@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.30.1",
+  "version": "3.32.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -17,6 +17,7 @@
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component lerna run test-component:chrome --concurrency 1 --stream",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component lerna run test-component:browserstack --concurrency 1 --stream",
+    "test:visual": "cross-env-shell JE_ENV=local TEST_TYPE=visual lerna run test:visual --concurrency 1 --stream",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
@@ -33,10 +34,10 @@
     "@babel/preset-env": "7.10.4",
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
-    "@justeat/f-utils": "1.1.0",
     "@justeat/fozzie": "5.0.0-beta.3",
-    "@justeat/fozzie-colour-palette": "3.1.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
+    "@percy/cli": "1.0.0-beta.48",
+    "@percy/webdriverio": "2.0.0",
     "@storybook/storybook-deployer": "2.8.6",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

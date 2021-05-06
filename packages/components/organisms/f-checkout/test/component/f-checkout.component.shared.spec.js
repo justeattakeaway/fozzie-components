@@ -1,5 +1,4 @@
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
-
 const checkout = new Checkout();
 
 describe('f-checkout component tests - @browserstack', () => {
@@ -17,6 +16,8 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should display the f-checkout component - @percy', () => {
         // Assert
+        browser.percyScreenshot('f-checkout is displayed', 'shared');
+
         expect(checkout.isComponentDisplayed()).toBe(true);
     });
 

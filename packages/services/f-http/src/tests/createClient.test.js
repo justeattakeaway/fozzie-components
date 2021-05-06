@@ -8,35 +8,43 @@ describe('createClient', () => {
         });
 
         it('should use default options when not overridden', async () => {
-            // Arrange & Act
+            // Arrange
+            const expectedResult = {
+                baseUrl: '',
+                timeout: 10000,
+                errorCallback: null,
+                contentType: 'application/json'
+            };
+
+            // Act
             const httpClient = createClient();
             const mergedOptions = httpClient.readConfiguration();
 
             // Assert
-            expect(mergedOptions).toBeDefined();
-            expect(mergedOptions.baseUrl).toBe('');
-            expect(mergedOptions.timeout).toBe(10000);
-            expect(mergedOptions.errorCallback).toBe(null);
+            expect(mergedOptions).toStrictEqual(expectedResult);
         });
 
         it('should use overridden options when overridden', async () => {
-            // Arrange & Act
+            // Arrange
             const expectedBaseUrl = 'https://www.example.org';
             const expectedTimeout = 2000;
             const expectedErrorCallback = () => {};
+            const expectedContentType = 'application/mpeg';
 
-            const httpClient = createClient({
+            const expectedResult = {
                 baseUrl: expectedBaseUrl,
                 timeout: expectedTimeout,
-                errorCallback: expectedErrorCallback
-            });
+                errorCallback: expectedErrorCallback,
+                contentType: expectedContentType
+            };
+
+            // Act
+            const httpClient = createClient(expectedResult);
+
             const mergedOptions = httpClient.readConfiguration();
 
             // Assert
-            expect(mergedOptions).toBeDefined();
-            expect(mergedOptions.baseUrl).toBe(expectedBaseUrl);
-            expect(mergedOptions.timeout).toBe(expectedTimeout);
-            expect(mergedOptions.errorCallback).toBe(expectedErrorCallback);
+            expect(mergedOptions).toStrictEqual(expectedResult);
         });
     });
 });

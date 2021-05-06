@@ -3,7 +3,36 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.30.1
+
+v3.32.0
+------------------------------
+*May 5, 2021*
+
+## Removed
+- `f-utils` and `fozzie-colour-pallete` packages from dependencies as they are available through `fozzie` package
+
+
+v3.31.1
+------------------------------
+*May 5, 2021*
+
+### Changed
+- Heading updates to the storybook documentation – ensures storybook automatically generates anchor tags for these headings.
+
+
+v3.31.0
+------------------------------
+*May 4, 2021*
+
+## Changed
+- Replaced `console.logs` in component tests with error handling `%s` string title
+
+## Removed
+- Unused READMEs inside `test/component` and `test-utils/component-object` folders 
+- Extra intermediate `spec` folder in generator for future components (see below entry)
+
+
+v3.30.0
 ------------------------------
 *April 30, 2021*
 
@@ -26,7 +55,7 @@ v3.29.1
 *April 16, 2021*
 
 ## Added
-- `husky` to enable pre-commit lint / test checks 
+- `husky` to enable pre-commit lint / test checks
 
 
 v3.28.0

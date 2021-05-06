@@ -36,12 +36,8 @@ module.exports = {
                     const relPath = path.relative(path.dirname(resourcePath), absPath)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
                     return `
-@import "@justeat/fozzie/src/scss/fozzie";
-@include reset();
-@include typography();
-@include links();
-@import "${relPath}";
-${content}`;
+                    @import "${relPath}";
+                    ${content}`;
                 }
             });
 
