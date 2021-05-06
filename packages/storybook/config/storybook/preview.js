@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import setupContext from '../../context';
 import jetPieThemeDark from './jetPieThemeDark';
+import './scss-loader.scss';
 
 setupContext();
 
