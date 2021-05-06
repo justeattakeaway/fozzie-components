@@ -1,8 +1,8 @@
 /**
-    * Reusable method for handling errors while making requests. Errors are handled by callbacks when provided, or re-thrown.
-    * @param {object} error - The error object
-    * @param {object} errorCallback - Configured callback method for handling global errors
-*/
+ * Reusable method for handling errors while making requests. Errors are handled by callbacks when provided, or re-thrown.
+ * @param {object} error - The error object
+ * @param {object} errorCallback - Configured callback method for handling global errors
+ */
 const handleError = (error, errorCallback) => {
     if (errorCallback) {
         errorCallback(error);

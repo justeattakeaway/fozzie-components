@@ -44,7 +44,7 @@ Ideally the package should be initialised by your website and the httpClient pla
 
 #### Initialise in a Nuxt Plugin (Works on Server and Client)
 ```js
-import http from '@justeat/f-http';
+import httpModule from '@justeat/f-http';
 
 const errorCallback = error => { // This is optional
     console.error(error);
@@ -56,7 +56,7 @@ export default (context, inject) => {
         errorCallback
     };
 
-    const httpClient = http.createClient(options);
+    const httpClient = httpModule.createClient(options);
 
     inject('http', httpClient); // Exposes GET, PUT, POST, PATCH, DELETE
 };
@@ -66,10 +66,10 @@ export default (context, inject) => {
 #### Initialise in NodeServices or Vue CLI
 ```js
 import Vue from 'vue';
-import http from '@justeat/f-http';
+import httpModule from '@justeat/f-http';
 
 const errorCallback = error => { // This is optional
-    console.error(`Handled HTTP Error: ${error.message}`, error)
+    console.error(`Handled HTTP Error: ${error.message}`);
 };
 
 export default () => {
@@ -78,7 +78,7 @@ export default () => {
         errorCallback
     };
 
-    const httpClient = http.createClient(configuration);
+    const httpClient = httpModule.createClient(configuration);
 
     Vue.prototype.$http = httpClient; // Exposes GET, PUT, POST, PATCH, DELETE
 };
@@ -87,9 +87,7 @@ export default () => {
 
 
 ### Basic Implementation
-**Recommended**: Using the prototype (Vue) or context (Nuxt).
-
-You can access $http in components, or anywhere the context is available including VueX
+**Recommended**: Using the prototype (Vue) or context (Nuxt). You can access $http in components, or anywhere the context is available including VueX
 
 ```js
 export default {
@@ -104,11 +102,45 @@ export default {
 }
 ```
 
+### Unit Testing Guidance
+Because $http exists in context, it should be really easy to mock it in any way you want. Check out the example below
+
+```js
+const wrapper = mount(MyComponent, {
+  mocks: {
+    $http: {
+      get: jest.fn()
+    }
+  }
+});
+```
+
+### Integration Testing Guidance
+F-Http exposes a way to create a mockClient, this enables you to mock the underlying HTTPProvider with responses.
+
+```js
+import httpModule from '@justeat/f-http';
+
+const { mockFactory, httpVerbs } = httpModule;
+
+mockFactory.setupMockResponse(httpVerbs.METHOD_POST, '/URL', REQUEST_DATA, 201);
+
+const $http = mockFactory.createMockClient();
+
+const wrapper = mount(MyComponent, {
+  mocks: {
+    $http
+  }
+});
+```
+
+
 ## Options
 All options are optional, you don't need to specify any overrides if you are happy with the default values
 
 Option | Description | Type | Default
 ------------- | ------------- | ------------- | -------------
-baseUrl | Ensure all requests from this client use a relative url | string | ""
+baseUrl | Ensure all requests from this client use a relative url | string | ''
 timeout | How long each request takes to timeout | number | 10000
 errorCallback | A function you can use to globally handle errors (accepts error object) | function | null
+contentType | Specify a value for the content type header | string | 'application/json'
