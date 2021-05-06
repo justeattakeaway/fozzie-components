@@ -4,7 +4,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 const checkout = new Checkout();
 
-describe('f-checkout "delivery" component tests - @percy', () => {
+describe('f-checkout "delivery" component tests', () => {
     beforeEach(() => {
         const checkoutData = {
             type: 'delivery',
