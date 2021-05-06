@@ -3,7 +3,7 @@ const DESKTOP_HUGE_WIDTH = 1280;
 const MOBILE_NARROW_WIDTH = 414;
 
 
-export default {
+exports.default = {
     DESKTOP_HUGE_WIDTH,
     MOBILE_NARROW_WIDTH
 };
