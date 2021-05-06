@@ -14,7 +14,7 @@ describe('f-checkout component tests - @browserstack', () => {
         checkout.waitForComponent();
     });
 
-    it('should display the f-checkout component, @percy', () => {
+    it('should display the f-checkout component - @percy', () => {
         // Assert
         browser.percyScreenshot('f-checkout is displayed', 'shared');
 
@@ -41,12 +41,12 @@ describe('f-checkout component tests - @browserstack', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it('should display the mandatory "mobileNumber" field', () => {
+    it('should display the mandatory "mobileNumber" field - @percy', () => {
         // Assert
         expect(checkout.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 
-    it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field', () => {
+    it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field - @percy', () => {
         // Arrange
         const addressDetails = {
             mobileNumber: '+8112345678911'
@@ -60,7 +60,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isFieldErrorDisplayed('mobileNumber')).toBe(true);
     });
 
-    it('should not display a "mobileNumber" error message when a number is formatted with a supported country code', () => {
+    it('should not display a "mobileNumber" error message when a number is formatted with a supported country code - @percy', () => {
         // Arrange
         const addressDetails = {
             mobileNumber: '+4412345678911'
@@ -74,7 +74,8 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isFieldErrorDisplayed('mobileNumber')).toBe(false);
     });
 
-    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+    // Refactor for Percy visual regression (delete maybe?)
+    it('should display times in ascending order, with default text "As soon as possible" showing first - @percy', () => {
         // Act
         checkout.selectOrderTime('As soon as possible');
 
@@ -119,11 +120,12 @@ describe('f-checkout component tests - @browserstack', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it('should display the switch user link', () => {
+    // Refactor for Percy visual regression (delete maybe?)
+    it('should display the switch user link - @percy', () => {
         expect(checkout.switchUserLinkIsDisplayed()).toBe(true);
     });
 
-    it('should display the preorder warning message when ASAP is not avalible', () => {
+    it('should display the preorder warning message when ASAP is not avalible - @percy', () => {
         // Arrange
         const checkoutData = {
             type: 'delivery',
@@ -140,7 +142,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isPreOrderWarningDisplayed()).toBe(true);
     });
 
-    it('should display the checkout error component when "Has Checkout Errors" is true', () => {
+    it('should display the checkout error component when "Has Checkout Errors" is true - @percy', () => {
         // Arrange
         const checkoutData = {
             type: 'delivery',
@@ -158,7 +160,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
     });
 
-    it('should display the checkout error component when "Has Place Order Errors" is true', () => {
+    it('should display the checkout error component when "Has Place Order Errors" is true - @percy', () => {
         // Arrange
         const checkoutData = {
             type: 'delivery',
@@ -176,7 +178,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
     });
 
-    it('should close the checkout error when "Retry" is clicked', () => {
+    it('should close the checkout error when "Retry" is clicked - @percy', () => {
         // Arrange
         const checkoutData = {
             type: 'delivery',
