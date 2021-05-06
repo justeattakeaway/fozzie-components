@@ -1,8 +1,8 @@
-import uniq from 'lodash.uniq';
-
-import ContentCards from './services/contentCard.service';
 import isAppboyInitialised from './utils/isAppboyInitialised';
 import { LogService } from './services/logging/logging.service';
+import BrazeConsumerRegistry from './services/BrazeConsumerRegistry';
+import { removeDuplicateContentCards } from './services/utils';
+import transformCardData from './services/utils/transformCardData';
 import areCookiesPermitted from './utils/areCookiesPermitted';
 
 /* braze event handler callbacks */
@@ -13,7 +13,7 @@ import areCookiesPermitted from './utils/areCookiesPermitted';
  * @this BrazeDispatcher
  */
 function interceptInAppMessageClickEventsHandler (message) {
-    this.inAppMessageClickEventCallbacks.forEach(callback => callback(message));
+    this.consumerRegistry.applyInAppMessageClickEventsCallbacks(message);
 }
 
 /**
@@ -32,7 +32,7 @@ function interceptInAppMessagesHandler (message) {
                  * as this is always "success" as opposed to "dismiss"
                  * as confirmed with CRM (AS)
                  */
-                this.inAppMessagesCallbacks.forEach(callback => callback(message));
+                this.consumerRegistry.applyInAppMessageCallbacks(message);
                 if (message.buttons && message.buttons.length >= 2) {
                     const [, button] = message.buttons;
                     // Note that the below subscription returns an ID that could later be used to unsubscribe
@@ -54,19 +54,11 @@ function interceptInAppMessagesHandler (message) {
 function contentCardsHandler (postCardsAppboy) {
     this.refreshRequested = false;
 
-    const {
-        cards,
-        rawCards,
-        groups
-    } = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
-        .removeDuplicateContentCards()
-        .filterCards(this.brands)
-        .getTitleCard()
-        .arrangeCardsByTitles()
-        .output();
+    const { rawCards = [] } = postCardsAppboy;
 
-    this.cardsCallbacks.forEach(callback => callback(cards));
-    this.groupedCardsCallback.forEach(callback => callback(groups));
+    const cards = removeDuplicateContentCards(rawCards.map(transformCardData));
+
+    this.consumerRegistry.applyContentCardCallbacks(cards);
 
     this.rawCards = rawCards;
 
@@ -78,6 +70,8 @@ function contentCardsHandler (postCardsAppboy) {
 let dispatcherInstance;
 
 class BrazeDispatcher {
+    consumerRegistry
+
     /**
      * Static constructor to store one instance of BrazeDispatcher per js env
      * @param {Number} sessionTimeoutInSeconds
@@ -103,17 +97,11 @@ class BrazeDispatcher {
         }
         dispatcherInstance = this;
 
+        this.consumerRegistry = BrazeConsumerRegistry.GetConsumerRegistry();
+
         this.appboyPromise = null;
 
-        this.brands = [];
-
         this.dispatcherOptions = null;
-
-        this.loggerCallbackInstances = [];
-        this.cardsCallbacks = [];
-        this.groupedCardsCallback = [];
-        this.inAppMessageClickEventCallbacks = [];
-        this.inAppMessagesCallbacks = [];
 
         this.rawCards = null;
 
@@ -124,6 +112,8 @@ class BrazeDispatcher {
         this.sessionTimeoutInSeconds = sessionTimeoutInSeconds;
 
         this.eventSignifier = 'BrazeContent';
+
+        this.loggerCallbackInstances = [];
     }
 
     /**
@@ -134,48 +124,36 @@ class BrazeDispatcher {
      * @param {Object} options
      * @return {Promise<null|*>}
      */
+
+    // TODO change this to be have the following apiKey, userId, consumerOptions
+
     async configure (options = {}) {
         const {
             apiKey,
             userId,
             disableComponent = false,
-            callbacks = {},
-            loggerCallbacks = {},
             enableLogging,
-            enabledCardTypes = [],
-            brands = []
+            loggerCallbacks
         } = options;
 
         if (!this.dispatcherOptions) {
             this.dispatcherOptions = {
                 apiKey,
-                userId,
-                enabledCardTypes
+                userId
             };
-        } else if (!(apiKey === this.dispatcherOptions.apiKey
-            && userId === this.dispatcherOptions.userId
-            && JSON.stringify(enabledCardTypes.slice().sort())
-                === JSON.stringify(this.dispatcherOptions.enabledCardTypes.slice().sort()))) {
+        } else if (!(apiKey === this.dispatcherOptions.apiKey && userId === this.dispatcherOptions.userId)) {
             throw new Error('attempt to reinitialise appboy with different parameters');
         }
 
+        // register the consumer in the registry
+        this.consumerRegistry.register(options);
+
+        // TODO figure out how we want to handle this with the consumer registry
         Object.keys(loggerCallbacks).forEach(key => {
             this.loggerCallbackInstances.push((new LogService(loggerCallbacks[key])));
         });
 
         window.dataLayer = window.dataLayer || [];
-
-        // Add callbacks to internal lists prior to attempting to configure appboy
-        if (callbacks.interceptInAppMessageClickEvents) this.inAppMessageClickEventCallbacks.push(callbacks.interceptInAppMessageClickEvents);
-        if (callbacks.interceptInAppMessages) this.inAppMessagesCallbacks.push(callbacks.interceptInAppMessages);
-        if (callbacks.handleContentCards) this.cardsCallbacks.push(callbacks.handleContentCards);
-        if (callbacks.handleContentCardsGrouped) this.groupedCardsCallback.push(callbacks.handleContentCardsGrouped);
-
-        // Concatenate brands to existing allowed brands for now
-        // TODO create registry of brands to apply before passing cards lists back to callbacks (has linked issue)
-        if (brands) {
-            this.brands = uniq([...this.brands, ...brands]);
-        }
 
         // Note that appBoyPromise will not be set if this is the first time running this method -
         // this is a guard against initialise() being called more than once, and attempting to
