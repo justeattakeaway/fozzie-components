@@ -2,12 +2,9 @@ require('@babel/register');
 const browserstack = require('browserstack-local');
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
+const { getConfigurationSettings } = require('./test/utils/configuration-helper');
 
-
-const { setTestSettings } = require('./test/utils/configuration-helper');
-const browserstackSettings = require('./test/configuration/browserstack/browserstack.settings').default();
-const { TEST_TYPE } = process.env;
-const testSettings = setTestSettings();
+const configurationSettings = getConfigurationSettings();
 
 exports.config = {
 
@@ -42,18 +39,6 @@ exports.config = {
     //     // 'path/to/excluded/files'
     // ],
 
-    // Suites
-    suites: {
-        shared: [
-            './test/specs/component/*.component.shared.spec.js',
-        ],
-        mobile: [
-            './test/specs/component/*.component.mobile.spec.js',
-        ],
-        desktop: [
-            './test/specs/component/*.component.desktop.spec.js',
-        ],
-    },
     //
     // ============
     // Capabilities
@@ -70,13 +55,13 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: testSettings.maxinstances,
+    maxInstances: configurationSettings.maxInstances,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [].concat(browserstackSettings.component.capabilities),  
+    capabilities: [].concat(configurationSettings.capabilities),  
     //
     // ===================
     // Test Configurations
@@ -84,7 +69,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: testSettings.loglevel,
+    logLevel: configurationSettings.logLevel,
     //
     // Set specific log levels per logger
     // loggers:
@@ -102,13 +87,13 @@ exports.config = {
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
-    bail: testSettings.bail,
+    bail: configurationSettings.bail,
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: browserstackSettings.baseUrl,
+    baseUrl: configurationSettings.baseUrl,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -124,7 +109,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: browserstackSettings.services,
+    services: configurationSettings.services,
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -145,7 +130,7 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters: browserstackSettings.reporters,
+    reporters: configurationSettings.reporters,
 
     //
     // Options to be passed to Mocha.

@@ -39,6 +39,18 @@ const settings = () => ({
             }] : [])
         ]
     },
+    visual: {
+        capabilities: [
+            {
+                browserName: 'chrome',
+                acceptInsecureCerts: true,
+                specs: [
+                    'test/component/*.component.desktop.spec.js',
+                    'test/component/*.component.mobile.spec.js',
+                    'test/component/*.component.shared.spec.js'
+                ]
+            }
+        ]},
     reporters: ALLURE_REPORTER === 'true' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
