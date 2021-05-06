@@ -41,7 +41,8 @@
                 <form
                     method="post"
                     :class="$style['c-checkout-form']"
-                    @submit.prevent="onFormSubmit">
+                    @submit.prevent="onFormSubmit"
+                >
                     <section
                         id="error-summary-container"
                         :class="$style['is-visuallyHidden']"
@@ -67,8 +68,7 @@
                             <error-message
                                 v-if="!isMobileNumberValid"
                                 data-js-error-message
-                                data-test-id="error-mobile-number"
-                                :class="$style['c-checkout-genericError']">
+                                data-test-id="error-mobile-number">
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
                             </error-message>
                         </template>
@@ -76,7 +76,6 @@
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
-                        :class="$style['c-checkout-genericError']"
                         data-test-id="address-block"
                     />
 
@@ -409,8 +408,7 @@ export default {
             'setAuthToken',
             'updateCheckout',
             'updateCustomerDetails',
-            'updateUserNote',
-            'formFieldBlur'
+            'updateUserNote'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -419,23 +417,12 @@ export default {
             'trackInitialLoad'
         ]),
 
-        // formStart () {
-        //     if (!this.formStarted) {
-        //         this.$emit(EventNames.CreateAccountStart);
-        //         this.formStarted = true;
-        //     }
-        // },
-
-        // formFieldBlur (field) {
-        //     const fieldValidation = this.$v[field];
-        //     if (fieldValidation) {
-        //         fieldValidation.$touch();
-
-        //         if (fieldValidation.$invalid) {
-        //             this.$emit(EventNames.CreateAccountInlineError, field);
-        //         }
-        //     }
-        // },
+        formStart () {
+            if (!this.formStarted) {
+                this.$emit(EventNames.CheckoutStartForm);
+                this.formStarted = true;
+            }
+        },
 
         /**
          * Loads the necessary data to render a meaningful checkout component.

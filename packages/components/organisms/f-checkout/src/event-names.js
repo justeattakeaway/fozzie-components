@@ -2,6 +2,7 @@ const CheckoutSuccess = 'checkout-payment-success';
 const CheckoutFailure = 'checkout-payment-failure';
 const CheckoutGetSuccess = 'checkout-get-success';
 const CheckoutGetFailure = 'checkout-get-failure';
+const CheckoutStartForm = 'checkout-start-form';
 const CheckoutAvailableFulfilmentGetSuccess = 'checkout-available-fulfilment-get-success';
 const CheckoutAvailableFulfilmentGetFailure = 'checkout-available-fulfilment-get-failure';
 const CheckoutVisitLoginPage = 'checkout-visit-login-page';
@@ -39,5 +40,6 @@ export default {
     CheckoutPlaceOrderSuccess,
     CheckoutPlaceOrderFailure,
     CheckoutUpdateSuccess,
-    CheckoutUpdateFailure
+    CheckoutUpdateFailure,
+    CheckoutStartForm
 };
