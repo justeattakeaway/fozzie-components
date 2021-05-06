@@ -8,7 +8,7 @@ const isLocal = JE_ENV === 'local';
 exports.getConfigurationSettings = () => {
 
     let runnerSettings = isLocal ? chromeSettings : browserstackSettings;
-    let testCapabilities = runnerSettings[TEST_TYPE.toLowerCase()].capabilities;;
+    let testCapabilities = runnerSettings[TEST_TYPE.toLowerCase()].capabilities;
 
     return {
         capabilities: testCapabilities,
