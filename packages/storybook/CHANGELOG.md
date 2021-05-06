@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.32.0
+------------------------------
+*May 5, 2021*
+
+### Changed
+- Global css styles moved from `vue.config.js` to `scss-loader.scss` and now are imported in `preview.js` to remove style duplication in every component
+
+
 v0.31.0
 ------------------------------
 *May 5, 2021*
@@ -19,6 +27,7 @@ v0.30.0
 ### Added
 - Wired up f-http within storybook context
 - Added documentation page for capabilities
+
 
 v0.29.0
 ------------------------------
