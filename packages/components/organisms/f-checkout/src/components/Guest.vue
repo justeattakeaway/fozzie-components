@@ -7,11 +7,15 @@
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
-            @input="updateCustomerDetails({ 'firstName': $event })">
+            input-type="text"
+            @input="updateCustomerDetails({ 'firstName': $event })"
+        >
             <template #error>
                 <error-message
                     v-if="isFirstNameEmpty"
+                    aria-required="true"
                     data-js-error-message
+                    role="alert"
                     data-test-id="error-first-name-empty">
                     {{ $t('validationMessages.firstName.requiredError') }}
                 </error-message>
@@ -28,6 +32,8 @@
                 <error-message
                     v-if="isLastNameEmpty"
                     data-js-error-message
+                    aria-required="true"
+                    role="alert"
                     data-test-id="error-last-name-empty">
                     {{ $t('validationMessages.lastName.requiredError') }}
                 </error-message>
@@ -44,6 +50,8 @@
                 <error-message
                     v-if="!isEmailValid"
                     data-js-error-message
+                    aria-required="true"
+                    role="alert"
                     data-test-id="error-email-invalid">
                     {{ $t('validationMessages.email.requiredError') }}
                 </error-message>

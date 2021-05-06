@@ -68,6 +68,8 @@
                             <error-message
                                 v-if="!isMobileNumberValid"
                                 data-js-error-message
+                                role="alert"
+                                aria-required="true"
                                 data-test-id="error-mobile-number">
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
                             </error-message>
