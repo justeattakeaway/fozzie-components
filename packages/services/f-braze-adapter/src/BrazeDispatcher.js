@@ -1,6 +1,6 @@
 import isAppboyInitialised from './utils/isAppboyInitialised';
 import { LogService } from './services/logging/logging.service';
-import BrazeConsumerRegistry from './services/BrazeConsumerRegistry';
+import GetConsumerRegistry from './services/BrazeConsumerRegistry';
 import { removeDuplicateContentCards } from './services/utils';
 import transformCardData from './services/utils/transformCardData';
 import areCookiesPermitted from './utils/areCookiesPermitted';
@@ -95,7 +95,7 @@ class BrazeDispatcher {
         }
         dispatcherInstance = this;
 
-        this.consumerRegistry = BrazeConsumerRegistry.GetConsumerRegistry();
+        this.consumerRegistry = GetConsumerRegistry();
 
         this.appboyPromise = null;
 
@@ -129,7 +129,6 @@ class BrazeDispatcher {
         const {
             apiKey,
             userId,
-            disableComponent = false,
             enableLogging,
             loggerCallbacks = {}
         } = options;
@@ -142,9 +141,6 @@ class BrazeDispatcher {
         } else if (!(apiKey === this.dispatcherOptions.apiKey && userId === this.dispatcherOptions.userId)) {
             throw new Error('attempt to reinitialise appboy with different parameters');
         }
-
-        // register the consumer in the registry
-        this.consumerRegistry.register(options);
 
         // TODO figure out how we want to handle this with the consumer registry
         Object.keys(loggerCallbacks).forEach(key => {
@@ -170,7 +166,7 @@ class BrazeDispatcher {
             return this.appboyPromise;
         }
 
-        if (disableComponent || !apiKey || !userId) {
+        if (!apiKey || !userId) {
             this.appboyPromise = Promise.reject(new Error('Not initialising braze due to config'));
             return this.appboyPromise;
         }
