@@ -1,5 +1,6 @@
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
+import { DESKTOP_HUGE_WIDTH, MOBILE_NARROW_WIDTH } from './test/constants/viewport-widths';
 const allure = require('allure-commandline');
 const { getConfigurationSettings } = require('./test/utils/configuration-helper');
 
@@ -188,24 +189,23 @@ exports.config = {
      */
     before: function (capabilities, specs) {
         browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
-
-            let viewportWidths = [];
+            let viewportWidths;
 
             switch(featureType.toLowerCase())
             {
                 case 'desktop':
-                    viewportWidths = [1280];
+                    viewportWidths = [DESKTOP_HUGE_WIDTH];
                     break;
                 case 'mobile':
-                    viewportWidths = [414];
+                    viewportWidths = [MOBILE_NARROW_WIDTH];
                     break;
                 case 'shared':
-                    viewportWidths = [414, 1280];
+                    viewportWidths = [MOBILE_NARROW_WIDTH, DESKTOP_HUGE_WIDTH];
                     break;
             }
 
             browser.call(async () => await percySnapshot(`${screenshotName}`, {
-                widths : viewportWidths
+                widths: viewportWidths
             }));
         });
     },
