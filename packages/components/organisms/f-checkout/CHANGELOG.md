@@ -9,7 +9,7 @@ v0.102.0
 *May 6, 2021*
 
 ### Changed
-- Guest checkout email input type to email to prevent capitalising emails on mobile
+- Guest checkout email input type to `email`
 
 
 v0.101.0
