@@ -18,24 +18,26 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         browser.pause(2000);
     });
 
-    it('should display the guest checkout header component', () => {
+    it('should display the guest checkout header component - @percy', () => {
         // Assert
         expect(checkout.isGuestCheckoutHeaderDisplayed()).toBe(true);
     });
 
-    it('should display the guest checkout login button', () => {
+    it('should display the guest checkout login button - @percy', () => {
         // Assert
         expect(checkout.isGuestCheckoutLoginButtonDisplayed()).toBe(true);
     });
 
+    // Refactor for Percy visual regression
     forEach(['firstName', 'lastName', 'emailAddress'])
-    .it('should show the guest checkout fields for "%s"', field => {
+    .it('should show the guest checkout fields for "%s" - @percy', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(true);
     });
 
+    // Refactor for Percy visual regression
     forEach(['firstName', 'lastName', 'emailAddress'])
-    .it('should display each fields error message', field => {
+    .it('should display each fields error message - @percy', field => {
         // Act
         checkout.clearCheckoutForm(field);
         checkout.goToPayment();
@@ -44,7 +46,7 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         expect(checkout.isFieldErrorDisplayed(field)).toBe(true);
     });
 
-    it('should prevent user from submitting an invalid email address', () => {
+    it('should prevent user from submitting an invalid email address - @percy', () => {
         // Arrange
         const emailAddress = {
             emailAddress: 'abc@abc'
@@ -70,7 +72,8 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         expect(pathname).toEqual(loginPath);
     });
 
-    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+    // Refactor for Percy visual regression
+    it('should display times in ascending order, with default text "As soon as possible" showing first - @percy', () => {
         // Act
         checkout.selectOrderTime('As soon as possible');
 
@@ -81,7 +84,7 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         expect(checkout.getOrderTimeOptionText(2)).toBe('Wednesday 02:00');
     });
 
-    it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field', () => {
+    it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field - @percy', () => {
         // Arrange
         const addressDetails = {
             mobileNumber: '+8112345678911'
@@ -95,7 +98,7 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         expect(checkout.isFieldErrorDisplayed('mobileNumber')).toBe(true);
     });
 
-    it('should not display a "mobileNumber" error message when a number is formatted with a supported country code', () => {
+    it('should not display a "mobileNumber" error message when a number is formatted with a supported country code - @percy', () => {
         // Arrange
         const addressDetails = {
             mobileNumber: '+4412345678911'
