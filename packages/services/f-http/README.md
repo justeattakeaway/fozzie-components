@@ -89,7 +89,6 @@ export default () => {
 
 ```
 
-
 ### Basic Implementation
 **Recommended**: Using the prototype (Vue) or context (Nuxt). You can access $http in components, or anywhere the context is available including VueX
 
@@ -102,6 +101,24 @@ export default {
   },
   async mounted () {
     this.apiResult = await this.$http.get('/todos/1');
+  }
+}
+```
+
+### Alternative Implementation
+If you would rather create the HTTPClient when you use it, thats fine too; its just means it can't be reused as easily and you will need to filter the configuration options down to the component.
+
+```js
+export default {
+  async mounted () {
+    const configuration = { // Options are described later
+        instanceName: 'Example client'
+        baseUrl: 'https://jsonplaceholder.typicode.com'
+    };
+
+    const httpClient = httpModule.createClient(configuration);
+
+    const result = await httpClient.get('/todos/1');
   }
 }
 ```
