@@ -25,6 +25,7 @@ const sendRequest = async (method, resource, headers = {}) => {
  * Send a request with a request body
  * @param {string} method - The HTTP Method of the request (post, put, patch)
  * @param {string} resource - The resource to get (URL)
+ * @param {object} body - The request body, contents of the resource
  * @param {object} headers - Any additional request headers you want to provide
  * @return {object} - Returns data from response
  */

@@ -106,7 +106,7 @@ export default {
 ```
 
 ### Alternative Implementation
-If you would rather create the HTTPClient when you use it, thats fine too; its just means it can't be reused as easily and you will need to filter the configuration options down to the component.
+If you would rather create the HTTPClient when you use it, that's fine too; it just means it can't be reused as easily and you will need to filter the configuration options down to the component.
 
 ```js
 export default {
@@ -190,10 +190,10 @@ These are all of the methods exposed by the httpClient
 
 Method | Description | Parameters
 ------------- | ------------- | -------------
-get | Perform a GET request for a resource | resource URL _[string]_, headers _[array]_
+get | GET a resource | resource URL _[string]_, headers _[array]_
 post | POST a resource | resource URL _[string]_, body _[object]_, headers _[array]_
-put | Perform a PUT on a resource | resource URL _[string]_, body _[object]_, headers _[array]_
-patch | Perform a PATCH on a resource | resource URL _[string]_, body _[object]_, headers _[array]_
-get | DELETE a resource | resource URL _[string]_, headers _[array]_
+put | PUT a resource | resource URL _[string]_, body _[object]_, headers _[array]_
+patch | PATCH a resource | resource URL _[string]_, body _[object]_, headers _[array]_
+delete | DELETE a resource | resource URL _[string]_, headers _[array]_
 setAuthorisationToken | Set the authorisation token for all requests | authorisationToken _[string]_
 readConfiguration | Returns the configuration which has been applied | None
