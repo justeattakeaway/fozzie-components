@@ -31,7 +31,7 @@ describe('ErrorDialog', () => {
     };
 
     it('should be defined', () => {
-        // Arrange
+        // Arrange && Act
         const wrapper = shallowMount(ErrorDialog, {
             store: createStore(),
             i18n,
@@ -46,7 +46,7 @@ describe('ErrorDialog', () => {
     describe('computed ::', () => {
         describe('errorCode ::', () => {
             it('should return `code` of `message` when `message` is provided', () => {
-                // Arrange
+                / Arrange && Act
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
@@ -62,7 +62,7 @@ describe('ErrorDialog', () => {
             });
 
             it('should return `null` if  no `message` is provided', () => {
-                // Arrange
+                // Arrange && Act
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore(),
                     i18n,
@@ -77,7 +77,7 @@ describe('ErrorDialog', () => {
 
         describe('restaurantMenuPageUrl ::', () => {
             it('should return the URL to redirect back to the restaurant menu', () => {
-                // Arrange
+                // Arrange && Act
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,

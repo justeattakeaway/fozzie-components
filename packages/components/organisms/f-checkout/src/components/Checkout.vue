@@ -41,6 +41,7 @@
                     <form-field
                         :value="customer.mobileNumber"
                         name="mobile-number"
+                        input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
                         @input="updateCustomerDetails({ mobileNumber: $event })"

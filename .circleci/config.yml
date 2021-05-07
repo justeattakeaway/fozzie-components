@@ -183,6 +183,9 @@ jobs:
       - run: # Run Accessibility UI Tests
           name: Run WebDriverIO Accessibility Tests
           command: yarn test-a11y:chrome
+      - run: # Run Visual Regression Tests
+          name: Run Percy Visual Regression Tests
+          command: yarn test:visual
       - store_artifacts:
           path: test/results/axe-violations
       - store_artifacts:
