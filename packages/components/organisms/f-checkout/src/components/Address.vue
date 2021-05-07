@@ -18,7 +18,6 @@
                     <error-message
                         v-if="isAddressLine1Empty"
                         aria-required="true"
-                        role="alert"
                         data-js-error-message
                         :class="$style['c-address-error']"
                         data-test-id="error-address-line1-empty">
@@ -48,7 +47,6 @@
                     v-if="isAddressLocalityEmpty"
                     data-js-error-message
                     aria-required="true"
-                    role="alert"
                     data-test-id="error-address-locality-empty">
                     {{ $t('validationMessages.locality.requiredError') }}
                 </error-message>
@@ -65,7 +63,6 @@
                 <error-message
                     v-if="isAddressPostcodeEmpty"
                     aria-required="true"
-                    role="alert"
                     data-js-error-message
                     data-test-id="error-address-postcode-empty">
                     {{ $t('validationMessages.postcode.requiredError') }}
@@ -73,7 +70,6 @@
                 <error-message
                     v-else-if="!isAddressPostcodeValid"
                     aria-required="true"
-                    role="alert"
                     data-js-error-message
                     data-test-id="error-address-postcode-type-error">
                     {{ $t('validationMessages.postcode.invalidCharError') }}

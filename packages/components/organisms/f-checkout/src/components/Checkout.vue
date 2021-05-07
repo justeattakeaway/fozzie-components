@@ -41,6 +41,8 @@
                 <form
                     method="post"
                     :class="$style['c-checkout-form']"
+                    @click="formStart"
+                    @focus="formStart"
                     @submit.prevent="onFormSubmit"
                 >
                     <section
@@ -55,20 +57,29 @@
                         </error-message>
                     </section>
 
-                    <guest-block v-if="!isLoggedIn" />
+                    <guest-block
+                        v-if="!isLoggedIn"
+                        @blurField="formFieldBlur"
+                    />
 
                     <form-field
+                        ref="mobileNumber"
+                        v-model="mobileNumber"
                         :value="customer.mobileNumber"
                         name="mobile-number"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
+                        :aria-invalid="!!isMobileNumberValid"
+                        aria-describedby="error-message-mobile"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
+                        @blur="formFieldBlur"
                     >
-                        <template #error>
+                        <template
+                            v-if="!isMobileNumberValid"
+                            #error>
                             <error-message
-                                v-if="!isMobileNumberValid"
+                                id="error-message-mobile"
                                 data-js-error-message
-                                role="alert"
                                 aria-required="true"
                                 data-test-id="error-mobile-number">
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
@@ -267,6 +278,7 @@ export default {
             nonFulfillableError: null,
             genericErrorMessage: null,
             genericFormErrorMessage: null,
+            mobileNumber: null,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false,
@@ -425,6 +437,18 @@ export default {
                 this.formStarted = true;
             }
         },
+
+        formFieldBlur () {
+            console.log('heyyyy', this.$v.$invalid);
+
+            const fieldValidation = this.$v;
+            fieldValidation.$touch();
+
+            if (fieldValidation.$invalid) {
+                this.$emit(EventNames.CheckoutInlineError, fieldValidation);
+            }
+        },
+
 
         /**
          * Loads the necessary data to render a meaningful checkout component.

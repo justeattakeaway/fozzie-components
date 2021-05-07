@@ -3,19 +3,27 @@
         data-test-id="guest-component"
         :class="$style['c-guest']">
         <form-field
+            ref="firstName"
+            v-model="firstName"
             :value="customer.firstName"
+            aria-required="true"
+            aria-describedby="error-message-guest-first-name"
+            :aria-invalid="!!isFirstNameEmpty"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
             input-type="text"
+            @blur="blurField"
             @input="updateCustomerDetails({ 'firstName': $event })"
         >
-            <template #error>
+            <template
+                v-if="isFirstNameEmpty"
+                #error>
                 <error-message
-                    v-if="isFirstNameEmpty"
-                    aria-required="true"
-                    data-js-error-message
+                    id="error-message-guest-first-name"
                     role="alert"
+                    aria-errormessage="true"
+                    data-js-error-message
                     data-test-id="error-first-name-empty">
                     {{ $t('validationMessages.firstName.requiredError') }}
                 </error-message>
@@ -23,17 +31,19 @@
         </form-field>
 
         <form-field
+            aria-labelledby="guest-last-name-error"
             :value="customer.lastName"
             name="guest-last-name"
             :label-text="$t('guest.lastName')"
             :has-error="isLastNameEmpty"
             @input="updateCustomerDetails({ 'lastName': $event })">
-            <template #error>
+            <template
+                v-if="isLastNameEmpty"
+                #error>
                 <error-message
-                    v-if="isLastNameEmpty"
+                    id="guest-last-name-error"
+                    aria-live="assertive"
                     data-js-error-message
-                    aria-required="true"
-                    role="alert"
                     data-test-id="error-last-name-empty">
                     {{ $t('validationMessages.lastName.requiredError') }}
                 </error-message>
@@ -46,12 +56,12 @@
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
             @input="updateCustomerDetails({ 'email': $event })">
-            <template #error>
+            <template
+                v-if="!isEmailValid"
+                #error>
                 <error-message
-                    v-if="!isEmailValid"
                     data-js-error-message
                     aria-required="true"
-                    role="alert"
                     data-test-id="error-email-invalid">
                     {{ $t('validationMessages.email.requiredError') }}
                 </error-message>
@@ -73,6 +83,12 @@ export default {
     components: { FormField, ErrorMessage },
 
     mixins: [checkoutValidationsMixin],
+
+    data () {
+        return {
+            firstName: null
+        };
+    },
 
     /*
     * Provide/Inject allows nested `Guest` component to inherit `Checkout`
@@ -110,7 +126,11 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateCustomerDetails'
-        ])
+        ]),
+
+        blurField () {
+            this.$emit('blurField');
+        }
     }
 };
 </script>
