@@ -3,12 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+
+v0.103.0
 ------------------------------
-*May 5, 2021*
+*May 7, 2021*
 
 ### Added
 - Tagging for future Percy tests
+
+### Changed
+- Bumped f-services version to 1.11.0.
+- Bumped f-form-field version to 1.11.0.
+- Set tel. no. field type as `Tel`
 
 
 v0.102.0
