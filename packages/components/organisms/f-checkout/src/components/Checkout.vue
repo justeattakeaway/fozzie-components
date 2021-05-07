@@ -49,6 +49,7 @@
                         :value="customer.mobileNumber"
                         name="mobile-number"
                         maxlength="16"
+                        input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
                         @blur="formFieldBlur('mobileNumber')"

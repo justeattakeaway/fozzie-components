@@ -15,7 +15,7 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         expect(registration.isComponentDisplayed()).toBe(true);
     });
 
-    it('should display the "Email address is already registered" error', () => {
+    it('should display the "Email address is already registered" error - @percy', () => {
         // Arrange
         const userInfo = {
             firstName: 'Test',
@@ -31,14 +31,16 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         expect(registration.isEmailExistsErrorDisplayed()).toBe(true);
     });
 
+    // Refactor for Percy visual regression
     forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should display input field "%s"', field => {
+    .it('should display input field "%s" - @percy', field => {
         // Assert
         expect(registration.isInputFieldDisplayed(field)).toBe(true);
     });
 
+    // Refactor for Percy visual regression
     forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should display error when "%s" field is empty', field => {
+    .it('should display error when "%s" field is empty - @percy', field => {
         // Arrange
         const userInfo = {
             firstName: '',
@@ -54,8 +56,9 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         expect(registration.isEmptyErrorDisplayed(field)).toBe(true);
     });
 
+    // Refactor for Percy visual regression
     forEach(['firstName', 'lastName', 'email'])
-    .it('should display error when "%s" input is invalid', field => {
+    .it('should display error when "%s" input is invalid - @percy', field => {
         // Arrange
         const userInfo = {
             firstName: '123*',
@@ -71,8 +74,9 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         expect(registration.isInvalidErrorDisplayed(field)).toBe(true);
     });
 
+    // Refactor for Percy visual regression
     forEach(['firstName', 'lastName'])
-    .it('should display error when "%s" input is too long', field => {
+    .it('should display error when "%s" input is too long - @percy', field => {
         // Arrange
         const userInfo = {
             firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',

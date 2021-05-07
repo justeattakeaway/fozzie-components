@@ -4,7 +4,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 const checkout = new Checkout();
 
-describe('f-checkout "delivery" component tests - @browserstack', () => {
+describe('f-checkout "delivery" component tests - @percy', () => {
     beforeEach(() => {
         const checkoutData = {
             type: 'delivery',
@@ -16,6 +16,7 @@ describe('f-checkout "delivery" component tests - @browserstack', () => {
         checkout.waitForComponent();
     });
 
+    // Refactor for Percy visual regression
     forEach(['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode'])
     .it('should display the error message for "%s"', field => {
         // Act
@@ -26,12 +27,14 @@ describe('f-checkout "delivery" component tests - @browserstack', () => {
         expect(checkout.isFieldErrorDisplayed(field)).toBe(true);
     });
 
+    // Refactor for Percy visual regression
     forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
     .it('should show that address fields exist for "%s"', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(true);
     });
 
+    // Refactor for Percy visual regression
     forEach(['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode'])
     .it('should display the mandatory field, "%s"', field => {
         // Assert
