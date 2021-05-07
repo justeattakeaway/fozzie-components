@@ -5,6 +5,7 @@
         <form-field
             :value="customer.firstName"
             name="guest-first-name"
+            maxlength="100"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
             @input="updateCustomerDetails({ 'firstName': $event })">
@@ -21,6 +22,7 @@
         <form-field
             :value="customer.lastName"
             name="guest-last-name"
+            maxlength="100"
             :label-text="$t('guest.lastName')"
             :has-error="isLastNameEmpty"
             @input="updateCustomerDetails({ 'lastName': $event })">
@@ -39,6 +41,7 @@
             name="guest-email"
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
+            @blur="formFieldBlur('email')"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
@@ -102,7 +105,14 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateCustomerDetails'
-        ])
+        ]),
+
+        formFieldBlur (field) {
+            const fieldValidation = this.$v[VALIDATIONS.guest][field];
+            if (fieldValidation) {
+                fieldValidation.$touch();
+            }
+        }
     }
 };
 </script>

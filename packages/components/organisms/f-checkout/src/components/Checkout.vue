@@ -48,8 +48,10 @@
                     <form-field
                         :value="customer.mobileNumber"
                         name="mobile-number"
+                        maxlength="16"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
+                        @blur="formFieldBlur('mobileNumber')"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
                     >
                         <template #error>
@@ -858,6 +860,13 @@ export default {
             }
 
             this.handleErrorDialogClose();
+        },
+
+        formFieldBlur (field) {
+            const fieldValidation = this.$v.customer[field];
+            if (fieldValidation) {
+                fieldValidation.$touch();
+            }
         }
     },
 
