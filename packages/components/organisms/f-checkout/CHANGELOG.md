@@ -11,6 +11,14 @@ Latest (add to next release)
 - Tagging for future Percy tests
 
 
+v0.102.0
+------------------------------
+*May 6, 2021*
+
+### Changed
+- Guest checkout email input type to `email`
+
+
 v0.101.0
 ------------------------------
 *May 5, 2021*
