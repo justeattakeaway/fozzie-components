@@ -37,6 +37,7 @@
         <form-field
             :value="customer.email"
             name="guest-email"
+            input-type="email"
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
             @input="updateCustomerDetails({ 'email': $event })">

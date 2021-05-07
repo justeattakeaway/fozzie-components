@@ -2,7 +2,7 @@ const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 const footer = new Footer();
 
-describe('Mobile - f-footer component tests - @browserstack', () => {
+describe('Mobile - f-footer component tests - @percy', () => {
     beforeEach(() => {
         const footerData = {
             locale: 'gb',

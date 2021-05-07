@@ -2,7 +2,7 @@ const Header = require('../../test-utils/component-objects/f-header.component');
 
 const header = new Header();
 
-describe('Shared - f-header component tests - @browserstack', () => {
+describe('Shared - f-header component tests - @percy', () => {
     beforeEach(() => {
         const headerData = {
             locale: 'gb',
