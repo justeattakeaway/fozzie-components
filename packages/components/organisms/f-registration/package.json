@@ -49,7 +49,8 @@
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1"
+    "@justeat/browserslist-config-fozzie": ">=1.1.1",
+    "@justeat/f-http": ">=0.4.0"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.1.0",
@@ -57,7 +58,6 @@
     "@justeat/f-card": "0.7.0",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.6.1",
-    "@justeat/f-http": "0.4.0",
     "@justeat/f-vue-icons": "1.10.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.5.8",
