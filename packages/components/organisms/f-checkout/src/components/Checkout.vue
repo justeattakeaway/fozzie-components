@@ -41,8 +41,6 @@
                 <form
                     method="post"
                     :class="$style['c-checkout-form']"
-                    @click="formStart"
-                    @focus="formStart"
                     @submit.prevent="onFormSubmit"
                 >
                     <section
@@ -59,7 +57,7 @@
 
                     <guest-block
                         v-if="!isLoggedIn"
-                        @blurField="formFieldBlur"
+                        @blurField="isFieldValid"
                     />
 
                     <form-field
@@ -70,15 +68,13 @@
                         :has-error="!isMobileNumberValid"
                         aria-describedby="mobile-number-error"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
-                        @blur="formFieldBlur('mobileNumber')"
+                        @blur="isFieldValid('mobileNumber')"
                     >
-                        <template
-                            v-if="!isMobileNumberValid"
-                            #error>
+                        <template #error>
                             <error-message
+                                v-if="!isMobileNumberValid"
                                 id="mobile-number-error"
                                 data-js-error-message
-                                aria-required="true"
                                 data-test-id="error-mobile-number">
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
                             </error-message>
@@ -88,7 +84,7 @@
                     <address-block
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block"
-                        @blurField="formFieldBlur"
+                        @blurField="isFieldValid"
                     />
 
                     <form-selector />
@@ -277,11 +273,9 @@ export default {
             nonFulfillableError: null,
             genericErrorMessage: null,
             genericFormErrorMessage: null,
-            mobileNumber: null,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
-            isLoading: false,
-            formStarted: false
+            isLoading: false
         };
     },
 
@@ -429,35 +423,6 @@ export default {
             'trackFormInteraction',
             'trackInitialLoad'
         ]),
-
-        formStart () {
-            if (!this.formStarted) {
-                this.$emit(EventNames.CheckoutStartForm);
-                this.formStarted = true;
-            }
-        },
-
-        formFieldBlur (field) {
-            const fieldValidation = this.$v.customer[field];
-            const addressValidation = this.$v.address[field];
-
-            if (fieldValidation) {
-                fieldValidation.$touch();
-
-                if (fieldValidation.$invalid) {
-                    this.$emit(EventNames.CheckoutInlineError, fieldValidation);
-                }
-            }
-
-            if (addressValidation) {
-                addressValidation.$touch();
-
-                if (addressValidation.$invalid) {
-                    this.$emit(EventNames.CheckoutInlineError, fieldValidation);
-                }
-            }
-        },
-
 
         /**
          * Loads the necessary data to render a meaningful checkout component.
@@ -856,7 +821,7 @@ export default {
             });
 
             this.genericFormErrorMessage = errorCount === 1 ?
-                `There is ${errorCount} error in the form.` :
+                'There is 1 error in the form.' :
                 `There are ${errorCount} errors in the form.`;
         },
 
@@ -866,6 +831,7 @@ export default {
         scrollToFirstInlineError () {
             this.$nextTick(() => {
                 const firstInlineError = document.querySelector('[data-js-error-message]');
+
                 this.scrollToElement(firstInlineError, { offset: -100 });
             });
         },
@@ -877,6 +843,25 @@ export default {
             this.$v.$touch();
             this.genericFormErrorMessage = '';
             return !this.$v.$invalid;
+        },
+
+        isFieldValid (field) {
+            const fieldValidation = this.$v.customer[field];
+            const addressValidation = this.$v.address[field];
+
+            if (fieldValidation) {
+                fieldValidation.$touch();
+                if (fieldValidation.$invalid) {
+                    this.$emit(EventNames.CheckoutInlineError, fieldValidation);
+                }
+            }
+
+            if (addressValidation) {
+                addressValidation.$touch();
+                if (addressValidation.$invalid) {
+                    this.$emit(EventNames.CheckoutInlineError, fieldValidation);
+                }
+            }
         },
 
         /**

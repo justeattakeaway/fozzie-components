@@ -5,19 +5,17 @@
         <form-field
             :value="customer.firstName"
             aria-required="true"
-            aria-describedby="js-error"
+            aria-describedby="first-name-error"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
-            input-type="text"
             @blur="blurField('firstName')"
             @input="updateCustomerDetails({ 'firstName': $event })"
         >
-            <template
-                v-if="isFirstNameEmpty"
-                #error>
+            <template #error>
                 <error-message
-                    id="js-error"
+                    v-if="isFirstNameEmpty"
+                    id="first-name-error"
                     data-js-error-message
                     data-test-id="error-first-name-empty">
                     {{ $t('validationMessages.firstName.requiredError') }}
@@ -34,12 +32,10 @@
             :has-error="isLastNameEmpty"
             @blur="blurField('lastName')"
             @input="updateCustomerDetails({ 'lastName': $event })">
-            <template
-                v-if="isLastNameEmpty"
-                #error>
+            <template #error>
                 <error-message
+                    v-if="isLastNameEmpty"
                     id="last-name-error"
-                    aria-live="assertive"
                     data-js-error-message
                     data-test-id="error-last-name-empty">
                     {{ $t('validationMessages.lastName.requiredError') }}
@@ -56,13 +52,11 @@
             aria-describedby="email-error"
             @blur="blurField('email')"
             @input="updateCustomerDetails({ 'email': $event })">
-            <template
-                v-if="!isEmailValid"
-                #error>
+            <template #error>
                 <error-message
+                    v-if="!isEmailValid"
                     id="email-error"
                     data-js-error-message
-                    aria-required="true"
                     data-test-id="error-email-invalid">
                     {{ $t('validationMessages.email.requiredError') }}
                 </error-message>
@@ -84,12 +78,6 @@ export default {
     components: { FormField, ErrorMessage },
 
     mixins: [checkoutValidationsMixin],
-
-    data () {
-        return {
-            firstName: null
-        };
-    },
 
     /*
     * Provide/Inject allows nested `Guest` component to inherit `Checkout`
