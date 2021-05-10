@@ -89,6 +89,7 @@ The props that can be defined are as follows (if any):
 | `locale`              | `String` | `''`    | Should be passed if [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application. |
 | `showCourierLinks`    | `Bool`   | `true`  | Controls whether to show courier links in footer.                                                             |
 | `showCountrySelector` | `Bool`   | `true`  | Controls whether to show country selector in footer.                                                          |
+| `euro2020Enabled`     | `Bool`   | `false` | Controls whether to show euro2020 related links in footer. |
 
 ### Events
 
