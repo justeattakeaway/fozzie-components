@@ -13,11 +13,14 @@
                 label-style="inline"
                 is-grouped
                 :has-error="isAddressLine1Empty"
+                aria-required="true"
+                aria-describedby="line1-error"
+                @blur="blurField('line1')"
                 @input="updateAddressDetails({ ['line1']: $event })">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Empty"
-                        aria-required="true"
+                        id="line1-error"
                         data-js-error-message
                         :class="$style['c-address-error']"
                         data-test-id="error-address-line1-empty">
@@ -41,10 +44,14 @@
             name="address-locality"
             :label-text="$t('labels.locality')"
             :has-error="isAddressLocalityEmpty"
+            aria-required="true"
+            aria-describedby="locality-error"
+            @blur="blurField('locality')"
             @input="updateAddressDetails({ ['locality']: $event })">
             <template #error>
                 <error-message
                     v-if="isAddressLocalityEmpty"
+                    id="locality-error"
                     data-js-error-message
                     aria-required="true"
                     data-test-id="error-address-locality-empty">
@@ -58,10 +65,14 @@
             name="address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
+            aria-required="true"
+            aria-describedby="postcode-error"
+            @blur="blurField('postcode')"
             @input="updateAddressDetails({ ['postcode']: $event })">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeEmpty"
+                    id="postcode-error"
                     aria-required="true"
                     data-js-error-message
                     data-test-id="error-address-postcode-empty">
@@ -133,7 +144,10 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateAddressDetails'
-        ])
+        ]),
+        blurField (field) {
+            this.$emit('blurField', field);
+        }
     }
 };
 </script>

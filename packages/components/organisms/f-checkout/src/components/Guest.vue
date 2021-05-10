@@ -3,26 +3,21 @@
         data-test-id="guest-component"
         :class="$style['c-guest']">
         <form-field
-            ref="firstName"
-            v-model="firstName"
             :value="customer.firstName"
             aria-required="true"
-            aria-describedby="error-message-guest-first-name"
-            :aria-invalid="!!isFirstNameEmpty"
+            aria-describedby="js-error"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
             input-type="text"
-            @blur="blurField"
+            @blur="blurField('firstName')"
             @input="updateCustomerDetails({ 'firstName': $event })"
         >
             <template
                 v-if="isFirstNameEmpty"
                 #error>
                 <error-message
-                    id="error-message-guest-first-name"
-                    role="alert"
-                    aria-errormessage="true"
+                    id="js-error"
                     data-js-error-message
                     data-test-id="error-first-name-empty">
                     {{ $t('validationMessages.firstName.requiredError') }}
@@ -31,17 +26,19 @@
         </form-field>
 
         <form-field
-            aria-labelledby="guest-last-name-error"
             :value="customer.lastName"
             name="guest-last-name"
             :label-text="$t('guest.lastName')"
+            aria-required="true"
+            aria-describedby="last-name-error"
             :has-error="isLastNameEmpty"
+            @blur="blurField('lastName')"
             @input="updateCustomerDetails({ 'lastName': $event })">
             <template
                 v-if="isLastNameEmpty"
                 #error>
                 <error-message
-                    id="guest-last-name-error"
+                    id="last-name-error"
                     aria-live="assertive"
                     data-js-error-message
                     data-test-id="error-last-name-empty">
@@ -55,11 +52,15 @@
             name="guest-email"
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
+            aria-required="true"
+            aria-describedby="email-error"
+            @blur="blurField('email')"
             @input="updateCustomerDetails({ 'email': $event })">
             <template
                 v-if="!isEmailValid"
                 #error>
                 <error-message
+                    id="email-error"
                     data-js-error-message
                     aria-required="true"
                     data-test-id="error-email-invalid">
@@ -128,8 +129,8 @@ export default {
             'updateCustomerDetails'
         ]),
 
-        blurField () {
-            this.$emit('blurField');
+        blurField (field) {
+            this.$emit('blurField', field);
         }
     }
 };

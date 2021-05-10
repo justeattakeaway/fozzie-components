@@ -64,21 +64,19 @@
 
                     <form-field
                         ref="mobileNumber"
-                        v-model="mobileNumber"
                         :value="customer.mobileNumber"
                         name="mobile-number"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
-                        :aria-invalid="!!isMobileNumberValid"
-                        aria-describedby="error-message-mobile"
+                        aria-describedby="mobile-number-error"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
-                        @blur="formFieldBlur"
+                        @blur="formFieldBlur('mobileNumber')"
                     >
                         <template
                             v-if="!isMobileNumberValid"
                             #error>
                             <error-message
-                                id="error-message-mobile"
+                                id="mobile-number-error"
                                 data-js-error-message
                                 aria-required="true"
                                 data-test-id="error-mobile-number">
@@ -90,6 +88,7 @@
                     <address-block
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block"
+                        @blurField="formFieldBlur"
                     />
 
                     <form-selector />
@@ -438,14 +437,24 @@ export default {
             }
         },
 
-        formFieldBlur () {
-            console.log('heyyyy', this.$v.$invalid);
+        formFieldBlur (field) {
+            const fieldValidation = this.$v.customer[field];
+            const addressValidation = this.$v.address[field];
 
-            const fieldValidation = this.$v;
-            fieldValidation.$touch();
+            if (fieldValidation) {
+                fieldValidation.$touch();
 
-            if (fieldValidation.$invalid) {
-                this.$emit(EventNames.CheckoutInlineError, fieldValidation);
+                if (fieldValidation.$invalid) {
+                    this.$emit(EventNames.CheckoutInlineError, fieldValidation);
+                }
+            }
+
+            if (addressValidation) {
+                addressValidation.$touch();
+
+                if (addressValidation.$invalid) {
+                    this.$emit(EventNames.CheckoutInlineError, fieldValidation);
+                }
             }
         },
 
@@ -857,7 +866,6 @@ export default {
         scrollToFirstInlineError () {
             this.$nextTick(() => {
                 const firstInlineError = document.querySelector('[data-js-error-message]');
-
                 this.scrollToElement(firstInlineError, { offset: -100 });
             });
         },
