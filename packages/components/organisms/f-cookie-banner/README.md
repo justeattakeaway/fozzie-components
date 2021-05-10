@@ -83,6 +83,8 @@ The props that can be defined are as follows:
 
 `f-cookie-banner` has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
 
+The component is also using utility css styles from [fozzie](https://github.com/justeat/fozzie/) package. You need to make sure to `@include trumps-utilities();` mixin to your application styles if you use beta version of fozzie package (>= v5.0.0-beta.0). If you are using main version (v4.X.X) styles should come out of the box.
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:
