@@ -141,7 +141,7 @@ export default {
             'updateAddressDetails'
         ]),
         isFieldValid (field) {
-            this.$emit('isFieldValid', field);
+            this.focusField(VALIDATIONS.address, field);
         }
     }
 };

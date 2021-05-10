@@ -116,7 +116,7 @@ export default {
         ]),
 
         isFieldValid (field) {
-            this.$emit('isFieldValid', field);
+            this.focusField(VALIDATIONS.guest, field);
         }
     }
 };

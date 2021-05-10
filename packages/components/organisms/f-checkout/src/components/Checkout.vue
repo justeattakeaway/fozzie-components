@@ -50,7 +50,6 @@
 
                     <guest-block
                         v-if="!isLoggedIn"
-                        @isFieldValid="isFieldValid"
                     />
 
                     <form-field
@@ -61,7 +60,7 @@
                         :has-error="!isMobileNumberValid"
                         aria-describedby="mobile-number-error"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
-                        @blur="isFieldValid('mobileNumber')"
+                        @blur="isFieldValid"
                     >
                         <template #error>
                             <error-message
@@ -77,7 +76,6 @@
                     <address-block
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block"
-                        @isFieldValid="isFieldValid"
                     />
 
                     <form-selector />
@@ -837,23 +835,8 @@ export default {
             return !this.$v.$invalid;
         },
 
-        isFieldValid (field) {
-            const fieldValidation = this.$v.customer[field];
-            const addressValidation = this.$v.address[field];
-
-            if (fieldValidation) {
-                fieldValidation.$touch();
-                if (fieldValidation.$invalid) {
-                    this.$emit(EventNames.CheckoutInlineError, fieldValidation);
-                }
-            }
-
-            if (addressValidation) {
-                addressValidation.$touch();
-                if (addressValidation.$invalid) {
-                    this.$emit(EventNames.CheckoutInlineError, fieldValidation);
-                }
-            }
+        isFieldValid () {
+            return this.$v.customer.mobileNumber.$touch();
         },
 
         /**
