@@ -38,7 +38,7 @@
                 data-test-id="search-btn-clear"
                 @click="onClearAddress">
                 <cross-icon />
-                <span :class="$style['is-visuallyHidden']">
+                <span class="is-visuallyHidden">
                     {{ copy.fullAddressSearchSuggestions.clearSearchBtn }}
                 </span>
             </clear-button>
@@ -348,28 +348,4 @@ export default {
         background-color: $grey--offWhite;
     }
 }
-
-// Hide only visually, but have it available for screenreaders: h5bp.com/v
-.is-visuallyHidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-
-    // Extends the .is-visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
-    &.focusable:active,
-    &.focusable:focus {
-        clip: auto;
-        height: auto;
-        margin: 0;
-        overflow: visible;
-        position: static;
-        width: auto;
-    }
-}
-
 </style>
