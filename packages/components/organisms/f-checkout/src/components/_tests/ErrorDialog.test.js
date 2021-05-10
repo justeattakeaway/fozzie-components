@@ -46,7 +46,7 @@ describe('ErrorDialog', () => {
     describe('computed ::', () => {
         describe('errorCode ::', () => {
             it('should return `code` of `message` when `message` is provided', () => {
-                / Arrange && Act
+                // Arrange && Act
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
