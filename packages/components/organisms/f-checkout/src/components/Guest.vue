@@ -9,7 +9,7 @@
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
-            @blur="blurField('firstName')"
+            @blur="isFieldValid('firstName')"
             @input="updateCustomerDetails({ 'firstName': $event })"
         >
             <template #error>
@@ -30,7 +30,7 @@
             aria-required="true"
             aria-describedby="last-name-error"
             :has-error="isLastNameEmpty"
-            @blur="blurField('lastName')"
+            @blur="isFieldValid('lastName')"
             @input="updateCustomerDetails({ 'lastName': $event })">
             <template #error>
                 <error-message
@@ -50,7 +50,7 @@
             :has-error="!isEmailValid"
             aria-required="true"
             aria-describedby="email-error"
-            @blur="blurField('email')"
+            @blur="isFieldValid('email')"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
@@ -117,8 +117,8 @@ export default {
             'updateCustomerDetails'
         ]),
 
-        blurField (field) {
-            this.$emit('blurField', field);
+        isFieldValid (field) {
+            this.$emit('isFieldValid', field);
         }
     }
 };

@@ -57,11 +57,10 @@
 
                     <guest-block
                         v-if="!isLoggedIn"
-                        @blurField="isFieldValid"
+                        @isFieldValid="isFieldValid"
                     />
 
                     <form-field
-                        ref="mobileNumber"
                         :value="customer.mobileNumber"
                         name="mobile-number"
                         :label-text="$t('labels.mobileNumber')"
@@ -84,7 +83,7 @@
                     <address-block
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block"
-                        @blurField="isFieldValid"
+                        @isFieldValid="isFieldValid"
                     />
 
                     <form-selector />
