@@ -3,12 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+
+v4.20.0
 ------------------------------
-*May 5, 2021*
+*May 10, 2021*
 
 ### Added
 - Tagging for future Percy tests
+- euro2020 related links to be shown if `euro2020Enabled` is true
 
 
 v4.19.0
