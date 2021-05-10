@@ -44,7 +44,6 @@
             name="address-locality"
             :label-text="$t('labels.locality')"
             :has-error="isAddressLocalityEmpty"
-            aria-required="true"
             aria-describedby="locality-error"
             @blur="blurField('locality')"
             @input="updateAddressDetails({ ['locality']: $event })">
