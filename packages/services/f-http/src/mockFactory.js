@@ -17,18 +17,17 @@ let _axiosMockAdapter;
 const setupMockResponse = async (method, url, requestData, statusCode, data) => {
     if (!_axiosMockAdapter) _axiosMockAdapter = new MockAdapter(axios);
 
-    switch (method) {
-        case httpVerbs.METHOD_GET:
-            _axiosMockAdapter.onGet(url, requestData).reply(statusCode, data);
-            break;
+    const supportedFunctions = {
+        [httpVerbs.GET]: 'onGet',
+        [httpVerbs.POST]: 'onPost',
+        [httpVerbs.PUT]: 'onPut',
+        [httpVerbs.PATCH]: 'onPatch',
+        [httpVerbs.DELETE]: 'onDelete'
+    };
 
-        case httpVerbs.METHOD_POST:
-            _axiosMockAdapter.onPost(url, requestData).reply(statusCode, data);
-            break;
+    const mockMethod = supportedFunctions[method];
 
-        default:
-            throw new Error('Method not provided');
-    }
+    _axiosMockAdapter[mockMethod](url, requestData).reply(statusCode, data);
 };
 
 /**

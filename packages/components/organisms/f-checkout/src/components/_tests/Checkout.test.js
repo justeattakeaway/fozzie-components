@@ -9,10 +9,8 @@ import {
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
-    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP
 } from '../../constants';
-import CheckoutIssues from '../../checkout-issues';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
@@ -64,6 +62,33 @@ const $v = {
         }
     },
     $touch: jest.fn()
+};
+
+const $style = {
+    'c-checkout-alert': 'c-checkout-alert'
+};
+
+
+const message = {
+    code: ERROR_CODE_FULFILMENT_TIME_INVALID,
+    shouldRedirectToMenu: true,
+    shouldShowInDialog: true
+};
+
+const dialog = {
+    name: 'error-dialog'
+};
+
+const alertCode = 'Something went wrong, please try again later';
+
+const alert = {
+    name: 'alert',
+    props: {
+        type: 'danger',
+        class: 'c-checkout-alert',
+        heading: 'Error'
+    },
+    content: alertCode
 };
 
 describe('Checkout', () => {
@@ -268,41 +293,6 @@ describe('Checkout', () => {
                 expect(spinner.exists()).toBe(true);
             });
         });
-
-        describe('nonFulfillableError ::', () => {
-            describe('when `nonFulfillableError` is an error in checkout issues', () => {
-                it('should show a mega modal displaying the error title and description', () => {
-                    // Arrange
-                    const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
-                    // Act
-                    const wrapper = mount(VueCheckout, {
-                        i18n,
-                        store: createStore(),
-                        localVue,
-                        propsData,
-                        data () {
-                            return {
-                                nonFulfillableError: {
-                                    ...fulfilmentTimeIssue,
-                                    code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-                                }
-                            };
-                        }
-                    });
-
-                    const errorModal = wrapper.find('[data-test-id="checkout-issue-modal"]');
-                    const errorTitle = wrapper.find('[data-test-id="checkout-issue-modal-title"]');
-                    const errorMessage = wrapper.find('[data-test-id="checkout-issue-modal-message"]');
-
-                    // Assert
-                    expect(errorModal.html()).toMatchSnapshot();
-
-                    expect(errorTitle.text()).toMatchSnapshot();
-
-                    expect(errorMessage.text()).toMatchSnapshot();
-                });
-            });
-        });
     });
 
     describe('computed ::', () => {
@@ -485,106 +475,6 @@ describe('Checkout', () => {
             });
         });
 
-        describe('shouldShowErrorDialog ::', () => {
-            it('should return `true` if `nonFulfillableError.shouldShowInDialog` is `true`', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true
-                    }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            nonFulfillableError: {
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
-                                shouldShowInDialog: true
-                            }
-                        };
-                    }
-                });
-
-                // Act
-                const result = wrapper.vm.shouldShowErrorDialog;
-
-                // Assert
-                expect(result).toBe(true);
-            });
-
-            it('should return `false` if `nonFulfillableError.shouldShowInDialog` is `false`', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true
-                    }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            nonFulfillableError: {
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
-                                shouldShowInDialog: false
-                            }
-                        };
-                    }
-                });
-
-                // Act
-                const result = wrapper.vm.shouldShowErrorDialog;
-
-                // Assert
-                expect(result).toBe(false);
-            });
-
-            it('should return `false` if there is no error', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const result = wrapper.vm.shouldShowErrorDialog;
-
-                // Assert
-                expect(result).toBe(false);
-            });
-        });
-
-        describe('restaurantMenuPageUrl ::', () => {
-            it('should return the URL to redirect back to the restaurant menu', () => {
-                // Arrange
-                const restaurantSeoName = 'masala-zone-camden';
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true,
-                        restaurant: {
-                            seoName: restaurantSeoName
-                        }
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const result = wrapper.vm.restaurantMenuPageUrl;
-
-                // Assert
-                expect(result).toBe(`restaurant-${restaurantSeoName}/menu`);
-            });
-        });
-
         describe('eventData ::', () => {
             it('should return `isLoggedIn` and `serviceType` in an object`', () => {
                 // Arrange
@@ -600,6 +490,118 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(result).toEqual({ isLoggedIn: defaultCheckoutState.isLoggedIn, serviceType: defaultCheckoutState.serviceType });
+            });
+        });
+
+        describe('messageType ::', () => {
+            describe('when a message exists AND `shouldShowInDialog` is true', () => {
+                let dialogMessageSpy;
+
+                beforeEach(() => {
+                    dialogMessageSpy = jest.spyOn(VueCheckout.computed, 'dialogMessage');
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should return dialog', () => {
+                    // Arrange
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    const { messageType } = wrapper.vm;
+
+                    // Assert
+                    expect(dialogMessageSpy).toHaveBeenCalled();
+                    expect(messageType).toEqual(dialog);
+                });
+            });
+
+            describe('when a message exists AND `shouldShowInDialog` is false', () => {
+                let alertMessageSpy;
+
+                beforeEach(() => {
+                    alertMessageSpy = jest.spyOn(VueCheckout.computed, 'alertMessage');
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should return alert', () => {
+                    // Arrange
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message: alertCode
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $style
+                        }
+                    });
+
+                    // Act
+                    const { messageType } = wrapper.vm;
+
+                    // Assert
+                    expect(alertMessageSpy).toHaveBeenCalled();
+                    expect(messageType).toEqual(alert);
+                });
+            });
+        });
+
+        describe('dialogMessage ::', () => {
+            describe('when a message exists AND `shouldShowInDialog` is true', () => {
+                it('should return dialog', () => {
+                    // Act
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.dialogMessage).toEqual(dialog);
+                });
+            });
+        });
+
+        describe('alertMessage ::', () => {
+            describe('when a message exists AND `shouldShowInDialog` is false', () => {
+                it('should return alert', () => {
+                    // Act
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message: alertCode
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $style
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.alertMessage).toEqual(alert);
+                });
             });
         });
     });
@@ -1094,6 +1096,22 @@ describe('Checkout', () => {
                     let handleErrorStateSpy;
 
                     beforeEach(() => {
+                        wrapper = mount(VueCheckout, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                serviceType: CHECKOUT_METHOD_COLLECTION,
+                                isLoggedIn: false,
+                                isFulfillable: true,
+                                message: alertCode
+                            }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger
+                            }
+                        });
+
                         handleErrorStateSpy = jest.spyOn(wrapper.vm, 'handleErrorState');
                     });
 
@@ -1224,7 +1242,7 @@ describe('Checkout', () => {
                 wrapper = mount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        errors: [{ code: ERROR_CODE_FULFILMENT_TIME_INVALID, shouldRedirectToMenu: false, shouldShowInDialog: true }]
+                        errors: [message]
                     }),
                     i18n,
                     localVue,
@@ -1253,17 +1271,6 @@ describe('Checkout', () => {
                         data: wrapper.vm.eventData,
                         logMethod: $logger.logWarn
                     });
-                });
-
-                it('should make a call to `toggleDialogError`', () => {
-                    // Arrange
-                    const toggleDialogErrorSpy = jest.spyOn(wrapper.vm, 'toggleDialogError');
-
-                    // Act
-                    wrapper.vm.handleNonFulfillableCheckout();
-
-                    // Assert
-                    expect(toggleDialogErrorSpy).toHaveBeenCalled();
                 });
 
                 it('should make a call to `trackFormErrors`', () => {
@@ -1878,7 +1885,6 @@ describe('Checkout', () => {
             let wrapper;
             let eventData;
             let error;
-            let messageToDisplay;
             let eventToEmit;
             let logInvokerSpy;
             let trackFormInteractionSpy;
@@ -1887,9 +1893,6 @@ describe('Checkout', () => {
             beforeEach(() => {
                 // Arrange
                 error = new Error('An error occurred');
-
-                messageToDisplay = 'Something went wrong, please try again later';
-
                 eventToEmit = EventNames.CheckoutFailure;
 
                 eventData = {
@@ -1898,7 +1901,10 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData,
@@ -1925,25 +1931,6 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(eventToEmit)[0][0]).toEqual({ ...eventData, error });
             });
 
-            it('should assign `messageToDisplay` to `genericErrorMessage` where there is a `messageToDisplay`', () => {
-                // Act
-                wrapper.vm.handleErrorState(error);
-
-                // Assert
-                expect(wrapper.vm.genericErrorMessage).toEqual(messageToDisplay);
-            });
-
-            it('should assign the generic server error to `genericErrorMessage` where there is no `messageToDisplay`', () => {
-                // Arrange
-                messageToDisplay = null;
-
-                // Act
-                wrapper.vm.handleErrorState(error);
-
-                // Assert
-                expect(wrapper.vm.genericErrorMessage).toMatchSnapshot();
-            });
-
             it('should call `logInvoker` to log the error, passing the `eventData` and `error`', () => {
                 // Act
                 wrapper.vm.handleErrorState(error);
@@ -1965,14 +1952,14 @@ describe('Checkout', () => {
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
             });
 
-            it('should call `scrollToElement` with the `errorAlert` element', async () => {
+            it('should call `scrollToElement` with the `errorMessage` element', async () => {
                 // Act
                 wrapper.vm.handleErrorState(error);
 
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(scrollToElementSpy).toHaveBeenCalledWith(wrapper.vm.$refs.errorAlert.$el);
+                expect(scrollToElementSpy).toHaveBeenCalledWith(wrapper.vm.$refs.errorMessage.$el);
             });
         });
 
@@ -1983,21 +1970,19 @@ describe('Checkout', () => {
 
             it('should call `scrollTo` with the default `options` when the element exists', () => {
                 // Arrange
-                const ref = 'errorAlert';
+                const ref = 'errorMessage';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
 
                 const wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData,
                     mocks: {
                         $logger
-                    },
-                    data () {
-                        return {
-                            genericErrorMessage: 'Some error'
-                        };
                     }
                 });
 
@@ -2033,21 +2018,19 @@ describe('Checkout', () => {
 
             it('should accept `options` as a parameter', () => {
                 // Arrange
-                const ref = 'errorAlert';
+                const ref = 'errorMessage';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
 
                 const wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData,
                     mocks: {
                         $logger
-                    },
-                    data () {
-                        return {
-                            genericErrorMessage: 'Some error'
-                        };
                     }
                 });
 
@@ -2069,7 +2052,10 @@ describe('Checkout', () => {
             it('should call `scrollToElement` with the first inline error and -100 offset', async () => {
                 // Arrange
                 const wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData,
@@ -2156,9 +2142,11 @@ describe('Checkout', () => {
 
         describe('`onFormSubmit` ::', () => {
             let isFormValidSpy;
+            let updateMessageSpy;
 
             beforeEach(() => {
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
+                updateMessageSpy = jest.spyOn(VueCheckout.methods, 'updateMessage');
             });
 
             it('should exist', () => {
@@ -2179,6 +2167,27 @@ describe('Checkout', () => {
             });
 
             describe('when invoked', () => {
+                it('should make a call to `updateMessage`', async () => {
+                    // Arrange
+                    isFormValidSpy.mockReturnValue(true);
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $v,
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(updateMessageSpy).toHaveBeenCalled();
+                });
+
                 it('should make a call to `trackFormInteraction` so we can track the action type `submit`', async () => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(true);
@@ -2536,7 +2545,10 @@ describe('Checkout', () => {
                 const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
 
                 const wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData
@@ -2571,64 +2583,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrlPrefix}/${defaultCheckoutState.orderId}`);
-            });
-        });
-
-        describe('handleErrorDialogButtonClick ::', () => {
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            const restaurantSeoName = 'checkout-kofte-farringdon';
-
-            it('should redirect to the restaurant menu if `shouldRedirectToMenu` is true', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, restaurant: { seoName: restaurantSeoName, id: '22222' } }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            nonFulfillableError: {
-                                shouldRedirectToMenu: true,
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-                            }
-                        };
-                    }
-                });
-
-                // Act
-                wrapper.vm.handleErrorDialogButtonClick();
-
-                // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(`restaurant-${restaurantSeoName}/menu`);
-                expect(wrapper.vm.nonFulfillableError).toBeNull();
-            });
-
-            it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, restaurant: { seoName: restaurantSeoName, id: '22222' } }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            nonFulfillableError: {
-                                shouldRedirectToMenu: false,
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-                            }
-                        };
-                    }
-                });
-
-                // Act
-                wrapper.vm.handleErrorDialogButtonClick();
-
-                // Assert
-                expect(windowLocationSpy).not.toHaveBeenCalled();
-                expect(wrapper.vm.nonFulfillableError).toBeNull();
             });
         });
 
@@ -2724,13 +2678,21 @@ describe('Checkout', () => {
                 it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
                     // Arrange
                     const errorMessage = 'An error';
+                    const error = {
+                        message: errorMessage,
+                        response: {
+                            data: {
+                                errorCode: errorMessage
+                            }
+                        }
+                    };
 
                     wrapper = shallowMount(VueCheckout, {
                         store: createStore(
                             defaultCheckoutState,
                             {
                                 ...defaultCheckoutActions,
-                                placeOrder: jest.fn(async () => Promise.reject(new Error(errorMessage)))
+                                placeOrder: jest.fn(async () => Promise.reject(error))
                             }
                         ),
                         i18n,
@@ -2746,38 +2708,6 @@ describe('Checkout', () => {
 
                     result.rejects.toThrow(PlaceOrderError);
                     result.rejects.toThrow(errorMessage);
-                });
-
-                it('should call `toggleDialogError`', async () => {
-                    // Arrange
-                    const errorMessage = 'An error';
-
-                    wrapper = shallowMount(VueCheckout, {
-                        store: createStore(
-                            defaultCheckoutState,
-                            {
-                                ...defaultCheckoutActions,
-                                placeOrder: jest.fn(async () => Promise.reject(new Error(errorMessage)))
-                            }
-                        ),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    const toggleDialogErrorSpy = jest.spyOn(wrapper.vm, 'toggleDialogError');
-
-                    // A try-catch is needed because the exception otherwise is thrown and the test fails.
-                    try {
-                        // Act
-                        await wrapper.vm.submitOrder();
-                    } catch {
-                        // Assert
-                        expect(toggleDialogErrorSpy).toHaveBeenCalled();
-                    }
                 });
             });
         });
