@@ -72,14 +72,13 @@
                 <error-message
                     v-if="isAddressPostcodeEmpty"
                     id="postcode-error"
-                    aria-required="true"
                     data-js-error-message
                     data-test-id="error-address-postcode-empty">
                     {{ $t('validationMessages.postcode.requiredError') }}
                 </error-message>
                 <error-message
                     v-else-if="!isAddressPostcodeValid"
-                    aria-required="true"
+                    id="postcode-error"
                     data-js-error-message
                     data-test-id="error-address-postcode-type-error">
                     {{ $t('validationMessages.postcode.invalidCharError') }}
