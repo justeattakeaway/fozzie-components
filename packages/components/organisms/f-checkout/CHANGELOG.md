@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.104.0
 ------------------------------
-*May 7, 2021*
+*May 10, 2021*
 
 ### Changed
 - `genericErrorMessage` and `nonFulfillableError` replaced with `vuex` `message`.
