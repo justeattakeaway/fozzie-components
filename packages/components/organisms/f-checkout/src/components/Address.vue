@@ -13,7 +13,6 @@
                 label-style="inline"
                 is-grouped
                 :has-error="isAddressLine1Empty"
-                aria-required="true"
                 aria-describedby="line1-error"
                 @blur="isFieldValid('line1')"
                 @input="updateAddressDetails({ ['line1']: $event })">
@@ -52,7 +51,6 @@
                     v-if="isAddressLocalityEmpty"
                     id="locality-error"
                     data-js-error-message
-                    aria-required="true"
                     data-test-id="error-address-locality-empty">
                     {{ $t('validationMessages.locality.requiredError') }}
                 </error-message>
@@ -64,7 +62,6 @@
             name="address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
-            aria-required="true"
             aria-describedby="postcode-error"
             @blur="isFieldValid('postcode')"
             @input="updateAddressDetails({ ['postcode']: $event })">

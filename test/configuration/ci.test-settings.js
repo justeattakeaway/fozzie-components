@@ -3,7 +3,7 @@ const video = require('wdio-video-reporter');
 const settings = () => ({
     bail: 1,
     logLevel: process.env.WDIO_LOG_LEVEL || 'info',
-    maxinstances: parseInt(process.env.WDIO_MAX_INSTANCES) || 2,
+    maxInstances: parseInt(process.env.WDIO_MAX_INSTANCES) || 2,
     reporters: [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases

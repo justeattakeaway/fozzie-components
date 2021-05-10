@@ -2,7 +2,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 const checkout = new Checkout();
 
-describe('f-checkout "invalid" component tests - @browserstack', () => {
+describe('f-checkout "invalid" component tests - @percy', () => {
     beforeEach(() => {
         const checkoutData = {
             type: 'collection',

@@ -4,7 +4,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 const checkout = new Checkout();
 
-describe('f-checkout "collection" component tests - @browserstack', () => {
+describe('f-checkout "collection" component tests - @percy', () => {
     beforeEach(() => {
         const checkoutData = {
             type: 'collection',
@@ -16,6 +16,7 @@ describe('f-checkout "collection" component tests - @browserstack', () => {
         checkout.waitForComponent();
     });
 
+    // Refactor for Percy visual regression
     forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
     .it('should show that "%s" does not exist', field => {
         // Assert

@@ -4,7 +4,6 @@
         :class="$style['c-guest']">
         <form-field
             :value="customer.firstName"
-            aria-required="true"
             aria-describedby="first-name-error"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
@@ -27,7 +26,6 @@
             :value="customer.lastName"
             name="guest-last-name"
             :label-text="$t('guest.lastName')"
-            aria-required="true"
             aria-describedby="last-name-error"
             :has-error="isLastNameEmpty"
             @blur="isFieldValid('lastName')"
@@ -46,9 +44,9 @@
         <form-field
             :value="customer.email"
             name="guest-email"
+            input-type="email"
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
-            aria-required="true"
             aria-describedby="email-error"
             @blur="isFieldValid('email')"
             @input="updateCustomerDetails({ 'email': $event })">

@@ -1,21 +1,17 @@
-import createClient from '../createClient';
+import httpModule from '../index';
 
-describe('createClient', () => {
+describe('httpModule', () => {
     beforeEach(() => {});
 
     it('should be defined', async () => {
         // Arrange, Act & Assert
-        expect(createClient).toBeDefined();
+        expect(httpModule).toBeDefined();
     });
 
-    it('should expose expected methods', async () => {
-        // Arrange & Act
-        const httpClient = createClient();
-
-        // Assert
-        expect(httpClient).toBeDefined();
-        expect(httpClient.get).toBeDefined();
-        expect(httpClient.post).toBeDefined();
-        expect(httpClient.readConfiguration).toBeDefined();
+    it('should define expected properties', async () => {
+        // Arrange, Act & Assert
+        expect(httpModule.createClient).toBeDefined();
+        expect(httpModule.mockFactory).toBeDefined();
+        expect(httpModule.httpVerbs).toBeDefined();
     });
 });

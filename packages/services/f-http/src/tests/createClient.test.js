@@ -7,36 +7,62 @@ describe('createClient', () => {
             expect(createClient).toBeDefined();
         });
 
-        it('should use default options when not overridden', async () => {
+        it('should expose expected methods', async () => {
             // Arrange & Act
+            const httpClient = createClient();
+
+            // Assert
+            expect(httpClient).toBeDefined();
+            expect(httpClient.get).toBeDefined();
+            expect(httpClient.post).toBeDefined();
+            expect(httpClient.put).toBeDefined();
+            expect(httpClient.patch).toBeDefined();
+            expect(httpClient.delete).toBeDefined();
+            expect(httpClient.setAuthorisationToken).toBeDefined();
+            expect(httpClient.readConfiguration).toBeDefined();
+        });
+
+        it('should use default options when not overridden', async () => {
+            // Arrange
+            const expectedResult = {
+                baseUrl: '',
+                timeout: 10000,
+                errorCallback: null,
+                contentType: 'application/json',
+                instanceName: 'Generic Front End'
+            };
+
+            // Act
             const httpClient = createClient();
             const mergedOptions = httpClient.readConfiguration();
 
             // Assert
-            expect(mergedOptions).toBeDefined();
-            expect(mergedOptions.baseUrl).toBe('');
-            expect(mergedOptions.timeout).toBe(10000);
-            expect(mergedOptions.errorCallback).toBe(null);
+            expect(mergedOptions).toStrictEqual(expectedResult);
         });
 
         it('should use overridden options when overridden', async () => {
-            // Arrange & Act
+            // Arrange
             const expectedBaseUrl = 'https://www.example.org';
             const expectedTimeout = 2000;
             const expectedErrorCallback = () => {};
+            const expectedContentType = 'application/mpeg';
+            const expectedInstanceName = 'Test Test Test';
 
-            const httpClient = createClient({
+            const expectedResult = {
                 baseUrl: expectedBaseUrl,
                 timeout: expectedTimeout,
-                errorCallback: expectedErrorCallback
-            });
+                errorCallback: expectedErrorCallback,
+                contentType: expectedContentType,
+                instanceName: expectedInstanceName
+            };
+
+            // Act
+            const httpClient = createClient(expectedResult);
+
             const mergedOptions = httpClient.readConfiguration();
 
             // Assert
-            expect(mergedOptions).toBeDefined();
-            expect(mergedOptions.baseUrl).toBe(expectedBaseUrl);
-            expect(mergedOptions.timeout).toBe(expectedTimeout);
-            expect(mergedOptions.errorCallback).toBe(expectedErrorCallback);
+            expect(mergedOptions).toStrictEqual(expectedResult);
         });
     });
 });
