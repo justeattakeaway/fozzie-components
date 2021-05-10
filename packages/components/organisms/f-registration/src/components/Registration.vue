@@ -231,11 +231,6 @@ export default {
             type: String,
             required: true
         },
-        createAccountTimeout: {
-            type: Number,
-            required: false,
-            default: 1000
-        },
         showLoginLink: {
             type: Boolean,
             required: true
@@ -449,7 +444,7 @@ export default {
                     registrationSource: 'Native',
                     marketingPreferences: []
                 };
-                await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData, this.createAccountTimeout);
+                await RegistrationServiceApi.createAccount(this.createAccountUrl, registrationData, this.tenant);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
                 let thrownErrors = error;
