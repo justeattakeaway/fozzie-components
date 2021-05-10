@@ -4,13 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.104.0
+v0.105.0
 ------------------------------
 *May 10, 2021*
 
 ### Added
 - Max Length added to fields submitted to Api to match spec.
-- Invoke pattern matching event to occur on blur for email and tel. no.
+- Invoke validation to occur on blur event for email and tel. no.
 
 
 v0.103.0
