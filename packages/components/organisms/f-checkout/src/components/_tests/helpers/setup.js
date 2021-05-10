@@ -47,6 +47,7 @@ const defaultCheckoutState = {
     },
     isFulfillable: true,
     notices: [],
+    message: null,
     messages: [],
     authToken: '',
     isLoggedIn: false,
@@ -63,6 +64,7 @@ const defaultAnalyticsState = {
 const defaultCheckoutActions = {
     getCheckout: jest.fn(),
     updateCheckout: jest.fn(),
+    updateMessage: jest.fn(),
     getAvailableFulfilment: jest.fn(),
     setAuthToken: jest.fn(),
     createGuestUser: jest.fn(),
@@ -75,10 +77,6 @@ const defaultCheckoutActions = {
     placeOrder: jest.fn(),
     getCustomerName: jest.fn(),
     updateHasAsapSelected: jest.fn()
-};
-
-const defaultCheckoutGetters = {
-    firstDialogError: jest.fn()
 };
 
 const defaultAnalyticsActions = {
@@ -102,7 +100,6 @@ const i18n = {
 const createStore = (
     checkoutState = defaultCheckoutState,
     checkoutActions = defaultCheckoutActions,
-    checkoutGetters = defaultCheckoutGetters,
     analyticsState = defaultAnalyticsState,
     analyticsActions = defaultAnalyticsActions
 ) => new Vuex.Store({
@@ -110,8 +107,7 @@ const createStore = (
         [VUEX_CHECKOUT_MODULE]: {
             namespaced: true,
             state: checkoutState,
-            actions: checkoutActions,
-            getters: checkoutGetters
+            actions: checkoutActions
         },
         [VUEX_CHECKOUT_ANALYTICS_MODULE]: {
             namespaced: true,

@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.104.0
+------------------------------
+*May 10, 2021*
+
+### Changed
+- `genericErrorMessage` and `nonFulfillableError` replaced with `vuex` `message`.
+- One of `ErrorDialog` or `f-alert` to be displayed if an error should be displayed to the user.
+
+### Added
+- Tests to cover changes in `ErrorDialog`.
+
 
 v0.103.0
 ------------------------------
