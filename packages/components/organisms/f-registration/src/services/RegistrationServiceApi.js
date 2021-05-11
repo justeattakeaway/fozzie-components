@@ -1,16 +1,13 @@
-import axios from 'axios';
+import httpModule from '@justeat/f-http';
 
 export default {
-    async createAccount (url, tenant, data, timeout) {
-        const config = {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept-Tenant': tenant
-            },
-            timeout
-        };
-        return axios
-            .post(url, data, config);
+    async createAccount (url, data, tenant) {
+        const httpClient = httpModule.createClient({
+            instanceName: 'Account Web'
+        });
+
+        return httpClient.post(url, data, {
+            'Accept-Tenant': tenant
+        });
     }
 };
