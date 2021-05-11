@@ -1,18 +1,20 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+import httpModule from '@justeat/f-http';
 import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 
 describe('RegistrationServiceApi', () => {
-    const axiosMock = new MockAdapter(axios);
-
     describe('when creating an account', () => {
-        afterEach(() => {
-            axiosMock.reset();
-            axiosMock.resetHistory();
-        });
-
         it('should post correct data with accept tenant header', async () => {
             // Arrange
+            let receivedData = null;
+            let receivedHeaders = null;
+
+            httpModule.createClient = () => ({
+                post: (url, data, headers) => {
+                    receivedData = data;
+                    receivedHeaders = headers;
+                }
+            });
+
             const tenant = 'uk';
             const url = 'http://localhost/account/register';
             const data = {
@@ -21,15 +23,13 @@ describe('RegistrationServiceApi', () => {
                 email: 'joe@test.com',
                 password: 'Passw0rd'
             };
-            axiosMock.onPost(url).reply(201);
 
             // Act
-            await RegistrationServiceApi.createAccount(url, tenant, data);
+            await RegistrationServiceApi.createAccount(url, data, tenant);
 
             // Assert
-            expect(axiosMock.history.post.length).toBe(1);
-            expect(axiosMock.history.post[0].data).toBe(JSON.stringify(data));
-            expect(axiosMock.history.post[0].headers['Accept-Tenant']).toBe('uk');
+            expect(receivedData).toBe(data);
+            expect(receivedHeaders['Accept-Tenant']).toBe('uk');
         });
     });
 });
