@@ -14,7 +14,7 @@
                 is-grouped
                 :has-error="isAddressLine1Empty"
                 aria-describedby="line1-error"
-                @blur="isFieldValid('line1')"
+                @blur="onAddressFieldBlur('line1')"
                 @input="updateAddressDetails({ ['line1']: $event })">
                 <template #error>
                     <error-message
@@ -44,7 +44,7 @@
             :label-text="$t('labels.locality')"
             :has-error="isAddressLocalityEmpty"
             aria-describedby="locality-error"
-            @blur="isFieldValid('locality')"
+            @blur="onAddressFieldBlur('locality')"
             @input="updateAddressDetails({ ['locality']: $event })">
             <template #error>
                 <error-message
@@ -63,7 +63,7 @@
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
             aria-describedby="postcode-error"
-            @blur="isFieldValid('postcode')"
+            @blur="onAddressFieldBlur('postcode')"
             @input="updateAddressDetails({ ['postcode']: $event })">
             <template #error>
                 <error-message
@@ -140,8 +140,8 @@ export default {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateAddressDetails'
         ]),
-        isFieldValid (field) {
-            this.focusField(VALIDATIONS.address, field);
+        onAddressFieldBlur (field) {
+            this.onFieldBlur(VALIDATIONS.address, field);
         }
     }
 };

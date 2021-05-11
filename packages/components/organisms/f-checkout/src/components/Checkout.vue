@@ -60,7 +60,7 @@
                         :has-error="!isMobileNumberValid"
                         aria-describedby="mobile-number-error"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
-                        @blur="isFieldValid"
+                        @blur="onMobileFieldBlur"
                     >
                         <template #error>
                             <error-message
@@ -835,8 +835,8 @@ export default {
             return !this.$v.$invalid;
         },
 
-        isFieldValid () {
-            return this.$v.customer.mobileNumber.$touch();
+        onMobileFieldBlur () {
+            this.onFieldBlur('customer', 'mobileNumber');
         },
 
         /**

@@ -8,7 +8,7 @@
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
-            @blur="isFieldValid('firstName')"
+            @blur="onGuestFieldBlur('firstName')"
             @input="updateCustomerDetails({ 'firstName': $event })"
         >
             <template #error>
@@ -28,7 +28,7 @@
             :label-text="$t('guest.lastName')"
             aria-describedby="last-name-error"
             :has-error="isLastNameEmpty"
-            @blur="isFieldValid('lastName')"
+            @blur="onGuestFieldBlur('lastName')"
             @input="updateCustomerDetails({ 'lastName': $event })">
             <template #error>
                 <error-message
@@ -48,7 +48,7 @@
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
             aria-describedby="email-error"
-            @blur="isFieldValid('email')"
+            @blur="onGuestFieldBlur('email')"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
@@ -115,8 +115,8 @@ export default {
             'updateCustomerDetails'
         ]),
 
-        isFieldValid (field) {
-            this.focusField(VALIDATIONS.guest, field);
+        onGuestFieldBlur (field) {
+            this.onFieldBlur(VALIDATIONS.guest, field);
         }
     }
 };
