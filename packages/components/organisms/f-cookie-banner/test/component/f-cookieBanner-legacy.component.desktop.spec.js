@@ -1,12 +1,14 @@
 import forEach from 'mocha-each';
 
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const CookieBanner = require('../../../test-utils/component-objects/f-cookieBanner-legacy.component');
+const CookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
 
-const cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+let cookieBanner;
 
 describe('Legacy - f-cookieBanner component tests @browserstack', () => {
     beforeEach(() => {
+        cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+        cookieBanner.withQuery('&knob-Locale', 'en-GB');
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
         cookieBanner.open(pageUrl);
         cookieBanner.waitForComponent();
@@ -31,6 +33,7 @@ describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
     ])
     .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
         // Arrange
+        cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
         const countryFormatted = tenant.toUpperCase();
         const formattedLocale = `en-${countryFormatted}`;
         cookieBanner.withQuery('&knob-Locale', formattedLocale);

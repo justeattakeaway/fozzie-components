@@ -1,16 +1,21 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
 
-const legacyCookieBanner = new LegacyCookieBanner();
+const legacyCookieBanner = new LegacyCookieBanner('organism', 'cookie-banner-component');
+
 const CookieConsentBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
 
-const cookieConsentBanner = new CookieConsentBanner();
+const cookieConsentBanner = new CookieConsentBanner('organism', 'cookie-banner-component');
 
 describe('Legacy Accessibility tests', () => {
     it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {
         // Arrange
-        legacyCookieBanner.open();
+        const formattedLocale = 'en-GB';
+        legacyCookieBanner.withQuery('&knob-Locale', formattedLocale);
+        const pageUrl = buildUrl(legacyCookieBanner.componentType, legacyCookieBanner.componentName, legacyCookieBanner.path);
+        legacyCookieBanner.open(pageUrl);
         legacyCookieBanner.waitForComponent();
 
         // Act
@@ -22,7 +27,10 @@ describe('Legacy Accessibility tests', () => {
 
     it('a11y - should test new f-cookie-banner component WCAG compliance', () => {
         // Arrange
-        cookieConsentBanner.open();
+        const formattedLocale = 'en-IE';
+        cookieConsentBanner.withQuery('&knob-Locale', formattedLocale);
+        const pageUrl = buildUrl(cookieConsentBanner.componentType, cookieConsentBanner.componentName, cookieConsentBanner.path);
+        cookieConsentBanner.open(pageUrl);
         cookieConsentBanner.waitForComponent();
 
         // Act

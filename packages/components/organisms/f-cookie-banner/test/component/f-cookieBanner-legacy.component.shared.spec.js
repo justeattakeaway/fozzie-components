@@ -1,6 +1,6 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
-const CookieBanner = require('../../../test-utils/component-objects/f-cookieBanner-legacy.component');
+const CookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
 
 const cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
 

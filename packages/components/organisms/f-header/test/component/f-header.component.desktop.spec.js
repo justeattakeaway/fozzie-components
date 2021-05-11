@@ -2,6 +2,7 @@ import forEach from 'mocha-each';
 
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
+const Header = require('../../test-utils/component-objects/f-header.component');
 
 let header;
 
@@ -91,15 +92,14 @@ describe('Desktop - f-header component tests - @browserstack', () => {
     forEach(['it', 'es', 'dk', 'no'])
     .it('should display the below navigation links for country code "%s"', expectedLocale => {
         // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
+        header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
         ['userAccount', 'help', 'countrySelector'].forEach(link => {
             // Act
-            header.open(headerData);
+            header.open(pageUrl);
             header.waitForComponent();
 
             // Assert

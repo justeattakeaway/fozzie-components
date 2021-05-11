@@ -1,5 +1,5 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
+const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
 

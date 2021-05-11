@@ -2,7 +2,7 @@ import forEach from 'mocha-each';
 
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
-const Footer = require('../../../test-utils/component-objects/f-footer.component');
+const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
 
@@ -102,6 +102,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['au', 'ie', 'nz'])
     .it('should show courier links for country code "%s" when option is selected', expectedLocale => {
         // Arrange
+        footer = new Footer('organism', 'footer-component');
         footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
         footer.withQuery('&knob-Show country selector', 'false');
         footer.withQuery('&knob-Show courier links', 'true');
@@ -118,14 +119,14 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['gb', 'es', 'it', 'no'])
     .it('should never show courier links for country code "%s", even when option is selected', expectedLocale => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: true,
-            countrySelector: false
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'true');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
@@ -133,8 +134,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach(['au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should always show country selector for country code "%s" when selected', expectedLocale => {
+    .it.only('should always show country selector for country code "%s" when selected', expectedLocale => {
         // Arrange
+        footer = new Footer('organism', 'footer-component');
         footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
         footer.withQuery('&knob-Show country selector', 'true');
         footer.withQuery('&knob-Show courier links', 'false');
@@ -151,6 +153,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
     .it('should display the corresponding icon for the "%s" country code', expectedLocale => {
         // Arrange
+        footer = new Footer('organism', 'footer-component');
         footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
         footer.withQuery('&knob-Show country selector', 'true');
         footer.withQuery('&knob-Show courier links', 'false');
@@ -222,6 +225,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
     .it('should display social icons block for country code "%s"', expectedLocale => {
         // Arrange
+        footer = new Footer('organism', 'footer-component');
         footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
         footer.withQuery('&knob-Show country selector', 'false');
         footer.withQuery('&knob-Show courier links', 'false');
@@ -238,6 +242,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
     .it('should display app downloads block for country code "%s"', expectedLocale => {
         // Arrange
+        footer = new Footer('organism', 'footer-component');
         footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
         footer.withQuery('&knob-Show country selector', 'false');
         footer.withQuery('&knob-Show courier links', 'false');
@@ -254,6 +259,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
     .it('should display payment options block for country code "%s"', expectedLocale => {
         // Arrange
+        footer = new Footer('organism', 'footer-component');
         footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
         footer.withQuery('&knob-Show country selector', 'false');
         footer.withQuery('&knob-Show courier links', 'false');
@@ -270,6 +276,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
     .it('should display the feedback block for country code "%s"', expectedLocale => {
         // Arrange
+        footer = new Footer('organism', 'footer-component');
         footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
         footer.withQuery('&knob-Show country selector', 'false');
         footer.withQuery('&knob-Show courier links', 'false');

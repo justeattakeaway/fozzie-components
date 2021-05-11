@@ -1,5 +1,5 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const HomePromotionCard2 = require('../../../test-utils/component-objects/f-content-cards-home-promotion-card2.component');
+const HomePromotionCard2 = require('../../test-utils/component-objects/f-content-cards-home-promotion-card2.component');
 
 let card;
 

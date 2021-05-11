@@ -1,14 +1,49 @@
 import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+
 const Header = require('../../test-utils/component-objects/f-header.component');
 
-const header = new Header();
+let header;
+
+function formatLocale (tenant) {
+    const countryFormatted = tenant.toUpperCase();
+    let formattedLocale = '';
+    switch (countryFormatted) {
+        case 'GB':
+        case 'AU':
+        case 'NZ':
+        case 'IE':
+            formattedLocale = `en-${countryFormatted}`;
+            break;
+        case 'DK':
+            formattedLocale = `da-${countryFormatted}`;
+            break;
+        case 'ES':
+            formattedLocale = `es-${countryFormatted}`;
+            break;
+        case 'IT':
+            formattedLocale = `it-${countryFormatted}`;
+            break;
+        case 'NO':
+            formattedLocale = `nb-${countryFormatted}`;
+            break;
+        default:
+            throw new Error(`locale ${countryFormatted} is not supported`);
+    }
+    return formattedLocale;
+}
 
 describe('Mobile - f-header component tests - @browserstack', () => {
     beforeEach(() => {
         // Act
-        header.open({ locale: 'gb', offers: true, delivery: true });
-        header.openMobileNavigation();
+        header = new Header('organism', 'header-component');
+        header.withQuery('&knob-Locale', 'en-GB');
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+        header.open(pageUrl);
+        header.openMobileNavigationBar();
         header.waitForComponent();
 
         if (process.env.JE_ENV !== 'browserstack') {
@@ -37,7 +72,11 @@ describe('Mobile - f-header component tests - @browserstack', () => {
 
         beforeEach(() => {
             // Act
-            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+            header.withQuery('&knob-Show offers link', 'true');
+            header.withQuery('&knob-Show delivery enquiry', 'true');
+            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+            header.open(pageUrl);
             header.waitForComponent();
         });
 
@@ -57,7 +96,11 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     .describe('open navigation for country code "%s"', expectedLocale => {
         beforeEach(() => {
             // Act
-            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+            header.withQuery('&knob-Show offers link', 'true');
+            header.withQuery('&knob-Show delivery enquiry', 'true');
+            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+            header.open(pageUrl);
             header.openMobileNavigation();
             header.waitForComponent();
         });
@@ -78,7 +121,11 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     .describe('closed navigation for country code "%s"', expectedLocale => {
         beforeEach(() => {
             // Act
-            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+            header.withQuery('&knob-Show offers link', 'true');
+            header.withQuery('&knob-Show delivery enquiry', 'true');
+            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+            header.open(pageUrl);
             header.waitForComponent();
         });
 
@@ -97,7 +144,11 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     .describe('open navigation for country code "%s"', expectedLocale => {
         beforeEach(() => {
             // Act
-            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+            header.withQuery('&knob-Show offers link', 'true');
+            header.withQuery('&knob-Show delivery enquiry', 'true');
+            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+            header.open(pageUrl);
             header.openMobileNavigation();
             header.waitForComponent();
         });

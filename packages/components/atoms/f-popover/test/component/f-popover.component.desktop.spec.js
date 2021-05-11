@@ -1,5 +1,5 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const Popover = require('../../../test-utils/component-objects/f-popover.component');
+const Popover = require('../../test-utils/component-objects/f-popover.component');
 
 const popover = new Popover('atom', 'popover-component');
 

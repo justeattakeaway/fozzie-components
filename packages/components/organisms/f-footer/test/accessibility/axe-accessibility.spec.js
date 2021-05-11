@@ -1,8 +1,8 @@
-
+import forEach from 'mocha-each';
 
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
-const Footer = require('../../../test-utils/component-objects/f-footer.component');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
 

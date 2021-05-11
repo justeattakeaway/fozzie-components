@@ -1,5 +1,6 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
+const Header = require('../../test-utils/component-objects/f-header.component');
 
 let header;
 

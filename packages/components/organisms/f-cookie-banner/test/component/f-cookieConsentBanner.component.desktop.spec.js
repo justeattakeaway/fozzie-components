@@ -1,15 +1,15 @@
 import forEach from 'mocha-each';
 
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const CookieBanner = require('../../../test-utils/component-objects/f-cookieConsentBanner.component');
+const CookieBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
 
 let cookieBanner;
 
 
 describe('New - f-cookieBanner component tests - @browserstack', () => {
     beforeEach(() => {
-
         cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+        cookieBanner.withQuery('&knob-Locale', 'en-IE');
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 
         cookieBanner.open(pageUrl);
@@ -65,6 +65,7 @@ describe('New - Multi-tenant - f-cookieBanner component tests', () => {
                 throw new Error(`locale ${countryFormatted} is not supported`);
         }
 
+        cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
         cookieBanner.withQuery('&knob-Locale', formattedLocale);
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 

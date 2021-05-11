@@ -1,5 +1,5 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-
+const ErrorMessage = require('../../test-utils/component-objects/f-error-message.component');
 
 const errorMessage = new ErrorMessage('atom', 'error-message-component');
 

@@ -1,5 +1,6 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
+const StatusBanner = require('../../test-utils/component-objects/f-statusBanner.component');
 
 let statusBanner;
 

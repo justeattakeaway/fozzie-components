@@ -1,6 +1,6 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
-const Footer = require('../../../test-utils/component-objects/f-footer.component');
+const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
 

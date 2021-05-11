@@ -1,5 +1,5 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-
+const Button = require('../../test-utils/component-objects/f-button.component');
 
 const button = new Button('atom-folder', 'f-button--button-component');
 
