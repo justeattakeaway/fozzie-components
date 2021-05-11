@@ -8,9 +8,12 @@ v0.105.0
 *May 11, 2021*
 
 ### Added
-- `aria-describedby` for all input fields - for error messages
+- `aria-describedby` and `aria-invalid` for all input fields - for reading error messages
 - `error-summary-section` in checkout to alert errors after submit button (resembles f-registration)
-- `isFieldValid` function so error messages populate after tabbing
+- `onFieldBlur` function so error messages populate after field has been touched
+
+### Fixed
+- `Resturant` to `Restaurant` typo in `en-GB.js` copy text.
 
 
 v0.104.0
