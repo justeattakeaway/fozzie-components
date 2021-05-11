@@ -44,7 +44,7 @@
                         <error-message
                             v-if="invalidFieldsCount"
                             :class="$style['c-checkout-genericError']">
-                            {{ $t('errorMessages.genericFormError', { invalidFieldsCount }) }}
+                            {{ invalidFieldsCount }}
                         </error-message>
                     </section>
 
@@ -790,6 +790,7 @@ export default {
         onInvalidCheckoutForm () {
             const validationState = validations.getFormValidationState(this.$v);
             const invalidFields = mapAnalyticsNames(validationState.invalidFields);
+            const invalidFieldsLength = validationState.invalidFields.length;
 
             this.scrollToFirstInlineError();
 
@@ -810,7 +811,9 @@ export default {
                 logMethod: this.$logger.logWarn
             });
 
-            this.invalidFieldsCount = validationState.invalidFields.length;
+            this.invalidFieldsCount = invalidFieldsLength === 1 ?
+                this.$t('errorMessages.singleFieldError') :
+                this.$t('errorMessages.multipleFieldErrors', { invalidFieldsLength });
         },
 
         /**
