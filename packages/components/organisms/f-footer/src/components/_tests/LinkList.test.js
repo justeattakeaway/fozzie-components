@@ -83,4 +83,35 @@ describe('LinkList component', () => {
             expect(linkListCollapsedWrapper.exists()).toBe(false);
         });
     });
+
+    describe.each([
+        [true, 2],
+        [false, 1]
+    ])('when showEuro2020Links is %s', (euro2020prop, expectedResult) => {
+        // Arrange & Act
+        const wrapper = shallowMount(LinkList, {
+            propsData: {
+                linkList: {
+                    title: 'Test',
+                    links: [
+                        {
+                            url: 'https://test.com',
+                            text: 'Test link'
+                        },
+                        {
+                            type: 'euro2020',
+                            url: 'https://www.just-eat.co.uk/euro2020/',
+                            text: 'UEFA EURO 2020™'
+                        }
+                    ]
+                },
+                showEuro2020Links: euro2020prop
+            }
+        });
+
+        it(`should ${euro2020prop ? '' : 'not '}display euro2020 related links`, () => {
+            // Assert
+            expect(wrapper.vm.filteredLinkList.length).toBe(expectedResult);
+        });
+    });
 });

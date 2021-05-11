@@ -42,7 +42,6 @@
             input-type="email"
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
-            @blur="formFieldBlur('email')"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
@@ -106,14 +105,7 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateCustomerDetails'
-        ]),
-
-        formFieldBlur (field) {
-            const fieldValidation = this.$v[VALIDATIONS.guest][field];
-            if (fieldValidation) {
-                fieldValidation.$touch();
-            }
-        }
+        ])
     }
 };
 </script>

@@ -59,6 +59,10 @@ export default {
 }
 ```
 
+### CSS styles
+
+The component is using utility css styles from [fozzie](https://github.com/justeat/fozzie/) package. You need to make sure to `@include trumps-utilities();` mixin to your application styles if you use beta version of fozzie package (>= v5.0.0-beta.0). If you are using main version (v4.X.X) styles should come out of the box.
+
 ## Configuration
 
 ### Props
@@ -81,22 +85,6 @@ export default {
 | `registration-create-account-inline-error` | Validation on form fields has failed. |
 | `registration-visit-login-page` | User clicked 'Already on Just Eat` login link. |
 | `registration-login-blocked` | 'FailedUserAuthentication' error has been returned when submitting the registration form. |
-
-## Development
-
-Start by cloning the repository and installing the required dependencies:
-
-```sh
-$ git clone git@github.com:justeat/fozzie-components.git
-$ cd fozzie-components
-$ yarn
-```
-
-Change directory to the `f-registration` package:
-
-```sh
-$ cd packages/components/molecules/f-registration
-```
 
 ## Development
 

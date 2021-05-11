@@ -1,13 +1,14 @@
 <template>
     <mega-modal
-        :is-open="isOpen"
         data-test-id="checkout-issue-modal"
         has-overlay
-        v-bind="$attrs"
-        v-on="$listeners">
+        :is-open="isOpen"
+        @close="closeErrorDialog"
+    >
         <h3
             data-test-id="checkout-issue-modal-title"
-            class="u-noSpacing">
+            class="u-noSpacing"
+        >
             {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText }) }}
         </h3>
 
@@ -19,7 +20,8 @@
             :class="$style['c-checkout-redirectButton']"
             button-size="large"
             data-test-id="redirect-to-menu-button"
-            @click.native="handleButtonClick">
+            @click.native="closeErrorDialog"
+        >
             {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonText`) }}
         </f-button>
     </mega-modal>
@@ -30,39 +32,58 @@ import MegaModal from '@justeat/f-mega-modal';
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-
-import EventNames from '../event-names';
+import { mapActions, mapState } from 'vuex';
+import {
+    VUEX_CHECKOUT_MODULE
+} from '../constants';
 
 export default {
     components: {
-        MegaModal,
-        FButton
-    },
-
-    props: {
-        isOpen: {
-            type: Boolean,
-            default: false
-        },
-        errorCode: {
-            type: String,
-            default: ''
-        },
-        serviceType: {
-            type: String,
-            default: ''
-        }
+        FButton,
+        MegaModal
     },
 
     data () {
         return {
-            serviceTypeText: this.$t(`serviceTypes.${this.serviceType}`)
+            isOpen: false
         };
     },
 
+    computed: {
+        ...mapState(VUEX_CHECKOUT_MODULE, [
+            'message',
+            'restaurant',
+            'serviceType'
+        ]),
+
+        errorCode () {
+            return this.message && this.message.code;
+        },
+
+        restaurantMenuPageUrl () {
+            return `restaurant-${this.restaurant.seoName}/menu`;
+        },
+
+        serviceTypeText () {
+            return this.$t(`serviceTypes.${this.serviceType}`);
+        }
+    },
+
+    mounted () {
+        this.isOpen = true;
+    },
+
     methods: {
-        handleButtonClick () {
-            this.$emit(EventNames.CheckoutErrorDialogButtonClicked);
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
+            'updateMessage'
+        ]),
+
+        closeErrorDialog () {
+            if (this.message && this.message.shouldRedirectToMenu) {
+                window.location.assign(this.restaurantMenuPageUrl);
+            }
+
+            this.updateMessage();
         }
     }
 };

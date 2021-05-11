@@ -209,6 +209,24 @@ export default {
                     target: '_blank',
                     rel: 'noopener',
                     gtm: 'click_ethics_hotline'
+                },
+                {
+                    type: 'euro2020',
+                    url: 'https://www.just-eat.es/euro2020/',
+                    text: 'UEFA EURO 2020™',
+                    gtm: 'click_euro2020'
+                },
+                {
+                    type: 'euro2020',
+                    url: 'https://www.just-eat.es/euro2020/ganar-entradas/',
+                    text: 'Ganar entradas',
+                    gtm: 'click_euro2020_ganar_entradas'
+                },
+                {
+                    type: 'euro2020',
+                    url: 'https://www.just-eat.es/euro2020/terms/',
+                    text: 'Ganar entradas - Términos y condiciones',
+                    gtm: 'click_euro2020_términos'
                 }
             ]
         }

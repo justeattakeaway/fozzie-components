@@ -8,9 +8,9 @@
         data-test-id="nav-container">
         <button
             :class="[
+                'is-hidden--noJS',
                 $style['c-nav-trigger'],
                 $style['c-nav-toggle'],
-                $style['is-hidden--noJS'],
                 { [$style['c-nav-toggle--altColour']]: isAltColour },
                 { [$style['is-open']]: navIsOpen }
             ]"
@@ -27,16 +27,16 @@
             v-model="navIsOpen"
             type="checkbox"
             :class="[
-                $style['c-nav-trigger'],
-                $style['is-hidden'],
-                $style['is-shown--noJS']
+                'is-hidden',
+                'is-shown--noJS',
+                $style['c-nav-trigger']
             ]">
 
         <label
             :class="[
+                'is-hidden',
+                'is-shown--noJS',
                 $style['c-nav-toggle'],
-                $style['is-hidden'],
-                $style['is-shown--noJS'],
                 { [$style['is-open']]: navIsOpen }
             ]"
             :aria-label="copy.openMenuText"
@@ -64,7 +64,7 @@
                     $style['c-nav-icon--offers'],
                     { [$style['c-nav-icon--alt']]: isAltColour }
                 ]" />
-            <span :class="$style['is-visuallyHidden']">
+            <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
             </span>
         </a>
@@ -135,7 +135,7 @@
                     :class="[
                         $style['c-nav-list-item--horizontallyAlignedAboveMid'],
                         $style['has-sublist'], {
-                            [$style['is-hidden']]: !userInfo || !showLoginInfo,
+                            'is-hidden': !userInfo || !showLoginInfo,
                             [$style['is-open']]: userMenuIsOpen
                         }]"
                     data-test-id="user-info-icon"
@@ -621,33 +621,6 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
 
-// TODO - Pull in fozzie utilities css instead
-// https://github.com/justeat/fozzie/blob/f7f0184ba3a244c19d6e83c44c35a31b7c2dd2d9/src/scss/trumps/_utilities.scss
-// Hide from both screenreaders and browsers: h5bp.com/u
-.is-hidden,
-.no-js .is-hidden--noJS {
-    display: none !important;
-    visibility: hidden !important;
-}
-
-.is-shown,
-.no-js .is-shown--noJS {
-    display: block !important;
-    visibility: visible !important;
-}
-
-// Hide only visually, but have it available for screenreaders: h5bp.com/v
-.is-visuallyHidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
 /**
  * Global Page Navigation
  * =================================
@@ -730,9 +703,11 @@ $nav-popover-width                 : 300px;
             }
         }
 
-        .c-nav-list-link--transparent {
+        .c-nav-list-link--transparent,
+        .c-nav-list-link--alt {
             @include media('>mid') {
-                &:hover {
+                &:hover,
+                &:focus {
                     color: $nav-text-color--transparent;
                 }
             }
@@ -846,10 +821,6 @@ $nav-popover-width                 : 300px;
     // hide on wider views
     @include media('>mid') {
         display: none;
-
-        &.is-shown--noJS {
-            display: none !important;
-        }
     }
 }
 

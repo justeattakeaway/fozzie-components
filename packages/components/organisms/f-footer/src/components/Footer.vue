@@ -11,7 +11,8 @@
             ]">
             <link-list
                 v-for="(linkList, i) in copy.linkLists"
-                :key="i + '_ButtonList'"
+                :key="i + '_LinkList'"
+                :show-euro2020-links="euro2020Enabled"
                 :link-list="linkList" />
         </div>
 
@@ -112,6 +113,10 @@ export default {
         showCountrySelector: {
             type: Boolean,
             default: true
+        },
+        euro2020Enabled: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {

@@ -1,11 +1,14 @@
 <template>
     <div>
-        <error-dialog
-            :is-open="shouldShowErrorDialog"
-            :error-code="hasNonFulfillableErrorCode"
-            :service-type="serviceType"
-            @close="handleErrorDialogClose"
-            @checkout-error-dialog-button-click="handleErrorDialogButtonClick" />
+        <component
+            :is="messageType.name"
+            v-if="message"
+            ref="errorMessage"
+            v-bind="messageType.props"
+        >
+            <span>{{ messageType.content }}</span>
+        </component>
+
         <div
             v-if="shouldShowSpinner"
             :class="$style['c-spinner-wrapper']"
@@ -18,16 +21,6 @@
             data-theme="jet"
             data-test-id="checkout-component"
         >
-            <alert
-                v-if="genericErrorMessage"
-                ref="errorAlert"
-                type="danger"
-                :class="$style['c-checkout-alert']"
-                :heading="$t('errorMessages.errorHeading')"
-            >
-                {{ genericErrorMessage }}
-            </alert>
-
             <card
                 is-rounded
                 has-outline
@@ -52,7 +45,6 @@
                         input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
-                        @blur="formFieldBlur('mobileNumber')"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
                     >
                         <template #error>
@@ -101,7 +93,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
@@ -254,8 +246,6 @@ export default {
     data () {
         return {
             tenantConfigs,
-            nonFulfillableError: null,
-            genericErrorMessage: null,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false
@@ -296,6 +286,7 @@ export default {
             'isFulfillable',
             'isLoggedIn',
             'messages',
+            'message',
             'notices',
             'orderId',
             'restaurant',
@@ -303,8 +294,6 @@ export default {
             'time',
             'userNote'
         ]),
-
-        ...mapGetters(VUEX_CHECKOUT_MODULE, ['firstDialogError']),
 
         isMobileNumberValid () {
             /*
@@ -338,22 +327,34 @@ export default {
             return !this.hasCheckoutLoadedSuccessfully;
         },
 
-        shouldShowErrorDialog () {
-            return this.nonFulfillableError ? this.nonFulfillableError.shouldShowInDialog : false;
-        },
-
-        restaurantMenuPageUrl () {
-            return `restaurant-${this.restaurant.seoName}/menu`;
-        },
-
-        hasNonFulfillableErrorCode () {
-            return this.nonFulfillableError && this.nonFulfillableError.code;
-        },
-
         eventData () {
             return {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType
+            };
+        },
+
+        messageType () {
+            return this.message && this.message.shouldShowInDialog
+                ? this.dialogMessage
+                : this.alertMessage;
+        },
+
+        dialogMessage () {
+            return {
+                name: 'error-dialog'
+            };
+        },
+
+        alertMessage () {
+            return {
+                name: 'alert',
+                props: {
+                    type: 'danger',
+                    class: this.$style['c-checkout-alert'],
+                    heading: this.$t('errorMessages.errorHeading')
+                },
+                content: this.message
             };
         }
     },
@@ -398,6 +399,7 @@ export default {
             'setAuthToken',
             'updateCheckout',
             'updateCustomerDetails',
+            'updateMessage',
             'updateUserNote'
         ]),
 
@@ -461,8 +463,6 @@ export default {
          */
         handleNonFulfillableCheckout () {
             if (this.errors) {
-                this.toggleDialogError();
-
                 this.trackFormErrors();
 
                 this.logInvoker({
@@ -473,14 +473,6 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
-        },
-
-        /**
-        * Update `nonFulfillableError`, which at the moment drives whether we should show or hide
-        * a dialog and what to show in it, using the first error to be shown in a dialog, if there's one.
-        */
-        toggleDialogError () {
-            this.nonFulfillableError = this.firstDialogError;
         },
 
         /**
@@ -550,8 +542,9 @@ export default {
                     logMethod: this.$logger.logInfo
                 });
             } catch (e) {
-                this.toggleDialogError();
-                throw new PlaceOrderError(e.message);
+                const { errorCode } = e.response.data;
+
+                throw new PlaceOrderError(e.message, errorCode);
             }
         },
 
@@ -716,7 +709,7 @@ export default {
         /**
          * Emit, log and track the error based on the parameters
          * encapsulated within the 'error' class.
-         * Set the `genericErrorMessage` for the user to see.
+         * Set the `message` for the user to see.
          */
         handleErrorState (error) {
             const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
@@ -734,14 +727,11 @@ export default {
 
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
 
-            // We don't want to show a dialog and an error message.
-            // TODO: refactor `nonFulfillableError` and `genericErrorMessage` so that we try to use only one, and
-            // we make it more generic and not just for "non fulfillable errors".
-            if (!this.nonFulfillableError) {
-                this.genericErrorMessage = message;
+            if (!error.shouldShowInDialog) {
+                this.updateMessage(message);
 
                 this.$nextTick(() => {
-                    this.scrollToElement(this.$refs.errorAlert.$el);
+                    this.scrollToElement(this.$refs.errorMessage.$el);
                 });
             }
         },
@@ -764,6 +754,7 @@ export default {
          */
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
+            this.updateMessage();
 
             if (this.isFormValid()) {
                 await this.submitCheckout();
@@ -849,25 +840,6 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, this.spinnerTimeout);
-        },
-
-        handleErrorDialogClose () {
-            this.nonFulfillableError = null;
-        },
-
-        handleErrorDialogButtonClick () {
-            if (this.nonFulfillableError && this.nonFulfillableError.shouldRedirectToMenu) {
-                window.location.assign(this.restaurantMenuPageUrl);
-            }
-
-            this.handleErrorDialogClose();
-        },
-
-        formFieldBlur (field) {
-            const fieldValidation = this.$v.customer[field];
-            if (fieldValidation) {
-                fieldValidation.$touch();
-            }
         }
     },
 

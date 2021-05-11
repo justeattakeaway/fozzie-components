@@ -185,6 +185,24 @@ export default {
                     target: '_blank',
                     rel: 'noopener',
                     gtm: 'click_ethics_hotline'
+                },
+                {
+                    type: 'euro2020',
+                    url: 'https://www.just-eat.ie/euro2020/',
+                    text: 'UEFA EURO 2020™',
+                    gtm: 'click_euro2020'
+                },
+                {
+                    type: 'euro2020',
+                    url: 'https://www.just-eat.ie/euro2020/win-tickets/',
+                    text: 'Win tickets',
+                    gtm: 'click_euro2020_win_tickets'
+                },
+                {
+                    type: 'euro2020',
+                    url: 'https://www.just-eat.ie/euro2020/terms/',
+                    text: 'Win tickets - Terms and conditions',
+                    gtm: 'click_euro2020_terms'
                 }
             ]
         }
