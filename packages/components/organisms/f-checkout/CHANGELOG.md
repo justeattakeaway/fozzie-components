@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.105.0
+------------------------------
+*May 10, 2021*
+
+### Added
+- `aria-describedby` for all input fields - for error messages
+- `error-summary-section` in checkout to alert errors after submit button (resembles f-registration)
+- `isFieldValid` function so error messages populate after tabbing
+
+
 v0.104.0
 ------------------------------
 *May 10, 2021*
