@@ -11,6 +11,9 @@ v0.106.0
 ### Added
 - Max Length added to fields submitted to Api to match spec.
 
+### Fixed
+- `Resturant` to `Restaurant` typo in `en-GB.js` copy text.
+
 
 v0.104.0
 ------------------------------
