@@ -14,6 +14,7 @@
                 is-grouped
                 :has-error="isAddressLine1Empty"
                 aria-describedby="line1-error"
+                :aria-invalid="isAddressLine1Empty"
                 @blur="onAddressFieldBlur('line1')"
                 @input="updateAddressDetails({ ['line1']: $event })">
                 <template #error>
@@ -44,6 +45,7 @@
             :label-text="$t('labels.locality')"
             :has-error="isAddressLocalityEmpty"
             aria-describedby="locality-error"
+            :aria-invalid="isAddressLocalityEmpty"
             @blur="onAddressFieldBlur('locality')"
             @input="updateAddressDetails({ ['locality']: $event })">
             <template #error>
@@ -63,6 +65,7 @@
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
             aria-describedby="postcode-error"
+            :aria-invalid="!isAddressPostcodeValid"
             @blur="onAddressFieldBlur('postcode')"
             @input="updateAddressDetails({ ['postcode']: $event })">
             <template #error>

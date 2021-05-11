@@ -59,6 +59,7 @@
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
                         aria-describedby="mobile-number-error"
+                        :aria-invalid="!isMobileNumberValid"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
                         @blur="onMobileFieldBlur"
                     >

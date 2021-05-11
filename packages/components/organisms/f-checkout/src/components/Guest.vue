@@ -5,6 +5,7 @@
         <form-field
             :value="customer.firstName"
             aria-describedby="first-name-error"
+            :aria-invalid="isFirstNameEmpty"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
@@ -27,6 +28,7 @@
             name="guest-last-name"
             :label-text="$t('guest.lastName')"
             aria-describedby="last-name-error"
+            :aria-invalid="isLastNameEmpty"
             :has-error="isLastNameEmpty"
             @blur="onGuestFieldBlur('lastName')"
             @input="updateCustomerDetails({ 'lastName': $event })">
@@ -48,6 +50,7 @@
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
             aria-describedby="email-error"
+            :aria-invalid="!isEmailValid"
             @blur="onGuestFieldBlur('email')"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
