@@ -10,7 +10,9 @@
         ]"
         :action-type="buttonActionType"
         :data-test-id="`${componentType}-component`"
-        v-on="$listeners">
+        v-bind="$attrs"
+        v-on="$listeners"
+    >
         <slot />
     </component>
 </template>
@@ -157,7 +159,8 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
 
     // Show focus styles on keyboard focus.
     &:focus-visible {
-        outline: 2px dotted $btn-default-outline-color;
+        outline: 0;
+        box-shadow: 0 0 0 2pt $btn-default-outline-color;
     }
 
     &:hover,
@@ -225,7 +228,6 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     }
 }
 
-
 /**
  * Modifier – .o-btn--secondary
  *
@@ -244,7 +246,6 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         background-color: $btn-secondary-bgColor--active;
     }
 }
-
 
 /**
  * Modifier – .o-btn--outline
@@ -271,7 +272,6 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         background-color: $btn-outline-bgColor--active;
     }
 }
-
 
 /**
  * Modifier – .o-btn--ghost
@@ -326,7 +326,6 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         background-color: transparent;
     }
 }
-
 
 /**
  * ==========================================================================
@@ -458,7 +457,6 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     line-height: $btn-sizeXSmall-lineHeight;
 }
 
-
 /**
  * ==========================================================================
  * Btn Layout Modifiers
@@ -481,5 +479,4 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         margin-top: spacing();
     }
 }
-
 </style>
