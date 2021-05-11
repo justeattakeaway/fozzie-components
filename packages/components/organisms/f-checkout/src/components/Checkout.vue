@@ -48,7 +48,7 @@
                     <form-field
                         :value="customer.mobileNumber"
                         name="mobile-number"
-                        input-type="tel"
+                        input-type="text"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
@@ -64,12 +64,32 @@
                         </template>
                     </form-field>
 
+                    <form-field
+                        v-if="isCheckoutMethodDineIn"
+                        :value="tableIdentifier"
+                        input-type="text"
+                        name="table-identifier"
+                        :label-text="$t('labels.tableIdentifier')"
+                        :has-error="false"
+                        @input="updateTableIdentifier($event)"
+                    >
+                        <template #error>
+                            <error-message
+                                v-if="!isTableIdentifierValid"
+                                data-js-error-message
+                                data-test-id="error-table-identifier"
+                            >
+                                {{ $t('validationMessages.tableIdentifier.requiredError') }}
+                            </error-message>
+                        </template>
+                    </form-field>
+
                     <address-block
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block"
                     />
 
-                    <form-selector />
+                    <form-selector v-if="shouldShowFulfilmentSelector" />
 
                     <user-note
                         data-test-id="user-note"
@@ -125,6 +145,7 @@ import exceptions from '../exceptions/exceptions';
 import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
+    CHECKOUT_METHOD_DINEIN,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -298,6 +319,7 @@ export default {
             'orderId',
             'restaurant',
             'serviceType',
+            'tableIdentifier',
             'time',
             'userNote'
         ]),
@@ -314,8 +336,22 @@ export default {
             return !this.$v.customer.mobileNumber.$dirty || this.$v.customer.mobileNumber.isValidPhoneNumber;
         },
 
+        isTableIdentifierValid () {
+            /*
+            * Validation methods return true if the validation conditions
+            * have not been met and the field has been `touched` by a user.
+            * The $dirty boolean changes to true when the user has focused/lost
+            * focus on the input field.
+            */
+            return !this.$v.tableIdentifier.$dirty || this.$v.tableIdentifier.isValidTableIdentifier;
+        },
+
         isCheckoutMethodDelivery () {
             return this.serviceType === CHECKOUT_METHOD_DELIVERY;
+        },
+
+        isCheckoutMethodDineIn () {
+            return this.serviceType === CHECKOUT_METHOD_DINEIN;
         },
 
         tenant () {
@@ -338,6 +374,10 @@ export default {
 
         shouldShowErrorDialog () {
             return this.nonFulfillableError ? this.nonFulfillableError.shouldShowInDialog : false;
+        },
+
+        shouldShowFulfilmentSelector () {
+            return this.serviceType !== CHECKOUT_METHOD_DINEIN;
         },
 
         restaurantMenuPageUrl () {
@@ -396,6 +436,7 @@ export default {
             'setAuthToken',
             'updateCheckout',
             'updateCustomerDetails',
+            'updateTableIdentifier',
             'updateUserNote'
         ]),
 
@@ -828,6 +869,10 @@ export default {
             return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
         },
 
+        isValidTableIdentifier () {
+            return validations.isValidTableIdentifier(this.tableIdentifier);
+        },
+
         /**
          * Use postcode validation in `f-services` to check if customer postcode is
          * valid in current locale
@@ -902,7 +947,15 @@ export default {
             };
         }
 
-        return deliveryDetails;
+        const otherValidators = {
+            tableIdentifier: {
+                required,
+                isValidTableIdentifier: this.isValidTableIdentifier
+            }
+
+        };
+
+        return { ...otherValidators, ...deliveryDetails };
     }
 };
 </script>

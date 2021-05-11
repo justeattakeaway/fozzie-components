@@ -87,6 +87,7 @@ const userNote = 'Beware of the dachshund';
 const defaultState = {
     id: '',
     serviceType: '',
+    tableIdentifier: '',
     restaurant: {
         id: '',
         seoName: ''

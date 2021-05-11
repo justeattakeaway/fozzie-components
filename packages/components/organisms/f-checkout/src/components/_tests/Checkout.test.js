@@ -10,7 +10,8 @@ import {
     CHECKOUT_METHOD_COLLECTION,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
-    TENANT_MAP
+    TENANT_MAP,
+    CHECKOUT_METHOD_DINEIN
 } from '../../constants';
 import CheckoutIssues from '../../checkout-issues';
 import VueCheckout from '../Checkout.vue';
@@ -192,6 +193,111 @@ describe('Checkout', () => {
                 // Assert
                 expect(addressBlock.exists()).toBe(false);
             });
+
+            it('should not display the address block if set to `dinein`', async () => {
+                // Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const addressBlock = wrapper.find('[data-test-id="address-block"]');
+
+                // Assert
+                expect(addressBlock.exists()).toBe(false);
+            });
+
+            it('should display the table identifier input if set to `dinein`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const tableIdentifierInput = wrapper.find('[data-test-id="formfield-table-identifier-input"]');
+
+                // Assert
+                expect(tableIdentifierInput.exists()).toBe(true);
+            });
+
+            it('should not display the table identifier input if set to `collection`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const tableIdentifierInput = wrapper.find('[data-test-id="formfield-table-identifier-input"]');
+
+                // Assert
+                expect(tableIdentifierInput.exists()).toBe(false);
+            });
+
+            it('should not display the table identifier input if set to `delivery`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const tableIdentifierInput = wrapper.find('[data-test-id="formfield-table-identifier-input"]');
+
+                // Assert
+                expect(tableIdentifierInput.exists()).toBe(false);
+            });
+
+            it('should display the fulfilment time dropdown if set to `delivery`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const fulfilmentTimeDropdown = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+
+                // Assert
+                expect(fulfilmentTimeDropdown.exists()).toBe(true);
+            });
+
+            it('should display the fulfilment time dropdown if set to `collection`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const fulfilmentTimeDropdown = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+
+                // Assert
+                expect(fulfilmentTimeDropdown.exists()).toBe(true);
+            });
+
+            it('should not display the fulfilment time dropdown if set to `dinein`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const fulfilmentTimeDropdown = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+
+                // Assert
+                expect(fulfilmentTimeDropdown.exists()).toBe(false);
+            });
         });
 
         describe('hasCheckoutLoadedSuccessfully ::', () => {
@@ -372,6 +478,60 @@ describe('Checkout', () => {
                 // Assert
                 expect(wrapper.vm.isCheckoutMethodDelivery).toBeFalsy();
             });
+
+            it('should return `false` if `serviceType` is set to Dine In', () => {
+                // Arrange and Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDelivery).toBeFalsy();
+            });
+        });
+
+        describe('isCheckoutMethodDineIn ::', () => {
+            it('should return `true` if `serviceType` is set to DineIn', () => {
+                // Arrange and Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDineIn).toBeTruthy();
+            });
+
+            it('should return `false` if `serviceType` is set to Collection', () => {
+                // Arrange and Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDineIn).toBeFalsy();
+            });
+
+            it('should return `false` if `serviceType` is set to Delivery', () => {
+                // Arrange and Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDineIn).toBeFalsy();
+            });
         });
 
         describe('tenant ::', () => {
@@ -451,6 +611,25 @@ describe('Checkout', () => {
                         ...defaultCheckoutState,
                         isLoggedIn: true,
                         serviceType: CHECKOUT_METHOD_COLLECTION,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                const result = await wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if `serviceType` is `dine in`', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DINEIN,
                         address: {}
                     }),
                     i18n,
@@ -2549,6 +2728,28 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ mobileNumber: newNumber });
+            });
+        });
+
+        describe('updateTableIdentifier ::', () => {
+            it('should be called with new input value on user input', async () => {
+                // Arrange
+                const updateTableIdentifierSpy = jest.spyOn(VueCheckout.methods, 'updateTableIdentifier');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                const tableNumber = '10';
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-table-identifier-input"]').setValue(tableNumber);
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(updateTableIdentifierSpy).toHaveBeenCalledWith(tableNumber);
             });
         });
 

@@ -18,6 +18,7 @@ import {
     UPDATE_ERRORS,
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
+    UPDATE_TABLE_IDENTIFIER,
     UPDATE_USER_NOTE
 } from './mutation-types';
 
@@ -69,6 +70,7 @@ export default {
     state: () => ({
         id: '',
         serviceType: '',
+        tableIdentifier: '',
         restaurant: {
             id: '',
             seoName: ''
@@ -371,6 +373,10 @@ export default {
             commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
+        updateTableIdentifier ({ commit }, payload) {
+            commit(UPDATE_TABLE_IDENTIFIER, payload);
+        },
+
         updateFulfilmentTime ({ commit }, payload) {
             commit(UPDATE_FULFILMENT_TIME, payload);
         },
@@ -421,6 +427,10 @@ export default {
                 state.address.postcode = address.postalCode;
             }
 
+            if (fulfilment.table) {
+                state.tableIdentifier = fulfilment.table.identifier;
+            }
+
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
@@ -460,6 +470,10 @@ export default {
                 ...state.customer,
                 ...customer
             };
+        },
+
+        [UPDATE_TABLE_IDENTIFIER]: (state, tableIdentifier) => {
+            state.tableIdentifier = tableIdentifier;
         },
 
         [UPDATE_FULFILMENT_ADDRESS]: (state, address) => {

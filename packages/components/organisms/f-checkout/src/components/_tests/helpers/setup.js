@@ -68,6 +68,7 @@ const defaultCheckoutActions = {
     createGuestUser: jest.fn(),
     updateAddressDetails: jest.fn(),
     updateCustomerDetails: jest.fn(),
+    updateTableIdentifier: jest.fn(),
     updateFulfilmentTime: jest.fn(),
     getGeoLocation: jest.fn(),
     getBasket: jest.fn(),

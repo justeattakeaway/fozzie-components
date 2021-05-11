@@ -9,7 +9,8 @@ const messages = {
         locality: 'City',
         postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
-        collectionOrderMethod: 'Collection time'
+        collectionOrderMethod: 'Collection time',
+        tableIdentifier: 'Table number'
     },
 
     validationMessages: {
@@ -34,6 +35,9 @@ const messages = {
         },
         email: {
             requiredError: 'Please enter a valid email address'
+        },
+        tableIdentifier: {
+            requiredError: 'Please enter a table number'
         }
     },
 
@@ -89,6 +93,12 @@ const messages = {
             LOCATION_UNDELIVERABLE: {
                 title: 'Cannot deliver to address',
                 message: 'We’re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
+                buttonText: 'Ok'
+            },
+
+            TABLE_IDENTIFIER_REQUIRED: {
+                title: 'Table number/name is required',
+                message: 'It appears you didn’t tell us how to find you in the restaurant. Please enter your table number and try again.',
                 buttonText: 'Ok'
             },
 
