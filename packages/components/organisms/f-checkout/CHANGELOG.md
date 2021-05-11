@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.105.0
 ------------------------------
-*May 10, 2021*
+*May 11, 2021*
 
 ### Added
 - Max Length added to fields submitted to Api to match spec.
-- Invoke validation to occur on blur event for email and tel. no.
+- Invoke validation to occur on blur event for email, tel. no. & postcode
 
 
 v0.103.0
