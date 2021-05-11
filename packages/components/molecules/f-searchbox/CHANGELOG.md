@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.0.0-beta.29
+------------------------------
+*May 6, 2021*
+
+### Removed
+- `is-visuallyHidden` css style definition as should come from `fozzie`
+
+### Added
+- Tagging for future Percy tests
+
+
 v4.0.0-beta.28
 ------------------------------
 *March 31, 2021*

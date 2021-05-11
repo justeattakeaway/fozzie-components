@@ -28,7 +28,6 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
         // Assert
         expect(bannerCookie.value).toBe('130315');
         expect(bannerConsent.value).toBe(expectedCookieValue);
-        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(false);
     });
 });
 

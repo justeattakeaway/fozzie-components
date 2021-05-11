@@ -4,7 +4,7 @@ const Header = require('../../test-utils/component-objects/f-header.component');
 
 let header;
 
-describe('Shared - f-header component tests - @browserstack', () => {
+describe('Shared - f-header component tests - @percy', () => {
     beforeEach(() => {
         header = new Header('organism', 'header-component');
         header.withQuery('&knob-Locale', 'en-GB');

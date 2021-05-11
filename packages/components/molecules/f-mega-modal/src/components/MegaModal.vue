@@ -1,9 +1,9 @@
 <template>
     <div
         ref="megaModal"
-        :class="['c-megaModal', $style['c-megaModal'], {
-            [$style['u-overlay']]: showOverlay
-        }]"
+        :class="['c-megaModal',
+                 $style['c-megaModal'],
+                 { 'u-overlay': showOverlay }]"
         data-test-id='mega-modal-component'
         :aria-hidden="!isOpen"
         @click.self="overlayClose">
@@ -15,7 +15,8 @@
                 [$style['c-megaModal-content--narrow']]: isNarrow,
                 [$style['c-megaModal-content--wide']]: isWide,
                 [$style['c-megaModal-content--flush']]: isFlush,
-                [$style['is-fullHeight']]: isFullHeight
+                [$style['is-fullHeight']]: isFullHeight,
+                [$style['is-positioned-bottom']]: isPositionedBottom
             }]"
             role="dialog">
             <div
@@ -100,6 +101,11 @@ export default {
         },
 
         isCloseRounded: {
+            type: Boolean,
+            default: false
+        },
+
+        isPositionedBottom: {
             type: Boolean,
             default: false
         },
@@ -274,15 +280,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-.u-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-}
-
 .c-megaModal {
     z-index: zIndex(high);
 }
@@ -299,6 +296,22 @@ export default {
     top: 50%;
     transform: translate(50%, -50%);
     width: 75%;
+
+    &.is-positioned-bottom {
+        border-radius: 0;
+        bottom: -100vh;
+        box-shadow: 0 -8px 16px 0 rgba(0, 0, 0, 0.22), 0 16px 16px 0 rgba(0, 0, 0, 0.24);
+        display: block;
+        left: 0;
+        top: auto;
+        transform: none;
+        width: 100%;
+        max-width: inherit;
+
+        &.c-megaModal-content--visible {
+            bottom: 0;
+        }
+    }
 
     @include media('<mid') {
         min-width: em(22);

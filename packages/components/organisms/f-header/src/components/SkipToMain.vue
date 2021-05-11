@@ -2,11 +2,12 @@
     <div
         :class="[
             $style['c-skipTo'],
-            { [$style['c-skipTo--whiteLink']]: transparentBg }]">
+            { [$style['c-skipTo--transparentBg']]: transparentBg }]">
         <a
             :class="[
-                $style['is-visuallyHidden'],
-                $style['is-focusable']
+                $style['c-skipTo-link'],
+                'is-visuallyHidden',
+                'focusable'
             ]"
             href="#skipToMain">{{ text }}</a>
     </div>
@@ -36,23 +37,9 @@ export default {
     text-align: center;
     z-index: zIndex(high);
 
-    .is-visuallyHidden {
-        border: 0;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-
-        &.is-focusable:active,
-        &.is-focusable:focus {
-            clip: auto;
-            height: auto;
-            overflow: visible;
-            position: static;
-            width: auto;
+    .c-skipTo-link {
+        &:active,
+        &:focus {
             display: block;
             margin: 4px;
             padding: 4px;
@@ -61,10 +48,10 @@ export default {
     }
 }
 
-.c-skipTo--whiteLink {
-    .is-visuallyHidden {
-        &.is-focusable:active,
-        &.is-focusable:focus {
+.c-skipTo--transparentBg {
+    .c-skipTo-link {
+        &:active,
+        &:focus {
             color: $white;
         }
     }

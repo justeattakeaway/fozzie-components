@@ -3,7 +3,7 @@ const Searchbox = require('../../test-utils/component-objects/f-searchbox.compon
 
 const searchbox = new Searchbox('molecule', 'searchbox-component');
 
-describe('f-searchbox component tests - @browserstack', () => {
+describe('f-searchbox component tests - @percy', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(searchbox.componentType, searchbox.componentName, searchbox.path);
         searchbox.open(pageUrl);

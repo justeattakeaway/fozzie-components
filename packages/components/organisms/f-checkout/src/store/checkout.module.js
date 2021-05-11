@@ -16,6 +16,7 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_IS_FULFILLABLE,
     UPDATE_ERRORS,
+    UPDATE_MESSAGE,
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_USER_NOTE
@@ -98,6 +99,7 @@ export default {
         isFulfillable: true,
         errors: [],
         notices: [],
+        message: null,
         messages: [],
         availableFulfilment: {
             times: [],
@@ -147,7 +149,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        updateCheckout: async ({ commit, state }, {
+        updateCheckout: async ({ commit, state, dispatch }, {
             url, data, timeout
         }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
@@ -171,6 +173,8 @@ export default {
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
+
+            dispatch('updateMessage', detailedIssues[0]);
         },
 
         /**
@@ -294,7 +298,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        placeOrder: async ({ commit, state }, {
+        placeOrder: async ({ commit, state, dispatch }, {
             url, data, timeout
         }) => {
             try {
@@ -323,6 +327,7 @@ export default {
                     const checkoutIssue = getIssueByCode(errorCode);
 
                     commit(UPDATE_ERRORS, (checkoutIssue ? [checkoutIssue] : []));
+                    dispatch('updateMessage', checkoutIssue);
                 }
 
                 throw error; // Handled by the calling function.
@@ -382,11 +387,11 @@ export default {
 
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
-        }
-    },
+        },
 
-    getters: {
-        firstDialogError: state => state.errors.find(error => error.shouldShowInDialog)
+        updateMessage:  ({ commit }, message = null) => {
+            commit(UPDATE_MESSAGE, message);
+        }
     },
 
     mutations: {
@@ -497,6 +502,10 @@ export default {
                 latitude: lat,
                 longitude: lng
             };
+        },
+
+        [UPDATE_MESSAGE]: (state, message) => {
+            state.message = message;
         }
     }
 };

@@ -12,8 +12,6 @@ A Vue.js modal component
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-mega-modal.svg)](https://badge.fury.io/js/%40justeat%2Ff-mega-modal)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-mega-modal/badge.svg)](https://coveralls.io/github/justeat/f-mega-modal)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mega-modal/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mega-modal?targetFile=package.json)
 
 ---
 
@@ -114,6 +112,7 @@ The props that can be defined are as follows:
 | `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable. |
 | `is-close-fixed` | `Boolean` | `false` | Sets the modal close button position to `fixed`. |
 | `is-close-rounded` | `Boolean` | `false` | Sets the modal close button to display in a rounded style. |
+| `is-positioned-bottom` | `Boolean` | `false` | Sets the modal position to the bottom of the viewport for all screen widths. |
 | `has-overlay` | `Boolean` | `true` | Controls whether or not to display an overlay behind the modal. |
 | `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |
 | `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
@@ -133,6 +132,8 @@ In addition to this, the modal exposes some classes which you can target in your
 | `c-megaModal-document` | Can be used to target the modal document element. |
 | `c-megaModal-document--scrollable` | Can be used to target the modal document element when it is scrollable. |
 | `c-megaModal-closeBtn` | Can be used to target the modal close button element. |
+
+The modal is also using utility css styles from [fozzie](https://github.com/justeat/fozzie/) package. You need to make sure to `@include trumps-utilities();` mixin to your application styles if you use beta version of fozzie package (>= v5.0.0-beta.0). If you are using main version (v4.X.X) styles should come out of the box.
 
 ### Events
 

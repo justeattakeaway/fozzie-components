@@ -4,7 +4,7 @@ const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
 
-describe('Mobile - f-footer component tests - @browserstack', () => {
+describe('Mobile - f-footer component tests - @percy', () => {
     beforeEach(() => {
         // Arrange
         footer = new Footer('organism', 'footer-component');

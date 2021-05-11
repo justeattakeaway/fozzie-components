@@ -32,7 +32,7 @@
                 @submit.prevent="onFormSubmit">
                 <section
                     id="error-summary-container"
-                    :class="$style['is-visuallyHidden']"
+                    class="is-visuallyHidden"
                     role="alert"
                     data-test-id="error-summary-container">
                     <error-message

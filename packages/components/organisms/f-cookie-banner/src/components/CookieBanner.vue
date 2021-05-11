@@ -1,14 +1,11 @@
 <template>
-    <div
+    <mega-modal
         v-if="!legacyBanner"
         ref="cookieBanner"
-        :class="[
-            $style['c-cookieBanner'],
-            $style['c-cookieBanner--overlay'],
-            { [$style['c-cookieBanner--is-hidden']]: shouldHideBanner }
-        ]"
-        data-cookie-consent-overlay
-        :aria-hidden="shouldHideBanner">
+        :is-open="!shouldHideBanner"
+        is-positioned-bottom
+        :has-close-button="false"
+        data-cookie-consent-overlay>
         <div
             :class="[
                 $style['c-cookieBanner-card'],
@@ -70,7 +67,7 @@
                 </button-component>
             </div>
         </div>
-    </div>
+    </mega-modal>
 
     <legacy-banner
         v-else
@@ -91,6 +88,9 @@ import { globalisationServices } from '@justeat/f-services';
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
+import MegaModal from '@justeat/f-mega-modal';
+import '@justeat/f-mega-modal/dist/f-mega-modal.css';
+
 import LegacyBanner from './LegacyBanner.vue';
 
 import tenantConfigs from '../tenants';
@@ -98,7 +98,8 @@ import tenantConfigs from '../tenants';
 export default {
     components: {
         ButtonComponent,
-        LegacyBanner
+        LegacyBanner,
+        MegaModal
     },
 
     props: {
@@ -297,20 +298,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-cookieBanner--overlay {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 99999991;
-    }
-
-    .c-cookieBanner--is-hidden {
-        display: none;
-    }
-
     .c-cookieBanner-card {
         position: absolute;
         bottom: 0;
@@ -330,6 +317,10 @@ export default {
     .c-cookieBanner-text {
         margin: 0;
         padding: 0;
+    }
+
+    .c-cookieBanner-content {
+        text-align: left;
     }
 
     .c-cookieBanner-title {
