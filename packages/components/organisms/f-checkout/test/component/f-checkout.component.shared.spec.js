@@ -48,6 +48,7 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field - @percy', () => {
         // Arrange
+        checkout.clearCheckoutForm('mobileNumber');
         const addressDetails = {
             mobileNumber: '+8112345678911'
         };
@@ -62,6 +63,7 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should not display a "mobileNumber" error message when a number is formatted with a supported country code - @percy', () => {
         // Arrange
+        checkout.clearCheckoutForm('mobileNumber');
         const addressDetails = {
             mobileNumber: '+4412345678911'
         };
@@ -86,18 +88,59 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.getOrderTimeOptionText(2)).toBe('Wednesday 02:00');
     });
 
-    it('should prevent a user from writing a note of over 200 characters', () => {
+    it('should prevent a user from entering a Address lines over 255 characters', () => {
         // Arrange
-        const userNote = 'A';
-        const addressInfo = {
-            note: userNote.repeat(300)
-        };
+        const maxlength = 255;
+        const userEntry = 'A'.repeat(256);
 
         // Act
-        checkout.inputUserNote(addressInfo);
+        checkout.inputAddressLine1(userEntry);
+        checkout.inputAddressLine2(userEntry);
 
         // Assert
-        expect(checkout.userNoteMaxCharacterCount()).toEqual('200');
+        expect(checkout.addressLine1MaxCharacterCount()).toEqual(maxlength.toString());
+        expect(checkout.addressLine2MaxCharacterCount()).toEqual(maxlength.toString());
+        expect(checkout.fields.addressLine1.input.getValue().length).toEqual(maxlength);
+        expect(checkout.fields.addressLine2.input.getValue().length).toEqual(maxlength);
+    });
+
+    it('should prevent a user from entering a Locality over 50 characters', () => {
+        // Arrange
+        const maxlength = 50;
+        const userEntry = 'A'.repeat(51);
+
+        // Act
+        checkout.inputLocality(userEntry);
+
+        // Assert
+        expect(checkout.localityMaxCharacterCount()).toEqual(maxlength.toString());
+        expect(checkout.fields.addressLocality.input.getValue().length).toEqual(maxlength);
+    });
+
+    it('should prevent a user from entering a Postcode over 50 characters', () => {
+        // Arrange
+        const maxlength = 50;
+        const userEntry = 'A'.repeat(51);
+
+        // Act
+        checkout.inputPostcode(userEntry);
+
+        // Assert
+        expect(checkout.postcodeMaxCharacterCount()).toEqual(maxlength.toString());
+        expect(checkout.fields.addressPostcode.input.getValue().length).toEqual(maxlength);
+    });
+
+    it('should prevent a user from writing a note of over 200 characters', () => {
+        // Arrange
+        const maxlength = 200;
+        const userEntry = 'A'.repeat(201);
+
+        // Act
+        checkout.inputUserNote(userEntry);
+
+        // Assert
+        expect(checkout.userNoteMaxCharacterCount()).toEqual(maxlength.toString());
+        expect(checkout.fields.userNote.input.getValue().length).toEqual(maxlength);
     });
 
     it.skip('should enable a user to submit without adding a note', () => {

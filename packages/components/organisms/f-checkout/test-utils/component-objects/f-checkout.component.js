@@ -143,8 +143,40 @@ module.exports = class Checkout extends Page {
         return this.orderTimeDropdown.isDisplayed();
     }
 
+    firstNameMaxCharacterCount () {
+        return this.fields.firstName.input.getAttribute('maxlength');
+    }
+
+    lastNameMaxCharacterCount () {
+        return this.fields.lastName.input.getAttribute('maxlength');
+    }
+
+    emailMaxCharacterCount () {
+        return this.fields.emailAddress.input.getAttribute('maxlength');
+    }
+
+    mobileNumberMaxCharacterCount () {
+        return this.fields.mobileNumber.input.getAttribute('maxlength');
+    }
+
+    addressLine1MaxCharacterCount () {
+        return this.fields.addressLine1.input.getAttribute('maxlength');
+    }
+
+    addressLine2MaxCharacterCount () {
+        return this.fields.addressLine2.input.getAttribute('maxlength');
+    }
+
+    localityMaxCharacterCount () {
+        return this.fields.addressLocality.input.getAttribute('maxlength');
+    }
+
+    postcodeMaxCharacterCount () {
+        return this.fields.addressPostcode.input.getAttribute('maxlength');
+    }
+
     userNoteMaxCharacterCount () {
-        return this.userNoteInput.getAttribute('maxlength');
+        return this.fields.userNote.input.getAttribute('maxlength');
     }
 
     clickPaymentButton () {
@@ -326,13 +358,92 @@ module.exports = class Checkout extends Page {
 
     /**
      * @description
+     * Sets the value of the First Name.
+     *
+     * @param {String} firstName
+     */
+    inputFirstName (firstName) {
+        this.fields.firstName.input.setValue(firstName);
+    }
+
+    /**
+     * @description
+     * Sets the value of the Last Name.
+     *
+     * @param {String} lastName
+     */
+    inputLastName (lastName) {
+        this.fields.lastName.input.setValue(lastName);
+    }
+
+    /**
+     * @description
+     * Sets the value of the email address.
+     *
+     * @param {String} email address
+     */
+    inputEmailAddress (emailAddress) {
+        this.fields.emailAddress.input.setValue(emailAddress);
+    }
+
+    /**
+     * @description
+     * Sets the value of the mobile number.
+     *
+     * @param {String} mobile number
+     */
+    inputMobileNumber (mobileNumber) {
+        this.fields.mobileNumber.input.setValue(mobileNumber);
+    }
+
+    /**
+     * @description
+     * Sets the value of the Address Line 1.
+     *
+     * @param {String} addressLine1
+     */
+    inputAddressLine1 (addressLine1) {
+        this.fields.addressLine1.input.setValue(addressLine1);
+    }
+
+    /**
+     * @description
+     * Sets the value of the Address Line 2.
+     *
+     * @param {String} addressLine1
+     */
+    inputAddressLine2 (addressLine2) {
+        this.fields.addressLine2.input.setValue(addressLine2);
+    }
+
+    /**
+     * @description
+     * Sets the value of the locality.
+     *
+     * @param {String} locality
+     */
+    inputLocality (locality) {
+        this.fields.addressLocality.input.setValue(locality);
+    }
+
+    /**
+     * @description
+     * Sets the value of the postcode.
+     *
+     * @param {String} postcode
+     */
+    inputPostcode (postcode) {
+        this.fields.addressPostcode.input.setValue(postcode);
+    }
+
+    /**
+     * @description
      * Sets the value of the user note.
      *
-     * @param {Object} addressInfo
-     * @param {String} addressInfo.note The user's extra note
+     * @param {String} addressInfo.note, the user's extra note
      */
-    inputUserNote (addressInfo) {
-        this.fields.userNote.input.setValue(addressInfo.note);
+    inputUserNote (note) {
+        this.fields.userNote.input.setValue(note);
     }
 
     /**
