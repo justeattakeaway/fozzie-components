@@ -160,7 +160,7 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     // Show focus styles on keyboard focus.
     &:focus-visible {
         outline: 0;
-        box-shadow: 0 0 0 2pt $btn-default-outline-color;
+        box-shadow: 0 0 0 2px $btn-default-outline-color;
     }
 
     &:hover,
