@@ -42,9 +42,9 @@
                         role="alert"
                         data-test-id="error-summary-container">
                         <error-message
-                            v-show="genericFormErrorMessage"
+                            v-if="invalidFieldsCount"
                             :class="$style['c-checkout-genericError']">
-                            {{ genericFormErrorMessage }}
+                            {{ $t('errorMessages.genericFormError', { invalidFieldsCount }) }}
                         </error-message>
                     </section>
 
@@ -264,7 +264,7 @@ export default {
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false,
-            genericFormErrorMessage: null
+            invalidFieldsCount: null
         };
     },
 
@@ -788,7 +788,6 @@ export default {
          * */
         onInvalidCheckoutForm () {
             const validationState = validations.getFormValidationState(this.$v);
-            const errorCount = validationState.invalidFields.length;
             const invalidFields = mapAnalyticsNames(validationState.invalidFields);
 
             this.scrollToFirstInlineError();
@@ -810,9 +809,7 @@ export default {
                 logMethod: this.$logger.logWarn
             });
 
-            this.genericFormErrorMessage = errorCount === 1 ?
-                'There is 1 error in the form.' :
-                `There are ${errorCount} errors in the form.`;
+            this.invalidFieldsCount = validationState.invalidFields.length;
         },
 
         /**
@@ -831,7 +828,6 @@ export default {
          */
         isFormValid () {
             this.$v.$touch();
-            this.genericFormErrorMessage = '';
             return !this.$v.$invalid;
         },
 
