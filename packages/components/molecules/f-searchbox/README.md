@@ -140,8 +140,6 @@ const config = {                 // (opt) component settings
 }
 ```
 
-## Configuration
-
 ### Props
 
 `f-searchbox` has a number of props that allow you to customise its functionality.
@@ -231,6 +229,11 @@ const copyOverrides = {
     // ...
 }
 ```
+
+### CSS styles
+
+The component is using utility css styles from [fozzie](https://github.com/justeat/fozzie/) package. You need to make sure to `@include trumps-utilities();` mixin to your application styles if you use beta version of fozzie package (>= v5.0.0-beta.0). If you are using main version (v4.X.X) styles should come out of the box.
+
 
 ### Non-Vue Applications
 

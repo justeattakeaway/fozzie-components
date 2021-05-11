@@ -109,9 +109,9 @@ module.exports = class Checkout extends Page {
         const isLoggedIn = `&knob-Is%20User%20Logged%20In=${checkout.isAuthenticated}`;
         const hasCheckoutErrors = `&knob-Checkout%20Errors=${checkout.checkoutErrors}`;
         const hasPlaceOrderErrors = `&knob-Place%20Order%20Errors=${checkout.placeOrderErrors}`;
-        const hasPreorderWarning = `&knob-Is%20ASAP%20available=${checkout.isPreOrderWarningDisplayed}`;
+        const hasAsapAvailable = `&knob-Is%20ASAP%20available=${checkout.isAsapAvailable}`;
 
-        const url = `checkout-component${serviceType}${isLoggedIn}${hasCheckoutErrors}${hasPlaceOrderErrors}${hasPreorderWarning}`;
+        const url = `checkout-component${serviceType}${isLoggedIn}${hasCheckoutErrors}${hasPlaceOrderErrors}${hasAsapAvailable}`;
         super.openComponent('organism', url);
     }
 
@@ -121,18 +121,6 @@ module.exports = class Checkout extends Page {
 
     waitForErrorPageComponent () {
         super.waitForComponent(this.errorPageComponent);
-    }
-
-    isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
-
-    isFieldErrorDisplayed (fieldName) {
-        return this.fields[fieldName].error.isDisplayed();
-    }
-
-    isFieldDisplayed (fieldName) {
-        return this.fields[fieldName].input.isDisplayed();
     }
 
     isPostcodeTypeErrorDisplayed () {
@@ -151,50 +139,13 @@ module.exports = class Checkout extends Page {
         return this.goToPaymentButton.click();
     }
 
-    switchUserLinkIsDisplayed () {
-        return this.switchUserLink.isDisplayed();
-    }
-
-    isGuestCheckoutLoginButtonDisplayed () {
-        return this.guestCheckoutLoginButton.isDisplayed();
-    }
-
     clickGuestCheckoutLoginButton () {
         return this.guestCheckoutLoginButton.click();
-    }
-
-    isGuestCheckoutHeaderDisplayed () {
-        return this.guestCheckoutHeader.isDisplayed();
-    }
-
-    isPreOrderWarningDisplayed () {
-        return this.preOrderWarning.isDisplayed();
-    }
-
-    isCheckoutErrorMessageDisplayed () {
-        return this.checkoutErrorMessage.isDisplayedInViewport();
     }
 
     clickRetryButton () {
         return this.errorMessageRetry.click();
     }
-
-    isErrorPageComponentDisplayed () {
-        return this.errorPageComponent.isDisplayed();
-    }
-
-    isErrorPageHeadingDisplayed () {
-        return this.errorPageHeading.isDisplayed();
-    }
-
-    isErrorPageDescriptionDisplayed () {
-        return this.errorPageDescription.isDisplayed();
-    }
-
-    isErrorPageImageDisplayed () {
-        return this.errorPageImage.isDisplayed();
-    }
-
 
     /**
     * @description
@@ -212,6 +163,10 @@ module.exports = class Checkout extends Page {
         this.fields.email.input.setValue(userInfo.email);
         this.fields.password.input.setValue(userInfo.password);
         this.createAccountButton.click();
+    }
+
+    isCheckoutErrorMessageDisplayed () {
+        return this.checkoutErrorMessage.isDisplayedInViewport();
     }
 
     /**
@@ -315,16 +270,6 @@ module.exports = class Checkout extends Page {
     }
 
     /**
-    * @description
-    * The time of the order should increase when a higher index is applied.
-    *
-    * @param {Number} index The index of the `orderTimeDropdownOptions` array
-    */
-    getOrderTimeOptionText (index) {
-        return this.orderTimeDropdownOptions[index].getText();
-    }
-
-    /**
      * @description
      * Sets the value of the user note.
      *
@@ -352,13 +297,5 @@ module.exports = class Checkout extends Page {
     goToPayment () {
         this.goToPaymentButton.scrollIntoView();
         this.goToPaymentButton.click();
-    }
-
-    doesErrorMessageExist (errorMessage) {
-        return this.fields[errorMessage].error.isExisting();
-    }
-
-    doesFieldExist (inputField) {
-        return this.fields[inputField].input.isExisting();
     }
 };

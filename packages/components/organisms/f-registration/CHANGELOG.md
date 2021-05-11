@@ -3,9 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+v0.53.0
 ------------------------------
-*May 5, 2021*
+*May 11, 2021*
+
+### Changes
+- Switched from Axios and Axios Mock Adapter to f-http
+
+
+v0.52.0
+------------------------------
+*May 6, 2021*
+
+### Removed
+- `is-visuallyHidden` css style definition as should come from `fozzie`
 
 ### Added
 - Tagging for future Percy tests
@@ -17,6 +28,7 @@ v0.51.0
 
 ### Changes
 - Error messages retrieved from i18n files.
+
 
 v0.50.0
 ------------------------------

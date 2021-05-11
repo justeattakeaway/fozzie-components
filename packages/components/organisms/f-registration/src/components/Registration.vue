@@ -32,7 +32,7 @@
                 @submit.prevent="onFormSubmit">
                 <section
                     id="error-summary-container"
-                    :class="$style['is-visuallyHidden']"
+                    class="is-visuallyHidden"
                     role="alert"
                     data-test-id="error-summary-container">
                     <error-message
@@ -230,11 +230,6 @@ export default {
         createAccountUrl: {
             type: String,
             required: true
-        },
-        createAccountTimeout: {
-            type: Number,
-            required: false,
-            default: 1000
         },
         showLoginLink: {
             type: Boolean,
@@ -449,7 +444,7 @@ export default {
                     registrationSource: 'Native',
                     marketingPreferences: []
                 };
-                await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData, this.createAccountTimeout);
+                await RegistrationServiceApi.createAccount(this.createAccountUrl, registrationData, this.tenant);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
                 let thrownErrors = error;

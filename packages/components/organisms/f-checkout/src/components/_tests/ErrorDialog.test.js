@@ -3,24 +3,35 @@ import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ErrorDialog from '../ErrorDialog.vue';
 import {
-    i18n, defaultCheckoutState, createStore, $logger
+    i18n, defaultCheckoutState, createStore
 } from './helpers/setup';
 import { ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE } from '../../constants';
-import EventNames from '../../event-names';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+let windowLocationSpy;
+
+beforeEach(() => {
+    windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
+});
+
 describe('ErrorDialog', () => {
-    const propsData = {
-        isOpen: true,
-        errorCode: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+    const propsData = {};
+    const restaurant = {
+        seoName: 'checkout-kofte-farringdon',
+        id: '22222'
+    };
+    const message = {
+        shouldRedirectToMenu: true,
+        shouldShowInDialog: true,
+        code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
     };
 
     it('should be defined', () => {
-        // Arrange
+        // Arrange && Act
         const wrapper = shallowMount(ErrorDialog, {
             store: createStore(),
             i18n,
@@ -31,26 +42,126 @@ describe('ErrorDialog', () => {
         // Assert
         expect(wrapper).toBeDefined();
     });
-    describe('methods ::', () => {
-        describe('handleButtonClick ::', () => {
-            it('should emit the `error-button-click` event', () => {
-                // Arrange
+
+    describe('computed ::', () => {
+        describe('errorCode ::', () => {
+            it('should return `code` of `message` when `message` is provided', () => {
+                // Arrange && Act
                 const wrapper = shallowMount(ErrorDialog, {
-                    store: createStore({ ...defaultCheckoutState, isLoggedIn: true }),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message
+                    }),
                     i18n,
                     localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.errorCode).toEqual(message.code);
+            });
+
+            it('should return `null` if  no `message` is provided', () => {
+                // Arrange && Act
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.errorCode).toEqual(null);
+            });
+        });
+
+        describe('restaurantMenuPageUrl ::', () => {
+            it('should return the URL to redirect back to the restaurant menu', () => {
+                // Arrange && Act
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.restaurantMenuPageUrl).toEqual(`restaurant-${restaurant.seoName}/menu`);
+            });
+        });
+    });
+
+    describe('methods ::', () => {
+        describe('closeErrorDialog ::', () => {
+            let updateMessageSpy;
+
+            beforeEach(() => {
+                updateMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateMessage');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `updateMessage`', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
                 });
 
                 // Act
-                const dialogButton = wrapper.find("[data-test-id='redirect-to-menu-button']");
-                dialogButton.trigger('click');
+                wrapper.vm.closeErrorDialog();
 
                 // Assert
-                expect(wrapper.emitted(EventNames.CheckoutErrorDialogButtonClicked).length).toBe(1);
+                expect(updateMessageSpy).toHaveBeenCalled();
+            });
+
+            it('should redirect to the restaurant menu if `shouldRedirectToMenu` is true', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant,
+                        message
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                wrapper.vm.closeErrorDialog();
+
+                // Assert
+                expect(windowLocationSpy).toHaveBeenCalledWith(`restaurant-${restaurant.seoName}/menu`);
+            });
+
+            it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {
+                // Arrange
+                message.shouldRedirectToMenu = false;
+
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant,
+                        message
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                wrapper.vm.closeErrorDialog();
+
+                // Assert
+                expect(windowLocationSpy).not.toHaveBeenCalled();
             });
         });
     });

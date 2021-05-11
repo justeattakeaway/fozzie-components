@@ -2175,14 +2175,6 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "1.11.0"
 
-"@justeat/f-form-field@1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.8.0.tgz#e8efedb2a72a38975c2c736ea874957aab73b560"
-  integrity sha512-jNc3E3QxqzpleY4qiFfEVZVRHSgTgAemfhyV2elbZ02hWs7drsLUWjXkrOyTXRmlu6UFB13KK/bTc6INR6EKXw==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "1.11.0"
-
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2211,6 +2203,11 @@
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.6.0.tgz#2933f1744b1fbde9636a366df73c1626f9cd2a83"
   integrity sha512-l94zXHEDgXhUq98DJJb6UK7fJfr2xZ7r3CgxcSnFUjBCYPi+tpxQUuO9wcoFPBTVM9HSrVIFJ2dNm/u0A+bOzg==
+
+"@justeat/f-mega-modal@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.7.0.tgz#e7f4aedfbaa614386f7fe5a180111e884c7db694"
+  integrity sha512-IGknAfUH9vExdkY8hg/tcK1iAHFzA1DusKiKMHFOf3obQ/cAMA2hK7I9JCSCGjBUrcBYhpY3WdlLxu9hInJREw==
 
 "@justeat/f-searchbox@3.10.0":
   version "3.10.0"
@@ -25103,12 +25100,7 @@ ws@^6.0.0, ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^7.0.0, ws@^7.2.3, ws@^7.4.4:
-  version "7.4.5"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
-  integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
-
-ws@^7.4.1:
+ws@^7.0.0, ws@^7.2.3, ws@^7.4.1, ws@^7.4.4:
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
   integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
