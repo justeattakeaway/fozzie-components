@@ -1,13 +1,17 @@
-import { mount } from '@vue/test-utils';
+import httpModule from '@justeat/f-http';
+import {
+    mount
+} from '@vue/test-utils';
 import flushPromises from 'flush-promises';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
 import CONSUMERS_REQUEST_DATA from '../../../test/constants/consumer';
 
-const axiosMock = new MockAdapter(axios);
+const {
+    mockFactory,
+    httpVerbs
+} = httpModule;
 
 const propsData = {
     locale: 'en-GB',
@@ -26,10 +30,16 @@ const setFormFieldValues = wrapper => {
 
 describe('Registration API service', () => {
     let wrapper;
+
     beforeEach(() => {
         const div = document.createElement('div');
         document.body.appendChild(div);
-        wrapper = mount(Registration, { propsData, attachTo: div });
+        wrapper = mount(Registration, {
+            propsData,
+            attachTo: div
+        });
+
+        setFormFieldValues(wrapper);
     });
 
     afterEach(() => {
@@ -39,8 +49,7 @@ describe('Registration API service', () => {
 
     it('responds with 201 when request is made with valid details', async () => {
         // Arrange
-        axiosMock.onPost(propsData.createAccountUrl, CONSUMERS_REQUEST_DATA).reply(201);
-        setFormFieldValues(wrapper);
+        mockFactory.setupMockResponse(httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 201);
 
         // Act
         await wrapper.vm.onFormSubmit();
@@ -52,18 +61,14 @@ describe('Registration API service', () => {
 
     it('responds with 409 when request is made with e-mail in use', async () => {
         // Arrange
-        axiosMock.onPost(propsData.createAccountUrl, CONSUMERS_REQUEST_DATA).reply(409, {
-            faultId: 'e2ea5f11-f771-487a-9f80-5c6f0981890b',
+        mockFactory.setupMockResponse(httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 409, {
+            faultId: '00000000-0000-0000-0000-000000000000',
             traceId: '80000806-0000-fd00-b63f-84710c7967bb',
-            errors: [
-                {
-                    description: 'The specified email already exists',
-                    errorCode: '409'
-                }
-            ]
+            errors: [{
+                description: 'The specified email already exists',
+                errorCode: '409'
+            }]
         });
-
-        setFormFieldValues(wrapper);
 
         // Act
         await wrapper.vm.onFormSubmit();
@@ -76,18 +81,14 @@ describe('Registration API service', () => {
 
     it('responds with 403 when login blocked by ravelin or recaptcha', async () => {
         // Arrange
-        axiosMock.onPost(propsData.createAccountUrl, CONSUMERS_REQUEST_DATA).reply(403, {
-            faultId: '25bbe062-c53d-4fbc-9d6c-3df6127b94fd',
+        mockFactory.setupMockResponse(httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 403, {
+            faultId: '00000000-0000-0000-0000-000000000000',
             traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
-            errors: [
-                {
-                    description: 'Failed user authentication.',
-                    errorCode: 'FailedUserAuthentication'
-                }
-            ]
+            errors: [{
+                description: 'Failed user authentication.',
+                errorCode: 'FailedUserAuthentication'
+            }]
         });
-
-        setFormFieldValues(wrapper);
 
         // Act
         await wrapper.vm.onFormSubmit();
