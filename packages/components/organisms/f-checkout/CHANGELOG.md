@@ -10,6 +10,7 @@ v0.108.0
 ### Added
 - `aria-describedby` and `aria-invalid` for all input fields - for reading error messages
 - `error-summary-section` in checkout to alert errors after submit button (resembles f-registration)
+- component and unit tests
 
 
 v0.107.0
