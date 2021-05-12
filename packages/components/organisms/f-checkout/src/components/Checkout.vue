@@ -951,9 +951,4 @@ export default {
 .c-checkout-submitButton {
     margin: spacing(x4) 0 spacing(x0.5);
 }
-
-.c-checkout-genericError {
-    margin-top: 0;
-    margin-bottom: spacing(x2);
-}
 </style>

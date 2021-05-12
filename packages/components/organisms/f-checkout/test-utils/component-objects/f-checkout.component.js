@@ -17,7 +17,8 @@ const {
     ERROR_PAGE_COMPONENT,
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
-    ERROR_PAGE_IMAGE
+    ERROR_PAGE_IMAGE,
+    ERROR_SUMMARY
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -54,6 +55,8 @@ module.exports = class Checkout extends Page {
     get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
 
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
+
+    get errorSummary () { return $(ERROR_SUMMARY); }
 
     fields = {
         firstName: {
@@ -288,6 +291,10 @@ module.exports = class Checkout extends Page {
     */
     getUserNoteLength () {
         return this.userNoteInput.getValue().length;
+    }
+
+    isErrorSummaryVisible () {
+        return this.errorSummary.isDisplayedInViewport();
     }
 
     /**

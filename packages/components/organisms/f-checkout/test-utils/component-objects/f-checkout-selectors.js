@@ -15,6 +15,7 @@ export const ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-componen
 export const ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';
 export const ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description"]';
 export const ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
+export const ERROR_SUMMARY = '[data-test-id="error-summary-container"]';
 
 export const FIELDS = {
     firstName: {

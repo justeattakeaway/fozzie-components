@@ -336,13 +336,10 @@ describe('Checkout', () => {
             });
         });
 
-        describe('..invalidFieldsSummary : :', () => {
+        describe('invalidFieldsSummary ::', () => {
             let wrapper;
-            // let touchSpy;
-            // let isFormValidSpy;
 
             beforeEach(() => {
-                // isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
                 wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
                     i18n,
@@ -350,15 +347,10 @@ describe('Checkout', () => {
                     propsData,
                     mocks: { $v }
                 });
-
-                // touchSpy = jest.spyOn($v, '$touch');
             });
 
-            // afterEach(() => {
-            //     jest.clearAllMocks();
-            // });
-
             it('should return `null` if no fields have been touched', () => {
+                // Arrange & Act
                 $v.$dirty = false;
 
                 // Assert
@@ -366,25 +358,134 @@ describe('Checkout', () => {
             });
 
             it('should return `null` if all fields have been touched and are valid', () => {
+                // Arrange
+                const mockValidationState = {
+                    invalidFields: []
+                };
+
+                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
                 $v.dirty = true;
-                $v.$invalid = false;
+
+                // Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    }
+                });
 
                 // Assert
                 expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
             });
 
-            // it('should return with an error summary in fields are invalid');
+            it('should return the error summary with the number of invalid fields when there are more than one', () => {
+                // Arrange
+                const mockValidationState = {
+                    invalidFields: [
+                        'customer.mobileNumber',
+                        'address.line1',
+                        'address.locality',
+                        'address.postcode'
+                    ]
+                };
 
-            // it.only('should return error summary if all fields have been touched and are invalid', () => {
-            //     $v.$dirty = true;
-            //     $v.$invalid = true;
+                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
+                $v.$dirty = true;
 
-            //     // Act
-            //     await wrapper.vm.onFormSubmit();
+                // Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    }
+                });
 
-            //     // Assert
-            //     expect(wrapper.vm.invalidFieldsSummary).toEqual('there are 7 errors in the form');
-            // });
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toMatchSnapshot();
+            });
+
+            it('should return the error summary with the number of invalid fields when there is only one', () => {
+                // Arrange
+                const mockValidationState = {
+                    invalidFields: [
+                        'customer.mobileNumber'
+                    ]
+                };
+
+                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
+                $v.$dirty = true;
+
+                // Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toMatchSnapshot();
+            });
+
+            it('should not render the error summary when there are no errors', () => {
+                // Arrange & Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    },
+                    computed: {
+                        invalidFieldsSummary () {
+                            return null;
+                        }
+                    }
+                });
+
+                const errorSummaryContainer = wrapper.find('[data-test-id="error-summary-container"]');
+
+                // Assert
+                expect(errorSummaryContainer.exists()).toBe(false);
+            });
+
+            it('should render the hidden error summary when there are errors', () => {
+                // Arrange & Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    },
+                    computed: {
+                        invalidFieldsSummary () {
+                            return 'There are 7 errors in the form';
+                        }
+                    }
+                });
+
+                const errorSummaryContainer = wrapper.find('[data-test-id="error-summary-container"]');
+
+                // Assert
+                expect(errorSummaryContainer.exists()).toBe(true);
+            });
         });
 
         describe('isCheckoutMethodDelivery ::', () => {
