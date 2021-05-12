@@ -1,0 +1,12 @@
+
+{
+  "commitizen": {
+    "name": "cz_customize",
+    "bump_map": {
+      "break": "MAJOR",
+      "feat": "MINOR",
+      "fix": "PATCH",
+      "refactor": "MINOR"
+    }
+  }
+}
