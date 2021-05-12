@@ -61,7 +61,7 @@ export const HeaderComponent = () => ({
             :showOffersLink="showOffersLink"
             :showHelpLink="showHelpLink"
             :locale="locale"
-            :logoLinkDisabled="logoLinkDisabled"
+            :isLogoLinkDisabled="logoLinkDisabled"
             :headerBackgroundTheme="headerBackgroundTheme"
             :showDeliveryEnquiry="showDeliveryEnquiry"
             :showLoginInfo="showLoginInfo"
