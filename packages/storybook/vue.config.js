@@ -20,8 +20,9 @@ module.exports = {
                  * @param resourcePath
                  * @returns {string}
                  */
-                additionalData (content, { resourcePath }) {
-                    const levelsUpToSrc = resourcePath.split(path.sep).reverse().indexOf('src');
+                additionalData (content, { resourcePath, rootContext }) {
+                    const relativePath = path.relative(rootContext, resourcePath);
+                    const levelsUpToSrc = relativePath.split(path.sep).reverse().indexOf('src');
 
                     // Only attempt to add common styles when under a src dir
                     if (levelsUpToSrc === -1) {
