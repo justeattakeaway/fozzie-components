@@ -41,9 +41,7 @@
                         class="is-visuallyHidden"
                         role="alert"
                         data-test-id="error-summary-container">
-                        <span>
-                            {{ invalidFieldsSummary }}
-                        </span>
+                        {{ invalidFieldsSummary }}
                     </section>
 
                     <guest-block

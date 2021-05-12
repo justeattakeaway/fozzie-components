@@ -336,6 +336,42 @@ describe('Checkout', () => {
             });
         });
 
+        describe('..invalidFieldsSummary : :', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+            });
+
+            it('should return `null` if no fields have been touched', () => {
+                wrapper.vm.$v.$dirty = false;
+                wrapper.vm.$v.$invalid = false;
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+            });
+
+            // it('should return `null` if all fields have been touched and are valid', () => {
+            //     wrapper.vm.$v.$dirty = true;
+
+            //     // Assert
+            //     expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+            // });
+
+            // it('should return invalid field summary with count: 1 when one field is invalid', () => {
+            //     wrapper.vm.$v.$dirty = true;
+            //     wrapper.vm.$v.customer.mobileNumber.isValidPhoneNumber = false;
+
+
+            // })
+        });
+
         describe('isCheckoutMethodDelivery ::', () => {
             it('should return `true` if `serviceType` is set to Delivery', () => {
                 // Arrange and Act
