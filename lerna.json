@@ -9,5 +9,13 @@
     "packages/services/*",
     "packages/tools/*"
   ],
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "message": "release: automated version bump via lerna"
+    }
+  },
+  "changelogPreset": "angular",
+  "ignoreChanges": ["**/*.md", "**/*.spec.js"],
   "useWorkspaces": true
 }
