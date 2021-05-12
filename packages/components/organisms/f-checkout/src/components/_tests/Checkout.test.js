@@ -338,8 +338,11 @@ describe('Checkout', () => {
 
         describe('..invalidFieldsSummary : :', () => {
             let wrapper;
+            // let touchSpy;
+            // let isFormValidSpy;
 
             beforeEach(() => {
+                // isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
                 wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
                     i18n,
@@ -347,29 +350,41 @@ describe('Checkout', () => {
                     propsData,
                     mocks: { $v }
                 });
+
+                // touchSpy = jest.spyOn($v, '$touch');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
             });
 
             it('should return `null` if no fields have been touched', () => {
-                wrapper.vm.$v.$dirty = false;
-                wrapper.vm.$v.$invalid = false;
+                $v.$dirty = false;
 
                 // Assert
                 expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
             });
 
-            // it('should return `null` if all fields have been touched and are valid', () => {
-            //     wrapper.vm.$v.$dirty = true;
+            it('should return `null` if all fields have been touched and are valid', () => {
+                $v.dirty = true;
+                $v.$invalid = false;
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+            });
+
+            it('should return with an error summary in fields are invalid');
+
+            // it.only('should return error summary if all fields have been touched and are invalid', () => {
+            //     $v.$dirty = true;
+            //     $v.$invalid = true;
+
+            //     // Act
+            //     await wrapper.vm.onFormSubmit();
 
             //     // Assert
-            //     expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+            //     expect(wrapper.vm.invalidFieldsSummary).toEqual('there are 7 errors in the form');
             // });
-
-            // it('should return invalid field summary with count: 1 when one field is invalid', () => {
-            //     wrapper.vm.$v.$dirty = true;
-            //     wrapper.vm.$v.customer.mobileNumber.isValidPhoneNumber = false;
-
-
-            // })
         });
 
         describe('isCheckoutMethodDelivery ::', () => {
