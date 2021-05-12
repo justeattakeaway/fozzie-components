@@ -44,7 +44,7 @@ describe('Logo', () => {
         expect(logo).toBeDefined();
     });
 
-    it('should disable the logo link if linkDisabled prop is provided', () => {
+    it('should change the logo link to a span if linkDisabled prop is provided', () => {
         const $style = {
             disabled: 'disabled'
         };
@@ -52,7 +52,7 @@ describe('Logo', () => {
         const propsData = {
             theme: 'je',
             companyName: 'Just Eat',
-            linkDisabled: true
+            isLogoDisabled: true
         };
 
         // Act
@@ -63,10 +63,10 @@ describe('Logo', () => {
             }
         });
 
-        const logo = wrapper.find('a');
+        const logo = wrapper.find('span');
 
         // Assert
-        expect(logo.classes()).toContain('disabled');
+        expect(logo.exists()).toBe(true);
     });
 
     describe('header logo :: ', () => {

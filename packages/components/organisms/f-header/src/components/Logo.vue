@@ -1,12 +1,9 @@
 <template>
-    <a
+    <component
+        :is="wrapperComponent"
         :aria-label="linkAltText"
         href="/"
-        :aria-disabled="linkDisabled"
-        :class="[
-            $style['c-logo'],
-            { [$style['disabled']]: linkDisabled }
-        ]"
+        :class="$style['c-logo']"
         :data-trak='`{
             "trakEvent": "click",
             "category": "engagement",
@@ -22,7 +19,7 @@
             ]"
             :data-theme-logo="iconClassName"
             data-test-id="header-logo" />
-    </a>
+    </component>
 </template>
 
 <script>
@@ -45,9 +42,9 @@ export default {
             type: String,
             required: true
         },
-        linkDisabled: {
+        isLogoDisabled: {
             type: Boolean,
-            default: false
+            required: true
         },
         logoGtmLabel: {
             type: String,
@@ -77,6 +74,9 @@ export default {
             const isTransparent = this.headerBackgroundTheme === 'transparent';
 
             return isHighlight || (isTransparent && !this.isOpen);
+        },
+        wrapperComponent () {
+            return this.isLogoDisabled ? 'span' : 'a';
         }
     }
 };
@@ -104,10 +104,6 @@ export default {
             @include theme(ml) {
                 padding-top: 16px;
             }
-        }
-
-        &.disabled {
-            pointer-events: none;
         }
     }
 
