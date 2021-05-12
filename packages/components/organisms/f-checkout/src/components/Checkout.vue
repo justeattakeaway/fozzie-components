@@ -37,15 +37,13 @@
                     @submit.prevent="onFormSubmit"
                 >
                     <section
-                        id="error-summary-container"
-                        :class="$style['is-visuallyHidden']"
+                        v-if="invalidFieldsSummary"
+                        class="is-visuallyHidden"
                         role="alert"
                         data-test-id="error-summary-container">
-                        <error-message
-                            v-if="invalidFieldsCount"
-                            :class="$style['c-checkout-genericError']">
-                            {{ invalidFieldsCount }}
-                        </error-message>
+                        <span>
+                            {{ invalidFieldsSummary }}
+                        </span>
                     </section>
 
                     <guest-block
@@ -61,7 +59,6 @@
                         aria-describedby="mobile-number-error"
                         :aria-invalid="!isMobileNumberValid"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
-                        @blur="onMobileFieldBlur"
                     >
                         <template #error>
                             <error-message
@@ -264,8 +261,7 @@ export default {
             tenantConfigs,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
-            isLoading: false,
-            invalidFieldsCount: null
+            isLoading: false
         };
     },
 
@@ -373,6 +369,19 @@ export default {
                 },
                 content: this.message
             };
+        },
+
+        invalidFieldsSummary () {
+            const invalidFieldCount = this.$v.$dirty
+                && validations.getFormValidationState(this.$v).invalidFields.length;
+
+            if (!invalidFieldCount) {
+                return null;
+            }
+
+            return invalidFieldCount === 1 ?
+                this.$t('errorMessages.singleFieldError') :
+                this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
         }
     },
 
@@ -790,7 +799,6 @@ export default {
         onInvalidCheckoutForm () {
             const validationState = validations.getFormValidationState(this.$v);
             const invalidFields = mapAnalyticsNames(validationState.invalidFields);
-            const invalidFieldsLength = validationState.invalidFields.length;
 
             this.scrollToFirstInlineError();
 
@@ -810,10 +818,6 @@ export default {
                 data: { ...this.eventData, validationState },
                 logMethod: this.$logger.logWarn
             });
-
-            this.invalidFieldsCount = invalidFieldsLength === 1 ?
-                this.$t('errorMessages.singleFieldError') :
-                this.$t('errorMessages.multipleFieldErrors', { invalidFieldsLength });
         },
 
         /**
@@ -833,10 +837,6 @@ export default {
         isFormValid () {
             this.$v.$touch();
             return !this.$v.$invalid;
-        },
-
-        onMobileFieldBlur () {
-            this.onFieldBlur('customer', 'mobileNumber');
         },
 
         /**

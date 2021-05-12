@@ -10,9 +10,6 @@ export default {
         */
         isFieldEmpty (type, field) {
             return this.$v[type][field].$dirty && !this.$v[type][field].required;
-        },
-        onFieldBlur (type, field) {
-            this.$v[type][field].$touch();
         }
     }
 };

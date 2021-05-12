@@ -9,7 +9,6 @@
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
-            @blur="onGuestFieldBlur('firstName')"
             @input="updateCustomerDetails({ 'firstName': $event })"
         >
             <template #error>
@@ -30,7 +29,6 @@
             aria-describedby="last-name-error"
             :aria-invalid="isLastNameEmpty"
             :has-error="isLastNameEmpty"
-            @blur="onGuestFieldBlur('lastName')"
             @input="updateCustomerDetails({ 'lastName': $event })">
             <template #error>
                 <error-message
@@ -51,7 +49,6 @@
             :has-error="!isEmailValid"
             aria-describedby="email-error"
             :aria-invalid="!isEmailValid"
-            @blur="onGuestFieldBlur('email')"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
@@ -116,11 +113,7 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateCustomerDetails'
-        ]),
-
-        onGuestFieldBlur (field) {
-            this.onFieldBlur(VALIDATIONS.guest, field);
-        }
+        ])
     }
 };
 </script>

@@ -43,7 +43,7 @@ const messages = {
         errorHeading: 'Error',
         genericServerError: 'Something went wrong, please try again later',
         singleFieldError: 'There is 1 error in the form',
-        multipleFieldErrors: 'There are {invalidFieldsLength} errors in the form',
+        multipleFieldErrors: 'There are {errorCount} errors in the form',
         pageLoad: {
             heading: 'We can’t show you this page',
             description: 'It’s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.'

@@ -5,12 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.105.0
 ------------------------------
-*May 11, 2021*
+*May 12, 2021*
 
 ### Added
 - `aria-describedby` and `aria-invalid` for all input fields - for reading error messages
 - `error-summary-section` in checkout to alert errors after submit button (resembles f-registration)
-- `onFieldBlur` function so error messages populate after field has been touched
 
 ### Fixed
 - `Resturant` to `Restaurant` typo in `en-GB.js` copy text.
