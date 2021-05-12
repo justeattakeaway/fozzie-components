@@ -41,7 +41,7 @@
                     <form-field
                         :value="customer.mobileNumber"
                         name="mobile-number"
-                        input-type="text"
+                        input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
@@ -334,7 +334,6 @@ export default {
         },
 
         isTableIdentifierEmpty () {
-            console.log(this.$v.tableIdentifier);
             return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
         },
 

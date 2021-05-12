@@ -62,6 +62,11 @@ const $v = {
             isValidPostcode: false
         }
     },
+    tableIdentifier: {
+        $dirty: false,
+        required: true,
+        maxLength: true
+    },
     $touch: jest.fn()
 };
 
@@ -439,6 +444,60 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.isMobileNumberValid).toBeTruthy();
+            });
+        });
+
+        describe('isTableIdentifierEmpty ::', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+            });
+
+            it('should return `false` if tableIdentifier field has not been touched', () => {
+                // Act
+                wrapper.vm.$v.tableIdentifier.$dirty = false;
+
+                // Assert
+                expect(wrapper.vm.isTableIdentifierEmpty).toBeFalsy();
+            });
+
+            it('should return `true` if tableIdentifier field has been touched but tableIdentifier is empty', () => {
+                // Act
+                wrapper.vm.$v.tableIdentifier.$dirty = true;
+                wrapper.vm.$v.tableIdentifier.required = false;
+
+                // Assert
+                expect(wrapper.vm.isTableIdentifierEmpty).toBeTruthy();
+            });
+        });
+
+        describe('isTableIdentifierExceedingMaxLength ::', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+            });
+
+            it('should return `true` if tableIdentifier exceeds the max length allowed', () => {
+                // Act
+                wrapper.vm.$v.tableIdentifier.$dirty = true;
+                wrapper.vm.$v.tableIdentifier.maxLength = false;
+
+                // Assert
+                expect(wrapper.vm.isTableIdentifierEmpty).toBeTruthy();
             });
         });
 
