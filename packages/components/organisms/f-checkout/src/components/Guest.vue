@@ -109,7 +109,6 @@ export default {
         ]),
 
         formFieldBlur (field) {
-            console.log(this.$v[VALIDATIONS.guest][field]);
             const fieldValidation = this.$v[VALIDATIONS.guest][field];
             if (fieldValidation) {
                 fieldValidation.$touch();
