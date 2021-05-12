@@ -2,14 +2,8 @@
     <component
         :is="wrapperComponent"
         :aria-label="linkAltText"
-        href="/"
         :class="$style['c-logo']"
-        :data-trak='`{
-            "trakEvent": "click",
-            "category": "engagement",
-            "action": "header",
-            "label": "${logoGtmLabel}"
-        }`'>
+        v-bind="linkProperties">
         <component
             :is="iconComponent"
             :class="[
@@ -68,6 +62,21 @@ export default {
         },
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
+        },
+        linkProperties () {
+            return this.isLogoDisabled ? {
+                'data-test-id': 'disabled-wrapper-element'
+            } : {
+                'data-test-id': 'wrapper-element',
+                'aria-label': this.linkAltText,
+                href: '/',
+                'data-trak': `{
+                    "trakEvent": "click",
+                    "category": "engagement",
+                    "action": "header",
+                    "label": "${this.logoGtmLabel}"
+                }`
+            };
         },
         isAltLogo () {
             const isHighlight = this.headerBackgroundTheme === 'highlight';

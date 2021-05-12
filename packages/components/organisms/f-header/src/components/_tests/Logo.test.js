@@ -6,7 +6,8 @@ describe('Logo', () => {
         const propsData = {
             theme: 'je',
             headerBackgroundTheme: 'transparent',
-            companyName: 'Just Eat'
+            companyName: 'Just Eat',
+            isLogoDisabled: false
         };
         const wrapper = shallowMount(Logo, { propsData });
         expect(wrapper.exists()).toBe(true);
@@ -17,7 +18,8 @@ describe('Logo', () => {
         const propsData = {
             theme: 'ml',
             headerBackgroundTheme: 'transparent',
-            companyName: 'MenuLog'
+            companyName: 'MenuLog',
+            isLogoDisabled: false
         };
 
         // Act
@@ -33,7 +35,8 @@ describe('Logo', () => {
         const propsData = {
             theme: 'je',
             headerBackgroundTheme: 'transparent',
-            companyName: 'Just Eat'
+            companyName: 'Just Eat',
+            isLogoDisabled: false
         };
 
         // Act
@@ -42,6 +45,32 @@ describe('Logo', () => {
 
         // Assert
         expect(logo).toBeDefined();
+    });
+
+    it('should render an anchor tag around the logo if isLogoDisabled is false', () => {
+        const $style = {
+            disabled: 'disabled'
+        };
+        // Arrange
+        const propsData = {
+            theme: 'je',
+            companyName: 'Just Eat',
+            isLogoDisabled: false
+        };
+
+        // Act
+        const wrapper = shallowMount(Logo, {
+            propsData,
+            mocks: {
+                $style
+            }
+        });
+
+        const disabledLogo = wrapper.find('[data-test-id="wrapper-element"]');
+
+        // Assert
+        expect(disabledLogo.exists()).toBe(true);
+        expect(disabledLogo.element.tagName).toBe('A');
     });
 
     it('should change the logo link to a span if linkDisabled prop is provided', () => {
@@ -63,10 +92,11 @@ describe('Logo', () => {
             }
         });
 
-        const logo = wrapper.find('span');
+        const disabledLogo = wrapper.find('[data-test-id="disabled-wrapper-element"]');
 
         // Assert
-        expect(logo.exists()).toBe(true);
+        expect(disabledLogo.exists()).toBe(true);
+        expect(disabledLogo.element.tagName).toBe('SPAN');
     });
 
     describe('header logo :: ', () => {
@@ -82,7 +112,8 @@ describe('Logo', () => {
             const propsData = {
                 theme: 'je',
                 headerBackgroundTheme: theme,
-                companyName: 'Just Eat'
+                companyName: 'Just Eat',
+                isLogoDisabled: false
             };
 
             // Act
@@ -106,7 +137,8 @@ describe('Logo', () => {
             const propsData = {
                 theme: 'je',
                 headerBackgroundTheme: theme,
-                companyName: 'Just Eat'
+                companyName: 'Just Eat',
+                isLogoDisabled: false
             };
 
             // Act

@@ -17,7 +17,7 @@
             <logo
                 :theme="theme"
                 :company-name="copy.companyName"
-                :link-disabled="logoLinkDisabled"
+                :is-logo-disabled="isLogoLinkDisabled"
                 :logo-gtm-label="copy.logo.gtm"
                 :header-background-theme="headerBackgroundTheme"
                 :is-open="mobileNavIsOpen" />
@@ -77,7 +77,7 @@ export default {
             default: true
         },
 
-        logoLinkDisabled: {
+        isLogoLinkDisabled: {
             type: Boolean,
             default: false
         },
