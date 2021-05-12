@@ -20,7 +20,7 @@ class BrazeConsumer {
     constructor ({
         enabledCardTypes,
         brands = [],
-        callbacks = {},
+        callbacks,
         interceptInAppMessages = {},
         interceptInAppMessageClickEvents = {},
         customFilters = []
@@ -32,6 +32,24 @@ class BrazeConsumer {
             'Promotion_Card_1',
             'Promotion_Card_2'
         ];
+
+        // check list all must be true to instantiate
+        this.optionsChecks = [
+            { 'Consumer callbacks must be an Object': !Array.isArray(callbacks) },
+            { 'Consumer callbacks must contain at least ONE callback function': callbacks && Object.keys(callbacks).length !== 0 },
+            { 'Consumer interceptInAppMessages must be an Object': !Array.isArray(interceptInAppMessages) },
+            { 'Consumer interceptInAppMessageClickEvents must be an Object': !Array.isArray(interceptInAppMessageClickEvents) },
+            { 'Consumer customFilters must be an Array': Array.isArray(customFilters) },
+            { 'Consumer brands must be an Array': Array.isArray(brands) }
+        ];
+
+        this.optionsChecks.forEach(check => {
+            Object.keys(check).forEach(key => {
+                if (!check[key]) {
+                    throw new Error(key);
+                }
+            });
+        });
 
         this.enabledCardTypes = enabledCardTypes || this.defaultEnabledCardTypes;
 
@@ -102,12 +120,13 @@ class BrazeConsumer {
      * @returns {(function(*): void)[]}
      */
     getContentCardCallbacks () {
-        const _this = this;
         // eslint-disable-next-line func-names
-        return Object.keys(this.callbacks).map(key => function (cards) {
-            _this.cards = cards;
-            _this.callbacks[key](_this._cards);
-        });
+        return Object.keys(this.callbacks).map(function mapContentCardCallbacks (key) {
+            return cards => {
+                this.cards = cards;
+                this.callbacks[key](this._cards);
+            };
+        }, this);
     }
 }
 

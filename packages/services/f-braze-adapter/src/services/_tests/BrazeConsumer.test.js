@@ -2,7 +2,6 @@ import BrazeConsumer from '../BrazeConsumer';
 import { removeDuplicateContentCards } from '../utils';
 import transformCardData from '../utils/transformCardData';
 
-// Arrange
 const mockCards = [
     {
         title: '51 Pegasi b',
@@ -30,11 +29,7 @@ const mockCards = [
     }
 ];
 
-const getContentCards = cards => {
-    console.log(cards);
-};
-
-const consumerOptions = {
+const mockConsumerOptions = {
     enabledCardTypes: [
         'Home_Promotion_Card_1',
         'Home_Promotion_Card_2',
@@ -43,10 +38,14 @@ const consumerOptions = {
         'Promotion_Card_2'
     ],
     callbacks: {
-        contentCards: getContentCards
+        contentCards: jest.fn()
     },
-    interceptInAppMessages: {},
-    interceptInAppMessageClickEvents: {},
+    interceptInAppMessages: {
+        messages: jest.fn()
+    },
+    interceptInAppMessageClickEvents: {
+        clickEvents: jest.fn()
+    },
     brands: [
         'a',
         'b',
@@ -56,15 +55,75 @@ const consumerOptions = {
 };
 
 describe('BrazeConsumer', () => {
-    it('should return an array of callbacks that when called return an array of of filtered cards', () => {
-        const consumer = new BrazeConsumer(consumerOptions);
+    it.each`
+        parameter | value
+        ${'callbacks'} | ${{ 'Consumer callbacks must contain at least ONE callback function': null }}
+        ${'callbacks'} | ${{ 'Consumer callbacks must contain at least ONE callback function': {} }}
+        ${'callbacks'} | ${{ 'Consumer callbacks must be an Object': [] }}
+        ${'interceptInAppMessages'} | ${{ 'Consumer interceptInAppMessages must be an Object': [] }}
+        ${'interceptInAppMessageClickEvents'} | ${{ 'Consumer interceptInAppMessageClickEvents must be an Object': [] }}
+        ${'brands'} | ${{ 'Consumer brands must be an Array': {} }}
+        ${'customFilters'} | ${{ 'Consumer customFilters must be an Array': {} }}
+    `('should throw an error if $parameter is $value', async ({ parameter, value }) => {
+    // Arrange
+    function instantiateBrazeConsumer () {
+        const testOptions = {
+            ...mockConsumerOptions,
+            [parameter]: value[Object.keys(value)[0]]
+        };
+        // eslint-disable-next-line no-unused-vars
+        const consumer = new BrazeConsumer(testOptions);
+    }
 
+    // Assert
+    expect(instantiateBrazeConsumer).toThrow(Object.keys(value)[0]);
+});
+
+    it('should return an array of callbacks from getContentCardCallbacks method', () => {
+        // Arrange
+        const consumer = new BrazeConsumer(mockConsumerOptions);
+
+        // Act
         const callbacks = consumer.getContentCardCallbacks();
 
-        const testCards = removeDuplicateContentCards(mockCards.map(transformCardData));
+        // Assert
+        expect(callbacks).toEqual(expect.arrayContaining([expect.any(Function)]));
+    });
 
+    it('should call "contentCards" callback when returned callbacks are called', () => {
+        // Arrange
+        const consumer = new BrazeConsumer(mockConsumerOptions);
+        const cards = removeDuplicateContentCards(mockCards.map(transformCardData));
+
+        // Act
+        const callbacks = consumer.getContentCardCallbacks();
         callbacks.forEach(callback => {
-            callback(testCards);
+            callback(cards);
         });
+
+        // Assert
+        expect(mockConsumerOptions.callbacks.contentCards).toHaveBeenCalled();
+    });
+
+    it('should return an array of callbacks from getInAppMessagesCallbacks method', () => {
+        // Arrange
+        const consumer = new BrazeConsumer(mockConsumerOptions);
+
+        // Act
+        const callbacks = consumer.getInAppMessagesCallbacks();
+
+        // Assert
+        expect(callbacks).toEqual(expect.arrayContaining([expect.any(Function)]));
+    });
+
+    it('should return an array of callbacks from getInAppMessageClickEventCallbacks method', () => {
+        // Arrange
+        const consumer = new BrazeConsumer(mockConsumerOptions);
+
+        // Act
+        const callbacks = consumer.getInAppMessageClickEventCallbacks();
+
+        // Assert
+        expect(callbacks).toEqual(expect.arrayContaining([expect.any(Function)]));
     });
 });

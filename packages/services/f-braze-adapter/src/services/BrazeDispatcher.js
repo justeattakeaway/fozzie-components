@@ -1,9 +1,8 @@
 import isAppboyInitialised from './utils/isAppboyInitialised';
-import { LogService } from './services/logging/logging.service';
-import GetConsumerRegistry from './services/BrazeConsumerRegistry';
-import { removeDuplicateContentCards } from './services/utils';
-import transformCardData from './services/utils/transformCardData';
+import { removeDuplicateContentCards } from './utils';
+import transformCardData from './utils/transformCardData';
 import areCookiesPermitted from './utils/areCookiesPermitted';
+import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME } from './types/events';
 
 /* braze event handler callbacks */
 
@@ -13,7 +12,7 @@ import areCookiesPermitted from './utils/areCookiesPermitted';
  * @this BrazeDispatcher
  */
 function interceptInAppMessageClickEventsHandler (message) {
-    this.consumerRegistry.applyInAppMessageClickEventsCallbacks(message);
+    this.eventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
 }
 
 /**
@@ -32,7 +31,7 @@ function interceptInAppMessagesHandler (message) {
                  * as this is always "success" as opposed to "dismiss"
                  * as confirmed with CRM (AS)
                  */
-                this.consumerRegistry.applyInAppMessageCallbacks(message);
+                this.eventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
                 if (message.buttons && message.buttons.length >= 2) {
                     const [, button] = message.buttons;
                     // Note that the below subscription returns an ID that could later be used to unsubscribe
@@ -58,7 +57,7 @@ function contentCardsHandler (postCardsAppboy) {
 
     const cards = removeDuplicateContentCards(rawCards.map(transformCardData));
 
-    this.consumerRegistry.applyContentCardCallbacks(cards);
+    this.eventStream.publish(CONTENT_CARDS_EVENT_NAME, cards);
 
     this.rawCards = rawCards;
 
@@ -66,36 +65,14 @@ function contentCardsHandler (postCardsAppboy) {
 }
 
 /* BrazeDispatcher */
-
-let dispatcherInstance;
-
 class BrazeDispatcher {
-    /**
-     * Static constructor to store one instance of BrazeDispatcher per js env
-     * @param {Number} sessionTimeoutInSeconds
-     * @return {BrazeDispatcher}
-     * @constructor
-     */
-    static GetDispatcher (sessionTimeoutInSeconds) {
-        if (!dispatcherInstance) {
-            dispatcherInstance = new BrazeDispatcher(sessionTimeoutInSeconds);
-        }
-        return dispatcherInstance;
-    }
-
     /**
      * Sets defaults, checks environment, checks for reinstantiation
      * @param {Number} sessionTimeoutInSeconds
+     * @param {DispatcherEventStream} eventStream
      */
-    constructor (sessionTimeoutInSeconds) {
+    constructor (sessionTimeoutInSeconds, eventStream) {
         if (typeof window === 'undefined') throw new Error('window is not defined');
-
-        if (dispatcherInstance && dispatcherInstance !== this) {
-            throw new Error('do not instantiate more than one instance of BrazeDispatcher');
-        }
-        dispatcherInstance = this;
-
-        this.consumerRegistry = GetConsumerRegistry();
 
         this.appboyPromise = null;
 
@@ -112,6 +89,8 @@ class BrazeDispatcher {
         this.eventSignifier = 'BrazeContent';
 
         this.loggerCallbackInstances = [];
+
+        this.eventStream = eventStream;
     }
 
     /**
@@ -122,15 +101,11 @@ class BrazeDispatcher {
      * @param {Object} options
      * @return {Promise<null|*>}
      */
-
-    // TODO change this to be have the following apiKey, userId, consumerOptions
-
     async configure (options = {}) {
         const {
             apiKey,
             userId,
-            enableLogging,
-            loggerCallbacks = {}
+            enableLogging
         } = options;
 
         if (!this.dispatcherOptions) {
@@ -141,11 +116,6 @@ class BrazeDispatcher {
         } else if (!(apiKey === this.dispatcherOptions.apiKey && userId === this.dispatcherOptions.userId)) {
             throw new Error('attempt to reinitialise appboy with different parameters');
         }
-
-        // TODO figure out how we want to handle this with the consumer registry
-        Object.keys(loggerCallbacks).forEach(key => {
-            this.loggerCallbackInstances.push((new LogService(loggerCallbacks[key])));
-        });
 
         window.dataLayer = window.dataLayer || [];
 
@@ -276,19 +246,6 @@ class BrazeDispatcher {
             }
         });
     }
-
-    /**
-     * Logger for braze dispatcher, utilizes a logging class to call the call back based on type
-     * @param type - Function name being called on the class ( should be in ['info', 'warn', 'error'])
-     * @param {string} logMessage - Describe what happened
-     * @param {object} [payload={}] - Any additional properties you want to add to the logs
-     */
-    logger (type, logMessage, payload) {
-        this.loggerCallbackInstances.forEach(instance => {
-            // eslint-disable-next-line no-unused-expressions
-            instance[type] && instance[type](logMessage, payload);
-        });
-    }
 }
 
-export default BrazeDispatcher.GetDispatcher;
+export default BrazeDispatcher;

@@ -1,49 +1,66 @@
 import GetConsumerRegistry from './services/BrazeConsumerRegistry';
-import GetDispatcher from './BrazeDispatcher';
-
-/**
- * sessionTimeoutInSeconds
- * Set session timeout to 0 in order to avoid caching issues with Braze
- * @type {number}
- */
-export const sessionTimeoutInSeconds = 0;
 
 export default class BrazeAdapter {
-    /**
-     * Return the instance of the consumer that has been registered
-     * @returns {BrazeConsumer}
-     */
-    get consumerInstance () {
-        return this._consumer;
-    }
-
-    /**
-     * Return the dispatcher to perform card click events
-     * @returns {BrazeConsumer}
-     */
     get dispatcher () {
-        return this._consumer;
+        return this._consumerRegistry.dispatcher;
     }
 
-    constructor () {
-        // create the consumer registry
-        this._consumerRegistry = GetConsumerRegistry();
-        // create the dispatcher
-        this._dispatcher = GetDispatcher(sessionTimeoutInSeconds);
+    constructor ({
+        apiKey,
+        userId,
+        enableLogging,
+        sessionTimeout,
+        enabledCardTypes,
+        brands,
+        callbacks,
+        interceptInAppMessages,
+        interceptInAppMessageClickEvents,
+        customFilters
+    }) {
+        // create / get the registry
+        this._consumerRegistry = GetConsumerRegistry({
+            apiKey,
+            userId,
+            enableLogging,
+            sessionTimeout
+        });
+        // register the consumer
+        this._consumer = this._consumerRegistry.register({
+            enabledCardTypes,
+            brands,
+            callbacks,
+            interceptInAppMessages,
+            interceptInAppMessageClickEvents,
+            customFilters
+        });
     }
 
     /**
-     * Configure the dispatcher and register this instance as a consumer in the consumer registry
-     * @param options
-     * @returns {Promise<void>}
+     * Pushes events to the GTM datalayer, for now this is using the dispatcher directly
+     * TODO use the dispatcher event stream to publish events
+     * @param pushToDataLayer
+     * @param payload
      */
-    async initialise (options) {
-        try {
-            this._consumer = this._consumerRegistry.register(options);
-            await this._dispatcher.configure(options);
-        } catch (error) {
-            throw new Error(`An error occurred while loading the component: ${error}`);
-        }
+    pushShapedEventToDataLayer (pushToDataLayer, payload) {
+        this.dispatcher.pushShapedEventToDataLayer(pushToDataLayer, payload);
+    }
+
+    /**
+     * Reports card click interaction to Dispatcher
+     * TODO use the dispatcher event stream to publish events
+     * @param cardId
+     */
+    logCardClick (cardId) {
+        this.dispatcher.logCardClick(cardId);
+    }
+
+    /**
+     * Reports card impressions interaction to Dispatcher
+     * TODO use the dispatcher event stream to publish events
+     * @param cardIds
+     */
+    logCardImpressions (cardIds) {
+        this.dispatcher.logCardImpressions(cardIds);
     }
 
     /**
