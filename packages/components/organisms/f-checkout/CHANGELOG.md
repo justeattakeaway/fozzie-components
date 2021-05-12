@@ -14,7 +14,6 @@ v0.107.0
 
 Latest – to be added to the next release
 ------------------------------
-
 *May 11, 2021*
 ### Fixed
 - `Resturant` to `Restaurant` typo in `en-GB.js` copy text.
