@@ -44,6 +44,31 @@ describe('Logo', () => {
         expect(logo).toBeDefined();
     });
 
+    it('should disable the logo link if linkDisabled prop is provided', () => {
+        const $style = {
+            disabled: 'disabled'
+        };
+        // Arrange
+        const propsData = {
+            theme: 'je',
+            companyName: 'Just Eat',
+            linkDisabled: true
+        };
+
+        // Act
+        const wrapper = shallowMount(Logo, {
+            propsData,
+            mocks: {
+                $style
+            }
+        });
+
+        const logo = wrapper.find('a');
+
+        // Assert
+        expect(logo.classes()).toContain('disabled');
+    });
+
     describe('header logo :: ', () => {
         const $style = {
             'c-logo-img--alt': 'c-logo-img--alt'

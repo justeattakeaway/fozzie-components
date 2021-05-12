@@ -1,8 +1,8 @@
 import {
     withKnobs, boolean, select, object
 } from '@storybook/addon-knobs';
-import VueHeader from '../src/components/Header.vue';
 import { withA11y } from '@storybook/addon-a11y';
+import VueHeader from '../src/components/Header.vue';
 
 const userInfo = {
     friendlyName: 'John',
@@ -26,6 +26,9 @@ export const HeaderComponent = () => ({
     props: {
         locale: {
             default: select('Locale', ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
+        },
+        logoLinkDisabled: {
+            default: boolean('Disable logo link', false)
         },
         showOffersLink: {
             default: boolean('Show offers link', false)
@@ -58,6 +61,7 @@ export const HeaderComponent = () => ({
             :showOffersLink="showOffersLink"
             :showHelpLink="showHelpLink"
             :locale="locale"
+            :logoLinkDisabled="logoLinkDisabled"
             :headerBackgroundTheme="headerBackgroundTheme"
             :showDeliveryEnquiry="showDeliveryEnquiry"
             :showLoginInfo="showLoginInfo"

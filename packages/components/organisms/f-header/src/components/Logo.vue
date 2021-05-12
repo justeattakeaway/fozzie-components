@@ -2,7 +2,11 @@
     <a
         :aria-label="linkAltText"
         href="/"
-        :class="$style['c-logo']"
+        :aria-disabled="linkDisabled"
+        :class="[
+            $style['c-logo'],
+            { [$style['disabled']]: linkDisabled }
+        ]"
         :data-trak='`{
             "trakEvent": "click",
             "category": "engagement",
@@ -40,6 +44,10 @@ export default {
         companyName: {
             type: String,
             required: true
+        },
+        linkDisabled: {
+            type: Boolean,
+            default: false
         },
         logoGtmLabel: {
             type: String,
@@ -96,6 +104,10 @@ export default {
             @include theme(ml) {
                 padding-top: 16px;
             }
+        }
+
+        &.disabled {
+            pointer-events: none;
         }
     }
 
