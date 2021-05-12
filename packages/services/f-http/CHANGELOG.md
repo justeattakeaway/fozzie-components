@@ -8,7 +8,7 @@ v0.4.1
 *May 11, 2021*
 
 ### Changed
-- Return entire response, not just response body; to support PACT tests further down the stack
+- Return status code to support PACT tests further down the stack
 
 
 v0.4.0
