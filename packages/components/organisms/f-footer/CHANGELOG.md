@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.21.0
+------------------------------
+*May 12, 2021*
+
+### Added
+- Added 3 classes so they can be targeted by css in the consumer application
 
 v4.20.0
 ------------------------------
@@ -18,7 +24,7 @@ v4.19.0
 *April 15, 2021*
 
 ### Changed
-- Expander buttons are present only for narrow screens 
+- Expander buttons are present only for narrow screens
 
 ### Added
 - Tests to cover this change
