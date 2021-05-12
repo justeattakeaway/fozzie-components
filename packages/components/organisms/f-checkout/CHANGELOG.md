@@ -4,16 +4,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.106.0
+v0.108.0
 ------------------------------
-*May 11, 2021*
+*May 12, 2021*
 
 ### Added
 - Max Length added to fields submitted to Api to match spec.
+- Trigger validation for Email, Mobile and Postcode `onBlur` event occurs
+
+
+v0.107.0
+------------------------------
+*May 12, 2021*
+
+### Changed
+- `f-button` version to fix focus state on tab.
 
 ### Fixed
 - `Resturant` to `Restaurant` typo in `en-GB.js` copy text.
-
 
 v0.104.0
 ------------------------------
