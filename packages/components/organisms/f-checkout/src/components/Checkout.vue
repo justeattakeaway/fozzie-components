@@ -68,11 +68,18 @@
                     >
                         <template #error>
                             <error-message
-                                v-if="!isTableIdentifierValid"
+                                v-if="isTableIdentifierEmpty"
                                 data-js-error-message
                                 data-test-id="error-table-identifier"
                             >
                                 {{ $t('validationMessages.tableIdentifier.requiredError') }}
+                            </error-message>
+                            <error-message
+                                v-if="isTableIdentifierExceedingMaxLength"
+                                data-js-error-message
+                                data-test-id="error-table-identifier-max-length"
+                            >
+                                {{ $t('validationMessages.tableIdentifier.maxLengthError') }}
                             </error-message>
                         </template>
                     </form-field>
@@ -111,7 +118,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate';
-import { required, email } from 'vuelidate/lib/validators';
+import { required, email, maxLength } from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -326,14 +333,13 @@ export default {
             return !this.$v.customer.mobileNumber.$dirty || this.$v.customer.mobileNumber.isValidPhoneNumber;
         },
 
-        isTableIdentifierValid () {
-            /*
-            * Validation methods return true if the validation conditions
-            * have not been met and the field has been `touched` by a user.
-            * The $dirty boolean changes to true when the user has focused/lost
-            * focus on the input field.
-            */
-            return !this.$v.tableIdentifier.$dirty || this.$v.tableIdentifier.isValidTableIdentifier;
+        isTableIdentifierEmpty () {
+            console.log(this.$v.tableIdentifier);
+            return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
+        },
+
+        isTableIdentifierExceedingMaxLength () {
+            return !this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.maxLength;
         },
 
         isCheckoutMethodDelivery () {
@@ -865,10 +871,6 @@ export default {
             return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
         },
 
-        isValidTableIdentifier () {
-            return validations.isValidTableIdentifier(this.tableIdentifier);
-        },
-
         /**
          * Use postcode validation in `f-services` to check if customer postcode is
          * valid in current locale
@@ -892,17 +894,21 @@ export default {
     },
 
     validations () {
-        const deliveryDetails = {
+        const validationProperties = {
             customer: {
                 mobileNumber: {
                     isValidPhoneNumber: this.isValidPhoneNumber
                 }
+            },
+            tableIdentifier: {
+                required,
+                maxLength: maxLength(100)
             }
         };
 
         if (!this.isLoggedIn) {
-            deliveryDetails.customer = {
-                ...deliveryDetails.customer,
+            validationProperties.customer = {
+                ...validationProperties.customer,
                 firstName: {
                     required
                 },
@@ -917,7 +923,7 @@ export default {
         }
 
         if (this.isCheckoutMethodDelivery) {
-            deliveryDetails.address = {
+            validationProperties.address = {
                 line1: {
                     required
                 },
@@ -931,15 +937,7 @@ export default {
             };
         }
 
-        const otherValidators = {
-            tableIdentifier: {
-                required,
-                isValidTableIdentifier: this.isValidTableIdentifier
-            }
-
-        };
-
-        return { ...otherValidators, ...deliveryDetails };
+        return validationProperties;
     }
 };
 </script>

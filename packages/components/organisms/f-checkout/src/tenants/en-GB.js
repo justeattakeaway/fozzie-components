@@ -37,7 +37,8 @@ const messages = {
             requiredError: 'Please enter a valid email address'
         },
         tableIdentifier: {
-            requiredError: 'Please enter a table number'
+            requiredError: 'Please enter a table number',
+            maxLengthError: 'The table number/name exceeds the maximum length (100)'
         }
     },
 
