@@ -74,6 +74,7 @@ The props that can be defined are as follows:
 | errorLog                  | `Function`    | `-`    | Function passed in for logging errors with the `fetchUserInfo` method. |
 | headerBackgroundTheme     | `String`      | `white` | Sets the background theme for the header component.<br><br>When set to `white` the header will be white with the default logo colour.<br>When set to `transparent` the header will be transparent with a white logo.<br>When set to `highlight` the header will use the primary brand colour as the background colour with a white logo. |
 | isOrderCountSupported     | `Boolean`     | `true` | ?? |
+| isLogoLinkDisabled        | `Boolean`     | `false` | Whether the company logo is disabled from allowing the user to navigate home
 | orderCountUrl             | `String`      | `false` | ?? |
 | showDeliveryEnquiry       | `Boolean`     | `false` | Defines if it is necessary to show the "Deliver with Just Eat" link in the header. |
 | showOffersLink            | `Boolean`     | `false` | Defines whether the offers link should be shown in the navigation. |
