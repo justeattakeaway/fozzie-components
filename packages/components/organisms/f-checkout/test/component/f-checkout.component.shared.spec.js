@@ -37,23 +37,23 @@ describe('f-checkout component tests - @browserstack', () => {
     });
 
     forEach([
-        ['addressLine1', 255],
-        ['addressLine1', 255],
-        ['addressLocality', 50],
-        ['addressPostcode', 50],
-        ['mobileNumber', 16],
-        ['userNote', 200]
+        [255, 'addressLine1'],
+        [255, 'addressLine2'],
+        [50, 'addressLocality'],
+        [50, 'addressPostcode'],
+        [16, 'mobileNumber'],
+        [200, 'userNote']
     ])
-    .it('should prevent a user from entering more characters than allowed in a field', (field, maxlength) => {
+    .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
         // Arrange
         checkout.clearCheckoutForm(field);
         const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
         // Act
-        checkout.setField(field, userEntry);
+        checkout.setFieldValue(field, userEntry);
 
         // Assert
-        expect(checkout.getField(field).length).toEqual(maxlength);
+        expect(checkout.getFieldValue(field).length).toEqual(maxlength);
     });
 
     it.skip('should enable a user to submit without adding a note', () => {

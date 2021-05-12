@@ -30,19 +30,19 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
     });
 
     forEach([
-        ['firstName', 100],
-        ['lastName', 100],
-        ['userNote', 200]
+        [100, 'firstName'],
+        [100, 'lastName'],
+        [200, 'userNote']
     ])
-    .it('should prevent a user from entering more characters than allowed in a field', (field, maxlength) => {
+    .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
         // Arrange
         checkout.clearCheckoutForm(field);
         const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
         // Act
-        checkout.setField(field, userEntry);
+        checkout.setFieldValue(field, userEntry);
 
         // Assert
-        expect(checkout.getField(field).length).toEqual(maxlength);
+        expect(checkout.getFieldValue(field).length).toEqual(maxlength);
     });
 });

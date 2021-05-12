@@ -276,7 +276,7 @@ module.exports = class Checkout extends Page {
      * @param {String} Field name
      * @param {String} Value to set
      */
-    setField (fieldName, value) {
+    setFieldValue (fieldName, value) {
         this.fields[fieldName].input.setValue(value);
     }
 
@@ -288,7 +288,7 @@ module.exports = class Checkout extends Page {
     *
     * @returns {String} The value of the field
     */
-    getField (fieldName) {
+    getFieldValue (fieldName) {
         return this.fields[fieldName].input.getValue();
     }
 
