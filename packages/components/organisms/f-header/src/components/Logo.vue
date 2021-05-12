@@ -1,7 +1,6 @@
 <template>
     <component
         :is="wrapperComponent"
-        :aria-label="linkAltText"
         :class="$style['c-logo']"
         v-bind="linkProperties">
         <component
