@@ -87,7 +87,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
     });
 
-    it('should not display the error summary', () => {
+    it('should hide the error summary when user submits invalid fields', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '',
