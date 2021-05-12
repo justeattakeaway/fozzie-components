@@ -45,14 +45,13 @@
                         input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
-                        @input="updateCustomerDetails({ mobileNumber: $event })"
-                    >
+                        @blur="formFieldBlur('mobileNumber')"
+                        @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
                                 v-if="!isMobileNumberValid"
                                 data-js-error-message
-                                data-test-id="error-mobile-number"
-                            >
+                                data-test-id="error-mobile-number">
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
                             </error-message>
                         </template>
@@ -840,6 +839,13 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, this.spinnerTimeout);
+        },
+
+        formFieldBlur (field) {
+            const fieldValidation = this.$v.customer[field];
+            if (fieldValidation) {
+                fieldValidation.$touch();
+            }
         }
     },
 

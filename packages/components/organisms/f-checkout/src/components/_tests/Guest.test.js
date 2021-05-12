@@ -49,10 +49,8 @@ describe('Guest', () => {
         const isFieldEmptySpy = jest.spyOn(checkoutValidationsMixin.methods, 'isFieldEmpty');
         const type = VALIDATIONS.guest;
 
-        let wrapper;
-
         beforeEach(() => {
-            wrapper = mount(Guest, {
+            mount(Guest, {
                 i18n,
                 store: createStore(),
                 localVue,
@@ -69,38 +67,10 @@ describe('Guest', () => {
 
         it.each([
             ['isFirstNameEmpty', 'firstName'],
-            ['isLastNameEmpty', 'lastName'],
-            ['isEmailValid', 'email']
+            ['isLastNameEmpty', 'lastName']
         ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
             // Assert
             expect(isFieldEmptySpy).toHaveBeenCalledWith(type, field);
-        });
-
-        describe('isEmailValid ::', () => {
-            it.each([
-                [true, true, false],
-                [false, true, true],
-                [false, false, false],
-                [false, false, true]
-            ])('should return %s if email.email = %s and `isFieldEmpty` returns %s for email field', (expected, email, isEmpty) => {
-                // Arrange
-                $v[VALIDATIONS.guest].email.email = email;
-                isFieldEmptySpy.mockReturnValue(isEmpty);
-
-                // Act
-                wrapper = shallowMount(Guest, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData,
-                    provide: () => ({
-                        $v
-                    })
-                });
-
-                // Assert
-                expect(wrapper.vm.isEmailValid).toEqual(expected);
-            });
         });
     });
 
