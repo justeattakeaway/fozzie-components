@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.33.0
+------------------------------
+*May 12, 2021*
+
+### Changed
+- Limited the check for common.scss files to be only inside the repo
+
+
 v0.32.0
 ------------------------------
 *May 5, 2021*
