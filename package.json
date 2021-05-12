@@ -5,6 +5,7 @@
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
     "bundlewatch": "cross-env-shell \"yarn build && bundlewatch --config bundlewatch.config.js\"",
+    "cm": "git commit --no-edit",
     "lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --stream\"",
     "lint:fix": "lerna run lint -- --fix",
     "lint:style": "lerna run lint:style --stream",
@@ -32,6 +33,10 @@
     "@babel/plugin-proposal-class-properties": "7.12.1",
     "@babel/plugin-proposal-optional-chaining": "7.10.4",
     "@babel/preset-env": "7.10.4",
+    "@commitlint/cli": "12.1.1",
+    "@commitlint/config-conventional": "12.1.1",
+    "@commitlint/config-lerna-scopes": "12.1.1",
+    "@commitlint/cz-commitlint": "12.1.4",
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/fozzie": "5.0.0-beta.3",
@@ -62,14 +67,18 @@
     "babel-loader": "8.1.0",
     "bundlewatch": "0.3.1",
     "chromedriver": "90.0.0",
+    "commitizen": "4.2.3",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
+    "cz-conventional-changelog": "3.3.0",
     "danger": "10.2.1",
     "eslint": "6.8.0",
     "eslint-import-resolver-webpack": "0.12.2",
     "eslint-plugin-vue": "6.2.2",
     "eslint-plugin-vuejs-accessibility": "0.6.0",
+    "execa": "5.0.0",
     "eyeglass": "3.0.2",
+    "git-cz": "4.7.6",
     "husky": "6.0.0",
     "include-media": "1.4.9",
     "lerna": "3.22.1",
@@ -109,6 +118,11 @@
   },
   "stylelint": {
     "extends": "@justeat/stylelint-config-fozzie"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   },
   "workspaces": [
     "packages/*",
