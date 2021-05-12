@@ -354,9 +354,9 @@ describe('Checkout', () => {
                 // touchSpy = jest.spyOn($v, '$touch');
             });
 
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
+            // afterEach(() => {
+            //     jest.clearAllMocks();
+            // });
 
             it('should return `null` if no fields have been touched', () => {
                 $v.$dirty = false;
@@ -373,7 +373,7 @@ describe('Checkout', () => {
                 expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
             });
 
-            it('should return with an error summary in fields are invalid');
+            // it('should return with an error summary in fields are invalid');
 
             // it.only('should return error summary if all fields have been touched and are invalid', () => {
             //     $v.$dirty = true;
