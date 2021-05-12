@@ -12,7 +12,7 @@
   "command": {
     "version": {
       "conventionalCommits": true,
-      "message": "⬆️ chore: automated version bump via lerna"
+      "message": "release: automated version bump via lerna"
     }
   },
   "changelogPreset": "angular",

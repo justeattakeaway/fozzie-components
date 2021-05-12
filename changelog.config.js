@@ -30,6 +30,7 @@ module.exports = {
         'docs',
         'perf',
         'refactor',
+        'release',
         'style',
         'test'
     ],
@@ -73,6 +74,11 @@ module.exports = {
             description: 'A code change that neither fixes a bug or adds a feature',
             emoji: '🎨',
             value: 'refactor'
+        },
+        release: {
+            description: 'Create a release commit',
+            emoji: '⬆️',
+            value: 'release'
         },
         style: {
             description: 'Markup, white-space, formatting, missing semi-colons...',
