@@ -50,7 +50,6 @@
             :has-error="!isEmailValid"
             aria-describedby="email-error"
             :aria-invalid="!isEmailValid"
-            @blur="formFieldBlur('email')"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
@@ -108,21 +107,14 @@ export default {
         * Checks that email field is not empty and is a valid email address.
         */
         isEmailValid () {
-            return !this.$v[VALIDATIONS.guest].email.$dirty || this.$v[VALIDATIONS.guest].email.isEmailValid;
+            return !this.isFieldEmpty(VALIDATIONS.guest, 'email') && this.$v[VALIDATIONS.guest].email.email;
         }
     },
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateCustomerDetails'
-        ]),
-
-        formFieldBlur (field) {
-            const fieldValidation = this.$v[VALIDATIONS.guest][field];
-            if (fieldValidation) {
-                fieldValidation.$touch();
-            }
-        }
+        ])
     }
 };
 </script>

@@ -57,7 +57,6 @@
                         :has-error="!isMobileNumberValid"
                         aria-describedby="mobile-number-error"
                         :aria-invalid="!isMobileNumberValid"
-                        @blur="formFieldBlur('mobileNumber')"
                         @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
@@ -863,13 +862,6 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, this.spinnerTimeout);
-        },
-
-        formFieldBlur (field) {
-            const fieldValidation = this.$v.customer[field];
-            if (fieldValidation) {
-                fieldValidation.$touch();
-            }
         }
     },
 

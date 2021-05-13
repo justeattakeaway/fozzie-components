@@ -68,7 +68,6 @@
             :has-error="!isAddressPostcodeValid"
             aria-describedby="postcode-error"
             :aria-invalid="!isAddressPostcodeValid"
-            @blur="formFieldBlur('postcode')"
             @input="updateAddressDetails({ ['postcode']: $event })">
             <template #error>
                 <error-message
@@ -144,14 +143,7 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateAddressDetails'
-        ]),
-
-        formFieldBlur (field) {
-            const fieldValidation = this.$v[VALIDATIONS.address][field];
-            if (fieldValidation) {
-                fieldValidation.$touch();
-            }
-        }
+        ])
     }
 };
 </script>
