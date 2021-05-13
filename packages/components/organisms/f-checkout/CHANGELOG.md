@@ -12,6 +12,14 @@ v0.111.0
 - Max Length added to fields submitted to Api to match spec.
 
 
+v0.110.0
+------------------------------
+*May 13, 2021*
+
+### Changed
+- Display 'Please enter your phone number' when the mobile number field is empty, and invalid phone message when the field is invalid but not empty
+
+
 v0.109.0
 ------------------------------
 *May 13, 2021*
