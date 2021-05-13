@@ -67,7 +67,19 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', 'shared');
     });
 
+    it('should display the illegal mobile number error message', () => {
+        // Arrange
+        const mobileNumberInfo = {
+            mobileNumber: '123'
+        };
 
+        // Act
+        checkout.populateCollectionCheckoutForm(mobileNumberInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Illegal Mobile Number Error State', 'shared');
+    });
 });
 
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Visual Tests', () => {
@@ -131,6 +143,20 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Postcode Error State', 'shared');
+    });
+
+    it('should display the illegal mobile number error message', () => {
+        // Arrange
+        const mobileNumberInfo = {
+            mobileNumber: '123'
+        };
+
+        // Act
+        checkout.populateCheckoutForm(mobileNumberInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', 'shared');
     });
 });
 
