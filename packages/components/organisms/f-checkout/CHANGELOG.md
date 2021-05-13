@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.112.0
+------------------------------
+*May 12, 2021*
+
+### Fixed
+- mobile view for alert and t&Cs box.
+
+
 v0.109.0
 ------------------------------
 *May 13, 2021*
@@ -10,14 +18,6 @@ v0.109.0
 ### Added
 - `aria-describedby` and `aria-invalid` for all input fields - for reading error messages
 - hidden `error-summary-section` in checkout to alert errors after submit button (resembles f-registration)
-
-
-v0.112.0
-------------------------------
-*May 12, 2021*
-
-### Fixed
-- mobile view for alert and t&Cs box.
 
 
 v0.108.0
