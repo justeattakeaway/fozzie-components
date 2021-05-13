@@ -12,6 +12,15 @@
     "time": {
       "from": "2020-01-01T00:00+00:00",
       "to": "2020-01-01T00:00+00:00"
+    },
+    "location": {
+      "address": {
+        "lines": null,
+        "locality": null,
+        "administrativeArea": null,
+        "postalCode": null
+      },
+      "geolocation": null
     }
   },
   "isFulfillable": true,

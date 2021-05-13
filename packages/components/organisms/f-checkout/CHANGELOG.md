@@ -13,6 +13,14 @@ v0.111.0
 - Trigger validation for Email, Mobile and Postcode `onBlur` event occurs
 
 
+v0.108.0
+------------------------------
+*May 13, 2021*
+
+### Fixed
+- Error when Checkout endpoint returns address with lines set to `null`
+
+
 v0.107.0
 ------------------------------
 *May 12, 2021*

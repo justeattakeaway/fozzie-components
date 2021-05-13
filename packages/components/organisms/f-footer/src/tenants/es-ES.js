@@ -227,6 +227,13 @@ export default {
                     url: 'https://www.just-eat.es/euro2020/terms/',
                     text: 'Ganar entradas - Términos y condiciones',
                     gtm: 'click_euro2020_términos'
+                },
+                {
+                    url: 'mailto:prensa@justeattakeaway.com',
+                    target: '_blank',
+                    rel: 'noopener',
+                    text: 'Prensa',
+                    gtm: 'click_prensa'
                 }
             ]
         }
