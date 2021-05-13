@@ -485,6 +485,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(errorSummaryContainer.exists()).toBe(true);
+                expect(errorSummaryContainer.classes('is-visuallyHidden')).toBe(true);
             });
         });
 

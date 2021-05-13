@@ -86,23 +86,4 @@ describe('f-checkout component tests - @browserstack', () => {
         // Assert
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
     });
-
-    it('should hide the error summary when user submits invalid fields', () => {
-        // Arrange
-        const addressInfo = {
-            mobileNumber: '',
-            line1: 'Test House',
-            line2: 'High Street',
-            locality: 'Test Locality',
-            postcode: 'AR51 1AA',
-            note: 'Doorbell is broken'
-        };
-
-        // Act
-        checkout.populateCheckoutForm(addressInfo);
-        checkout.goToPayment();
-
-        // Arrange
-        expect(checkout.isErrorSummaryVisible()).toBe(false);
-    });
 });
