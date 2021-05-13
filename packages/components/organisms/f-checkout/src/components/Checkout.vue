@@ -36,7 +36,17 @@
                     :class="$style['c-checkout-form']"
                     @submit.prevent="onFormSubmit"
                 >
-                    <guest-block v-if="!isLoggedIn" />
+                    <section
+                        v-if="invalidFieldsSummary"
+                        class="is-visuallyHidden"
+                        role="alert"
+                        data-test-id="error-summary-container">
+                        {{ invalidFieldsSummary }}
+                    </section>
+
+                    <guest-block
+                        v-if="!isLoggedIn"
+                    />
 
                     <form-field
                         :value="customer.mobileNumber"
@@ -45,11 +55,14 @@
                         input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
+                        aria-describedby="mobile-number-error"
+                        :aria-invalid="!isMobileNumberValid"
                         @blur="formFieldBlur('mobileNumber')"
                         @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
                                 v-if="!isMobileNumberValid"
+                                id="mobile-number-error"
                                 data-js-error-message
                                 data-test-id="error-mobile-number">
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
@@ -355,6 +368,17 @@ export default {
                 },
                 content: this.message
             };
+        },
+
+        invalidFieldsSummary () {
+            const invalidFieldCount = this.$v.$dirty
+                && validations.getFormValidationState(this.$v).invalidFields.length;
+
+            if (!invalidFieldCount) return null;
+
+            return invalidFieldCount === 1 ?
+                this.$t('errorMessages.singleFieldError') :
+                this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
         }
     },
 
