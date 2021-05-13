@@ -374,9 +374,7 @@ export default {
             const invalidFieldCount = this.$v.$dirty
                 && validations.getFormValidationState(this.$v).invalidFields.length;
 
-            if (!invalidFieldCount) {
-                return null;
-            }
+            if (!invalidFieldCount) return null;
 
             return invalidFieldCount === 1 ?
                 this.$t('errorMessages.singleFieldError') :
