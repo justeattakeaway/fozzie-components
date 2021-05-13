@@ -31,7 +31,7 @@ export const FIELDS = {
     },
     mobileNumber: {
         input: '[data-test-id="formfield-mobile-number-input"]',
-        error: '[data-test-id="error-mobile-number-empty"]',
+        emptyError: '[data-test-id="error-mobile-number-empty"]',
         invalidError: '[data-test-id="error-mobile-number-invalid"]'
     },
     addressLine1: {
