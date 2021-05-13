@@ -69,6 +69,7 @@
                             </error-message>
                             <error-message
                                 v-if="isMobileNumberInvalid"
+                                id="mobile-number-error"
                                 data-js-error-message
                                 data-test-id="error-mobile-number-invalid"
                             >
