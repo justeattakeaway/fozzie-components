@@ -1,8 +1,7 @@
 module.exports = {
     stories: [
-        // '../../../**/*.stories.@(js|mdx)',
-        // '../../../../stories/**/*.stories.@(js|mdx)'
-        '../../../components/organisms/f-checkout/stories/Checkout.stories'
+        '../../../**/*.stories.@(js|mdx)',
+        '../../../../stories/**/*.stories.@(js|mdx)'
     ],
     addons: [
         '@storybook/addon-essentials',
