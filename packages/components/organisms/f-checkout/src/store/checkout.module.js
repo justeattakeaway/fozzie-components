@@ -415,7 +415,7 @@ export default {
 
             state.time = fulfilment.time;
 
-            if (fulfilment.location && fulfilment.location.address) {
+            if (fulfilment.location && fulfilment.location.address && fulfilment.location.address.lines) {
                 const { address } = fulfilment.location;
                 /* eslint-disable prefer-destructuring */
                 state.address.line1 = address.lines[0];

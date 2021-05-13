@@ -5,6 +5,7 @@
         data-test-id="footer-component">
         <div
             :class="[
+                'c-footer-row-linkLists',
                 $style['c-footer-container'],
                 $style['c-footer-row'],
                 $style['c-footer-row--noPadBelowWide']
@@ -22,6 +23,7 @@
                     v-if="copy.linkButtonList.length && showCourierLinks"
                     data-test-id="courierLinks-wrapper"
                     :class="[
+                        'c-footer-row-partnerLinks',
                         $style['c-footer-row'],
                         $style['c-footer-row--noBottomPad']
                     ]">
@@ -31,7 +33,11 @@
                         :button-list="buttonList" />
                 </div>
 
-                <div :class="$style['c-footer-row']">
+                <div
+                    :class="[
+                        'c-footer-row-socialLinks',
+                        $style['c-footer-row']
+                    ]">
                     <icon-list
                         :title="copy.downloadOurApps"
                         :icons="copy.appStoreIcons"
