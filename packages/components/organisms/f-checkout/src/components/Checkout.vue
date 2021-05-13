@@ -908,8 +908,9 @@ export default {
     @include media('<=narrow') {
         border: none;
         padding-top: spacing(x3);
-        padding-bottom: spacing(x5);
+        padding-bottom: 0;
         margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -921,6 +922,12 @@ export default {
     width: $checkout-width;
     margin-left: auto;
     margin-right: auto;
+
+    @include media('<=narrow') {
+        width: Calc(
+            $checkout-width - 120px
+        ); // Matches the padding and margin of `f-card`
+    }
 }
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
