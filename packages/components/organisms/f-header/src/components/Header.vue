@@ -17,6 +17,7 @@
             <logo
                 :theme="theme"
                 :company-name="copy.companyName"
+                :is-logo-disabled="isLogoLinkDisabled"
                 :logo-gtm-label="copy.logo.gtm"
                 :header-background-theme="headerBackgroundTheme"
                 :is-open="mobileNavIsOpen" />
@@ -74,6 +75,11 @@ export default {
         isOrderCountSupported: {
             type: Boolean,
             default: true
+        },
+
+        isLogoLinkDisabled: {
+            type: Boolean,
+            default: false
         },
 
         orderCountUrl: {

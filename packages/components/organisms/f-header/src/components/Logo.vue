@@ -1,14 +1,8 @@
 <template>
-    <a
-        :aria-label="linkAltText"
-        href="/"
+    <component
+        :is="wrapperComponent"
         :class="$style['c-logo']"
-        :data-trak='`{
-            "trakEvent": "click",
-            "category": "engagement",
-            "action": "header",
-            "label": "${logoGtmLabel}"
-        }`'>
+        v-bind="linkProperties">
         <component
             :is="iconComponent"
             :class="[
@@ -18,7 +12,7 @@
             ]"
             :data-theme-logo="iconClassName"
             data-test-id="header-logo" />
-    </a>
+    </component>
 </template>
 
 <script>
@@ -39,6 +33,10 @@ export default {
         },
         companyName: {
             type: String,
+            required: true
+        },
+        isLogoDisabled: {
+            type: Boolean,
             required: true
         },
         logoGtmLabel: {
@@ -64,11 +62,29 @@ export default {
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
         },
+        linkProperties () {
+            return this.isLogoDisabled ? {
+                'data-test-id': 'disabled-wrapper-element'
+            } : {
+                'data-test-id': 'wrapper-element',
+                'aria-label': this.linkAltText,
+                href: '/',
+                'data-trak': `{
+                    "trakEvent": "click",
+                    "category": "engagement",
+                    "action": "header",
+                    "label": "${this.logoGtmLabel}"
+                }`
+            };
+        },
         isAltLogo () {
             const isHighlight = this.headerBackgroundTheme === 'highlight';
             const isTransparent = this.headerBackgroundTheme === 'transparent';
 
             return isHighlight || (isTransparent && !this.isOpen);
+        },
+        wrapperComponent () {
+            return this.isLogoDisabled ? 'span' : 'a';
         }
     }
 };
