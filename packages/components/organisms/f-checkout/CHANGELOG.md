@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.110.0
 ------------------------------
-*May 12, 2021*
+*May 13, 2021*
 
 ### Changed
 - Display 'Please enter your phone number' when the mobile number field is empty, and invalid phone message when the field is invalid but not empty
