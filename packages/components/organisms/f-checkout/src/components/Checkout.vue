@@ -924,9 +924,7 @@ export default {
     margin-right: auto;
 
     @include media('<=narrow') {
-        width: Calc(
-            $checkout-width - 120px
-        ); // Matches the padding and margin of `f-card`
+        width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
     }
 }
 /* If these stay the same then just rename the class to something more generic */
