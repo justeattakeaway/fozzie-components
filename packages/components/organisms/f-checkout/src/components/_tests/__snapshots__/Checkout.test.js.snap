@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkout computed :: invalidFieldsSummary :: should return the error summary with the number of invalid fields when there are more than one 1`] = `"There are 4 errors in the form"`;
+
+exports[`Checkout computed :: invalidFieldsSummary :: should return the error summary with the number of invalid fields when there is only one 1`] = `"There is 1 error in the form"`;

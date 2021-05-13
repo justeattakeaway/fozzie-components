@@ -336,6 +336,159 @@ describe('Checkout', () => {
             });
         });
 
+        describe('invalidFieldsSummary ::', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+            });
+
+            it('should return `null` if no fields have been touched', () => {
+                // Arrange & Act
+                $v.$dirty = false;
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+            });
+
+            it('should return `null` if all fields have been touched and are valid', () => {
+                // Arrange
+                const mockValidationState = {
+                    invalidFields: []
+                };
+
+                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
+                $v.dirty = true;
+
+                // Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+            });
+
+            it('should return the error summary with the number of invalid fields when there are more than one', () => {
+                // Arrange
+                const mockValidationState = {
+                    invalidFields: [
+                        'customer.mobileNumber',
+                        'address.line1',
+                        'address.locality',
+                        'address.postcode'
+                    ]
+                };
+
+                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
+                $v.$dirty = true;
+
+                // Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toMatchSnapshot();
+            });
+
+            it('should return the error summary with the number of invalid fields when there is only one', () => {
+                // Arrange
+                const mockValidationState = {
+                    invalidFields: [
+                        'customer.mobileNumber'
+                    ]
+                };
+
+                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
+                $v.$dirty = true;
+
+                // Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toMatchSnapshot();
+            });
+
+            it('should not render the error summary when there are no errors', () => {
+                // Arrange & Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    },
+                    computed: {
+                        invalidFieldsSummary () {
+                            return null;
+                        }
+                    }
+                });
+
+                const errorSummaryContainer = wrapper.find('[data-test-id="error-summary-container"]');
+
+                // Assert
+                expect(errorSummaryContainer.exists()).toBe(false);
+            });
+
+            it('should render the hidden error summary when there are errors', () => {
+                // Arrange & Act
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    },
+                    computed: {
+                        invalidFieldsSummary () {
+                            return 'There are 7 errors in the form';
+                        }
+                    }
+                });
+
+                const errorSummaryContainer = wrapper.find('[data-test-id="error-summary-container"]');
+
+                // Assert
+                expect(errorSummaryContainer.exists()).toBe(true);
+                expect(errorSummaryContainer.classes('is-visuallyHidden')).toBe(true);
+            });
+        });
+
         describe('isCheckoutMethodDelivery ::', () => {
             it('should return `true` if `serviceType` is set to Delivery', () => {
                 // Arrange and Act
