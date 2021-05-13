@@ -1,14 +1,15 @@
 <template>
     <div
         data-test-id="checkout-terms-and-conditions-component"
-        :class="$style['c-checkoutTermsAndConditions']">
-        <i18n
-            path="checkoutTermsAndConditions">
+        :class="$style['c-checkoutTermsAndConditions']"
+    >
+        <i18n path="checkoutTermsAndConditions">
             <template #termsAndConditions>
                 <a
                     class="o-link--bold"
                     :href="$t('termsAndConditionsLinkUrl')"
-                    target="_blank">
+                    target="_blank"
+                >
                     <span>{{ $t('termsAndConditionsLinkText') }}</span>
                 </a>
             </template>
@@ -16,7 +17,8 @@
                 <a
                     class="o-link--bold"
                     :href="$t('privacyPolicyLinkUrl')"
-                    target="_blank">
+                    target="_blank"
+                >
                     <span>{{ $t('privacyPolicyLinkText') }}</span>
                 </a>
             </template>
@@ -24,7 +26,8 @@
                 <a
                     class="o-link--bold"
                     :href="$t('cookiePolicyLinkUrl')"
-                    target="_blank">
+                    target="_blank"
+                >
                     <span>{{ $t('cookiePolicyLinkText') }}</span>
                 </a>
             </template>
@@ -52,7 +55,7 @@
 
     @include media('<narrow') {
         width: 100vw;
-        margin-left: -(spacing(x5));
+        margin-left: -(spacing(x5)); // removes the margin of f-card
         padding: spacing(x2) spacing(x5);
     }
 }
