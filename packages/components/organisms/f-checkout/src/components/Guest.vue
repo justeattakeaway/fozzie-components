@@ -9,8 +9,7 @@
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
-            @input="updateCustomerDetails({ 'firstName': $event })"
-        >
+            @input="updateCustomerDetails({ 'firstName': $event })">
             <template #error>
                 <error-message
                     v-if="isFirstNameEmpty"
