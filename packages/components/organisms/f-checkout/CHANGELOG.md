@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.108.0
 ------------------------------
-*May 12, 2021*
+*May 13, 2021*
 
 ### Added
 - `aria-describedby` and `aria-invalid` for all input fields - for reading error messages
