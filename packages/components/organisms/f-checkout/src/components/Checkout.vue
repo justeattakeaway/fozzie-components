@@ -53,19 +53,26 @@
                         name="mobile-number"
                         input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
-                        :has-error="!isMobileNumberValid"
+                        :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
                         aria-describedby="mobile-number-error"
                         :aria-invalid="!isMobileNumberValid"
                         @input="updateCustomerDetails({ mobileNumber: $event })"
                     >
                         <template #error>
                             <error-message
-                                v-if="!isMobileNumberValid"
+                                v-if="isMobileNumberEmpty"
                                 id="mobile-number-error"
                                 data-js-error-message
-                                data-test-id="error-mobile-number"
+                                data-test-id="error-mobile-number-empty"
                             >
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
+                            </error-message>
+                            <error-message
+                                v-if="isMobileNumberInvalid"
+                                data-js-error-message
+                                data-test-id="error-mobile-number-invalid"
+                            >
+                                {{ $t('validationMessages.mobileNumber.invalidCharError') }}
                             </error-message>
                         </template>
                     </form-field>
@@ -307,14 +314,16 @@ export default {
             'userNote'
         ]),
 
-        isMobileNumberValid () {
-            /*
-            * Validation methods return true if the validation conditions
-            * have not been met and the field has been `touched` by a user.
-            * The $dirty boolean changes to true when the user has focused/lost
-            * focus on the input field.
-            */
-            return !this.$v.customer.mobileNumber.$dirty || this.$v.customer.mobileNumber.isValidPhoneNumber;
+        wasMobileNumberFocused () {
+            return this.$v.customer.mobileNumber.$dirty;
+        },
+
+        isMobileNumberEmpty () {
+            return this.wasMobileNumberFocused && !this.customer.mobileNumber;
+        },
+
+        isMobileNumberInvalid () {
+            return this.wasMobileNumberFocused && !this.isMobileNumberEmpty && !this.$v.customer.mobileNumber.isValidPhoneNumber;
         },
 
         isCheckoutMethodDelivery () {

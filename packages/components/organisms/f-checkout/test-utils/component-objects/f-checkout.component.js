@@ -70,7 +70,8 @@ module.exports = class Checkout extends Page {
         },
         mobileNumber: {
             get input () { return $(FIELDS.mobileNumber.input); },
-            get error () { return $(FIELDS.mobileNumber.error); }
+            get error () { return $(FIELDS.mobileNumber.error); },
+            get invalidError () { return $(FIELDS.mobileNumber.invalidError); }
         },
         addressLine1: {
             get input () { return $(FIELDS.addressLine1.input); },
@@ -125,6 +126,10 @@ module.exports = class Checkout extends Page {
 
     isPostcodeTypeErrorDisplayed () {
         return this.fields.addressPostcode.typeError.isDisplayed();
+    }
+
+    isMobileNumberInvalidErrorDisplayed () {
+        return this.fields.mobileNumber.invalidError.isDisplayed();
     }
 
     isOrderTimeDropdownDisplayed () {
