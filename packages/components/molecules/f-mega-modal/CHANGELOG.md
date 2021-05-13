@@ -1,3 +1,19 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 0.8.1 (2021-05-13)
+
+
+### Reverts
+
+* Revert "f-mega-modal@0.7.0 (#923)" (#929) ([3abe445](https://github.com/justeat/fozzie-components/commit/3abe4450e194e9c744c7fce279857add1911b12f)), closes [#923](https://github.com/justeat/fozzie-components/issues/923) [#929](https://github.com/justeat/fozzie-components/issues/929)
+
+
+
+
+
 # Changelog
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)

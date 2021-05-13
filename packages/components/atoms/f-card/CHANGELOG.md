@@ -1,3 +1,19 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.2.0 (2021-05-13)
+
+
+### Features
+
+* **f-card:** 🌟 added feature to story ([734653c](https://github.com/justeat/fozzie-components/commit/734653ce72e3b90fc5dbf2935c7b633b2eb96d25))
+
+
+
+
+
 # Changelog
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)

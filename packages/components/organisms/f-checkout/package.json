@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.107.0",
+  "version": "0.107.1",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -61,7 +61,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
     "@justeat/f-alert": "0.5.0",
-    "@justeat/f-button": "1.2.0",
+    "@justeat/f-button": "^1.2.1",
     "@justeat/f-card": "0.8.0",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.11.0",
