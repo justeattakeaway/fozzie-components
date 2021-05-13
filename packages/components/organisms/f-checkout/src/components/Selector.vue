@@ -6,6 +6,7 @@
         input-type="dropdown"
         :label-text="orderMethod"
         :dropdown-options="fulfilmentTimes"
+        :value="selectedAvailableFulfilmentTime"
         @input="selectionChanged">
         <template #error>
             <alert
@@ -131,6 +132,8 @@ export default {
                     from: times[0].value,
                     to: times[0].value
                 });
+
+                this.selectedAvailableFulfilmentTime = times[0].value;
             }
         },
 

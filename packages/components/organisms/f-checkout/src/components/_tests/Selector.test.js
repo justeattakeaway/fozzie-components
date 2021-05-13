@@ -290,6 +290,20 @@ describe('Selector', () => {
                             to: '2020-01-01T01:00:00.000Z'
                         });
                     });
+
+                    it('should update `selectedAvailableFulfilmentTime` with the `from` & `to` values', () => {
+                        // Arrange
+                        const times = [{
+                            text: 'Wednesday 01:00',
+                            value: '2020-01-01T01:00:00.000Z'
+                        }];
+
+                        // Act
+                        wrapper.vm.initFulfilmentTime(times);
+
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toEqual(times[0].value);
+                    });
                 });
             });
         });
