@@ -192,6 +192,25 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(state.address).toEqual(defaultState.address);
             });
+
+            it('should leave address state empty if location data is returned with empty address fields from the API.', () => {
+                // Arrange
+                checkoutDelivery.fulfilment.location = {
+                    address: {
+                        lines: null,
+                        locality: null,
+                        administrativeArea: null,
+                        postalCode: null
+                    },
+                    geolocation: null
+                };
+
+                // Act
+                mutations[UPDATE_STATE](state, checkoutDelivery);
+
+                // Assert
+                expect(state.address).toEqual(defaultState.address);
+            });
         });
 
         describe(`${UPDATE_AUTH} ::`, () => {
