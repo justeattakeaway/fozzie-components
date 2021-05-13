@@ -24,7 +24,7 @@
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
     "allure:clean": "rimraf test/results/allure",
     "prepare": "husky install",
-    "version-bump": "HUSKY_SKIP_HOOKS=1 lerna version"
+    "version-bump": "cross-env-shell HUSKY_SKIP_HOOKS=1 lerna version"
   },
   "resolutions": {
     "webpack": "4.36.0"
