@@ -63,7 +63,8 @@
                                 v-if="!isMobileNumberValid"
                                 id="mobile-number-error"
                                 data-js-error-message
-                                data-test-id="error-mobile-number">
+                                data-test-id="error-mobile-number"
+                            >
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
                             </error-message>
                         </template>
