@@ -6,10 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.112.0
 ------------------------------
-*May 13, 2021*
+*May 14, 2021*
 
 ### Added
 - Max Length added to fields submitted to Api to match spec.
+
+
+v0.111.0
+------------------------------
+*May 13, 2021*
+
+### Fixed
+- Fulfilment Times drop down not populating on startup
 
 
 v0.110.0
