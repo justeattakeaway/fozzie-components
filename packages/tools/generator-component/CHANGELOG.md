@@ -10,6 +10,9 @@ v2.2.0
 ### Fixed
 - Missing brackets on component spec.
 
+### Removed
+- DA and NO tenants.
+
 
 v2.1.0
 ------------------------------
