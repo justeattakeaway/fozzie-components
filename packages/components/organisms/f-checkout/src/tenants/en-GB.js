@@ -14,7 +14,8 @@ const messages = {
 
     validationMessages: {
         mobileNumber: {
-            requiredError: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
+            requiredError: 'Please enter your phone number',
+            invalidCharError: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
         },
         addressLine1: {
             requiredError: 'Please enter the first line of your address'

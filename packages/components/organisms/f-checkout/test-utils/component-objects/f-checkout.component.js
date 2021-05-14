@@ -70,7 +70,8 @@ module.exports = class Checkout extends Page {
         },
         mobileNumber: {
             get input () { return $(FIELDS.mobileNumber.input); },
-            get error () { return $(FIELDS.mobileNumber.error); }
+            get emptyError () { return $(FIELDS.mobileNumber.emptyError); },
+            get invalidError () { return $(FIELDS.mobileNumber.invalidError); }
         },
         addressLine1: {
             get input () { return $(FIELDS.addressLine1.input); },

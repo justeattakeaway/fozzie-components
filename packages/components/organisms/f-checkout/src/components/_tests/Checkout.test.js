@@ -296,7 +296,7 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        describe('isMobileNumberValid ::', () => {
+        describe('isMobileNumberEmpty ::', () => {
             let wrapper;
 
             beforeEach(() => {
@@ -309,30 +309,79 @@ describe('Checkout', () => {
                 });
             });
 
-            it('should return `true` if mobileNumber field has not been touched', () => {
+            it('should return `false` if mobileNumber field has not been touched', () => {
                 // Act
                 wrapper.vm.$v.customer.mobileNumber.$dirty = false;
 
                 // Assert
-                expect(wrapper.vm.isMobileNumberValid).toBeTruthy();
+                expect(wrapper.vm.isMobileNumberEmpty).toBeFalsy();
             });
 
-            it('should return `false` if mobileNumber field has been touched but mobileNumber is not valid', () => {
+            it('should return `true` if mobileNumber field has been touched but the field is empty', () => {
                 // Act
                 wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.$v.customer.mobileNumber.isValidPhoneNumber = false;
+                wrapper.vm.customer.mobileNumber = '';
 
                 // Assert
-                expect(wrapper.vm.isMobileNumberValid).toBeFalsy();
+                expect(wrapper.vm.isMobileNumberEmpty).toBeTruthy();
             });
 
-            it('should return `true` if mobileNumber field has been touched and mobileNumber is valid', () => {
+            it('should return `false` if mobileNumber field has been touched and the field is not empty', () => {
                 // Act
                 wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.$v.customer.mobileNumber.isValidPhoneNumber = true;
+                wrapper.vm.customer.mobileNumber = '123';
 
                 // Assert
-                expect(wrapper.vm.isMobileNumberValid).toBeTruthy();
+                expect(wrapper.vm.isMobileNumberEmpty).toBeFalsy();
+            });
+        });
+
+        describe('isMobileNumberInvalid ::', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+            });
+
+            it('should return `false` if mobileNumber field has not been touched', () => {
+                // Act
+                wrapper.vm.$v.customer.mobileNumber.$dirty = false;
+
+                // Assert
+                expect(wrapper.vm.isMobileNumberInvalid).toBeFalsy();
+            });
+
+            it('should return `false` if mobileNumber field has been touched and the field is empty', () => {
+                // Act
+                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
+                wrapper.vm.customer.mobileNumber = '';
+
+                // Assert
+                expect(wrapper.vm.isMobileNumberInvalid).toBeFalsy();
+            });
+
+            it('should return `true` if mobileNumber field has been touched, the field is not empty, but the phone number is invalid', () => {
+                // Act
+                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
+                wrapper.vm.customer.mobileNumber = '123';
+
+                // Assert
+                expect(wrapper.vm.isMobileNumberInvalid).toBeTruthy();
+            });
+
+            it('should return `false` if mobileNumber field has been touched, and the phone number is valid', () => {
+                // Act
+                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
+                wrapper.vm.customer.mobileNumber = '0711111111';
+
+                // Assert
+                expect(wrapper.vm.isMobileNumberInvalid).toBeTruthy();
             });
         });
 

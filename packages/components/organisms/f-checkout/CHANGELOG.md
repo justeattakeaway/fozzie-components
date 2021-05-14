@@ -11,6 +11,14 @@ v0.112.0
 - mobile view for alert and t&Cs box.
 
 
+v0.110.0
+------------------------------
+*May 13, 2021*
+
+### Changed
+- Display 'Please enter your phone number' when the mobile number field is empty, and invalid phone message when the field is invalid but not empty
+
+
 v0.109.0
 ------------------------------
 *May 13, 2021*
