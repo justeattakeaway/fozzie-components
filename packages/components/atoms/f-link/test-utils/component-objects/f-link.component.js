@@ -9,7 +9,7 @@ module.exports = class Link extends Page {
         super.openComponent('atom', 'link-component');
     }
 
-    waitForTestComponent () 
+    waitForTestComponent () {
         super.waitForComponent(this.component);
     }
 
