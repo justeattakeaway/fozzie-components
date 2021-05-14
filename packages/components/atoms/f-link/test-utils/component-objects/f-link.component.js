@@ -6,10 +6,10 @@ module.exports = class Link extends Page {
     get component () { return $(COMPONENT); }
 
     open () {
-        super.openComponent('atom', 'link-component');
+        super.openComponent('atom', 'v-link-component');
     }
 
-    waitForTestComponent () {
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 

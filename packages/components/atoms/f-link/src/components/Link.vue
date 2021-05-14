@@ -1,7 +1,8 @@
 <template>
     <div
-        :class="$style['c-link']"
-        data-test-id="link">
+        :class="$style['o-link']"
+        data-test-id="link"
+    >
         {{ copy.text }}
     </div>
 </template>
@@ -31,8 +32,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-
-.c-link {
+.o-link {
     display: flex;
     justify-content: center;
     min-height: 80vh;
@@ -42,5 +42,4 @@ export default {
     font-family: $font-family-base;
     @include font-size(heading-m);
 }
-
 </style>
