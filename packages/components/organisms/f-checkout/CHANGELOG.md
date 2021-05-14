@@ -3,12 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.112.0
+v0.113.0
 ------------------------------
 *May 12, 2021*
 
 ### Fixed
 - mobile view for alert and t&Cs box.
+
+
+v0.112.0
+------------------------------
+*May 14, 2021*
+
+### Added
+- Max Length added to fields submitted to Api to match spec.
 
 
 v0.111.0
@@ -36,6 +44,7 @@ v0.109.0
 - hidden `error-summary-section` in checkout to alert errors after submit button (resembles f-registration)
 
 
+
 v0.108.0
 ------------------------------
 *May 13, 2021*
@@ -51,13 +60,8 @@ v0.107.0
 ### Changed
 - `f-button` version to fix focus state on tab.
 
-
-Latest – to be added to the next release
-------------------------------
-*May 11, 2021*
 ### Fixed
 - `Resturant` to `Restaurant` typo in `en-GB.js` copy text.
-
 
 v0.104.0
 ------------------------------

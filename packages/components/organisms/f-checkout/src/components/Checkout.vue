@@ -51,13 +51,13 @@
                     <form-field
                         :value="customer.mobileNumber"
                         name="mobile-number"
+                        maxlength="16"
                         input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
                         aria-describedby="mobile-number-error"
                         :aria-invalid="!isMobileNumberValid"
-                        @input="updateCustomerDetails({ mobileNumber: $event })"
-                    >
+                        @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
                                 v-if="isMobileNumberEmpty"
