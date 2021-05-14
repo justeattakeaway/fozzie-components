@@ -11,6 +11,14 @@ v0.112.0
 - mobile view for alert and t&Cs box.
 
 
+v0.111.0
+------------------------------
+*May 13, 2021*
+
+### Fixed
+- Fulfilment Times drop down not populating on startup
+
+
 v0.110.0
 ------------------------------
 *May 13, 2021*
