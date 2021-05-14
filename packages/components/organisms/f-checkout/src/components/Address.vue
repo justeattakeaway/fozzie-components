@@ -9,6 +9,7 @@
                 :value="address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
+                maxlength="255"
                 :label-text="$t('labels.line1')"
                 label-style="inline"
                 is-grouped
@@ -32,6 +33,7 @@
                 :value="address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
+                maxlength="255"
                 :label-text="$t('labels.line2')"
                 is-grouped
                 label-style="inline"
@@ -41,6 +43,7 @@
         <form-field
             :value="address.locality"
             name="address-locality"
+            maxlength="50"
             :label-text="$t('labels.locality')"
             :has-error="isAddressLocalityEmpty"
             aria-describedby="locality-error"
@@ -60,6 +63,7 @@
         <form-field
             :value="address.postcode"
             name="address-postcode"
+            maxlength="50"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
             aria-describedby="postcode-error"
