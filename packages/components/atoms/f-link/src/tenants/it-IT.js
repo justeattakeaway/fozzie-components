@@ -1,4 +1,7 @@
 export default {
-    locale: 'it-IT',
-    text: 'I am a VLink Component (IT)'
+    ariaDescribedBy: {
+        openInNew: 'Stai aprendo una nuova {location}', // finestra / schermata / scheda
+        opensExternal: 'Stai aprendo un sito esterno',
+        opensExternalSiteInNew: 'Stai aprendo un sito esterno in una {location}'
+    }
 };

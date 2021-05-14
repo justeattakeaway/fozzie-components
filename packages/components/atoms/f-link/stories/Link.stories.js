@@ -1,7 +1,6 @@
-// Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-// import {
-//     withKnobs, select, boolean
-// } from '@storybook/addon-knobs';
+import {
+    withKnobs, text
+} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VLink from '../src/components/Link.vue';
 
@@ -13,8 +12,15 @@ export default {
 export const VLinkComponent = () => ({
     components: { VLink },
     props: {
+        linkText: {
+            default: text('Link Text', 'This is a link')
+        },
+
+        linkHref: {
+            default: text('Link Destination', 'https://www.just-eat.co.uk/')
+        },
     },
-    template: `<v-link />`
+    template: `<v-link :linkText="linkText" :linkHref="linkHref"/>`
 });
 
 VLinkComponent.storyName = 'f-link';
