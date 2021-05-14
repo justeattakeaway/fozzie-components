@@ -115,7 +115,7 @@ export default {
 
         showLegacyBanner: {
             type: Boolean,
-            default: false
+            default: null
         },
 
         cookieExpiry: {
@@ -148,7 +148,7 @@ export default {
          * Check if the legacy cookie banner should be used
          */
         legacyBanner () {
-            return this.config.displayLegacy;
+            return this.showLegacyBanner === null ? this.config.displayLegacy : this.showLegacyBanner;
         }
     },
 
