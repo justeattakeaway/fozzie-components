@@ -9,7 +9,7 @@ module.exports = class <%= name.filename %> extends Page {
         super.openComponent('<%= storybook.componentCategory.toLowerCase().replace('s','') %>', '<%= name.class %>-component');
     }
 
-    waitForTestComponent () {
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
