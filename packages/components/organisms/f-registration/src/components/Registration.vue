@@ -32,7 +32,6 @@
                 @submit.prevent="onFormSubmit">
                 <section
                     id="error-summary-container"
-                    class="is-visuallyHidden"
                     role="alert"
                     data-test-id="error-summary-container">
                     <error-message
@@ -190,6 +189,15 @@ import EventNames from '../event-names';
  */
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
+/**
+ * Tests that the user is not retrying a conflicted email address
+ *
+ * @param {string} value The email address to test.
+ * * @param {object} vm The Vue instance
+ * @return {boolean} True if the email does not email the conflicted email address value
+ */
+const emailNotConflicted = (value, vm) => (value !== vm.conflictedEmailAddress);
+
 const formValidationState = $v => {
     const fields = $v.$params;
     const invalidFields = [];
@@ -255,8 +263,8 @@ export default {
             password: null,
             shouldDisableCreateAccountButton: false,
             genericErrorMessage: null,
-            shouldShowEmailAlreadyExistsError: false,
-            formStarted: false
+            formStarted: false,
+            conflictedEmailAddress: ''
         };
     },
 
@@ -312,6 +320,9 @@ export default {
                 }
                 if (!this.$v.email.email) {
                     return messages.invalidEmailError;
+                }
+                if (!this.$v.email.emailNotConflicted) {
+                    return messages.alreadyExistsError;
                 }
             }
             return '';
@@ -391,7 +402,8 @@ export default {
         email: {
             required,
             email,
-            maxLength: maxLength(50)
+            maxLength: maxLength(50),
+            emailNotConflicted
         },
         password: {
             required,
@@ -424,7 +436,7 @@ export default {
 
         async onFormSubmit () {
             this.genericErrorMessage = null;
-            this.shouldShowEmailAlreadyExistsError = false;
+            this.conflictedEmailAddress = '';
 
             if (this.isFormInvalid()) {
                 const validationState = formValidationState(this.$v);
@@ -435,6 +447,7 @@ export default {
             }
 
             this.shouldDisableCreateAccountButton = true;
+
             try {
                 const registrationData = {
                     firstName: this.firstName,
@@ -454,8 +467,8 @@ export default {
                 let shouldEmitCreateAccountFailure = true;
 
                 if (Array.isArray(thrownErrors)) {
-                    if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
-                        this.shouldShowEmailAlreadyExistsError = true;
+                    if (thrownErrors.some(thrownError => thrownError.errorCode === '409' || thrownError.errorCode === 'Conflict')) {
+                        this.conflictedEmailAddress = this.email;
                     } else if (thrownErrors.some(thrownError => thrownError.errorCode === 'FailedUserAuthentication')) {
                         this.$emit(EventNames.LoginBlocked);
 

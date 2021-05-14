@@ -141,17 +141,20 @@ describe('Registration', () => {
 
             it('should show error message and emit failure event when service responds with a 409', async () => {
                 // Arrange
+                const testEmailAddress = 'test@test.test';
+
                 const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The specified email already exists', errorCode: '409' }] } } };
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
                 wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+                wrapper.vm.email = testEmailAddress;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(true);
+                expect(wrapper.vm.conflictedEmailAddress).toBe(testEmailAddress);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             });
 

@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.53.1
+------------------------------
+*May 14, 2021*
+
+### Fixed
+- Error message for 409 - Conflict was no longer being rendered due to recent accessibility changes.
+- Added functionality to validate conflicted email addresses
+
+
 v0.53.0
 ------------------------------
 *May 11, 2021*
@@ -44,6 +53,7 @@ v0.49.2
 
 ### Added
 - `o-link` fozzie classes for the links.
+
 
 *March 31, 2021*
 

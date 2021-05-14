@@ -55,7 +55,7 @@ export default {
 
         password: {
             requiredError: 'Please enter a password',
-            minLengthError: 'Password is less than four characters '
+            minLengthError: 'Password is less than four characters'
         }
     }
 };

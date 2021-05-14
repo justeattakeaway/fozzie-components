@@ -12,6 +12,7 @@
     "vue-i18n": "8.22.1"
   },
   "devDependencies": {
+    "@justeat/f-http": "0.4.1",
     "@kazupon/vue-i18n-loader": "0.5.0",
     "@storybook/addon-a11y": "6.0.28",
     "@storybook/addon-essentials": "6.0.28",
