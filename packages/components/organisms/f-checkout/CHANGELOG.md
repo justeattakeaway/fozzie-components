@@ -3,13 +3,65 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest – to be added to the next release
+v0.113.0
 ------------------------------
-*May 11, 2021*
+*May 12, 2021*
+
+### Fixed
+- mobile view for alert and t&Cs box.
+
+
+v0.112.0
+------------------------------
+*May 14, 2021*
+
+### Added
+- Max Length added to fields submitted to Api to match spec.
+
+
+v0.111.0
+------------------------------
+*May 13, 2021*
+
+### Fixed
+- Fulfilment Times drop down not populating on startup
+
+
+v0.110.0
+------------------------------
+*May 13, 2021*
+
+### Changed
+- Display 'Please enter your phone number' when the mobile number field is empty, and invalid phone message when the field is invalid but not empty
+
+
+v0.109.0
+------------------------------
+*May 13, 2021*
+
+### Added
+- `aria-describedby` and `aria-invalid` for all input fields - for reading error messages
+- hidden `error-summary-section` in checkout to alert errors after submit button (resembles f-registration)
+
+
+
+v0.108.0
+------------------------------
+*May 13, 2021*
+
+### Fixed
+- Error when Checkout endpoint returns address with lines set to `null`
+
+
+v0.107.0
+------------------------------
+*May 12, 2021*
+
+### Changed
+- `f-button` version to fix focus state on tab.
 
 ### Fixed
 - `Resturant` to `Restaurant` typo in `en-GB.js` copy text.
-
 
 v0.104.0
 ------------------------------

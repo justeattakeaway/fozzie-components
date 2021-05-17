@@ -91,6 +91,18 @@ The props that can be defined are as follows (if any):
 | `showCountrySelector` | `Bool`   | `true`  | Controls whether to show country selector in footer.                                                          |
 | `euro2020Enabled`     | `Bool`   | `false` | Controls whether to show euro2020 related links in footer. |
 
+### CSS Classes
+
+The footer has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
+
+In addition to this, the footer exposes some classes which you can target in your application.
+
+| Class | Description |
+| ----- | ----------- |
+| `c-footer-row-linkLists` | Can be used to target the footer with the list of links |
+| `c-footer-row-partnerLinks` | Can be used to target the footer's links for curiers and partners |
+| `c-footer-row-socialLinks` | Can be used to target the footer's links for our apps and social media links |
+
 ### Events
 
 The events that can be subscribed to are as follows (if any):

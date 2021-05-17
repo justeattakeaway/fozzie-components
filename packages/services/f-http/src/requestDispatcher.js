@@ -15,7 +15,10 @@ const sendRequest = async (method, resource, headers = {}) => {
     try {
         const response = await _axiosInstance[method.toLowerCase()](resource, configBuilder(headers));
 
-        return response.data;
+        return {
+            statusCode: response.status,
+            data: response.data
+        };
     } catch (error) {
         return handleError(error, _configuration.errorCallback);
     }
@@ -33,7 +36,10 @@ const sendRequestWithBody = async (method, resource, body, headers = {}) => {
     try {
         const response = await _axiosInstance[method.toLowerCase()](resource, body, configBuilder(headers));
 
-        return response.data;
+        return {
+            statusCode: response.status,
+            data: response.data
+        };
     } catch (error) {
         return handleError(error, _configuration.errorCallback);
     }
