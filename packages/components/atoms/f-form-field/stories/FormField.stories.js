@@ -36,13 +36,31 @@ export const FormFieldComponent = () => ({
         },
         isGrouped: {
             default: boolean('isGrouped', false)
+        },
+        hasExtraLabelText: {
+            default: boolean('hasExtraLabelText', true)
         }
     },
     parameters: {
         notes: 'some documentation here'
     },
     template:
-        '<form-field :locale="locale" :labelText="labelText" :inputType="inputType" :labelStyle="labelStyle" :hasError="hasError" :dropdownOptions="dropdownOptions" :isGrouped="isGrouped" />'
+        `<form-field
+            :locale="locale"
+            :labelText="labelText"
+            :inputType="inputType"
+            :labelStyle="labelStyle"
+            :hasError="hasError"
+            :dropdownOptions="dropdownOptions"
+            :isGrouped="isGrouped"
+            :cols="30"
+            :rows="7"
+            :maxlength="200"
+            :hasExtraLabelText="hasExtraLabelText">
+            <div>
+                Here is a bit more text to show
+            </div>
+        </form-field>`
 });
 
 FormFieldComponent.storyName = 'f-form-field';

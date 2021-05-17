@@ -19,6 +19,8 @@
                 {{ labelText }}
             </form-label>
 
+            <slot v-if="hasExtraLabelText" />
+
             <form-dropdown
                 v-if="isDropdown"
                 :id="uniqueId"
@@ -31,6 +33,19 @@
                     $style['c-formField-input--focus']
                 ]"
                 :dropdown-options="dropdownOptions"
+                v-on="listeners" />
+
+            <textarea
+                v-else-if="isTextarea"
+                :id="`${uniqueId}`"
+                :aria-labelledby="`label-${uniqueId}`"
+                :value="value"
+                v-bind="$attrs"
+                :class="[
+                    $style['c-formField-textarea'],
+                    $style['c-formField-textarea--focus']
+                ]"
+                data-test-id="formfield-textarea"
                 v-on="listeners" />
 
             <input
@@ -139,6 +154,31 @@ export default {
         maxNumber: {
             type: Number,
             default: 100
+        },
+
+        textareaCols: {
+            type: Number,
+            default: 30
+        },
+
+        textareaRows: {
+            type: Number,
+            default: 8
+        },
+
+        textareaMaxlength: {
+            type: Number,
+            default: 200
+        },
+
+        textareaName: {
+            type: String,
+            default: ''
+        },
+
+        hasExtraLabelText: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -213,6 +253,10 @@ export default {
 
         isFieldGrouped () {
             return this.isGrouped && !this.hasError;
+        },
+
+        isTextarea () {
+            return this.inputType === 'textarea';
         }
     },
 
@@ -259,6 +303,7 @@ $form-input-height                        : 46px; // height is 46px + 1px border
 $form-input-padding                       : spacing(x1.5) spacing(x2);
 $form-input-fontSize                      : 'body-l';
 $form-input-focus                         : $blue--light;
+$form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
 
 .c-formField {
     & + & {
@@ -271,12 +316,16 @@ $form-input-focus                         : $blue--light;
     }
 
     .c-formField-input {
+        @include rem(height, $form-input-height); //convert height to rem
+    }
+
+    .c-formField-input,
+    .c-formField-textarea {
         width: 100%;
         font-family: $font-family-base;
         @include font-size($form-input-fontSize);
         font-weight: $font-weight-base;
         color: $form-input-textColour;
-        @include rem(height, $form-input-height); //convert height to rem
 
         background-color: $form-input-bg;
         border: $form-input-borderWidth solid $form-input-borderColour;
@@ -305,11 +354,18 @@ $form-input-focus                         : $blue--light;
         }
     }
 
-    .c-formField-input--focus {
+    .c-formField-textarea {
+        background-clip: padding-box;
+        padding: spacing(x2);
+        resize: none;
+    }
+
+    .c-formField-input--focus,
+    .c-formField-textarea--focus {
         &:focus,
         &:active,
         &:focus-within {
-            box-shadow: 0 0 0 2pt $form-input-focus;
+            box-shadow: $form-input-focus--boxShadow;
             outline: none;
         }
     }

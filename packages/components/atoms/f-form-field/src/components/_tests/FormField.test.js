@@ -107,6 +107,25 @@ describe('FormField', () => {
                 // Assert
                 expect(wrapper.contains(FormDropdown)).toBe(true);
             });
+
+            describe.each([
+                ['textarea', true],
+                ['text', false]
+            ])('is %s', (inputType, expected) => {
+                // Arrange
+                const propsData = {
+                    inputType: inputType
+                };
+                const wrapper = shallowMount(FormField, { propsData });
+
+                // Act
+                const textareaElement = wrapper.find('[data-test-id="formfield-textarea"]');
+
+                // Assert
+                it(`should ${inputType === 'textarea' ? '' : 'not '}display a textarea element`, () => {
+                    expect(textareaElement.exists()).toBe(expected);
+                })
+            });
         });
 
         describe('labelStyle ::', () => {
