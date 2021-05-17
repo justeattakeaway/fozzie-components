@@ -190,13 +190,13 @@ import EventNames from '../event-names';
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
 /**
- * Tests that the user is not retrying a conflicted email address
+ * Tests that the entered email address does not match the conflicted email address stored
  *
  * @param {string} value The email address to test.
  * * @param {object} vm The Vue instance
- * @return {boolean} True if the email does not email the conflicted email address value
+ * @return {boolean} True if the email does not match the conflicted email address stored
  */
-const emailNotConflicted = (value, vm) => (value !== vm.conflictedEmailAddress);
+const isValidEmailAddress = (value, vm) => (value !== vm.conflictedEmailAddress);
 
 const formValidationState = $v => {
     const fields = $v.$params;
@@ -321,7 +321,7 @@ export default {
                 if (!this.$v.email.email) {
                     return messages.invalidEmailError;
                 }
-                if (!this.$v.email.emailNotConflicted) {
+                if (!this.$v.email.isValidEmailAddress) {
                     return messages.alreadyExistsError;
                 }
             }
@@ -403,7 +403,7 @@ export default {
             required,
             email,
             maxLength: maxLength(50),
-            emailNotConflicted
+            isValidEmailAddress
         },
         password: {
             required,
