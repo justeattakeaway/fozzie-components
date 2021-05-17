@@ -1,5 +1,5 @@
 const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
-const takeawaypayActivation = new TakeawaypayActivation
+const takeawaypayActivation = new TakeawaypayActivation();
 
 describe('f-takeawaypayActivation component tests', () => {
     beforeEach(() => {

@@ -1,7 +1,7 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
 const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
-const takeawaypayActivation = new TakeawaypayActivation
+const takeawaypayActivation = new TakeawaypayActivation();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
