@@ -402,10 +402,6 @@ export default {
             return this.serviceType !== CHECKOUT_METHOD_DINEIN || this.availableFulfilment.times.length > 1;
         },
 
-        restaurantMenuPageUrl () {
-            return `restaurant-${this.restaurant.seoName}/menu`;
-        },
-
         messageType () {
             return this.message && this.message.shouldShowInDialog
                 ? this.dialogMessage
