@@ -51,13 +51,13 @@
                     <form-field
                         :value="customer.mobileNumber"
                         name="mobile-number"
+                        maxlength="16"
                         input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
                         aria-describedby="mobile-number-error"
                         :aria-invalid="!isMobileNumberValid"
-                        @input="updateCustomerDetails({ mobileNumber: $event })"
-                    >
+                        @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
                                 v-if="isMobileNumberEmpty"
@@ -942,8 +942,9 @@ export default {
     @include media('<=narrow') {
         border: none;
         padding-top: spacing(x3);
-        padding-bottom: spacing(x5);
+        padding-bottom: 0;
         margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -955,6 +956,10 @@ export default {
     width: $checkout-width;
     margin-left: auto;
     margin-right: auto;
+
+    @include media('<=narrow') {
+        width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
+    }
 }
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {

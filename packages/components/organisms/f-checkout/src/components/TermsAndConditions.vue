@@ -49,5 +49,11 @@
     a {
         margin-right: none;
     }
+
+    @include media('<narrow') {
+        width: 100vw;
+        margin-left: -(spacing(x5)); // removes the margin of f-card
+        padding: spacing(x2) spacing(x5);
+    }
 }
 </style>
