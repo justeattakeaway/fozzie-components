@@ -143,7 +143,7 @@ describe('Registration', () => {
                 // Arrange
                 const testEmailAddress = 'test@test.test';
 
-                const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The specified email already exists', errorCode: '409' }] } } };
+                const err = { response: { status: 409, data: { faultId: '123', traceId: '123', errors: [{ description: 'The specified email already exists', errorCode: '409' }] } } };
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
                 wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
@@ -162,18 +162,19 @@ describe('Registration', () => {
                 // Arrange
                 const err = {
                     response:
-                    {
-                        data: {
-                            faultId: '123',
-                            traceId: '123',
-                            errors: [
-                                {
-                                    description: 'Failed user authentication.',
-                                    errorCode: 'FailedUserAuthentication'
-                                }
-                            ]
+                        {
+                            status: 403,
+                            data: {
+                                faultId: '123',
+                                traceId: '123',
+                                errors: [
+                                    {
+                                        description: 'Failed user authentication.',
+                                        errorCode: 'FailedUserAuthentication'
+                                    }
+                                ]
+                            }
                         }
-                    }
                 };
 
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
@@ -191,7 +192,7 @@ describe('Registration', () => {
 
             it('should populate generic error message and emit failure event when service responds with a 400', async () => {
                 // Arrange
-                const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The Password field is required', errorCode: '400' }] } } };
+                const err = { response: { status: 400, data: { faultId: '123', traceId: '123', errors: [{ description: 'The Password field is required', errorCode: '400' }] } } };
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
                 wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });

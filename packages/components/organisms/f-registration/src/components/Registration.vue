@@ -460,29 +460,27 @@ export default {
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, registrationData, this.tenant);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
-                let thrownErrors = error;
-                if (error && error.response && error.response.data && error.response.data.errors) {
-                    thrownErrors = error.response.data.errors;
-                }
-                let shouldEmitCreateAccountFailure = true;
-
-                if (Array.isArray(thrownErrors)) {
-                    if (thrownErrors.some(thrownError => thrownError.errorCode === '409' || thrownError.errorCode === 'Conflict')) {
+                if (error.response && error.response.status) {
+                    if (error.response.status === 409) {
                         this.conflictedEmailAddress = this.email;
-                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === 'FailedUserAuthentication')) {
-                        this.$emit(EventNames.LoginBlocked);
-
-                        shouldEmitCreateAccountFailure = false;
-                    } else {
-                        this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
+                        this.$emit(EventNames.CreateAccountFailure, error);
+                        return;
                     }
-                } else {
-                    this.genericErrorMessage = error;
+
+                    if (error.response.status === 400) {
+                        this.genericErrorMessage = error.response.data.errors[0].description;
+                        this.$emit(EventNames.CreateAccountFailure, error);
+                        return;
+                    }
+
+                    if (error.response.status === 403) {
+                        this.$emit(EventNames.LoginBlocked);
+                        return;
+                    }
                 }
 
-                if (shouldEmitCreateAccountFailure) {
-                    this.$emit(EventNames.CreateAccountFailure, thrownErrors);
-                }
+                this.genericErrorMessage = error.message || 'Something went wrong, please try again later';
+                this.$emit(EventNames.CreateAccountFailure, this.genericErrorMessage);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
