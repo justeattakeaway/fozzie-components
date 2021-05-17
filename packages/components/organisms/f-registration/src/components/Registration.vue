@@ -436,7 +436,6 @@ export default {
 
         async onFormSubmit () {
             this.genericErrorMessage = null;
-            this.conflictedEmailAddress = '';
 
             if (this.isFormInvalid()) {
                 const validationState = formValidationState(this.$v);
@@ -447,6 +446,7 @@ export default {
             }
 
             this.shouldDisableCreateAccountButton = true;
+            this.conflictedEmailAddress = '';
 
             try {
                 const registrationData = {
