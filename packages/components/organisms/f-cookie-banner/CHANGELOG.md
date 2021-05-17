@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.10.0
+------------------------------
+*May 17, 2021*
+
+### Changed
+- showLegacyBanner can be passed in as a prop to allow experimentation in UK rollout
+
+
 v0.9.0
 ------------------------------
 *May 10, 2021*

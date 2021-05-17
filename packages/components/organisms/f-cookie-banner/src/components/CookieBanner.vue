@@ -146,6 +146,7 @@ export default {
     computed: {
         /**
          * Check if the legacy cookie banner should be used
+         * @returns {Bool}
          */
         legacyBanner () {
             return this.showLegacyBanner === null ? this.config.displayLegacy : this.showLegacyBanner;
