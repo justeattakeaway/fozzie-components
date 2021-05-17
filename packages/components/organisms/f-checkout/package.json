@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.113.0",
+  "version": "0.114.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -65,7 +65,7 @@
     "@justeat/f-card": "0.8.0",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.11.0",
-    "@justeat/f-mega-modal": "0.6.0",
+    "@justeat/f-mega-modal": "0.8.0",
     "@justeat/f-wdio-utils": "0.1.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
