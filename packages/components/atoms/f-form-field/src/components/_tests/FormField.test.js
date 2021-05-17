@@ -114,7 +114,7 @@ describe('FormField', () => {
             ])('is %s', (inputType, expected) => {
                 // Arrange
                 const propsData = {
-                    inputType: inputType
+                    inputType
                 };
                 const wrapper = shallowMount(FormField, { propsData });
 
@@ -124,7 +124,7 @@ describe('FormField', () => {
                 // Assert
                 it(`should ${inputType === 'textarea' ? '' : 'not '}display a textarea element`, () => {
                     expect(textareaElement.exists()).toBe(expected);
-                })
+                });
             });
         });
 
