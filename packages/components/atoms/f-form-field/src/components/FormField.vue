@@ -156,26 +156,6 @@ export default {
             default: 100
         },
 
-        textareaCols: {
-            type: Number,
-            default: 30
-        },
-
-        textareaRows: {
-            type: Number,
-            default: 8
-        },
-
-        textareaMaxlength: {
-            type: Number,
-            default: 200
-        },
-
-        textareaName: {
-            type: String,
-            default: ''
-        },
-
         hasExtraLabelText: {
             type: Boolean,
             default: false
