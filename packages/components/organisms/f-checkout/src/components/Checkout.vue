@@ -935,8 +935,8 @@ export default {
                 }
             },
             tableIdentifier: {
-                required,
-                maxLength: maxLength(100)
+                required: this.isCheckoutMethodDineIn,
+                maxLength: maxLength(12)
             }
         };
 
