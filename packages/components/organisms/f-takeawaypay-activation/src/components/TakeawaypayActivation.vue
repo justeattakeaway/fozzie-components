@@ -11,8 +11,6 @@ import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'TakeawaypayActivation',
-    components: {},
     props: {
         locale: {
             type: String,

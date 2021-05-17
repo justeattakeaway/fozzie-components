@@ -9,7 +9,7 @@ module.exports = class TakeawaypayActivation extends Page {
         super.openComponent('organims', 'takeawaypayActivation-component');
     }
 
-    waitForTestComponent () 
+    waitForTestComponent () {
         super.waitForComponent(this.component);
     }
 
