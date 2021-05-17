@@ -314,10 +314,39 @@ describe('Checkout', () => {
                 expect(fulfilmentTimeDropdown.exists()).toBe(true);
             });
 
-            it('should not display the fulfilment time dropdown if set to `dinein`', async () => {
+            it('should display the fulfilment time dropdown if set to `dinein` and there is more than one fulfilment time available', async () => {
                 // Act
                 const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        serviceType: CHECKOUT_METHOD_DINEIN
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const fulfilmentTimeDropdown = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+
+                // Assert
+                expect(fulfilmentTimeDropdown.exists()).toBe(true);
+            });
+
+            it('should not display the fulfilment time dropdown if set to `dinein` and there is only one fulfilment time available', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        availableFulfilment: {
+                            times: [
+                                {
+                                    from: '2020-01-01T01:00:00.000Z',
+                                    to: '2020-01-01T01:00:00.000Z'
+                                }
+                            ]
+                        },
+                        serviceType: CHECKOUT_METHOD_DINEIN
+                    }),
                     i18n,
                     localVue,
                     propsData

@@ -324,6 +324,7 @@ export default {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'availableFulfilment',
             'address',
+            'availableFulfilment',
             'basket',
             'customer',
             'errors',
@@ -398,7 +399,7 @@ export default {
         },
 
         shouldShowFulfilmentSelector () {
-            return this.serviceType !== CHECKOUT_METHOD_DINEIN;
+            return this.serviceType !== CHECKOUT_METHOD_DINEIN || this.availableFulfilment.times.length > 1;
         },
 
         restaurantMenuPageUrl () {
