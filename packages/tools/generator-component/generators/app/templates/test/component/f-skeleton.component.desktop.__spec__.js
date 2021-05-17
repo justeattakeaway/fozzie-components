@@ -1,6 +1,5 @@
 const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.class %>.component');
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const <%= name.class %> = new <%= name.filename %>
 
 describe('f-<%= name.class %> component tests', () => {
     beforeEach(() => {

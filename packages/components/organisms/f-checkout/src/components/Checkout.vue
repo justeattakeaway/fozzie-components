@@ -36,23 +36,44 @@
                     :class="$style['c-checkout-form']"
                     @submit.prevent="onFormSubmit"
                 >
-                    <guest-block v-if="!isLoggedIn" />
+                    <section
+                        v-if="invalidFieldsSummary"
+                        class="is-visuallyHidden"
+                        role="alert"
+                        data-test-id="error-summary-container">
+                        {{ invalidFieldsSummary }}
+                    </section>
+
+                    <guest-block
+                        v-if="!isLoggedIn"
+                    />
 
                     <form-field
                         :value="customer.mobileNumber"
                         name="mobile-number"
+                        maxlength="16"
                         input-type="tel"
                         :label-text="$t('labels.mobileNumber')"
-                        :has-error="!isMobileNumberValid"
-                        @input="updateCustomerDetails({ mobileNumber: $event })"
-                    >
+                        :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
+                        aria-describedby="mobile-number-error"
+                        :aria-invalid="!isMobileNumberValid"
+                        @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
-                                v-if="!isMobileNumberValid"
+                                v-if="isMobileNumberEmpty"
+                                id="mobile-number-error"
                                 data-js-error-message
-                                data-test-id="error-mobile-number"
+                                data-test-id="error-mobile-number-empty"
                             >
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
+                            </error-message>
+                            <error-message
+                                v-if="isMobileNumberInvalid"
+                                id="mobile-number-error"
+                                data-js-error-message
+                                data-test-id="error-mobile-number-invalid"
+                            >
+                                {{ $t('validationMessages.mobileNumber.invalidCharError') }}
                             </error-message>
                         </template>
                     </form-field>
@@ -294,14 +315,16 @@ export default {
             'userNote'
         ]),
 
-        isMobileNumberValid () {
-            /*
-            * Validation methods return true if the validation conditions
-            * have not been met and the field has been `touched` by a user.
-            * The $dirty boolean changes to true when the user has focused/lost
-            * focus on the input field.
-            */
-            return !this.$v.customer.mobileNumber.$dirty || this.$v.customer.mobileNumber.isValidPhoneNumber;
+        wasMobileNumberFocused () {
+            return this.$v.customer.mobileNumber.$dirty;
+        },
+
+        isMobileNumberEmpty () {
+            return this.wasMobileNumberFocused && !this.customer.mobileNumber;
+        },
+
+        isMobileNumberInvalid () {
+            return this.wasMobileNumberFocused && !this.isMobileNumberEmpty && !this.$v.customer.mobileNumber.isValidPhoneNumber;
         },
 
         isCheckoutMethodDelivery () {
@@ -355,6 +378,17 @@ export default {
                 },
                 content: this.message
             };
+        },
+
+        invalidFieldsSummary () {
+            const invalidFieldCount = this.$v.$dirty
+                && validations.getFormValidationState(this.$v).invalidFields.length;
+
+            if (!invalidFieldCount) return null;
+
+            return invalidFieldCount === 1 ?
+                this.$t('errorMessages.singleFieldError') :
+                this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
         }
     },
 
@@ -908,8 +942,9 @@ export default {
     @include media('<=narrow') {
         border: none;
         padding-top: spacing(x3);
-        padding-bottom: spacing(x5);
+        padding-bottom: 0;
         margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -921,6 +956,10 @@ export default {
     width: $checkout-width;
     margin-left: auto;
     margin-right: auto;
+
+    @include media('<=narrow') {
+        width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
+    }
 }
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {

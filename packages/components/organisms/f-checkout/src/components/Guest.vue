@@ -4,13 +4,17 @@
         :class="$style['c-guest']">
         <form-field
             :value="customer.firstName"
+            aria-describedby="first-name-error"
+            :aria-invalid="isFirstNameEmpty"
             name="guest-first-name"
+            maxlength="100"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
             @input="updateCustomerDetails({ 'firstName': $event })">
             <template #error>
                 <error-message
                     v-if="isFirstNameEmpty"
+                    id="first-name-error"
                     data-js-error-message
                     data-test-id="error-first-name-empty">
                     {{ $t('validationMessages.firstName.requiredError') }}
@@ -21,12 +25,16 @@
         <form-field
             :value="customer.lastName"
             name="guest-last-name"
+            maxlength="100"
             :label-text="$t('guest.lastName')"
+            aria-describedby="last-name-error"
+            :aria-invalid="isLastNameEmpty"
             :has-error="isLastNameEmpty"
             @input="updateCustomerDetails({ 'lastName': $event })">
             <template #error>
                 <error-message
                     v-if="isLastNameEmpty"
+                    id="last-name-error"
                     data-js-error-message
                     data-test-id="error-last-name-empty">
                     {{ $t('validationMessages.lastName.requiredError') }}
@@ -40,10 +48,13 @@
             input-type="email"
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
+            aria-describedby="email-error"
+            :aria-invalid="!isEmailValid"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
                     v-if="!isEmailValid"
+                    id="email-error"
                     data-js-error-message
                     data-test-id="error-email-invalid">
                     {{ $t('validationMessages.email.requiredError') }}

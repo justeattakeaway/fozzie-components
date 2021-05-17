@@ -2,7 +2,7 @@
 
 exports[`Footer should render default component markup 1`] = `
 <footer data-theme="je" data-test-id="footer-component">
-  <div class="">
+  <div class="c-footer-row-linkLists">
     <link-list-stub linklist="[object Object]"></link-list-stub>
     <link-list-stub linklist="[object Object]"></link-list-stub>
     <link-list-stub linklist="[object Object]"></link-list-stub>
@@ -12,7 +12,7 @@ exports[`Footer should render default component markup 1`] = `
   <div>
     <div>
       <!---->
-      <div>
+      <div class="c-footer-row-socialLinks">
         <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Download our apps" listtype="apps" locale="en-GB"></icon-list-stub>
         <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback" data-test-id="feedback-block"></feedback-block-stub>
         <icon-list-stub icons="[object Object],[object Object],[object Object],[object Object],[object Object]" title="Follow us" listtype="social" locale="en-GB"></icon-list-stub>

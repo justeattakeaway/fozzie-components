@@ -14,7 +14,8 @@ const messages = {
 
     validationMessages: {
         mobileNumber: {
-            requiredError: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
+            requiredError: 'Please enter your phone number',
+            invalidCharError: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
         },
         addressLine1: {
             requiredError: 'Please enter the first line of your address'
@@ -42,6 +43,8 @@ const messages = {
     errorMessages: {
         errorHeading: 'Error',
         genericServerError: 'Something went wrong, please try again later',
+        singleFieldError: 'There is 1 error in the form',
+        multipleFieldErrors: 'There are {errorCount} errors in the form',
         pageLoad: {
             heading: 'We can’t show you this page',
             description: 'It’s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.'
@@ -117,8 +120,8 @@ const messages = {
 
     userNote: {
         title: 'Leave a note',
-        text: 'Leave a note for the resturant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
-        placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here. \n\nWe\'re working with resturants to cut waste. Please don\'t ask for plastic cutlery.'
+        text: 'Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
+        placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
     },
 
     guest: {

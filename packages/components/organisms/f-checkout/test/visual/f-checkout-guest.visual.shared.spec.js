@@ -28,6 +28,20 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Guest - Mandatory Errors State', 'shared');
     });
+
+    it('should display the illegal mobile number error message', () => {
+        // Arrange
+        const mobileNumberInfo = {
+            mobileNumber: '123'
+        };
+
+        // Act
+        checkout.populateCollectionCheckoutForm(mobileNumberInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', 'shared');
+    });
 });
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests', () => {
@@ -77,6 +91,20 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Guest - Mandatory Errors State', 'shared');
+    });
+
+    it('should display the illegal mobile number error message', () => {
+        // Arrange
+        const mobileNumberInfo = {
+            mobileNumber: '123'
+        };
+
+        // Act
+        checkout.populateCheckoutForm(mobileNumberInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'shared');
     });
 });
 

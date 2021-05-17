@@ -9,14 +9,18 @@
                 :value="address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
+                maxlength="255"
                 :label-text="$t('labels.line1')"
                 label-style="inline"
                 is-grouped
                 :has-error="isAddressLine1Empty"
+                aria-describedby="line1-error"
+                :aria-invalid="isAddressLine1Empty"
                 @input="updateAddressDetails({ ['line1']: $event })">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Empty"
+                        id="line1-error"
                         data-js-error-message
                         :class="$style['c-address-error']"
                         data-test-id="error-address-line1-empty">
@@ -29,6 +33,7 @@
                 :value="address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
+                maxlength="255"
                 :label-text="$t('labels.line2')"
                 is-grouped
                 label-style="inline"
@@ -38,12 +43,16 @@
         <form-field
             :value="address.locality"
             name="address-locality"
+            maxlength="50"
             :label-text="$t('labels.locality')"
             :has-error="isAddressLocalityEmpty"
+            aria-describedby="locality-error"
+            :aria-invalid="isAddressLocalityEmpty"
             @input="updateAddressDetails({ ['locality']: $event })">
             <template #error>
                 <error-message
                     v-if="isAddressLocalityEmpty"
+                    id="locality-error"
                     data-js-error-message
                     data-test-id="error-address-locality-empty">
                     {{ $t('validationMessages.locality.requiredError') }}
@@ -54,18 +63,23 @@
         <form-field
             :value="address.postcode"
             name="address-postcode"
+            maxlength="50"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
+            aria-describedby="postcode-error"
+            :aria-invalid="!isAddressPostcodeValid"
             @input="updateAddressDetails({ ['postcode']: $event })">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeEmpty"
+                    id="postcode-error"
                     data-js-error-message
                     data-test-id="error-address-postcode-empty">
                     {{ $t('validationMessages.postcode.requiredError') }}
                 </error-message>
                 <error-message
                     v-else-if="!isAddressPostcodeValid"
+                    id="postcode-error"
                     data-js-error-message
                     data-test-id="error-address-postcode-type-error">
                     {{ $t('validationMessages.postcode.invalidCharError') }}

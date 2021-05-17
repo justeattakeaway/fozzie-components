@@ -9,7 +9,7 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         const checkoutData = {
             type: 'delivery',
             isAuthenticated: false,
-            isValid: true,
+            isValid: true
         };
 
         checkout.open(checkoutData);
@@ -29,17 +29,19 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         expect(pathname).toEqual(loginPath);
     });
 
-    it('should prevent a user from writing a note of over 200 characters', () => {
+    forEach([
+        [100, 'firstName'],
+        [100, 'lastName']
+    ])
+    .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
         // Arrange
-        const userNote = 'A';
-        const addressInfo = {
-            note: userNote.repeat(300)
-        };
+        checkout.clearCheckoutForm(field);
+        const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
         // Act
-        checkout.inputUserNote(addressInfo);
+        checkout.setFieldValue(field, userEntry);
 
         // Assert
-        expect(checkout.userNoteMaxCharacterCount()).toEqual('200');
+        expect(checkout.getFieldValue(field).length).toEqual(maxlength);
     });
 });
