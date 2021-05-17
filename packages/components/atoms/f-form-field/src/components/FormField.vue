@@ -19,7 +19,7 @@
                 {{ labelText }}
             </form-label>
 
-            <slot v-if="hasExtraLabelText" />
+            <slot v-if="hasInputDescription" />
 
             <form-dropdown
                 v-if="isDropdown"
@@ -156,7 +156,7 @@ export default {
             default: 100
         },
 
-        hasExtraLabelText: {
+        hasInputDescription: {
             type: Boolean,
             default: false
         }

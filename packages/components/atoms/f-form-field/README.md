@@ -79,7 +79,7 @@ The props that can be defined are as follows (if any):
 | `isGrouped` | `Boolean` | `false` | When `true` will remove margin between all grouped form fields. |
 | `minNumber` | `Number` | 0 | Sets the value of the `min` property when `inputType` is `number` |
 | `maxNumber` | `Number` | 0 | Sets the value of the `max` property when `inputType` is `number` |
-| `hasExtraLabelText` | `Boolean` | `false` | When `true` will add the ability to insert extra html element under form label to the component via slot. | 
+| `hasInputDescription` | `Boolean` | `false` | When `true` will add the ability to insert extra html element under form label to the component via slot. | 
 
 ### Events
 
