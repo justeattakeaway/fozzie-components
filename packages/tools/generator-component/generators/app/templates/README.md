@@ -97,34 +97,30 @@ $ cd <%= componentFolder %>f-<%= name.default %>
 
 ## Testing
 
-### Unit, Integration and Contract
-
 To test all components, run from root directory.
 To test only `f-<%= name.default %>`, run from the `./fozzie-components/<%= componentFolder %>f-<%= name.default %>` directory.
+
+### Unit and Integration tests
 
 ```sh
 yarn test
 ```
 
-### Component Tests
+### Component and Accessibility Tests
 
 ```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
+# Note: Ensure Storybook is running when running the following commands
 cd ./fozzie-components
 
 yarn storybook:build
 yarn storybook:serve-static
-yarn test-component:chrome
 ```
 
-OR
-
-```bash
-# Run Component tests for f-<%= name.default %>
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/<%= componentFolder %>f-<%= name.default %>
 yarn test-component:chrome
+```
+### Accessibility tests
+```bash
+yarn test-a11y:chrome
 ```
 ## Documentation to be completed once module is in stable state.
 
