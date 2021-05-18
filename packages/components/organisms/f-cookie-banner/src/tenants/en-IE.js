@@ -8,7 +8,8 @@ const messages = {
     textLine3: 'For details about the cookies and technologies we use, see our ',
     textLine4: '.  Using this banner will set a cookie on your device to remember your preferences.',
     cookiePolicyLinkText: 'cookies notice',
-    cookiePolicyLinkUrl: 'https://www.just-eat.ie/info/cookies-policy'
+    cookiePolicyLinkUrl: 'https://www.just-eat.ie/info/cookies-policy',
+    administerCookiePolicy:  'Check my cookies preferences'
 };
 
 const displayLegacy = false;
