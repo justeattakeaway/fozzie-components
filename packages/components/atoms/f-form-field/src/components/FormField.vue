@@ -19,7 +19,11 @@
                 {{ labelText }}
             </form-label>
 
-            <slot v-if="hasInputDescription" />
+            <p
+                v-if="hasInputDescription"
+                class="u-spacingTop u-spacingBottom--large">
+                <slot />
+            </p>
 
             <form-dropdown
                 v-if="isDropdown"
