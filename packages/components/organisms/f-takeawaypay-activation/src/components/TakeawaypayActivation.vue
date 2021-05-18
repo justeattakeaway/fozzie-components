@@ -1,7 +1,7 @@
 <template>
     <div
-        :class="$style['c-takeawayPayActivation']"
-        data-test-id="takeawayPayActivation">
+        :class="$style['c-takeawaypayActivation']"
+        data-test-id="takeawaypayActivation">
         {{ copy.text }}
     </div>
 </template>
@@ -11,7 +11,6 @@ import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'TakeawayPayActivation',
     props: {
         locale: {
             type: String,
@@ -31,7 +30,7 @@ export default {
 
 <style lang="scss" module>
 
-.c-takeawayPayActivation {
+.c-takeawaypayActivation {
     display: flex;
     justify-content: center;
     min-height: 80vh;

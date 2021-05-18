@@ -1,14 +1,14 @@
-const TakeawayPayActivation = require('../../test-utils/component-objects/f-takeawayPayActivation.component');
-const takeawayPayActivation = new TakeawayPayActivation();
+const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
+const takeawaypayActivation = new TakeawaypayActivation();
 
 describe('f-takeawaypayActivation component tests', () => {
     beforeEach(() => {
-        takeawayPayActivation.open();
-        takeawayPayActivation.waitForComponent();
+        takeawaypayActivation.open();
+        takeawaypayActivation.waitForComponent();
     });
 
-    it('should display the f-takeawayPayActivation component', () => {
+    it('should display the f-takeawaypayActivation component', () => {
         // Assert
-        expect(takeawayPayActivation.isComponentDisplayed()).toBe(true);
+        expect(takeawaypayActivation.isComponentDisplayed()).toBe(true);
     });
 });

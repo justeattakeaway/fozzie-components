@@ -43,7 +43,7 @@ import '@justeat/f-takeawaypay-activation/dist/f-takeawaypay-activation.css';
 
 export default {
     components: {
-        TakeawayPayActivation
+        TakeawaypayActivation
     }
 }
 ```
@@ -56,7 +56,7 @@ import '@justeat/f-takeawaypay-activation/dist/f-takeawaypay-activation.css';
 export default {
     components: {
         // …
-        TakeawayPayActivation: () => import(/* webpackChunkName: "takeawaypay-activation" */ '@justeat/f-takeawaypay-activation')
+        TakeawaypayActivation: () => import(/* webpackChunkName: "takeawaypay-activation" */ '@justeat/f-takeawaypay-activation')
     }
 }
 ```

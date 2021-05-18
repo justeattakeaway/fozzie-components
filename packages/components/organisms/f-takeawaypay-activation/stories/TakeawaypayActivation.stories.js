@@ -3,18 +3,18 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import TakeawayPayActivation from '../src/components/TakeawayPayActivation.vue';
+import TakeawayPayActivation from '../src/components/TakeawaypayActivation.vue';
 
 export default {
     title: 'Components/Organisms',
     decorators: [withA11y]
 };
 
-export const TakeawayPayActivationComponent = () => ({
+export const TakeawaypayActivationComponent = () => ({
     components: { TakeawaypayActivation },
     props: {
     },
     template: `<takeawaypay-activation />`
 });
 
-TakeawayPayActivationComponent.storyName = 'f-takeawaypay-activation';
+TakeawaypayActivationComponent.storyName = 'f-takeawaypay-activation';

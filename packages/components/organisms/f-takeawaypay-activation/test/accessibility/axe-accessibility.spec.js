@@ -1,16 +1,16 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
-const TakeawayPayActivation = require('../../test-utils/component-objects/f-takeawayPayActivation.component');
-const takeawayPayActivation = new TakeawayPayActivation();
+const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
+const takeawaypayActivation = new TakeawaypayActivation();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        takeawayPayActivation.open();
-        takeawayPayActivation.waitForComponent();
+        takeawaypayActivation.open();
+        takeawaypayActivation.waitForComponent();
     });
-    it('a11y - should test f-takeawayPayActivation component WCAG compliance', () => {
+    it('a11y - should test f-takeawaypayActivation component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-takeawayPayActivation');
+        const axeResults = getAccessibilityTestResults('f-takeawaypayActivation');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
