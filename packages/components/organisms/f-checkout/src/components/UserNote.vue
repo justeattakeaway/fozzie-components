@@ -43,7 +43,7 @@ $userNote-textArea-height                        : 188px;
 
 .c-userNote {
     margin-top: spacing(x3);
-    @include font-size(body-l);
+    @include font-size(body-s);
     color: $userNote-textColour;
 
     .c-userNote-title {
@@ -61,6 +61,7 @@ $userNote-textArea-height                        : 188px;
         padding: spacing() spacing(x2);
         margin-top: spacing(x2);
         font: inherit;
+        @include font-size(body-l);
         color: inherit;
         background-color: $userNote-textArea-bg;
         border: $userNote-textArea-borderWidth solid $userNote-textArea-borderColour;
