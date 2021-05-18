@@ -193,7 +193,7 @@ const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u01
  * Tests that the entered email address does not match the conflicted email address stored
  *
  * @param {string} value The email address to test.
- * * @param {object} vm The Vue instance
+ * @param {object} vm The Vue instance
  * @return {boolean} True if the email does not match the conflicted email address stored
  */
 const isValidEmailAddress = (value, vm) => (value !== vm.conflictedEmailAddress);
@@ -461,25 +461,27 @@ export default {
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
                 if (error.response && error.response.status) {
-                    if (error.response.status === 409) {
+                    const { status } = error.response;
+
+                    if (status === 409) {
                         this.conflictedEmailAddress = this.email;
                         this.$emit(EventNames.CreateAccountFailure, error);
                         return;
                     }
 
-                    if (error.response.status === 400) {
+                    if (status === 400) {
                         this.genericErrorMessage = error.response.data.errors[0].description;
                         this.$emit(EventNames.CreateAccountFailure, error);
                         return;
                     }
 
-                    if (error.response.status === 403) {
+                    if (status === 403) {
                         this.$emit(EventNames.LoginBlocked);
                         return;
                     }
                 }
 
-                this.genericErrorMessage = error.message || 'Something went wrong, please try again later';
+                this.genericErrorMessage = error.message || this.copy.genericErrorMessage;
                 this.$emit(EventNames.CreateAccountFailure, this.genericErrorMessage);
             } finally {
                 this.shouldDisableCreateAccountButton = false;

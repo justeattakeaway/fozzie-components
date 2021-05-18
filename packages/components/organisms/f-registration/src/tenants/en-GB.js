@@ -1,5 +1,6 @@
 export default {
     locale: 'en-GB',
+    genericErrorMessage: 'Something went wrong, please try again later',
 
     navLinks: {
         termsAndConditions: {
