@@ -7,6 +7,7 @@ import {
     sortByCardOrder
 } from './utils/index';
 import InvalidConsumerConfigError from './errors/InvalidConsumerConfigError';
+import { LogService } from './logging/logging.service';
 
 class BrazeConsumer {
     /**
@@ -24,6 +25,7 @@ class BrazeConsumer {
         callbacks,
         interceptInAppMessages = {},
         interceptInAppMessageClickEvents = {},
+        loggerCallbacks = {},
         customFilters = []
     }) {
         this.defaultEnabledCardTypes = [
@@ -60,6 +62,8 @@ class BrazeConsumer {
 
         this.inAppMessageClickEventsCallbacks = interceptInAppMessageClickEvents;
 
+        this.loggerCallbacks = loggerCallbacks;
+
         this.callbacks = callbacks;
 
         this.defaultFiltersInOrder = [
@@ -94,6 +98,15 @@ class BrazeConsumer {
             ...this.defaultFiltersInOrder,
             ...this.customFilters
         );
+    }
+
+    /**
+     * Function that loops over all loggerCallbacks and calls them
+     * @returns {*[]}
+     */
+    getLoggerCallbacks () {
+        return Object.keys(this.loggerCallbacks)
+            .map(key => new LogService(this.loggerCallbacks[key]));
     }
 
     /**

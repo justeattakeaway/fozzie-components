@@ -2,7 +2,7 @@ import isAppboyInitialised from './utils/isAppboyInitialised';
 import { removeDuplicateContentCards } from './utils';
 import transformCardData from './utils/transformCardData';
 import areCookiesPermitted from './utils/areCookiesPermitted';
-import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME } from './types/events';
+import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME, LOGGER } from './types/events';
 import dispatcherEventStream from './DispatcherEventStream';
 
 /* braze event handler callbacks */
@@ -42,7 +42,7 @@ function interceptInAppMessagesHandler (message) {
             appboy.display.showInAppMessage(message);
         })
         .catch(error => {
-            this.logger('error', `Error handling message - ${error}`, { message, error });
+            dispatcherEventStream.publish(LOGGER, ['error', `Error handling message - ${error}`, { message, error }]);
         });
 }
 /**

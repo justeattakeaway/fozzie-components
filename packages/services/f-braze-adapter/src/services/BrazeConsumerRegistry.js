@@ -1,7 +1,12 @@
 import BrazeConsumer from './BrazeConsumer';
 import BrazeDispatcher from './BrazeDispatcher';
 import dispatcherEventStream from './DispatcherEventStream';
-import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_CLICKS_NAME, IN_APP_MESSAGE_EVENT_NAME } from './types/events';
+import {
+    CONTENT_CARDS_EVENT_NAME,
+    IN_APP_MESSAGE_EVENT_CLICKS_NAME,
+    IN_APP_MESSAGE_EVENT_NAME,
+    LOGGER
+} from './types/events';
 
 let registryInstance;
 
@@ -49,8 +54,22 @@ class BrazeConsumerRegistry {
         dispatcherEventStream.subscribe(CONTENT_CARDS_EVENT_NAME, this.applyContentCardCallbacks);
         dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, this.applyInAppMessageCallbacks);
         dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, this.applyInAppMessageClickEventsCallbacks);
+        dispatcherEventStream.subscribe(LOGGER, log => this.applyLoggerCallbacks(...log));
 
         this._dispatcher = dispatcher;
+    }
+
+    /**
+     * For each consumers logger callbacks fire the callback with log data
+     * @param type
+     * @param message
+     * @param data
+     */
+    applyLoggerCallbacks (type, message, data) {
+        this.consumers.reduce((acc, consumer) => [...acc, ...consumer.getLoggerCallbacks()], [])
+            .forEach(callback => {
+                callback[type](message, data);
+            });
     }
 
     /**

@@ -1,6 +1,7 @@
 import BrazeConsumer from '../BrazeConsumer';
 import { removeDuplicateContentCards } from '../utils';
 import transformCardData from '../utils/transformCardData';
+import { LogService } from '../logging/logging.service';
 
 const mockCards = [
     {
@@ -45,6 +46,9 @@ const mockConsumerOptions = {
     },
     interceptInAppMessageClickEvents: {
         clickEvents: jest.fn()
+    },
+    loggerCallbacks: {
+        logger: jest.fn()
     },
     brands: [
         'a',
@@ -116,14 +120,14 @@ describe('BrazeConsumer', () => {
         expect(callbacks).toEqual(expect.arrayContaining([expect.any(Function)]));
     });
 
-    it('should return an array of callbacks from getInAppMessageClickEventCallbacks method', () => {
+    it('should return an array of callbacks from getLoggerCallbacks method', () => {
         // Arrange
         const consumer = new BrazeConsumer(mockConsumerOptions);
 
         // Act
-        const callbacks = consumer.getInAppMessageClickEventCallbacks();
+        const callbacks = consumer.getLoggerCallbacks();
 
         // Assert
-        expect(callbacks).toEqual(expect.arrayContaining([expect.any(Function)]));
+        expect(callbacks).toEqual(expect.arrayContaining([expect.any(LogService)]));
     });
 });

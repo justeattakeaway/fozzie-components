@@ -56,6 +56,7 @@ export default class BrazeAdapter {
         interceptInAppMessages,
         interceptInAppMessageClickEvents,
         customFilters,
+        loggerCallbacks,
         registry
     }) {
         // create / get the registry
@@ -67,7 +68,8 @@ export default class BrazeAdapter {
             callbacks,
             interceptInAppMessages,
             interceptInAppMessageClickEvents,
-            customFilters
+            customFilters,
+            loggerCallbacks
         });
     }
 
