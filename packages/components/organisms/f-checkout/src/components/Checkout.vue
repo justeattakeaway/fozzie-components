@@ -89,10 +89,10 @@
                         :label-text="$t('userNote.title')"
                         input-type="textarea"
                         :placeholder="$t('userNote.placeholder')"
-                        :cols="30"
-                        :rows="7"
-                        :maxlength="200"
-                        :name="notePlaceholder"
+                        cols="30"
+                        rows="7"
+                        maxlength="200"
+                        name="Note"
                         has-input-description
                         data-test-id="user-note"
                         @input="updateUserNote($event)">
