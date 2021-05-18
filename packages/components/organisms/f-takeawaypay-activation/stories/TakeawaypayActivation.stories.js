@@ -3,7 +3,7 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import TakeawayPayActivation from '../src/components/TakeawaypayActivation.vue';
+import TakeawaypayActivation from '../src/components/TakeawaypayActivation.vue';
 
 export default {
     title: 'Components/Organisms',
