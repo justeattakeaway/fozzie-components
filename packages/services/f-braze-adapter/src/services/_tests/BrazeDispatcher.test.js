@@ -8,7 +8,12 @@ import areCookiesPermitted from '../utils/areCookiesPermitted';
 import removeDuplicateContentCards from '../utils/removeDuplicateContentCards';
 import BrazeDispatcher from '../BrazeDispatcher';
 import dispatcherEventStream from '../DispatcherEventStream';
-import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_CLICKS_NAME, IN_APP_MESSAGE_EVENT_NAME } from '../types/events';
+import {
+    CONTENT_CARDS_EVENT_NAME,
+    IN_APP_MESSAGE_EVENT_CLICKS_NAME,
+    IN_APP_MESSAGE_EVENT_NAME,
+    LOGGER
+} from '../types/events';
 
 jest.mock('appboy-web-sdk');
 jest.mock('../utils/isAppboyInitialised');
@@ -29,14 +34,7 @@ const dataLayer = {
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
 
-// const TEST_LOG_MESSAGE = '__TEST_MESSAGE__';
-// const TEST_PAYLOAD = {
-//     test: '__TEST_PAYLOAD__'
-// };
-//
-// const LOG_ERROR = 'logError';
-// const LOG_INFO = 'logInfo';
-// const LOG_WARN = 'logWarn';
+const LOG_ERROR = 'error';
 
 const enabledComponentParameters = {
     disableComponent: false,
@@ -56,10 +54,12 @@ const inAppMessageButtons = [
 const contentCardsMockCallback = jest.fn();
 const inAppMessagesMockCallback = jest.fn();
 const inAppMessageClicksMockCallback = jest.fn();
+const loggerCallback = jest.fn();
 
 dispatcherEventStream.subscribe(CONTENT_CARDS_EVENT_NAME, contentCardsMockCallback);
 dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, inAppMessagesMockCallback);
 dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, inAppMessageClicksMockCallback);
+dispatcherEventStream.subscribe(LOGGER, loggerCallback);
 
 beforeEach(() => {
     jest.resetAllMocks();
@@ -330,23 +330,23 @@ describe('BrazeDispatcher operation', () => {
                 expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(message);
             });
 
-            // describe('when showInAppMessage throws an error', () => {
-            //     const error = new Error('We have a problem');
-            //
-            //     beforeEach(() => {
-            //         interceptInAppMessages.mockImplementation(() => {
-            //             throw error;
-            //         });
-            //     });
-            //
-            //     it('should log the error to the provided callback', async () => {
-            //         // Act
-            //         await interceptInAppMessagesHandler(message);
-            //
-            //         // Assert
-            //         expect(loggingCallback).toHaveBeenCalledWith(LOG_ERROR, `Error handling message - ${error}`, { message, error });
-            //     });
-            // });
+            describe('when showInAppMessage throws an error', () => {
+                const error = new Error('We have a problem');
+
+                beforeEach(() => {
+                    inAppMessagesMockCallback.mockImplementation(() => {
+                        throw error;
+                    });
+                });
+
+                it('should log the error to the provided callback', async () => {
+                    // Act
+                    await interceptInAppMessagesHandler(message);
+
+                    // Assert
+                    expect(loggerCallback).toHaveBeenCalledWith([LOG_ERROR, `Error handling message - ${error}`, { message, error }]);
+                });
+            });
 
             it('should subscribe internal callback to the CTA button click event', async () => {
                 // Act
