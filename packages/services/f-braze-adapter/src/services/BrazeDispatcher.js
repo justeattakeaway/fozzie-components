@@ -3,6 +3,7 @@ import { removeDuplicateContentCards } from './utils';
 import transformCardData from './utils/transformCardData';
 import areCookiesPermitted from './utils/areCookiesPermitted';
 import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME } from './types/events';
+import dispatcherEventStream from './DispatcherEventStream';
 
 /* braze event handler callbacks */
 
@@ -12,7 +13,7 @@ import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME } from './types/eve
  * @this BrazeDispatcher
  */
 function interceptInAppMessageClickEventsHandler (message) {
-    this.eventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
+    dispatcherEventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
 }
 
 /**
@@ -31,7 +32,7 @@ function interceptInAppMessagesHandler (message) {
                  * as this is always "success" as opposed to "dismiss"
                  * as confirmed with CRM (AS)
                  */
-                this.eventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
+                dispatcherEventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
                 if (message.buttons && message.buttons.length >= 2) {
                     const [, button] = message.buttons;
                     // Note that the below subscription returns an ID that could later be used to unsubscribe
@@ -44,7 +45,6 @@ function interceptInAppMessagesHandler (message) {
             this.logger('error', `Error handling message - ${error}`, { message, error });
         });
 }
-
 /**
  * Internal handler for content cards that dispatches to component-registered callbacks
  * @param postCardsAppboy
@@ -57,7 +57,7 @@ function contentCardsHandler (postCardsAppboy) {
 
     const cards = removeDuplicateContentCards(rawCards.map(transformCardData));
 
-    this.eventStream.publish(CONTENT_CARDS_EVENT_NAME, cards);
+    dispatcherEventStream.publish(CONTENT_CARDS_EVENT_NAME, cards);
 
     this.rawCards = rawCards;
 
@@ -69,9 +69,8 @@ class BrazeDispatcher {
     /**
      * Sets defaults, checks environment, checks for reinstantiation
      * @param {Number} sessionTimeoutInSeconds
-     * @param {DispatcherEventStream} eventStream
      */
-    constructor (sessionTimeoutInSeconds, eventStream) {
+    constructor (sessionTimeoutInSeconds) {
         if (typeof window === 'undefined') throw new Error('window is not defined');
 
         this.appboyPromise = null;
@@ -89,8 +88,6 @@ class BrazeDispatcher {
         this.eventSignifier = 'BrazeContent';
 
         this.loggerCallbackInstances = [];
-
-        this.eventStream = eventStream;
     }
 
     /**

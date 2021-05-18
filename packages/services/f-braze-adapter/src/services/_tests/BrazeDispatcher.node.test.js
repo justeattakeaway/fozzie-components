@@ -3,7 +3,6 @@
  */
 import appboy from 'appboy-web-sdk';
 import BrazeDispatcher from '../BrazeDispatcher';
-import DispatcherEventStream from '../DispatcherEventStream';
 
 jest.mock('appboy-web-sdk', () => ({
     initialize: jest.fn()
@@ -23,8 +22,7 @@ describe('BrazeDispatcher › node', () => {
         expect.assertions(2);
 
         try {
-            const eventStream = new DispatcherEventStream();
-            const Dispatcher = new BrazeDispatcher(0, eventStream);
+            const Dispatcher = new BrazeDispatcher(0);
             await Dispatcher.configure({
                 userId,
                 apiKey

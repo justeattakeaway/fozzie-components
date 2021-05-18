@@ -1,3 +1,8 @@
 const filterByEnabledCardTypes = (cards, enabledCardTypes) => cards
-    .filter(({ type }) => (type ? enabledCardTypes.includes(type) : false));
+    .filter(({ type }) => {
+        if (enabledCardTypes.length > 0) {
+            return !type || enabledCardTypes.includes(type);
+        }
+        return true;
+    });
 export default filterByEnabledCardTypes;

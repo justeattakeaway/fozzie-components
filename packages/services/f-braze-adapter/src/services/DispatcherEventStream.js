@@ -21,4 +21,6 @@ class DispatcherEventStream {
     }
 }
 
-export default DispatcherEventStream;
+const eventStream = new DispatcherEventStream();
+
+export default eventStream;

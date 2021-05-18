@@ -7,7 +7,7 @@ import isAppboyInitialised from '../utils/isAppboyInitialised';
 import areCookiesPermitted from '../utils/areCookiesPermitted';
 import removeDuplicateContentCards from '../utils/removeDuplicateContentCards';
 import BrazeDispatcher from '../BrazeDispatcher';
-import DispatcherEventStream from '../DispatcherEventStream';
+import dispatcherEventStream from '../DispatcherEventStream';
 import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_CLICKS_NAME, IN_APP_MESSAGE_EVENT_NAME } from '../types/events';
 
 jest.mock('appboy-web-sdk');
@@ -53,15 +53,13 @@ const inAppMessageButtons = [
     }
 ];
 
-const eventStream = new DispatcherEventStream();
-
 const contentCardsMockCallback = jest.fn();
 const inAppMessagesMockCallback = jest.fn();
 const inAppMessageClicksMockCallback = jest.fn();
 
-eventStream.subscribe(CONTENT_CARDS_EVENT_NAME, contentCardsMockCallback);
-eventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, inAppMessagesMockCallback);
-eventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, inAppMessageClicksMockCallback);
+dispatcherEventStream.subscribe(CONTENT_CARDS_EVENT_NAME, contentCardsMockCallback);
+dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, inAppMessagesMockCallback);
+dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, inAppMessageClicksMockCallback);
 
 beforeEach(() => {
     jest.resetAllMocks();
@@ -75,7 +73,7 @@ describe('instantiation', () => {
         let brazeDispatcher;
 
         beforeEach(() => {
-            brazeDispatcher = new BrazeDispatcher(sessionTimeoutInSeconds, eventStream);
+            brazeDispatcher = new BrazeDispatcher(sessionTimeoutInSeconds);
         });
 
         it('should have a property `sessionTimeoutInSeconds` with value as supplied to GetDispatcher()', () => {
@@ -274,7 +272,7 @@ describe('BrazeDispatcher operation', () => {
         contentCardsHandler;
 
     beforeEach(async () => {
-        dispatcher = new BrazeDispatcher(0, eventStream);
+        dispatcher = new BrazeDispatcher(0);
 
         appboy.subscribeToInAppMessage.mockImplementation(callback => {
             interceptInAppMessagesHandler = callback;

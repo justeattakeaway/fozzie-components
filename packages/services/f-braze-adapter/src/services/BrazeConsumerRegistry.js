@@ -1,6 +1,6 @@
 import BrazeConsumer from './BrazeConsumer';
 import BrazeDispatcher from './BrazeDispatcher';
-import DispatcherEventStream from './DispatcherEventStream';
+import dispatcherEventStream from './DispatcherEventStream';
 import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_CLICKS_NAME, IN_APP_MESSAGE_EVENT_NAME } from './types/events';
 
 let registryInstance;
@@ -14,13 +14,26 @@ export const sessionTimeoutInSeconds = 0;
 
 class BrazeConsumerRegistry {
     /**
-     * Static constructor to store one instance of BrazeDispatcher per js env
+     * Static constructor to store one instance of BrazeConsumerRegistry per js env
      * @return {BrazeConsumerRegistry}
      * @constructor
      */
-    static GetConsumerRegistry (options) {
+    static async GetConsumerRegistry ({
+        sessionTimeout = sessionTimeoutInSeconds,
+        apiKey,
+        userId,
+        enableLogging
+    }) {
         if (!registryInstance) {
-            registryInstance = new BrazeConsumerRegistry(options);
+            const dispatcher = new BrazeDispatcher(sessionTimeout);
+
+            await dispatcher.configure({
+                apiKey,
+                userId,
+                enableLogging
+            });
+
+            registryInstance = new BrazeConsumerRegistry(dispatcher);
         }
         return registryInstance;
     }
@@ -29,29 +42,15 @@ class BrazeConsumerRegistry {
         return this._dispatcher;
     }
 
-    constructor ({
-        apiKey,
-        userId,
-        enableLogging,
-        sessionTimeout = sessionTimeoutInSeconds
-    }) {
+    constructor (dispatcher) {
         this.consumers = [];
 
-        this.eventStream = new DispatcherEventStream();
-
-        this._dispatcher = new BrazeDispatcher(sessionTimeout, this.eventStream);
-
-        // TODO change this so we call all configure bits inside the dispatcher constructor
-        this._dispatcher.configure({
-            apiKey,
-            userId,
-            enableLogging
-        });
-
         // subscribe to event stream for braze cards and messages
-        this.eventStream.subscribe(CONTENT_CARDS_EVENT_NAME, this.applyContentCardCallbacks);
-        this.eventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, this.applyInAppMessageCallbacks);
-        this.eventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, this.applyInAppMessageClickEventsCallbacks);
+        dispatcherEventStream.subscribe(CONTENT_CARDS_EVENT_NAME, this.applyContentCardCallbacks);
+        dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, this.applyInAppMessageCallbacks);
+        dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, this.applyInAppMessageClickEventsCallbacks);
+
+        this._dispatcher = dispatcher;
     }
 
     /**
@@ -89,7 +88,7 @@ class BrazeConsumerRegistry {
 
     /**
      * Register a consumer instance in the registry
-     * @returns {BrazeConsumer, BrazeDispatcher}
+     * @returns {BrazeConsumer}
      */
     register (options) {
         const consumer = new BrazeConsumer(options);

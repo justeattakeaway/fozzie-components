@@ -6,6 +6,7 @@ import {
     filterByCurrentlyActive,
     sortByCardOrder
 } from './utils/index';
+import InvalidConsumerConfigError from './errors/InvalidConsumerConfigError';
 
 class BrazeConsumer {
     /**
@@ -46,7 +47,7 @@ class BrazeConsumer {
         this.optionsChecks.forEach(check => {
             Object.keys(check).forEach(key => {
                 if (!check[key]) {
-                    throw new Error(key);
+                    throw new InvalidConsumerConfigError(key);
                 }
             });
         });

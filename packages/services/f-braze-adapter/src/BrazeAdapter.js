@@ -1,11 +1,21 @@
 import GetConsumerRegistry from './services/BrazeConsumerRegistry';
 
 export default class BrazeAdapter {
-    get dispatcher () {
-        return this._consumerRegistry.dispatcher;
-    }
-
-    constructor ({
+    /**
+     * Initializes the braze adapter and returns instance of the braze adapter class
+     * @param apiKey
+     * @param userId
+     * @param enableLogging
+     * @param sessionTimeout
+     * @param enabledCardTypes
+     * @param brands
+     * @param callbacks
+     * @param interceptInAppMessages
+     * @param interceptInAppMessageClickEvents
+     * @param customFilters
+     * @returns {Promise<BrazeAdapter>}
+     */
+    static async initialize ({
         apiKey,
         userId,
         enableLogging,
@@ -17,13 +27,39 @@ export default class BrazeAdapter {
         interceptInAppMessageClickEvents,
         customFilters
     }) {
-        // create / get the registry
-        this._consumerRegistry = GetConsumerRegistry({
+        const registry = await GetConsumerRegistry({
             apiKey,
             userId,
             enableLogging,
             sessionTimeout
         });
+
+        return new BrazeAdapter({
+            enabledCardTypes,
+            brands,
+            callbacks,
+            interceptInAppMessages,
+            interceptInAppMessageClickEvents,
+            customFilters,
+            registry
+        });
+    }
+
+    get dispatcher () {
+        return this._consumerRegistry.dispatcher;
+    }
+
+    constructor ({
+        enabledCardTypes,
+        brands,
+        callbacks,
+        interceptInAppMessages,
+        interceptInAppMessageClickEvents,
+        customFilters,
+        registry
+    }) {
+        // create / get the registry
+        this._consumerRegistry = registry;
         // register the consumer
         this._consumer = this._consumerRegistry.register({
             enabledCardTypes,
@@ -50,8 +86,8 @@ export default class BrazeAdapter {
      * TODO use the dispatcher event stream to publish events
      * @param cardId
      */
-    logCardClick (cardId) {
-        this.dispatcher.logCardClick(cardId);
+    async logCardClick (cardId) {
+        await this.dispatcher.logCardClick(cardId);
     }
 
     /**
@@ -59,8 +95,8 @@ export default class BrazeAdapter {
      * TODO use the dispatcher event stream to publish events
      * @param cardIds
      */
-    logCardImpressions (cardIds) {
-        this.dispatcher.logCardImpressions(cardIds);
+    async logCardImpressions (cardIds) {
+        await this.dispatcher.logCardImpressions(cardIds);
     }
 
     /**

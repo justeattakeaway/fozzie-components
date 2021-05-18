@@ -69,12 +69,12 @@ const registryOptions = {
 
 describe('BrazeConsumerRegistry', () => {
     describe('GetDispatcher', () => {
-        it('should return the same BrazeConsumerRegistry instance when called twice', () => {
+        it('should return the same BrazeConsumerRegistry instance when called twice', async () => {
             // Arrange
-            const ConsumerRegistry1 = GetConsumerRegistry(registryOptions);
+            const ConsumerRegistry1 = await GetConsumerRegistry(registryOptions);
 
             // Act
-            const ConsumerRegistry2 = GetConsumerRegistry(registryOptions);
+            const ConsumerRegistry2 = await GetConsumerRegistry(registryOptions);
 
             // Assert
             expect(ConsumerRegistry1).toBe(ConsumerRegistry2);
@@ -89,10 +89,10 @@ describe('BrazeConsumerRegistry', () => {
     });
     describe('callbacks', () => {
         let consumerRegistry;
-        beforeEach(() => {
+        beforeEach(async () => {
             // Arrange
             BrazeDispatcher.mockClear();
-            consumerRegistry = GetConsumerRegistry(registryOptions);
+            consumerRegistry = await GetConsumerRegistry(registryOptions);
             consumerRegistry.consumers.length = 0;
             consumerRegistry.register(mockConsumerOptions);
         });
@@ -124,9 +124,9 @@ describe('BrazeConsumerRegistry', () => {
 
     describe('register', () => {
         let consumerRegistry;
-        beforeEach(() => {
+        beforeEach(async () => {
             BrazeDispatcher.mockClear();
-            consumerRegistry = GetConsumerRegistry(registryOptions);
+            consumerRegistry = await GetConsumerRegistry(registryOptions);
             consumerRegistry.consumers.length = 0;
         });
 
@@ -138,7 +138,7 @@ describe('BrazeConsumerRegistry', () => {
             expect(consumerRegistry.consumers.length).toEqual(1);
         });
 
-        it('should throw an error if the consumer options passed can not instantiate a consumer instance', () => {
+        it('should throw an error if the consumer options passed can not instantiate a consumer instance', async () => {
             // Arrange
             const modifiedMockConsumerOptions = {
                 ...mockConsumerOptions,
@@ -150,7 +150,7 @@ describe('BrazeConsumerRegistry', () => {
             }
 
             // Assert
-            expect(mockError).toThrow();
+            expect(mockError).toThrowError();
             expect(consumerRegistry.consumers.length).toEqual(0);
         });
     });
@@ -158,10 +158,10 @@ describe('BrazeConsumerRegistry', () => {
     describe('unregister', () => {
         let consumerRegistry;
         let consumer;
-        beforeEach(() => {
+        beforeEach(async () => {
             // Arrange
             BrazeDispatcher.mockClear();
-            consumerRegistry = GetConsumerRegistry(registryOptions);
+            consumerRegistry = await GetConsumerRegistry(registryOptions);
             consumerRegistry.consumers.length = 0;
             consumer = consumerRegistry.register(mockConsumerOptions);
         });
