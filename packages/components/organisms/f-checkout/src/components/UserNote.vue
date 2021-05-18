@@ -3,10 +3,10 @@
         <label
             for="userNote"
             :class="$style['c-userNote-title']">
-            {{ $t('userNote.title') }}
+            {{ $t(`userNote.${serviceType}.title`) }}
         </label>
         <div :class="$style['c-userNote-content']">
-            {{ $t('userNote.text') }}
+            {{ $t(`userNote.${serviceType}.text`) }}
         </div>
         <textarea
             id="userNote"
@@ -15,16 +15,22 @@
             rows="10"
             maxlength="200"
             :class="$style['c-userNote-textArea']"
-            :placeholder="$t('userNote.placeholder')"
+            :placeholder="$t(`userNote.${serviceType}.placeholder`)"
             @input="updateUserNote($event.target.value)" />
     </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
+    computed: {
+        ...mapState(VUEX_CHECKOUT_MODULE, [
+            'serviceType'
+        ])
+    },
+
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateUserNote'
