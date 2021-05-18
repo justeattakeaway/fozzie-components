@@ -26,7 +26,7 @@ export const CookieBannerComponent = () => ({
         :locale="locale"
         :is-hidden="isHidden"
         :key="locale"
-        :show-legacy-banner="shouldShowLegacyBanner" />`
+        :should-show-legacy-banner="shouldShowLegacyBanner" />`
 });
 
 CookieBannerComponent.storyName = 'f-cookie-banner';
