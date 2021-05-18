@@ -113,7 +113,7 @@ export default {
             default: false
         },
 
-        showLegacyBanner: {
+        shouldShowLegacyBanner: {
             type: Boolean,
             default: null
         },
@@ -149,7 +149,7 @@ export default {
          * @returns {Bool}
          */
         legacyBanner () {
-            return this.showLegacyBanner === null ? this.config.displayLegacy : this.showLegacyBanner;
+            return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
         }
     },
 

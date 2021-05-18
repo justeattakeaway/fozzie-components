@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.10.0
 ------------------------------
-*May 17, 2021*
+*May 18, 2021*
 
 ### Changed
-- showLegacyBanner can be passed in as a prop to allow experimentation in UK rollout
+- rename showLegacyBanner prop to shouldShowLegacyBanner for Sacha
+- shouldShowLegacyBanner can be passed in as a prop to allow experimentation in UK rollout
 
 
 v0.9.0

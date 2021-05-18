@@ -18,7 +18,7 @@ export const CookieBannerComponent = () => ({
             default: boolean('Is hidden', false)
         },
 
-        showLegacyBanner: {
+        shouldShowLegacyBanner: {
             default: boolean('Show legacy banner', null)
         }
     },
@@ -26,7 +26,7 @@ export const CookieBannerComponent = () => ({
         :locale="locale"
         :is-hidden="isHidden"
         :key="locale"
-        :show-legacy-banner="showLegacyBanner" />`
+        :show-legacy-banner="shouldShowLegacyBanner" />`
 });
 
 CookieBannerComponent.storyName = 'f-cookie-banner';

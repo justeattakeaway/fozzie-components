@@ -76,7 +76,7 @@ The props that can be defined are as follows:
 | ----- | ----- | ------- | ----------- |
 | `locale` | `String` | `''` | Set the tenant for localisation ['da-DK', 'en-AU', 'en-GB', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']. |
 | `isHidden` | `Boolean` | `false` | show/hide the cookie consent banner. |
-| `showLegacyBanner` | `Boolean` | `false` | Use the legacy "passive" banner markup (UK only). |
+| `shouldShowLegacyBanner` | `Boolean` | `false` | Use the legacy "passive" banner markup (UK only). |
 | `cookieExpiry` | `Number` | `7776000` | Expiry time of cookies written to the browser. |
 
 ### CSS Classes
