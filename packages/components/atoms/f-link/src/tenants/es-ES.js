@@ -1,7 +1,11 @@
-export default {
+const messages = {
     ariaDescribedBy: {
-        openInNew: 'Abrir una nueva {location}', // ventana/pestaña
+        openInNew: 'Abrir una nueva posición',
         opensExternal: 'Abrir a una web externa',
-        opensExternalSiteInNew: 'Abrir a una web externa en una nueva {location}'
+        opensExternalSiteInNew: 'Abrir a una web externa en una nueva posición'
     }
+};
+
+export default {
+    messages
 };

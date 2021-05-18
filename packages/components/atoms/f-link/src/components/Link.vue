@@ -1,22 +1,35 @@
 <template>
     <a
-        :class="$style['o-link']"
+        :class="[
+            $style['o-link'],
+            { [$style['o-link--bold']]: isBold },
+            { [$style['o-link--noDecoration']]: !hasDecoration },
+            { [$style['o-link--full']]: isFullWidth }
+        ]"
         data-test-id="link"
         :href="linkHref"
+        :target="target"
         rel="noopener"
-        :aria-describedby="`copy.ariaDescribedBy['${linkType}']`"
+        :aria-describedby="ariaLabel"
     >
         {{ linkText }}
     </a>
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+// import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
+import {
+    DEFAULT_LINK_TARGET,
+    VALID_LINK_TARGETS
+} from '../constants';
 
 export default {
     name: 'VLink',
-    components: {},
+
+    mixins: [VueGlobalisationMixin],
+
     props: {
         locale: {
             type: String,
@@ -31,21 +44,56 @@ export default {
         linkHref: {
             type: String,
             required: true
+        },
+
+        isBold: {
+            type: Boolean,
+            default: false
+        },
+
+        hasDecoration: {
+            type: Boolean,
+            default: true
+        },
+
+        isFullWidth: {
+            type: Boolean,
+            default: false
+        },
+
+        target: {
+            type: String,
+            default: DEFAULT_LINK_TARGET,
+            validator: value => (VALID_LINK_TARGETS.indexOf(value) !== -1) // The prop value must match one of the valid link types
+        },
+
+        isExternalLink: {
+            type: Boolean,
+            default: false
         }
-
-        // linkType: {
-        //     type: String,
-        //     default: DEFAULT_LINK_TYPE,
-        //     validator: value => (VALID_LINK_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid link types
-        // }
     },
-    data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
 
+    data () {
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
+    },
+
+    computed: {
+        ariaLabel () {
+            console.log(this.target); // eslint-disable-line no-console
+            const locationType = this.isExternalLink ? 'opensExternalSiteInNew' : 'openInNew';
+            console.log(locationType); // eslint-disable-line no-console
+            const type = this.target === DEFAULT_LINK_TARGET ? 'opensExternal' : locationType;
+            console.log(type); // eslint-disable-line no-console
+            console.log(this.$t(`ariaDescribedBy['${type}']`)); // eslint-disable-line no-console
+            return this.$t(`ariaDescribedBy['${type}']`) || null;
+        },
+
+        linkTarget () {
+            // _blank|_self|_parent|_top|framename
+            return '_top';
+        }
     }
 };
 </script>
