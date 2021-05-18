@@ -10,6 +10,7 @@ v1.12.1
 
 ### Added
 - Added back missed css class to the textarea element
+- Wrapped input description slot into a p html element
 
 
 v1.12.0
