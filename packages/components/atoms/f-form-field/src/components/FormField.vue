@@ -63,7 +63,7 @@
                 :class="[
                     $style['c-formField-field'],
                     $style['c-formField-field--defaultHeight'],
-                    (isSelectionControl ? $style['c-formField-field--focus'] : '')
+                    { [$style['c-formField-field--focus']]: isSelectionControl }
                 ]"
                 v-on="listeners"
             >
