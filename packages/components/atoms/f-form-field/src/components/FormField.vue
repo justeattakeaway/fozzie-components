@@ -19,7 +19,11 @@
                 {{ labelText }}
             </form-label>
 
-            <slot v-if="hasInputDescription" />
+            <p
+                v-if="hasInputDescription"
+                class="u-spacingTop u-spacingBottom--large">
+                <slot />
+            </p>
 
             <form-dropdown
                 v-if="isDropdown"
@@ -44,7 +48,8 @@
                 v-bind="$attrs"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--focus']
+                    $style['c-formField-field--focus'],
+                    $style['c-formField-field--textarea']
                 ]"
                 data-test-id="formfield-textarea"
                 v-on="listeners" />
@@ -335,7 +340,7 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         }
     }
 
-    .c-formField-textarea {
+    .c-formField-field--textarea {
         background-clip: padding-box;
         padding: spacing(x2);
         resize: none;
