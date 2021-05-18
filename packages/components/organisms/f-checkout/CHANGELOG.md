@@ -8,8 +8,11 @@ v0.115.0
 ------------------------------
 *May 18, 2021*
 
-### Changed
-- User note to use f-form-field textarea option
+### Removed
+- `UserNote.vue` as now it is just another form field from `f-form-field` component
+
+### Updated
+- `f-form-field` to version 1.12.1 to include textarea input-type
 
 
 v0.114.0
