@@ -9,7 +9,7 @@
         ]"
         :data-test-id="testId.container">
         <div
-            :class="$style['c-formField-inputWrapper']">
+            :class="$style['c-formField-fieldWrapper']">
             <form-label
                 v-if="!isInline"
                 :label-style="normalisedLabelStyle"
@@ -28,9 +28,10 @@
                 :type="normalisedInputType"
                 :value="value"
                 :class="[
-                    $style['c-formField-input'],
+                    $style['c-formField-field'],
+                    $style['c-formField-field--defaultHeight'],
                     $style['c-formField-dropdownContainer'],
-                    $style['c-formField-input--focus']
+                    $style['c-formField-field--focus']
                 ]"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
@@ -42,8 +43,8 @@
                 :value="value"
                 v-bind="$attrs"
                 :class="[
-                    $style['c-formField-textarea'],
-                    $style['c-formField-textarea--focus']
+                    $style['c-formField-field'],
+                    $style['c-formField-field--focus']
                 ]"
                 data-test-id="formfield-textarea"
                 v-on="listeners" />
@@ -60,8 +61,9 @@
                 placeholder=" "
                 :data-test-id="testId.input"
                 :class="[
-                    $style['c-formField-input'],
-                    (isSelectionControl ? $style['c-formField-input--focus'] : '')
+                    $style['c-formField-field'],
+                    $style['c-formField-field--defaultHeight'],
+                    (isSelectionControl ? $style['c-formField-field--focus'] : '')
                 ]"
                 v-on="listeners"
             >
@@ -291,16 +293,15 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
     }
 }
 
-    .c-formField-inputWrapper {
+    .c-formField-fieldWrapper {
         position: relative;
     }
 
-    .c-formField-input {
+    .c-formField-field--defaultHeight {
         @include rem(height, $form-input-height); //convert height to rem
     }
 
-    .c-formField-input,
-    .c-formField-textarea {
+    .c-formField-field {
         width: 100%;
         font-family: $font-family-base;
         @include font-size($form-input-fontSize);
@@ -340,8 +341,7 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         resize: none;
     }
 
-    .c-formField-input--focus,
-    .c-formField-textarea--focus {
+    .c-formField-field--focus {
         &:focus,
         &:active,
         &:focus-within {
@@ -358,7 +358,7 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         & + & {
             margin-top: 0;
 
-            .c-formField-input {
+            .c-formField-field {
                 border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
                 border-top: 0;
             }
@@ -366,13 +366,13 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
     }
 
     .c-formField--grouped:not(:last-child) {
-        .c-formField-input {
+        .c-formField-field {
             border-radius: 0;
         }
     }
 
     .c-formField--grouped:first-child {
-        .c-formField-input {
+        .c-formField-field {
             border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
     }
