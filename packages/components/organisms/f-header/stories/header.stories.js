@@ -50,6 +50,9 @@ export const HeaderComponent = () => ({
         },
         showCountrySelector: {
             default: boolean('Show country selector', true)
+        },
+        showSkipLink: {
+            default: boolean('Show skip link', true)
         }
     },
     parameters: {
@@ -57,16 +60,17 @@ export const HeaderComponent = () => ({
     },
     template: `
         <vue-header
-            :userInfoProp="userInfoProp"
-            :showOffersLink="showOffersLink"
-            :showHelpLink="showHelpLink"
+            :user-info-prop="userInfoProp"
+            :show-offers-link="showOffersLink"
+            :show-help-link="showHelpLink"
             :locale="locale"
-            :isLogoLinkDisabled="logoLinkDisabled"
-            :headerBackgroundTheme="headerBackgroundTheme"
-            :showDeliveryEnquiry="showDeliveryEnquiry"
-            :showLoginInfo="showLoginInfo"
-            :showCountrySelector="showCountrySelector"
-            :key="locale" />`
+            :is-logo-link-disabled="logoLinkDisabled"
+            :header-background-theme="headerBackgroundTheme"
+            :show-delivery-enquiry="showDeliveryEnquiry"
+            :show-login-info="showLoginInfo"
+            :show-country-selector="showCountrySelector"
+            :key="locale"
+            :show-skip-link="showSkipLink" />`
 });
 
 HeaderComponent.storyName = 'f-header';
