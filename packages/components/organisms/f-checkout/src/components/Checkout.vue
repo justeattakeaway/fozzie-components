@@ -94,6 +94,7 @@
                         :maxlength="200"
                         :name="notePlaceholder"
                         has-input-description
+                        data-test-id="user-note"
                         @input="updateUserNote($event)">
                         {{ $t('userNote.text') }}
                     </form-field>
