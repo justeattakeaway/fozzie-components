@@ -1,5 +1,5 @@
 const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.class %>.component');
-const <%= name.class %> = new <%= name.filename %>
+const <%= name.class %> = new <%= name.filename %>();
 
 describe('f-<%= name.class %> component tests', () => {
     beforeEach(() => {

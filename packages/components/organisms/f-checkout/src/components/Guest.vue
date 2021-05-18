@@ -7,6 +7,7 @@
             aria-describedby="first-name-error"
             :aria-invalid="isFirstNameEmpty"
             name="guest-first-name"
+            maxlength="100"
             :label-text="$t('guest.firstName')"
             :has-error="isFirstNameEmpty"
             @input="updateCustomerDetails({ 'firstName': $event })">
@@ -24,6 +25,7 @@
         <form-field
             :value="customer.lastName"
             name="guest-last-name"
+            maxlength="100"
             :label-text="$t('guest.lastName')"
             aria-describedby="last-name-error"
             :aria-invalid="isLastNameEmpty"

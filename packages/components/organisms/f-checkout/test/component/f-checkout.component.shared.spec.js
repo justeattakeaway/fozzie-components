@@ -1,4 +1,7 @@
+import forEach from 'mocha-each';
+
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
+
 const checkout = new Checkout();
 
 describe('f-checkout component tests - @browserstack', () => {
@@ -33,18 +36,24 @@ describe('f-checkout component tests - @browserstack', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it('should prevent a user from writing a note of over 200 characters', () => {
+    forEach([
+        [255, 'addressLine1'],
+        [255, 'addressLine2'],
+        [50, 'addressLocality'],
+        [50, 'addressPostcode'],
+        [16, 'mobileNumber'],
+        [200, 'userNote']
+    ])
+    .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
         // Arrange
-        const userNote = 'A';
-        const addressInfo = {
-            note: userNote.repeat(300)
-        };
+        checkout.clearCheckoutForm(field);
+        const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
         // Act
-        checkout.inputUserNote(addressInfo);
+        checkout.setFieldValue(field, userEntry);
 
         // Assert
-        expect(checkout.userNoteMaxCharacterCount()).toEqual('200');
+        expect(checkout.getFieldValue(field).length).toEqual(maxlength);
     });
 
     it.skip('should enable a user to submit without adding a note', () => {

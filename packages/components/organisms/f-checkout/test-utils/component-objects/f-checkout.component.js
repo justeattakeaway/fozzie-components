@@ -272,23 +272,25 @@ module.exports = class Checkout extends Page {
 
     /**
      * @description
-     * Sets the value of the user note.
+     * Sets the value of the Checkout field.
      *
-     * @param {Object} addressInfo
-     * @param {String} addressInfo.note The user's extra note
+     * @param {String} Field name
+     * @param {String} Value to set
      */
-    inputUserNote (addressInfo) {
-        this.fields.userNote.input.setValue(addressInfo.note);
+    setFieldValue (fieldName, value) {
+        this.fields[fieldName].input.setValue(value);
     }
 
     /**
     * @description
-    * Grabs the length of characters of the user note.
+    * Gets the value of the Checkout field.
     *
-    * @returns {number} The length of the user note
+    * @param {String} Field name
+    *
+    * @returns {String} The value of the field
     */
-    getUserNoteLength () {
-        return this.userNoteInput.getValue().length;
+    getFieldValue (fieldName) {
+        return this.fields[fieldName].input.getValue();
     }
 
     /**

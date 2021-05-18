@@ -6,10 +6,10 @@ module.exports = class <%= name.filename %> extends Page {
     get component () { return $(COMPONENT); }
 
     open () {
-        super.openComponent('<%= storybook.componentCategory.toLowerCase().replace('s','') %>', '<%= name.class %>-component');
+        super.openComponent('<%= storybook.componentCategory.toLowerCase().slice(0, -1) %>', '<%= name.class %>-component');
     }
 
-    waitForTestComponent () 
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
