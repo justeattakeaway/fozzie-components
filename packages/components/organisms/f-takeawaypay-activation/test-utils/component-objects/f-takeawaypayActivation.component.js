@@ -1,7 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-takeawaypayActivation-selectors')
+const { COMPONENT } = require('./f-takeawayPayActivation-selectors')
 
-module.exports = class TakeawaypayActivation extends Page {
+module.exports = class TakeawayPayActivation extends Page {
 
     get component () { return $(COMPONENT); }
 

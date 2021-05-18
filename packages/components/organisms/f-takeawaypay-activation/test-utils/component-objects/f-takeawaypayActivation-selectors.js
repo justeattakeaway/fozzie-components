@@ -1,1 +1,1 @@
-export const COMPONENT = '[data-test-id="takeawaypayActivation"]';
+export const COMPONENT = '[data-test-id="takeawayPayActivation"]';

@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import TakeawaypayActivation from '../TakeawaypayActivation.vue';
+import TakeawayPayActivation from '../TakeawayPayActivation.vue';
 
-describe('TakeawaypayActivation', () => {
+describe('TakeawayPayActivation', () => {
     it('should be defined', () => {
         const propsData = {};
-        const wrapper = shallowMount(TakeawaypayActivation, { propsData });
+        const wrapper = shallowMount(TakeawayPayActivation, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
 });

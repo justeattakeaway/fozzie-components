@@ -7,13 +7,13 @@
 
 
 // Import vue component
-import TakeawaypayActivation from '@/components/TakeawaypayActivation.vue';
+import TakeawayPayActivation from '@/components/TakeawayPayActivation.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('TakeawaypayActivation', TakeawaypayActivation);
+    Vue.component('TakeawayPayActivation', TakeawayPayActivation);
 }
 
 // Create module definition for Vue.use()
@@ -33,6 +33,6 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default TakeawaypayActivation;
+export default TakeawayPayActivation;
 
 

@@ -1,7 +1,7 @@
 <template>
     <div
-        :class="$style['c-takeawaypayActivation']"
-        data-test-id="takeawaypayActivation">
+        :class="$style['c-takeawayPayActivation']"
+        data-test-id="takeawayPayActivation">
         {{ copy.text }}
     </div>
 </template>
@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss" module>
 
-.c-takeawaypayActivation {
+.c-takeawayPayActivation {
     display: flex;
     justify-content: center;
     min-height: 80vh;
