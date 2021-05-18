@@ -84,7 +84,7 @@ export default {
             const locationType = this.isExternalLink ? 'opensExternalSiteInNew' : 'openInNew';
             const type = this.target === DEFAULT_LINK_TARGET ? 'opensExternal' : locationType;
 
-            return this.linkText + " - " + this.$t(`ariaDescribedBy['${type}']`) || null;
+            return `${this.linkText} - ${this.$t(`ariaDescribedBy['${type}']`)}` || null;
         }
     }
 };
