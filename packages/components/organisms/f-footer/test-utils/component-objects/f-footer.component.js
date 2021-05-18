@@ -60,6 +60,10 @@ module.exports = class Footer extends Page {
         this.socialIconValue = this.socialIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
     }
 
+    set expectedCountry (country) {
+        this.countryValue = this.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
+    }
+
     open (url) {
         super.open(url);
     }

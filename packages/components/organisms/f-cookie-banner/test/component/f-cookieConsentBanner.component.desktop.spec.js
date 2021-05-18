@@ -34,38 +34,16 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
 
 describe('New - Multi-tenant - f-cookieBanner component tests', () => {
     forEach([
-        ['es', 'es/info/politica-de-cookies'],
+        ['es-ES', 'es/info/politica-de-cookies'],
         // ['dk', 'dk/cookie-erklaering'],
-        ['ie', 'ie/info/cookies-policy'],
-        ['it', 'it/informazioni/politica-dei-cookie']
+        ['en-IE', 'ie/info/cookies-policy'],
+        ['it-IT', 'it/informazioni/politica-dei-cookie']
         // ['no', 'no/informasjonskapselerklaering']  'dk' and 'no' disabled for now
     ])
     .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
         // Arrange
-        const countryFormatted = tenant.toUpperCase();
-        let formattedLocale = '';
-        switch (countryFormatted) {
-            case 'IE':
-                formattedLocale = `en-${countryFormatted}`;
-                break;
-            case 'DK':
-                formattedLocale = `da-${countryFormatted}`;
-                break;
-            case 'ES':
-                formattedLocale = `es-${countryFormatted}`;
-                break;
-            case 'IT':
-                formattedLocale = `it-${countryFormatted}`;
-                break;
-            case 'NO':
-                formattedLocale = `nb-${countryFormatted}`;
-                break;
-            default:
-                throw new Error(`locale ${countryFormatted} is not supported`);
-        }
-
         cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
-        cookieBanner.withQuery('&knob-Locale', formattedLocale);
+        cookieBanner.withQuery('&knob-Locale', tenant);
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 
         cookieBanner.open(pageUrl);

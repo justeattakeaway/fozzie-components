@@ -51,7 +51,7 @@ module.exports = class CookieBanner extends Page {
                 this.cookieAcceptNecessaryButton.click();
                 break;
             default:
-                    // not implemented
+                throw new Error(`${cookieType} is not a valid cookie type.`);
         }
         return this;
     }

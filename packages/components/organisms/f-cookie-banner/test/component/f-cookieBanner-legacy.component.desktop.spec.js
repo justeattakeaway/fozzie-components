@@ -27,16 +27,14 @@ describe('Legacy - f-cookieBanner component tests @browserstack', () => {
 
 describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
     forEach([
-        ['gb', 'uk/info/cookies-policy'],
-        ['au', 'au/info/privacy-policy#cookies_policy'],
-        ['nz', 'nz/info/privacy-policy#cookies_policy']
+        ['en-GB', 'uk/info/cookies-policy'],
+        ['en-AU', 'au/info/privacy-policy#cookies_policy'],
+        ['en-NZ', 'nz/info/privacy-policy#cookies_policy']
     ])
     .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
         // Arrange
         cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
-        const countryFormatted = tenant.toUpperCase();
-        const formattedLocale = `en-${countryFormatted}`;
-        cookieBanner.withQuery('&knob-Locale', formattedLocale);
+        cookieBanner.withQuery('&knob-Locale', tenant);
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 
         cookieBanner.open(pageUrl);

@@ -31,35 +31,14 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
     });
 
     // 'dk' and 'no' disabled for now
-    forEach(['es', 'ie', 'it'])
+    forEach(['es-ES', 'en-IE', 'it-IT'])
     .it('should display the f-cookieBanner component for "%s"', tenant => {
         // Arrange
-        const countryFormatted = tenant.toUpperCase();
-        let formattedLocale = '';
-        switch (countryFormatted) {
-            case 'IE':
-                formattedLocale = `en-${countryFormatted}`;
-                break;
-            case 'DK':
-                formattedLocale = `da-${countryFormatted}`;
-                break;
-            case 'ES':
-                formattedLocale = `es-${countryFormatted}`;
-                break;
-            case 'IT':
-                formattedLocale = `it-${countryFormatted}`;
-                break;
-            case 'NO':
-                formattedLocale = `nb-${countryFormatted}`;
-                break;
-            default:
-                throw new Error(`locale ${countryFormatted} is not supported`);
-        }
-
         cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
-        cookieBanner.withQuery('&knob-Locale', formattedLocale);
+        cookieBanner.withQuery('&knob-Locale', tenant);
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 
+        // Act
         cookieBanner.open(pageUrl);
         browser.deleteAllCookies();
         browser.refresh();
