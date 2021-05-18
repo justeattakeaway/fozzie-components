@@ -57,9 +57,7 @@ export const FormFieldComponent = () => ({
             :rows="7"
             :maxlength="200"
             :has-input-description="hasInputDescription">
-            <div>
                 Here is a bit more text to show
-            </div>
         </form-field>`
 });
 

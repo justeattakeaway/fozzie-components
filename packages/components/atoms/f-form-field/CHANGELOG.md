@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.12.1
+------------------------------
+*May 18, 2021*
+
+### Added
+- Added back missed css class to the textarea element
+- Wrapped input description slot into a p html element
+
+
 v1.12.0
 ------------------------------
 *May 17, 2021*
