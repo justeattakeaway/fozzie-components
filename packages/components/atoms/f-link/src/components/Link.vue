@@ -10,7 +10,7 @@
         :href="linkHref"
         :target="target"
         rel="noopener"
-        :aria-describedby="ariaLabel"
+        :aria-label="ariaLabel"
     >
         {{ linkText }}
     </a>
@@ -81,18 +81,10 @@ export default {
 
     computed: {
         ariaLabel () {
-            console.log(this.target); // eslint-disable-line no-console
             const locationType = this.isExternalLink ? 'opensExternalSiteInNew' : 'openInNew';
-            console.log(locationType); // eslint-disable-line no-console
             const type = this.target === DEFAULT_LINK_TARGET ? 'opensExternal' : locationType;
-            console.log(type); // eslint-disable-line no-console
-            console.log(this.$t(`ariaDescribedBy['${type}']`)); // eslint-disable-line no-console
-            return this.$t(`ariaDescribedBy['${type}']`) || null;
-        },
 
-        linkTarget () {
-            // _blank|_self|_parent|_top|framename
-            return '_top';
+            return this.linkText + " - " + this.$t(`ariaDescribedBy['${type}']`) || null;
         }
     }
 };
