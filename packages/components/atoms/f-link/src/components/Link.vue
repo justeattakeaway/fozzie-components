@@ -7,23 +7,16 @@
             { [$style['o-link--full']]: isFullWidth }
         ]"
         data-test-id="link"
-        :href="linkHref"
+        :href="url"
         :target="target"
-        rel="noopener"
         :aria-label="ariaLabel"
-    >
-        {{ linkText }}
-    </a>
+        :rel="rel"
+    >{{ linkText }}</a>
 </template>
 
 <script>
-// import { globalisationServices } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
-import {
-    DEFAULT_LINK_TARGET,
-    VALID_LINK_TARGETS
-} from '../constants';
 
 export default {
     name: 'VLink',
@@ -41,9 +34,19 @@ export default {
             required: true
         },
 
-        linkHref: {
+        url: {
             type: String,
             required: true
+        },
+
+        isExternalLink: {
+            type: Boolean,
+            default: false
+        },
+
+        opensInNew: {
+            type: Boolean,
+            default: false
         },
 
         isBold: {
@@ -59,17 +62,6 @@ export default {
         isFullWidth: {
             type: Boolean,
             default: false
-        },
-
-        target: {
-            type: String,
-            default: DEFAULT_LINK_TARGET,
-            validator: value => (VALID_LINK_TARGETS.indexOf(value) !== -1) // The prop value must match one of the valid link types
-        },
-
-        isExternalLink: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -81,10 +73,24 @@ export default {
 
     computed: {
         ariaLabel () {
-            const locationType = this.isExternalLink ? 'opensExternalSiteInNew' : 'openInNew';
-            const type = this.target === DEFAULT_LINK_TARGET ? 'opensExternal' : locationType;
+            let message = this.$t('ariaLabel.prefix');
 
-            return `${this.linkText} - ${this.$t(`ariaDescribedBy['${type}']`)}` || null;
+            if (this.isExternalLink) {
+                message += this.$t('ariaLabel.externalSite');
+            }
+            if (this.opensInNew) {
+                message += this.$t('ariaLabel.newLocation');
+            }
+
+            return message === this.$t('ariaLabel.prefix') ? this.linkText : this.linkText + message;
+        },
+
+        target () {
+            return this.isExternalLink ? '_blank' : null;
+        },
+
+        rel () {
+            return this.opensInNew ? 'noopener' : null;
         }
     }
 };

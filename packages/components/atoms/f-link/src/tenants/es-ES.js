@@ -1,8 +1,8 @@
 const messages = {
-    ariaDescribedBy: {
-        openInNew: 'Abrir una nueva posición',
-        opensExternal: 'Abrir a una web externa',
-        opensExternalSiteInNew: 'Abrir a una web externa en una nueva posición'
+    ariaLabel: {
+        prefix: ' - Abrir',
+        newLocation: ' una nueva posición',
+        externalSite: ' a una web externa'
     }
 };
 

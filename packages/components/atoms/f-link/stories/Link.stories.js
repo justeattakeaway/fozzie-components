@@ -4,26 +4,43 @@ import {
 import { withA11y } from '@storybook/addon-a11y';
 import VLink from '../src/components/Link.vue';
 import { locales } from '@justeat/storybook/constants/globalisation';
-import { VALID_LINK_TARGETS } from '../src/constants';
 
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
+// Removes DK and NO from `@justeat/storybook/constants/globalisation` locales
+const availableLocales = [
+    locales.gb,
+    locales.au,
+    locales.nz,
+    locales.ie,
+    locales.es,
+    locales.it
+]
+
 export const VLinkComponent = () => ({
     components: { VLink },
     props: {
         locale: {
-            default: select('Locale', [locales.gb])
+            default: select('Locale', availableLocales)
         },
 
         linkText: {
             default: text('Link Text', 'This is a link')
         },
 
-        linkHref: {
+        url: {
             default: text('Link Destination', 'https://www.just-eat.co.uk/')
+        },
+
+        isExternalLink: {
+            default: boolean('Is external', false)
+        },
+
+        opensInNew: {
+            default: boolean('new', false)
         },
 
         isBold: {
@@ -36,25 +53,17 @@ export const VLinkComponent = () => ({
 
         isFullWidth: {
             default: boolean('Is full-width', false)
-        },
-
-        target: {
-            default: select('Link target', VALID_LINK_TARGETS)
-        },
-
-        isExternalLink: {
-            default: boolean('Is external', false)
         }
+
     },
     template: `<v-link ` +
                 ':locale="locale" ' +
                 ':linkText="linkText" ' +
-                ':linkHref="linkHref" ' +
+                ':url="url" ' +
+                ':isExternalLink="isExternalLink" ' +
+                ':opensInNew="opensInNew" ' +
                 ':isBold="isBold" ' +
                 ':hasDecoration="hasDecoration"  ' +
-                ':isFullWidth="isFullWidth" ' +
-                ':target="target" ' +
-                ':isExternalLink="isExternalLink" ' +
                 '/>'
 });
 
