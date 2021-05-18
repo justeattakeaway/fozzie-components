@@ -37,6 +37,5 @@ export default {
 <style lang="scss" module>
 .c-userNote {
     margin-top: spacing(x3);
-    color: $color-text;
 }
 </style>
