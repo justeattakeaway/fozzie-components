@@ -37,8 +37,8 @@ export const FormFieldComponent = () => ({
         isGrouped: {
             default: boolean('isGrouped', false)
         },
-        hasExtraLabelText: {
-            default: boolean('hasExtraLabelText', true)
+        hasInputDescription: {
+            default: boolean('hasExtraLabelText', false)
         }
     },
     parameters: {
@@ -47,16 +47,16 @@ export const FormFieldComponent = () => ({
     template:
         `<form-field
             :locale="locale"
-            :labelText="labelText"
-            :inputType="inputType"
-            :labelStyle="labelStyle"
-            :hasError="hasError"
-            :dropdownOptions="dropdownOptions"
-            :isGrouped="isGrouped"
+            :label-text="labelText"
+            :input-type="inputType"
+            :label-style="labelStyle"
+            :has-error="hasError"
+            :dropdown-options="dropdownOptions"
+            :is-grouped="isGrouped"
             :cols="30"
             :rows="7"
             :maxlength="200"
-            :hasExtraLabelText="hasExtraLabelText">
+            :has-input-description="hasInputDescription">
             <div>
                 Here is a bit more text to show
             </div>
