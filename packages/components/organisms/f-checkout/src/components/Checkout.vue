@@ -91,7 +91,7 @@
                             <error-message
                                 v-if="isTableIdentifierEmpty"
                                 data-js-error-message
-                                data-test-id="error-table-identifier"
+                                data-test-id="error-table-identifier-empty"
                             >
                                 {{ $t('validationMessages.tableIdentifier.requiredError') }}
                             </error-message>

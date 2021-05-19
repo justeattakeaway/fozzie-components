@@ -40,7 +40,7 @@ const messages = {
         },
         tableIdentifier: {
             requiredError: 'Please include your table name/number',
-            maxLengthError: 'The table number/name exceeds the maximum length (100)'
+            maxLengthError: 'The table number/name exceeds the maximum length (12)'
         }
     },
 
