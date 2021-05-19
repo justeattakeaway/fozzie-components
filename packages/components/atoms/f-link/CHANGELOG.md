@@ -9,7 +9,6 @@ v0.2.0
 *May 19, 2021*
 
 ### Added
-- Props to set `linkText` and `url`.
 - Props `isExternalLink` and `opensInNewLocation` to set `target`, `rel`, and `arialLabel`.
 - Props `isBold`, `isFullWidth` and `hadTextDecoration` to toggle link style.
 - Tests to cover changes.
