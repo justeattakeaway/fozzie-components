@@ -3,10 +3,10 @@
         :class="[
             $style['o-link'],
             { [$style['o-link--bold']]: isBold },
-            { [$style['o-link--noDecoration']]: !hasDecoration },
+            { [$style['o-link--noDecoration']]: !hasTextDecoration },
             { [$style['o-link--full']]: isFullWidth }
         ]"
-        data-test-id="link"
+        :data-test-id="`${linkText} link`"
         :href="url"
         :target="target"
         :aria-label="ariaLabel"
@@ -39,12 +39,12 @@ export default {
             required: true
         },
 
-        isExternalLink: {
+        isExternal: {
             type: Boolean,
             default: false
         },
 
-        opensInNew: {
+        opensInNewLocation: {
             type: Boolean,
             default: false
         },
@@ -54,7 +54,7 @@ export default {
             default: false
         },
 
-        hasDecoration: {
+        hasTextDecoration: {
             type: Boolean,
             default: true
         },
@@ -73,24 +73,23 @@ export default {
 
     computed: {
         ariaLabel () {
-            let message = this.$t('ariaLabel.prefix');
+            let message;
 
-            if (this.isExternalLink) {
-                message += this.$t('ariaLabel.externalSite');
-            }
-            if (this.opensInNew) {
-                message += this.$t('ariaLabel.newLocation');
+            if (this.isExternal) {
+                message = this.$t('ariaLabel.externalSite');
+            } else if (this.opensInNewLocation) {
+                message = this.$t('ariaLabel.newLocation');
             }
 
-            return message === this.$t('ariaLabel.prefix') ? this.linkText : this.linkText + message;
+            return message ? this.linkText + message : this.linkText;
         },
 
         target () {
-            return this.isExternalLink ? '_blank' : null;
+            return this.isExternal || this.opensInNewLocation ? '_blank' : null;
         },
 
         rel () {
-            return this.opensInNew ? 'noopener' : null;
+            return this.isExternal ? 'noopener' : null;
         }
     }
 };

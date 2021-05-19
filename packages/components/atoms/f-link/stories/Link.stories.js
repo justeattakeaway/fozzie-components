@@ -32,27 +32,27 @@ export const VLinkComponent = () => ({
         },
 
         url: {
-            default: text('Link Destination', 'https://www.just-eat.co.uk/')
+            default: text('Link URL', 'https://www.just-eat.co.uk/')
         },
 
-        isExternalLink: {
+        isExternal: {
             default: boolean('Is external', false)
         },
 
-        opensInNew: {
-            default: boolean('new', false)
+        opensInNewLocation: {
+            default: boolean('opensInNewLocation', false)
         },
 
         isBold: {
-            default: boolean('Is bold', false)
+            default: boolean('isBold', false)
         },
 
-        hasDecoration: {
-            default: boolean('Has text decoration', true)
+        hasTextDecoration: {
+            default: boolean('hasTextDecoration', true)
         },
 
         isFullWidth: {
-            default: boolean('Is full-width', false)
+            default: boolean('isFullWidth', false)
         }
 
     },
@@ -60,10 +60,11 @@ export const VLinkComponent = () => ({
                 ':locale="locale" ' +
                 ':linkText="linkText" ' +
                 ':url="url" ' +
-                ':isExternalLink="isExternalLink" ' +
-                ':opensInNew="opensInNew" ' +
+                ':isExternal="isExternal" ' +
+                ':opensInNewLocation="opensInNewLocation" ' +
                 ':isBold="isBold" ' +
-                ':hasDecoration="hasDecoration"  ' +
+                ':hasTextDecoration="hasTextDecoration"  ' +
+                ':isFullWidth="isFullWidth"  ' +
                 '/>'
 });
 

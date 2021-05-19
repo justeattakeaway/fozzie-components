@@ -32,21 +32,20 @@ describe('Link', () => {
 
     describe('computed :: ', () => {
         describe('ariaLabel :: ', () => {
-            const fullMessage = `${linkText} - Opens an external site in a new location`;
             const newLocationMessage = `${linkText} - Opens in a new location`;
-            const externalLinkMessage = `${linkText} - Opens an external site`;
+            const externalLinkMessage = `${linkText} - Opens an external site in a new location`;
 
             it.each([
                 [linkText, false, false],
-                [fullMessage, true, true],
                 [newLocationMessage, false, true],
-                [externalLinkMessage, true, false]
-            ])('should return `%s` when `isExternalLink` is %s AND `opensInNewTab` is $s', (expected, isExternalLink, opensInNew) => {
+                [externalLinkMessage, true, false],
+                [externalLinkMessage, true, true]
+            ])('should return `%s` when `isExternal` is %s AND `opensInNewLocationTab` is $s', (expected, isExternal, opensInNewLocation) => {
                 const propsData = {
                     linkText: 'This is a Link',
                     url: 'https://www.just-eat.com',
-                    isExternalLink,
-                    opensInNew
+                    isExternal,
+                    opensInNewLocation
                 };
 
                 const wrapper = shallowMount(VLink, {
@@ -63,11 +62,30 @@ describe('Link', () => {
             it.each([
                 ['_blank', true],
                 [null, false]
-            ])('should return %s when `isExternalLink` is %s', (expected, isExternalLink) => {
+            ])('should return %s when `isExternal` is %s', (expected, isExternal) => {
                 const propsData = {
                     linkText,
                     url,
-                    isExternalLink
+                    isExternal
+                };
+
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    i18n,
+                    localVue
+                });
+
+                expect(wrapper.vm.target).toEqual(expected);
+            });
+
+            it.each([
+                ['_blank', true],
+                [null, false]
+            ])('should return %s when `opensInNewLocation` is %s', (expected, opensInNewLocation) => {
+                const propsData = {
+                    linkText,
+                    url,
+                    opensInNewLocation
                 };
 
                 const wrapper = shallowMount(VLink, {
@@ -84,11 +102,11 @@ describe('Link', () => {
             it.each([
                 ['noopener', true],
                 [null, false]
-            ])('should return %s when `opensInNew` is %s', (expected, opensInNew) => {
+            ])('should return %s when `isExternal` is %s', (expected, isExternal) => {
                 const propsData = {
                     linkText,
                     url,
-                    opensInNew
+                    isExternal
                 };
 
                 const wrapper = shallowMount(VLink, {
