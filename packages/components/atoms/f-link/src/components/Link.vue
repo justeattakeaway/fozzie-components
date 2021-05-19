@@ -6,11 +6,10 @@
             { [$style['o-link--noDecoration']]: !hasTextDecoration },
             { [$style['o-link--full']]: isFullWidth }
         ]"
-        :data-test-id="dataTestId"
-        :href="url"
         :target="target"
         :aria-label="ariaLabel"
         :rel="rel"
+        v-bind="$attrs"
     >{{ linkText }}</a>
 </template>
 
@@ -24,16 +23,6 @@ export default {
     mixins: [VueGlobalisationMixin],
 
     props: {
-        locale: {
-            type: String,
-            default: 'en-GB'
-        },
-
-        dataTestId: {
-            type: String,
-            required: true
-        },
-
         linkText: {
             type: String,
             required: true
@@ -86,7 +75,7 @@ export default {
                 message = this.$t('ariaLabel.newLocation');
             }
 
-            return message ? this.linkText + message : this.linkText;
+            return message ? this.linkText + message : null;
         },
 
         target () {
@@ -114,11 +103,6 @@ export default {
     &:active {
         color: $color-link-active;
     }
-    // have left in in case we want to use eventually
-    // &:visited {
-    //     color: $color-link-visited;
-    //     text-decoration: none;
-    // }
 }
 
 .o-link--full {

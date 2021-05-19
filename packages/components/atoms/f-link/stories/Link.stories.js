@@ -3,22 +3,11 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VLink from '../src/components/Link.vue';
-import { locales } from '@justeat/storybook/constants/globalisation';
 
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
 };
-
-// Removes DK and NO from `@justeat/storybook/constants/globalisation` locales
-const availableLocales = [
-    locales.gb,
-    locales.au,
-    locales.nz,
-    locales.ie,
-    locales.es,
-    locales.it
-]
 
 export const VLinkComponent = () => ({
     components: { VLink },
@@ -28,16 +17,8 @@ export const VLinkComponent = () => ({
         }
     },
     props: {
-        locale: {
-            default: select('Locale', availableLocales)
-        },
-
         linkText: {
             default: text('Link Text', 'This is a link')
-        },
-
-        url: {
-            default: text('Link URL', 'https://www.just-eat.co.uk/')
         },
 
         isExternal: {
@@ -61,17 +42,17 @@ export const VLinkComponent = () => ({
         }
 
     },
-    template: `<v-link ` +
-                ':locale="locale" ' +
-                ':dataTestId="dataTestId" ' +
-                ':linkText="linkText" ' +
-                ':url="url" ' +
-                ':isExternal="isExternal" ' +
-                ':opensInNewLocation="opensInNewLocation" ' +
-                ':isBold="isBold" ' +
-                ':hasTextDecoration="hasTextDecoration"  ' +
-                ':isFullWidth="isFullWidth"  ' +
-                '/>'
+    template: `<v-link
+                    :data-test-id="dataTestId"
+                    href="https://www.just-eat.co.uk/"
+                    :link-text="linkText"
+                    :url="url"
+                    :is-external="isExternal"
+                    :opens-in-new-location="opensInNewLocation"
+                    :is-bold="isBold"
+                    :has-text-decoration="hasTextDecoration"
+                    :is-full-width="isFullWidth"
+                />`
 });
 
 VLinkComponent.storyName = 'f-link';

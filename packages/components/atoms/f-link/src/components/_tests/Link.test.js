@@ -36,7 +36,7 @@ describe('Link', () => {
             const externalLinkMessage = `${linkText} - Opens an external site in a new window/screen/tab`;
 
             it.each([
-                [linkText, false, false],
+                [null, false, false],
                 [newLocationMessage, false, true],
                 [externalLinkMessage, true, false],
                 [externalLinkMessage, true, true]
