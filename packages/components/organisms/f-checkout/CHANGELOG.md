@@ -11,6 +11,17 @@ v0.116.0
 - Output the tag: 'checkout' with all log messages
 
 
+v0.115.0
+------------------------------
+*May 18, 2021*
+
+### Removed
+- `UserNote.vue` as now it is just another form field from `f-form-field` component
+
+### Updated
+- `f-form-field` to version 1.12.1 to include textarea input-type
+
+
 v0.114.0
 ------------------------------
 *May 17, 2021*

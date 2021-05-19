@@ -2,7 +2,7 @@ import axios from 'axios';
 import defaultOptions from './defaultOptions';
 import setAuthorisationToken from './authorisationHandler';
 import httpVerbs from './httpVerbs';
-
+import interceptors from './interceptors';
 import requestDispatcher from './requestDispatcher';
 
 let _configuration = null;
@@ -73,6 +73,8 @@ export default (options = {}) => {
             'Content-Type': _configuration.contentType
         }
     });
+
+    interceptors.addTimingInterceptor(_axiosInstance, _configuration.isDevelopment);
 
     const requestDispatchMethods = requestDispatcher(_axiosInstance, _configuration);
     _sendRequest = requestDispatchMethods.sendRequest;

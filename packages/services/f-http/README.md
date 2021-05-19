@@ -23,9 +23,9 @@ This package exposes methods for interacting with restful services, it may abstr
 - Sensible defaults, with the ability to override everything
 - Ability to set authorisation tokens for all requests for specific clients
 - Ability to name each client, so output from it is grouped and labelled
+- Automatically collect stats showing how long real API calls take
 
 ## Benefits (Soon)
-- _Automatically collect stats showing how long real API calls take_
 - _Opt-in automatic logging of errors_
 - _Opt-in ability to use dynamic timeouts_
 - _Opt-in automatic providing of diagnostic headers, such as Conversation ID_
@@ -171,6 +171,12 @@ const wrapper = mount(MyComponent, {
 });
 ```
 
+### Output API stats
+F-Http automatically injects an interceptor to record details about the call and if the `isDevelopment` flag is set to `true` then these details are outputted to the Console in the format of `<verb>|<url segment>|<status code>|<milliseconds>ms` e.g. see below;
+
+```
+GET|/test|200|532ms
+```
 
 ## Options
 All options are optional, you don't need to specify any overrides if you are happy with the default values
@@ -182,6 +188,7 @@ timeout | How long each request takes to timeout | number | 10000
 errorCallback | A function you can use to globally handle errors (accepts error object) | function | null
 contentType | Specify a value for the content type header | string | 'application/json'
 instanceName | Name the client so that stats and logs can be grouped by a specific API | string | 'Generic Front End'
+isDevelopment | Flag to indicate that execution is within a development environment | Boolean | false
 
 <hr>
 
