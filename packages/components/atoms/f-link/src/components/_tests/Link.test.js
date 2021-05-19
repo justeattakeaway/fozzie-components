@@ -32,8 +32,8 @@ describe('Link', () => {
 
     describe('computed :: ', () => {
         describe('ariaLabel :: ', () => {
-            const newLocationMessage = `${linkText} - Opens in a new location`;
-            const externalLinkMessage = `${linkText} - Opens an external site in a new location`;
+            const newLocationMessage = `${linkText} - Opens in a new window/screen/tab`;
+            const externalLinkMessage = `${linkText} - Opens an external site in a new window/screen/tab`;
 
             it.each([
                 [linkText, false, false],

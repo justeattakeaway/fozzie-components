@@ -22,6 +22,11 @@ const availableLocales = [
 
 export const VLinkComponent = () => ({
     components: { VLink },
+    data () {
+        return {
+            dataTestId: 'link-component'
+        }
+    },
     props: {
         locale: {
             default: select('Locale', availableLocales)
@@ -58,6 +63,7 @@ export const VLinkComponent = () => ({
     },
     template: `<v-link ` +
                 ':locale="locale" ' +
+                ':dataTestId="dataTestId" ' +
                 ':linkText="linkText" ' +
                 ':url="url" ' +
                 ':isExternal="isExternal" ' +

@@ -1,7 +1,7 @@
 const messages = {
     ariaLabel: {
-        newLocation: ' - Opens in a new location',
-        externalSite: ' - Opens an external site in a new location'
+        newLocation: ' - Opens in a new window/screen/tab',
+        externalSite: ' - Opens an external site in a new window/screen/tab'
     }
 };
 

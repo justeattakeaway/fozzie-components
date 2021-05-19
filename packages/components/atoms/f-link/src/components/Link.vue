@@ -6,7 +6,7 @@
             { [$style['o-link--noDecoration']]: !hasTextDecoration },
             { [$style['o-link--full']]: isFullWidth }
         ]"
-        :data-test-id="`${linkText} link`"
+        :data-test-id="dataTestId"
         :href="url"
         :target="target"
         :aria-label="ariaLabel"
@@ -27,6 +27,11 @@ export default {
         locale: {
             type: String,
             default: 'en-GB'
+        },
+
+        dataTestId: {
+            type: String,
+            required: true
         },
 
         linkText: {
