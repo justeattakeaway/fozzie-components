@@ -1,13 +1,14 @@
 <template>
     <a
         :class="[
-            $style['o-link'],
-            { [$style['o-link--bold']]: isBold },
-            { [$style['o-link--noDecoration']]: !hasTextDecoration },
-            { [$style['o-link--full']]: isFullWidth }
-        ]"
-        :target="target"
+            $style['o-link'], {
+                [$style['o-link--bold']]: isBold,
+                [$style['o-link--noDecoration']]: !hasTextDecoration,
+                [$style['o-link--full']]: isFullWidth
+            }]"
+        :data-test-id="'link-component'"
         :aria-label="ariaLabel"
+        :target="target"
         :rel="rel"
         v-bind="$attrs"
     >{{ linkText }}</a>
@@ -27,12 +28,6 @@ export default {
             type: String,
             required: true
         },
-
-        url: {
-            type: String,
-            required: true
-        },
-
         isExternal: {
             type: Boolean,
             default: false

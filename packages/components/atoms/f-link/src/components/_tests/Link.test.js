@@ -14,14 +14,11 @@ const i18n = {
 };
 
 const linkText = 'This is a Link';
-const url = 'https://www.just-eat.com';
 
 describe('Link', () => {
     it('should be defined', () => {
-        const propsData = {
-            linkText: 'This is a Link',
-            url: 'https://www.just-eat.com'
-        };
+        const propsData = {linkText};
+
         const wrapper = shallowMount(VLink, {
             propsData,
             i18n,
@@ -42,8 +39,7 @@ describe('Link', () => {
                 [externalLinkMessage, true, true]
             ])('should return `%s` when `isExternal` is %s AND `opensInNewLocationTab` is $s', (expected, isExternal, opensInNewLocation) => {
                 const propsData = {
-                    linkText: 'This is a Link',
-                    url: 'https://www.just-eat.com',
+                    linkText,
                     isExternal,
                     opensInNewLocation
                 };
@@ -65,7 +61,6 @@ describe('Link', () => {
             ])('should return %s when `isExternal` is %s', (expected, isExternal) => {
                 const propsData = {
                     linkText,
-                    url,
                     isExternal
                 };
 
@@ -84,7 +79,6 @@ describe('Link', () => {
             ])('should return %s when `opensInNewLocation` is %s', (expected, opensInNewLocation) => {
                 const propsData = {
                     linkText,
-                    url,
                     opensInNewLocation
                 };
 
@@ -105,7 +99,6 @@ describe('Link', () => {
             ])('should return %s when `isExternal` is %s', (expected, isExternal) => {
                 const propsData = {
                     linkText,
-                    url,
                     isExternal
                 };
 
