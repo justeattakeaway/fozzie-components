@@ -48,7 +48,7 @@ describe('BrazeAdapter', () => {
             }));
 
             // Act
-            const brazeAdapter = await BrazeAdapter.initialize(mockConfig);
+            const brazeAdapter = await BrazeAdapter.initialise(mockConfig);
 
             // Assert
             expect(brazeAdapter).toBeInstanceOf(BrazeAdapter);
@@ -61,7 +61,7 @@ describe('BrazeAdapter', () => {
             }));
 
             // Act
-            await BrazeAdapter.initialize(mockConfig);
+            await BrazeAdapter.initialise(mockConfig);
 
             // Assert
             expect(GetConsumerRegistry).toHaveBeenCalledTimes(1);
@@ -75,7 +75,7 @@ describe('BrazeAdapter', () => {
             }));
 
             // Assert
-            expect(BrazeAdapter.initialize(mockConfig)).rejects.toEqual(error);
+            expect(BrazeAdapter.initialise(mockConfig)).rejects.toEqual(error);
         });
 
         it('should handle errors in registering a consumer', async () => {
@@ -87,7 +87,7 @@ describe('BrazeAdapter', () => {
             }));
 
             // Assert
-            expect(BrazeAdapter.initialize(mockConfig)).rejects.toThrowError('Test error');
+            expect(BrazeAdapter.initialise(mockConfig)).rejects.toThrowError('Test error');
         });
 
         it('should NOT be a singleton class', async () => {
@@ -97,9 +97,9 @@ describe('BrazeAdapter', () => {
             }));
 
             // Act
-            const brazeAdapter = await BrazeAdapter.initialize(mockConfig);
+            const brazeAdapter = await BrazeAdapter.initialise(mockConfig);
 
-            const brazeAdapter2 = await BrazeAdapter.initialize(mockConfig);
+            const brazeAdapter2 = await BrazeAdapter.initialise(mockConfig);
 
             // Assert
             expect(brazeAdapter).not.toEqual(brazeAdapter2);
@@ -123,7 +123,7 @@ describe('BrazeAdapter', () => {
                 }
             }));
 
-            brazeAdapter = await BrazeAdapter.initialize(mockConfig);
+            brazeAdapter = await BrazeAdapter.initialise(mockConfig);
         });
 
         it('should pushShapedEventToDataLayer via dispatcher', async () => {

@@ -1,4 +1,4 @@
 import BrazeAdapter from './BrazeAdapter';
 
-export default BrazeAdapter;
+export default BrazeAdapter.initialise;
 

@@ -24,20 +24,12 @@ const mockCards = [
 ];
 
 describe('filterByEnabledCardTypes', () => {
-    it('should filter cards by type key', () => {
+    it('should filter cards by type key AND cards with NO type key', () => {
         // Act
         const filteredCards = filterByEnabledCardTypes(mockCards, mockTypes);
 
         // Assert
-        expect(filteredCards.length).toEqual(mockCards.length - 1);
-    });
-
-    it('should not filter a card if no type key is present', () => {
-        // Act
-        const filteredCards = filterByEnabledCardTypes(mockCards, mockTypes);
-
-        // Assert
-        expect(filteredCards).toEqual(expect.arrayContaining([{ id: 4 }]));
+        expect(filteredCards.length).toEqual(mockCards.length - 2);
     });
 
     it('should return all cards if passed enabledCardTypes array is empty', () => {

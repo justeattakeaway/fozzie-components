@@ -15,7 +15,7 @@ export default class BrazeAdapter {
      * @param customFilters
      * @returns {Promise<BrazeAdapter>}
      */
-    static async initialize ({
+    static async initialise ({
         apiKey,
         userId,
         enableLogging,

@@ -4,6 +4,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0-beta-1
+------------------------------
+*May 19, 2021*
+
+### Added
+- BrazeConsumer to store the adapters' consumer config
+- BrazeConsumerRegistry to store a list of consumers and apply callbacks for all consumers in list
+- BrazeAdapter the entry point to braze adapter via initialize method
+- DispatcherEventStream simple pub/sub event system for sending data from dispatcher to registry
+- filterByBrandName function to filter by brand name
+- filterByCurrentlyActive moved from the contentCard service filter function to separate function
+- filterByEnabledCardTypes moved from the contentCard service filter function to separate function
+- removeDuplicateContentCards moved from the contentCard service filter function to separate function
+- sortByCardOrder moved from the contentCard service filter function to separate function
+- pipe function that takes other functions and curries them
+
+### Removed
+- contentCard service has now been separated into its functions, they are now curried via the pipe function within
+the BrazeConsumer when cards are set on the consumer during the callback.
+
+### Changed
+- It now pushes cards and messages out on the DispatcherEventStream via publish method.
+- Modified the BrazeDispatcher to no longer be a singleton.
+- updated tests to account for changes to the dispatcher
+
+
 v3.4.0
 ------------------------------
 *April 28, 2021*
