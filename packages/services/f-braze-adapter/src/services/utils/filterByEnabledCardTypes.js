@@ -1,3 +1,8 @@
+/**
+ * Filters cards by card type
+ * @param cards
+ * @param enabledCardTypes
+ */
 const filterByEnabledCardTypes = (cards, enabledCardTypes) => cards
     .filter(({ type }) => {
         if (enabledCardTypes.length > 0) {
