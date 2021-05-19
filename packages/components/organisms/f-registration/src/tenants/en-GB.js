@@ -1,5 +1,6 @@
 export default {
     locale: 'en-GB',
+    genericErrorMessage: 'Something went wrong, please try again later',
 
     navLinks: {
         termsAndConditions: {
@@ -55,7 +56,7 @@ export default {
 
         password: {
             requiredError: 'Please enter a password',
-            minLengthError: 'Password is less than four characters '
+            minLengthError: 'Password is less than four characters'
         }
     }
 };

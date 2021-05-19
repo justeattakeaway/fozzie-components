@@ -11,6 +11,14 @@ v3.33.0
 - `URL Builder` to all components for testing different knobs against storybook
 
 
+v3.33.0
+------------------------------
+*May 18, 2021*
+
+## Changed
+- `@wdio` to `v7` to fix a Node 14 potential package conflict.
+
+
 v3.32.0
 ------------------------------
 *May 5, 2021*
@@ -35,7 +43,7 @@ v3.31.0
 - Replaced `console.logs` in component tests with error handling `%s` string title
 
 ## Removed
-- Unused READMEs inside `test/component` and `test-utils/component-object` folders 
+- Unused READMEs inside `test/component` and `test-utils/component-object` folders
 - Extra intermediate `spec` folder in generator for future components (see below entry)
 
 
