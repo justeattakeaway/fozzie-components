@@ -1,8 +1,7 @@
 const messages = {
     ariaLabel: {
-        prefix: ' - Stai aprendo',
-        newLocation: '  una nuova posizione',
-        externalSite: ' aprendo un sito esterno'
+        newLocation: ' - Stai aprendo una nuova posizione',
+        externalSite: ' - Stai aprendo aprendo un sito esterno'
     }
 };
 

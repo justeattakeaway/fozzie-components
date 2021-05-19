@@ -36,7 +36,7 @@ export const VLinkComponent = () => ({
         },
 
         isExternal: {
-            default: boolean('Is external', false)
+            default: boolean('isExternal', false)
         },
 
         opensInNewLocation: {
