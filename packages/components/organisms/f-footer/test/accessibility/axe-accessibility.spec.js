@@ -6,38 +6,11 @@ const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
 
-function formatLocale (tenant) {
-    const countryFormatted = tenant.toUpperCase();
-    let formattedLocale = '';
-    switch (countryFormatted) {
-        case 'GB':
-        case 'AU':
-        case 'NZ':
-        case 'IE':
-            formattedLocale = `en-${countryFormatted}`;
-            break;
-        case 'DK':
-            formattedLocale = `da-${countryFormatted}`;
-            break;
-        case 'ES':
-            formattedLocale = `es-${countryFormatted}`;
-            break;
-        case 'IT':
-            formattedLocale = `it-${countryFormatted}`;
-            break;
-        case 'NO':
-            formattedLocale = `nb-${countryFormatted}`;
-            break;
-        default:
-            throw new Error(`locale ${countryFormatted} is not supported`);
-    }
-    return formattedLocale;
-}
 describe('Accessibility tests', () => {
-    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('a11y - should test f-footer component WCAG compliance for country code "%s" with default options selected', expectedLocale => {
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
+    .it('a11y - should test f-footer component WCAG compliance for country code "%s" with default options selected', tenant => {
         footer = new Footer('organism', 'footer-component');
-        footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
+        footer.withQuery('&knob-Locale', tenant);
         footer.withQuery('&knob-Show country selector', 'false');
         footer.withQuery('&knob-Show courier links', 'false');
         const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
@@ -51,10 +24,10 @@ describe('Accessibility tests', () => {
         expect(axeResults.violations.length).toBe(0);
     });
 
-    forEach(['gb', 'au', 'ie', 'nz'])
-    .it('a11y - should test f-footer component WCAG compliance for country code "%s" with extra options selected', expectedLocale => {
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ'])
+    .it('a11y - should test f-footer component WCAG compliance for country code "%s" with extra options selected', tenant => {
         footer = new Footer('organism', 'footer-component');
-        footer.withQuery('&knob-Locale', formatLocale(expectedLocale));
+        footer.withQuery('&knob-Locale', tenant);
         footer.withQuery('&knob-Show country selector', 'true');
         footer.withQuery('&knob-Show courier links', 'false');
         const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
