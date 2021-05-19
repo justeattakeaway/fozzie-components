@@ -112,10 +112,18 @@
 
                     <form-selector v-if="shouldShowFulfilmentSelector" />
 
-                    <user-note
-                        data-test-id="user-note"
-                        @input="updateUserNote($event.target.value)"
-                    />
+                    <form-field
+                        :label-text="$t('userNote.title')"
+                        input-type="textarea"
+                        :placeholder="$t('userNote.placeholder')"
+                        cols="30"
+                        rows="7"
+                        maxlength="200"
+                        name="Note"
+                        has-input-description
+                        @input="updateUserNote($event)">
+                        {{ $t('userNote.text') }}
+                    </form-field>
 
                     <f-button
                         :class="$style['c-checkout-submitButton']"
@@ -159,7 +167,6 @@ import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
-import UserNote from './UserNote.vue';
 import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 import exceptions from '../exceptions/exceptions';
@@ -199,7 +206,6 @@ export default {
         FormField,
         FormSelector,
         GuestBlock,
-        UserNote,
         ErrorDialog
     },
 

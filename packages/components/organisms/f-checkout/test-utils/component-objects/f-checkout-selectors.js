@@ -1,7 +1,7 @@
 export const CHECKOUT_COMPONENT = '[data-test-id="checkout-component"]';
 export const ORDER_TIME_DROPDOWN = '[data-test-id="formfield-order-time-dropdown-select"]';
 export const ORDER_TIME_DROPDOWN_OPTIONS = '[data-test-id="formfield-order-time-dropdown-select"] option';
-export const USER_NOTE_INPUT = '[data-test-id="user-note"] textarea';
+export const USER_NOTE_INPUT = '[data-test-id="formfield-textarea"]';
 export const GO_TO_PAYMENT_BUTTON = '[data-test-id="confirm-payment-submit-button"]';
 export const KNOB_BUTTON = '[id$="tabbutton-knobs"]';
 export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
@@ -52,7 +52,7 @@ export const FIELDS = {
         typeError: '[data-test-id="error-address-postcode-type-error"]'
     },
     userNote: {
-        input: '[data-test-id="user-note"] textarea',
+        input: '[data-test-id="formfield-textarea"]',
         error: ''
     },
     tableIdentifier: {

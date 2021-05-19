@@ -1,10 +1,15 @@
-import { mount, shallowMount } from '@vue/test-utils';
+import {
+    mount,
+    shallowMount
+} from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
 
-jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.fn() }));
+jest.mock('../../services/RegistrationServiceApi', () => ({
+    createAccount: jest.fn()
+}));
 
 let wrapper;
 
@@ -18,7 +23,9 @@ describe('Registration', () => {
 
     it('should be defined', () => {
         // Arrange & Act
-        wrapper = shallowMount(Registration, { propsData });
+        wrapper = shallowMount(Registration, {
+            propsData
+        });
 
         // Assert
         expect(wrapper.exists()).toBe(true);
@@ -26,7 +33,9 @@ describe('Registration', () => {
 
     it('should have one form with method "post"', () => {
         // Arrange
-        wrapper = mount(Registration, { propsData });
+        wrapper = mount(Registration, {
+            propsData
+        });
 
         // Act
         const forms = wrapper.findAll('form');
@@ -38,7 +47,9 @@ describe('Registration', () => {
 
     it('should have a button', () => {
         // Arrange
-        wrapper = shallowMount(Registration, { propsData });
+        wrapper = shallowMount(Registration, {
+            propsData
+        });
 
         // Act
         const button = wrapper.find("[data-test-id='create-account-submit-button']");
@@ -84,7 +95,9 @@ describe('Registration', () => {
 
         it('should show the login link if showLoginLink prop not set', () => {
             // Arrange
-            wrapper = shallowMount(Registration, { propsData });
+            wrapper = shallowMount(Registration, {
+                propsData
+            });
 
             // Act
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
@@ -116,7 +129,10 @@ describe('Registration', () => {
         const mountComponentAndAttachToDocument = () => {
             const div = document.createElement('div');
             document.body.appendChild(div);
-            return mount(Registration, { propsData, attachTo: div });
+            return mount(Registration, {
+                propsData,
+                attachTo: div
+            });
         };
 
         afterEach(() => {
@@ -126,9 +142,13 @@ describe('Registration', () => {
         describe('with a faulty registration service', () => {
             it('should populate generic error message and emit failure event when service responds with an error', async () => {
                 // Arrange
-                RegistrationServiceApi.createAccount.mockImplementation(async () => { throw new Error('Conflict'); });
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw new Error('Conflict');
+                });
                 wrapper = mountComponentAndAttachToDocument();
-                Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -141,41 +161,62 @@ describe('Registration', () => {
 
             it('should show error message and emit failure event when service responds with a 409', async () => {
                 // Arrange
-                const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The specified email already exists', errorCode: '409' }] } } };
-                RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
+                const testEmailAddress = 'test@test.test';
+
+                const err = {
+                    response: {
+                        status: 409,
+                        data: {
+                            faultId: '123',
+                            traceId: '123',
+                            errors: [{
+                                description: 'The specified email already exists',
+                                errorCode: '409'
+                            }]
+                        }
+                    }
+                };
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw err;
+                });
                 wrapper = mountComponentAndAttachToDocument();
-                Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
+                wrapper.vm.email = testEmailAddress;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(true);
+                expect(wrapper.vm.conflictedEmailAddress).toBe(testEmailAddress);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             });
 
             it('should emit login blocked event when service responds with a 403', async () => {
                 // Arrange
                 const err = {
-                    response:
-                    {
+                    response: {
+                        status: 403,
                         data: {
                             faultId: '123',
                             traceId: '123',
-                            errors: [
-                                {
-                                    description: 'Failed user authentication.',
-                                    errorCode: 'FailedUserAuthentication'
-                                }
-                            ]
+                            errors: [{
+                                description: 'Failed user authentication.',
+                                errorCode: 'FailedUserAuthentication'
+                            }]
                         }
                     }
                 };
 
-                RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw err;
+                });
                 wrapper = mountComponentAndAttachToDocument();
-                Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -188,10 +229,26 @@ describe('Registration', () => {
 
             it('should populate generic error message and emit failure event when service responds with a 400', async () => {
                 // Arrange
-                const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The Password field is required', errorCode: '400' }] } } };
-                RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
+                const err = {
+                    response: {
+                        status: 400,
+                        data: {
+                            faultId: '123',
+                            traceId: '123',
+                            errors: [{
+                                description: 'The Password field is required',
+                                errorCode: '400'
+                            }]
+                        }
+                    }
+                };
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw err;
+                });
                 wrapper = mountComponentAndAttachToDocument();
-                Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -204,10 +261,22 @@ describe('Registration', () => {
 
             it('should show default error message and emit failure event when service with an error with no description', async () => {
                 // Arrange
-                const err = { response: { data: { errors: [{ errorCode: 'XXX' }] } } };
-                RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
+                const err = {
+                    response: {
+                        data: {
+                            errors: [{
+                                errorCode: 'XXX'
+                            }]
+                        }
+                    }
+                };
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw err;
+                });
                 wrapper = mountComponentAndAttachToDocument();
-                Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -229,7 +298,9 @@ describe('Registration', () => {
 
             it('should post correct data and emit success event when service succeeds', async () => {
                 // Arrange
-                Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
 
                 // Act
                 await wrapper.vm.onFormSubmit();

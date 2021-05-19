@@ -32,7 +32,6 @@
                 @submit.prevent="onFormSubmit">
                 <section
                     id="error-summary-container"
-                    class="is-visuallyHidden"
                     role="alert"
                     data-test-id="error-summary-container">
                     <error-message
@@ -190,6 +189,15 @@ import EventNames from '../event-names';
  */
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
+/**
+ * Tests that the entered email address does not match the conflicted email address stored
+ *
+ * @param {string} value The email address to test.
+ * @param {object} vm The Vue instance
+ * @return {boolean} True if the email does not match the conflicted email address stored
+ */
+const isValidEmailAddress = (value, vm) => (value !== vm.conflictedEmailAddress);
+
 const formValidationState = $v => {
     const fields = $v.$params;
     const invalidFields = [];
@@ -255,8 +263,8 @@ export default {
             password: null,
             shouldDisableCreateAccountButton: false,
             genericErrorMessage: null,
-            shouldShowEmailAlreadyExistsError: false,
-            formStarted: false
+            formStarted: false,
+            conflictedEmailAddress: ''
         };
     },
 
@@ -312,6 +320,9 @@ export default {
                 }
                 if (!this.$v.email.email) {
                     return messages.invalidEmailError;
+                }
+                if (!this.$v.email.isValidEmailAddress) {
+                    return messages.alreadyExistsError;
                 }
             }
             return '';
@@ -391,7 +402,8 @@ export default {
         email: {
             required,
             email,
-            maxLength: maxLength(50)
+            maxLength: maxLength(50),
+            isValidEmailAddress
         },
         password: {
             required,
@@ -424,7 +436,6 @@ export default {
 
         async onFormSubmit () {
             this.genericErrorMessage = null;
-            this.shouldShowEmailAlreadyExistsError = false;
 
             if (this.isFormInvalid()) {
                 const validationState = formValidationState(this.$v);
@@ -435,6 +446,8 @@ export default {
             }
 
             this.shouldDisableCreateAccountButton = true;
+            this.conflictedEmailAddress = '';
+
             try {
                 const registrationData = {
                     firstName: this.firstName,
@@ -447,29 +460,29 @@ export default {
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, registrationData, this.tenant);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
-                let thrownErrors = error;
-                if (error && error.response && error.response.data && error.response.data.errors) {
-                    thrownErrors = error.response.data.errors;
-                }
-                let shouldEmitCreateAccountFailure = true;
+                if (error.response && error.response.status) {
+                    const { status } = error.response;
 
-                if (Array.isArray(thrownErrors)) {
-                    if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
-                        this.shouldShowEmailAlreadyExistsError = true;
-                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === 'FailedUserAuthentication')) {
-                        this.$emit(EventNames.LoginBlocked);
-
-                        shouldEmitCreateAccountFailure = false;
-                    } else {
-                        this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
+                    if (status === 409) {
+                        this.conflictedEmailAddress = this.email;
+                        this.$emit(EventNames.CreateAccountFailure, error);
+                        return;
                     }
-                } else {
-                    this.genericErrorMessage = error;
+
+                    if (status === 400) {
+                        this.genericErrorMessage = error.response.data.errors[0].description;
+                        this.$emit(EventNames.CreateAccountFailure, error);
+                        return;
+                    }
+
+                    if (status === 403) {
+                        this.$emit(EventNames.LoginBlocked);
+                        return;
+                    }
                 }
 
-                if (shouldEmitCreateAccountFailure) {
-                    this.$emit(EventNames.CreateAccountFailure, thrownErrors);
-                }
+                this.genericErrorMessage = error.message || this.copy.genericErrorMessage;
+                this.$emit(EventNames.CreateAccountFailure, this.genericErrorMessage);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }

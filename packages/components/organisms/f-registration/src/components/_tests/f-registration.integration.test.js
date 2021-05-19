@@ -76,7 +76,7 @@ describe('Registration API service', () => {
 
         // Assert
         expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-        expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(true);
+        expect(wrapper.vm.conflictedEmailAddress).toBe(CONSUMERS_REQUEST_DATA.emailAddress);
     });
 
     it('responds with 403 when login blocked by ravelin or recaptcha', async () => {

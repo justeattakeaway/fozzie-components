@@ -83,9 +83,13 @@ The props that can be defined are as follows:
 | userInfoProp              | `Object`      | `{}`     | Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details` |
 | userInfoUrl               | `String`      | `/api/account/details` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
 | showCountrySelector       | `Boolean`     | `false` | Defines whether the country selector should be shown in the navigation. |
-
+| showSkipLink | `Boolean` | `true` | Set to false if you need to remove skip-to-main-content link from the header. |
 
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
+
+### CSS styles
+
+The component is using utility css styles from [fozzie](https://github.com/justeat/fozzie/) package. You need to make sure to `@include trumps-utilities();` mixin to your application styles if you use beta version of fozzie package (>= v5.0.0-beta.0). If you are using main version (v4.X.X) styles should come out of the box.
 
 ### Events
 
