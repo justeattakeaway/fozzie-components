@@ -113,16 +113,16 @@
                     <form-selector v-if="shouldShowFulfilmentSelector" />
 
                     <form-field
-                        :label-text="$t('userNote.title')"
+                        :label-text="$t(`userNote.${serviceType}.title`)"
                         input-type="textarea"
-                        :placeholder="$t('userNote.placeholder')"
+                        :placeholder="$t(`userNote.${serviceType}.placeholder`)"
                         cols="30"
                         rows="7"
                         maxlength="200"
                         name="Note"
                         has-input-description
                         @input="updateUserNote($event)">
-                        {{ $t('userNote.text') }}
+                        {{ $t(`userNote.${serviceType}.text`) }}
                     </form-field>
 
                     <f-button
