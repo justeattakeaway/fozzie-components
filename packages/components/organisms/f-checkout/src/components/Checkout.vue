@@ -437,10 +437,6 @@ export default {
         this.trackInitialLoad();
     },
 
-    updated () {
-        console.log(this.customer.mobileNumber);
-    },
-
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'createGuestUser',
