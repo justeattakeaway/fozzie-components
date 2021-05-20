@@ -8,9 +8,9 @@
         data-cookie-consent-overlay>
         <div
             :class="[
-                $style['c-cookieBanner-card'],
-                { [$style['c-cookieBanner-ios']]: isIosBrowser }
-            ]"
+                    $style['c-cookieBanner-card'],
+                    { [$style['c-cookieBanner-ios']]: isIosBrowser }
+                ]"
             data-test-id="cookieConsentBanner"
             role="dialog"
             aria-modal="true"
@@ -158,9 +158,10 @@ export default {
             this.shouldHideBanner = !!newVal;
         }
     },
-
-    mounted () {
+    beforeMount () {
         this.checkCookieBannerCookie();
+    },
+    mounted () {
         this.focusOnTitle();
 
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
@@ -221,6 +222,20 @@ export default {
                 } else {
                     this.shouldHideBanner = false;
                     this.dataLayerPush('shown');
+                }
+            }
+
+            if (this.shouldHideBanner) {
+                const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+                const localeConfig = tenantConfigs[locale];
+                const copy = localeConfig.messages;
+
+                if (copy.administerCookiePolicy) {
+                    const administerCookiePolicyLink = document.createElement('a');
+                    administerCookiePolicyLink.classList.add('o-link--bold');
+                    administerCookiePolicyLink.style.alignContent = 'centre';
+                    administerCookiePolicyLink.innerText = copy.administerCookiePolicy;
+                    document.body.append(administerCookiePolicyLink);
                 }
             }
         },
@@ -327,7 +342,7 @@ export default {
     .c-cookieBanner-title {
         @include font-size(heading-m);
         font-weight: $font-weight-bold;
-        margin: spacing() 0;
+        margin: -spacing() 0;
         padding: 0;
         color: $color-content-default;
         &:hover,

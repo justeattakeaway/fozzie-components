@@ -9,7 +9,7 @@ const messages = {
     textLine4: '.  Using this banner will set a cookie on your device to remember your preferences.',
     cookiePolicyLinkText: 'cookies notice',
     cookiePolicyLinkUrl: 'https://www.just-eat.ie/info/cookies-policy',
-    administerCookiePolicy:  'Check my cookies preferences'
+    administerCookiePolicy:  'Check my cookie preferences'
 };
 
 const displayLegacy = false;

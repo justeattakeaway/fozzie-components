@@ -12,7 +12,7 @@ const messages = {
     legacyBannerText: 'We use cookies to improve your browsing experience. By continuing, you agree to receive cookies on our website.',
     legacyBannerLinkText: 'Learn more about our cookies policy.',
     legacyBannerCloseBannerText: 'Close cookie banner',
-    administerCookiePolicy:  ''
+    administerCookiePolicy:  'Check my cookie preferences'
 };
 
 const displayLegacy = true;
