@@ -50,9 +50,8 @@
                 <component
                     :is="titleHtmlTag"
                     v-if="title"
-                    :class="$style['c-megaModal-title']"
-                    data-test-id="mega-modal-title"
-                >
+                    :class="['c-megaModal-title', $style['c-megaModal-title']]"
+                    data-test-id="mega-modal-title">
                     {{ title }}
                 </component>
 
@@ -147,7 +146,7 @@ export default {
         titleHtmlTag: {
             type: String,
             default: 'h3',
-            validator: value => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(value)
+            validator: value => ['h1', 'h2', 'h3', 'h4'].includes(value)
         }
     },
 

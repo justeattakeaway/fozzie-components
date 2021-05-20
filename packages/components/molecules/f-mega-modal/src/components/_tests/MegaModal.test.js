@@ -72,7 +72,7 @@ describe('MegaModal', () => {
                 expect(modalTitle.text()).toBe(propsData.title);
             });
 
-            it.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])('should set the tag to be %s, as passed in the `titleHtmlTag` prop', htmlTag => {
+            it.each(['h1', 'h2', 'h3', 'h4'])('should set the tag to be %s, as passed in the `titleHtmlTag` prop', htmlTag => {
                 // Arrange
                 const propsData = {
                     title: 'Test modal title',
