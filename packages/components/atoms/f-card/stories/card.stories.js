@@ -19,7 +19,21 @@ export const CardComponent = (args, { argTypes }) => ({
     components: { Card },
     props: Object.keys(argTypes),
     template:
-        '<card :cardHeading="cardHeading" :cardHeadingPosition="cardHeadingPosition" :cardHeadingTag="cardHeadingTag" :isRounded="isRounded" :hasOutline="hasOutline" :isPageContentWrapper="isPageContentWrapper"><p>Some Card Content</p></card>'
+        `<card
+            :card-heading="cardHeading"
+            :card-heading-position="cardHeadingPosition"
+            :card-heading-tag="cardHeadingTag"
+            :is-rounded="isRounded"
+            :has-outline="hasOutline"
+            :is-page-content-wrapper="isPageContentWrapper"
+            :has-full-width-bottom-element="hasFullWidthBottomElement">
+            <p>Some Card Content</p>
+            <template v-slot:full-width-bottom-element>
+                <div>
+                    I am a bottom positioned full width element
+                </div>
+            </template>
+        </card>`
 });
 
 CardComponent.args = {
@@ -28,7 +42,8 @@ CardComponent.args = {
     cardHeadingTag: 'h1',
     isRounded: false,
     hasOutline: false,
-    isPageContentWrapper: false
+    isPageContentWrapper: false,
+    hasFullWidthBottomElement: false
 };
 
 CardComponent.argTypes = {

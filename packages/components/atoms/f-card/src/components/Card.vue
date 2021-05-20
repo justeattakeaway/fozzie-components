@@ -2,24 +2,31 @@
     <div
         data-test-id="card-component"
         :class="[
-            $style['c-card'],
-            (isRounded ? $style['c-card--rounded'] : ''),
-            (hasOutline ? $style['c-card--outline'] : ''),
-            (isPageContentWrapper ? $style['c-card--pageContentWrapper'] : '')
-        ]"
-    >
-        <component
-            :is="cardHeadingTag"
-            v-if="cardHeading"
-            :class="[
-                $style['c-card-heading'],
-                (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}`] : '')
-            ]"
-            data-test-id="card-heading"
-        >
-            {{ cardHeading }}
-        </component>
-        <slot />
+            $style['c-card'], {
+                [$style['c-card--rounded']]: isRounded,
+                [$style['c-card--outline']]: hasOutline,
+                [$style['c-card--pageContentWrapper']]: isPageContentWrapper
+            }]">
+        <div :class="[$style['c-card--innerSpacing']]">
+            <component
+                :is="cardHeadingTag"
+                v-if="cardHeading"
+                :class="[
+                    $style['c-card-heading'],
+                    (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}`] : '')
+                ]"
+                data-test-id="card-heading">
+                {{ cardHeading }}
+            </component>
+            <slot />
+        </div>
+
+        <div
+            v-if="hasFullWidthBottomElement"
+            data-test-id="card-component-fullWidthBottomElement">
+            <slot
+                name="full-width-bottom-element" />
+        </div>
     </div>
 </template>
 
@@ -53,6 +60,10 @@ export default {
         isRounded: {
             type: Boolean,
             default: false
+        },
+        hasFullWidthBottomElement: {
+            type: Boolean,
+            default: false
         }
     }
 };
@@ -70,11 +81,9 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
 .c-card {
     background-color: $card-bgColor;
     display: block;
-    padding: $card-padding;
 }
-
-    .c-card--separated {
-        margin-bottom: spacing();
+    .c-card--innerSpacing {
+        padding: $card-padding;
     }
 
     .c-card--rounded {
@@ -92,32 +101,27 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
     .c-card--pageContentWrapper {
         width: 100%;
         transition: 250ms padding ease-in-out;
-        padding-left: 6%;
-        padding-right: 6%;
         margin: spacing(x5) 0;
-
-        @include media('>=narrow') {
-            padding-left: 10%;
-            padding-right: 10%;
-        }
 
         @include media('>=#{$card--pageContentWrapper-width}') {
             width: $card--pageContentWrapper-width;
             margin: spacing(x5) auto;
-            padding-left: spacing(x10);
-            padding-right: spacing(x10);
+        }
+
+        .c-card--innerSpacing {
+            padding: spacing(x3) 6% 0;
+
+            @include media('>=narrow') {
+                padding: spacing(x6) 10%;
+            }
+
+            @include media('>=#{$card--pageContentWrapper-width}') {
+                padding: spacing(x6) spacing(x10);
+            }
         }
     }
 
     .c-card-heading {
         margin-bottom: spacing(x2);
-    }
-
-    .c-card--center {
-        text-align: center;
-    }
-
-    .c-card--right {
-        text-align: right;
     }
 </style>
