@@ -1,6 +1,8 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
+
 let checkout;
 
 describe('f-checkout component tests - @browserstack', () => {
