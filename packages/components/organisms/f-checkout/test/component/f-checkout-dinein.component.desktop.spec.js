@@ -54,6 +54,6 @@ describe('f-checkout "dinein" component tests', () => {
         checkout.setFieldValue('tableIdentifier', tableEntry);
 
         // Assert
-        expect(checkout.getFieldValue(field).length).toEqual(maxlength);
+        expect(checkout.getFieldValue('tableIdentifier').length).toEqual(maxlength);
     });
 });
