@@ -3,10 +3,11 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const StatusBanner = require('../../test-utils/component-objects/f-statusBanner.component');
 
-const statusBanner = new StatusBanner();
+let statusBanner;
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
+        statusBanner = new StatusBanner('organism', 'status-banner-component');
         const pageUrl = buildUrl(statusBanner.componentType, statusBanner.componentName, statusBanner.path);
         statusBanner.open(pageUrl);
         statusBanner.waitForComponent();
