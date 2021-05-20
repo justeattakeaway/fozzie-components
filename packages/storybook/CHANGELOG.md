@@ -1,3 +1,23 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 0.34.1 (2021-05-20)
+
+
+
+# 1.0.0 (2021-02-18)
+
+
+### Reverts
+
+* Revert "Hack 1 pie (#347)" (#349) ([a6c141f](https://github.com/justeat/fozzie-components/commit/a6c141f9b5745136dfece13f796e1a606b5d88dd)), closes [#347](https://github.com/justeat/fozzie-components/issues/347) [#349](https://github.com/justeat/fozzie-components/issues/349)
+
+
+
+
+
 # Changelog
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)

@@ -1,11 +1,11 @@
 {
   "name": "@justeat/f-takeawaypay-activation",
   "description": "Fozzie TakeawayPay Activation - Handles Takeaway Pay activation for users",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/f-takeawaypay-activation.umd.min.js",
   "files": [
     "dist",
-    "test-utils" ,
+    "test-utils",
     "src/services"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-takeawaypay-activation",
@@ -37,7 +37,7 @@
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
     "report:test-component:chome": "cross-env-shell JE_ENV=ci TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn:allure:open",
     "allure:open": "yarn allure:clean && allure open",
-    "allure:clean": "rimraf ../../../../test/results/allure"  
+    "allure:clean": "rimraf ../../../../test/results/allure"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -50,11 +50,11 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
+    "@justeat/f-wdio-utils": "0.1.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@justeat/f-wdio-utils": "0.1.0",
     "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2"
   }
