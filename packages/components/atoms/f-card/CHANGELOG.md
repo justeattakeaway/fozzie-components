@@ -9,9 +9,9 @@ v1.2.0
 *May 20, 2021*
 
 ### Added
-- `hasFullWidthBottomElement` prop
-- Named slot `full-width-bottom-element` to render full width content at the bottom of the card without card paddings when `hasFullWidthBottomElement` set to true
-- `.c-card--innerSpacing` css class for card paddings to be able to separate card content paddings from the card itself
+- `hasFullWidthFooter` prop
+- Named slot `cardFooter` to render full width content at the bottom of the card without card paddings when `hasFullWidthFooter` set to true
+- `.c-card-innerSpacing` css class for card paddings to be able to separate card content paddings from the card itself
 
 ### Removed
 - `.c-card--separated`, `.c-card--center`, `.c-card--right` css classes as unused
