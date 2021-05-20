@@ -61,7 +61,7 @@ const settings = () => ({
             outputDir: `${global.baseDir}/test/results/allure`,
             disableWebdriverStepsReporting: true,
             disableWebdriverScreenshotsReporting: false,
-            disableMochaHooks: true
+            disableMochaHooks: false
         }]
     ] : [],
     services: ['chromedriver']

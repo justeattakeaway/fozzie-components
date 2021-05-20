@@ -73,7 +73,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
 
             // Act
             header.open(pageUrl);
-            header.openMobileNavigation();
+            header.openMobileNavigationBar();
             header.waitForComponent();
         });
 
@@ -114,7 +114,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
 
     // Make sure tenant is appended to screenshot for Percy tests
     forEach(['it-IT', 'es-ES', 'da-DK', 'nb-NO'])
-    .describe('open navigation for country code "%s" - @percy', tenant => {
+    .describe.only('open navigation for country code "%s" - @percy', tenant => {
         beforeEach(() => {
             // Arrange
             header.withQuery('&knob-Locale', tenant);
@@ -122,10 +122,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
 
             // Act
             header.open(pageUrl);
-            header.openMobileNavigation();
+            header.openMobileNavigationBar();
             header.waitForComponent();
         });
-
 
         forEach(['userAccount', 'help', 'countrySelector'])
         .it('should display navigation link "%s" - @percy', link => {
