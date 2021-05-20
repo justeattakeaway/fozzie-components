@@ -14,20 +14,48 @@ const i18n = {
 };
 
 const linkText = 'This is a Link';
+const slot = `<span>${linkText}</span>`;
 
 describe('Link', () => {
     it('should be defined', () => {
-        const propsData = {linkText};
+        // Arrange
+        const propsData = { };
 
+        // Act
         const wrapper = shallowMount(VLink, {
             propsData,
             i18n,
-            localVue
+            localVue,
+            slots: {
+                default: slot
+            }
         });
+
+        // Assert
         expect(wrapper.exists()).toBe(true);
     });
 
     describe('computed :: ', () => {
+        describe('linkText :: ', () => {
+            it('should return `text` of the first slot`', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    i18n,
+                    localVue,
+                    slots: {
+                        default: slot
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.linkText).toEqual(linkText);
+            });
+        });
+
         describe('ariaLabel :: ', () => {
             const newLocationMessage = `${linkText} - Opens in a new window/screen/tab`;
             const externalLinkMessage = `${linkText} - Opens an external site in a new window/screen/tab`;
@@ -38,18 +66,23 @@ describe('Link', () => {
                 [externalLinkMessage, true, false],
                 [externalLinkMessage, true, true]
             ])('should return `%s` when `isExternal` is %s AND `opensInNewLocationTab` is $s', (expected, isExternal, opensInNewLocation) => {
+                // Arrange
                 const propsData = {
-                    linkText,
                     isExternal,
                     opensInNewLocation
                 };
 
+                // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
                     i18n,
-                    localVue
+                    localVue,
+                    slots: {
+                        default: slot
+                    }
                 });
 
+                // Assert
                 expect(wrapper.vm.ariaLabel).toEqual(expected);
             });
         });
@@ -59,17 +92,22 @@ describe('Link', () => {
                 ['_blank', true],
                 [null, false]
             ])('should return %s when `isExternal` is %s', (expected, isExternal) => {
+                // Arrange
                 const propsData = {
-                    linkText,
                     isExternal
                 };
 
+                // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
                     i18n,
-                    localVue
+                    localVue,
+                    slots: {
+                        default: slot
+                    }
                 });
 
+                // Assert
                 expect(wrapper.vm.target).toEqual(expected);
             });
 
@@ -77,17 +115,22 @@ describe('Link', () => {
                 ['_blank', true],
                 [null, false]
             ])('should return %s when `opensInNewLocation` is %s', (expected, opensInNewLocation) => {
+                // Arrange
                 const propsData = {
-                    linkText,
                     opensInNewLocation
                 };
 
+                // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
                     i18n,
-                    localVue
+                    localVue,
+                    slots: {
+                        default: slot
+                    }
                 });
 
+                // Assert
                 expect(wrapper.vm.target).toEqual(expected);
             });
         });
@@ -97,17 +140,22 @@ describe('Link', () => {
                 ['noopener', true],
                 [null, false]
             ])('should return %s when `isExternal` is %s', (expected, isExternal) => {
+                // Arrange
                 const propsData = {
-                    linkText,
                     isExternal
                 };
 
+                // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
                     i18n,
-                    localVue
+                    localVue,
+                    slots: {
+                        default: slot
+                    }
                 });
 
+                // Assert
                 expect(wrapper.vm.rel).toEqual(expected);
             });
         });

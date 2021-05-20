@@ -10,8 +10,9 @@
         :aria-label="ariaLabel"
         :target="target"
         :rel="rel"
-        v-bind="$attrs"
-    >{{ linkText }}</a>
+        v-bind="$attrs">
+        <slot />
+    </a>
 </template>
 
 <script>
@@ -24,10 +25,6 @@ export default {
     mixins: [VueGlobalisationMixin],
 
     props: {
-        linkText: {
-            type: String,
-            required: true
-        },
         isExternal: {
             type: Boolean,
             default: false
@@ -61,6 +58,10 @@ export default {
     },
 
     computed: {
+        linkText () {
+            return this.$slots.default[0].children[0].text.trim();
+        },
+
         ariaLabel () {
             let message;
 

@@ -17,10 +17,6 @@ export const VLinkComponent = () => ({
         }
     },
     props: {
-        linkText: {
-            default: text('Link Text', 'This is a link')
-        },
-
         isExternal: {
             default: boolean('isExternal', false)
         },
@@ -45,14 +41,16 @@ export const VLinkComponent = () => ({
     template: `<v-link
                     :data-test-id="dataTestId"
                     href="https://www.just-eat.co.uk/"
-                    :link-text="linkText"
-                    :url="url"
                     :is-external="isExternal"
                     :opens-in-new-location="opensInNewLocation"
                     :is-bold="isBold"
                     :has-text-decoration="hasTextDecoration"
                     :is-full-width="isFullWidth"
-                />`
+                >
+                    <span>
+                        This is a Link
+                    </span>
+                </v-link>`
 });
 
 VLinkComponent.storyName = 'f-link';
