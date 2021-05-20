@@ -77,10 +77,8 @@ export const MegaModalComponent = () => ({
             :has-overlay="hasOverlay"
             :has-close-button="hasCloseButton"
             :close-on-blur="closeOnBlur"
-            :close-button-copy="closeButtonCopy">
-            <h3 data-test-id="mega-modal-title" class="u-noSpacing">
-                This place isn't taking orders
-            </h3>
+            :close-button-copy="closeButtonCopy"
+            :title="'This place isn’t taking orders'">
 
             <p data-test-id="mega-modal-content">
                 Let's find another restaurant to order from.
