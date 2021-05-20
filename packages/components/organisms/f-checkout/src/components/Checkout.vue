@@ -399,12 +399,7 @@ export default {
         },
 
         formattedMobileNumberForScreenReader () {
-            return Array.from(this.customer.mobileNumber, (digit, index) => {
-                if (index > 0 && (index + 1) % 3 === 0) {
-                    return `${digit}.`;
-                }
-                return digit;
-            }).join(' ');
+            return [...this.customer.mobileNumber].join(' ');
         }
     },
 
