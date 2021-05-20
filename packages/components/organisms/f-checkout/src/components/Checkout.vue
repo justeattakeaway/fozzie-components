@@ -885,7 +885,6 @@ export default {
          * Check to see if any `Vuelidate` validation errors
          */
         isFormValid () {
-            console.log(this.$v);
             this.$v.$touch();
             return !this.$v.$invalid;
         },
