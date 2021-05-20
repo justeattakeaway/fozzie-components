@@ -30,19 +30,6 @@ describe('f-checkout "dinein" component tests', () => {
         expect(checkout.isTableIdentifierMaxLengthErrorDisplayed()).toBe(false);
     });
 
-    it('should display an error if the table identifier is longer than 12 characters', () => {
-        // Arrange
-        const customerInfo = {
-            tableIdentifier: 'Longer than 12 characters'
-        };
-
-        // Act
-        checkout.populateDineInCheckoutForm(customerInfo);
-
-        // Assert
-        expect(checkout.isTableIdentifierMaxLengthErrorDisplayed()).toBe(true);
-    });
-
     it('should prevent a user from entering more than 12 characters in the tableIdentifier field', () => {
         // Arrange
         const maxlength = 12;
