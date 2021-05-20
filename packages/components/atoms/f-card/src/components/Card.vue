@@ -24,8 +24,7 @@
         <div
             v-if="hasFullWidthFooter"
             data-test-id="card-footer">
-            <slot
-                name="cardFooter" />
+            <slot name="cardFooter" />
         </div>
     </div>
 </template>
