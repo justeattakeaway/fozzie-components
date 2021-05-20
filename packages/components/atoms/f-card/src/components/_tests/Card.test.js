@@ -214,7 +214,7 @@ describe('Card', () => {
     describe.each([
         [true, true],
         [false, false]
-    ])('`hasFullWidthBottomElement` is %s', (passedValue, expected) => {
+    ])('if `hasFullWidthBottomElement` prop is %s', (passedValue, expected) => {
         // Arrange
         const propsData = {
             hasFullWidthBottomElement: passedValue
