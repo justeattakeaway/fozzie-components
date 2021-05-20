@@ -5,6 +5,7 @@ let checkout;
 
 describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
@@ -12,6 +13,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
+        // Act
         checkout.open(pageUrl);
         checkout.waitForComponent();
     });
@@ -32,20 +34,11 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
 
     it('should display the "Something went wrong" error.', () => {
         // Arrange
-        // const checkoutData = {
-        //     type: 'delivery',
-        //     isAuthenticated: true,
-        //     isValid: true,
-        //     checkoutErrors: 'SERVER',
-        //     isAsapAvailable: true
-        // };
-
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Checkout Errors', 'SERVER')
                 .withQuery('&knob-Is ASAP available', true);
-
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -60,19 +53,10 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
-        // const checkoutData = {
-        //     type: 'delivery',
-        //     isAuthenticated: true,
-        //     isValid: true,
-        //     placeOrderErrors: 'SERVER',
-        //     isAsapAvailable: true
-
-        // };
-
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Place Order Errors', 'SERVER')
+                .withQuery('$knob-Checkout Errors', 'ISSUES')
                 .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
@@ -102,12 +86,14 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
 
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Visual Tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', false);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
         // Act
         checkout.open(pageUrl);
         checkout.waitForComponent();

@@ -5,6 +5,7 @@ let checkout = new Checkout();
 
 describe('f-checkout - Collection - Guest - Visual Tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', false)
@@ -12,6 +13,7 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
+        // Act
         checkout.open(pageUrl);
         checkout.waitForComponent();
     });
@@ -47,6 +49,7 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', false)
@@ -54,6 +57,7 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests'
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
+        // Act
         checkout.open(pageUrl);
         checkout.waitForComponent();
     });
@@ -67,6 +71,7 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests'
 
 describe('f-checkout - Delivery - Guest - Visual Tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', false)
@@ -74,6 +79,7 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
+        // Act
         checkout.open(pageUrl);
         checkout.waitForComponent();
     });
@@ -111,6 +117,7 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
 
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Visual Tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', false)
@@ -118,6 +125,7 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Visual Tests', 
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
+        // Act
         checkout.open(pageUrl);
         checkout.waitForComponent();
     });
