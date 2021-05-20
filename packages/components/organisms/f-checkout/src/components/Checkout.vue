@@ -85,6 +85,7 @@
                         name="table-identifier"
                         :label-text="$t('labels.tableIdentifier')"
                         :has-error="false"
+                        maxlength="12"
                         @input="updateTableIdentifier($event)"
                     >
                         <template #error>
@@ -94,13 +95,6 @@
                                 data-test-id="error-table-identifier-empty"
                             >
                                 {{ $t('validationMessages.tableIdentifier.requiredError') }}
-                            </error-message>
-                            <error-message
-                                v-if="isTableIdentifierExceedingMaxLength"
-                                data-js-error-message
-                                data-test-id="error-table-identifier-max-length"
-                            >
-                                {{ $t('validationMessages.tableIdentifier.maxLengthError') }}
                             </error-message>
                         </template>
                     </form-field>
@@ -365,10 +359,6 @@ export default {
 
         isTableIdentifierEmpty () {
             return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
-        },
-
-        isTableIdentifierExceedingMaxLength () {
-            return !this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.maxLength;
         },
 
         isCheckoutMethodDelivery () {
@@ -895,6 +885,7 @@ export default {
          * Check to see if any `Vuelidate` validation errors
          */
         isFormValid () {
+            console.log(this.$v);
             this.$v.$touch();
             return !this.$v.$invalid;
         },
@@ -937,7 +928,7 @@ export default {
                 }
             },
             tableIdentifier: {
-                required: this.isCheckoutMethodDineIn,
+                required,
                 maxLength: maxLength(12)
             }
         };

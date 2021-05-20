@@ -709,29 +709,6 @@ describe('Checkout', () => {
             });
         });
 
-        describe('isTableIdentifierExceedingMaxLength ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `true` if tableIdentifier exceeds the max length allowed', () => {
-                // Act
-                wrapper.vm.$v.tableIdentifier.$dirty = true;
-                wrapper.vm.$v.tableIdentifier.maxLength = false;
-
-                // Assert
-                expect(wrapper.vm.isTableIdentifierEmpty).toBeTruthy();
-            });
-        });
-
         describe('isCheckoutMethodDelivery ::', () => {
             it('should return `true` if `serviceType` is set to Delivery', () => {
                 // Arrange and Act

@@ -210,20 +210,6 @@ describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
         browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', 'shared');
     });
 
-    it('should display the illegal table identifier error message', () => {
-        // Arrange
-        const orderInfo = {
-            tableIdentifier: 'Longer than 12 characters'
-        };
-
-        // Act
-        checkout.populateDineInCheckoutForm(orderInfo);
-        checkout.goToPayment();
-
-        // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Table Identifier Error State', 'shared');
-    });
-
     it('should display the illegal mobile number error message', () => {
         // Arrange
         const mobileNumberInfo = {

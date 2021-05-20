@@ -42,4 +42,18 @@ describe('f-checkout "dinein" component tests', () => {
         // Assert
         expect(checkout.isTableIdentifierMaxLengthErrorDisplayed()).toBe(true);
     });
+
+    it('should prevent a user from entering more than 12 characters in the tableIdentifier field', () => {
+        // Arrange
+        const maxlength = 12;
+
+        checkout.clearCheckoutForm('tableIdentifier');
+        const tableEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
+
+        // Act
+        checkout.setFieldValue('tableIdentifier', tableEntry);
+
+        // Assert
+        expect(checkout.getFieldValue(field).length).toEqual(maxlength);
+    });
 });
