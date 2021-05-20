@@ -26,12 +26,10 @@ export const CardComponent = (args, { argTypes }) => ({
             :is-rounded="isRounded"
             :has-outline="hasOutline"
             :is-page-content-wrapper="isPageContentWrapper"
-            :has-full-width-bottom-element="hasFullWidthBottomElement">
+            :has-full-width-footer="hasFullWidthFooter">
             <p>Some Card Content</p>
-            <template v-slot:full-width-bottom-element>
-                <div>
-                    I am a bottom positioned full width element
-                </div>
+            <template v-slot:cardFooter>
+                    <p>I am a bottom positioned full width element</p>
             </template>
         </card>`
 });
@@ -43,7 +41,7 @@ CardComponent.args = {
     isRounded: false,
     hasOutline: false,
     isPageContentWrapper: false,
-    hasFullWidthBottomElement: false
+    hasFullWidthFooter: false
 };
 
 CardComponent.argTypes = {

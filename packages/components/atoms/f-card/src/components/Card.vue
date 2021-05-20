@@ -7,7 +7,7 @@
                 [$style['c-card--outline']]: hasOutline,
                 [$style['c-card--pageContentWrapper']]: isPageContentWrapper
             }]">
-        <div :class="[$style['c-card--innerSpacing']]">
+        <div :class="[$style['c-card-innerSpacing']]">
             <component
                 :is="cardHeadingTag"
                 v-if="cardHeading"
@@ -22,10 +22,10 @@
         </div>
 
         <div
-            v-if="hasFullWidthBottomElement"
-            data-test-id="card-component-fullWidthBottomElement">
+            v-if="hasFullWidthFooter"
+            data-test-id="card-footer">
             <slot
-                name="full-width-bottom-element" />
+                name="cardFooter" />
         </div>
     </div>
 </template>
@@ -61,7 +61,7 @@ export default {
             type: Boolean,
             default: false
         },
-        hasFullWidthBottomElement: {
+        hasFullWidthFooter: {
             type: Boolean,
             default: false
         }
@@ -82,7 +82,7 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
     background-color: $card-bgColor;
     display: block;
 }
-    .c-card--innerSpacing {
+    .c-card-innerSpacing {
         padding: $card-padding;
     }
 
@@ -108,7 +108,7 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
             margin: spacing(x5) auto;
         }
 
-        .c-card--innerSpacing {
+        .c-card-innerSpacing {
             padding: spacing(x3) 6% 0;
 
             @include media('>=narrow') {
