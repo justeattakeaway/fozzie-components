@@ -297,31 +297,12 @@ describe('Checkout', () => {
 
     describe('computed ::', () => {
         describe('formattedMobileNumberForScreenReader ::', () => {
-            it('should return the mobile number with spaces and periods after the 7th and 10th digit if number starts with `+`', () => {
-                const expectedMobileNumber = '+ 4 4 7 1 1 1. 1 1 1. 1 1 1';
+            it('should return the mobile number with spaces, and periods after every third character', () => {
+                const expectedMobileNumber = '+ 4 4. 7 1 1. 1 1 1. 1 1 1. 1';
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.formattedMobileNumberForScreenReader).toEqual(expectedMobileNumber);
-            });
-
-            it('should return the mobile number with spaces and periods after the 5th and 8th digit if number does not start with `+`', () => {
-                const expectedMobileNumber = '0 7 1 1 1. 1 1 1. 1 1 1';
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        customer: {
-                            mobileNumber: '07111111111'
-                        }
                     }),
                     i18n,
                     localVue,
