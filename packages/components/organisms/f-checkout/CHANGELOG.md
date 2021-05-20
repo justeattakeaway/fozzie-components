@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.117.0
+------------------------------
+*May 20, 2021*
+
+### Added
+- Aria label with structured mobile number for screen readers
+
+
 v0.116.0
 ------------------------------
 *May 18, 2021*

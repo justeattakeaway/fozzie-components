@@ -57,6 +57,7 @@
                         :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
                         aria-describedby="mobile-number-error"
                         :aria-invalid="!isMobileNumberValid"
+                        :aria-label="formattedMobileNumberForScreenReader"
                         @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
@@ -395,6 +396,17 @@ export default {
             return invalidFieldCount === 1 ?
                 this.$t('errorMessages.singleFieldError') :
                 this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
+        },
+
+        formattedMobileNumberForScreenReader () {
+            const usesAreaCode = this.customer.mobileNumber.startsWith('+');
+            const pauseIndices = usesAreaCode ? [6, 9] : [4, 7]; // TODO: Split the number at different indices depending on country
+            return Array.from(this.customer.mobileNumber, (digit, index) => {
+                if (pauseIndices.includes(index)) {
+                    return `${digit}.`;
+                }
+                return digit;
+            }).join(' ');
         }
     },
 
@@ -423,6 +435,10 @@ export default {
 
         await this.initialise();
         this.trackInitialLoad();
+    },
+
+    updated () {
+        console.log(this.customer.mobileNumber);
     },
 
     methods: {
