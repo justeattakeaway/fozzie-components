@@ -13,7 +13,7 @@
                 v-if="cardHeading"
                 :class="[
                     $style['c-card-heading'],
-                    (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}`] : '')
+                    (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}AlignedText`] : '')
                 ]"
                 data-test-id="card-heading">
                 {{ cardHeading }}
@@ -122,5 +122,13 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
 
     .c-card-heading {
         margin-bottom: spacing(x2);
+    }
+
+    .c-card--centerAlignedText {
+        text-align: center;
+    }
+
+    .c-card--rightAlignedText {
+        text-align: right;
     }
 </style>

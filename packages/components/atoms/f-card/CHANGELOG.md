@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.2.1
+------------------------------
+*May 20, 2021*
+
+### Added
+- Returned back `.c-card--center`, `.c-card--right` css classes as they are in use for aligning the header. Renamed to `.c-card--centerAlignedText` and `.c-card--rightAlignedText`.
+
+
 v1.2.0
 ------------------------------
 *May 20, 2021*
