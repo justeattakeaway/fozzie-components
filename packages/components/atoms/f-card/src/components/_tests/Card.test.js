@@ -5,8 +5,8 @@ const $style = {
     'c-card--rounded': 'c-card--rounded',
     'c-card--outline': 'c-card--outline',
     'c-card--pageContentWrapper': 'c-card--pageContentWrapper',
-    'c-card--centerAlignedText': 'c-card--centerAlignedText',
-    'c-card--rightAlignedText': 'c-card--rightAlignedText'
+    'c-card-heading--centerAligned': 'c-card-heading--centerAligned',
+    'c-card-heading--rightAligned': 'c-card-heading--rightAligned'
 };
 
 describe('Card', () => {
@@ -119,8 +119,8 @@ describe('Card', () => {
             });
 
             it.each([
-                ['c-card--centerAlignedText', 'center'],
-                ['c-card--rightAlignedText', 'right']
+                ['c-card-heading--centerAligned', 'center'],
+                ['c-card-heading--rightAligned', 'right']
             ])('should add %s class to the heading if `cardHeadingPosition` prop is set to %s', (cssClass, propValue) => {
                 // Arrange & Act
                 const wrapper = shallowMount(Card, {
