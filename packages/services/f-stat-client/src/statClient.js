@@ -2,7 +2,7 @@ const { Client } = require('@elastic/elasticsearch');
 
 export default class StatClient {
     constructor (url, port, tenant, featureName, user, pwd, indexName, mock) {
-        const nodeUrl = `${url ?? 'http://localhost'}:${port ?? 9200}`;
+        const nodeUrl = `${url || 'http://localhost'}:${port || 9200}`;
 
         const conn = {
             node: nodeUrl

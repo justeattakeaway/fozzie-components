@@ -40,10 +40,11 @@ yarn add @justeat/f-stat-client
 ```
 </br>
 
-### *Initialisation*
+### *Initialisation/Construction e.g.*
 ```js
+import StatClient from '@justeat/f-stat-client';
 
-// TODO
+const client = new StatClient('http://localhost', 9200, 'uk', 'checkoutWeb');
 
 ```
 
@@ -51,28 +52,30 @@ yarn add @justeat/f-stat-client
 
 ### *How to use*
 ```js
-import httpModule from '@justeat/f-stat-client';
 
-// TODO
+await client.publish('GET', '/search', 200, 611);
 
 ```
 <hr></br>
 
-## Options
-All options are optional, you don't need to specify any overrides if you are happy with the default values
+## Constructor
+All values are optional, you don't need to specify any overrides if you are happy with the default values
 
 Option | Description | Type | Default
 ------------- | ------------- | ------------- | -------------
+url | The host of the stat publishing endpoint | String | '`http://localhost`'
+port | The port of the stat publishing endpoint | Number | 9200
+tenant | The current tenant | String | 'ns'
 featureName | This is key so stats can be identified & grouped by feature, e.g. `salesWebsite` | String | 'NotSpecified'
-statPort | The port of the stat publishing endpoint | Number | 9200
-statHost | The host of the stat publishing endpoint | String | '`http://localhost`'
-statUN | The username to gain access to the stat publishing endpoint | String | ''
-statPWD | The password to gain access to the stat publishing endpoint | String | ''
+user | The username to gain access to the stat publishing endpoint, if not supplied then no authentication will be used | String |
+pwd | The password to gain access to the stat publishing endpoint | String |
+indexName | This is index to write to | String | 'justeat'
+mock | This can be supplied for testing purposes and will use/return your mock instead | String |
 <hr></br>
 
 ## Client Methods
 These are all of the methods exposed by the httpClient
 
-Method | Description | Parameters
-------------- | ------------- | -------------
-publish | Send the details of a stat to the Endpoint | _TODO_
+Method | Description | Parameters | Example
+------------- | ------------- | ------------- | -------------
+publish | Sends the stat details to the Endpoint | `verb` _[string]_, `segment` _[string]_, `status` _[number]_, `timing` _[number]_ | `'GET', '/search', 200, 654`
