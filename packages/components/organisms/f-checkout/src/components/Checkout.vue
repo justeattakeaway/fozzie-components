@@ -84,7 +84,7 @@
                         input-type="text"
                         name="table-identifier"
                         :label-text="$t('labels.tableIdentifier')"
-                        :has-error="false"
+                        :has-error="isTableIdentifierEmpty"
                         maxlength="12"
                         @input="updateTableIdentifier($event)"
                     >
