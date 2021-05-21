@@ -210,4 +210,24 @@ describe('Card', () => {
             });
         });
     });
+
+    describe.each([
+        [true, true],
+        [false, false]
+    ])('if `hasFullWidthFooter` prop is %s', (passedValue, expected) => {
+        // Arrange
+        const propsData = {
+            hasFullWidthFooter: passedValue
+        };
+
+        // Act
+        const wrapper = shallowMount(Card, { propsData });
+
+        // Act
+        const testedElement = wrapper.find('[data-test-id="card-footer"]');
+
+        it(`should ${wrapper.vm.hasFullWidthFooter ? '' : 'not '}display a bottom positioned full width element`, () => {
+            expect(testedElement.exists()).toBe(expected);
+        });
+    });
 });
