@@ -141,7 +141,9 @@
 
 <script>
 import { validationMixin } from 'vuelidate';
-import { required, email, maxLength } from 'vuelidate/lib/validators';
+import {
+    required, email, maxLength, requiredIf
+} from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -927,7 +929,7 @@ export default {
                 }
             },
             tableIdentifier: {
-                required,
+                required: requiredIf(() => this.isCheckoutMethodDineIn),
                 maxLength: maxLength(12)
             }
         };
