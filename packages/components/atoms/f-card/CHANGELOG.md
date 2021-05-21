@@ -11,6 +11,9 @@ v1.2.1
 ### Added
 - Returned back `.c-card--center`, `.c-card--right` css classes as they are in use for aligning the header. Renamed to `.c-card--centerAlignedText` and `.c-card--rightAlignedText`.
 
+### Changed
+-Refactored unit tests
+
 
 v1.2.0
 ------------------------------
