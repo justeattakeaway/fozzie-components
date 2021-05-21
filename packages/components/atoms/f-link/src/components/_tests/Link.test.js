@@ -17,7 +17,6 @@ const i18n = {
 const linkText = 'This is a Link';
 const slot = `<span>${linkText}</span>`;
 
-
 const $style = {
     'o-link--bold': 'o-link--bold',
     'o-link--noDecoration': 'o-link--noDecoration',
@@ -57,14 +56,10 @@ describe('Link', () => {
                     propsData,
                     i18n,
                     localVue,
-                    slots: {
-                        default: slot
-                    },
                     mocks: {
                         $style
                     }
                 });
-
 
                 // Assert
                 expect(wrapper.attributes('class')).toContain('o-link--bold');
@@ -83,14 +78,10 @@ describe('Link', () => {
                     propsData,
                     i18n,
                     localVue,
-                    slots: {
-                        default: slot
-                    },
                     mocks: {
                         $style
                     }
                 });
-
 
                 // Assert
                 expect(wrapper.attributes('class')).toContain('o-link--noDecoration');
@@ -109,14 +100,10 @@ describe('Link', () => {
                     propsData,
                     i18n,
                     localVue,
-                    slots: {
-                        default: slot
-                    },
                     mocks: {
                         $style
                     }
                 });
-
 
                 // Assert
                 expect(wrapper.attributes('class')).toContain('o-link--full');
@@ -135,14 +122,10 @@ describe('Link', () => {
                     propsData,
                     i18n,
                     localVue,
-                    slots: {
-                        default: slot
-                    },
                     mocks: {
                         $style
                     }
                 });
-
 
                 // Assert
                 expect(wrapper.attributes('class')).toContain('o-link--noBreak');
@@ -191,10 +174,7 @@ describe('Link', () => {
                 const wrapper = shallowMount(VLink, {
                     propsData,
                     i18n,
-                    localVue,
-                    slots: {
-                        default: slot
-                    }
+                    localVue
                 });
 
                 // Assert
@@ -216,10 +196,7 @@ describe('Link', () => {
                 const wrapper = shallowMount(VLink, {
                     propsData,
                     i18n,
-                    localVue,
-                    slots: {
-                        default: slot
-                    }
+                    localVue
                 });
 
                 // Assert
@@ -239,10 +216,7 @@ describe('Link', () => {
                 const wrapper = shallowMount(VLink, {
                     propsData,
                     i18n,
-                    localVue,
-                    slots: {
-                        default: slot
-                    }
+                    localVue
                 });
 
                 // Assert
@@ -264,10 +238,7 @@ describe('Link', () => {
                 const wrapper = shallowMount(VLink, {
                     propsData,
                     i18n,
-                    localVue,
-                    slots: {
-                        default: slot
-                    }
+                    localVue
                 });
 
                 // Assert
