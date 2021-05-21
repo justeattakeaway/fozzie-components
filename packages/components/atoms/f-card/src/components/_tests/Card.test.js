@@ -67,10 +67,7 @@ describe('Card', () => {
     describe('props', () => {
         describe.each([
             ['isRounded', 'c-card--rounded'],
-            ['isRounded', 'c-card--rounded'],
             ['hasOutline', 'c-card--outline'],
-            ['hasOutline', 'c-card--outline'],
-            ['isPageContentWrapper', 'c-card--pageContentWrapper'],
             ['isPageContentWrapper', 'c-card--pageContentWrapper']
         ])('%s', (propKey, cssClass) => {
             it(`should not apply ${cssClass} to the card if it is not set`, () => {

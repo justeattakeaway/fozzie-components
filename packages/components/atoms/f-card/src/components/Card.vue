@@ -13,7 +13,7 @@
                 v-if="cardHeading"
                 :class="[
                     $style['c-card-heading'],
-                    (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}AlignedText`] : '')
+                    { [$style[`c-card--${cardHeadingPosition}AlignedText`]]: cardHeadingPosition !== 'left' }
                 ]"
                 data-test-id="card-heading">
                 {{ cardHeading }}
