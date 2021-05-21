@@ -56,7 +56,6 @@ export const FIELDS = {
         error: ''
     },
     tableIdentifier: {
-        input: '[data-test-id="formfield-table-identifier-input"]',
-        maxLengthError: '[data-test-id="error-table-identifier-max-length"'
+        input: '[data-test-id="formfield-table-identifier-input"]'
     }
 };
