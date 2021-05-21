@@ -1,16 +1,18 @@
 <template>
     <a
+        v-aria-label="newWindowMessage"
         :class="[
             $style['o-link'], {
                 [$style['o-link--bold']]: isBold,
                 [$style['o-link--noDecoration']]: !hasTextDecoration,
-                [$style['o-link--full']]: isFullWidth
+                [$style['o-link--full']]: isFullWidth,
+                [$style['o-link--noBreak']]: noLineBreak
             }]"
-        :data-test-id="'link-component'"
-        :aria-label="ariaLabel"
+        data-test-id="link-component"
         :target="target"
         :rel="rel"
-        v-bind="$attrs">
+        v-bind="$attrs"
+    >
         <slot />
     </a>
 </template>
@@ -21,6 +23,20 @@ import tenantConfigs from '../tenants';
 
 export default {
     name: 'VLink',
+
+    directives: {
+        /**
+         * Called when the slot is updated.
+         * Applies the `innerText` of the slot with `newWindowMessage` to link `aria-label`
+         * https://vuejs.org/v2/guide/custom-directive.html#Hook-Functions
+         *
+         * */
+        ariaLabel: {
+            componentUpdated (el, { value }) {
+                el.ariaLabel = el.innerText + value || null;
+            }
+        }
+    },
 
     mixins: [VueGlobalisationMixin],
 
@@ -48,6 +64,11 @@ export default {
         isFullWidth: {
             type: Boolean,
             default: false
+        },
+
+        noLineBreak: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -62,16 +83,13 @@ export default {
             return this.$slots.default[0].children[0].text.trim();
         },
 
-        ariaLabel () {
-            let message;
-
+        newWindowMessage () {
             if (this.isExternal) {
-                message = this.$t('ariaLabel.externalSite');
+                return this.$t('ariaLabel.externalSite');
             } else if (this.opensInNewLocation) {
-                message = this.$t('ariaLabel.newLocation');
+                return this.$t('ariaLabel.newLocation');
             }
-
-            return message ? this.linkText + message : null;
+            return null;
         },
 
         target () {
@@ -119,5 +137,9 @@ export default {
 
 .o-link--bold {
     font-weight: $font-weight-bold;
+}
+
+.o-link--noBreak {
+    white-space: nowrap;
 }
 </style>

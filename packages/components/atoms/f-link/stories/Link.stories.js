@@ -35,6 +35,10 @@ export const VLinkComponent = () => ({
 
         isFullWidth: {
             default: boolean('isFullWidth', false)
+        },
+
+        noLineBreak: {
+            default: boolean('noLineBreak', false)
         }
 
     },
@@ -46,6 +50,7 @@ export const VLinkComponent = () => ({
                     :is-bold="isBold"
                     :has-text-decoration="hasTextDecoration"
                     :is-full-width="isFullWidth"
+                    :no-line-break="noLineBreak"
                 >
                     <span>
                         This is a Link

@@ -4,6 +4,7 @@ import VLink from '../Link.vue';
 import tenantConfigs from '../../tenants';
 
 const localVue = createLocalVue();
+localVue.directive('aria-label', VLink.directives.ariaLabel);
 localVue.use(VueI18n);
 
 const i18n = {
@@ -15,6 +16,14 @@ const i18n = {
 
 const linkText = 'This is a Link';
 const slot = `<span>${linkText}</span>`;
+
+
+const $style = {
+    'o-link--bold': 'o-link--bold',
+    'o-link--noDecoration': 'o-link--noDecoration',
+    'o-link--full': 'o-link--full',
+    'o-link--noBreak': 'o-link--noBreak'
+};
 
 describe('Link', () => {
     it('should be defined', () => {
@@ -33,6 +42,112 @@ describe('Link', () => {
 
         // Assert
         expect(wrapper.exists()).toBe(true);
+    });
+
+    describe('props :: ', () => {
+        describe('isBold :: ', () => {
+            it('should apply `o-link--bold` class to link if true', () => {
+                // Arrange
+                const propsData = {
+                    isBold: true
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    i18n,
+                    localVue,
+                    slots: {
+                        default: slot
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
+
+
+                // Assert
+                expect(wrapper.attributes('class')).toContain('o-link--bold');
+            });
+        });
+
+        describe('hasTextDecoration :: ', () => {
+            it('should apply `o-link--noDecoration` class to link if false', () => {
+                // Arrange
+                const propsData = {
+                    hasTextDecoration: false
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    i18n,
+                    localVue,
+                    slots: {
+                        default: slot
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
+
+
+                // Assert
+                expect(wrapper.attributes('class')).toContain('o-link--noDecoration');
+            });
+        });
+
+        describe('isFullWidth :: ', () => {
+            it('should apply `o-link--full` class to link if true', () => {
+                // Arrange
+                const propsData = {
+                    isFullWidth: true
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    i18n,
+                    localVue,
+                    slots: {
+                        default: slot
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
+
+
+                // Assert
+                expect(wrapper.attributes('class')).toContain('o-link--full');
+            });
+        });
+
+        describe('noLineBreak :: ', () => {
+            it('should apply `o-link--noBreak` class to link if true', () => {
+                // Arrange
+                const propsData = {
+                    noLineBreak: true
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    i18n,
+                    localVue,
+                    slots: {
+                        default: slot
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
+
+
+                // Assert
+                expect(wrapper.attributes('class')).toContain('o-link--noBreak');
+            });
+        });
     });
 
     describe('computed :: ', () => {
@@ -56,9 +171,9 @@ describe('Link', () => {
             });
         });
 
-        describe('ariaLabel :: ', () => {
-            const newLocationMessage = `${linkText} - Opens in a new window/screen/tab`;
-            const externalLinkMessage = `${linkText} - Opens an external site in a new window/screen/tab`;
+        describe('newWindowMessage :: ', () => {
+            const newLocationMessage = ' - Opens in a new window/screen/tab';
+            const externalLinkMessage = ' - Opens an external site in a new window/screen/tab';
 
             it.each([
                 [null, false, false],
@@ -83,7 +198,7 @@ describe('Link', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.ariaLabel).toEqual(expected);
+                expect(wrapper.vm.newWindowMessage).toEqual(expected);
             });
         });
 
@@ -157,6 +272,31 @@ describe('Link', () => {
 
                 // Assert
                 expect(wrapper.vm.rel).toEqual(expected);
+            });
+        });
+    });
+
+    describe('ariaLabel directive', () => {
+        let ariaLabel;
+
+        beforeEach(() => {
+            ariaLabel = VLink.directives.ariaLabel;
+        });
+
+        describe('the `componentUpdated` hook', () => {
+            it('should set the passed elements ariaLabel attribute', () => {
+                // Arrange
+                const el = document.createElement('div');
+                const labelText = 'my test link content';
+                const suffix = ' - a suffix message';
+
+                el.innerText = labelText;
+
+                // Act
+                ariaLabel.componentUpdated(el, { value: suffix });
+
+                // Assert
+                expect(el.ariaLabel).toEqual(labelText + suffix);
             });
         });
     });

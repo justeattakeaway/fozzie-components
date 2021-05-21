@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.0
 ------------------------------
-*May 20, 2021*
+*May 21, 2021*
 
 ### Added
 - Props `isExternalLink` and `opensInNewLocation` to set `target`, `rel`, and `ariaLabel`.
