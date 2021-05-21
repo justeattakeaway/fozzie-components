@@ -14,9 +14,6 @@ const i18n = {
     }
 };
 
-const linkText = 'This is a Link';
-const slot = `<span>${linkText}</span>`;
-
 const $style = {
     'o-link--bold': 'o-link--bold',
     'o-link--noDecoration': 'o-link--noDecoration',
@@ -33,10 +30,7 @@ describe('Link', () => {
         const wrapper = shallowMount(VLink, {
             propsData,
             i18n,
-            localVue,
-            slots: {
-                default: slot
-            }
+            localVue
         });
 
         // Assert
@@ -134,26 +128,6 @@ describe('Link', () => {
     });
 
     describe('computed :: ', () => {
-        describe('linkText :: ', () => {
-            it('should return `text` of the first slot`', () => {
-                // Arrange
-                const propsData = {};
-
-                // Act
-                const wrapper = shallowMount(VLink, {
-                    propsData,
-                    i18n,
-                    localVue,
-                    slots: {
-                        default: slot
-                    }
-                });
-
-                // Assert
-                expect(wrapper.vm.linkText).toEqual(linkText);
-            });
-        });
-
         describe('newWindowMessage :: ', () => {
             const newLocationMessage = ' - Opens in a new window/screen/tab';
             const externalLinkMessage = ' - Opens an external site in a new window/screen/tab';

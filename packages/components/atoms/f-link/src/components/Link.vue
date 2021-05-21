@@ -79,10 +79,6 @@ export default {
     },
 
     computed: {
-        linkText () {
-            return this.$slots.default[0].children[0].text.trim();
-        },
-
         newWindowMessage () {
             if (this.isExternal) {
                 return this.$t('ariaLabel.externalSite');
