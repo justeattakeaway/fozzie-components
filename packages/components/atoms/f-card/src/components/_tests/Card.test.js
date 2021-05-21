@@ -1,6 +1,14 @@
 import { shallowMount } from '@vue/test-utils';
 import Card from '../Card.vue';
 
+const $style = {
+    'c-card--rounded': 'c-card--rounded',
+    'c-card--outline': 'c-card--outline',
+    'c-card--pageContentWrapper': 'c-card--pageContentWrapper',
+    'c-card-heading--centerAligned': 'c-card-heading--centerAligned',
+    'c-card-heading--rightAligned': 'c-card-heading--rightAligned'
+};
+
 describe('Card', () => {
     it('should be defined', () => {
         // Arrange
@@ -57,107 +65,77 @@ describe('Card', () => {
     });
 
     describe('props', () => {
-        describe('isRounded', () => {
-            it('should default to `false` if it is not set', () => {
-                // Arrange
-                const propsData = {};
-
-                // Act
-                const wrapper = shallowMount(Card, { propsData });
+        describe.each([
+            ['isRounded', 'c-card--rounded'],
+            ['hasOutline', 'c-card--outline'],
+            ['isPageContentWrapper', 'c-card--pageContentWrapper']
+        ])('%s', (propKey, cssClass) => {
+            it(`should not apply ${cssClass} to the card if it is not set`, () => {
+                // Arrange & Act
+                const wrapper = shallowMount(Card, { propsData: {} });
 
                 // Assert
-                expect(wrapper.vm.isRounded).toBe(false);
+                expect(wrapper.attributes('class')).not.toContain(cssClass);
             });
 
-            it('should be set to `true` if the `isRounded` prop is passed in as `true`', () => {
-                // Arrange
-                const propsData = {
-                    isRounded: true
-                };
-
-                // Act
-                const wrapper = shallowMount(Card, { propsData });
-
-                // Assert
-                expect(wrapper.vm.isRounded).toBe(true);
-            });
-        });
-
-        describe('hasOutline', () => {
-            it('should default to `false` if it is not set', () => {
-                // Arrange
-                const propsData = {};
-
-                // Act
-                const wrapper = shallowMount(Card, { propsData });
+            it(`should apply ${cssClass} class to the card if set to true`, () => {
+                // Arrange & Act
+                const wrapper = shallowMount(Card, {
+                    propsData: {
+                        [propKey]: true
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
 
                 // Assert
-                expect(wrapper.vm.hasOutline).toBe(false);
+                expect(wrapper.attributes('class')).toContain(cssClass);
             });
 
-            it('should be set to `true` if the `hasOutline` prop is passed in as `true`', () => {
-                // Arrange
-                const propsData = {
-                    hasOutline: true
-                };
-
-                // Act
-                const wrapper = shallowMount(Card, { propsData });
-
-                // Assert
-                expect(wrapper.vm.hasOutline).toBe(true);
-            });
-        });
-
-        describe('isPageContentWrapper', () => {
-            it('should default to `false` if it is not set', () => {
-                // Arrange
-                const propsData = {};
-
-                // Act
-                const wrapper = shallowMount(Card, { propsData });
+            it(`should not apply ${cssClass} class to the card if set to false`, () => {
+                // Arrange & Act
+                const wrapper = shallowMount(Card, {
+                    propsData: {
+                        [propKey]: false
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
 
                 // Assert
-                expect(wrapper.vm.isPageContentWrapper).toBe(false);
-            });
-
-            it('should be set to `true` if the `isPageContentWrapper` prop is passed in as `true`', () => {
-                // Arrange
-                const propsData = {
-                    isPageContentWrapper: true
-                };
-
-                // Act
-                const wrapper = shallowMount(Card, { propsData });
-
-                // Assert
-                expect(wrapper.vm.isPageContentWrapper).toBe(true);
+                expect(wrapper.attributes('class')).not.toContain(cssClass);
             });
         });
 
         describe('cardHeadingPosition', () => {
             it('should default to `left` if it is not set', () => {
-                // Arrange
-                const propsData = {};
-
-                // Act
-                const wrapper = shallowMount(Card, { propsData });
+                // Arrange & Act
+                const wrapper = shallowMount(Card, { propsData: {} });
 
                 // Assert
                 expect(wrapper.vm.cardHeadingPosition).toBe('left');
             });
 
-            it('should be set to `center` if the `cardHeadingPosition` prop is passed in as `center`', () => {
-                // Arrange
-                const propsData = {
-                    cardHeadingPosition: 'center'
-                };
-
-                // Act
-                const wrapper = shallowMount(Card, { propsData });
+            it.each([
+                ['c-card-heading--centerAligned', 'center'],
+                ['c-card-heading--rightAligned', 'right']
+            ])('should add %s class to the heading if `cardHeadingPosition` prop is set to %s', (cssClass, propValue) => {
+                // Arrange & Act
+                const wrapper = shallowMount(Card, {
+                    propsData: {
+                        cardHeadingPosition: propValue,
+                        cardHeading: 'Test Heading'
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
+                const testedElement = wrapper.find('[data-test-id="card-heading"]');
 
                 // Assert
-                expect(wrapper.vm.cardHeadingPosition).toBe('center');
+                expect(testedElement.attributes('class')).toContain(cssClass);
             });
 
             it('should only allow `left`, `right` or `center` to be passed in.', () => {
