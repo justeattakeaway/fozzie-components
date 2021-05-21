@@ -18,9 +18,10 @@ Javascript HTTP client for publishing stats to ElasticSearch
 This client abstracts away the complexity of publishing stats to ElasticSearch, such as API timings so you can then graph on these results.  It also provides a standardised approach for to follow that can be used in a suite of features and components, allowing you to use and report in a generic way.
 
 ## Benefits (Now)
-- Simple public publish method that requires minimal parameters
-- Sensible defaults, with the ability to override most
-- All setup parameters are held by the parent in their option file
+- Simple publish method that hides away the complexities of making posts requests to ElasticSearch
+- Sensible defaults, with the ability to override all
+- If you run ElasticSearch locally in a Docker Container and use the host `localhost` then you can see you results instantly (see https://www.elastic.co/guide/en/elasticsearch/reference/7.0/docker.html & https://elasticvue.com/)
+- Built-in mock ability by providing a mock on the constructor (see https://github.com/elastic/elasticsearch-js-mock and an example below)
 
 ## Benefits (Soon)
 - _encapsualted batch publishing_
@@ -38,8 +39,6 @@ Install the module using npm or Yarn:
 ```sh
 yarn add @justeat/f-stat-client
 ```
-</br>
-
 ### *Initialisation/Construction e.g.*
 ```js
 import StatClient from '@justeat/f-stat-client';
@@ -47,21 +46,50 @@ import StatClient from '@justeat/f-stat-client';
 const client = new StatClient('http://localhost', 9200, 'uk', 'checkoutWeb');
 
 ```
-
-</br>
-
 ### *How to use*
 ```js
 
 await client.publish('GET', '/search', 200, 611);
 
 ```
+### *How to test/mock e.g.*
+```js
+import StatClient from '@justeat/f-stat-client';
+
+const Mock = require('@elastic/elasticsearch-mock');
+
+const mock = new Mock();
+
+// Build a cut down mock reponse
+const mockResponse = {
+    _index: 'justeat',
+    result: 'created',
+    statusCode: 201
+};
+
+// Mock the action to return the mock response
+mock.add({
+    method: 'POST',
+    path: '*'
+}, () => (mockResponse));
+
+// Supply the mock on the constructor
+const client = new StatClient('http://localhost', 9200, 'uk', 'checkoutWeb', '', '', null, mock);
+
+// Act
+const response = await client.publish('GET', '/basket', 200, 654);
+
+// Assert
+expect(response.body.result).toBe('created');
+
+```
+</br>
 <hr></br>
 
 ## Constructor
 All values are optional, you don't need to specify any overrides if you are happy with the default values
 
-Option | Description | Type | Default
+Parameter | Description | Type | Default
 ------------- | ------------- | ------------- | -------------
 url | The host of the stat publishing endpoint | String | '`http://localhost`'
 port | The port of the stat publishing endpoint | Number | 9200
@@ -70,7 +98,7 @@ featureName | This is key so stats can be identified & grouped by feature, e.g. 
 user | The username to gain access to the stat publishing endpoint, if not supplied then no authentication will be used | String |
 pwd | The password to gain access to the stat publishing endpoint | String |
 indexName | This is index to write to | String | 'justeat'
-mock | This can be supplied for testing purposes and will use/return your mock instead | String |
+mock | This can be supplied for testing purposes and will use/return your mock response instead | String |
 <hr></br>
 
 ## Client Methods

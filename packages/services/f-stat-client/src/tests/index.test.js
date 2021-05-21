@@ -6,24 +6,8 @@ const mock = new Mock();
 
 const expectedPostResponse = {
     _index: 'justeat',
-    _type: '_doc',
     result: 'created',
-    statusCode: 201,
-    meta: {
-        context: null,
-        request:     {
-            method: 'POST',
-            path: '/justeat/_doc',
-            body: '{"tenant":"uk","feature":"checkoutweb_test","timeStamp":"2021-05-21T13:51:39.002Z","verb":"GET","segment":"/jazz1","status":200,"timing":654}'
-        },
-        name: 'elasticsearch-js',
-        connection: {
-            url: 'http://localhost:9200/',
-            id: 'http://localhost:9200/'
-        },
-        attempts: 0,
-        aborted: false
-    }
+    statusCode: 201
 };
 
 describe('publisher', () => {

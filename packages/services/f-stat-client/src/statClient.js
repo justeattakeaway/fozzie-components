@@ -2,10 +2,8 @@ const { Client } = require('@elastic/elasticsearch');
 
 export default class StatClient {
     constructor (url, port, tenant, featureName, user, pwd, indexName, mock) {
-        const nodeUrl = `${url || 'http://localhost'}:${port || 9200}`;
-
         const conn = {
-            node: nodeUrl
+            node: `${url || 'http://localhost'}:${port || 9200}`
         };
 
         if (user) {
@@ -28,7 +26,7 @@ export default class StatClient {
     async publish ({
         verb, segment, status, timing
     }) {
-        const response = await this.client.index({
+        const payload = {
             index: this.indexName,
             body: {
                 tenant: this.tenant,
@@ -39,7 +37,9 @@ export default class StatClient {
                 status,
                 timing
             }
-        });
+        };
+
+        const response = await this.client.index(payload);
 
         return response;
     }
