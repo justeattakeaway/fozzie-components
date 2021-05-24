@@ -49,7 +49,7 @@ const client = new StatClient('http://localhost:9200', 'uk', 'checkoutWeb');
 ### *How to use*
 ```js
 
-await client.publish({ verb: 'GET', segment: '/search', status: 200, timimg: 611 });
+await client.publish({ verb: 'GET', segment: '/search', status: 200, timing: 611 });
 
 ```
 Note; the dynamic model passed to the `publish()` method will get deconstructed and written out as individual fields on the ElasticSearch document along with the fixed fields of `FeatureName`, `Tenant` and a `Timestamp`.
