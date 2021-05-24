@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.118.1
 ------------------------------
-*May 21, 2021*
+*May 24, 2021*
 
 ### Changed
-- check mobile number exists before formatting for screen reader
+- Check mobile number exists before formatting for screen reader
 
 
 v0.118.0
