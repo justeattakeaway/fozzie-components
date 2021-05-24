@@ -4,6 +4,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.2.1
+------------------------------
+*May 20, 2021*
+
+### Added
+- Returned back `.c-card--center`, `.c-card--right` css classes as they are in use for aligning the header. Renamed to `.c-card-heading--centerAligned` and `.c-card-heading--rightAligned`.
+
+### Changed
+-Refactored unit tests
+
+
+v1.2.0
+------------------------------
+*May 20, 2021*
+
+### Added
+- `hasFullWidthFooter` prop
+- Named slot `cardFooter` to render full width content at the bottom of the card without card paddings when `hasFullWidthFooter` set to true
+- `.c-card-innerSpacing` css class for card paddings to be able to separate card content paddings from the card itself
+
+### Removed
+- `.c-card--separated`, `.c-card--center`, `.c-card--right` css classes as unused
+
 v1.1.0
 ------------------------------
 *March 17, 2021*
