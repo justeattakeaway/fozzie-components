@@ -6,11 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.119.0
 ------------------------------
-*May 18, 2021*
+*May 24, 2021*
 
 ### Added
 - Ability to handle orders with the service type `dinein`
 - Table number/name input field
+
+
+v0.118.1
+------------------------------
+*May 24, 2021*
+
+### Changed
+- Check mobile number exists before formatting for screen reader
 
 
 v0.118.0
@@ -23,7 +31,7 @@ v0.118.0
 ### Changed
 - Refactor ErrorDialog to use `title` prop in `f-mega-modal`
 
-  
+
 v0.117.0
 ------------------------------
 *May 20, 2021*
