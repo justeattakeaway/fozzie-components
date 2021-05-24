@@ -5,7 +5,7 @@ class CookieBanner extends Page {
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
 
-    get policyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
+    get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
 
     get cookieAcceptAllButton () { return this.component.$('[data-test-id="accept-all-cookies-button"]'); }
 
