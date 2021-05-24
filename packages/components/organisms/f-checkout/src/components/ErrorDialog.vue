@@ -2,16 +2,10 @@
     <mega-modal
         data-test-id="checkout-issue-modal"
         has-overlay
+        :title="$t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText })"
         :is-open="isOpen"
         @close="closeErrorDialog"
     >
-        <h3
-            data-test-id="checkout-issue-modal-title"
-            :class="$style['c-checkout-errorTitle']"
-        >
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText }) }}
-        </h3>
-
         <p data-test-id="checkout-issue-modal-message">
             {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`, { serviceType: serviceTypeText }) }}
         </p>
@@ -90,10 +84,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-checkout-errorTitle {
-    margin: 0 spacing(x3);
-}
-
 .c-checkout-redirectButton {
     margin: spacing(x4) 0 spacing(x0.5);
 }
