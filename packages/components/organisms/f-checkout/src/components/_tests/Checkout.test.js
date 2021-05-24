@@ -297,7 +297,7 @@ describe('Checkout', () => {
 
     describe('computed ::', () => {
         describe('formattedMobileNumberForScreenReader ::', () => {
-            it('should return the mobile number with spaces, and periods after every third character', () => {
+            it('should return the mobile number with spaces after every character', () => {
                 const expectedMobileNumber = '+ 4 4 7 1 1 1 1 1 1 1 1 1';
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
