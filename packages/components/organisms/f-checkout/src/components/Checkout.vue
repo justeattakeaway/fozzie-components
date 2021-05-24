@@ -56,7 +56,8 @@
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
                         aria-describedby="mobile-number-error"
-                        :aria-invalid="!isMobileNumberValid"
+                        :aria-invalid="isMobileNumberInvalid"
+                        :aria-label="formattedMobileNumberForScreenReader"
                         @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
@@ -395,6 +396,10 @@ export default {
             return invalidFieldCount === 1 ?
                 this.$t('errorMessages.singleFieldError') :
                 this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
+        },
+
+        formattedMobileNumberForScreenReader () {
+            return [...this.customer.mobileNumber].join(' ');
         }
     },
 
