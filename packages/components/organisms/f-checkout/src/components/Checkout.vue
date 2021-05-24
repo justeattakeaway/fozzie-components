@@ -23,6 +23,7 @@
         >
             <card
                 is-rounded
+                has-full-width-footer
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center"
@@ -132,7 +133,11 @@
                     </f-button>
                 </form>
 
-                <checkout-terms-and-conditions v-if="!isLoggedIn" />
+                <template
+                    v-if="!isLoggedIn"
+                    v-slot:cardFooter>
+                    <checkout-terms-and-conditions />
+                </template>
             </card>
         </div>
 
@@ -990,13 +995,8 @@ export default {
 }
 
 .c-checkout {
-    padding-top: spacing(x6);
-    padding-bottom: spacing(x6);
-
     @include media('<=narrow') {
         border: none;
-        padding-top: spacing(x3);
-        padding-bottom: 0;
         margin-top: 0;
         margin-bottom: 0;
     }
@@ -1011,7 +1011,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
 
-    @include media('<=narrow') {
+    @include media('<=#{$checkout-width}') {
         width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
     }
 }

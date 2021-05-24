@@ -544,12 +544,6 @@ $registration-icon-height--narrow : 74px;
 
     .c-registration-card {
         position: relative;
-        padding-top: spacing(x7);
-        padding-bottom: spacing(x6);
-
-        @include media('<mid') {
-            padding-bottom: spacing(x4);
-        }
 
         @include media('>=narrow') {
             // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
