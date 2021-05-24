@@ -57,8 +57,8 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('$knob-Checkout Errors', 'ISSUES')
-                .withQuery('$knob-Place Order Errors', 'SERVER');
+                .withQuery('&knob-Checkout Errors', 'ISSUES')
+                .withQuery('&knob-Place Order Errors', 'SERVER');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
