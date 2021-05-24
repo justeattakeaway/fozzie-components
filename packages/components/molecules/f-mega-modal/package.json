@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-mega-modal",
   "description": "Fozzie Mega Modal – A Vue.js modal component",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "main": "dist/f-mega-modal.common.js",
   "files": [
     "dist"

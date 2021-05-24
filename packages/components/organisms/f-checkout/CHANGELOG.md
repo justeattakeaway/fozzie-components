@@ -12,6 +12,13 @@ v0.118.0
 - Ability to handle orders with the service type `dinein`
 - Table number/name input field
   
+v0.117.0
+------------------------------
+*May 20, 2021*
+
+### Added
+- Aria label with structured mobile number for screen readers
+
 
 v0.116.0
 ------------------------------

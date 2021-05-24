@@ -436,6 +436,24 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
+        describe('formattedMobileNumberForScreenReader ::', () => {
+            it('should return the mobile number with spaces after every character', () => {
+                const expectedMobileNumber = '+ 4 4 7 1 1 1 1 1 1 1 1 1';
+                // Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.formattedMobileNumberForScreenReader).toEqual(expectedMobileNumber);
+            });
+        });
+
         describe('isMobileNumberEmpty ::', () => {
             let wrapper;
 
