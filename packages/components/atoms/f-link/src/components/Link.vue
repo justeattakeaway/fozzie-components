@@ -9,7 +9,7 @@
                     [$style['o-link--noBreak']]: noLineBreak
                 }]"
             data-test-id="link-component"
-            aria-describedby="description"
+            :aria-describedby="descriptionId"
             :target="target"
             :rel="rel"
             v-bind="$attrs"
@@ -18,7 +18,7 @@
         </a>
         <span
             v-if="ariaDescription"
-            id=description
+            :id="descriptionId"
             class="is-visuallyHidden"
         >
             {{ ariaDescription }}
@@ -29,6 +29,8 @@
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
+
+let uid = 0;
 
 export default {
     name: 'VLink',
@@ -68,8 +70,11 @@ export default {
     },
 
     data () {
+        uid += 1;
+
         return {
-            tenantConfigs
+            tenantConfigs,
+            uid: `link-${uid}-description`
         };
     },
 
@@ -89,6 +94,10 @@ export default {
 
         rel () {
             return this.isExternal ? 'noopener' : null;
+        },
+
+        descriptionId () {
+            return this.ariaDescription ? this.uid : null;
         }
     }
 };
