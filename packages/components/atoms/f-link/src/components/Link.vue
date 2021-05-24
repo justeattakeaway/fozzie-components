@@ -19,6 +19,7 @@
         <span
             id=description
             class="is-visuallyHidden"
+            v-if="ariaDescription"
         >
             {{ ariaDescription }}
         </span>
