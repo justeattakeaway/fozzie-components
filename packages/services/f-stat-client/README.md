@@ -24,9 +24,9 @@ This client abstracts away the complexity of publishing stats to ElasticSearch, 
 - Built-in mock ability by providing a mock on the constructor (see https://github.com/elastic/elasticsearch-js-mock and an example below)
 
 ## Benefits (Soon)
-- _encapsualted batch publishing_
-- _encapsualted sample publishing_
-- _encapsualted authentication_
+- _encapsulated batch publishing_
+- _encapsulated sample publishing_
+- _encapsulated authentication_
 <hr></br>
 
 ## Usage
