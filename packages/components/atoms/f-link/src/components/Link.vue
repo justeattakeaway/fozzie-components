@@ -17,9 +17,9 @@
             <slot />
         </a>
         <span
+            v-if="ariaDescription"
             id=description
             class="is-visuallyHidden"
-            v-if="ariaDescription"
         >
             {{ ariaDescription }}
         </span>
