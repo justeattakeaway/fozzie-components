@@ -9,6 +9,7 @@ import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutErrors from './update-checkout-errors.json';
+import checkoutServerError from './checkout-server-error.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
@@ -47,7 +48,7 @@ export default {
                 mock.onPatch(path).reply(200, updateCheckoutErrors);
                 break;
             case '/update-checkout-server-error.json':
-                mock.onPatch(path).reply(500);
+                mock.onPatch(path).reply(403, checkoutServerError);
                 break;
             case '/get-address.json':
                 mock.onGet(path).reply(200, getAddress);

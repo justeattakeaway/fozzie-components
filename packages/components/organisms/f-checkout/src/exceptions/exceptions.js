@@ -13,12 +13,13 @@ class CreateGuestUserError extends Error {
 }
 
 class UpdateCheckoutError extends Error {
-    constructor (message) {
-        super(message);
+    constructor (error) {
+        super(error.message);
         this.messageKey = 'errorMessages.genericServerError';
         this.eventToEmit = EventNames.CheckoutUpdateFailure;
         this.logMessage = 'Checkout Update Failure';
         this.shouldShowInDialog = false;
+        this.traceId = error.response && error.response.data ? error.response.data.traceId : null;
     }
 }
 
