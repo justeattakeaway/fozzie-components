@@ -43,7 +43,13 @@ yarn add @justeat/f-stat-client
 ```js
 import StatClient from '@justeat/f-stat-client';
 
-const client = new StatClient('http://localhost:9200', 'uk', 'checkoutWeb');
+const options = {
+    statClientUri: 'http://public-elastic-search-endpoint',
+    tenant: 'uk',
+    featureName: 'checkoutweb'
+};
+
+const client = new StatClient(options);
 
 ```
 ### *How to use*
@@ -57,7 +63,34 @@ Note; the dynamic model passed to the `publish()` method will get deconstructed 
 *An example of the final document written to ElasticSearch:*
 <img alt="Output Example" src="README_1.png" />
 
-### *How to test/mock e.g.*
+## Constructor
+Parameter | Description | Type | Example
+------------- | ------------- | ------------- | -------------
+options | The overrides for the default options | `json` _[string]_ | `{`</br>`statClientUri: 'http://localhost:9200',`</br>`tenant: 'ns',`</br>`featureName: 'Generic Front End'`</br>`}`</br>(See below the defaults for the options if not overridden via the constructor `options`)
+mock | This can be supplied for testing purposes and will be used to return your mock response instead | @elastic/elasticsearch-mock | (see mock example below)
+<hr></br>
+
+## Options
+Parameter | Description | Type | Default
+------------- | ------------- | ------------- | -------------
+statClientUri | The host of the stat publishing endpoint | String | '`http://localhost:9200`'
+tenant | This is a key identifier to group stats by country, e.g. `uk` | String | 'ns'
+featureName | This is a key identifier to group stats by feature, e.g. `salesWebsite` | String | 'Generic Front End'
+statClientUser | The username to gain access to the stat publishing endpoint (if not supplied then no authentication will be used) | String | `null`
+statClientPwd | The password to gain access to the stat publishing endpoint (ignored if `user` not supplied) | String | `null`
+statClientIndexName | This is index to write to | String | 'justeat'
+<hr></br>
+
+## Client Methods
+These are all of the methods exposed by the `f-stat-client`
+
+Method | Description | Parameters | Example
+------------- | ------------- | ------------- | -------------
+publish | Sends a dynamic model (stat details) to the Endpoint | `json` _[string]_ | `{`</br>`verb: 'GET',`</br>`segment: '/search',`</br>`status: 200,`</br>`timing: 654`</br>`}`
+</br>
+## How to Test/Mock e.g.
+<hr></br>
+
 ```js
 import StatClient from '@justeat/f-stat-client';
 
@@ -78,8 +111,15 @@ mock.add({
     path: '*'
 }, () => (mockResponse));
 
+const options = {
+    statClientUri: 'http://localhost:9200',
+    tenant: 'uk',
+    featureName: 'checkoutweb_test',
+    statClientIndexName: 'justeat'
+};
+
 // Supply the mock on the constructor
-const client = new StatClient('http://localhost:9200', 'uk', 'checkoutWeb', '', '', null, mock);
+const client = new StatClient(options, mock);
 
 // Act
 const response = await client.publish({ verb: 'GET', segment: '/basket', status: 200, timimg: 654 });
@@ -90,24 +130,3 @@ expect(response.body.result).toBe('created');
 ```
 </br>
 <hr></br>
-
-## Constructor
-All values are optional, you don't need to specify any overrides if you are happy with the default values
-
-Parameter | Description | Type | Default
-------------- | ------------- | ------------- | -------------
-uri | The host of the stat publishing endpoint | String | '`http://localhost:9200`'
-tenant | This is a key identifier to group stats by country, e.g. `uk` | String | 'ns'
-featureName | This is a key identifier to group stats by feature, e.g. `salesWebsite` | String | 'Generic Front End'
-user | The username to gain access to the stat publishing endpoint (if not supplied then no authentication will be used) | String | `null`
-pwd | The password to gain access to the stat publishing endpoint (ignored if `user` not supplied) | String | `null`
-indexName | This is index to write to | String | 'justeat'
-mock | This can be supplied for testing purposes and will use/return your mock response instead | String | `null`
-<hr></br>
-
-## Client Methods
-These are all of the methods exposed by the httpClient
-
-Method | Description | Parameters | Example
-------------- | ------------- | ------------- | -------------
-publish | Sends a dynamic model (stat details) to the Endpoint | `json` _[string]_ | `{`</br>`verb: 'GET',`</br>`segment: '/search',`</br>`status: 200,`</br>`timing: 654`</br>`}`

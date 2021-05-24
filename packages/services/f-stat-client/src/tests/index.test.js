@@ -26,30 +26,20 @@ describe('publisher', () => {
     it('should build expected instance', async () => {
         // Arrange
         const ctorParams = {
-            uri: 'http://localhost:9200',
+            statClientUri: 'http://localhost:9200',
             tenant: 'ZX',
             featureName: 'strangeTown',
-            user: '',
-            pwd: '',
-            indexName: 'jazzT'
+            statClientIndexName: 'jazzT'
         };
 
         // Act
-        const client = new StatClient(
-            ctorParams.uri,
-            ctorParams.tenant,
-            ctorParams.featureName,
-            ctorParams.user,
-            ctorParams.pwd,
-            ctorParams.indexName,
-            ctorParams.mock
-        );
+        const client = new StatClient(ctorParams);
 
         // Assert
         expect(client.client.name).toBe('elasticsearch-js');
         expect(client.tenant).toBe(ctorParams.tenant);
         expect(client.feature).toBe(ctorParams.featureName);
-        expect(client.indexName).toBe(ctorParams.indexName);
+        expect(client.indexName).toBe(ctorParams.statClientIndexName);
     });
 
     it('should build expected default instance', async () => {
@@ -73,13 +63,10 @@ describe('publisher', () => {
     it('should return expected reponse', async () => {
         // Arrange
         const ctorParams = {
-            uri: 'http://localhost:9200',
+            statClientUri: 'http://localhost:9200',
             tenant: 'uk',
             featureName: 'checkoutweb_test',
-            user: '',
-            pwd: '',
-            indexName: 'justeat',
-            mock
+            statClientIndexName: 'justeat'
         };
 
         // Mock ElasticSearch POST with expected response
@@ -101,13 +88,8 @@ describe('publisher', () => {
                                     `"timing":${statValues.timing}}`);
 
         const client = new StatClient(
-            ctorParams.uri,
-            ctorParams.tenant,
-            ctorParams.featureName,
-            ctorParams.user,
-            ctorParams.pwd,
-            ctorParams.indexName,
-            ctorParams.mock
+            ctorParams,
+            mock
         );
 
         // Act
@@ -116,7 +98,7 @@ describe('publisher', () => {
         // Assert
         expect(response.body.result).toBe('created');
         expect(response.body.statusCode).toBe(201);
-        expect(response.body._index).toBe(ctorParams.indexName);
+        expect(response.body._index).toBe(ctorParams.statClientIndexName);
         expect(response.meta.request.params.body).toMatch(bodyRegex);
         expect(response.meta.connection.id).toBe('http://localhost:9200/');
         expect(response.warnings).toBe(null);

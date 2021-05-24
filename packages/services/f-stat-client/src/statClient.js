@@ -1,27 +1,37 @@
 const { Client } = require('@elastic/elasticsearch');
-
+/**
+ * Create a `f-stat-client`
+ * @param {object} options - Any options to override - refer to documentation for options
+ * @param {object} mock - Developer option to mock the internal publish api call
+ */
 export default class StatClient {
-    constructor (
-        uri = 'http://localhost:9200',
-        tenant = 'ns',
-        featureName = 'Generic Front End',
-        user = null,
-        pwd = null,
-        indexName = 'justeat',
-        mock = null
-    ) {
-        this.tenant = tenant;
-        this.feature = featureName;
-        this.indexName = indexName;
-
-        const conn = {
-            node: uri
+    constructor (options, mock) {
+        const defaultOptions = {
+            statClientUri: 'http://localhost:9200',
+            tenant: 'ns',
+            featureName: 'Generic Front End',
+            statClientUser: null,
+            statClientPwd: null,
+            statClientIndexName: 'justeat'
         };
 
-        if (user) {
+        const configuration = {
+            ...defaultOptions,
+            ...options
+        };
+
+        this.tenant = configuration.tenant;
+        this.feature = configuration.featureName;
+        this.indexName = configuration.statClientIndexName;
+
+        const conn = {
+            node: configuration.statClientUri
+        };
+
+        if (configuration.statClientUser) {
             conn.auth = {
-                username: user,
-                password: pwd
+                username: configuration.statClientUser,
+                password: configuration.statClientPwd
             };
         }
 
@@ -32,6 +42,11 @@ export default class StatClient {
         this.client = new Client(conn);
     }
 
+    /**
+     * Publishes a dynamic list of fields (stat) to ElasticSearch
+     * @param {object} body - An object of fields/values to publish
+     * @param {object} response - The raw response from the ElasticSearch api call
+     */
     async publish (body) {
         const payload = {
             index: this.indexName,
