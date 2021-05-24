@@ -56,7 +56,7 @@
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
                         aria-describedby="mobile-number-error"
-                        :aria-invalid="!isMobileNumberValid"
+                        :aria-invalid="isMobileNumberInvalid"
                         :aria-label="formattedMobileNumberForScreenReader"
                         @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
