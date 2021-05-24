@@ -122,7 +122,10 @@
                     </form-field>
 
                     <f-button
-                        :class="$style['c-checkout-submitButton']"
+                        :class="[
+                            $style['c-checkout-submitButton'], {
+                                [$style['c-checkout-submitButton--noBottomSpace']]: !isLoggedIn
+                            }]"
                         button-type="primary"
                         button-size="large"
                         is-full-width
@@ -1017,6 +1020,14 @@ export default {
 }
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
-    margin: spacing(x4) 0 spacing(x0.5);
+    margin: spacing(x4) 0;
+
+    @include media('>=#{$checkout-width}') {
+        margin: spacing(x4) 0 0;
+    }
+}
+
+.c-checkout-submitButton--noBottomSpace {
+    margin-bottom: 0;
 }
 </style>
