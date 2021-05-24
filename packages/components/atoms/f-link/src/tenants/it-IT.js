@@ -1,4 +1,10 @@
+const messages = {
+    ariaDescription: {
+        newLocation: 'Stai aprendo una nuova finestra/schermata/scheda',
+        externalSite: 'Stai aprendo un sito esterno in una nuova finestra/schermata/scheda'
+    }
+};
+
 export default {
-    locale: 'it-IT',
-    text: 'I am a VLink Component (IT)'
+    messages
 };
