@@ -43,15 +43,20 @@ yarn add @justeat/f-stat-client
 ```js
 import StatClient from '@justeat/f-stat-client';
 
-const client = new StatClient('http://localhost', 9200, 'uk', 'checkoutWeb');
+const client = new StatClient('http://localhost:9200', 'uk', 'checkoutWeb');
 
 ```
 ### *How to use*
 ```js
 
-await client.publish('GET', '/search', 200, 611);
+await client.publish({ verb: 'GET', segment: '/search', status: 200, timimg: 611 });
 
 ```
+Note; the dynamic model passed to the `publish()` method will get deconstructed and written out as individual fields on the ElasticSearch document along with the fixed fields of `FeatureName`, `Tenant` and a `Timestamp`.
+
+*An example of the final document written to ElasticSearch:*
+<img alt="Output Example" src="README_1.png" />
+
 ### *How to test/mock e.g.*
 ```js
 import StatClient from '@justeat/f-stat-client';
@@ -74,10 +79,10 @@ mock.add({
 }, () => (mockResponse));
 
 // Supply the mock on the constructor
-const client = new StatClient('http://localhost', 9200, 'uk', 'checkoutWeb', '', '', null, mock);
+const client = new StatClient('http://localhost:9200', 'uk', 'checkoutWeb', '', '', null, mock);
 
 // Act
-const response = await client.publish('GET', '/basket', 200, 654);
+const response = await client.publish({ verb: 'GET', segment: '/basket', status: 200, timimg: 654 });
 
 // Assert
 expect(response.body.result).toBe('created');
@@ -91,14 +96,13 @@ All values are optional, you don't need to specify any overrides if you are happ
 
 Parameter | Description | Type | Default
 ------------- | ------------- | ------------- | -------------
-url | The host of the stat publishing endpoint | String | '`http://localhost`'
-port | The port of the stat publishing endpoint | Number | 9200
-tenant | The current tenant | String | 'ns'
-featureName | This is key so stats can be identified & grouped by feature, e.g. `salesWebsite` | String | 'NotSpecified'
-user | The username to gain access to the stat publishing endpoint, if not supplied then no authentication will be used | String |
-pwd | The password to gain access to the stat publishing endpoint | String |
+uri | The host of the stat publishing endpoint | String | '`http://localhost:9200`'
+tenant | This is a key identifier to group stats by country, e.g. `uk` | String | 'ns'
+featureName | This is a key identifier to group stats by feature, e.g. `salesWebsite` | String | 'Generic Front End'
+user | The username to gain access to the stat publishing endpoint (if not supplied then no authentication will be used) | String | `null`
+pwd | The password to gain access to the stat publishing endpoint (ignored if `user` not supplied) | String | `null`
 indexName | This is index to write to | String | 'justeat'
-mock | This can be supplied for testing purposes and will use/return your mock response instead | String |
+mock | This can be supplied for testing purposes and will use/return your mock response instead | String | `null`
 <hr></br>
 
 ## Client Methods
@@ -106,4 +110,4 @@ These are all of the methods exposed by the httpClient
 
 Method | Description | Parameters | Example
 ------------- | ------------- | ------------- | -------------
-publish | Sends the stat details to the Endpoint | `verb` _[string]_, `segment` _[string]_, `status` _[number]_, `timing` _[number]_ | `'GET', '/search', 200, 654`
+publish | Sends a dynamic model (stat details) to the Endpoint | `json` _[string]_ | `{`</br>`verb: 'GET',`</br>`segment: '/search',`</br>`status: 200,`</br>`timing: 654`</br>`}`

@@ -26,8 +26,7 @@ describe('publisher', () => {
     it('should build expected instance', async () => {
         // Arrange
         const ctorParams = {
-            url: 'http://localhost',
-            port: 9200,
+            uri: 'http://localhost:9200',
             tenant: 'ZX',
             featureName: 'strangeTown',
             user: '',
@@ -37,8 +36,7 @@ describe('publisher', () => {
 
         // Act
         const client = new StatClient(
-            ctorParams.url,
-            ctorParams.port,
+            ctorParams.uri,
             ctorParams.tenant,
             ctorParams.featureName,
             ctorParams.user,
@@ -57,10 +55,8 @@ describe('publisher', () => {
     it('should build expected default instance', async () => {
         // Arrange
         const expected = {
-            url: 'http://localhost',
-            port: 9200,
             tenant: 'ns',
-            featureName: 'NotSpecified',
+            featureName: 'Generic Front End',
             indexName: 'justeat'
         };
 
@@ -77,8 +73,7 @@ describe('publisher', () => {
     it('should return expected reponse', async () => {
         // Arrange
         const ctorParams = {
-            url: 'http://localhost',
-            port: 9200,
+            uri: 'http://localhost:9200',
             tenant: 'uk',
             featureName: 'checkoutweb_test',
             user: '',
@@ -106,8 +101,7 @@ describe('publisher', () => {
                                     `"timing":${statValues.timing}}`);
 
         const client = new StatClient(
-            ctorParams.url,
-            ctorParams.port,
+            ctorParams.uri,
             ctorParams.tenant,
             ctorParams.featureName,
             ctorParams.user,

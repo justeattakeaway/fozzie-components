@@ -2,17 +2,20 @@ const { Client } = require('@elastic/elasticsearch');
 
 export default class StatClient {
     constructor (
-        url,
-        port,
-        tenant,
-        featureName,
+        uri = 'http://localhost:9200',
+        tenant = 'ns',
+        featureName = 'Generic Front End',
         user = null,
         pwd = null,
         indexName = 'justeat',
         mock = null
     ) {
+        this.tenant = tenant;
+        this.feature = featureName;
+        this.indexName = indexName;
+
         const conn = {
-            node: `${url || 'http://localhost'}:${port || 9200}`
+            node: uri
         };
 
         if (user) {
@@ -27,24 +30,16 @@ export default class StatClient {
         }
 
         this.client = new Client(conn);
-        this.tenant = tenant || 'ns';
-        this.feature = featureName || 'NotSpecified';
-        this.indexName = indexName;
     }
 
-    async publish ({
-        verb, segment, status, timing
-    }) {
+    async publish (body) {
         const payload = {
             index: this.indexName,
             body: {
                 tenant: this.tenant,
                 feature: this.feature,
                 timeStamp: new Date().toISOString(),
-                verb,
-                segment,
-                status,
-                timing
+                ...body
             }
         };
 
