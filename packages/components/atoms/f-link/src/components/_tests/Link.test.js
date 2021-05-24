@@ -4,7 +4,6 @@ import VLink from '../Link.vue';
 import tenantConfigs from '../../tenants';
 
 const localVue = createLocalVue();
-localVue.directive('aria-label', VLink.directives.ariaLabel);
 localVue.use(VueI18n);
 
 const i18n = {
@@ -55,8 +54,10 @@ describe('Link', () => {
                     }
                 });
 
+                const link = wrapper.find('[data-test-id="link-component"]')
+
                 // Assert
-                expect(wrapper.attributes('class')).toContain('o-link--bold');
+                expect(link.attributes('class')).toContain('o-link--bold');
             });
         });
 
@@ -77,8 +78,10 @@ describe('Link', () => {
                     }
                 });
 
+                const link = wrapper.find('[data-test-id="link-component"]')
+
                 // Assert
-                expect(wrapper.attributes('class')).toContain('o-link--noDecoration');
+                expect(link.attributes('class')).toContain('o-link--noDecoration');
             });
         });
 
@@ -99,8 +102,10 @@ describe('Link', () => {
                     }
                 });
 
+                const link = wrapper.find('[data-test-id="link-component"]')
+
                 // Assert
-                expect(wrapper.attributes('class')).toContain('o-link--full');
+                expect(link.attributes('class')).toContain('o-link--full');
             });
         });
 
@@ -121,16 +126,18 @@ describe('Link', () => {
                     }
                 });
 
+                const link = wrapper.find('[data-test-id="link-component"]')
+
                 // Assert
-                expect(wrapper.attributes('class')).toContain('o-link--noBreak');
+                expect(link.attributes('class')).toContain('o-link--noBreak');
             });
         });
     });
 
     describe('computed :: ', () => {
-        describe('newWindowMessage :: ', () => {
-            const newLocationMessage = ' - Opens in a new window/screen/tab';
-            const externalLinkMessage = ' - Opens an external site in a new window/screen/tab';
+        describe('ariaDescription :: ', () => {
+            const newLocationMessage = 'Opens in a new window/screen/tab';
+            const externalLinkMessage = 'Opens an external site in a new window/screen/tab';
 
             it.each([
                 [null, false, false],
@@ -152,7 +159,7 @@ describe('Link', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.newWindowMessage).toEqual(expected);
+                expect(wrapper.vm.ariaDescription).toEqual(expected);
             });
         });
 
@@ -217,31 +224,6 @@ describe('Link', () => {
 
                 // Assert
                 expect(wrapper.vm.rel).toEqual(expected);
-            });
-        });
-    });
-
-    describe('ariaLabel directive', () => {
-        let ariaLabel;
-
-        beforeEach(() => {
-            ariaLabel = VLink.directives.ariaLabel;
-        });
-
-        describe('the `componentUpdated` hook', () => {
-            it('should set the passed elements ariaLabel attribute', () => {
-                // Arrange
-                const el = document.createElement('div');
-                const labelText = 'my test link content';
-                const suffix = ' - a suffix message';
-
-                el.innerText = labelText;
-
-                // Act
-                ariaLabel.componentUpdated(el, { value: suffix });
-
-                // Assert
-                expect(el.ariaLabel).toEqual(labelText + suffix);
             });
         });
     });

@@ -1,20 +1,28 @@
 <template>
-    <a
-        v-aria-label="newWindowMessage"
-        :class="[
-            $style['o-link'], {
-                [$style['o-link--bold']]: isBold,
-                [$style['o-link--noDecoration']]: !hasTextDecoration,
-                [$style['o-link--full']]: isFullWidth,
-                [$style['o-link--noBreak']]: noLineBreak
-            }]"
-        data-test-id="link-component"
-        :target="target"
-        :rel="rel"
-        v-bind="$attrs"
-    >
-        <slot />
-    </a>
+    <span>
+        <a
+            :class="[
+                $style['o-link'], {
+                    [$style['o-link--bold']]: isBold,
+                    [$style['o-link--noDecoration']]: !hasTextDecoration,
+                    [$style['o-link--full']]: isFullWidth,
+                    [$style['o-link--noBreak']]: noLineBreak
+                }]"
+            data-test-id="link-component"
+            aria-describedby="description"
+            :target="target"
+            :rel="rel"
+            v-bind="$attrs"
+        >
+            <slot />
+        </a>
+        <span
+            id=description
+            class="is-visuallyHidden"
+        >
+            {{ ariaDescription }}
+        </span>
+    </span>
 </template>
 
 <script>
@@ -23,20 +31,6 @@ import tenantConfigs from '../tenants';
 
 export default {
     name: 'VLink',
-
-    directives: {
-        /**
-         * Called when the slot is updated.
-         * Applies the `innerText` of the slot with `newWindowMessage` to link `aria-label`
-         * https://vuejs.org/v2/guide/custom-directive.html#Hook-Functions
-         *
-         * */
-        ariaLabel: {
-            componentUpdated (el, { value }) {
-                el.ariaLabel = el.innerText + value || null;
-            }
-        }
-    },
 
     mixins: [VueGlobalisationMixin],
 
@@ -79,11 +73,11 @@ export default {
     },
 
     computed: {
-        newWindowMessage () {
+        ariaDescription () {
             if (this.isExternal) {
-                return this.$t('ariaLabel.externalSite');
+                return this.$t('ariaDescription.externalSite');
             } else if (this.opensInNewLocation) {
-                return this.$t('ariaLabel.newLocation');
+                return this.$t('ariaDescription.newLocation');
             }
             return null;
         },

@@ -1,7 +1,7 @@
 const messages = {
-    ariaLabel: {
-        newLocation: ' - Stai aprendo una nuova finestra/schermata/scheda',
-        externalSite: ' - Stai aprendo un sito esterno in una nuova finestra/schermata/scheda'
+    ariaDescription: {
+        newLocation: 'aprendo una nuova finestra/schermata/scheda',
+        externalSite: 'aprendo un sito esterno in una nuova finestra/schermata/scheda'
     }
 };
 
