@@ -54,7 +54,7 @@ describe('Link', () => {
                     }
                 });
 
-                const link = wrapper.find('[data-test-id="link-component"]')
+                const link = wrapper.find('[data-test-id="link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--bold');
@@ -78,7 +78,7 @@ describe('Link', () => {
                     }
                 });
 
-                const link = wrapper.find('[data-test-id="link-component"]')
+                const link = wrapper.find('[data-test-id="link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--noDecoration');
@@ -102,7 +102,7 @@ describe('Link', () => {
                     }
                 });
 
-                const link = wrapper.find('[data-test-id="link-component"]')
+                const link = wrapper.find('[data-test-id="link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--full');
@@ -126,7 +126,7 @@ describe('Link', () => {
                     }
                 });
 
-                const link = wrapper.find('[data-test-id="link-component"]')
+                const link = wrapper.find('[data-test-id="link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--noBreak');
