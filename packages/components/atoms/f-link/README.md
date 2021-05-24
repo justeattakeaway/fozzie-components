@@ -71,13 +71,12 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-
-### Events
-
-The events that can be subscribed to are as follows (if any):
-
-| Event | Description |
-| ----- | ----------- |
+| `isExternal` | `Boolean` | `false` | Adds `target=_blank` and `rel=noopener` attributes.<br><br>Adds 'Opens an external site in a new window/screen/tab' as aria description |
+| `opensInNewLocation` | `Boolean` | `false` | Adds `target=_blank` attribute.<br><br>Adds 'Opens in a new window/screen/tab' as aria description |
+| `isBold` | `Boolean` | `false` | Sets link text to bold. |
+| `hasTextDecoration` | `Boolean` | `true` | Adds underline to link text. |
+| `isFullWidth` | `Boolean` | `false` | Link set as full width. |
+| `noLineBreak` | `Boolean` | `false` | Removes white space. |
 
 ## Development
 
