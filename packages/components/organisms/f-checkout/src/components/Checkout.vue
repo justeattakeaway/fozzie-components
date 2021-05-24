@@ -399,7 +399,7 @@ export default {
         },
 
         formattedMobileNumberForScreenReader () {
-            return [...this.customer.mobileNumber].join(' ');
+            return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         }
     },
 
