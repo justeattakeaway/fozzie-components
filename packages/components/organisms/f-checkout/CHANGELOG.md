@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.118.0
+------------------------------
+*May 21, 2021*
+
+### Updated
+- `f-mega-modal` to version 0.9.0 to include `title` prop
+
+### Changed
+- Refactor ErrorDialog to use `title` prop in `f-mega-modal`
+
 
 v0.117.0
 ------------------------------
