@@ -26,6 +26,10 @@ export const ButtonComponent = () => ({
             default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
         },
 
+        disabled: {
+            default: boolean('disabled', false)
+        },
+
         isFullWidth: {
             default: boolean('isFullWidth', false)
         },
@@ -43,6 +47,7 @@ export const ButtonComponent = () => ({
         <f-button
             :buttonType="buttonType"
             :buttonSize="buttonSize"
+            :disabled="disabled"
             :isFullWidth="isFullWidth"
             :actionType="actionType"
             :href="href"

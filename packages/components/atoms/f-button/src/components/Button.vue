@@ -177,18 +177,6 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     &:visited {
         text-decoration: none;
     }
-
-    // Disabled state
-    &.is-disabled,
-    &[disabled] {
-        cursor: not-allowed;
-
-        &,
-        &:hover {
-            background-color: $btn-disabled-bgColor;
-            color: $btn-disabled-textColor;
-        }
-    }
 }
 
 /**
@@ -477,6 +465,25 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     // same as .o-btn--fullWidth + .o-btn--fullWidth
     & + & {
         margin-top: spacing();
+    }
+}
+
+/**
+ * ==========================================================================
+ * Disabled state styling
+ * ==========================================================================
+ */
+
+.o-btn {
+    &.is-disabled,
+    &[disabled] {
+        cursor: not-allowed;
+
+        &,
+        &:hover {
+            background-color: $btn-disabled-bgColor;
+            color: $btn-disabled-textColor;
+        }
     }
 }
 </style>
