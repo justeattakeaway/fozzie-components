@@ -21,17 +21,6 @@ v0.118.1
 - Check mobile number exists before formatting for screen reader
 
 
-v0.118.0
-------------------------------
-*May 21, 2021*
-
-### Updated
-- `f-mega-modal` to version 0.9.0 to include `title` prop
-
-### Changed
-- Refactor ErrorDialog to use `title` prop in `f-mega-modal`
-
-
 v0.117.0
 ------------------------------
 *May 20, 2021*
