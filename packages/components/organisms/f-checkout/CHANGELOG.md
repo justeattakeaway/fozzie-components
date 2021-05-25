@@ -32,14 +32,6 @@ v0.118.0
 - Refactor ErrorDialog to use `title` prop in `f-mega-modal`
 
 
-v0.118.1
-------------------------------
-*May 24, 2021*
-
-### Changed
-- Check mobile number exists before formatting for screen reader
-
-
 v0.117.0
 ------------------------------
 *May 20, 2021*
