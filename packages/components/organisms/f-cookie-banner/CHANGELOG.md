@@ -12,6 +12,14 @@ v0.11.0
 - New `policyLinkHref` function in component objects
 
 
+v0.11.0
+------------------------------
+*May 25, 2021*
+
+### Changed
+- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
+
+
 v0.10.0
 ------------------------------
 *May 18, 2021*
