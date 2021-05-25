@@ -176,29 +176,29 @@ export default {
             font-weight: $font-weight-bold;
 
             & {
-                color: $color-link-default;
+                color: $color-content-link;
             }
 
             &:hover, &:focus {
-                color: $color-link-hover;
+                color: darken($color-content-link, $color-hover-01);
             }
 
             &:active {
-                color: $color-link-active;
+                color: darken($color-content-link, $color-active-02);
             }
         }
 
         .c-contentCards-homePromotionCard2-text {
-            color: $grey--dark;
+            color: $color-content-subdued;
         }
 
         &.c-contentCards-homePromotionCard2--light {
             .c-contentCards-homePromotionCard2-text {
-                color: $white;
+                color: $color-content-light;
             }
 
             .c-contentCards-homePromotionCard2-title {
-                color: $grey--lighter;
+                color: $color-grey-20;
             }
         }
     }

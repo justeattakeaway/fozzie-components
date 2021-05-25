@@ -177,7 +177,7 @@ export default {
         display: flex;
         width: 100%;
         font-family: $font-family-base;
-        border: solid $color-border;
+        border: solid $color-border-strong;
         border-width: 1px 0 0;
         padding-top: spacing(x2);
         margin-top: spacing(x2);
@@ -192,19 +192,19 @@ export default {
     }
 
     .c-contentCard-voucher-code {
-        font-weight: $font-weight-base;
-        color: $grey--mid;
+        font-weight: $font-weight-regular;
+        color: $color-grey-40;
         text-align: left;
     }
 
     .c-contentCard-voucher-copy {
         font-weight: $font-weight-bold;
-        color: $color-link-default;
+        color: $color-content-link;
         text-align: right;
     }
 
     .c-contentCard-voucher-copy-copied {
-        color: $orange--aa;
+        color: $color-content-brand-strong;
     }
 
     .c-contentCard-voucher-copy-transition-out {
@@ -220,7 +220,7 @@ export default {
     }
 
     .c-contentCard-voucher-code-cooldown-tick {
-        fill: $orange--aa;
+        fill: $color-content-brand-strong;
         width: spacing(x2);
         height: spacing(x2);
         padding: 0;

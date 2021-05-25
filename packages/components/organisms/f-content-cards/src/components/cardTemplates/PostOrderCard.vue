@@ -104,7 +104,7 @@ export default {
 
 <style lang="scss" module>
     .c-postOrderCard {
-        border: 1px solid $color-border;
+        border: 1px solid $color-border-strong;
         border-radius: $post-order-card-radius;
         padding: spacing(x3);
         max-width: 100%;

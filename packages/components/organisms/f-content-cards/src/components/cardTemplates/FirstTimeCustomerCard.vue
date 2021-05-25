@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$banner-bgColour : $orange--offWhite;
+$banner-bgColour : $color-orange-10;
 $banner-bgColour-legacy : #cd381f;
 
 .c-restaurantCard-banner {
