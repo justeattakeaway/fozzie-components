@@ -62,11 +62,11 @@ export default {
 
 <style lang="scss" module>
 
-$breadcrumbs-text-colour: $white;
-$breadcrumbs-background-colour: rgba($black, 0.6);
+$breadcrumbs-text-colour: $color-content-light;
+$breadcrumbs-background-colour: rgba($color-black, 0.6);
 $breadcrumbs-border-radius: 16px;
 $breadcrumbs-not-active-font-weight: $font-weight-bold;
-$breadcrumbs-active-font-weight: $font-weight-base;
+$breadcrumbs-active-font-weight: $font-weight-regular;
 
 .c-breadcrumbs {
     display: flex;
