@@ -237,7 +237,7 @@ html:global(.is-navInView) {
     }
 
     .c-header--highlightBg {
-        background-color: $color-primary;
+        background-color: $color-content-brand;
         min-height: 88px;
     }
 
