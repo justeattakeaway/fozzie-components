@@ -322,7 +322,7 @@ export default {
     $btn-size: 52px;
     $icon-size: 14px;
 
-    background: $white;
+    background: $color-interactive-inverse;
     border: none;
     width: $btn-size;
     height: $btn-size;
@@ -339,13 +339,13 @@ export default {
         position: absolute;
 
         g {
-            fill: $grey--midDark;
+            fill: $color-content-disabled;
         }
     }
 
     &:hover,
     &:focus {
-        background-color: $grey--offWhite;
+        background-color: darken($color-black, $color-hover-01);
     }
 }
 </style>
