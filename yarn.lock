@@ -2346,10 +2346,10 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
-"@justeat/f-utils@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-1.1.0.tgz#7407d0accec0de8c542478f63e0a015ec9098877"
-  integrity sha512-5nR77wCUngMfrBlPsM+nQJiOEh+I/DZWZiqO3cxZaOg9seanKBZnXMwyWnNAfx3ICzhJ3ejkMj2PSrAz2CxNYw==
+"@justeat/f-utils@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-2.0.0.tgz#34e34870f20ec85b5d0aca8a87e2bc2225e2f597"
+  integrity sha512-fFkNH39Qe6sg6e2YZmbh4l4g4qegvpsaEKnj1grCDRspQQvzpmBQBifx6nkHsdaEhetZTJC3LqwOXybmlVJI/g==
 
 "@justeat/f-vue-icons@1.10.0":
   version "1.10.0"
@@ -2407,23 +2407,27 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie-colour-palette@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.1.0.tgz#3bbe51404025c5ef8c5e8bf8280a266e51d2a640"
-  integrity sha512-QWkVa0Hv1xQ6nqxY3S1V37fAQUdIaTO1RtAhCKIe5YmNKBKEegW0PbmFIcPk3ojBVnL6Q1hzUhs3wGvOLJAMbg==
-
-"@justeat/fozzie@5.0.0-beta.3":
-  version "5.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.3.tgz#13baadeb6774567991bc6f3ed622e8fceb8b1327"
-  integrity sha512-aqgDOC1yvAu5hP1Nxji2cQTGAGFE4e5iLPfRC4VfBMqcHp3iAC4CnQjw5phMpTSw9J9/dducptzEd+yaxmnTLQ==
+"@justeat/fozzie@5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.7.tgz#163808cb631686e0fb553d7901e111604142765c"
+  integrity sha512-teAtWDlfun2RTnQFxkciGOCJqqRKkPF80ybwF1zoU3+q8vZh6/DczxNvCUWmIybQIbK9k3I7qkUvzf7oeI2jVA==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
-    "@justeat/f-utils" "1.1.0"
-    "@justeat/fozzie-colour-palette" "3.1.0"
+    "@justeat/f-utils" "2.0.0"
+    "@justeat/pie-design-tokens" "0.18.0"
     fontfaceobserver "2.1.0"
     include-media "1.4.9"
     normalize-scss "7.0.1"
+
+"@justeat/pie-design-tokens@0.18.0":
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-0.18.0.tgz#0f88859ddf31e6be05f86e42e0c0f7d7b39ed41b"
+  integrity sha512-vxUuc4mdSU8ojIjuE7TtotSmastITeZ5WlUWmvjVl1tvbXzHdr6cJCSJV1WaQ4N2hjjrEpL9FfPAV5kPzGKxwA==
+  dependencies:
+    jsonc-parser "2.2.0"
+    lodash.merge "4.6.2"
+    mkdirp "1.0.3"
 
 "@justeat/stylelint-config-fozzie@2.2.0":
   version "2.2.0"
@@ -15808,6 +15812,11 @@ json5@^1.0.1:
   dependencies:
     minimist "^1.2.0"
 
+jsonc-parser@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-2.2.0.tgz#f206f87f9d49d644b7502052c04e82dd6392e9ef"
+  integrity sha512-4fLQxW1j/5fWj6p78vAlAafoCKtuBm6ghv+Ij5W2DrDx0qE+ZdEl2c6Ko1mgJNF5ftX1iEWQQ4Ap7+3GlhjkOA==
+
 jsonfile@^2.1.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
@@ -16373,7 +16382,7 @@ lodash.memoize@4.x, lodash.memoize@^4.1.2:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
-lodash.merge@^4.6.1:
+lodash.merge@4.6.2, lodash.merge@^4.6.1:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
@@ -17322,6 +17331,11 @@ mkdirp@0.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.3, mkdir
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   dependencies:
     minimist "^1.2.5"
+
+mkdirp@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.3.tgz#4cf2e30ad45959dddea53ad97d518b6c8205e1ea"
+  integrity sha512-6uCP4Qc0sWsgMLy1EOqqS/3rjDHOEnsStVr/4vtAIK2Y5i2kA7lFFejYrpIyiN9w0pYf4ckeCYT9f1r1P9KX5g==
 
 mocha-each@2.0.1:
   version "2.0.1"
