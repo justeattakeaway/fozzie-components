@@ -78,39 +78,36 @@ export default {
 
 <style lang="scss" module>
 
-$btn-default-bgColor            : $grey--lighter;
-$btn-default-bgColor--hover     : $grey--light;
 $btn-default-borderRadius       : $border-radius;
 $btn-default-font-family        : $font-family-base;
 $btn-default-font-size          : 'body-l';
 $btn-default-weight             : $font-weight-bold;
 $btn-default-padding            : 11px 1.5em 13px;
-$btn-default-outline-color      : $color-focus-outline;
+$btn-default-outline-color      : $color-focus;
 
-$btn-primary-bgColor            : $blue;
-$btn-primary-bgColor--hover     : $blue--dark;
-$btn-primary-bgColor--focus     : $blue--darkest;
-$btn-primary-textColor          : $white;
+$btn-primary-bgColor            : $color-interactive-primary;
+$btn-primary-bgColor--hover     : darken($color-interactive-primary, $color-hover-01);
+$btn-primary-bgColor--active    : darken($color-interactive-primary, $color-active-01);
+$btn-primary-textColor          : $color-content-interactive-primary;
 
-$btn-secondary-bgColor          : $blue--offWhite;
-$btn-secondary-bgColor--hover   : $blue--offWhite--dark;
-$btn-secondary-bgColor--active  : $blue--offWhite--darkest;
-$btn-secondary-textColor        : $blue;
+$btn-secondary-bgColor          : $color-interactive-secondary;
+$btn-secondary-bgColor--hover   : darken($color-interactive-secondary, $color-hover-01);
+$btn-secondary-bgColor--active  : darken($color-interactive-secondary, $color-active-01);
+$btn-secondary-textColor        : $color-content-interactive-secondary;
 
 $btn-outline-bgColor            : transparent;
-$btn-outline-bgColor--hover     : rgba($black, 0.08);
-$btn-outline-bgColor--active    : rgba($black, 0.12);
-$btn-outline-textColor          : $black;
-$btn-outline-border-color       : $grey--light;
-// TODO: checking with design if $btn-outline-border-color should change on hover/active
+$btn-outline-bgColor--hover     : darken($color-white, $color-hover-01);
+$btn-outline-bgColor--active    : darken($color-white, $color-active-01);
+$btn-outline-textColor          : $color-content-interactive-tertiary;
+$btn-outline-border-color       : $color-border-default;
 
 $btn-ghost-bgColor              : transparent;
-$btn-ghost-bgColor--hover       : rgba($black, 0.08);
-$btn-ghost-bgColor--active      : rgba($black, 0.12);
-$btn-ghost-textColor            : $blue;
+$btn-ghost-bgColor--hover       : rgba($color-black, 0.08);
+$btn-ghost-bgColor--active      : rgba($color-black, 0.12);
+$btn-ghost-textColor            : $color-content-interactive-secondary;
 
-$btn-disabled-bgColor           : $grey--light;
-$btn-disabled-textColor         : $grey--midDark;
+$btn-disabled-bgColor           : $color-disabled-01;
+$btn-disabled-textColor         : $color-content-disabled;
 
 $btn-sizeLarge-font-size        : 'heading-s';
 $btn-sizeLarge-padding          : 13px 1.2em 15px;
@@ -140,17 +137,11 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     overflow: visible;
     text-align: center;
     font-weight: $btn-default-weight;
-    background-color: $btn-default-bgColor;
     border-radius: $btn-default-borderRadius;
     border: 1px solid transparent;
     user-select: none;
-    color: $grey--dark;
+    color: $color-grey-50;
     text-decoration: none;
-
-    &:hover,
-    &:active {
-        background-color: $btn-default-bgColor--hover;
-    }
 
     // Hide focus styles if they're not needed, for example, when an element receives focus via the mouse.
     &:focus:not(:focus-visible) {
@@ -212,7 +203,7 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     }
 
     &:active {
-        background-color: $btn-primary-bgColor--focus;
+        background-color: $btn-primary-bgColor--active;
     }
 }
 
@@ -299,18 +290,18 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     border: 0;
     background-color: transparent;
     padding: 0;
-    color: $color-link-default;
+    color: $color-content-link;
     font-weight: $font-weight-bold;
 
     &:hover {
         cursor: pointer;
-        color: $color-link-hover;
+        color: darken($color-content-link, $color-hover-01);
         background-color: transparent;
         text-decoration: underline;
     }
     &:active,
     &:focus {
-        color: $color-link-active;
+        color: darken($color-content-link, $color-active-02);
         background-color: transparent;
     }
 }
@@ -355,19 +346,19 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
 
     &.o-btn--link {
         path {
-            fill: $color-link-default;
+            fill: $color-content-link;
         }
 
         &:hover {
             path {
-                fill: $color-link-hover;
+                fill: darken($color-content-link, $color-hover-01);
             }
         }
 
         &:active,
         &:focus {
             path {
-                fill: $color-link-active;
+                fill: darken($color-content-link, $color-active-02);
             }
         }
     }
@@ -425,13 +416,13 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     padding: $btn-sizeLarge-padding;
 
     &.o-btn--primary {
-        background-color: $orange;
+        background-color: $color-interactive-brand;
 
         &:hover {
-            background-color: $orange--dark;
+            background-color: darken($color-interactive-brand, $color-hover-01);
         }
         &:active {
-            background-color: $orange--darkest;
+            background-color: darken($color-interactive-brand, $color-active-01);
         }
     }
 }
