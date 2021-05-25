@@ -12,15 +12,13 @@
             :aria-describedby="descriptionId"
             :target="target"
             :rel="rel"
-            v-bind="$attrs"
-        >
+            v-bind="$attrs">
             <slot />
         </a>
         <span
             v-if="ariaDescription"
             :id="descriptionId"
-            class="is-visuallyHidden"
-        >
+            class="is-visuallyHidden">
             {{ ariaDescription }}
         </span>
     </span>
@@ -82,7 +80,7 @@ export default {
         },
 
         target () {
-            return this.linkType === 'external' || this.linkType === 'newLocation' ? '_blank' : null;
+            return this.linkType === DEFAULT_LINK_TYPE ? null : '_blank';
         },
 
         rel () {
