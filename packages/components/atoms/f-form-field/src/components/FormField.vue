@@ -34,8 +34,7 @@
                 :class="[
                     $style['c-formField-field'],
                     $style['c-formField-field--defaultHeight'],
-                    $style['c-formField-dropdownContainer'],
-                    $style['c-formField-field--focus']
+                    $style['c-formField-dropdownContainer']
                 ]"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
@@ -48,7 +47,6 @@
                 v-bind="$attrs"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--focus'],
                     $style['c-formField-field--textarea']
                 ]"
                 data-test-id="formfield-textarea"
@@ -68,7 +66,7 @@
                 :class="[
                     $style['c-formField-field'],
                     $style['c-formField-field--defaultHeight'],
-                    { [$style['c-formField-field--focus']]: isSelectionControl }
+                    { [$style['c-formField-field--noFocus']]: isSelectionControl }
                 ]"
                 v-on="listeners"
             >
@@ -235,7 +233,7 @@ export default {
         },
 
         isSelectionControl () {
-            return !(this.inputType === 'radio' || this.inputType === 'checkbox');
+            return this.inputType === 'radio' || this.inputType === 'checkbox';
         },
 
         isFieldGrouped () {
@@ -323,6 +321,13 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
             background-color: $form-input-bg--hover;
         }
 
+        &:focus,
+        &:active,
+        &:focus-within {
+            box-shadow: $form-input-focus--boxShadow;
+            outline: none;
+        }
+
         .c-formField--invalid & {
             border-color: $form-input-borderColour--invalid;
         }
@@ -346,12 +351,11 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         resize: none;
     }
 
-    .c-formField-field--focus {
+    .c-formField-field--noFocus {
         &:focus,
         &:active,
         &:focus-within {
-            box-shadow: $form-input-focus--boxShadow;
-            outline: none;
+            box-shadow: none;
         }
     }
 
