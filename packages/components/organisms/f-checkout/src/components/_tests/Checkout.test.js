@@ -196,6 +196,7 @@ describe('Checkout', () => {
         describe('serviceType ::', () => {
             const fulfilmentTimeDropdownSelector = '[data-test-id="formfield-order-time-dropdown-select"]';
             const tableIdentifierSelector = '[data-test-id="formfield-table-identifier-input"]';
+
             it('should display the address block if set to `delivery`', async () => {
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
