@@ -149,11 +149,14 @@ $countrySelector-btn-font-size: 'body-s';
     display: flex;
     padding: spacing() spacing(x2);
     text-decoration: none;
-    color: $color-text;
+    color: $color-content-interactive-tertiary;
 
-    &:hover,
+    &:hover {
+        color: darken($color-content-link, $color-hover-01);
+    }
+    &:active,
     &:focus {
-        color: $blue--dark;
+        color: darken($color-content-link, $color-active-02);
     }
 
     p {
@@ -210,7 +213,7 @@ $countrySelector-btn-font-size: 'body-s';
     margin-left: 0;
     margin-bottom: spacing(x6) + 1;
     background-color: $footer-bgLight;
-    box-shadow: 0 2px 28px rgba($grey--darkest, 0.08);
+    box-shadow: 0 2px 28px rgba($color-grey, 0.08);
     list-style: none;
 
     & > li:before {

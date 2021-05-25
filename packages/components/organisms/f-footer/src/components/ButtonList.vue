@@ -47,9 +47,9 @@ $buttonList-font-size: 'subheading-s';
 }
 
 .c-buttonList-button {
-    background-color: $white;
+    background-color: $color-interactive-inverse;
     border-radius: 4px;
-    color: $color-link-default;
+    color: $color-content-interactive-inverse;
     display: inline-block;
     @include font-size($buttonList-font-size, false);
     font-weight: $font-weight-headings;
@@ -67,7 +67,7 @@ $buttonList-font-size: 'subheading-s';
 
     &:hover,
     &:focus {
-        background-color: $grey--lighter;
+        background-color: darken($color-black, $color-hover-01);
     }
 
     @include media('<narrow') {
