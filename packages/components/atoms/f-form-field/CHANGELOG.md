@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.13.0
+------------------------------
+*May 25, 2021*
+
+### Fixed
+- `isSelectionControl` was back-to-front and was true when not a selector like checkbox or radio. This has been fixed.
+- `c-formField-field--focus` switched to `c-formField-field--noFocus` class.
+
+
 v1.12.1
 ------------------------------
 *May 18, 2021*
