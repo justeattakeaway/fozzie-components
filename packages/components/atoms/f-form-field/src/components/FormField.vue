@@ -273,21 +273,21 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-textColour                    : $color-text;
-$form-input-textColour--disabled          : $grey--midDark;
-$form-input-bg                            : $white;
-$form-input-bg--hover                     : rgba($black, 0.04);
-$form-input-bg--disabled                  : $color-disabled;
+$form-input-textColour                    : $color-content-default;
+$form-input-textColour--disabled          : $color-content-disabled;
+$form-input-bg                            : $color-container-default;
+$form-input-bg--hover                     : darken($form-input-bg, $color-hover-02);
+$form-input-bg--disabled                  : $color-disabled-01;
 $form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $color-border;
-$form-input-borderColour--focus           : $color-border--interactive;
-$form-input-borderColour--invalid         : $red;
-$form-input-borderColour--disabled        : $color-disabled;
+$form-input-borderColour                  : $color-border-strong;
+$form-input-borderColour--focus           : $color-grey-50;
+$form-input-borderColour--invalid         : $color-support-error;
+$form-input-borderColour--disabled        : $color-disabled-01;
 $form-input-height                        : 46px; // height is 46px + 1px border = 48px
 $form-input-padding                       : spacing(x1.5) spacing(x2);
 $form-input-fontSize                      : 'body-l';
-$form-input-focus                         : $blue--light;
+$form-input-focus                         : $color-focus;
 $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
 
 .c-formField {
@@ -308,7 +308,7 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         width: 100%;
         font-family: $font-family-base;
         @include font-size($form-input-fontSize);
-        font-weight: $font-weight-base;
+        font-weight: $font-weight-regular;
         color: $form-input-textColour;
 
         background-color: $form-input-bg;
