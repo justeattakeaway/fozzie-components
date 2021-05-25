@@ -1,17 +1,5 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import { VueI18n } from '@justeat/f-globalisation';
+import { shallowMount } from '@vue/test-utils';
 import VLink from '../Link.vue';
-import tenantConfigs from '../../tenants';
-
-const localVue = createLocalVue();
-localVue.use(VueI18n);
-
-const i18n = {
-    locale: 'en-GB',
-    messages: {
-        'en-GB': tenantConfigs['en-GB'].messages
-    }
-};
 
 const $style = {
     'o-link--bold': 'o-link--bold',
@@ -27,9 +15,7 @@ describe('Link', () => {
 
         // Act
         const wrapper = shallowMount(VLink, {
-            propsData,
-            i18n,
-            localVue
+            propsData
         });
 
         // Assert
@@ -47,8 +33,6 @@ describe('Link', () => {
                 // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
-                    i18n,
-                    localVue,
                     mocks: {
                         $style
                     }
@@ -71,8 +55,6 @@ describe('Link', () => {
                 // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
-                    i18n,
-                    localVue,
                     mocks: {
                         $style
                     }
@@ -95,8 +77,6 @@ describe('Link', () => {
                 // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
-                    i18n,
-                    localVue,
                     mocks: {
                         $style
                     }
@@ -119,8 +99,6 @@ describe('Link', () => {
                 // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
-                    i18n,
-                    localVue,
                     mocks: {
                         $style
                     }
@@ -140,22 +118,18 @@ describe('Link', () => {
             const externalLinkMessage = 'Opens an external site in a new window/screen/tab';
 
             it.each([
-                [null, false, false],
-                [newLocationMessage, false, true],
-                [externalLinkMessage, true, false],
-                [externalLinkMessage, true, true]
-            ])('should return `%s` when `isExternal` is %s AND `opensInNewLocationTab` is $s', (expected, isExternal, opensInNewLocation) => {
+                [null, 'default'],
+                [newLocationMessage, 'newLocation'],
+                [externalLinkMessage, 'external']
+            ])('should return `%s` when `linkType` is %s', (expected, linkType) => {
                 // Arrange
                 const propsData = {
-                    isExternal,
-                    opensInNewLocation
+                    linkType
                 };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
-                    propsData,
-                    i18n,
-                    localVue
+                    propsData
                 });
 
                 // Assert
@@ -165,39 +139,18 @@ describe('Link', () => {
 
         describe('target :: ', () => {
             it.each([
-                ['_blank', true],
-                [null, false]
-            ])('should return %s when `isExternal` is %s', (expected, isExternal) => {
+                [null, 'default'],
+                ['_blank', 'external'],
+                ['_blank', 'newLocation']
+            ])('should return %s when `linkType` is %s', (expected, linkType) => {
                 // Arrange
                 const propsData = {
-                    isExternal
+                    linkType
                 };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
-                    propsData,
-                    i18n,
-                    localVue
-                });
-
-                // Assert
-                expect(wrapper.vm.target).toEqual(expected);
-            });
-
-            it.each([
-                ['_blank', true],
-                [null, false]
-            ])('should return %s when `opensInNewLocation` is %s', (expected, opensInNewLocation) => {
-                // Arrange
-                const propsData = {
-                    opensInNewLocation
-                };
-
-                // Act
-                const wrapper = shallowMount(VLink, {
-                    propsData,
-                    i18n,
-                    localVue
+                    propsData
                 });
 
                 // Assert
@@ -207,19 +160,18 @@ describe('Link', () => {
 
         describe('rel :: ', () => {
             it.each([
-                ['noopener', true],
-                [null, false]
-            ])('should return %s when `isExternal` is %s', (expected, isExternal) => {
+                [null, 'default'],
+                ['noopener', 'external'],
+                [null, 'newLocation']
+            ])('should return %s when `linkType` is %s', (expected, linkType) => {
                 // Arrange
                 const propsData = {
-                    isExternal
+                    linkType
                 };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
-                    propsData,
-                    i18n,
-                    localVue
+                    propsData
                 });
 
                 // Assert

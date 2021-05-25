@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import { globalisationServices } from '@justeat/f-services';
+import { DEFAULT_LINK_TYPE, VALID_LINK_TYPES } from '../constants';
 import tenantConfigs from '../tenants';
 
 let uid = 0;
@@ -35,17 +36,11 @@ let uid = 0;
 export default {
     name: 'VLink',
 
-    mixins: [VueGlobalisationMixin],
-
     props: {
-        isExternal: {
-            type: Boolean,
-            default: false
-        },
-
-        opensInNewLocation: {
-            type: Boolean,
-            default: false
+        linkType: {
+            type: String,
+            default: DEFAULT_LINK_TYPE,
+            validator: value => (VALID_LINK_TYPES.indexOf(value) !== -1) // The prop value must match one of the valid input types
         },
 
         isBold: {
@@ -70,30 +65,28 @@ export default {
     },
 
     data () {
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const localeConfig = tenantConfigs[locale];
+
         uid += 1;
 
         return {
-            tenantConfigs,
+            copy: { ...localeConfig },
             uid: `link-${uid}-description`
         };
     },
 
     computed: {
         ariaDescription () {
-            if (this.isExternal) {
-                return this.$t('ariaDescription.externalSite');
-            } else if (this.opensInNewLocation) {
-                return this.$t('ariaDescription.newLocation');
-            }
-            return null;
+            return this.linkType === DEFAULT_LINK_TYPE ? null : this.copy.ariaDescription[this.linkType];
         },
 
         target () {
-            return this.isExternal || this.opensInNewLocation ? '_blank' : null;
+            return this.linkType === 'external' || this.linkType === 'newLocation' ? '_blank' : null;
         },
 
         rel () {
-            return this.isExternal ? 'noopener' : null;
+            return this.linkType === 'external' ? 'noopener' : null;
         },
 
         descriptionId () {
