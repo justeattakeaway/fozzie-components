@@ -65,8 +65,8 @@ export default {
 
 <style lang="scss" module>
 .c-userMessage {
-    color: $white;
-    background-color: $orange;
+    color: $color-content-light;
+    background-color: $color-content-brand;
     max-width: 100%;
 }
 
@@ -86,7 +86,7 @@ export default {
     }
 
     svg {
-        fill: $white;
+        fill: $color-content-light;
         min-width: 28px;
         max-width: 28px;
         width: 28px;
@@ -99,7 +99,7 @@ export default {
 .c-userMessage-text {
     margin: 0 0 0 spacing(x2);
     font-family: $font-family-base;
-    font-weight: $font-weight-base;
+    font-weight: $font-weight-regular;
     @include font-size(body-s);
 
     @include media('>=mid') {
