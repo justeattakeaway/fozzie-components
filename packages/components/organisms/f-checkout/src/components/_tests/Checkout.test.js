@@ -194,6 +194,8 @@ describe('Checkout', () => {
 
     describe('data ::', () => {
         describe('serviceType ::', () => {
+            const fulfilmentTimeDropdownSelector = '[data-test-id="formfield-order-time-dropdown-select"]';
+            const tableIdentifierSelector = '[data-test-id="formfield-table-identifier-input"]';
             it('should display the address block if set to `delivery`', async () => {
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
@@ -248,7 +250,7 @@ describe('Checkout', () => {
                     propsData
                 });
 
-                const tableIdentifierInput = wrapper.find('[data-test-id="formfield-table-identifier-input"]');
+                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
 
                 // Assert
                 expect(tableIdentifierInput.exists()).toBe(true);
@@ -263,7 +265,7 @@ describe('Checkout', () => {
                     propsData
                 });
 
-                const tableIdentifierInput = wrapper.find('[data-test-id="formfield-table-identifier-input"]');
+                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
 
                 // Assert
                 expect(tableIdentifierInput.exists()).toBe(false);
@@ -278,7 +280,7 @@ describe('Checkout', () => {
                     propsData
                 });
 
-                const tableIdentifierInput = wrapper.find('[data-test-id="formfield-table-identifier-input"]');
+                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
 
                 // Assert
                 expect(tableIdentifierInput.exists()).toBe(false);
@@ -293,7 +295,7 @@ describe('Checkout', () => {
                     propsData
                 });
 
-                const fulfilmentTimeDropdown = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+                const fulfilmentTimeDropdown = wrapper.find(fulfilmentTimeDropdownSelector);
 
                 // Assert
                 expect(fulfilmentTimeDropdown.exists()).toBe(true);
@@ -308,7 +310,7 @@ describe('Checkout', () => {
                     propsData
                 });
 
-                const fulfilmentTimeDropdown = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+                const fulfilmentTimeDropdown = wrapper.find(fulfilmentTimeDropdownSelector);
 
                 // Assert
                 expect(fulfilmentTimeDropdown.exists()).toBe(true);
@@ -326,7 +328,7 @@ describe('Checkout', () => {
                     propsData
                 });
 
-                const fulfilmentTimeDropdown = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+                const fulfilmentTimeDropdown = wrapper.find(fulfilmentTimeDropdownSelector);
 
                 // Assert
                 expect(fulfilmentTimeDropdown.exists()).toBe(true);
@@ -352,7 +354,7 @@ describe('Checkout', () => {
                     propsData
                 });
 
-                const fulfilmentTimeDropdown = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+                const fulfilmentTimeDropdown = wrapper.find(fulfilmentTimeDropdownSelector);
 
                 // Assert
                 expect(fulfilmentTimeDropdown.exists()).toBe(false);
