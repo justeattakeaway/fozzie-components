@@ -24,7 +24,6 @@ export default {
             message, data, logMethod, error
         }) {
             const errorFields = buildErrorLogFields(error);
-            console.log('errorFields', errorFields);
             logMethod(message, this.$store, {
                 data,
                 tags: 'checkout',
