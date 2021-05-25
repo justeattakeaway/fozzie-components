@@ -3,7 +3,7 @@ const Button = require('../../test-utils/component-objects/f-button.component');
 const button = new Button();
 
 describe('f-button visual tests', () => {
-    it('should display mediun size primary button', () => {
+    it('should display medium size primary button', () => {
         const buttonData = {
             type: 'primary',
             size: 'medium'
@@ -55,7 +55,7 @@ describe('f-button visual tests', () => {
         browser.percyScreenshot('f-button - Primary - XSmall', 'shared');
     });
 
-    it('should display mediun size secondary button', () => {
+    it('should display medium size secondary button', () => {
         const buttonData = {
             type: 'secondary',
             size: 'medium'
@@ -107,7 +107,7 @@ describe('f-button visual tests', () => {
         browser.percyScreenshot('f-button - Secondary - XSmall', 'shared');
     });
 
-    it('should display mediun size outline button', () => {
+    it('should display medium size outline button', () => {
         const buttonData = {
             type: 'outline',
             size: 'medium'
@@ -159,7 +159,7 @@ describe('f-button visual tests', () => {
         browser.percyScreenshot('f-button - Outline - XSmall', 'shared');
     });
 
-    it('should display mediun size ghost button', () => {
+    it('should display medium size ghost button', () => {
         const buttonData = {
             type: 'ghost',
             size: 'medium'
