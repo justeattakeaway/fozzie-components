@@ -1,9 +1,11 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-module.exports = class CookieBanner extends Page {
+class CookieBanner extends Page {
     get component () { return $('[data-test-id="cookieConsentBanner"]'); }
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
+
+    get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
 
     get cookieAcceptAllButton () { return this.component.$('[data-test-id="accept-all-cookies-button"]'); }
 
@@ -35,9 +37,6 @@ module.exports = class CookieBanner extends Page {
         }
         super.openComponent('organism', `cookie-banner-component&knob-Locale=${formattedLocale}`);
     }
-
-
-
 
     waitForComponent () {
         this.component.waitForExist();
@@ -77,3 +76,5 @@ module.exports = class CookieBanner extends Page {
         return this;
     }
 };
+
+export default new CookieBanner();
