@@ -112,6 +112,7 @@ describe('BrazeAdapter', () => {
         ];
 
         let brazeAdapter;
+
         beforeEach(async () => {
             // Arrange
             GetConsumerRegistry.mockImplementation(() => ({
