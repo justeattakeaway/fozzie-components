@@ -88,8 +88,8 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
 
-$countrySelector-text-color : $grey--darkest;
-$countrySelector-text-hover : $color-bg--darker;
+$countrySelector-text-color    : $color-content-default;
+$countrySelector-text-bg-hover : $color-container-subtle;
 
 .c-countrySelector {
     @include media('>mid') {
@@ -138,7 +138,7 @@ $countrySelector-text-hover : $color-bg--darker;
     margin-bottom: 0;
 
     &:hover {
-        background: $countrySelector-text-hover;
+        background: $countrySelector-text-bg-hover;
     }
 }
 

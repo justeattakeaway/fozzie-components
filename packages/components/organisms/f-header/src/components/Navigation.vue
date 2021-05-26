@@ -630,15 +630,15 @@ export default {
 
 $nav-text-size                     : 'body-l';
 $nav-text-size--narrow             : 'body-s';
-$nav-text-color                    : $color-link-default;
+$nav-text-color                    : $color-content-link;
 
-$nav-text-color--narrow            : $grey--dark;
-$nav-text-color--transparent       : $white;
+$nav-text-color--narrow            : $color-content-subdued;
+$nav-text-color--transparent       : $color-content-link-inverse;
 $nav-text-weight                   : $font-weight-bold;
 $nav-text-subFont                  : $font-family-base;
-$nav-icon-color                    : $color-secondary;
-$nav-icon-color--transparent       : $white;
-$nav-icon-color--mobileWhiteBg     : $grey--darkest;
+$nav-icon-color                    : $color-interactive-primary;
+$nav-icon-color--transparent       : $color-interactive-inverse;
+$nav-icon-color--mobileWhiteBg     : $color-content-interactive-tertiary;
 $nav-transition-duration           : 250ms;
 $nav-icon-size                     : 24px;
 
@@ -649,8 +649,8 @@ $nav-toggleIcon-left               : spacing(x2);
 $nav-toggleIcon-width              : 21px;
 $nav-toggleIcon-height             : 2px;
 $nav-toggleIcon-borderRadius       : 1px;
-$nav-toggleIcon-color              : $color-secondary;
-$nav-toggleIcon-color--transparent : $white;
+$nav-toggleIcon-color              : $nav-icon-color;
+$nav-toggleIcon-color--transparent : $nav-icon-color--transparent;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
@@ -686,7 +686,7 @@ $nav-popover-width                 : 300px;
             @include font-size($nav-text-size--narrow);
             font-weight: 300;
             text-decoration: none;
-            border-bottom: 1px solid $grey--light;
+            border-bottom: 1px solid $color-border-default;
 
             @include media('>mid') {
                 @include font-size($nav-text-size);
@@ -848,7 +848,7 @@ $nav-popover-width                 : 300px;
             }
 
             .c-nav-toggle--altColour & {
-                background-color: $white;
+                background-color: $color-container-default;
             }
         }
 
@@ -934,7 +934,7 @@ $nav-popover-width                 : 300px;
     }
 
     @include media('>mid') {
-        background-color: $white;
+        background-color: $color-container-default;
         width: 32px;
         height: 32px;
         border-radius: 50%;

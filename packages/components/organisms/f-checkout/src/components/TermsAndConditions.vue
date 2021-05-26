@@ -35,7 +35,7 @@
 <style lang="scss" module>
 .c-checkoutTermsAndConditions {
     width: Calc($checkout-width - 2px); // -2px for border width
-    background: $grey--offWhite;
+    background: $color-background-default;
     margin-left: -(spacing(x10));
     margin-bottom: -(spacing(x6));
     margin-top: spacing(x6);
@@ -43,7 +43,7 @@
     padding: spacing(x2);
     @include font-size('body-s');
     text-align: center;
-    color: $grey--dark;
+    color: $color-grey-50;
     font-weight: $font-weight-bold;
 
     a {

@@ -307,7 +307,7 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: $white;
+        background-color: $color-container-default;
         z-index: 99999992;
     }
 
@@ -329,7 +329,7 @@ export default {
         font-weight: $font-weight-bold;
         margin: spacing() 0;
         padding: 0;
-        color: $color-headings;
+        color: $color-content-default;
         &:hover,
         &:focus {
             a {

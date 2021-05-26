@@ -43,14 +43,14 @@ export default {
 
 <style lang="scss" module>
 
-$form-label-colour              : $grey--darkest; // Text colour of form labels
+$form-label-colour              : $color-content-default; // Text colour of form labels
 $form-label-fontSize            : 'body-s';
 $form-label-weight              : $font-weight-bold;
 
 $form-inlineLabel-padding       : spacing(x1.5) spacing(x2);
-$form-inlineLabel-colour        : $grey--dark;
+$form-inlineLabel-colour        : $color-content-subdued;
 $form-inlineLabel-fontSize      : 'body-l';
-$form-inlineLabel-weight        : $font-weight-base;
+$form-inlineLabel-weight        : $font-weight-regular;
 
 
 .c-formField-label {
