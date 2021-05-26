@@ -17,8 +17,12 @@ export const VLinkComponent = () => ({
         }
     },
     props: {
-        linkType: {
-            default: select('Link Type', VALID_LINK_TYPES, DEFAULT_LINK_TYPE)
+        isExternalSite: {
+            default: boolean('Is the link and external site', false)
+        },
+
+        opensInNewLocation: {
+            default: boolean('Does the link open in an external tab/window', false)
         },
 
         isBold: {
@@ -36,16 +40,24 @@ export const VLinkComponent = () => ({
         noLineBreak: {
             default: boolean('noLineBreak', false)
         }
-
     },
+
+    computed: {
+        target() {
+            console.log(this.opensInNewLocation ? '_blank' : null); // eslint-disable-line no-console
+            return this.opensInNewLocation ? '_blank' : null;
+        }
+    },
+
     template: `<v-link
                     :data-test-id="dataTestId"
                     href="https://www.just-eat.co.uk/"
-                    :link-type="linkType"
                     :is-bold="isBold"
                     :has-text-decoration="hasTextDecoration"
                     :is-full-width="isFullWidth"
                     :no-line-break="noLineBreak"
+                    :is-external-site="isExternalSite"
+                    :target="target"
                 >
                     <span>This is a Link</span>
                 </v-link>`

@@ -10,15 +10,15 @@
                 }]"
             data-test-id="link-component"
             :aria-describedby="descriptionId"
-            :target="target"
-            :rel="rel"
-            v-bind="$attrs">
+            v-bind="$attrs"
+        >
             <slot />
         </a>
         <span
             v-if="ariaDescription"
             :id="descriptionId"
-            class="is-visuallyHidden">
+            class="is-visuallyHidden"
+        >
             {{ ariaDescription }}
         </span>
     </span>
@@ -26,7 +26,6 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
-import { DEFAULT_LINK_TYPE, VALID_LINK_TYPES } from '../constants';
 import tenantConfigs from '../tenants';
 
 let uid = 0;
@@ -35,10 +34,9 @@ export default {
     name: 'VLink',
 
     props: {
-        linkType: {
-            type: String,
-            default: DEFAULT_LINK_TYPE,
-            validator: value => (VALID_LINK_TYPES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+        isExternalSite: {
+            type: Boolean,
+            default: false
         },
 
         isBold: {
@@ -76,15 +74,17 @@ export default {
 
     computed: {
         ariaDescription () {
-            return this.linkType === DEFAULT_LINK_TYPE ? null : this.copy.ariaDescription[this.linkType];
-        },
+            let linkType = '';
 
-        target () {
-            return this.linkType === DEFAULT_LINK_TYPE ? null : '_blank';
-        },
+            if (this.isExternalSite) {
+                linkType = 'external';
+            }
 
-        rel () {
-            return this.linkType === 'external' ? 'noopener' : null;
+            if (this.$attrs.target === '_blank') {
+                linkType += 'newLocation';
+            }
+
+            return linkType ? this.copy.ariaDescription[linkType] : null;
         },
 
         descriptionId () {

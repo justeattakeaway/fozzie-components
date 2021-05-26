@@ -10,10 +10,14 @@ v0.3.0
 
 ### Removed
 - `VueGlobalisationMixin`
+- `opensInNewLocation` props
 
 ### Changed
-- `isExternalLink` and `opensInNewLocation` props to 'linkType'
+- `isExternalLink` prop to `isExternalSite`
 - Tests to cover changes.
+
+### Added
+- external site aria description.
 
 
 v0.2.0

@@ -115,67 +115,48 @@ describe('Link', () => {
     describe('computed :: ', () => {
         describe('ariaDescription :: ', () => {
             const newLocationMessage = 'Opens in a new window/screen/tab';
-            const externalLinkMessage = 'Opens an external site in a new window/screen/tab';
+            const externalLinkMessage = 'Opens an external site';
+            const externalNewLocationLinkMessage = 'Opens an external site in a new window/screen/tab';
 
-            it.each([
-                [null, 'default'],
-                [newLocationMessage, 'newLocation'],
-                [externalLinkMessage, 'external']
-            ])('should return `%s` when `linkType` is %s', (expected, linkType) => {
-                // Arrange
-                const propsData = {
-                    linkType
-                };
+            describe('When `target="_blank"` is applied to the link', () => {
+                it.each([
+                    [newLocationMessage, false],
+                    [externalNewLocationLinkMessage, true]
+                ])('should return `%s` when `isExternalSite` is %s', (expected, isExternalSite) => {
+                    // Arrange
+                    const propsData = {
+                        isExternalSite,
+                        target: '_blank'
+                    };
 
-                // Act
-                const wrapper = shallowMount(VLink, {
-                    propsData
+                    // Act
+                    const wrapper = shallowMount(VLink, {
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.ariaDescription).toEqual(expected);
                 });
-
-                // Assert
-                expect(wrapper.vm.ariaDescription).toEqual(expected);
             });
-        });
 
-        describe('target :: ', () => {
-            it.each([
-                [null, 'default'],
-                ['_blank', 'external'],
-                ['_blank', 'newLocation']
-            ])('should return %s when `linkType` is %s', (expected, linkType) => {
-                // Arrange
-                const propsData = {
-                    linkType
-                };
+            describe('When `target="_blank"` is not applied to the link', () => {
+                it.each([
+                    [null, false],
+                    [externalLinkMessage, true]
+                ])('should return `%s` when `isExternalSite` is %s', (expected, isExternalSite) => {
+                    // Arrange
+                    const propsData = {
+                        isExternalSite
+                    };
 
-                // Act
-                const wrapper = shallowMount(VLink, {
-                    propsData
+                    // Act
+                    const wrapper = shallowMount(VLink, {
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.ariaDescription).toEqual(expected);
                 });
-
-                // Assert
-                expect(wrapper.vm.target).toEqual(expected);
-            });
-        });
-
-        describe('rel :: ', () => {
-            it.each([
-                [null, 'default'],
-                ['noopener', 'external'],
-                [null, 'newLocation']
-            ])('should return %s when `linkType` is %s', (expected, linkType) => {
-                // Arrange
-                const propsData = {
-                    linkType
-                };
-
-                // Act
-                const wrapper = shallowMount(VLink, {
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.rel).toEqual(expected);
             });
         });
     });
