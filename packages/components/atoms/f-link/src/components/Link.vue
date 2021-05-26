@@ -10,15 +10,13 @@
                 }]"
             data-test-id="link-component"
             :aria-describedby="descriptionId"
-            v-bind="$attrs"
-        >
+            v-bind="$attrs">
             <slot />
         </a>
         <span
             v-if="ariaDescription"
             :id="descriptionId"
-            class="is-visuallyHidden"
-        >
+            class="is-visuallyHidden">
             {{ ariaDescription }}
         </span>
     </span>
