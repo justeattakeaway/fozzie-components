@@ -94,6 +94,7 @@ const message = {
 const defaultState = {
     id: '',
     serviceType: '',
+    tableIdentifier: '',
     restaurant: {
         id: '',
         seoName: ''
