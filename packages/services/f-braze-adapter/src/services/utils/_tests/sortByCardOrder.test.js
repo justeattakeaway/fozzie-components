@@ -51,6 +51,6 @@ describe('sortByCardOrder', () => {
         const orderedCards = sortByCardOrder(mockCards);
 
         // Arrange
-        expect(orderedCards[3]).toEqual({ id: 4 });
+        expect(orderedCards.slice(-1).pop()).toEqual({ id: 4 });
     });
 });

@@ -48,7 +48,7 @@ describe('DispatcherEventStream', () => {
         expect(mockCallback).not.toHaveBeenCalled();
     });
 
-    it('should throw and error if the channel being published to is no in the list of subscriptions', () => {
+    it('should throw and error if the channel being published to is NOT in the list of subscriptions', () => {
         // Arrange
         function mockError () {
             dispatcherEventStream.publish(mockEventName, mockData);

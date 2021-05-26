@@ -115,12 +115,14 @@ describe('BrazeAdapter', () => {
         beforeEach(async () => {
             // Arrange
             GetConsumerRegistry.mockImplementation(() => ({
+                consumers: [],
                 register: jest.fn(),
                 dispatcher: {
                     pushShapedEventToDataLayer: jest.fn(),
                     logCardClick: jest.fn(),
                     logCardImpressions: jest.fn()
-                }
+                },
+                unregister: jest.fn()
             }));
 
             brazeAdapter = await BrazeAdapter.initialise(mockConfig);
@@ -156,7 +158,11 @@ describe('BrazeAdapter', () => {
 
         describe('unsubscribe', () => {
             it('should unregister the consumer that this braze adapter instance created', async () => {
+                // Act
+                brazeAdapter.unsubscribe();
 
+                // Assert
+                expect(brazeAdapter._consumerRegistry.unregister).toHaveBeenCalled();
             });
         });
     });

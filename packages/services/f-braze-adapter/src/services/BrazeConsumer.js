@@ -82,7 +82,7 @@ class BrazeConsumer {
         Promise.resolve(brands).then(brandsList => {
             this.brands = uniq([...this.brands, ...brandsList]);
             // check to see if cards has already been set if so re call all the content card callbacks
-            if (this._cards.length > 0) {
+            if (this._cards.length) {
                 this.getContentCardCallbacks().forEach(callback => {
                     callback(this._cards);
                 });
