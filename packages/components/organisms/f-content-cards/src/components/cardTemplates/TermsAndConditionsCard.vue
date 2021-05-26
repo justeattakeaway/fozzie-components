@@ -83,14 +83,14 @@ export default {
 
 <style lang="scss" module>
   .c-contentCards-tnc-card-shell {
-    background-color: $white;
+    background-color: $color-container-default;
     padding: spacing(x3);
     text-align: center;
   }
 
   .c-contentCards-tnc-card-primaryHeader {
     @include font-size(heading-s);
-    color: $grey--darkest;
+    color: $color-content-default;
 
     @include media('>=narrow') {
       @include font-size(heading-xl);
@@ -99,7 +99,7 @@ export default {
 
   .c-contentCards-tnc-card-secondaryHeader {
     @include font-size(body-s);
-    color: $grey--dark;
+    color: $color-content-subdued;
     margin-top: spacing(x2);
 
     @include media('>=narrow') {

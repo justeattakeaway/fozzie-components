@@ -4,9 +4,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.3.0
+v0.4.0
 ------------------------------
-*May 26, 2021*
+*May 27, 2021*
 
 ### Removed
 - `VueGlobalisationMixin`
@@ -18,6 +18,14 @@ v0.3.0
 
 ### Added
 - external site aria description.
+
+
+v0.3.0
+------------------------------
+*May 25, 2021*
+
+### Changed
+- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
 
 
 v0.2.0

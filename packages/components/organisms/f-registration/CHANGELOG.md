@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.54.0
+------------------------------
+*May 25, 2021*
+
+### Changed
+- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
+
+
 v0.53.2
 ------------------------------
 *May 20, 2021*

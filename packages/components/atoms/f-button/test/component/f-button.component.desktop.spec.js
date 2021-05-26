@@ -5,7 +5,10 @@ const button = new Button();
 describe('f-button component tests', () => {
     it('should display the f-button action component', () => {
         // Act
-        button.open();
+        button.open({
+            type: 'primary',
+            size: 'medium'
+        });
         button.waitForActionComponent();
 
         // Assert
@@ -14,7 +17,10 @@ describe('f-button component tests', () => {
 
     it('should display the f-button link component', () => {
         // Act
-        button.open('link');
+        button.open({
+            type: 'link',
+            size: 'medium'
+        });
         button.waitForLinkComponent();
 
         // Assert
