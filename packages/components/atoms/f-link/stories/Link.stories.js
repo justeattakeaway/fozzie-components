@@ -18,11 +18,11 @@ export const VLinkComponent = () => ({
     },
     props: {
         isExternalSite: {
-            default: boolean('Is the link and external site', false)
+            default: boolean('Opens an external site', false)
         },
 
         opensInNewLocation: {
-            default: boolean('Does the link open in an external tab/window', false)
+            default: boolean('Open link in a new tab/window', false)
         },
 
         isBold: {
@@ -44,7 +44,6 @@ export const VLinkComponent = () => ({
 
     computed: {
         target() {
-            console.log(this.opensInNewLocation ? '_blank' : null); // eslint-disable-line no-console
             return this.opensInNewLocation ? '_blank' : null;
         }
     },
@@ -57,8 +56,7 @@ export const VLinkComponent = () => ({
                     :is-full-width="isFullWidth"
                     :no-line-break="noLineBreak"
                     :is-external-site="isExternalSite"
-                    :target="target"
-                >
+                    :target="target">
                     <span>This is a Link</span>
                 </v-link>`
 });

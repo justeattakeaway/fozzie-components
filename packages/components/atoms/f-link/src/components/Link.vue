@@ -72,17 +72,21 @@ export default {
 
     computed: {
         ariaDescription () {
-            let linkType = '';
+            const shouldOpenInNewTab = this.$attrs.target === '_blank';
+
+            if (this.isExternalSite && shouldOpenInNewTab) {
+                return this.copy.ariaDescription['externalNewLocation'];
+            }
 
             if (this.isExternalSite) {
-                linkType = 'external';
+                return this.copy.ariaDescription['external'];
             }
 
-            if (this.$attrs.target === '_blank') {
-                linkType += 'newLocation';
+            if (shouldOpenInNewTab) {
+                return this.copy.ariaDescription['newLocation'];
             }
 
-            return linkType ? this.copy.ariaDescription[linkType] : null;
+            return null;
         },
 
         descriptionId () {

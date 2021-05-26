@@ -118,7 +118,7 @@ describe('Link', () => {
             const externalLinkMessage = 'Opens an external site';
             const externalNewLocationLinkMessage = 'Opens an external site in a new window/screen/tab';
 
-            describe('When `target="_blank"` is applied to the link', () => {
+            describe('when `target="_blank"` is applied to the link', () => {
                 it.each([
                     [newLocationMessage, false],
                     [externalNewLocationLinkMessage, true]
@@ -139,7 +139,7 @@ describe('Link', () => {
                 });
             });
 
-            describe('When `target="_blank"` is not applied to the link', () => {
+            describe('when `target="_blank"` is not applied to the link', () => {
                 it.each([
                     [null, false],
                     [externalLinkMessage, true]
