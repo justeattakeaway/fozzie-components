@@ -1,6 +1,6 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-class CookieBanner extends Page {
+module.exports = class CookieBanner extends Page {
     get component () { return $('[data-test-id="legacyCookieBanner-component"]'); }
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
@@ -31,5 +31,3 @@ class CookieBanner extends Page {
         return this;
     }
 };
-
-export default new CookieBanner();
