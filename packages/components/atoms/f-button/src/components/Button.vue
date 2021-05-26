@@ -301,7 +301,7 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     }
     &:active,
     &:focus {
-        color: darken($color-content-link, $color-active-02);
+        color: darken($color-content-link, $color-active-01);
         background-color: transparent;
     }
 }
@@ -358,7 +358,7 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         &:active,
         &:focus {
             path {
-                fill: darken($color-content-link, $color-active-02);
+                fill: darken($color-content-link, $color-active-01);
             }
         }
     }

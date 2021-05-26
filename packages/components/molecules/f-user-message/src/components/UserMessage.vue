@@ -66,7 +66,7 @@ export default {
 <style lang="scss" module>
 .c-userMessage {
     color: $color-content-light;
-    background-color: $color-content-brand;
+    background-color: $color-support-brand;
     max-width: 100%;
 }
 

@@ -184,7 +184,7 @@ export default {
             }
 
             &:active {
-                color: darken($color-content-link, $color-active-02);
+                color: darken($color-content-link, $color-active-01);
             }
         }
 

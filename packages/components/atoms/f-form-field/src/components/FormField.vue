@@ -276,7 +276,7 @@ export default {
 $form-input-textColour                    : $color-content-default;
 $form-input-textColour--disabled          : $color-content-disabled;
 $form-input-bg                            : $color-container-default;
-$form-input-bg--hover                     : darken($form-input-bg, $color-hover-02);
+$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);
 $form-input-bg--disabled                  : $color-disabled-01;
 $form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;

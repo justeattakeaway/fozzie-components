@@ -156,7 +156,7 @@ $countrySelector-btn-font-size: 'body-s';
     }
     &:active,
     &:focus {
-        color: darken($color-content-link, $color-active-02);
+        color: darken($color-content-link, $color-active-01);
     }
 
     p {

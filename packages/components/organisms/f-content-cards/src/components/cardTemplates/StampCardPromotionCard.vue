@@ -185,7 +185,7 @@ $stampCard-promo-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     }
 
     &:active {
-        color: darken($color-content-link, $color-active-02);
+        color: darken($color-content-link, $color-active-01);
     }
 }
 
