@@ -3,7 +3,7 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VLink from '../src/components/Link.vue';
-import { DEFAULT_LINK_TYPE, VALID_LINK_TYPE, VALID_LINK_TYPES }  from '../src/constants'
+
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
