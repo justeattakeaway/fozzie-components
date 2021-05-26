@@ -3,14 +3,17 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const Button = require('../../test-utils/component-objects/f-button.component');
 
-const button = new Button('atom-folder', 'f-button--button-component');
+let button;
 
 describe('Accessibility tests', () => {
     it('a11y - should test f-button action component WCAG compliance', () => {
         // Act
+        button = new Button('atom-folder', 'f-button--button-component');
         button.withQuery('knob-Button Type', 'primary');
+        button.withQuery('knob-Button Size', 'medium');
         const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
         button.open(pageUrl);
+
         button.waitForActionComponent();
         const axeResults = getAccessibilityTestResults('f-button - action');
 
@@ -19,10 +22,14 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-button link component WCAG compliance', () => {
         // Act
+        button = new Button('atom-folder', 'f-button--button-component');
         button.withQuery('knob-Button Type', 'link')
-        .withQuery('knob-href', 'link');
+                .withQuery('knob-href', 'link')
+                .withQuery('knob-Button Size', 'medium');
+
         const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
         button.open(pageUrl);
+
         button.waitForLinkComponent();
         const axeResults = getAccessibilityTestResults('f-button - link');
 
