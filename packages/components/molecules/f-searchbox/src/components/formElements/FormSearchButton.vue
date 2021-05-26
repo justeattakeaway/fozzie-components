@@ -54,7 +54,7 @@ export default {
     border: none;
     border-radius: 0 $border-radius $border-radius 0;
     box-sizing: border-box;
-    color: $white;
+    color: $color-content-interactive-brand;
     cursor: pointer;
     font-family: $font-family-base;
     @include font-size(heading-s);
@@ -71,11 +71,11 @@ export default {
 
     &:focus,
     &:hover {
-        background-color: $search-button-bgColor--hover;
+        background-color: darken($color-interactive-brand, $color-hover-01);
     }
 
     &:active {
-        background-color: $search-button-bgColor--active;
+        background-color: darken($color-interactive-brand, $color-active-01);
     }
 
     @include media('>=narrow') {
@@ -113,7 +113,7 @@ export default {
 .c-search-btn-clear {
     $btn-size: 52px;
 
-    background: $white;
+    background: $color-interactive-inverse;
     border: none;
     width: $btn-size;
     height: $btn-size;
@@ -124,7 +124,7 @@ export default {
 
     &:hover,
     &:focus {
-        background-color: $grey--offWhite;
+        background-color: darken($color-interactive-inverse, $color-hover-01);
     }
 }
 
