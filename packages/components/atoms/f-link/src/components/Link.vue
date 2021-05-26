@@ -106,16 +106,16 @@ export default {
 <style lang="scss" module>
 .o-link {
     & {
-        color: $color-link-default;
+        color: $color-content-link;
     }
 
     &:hover,
     &:focus {
-        color: $color-link-hover;
+        color: darken($color-content-link, $color-hover-01);
     }
 
     &:active {
-        color: $color-link-active;
+        color: darken($color-content-link, $color-active-01);
     }
 }
 

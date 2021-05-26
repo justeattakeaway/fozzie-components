@@ -109,9 +109,9 @@ export default {
 
 <style lang="scss" module>
 
-$tabs-link-colour         : $grey--darkest;
+$tabs-link-colour         : $color-content-default;
 $tabs-link-font-weight    : $font-weight-bold;
-$tabs-link-border-colour  : $brand--orange;
+$tabs-link-border-colour  : $color-orange-30;
 
 .c-tabs {
     width: 100%;

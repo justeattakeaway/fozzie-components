@@ -69,18 +69,18 @@ export default {
 
 <style lang="scss" module>
 
-    $btn-secondary-bgColor              : $blue--offWhite;
-    $btn-secondary-bgColor--hover       : $blue--offWhite--dark;
-    $btn-secondary-bgColor--active      : $blue--offWhite--darkest;
-    $btn-secondary-textColor            : $blue;
-    $btn-secondary-textColor--hover     : $blue;
-    $btn-secondary-textColor--active    : $blue;
+    $btn-secondary-bgColor              : $color-interactive-secondary;
+    $btn-secondary-bgColor--hover       : darken($color-interactive-secondary, $color-hover-01);
+    $btn-secondary-bgColor--active      : darken($color-interactive-secondary, $color-active-01);
+    $btn-secondary-textColor            : $color-content-interactive-secondary;
+    $btn-secondary-textColor--hover     : $color-content-interactive-secondary;
+    $btn-secondary-textColor--active    : $color-content-interactive-secondary;
 
     .c-contentCard-linkPromo2 {
         font-weight: $font-weight-bold;
         text-decoration: none;
         @include font-size(body-l);
-        color: $color-secondary;
+        color: $color-content-link;
         display: block;
     }
 

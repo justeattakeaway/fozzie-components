@@ -151,12 +151,12 @@ export default {
 
 .c-search-input-overlay {
     flex: 1 1 auto;
-    border: 1px solid $grey--light;
+    border: 1px solid $color-border-default;
     border-radius: 4px;
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.11);
 
     &:focus {
-        border: solid 2px $color-focus-outline;
+        border: solid 2px $color-focus;
     }
 }
 
@@ -166,19 +166,19 @@ export default {
     background-color: transparent;
     padding: 0;
     margin: 0 0 0 25px;
-    color: $color-link-default;
+    color: $color-content-link;
     font-weight: $font-weight-bold;
     @include font-size(body-s, false);
     font-family: $font-family-base;
 
     &:hover {
         cursor: pointer;
-        color: $color-link-hover;
+        color: darken($color-content-link, $color-hover-01);
         background-color: transparent;
     }
     &:active,
     &:focus {
-        color: $color-link-active;
+        color: darken($color-content-link, $color-active-01);
         background-color: transparent;
     }
 }

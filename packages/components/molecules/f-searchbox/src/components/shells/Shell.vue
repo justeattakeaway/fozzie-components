@@ -32,13 +32,13 @@ $midWide: 980px;
 
 .c-searchShell {
     -webkit-font-smoothing: antialiased;
-    background-color: $color-bg--component;
+    background-color: $color-container-default;
     border-radius: $border-radius;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
-    color: $grey--dark;
+    color: $color-grey-50;
     @include font-size('heading-xl', false);
     font-family: $font-family-base;
-    font-weight: $font-weight-base;
+    font-weight: $font-weight-regular;
     padding: spacing(x2);
     text-align: center;
     text-rendering: optimizeLegibility;
@@ -66,7 +66,7 @@ $midWide: 980px;
 }
 
 .c-searchShell-title {
-    color: $color-headings--highlight;
+    color: $color-content-brand;
     @include font-size('heading-xxl', true, 'narrow');
     font-weight: $font-weight-bold;
     margin-bottom: spacing();
@@ -82,9 +82,9 @@ $midWide: 980px;
 }
 
 .c-searchShell-subtitle {
-    color: $grey--dark;
+    color: $color-grey-50;
     @include font-size('subheading-s', true, 'narrow');
-    font-weight: $font-weight-base;
+    font-weight: $font-weight-regular;
     margin-bottom: spacing(x2);
 
     @include media('>=narrowMid') {

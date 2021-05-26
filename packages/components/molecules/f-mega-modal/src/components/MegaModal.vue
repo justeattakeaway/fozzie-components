@@ -304,7 +304,7 @@ export default {
 }
 
 .c-megaModal-content {
-    background-color: $color-bg--component;
+    background-color: $color-container-default;
     border-radius: $border-radius;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
     display: none;
@@ -401,7 +401,7 @@ export default {
     }
 
     .c-megaModal-closeIcon * {
-        fill: $color-link-default;
+        fill: $color-content-link;
     }
 }
 
