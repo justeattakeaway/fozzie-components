@@ -258,32 +258,128 @@ describe('Selector', () => {
                 updateFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'updateFulfilmentTime');
             });
 
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
             it('should exist', () => {
                 expect(wrapper.vm.initFulfilmentTime).toBeDefined();
             });
 
             describe('when invoked', () => {
-                describe('AND there are no fulfilment `times` available', () => {
-                    it('should NOT make a call to `updateFulfilmentTime`', () => {
-                        // Act
-                        wrapper.vm.initFulfilmentTime([]);
+                let times;
+                beforeEach(() => {
+                    // Arrange
+                    times = [{
+                        text: 'Wednesday 01:00',
+                        value: '2020-01-01T01:00:00.000Z'
+                    }, {
+                        text: 'Wednesday 01:15',
+                        value: '2020-01-01T01:15:00.000Z'
+                    }, {
+                        text: 'Wednesday 01:30',
+                        value: '2020-01-01T01:30:00.000Z'
+                    }];
+                });
 
+                describe('AND fulfilment `times` are supplied, a selected Fulfilment Time is supplied and this time is still available in the fulfilment `times`', () => {
+                    // Arrange
+                    let selectedFulfilmentTime;
+
+                    beforeEach(() => {
+                        // Pre-selected/set fulfilment time
+                        selectedFulfilmentTime = {
+                            from: '2020-01-01T01:15:00.000Z',
+                            to: '2020-01-01T01:15:00.000Z'
+                        };
+
+                        // Act
+                        wrapper.vm.initFulfilmentTime(times, selectedFulfilmentTime);
+                    });
+
+                    it('should update `selectedAvailableFulfilmentTime` with the state Time value', () => {
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toEqual(selectedFulfilmentTime.from);
+                    });
+
+                    it('should NOT make a call to `updateFulfilmentTime`', () => {
                         // Assert
                         expect(updateFulfilmentTimeSpy).not.toHaveBeenCalled();
                     });
                 });
 
-                describe('AND there are fulfilment `times` available', () => {
-                    it('should make a call to `updateFulfilmentTime` with the `from` & `to` values', () => {
+                describe('AND fulfilment `times` are supplied, a selected Fulfilment Time is supplied but this time is now not available in the fulfilment `times`', () => {
+                    // Arrange
+                    beforeEach(() => {
                         // Arrange
-                        const times = [{
-                            text: 'Wednesday 01:00',
-                            value: '2020-01-01T01:00:00.000Z'
-                        }];
+                        const selectedFulfilmentTime = {
+                            from: '2020-01-01T00:45:00.000Z',
+                            to: '2020-01-01T00:45:00.000Z'
+                        };
 
                         // Act
-                        wrapper.vm.initFulfilmentTime(times);
+                        wrapper.vm.initFulfilmentTime(times, selectedFulfilmentTime);
+                    });
 
+                    it('should update `selectedAvailableFulfilmentTime` with the first available time value from the fulfilment `times`', () => {
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toEqual(times[0].value);
+                    });
+
+                    it('should make a call to `updateFulfilmentTime` with the first available `from` & `to` values', () => {
+                        // Assert
+                        expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
+                            from: '2020-01-01T01:00:00.000Z',
+                            to: '2020-01-01T01:00:00.000Z'
+                        });
+                    });
+                });
+
+                describe('AND no fulfilment `times` are supplied but a selected Fulfilment Time is supplied', () => {
+                    beforeEach(() => {
+                        const selectedFulfilmentTime = {
+                            from: '2020-01-01T01:15:00.000Z',
+                            to: '2020-01-01T01:15:00.000Z'
+                        };
+
+                        // Act
+                        wrapper.vm.initFulfilmentTime([], selectedFulfilmentTime);
+                    });
+
+                    it('should NOT make a call to `updateFulfilmentTime`', () => {
+                        // Assert
+                        expect(updateFulfilmentTimeSpy).not.toHaveBeenCalled();
+                    });
+
+                    it('should not update `selectedAvailableFulfilmentTime`', () => {
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toEqual('');
+                    });
+                });
+
+                describe('AND no fulfilment `times` are supplied and no selected Fulfilment Time is supplied', () => {
+                    beforeEach(() => {
+                        // Act
+                        wrapper.vm.initFulfilmentTime([]);
+                    });
+                    it('should NOT make a call to `updateFulfilmentTime`', () => {
+                        // Assert
+                        expect(updateFulfilmentTimeSpy).not.toHaveBeenCalled();
+                    });
+
+                    it('should not update `selectedAvailableFulfilmentTime`', () => {
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toEqual('');
+                    });
+                });
+
+                describe('AND fulfilment `times` are supplied but no selected Fulfilment Time is supplied', () => {
+                    beforeEach(() => {
+                        // Act
+                        wrapper.vm.initFulfilmentTime(times);
+                    });
+
+                    it('should make a call to `updateFulfilmentTime` with the `from` & `to` values', () => {
                         // Assert
                         expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
                             from: '2020-01-01T01:00:00.000Z',
@@ -291,16 +387,7 @@ describe('Selector', () => {
                         });
                     });
 
-                    it('should update `selectedAvailableFulfilmentTime` with the `from` & `to` values', () => {
-                        // Arrange
-                        const times = [{
-                            text: 'Wednesday 01:00',
-                            value: '2020-01-01T01:00:00.000Z'
-                        }];
-
-                        // Act
-                        wrapper.vm.initFulfilmentTime(times);
-
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment Time value', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toEqual(times[0].value);
                     });
@@ -413,29 +500,73 @@ describe('Selector', () => {
     });
 
     describe('mounted ::', () => {
-        it('should make a call to `initFulfilmentTime` with the available `fulfilmentTimes`', () => {
-            // Arrange
-            const initFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'initFulfilmentTime');
+        describe('Initial Page Visit ::', () => {
+            it('should make a call to `initFulfilmentTime` with the available `fulfilmentTimes` and no preset `fulfilmentTime`', () => {
+                // Arrange
+                const initFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'initFulfilmentTime');
 
-            // Act
-            shallowMount(Selector, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
+                // Act
+                shallowMount(Selector, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(initFulfilmentTimeSpy).toHaveBeenCalledWith(
+                    [
+                        {
+                            text: 'As soon as possible',
+                            value: '2020-01-01T01:00:00.000Z'
+                        },
+                        {
+                            text: 'Wednesday 01:15',
+                            value: '2020-01-01T01:15:00.000Z'
+                        }
+                    ],
+                    {
+                        from: '',
+                        to: ''
+                    }
+                );
             });
+        });
 
-            // Assert
-            expect(initFulfilmentTimeSpy).toHaveBeenCalledWith([
-                {
-                    text: 'As soon as possible',
-                    value: '2020-01-01T01:00:00.000Z'
-                },
-                {
-                    text: 'Wednesday 01:15',
-                    value: '2020-01-01T01:15:00.000Z'
-                }
-            ]);
+        describe('Page Re-visit ::', () => {
+            it('should make a call to `initFulfilmentTime` with the available `fulfilmentTimes` and any preset `fulfilmentTime`', () => {
+                const preselectedTime = {
+                    from: '2020-01-01T01:15:00.000Z',
+                    to: '2020-01-01T01:15:00.000Z'
+                };
+                defaultCheckoutState.time = preselectedTime;
+
+                // Arrange
+                const initFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'initFulfilmentTime');
+
+                // Act
+                shallowMount(Selector, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(initFulfilmentTimeSpy).toHaveBeenCalledWith(
+                    [
+                        {
+                            text: 'As soon as possible',
+                            value: '2020-01-01T01:00:00.000Z'
+                        },
+                        {
+                            text: 'Wednesday 01:15',
+                            value: '2020-01-01T01:15:00.000Z'
+                        }
+                    ],
+                    preselectedTime
+                );
+            });
         });
     });
 });

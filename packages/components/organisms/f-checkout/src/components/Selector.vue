@@ -43,7 +43,8 @@ export default {
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'availableFulfilment',
-            'serviceType'
+            'serviceType',
+            'time'
         ]),
 
         orderMethod () {
@@ -89,7 +90,7 @@ export default {
     },
 
     mounted () {
-        this.initFulfilmentTime(this.fulfilmentTimes);
+        this.initFulfilmentTime(this.fulfilmentTimes, this.time);
     },
 
     methods: {
@@ -121,13 +122,18 @@ export default {
         },
 
         /**
-         * Initialise the first set of times so if the user proceeds with the preset delivery time
-         * we have access to the from/to times up front.
+         * If we have previously set a time then initialise the `selected dropdown item` with that value; if
+         * currently present in the Fulfilment times array, otherwise initialise the with first value in the
+         * Fulfilment times array.
+         * Note; we always need to pre-select a time so the user can always proceeds with a selected time.
          *
-         * @param times
+         * @param {array} times - An array of available fulfilment times
+         * @param {object} selectedFulfilmentTime - The previously set time (if any)
          */
-        initFulfilmentTime (times) {
-            if (times.length && times[0].value) {
+        initFulfilmentTime (times, selectedFulfilmentTime = {}) {
+            if (selectedFulfilmentTime.from && times.length && times.find(i => i.value === selectedFulfilmentTime.from)) {
+                this.selectedAvailableFulfilmentTime = selectedFulfilmentTime.from;
+            } else if (times.length && times[0].value) {
                 this.updateFulfilmentTime({
                     from: times[0].value,
                     to: times[0].value
