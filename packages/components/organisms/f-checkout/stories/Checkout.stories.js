@@ -18,11 +18,13 @@ Vue.use(Vuex);
 
 const getCheckoutDeliveryUrl = '/checkout-delivery.json';
 const getCheckoutCollectionUrl = '/checkout-collection.json';
+const getCheckoutDineInUrl = '/checkout-dinein.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const checkoutAvailableFulfilmentPreorderUrl = '/checkout-available-fulfilment-preorder.json';
 const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
+const getBasketDineInUrl = '/get-basket-dinein.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const updateCheckoutErrorsUrl = '/update-checkout-errors.json';
 const updateCheckoutServerErrorUrl = '/update-checkout-server-error.json';
@@ -34,11 +36,13 @@ const getGeoLocationUrl = '/get-geo-location.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutDineInUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentPreorderUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
+CheckoutMock.setupCheckoutMethod(getBasketDineInUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutErrorsUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutServerErrorUrl);
@@ -90,7 +94,7 @@ export const CheckoutComponent = () => ({
         },
 
         serviceType: {
-            default: select('Service Type', ['collection', 'delivery', 'invalid-url'], 'delivery')
+            default: select('Service Type', ['collection', 'delivery', 'dinein', 'invalid-url'], 'delivery')
         },
 
         locale: {

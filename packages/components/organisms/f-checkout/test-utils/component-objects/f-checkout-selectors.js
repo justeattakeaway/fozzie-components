@@ -54,5 +54,8 @@ export const FIELDS = {
     userNote: {
         input: '[data-test-id="formfield-textarea"]',
         error: ''
+    },
+    tableIdentifier: {
+        input: '[data-test-id="formfield-table-identifier-input"]'
     }
 };

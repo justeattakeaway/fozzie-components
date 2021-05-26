@@ -93,6 +93,10 @@ module.exports = class Checkout extends Page {
         userNote: {
             get input () { return $(FIELDS.userNote.input); },
             get error () { return ''; }
+        },
+        tableIdentifier: {
+            get input () { return $(FIELDS.tableIdentifier.input); },
+            get maxLengthError () { return $(FIELDS.tableIdentifier.maxLengthError); }
         }
     }
     /**
@@ -124,6 +128,10 @@ module.exports = class Checkout extends Page {
 
     isPostcodeTypeErrorDisplayed () {
         return this.fields.addressPostcode.typeError.isDisplayed();
+    }
+
+    isTableIdentifierMaxLengthErrorDisplayed () {
+        return this.fields.tableIdentifier.maxLengthError.isDisplayed();
     }
 
     isOrderTimeDropdownDisplayed () {
@@ -212,6 +220,22 @@ module.exports = class Checkout extends Page {
         this.fields.addressLocality.input.setValue(addressInfo.locality);
         this.fields.addressPostcode.input.setValue(addressInfo.postcode);
         this.fields.userNote.input.setValue(addressInfo.note);
+    }
+
+    /**
+    * @description
+    * Inputs customer details into the checkout component.
+    *
+    * @param {Object} customerInfo
+    * @param {String} customerInfo.mobileNumber The user's mobile number
+    * @param {String} customerInfo.tableIdentifier The user's table ID
+    * @param {String} customerInfo.note The user's extra note
+    */
+    populateDineInCheckoutForm (customerInfo) {
+        this.waitForComponent();
+        this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
+        this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
+        this.fields.userNote.input.setValue(customerInfo.note);
     }
 
     /**

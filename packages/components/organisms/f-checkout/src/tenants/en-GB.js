@@ -9,7 +9,9 @@ const messages = {
         locality: 'City',
         postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
-        collectionOrderMethod: 'Collection time'
+        collectionOrderMethod: 'Collection time',
+        dineinOrderMethod: 'Dine in time',
+        tableIdentifier: 'Table number or name'
     },
 
     validationMessages: {
@@ -35,6 +37,10 @@ const messages = {
         },
         email: {
             requiredError: 'Please enter a valid email address'
+        },
+        tableIdentifier: {
+            requiredError: 'Please include your table name/number',
+            maxLengthError: 'The table number/name exceeds the maximum length (12)'
         }
     },
 
@@ -95,6 +101,12 @@ const messages = {
                 buttonText: 'Ok'
             },
 
+            TABLE_IDENTIFIER_REQUIRED: {
+                title: 'Table number/name is required',
+                message: 'It appears you didn’t tell us how to find you in the restaurant. Please enter your table number and try again.',
+                buttonText: 'Ok'
+            },
+
             DEFAULT_CHECKOUT_ISSUE: {
                 title: 'Something went wrong',
                 message: 'Please try again',
@@ -119,9 +131,22 @@ const messages = {
     buttonText: 'Go to payment',
 
     userNote: {
-        title: 'Leave a note',
-        text: 'Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
-        placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+        delivery: {
+            title: 'Leave a note',
+            text: 'Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
+            placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+        },
+        collection: {
+            title: 'Leave a note',
+            text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+            placeholder: 'Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+        },
+        dinein: {
+            title: 'Leave a note',
+            text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+            placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
+        }
+
     },
 
     guest: {

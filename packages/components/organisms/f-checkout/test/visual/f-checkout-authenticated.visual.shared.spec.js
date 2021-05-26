@@ -187,3 +187,50 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Visual 
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Pre-Order Warning', 'shared');
     });
 });
+
+describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
+    beforeEach(() => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'dinein')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true);
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+    });
+
+    it('should display the component base state.', () => {
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', 'shared');
+    });
+
+    it('should display the mandatory error messages', field => {
+        // Act
+
+        ['mobileNumber', 'tableIdentifier']
+            .forEach(field => checkout.clearCheckoutForm(field));
+
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', 'shared');
+    });
+
+    it('should display the illegal mobile number error message', () => {
+        // Arrange
+        const mobileNumberInfo = {
+            mobileNumber: '123'
+        };
+
+        // Act
+        checkout.populateDineInCheckoutForm(mobileNumberInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', 'shared');
+    });
+});
