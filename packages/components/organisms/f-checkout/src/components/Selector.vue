@@ -26,7 +26,7 @@ import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FormDropdown from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { CHECKOUT_METHOD_DELIVERY, VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: {
@@ -47,9 +47,7 @@ export default {
         ]),
 
         orderMethod () {
-            return this.serviceType === CHECKOUT_METHOD_DELIVERY
-                ? this.$t('labels.deliveryOrderMethod')
-                : this.$t('labels.collectionOrderMethod');
+            return this.$t(`labels.${this.serviceType}OrderMethod`);
         },
 
         /*
