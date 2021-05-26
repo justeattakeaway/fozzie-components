@@ -3,12 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest – to be added to the next release
+v1.4.0
 ------------------------------
+*May 25, 2021*
 
 ### Added
 - Percy visual regression tests
+
+### Changed
+- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
 
 
 v1.3.0

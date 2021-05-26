@@ -43,7 +43,7 @@ export default {
             display: block;
             margin: 4px;
             padding: 4px;
-            color: $color-link-default;
+            color: $color-content-link;
         }
     }
 }
@@ -52,7 +52,7 @@ export default {
     .c-skipTo-link {
         &:active,
         &:focus {
-            color: $white;
+            color: $color-content-link-inverse;
         }
     }
 }

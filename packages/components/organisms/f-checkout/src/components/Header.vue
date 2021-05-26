@@ -131,7 +131,7 @@ export default {
     margin-bottom: 0;
     @include font-size('body-s');
     font-weight: $font-weight-bold;
-    color: $grey--dark;
+    color: $color-content-subdued;
 }
 
 .c-checkoutHeader-option {
@@ -164,7 +164,7 @@ export default {
             top: 50%;
             width: 9999px;
             height: 1px;
-            background: $grey--mid;
+            background: $color-grey-40;
         }
     }
 }

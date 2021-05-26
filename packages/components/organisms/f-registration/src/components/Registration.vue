@@ -544,9 +544,9 @@ $registration-icon-height--narrow : 74px;
 
         @include media('>=narrow') {
             // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
-            box-shadow: 0 1px 1px 0 rgba($black, 0.03),
-                    0 2px 1px -1px rgba($black, 0.07),
-                    0 1px 3px 0 rgba($black, 0.06);
+            box-shadow: 0 1px 1px 0 rgba($color-black, 0.03),
+                    0 2px 1px -1px rgba($color-black, 0.07),
+                    0 1px 3px 0 rgba($color-black, 0.06);
         }
     }
 

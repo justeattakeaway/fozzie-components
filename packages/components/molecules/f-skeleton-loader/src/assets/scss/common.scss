@@ -5,10 +5,10 @@ $theme: 'jet' !default;
 
 @import  '~@justeat/fozzie/src/scss/fozzie';
 
-$skeleton-loader-heading-height: spacing(x4);
-$skeleton-loader-text-height: spacing(x2);
-$skeleton-loader-bone-background-color: $grey--mid;
-$skeleton-loader-image-height: spacing(x8);
+$skeleton-loader-heading-height        : spacing(x4);
+$skeleton-loader-text-height           : spacing(x2);
+$skeleton-loader-bone-background-color : $color-skeleton-02;
+$skeleton-loader-image-height          : spacing(x8);
 
 @keyframes loading {
     100% {

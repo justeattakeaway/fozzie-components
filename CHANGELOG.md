@@ -11,11 +11,19 @@ v3.34.0
 - `URL Builder` to all components for testing different knobs against storybook
 
 
+v3.34.0
+------------------------------
+*May 18, 2021*
+
+### Updated 
+- fozzie to v5.0.0-beta.7 which uses new pie design tokens instead of fozzie-colour-palette vars
+
+
 v3.33.0
 ------------------------------
 *May 18, 2021*
 
-## Changed
+### Changed
 - `@wdio` to `v7` to fix a Node 14 potential package conflict.
 
 
@@ -23,7 +31,7 @@ v3.32.0
 ------------------------------
 *May 5, 2021*
 
-## Removed
+### Removed
 - `f-utils` and `fozzie-colour-pallete` packages from dependencies as they are available through `fozzie` package
 
 

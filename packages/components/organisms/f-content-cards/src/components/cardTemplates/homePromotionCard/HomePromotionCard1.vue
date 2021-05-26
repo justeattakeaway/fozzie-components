@@ -188,7 +188,7 @@ export default {
     }
 
         .c-contentCards-homePromotionCard1-subtitle--light {
-            color: $white;
+            color: $color-content-light;
         }
 
     .c-contentCards-homePromotionCard1-innerCard {
