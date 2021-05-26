@@ -345,7 +345,7 @@ export default {
 
     &:hover,
     &:focus {
-        background-color: darken($color-black, $color-hover-01);
+        background-color: darken($color-interactive-inverse, $color-hover-01);
     }
 }
 </style>

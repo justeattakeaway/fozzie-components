@@ -2176,6 +2176,13 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-alert@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-0.5.0.tgz#a5d53f2b2b0b073d5e0c46c64a67497d4019ff6b"
+  integrity sha512-7aw/1cnfYg9ZGm9j68WIoV7+uOWinrOZ752m8VVdtgECm4NgcXM7gEPEmIQ7rF7HGnvIvOzlL2IVxndaj2gaPQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-button@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.1.tgz#6b735093286422f579bd41cee93400a4d32d1b2d"
@@ -2281,6 +2288,18 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.7.0.tgz#e7f4aedfbaa614386f7fe5a180111e884c7db694"
   integrity sha512-IGknAfUH9vExdkY8hg/tcK1iAHFzA1DusKiKMHFOf3obQ/cAMA2hK7I9JCSCGjBUrcBYhpY3WdlLxu9hInJREw==
+
+"@justeat/f-mega-modal@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.9.0.tgz#834750c3ca4f66aeabd5b689628ccb5ed2d14db2"
+  integrity sha512-1OZay+2ZpelgdYvlVPV5cveZHY9Cls6yH9aQkGAYxXLzIEgmC8GfiQqtlwvLR0BQSNXr/K83asa0RUays3PE+w==
+
+"@justeat/f-popover@0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-0.2.1.tgz#0c6780bcf8c452f4b0319c14b86a3cc05904dcb0"
+  integrity sha512-myeYCy8uG5k1isc4D3sPRDFeZJnX54jvFm9zbr7b45gdx/FOVLNAiB3tEQobtakTjmfW8Jl1IxiXtuUiqBD7yg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
 
 "@justeat/f-searchbox@3.10.0":
   version "3.10.0"

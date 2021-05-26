@@ -67,7 +67,7 @@ $buttonList-font-size: 'subheading-s';
 
     &:hover,
     &:focus {
-        background-color: darken($color-black, $color-hover-01);
+        background-color: darken($color-interactive-inverse, $color-hover-01);
     }
 
     @include media('<narrow') {

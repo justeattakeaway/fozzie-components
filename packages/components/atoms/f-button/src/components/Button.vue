@@ -102,8 +102,8 @@ $btn-outline-textColor          : $color-content-interactive-tertiary;
 $btn-outline-border-color       : $color-border-default;
 
 $btn-ghost-bgColor              : transparent;
-$btn-ghost-bgColor--hover       : rgba($color-black, 0.08);
-$btn-ghost-bgColor--active      : rgba($color-black, 0.12);
+$btn-ghost-bgColor--hover       : darken($color-white, $color-hover-01);
+$btn-ghost-bgColor--active      : darken($color-white, $color-active-01);
 $btn-ghost-textColor            : $color-content-interactive-secondary;
 
 $btn-disabled-bgColor           : $color-disabled-01;

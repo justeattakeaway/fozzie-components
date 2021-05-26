@@ -9,7 +9,7 @@ $theme: 'jet' !default;
  * Component Variables
  */
 $header-logo-color                 : $color-interactive-brand;
-$header-logo-color--alt            : $color-white;
+$header-logo-color--alt            : $color-interactive-inverse;
 
 $header-height--narrow              : 48px;
 $header-button--height              : $header-height--narrow;
@@ -22,7 +22,7 @@ $header-border-color                : $color-border-subtle;
 $header-box-shadow                  : 0 3px 4px 0 rgba(0, 0, 0, 0.12);
 $header-buttonIcon-color            : $color-interactive-primary;
 $header-buttonCount-bg              : $color-interactive-primary;
-$header-buttonCount-color           : $color-white;
+$header-buttonCount-color           : $color-content-interactive-primary;
 $header-buttonCount-borderColor     : $color-white;
 
 $header--transparent-gradient-color : $color-black;
