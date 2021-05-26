@@ -75,15 +75,15 @@ export default {
             const shouldOpenInNewTab = this.$attrs.target === '_blank';
 
             if (this.isExternalSite && shouldOpenInNewTab) {
-                return this.copy.ariaDescription['externalNewLocation'];
+                return this.copy.ariaDescription.externalNewLocation;
             }
 
             if (this.isExternalSite) {
-                return this.copy.ariaDescription['external'];
+                return this.copy.ariaDescription.external;
             }
 
             if (shouldOpenInNewTab) {
-                return this.copy.ariaDescription['newLocation'];
+                return this.copy.ariaDescription.newLocation;
             }
 
             return null;
