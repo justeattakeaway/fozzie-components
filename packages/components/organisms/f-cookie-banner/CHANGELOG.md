@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.11.1
 ------------------------------
-*May 24, 2021*
+*May 26, 2021*
 
 ### Fixed
 - component object export for consuming applications
