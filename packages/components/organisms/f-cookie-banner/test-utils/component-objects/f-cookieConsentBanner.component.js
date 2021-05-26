@@ -1,3 +1,4 @@
+
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class CookieBanner extends Page {
@@ -5,7 +6,7 @@ module.exports = class CookieBanner extends Page {
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
 
-    get componentContent () { return $('[data-test-id="cookieBannerContent"]'); }
+    get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
 
     get cookieAcceptAllButton () { return this.component.$('[data-test-id="accept-all-cookies-button"]'); }
 

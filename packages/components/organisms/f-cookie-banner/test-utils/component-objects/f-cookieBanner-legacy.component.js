@@ -5,6 +5,8 @@ module.exports = class CookieBanner extends Page {
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
 
+    get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
+
     get closeButton () { return this.component.$('[data-test-id="cookieBanner-close-button"]'); }
 
     open (url) {
@@ -28,4 +30,4 @@ module.exports = class CookieBanner extends Page {
 
         return this;
     }
-};
+}
