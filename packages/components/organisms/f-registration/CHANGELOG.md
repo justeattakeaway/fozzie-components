@@ -17,16 +17,16 @@ v0.55.0
 ------------------------------
 *May 27, 2021*
 
-### Changed
-- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
+### Added
+- `f-link` to login link and terms and conditions.`
 
 
 v0.54.0
 ------------------------------
 *May 25, 2021*
 
-### Added
-- `f-link` to login link and terms and conditions.`
+### Changed
+- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
 
 
 v0.53.2
