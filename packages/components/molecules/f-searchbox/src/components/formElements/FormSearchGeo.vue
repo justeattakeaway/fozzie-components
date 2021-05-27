@@ -114,7 +114,7 @@ export default {
 .c-geo-fill-icon,
 .c-geo-outline-icon {
     path {
-        fill: $blue;
+        fill: $color-interactive-primary;
     }
 }
 </style>

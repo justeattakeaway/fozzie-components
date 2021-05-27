@@ -1,6 +1,5 @@
 <template>
-    <div
-        :class="$style['c-registration']">
+    <div :class="$style['c-registration']">
         <card-component
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
@@ -18,11 +17,12 @@
                 ]"
                 data-test-id="create-account-login-link"
                 @click="visitLoginPage">
-                <a
-                    class="o-link--bold o-link--noDecoration"
-                    :href="loginUrl">
+                <v-link
+                    is-bold
+                    :href="loginUrl"
+                    :has-text-decoration="false">
                     {{ copy.navLinks.login.text }}
-                </a>
+                </v-link>
             </p>
             <form
                 method="post"
@@ -137,23 +137,29 @@
             </form>
             <p :class="$style['c-registration-link']">
                 {{ copy.navLinks.termsAndConditions.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="ts-and-cs-link"
                     :href="copy.navLinks.termsAndConditions.url"
-                    target="_blank">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
+                    target="_blank">
+                    {{ copy.navLinks.termsAndConditions.text }}
+                </v-link>{{ copy.navLinks.termsAndConditions.suffix }}
                 {{ copy.navLinks.privacyPolicy.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="privacy-policy-link"
                     :href="copy.navLinks.privacyPolicy.url"
-                    target="_blank">{{ copy.navLinks.privacyPolicy.text }}</a>
+                    target="_blank">
+                    {{ copy.navLinks.privacyPolicy.text }}
+                </v-link>
                 {{ copy.navLinks.cookiesPolicy.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
-                    target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
+                    target="_blank">
+                    {{ copy.navLinks.cookiesPolicy.text }}
+                </v-link>{{ copy.navLinks.cookiesPolicy.suffix }}
             </p>
         </card-component>
     </div>
@@ -177,6 +183,8 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
+import VLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
@@ -225,7 +233,8 @@ export default {
         CardComponent,
         FormField,
         BagCelebrateIcon,
-        ErrorMessage
+        ErrorMessage,
+        VLink
     },
 
     mixins: [validationMixin],
@@ -544,9 +553,9 @@ $registration-icon-height--narrow : 74px;
 
         @include media('>=narrow') {
             // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
-            box-shadow: 0 1px 1px 0 rgba($black, 0.03),
-                    0 2px 1px -1px rgba($black, 0.07),
-                    0 1px 3px 0 rgba($black, 0.06);
+            box-shadow: 0 1px 1px 0 rgba($color-black, 0.03),
+                    0 2px 1px -1px rgba($color-black, 0.07),
+                    0 1px 3px 0 rgba($color-black, 0.06);
         }
     }
 

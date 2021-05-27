@@ -4,6 +4,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.121.0
+------------------------------
+*May 24, 2021*
+
+### Updated
+- Logging to include traceID from server
+
+
+v0.120.0
+------------------------------
+*May 26, 2021*
+
+### Changed
+- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
+
+
+v0.119.0
+------------------------------
+*May 24, 2021*
+
+### Added
+- Ability to handle orders with the service type `dinein`
+- Table number/name input field
+
+
 v0.118.1
 ------------------------------
 *May 24, 2021*

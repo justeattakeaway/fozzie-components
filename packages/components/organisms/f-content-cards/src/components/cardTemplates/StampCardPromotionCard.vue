@@ -125,7 +125,7 @@ $stampCard-promo-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     left: spacing(x2);
     margin: 0;
     border-radius: $border-radius;
-    border: 0.5px solid $grey--light;
+    border: 0.5px solid $color-border-default;
 
     @include media('>narrowMid') {
         top: spacing(x1.5) - 2px;
@@ -134,7 +134,7 @@ $stampCard-promo-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
 
 .c-stampCardPromotion1-info {
     padding: spacing(x2);
-    background-color: $white;
+    background-color: $color-container-default;
     position: static;
     display: block;
     text-align: left;
@@ -177,15 +177,15 @@ $stampCard-promo-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     margin-top: spacing();
 
     & {
-        color: $color-link-default;
+        color: $color-content-link;
     }
 
     &:hover, &:focus {
-        color: $color-link-hover;
+        color: darken($color-content-link, $color-hover-01);
     }
 
     &:active {
-        color: $color-link-active;
+        color: darken($color-content-link, $color-active-01);
     }
 }
 

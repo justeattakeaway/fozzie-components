@@ -70,8 +70,8 @@ export default {
 
 <style lang="scss" module>
 
-$card-bgColor                             : $color-bg--component;
-$card-borderColor                         : $color-border;
+$card-bgColor                             : $color-container-default;
+$card-borderColor                         : $color-border-strong;
 $card-borderRadius                        : $border-radius;
 $card-padding                             : spacing(x2);
 
