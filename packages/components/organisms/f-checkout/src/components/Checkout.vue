@@ -138,7 +138,7 @@
 
                 <template
                     v-if="!isLoggedIn"
-                    v-slot:cardFooter>
+                    #cardFooter>
                     <checkout-terms-and-conditions />
                 </template>
             </card>
