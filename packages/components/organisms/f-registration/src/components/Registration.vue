@@ -7,8 +7,7 @@
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="registration-component"
-            :class="$style['c-registration-card']"
-        >
+            :class="$style['c-registration-card']">
             <bag-celebrate-icon :class="$style['c-registration-icon']" />
             <p
                 v-if="showLoginLink"
@@ -17,13 +16,11 @@
                     $style['c-registration-link--subtitle']
                 ]"
                 data-test-id="create-account-login-link"
-                @click="visitLoginPage"
-            >
+                @click="visitLoginPage">
                 <v-link
                     is-bold
                     :href="loginUrl"
-                    :has-text-decoration="false"
-                >
+                    :has-text-decoration="false">
                     {{ copy.navLinks.login.text }}
                 </v-link>
             </p>
@@ -32,17 +29,14 @@
                 :class="$style['c-registration-form']"
                 @click="formStart"
                 @focus="formStart"
-                @submit.prevent="onFormSubmit"
-            >
+                @submit.prevent="onFormSubmit">
                 <section
                     id="error-summary-container"
                     role="alert"
-                    data-test-id="error-summary-container"
-                >
+                    data-test-id="error-summary-container">
                     <error-message
                         v-show="genericErrorMessage"
-                        :class="$style['c-registration-genericError']"
-                    >
+                        :class="$style['c-registration-genericError']">
                         {{ genericErrorMessage }}
                     </error-message>
                 </section>
@@ -56,16 +50,13 @@
                     name="firstName"
                     :label-text="copy.labels.firstName"
                     input-type="text"
-                    @blur="formFieldBlur('firstName')"
-                >
+                    @blur="formFieldBlur('firstName')">
                     <template
                         v-if="describeFirstnameErrorMessage"
-                        #error
-                    >
+                        #error>
                         <error-message
                             test-data-id="firstnameErrorMessage"
-                            :class="$style['c-registration-genericError']"
-                        >
+                            :class="$style['c-registration-genericError']">
                             {{ describeFirstnameErrorMessage }}
                         </error-message>
                     </template>
@@ -80,16 +71,13 @@
                     input-type="text"
                     aria-describedby="error-message-lastname"
                     :aria-invalid="!!describeLastnameErrorMessage"
-                    @blur="formFieldBlur('lastName')"
-                >
+                    @blur="formFieldBlur('lastName')">
                     <template
                         v-if="describeLastnameErrorMessage"
-                        #error
-                    >
+                        #error>
                         <error-message
                             test-data-id="lastnameErrorMessage"
-                            :class="$style['c-registration-genericError']"
-                        >
+                            :class="$style['c-registration-genericError']">
                             {{ describeLastnameErrorMessage }}
                         </error-message>
                     </template>
@@ -104,16 +92,13 @@
                     :aria-invalid="!!describeEmailErrorMessage"
                     :label-text="copy.labels.email"
                     input-type="email"
-                    @blur="formFieldBlur('email')"
-                >
+                    @blur="formFieldBlur('email')">
                     <template
                         v-if="describeEmailErrorMessage"
-                        #error
-                    >
+                        #error>
                         <error-message
                             test-data-id="emailErrorMessage"
-                            :class="$style['c-registration-genericError']"
-                        >
+                            :class="$style['c-registration-genericError']">
                             {{ describeEmailErrorMessage }}
                         </error-message>
                     </template>
@@ -128,16 +113,13 @@
                     name="password"
                     :label-text="copy.labels.password"
                     input-type="password"
-                    @blur="formFieldBlur('password')"
-                >
+                    @blur="formFieldBlur('password')">
                     <template
                         v-if="describePasswordErrorMessage"
-                        #error
-                    >
+                        #error>
                         <error-message
                             test-data-id="passwordErrorMessage"
-                            :class="$style['c-registration-genericError']"
-                        >
+                            :class="$style['c-registration-genericError']">
                             {{ describePasswordErrorMessage }}
                         </error-message>
                     </template>
@@ -149,8 +131,7 @@
                     button-type="primary"
                     button-size="large"
                     is-full-width
-                    :disabled="shouldDisableCreateAccountButton"
-                >
+                    :disabled="shouldDisableCreateAccountButton">
                     {{ copy.labels.createAccountBtn }}
                 </f-button>
             </form>
@@ -160,22 +141,25 @@
                     is-bold
                     data-test-id="ts-and-cs-link"
                     :href="copy.navLinks.termsAndConditions.url"
-                    target="_blank"
-                >{{ copy.navLinks.termsAndConditions.text }}</v-link>{{ copy.navLinks.termsAndConditions.suffix }}
+                    target="_blank">
+                    {{ copy.navLinks.termsAndConditions.text }}
+                </v-link>{{ copy.navLinks.termsAndConditions.suffix }}
                 {{ copy.navLinks.privacyPolicy.prefix }}
                 <v-link
                     is-bold
                     data-test-id="privacy-policy-link"
                     :href="copy.navLinks.privacyPolicy.url"
-                    target="_blank"
-                >{{ copy.navLinks.privacyPolicy.text }}</v-link>
+                    target="_blank">
+                    {{ copy.navLinks.privacyPolicy.text }}
+                </v-link>
                 {{ copy.navLinks.cookiesPolicy.prefix }}
                 <v-link
                     is-bold
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
-                    target="_blank"
-                >{{ copy.navLinks.cookiesPolicy.text }}</v-link>{{ copy.navLinks.cookiesPolicy.suffix }}
+                    target="_blank">
+                    {{ copy.navLinks.cookiesPolicy.text }}
+                </v-link>{{ copy.navLinks.cookiesPolicy.suffix }}
             </p>
         </card-component>
     </div>
