@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.122.0
+------------------------------
+*May 27, 2021*
+
+### Changed
+- Restored/Set the selected fulfilment time if available/valid on `mount`
+
+
 v0.118.1
 ------------------------------
 *May 24, 2021*
