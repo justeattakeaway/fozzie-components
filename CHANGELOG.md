@@ -3,12 +3,27 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.35.0
+------------------------------
+*May 27, 2021*
+
+## Changed
+- Force Percy to run in parallel
+
+
+v3.34.0
+------------------------------
+*May 18, 2021*
+
+### Updated 
+- fozzie to v5.0.0-beta.7 which uses new pie design tokens instead of fozzie-colour-palette vars
+
 
 v3.33.0
 ------------------------------
 *May 18, 2021*
 
-## Changed
+### Changed
 - `@wdio` to `v7` to fix a Node 14 potential package conflict.
 
 
@@ -16,7 +31,7 @@ v3.32.0
 ------------------------------
 *May 5, 2021*
 
-## Removed
+### Removed
 - `f-utils` and `fozzie-colour-pallete` packages from dependencies as they are available through `fozzie` package
 
 

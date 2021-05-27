@@ -73,19 +73,19 @@ $feedback-btn-font-size: 'body-s';
     background-color: transparent;
     padding: 0;
     margin: 0;
-    color: $color-link-default;
+    color: $color-content-link;
     font-weight: 500;
     @include font-size($feedback-btn-font-size);
     text-decoration: underline;
 
     &:hover {
         cursor: pointer;
-        color: $color-link-hover;
+        color: darken($color-content-link, $color-hover-01);
         background-color: transparent;
     }
     &:active,
     &:focus {
-        color: $color-link-active;
+        color: darken($color-content-link, $color-active-01);
         background-color: transparent;
     }
 }

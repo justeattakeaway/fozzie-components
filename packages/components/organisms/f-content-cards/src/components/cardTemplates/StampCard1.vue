@@ -253,7 +253,7 @@ export default {
 <style lang="scss" module>
 
 $stampCard-subStatus-colour: #017a39; /* $color-green in PIE - not in fozzie-colour-palette yet */
-$stampCard-expiryInfo-colour: $grey--dark;
+$stampCard-expiryInfo-colour: $color-content-subdued;
 
 $stampCard-iconSize-landscape: 56px;
 $stampCard-iconSize-portrait: 48px;
@@ -276,7 +276,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     &:hover,
     &:visited,
     &:focus {
-        color: $color-text;
+        color: $color-content-default;
     }
 
     @include media($stampCard-responsive-tabletViewBreakpoint) {

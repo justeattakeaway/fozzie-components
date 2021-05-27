@@ -58,7 +58,7 @@ export default {
 <style lang="scss" module>
     .c-cookieWarning {
         box-sizing: border-box;
-        background-color: $grey--darkest;
+        background-color: $color-grey;
         position: fixed;
         left: 0;
         right: 0;
@@ -74,12 +74,12 @@ export default {
 
             p {
                 @include font-size(caption);
-                color: $white;
+                color: $color-white;
                 text-align: center;
                 margin: 0 auto;
 
                     a {
-                        color: $white;
+                        color: $color-white;
                     }
             }
 

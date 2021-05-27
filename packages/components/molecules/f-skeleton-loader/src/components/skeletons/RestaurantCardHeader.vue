@@ -23,7 +23,7 @@ $restaurant-logo-width: 48px;
 
 .c-restaurantCardHeader {
     text-align: center;
-    background-color: $white;
+    background-color: $color-container-default;
     margin: auto;
     width: 96%;
     padding-bottom: spacing(x2);
@@ -34,7 +34,7 @@ $restaurant-logo-width: 48px;
     margin: auto;
     width: $restaurant-logo-width;
     height: $restaurant-logo-width;
-    border: 1px solid $white;
+    border: 1px solid $color-white;
     transform: translateY(-50%);
 }
 

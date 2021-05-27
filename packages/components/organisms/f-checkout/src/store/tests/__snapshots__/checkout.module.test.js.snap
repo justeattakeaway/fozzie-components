@@ -59,6 +59,7 @@ Object {
     "seoName": "",
   },
   "serviceType": "delivery",
+  "tableIdentifier": "",
   "time": Object {
     "from": "2020-01-01T01:30:00.000Z",
     "to": "2020-01-01T01:30:00.000Z",

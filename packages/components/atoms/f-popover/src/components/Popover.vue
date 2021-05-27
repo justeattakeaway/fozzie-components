@@ -23,7 +23,7 @@ $tooltip-width                 : 10px;
 
 .c-popover {
     @include media('>mid') {
-        background-color: $color-bg--component;
+        background-color: $color-container-default;
         box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.03),
                     0 1px 10px 1px rgba(0, 0, 0, 0.07),
                     0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -35,7 +35,7 @@ $tooltip-width                 : 10px;
         &:before {
             bottom: 100%;
             border: $tooltip-width solid transparent;
-            border-bottom: $tooltip-width solid $color-bg--component;
+            border-bottom: $tooltip-width solid $color-container-default;
             content: '';
             height: 0;
             width: 0;
