@@ -14,7 +14,7 @@ import {
     POST_ORDER_CARD_1,
     PROMOTION_CARD_1,
     PROMOTION_CARD_2
-} from "./types/cardTypes";
+} from './types/cardTypes';
 
 class BrazeConsumer {
     /**
