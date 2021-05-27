@@ -586,7 +586,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
-                throw new UpdateCheckoutError(e.message);
+                throw new UpdateCheckoutError(e);
             }
         },
 

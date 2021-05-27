@@ -10,24 +10,20 @@
                 }]"
             data-test-id="link-component"
             :aria-describedby="descriptionId"
-            :target="target"
-            :rel="rel"
-            v-bind="$attrs"
-        >
+            v-bind="$attrs">
             <slot />
         </a>
         <span
             v-if="ariaDescription"
             :id="descriptionId"
-            class="is-visuallyHidden"
-        >
+            class="is-visuallyHidden">
             {{ ariaDescription }}
         </span>
     </span>
 </template>
 
 <script>
-import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 let uid = 0;
@@ -35,15 +31,8 @@ let uid = 0;
 export default {
     name: 'VLink',
 
-    mixins: [VueGlobalisationMixin],
-
     props: {
-        isExternal: {
-            type: Boolean,
-            default: false
-        },
-
-        opensInNewLocation: {
+        isExternalSite: {
             type: Boolean,
             default: false
         },
@@ -70,30 +59,34 @@ export default {
     },
 
     data () {
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const localeConfig = tenantConfigs[locale];
+
         uid += 1;
 
         return {
-            tenantConfigs,
+            copy: { ...localeConfig },
             uid: `link-${uid}-description`
         };
     },
 
     computed: {
         ariaDescription () {
-            if (this.isExternal) {
-                return this.$t('ariaDescription.externalSite');
-            } else if (this.opensInNewLocation) {
-                return this.$t('ariaDescription.newLocation');
+            const shouldOpenInNewTab = this.$attrs.target === '_blank';
+
+            if (this.isExternalSite && shouldOpenInNewTab) {
+                return this.copy.ariaDescription.externalNewLocation;
             }
+
+            if (this.isExternalSite) {
+                return this.copy.ariaDescription.external;
+            }
+
+            if (shouldOpenInNewTab) {
+                return this.copy.ariaDescription.newLocation;
+            }
+
             return null;
-        },
-
-        target () {
-            return this.isExternal || this.opensInNewLocation ? '_blank' : null;
-        },
-
-        rel () {
-            return this.isExternal ? 'noopener' : null;
         },
 
         descriptionId () {
