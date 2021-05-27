@@ -2209,17 +2209,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.2.0.tgz#5d7213ebc8e828134d0f7b6dd13d15b71e842db0"
   integrity sha512-XfGFC4rW+K4bpqtjf+8WOVfYvL/BBiwtuPJ3BvGRzAsHluzctqalPVIrHF5kRHvPvHZcFSn9BvMkBl66qpKrQA==
 
-"@justeat/f-card@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.7.0.tgz#3179bcee050625c4391a4e97d39884a660feed8f"
-  integrity sha512-7d7RmAlaakEVGR3H/Z+21JYHc5ySallKtaEZZFZuyuugUgUVxa/51qIXYS3iYN1btMAi3WNTFhEfMBse7pfCHw==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
-"@justeat/f-card@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.8.0.tgz#f49403128ff972fbd8ac8cc600c3c0ed82a76d78"
-  integrity sha512-e1/BbN3UpeD/rnN8BBCd5a0QBuvEFenONz9bOQttvX8HzwWuZnhS2Lx/bhKICFvFtaGjHm9AuOoZ36FBdvKG+Q==
+"@justeat/f-card@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-1.2.1.tgz#8b44b73c291c8527beb6351730a90a476cb54325"
+  integrity sha512-kLu3vGhpkKZJFvMN0yutDUytQp/9ula4CsZfQeDAXPjQS+r3W6IsuqOR7cQMoO/HXRu1ccd1fS0TUHkSqgkQcA==
   dependencies:
     "@justeat/f-services" "0.13.0"
 
@@ -21621,9 +21614,9 @@ rollup@^0.66.6:
     "@types/node" "*"
 
 rollup@^2.38.5:
-  version "2.50.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.50.1.tgz#5d52d5c65ade19164d56efec98f16a461c6df38e"
-  integrity sha512-3MQhSdGpms4xjYrtR3WNHMT+VrWWM4oqUxUC770MmLo1FWFR2pr/OL81HSPC/ifmiu0uMFk0qPGLmjkSMRIESw==
+  version "2.50.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.50.2.tgz#640c500c68c698f62efb01857e0ff06fcd18181f"
+  integrity sha512-Ra5JkxSiZPZZFnvE68KWtlrLnZGg5LNaV1n1esq4ch69P7ReeoRVlrTuL/k+L/GJfcowA5An0BEhEq2Hfzwl6w==
   optionalDependencies:
     fsevents "~2.3.1"
 
