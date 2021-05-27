@@ -56,4 +56,4 @@ export const ButtonComponent = () => ({
         </f-button>`
 });
 
-ButtonComponent.storyName = 'f-button';
+ButtonComponent.storyName = 'Button';
