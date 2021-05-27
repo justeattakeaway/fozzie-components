@@ -129,7 +129,7 @@ describe('BrazeAdapter', () => {
             brazeAdapter = await BrazeAdapter.initialise(mockConfig);
         });
 
-        it('should pushShapedEventToDataLayer via dispatcher', async () => {
+        it('should pushShapedEventToDataLayer via dispatcher', () => {
             // Arrange
             const pushToDataLayer = jest.fn();
             const givenContent = { foo: 'bar' };
@@ -141,24 +141,24 @@ describe('BrazeAdapter', () => {
             expect(brazeAdapter.dispatcher.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, givenContent);
         });
 
-        it('should logCardClick via the dispatcher', async () => {
+        it('should logCardClick via the dispatcher', () => {
             // Act
-            await brazeAdapter.logCardClick(rawCards[0].id);
+            brazeAdapter.logCardClick(rawCards[0].id);
 
             // Assert
             expect(brazeAdapter.dispatcher.logCardClick).toHaveBeenCalledWith(rawCards[0].id);
         });
 
-        it('should logCardImpressions via the dispatcher', async () => {
+        it('should logCardImpressions via the dispatcher', () => {
             // Act
-            await brazeAdapter.logCardImpressions([rawCards[0].id, rawCards[1].id]);
+            brazeAdapter.logCardImpressions([rawCards[0].id, rawCards[1].id]);
 
             // Assert
             expect(brazeAdapter.dispatcher.logCardImpressions).toHaveBeenCalledWith([rawCards[0].id, rawCards[1].id]);
         });
 
         describe('unsubscribe', () => {
-            it('should unregister the consumer that this braze adapter instance created', async () => {
+            it('should unregister the consumer that this braze adapter instance created', () => {
                 // Act
                 brazeAdapter.unsubscribe();
 

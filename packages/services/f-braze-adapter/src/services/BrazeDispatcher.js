@@ -75,6 +75,9 @@ class BrazeDispatcher {
 
         this.appboyPromise = null;
 
+        // set during configure
+        this.appboy = null;
+
         this.dispatcherOptions = null;
 
         this.rawCards = null;
@@ -111,7 +114,7 @@ class BrazeDispatcher {
                 userId
             };
         } else if (!(apiKey === this.dispatcherOptions.apiKey && userId === this.dispatcherOptions.userId)) {
-            throw new Error('attempt to reinitialise appboy with different parameters');
+            throw new Error('Attempt to reinitialise appboy with different parameters');
         }
 
         window.dataLayer = window.dataLayer || [];
@@ -149,6 +152,8 @@ class BrazeDispatcher {
                     appboy.openSession();
 
                     window.appboy = appboy;
+
+                    this.appboy = appboy;
 
                     this.subscribeBraze(appboy);
 
@@ -194,15 +199,13 @@ class BrazeDispatcher {
      * Abstracts card interaction reports to braze SDK
      * @param {String} type
      * @param {Card} payload
-     * @return {Promise<boolean|*>}
+     * @return {boolean|*}
      */
-    async logEvent (type, payload) {
-        if (!this.appboyPromise) return false;
+    logEvent (type, payload) {
+        if (!this.appboy) return false;
 
-        const appboy = await this.appboyPromise;
-
-        const output = appboy[type](payload, true);
-        appboy.requestImmediateDataFlush();
+        const output = this.appboy[type](payload, true);
+        this.appboy.requestImmediateDataFlush();
 
         return output;
     }

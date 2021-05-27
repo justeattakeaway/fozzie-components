@@ -117,7 +117,7 @@ describe('BrazeConsumer', () => {
         const callbacks = consumer.getInAppMessagesCallbacks();
 
         // Assert
-        expect(callbacks).toEqual(expect.arrayContaining([expect.any(Function)]));
+        expect(callbacks).toEqual(expect.arrayContaining([mockConsumerOptions.interceptInAppMessages.messages]));
     });
 
     it('should return an array of callbacks from getLoggerCallbacks method', () => {

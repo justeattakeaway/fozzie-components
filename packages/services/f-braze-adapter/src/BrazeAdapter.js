@@ -88,8 +88,8 @@ export default class BrazeAdapter {
      * TODO use the dispatcher event stream to publish events
      * @param cardId
      */
-    async logCardClick (cardId) {
-        await this.dispatcher.logCardClick(cardId);
+    logCardClick (cardId) {
+        this.dispatcher.logCardClick(cardId);
     }
 
     /**
@@ -97,8 +97,8 @@ export default class BrazeAdapter {
      * TODO use the dispatcher event stream to publish events
      * @param cardIds
      */
-    async logCardImpressions (cardIds) {
-        await this.dispatcher.logCardImpressions(cardIds);
+    logCardImpressions (cardIds) {
+        this.dispatcher.logCardImpressions(cardIds);
     }
 
     /**

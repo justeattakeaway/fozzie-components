@@ -215,7 +215,7 @@ describe('instantiation', () => {
                     });
                 } catch (error) {
                     // Assert
-                    expect(error.message).toBe('attempt to reinitialise appboy with different parameters');
+                    expect(error.message).toBe('Attempt to reinitialise appboy with different parameters');
                 }
             });
 
@@ -395,17 +395,17 @@ describe('BrazeDispatcher operation', () => {
         });
 
         describe('logCardClick', () => {
-            it('should report back to braze a card resolved from its given ID', async () => {
+            it('should report back to braze a card resolved from its given ID', () => {
                 // Act
-                await dispatcher.logCardClick(rawCards[0].id);
+                dispatcher.logCardClick(rawCards[0].id);
 
                 // Assert
                 expect(appboy.logCardClick).toHaveBeenCalledWith(rawCards[0], true);
             });
 
-            it('should request a flush of data', async () => {
+            it('should request a flush of data', () => {
                 // Act
-                await dispatcher.logCardClick(rawCards[0].id);
+                dispatcher.logCardClick(rawCards[0].id);
 
                 // Assert
                 expect(appboy.requestImmediateDataFlush).toHaveBeenCalledAfter(appboy.logCardClick);
@@ -413,17 +413,17 @@ describe('BrazeDispatcher operation', () => {
         });
 
         describe('logCardImpressions', () => {
-            it('should report back to braze a list of cards resolved from their given IDs', async () => {
+            it('should report back to braze a list of cards resolved from their given IDs', () => {
                 // Act
-                await dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
+                dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
 
                 // Assert
                 expect(appboy.logCardImpressions).toHaveBeenCalledWith([rawCards[0], rawCards[1]], true);
             });
 
-            it('should request a flush of data', async () => {
+            it('should request a flush of data', () => {
                 // Act
-                await dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
+                dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
 
                 // Assert
                 expect(appboy.requestImmediateDataFlush).toHaveBeenCalledAfter(appboy.logCardImpressions);

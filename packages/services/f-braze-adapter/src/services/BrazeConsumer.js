@@ -22,7 +22,7 @@ class BrazeConsumer {
     constructor ({
         enabledCardTypes,
         brands = [],
-        callbacks,
+        callbacks = {},
         interceptInAppMessages = {},
         interceptInAppMessageClickEvents = {},
         loggerCallbacks = {},

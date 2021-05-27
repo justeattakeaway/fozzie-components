@@ -124,7 +124,7 @@ class BrazeConsumerRegistry {
         if (this.consumers.findIndex(c => c === consumer) !== -1) {
             this.consumers.splice(this.consumers.findIndex(c => c === consumer), 1);
         } else {
-            throw new Error("Can't find consumer in registry");
+            throw new Error('Failed to unregister consumer, consumer not in registry.');
         }
     }
 }

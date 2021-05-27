@@ -5,12 +5,11 @@ class DispatcherEventStream {
     }
 
     publish (eventName, data) {
-        if (!Array.isArray(this.subscribers[eventName])) {
-            throw new Error(`No event subscribers exist for the following event: ${eventName}`);
+        if (Array.isArray(this.subscribers[eventName])) {
+            this.subscribers[eventName].forEach(callback => {
+                callback(data);
+            });
         }
-        this.subscribers[eventName].forEach(callback => {
-            callback(data);
-        });
     }
 
     subscribe (eventName, callback) {
