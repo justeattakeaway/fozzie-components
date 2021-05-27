@@ -135,7 +135,10 @@
                     {{ copy.labels.createAccountBtn }}
                 </f-button>
             </form>
-            <p :class="$style['c-registration-link']">
+            <p
+                :class="[
+                    $style['c-registration-link'],
+                    $style['c-registration-link--bottomSpacing']]">
                 {{ copy.navLinks.termsAndConditions.prefix }}
                 <v-link
                     is-bold
@@ -544,12 +547,6 @@ $registration-icon-height--narrow : 74px;
 
     .c-registration-card {
         position: relative;
-        padding-top: spacing(x7);
-        padding-bottom: spacing(x6);
-
-        @include media('<mid') {
-            padding-bottom: spacing(x4);
-        }
 
         @include media('>=narrow') {
             // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
@@ -593,5 +590,11 @@ $registration-icon-height--narrow : 74px;
 
         .c-registration-link--subtitle {
             margin-top: - spacing(); // shift the subtitle link closer to the main title
+        }
+
+        .c-registration-link--bottomSpacing {
+            @include media('<narrow') {
+                padding-bottom: spacing(x4);
+            }
         }
 </style>
