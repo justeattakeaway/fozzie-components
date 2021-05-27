@@ -8,6 +8,13 @@ import {
 } from './utils/index';
 import InvalidConsumerConfigError from './errors/InvalidConsumerConfigError';
 import { LogService } from './logging/logging.service';
+import {
+    HOME_PROMOTION_CARD_1,
+    HOME_PROMOTION_CARD_2,
+    POST_ORDER_CARD_1,
+    PROMOTION_CARD_1,
+    PROMOTION_CARD_2
+} from "./types/cardTypes";
 
 class BrazeConsumer {
     /**
@@ -20,7 +27,7 @@ class BrazeConsumer {
     }
 
     constructor ({
-        enabledCardTypes,
+        enabledCardTypes = [],
         brands = [],
         callbacks = {},
         interceptInAppMessages = {},
@@ -29,11 +36,11 @@ class BrazeConsumer {
         customFilters = []
     }) {
         this.defaultEnabledCardTypes = [
-            'Home_Promotion_Card_1',
-            'Home_Promotion_Card_2',
-            'Post_Order_Card_1',
-            'Promotion_Card_1',
-            'Promotion_Card_2'
+            HOME_PROMOTION_CARD_1,
+            HOME_PROMOTION_CARD_2,
+            POST_ORDER_CARD_1,
+            PROMOTION_CARD_1,
+            PROMOTION_CARD_2
         ];
 
         // check list all must be true to instantiate

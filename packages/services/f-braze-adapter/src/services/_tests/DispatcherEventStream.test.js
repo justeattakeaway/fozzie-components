@@ -47,14 +47,4 @@ describe('DispatcherEventStream', () => {
         // Assert
         expect(mockCallback).not.toHaveBeenCalled();
     });
-
-    it('should throw and error if the channel being published to is NOT in the list of subscriptions', () => {
-        // Arrange
-        function mockError () {
-            dispatcherEventStream.publish(mockEventName, mockData);
-        }
-
-        // Assert
-        expect(mockError).toThrowError(`No event subscribers exist for the following event: ${mockEventName}`);
-    });
 });

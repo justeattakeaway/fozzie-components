@@ -196,7 +196,7 @@ describe('BrazeConsumerRegistry', () => {
             }
 
             // Assert
-            expect(mockError).toThrowError("Can't find consumer in registry");
+            expect(mockError).toThrowError('Failed to unregister consumer, consumer not in registry.');
         });
     });
 });
