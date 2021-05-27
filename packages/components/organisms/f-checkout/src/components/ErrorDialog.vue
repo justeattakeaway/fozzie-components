@@ -1,5 +1,6 @@
 <template>
     <mega-modal
+        ref="errorModal"
         data-test-id="checkout-issue-modal"
         has-overlay
         :title="$t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText })"
@@ -39,8 +40,15 @@ export default {
 
     data () {
         return {
-            isOpen: false
+            isOpen: true
         };
+    },
+
+    mounted () {
+        const { errorModal } = this.$refs;
+        const { megaModal } = errorModal.$refs;
+
+        if (megaModal) errorModal.open();
     },
 
     computed: {
@@ -63,10 +71,6 @@ export default {
         }
     },
 
-    mounted () {
-        this.isOpen = true;
-    },
-
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateMessage'
@@ -78,6 +82,11 @@ export default {
             }
 
             this.updateMessage();
+
+            const { errorModal } = this.$refs;
+            const { megaModal } = errorModal.$refs;
+
+            if (megaModal) errorModal.close();
         }
     }
 };
