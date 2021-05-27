@@ -44,13 +44,6 @@ export default {
         };
     },
 
-    mounted () {
-        const { errorModal } = this.$refs;
-        const { megaModal } = errorModal.$refs;
-
-        if (megaModal) errorModal.open();
-    },
-
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'message',
@@ -69,6 +62,13 @@ export default {
         serviceTypeText () {
             return this.$t(`serviceTypes.${this.serviceType}`);
         }
+    },
+
+    mounted () {
+        const { errorModal } = this.$refs;
+        const { megaModal } = errorModal.$refs;
+
+        if (megaModal) errorModal.open();
     },
 
     methods: {
