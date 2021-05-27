@@ -525,6 +525,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+
 $registration-topMargin           : spacing() * 14;
 $registration-topMargin--narrow   : spacing(x9);
 $registration-icon-width          : 97px;
@@ -591,6 +592,6 @@ $registration-icon-height--narrow : 74px;
     }
 
         .c-registration-link--subtitle {
-            margin-top: -spacing(); // shift the subtitle link closer to the main title
+            margin-top: - spacing(); // shift the subtitle link closer to the main title
         }
 </style>
