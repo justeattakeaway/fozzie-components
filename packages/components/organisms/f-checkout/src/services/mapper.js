@@ -8,10 +8,12 @@ const mapUpdateCheckoutRequest = ({
     address,
     customer = {},
     isCheckoutMethodDelivery,
+    isCheckoutMethodDineIn, // Should probably just pass the service type here instead
     time,
     userNote,
     geolocation,
-    asap
+    asap,
+    tableIdentifier
 }) => ([
     {
         op: 'add',
@@ -45,6 +47,11 @@ const mapUpdateCheckoutRequest = ({
                     }
                 } : {}),
                 geolocation
+            },
+            table: {
+                ...(isCheckoutMethodDineIn ? {
+                    identifier: tableIdentifier
+                } : {})
             }
         }
     },

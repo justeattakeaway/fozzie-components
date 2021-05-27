@@ -79,24 +79,45 @@
                         </template>
                     </form-field>
 
+                    <form-field
+                        v-if="isCheckoutMethodDineIn"
+                        :value="tableIdentifier"
+                        input-type="text"
+                        name="table-identifier"
+                        :label-text="$t('labels.tableIdentifier')"
+                        :has-error="isTableIdentifierEmpty"
+                        maxlength="12"
+                        @input="updateTableIdentifier($event)"
+                    >
+                        <template #error>
+                            <error-message
+                                v-if="isTableIdentifierEmpty"
+                                data-js-error-message
+                                data-test-id="error-table-identifier-empty"
+                            >
+                                {{ $t('validationMessages.tableIdentifier.requiredError') }}
+                            </error-message>
+                        </template>
+                    </form-field>
+
                     <address-block
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block"
                     />
 
-                    <form-selector />
+                    <form-selector v-if="shouldShowFulfilmentSelector" />
 
                     <form-field
-                        :label-text="$t('userNote.title')"
+                        :label-text="$t(`userNote.${serviceType}.title`)"
                         input-type="textarea"
-                        :placeholder="$t('userNote.placeholder')"
+                        :placeholder="$t(`userNote.${serviceType}.placeholder`)"
                         cols="30"
                         rows="7"
                         maxlength="200"
                         name="Note"
                         has-input-description
                         @input="updateUserNote($event)">
-                        {{ $t('userNote.text') }}
+                        {{ $t(`userNote.${serviceType}.text`) }}
                     </form-field>
 
                     <f-button
@@ -121,7 +142,9 @@
 
 <script>
 import { validationMixin } from 'vuelidate';
-import { required, email } from 'vuelidate/lib/validators';
+import {
+    required, email, maxLength, requiredIf
+} from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -147,6 +170,7 @@ import exceptions from '../exceptions/exceptions';
 import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
+    CHECKOUT_METHOD_DINEIN,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -303,6 +327,7 @@ export default {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'availableFulfilment',
             'address',
+            'availableFulfilment',
             'basket',
             'customer',
             'errors',
@@ -318,6 +343,7 @@ export default {
             'orderId',
             'restaurant',
             'serviceType',
+            'tableIdentifier',
             'time',
             'userNote'
         ]),
@@ -334,8 +360,16 @@ export default {
             return this.wasMobileNumberFocused && !this.isMobileNumberEmpty && !this.$v.customer.mobileNumber.isValidPhoneNumber;
         },
 
+        isTableIdentifierEmpty () {
+            return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
+        },
+
         isCheckoutMethodDelivery () {
             return this.serviceType === CHECKOUT_METHOD_DELIVERY;
+        },
+
+        isCheckoutMethodDineIn () {
+            return this.serviceType === CHECKOUT_METHOD_DINEIN;
         },
 
         tenant () {
@@ -361,6 +395,10 @@ export default {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType
             };
+        },
+
+        shouldShowFulfilmentSelector () {
+            return !this.isCheckoutMethodDineIn || this.availableFulfilment.times.length > 1;
         },
 
         messageType () {
@@ -443,6 +481,7 @@ export default {
             'setAuthToken',
             'updateCheckout',
             'updateCustomerDetails',
+            'updateTableIdentifier',
             'updateMessage',
             'updateUserNote'
         ]),
@@ -888,17 +927,21 @@ export default {
     },
 
     validations () {
-        const deliveryDetails = {
+        const validationProperties = {
             customer: {
                 mobileNumber: {
                     isValidPhoneNumber: this.isValidPhoneNumber
                 }
+            },
+            tableIdentifier: {
+                required: requiredIf(() => this.isCheckoutMethodDineIn),
+                maxLength: maxLength(12)
             }
         };
 
         if (!this.isLoggedIn) {
-            deliveryDetails.customer = {
-                ...deliveryDetails.customer,
+            validationProperties.customer = {
+                ...validationProperties.customer,
                 firstName: {
                     required
                 },
@@ -913,7 +956,7 @@ export default {
         }
 
         if (this.isCheckoutMethodDelivery) {
-            deliveryDetails.address = {
+            validationProperties.address = {
                 line1: {
                     required
                 },
@@ -927,7 +970,7 @@ export default {
             };
         }
 
-        return deliveryDetails;
+        return validationProperties;
     }
 };
 </script>

@@ -2,11 +2,13 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import getCheckoutDelivery from './checkout-delivery.json';
 import getCheckoutCollection from './checkout-collection.json';
+import getCheckoutDineIn from './checkout-dinein.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
 import createGuest from './create-guest.json';
 import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
+import getBasketDineIn from './get-basket-dinein.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutErrors from './update-checkout-errors.json';
 import checkoutServerError from './checkout-server-error.json';
@@ -26,6 +28,9 @@ export default {
             case '/checkout-collection.json':
                 mock.onGet(path).reply(200, getCheckoutCollection);
                 break;
+            case '/checkout-dinein.json':
+                mock.onGet(path).reply(200, getCheckoutDineIn);
+                break;
             case '/checkout-available-fulfilment.json':
                 mock.onGet(path).reply(200, checkoutAvailableFulfilment);
                 break;
@@ -40,6 +45,9 @@ export default {
                 break;
             case '/get-basket-collection.json':
                 mock.onGet(path).reply(200, getBasketCollection);
+                break;
+            case '/get-basket-dinein.json':
+                mock.onGet(path).reply(200, getBasketDineIn);
                 break;
             case '/update-checkout.json':
                 mock.onPatch(path).reply(200, updateCheckout);

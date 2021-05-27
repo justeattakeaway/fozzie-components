@@ -129,19 +129,19 @@ $alert-borderRadius: $border-radius;
     }
 
     .c-alert--success {
-        @include alert-variant($color-bg--accept, $color-text);
+        @include alert-variant($color-support-positive-02, $color-content-default);
     }
 
     .c-alert--warning {
-        @include alert-variant($color-bg--notification, $color-text);
+        @include alert-variant($color-support-warning-02, $color-content-default);
     }
 
     .c-alert--danger {
-        @include alert-variant($color-bg--error, $color-text);
+        @include alert-variant($color-support-error-02, $color-content-default);
     }
 
     .c-alert--info {
-        @include alert-variant($color-bg--info, $color-text);
+        @include alert-variant($color-support-info-02, $color-content-default);
     }
 
     .c-alert-heading {
@@ -178,7 +178,7 @@ $alert-borderRadius: $border-radius;
             height: 16px;
 
             * {
-                fill: $color-border--interactive;
+                fill: $color-content-subdued;
             }
         }
 </style>

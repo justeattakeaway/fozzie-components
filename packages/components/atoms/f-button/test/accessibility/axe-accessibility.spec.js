@@ -7,7 +7,10 @@ const button = new Button();
 describe('Accessibility tests', () => {
     it('a11y - should test f-button action component WCAG compliance', () => {
         // Act
-        button.open();
+        button.open({
+            type: 'primary',
+            size: 'medium'
+        });
         button.waitForActionComponent();
         const axeResults = getAccessibilityTestResults('f-button - action');
 
@@ -16,7 +19,10 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-button link component WCAG compliance', () => {
         // Act
-        button.open('link');
+        button.open({
+            type: 'link',
+            size: 'medium'
+        });
         button.waitForLinkComponent();
         const axeResults = getAccessibilityTestResults('f-button - link');
 

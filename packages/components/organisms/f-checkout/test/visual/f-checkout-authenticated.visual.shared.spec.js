@@ -1,4 +1,5 @@
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
+
 const checkout = new Checkout();
 
 describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
@@ -124,7 +125,7 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
 
         ['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode']
             .forEach(field => checkout.clearCheckoutForm(field));
-        
+
         checkout.goToPayment();
 
         // Assert
@@ -176,5 +177,50 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Visual 
     it('should display the pre-order warning.', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Pre-Order Warning', 'shared');
+    });
+});
+
+describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
+    beforeEach(() => {
+        const checkoutData = {
+            type: 'dinein',
+            isAuthenticated: true,
+            isValid: true,
+            isAsapAvailable: true
+        };
+
+        checkout.open(checkoutData);
+        checkout.waitForComponent();
+    });
+
+    it('should display the component base state.', () => {
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', 'shared');
+    });
+
+    it('should display the mandatory error messages', field => {
+        // Act
+
+        ['mobileNumber', 'tableIdentifier']
+            .forEach(field => checkout.clearCheckoutForm(field));
+
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', 'shared');
+    });
+
+    it('should display the illegal mobile number error message', () => {
+        // Arrange
+        const mobileNumberInfo = {
+            mobileNumber: '123'
+        };
+
+        // Act
+        checkout.populateDineInCheckoutForm(mobileNumberInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', 'shared');
     });
 });
