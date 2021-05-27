@@ -1,6 +1,5 @@
 <template>
-    <div
-        :class="$style['c-registration']">
+    <div :class="$style['c-registration']">
         <card-component
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
@@ -8,7 +7,8 @@
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="registration-component"
-            :class="$style['c-registration-card']">
+            :class="$style['c-registration-card']"
+        >
             <bag-celebrate-icon :class="$style['c-registration-icon']" />
             <p
                 v-if="showLoginLink"
@@ -17,26 +17,32 @@
                     $style['c-registration-link--subtitle']
                 ]"
                 data-test-id="create-account-login-link"
-                @click="visitLoginPage">
-                <a
-                    class="o-link--bold o-link--noDecoration"
-                    :href="loginUrl">
+                @click="visitLoginPage"
+            >
+                <v-link
+                    is-bold
+                    :href="loginUrl"
+                    :has-text-decoration="false"
+                >
                     {{ copy.navLinks.login.text }}
-                </a>
+                </v-link>
             </p>
             <form
                 method="post"
                 :class="$style['c-registration-form']"
                 @click="formStart"
                 @focus="formStart"
-                @submit.prevent="onFormSubmit">
+                @submit.prevent="onFormSubmit"
+            >
                 <section
                     id="error-summary-container"
                     role="alert"
-                    data-test-id="error-summary-container">
+                    data-test-id="error-summary-container"
+                >
                     <error-message
                         v-show="genericErrorMessage"
-                        :class="$style['c-registration-genericError']">
+                        :class="$style['c-registration-genericError']"
+                    >
                         {{ genericErrorMessage }}
                     </error-message>
                 </section>
@@ -50,13 +56,16 @@
                     name="firstName"
                     :label-text="copy.labels.firstName"
                     input-type="text"
-                    @blur="formFieldBlur('firstName')">
+                    @blur="formFieldBlur('firstName')"
+                >
                     <template
                         v-if="describeFirstnameErrorMessage"
-                        #error>
+                        #error
+                    >
                         <error-message
                             test-data-id="firstnameErrorMessage"
-                            :class="$style['c-registration-genericError']">
+                            :class="$style['c-registration-genericError']"
+                        >
                             {{ describeFirstnameErrorMessage }}
                         </error-message>
                     </template>
@@ -71,13 +80,16 @@
                     input-type="text"
                     aria-describedby="error-message-lastname"
                     :aria-invalid="!!describeLastnameErrorMessage"
-                    @blur="formFieldBlur('lastName')">
+                    @blur="formFieldBlur('lastName')"
+                >
                     <template
                         v-if="describeLastnameErrorMessage"
-                        #error>
+                        #error
+                    >
                         <error-message
                             test-data-id="lastnameErrorMessage"
-                            :class="$style['c-registration-genericError']">
+                            :class="$style['c-registration-genericError']"
+                        >
                             {{ describeLastnameErrorMessage }}
                         </error-message>
                     </template>
@@ -92,13 +104,16 @@
                     :aria-invalid="!!describeEmailErrorMessage"
                     :label-text="copy.labels.email"
                     input-type="email"
-                    @blur="formFieldBlur('email')">
+                    @blur="formFieldBlur('email')"
+                >
                     <template
                         v-if="describeEmailErrorMessage"
-                        #error>
+                        #error
+                    >
                         <error-message
                             test-data-id="emailErrorMessage"
-                            :class="$style['c-registration-genericError']">
+                            :class="$style['c-registration-genericError']"
+                        >
                             {{ describeEmailErrorMessage }}
                         </error-message>
                     </template>
@@ -113,13 +128,16 @@
                     name="password"
                     :label-text="copy.labels.password"
                     input-type="password"
-                    @blur="formFieldBlur('password')">
+                    @blur="formFieldBlur('password')"
+                >
                     <template
                         v-if="describePasswordErrorMessage"
-                        #error>
+                        #error
+                    >
                         <error-message
                             test-data-id="passwordErrorMessage"
-                            :class="$style['c-registration-genericError']">
+                            :class="$style['c-registration-genericError']"
+                        >
                             {{ describePasswordErrorMessage }}
                         </error-message>
                     </template>
@@ -131,29 +149,33 @@
                     button-type="primary"
                     button-size="large"
                     is-full-width
-                    :disabled="shouldDisableCreateAccountButton">
+                    :disabled="shouldDisableCreateAccountButton"
+                >
                     {{ copy.labels.createAccountBtn }}
                 </f-button>
             </form>
             <p :class="$style['c-registration-link']">
                 {{ copy.navLinks.termsAndConditions.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="ts-and-cs-link"
                     :href="copy.navLinks.termsAndConditions.url"
-                    target="_blank">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
+                    target="_blank"
+                >{{ copy.navLinks.termsAndConditions.text }}</v-link>{{ copy.navLinks.termsAndConditions.suffix }}
                 {{ copy.navLinks.privacyPolicy.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="privacy-policy-link"
                     :href="copy.navLinks.privacyPolicy.url"
-                    target="_blank">{{ copy.navLinks.privacyPolicy.text }}</a>
+                    target="_blank"
+                >{{ copy.navLinks.privacyPolicy.text }}</v-link>
                 {{ copy.navLinks.cookiesPolicy.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
-                    target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
+                    target="_blank"
+                >{{ copy.navLinks.cookiesPolicy.text }}</v-link>{{ copy.navLinks.cookiesPolicy.suffix }}
             </p>
         </card-component>
     </div>
@@ -177,6 +199,8 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
+import VLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
@@ -225,7 +249,8 @@ export default {
         CardComponent,
         FormField,
         BagCelebrateIcon,
-        ErrorMessage
+        ErrorMessage,
+        VLink
     },
 
     mixins: [validationMixin],
@@ -516,13 +541,12 @@ export default {
 </script>
 
 <style lang="scss" module>
-
-$registration-topMargin           : spacing() * 14;
-$registration-topMargin--narrow   : spacing(x9);
-$registration-icon-width          : 97px;
-$registration-icon-width--narrow  : 92px;
-$registration-icon-height         : 78px;
-$registration-icon-height--narrow : 74px;
+$registration-topMargin: spacing() * 14;
+$registration-topMargin--narrow: spacing(x9);
+$registration-icon-width: 97px;
+$registration-icon-width--narrow: 92px;
+$registration-icon-height: 78px;
+$registration-icon-height--narrow: 74px;
 
 // Form styling
 .c-registration {
@@ -533,56 +557,56 @@ $registration-icon-height--narrow : 74px;
     }
 }
 
-    .c-registration-card {
-        position: relative;
-        padding-top: spacing(x7);
-        padding-bottom: spacing(x6);
+.c-registration-card {
+    position: relative;
+    padding-top: spacing(x7);
+    padding-bottom: spacing(x6);
 
-        @include media('<mid') {
-            padding-bottom: spacing(x4);
-        }
-
-        @include media('>=narrow') {
-            // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
-            box-shadow: 0 1px 1px 0 rgba($color-black, 0.03),
-                    0 2px 1px -1px rgba($color-black, 0.07),
-                    0 1px 3px 0 rgba($color-black, 0.06);
-        }
+    @include media('<mid') {
+        padding-bottom: spacing(x4);
     }
 
-    .c-registration-icon {
-        width: $registration-icon-width;
-        height: $registration-icon-height;
-        position: absolute;
-        top: -40px;
-        left: 50%;
-        transform: translate(-35%);
-
-        @include media('<mid') {
-            width: $registration-icon-width--narrow;
-            height: $registration-icon-height--narrow;
-        }
+    @include media('>=narrow') {
+        // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
+        box-shadow: 0 1px 1px 0 rgba($color-black, 0.03),
+            0 2px 1px -1px rgba($color-black, 0.07),
+            0 1px 3px 0 rgba($color-black, 0.06);
     }
+}
 
-    .c-registration-form {
-        margin-top: spacing(x3);
+.c-registration-icon {
+    width: $registration-icon-width;
+    height: $registration-icon-height;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translate(-35%);
+
+    @include media('<mid') {
+        width: $registration-icon-width--narrow;
+        height: $registration-icon-height--narrow;
     }
+}
 
-    .c-registration-genericError {
-        margin-top: 0;
-        margin-bottom: spacing(x2);
-    }
+.c-registration-form {
+    margin-top: spacing(x3);
+}
 
-    .c-registration-submit {
-        margin-top: spacing(x4);
-        margin-bottom: spacing(x4);
-    }
+.c-registration-genericError {
+    margin-top: 0;
+    margin-bottom: spacing(x2);
+}
 
-    .c-registration-link {
-        text-align: center;
-    }
+.c-registration-submit {
+    margin-top: spacing(x4);
+    margin-bottom: spacing(x4);
+}
 
-        .c-registration-link--subtitle {
-            margin-top: - spacing(); // shift the subtitle link closer to the main title
-        }
+.c-registration-link {
+    text-align: center;
+}
+
+.c-registration-link--subtitle {
+    margin-top: -spacing(); // shift the subtitle link closer to the main title
+}
 </style>
