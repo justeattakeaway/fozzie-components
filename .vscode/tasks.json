@@ -1,7 +1,7 @@
 {
     "version": "2.0.0",
     "tasks": [{
-        "label": "CircleCI CLI",
+        "label": "CircleCI Complete Build",
         "command": "circleci local execute --config .circleci/local_config.yml --job complete-build", // Could be any other shell command
         "type": "shell"
     },
@@ -16,7 +16,7 @@
         "type":"shell"
     },
     {
-        "label": "CircleCI Unit Tests",
+        "label": "CircleCI Unit + Integration Tests",
         "command": "circleci local execute --config .circleci/local_config.yml --job unit-build",
         "type":"shell"
     }
