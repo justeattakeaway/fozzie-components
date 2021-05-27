@@ -56,14 +56,12 @@ export default {
 <style lang="scss" module>
 @import '../../assets/scss/common';
 
-$suggestions-item-highlight-colour: $grey--light;
-$suggestions-bg-colour: $white;
-$suggestions-shadow-colour: $grey--midDark;
+$suggestions-shadow: $color-grey-45 0 5px 6px -2px;
 
 .c-search-suggestions {
     $border-radius: 2px;
-    background: $suggestions-bg-colour;
-    box-shadow: $suggestions-shadow-colour 0 5px 6px -2px;
+    background: $color-container-default;
+    box-shadow: $suggestions-shadow;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
     position: absolute;
@@ -79,7 +77,7 @@ $suggestions-shadow-colour: $grey--midDark;
     display: block;
     width: 100%;
     border: 0;
-    border-top: $suggestions-item-highlight-colour 1px solid;
+    border-top: $color-border-default 1px solid;
     cursor: pointer;
     font-family: Arial, sans-serif;
     font-size: 11px;
@@ -93,7 +91,7 @@ $suggestions-shadow-colour: $grey--midDark;
 
     &:hover,
     &.selected {
-        background: $suggestions-item-highlight-colour;
+        background: $color-container-strong;
     }
 }
 

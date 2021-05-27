@@ -78,7 +78,7 @@ export default {
     transform: rotate(180deg);
 
     path {
-        fill: $grey--dark;
+        fill: $color-content-subdued;
     }
 }
 

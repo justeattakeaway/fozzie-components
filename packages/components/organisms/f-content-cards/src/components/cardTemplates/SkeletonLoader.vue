@@ -77,17 +77,17 @@ export default {
     .c-skeletonLoader-card:empty {
         position: relative;
         height: 403px; // 1
-        background-color: $white;
+        background-color: $color-container-default;
         background-repeat: no-repeat;
 
         // 2
-        background-image: radial-gradient(0 at 0 0, $grey--mid 99%, transparent 0),
+        background-image: radial-gradient(0 at 0 0, $color-grey-40 99%, transparent 0),
                           linear-gradient(to right, white 20px, transparent 0), // 2.1 right margin
-                          linear-gradient($grey--mid 20px, transparent 0), // 2.2 title placeholder
-                          linear-gradient($grey--mid 220px, transparent 0), // 2.3 main image placeholder
-                          linear-gradient($grey--mid 20px, transparent 0), // 2.4 line one placeholder
-                          linear-gradient($grey--mid 20px, transparent 0), // 2.5 line two placeholder
-                          linear-gradient($grey--mid 20px, transparent 0); // 2.6 line three placeholder
+                          linear-gradient($color-grey-40 20px, transparent 0), // 2.2 title placeholder
+                          linear-gradient($color-grey-40 220px, transparent 0), // 2.3 main image placeholder
+                          linear-gradient($color-grey-40 20px, transparent 0), // 2.4 line one placeholder
+                          linear-gradient($color-grey-40 20px, transparent 0), // 2.5 line two placeholder
+                          linear-gradient($color-grey-40 20px, transparent 0); // 2.6 line three placeholder
         background-size: 100px 457px,
                          20px 100%, // 2.1
                          50% 20px, // 2.2
@@ -116,12 +116,12 @@ export default {
 
         &.c-skeletonLoader-card--promo {
             // 3
-            background-image: radial-gradient(0 at 0 0, $grey--mid 99%, transparent 0),
-                              linear-gradient(to left, $grey--dark 46px, transparent 0), // 3.1 icon placeholder
-                              linear-gradient($grey--mid 170px, transparent 0), // 3.2 main image placeholder
-                              linear-gradient($grey--mid 20px, transparent 0), //  3.3 line one placeholder
-                              linear-gradient($grey--mid 20px, transparent 0), // 3.4 line two placeholder
-                              linear-gradient($grey--mid 20px, transparent 0); // 3.5 line three placeholder
+            background-image: radial-gradient(0 at 0 0, $color-grey-40 99%, transparent 0),
+                              linear-gradient(to left, $color-grey-50 46px, transparent 0), // 3.1 icon placeholder
+                              linear-gradient($color-grey-40 170px, transparent 0), // 3.2 main image placeholder
+                              linear-gradient($color-grey-40 20px, transparent 0), //  3.3 line one placeholder
+                              linear-gradient($color-grey-40 20px, transparent 0), // 3.4 line two placeholder
+                              linear-gradient($color-grey-40 20px, transparent 0); // 3.5 line three placeholder
 
             background-size: 100px 457px,
                              50% 46px, // 3.1

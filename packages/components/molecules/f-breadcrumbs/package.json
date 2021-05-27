@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-breadcrumbs",
   "description": "Fozzie Bread Crumbs – Provides clickable paths back to previous pages",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/f-breadcrumbs.umd.min.js",
   "files": [
     "dist",

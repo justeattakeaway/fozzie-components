@@ -214,7 +214,7 @@ export default {
 
     .c-contentCard-subTitle {
         @include font-size(body-l);
-        font-weight: $font-weight-base;
+        font-weight: $font-weight-regular;
         margin-top: spacing();
     }
 
@@ -230,7 +230,7 @@ export default {
         flex-direction: column;
         align-items: center;
         min-height: 164px; // min-height set to the height of an card with a one-line title
-        background-color: $white;
+        background-color: $color-container-default;
         padding: spacing(x2);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: 0 0 $border-radius $border-radius;
@@ -244,7 +244,7 @@ export default {
     }
 
     .c-contentCard-thumbnail {
-        border: 1px solid $grey--lighter;
+        border: 1px solid $color-border-subtle;
         margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
         width: 48px;
         min-height: 48px;
@@ -269,7 +269,7 @@ export default {
             padding: spacing(x3) 0 0 0;
 
             @include media ('<mid') {
-                border: 1px solid $color-border;
+                border: 1px solid $color-border-strong;
                 padding: spacing(x3);
                 border-radius: 0 0 $post-order-card-radius $post-order-card-radius;
             }
