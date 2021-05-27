@@ -90,7 +90,7 @@ export default {
     },
 
     mounted () {
-        this.initFulfilmentTime(this.fulfilmentTimes, this.time);
+        this.initFulfilmentTime(this.fulfilmentTimes);
     },
 
     methods: {
@@ -128,11 +128,10 @@ export default {
          * Note; we always need to pre-select a time so the user can always proceeds with a selected time.
          *
          * @param {array} times - An array of available fulfilment times
-         * @param {object} selectedFulfilmentTime - The previously set time (if any)
          */
-        initFulfilmentTime (times, selectedFulfilmentTime = {}) {
-            if (selectedFulfilmentTime.from && times.length && times.find(i => i.value === selectedFulfilmentTime.from)) {
-                this.selectedAvailableFulfilmentTime = selectedFulfilmentTime.from;
+        initFulfilmentTime (times) {
+            if (this.time && this.time.from && times.length && times.find(i => i.value === this.time.from)) {
+                this.selectedAvailableFulfilmentTime = this.time.from;
             } else if (times.length && times[0].value) {
                 this.updateFulfilmentTime({
                     from: times[0].value,
