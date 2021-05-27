@@ -525,12 +525,12 @@ export default {
 </script>
 
 <style lang="scss" module>
-$registration-topMargin: spacing() * 14;
-$registration-topMargin--narrow: spacing(x9);
-$registration-icon-width: 97px;
-$registration-icon-width--narrow: 92px;
-$registration-icon-height: 78px;
-$registration-icon-height--narrow: 74px;
+$registration-topMargin           : spacing() * 14;
+$registration-topMargin--narrow   : spacing(x9);
+$registration-icon-width          : 97px;
+$registration-icon-width--narrow  : 92px;
+$registration-icon-height         : 78px;
+$registration-icon-height--narrow : 74px;
 
 // Form styling
 .c-registration {
@@ -541,56 +541,56 @@ $registration-icon-height--narrow: 74px;
     }
 }
 
-.c-registration-card {
-    position: relative;
-    padding-top: spacing(x7);
-    padding-bottom: spacing(x6);
+    .c-registration-card {
+        position: relative;
+        padding-top: spacing(x7);
+        padding-bottom: spacing(x6);
 
-    @include media('<mid') {
-        padding-bottom: spacing(x4);
+        @include media('<mid') {
+            padding-bottom: spacing(x4);
+        }
+
+        @include media('>=narrow') {
+            // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
+            box-shadow: 0 1px 1px 0 rgba($color-black, 0.03),
+                0 2px 1px -1px rgba($color-black, 0.07),
+                0 1px 3px 0 rgba($color-black, 0.06);
+        }
     }
 
-    @include media('>=narrow') {
-        // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
-        box-shadow: 0 1px 1px 0 rgba($color-black, 0.03),
-            0 2px 1px -1px rgba($color-black, 0.07),
-            0 1px 3px 0 rgba($color-black, 0.06);
+    .c-registration-icon {
+        width: $registration-icon-width;
+        height: $registration-icon-height;
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translate(-35%);
+
+        @include media('<mid') {
+            width: $registration-icon-width--narrow;
+            height: $registration-icon-height--narrow;
+        }
     }
-}
 
-.c-registration-icon {
-    width: $registration-icon-width;
-    height: $registration-icon-height;
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translate(-35%);
-
-    @include media('<mid') {
-        width: $registration-icon-width--narrow;
-        height: $registration-icon-height--narrow;
+    .c-registration-form {
+        margin-top: spacing(x3);
     }
-}
 
-.c-registration-form {
-    margin-top: spacing(x3);
-}
+    .c-registration-genericError {
+        margin-top: 0;
+        margin-bottom: spacing(x2);
+    }
 
-.c-registration-genericError {
-    margin-top: 0;
-    margin-bottom: spacing(x2);
-}
+    .c-registration-submit {
+        margin-top: spacing(x4);
+        margin-bottom: spacing(x4);
+    }
 
-.c-registration-submit {
-    margin-top: spacing(x4);
-    margin-bottom: spacing(x4);
-}
+    .c-registration-link {
+        text-align: center;
+    }
 
-.c-registration-link {
-    text-align: center;
-}
-
-.c-registration-link--subtitle {
-    margin-top: -spacing(); // shift the subtitle link closer to the main title
-}
+    .c-registration-link--subtitle {
+        margin-top: -spacing(); // shift the subtitle link closer to the main title
+    }
 </style>
