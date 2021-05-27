@@ -71,8 +71,7 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| `isExternal` | `Boolean` | `false` | Adds `target=_blank` and `rel=noopener` attributes.<br><br>Sets aria description to 'Opens an external site in a new window/screen/tab' |
-| `opensInNewLocation` | `Boolean` | `false` | Sets `target=_blank` attribute.<br><br>Sets aria description to  'Opens in a new window/screen/tab' |
+| `isExternalSite` | `String` | `false` | Sets aria description to 'Opens and external site' or 'Opens and external site in a new window/screen/tab' depending on target of link.|
 | `isBold` | `Boolean` | `false` | Sets link text to bold. |
 | `hasTextDecoration` | `Boolean` | `true` | Adds underline to link text. |
 | `isFullWidth` | `Boolean` | `false` | Link set as full width. |
