@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.34.0
+v3.35.0
 ------------------------------
-*May 24, 2021*
+*May 27, 2021*
 
 ## Added
 - CircleCI config for running `build`, `lint` & `unit testing` steps individually locally.
