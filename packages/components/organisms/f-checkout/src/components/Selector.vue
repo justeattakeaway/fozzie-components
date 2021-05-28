@@ -88,7 +88,7 @@ export default {
     },
 
     mounted () {
-        this.initFulfilmentTime(this.fulfilmentTimes);
+        this.initFulfilmentTime();
     },
 
     methods: {
@@ -123,21 +123,23 @@ export default {
          * If we have previously set a time then initialise the `selected dropdown item` with that value; if
          * currently present in the Fulfilment times array, otherwise initialise the with first value in the
          * Fulfilment times array.
-         * Note; we always need to pre-select a time so the user can always proceeds with a selected time.
+         * Note; we always need to pre-select a time; if available, so the user can always proceeds with a selected time.
          *
          * @param {array} times - An array of available fulfilment times
          */
-        initFulfilmentTime (times) {
-            if (this.time && this.time.from && times.length && times.find(i => i.value === this.time.from)) {
-                this.selectedAvailableFulfilmentTime = this.time.from;
-            } else if (times.length && times[0].value) {
-                this.updateFulfilmentTime({
-                    from: times[0].value,
-                    to: times[0].value
-                });
+        initFulfilmentTime () {
+            const times = this.fulfilmentTimes || [];
 
-                this.selectedAvailableFulfilmentTime = times[0].value;
-            }
+            let selectedTime = (times.some(i => i.value === this.time.from) && this.time.from)
+                                || (times.length && times[0].value);
+            selectedTime = selectedTime === 0 ? '' : selectedTime;
+
+            this.updateFulfilmentTime({
+                from: selectedTime,
+                to: selectedTime
+            });
+
+            this.selectedAvailableFulfilmentTime = selectedTime;
         },
 
         /**

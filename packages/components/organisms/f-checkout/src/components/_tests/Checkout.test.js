@@ -1699,6 +1699,38 @@ describe('Checkout', () => {
                     // Assert
                     expect($logger.logInfo).toHaveBeenCalled();
                 });
+
+                it('should call `$logger` with the correct arguments', () => {
+                    // Arrange
+                    const eventData = {
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY
+                    };
+                    const error = new Error();
+                    error.name = 'Test name';
+                    error.message = 'Test message';
+                    error.stack = 'Test stack';
+                    error.errorCode = 'Test error code';
+
+                    const expectedError = {
+                        exception: error.name,
+                        exceptionMessage: error.message,
+                        exceptionStackTrace: error.stack,
+                        errorCode: error.errorCode
+                    };
+                    const logMessage = 'Logger says hi';
+
+                    // Act
+                    wrapper.vm.logInvoker({
+                        message: logMessage,
+                        data: eventData,
+                        logMethod: $logger.logError,
+                        error
+                    });
+
+                    // Assert
+                    expect($logger.logError).toHaveBeenCalledWith(logMessage, store, { data: eventData, tags: 'checkout', ...expectedError });
+                });
             });
         });
 
