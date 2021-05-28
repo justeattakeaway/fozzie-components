@@ -1,16 +1,18 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
-const checkout = new Checkout();
+let checkout;
 
 describe('f-checkout "dinein" component tests', () => {
     beforeEach(() => {
-        const checkoutData = {
-            type: 'dinein',
-            isAuthenticated: true,
-            isValid: true
-        };
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'dinein')
+                .withQuery('&knob-Is User Logged In', true);
 
-        checkout.open(checkoutData);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
         checkout.waitForComponent();
     });
 

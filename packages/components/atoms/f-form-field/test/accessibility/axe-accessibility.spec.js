@@ -1,12 +1,14 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const FormField = require('../../test-utils/component-objects/f-form-field.component');
 
-const formfield = new FormField();
+const formfield = new FormField('atom', 'form-field-component');
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        formfield.open();
+        const pageUrl = buildUrl(formfield.componentType, formfield.componentName, formfield.path);
+        formfield.open(pageUrl);
         formfield.waitForComponent();
     });
 

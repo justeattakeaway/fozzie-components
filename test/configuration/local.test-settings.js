@@ -1,6 +1,6 @@
 const settings = () => ({
     bail: 0,
-    logLevel: 'info',
+    logLevel: 'silent',
     maxInstances: 1
 });
 

@@ -1,12 +1,14 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const Card = require('../../test-utils/component-objects/f-card.component');
 
-const card = new Card();
+const card = new Card('atom', 'card-component');
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        card.open();
+        const pageUrl = buildUrl(card.componentType, card.componentName, card.path);
+        card.open(pageUrl);
         card.waitForComponent();
     });
 
