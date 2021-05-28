@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (add to next release)
+------------------------------
+*May 28, 2021*
+
+### Added
+- `serviceType` to data-test-id
+
+
 v0.123.0
 ------------------------------
 *May 27, 2021*
@@ -35,14 +43,6 @@ v0.120.0
 
 ### Changed
 - CSS variables to use pie design tokens instead of fozzie-colour-palette vars
-
-
-Latest (add to next release)
-------------------------------
-*May 28, 2021*
-
-### Added
-- `serviceType` to data-test-id
 
 
 v0.119.0
