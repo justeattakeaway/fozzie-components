@@ -1,8 +1,24 @@
 {
     "version": "2.0.0",
     "tasks": [{
-        "label": "CircleCI CLI",
-        "command": "circleci local execute --config .circleci/local_config.yml --job local", // Could be any other shell command
+        "label": "CircleCI Complete Build",
+        "command": "circleci local execute --config .circleci/local_config.yml --job complete-build", // Could be any other shell command
         "type": "shell"
-    }]
+    },
+    {
+        "label": "CircleCI Build",
+        "command": "circleci local execute --config .circleci/local_config.yml --job build",
+        "type": "shell"
+    },
+    {
+        "label": "CircleCI Lint",
+        "command": "circleci local execute --config .circleci/local_config.yml --job lint-build",
+        "type":"shell"
+    },
+    {
+        "label": "CircleCI Unit + Integration Tests",
+        "command": "circleci local execute --config .circleci/local_config.yml --job unit-build",
+        "type":"shell"
+    }
+    ] 
 }
