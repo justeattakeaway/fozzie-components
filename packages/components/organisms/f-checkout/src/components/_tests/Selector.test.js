@@ -268,7 +268,7 @@ describe('Selector', () => {
                     expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
                 });
 
-                it('should make a call to `updateFulfilmentTime` with the first available `to` and `from` times', () => {
+                it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
                     // Assert
                     expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
                         from: '2020-01-01T01:00:00.000Z',
@@ -276,7 +276,7 @@ describe('Selector', () => {
                     });
                 });
 
-                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment `times`', () => {
+                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                     // Assert
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:00:00.000Z');
                 });
@@ -302,7 +302,7 @@ describe('Selector', () => {
                         expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
                     });
 
-                    it('should make a call to `updateFulfilmentTime` with the first available fulfilment `times`', () => {
+                    it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
                         // Assert
                         expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
                             from: '2020-01-01T01:15:00.000Z',
@@ -310,7 +310,7 @@ describe('Selector', () => {
                         });
                     });
 
-                    it('should update `selectedAvailableFulfilmentTime` with the pre-selected fulfilment time`', () => {
+                    it('should update `selectedAvailableFulfilmentTime` with the pre-selected fulfilment time', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:15:00.000Z');
                     });
@@ -335,7 +335,7 @@ describe('Selector', () => {
                         expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
                     });
 
-                    it('should make a call to `updateFulfilmentTime` with the first available fulfilment `times`', () => {
+                    it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
                         // Assert
                         expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
                             from: '2020-01-01T01:00:00.000Z',
@@ -343,7 +343,7 @@ describe('Selector', () => {
                         });
                     });
 
-                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment `times`', () => {
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:00:00.000Z');
                     });
@@ -372,7 +372,7 @@ describe('Selector', () => {
                     expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
                 });
 
-                it('should make a call to `updateFulfilmentTime` with the first available fulfilment `times`', () => {
+                it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
                     // Assert
                     expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
                         from: '',
@@ -380,7 +380,7 @@ describe('Selector', () => {
                     });
                 });
 
-                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment `times`', () => {
+                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                     // Assert
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('');
                 });
@@ -409,7 +409,7 @@ describe('Selector', () => {
                     expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
                 });
 
-                it('should make a call to `updateFulfilmentTime` with the first available fulfilment `times`', () => {
+                it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
                     // Assert
                     expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
                         from: '',
@@ -417,7 +417,7 @@ describe('Selector', () => {
                     });
                 });
 
-                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment `times`', () => {
+                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                     // Assert
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('');
                 });
