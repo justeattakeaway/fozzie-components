@@ -4,7 +4,8 @@ function buildErrorLogFields (error) {
             exception: error.name,
             exceptionMessage: error.message,
             exceptionStackTrace: error.stack,
-            traceId: error.traceId || (error.response && error.response.data.traceId)
+            traceId: error.traceId || (error.response && error.response.data.traceId),
+            errorCode: error.errorCode
         })
     };
 }
