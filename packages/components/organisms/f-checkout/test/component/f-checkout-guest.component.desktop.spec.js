@@ -1,20 +1,22 @@
 import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
-const checkout = new Checkout();
+let checkout;
 
 describe('f-checkout "guest" component tests - @browserstack', () => {
     beforeEach(() => {
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: false,
-            isValid: true
-        };
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', false)
+                .withQuery('&knob-Is ASAP available', true);
 
-        checkout.open(checkoutData);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        checkout.open(pageUrl);
         checkout.waitForComponent();
-        browser.pause(2000);
     });
 
     it('should navigate to correct url when the login link is clicked', () => {

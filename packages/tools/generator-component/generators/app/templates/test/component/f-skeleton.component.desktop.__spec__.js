@@ -1,9 +1,12 @@
 const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.class %>.component');
-const <%= name.class %> = new <%= name.filename %>();
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
 describe('f-<%= name.class %> component tests', () => {
     beforeEach(() => {
-        <%= name.class %>.open();
+
+        const pageUrl = buildUrl(<%= name.class %>.componentType, <%= name.class %>.componentName, <%= name.class %>.path);
+
+        <%= name.class %>.open(pageUrl)
         <%= name.class %>.waitForComponent();
     });
 
