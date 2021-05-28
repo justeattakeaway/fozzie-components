@@ -1,11 +1,14 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 const Registration = require('../../test-utils/component-objects/f-registration.component');
 
-const registration = new Registration();
+const registration = new Registration('organism', 'registration-component');
+
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        registration.open();
+        const pageUrl = buildUrl(registration.componentType, registration.componentName, registration.path);
+        registration.open(pageUrl);
         registration.waitForComponent();
     });
 
