@@ -65,10 +65,9 @@ export default {
     },
 
     mounted () {
-        const { errorModal } = this.$refs;
-        const { megaModal } = errorModal.$refs;
+        const modalContext = this.getModalContext();
 
-        if (megaModal) errorModal.open();
+        if (modalContext) modalContext.open();
     },
 
     methods: {
@@ -76,17 +75,25 @@ export default {
             'updateMessage'
         ]),
 
+        getModalContext () {
+            const { errorModal } = this.$refs;
+            const { megaModal } = errorModal.$refs;
+
+            if (megaModal) return errorModal;
+
+            return null;
+        },
+
         closeErrorDialog () {
+            const modalContext = this.getModalContext();
+
             if (this.message && this.message.shouldRedirectToMenu) {
                 window.location.assign(this.restaurantMenuPageUrl);
             }
 
             this.updateMessage();
 
-            const { errorModal } = this.$refs;
-            const { megaModal } = errorModal.$refs;
-
-            if (megaModal) errorModal.close();
+            if (modalContext) modalContext.close();
         }
     }
 };

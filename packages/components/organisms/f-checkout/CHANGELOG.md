@@ -11,6 +11,14 @@ v0.123.0
 - Scrolling broken when clicking `OK` within `megaModal` component.
 
 
+v0.121.0
+------------------------------
+*May 24, 2021*
+
+### Updated
+- Logging to include traceID from server
+
+
 v0.120.0
 ------------------------------
 *May 26, 2021*
