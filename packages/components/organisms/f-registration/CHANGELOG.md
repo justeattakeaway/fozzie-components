@@ -4,6 +4,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.56.0
+------------------------------
+*May 27, 2021*
+
+### Changed
+- f-card package version updated to 1.2.1
+- Some styles were cleaned up in connection with new f-card version
+
+
+v0.55.0
+------------------------------
+*May 27, 2021*
+
+### Added
+- `f-link` to login link and terms and conditions.`
+
+
 v0.54.0
 ------------------------------
 *May 25, 2021*

@@ -11,6 +11,23 @@ v0.123.0
 - Scrolling broken when clicking `OK` within `megaModal` component.
 
 
+v0.122.0
+------------------------------
+*May 27, 2021*
+
+### Changed
+- f-card package version updated to 1.2.1 to include card footer for T&C
+- T&C styles were cleaned up
+
+
+v0.121.0
+------------------------------
+*May 24, 2021*
+
+### Updated
+- Logging to include traceID from server
+
+
 v0.120.0
 ------------------------------
 *May 26, 2021*

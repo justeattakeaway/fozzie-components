@@ -69,20 +69,22 @@ Call the component in your template:
 
 ## Configuration
 
+If the `f-button` component has an `href` attribute set, it will automatically change the markup of this component to be an `<a>` tag, while still visually looking like a button component. If no `href` is set, it will render a `<button>` tag.
+
+
 ### Props
 
 `f-button` has a number of props that allow you to customise its functionality.
 
 The props that can be defined are as follows:
 
-| Prop  | Type  | Required | Default | Description |
-| ----- | ----- | -------- |------- | ----------- |
-| `buttonType` | `String` | No |`primary` | Sets the modifier theme for styling.<br>Options: `primary`, `secondary`, `outline`, `ghost`, `link`. |
-| `buttonSize` | `String` | No |`medium` | Sets the size.<br>Options: `large`, `medium`, `small`, `xsmall`. |
-| `isFullWidth` | `Boolean` | No |  `false` | Controls whether or not to apply fullWidth modifier class |
-| `actionType` | `String` | No |`button` | Sets the action button type.<br>Options: `button`, `submit`, `reset`. |
-| `href` | `String` | No |  N/A | If provided, replaces `Action` button or `Link` button. |
-| `isIcon` | `Boolean` | No |  `false` | Sets the button style to be displayed like an icon . |
+| Prop          | Type       | Required   | Default  | Description |
+| :---          | :---:      | :---:      | :---:    | :---        |
+| `actionType`  | `String`   | No         | `button` | Sets the action button type.<br>Options: `button`, `submit`, `reset`. |
+| `buttonType`  | `String`   | No         | `primary`| Sets the modifier theme for styling.<br>Options: `primary`, `secondary`, `outline`, `ghost`, `link`. |
+| `buttonSize`  | `String`   | No         | `medium` | Sets the button size.<br>Options: `large`, `medium`, `small`, `xsmall`. |
+| `isFullWidth` | `Boolean`  | No         | `false`  | Controls whether or not to apply `fullWidth` modifier class |
+| `isIcon`      | `Boolean`  | No         | `false`  | when true, changes the button style to be displayed as an Icon Button (Icon, with no text). |
 
 ### CSS Classes
 
