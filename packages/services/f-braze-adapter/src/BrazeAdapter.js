@@ -89,7 +89,7 @@ export default class BrazeAdapter {
      * @param cardId
      */
     logCardClick (cardId) {
-        this.dispatcher.logCardClick(cardId);
+        return this.dispatcher.logCardClick(cardId);
     }
 
     /**
@@ -98,7 +98,7 @@ export default class BrazeAdapter {
      * @param cardIds
      */
     logCardImpressions (cardIds) {
-        this.dispatcher.logCardImpressions(cardIds);
+        return this.dispatcher.logCardImpressions(cardIds);
     }
 
     /**
