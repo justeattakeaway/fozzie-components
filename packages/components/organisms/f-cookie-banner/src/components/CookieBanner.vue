@@ -1,34 +1,31 @@
 <template>
-    <div v-if="shouldHideBanner && copy.administerCookiePolicy">
-        <administration-link :message="copy.administerCookiePolicy" />
-    </div>
-    <div v-else>
+    <div v-if="!shouldHideBanner || !copy.administerCookiePolicy">
         <mega-modal
             v-if="!legacyBanner"
             ref="cookieBanner"
-            :is-open="!shouldHideBanner"
-            is-positioned-bottom
             :has-close-button="false"
-            data-cookie-consent-overlay>
+            :is-open="!shouldHideBanner"
+            data-cookie-consent-overlay
+            is-positioned-bottom>
             <div
                 :class="[
                     $style['c-cookieBanner-card'],
                     { [$style['c-cookieBanner-ios']]: isIosBrowser }
                 ]"
-                data-test-id="cookieConsentBanner"
-                role="dialog"
-                aria-modal="true"
+                aria-describedby="cookieConsentDescription"
                 aria-labelledby="cookieConsentTitle"
-                aria-describedby="cookieConsentDescription">
+                aria-modal="true"
+                data-test-id="cookieConsentBanner"
+                role="dialog">
                 <div
                     :class="$style['c-cookieBanner-content']"
                     data-test-id="cookieBannerContent">
                     <h2
                         id="cookieConsentTitle"
                         ref="cookieBannerHeading"
-                        tabindex="0"
                         :class="$style['c-cookieBanner-title']"
-                        data-consent-title>
+                        data-consent-title
+                        tabindex="0">
                         {{ copy.mainTitle }}
                     </h2>
                     <div id="cookieConsentDescription">
@@ -43,9 +40,9 @@
                         <p :class="$style['c-cookieBanner-text']">
                             {{ copy.textLine3 }}
                             <a
-                                data-test-id="cookie-policy-link"
-                                :href="copy.cookiePolicyLinkUrl"
                                 :class="$style['c-cookieBanner-link']"
+                                :href="copy.cookiePolicyLinkUrl"
+                                data-test-id="cookie-policy-link"
                                 target="_blank">
                                 {{ copy.cookiePolicyLinkText }}
                             </a>
@@ -75,13 +72,19 @@
 
         <legacy-banner
             v-else
-            :should-hide-legacy-banner="shouldHideBanner"
-            :legacy-banner-text="copy.legacyBannerText"
             :cookie-policy-link-url="copy.cookiePolicyLinkUrl"
-            :legacy-banner-link-text="copy.legacyBannerLinkText"
             :legacy-banner-close-banner-text="copy.legacyBannerCloseBannerText"
+            :legacy-banner-link-text="copy.legacyBannerLinkText"
+            :legacy-banner-text="copy.legacyBannerText"
+            :should-hide-legacy-banner="shouldHideBanner"
             @hide-legacy-banner="hideBanner"
         />
+    </div>
+    <div v-else>
+        <administration-link
+            :message="copy.administerCookiePolicy"
+            :use-grey-background="useGreyBackground"
+            @resetPolicy="resetPolicy" />
     </div>
 </template>
 
@@ -128,6 +131,10 @@ export default {
         cookieExpiry: {
             type: Number,
             default: 7776000
+        },
+        useGreyBackground: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -153,7 +160,7 @@ export default {
     computed: {
         /**
          * Check if the legacy cookie banner should be used
-         * @returns {Bool}
+         * @returns {boolean}
          */
         legacyBanner () {
             return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
@@ -165,16 +172,23 @@ export default {
             this.shouldHideBanner = !!newVal;
         }
     },
-    beforeMount () {
-        this.checkCookieBannerCookie();
-    },
-    mounted () {
-        this.focusOnTitle();
 
+    mounted () {
+        this.checkCookieBannerCookie();
+        if (!this.shouldHideBanner) {
+            this.focusOnTitle();
+        }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
     },
 
     methods: {
+        /** Revoke all cookie permissions
+         */
+        resetPolicy () {
+            this.isHidden = false;
+            this.shouldHideBanner = false;
+        },
+
         /**
          * Actions for "Accept all cookies" button
          */
@@ -310,82 +324,83 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-cookieBanner-card {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        background-color: $color-container-default;
-        z-index: 99999992;
-    }
+.c-cookieBanner-card {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $color-container-default;
+    z-index: 99999992;
+}
 
-    .c-cookieBanner-cta {
-        min-width: 352px;
-    }
+.c-cookieBanner-cta {
+    min-width: 352px;
+}
 
-    .c-cookieBanner-text {
-        margin: 0;
-        padding: 0;
-    }
+.c-cookieBanner-text {
+    margin: 0;
+    padding: 0;
+}
 
-    .c-cookieBanner-content {
-        text-align: left;
-    }
+.c-cookieBanner-content {
+    text-align: left;
+}
 
-    .c-cookieBanner-title {
-        @include font-size(heading-m);
-        font-weight: $font-weight-bold;
-        margin: -spacing() 0;
-        padding: 0;
-        color: $color-content-default;
-        &:hover,
-        &:focus {
-            a {
-                text-decoration: none;
-            }
+.c-cookieBanner-title {
+    @include font-size(heading-m);
+    font-weight: $font-weight-bold;
+    margin: -spacing() 0;
+    padding: 0;
+    color: $color-content-default;
+
+    &:hover,
+    &:focus {
+        a {
+            text-decoration: none;
         }
+    }
+}
+
+.c-cookieBanner-content,
+.c-cookieBanner-cta {
+    margin: 0 auto;
+    padding: spacing(x4);
+}
+
+@include media('<mid') {
+    .c-cookieBanner-card {
+        flex-direction: column;
+        padding: spacing(x2) 0;
+    }
+
+    .c-cookieBanner-ios {
+        padding-bottom: 80px;
     }
 
     .c-cookieBanner-content,
     .c-cookieBanner-cta {
-        margin: 0 auto;
-        padding: spacing(x4);
+        padding: spacing(x0.5) spacing(x3);
     }
 
-    @include media ('<mid') {
-        .c-cookieBanner-card {
-            flex-direction: column;
-            padding: spacing(x2) 0;
-        }
+    .c-cookieBanner-cta {
+        min-width: initial;
+        display: flex;
+        flex-direction: row-reverse;
+        margin: 0;
+    }
+}
 
-        .c-cookieBanner-ios {
-            padding-bottom: 80px;
-        }
-
-        .c-cookieBanner-content,
-        .c-cookieBanner-cta {
-            padding: spacing(x0.5) spacing(x3);
-        }
-
-        .c-cookieBanner-cta {
-            min-width: initial;
-            display: flex;
-            flex-direction: row-reverse;
-            margin: 0;
-        }
+@include media('<=narrow') {
+    .c-cookieBanner-title {
+        @include font-size(heading-s);
     }
 
-    @include media('<=narrow') {
-        .c-cookieBanner-title {
-            @include font-size(heading-s);
-        }
-
-        .c-cookieBanner-cta {
-            display: block;
-            margin: 0;
-        }
+    .c-cookieBanner-cta {
+        display: block;
+        margin: 0;
     }
+}
 </style>
