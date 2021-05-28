@@ -176,55 +176,104 @@ describe('addressService', () => {
     });
 
     describe('isAddressInLocalStorage ::', () => {
-        let store = {};
-
-        beforeAll(() => {
-            global.Storage.prototype.setItem = jest.fn((key, value) => {
-                store[key] = value;
+        describe('if localStorage exists', () => {
+            beforeEach(() => {
+                const localStorageMock = (function localStorageMock () {
+                    let store = {};
+                    return {
+                        getItem: function getItem (key) {
+                            return store[key];
+                        },
+                        setItem: function setItem (key, value) {
+                            store[key] = value.toString();
+                        },
+                        clear: function clear () {
+                            store = {};
+                        },
+                        removeItem: function removeItem (key) {
+                            delete store[key];
+                        }
+                    };
+                }());
+                Object.defineProperty(window, 'localStorage', { value: localStorageMock });
             });
-            global.Storage.prototype.getItem = jest.fn(key => store[key] || null);
+
+            afterEach(() => {
+                window.localStorage.clear();
+                jest.resetAllMocks();
+            });
+
+            describe('when the address does NOT exist in local storage', () => {
+                it('should return false', () => {
+                    expect(addressService.isAddressInLocalStorage()).toBe(false);
+                });
+            });
+
+            describe('when the address does exist in local storage', () => {
+                it('should return true if there is a post code', async () => {
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
+                    expect(addressService.isAddressInLocalStorage()).toBe(true);
+                });
+
+                it('should return false if the customer only searched a postcode', async () => {
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({
+                        City: null,
+                        Field1: null,
+                        Field2: null,
+                        Line1: null,
+                        Line2: null,
+                        Line3: null,
+                        Line4: null,
+                        Line5: null,
+                        PostalCode: null,
+                        searchBoxAddress: 'BS3 4RL'
+                    }));
+                    expect(addressService.isAddressInLocalStorage()).toBe(false);
+                });
+            });
         });
 
-        beforeEach(() => {
-            store = {};
-        });
+        describe('if localStorage does NOT exist', () => {
+            beforeAll(() => {
+                Object.defineProperty(window, 'localStorage', { value: null });
+            });
 
-        afterAll(() => {
-            global.Storage.prototype.setItem.mockReset();
-            global.Storage.prototype.getItem.mockReset();
-        });
+            afterAll(() => {
+                window.localStorage.clear();
+                jest.resetAllMocks();
+            });
 
-        describe('when the address does NOT exist in local storage', () => {
             it('should return false', () => {
                 expect(addressService.isAddressInLocalStorage()).toBe(false);
-            });
-        });
-
-        describe('when the address does exist in local storage', () => {
-            it('should return true', async () => {
-                global.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
-                expect(addressService.isAddressInLocalStorage()).toBe(true);
             });
         });
     });
 
     describe('getAddressFromLocalStorage ::', () => {
-        let store = {};
-
-        beforeAll(() => {
-            global.Storage.prototype.setItem = jest.fn((key, value) => {
-                store[key] = value;
-            });
-            global.Storage.prototype.getItem = jest.fn(key => store[key] || null);
-        });
-
         beforeEach(() => {
-            store = {};
+            const localStorageMock = (function localStorageMock () {
+                let store = {};
+                return {
+                    getItem: function getItem (key) {
+                        return store[key];
+                    },
+                    setItem: function setItem (key, value) {
+                        store[key] = value.toString();
+                    },
+                    clear: function clear () {
+                        store = {};
+                    },
+                    removeItem: function removeItem (key) {
+                        delete store[key];
+                    }
+                };
+            }());
+            Object.defineProperty(window, 'localStorage', { value: localStorageMock });
         });
 
-        afterAll(() => {
-            global.Storage.prototype.setItem.mockReset();
-            global.Storage.prototype.getItem.mockReset();
+        afterEach(() => {
+            window.localStorage.clear();
+            jest.resetAllMocks();
         });
 
         describe('when the address does NOT exist in local storage', () => {

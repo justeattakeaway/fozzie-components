@@ -72,7 +72,14 @@ function getAddressClosestToPostcode (postcode, addresses) {
     return address;
 }
 
-const isAddressInLocalStorage = () => window.localStorage.getItem(storedLocationKey) !== null;
+const isAddressInLocalStorage = () => {
+    if (window.localStorage) {
+        const address = window.localStorage.getItem(storedLocationKey) ? JSON.parse(window.localStorage.getItem(storedLocationKey)) : null;
+        return !!(address && (address.PostalCode || address.ZipCode));
+    }
+
+    return false;
+};
 
 function mapLocalStorageAddress (address) {
     return {
