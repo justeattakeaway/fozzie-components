@@ -10,7 +10,24 @@ v0.124.0
 
 ### Added
 - Reading address from local storage if it exists 
-  
+
+
+v0.123.0
+------------------------------
+*May 27, 2021*
+
+### Added
+- Logging of place order error code
+
+
+v0.122.0
+------------------------------
+*May 27, 2021*
+
+### Changed
+- f-card package version updated to 1.2.1 to include card footer for T&C
+- T&C styles were cleaned up
+
 
 v0.121.0
 ------------------------------
@@ -35,7 +52,6 @@ v0.119.0
 ### Added
 - Ability to handle orders with the service type `dinein`
 - Table number/name input field
-
 
 v0.118.1
 ------------------------------
