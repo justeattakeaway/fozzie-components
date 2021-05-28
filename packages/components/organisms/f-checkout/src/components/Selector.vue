@@ -124,8 +124,6 @@ export default {
          * currently present in the Fulfilment times array, otherwise initialise the with first value in the
          * Fulfilment times array.
          * Note; we always need to pre-select a time; if available, so the user can always proceeds with a selected time.
-         *
-         * @param {array} times - An array of available fulfilment times
          */
         initFulfilmentTime () {
             const times = this.fulfilmentTimes || [];
