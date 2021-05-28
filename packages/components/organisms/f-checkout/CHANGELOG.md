@@ -53,7 +53,6 @@ v0.119.0
 - Ability to handle orders with the service type `dinein`
 - Table number/name input field
 
-
 v0.118.1
 ------------------------------
 *May 24, 2021*

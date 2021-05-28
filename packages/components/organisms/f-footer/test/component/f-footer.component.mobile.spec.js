@@ -1,16 +1,20 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+
 const Footer = require('../../test-utils/component-objects/f-footer.component');
 
-const footer = new Footer();
+let footer;
 
 describe('Mobile - f-footer component tests - @percy', () => {
     beforeEach(() => {
-        const footerData = {
-            locale: 'gb',
-            courierLinks: false,
-            countrySelector: true
-        };
+        // Arrange
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', 'en-GB');
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-        footer.open(footerData);
+        // Act
+        footer.open(pageUrl);
         footer.waitForComponent();
     });
 

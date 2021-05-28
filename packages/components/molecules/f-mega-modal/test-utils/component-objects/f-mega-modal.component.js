@@ -5,8 +5,8 @@ module.exports = class MegaModal extends Page {
     get megaModalTitle () { return $('[data-test-id="mega-modal-title"]'); }
     get megaModalContent () { return $('[data-test-id="mega-modal-content"]'); }
 
-    open () {
-        super.openComponent('molecule', 'mega-modal-component');
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
