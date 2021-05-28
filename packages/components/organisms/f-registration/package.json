@@ -53,7 +53,7 @@
     "@justeat/f-http": ">=0.5.0"
   },
   "devDependencies": {
-    "@justeat/f-wdio-utils": "0.1.0",
+    "@justeat/f-wdio-utils": "0.2.0",
     "@justeat/f-button": "0.4.1",
     "@justeat/f-card": "1.2.1",
     "@justeat/f-link": "0.4.0",

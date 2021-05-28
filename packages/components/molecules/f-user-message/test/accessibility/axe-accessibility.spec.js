@@ -1,12 +1,14 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const UserMessage = require('../../test-utils/component-objects/f-user-message.component');
 
-const userMessage = new UserMessage();
+const userMessage = new UserMessage('molecule', 'user-message-component');
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        userMessage.open();
+        const pageUrl = buildUrl(userMessage.componentType, userMessage.componentName, userMessage.path);
+        userMessage.open(pageUrl);
         userMessage.waitForComponent();
     });
 

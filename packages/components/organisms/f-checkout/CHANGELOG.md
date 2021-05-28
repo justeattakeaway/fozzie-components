@@ -6,11 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.124.0
 ------------------------------
-=======
 *May 28, 2021*
 
 ### Changed
 - Restored/Set the selected `fulfilment time` if available/valid on `mount`
+
+### Added
+- `serviceType` to data-test-id
 
 
 v0.123.0
@@ -53,7 +55,6 @@ v0.119.0
 ### Added
 - Ability to handle orders with the service type `dinein`
 - Table number/name input field
-
 
 v0.118.1
 ------------------------------

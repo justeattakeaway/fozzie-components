@@ -1,12 +1,14 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const MegaModal = require('../../test-utils/component-objects/f-mega-modal.component');
 
-const megaModal = new MegaModal();
+const megaModal = new MegaModal('molecule', 'mega-modal-component');
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        megaModal.open();
+        const pageUrl = buildUrl(megaModal.componentType, megaModal.componentName, megaModal.path);
+        megaModal.open(pageUrl);
         megaModal.waitForComponent();
     });
 
