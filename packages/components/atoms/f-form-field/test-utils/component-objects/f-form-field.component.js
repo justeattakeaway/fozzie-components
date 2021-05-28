@@ -7,12 +7,12 @@ module.exports = class FormField extends Page {
 
     get input () { return $('[data-test-id="formfield-input"]'); }
 
-    open () {
-        super.openComponent('atom', 'form-field-component');
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
-        this.component.waitForExist();
+        super.waitForComponent(this.component);
     }
 
     isComponentDisplayed () {

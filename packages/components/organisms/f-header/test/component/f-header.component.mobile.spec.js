@@ -1,14 +1,22 @@
 import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+
 const Header = require('../../test-utils/component-objects/f-header.component');
 
-const header = new Header();
+let header;
 
 describe('Mobile - f-header component tests - @browserstack', () => {
     beforeEach(() => {
+        // Arrange
+        header = new Header('organism', 'header-component');
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+
         // Act
-        header.open({ locale: 'gb', offers: true, delivery: true });
-        header.openMobileNavigation();
+        header.open(pageUrl);
+        header.openMobileNavigationBar();
         header.waitForComponent();
 
         if (process.env.JE_ENV !== 'browserstack') {
@@ -34,12 +42,13 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['au', 'ie', 'nz'])
-    .describe('closed navigation for country code "%s" - @percy', expectedLocale => {
-
+    forEach(['en-AU', 'en-IE', 'en-NZ'])
+    .describe('closed navigation for country code "%s" - @percy', tenant => {
         beforeEach(() => {
             // Act
-            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.withQuery('&knob-Locale', tenant);
+            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+            header.open(pageUrl);
             header.waitForComponent();
         });
 
@@ -55,12 +64,16 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         });
     });
 
-    forEach(['au', 'ie', 'nz'])
-    .describe('open navigation for country code "%s" - @percy', expectedLocale => {
+    forEach(['en-AU', 'en-IE', 'en-NZ'])
+    .describe('open navigation for country code "%s" - @percy', tenant => {
         beforeEach(() => {
+            // Arrange
+            header.withQuery('&knob-Locale', tenant);
+            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+
             // Act
-            header.open({ locale: expectedLocale, offers: true, delivery: true });
-            header.openMobileNavigation();
+            header.open(pageUrl);
+            header.openMobileNavigationBar();
             header.waitForComponent();
         });
 
@@ -76,11 +89,15 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         });
     });
 
-    forEach(['it', 'es', 'dk', 'no'])
-    .describe('closed navigation for country code "%s" - @percy', expectedLocale => {
+    forEach(['it-IT', 'es-ES', 'da-DK', 'nb-NO'])
+    .describe('closed navigation for country code "%s" - @percy', tenant => {
         beforeEach(() => {
+            // Arrange
+            header.withQuery('&knob-Locale', tenant);
+            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+
             // Act
-            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.open(pageUrl);
             header.waitForComponent();
         });
 
@@ -96,15 +113,18 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['it', 'es', 'dk', 'no'])
-    .describe('open navigation for country code "%s" - @percy', expectedLocale => {
+    forEach(['it-IT', 'es-ES', 'da-DK', 'nb-NO'])
+    .describe.only('open navigation for country code "%s" - @percy', tenant => {
         beforeEach(() => {
+            // Arrange
+            header.withQuery('&knob-Locale', tenant);
+            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+
             // Act
-            header.open({ locale: expectedLocale, offers: true, delivery: true });
-            header.openMobileNavigation();
+            header.open(pageUrl);
+            header.openMobileNavigationBar();
             header.waitForComponent();
         });
-
 
         forEach(['userAccount', 'help', 'countrySelector'])
         .it('should display navigation link "%s" - @percy', link => {

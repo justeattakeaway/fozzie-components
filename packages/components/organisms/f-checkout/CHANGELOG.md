@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.123.0
+------------------------------
+*May 27, 2021*
+
+### Added
+- Logging of place order error code
+
+
 v0.122.0
 ------------------------------
 *May 27, 2021*
@@ -36,7 +44,6 @@ v0.119.0
 ### Added
 - Ability to handle orders with the service type `dinein`
 - Table number/name input field
-
 
 v0.118.1
 ------------------------------

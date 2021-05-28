@@ -13,8 +13,8 @@ module.exports = class UserMessage extends Page {
         super.waitForComponent(this.component);
     }
 
-    open () {
-        super.openComponent('molecule', 'user-message-component');
+    open (url) {
+        super.open(url);
     }
 
     isComponentDisplayed () {

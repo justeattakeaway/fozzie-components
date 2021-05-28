@@ -5,6 +5,9 @@ module.exports = class Buttons extends Page {
 
     get linkComponent () { return $('[data-test-id="link-button-component"]'); }
 
+    open (url) {
+        super.open(url);
+    }
     /**
      * @description
      * Sets the data for the button component.
@@ -13,20 +16,20 @@ module.exports = class Buttons extends Page {
      * @param {String} button.type
      * @param {String} button.size
      */
-    open (button) {
-        const type = `&knob-Button%20Type=${button.type}`;
-        const url = button.type === 'link' ? `&knob-href=link` : '';
-        const size = `&knob-Button%20Size=${button.size}`;
+    // open (button) {
+    //     const type = `&knob-Button%20Type=${button.type}`;
+    //     const url = button.type === 'link' ? `&knob-href=link` : '';
+    //     const size = `&knob-Button%20Size=${button.size}`;
 
-        browser.url(`/iframe.html?id=components-atoms-f-button--button-component${type}${url}${size}`)
-    }
+    //     browser.url(`/iframe.html?id=components-atoms-f-button--button-component${type}${url}${size}`)
+    // }
 
     waitForActionComponent () {
-        this.actionComponent.waitForExist();
+        super.waitForComponent(this.actionComponent);
     }
 
     waitForLinkComponent () {
-        this.linkComponent.waitForExist();
+        super.waitForComponent(this.linkComponent);
     }
 
     isActionComponentDisplayed () {
