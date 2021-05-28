@@ -26,7 +26,7 @@
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center"
-                data-test-id="checkout-card-component"
+                :data-test-id="`checkout-card-component-${serviceType}`"
                 :class="$style['c-checkout']"
             >
                 <checkout-header :login-url="loginUrl" />

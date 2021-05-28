@@ -20,6 +20,14 @@ v0.120.0
 - CSS variables to use pie design tokens instead of fozzie-colour-palette vars
 
 
+Latest (add to next release)
+------------------------------
+*May 28, 2021*
+
+### Added
+- `serviceType` to data-test-id
+
+
 v0.119.0
 ------------------------------
 *May 24, 2021*
