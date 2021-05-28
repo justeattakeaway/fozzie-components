@@ -1,5 +1,7 @@
 import { getCookie } from '../utils/helpers';
 
+const storedLocationKey = 'je-full-address-details';
+
 function isFullPostCode (postcode) {
     if (!postcode) {
         return false;
@@ -70,6 +72,25 @@ function getAddressClosestToPostcode (postcode, addresses) {
     return address;
 }
 
+const isAddressInLocalStorage = () => window.localStorage.getItem(storedLocationKey) !== null;
+
+function mapLocalStorageAddress (address) {
+    return {
+        lines: [address.Line1, address.Line2, address.Line3],
+        locality: address.City,
+        postalCode: address.PostalCode || address.ZipCode
+    };
+}
+
+function getAddressFromLocalStorage () {
+    if (window.localStorage) {
+        const storedLocation = window.localStorage.getItem(storedLocationKey);
+        return storedLocation ? mapLocalStorageAddress(JSON.parse(storedLocation)) : null;
+    }
+
+    return null;
+}
+
 export default {
     getClosestAddress (addresses, tenant) {
         if (tenant !== 'uk') {
@@ -81,5 +102,7 @@ export default {
         const address = getAddressClosestToPostcode(postcode, addresses);
 
         return getAddress(postcode, address);
-    }
+    },
+    getAddressFromLocalStorage,
+    isAddressInLocalStorage
 };

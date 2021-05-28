@@ -174,4 +174,75 @@ describe('addressService', () => {
             });
         });
     });
+
+    describe('isAddressInLocalStorage ::', () => {
+        let store = {};
+
+        beforeAll(() => {
+            global.Storage.prototype.setItem = jest.fn((key, value) => {
+                store[key] = value;
+            });
+            global.Storage.prototype.getItem = jest.fn(key => store[key] || null);
+        });
+
+        beforeEach(() => {
+            store = {};
+        });
+
+        afterAll(() => {
+            global.Storage.prototype.setItem.mockReset();
+            global.Storage.prototype.getItem.mockReset();
+        });
+
+        describe('when the address does NOT exist in local storage', () => {
+            it('should return false', () => {
+                expect(addressService.isAddressInLocalStorage()).toBe(false);
+            });
+        });
+
+        describe('when the address does exist in local storage', () => {
+            it('should return true', async () => {
+                global.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
+                expect(addressService.isAddressInLocalStorage()).toBe(true);
+            });
+        });
+    });
+
+    describe('getAddressFromLocalStorage ::', () => {
+        let store = {};
+
+        beforeAll(() => {
+            global.Storage.prototype.setItem = jest.fn((key, value) => {
+                store[key] = value;
+            });
+            global.Storage.prototype.getItem = jest.fn(key => store[key] || null);
+        });
+
+        beforeEach(() => {
+            store = {};
+        });
+
+        afterAll(() => {
+            global.Storage.prototype.setItem.mockReset();
+            global.Storage.prototype.getItem.mockReset();
+        });
+
+        describe('when the address does NOT exist in local storage', () => {
+            it('should return null', () => {
+                expect(addressService.getAddressFromLocalStorage()).toBe(null);
+            });
+        });
+
+        describe('when the address does exist in local storage', () => {
+            it('should return the address mapped correctly', () => {
+                window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
+                const expectedAddress = {
+                    lines: ['Fleet Place House', 'Farringdon', 'City of London'],
+                    locality: 'London',
+                    postalCode: 'EC4M 7RF'
+                };
+                expect(addressService.getAddressFromLocalStorage()).toEqual(expectedAddress);
+            });
+        });
+    });
 });
