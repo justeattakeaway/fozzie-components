@@ -1,12 +1,15 @@
 import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Registration = require('../../test-utils/component-objects/f-registration.component');
 
-const registration = new Registration();
+let registration;
 
 describe('Shared - f-registration component tests - @browserstack', () => {
     beforeEach(() => {
-        registration.open();
+        registration = new Registration('organism', 'registration-component');
+        const pageUrl = buildUrl(registration.componentType, registration.componentName, registration.path);
+        registration.open(pageUrl);
         registration.waitForComponent();
     });
 

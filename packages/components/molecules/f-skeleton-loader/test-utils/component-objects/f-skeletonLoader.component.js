@@ -4,8 +4,8 @@ const { COMPONENT } = require('./f-skeletonLoader-selectors');
 module.exports = class SkeletonLoader extends Page {
     get component () { return $(COMPONENT); }
 
-    open () {
-        super.openComponent('molecule', 'skeleton-loader-component');
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {

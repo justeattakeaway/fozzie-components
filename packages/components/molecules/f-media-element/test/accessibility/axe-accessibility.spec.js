@@ -1,12 +1,14 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const MediaElement = require('../../test-utils/component-objects/f-mediaElement.component');
 
-const mediaElement = new MediaElement();
+const mediaElement = new MediaElement('molecule', 'media-element-component');
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        mediaElement.open();
+        const pageUrl = buildUrl(mediaElement.componentType, mediaElement.componentName, mediaElement.path);
+        mediaElement.open(pageUrl);
         mediaElement.waitForComponent();
     });
     it('a11y - should test f-mediaElement component WCAG compliance', () => {

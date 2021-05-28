@@ -1,12 +1,13 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
-
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 const Alert = require('../../test-utils/component-objects/f-alert.component');
 
-const alert = new Alert();
+const alert = new Alert('molecule', 'alert-component');
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        alert.open();
+        const pageUrl = buildUrl(alert.componentType, alert.componentName, alert.path);
+        alert.open(pageUrl);
         alert.waitForComponent();
     });
 
