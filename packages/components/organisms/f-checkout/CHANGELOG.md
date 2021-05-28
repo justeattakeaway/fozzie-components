@@ -3,17 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.123.0
+v0.124.0
 ------------------------------
-*May 27, 2021*
+*May 28, 2021*
 
 ### Fixed
 - Scrolling broken when clicking `OK` within `megaModal` component.
-
-
-Latest (add to next release)
-------------------------------
-*May 28, 2021*
 
 ### Added
 - `serviceType` to data-test-id
