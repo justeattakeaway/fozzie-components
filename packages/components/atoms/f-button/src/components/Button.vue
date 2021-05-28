@@ -13,7 +13,13 @@
         v-bind="$attrs"
         v-on="$listeners"
     >
-        <slot />
+        <div
+            v-if="isLoading"
+            :class="$style['c-spinner']" />
+
+        <span :class="isLoading ? $style['o-btn-text--hidden'] : ''">
+            <slot />
+        </span>
     </component>
 </template>
 
@@ -47,6 +53,10 @@ export default {
         isIcon: {
             type: Boolean,
             default: false
+        },
+        isLoading: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -61,7 +71,7 @@ export default {
         },
         /**
          * Renders `Link` component if a `href` attribute is applied to the component
-         * Renders `Action` component if no `href` attrivute is applied to the component
+         * Renders `Action` component if no `href` attribute is applied to the component
          */
         componentType () {
             return this.$attrs.href ? 'link-button' : 'action-button';
@@ -77,13 +87,14 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $btn-default-borderRadius       : $border-radius;
 $btn-default-font-family        : $font-family-base;
 $btn-default-font-size          : 'body-l';
 $btn-default-weight             : $font-weight-bold;
 $btn-default-padding            : 11px 1.5em 13px;
 $btn-default-outline-color      : $color-focus;
+$btn-default-loading-color      : $color-content-interactive-primary;
+$btn-default-loading-colorOpaque: #6490cd;
 
 $btn-primary-bgColor            : $color-interactive-primary;
 $btn-primary-bgColor--hover     : darken($color-interactive-primary, $color-hover-01);
@@ -119,15 +130,28 @@ $btn-sizeXSmall-lineHeight      : 1;
 
 $btn-icon-sizeLarge-buttonSize  : 56px; // button--icon is a sircle so width and height can use one var
 $btn-icon-sizeLarge-iconSize    : 21px;
-$btn-icon-sizeMedium-buttonSize  : 48px;
-$btn-icon-sizeMedium-iconSize    : 21px;
+$btn-icon-sizeMedium-buttonSize : 48px;
+$btn-icon-sizeMedium-iconSize   : 21px;
 $btn-icon-sizeSmall-buttonSize  : 40px;
 $btn-icon-sizeSmall-iconSize    : 18px;
-$btn-icon-sizeXSmall-buttonSize  : 32px;
-$btn-icon-sizeXSmall-iconSize    : 18px;
+$btn-icon-sizeXSmall-buttonSize : 32px;
+$btn-icon-sizeXSmall-iconSize   : 18px;
 
+@include loadingIndicator('medium', $btn-default-loading-color, $btn-default-loading-colorOpaque);//transparentize($color-interactive-primary, 0.3));
+
+.c-spinner {
+    margin: 0 auto;
+    position: absolute;
+    left: calc(50% - 10px); // Substract half of the size of the spinner.
+    top: calc(50% - 10px); // Substract half of the size of the spinner.
+}
+
+.o-btn-text--hidden {
+    visibility: hidden;
+}
 
 .o-btn {
+    position: relative;
     display: inline-block;
     vertical-align: middle;
     font-family: $btn-default-font-family;
@@ -214,6 +238,7 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
  */
 
 .o-btn--secondary {
+    $btn-default-loading-color: red;
     background-color: $btn-secondary-bgColor;
     color: $btn-secondary-textColor;
 
@@ -223,6 +248,11 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
 
     &:active {
         background-color: $btn-secondary-bgColor--active;
+    }
+
+    .c-spinner {
+        border-top: 3px solid red;
+        border-right: 3px solid black;
     }
 }
 

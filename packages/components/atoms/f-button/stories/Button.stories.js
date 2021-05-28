@@ -34,6 +34,10 @@ export const ButtonComponent = () => ({
             default: boolean('isFullWidth', false)
         },
 
+        isLoading: {
+            default: boolean('isLoading', false)
+        },
+
         actionType: {
             default: select('Action Type', ['button', 'submit', 'reset'], 'button')
         },
@@ -51,7 +55,8 @@ export const ButtonComponent = () => ({
             :isFullWidth="isFullWidth"
             :actionType="actionType"
             :href="href"
-            :isIcon="false">
+            :isIcon="false"
+            :isLoading="isLoading">
             Default Button Text
         </f-button>`
 });
