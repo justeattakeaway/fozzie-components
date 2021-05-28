@@ -1,4 +1,5 @@
 import addressService from '../addressService';
+import localStorageMock from '../../../test-utils/local-storage/local-storage-mock';
 import { getCookie } from '../../utils/helpers';
 
 jest.mock('../../utils/helpers');
@@ -178,23 +179,6 @@ describe('addressService', () => {
     describe('isAddressInLocalStorage ::', () => {
         describe('if localStorage exists', () => {
             beforeEach(() => {
-                const localStorageMock = (function localStorageMock () {
-                    let store = {};
-                    return {
-                        getItem: function getItem (key) {
-                            return store[key];
-                        },
-                        setItem: function setItem (key, value) {
-                            store[key] = value.toString();
-                        },
-                        clear: function clear () {
-                            store = {};
-                        },
-                        removeItem: function removeItem (key) {
-                            delete store[key];
-                        }
-                    };
-                }());
                 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
             });
 
@@ -251,23 +235,6 @@ describe('addressService', () => {
 
     describe('getAddressFromLocalStorage ::', () => {
         beforeEach(() => {
-            const localStorageMock = (function localStorageMock () {
-                let store = {};
-                return {
-                    getItem: function getItem (key) {
-                        return store[key];
-                    },
-                    setItem: function setItem (key, value) {
-                        store[key] = value.toString();
-                    },
-                    clear: function clear () {
-                        store = {};
-                    },
-                    removeItem: function removeItem (key) {
-                        delete store[key];
-                    }
-                };
-            }());
             Object.defineProperty(window, 'localStorage', { value: localStorageMock });
         });
 
