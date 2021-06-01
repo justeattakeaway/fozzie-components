@@ -421,8 +421,15 @@ export default {
 
             state.time = fulfilment.time;
 
-            if (fulfilment.location && fulfilment.location.address && fulfilment.location.address.lines) {
-                const { address } = fulfilment.location;
+            let address = null;
+            if (addressService.isAddressInLocalStorage()) {
+                address = addressService.getAddressFromLocalStorage();
+            } else if (fulfilment.location && fulfilment.location.address && fulfilment.location.address.lines) {
+                /* eslint-disable prefer-destructuring */
+                address = fulfilment.location.address;
+            }
+
+            if (address) {
                 /* eslint-disable prefer-destructuring */
                 state.address.line1 = address.lines[0];
                 state.address.line2 = address.lines[1];

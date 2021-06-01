@@ -1,5 +1,7 @@
 import { getCookie } from '../utils/helpers';
 
+const storedLocationKey = 'je-full-address-details';
+
 function isFullPostCode (postcode) {
     if (!postcode) {
         return false;
@@ -70,6 +72,45 @@ function getAddressClosestToPostcode (postcode, addresses) {
     return address;
 }
 
+/**
+ * Checks whether the user has an address in local storage available to us
+ * @returns {boolean} - whether the address is in local storage or now
+ */
+const isAddressInLocalStorage = () => {
+    if (window.localStorage) {
+        const address = window.localStorage.getItem(storedLocationKey) ? JSON.parse(window.localStorage.getItem(storedLocationKey)) : null;
+        return !!(address && (address.PostalCode || address.ZipCode));
+    }
+
+    return false;
+};
+
+/**
+ * Maps the address to how it is returned from the API
+ * @param address - The address from local storage
+ * @returns The address but mapped to how the API shapes it
+ */
+function getMappedLocalStorageAddress (address) {
+    return {
+        lines: [address.Line1, address.Line2, address.Line3],
+        locality: address.City,
+        postalCode: address.PostalCode || address.ZipCode
+    };
+}
+
+/**
+ * Retrieves the address from local storage
+ * @returns address - The address from local storage
+ */
+function getAddressFromLocalStorage () {
+    if (window.localStorage) {
+        const storedLocation = window.localStorage.getItem(storedLocationKey);
+        return storedLocation ? getMappedLocalStorageAddress(JSON.parse(storedLocation)) : null;
+    }
+
+    return null;
+}
+
 export default {
     getClosestAddress (addresses, tenant) {
         if (tenant !== 'uk') {
@@ -81,5 +122,7 @@ export default {
         const address = getAddressClosestToPostcode(postcode, addresses);
 
         return getAddress(postcode, address);
-    }
+    },
+    getAddressFromLocalStorage,
+    isAddressInLocalStorage
 };
