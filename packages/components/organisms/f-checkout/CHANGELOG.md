@@ -9,7 +9,7 @@ v0.125.0
 *May 24, 2021*
 
 ### Added
-- Reading address from local storage if it exists 
+- Populate address fields from local storage if it exists 
 
 
 v0.124.0
