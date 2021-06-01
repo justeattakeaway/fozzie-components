@@ -72,6 +72,10 @@ function getAddressClosestToPostcode (postcode, addresses) {
     return address;
 }
 
+/**
+ * Checks whether the user has an address in local storage available to us
+ * @returns {boolean} - whether the address is in local storage or now
+ */
 const isAddressInLocalStorage = () => {
     if (window.localStorage) {
         const address = window.localStorage.getItem(storedLocationKey) ? JSON.parse(window.localStorage.getItem(storedLocationKey)) : null;
@@ -81,7 +85,12 @@ const isAddressInLocalStorage = () => {
     return false;
 };
 
-function mapLocalStorageAddress (address) {
+/**
+ * Maps the address to how it is returned from the API
+ * @param address - The address from local storage
+ * @returns The address but mapped to how the API shapes it
+ */
+function getMappedLocalStorageAddress (address) {
     return {
         lines: [address.Line1, address.Line2, address.Line3],
         locality: address.City,
@@ -89,10 +98,14 @@ function mapLocalStorageAddress (address) {
     };
 }
 
+/**
+ * Retrieves the address from local storage
+ * @returns address - The address from local storage
+ */
 function getAddressFromLocalStorage () {
     if (window.localStorage) {
         const storedLocation = window.localStorage.getItem(storedLocationKey);
-        return storedLocation ? mapLocalStorageAddress(JSON.parse(storedLocation)) : null;
+        return storedLocation ? getMappedLocalStorageAddress(JSON.parse(storedLocation)) : null;
     }
 
     return null;
