@@ -46,8 +46,6 @@ export default {
     text-align: center;
 
     &.c-checkout-error--verticalPadding {
-        padding: spacing(x8) spacing() spacing(x4);
-
         @include media('<=narrow') {
             border: none;
             padding-top: spacing(x2);

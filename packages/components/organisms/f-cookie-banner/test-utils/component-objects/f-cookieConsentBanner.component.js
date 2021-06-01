@@ -1,6 +1,7 @@
+
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-class CookieBanner extends Page {
+module.exports = class CookieBanner extends Page {
     get component () { return $('[data-test-id="cookieConsentBanner"]'); }
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
@@ -13,29 +14,8 @@ class CookieBanner extends Page {
 
     get componentContent () { return $('[data-test-id="cookieBannerContent"]'); }
 
-    open (locale = 'ie') {
-        const countryFormatted = locale.toUpperCase();
-        let formattedLocale = '';
-        switch (countryFormatted) {
-            case 'IE':
-                formattedLocale = `en-${countryFormatted}`;
-                break;
-            case 'DK':
-                formattedLocale = `da-${countryFormatted}`;
-                break;
-            case 'ES':
-                formattedLocale = `es-${countryFormatted}`;
-                break;
-            case 'IT':
-                formattedLocale = `it-${countryFormatted}`;
-                break;
-            case 'NO':
-                formattedLocale = `nb-${countryFormatted}`;
-                break;
-            default:
-                throw new Error(`locale ${countryFormatted} is not supported`);
-        }
-        super.openComponent('organism', `cookie-banner-component&knob-Locale=${formattedLocale}`);
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
@@ -72,9 +52,8 @@ class CookieBanner extends Page {
                 this.cookieAcceptNecessaryButton.click();
                 break;
             default:
+                throw new Error(`${cookieType} is not a valid cookie type.`);
         }
         return this;
     }
 };
-
-export default new CookieBanner();
