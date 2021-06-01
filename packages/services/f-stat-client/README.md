@@ -4,7 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../bear.png" />
 
-Javascript HTTP client for publishing stats to ElasticSearch
+Javascript client for publishing stats to ElasticSearch
 
 </div>
 
@@ -87,15 +87,16 @@ These are all of the methods exposed by the `f-stat-client`
 Method | Description | Parameters | Example
 ------------- | ------------- | ------------- | -------------
 publish | Sends a dynamic model (stat details) to the Endpoint | `json` _[string]_ | `{`</br>`verb: 'GET',`</br>`segment: '/search',`</br>`status: 200,`</br>`timing: 654`</br>`}`
-</br>
-## How to Test/Mock e.g.
 <hr></br>
+
+## How to Test/Mock e.g.
 
 ```js
 import StatClient from '@justeat/f-stat-client';
 
 const Mock = require('@elastic/elasticsearch-mock');
 
+// Arrange
 const mock = new Mock();
 
 // Build a cut down mock reponse

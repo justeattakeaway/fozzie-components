@@ -11,12 +11,26 @@
         </p>
 
         <f-button
-            :class="$style['c-checkout-redirectButton']"
+            :class="$style['c-checkout-errorDialogButton']"
+            :data-gtm="isDuplicateOrderError() ? 'engagement|dialog_duplicate_order_warning|click_acknowledge' : undefined"
             button-size="large"
+            :button-type="isDuplicateOrderError() ? 'secondary' : 'primary'"
             data-test-id="redirect-to-menu-button"
             @click.native="closeErrorDialog"
         >
             {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonText`) }}
+        </f-button>
+
+        <f-button
+            v-if="isDuplicateOrderError()"
+            :class="$style['c-checkout-errorDialogButton']"
+            button-size="large"
+            button-type="primary"
+            data-test-id="redirect-to-orderhistory-button"
+            data-gtm="engagement|dialog_duplicate_order_warning|click_view_orders"
+            @click.native="showOrderHistory"
+        >
+            {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonTextPrimary`) }}
         </f-button>
     </mega-modal>
 </template>
@@ -65,6 +79,10 @@ export default {
 
     mounted () {
         this.isOpen = true;
+
+        if (this.isDuplicateOrderError()) {
+            this.dataLayerPushDupOrderWarnTrackingEvent();
+        }
     },
 
     methods: {
@@ -78,13 +96,34 @@ export default {
             }
 
             this.updateMessage();
+        },
+
+        showOrderHistory () {
+            window.location.assign('order-history');
+
+            this.updateMessage();
+        },
+
+        isDuplicateOrderError () {
+            return this.errorCode === 'DuplicateOrder';
+        },
+
+        dataLayerPushDupOrderWarnTrackingEvent () {
+            const dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                event: 'trackEvent',
+                eventCategory: 'engagement',
+                eventAction: 'dialog_duplicate_order_warning',
+                eventLabel: 'view_dialog'
+            });
         }
     }
 };
+
 </script>
 
 <style lang="scss" module>
-.c-checkout-redirectButton {
-    margin: spacing(x4) 0 spacing(x0.5);
+.c-checkout-errorDialogButton {
+    margin: spacing(x4) 0 spacing(x0.5) spacing(x2);
 }
 </style>
