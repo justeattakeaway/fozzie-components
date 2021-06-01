@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.126.0
+------------------------------
+*June 1, 2021*
+
+### Changed
+- Restored/Set the selected `fulfilment time` if available/valid on `mount`
+
+
 v0.125.0
 ------------------------------
 *May 24, 2021*
@@ -33,7 +41,7 @@ v0.123.0
 
 v0.122.0
 ------------------------------
-*May 27, 2021*
+*May 24, 2021*
 
 ### Changed
 - f-card package version updated to 1.2.1 to include card footer for T&C
