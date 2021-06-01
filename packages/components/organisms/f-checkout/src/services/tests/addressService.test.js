@@ -194,12 +194,16 @@ describe('addressService', () => {
             });
 
             describe('when the address does exist in local storage', () => {
-                it('should return true if there is a post code', async () => {
+                it('should return true if there is a postcode', async () => {
+                    // Arrange & Act
                     window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
+
+                    // Assert
                     expect(addressService.isAddressInLocalStorage()).toBe(true);
                 });
 
                 it('should return false if the customer only searched a postcode', async () => {
+                    // Arrange & Act
                     window.localStorage.setItem('je-full-address-details', JSON.stringify({
                         City: null,
                         Field1: null,
@@ -212,6 +216,8 @@ describe('addressService', () => {
                         PostalCode: null,
                         searchBoxAddress: 'BS3 4RL'
                     }));
+
+                    // Assert
                     expect(addressService.isAddressInLocalStorage()).toBe(false);
                 });
             });
@@ -228,6 +234,7 @@ describe('addressService', () => {
             });
 
             it('should return false', () => {
+                // Assert
                 expect(addressService.isAddressInLocalStorage()).toBe(false);
             });
         });
@@ -245,18 +252,22 @@ describe('addressService', () => {
 
         describe('when the address does NOT exist in local storage', () => {
             it('should return null', () => {
+                // Assert
                 expect(addressService.getAddressFromLocalStorage()).toBe(null);
             });
         });
 
         describe('when the address does exist in local storage', () => {
             it('should return the address mapped correctly', () => {
-                window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
+                // Arrange & Act
                 const expectedAddress = {
                     lines: ['Fleet Place House', 'Farringdon', 'City of London'],
                     locality: 'London',
                     postalCode: 'EC4M 7RF'
                 };
+                window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
+
+                // Assert
                 expect(addressService.getAddressFromLocalStorage()).toEqual(expectedAddress);
             });
         });
