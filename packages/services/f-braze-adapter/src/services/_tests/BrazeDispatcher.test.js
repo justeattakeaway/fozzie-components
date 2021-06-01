@@ -5,12 +5,20 @@ import 'core-js/modules/es.object.from-entries';
 
 import isAppboyInitialised from '../utils/isAppboyInitialised';
 import areCookiesPermitted from '../utils/areCookiesPermitted';
-import ContentCards from '../services/contentCard.service';
+import removeDuplicateContentCards from '../utils/removeDuplicateContentCards';
+import BrazeDispatcher from '../BrazeDispatcher';
+import dispatcherEventStream from '../DispatcherEventStream';
+import {
+    CONTENT_CARDS_EVENT_NAME,
+    IN_APP_MESSAGE_EVENT_CLICKS_NAME,
+    IN_APP_MESSAGE_EVENT_NAME,
+    LOGGER
+} from '../types/events';
 
 jest.mock('appboy-web-sdk');
 jest.mock('../utils/isAppboyInitialised');
 jest.mock('../utils/areCookiesPermitted');
-jest.mock('../services/contentCard.service');
+jest.mock('../utils/removeDuplicateContentCards');
 
 let appboy;
 jest.isolateModules(() => {
@@ -19,12 +27,6 @@ jest.isolateModules(() => {
     jest.mock('appboy-web-sdk');
 });
 
-const handleContentCards = jest.fn();
-const handleContentCardsGrouped = jest.fn();
-const interceptInAppMessages = jest.fn();
-const interceptInAppMessageClickEvents = jest.fn();
-const loggingCallback = jest.fn();
-
 const dataLayer = {
     push: jest.fn()
 };
@@ -32,14 +34,7 @@ const dataLayer = {
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
 
-const TEST_LOG_MESSAGE = '__TEST_MESSAGE__';
-const TEST_PAYLOAD = {
-    test: '__TEST_PAYLOAD__'
-};
-
-const LOG_ERROR = 'logError';
-const LOG_INFO = 'logInfo';
-const LOG_WARN = 'logWarn';
+const LOG_ERROR = 'error';
 
 const enabledComponentParameters = {
     disableComponent: false,
@@ -56,38 +51,29 @@ const inAppMessageButtons = [
     }
 ];
 
-let GetDispatcher;
+const contentCardsMockCallback = jest.fn();
+const inAppMessagesMockCallback = jest.fn();
+const inAppMessageClicksMockCallback = jest.fn();
+const loggerCallback = jest.fn();
+
+dispatcherEventStream.subscribe(CONTENT_CARDS_EVENT_NAME, contentCardsMockCallback);
+dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, inAppMessagesMockCallback);
+dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, inAppMessageClicksMockCallback);
+dispatcherEventStream.subscribe(LOGGER, loggerCallback);
 
 beforeEach(() => {
     jest.resetAllMocks();
-    jest.isolateModules(async () => {
-        /* eslint-disable-next-line global-require */
-        GetDispatcher = require('../BrazeDispatcher').default;
-    });
     window.dataLayer = dataLayer;
     window.appboy = appboy;
 });
 
 describe('instantiation', () => {
-    describe('GetDispatcher', () => {
-        it('should return the same BrazeDispatcher instance when called twice', () => {
-            // Arrange
-            const BrazeDispatcher1 = GetDispatcher(0);
-
-            // Act
-            const BrazeDispatcher2 = GetDispatcher(0);
-
-            // Assert
-            expect(BrazeDispatcher1).toBe(BrazeDispatcher2);
-        });
-    });
-
     describe('BrazeDispatcher', () => {
         const sessionTimeoutInSeconds = 0;
         let brazeDispatcher;
 
         beforeEach(() => {
-            brazeDispatcher = GetDispatcher(sessionTimeoutInSeconds);
+            brazeDispatcher = new BrazeDispatcher(sessionTimeoutInSeconds);
         });
 
         it('should have a property `sessionTimeoutInSeconds` with value as supplied to GetDispatcher()', () => {
@@ -100,26 +86,9 @@ describe('instantiation', () => {
             expect(brazeDispatcher.eventSignifier).toBe('BrazeContent');
         });
 
-        it('should throw an error when attempting to instantiate another instance', () => {
-            // Arrange
-            expect.assertions(2);
-            const Dispatcher = brazeDispatcher.constructor;
-            let anotherInstance = null;
-
-            try {
-                // Act
-                anotherInstance = new Dispatcher(0);
-            } catch (error) {
-                // Assert
-                expect(anotherInstance).toBe(null);
-                expect(error.message).toBe('do not instantiate more than one instance of BrazeDispatcher');
-            }
-        });
-
         describe('configure', () => {
             it.each`
                 parameter             | value
-                ${'disableComponent'} | ${true}
                 ${'apiKey'}           | ${null}
                 ${'userId'}           | ${null}
             `('should not attempt to subscribe if $parameter is $value', async ({ parameter, value }) => {
@@ -246,7 +215,7 @@ describe('instantiation', () => {
                     });
                 } catch (error) {
                     // Assert
-                    expect(error.message).toBe('attempt to reinitialise appboy with different parameters');
+                    expect(error.message).toBe('Attempt to reinitialise appboy with different parameters');
                 }
             });
 
@@ -295,16 +264,7 @@ describe('instantiation', () => {
 
 describe('BrazeDispatcher operation', () => {
     const callbackConfiguredComponentParameters = {
-        ...enabledComponentParameters,
-        callbacks: {
-            interceptInAppMessageClickEvents,
-            interceptInAppMessages,
-            handleContentCards,
-            handleContentCardsGrouped
-        },
-        loggerCallbacks: {
-            loggingCallback
-        }
+        ...enabledComponentParameters
     };
 
     let dispatcher,
@@ -312,7 +272,7 @@ describe('BrazeDispatcher operation', () => {
         contentCardsHandler;
 
     beforeEach(async () => {
-        dispatcher = GetDispatcher(0);
+        dispatcher = new BrazeDispatcher(0);
 
         appboy.subscribeToInAppMessage.mockImplementation(callback => {
             interceptInAppMessagesHandler = callback;
@@ -325,86 +285,22 @@ describe('BrazeDispatcher operation', () => {
     });
 
     describe('callbacks', () => {
-        /* eslint-disable indent */
-        describe('logger', () => {
-            it.each`
-                key          | value
-                ${'info'}    | ${LOG_INFO}
-                ${'warn'}    | ${LOG_WARN}
-                ${'error'}   | ${LOG_ERROR}
-            `('should for each key call the callback with the relevant log data', ({ key, value }) => {
-                // Act
-                dispatcher.logger(key, TEST_LOG_MESSAGE, TEST_PAYLOAD);
-
-                // Assert
-                expect(loggingCallback).toHaveBeenCalledWith(value, TEST_LOG_MESSAGE, TEST_PAYLOAD);
-            });
-        });
-
         describe('contentCardsHandler', () => {
             const rawCards = [
                 { id: 'card1' },
                 { id: 'card2' }
             ];
-            const groupedCards = [
-                {
-                    title: 'example1',
-                    cards: [
-                        { id: 'card1' },
-                        { id: 'card2' }
-                    ]
-                },
-                {
-                    title: 'example2',
-                    cards: [
-                        { id: 'card3' },
-                        { id: 'card4' }
-                    ]
-                }
-            ];
 
             beforeEach(() => {
-                ContentCards.prototype.orderCardsByOrderValue.mockReturnThis();
-                ContentCards.prototype.orderCardsByUpdateValue.mockReturnThis();
-                ContentCards.prototype.arrangeCardsByTitles.mockReturnThis();
-                ContentCards.prototype.getTitleCard.mockReturnThis();
-                ContentCards.prototype.filterCards.mockReturnThis();
-                ContentCards.prototype.removeDuplicateContentCards.mockReturnThis();
-                ContentCards.prototype.output.mockReturnValue({
-                    cards: rawCards,
-                    groups: groupedCards,
-                    rawCards
-                });
-            });
-
-            it('should instantiate ContentCards and call required methods in order of [removeDuplicateContentCards, filterCards, getTitleCard, output]', () => {
-                // Arrange & Act
-                contentCardsHandler();
-
-                // Assert
-                const [contentCardsInstance] = ContentCards.mock.instances;
-                expect(contentCardsInstance.removeDuplicateContentCards)
-                    .toHaveBeenCalledBefore(contentCardsInstance.filterCards);
-                expect(contentCardsInstance.filterCards)
-                    .toHaveBeenCalledBefore(contentCardsInstance.getTitleCard);
-                expect(contentCardsInstance.arrangeCardsByTitles)
-                    .toHaveBeenCalledBefore(contentCardsInstance.output);
+                removeDuplicateContentCards.mockReturnValue(rawCards);
             });
 
             it('should call registered callback with returned cards', () => {
                 // Arrange & Act
-                contentCardsHandler();
+                contentCardsHandler({ rawCards });
 
                 // Assert
-                expect(handleContentCards).toHaveBeenCalledWith(rawCards);
-            });
-
-            it('should call registered group callback with returned cards', () => {
-                // Arrange & Act
-                contentCardsHandler();
-
-                // Assert
-                expect(handleContentCardsGrouped).toHaveBeenCalledWith(groupedCards);
+                expect(contentCardsMockCallback).toHaveBeenCalledWith(rawCards);
             });
         });
 
@@ -423,7 +319,7 @@ describe('BrazeDispatcher operation', () => {
                 await interceptInAppMessagesHandler(message);
 
                 // Assert
-                expect(interceptInAppMessages).toHaveBeenCalledWith(message);
+                expect(inAppMessagesMockCallback).toHaveBeenCalledWith(message);
             });
 
             it('should call braze display function for message', async () => {
@@ -438,7 +334,7 @@ describe('BrazeDispatcher operation', () => {
                 const error = new Error('We have a problem');
 
                 beforeEach(() => {
-                    interceptInAppMessages.mockImplementation(() => {
+                    inAppMessagesMockCallback.mockImplementation(() => {
                         throw error;
                     });
                 });
@@ -448,7 +344,7 @@ describe('BrazeDispatcher operation', () => {
                     await interceptInAppMessagesHandler(message);
 
                     // Assert
-                    expect(loggingCallback).toHaveBeenCalledWith(LOG_ERROR, `Error handling message - ${error}`, { message, error });
+                    expect(loggerCallback).toHaveBeenCalledWith([LOG_ERROR, `Error handling message - ${error}`, { message, error }]);
                 });
             });
 
@@ -482,7 +378,7 @@ describe('BrazeDispatcher operation', () => {
                 messageClickEventsHandler();
 
                 // Assert
-                expect(interceptInAppMessageClickEvents).toHaveBeenCalledWith(message);
+                expect(inAppMessageClicksMockCallback).toHaveBeenCalledWith(message);
             });
         });
     });
@@ -492,49 +388,24 @@ describe('BrazeDispatcher operation', () => {
             { id: 'card1' },
             { id: 'card2' }
         ];
-        const groupedCards = [
-            {
-                title: 'example1',
-                cards: [
-                    { id: 'card1' },
-                    { id: 'card2' }
-                ]
-            },
-            {
-                title: 'example2',
-                cards: [
-                    { id: 'card3' },
-                    { id: 'card4' }
-                ]
-            }
-        ];
+
         beforeEach(() => {
-            ContentCards.prototype.orderCardsByOrderValue.mockReturnThis();
-            ContentCards.prototype.orderCardsByUpdateValue.mockReturnThis();
-            ContentCards.prototype.arrangeCardsByTitles.mockReturnThis();
-            ContentCards.prototype.getTitleCard.mockReturnThis();
-            ContentCards.prototype.filterCards.mockReturnThis();
-            ContentCards.prototype.removeDuplicateContentCards.mockReturnThis();
-            ContentCards.prototype.output.mockReturnValue({
-                cards: rawCards,
-                groups: groupedCards,
-                rawCards
-            });
-            contentCardsHandler();
+            removeDuplicateContentCards.mockReturnValue(rawCards);
+            contentCardsHandler({ rawCards });
         });
 
         describe('logCardClick', () => {
-            it('should report back to braze a card resolved from its given ID', async () => {
+            it('should report back to braze a card resolved from its given ID', () => {
                 // Act
-                await dispatcher.logCardClick(rawCards[0].id);
+                dispatcher.logCardClick(rawCards[0].id);
 
                 // Assert
                 expect(appboy.logCardClick).toHaveBeenCalledWith(rawCards[0], true);
             });
 
-            it('should request a flush of data', async () => {
+            it('should request a flush of data', () => {
                 // Act
-                await dispatcher.logCardClick(rawCards[0].id);
+                dispatcher.logCardClick(rawCards[0].id);
 
                 // Assert
                 expect(appboy.requestImmediateDataFlush).toHaveBeenCalledAfter(appboy.logCardClick);
@@ -542,17 +413,17 @@ describe('BrazeDispatcher operation', () => {
         });
 
         describe('logCardImpressions', () => {
-            it('should report back to braze a list of cards resolved from their given IDs', async () => {
+            it('should report back to braze a list of cards resolved from their given IDs', () => {
                 // Act
-                await dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
+                dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
 
                 // Assert
                 expect(appboy.logCardImpressions).toHaveBeenCalledWith([rawCards[0], rawCards[1]], true);
             });
 
-            it('should request a flush of data', async () => {
+            it('should request a flush of data', () => {
                 // Act
-                await dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
+                dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
 
                 // Assert
                 expect(appboy.requestImmediateDataFlush).toHaveBeenCalledAfter(appboy.logCardImpressions);
