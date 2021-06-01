@@ -1,9 +1,9 @@
-import uniq from 'lodash.uniq';
-
-import ContentCards from './services/contentCard.service';
 import isAppboyInitialised from './utils/isAppboyInitialised';
-import { LogService } from './services/logging/logging.service';
+import { removeDuplicateContentCards } from './utils';
+import transformCardData from './utils/transformCardData';
 import areCookiesPermitted from './utils/areCookiesPermitted';
+import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME, LOGGER } from './types/events';
+import dispatcherEventStream from './DispatcherEventStream';
 
 /* braze event handler callbacks */
 
@@ -13,7 +13,7 @@ import areCookiesPermitted from './utils/areCookiesPermitted';
  * @this BrazeDispatcher
  */
 function interceptInAppMessageClickEventsHandler (message) {
-    this.inAppMessageClickEventCallbacks.forEach(callback => callback(message));
+    dispatcherEventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
 }
 
 /**
@@ -32,7 +32,7 @@ function interceptInAppMessagesHandler (message) {
                  * as this is always "success" as opposed to "dismiss"
                  * as confirmed with CRM (AS)
                  */
-                this.inAppMessagesCallbacks.forEach(callback => callback(message));
+                dispatcherEventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
                 if (message.buttons && message.buttons.length >= 2) {
                     const [, button] = message.buttons;
                     // Note that the below subscription returns an ID that could later be used to unsubscribe
@@ -42,10 +42,9 @@ function interceptInAppMessagesHandler (message) {
             appboy.display.showInAppMessage(message);
         })
         .catch(error => {
-            this.logger('error', `Error handling message - ${error}`, { message, error });
+            dispatcherEventStream.publish(LOGGER, ['error', `Error handling message - ${error}`, { message, error }]);
         });
 }
-
 /**
  * Internal handler for content cards that dispatches to component-registered callbacks
  * @param postCardsAppboy
@@ -54,19 +53,11 @@ function interceptInAppMessagesHandler (message) {
 function contentCardsHandler (postCardsAppboy) {
     this.refreshRequested = false;
 
-    const {
-        cards,
-        rawCards,
-        groups
-    } = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
-        .removeDuplicateContentCards()
-        .filterCards(this.brands)
-        .getTitleCard()
-        .arrangeCardsByTitles()
-        .output();
+    const { rawCards = [] } = postCardsAppboy;
 
-    this.cardsCallbacks.forEach(callback => callback(cards));
-    this.groupedCardsCallback.forEach(callback => callback(groups));
+    const cards = removeDuplicateContentCards(rawCards.map(transformCardData));
+
+    dispatcherEventStream.publish(CONTENT_CARDS_EVENT_NAME, cards);
 
     this.rawCards = rawCards;
 
@@ -74,23 +65,7 @@ function contentCardsHandler (postCardsAppboy) {
 }
 
 /* BrazeDispatcher */
-
-let dispatcherInstance;
-
 class BrazeDispatcher {
-    /**
-     * Static constructor to store one instance of BrazeDispatcher per js env
-     * @param {Number} sessionTimeoutInSeconds
-     * @return {BrazeDispatcher}
-     * @constructor
-     */
-    static GetDispatcher (sessionTimeoutInSeconds) {
-        if (!dispatcherInstance) {
-            dispatcherInstance = new BrazeDispatcher(sessionTimeoutInSeconds);
-        }
-        return dispatcherInstance;
-    }
-
     /**
      * Sets defaults, checks environment, checks for reinstantiation
      * @param {Number} sessionTimeoutInSeconds
@@ -98,22 +73,12 @@ class BrazeDispatcher {
     constructor (sessionTimeoutInSeconds) {
         if (typeof window === 'undefined') throw new Error('window is not defined');
 
-        if (dispatcherInstance && dispatcherInstance !== this) {
-            throw new Error('do not instantiate more than one instance of BrazeDispatcher');
-        }
-        dispatcherInstance = this;
-
         this.appboyPromise = null;
 
-        this.brands = [];
+        // set during configure
+        this.appboy = null;
 
         this.dispatcherOptions = null;
-
-        this.loggerCallbackInstances = [];
-        this.cardsCallbacks = [];
-        this.groupedCardsCallback = [];
-        this.inAppMessageClickEventCallbacks = [];
-        this.inAppMessagesCallbacks = [];
 
         this.rawCards = null;
 
@@ -124,6 +89,8 @@ class BrazeDispatcher {
         this.sessionTimeoutInSeconds = sessionTimeoutInSeconds;
 
         this.eventSignifier = 'BrazeContent';
+
+        this.loggerCallbackInstances = [];
     }
 
     /**
@@ -138,44 +105,19 @@ class BrazeDispatcher {
         const {
             apiKey,
             userId,
-            disableComponent = false,
-            callbacks = {},
-            loggerCallbacks = {},
-            enableLogging,
-            enabledCardTypes = [],
-            brands = []
+            enableLogging
         } = options;
 
         if (!this.dispatcherOptions) {
             this.dispatcherOptions = {
                 apiKey,
-                userId,
-                enabledCardTypes
+                userId
             };
-        } else if (!(apiKey === this.dispatcherOptions.apiKey
-            && userId === this.dispatcherOptions.userId
-            && JSON.stringify(enabledCardTypes.slice().sort())
-                === JSON.stringify(this.dispatcherOptions.enabledCardTypes.slice().sort()))) {
-            throw new Error('attempt to reinitialise appboy with different parameters');
+        } else if (!(apiKey === this.dispatcherOptions.apiKey && userId === this.dispatcherOptions.userId)) {
+            throw new Error('Attempt to reinitialise appboy with different parameters');
         }
-
-        Object.keys(loggerCallbacks).forEach(key => {
-            this.loggerCallbackInstances.push((new LogService(loggerCallbacks[key])));
-        });
 
         window.dataLayer = window.dataLayer || [];
-
-        // Add callbacks to internal lists prior to attempting to configure appboy
-        if (callbacks.interceptInAppMessageClickEvents) this.inAppMessageClickEventCallbacks.push(callbacks.interceptInAppMessageClickEvents);
-        if (callbacks.interceptInAppMessages) this.inAppMessagesCallbacks.push(callbacks.interceptInAppMessages);
-        if (callbacks.handleContentCards) this.cardsCallbacks.push(callbacks.handleContentCards);
-        if (callbacks.handleContentCardsGrouped) this.groupedCardsCallback.push(callbacks.handleContentCardsGrouped);
-
-        // Concatenate brands to existing allowed brands for now
-        // TODO create registry of brands to apply before passing cards lists back to callbacks (has linked issue)
-        if (brands) {
-            this.brands = uniq([...this.brands, ...brands]);
-        }
 
         // Note that appBoyPromise will not be set if this is the first time running this method -
         // this is a guard against initialise() being called more than once, and attempting to
@@ -194,7 +136,7 @@ class BrazeDispatcher {
             return this.appboyPromise;
         }
 
-        if (disableComponent || !apiKey || !userId) {
+        if (!apiKey || !userId) {
             this.appboyPromise = Promise.reject(new Error('Not initialising braze due to config'));
             return this.appboyPromise;
         }
@@ -210,6 +152,8 @@ class BrazeDispatcher {
                     appboy.openSession();
 
                     window.appboy = appboy;
+
+                    this.appboy = appboy;
 
                     this.subscribeBraze(appboy);
 
@@ -255,15 +199,13 @@ class BrazeDispatcher {
      * Abstracts card interaction reports to braze SDK
      * @param {String} type
      * @param {Card} payload
-     * @return {Promise<boolean|*>}
+     * @return {boolean|*}
      */
-    async logEvent (type, payload) {
-        if (!this.appboyPromise) return false;
+    logEvent (type, payload) {
+        if (!this.appboy) return false;
 
-        const appboy = await this.appboyPromise;
-
-        const output = appboy[type](payload, true);
-        appboy.requestImmediateDataFlush();
+        const output = this.appboy[type](payload, true);
+        this.appboy.requestImmediateDataFlush();
 
         return output;
     }
@@ -304,19 +246,6 @@ class BrazeDispatcher {
             }
         });
     }
-
-    /**
-     * Logger for braze dispatcher, utilizes a logging class to call the call back based on type
-     * @param type - Function name being called on the class ( should be in ['info', 'warn', 'error'])
-     * @param {string} logMessage - Describe what happened
-     * @param {object} [payload={}] - Any additional properties you want to add to the logs
-     */
-    logger (type, logMessage, payload) {
-        this.loggerCallbackInstances.forEach(instance => {
-            // eslint-disable-next-line no-unused-expressions
-            instance[type] && instance[type](logMessage, payload);
-        });
-    }
 }
 
-export default BrazeDispatcher.GetDispatcher;
+export default BrazeDispatcher;
