@@ -81,7 +81,9 @@ export default {
     mounted () {
         const modalContext = this.getModalContext();
 
-        if (modalContext) modalContext.open();
+        if (modalContext) {
+            modalContext.open();
+        }
 
         if (this.isDuplicateOrderError()) {
             this.dataLayerPushDupOrderWarnTrackingEvent();
@@ -97,7 +99,9 @@ export default {
             const { errorModal } = this.$refs;
             const { megaModal } = errorModal.$refs;
 
-            if (megaModal) return errorModal;
+            if (megaModal) {
+                return errorModal;
+            }
 
             return null;
         },
@@ -128,6 +132,7 @@ export default {
 
         dataLayerPushDupOrderWarnTrackingEvent () {
             const dataLayer = window.dataLayer || [];
+
             dataLayer.push({
                 event: 'trackEvent',
                 eventCategory: 'engagement',
@@ -142,6 +147,6 @@ export default {
 
 <style lang="scss" module>
 .c-checkout-errorDialogButton {
-    margin: spacing(x4) 0 spacing(x0.5) spacing(x2);
+    margin: spacing(x4) spacing(x1.5) spacing(x0.5) spacing(x1.5);
 }
 </style>

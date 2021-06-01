@@ -12,6 +12,7 @@ v0.127.0
 - Give the consumer two options; 'Close' or 'View recent orders', when showing the Duplicate Error Warning dialog box
 - Added tracking to the alternative dialog box
 
+
 v0.126.0
 ------------------------------
 *June 1, 2021*
@@ -25,7 +26,7 @@ v0.125.0
 *May 24, 2021*
 
 ### Added
-- Populate address fields from local storage if it exists 
+- Populate address fields from local storage if it exists
 
 
 v0.124.0
