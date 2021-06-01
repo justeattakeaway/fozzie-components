@@ -189,6 +189,80 @@ describe('Selector', () => {
                 });
             });
         });
+
+        describe('shouldShowSelector', () => {
+            let wrapper;
+            describe('when the service type is `dinein` and there is only one fulfilment time', () => {
+                beforeEach(() => {
+                    wrapper = shallowMount(Selector, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            serviceType: 'dinein',
+                            availableFulfilment: {
+                                times: [{
+                                    from: '2020-01-01T01:00:00.000Z',
+                                    to: '2020-01-01T01:00:00.000Z'
+                                }],
+                                isAsapAvailable: true
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should return `false`', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowSelector).toBeFalsy();
+                });
+            });
+
+            describe('when the service type is `dinein` and there is more than one fulfilment time', () => {
+                beforeEach(() => {
+                    wrapper = shallowMount(Selector, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            serviceType: 'dinein',
+                            availableFulfilment: {
+                                times: fulfilmentTimes,
+                                isAsapAvailable: true
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should return `true`', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowSelector).toBeTruthy();
+                });
+            });
+
+            describe('when the service type is not `dinein`', () => {
+                beforeEach(() => {
+                    wrapper = shallowMount(Selector, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            availableFulfilment: {
+                                times: fulfilmentTimes,
+                                isAsapAvailable: true
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should return `true`', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowSelector).toBeTruthy();
+                });
+            });
+        });
     });
 
     describe('methods ::', () => {

@@ -1,5 +1,6 @@
 <template>
     <form-dropdown
+        v-show="shouldShowSelector"
         id="time-selection"
         name="order-time"
         :class="$style['c-checkout-selector']"
@@ -77,6 +78,10 @@ export default {
          */
         shouldShowPreOrderWarning () {
             return !this.availableFulfilment.isAsapAvailable;
+        },
+
+        shouldShowSelector () {
+            return this.serviceType !== 'dinein' || this.availableFulfilment.times.length > 1;
         }
     },
 
