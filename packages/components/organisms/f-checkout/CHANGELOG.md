@@ -4,12 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.125.0
+------------------------------
+*June 1, 2021*
+
+### Changed
+- Restored/Set the selected `fulfilment time` if available/valid on `mount`
+
+
 v0.124.0
 ------------------------------
 *May 28, 2021*
 
-### Changed
-- Restored/Set the selected `fulfilment time` if available/valid on `mount`
+### Fixed
+- Scrolling broken when clicking `OK` within `megaModal` component.
 
 ### Added
 - `serviceType` to data-test-id
