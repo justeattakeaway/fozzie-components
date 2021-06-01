@@ -1,5 +1,6 @@
 <template>
     <mega-modal
+        ref="errorModal"
         data-test-id="checkout-issue-modal"
         has-overlay
         :title="$t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText })"
@@ -39,7 +40,7 @@ export default {
 
     data () {
         return {
-            isOpen: false
+            isOpen: true
         };
     },
 
@@ -64,7 +65,9 @@ export default {
     },
 
     mounted () {
-        this.isOpen = true;
+        const modalContext = this.getModalContext();
+
+        if (modalContext) modalContext.open();
     },
 
     methods: {
@@ -72,12 +75,25 @@ export default {
             'updateMessage'
         ]),
 
+        getModalContext () {
+            const { errorModal } = this.$refs;
+            const { megaModal } = errorModal.$refs;
+
+            if (megaModal) return errorModal;
+
+            return null;
+        },
+
         closeErrorDialog () {
+            const modalContext = this.getModalContext();
+
             if (this.message && this.message.shouldRedirectToMenu) {
                 window.location.assign(this.restaurantMenuPageUrl);
             }
 
             this.updateMessage();
+
+            if (modalContext) modalContext.close();
         }
     }
 };
