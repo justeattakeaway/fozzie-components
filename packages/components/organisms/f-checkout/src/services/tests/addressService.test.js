@@ -1,4 +1,5 @@
 import addressService from '../addressService';
+import localStorageMock from '../../../test-utils/local-storage/local-storage-mock';
 import { getCookie } from '../../utils/helpers';
 
 jest.mock('../../utils/helpers');
@@ -171,6 +172,103 @@ describe('addressService', () => {
                     locality: area511Line.City,
                     postcode: area511Line.ZipCode
                 });
+            });
+        });
+    });
+
+    describe('isAddressInLocalStorage ::', () => {
+        describe('if localStorage exists', () => {
+            beforeEach(() => {
+                Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+            });
+
+            afterEach(() => {
+                window.localStorage.clear();
+                jest.resetAllMocks();
+            });
+
+            describe('when the address does NOT exist in local storage', () => {
+                it('should return false', () => {
+                    expect(addressService.isAddressInLocalStorage()).toBe(false);
+                });
+            });
+
+            describe('when the address does exist in local storage', () => {
+                it('should return true if there is a postcode', async () => {
+                    // Arrange
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
+
+                    // Act & Assert
+                    expect(addressService.isAddressInLocalStorage()).toBe(true);
+                });
+
+                it('should return false if the customer only searched a postcode', async () => {
+                    // Arrange
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({
+                        City: null,
+                        Field1: null,
+                        Field2: null,
+                        Line1: null,
+                        Line2: null,
+                        Line3: null,
+                        Line4: null,
+                        Line5: null,
+                        PostalCode: null,
+                        searchBoxAddress: 'BS3 4RL'
+                    }));
+
+                    // Act & Assert
+                    expect(addressService.isAddressInLocalStorage()).toBe(false);
+                });
+            });
+        });
+
+        describe('if localStorage does NOT exist', () => {
+            beforeAll(() => {
+                Object.defineProperty(window, 'localStorage', { value: null });
+            });
+
+            afterAll(() => {
+                window.localStorage.clear();
+                jest.resetAllMocks();
+            });
+
+            it('should return false', () => {
+                // Assert
+                expect(addressService.isAddressInLocalStorage()).toBe(false);
+            });
+        });
+    });
+
+    describe('getAddressFromLocalStorage ::', () => {
+        beforeEach(() => {
+            Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+        });
+
+        afterEach(() => {
+            window.localStorage.clear();
+            jest.resetAllMocks();
+        });
+
+        describe('when the address does NOT exist in local storage', () => {
+            it('should return null', () => {
+                // Assert
+                expect(addressService.getAddressFromLocalStorage()).toBe(null);
+            });
+        });
+
+        describe('when the address does exist in local storage', () => {
+            it('should return the address mapped correctly', () => {
+                // Arrange
+                const expectedAddress = {
+                    lines: ['Fleet Place House', 'Farringdon', 'City of London'],
+                    locality: 'London',
+                    postalCode: 'EC4M 7RF'
+                };
+                window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
+
+                // Act & Assert
+                expect(addressService.getAddressFromLocalStorage()).toEqual(expectedAddress);
             });
         });
     });
