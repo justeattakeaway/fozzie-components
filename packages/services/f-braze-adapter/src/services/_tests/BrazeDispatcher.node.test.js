@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import appboy from 'appboy-web-sdk';
-import GetDispatcher from '../BrazeDispatcher';
+import BrazeDispatcher from '../BrazeDispatcher';
 
 jest.mock('appboy-web-sdk', () => ({
     initialize: jest.fn()
@@ -22,7 +22,7 @@ describe('BrazeDispatcher › node', () => {
         expect.assertions(2);
 
         try {
-            const Dispatcher = GetDispatcher(0);
+            const Dispatcher = new BrazeDispatcher(0);
             await Dispatcher.configure({
                 userId,
                 apiKey
