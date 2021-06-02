@@ -78,7 +78,6 @@ describe('f-checkout component tests - @browserstack', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
         checkout.withQuery('&knob-Checkout Errors', 'ISSUES');
@@ -93,5 +92,48 @@ describe('f-checkout component tests - @browserstack', () => {
 
         // Assert
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+    });
+
+    describe('when a duplicate order error is triggered', () => {
+        beforeEach(() => {
+            // Arrange
+            checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+            const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+            // Act
+            checkout.open(pageUrl);
+            checkout.waitForComponent();
+            checkout.goToPayment();
+        });
+
+        it('should display the duplicate order warning dialog box', () => {
+            // Assert
+            expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
+        });
+
+        it('should display the correct buttons', () => {
+            // Assert
+            expect(checkout.isCheckoutErrorCloseButtonDisplayed()).toBe(true);
+            expect(checkout.isCheckoutErrorDupOrderGoToHistoryButtonDisplayed()).toBe(true);
+        });
+
+        it('should close the dialog and remain on the checkout page when the `close` button is pressed', () => {
+            // Act
+            checkout.waitForComponent();
+            checkout.clickRetryButton();
+
+            // Assert
+            expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+            expect(checkout.isCheckoutPageDisplayed()).toBe(true);
+        });
+
+        it('should attempt to redirect to the order history page when the `View my orders` button is pressed', () => {
+            // Act
+            checkout.waitForComponent();
+            checkout.clickDupOrderGoToHistoryButton();
+
+            // Assert
+            expect(browser.getUrl().split('/')[3]).toBe('order-history');
+        });
     });
 });

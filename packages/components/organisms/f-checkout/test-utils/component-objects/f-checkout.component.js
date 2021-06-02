@@ -14,6 +14,7 @@ const {
     PRE_ORDER_WARNING,
     CHECKOUT_ERROR_MESSAGE,
     RETRY_BUTTON,
+    DUP_ORDER_GO_TO_HISTORY_BUTTON,
     ERROR_PAGE_COMPONENT,
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
@@ -46,6 +47,8 @@ module.exports = class Checkout extends Page {
     get checkoutErrorMessage () { return $(CHECKOUT_ERROR_MESSAGE); }
 
     get errorMessageRetry () { return $(RETRY_BUTTON); }
+
+    get errorMessageDupOrderGoToHistory () { return $(DUP_ORDER_GO_TO_HISTORY_BUTTON); }
 
     get errorPageComponent () { return $(ERROR_PAGE_COMPONENT); }
 
@@ -126,6 +129,10 @@ module.exports = class Checkout extends Page {
         super.waitForComponent(this.errorPageComponent);
     }
 
+    isCheckoutPageDisplayed () {
+        return this.component.isDisplayed();
+    }
+
     isPostcodeTypeErrorDisplayed () {
         return this.fields.addressPostcode.typeError.isDisplayed();
     }
@@ -154,6 +161,10 @@ module.exports = class Checkout extends Page {
         return this.errorMessageRetry.click();
     }
 
+    clickDupOrderGoToHistoryButton () {
+        return this.errorMessageDupOrderGoToHistory.click();
+    }
+
     /**
     * @description
     * Inputs user details into the registration component and submits the form.
@@ -174,6 +185,14 @@ module.exports = class Checkout extends Page {
 
     isCheckoutErrorMessageDisplayed () {
         return this.checkoutErrorMessage.isDisplayedInViewport();
+    }
+
+    isCheckoutErrorCloseButtonDisplayed () {
+        return this.errorMessageRetry.isDisplayed();
+    }
+
+    isCheckoutErrorDupOrderGoToHistoryButtonDisplayed () {
+        return this.errorMessageDupOrderGoToHistory.isDisplayed();
     }
 
     /**
@@ -250,7 +269,6 @@ module.exports = class Checkout extends Page {
         this.knobButton.click();
         this.knobCheckoutDropdown.selectByVisibleText(file);
     }
-
 
     /**
     * @description
