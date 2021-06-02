@@ -214,7 +214,7 @@ describe('Selector', () => {
 
                 it('should return `false`', () => {
                     // Assert
-                    expect(wrapper.vm.shouldShowSelector).toBeFalsy();
+                    expect(wrapper.vm.shouldShowSelector).toBe(false);
                 });
             });
 
@@ -237,7 +237,7 @@ describe('Selector', () => {
 
                 it('should return `true`', () => {
                     // Assert
-                    expect(wrapper.vm.shouldShowSelector).toBeTruthy();
+                    expect(wrapper.vm.shouldShowSelector).toBe(true);
                 });
             });
 
@@ -259,7 +259,7 @@ describe('Selector', () => {
 
                 it('should return `true`', () => {
                     // Assert
-                    expect(wrapper.vm.shouldShowSelector).toBeTruthy();
+                    expect(wrapper.vm.shouldShowSelector).toBe(true);
                 });
             });
         });
