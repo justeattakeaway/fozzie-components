@@ -333,7 +333,6 @@ describe('ErrorDialog', () => {
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        restaurant,
                         message: duplicateOrderMessage
                     }),
                     i18n,

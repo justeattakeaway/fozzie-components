@@ -108,11 +108,7 @@ export default {
             const { errorModal } = this.$refs;
             const { megaModal } = errorModal.$refs;
 
-            if (megaModal) {
-                return errorModal;
-            }
-
-            return null;
+            return megaModal ? errorModal : null;
         },
 
         closeErrorDialog () {
@@ -141,6 +137,6 @@ export default {
 
 <style lang="scss" module>
 .c-checkout-errorDialogButton {
-    margin: spacing(x4) spacing(x1.5) spacing(x0.5) spacing(x1.5);
+    margin: spacing(x4) spacing(x1.5) spacing(x0.5);
 }
 </style>

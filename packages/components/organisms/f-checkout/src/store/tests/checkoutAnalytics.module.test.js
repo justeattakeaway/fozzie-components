@@ -392,13 +392,6 @@ describe('CheckoutAnalyticsModule', () => {
                     eventLabel: 'view_dialog'
                 };
 
-                Object.defineProperty(global, 'window', {
-                    value: {
-                        dataLayer: []
-                    }
-                });
-                window.dataLayer = [];
-
                 // Act
                 trackDuplicateOrderWarnDialog();
 
