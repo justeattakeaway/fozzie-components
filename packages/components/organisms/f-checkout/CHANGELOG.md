@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.127.0
 ------------------------------
-*June 2, 2021*
+*June 1, 2021*
 
 ### Changed
 - Moved logic to show fulfilment time dropdown inside selector component to still set the time under the hood
