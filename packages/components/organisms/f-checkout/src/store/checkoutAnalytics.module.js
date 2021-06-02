@@ -96,6 +96,18 @@ export default {
         },
 
         /**
+         * Pushes details that the Duplicated Order Warning dialog has been loaded
+         */
+        trackDuplicateOrderWarnDialog () {
+            window.dataLayer.push({
+                event: 'trackEvent',
+                eventCategory: 'engagement',
+                eventAction: 'dialog_duplicate_order_warning',
+                eventLabel: 'view_dialog'
+            });
+        },
+
+        /**
          *Dispatches `trackFormInteraction` with each error in `state.errors`.
          */
         trackFormErrors ({ rootState, dispatch }) {
