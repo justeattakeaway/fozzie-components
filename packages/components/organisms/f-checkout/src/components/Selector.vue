@@ -1,5 +1,6 @@
 <template>
     <form-dropdown
+        v-show="shouldShowSelector"
         id="time-selection"
         name="order-time"
         :class="$style['c-checkout-selector']"
@@ -26,7 +27,7 @@ import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FormDropdown from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
+import { CHECKOUT_METHOD_DINEIN, VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: {
@@ -78,6 +79,10 @@ export default {
          */
         shouldShowPreOrderWarning () {
             return !this.availableFulfilment.isAsapAvailable;
+        },
+
+        shouldShowSelector () {
+            return this.serviceType !== CHECKOUT_METHOD_DINEIN || this.availableFulfilment.times.length > 1;
         }
     },
 
