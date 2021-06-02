@@ -163,6 +163,163 @@ describe('ErrorDialog', () => {
                 // Assert
                 expect(windowLocationSpy).not.toHaveBeenCalled();
             });
+
+            describe('when `modalContext` exists', () => {
+                it('should invoke `close` so the error modal can be closed', () => {
+                    // Arrange
+                    const wrapper = shallowMount(ErrorDialog, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    const closeModalMethod = jest.fn();
+
+                    const spy = jest.spyOn(wrapper.vm, 'getModalContext').mockImplementation(() => ({
+                        close: closeModalMethod
+                    }));
+
+                    // Act
+                    wrapper.vm.closeErrorDialog();
+
+                    // Assert
+                    expect(spy).toHaveBeenCalled();
+                });
+            });
+
+            describe('when `modalContext` does not exist', () => {
+                it('should not invoke `close`', () => {
+                    // Arrange
+                    const wrapper = shallowMount(ErrorDialog, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    const closeModalMethod = jest.fn();
+
+                    jest.spyOn(wrapper.vm, 'getModalContext').mockImplementation(() => undefined);
+
+                    // Act
+                    wrapper.vm.closeErrorDialog();
+
+                    // Assert
+                    expect(closeModalMethod).not.toHaveBeenCalled();
+                });
+            });
+        });
+
+        describe('`getModalContext ::`', () => {
+            it('should exist', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.getModalContext).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                it('should return `null` when `megaModal` does not exist', () => {
+                    // Arrange
+                    const wrapper = shallowMount(ErrorDialog, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act & Assert
+                    expect(wrapper.vm.getModalContext()).toBe(null);
+                });
+
+                it('should return `errorModal` when `megaModal` does exist', () => {
+                    // Arrange
+                    const wrapper = shallowMount(ErrorDialog, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    wrapper.vm.$refs = {
+                        errorModal: {
+                            $refs: {
+                                megaModal: '<div>'
+                            }
+                        }
+                    };
+
+                    // Act
+                    const result = wrapper.vm.getModalContext();
+
+                    // Assert
+                    expect(result).toBe(wrapper.vm.$refs.errorModal);
+                });
+            });
+        });
+    });
+
+    describe('mounted ::', () => {
+        it('should make a call to `getModalContext`', () => {
+            // Arrange
+            const getModalContextSpy = jest.spyOn(ErrorDialog.methods, 'getModalContext');
+
+            shallowMount(ErrorDialog, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(getModalContextSpy).toHaveBeenCalled();
+        });
+
+        describe('when `modalContext` does exist', () => {
+            it('should open the modal via `modalContext.open`', () => {
+                // Arrange
+                const openModalMethod = jest.fn();
+
+                jest.spyOn(ErrorDialog.methods, 'getModalContext').mockImplementation(() => ({
+                    open: openModalMethod
+                }));
+
+                shallowMount(ErrorDialog, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(openModalMethod).toHaveBeenCalled();
+            });
+        });
+
+        describe('when `modalContext` does not exist', () => {
+            it('should not call the `open` method on `modalContext.open`', () => {
+                // Arrange
+                const openModalMethod = jest.fn();
+
+                jest.spyOn(ErrorDialog.methods, 'getModalContext').mockImplementation(() => undefined);
+
+                shallowMount(ErrorDialog, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(openModalMethod).not.toHaveBeenCalled();
+            });
         });
     });
 });

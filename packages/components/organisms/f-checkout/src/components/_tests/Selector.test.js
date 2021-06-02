@@ -239,51 +239,103 @@ describe('Selector', () => {
         });
 
         describe('`initFulfilmentTime`', () => {
+            // Arrange
             let wrapper;
             let updateFulfilmentTimeSpy;
 
             beforeEach(() => {
-                wrapper = shallowMount(Selector, {
-                    store: createStore({
-                        availableFulfilment: {
-                            isAsapAvailable: false,
-                            times: []
-                        }
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
+                // Arrange
                 updateFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'updateFulfilmentTime');
             });
 
-            it('should exist', () => {
-                expect(wrapper.vm.initFulfilmentTime).toBeDefined();
+            afterEach(() => {
+                jest.clearAllMocks();
             });
 
-            describe('when invoked', () => {
-                describe('AND there are no fulfilment `times` available', () => {
-                    it('should NOT make a call to `updateFulfilmentTime`', () => {
-                        // Act
-                        wrapper.vm.initFulfilmentTime([]);
-
-                        // Assert
-                        expect(updateFulfilmentTimeSpy).not.toHaveBeenCalled();
+            describe('AND when there are fulfilment `times` but no pre-selected fulfilment time', () => {
+                beforeEach(() => {
+                    // Act
+                    wrapper = shallowMount(Selector, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
                     });
                 });
 
-                describe('AND there are fulfilment `times` available', () => {
-                    it('should make a call to `updateFulfilmentTime` with the `from` & `to` values', () => {
-                        // Arrange
-                        const times = [{
-                            text: 'Wednesday 01:00',
-                            value: '2020-01-01T01:00:00.000Z'
-                        }];
+                it('should make a call to `updateFulfilmentTime` only once', () => {
+                    // Assert
+                    expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
+                });
 
+                it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
+                    // Assert
+                    expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
+                        from: '2020-01-01T01:00:00.000Z',
+                        to: '2020-01-01T01:00:00.000Z'
+                    });
+                });
+
+                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                    // Assert
+                    expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:00:00.000Z');
+                });
+            });
+
+            describe('AND when there are fulfilment `times` available and a pre-selected fulfilment time', () => {
+                describe('AND the pre-selected fulfilment time is still available', () => {
+                    beforeEach(() => {
                         // Act
-                        wrapper.vm.initFulfilmentTime(times);
+                        wrapper = shallowMount(Selector, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                time: { from: '2020-01-01T01:15:00.000Z', to: '2020-01-01T01:15:00.000Z' }
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+                    });
 
+                    it('should make a call to `updateFulfilmentTime` only once', () => {
+                        // Assert
+                        expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
+                    });
+
+                    it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
+                        // Assert
+                        expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
+                            from: '2020-01-01T01:15:00.000Z',
+                            to: '2020-01-01T01:15:00.000Z'
+                        });
+                    });
+
+                    it('should update `selectedAvailableFulfilmentTime` with the pre-selected fulfilment time', () => {
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:15:00.000Z');
+                    });
+                });
+
+                describe('AND when the pre-selected fulfilment time is not available', () => {
+                    beforeEach(() => {
+                        // Act
+                        wrapper = shallowMount(Selector, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                time: { from: '2020-01-01T00:45:00.000Z', to: '2020-01-01T00:45:00.000Z' }
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+                    });
+
+                    it('should make a call to `updateFulfilmentTime` only once', () => {
+                        // Assert
+                        expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
+                    });
+
+                    it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
                         // Assert
                         expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
                             from: '2020-01-01T01:00:00.000Z',
@@ -291,52 +343,122 @@ describe('Selector', () => {
                         });
                     });
 
-                    it('should update `selectedAvailableFulfilmentTime` with the `from` & `to` values', () => {
-                        // Arrange
-                        const times = [{
-                            text: 'Wednesday 01:00',
-                            value: '2020-01-01T01:00:00.000Z'
-                        }];
-
-                        // Act
-                        wrapper.vm.initFulfilmentTime(times);
-
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Assert
-                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toEqual(times[0].value);
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:00:00.000Z');
                     });
+                });
+            });
+
+            describe('AND when there are no fulfilment `times` available and no pre-selected fulfilment time', () => {
+                beforeEach(() => {
+                    // Act
+                    wrapper = shallowMount(Selector, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            availableFulfilment: {
+                                times: [],
+                                isAsapAvailable: true
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should make a call to `updateFulfilmentTime` only once', () => {
+                    // Assert
+                    expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
+                });
+
+                it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
+                    // Assert
+                    expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
+                        from: '',
+                        to: ''
+                    });
+                });
+
+                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                    // Assert
+                    expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('');
+                });
+            });
+
+            describe('AND when there are no fulfilment `times` available but a pre-selected fulfilment time', () => {
+                beforeEach(() => {
+                    // Act
+                    wrapper = shallowMount(Selector, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            availableFulfilment: {
+                                times: [],
+                                isAsapAvailable: true
+                            },
+                            time: { from: '2020-01-01T01:00:00.000Z', to: '2020-01-01T01:00:00.000Z' }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should make a call to `updateFulfilmentTime` only once', () => {
+                    // Assert
+                    expect(updateFulfilmentTimeSpy).toBeCalledTimes(1);
+                });
+
+                it('should make a call to `updateFulfilmentTime` with the first available fulfilment `to` and `from` time', () => {
+                    // Assert
+                    expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
+                        from: '',
+                        to: ''
+                    });
+                });
+
+                it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                    // Assert
+                    expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('');
                 });
             });
         });
 
         describe('`setAsapFlag`', () => {
+            // Arrange
             let wrapper;
             let updateHasAsapSelectedSpy;
+            const anyTime = '2020-01-01T01:00:00.000Z';
 
             beforeEach(() => {
-                wrapper = shallowMount(Selector, {
-                    store: createStore({
-                        availableFulfilment: {
-                            isAsapAvailable: true,
-                            times: fulfilmentTimes
-                        }
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
                 updateHasAsapSelectedSpy = jest.spyOn(Selector.methods, 'updateHasAsapSelected');
             });
 
-            it('should exist', () => {
-                expect(wrapper.vm.setAsapFlag).toBeDefined();
+            afterEach(() => {
+                jest.clearAllMocks();
             });
 
             describe('when invoked', () => {
                 describe('AND `isAsapAvailable` is available & the `availableFulfilment` from matches the `selected` fulfilment time', () => {
+                    beforeEach(() => {
+                        // Arrange
+                        wrapper = shallowMount(Selector, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                availableFulfilment: {
+                                    isAsapAvailable: true,
+                                    times: fulfilmentTimes
+                                }
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+                    });
+
                     it('should make a call to `updateHasAsapSelected` with the param `true` passed', () => {
                         // Act
-                        wrapper.vm.setAsapFlag();
+                        wrapper.vm.setAsapFlag(anyTime);
 
                         // Assert
                         expect(updateHasAsapSelectedSpy).toHaveBeenCalledWith(true);
@@ -344,9 +466,25 @@ describe('Selector', () => {
                 });
 
                 describe('AND `isAsapAvailable` is not available', () => {
+                    beforeEach(() => {
+                        // Arrange
+                        wrapper = shallowMount(Selector, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                availableFulfilment: {
+                                    isAsapAvailable: false,
+                                    times: fulfilmentTimes
+                                }
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+                    });
+
                     it('should make a call to `updateHasAsapSelected` with the param `false` passed', () => {
                         // Act
-                        wrapper.vm.setAsapFlag();
+                        wrapper.vm.setAsapFlag(anyTime);
 
                         // Assert
                         expect(updateHasAsapSelectedSpy).toHaveBeenCalledWith(false);
@@ -413,7 +551,7 @@ describe('Selector', () => {
     });
 
     describe('mounted ::', () => {
-        it('should make a call to `initFulfilmentTime` with the available `fulfilmentTimes`', () => {
+        it('should make a call to `initFulfilmentTime`', () => {
             // Arrange
             const initFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'initFulfilmentTime');
 
@@ -426,16 +564,7 @@ describe('Selector', () => {
             });
 
             // Assert
-            expect(initFulfilmentTimeSpy).toHaveBeenCalledWith([
-                {
-                    text: 'As soon as possible',
-                    value: '2020-01-01T01:00:00.000Z'
-                },
-                {
-                    text: 'Wednesday 01:15',
-                    value: '2020-01-01T01:15:00.000Z'
-                }
-            ]);
+            expect(initFulfilmentTimeSpy).toHaveBeenCalled();
         });
     });
 });
