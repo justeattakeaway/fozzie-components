@@ -167,6 +167,27 @@ describe('checkout mapper', () => {
         // Assert
         expect(geolocationRequest).toBe(geolocation);
     });
+
+    describe('when checkout method is dine in', () => {
+        const isCheckoutMethodDelivery = false;
+        const isCheckoutMethodDineIn = true;
+
+        it('should map the table identifier', () => {
+            // Act
+            const requestBody = mapUpdateCheckoutRequest({
+                ...defaultParams,
+                address,
+                isCheckoutMethodDelivery,
+                isCheckoutMethodDineIn,
+                tableIdentifier: '10'
+            });
+
+            const tableRequest = requestBody[1].value.table;
+
+            // Assert
+            expect(tableRequest.identifier).toBe('10');
+        });
+    });
 });
 
 describe('mapAnalyticsName :: ', () => {
