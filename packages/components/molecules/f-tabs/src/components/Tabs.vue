@@ -7,13 +7,13 @@
                 <button
                     v-for="({ name, title }, i) in tabs"
                     :key="i"
+                    type="button"
                     :class="[
                         { [$style['c-tabs-button--active']]: activeTab === name },
                         $style['c-tabs-button']
                     ]"
                     :data-test-id="`tab-button-${name}`"
-                    @click="selectTabIndex(name)"
-                >
+                    @click="selectTabIndex(name)">
                     {{ title }}
                 </button>
             </div>
