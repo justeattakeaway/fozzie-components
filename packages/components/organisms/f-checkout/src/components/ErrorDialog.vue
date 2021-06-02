@@ -13,9 +13,9 @@
 
         <f-button
             :class="$style['c-checkout-errorDialogButton']"
-            :data-gtm="isDuplicateOrderError() ? 'engagement|dialog_duplicate_order_warning|click_acknowledge' : undefined"
+            :data-gtm="isDuplicateOrderError ? 'engagement|dialog_duplicate_order_warning|click_acknowledge' : undefined"
             button-size="large"
-            :button-type="isDuplicateOrderError() ? 'secondary' : 'primary'"
+            :button-type="isDuplicateOrderError ? 'secondary' : 'primary'"
             data-test-id="redirect-to-menu-button"
             @click.native="closeErrorDialog"
         >
@@ -23,7 +23,7 @@
         </f-button>
 
         <f-button
-            v-if="isDuplicateOrderError()"
+            v-if="isDuplicateOrderError"
             :class="$style['c-checkout-errorDialogButton']"
             button-size="large"
             button-type="primary"
@@ -43,7 +43,8 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapActions, mapState } from 'vuex';
 import {
-    VUEX_CHECKOUT_MODULE
+    VUEX_CHECKOUT_MODULE,
+    VUEX_CHECKOUT_ANALYTICS_MODULE
 } from '../constants';
 
 export default {
@@ -75,6 +76,10 @@ export default {
 
         serviceTypeText () {
             return this.$t(`serviceTypes.${this.serviceType}`);
+        },
+
+        isDuplicateOrderError () {
+            return this.errorCode === 'DuplicateOrder';
         }
     },
 
@@ -85,14 +90,18 @@ export default {
             modalContext.open();
         }
 
-        if (this.isDuplicateOrderError()) {
-            this.dataLayerPushDupOrderWarnTrackingEvent();
+        if (this.isDuplicateOrderError) {
+            this.trackDuplicateOrderWarnDialog();
         }
     },
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateMessage'
+        ]),
+
+        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+            'trackDuplicateOrderWarnDialog'
         ]),
 
         getModalContext () {
@@ -124,21 +133,6 @@ export default {
             window.location.assign('order-history');
 
             this.updateMessage();
-        },
-
-        isDuplicateOrderError () {
-            return this.errorCode === 'DuplicateOrder';
-        },
-
-        dataLayerPushDupOrderWarnTrackingEvent () {
-            const dataLayer = window.dataLayer || [];
-
-            dataLayer.push({
-                event: 'trackEvent',
-                eventCategory: 'engagement',
-                eventAction: 'dialog_duplicate_order_warning',
-                eventLabel: 'view_dialog'
-            });
         }
     }
 };

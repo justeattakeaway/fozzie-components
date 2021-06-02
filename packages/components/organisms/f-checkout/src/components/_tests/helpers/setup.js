@@ -85,7 +85,8 @@ const defaultAnalyticsActions = {
     trackFormInteraction: jest.fn(),
     trackInitialLoad: jest.fn(),
     updateAutofill: jest.fn(),
-    updateChangedField: jest.fn()
+    updateChangedField: jest.fn(),
+    trackDuplicateOrderWarnDialog: jest.fn()
 };
 
 const i18n = {

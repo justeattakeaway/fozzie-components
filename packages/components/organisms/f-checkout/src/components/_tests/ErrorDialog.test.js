@@ -93,6 +93,46 @@ describe('ErrorDialog', () => {
                 expect(wrapper.vm.restaurantMenuPageUrl).toEqual(`restaurant-${restaurant.seoName}/menu`);
             });
         });
+
+        describe('isDuplicateOrderError ::', () => {
+            it('should return `True` when `ErrorCode` refers to a duplicate order', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: duplicateOrderMessage
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const actual = wrapper.vm.isDuplicateOrderError;
+
+                // Assert
+                expect(actual).toBeTruthy();
+            });
+
+            it('should return `False` when `ErrorCode` does not refer to a duplicate order', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: defaultMessage
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const actual = wrapper.vm.isDuplicateOrderError;
+
+                // Assert
+                expect(actual).toBeFalsy();
+            });
+        });
     });
 
     describe('methods ::', () => {
@@ -308,81 +348,6 @@ describe('ErrorDialog', () => {
                 expect(windowLocationSpy).toHaveBeenCalledWith('order-history');
             });
         });
-
-        describe('isDuplicateOrderError ::', () => {
-            it('should return `True` when `ErrorCode` refers to a duplicate order', () => {
-                // Arrange
-                const wrapper = shallowMount(ErrorDialog, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        message: duplicateOrderMessage
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const actual = wrapper.vm.isDuplicateOrderError();
-
-                // Assert
-                expect(actual).toBeTruthy();
-            });
-
-            it('should return `False` when `ErrorCode` does not refer to a duplicate order', () => {
-                // Arrange
-                const wrapper = shallowMount(ErrorDialog, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        message: defaultMessage
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const actual = wrapper.vm.isDuplicateOrderError();
-
-                // Assert
-                expect(actual).toBeFalsy();
-            });
-        });
-
-        describe('dataLayerPushDupOrderWarnTrackingEvent ::', () => {
-            it('should push to the dataLayer', () => {
-                // Arrange
-                const expected = {
-                    event: 'trackEvent',
-                    eventCategory: 'engagement',
-                    eventAction: 'dialog_duplicate_order_warning',
-                    eventLabel: 'view_dialog'
-                };
-
-                Object.defineProperty(global, 'window', {
-                    value: {
-                        dataLayer: []
-                    }
-                });
-                window.dataLayer = [];
-
-                const wrapper = shallowMount(ErrorDialog, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        message: duplicateOrderMessage
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                wrapper.vm.dataLayerPushDupOrderWarnTrackingEvent();
-
-                // Assert
-                expect(window.dataLayer).toContainEqual(expected);
-            });
-        });
     });
 
     describe('mounted ::', () => {
@@ -441,10 +406,11 @@ describe('ErrorDialog', () => {
             });
         });
 
-        it('should make a call to `dataLayerPushDupOrderWarnTrackingEvent` when `ErrorCode` refers to a duplicate order ', () => {
-            // Arrange & Act
-            const dataLayerPushDupOrderWarnTrackingEventSpy = jest.spyOn(ErrorDialog.methods, 'dataLayerPushDupOrderWarnTrackingEvent');
+        it('should make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` refers to a duplicate order ', () => {
+            // Arrange
+            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
 
+            // Act
             shallowMount(ErrorDialog, {
                 store: createStore({
                     ...defaultCheckoutState,
@@ -456,13 +422,14 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(dataLayerPushDupOrderWarnTrackingEventSpy).toHaveBeenCalled();
+            expect(trackDuplicateOrderWarnDialogSpy).toHaveBeenCalled();
         });
 
-        it('should not make a call to `dataLayerPushDupOrderWarnTrackingEvent` when `ErrorCode` does not refer to a duplicate order ', () => {
-            // Arrange & Act
-            const dataLayerPushDupOrderWarnTrackingEventSpy = jest.spyOn(ErrorDialog.methods, 'dataLayerPushDupOrderWarnTrackingEvent');
+        it('should not make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` does not refer to a duplicate order ', () => {
+            // Arrange
+            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
 
+            // Act
             shallowMount(ErrorDialog, {
                 store: createStore({
                     ...defaultCheckoutState,
@@ -474,7 +441,7 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(dataLayerPushDupOrderWarnTrackingEventSpy).not.toHaveBeenCalled();
+            expect(trackDuplicateOrderWarnDialogSpy).not.toHaveBeenCalled();
         });
     });
 });
