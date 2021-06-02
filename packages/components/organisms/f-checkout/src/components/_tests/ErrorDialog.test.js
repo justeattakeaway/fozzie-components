@@ -12,23 +12,24 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-let windowLocationSpy;
-
-beforeEach(() => {
-    windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
-});
-
 describe('ErrorDialog', () => {
     const propsData = {};
     const restaurant = {
         seoName: 'checkout-kofte-farringdon',
         id: '22222'
     };
-    const message = {
+    const defaultMessage = {
         shouldRedirectToMenu: true,
         shouldShowInDialog: true,
         code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
     };
+    const duplicateOrderMessage = {
+        code: 'DuplicateOrder'
+    };
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
 
     it('should be defined', () => {
         // Arrange && Act
@@ -50,7 +51,7 @@ describe('ErrorDialog', () => {
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        message
+                        message: defaultMessage
                     }),
                     i18n,
                     localVue,
@@ -58,7 +59,7 @@ describe('ErrorDialog', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.errorCode).toEqual(message.code);
+                expect(wrapper.vm.errorCode).toEqual(defaultMessage.code);
             });
 
             it('should return `null` if  no `message` is provided', () => {
@@ -92,20 +93,57 @@ describe('ErrorDialog', () => {
                 expect(wrapper.vm.restaurantMenuPageUrl).toEqual(`restaurant-${restaurant.seoName}/menu`);
             });
         });
+
+        describe('isDuplicateOrderError ::', () => {
+            it('should return `True` when `ErrorCode` refers to a duplicate order', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: duplicateOrderMessage
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const actual = wrapper.vm.isDuplicateOrderError;
+
+                // Assert
+                expect(actual).toBeTruthy();
+            });
+
+            it('should return `False` when `ErrorCode` does not refer to a duplicate order', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: defaultMessage
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const actual = wrapper.vm.isDuplicateOrderError;
+
+                // Assert
+                expect(actual).toBeFalsy();
+            });
+        });
     });
 
     describe('methods ::', () => {
         describe('closeErrorDialog ::', () => {
             let updateMessageSpy;
+            let windowLocationSpy;
 
             beforeEach(() => {
                 updateMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateMessage');
+                windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
             });
-
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
             it('should call `updateMessage`', () => {
                 // Arrange
                 const wrapper = shallowMount(ErrorDialog, {
@@ -128,7 +166,7 @@ describe('ErrorDialog', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         restaurant,
-                        message
+                        message: defaultMessage
                     }),
                     i18n,
                     localVue,
@@ -144,13 +182,13 @@ describe('ErrorDialog', () => {
 
             it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {
                 // Arrange
-                message.shouldRedirectToMenu = false;
+                defaultMessage.shouldRedirectToMenu = false;
 
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
                         restaurant,
-                        message
+                        message: defaultMessage
                     }),
                     i18n,
                     localVue,
@@ -264,6 +302,51 @@ describe('ErrorDialog', () => {
                 });
             });
         });
+
+        describe('showOrderHistory ::', () => {
+            let updateMessageSpy;
+            let windowLocationSpy;
+
+            beforeEach(() => {
+                updateMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateMessage');
+                windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
+            });
+
+            it('should call `updateMessage`', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                wrapper.vm.closeErrorDialog();
+
+                // Assert
+                expect(updateMessageSpy).toHaveBeenCalled();
+            });
+
+            it('should redirect to the order history', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: duplicateOrderMessage
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                wrapper.vm.showOrderHistory();
+
+                // Assert
+                expect(windowLocationSpy).toHaveBeenCalledWith('order-history');
+            });
+        });
     });
 
     describe('mounted ::', () => {
@@ -320,6 +403,44 @@ describe('ErrorDialog', () => {
                 // Assert
                 expect(openModalMethod).not.toHaveBeenCalled();
             });
+        });
+
+        it('should make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` refers to a duplicate order ', () => {
+            // Arrange
+            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
+
+            // Act
+            shallowMount(ErrorDialog, {
+                store: createStore({
+                    ...defaultCheckoutState,
+                    message: duplicateOrderMessage
+                }),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(trackDuplicateOrderWarnDialogSpy).toHaveBeenCalled();
+        });
+
+        it('should not make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` does not refer to a duplicate order ', () => {
+            // Arrange
+            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
+
+            // Act
+            shallowMount(ErrorDialog, {
+                store: createStore({
+                    ...defaultCheckoutState,
+                    message: defaultMessage
+                }),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(trackDuplicateOrderWarnDialogSpy).not.toHaveBeenCalled();
         });
     });
 });
