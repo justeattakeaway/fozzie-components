@@ -4,9 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.6.0
+------------------------------
+*June 2, 2021*
+
+### Changed
+- Button type from `submit` (the default) to `button` to prevent submission when tabs are used inside a form.
+
+
 v0.5.0
 ------------------------------
-*May 25, 2021
+*May 25, 2021*
 
 ### Changed
 - CSS variables to use pie design tokens instead of fozzie-colour-palette vars
@@ -33,12 +41,8 @@ v0.3.0
 - Added supporting code to component object file
 
 ### Changed
-- `Data-test-id` naming for `tab-` to `tab-button-` in `Tabs.vue` and `Tabs.test.js`
-- `Data-test-id` naming for `transition-tab-` to `tab-content-` in `Tab.vue` and `Tab.test.js`
-
-*February 24, 2021*
-
-### Changed
+- `data-test-id` naming for `tab-` to `tab-button-` in `Tabs.vue` and `Tabs.test.js`
+- `data-test-id` naming for `transition-tab-` to `tab-content-` in `Tab.vue` and `Tab.test.js`
 - Restructured component object into page object model
 - Refactored component and accessibility tests
 
