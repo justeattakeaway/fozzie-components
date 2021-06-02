@@ -175,6 +175,7 @@ export default {
             this.setLegacyCookieBannerCookie();
             this.dataLayerPush('full');
             this.resendEvents();
+            this.hideAllBanners();
             this.shouldHideBanner = true;
         },
 
@@ -187,6 +188,7 @@ export default {
             this.dataLayerPush('necessary');
             this.resendEvents();
             this.removeUnnecessaryCookies();
+            this.hideAllBanners();
             this.shouldHideBanner = true;
         },
 
@@ -204,6 +206,16 @@ export default {
          */
         hideBanner () {
             this.shouldHideBanner = true;
+        },
+
+        /**
+         * Hide the legacy banners
+         */
+        hideAllBanners () {
+            const allBanners = document.getElementsByClassName('cpOverlay');
+            if (allBanners.length) {
+                allBanners[0].classList.add('hideCPBanner');
+            }
         },
 
         /**
