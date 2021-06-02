@@ -5,8 +5,8 @@ module.exports = class Loyalty extends Page {
 
     get component () { return $(COMPONENT); }
 
-    open () {
-        super.openComponent('organism', 'loyalty-component');
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
