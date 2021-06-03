@@ -47,7 +47,7 @@ const getIssueByCode = code => {
 * @param  {object} state - The current `checkout` state.
 */
 const resolveCustomerDetails = (data, state) => {
-    if (data && data.customer) {
+    if (data?.customer) {
         let tokenData;
 
         if (!data.customer.phoneNumber) {
@@ -323,7 +323,7 @@ export default {
                 commit(UPDATE_ORDER_PLACED, orderId);
                 commit(UPDATE_ERRORS, []);
             } catch (error) {
-                if (error.response && error.response.data) {
+                if (error?.response?.data) {
                     const { errorCode } = error.response.data;
 
                     const checkoutIssue = getIssueByCode(errorCode);
@@ -355,7 +355,6 @@ export default {
                 };
 
                 const { data } = await axios.post(url, postData, config);
-
                 commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
             }
         },
@@ -424,7 +423,7 @@ export default {
             let address = null;
             if (addressService.isAddressInLocalStorage()) {
                 address = addressService.getAddressFromLocalStorage();
-            } else if (fulfilment.location && fulfilment.location.address && fulfilment.location.address.lines) {
+            } else if (fulfilment?.location?.address?.lines) {
                 /* eslint-disable prefer-destructuring */
                 address = fulfilment.location.address;
             }
