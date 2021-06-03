@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.38.0
+------------------------------
+*June 3, 2021*
+
+## Added
+- Optional Chaining which works inside Storybook by adding acorn resolution to package.json
+
+
 v3.37.0
 ------------------------------
 *May 28, 2021*

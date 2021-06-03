@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.37.0",
+  "version": "3.38.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -25,7 +25,8 @@
     "prepare": "husky install"
   },
   "resolutions": {
-    "webpack": "4.36.0"
+    "webpack": "4.36.0",
+    "acorn": "8.0.1"
   },
   "devDependencies": {
     "@babel/cli": "7.10.5",
