@@ -4,12 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.127.1
+v0.128.1
 ------------------------------
 *June 3, 2021*
 
 ### Changed
 - Utilise Optional Chaining in checkout module
+
+
+v0.128.0
+------------------------------
+*June 2, 2021*
+
+### Change
+- Give the consumer two options; 'Close' or 'View recent orders', when showing the Duplicate Error Warning dialog box
+- Added tracking to the alternative dialog box
+
 
 v0.127.0
 ------------------------------
@@ -33,7 +43,7 @@ v0.125.0
 *May 24, 2021*
 
 ### Added
-- Populate address fields from local storage if it exists 
+- Populate address fields from local storage if it exists
 
 
 v0.124.0

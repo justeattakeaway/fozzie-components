@@ -181,6 +181,29 @@ describe('Tabs', () => {
                 // Assert
                 expect(wrapper.vm.direction).toEqual('LEFT');
             });
+
+            it('should emit a `change` event if new index != old index', async () => {
+                // Act
+                await wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[0].name}"]`).trigger('click');
+                await wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[1].name}"]`).trigger('click');
+
+                // Assert
+                expect(wrapper.emitted().change).toBeTruthy();
+                expect(wrapper.emitted().change.length).toBe(1);
+                expect(wrapper.emitted().change[0]).toStrictEqual([{
+                    new: 1,
+                    prev: 0
+                }]);
+            });
+
+            it('should not emit a `change` event if new index = old index', async () => {
+                // Act
+                await wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[0].name}"]`).trigger('click');
+                await wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[0].name}"]`).trigger('click');
+
+                // Assert
+                expect(wrapper.emitted().change).toBeFalsy();
+            });
         });
 
         describe('programmatically', () => {
@@ -208,6 +231,29 @@ describe('Tabs', () => {
 
                 // Assert
                 expect(wrapper.vm.direction).toEqual('LEFT');
+            });
+
+            it('should emit a `change` event if new index != old index', async () => {
+                // Act
+                await tabStub.vm[SELECT](registeredTabsMock[0].name);
+                await tabStub.vm[SELECT](registeredTabsMock[1].name);
+
+                // Assert
+                expect(wrapper.emitted().change).toBeTruthy();
+                expect(wrapper.emitted().change.length).toBe(1);
+                expect(wrapper.emitted().change[0]).toStrictEqual([{
+                    new: 1,
+                    prev: 0
+                }]);
+            });
+
+            it('should not emit a `change` event if new index = old index', async () => {
+                // Act
+                await tabStub.vm[SELECT](registeredTabsMock[0].name);
+                await tabStub.vm[SELECT](registeredTabsMock[0].name);
+
+                // Assert
+                expect(wrapper.emitted().change).toBeFalsy();
             });
         });
     });

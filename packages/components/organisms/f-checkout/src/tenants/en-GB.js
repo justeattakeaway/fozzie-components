@@ -114,9 +114,10 @@ const messages = {
             },
 
             DuplicateOrder: {
-                title: 'This looks like a duplicate order',
-                message: 'So you’re not charged twice, your order has not been processed',
-                buttonText: 'Ok'
+                title: 'This order has not been placed',
+                message: 'It’s the same as the one you made a moment ago and we want to check it’s not a mistake. Wait 15 mins or change an item in your order',
+                buttonText: 'Close',
+                buttonTextPrimary: 'View my orders'
             }
         }
     },
