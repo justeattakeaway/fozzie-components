@@ -27,7 +27,7 @@
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center"
-                data-test-id="checkout-card-component"
+                :data-test-id="`checkout-card-component-${serviceType}`"
                 :class="$style['c-checkout']"
             >
                 <checkout-header :login-url="loginUrl" />
@@ -106,7 +106,7 @@
                         data-test-id="address-block"
                     />
 
-                    <form-selector v-if="shouldShowFulfilmentSelector" />
+                    <form-selector />
 
                     <form-field
                         :label-text="$t(`userNote.${serviceType}.title`)"
@@ -405,10 +405,6 @@ export default {
             };
         },
 
-        shouldShowFulfilmentSelector () {
-            return !this.isCheckoutMethodDineIn || this.availableFulfilment.times.length > 1;
-        },
-
         messageType () {
             return this.message && this.message.shouldShowInDialog
                 ? this.dialogMessage
@@ -580,10 +576,12 @@ export default {
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
                     time: this.time,
                     userNote: this.userNote,
                     geolocation: this.geolocation,
-                    asap: this.hasAsapSelected
+                    asap: this.hasAsapSelected,
+                    tableIdentifier: this.tableIdentifier
                 });
 
                 await this.updateCheckout({

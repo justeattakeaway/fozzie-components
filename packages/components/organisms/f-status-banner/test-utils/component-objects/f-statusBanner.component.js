@@ -19,19 +19,18 @@ module.exports = class StatusBanner extends Page {
     get heading () { return $(BANNER_HEADING); }
 
     get subheading () { return $(BANNER_SUBHEADING); }
-
     get addressBox () { return $(ADDRESS_BOX); }
 
     get button () { return $(BUTTON); }
 
     get errorMessage () { return $(ERROR_MESSAGE); }
 
-    open () {
-        super.openComponent('organism', 'status-banner-component');
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
-        this.component.waitForExist();
+        super.waitForComponent(this.component);
     }
 
     isStatusBannerComponentDisplayed () {

@@ -194,7 +194,6 @@ describe('Checkout', () => {
 
     describe('data ::', () => {
         describe('serviceType ::', () => {
-            const fulfilmentTimeDropdownSelector = '[data-test-id="formfield-order-time-dropdown-select"]';
             const tableIdentifierSelector = '[data-test-id="formfield-table-identifier-input"]';
 
             it('should display the address block if set to `delivery`', async () => {
@@ -285,80 +284,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(tableIdentifierInput.exists()).toBe(false);
-            });
-
-            it('should display the fulfilment time dropdown if set to `delivery`', async () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const fulfilmentTimeDropdown = wrapper.find(fulfilmentTimeDropdownSelector);
-
-                // Assert
-                expect(fulfilmentTimeDropdown.exists()).toBe(true);
-            });
-
-            it('should display the fulfilment time dropdown if set to `collection`', async () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const fulfilmentTimeDropdown = wrapper.find(fulfilmentTimeDropdownSelector);
-
-                // Assert
-                expect(fulfilmentTimeDropdown.exists()).toBe(true);
-            });
-
-            it('should display the fulfilment time dropdown if set to `dinein` and there is more than one fulfilment time available', async () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        serviceType: CHECKOUT_METHOD_DINEIN
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const fulfilmentTimeDropdown = wrapper.find(fulfilmentTimeDropdownSelector);
-
-                // Assert
-                expect(fulfilmentTimeDropdown.exists()).toBe(true);
-            });
-
-            it('should not display the fulfilment time dropdown if set to `dinein` and there is only one fulfilment time available', async () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        availableFulfilment: {
-                            times: [
-                                {
-                                    from: '2020-01-01T01:00:00.000Z',
-                                    to: '2020-01-01T01:00:00.000Z'
-                                }
-                            ]
-                        },
-                        serviceType: CHECKOUT_METHOD_DINEIN
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const fulfilmentTimeDropdown = wrapper.find(fulfilmentTimeDropdownSelector);
-
-                // Assert
-                expect(fulfilmentTimeDropdown.exists()).toBe(false);
             });
         });
 
@@ -1698,6 +1623,38 @@ describe('Checkout', () => {
 
                     // Assert
                     expect($logger.logInfo).toHaveBeenCalled();
+                });
+
+                it('should call `$logger` with the correct arguments', () => {
+                    // Arrange
+                    const eventData = {
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY
+                    };
+                    const error = new Error();
+                    error.name = 'Test name';
+                    error.message = 'Test message';
+                    error.stack = 'Test stack';
+                    error.errorCode = 'Test error code';
+
+                    const expectedError = {
+                        exception: error.name,
+                        exceptionMessage: error.message,
+                        exceptionStackTrace: error.stack,
+                        errorCode: error.errorCode
+                    };
+                    const logMessage = 'Logger says hi';
+
+                    // Act
+                    wrapper.vm.logInvoker({
+                        message: logMessage,
+                        data: eventData,
+                        logMethod: $logger.logError,
+                        error
+                    });
+
+                    // Assert
+                    expect($logger.logError).toHaveBeenCalledWith(logMessage, store, { data: eventData, tags: 'checkout', ...expectedError });
                 });
             });
         });

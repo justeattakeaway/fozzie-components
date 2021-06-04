@@ -1,12 +1,14 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const ErrorMessage = require('../../test-utils/component-objects/f-error-message.component');
 
-const errorMessage = new ErrorMessage();
+const errorMessage = new ErrorMessage('atom', 'error-message-component');
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        errorMessage.open();
+        const pageUrl = buildUrl(errorMessage.componentType, errorMessage.componentName, errorMessage.path);
+        errorMessage.open(pageUrl);
         errorMessage.waitForComponent();
     });
 

@@ -10,6 +10,14 @@ v0.12.1
 ### Fixed
 - component object export for consuming applications
 
+v0.13.0
+------------------------------
+*May 27, 2021*
+
+### Added
+- Method to hide legacy cookie banner(s) to avoid race conditions
+
+
 v0.12.0
 ------------------------------
 *May 25, 2021*

@@ -1,16 +1,19 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+
 const Header = require('../../test-utils/component-objects/f-header.component');
 
-const header = new Header();
+let header;
 
 describe('Shared - f-header component tests - @percy', () => {
     beforeEach(() => {
-        const headerData = {
-            locale: 'gb',
-            offers: true,
-            delivery: true
-        };
+        header = new Header('organism', 'header-component');
+        header.withQuery('&knob-Locale', 'en-GB');
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
-        header.open(headerData);
+        // Act
+        header.open(pageUrl);
         header.waitForComponent();
     });
 

@@ -29,7 +29,7 @@ class PlaceOrderError extends Error {
         this.messageKey = 'errorMessages.genericServerError';
         this.eventToEmit = EventNames.CheckoutPlaceOrderFailure;
         this.logMessage = 'Place Order Failure';
-
+        this.errorCode = errorCode;
         const issue = checkoutIssues[errorCode] || {};
         this.shouldShowInDialog = issue.shouldShowInDialog || false;
     }

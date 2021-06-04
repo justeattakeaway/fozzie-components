@@ -9,8 +9,8 @@ module.exports = class CookieBanner extends Page {
 
     get closeButton () { return this.component.$('[data-test-id="cookieBanner-close-button"]'); }
 
-    open (tenant = 'en-gb') {
-        super.openComponent('organism', `cookie-banner-component&knob-Locale=en-${tenant.toUpperCase()}`);
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
