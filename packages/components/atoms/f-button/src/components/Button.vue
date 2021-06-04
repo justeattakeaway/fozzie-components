@@ -6,7 +6,8 @@
             (isIcon ? $style['o-btn--icon'] : ''),
             $style[`o-btn--${buttonType}`],
             $style[`o-btn--size${buttonSizeClassname}`],
-            (isFullWidth ? $style['o-btn--fullWidth'] : '')
+            (isFullWidth ? $style['o-btn--fullWidth'] : ''),
+            (isLoading ? $style['o-btn--loading'] : '')
         ]"
         :action-type="buttonActionType"
         :data-test-id="`${componentType}-component`"
@@ -93,35 +94,47 @@ $btn-default-font-size          : 'body-l';
 $btn-default-weight             : $font-weight-bold;
 $btn-default-padding            : 11px 1.5em 13px;
 $btn-default-outline-color      : $color-focus;
-$btn-default-loading-color      : $color-content-interactive-primary;
-$btn-default-loading-colorOpaque: #6490cd;
+$btn-default-loading-opacity    : 0.35;
 
 $btn-primary-bgColor            : $color-interactive-primary;
 $btn-primary-bgColor--hover     : darken($color-interactive-primary, $color-hover-01);
 $btn-primary-bgColor--active    : darken($color-interactive-primary, $color-active-01);
 $btn-primary-textColor          : $color-content-interactive-primary;
+$btn-primary-loading-color      : $color-content-interactive-primary;
+$btn-primary-loading-colorOpaque: rgba($btn-primary-loading-color, $btn-default-loading-opacity);
 
 $btn-secondary-bgColor          : $color-interactive-secondary;
 $btn-secondary-bgColor--hover   : darken($color-interactive-secondary, $color-hover-01);
 $btn-secondary-bgColor--active  : darken($color-interactive-secondary, $color-active-01);
 $btn-secondary-textColor        : $color-content-interactive-secondary;
+$btn-secondary-loading-color      : $color-content-interactive-secondary;
+$btn-secondary-loading-colorOpaque: rgba($btn-secondary-loading-color, $btn-default-loading-opacity);
 
 $btn-outline-bgColor            : transparent;
 $btn-outline-bgColor--hover     : darken($color-white, $color-hover-01);
 $btn-outline-bgColor--active    : darken($color-white, $color-active-01);
 $btn-outline-textColor          : $color-content-interactive-tertiary;
 $btn-outline-border-color       : $color-border-default;
+$btn-outline-loading-color      : $color-content-interactive-tertiary;
+$btn-outline-loading-colorOpaque: rgba($btn-outline-loading-color, $btn-default-loading-opacity);
 
 $btn-ghost-bgColor              : transparent;
 $btn-ghost-bgColor--hover       : darken($color-white, $color-hover-01);
 $btn-ghost-bgColor--active      : darken($color-white, $color-active-01);
 $btn-ghost-textColor            : $color-content-interactive-secondary;
+$btn-ghost-loading-color      : $color-content-interactive-secondary;
+$btn-ghost-loading-colorOpaque: rgba($btn-ghost-loading-color, $btn-default-loading-opacity);
+
+$btn-link-loading-color      : $color-content-link;
+$btn-link-loading-colorOpaque: rgba($btn-link-loading-color, $btn-default-loading-opacity);
 
 $btn-disabled-bgColor           : $color-disabled-01;
 $btn-disabled-textColor         : $color-content-disabled;
 
 $btn-sizeLarge-font-size        : 'heading-s';
 $btn-sizeLarge-padding          : 13px 1.2em 15px;
+$btn-sizeLarge-loading-color      : $color-content-interactive-primary;
+$btn-sizeLarge-loading-colorOpaque: rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
 
 $btn-sizeSmall-padding          : 7px 1em 9px;
 
@@ -137,7 +150,7 @@ $btn-icon-sizeSmall-iconSize    : 18px;
 $btn-icon-sizeXSmall-buttonSize : 32px;
 $btn-icon-sizeXSmall-iconSize   : 18px;
 
-@include loadingIndicator('medium', $btn-default-loading-color, $btn-default-loading-colorOpaque);//transparentize($color-interactive-primary, 0.3));
+@include loadingIndicator('medium');
 
 .c-spinner {
     margin: 0 auto;
@@ -226,9 +239,12 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
         background-color: $btn-primary-bgColor--hover;
     }
 
-    &:active {
+    &:active,
+    &.o-btn--loading {
         background-color: $btn-primary-bgColor--active;
     }
+
+    @include spinnerColor($btn-primary-loading-color, $btn-primary-loading-colorOpaque);
 }
 
 /**
@@ -238,7 +254,6 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
  */
 
 .o-btn--secondary {
-    $btn-default-loading-color: red;
     background-color: $btn-secondary-bgColor;
     color: $btn-secondary-textColor;
 
@@ -246,14 +261,12 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
         background-color: $btn-secondary-bgColor--hover;
     }
 
-    &:active {
+    &:active,
+    &.o-btn--loading {
         background-color: $btn-secondary-bgColor--active;
     }
 
-    .c-spinner {
-        border-top: 3px solid red;
-        border-right: 3px solid black;
-    }
+    @include spinnerColor($btn-secondary-loading-color, $btn-secondary-loading-colorOpaque);
 }
 
 /**
@@ -277,9 +290,12 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
         background-color: $btn-outline-bgColor--hover;
     }
 
-    &:active {
+    &:active,
+    &.o-btn--loading {
         background-color: $btn-outline-bgColor--active;
     }
+
+    @include spinnerColor($btn-outline-loading-color, $btn-outline-loading-colorOpaque);
 }
 
 /**
@@ -302,9 +318,12 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
         background-color: $btn-ghost-bgColor--hover;
     }
 
-    &:active {
+    &:active,
+    &.o-btn--loading {
         background-color: $btn-ghost-bgColor--active;
     }
+
+    @include spinnerColor($btn-ghost-loading-color, $btn-ghost-loading-colorOpaque);
 }
 
 /**
@@ -334,6 +353,8 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
         color: darken($color-content-link, $color-active-01);
         background-color: transparent;
     }
+
+    @include spinnerColor($btn-link-loading-color, $btn-link-loading-colorOpaque);
 }
 
 /**
@@ -451,9 +472,11 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
         &:hover {
             background-color: darken($color-interactive-brand, $color-hover-01);
         }
-        &:active {
+        &:active, &.o-btn--loading {
             background-color: darken($color-interactive-brand, $color-active-01);
         }
+
+        @include spinnerColor($btn-sizeLarge-loading-color, $btn-sizeLarge-loading-colorOpaque);
     }
 }
 
