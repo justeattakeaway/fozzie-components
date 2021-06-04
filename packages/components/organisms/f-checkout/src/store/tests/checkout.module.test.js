@@ -5,6 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import localStorageMock from '../../../test-utils/local-storage/local-storage-mock';
 import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
@@ -909,6 +910,68 @@ describe('CheckoutModule', () => {
                     // Assert
                     expect(axios.post).not.toHaveBeenCalled();
                     expect(commit).not.toHaveBeenCalled();
+                });
+            });
+
+            describe('if the address is in local storage', () => {
+                const storedAddress = {
+                    Line1: 'Flat 101',
+                    Line2: 'Made Up House',
+                    Line3: 'Camden Town',
+                    Line4: '',
+                    Line5: '',
+                    City: 'London',
+                    Field1: '51.529747',
+                    Field2: '-0.142396',
+                    PostalCode: 'NW1 4DE',
+                    searchBoxAddress: 'NW1 4DE'
+                };
+
+                beforeEach(() => {
+                    state.authToken = authToken;
+
+                    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify(storedAddress));
+                });
+
+                afterEach(() => {
+                    window.localStorage.clear();
+                    jest.resetAllMocks();
+                });
+
+                it('should not make api call and should call the mutation with the stored coordinates if the form values match local storage', async () => {
+                    const newState = {
+                        ...state,
+                        address: {
+                            line1: 'Flat 101',
+                            line2: 'Made Up House',
+                            locality: 'London',
+                            postcode: 'NW1 4DE'
+                        }
+                    };
+                    // Act
+                    await getGeoLocation({ commit, state: newState }, payload);
+
+                    // Assert
+                    expect(axios.post).not.toHaveBeenCalled();
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, [storedAddress.Field1, storedAddress.Field2]);
+                });
+
+                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if the form address does not match local storage`, async () => {
+                    const newState = {
+                        ...state,
+                        address: {
+                            line1: 'Flat 101',
+                            line2: 'Made Up House',
+                            locality: 'London',
+                            postcode: 'NW2 3PE'
+                        }
+                    };
+                    // Act
+                    await getGeoLocation({ commit, state: newState }, payload);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
                 });
             });
         });
