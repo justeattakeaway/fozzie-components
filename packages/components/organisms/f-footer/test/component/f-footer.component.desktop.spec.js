@@ -149,7 +149,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         ['at', 'at'],
         ['no', 'no'],
         ['dk', 'dk'],
-        ['be', 'be-en'],
+        ['be', 'be'],
         ['bg', 'bg'],
         ['ca_en', 'skipthedishes.com'],
         ['jet_fr', '.fr'],

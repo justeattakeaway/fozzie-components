@@ -89,7 +89,7 @@ describe('Desktop - f-header component tests - @browserstack', () => {
         ['no', '.no'],
         ['au', 'au'],
         ['at', 'at'],
-        ['be', 'be-en'],
+        ['be', 'be'],
         ['bg', 'bg'],
         ['ca_en', 'skipthedishes.com'],
         ['jet_fr', '.fr'],

@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.24.1
+------------------------------
+*June 4, 2021*
+
+### Fixed
+- Update expected URL for Belgium
+
+
 v4.24.0
 ------------------------------
 *June 3, 2021*
