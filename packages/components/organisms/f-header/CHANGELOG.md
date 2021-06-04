@@ -11,6 +11,9 @@ v4.17.1
 ### Fixed
 - Update expected URL for BE and LU
 
+### Changed
+- Use domain names in country selector tests
+
 
 v4.17.0
 ------------------------------
