@@ -73,4 +73,4 @@ export const IconButtonComponent = () => ({
     </div>`
 });
 
-IconButtonComponent.storyName = 'f-button--icon';
+IconButtonComponent.storyName = 'Icon Button';

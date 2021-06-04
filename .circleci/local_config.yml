@@ -27,7 +27,7 @@ jobs:
 
   working_directory: ~/repo
   
-  local:
+  complete-build:
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -59,12 +59,65 @@ jobs:
           name: Run WebDriverIO Accessibility Tests
           command: yarn test-a11y:chrome
 
+  build:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - install_node_dependencies
+      - build_packages
+
+  lint-build:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - install_node_dependencies
+      - run: # Lint packages
+          name: Run Lint Tasks on Packages
+          command: yarn lint
+
+  unit-build:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - install_node_dependencies
+      - build_packages
+      - run: # Run Tests
+          name: Run Unit / Integration Tests
+          command: yarn test
+
 workflows:
   version: 2
 
   local:
     jobs:
-      - local:
+      - complete-build:
+          context: web-core
+          filters:
+            branches:
+              ignore: 'gh-pages'
+
+      - build:
+          context: web-core
+          filters:
+            branches:
+              ignore: 'gh-pages'
+
+      - lint-build:
+          context: web-core
+          filters:
+            branches:
+              ignore: 'gh-pages'
+
+      - unit-build:
           context: web-core
           filters:
             branches:

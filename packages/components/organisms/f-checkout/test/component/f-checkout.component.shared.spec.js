@@ -1,18 +1,20 @@
 import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
-const checkout = new Checkout();
+let checkout;
 
 describe('f-checkout component tests - @browserstack', () => {
     beforeEach(() => {
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: true,
-            isValid: true
-        };
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true);
 
-        checkout.open(checkoutData);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        checkout.open(pageUrl);
         checkout.waitForComponent();
     });
 
@@ -76,20 +78,18 @@ describe('f-checkout component tests - @browserstack', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
+
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: true,
-            isValid: true,
-            checkoutErrors: 'ISSUES'
-        };
+        checkout.withQuery('&knob-Checkout Errors', 'ISSUES');
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act
-        checkout.open(checkoutData);
+        checkout.open(pageUrl);
         checkout.waitForComponent();
         checkout.goToPayment();
         checkout.clickRetryButton();
+        browser.pause(2000);
 
         // Assert
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);

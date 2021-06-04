@@ -23,10 +23,11 @@
         >
             <card
                 is-rounded
+                has-full-width-footer
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center"
-                data-test-id="checkout-card-component"
+                :data-test-id="`checkout-card-component-${serviceType}`"
                 :class="$style['c-checkout']"
             >
                 <checkout-header :login-url="loginUrl" />
@@ -105,7 +106,7 @@
                         data-test-id="address-block"
                     />
 
-                    <form-selector v-if="shouldShowFulfilmentSelector" />
+                    <form-selector />
 
                     <form-field
                         :label-text="$t(`userNote.${serviceType}.title`)"
@@ -121,7 +122,10 @@
                     </form-field>
 
                     <f-button
-                        :class="$style['c-checkout-submitButton']"
+                        :class="[
+                            $style['c-checkout-submitButton'], {
+                                [$style['c-checkout-submitButton--noBottomSpace']]: !isLoggedIn
+                            }]"
                         button-type="primary"
                         button-size="large"
                         is-full-width
@@ -132,7 +136,11 @@
                     </f-button>
                 </form>
 
-                <checkout-terms-and-conditions v-if="!isLoggedIn" />
+                <template
+                    v-if="!isLoggedIn"
+                    #cardFooter>
+                    <checkout-terms-and-conditions />
+                </template>
             </card>
         </div>
 
@@ -397,10 +405,6 @@ export default {
             };
         },
 
-        shouldShowFulfilmentSelector () {
-            return !this.isCheckoutMethodDineIn || this.availableFulfilment.times.length > 1;
-        },
-
         messageType () {
             return this.message && this.message.shouldShowInDialog
                 ? this.dialogMessage
@@ -572,10 +576,12 @@ export default {
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
                     time: this.time,
                     userNote: this.userNote,
                     geolocation: this.geolocation,
-                    asap: this.hasAsapSelected
+                    asap: this.hasAsapSelected,
+                    tableIdentifier: this.tableIdentifier
                 });
 
                 await this.updateCheckout({
@@ -586,7 +592,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
-                throw new UpdateCheckoutError(e.message);
+                throw new UpdateCheckoutError(e);
             }
         },
 
@@ -990,13 +996,8 @@ export default {
 }
 
 .c-checkout {
-    padding-top: spacing(x6);
-    padding-bottom: spacing(x6);
-
     @include media('<=narrow') {
         border: none;
-        padding-top: spacing(x3);
-        padding-bottom: 0;
         margin-top: 0;
         margin-bottom: 0;
     }
@@ -1011,12 +1012,20 @@ export default {
     margin-left: auto;
     margin-right: auto;
 
-    @include media('<=narrow') {
+    @include media('<=#{$checkout-width}') {
         width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
     }
 }
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
-    margin: spacing(x4) 0 spacing(x0.5);
+    margin: spacing(x4) 0;
+
+    @include media('>=#{$checkout-width}') {
+        margin: spacing(x4) 0 0;
+    }
+}
+
+.c-checkout-submitButton--noBottomSpace {
+    margin-bottom: 0;
 }
 </style>

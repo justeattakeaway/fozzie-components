@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.120.0",
+  "version": "0.128.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -39,7 +39,6 @@
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component wdio ../../../../wdio-browserstack.conf.js --mochaOpts.grep '@browserstack'",
     "report:test-component:chrome": "cross-env-shell JE_ENV=local  TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn allure:open",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
-    "test:visual": "cross-env-shell JE_ENV=local TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "allure:open": "yarn allure:clean && allure open",
     "allure:clean": "rimraf ../../../../test/results/allure"
   },
@@ -62,11 +61,11 @@
     "@babel/plugin-proposal-class-properties": "7.12.13",
     "@justeat/f-alert": "0.5.0",
     "@justeat/f-button": "1.2.0",
-    "@justeat/f-card": "0.8.0",
+    "@justeat/f-card": "1.2.1",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.12.1",
     "@justeat/f-mega-modal": "0.9.0",
-    "@justeat/f-wdio-utils": "0.1.0",
+    "@justeat/f-wdio-utils": "0.2.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

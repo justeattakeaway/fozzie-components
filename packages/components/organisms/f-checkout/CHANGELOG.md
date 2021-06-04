@@ -4,6 +4,76 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.128.0
+------------------------------
+*June 2, 2021*
+
+### Change
+- Give the consumer two options; 'Close' or 'View recent orders', when showing the Duplicate Error Warning dialog box
+- Added tracking to the alternative dialog box
+
+
+v0.127.0
+------------------------------
+*June 1, 2021*
+
+### Changed
+- Moved logic to show fulfilment time dropdown inside selector component to still set the time under the hood
+- Passed correct params to mapper to ensure request is made correctly
+
+
+v0.126.0
+------------------------------
+*June 1, 2021*
+
+### Changed
+- Restored/Set the selected `fulfilment time` if available/valid on `mount`
+
+
+v0.125.0
+------------------------------
+*May 24, 2021*
+
+### Added
+- Populate address fields from local storage if it exists
+
+
+v0.124.0
+------------------------------
+*May 28, 2021*
+
+### Fixed
+- Scrolling broken when clicking `OK` within `megaModal` component.
+
+### Added
+- `serviceType` to data-test-id
+
+
+v0.123.0
+------------------------------
+*May 27, 2021*
+
+### Added
+- Logging of place order error code
+
+
+v0.122.0
+------------------------------
+*May 24, 2021*
+
+### Changed
+- f-card package version updated to 1.2.1 to include card footer for T&C
+- T&C styles were cleaned up
+
+
+v0.121.0
+------------------------------
+*May 24, 2021*
+
+### Updated
+- Logging to include traceID from server
+
+
 v0.120.0
 ------------------------------
 *May 26, 2021*
@@ -19,7 +89,6 @@ v0.119.0
 ### Added
 - Ability to handle orders with the service type `dinein`
 - Table number/name input field
-
 
 v0.118.1
 ------------------------------

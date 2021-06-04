@@ -19,8 +19,8 @@ module.exports = class HomePromotionCard1 extends Page {
 
     get subtitle () { return $(SUBTITLE); }
 
-    open () {
-        super.openComponent('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
