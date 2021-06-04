@@ -61,6 +61,17 @@
 
     ```
 
+## Configuration
+
+### Events
+
+The events that can be subscribed to are as follows (if any):
+
+| Event | Description |
+| ----- | ----------- |
+| `change` | Fired from `f-tabs` when the selected tab is changed. Payload contains the indices of the `new` and `prev` selected tabs. |
+
+
 ## Development
 It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
