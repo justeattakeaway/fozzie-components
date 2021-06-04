@@ -8,6 +8,9 @@ v0.8.0
 ------------------------------
 *June 4, 2021*
 
+### Changed
+- Reverse animation direction (when choosing a tab that is further left, its contents should slide in from the left and vice-versa).
+
 ### Fixed
 - Don't *change* direction if tab selection isn't changing.
 

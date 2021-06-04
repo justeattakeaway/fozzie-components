@@ -89,9 +89,9 @@ export default {
             const newIndex = this.tabs.findIndex(t => t.name === name);
 
             if (newIndex > previousIndex) {
-                this.direction = DIRECTION.RIGHT;
-            } else {
                 this.direction = DIRECTION.LEFT;
+            } else {
+                this.direction = DIRECTION.RIGHT;
             }
 
             this.$emit('change', {
