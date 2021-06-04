@@ -15,7 +15,8 @@ const {
     trackFormInteraction,
     trackInitialLoad,
     updateAutofill,
-    updateChangedField
+    updateChangedField,
+    trackDuplicateOrderWarnDialog
 } = actions;
 
 Object.defineProperty(global, 'window', {
@@ -381,6 +382,24 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith('trackFormInteraction', { action: 'error', error: errors });
+            });
+        });
+
+        describe('trackDuplicateOrderWarnDialog ::', () => {
+            it('should `push` expected event to `dataLayer`', () => {
+                // Arrange
+                const expected = {
+                    event: 'trackEvent',
+                    eventCategory: 'engagement',
+                    eventAction: 'dialog_duplicate_order_warning',
+                    eventLabel: 'view_dialog'
+                };
+
+                // Act
+                trackDuplicateOrderWarnDialog();
+
+                // Assert
+                expect(window.dataLayer).toContainEqual(expected);
             });
         });
     });

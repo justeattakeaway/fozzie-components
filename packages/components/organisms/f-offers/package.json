@@ -1,13 +1,13 @@
 {
-  "name": "@justeat/f-tabs",
-  "description": "Fozzie Tabs – Switchable slots for content",
-  "version": "0.7.0",
-  "main": "dist/f-tabs.umd.min.js",
+  "name": "@justeat/f-offers",
+  "description": "Fozzie Offers - displays offers to the customers",
+  "version": "0.1.0",
+  "main": "dist/f-offers.umd.min.js",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-tabs",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-offers",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -27,30 +27,33 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-tabs src/index.js",
+    "build": "vue-cli-service build --target lib --name f-offers ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
+    "report:test-component:chome": "cross-env-shell JE_ENV=ci TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn:allure:open",
+    "allure:open": "yarn allure:clean && allure open",
+    "allure:clean": "rimraf ../../../../test/results/allure"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.0.0"
+    "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@vue/test-utils": "1.0.3",
     "@justeat/f-wdio-utils": "0.2.0",
+    "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2"
   }
 }

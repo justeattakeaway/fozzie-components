@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.129.0
+------------------------------
+*June 2, 2021*
+
+### Added
+- Populate userNote field from session storage if it exists
+- Save userNote field to session storage when checkout form is submitted
+
+
+v0.128.0
+------------------------------
+*June 2, 2021*
+
+### Change
+- Give the consumer two options; 'Close' or 'View recent orders', when showing the Duplicate Error Warning dialog box
+- Added tracking to the alternative dialog box
+
 
 v0.128.0
 ------------------------------
@@ -34,7 +51,7 @@ v0.125.0
 *May 24, 2021*
 
 ### Added
-- Populate address fields from local storage if it exists 
+- Populate address fields from local storage if it exists
 
 
 v0.124.0
