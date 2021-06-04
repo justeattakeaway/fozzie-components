@@ -173,7 +173,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach([
-        ['lu', 'lu-en'],
+        ['lu', 'lu'],
         ['nl', '.nl'],
         ['nz', '.nz'],
         ['pl', '.pl'],

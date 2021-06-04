@@ -9,7 +9,7 @@ v4.24.1
 *June 4, 2021*
 
 ### Fixed
-- Update expected URL for Belgium
+- Update expected URL for BE and LU
 
 
 v4.24.0
