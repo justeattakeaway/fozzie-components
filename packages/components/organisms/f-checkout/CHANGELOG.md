@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.129.0
+------------------------------
+*June 2, 2021*
+
+### Added
+- Populate userNote field from session storage if it exists
+- Save userNote field to session storage when checkout form is submitted
+
 
 v0.128.0
 ------------------------------
