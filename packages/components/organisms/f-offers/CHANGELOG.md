@@ -13,7 +13,8 @@ v0.2.0
 - Unit tests for offers header search box vuex module
 - Unit tests for helpers
 - Helper functions
-
+- Added Types for actions
+- Added Types for mutations
 
 v0.1.0
 ------------------------------
