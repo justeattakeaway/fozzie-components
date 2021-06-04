@@ -94,7 +94,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
     });
 
-    describe('when a duplicate order error is triggered', () => {
+    describe('when the "Duplicate Order Warning" modal is displayed', () => {
         beforeEach(() => {
             // Arrange
             checkout.withQuery('&knob-Place Order Errors', 'SERVER');
@@ -106,18 +106,7 @@ describe('f-checkout component tests - @browserstack', () => {
             checkout.goToPayment();
         });
 
-        it('should display the duplicate order warning dialog box', () => {
-            // Assert
-            expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
-        });
-
-        it('should display the correct buttons', () => {
-            // Assert
-            expect(checkout.isCheckoutErrorCloseButtonDisplayed()).toBe(true);
-            expect(checkout.isCheckoutErrorDupOrderGoToHistoryButtonDisplayed()).toBe(true);
-        });
-
-        it('should close the dialog and remain on the checkout page when the `close` button is pressed', () => {
+        it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
             // Act
             checkout.waitForComponent();
             checkout.clickRetryButton();
@@ -127,7 +116,7 @@ describe('f-checkout component tests - @browserstack', () => {
             expect(checkout.isCheckoutPageDisplayed()).toBe(true);
         });
 
-        it('should attempt to redirect to the order history page when the `View my orders` button is pressed', () => {
+        it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
             // Act
             checkout.waitForComponent();
             checkout.clickDupOrderGoToHistoryButton();
