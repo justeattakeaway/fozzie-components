@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+
+
+v0.130.0
+------------------------------
+*June 2, 2021*
+
+### Added
+- Service type inside menu object for initial push to GTM data layer
+
+
 v0.129.0
 ------------------------------
 *June 2, 2021*
@@ -19,14 +30,6 @@ v0.128.0
 ### Change
 - Give the consumer two options; 'Close' or 'View recent orders', when showing the Duplicate Error Warning dialog box
 - Added tracking to the alternative dialog box
-
-
-v0.128.0
-------------------------------
-*June 2, 2021*
-
-### Added
-- Service type inside menu object for initial push to GTM data layer
 
 
 v0.127.0
