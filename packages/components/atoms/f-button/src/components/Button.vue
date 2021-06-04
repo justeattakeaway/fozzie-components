@@ -14,11 +14,15 @@
         v-bind="$attrs"
         v-on="$listeners"
     >
-        <div
+        <span
             v-if="isLoading"
             :class="$style['c-spinner']" />
 
-        <span :class="isLoading ? $style['o-btn-text--hidden'] : ''">
+        <span
+            :class="[
+                (isLoading ? $style['o-btn-text--hidden'] : ''),
+                $style['o-btn-text--flex']
+            ]">
             <slot />
         </span>
     </component>
@@ -159,10 +163,6 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
     top: calc(50% - 10px); // Substract half of the size of the spinner.
 }
 
-.o-btn-text--hidden {
-    visibility: hidden;
-}
-
 .o-btn {
     position: relative;
     display: inline-block;
@@ -212,6 +212,14 @@ $btn-icon-sizeXSmall-iconSize   : 18px;
  * Btn Type modifiers
  * ==========================================================================
  */
+
+.o-btn-text--hidden {
+    visibility: hidden;
+}
+
+.o-btn-text--flex {
+    display: flex;
+}
 
 /**
  * Modifier – .o-btn--primary
