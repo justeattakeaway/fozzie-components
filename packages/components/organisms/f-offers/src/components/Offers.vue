@@ -2,23 +2,30 @@
     <div
         :class="$style['c-offers']"
         data-test-id="offers">
-        {{ copy.text }}
+        <offers-search-box />
     </div>
 </template>
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
+import OffersSearchBox from './SearchBox.vue';
+import '@justeat/f-searchbox/dist/f-searchbox.css';
 
 export default {
     name: 'VOffers',
-    components: {},
+
+    components: {
+        OffersSearchBox
+    },
+
     props: {
         locale: {
             type: String,
             default: ''
         }
     },
+
     data () {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
