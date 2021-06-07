@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.8.0
+------------------------------
+*June 4, 2021*
+
+### Changed
+- Reverse animation direction (when choosing a tab that is further left, its contents should slide in from the left and vice-versa).
+
+### Fixed
+- Don't *change* direction if tab selection isn't changing.
+
+
 v0.7.0
 ------------------------------
 *June 3, 2021*
