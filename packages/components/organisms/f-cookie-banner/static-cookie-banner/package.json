@@ -1,0 +1,51 @@
+{
+  "name": "@justeat/f-cookie-banner-static",
+  "description": "Fozzie Cookie Banner Static – Cookie Banner Static",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "npx vue-cli-service build --dest ./.tmp-vue",
+    "build:static": "yarn exec gulp",
+    "serve": "npx vue-cli-service serve"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "dependencies": {
+    "@justeat/f-cookie-banner": "file:../dist/",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11"
+  },
+  "peerDependencies": {
+    "@justeat/browserslist-config-fozzie": ">=1.1.1",
+    "js-cookie": "2.2.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "del": "^4.1.1",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-preprocess": "^4.0.2",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.1.3",
+    "prerender-spa-plugin": "^3.2.1",
+    "vue-cli-plugin-prerender-spa": "~1.1.6",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  }
+}
