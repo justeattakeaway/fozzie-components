@@ -1,5 +1,5 @@
 <template>
-    <div class="c-offers-searchBox">
+    <div :class="$style['c-offers-searchBox']">
         <search-box
             class="l-boxWrapper"
             :config="{
@@ -27,6 +27,7 @@ import {
     EMPTY_ADDRESS,
     UNKNOWN_ERROR
 } from '../store/types/actions';
+import { POSTCODE_EMPTY, POSTCODE_INVALID } from '../store/types/errors';
 
 export default {
     name: 'OffersSearchBox',
@@ -51,14 +52,14 @@ export default {
          */
         handleSearchBoxError (e) {
             let errors = e;
-            if (errors.includes('POSTCODE_EMPTY')) {
+            if (errors.includes(POSTCODE_EMPTY)) {
                 this.emptyAddress();
-                errors = errors.filter(err => err !== 'POSTCODE_EMPTY');
+                errors = errors.filter(err => err !== POSTCODE_EMPTY);
             }
 
-            if (errors.includes('POSTCODE_INVALID')) {
+            if (errors.includes(POSTCODE_INVALID)) {
                 this.invalidAddress();
-                errors = errors.filter(err => err !== 'POSTCODE_INVALID');
+                errors = errors.filter(err => err !== POSTCODE_INVALID);
             }
 
             if (errors.length) {
@@ -70,5 +71,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-
+.c-offers-searchBox {
+    width: 400px;
+}
 </style>
