@@ -112,6 +112,7 @@
                         :label-text="$t(`userNote.${serviceType}.title`)"
                         input-type="textarea"
                         :placeholder="$t(`userNote.${serviceType}.placeholder`)"
+                        :value="userNote"
                         cols="30"
                         rows="7"
                         maxlength="200"
@@ -487,7 +488,9 @@ export default {
             'updateCustomerDetails',
             'updateTableIdentifier',
             'updateMessage',
-            'updateUserNote'
+            'updateUserNote',
+            'getUserNote',
+            'saveUserNote'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -515,6 +518,8 @@ export default {
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
             }
+
+            this.getUserNote();
         },
 
         /**
@@ -524,6 +529,8 @@ export default {
          */
         async submitCheckout () {
             try {
+                this.saveUserNote();
+
                 if (!this.isLoggedIn && !this.isGuestCreated) {
                     await this.setupGuestUser();
                 }
