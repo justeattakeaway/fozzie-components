@@ -90,7 +90,7 @@ export default {
             return !this.$attrs.href ? this.actionType : null;
         },
         /**
-         * Get the correct value for the aria-live attribute depending on whether the button is loading or not.
+         * Gets the correct value for the aria-live attribute depending on whether the button is loading or not.
          */
         getAriaLive () {
             return this.isLoading ? 'polite' : 'off';
