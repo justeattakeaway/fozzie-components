@@ -85,7 +85,7 @@ The props that can be defined are as follows:
 | `buttonSize`  | `String`   | No         | `medium` | Sets the button size.<br>Options: `large`, `medium`, `small`, `xsmall`. |
 | `isFullWidth` | `Boolean`  | No         | `false`  | Controls whether or not to apply `fullWidth` modifier class |
 | `isIcon`      | `Boolean`  | No         | `false`  | When true, changes the button style to be displayed as an Icon Button (Icon, with no text). |
-| `isLoading`      | `Boolean`  | No         | `false`  | When true, replaces the text with a loading spinner, and it prevents any further interaction with the button (e.g. `click`). |
+| `isLoading`   | `Boolean`  | No         | `false`  | When true, replaces the text with a loading spinner, and it prevents any further interaction with the button (e.g. `click`). |
 
 ### CSS Classes
 
