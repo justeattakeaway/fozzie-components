@@ -11,6 +11,7 @@ export const GUEST_CHECKOUT_HEADER = '[data-test-id="guest-checkoutHeader"]';
 export const PRE_ORDER_WARNING = '[data-test-id="warning-pre-order"]';
 export const CHECKOUT_ERROR_MESSAGE = '[data-test-id="checkout-issue-modal"] div';
 export const RETRY_BUTTON = '[data-test-id="redirect-to-menu-button"]';
+export const DUP_ORDER_GO_TO_HISTORY_BUTTON = '[data-test-id="redirect-to-orderhistory-button"]';
 export const ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-component"]';
 export const ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';
 export const ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description"]';

@@ -45,6 +45,30 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', 'shared');
     });
+
+    it('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.setFieldValue('firstName', 'Jerry');
+        checkout.setFieldValue('lastName', 'Jazzman');
+        const addressInfo = {
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890',
+            line1: '47 Frith  Street',
+            locality: 'London',
+            postcode: 'W1D 4HT'
+        };
+        checkout.populateGuestCheckoutForm(addressInfo);
+
+        // Act
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'shared');
+    });
 });
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests', () => {
@@ -112,6 +136,30 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'shared');
+    });
+
+    it.only('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.setFieldValue('firstName', 'Jerry');
+        checkout.setFieldValue('lastName', 'Jazzman');
+        const addressInfo = {
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890',
+            line1: '47 Frith  Street',
+            locality: 'London',
+            postcode: 'W1D 4HT'
+        };
+        checkout.populateGuestCheckoutForm(addressInfo);
+
+        // Act
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'shared');
     });
 });
 
