@@ -117,6 +117,8 @@ The props that can be defined are as follows:
 | `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |
 | `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
 | `close-button-copy` | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers. |
+| `title` | `String` | `''` | When set, will add a title to the top of the component. If you need to define a custom heading, ignore this prop.  |
+| `titleHtmlTag` | `String` | `h3` | Sets the tag for the component's title.<br><br>Allowed values are `h1`, `h2`, `h3`, and `h4` |
 
 ### CSS Classes
 

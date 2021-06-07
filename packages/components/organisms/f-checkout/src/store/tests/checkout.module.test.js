@@ -10,6 +10,7 @@ import {
 } from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
+import sessionStorageMock from '../../../test-utils/local-storage/local-storage-mock';
 
 import {
     UPDATE_AUTH,
@@ -43,7 +44,9 @@ const {
     updateCustomerDetails,
     updateFulfilmentTime,
     updateMessage,
-    updateUserNote
+    updateUserNote,
+    getUserNote,
+    saveUserNote
 } = actions;
 
 const mobileNumber = '+447111111111';
@@ -94,6 +97,7 @@ const message = {
 const defaultState = {
     id: '',
     serviceType: '',
+    tableIdentifier: '',
     restaurant: {
         id: '',
         seoName: ''
@@ -936,6 +940,89 @@ describe('CheckoutModule', () => {
 
             // Assert
             expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
+        });
+
+        describe('getUserNote ::', () => {
+            describe('if sessionStorage exists', () => {
+                beforeEach(() => {
+                    Object.defineProperty(window, 'sessionStorage', { value: sessionStorageMock });
+                });
+
+                afterEach(() => {
+                    window.sessionStorage.clear();
+                    jest.resetAllMocks();
+                });
+
+                describe('when the user note exists in session storage', () => {
+                    it('should call dispatch with updateUserNote action and the user note', () => {
+                        // Arrange
+                        jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(userNote);
+
+                        // Act
+                        getUserNote({ dispatch, state });
+
+                        // Assert
+                        expect(dispatch).toHaveBeenCalledWith('updateUserNote', userNote);
+                    });
+                });
+
+                describe('when the user note does NOT exist in session storage', () => {
+                    it('should not call dispatch', () => {
+                        // Arrange
+                        jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(undefined);
+
+                        // Act
+                        getUserNote({ dispatch, state });
+
+                        // Assert
+                        expect(dispatch).not.toHaveBeenCalled();
+                    });
+                });
+            });
+
+            describe('if sessionStorage does NOT exist', () => {
+                beforeAll(() => {
+                    Object.defineProperty(window, 'sessionStorage', { value: null });
+                });
+
+                afterAll(() => {
+                    window.sessionStorage.clear();
+                    jest.resetAllMocks();
+                });
+
+                it('should not call dispatch', () => {
+                    // Act
+                    getUserNote({ dispatch, state });
+
+                    // Assert
+                    expect(dispatch).not.toHaveBeenCalled();
+                });
+            });
+        });
+
+        describe('saveUserNote ::', () => {
+            beforeEach(() => {
+                Object.defineProperty(window, 'sessionStorage', { value: sessionStorageMock });
+            });
+
+            afterEach(() => {
+                window.sessionStorage.clear();
+                jest.resetAllMocks();
+            });
+
+
+            it('should save userNote to sessionStorage', () => {
+                // Arrange
+                const spy = jest.spyOn(window.sessionStorage, 'setItem');
+                const testBasketId = '11111';
+                const key = `userNote-${testBasketId}`;
+
+                // Act
+                saveUserNote({ state });
+
+                // Assert
+                expect(spy).toHaveBeenCalledWith(key, state.userNote);
+            });
         });
     });
 });

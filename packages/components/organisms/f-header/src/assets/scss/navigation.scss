@@ -1,20 +1,20 @@
 @import './common.scss';
 
-$nav-text-color--hover : $color-link-hover;
-$nav-text-color--transparent : $white;
+$nav-text-color--hover           : darken($color-content-link, $color-hover-01);
+$nav-text-color--transparent     : $color-content-link-light;
 
-$nav-transition-duration : 250ms;
+$nav-transition-duration         : 250ms;
 
-$nav-trigger-width : 56px;
-$nav-trigger-height : 48px;
-$nav-trigger-focus-color : $blue;
-$nav-trigger-focus-bg : $blue--offWhite;
+$nav-trigger-width               : 56px;
+$nav-trigger-height              : 48px;
+$nav-trigger-focus-color         : $color-content-interactive-secondary;
+$nav-trigger-focus-bg            : $color-interactive-secondary;
 
-$nav-popover-transition-delay : 200ms;
+$nav-popover-transition-delay    : 200ms;
 $nav-popover-transition-duration : 200ms;
 
-$countrySelector-flag-width : 16px;
-$countrySelector-flag-height : 16px;
+$countrySelector-flag-width      : 16px;
+$countrySelector-flag-height     : 16px;
 
 @mixin nav-container-visible () {
     overflow-y: auto;
@@ -45,7 +45,7 @@ $countrySelector-flag-height : 16px;
         padding: 0;
         height: calc(100% - (#{$header-height--narrow}));
         border-top: $header-separator solid $header-border-color;
-        background: $white;
+        background: $color-container-default;
         z-index: -1;
         opacity: 0;
         transition: opacity $nav-transition-duration ease-in-out,

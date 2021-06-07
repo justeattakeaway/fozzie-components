@@ -93,6 +93,10 @@ module.exports = class Checkout extends Page {
         userNote: {
             get input () { return $(FIELDS.userNote.input); },
             get error () { return ''; }
+        },
+        tableIdentifier: {
+            get input () { return $(FIELDS.tableIdentifier.input); },
+            get maxLengthError () { return $(FIELDS.tableIdentifier.maxLengthError); }
         }
     }
     /**
@@ -105,15 +109,13 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
-    open (checkout) {
-        const serviceType = checkout.isValid ? `&knob-Service%20Type=${checkout.type}` : '&knob-Service%20Type=Invalid%20URL';
-        const isLoggedIn = `&knob-Is%20User%20Logged%20In=${checkout.isAuthenticated}`;
-        const hasCheckoutErrors = `&knob-Checkout%20Errors=${checkout.checkoutErrors}`;
-        const hasPlaceOrderErrors = `&knob-Place%20Order%20Errors=${checkout.placeOrderErrors}`;
-        const hasAsapAvailable = `&knob-Is%20ASAP%20available=${checkout.isAsapAvailable}`;
+    open (url) {
+        super.open(url);
+    }
 
-        const url = `checkout-component${serviceType}${isLoggedIn}${hasCheckoutErrors}${hasPlaceOrderErrors}${hasAsapAvailable}`;
-        super.openComponent('organism', url);
+    withQuery (name, value) {
+        super.withQuery(name, value);
+        return this;
     }
 
     waitForComponent () {
@@ -126,6 +128,10 @@ module.exports = class Checkout extends Page {
 
     isPostcodeTypeErrorDisplayed () {
         return this.fields.addressPostcode.typeError.isDisplayed();
+    }
+
+    isTableIdentifierMaxLengthErrorDisplayed () {
+        return this.fields.tableIdentifier.maxLengthError.isDisplayed();
     }
 
     isOrderTimeDropdownDisplayed () {
@@ -158,7 +164,7 @@ module.exports = class Checkout extends Page {
     * @param {String} userInfo.email The user's e-mail address
     * @param {String} userInfo.password The user's password
     */
-    submitForm () {
+    submitForm (userInfo) {
         this.fields.firstName.input.setValue(userInfo.firstName);
         this.fields.lastName.input.setValue(userInfo.lastName);
         this.fields.email.input.setValue(userInfo.email);
@@ -214,6 +220,22 @@ module.exports = class Checkout extends Page {
         this.fields.addressLocality.input.setValue(addressInfo.locality);
         this.fields.addressPostcode.input.setValue(addressInfo.postcode);
         this.fields.userNote.input.setValue(addressInfo.note);
+    }
+
+    /**
+    * @description
+    * Inputs customer details into the checkout component.
+    *
+    * @param {Object} customerInfo
+    * @param {String} customerInfo.mobileNumber The user's mobile number
+    * @param {String} customerInfo.tableIdentifier The user's table ID
+    * @param {String} customerInfo.note The user's extra note
+    */
+    populateDineInCheckoutForm (customerInfo) {
+        this.waitForComponent();
+        this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
+        this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
+        this.fields.userNote.input.setValue(customerInfo.note);
     }
 
     /**

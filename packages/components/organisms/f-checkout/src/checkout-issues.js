@@ -34,6 +34,11 @@ const checkoutIssues = {
         shouldRedirectToMenu: false
     },
 
+    TABLE_IDENTIFIER_REQUIRED: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: false
+    },
+
     GENERIC_CHECKOUT_ISSUE: {
         shouldShowInDialog: true,
         shouldRedirectToMenu: false

@@ -5,10 +5,12 @@ module.exports = class CookieBanner extends Page {
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
 
+    get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
+
     get closeButton () { return this.component.$('[data-test-id="cookieBanner-close-button"]'); }
 
-    open (tenant = 'en-gb') {
-        super.openComponent('organism', `cookie-banner-component&knob-Locale=en-${tenant.toUpperCase()}`);
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
@@ -28,4 +30,4 @@ module.exports = class CookieBanner extends Page {
 
         return this;
     }
-};
+}

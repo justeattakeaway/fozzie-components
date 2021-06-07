@@ -47,6 +47,14 @@
                     </f-button>
                 </slot>
 
+                <component
+                    :is="titleHtmlTag"
+                    v-if="title"
+                    :class="['c-megaModal-title', $style['c-megaModal-title']]"
+                    data-test-id="mega-modal-title">
+                    {{ title }}
+                </component>
+
                 <slot />
             </div>
         </div>
@@ -128,6 +136,17 @@ export default {
         closeButtonCopy: {
             type: String,
             default: 'Close modal'
+        },
+
+        title: {
+            type: String,
+            default: ''
+        },
+
+        titleHtmlTag: {
+            type: String,
+            default: 'h3',
+            validator: value => ['h1', 'h2', 'h3', 'h4'].includes(value)
         }
     },
 
@@ -285,7 +304,7 @@ export default {
 }
 
 .c-megaModal-content {
-    background-color: $color-bg--component;
+    background-color: $color-container-default;
     border-radius: $border-radius;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
     display: none;
@@ -382,7 +401,11 @@ export default {
     }
 
     .c-megaModal-closeIcon * {
-        fill: $color-link-default;
+        fill: $color-content-link;
     }
+}
+
+.c-megaModal-title {
+    margin: 0 spacing(x3);
 }
 </style>

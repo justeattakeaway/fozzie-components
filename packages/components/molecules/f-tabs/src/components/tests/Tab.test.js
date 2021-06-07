@@ -17,7 +17,7 @@ const REGISTER_DATA = {
 describe('Tab.vue', () => {
     let activeWrapper;
 
-    function defineActiveCompoment () {
+    function defineActiveComponent () {
         activeWrapper = shallowMount(Tab, {
             propsData: {
                 name: REGISTER_DATA.name,
@@ -38,7 +38,7 @@ describe('Tab.vue', () => {
 
     it('should be defined', () => {
         // Arrange & Act
-        defineActiveCompoment();
+        defineActiveComponent();
 
         // Assert
         expect(activeWrapper.exists()).toBe(true);
@@ -47,7 +47,7 @@ describe('Tab.vue', () => {
     describe('when active', () => {
         beforeEach(() => {
             // Arrange & Act
-            defineActiveCompoment();
+            defineActiveComponent();
         });
 
         it('should call the register callback method when created', () => {

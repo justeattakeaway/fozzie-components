@@ -19,6 +19,7 @@ import {
     UPDATE_MESSAGE,
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
+    UPDATE_TABLE_IDENTIFIER,
     UPDATE_USER_NOTE
 } from './mutation-types';
 
@@ -64,12 +65,19 @@ const resolveCustomerDetails = (data, state) => {
     }
 };
 
+/**
+ * @param {object} state - The current `checkout` state.
+ * @returns {String} - session storage key where we save user note.
+ */
+const getUserNoteSessionStorageKey = state => `userNote-${state.basket.id}`;
+
 export default {
     namespaced: true,
 
     state: () => ({
         id: '',
         serviceType: '',
+        tableIdentifier: '',
         restaurant: {
             id: '',
             seoName: ''
@@ -376,6 +384,10 @@ export default {
             commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
+        updateTableIdentifier ({ commit }, payload) {
+            commit(UPDATE_TABLE_IDENTIFIER, payload);
+        },
+
         updateFulfilmentTime ({ commit }, payload) {
             commit(UPDATE_FULFILMENT_TIME, payload);
         },
@@ -383,6 +395,23 @@ export default {
         updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
+        },
+
+        getUserNote: ({ dispatch, state }) => {
+            if (window.sessionStorage) {
+                const key = getUserNoteSessionStorageKey(state);
+                const note = window.sessionStorage.getItem(key);
+                if (note) {
+                    dispatch('updateUserNote', note);
+                }
+            }
+        },
+
+        saveUserNote ({ state }) {
+            if (window.sessionStorage) {
+                const key = getUserNoteSessionStorageKey(state);
+                window.sessionStorage.setItem(key, state.userNote);
+            }
         },
 
         updateHasAsapSelected ({ commit }, payload) {
@@ -415,8 +444,15 @@ export default {
 
             state.time = fulfilment.time;
 
-            if (fulfilment.location && fulfilment.location.address && fulfilment.location.address.lines) {
-                const { address } = fulfilment.location;
+            let address = null;
+            if (addressService.isAddressInLocalStorage()) {
+                address = addressService.getAddressFromLocalStorage();
+            } else if (fulfilment.location && fulfilment.location.address && fulfilment.location.address.lines) {
+                /* eslint-disable prefer-destructuring */
+                address = fulfilment.location.address;
+            }
+
+            if (address) {
                 /* eslint-disable prefer-destructuring */
                 state.address.line1 = address.lines[0];
                 state.address.line2 = address.lines[1];
@@ -424,6 +460,10 @@ export default {
 
                 state.address.locality = address.locality;
                 state.address.postcode = address.postalCode;
+            }
+
+            if (fulfilment.table) {
+                state.tableIdentifier = fulfilment.table.identifier;
             }
 
             state.isFulfillable = isFulfillable;
@@ -465,6 +505,10 @@ export default {
                 ...state.customer,
                 ...customer
             };
+        },
+
+        [UPDATE_TABLE_IDENTIFIER]: (state, tableIdentifier) => {
+            state.tableIdentifier = tableIdentifier;
         },
 
         [UPDATE_FULFILMENT_ADDRESS]: (state, address) => {

@@ -44,7 +44,14 @@ Once you have installed the CircleCI CLI, you can simply open your VScode, and p
 `Ctrl`/`Cmd` +`Shift`+`P`
 and type; `‘Run task’`. 
 
-Hit enter and you will then see the `CircleCI CLI task` pop up. 
-Just hit enter again and then once more on the option, `"Continue without scanning the task output"` to run the CircleCI build. 
+Hit enter and you will then see a list of `CircleCI` tasks.
 
-This can take around 15-20 mins to complete the run.
+Currently we have (and what they run);
+`CircleCI Complete Build` - Full CircleCI workflow
+`CircleCI Build` - Build steps of the CircleCI workflow
+`CircleCI Lint` - Linting steps of the CircleCI workflow
+`CircleCI Unit + Integration Tests` - Build and unit + integration testing steps of the CircleCI workflow
+
+Just select the CircleCI task you wish to run and then hit enter on the option, `'Continue without scanning the task output'` to run the CircleCI build. 
+
+These tasks can take around 5-20 mins to complete depending on the task selected.

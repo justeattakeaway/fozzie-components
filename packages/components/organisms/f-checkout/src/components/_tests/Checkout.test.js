@@ -8,6 +8,7 @@ import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
+    CHECKOUT_METHOD_DINEIN,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
     TENANT_MAP
 } from '../../constants';
@@ -60,6 +61,11 @@ const $v = {
             required: true,
             isValidPostcode: false
         }
+    },
+    tableIdentifier: {
+        $dirty: false,
+        required: true,
+        maxLength: true
     },
     $touch: jest.fn()
 };
@@ -188,6 +194,8 @@ describe('Checkout', () => {
 
     describe('data ::', () => {
         describe('serviceType ::', () => {
+            const tableIdentifierSelector = '[data-test-id="formfield-table-identifier-input"]';
+
             it('should display the address block if set to `delivery`', async () => {
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
@@ -216,6 +224,66 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(addressBlock.exists()).toBe(false);
+            });
+
+            it('should not display the address block if set to `dinein`', async () => {
+                // Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const addressBlock = wrapper.find('[data-test-id="address-block"]');
+
+                // Assert
+                expect(addressBlock.exists()).toBe(false);
+            });
+
+            it('should display the table identifier input if set to `dinein`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
+
+                // Assert
+                expect(tableIdentifierInput.exists()).toBe(true);
+            });
+
+            it('should not display the table identifier input if set to `collection`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
+
+                // Assert
+                expect(tableIdentifierInput.exists()).toBe(false);
+            });
+
+            it('should not display the table identifier input if set to `delivery`', async () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
+
+                // Assert
+                expect(tableIdentifierInput.exists()).toBe(false);
             });
         });
 
@@ -296,6 +364,24 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
+        describe('formattedMobileNumberForScreenReader ::', () => {
+            it('should return the mobile number with spaces after every character', () => {
+                const expectedMobileNumber = '+ 4 4 7 1 1 1 1 1 1 1 1 1';
+                // Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.formattedMobileNumberForScreenReader).toEqual(expectedMobileNumber);
+            });
+        });
+
         describe('isMobileNumberEmpty ::', () => {
             let wrapper;
 
@@ -538,6 +624,37 @@ describe('Checkout', () => {
             });
         });
 
+        describe('isTableIdentifierEmpty ::', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+            });
+
+            it('should return `false` if tableIdentifier field has not been touched', () => {
+                // Act
+                wrapper.vm.$v.tableIdentifier.$dirty = false;
+
+                // Assert
+                expect(wrapper.vm.isTableIdentifierEmpty).toBeFalsy();
+            });
+
+            it('should return `true` if tableIdentifier field has been touched but tableIdentifier is empty', () => {
+                // Act
+                wrapper.vm.$v.tableIdentifier.$dirty = true;
+                wrapper.vm.$v.tableIdentifier.required = false;
+
+                // Assert
+                expect(wrapper.vm.isTableIdentifierEmpty).toBeTruthy();
+            });
+        });
+
         describe('isCheckoutMethodDelivery ::', () => {
             it('should return `true` if `serviceType` is set to Delivery', () => {
                 // Arrange and Act
@@ -563,6 +680,60 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.isCheckoutMethodDelivery).toBeFalsy();
+            });
+
+            it('should return `false` if `serviceType` is set to Dine In', () => {
+                // Arrange and Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDelivery).toBeFalsy();
+            });
+        });
+
+        describe('isCheckoutMethodDineIn ::', () => {
+            it('should return `true` if `serviceType` is set to DineIn', () => {
+                // Arrange and Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDineIn).toBeTruthy();
+            });
+
+            it('should return `false` if `serviceType` is set to Collection', () => {
+                // Arrange and Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDineIn).toBeFalsy();
+            });
+
+            it('should return `false` if `serviceType` is set to Delivery', () => {
+                // Arrange and Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDineIn).toBeFalsy();
             });
         });
 
@@ -643,6 +814,25 @@ describe('Checkout', () => {
                         ...defaultCheckoutState,
                         isLoggedIn: true,
                         serviceType: CHECKOUT_METHOD_COLLECTION,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                const result = await wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if `serviceType` is `dine in`', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DINEIN,
                         address: {}
                     }),
                     i18n,
@@ -1433,6 +1623,38 @@ describe('Checkout', () => {
 
                     // Assert
                     expect($logger.logInfo).toHaveBeenCalled();
+                });
+
+                it('should call `$logger` with the correct arguments', () => {
+                    // Arrange
+                    const eventData = {
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY
+                    };
+                    const error = new Error();
+                    error.name = 'Test name';
+                    error.message = 'Test message';
+                    error.stack = 'Test stack';
+                    error.errorCode = 'Test error code';
+
+                    const expectedError = {
+                        exception: error.name,
+                        exceptionMessage: error.message,
+                        exceptionStackTrace: error.stack,
+                        errorCode: error.errorCode
+                    };
+                    const logMessage = 'Logger says hi';
+
+                    // Act
+                    wrapper.vm.logInvoker({
+                        message: logMessage,
+                        data: eventData,
+                        logMethod: $logger.logError,
+                        error
+                    });
+
+                    // Assert
+                    expect($logger.logError).toHaveBeenCalledWith(logMessage, store, { data: eventData, tags: 'checkout', ...expectedError });
                 });
             });
         });
@@ -2763,6 +2985,28 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ mobileNumber: newNumber });
+            });
+        });
+
+        describe('updateTableIdentifier ::', () => {
+            it('should be called with new input value on user input', async () => {
+                // Arrange
+                const updateTableIdentifierSpy = jest.spyOn(VueCheckout.methods, 'updateTableIdentifier');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                const tableNumber = '10';
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-table-identifier-input"]').setValue(tableNumber);
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(updateTableIdentifierSpy).toHaveBeenCalledWith(tableNumber);
             });
         });
 

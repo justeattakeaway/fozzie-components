@@ -72,6 +72,7 @@ The props that can be defined are as follows:
 | `hasOutline`              | `Boolean`  |  No        | `false` | When set to `true`, an outline is applied to the card component.  |
 | `isPageContentWrapper`    | `Boolean`  |  No        | `false` | When set to `true`, applies styles to make the card act like a page content wrapper.<br><br>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page. |
 | `isRounded`               | `Boolean`  |  No        | `false` | When set to `true`, rounded corners are applied to the card component. |
+| `hasFullWidthFooter` | `Boolean` | No | `false` | When set to `true`, named slot `full-width-bottom-element` can be passed to render full width content at the bottom of the card without card paddings. |
 
 ### CSS Classes
 

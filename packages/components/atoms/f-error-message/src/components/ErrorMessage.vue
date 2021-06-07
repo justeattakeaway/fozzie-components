@@ -37,7 +37,7 @@ export default {
 <style lang="scss" module>
 .c-errorMessage {
     position: relative;
-    color: $color-text--danger;
+    color: $color-content-error;
     @include font-size();
     margin-top: spacing();
 }

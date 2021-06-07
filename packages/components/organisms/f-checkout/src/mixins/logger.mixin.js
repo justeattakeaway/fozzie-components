@@ -3,7 +3,9 @@ function buildErrorLogFields (error) {
         ...(error && error instanceof Error && {
             exception: error.name,
             exceptionMessage: error.message,
-            exceptionStackTrace: error.stack
+            exceptionStackTrace: error.stack,
+            traceId: error.traceId || (error.response && error.response.data.traceId),
+            errorCode: error.errorCode
         })
     };
 }
@@ -23,7 +25,11 @@ export default {
             message, data, logMethod, error
         }) {
             const errorFields = buildErrorLogFields(error);
-            logMethod(message, this.$store, { data, ...errorFields });
+            logMethod(message, this.$store, {
+                data,
+                tags: 'checkout',
+                ...errorFields
+            });
         }
     }
 };

@@ -1,4 +1,7 @@
 export default {
-    locale: 'en-AU',
-    text: 'I am a VLink Component (AU)'
+    ariaDescription: {
+        newLocation: 'Opens in a new window/screen/tab',
+        external: 'Opens an external site',
+        externalNewLocation: 'Opens an external site in a new window/screen/tab'
+    }
 };
