@@ -49,12 +49,21 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout.withQuery('&knob-Place Order Errors', 'SERVER');
-
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
-        // Act
         checkout.open(pageUrl);
         checkout.waitForComponent();
+        checkout.setFieldValue('firstName', 'Jerry');
+        checkout.setFieldValue('lastName', 'Jazzman');
+        const addressInfo = {
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890',
+            line1: '47 Frith  Street',
+            locality: 'London',
+            postcode: 'W1D 4HT'
+        };
+        checkout.populateGuestCheckoutForm(addressInfo);
+
+        // Act
         checkout.goToPayment();
 
         // Assert
@@ -129,15 +138,24 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
         browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'shared');
     });
 
-    it('should display the "Duplicate Order Warning" modal', () => {
+    it.only('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout.withQuery('&knob-Place Order Errors', 'SERVER');
-
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
-        // Act
         checkout.open(pageUrl);
         checkout.waitForComponent();
+        checkout.setFieldValue('firstName', 'Jerry');
+        checkout.setFieldValue('lastName', 'Jazzman');
+        const addressInfo = {
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890',
+            line1: '47 Frith  Street',
+            locality: 'London',
+            postcode: 'W1D 4HT'
+        };
+        checkout.populateGuestCheckoutForm(addressInfo);
+
+        // Act
         checkout.goToPayment();
 
         // Assert

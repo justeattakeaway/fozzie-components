@@ -6,10 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.130.0
 ------------------------------
-*June 3, 2021*
+*June 7, 2021*
 
 ### Added
-- Feature Tests for Duplicate Error Warning dialog box
+- Feature & Visual Tests for `Duplicate Order Warning` modal
+
+
+v0.129.0
+------------------------------
+*June 2, 2021*
+
+### Added
+- Populate userNote field from session storage if it exists
+- Save userNote field to session storage when checkout form is submitted
 
 
 v0.128.0

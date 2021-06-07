@@ -65,6 +65,12 @@ const resolveCustomerDetails = (data, state) => {
     }
 };
 
+/**
+ * @param {object} state - The current `checkout` state.
+ * @returns {String} - session storage key where we save user note.
+ */
+const getUserNoteSessionStorageKey = state => `userNote-${state.basket.id}`;
+
 export default {
     namespaced: true,
 
@@ -389,6 +395,23 @@ export default {
         updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
+        },
+
+        getUserNote: ({ dispatch, state }) => {
+            if (window.sessionStorage) {
+                const key = getUserNoteSessionStorageKey(state);
+                const note = window.sessionStorage.getItem(key);
+                if (note) {
+                    dispatch('updateUserNote', note);
+                }
+            }
+        },
+
+        saveUserNote ({ state }) {
+            if (window.sessionStorage) {
+                const key = getUserNoteSessionStorageKey(state);
+                window.sessionStorage.setItem(key, state.userNote);
+            }
         },
 
         updateHasAsapSelected ({ commit }, payload) {
