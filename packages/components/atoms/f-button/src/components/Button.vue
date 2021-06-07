@@ -12,6 +12,8 @@
         :action-type="buttonActionType"
         :data-test-id="`${componentType}-component`"
         v-bind="$attrs"
+        :aria-live="getAriaLive"
+        :aria-busy="isLoading"
         v-on="!isLoading && $listeners"
     >
         <span
@@ -86,6 +88,12 @@ export default {
          */
         buttonActionType () {
             return !this.$attrs.href ? this.actionType : null;
+        },
+        /**
+         * Get the correct value for the aria-live attribute depending on whether the button is loading or not.
+         */
+        getAriaLive () {
+            return this.isLoading ? 'polite' : 'off';
         }
     }
 };
