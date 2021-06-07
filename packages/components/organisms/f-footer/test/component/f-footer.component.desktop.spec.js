@@ -182,23 +182,6 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(browser.getUrl()).toContain(expectedUrl);
     });
 
-    forEach([
-    ])
-    .it('should display link for country code "%s" and redirect to correct URL ("%s")', (country, expectedUrl) => {
-        // Act
-        footer.clickCountrySelectorButton();
-        footer.expectedCountry = country;
-
-        // Assert
-        expect(footer.isCountryLinkItemDisplayed()).toBe(true);
-
-        // Act
-        footer.clickCountryLinkItem();
-
-        // Assert
-        expect(browser.getUrl()).toContain(expectedUrl);
-    });
-
     // Make sure tenant is appended to screenshot for Percy tests
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
     .it('should display social icons block for country code "%s" - @percy', tenant => {
