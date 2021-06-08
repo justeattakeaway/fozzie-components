@@ -1948,6 +1948,33 @@ describe('Checkout', () => {
                     // Assert
                     expect($logger.logError).toHaveBeenCalled();
                 });
+
+                it('should set `getCheckoutErrorType` to "pageLoad" if error status code is not 403', async () => {
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
+                    expect(wrapper.vm.getCheckoutErrorType).toBe('pageLoad');
+                });
+
+                it('should set `getCheckoutErrorType` to "accessForbiddenError" if error status code is 403', async () => {
+                    // Assert
+                    wrapper = mount(VueCheckout, {
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject({ response: { status: 403 } })) }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
+                    expect(wrapper.vm.getCheckoutErrorType).toBe('accessForbiddenError');
+                });
             });
 
             describe('when `getCheckout` request succeeds', () => {

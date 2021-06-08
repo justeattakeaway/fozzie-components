@@ -147,7 +147,7 @@
 
         <error-page
             v-else-if="shouldShowErrorPage"
-            :error-type="getCheckoutError"
+            :error-type="getCheckoutErrorType"
         />
     </div>
 </template>
@@ -449,7 +449,7 @@ export default {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         },
 
-        getCheckoutError () {
+        getCheckoutErrorType () {
             return this.hasAccessForbiddenError ? 'accessForbiddenError' : 'pageLoad';
         }
     },
