@@ -693,7 +693,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
-                if (error.response.status === 403) {
+                if (error.response && error.response.status === 403) {
                     this.hasAccessForbiddenError = true;
                 }
                 this.$emit(EventNames.CheckoutGetFailure, error);
