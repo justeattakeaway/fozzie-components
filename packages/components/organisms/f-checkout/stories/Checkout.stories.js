@@ -31,6 +31,7 @@ const updateCheckoutServerErrorUrl = '/update-checkout-server-error.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
+const accessForbiddenErrorUrl = '/checkout-403-error.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
 
@@ -49,19 +50,26 @@ CheckoutMock.setupCheckoutMethod(updateCheckoutServerErrorUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
+CheckoutMock.setupCheckoutMethod(accessForbiddenErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
 const checkoutIssues = 'Checkout Issues (Response from server but order not fulfillable)';
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
+const accessForbiddenError = 'Get checkout error - access is forbidden';
 const ISSUES = 'ISSUES';
 const SERVER = 'SERVER';
 
-const checkoutErrorOptions = {
+const patchCheckoutErrorOptions = {
     None: null,
     [checkoutIssues]: ISSUES,
     [checkoutServerError]: SERVER
+};
+
+const getCheckoutErrorOptions = {
+    None: null,
+    [accessForbiddenError]: SERVER
 };
 
 const placeOrderErrorOptions = {
@@ -105,8 +113,12 @@ export const CheckoutComponent = () => ({
             default: boolean('Is ASAP available', true)
         },
 
-        checkoutError: {
-            default: select('Checkout Errors', checkoutErrorOptions)
+        patchCheckoutError: {
+            default: select('Patch Checkout Errors', patchCheckoutErrorOptions)
+        },
+
+        getCheckoutError: {
+            default: select('Get Checkout Errors', getCheckoutErrorOptions)
         },
 
         placeOrderError: {
@@ -116,6 +128,10 @@ export const CheckoutComponent = () => ({
 
     computed: {
         getCheckoutUrl () {
+            if (this.getCheckoutError) {
+                return accessForbiddenErrorUrl;
+            }
+
             return `/checkout-${this.serviceType}.json`;
         },
 
@@ -128,8 +144,8 @@ export const CheckoutComponent = () => ({
         },
 
         updateCheckoutUrl () {
-            if (this.checkoutError) {
-                return this.checkoutError === SERVER ? updateCheckoutServerErrorUrl : updateCheckoutErrorsUrl;
+            if (this.patchCheckoutError) {
+                return this.patchCheckoutError === SERVER ? updateCheckoutServerErrorUrl : updateCheckoutErrorsUrl;
             }
 
             return updateCheckoutUrl;

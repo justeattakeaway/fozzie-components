@@ -1911,11 +1911,17 @@ describe('Checkout', () => {
             describe('when `getCheckout` request fails', () => {
                 let wrapper;
 
+                const error = {
+                    response: {
+                        status: 400
+                    }
+                };
+
                 beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject(error)) }),
                         i18n,
                         localVue,
                         propsData,
