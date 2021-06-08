@@ -145,7 +145,11 @@
             </card>
         </div>
 
-        <error-page v-else-if="shouldShowErrorPage" />
+        <error-page
+            v-else-if="shouldShowErrorPage"
+            :header="$t(`errorMessages.${getCheckoutError}.heading`)"
+            :description="$t(`errorMessages.${getCheckoutError}.description`)"
+        />
     </div>
 </template>
 
@@ -308,7 +312,8 @@ export default {
             tenantConfigs,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
-            isLoading: false
+            isLoading: false,
+            hasAccessForbiddenError: false
         };
     },
 
@@ -443,6 +448,10 @@ export default {
 
         formattedMobileNumberForScreenReader () {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
+        },
+
+        getCheckoutError () {
+            return this.hasAccessForbiddenError ? 'accessForbiddenError' : 'pageLoad';
         }
     },
 
@@ -685,6 +694,9 @@ export default {
 
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
+                if (error.response.status === 403) {
+                    this.hasAccessForbiddenError = true;
+                }
                 this.$emit(EventNames.CheckoutGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 

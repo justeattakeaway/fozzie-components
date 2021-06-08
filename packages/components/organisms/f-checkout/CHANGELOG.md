@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.133.0
+------------------------------
+*June 8, 2021*
+
+### Added
+- Separate content for 403 error
+
+
 v0.130.0
 ------------------------------
 *June 7, 2021*
