@@ -1,83 +1,91 @@
 <template>
-    <mega-modal
-        v-if="!legacyBanner"
-        ref="cookieBanner"
-        :is-open="!shouldHideBanner"
-        is-positioned-bottom
-        :has-close-button="false"
-        data-cookie-consent-overlay>
-        <div
-            :class="[
-                $style['c-cookieBanner-card'],
-                { [$style['c-cookieBanner-ios']]: isIosBrowser }
-            ]"
-            data-test-id="cookieConsentBanner"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="cookieConsentTitle"
-            aria-describedby="cookieConsentDescription">
+    <div v-if="!shouldHideBanner || !copy.reopenCookieBannerLinkText">
+        <mega-modal
+            v-if="!legacyBanner"
+            ref="cookieBanner"
+            :is-open="!shouldHideBanner"
+            is-positioned-bottom
+            :has-close-button="false"
+            data-cookie-consent-overlay>
             <div
-                :class="$style['c-cookieBanner-content']"
-                data-test-id="cookieBannerContent">
-                <h2
-                    id="cookieConsentTitle"
-                    ref="cookieBannerHeading"
-                    tabindex="0"
-                    :class="$style['c-cookieBanner-title']"
-                    data-consent-title>
-                    {{ copy.mainTitle }}
-                </h2>
-                <div id="cookieConsentDescription">
-                    <p :class="$style['c-cookieBanner-text']">
-                        {{ copy.textLine1 }}
-                    </p>
+                :class="[
+                    $style['c-cookieBanner-card'],
+                    { [$style['c-cookieBanner-ios']]: isIosBrowser }
+                ]"
+                data-test-id="cookieConsentBanner"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="cookieConsentTitle"
+                aria-describedby="cookieConsentDescription">
+                <div
+                    :class="$style['c-cookieBanner-content']"
+                    data-test-id="cookieBannerContent">
+                    <h2
+                        id="cookieConsentTitle"
+                        ref="cookieBannerHeading"
+                        tabindex="0"
+                        :class="$style['c-cookieBanner-title']"
+                        data-consent-title>
+                        {{ copy.mainTitle }}
+                    </h2>
+                    <div id="cookieConsentDescription">
+                        <p :class="$style['c-cookieBanner-text']">
+                            {{ copy.textLine1 }}
+                        </p>
 
-                    <p :class="$style['c-cookieBanner-text']">
-                        {{ copy.textLine2 }}
-                    </p>
+                        <p :class="$style['c-cookieBanner-text']">
+                            {{ copy.textLine2 }}
+                        </p>
 
-                    <p :class="$style['c-cookieBanner-text']">
-                        {{ copy.textLine3 }}
-                        <a
-                            data-test-id="cookie-policy-link"
-                            :href="copy.cookiePolicyLinkUrl"
-                            :class="$style['c-cookieBanner-link']"
-                            target="_blank">
-                            {{ copy.cookiePolicyLinkText }}
-                        </a>
-                        {{ copy.textLine4 }}
-                    </p>
+                        <p :class="$style['c-cookieBanner-text']">
+                            {{ copy.textLine3 }}
+                            <a
+                                data-test-id="cookie-policy-link"
+                                :href="copy.cookiePolicyLinkUrl"
+                                :class="$style['c-cookieBanner-link']"
+                                target="_blank">
+                                {{ copy.cookiePolicyLinkText }}
+                            </a>
+                            {{ copy.textLine4 }}
+                        </p>
+                    </div>
+                </div>
+
+                <div :class="$style['c-cookieBanner-cta']">
+                    <button-component
+                        data-test-id="accept-all-cookies-button"
+                        is-full-width
+                        @click="acceptAllCookiesActions">
+                        {{ copy.acceptButtonText }}
+                    </button-component>
+
+                    <button-component
+                        button-type="ghost"
+                        data-test-id="accept-necessary-cookies-button"
+                        is-full-width
+                        @click="acceptOnlyNecessaryCookiesActions">
+                        {{ copy.nonAcceptButtonText }}
+                    </button-component>
                 </div>
             </div>
+        </mega-modal>
 
-            <div :class="$style['c-cookieBanner-cta']">
-                <button-component
-                    data-test-id="accept-all-cookies-button"
-                    is-full-width
-                    @click="acceptAllCookiesActions">
-                    {{ copy.acceptButtonText }}
-                </button-component>
-
-                <button-component
-                    button-type="ghost"
-                    data-test-id="accept-necessary-cookies-button"
-                    is-full-width
-                    @click="acceptOnlyNecessaryCookiesActions">
-                    {{ copy.nonAcceptButtonText }}
-                </button-component>
-            </div>
-        </div>
-    </mega-modal>
-
-    <legacy-banner
-        v-else
-        :should-hide-legacy-banner="shouldHideBanner"
-        :legacy-banner-text="copy.legacyBannerText"
-        :cookie-policy-link-url="copy.cookiePolicyLinkUrl"
-        :legacy-banner-link-text="copy.legacyBannerLinkText"
-        :legacy-banner-close-banner-text="copy.legacyBannerCloseBannerText"
-        @hide-legacy-banner="hideBanner"
-    />
+        <legacy-banner
+            v-else
+            :should-hide-legacy-banner="shouldHideBanner"
+            :legacy-banner-text="copy.legacyBannerText"
+            :cookie-policy-link-url="copy.cookiePolicyLinkUrl"
+            :legacy-banner-link-text="copy.legacyBannerLinkText"
+            :legacy-banner-close-banner-text="copy.legacyBannerCloseBannerText"
+            @hide-legacy-banner="hideBanner"
+        />
+    </div>
+    <div v-else>
+        <reopen-banner-link
+            :message="copy.reopenCookieBannerLinkText"
+            :use-grey-background="useGreyBackground"
+            @reopenBanner="reopenBanner" />
+    </div>
 </template>
 
 <script>
@@ -93,13 +101,16 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 
 import LegacyBanner from './LegacyBanner.vue';
 
+import ReopenBannerLink from './ReopenBannerLink.vue';
+
 import tenantConfigs from '../tenants';
 
 export default {
     components: {
         ButtonComponent,
         LegacyBanner,
-        MegaModal
+        MegaModal,
+        ReopenBannerLink
     },
 
     props: {
@@ -121,6 +132,10 @@ export default {
         cookieExpiry: {
             type: Number,
             default: 7776000
+        },
+        useGreyBackground: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -146,7 +161,7 @@ export default {
     computed: {
         /**
          * Check if the legacy cookie banner should be used
-         * @returns {Bool}
+         * @returns {Boolean}
          */
         legacyBanner () {
             return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
@@ -161,8 +176,9 @@ export default {
 
     mounted () {
         this.checkCookieBannerCookie();
-        this.focusOnTitle();
-
+        if (!this.shouldHideBanner) {
+            this.focusOnTitle();
+        }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
     },
 
@@ -216,6 +232,13 @@ export default {
             if (allBanners.length) {
                 allBanners[0].classList.add('hideCPBanner');
             }
+        },
+
+        /**
+         * Show the cookie consent banner
+         */
+        reopenBanner () {
+            this.shouldHideBanner = false;
         },
 
         /**
