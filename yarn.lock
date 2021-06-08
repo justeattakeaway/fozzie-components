@@ -2413,10 +2413,10 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@5.0.0-beta.7":
-  version "5.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.7.tgz#163808cb631686e0fb553d7901e111604142765c"
-  integrity sha512-teAtWDlfun2RTnQFxkciGOCJqqRKkPF80ybwF1zoU3+q8vZh6/DczxNvCUWmIybQIbK9k3I7qkUvzf7oeI2jVA==
+"@justeat/fozzie@5.0.0-beta.8":
+  version "5.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.8.tgz#40e07dddd107e8b38dfdc18da69fda8ca632863a"
+  integrity sha512-XALec51+e/VfcmK5gJTEXxhBjUmcLqZZlWHF384dSu+ujBK3c2QNBfeLJMfuBRa9mV3nXMCqbsJvxSZmty56Yw==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
