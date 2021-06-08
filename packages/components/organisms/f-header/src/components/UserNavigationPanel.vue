@@ -75,17 +75,17 @@ export default {
     margin: 0;
     font-family: $font-family-base;
     font-weight: 300;
-    color: $grey--dark;
+    color: $color-content-subdued;
     height: auto;
     @include font-size('body-s');
     text-decoration: none;
-    border-bottom: 1px solid $grey--light;
+    border-bottom: 1px solid $color-border-default;
 
     &:hover,
     &:focus {
         font-weight: $font-weight-bold;
         text-decoration: none;
-        color: $grey--dark;
+        color: $color-content-subdued;
     }
 
     @include media('>mid') {

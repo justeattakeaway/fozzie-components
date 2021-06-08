@@ -1,18 +1,20 @@
 import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+
 const Footer = require('../../test-utils/component-objects/f-footer.component');
 
-const footer = new Footer();
+let footer;
 
 describe('Desktop - f-footer component tests - @browserstack', () => {
     beforeEach(() => {
-        const footerData = {
-            locale: 'gb',
-            courierLinks: false,
-            countrySelector: true
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', 'en-GB');
+        footer.withQuery('&knob-Show country selector', 'true');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
     });
 
@@ -52,17 +54,16 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should not show courier links and country selector for country code "%s" when options are unselected - @percy', expectedLocale => {
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
+    .it('should not show courier links and country selector for country code "%s" when options are unselected - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: false,
-            countrySelector: false
-        };
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
@@ -71,17 +72,17 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['au', 'ie', 'nz'])
-    .it('should show courier links for country code "%s" when option is selected - @percy', expectedLocale => {
+    forEach(['en-AU', 'en-IE', 'en-NZ'])
+    .it('should show courier links for country code "%s" when option is selected - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: true,
-            countrySelector: false
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'true');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
@@ -89,17 +90,17 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['gb', 'es', 'it', 'no'])
-    .it('should never show courier links for country code "%s", even when option is selected - @percy', expectedLocale => {
+    forEach(['en-GB', 'es-ES', 'it-IT', 'nb-NO'])
+    .it('should never show courier links for country code "%s", even when option is selected - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: true,
-            countrySelector: false
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'true');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
@@ -107,17 +108,17 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should always show country selector for country code "%s" when selected - @percy', expectedLocale => {
+    forEach(['en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
+    .it('should always show country selector for country code "%s" when selected - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: false,
-            countrySelector: true
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'true');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
@@ -125,36 +126,47 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display the corresponding icon for the "%s" country code - @percy', expectedLocale => {
+    forEach(['en-AU', 'en-GB', 'en-NZ', 'en-IE', 'da-DK', 'es-ES', 'it-IT'])
+    .it('should display the corresponding icon for the "%s" country code - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: false,
-            countrySelector: true
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'true');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
+        const countryIcon = tenant.split('-');
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
-        expect(footer.isCurrentCountryIconDisplayed(expectedLocale)).toBe(true);
+        expect(footer.isCurrentCountryIconDisplayed(countryIcon[1].toLowerCase())).toBe(true);
     });
 
     forEach([
-        ['au', 'au'],
-        ['at', 'at'],
-        ['no', 'no'],
-        ['dk', 'dk'],
-        ['be', 'be-en'],
-        ['bg', 'bg'],
+        ['au', 'menulog.com.au'],
+        ['at', 'lieferando.at'],
+        ['be', 'takeaway.com/be'],
+        ['bg', 'takeaway.com/bg'],
         ['ca_en', 'skipthedishes.com'],
-        ['jet_fr', '.fr'],
-        ['de', '.de'],
-        ['ie', '.ie'],
-        ['il', '.il'],
-        ['it', '.it']
+        ['dk', 'just-eat.dk'],
+        ['jet_fr', 'just-eat.fr'],
+        ['de', 'lieferando.de'],
+        ['ie', 'just-eat.ie'],
+        ['il', '10bis.co.il'],
+        ['it', 'justeat.it'],
+        ['lu', 'takeaway.com/lu'],
+        ['nl', 'thuisbezorgd.nl'],
+        ['nz', 'menulog.co.nz'],
+        ['no', 'just-eat.no'],
+        ['pl', 'pyszne.pl'],
+        ['pt', 'takeaway.com/pt'],
+        ['ro', 'takeaway.com/ro'],
+        ['es', 'just-eat.es'],
+        ['ch_ch', 'eat.ch'],
+        ['ch_en', 'eat.ch/en'],
+        ['ch_fr', 'eat.ch/fr']
     ]).it('should display link for country code "%s" and redirect to correct URL ("%s")', (country, expectedUrl) => {
         // Act
         footer.clickCountrySelectorButton();
@@ -170,44 +182,18 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(browser.getUrl()).toContain(expectedUrl);
     });
 
-    forEach([
-        ['lu', 'lu-en'],
-        ['nl', '.nl'],
-        ['nz', '.nz'],
-        ['pl', '.pl'],
-        ['pt', '/pt'],
-        ['ro', '/ro'],
-        ['es', '.es'],
-        ['ch_ch', '.ch'],
-        ['ch_en', '/en'],
-        ['ch_fr', '/fr']])
-    .it('should display link for country code "%s" and redirect to correct URL ("%s")', (country, expectedUrl) => {
-        // Act
-        footer.clickCountrySelectorButton();
-        footer.expectedCountry = country;
-
-        // Assert
-        expect(footer.isCountryLinkItemDisplayed()).toBe(true);
-
-        // Act
-        footer.clickCountryLinkItem();
-
-        // Assert
-        expect(browser.getUrl()).toContain(expectedUrl);
-    });
-
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display social icons block for country code "%s" - @percy', expectedLocale => {
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
+    .it('should display social icons block for country code "%s" - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: false,
-            countrySelector: false
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
@@ -215,17 +201,17 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display app downloads block for country code "%s" - @percy', expectedLocale => {
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
+    .it('should display app downloads block for country code "%s" - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: false,
-            countrySelector: false
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
@@ -233,17 +219,17 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display payment options block for country code "%s" - @percy', expectedLocale => {
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
+    .it('should display payment options block for country code "%s" - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: false,
-            countrySelector: false
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert
@@ -251,17 +237,17 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     // Make sure tenant is appended to screenshot for Percy tests
-    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display the feedback block for country code "%s" - @percy', expectedLocale => {
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
+    .it('should display the feedback block for country code "%s" - @percy', tenant => {
         // Arrange
-        const footerData = {
-            locale: expectedLocale,
-            courierLinks: false,
-            countrySelector: false
-        };
+        footer = new Footer('organism', 'footer-component');
+        footer.withQuery('&knob-Locale', tenant);
+        footer.withQuery('&knob-Show country selector', 'false');
+        footer.withQuery('&knob-Show courier links', 'false');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         // Act
-        footer.open(footerData);
+        footer.open(pageUrl);
         footer.waitForComponent();
 
         // Assert

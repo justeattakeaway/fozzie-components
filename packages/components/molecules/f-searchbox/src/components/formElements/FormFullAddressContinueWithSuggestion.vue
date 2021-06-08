@@ -110,7 +110,7 @@ export default {
 .c-continueWithSuggestion-btn {
     cursor: pointer;
     @include font-size('body-s', false);
-    color: $grey--dark;
+    color: $color-content-subdued;
     line-height: 30px;
     overflow: hidden;
     text-align: left;
@@ -120,7 +120,7 @@ export default {
     width: 100%;
     border: 0;
     padding: 15px 20px;
-    background-color: $white;
+    background-color: $color-interactive-inverse;
 
     &:hover,
     &:focus,
@@ -140,6 +140,6 @@ export default {
 }
 
 .c-continueWithSuggestion-area {
-    color: $blue;
+    color: $color-support-info;
 }
 </style>

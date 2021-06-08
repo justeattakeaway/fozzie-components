@@ -1,4 +1,7 @@
 export default {
-    locale: 'it-IT',
-    text: 'I am a VLink Component (IT)'
+    ariaDescription: {
+        newLocation: 'Stai aprendo una nuova finestra/schermata/scheda',
+        external: 'Stai aprendo un sito esterno',
+        externalNewLocation: 'Stai aprendo un sito esterno in una nuova finestra/schermata/scheda'
+    }
 };

@@ -1,5 +1,6 @@
 import {
     withKnobs,
+    boolean,
     select,
     text
 } from '@storybook/addon-knobs';
@@ -33,6 +34,10 @@ export const IconButtonComponent = () => ({
             default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
         },
 
+        isLoading: {
+            default: boolean('isLoading', false)
+        },
+
         actionType: {
             default: select('Action Type', ['button', 'submit', 'reset'], 'button')
         },
@@ -49,7 +54,8 @@ export const IconButtonComponent = () => ({
             :buttonSize="buttonSize"
             :actionType="actionType"
             :href="href"
-            :isIcon="true">
+            :isIcon="true"
+            :isLoading="isLoading">
             <CrossIcon />
         </f-button>
 
@@ -58,7 +64,8 @@ export const IconButtonComponent = () => ({
             :buttonSize="buttonSize"
             :actionType="actionType"
             :href="href"
-            :isIcon="true">
+            :isIcon="true"
+            :isLoading="isLoading">
             <PlusIcon />
         </f-button>
 
@@ -67,10 +74,11 @@ export const IconButtonComponent = () => ({
             :buttonSize="buttonSize"
             :actionType="actionType"
             :href="href"
-            :isIcon="true">
+            :isIcon="true"
+            :isLoading="isLoading">
             <MoreVerticalIcon />
         </f-button>
     </div>`
 });
 
-IconButtonComponent.storyName = 'f-button--icon';
+IconButtonComponent.storyName = 'Icon Button';

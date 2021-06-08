@@ -149,7 +149,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$address-colour          : $color-text;
+$address-colour          : $color-content-default;
 $address-fontSize        : 'body-s';
 $address-weight-bold     : $font-weight-bold;
 

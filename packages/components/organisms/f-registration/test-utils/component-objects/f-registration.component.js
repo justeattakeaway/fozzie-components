@@ -64,8 +64,8 @@ module.exports = class Registration extends Page {
         }
     };
 
-    open () {
-        super.openComponent('organism', 'registration-component');
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {

@@ -4,6 +4,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.17.1
+------------------------------
+*June 4, 2021*
+
+### Fixed
+- Update expected URL for BE and LU
+
+### Changed
+- Use domain names in country selector tests
+
+
+v4.17.0
+------------------------------
+*May 25, 2021*
+
+### Changed
+- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
+
+
 v4.16.0
 ------------------------------
 *May 12, 2021*

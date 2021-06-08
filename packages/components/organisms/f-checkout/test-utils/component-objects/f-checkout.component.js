@@ -14,6 +14,7 @@ const {
     PRE_ORDER_WARNING,
     CHECKOUT_ERROR_MESSAGE,
     RETRY_BUTTON,
+    DUP_ORDER_GO_TO_HISTORY_BUTTON,
     ERROR_PAGE_COMPONENT,
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
@@ -46,6 +47,8 @@ module.exports = class Checkout extends Page {
     get checkoutErrorMessage () { return $(CHECKOUT_ERROR_MESSAGE); }
 
     get errorMessageRetry () { return $(RETRY_BUTTON); }
+
+    get errorMessageDupOrderGoToHistory () { return $(DUP_ORDER_GO_TO_HISTORY_BUTTON); }
 
     get errorPageComponent () { return $(ERROR_PAGE_COMPONENT); }
 
@@ -93,6 +96,10 @@ module.exports = class Checkout extends Page {
         userNote: {
             get input () { return $(FIELDS.userNote.input); },
             get error () { return ''; }
+        },
+        tableIdentifier: {
+            get input () { return $(FIELDS.tableIdentifier.input); },
+            get maxLengthError () { return $(FIELDS.tableIdentifier.maxLengthError); }
         }
     }
     /**
@@ -105,15 +112,13 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
-    open (checkout) {
-        const serviceType = checkout.isValid ? `&knob-Service%20Type=${checkout.type}` : '&knob-Service%20Type=Invalid%20URL';
-        const isLoggedIn = `&knob-Is%20User%20Logged%20In=${checkout.isAuthenticated}`;
-        const hasCheckoutErrors = `&knob-Checkout%20Errors=${checkout.checkoutErrors}`;
-        const hasPlaceOrderErrors = `&knob-Place%20Order%20Errors=${checkout.placeOrderErrors}`;
-        const hasAsapAvailable = `&knob-Is%20ASAP%20available=${checkout.isAsapAvailable}`;
+    open (url) {
+        super.open(url);
+    }
 
-        const url = `checkout-component${serviceType}${isLoggedIn}${hasCheckoutErrors}${hasPlaceOrderErrors}${hasAsapAvailable}`;
-        super.openComponent('organism', url);
+    withQuery (name, value) {
+        super.withQuery(name, value);
+        return this;
     }
 
     waitForComponent () {
@@ -124,8 +129,16 @@ module.exports = class Checkout extends Page {
         super.waitForComponent(this.errorPageComponent);
     }
 
+    isCheckoutPageDisplayed () {
+        return this.component.isDisplayed();
+    }
+
     isPostcodeTypeErrorDisplayed () {
         return this.fields.addressPostcode.typeError.isDisplayed();
+    }
+
+    isTableIdentifierMaxLengthErrorDisplayed () {
+        return this.fields.tableIdentifier.maxLengthError.isDisplayed();
     }
 
     isOrderTimeDropdownDisplayed () {
@@ -148,6 +161,10 @@ module.exports = class Checkout extends Page {
         return this.errorMessageRetry.click();
     }
 
+    clickDupOrderGoToHistoryButton () {
+        return this.errorMessageDupOrderGoToHistory.click();
+    }
+
     /**
     * @description
     * Inputs user details into the registration component and submits the form.
@@ -158,7 +175,7 @@ module.exports = class Checkout extends Page {
     * @param {String} userInfo.email The user's e-mail address
     * @param {String} userInfo.password The user's password
     */
-    submitForm () {
+    submitForm (userInfo) {
         this.fields.firstName.input.setValue(userInfo.firstName);
         this.fields.lastName.input.setValue(userInfo.lastName);
         this.fields.email.input.setValue(userInfo.email);
@@ -168,6 +185,14 @@ module.exports = class Checkout extends Page {
 
     isCheckoutErrorMessageDisplayed () {
         return this.checkoutErrorMessage.isDisplayedInViewport();
+    }
+
+    isCheckoutErrorCloseButtonDisplayed () {
+        return this.errorMessageRetry.isDisplayed();
+    }
+
+    isCheckoutErrorDupOrderGoToHistoryButtonDisplayed () {
+        return this.errorMessageDupOrderGoToHistory.isDisplayed();
     }
 
     /**
@@ -218,6 +243,22 @@ module.exports = class Checkout extends Page {
 
     /**
     * @description
+    * Inputs customer details into the checkout component.
+    *
+    * @param {Object} customerInfo
+    * @param {String} customerInfo.mobileNumber The user's mobile number
+    * @param {String} customerInfo.tableIdentifier The user's table ID
+    * @param {String} customerInfo.note The user's extra note
+    */
+    populateDineInCheckoutForm (customerInfo) {
+        this.waitForComponent();
+        this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
+        this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
+        this.fields.userNote.input.setValue(customerInfo.note);
+    }
+
+    /**
+    * @description
     * Changes checkout page to reflect checkout method to either delivery or collection depending on index given.
     *
     * @param {string} method The collection type: either 'delivery' or 'collection'
@@ -228,7 +269,6 @@ module.exports = class Checkout extends Page {
         this.knobButton.click();
         this.knobCheckoutDropdown.selectByVisibleText(file);
     }
-
 
     /**
     * @description

@@ -1,6 +1,5 @@
 <template>
-    <div
-        :class="$style['c-registration']">
+    <div :class="$style['c-registration']">
         <card-component
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
@@ -18,11 +17,12 @@
                 ]"
                 data-test-id="create-account-login-link"
                 @click="visitLoginPage">
-                <a
-                    class="o-link--bold o-link--noDecoration"
-                    :href="loginUrl">
+                <v-link
+                    is-bold
+                    :href="loginUrl"
+                    :has-text-decoration="false">
                     {{ copy.navLinks.login.text }}
-                </a>
+                </v-link>
             </p>
             <form
                 method="post"
@@ -32,7 +32,6 @@
                 @submit.prevent="onFormSubmit">
                 <section
                     id="error-summary-container"
-                    class="is-visuallyHidden"
                     role="alert"
                     data-test-id="error-summary-container">
                     <error-message
@@ -136,25 +135,34 @@
                     {{ copy.labels.createAccountBtn }}
                 </f-button>
             </form>
-            <p :class="$style['c-registration-link']">
+            <p
+                :class="[
+                    $style['c-registration-link'],
+                    $style['c-registration-link--bottomSpacing']]">
                 {{ copy.navLinks.termsAndConditions.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="ts-and-cs-link"
                     :href="copy.navLinks.termsAndConditions.url"
-                    target="_blank">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
+                    target="_blank">
+                    {{ copy.navLinks.termsAndConditions.text }}
+                </v-link>{{ copy.navLinks.termsAndConditions.suffix }}
                 {{ copy.navLinks.privacyPolicy.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="privacy-policy-link"
                     :href="copy.navLinks.privacyPolicy.url"
-                    target="_blank">{{ copy.navLinks.privacyPolicy.text }}</a>
+                    target="_blank">
+                    {{ copy.navLinks.privacyPolicy.text }}
+                </v-link>
                 {{ copy.navLinks.cookiesPolicy.prefix }}
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
-                    target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
+                    target="_blank">
+                    {{ copy.navLinks.cookiesPolicy.text }}
+                </v-link>{{ copy.navLinks.cookiesPolicy.suffix }}
             </p>
         </card-component>
     </div>
@@ -178,6 +186,8 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
+import VLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
@@ -189,6 +199,15 @@ import EventNames from '../event-names';
  * @return {boolean} True if there are no invalid chars in value, false otherwise.
  */
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
+
+/**
+ * Tests that the entered email address does not match the conflicted email address stored
+ *
+ * @param {string} value The email address to test.
+ * @param {object} vm The Vue instance
+ * @return {boolean} True if the email does not match the conflicted email address stored
+ */
+const isValidEmailAddress = (value, vm) => (value !== vm.conflictedEmailAddress);
 
 const formValidationState = $v => {
     const fields = $v.$params;
@@ -217,7 +236,8 @@ export default {
         CardComponent,
         FormField,
         BagCelebrateIcon,
-        ErrorMessage
+        ErrorMessage,
+        VLink
     },
 
     mixins: [validationMixin],
@@ -255,8 +275,8 @@ export default {
             password: null,
             shouldDisableCreateAccountButton: false,
             genericErrorMessage: null,
-            shouldShowEmailAlreadyExistsError: false,
-            formStarted: false
+            formStarted: false,
+            conflictedEmailAddress: ''
         };
     },
 
@@ -312,6 +332,9 @@ export default {
                 }
                 if (!this.$v.email.email) {
                     return messages.invalidEmailError;
+                }
+                if (!this.$v.email.isValidEmailAddress) {
+                    return messages.alreadyExistsError;
                 }
             }
             return '';
@@ -391,7 +414,8 @@ export default {
         email: {
             required,
             email,
-            maxLength: maxLength(50)
+            maxLength: maxLength(50),
+            isValidEmailAddress
         },
         password: {
             required,
@@ -424,7 +448,6 @@ export default {
 
         async onFormSubmit () {
             this.genericErrorMessage = null;
-            this.shouldShowEmailAlreadyExistsError = false;
 
             if (this.isFormInvalid()) {
                 const validationState = formValidationState(this.$v);
@@ -435,6 +458,8 @@ export default {
             }
 
             this.shouldDisableCreateAccountButton = true;
+            this.conflictedEmailAddress = '';
+
             try {
                 const registrationData = {
                     firstName: this.firstName,
@@ -447,29 +472,29 @@ export default {
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, registrationData, this.tenant);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
-                let thrownErrors = error;
-                if (error && error.response && error.response.data && error.response.data.errors) {
-                    thrownErrors = error.response.data.errors;
-                }
-                let shouldEmitCreateAccountFailure = true;
+                if (error.response && error.response.status) {
+                    const { status } = error.response;
 
-                if (Array.isArray(thrownErrors)) {
-                    if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
-                        this.shouldShowEmailAlreadyExistsError = true;
-                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === 'FailedUserAuthentication')) {
-                        this.$emit(EventNames.LoginBlocked);
-
-                        shouldEmitCreateAccountFailure = false;
-                    } else {
-                        this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
+                    if (status === 409) {
+                        this.conflictedEmailAddress = this.email;
+                        this.$emit(EventNames.CreateAccountFailure, error);
+                        return;
                     }
-                } else {
-                    this.genericErrorMessage = error;
+
+                    if (status === 400) {
+                        this.genericErrorMessage = error.response.data.errors[0].description;
+                        this.$emit(EventNames.CreateAccountFailure, error);
+                        return;
+                    }
+
+                    if (status === 403) {
+                        this.$emit(EventNames.LoginBlocked);
+                        return;
+                    }
                 }
 
-                if (shouldEmitCreateAccountFailure) {
-                    this.$emit(EventNames.CreateAccountFailure, thrownErrors);
-                }
+                this.genericErrorMessage = error.message || this.copy.genericErrorMessage;
+                this.$emit(EventNames.CreateAccountFailure, this.genericErrorMessage);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
@@ -522,18 +547,12 @@ $registration-icon-height--narrow : 74px;
 
     .c-registration-card {
         position: relative;
-        padding-top: spacing(x7);
-        padding-bottom: spacing(x6);
-
-        @include media('<mid') {
-            padding-bottom: spacing(x4);
-        }
 
         @include media('>=narrow') {
             // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
-            box-shadow: 0 1px 1px 0 rgba($black, 0.03),
-                    0 2px 1px -1px rgba($black, 0.07),
-                    0 1px 3px 0 rgba($black, 0.06);
+            box-shadow: 0 1px 1px 0 rgba($color-black, 0.03),
+                    0 2px 1px -1px rgba($color-black, 0.07),
+                    0 1px 3px 0 rgba($color-black, 0.06);
         }
     }
 
@@ -571,5 +590,11 @@ $registration-icon-height--narrow : 74px;
 
         .c-registration-link--subtitle {
             margin-top: - spacing(); // shift the subtitle link closer to the main title
+        }
+
+        .c-registration-link--bottomSpacing {
+            @include media('<narrow') {
+                padding-bottom: spacing(x4);
+            }
         }
 </style>

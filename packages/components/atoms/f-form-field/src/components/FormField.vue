@@ -9,7 +9,7 @@
         ]"
         :data-test-id="testId.container">
         <div
-            :class="$style['c-formField-inputWrapper']">
+            :class="$style['c-formField-fieldWrapper']">
             <form-label
                 v-if="!isInline"
                 :label-style="normalisedLabelStyle"
@@ -19,6 +19,12 @@
                 {{ labelText }}
             </form-label>
 
+            <p
+                v-if="hasInputDescription"
+                class="u-spacingTop u-spacingBottom--large">
+                <slot />
+            </p>
+
             <form-dropdown
                 v-if="isDropdown"
                 :id="uniqueId"
@@ -26,11 +32,24 @@
                 :type="normalisedInputType"
                 :value="value"
                 :class="[
-                    $style['c-formField-input'],
-                    $style['c-formField-dropdownContainer'],
-                    $style['c-formField-input--focus']
+                    $style['c-formField-field'],
+                    $style['c-formField-field--defaultHeight'],
+                    $style['c-formField-dropdownContainer']
                 ]"
                 :dropdown-options="dropdownOptions"
+                v-on="listeners" />
+
+            <textarea
+                v-else-if="isTextarea"
+                :id="`${uniqueId}`"
+                :aria-labelledby="`label-${uniqueId}`"
+                :value="value"
+                v-bind="$attrs"
+                :class="[
+                    $style['c-formField-field'],
+                    $style['c-formField-field--textarea']
+                ]"
+                data-test-id="formfield-textarea"
                 v-on="listeners" />
 
             <input
@@ -45,8 +64,9 @@
                 placeholder=" "
                 :data-test-id="testId.input"
                 :class="[
-                    $style['c-formField-input'],
-                    (isSelectionControl ? $style['c-formField-input--focus'] : '')
+                    $style['c-formField-field'],
+                    $style['c-formField-field--defaultHeight'],
+                    { [$style['c-formField-field--noFocus']]: isSelectionControl }
                 ]"
                 v-on="listeners"
             >
@@ -139,6 +159,11 @@ export default {
         maxNumber: {
             type: Number,
             default: 100
+        },
+
+        hasInputDescription: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -208,11 +233,15 @@ export default {
         },
 
         isSelectionControl () {
-            return !(this.inputType === 'radio' || this.inputType === 'checkbox');
+            return this.inputType === 'radio' || this.inputType === 'checkbox';
         },
 
         isFieldGrouped () {
             return this.isGrouped && !this.hasError;
+        },
+
+        isTextarea () {
+            return this.inputType === 'textarea';
         }
     },
 
@@ -244,21 +273,22 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-textColour                    : $color-text;
-$form-input-textColour--disabled          : $grey--midDark;
-$form-input-bg                            : $white;
-$form-input-bg--hover                     : rgba($black, 0.04);
-$form-input-bg--disabled                  : $color-disabled;
+$form-input-textColour                    : $color-content-default;
+$form-input-textColour--disabled          : $color-content-disabled;
+$form-input-bg                            : $color-container-default;
+$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);
+$form-input-bg--disabled                  : $color-disabled-01;
 $form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $color-border;
-$form-input-borderColour--focus           : $color-border--interactive;
-$form-input-borderColour--invalid         : $red;
-$form-input-borderColour--disabled        : $color-disabled;
+$form-input-borderColour                  : $color-border-strong;
+$form-input-borderColour--focus           : $color-grey-50;
+$form-input-borderColour--invalid         : $color-support-error;
+$form-input-borderColour--disabled        : $color-disabled-01;
 $form-input-height                        : 46px; // height is 46px + 1px border = 48px
 $form-input-padding                       : spacing(x1.5) spacing(x2);
 $form-input-fontSize                      : 'body-l';
-$form-input-focus                         : $blue--light;
+$form-input-focus                         : $color-focus;
+$form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
 
 .c-formField {
     & + & {
@@ -266,17 +296,20 @@ $form-input-focus                         : $blue--light;
     }
 }
 
-    .c-formField-inputWrapper {
+    .c-formField-fieldWrapper {
         position: relative;
     }
 
-    .c-formField-input {
+    .c-formField-field--defaultHeight {
+        @include rem(height, $form-input-height); //convert height to rem
+    }
+
+    .c-formField-field {
         width: 100%;
         font-family: $font-family-base;
         @include font-size($form-input-fontSize);
-        font-weight: $font-weight-base;
+        font-weight: $font-weight-regular;
         color: $form-input-textColour;
-        @include rem(height, $form-input-height); //convert height to rem
 
         background-color: $form-input-bg;
         border: $form-input-borderWidth solid $form-input-borderColour;
@@ -286,6 +319,13 @@ $form-input-focus                         : $blue--light;
 
         &:hover {
             background-color: $form-input-bg--hover;
+        }
+
+        &:focus,
+        &:active,
+        &:focus-within {
+            box-shadow: $form-input-focus--boxShadow;
+            outline: none;
         }
 
         .c-formField--invalid & {
@@ -305,12 +345,17 @@ $form-input-focus                         : $blue--light;
         }
     }
 
-    .c-formField-input--focus {
+    .c-formField-field--textarea {
+        background-clip: padding-box;
+        padding: spacing(x2);
+        resize: none;
+    }
+
+    .c-formField-field--noFocus {
         &:focus,
         &:active,
         &:focus-within {
-            box-shadow: 0 0 0 2pt $form-input-focus;
-            outline: none;
+            box-shadow: none;
         }
     }
 
@@ -322,7 +367,7 @@ $form-input-focus                         : $blue--light;
         & + & {
             margin-top: 0;
 
-            .c-formField-input {
+            .c-formField-field {
                 border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
                 border-top: 0;
             }
@@ -330,13 +375,13 @@ $form-input-focus                         : $blue--light;
     }
 
     .c-formField--grouped:not(:last-child) {
-        .c-formField-input {
+        .c-formField-field {
             border-radius: 0;
         }
     }
 
     .c-formField--grouped:first-child {
-        .c-formField-input {
+        .c-formField-field {
             border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
     }

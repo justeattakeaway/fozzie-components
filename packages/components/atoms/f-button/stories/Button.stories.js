@@ -26,8 +26,16 @@ export const ButtonComponent = () => ({
             default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
         },
 
+        disabled: {
+            default: boolean('disabled', false)
+        },
+
         isFullWidth: {
             default: boolean('isFullWidth', false)
+        },
+
+        isLoading: {
+            default: boolean('isLoading', false)
         },
 
         actionType: {
@@ -43,12 +51,14 @@ export const ButtonComponent = () => ({
         <f-button
             :buttonType="buttonType"
             :buttonSize="buttonSize"
+            :disabled="disabled"
             :isFullWidth="isFullWidth"
             :actionType="actionType"
             :href="href"
-            :isIcon="false">
+            :isIcon="false"
+            :isLoading="isLoading">
             Default Button Text
         </f-button>`
 });
 
-ButtonComponent.storyName = 'f-button';
+ButtonComponent.storyName = 'Button';

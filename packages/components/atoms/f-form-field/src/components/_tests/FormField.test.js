@@ -5,6 +5,10 @@ import {
     DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES
 } from '../../constants';
 
+const $style = {
+    'c-formField-field--noFocus': 'c-formField-field--noFocus'
+};
+
 describe('FormField', () => {
     it('should be defined', () => {
         const propsData = {};
@@ -107,6 +111,25 @@ describe('FormField', () => {
                 // Assert
                 expect(wrapper.contains(FormDropdown)).toBe(true);
             });
+
+            describe.each([
+                ['textarea', true],
+                ['text', false]
+            ])('is %s', (inputType, expected) => {
+                // Arrange
+                const propsData = {
+                    inputType
+                };
+                const wrapper = shallowMount(FormField, { propsData });
+
+                // Act
+                const textareaElement = wrapper.find('[data-test-id="formfield-textarea"]');
+
+                // Assert
+                it(`should ${inputType === 'textarea' ? '' : 'not '}display a textarea element`, () => {
+                    expect(textareaElement.exists()).toBe(expected);
+                });
+            });
         });
 
         describe('labelStyle ::', () => {
@@ -176,6 +199,26 @@ describe('FormField', () => {
                     expect(defaultLabel.exists()).toBe(false);
                     expect(inlineLabel.exists()).toBe(true);
                 });
+            });
+        });
+    });
+
+    describe('computed :: ', () => {
+        describe('isSelectionControl :: ', () => {
+            it('should capitalise to first letter of `buttonSize` prop :: ', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormField, {
+                    propsData: {
+                        inputType: 'checkbox'
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
+                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
+
+                // Assert
+                expect(formInput.attributes('class')).toContain('c-formField-field--noFocus');
             });
         });
     });

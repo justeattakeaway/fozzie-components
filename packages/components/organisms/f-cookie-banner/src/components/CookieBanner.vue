@@ -113,9 +113,9 @@ export default {
             default: false
         },
 
-        showLegacyBanner: {
+        shouldShowLegacyBanner: {
             type: Boolean,
-            default: false
+            default: null
         },
 
         cookieExpiry: {
@@ -146,9 +146,10 @@ export default {
     computed: {
         /**
          * Check if the legacy cookie banner should be used
+         * @returns {Bool}
          */
         legacyBanner () {
-            return this.config.displayLegacy;
+            return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
         }
     },
 
@@ -174,6 +175,7 @@ export default {
             this.setLegacyCookieBannerCookie();
             this.dataLayerPush('full');
             this.resendEvents();
+            this.hideAllBanners();
             this.shouldHideBanner = true;
         },
 
@@ -186,6 +188,7 @@ export default {
             this.dataLayerPush('necessary');
             this.resendEvents();
             this.removeUnnecessaryCookies();
+            this.hideAllBanners();
             this.shouldHideBanner = true;
         },
 
@@ -203,6 +206,16 @@ export default {
          */
         hideBanner () {
             this.shouldHideBanner = true;
+        },
+
+        /**
+         * Hide the legacy banners
+         */
+        hideAllBanners () {
+            const allBanners = document.getElementsByClassName('cpOverlay');
+            if (allBanners.length) {
+                allBanners[0].classList.add('hideCPBanner');
+            }
         },
 
         /**
@@ -306,7 +319,7 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: $white;
+        background-color: $color-container-default;
         z-index: 99999992;
     }
 
@@ -328,7 +341,7 @@ export default {
         font-weight: $font-weight-bold;
         margin: spacing() 0;
         padding: 0;
-        color: $color-headings;
+        color: $color-content-default;
         &:hover,
         &:focus {
             a {

@@ -1,7 +1,7 @@
 export const CHECKOUT_COMPONENT = '[data-test-id="checkout-component"]';
 export const ORDER_TIME_DROPDOWN = '[data-test-id="formfield-order-time-dropdown-select"]';
 export const ORDER_TIME_DROPDOWN_OPTIONS = '[data-test-id="formfield-order-time-dropdown-select"] option';
-export const USER_NOTE_INPUT = '[data-test-id="user-note"] textarea';
+export const USER_NOTE_INPUT = '[data-test-id="formfield-textarea"]';
 export const GO_TO_PAYMENT_BUTTON = '[data-test-id="confirm-payment-submit-button"]';
 export const KNOB_BUTTON = '[id$="tabbutton-knobs"]';
 export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
@@ -9,8 +9,9 @@ export const SWITCH_USER_LINK = '[data-test-id="switch-user-link"]';
 export const GUEST_CHECKOUT_LOGIN_BUTTON = '[data-test-id="guest-login-button"]';
 export const GUEST_CHECKOUT_HEADER = '[data-test-id="guest-checkoutHeader"]';
 export const PRE_ORDER_WARNING = '[data-test-id="warning-pre-order"]';
-export const CHECKOUT_ERROR_MESSAGE = '[data-test-id="checkout-issue-modal"]';
+export const CHECKOUT_ERROR_MESSAGE = '[data-test-id="checkout-issue-modal"] div';
 export const RETRY_BUTTON = '[data-test-id="redirect-to-menu-button"]';
+export const DUP_ORDER_GO_TO_HISTORY_BUTTON = '[data-test-id="redirect-to-orderhistory-button"]';
 export const ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-component"]';
 export const ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';
 export const ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description"]';
@@ -52,7 +53,10 @@ export const FIELDS = {
         typeError: '[data-test-id="error-address-postcode-type-error"]'
     },
     userNote: {
-        input: '[data-test-id="user-note"] textarea',
+        input: '[data-test-id="formfield-textarea"]',
         error: ''
+    },
+    tableIdentifier: {
+        input: '[data-test-id="formfield-table-identifier-input"]'
     }
 };

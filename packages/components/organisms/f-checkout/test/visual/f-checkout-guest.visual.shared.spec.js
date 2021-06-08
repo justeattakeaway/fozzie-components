@@ -1,18 +1,21 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
-const checkout = new Checkout();
+
+let checkout = new Checkout();
 
 describe('f-checkout - Collection - Guest - Visual Tests', () => {
     beforeEach(() => {
-        const checkoutData = {
-            type: 'collection',
-            isAuthenticated: false,
-            isValid: true,
-            isAsapAvailable: true
-        };
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'collection')
+                .withQuery('&knob-Is User Logged In', false)
+                .withQuery('&knob-Is ASAP available', true);
 
-        checkout.open(checkoutData);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
         checkout.waitForComponent();
-        browser.pause(2000);
     });
 
     it('should display the component base state.', () => {
@@ -42,18 +45,44 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', 'shared');
     });
+
+    it('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.setFieldValue('firstName', 'Jerry');
+        checkout.setFieldValue('lastName', 'Jazzman');
+        const addressInfo = {
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890',
+            line1: '47 Frith  Street',
+            locality: 'London',
+            postcode: 'W1D 4HT'
+        };
+        checkout.populateGuestCheckoutForm(addressInfo);
+
+        // Act
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'shared');
+    });
 });
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests', () => {
     beforeEach(() => {
-        const checkoutData = {
-            type: 'collection',
-            isAuthenticated: false,
-            isValid: true,
-            isAsapAvailable: false
-        };
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'collection')
+                .withQuery('&knob-Is User Logged In', false)
+                .withQuery('&knob-Is ASAP available', false);
 
-        checkout.open(checkoutData);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
         checkout.waitForComponent();
     });
 
@@ -66,14 +95,16 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests'
 
 describe('f-checkout - Delivery - Guest - Visual Tests', () => {
     beforeEach(() => {
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: false,
-            isValid: true,
-            isAsapAvailable: true
-        };
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', false)
+                .withQuery('&knob-Is ASAP available', true);
 
-        checkout.open(checkoutData);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
         checkout.waitForComponent();
     });
 
@@ -106,18 +137,44 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'shared');
     });
+
+    it.only('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.setFieldValue('firstName', 'Jerry');
+        checkout.setFieldValue('lastName', 'Jazzman');
+        const addressInfo = {
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890',
+            line1: '47 Frith  Street',
+            locality: 'London',
+            postcode: 'W1D 4HT'
+        };
+        checkout.populateGuestCheckoutForm(addressInfo);
+
+        // Act
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'shared');
+    });
 });
 
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Visual Tests', () => {
     beforeEach(() => {
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: false,
-            isValid: true,
-            isAsapAvailable: false
-        };
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', false)
+                .withQuery('&knob-Is ASAP available', false);
 
-        checkout.open(checkoutData);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
         checkout.waitForComponent();
     });
 

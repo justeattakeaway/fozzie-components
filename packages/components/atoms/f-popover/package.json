@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-popover",
   "description": "Fozzie Popover - renders recieved content as a popover",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "main": "dist/f-popover.umd.min.js",
   "files": [
     "dist" 
@@ -50,7 +50,7 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.1.0",
+    "@justeat/f-wdio-utils": "0.2.0",
     "node-sass-magic-importer": "5.3.2"
   }
 }

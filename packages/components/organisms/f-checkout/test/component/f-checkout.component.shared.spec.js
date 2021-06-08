@@ -1,18 +1,20 @@
 import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
-const checkout = new Checkout();
+let checkout;
 
 describe('f-checkout component tests - @browserstack', () => {
     beforeEach(() => {
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: true,
-            isValid: true
-        };
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true);
 
-        checkout.open(checkoutData);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        checkout.open(pageUrl);
         checkout.waitForComponent();
     });
 
@@ -78,20 +80,49 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: true,
-            isValid: true,
-            checkoutErrors: 'ISSUES'
-        };
+        checkout.withQuery('&knob-Checkout Errors', 'ISSUES');
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act
-        checkout.open(checkoutData);
+        checkout.open(pageUrl);
         checkout.waitForComponent();
         checkout.goToPayment();
         checkout.clickRetryButton();
+        browser.pause(2000);
 
         // Assert
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+    });
+
+    describe('when the "Duplicate Order Warning" modal is displayed', () => {
+        beforeEach(() => {
+            // Arrange
+            checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+            const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+            // Act
+            checkout.open(pageUrl);
+            checkout.waitForComponent();
+            checkout.goToPayment();
+        });
+
+        it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
+            // Act
+            checkout.waitForComponent();
+            checkout.clickRetryButton();
+
+            // Assert
+            expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+            expect(checkout.isCheckoutPageDisplayed()).toBe(true);
+        });
+
+        it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
+            // Act
+            checkout.waitForComponent();
+            checkout.clickDupOrderGoToHistoryButton();
+
+            // Assert
+            expect(browser.getUrl().split('/')[3]).toBe('order-history');
+        });
     });
 });

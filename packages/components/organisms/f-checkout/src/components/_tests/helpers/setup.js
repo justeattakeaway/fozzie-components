@@ -70,16 +70,20 @@ const defaultCheckoutActions = {
     createGuestUser: jest.fn(),
     updateAddressDetails: jest.fn(),
     updateCustomerDetails: jest.fn(),
+    updateTableIdentifier: jest.fn(),
     updateFulfilmentTime: jest.fn(),
     getGeoLocation: jest.fn(),
     getBasket: jest.fn(),
     getAddress: jest.fn(),
     placeOrder: jest.fn(),
     getCustomerName: jest.fn(),
-    updateHasAsapSelected: jest.fn()
+    updateHasAsapSelected: jest.fn(),
+    getUserNote: jest.fn(),
+    saveUserNote: jest.fn()
 };
 
 const defaultAnalyticsActions = {
+    trackDuplicateOrderWarnDialog: jest.fn(),
     trackFormErrors: jest.fn(),
     trackFormInteraction: jest.fn(),
     trackInitialLoad: jest.fn(),

@@ -3,6 +3,167 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.130.0
+------------------------------
+*June 7, 2021*
+
+### Added
+- Feature & Visual Tests for `Duplicate Order Warning` modal
+
+
+v0.129.0
+------------------------------
+*June 2, 2021*
+
+### Added
+- Populate userNote field from session storage if it exists
+- Save userNote field to session storage when checkout form is submitted
+
+
+v0.128.0
+------------------------------
+*June 2, 2021*
+
+### Change
+- Give the consumer two options; 'Close' or 'View recent orders', when showing the Duplicate Error Warning dialog box
+- Added tracking to the alternative dialog box
+
+
+v0.127.0
+------------------------------
+*June 1, 2021*
+
+### Changed
+- Moved logic to show fulfilment time dropdown inside selector component to still set the time under the hood
+- Passed correct params to mapper to ensure request is made correctly
+
+
+v0.126.0
+------------------------------
+*June 1, 2021*
+
+### Changed
+- Restored/Set the selected `fulfilment time` if available/valid on `mount`
+
+
+v0.125.0
+------------------------------
+*May 24, 2021*
+
+### Added
+- Populate address fields from local storage if it exists
+
+
+v0.124.0
+------------------------------
+*May 28, 2021*
+
+### Fixed
+- Scrolling broken when clicking `OK` within `megaModal` component.
+
+### Added
+- `serviceType` to data-test-id
+
+
+v0.123.0
+------------------------------
+*May 27, 2021*
+
+### Added
+- Logging of place order error code
+
+
+v0.122.0
+------------------------------
+*May 24, 2021*
+
+### Changed
+- f-card package version updated to 1.2.1 to include card footer for T&C
+- T&C styles were cleaned up
+
+
+v0.121.0
+------------------------------
+*May 24, 2021*
+
+### Updated
+- Logging to include traceID from server
+
+
+v0.120.0
+------------------------------
+*May 26, 2021*
+
+### Changed
+- CSS variables to use pie design tokens instead of fozzie-colour-palette vars
+
+
+v0.119.0
+------------------------------
+*May 24, 2021*
+
+### Added
+- Ability to handle orders with the service type `dinein`
+- Table number/name input field
+
+v0.118.1
+------------------------------
+*May 24, 2021*
+
+### Changed
+- Check mobile number exists before formatting for screen reader
+
+
+v0.118.0
+------------------------------
+*May 21, 2021*
+
+### Updated
+- `f-mega-modal` to version 0.9.0 to include `title` prop
+
+### Changed
+- Refactor ErrorDialog to use `title` prop in `f-mega-modal`
+
+
+v0.117.0
+------------------------------
+*May 20, 2021*
+
+### Added
+- Aria label with structured mobile number for screen readers
+
+
+v0.116.0
+------------------------------
+*May 18, 2021*
+
+### Changed
+- Output the tag: 'checkout' with all log messages
+
+
+v0.115.0
+------------------------------
+*May 18, 2021*
+
+### Removed
+- `UserNote.vue` as now it is just another form field from `f-form-field` component
+
+### Updated
+- `f-form-field` to version 1.12.1 to include textarea input-type
+
+
+v0.114.0
+------------------------------
+*May 17, 2021*
+
+### Fixed
+- Error modal spacing so that the title and the close button don't overlap
+
+### Changed
+- Updated `f-mega-modal` version
+
+
 v0.113.0
 ------------------------------
 *May 12, 2021*

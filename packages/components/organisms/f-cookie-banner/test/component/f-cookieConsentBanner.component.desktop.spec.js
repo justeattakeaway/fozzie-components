@@ -1,12 +1,17 @@
 import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const CookieBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
 
-const cookieBanner = new CookieBanner();
+let cookieBanner;
 
 describe('New - f-cookieBanner component tests - @browserstack', () => {
     beforeEach(() => {
-        cookieBanner.open();
+        cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+        cookieBanner.withQuery('&knob-Locale', 'en-IE');
+        const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
+
+        cookieBanner.open(pageUrl);
         cookieBanner.waitForComponent();
     });
 
@@ -28,15 +33,19 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
 
 describe('New - Multi-tenant - f-cookieBanner component tests', () => {
     forEach([
-        ['es', 'es/info/politica-de-cookies'],
+        ['es-ES', 'es/info/politica-de-cookies'],
         // ['dk', 'dk/cookie-erklaering'],
-        ['ie', 'ie/info/cookies-policy'],
-        ['it', 'it/informazioni/politica-dei-cookie']
+        ['en-IE', 'ie/info/cookies-policy'],
+        ['it-IT', 'it/informazioni/politica-dei-cookie']
         // ['no', 'no/informasjonskapselerklaering']  'dk' and 'no' disabled for now
     ])
     .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
         // Arrange
-        cookieBanner.open(tenant);
+        cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+        cookieBanner.withQuery('&knob-Locale', tenant);
+        const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
+
+        cookieBanner.open(pageUrl);
         browser.deleteAllCookies();
         browser.refresh();
         cookieBanner.waitForComponent();
