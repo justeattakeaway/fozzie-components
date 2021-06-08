@@ -147,8 +147,7 @@
 
         <error-page
             v-else-if="shouldShowErrorPage"
-            :header="$t(`errorMessages.${getCheckoutError}.heading`)"
-            :description="$t(`errorMessages.${getCheckoutError}.description`)"
+            :error-type="getCheckoutError"
         />
     </div>
 </template>

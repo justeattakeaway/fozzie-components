@@ -1,10 +1,11 @@
-import Vuex from 'vuex';
+import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Error from '../Error.vue';
+import { i18n } from './helpers/setup';
 
 const localVue = createLocalVue();
 
-localVue.use(Vuex);
+localVue.use(VueI18n);
 
 describe('Error', () => {
     let wrapper;
@@ -12,10 +13,10 @@ describe('Error', () => {
     beforeEach(() => {
         // Arrange & Act
         wrapper = shallowMount(Error, {
+            i18n,
             localVue,
             propsData: {
-                header: 'Test header',
-                description: 'Test description'
+                errorType: 'pageLoad'
             }
         });
     });

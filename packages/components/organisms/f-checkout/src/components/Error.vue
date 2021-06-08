@@ -14,13 +14,13 @@
         <h1
             :class="$style['c-checkout-error-heading']"
             data-test-id="checkout-error-page-heading">
-            {{ header }}
+            {{ $t(`errorMessages.${errorType}.heading`) }}
         </h1>
 
         <p
             :class="$style['c-checkout-error-description']"
             data-test-id="checkout-error-page-description">
-            {{ description }}
+            {{ $t(`errorMessages.${errorType}.description`) }}
         </p>
     </card>
 </template>
@@ -36,11 +36,7 @@ export default {
         SadBagIconDecorator
     },
     props: {
-        header: {
-            type: String,
-            required: true
-        },
-        description: {
+        errorType: {
             type: String,
             required: true
         }
