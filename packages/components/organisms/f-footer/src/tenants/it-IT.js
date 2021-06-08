@@ -107,8 +107,74 @@ export default {
             ]
         },
         brands: {
-            title: 'Brands',
-            links: []
+            title: 'Catene',
+            links: [
+                {
+                    url: "/domicilio/catene-ristoranti/McDonald's",
+                    text: "McDonald's",
+                    gtm: 'click_catene_mcdonalds'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/burger-king',
+                    text: 'Burger King',
+                    gtm: 'click_brands_burger_king'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/old-wild-west',
+                    text: 'Old Wild West',
+                    gtm: 'click_catene_old_wild_west'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/kfc',
+                    text: 'KFC',
+                    gtm: 'click_catene_kfc'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/dominos-pizza',
+                    text: "Domino's",
+                    gtm: 'click_catene_dominos_pizza'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/sushiko',
+                    text: 'Sushiko',
+                    gtm: 'click_catene_sushiko'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/la-piadineria',
+                    text: 'La Piadineria',
+                    gtm: 'click_catene_la_piadineria'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/Roadhouse',
+                    text: 'Roadhouse',
+                    gtm: 'click_catene_roadhouse'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/fratelli-la-bufala',
+                    text: 'Fratelli La Bufala',
+                    gtm: 'click_catene_fratelli_la_bufala'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/poke-house',
+                    text: 'Poke House',
+                    gtm: 'click_catene_poke_house'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/zushi',
+                    text: 'Zushi',
+                    gtm: 'click_catene_zushi'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti/alice-pizza',
+                    text: 'Alice Pizza',
+                    gtm: 'click_catene_alice_pizza'
+                },
+                {
+                    url: '/domicilio/catene-ristoranti',
+                    text: 'Tutte le catene',
+                    gtm: 'click_brands_view_all'
+                }
+            ]
         },
         aboutUs: {
             title: 'Chi siamo',

@@ -7,13 +7,13 @@
                 <button
                     v-for="({ name, title }, i) in tabs"
                     :key="i"
+                    type="button"
                     :class="[
                         { [$style['c-tabs-button--active']]: activeTab === name },
                         $style['c-tabs-button']
                     ]"
                     :data-test-id="`tab-button-${name}`"
-                    @click="selectTabIndex(name)"
-                >
+                    @click="selectTabIndex(name)">
                     {{ title }}
                 </button>
             </div>
@@ -83,13 +83,18 @@ export default {
          * @param name
          */
         selectTabIndex (name) {
+            if (this.activeTab === name) return;
+
             const previousIndex = this.tabs.findIndex(t => t.name === this.activeTab);
             const newIndex = this.tabs.findIndex(t => t.name === name);
-            if (newIndex > previousIndex) {
-                this.direction = DIRECTION.RIGHT;
-            } else {
-                this.direction = DIRECTION.LEFT;
-            }
+
+            this.direction = (newIndex > previousIndex) ? DIRECTION.LEFT : DIRECTION.RIGHT;
+
+            this.$emit('change', {
+                new: newIndex,
+                prev: previousIndex
+            });
+
             this.activeTab = name;
         },
 

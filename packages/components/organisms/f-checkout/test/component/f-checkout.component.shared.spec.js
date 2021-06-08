@@ -78,7 +78,6 @@ describe('f-checkout component tests - @browserstack', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
         checkout.withQuery('&knob-Checkout Errors', 'ISSUES');
@@ -93,5 +92,37 @@ describe('f-checkout component tests - @browserstack', () => {
 
         // Assert
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+    });
+
+    describe('when the "Duplicate Order Warning" modal is displayed', () => {
+        beforeEach(() => {
+            // Arrange
+            checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+            const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+            // Act
+            checkout.open(pageUrl);
+            checkout.waitForComponent();
+            checkout.goToPayment();
+        });
+
+        it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
+            // Act
+            checkout.waitForComponent();
+            checkout.clickRetryButton();
+
+            // Assert
+            expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+            expect(checkout.isCheckoutPageDisplayed()).toBe(true);
+        });
+
+        it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
+            // Act
+            checkout.waitForComponent();
+            checkout.clickDupOrderGoToHistoryButton();
+
+            // Assert
+            expect(browser.getUrl().split('/')[3]).toBe('order-history');
+        });
     });
 });
