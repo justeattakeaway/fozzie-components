@@ -20,14 +20,14 @@
 import { mapActions } from 'vuex';
 import SearchBox from '@justeat/f-searchbox';
 import {
-    ADDRESS_FOCUS,
-    VALID_SAVED_ADDRESS_SEARCH,
-    VALID_SEARCH,
-    INVALID_ADDRESS,
-    EMPTY_ADDRESS,
-    UNKNOWN_ERROR
-} from '../store/types/actions';
-import { POSTCODE_EMPTY, POSTCODE_INVALID } from '../store/types/errors';
+    ACTION_ADDRESS_FOCUS,
+    ACTION_VALID_SAVED_ADDRESS_SEARCH,
+    ACTION_VALID_SEARCH,
+    ACTION_INVALID_ADDRESS,
+    ACTION_EMPTY_ADDRESS,
+    ACTION_UNKNOWN_ERROR
+} from '../store/types';
+import { POSTCODE_EMPTY, POSTCODE_INVALID } from '../constants';
 
 export default {
     name: 'OffersSearchBox',
@@ -38,12 +38,12 @@ export default {
 
     methods: {
         ...mapActions({
-            addressFocus: ADDRESS_FOCUS,
-            validSavedAddress: VALID_SAVED_ADDRESS_SEARCH,
-            validSearch: VALID_SEARCH,
-            invalidAddress: INVALID_ADDRESS,
-            emptyAddress: EMPTY_ADDRESS,
-            unknownError: UNKNOWN_ERROR
+            addressFocus: ACTION_ADDRESS_FOCUS,
+            validSavedAddress: ACTION_VALID_SAVED_ADDRESS_SEARCH,
+            validSearch: ACTION_VALID_SEARCH,
+            invalidAddress: ACTION_INVALID_ADDRESS,
+            emptyAddress: ACTION_EMPTY_ADDRESS,
+            unknownError: ACTION_UNKNOWN_ERROR
         }),
 
         /**
