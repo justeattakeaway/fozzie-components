@@ -12,6 +12,14 @@ v0.132.0
 - Read location coords from local storage if address in form hasn't changed
 
 
+v0.131.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Service type inside menu object for initial push to GTM data layer
+
+
 v0.130.0
 ------------------------------
 *June 7, 2021*
