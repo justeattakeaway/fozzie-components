@@ -2,22 +2,6 @@ import Cookies from 'js-cookie';
 import Trak from '@justeat/f-trak';
 
 /**
- * Function that sets the cookies using js-cookie
- * @param name
- * @param value
- * @param minutes
- */
-const setCookie = (name, value, minutes = 1) => {
-    let expires = '';
-    const millisecondsPerMinute = 60 * 1000;
-    if (minutes) {
-        const date = new Date();
-        expires = date.setTime(date.getTime() + (minutes * millisecondsPerMinute));
-    }
-    Cookies.set(name, (value || ''), { expires, path: '/' });
-};
-
-/**
  * Pushes to the GTM datalayer using the f-trak library
  * @param category
  * @param action
@@ -40,7 +24,14 @@ export const pushToDataLayer = (category, action, label) => {
  * @param category
  * @param action
  * @param label
+ * @param minutes
  */
-export const setGtmEventCookie = (category, action, label) => {
-    setCookie('je-gtm-event', `${category}|${action}|${label}`);
+export const setGtmEventCookie = (category, action, label, minutes = 1) => {
+    let expires = '';
+    const millisecondsPerMinute = 60 * 1000;
+    if (minutes) {
+        const date = new Date();
+        expires = date.setTime(date.getTime() + (minutes * millisecondsPerMinute));
+    }
+    Cookies.set('je-gtm-event', (`${category}|${action}|${label}` || ''), { expires, path: '/' });
 };
