@@ -942,6 +942,7 @@ describe('CheckoutModule', () => {
                 });
 
                 it('should not make api call and should call the mutation with the stored coordinates if the form values match local storage', async () => {
+                    // Arrange
                     const newState = {
                         ...state,
                         address: {
@@ -951,6 +952,7 @@ describe('CheckoutModule', () => {
                             postcode: 'NW1 4DE'
                         }
                     };
+
                     // Act
                     await getGeoLocation({ commit, state: newState }, payload);
 
@@ -960,6 +962,7 @@ describe('CheckoutModule', () => {
                 });
 
                 it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if the form address does not match local storage`, async () => {
+                    // Arrange
                     const newState = {
                         ...state,
                         address: {
@@ -969,6 +972,7 @@ describe('CheckoutModule', () => {
                             postcode: 'NW2 3PE'
                         }
                     };
+
                     // Act
                     await getGeoLocation({ commit, state: newState }, payload);
 
