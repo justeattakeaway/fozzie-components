@@ -49,7 +49,11 @@ import {
     SuccessIcon,
     WarningIcon
 } from '@justeat/f-vue-icons';
-import { globalisationServices } from '@justeat/f-services';
+
+import {
+    globalisationServices
+} from '@justeat/f-services';
+
 import FButton from '@justeat/f-button';
 import tenantConfigs from '../tenants';
 import '@justeat/f-button/dist/f-button.css';
@@ -146,6 +150,7 @@ $alert-borderRadius: $border-radius;
     .c-alert-heading {
         @include font-size(subheading-s);
         margin-top: -1px;
+        margin-bottom: spacing(x0.5);
     }
 
     .c-alert-content {

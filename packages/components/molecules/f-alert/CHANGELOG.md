@@ -12,6 +12,7 @@ v0.6.1
 - Alert icon no longer resizes as content around it grows
 - Warning icon no longer receives greater margin than the other alert types
 - Items in the header are no longer vertically aligned as the content may exceed one line
+- Added some spacing below the title so that the component doesn't feel so mushed
 
 
 v0.6.0
