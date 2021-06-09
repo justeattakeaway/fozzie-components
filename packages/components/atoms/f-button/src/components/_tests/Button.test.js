@@ -4,6 +4,7 @@ import FButton from '../Button.vue';
 describe('Button', () => {
     const actionType = 'button';
     const link = 'http://www.just-eat.co.uk';
+    const routerLink = '/test';
 
     it('should be defined', () => {
         const propsData = { };
@@ -149,10 +150,11 @@ describe('Button', () => {
         describe('componentType :: ', () => {
             let propsData;
 
-            describe('when `href` prop is empty :: ', () => {
+            describe('when `href` and `to` prop is empty :: ', () => {
                 beforeEach(() => {
                     propsData = {
                         href: null,
+                        to: null,
                         actionType
                     };
                 });
@@ -203,6 +205,38 @@ describe('Button', () => {
                     expect(wrapper.attributes('href')).toEqual(link);
                 });
             });
+
+            describe('when `to` prop is not an empty string :: ', () => {
+                beforeEach(() => {
+                    propsData = {
+                        to: routerLink
+                    };
+                });
+
+                it('should return `componentType` of `router-link-button`', () => {
+                    // Act
+                    const wrapper = shallowMount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.vm.componentType).toEqual('router-link-button');
+                });
+
+                it('should render `Router Link` component', () => {
+                    // Act
+                    const wrapper = mount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.find('[data-test-id="router-link-button-component"]').exists()).toBeTruthy();
+                });
+
+                it('should apply `href` attribute', () => {
+                    // Act
+                    const wrapper = mount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.attributes('to')).toEqual(routerLink);
+                });
+            });
         });
 
         describe('buttonActionType :: ', () => {
@@ -227,6 +261,39 @@ describe('Button', () => {
                     // Arrange
                     const propsData = {
                         href: link,
+                        actionType
+                    };
+
+                    // Act
+                    const wrapper = mount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.attributes('type')).toBeUndefined();
+                });
+            });
+
+            // RouterLink type -> incl. `to` attribute
+            describe('when `to` prop is empty :: ', () => {
+                it('should add `type` attribute', () => {
+                    // Arrange
+                    const propsData = {
+                        to: null,
+                        actionType
+                    };
+
+                    // Act
+                    const wrapper = mount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.attributes('type')).toEqual(actionType);
+                });
+            });
+
+            describe('when `to` prop is not an empty string :: ', () => {
+                it('should not add `type` attribute', () => {
+                    // Arrange
+                    const propsData = {
+                        to: routerLink,
                         actionType
                     };
 

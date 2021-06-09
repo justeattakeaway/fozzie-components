@@ -24567,6 +24567,11 @@ vue-loader@^15.4.2, vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-router@^3.5.1:
+  version "3.5.1"
+  resolved "http://packages.je-labs.com/npm/private-npm/vue-router/-/vue-router-3.5.1.tgz#edf3cf4907952d1e0583e079237220c5ff6eb6c9"
+  integrity sha1-7fPPSQeVLR4Fg+B5I3Igxf9utsk=
+
 vue-scrollto@2.20.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/vue-scrollto/-/vue-scrollto-2.20.0.tgz#3ba52239a62710c97003d12d4393f1f3393cd5cc"
@@ -24607,6 +24612,11 @@ vue@2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+
+vue@2.x:
+  version "2.6.14"
+  resolved "http://packages.je-labs.com/npm/private-npm/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
+  integrity sha1-5RqlJQJQ1Wmj+606ilpofWA24jU=
 
 vuelidate@0.7.6:
   version "0.7.6"
@@ -24954,8 +24964,8 @@ webpack-virtual-modules@^0.2.2:
 
 webpack@4.36.0, webpack@4.42.1, "webpack@>=4 < 4.29", webpack@^4.0.0, webpack@^4.26.0, webpack@^4.43.0:
   version "4.36.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.36.0.tgz#d49474e54acd6eed51c3aff70333cbd172f21101"
-  integrity sha512-UGcu9VQMjs9CxYfDEMe7UYkMgSVx9eSgcmj8ksveJk0b7/CxPW4B0HOk+yF0CLQg8p0sxynUS4PHQtjEDSZSmg==
+  resolved "http://packages.je-labs.com/npm/private-npm/webpack/-/webpack-4.36.0.tgz#d49474e54acd6eed51c3aff70333cbd172f21101"
+  integrity sha1-1JR05UrNbu1Rw6/3AzPL0XLyEQE=
   dependencies:
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/helper-module-context" "1.8.5"
