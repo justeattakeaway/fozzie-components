@@ -287,8 +287,8 @@ describe('Checkout', () => {
             });
         });
 
-        describe('hasCheckoutLoadedSuccessfully ::', () => {
-            it('should render the checkout form and not the error page when set to `true`', () => {
+        describe('errorFormType ::', () => {
+            it('should render the checkout form and not the error page when is null', () => {
                 // Arrange & Act
                 const wrapper = mount(VueCheckout, {
                     i18n,
@@ -297,7 +297,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: true
+                            errorFormType: null
                         };
                     }
                 });
@@ -320,7 +320,6 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: false,
                             isLoading: false,
                             errorFormType: 'pageLoad'
                         };
@@ -348,7 +347,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: true,
+                            errorFormType: null,
                             shouldShowSpinner: true
                         };
                     }
@@ -1932,14 +1931,13 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadCheckout();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -2026,14 +2024,13 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadAvailableFulfilment();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -2232,14 +2229,13 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadBasket();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -2324,8 +2320,6 @@ describe('Checkout', () => {
                         logMethod: $logger.logWarn,
                         error
                     });
-
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(true);
                 });
             });
 

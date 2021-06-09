@@ -312,7 +312,6 @@ export default {
     data () {
         return {
             tenantConfigs,
-            hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false,
             errorFormType: null
@@ -399,7 +398,7 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.isLoading && this.hasCheckoutLoadedSuccessfully;
+            return !this.isLoading && !this.errorFormType;
         },
 
         eventData () {
@@ -688,7 +687,6 @@ export default {
 
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
-                this.hasCheckoutLoadedSuccessfully = false;
                 if (error.response && error.response.status === 403) {
                     this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
                 } else {
@@ -712,7 +710,6 @@ export default {
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
             } catch (error) {
-                this.hasCheckoutLoadedSuccessfully = false;
                 this.handleErrorState(new GetCheckoutLoadBasketError(error.message, error.response.status));
             }
         },
@@ -730,8 +727,6 @@ export default {
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
             } catch (error) {
-                this.hasCheckoutLoadedSuccessfully = false;
-
                 this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
             }
         },
