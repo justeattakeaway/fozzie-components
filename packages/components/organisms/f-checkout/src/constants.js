@@ -32,3 +32,8 @@ export const ANALYTICS_ERROR_CODE_SET_ORDER_TIME = 'setOrderTime';
 export const ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME = 'invalidOrderTime';
 
 export const DEFAULT_CHECKOUT_ISSUE = 'DEFAULT_CHECKOUT_ISSUE';
+
+export const CHECKOUT_LOADED_TYPE = {
+    checkout: 'Checkout',
+    basket: 'Basket'
+};

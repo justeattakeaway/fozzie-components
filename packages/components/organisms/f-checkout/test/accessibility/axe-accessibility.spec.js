@@ -55,7 +55,7 @@ describe('Accessibility tests', () => {
         // Act
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'Invalid URL')
-                .withQuery('&knob-Is User Logged In', true);
+                .withQuery('&knob-Is User Logged In', false);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);

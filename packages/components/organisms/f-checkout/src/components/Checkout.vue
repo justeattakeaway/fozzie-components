@@ -185,7 +185,8 @@ import {
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
-    VUEX_CHECKOUT_MODULE
+    VUEX_CHECKOUT_MODULE,
+    CHECKOUT_LOADED_TYPE
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
@@ -688,9 +689,9 @@ export default {
             } catch (error) {
                 this.hasCheckoutLoadedSuccessfully = false;
                 if (error.response && error.response.status === 403) {
-                    this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
+                    this.handleErrorState(new AccessForbiddenError(error.message, CHECKOUT_LOADED_TYPE.checkout, error.response.status));
                 } else {
-                    this.handleErrorState(new DefaultGetCheckoutError(error.message, error.response.status));
+                    this.handleErrorState(new DefaultGetCheckoutError(error.message, CHECKOUT_LOADED_TYPE.checkout, error.response.status));
                 }
             }
         },
@@ -710,15 +711,12 @@ export default {
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
             } catch (error) {
-                this.$emit(EventNames.CheckoutBasketGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
-
-                this.logInvoker({
-                    message: 'Get Checkout Basket Failure',
-                    data: this.eventData,
-                    logMethod: this.$logger.logError,
-                    error
-                });
+                if (error.response && error.response.status === 403) {
+                    this.handleErrorState(new AccessForbiddenError(error.message, CHECKOUT_LOADED_TYPE.basket, error.response.status));
+                } else {
+                    this.handleErrorState(new DefaultGetCheckoutError(error.message, CHECKOUT_LOADED_TYPE.basket, error.response.status));
+                }
             }
         },
 

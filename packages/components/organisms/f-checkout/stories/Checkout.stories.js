@@ -142,6 +142,9 @@ export const CheckoutComponent = () => ({
         },
 
         getBasketUrl () {
+            if (this.getCheckoutError) {
+                return `/checkout-${this.getCheckoutError}-get-error.json`;
+            }
             return `/get-basket-${this.serviceType}.json`;
         },
 

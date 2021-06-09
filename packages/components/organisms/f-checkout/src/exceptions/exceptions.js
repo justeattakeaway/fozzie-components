@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import EventNames from '../event-names';
 import checkoutIssues from '../checkout-issues';
+import { CHECKOUT_LOADED_TYPE } from '../constants';
 
 class CreateGuestUserError extends Error {
     constructor (message) {
@@ -36,11 +37,11 @@ class PlaceOrderError extends Error {
 }
 
 class DefaultGetCheckoutError extends Error {
-    constructor (message, errorCode) {
+    constructor (message, loadedComponent, errorCode) {
         super(message);
         this.messageKey = 'errorMessages.pageLoad.description';
-        this.eventToEmit = EventNames.CheckoutGetFailure;
-        this.logMessage = 'Get Checkout Failure';
+        this.eventToEmit = loadedComponent === CHECKOUT_LOADED_TYPE.checkout ? EventNames.CheckoutGetFailure : EventNames.CheckoutBasketGetFailure;
+        this.logMessage = `Get ${loadedComponent} Failure`;
         this.errorCode = errorCode;
         this.shouldShowInDialog = false;
         this.errorFormType = 'pageLoad';
@@ -48,10 +49,10 @@ class DefaultGetCheckoutError extends Error {
 }
 
 class AccessForbiddenError extends DefaultGetCheckoutError {
-    constructor (message) {
+    constructor (message, loadedComponent) {
         super(message);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
-        this.logMessage = 'Access Forbidden Failure';
+        this.logMessage = `${loadedComponent}: Access Forbidden Failure`;
         this.errorFormType = 'accessForbiddenError';
     }
 }
