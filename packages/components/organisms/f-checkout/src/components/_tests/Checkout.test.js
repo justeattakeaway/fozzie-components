@@ -2317,6 +2317,7 @@ describe('Checkout', () => {
             beforeEach(() => {
                 // Arrange
                 error = new Error('An error occurred');
+                error.errorCode = 'OrderError';
                 eventToEmit = EventNames.CheckoutFailure;
 
                 eventData = {
@@ -2373,7 +2374,7 @@ describe('Checkout', () => {
                 wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
+                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.errorCode}-${error.message}` });
             });
 
             it('should call `scrollToElement` with the `errorMessage` element', async () => {
