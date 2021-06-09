@@ -35,8 +35,31 @@ class PlaceOrderError extends Error {
     }
 }
 
+class DefaultGetCheckoutError extends Error {
+    constructor (message, errorCode) {
+        super(message);
+        this.messageKey = 'errorMessages.pageLoad.description';
+        this.eventToEmit = EventNames.CheckoutGetFailure;
+        this.logMessage = 'Get Checkout Failure';
+        this.errorCode = errorCode;
+        this.shouldShowInDialog = false;
+        this.errorFormType = 'pageLoad';
+    }
+}
+
+class AccessForbiddenError extends DefaultGetCheckoutError {
+    constructor (message) {
+        super(message);
+        this.messageKey = 'errorMessages.accessForbiddenError.description';
+        this.logMessage = 'Access Forbidden Failure';
+        this.errorFormType = 'accessForbiddenError';
+    }
+}
+
 export default {
     CreateGuestUserError,
     UpdateCheckoutError,
-    PlaceOrderError
+    PlaceOrderError,
+    DefaultGetCheckoutError,
+    AccessForbiddenError
 };

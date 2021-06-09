@@ -146,9 +146,8 @@
         </div>
 
         <error-page
-            v-else-if="shouldShowErrorPage"
-            :error-type="getCheckoutErrorType"
-        />
+            v-else-if="errorFormType"
+            :error-type="errorFormType" />
     </div>
 </template>
 
@@ -197,7 +196,9 @@ import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper'
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
-    PlaceOrderError
+    PlaceOrderError,
+    DefaultGetCheckoutError,
+    AccessForbiddenError
 } = exceptions;
 
 export default {
@@ -312,7 +313,7 @@ export default {
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false,
-            hasAccessForbiddenError: false
+            errorFormType: null
         };
     },
 
@@ -396,11 +397,7 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.isLoading && this.hasCheckoutLoadedSuccessfully;
-        },
-
-        shouldShowErrorPage () {
-            return !this.hasCheckoutLoadedSuccessfully;
+            return !this.isLoading && this.hasCheckoutLoadedSuccessfully && !this.errorFormType;
         },
 
         eventData () {
@@ -447,10 +444,6 @@ export default {
 
         formattedMobileNumberForScreenReader () {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
-        },
-
-        getCheckoutErrorType () {
-            return this.hasAccessForbiddenError ? 'accessForbiddenError' : 'pageLoad';
         }
     },
 
@@ -693,18 +686,12 @@ export default {
 
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
-                if (error.response && error.response.status === 403) {
-                    this.hasAccessForbiddenError = true;
-                }
-                this.$emit(EventNames.CheckoutGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
-
-                this.logInvoker({
-                    message: 'Get Checkout Failure',
-                    data: this.eventData,
-                    logMethod: this.$logger.logError,
-                    error
-                });
+                if (error.response && error.response.status === 403) {
+                    this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
+                } else {
+                    this.handleErrorState(new DefaultGetCheckoutError(error.message, error.response.status));
+                }
             }
         },
 
@@ -834,13 +821,15 @@ export default {
 
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
 
-            if (!error.shouldShowInDialog) {
+            if (!error.shouldShowInDialog && !error.errorFormType) {
                 this.updateMessage(message);
 
                 this.$nextTick(() => {
                     this.scrollToElement(this.$refs.errorMessage.$el);
                 });
             }
+
+            this.errorFormType = error.errorFormType;
         },
 
         /**

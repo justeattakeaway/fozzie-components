@@ -321,7 +321,8 @@ describe('Checkout', () => {
                     data () {
                         return {
                             hasCheckoutLoadedSuccessfully: false,
-                            isLoading: false
+                            isLoading: false,
+                            errorFormType: 'pageLoad'
                         };
                     }
                 });
@@ -1949,15 +1950,15 @@ describe('Checkout', () => {
                     expect($logger.logError).toHaveBeenCalled();
                 });
 
-                it('should set `getCheckoutErrorType` to "pageLoad" if error status code is not 403', async () => {
+                it('should set `errorFormType` to "pageLoad" if error status code is not 403', async () => {
                     // Act
                     await wrapper.vm.loadCheckout();
 
                     // Assert
-                    expect(wrapper.vm.getCheckoutErrorType).toBe('pageLoad');
+                    expect(wrapper.vm.errorFormType).toBe('pageLoad');
                 });
 
-                it('should set `getCheckoutErrorType` to "accessForbiddenError" if error status code is 403', async () => {
+                it('should set `errorFormType` to "accessForbiddenError" if error status code is 403', async () => {
                     // Assert
                     wrapper = mount(VueCheckout, {
                         // eslint-disable-next-line prefer-promise-reject-errors
@@ -1973,7 +1974,7 @@ describe('Checkout', () => {
                     await wrapper.vm.loadCheckout();
 
                     // Assert
-                    expect(wrapper.vm.getCheckoutErrorType).toBe('accessForbiddenError');
+                    expect(wrapper.vm.errorFormType).toBe('accessForbiddenError');
                 });
             });
 
