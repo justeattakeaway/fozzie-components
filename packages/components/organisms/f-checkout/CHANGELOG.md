@@ -4,14 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.134.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Service type inside menu object for initial push to GTM data layer
 
 
 v0.130.0
 ------------------------------
-*June 2, 2021*
+*June 7, 2021*
 
 ### Added
-- Service type inside menu object for initial push to GTM data layer
+- Feature & Visual Tests for `Duplicate Order Warning` modal
 
 
 v0.129.0

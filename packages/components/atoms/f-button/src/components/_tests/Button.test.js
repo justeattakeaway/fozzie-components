@@ -5,11 +5,114 @@ describe('Button', () => {
     const actionType = 'button';
     const link = 'http://www.just-eat.co.uk';
 
-
     it('should be defined', () => {
         const propsData = { };
         const wrapper = shallowMount(FButton, { propsData });
         expect(wrapper.exists()).toBe(true);
+    });
+
+    describe('template :: ', () => {
+        describe('component :: ', () => {
+            describe('`aria-live` :: ', () => {
+                it('should be set using the `getAriaLive` computed property', () => {
+                    // Arrange & Act
+                    const wrapper = shallowMount(FButton, {
+                        computed: {
+                            getAriaLive () {
+                                return 'ariaLiveTest';
+                            }
+                        }
+                    });
+
+                    const button = wrapper.find('[data-test-id="action-button-component"]');
+
+                    // Assert
+                    expect(button.attributes('aria-live')).toMatchSnapshot();
+                });
+            });
+
+            describe('`aria-busy` :: ', () => {
+                describe('when `isLoading` is `true` :: ', () => {
+                    it('should be `true`', () => {
+                        // Arrange
+                        const propsData = {
+                            isLoading: true
+                        };
+
+                        // Act
+                        const wrapper = shallowMount(FButton, { propsData });
+
+                        const button = wrapper.find('[data-test-id="action-button-component"]');
+
+                        // Assert
+                        expect(button.attributes('aria-busy')).toBeTruthy();
+                    });
+                });
+
+                describe('when `isLoading` is `false` :: ', () => {
+                    it('should be `false`', () => {
+                        // Arrange
+                        const propsData = {
+                            isLoading: false
+                        };
+
+                        // Act
+                        const wrapper = shallowMount(FButton, { propsData });
+
+                        const button = wrapper.find('[data-test-id="action-button-component"]');
+
+                        // Assert
+                        expect(button.attributes('aria-busy')).toBeFalsy();
+                    });
+                });
+            });
+
+            describe('events :: ', () => {
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                describe('click :: ', () => {
+                    describe('when `isLoading` is `true` :: ', () => {
+                        it('should not be triggered', () => {
+                            // Arrange
+                            const propsData = {
+                                isLoading: true
+                            };
+
+                            const onClick = jest.fn();
+                            const wrapper = mount(FButton, { listeners: { click: onClick }, propsData });
+                            const button = wrapper.find('[data-test-id="action-button-component"]');
+
+                            // Act
+                            button.trigger('click');
+
+                            // Assert
+                            expect(onClick).not.toHaveBeenCalled();
+                        });
+                    });
+
+                    describe('when `isLoading` is `false` :: ', () => {
+                        it('should be triggered', () => {
+                            // Arrange
+                            const propsData = {
+                                isLoading: false
+                            };
+
+                            const onClick = jest.fn();
+                            const wrapper = mount(FButton, { listeners: { click: onClick }, propsData });
+                            const button = wrapper.find('[data-test-id="action-button-component"]');
+
+                            // Act
+                            button.trigger('click');
+
+                            // Assert
+                            expect(onClick).toHaveBeenCalled();
+                        });
+                    });
+                });
+            });
+        });
     });
 
     describe('computed :: ', () => {
@@ -132,6 +235,38 @@ describe('Button', () => {
 
                     // Assert
                     expect(wrapper.attributes('type')).toBeUndefined();
+                });
+            });
+        });
+
+        describe('getAriaLive :: ', () => {
+            describe('when `isLoading` prop is `true` :: ', () => {
+                it('should return "polite"', () => {
+                    // Arrange
+                    const propsData = {
+                        isLoading: true
+                    };
+
+                    // Act
+                    const wrapper = shallowMount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.vm.getAriaLive).toEqual('polite');
+                });
+            });
+
+            describe('when `isLoading` prop is `false` :: ', () => {
+                it('should return "off"', () => {
+                    // Arrange
+                    const propsData = {
+                        isLoading: false
+                    };
+
+                    // Act
+                    const wrapper = shallowMount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.vm.getAriaLive).toEqual('off');
                 });
             });
         });
