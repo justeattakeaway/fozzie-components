@@ -45,9 +45,9 @@ const settings = () => ({
                 browserName: 'chrome',
                 acceptInsecureCerts: true,
                 specs: [
-                    'packages/components/**/f-*/test/visual/*.visual.desktop.spec.js',
-                    'packages/components/**/f-*/test/visual/*.visual.mobile.spec.js',
-                    'packages/components/**/f-*/test/visual/*.visual.shared.spec.js'
+                    'test/visual/*.visual.desktop.spec.js',
+                    'test/visual/*.visual.mobile.spec.js',
+                    'test/visual/*.visual.shared.spec.js'
                 ]
             }
         ]},
