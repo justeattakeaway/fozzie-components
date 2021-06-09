@@ -1,11 +1,12 @@
 import {
-    ADDRESS_FOCUS,
-    EMPTY_ADDRESS,
-    INVALID_ADDRESS,
-    UNKNOWN_ERROR,
-    VALID_SAVED_ADDRESS_SEARCH, VALID_SEARCH
-} from '../types/actions';
-import EMIT_SEARCH_START from '../types/mutations';
+    ACTION_ADDRESS_FOCUS,
+    ACTION_EMPTY_ADDRESS,
+    ACTION_INVALID_ADDRESS,
+    ACTION_UNKNOWN_ERROR,
+    ACTION_VALID_SAVED_ADDRESS_SEARCH,
+    ACTION_VALID_SEARCH,
+    MUTATION_EMIT_SEARCH_START
+} from '../types';
 import { pushToDataLayer, setGtmEventCookie } from '../../utils/helpers';
 import { DEFAULT_CATEGORY, DEFAULT_ACTION, offersHeaderSearchModule } from '../offersHeaderSearch.module';
 
@@ -35,10 +36,10 @@ describe('offersHeaderSearchModule', () => {
             jest.resetAllMocks();
         });
 
-        describe(`${ADDRESS_FOCUS} ::`, () => {
+        describe(`${ACTION_ADDRESS_FOCUS} ::`, () => {
             it('should push to the datalayer with label "start" when startSearchEmitted is false', () => {
                 // Act
-                actions[ADDRESS_FOCUS]({ commit, state });
+                actions[ACTION_ADDRESS_FOCUS]({ commit, state });
 
                 // Assert
                 expect(pushToDataLayer).toHaveBeenCalledWith(DEFAULT_CATEGORY, DEFAULT_ACTION, 'start');
@@ -46,10 +47,10 @@ describe('offersHeaderSearchModule', () => {
 
             it('should commit startSearchEmitted true to state', () => {
                 // Act
-                actions[ADDRESS_FOCUS]({ commit, state });
+                actions[ACTION_ADDRESS_FOCUS]({ commit, state });
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(EMIT_SEARCH_START);
+                expect(commit).toHaveBeenCalledWith(MUTATION_EMIT_SEARCH_START);
             });
 
             it('should NOT push to the datalayer with label "start" when startSearchEmitted is true', () => {
@@ -57,48 +58,48 @@ describe('offersHeaderSearchModule', () => {
                 state.startSearchEmitted = true;
 
                 // Act
-                actions[ADDRESS_FOCUS]({ commit, state });
+                actions[ACTION_ADDRESS_FOCUS]({ commit, state });
 
                 // Assert
                 expect(pushToDataLayer).not.toHaveBeenCalled();
             });
         });
 
-        it(`should push "error_address_missing" to the datalayer when ${EMPTY_ADDRESS} is called`, () => {
+        it(`should push "error_address_missing" to the datalayer when ${ACTION_EMPTY_ADDRESS} is called`, () => {
             // Act
-            actions[EMPTY_ADDRESS]();
+            actions[ACTION_EMPTY_ADDRESS]();
 
             // Assert
             expect(pushToDataLayer).toHaveBeenCalledWith(DEFAULT_CATEGORY, DEFAULT_ACTION, 'error_address_missing');
         });
 
-        it(`should push "error_invalid_postcode" to the datalayer when ${INVALID_ADDRESS} is called`, () => {
+        it(`should push "error_invalid_postcode" to the datalayer when ${ACTION_INVALID_ADDRESS} is called`, () => {
             // Act
-            actions[INVALID_ADDRESS]();
+            actions[ACTION_INVALID_ADDRESS]();
 
             // Assert
             expect(pushToDataLayer).toHaveBeenCalledWith(DEFAULT_CATEGORY, DEFAULT_ACTION, 'error_invalid_postcode');
         });
 
-        it(`should push "error_unknown" to the datalayer when ${UNKNOWN_ERROR} is called`, () => {
+        it(`should push "error_unknown" to the datalayer when ${ACTION_UNKNOWN_ERROR} is called`, () => {
             // Act
-            actions[UNKNOWN_ERROR]();
+            actions[ACTION_UNKNOWN_ERROR]();
 
             // Assert
             expect(pushToDataLayer).toHaveBeenCalledWith(DEFAULT_CATEGORY, DEFAULT_ACTION, 'error_unknown');
         });
 
-        it(`should set gtm event cookie with "valid_saved" when ${VALID_SAVED_ADDRESS_SEARCH} is called`, () => {
+        it(`should set gtm event cookie with "valid_saved" when ${ACTION_VALID_SAVED_ADDRESS_SEARCH} is called`, () => {
             // Act
-            actions[VALID_SAVED_ADDRESS_SEARCH]();
+            actions[ACTION_VALID_SAVED_ADDRESS_SEARCH]();
 
             // Assert
             expect(setGtmEventCookie).toHaveBeenCalledWith(DEFAULT_CATEGORY, DEFAULT_ACTION, 'valid_saved');
         });
 
-        it(`should set gtm event cookie with "valid_selected" when ${VALID_SEARCH} is called`, () => {
+        it(`should set gtm event cookie with "valid_selected" when ${ACTION_VALID_SEARCH} is called`, () => {
             // Act
-            actions[VALID_SEARCH]();
+            actions[ACTION_VALID_SEARCH]();
 
             // Assert
             expect(setGtmEventCookie).toHaveBeenCalledWith(DEFAULT_CATEGORY, DEFAULT_ACTION, 'valid_selected');
@@ -106,9 +107,9 @@ describe('offersHeaderSearchModule', () => {
     });
 
     describe('mutations ::', () => {
-        it(`should set startSearchEmitted when ${EMIT_SEARCH_START} is called`, () => {
+        it(`should set startSearchEmitted when ${MUTATION_EMIT_SEARCH_START} is called`, () => {
             // Act
-            mutations[EMIT_SEARCH_START](state);
+            mutations[MUTATION_EMIT_SEARCH_START](state);
 
             // Assert
             expect(state.startSearchEmitted).toEqual(true);

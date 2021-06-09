@@ -1,4 +1,7 @@
+import Trak from '@justeat/f-trak';
 import { pushToDataLayer, setGtmEventCookie } from '../helpers';
+
+jest.mock('@justeat/f-trak');
 
 const mockCategory = '__TEST_CATEGORY__';
 const mockAction = '__TEST_ACTION__';
@@ -15,15 +18,13 @@ describe('helpers', () => {
     describe('pushToDataLayer', () => {
         it('should call the window trak event with supplied object', () => {
             // Arrange
-            window.trak = {
-                event: jest.fn()
-            };
+            window.trak = {}; // need to mock window
 
             // Act
             pushToDataLayer(mockCategory, mockAction, mockLabel);
 
             // Assert
-            expect(window.trak.event).toHaveBeenCalledWith(mockWindowTrakData);
+            expect(Trak.event).toHaveBeenCalledWith(mockWindowTrakData);
         });
     });
 
