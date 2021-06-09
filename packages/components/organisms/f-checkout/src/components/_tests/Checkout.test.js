@@ -2015,7 +2015,8 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAvailableFulfilment: jest.fn(async () => Promise.reject({ response: { status: 500 } })) }),
                         i18n,
                         localVue,
                         propsData,
@@ -2252,31 +2253,12 @@ describe('Checkout', () => {
                     expect(logInvokerSpy).toHaveBeenCalled();
                 });
 
-                it('should set `errorFormType` to "pageLoad" if error status code is not 403', async () => {
+                it('should set `errorFormType` to "pageLoad"', async () => {
                     // Act
                     await wrapper.vm.loadBasket();
 
                     // Assert
                     expect(wrapper.vm.errorFormType).toBe('pageLoad');
-                });
-
-                it('should set `errorFormType` to "accessForbiddenError" if error status code is 403', async () => {
-                    // Assert
-                    wrapper = mount(VueCheckout, {
-                        // eslint-disable-next-line prefer-promise-reject-errors
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getBasket: jest.fn(async () => Promise.reject({ response: { status: 403 } })) }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-                    // Act
-                    await wrapper.vm.loadBasket();
-
-                    // Assert
-                    expect(wrapper.vm.errorFormType).toBe('accessForbiddenError');
                 });
             });
 
