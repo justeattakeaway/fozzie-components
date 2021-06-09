@@ -192,6 +192,9 @@ describe('CheckoutAnalyticsModule', () => {
                     pageData: {
                         name: 'Checkout 1 Guest',
                         group: 'Checkout'
+                    },
+                    menu: {
+                        type: rootState[VUEX_CHECKOUT_MODULE].serviceType
                     }
                 };
             });
