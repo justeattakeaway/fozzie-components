@@ -11,6 +11,7 @@ v0.134.0
 ### Added
 - Error code to analytics when errors occur for a more descriptive error
 
+
 v0.130.0
 ------------------------------
 *June 7, 2021*
