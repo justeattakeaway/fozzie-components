@@ -49,7 +49,11 @@ import {
     SuccessIcon,
     WarningIcon
 } from '@justeat/f-vue-icons';
-import { globalisationServices } from '@justeat/f-services';
+
+import {
+    globalisationServices
+} from '@justeat/f-services';
+
 import FButton from '@justeat/f-button';
 import tenantConfigs from '../tenants';
 import '@justeat/f-button/dist/f-button.css';
@@ -120,7 +124,6 @@ $alert-borderRadius: $border-radius;
 }
     .c-alert-headingContainer {
         display: flex;
-        align-items: center;
         padding: spacing(x0.5) 0 0;
     }
 
@@ -147,6 +150,7 @@ $alert-borderRadius: $border-radius;
     .c-alert-heading {
         @include font-size(subheading-s);
         margin-top: -1px;
+        margin-bottom: spacing(x0.5);
     }
 
     .c-alert-content {
@@ -155,13 +159,11 @@ $alert-borderRadius: $border-radius;
     }
 
     .c-alert-icon {
+        min-width: 20px;
+        width: 20px;
         height: 20px;
-        margin: 0 spacing(x1.5) 0 spacing();
+        margin: 5px spacing(x1.5) 0 spacing();
     }
-
-        .c-alert-icon--warning {
-            margin-right: 10px;
-        }
 
     .c-alert-dismiss {
         text-indent: 0;
