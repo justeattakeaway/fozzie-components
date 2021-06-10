@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.38.0",
+  "version": "3.39.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -17,7 +17,7 @@
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component lerna run test-component:chrome --concurrency 1 --stream",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component lerna run test-component:browserstack --concurrency 1 --stream",
-    "test:visual": "cross-env-shell JE_ENV=local TEST_TYPE=visual percy exec -- wdio ./wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell JE_ENV=local TEST_TYPE=visual lerna run test:visual --concurrency 1 --stream",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
