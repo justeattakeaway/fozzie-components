@@ -5,7 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
-import storagemock from '../../../test-utils/local-storage/local-storage-mock';
+import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
@@ -932,7 +932,7 @@ describe('CheckoutModule', () => {
                 beforeEach(() => {
                     state.authToken = authToken;
 
-                    Object.defineProperty(window, 'localStorage', { value: storagemock });
+                    Object.defineProperty(window, 'localStorage', { value: storageMock });
                     window.localStorage.setItem('je-full-address-details', JSON.stringify(storedAddress));
                 });
 
@@ -1011,7 +1011,7 @@ describe('CheckoutModule', () => {
         describe('getUserNote ::', () => {
             describe('if sessionStorage exists', () => {
                 beforeEach(() => {
-                    Object.defineProperty(window, 'sessionStorage', { value: storagemock });
+                    Object.defineProperty(window, 'sessionStorage', { value: storageMock });
                 });
 
                 afterEach(() => {
@@ -1068,7 +1068,7 @@ describe('CheckoutModule', () => {
 
         describe('saveUserNote ::', () => {
             beforeEach(() => {
-                Object.defineProperty(window, 'sessionStorage', { value: storagemock });
+                Object.defineProperty(window, 'sessionStorage', { value: storageMock });
             });
 
             afterEach(() => {
