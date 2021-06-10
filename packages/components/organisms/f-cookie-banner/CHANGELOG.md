@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.14.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Percy Visual Regression tests for Legacy and ConsentBanner
+
 
 v0.13.0
 ------------------------------
