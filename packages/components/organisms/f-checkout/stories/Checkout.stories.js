@@ -60,11 +60,11 @@ const checkoutIssues = 'Checkout Issues (Response from server but order not fulf
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
-const GetCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
+const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
 const ISSUES = 'ISSUES';
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
-const GetCheckoutErrorCode = '500';
+const getCheckoutErrorCode = '500';
 
 const patchCheckoutErrorOptions = {
     None: null,
@@ -75,7 +75,7 @@ const patchCheckoutErrorOptions = {
 const getCheckoutErrorOptions = {
     None: null,
     [accessForbiddenError]: accessForbiddenErrorCode,
-    [GetCheckoutError]: GetCheckoutErrorCode
+    [getCheckoutError]: getCheckoutErrorCode
 
 };
 

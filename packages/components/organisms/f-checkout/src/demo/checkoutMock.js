@@ -16,7 +16,7 @@ import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
 import accessForbiddenError from './checkout-403-get-error.json';
-import GetCheckoutError from './checkout-500-get-error.json';
+import getCheckoutError from './checkout-500-get-error.json';
 import getGeoLocation from './get-geo-location.json';
 
 const mock = new MockAdapter(axios);
@@ -73,7 +73,7 @@ export default {
                 mock.onGet(path).reply(403, accessForbiddenError);
                 break;
             case '/checkout-500-get-error.json':
-                mock.onGet(path).reply(400, GetCheckoutError);
+                mock.onGet(path).reply(500, getCheckoutError);
                 break;
             case '/get-geo-location.json':
                 mock.onPost(path).reply(200, getGeoLocation);
