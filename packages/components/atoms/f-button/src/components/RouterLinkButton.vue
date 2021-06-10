@@ -10,7 +10,7 @@ export default {
     name: 'RouterLinkButton',
     props: {
         to: {
-            type: String,
+            type: [String, Object],
             required: true
         }
     }
