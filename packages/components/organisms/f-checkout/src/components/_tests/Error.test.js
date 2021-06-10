@@ -1,41 +1,34 @@
-import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Error from '../Error.vue';
-import {
-    i18n, createStore
-} from './helpers/setup';
+import { i18n } from './helpers/setup';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
-localVue.use(Vuex);
 
 describe('Error', () => {
-    const propsData = {};
+    let wrapper;
 
-    it('should be defined', () => {
+    beforeEach(() => {
         // Arrange & Act
-        const wrapper = shallowMount(Error, {
-            store: createStore(),
+        wrapper = shallowMount(Error, {
             i18n,
             localVue,
-            propsData
+            propsData: {
+                errorFormType: 'pageLoad'
+            }
         });
+    });
 
+
+    it('should be defined', () => {
         // Assert
         expect(wrapper.exists()).toBe(true);
     });
 
     it('should show the heading', () => {
-        // Arrange & Act
-        const wrapper = shallowMount(Error, {
-            store: createStore(),
-            i18n,
-            localVue,
-            propsData
-        });
-
+        // Act
         const heading = wrapper.find('[data-test-id="checkout-error-page-heading"]');
 
         // Assert
@@ -43,14 +36,7 @@ describe('Error', () => {
     });
 
     it('should show the description', () => {
-        // Arrange & Act
-        const wrapper = shallowMount(Error, {
-            store: createStore(),
-            i18n,
-            localVue,
-            propsData
-        });
-
+        // Act
         const description = wrapper.find('[data-test-id="checkout-error-page-description"]');
 
         // Assert
