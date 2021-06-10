@@ -32,7 +32,7 @@ const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
 const accessForbiddenErrorUrl = '/checkout-403-get-error.json';
-const getCheckoutErrorUrl = '/checkout-default-get-error.json';
+const getCheckoutErrorUrl = '/checkout-500-get-error.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
 
@@ -60,11 +60,11 @@ const checkoutIssues = 'Checkout Issues (Response from server but order not fulf
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
-const defaultGetCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
+const GetCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
 const ISSUES = 'ISSUES';
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
-const defaultGetCheckoutErrorCode = 'default';
+const GetCheckoutErrorCode = '500';
 
 const patchCheckoutErrorOptions = {
     None: null,
@@ -75,7 +75,7 @@ const patchCheckoutErrorOptions = {
 const getCheckoutErrorOptions = {
     None: null,
     [accessForbiddenError]: accessForbiddenErrorCode,
-    [defaultGetCheckoutError]: defaultGetCheckoutErrorCode
+    [GetCheckoutError]: GetCheckoutErrorCode
 
 };
 

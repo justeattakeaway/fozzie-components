@@ -197,10 +197,10 @@ const {
     CreateGuestUserError,
     UpdateCheckoutError,
     PlaceOrderError,
-    DefaultGetCheckoutError,
+    GetCheckoutError,
     AccessForbiddenError,
     AvailableFulfilmentGetError,
-    GetCheckoutLoadBasketError
+    GetBasketError
 } = exceptions;
 
 export default {
@@ -690,7 +690,7 @@ export default {
                 if (error.response && error.response.status === 403) {
                     this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
                 } else {
-                    this.handleErrorState(new DefaultGetCheckoutError(error.message, error.response.status));
+                    this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
                 }
             }
         },
@@ -710,7 +710,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
             } catch (error) {
-                this.handleErrorState(new GetCheckoutLoadBasketError(error.message, error.response.status));
+                this.handleErrorState(new GetBasketError(error.message, error.response.status));
             }
         },
 
