@@ -147,7 +147,7 @@
 
         <error-page
             v-else-if="errorFormType"
-            :error-type="errorFormType" />
+            :error-form-type="errorFormType" />
     </div>
 </template>
 

@@ -16,7 +16,7 @@ describe('Error', () => {
             i18n,
             localVue,
             propsData: {
-                errorType: 'pageLoad'
+                errorFormType: 'pageLoad'
             }
         });
     });

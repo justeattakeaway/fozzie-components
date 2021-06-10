@@ -10,7 +10,11 @@ v0.133.0
 
 ### Added
 - Separate content for 403 error
-- "Get checkout errors" knob for storybook
+- "Get checkout errors" knob for storybook to render different error page variations
+- `errorFormType` data attribute to deside wether to show one of the error page versions or the checkout form
+
+### Removed
+- `hasCheckoutLoadedSuccessfully` data attribute as redundant
 
 
 v0.132.0
