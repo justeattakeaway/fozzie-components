@@ -10,7 +10,8 @@ import {
     CHECKOUT_METHOD_COLLECTION,
     CHECKOUT_METHOD_DINEIN,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
-    TENANT_MAP
+    TENANT_MAP,
+    CHEKOUT_ERROR_FORM_TYPE
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
@@ -321,7 +322,7 @@ describe('Checkout', () => {
                     data () {
                         return {
                             isLoading: false,
-                            errorFormType: 'pageLoad'
+                            errorFormType: CHEKOUT_ERROR_FORM_TYPE.default
                         };
                     }
                 });
@@ -1953,7 +1954,7 @@ describe('Checkout', () => {
                     await wrapper.vm.loadCheckout();
 
                     // Assert
-                    expect(wrapper.vm.errorFormType).toBe('pageLoad');
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.default);
                 });
 
                 it('should set `errorFormType` to "accessForbiddenError" if error status code is 403', async () => {
@@ -1972,7 +1973,7 @@ describe('Checkout', () => {
                     await wrapper.vm.loadCheckout();
 
                     // Assert
-                    expect(wrapper.vm.errorFormType).toBe('accessForbiddenError');
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.accessForbidden);
                 });
             });
 
@@ -2254,7 +2255,7 @@ describe('Checkout', () => {
                     await wrapper.vm.loadBasket();
 
                     // Assert
-                    expect(wrapper.vm.errorFormType).toBe('pageLoad');
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.default);
                 });
             });
 
