@@ -31,6 +31,8 @@ const updateCheckoutServerErrorUrl = '/update-checkout-server-error.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
+const accessForbiddenErrorUrl = '/checkout-403-get-error.json';
+const getCheckoutErrorUrl = '/checkout-500-get-error.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
 
@@ -49,19 +51,32 @@ CheckoutMock.setupCheckoutMethod(updateCheckoutServerErrorUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
+CheckoutMock.setupCheckoutMethod(accessForbiddenErrorUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
 const checkoutIssues = 'Checkout Issues (Response from server but order not fulfillable)';
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
+const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
+const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
 const ISSUES = 'ISSUES';
 const SERVER = 'SERVER';
+const accessForbiddenErrorCode = '403';
+const getCheckoutErrorCode = '500';
 
-const checkoutErrorOptions = {
+const patchCheckoutErrorOptions = {
     None: null,
     [checkoutIssues]: ISSUES,
     [checkoutServerError]: SERVER
+};
+
+const getCheckoutErrorOptions = {
+    None: null,
+    [accessForbiddenError]: accessForbiddenErrorCode,
+    [getCheckoutError]: getCheckoutErrorCode
+
 };
 
 const placeOrderErrorOptions = {
@@ -105,8 +120,12 @@ export const CheckoutComponent = () => ({
             default: boolean('Is ASAP available', true)
         },
 
-        checkoutError: {
-            default: select('Checkout Errors', checkoutErrorOptions)
+        patchCheckoutError: {
+            default: select('Patch Checkout Errors', patchCheckoutErrorOptions)
+        },
+
+        getCheckoutError: {
+            default: select('Get Checkout Errors', getCheckoutErrorOptions)
         },
 
         placeOrderError: {
@@ -116,10 +135,16 @@ export const CheckoutComponent = () => ({
 
     computed: {
         getCheckoutUrl () {
+            if (this.getCheckoutError) {
+                return `/checkout-${this.getCheckoutError}-get-error.json`;
+            }
             return `/checkout-${this.serviceType}.json`;
         },
 
         getBasketUrl () {
+            if (this.getCheckoutError) {
+                return `/checkout-${this.getCheckoutError}-get-error.json`;
+            }
             return `/get-basket-${this.serviceType}.json`;
         },
 
@@ -128,8 +153,8 @@ export const CheckoutComponent = () => ({
         },
 
         updateCheckoutUrl () {
-            if (this.checkoutError) {
-                return this.checkoutError === SERVER ? updateCheckoutServerErrorUrl : updateCheckoutErrorsUrl;
+            if (this.patchCheckoutError) {
+                return this.patchCheckoutError === SERVER ? updateCheckoutServerErrorUrl : updateCheckoutErrorsUrl;
             }
 
             return updateCheckoutUrl;
