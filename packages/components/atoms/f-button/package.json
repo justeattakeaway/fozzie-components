@@ -48,7 +48,7 @@
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "vue": "2.x",
-    "vue-router": "^3.4.8"
+    "vue-router": ">=3.4.8"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.2.0",
