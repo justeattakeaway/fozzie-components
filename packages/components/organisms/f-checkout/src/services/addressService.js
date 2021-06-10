@@ -100,12 +100,27 @@ function getMappedLocalStorageAddress (address) {
 
 /**
  * Retrieves the address from local storage
+ * @param mapped - boolean deciding whether to return the address in a mapped state
  * @returns address - The address from local storage
  */
-function getAddressFromLocalStorage () {
+function getAddressFromLocalStorage (mapped = true) {
     if (window.localStorage) {
         const storedLocation = window.localStorage.getItem(storedLocationKey);
-        return storedLocation ? getMappedLocalStorageAddress(JSON.parse(storedLocation)) : null;
+
+        if (storedLocation) {
+            return mapped ? getMappedLocalStorageAddress(JSON.parse(storedLocation)) : JSON.parse(storedLocation);
+        }
+    }
+
+    return null;
+}
+
+function getAddressCoordsFromLocalStorage () {
+    if (window.localStorage) {
+        const storedLocation = window.localStorage.getItem(storedLocationKey);
+        const parsedLocation = JSON.parse(storedLocation);
+
+        return parsedLocation.Field1 && parsedLocation.Field2 ? [parsedLocation.Field1, parsedLocation.Field2] : null;
     }
 
     return null;
@@ -124,5 +139,6 @@ export default {
         return getAddress(postcode, address);
     },
     getAddressFromLocalStorage,
+    getAddressCoordsFromLocalStorage,
     isAddressInLocalStorage
 };
