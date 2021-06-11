@@ -793,7 +793,7 @@ export default {
             const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
             const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
-            const errorName = error.errorCode || '';
+            const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
             this.$emit(eventToEmit, { ...this.eventData, error });
 
@@ -804,7 +804,8 @@ export default {
                 error
             });
 
-            this.trackFormInteraction({ action: 'error', error: `error_${errorName}-${error.message}` });
+
+            this.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
             if (!error.shouldShowInDialog && !error.errorFormType) {
                 this.updateMessage(message);

@@ -2419,11 +2419,14 @@ describe('Checkout', () => {
             });
 
             it('should call `trackFormInteraction` with the error information', () => {
+                // Arrange
+                error.errorCode = null;
+
                 // Act
                 wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_-${error.message}` });
+                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
             });
 
             it('should call `scrollToElement` with the `errorMessage` element', async () => {
