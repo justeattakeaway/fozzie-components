@@ -2407,7 +2407,21 @@ describe('Checkout', () => {
                 });
             });
 
-            it('should call `trackFormInteraction` with the error information', () => {
+            it('should call `trackFormInteraction` with the error information including `errorCode` when it exists', () => {
+                // Arrange
+                error.errorCode = 'OrderError';
+
+                // Act
+                wrapper.vm.handleErrorState(error);
+
+                // Assert
+                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.errorCode}-${error.message}` });
+            });
+
+            it('should call `trackFormInteraction` without an `errorCode` when it does not exist', () => {
+                // Arrange
+                error.errorCode = null;
+
                 // Act
                 wrapper.vm.handleErrorState(error);
 
