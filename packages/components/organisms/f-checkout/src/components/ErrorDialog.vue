@@ -71,7 +71,7 @@ export default {
         },
 
         restaurantMenuPageUrl () {
-            return `restaurant-${this.restaurant.seoName}/menu`;
+            return `restaurants-${this.restaurant.seoName}/menu`;
         },
 
         serviceTypeText () {
