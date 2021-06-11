@@ -4,6 +4,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.134.0
+------------------------------
+*June 10, 2021*
+
+### Added
+- Error code to analytics when errors occur for a more descriptive error
+
+
+v0.133.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Separate content for 403 error
+- "Get checkout errors" knob for storybook to render different error page variations
+- `errorFormType` data attribute to deside wether to show one of the error page versions or the checkout form
+
+### Removed
+- `hasCheckoutLoadedSuccessfully` data attribute as redundant
+
+
 v0.132.0
 ------------------------------
 *June 8, 2021*

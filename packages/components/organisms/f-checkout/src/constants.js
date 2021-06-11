@@ -32,3 +32,8 @@ export const ANALYTICS_ERROR_CODE_SET_ORDER_TIME = 'setOrderTime';
 export const ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME = 'invalidOrderTime';
 
 export const DEFAULT_CHECKOUT_ISSUE = 'DEFAULT_CHECKOUT_ISSUE';
+
+export const CHEKOUT_ERROR_FORM_TYPE = {
+    default: 'pageLoad',
+    accessForbidden: 'accessForbiddenError'
+};
