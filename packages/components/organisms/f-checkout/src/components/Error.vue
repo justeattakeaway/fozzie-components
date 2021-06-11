@@ -35,11 +35,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Card from '@justeat/f-card';
 import FButton from '@justeat/f-button';
 import SadBagIconDecorator from '../assets/images/jet-sad-bag.svg';
 import '@justeat/f-button/dist/f-button.css';
 import '@justeat/f-card/dist/f-card.css';
+import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: {
@@ -58,8 +60,18 @@ export default {
         }
     },
 
+    computed: {
+        ...mapState(VUEX_CHECKOUT_MODULE, [
+            'basket'
+        ])
+    },
+
     methods: {
         redirectToMenu () {
+            const basketCookie = this.$cookies.get(`je-mw-basket-${this.basket.id}`);
+            if (basketCookie) {
+                this.$cookies.remove(`je-mw-basket-${this.basket.id}`);
+            }
             window.location.assign(this.restaurantMenuPageUrl);
         }
     }
