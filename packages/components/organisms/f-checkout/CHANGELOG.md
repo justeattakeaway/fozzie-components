@@ -9,9 +9,15 @@ v0.136.0
 *June 11, 2021*
 
 ### Added
+
 - Button for error pages.
 - Tests to cover button changes.
 - Added log warn when error component is displayed.
+- `AdditionalItemsRequared` issue for storybook story
+
+### Changed
+- `updateCheckoutErrors` to `updateCheckoutRestaurantNotTakingOrders` in storybook story to be able to specify different issues as the content of the error dialogs can differ
+
 
 
 v0.135.0
@@ -19,7 +25,7 @@ v0.135.0
 *June 11, 2021*
 
 ### Changed
-- Fixed the error dialog "Back to order" redirect.
+- Fixed the error dialog "Back to order" redirect
 
 
 v0.134.0
