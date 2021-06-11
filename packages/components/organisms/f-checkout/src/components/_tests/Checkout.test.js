@@ -2418,7 +2418,7 @@ describe('Checkout', () => {
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.errorCode}-${error.message}` });
             });
 
-            it('should call `trackFormInteraction` with the error information', () => {
+            it('should call `trackFormInteraction` without an `errorCode` when it does not exist', () => {
                 // Arrange
                 error.errorCode = null;
 
