@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-button",
   "description": "Fozzie Button – The generic button component",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "main": "dist/f-button.umd.min.js",
   "files": [
     "dist",
@@ -33,6 +33,7 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_BUTTON} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
   "scriptsInfo": {

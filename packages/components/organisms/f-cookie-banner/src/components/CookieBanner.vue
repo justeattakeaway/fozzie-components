@@ -187,25 +187,27 @@ export default {
          * Actions for "Accept all cookies" button
          */
         acceptAllCookiesActions () {
-            this.setCookieBannerCookie('full');
-            this.setLegacyCookieBannerCookie();
-            this.dataLayerPush('full');
-            this.resendEvents();
-            this.hideAllBanners();
-            this.shouldHideBanner = true;
+            this.hideBanner().then(() => {
+                this.setCookieBannerCookie('full');
+                this.setLegacyCookieBannerCookie();
+                this.dataLayerPush('full');
+                this.resendEvents();
+                this.hideAllBanners();
+            });
         },
 
         /**
          * Actions for "Accept only required cookies" button
          */
         acceptOnlyNecessaryCookiesActions () {
-            this.setCookieBannerCookie('necessary');
-            this.setLegacyCookieBannerCookie();
-            this.dataLayerPush('necessary');
-            this.resendEvents();
-            this.removeUnnecessaryCookies();
-            this.hideAllBanners();
-            this.shouldHideBanner = true;
+            this.hideBanner().then(() => {
+                this.setCookieBannerCookie('necessary');
+                this.setLegacyCookieBannerCookie();
+                this.dataLayerPush('necessary');
+                this.resendEvents();
+                this.removeUnnecessaryCookies();
+                this.hideAllBanners();
+            });
         },
 
         /**
@@ -221,7 +223,9 @@ export default {
          * Hide the banner
          */
         hideBanner () {
-            this.shouldHideBanner = true;
+            return new Promise(resolve => {
+                resolve(this.shouldHideBanner = true);
+            });
         },
 
         /**

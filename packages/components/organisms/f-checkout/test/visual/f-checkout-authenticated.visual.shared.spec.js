@@ -37,7 +37,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Checkout Errors', 'SERVER')
+                .withQuery('&knob-Patch Checkout Errors', 'SERVER')
                 .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
@@ -57,7 +57,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Checkout Errors', 'ISSUES')
+                .withQuery('&knob-Patch Checkout Errors', 'ISSUES')
                 .withQuery('&knob-Place Order Errors', 'SERVER');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
@@ -82,6 +82,25 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Authenticated - Illegal Mobile Number Error State', 'shared');
+    });
+
+    it('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'collection')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Place Order Errors', 'SERVER');
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', 'shared');
     });
 });
 
@@ -165,6 +184,25 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', 'shared');
     });
+
+    it('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Place Order Errors', 'SERVER');
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', 'shared');
+    });
 });
 
 describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Visual Tests', () => {
@@ -232,5 +270,24 @@ describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', 'shared');
+    });
+
+    it('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'dinein')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Place Order Errors', 'SERVER');
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', 'shared');
     });
 });
