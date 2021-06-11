@@ -37,6 +37,7 @@
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component wdio ../../../../wdio-browserstack.conf.js --mochaOpts.grep '@browserstack'",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_CHECKOUT} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "report:test-component:chrome": "cross-env-shell JE_ENV=local  TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn allure:open",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
     "allure:open": "yarn allure:clean && allure open",

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "0.13.0",
+  "version": "0.15.0",
   "main": "dist/f-cookie-banner.umd.min.js",
   "files": [
     "dist",
@@ -34,6 +34,7 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_COOKIE_BANNER} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "report:test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn allure:open",
     "allure:open": "yarn allure:clean && allure open",
     "allure:clean": "rimraf ../../../../test/results/allure",

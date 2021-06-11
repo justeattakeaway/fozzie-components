@@ -231,6 +231,11 @@ export default {
                     url: 'https://www.just-eat.co.uk/euro2020/terms/',
                     text: 'Win tickets - Terms and conditions',
                     gtm: 'click_euro2020_terms'
+                },
+                {
+                    url: 'https://www.just-eat.co.uk/business',
+                    text: 'Just Eat for Business',
+                    gtm: 'click_about_for_business'
                 }
             ]
         }
