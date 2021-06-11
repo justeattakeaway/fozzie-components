@@ -3,7 +3,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 let checkout = new Checkout();
 
-describe('f-checkout - Collection - Guest - Visual Tests', () => {
+describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -20,7 +20,7 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Base State', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Guest - Base State', 'desktop');
     });
 
     it('should display the mandatory error messages', () => {
@@ -29,7 +29,7 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Mandatory Errors State', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Guest - Mandatory Errors State', 'desktop');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -43,7 +43,7 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', 'desktop');
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -67,11 +67,11 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'desktop');
     });
 });
 
-describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests', () => {
+describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -88,12 +88,12 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests'
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Pre-Order Warning', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Guest - Pre-Order Warning', 'desktop');
     });
 });
 
 
-describe('f-checkout - Delivery - Guest - Visual Tests', () => {
+describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -110,7 +110,7 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
 
     it('should display the delivery f-checkout component guest base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Base State', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Base State', 'desktop');
     });
 
     it('should display the delivery f-checkout guest mandatory error messages', () => {
@@ -121,7 +121,7 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Mandatory Errors State', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Mandatory Errors State', 'desktop');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -135,10 +135,10 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'desktop');
     });
 
-    it.only('should display the "Duplicate Order Warning" modal', () => {
+    it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout.withQuery('&knob-Place Order Errors', 'SERVER');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
@@ -159,11 +159,11 @@ describe('f-checkout - Delivery - Guest - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'desktop');
     });
 });
 
-describe('f-checkout - Delivery - Guest - isAsapAvailable: false Visual Tests', () => {
+describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -180,6 +180,6 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Visual Tests', 
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Pre-Order Warning', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Pre-Order Warning', 'desktop');
     });
 });

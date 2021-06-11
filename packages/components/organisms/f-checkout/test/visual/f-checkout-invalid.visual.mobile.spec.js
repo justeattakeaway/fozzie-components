@@ -3,7 +3,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 let checkout;
 
-describe('f-checkout - Invalid - Visual Tests', () => {
+describe('f-checkout - Invalid - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -18,6 +18,6 @@ describe('f-checkout - Invalid - Visual Tests', () => {
 
     it('should display the error page component', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Invalid - Base State', 'shared');
+        browser.percyScreenshot('f-checkout - Invalid - Base State', 'mobile');
     });
 });

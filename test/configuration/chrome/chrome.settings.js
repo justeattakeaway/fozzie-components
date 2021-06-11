@@ -41,15 +41,23 @@ const settings = () => ({
     },
     visual: {
         capabilities: [
-            {
+            ...(isDesktop ? [{
                 browserName: 'chrome',
                 acceptInsecureCerts: true,
                 specs: [
-                    'test/visual/*.visual.desktop.spec.js',
-                    'test/visual/*.visual.mobile.spec.js',
-                    'test/visual/*.visual.shared.spec.js'
+                    'test/visual/*.visual.desktop.spec.js'
                 ]
-            }
+            }] : []),
+            ...(isMobile ? [{
+                browserName: 'chrome',
+                acceptInsecureCerts: true,
+                'goog:chromeOptions': {
+                    mobileEmulation: { deviceName: 'Pixel 2' }
+                },
+                specs: [
+                    'test/visual/*.visual.mobile.spec.js'
+                ]
+            }] : [])
         ]},
     reporters: ALLURE_REPORTER === 'true' ? [
         [video, {

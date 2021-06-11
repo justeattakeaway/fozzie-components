@@ -5,7 +5,7 @@ const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
 
-describe('f-footer - Visual Tests', () => {
+describe('f-footer - Desktop Visual Tests', () => {
     beforeEach(() => {
         footer = new Footer('organism', 'footer-component');
     });
@@ -21,7 +21,7 @@ describe('f-footer - Visual Tests', () => {
 
         footer.open(pageUrl);
         footer.waitForComponent();
-        browser.percyScreenshot(`f-footer - Base - ${tenant}`, 'shared')
+        browser.percyScreenshot(`f-footer - Base - ${tenant}`, 'desktop')
     });
 
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'])
@@ -35,7 +35,7 @@ describe('f-footer - Visual Tests', () => {
 
         footer.open(pageUrl);
         footer.waitForComponent();
-        browser.percyScreenshot(`f-footer - Country Selector - ${tenant}`, 'shared')
+        browser.percyScreenshot(`f-footer - Country Selector - ${tenant}`, 'desktop')
     });
 
     forEach(['en-AU', 'en-NZ'])
@@ -49,7 +49,7 @@ describe('f-footer - Visual Tests', () => {
 
         footer.open(pageUrl);
         footer.waitForComponent();
-        browser.percyScreenshot(`f-footer - Courier Links - ${tenant}`, 'shared')
+        browser.percyScreenshot(`f-footer - Courier Links - ${tenant}`, 'desktop')
     });
 
     forEach(['en-AU', 'en-NZ'])
@@ -63,6 +63,6 @@ describe('f-footer - Visual Tests', () => {
 
         footer.open(pageUrl);
         footer.waitForComponent();
-        browser.percyScreenshot(`f-footer - Courier Links and Country Selector - ${tenant}`, 'shared')
+        browser.percyScreenshot(`f-footer - Courier Links and Country Selector - ${tenant}`, 'desktop')
     });
 });
