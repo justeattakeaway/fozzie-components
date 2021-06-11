@@ -26,7 +26,8 @@ const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
 const getBasketDineInUrl = '/get-basket-dinein.json';
 const updateCheckoutUrl = '/update-checkout.json';
-const updateCheckoutErrorsUrl = '/update-checkout-errors.json';
+const updateCheckoutRestaurantNotTakingOrdersUrl = '/update-checkout-restaurant-not-taking-orders.json';
+const updateCheckoutAdditionalItemsRequaredUrl = '/update-checkout-additional-items-requared.json';
 const updateCheckoutServerErrorUrl = '/update-checkout-server-error.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
@@ -46,7 +47,8 @@ CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDineInUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
-CheckoutMock.setupCheckoutMethod(updateCheckoutErrorsUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutRestaurantNotTakingOrdersUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutAdditionalItemsRequaredUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutServerErrorUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
@@ -56,19 +58,22 @@ CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
-const checkoutIssues = 'Checkout Issues (Response from server but order not fulfillable)';
+const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
+const additionalItemsRequared = 'Additional Items Requared Issue (Response from server but order not fulfillable)';
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
 const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
-const ISSUES = 'ISSUES';
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
+const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
+const additionalItemsRequaredIssue = 'additional-items-requared'
 
 const patchCheckoutErrorOptions = {
     None: null,
-    [checkoutIssues]: ISSUES,
+    [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
+    [additionalItemsRequared]: additionalItemsRequaredIssue,
     [checkoutServerError]: SERVER
 };
 
@@ -154,7 +159,10 @@ export const CheckoutComponent = () => ({
 
         updateCheckoutUrl () {
             if (this.patchCheckoutError) {
-                return this.patchCheckoutError === SERVER ? updateCheckoutServerErrorUrl : updateCheckoutErrorsUrl;
+                if (this.patchCheckoutError === SERVER) {
+                    return updateCheckoutServerErrorUrl;
+                }
+                return `/update-checkout-${this.patchCheckoutError}.json`;
             }
 
             return updateCheckoutUrl;

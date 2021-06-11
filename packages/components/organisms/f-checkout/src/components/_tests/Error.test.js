@@ -2,6 +2,7 @@ import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Error from '../Error.vue';
 import { i18n } from './helpers/setup';
+import { CHEKOUT_ERROR_FORM_TYPE } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -16,7 +17,7 @@ describe('Error', () => {
             i18n,
             localVue,
             propsData: {
-                errorFormType: 'pageLoad'
+                errorFormType: CHEKOUT_ERROR_FORM_TYPE.default
             }
         });
     });

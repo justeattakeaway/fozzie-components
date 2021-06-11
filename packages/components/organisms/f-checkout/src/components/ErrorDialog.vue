@@ -53,6 +53,13 @@ export default {
         MegaModal
     },
 
+    props: {
+        restaurantMenuPageUrl: {
+            type: String,
+            default: ''
+        }
+    },
+
     data () {
         return {
             isOpen: true
@@ -68,10 +75,6 @@ export default {
 
         errorCode () {
             return this.message && this.message.code;
-        },
-
-        restaurantMenuPageUrl () {
-            return `restaurants-${this.restaurant.seoName}/menu`;
         },
 
         serviceTypeText () {

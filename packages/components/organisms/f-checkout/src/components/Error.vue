@@ -5,8 +5,7 @@
         is-page-content-wrapper
         card-heading-position="center"
         data-test-id="checkout-error-page-component"
-        :class="[$style['c-checkout-error'], $style['c-checkout-error--verticalPadding']]"
-    >
+        :class="[$style['c-checkout-error'], $style['c-checkout-error--verticalPadding']]">
         <!-- TODO: Load image from CDN in future -->
         <sad-bag-icon-decorator
             data-test-id="checkout-error-page-image" />
@@ -22,23 +21,46 @@
             data-test-id="checkout-error-page-description">
             {{ $t(`errorMessages.${errorFormType}.description`) }}
         </p>
+
+        <f-button
+            :class="$style['c-checkout-error-button']"
+            button-size="large"
+            button-type="primary"
+            is-full-width
+            data-test-id="error-page-redirect-to-menu-button"
+            @click.native="redirectToMenu">
+            {{ $t(`errorMessages.${errorFormType}.buttonText`) }}
+        </f-button>
     </card>
 </template>
 
 <script>
 import Card from '@justeat/f-card';
+import FButton from '@justeat/f-button';
 import SadBagIconDecorator from '../assets/images/jet-sad-bag.svg';
+import '@justeat/f-button/dist/f-button.css';
 import '@justeat/f-card/dist/f-card.css';
 
 export default {
     components: {
         Card,
+        FButton,
         SadBagIconDecorator
     },
     props: {
         errorFormType: {
             type: String,
             required: true
+        },
+        restaurantMenuPageUrl: {
+            type: String,
+            default: ''
+        }
+    },
+
+    methods: {
+        redirectToMenu () {
+            window.location.assign(this.restaurantMenuPageUrl);
         }
     }
 };
@@ -68,6 +90,10 @@ export default {
     .c-checkout-error-description {
         @include font-size(body-l);
         margin-top: spacing();
+    }
+
+    .c-checkout-error-button {
+        margin: spacing(x4) 0 spacing(x0.5);
     }
 }
 </style>
