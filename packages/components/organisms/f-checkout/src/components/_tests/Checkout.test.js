@@ -10,7 +10,8 @@ import {
     CHECKOUT_METHOD_COLLECTION,
     CHECKOUT_METHOD_DINEIN,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
-    TENANT_MAP
+    TENANT_MAP,
+    CHEKOUT_ERROR_FORM_TYPE
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
@@ -287,8 +288,8 @@ describe('Checkout', () => {
             });
         });
 
-        describe('hasCheckoutLoadedSuccessfully ::', () => {
-            it('should render the checkout form and not the error page when set to `true`', () => {
+        describe('errorFormType ::', () => {
+            it('should render the checkout form and not the error page when is null', () => {
                 // Arrange & Act
                 const wrapper = mount(VueCheckout, {
                     i18n,
@@ -297,7 +298,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: true
+                            errorFormType: null
                         };
                     }
                 });
@@ -320,8 +321,8 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: false,
-                            isLoading: false
+                            isLoading: false,
+                            errorFormType: CHEKOUT_ERROR_FORM_TYPE.default
                         };
                     }
                 });
@@ -347,7 +348,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: true,
+                            errorFormType: null,
                             shouldShowSpinner: true
                         };
                     }
@@ -1911,11 +1912,17 @@ describe('Checkout', () => {
             describe('when `getCheckout` request fails', () => {
                 let wrapper;
 
+                const error = {
+                    response: {
+                        status: 400
+                    }
+                };
+
                 beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject(error)) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1925,14 +1932,13 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadCheckout();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -1941,6 +1947,33 @@ describe('Checkout', () => {
 
                     // Assert
                     expect($logger.logError).toHaveBeenCalled();
+                });
+
+                it('should set `errorFormType` to "pageLoad" if error status code is not 403', async () => {
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.default);
+                });
+
+                it('should set `errorFormType` to "accessForbiddenError" if error status code is 403', async () => {
+                    // Assert
+                    wrapper = mount(VueCheckout, {
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject({ response: { status: 403 } })) }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.accessForbidden);
                 });
             });
 
@@ -1981,7 +2014,8 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAvailableFulfilment: jest.fn(async () => Promise.reject({ response: { status: 500 } })) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1991,14 +2025,13 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadAvailableFulfilment();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -2186,7 +2219,8 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getBasket: jest.fn(async () => Promise.reject()) }),
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getBasket: jest.fn(async () => Promise.reject({ response: { status: 400 } })) }),
                         i18n,
                         localVue,
                         propsData,
@@ -2196,14 +2230,13 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadBasket();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -2215,6 +2248,14 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(logInvokerSpy).toHaveBeenCalled();
+                });
+
+                it('should set `errorFormType` to "pageLoad"', async () => {
+                    // Act
+                    await wrapper.vm.loadBasket();
+
+                    // Assert
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.default);
                 });
             });
 
@@ -2280,8 +2321,6 @@ describe('Checkout', () => {
                         logMethod: $logger.logWarn,
                         error
                     });
-
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(true);
                 });
             });
 
