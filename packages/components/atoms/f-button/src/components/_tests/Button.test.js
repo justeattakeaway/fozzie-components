@@ -229,7 +229,7 @@ describe('Button', () => {
                     expect(wrapper.find('[data-test-id="router-link-button-component"]').exists()).toBeTruthy();
                 });
 
-                it('should apply `href` attribute', () => {
+                it('should apply `to` attribute', () => {
                     // Act
                     const wrapper = mount(FButton, { propsData });
 
