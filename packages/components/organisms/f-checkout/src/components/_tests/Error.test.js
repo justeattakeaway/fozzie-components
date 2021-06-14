@@ -12,7 +12,7 @@ localVue.use(Vuex);
 
 const mockState = {
     basket: {
-        id: 'menu-sentinel-6-freilich',
+        id: 'MGFkMzgwZjgtYjY3Yi00Nz-v1',
         total: 0
     }
 };
@@ -96,12 +96,8 @@ describe('Error', () => {
                 window.location = oldWindowLocation;
             });
 
-            it('should exist', () => {
-                expect(wrapper.vm.redirectToMenu).toBeDefined();
-            });
-
             describe('when invoked', () => {
-                it('should assign the window location to the restaurant menu page url so the user can navigate back from the error', () => {
+                it('should redirect the customer back to the menu page so the user can navigate back from the error', () => {
                     // Act
                     wrapper.vm.redirectToMenu();
 
@@ -132,7 +128,7 @@ describe('Error', () => {
                         wrapper.vm.redirectToMenu();
 
                         // Assert
-                        expect(cookieRemoveSpy).toHaveBeenCalledWith('je-mw-basket-menu-sentinel-6-freilich');
+                        expect(cookieRemoveSpy).toHaveBeenCalledWith('je-mw-basket-MGFkMzgwZjgtYjY3Yi00Nz-v1');
                     });
                 });
             });
