@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style module lang="scss">
-a.reopen-link {
+.reopen-link {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
