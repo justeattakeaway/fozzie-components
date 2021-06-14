@@ -42,6 +42,7 @@ import SadBagIconDecorator from '../assets/images/jet-sad-bag.svg';
 import '@justeat/f-button/dist/f-button.css';
 import '@justeat/f-card/dist/f-card.css';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
+import loggerMixin from '../mixins/logger.mixin';
 
 export default {
     components: {
@@ -49,6 +50,9 @@ export default {
         FButton,
         SadBagIconDecorator
     },
+    mixins: [
+        loggerMixin
+    ],
     props: {
         errorFormType: {
             type: String,
@@ -66,12 +70,24 @@ export default {
         ])
     },
 
+    mounted () {
+        if (this.$logger) {
+            this.logInvoker({
+                message: 'Consumer Checkout Error Page',
+                data: {},
+                logMethod: this.$logger.logWarn
+            });
+        }
+    },
+
     methods: {
         redirectToMenu () {
             const basketCookie = this.$cookies.get(`je-mw-basket-${this.basket.id}`);
+
             if (basketCookie) {
                 this.$cookies.remove(`je-mw-basket-${this.basket.id}`);
             }
+
             window.location.assign(this.restaurantMenuPageUrl);
         }
     }
