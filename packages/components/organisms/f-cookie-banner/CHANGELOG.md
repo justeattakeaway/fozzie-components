@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.16.0
 ------------------------------
-*June 11, 2021*
+*June 14, 2021*
 
 ### Added
 - Attach link to bottom of page to reopen the cookie consent banner
