@@ -42,7 +42,8 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.11.0"
+    "@justeat/f-services": "1.11.0",
+    "@justeat/f-media-element": "0.2.1"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
