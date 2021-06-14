@@ -362,6 +362,56 @@ describe('Checkout', () => {
                 expect(spinner.exists()).toBe(true);
             });
         });
+
+        describe('isFormSubmitting', () => {
+            it('should display a loading spinner on the submit button when `isFormSubmitting` is true', () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            errorFormType: null,
+                            isFormSubmitting: true
+                        };
+                    }
+                });
+
+                // Act
+                const submitButton = wrapper.find('[data-test-id="confirm-payment-submit-button"]');
+                const spinner = submitButton.find('[data-test-id="action-button-spinner"]');
+
+                // Assert
+                expect(submitButton.attributes('aria-busy')).toBeTruthy();
+                expect(spinner.exists()).toBe(true);
+            });
+
+            it('should NOT display a loading spinner on the submit button when `isFormSubmitting` is false', () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            errorFormType: null,
+                            isFormSubmitting: false
+                        };
+                    }
+                });
+
+                // Act
+                const submitButton = wrapper.find('[data-test-id="confirm-payment-submit-button"]');
+                const spinner = submitButton.find('[data-test-id="action-button-spinner"]');
+
+                // Assert
+                expect(submitButton.attributes('aria-busy')).toBeFalsy();
+                expect(spinner.exists()).toBe(false);
+            });
+        });
     });
 
     describe('computed ::', () => {

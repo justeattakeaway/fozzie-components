@@ -132,6 +132,7 @@
                         is-full-width
                         action-type="submit"
                         data-test-id="confirm-payment-submit-button"
+                        :is-loading="isFormSubmitting"
                     >
                         {{ $t('buttonText') }}
                     </f-button>
@@ -314,7 +315,8 @@ export default {
             tenantConfigs,
             shouldShowSpinner: false,
             isLoading: false,
-            errorFormType: null
+            errorFormType: null,
+            isFormSubmitting: false
         };
     },
 
@@ -836,6 +838,7 @@ export default {
          */
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
+            this.isFormSubmitting = true;
             this.updateMessage();
 
             if (this.isFormValid()) {
@@ -843,6 +846,9 @@ export default {
             } else {
                 this.onInvalidCheckoutForm();
             }
+            setTimeout(() => {
+                this.isFormSubmitting = false;
+            }, 10000);
         },
 
         /**
