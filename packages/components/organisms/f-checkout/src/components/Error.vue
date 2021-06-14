@@ -85,8 +85,6 @@ export default {
             const cookieName = `je-mw-basket-${this.basket.id}`;
             const basketCookie = this.$cookies.get(cookieName);
 
-            console.log(cookieName);
-
             if (basketCookie) {
                 this.$cookies.remove(cookieName);
             }
