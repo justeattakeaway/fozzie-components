@@ -152,13 +152,13 @@ export default {
         },
 
         minNumber: {
-            type: Number,
-            default: 0
+            type: [Number, undefined],
+            default: undefined
         },
 
         maxNumber: {
-            type: Number,
-            default: 100
+            type: [Number, undefined],
+            default: undefined
         },
 
         hasInputDescription: {

@@ -10,7 +10,8 @@ const copy = {
         3: 'Three stamps earned out of five',
         4: 'Four stamps earned out of five',
         5: 'Five stamps earned out of five'
-    }
+    },
+    stampCardDefaultPercentage: '10'
 };
 
 export default {
@@ -37,8 +38,8 @@ export default {
             description: 'A url for the ongoing journey to order at the relevant restaurant'
         },
         discountPercentage: {
-            control: { type: 'text' },
-            description: 'Currently fixed - The percentage of each contributing order taken as the value off on the resulting card'
+            control: { type: 'select', options: ['10', '15'] },
+            description: 'The percentage of each contributing order taken as the value off on the resulting card'
         },
         earnedStamps: {
             control: { type: 'range', min: 0, max: 5 },
@@ -103,7 +104,7 @@ InProgressStampCard1Component.args = {
     description: [],
     image,
     url: 'https://example.com/the-burger-place',
-    discountPercentage: 15,
+    discountPercentage: '15',
     earnedStamps: 2,
     expiryDate: '2021-02-28T23:59:59',
     expiryLine: 'Discount expires',
@@ -150,7 +151,7 @@ ClaimableStampCard1Component.args = {
     ],
     image,
     url: 'https://example.com/an-viet',
-    discountPercentage: 15,
+    discountPercentage: '15',
     earnedStamps: 5,
     expiryDate: '2021-02-28T23:59:59',
     expiryLine: 'Discount expires',
