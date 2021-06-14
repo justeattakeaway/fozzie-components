@@ -19,13 +19,15 @@
 <script>
 import { mapActions } from 'vuex';
 import SearchBox from '@justeat/f-searchbox';
+import { offersSearchModule } from '../store/offersSearch.module';
 import {
     ACTION_ADDRESS_FOCUS,
     ACTION_VALID_SAVED_ADDRESS_SEARCH,
     ACTION_VALID_SEARCH,
     ACTION_INVALID_ADDRESS,
     ACTION_EMPTY_ADDRESS,
-    ACTION_UNKNOWN_ERROR
+    ACTION_UNKNOWN_ERROR,
+    OFFERS_SEARCH_VUEX_MODULE_NAMESPACE
 } from '../store/types';
 import { POSTCODE_EMPTY, POSTCODE_INVALID } from '../constants';
 
@@ -34,6 +36,12 @@ export default {
 
     components: {
         SearchBox
+    },
+
+    beforeCreate () {
+        if (!this.$store.hasModule(OFFERS_SEARCH_VUEX_MODULE_NAMESPACE)) {
+            this.$store.registerModule(OFFERS_SEARCH_VUEX_MODULE_NAMESPACE, offersSearchModule);
+        }
     },
 
     methods: {

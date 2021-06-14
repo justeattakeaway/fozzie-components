@@ -6,7 +6,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import Vuex from 'vuex';
 import Vue from 'vue';
 import VOffers from '../src/components/Offers.vue';
-import { offersHeaderSearchModule } from '../src/store/offersHeaderSearch.module';
+import { offersSearchModule } from '../src/store/offersSearch.module';
 
 
 export default {
@@ -22,7 +22,7 @@ export const VOffersComponent = () => ({
     },
     store: new Vuex.Store({
         modules: {
-            offersHeaderSearchModule
+            offersSearchModule
         }
     }),
     template: '<v-offers />'
