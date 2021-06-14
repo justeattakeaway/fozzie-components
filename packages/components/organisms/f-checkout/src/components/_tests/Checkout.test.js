@@ -17,7 +17,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
+    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger, $cookies
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
 
@@ -1304,9 +1304,7 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $logger,
-                        $cookies: {
-                            get: jest.fn()
-                        }
+                        $cookies
                     }
                 });
             });
@@ -1343,9 +1341,7 @@ describe('Checkout', () => {
                                 propsData,
                                 mocks: {
                                     $logger,
-                                    $cookies: {
-                                        get: jest.fn()
-                                    }
+                                    $cookies
                                 }
                             });
                             const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
@@ -1375,9 +1371,7 @@ describe('Checkout', () => {
                                 propsData,
                                 mocks: {
                                     $logger,
-                                    $cookies: {
-                                        get: jest.fn()
-                                    }
+                                    $cookies
                                 }
                             });
 
@@ -1406,9 +1400,7 @@ describe('Checkout', () => {
                                 propsData,
                                 mocks: {
                                     $logger,
-                                    $cookies: {
-                                        get: jest.fn()
-                                    }
+                                    $cookies
                                 }
                             });
 
@@ -1484,9 +1476,7 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $logger,
-                                $cookies: {
-                                    get: jest.fn()
-                                }
+                                $cookies
                             }
                         });
 
@@ -1517,9 +1507,7 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $logger,
-                                $cookies: {
-                                    get: jest.fn()
-                                }
+                                $cookies
                             }
                         });
 
@@ -2654,9 +2642,7 @@ describe('Checkout', () => {
                     mocks: {
                         $v,
                         $logger,
-                        $cookies: {
-                            get: jest.fn()
-                        }
+                        $cookies
                     }
                 });
 
@@ -2676,9 +2662,7 @@ describe('Checkout', () => {
                         mocks: {
                             $v,
                             $logger,
-                            $cookies: {
-                                get: jest.fn()
-                            }
+                            $cookies
                         }
                     });
 
@@ -2701,9 +2685,7 @@ describe('Checkout', () => {
                         mocks: {
                             $v,
                             $logger,
-                            $cookies: {
-                                get: jest.fn()
-                            }
+                            $cookies
                         }
                     });
 
@@ -2740,9 +2722,7 @@ describe('Checkout', () => {
                             mocks: {
                                 $v,
                                 $logger,
-                                $cookies: {
-                                    get: jest.fn()
-                                }
+                                $cookies
                             }
                         });
 
@@ -2766,9 +2746,7 @@ describe('Checkout', () => {
                             mocks: {
                                 $v,
                                 $logger,
-                                $cookies: {
-                                    get: jest.fn()
-                                }
+                                $cookies
                             }
                         });
                         const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
@@ -2805,9 +2783,7 @@ describe('Checkout', () => {
                             mocks: {
                                 $v,
                                 $logger,
-                                $cookies: {
-                                    get: jest.fn()
-                                }
+                                $cookies
                             }
                         });
 
@@ -2831,9 +2807,7 @@ describe('Checkout', () => {
                             mocks: {
                                 $v,
                                 $logger,
-                                $cookies: {
-                                    get: jest.fn()
-                                }
+                                $cookies
                             }
                         });
                         const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
@@ -3142,9 +3116,7 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $logger,
-                        $cookies: {
-                            get: jest.fn()
-                        }
+                        $cookies
                     }
                 });
             });
@@ -3241,9 +3213,7 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $logger,
-                            $cookies: {
-                                get: jest.fn()
-                            }
+                            $cookies
                         }
                     });
 

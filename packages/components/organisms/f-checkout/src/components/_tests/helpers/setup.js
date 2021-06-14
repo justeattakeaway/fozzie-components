@@ -128,6 +128,11 @@ const $logger = {
     logError: jest.fn()
 };
 
+const $cookies = {
+    get: jest.fn(),
+    set: jest.fn()
+};
+
 // eslint-disable-next-line
 const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsInBob25lX251bWJlciI6IjAxMjM0NTY3ODkiLCJtb2JpbGVfbnVtYmVyIjoiOTg3NjU0MzIxMCIsImlhdCI6MTYxNTQ2OTUxNn0.5NJxvUBHCpVAo7MMq02_yvVr4UKWcFtm2tjrLY0JzWw';
 const mockAuthTokenNoNumbers = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.yLXN84pcRRn9O_mdPHkVj18TgrH2i9Q1_V9020B2h7s';
@@ -141,6 +146,7 @@ export {
     i18n,
     createStore,
     $logger,
+    $cookies,
     mockAuthToken,
     mockAuthTokenNoNumbers,
     mockAuthTokenNoMobileNumber
