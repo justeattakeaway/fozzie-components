@@ -1303,7 +1303,10 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies: {
+                            get: jest.fn()
+                        }
                     }
                 });
             });
@@ -1339,7 +1342,10 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies: {
+                                        get: jest.fn()
+                                    }
                                 }
                             });
                             const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
@@ -1368,7 +1374,10 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies: {
+                                        get: jest.fn()
+                                    }
                                 }
                             });
 
@@ -1396,7 +1405,10 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies: {
+                                        get: jest.fn()
+                                    }
                                 }
                             });
 
@@ -1471,7 +1483,10 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger
+                                $logger,
+                                $cookies: {
+                                    get: jest.fn()
+                                }
                             }
                         });
 
@@ -1501,7 +1516,10 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger
+                                $logger,
+                                $cookies: {
+                                    get: jest.fn()
+                                }
                             }
                         });
 
@@ -2635,7 +2653,10 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies: {
+                            get: jest.fn()
+                        }
                     }
                 });
 
@@ -2654,7 +2675,10 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies: {
+                                get: jest.fn()
+                            }
                         }
                     });
 
@@ -2676,7 +2700,10 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies: {
+                                get: jest.fn()
+                            }
                         }
                     });
 
@@ -2712,7 +2739,10 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies: {
+                                    get: jest.fn()
+                                }
                             }
                         });
 
@@ -2735,7 +2765,10 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies: {
+                                    get: jest.fn()
+                                }
                             }
                         });
                         const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
@@ -2771,7 +2804,10 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies: {
+                                    get: jest.fn()
+                                }
                             }
                         });
 
@@ -2794,7 +2830,10 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies: {
+                                    get: jest.fn()
+                                }
                             }
                         });
                         const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
@@ -3102,7 +3141,10 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies: {
+                            get: jest.fn()
+                        }
                     }
                 });
             });
@@ -3122,7 +3164,7 @@ describe('Checkout', () => {
                         customerNotes: {
                             noteForRestaurant: defaultCheckoutState.userNote
                         },
-                        referralState: 'ReferredByWeb'
+                        referralState: 'None'
                     },
                     timeout: 10000
                 };
@@ -3198,7 +3240,10 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies: {
+                                get: jest.fn()
+                            }
                         }
                     });
 
