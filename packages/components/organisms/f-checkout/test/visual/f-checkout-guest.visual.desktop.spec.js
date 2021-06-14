@@ -54,14 +54,8 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         checkout.waitForComponent();
         checkout.setFieldValue('firstName', 'Jerry');
         checkout.setFieldValue('lastName', 'Jazzman');
-        const addressInfo = {
-            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '07234567890',
-            line1: '47 Frith  Street',
-            locality: 'London',
-            postcode: 'W1D 4HT'
-        };
-        checkout.populateGuestCheckoutForm(addressInfo);
+        checkout.setFieldValue('emailAddress', 'jerry.jazzman@ronniescotts.co.uk');
+        checkout.setFieldValue('mobileNumber', '07234567890');
 
         // Act
         checkout.goToPayment();
