@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.16.0
+------------------------------
+*June 11, 2021*
+
+### Added
+- Attach link to bottom of page to reopen the cookie consent banner
+
+
 v0.15.0
 ------------------------------
 *June 10, 2021*
@@ -18,14 +26,6 @@ v0.14.0
 
 ### Added
 - Percy Visual Regression tests for Legacy and ConsentBanner
-
-
-v0.14.0
-------------------------------
-*June 10, 2021*
-
-### Added
-- Attach link to bottom of page to reopen the cookie consent banner
 
 
 v0.13.0

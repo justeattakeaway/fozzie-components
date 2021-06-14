@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!shouldHideBanner || !copy.reopenCookieBannerLinkText">
+    <div v-if="!shouldHideBanner">
         <mega-modal
             v-if="!legacyBanner"
             ref="cookieBanner"
@@ -214,7 +214,7 @@ export default {
          * Set focus to the cookie consent banner title for accessibility
          */
         focusOnTitle () {
-            if (!this.legacyBanner) {
+            if (!this.legacyBanner && this.$refs.cookieBannerHeading) {
                 this.$refs.cookieBannerHeading.focus();
             }
         },

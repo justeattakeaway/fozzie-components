@@ -9,7 +9,7 @@ const i18n = {
     locale: 'en-IE'
 };
 
-xdescribe('CookieBanner', () => {
+describe('CookieBanner', () => {
     describe('components', () => {
         it('should be defined', () => {
             // Arrange
@@ -27,7 +27,7 @@ xdescribe('CookieBanner', () => {
         });
     });
 
-    describe('methods', () => {
+    xdescribe('methods', () => {
         describe('isNotExcluded', () => {
             it.each([
                 [false, 'je-location'],
