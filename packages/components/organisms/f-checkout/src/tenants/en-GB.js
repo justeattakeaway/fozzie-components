@@ -53,7 +53,13 @@ const messages = {
         multipleFieldErrors: 'There are {errorCount} errors in the form',
         pageLoad: {
             heading: 'We can’t show you this page',
-            description: 'It’s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.'
+            description: 'It’s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.',
+            buttonText: 'Go back to order'
+        },
+        accessForbiddenError: {
+            heading: 'Something went wrong',
+            description: 'This basket was created with a different account so we can’t proceed, sorry. Please add your items again.',
+            buttonText: 'Go back to order'
         },
 
         guestUserCreationFailure: 'Guest checkout isn’t available, sorry. Try again soon or sign up',
