@@ -846,9 +846,8 @@ export default {
             } else {
                 this.onInvalidCheckoutForm();
             }
-            setTimeout(() => {
-                this.isFormSubmitting = false;
-            }, 10000);
+
+            this.isFormSubmitting = false;
         },
 
         /**
