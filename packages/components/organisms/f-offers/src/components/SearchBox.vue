@@ -27,7 +27,7 @@ import {
     ACTION_INVALID_ADDRESS,
     ACTION_EMPTY_ADDRESS,
     ACTION_UNKNOWN_ERROR,
-    OFFERS_SEARCH_VUEX_MODULE_NAMESPACE
+    VUEX_MODULE_NAMESPACE_OFFERS_SEARCH
 } from '../store/types';
 import { POSTCODE_EMPTY, POSTCODE_INVALID } from '../constants';
 
@@ -39,8 +39,8 @@ export default {
     },
 
     beforeCreate () {
-        if (!this.$store.hasModule(OFFERS_SEARCH_VUEX_MODULE_NAMESPACE)) {
-            this.$store.registerModule(OFFERS_SEARCH_VUEX_MODULE_NAMESPACE, offersSearchModule);
+        if (!this.$store.hasModule(VUEX_MODULE_NAMESPACE_OFFERS_SEARCH)) {
+            this.$store.registerModule(VUEX_MODULE_NAMESPACE_OFFERS_SEARCH, offersSearchModule);
         }
     },
 
