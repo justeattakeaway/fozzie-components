@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.137.0
+------------------------------
+*June 14, 2021*
+
+### Changed
+- Dependency updated to f-alert@v0.6.1
+
+
+v0.136.0
+------------------------------
+*June 11, 2021*
+
+### Added
+- Button for error pages.
+
+
 v0.135.0
 ------------------------------
 *June 11, 2021*
