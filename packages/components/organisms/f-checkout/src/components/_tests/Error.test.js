@@ -101,7 +101,7 @@ describe('Error', () => {
             });
 
             describe('when invoked', () => {
-                it('should assign the window location to equal to the restaurant menu page so the user can navigate back from the error', () => {
+                it('should assign the window location to the restaurant menu page url so the user can navigate back from the error', () => {
                     // Act
                     wrapper.vm.redirectToMenu();
 
