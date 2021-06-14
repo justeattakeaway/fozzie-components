@@ -928,9 +928,9 @@ export default {
             const cookieName = `je-rw-menu-referral-state-${this.restaurant.id}`;
             const referralCookie = this.$cookies.get(cookieName);
 
-            return !referralCookie || !referralCookie.menuReferralState
-                ? 'None'
-                : 'ReferredByWeb';
+            return referralCookie && referralCookie.menuReferralState
+                ? 'ReferredByWeb'
+                : 'None';
         }
     },
 
