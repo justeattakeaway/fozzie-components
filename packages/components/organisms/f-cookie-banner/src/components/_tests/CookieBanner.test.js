@@ -27,7 +27,7 @@ describe('CookieBanner', () => {
         });
     });
 
-    xdescribe('methods', () => {
+    describe('methods', () => {
         describe('isNotExcluded', () => {
             it.each([
                 [false, 'je-location'],
