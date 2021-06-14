@@ -82,10 +82,13 @@ export default {
 
     methods: {
         redirectToMenu () {
-            const basketCookie = this.$cookies.get(`je-mw-basket-${this.basket.id}`);
+            const cookieName = `je-mw-basket-${this.basket.id}`;
+            const basketCookie = this.$cookies.get(cookieName);
+
+            console.log(cookieName);
 
             if (basketCookie) {
-                this.$cookies.remove(`je-mw-basket-${this.basket.id}`);
+                this.$cookies.remove(cookieName);
             }
 
             window.location.assign(this.restaurantMenuPageUrl);
