@@ -145,7 +145,9 @@
             </card>
         </div>
 
-        <error-page v-else-if="shouldShowErrorPage" />
+        <error-page
+            v-else-if="errorFormType"
+            :error-form-type="errorFormType" />
     </div>
 </template>
 
@@ -194,7 +196,11 @@ import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper'
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
-    PlaceOrderError
+    PlaceOrderError,
+    GetCheckoutError,
+    AccessForbiddenError,
+    AvailableFulfilmentGetError,
+    GetBasketError
 } = exceptions;
 
 export default {
@@ -306,9 +312,9 @@ export default {
     data () {
         return {
             tenantConfigs,
-            hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
-            isLoading: false
+            isLoading: false,
+            errorFormType: null
         };
     },
 
@@ -392,11 +398,7 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.isLoading && this.hasCheckoutLoadedSuccessfully;
-        },
-
-        shouldShowErrorPage () {
-            return !this.hasCheckoutLoadedSuccessfully;
+            return !this.isLoading && !this.errorFormType;
         },
 
         eventData () {
@@ -685,15 +687,11 @@ export default {
 
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
-                this.$emit(EventNames.CheckoutGetFailure, error);
-                this.hasCheckoutLoadedSuccessfully = false;
-
-                this.logInvoker({
-                    message: 'Get Checkout Failure',
-                    data: this.eventData,
-                    logMethod: this.$logger.logError,
-                    error
-                });
+                if (error.response && error.response.status === 403) {
+                    this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
+                } else {
+                    this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
+                }
             }
         },
 
@@ -712,15 +710,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
             } catch (error) {
-                this.$emit(EventNames.CheckoutBasketGetFailure, error);
-                this.hasCheckoutLoadedSuccessfully = false;
-
-                this.logInvoker({
-                    message: 'Get Checkout Basket Failure',
-                    data: this.eventData,
-                    logMethod: this.$logger.logError,
-                    error
-                });
+                this.handleErrorState(new GetBasketError(error.message, error.response.status));
             }
         },
 
@@ -737,15 +727,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
             } catch (error) {
-                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, error);
-                this.hasCheckoutLoadedSuccessfully = false;
-
-                this.logInvoker({
-                    message: 'Get Checkout Available Fulfilment Times Failure',
-                    data: this.eventData,
-                    logMethod: this.$logger.logError,
-                    error
-                });
+                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
             }
         },
 
@@ -811,6 +793,7 @@ export default {
             const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
             const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
+            const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
             this.$emit(eventToEmit, { ...this.eventData, error });
 
@@ -821,15 +804,18 @@ export default {
                 error
             });
 
-            this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
 
-            if (!error.shouldShowInDialog) {
+            this.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
+
+            if (!error.shouldShowInDialog && !error.errorFormType) {
                 this.updateMessage(message);
 
                 this.$nextTick(() => {
                     this.scrollToElement(this.$refs.errorMessage.$el);
                 });
             }
+
+            this.errorFormType = error.errorFormType;
         },
 
         /**
