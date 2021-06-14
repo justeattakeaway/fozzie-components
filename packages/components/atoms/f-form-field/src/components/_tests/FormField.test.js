@@ -74,7 +74,24 @@ describe('FormField', () => {
                 expect(formInput.attributes('type')).toBe(definedType);
             });
 
-            it('should include the `min` and `max` attributes if inputType=`number`', () => {
+            it('should include the `min` and `max` attributes if provided for inputType=`number`', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'number',
+                    minNumber: -10,
+                    maxNumber: 10
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('min')).toBe('-10');
+                expect(formInput.attributes('max')).toBe('10');
+            });
+
+            it('should not include the `min` and `max` attributes if not provided for inputType=`number`', () => {
                 // Arrange
                 const propsData = {
                     inputType: 'number'
@@ -85,13 +102,29 @@ describe('FormField', () => {
                 const formInput = wrapper.find('input');
 
                 // Assert
-                expect(formInput.attributes('min')).toBeDefined();
-                expect(formInput.attributes('max')).toBeDefined();
+                expect(formInput.attributes('min')).toBeUndefined();
+                expect(formInput.attributes('max')).toBeUndefined();
             });
 
-            it('should not include the `min` and `max` attributes for default inputType', () => {
+            it('should not include the `min` and `max` attributes for default inputType if not provided', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(FormField);
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('min')).toBeUndefined();
+                expect(formInput.attributes('max')).toBeUndefined();
+            });
+
+            it('should not include the `min` and `max` attributes for default inputType even if provided', () => {
+                // Arrange
+                const propsData = {
+                    minNumber: -10,
+                    maxNumber: 10
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
                 const formInput = wrapper.find('input');
 
                 // Assert
