@@ -266,7 +266,7 @@ describe('Button', () => {
             });
 
             describe('when `href` prop is not an empty string :: ', () => {
-                it('should not add `type` attribute', () => {
+                it('should not add `type` or `action-type` attribute', () => {
                     // Arrange
                     const propsData = {
                         href: link,
@@ -278,6 +278,7 @@ describe('Button', () => {
 
                     // Assert
                     expect(wrapper.attributes('type')).toBeUndefined();
+                    expect(wrapper.attributes('action-type')).toBeUndefined();
                 });
             });
 
@@ -302,7 +303,7 @@ describe('Button', () => {
             });
 
             describe('when `to` prop is not an empty string :: ', () => {
-                it('should not add `type` attribute', () => {
+                it('should not add `type` or `action-type` attribute', () => {
                     // Arrange
                     const propsData = {
                         to: routerLink,
@@ -317,6 +318,7 @@ describe('Button', () => {
 
                     // Assert
                     expect(wrapper.attributes('type')).toBeUndefined();
+                    expect(wrapper.attributes('action-type')).toBeUndefined();
                 });
             });
         });
