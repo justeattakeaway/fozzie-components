@@ -617,7 +617,7 @@ export default {
                     customerNotes: {
                         noteForRestaurant: this.userNote
                     },
-                    referralState: 'ReferredByWeb'
+                    referralState: this.getReferralState()
                 };
 
                 await this.placeOrder({
@@ -917,6 +917,15 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, this.spinnerTimeout);
+        },
+
+        getReferralState () {
+            const cookieName = `je-rw-menu-referral-state-${this.restaurant.id}`;
+            const referralCookie = this.$cookies.get(cookieName);
+
+            return referralCookie && referralCookie.menuReferralState
+                ? 'ReferredByWeb'
+                : 'None';
         }
     },
 
