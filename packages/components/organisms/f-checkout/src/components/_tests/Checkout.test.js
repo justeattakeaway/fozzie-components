@@ -974,10 +974,7 @@ describe('Checkout', () => {
                     }),
                     i18n,
                     localVue,
-                    propsData,
-                    mocks: {
-                        $style
-                    }
+                    propsData
                 });
 
                 // Assert
