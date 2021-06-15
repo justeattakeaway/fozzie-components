@@ -150,7 +150,7 @@ describe('Button', () => {
         describe('componentType :: ', () => {
             let propsData;
 
-            describe('when `href` and `to` prop is empty :: ', () => {
+            describe('when `href` and `to` props are empty :: ', () => {
                 beforeEach(() => {
                     propsData = {
                         href: null,
