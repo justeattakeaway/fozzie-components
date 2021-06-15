@@ -8,19 +8,19 @@ import {
     MUTATION_EMIT_SEARCH_START
 } from '../types';
 import { pushToDataLayer, setGtmEventCookie } from '../../utils/helpers';
-import { DEFAULT_CATEGORY, DEFAULT_ACTION, offersHeaderSearchModule } from '../offersHeaderSearch.module';
+import { DEFAULT_CATEGORY, DEFAULT_ACTION, offersSearchModule } from '../offersSearch.module';
 
 jest.mock('../../utils/helpers');
 
-const { actions, mutations } = offersHeaderSearchModule;
+const { actions, mutations } = offersSearchModule;
 
 const defaultSate = {
     startSearchEmitted: false
 };
 
-let state = offersHeaderSearchModule.state();
+let state = offersSearchModule.state();
 
-describe('offersHeaderSearchModule', () => {
+describe('offersSearchModule', () => {
     it('should create default state when initialized', () => {
         // Act
         expect(state).toEqual(defaultSate);
