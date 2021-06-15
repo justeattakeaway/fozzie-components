@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.6.1
+------------------------------
+*June 15, 2021*
+
+### Fixed
+- Small tweak to class-naming of `o-btn-text--flex` > `o-btn-text` so it matches our naming scheme.
+
+
 v1.6.0
 ------------------------------
 *June 7, 2021*
