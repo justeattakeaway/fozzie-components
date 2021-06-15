@@ -8,7 +8,8 @@ const messages = {
     textLine3: 'Per i dettagli sui cookie e sulle tecnologie che utilizziamo puoi leggere ',
     textLine4: '. L\'utilizzo di questo banner imposterá; un cookie sul tuo dispositivo per ricordare le tue preferenze.',
     cookiePolicyLinkText: 'la nostra informativa sui cookie',
-    cookiePolicyLinkUrl: 'https://www.justeat.it/informazioni/politica-dei-cookie'
+    cookiePolicyLinkUrl: 'https://www.justeat.it/informazioni/politica-dei-cookie',
+    reopenCookieBannerLinkText:  'Controlla le mie preferenze sui cookie'
 };
 
 const displayLegacy = false;
