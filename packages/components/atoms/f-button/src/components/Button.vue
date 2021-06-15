@@ -18,7 +18,8 @@
     >
         <span
             v-if="isLoading"
-            :class="$style['c-spinner']" />
+            :class="$style['c-spinner']"
+            :data-test-id="`${componentType}-spinner`" />
 
         <span
             :class="[
@@ -238,6 +239,7 @@ $btn-icon-sizeXSmall-iconSize       : 18px;
 
 .o-btn-text--flex {
     display: flex;
+    justify-content: center;
 }
 
 /**

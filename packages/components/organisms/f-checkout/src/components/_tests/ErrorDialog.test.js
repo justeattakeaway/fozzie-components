@@ -90,7 +90,7 @@ describe('ErrorDialog', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.restaurantMenuPageUrl).toEqual(`restaurant-${restaurant.seoName}/menu`);
+                expect(wrapper.vm.restaurantMenuPageUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
             });
         });
 
@@ -177,7 +177,7 @@ describe('ErrorDialog', () => {
                 wrapper.vm.closeErrorDialog();
 
                 // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(`restaurant-${restaurant.seoName}/menu`);
+                expect(windowLocationSpy).toHaveBeenCalledWith(`restaurants-${restaurant.seoName}/menu`);
             });
 
             it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {

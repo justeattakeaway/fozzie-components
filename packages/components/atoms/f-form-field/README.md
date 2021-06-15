@@ -77,9 +77,9 @@ The props that can be defined are as follows (if any):
 | `hasError` | `Boolean` | `false` | When `true` border colour changes to red. |
 | `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. |
 | `isGrouped` | `Boolean` | `false` | When `true` will remove margin between all grouped form fields. |
-| `minNumber` | `Number` | 0 | Sets the value of the `min` property when `inputType` is `number` |
-| `maxNumber` | `Number` | 0 | Sets the value of the `max` property when `inputType` is `number` |
-| `hasInputDescription` | `Boolean` | `false` | When `true` will add the ability to insert extra html element under form label to the component via slot. | 
+| `minNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `min` property when `inputType` is `number` |
+| `maxNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `max` property when `inputType` is `number` |
+| `hasInputDescription` | `Boolean` | `false` | When `true` will add the ability to insert extra html element under form label to the component via slot. |
 
 ### Events
 

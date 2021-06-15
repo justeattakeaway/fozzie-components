@@ -1,5 +1,6 @@
 <template>
     <card-case
+        v-if="stampCardsPercentage"
         :card="card"
         :data-test-id="testId"
         :class="[$style['c-stampCard1']]">
@@ -81,17 +82,22 @@ import format from 'date-fns/format';
 import lightFormat from 'date-fns/lightFormat';
 
 import CardCase from './CardCase.vue';
-import EmptyStamp from './images/stamp-empty-15.svg';
-import FullStamp from './images/stamp-full-15.svg';
 
 import makeTextAccessible from '../MakeTextAccessible';
+
+const PERMITTED_STAMPCARDS_PERCENTAGES = [
+    '10',
+    '15'
+];
 
 export default {
     name: 'StampCard1',
 
     components: {
-        EmptyStamp,
-        FullStamp,
+        EmptyStamp15: () => import('./images/stamp-empty-15.svg'),
+        FullStamp15: () => import('./images/stamp-full-15.svg'),
+        EmptyStamp10: () => import('./images/stamp-empty-10.svg'),
+        FullStamp10: () => import('./images/stamp-full-10.svg'),
         CardCase
     },
 
@@ -171,15 +177,29 @@ export default {
             for (let i = 0; i < this.card.totalRequiredStamps; i++) {
                 const full = (i < this.card.earnedStamps);
                 stamps.push(full ? {
-                    stampImage: 'FullStamp',
+                    stampImage: `FullStamp${this.stampCardsPercentage}`,
                     classSuffix: 'Full'
                 } : {
-                    stampImage: 'EmptyStamp',
+                    stampImage: `EmptyStamp${this.stampCardsPercentage}`,
                     classSuffix: 'Empty'
                 });
             }
 
             return stamps;
+        },
+
+        /**
+         */
+        stampCardsPercentage () {
+            if (PERMITTED_STAMPCARDS_PERCENTAGES.includes(this.card.discountPercentage)) {
+                return this.card.discountPercentage;
+            }
+
+            if (PERMITTED_STAMPCARDS_PERCENTAGES.includes(this.copy.stampCardDefaultPercentage)) {
+                return this.copy.stampCardDefaultPercentage;
+            }
+
+            return null;
         },
 
         /**
@@ -358,15 +378,9 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     width: 100%;
     left: 0;
     top: 0;
-}
 
-.c-stampCard1-stampEmpty { /* Required to handle positioning of `empty` SVG relative to the 'full' graphic */
-    margin-top: 5px;
-    height: 89%;
-    width: 89%;
-
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
-        margin-top: 4.5px;
+    &#{&} { // to increase specificity level to override svg:not(:root) rule
+        overflow: visible;
     }
 }
 </style>
