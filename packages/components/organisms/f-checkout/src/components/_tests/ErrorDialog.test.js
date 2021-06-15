@@ -13,16 +13,21 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 describe('ErrorDialog', () => {
-    const propsData = {};
     const restaurant = {
         seoName: 'checkout-kofte-farringdon',
         id: '22222'
     };
+
+    const propsData = {
+        redirectUrl: `restaurants-${restaurant.seoName}/menu`
+    };
+
     const defaultMessage = {
         shouldRedirectToMenu: true,
         shouldShowInDialog: true,
         code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
     };
+
     const duplicateOrderMessage = {
         code: 'DuplicateOrder'
     };
@@ -73,24 +78,6 @@ describe('ErrorDialog', () => {
 
                 // Assert
                 expect(wrapper.vm.errorCode).toEqual(null);
-            });
-        });
-
-        describe('restaurantMenuPageUrl ::', () => {
-            it('should return the URL to redirect back to the restaurant menu', () => {
-                // Arrange && Act
-                const wrapper = shallowMount(ErrorDialog, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        restaurant
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.restaurantMenuPageUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
             });
         });
 
@@ -177,7 +164,7 @@ describe('ErrorDialog', () => {
                 wrapper.vm.closeErrorDialog();
 
                 // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(`restaurants-${restaurant.seoName}/menu`);
+                expect(windowLocationSpy).toHaveBeenCalledWith(wrapper.vm.redirectUrl);
             });
 
             it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {
