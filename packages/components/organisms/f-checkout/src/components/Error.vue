@@ -74,13 +74,11 @@ export default {
     },
 
     mounted () {
-        if (this.$logger) {
-            this.logInvoker({
-                message: 'Consumer Checkout Error Page',
-                data: {},
-                logMethod: this.$logger.logWarn
-            });
-        }
+        this.logInvoker({
+            message: 'Consumer Checkout Error Page',
+            data: {},
+            logMethod: this.$logger.logWarn
+        });
     },
 
     methods: {

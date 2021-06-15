@@ -320,6 +320,9 @@ describe('Checkout', () => {
                     store: createStore(),
                     localVue,
                     propsData,
+                    mocks: {
+                        $logger
+                    },
                     data () {
                         return {
                             isLoading: false,
