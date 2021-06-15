@@ -80,7 +80,7 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
-        checkout.withQuery('&knob-Patch Checkout Errors', 'ISSUES');
+        checkout.withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act

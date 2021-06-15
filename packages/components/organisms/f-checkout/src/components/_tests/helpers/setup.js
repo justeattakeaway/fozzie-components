@@ -133,6 +133,11 @@ const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5i
 const mockAuthTokenNoNumbers = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.yLXN84pcRRn9O_mdPHkVj18TgrH2i9Q1_V9020B2h7s';
 const mockAuthTokenNoMobileNumber = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsInBob25lX251bWJlciI6IjAxMjM0NTY3ODkiLCJpYXQiOjE2MTU0Njk1MTZ9.tZaClhRU8JHBoGU3LWwDPNiGKx0ecMQFtXxwqpPbDhQ';
 
+const $cookies = {
+    get: jest.fn(),
+    remove: jest.fn()
+};
+
 export {
     fulfilmentTimes,
     defaultCheckoutState,
@@ -141,6 +146,7 @@ export {
     i18n,
     createStore,
     $logger,
+    $cookies,
     mockAuthToken,
     mockAuthTokenNoNumbers,
     mockAuthTokenNoMobileNumber
