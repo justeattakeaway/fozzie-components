@@ -10,9 +10,10 @@ v0.136.0
 
 ### Added
 
-- Button for error pages.
-- Tests to cover button changes.
-- Added log warn when error component is displayed.
+- Button for error pages
+- Tests to cover button changes
+- Added log warn when error component is displayed
+- Visual regression tests for error pages
 - `AdditionalItemsRequired` issue for storybook story
 
 ### Changed

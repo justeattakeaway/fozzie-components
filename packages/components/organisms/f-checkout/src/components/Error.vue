@@ -41,7 +41,7 @@ import FButton from '@justeat/f-button';
 import SadBagIconDecorator from '../assets/images/jet-sad-bag.svg';
 import '@justeat/f-button/dist/f-button.css';
 import '@justeat/f-card/dist/f-card.css';
-import { 
+import {
     VUEX_CHECKOUT_MODULE,
     CHEKOUT_ERROR_FORM_TYPE
 } from '../constants';
