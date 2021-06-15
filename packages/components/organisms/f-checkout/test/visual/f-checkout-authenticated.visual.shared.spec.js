@@ -75,7 +75,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Get Checkout Errors', 'additional-items-required')
+                .withQuery('&knob-Patch Checkout Errors', 'additional-items-required')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
@@ -245,7 +245,7 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Get Checkout Errors', 'additional-items-required')
+                .withQuery('&knob-Patch Checkout Errors', 'additional-items-required')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
