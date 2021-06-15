@@ -1,4 +1,5 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
+
 import StampCard from '../StampCard1.vue';
 import tenantConfigs from '../../../tenants';
 
@@ -13,8 +14,8 @@ const card = {
     description: ['subStatusText1', 'subStatusText2'],
     image: '/path/to/image',
     url: 'https://foo.com/bar',
-    discountPercentage: 15,
-    earnedStamps: 0,
+    discountPercentage: '15',
+    earnedStamps: 2,
     expiryDate: '2021-02-28T23:59:59',
     expiryLine: 'Discount expires',
     isReadyToClaim: 'false',
@@ -23,11 +24,11 @@ const card = {
 
 const localeConfig = tenantConfigs['en-GB'];
 
-const provide = {
-    copy: localeConfig
-};
-
-function getWrapper (cardDetails = {}, testId = 'stampCard1') {
+function getWrapper (
+    cardDetails = {},
+    testId = 'stampCard1',
+    copy = {}
+) {
     return shallowMount(StampCard, {
         localVue,
         propsData: {
@@ -40,7 +41,19 @@ function getWrapper (cardDetails = {}, testId = 'stampCard1') {
         directives: {
             makeTextAccessible: jest.fn()
         },
-        provide
+        stubs: [
+            'CardCase',
+            'EmptyStamp15',
+            'EmptyStamp10',
+            'FullStamp15',
+            'FullStamp10'
+        ],
+        provide: {
+            copy: {
+                ...localeConfig,
+                ...copy
+            }
+        }
     });
 }
 
@@ -74,31 +87,97 @@ describe('contentCards › StampCard1', () => {
     });
 
     describe('when card is in progress', () => {
-        let wrapper;
+        describe('', () => {
+            let wrapper;
 
-        beforeEach(() => {
+            beforeEach(() => {
+                // Arrange & Act
+                wrapper = getWrapper();
+            });
+
+            it('should display the stamps section', () => {
+                // Assert
+                expect(wrapper.find('[data-test-id="stampCard1--stamps"]').exists()).toBe(true);
+            });
+
+            it('should NOT display the redemptionDetails section', () => {
+                // Assert
+                expect(wrapper.find('[data-test-id="stampCard1--redemptionDetails"]').exists()).toBe(false);
+            });
+
+            it('should display as many filled stamps as have been earned', () => {
+                // Assert
+                expect(wrapper.findAll('[data-test-id="stampCard1--stampFull"]').length).toBe(card.earnedStamps);
+            });
+
+            it('should display as many empty stamps as 5 minus the number that have been earned', () => {
+                // Assert
+                expect(wrapper.findAll('[data-test-id="stampCard1--stampEmpty"]').length).toBe(5 - card.earnedStamps);
+            });
+        });
+
+        it.each([
+            ['15', 'EmptyStamp15'],
+            ['15', 'FullStamp15'],
+            ['10', 'EmptyStamp10'],
+            ['10', 'FullStamp10']
+        ])('should display the correct stamp image when discount percentage is %s', (discountPercentage, imageComponent) => {
             // Arrange & Act
-            wrapper = getWrapper();
+            const wrapper = getWrapper({
+                discountPercentage
+            });
+
+            // Assert
+            const stubbedComponent = wrapper.vm.$options.components[imageComponent];
+            expect(wrapper.findComponent(stubbedComponent).exists()).toBeTruthy();
         });
 
-        it('should display the stamps section', () => {
+        it.each([
+            ['15', 'EmptyStamp10'],
+            ['15', 'FullStamp10'],
+            ['10', 'EmptyStamp15'],
+            ['10', 'FullStamp15']
+        ])('should NOT display the incorrect correct stamp image when discount percentage is %s', (discountPercentage, imageComponent) => {
+            // Arrange & Act
+            const wrapper = getWrapper({
+                discountPercentage
+            });
+
             // Assert
-            expect(wrapper.find('[data-test-id="stampCard1--stamps"]').exists()).toBe(true);
+            const stubbedComponent = wrapper.vm.$options.components[imageComponent];
+            expect(wrapper.findComponent(stubbedComponent).exists()).toBeFalsy();
         });
 
-        it('should NOT display the redemptionDetails section', () => {
+        it.each([
+            ['27'],
+            [null],
+            [undefined]
+        ])('should fall back on the percentage defined in locale data when incorrect discount percentage (%p) is given', discountPercentage => {
+            // Arrange & Act
+            const wrapper = getWrapper({
+                discountPercentage
+            });
+
             // Assert
-            expect(wrapper.find('[data-test-id="stampCard1--redemptionDetails"]').exists()).toBe(false);
+            const stubbedComponent = wrapper.vm.$options.components.EmptyStamp10;
+            expect(wrapper.findComponent(stubbedComponent).exists()).toBeTruthy();
         });
 
-        it('should display as many filled stamps as have been earned', () => {
-            // Assert
-            expect(wrapper.findAll('[data-test-id="stampCard1--stampFull"]').length).toBe(card.earnedStamps);
-        });
+        it.each([
+            ['27'],
+            [null],
+            [undefined]
+        ])('should hide the card when fallback discount percentage (%p) is incorrect or undefined for the locale', stampCardDefaultPercentage => {
+            // Arrange & Act
+            const wrapper = getWrapper({
+                discountPercentage: undefined
+            }, 'testId', {
+                stampCardDefaultPercentage
+            });
 
-        it('should display as many empty stamps as 5 minus the number that have been earned', () => {
             // Assert
-            expect(wrapper.findAll('[data-test-id="stampCard1--stampEmpty"]').length).toBe(5 - card.earnedStamps);
+            const stubbedCardCaseComponent = wrapper.vm.$options.components.CardCase;
+            expect(wrapper.findComponent(stubbedCardCaseComponent).exists()).toBeFalsy();
         });
     });
 
