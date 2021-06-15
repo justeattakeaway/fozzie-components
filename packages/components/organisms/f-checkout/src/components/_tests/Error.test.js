@@ -2,29 +2,19 @@ import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Error from '../Error.vue';
-import { i18n, $cookies, $logger } from './helpers/setup';
-import { CHEKOUT_ERROR_FORM_TYPE, VUEX_CHECKOUT_MODULE } from '../../constants';
+import {
+    i18n,
+    $cookies,
+    $logger,
+    createStore,
+    defaultCheckoutState
+} from './helpers/setup';
+import { CHEKOUT_ERROR_FORM_TYPE } from '../../constants';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
-
-const mockState = {
-    basket: {
-        id: 'MGFkMzgwZjgtYjY3Yi00Nz-v1',
-        total: 0
-    }
-};
-
-const createStore = (state = mockState) => new Vuex.Store({
-    modules: {
-        [VUEX_CHECKOUT_MODULE]: {
-            namespaced: true,
-            state
-        }
-    }
-});
 
 describe('Error', () => {
     let wrapper;
@@ -35,7 +25,13 @@ describe('Error', () => {
         wrapper = shallowMount(Error, {
             i18n,
             localVue,
-            store: createStore(),
+            store: createStore({
+                ...defaultCheckoutState,
+                basket: {
+                    id: 'MGFkMzgwZjgtYjY3Yi00Nz-v1',
+                    total: 0
+                }
+            }),
             propsData: {
                 errorFormType: CHEKOUT_ERROR_FORM_TYPE.default,
                 restaurantMenuPageUrl: 'menu-jason-1'

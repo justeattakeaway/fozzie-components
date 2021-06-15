@@ -11,7 +11,7 @@ import getBasketCollection from './get-basket-collection.json';
 import getBasketDineIn from './get-basket-dinein.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
-import updateCheckoutAdditionalItemsRequared from './update-checkout-additional-items-requared.json';
+import updateCheckoutAdditionalItemsRequared from './update-checkout-additional-items-required.json';
 import checkoutServerError from './checkout-server-error.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
@@ -58,7 +58,7 @@ export default {
             case '/update-checkout-restaurant-not-taking-orders.json':
                 mock.onPatch(path).reply(200, updateCheckoutRestaurantNotTakingOrders);
                 break;
-            case '/update-checkout-additional-items-requared.json':
+            case '/update-checkout-additional-items-required.json':
                 mock.onPatch(path).reply(200, updateCheckoutAdditionalItemsRequared);
                 break;
             case '/update-checkout-server-error.json':
