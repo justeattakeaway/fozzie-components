@@ -99,7 +99,7 @@ export default {
          * Passes `actionType` prop to action button if no `href` attribute is applied to the component
          */
         buttonActionType () {
-            return (!this.$attrs.href || !this.$attrs.to) ? this.actionType : null;
+            return (!this.$attrs.href && !this.$attrs.to) ? this.actionType : null;
         },
         /**
          * Gets the correct value for the aria-live attribute depending on whether the button is loading or not.

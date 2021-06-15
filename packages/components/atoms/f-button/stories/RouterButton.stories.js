@@ -12,19 +12,13 @@ import FButton from '../src/components/Button.vue';
 
 Vue.use(Router);
 
-const Foo = { template: '<div>foo</div>' };
-const Bar = { template: '<div>bar</div>' };
+const exampleComponent = { template: '<div>Example Route</div>' };
 
 const routes = [
     {
-        path: '/foo',
-        component: Foo,
-        name: 'foo'
-    },
-    {
-        path: '/bar',
-        component: Bar,
-        name: 'bar'
+        path: '/exampleRoute',
+        component: exampleComponent,
+        name: 'exampleRoute'
     }
 ];
 
@@ -60,7 +54,7 @@ export const RouterLinkComponent = () => ({
         },
 
         to: {
-            default: text('to', '/foo')
+            default: text('to', '/exampleRoute')
         }
     },
 
