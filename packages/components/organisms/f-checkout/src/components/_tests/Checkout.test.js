@@ -3232,8 +3232,6 @@ describe('Checkout', () => {
 
             it('should retrieve the referral state from the cookie', () => {
                 // Arrange
-                const getSpy = jest.fn().mockImplementation(() => ({ menuReferralState: 1 }));
-
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({ ...defaultCheckoutState, restaurant: { id: '99999' } }),
                     i18n,
@@ -3241,11 +3239,11 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $logger,
-                        $cookies: {
-                            get: getSpy
-                        }
+                        $cookies
                     }
                 });
+
+                const getSpy = jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 1 });
 
                 // Act
                 wrapper.vm.getReferralState();
@@ -3258,8 +3256,6 @@ describe('Checkout', () => {
                 describe('AND the `menuReferralState` is `1`', () => {
                     it('should return "ReferredByWeb"', () => {
                         // Arrange
-                        const getSpy = jest.fn().mockImplementation(() => ({ menuReferralState: 1 }));
-
                         const wrapper = shallowMount(VueCheckout, {
                             store: createStore(),
                             i18n,
@@ -3267,11 +3263,11 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $logger,
-                                $cookies: {
-                                    get: getSpy
-                                }
+                                $cookies
                             }
                         });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 1 });
 
                         // Act
                         const result = wrapper.vm.getReferralState();
@@ -3284,8 +3280,6 @@ describe('Checkout', () => {
                 describe('AND the `menuReferralState` is not `1`', () => {
                     it('should return "None"', () => {
                         // Arrange
-                        const getSpy = jest.fn().mockImplementation(() => ({ menuReferralState: 0 }));
-
                         const wrapper = shallowMount(VueCheckout, {
                             store: createStore(),
                             i18n,
@@ -3293,11 +3287,11 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $logger,
-                                $cookies: {
-                                    get: getSpy
-                                }
+                                $cookies
                             }
                         });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 0 });
 
                         // Act
                         const result = wrapper.vm.getReferralState();
@@ -3310,8 +3304,6 @@ describe('Checkout', () => {
                 describe('AND the `menuReferralState` does not exist', () => {
                     it('should return "None"', () => {
                         // Arrange
-                        const getSpy = jest.fn().mockImplementation(() => {});
-
                         const wrapper = shallowMount(VueCheckout, {
                             store: createStore(),
                             i18n,
@@ -3319,11 +3311,11 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $logger,
-                                $cookies: {
-                                    get: getSpy
-                                }
+                                $cookies
                             }
                         });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({});
 
                         // Act
                         const result = wrapper.vm.getReferralState();
@@ -3337,8 +3329,6 @@ describe('Checkout', () => {
             describe('when the cookie does not exist', () => {
                 it('should return "None"', () => {
                     // Arrange
-                    const getSpy = jest.fn().mockImplementation(() => null);
-
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore(),
                         i18n,
@@ -3346,11 +3336,11 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $logger,
-                            $cookies: {
-                                get: getSpy
-                            }
+                            $cookies
                         }
                     });
+
+                    jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue(null);
 
                     // Act
                     const result = wrapper.vm.getReferralState();
