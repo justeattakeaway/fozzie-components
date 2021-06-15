@@ -70,13 +70,13 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Restaurant not taking orders" Error Modal', 'shared');
     });
 
-    it('should display the "Additional Items Requared" modal', () => {
+    it('should display the "Additional Items Required" modal', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Get Checkout Errors', 'additional-items-requared')
+                .withQuery('&knob-Get Checkout Errors', 'additional-items-required')
                 .withQuery('&knob-Place Order Errors', 'SERVER');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
@@ -86,7 +86,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Additional Items Requared" Error Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Additional Items Required" Error Modal', 'shared');
     });
 
     it('should display the "Get Checkout" error page', () => {

@@ -918,7 +918,7 @@ describe('Checkout', () => {
                     const dialog = {
                         name: 'error-dialog',
                         props: {
-                            'restaurant-menu-page-url': wrapper.vm.restaurantMenuPageUrl
+                            'redirect-url': wrapper.vm.redirectUrl
                         }
                     };
 
@@ -967,7 +967,7 @@ describe('Checkout', () => {
             });
         });
 
-        describe('restaurantMenuPageUrl ::', () => {
+        describe('redirectUrl ::', () => {
             it('should return the URL to redirect back to the restaurant menu', () => {
                 // Arrange && Act
                 const wrapper = shallowMount(VueCheckout, {
@@ -981,7 +981,7 @@ describe('Checkout', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.restaurantMenuPageUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
+                expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
             });
         });
     });

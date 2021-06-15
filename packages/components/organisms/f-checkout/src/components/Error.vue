@@ -61,7 +61,7 @@ export default {
             type: String,
             required: true
         },
-        restaurantMenuPageUrl: {
+        redirectUrl: {
             type: String,
             default: ''
         }
@@ -90,7 +90,7 @@ export default {
                 this.$cookies.remove(cookieName);
             }
 
-            window.location.assign(this.restaurantMenuPageUrl);
+            window.location.assign(this.redirectUrl);
         }
     }
 };
@@ -110,20 +110,20 @@ export default {
             padding-bottom: spacing(x2);
         }
     }
+}
 
-    .c-checkout-error-heading {
-        @include font-size(heading-s);
-        margin-top: spacing(x8);
-        margin-bottom: 0;
-    }
+.c-checkout-error-heading {
+    @include font-size(heading-s);
+    margin-top: spacing(x8);
+    margin-bottom: 0;
+}
 
-    .c-checkout-error-description {
-        @include font-size(body-l);
-        margin-top: spacing();
-    }
+.c-checkout-error-description {
+    @include font-size(body-l);
+    margin-top: spacing();
+}
 
-    .c-checkout-error-button {
-        margin: spacing(x4) 0 spacing(x0.5);
-    }
+.c-checkout-error-button {
+    margin: spacing(x4) 0 spacing(x0.5);
 }
 </style>

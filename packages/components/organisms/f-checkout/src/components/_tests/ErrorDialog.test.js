@@ -19,7 +19,7 @@ describe('ErrorDialog', () => {
     };
 
     const propsData = {
-        restaurantMenuPageUrl: `restaurants-${restaurant.seoName}/menu`
+        redirectUrl: `restaurants-${restaurant.seoName}/menu`
     };
 
     const defaultMessage = {
@@ -164,7 +164,7 @@ describe('ErrorDialog', () => {
                 wrapper.vm.closeErrorDialog();
 
                 // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(wrapper.vm.restaurantMenuPageUrl);
+                expect(windowLocationSpy).toHaveBeenCalledWith(wrapper.vm.redirectUrl);
             });
 
             it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {

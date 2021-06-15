@@ -34,7 +34,7 @@ describe('Error', () => {
             }),
             propsData: {
                 errorFormType: CHEKOUT_ERROR_FORM_TYPE.default,
-                restaurantMenuPageUrl: 'menu-jason-1'
+                redirectUrl: 'menu-jason-1'
             },
             mocks: {
                 $cookies,

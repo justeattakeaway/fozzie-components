@@ -54,7 +54,7 @@ export default {
     },
 
     props: {
-        restaurantMenuPageUrl: {
+        redirectUrl: {
             type: String,
             default: ''
         }
@@ -118,7 +118,7 @@ export default {
             const modalContext = this.getModalContext();
 
             if (this.message && this.message.shouldRedirectToMenu) {
-                window.location.assign(this.restaurantMenuPageUrl);
+                window.location.assign(this.redirectUrl);
             }
 
             this.updateMessage();

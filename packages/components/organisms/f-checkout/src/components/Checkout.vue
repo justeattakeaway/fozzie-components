@@ -135,7 +135,7 @@
         <error-page
             v-else-if="errorFormType"
             :error-form-type="errorFormType"
-            :restaurant-menu-page-url="restaurantMenuPageUrl" />
+            :redirect-url="redirectUrl" />
     </div>
 </template>
 
@@ -406,7 +406,7 @@ export default {
             return {
                 name: 'error-dialog',
                 props: {
-                    'restaurant-menu-page-url': this.restaurantMenuPageUrl
+                    'redirect-url': this.redirectUrl
                 }
             };
         },
@@ -438,7 +438,7 @@ export default {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         },
 
-        restaurantMenuPageUrl () {
+        redirectUrl () {
             return `restaurants-${this.restaurant.seoName}/menu`;
         }
     },
