@@ -215,7 +215,10 @@ describe('Button', () => {
 
                 it('should return `componentType` of `router-link-button`', () => {
                     // Act
-                    const wrapper = shallowMount(FButton, { propsData });
+                    const wrapper = shallowMount(FButton, {
+                        propsData,
+                        stubs: ['router-link']
+                    });
 
                     // Assert
                     expect(wrapper.vm.componentType).toEqual('router-link-button');
@@ -223,7 +226,10 @@ describe('Button', () => {
 
                 it('should render `Router Link` component', () => {
                     // Act
-                    const wrapper = mount(FButton, { propsData });
+                    const wrapper = mount(FButton, {
+                        propsData,
+                        stubs: ['router-link']
+                    });
 
                     // Assert
                     expect(wrapper.find('[data-test-id="router-link-button-component"]').exists()).toBeTruthy();
@@ -231,7 +237,10 @@ describe('Button', () => {
 
                 it('should apply `to` attribute', () => {
                     // Act
-                    const wrapper = mount(FButton, { propsData });
+                    const wrapper = mount(FButton, {
+                        propsData,
+                        stubs: ['router-link']
+                    });
 
                     // Assert
                     expect(wrapper.attributes('to')).toEqual(routerLink);
@@ -282,7 +291,10 @@ describe('Button', () => {
                     };
 
                     // Act
-                    const wrapper = mount(FButton, { propsData });
+                    const wrapper = mount(FButton, {
+                        propsData,
+                        stubs: ['router-link']
+                    });
 
                     // Assert
                     expect(wrapper.attributes('type')).toEqual(actionType);
@@ -298,7 +310,10 @@ describe('Button', () => {
                     };
 
                     // Act
-                    const wrapper = mount(FButton, { propsData });
+                    const wrapper = mount(FButton, {
+                        propsData,
+                        stubs: ['router-link']
+                    });
 
                     // Assert
                     expect(wrapper.attributes('type')).toBeUndefined();
