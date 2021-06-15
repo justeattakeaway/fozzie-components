@@ -48,7 +48,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Something went wrong" Error', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Something went wrong" Error', 'shared');
     });
 
     it('should display the "Restaurant not taking orders" modal', () => {
@@ -57,7 +57,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Patch Checkout Errors', 'ISSUES')
+                .withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders')
                 .withQuery('&knob-Place Order Errors', 'SERVER');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
@@ -67,7 +67,62 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Restaurant not taking orders" Error Modal', 'shared');
+    });
+
+    it('should display the "Additional Items Requared" modal', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Get Checkout Errors', 'additional-items-requared')
+                .withQuery('&knob-Place Order Errors', 'SERVER');
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Additional Items Requared" Error Modal', 'shared');
+    });
+
+    it('should display the "Get Checkout" error page', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Get Checkout Errors', '500')
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - ""Get Checkout" Error Page', 'shared');
+    });
+
+    it('should display the "Get Checkout 403" error page', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Get Checkout Errors', '403')
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'shared');
     });
 
     it('should display the illegal mobile number error message', () => {
