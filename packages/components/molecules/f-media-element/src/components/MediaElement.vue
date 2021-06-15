@@ -18,7 +18,7 @@
             <p :class="$style['c-mediaElement-text']">
                 {{ text }}
             </p>
-            <slot />
+            <slot></slot>
         </div>
         <div
             :class="[

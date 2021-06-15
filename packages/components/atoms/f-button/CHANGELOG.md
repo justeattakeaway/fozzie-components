@@ -29,6 +29,7 @@ v1.5.0
 ### Added
 - `isLoading` prop to allow the button to be in a loading state.
 
+
 v1.4.0
 ------------------------------
 *May 25, 2021*
