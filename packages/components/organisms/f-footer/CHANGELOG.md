@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.26.0
 ------------------------------
-*June 10, 2021*
+*June 15, 2021*
 
 ### Added
 - Added Percy Visual Regression tests
