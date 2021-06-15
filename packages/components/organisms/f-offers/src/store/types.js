@@ -6,3 +6,5 @@ export const ACTION_VALID_SAVED_ADDRESS_SEARCH = 'validSavedAddressSearch';
 export const ACTION_VALID_SEARCH = 'validSearch';
 
 export const MUTATION_EMIT_SEARCH_START = 'searchbox-focus';
+
+export const VUEX_MODULE_NAMESPACE_OFFERS_SEARCH = 'offersSearch';

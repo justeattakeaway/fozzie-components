@@ -82,10 +82,6 @@ const message = {
     shouldShowInDialog: true
 };
 
-const dialog = {
-    name: 'error-dialog'
-};
-
 const alertCode = 'Something went wrong, please try again later';
 
 const alert = {
@@ -127,6 +123,11 @@ describe('Checkout', () => {
         applicationName,
         spinnerTimeout,
         otacToAuthExchanger
+    };
+
+    const restaurant = {
+        seoName: 'checkout-kofte-farringdon',
+        id: '22222'
     };
 
     let windowLocationSpy;
@@ -319,6 +320,9 @@ describe('Checkout', () => {
                     store: createStore(),
                     localVue,
                     propsData,
+                    mocks: {
+                        $logger
+                    },
                     data () {
                         return {
                             isLoading: false,
@@ -903,12 +907,20 @@ describe('Checkout', () => {
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
-                            message
+                            message,
+                            restaurant
                         }),
                         i18n,
                         localVue,
                         propsData
                     });
+
+                    const dialog = {
+                        name: 'error-dialog',
+                        props: {
+                            'redirect-url': wrapper.vm.redirectUrl
+                        }
+                    };
 
                     // Act
                     const { messageType } = wrapper.vm;
@@ -955,46 +967,21 @@ describe('Checkout', () => {
             });
         });
 
-        describe('dialogMessage ::', () => {
-            describe('when a message exists AND `shouldShowInDialog` is true', () => {
-                it('should return dialog', () => {
-                    // Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            message
-                        }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.dialogMessage).toEqual(dialog);
+        describe('redirectUrl ::', () => {
+            it('should return the URL to redirect back to the restaurant menu', () => {
+                // Arrange && Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
                 });
-            });
-        });
 
-        describe('alertMessage ::', () => {
-            describe('when a message exists AND `shouldShowInDialog` is false', () => {
-                it('should return alert', () => {
-                    // Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            message: alertCode
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $style
-                        }
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.alertMessage).toEqual(alert);
-                });
+                // Assert
+                expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
             });
         });
     });
