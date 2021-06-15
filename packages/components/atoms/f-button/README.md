@@ -79,16 +79,16 @@ When `to` attribute is set, it uses Vue Router `router-link` component, this hel
 
 The props that can be defined are as follows:
 
-| Prop          | Type       | Required   | Default  | Description |
-| :---          | :---:      | :---:      | :---:    | :---        |
-| `actionType`  | `String`   | No         | `button` | Sets the action button type.<br>Options: `button`, `submit`, `reset`. |
-| `buttonType`  | `String`   | No         | `primary`| Sets the modifier theme for styling.<br>Options: `primary`, `secondary`, `outline`, `ghost`, `link`. |
-| `buttonSize`  | `String`   | No         | `medium` | Sets the button size.<br>Options: `large`, `medium`, `small`, `xsmall`. |
-| `isFullWidth` | `Boolean`  | No         | `false`  | Controls whether or not to apply `fullWidth` modifier class |
-| `isIcon`      | `Boolean`  | No         | `false`  | When true, changes the button style to be displayed as an Icon Button (Icon, with no text). |
-| `isLoading`   | `Boolean`  | No         | `false`  | When true, replaces the text with a loading spinner, and it prevents any further interaction with the button (e.g. `click`). |
-| `href`        | `String`   | No         | `null`   | When set, generated markup is Anchor element e.g. <a> |
-| `to`          | `String`   | No         | `null`   | When set, generated markup is Anchor element e.g. <a>. Additionally it allows to work with host App defined routes. |
+| Prop          | Type              | Required   | Default  | Description |
+| :---          | :---:             | :---:      | :---:    | :---        |
+| `actionType`  | `String`          | No         | `button` | Sets the action button type.<br>Options: `button`, `submit`, `reset`. |
+| `buttonType`  | `String`          | No         | `primary`| Sets the modifier theme for styling.<br>Options: `primary`, `secondary`, `outline`, `ghost`, `link`. |
+| `buttonSize`  | `String`          | No         | `medium` | Sets the button size.<br>Options: `large`, `medium`, `small`, `xsmall`. |
+| `isFullWidth` | `Boolean`         | No         | `false`  | Controls whether or not to apply `fullWidth` modifier class |
+| `isIcon`      | `Boolean`         | No         | `false`  | When true, changes the button style to be displayed as an Icon Button (Icon, with no text). |
+| `isLoading`   | `Boolean`         | No         | `false`  | When true, replaces the text with a loading spinner, and it prevents any further interaction with the button (e.g. `click`). |
+| `href`        | `String`          | No         | `null`   | When set, generated markup is Anchor element e.g. <a> |
+| `to`          | `String, Object`  | No         | `null`   | When set, generated markup is Anchor element e.g. <a>. Additionally it allows to work with host App defined routes. |
 
 ### CSS Classes
 
