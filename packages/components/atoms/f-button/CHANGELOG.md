@@ -10,6 +10,7 @@ v1.7.0
 ### Added
 - Support for Vue Router link and tests
 
+
 v1.6.0
 ------------------------------
 *June 7, 2021*
@@ -27,6 +28,7 @@ v1.5.0
 
 ### Added
 - `isLoading` prop to allow the button to be in a loading state.
+
 
 v1.4.0
 ------------------------------
