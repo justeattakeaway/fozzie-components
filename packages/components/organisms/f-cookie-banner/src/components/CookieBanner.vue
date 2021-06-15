@@ -135,7 +135,7 @@ export default {
         },
         useGreyBackground: {
             type: Boolean,
-            default: false
+            default: true
         }
     },
 
