@@ -59,7 +59,7 @@ CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
 const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
-const additionalItemsRequared = 'Additional Items Requared Issue (Response from server but order not fulfillable)';
+const additionalItemsRequired = 'Additional Items Required Issue (Response from server but order not fulfillable)';
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
@@ -68,12 +68,12 @@ const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
-const additionalItemsRequaredIssue = 'additional-items-requared'
+const additionalItemsRequiredIssue = 'additional-items-required'
 
 const patchCheckoutErrorOptions = {
     None: null,
     [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
-    [additionalItemsRequared]: additionalItemsRequaredIssue,
+    [additionalItemsRequired]: additionalItemsRequiredIssue,
     [checkoutServerError]: SERVER
 };
 

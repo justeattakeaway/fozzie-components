@@ -6,18 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.136.0
 ------------------------------
-*June 11, 2021*
+*June 15, 2021*
 
 ### Added
 
 - Button for error pages.
 - Tests to cover button changes.
 - Added log warn when error component is displayed.
-- `AdditionalItemsRequared` issue for storybook story
+- `AdditionalItemsRequired` issue for storybook story
 
 ### Changed
 - `updateCheckoutErrors` to `updateCheckoutRestaurantNotTakingOrders` in storybook story to be able to specify different issues as the content of the error dialogs can differ
-
 
 
 v0.135.0
