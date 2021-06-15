@@ -446,7 +446,7 @@ export default {
         },
 
         isAltColour () {
-            return this.headerBackgroundTheme === 'highlight' || (this.headerBackgroundTheme === 'transparent' && !this.navIsOpen);
+            return this.headerBackgroundTheme === 'highlight' || this.headerBackgroundTheme === 'transparent';
         },
 
         /**
