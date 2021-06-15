@@ -101,24 +101,26 @@ describe('Error', () => {
                     expect(window.location.assign).toHaveBeenCalledWith('menu-jason-1');
                 });
 
-                describe('AND a menu basket cookie does not exist', () => {
-                    it('should not delete the cookie', () => {
-                        // Arrange
-                        const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
-
-                        // Act
-                        wrapper.vm.redirectToMenu();
-
-                        // Assert
-                        expect(cookieRemoveSpy).not.toHaveBeenCalled();
+                describe('AND errorFormType is accessForbiddenError', () => {
+                    beforeEach(async () => {
+                        await wrapper.setProps({ errorFormType: CHEKOUT_ERROR_FORM_TYPE.accessForbidden });
                     });
-                });
-
-                describe('AND a menu basket cookie already exists', () => {
-                    describe('AND errorFormType is accessForbiddenError', () => {
-                        it('should delete the cookie', async () => {
+                    describe('AND a menu basket cookie does not exist', () => {
+                        it('should not delete the cookie', () => {
                             // Arrange
-                            await wrapper.setProps({ errorFormType: CHEKOUT_ERROR_FORM_TYPE.accessForbidden });
+                            const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
+
+                            // Act
+                            wrapper.vm.redirectToMenu();
+
+                            // Assert
+                            expect(cookieRemoveSpy).not.toHaveBeenCalled();
+                        });
+                    });
+
+                    describe('AND a menu basket cookie already exists', () => {
+                        it('should delete the cookie', () => {
+                            // Arrange
                             jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue(() => 'je-mw-basket');
                             const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
 
@@ -127,21 +129,6 @@ describe('Error', () => {
 
                             // Assert
                             expect(cookieRemoveSpy).toHaveBeenCalledWith('je-mw-basket-MGFkMzgwZjgtYjY3Yi00Nz-v1');
-                        });
-                    });
-
-                    describe('AND errorFormType is NOT accessForbiddenError', () => {
-                        it('should NOT delete the cookie', async () => {
-                            // Arrange
-                            await wrapper.setProps({ errorFormType: CHEKOUT_ERROR_FORM_TYPE.default });
-                            jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue(() => 'je-mw-basket');
-                            const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
-
-                            // Act
-                            wrapper.vm.redirectToMenu();
-
-                            // Assert
-                            expect(cookieRemoveSpy).not.toHaveBeenCalled();
                         });
                     });
                 });

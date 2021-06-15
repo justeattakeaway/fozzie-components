@@ -83,11 +83,12 @@ export default {
 
     methods: {
         redirectToMenu () {
-            const cookieName = `je-mw-basket-${this.basket.id}`;
-            const basketCookie = this.$cookies.get(cookieName);
-
-            if (basketCookie && this.errorFormType === CHEKOUT_ERROR_FORM_TYPE.accessForbidden) {
-                this.$cookies.remove(cookieName);
+            if (this.errorFormType === CHEKOUT_ERROR_FORM_TYPE.accessForbidden) {
+                const cookieName = `je-mw-basket-${this.basket.id}`;
+                const basketCookie = this.$cookies.get(cookieName);
+                if (basketCookie) {
+                    this.$cookies.remove(cookieName);
+                }
             }
 
             window.location.assign(this.redirectUrl);
