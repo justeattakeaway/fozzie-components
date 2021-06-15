@@ -17,7 +17,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
+    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger, $cookies
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
 
@@ -82,10 +82,6 @@ const message = {
     shouldShowInDialog: true
 };
 
-const dialog = {
-    name: 'error-dialog'
-};
-
 const alertCode = 'Something went wrong, please try again later';
 
 const alert = {
@@ -127,6 +123,11 @@ describe('Checkout', () => {
         applicationName,
         spinnerTimeout,
         otacToAuthExchanger
+    };
+
+    const restaurant = {
+        seoName: 'checkout-kofte-farringdon',
+        id: '22222'
     };
 
     let windowLocationSpy;
@@ -319,6 +320,9 @@ describe('Checkout', () => {
                     store: createStore(),
                     localVue,
                     propsData,
+                    mocks: {
+                        $logger
+                    },
                     data () {
                         return {
                             isLoading: false,
@@ -953,12 +957,20 @@ describe('Checkout', () => {
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
-                            message
+                            message,
+                            restaurant
                         }),
                         i18n,
                         localVue,
                         propsData
                     });
+
+                    const dialog = {
+                        name: 'error-dialog',
+                        props: {
+                            'redirect-url': wrapper.vm.redirectUrl
+                        }
+                    };
 
                     // Act
                     const { messageType } = wrapper.vm;
@@ -1005,46 +1017,21 @@ describe('Checkout', () => {
             });
         });
 
-        describe('dialogMessage ::', () => {
-            describe('when a message exists AND `shouldShowInDialog` is true', () => {
-                it('should return dialog', () => {
-                    // Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            message
-                        }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.dialogMessage).toEqual(dialog);
+        describe('redirectUrl ::', () => {
+            it('should return the URL to redirect back to the restaurant menu', () => {
+                // Arrange && Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
                 });
-            });
-        });
 
-        describe('alertMessage ::', () => {
-            describe('when a message exists AND `shouldShowInDialog` is false', () => {
-                it('should return alert', () => {
-                    // Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            message: alertCode
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $style
-                        }
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.alertMessage).toEqual(alert);
-                });
+                // Assert
+                expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
             });
         });
     });
@@ -1353,7 +1340,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
             });
@@ -1389,7 +1377,8 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies
                                 }
                             });
                             const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
@@ -1418,7 +1407,8 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies
                                 }
                             });
 
@@ -1446,7 +1436,8 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies
                                 }
                             });
 
@@ -1521,7 +1512,8 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
 
@@ -1551,7 +1543,8 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
 
@@ -2685,7 +2678,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -2704,7 +2698,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2726,7 +2721,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2762,7 +2758,8 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
 
@@ -2785,7 +2782,8 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
                         const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
@@ -2821,7 +2819,8 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
 
@@ -2844,7 +2843,8 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
                         const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
@@ -3152,7 +3152,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
             });
@@ -3161,9 +3162,21 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
+            it('should call `getReferralState`', async () => {
+                // Arrange
+                const getReferralStateSpy = jest.spyOn(wrapper.vm, 'getReferralState');
+
+                // Act
+                await wrapper.vm.submitOrder();
+
+                // Assert
+                expect(getReferralStateSpy).toHaveBeenCalled();
+            });
+
             it('should call `placeOrder`', async () => {
                 // Arrange
                 const placeOrderSpy = jest.spyOn(wrapper.vm, 'placeOrder');
+                jest.spyOn(wrapper.vm, 'getReferralState').mockImplementation(() => 'MockReferralState');
 
                 const expected = {
                     url: placeOrderUrl,
@@ -3172,7 +3185,7 @@ describe('Checkout', () => {
                         customerNotes: {
                             noteForRestaurant: defaultCheckoutState.userNote
                         },
-                        referralState: 'ReferredByWeb'
+                        referralState: 'MockReferralState'
                     },
                     timeout: 10000
                 };
@@ -3248,7 +3261,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3257,6 +3271,132 @@ describe('Checkout', () => {
 
                     result.rejects.toThrow(PlaceOrderError);
                     result.rejects.toThrow(errorMessage);
+                });
+            });
+        });
+
+        describe('getReferralState ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should retrieve the referral state from the cookie', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, restaurant: { id: '99999' } }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    }
+                });
+
+                const getSpy = jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 1 });
+
+                // Act
+                wrapper.vm.getReferralState();
+
+                // Assert
+                expect(getSpy).toHaveBeenCalledWith('je-rw-menu-referral-state-99999');
+            });
+
+            describe('when the cookie exists', () => {
+                describe('AND the `menuReferralState` is `1`', () => {
+                    it('should return "ReferredByWeb"', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 1 });
+
+                        // Act
+                        const result = wrapper.vm.getReferralState();
+
+                        // Assert
+                        expect(result).toBe('ReferredByWeb');
+                    });
+                });
+
+                describe('AND the `menuReferralState` is not `1`', () => {
+                    it('should return "None"', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 0 });
+
+                        // Act
+                        const result = wrapper.vm.getReferralState();
+
+                        // Assert
+                        expect(result).toBe('None');
+                    });
+                });
+
+                describe('AND the `menuReferralState` does not exist', () => {
+                    it('should return "None"', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({});
+
+                        // Act
+                        const result = wrapper.vm.getReferralState();
+
+                        // Assert
+                        expect(result).toBe('None');
+                    });
+                });
+            });
+
+            describe('when the cookie does not exist', () => {
+                it('should return "None"', () => {
+                    // Arrange
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
+                    });
+
+                    jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue(null);
+
+                    // Act
+                    const result = wrapper.vm.getReferralState();
+
+                    // Assert
+                    expect(result).toBe('None');
                 });
             });
         });
