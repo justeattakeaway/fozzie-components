@@ -7,29 +7,25 @@
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
 import NoResults from './NoResults.vue';
 import '@justeat/f-searchbox/dist/f-searchbox.css';
 
 export default {
     name: 'VOffers',
+
     components: {
         NoResults
     },
-    props: {
-        locale: {
-            type: String,
-            default: ''
-        }
-    },
+
+    mixins: [
+        VueGlobalisationMixin
+    ],
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
     }
 };

@@ -3,8 +3,8 @@
         :class="$style['c-noResults-wrapper']"
     >
         <media-element
-            title="Can’t find anything?"
-            text="There might still be restaurants near you with a tasty discount or deal on."
+            :title="$t('noResults.title')"
+            :text="$t('noResults.subtitle')"
             image-url="https://d30v2pzvrfyzpo.cloudfront.net/a/hw/img/decoration/oi_no-results-image.svg"
             :image-align="imageAlign"
             :text-size="textSize"
@@ -13,9 +13,9 @@
                 :class="$style['c-noResults-link']"
                 button-type="link"
                 button-size="xsmall"
-                href="/terms&conditions"
+                :href="$t('termsAndConditionsLinkUrl')"
             >
-                Full terms and conditions here
+                {{ $t('termsAndConditionsLinkText') }}
             </f-button>
         </media-element>
     </div>
