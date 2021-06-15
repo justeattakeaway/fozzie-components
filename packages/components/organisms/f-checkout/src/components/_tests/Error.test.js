@@ -115,16 +115,34 @@ describe('Error', () => {
                 });
 
                 describe('AND a menu basket cookie already exists', () => {
-                    it('should delete the cookie', () => {
-                        // Arrange
-                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue(() => 'je-mw-basket');
-                        const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
+                    describe('AND errorFormType is accessForbiddenError', () => {
+                        it.only('should delete the cookie', async () => {
+                            // Arrange
+                            await wrapper.setProps({ errorFormType: CHEKOUT_ERROR_FORM_TYPE.accessForbidden });
+                            jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue(() => 'je-mw-basket');
+                            const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
 
-                        // Act
-                        wrapper.vm.redirectToMenu();
+                            // Act
+                            wrapper.vm.redirectToMenu();
 
-                        // Assert
-                        expect(cookieRemoveSpy).toHaveBeenCalledWith('je-mw-basket-MGFkMzgwZjgtYjY3Yi00Nz-v1');
+                            // Assert
+                            expect(cookieRemoveSpy).toHaveBeenCalledWith('je-mw-basket-MGFkMzgwZjgtYjY3Yi00Nz-v1');
+                        });
+                    });
+
+                    describe('AND errorFormType is NOT accessForbiddenError', () => {
+                        it.only('should NOT delete the cookie', async () => {
+                            // Arrange
+                            await wrapper.setProps({ errorFormType: CHEKOUT_ERROR_FORM_TYPE.default });
+                            jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue(() => 'je-mw-basket');
+                            const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
+
+                            // Act
+                            wrapper.vm.redirectToMenu();
+
+                            // Assert
+                            expect(cookieRemoveSpy).not.toHaveBeenCalled();
+                        });
                     });
                 });
             });

@@ -41,7 +41,10 @@ import FButton from '@justeat/f-button';
 import SadBagIconDecorator from '../assets/images/jet-sad-bag.svg';
 import '@justeat/f-button/dist/f-button.css';
 import '@justeat/f-card/dist/f-card.css';
-import { VUEX_CHECKOUT_MODULE } from '../constants';
+import { 
+    VUEX_CHECKOUT_MODULE,
+    CHEKOUT_ERROR_FORM_TYPE
+} from '../constants';
 import loggerMixin from '../mixins/logger.mixin';
 
 export default {
@@ -85,7 +88,7 @@ export default {
             const cookieName = `je-mw-basket-${this.basket.id}`;
             const basketCookie = this.$cookies.get(cookieName);
 
-            if (basketCookie) {
+            if (basketCookie && this.errorFormType === CHEKOUT_ERROR_FORM_TYPE.accessForbidden) {
                 this.$cookies.remove(cookieName);
             }
 
