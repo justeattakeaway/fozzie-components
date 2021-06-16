@@ -4,8 +4,7 @@ import Router from 'vue-router';
 import {
     withKnobs,
     select,
-    boolean,
-    text
+    boolean
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FButton from '../src/components/Button.vue';

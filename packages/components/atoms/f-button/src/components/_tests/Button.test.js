@@ -249,11 +249,15 @@ describe('Button', () => {
         });
 
         describe('buttonActionType :: ', () => {
-            describe('when `href` prop is empty :: ', () => {
+            describe.each([
+                ['to'],
+                ['href']
+            ])('when %s prop is empty :: ', () => {
                 it('should add `type` attribute', () => {
                     // Arrange
                     const propsData = {
                         href: null,
+                        to: null,
                         actionType
                     };
 
@@ -279,26 +283,6 @@ describe('Button', () => {
                     // Assert
                     expect(wrapper.attributes('type')).toBeUndefined();
                     expect(wrapper.attributes('action-type')).toBeUndefined();
-                });
-            });
-
-            // RouterLink type -> incl. `to` attribute
-            describe('when `to` prop is empty :: ', () => {
-                it('should add `type` attribute', () => {
-                    // Arrange
-                    const propsData = {
-                        to: null,
-                        actionType
-                    };
-
-                    // Act
-                    const wrapper = mount(FButton, {
-                        propsData,
-                        stubs: ['router-link']
-                    });
-
-                    // Assert
-                    expect(wrapper.attributes('type')).toEqual(actionType);
                 });
             });
 

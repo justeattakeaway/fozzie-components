@@ -94,7 +94,7 @@ export default {
             return 'action-button';
         },
         /**
-         * Passes `actionType` prop to action button if no `href` attribute is applied to the component
+         * Passes `actionType` prop to action button if no `href` or `to` attributes is applied to the component
          */
         buttonActionType () {
             return (!this.$attrs.href && !this.$attrs.to) ? this.actionType : null;
