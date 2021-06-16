@@ -27,10 +27,6 @@ describe('Error', () => {
             localVue,
             store: createStore({
                 ...defaultCheckoutState,
-                basket: {
-                    id: 'MGFkMzgwZjgtYjY3Yi00Nz-v1',
-                    total: 0
-                },
                 restaurant: {
                     id: '301389'
                 }
