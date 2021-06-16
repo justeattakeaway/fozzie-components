@@ -58,7 +58,8 @@ const settings = () => ({
                     'test/visual/*.visual.mobile.spec.js'
                 ]
             }] : [])
-        ]},
+        ]
+    },
     reporters: ALLURE_REPORTER === 'true' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases

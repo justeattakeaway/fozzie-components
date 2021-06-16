@@ -84,7 +84,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Additional Items Required" Error Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Additional Items Required" Error Modal', 'mobile');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -236,7 +236,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Restaurant not taking orders" Error Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Restaurant not taking orders" Error Modal', 'mobile');
     });
 
     it('should display the "Additional Items Required" modal', () => {
@@ -254,7 +254,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Additional Items Required" Error Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Additional Items Required" Error Modal', 'mobile');
     });
 });
 
