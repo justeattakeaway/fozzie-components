@@ -12,13 +12,19 @@ import FButton from '../src/components/Button.vue';
 
 Vue.use(Router);
 
-const exampleComponent = { template: '<div>Example Route</div>' };
+const exampleComponent1 = { template: '<div>Example Route 1</div>' };
+const exampleComponent2 = { template: '<div>Example Route 2</div>' };
 
 const routes = [
     {
-        path: '/exampleRoute',
-        component: exampleComponent,
-        name: 'exampleRoute'
+        path: '/exampleRoute1',
+        component: exampleComponent1,
+        name: 'exampleRoute1'
+    },
+    {
+        path: '/exampleRoute2',
+        component: exampleComponent2,
+        name: 'exampleRoute2'
     }
 ];
 
@@ -54,20 +60,23 @@ export const RouterLinkComponent = () => ({
         },
 
         to: {
-            default: text('to', '/exampleRoute')
+            default: select('to', ['/exampleRoute1', '/exampleRoute2'])
         }
     },
 
     template: `
-        <f-button
-            :buttonType="buttonType"
-            :buttonSize="buttonSize"
-            :disabled="disabled"
-            :isFullWidth="isFullWidth"
-            :to="to"
-            :isIcon="false">
-            Default Button Text
-        </f-button>`
+        <div>
+            <f-button
+                :buttonType="buttonType"
+                :buttonSize="buttonSize"
+                :disabled="disabled"
+                :isFullWidth="isFullWidth"
+                :to="to"
+                :isIcon="false">
+                Default Button Text
+            </f-button>
+            <router-view/>
+        </div>`
 });
 
-RouterLinkComponent.storyName = 'RouterLink';
+RouterLinkComponent.storyName = 'Router Link';

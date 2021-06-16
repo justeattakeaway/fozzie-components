@@ -34,14 +34,12 @@
 <script>
 import ActionButton from './Action.vue';
 import LinkButton from './Link.vue';
-import RouterLinkButton from './RouterLinkButton.vue';
 
 export default {
     name: 'FButton',
     components: {
         ActionButton,
-        LinkButton,
-        RouterLinkButton
+        LinkButton
     },
     props: {
         buttonType: {
@@ -90,7 +88,7 @@ export default {
             }
 
             if (this.$attrs.to) {
-                return 'router-link-button';
+                return 'router-link';
             }
 
             return 'action-button';

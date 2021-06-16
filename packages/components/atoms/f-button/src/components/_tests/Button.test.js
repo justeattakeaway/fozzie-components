@@ -213,7 +213,7 @@ describe('Button', () => {
                     };
                 });
 
-                it('should return `componentType` of `router-link-button`', () => {
+                it('should return `componentType` of `router-link`', () => {
                     // Act
                     const wrapper = shallowMount(FButton, {
                         propsData,
@@ -221,7 +221,7 @@ describe('Button', () => {
                     });
 
                     // Assert
-                    expect(wrapper.vm.componentType).toEqual('router-link-button');
+                    expect(wrapper.vm.componentType).toEqual('router-link');
                 });
 
                 it('should render `Router Link` component', () => {
@@ -232,7 +232,7 @@ describe('Button', () => {
                     });
 
                     // Assert
-                    expect(wrapper.find('[data-test-id="router-link-button-component"]').exists()).toBeTruthy();
+                    expect(wrapper.find('[data-test-id="router-link-component"]').exists()).toBeTruthy();
                 });
 
                 it('should apply `to` attribute', () => {
