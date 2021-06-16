@@ -54,11 +54,10 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
+        checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Patch Checkout Errors', 'ISSUES')
-                .withQuery('&knob-Place Order Errors', 'SERVER');
+                .withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
@@ -68,6 +67,24 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', 'mobile');
+    });
+
+    it('should display the "Additional Items Required" modal', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'collection')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Patch Checkout Errors', 'additional-items-required')
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Additional Items Required" Error Modal', 'shared');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -202,6 +219,42 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', 'mobile');
+    });
+
+    it('should display the "Restaurant not taking orders" modal', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders')
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Restaurant not taking orders" Error Modal', 'shared');
+    });
+
+    it('should display the "Additional Items Required" modal', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Patch Checkout Errors', 'additional-items-required')
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Additional Items Required" Error Modal', 'shared');
     });
 });
 

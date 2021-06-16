@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.16.1
+------------------------------
+*June 15, 2021*
+
+### Changed
+- Set default of useGreyBackground to true (most JE apps need this set to true)
+
+
 v0.16.0
 ------------------------------
 *June 14, 2021*

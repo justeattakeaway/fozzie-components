@@ -52,7 +52,7 @@ const messages = {
         singleFieldError: 'There is 1 error in the form',
         multipleFieldErrors: 'There are {errorCount} errors in the form',
         pageLoad: {
-            heading: 'We can’t show you this page',
+            heading: 'Something went wrong',
             description: 'It’s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.',
             buttonText: 'Go back to order'
         },

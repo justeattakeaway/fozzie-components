@@ -4,20 +4,40 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 
 describe('f-checkout - Invalid - Mobile Visual Tests', () => {
-    beforeEach(() => {
+
+    it('should display the "Get Checkout" error page', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'invalid-url');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Get Checkout Errors', '500')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act
         checkout.open(pageUrl);
         checkout.waitForErrorPageComponent();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout" Error Page', 'mobile');
     });
 
-    it('should display the error page component', () => {
+    it('should display the "Get Checkout 403" error page', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Get Checkout Errors', '403')
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForErrorPageComponent();
+
         // Assert
-        browser.percyScreenshot('f-checkout - Invalid - Base State', 'mobile');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'mobile');
     });
 });
