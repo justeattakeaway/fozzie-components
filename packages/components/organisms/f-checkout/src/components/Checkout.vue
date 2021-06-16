@@ -924,6 +924,11 @@ export default {
             }, this.spinnerTimeout);
         },
 
+        /**
+         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
+         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
+         *
+         */
         setSubmittingState (isFormSubmitting) {
             this.isFormSubmitting = isFormSubmitting;
         },
