@@ -4,6 +4,54 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.139.0
+------------------------------
+*June 14, 2021*
+
+### Changed
+- Use loading spinner on submit button
+  
+
+v0.138.0
+------------------------------
+*June 15, 2021*
+
+### Changed
+- Fixed the hardcoded `referralState` data we're passing to the Place Order endpoint.
+
+
+v0.137.0
+------------------------------
+*June 15, 2021*
+
+### Changed
+- Dependency updated to f-alert@v0.6.1
+
+
+v0.136.0
+------------------------------
+*June 15, 2021*
+
+### Added
+
+- Button for error pages
+- Tests to cover button changes
+- Added log warn when error component is displayed
+- Visual regression tests for error pages
+- `AdditionalItemsRequired` issue for storybook story
+
+### Changed
+- `updateCheckoutErrors` to `updateCheckoutRestaurantNotTakingOrders` in storybook story to be able to specify different issues as the content of the error dialogs can differ
+
+
+v0.135.0
+------------------------------
+*June 11, 2021*
+
+### Changed
+- Fixed the error dialog "Back to order" redirect
+
+
 v0.134.0
 ------------------------------
 *June 10, 2021*

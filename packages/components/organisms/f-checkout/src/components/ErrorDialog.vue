@@ -53,6 +53,13 @@ export default {
         MegaModal
     },
 
+    props: {
+        redirectUrl: {
+            type: String,
+            default: ''
+        }
+    },
+
     data () {
         return {
             isOpen: true
@@ -68,10 +75,6 @@ export default {
 
         errorCode () {
             return this.message && this.message.code;
-        },
-
-        restaurantMenuPageUrl () {
-            return `restaurant-${this.restaurant.seoName}/menu`;
         },
 
         serviceTypeText () {
@@ -115,7 +118,7 @@ export default {
             const modalContext = this.getModalContext();
 
             if (this.message && this.message.shouldRedirectToMenu) {
-                window.location.assign(this.restaurantMenuPageUrl);
+                window.location.assign(this.redirectUrl);
             }
 
             this.updateMessage();

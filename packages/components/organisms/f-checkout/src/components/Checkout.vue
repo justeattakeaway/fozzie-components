@@ -4,23 +4,20 @@
             :is="messageType.name"
             v-if="message"
             ref="errorMessage"
-            v-bind="messageType.props"
-        >
+            v-bind="messageType.props">
             <span>{{ messageType.content }}</span>
         </component>
 
         <div
             v-if="shouldShowSpinner"
             :class="$style['c-spinner-wrapper']"
-            data-test-id="checkout-loading-spinner"
-        >
+            data-test-id="checkout-loading-spinner">
             <div :class="$style['c-spinner']" />
         </div>
         <div
             v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
-            data-test-id="checkout-component"
-        >
+            data-test-id="checkout-component">
             <card
                 is-rounded
                 has-full-width-footer
@@ -28,15 +25,13 @@
                 is-page-content-wrapper
                 card-heading-position="center"
                 :data-test-id="`checkout-card-component-${serviceType}`"
-                :class="$style['c-checkout']"
-            >
+                :class="$style['c-checkout']">
                 <checkout-header :login-url="loginUrl" />
 
                 <form
                     method="post"
                     :class="$style['c-checkout-form']"
-                    @submit.prevent="onFormSubmit"
-                >
+                    @submit.prevent="onFormSubmit">
                     <section
                         v-if="invalidFieldsSummary"
                         class="is-visuallyHidden"
@@ -45,9 +40,7 @@
                         {{ invalidFieldsSummary }}
                     </section>
 
-                    <guest-block
-                        v-if="!isLoggedIn"
-                    />
+                    <guest-block v-if="!isLoggedIn" />
 
                     <form-field
                         :value="customer.mobileNumber"
@@ -65,16 +58,14 @@
                                 v-if="isMobileNumberEmpty"
                                 id="mobile-number-error"
                                 data-js-error-message
-                                data-test-id="error-mobile-number-empty"
-                            >
+                                data-test-id="error-mobile-number-empty">
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
                             </error-message>
                             <error-message
                                 v-if="isMobileNumberInvalid"
                                 id="mobile-number-error"
                                 data-js-error-message
-                                data-test-id="error-mobile-number-invalid"
-                            >
+                                data-test-id="error-mobile-number-invalid">
                                 {{ $t('validationMessages.mobileNumber.invalidCharError') }}
                             </error-message>
                         </template>
@@ -88,14 +79,12 @@
                         :label-text="$t('labels.tableIdentifier')"
                         :has-error="isTableIdentifierEmpty"
                         maxlength="12"
-                        @input="updateTableIdentifier($event)"
-                    >
+                        @input="updateTableIdentifier($event)">
                         <template #error>
                             <error-message
                                 v-if="isTableIdentifierEmpty"
                                 data-js-error-message
-                                data-test-id="error-table-identifier-empty"
-                            >
+                                data-test-id="error-table-identifier-empty">
                                 {{ $t('validationMessages.tableIdentifier.requiredError') }}
                             </error-message>
                         </template>
@@ -103,8 +92,7 @@
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
-                        data-test-id="address-block"
-                    />
+                        data-test-id="address-block" />
 
                     <form-selector />
 
@@ -132,6 +120,7 @@
                         is-full-width
                         action-type="submit"
                         data-test-id="confirm-payment-submit-button"
+                        :is-loading="isFormSubmitting"
                     >
                         {{ $t('buttonText') }}
                     </f-button>
@@ -147,7 +136,8 @@
 
         <error-page
             v-else-if="errorFormType"
-            :error-form-type="errorFormType" />
+            :error-form-type="errorFormType"
+            :redirect-url="redirectUrl" />
     </div>
 </template>
 
@@ -314,7 +304,8 @@ export default {
             tenantConfigs,
             shouldShowSpinner: false,
             isLoading: false,
-            errorFormType: null
+            errorFormType: null,
+            isFormSubmitting: false
         };
     },
 
@@ -416,7 +407,10 @@ export default {
 
         dialogMessage () {
             return {
-                name: 'error-dialog'
+                name: 'error-dialog',
+                props: {
+                    'redirect-url': this.redirectUrl
+                }
             };
         },
 
@@ -445,6 +439,10 @@ export default {
 
         formattedMobileNumberForScreenReader () {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
+        },
+
+        redirectUrl () {
+            return `restaurants-${this.restaurant.seoName}/menu`;
         }
     },
 
@@ -622,7 +620,7 @@ export default {
                     customerNotes: {
                         noteForRestaurant: this.userNote
                     },
-                    referralState: 'ReferredByWeb'
+                    referralState: this.getReferralState()
                 };
 
                 await this.placeOrder({
@@ -837,12 +835,15 @@ export default {
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
             this.updateMessage();
+            this.setSubmittingState(true);
 
             if (this.isFormValid()) {
                 await this.submitCheckout();
             } else {
                 this.onInvalidCheckoutForm();
             }
+
+            this.setSubmittingState(false);
         },
 
         /**
@@ -922,6 +923,24 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, this.spinnerTimeout);
+        },
+
+        /**
+         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
+         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
+         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
+         */
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
+        },
+
+        getReferralState () {
+            const cookieName = `je-rw-menu-referral-state-${this.restaurant.id}`;
+            const referralCookie = this.$cookies.get(cookieName);
+
+            return referralCookie && referralCookie.menuReferralState
+                ? 'ReferredByWeb'
+                : 'None';
         }
     },
 

@@ -29,7 +29,7 @@ The `StampCard1` component supports the following keys of the `card` prop, with 
 
 * `discountPercentage` - `Number`
 
-  A value (currently disregarded) for future support of alternate percentage offer amounts
+  A value for support of alternate percentage offer amounts. Only `10` or `15` are supported currently, any other value is ignored.
 
 * `earnedStamps` - `Number`
 

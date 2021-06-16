@@ -76,6 +76,7 @@ export default {
     right: spacing(x3);
     bottom: 20px;
     transform: rotate(180deg);
+    pointer-events: none;
 
     path {
         fill: $color-content-subdued;
