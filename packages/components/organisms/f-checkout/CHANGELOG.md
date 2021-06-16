@@ -11,6 +11,7 @@ v0.140.0
 ### Changed
 - Fixed cookie removal on 403 error dialog by now using restaurant ID instead of basket ID
 
+
 v0.139.0
 ------------------------------
 *June 14, 2021*
