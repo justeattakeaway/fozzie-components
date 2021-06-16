@@ -2204,11 +2204,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.1.1.tgz#065471a0aa00391ca70f4a108f5904b85b477446"
   integrity sha512-0l43zDtVP5oIOYUqJtZjX4CPEwl9NIu3UgENt6EairOZpfFeGZg/2YJ6vVIWySycQo9v6iHfeaAtDj4JyTWebg==
 
-"@justeat/f-button@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.2.0.tgz#5d7213ebc8e828134d0f7b6dd13d15b71e842db0"
-  integrity sha512-XfGFC4rW+K4bpqtjf+8WOVfYvL/BBiwtuPJ3BvGRzAsHluzctqalPVIrHF5kRHvPvHZcFSn9BvMkBl66qpKrQA==
-
 "@justeat/f-card@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-1.2.1.tgz#8b44b73c291c8527beb6351730a90a476cb54325"

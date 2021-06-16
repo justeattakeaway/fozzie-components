@@ -2620,10 +2620,12 @@ describe('Checkout', () => {
         describe('`onFormSubmit` ::', () => {
             let isFormValidSpy;
             let updateMessageSpy;
+            let setSubmittingStateSpy;
 
             beforeEach(() => {
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
                 updateMessageSpy = jest.spyOn(VueCheckout.methods, 'updateMessage');
+                setSubmittingStateSpy = jest.spyOn(VueCheckout.methods, 'setSubmittingState');
             });
 
             it('should exist', () => {
@@ -2663,6 +2665,28 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(updateMessageSpy).toHaveBeenCalled();
+                });
+
+                it('should call `setSubmittingState` first with `true` and then with `false`', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $v,
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(setSubmittingStateSpy).toHaveBeenCalledTimes(2);
+                    expect(setSubmittingStateSpy).toHaveBeenNthCalledWith(1, true);
+                    expect(setSubmittingStateSpy).toHaveBeenLastCalledWith(false);
                 });
 
                 it('should make a call to `trackFormInteraction` so we can track the action type `submit`', async () => {
