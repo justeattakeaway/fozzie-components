@@ -446,7 +446,8 @@ export default {
         },
 
         isAltColour () {
-            return this.headerBackgroundTheme === 'highlight' || this.headerBackgroundTheme === 'transparent';
+            const isMobileNavOpen = this.navIsOpen && this.isBelowMid;
+            return (this.headerBackgroundTheme === 'transparent' && !isMobileNavOpen) || this.headerBackgroundTheme === 'highlight';
         },
 
         /**
