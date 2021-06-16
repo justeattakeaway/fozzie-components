@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.141.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- Fixed an issue in which the chosen delivery/collection time wasn't remembered.
+
+
+v0.140.0
+------------------------------
+*June 16, 2021*
+
+### Changed
+- Fixed cookie removal on 403 error dialog by now using restaurant ID instead of basket ID
+
+
 v0.139.0
 ------------------------------
 *June 14, 2021*
