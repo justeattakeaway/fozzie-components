@@ -12,7 +12,7 @@ import { pushToDataLayer, setGtmEventCookie } from '../utils/helpers';
 export const DEFAULT_CATEGORY = 'engagement';
 export const DEFAULT_ACTION = 'form_search';
 
-export const offersHeaderSearchModule = {
+export const offersSearchModule = {
     namespaced:  true,
 
     state: () => ({
