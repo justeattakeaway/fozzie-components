@@ -69,7 +69,7 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'basket'
+            'restaurant'
         ])
     },
 
@@ -84,7 +84,7 @@ export default {
     methods: {
         redirectToMenu () {
             if (this.errorFormType === CHEKOUT_ERROR_FORM_TYPE.accessForbidden) {
-                const cookieName = `je-mw-basket-${this.basket.id}`;
+                const cookieName = `je-mw-basket-${this.restaurant.id}`;
                 const basketCookie = this.$cookies.get(cookieName);
                 if (basketCookie) {
                     this.$cookies.remove(cookieName);

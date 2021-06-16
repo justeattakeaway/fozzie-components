@@ -30,6 +30,9 @@ describe('Error', () => {
                 basket: {
                     id: 'MGFkMzgwZjgtYjY3Yi00Nz-v1',
                     total: 0
+                },
+                restaurant: {
+                    id: '301389'
                 }
             }),
             propsData: {
@@ -128,7 +131,7 @@ describe('Error', () => {
                             wrapper.vm.redirectToMenu();
 
                             // Assert
-                            expect(cookieRemoveSpy).toHaveBeenCalledWith('je-mw-basket-MGFkMzgwZjgtYjY3Yi00Nz-v1');
+                            expect(cookieRemoveSpy).toHaveBeenCalledWith('je-mw-basket-301389');
                         });
                     });
                 });
