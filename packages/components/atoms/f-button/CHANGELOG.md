@@ -11,6 +11,14 @@ v1.7.0
 - Support for Vue Router link and tests
 
 
+v1.6.1
+------------------------------
+*June 15, 2021*
+
+### Fixed
+- Small tweak to class-naming of `o-btn-text--flex` > `o-btn-text` so it matches our naming scheme.
+
+
 v1.6.0
 ------------------------------
 *June 7, 2021*

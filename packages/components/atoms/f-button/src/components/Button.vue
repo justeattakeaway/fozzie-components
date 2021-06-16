@@ -23,8 +23,8 @@
 
         <span
             :class="[
-                (isLoading ? $style['o-btn-text--hidden'] : ''),
-                $style['o-btn-text--flex']
+                $style['o-btn-text'],
+                (isLoading ? $style['o-btn-text--hidden'] : '')
             ]">
             <slot />
         </span>
@@ -225,20 +225,16 @@ $btn-icon-sizeXSmall-iconSize       : 18px;
     }
 }
 
-/**
- * ==========================================================================
- * Btn Type modifiers
- * ==========================================================================
- */
+    .o-btn-text {
+        display: flex;
+        justify-content: center;
+    }
+    // Visually hide button text (used for loading states)
+    .o-btn-text--hidden {
+        visibility: hidden;
+    }
 
-.o-btn-text--hidden {
-    visibility: hidden;
-}
 
-.o-btn-text--flex {
-    display: flex;
-    justify-content: center;
-}
 
 /**
  * Modifier – .o-btn--primary
