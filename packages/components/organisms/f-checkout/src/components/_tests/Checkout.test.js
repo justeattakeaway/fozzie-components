@@ -2662,7 +2662,7 @@ describe('Checkout', () => {
                     expect(updateMessageSpy).toHaveBeenCalled();
                 });
 
-                it('should set `isFormSubmitting` to true via `setSubmittingState`', async () => {
+                it('should call `setSubmittingState` first with `true` and then with `false`', async () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
