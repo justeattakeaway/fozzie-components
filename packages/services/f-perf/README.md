@@ -37,9 +37,9 @@ It is non blocking to the page performance as it uses [requestidlecallback](http
 
 
 ```javascript
-import webPerf from '@justeat/f-perf';
+import fPerf from '@justeat/f-perf';
 
-Vue.use(webPerf)
+Vue.use(fPerf)
 ```
 
 It implements PerfumeJS as Vue plugin. See more at https://github.com/zizzamia/perfume.js
@@ -71,7 +71,7 @@ Additionally user can overwrite the logging function with their own, when specif
 
 ```javascript
 // Instantiate with own logger Function
-import webPerf from '@justeat/f-perf';
+import fPerf from '@justeat/f-perf';
 
 /**
  * Custom logger
@@ -82,7 +82,7 @@ function ownPerfLogger (metricName, data) {
   console.log(metricName, data);
 }
 
-Vue.use(webPerf, {logger: ownPerfLogger})
+Vue.use(fPerf, {logger: ownPerfLogger})
 ```
 
 

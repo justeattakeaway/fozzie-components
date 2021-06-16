@@ -9,7 +9,7 @@ import Perfume from 'perfume.js';
 * @module f-perf
 */
 
-let performanceLog;
+let logPerformance;
 let debugMode = window.fPerfDebug || false;
 
 const perfumeJS = new Perfume({
@@ -25,58 +25,58 @@ const perfumeJS = new Perfume({
         switch (metricName) {
             case 'navigationTiming':
                 if (data && data.timeToFirstByte) {
-                    performanceLog('navigationTiming', data);
+                    logPerformance('navigationTiming', data);
                 }
                 break;
             case 'networkInformation':
                 if (data && data.effectiveType) {
-                    performanceLog('networkInformation', data);
+                    logPerformance('networkInformation', data);
                 }
                 break;
             case 'storageEstimate':
-                performanceLog('storageEstimate', data);
+                logPerformance('storageEstimate', data);
                 break;
             case 'ttfb':
-                performanceLog('ttfb', { duration: data });
+                logPerformance('ttfb', { duration: data });
                 break;
             case 'fp':
-                performanceLog('firstPaint', { duration: data });
+                logPerformance('firstPaint', { duration: data });
                 break;
             case 'fcp':
-                performanceLog('firstContentfulPaint', { duration: data });
+                logPerformance('firstContentfulPaint', { duration: data });
                 break;
             case 'fid':
-                performanceLog('firstInputDelay', { duration: data });
+                logPerformance('firstInputDelay', { duration: data });
                 break;
             case 'lcp':
-                performanceLog('largestContentfulPaint', { duration: data });
+                logPerformance('largestContentfulPaint', { duration: data });
                 break;
             case 'lcpFinal':
-                performanceLog('largestContentfulPaintFinal', {
+                logPerformance('largestContentfulPaintFinal', {
                     duration: data
                 });
                 break;
             case 'cls':
-                performanceLog('cumulativeLayoutShift', { value: data });
+                logPerformance('cumulativeLayoutShift', { value: data });
                 break;
             case 'clsFinal':
-                performanceLog('cumulativeLayoutShiftFinal', { value: data });
+                logPerformance('cumulativeLayoutShiftFinal', { value: data });
                 break;
             case 'tbt':
-                performanceLog('totalBlockingTime', { duration: data });
+                logPerformance('totalBlockingTime', { duration: data });
                 break;
             case 'elPageTitle':
-                performanceLog('elementTimingPageTitle', { duration: data });
+                logPerformance('elementTimingPageTitle', { duration: data });
                 break;
             default:
-                performanceLog(`${metricName}`, { duration: data });
+                logPerformance(`${metricName}`, { duration: data });
                 break;
         }
     }
 });
 
 
-const webPerf = {
+const fPerf = {
     /**
      * Instantiates RUM Vue Plugin with options
      * @param {Object} Vue instance
@@ -84,11 +84,11 @@ const webPerf = {
      */
     install: (Vue, options) => {
         // Set user defined RUM logging function
-        if (options && options.log && typeof options.log === 'function') {
-            performanceLog = options.log;
+        if (options && options.logger && typeof options.logger === 'function') {
+            logPerformance = options.logger;
         } else {
             // defaults to GTM tracking
-            performanceLog = (metricName, data) => {
+            logPerformance = (metricName, data) => {
                 window.dataLayer = window.dataLayer || [];
                 // eslint-disable-next-line no-console
                 if (debugMode) console.log(metricName, data);
@@ -129,4 +129,4 @@ const webPerf = {
     }
 };
 
-export default webPerf;
+export default fPerf;

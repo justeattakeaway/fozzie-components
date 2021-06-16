@@ -1,13 +1,13 @@
-import webPerf from '../index';
+import fPerf from '../index';
 
-describe('webPerf Module', () => {
+describe('fPerf Module', () => {
     it('should be defined', async () => {
         // Arrange, Act & Assert
-        expect(webPerf).toBeDefined();
+        expect(fPerf).toBeDefined();
     });
 
     it('should define expected properties', async () => {
         // Arrange, Act & Assert
-        expect(webPerf.install).toBeDefined();
+        expect(fPerf.install).toBeDefined();
     });
 });
