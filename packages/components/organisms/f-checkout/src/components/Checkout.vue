@@ -838,16 +838,14 @@ export default {
          */
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
-            this.isFormSubmitting = true;
-            this.updateMessage();
-
+            this.setSubmittingState(true);
             if (this.isFormValid()) {
                 await this.submitCheckout();
             } else {
                 this.onInvalidCheckoutForm();
             }
-
-            this.isFormSubmitting = false;
+            this.updateMessage();
+            this.setSubmittingState(false);
         },
 
         /**
@@ -927,6 +925,10 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, this.spinnerTimeout);
+        },
+
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
         }
     },
 
