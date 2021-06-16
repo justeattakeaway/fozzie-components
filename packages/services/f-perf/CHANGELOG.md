@@ -9,4 +9,5 @@ v0.1.0
 *June 16, 2021*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
+- Implements a Real User Monitoring metrics as Vue plugin
+ - Uses PerfumeJS library to provide sensible defaults
