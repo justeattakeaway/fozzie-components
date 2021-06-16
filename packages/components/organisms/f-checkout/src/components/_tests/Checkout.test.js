@@ -321,7 +321,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     },
                     data () {
                         return {
@@ -514,7 +515,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -544,7 +546,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -571,7 +574,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -588,7 +592,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     },
                     computed: {
                         invalidFieldsSummary () {
@@ -612,7 +617,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     },
                     computed: {
                         invalidFieldsSummary () {
@@ -1591,7 +1597,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
             });
@@ -1666,7 +1673,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
             });
@@ -1732,7 +1740,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -1752,7 +1761,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -1781,7 +1791,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -1825,7 +1836,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -1854,7 +1866,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
@@ -1883,7 +1896,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -1920,7 +1934,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
@@ -1959,7 +1974,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                     // Act
@@ -1981,7 +1997,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2013,7 +2030,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
@@ -2047,7 +2065,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2095,7 +2114,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2135,7 +2155,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
@@ -2174,7 +2195,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2218,7 +2240,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
@@ -2263,7 +2286,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2297,7 +2321,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                     const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
@@ -2671,7 +2696,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
