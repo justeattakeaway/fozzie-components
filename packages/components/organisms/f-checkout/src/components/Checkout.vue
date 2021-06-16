@@ -926,6 +926,7 @@ export default {
 
         /**
          * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
+         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
          * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
          */
         setSubmittingState (isFormSubmitting) {
