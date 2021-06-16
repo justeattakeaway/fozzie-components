@@ -33,6 +33,9 @@ npm install @justeat/f-perf
 
 Real User Measurement (RUM) Vue plugin, allows you to logs metrics in your Vue app. By default will push to GTM `dataLayer`.
 
+It is non blocking to the page performance as it uses [requestidlecallback](https://developers.google.com/web/updates/2015/08/using-requestidlecallback).
+
+
 ```javascript
 import webPerf from '@justeat/f-perf';
 
