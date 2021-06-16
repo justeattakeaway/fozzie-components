@@ -932,7 +932,6 @@ export default {
          */
         setSubmittingState (isFormSubmitting) {
             this.isFormSubmitting = isFormSubmitting;
-
         },
 
         getReferralState () {
