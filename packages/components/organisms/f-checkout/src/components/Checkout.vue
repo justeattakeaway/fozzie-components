@@ -122,7 +122,6 @@
                         data-test-id="confirm-payment-submit-button"
                         :is-loading="isFormSubmitting"
                     >
-                        data-test-id="confirm-payment-submit-button">
                         {{ $t('buttonText') }}
                     </f-button>
                 </form>
