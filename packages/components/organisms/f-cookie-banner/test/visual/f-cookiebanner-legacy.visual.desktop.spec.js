@@ -4,7 +4,7 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookieBanner-
 
 const cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
 
-describe('Legacy - f-cookieBanner component tests', () => {
+describe('Legacy - f-cookieBanner Desktop Visual Tests', () => {
     it('should display the f-cookieBanner component', () => {
         // Arrange
         cookieBanner.withQuery('&knob-Locale', 'en-GB');
@@ -14,6 +14,6 @@ describe('Legacy - f-cookieBanner component tests', () => {
         cookieBanner.waitForComponent();
 
         // Assert
-        browser.percyScreenshot('f-cookiebanner - Legacy', 'shared');
+        browser.percyScreenshot('f-cookiebanner - Legacy', 'desktop');
     });
 });

@@ -3,6 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.142.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- Percy to run desktop / mobile in separate specs
+
+
+### Fixed
+- Percy visual regression test
+
+
+v0.141.1
+------------------------------
+*June 17, 2021*
+
+### Fixed
+- "As soon as possible" not being displayed by default.
+
 
 v0.141.0
 ------------------------------
