@@ -8,7 +8,7 @@ v0.17.0
 *June 17, 2021*
 
 ### Changed
-- UK to two-button banner
+- Percy to run desktop / mobile in separate specs
 
 
 v0.16.1
