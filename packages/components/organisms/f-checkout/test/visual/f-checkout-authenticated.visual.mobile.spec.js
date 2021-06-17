@@ -35,7 +35,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     it('should display the "Something went wrong" error.', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
+        checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Patch Checkout Errors', 'SERVER')
                 .withQuery('&knob-Is ASAP available', true);

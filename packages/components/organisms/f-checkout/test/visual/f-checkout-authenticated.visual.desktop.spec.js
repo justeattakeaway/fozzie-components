@@ -35,9 +35,9 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
     it('should display the "Something went wrong" error.', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
+        checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Checkout Errors', 'SERVER')
+                .withQuery('&knob-Patch Checkout Errors', 'SERVER')
                 .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
@@ -54,11 +54,10 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
+        checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Checkout Errors', 'ISSUES')
-                .withQuery('&knob-Place Order Errors', 'SERVER');
+                .withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
