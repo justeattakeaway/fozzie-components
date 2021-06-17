@@ -31,9 +31,10 @@ describe('Shared - f-header component tests', () => {
         // Act
         header.open(pageUrl);
         header.waitForComponent();
+        header.openMobileNavigationBar();
 
         // Assert
-        browser.percyScreenshot(`f-header - Base state - isLoggedIn: ${isLoggedIn} - ${tenant}`, 'desktop');
+        browser.percyScreenshot(`f-header - Base state - isLoggedIn: ${isLoggedIn} - ${tenant}`, 'mobile');
     });
 
     forEach(['white', 'highlight', 'transparent'])
@@ -49,7 +50,7 @@ describe('Shared - f-header component tests', () => {
         header.waitForComponent();
 
         // Assert
-        browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
+        browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'mobile');
     });
 
     it('should display all avalible countries', () => {
@@ -60,10 +61,11 @@ describe('Shared - f-header component tests', () => {
         // Act
         header.open(pageUrl);
         header.waitForComponent();
-        header.moveToCountrySelector();
+        header.openMobileNavigationBar();
+        header.openCountrySelector();
 
         // Assert
-        browser.percyScreenshot('f-header - Country list', 'desktop');
+        browser.percyScreenshot('f-header - Country list', 'mobile');
     });
 
     forEach(['Show login/user info link', 'Show help link', 'Show country selector'])
@@ -76,22 +78,9 @@ describe('Shared - f-header component tests', () => {
         // Act
         header.open(pageUrl);
         header.waitForComponent();
+        header.openMobileNavigationBar();
 
         // Assert
-        browser.percyScreenshot(`f-header - ${knobName} - False`, 'desktop');
-    });
-
-    it('should display all user account options', () => {
-        header = new Header('organism', 'header-component');
-        header.withQuery('&knob-Locale', 'en-GB');
-        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
-
-        // Act
-        header.open(pageUrl);
-        header.waitForComponent();
-        header.moveToUserAccount();
-
-        // Assert
-        browser.percyScreenshot('f-header - User Account dropdown', 'desktop');
+        browser.percyScreenshot(`f-header - ${knobName} - False`, 'mobile');
     });
 });
