@@ -454,7 +454,7 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.time = fulfilment.time;
+            state.time = fulfilment.time.scheduled;
 
             let address = null;
             if (addressService.isAddressInLocalStorage()) {
