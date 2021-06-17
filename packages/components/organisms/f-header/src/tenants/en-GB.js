@@ -65,7 +65,7 @@ export default {
     },
     deliveryEnquiry: {
         text: 'Deliver with Just Eat',
-        url: 'https://couriers.just-eat.co.uk/application?utm_medium=referrer&utm_source=just-eat.co.uk&utm_campaign=ex1140-header',
+        url: 'https://just-eat.co.uk/info/delivering-with-just-eat',
         gtm: 'click_courier_signup'
     },
     offers: {
