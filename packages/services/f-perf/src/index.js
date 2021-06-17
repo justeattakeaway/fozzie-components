@@ -10,8 +10,6 @@ import Perfume from 'perfume.js';
 */
 
 let logPerformance;
-let debugMode = window.fPerfDebug || false;
-
 const perfumeJS = new Perfume({
     analyticsTracker: options => {
         const {
@@ -90,9 +88,6 @@ const fPerf = {
             // defaults to GTM tracking
             logPerformance = (metricName, data) => {
                 window.dataLayer = window.dataLayer || [];
-                // eslint-disable-next-line no-console
-                if (debugMode) console.log(metricName, data);
-
                 return window.dataLayer.push({
                     event: 'trackEvent',
                     eventCategory: 'engagement',
@@ -102,11 +97,6 @@ const fPerf = {
                     nonInteraction: true
                 });
             };
-        }
-
-        // When `debugMode` is explicitly specified on instantiation
-        if (options.debugMode) {
-            ({ debugMode } = options);
         }
 
         /**

@@ -18,7 +18,7 @@ Web Performance Metrics and Monitoring - Real User Measurement (RUM) Vue plugin
 ---
 
 ### Installation
-
+j
 Install the module using npm or Yarn:
 
 ```sh
@@ -57,13 +57,7 @@ this.$perfAnnotateEnd('myMethodPerformance');
 
 Note the metric name needs to match for `$perfAnnotateStart` and `$perfAnnotateEnd`. Also those will be prefixed with `webPerf_` to help filter those in your data.
 
-#### Debug mode
-
-It has the ability to run in debug mode, e.g. console logging output when `window.fPerfDebug` is set to true in the browser.
-
-```javascript
-window.fPerfDebug = true;
-```
+_Tip_: Data can be viewed in console under `window.dataLayer`. [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna?hl=en) extension can also be helpful with the default GTM logging.
 
 #### With custom logger function
 
