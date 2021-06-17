@@ -83,23 +83,19 @@ export default {
          * @param name
          */
         selectTabIndex (name) {
+            if (this.activeTab === name) return;
+
             const previousIndex = this.tabs.findIndex(t => t.name === this.activeTab);
             const newIndex = this.tabs.findIndex(t => t.name === name);
 
-            if (newIndex > previousIndex) {
-                this.direction = DIRECTION.RIGHT;
-            } else {
-                this.direction = DIRECTION.LEFT;
-            }
+            this.direction = (newIndex > previousIndex) ? DIRECTION.LEFT : DIRECTION.RIGHT;
 
-            if (this.activeTab !== name) {
-                this.$emit('change', {
-                    new: newIndex,
-                    prev: previousIndex
-                });
+            this.$emit('change', {
+                new: newIndex,
+                prev: previousIndex
+            });
 
-                this.activeTab = name;
-            }
+            this.activeTab = name;
         },
 
         /**

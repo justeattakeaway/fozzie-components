@@ -3,6 +3,34 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.26.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- "Deliver with Just Eat" link
+
+
+v4.25.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Added a link “Just Eat for Business” to the bottom of the “Get to know us” column for the UK. 
+
+
+v4.24.1
+------------------------------
+*June 4, 2021*
+
+### Fixed
+- Update expected URL for BE and LU
+
+### Changed
+- Use domain names in country selector tests
+
+
 v4.24.0
 ------------------------------
 *June 3, 2021*

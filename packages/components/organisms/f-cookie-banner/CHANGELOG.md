@@ -3,12 +3,45 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.13.1
+v0.16.2
 ------------------------------
-*June 04, 2021*
+*June 17, 2021*
 
 ### Fixed
-- component object export for consuming applications
+- Component object export
+
+v0.16.1
+------------------------------
+*June 15, 2021*
+
+### Changed
+- Set default of useGreyBackground to true (most JE apps need this set to true)
+
+
+v0.16.0
+------------------------------
+*June 14, 2021*
+
+### Added
+- Attach link to bottom of page to reopen the cookie consent banner
+
+
+v0.15.0
+------------------------------
+*June 10, 2021*
+
+### Changed
+- Hide banner action wrapped in Promise to call the resendEvents asynchronously
+- Tests updated accordingly
+
+
+v0.14.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Percy Visual Regression tests for Legacy and ConsentBanner
+
 
 v0.13.0
 ------------------------------

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-button",
   "description": "Fozzie Button – The generic button component",
-  "version": "1.4.0",
+  "version": "1.7.0",
   "main": "dist/f-button.umd.min.js",
   "files": [
     "dist",
@@ -33,6 +33,7 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_BUTTON} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
   "scriptsInfo": {
@@ -45,15 +46,18 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1"
+    "@justeat/browserslist-config-fozzie": ">=1.1.1",
+    "vue": "2.x",
+    "vue-router": ">=3.4.8"
   },
   "devDependencies": {
+    "@justeat/f-wdio-utils": "0.2.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.2.0",
-    "node-sass-magic-importer": "5.3.2"
+    "node-sass-magic-importer": "5.3.2",
+    "vue-router": "^3.5.1"
   }
 }

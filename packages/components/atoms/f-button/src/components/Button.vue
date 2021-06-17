@@ -6,14 +6,28 @@
             (isIcon ? $style['o-btn--icon'] : ''),
             $style[`o-btn--${buttonType}`],
             $style[`o-btn--size${buttonSizeClassname}`],
-            (isFullWidth ? $style['o-btn--fullWidth'] : '')
+            (isFullWidth ? $style['o-btn--fullWidth'] : ''),
+            (isLoading ? $style['o-btn--loading'] : '')
         ]"
         :action-type="buttonActionType"
         :data-test-id="`${componentType}-component`"
         v-bind="$attrs"
-        v-on="$listeners"
+        :aria-live="getAriaLive"
+        :aria-busy="isLoading"
+        v-on="!isLoading && $listeners"
     >
-        <slot />
+        <span
+            v-if="isLoading"
+            :class="$style['c-spinner']"
+            :data-test-id="`${componentType}-spinner`" />
+
+        <span
+            :class="[
+                $style['o-btn-text'],
+                (isLoading ? $style['o-btn-text--hidden'] : '')
+            ]">
+            <slot />
+        </span>
     </component>
 </template>
 
@@ -47,6 +61,10 @@ export default {
         isIcon: {
             type: Boolean,
             default: false
+        },
+        isLoading: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -61,73 +79,110 @@ export default {
         },
         /**
          * Renders `Link` component if a `href` attribute is applied to the component
+         * Renders `RouterLink` component if a `to` attribute is applied to the component, avoids page reload compared to Link with `href`
          * Renders `Action` component if no `href` attrivute is applied to the component
          */
         componentType () {
-            return this.$attrs.href ? 'link-button' : 'action-button';
+            if (this.$attrs.href) {
+                return 'link-button';
+            }
+
+            if (this.$attrs.to) {
+                return 'router-link';
+            }
+
+            return 'action-button';
         },
         /**
-         * Passes `actionType` prop to action button if no `href` attribute is applied to the component
+         * Passes `actionType` prop to action button if no `href` or `to` attributes is applied to the component
          */
         buttonActionType () {
-            return !this.$attrs.href ? this.actionType : null;
+            return (!this.$attrs.href && !this.$attrs.to) ? this.actionType : null;
+        },
+        /**
+         * Gets the correct value for the aria-live attribute depending on whether the button is loading or not.
+         */
+        getAriaLive () {
+            return this.isLoading ? 'polite' : 'off';
         }
     }
 };
 </script>
 
 <style lang="scss" module>
+$btn-default-borderRadius           : $border-radius;
+$btn-default-font-family            : $font-family-base;
+$btn-default-font-size              : 'body-l';
+$btn-default-weight                 : $font-weight-bold;
+$btn-default-padding                : 11px 1.5em 13px;
+$btn-default-outline-color          : $color-focus;
+$btn-default-loading-opacity        : 0.35;
 
-$btn-default-borderRadius       : $border-radius;
-$btn-default-font-family        : $font-family-base;
-$btn-default-font-size          : 'body-l';
-$btn-default-weight             : $font-weight-bold;
-$btn-default-padding            : 11px 1.5em 13px;
-$btn-default-outline-color      : $color-focus;
+$btn-primary-bgColor                : $color-interactive-primary;
+$btn-primary-bgColor--hover         : darken($color-interactive-primary, $color-hover-01);
+$btn-primary-bgColor--active        : darken($color-interactive-primary, $color-active-01);
+$btn-primary-textColor              : $color-content-interactive-primary;
+$btn-primary-loading-color          : $color-content-interactive-primary;
+$btn-primary-loading-colorOpaque    : rgba($btn-primary-loading-color, $btn-default-loading-opacity);
 
-$btn-primary-bgColor            : $color-interactive-primary;
-$btn-primary-bgColor--hover     : darken($color-interactive-primary, $color-hover-01);
-$btn-primary-bgColor--active    : darken($color-interactive-primary, $color-active-01);
-$btn-primary-textColor          : $color-content-interactive-primary;
+$btn-secondary-bgColor              : $color-interactive-secondary;
+$btn-secondary-bgColor--hover       : darken($color-interactive-secondary, $color-hover-01);
+$btn-secondary-bgColor--active      : darken($color-interactive-secondary, $color-active-01);
+$btn-secondary-textColor            : $color-content-interactive-secondary;
+$btn-secondary-loading-color        : $color-content-interactive-secondary;
+$btn-secondary-loading-colorOpaque  : rgba($btn-secondary-loading-color, $btn-default-loading-opacity);
 
-$btn-secondary-bgColor          : $color-interactive-secondary;
-$btn-secondary-bgColor--hover   : darken($color-interactive-secondary, $color-hover-01);
-$btn-secondary-bgColor--active  : darken($color-interactive-secondary, $color-active-01);
-$btn-secondary-textColor        : $color-content-interactive-secondary;
+$btn-outline-bgColor                : transparent;
+$btn-outline-bgColor--hover         : darken($color-white, $color-hover-01);
+$btn-outline-bgColor--active        : darken($color-white, $color-active-01);
+$btn-outline-textColor              : $color-content-interactive-tertiary;
+$btn-outline-border-color           : $color-border-default;
+$btn-outline-loading-color          : $color-content-interactive-tertiary;
+$btn-outline-loading-colorOpaque    : rgba($btn-outline-loading-color, $btn-default-loading-opacity);
 
-$btn-outline-bgColor            : transparent;
-$btn-outline-bgColor--hover     : darken($color-white, $color-hover-01);
-$btn-outline-bgColor--active    : darken($color-white, $color-active-01);
-$btn-outline-textColor          : $color-content-interactive-tertiary;
-$btn-outline-border-color       : $color-border-default;
+$btn-ghost-bgColor                  : transparent;
+$btn-ghost-bgColor--hover           : darken($color-white, $color-hover-01);
+$btn-ghost-bgColor--active          : darken($color-white, $color-active-01);
+$btn-ghost-textColor                : $color-content-interactive-secondary;
+$btn-ghost-loading-color            : $color-content-interactive-secondary;
+$btn-ghost-loading-colorOpaque      : rgba($btn-ghost-loading-color, $btn-default-loading-opacity);
 
-$btn-ghost-bgColor              : transparent;
-$btn-ghost-bgColor--hover       : darken($color-white, $color-hover-01);
-$btn-ghost-bgColor--active      : darken($color-white, $color-active-01);
-$btn-ghost-textColor            : $color-content-interactive-secondary;
+$btn-link-loading-color             : $color-content-link;
+$btn-link-loading-colorOpaque       : rgba($btn-link-loading-color, $btn-default-loading-opacity);
 
-$btn-disabled-bgColor           : $color-disabled-01;
-$btn-disabled-textColor         : $color-content-disabled;
+$btn-disabled-bgColor               : $color-disabled-01;
+$btn-disabled-textColor             : $color-content-disabled;
 
-$btn-sizeLarge-font-size        : 'heading-s';
-$btn-sizeLarge-padding          : 13px 1.2em 15px;
+$btn-sizeLarge-font-size            : 'heading-s';
+$btn-sizeLarge-padding              : 13px 1.2em 15px;
+$btn-sizeLarge-loading-color        : $color-content-interactive-primary;
+$btn-sizeLarge-loading-colorOpaque  : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
 
-$btn-sizeSmall-padding          : 7px 1em 9px;
+$btn-sizeSmall-padding              : 7px 1em 9px;
 
-$btn-sizeXSmall-padding         : 5px 0.5em 7px;
-$btn-sizeXSmall-lineHeight      : 1;
+$btn-sizeXSmall-padding             : 5px 0.5em 7px;
+$btn-sizeXSmall-lineHeight          : 1;
 
-$btn-icon-sizeLarge-buttonSize  : 56px; // button--icon is a sircle so width and height can use one var
-$btn-icon-sizeLarge-iconSize    : 21px;
-$btn-icon-sizeMedium-buttonSize  : 48px;
-$btn-icon-sizeMedium-iconSize    : 21px;
-$btn-icon-sizeSmall-buttonSize  : 40px;
-$btn-icon-sizeSmall-iconSize    : 18px;
-$btn-icon-sizeXSmall-buttonSize  : 32px;
-$btn-icon-sizeXSmall-iconSize    : 18px;
+$btn-icon-sizeLarge-buttonSize      : 56px; // button--icon is a sircle so width and height can use one var
+$btn-icon-sizeLarge-iconSize        : 21px;
+$btn-icon-sizeMedium-buttonSize     : 48px;
+$btn-icon-sizeMedium-iconSize       : 21px;
+$btn-icon-sizeSmall-buttonSize      : 40px;
+$btn-icon-sizeSmall-iconSize        : 18px;
+$btn-icon-sizeXSmall-buttonSize     : 32px;
+$btn-icon-sizeXSmall-iconSize       : 18px;
 
+@include loadingIndicator('medium');
+
+.c-spinner {
+    margin: 0 auto;
+    position: absolute;
+    left: calc(50% - 10px); // Substract half of the size of the spinner.
+    top: calc(50% - 10px); // Substract half of the size of the spinner.
+}
 
 .o-btn {
+    position: relative;
     display: inline-block;
     vertical-align: middle;
     font-family: $btn-default-font-family;
@@ -170,11 +225,16 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
     }
 }
 
-/**
- * ==========================================================================
- * Btn Type modifiers
- * ==========================================================================
- */
+    .o-btn-text {
+        display: flex;
+        justify-content: center;
+    }
+    // Visually hide button text (used for loading states)
+    .o-btn-text--hidden {
+        visibility: hidden;
+    }
+
+
 
 /**
  * Modifier – .o-btn--primary
@@ -202,9 +262,12 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         background-color: $btn-primary-bgColor--hover;
     }
 
-    &:active {
+    &:active,
+    &.o-btn--loading {
         background-color: $btn-primary-bgColor--active;
     }
+
+    @include spinnerColor($btn-primary-loading-color, $btn-primary-loading-colorOpaque);
 }
 
 /**
@@ -221,9 +284,12 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         background-color: $btn-secondary-bgColor--hover;
     }
 
-    &:active {
+    &:active,
+    &.o-btn--loading {
         background-color: $btn-secondary-bgColor--active;
     }
+
+    @include spinnerColor($btn-secondary-loading-color, $btn-secondary-loading-colorOpaque);
 }
 
 /**
@@ -247,9 +313,12 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         background-color: $btn-outline-bgColor--hover;
     }
 
-    &:active {
+    &:active,
+    &.o-btn--loading {
         background-color: $btn-outline-bgColor--active;
     }
+
+    @include spinnerColor($btn-outline-loading-color, $btn-outline-loading-colorOpaque);
 }
 
 /**
@@ -272,9 +341,12 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         background-color: $btn-ghost-bgColor--hover;
     }
 
-    &:active {
+    &:active,
+    &.o-btn--loading {
         background-color: $btn-ghost-bgColor--active;
     }
+
+    @include spinnerColor($btn-ghost-loading-color, $btn-ghost-loading-colorOpaque);
 }
 
 /**
@@ -304,6 +376,8 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         color: darken($color-content-link, $color-active-01);
         background-color: transparent;
     }
+
+    @include spinnerColor($btn-link-loading-color, $btn-link-loading-colorOpaque);
 }
 
 /**
@@ -421,9 +495,11 @@ $btn-icon-sizeXSmall-iconSize    : 18px;
         &:hover {
             background-color: darken($color-interactive-brand, $color-hover-01);
         }
-        &:active {
+        &:active, &.o-btn--loading {
             background-color: darken($color-interactive-brand, $color-active-01);
         }
+
+        @include spinnerColor($btn-sizeLarge-loading-color, $btn-sizeLarge-loading-colorOpaque);
     }
 }
 

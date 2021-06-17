@@ -65,6 +65,12 @@ const resolveCustomerDetails = (data, state) => {
     }
 };
 
+/**
+ * @param {object} state - The current `checkout` state.
+ * @returns {String} - session storage key where we save user note.
+ */
+const getUserNoteSessionStorageKey = state => `userNote-${state.basket.id}`;
+
 export default {
     namespaced: true,
 
@@ -343,7 +349,19 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getGeoLocation: async ({ commit, state }, { url, postData, timeout }) => {
-            if (state.authToken) {
+            let addressCoords;
+
+            const isAddressInLocalStorage = addressService.isAddressInLocalStorage();
+
+            if (isAddressInLocalStorage) {
+                const storedAddress = addressService.getAddressFromLocalStorage(false);
+                if (storedAddress.Line1 === state.address.line1 && storedAddress.PostalCode === state.address.postcode) {
+                    addressCoords = [storedAddress.Field1, storedAddress.Field2];
+                    commit(UPDATE_GEO_LOCATION, addressCoords);
+                }
+            }
+
+            if (!addressCoords && state.authToken) {
                 const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
                 const config = {
@@ -391,6 +409,23 @@ export default {
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
         },
 
+        getUserNote: ({ dispatch, state }) => {
+            if (window.sessionStorage) {
+                const key = getUserNoteSessionStorageKey(state);
+                const note = window.sessionStorage.getItem(key);
+                if (note) {
+                    dispatch('updateUserNote', note);
+                }
+            }
+        },
+
+        saveUserNote ({ state }) {
+            if (window.sessionStorage) {
+                const key = getUserNoteSessionStorageKey(state);
+                window.sessionStorage.setItem(key, state.userNote);
+            }
+        },
+
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
         },
@@ -419,7 +454,7 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.time = fulfilment.time;
+            state.time = fulfilment.time.scheduled || state.time;
 
             let address = null;
             if (addressService.isAddressInLocalStorage()) {

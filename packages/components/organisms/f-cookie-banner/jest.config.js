@@ -7,7 +7,8 @@ module.exports = {
 
     modulePathIgnorePatterns: [
         './test/component/',
-        './test/accessibility'
+        './test/accessibility',
+        './test/visual'
     ],
 
     transform: {

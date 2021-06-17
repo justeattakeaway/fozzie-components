@@ -11,7 +11,8 @@ const messages = {
     cookiePolicyLinkUrl: 'https://www.menulog.com.au/info/privacy-policy#cookies_policy',
     legacyBannerText: 'We use cookies to improve your browsing experience. By continuing, you agree to receive cookies on our website.',
     legacyBannerLinkText: 'Learn more about our cookies policy.',
-    legacyBannerCloseBannerText: 'Close cookie banner'
+    legacyBannerCloseBannerText: 'Close cookie banner',
+    reopenCookieBannerLinkText:  'Check my cookie preferences'
 };
 
 const displayLegacy = true;
