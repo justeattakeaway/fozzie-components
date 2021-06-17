@@ -3,7 +3,8 @@ import Perfume from 'perfume.js';
 
 /**
 * @overview Vue Plugin logging Real User Metrics
-* Will console log when `window.fPerfDebug` is set to true
+* By default will push to `window.dataLayer`
+* Custom logger function can be used
 * Builds on top of PerfumeJS https://github.com/zizzamia/perfume.js
 *
 * @module f-perf
@@ -108,13 +109,14 @@ const fPerf = {
          * myMethod(400);
          * this.$perfAnnotateEnd('myMethodPerformance');
          * ```
+         * Prefixes entry name with `fPerf_` to help filter data
          */
         Vue.prototype.$perfAnnotateStart = entry => {
-            perfumeJS.start(`webPerf_${entry}`);
+            perfumeJS.start(`fPerf_${entry}`);
         };
 
         Vue.prototype.$perfAnnotateEnd = entry => {
-            perfumeJS.end(`webPerf_${entry}`);
+            perfumeJS.end(`fPerf_${entry}`);
         };
     }
 };

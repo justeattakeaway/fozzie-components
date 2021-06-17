@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-perf",
-  "description": "Fozzie Perf - Web Performance Metrics and Monitoring - Real User Measurement (RUM) Vue plugin",
+  "description": "Fozzie Web Performance Metrics and Monitoring - Real User Measurement (RUM) Vue plugin",
   "version": "0.1.0",
   "main": "dist/f-perf.umd.min.js",
   "files": [
