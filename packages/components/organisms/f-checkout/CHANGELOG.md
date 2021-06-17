@@ -15,6 +15,14 @@ v0.141.1
 - Percy visual regression test
 
 
+v0.141.1
+------------------------------
+*June 17, 2021*
+
+### Fixed
+- "As soon as possible" not being displayed by default.
+
+
 v0.141.0
 ------------------------------
 *June 17, 2021*
