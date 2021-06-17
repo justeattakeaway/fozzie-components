@@ -99,6 +99,10 @@ module.exports = class Header extends Page {
         return this.countryLink.click();
     }
 
+    moveToUserAccount () {
+        this.navigation.userAccount.link.moveTo();
+    }
+
     openMobileNavigationBar () {
         this.mobileNavigationBar.click();
 
