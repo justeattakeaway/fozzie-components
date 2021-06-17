@@ -10,7 +10,26 @@ import Perfume from 'perfume.js';
 * @module f-perf
 */
 
-let logPerformance;
+/**
+ * Default Performance log Function, pushes metrics to GTM dataLayer
+ * @param {String} metricName Metric logged
+ * @param {Object} data Metric data
+ */
+let logPerformance = (metricName, data) => {
+    window.dataLayer = window.dataLayer || [];
+    return window.dataLayer.push({
+        event: 'trackEvent',
+        eventCategory: 'engagement',
+        eventAction: 'app_performance',
+        eventLabel: metricName,
+        eventValue: metricName === 'cls' ? data * 1000 : data,
+        nonInteraction: true
+    });
+};
+
+/**
+ * Instantiates PerfumeJS with some of the defaults
+ */
 const perfumeJS = new Perfume({
     analyticsTracker: options => {
         const {
@@ -74,30 +93,16 @@ const perfumeJS = new Perfume({
     }
 });
 
-
 const fPerf = {
     /**
      * Instantiates RUM Vue Plugin with options
      * @param {Object} Vue instance
      * @param {Object} options optional configuration, metric logging {Function} and debug mode {Boolean}
      */
-    install: (Vue, options) => {
+    install: (Vue, options = {}) => {
         // Set user defined RUM logging function
-        if (options && options.logger && typeof options.logger === 'function') {
+        if (options.logger && typeof options.logger === 'function') {
             logPerformance = options.logger;
-        } else {
-            // defaults to GTM tracking
-            logPerformance = (metricName, data) => {
-                window.dataLayer = window.dataLayer || [];
-                return window.dataLayer.push({
-                    event: 'trackEvent',
-                    eventCategory: 'engagement',
-                    eventAction: 'app_performance',
-                    eventLabel: metricName,
-                    eventValue: metricName === 'cls' ? data * 1000 : data,
-                    nonInteraction: true
-                });
-            };
         }
 
         /**
