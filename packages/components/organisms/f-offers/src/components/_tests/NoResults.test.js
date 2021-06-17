@@ -13,7 +13,8 @@ describe('NoResults.vue', () => {
         wrapper = mount(NoResults, {
             mocks: {
                 $t: key => key.split('.').reduce((acc, current) => acc[current], tenantConfigs[mockLocale].messages)
-            }
+            },
+            stubs: ['search-box']
         });
     });
 

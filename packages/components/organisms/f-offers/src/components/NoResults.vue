@@ -9,6 +9,7 @@
             :image-align="imageAlign"
             :text-size="textSize"
         >
+            <search-box :class="$style['c-noResults-searchBox']" />
             <f-button
                 :class="$style['c-noResults-link']"
                 button-type="link"
@@ -24,16 +25,17 @@
 <script>
 import MediaElement from '@justeat/f-media-element';
 import FButton from '@justeat/f-button';
-import '@justeat/f-card/dist/f-card.css';
 import '@justeat/f-media-element/dist/f-media-element.css';
 import { ALIGN, FONT_SIZE } from '@justeat/f-media-element/src/constants';
+import SearchBox from './SearchBox.vue';
 
 export default {
     name: 'OffersNoResults',
 
     components: {
         MediaElement,
-        FButton
+        FButton,
+        SearchBox
     },
 
     data: () => ({
@@ -50,7 +52,14 @@ export default {
     padding: spacing(x4) spacing(x5);
 
     & .c-noResults-link {
-        padding: spacing(x2) 0;
+        padding: 0;
+    }
+
+    & .c-noResults-searchBox {
+        padding-top: spacing(x2);
+        & input {
+            background-color: $color-white;
+        }
     }
 
 }
