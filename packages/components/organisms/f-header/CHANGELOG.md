@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.17.2
+------------------------------
+*June 15, 2021*
+
+### Fixed
+- fix nav links colour when profile dropdown is open
+
 
 v4.17.1
 ------------------------------
