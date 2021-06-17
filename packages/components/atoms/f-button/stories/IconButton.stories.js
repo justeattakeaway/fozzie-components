@@ -27,7 +27,7 @@ export const IconButtonComponent = () => ({
 
     props: {
         buttonType: {
-            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link'], 'primary')
+            default: select('Button Type', ['primary', 'secondary', 'ghost', 'ghostTertiary'], 'primary')
         },
 
         buttonSize: {

@@ -35,6 +35,8 @@
 import ActionButton from './Action.vue';
 import LinkButton from './Link.vue';
 
+import { VALID_BUTTON_TYPES } from '../constants';
+
 export default {
     name: 'FButton',
     components: {
@@ -105,72 +107,105 @@ export default {
         getAriaLive () {
             return this.isLoading ? 'polite' : 'off';
         }
+    },
+    watch: {
+        $props: {
+            immediate: true,
+            handler () {
+                this.validateProps();
+            }
+        }
+    },
+    methods: {
+        /**
+         * Throws an error if the `buttonType` is invalid for the type of button being used (component is either a button or iconButton).
+         * This is to ensure visual styles are only used with the intended component type.
+         */
+        validateProps () {
+            let componentType = 'button';
+
+            if (this.isIcon === true) {
+                componentType = 'iconButton';
+            }
+
+            const validTypes = VALID_BUTTON_TYPES[componentType];
+            if (!validTypes.includes(this.buttonType)) {
+                throw new TypeError(`${componentType} is set to have buttonType="${this.buttonType}", but it can only be one of the following buttonTypes: "${validTypes.join('", "')}"`);
+            }
+        }
     }
 };
 </script>
 
 <style lang="scss" module>
-$btn-default-borderRadius           : $border-radius;
-$btn-default-font-family            : $font-family-base;
-$btn-default-font-size              : 'body-l';
-$btn-default-weight                 : $font-weight-bold;
-$btn-default-padding                : 11px 1.5em 13px;
-$btn-default-outline-color          : $color-focus;
-$btn-default-loading-opacity        : 0.35;
+$btn-default-borderRadius              : $border-radius;
+$btn-default-font-family               : $font-family-base;
+$btn-default-font-size                 : 'body-l';
+$btn-default-weight                    : $font-weight-bold;
+$btn-default-padding                   : 11px 1.5em 13px;
+$btn-default-outline-color             : $color-focus;
+$btn-default-loading-opacity           : 0.35;
 
-$btn-primary-bgColor                : $color-interactive-primary;
-$btn-primary-bgColor--hover         : darken($color-interactive-primary, $color-hover-01);
-$btn-primary-bgColor--active        : darken($color-interactive-primary, $color-active-01);
-$btn-primary-textColor              : $color-content-interactive-primary;
-$btn-primary-loading-color          : $color-content-interactive-primary;
-$btn-primary-loading-colorOpaque    : rgba($btn-primary-loading-color, $btn-default-loading-opacity);
+$btn-primary-bgColor                   : $color-interactive-primary;
+$btn-primary-bgColor--hover            : darken($color-interactive-primary, $color-hover-01);
+$btn-primary-bgColor--active           : darken($color-interactive-primary, $color-active-01);
+$btn-primary-textColor                 : $color-content-interactive-primary;
+$btn-primary-loading-color             : $color-content-interactive-primary;
+$btn-primary-loading-colorOpaque       : rgba($btn-primary-loading-color, $btn-default-loading-opacity);
 
-$btn-secondary-bgColor              : $color-interactive-secondary;
-$btn-secondary-bgColor--hover       : darken($color-interactive-secondary, $color-hover-01);
-$btn-secondary-bgColor--active      : darken($color-interactive-secondary, $color-active-01);
-$btn-secondary-textColor            : $color-content-interactive-secondary;
-$btn-secondary-loading-color        : $color-content-interactive-secondary;
-$btn-secondary-loading-colorOpaque  : rgba($btn-secondary-loading-color, $btn-default-loading-opacity);
+$btn-secondary-bgColor                 : $color-interactive-secondary;
+$btn-secondary-bgColor--hover          : darken($color-interactive-secondary, $color-hover-01);
+$btn-secondary-bgColor--active         : darken($color-interactive-secondary, $color-active-01);
+$btn-secondary-textColor               : $color-content-interactive-secondary;
+$btn-secondary-loading-color           : $color-content-interactive-secondary;
+$btn-secondary-loading-colorOpaque     : rgba($btn-secondary-loading-color, $btn-default-loading-opacity);
 
-$btn-outline-bgColor                : transparent;
-$btn-outline-bgColor--hover         : darken($color-white, $color-hover-01);
-$btn-outline-bgColor--active        : darken($color-white, $color-active-01);
-$btn-outline-textColor              : $color-content-interactive-tertiary;
-$btn-outline-border-color           : $color-border-default;
-$btn-outline-loading-color          : $color-content-interactive-tertiary;
-$btn-outline-loading-colorOpaque    : rgba($btn-outline-loading-color, $btn-default-loading-opacity);
+$btn-outline-bgColor                   : transparent;
+$btn-outline-bgColor--hover            : darken($color-white, $color-hover-01);
+$btn-outline-bgColor--active           : darken($color-white, $color-active-01);
+$btn-outline-textColor                 : $color-content-interactive-tertiary;
+$btn-outline-border-color              : $color-border-default;
+$btn-outline-loading-color             : $color-content-interactive-tertiary;
+$btn-outline-loading-colorOpaque       : rgba($btn-outline-loading-color, $btn-default-loading-opacity);
 
-$btn-ghost-bgColor                  : transparent;
-$btn-ghost-bgColor--hover           : darken($color-white, $color-hover-01);
-$btn-ghost-bgColor--active          : darken($color-white, $color-active-01);
-$btn-ghost-textColor                : $color-content-interactive-secondary;
-$btn-ghost-loading-color            : $color-content-interactive-secondary;
-$btn-ghost-loading-colorOpaque      : rgba($btn-ghost-loading-color, $btn-default-loading-opacity);
+$btn-ghost-bgColor                     : transparent;
+$btn-ghost-bgColor--hover              : darken($color-white, $color-hover-01);
+$btn-ghost-bgColor--active             : darken($color-white, $color-active-01);
+$btn-ghost-textColor                   : $color-content-interactive-secondary;
+$btn-ghost-loading-color               : $color-content-interactive-secondary;
+$btn-ghost-loading-colorOpaque         : rgba($btn-ghost-loading-color, $btn-default-loading-opacity);
 
-$btn-link-loading-color             : $color-content-link;
-$btn-link-loading-colorOpaque       : rgba($btn-link-loading-color, $btn-default-loading-opacity);
+$btn-ghostTertiary-bgColor             : transparent;
+$btn-ghostTertiary-bgColor--hover      : darken($color-white, $color-hover-01);
+$btn-ghostTertiary-bgColor--active     : darken($color-white, $color-active-01);
+$btn-ghostTertiary-textColor           : $color-content-interactive-tertiary;
+$btn-ghostTertiary-loading-color       : $color-content-interactive-tertiary;
+$btn-ghostTertiary-loading-colorOpaque : rgba($btn-ghostTertiary-loading-color, $btn-default-loading-opacity);
 
-$btn-disabled-bgColor               : $color-disabled-01;
-$btn-disabled-textColor             : $color-content-disabled;
+$btn-link-loading-color                : $color-content-link;
+$btn-link-loading-colorOpaque          : rgba($btn-link-loading-color, $btn-default-loading-opacity);
 
-$btn-sizeLarge-font-size            : 'heading-s';
-$btn-sizeLarge-padding              : 13px 1.2em 15px;
-$btn-sizeLarge-loading-color        : $color-content-interactive-primary;
-$btn-sizeLarge-loading-colorOpaque  : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
+$btn-disabled-bgColor                  : $color-disabled-01;
+$btn-disabled-textColor                : $color-content-disabled;
 
-$btn-sizeSmall-padding              : 7px 1em 9px;
+$btn-sizeLarge-font-size               : 'heading-s';
+$btn-sizeLarge-padding                 : 13px 1.2em 15px;
+$btn-sizeLarge-loading-color           : $color-content-interactive-primary;
+$btn-sizeLarge-loading-colorOpaque     : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
 
-$btn-sizeXSmall-padding             : 5px 0.5em 7px;
-$btn-sizeXSmall-lineHeight          : 1;
+$btn-sizeSmall-padding                 : 7px 1em 9px;
 
-$btn-icon-sizeLarge-buttonSize      : 56px; // button--icon is a sircle so width and height can use one var
-$btn-icon-sizeLarge-iconSize        : 21px;
-$btn-icon-sizeMedium-buttonSize     : 48px;
-$btn-icon-sizeMedium-iconSize       : 21px;
-$btn-icon-sizeSmall-buttonSize      : 40px;
-$btn-icon-sizeSmall-iconSize        : 18px;
-$btn-icon-sizeXSmall-buttonSize     : 32px;
-$btn-icon-sizeXSmall-iconSize       : 18px;
+$btn-sizeXSmall-padding                : 5px 0.5em 7px;
+$btn-sizeXSmall-lineHeight             : 1;
+
+$btn-icon-sizeLarge-buttonSize         : 56px; // button--icon is a sircle so width and height can use one var
+$btn-icon-sizeLarge-iconSize           : 21px;
+$btn-icon-sizeMedium-buttonSize        : 48px;
+$btn-icon-sizeMedium-iconSize          : 21px;
+$btn-icon-sizeSmall-buttonSize         : 40px;
+$btn-icon-sizeSmall-iconSize           : 18px;
+$btn-icon-sizeXSmall-buttonSize        : 32px;
+$btn-icon-sizeXSmall-iconSize          : 18px;
 
 @include loadingIndicator('medium');
 
@@ -350,6 +385,35 @@ $btn-icon-sizeXSmall-iconSize       : 18px;
 }
 
 /**
+ * Modifier – .o-btn--ghostTertiary
+ *
+ * Accompanying button that can be used on solid background colours (such as grey)
+ * this button type should only be used with iconButtons
+ */
+
+.o-btn--ghostTertiary {
+    background-color: $btn-ghostTertiary-bgColor;
+    color: $btn-ghostTertiary-textColor;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $btn-ghostTertiary-textColor;
+    }
+
+    &:hover {
+        background-color: $btn-ghostTertiary-bgColor--hover;
+    }
+
+    &:active,
+    &.o-btn--loading {
+        background-color: $btn-ghostTertiary-bgColor--active;
+    }
+
+    @include spinnerColor($btn-ghostTertiary-loading-color, $btn-ghostTertiary-loading-colorOpaque);
+}
+
+/**
  * Modifier – .o-btn--link
  *
  * Make a button visually look like a default link
@@ -415,6 +479,12 @@ $btn-icon-sizeXSmall-iconSize       : 18px;
     &.o-btn--ghost {
         path {
             fill: $btn-ghost-textColor;
+        }
+    }
+
+    &.o-btn--ghostTertiary {
+        path {
+            fill: $btn-ghostTertiary-textColor;
         }
     }
 

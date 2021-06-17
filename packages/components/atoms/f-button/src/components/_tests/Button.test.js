@@ -5,9 +5,89 @@ describe('Button', () => {
     const actionType = 'button';
 
     it('should be defined', () => {
-        const propsData = { };
+        const propsData = {};
         const wrapper = shallowMount(FButton, { propsData });
         expect(wrapper.exists()).toBe(true);
+    });
+
+    describe('methods ::', () => {
+        describe('validateProps ::', () => {
+            it.each([
+                'primary',
+                'secondary',
+                'outline',
+                'ghost',
+                'link'
+            ])('should not throw an error when the component is a standard button (isIcon="false") and buttonType is set to %s', buttonType => {
+                // Arrange
+                const propsData = {
+                    buttonType,
+                    isIcon: false
+                };
+
+                // Act
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    // Assert
+                    .not.toThrowError();
+            });
+            it('should throw an error when the component is a standard button (isIcon="false") and buttonType is set to an invalid type', () => {
+                // Arrange
+                const spy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
+                const propsData = {
+                    buttonType: 'invalid_value',
+                    isIcon: false
+                };
+
+                // Act
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    // Assert
+                    .toThrowError('button is set to have buttonType="invalid_value"');
+
+                spy.mockRestore();
+            });
+
+            it.each([
+                'primary',
+                'secondary',
+                'ghost',
+                'ghostTertiary'
+            ])('should not throw an error when the component is an iconButton (isIcon="true") and buttonType is set to %s', buttonType => {
+                // Arrange
+                const propsData = {
+                    buttonType,
+                    isIcon: true
+                };
+
+                // Act
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    // Assert
+                    .not.toThrowError();
+            });
+
+            it('should throw an error when the component is an iconButton (isIcon="true") and the buttonType is set to an invalid type', () => {
+                // Arrange
+                const spy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
+                const propsData = {
+                    buttonType: 'invalid_value',
+                    isIcon: true
+                };
+
+                // Act
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    // Assert
+                    .toThrowError('iconButton is set to have buttonType="invalid_value"');
+
+                spy.mockRestore();
+            });
+        });
     });
 
     describe('template :: ', () => {
