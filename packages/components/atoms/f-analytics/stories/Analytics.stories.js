@@ -3,18 +3,18 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import GtmAnalytics from '../src/components/Analytics.vue';
+import Analytics from '../src/components/Analytics.vue';
 
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
-export const GtmAnalyticsComponent = () => ({
-    components: { GtmAnalytics },
+export const AnalyticsComponent = () => ({
+    components: { Analytics },
     props: {
     },
-    template: '<gtm-analytics />'
+    template: '<analytics />'
 });
 
-GtmAnalyticsComponent.storyName = 'f-analytics';
+AnalyticsComponent.storyName = 'f-analytics';

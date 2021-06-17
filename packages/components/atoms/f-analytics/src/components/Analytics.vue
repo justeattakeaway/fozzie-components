@@ -2,14 +2,14 @@
     <div
         :class="$style['c-analytics']"
         data-test-id="analytics">
-        I am the GtmAnalytics Component (GB)
+        I am the 'f-analytics' component
     </div>
 </template>
 
 <script>
 
 export default {
-    name: 'GtmAnalytics',
+    name: 'Analytics',
     components: {},
     props: {
     }

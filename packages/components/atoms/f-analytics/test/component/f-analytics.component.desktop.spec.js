@@ -1,15 +1,15 @@
-const GtmAnalytics = require('../../test-utils/component-objects/f-analytics.component');
+const AnalyticsComponent = require('../../test-utils/component-objects/f-analytics.component');
 
-const gtmAnalytics = new GtmAnalytics();
+const analyticsComponent = new AnalyticsComponent();
 
 describe('f-analytics component tests', () => {
     beforeEach(() => {
-        gtmAnalytics.open();
-        gtmAnalytics.waitForComponent();
+        analyticsComponent.open();
+        analyticsComponent.waitForComponent();
     });
 
     it('should display the f-analytics component', () => {
         // Assert
-        expect(gtmAnalytics.isComponentDisplayed()).toBe(true);
+        expect(analyticsComponent.isComponentDisplayed()).toBe(true);
     });
 });

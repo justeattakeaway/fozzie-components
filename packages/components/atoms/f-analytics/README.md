@@ -38,28 +38,28 @@ npm install @justeat/f-analytics
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import GtmAnalytics from '@justeat/f-analytics';
+import Analytics from '@justeat/f-analytics';
 import '@justeat/f-analytics/dist/f-analytics.css';
 
 export default {
     components: {
-        GtmAnalytics
+        Analytics
     }
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `gtm-analytics` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `analytics` bundle from the main `bundle.client.js`:
 
 ```js
 import '@justeat/f-analytics/dist/f-analytics.css';
 
 export default {
     components: {
-        // …
-        GtmAnalytics: () => import(/* webpackChunkName: "gtm-analytics" */ '@justeat/f-analytics')
+        Analytics: () => import(/* webpackChunkName: "analytics" */ '@justeat/f-analytics')
     }
 }
 ```
+</br>
 
 ## Configuration
 
@@ -78,6 +78,7 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+</br>
 
 ## Development
 
@@ -94,6 +95,7 @@ Change directory to the `f-analytics` package:
 ```sh
 $ cd packages/components/atoms/f-analytics
 ```
+</br>
 
 ## Testing
 
@@ -122,4 +124,6 @@ yarn test-component:chrome
 ```bash
 yarn test-a11y:chrome
 ```
+</br>
+
 ## Documentation to be completed once module is in stable state.
