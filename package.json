@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.40.0",
+  "version": "3.41.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -13,7 +13,7 @@
     "storybook:build": "lerna run storybook:build --stream",
     "storybook:serve": "lerna run storybook:serve --stream",
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
-    "storybook:deploy": "storybook-to-ghpages --script storybook:build",
+    "storybook:deploy": "lerna run storybook:deploy",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component lerna run test-component:chrome --concurrency 1 --stream",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component lerna run test-component:browserstack --concurrency 1 --stream",
@@ -38,7 +38,6 @@
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.0-beta.52",
     "@percy/webdriverio": "2.0.0",
-    "@storybook/storybook-deployer": "2.8.6",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
