@@ -79,16 +79,25 @@ export default {
         },
         /**
          * Renders `Link` component if a `href` attribute is applied to the component
-         * Renders `Action` component if no `href` attribute is applied to the component
+         * Renders `RouterLink` component if a `to` attribute is applied to the component, avoids page reload compared to Link with `href`
+         * Renders `Action` component if no `href` attrivute is applied to the component
          */
         componentType () {
-            return this.$attrs.href ? 'link-button' : 'action-button';
+            if (this.$attrs.href) {
+                return 'link-button';
+            }
+
+            if (this.$attrs.to) {
+                return 'router-link';
+            }
+
+            return 'action-button';
         },
         /**
-         * Passes `actionType` prop to action button if no `href` attribute is applied to the component
+         * Passes `actionType` prop to action button if no `href` or `to` attributes is applied to the component
          */
         buttonActionType () {
-            return !this.$attrs.href ? this.actionType : null;
+            return (!this.$attrs.href && !this.$attrs.to) ? this.actionType : null;
         },
         /**
          * Gets the correct value for the aria-live attribute depending on whether the button is loading or not.
