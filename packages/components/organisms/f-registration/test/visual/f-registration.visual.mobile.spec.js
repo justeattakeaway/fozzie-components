@@ -13,12 +13,11 @@ describe('f-registration - Mobile visual tests', () => {
         registration.waitForComponent();
     });
 
-//Percy test to assert component is displayed
     it('should display component', () => {
         // Assert
         browser.percyScreenshot(`f-registration - Base`, 'mobile')
     });
-//Percy test
+
     it('should display the "Email address is already registered" error', () => {
         // Arrange
         const userInfo = {
@@ -34,8 +33,7 @@ describe('f-registration - Mobile visual tests', () => {
         // Assert
         browser.percyScreenshot(`f-registration - "Email is already registered error"`, 'mobile')
     });
-//Percy test
-    // Refactor for Percy visual regression
+
     it('should display error when "%s" field is empty', field => {
         // Arrange
         const userInfo = {
@@ -51,9 +49,7 @@ describe('f-registration - Mobile visual tests', () => {
         // Assert
         browser.percyScreenshot(`f-registration - "Mandatory field errors"`, 'mobile')
     });
-//Percy test (In this case we will need two tests. 1 to ensure field validation.
-//And another to ensure error is thrown after create account button is hit. )
-    // Refactor for Percy visual regression
+
     it('should display error when "%s" input is invalid', () => {
         // Arrange
         const userInfo = {
@@ -70,8 +66,6 @@ describe('f-registration - Mobile visual tests', () => {
         browser.percyScreenshot(`f-registration - "Invalid input error"`, 'mobile')
     });
 
-//Percy test(No max length on password field)
-    // Refactor for Percy visual regression
     it('should display error when "%s" input is too long', field => {
         // Arrange
         const userInfo = {
