@@ -35,7 +35,7 @@
 import ActionButton from './Action.vue';
 import LinkButton from './Link.vue';
 
-import { VALID_BUTTON_TYPES } from '../constants';
+import { VALID_BUTTON_TYPES, VALID_BUTTON_SIZES } from '../constants';
 
 export default {
     name: 'FButton',
@@ -71,7 +71,14 @@ export default {
     },
     computed: {
         /**
-         * Converts the buttonSize prop into a normalised classname (that fit with our class naming scheme)
+         * Passes `actionType` prop to action button if no `href` or `to` attributes is applied to the component
+         */
+        buttonActionType () {
+            return (!this.$attrs.href && !this.$attrs.to) ? this.actionType : null;
+        },
+
+        /**
+         * Converts the buttonSize prop into a normalised classname (that fits with our class naming scheme)
          */
         buttonSizeClassname () {
             if (this.buttonSize === 'xsmall') {
@@ -79,6 +86,7 @@ export default {
             }
             return this.buttonSize.charAt(0).toUpperCase() + this.buttonSize.slice(1); // capitalize the first letter of the prop
         },
+
         /**
          * Renders `Link` component if a `href` attribute is applied to the component
          * Renders `RouterLink` component if a `to` attribute is applied to the component, avoids page reload compared to Link with `href`
@@ -95,12 +103,7 @@ export default {
 
             return 'action-button';
         },
-        /**
-         * Passes `actionType` prop to action button if no `href` or `to` attributes is applied to the component
-         */
-        buttonActionType () {
-            return (!this.$attrs.href && !this.$attrs.to) ? this.actionType : null;
-        },
+
         /**
          * Gets the correct value for the aria-live attribute depending on whether the button is loading or not.
          */
@@ -122,15 +125,15 @@ export default {
          * This is to ensure visual styles are only used with the intended component type.
          */
         validateProps () {
-            let componentType = 'button';
-
-            if (this.isIcon === true) {
-                componentType = 'iconButton';
-            }
+            const componentType = this.isIcon ? 'iconButton' : 'button';
 
             const validTypes = VALID_BUTTON_TYPES[componentType];
             if (!validTypes.includes(this.buttonType)) {
                 throw new TypeError(`${componentType} is set to have buttonType="${this.buttonType}", but it can only be one of the following buttonTypes: "${validTypes.join('", "')}"`);
+            }
+
+            if (!VALID_BUTTON_SIZES.includes(this.buttonSize)) {
+                throw new TypeError(`buttonSize is set to "${this.buttonSize}", but it can only be one of the following buttonSizes: "${VALID_BUTTON_SIZES.join('", "')}"`);
             }
         }
     }

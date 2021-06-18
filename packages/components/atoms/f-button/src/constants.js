@@ -3,3 +3,5 @@ export const VALID_BUTTON_TYPES = {
     iconButton: ['primary', 'secondary', 'ghost', 'ghostTertiary'],
     button: ['primary', 'secondary', 'outline', 'ghost', 'link']
 };
+
+export const VALID_BUTTON_SIZES = ['xsmall', 'small', 'medium', 'large'];
