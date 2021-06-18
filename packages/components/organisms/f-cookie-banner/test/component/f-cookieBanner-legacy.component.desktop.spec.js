@@ -8,7 +8,7 @@ let cookieBanner;
 describe('Legacy - f-cookieBanner component tests @browserstack', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
-        cookieBanner.withQuery('&knob-Locale', 'en-GB');
+        cookieBanner.withQuery('&knob-Locale', 'en-AU');
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
         cookieBanner.open(pageUrl);
         cookieBanner.waitForComponent();
@@ -27,7 +27,6 @@ describe('Legacy - f-cookieBanner component tests @browserstack', () => {
 
 describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
     forEach([
-        ['en-GB', 'uk/info/cookies-policy'],
         ['en-AU', 'au/info/privacy-policy#cookies_policy'],
         ['en-NZ', 'nz/info/privacy-policy#cookies_policy']
     ])
