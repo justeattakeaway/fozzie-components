@@ -5,7 +5,7 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookieConsent
 
 let cookieBanner;
 
-describe('New - f-cookieBanner component tests - @browserstack', () => {
+describe('New - f-cookieBanner Desktop Visual Tests', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
         cookieBanner.withQuery('&knob-Locale', 'en-IE');
@@ -30,6 +30,6 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
         cookieBanner.waitForComponent();
 
         // Assert
-        browser.percyScreenshot(`f-cookiebanner - CookieConsent - ${tenant}`, 'shared');
+        browser.percyScreenshot(`f-cookiebanner - CookieConsent - ${tenant}`, 'desktop');
     });
 });

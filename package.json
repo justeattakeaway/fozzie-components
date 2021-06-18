@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.39.0",
+  "version": "3.40.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -36,7 +36,7 @@
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/fozzie": "5.0.0-beta.8",
     "@justeat/stylelint-config-fozzie": "2.2.0",
-    "@percy/cli": "1.0.0-beta.48",
+    "@percy/cli": "1.0.0-beta.52",
     "@percy/webdriverio": "2.0.0",
     "@storybook/storybook-deployer": "2.8.6",
     "@vue/cli-plugin-babel": "4.4.6",
