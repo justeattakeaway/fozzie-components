@@ -5,7 +5,7 @@ const Registration = require('../../test-utils/component-objects/f-registration.
 
 let registration;
 
-describe('Shared - f-registration component tests - @browserstack', () => {
+describe('f-registration - Desktop visual tests', () => {
     beforeEach(() => {
         registration = new Registration('organism', 'registration-component');
         const pageUrl = buildUrl(registration.componentType, registration.componentName, registration.path);
@@ -13,13 +13,13 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         registration.waitForComponent();
     });
 
-//Percy test
+//Percy test to assert component is displayed
     it('should display component', () => {
         // Assert
-        expect(registration.isComponentDisplayed()).toBe(true);
+        browser.percyScreenshot(`f-registration - Base`, 'desktop')
     });
 //Percy test
-    it('should display the "Email address is already registered" error - @percy', () => {
+    it('should display the "Email address is already registered" error', () => {
         // Arrange
         const userInfo = {
             firstName: 'Test',
@@ -32,18 +32,11 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         registration.submitForm(userInfo);
 
         // Assert
-        expect(registration.isEmailExistsErrorDisplayed()).toBe(true);
-    });
-//Will not be converted
-    forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should display input field "%s" - @percy', field => {
-        // Assert
-        expect(registration.isInputFieldDisplayed(field)).toBe(true);
+        browser.percyScreenshot(`f-registration - "Email is already registered error"`, 'desktop')
     });
 //Percy test
     // Refactor for Percy visual regression
-    forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should display error when "%s" field is empty - @percy', field => {
+    it('should display error when "%s" field is empty', field => {
         // Arrange
         const userInfo = {
             firstName: '',
@@ -56,13 +49,12 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         registration.submitForm(userInfo);
 
         // Assert
-        expect(registration.isEmptyErrorDisplayed(field)).toBe(true);
+        browser.percyScreenshot(`f-registration - "Mandatory field errors"`, 'desktop')
     });
 //Percy test (In this case we will need two tests. 1 to ensure field validation.
 //And another to ensure error is thrown after create account button is hit. )
     // Refactor for Percy visual regression
-    forEach(['firstName', 'lastName', 'email'])
-    .it('should display error when "%s" input is invalid - @percy', field => {
+    it('should display error when "%s" input is invalid', () => {
         // Arrange
         const userInfo = {
             firstName: '123*',
@@ -75,18 +67,17 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         registration.submitForm(userInfo);
 
         // Assert
-        expect(registration.isInvalidErrorDisplayed(field)).toBe(true);
+        browser.percyScreenshot(`f-registration - "Invalid input error"`, 'desktop')
     });
 
 //Percy test(No max length on password field)
     // Refactor for Percy visual regression
-    forEach(['firstName', 'lastName'])
-    .it('should display error when "%s" input is too long - @percy', field => {
+    it('should display error when "%s" input is too long', field => {
         // Arrange
         const userInfo = {
             firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
             lastName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
-            email: 'joe@test.com',
+            email: 'abcdefghijabcdefghijabc@defghijabcdefghijabcdefghijabcdefghij.com',
             password: 'abcdefghijabcdefghijabcdefghi'
         };
 
@@ -94,14 +85,6 @@ describe('Shared - f-registration component tests - @browserstack', () => {
         registration.submitForm(userInfo);
 
         // Assert
-        expect(registration.isMaxLengthErrorDisplayed(field)).toBe(true);
-    });
-
-//Will not be converted
-    it('should display and be able to click the legal documentation', () => {
-        // Assert
-        expect(registration.termsAndConditionsLinkCanBeClicked()).toBe(true);
-        expect(registration.privacyPolicyLinkCanBeClicked()).toBe(true);
-        expect(registration.cookiesPolicyLinkCanBeClicked()).toBe(true);
+        browser.percyScreenshot(`f-registration - "Input exceed max length error"`, 'desktop')
     });
 });
