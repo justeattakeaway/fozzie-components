@@ -974,20 +974,41 @@ describe('Checkout', () => {
         });
 
         describe('redirectUrl ::', () => {
-            it('should return the URL to redirect back to the restaurant menu', () => {
-                // Arrange && Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        restaurant
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
+            describe('when service type is delivery or collection', () => {
+                it('should return the URL with a "restaurants" prefix to redirect back to the restaurant menu', () => {
+                    // Arrange && Act
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            restaurant
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
 
-                // Assert
-                expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
+                    // Assert
+                    expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
+                });
+            });
+
+            describe('when service type is dine in', () => {
+                it('should return the URL with a "dine-in" prefix to redirect back to the restaurant menu', () => {
+                    // Arrange && Act
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            restaurant,
+                            serviceType: 'dinein'
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.redirectUrl).toEqual(`dine-in-${restaurant.seoName}/menu`);
+                });
             });
         });
     });
