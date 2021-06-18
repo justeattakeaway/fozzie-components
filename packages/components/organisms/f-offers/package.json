@@ -61,6 +61,6 @@
     "js-cookie": "2.2.1",
     "@justeat/f-trak": "0.7.1",
     "@justeat/f-media-element": "0.3.0",
-    "@justeat/f-button": "1.5.0"
+    "@justeat/f-button": "1.7.0"
   }
 }

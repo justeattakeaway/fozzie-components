@@ -1,17 +1,17 @@
 <template>
     <div
-        :class="$style['c-noResults-wrapper']"
+        :class="$style['c-noOffersFound-wrapper']"
     >
         <media-element
-            :title="$t('noResults.title')"
-            :text="$t('noResults.subtitle')"
+            :title="$t('noOffersFound.title')"
+            :text="$t('noOffersFound.subtitle')"
             image-url="https://d30v2pzvrfyzpo.cloudfront.net/a/hw/img/decoration/oi_no-results-image.svg"
             :image-align="imageAlign"
             :text-size="textSize"
         >
-            <search-box :class="$style['c-noResults-searchBox']" />
+            <search-box :class="$style['c-noOffersFound-searchBox']" />
             <f-button
-                :class="$style['c-noResults-link']"
+                :class="$style['c-noOffersFound-link']"
                 button-type="link"
                 button-size="xsmall"
                 :href="$t('termsAndConditionsLinkUrl')"
@@ -30,7 +30,7 @@ import { ALIGN, FONT_SIZE } from '@justeat/f-media-element/src/constants';
 import SearchBox from './SearchBox.vue';
 
 export default {
-    name: 'OffersNoResults',
+    name: 'OffersNoOffersFound',
 
     components: {
         MediaElement,
@@ -46,16 +46,16 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-noResults-wrapper {
+.c-noOffersFound-wrapper {
     width: 100%;
     background: $color-grey-20;
     padding: spacing(x4) spacing(x5);
 
-    & .c-noResults-link {
+    & .c-noOffersFound-link {
         padding: 0;
     }
 
-    & .c-noResults-searchBox {
+    & .c-noOffersFound-searchBox {
         padding-top: spacing(x2);
         & input {
             background-color: $color-white;

@@ -2,21 +2,21 @@
     <div
         :class="$style['c-offers']"
         data-test-id="offers">
-        <no-results />
+        <no-offers-found />
     </div>
 </template>
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
-import NoResults from './NoResults.vue';
+import NoOffersFound from './NoOffersFound.vue';
 import '@justeat/f-searchbox/dist/f-searchbox.css';
 
 export default {
     name: 'VOffers',
 
     components: {
-        NoResults
+        NoOffersFound
     },
 
     mixins: [

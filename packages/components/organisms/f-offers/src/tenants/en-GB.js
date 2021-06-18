@@ -2,7 +2,7 @@ const messages = {
     locale: 'en-GB',
     text: 'I am a VOffers Component (GB)',
 
-    noResults: {
+    noOffersFound: {
         title: 'Can’t find anything?',
         subtitle: 'There might still be restaurants near you with a tasty discount or deal on.'
     },
