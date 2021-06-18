@@ -33,6 +33,7 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
 
 describe('New - Multi-tenant - f-cookieBanner component tests', () => {
     forEach([
+        ['en-GB', 'uk/info/cookies-policy'],
         ['es-ES', 'es/info/politica-de-cookies'],
         // ['dk', 'dk/cookie-erklaering'],
         ['en-IE', 'ie/info/cookies-policy'],
