@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.41.0
+------------------------------
+*June 18, 2021*
+
+## Fixed
+- Storybook deployer moved to the storybook package (so that it deploys the `index.html` to the root of `gh-pages` correctly).
+
+
 v3.40.0
 ------------------------------
 *June 17, 2021*
@@ -55,7 +63,7 @@ v3.34.0
 ------------------------------
 *May 18, 2021*
 
-### Updated 
+### Updated
 - fozzie to v5.0.0-beta.7 which uses new pie design tokens instead of fozzie-colour-palette vars
 
 

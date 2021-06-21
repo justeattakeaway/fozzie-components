@@ -31,7 +31,7 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
     });
 
     // 'dk' and 'no' disabled for now
-    forEach(['es-ES', 'en-IE', 'it-IT'])
+    forEach(['es-ES', 'en-IE', 'it-IT', 'en-GB'])
     .it('should display the f-cookieBanner component for "%s"', tenant => {
         // Arrange
         cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
