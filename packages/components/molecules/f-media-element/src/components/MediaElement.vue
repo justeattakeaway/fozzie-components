@@ -4,7 +4,8 @@
         :class="[
             $style['c-mediaElement'],
             (stacked ? $style['c-mediaElement--stack'] : ''),
-            (reverse ? $style['c-mediaElement--reverse'] : '')
+            (reverse ? $style['c-mediaElement--reverse'] : ''),
+            (stackOnMobile ? $style['c-mediaElement--stackMobile'] : '')
         ]">
         <div
             :class="[
@@ -23,6 +24,7 @@
         <div
             :class="[
                 $style['c-mediaElement-imgWrapper'],
+                'c-mediaElement-imgWrapper--override',
                 imageAlignClass
             ]">
             <img
@@ -73,6 +75,10 @@ export default {
         altText: {
             type: String,
             default: 'Media Element Image'
+        },
+        stackOnMobile: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
@@ -165,6 +171,43 @@ $font-sizes: (
 .c-mediaElement {
     display: flex;
     width: 100%;
+
+    &.c-mediaElement--reverse {
+        flex-direction: row-reverse;
+    }
+}
+
+/**
+ * Modifier – .c-mediaElement--stackMobile
+ *
+ * Applies flex direction column on <=narrow
+ */
+.c-mediaElement--stackMobile {
+    @include media('<=narrow') {
+        flex-direction: column;
+    }
+    /**
+     * Modifier – .c-mediaElement--reverse
+     *
+     * When stacked in flex col applies col-reverse
+     */
+    &.c-mediaElement--reverse {
+        @include media('<=narrow') {
+            flex-direction: column-reverse;
+        }
+
+        & .c-mediaElement-text {
+            @include media('<=narrow') {
+                margin-bottom: spacing(x3);
+            }
+        }
+    }
+
+    & .c-mediaElement-title {
+        @include media('<=narrow') {
+            margin-top: spacing(x3);
+        }
+    }
 }
 
 /**
@@ -198,6 +241,7 @@ $font-sizes: (
     flex-direction: column;
     justify-content: center;
     flex: 1 1 0%;
+    white-space: pre-line;
 
     /**
      * Modifier – .c-mediaElement-content--center
