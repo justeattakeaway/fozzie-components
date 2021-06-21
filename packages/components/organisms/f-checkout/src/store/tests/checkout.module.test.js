@@ -958,7 +958,7 @@ describe('CheckoutModule', () => {
 
                     // Assert
                     expect(axios.post).not.toHaveBeenCalled();
-                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, [storedAddress.Field1, storedAddress.Field2]);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, [storedAddress.Field2, storedAddress.Field1]);
                 });
 
                 it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if the form address does not match local storage`, async () => {
