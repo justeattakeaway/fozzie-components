@@ -272,4 +272,81 @@ describe('addressService', () => {
             });
         });
     });
+
+    describe('doesAddressInStorageAndFormMatch ::', () => {
+        beforeEach(() => {
+            Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+        });
+
+        afterEach(() => {
+            window.localStorage.clear();
+            jest.resetAllMocks();
+        });
+
+        describe('when the address fields are the same', () => {
+            it('should return true', () => {
+                // Arrange
+                const storageAddress = {
+                    Line1: 'Fleet Place House',
+                    Line2: 'Farringdon',
+                    City: 'London',
+                    PostalCode: 'EC4M 7RF'
+                };
+
+                const formAddress = {
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    locality: 'London',
+                    postcode: 'EC4M 7RF'
+                };
+
+                // Act & Assert
+                expect(addressService.doesAddressInStorageAndFormMatch(storageAddress, formAddress)).toEqual(true);
+            });
+        });
+
+        describe('when the city field is different', () => {
+            it('should return false', () => {
+                // Arrange
+                const storageAddress = {
+                    Line1: 'Fleet Place House',
+                    Line2: 'Farringdon',
+                    City: 'Newcastle',
+                    PostalCode: 'EC4M 7RF'
+                };
+
+                const formAddress = {
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    locality: 'London',
+                    postcode: 'EC4M 7RF'
+                };
+
+                // Act & Assert
+                expect(addressService.doesAddressInStorageAndFormMatch(storageAddress, formAddress)).toEqual(false);
+            });
+        });
+
+        describe('when the postcode is different', () => {
+            it('should return false', () => {
+                // Arrange
+                const storageAddress = {
+                    Line1: 'Fleet Place House',
+                    Line2: 'Farringdon',
+                    City: 'London',
+                    PostalCode: 'EC4M 7RF'
+                };
+
+                const formAddress = {
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    locality: 'London',
+                    postcode: 'EC4M 7RE'
+                };
+
+                // Act & Assert
+                expect(addressService.doesAddressInStorageAndFormMatch(storageAddress, formAddress)).toEqual(false);
+            });
+        });
+    });
 });
