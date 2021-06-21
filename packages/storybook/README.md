@@ -21,6 +21,6 @@ If you need to add styles that should be available in every story you can add th
 
 ## More Info
 
-### [Just Eat Storybook production](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html)
+### [Just Eat Storybook production](https://vue.pie.design/)
 
 ### [Storybook Documentation - Writing Stories](https://storybook.js.org/docs/basics/writing-stories/)
