@@ -7,7 +7,7 @@ import Perfume from 'perfume.js';
 * Custom logger function can be used
 * Builds on top of PerfumeJS https://github.com/zizzamia/perfume.js
 *
-* @module f-perf
+* @module f-performance
 */
 
 /**
@@ -93,7 +93,7 @@ const perfumeJS = new Perfume({
     }
 });
 
-const fPerf = {
+const fPerformance = {
     /**
      * Instantiates RUM Vue Plugin with options
      * @param {Object} Vue instance
@@ -126,4 +126,4 @@ const fPerf = {
     }
 };
 
-export default fPerf;
+export default fPerformance;

@@ -1,12 +1,12 @@
 {
-  "name": "@justeat/f-perf",
+  "name": "@justeat/f-performance",
   "description": "Fozzie Web Performance Metrics and Monitoring - Real User Measurement (RUM) Vue plugin",
   "version": "0.1.0",
-  "main": "dist/f-perf.umd.min.js",
+  "main": "dist/f-performance.umd.min.js",
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-perf",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-performance",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-perf ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-performance ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit"

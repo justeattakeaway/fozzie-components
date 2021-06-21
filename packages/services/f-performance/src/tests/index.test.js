@@ -1,13 +1,13 @@
-import fPerf from '../index';
+import fPerformance from '../index';
 
-describe('fPerf Module', () => {
+describe('fPerformance Module', () => {
     it('should be defined', async () => {
         // Arrange, Act & Assert
-        expect(fPerf).toBeDefined();
+        expect(fPerformance).toBeDefined();
     });
 
     it('should define expected properties', async () => {
         // Arrange, Act & Assert
-        expect(fPerf.install).toBeDefined();
+        expect(fPerformance.install).toBeDefined();
     });
 });

@@ -1,6 +1,6 @@
 <div align="center">
 
-# f-perf
+# f-performance
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
@@ -12,8 +12,8 @@ Web Performance Metrics and Monitoring - Real User Measurement (RUM) Vue plugin
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-perf.svg)](https://badge.fury.io/js/%40justeat%2Ff-perf)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-perf/badge.svg)](https://coveralls.io/github/justeat/f-perf)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-perf/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-perf?targetFile=package.json)
+[![Coverage Status](https://coveralls.io/repos/github/justeat/f-performance/badge.svg)](https://coveralls.io/github/justeat/f-performance)
+[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-performance/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-performance?targetFile=package.json)
 
 ---
 
@@ -22,11 +22,11 @@ j
 Install the module using npm or Yarn:
 
 ```sh
-yarn add @justeat/f-perf
+yarn add @justeat/f-performance
 ```
 
 ```sh
-npm install @justeat/f-perf
+npm install @justeat/f-performance
 ```
 
 ## Usage
@@ -37,9 +37,9 @@ It is non blocking to the page performance as it uses [requestidlecallback](http
 
 
 ```javascript
-import fPerf from '@justeat/f-perf';
+import fPerformance from '@justeat/f-performance';
 
-Vue.use(fPerf)
+Vue.use(fPerformance)
 ```
 
 It implements PerfumeJS as Vue plugin. See more at https://github.com/zizzamia/perfume.js
@@ -65,7 +65,7 @@ Additionally user can overwrite the logging function with their own, when specif
 
 ```javascript
 // Instantiate with own logger Function
-import fPerf from '@justeat/f-perf';
+import fPerformance from '@justeat/f-performance';
 
 /**
  * Custom logger
@@ -76,7 +76,7 @@ function ownPerfLogger (metricName, data) {
   console.log(metricName, data);
 }
 
-Vue.use(fPerf, {logger: ownPerfLogger})
+Vue.use(fPerformance, {logger: ownPerfLogger})
 ```
 
 
