@@ -15,7 +15,7 @@ const messages = {
     reopenCookieBannerLinkText:  'Check my cookie preferences'
 };
 
-const displayLegacy = true;
+const displayLegacy = false;
 
 const cookieExclusionList = [
     '_dc_gtm_',

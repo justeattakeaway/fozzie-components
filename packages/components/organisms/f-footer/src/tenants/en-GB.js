@@ -161,7 +161,7 @@ export default {
                     gtm: 'click_about_restaurant_signup'
                 },
                 {
-                    url: 'https://couriers.just-eat.co.uk/application',
+                    url: 'https://just-eat.co.uk/info/delivering-with-just-eat',
                     text: 'Deliver with Just Eat',
                     gtm: 'click_about_couriers_signup'
                 },

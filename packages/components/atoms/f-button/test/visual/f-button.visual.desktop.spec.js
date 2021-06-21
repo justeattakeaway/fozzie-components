@@ -3,7 +3,7 @@ const Button = require('../../test-utils/component-objects/f-button.component');
 
 let button;
 
-describe('f-button visual tests', () => {
+describe('f-button Desktop visual tests', () => {
     describe('primary button', () => {
         it('should display medium size', () => {
             // Arrange
@@ -17,7 +17,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Primary - Medium', 'shared');
+            browser.percyScreenshot('f-button - Primary - Medium', 'desktop');
         });
 
         it('should display large size', () => {
@@ -32,7 +32,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Primary - Large', 'shared');
+            browser.percyScreenshot('f-button - Primary - Large', 'desktop');
         });
 
         it('should display small size', () => {
@@ -47,7 +47,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Primary - Small', 'shared');
+            browser.percyScreenshot('f-button - Primary - Small', 'desktop');
         });
 
         it('should display xsmall size', () => {
@@ -62,7 +62,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Primary - XSmall', 'shared');
+            browser.percyScreenshot('f-button - Primary - XSmall', 'desktop');
         });
 
         describe('isLoading', () => {
@@ -79,7 +79,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Primary - Medium - Loading', 'shared');
+                browser.percyScreenshot('f-button - Primary - Medium - Loading', 'desktop');
             });
 
             it('should display large size in a loading state', () => {
@@ -95,7 +95,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Primary - Large - Loading', 'shared');
+                browser.percyScreenshot('f-button - Primary - Large - Loading', 'desktop');
             });
         });
     });
@@ -113,7 +113,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Secondary - Medium', 'shared');
+            browser.percyScreenshot('f-button - Secondary - Medium', 'desktop');
         });
 
         it('should display large size', () => {
@@ -128,7 +128,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Secondary - Large', 'shared');
+            browser.percyScreenshot('f-button - Secondary - Large', 'desktop');
         });
 
         it('should display small size', () => {
@@ -143,7 +143,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Secondary - Small', 'shared');
+            browser.percyScreenshot('f-button - Secondary - Small', 'desktop');
         });
 
         it('should display xsmall size', () => {
@@ -158,7 +158,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Secondary - XSmall', 'shared');
+            browser.percyScreenshot('f-button - Secondary - XSmall', 'desktop');
         });
 
         describe('isLoading', () => {
@@ -175,7 +175,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Secondary - Medium - Loading', 'shared');
+                browser.percyScreenshot('f-button - Secondary - Medium - Loading', 'desktop');
             });
 
             it('should display large size in a loading state', () => {
@@ -191,7 +191,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Secondary - Large - Loading', 'shared');
+                browser.percyScreenshot('f-button - Secondary - Large - Loading', 'desktop');
             });
         });
     });
@@ -209,7 +209,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Outline - Medium', 'shared');
+            browser.percyScreenshot('f-button - Outline - Medium', 'desktop');
         });
 
         it('should display large size', () => {
@@ -224,7 +224,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Outline - Large', 'shared');
+            browser.percyScreenshot('f-button - Outline - Large', 'desktop');
         });
 
         it('should display small size', () => {
@@ -239,7 +239,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Outline - Small', 'shared');
+            browser.percyScreenshot('f-button - Outline - Small', 'desktop');
         });
 
         it('should display xsmall size', () => {
@@ -254,7 +254,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Outline - XSmall', 'shared');
+            browser.percyScreenshot('f-button - Outline - XSmall', 'desktop');
         });
 
         describe('isLoading', () => {
@@ -271,7 +271,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Outline - Medium - Loading', 'shared');
+                browser.percyScreenshot('f-button - Outline - Medium - Loading', 'desktop');
             });
 
             it('should display large size in a loading state', () => {
@@ -287,7 +287,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Outline - Large - Loading', 'shared');
+                browser.percyScreenshot('f-button - Outline - Large - Loading', 'desktop');
             });
         });
     });
@@ -305,7 +305,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Ghost - Medium', 'shared');
+            browser.percyScreenshot('f-button - Ghost - Medium', 'desktop');
         });
 
         it('should display large size', () => {
@@ -320,7 +320,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Ghost - Large', 'shared');
+            browser.percyScreenshot('f-button - Ghost - Large', 'desktop');
         });
 
         it('should display small size', () => {
@@ -335,7 +335,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Ghost - Small', 'shared');
+            browser.percyScreenshot('f-button - Ghost - Small', 'desktop');
         });
 
         it('should display xsmall size', () => {
@@ -350,7 +350,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Ghost - XSmall', 'shared');
+            browser.percyScreenshot('f-button - Ghost - XSmall', 'desktop');
         });
 
         describe('isLoading', () => {
@@ -367,7 +367,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Ghost - Medium - Loading', 'shared');
+                browser.percyScreenshot('f-button - Ghost - Medium - Loading', 'desktop');
             });
 
             it('should display large size in a loading state', () => {
@@ -383,7 +383,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Ghost - Large - Loading', 'shared');
+                browser.percyScreenshot('f-button - Ghost - Large - Loading', 'desktop');
             });
         });
     });
@@ -401,7 +401,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Link - Medium', 'shared');
+            browser.percyScreenshot('f-button - Link - Medium', 'desktop');
         });
 
         it('should display large size', () => {
@@ -416,7 +416,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Link - Large', 'shared');
+            browser.percyScreenshot('f-button - Link - Large', 'desktop');
         });
 
         it('should display small size', () => {
@@ -431,7 +431,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Link - Small', 'shared');
+            browser.percyScreenshot('f-button - Link - Small', 'desktop');
         });
 
         it('should display xsmall size', () => {
@@ -446,7 +446,7 @@ describe('f-button visual tests', () => {
             button.waitForActionComponent();
 
             // Assert
-            browser.percyScreenshot('f-button - Link - XSmall', 'shared');
+            browser.percyScreenshot('f-button - Link - XSmall', 'desktop');
         });
 
         describe('isLoading', () => {
@@ -463,7 +463,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Link - Medium - Loading', 'shared');
+                browser.percyScreenshot('f-button - Link - Medium - Loading', 'desktop');
             });
 
             it('should display large size in a loading state', () => {
@@ -479,7 +479,7 @@ describe('f-button visual tests', () => {
                 button.waitForActionComponent();
 
                 // Assert
-                browser.percyScreenshot('f-button - Link - Large - Loading', 'shared');
+                browser.percyScreenshot('f-button - Link - Large - Loading', 'desktop');
             });
         });
     });
