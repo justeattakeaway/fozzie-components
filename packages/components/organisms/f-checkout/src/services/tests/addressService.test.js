@@ -274,15 +274,6 @@ describe('addressService', () => {
     });
 
     describe('doesAddressInStorageAndFormMatch ::', () => {
-        beforeEach(() => {
-            Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-        });
-
-        afterEach(() => {
-            window.localStorage.clear();
-            jest.resetAllMocks();
-        });
-
         describe('when the address fields are the same', () => {
             it('should return true', () => {
                 // Arrange
