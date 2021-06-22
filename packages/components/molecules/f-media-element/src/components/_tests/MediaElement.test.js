@@ -102,7 +102,7 @@ describe('MediaElement.vue', () => {
             expect(style.exists()).toBe(true);
         });
 
-        it('should apply stackWhenNarrow class when stackOnMobile prop is true', () => {
+        it('should apply stackWhenNarrow class when stackWhenNarrow prop is true', () => {
             // Arrange
             const wrapper = shallowMount(MediaElement, {
                 propsData: {
