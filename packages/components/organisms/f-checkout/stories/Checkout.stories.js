@@ -17,7 +17,11 @@ export default {
 Vue.use(Vuex);
 
 const getCheckoutDeliveryUrl = '/checkout-delivery.json';
+const getCheckoutDeliveryAsapUrl = '/checkout-delivery-user-selected-asap.json';
+const getCheckoutDeliveryLaterUrl = '/checkout-delivery-user-selected-later.json';
 const getCheckoutCollectionUrl = '/checkout-collection.json';
+const getCheckoutCollectionAsapUrl = '/checkout-collection-user-selected-asap.json';
+const getCheckoutCollectionLaterUrl = '/checkout-collection-user-selected-later.json';
 const getCheckoutDineInUrl = '/checkout-dinein.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const checkoutAvailableFulfilmentPreorderUrl = '/checkout-available-fulfilment-preorder.json';
@@ -38,7 +42,11 @@ const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect
 const getGeoLocationUrl = '/get-geo-location.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryAsapUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryLaterUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutCollectionAsapUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutCollectionLaterUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDineInUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentPreorderUrl);
@@ -68,7 +76,7 @@ const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
-const additionalItemsRequiredIssue = 'additional-items-required'
+const additionalItemsRequiredIssue = 'additional-items-required';
 
 const patchCheckoutErrorOptions = {
     None: null,
@@ -87,6 +95,12 @@ const getCheckoutErrorOptions = {
 const placeOrderErrorOptions = {
     None: null,
     [placeOrderError]: SERVER
+};
+
+const fulfilmentTimeOptions = {
+    none: null,
+    'Selected Asap Time': 'user-selected-asap',
+    'Selected Later Time': 'user-selected-later'
 };
 
 // eslint-disable-next-line
@@ -135,22 +149,24 @@ export const CheckoutComponent = () => ({
 
         placeOrderError: {
             default: select('Place Order Errors', placeOrderErrorOptions)
+        },
+
+        fulfilmentTimeSelection: {
+            default: select('Fulfilment Time Options', fulfilmentTimeOptions)
         }
     },
 
     computed: {
         getCheckoutUrl () {
-            if (this.getCheckoutError) {
-                return `/checkout-${this.getCheckoutError}-get-error.json`;
+            if (this.fulfilmentTimeSelection) {
+                return `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
             }
-            return `/checkout-${this.serviceType}.json`;
+
+            return this.getCheckoutError ? `/checkout-${this.getCheckoutError}-get-error.json` : `/checkout-${this.serviceType}.json`;
         },
 
         getBasketUrl () {
-            if (this.getCheckoutError) {
-                return `/checkout-${this.getCheckoutError}-get-error.json`;
-            }
-            return `/get-basket-${this.serviceType}.json`;
+            return this.getCheckoutError ? `/checkout-${this.getCheckoutError}-get-error.json` : `/get-basket-${this.serviceType}.json`;
         },
 
         authToken () {

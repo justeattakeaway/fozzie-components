@@ -146,6 +146,7 @@ export default {
             resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);
+            commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
