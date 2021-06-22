@@ -213,7 +213,7 @@ jobs:
       - build_packages
       - run:
           name: Deploy
-          command: yarn storybook:deploy --packages packages
+          command: lerna run storybook:deploy
       - slack_notify_fail
       - slack_notify_success
 

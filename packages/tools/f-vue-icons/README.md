@@ -66,7 +66,7 @@ The component extends [@justeat/browserslist-config-fozzie](https://github.com/j
 
 ## Contributing
 
-Before staring please read our [contributing guide](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-contributing--page)
+Before staring please read our [contributing guide](https://vue.pie.design/?path=/story/documentation-getting-started-contributing--page)
 
 ### Adding new icons
 
@@ -84,7 +84,7 @@ Run `yarn test` to run the tests.
 
 ## Icon list
 
-You can check the list of all the icons in our [Storybook](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/components-atoms--icons).
+You can check the list of all the icons in our [Storybook](https://vue.pie.design/?path=/story/components-atoms--icons).
 
 
 ## Credits
