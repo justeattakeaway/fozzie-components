@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.35.0
+------------------------------
+*June 17, 2021*
+
+### Added
+- `CNAME` record for custom `vue.pie.design` domain.
+### Fixed
+- Storybook deployer moved to the storybook package (so that it deploys the `index.html` to the root of `gh-pages` correctly).
+
+
 v0.34.0
 ------------------------------
 *May 14, 2021*

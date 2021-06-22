@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.141.1",
+  "version": "0.143.1",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
