@@ -2202,7 +2202,7 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.6.0.tgz#8a3cd152ab02e33a4a213ee6a911e2700a47c1ef"
   integrity sha512-uybD+Qz7e/Xq996Yy4E5YMsWDB13H9gZbkfGwO3yNOopGcHhvjW4legHI0eIAs5Jp3o9iE2d9ko21vUvd/BFDw==
 
-"@justeat/f-button@1.8.0":
+"@justeat/f-button@1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.7.0.tgz#aa6aec60198623f95f59ab34b508362271976b2e"
   integrity sha512-tICH7QOafDpUC/p9Lz015K/1UTSjak75BSLLvirA1LuL6CDkzweiqsYK9xm98LksdgwYL5qou2HAeYUDhGfTgQ==
@@ -2234,14 +2234,6 @@
   integrity sha512-KANckjkK0ay/r9FqK2yEQOCzCASNrnJjHRdLIKvMgl4mVo8WxSSVyjIhfJtnVKQwfWv6bg0kkm1xpxxuQffokg==
   dependencies:
     "@justeat/f-vue-icons" "1.10.0"
-
-"@justeat/f-form-field@1.12.1":
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.12.1.tgz#7fad8a3462a78b588246badd299b095be7ca7ee8"
-  integrity sha512-76tlZQ9U4HfiOh6BUDcfH5olKUi/EOXJ7nOP15mvDpaiszA+6ZXXHmUfNinD/fk8w2JmUyJuITNtXwQrIV8gQA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "1.11.0"
 
 "@justeat/f-form-field@1.6.1":
   version "1.6.1"
