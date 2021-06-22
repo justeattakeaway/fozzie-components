@@ -61,7 +61,7 @@ _Tip_: Data can be viewed in console under `window.dataLayer`. [Google Analytics
 
 #### With custom logger function
 
-Additionally user can overwrite the logging function with their own, when specified as an `option`. Custom logging function takes two arguments `metricName` and `data`.
+Additionally user can overwrite the logging function with their own, when specified as an `config`. Custom logging function takes two arguments `metricName` and `data`.
 
 ```javascript
 // Instantiate with own logger Function
