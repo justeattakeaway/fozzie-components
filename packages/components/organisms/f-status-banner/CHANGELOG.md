@@ -3,8 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest – to be added to the next release
-----------------------------------------
+v1.2.0
+------------------------------
+*June 22, 2021*
+
+### Added
+- Visual regression tests
+
+
 *April 6, 2021*
 
 ### Added
