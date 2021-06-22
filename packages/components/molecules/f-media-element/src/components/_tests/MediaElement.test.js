@@ -102,24 +102,24 @@ describe('MediaElement.vue', () => {
             expect(style.exists()).toBe(true);
         });
 
-        it('should apply stackOnMobile class when stackOnMobile prop is true', () => {
+        it('should apply stackWhenNarrow class when stackOnMobile prop is true', () => {
             // Arrange
             const wrapper = shallowMount(MediaElement, {
                 propsData: {
                     title: mockTitle,
                     text: mockText,
                     imageUrl: mockImageUrl,
-                    stackOnMobile: true
+                    stackWhenNarrow: true
                 },
                 mocks: {
                     $style: {
-                        'c-mediaElement--stackMobile': 'c-mediaElement--stackMobile'
+                        'c-mediaElement--stackWhenNarrow': 'c-mediaElement--stackWhenNarrow'
                     }
                 }
             });
 
             // Act
-            const style = wrapper.find('.c-mediaElement--stackMobile');
+            const style = wrapper.find('.c-mediaElement--stackWhenNarrow');
 
             // Assert
             expect(style.exists()).toBe(true);

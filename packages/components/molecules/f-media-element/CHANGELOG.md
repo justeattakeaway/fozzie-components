@@ -4,12 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.3.1
+v0.4.0
 ------------------------------
 *June 21, 2021*
 
 ### Added
-- stackOnMobile prop to stack when on device sizes <=narrowMid
+- stackWhenNarrow prop to stack when on device sizes <=narrowMid
 - `white-space: pre-line` to enable newlines to be preserved when used in title or text
 - Additional unit tests for new features
 
