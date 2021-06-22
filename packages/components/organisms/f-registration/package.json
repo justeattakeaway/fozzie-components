@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Registration Form Component",
-  "version": "0.56.0",
+  "version": "0.57.0",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist",
@@ -35,6 +35,7 @@
     "test": "vue-cli-service test:unit",
     "test:coverage": "yarn test --coverage",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component wdio ../../../../wdio-browserstack.conf.js --mochaOpts.grep '@browserstack'",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_REGISTRATION} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "report:test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn allure:open",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
