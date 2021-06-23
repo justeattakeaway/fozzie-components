@@ -14,6 +14,7 @@
     "url": "https://github.com/justeat/fozzie-components/issues"
   },
   "scripts": {
+    "prepublish": "yarn build",
     "build": "yarn cache clean --all && yarn exec gulp",
     "serve": "npx vue-cli-service serve"
   },
