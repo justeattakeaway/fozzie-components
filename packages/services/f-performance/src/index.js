@@ -60,14 +60,13 @@ const fPerformance = {
          * myMethod(400);
          * this.$perfAnnotateEnd('myMethodPerformance');
          * ```
-         * Prefixes entry name with `fPerf_` to help filter data
          */
         Vue.prototype.$perfAnnotateStart = entry => {
-            perfumeJS.start(`fPerf_${entry}`);
+            perfumeJS.start(entry);
         };
 
         Vue.prototype.$perfAnnotateEnd = entry => {
-            perfumeJS.end(`fPerf_${entry}`);
+            perfumeJS.end(entry);
         };
     }
 };
