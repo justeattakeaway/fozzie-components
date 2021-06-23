@@ -496,6 +496,57 @@ describe('Selector', () => {
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('');
                 });
             });
+
+            describe('when a future fulfilment time has been selected', () => {
+                let selectedTime;
+                let asapTime;
+                let laterTime;
+
+                beforeEach(() => {
+                    // eslint-disable-next-line prefer-destructuring
+                    selectedTime = fulfilmentTimes[1];
+                    asapTime = fulfilmentTimes[0].from;
+                    laterTime = fulfilmentTimes[1].from;
+                });
+
+                describe('AND `hasAsapSelected` is true', () => {
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                        // Act
+                        wrapper = shallowMount(Selector, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                hasAsapSelected: true,
+                                time: selectedTime
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(asapTime);
+                    });
+                });
+
+                describe('AND `hasAsapSelected` is false', () => {
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                        // Act
+                        wrapper = shallowMount(Selector, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                hasAsapSelected: false,
+                                time: selectedTime
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(laterTime);
+                    });
+                });
+            });
         });
 
         describe('`setAsapFlag`', () => {
