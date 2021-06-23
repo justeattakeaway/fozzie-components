@@ -132,10 +132,10 @@ export default {
          */
         initFulfilmentTime () {
             const times = this.fulfilmentTimes || [];
-            const isTimeAvailable = (times.some(i => i.value === this.time.from) && this.time.from);
+            const preSelectedTime = (times.some(i => i.value === this.time.from) && this.time.from);
 
-            let selectedTime = isTimeAvailable && !this.hasAsapSelected
-                ? isTimeAvailable
+            let selectedTime = preSelectedTime && !this.hasAsapSelected
+                ? preSelectedTime
                 : (times.length && times[0].value);
 
             selectedTime = selectedTime === 0 ? '' : selectedTime;
