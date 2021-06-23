@@ -6,6 +6,13 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-cookie-banner",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
   "scripts": {
     "build": "yarn cache clean --all && yarn exec gulp",
     "serve": "npx vue-cli-service serve"
@@ -14,7 +21,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-cookie-banner": "file:../f-cookie-banner/dist/",
+    "@justeat/f-cookie-banner": "^0.18.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
