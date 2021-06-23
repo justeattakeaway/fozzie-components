@@ -24,7 +24,6 @@
         <div
             :class="[
                 $style['c-mediaElement-imgWrapper'],
-                'c-mediaElement-imgWrapper--override',
                 imageAlignClass
             ]">
             <img
