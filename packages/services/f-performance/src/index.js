@@ -16,12 +16,15 @@ const fPerformance = {
     /**
      * Instantiates RUM Vue Plugin with config
      * @param {Object} Vue instance
-     * @param {Object} config optional configuration, metric logging {Function}
+     * @param {Object} config optional configuration, metrics and logging {Function}
      */
     install: (Vue, config = {}) => {
-        let logPerformance = gtmLogger;
+        // Check for custom metrics
+        const configMetrics = config.metrics || {};
+        const logMetrics = { ...metrics, ...configMetrics };
 
-        // Use custom `config.logger` function
+        // Custom `config.logger` function
+        let logPerformance = gtmLogger;
         if (config.logger && typeof config.logger === 'function') {
             logPerformance = config.logger;
         }
@@ -38,10 +41,13 @@ const fPerformance = {
                     navigatorInformation,
                     vitalsScore
                 } = options;
-                const metricLog = metrics[metricName] || `${metricName}`;
-                const metricLogData = metricLog.formatData(data) || { duration: data };
+                const logMetric = logMetrics[metricName];
 
-                logPerformance(metricLog.name, metricLogData);
+                // Log defined metric only
+                if (logMetric) {
+                    const logMetricData = (logMetric.formatData && logMetric.formatData(data)) || data;
+                    logPerformance(logMetric.name, logMetricData);
+                }
             }
         });
 
