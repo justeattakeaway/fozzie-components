@@ -349,7 +349,19 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getGeoLocation: async ({ commit, state }, { url, postData, timeout }) => {
-            if (state.authToken) {
+            let addressCoords;
+
+            const isAddressInLocalStorage = addressService.isAddressInLocalStorage();
+
+            if (isAddressInLocalStorage) {
+                const storedAddress = addressService.getAddressFromLocalStorage(false);
+                if (storedAddress.Line1 === state.address.line1 && storedAddress.PostalCode === state.address.postcode) {
+                    addressCoords = [storedAddress.Field2, storedAddress.Field1];
+                    commit(UPDATE_GEO_LOCATION, addressCoords);
+                }
+            }
+
+            if (!addressCoords && state.authToken) {
                 const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
                 const config = {
@@ -442,7 +454,7 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.time = fulfilment.time;
+            state.time = fulfilment.time.scheduled || state.time;
 
             let address = null;
             if (addressService.isAddressInLocalStorage()) {

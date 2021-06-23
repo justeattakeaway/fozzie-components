@@ -3,7 +3,6 @@ import FButton from '../Button.vue';
 
 describe('Button', () => {
     const actionType = 'button';
-    const link = 'http://www.just-eat.co.uk';
 
     it('should be defined', () => {
         const propsData = { };
@@ -149,10 +148,11 @@ describe('Button', () => {
         describe('componentType :: ', () => {
             let propsData;
 
-            describe('when `href` prop is empty :: ', () => {
+            describe('when `href` and `to` props are empty :: ', () => {
                 beforeEach(() => {
                     propsData = {
                         href: null,
+                        to: null,
                         actionType
                     };
                 });
@@ -174,43 +174,67 @@ describe('Button', () => {
                 });
             });
 
-            describe('when `href` prop is not an empty string :: ', () => {
+            describe.each([
+                ['to', '/test', 'router-link'],
+                ['href', 'http://www.just-eat.co.uk', 'link-button']
+            ])('when %s prop is not an empty string :: ', (prop, value, componentType) => {
                 beforeEach(() => {
-                    propsData = { href: link };
+                    propsData = { [prop]: value };
                 });
 
-                it('should return `componentType` of `link-button`', () => {
+                it(`should return componentType of ${componentType}`, () => {
                     // Act
-                    const wrapper = shallowMount(FButton, { propsData });
-
+                    const wrapper = shallowMount(FButton, {
+                        propsData,
+                        stubs: [componentType === 'router-link' ? componentType : '']
+                    });
                     // Assert
-                    expect(wrapper.vm.componentType).toEqual('link-button');
+                    expect(wrapper.vm.componentType).toEqual(componentType);
                 });
 
-                it('should render `Link` component', () => {
+                it('should render correct component', () => {
                     // Act
-                    const wrapper = mount(FButton, { propsData });
-
+                    const wrapper = mount(FButton, {
+                        propsData,
+                        stubs: [componentType === 'router-link' ? componentType : '']
+                    });
                     // Assert
-                    expect(wrapper.find('[data-test-id="link-button-component"]').exists()).toBeTruthy();
+                    expect(wrapper.find(`[data-test-id=${componentType}-component]`).exists()).toBeTruthy();
                 });
 
-                it('should apply `href` attribute', () => {
+                it(`should apply correct ${prop} value`, () => {
                     // Act
-                    const wrapper = mount(FButton, { propsData });
-
+                    const wrapper = mount(FButton, {
+                        propsData,
+                        stubs: [componentType === 'router-link' ? componentType : '']
+                    });
                     // Assert
-                    expect(wrapper.attributes('href')).toEqual(link);
+                    expect(wrapper.attributes(prop)).toEqual(value);
+                });
+
+                it('should not add `type` or `action-type` attribute', () => {
+                    // Act
+                    const wrapper = mount(FButton, {
+                        propsData,
+                        stubs: [componentType === 'router-link' ? componentType : '']
+                    });
+                    // Assert
+                    expect(wrapper.attributes('type')).toBeUndefined();
+                    expect(wrapper.attributes('action-type')).toBeUndefined();
                 });
             });
         });
 
         describe('buttonActionType :: ', () => {
-            describe('when `href` prop is empty :: ', () => {
+            describe.each([
+                ['to'],
+                ['href']
+            ])('when %s prop is empty :: ', () => {
                 it('should add `type` attribute', () => {
                     // Arrange
                     const propsData = {
                         href: null,
+                        to: null,
                         actionType
                     };
 
@@ -219,22 +243,6 @@ describe('Button', () => {
 
                     // Assert
                     expect(wrapper.attributes('type')).toEqual(actionType);
-                });
-            });
-
-            describe('when `href` prop is not an empty string :: ', () => {
-                it('should not add `type` attribute', () => {
-                    // Arrange
-                    const propsData = {
-                        href: link,
-                        actionType
-                    };
-
-                    // Act
-                    const wrapper = mount(FButton, { propsData });
-
-                    // Assert
-                    expect(wrapper.attributes('type')).toBeUndefined();
                 });
             });
         });

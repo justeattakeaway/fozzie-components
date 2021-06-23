@@ -3,6 +3,54 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.18.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- UK to two-button banner
+
+
+v0.17.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- Percy to run desktop / mobile in separate specs
+
+
+v0.16.1
+------------------------------
+*June 15, 2021*
+
+### Changed
+- Set default of useGreyBackground to true (most JE apps need this set to true)
+
+
+v0.16.0
+------------------------------
+*June 14, 2021*
+
+### Added
+- Attach link to bottom of page to reopen the cookie consent banner
+
+
+v0.15.0
+------------------------------
+*June 10, 2021*
+
+### Changed
+- Hide banner action wrapped in Promise to call the resendEvents asynchronously
+- Tests updated accordingly
+
+
+v0.14.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Percy Visual Regression tests for Legacy and ConsentBanner
+
 
 v0.13.0
 ------------------------------

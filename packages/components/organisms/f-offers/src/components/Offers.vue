@@ -2,29 +2,30 @@
     <div
         :class="$style['c-offers']"
         data-test-id="offers">
-        {{ copy.text }}
+        <no-offers-found />
     </div>
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
+import NoOffersFound from './NoOffersFound.vue';
+import '@justeat/f-searchbox/dist/f-searchbox.css';
 
 export default {
     name: 'VOffers',
-    components: {},
-    props: {
-        locale: {
-            type: String,
-            default: ''
-        }
-    },
-    data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
 
+    components: {
+        NoOffersFound
+    },
+
+    mixins: [
+        VueGlobalisationMixin
+    ],
+
+    data () {
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
     }
 };
@@ -35,12 +36,8 @@ export default {
 .c-offers {
     display: flex;
     justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
+    width: 100%;
     margin: auto;
-    border: 1px solid $color-red;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
 }
 
 </style>

@@ -161,7 +161,7 @@ export default {
                     gtm: 'click_about_restaurant_signup'
                 },
                 {
-                    url: 'https://couriers.just-eat.co.uk/application',
+                    url: 'https://just-eat.co.uk/info/delivering-with-just-eat',
                     text: 'Deliver with Just Eat',
                     gtm: 'click_about_couriers_signup'
                 },
@@ -231,6 +231,11 @@ export default {
                     url: 'https://www.just-eat.co.uk/euro2020/terms/',
                     text: 'Win tickets - Terms and conditions',
                     gtm: 'click_euro2020_terms'
+                },
+                {
+                    url: 'https://www.just-eat.co.uk/business',
+                    text: 'Just Eat for Business',
+                    gtm: 'click_about_for_business'
                 }
             ]
         }

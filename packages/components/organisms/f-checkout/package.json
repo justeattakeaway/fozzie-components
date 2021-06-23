@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.130.0",
+  "version": "0.143.1",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -37,6 +37,7 @@
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component wdio ../../../../wdio-browserstack.conf.js --mochaOpts.grep '@browserstack'",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_CHECKOUT} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "report:test-component:chrome": "cross-env-shell JE_ENV=local  TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn allure:open",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
     "allure:open": "yarn allure:clean && allure open",
@@ -59,8 +60,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
-    "@justeat/f-alert": "0.5.0",
-    "@justeat/f-button": "1.2.0",
+    "@justeat/f-alert": "0.6.1",
+    "@justeat/f-button": "1.6.0",
     "@justeat/f-card": "1.2.1",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.12.1",

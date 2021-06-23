@@ -3,7 +3,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 let checkout;
 
-describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
+describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -20,7 +20,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State', 'desktop');
     });
 
     it('should display the mandatory error messages.', () => {
@@ -29,15 +29,15 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Mandatory Errors State', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Mandatory Errors State', 'desktop');
     });
 
     it('should display the "Something went wrong" error.', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
+        checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Checkout Errors', 'SERVER')
+                .withQuery('&knob-Patch Checkout Errors', 'SERVER')
                 .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
@@ -48,17 +48,16 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Something went wrong" Error', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Something went wrong" Error', 'desktop');
     });
 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
+        checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Checkout Errors', 'ISSUES')
-                .withQuery('&knob-Place Order Errors', 'SERVER');
+                .withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
@@ -67,7 +66,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', 'desktop');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -81,7 +80,7 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Illegal Mobile Number Error State', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Illegal Mobile Number Error State', 'desktop');
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -100,11 +99,11 @@ describe('f-checkout - Collection - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
     });
 });
 
-describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Visual Tests', () => {
+describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -121,11 +120,11 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Visua
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Pre-Order Warning', 'shared');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Pre-Order Warning', 'desktop');
     });
 });
 
-describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
+describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -142,7 +141,7 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State', 'desktop');
     });
 
     it('should display the mandatory error messages', field => {
@@ -154,7 +153,7 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', 'desktop');
     });
 
     it('should display the illegal postcode error message', () => {
@@ -168,7 +167,7 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Postcode Error State', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Postcode Error State', 'desktop');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -182,7 +181,7 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', 'desktop');
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -201,11 +200,11 @@ describe('f-checkout - Delivery - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
     });
 });
 
-describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Visual Tests', () => {
+describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -222,11 +221,11 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Visual 
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Pre-Order Warning', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Pre-Order Warning', 'desktop');
     });
 });
 
-describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
+describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
@@ -243,7 +242,7 @@ describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', 'shared');
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', 'desktop');
     });
 
     it('should display the mandatory error messages', field => {
@@ -255,7 +254,7 @@ describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', 'shared');
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', 'desktop');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -269,7 +268,7 @@ describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', 'shared');
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', 'desktop');
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -288,6 +287,6 @@ describe('f-checkout - Dine In - Authenticated - Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', 'shared');
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
     });
 });

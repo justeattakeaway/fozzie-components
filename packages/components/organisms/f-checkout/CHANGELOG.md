@@ -4,6 +4,143 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.143.1
+------------------------------
+*June 21, 2021*
+
+### Changed
+- Flipped coordinates from local storage
+
+
+v0.143.0
+------------------------------
+*June 18, 2021*
+
+### Changed
+- Fixed redirect link for Dine In orders
+
+
+v0.142.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- Percy to run desktop / mobile in separate specs
+
+
+### Fixed
+- Percy visual regression test
+
+
+v0.141.1
+------------------------------
+*June 17, 2021*
+
+### Fixed
+- "As soon as possible" not being displayed by default.
+
+
+v0.141.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- Fixed an issue in which the chosen delivery/collection time wasn't remembered.
+
+
+v0.140.0
+------------------------------
+*June 16, 2021*
+
+### Changed
+- Fixed cookie removal on 403 error page by now using restaurant ID instead of basket ID
+
+
+v0.139.0
+------------------------------
+*June 14, 2021*
+
+### Changed
+- Use loading spinner on submit button
+  
+
+v0.138.0
+------------------------------
+*June 15, 2021*
+
+### Changed
+- Fixed the hardcoded `referralState` data we're passing to the Place Order endpoint.
+
+
+v0.137.0
+------------------------------
+*June 15, 2021*
+
+### Changed
+- Dependency updated to f-alert@v0.6.1
+
+
+v0.136.0
+------------------------------
+*June 15, 2021*
+
+### Added
+
+- Button for error pages
+- Tests to cover button changes
+- Added log warn when error component is displayed
+- Visual regression tests for error pages
+- `AdditionalItemsRequired` issue for storybook story
+
+### Changed
+- `updateCheckoutErrors` to `updateCheckoutRestaurantNotTakingOrders` in storybook story to be able to specify different issues as the content of the error dialogs can differ
+
+
+v0.135.0
+------------------------------
+*June 11, 2021*
+
+### Changed
+- Fixed the error dialog "Back to order" redirect
+
+
+v0.134.0
+------------------------------
+*June 10, 2021*
+
+### Added
+- Error code to analytics when errors occur for a more descriptive error
+
+
+v0.133.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Separate content for 403 error
+- "Get checkout errors" knob for storybook to render different error page variations
+- `errorFormType` data attribute to deside wether to show one of the error page versions or the checkout form
+
+### Removed
+- `hasCheckoutLoadedSuccessfully` data attribute as redundant
+
+
+v0.132.0
+------------------------------
+*June 8, 2021*
+
+### Changed
+- Read location coords from local storage if address in form hasn't changed
+
+
+v0.131.0
+------------------------------
+*June 9, 2021*
+
+### Added
+- Service type inside menu object for initial push to GTM data layer
+
+
 v0.130.0
 ------------------------------
 *June 7, 2021*

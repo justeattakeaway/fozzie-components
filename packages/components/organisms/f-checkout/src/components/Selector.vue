@@ -135,6 +135,7 @@ export default {
 
             let selectedTime = (times.some(i => i.value === this.time.from) && this.time.from)
                                 || (times.length && times[0].value);
+
             selectedTime = selectedTime === 0 ? '' : selectedTime;
 
             this.updateFulfilmentTime({

@@ -4,7 +4,8 @@
         :class="[
             $style['c-mediaElement'],
             (stacked ? $style['c-mediaElement--stack'] : ''),
-            (reverse ? $style['c-mediaElement--reverse'] : '')
+            (reverse ? $style['c-mediaElement--reverse'] : ''),
+            (stackWhenNarrow ? $style['c-mediaElement--stackWhenNarrow'] : '')
         ]">
         <div
             :class="[
@@ -18,6 +19,7 @@
             <p :class="$style['c-mediaElement-text']">
                 {{ text }}
             </p>
+            <slot />
         </div>
         <div
             :class="[
@@ -72,6 +74,10 @@ export default {
         altText: {
             type: String,
             default: 'Media Element Image'
+        },
+        stackWhenNarrow: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
@@ -164,6 +170,37 @@ $font-sizes: (
 .c-mediaElement {
     display: flex;
     width: 100%;
+
+    &.c-mediaElement--reverse {
+        flex-direction: row-reverse;
+    }
+}
+
+/**
+ * Modifier – .c-mediaElement--stackOnNarrow
+ *
+ * Applies flex direction column on <=narrow
+ */
+@include media('<=narrow') {
+    .c-mediaElement--stackWhenNarrow {
+            flex-direction: column;
+        /**
+         * Modifier – .c-mediaElement--reverse
+         *
+         * When stacked in flex col applies col-reverse
+         */
+        &.c-mediaElement--reverse {
+            flex-direction: column-reverse;
+
+            & .c-mediaElement-text {
+                margin-bottom: spacing(x3);
+            }
+        }
+
+        & .c-mediaElement-title {
+            margin-top: spacing(x3);
+        }
+    }
 }
 
 /**
@@ -197,6 +234,7 @@ $font-sizes: (
     flex-direction: column;
     justify-content: center;
     flex: 1 1 0%;
+    white-space: pre-line;
 
     /**
      * Modifier – .c-mediaElement-content--center

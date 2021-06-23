@@ -3,9 +3,28 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+
+v0.4.0
 ------------------------------
-*February 25, 2021*
+*June 21, 2021*
+
+### Added
+- stackWhenNarrow prop to stack when on device sizes <=narrowMid
+- `white-space: pre-line` to enable newlines to be preserved when used in title or text
+- Additional unit tests for new features
+
+### Fixed
+- Styling fix to make sure reverse prop works when not in stacked mode
+
+
+v0.3.0
+------------------------------
+*June 09, 2021*
+
+### Added
+- Slot to enable additional content to be displayed below the text and title
+- Unit tests to test the classes appear when props are set
+- Unit test for checking slot content works
 
 ### Changed
 - Restructured component object into page object model
