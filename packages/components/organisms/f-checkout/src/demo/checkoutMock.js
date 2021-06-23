@@ -1,7 +1,13 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import getCheckoutDelivery from './checkout-delivery.json';
+import getCheckoutDeliveryAsapUrl from './checkout-delivery-user-selected-asap.json';
+import getCheckoutDeliveryLaterUrl from './checkout-delivery-user-selected-later.json';
+import getCheckoutDeliveryUnavailableUrl from './checkout-delivery-user-selected-unavailable-time.json';
 import getCheckoutCollection from './checkout-collection.json';
+import getCheckoutCollectionAsapUrl from './checkout-collection-user-selected-asap.json';
+import getCheckoutCollectionLaterUrl from './checkout-collection-user-selected-later.json';
+import getCheckoutCollectionUnavailableUrl from './checkout-collection-user-selected-unavailable-time.json';
 import getCheckoutDineIn from './checkout-dinein.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
@@ -28,8 +34,26 @@ export default {
             case '/checkout-delivery.json':
                 mock.onGet(path).reply(200, getCheckoutDelivery);
                 break;
+            case '/checkout-delivery-user-selected-asap.json':
+                mock.onGet(path).reply(200, getCheckoutDeliveryAsapUrl);
+                break;
+            case '/checkout-delivery-user-selected-later.json':
+                mock.onGet(path).reply(200, getCheckoutDeliveryLaterUrl);
+                break;
+            case '/checkout-delivery-user-selected-unavailable-time.json':
+                mock.onGet(path).reply(200, getCheckoutDeliveryUnavailableUrl);
+                break;
             case '/checkout-collection.json':
                 mock.onGet(path).reply(200, getCheckoutCollection);
+                break;
+            case '/checkout-collection-user-selected-asap.json':
+                mock.onGet(path).reply(200, getCheckoutCollectionAsapUrl);
+                break;
+            case '/checkout-collection-user-selected-later.json':
+                mock.onGet(path).reply(200, getCheckoutCollectionLaterUrl);
+                break;
+            case '/checkout-collection-user-selected-unavailable-time.json':
+                mock.onGet(path).reply(200, getCheckoutCollectionUnavailableUrl);
                 break;
             case '/checkout-dinein.json':
                 mock.onGet(path).reply(200, getCheckoutDineIn);
