@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.2.0
 ------------------------------
-*June 22, 2021*
+*June 23, 2021*
 
 ### Added
 - Visual regression tests
