@@ -24,7 +24,8 @@ import exceptions from '../../exceptions/exceptions';
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
-    PlaceOrderError
+    PlaceOrderError,
+    PlaceOrderAccessForbiddenError
 } = exceptions;
 const localVue = createLocalVue();
 
@@ -3258,40 +3259,83 @@ describe('Checkout', () => {
             });
 
             describe('when `placeOrder` is unsuccessful', () => {
-                it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
-                    // Arrange
-                    const errorMessage = 'An error';
-                    const error = {
-                        message: errorMessage,
-                        response: {
-                            data: {
-                                errorCode: errorMessage
+                describe('when `errorCode` is not `403`', () => {
+                    it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'An error';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 500
+                                }
                             }
-                        }
-                    };
+                        };
 
-                    wrapper = shallowMount(VueCheckout, {
-                        store: createStore(
-                            defaultCheckoutState,
-                            {
-                                ...defaultCheckoutActions,
-                                placeOrder: jest.fn(async () => Promise.reject(error))
+                        wrapper = shallowMount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    placeOrder: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
                             }
-                        ),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger,
-                            $cookies
-                        }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.submitOrder());
+
+                        result.rejects.toThrow(PlaceOrderError);
+                        result.rejects.toThrow(errorMessage);
                     });
+                });
 
-                    // Act & Assert
-                    const result = await expect(wrapper.vm.submitOrder());
+                describe('when `errorCode` is `403`', () => {
+                    it('should call `handleStateError` passing a `PlaceOrderAccessForbiddenError`', async () => {
+                        // Arrange
+                        const errorMessage = 'An error - Forbidden access';
+                        const placeOrderAccessForbiddenError = new PlaceOrderAccessForbiddenError(errorMessage, 403);
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 403
+                                }
+                            }
+                        };
 
-                    result.rejects.toThrow(PlaceOrderError);
-                    result.rejects.toThrow(errorMessage);
+                        wrapper = shallowMount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    placeOrder: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        const handleErrorStateSpy = jest.spyOn(wrapper.vm, 'handleErrorState');
+
+                        // Act
+                        await wrapper.vm.submitOrder();
+
+                        // Assert
+                        expect(handleErrorStateSpy).toHaveBeenCalledWith(placeOrderAccessForbiddenError);
+                    });
                 });
             });
         });

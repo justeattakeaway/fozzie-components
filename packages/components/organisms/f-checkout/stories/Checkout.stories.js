@@ -32,6 +32,7 @@ const updateCheckoutServerErrorUrl = '/update-checkout-server-error.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
+const placeOrderForbiddenUrl = '/place-order-403.json';
 const accessForbiddenErrorUrl = '/checkout-403-get-error.json';
 const getCheckoutErrorUrl = '/checkout-500-get-error.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
@@ -53,6 +54,7 @@ CheckoutMock.setupCheckoutMethod(updateCheckoutServerErrorUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
+CheckoutMock.setupCheckoutMethod(placeOrderForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(accessForbiddenErrorUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
@@ -61,14 +63,15 @@ CheckoutMock.passThroughAny();
 const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
 const additionalItemsRequired = 'Additional Items Required Issue (Response from server but order not fulfillable)';
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
-const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
+const placeOrderDuplicateError = 'Place Order Duplicate Error (Response from server is an error)';
+const placeOrderForbiddenError = 'Place Order Forbidden Error (Response from server is a 403 error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
 const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
-const additionalItemsRequiredIssue = 'additional-items-required'
+const additionalItemsRequiredIssue = 'additional-items-required';
 
 const patchCheckoutErrorOptions = {
     None: null,
@@ -81,12 +84,12 @@ const getCheckoutErrorOptions = {
     None: null,
     [accessForbiddenError]: accessForbiddenErrorCode,
     [getCheckoutError]: getCheckoutErrorCode
-
 };
 
 const placeOrderErrorOptions = {
     None: null,
-    [placeOrderError]: SERVER
+    [placeOrderDuplicateError]: SERVER,
+    [placeOrderForbiddenError]: accessForbiddenErrorCode
 };
 
 // eslint-disable-next-line
@@ -169,7 +172,14 @@ export const CheckoutComponent = () => ({
         },
 
         placeOrderUrl () {
-            return this.placeOrderError === SERVER ? placeOrderDuplicateUrl : placeOrderUrl;
+            if (this.placeOrderError) {
+                if (this.placeOrderError === SERVER) {
+                    return placeOrderDuplicateUrl;
+                }
+                return `/place-order-${this.placeOrderError}.json`;
+            }
+
+            return placeOrderUrl;
         },
 
         checkoutAvailableFulfilmentUrl () {

@@ -187,8 +187,9 @@ const {
     CreateGuestUserError,
     UpdateCheckoutError,
     PlaceOrderError,
+    PlaceOrderAccessForbiddenError,
     GetCheckoutError,
-    AccessForbiddenError,
+    GetCheckoutAccessForbiddenError,
     AvailableFulfilmentGetError,
     GetBasketError
 } = exceptions;
@@ -639,9 +640,13 @@ export default {
                     logMethod: this.$logger.logInfo
                 });
             } catch (e) {
-                const { errorCode } = e.response.data;
+                const statusCode = e.response.data.statusCode || e.response.status;
 
-                throw new PlaceOrderError(e.message, errorCode);
+                if (statusCode === 403) {
+                    this.handleErrorState(new PlaceOrderAccessForbiddenError(e.message, statusCode));
+                } else {
+                    throw new PlaceOrderError(e.message, statusCode);
+                }
             }
         },
 
@@ -687,7 +692,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
                 if (error.response && error.response.status === 403) {
-                    this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, error.response.status));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
                 }

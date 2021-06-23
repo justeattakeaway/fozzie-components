@@ -16,6 +16,7 @@ import checkoutServerError from './checkout-server-error.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
+import placeOrderForbidden from './place-order-403.json';
 import accessForbiddenError from './checkout-403-get-error.json';
 import getCheckoutError from './checkout-500-get-error.json';
 import getGeoLocation from './get-geo-location.json';
@@ -72,6 +73,9 @@ export default {
                 break;
             case '/place-order-duplicate.json':
                 mock.onPost(path).reply(400, placeOrderDuplicate);
+                break;
+            case '/place-order-403.json':
+                mock.onPost(path).reply(403, placeOrderForbidden);
                 break;
             case '/checkout-403-get-error.json':
                 mock.onGet(path).reply(403, accessForbiddenError);
