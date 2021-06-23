@@ -498,10 +498,16 @@ describe('Selector', () => {
             });
 
             describe('when a future fulfilment time has been selected', () => {
-                // eslint-disable-next-line prefer-destructuring
-                const selectedTime = fulfilmentTimes[1];
-                const asapTime = fulfilmentTimes[0].from;
-                const laterTime = fulfilmentTimes[1].from;
+                let selectedTime;
+                let asapTime;
+                let laterTime;
+
+                beforeEach(() => {
+                    // eslint-disable-next-line prefer-destructuring
+                    selectedTime = fulfilmentTimes[1];
+                    asapTime = fulfilmentTimes[0].from;
+                    laterTime = fulfilmentTimes[1].from;
+                });
 
                 describe('AND `hasAsapSelected` is true', () => {
                     it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {

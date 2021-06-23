@@ -132,11 +132,11 @@ export default {
          */
         initFulfilmentTime () {
             const times = this.fulfilmentTimes || [];
-            const foundTimeInList = (times.some(i => i.value === this.time.from) && this.time.from);
+            const isTimeAvailable = (times.some(i => i.value === this.time.from) && this.time.from);
 
-            let selectedTime = foundTimeInList && !this.hasAsapSelected
-                ? foundTimeInList :
-                (times.length && times[0].value);
+            let selectedTime = isTimeAvailable && !this.hasAsapSelected
+                ? isTimeAvailable
+                : (times.length && times[0].value);
 
             selectedTime = selectedTime === 0 ? '' : selectedTime;
             this.updateFulfilmentTime({

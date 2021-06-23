@@ -9,8 +9,7 @@ v0.144.0
 *June 23, 2021*
 
 ### Fixed
-- Selector to display previously
- selected times
+- Selector to display previously selected times
 
 ### Changed
 - `f-form-field` version
