@@ -19,6 +19,7 @@ Vue.use(Vuex);
 const getCheckoutDeliveryUrl = '/checkout-delivery.json';
 const getCheckoutDeliveryAsapUrl = '/checkout-delivery-user-selected-asap.json';
 const getCheckoutDeliveryLaterUrl = '/checkout-delivery-user-selected-later.json';
+const getCheckoutDeliveryUnavailableUrl = '/checkout-delivery-user-selected-unavailable-time.json';
 const getCheckoutCollectionUrl = '/checkout-collection.json';
 const getCheckoutCollectionAsapUrl = '/checkout-collection-user-selected-asap.json';
 const getCheckoutCollectionLaterUrl = '/checkout-collection-user-selected-later.json';
@@ -44,6 +45,7 @@ const getGeoLocationUrl = '/get-geo-location.json';
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryAsapUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryLaterUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUnavailableUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionAsapUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionLaterUrl);
@@ -100,7 +102,8 @@ const placeOrderErrorOptions = {
 const fulfilmentTimeOptions = {
     none: null,
     'Selected Asap Time': 'user-selected-asap',
-    'Selected Later Time': 'user-selected-later'
+    'Selected Later Time': 'user-selected-later',
+    'Selected Unavailable Time': 'user-selected-unavailable-time'
 };
 
 // eslint-disable-next-line

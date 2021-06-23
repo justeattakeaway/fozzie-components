@@ -504,7 +504,7 @@ describe('Selector', () => {
                 const laterTime = fulfilmentTimes[1].from;
 
                 describe('AND `hasAsapSelected` is true', () => {
-                    beforeEach(() => {
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Act
                         wrapper = shallowMount(Selector, {
                             store: createStore({
@@ -516,16 +516,14 @@ describe('Selector', () => {
                             localVue,
                             propsData
                         });
-                    });
 
-                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(asapTime);
                     });
                 });
 
                 describe('AND `hasAsapSelected` is false', () => {
-                    beforeEach(() => {
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Act
                         wrapper = shallowMount(Selector, {
                             store: createStore({
@@ -537,9 +535,7 @@ describe('Selector', () => {
                             localVue,
                             propsData
                         });
-                    });
 
-                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(laterTime);
                     });
