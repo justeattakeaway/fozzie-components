@@ -11,11 +11,12 @@ v0.144.0
 ### Fixed
 - Selector to display previously
  selected times
+
 ### Changed
 - `f-form-field` version
 
 ### Added
-- Storybook mocks for pre selected fulfilment times
+- Storybook mocks for pre-selected fulfilment times
 
 
 v0.143.1

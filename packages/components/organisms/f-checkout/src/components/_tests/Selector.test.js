@@ -496,6 +496,55 @@ describe('Selector', () => {
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('');
                 });
             });
+
+            describe('when a future fulfilment time has been selected', () => {
+                // eslint-disable-next-line prefer-destructuring
+                const selectedTime = fulfilmentTimes[1];
+                const asapTime = fulfilmentTimes[0].from;
+                const laterTime = fulfilmentTimes[1].from;
+
+                describe('AND `hasAsapSelected` is true', () => {
+                    beforeEach(() => {
+                        // Act
+                        wrapper = shallowMount(Selector, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                hasAsapSelected: true,
+                                time: selectedTime
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+                    });
+
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(asapTime);
+                    });
+                });
+
+                describe('AND `hasAsapSelected` is false', () => {
+                    beforeEach(() => {
+                        // Act
+                        wrapper = shallowMount(Selector, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                hasAsapSelected: false,
+                                time: selectedTime
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+                    });
+
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                        // Assert
+                        expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(laterTime);
+                    });
+                });
+            });
         });
 
         describe('`setAsapFlag`', () => {
