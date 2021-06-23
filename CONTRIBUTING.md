@@ -1,6 +1,6 @@
 # Contributing
 
-*_[This contributing guide can also be viewed in our Storybook documentation](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-contributing--page)_*
+*_[This contributing guide can also be viewed in our Storybook documentation](https://vue.pie.design/?path=/story/documentation-getting-started-contributing--page)_*
 
 - Before creating a new component, please discuss it with us in #help-web
 - New components should use [generator-component](https://github.com/justeat/fozzie-components/tree/master/packages/tools/generator-component) to create the base structure of the component. It's usually a good idea to PR this base structure as a `v0.1.0` before adding any significant custom component code.
@@ -12,10 +12,10 @@ If you want to learn more about fozzie-components and how it's structured, these
 Resources |
 ------------- |
 [Guide to mono-repos](https://www.toptal.com/front-end/guide-to-monorepos) |
-[Our Development Principles](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-development-principles--page) |
+[Our Development Principles](https://vue.pie.design/?path=/story/documentation-getting-started-development-principles--page) |
 [Fozzie CSS Naming Scheme](https://fozzie.just-eat.com/documentation/css/css-naming) |
 [Fozzie Accessibility Guide](https://fozzie.just-eat.com/documentation/general/accessibility/) |
-[What not to do guide](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-standards-accessibility-overview--page) |
+[What not to do guide](https://vue.pie.design/?path=/story/documentation-standards-accessibility-overview--page) |
 
 ## Pull Requests
 
