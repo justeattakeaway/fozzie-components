@@ -28,7 +28,7 @@ const getBasketDineInUrl = '/get-basket-dinein.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const updateCheckoutRestaurantNotTakingOrdersUrl = '/update-checkout-restaurant-not-taking-orders.json';
 const updateCheckoutAdditionalItemsRequiredUrl = '/update-checkout-additional-items-required.json';
-const updateCheckoutServerErrorUrl = '/update-checkout-server-error.json';
+const updateCheckoutForbidden = '/update-checkout-403.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
@@ -50,7 +50,7 @@ CheckoutMock.setupCheckoutMethod(getBasketDineInUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutRestaurantNotTakingOrdersUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutAdditionalItemsRequiredUrl);
-CheckoutMock.setupCheckoutMethod(updateCheckoutServerErrorUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutForbidden);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
@@ -77,7 +77,7 @@ const patchCheckoutErrorOptions = {
     None: null,
     [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
     [additionalItemsRequired]: additionalItemsRequiredIssue,
-    [checkoutServerError]: SERVER
+    [checkoutServerError]: accessForbiddenErrorCode
 };
 
 const getCheckoutErrorOptions = {
@@ -162,9 +162,6 @@ export const CheckoutComponent = () => ({
 
         updateCheckoutUrl () {
             if (this.patchCheckoutError) {
-                if (this.patchCheckoutError === SERVER) {
-                    return updateCheckoutServerErrorUrl;
-                }
                 return `/update-checkout-${this.patchCheckoutError}.json`;
             }
 

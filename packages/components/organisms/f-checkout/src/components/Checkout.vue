@@ -186,10 +186,10 @@ import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper'
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
+    UpdateCheckoutAccessForbiddenError,
     PlaceOrderError,
-    PlaceOrderAccessForbiddenError,
     GetCheckoutError,
-    GetCheckoutAccessForbiddenError,
+    AccessForbiddenError,
     AvailableFulfilmentGetError,
     GetBasketError
 } = exceptions;
@@ -601,6 +601,12 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
+                const statusCode = e.response.data.statusCode || e.response.status;
+
+                if (statusCode === 403) {
+                    throw new UpdateCheckoutAccessForbiddenError(e.message);
+                }
+
                 throw new UpdateCheckoutError(e);
             }
         },
@@ -640,13 +646,9 @@ export default {
                     logMethod: this.$logger.logInfo
                 });
             } catch (e) {
-                const statusCode = e.response.data.statusCode || e.response.status;
+                const { errorCode } = e.response.data;
 
-                if (statusCode === 403) {
-                    this.handleErrorState(new PlaceOrderAccessForbiddenError(e.message, statusCode));
-                } else {
-                    throw new PlaceOrderError(e.message, statusCode);
-                }
+                throw new PlaceOrderError(e.message, errorCode);
             }
         },
 
@@ -692,7 +694,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
                 if (error.response && error.response.status === 403) {
-                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, error.response.status));
+                    this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
                 }
