@@ -28,3 +28,18 @@ yarn add @justeat/f-cookie-banner-static
 ```sh
 npm install @justeat/f-cookie-banner-static
 ```
+
+### Using Script tags
+
+Include the CSS file in the head
+
+<link href="/css/en-GB.css" rel="stylesheet" />
+Create a placeholder element
+
+<div id="cookie-banner"></div>
+Include the script tag
+
+<script src="/js/en-GB.js"></script>
+
+### Using a bundling tool
+
