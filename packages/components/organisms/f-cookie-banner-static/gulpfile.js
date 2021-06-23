@@ -9,24 +9,24 @@ const LOCALES = ['en-GB', 'es-ES', 'it-IT'];
 
 const PATHS = {
     vueSrcFolder: './src',
-    distFolder: '../dist/static',
+    distFolder: './dist',
     tempVueFolder: './.tmp-vue'
 };
 
 const replace = require('gulp-replace');
 
-function setLocaleProp(locale) {
+function setVueProps(locale) {
     return function replaceTemplateFnc () {
         log(`update locale prop -  ${locale}`);
 
-    return src([`${PATHS.tempVueFolder}/${locale}.js`])
-        .pipe(replace(/(attrs:{locale:"en-GB"})/g, `attrs:{locale:"${locale}"}`))
-        .pipe(dest(PATHS.distFolder));
+    return src([`${PATHS.vueSrcFolder}/App.vue`])
+        .pipe(replace(/locale='(.*?)'(.*?)/g, `locale='${locale}'`))
+        .pipe(dest(PATHS.vueSrcFolder));
     }
 }
 
 function vueBuild (cb) {
-    log('building Vue code into the directory');
+    log('running vue-cli-service build ');
     return exec(`yarn vue-cli-service build --dest ${PATHS.tempVueFolder}`, (err, stdout, stderr) => {
         log(stdout);
         log(stderr);
@@ -36,11 +36,16 @@ function vueBuild (cb) {
 
 function cleanTmpFolders () {
     log('clear .tmp folders and dest folder');
-    return del([PATHS.tempVueFolder, PATHS.distFolder], { force: true });
+    return del([PATHS.tempVueFolder, PATHS.distFolder, '../f-cookie-banner/.node_modules/.cache/vue-loader'], { force: true });
+}
+
+function clearVueCliCache () {
+    log('clear ./node_modules/.cache');
+    return del(['./node_modules/.cache/vue-loader'], { force: true });
 }
 
 function cleanUp() {
-    log('clear .tmp-dist foldeer');
+    log('clear .tmp-dist folder');
     return del([PATHS.tempVueFolder], { force: true });
 }
 
@@ -50,7 +55,7 @@ function concatJS (locale) {
 
         return src(`${PATHS.tempVueFolder}/js/*.js`)
             .pipe(concat(`${locale}.js`))
-            .pipe(dest(PATHS.tempVueFolder));
+            .pipe(dest(PATHS.distFolder));
     };
 }
 
@@ -66,10 +71,11 @@ function moveCSS (locale) {
 
 function defaultTask () {
     const tasks = LOCALES.map(locale => [
+        clearVueCliCache,
+        setVueProps(locale),
         vueBuild,
         moveCSS(locale),
         concatJS(locale),
-        setLocaleProp(locale),
     ]);
 
     return series(

@@ -1,16 +1,20 @@
 {
   "name": "@justeat/f-cookie-banner-static",
-  "description": "Fozzie Cookie Banner Static – Cookie Banner Static",
+  "description": "Fozzie Cookie Banner compiled via vue cli prerender to vanilla js/css",
   "license": "Apache-2.0",
+  "version": "0.1.0",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "yarn exec gulp",
+    "build": "yarn cache clean --all && yarn exec gulp",
     "serve": "npx vue-cli-service serve"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-cookie-banner": "file:../dist/",
+    "@justeat/f-cookie-banner": "file:../f-cookie-banner/dist/",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
