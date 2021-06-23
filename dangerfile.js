@@ -24,12 +24,21 @@ if (!isTrivial) {
     // loop through package paths and return an object with the package name and path to that package
     modifiedPackagePaths.forEach(filepath => {
         const directoryMatch = packageDirectories.filter(subDirectory => filepath.includes(subDirectory));
-        // eslint-disable-next-line prefer-destructuring
-        const packageName = (filepath.split(directoryMatch)[1]) // splits the string based on the matching directory
-            .split('/')[0]; // and then get the first part of the string that's left (the package name)
+        let packageName;
+        let path;
+
+        if (directoryMatch[0] === 'packages/storybook') {
+            packageName = 'storybook';
+            path = 'packages/';
+        } else {
+            // eslint-disable-next-line prefer-destructuring
+            packageName = (filepath.split(directoryMatch)[1]) // splits the string based on the matching directory
+                .split('/')[0]; // and then get the first part of the string that's left (the package name)
+            [path] = directoryMatch;
+        }
 
         modifiedPackages[packageName] = {
-            path: directoryMatch[0]
+            path
         };
     });
 
