@@ -18,7 +18,7 @@ import getBasketDineIn from './get-basket-dinein.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
 import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-items-required.json';
-import checkoutServerError from './checkout-server-error.json';
+import updateCheckoutAccessForbidden from './update-checkout-403.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
@@ -85,8 +85,8 @@ export default {
             case '/update-checkout-additional-items-required.json':
                 mock.onPatch(path).reply(200, updateCheckoutAdditionalItemsRequired);
                 break;
-            case '/update-checkout-server-error.json':
-                mock.onPatch(path).reply(403, checkoutServerError);
+            case '/update-checkout-403.json':
+                mock.onPatch(path).reply(403, updateCheckoutAccessForbidden);
                 break;
             case '/get-address.json':
                 mock.onGet(path).reply(200, getAddress);

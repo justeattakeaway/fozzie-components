@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.146.0
+------------------------------
+*June 24, 2021*
+
+### Changed
+- When submitting the checkout page and we get a `403` error code, we show the `403` error page.
+
+
 v0.145.0
 ------------------------------
 *June 23, 2021*
