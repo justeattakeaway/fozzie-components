@@ -356,9 +356,19 @@ export default {
 
             if (isAddressInLocalStorage) {
                 const storedAddress = addressService.getAddressFromLocalStorage(false);
+
                 if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
                     addressCoords = [storedAddress.Field2, storedAddress.Field1];
                     commit(UPDATE_GEO_LOCATION, addressCoords);
+                } else if (window.localStorage) {
+                    const addressDetails = state.address;
+
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({
+                        PostalCode: addressDetails.postcode,
+                        Line1: addressDetails.line1,
+                        Line2: addressDetails.line2,
+                        City: addressDetails.locality
+                    }));
                 }
             }
 
