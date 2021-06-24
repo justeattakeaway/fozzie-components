@@ -975,20 +975,41 @@ describe('Checkout', () => {
         });
 
         describe('redirectUrl ::', () => {
-            it('should return the URL to redirect back to the restaurant menu', () => {
-                // Arrange && Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        restaurant
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
+            describe('when service type is delivery or collection', () => {
+                it('should return the URL with a "restaurants" prefix to redirect back to the restaurant menu', () => {
+                    // Arrange && Act
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            restaurant
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
 
-                // Assert
-                expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
+                    // Assert
+                    expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
+                });
+            });
+
+            describe('when service type is dine in', () => {
+                it('should return the URL with a "dine-in" prefix to redirect back to the restaurant menu', () => {
+                    // Arrange && Act
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            restaurant,
+                            serviceType: 'dinein'
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.redirectUrl).toEqual(`dine-in-${restaurant.seoName}/menu`);
+                });
             });
         });
     });
@@ -1776,7 +1797,7 @@ describe('Checkout', () => {
             });
 
             describe('when `updateCheckout` request fails', () => {
-                describe('when `statusCode` is `403`', () => {
+                describe('AND `statusCode` is `403`', () => {
                     it('should throw an `UpdateCheckoutAccessForbiddenError` error with the `message` of the error', async () => {
                         // Arrange
                         const errorMessage = 'An error - Access Forbidden';
@@ -1814,40 +1835,42 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should throw an `UpdateCheckoutError` error with the `message` of the error', async () => {
-                    // Arrange
-                    const errorMessage = 'An error';
-                    const error = {
-                        message: errorMessage,
-                        response: {
-                            data: {
-                                statusCode: 500
+                describe('AND `statusCode` is not `403`', () => {
+                    it('should throw an `UpdateCheckoutError` error with the `message` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'An error';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 500
+                                }
                             }
-                        }
-                    };
+                        };
 
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultCheckoutState,
-                            {
-                                ...defaultCheckoutActions,
-                                updateCheckout: jest.fn(async () => Promise.reject(error))
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
                             }
-                        ),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger,
-                            $cookies
-                        }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toThrow(UpdateCheckoutError);
+                        result.rejects.toThrow(errorMessage);
                     });
-
-                    // Act & Assert
-                    const result = await expect(wrapper.vm.handleUpdateCheckout());
-
-                    result.rejects.toThrow(UpdateCheckoutError);
-                    result.rejects.toThrow(errorMessage);
                 });
             });
         });
