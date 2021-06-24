@@ -315,10 +315,12 @@ describe('Selector', () => {
         describe('`initFulfilmentTime`', () => {
             // Arrange
             let wrapper;
+            let setAsapFlagSpy;
             let updateFulfilmentTimeSpy;
 
             beforeEach(() => {
                 // Arrange
+                setAsapFlagSpy = jest.spyOn(Selector.methods, 'setAsapFlag');
                 updateFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'updateFulfilmentTime');
             });
 
@@ -354,6 +356,11 @@ describe('Selector', () => {
                     // Assert
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:00:00.000Z');
                 });
+
+                it('should make a call to `setAsapFlag` with correct time', () => {
+                    // Assert
+                    expect(setAsapFlagSpy).toBeCalledWith('2020-01-01T01:00:00.000Z');
+                });
             });
 
             describe('AND when there are fulfilment `times` available and a pre-selected fulfilment time', () => {
@@ -388,6 +395,11 @@ describe('Selector', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:15:00.000Z');
                     });
+
+                    it('should make a call to `setAsapFlag` with correct time', () => {
+                        // Assert
+                        expect(setAsapFlagSpy).toBeCalledWith('2020-01-01T01:15:00.000Z');
+                    });
                 });
 
                 describe('AND when the pre-selected fulfilment time is not available', () => {
@@ -420,6 +432,11 @@ describe('Selector', () => {
                     it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:00:00.000Z');
+                    });
+
+                    it('should make a call to `setAsapFlag` with correct time', () => {
+                        // Assert
+                        expect(setAsapFlagSpy).toBeCalledWith('2020-01-01T01:00:00.000Z');
                     });
                 });
             });
@@ -458,6 +475,11 @@ describe('Selector', () => {
                     // Assert
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('');
                 });
+
+                it('should not make a call to `setAsapFlag`', () => {
+                    // Assert
+                    expect(setAsapFlagSpy).not.toBeCalled();
+                });
             });
 
             describe('AND when there are no fulfilment `times` available but a pre-selected fulfilment time', () => {
@@ -495,6 +517,11 @@ describe('Selector', () => {
                     // Assert
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('');
                 });
+
+                it('should not make a call to `setAsapFlag`', () => {
+                    // Assert
+                    expect(setAsapFlagSpy).not.toBeCalled();
+                });
             });
 
             describe('when a future fulfilment time has been selected', () => {
@@ -510,7 +537,7 @@ describe('Selector', () => {
                 });
 
                 describe('AND `hasAsapSelected` is true', () => {
-                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                    beforeEach(() => {
                         // Act
                         wrapper = shallowMount(Selector, {
                             store: createStore({
@@ -522,14 +549,21 @@ describe('Selector', () => {
                             localVue,
                             propsData
                         });
+                    });
 
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(asapTime);
+                    });
+
+                    it('should make a call to `setAsapFlag` with correct time', () => {
+                        // Assert
+                        expect(setAsapFlagSpy).toBeCalledWith(asapTime);
                     });
                 });
 
                 describe('AND `hasAsapSelected` is false', () => {
-                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
+                    beforeEach(() => {
                         // Act
                         wrapper = shallowMount(Selector, {
                             store: createStore({
@@ -541,9 +575,16 @@ describe('Selector', () => {
                             localVue,
                             propsData
                         });
+                    });
 
+                    it('should update `selectedAvailableFulfilmentTime` with the first available fulfilment time', () => {
                         // Assert
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(laterTime);
+                    });
+
+                    it('should make a call to `setAsapFlag` with correct time', () => {
+                        // Assert
+                        expect(setAsapFlagSpy).toBeCalledWith(laterTime);
                     });
                 });
             });
