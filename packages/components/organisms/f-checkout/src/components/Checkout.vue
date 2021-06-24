@@ -186,9 +186,10 @@ import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper'
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
+    UpdateCheckoutAccessForbiddenError,
     PlaceOrderError,
     GetCheckoutError,
-    AccessForbiddenError,
+    GetCheckoutAccessForbiddenError,
     AvailableFulfilmentGetError,
     GetBasketError
 } = exceptions;
@@ -600,6 +601,12 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
+                const statusCode = e.response.data.statusCode || e.response.status;
+
+                if (statusCode === 403) {
+                    throw new UpdateCheckoutAccessForbiddenError(e);
+                }
+
                 throw new UpdateCheckoutError(e);
             }
         },
@@ -687,7 +694,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
                 if (error.response && error.response.status === 403) {
-                    this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
                 }
