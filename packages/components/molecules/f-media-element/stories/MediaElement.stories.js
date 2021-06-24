@@ -23,7 +23,8 @@ MediaElementComponent.args = {
     title: 'Stampcards',
     text: 'See the stamps you’ve collected and any discounts you’ve earned.',
     stacked: false,
-    reverse: true,
+    reverse: false,
+    stackWhenNarrow: false,
     altText: 'Test alt text',
     imageUrl: 'https://via.placeholder.com/250',
 };

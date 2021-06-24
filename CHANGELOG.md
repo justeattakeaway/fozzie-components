@@ -3,6 +3,50 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.42.4
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Trying a different fix for the package comparison. Checks if variable is defined rather than a numeric comparison.
+
+
+v3.42.3
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Storybook deploy should reference yarn (to call lerna indirectly).
+
+
+v3.42.2
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Numeric comparison fixed in CircleCI bash script
+
+
+v3.42.1
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Added a couple of exclusions to the root entries that don't trigger a full build.
+
+
+v3.42.0
+------------------------------
+*June 23, 2021*
+
+## Changed
+- Optimises the build so that only packages that have been amended run in the build and are tested via Storybook.
+
+## Fixed
+- DangerJS now correctly reports when Storybook needs a version bump and CHANGELOG entry.
+
+
 v3.41.0
 ------------------------------
 *June 18, 2021*
