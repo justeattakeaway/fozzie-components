@@ -1005,7 +1005,8 @@ describe('CheckoutModule', () => {
                         // Assert
                         expect(setItemSpy).toHaveBeenCalledWith(
                             'je-full-address-details',
-                            "{\"PostalCode\":\"postcode\",\"Line1\":\"line 1\",\"Line2\":\"line 2\",\"City\":\"locality\"}");
+                            '{"PostalCode":"postcode","Line1":"line 1","Line2":"line 2","City":"locality"}'
+                        );
                     });
                 });
             });
