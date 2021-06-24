@@ -28,11 +28,10 @@ const getBasketDineInUrl = '/get-basket-dinein.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const updateCheckoutRestaurantNotTakingOrdersUrl = '/update-checkout-restaurant-not-taking-orders.json';
 const updateCheckoutAdditionalItemsRequiredUrl = '/update-checkout-additional-items-required.json';
-const updateCheckoutForbidden = '/update-checkout-403.json';
+const updateCheckoutAccessForbiddenUrl = '/update-checkout-403.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
-const placeOrderForbiddenUrl = '/place-order-403.json';
 const accessForbiddenErrorUrl = '/checkout-403-get-error.json';
 const getCheckoutErrorUrl = '/checkout-500-get-error.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
@@ -50,11 +49,10 @@ CheckoutMock.setupCheckoutMethod(getBasketDineInUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutRestaurantNotTakingOrdersUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutAdditionalItemsRequiredUrl);
-CheckoutMock.setupCheckoutMethod(updateCheckoutForbidden);
+CheckoutMock.setupCheckoutMethod(updateCheckoutAccessForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
-CheckoutMock.setupCheckoutMethod(placeOrderForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(accessForbiddenErrorUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
@@ -62,9 +60,9 @@ CheckoutMock.passThroughAny();
 
 const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
 const additionalItemsRequired = 'Additional Items Required Issue (Response from server but order not fulfillable)';
+const updateCheckoutAccessForbidden = 'Access Forbidden (Response from server is 403)';
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
-const placeOrderDuplicateError = 'Place Order Duplicate Error (Response from server is an error)';
-const placeOrderForbiddenError = 'Place Order Forbidden Error (Response from server is a 403 error)';
+const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
 const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
 const SERVER = 'SERVER';
@@ -77,7 +75,8 @@ const patchCheckoutErrorOptions = {
     None: null,
     [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
     [additionalItemsRequired]: additionalItemsRequiredIssue,
-    [checkoutServerError]: accessForbiddenErrorCode
+    [checkoutServerError]: SERVER,
+    [updateCheckoutAccessForbidden]: accessForbiddenErrorCode
 };
 
 const getCheckoutErrorOptions = {
@@ -88,8 +87,7 @@ const getCheckoutErrorOptions = {
 
 const placeOrderErrorOptions = {
     None: null,
-    [placeOrderDuplicateError]: SERVER,
-    [placeOrderForbiddenError]: accessForbiddenErrorCode
+    [placeOrderError]: SERVER
 };
 
 // eslint-disable-next-line
@@ -169,14 +167,7 @@ export const CheckoutComponent = () => ({
         },
 
         placeOrderUrl () {
-            if (this.placeOrderError) {
-                if (this.placeOrderError === SERVER) {
-                    return placeOrderDuplicateUrl;
-                }
-                return `/place-order-${this.placeOrderError}.json`;
-            }
-
-            return placeOrderUrl;
+            return this.placeOrderError === SERVER ? placeOrderDuplicateUrl : placeOrderUrl;
         },
 
         checkoutAvailableFulfilmentUrl () {

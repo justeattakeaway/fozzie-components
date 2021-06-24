@@ -25,7 +25,7 @@ const {
     CreateGuestUserError,
     UpdateCheckoutError,
     PlaceOrderError,
-    PlaceOrderAccessForbiddenError
+    UpdateCheckoutAccessForbiddenError
 } = exceptions;
 const localVue = createLocalVue();
 
@@ -975,41 +975,20 @@ describe('Checkout', () => {
         });
 
         describe('redirectUrl ::', () => {
-            describe('when service type is delivery or collection', () => {
-                it('should return the URL with a "restaurants" prefix to redirect back to the restaurant menu', () => {
-                    // Arrange && Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            restaurant
-                        }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
+            it('should return the URL to redirect back to the restaurant menu', () => {
+                // Arrange && Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
                 });
-            });
 
-            describe('when service type is dine in', () => {
-                it('should return the URL with a "dine-in" prefix to redirect back to the restaurant menu', () => {
-                    // Arrange && Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            restaurant,
-                            serviceType: 'dinein'
-                        }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.redirectUrl).toEqual(`dine-in-${restaurant.seoName}/menu`);
-                });
+                // Assert
+                expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
             });
         });
     });
@@ -1797,16 +1776,62 @@ describe('Checkout', () => {
             });
 
             describe('when `updateCheckout` request fails', () => {
+                describe('when `statusCode` is `403`', () => {
+                    it('should throw an `UpdateCheckoutAccessForbiddenError` error with the `message` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'An error - Access Forbidden';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 403
+                                }
+                            }
+                        };
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toThrow(UpdateCheckoutAccessForbiddenError);
+                        result.rejects.toThrow(errorMessage);
+                    });
+                });
+
                 it('should throw an `UpdateCheckoutError` error with the `message` of the error', async () => {
                     // Arrange
                     const errorMessage = 'An error';
+                    const error = {
+                        message: errorMessage,
+                        response: {
+                            data: {
+                                statusCode: 500
+                            }
+                        }
+                    };
 
                     wrapper = mount(VueCheckout, {
                         store: createStore(
                             defaultCheckoutState,
                             {
                                 ...defaultCheckoutActions,
-                                updateCheckout: jest.fn(async () => Promise.reject(new Error(errorMessage)))
+                                updateCheckout: jest.fn(async () => Promise.reject(error))
                             }
                         ),
                         i18n,
@@ -3259,83 +3284,40 @@ describe('Checkout', () => {
             });
 
             describe('when `placeOrder` is unsuccessful', () => {
-                describe('when `errorCode` is not `403`', () => {
-                    it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
-                        // Arrange
-                        const errorMessage = 'An error';
-                        const error = {
-                            message: errorMessage,
-                            response: {
-                                data: {
-                                    statusCode: 500
-                                }
+                it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
+                    // Arrange
+                    const errorMessage = 'An error';
+                    const error = {
+                        message: errorMessage,
+                        response: {
+                            data: {
+                                errorCode: errorMessage
                             }
-                        };
+                        }
+                    };
 
-                        wrapper = shallowMount(VueCheckout, {
-                            store: createStore(
-                                defaultCheckoutState,
-                                {
-                                    ...defaultCheckoutActions,
-                                    placeOrder: jest.fn(async () => Promise.reject(error))
-                                }
-                            ),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $logger,
-                                $cookies
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore(
+                            defaultCheckoutState,
+                            {
+                                ...defaultCheckoutActions,
+                                placeOrder: jest.fn(async () => Promise.reject(error))
                             }
-                        });
-
-                        // Act & Assert
-                        const result = await expect(wrapper.vm.submitOrder());
-
-                        result.rejects.toThrow(PlaceOrderError);
-                        result.rejects.toThrow(errorMessage);
+                        ),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
                     });
-                });
 
-                describe('when `errorCode` is `403`', () => {
-                    it('should call `handleStateError` passing a `PlaceOrderAccessForbiddenError`', async () => {
-                        // Arrange
-                        const errorMessage = 'An error - Forbidden access';
-                        const placeOrderAccessForbiddenError = new PlaceOrderAccessForbiddenError(errorMessage, 403);
-                        const error = {
-                            message: errorMessage,
-                            response: {
-                                data: {
-                                    statusCode: 403
-                                }
-                            }
-                        };
+                    // Act & Assert
+                    const result = await expect(wrapper.vm.submitOrder());
 
-                        wrapper = shallowMount(VueCheckout, {
-                            store: createStore(
-                                defaultCheckoutState,
-                                {
-                                    ...defaultCheckoutActions,
-                                    placeOrder: jest.fn(async () => Promise.reject(error))
-                                }
-                            ),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $logger,
-                                $cookies
-                            }
-                        });
-
-                        const handleErrorStateSpy = jest.spyOn(wrapper.vm, 'handleErrorState');
-
-                        // Act
-                        await wrapper.vm.submitOrder();
-
-                        // Assert
-                        expect(handleErrorStateSpy).toHaveBeenCalledWith(placeOrderAccessForbiddenError);
-                    });
+                    result.rejects.toThrow(PlaceOrderError);
+                    result.rejects.toThrow(errorMessage);
                 });
             });
         });

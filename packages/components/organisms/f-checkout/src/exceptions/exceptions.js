@@ -25,8 +25,8 @@ class UpdateCheckoutError extends Error {
 }
 
 class UpdateCheckoutAccessForbiddenError extends UpdateCheckoutError {
-    constructor (message) {
-        super(message);
+    constructor (error) {
+        super(error);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.logMessage = 'Checkout Update Failure: Access Forbidden';
         this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
@@ -59,7 +59,7 @@ class GetCheckoutError extends Error {
 
 class GetCheckoutAccessForbiddenError extends GetCheckoutError {
     constructor (message) {
-        super(message);
+        super(message, 403);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.logMessage = 'Get Checkout Failure: Access Forbidden';
         this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
