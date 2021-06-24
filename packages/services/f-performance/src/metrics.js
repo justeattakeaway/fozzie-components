@@ -8,8 +8,7 @@ const metrics = {
         formatData: data => ((data && data.effectiveType) ? data : {})
     },
     storageEstimate: {
-        name: 'storageEstimate',
-        formatData: data => data
+        name: 'storageEstimate'
     },
     ttfb: {
         name: 'timeToFirstByte',

@@ -20,8 +20,7 @@ const fPerformance = {
      */
     install: (Vue, config = {}) => {
         // Check for custom metrics
-        const configMetrics = config.metrics || {};
-        const logMetrics = { ...metrics, ...configMetrics };
+        const logMetrics = { ...metrics, ...config.metrics || {} };
 
         // Custom `config.logger` function
         let logPerformance = gtmLogger;
@@ -61,11 +60,11 @@ const fPerformance = {
          * this.$perfAnnotateEnd('myMethodPerformance');
          * ```
          */
-        Vue.prototype.$perfAnnotateStart = entry => {
+        Vue.prototype.$performanceAnnotateStart = entry => {
             perfumeJS.start(entry);
         };
 
-        Vue.prototype.$perfAnnotateEnd = entry => {
+        Vue.prototype.$performanceAnnotateEnd = entry => {
             perfumeJS.end(entry);
         };
     }
