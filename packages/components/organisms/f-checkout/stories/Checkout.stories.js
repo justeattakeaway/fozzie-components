@@ -37,7 +37,7 @@ const updateCheckoutAccessForbiddenUrl = '/update-checkout-403.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
-const accessForbiddenErrorUrl = '/checkout-403-get-error.json';
+const getCheckoutAccessForbiddenUrl = '/checkout-403-get-error.json';
 const getCheckoutErrorUrl = '/checkout-500-get-error.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
@@ -63,7 +63,7 @@ CheckoutMock.setupCheckoutMethod(updateCheckoutAccessForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
-CheckoutMock.setupCheckoutMethod(accessForbiddenErrorUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutAccessForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
