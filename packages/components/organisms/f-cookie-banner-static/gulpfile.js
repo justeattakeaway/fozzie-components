@@ -5,7 +5,7 @@ const rename = require('gulp-rename');
 const del = require('del');
 const { exec } = require('child_process');
 
-const LOCALES = ['en-GB', 'es-ES', 'it-IT'];
+const LOCALES = ['en-GB', 'es-ES', 'it-IT', 'en-IE', 'en-AU', 'en-NZ'];
 
 const PATHS = {
     vueSrcFolder: './src',

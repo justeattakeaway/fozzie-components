@@ -14,17 +14,15 @@
     "url": "https://github.com/justeat/fozzie-components/issues"
   },
   "scripts": {
-    "prepublish": "yarn build",
-    "build": "yarn cache clean --all && yarn exec gulp",
+    "prepublish": "yarn build:static-files",
+    "build:static-files": "yarn cache clean --all && yarn exec gulp",
     "serve": "npx vue-cli-service serve"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-cookie-banner": "^0.18.0",
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue-cookies": "^1.7.4"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
