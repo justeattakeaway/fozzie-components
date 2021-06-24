@@ -16,17 +16,16 @@ commands:
             - "0e:50:82:ad:81:17:a5:31:04:13:fd:6e:c7:72:c9:18"
 
   detect_root_change:
-    description: Detects root package.json changes
+    description: Detects root file changes
     steps:
       - run: |
           changes=`git diff --name-only master...$CIRCLE_BRANCH | grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig'`
 
-          if [ "${#changes}" > 0 ];
-          then
+          if ((${#changes} > 0)); then
             echo 'export ROOT_CHANGE=true' >> $BASH_ENV
             source $BASH_ENV
           else
-            echo Root files not changed
+            echo 'Root files not changed'
           fi
 
   echo_root:
