@@ -357,7 +357,7 @@ describe('Selector', () => {
                     expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:00:00.000Z');
                 });
 
-                it('should make a call to `setAsapFlag` with correct time', () => {
+                it('should make a call to `setAsapFlag` with the first available fulfilment time', () => {
                     // Assert
                     expect(setAsapFlagSpy).toBeCalledWith('2020-01-01T01:00:00.000Z');
                 });
@@ -396,7 +396,7 @@ describe('Selector', () => {
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:15:00.000Z');
                     });
 
-                    it('should make a call to `setAsapFlag` with correct time', () => {
+                    it('should make a call to `setAsapFlag` with the pre-selected fulfilment time', () => {
                         // Assert
                         expect(setAsapFlagSpy).toBeCalledWith('2020-01-01T01:15:00.000Z');
                     });
@@ -434,7 +434,7 @@ describe('Selector', () => {
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe('2020-01-01T01:00:00.000Z');
                     });
 
-                    it('should make a call to `setAsapFlag` with correct time', () => {
+                    it('should make a call to `setAsapFlag` with the first available fulfilment time', () => {
                         // Assert
                         expect(setAsapFlagSpy).toBeCalledWith('2020-01-01T01:00:00.000Z');
                     });
@@ -556,7 +556,7 @@ describe('Selector', () => {
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(asapTime);
                     });
 
-                    it('should make a call to `setAsapFlag` with correct time', () => {
+                    it('should make a call to `setAsapFlag` with the first available fulfilment time', () => {
                         // Assert
                         expect(setAsapFlagSpy).toBeCalledWith(asapTime);
                     });
@@ -582,7 +582,7 @@ describe('Selector', () => {
                         expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(laterTime);
                     });
 
-                    it('should make a call to `setAsapFlag` with correct time', () => {
+                    it('should make a call to `setAsapFlag` with the selected time', () => {
                         // Assert
                         expect(setAsapFlagSpy).toBeCalledWith(laterTime);
                     });

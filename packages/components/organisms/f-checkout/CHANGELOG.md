@@ -12,7 +12,6 @@ v0.147.0
 - ASAP flag applied when times are initialised.
 
 
-
 v0.146.0
 ------------------------------
 *June 24, 2021*
