@@ -24,7 +24,8 @@ import exceptions from '../../exceptions/exceptions';
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
-    PlaceOrderError
+    PlaceOrderError,
+    UpdateCheckoutAccessForbiddenError
 } = exceptions;
 const localVue = createLocalVue();
 
@@ -1796,32 +1797,80 @@ describe('Checkout', () => {
             });
 
             describe('when `updateCheckout` request fails', () => {
-                it('should throw an `UpdateCheckoutError` error with the `message` of the error', async () => {
-                    // Arrange
-                    const errorMessage = 'An error';
-
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultCheckoutState,
-                            {
-                                ...defaultCheckoutActions,
-                                updateCheckout: jest.fn(async () => Promise.reject(new Error(errorMessage)))
+                describe('AND `statusCode` is `403`', () => {
+                    it('should throw an `UpdateCheckoutAccessForbiddenError` error with the `message` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'An error - Access Forbidden';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 403
+                                }
                             }
-                        ),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger,
-                            $cookies
-                        }
+                        };
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toThrow(UpdateCheckoutAccessForbiddenError);
+                        result.rejects.toThrow(errorMessage);
                     });
+                });
 
-                    // Act & Assert
-                    const result = await expect(wrapper.vm.handleUpdateCheckout());
+                describe('AND `statusCode` is not `403`', () => {
+                    it('should throw an `UpdateCheckoutError` error with the `message` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'An error';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 500
+                                }
+                            }
+                        };
 
-                    result.rejects.toThrow(UpdateCheckoutError);
-                    result.rejects.toThrow(errorMessage);
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toThrow(UpdateCheckoutError);
+                        result.rejects.toThrow(errorMessage);
+                    });
                 });
             });
         });
