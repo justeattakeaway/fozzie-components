@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.42.4
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Trying a different fix for the package comparison. Checks if variable is defined rather than a numeric comparison.
+
+
 v3.42.3
 ------------------------------
 *June 24, 2021*
