@@ -21,6 +21,7 @@ import {
     UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
     UPDATE_STATE,
     UPDATE_USER_NOTE,
@@ -368,6 +369,17 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+            });
+
+            it(`should update 'hasUpdatedAsap' value with ${UPDATE_HAS_ASAP_SELECTED} mutation.`, async () => {
+                // Arrange
+                const expectedAsapValue = checkoutDeliveryCopy.fulfilment.time.asap;
+
+                // Act
+                await getCheckout({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_HAS_ASAP_SELECTED, expectedAsapValue);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
