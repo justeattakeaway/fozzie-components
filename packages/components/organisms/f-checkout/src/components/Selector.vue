@@ -139,11 +139,17 @@ export default {
                 : (times.length && times[0].value);
 
             selectedTime = selectedTime === 0 ? '' : selectedTime;
+
             this.updateFulfilmentTime({
                 from: selectedTime,
                 to: selectedTime
             });
+
             this.selectedAvailableFulfilmentTime = selectedTime;
+
+            if (times.length) {
+                this.setAsapFlag(selectedTime);
+            }
         },
 
         /**
