@@ -3,6 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2.1
+
 orbs:
   slack: circleci/slack@4.1.3
 
@@ -14,6 +15,26 @@ commands:
           fingerprints:
             - "0e:50:82:ad:81:17:a5:31:04:13:fd:6e:c7:72:c9:18"
 
+  detect_root_change:
+    description: Detects root package.json changes
+    steps:
+      - run: |
+          changes=`git diff --name-only master...$CIRCLE_BRANCH | grep -v '^packages/'`
+
+          if [ "${#changes}" > 0 ];
+          then
+            echo 'export ROOT_CHANGE=true' >> $BASH_ENV
+            source $BASH_ENV
+          else
+            echo Root files not changed
+          fi
+
+  echo_root:
+    description: Detects root package.json changes
+    steps:
+      - run: |
+          echo $ROOT_CHANGE
+
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
@@ -22,9 +43,79 @@ commands:
   build_packages:
     description: Locally builds all packages in the monorepo
     steps:
-      - run: # Check UI packages all build as expected
-          name: Build Packages
-          command: yarn build
+      - run: |
+          if [ "${ROOT_CHANGE}" == "true" ];
+          then
+            yarn build
+          else
+            yarn build --since origin/master --include-dependencies
+          fi
+
+  lint_packages:
+    description: Locally lints all packages in the monorepo
+    steps:
+      - run: |
+          if [ "${ROOT_CHANGE}" == "true" ];
+          then
+            yarn lint
+          else
+            yarn lint --since origin/master
+          fi
+
+  unit_integration_tests:
+    description: Run Unit / Integration Tests
+    steps:
+      - run: |
+          if [ "${ROOT_CHANGE}" == "true" ];
+          then
+            yarn test
+          else
+            yarn test --since origin/master
+          fi
+
+  build_storybook:
+    description: Build Storybook for UI tests
+    steps:
+      - run: |
+          if [ "${ROOT_CHANGE}" == "true" ];
+          then
+            yarn storybook:build
+          else
+            yarn storybook:build-changed
+          fi
+
+  component_tests:
+    description: Run Components Tests
+    steps:
+      - run: |
+          if [ "${ROOT_CHANGE}" == "true" ];
+          then
+            yarn test-component:chrome
+          else
+            yarn test-component:chrome --since origin/master
+          fi
+
+  accessibility_tests:
+    description: Run Accessibility Tests
+    steps:
+      - run: |
+          if [ "${ROOT_CHANGE}" == "true" ];
+          then
+            yarn test-a11y:chrome
+          else
+            yarn test-a11y:chrome --since origin/master
+          fi
+
+  visual_regression_tests:
+    description: Run Percy Visual Regression Tests
+    steps:
+      - run: |
+          if [ "${ROOT_CHANGE}" == "true" ];
+          then
+            yarn test:visual
+          else
+            yarn test:visual --since origin/master
+          fi
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
@@ -147,6 +238,8 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
+      - detect_root_change
+      - echo_root
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -161,31 +254,19 @@ jobs:
           name: Run PR Checks
           command: yarn danger ci
       - build_packages
-      - run: # Lint packages
-          name: Run Lint Tasks on Packages
-          command: yarn lint
-      - run: # Run Tests
-          name: Run Unit / Integration Tests
-          command: yarn test
+      - lint_packages
+      - unit_integration_tests
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
-      - run: # Build Storybook
-          name: Build Storybook
-          command: yarn storybook:build
+      - build_storybook
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
           background: true
-      - run: # Run Component UI Tests
-          name: Run WebDriverIO Component Tests
-          command: yarn test-component:chrome
-      - run: # Run Accessibility UI Tests
-          name: Run WebDriverIO Accessibility Tests
-          command: yarn test-a11y:chrome
-      - run: # Run Visual Regression Tests
-          name: Run Percy Visual Regression Tests
-          command: yarn test:visual
+      - component_tests
+      - accessibility_tests
+      - visual_regression_tests
       - store_artifacts:
           path: test/results/axe-violations
       - store_artifacts:
