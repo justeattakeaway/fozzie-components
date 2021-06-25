@@ -2306,6 +2306,13 @@
   dependencies:
     lodash.debounce "4.0.8"
 
+"@justeat/f-searchbox@3.13.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-3.13.0.tgz#c2d921ace6524af864743e24d890a334ca964186"
+  integrity sha512-dKPJx+1R/HGWJl6fSwNIDmKoBQwswOIzOLbQxnFtMJGTqW506bDRiNPQW3lvP7xmhBpxFHk49xarD2cph+eqvg==
+  dependencies:
+    lodash.debounce "4.0.8"
+
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"

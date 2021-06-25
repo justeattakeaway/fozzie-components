@@ -62,6 +62,7 @@
     "@justeat/f-trak": "0.7.1",
     "@justeat/f-media-element": "0.3.0",
     "@justeat/f-button": "1.7.0",
+    "@justeat/f-searchbox": "3.13.0",
     "miragejs": "0.1.41",
     "faker": "5.5.3"
   }
