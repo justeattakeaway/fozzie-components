@@ -9,7 +9,7 @@ v0.19.0
 *June 24, 2021*
 
 ### Added
-- Configeration to generate compiled vanilla js versions of the vue component
+- Config to generate compiled vanilla js versions of the vue component
 
 
 v0.18.0
