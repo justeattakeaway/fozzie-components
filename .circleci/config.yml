@@ -19,7 +19,20 @@ commands:
     description: Detects root file changes
     steps:
       - run: |
-          changes=`git diff --name-only master...$CIRCLE_BRANCH | grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig'`
+          set -e
+          trap 'catch $? $LINENO' ERR
+
+          catch() {
+            if [ "$1" != "0" ]; then
+              # error handling goes here
+              echo "Error $1 occurred on $2"
+            fi
+          }
+
+          echo 'Checking changes'
+          changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+          echo 'Changes detected:'
+          echo $changes
 
           if [[ $changes ]]; then
             echo 'export ROOT_CHANGE=true' >> $BASH_ENV
