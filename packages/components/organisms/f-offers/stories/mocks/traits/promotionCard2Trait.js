@@ -5,7 +5,7 @@ const type = 'Promotion_Card_2';
 
 /* eslint-disable camelcase */
 export default trait({
-    tt: () => `KFC I Love You Bacon Burger ${faker.random.number({ min: 1, max: 10 })}`,
+    tt: () => `KFC I Love You Bacon Burger ${faker.datatype.number({ min: 1, max: 10 })}`,
     ds: () => 'Available Tuesdays',
     e: () => ({
         custom_card_type: type,

@@ -25,7 +25,7 @@ const { nowMinus5Hours, nowPlus5Hours } = timeRange10HoursAroundNow();
 
 /* eslint-disable camelcase */
 export default Factory.extend({
-    id: () => Buffer.from([`5d79109d167e923a83d3d7db_$_cc=${faker.random.uuid()}`, 'mv=5d79109d167e923a83d3d7dd', 'pi=cmp']
+    id: () => Buffer.from([`5d79109d167e923a83d3d7db_$_cc=${faker.datatype.uuid()}`, 'mv=5d79109d167e923a83d3d7dd', 'pi=cmp']
         .join('&'))
         .toString('base64'),
     v: false,

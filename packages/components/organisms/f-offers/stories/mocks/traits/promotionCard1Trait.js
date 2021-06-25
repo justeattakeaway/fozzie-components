@@ -13,6 +13,6 @@ export default trait({
         line_5: faker.lorem.sentence(),
         line_6: faker.lorem.sentence(),
         image_1: `https://picsum.photos/seed/${type}_image_1/384/216?blur=3`,
-        offer_auth_required: faker.random.boolean()
+        offer_auth_required: faker.datatype.boolean()
     })
 });
