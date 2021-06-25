@@ -99,3 +99,5 @@ For example: `git commit -m "Refactor f-button" --no-verify `.
 More information about how to contribute to this repo can be found in our Storybook [Documentation section](https://vue.pie.design/?path=/story/documentation-getting-started-contributing--page)
 
 ### [Just Eat Storybook production](https://vue.pie.design/)
+
+.
