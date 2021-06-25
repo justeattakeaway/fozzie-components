@@ -360,7 +360,7 @@ export default {
                 if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
                     addressCoords = [storedAddress.Field2, storedAddress.Field1];
                     commit(UPDATE_GEO_LOCATION, addressCoords);
-                } else if (window.localStorage) {
+                } else {
                     const addressDetails = state.address;
 
                     window.localStorage.setItem('je-full-address-details', JSON.stringify({
