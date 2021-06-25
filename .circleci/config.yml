@@ -21,7 +21,7 @@ commands:
       - run: |
           changes=`git diff --name-only master...$CIRCLE_BRANCH | grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig'`
 
-          if ((${#changes} > 0)); then
+          if [[ $changes ]]; then
             echo 'export ROOT_CHANGE=true' >> $BASH_ENV
             source $BASH_ENV
           else
@@ -293,7 +293,7 @@ jobs:
       - build_packages
       - run:
           name: Deploy
-          command: lerna run storybook:deploy
+          command: yarn storybook:deploy
       - slack_notify_fail
       - slack_notify_success
 
