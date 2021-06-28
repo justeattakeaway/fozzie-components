@@ -75,7 +75,7 @@ describe('Registration API service', () => {
         await flushPromises();
 
         // Assert
-        expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+        expect(wrapper.emitted(EventNames.CreateAccountWarning).length).toBe(1);
         expect(wrapper.vm.conflictedEmailAddress).toBe(CONSUMERS_REQUEST_DATA.emailAddress);
     });
 
