@@ -6,6 +6,7 @@ import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilmen
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
+import addressService from '../../services/addressService';
 import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
@@ -990,6 +991,23 @@ describe('CheckoutModule', () => {
 
                     // Assert
                     expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+
+                describe('When the address in localStorage does not match the address `state`', () => {
+                    it('should update localStorage to the changed address', async () => {
+                        // Arrange
+                        const setItemSpy = jest.spyOn(window.localStorage, 'setItem');
+                        jest.spyOn(addressService, 'doesAddressInStorageAndFormMatch').mockImplementation(() => false);
+
+                        // Act
+                        await getGeoLocation({ commit, state }, payload);
+
+                        // Assert
+                        expect(setItemSpy).toHaveBeenCalledWith(
+                            'je-full-address-details',
+                            '{"PostalCode":"postcode","Line1":"line 1","Line2":"line 2","City":"locality"}'
+                        );
+                    });
                 });
             });
         });
