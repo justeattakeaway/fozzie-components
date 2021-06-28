@@ -10,7 +10,7 @@ v1.16.0
 
 ### Fixed
 - Hover state to be consistent across all field types.
-- First grouped field to have correct `border-radius`.
+- First grouped form field to have correct `border-radius`.
 
 
 v1.15.1
