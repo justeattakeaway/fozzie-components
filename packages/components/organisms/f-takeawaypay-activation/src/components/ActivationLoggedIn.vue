@@ -2,10 +2,10 @@
     <div>
         <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
-        <p
+        <h1
             :class="$style['c-takeawaypayActivation-title']">
             {{ $t('messages.titleActivationAvailable') }}
-        </p>
+        </h1>
 
         <p>
             {{ $t('messages.descriptionActivationAvailable1') }} <span :class="$style['c-takeawaypayActivation-email']">test@mail.com</span>

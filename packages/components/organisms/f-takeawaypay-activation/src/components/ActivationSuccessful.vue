@@ -2,9 +2,9 @@
     <div>
         <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
-        <p :class="$style['c-takeawaypayActivation-title']">
+        <h1 :class="$style['c-takeawaypayActivation-title']">
             {{ $t('messages.titleActivationSuccessful') }}
-        </p>
+        </h1>
 
         <p>
             {{ $t('messages.descriptionActivationSuccessful') }}
@@ -54,6 +54,7 @@ export default {
 .c-takeawaypayActivation-title {
     @include font-size(body-l);
     font-weight: $font-weight-bold;
+    padding-top: spacing(x2);
 }
 
 .c-takeawaypayActivation-actions {

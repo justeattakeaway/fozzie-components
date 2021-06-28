@@ -44,10 +44,6 @@ export default {
     ],
 
     props: {
-        locale: {
-            type: String,
-            default: ''
-        },
         loginUrl: {
             type: String,
             required: true

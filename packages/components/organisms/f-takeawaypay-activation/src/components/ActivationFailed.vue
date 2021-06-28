@@ -2,10 +2,10 @@
     <div>
         <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
-        <p
+        <h1
             :class="$style['c-takeawaypayActivation-title']">
             {{ $t('messages.titleActivationFailed') }}
-        </p>
+        </h1>
 
         <p>
             {{ $t('messages.descriptionActivationFailed') }}

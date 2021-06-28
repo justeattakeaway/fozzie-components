@@ -2,9 +2,9 @@
     <div>
         <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
-        <p :class="$style['c-takeawaypayActivation-title']">
+        <h1 :class="$style['c-takeawaypayActivation-title']">
             {{ $t('messages.titleActivationNotLoggedIn') }}
-        </p>
+        </h1>
 
         <p>
             {{ $t('messages.descriptionActivationNotLoggedIn') }}
