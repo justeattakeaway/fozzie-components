@@ -24,6 +24,15 @@ class UpdateCheckoutError extends Error {
     }
 }
 
+class UpdateCheckoutAccessForbiddenError extends UpdateCheckoutError {
+    constructor (error) {
+        super(error);
+        this.messageKey = 'errorMessages.accessForbiddenError.description';
+        this.logMessage = 'Checkout Update Failure: Access Forbidden';
+        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
+    }
+}
+
 class PlaceOrderError extends Error {
     constructor (message, errorCode) {
         super(message);
@@ -48,9 +57,9 @@ class GetCheckoutError extends Error {
     }
 }
 
-class AccessForbiddenError extends GetCheckoutError {
+class GetCheckoutAccessForbiddenError extends GetCheckoutError {
     constructor (message) {
-        super(message);
+        super(message, 403);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.logMessage = 'Get Checkout Failure: Access Forbidden';
         this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
@@ -85,8 +94,9 @@ export default {
     CreateGuestUserError,
     UpdateCheckoutError,
     PlaceOrderError,
+    UpdateCheckoutAccessForbiddenError,
     GetCheckoutError,
-    AccessForbiddenError,
+    GetCheckoutAccessForbiddenError,
     AvailableFulfilmentGetError,
     GetBasketError
 };
