@@ -50,6 +50,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
+    "@justeat/f-button": "1.8.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
