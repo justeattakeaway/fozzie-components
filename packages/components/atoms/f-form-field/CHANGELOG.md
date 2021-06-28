@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.16.0
+------------------------------
+*June 28, 2021*
+
+### Fixed
+- Hover state to be consistent across all field types.
+- First grouped field to have correct `border-radius`.
+
+
 v1.15.1
 ------------------------------
 *June 15, 2021*

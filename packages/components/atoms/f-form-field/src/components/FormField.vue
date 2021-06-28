@@ -294,6 +294,12 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
     & + & {
         margin-top: spacing(x2);
     }
+
+    &:hover {
+        .c-formField-field {
+            background-color: $form-input-bg--hover;
+        }
+    }
 }
 
     .c-formField-fieldWrapper {
@@ -317,9 +323,6 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         background-clip: padding-box;
         padding: $form-input-padding;
 
-        &:hover {
-            background-color: $form-input-bg--hover;
-        }
 
         &:focus,
         &:active,
@@ -380,7 +383,7 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         }
     }
 
-    .c-formField--grouped:first-child {
+    .c-formField--grouped:nth-of-type(1) {
         .c-formField-field {
             border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
