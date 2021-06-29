@@ -10,6 +10,7 @@ import {
     CHECKOUT_METHOD_COLLECTION,
     CHECKOUT_METHOD_DINEIN,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
+    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     CHEKOUT_ERROR_FORM_TYPE
 } from '../../constants';
@@ -1495,7 +1496,7 @@ describe('Checkout', () => {
                             }
                         });
 
-                        const handleNonFulfillableCheckoutSpy = jest.spyOn(wrapper.vm, 'handleNonFulfillableCheckout');
+                        const handleNonFulfillableCheckoutSpy = jest.spyOn(wrapper.vm, 'handleNonFulfillableCheckout').mockImplementation();
 
                         // Act
                         await wrapper.vm.submitCheckout();
@@ -1706,6 +1707,35 @@ describe('Checkout', () => {
             });
 
             describe('when there are errors', () => {
+                describe('when fulfilment time is unavailable', () => {
+                    it('should make a call to `loadAvailableFulfilment`', () => {
+                        // Arrange
+                        const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                errors: [{
+                                    code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+                                }]
+                            }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act
+                        wrapper.vm.handleNonFulfillableCheckout();
+
+                        // Assert
+                        expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+                    });
+                });
+
                 it('should make a call to `logInvoker` with a `message` and `eventData`', () => {
                     // Arrange
                     const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');

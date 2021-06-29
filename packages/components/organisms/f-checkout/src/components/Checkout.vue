@@ -172,6 +172,7 @@ import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
+    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -557,8 +558,12 @@ export default {
          * Display and track issues when updating checkout even though the request was successful.
          * (e.g. request is correct, but the restaurant is now offline).
          */
-        handleNonFulfillableCheckout () {
+        async handleNonFulfillableCheckout () {
             if (this.errors) {
+                if (this.errors[0].code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+                    await this.loadAvailableFulfilment();
+                }
+
                 this.trackFormErrors();
 
                 this.logInvoker({
