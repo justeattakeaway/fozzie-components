@@ -9,7 +9,7 @@ const LOCALES = ['en-GB', 'es-ES', 'it-IT', 'en-IE', 'en-AU', 'en-NZ'];
 
 const PATHS = {
     vueSrcFolder: './src',
-    distFolder: './dist',
+    distFolder: './.tmp-dist',
     tempVueFolder: './.tmp-vue'
 };
 
@@ -27,7 +27,7 @@ function setVueProps(locale) {
 
 function vueBuild (cb) {
     log('running vue-cli-service build ');
-    return exec(`yarn vue-cli-service build --dest ${PATHS.tempVueFolder}`, (err, stdout, stderr) => {
+    return exec(`VUE_CLI_SERVICE_CONFIG_PATH=$PWD/vue.config.js npx vue-cli-service build --dest ${PATHS.tempVueFolder}`, (err, stdout, stderr) => {
         log(stdout);
         log(stderr);
         cb(err);
@@ -42,11 +42,6 @@ function cleanTmpFolders () {
 function clearVueCliCache () {
     log('clear ./node_modules/.cache');
     return del(['./node_modules/.cache/vue-loader'], { force: true });
-}
-
-function cleanUp() {
-    log('clear .tmp-dist folder');
-    return del([PATHS.tempVueFolder], { force: true });
 }
 
 function concatJS (locale) {
@@ -69,6 +64,13 @@ function moveCSS (locale) {
     };
 }
 
+function moveFilesToRootDist () {
+        log(`move generated files to ../dist/static`);
+        return src(`${PATHS.distFolder}/**`)
+            .pipe(dest('../dist/static'));
+}
+
+
 function defaultTask () {
     const tasks = LOCALES.map(locale => [
         clearVueCliCache,
@@ -81,7 +83,8 @@ function defaultTask () {
     return series(
         cleanTmpFolders,
         ...tasks,
-        cleanUp
+        moveFilesToRootDist,
+        cleanTmpFolders
     );
 }
 
