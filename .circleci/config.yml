@@ -56,7 +56,7 @@ commands:
     description: Locally builds all packages in the monorepo
     steps:
       - run: |
-          if [ "${ROOT_CHANGE}" == "true" ];
+          if [ "${ROOT_CHANGE}" == "true" || "${STORYBOOK_DEPLOY}" == "true" ];
           then
             yarn build
           else
@@ -296,6 +296,7 @@ jobs:
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
+      STORYBOOK_DEPLOY: true
     steps:
       - checkout
       - restore_cache:
