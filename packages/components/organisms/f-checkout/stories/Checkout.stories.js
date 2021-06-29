@@ -34,6 +34,7 @@ const updateCheckoutUrl = '/update-checkout.json';
 const updateCheckoutRestaurantNotTakingOrdersUrl = '/update-checkout-restaurant-not-taking-orders.json';
 const updateCheckoutAdditionalItemsRequiredUrl = '/update-checkout-additional-items-required.json';
 const updateCheckoutAccessForbiddenUrl = '/update-checkout-403.json';
+const updateCheckoutUnavailableTimeUrl = '/update-checkout-time-unavailable.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
@@ -60,6 +61,7 @@ CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutRestaurantNotTakingOrdersUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutAdditionalItemsRequiredUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutAccessForbiddenUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutUnavailableTimeUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
@@ -180,6 +182,12 @@ export const CheckoutComponent = () => ({
         updateCheckoutUrl () {
             if (this.patchCheckoutError) {
                 return `/update-checkout-${this.patchCheckoutError}.json`;
+            }
+
+            console.log(this.fulfilmentTimeSelection);
+
+            if (this.fulfilmentTimeSelection === 'user-selected-unavailable-time') {
+                return '/update-checkout-time-unavailable.json';
             }
 
             return updateCheckoutUrl;
