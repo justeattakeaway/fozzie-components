@@ -5,12 +5,13 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import storageMock from '../../../test-utils/local-storage/local-storage-mock';
+import addressService from '../../services/addressService';
 import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
-import sessionStorageMock from '../../../test-utils/local-storage/local-storage-mock';
 
 import {
     UPDATE_AUTH,
@@ -21,6 +22,7 @@ import {
     UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
     UPDATE_STATE,
     UPDATE_USER_NOTE,
@@ -368,6 +370,17 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+            });
+
+            it(`should update 'hasUpdatedAsap' value with ${UPDATE_HAS_ASAP_SELECTED} mutation.`, async () => {
+                // Arrange
+                const expectedAsapValue = checkoutDeliveryCopy.fulfilment.time.asap;
+
+                // Act
+                await getCheckout({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_HAS_ASAP_SELECTED, expectedAsapValue);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
@@ -914,6 +927,89 @@ describe('CheckoutModule', () => {
                     expect(commit).not.toHaveBeenCalled();
                 });
             });
+
+            describe('if the address is in local storage', () => {
+                const storedAddress = {
+                    Line1: 'Flat 101',
+                    Line2: 'Made Up House',
+                    Line3: 'Camden Town',
+                    Line4: '',
+                    Line5: '',
+                    City: 'London',
+                    Field1: '51.529747',
+                    Field2: '-0.142396',
+                    PostalCode: 'NW1 4DE',
+                    searchBoxAddress: 'NW1 4DE'
+                };
+
+                beforeEach(() => {
+                    state.authToken = authToken;
+
+                    Object.defineProperty(window, 'localStorage', { value: storageMock });
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify(storedAddress));
+                });
+
+                afterEach(() => {
+                    window.localStorage.clear();
+                    jest.resetAllMocks();
+                });
+
+                it('should not make api call and should call the mutation with the stored coordinates if the form values match local storage', async () => {
+                    // Arrange
+                    const newState = {
+                        ...state,
+                        address: {
+                            line1: 'Flat 101',
+                            line2: 'Made Up House',
+                            locality: 'London',
+                            postcode: 'NW1 4DE'
+                        }
+                    };
+
+                    // Act
+                    await getGeoLocation({ commit, state: newState }, payload);
+
+                    // Assert
+                    expect(axios.post).not.toHaveBeenCalled();
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, [storedAddress.Field2, storedAddress.Field1]);
+                });
+
+                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if the form address does not match local storage`, async () => {
+                    // Arrange
+                    const newState = {
+                        ...state,
+                        address: {
+                            line1: 'Flat 101',
+                            line2: 'Made Up House',
+                            locality: 'London',
+                            postcode: 'NW2 3PE'
+                        }
+                    };
+
+                    // Act
+                    await getGeoLocation({ commit, state: newState }, payload);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+
+                describe('When the address in localStorage does not match the address `state`', () => {
+                    it('should update localStorage to the changed address', async () => {
+                        // Arrange
+                        const setItemSpy = jest.spyOn(window.localStorage, 'setItem');
+                        jest.spyOn(addressService, 'doesAddressInStorageAndFormMatch').mockImplementation(() => false);
+
+                        // Act
+                        await getGeoLocation({ commit, state }, payload);
+
+                        // Assert
+                        expect(setItemSpy).toHaveBeenCalledWith(
+                            'je-full-address-details',
+                            '{"PostalCode":"postcode","Line1":"line 1","Line2":"line 2","City":"locality"}'
+                        );
+                    });
+                });
+            });
         });
 
         it.each([
@@ -945,7 +1041,7 @@ describe('CheckoutModule', () => {
         describe('getUserNote ::', () => {
             describe('if sessionStorage exists', () => {
                 beforeEach(() => {
-                    Object.defineProperty(window, 'sessionStorage', { value: sessionStorageMock });
+                    Object.defineProperty(window, 'sessionStorage', { value: storageMock });
                 });
 
                 afterEach(() => {
@@ -1002,7 +1098,7 @@ describe('CheckoutModule', () => {
 
         describe('saveUserNote ::', () => {
             beforeEach(() => {
-                Object.defineProperty(window, 'sessionStorage', { value: sessionStorageMock });
+                Object.defineProperty(window, 'sessionStorage', { value: storageMock });
             });
 
             afterEach(() => {

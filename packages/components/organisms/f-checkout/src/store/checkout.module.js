@@ -146,6 +146,7 @@ export default {
             resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);
+            commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
@@ -349,7 +350,29 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getGeoLocation: async ({ commit, state }, { url, postData, timeout }) => {
-            if (state.authToken) {
+            let addressCoords;
+
+            const isAddressInLocalStorage = addressService.isAddressInLocalStorage();
+
+            if (isAddressInLocalStorage) {
+                const storedAddress = addressService.getAddressFromLocalStorage(false);
+
+                if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
+                    addressCoords = [storedAddress.Field2, storedAddress.Field1];
+                    commit(UPDATE_GEO_LOCATION, addressCoords);
+                } else {
+                    const addressDetails = state.address;
+
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({
+                        PostalCode: addressDetails.postcode,
+                        Line1: addressDetails.line1,
+                        Line2: addressDetails.line2,
+                        City: addressDetails.locality
+                    }));
+                }
+            }
+
+            if (!addressCoords && state.authToken) {
                 const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
                 const config = {
@@ -442,7 +465,7 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.time = fulfilment.time;
+            state.time = fulfilment.time.scheduled || state.time;
 
             let address = null;
             if (addressService.isAddressInLocalStorage()) {

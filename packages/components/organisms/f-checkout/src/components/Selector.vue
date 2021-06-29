@@ -45,6 +45,7 @@ export default {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'availableFulfilment',
             'serviceType',
+            'hasAsapSelected',
             'time'
         ]),
 
@@ -68,7 +69,6 @@ export default {
 
             if (this.availableFulfilment.isAsapAvailable && times.length) {
                 times[0].text = this.$t('asapFulfilmentOption');
-                this.updateHasAsapSelected(true);
             }
 
             return times;
@@ -132,9 +132,12 @@ export default {
          */
         initFulfilmentTime () {
             const times = this.fulfilmentTimes || [];
+            const preSelectedTime = (times.some(i => i.value === this.time.from) && this.time.from);
 
-            let selectedTime = (times.some(i => i.value === this.time.from) && this.time.from)
-                                || (times.length && times[0].value);
+            let selectedTime = preSelectedTime && !this.hasAsapSelected
+                ? preSelectedTime
+                : (times.length && times[0].value);
+
             selectedTime = selectedTime === 0 ? '' : selectedTime;
 
             this.updateFulfilmentTime({
@@ -143,6 +146,10 @@ export default {
             });
 
             this.selectedAvailableFulfilmentTime = selectedTime;
+
+            if (times.length) {
+                this.setAsapFlag(selectedTime);
+            }
         },
 
         /**

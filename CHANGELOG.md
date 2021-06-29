@@ -3,6 +3,74 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.42.5
+------------------------------
+*June 24, 2021*
+
+## Fix
+- Fix to output the changes varirable so that it works on CircleCI.
+
+
+v3.42.4
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Trying a different fix for the package comparison. Checks if variable is defined rather than a numeric comparison.
+
+
+v3.42.3
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Storybook deploy should reference yarn (to call lerna indirectly).
+
+
+v3.42.2
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Numeric comparison fixed in CircleCI bash script
+
+
+v3.42.1
+------------------------------
+*June 24, 2021*
+
+## Fixed
+- Added a couple of exclusions to the root entries that don't trigger a full build.
+
+
+v3.42.0
+------------------------------
+*June 23, 2021*
+
+## Changed
+- Optimises the build so that only packages that have been amended run in the build and are tested via Storybook.
+
+## Fixed
+- DangerJS now correctly reports when Storybook needs a version bump and CHANGELOG entry.
+
+
+v3.41.0
+------------------------------
+*June 18, 2021*
+
+## Fixed
+- Storybook deployer moved to the storybook package (so that it deploys the `index.html` to the root of `gh-pages` correctly).
+
+
+v3.40.0
+------------------------------
+*June 17, 2021*
+
+## Changed
+- Updated `@percy/cli` dependency.
+
+
 v3.39.0
 ------------------------------
 *June 9, 2021*
@@ -47,7 +115,7 @@ v3.34.0
 ------------------------------
 *May 18, 2021*
 
-### Updated 
+### Updated
 - fozzie to v5.0.0-beta.7 which uses new pie design tokens instead of fozzie-colour-palette vars
 
 

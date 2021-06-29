@@ -10,20 +10,22 @@ import {
     CHECKOUT_METHOD_COLLECTION,
     CHECKOUT_METHOD_DINEIN,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
-    TENANT_MAP
+    TENANT_MAP,
+    CHEKOUT_ERROR_FORM_TYPE
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
+    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger, $cookies
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
 
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
-    PlaceOrderError
+    PlaceOrderError,
+    UpdateCheckoutAccessForbiddenError
 } = exceptions;
 const localVue = createLocalVue();
 
@@ -81,10 +83,6 @@ const message = {
     shouldShowInDialog: true
 };
 
-const dialog = {
-    name: 'error-dialog'
-};
-
 const alertCode = 'Something went wrong, please try again later';
 
 const alert = {
@@ -126,6 +124,11 @@ describe('Checkout', () => {
         applicationName,
         spinnerTimeout,
         otacToAuthExchanger
+    };
+
+    const restaurant = {
+        seoName: 'checkout-kofte-farringdon',
+        id: '22222'
     };
 
     let windowLocationSpy;
@@ -287,8 +290,8 @@ describe('Checkout', () => {
             });
         });
 
-        describe('hasCheckoutLoadedSuccessfully ::', () => {
-            it('should render the checkout form and not the error page when set to `true`', () => {
+        describe('errorFormType ::', () => {
+            it('should render the checkout form and not the error page when is null', () => {
                 // Arrange & Act
                 const wrapper = mount(VueCheckout, {
                     i18n,
@@ -297,7 +300,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: true
+                            errorFormType: null
                         };
                     }
                 });
@@ -318,10 +321,14 @@ describe('Checkout', () => {
                     store: createStore(),
                     localVue,
                     propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    },
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: false,
-                            isLoading: false
+                            isLoading: false,
+                            errorFormType: CHEKOUT_ERROR_FORM_TYPE.default
                         };
                     }
                 });
@@ -347,7 +354,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: true,
+                            errorFormType: null,
                             shouldShowSpinner: true
                         };
                     }
@@ -509,7 +516,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -539,7 +547,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -566,7 +575,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -583,7 +593,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     },
                     computed: {
                         invalidFieldsSummary () {
@@ -607,7 +618,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     },
                     computed: {
                         invalidFieldsSummary () {
@@ -902,12 +914,20 @@ describe('Checkout', () => {
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
-                            message
+                            message,
+                            restaurant
                         }),
                         i18n,
                         localVue,
                         propsData
                     });
+
+                    const dialog = {
+                        name: 'error-dialog',
+                        props: {
+                            'redirect-url': wrapper.vm.redirectUrl
+                        }
+                    };
 
                     // Act
                     const { messageType } = wrapper.vm;
@@ -954,14 +974,14 @@ describe('Checkout', () => {
             });
         });
 
-        describe('dialogMessage ::', () => {
-            describe('when a message exists AND `shouldShowInDialog` is true', () => {
-                it('should return dialog', () => {
-                    // Act
+        describe('redirectUrl ::', () => {
+            describe('when service type is delivery or collection', () => {
+                it('should return the URL with a "restaurants" prefix to redirect back to the restaurant menu', () => {
+                    // Arrange && Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
-                            message
+                            restaurant
                         }),
                         i18n,
                         localVue,
@@ -969,30 +989,26 @@ describe('Checkout', () => {
                     });
 
                     // Assert
-                    expect(wrapper.vm.dialogMessage).toEqual(dialog);
+                    expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
                 });
             });
-        });
 
-        describe('alertMessage ::', () => {
-            describe('when a message exists AND `shouldShowInDialog` is false', () => {
-                it('should return alert', () => {
-                    // Act
+            describe('when service type is dine in', () => {
+                it('should return the URL with a "dine-in" prefix to redirect back to the restaurant menu', () => {
+                    // Arrange && Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
-                            message: alertCode
+                            restaurant,
+                            serviceType: 'dinein'
                         }),
                         i18n,
                         localVue,
-                        propsData,
-                        mocks: {
-                            $style
-                        }
+                        propsData
                     });
 
                     // Assert
-                    expect(wrapper.vm.alertMessage).toEqual(alert);
+                    expect(wrapper.vm.redirectUrl).toEqual(`dine-in-${restaurant.seoName}/menu`);
                 });
             });
         });
@@ -1302,7 +1318,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
             });
@@ -1338,7 +1355,8 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies
                                 }
                             });
                             const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
@@ -1367,7 +1385,8 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies
                                 }
                             });
 
@@ -1395,7 +1414,8 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger
+                                    $logger,
+                                    $cookies
                                 }
                             });
 
@@ -1470,7 +1490,8 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
 
@@ -1500,7 +1521,8 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
 
@@ -1597,7 +1619,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
             });
@@ -1672,7 +1695,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
             });
@@ -1738,7 +1762,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -1758,7 +1783,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -1771,31 +1797,80 @@ describe('Checkout', () => {
             });
 
             describe('when `updateCheckout` request fails', () => {
-                it('should throw an `UpdateCheckoutError` error with the `message` of the error', async () => {
-                    // Arrange
-                    const errorMessage = 'An error';
-
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultCheckoutState,
-                            {
-                                ...defaultCheckoutActions,
-                                updateCheckout: jest.fn(async () => Promise.reject(new Error(errorMessage)))
+                describe('AND `statusCode` is `403`', () => {
+                    it('should throw an `UpdateCheckoutAccessForbiddenError` error with the `message` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'An error - Access Forbidden';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 403
+                                }
                             }
-                        ),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
+                        };
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toThrow(UpdateCheckoutAccessForbiddenError);
+                        result.rejects.toThrow(errorMessage);
                     });
+                });
 
-                    // Act & Assert
-                    const result = await expect(wrapper.vm.handleUpdateCheckout());
+                describe('AND `statusCode` is not `403`', () => {
+                    it('should throw an `UpdateCheckoutError` error with the `message` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'An error';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 500
+                                }
+                            }
+                        };
 
-                    result.rejects.toThrow(UpdateCheckoutError);
-                    result.rejects.toThrow(errorMessage);
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toThrow(UpdateCheckoutError);
+                        result.rejects.toThrow(errorMessage);
+                    });
                 });
             });
         });
@@ -1831,7 +1906,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -1860,7 +1936,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
@@ -1889,7 +1966,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -1911,28 +1989,34 @@ describe('Checkout', () => {
             describe('when `getCheckout` request fails', () => {
                 let wrapper;
 
+                const error = {
+                    response: {
+                        status: 400
+                    }
+                };
+
                 beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject(error)) }),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadCheckout();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -1941,6 +2025,34 @@ describe('Checkout', () => {
 
                     // Assert
                     expect($logger.logError).toHaveBeenCalled();
+                });
+
+                it('should set `errorFormType` to "pageLoad" if error status code is not 403', async () => {
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.default);
+                });
+
+                it('should set `errorFormType` to "accessForbiddenError" if error status code is 403', async () => {
+                    // Assert
+                    wrapper = mount(VueCheckout, {
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject({ response: { status: 403 } })) }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
+                    });
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.accessForbidden);
                 });
             });
 
@@ -1955,7 +2067,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -1981,24 +2094,25 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAvailableFulfilment: jest.fn(async () => Promise.reject({ response: { status: 500 } })) }),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadAvailableFulfilment();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -2021,7 +2135,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2069,7 +2184,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2109,7 +2225,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
@@ -2148,7 +2265,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2186,24 +2304,25 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getBasket: jest.fn(async () => Promise.reject()) }),
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getBasket: jest.fn(async () => Promise.reject({ response: { status: 400 } })) }),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                 });
 
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event', async () => {
                     // Act
                     await wrapper.vm.loadBasket();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
 
                 it('should call `logError`', async () => {
@@ -2215,6 +2334,14 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(logInvokerSpy).toHaveBeenCalled();
+                });
+
+                it('should set `errorFormType` to "pageLoad"', async () => {
+                    // Act
+                    await wrapper.vm.loadBasket();
+
+                    // Assert
+                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.default);
                 });
             });
 
@@ -2229,7 +2356,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2263,7 +2391,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
                     const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
@@ -2280,8 +2409,6 @@ describe('Checkout', () => {
                         logMethod: $logger.logWarn,
                         error
                     });
-
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(true);
                 });
             });
 
@@ -2368,7 +2495,21 @@ describe('Checkout', () => {
                 });
             });
 
-            it('should call `trackFormInteraction` with the error information', () => {
+            it('should call `trackFormInteraction` with the error information including `errorCode` when it exists', () => {
+                // Arrange
+                error.errorCode = 'OrderError';
+
+                // Act
+                wrapper.vm.handleErrorState(error);
+
+                // Assert
+                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.errorCode}-${error.message}` });
+            });
+
+            it('should call `trackFormInteraction` without an `errorCode` when it does not exist', () => {
+                // Arrange
+                error.errorCode = null;
+
                 // Act
                 wrapper.vm.handleErrorState(error);
 
@@ -2567,10 +2708,12 @@ describe('Checkout', () => {
         describe('`onFormSubmit` ::', () => {
             let isFormValidSpy;
             let updateMessageSpy;
+            let setSubmittingStateSpy;
 
             beforeEach(() => {
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
                 updateMessageSpy = jest.spyOn(VueCheckout.methods, 'updateMessage');
+                setSubmittingStateSpy = jest.spyOn(VueCheckout.methods, 'setSubmittingState');
             });
 
             it('should exist', () => {
@@ -2582,7 +2725,8 @@ describe('Checkout', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
 
@@ -2601,7 +2745,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2610,6 +2755,29 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(updateMessageSpy).toHaveBeenCalled();
+                });
+
+                it('should call `setSubmittingState` first with `true` and then with `false`', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $v,
+                            $logger,
+                            $cookies
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(setSubmittingStateSpy).toHaveBeenCalledTimes(2);
+                    expect(setSubmittingStateSpy).toHaveBeenNthCalledWith(1, true);
+                    expect(setSubmittingStateSpy).toHaveBeenLastCalledWith(false);
                 });
 
                 it('should make a call to `trackFormInteraction` so we can track the action type `submit`', async () => {
@@ -2623,7 +2791,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -2659,7 +2828,8 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
 
@@ -2682,7 +2852,8 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
                         const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
@@ -2718,7 +2889,8 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
 
@@ -2741,7 +2913,8 @@ describe('Checkout', () => {
                             propsData,
                             mocks: {
                                 $v,
-                                $logger
+                                $logger,
+                                $cookies
                             }
                         });
                         const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
@@ -3049,7 +3222,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $logger,
+                        $cookies
                     }
                 });
             });
@@ -3058,9 +3232,21 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
+            it('should call `getReferralState`', async () => {
+                // Arrange
+                const getReferralStateSpy = jest.spyOn(wrapper.vm, 'getReferralState');
+
+                // Act
+                await wrapper.vm.submitOrder();
+
+                // Assert
+                expect(getReferralStateSpy).toHaveBeenCalled();
+            });
+
             it('should call `placeOrder`', async () => {
                 // Arrange
                 const placeOrderSpy = jest.spyOn(wrapper.vm, 'placeOrder');
+                jest.spyOn(wrapper.vm, 'getReferralState').mockImplementation(() => 'MockReferralState');
 
                 const expected = {
                     url: placeOrderUrl,
@@ -3069,7 +3255,7 @@ describe('Checkout', () => {
                         customerNotes: {
                             noteForRestaurant: defaultCheckoutState.userNote
                         },
-                        referralState: 'ReferredByWeb'
+                        referralState: 'MockReferralState'
                     },
                     timeout: 10000
                 };
@@ -3145,7 +3331,8 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3154,6 +3341,132 @@ describe('Checkout', () => {
 
                     result.rejects.toThrow(PlaceOrderError);
                     result.rejects.toThrow(errorMessage);
+                });
+            });
+        });
+
+        describe('getReferralState ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should retrieve the referral state from the cookie', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, restaurant: { id: '99999' } }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    }
+                });
+
+                const getSpy = jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 1 });
+
+                // Act
+                wrapper.vm.getReferralState();
+
+                // Assert
+                expect(getSpy).toHaveBeenCalledWith('je-rw-menu-referral-state-99999');
+            });
+
+            describe('when the cookie exists', () => {
+                describe('AND the `menuReferralState` is `1`', () => {
+                    it('should return "ReferredByWeb"', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 1 });
+
+                        // Act
+                        const result = wrapper.vm.getReferralState();
+
+                        // Assert
+                        expect(result).toBe('ReferredByWeb');
+                    });
+                });
+
+                describe('AND the `menuReferralState` is not `1`', () => {
+                    it('should return "None"', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({ menuReferralState: 0 });
+
+                        // Act
+                        const result = wrapper.vm.getReferralState();
+
+                        // Assert
+                        expect(result).toBe('None');
+                    });
+                });
+
+                describe('AND the `menuReferralState` does not exist', () => {
+                    it('should return "None"', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue({});
+
+                        // Act
+                        const result = wrapper.vm.getReferralState();
+
+                        // Assert
+                        expect(result).toBe('None');
+                    });
+                });
+            });
+
+            describe('when the cookie does not exist', () => {
+                it('should return "None"', () => {
+                    // Arrange
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
+                    });
+
+                    jest.spyOn(wrapper.vm.$cookies, 'get').mockReturnValue(null);
+
+                    // Act
+                    const result = wrapper.vm.getReferralState();
+
+                    // Assert
+                    expect(result).toBe('None');
                 });
             });
         });

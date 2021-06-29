@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import EventNames from '../event-names';
 import checkoutIssues from '../checkout-issues';
+import { CHEKOUT_ERROR_FORM_TYPE } from '../constants';
 
 class CreateGuestUserError extends Error {
     constructor (message) {
@@ -23,6 +24,15 @@ class UpdateCheckoutError extends Error {
     }
 }
 
+class UpdateCheckoutAccessForbiddenError extends UpdateCheckoutError {
+    constructor (error) {
+        super(error);
+        this.messageKey = 'errorMessages.accessForbiddenError.description';
+        this.logMessage = 'Checkout Update Failure: Access Forbidden';
+        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
+    }
+}
+
 class PlaceOrderError extends Error {
     constructor (message, errorCode) {
         super(message);
@@ -35,8 +45,58 @@ class PlaceOrderError extends Error {
     }
 }
 
+class GetCheckoutError extends Error {
+    constructor (message, errorCode) {
+        super(message);
+        this.messageKey = 'errorMessages.pageLoad.description';
+        this.eventToEmit = EventNames.CheckoutGetFailure;
+        this.logMessage = 'Get Checkout Failure';
+        this.errorCode = errorCode;
+        this.shouldShowInDialog = false;
+        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.default;
+    }
+}
+
+class GetCheckoutAccessForbiddenError extends GetCheckoutError {
+    constructor (message) {
+        super(message, 403);
+        this.messageKey = 'errorMessages.accessForbiddenError.description';
+        this.logMessage = 'Get Checkout Failure: Access Forbidden';
+        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
+    }
+}
+
+class AvailableFulfilmentGetError extends Error {
+    constructor (message, errorCode) {
+        super(message);
+        this.messageKey = 'errorMessages.pageLoad.description';
+        this.eventToEmit = EventNames.CheckoutAvailableFulfilmentGetFailure;
+        this.logMessage = 'Get Checkout Available Fulfilment Times Failure';
+        this.errorCode = errorCode;
+        this.shouldShowInDialog = false;
+        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.default;
+    }
+}
+
+class GetBasketError extends Error {
+    constructor (message, errorCode) {
+        super(message);
+        this.messageKey = 'errorMessages.pageLoad.description';
+        this.eventToEmit = EventNames.CheckoutBasketGetFailure;
+        this.logMessage = 'Get Basket Failure';
+        this.errorCode = errorCode;
+        this.shouldShowInDialog = false;
+        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.default;
+    }
+}
+
 export default {
     CreateGuestUserError,
     UpdateCheckoutError,
-    PlaceOrderError
+    PlaceOrderError,
+    UpdateCheckoutAccessForbiddenError,
+    GetCheckoutError,
+    GetCheckoutAccessForbiddenError,
+    AvailableFulfilmentGetError,
+    GetBasketError
 };
