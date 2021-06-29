@@ -184,8 +184,6 @@ export const CheckoutComponent = () => ({
                 return `/update-checkout-${this.patchCheckoutError}.json`;
             }
 
-            console.log(this.fulfilmentTimeSelection);
-
             if (this.fulfilmentTimeSelection === 'user-selected-unavailable-time') {
                 return '/update-checkout-time-unavailable.json';
             }
