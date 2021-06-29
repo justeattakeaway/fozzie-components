@@ -70,6 +70,9 @@ export default {
 </script>
 
 <style lang="scss" module>
+$form-input-bg                            : $color-container-default;
+$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);
+
 .c-formDropdown-icon {
     width: spacing(x1.5);
     position: absolute;
@@ -95,5 +98,9 @@ export default {
     /* Remove default styling */
     border: none;
     appearance: none;
+
+    &:hover {
+        background-color: $form-input-bg--hover;
+    }
 }
 </style>
