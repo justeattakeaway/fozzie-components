@@ -27,7 +27,8 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE,
     UPDATE_GEO_LOCATION,
-    UPDATE_MESSAGE
+    UPDATE_MESSAGE,
+    UPDATE_LOCAL_STORAGE_ADDRESS
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -307,6 +308,23 @@ describe('CheckoutModule', () => {
                     latitude: geometryData[1],
                     longitude: geometryData[0]
                 });
+            });
+        });
+
+        describe(`${UPDATE_LOCAL_STORAGE_ADDRESS} ::`, () => {
+            it('should update state with received values', () => {
+                // Arrange
+                const addressFromLocalStorage = {
+                    lines: ['line 1', 'line 2'],
+                    locality: 'locality',
+                    postalCode: 'postcode'
+                };
+
+                // Act
+                mutations[UPDATE_LOCAL_STORAGE_ADDRESS](state, addressFromLocalStorage);
+
+                // Assert
+                expect(state.address).toEqual(address);
             });
         });
 

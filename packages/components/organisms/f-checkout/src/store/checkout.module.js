@@ -20,7 +20,8 @@ import {
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTE,
+    UPDATE_LOCAL_STORAGE_ADDRESS
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -443,6 +444,10 @@ export default {
 
         updateMessage:  ({ commit }, message = null) => {
             commit(UPDATE_MESSAGE, message);
+        },
+
+        updateAddressFromLocalStorage: ({ commit }, address) => {
+            commit(UPDATE_LOCAL_STORAGE_ADDRESS, address);
         }
     },
 
@@ -573,6 +578,16 @@ export default {
 
         [UPDATE_MESSAGE]: (state, message) => {
             state.message = message;
+        },
+
+        [UPDATE_LOCAL_STORAGE_ADDRESS]: (state, address) => {
+            /* eslint-disable prefer-destructuring */
+            state.address.line1 = address.lines[0];
+            state.address.line2 = address.lines[1];
+            /* eslint-enable prefer-destructuring */
+
+            state.address.locality = address.locality;
+            state.address.postcode = address.postalCode;
         }
     }
 };
