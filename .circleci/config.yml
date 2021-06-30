@@ -34,7 +34,7 @@ commands:
           echo 'Changes detected:'
           echo $changes
 
-          if [[ $changes ]]; then
+          if [[ $changes ] || [ $CIRCLE_BRANCH == "master" ]]; then
             echo 'export RUN_ALL=true' >> $BASH_ENV
             source $BASH_ENV
           else
