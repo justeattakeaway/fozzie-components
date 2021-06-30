@@ -17,13 +17,18 @@
                 :is-inline="isInline"
                 :data-test-id="testId.label">
                 {{ labelText }}
+                <template #description>
+                    <p
+                        v-if="hasInputDescription"
+                        :class="[
+                            'u-spacingTop',
+                            'u-spacingBottom--large',
+                            $style['c-formField-labelDescription']
+                        ]">
+                        <slot />
+                    </p>
+                </template>
             </form-label>
-
-            <p
-                v-if="hasInputDescription"
-                class="u-spacingTop u-spacingBottom--large">
-                <slot />
-            </p>
 
             <form-dropdown
                 v-if="isDropdown"
@@ -70,6 +75,7 @@
                 ]"
                 v-on="listeners"
             >
+
             <form-label
                 v-if="isInline"
                 :id="`label-${uniqueId}`"
@@ -380,9 +386,13 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         }
     }
 
-    .c-formField--grouped:first-child {
+    .c-formField--grouped:nth-of-type(1) {
         .c-formField-field {
             border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
+    }
+
+    .c-formField-labelDescription {
+        font-weight: normal;
     }
 </style>
