@@ -25,16 +25,17 @@ class UpdateCheckoutError extends Error {
 }
 
 class UpdateCheckoutAccessForbiddenError extends UpdateCheckoutError {
-    constructor (error) {
+    constructor (error, logMethod) {
         super(error);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.logMessage = 'Checkout Update Failure: Access Forbidden';
         this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
+        this.logMethod = logMethod;
     }
 }
 
 class PlaceOrderError extends Error {
-    constructor (message, errorCode) {
+    constructor (message, errorCode, logMethod) {
         super(message);
         this.messageKey = 'errorMessages.genericServerError';
         this.eventToEmit = EventNames.CheckoutPlaceOrderFailure;
@@ -42,6 +43,7 @@ class PlaceOrderError extends Error {
         this.errorCode = errorCode;
         const issue = checkoutIssues[errorCode] || {};
         this.shouldShowInDialog = issue.shouldShowInDialog || false;
+        this.logMethod = logMethod;
     }
 }
 
@@ -58,11 +60,12 @@ class GetCheckoutError extends Error {
 }
 
 class GetCheckoutAccessForbiddenError extends GetCheckoutError {
-    constructor (message) {
+    constructor (message, logMethod) {
         super(message, 403);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.logMessage = 'Get Checkout Failure: Access Forbidden';
         this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
+        this.logMethod = logMethod;
     }
 }
 
