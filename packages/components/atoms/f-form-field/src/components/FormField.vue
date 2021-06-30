@@ -17,13 +17,18 @@
                 :is-inline="isInline"
                 :data-test-id="testId.label">
                 {{ labelText }}
+                <template #description>
+                    <span
+                        v-if="hasInputDescription"
+                        :class="[
+                            'u-spacingTop',
+                            'u-spacingBottom--large',
+                            $style['c-formField-label-description']
+                        ]">
+                        <slot />
+                    </span>
+                </template>
             </form-label>
-
-            <p
-                v-if="hasInputDescription"
-                class="u-spacingTop u-spacingBottom--large">
-                <slot />
-            </p>
 
             <form-dropdown
                 v-if="isDropdown"
@@ -70,6 +75,7 @@
                 ]"
                 v-on="listeners"
             >
+
             <form-label
                 v-if="isInline"
                 :id="`label-${uniqueId}`"
@@ -275,8 +281,6 @@ export default {
 <style lang="scss" module>
 $form-input-textColour                    : $color-content-default;
 $form-input-textColour--disabled          : $color-content-disabled;
-$form-input-bg                            : $color-container-default;
-$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);
 $form-input-bg--disabled                  : $color-disabled-01;
 $form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;
@@ -380,9 +384,14 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         }
     }
 
-    .c-formField--grouped:first-child {
+    .c-formField--grouped:nth-of-type(1) {
         .c-formField-field {
             border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
+    }
+
+    .c-formField-label-description {
+        display: block;
+        font-weight: normal;
     }
 </style>

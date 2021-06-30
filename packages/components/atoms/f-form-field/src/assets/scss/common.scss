@@ -4,3 +4,6 @@
 $theme: 'jet' !default;
 
 @import  '~@justeat/fozzie/src/scss/fozzie';
+
+$form-input-bg                            : $color-container-default;
+$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);

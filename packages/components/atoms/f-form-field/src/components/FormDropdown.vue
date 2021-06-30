@@ -95,5 +95,9 @@ export default {
     /* Remove default styling */
     border: none;
     appearance: none;
+
+    &:hover {
+        background-color: $form-input-bg--hover;
+    }
 }
 </style>
