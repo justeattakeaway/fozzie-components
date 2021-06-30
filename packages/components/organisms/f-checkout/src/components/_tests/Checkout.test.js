@@ -2492,7 +2492,7 @@ describe('Checkout', () => {
                 });
             });
 
-            it('should call `logInvoker` to log the warning, passing the `eventData`, `error` and `logWarn` as a method when specified by the error', () => {
+            it('should call `logInvoker` to log the warning, passing the `eventData`, `error` and the logging method specified by the error', () => {
                 // Arrange
                 error = new UpdateCheckoutAccessForbiddenError('An error', $logger.logWarn);
 
