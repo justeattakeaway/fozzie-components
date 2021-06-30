@@ -18,15 +18,15 @@
                 :data-test-id="testId.label">
                 {{ labelText }}
                 <template #description>
-                    <p
+                    <span
                         v-if="hasInputDescription"
                         :class="[
                             'u-spacingTop',
                             'u-spacingBottom--large',
-                            $style['c-formField-labelDescription']
+                            $style['c-formField-label-description']
                         ]">
                         <slot />
-                    </p>
+                    </span>
                 </template>
             </form-label>
 
@@ -281,8 +281,6 @@ export default {
 <style lang="scss" module>
 $form-input-textColour                    : $color-content-default;
 $form-input-textColour--disabled          : $color-content-disabled;
-$form-input-bg                            : $color-container-default;
-$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);
 $form-input-bg--disabled                  : $color-disabled-01;
 $form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;
@@ -392,7 +390,8 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         }
     }
 
-    .c-formField-labelDescription {
+    .c-formField-label-description {
+        display: block;
         font-weight: normal;
     }
 </style>
