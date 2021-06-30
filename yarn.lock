@@ -2235,6 +2235,14 @@
   dependencies:
     "@justeat/f-vue-icons" "1.10.0"
 
+"@justeat/f-form-field@1.15.1":
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.15.1.tgz#b7acf9e76975df9122dd8c4835ec8664c1f79eae"
+  integrity sha512-MRWQ+m1E5qT5irTLLhNwyf0RZIhNaF7TEWMHtgPWzGooPxtzMcco6zh+XvZ8mNp9QjosV+tl09+EDSTbxFIcmQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "1.11.0"
+
 "@justeat/f-form-field@1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.6.1.tgz#47b014847a42467737b65997cfcab212d0385ba7"
@@ -5848,9 +5856,9 @@ acorn@^7.1.0, acorn@^7.1.1, acorn@^7.2.0:
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
 acorn@^8.2.4:
-  version "8.2.4"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.2.4.tgz#caba24b08185c3b56e3168e97d15ed17f4d31fd0"
-  integrity sha512-Ibt84YwBDDA890eDiDCEqcbwvHlBvzzDkU2cGBBDDI1QWT12jTiXIOn2CIw5KK4i6N5Z2HUxwYjzriDyqaqqZg==
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.4.1.tgz#56c36251fc7cabc7096adc18f05afe814321a28c"
+  integrity sha512-asabaBSkEKosYKMITunzX177CXxQ4Q8BSSzMTKD+FefUhipQC70gfW5SiUDhYQ3vk8G+81HqQk7Fv9OXwwn9KA==
 
 address@1.1.2, address@^1.0.1, address@^1.0.3, address@^1.1.2:
   version "1.1.2"
