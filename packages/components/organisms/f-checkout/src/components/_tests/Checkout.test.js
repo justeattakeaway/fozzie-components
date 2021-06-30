@@ -1573,7 +1573,7 @@ describe('Checkout', () => {
                     describe('AND the error is of type `PlaceOrderError`', () => {
                         it('should call `handleErrorState` with the place order error info', async () => {
                             // Arrange
-                            const error = new PlaceOrderError('PlaceOrderError exception!');
+                            const error = new PlaceOrderError('PlaceOrderError exception!', 'Error code', $logger);
 
                             jest.spyOn(wrapper.vm, 'submitOrder').mockImplementation(() => {
                                 throw error;
@@ -2494,7 +2494,7 @@ describe('Checkout', () => {
 
             it('should call `logInvoker` to log the warning, passing the `eventData`, `error` and the logging method specified by the error', () => {
                 // Arrange
-                error = new UpdateCheckoutAccessForbiddenError('An error', $logger.logWarn);
+                error = new UpdateCheckoutAccessForbiddenError('An error', $logger);
 
                 // Act
                 wrapper.vm.handleErrorState(error);

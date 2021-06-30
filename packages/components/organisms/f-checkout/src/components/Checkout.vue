@@ -604,7 +604,7 @@ export default {
                 const statusCode = e.response.data.statusCode || e.response.status;
 
                 if (statusCode === 403) {
-                    throw new UpdateCheckoutAccessForbiddenError(e, this.$logger.logWarn);
+                    throw new UpdateCheckoutAccessForbiddenError(e, this.$logger);
                 }
 
                 throw new UpdateCheckoutError(e);
@@ -648,11 +648,7 @@ export default {
             } catch (e) {
                 const { errorCode } = e.response.data;
 
-                const logMethod = errorCode === 'DuplicateOrder'
-                    ? this.$logger.logWarn
-                    : this.$logger.logError;
-
-                throw new PlaceOrderError(e.message, errorCode, logMethod);
+                throw new PlaceOrderError(e.message, errorCode, this.$logger);
             }
         },
 
@@ -698,7 +694,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
                 if (error.response && error.response.status === 403) {
-                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger.logWarn));
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
                 }
