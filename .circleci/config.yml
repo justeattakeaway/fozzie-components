@@ -35,9 +35,10 @@ commands:
           echo $changes
 
           if [[ $changes ]]; then
-            echo 'export ROOT_CHANGE=true' >> $BASH_ENV
+            echo 'export RUN_ALL=true' >> $BASH_ENV
             source $BASH_ENV
           else
+          echo 'export RUN_ALL=false' >> $BASH_ENV
             echo 'Root files not changed'
           fi
 
@@ -45,7 +46,7 @@ commands:
     description: Detects root package.json changes
     steps:
       - run: |
-          echo $ROOT_CHANGE
+          echo $RUN_ALL
 
   install_node_dependencies:
     description: Installs the node dependencies
@@ -56,7 +57,7 @@ commands:
     description: Locally builds all packages in the monorepo
     steps:
       - run: |
-          if [ "${ROOT_CHANGE}" == "true" || "${STORYBOOK_DEPLOY}" == "true" ];
+          if [ "${RUN_ALL}" == "true" ];
           then
             yarn build
           else
@@ -67,7 +68,7 @@ commands:
     description: Locally lints all packages in the monorepo
     steps:
       - run: |
-          if [ "${ROOT_CHANGE}" == "true" ];
+          if [ "${RUN_ALL}" == "true" ];
           then
             yarn lint
           else
@@ -78,7 +79,7 @@ commands:
     description: Run Unit / Integration Tests
     steps:
       - run: |
-          if [ "${ROOT_CHANGE}" == "true" ];
+          if [ "${RUN_ALL}" == "true" ];
           then
             yarn test
           else
@@ -89,7 +90,7 @@ commands:
     description: Build Storybook for UI tests
     steps:
       - run: |
-          if [ "${ROOT_CHANGE}" == "true" ];
+          if [ "${RUN_ALL}" == "true" ];
           then
             yarn storybook:build
           else
@@ -100,7 +101,7 @@ commands:
     description: Run Components Tests
     steps:
       - run: |
-          if [ "${ROOT_CHANGE}" == "true" ];
+          if [ "${RUN_ALL}" == "true" ];
           then
             yarn test-component:chrome
           else
@@ -111,7 +112,7 @@ commands:
     description: Run Accessibility Tests
     steps:
       - run: |
-          if [ "${ROOT_CHANGE}" == "true" ];
+          if [ "${RUN_ALL}" == "true" ];
           then
             yarn test-a11y:chrome
           else
@@ -122,7 +123,7 @@ commands:
     description: Run Percy Visual Regression Tests
     steps:
       - run: |
-          if [ "${ROOT_CHANGE}" == "true" ];
+          if [ "${RUN_ALL}" == "true" ];
           then
             yarn test:visual
           else
@@ -296,7 +297,7 @@ jobs:
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
-      STORYBOOK_DEPLOY: true
+      RUN_ALL: true
     steps:
       - checkout
       - restore_cache:
