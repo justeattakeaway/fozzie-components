@@ -21,7 +21,7 @@ import {
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
     UPDATE_USER_NOTE,
-    UPDATE_LOCAL_STORAGE_ADDRESS
+    UPDATE_ADDRESS
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -446,8 +446,8 @@ export default {
             commit(UPDATE_MESSAGE, message);
         },
 
-        updateAddressFromLocalStorage: ({ commit }, address) => {
-            commit(UPDATE_LOCAL_STORAGE_ADDRESS, address);
+        updateAddress: ({ commit }, address) => {
+            commit(UPDATE_ADDRESS, address);
         }
     },
 
@@ -580,7 +580,7 @@ export default {
             state.message = message;
         },
 
-        [UPDATE_LOCAL_STORAGE_ADDRESS]: (state, address) => {
+        [UPDATE_ADDRESS]: (state, address) => {
             /* eslint-disable prefer-destructuring */
             state.address.line1 = address.lines[0];
             state.address.line2 = address.lines[1];

@@ -1184,9 +1184,9 @@ describe('Checkout', () => {
                     expect(loadCheckoutSpy).not.toHaveBeenCalled();
                 });
 
-                it('should call `getAddressFromLocalStorage` so we can pre-populate the guest checkout address', async () => {
+                it('should call `loadAddressFromLocalStorage` so we can pre-populate the guest checkout address', async () => {
                     // Arrange & Act
-                    const getAddressFromLocalStorageSpy = jest.spyOn(VueCheckout.methods, 'getAddressFromLocalStorage');
+                    const loadAddressFromLocalStorageSpy = jest.spyOn(VueCheckout.methods, 'loadAddressFromLocalStorage');
 
                     shallowMount(VueCheckout, {
                         store: createStore(),
@@ -1197,7 +1197,7 @@ describe('Checkout', () => {
                     await flushPromises();
 
                     // Assert
-                    expect(getAddressFromLocalStorageSpy).toHaveBeenCalled();
+                    expect(loadAddressFromLocalStorageSpy).toHaveBeenCalled();
                 });
             });
 
@@ -1218,9 +1218,9 @@ describe('Checkout', () => {
                     expect(loadCheckoutSpy).toHaveBeenCalled();
                 });
 
-                it('should not call `getAddressFromLocalStorage`', async () => {
+                it('should not call `loadAddressFromLocalStorage`', async () => {
                     // Arrange & Act
-                    const getAddressFromLocalStorageSpy = jest.spyOn(VueCheckout.methods, 'getAddressFromLocalStorage');
+                    const loadAddressFromLocalStorageSpy = jest.spyOn(VueCheckout.methods, 'loadAddressFromLocalStorage');
 
                     shallowMount(VueCheckout, {
                         store: createStore({ ...defaultCheckoutState, isLoggedIn: true }),
@@ -1231,12 +1231,12 @@ describe('Checkout', () => {
                     await flushPromises();
 
                     // Assert
-                    expect(getAddressFromLocalStorageSpy).not.toHaveBeenCalled();
+                    expect(loadAddressFromLocalStorageSpy).not.toHaveBeenCalled();
                 });
             });
         });
 
-        describe('getAddressFromLocalStorage ::', () => {
+        describe('loadAddressFromLocalStorage ::', () => {
             it('should make a call to `addressService.getAddressFromLocalStorage`', () => {
                 // Arrange
                 const addressServiceSpy = jest.spyOn(addressService, 'getAddressFromLocalStorage');
@@ -1254,7 +1254,7 @@ describe('Checkout', () => {
                 });
 
                 // Act
-                wrapper.vm.getAddressFromLocalStorage();
+                wrapper.vm.loadAddressFromLocalStorage();
 
                 // Assert
                 expect(addressServiceSpy).toHaveBeenCalled();

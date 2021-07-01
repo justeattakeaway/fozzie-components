@@ -28,7 +28,7 @@ import {
     UPDATE_USER_NOTE,
     UPDATE_GEO_LOCATION,
     UPDATE_MESSAGE,
-    UPDATE_LOCAL_STORAGE_ADDRESS
+    UPDATE_ADDRESS
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -311,7 +311,7 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe(`${UPDATE_LOCAL_STORAGE_ADDRESS} ::`, () => {
+        describe(`${UPDATE_ADDRESS} ::`, () => {
             it('should update state with received values', () => {
                 // Arrange
                 const addressFromLocalStorage = {
@@ -321,7 +321,7 @@ describe('CheckoutModule', () => {
                 };
 
                 // Act
-                mutations[UPDATE_LOCAL_STORAGE_ADDRESS](state, addressFromLocalStorage);
+                mutations[UPDATE_ADDRESS](state, addressFromLocalStorage);
 
                 // Assert
                 expect(state.address).toEqual(address);

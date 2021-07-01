@@ -492,7 +492,7 @@ export default {
             'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
-            'updateAddressFromLocalStorage',
+            'updateAddress',
             'getUserNote',
             'saveUserNote'
         ]),
@@ -514,7 +514,7 @@ export default {
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.getAddressFromLocalStorage(), this.loadAvailableFulfilment()];
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
             this.resetLoadingState();
@@ -530,11 +530,11 @@ export default {
          * Update address lines if localStorage is populated.
          *
          * */
-        getAddressFromLocalStorage () {
+        loadAddressFromLocalStorage () {
             const address = addressService.getAddressFromLocalStorage();
 
             if (address) {
-                this.updateAddressFromLocalStorage(address);
+                this.updateAddress(address);
             }
         },
 
