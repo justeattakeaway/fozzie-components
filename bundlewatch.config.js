@@ -1,43 +1,38 @@
 // https://bundlewatch.io/#/getting-started/using-a-config-file
 
-const { readdirSync } = require('fs');
-
-const packageFolders = [
-    'packages/components/atoms',
-    'packages/components/molecules',
-    'packages/components/organisms',
-    'packages/services',
-    'packages/tools'
-];
+const { execSync } = require('child_process');
+let outputChangedPackages;
 
 const excludedPackages = [
-    'packages/services/f-braze-adapter',
-    'packages/tools/generator-component',
-    'packages/tools/storybook',
-    'packages/services/f-wdio-utils'
+    'storybook',
+    'services/f-braze-adapter',
+    'services/f-wdio-utils',
+    'tools/generator-component'
 ];
 
-/**
- * Function to get subfolders of a given path.
- *
- * @param {String} source – Path string to check the contents of.
- * @returns {Array} – A set of subfolder paths to each package found
- */
-const getDirectories = source =>
-    readdirSync(source, { withFileTypes: true })
-        .filter(dirent => dirent.isDirectory())
-        .map(dirent => `${source}/${dirent.name}`);
+const getChangedPackageLocations = () => {
+    try {
+        outputChangedPackages = execSync('npx lerna ls --since origin/master --json');
+    } catch (error) {
+        console.info('No changed packages found.');
+        process.exit(0);
+    }
 
-let packageNames = [];
+    const changedPackagesArray = JSON.parse(outputChangedPackages.toString());
 
-packageFolders.forEach(folder => {
-    packageNames = packageNames.concat(getDirectories(folder));
-});
+    let changedPackageLocations = [];
+    changedPackagesArray.forEach(package => changedPackageLocations.push(package.location));
 
-const filteredPackages = packageNames.filter(package => !excludedPackages.includes(package));
+    const filteredPackages = changedPackageLocations.filter(packageLocation => !excludedPackages.includes(packageLocation.split('packages/')[1]))
 
-const files = filteredPackages.map(package => ({
-    path: `${package}/dist/*+(.min|.min.umd|.es).js`,
+    return filteredPackages;
+};
+
+
+const packagesLocations = getChangedPackageLocations();
+
+const files = packagesLocations.map(packageLocation => ({
+    path: `${packageLocation}/dist/*+(.min|.min.umd|.es).js`,
     maxSize: '100kB'
 }));
 
