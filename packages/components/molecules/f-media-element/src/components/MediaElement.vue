@@ -34,8 +34,9 @@
 
 <script>
 import {
-    ALIGN, FONT_SIZE, MODIFIER_OPPOSITES_RULES_MAP, MODIFIER_RULES_MAP
+    ALIGN, FONT_SIZE
 } from '../constants';
+import FlexStyles from '../FlexStyles';
 
 export default {
     props: {
@@ -121,23 +122,7 @@ export default {
          * @returns {*[]}
          */
         flexClasses () {
-            const classList = [];
-
-            // firstly get the default values and create classes for those
-            const defaultReverse = this.flex?.default?.reverse ? '--reverse' : '';
-
-            classList.push(this.flex.default?.column ? this.$style[`c-flex-col${defaultReverse}`] :
-                this.$style[`c-flex-row${defaultReverse}`]);
-
-            const modifierReverse = this.flex?.modifier?.reverse ? '--reverse' : '';
-
-            classList.push(this.$style[`${this.flex?.modifier?.rule[1]}:c-flex-${this.flex.modifier?.column ? 'col'
-                : 'row'}-${MODIFIER_RULES_MAP[this.flex?.modifier?.rule[0]]}${modifierReverse}`]);
-
-            classList.push(this.$style[`${this.flex?.modifier?.rule[1]}:c-flex-${this.flex.default?.column ? 'col'
-                : 'row'}-${MODIFIER_OPPOSITES_RULES_MAP[this.flex?.modifier?.rule[0]]}${defaultReverse}`]);
-
-            return classList;
+            return (new FlexStyles(this.flex)).styles.map(style => this.$style[style]);
         }
     }
 };
@@ -168,158 +153,158 @@ $font-sizes: (
     )
 );
 
+$flexMargin: spacing(x3);
+
 .c-mediaElement {
     display: flex;
     width: 100%;
 }
 
-.c-flex-col--reverse {
+.c-mediaElement--col--reverse {
     flex-direction: column-reverse;
 
     & .c-mediaElement-content {
-        margin-top: spacing(x3);
+        margin-top: $flexMargin;
     }
 }
-.c-flex-col {
+.c-mediaElement--col {
     flex-direction: column;
 
     & .c-mediaElement-content {
-        margin-bottom: spacing(x3);
+        margin-bottom: $flexMargin;
     }
 }
-.c-flex-row {
+.c-mediaElement--row {
     flex-direction: row;
 }
-.c-flex-row--reverse {
+.c-mediaElement--row--reverse {
     flex-direction: row-reverse;
 }
 
-/**
- * Modifier – .c-mediaElement-stackWhen--$name
- *
- * Applies flex direction column on $name
- */
+
 @each $name, $value in $breakpoints {
 
+    /**
+    * Modifier – .c-mediaElement--gte--$name--col
+    * Modifier – .c-mediaElement--gte--$name--col--reverse
+    * Modifier – .c-mediaElement--gte--$name--row
+    * Modifier – .c-mediaElement--gte--$name--row--reverse
+     *
+     * Applies flex direction column on $name
+     */
     @include media('>='+$name) {
-        .#{$name}\:c-flex-col-gte {
+        .c-mediaElement-col--gte--#{$name} {
             flex-direction: column;
 
             & .c-mediaElement-content {
-                margin-bottom: spacing(x3);
+                margin-bottom: $flexMargin;
             }
         }
-        .#{$name}\:c-flex-col-gte--reverse {
+        .c-mediaElement-col--gte--#{$name}--reverse {
             flex-direction: column-reverse;
 
             & .c-mediaElement-content {
-                margin-top: spacing(x3);
+                margin-top: $flexMargin;
             }
         }
-        .#{$name}\:c-flex-row-gte {
+        .c-mediaElement-row--gte--#{$name} {
             flex-direction: row;
         }
-        .#{$name}\:c-flex-row-gte--reverse {
+        .c-mediaElement-row--gte--#{$name}--reverse {
             flex-direction: row-reverse;
         }
     }
-
-    @include media('>'+$name) {
-        .#{$name}\:c-flex-col-gt {
-            flex-direction: column;
-
-            & .c-mediaElement-content {
-                margin-bottom: spacing(x3);
-            }
-        }
-        .#{$name}\:c-flex-col-gt--reverse {
-            flex-direction: column-reverse;
-
-            & .c-mediaElement-content {
-                margin-top: spacing(x3);
-            }
-        }
-        .#{$name}\:c-flex-row-gt {
-            flex-direction: row;
-        }
-        .#{$name}\:c-flex-row-gt--reverse {
-            flex-direction: row-reverse;
-        }
-    }
-
-    @include media('<='+$name) {
-        .#{$name}\:c-flex-col-lte {
-            flex-direction: column;
-
-            & .c-mediaElement-content {
-                margin-bottom: spacing(x3);
-            }
-        }
-        .#{$name}\:c-flex-col-lte--reverse {
-            flex-direction: column-reverse;
-
-            & .c-mediaElement-content {
-                margin-top: spacing(x3);
-            }
-        }
-        .#{$name}\:c-flex-row-lte {
-            flex-direction: row;
-        }
-        .#{$name}\:c-flex-row-lte--reverse {
-            flex-direction: row-reverse;
-        }
-    }
-
-    @include media('<'+$name) {
-        .#{$name}\:c-flex-col-lt {
-            flex-direction: column;
-
-            & .c-mediaElement-content {
-                margin-bottom: spacing(x3);
-            }
-        }
-        .#{$name}\:c-flex-col-lt--reverse {
-            flex-direction: column-reverse;
-
-            & .c-mediaElement-content {
-                margin-top: spacing(x3);
-            }
-        }
-        .#{$name}\:c-flex-row-lt {
-            flex-direction: row;
-        }
-        .#{$name}\:c-flex-row-lt--reverse {
-            flex-direction: row-reverse;
-        }
-    }
-}
-
-
-/**
- * Modifier – .c-mediaElement--stack
- *
- * Applies flex direction column
- */
-.c-mediaElement-stack {
-    flex-direction: column;
 
     /**
-     * Modifier – .c-mediaElement--reverse
-     *
-     * When stacked in flex col applies col-reverse
-     */
-    &.c-mediaElement-reverse {
-        flex-direction: column-reverse;
+    * Modifier – .c-mediaElement--gt--$name--col
+    * Modifier – .c-mediaElement--gt--$name--col--reverse
+    * Modifier – .c-mediaElement--gt--$name--row
+    * Modifier – .c-mediaElement--gt--$name--row--reverse
+    *
+    * Applies flex direction column on $name
+    */
+    @include media('>'+$name) {
+        .c-mediaElement--gt-#{$name}--col {
+            flex-direction: column;
 
-        & .c-mediaElement-content {
-            margin-top: spacing(x3);
+            & .c-mediaElement-content {
+                margin-bottom: $flexMargin;
+            }
+        }
+        .c-mediaElement--gt--#{$name}--col--reverse {
+            flex-direction: column-reverse;
+
+            & .c-mediaElement-content {
+                margin-top: $flexMargin;
+            }
+        }
+        .c-mediaElement--gt--#{$name}--row {
+            flex-direction: row;
+        }
+        .c-mediaElement--gt--#{$name}--row--reverse {
+            flex-direction: row-reverse;
         }
     }
 
-    &:not(.c-mediaElement-reverse) {
+    /**
+    * Modifier – .c-mediaElement--lte--$name--col
+    * Modifier – .c-mediaElement--lte--$name--col--reverse
+    * Modifier – .c-mediaElement--lte--$name--row
+    * Modifier – .c-mediaElement--lte--$name--row--reverse
+    *
+    * Applies flex direction column on $name
+    */
+    @include media('<='+$name) {
+        .c-mediaElement--lte--#{$name}--col {
+            flex-direction: column;
 
-        & .c-mediaElement-content {
-            margin-bottom: spacing(x3);
+            & .c-mediaElement-content {
+                margin-bottom: $flexMargin;
+            }
+        }
+        .c-mediaElement--lte--#{$name}--col--reverse {
+            flex-direction: column-reverse;
+
+            & .c-mediaElement-content {
+                margin-top: $flexMargin;
+            }
+        }
+        .c-mediaElement--lte--#{$name}--row {
+            flex-direction: row;
+        }
+        .c-mediaElement--lte--#{$name}--row--reverse {
+            flex-direction: row-reverse;
+        }
+    }
+
+    /**
+    * Modifier – .c-mediaElement--lt--$name--col
+    * Modifier – .c-mediaElement--lt--$name--col--reverse
+    * Modifier – .c-mediaElement--lt--$name--row
+    * Modifier – .c-mediaElement--lt--$name--row--reverse
+    *
+    * Applies flex direction column on $name
+    */
+    @include media('<'+$name) {
+        .c-mediaElement--lt--#{$name}--col {
+            flex-direction: column;
+
+            & .c-mediaElement-content {
+                margin-bottom: $flexMargin;
+            }
+        }
+        .c-mediaElement--lt--#{$name}--col--reverse {
+            flex-direction: column-reverse;
+
+            & .c-mediaElement-content {
+                margin-top: $flexMargin;
+            }
+        }
+        .c-mediaElement--lt--#{$name}--row {
+            flex-direction: row;
+        }
+        .c-mediaElement--lt--#{$name}--row--reverse {
+            flex-direction: row-reverse;
         }
     }
 }

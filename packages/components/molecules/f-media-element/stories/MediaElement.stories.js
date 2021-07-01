@@ -29,7 +29,7 @@ MediaElementComponent.args = {
         },
         modifier: {
             rule: [
-                '>=',
+                '<',
                 'narrowMid'
             ],
             column: true,
