@@ -6,6 +6,7 @@ import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilmen
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
+import addressService from '../../services/addressService';
 import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
@@ -21,6 +22,7 @@ import {
     UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
     UPDATE_STATE,
     UPDATE_USER_NOTE,
@@ -382,6 +384,17 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+            });
+
+            it(`should update 'hasUpdatedAsap' value with ${UPDATE_HAS_ASAP_SELECTED} mutation.`, async () => {
+                // Arrange
+                const expectedAsapValue = checkoutDeliveryCopy.fulfilment.time.asap;
+
+                // Act
+                await getCheckout({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_HAS_ASAP_SELECTED, expectedAsapValue);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
@@ -992,6 +1005,23 @@ describe('CheckoutModule', () => {
 
                     // Assert
                     expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+
+                describe('When the address in localStorage does not match the address `state`', () => {
+                    it('should update localStorage to the changed address', async () => {
+                        // Arrange
+                        const setItemSpy = jest.spyOn(window.localStorage, 'setItem');
+                        jest.spyOn(addressService, 'doesAddressInStorageAndFormMatch').mockImplementation(() => false);
+
+                        // Act
+                        await getGeoLocation({ commit, state }, payload);
+
+                        // Assert
+                        expect(setItemSpy).toHaveBeenCalledWith(
+                            'je-full-address-details',
+                            '{"PostalCode":"postcode","Line1":"line 1","Line2":"line 2","City":"locality"}'
+                        );
+                    });
                 });
             });
         });

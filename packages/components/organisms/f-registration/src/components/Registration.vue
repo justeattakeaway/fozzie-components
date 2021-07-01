@@ -477,7 +477,7 @@ export default {
 
                     if (status === 409) {
                         this.conflictedEmailAddress = this.email;
-                        this.$emit(EventNames.CreateAccountFailure, error);
+                        this.$emit(EventNames.CreateAccountWarning, error);
                         return;
                     }
 

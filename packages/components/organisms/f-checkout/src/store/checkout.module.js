@@ -147,6 +147,7 @@ export default {
             resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);
+            commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
@@ -356,9 +357,19 @@ export default {
 
             if (isAddressInLocalStorage) {
                 const storedAddress = addressService.getAddressFromLocalStorage(false);
-                if (storedAddress.Line1 === state.address.line1 && storedAddress.PostalCode === state.address.postcode) {
+
+                if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
                     addressCoords = [storedAddress.Field2, storedAddress.Field1];
                     commit(UPDATE_GEO_LOCATION, addressCoords);
+                } else {
+                    const addressDetails = state.address;
+
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({
+                        PostalCode: addressDetails.postcode,
+                        Line1: addressDetails.line1,
+                        Line2: addressDetails.line2,
+                        City: addressDetails.locality
+                    }));
                 }
             }
 
@@ -484,7 +495,6 @@ export default {
             state.notices = notices;
             state.messages = messages;
             state.noteTypes = noteTypes;
-            console.log(state);
         },
 
         [UPDATE_AUTH]: (state, authToken) => {
