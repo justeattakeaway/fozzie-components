@@ -27,7 +27,6 @@
     "fozzie"
   ],
   "scripts": {
-
     "prepublishOnly": "yarn && yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
     "lint": "vue-cli-service lint --no-fix",

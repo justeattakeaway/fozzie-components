@@ -26,7 +26,6 @@
     "fozzie"
   ],
   "scripts": {
-
     "prepublishOnly": "yarn build",
     "build": "webpack",
     "test": "jest"
