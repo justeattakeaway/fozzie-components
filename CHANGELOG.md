@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.42.8
+v3.43.1
 ------------------------------
-*June 30, 2021*
+*July 1, 2021*
 
 ## Fix
 - Fix CircleCI lint error when building one component.
