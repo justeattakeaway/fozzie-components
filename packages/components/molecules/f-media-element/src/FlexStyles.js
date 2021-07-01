@@ -24,15 +24,11 @@ class FlexStyles {
     }
 
     get styles () {
-        const test = [
+        return [
             this._createDefaultStyle(),
             this._createOppositeStyle(),
             this._createStyle()
         ];
-
-        console.log(test);
-
-        return test;
     }
 
     set column (value) {
