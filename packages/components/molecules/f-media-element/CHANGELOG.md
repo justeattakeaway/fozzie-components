@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.5.0
+------------------------------
+*June 30, 2021*
+
+### Added
+- Added new prop called flex, which allows custom flex rules when implementing
+
+### Removed
+- removed stackOnNarrow as we now allow breakpoints to be passed into flex prop
+- removed stacked as we now allow breakpoints to be passed into flex prop
+- removed reverse as we now allow reverse to be passed into flex prop
+
+
 v0.4.0
 ------------------------------
 *June 21, 2021*

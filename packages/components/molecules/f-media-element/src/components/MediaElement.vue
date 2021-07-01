@@ -3,9 +3,7 @@
         data-test-id="mediaElement-component"
         :class="[
             $style['c-mediaElement'],
-            (stacked ? $style['c-mediaElement--stack'] : ''),
-            (reverse ? $style['c-mediaElement--reverse'] : ''),
-            (stackWhenNarrow ? $style['c-mediaElement--stackWhenNarrow'] : '')
+            ...flexClasses
         ]">
         <div
             :class="[
@@ -35,7 +33,9 @@
 </template>
 
 <script>
-import { ALIGN, FONT_SIZE } from '../constants';
+import {
+    ALIGN, FONT_SIZE, MODIFIER_OPPOSITES_RULES_MAP, MODIFIER_RULES_MAP
+} from '../constants';
 
 export default {
     props: {
@@ -51,13 +51,14 @@ export default {
             type: String,
             required: true
         },
-        stacked: {
-            type: Boolean,
-            default: false
-        },
-        reverse: {
-            type: Boolean,
-            default: false
+        flex: {
+            type: Object,
+            default: () => ({
+                default: {
+                    column: false,
+                    reverse: false
+                }
+            })
         },
         contentAlign: {
             type: String,
@@ -74,69 +75,69 @@ export default {
         altText: {
             type: String,
             default: 'Media Element Image'
-        },
-        stackWhenNarrow: {
-            type: Boolean,
-            default: false
         }
     },
+
     data () {
         return {
             componentName: 'MediaElement'
         };
     },
+
     computed: {
         /**
          * Returns the class to modify the alignment of the content based on the prop contentAlign
          * @returns {*}
          */
         contentAlignClass () {
-            switch (this.contentAlign) {
-                case ALIGN.LEFT:
-                    return this.$style['c-mediaElement-content--left'];
-                case ALIGN.RIGHT:
-                    return this.$style['c-mediaElement-content--right'];
-                case ALIGN.CENTER:
-                    return this.$style['c-mediaElement-content--center'];
-                default:
-                    return this.$style['c-mediaElement-content--left'];
-            }
+            const alignment = Object.keys(ALIGN)
+                .find(key => this.contentAlign === ALIGN[key]);
+            return alignment ? this.$style[`c-mediaElement-content--${ALIGN[alignment]}`] :
+                this.$style['c-mediaElement-content--left'];
         },
         /**
          * Returns the class to modify the alignment of the image based on the prop imageAlign
          * @returns {*}
          */
         imageAlignClass () {
-            switch (this.imageAlign) {
-                case ALIGN.LEFT:
-                    return this.$style['c-mediaElement-imgWrapper--left'];
-                case ALIGN.RIGHT:
-                    return this.$style['c-mediaElement-imgWrapper--right'];
-                case ALIGN.CENTER:
-                    return this.$style['c-mediaElement-imgWrapper--center'];
-                default:
-                    return this.$style['c-mediaElement-imgWrapper--left'];
-            }
+            const alignment = Object.keys(ALIGN)
+                .find(key => this.imageAlign === ALIGN[key]);
+            return alignment ? this.$style[`c-mediaElement-imgWrapper--${ALIGN[alignment]}`] :
+                this.$style['c-mediaElement-imgWrapper--left'];
         },
         /**
          * Returns the class to modify the font size of the content based on the prop textSize
          * @returns {*}
          */
         fontSizeClass () {
-            switch (this.textSize) {
-                case FONT_SIZE.SM:
-                    return this.$style['c-mediaElement-content--fontSizeSmall'];
-                case FONT_SIZE.MD:
-                    return this.$style['c-mediaElement-content--fontSizeMedium'];
-                case FONT_SIZE.LG:
-                    return this.$style['c-mediaElement-content--fontSizeLarge'];
-                case FONT_SIZE.XL:
-                    return this.$style['c-mediaElement-content--fontSizeXLarge'];
-                case FONT_SIZE.XXL:
-                    return this.$style['c-mediaElement-content--fontSizeXXLarge'];
-                default:
-                    return this.$style['c-mediaElement-content--fontSizeMedium'];
-            }
+            const size = Object.keys(FONT_SIZE).find(key => this.textSize === FONT_SIZE[key]);
+            return size ? this.$style[`c-mediaElement-contentFontSize--${FONT_SIZE[size]}`] :
+                this.$style['c-mediaElement-contentFontSize--md'];
+        },
+
+
+        /**
+         * This applies flex classes based on the passed flex prop configuration.
+         * @returns {*[]}
+         */
+        flexClasses () {
+            const classList = [];
+
+            // firstly get the default values and create classes for those
+            const defaultReverse = this.flex?.default?.reverse ? '--reverse' : '';
+
+            classList.push(this.flex.default?.column ? this.$style[`c-flex-col${defaultReverse}`] :
+                this.$style[`c-flex-row${defaultReverse}`]);
+
+            const modifierReverse = this.flex?.modifier?.reverse ? '--reverse' : '';
+
+            classList.push(this.$style[`${this.flex?.modifier?.rule[1]}:c-flex-${this.flex.modifier?.column ? 'col'
+                : 'row'}-${MODIFIER_RULES_MAP[this.flex?.modifier?.rule[0]]}${modifierReverse}`]);
+
+            classList.push(this.$style[`${this.flex?.modifier?.rule[1]}:c-flex-${this.flex.default?.column ? 'col'
+                : 'row'}-${MODIFIER_OPPOSITES_RULES_MAP[this.flex?.modifier?.rule[0]]}${defaultReverse}`]);
+
+            return classList;
         }
     }
 };
@@ -145,23 +146,23 @@ export default {
 <style lang="scss" module>
 
 $font-sizes: (
-    fontSizeSmall: (
+    sm: (
         title: heading-s,
         text: body-s,
     ),
-    fontSizeMedium: (
+    md: (
         title: heading-m,
         text: body-l,
     ),
-    fontSizeLarge: (
+    lg: (
         title: heading-l,
         text: subheading-s,
     ),
-    fontSizeXLarge: (
+    xl: (
         title: heading-xl,
         text: subheading-s,
     ),
-    fontSizeXXLarge: (
+    xxl: (
         title: heading-xxl,
         text: subheading-l,
     )
@@ -170,45 +171,136 @@ $font-sizes: (
 .c-mediaElement {
     display: flex;
     width: 100%;
+}
 
-    &.c-mediaElement--reverse {
-        flex-direction: row-reverse;
+.c-flex-col--reverse {
+    flex-direction: column-reverse;
+
+    & .c-mediaElement-content {
+        margin-top: spacing(x3);
     }
+}
+.c-flex-col {
+    flex-direction: column;
+
+    & .c-mediaElement-content {
+        margin-bottom: spacing(x3);
+    }
+}
+.c-flex-row {
+    flex-direction: row;
+}
+.c-flex-row--reverse {
+    flex-direction: row-reverse;
 }
 
 /**
- * Modifier – .c-mediaElement--stackOnNarrow
+ * Modifier – .c-mediaElement-stackWhen--$name
  *
- * Applies flex direction column on <=narrow
+ * Applies flex direction column on $name
  */
-@include media('<=narrow') {
-    .c-mediaElement--stackWhenNarrow {
-            flex-direction: column;
-        /**
-         * Modifier – .c-mediaElement--reverse
-         *
-         * When stacked in flex col applies col-reverse
-         */
-        &.c-mediaElement--reverse {
-            flex-direction: column-reverse;
+@each $name, $value in $breakpoints {
 
-            & .c-mediaElement-text {
+    @include media('>='+$name) {
+        .#{$name}\:c-flex-col-gte {
+            flex-direction: column;
+
+            & .c-mediaElement-content {
                 margin-bottom: spacing(x3);
             }
         }
+        .#{$name}\:c-flex-col-gte--reverse {
+            flex-direction: column-reverse;
 
-        & .c-mediaElement-title {
-            margin-top: spacing(x3);
+            & .c-mediaElement-content {
+                margin-top: spacing(x3);
+            }
+        }
+        .#{$name}\:c-flex-row-gte {
+            flex-direction: row;
+        }
+        .#{$name}\:c-flex-row-gte--reverse {
+            flex-direction: row-reverse;
+        }
+    }
+
+    @include media('>'+$name) {
+        .#{$name}\:c-flex-col-gt {
+            flex-direction: column;
+
+            & .c-mediaElement-content {
+                margin-bottom: spacing(x3);
+            }
+        }
+        .#{$name}\:c-flex-col-gt--reverse {
+            flex-direction: column-reverse;
+
+            & .c-mediaElement-content {
+                margin-top: spacing(x3);
+            }
+        }
+        .#{$name}\:c-flex-row-gt {
+            flex-direction: row;
+        }
+        .#{$name}\:c-flex-row-gt--reverse {
+            flex-direction: row-reverse;
+        }
+    }
+
+    @include media('<='+$name) {
+        .#{$name}\:c-flex-col-lte {
+            flex-direction: column;
+
+            & .c-mediaElement-content {
+                margin-bottom: spacing(x3);
+            }
+        }
+        .#{$name}\:c-flex-col-lte--reverse {
+            flex-direction: column-reverse;
+
+            & .c-mediaElement-content {
+                margin-top: spacing(x3);
+            }
+        }
+        .#{$name}\:c-flex-row-lte {
+            flex-direction: row;
+        }
+        .#{$name}\:c-flex-row-lte--reverse {
+            flex-direction: row-reverse;
+        }
+    }
+
+    @include media('<'+$name) {
+        .#{$name}\:c-flex-col-lt {
+            flex-direction: column;
+
+            & .c-mediaElement-content {
+                margin-bottom: spacing(x3);
+            }
+        }
+        .#{$name}\:c-flex-col-lt--reverse {
+            flex-direction: column-reverse;
+
+            & .c-mediaElement-content {
+                margin-top: spacing(x3);
+            }
+        }
+        .#{$name}\:c-flex-row-lt {
+            flex-direction: row;
+        }
+        .#{$name}\:c-flex-row-lt--reverse {
+            flex-direction: row-reverse;
         }
     }
 }
+
 
 /**
  * Modifier – .c-mediaElement--stack
  *
  * Applies flex direction column
  */
-.c-mediaElement--stack {
+.c-mediaElement-stack {
     flex-direction: column;
 
     /**
@@ -216,16 +308,19 @@ $font-sizes: (
      *
      * When stacked in flex col applies col-reverse
      */
-    &.c-mediaElement--reverse {
+    &.c-mediaElement-reverse {
         flex-direction: column-reverse;
 
-        & .c-mediaElement-text {
-            margin-bottom: spacing(x3);
+        & .c-mediaElement-content {
+            margin-top: spacing(x3);
         }
     }
 
-    & .c-mediaElement-title {
-        margin-top: spacing(x3);
+    &:not(.c-mediaElement-reverse) {
+
+        & .c-mediaElement-content {
+            margin-bottom: spacing(x3);
+        }
     }
 }
 
@@ -302,16 +397,16 @@ $font-sizes: (
  * and text depending on the key using map-get()
  */
 @each $size, $value in $font-sizes {
-    .c-mediaElement-content--#{$size} {
+    .c-mediaElement-contentFontSize--#{$size} {
         & .c-mediaElement-title {
             @include font-size(map-get($value, 'title'));
         }
         & .c-mediaElement-text {
             @include font-size(map-get($value, 'text'));
-            @if $size == fontSizeSmall {
+            @if $size == sm {
                 margin-top: spacing(x0.5);
             }
-            @else if $size == fontSizeMedium {
+            @else if $size == md {
                 margin-top: spacing();
             }
         }
