@@ -604,7 +604,7 @@ export default {
                 const statusCode = e.response.data.statusCode || e.response.status;
 
                 if (statusCode === 403) {
-                    throw new UpdateCheckoutAccessForbiddenError(e);
+                    throw new UpdateCheckoutAccessForbiddenError(e, this.$logger);
                 }
 
                 throw new UpdateCheckoutError(e);
@@ -648,7 +648,7 @@ export default {
             } catch (e) {
                 const { errorCode } = e.response.data;
 
-                throw new PlaceOrderError(e.message, errorCode);
+                throw new PlaceOrderError(e.message, errorCode, this.$logger);
             }
         },
 
@@ -694,7 +694,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
                 if (error.response && error.response.status === 403) {
-                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message));
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
                 }
@@ -799,6 +799,7 @@ export default {
             const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
             const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
+            const logMethod = error.logMethod || this.$logger.logError;
             const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
             this.$emit(eventToEmit, { ...this.eventData, error });
@@ -806,10 +807,9 @@ export default {
             this.logInvoker({
                 message: logMessage,
                 data: this.eventData,
-                logMethod: this.$logger.logError,
+                logMethod,
                 error
             });
-
 
             this.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
