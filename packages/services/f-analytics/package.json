@@ -1,12 +1,12 @@
 {
   "name": "@justeat/f-analytics",
-  "description": "Fozzie Analytics - Encapsulates the GTM / Google Analytics functionality",
-  "version": "0.1.0",
+  "description": "Fozzie Analytics - A utility that encapsulates the GTM / Google Analytics functionality",
+  "version": "0.2.0",
   "main": "dist/f-analytics.umd.min.js",
   "files": [
-    "dist" 
+    "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-analytics",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-analytics",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -29,7 +29,6 @@
     "build": "vue-cli-service build --target lib --name f-analytics ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit"
   },
   "browserslist": [
@@ -46,8 +45,6 @@
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@justeat/f-wdio-utils": "0.1.0",
-    "@vue/test-utils": "1.0.3",
-    "node-sass-magic-importer": "5.3.2"
+    "@vue/test-utils": "1.0.3"
   }
 }
