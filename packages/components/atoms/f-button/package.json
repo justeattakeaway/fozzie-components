@@ -7,7 +7,7 @@
     "files": [
       {
         "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "15kB"
+        "maxSize": "5kB"
       }
     ]
   },
