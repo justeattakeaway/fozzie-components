@@ -93,14 +93,14 @@ $ yarn
 Change directory to the `f-analytics` package:
 
 ```sh
-$ cd packages/components/atoms/f-analytics
+$ cd packages/services/f-analytics
 ```
 </br>
 
 ## Testing
 
 To test all components, run from root directory.
-To test only `f-analytics`, run from the `./fozzie-components/packages/components/atoms/f-analytics` directory.
+To test only `f-analytics`, run from the `./fozzie-components/packages/services/f-analytics` directory.
 
 ### Unit and Integration tests
 
