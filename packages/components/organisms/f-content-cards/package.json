@@ -27,7 +27,7 @@
     "fozzie"
   ],
   "scripts": {
-    "bundlewatch": "bundlewatch",
+
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-content-cards ./src/index.js",
     "lint": "vue-cli-service lint --no-fix",

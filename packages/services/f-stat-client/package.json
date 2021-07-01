@@ -26,7 +26,7 @@
     "fozzie"
   ],
   "scripts": {
-    "bundlewatch": "bundlewatch",
+
     "prepublishOnly": "yarn lint:fix && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-stat-client ./src/index.js",
     "lint": "vue-cli-service lint --no-fix",
