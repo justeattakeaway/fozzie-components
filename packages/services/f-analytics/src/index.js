@@ -1,11 +1,11 @@
 /**
- * @overview Fozzie Analytics Component JS Wrapper
+ * @overview Fozzie GTM / GA Analytics JS Wrapper
  *
  * @module f-analytics
  */
 
 // Import vue component
-import Analytics from '@/components/Analytics.vue';
+import AnalyticsMixin from './mixins/analytics.mixin.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
@@ -13,7 +13,7 @@ export function install (Vue) {
         return;
     }
     install.installed = true;
-    Vue.component('Analytics', Analytics);
+    Vue.component('Analytics', AnalyticsMixin);
 }
 
 // Create module definition for Vue.use()
@@ -33,4 +33,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default Analytics;
+export default AnalyticsMixin;
