@@ -4,11 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.43.0
+------------------------------
+*July 1, 2021*
+
+### Changed
+- Decrease maximum allowed package size for atoms and molecules.
+
+
 v3.42.7
 ------------------------------
 *June 30, 2021*
 
-## Fix
+### Fixed
 - Fix to enable optional chaining in storybook
 
 
@@ -16,7 +24,7 @@ v3.42.6
 ------------------------------
 *June 29, 2021*
 
-## Fix
+### Fixed
 - Fix Storybook deploy CI build.
 
 
@@ -24,7 +32,7 @@ v3.42.5
 ------------------------------
 *June 24, 2021*
 
-## Fix
+### Fixed
 - Fix to output the changes varirable so that it works on CircleCI.
 
 
@@ -32,7 +40,7 @@ v3.42.4
 ------------------------------
 *June 24, 2021*
 
-## Fixed
+### Fixed
 - Trying a different fix for the package comparison. Checks if variable is defined rather than a numeric comparison.
 
 
@@ -40,7 +48,7 @@ v3.42.3
 ------------------------------
 *June 24, 2021*
 
-## Fixed
+### Fixed
 - Storybook deploy should reference yarn (to call lerna indirectly).
 
 
@@ -48,7 +56,7 @@ v3.42.2
 ------------------------------
 *June 24, 2021*
 
-## Fixed
+### Fixed
 - Numeric comparison fixed in CircleCI bash script
 
 
@@ -56,7 +64,7 @@ v3.42.1
 ------------------------------
 *June 24, 2021*
 
-## Fixed
+### Fixed
 - Added a couple of exclusions to the root entries that don't trigger a full build.
 
 
@@ -64,10 +72,10 @@ v3.42.0
 ------------------------------
 *June 23, 2021*
 
-## Changed
+### Changed
 - Optimises the build so that only packages that have been amended run in the build and are tested via Storybook.
 
-## Fixed
+### Fixed
 - DangerJS now correctly reports when Storybook needs a version bump and CHANGELOG entry.
 
 
@@ -75,7 +83,7 @@ v3.41.0
 ------------------------------
 *June 18, 2021*
 
-## Fixed
+### Fixed
 - Storybook deployer moved to the storybook package (so that it deploys the `index.html` to the root of `gh-pages` correctly).
 
 
@@ -83,7 +91,7 @@ v3.40.0
 ------------------------------
 *June 17, 2021*
 
-## Changed
+### Changed
 - Updated `@percy/cli` dependency.
 
 
@@ -91,7 +99,7 @@ v3.39.0
 ------------------------------
 *June 9, 2021*
 
-## Changed
+### Changed
 - Updated Percy tests to use Lerna
 
 
@@ -99,7 +107,7 @@ v3.38.0
 ------------------------------
 *June 7, 2021*
 
-## Changed
+### Changed
 - `fozzie` version.
 
 
@@ -107,7 +115,7 @@ v3.37.0
 ------------------------------
 *May 28, 2021*
 
-## Added
+### Added
 - CircleCI config for running `build`, `lint` & `unit testing` steps individually locally.
 - Documentation into storybook guides as to how to run these tests through CircleCI CLI locally and what each task is setup to do.
 
@@ -116,14 +124,15 @@ v3.36.0
 ------------------------------
 *May 27, 2021*
 
-## Added
+### Added
 - `URL Builder` to all components for testing different knobs against storybook
+
 
 v3.35.0
 ------------------------------
 *May 27, 2021*
 
-## Changed
+### Changed
 - Force Percy to run in parallel
 
 
@@ -163,10 +172,10 @@ v3.31.0
 ------------------------------
 *May 4, 2021*
 
-## Changed
+### Changed
 - Replaced `console.logs` in component tests with error handling `%s` string title
 
-## Removed
+### Removed
 - Unused READMEs inside `test/component` and `test-utils/component-object` folders
 - Extra intermediate `spec` folder in generator for future components (see below entry)
 
@@ -175,11 +184,11 @@ v3.30.0
 ------------------------------
 *April 30, 2021*
 
-## Added
+### Added
 - Error handling added for `forEach` component tests
 - General linting changes and test-cleanup
 
-## Removed
+### Removed
 - Unneeded extra intermediate `spec` folder in `test/spec/component`
 
 
@@ -187,13 +196,13 @@ v3.29.1
 ------------------------------
 *April 29, 2021*
 
-## Added
+### Added
 - CircleCI config for local testing
 - Documentation into storybook guides as to how to install CircleCI local with Docker
 
 *April 16, 2021*
 
-## Added
+### Added
 - `husky` to enable pre-commit lint / test checks
 
 
@@ -201,7 +210,7 @@ v3.28.0
 ------------------------------
 *April 14, 2021*
 
-## Added
+### Added
 - Test tagging mechanism for chrome / browserstack
 
 
@@ -209,7 +218,7 @@ v3.27.0
 ------------------------------
 *April 13, 2021*
 
-## Added
+### Added
 - Test tagging mechanism for chrome / browserstack
 
 
@@ -217,24 +226,26 @@ v3.26.0
 ------------------------------
 *March 29, 2021*
 
-## Added
+### Added
 - A11y markup added for screen-reader support to f-registration.
+
 
 v3.25.0
 ------------------------------
 *March 24, 2021*
 
-## Added
+### Added
 - launch.json to provide ability to run / debug individual WDIO test specs against chrome / browserstack / Jest tests
 
-## Removed
+### Removed
 - jest-allure2 package
+
 
 v3.24.1
 ------------------------------
 *March 23, 2021*
 
-## Added
+### Added
 - `f-wdio-utils` package to all component folders
 - `f-wdio-utils` package to generator
 
@@ -246,7 +257,7 @@ v3.24.0
 ------------------------------
 *March 22, 2021*
 
-## Changed
+### Changed
 - Refactored `jest-allure2` and `allure-reporter`
 - Added script `report:test-component:chrome` into package.json for automating component test report
 - Updated generator to reflect changes
@@ -256,7 +267,7 @@ v3.23.0
 ------------------------------
 *March 18, 2021*
 
-## Changed
+### Changed
 - Updated node `config.yml` to support chromedriver 89.0.0
 
 
@@ -264,7 +275,7 @@ v3.22.0
 ------------------------------
 *March 12, 2021*
 
-## Changed
+### Changed
 - `wdio-browserstack.conf.js` to support new Browserstack configs.
 
 
@@ -282,6 +293,7 @@ v3.20.0
 
 ### Changed
 - Accessibility / Alure folder structure
+
 
 v3.19.0
 ------------------------------
@@ -369,6 +381,7 @@ v3.12.0
 - Accessibility automated tests info to documentation
 - More info to getting started guide
 
+
 v3.11.0
 ------------------------------
 *February 5, 2021*
@@ -398,7 +411,7 @@ v3.9.0
 ------------------------------
 *February 4, 2021*
 
-### Changes
+### Changed
 - Updated `package.json` with `chromedriver` version to `88.0.0`.
 - Updated CircleCI `config.yml` to support updated `chromedriver` version.
 
@@ -426,7 +439,7 @@ v3.7.1
 ------------------------------
 *February 3, 2021*
 
-### Changes
+### Changed
 - Update Axe Helper
 
 
@@ -434,7 +447,7 @@ v3.7.0
 ------------------------------
 *January 29, 2021*
 
-### Changes
+### Changed
 - Bundle watch maxSize value to `100kb` & target files `umd.min.js, .min & .es.js`.
 
 
@@ -450,7 +463,7 @@ v3.6.0
 ------------------------------
 *January 18, 2021*
 
-### Changes
+### Changed
 - Unit test directories updated so that they are named `_tests/` to match our previously agreed frontend guidelines.
 
 
@@ -458,7 +471,7 @@ v3.5.0
 ------------------------------
 *January 12, 2021*
 
-### Changes
+### Changed
 - CircleCI config to run jobs in parallel
 
 
@@ -527,6 +540,7 @@ v2.25.0
 
 ### Added
 - Documentation for font optimisation and subsetting.
+
 
 v2.24.0
 ------------------------------
