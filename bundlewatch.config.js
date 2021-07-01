@@ -12,7 +12,6 @@ const packageFolders = [
 
 const getMaxSizeForPackage = packageName => {
     const folder = packageFolders.find(f => packageName.startsWith(f.name));
-    console.log('package:', packageName, 'maxSize:', folder.maxSize);
     return (folder && folder.maxSize) ? folder.maxSize : '100kB';
 };
 

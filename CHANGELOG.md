@@ -9,6 +9,7 @@ v3.43.0
 *July 1, 2021*
 
 ### Changed
+- Decrease maximum allowed package size for atoms and molecules.
 
 
 v3.42.7
