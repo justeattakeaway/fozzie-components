@@ -1,6 +1,8 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import getCheckoutDelivery from './checkout-delivery.json';
+import getCheckoutDeliverySplitNotesDeliveryKitchen from './checkout-delivery-split-notes-delivery-kitchen.json';
+import getCheckoutDeliverySplitNotesDelivery from './checkout-delivery-split-notes-delivery.json';
 import getCheckoutCollection from './checkout-collection.json';
 import getCheckoutDineIn from './checkout-dinein.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
@@ -27,6 +29,12 @@ export default {
         switch (path) {
             case '/checkout-delivery.json':
                 mock.onGet(path).reply(200, getCheckoutDelivery);
+                break;
+            case '/checkout-delivery-split-notes-delivery-kitchen.json':
+                mock.onGet(path).reply(200, getCheckoutDeliverySplitNotesDeliveryKitchen);
+                break;
+            case '/checkout-delivery-split-notes-delivery.json':
+                mock.onGet(path).reply(200, getCheckoutDeliverySplitNotesDelivery);
                 break;
             case '/checkout-collection.json':
                 mock.onGet(path).reply(200, getCheckoutCollection);

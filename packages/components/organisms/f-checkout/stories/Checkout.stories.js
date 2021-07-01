@@ -68,11 +68,25 @@ const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
 const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
+
+// Note types
+const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
+const noteTypesDelivery = 'Delivery notes only';
+
+const splitNotesDeliveryKitchen = '-split-notes-delivery-kitchen';
+const splitNotesDelivery = '-split-notes-delivery';
+
+const noteTypeOptions = {
+    None: null,
+    [noteTypesDelivery]: splitNotesDelivery,
+    [noteTypesDeliveryAndKitchen]: splitNotesDeliveryKitchen
+};
+
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
-const additionalItemsRequiredIssue = 'additional-items-required'
+const additionalItemsRequiredIssue = 'additional-items-required';
 
 const patchCheckoutErrorOptions = {
     None: null,
@@ -139,15 +153,20 @@ export const CheckoutComponent = () => ({
 
         placeOrderError: {
             default: select('Place Order Errors', placeOrderErrorOptions)
+        },
+
+        noteTypes: {
+            default: select('Note types', noteTypeOptions)
         }
     },
 
     computed: {
         getCheckoutUrl () {
+            const noteType = this.noteTypes || '';
             if (this.getCheckoutError) {
                 return `/checkout-${this.getCheckoutError}-get-error.json`;
             }
-            return `/checkout-${this.serviceType}.json`;
+            return this.serviceType === 'delivery' ? `/checkout-${this.serviceType}${noteType}.json` : `/checkout-${this.serviceType}.json`;
         },
 
         getBasketUrl () {

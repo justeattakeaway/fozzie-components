@@ -45,6 +45,7 @@ Object {
       "type": "information",
     },
   ],
+  "noteTypes": undefined,
   "notices": Array [
     Object {
       "notice": Object {
@@ -64,6 +65,6 @@ Object {
     "from": "",
     "to": "",
   },
-  "userNote": "",
+  "userNote": Object {},
 }
 `;

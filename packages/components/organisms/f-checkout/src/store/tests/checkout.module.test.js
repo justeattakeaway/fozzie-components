@@ -135,9 +135,10 @@ const defaultState = {
     authToken: '',
     isLoggedIn: false,
     isGuestCreated: false,
-    userNote: '',
+    userNote: {},
     geolocation: null,
-    hasAsapSelected: false
+    hasAsapSelected: false,
+    noteTypes: []
 };
 
 let state = CheckoutModule.state();
@@ -308,12 +309,25 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_USER_NOTE} ::`, () => {
+            it('should update the state with the new note values', () => {
+                const noteData = { type: 'restaurant', note: 'This is the new note value' };
+
+                // Act
+                mutations[UPDATE_USER_NOTE](state, noteData);
+
+                // Assert
+                expect(state.userNote).toEqual({
+                    [noteData.type]: noteData.note
+                });
+            });
+        });
+
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
-            [UPDATE_USER_NOTE, 'userNote', userNote],
             [UPDATE_MESSAGE, 'message', message]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {
             // Arrange & Act

@@ -103,12 +103,13 @@ export default {
             locality: '',
             postcode: ''
         },
-        userNote: '',
+        userNote: {},
         isFulfillable: true,
         errors: [],
         notices: [],
         message: null,
         messages: [],
+        noteTypes: [],
         availableFulfilment: {
             times: [],
             isAsapAvailable: false
@@ -443,7 +444,8 @@ export default {
             fulfilment,
             isFulfillable,
             notices,
-            messages
+            messages,
+            noteTypes
         }) => {
             state.id = id;
             state.serviceType = serviceType;
@@ -481,6 +483,8 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
+            state.noteTypes = noteTypes;
+            console.log(state);
         },
 
         [UPDATE_AUTH]: (state, authToken) => {
@@ -546,7 +550,7 @@ export default {
         },
 
         [UPDATE_USER_NOTE]: (state, userNote) => {
-            state.userNote = userNote;
+            state.userNote = { ...state.userNote, [`${userNote.type}`]: userNote.note };
         },
 
         [UPDATE_ORDER_PLACED]: (state, orderId) => {

@@ -96,19 +96,7 @@
 
                     <form-selector />
 
-                    <form-field
-                        :label-text="$t(`userNote.${serviceType}.title`)"
-                        input-type="textarea"
-                        :placeholder="$t(`userNote.${serviceType}.placeholder`)"
-                        :value="userNote"
-                        cols="30"
-                        rows="7"
-                        maxlength="200"
-                        name="Note"
-                        has-input-description
-                        @input="updateUserNote($event)">
-                        {{ $t(`userNote.${serviceType}.text`) }}
-                    </form-field>
+                    <checkout-notes />
 
                     <f-button
                         :class="[
@@ -162,6 +150,7 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
+import CheckoutNotes from './Notes.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
@@ -202,6 +191,7 @@ export default {
         FButton,
         Card,
         CheckoutHeader,
+        CheckoutNotes,
         CheckoutTermsAndConditions,
         ErrorPage,
         ErrorMessage,
