@@ -3,14 +3,7 @@
   "description": "Fozzie Header – Globalised Header Component",
   "version": "4.19.0",
   "main": "dist/f-header.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "50kB"
-      }
-    ]
-  },
+  "maxBundleSize": "40kB",
   "files": [
     "dist",
     "test-utils"

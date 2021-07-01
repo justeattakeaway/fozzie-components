@@ -2,14 +2,7 @@
   "name": "@justeat/f-vue-icons",
   "version": "2.5.0",
   "main": "dist/f-vue-icons.cjs.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "100kB"
-      }
-    ]
-  },
+  "maxBundleSize": "100kB",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
   "module": "dist/f-vue-icons.es.js",

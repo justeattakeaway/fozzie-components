@@ -3,14 +3,7 @@
   "description": "Fozzie Analytics - A utility that encapsulates the GTM / Google Analytics functionality",
   "version": "0.2.0",
   "main": "dist/f-analytics.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "5kB"
-      }
-    ]
-  },
+  "maxBundleSize": "5kB",
   "files": [
     "dist"
   ],

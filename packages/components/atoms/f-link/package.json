@@ -3,14 +3,7 @@
   "description": "Fozzie Link - Fozzie link component",
   "version": "0.4.0",
   "main": "dist/f-link.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "15kB"
-      }
-    ]
-  },
+  "maxBundleSize": "15kB",
   "files": [
     "dist",
     "test-utils"

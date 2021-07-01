@@ -3,14 +3,7 @@
   "description": "Fozzie Button – The generic button component",
   "version": "1.8.0",
   "main": "dist/f-button.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "5kB"
-      }
-    ]
-  },
+  "maxBundleSize": "5kB",
   "files": [
     "dist",
     "test-utils"

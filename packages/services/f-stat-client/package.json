@@ -3,14 +3,7 @@
   "description": "Javascript HTTP client for publishing stats to ElasticSearch",
   "version": "0.1.0",
   "main": "src/index.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "100kB"
-      }
-    ]
-  },
+  "maxBundleSize": "100kB",
   "files": [
     "src"
   ],

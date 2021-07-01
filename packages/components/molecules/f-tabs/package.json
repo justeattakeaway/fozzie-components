@@ -3,14 +3,7 @@
   "description": "Fozzie Tabs – Switchable slots for content",
   "version": "0.8.0",
   "main": "dist/f-tabs.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "5kB"
-      }
-    ]
-  },
+  "maxBundleSize": "5kB",
   "files": [
     "dist",
     "test-utils"

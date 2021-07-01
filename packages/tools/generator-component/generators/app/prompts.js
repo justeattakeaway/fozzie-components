@@ -56,6 +56,20 @@ const prompts = [
         }
     },
     {
+        message: 'Does your component require Bundlewatch checks?',
+        name: 'needsBundlewatch',
+        type: 'confirm',
+        default: true,
+    },
+    {
+        message: "What size limit do you want in place for your bundles (in kB)? e.g. '15'",
+        name: 'bundlewatchMaxSize',
+        type: 'input',
+        when: function shouldShowThisQuestion (answers) {
+            return answers.needsBundlewatch === true;
+        }
+    },
+    {
         message: 'Does your component require browser-based Component Tests?',
         name: 'needsComponentTests',
         type: 'confirm',

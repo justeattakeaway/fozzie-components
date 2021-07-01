@@ -3,14 +3,7 @@
   "description": "Fozzie Content Cards",
   "version": "4.7.0",
   "main": "dist/f-content-cards.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "80kB"
-      }
-    ]
-  },
+  "maxBundleSize": "70kB",
   "files": [
     "dist",
     "docs"
@@ -64,7 +57,6 @@
   "devDependencies": {
     "@justeat/f-braze-adapter": "3.4.0",
     "@justeat/f-vue-icons": "1.2.0",
-    "@justeat/f-wdio-utils": "0.1.1",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

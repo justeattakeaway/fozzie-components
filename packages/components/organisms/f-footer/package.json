@@ -2,14 +2,7 @@
   "name": "@justeat/f-footer",
   "version": "4.27.0",
   "main": "dist/f-footer.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "80kB"
-      }
-    ]
-  },
+  "maxBundleSize": "80kB",
   "files": [
     "dist",
     "test-utils"

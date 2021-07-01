@@ -3,14 +3,7 @@
   "description": "Fozzie Searchbox – Just Eat Takeaway Global Searchbox",
   "version": "4.0.0-beta.30",
   "main": "dist/f-searchbox.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "60kB"
-      }
-    ]
-  },
+  "maxBundleSize": "60kB",
   "files": [
     "dist",
     "test-utils",

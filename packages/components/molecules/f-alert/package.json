@@ -3,14 +3,7 @@
   "description": "Fozzie Alert – Fozzie Alert Component",
   "version": "0.6.1",
   "main": "dist/f-alert.umd.min.js",
-  "bundlewatch" : {
-    "files": [
-      {
-        "path": "dist/*+(.min|.min.umd|.es).js",
-        "maxSize": "15kB"
-      }
-    ]
-  },
+  "maxBundleSize": "15kB",
   "files": [
     "dist"
   ],
