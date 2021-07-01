@@ -182,6 +182,7 @@ import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
+import addressService from '../services/addressService';
 
 const {
     CreateGuestUserError,
@@ -491,6 +492,7 @@ export default {
             'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
+            'updateAddress',
             'getUserNote',
             'saveUserNote'
         ]),
@@ -512,7 +514,7 @@ export default {
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.loadAvailableFulfilment()];
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
             this.resetLoadingState();
@@ -522,6 +524,18 @@ export default {
             }
 
             this.getUserNote();
+        },
+
+        /**
+         * Update address lines if localStorage is populated.
+         *
+         * */
+        loadAddressFromLocalStorage () {
+            const address = addressService.getAddressFromLocalStorage();
+
+            if (address) {
+                this.updateAddress(address);
+            }
         },
 
         /**
