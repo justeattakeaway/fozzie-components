@@ -3,6 +3,14 @@
   "description": "Fozzie Registration Form Component",
   "version": "0.58.0",
   "main": "dist/f-registration.umd.min.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "100kB"
+      }
+    ]
+  },
   "files": [
     "dist",
     "test-utils",
@@ -27,6 +35,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-registration ./src/index.js",
     "lint": "vue-cli-service lint",

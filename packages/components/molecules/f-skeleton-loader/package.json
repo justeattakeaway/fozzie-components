@@ -3,6 +3,14 @@
   "description": "Fozzie Skeleton Loader - Provides a visual indication that another component is loading. ",
   "version": "0.6.0",
   "main": "dist/f-skeleton-loader.umd.min.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "60kB"
+      }
+    ]
+  },
   "files": [
     "dist",
     "test-utils"
@@ -26,6 +34,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-skeleton-loader ./src/index.js",
     "lint": "vue-cli-service lint",

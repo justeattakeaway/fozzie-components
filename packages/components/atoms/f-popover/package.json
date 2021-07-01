@@ -3,6 +3,14 @@
   "description": "Fozzie Popover - renders recieved content as a popover",
   "version": "0.3.0",
   "main": "dist/f-popover.umd.min.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "15kB"
+      }
+    ]
+  },
   "files": [
     "dist" 
   ],
@@ -25,6 +33,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-popover ./src/index.js",
     "lint": "vue-cli-service lint",

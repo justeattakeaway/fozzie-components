@@ -3,6 +3,14 @@
   "description": "Fozzie Analytics - Encapsulates the GTM / Google Analytics functionality",
   "version": "0.1.0",
   "main": "dist/f-analytics.umd.min.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "15kB"
+      }
+    ]
+  },
   "files": [
     "dist" 
   ],
@@ -25,6 +33,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-analytics ./src/index.js",
     "lint": "vue-cli-service lint",

@@ -3,6 +3,14 @@
   "description": "Fozzie Bread Crumbs – Provides clickable paths back to previous pages",
   "version": "0.3.0",
   "main": "dist/f-breadcrumbs.umd.min.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "60kB"
+      }
+    ]
+  },
   "files": [
     "dist",
     "test-utils"
@@ -26,6 +34,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-breadcrumbs src/index.js",
     "lint": "vue-cli-service lint",

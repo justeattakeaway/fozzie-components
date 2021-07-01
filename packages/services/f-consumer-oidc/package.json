@@ -3,6 +3,14 @@
   "version": "1.1.0",
   "description": "Authentication helper to communicate with open apis",
   "main": "dist/f-consumer-oidc.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "100kB"
+      }
+    ]
+  },
   "files": [
     "dist"
   ],
@@ -25,6 +33,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn build",
     "build": "webpack",
     "test": "jest"

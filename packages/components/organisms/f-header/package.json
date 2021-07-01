@@ -3,6 +3,14 @@
   "description": "Fozzie Header – Globalised Header Component",
   "version": "4.19.0",
   "main": "dist/f-header.umd.min.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "100kB"
+      }
+    ]
+  },
   "files": [
     "dist",
     "test-utils"
@@ -26,6 +34,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn && yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
     "lint": "vue-cli-service lint --no-fix",

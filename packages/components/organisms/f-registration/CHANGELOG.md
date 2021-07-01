@@ -66,7 +66,7 @@ v0.53.0
 ------------------------------
 *May 11, 2021*
 
-### Changes
+### Changed
 - Switched from Axios and Axios Mock Adapter to f-http
 
 
@@ -85,7 +85,7 @@ v0.51.0
 ------------------------------
 *April 15, 2021*
 
-### Changes
+### Changed
 - Error messages retrieved from i18n files.
 
 
@@ -118,53 +118,38 @@ v0.49.1
 ### Added
 - `f-wdio-utils` npm package to package.json
 
+
 v0.49.0
 ------------------------------
 *March 19, 2021*
 
-## Added
+### Added
 - Add translations for 'en-AU' and 'en-NZ'
+
 
 v0.48.0
 ------------------------------
 *March 18, 2021*
 
-## Removed
+### Removed
 - Remove 'en-GB' as the default value for `props.locale.default`
+
 
 v0.47.0
 ------------------------------
 *March 12, 2021*
 
-## Added
+### Added
 - Browserstack test config in `package.json`
+- Axios mocks for Storybook
+- 'email in use' component test
+- `f-wdio-utils` npm package to `f-registration-component`
+- `selector.js` file for referencing attributes
 
 ### Changed
 - Restructured component tests to support Browserstack
-
-*March 8, 2021*
-
-### Added
-- Axios mocks for Storybook
-- 'email in use' component test
-
-*February 4, 2021*
-
-### Added
-- `f-wdio-utils` npm package to `f-registration-component`
-
-*February 4, 2021*
-
-### Changed
 - component feature tests
 - component object into a class that imports `page.object`
-
-### Added
-- `selector.js` file for referencing attributes
-
-*January 12, 2021*
-
-### Changed
 - Update axios version for security advisory.
 - Use latest version of `f-form-field`.
   - Updated tests to handle new `data-test-id` attributes.
@@ -301,14 +286,10 @@ v0.39.0
 
 ### Changed
 - Added f-error-message for inline registration page errors
-
-*October 28, 2020*
+- 'jet' theme instead of 'je'
 
 ### Added
 - Stylelint added to lint styling on build.
-
-### Changed
-- 'jet' theme instead of 'je'
 
 ### Removed
 - System test mocks

@@ -3,6 +3,14 @@
   "description": "Javascript HTTP client for publishing stats to ElasticSearch",
   "version": "0.1.0",
   "main": "src/index.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "100kB"
+      }
+    ]
+  },
   "files": [
     "src"
   ],
@@ -25,6 +33,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint:fix && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-stat-client ./src/index.js",
     "lint": "vue-cli-service lint --no-fix",

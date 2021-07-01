@@ -2,6 +2,14 @@
   "name": "@justeat/f-vue-icons",
   "version": "2.5.0",
   "main": "dist/f-vue-icons.cjs.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "100kB"
+      }
+    ]
+  },
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
   "module": "dist/f-vue-icons.es.js",
@@ -29,6 +37,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "yarn build:icons && yarn build:dist",
     "build:dist": "bili --format umd,es,cjs,umd-min --js buble --name f-vue-icons",

@@ -3,6 +3,14 @@
   "description": "Fozzie Services - Shared Services for Components and projects",
   "version": "1.11.0",
   "main": "dist/f-services.umd.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "100kB"
+      }
+    ]
+  },
   "module": "dist/f-services.es.js",
   "source": "src/index.js",
   "files": [
@@ -27,6 +35,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",

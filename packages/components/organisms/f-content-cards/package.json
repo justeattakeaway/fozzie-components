@@ -3,6 +3,14 @@
   "description": "Fozzie Content Cards",
   "version": "4.7.0",
   "main": "dist/f-content-cards.umd.min.js",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "100kB"
+      }
+    ]
+  },
   "files": [
     "dist",
     "docs"
@@ -26,6 +34,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-content-cards ./src/index.js",
     "lint": "vue-cli-service lint --no-fix",

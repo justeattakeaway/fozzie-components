@@ -2,6 +2,14 @@
   "name": "@justeat/f-error-message",
   "description": "Fozzie Error Message – Generic inline error message",
   "version": "0.5.0",
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "dist/*+(.min|.min.umd|.es).js",
+        "maxSize": "15kB"
+      }
+    ]
+  },
   "main": "dist/f-error-message.umd.min.js",
   "files": [
     "dist"
@@ -25,6 +33,7 @@
     "fozzie"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-error-message ./src/index.js",
     "lint": "vue-cli-service lint",
