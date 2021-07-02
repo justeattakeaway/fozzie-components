@@ -3,6 +3,7 @@
   "description": "Fozzie Card Component – Used for providing wrapper card styling to an element (or group of elements)",
   "version": "1.3.0",
   "main": "dist/f-card.umd.min.js",
+  "maxBundleSize": "5kB",
   "files": [
     "dist"
   ],
