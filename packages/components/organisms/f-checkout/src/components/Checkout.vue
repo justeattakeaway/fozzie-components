@@ -299,6 +299,11 @@ export default {
         getGeoLocationUrl: {
             type: String,
             required: true
+        },
+
+        getCustomerUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -706,6 +711,7 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.getCheckoutUrl,
+                    getCustomerUrl: this.getCustomerUrl,
                     timeout: this.checkoutTimeout
                 });
 

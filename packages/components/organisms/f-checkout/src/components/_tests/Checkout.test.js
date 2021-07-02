@@ -111,6 +111,7 @@ describe('Checkout', () => {
     const placeOrderUrl = 'http://localhost/placeorder';
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
+    const getCustomerUrl = 'http://localhost/getcustomer';
     const spinnerTimeout = 100;
     const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
@@ -126,6 +127,7 @@ describe('Checkout', () => {
         placeOrderUrl,
         paymentPageUrlPrefix,
         getGeoLocationUrl,
+        getCustomerUrl,
         applicationName,
         spinnerTimeout,
         otacToAuthExchanger

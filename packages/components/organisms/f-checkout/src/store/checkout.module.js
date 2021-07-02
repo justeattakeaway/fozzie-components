@@ -41,6 +41,37 @@ const getIssueByCode = code => {
 };
 
 /**
+* @function enrichPhoneNumber
+* If phone number is missing both from chckout api and from
+* `state.AuthToken`, then retrieve the phone number from consumer api
+* This can happen for newly created guest
+* @param  {object} data  - Api response object.
+* @param  {object} state - The current `checkout` state.
+* @param  {object} url - Account api url
+* @param  {object} timeout - Api timeout
+*/
+const enrichPhoneNumber = async (customer, state, url, timeout) => {
+    if (!customer || customer.phoneNumber) {
+        return;
+    }
+
+    const authHeader = state.authToken && `Bearer ${state.authToken}`;
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            ...(state.authToken && {
+                Authorization: authHeader
+            })
+        },
+        timeout
+    };
+
+    const { data } = await axios.get(url, config);
+
+    customer.phoneNumber = data.PhoneNumber;
+};
+
+/**
 * @function resolveCustomerDetails
 * If certain customer details are missing from api `data.customer` object then fallback
 * to the decoded `state.AuthToken` details and re-assign back to `data.customer`.
@@ -128,7 +159,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
+        getCheckout: async ({ commit, state, dispatch }, { url, getCustomerUrl, timeout }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             // TODO: deal with exceptions.
@@ -145,6 +176,7 @@ export default {
             const { data } = await axios.get(url, config);
 
             resolveCustomerDetails(data, state);
+            await enrichPhoneNumber(data.customer, state, getCustomerUrl, timeout);
 
             commit(UPDATE_STATE, data);
             commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
