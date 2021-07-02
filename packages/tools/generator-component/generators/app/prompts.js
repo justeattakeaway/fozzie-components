@@ -65,6 +65,7 @@ const prompts = [
         message: "What size limit do you want in place for your bundles (in kB)? e.g. '15'",
         name: 'bundlewatchMaxSize',
         type: 'input',
+        default: '5',
         when: function shouldShowThisQuestion (answers) {
             return answers.needsBundlewatch === true;
         }
