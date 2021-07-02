@@ -5,8 +5,6 @@ let _configuration;
 let _justLogInstance;
 
 const publish = payload => {
-    console.log('Publish'); // eslint-disable-line
-
     _justLogInstance.info('test', {
         statClient: `${_configuration.featureName} - f-statistics`,
         ...payload
