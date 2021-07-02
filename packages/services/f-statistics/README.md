@@ -1,6 +1,6 @@
 <div align="center">
 
-# f-stat-client
+# f-statistics
 
 <img width="125" alt="Fozzie Bear" src="../../../bear.png" />
 
@@ -10,10 +10,10 @@ Javascript HTTP client for publishing stats to ElasticSearch
 
 ---
 
-[![npm version](https://badge.fury.io/js/%40justeat%2Ff-stat-client.svg)](https://badge.fury.io/js/%40justeat%2Ff-stat-client)
+[![npm version](https://badge.fury.io/js/%40justeat%2Ff-statistics.svg)](https://badge.fury.io/js/%40justeat%2Ff-statistics)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-stat-client/badge.svg)](https://coveralls.io/github/justeat/f-stat-client)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-stat-client/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-stat-client?targetFile=package.json)
+[![Coverage Status](https://coveralls.io/repos/github/justeat/f-statistics/badge.svg)](https://coveralls.io/github/justeat/f-statistics)
+[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-statistics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-statistics?targetFile=package.json)
 
 This client abstracts away the complexity of publishing stats to ElasticSearch, such as API timings so you can then graph on these results.  It also provides a standardised approach for to follow that can be used in a suite of features and components, allowing you to use and report in a generic way.
 
@@ -37,11 +37,11 @@ This client abstracts away the complexity of publishing stats to ElasticSearch, 
 Install the module using npm or Yarn:
 
 ```sh
-yarn add @justeat/f-stat-client
+yarn add @justeat/f-statistics
 ```
 ### *Initialisation/Construction e.g.*
 ```js
-import StatClient from '@justeat/f-stat-client';
+import StatClient from '@justeat/f-statistics';
 
 const options = {
     statClientUri: 'http://public-elastic-search-endpoint',
@@ -82,7 +82,7 @@ statClientIndexName | This is index to write to | String | 'justeat'
 <hr></br>
 
 ## Client Methods
-These are all of the methods exposed by the `f-stat-client`
+These are all of the methods exposed by the `f-statistics`
 
 Method | Description | Parameters | Example
 ------------- | ------------- | ------------- | -------------
@@ -92,7 +92,7 @@ publish | Sends a dynamic model (stat details) to the Endpoint | `json` _[string
 <hr></br>
 
 ```js
-import StatClient from '@justeat/f-stat-client';
+import StatClient from '@justeat/f-statistics';
 
 const Mock = require('@elastic/elasticsearch-mock');
 
