@@ -10,9 +10,9 @@ const getMaxSizeForPackage = packageLocation => {
     return maxBundleSize;
 };
 
-const getChangedPackageLocations = () => {
+const getPackageLocations = () => {
     try {
-        
+
         let command = 'npx lerna ls --json';
 
         command = process.env.CIRCLE_BRANCH === 'master' ? command : command.concat(' --since origin/master');
@@ -23,16 +23,16 @@ const getChangedPackageLocations = () => {
         process.exit(0);
     }
 
-    const changedPackagesArray = JSON.parse(outputPackages.toString());
+    const packagesArray = JSON.parse(outputPackages.toString());
 
-    const changedPackageLocations = changedPackagesArray.map(package => package.location);
+    const packageLocations = packagesArray.map(package => package.location);
 
-    const filteredPackages = changedPackageLocations.filter(packageLocation => getMaxSizeForPackage(packageLocation) !== undefined);
+    const filteredPackages = packageLocations.filter(packageLocation => getMaxSizeForPackage(packageLocation) !== undefined);
 
     return filteredPackages;
 };
 
-const packagesLocations = getChangedPackageLocations();
+const packagesLocations = getPackageLocations();
 
 const files = packagesLocations.map(packageLocation => ({
     path: `${packageLocation}/dist/*+(.min|.min.umd|.es).js`,

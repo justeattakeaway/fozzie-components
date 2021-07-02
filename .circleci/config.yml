@@ -130,17 +130,6 @@ commands:
             yarn test:visual --since origin/master
           fi
 
-  bundlewatch:
-    description: Run Bundlewatch checks
-    steps:
-      - run: |
-          if [ "${RUN_ALL}" == "true" ];
-          then
-            yarn test:visual
-          else
-            yarn test:visual --since origin/master
-          fi
-
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
     steps:
