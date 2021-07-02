@@ -3,6 +3,7 @@
   "description": "Fozzie Mega Modal – A Vue.js modal component",
   "version": "0.10.0",
   "main": "dist/f-mega-modal.common.js",
+  "maxBundleSize": "5kB",
   "files": [
     "dist"
   ],
