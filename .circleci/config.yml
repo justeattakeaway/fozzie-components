@@ -130,6 +130,15 @@ commands:
             yarn test:visual --since origin/master
           fi
 
+  bundlewatch:
+    description: Run Bundlewatch checks
+    steps:
+      - run: |
+          if [ $CIRCLE_BRANCH !== "master" ];
+          then
+            yarn bundlewatch
+          fi
+
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
     steps:
@@ -286,9 +295,7 @@ jobs:
           path: test/results/allure/failure-videos
       - store_test_results:
           path: test/results/ci
-      - run:
-          name: Run Bundlewatch checks
-          command: yarn bundlewatch
+      - bundlewatch
       - slack_notify_fail
       - slack_notify_success
 
