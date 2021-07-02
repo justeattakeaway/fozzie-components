@@ -134,9 +134,11 @@ commands:
     description: Run Bundlewatch checks
     steps:
       - run: |
-          if [ $CIRCLE_BRANCH !== "master" ];
+          if [ "${RUN_ALL}" == "true" ];
           then
-            yarn bundlewatch
+            yarn test:visual
+          else
+            yarn test:visual --since origin/master
           fi
 
   slack_notify_fail:
@@ -295,7 +297,9 @@ jobs:
           path: test/results/allure/failure-videos
       - store_test_results:
           path: test/results/ci
-      - bundlewatch
+      - run:
+          name: Run Bundlewatch checks
+          command: yarn bundlewatch
       - slack_notify_fail
       - slack_notify_success
 

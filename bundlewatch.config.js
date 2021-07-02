@@ -1,7 +1,7 @@
 // https://bundlewatch.io/#/getting-started/using-a-config-file
 
 const { execSync } = require('child_process');
-let outputChangedPackages;
+let outputPackages;
 
 const getMaxSizeForPackage = packageLocation => {
 
@@ -12,13 +12,18 @@ const getMaxSizeForPackage = packageLocation => {
 
 const getChangedPackageLocations = () => {
     try {
-        outputChangedPackages = execSync('npx lerna ls --since origin/master --json');
+        
+        let command = 'npx lerna ls --json';
+
+        command = process.env.CIRCLE_BRANCH === 'master' ? command : command.concat(' --since origin/master');
+
+        outputPackages = execSync(command);
     } catch (error) {
         console.info('No changed packages found.');
         process.exit(0);
     }
 
-    const changedPackagesArray = JSON.parse(outputChangedPackages.toString());
+    const changedPackagesArray = JSON.parse(outputPackages.toString());
 
     const changedPackageLocations = changedPackagesArray.map(package => package.location);
 
