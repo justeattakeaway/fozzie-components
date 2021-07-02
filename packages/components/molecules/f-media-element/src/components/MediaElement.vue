@@ -122,7 +122,7 @@ export default {
          * @returns {*[]}
          */
         flexClasses () {
-            return (new FlexStyles(this.flex)).styles.map(style => this.$style[style]);
+            return (new FlexStyles(this.flex)).classNames.map(style => this.$style[style]);
         }
     }
 };
@@ -153,7 +153,7 @@ $font-sizes: (
     )
 );
 
-$flexMargin: spacing(x3);
+$mediaElement-content-margin: spacing(x3);
 
 .c-mediaElement {
     display: flex;
@@ -164,14 +164,14 @@ $flexMargin: spacing(x3);
     flex-direction: column-reverse;
 
     & .c-mediaElement-content {
-        margin-top: $flexMargin;
+        margin-top: $mediaElement-content-margin;
     }
 }
 .c-mediaElement--col {
     flex-direction: column;
 
     & .c-mediaElement-content {
-        margin-bottom: $flexMargin;
+        margin-bottom: $mediaElement-content-margin;
     }
 }
 .c-mediaElement--row {
@@ -193,24 +193,24 @@ $flexMargin: spacing(x3);
      * Applies flex direction column on $name
      */
     @include media('>='+$name) {
-        .c-mediaElement-col--gte--#{$name} {
+        .c-mediaElement--gte--#{$name}--col {
             flex-direction: column;
 
             & .c-mediaElement-content {
-                margin-bottom: $flexMargin;
+                margin-bottom: $mediaElement-content-margin;
             }
         }
-        .c-mediaElement-col--gte--#{$name}--reverse {
+        .c-mediaElement--gte--#{$name}--col--reverse {
             flex-direction: column-reverse;
 
             & .c-mediaElement-content {
-                margin-top: $flexMargin;
+                margin-top: $mediaElement-content-margin;
             }
         }
-        .c-mediaElement-row--gte--#{$name} {
+        .c-mediaElement--gte--#{$name}--row {
             flex-direction: row;
         }
-        .c-mediaElement-row--gte--#{$name}--reverse {
+        .c-mediaElement--gte--#{$name}--row--reverse {
             flex-direction: row-reverse;
         }
     }
@@ -224,18 +224,18 @@ $flexMargin: spacing(x3);
     * Applies flex direction column on $name
     */
     @include media('>'+$name) {
-        .c-mediaElement--gt-#{$name}--col {
+        .c-mediaElement--gt--#{$name}--col {
             flex-direction: column;
 
             & .c-mediaElement-content {
-                margin-bottom: $flexMargin;
+                margin-bottom: $mediaElement-content-margin;
             }
         }
         .c-mediaElement--gt--#{$name}--col--reverse {
             flex-direction: column-reverse;
 
             & .c-mediaElement-content {
-                margin-top: $flexMargin;
+                margin-top: $mediaElement-content-margin;
             }
         }
         .c-mediaElement--gt--#{$name}--row {
@@ -259,14 +259,14 @@ $flexMargin: spacing(x3);
             flex-direction: column;
 
             & .c-mediaElement-content {
-                margin-bottom: $flexMargin;
+                margin-bottom: $mediaElement-content-margin;
             }
         }
         .c-mediaElement--lte--#{$name}--col--reverse {
             flex-direction: column-reverse;
 
             & .c-mediaElement-content {
-                margin-top: $flexMargin;
+                margin-top: $mediaElement-content-margin;
             }
         }
         .c-mediaElement--lte--#{$name}--row {
@@ -290,14 +290,14 @@ $flexMargin: spacing(x3);
             flex-direction: column;
 
             & .c-mediaElement-content {
-                margin-bottom: $flexMargin;
+                margin-bottom: $mediaElement-content-margin;
             }
         }
         .c-mediaElement--lt--#{$name}--col--reverse {
             flex-direction: column-reverse;
 
             & .c-mediaElement-content {
-                margin-top: $flexMargin;
+                margin-top: $mediaElement-content-margin;
             }
         }
         .c-mediaElement--lt--#{$name}--row {

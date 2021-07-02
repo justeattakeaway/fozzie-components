@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import MediaElement from '../MediaElement.vue';
-import { ALIGN, FONT_SIZE } from '../../constants';
+import {ALIGN, FONT_SIZE, MODIFIER_OPPOSITES_RULES_MAP, MODIFIER_RULES_MAP} from '../../constants';
 
 const mockTitle = '__TEST_TITLE__';
 const mockText = '__TEST_TEXT__';
@@ -141,6 +141,174 @@ describe('MediaElement.vue', () => {
             // Assert
             expect(style.exists()).toBe(true);
         });
+
+        describe('flex ::', () => {
+            it('should add a default class name when not set', () => {
+                const className = 'c-mediaElement--row';
+                // Arrange
+                const wrapper = shallowMount(MediaElement, {
+                    propsData: {
+                        title: mockTitle,
+                        text: mockText,
+                        imageUrl: mockImageUrl
+                    },
+                    mocks: {
+                        $style: {
+                            [className]: className
+                        }
+                    }
+                });
+
+                // Act
+                const style = wrapper.find(`.${className}`);
+
+                // Assert
+                expect(style.exists()).toBe(true);
+            });
+
+            it('should apply class with the default direction if default.column is true', () => {
+                const className = 'c-mediaElement--col';
+                // Arrange
+                const wrapper = shallowMount(MediaElement, {
+                    propsData: {
+                        title: mockTitle,
+                        text: mockText,
+                        imageUrl: mockImageUrl,
+                        flex: {
+                            default: {
+                                column: true,
+                                reverse: false
+                            }
+                        }
+                    },
+                    mocks: {
+                        $style: {
+                            [className]: className
+                        }
+                    }
+                });
+
+                // Act
+                const style = wrapper.find(`.${className}`);
+
+                // Assert
+                expect(style.exists()).toBe(true);
+            });
+
+            it('should apply class with reverse direction if default.reverse is true', () => {
+                const className = 'c-mediaElement--row--reverse';
+                // Arrange
+                const wrapper = shallowMount(MediaElement, {
+                    propsData: {
+                        title: mockTitle,
+                        text: mockText,
+                        imageUrl: mockImageUrl,
+                        flex: {
+                            default: {
+                                column: false,
+                                reverse: true
+                            }
+                        }
+                    },
+                    mocks: {
+                        $style: {
+                            [className]: className
+                        }
+                    }
+                });
+
+                // Act
+                const style = wrapper.find(`.${className}`);
+
+                // Assert
+                expect(style.exists()).toBe(true);
+            });
+
+            it.each([
+                ['>', 'narrowMid'],
+                ['>=', 'narrowMid'],
+                ['<', 'narrowMid'],
+                ['<=', 'narrowMid']
+            ])('should apply class that applies column and reverse when %s %s screen size', (operator, size) => {
+                const className = `c-mediaElement--${MODIFIER_RULES_MAP[operator]}--${size}--col--reverse`;
+                // Arrange
+                const wrapper = shallowMount(MediaElement, {
+                    propsData: {
+                        title: mockTitle,
+                        text: mockText,
+                        imageUrl: mockImageUrl,
+                        flex: {
+                            default: {
+                                column: false,
+                                reverse: false
+                            },
+                            modifier: {
+                                rule: [
+                                    operator,
+                                    size
+                                ],
+                                column: true,
+                                reverse: true
+                            }
+                        }
+                    },
+                    mocks: {
+                        $style: {
+                            [className]: className
+                        }
+                    }
+                });
+
+                // Act
+                const style = wrapper.find(`.${className}`);
+
+                // Assert
+                expect(style.exists()).toBe(true);
+            });
+
+            it.each([
+                ['>', 'narrowMid'],
+                ['>=', 'narrowMid'],
+                ['<', 'narrowMid'],
+                ['<=', 'narrowMid']
+            ])('should apply class that applies default column and reverse for opposite of %s %s screen size', (operator, size) => {
+                const className = `c-mediaElement--${MODIFIER_OPPOSITES_RULES_MAP[operator]}--${size}--row`;
+                // Arrange
+                const wrapper = shallowMount(MediaElement, {
+                    propsData: {
+                        title: mockTitle,
+                        text: mockText,
+                        imageUrl: mockImageUrl,
+                        flex: {
+                            default: {
+                                column: false,
+                                reverse: false
+                            },
+                            modifier: {
+                                rule: [
+                                    operator,
+                                    size
+                                ],
+                                column: true,
+                                reverse: true
+                            }
+                        }
+                    },
+                    mocks: {
+                        $style: {
+                            [className]: className
+                        }
+                    }
+                });
+
+                // Act
+                const style = wrapper.find(`.${className}`);
+
+                // Assert
+                expect(style.exists()).toBe(true);
+            });
+        });
+
     });
 
     describe('slot', () => {
