@@ -10,7 +10,7 @@ import {
     CrossIcon,
     PlusIcon,
     MoreVerticalIcon
-} from '../../../../tools/f-vue-icons/dist/f-vue-icons';
+} from '@justeat/f-vue-icons';
 
 export default {
     title: 'Components/Atoms/f-button',
