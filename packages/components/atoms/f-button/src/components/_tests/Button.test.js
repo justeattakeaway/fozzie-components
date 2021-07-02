@@ -109,6 +109,26 @@ describe('Button', () => {
                             expect(onClick).toHaveBeenCalled();
                         });
                     });
+
+                    describe('when loaded and `href` is not empty :: ', () => {
+                        it('should be triggered', () => {
+                            // Arrange
+                            const propsData = {
+                                isLoading: false,
+                                href: '#'
+                            };
+
+                            const onClick = jest.fn();
+                            const wrapper = mount(FButton, { listeners: { click: onClick }, propsData });
+                            const button = wrapper.find('[data-test-id="link-button-component"]');
+
+                            // Act
+                            button.trigger('click');
+
+                            // Assert
+                            expect(onClick).toHaveBeenCalled();
+                        });
+                    });
                 });
             });
         });
