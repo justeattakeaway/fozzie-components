@@ -2,7 +2,8 @@
   "name": "@justeat/f-<%= name.default %>",
   "description": "Fozzie <%= name.readme %> - <%= description %>",
   "version": "0.1.0",
-  "main": "dist/f-<%= name.default %>.umd.min.js",
+  "main": "dist/f-<%= name.default %>.umd.min.js", <% if(config.needsBundlewatch) { %>
+  "maxBundleSize": "<%= bundlewatchMaxSize %>kB",<% } %>
   "files": [
     "dist"<% if(config.needsComponentTests) { %>,
     "test-utils"<% } %> <% if(config.needsTestingApiMocks) { %>,
