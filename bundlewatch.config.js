@@ -3,12 +3,6 @@
 const { execSync } = require('child_process');
 let outputChangedPackages;
 
-const maxBundleSizeExistsForPackage = packageLocation => {
-    const { maxBundleSize } = require(`${packageLocation}/package.json`);
-    
-    return (maxBundleSize);
-}
-
 const getMaxSizeForPackage = packageLocation => {
 
     const { maxBundleSize } = require(`${packageLocation}/package.json`);
@@ -26,10 +20,9 @@ const getChangedPackageLocations = () => {
 
     const changedPackagesArray = JSON.parse(outputChangedPackages.toString());
 
-    let changedPackageLocations = [];
-    changedPackagesArray.forEach(package => changedPackageLocations.push(package.location));
+    const changedPackageLocations = changedPackagesArray.map(package => package.location);
 
-    const filteredPackages = changedPackageLocations.filter(packageLocation => maxBundleSizeExistsForPackage(packageLocation));
+    const filteredPackages = changedPackageLocations.filter(packageLocation => getMaxSizeForPackage(packageLocation) !== undefined);
 
     return filteredPackages;
 };
