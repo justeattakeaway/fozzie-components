@@ -38,6 +38,7 @@ Yeoman Generator version: {white v${pkg.version}}
             isComponent: (this.answers.componentType === 'uiComponent'),
             needsComponentTests: (this.answers.componentType === 'service' ? false : this.answers.needsComponentTests),
             needsComponentTranslations: (this.answers.componentType === 'service' ? false : this.answers.needsComponentTranslations),
+            needsBundlewatch: (this.answers.needsBundlewatch),
             needsTestingApiMocks: (this.answers.componentType === 'service' ? false : this.answers.needsTestingApiMocks)
         };
 
@@ -89,6 +90,7 @@ Yeoman Generator version: {white v${pkg.version}}
             this.destinationPath(this.componentPath),
             {
                 name: this.nameTransformations,
+                bundlewatchMaxSize: this.answers.bundlewatchMaxSize,
                 changelogDate: `${this.currentDate.month} ${this.currentDate.day}, ${this.currentDate.year}`,
                 config: this.config,
                 description: this.answers.description,
