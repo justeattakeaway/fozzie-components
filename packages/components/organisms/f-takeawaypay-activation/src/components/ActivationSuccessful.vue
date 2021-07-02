@@ -46,19 +46,6 @@ export default {
 
 <style lang="scss" module>
 
-.c-takeawaypayActivation-icon {
-    transform: translate(10%);
-    width: 125px;
-}
-
-.c-takeawaypayActivation-title {
-    @include font-size(body-l);
-    font-weight: $font-weight-bold;
-    padding-top: spacing(x2);
-}
-
-.c-takeawaypayActivation-actions {
-    padding-top: spacing(x3);
-}
+@import './../assets/scss/takeaway-pay-activation';
 
 </style>
