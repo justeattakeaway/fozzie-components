@@ -184,6 +184,21 @@ export default {
             commit(UPDATE_ERRORS, detailedIssues);
 
             dispatch('updateMessage', detailedIssues[0]);
+            // },
+
+            // commit(UPDATE_IS_FULFILLABLE, false);
+            // const iss = {
+            //     isFulfillable: false,
+            //     issues: [
+            //         {
+            //             code: 'FULFILMENT_TIME_UNAVAILABLE',
+            //             shouldShowInDialog: true
+            //         }
+            //     ]
+            // };
+            // commit(UPDATE_ERRORS, iss);
+
+            // dispatch('updateMessage', iss.issues[0]);
         },
 
         /**
@@ -443,6 +458,17 @@ export default {
 
         updateMessage:  ({ commit }, message = null) => {
             commit(UPDATE_MESSAGE, message);
+        },
+
+        resetFulfilmentTimes: async ({ commit, dispatch }, payload) => {
+            dispatch('getAvailableFulfilment', payload);
+
+            const defaultTime = {
+                from: '',
+                to: ''
+            };
+            commit(UPDATE_FULFILMENT_TIME, defaultTime);
+            commit(UPDATE_HAS_ASAP_SELECTED, true);
         }
     },
 

@@ -12,7 +12,7 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-describe('Selector', () => {
+xdescribe('Selector', () => {
     const propsData = {};
 
     it('should be defined', () => {

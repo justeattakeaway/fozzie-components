@@ -466,6 +466,15 @@ export default {
             if ((!newTokenVal && oldTokenVal) || (!oldTokenVal && newTokenVal)) {
                 await this.initialise();
             }
+        },
+
+        async message () {
+            if (this.message && this.message.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+                await this.resetFulfilmentTimes({
+                    url: this.checkoutAvailableFulfilmentUrl,
+                    timeout: this.checkoutTimeout
+                });
+            }
         }
     },
 
@@ -492,6 +501,7 @@ export default {
             'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
+            'resetFulfilmentTimes',
             'getUserNote',
             'saveUserNote'
         ]),
@@ -560,10 +570,6 @@ export default {
          */
         async handleNonFulfillableCheckout () {
             if (this.errors) {
-                if (this.errors[0].code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
-                    await this.loadAvailableFulfilment();
-                }
-
                 this.trackFormErrors();
 
                 this.logInvoker({
