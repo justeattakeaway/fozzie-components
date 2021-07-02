@@ -1,8 +1,9 @@
 const defaultConfig = {
-    loggingEndpointUri: 'http://localhost:9200',
+    clientVersion: '1.0.0',
     environment: 'test',
-    tenant: 'uk',
-    featureName: 'Generic Front End'
+    featureName: 'Generic Front End',
+    loggingEndpointUri: 'http://localhost:9200',
+    tenant: 'uk'
 };
 
 export default defaultConfig;

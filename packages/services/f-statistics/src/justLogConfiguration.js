@@ -7,8 +7,8 @@ const configureJustLog = configuration => {
     justLog
         .forFeature({
             name: 'f-statistics',
-            tenant: 'all',
-            version: '1.0.0',
+            tenant: configuration.tenant,
+            version: configuration.clientVersion,
             environment: configuration.environment
         })
         .to(new JustEatLoggingService(configuration.loggingEndpointUri));
