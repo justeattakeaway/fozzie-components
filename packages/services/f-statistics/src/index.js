@@ -19,7 +19,7 @@ export default (options = {}) => {
         ...options
     };
 
-    if (!_configuration.loggingEndpointUri) {
+    if (!_configuration.endpointUri) {
         throw new Error('Logging endpoint not configured for f-statistics');
     }
 

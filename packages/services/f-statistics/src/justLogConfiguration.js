@@ -11,7 +11,7 @@ const configureJustLog = configuration => {
             version: configuration.clientVersion,
             environment: configuration.environment
         })
-        .to(new JustEatLoggingService(configuration.loggingEndpointUri));
+        .to(new JustEatLoggingService(configuration.endpointUri));
 
     return justLog;
 };

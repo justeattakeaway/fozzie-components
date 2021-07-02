@@ -8,6 +8,6 @@ describe('f-statistics', () => {
 
     it('should define expected method', async () => {
         // Arrange, Act & Assert
-        expect(statsModule().publish).toBeDefined();
+        expect(statsModule({ endpointUri: '/test' }).publish).toBeDefined();
     });
 });
