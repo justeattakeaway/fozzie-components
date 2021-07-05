@@ -970,11 +970,12 @@ export default {
         },
 
         /**
-         * Calls `loadAvailableFulfilment` times if we have no available fulfilment times avaiable.
+         * Calls `loadAvailableFulfilment` times if we have no available fulfilment times available.
          * Updates the key for the `FromDropdown` component to force the component re-render.
          *
-         * This needed to be done as the dropdown component does not correctly update
-         * the value of the dropdown with the first option of the new avaialble times.
+         * When we recieve the new `availableFulfilment` times, the dropdown doesn't automatically set the selected time
+         * to the first available fulfilment time. It leaves the selected value blank.
+         * Forcing the component to re-render ensures that the correct time is selected and displayed.
          */
         async reloadAvailableFulfilmentTimesIfOutdated () {
             if (this.message?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
