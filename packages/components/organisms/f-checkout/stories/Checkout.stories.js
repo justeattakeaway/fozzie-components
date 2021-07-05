@@ -82,13 +82,16 @@ const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
 const additionalItemsRequiredIssue = 'additional-items-required';
+const timeNotAvailable = 'Selected time no longer available';
+const timeNotAvailableIssue = 'time-unavailable';
 
 const patchCheckoutErrorOptions = {
     None: null,
     [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
     [additionalItemsRequired]: additionalItemsRequiredIssue,
     [checkoutServerError]: SERVER,
-    [updateCheckoutAccessForbidden]: accessForbiddenErrorCode
+    [updateCheckoutAccessForbidden]: accessForbiddenErrorCode,
+    [timeNotAvailable]: timeNotAvailableIssue
 };
 
 const getCheckoutErrorOptions = {
@@ -182,10 +185,6 @@ export const CheckoutComponent = () => ({
         updateCheckoutUrl () {
             if (this.patchCheckoutError) {
                 return `/update-checkout-${this.patchCheckoutError}.json`;
-            }
-
-            if (this.fulfilmentTimeSelection === 'user-selected-unavailable-time') {
-                return '/update-checkout-time-unavailable.json';
             }
 
             return updateCheckoutUrl;
