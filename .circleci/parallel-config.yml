@@ -124,7 +124,7 @@
 #   node:
 #     docker:
 #       # specify the version you desire here
-#       - image: circleci/node:14.16.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+#       - image: circleci/node:14.17.2-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 # jobs:
 #   set_up:
@@ -154,7 +154,7 @@
 #           key: working-directory-{{ .Branch }}-{{ .Revision }}
 #           paths:
 #             - ~/project
-                    
+
 #   build:
 #     executor: node
 #     environment:
@@ -194,7 +194,7 @@
 #       - run: # Lint packages
 #           name: Run Lint Tasks on Packages
 #           command: yarn lint
-    
+
 #   unit_tests:
 #     executor: node
 #     environment:
@@ -325,7 +325,7 @@
 #             - build
 #           filters:
 #             branches:
-#               ignore: 'gh-pages'    
+#               ignore: 'gh-pages'
 #       - bundlewatch:
 #           context: web-core
 #           requires:
