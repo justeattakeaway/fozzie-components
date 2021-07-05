@@ -17,10 +17,10 @@ const captureResponseStatistics = ({ interceptors }, statisticsClient) => {
         res.responseTimeMs = timeTakenMs;
 
         const payload = {
-            method: res.config.method.toUpperCase(),
-            url: res.config.url,
-            status: res.status,
-            responseTimeMs: res.responseTimeMs
+            'cs-method': res.config.method.toUpperCase(),
+            'cs-uri-stem': res.config.url,
+            'sc-status': res.status,
+            'time-taken': res.responseTimeMs
         };
 
         statisticsClient.publish({
