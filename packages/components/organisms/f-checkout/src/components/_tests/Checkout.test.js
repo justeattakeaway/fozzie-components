@@ -1837,11 +1837,13 @@ describe('Checkout', () => {
             });
 
             describe('when `updateCheckout` returns `ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE`', () => {
-                let reloadAvailableFulfilmentTimesIfOutdatedSpy;
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
 
-                beforeEach(() => {
+                it('should make a call to `reloadAvailableFulfilmentTimesIfOutdated`', async () => {
                     // Arrange
-                    reloadAvailableFulfilmentTimesIfOutdatedSpy = jest.spyOn(VueCheckout.methods, 'reloadAvailableFulfilmentTimesIfOutdated');
+                    const reloadAvailableFulfilmentTimesIfOutdatedSpy = jest.spyOn(VueCheckout.methods, 'reloadAvailableFulfilmentTimesIfOutdated');
 
                     wrapper = mount(VueCheckout, {
                         store: createStore({
@@ -1858,13 +1860,7 @@ describe('Checkout', () => {
                             $cookies
                         }
                     });
-                });
 
-                afterEach(() => {
-                    jest.clearAllMocks();
-                });
-
-                it('should make a call to `reloadAvailableFulfilmentTimesIfOutdated`', async () => {
                     // Act
                     await wrapper.vm.handleUpdateCheckout();
 
