@@ -1,6 +1,8 @@
-import { getStringValue } from '../src/index';
+import featureManagement from '../src/index';
 
-describe('String value retrieval', () => {
+const { getStringValue } = featureManagement('je-web-core');
+
+describe.skip('String value retrieval', () => {
     describe('Get empty string value', () => {
         const key = 'string-empty-value';
         const result = getStringValue(key);
@@ -16,7 +18,7 @@ describe('String value retrieval', () => {
     describe('Get complex string value', () => {
         const key = 'string-complex-value';
         const result = getStringValue(key);
-        expect(result.value).toBe('this is a complex string\nwith multiple lines\n and special characters !@£$%^&*()¡€#¢∞§¶•ªº');
+        expect(result.value).toBe('this is a complex string\nwith multiple lines\n and special characters !@£$%^&*()¡€#¢∞§¶•ªº\'"');
     });
 
     describe('Get whitespace only string', () => {

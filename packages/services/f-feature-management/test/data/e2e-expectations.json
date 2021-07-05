@@ -1,0 +1,575 @@
+{
+  "filename": "Config.e2e.json",
+  "expectations": [
+    {
+      "description": "Hit variant 1",
+      "context": {
+        "anonUserId": "AudScore:0-0.5|VarScore:0-0.5|0000",
+        "tenant": "ES",
+        "appVersion": "50.0.0"
+      },
+      "feature": "string-feature-1",
+      "valueType": "string",
+      "expectation": {
+        "value": "val r1v1",
+        "experimentKey": "StringExperiment1",
+        "experimentVariant": "var r1v1"
+      }
+    },
+    {
+      "description": "Hit variant 2",
+      "context": {
+        "anonUserId": "AudScore:0-0.5|VarScore:0.5-1|0000",
+        "tenant": "ES",
+        "appVersion": "50.0.0"
+      },
+      "feature": "string-feature-1",
+      "valueType": "string",
+      "expectation": {
+        "value": "val r1v2",
+        "experimentKey": "StringExperiment1",
+        "experimentVariant": "var r1v2"
+      }
+    },
+    {
+      "description": "Rule 1 miss Hit rule 2",
+      "context": {
+        "anonUserId": "AudScore:0-0.5|VarScore:0.5-1|0000",
+        "tenant": "UK",
+        "appVersion": "50.0.0"
+      },
+      "feature": "string-feature-1",
+      "valueType": "string",
+      "expectation": {
+        "value": "val r2v2",
+        "experimentKey": "StringExperiment1",
+        "experimentVariant": "var r2v2"
+      }
+    },
+    {
+      "description": "Rule 1 hit but outside audience. Other Rule matches but ignored so default returned.",
+      "context": {
+        "anonUserId": "AudScore:0.5-0.75|VarScore:0-1|0001",
+        "tenant": "UK",
+        "appVersion": "50.0.0"
+      },
+      "feature": "string-feature-1",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-uk",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "All other rules miss; catch-all rule variant returned",
+      "context": {
+        "anonUserId": "AudScore:0-0.75|VarScore:0-1|0000",
+        "tenant": "AU",
+        "appVersion": "50.0.0"
+      },
+      "feature": "string-feature-1",
+      "valueType": "string",
+      "expectation": {
+        "value": "val catchallv1",
+        "experimentKey": "StringExperiment1",
+        "experimentVariant": "var catchallv1"
+      }
+    },
+    {
+      "description": "Single rule missed by country; default returned.",
+      "context": {
+        "anonUserId": "AudScore:0-0.5|VarScore:0-1|0002",
+        "tenant": "AU",
+        "appVersion": "75.1"
+      },
+      "feature": "string-feature-2-one-exp-rule",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-catchall",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Single rule missed by version; default returned.",
+      "context": {
+        "anonUserId": "AudScore:0-0.5|VarScore:0-1|0002",
+        "tenant": "UK",
+        "appVersion": "74.0"
+      },
+      "feature": "string-feature-2-one-exp-rule",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-catchall",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Integer returned from variant.",
+      "context": {
+        "anonUserId": "AudScore:0-0.5|VarScore:0-1|0002",
+        "tenant": "UK",
+        "appVersion": "74.0"
+      },
+      "feature": "int-feature",
+      "valueType": "int",
+      "expectation": {
+        "value": 123,
+        "experimentKey": "IntExperiment",
+        "experimentVariant": "int var"
+      }
+    },
+    {
+      "description": "Positive Integer returned from default.",
+      "context": {
+        "anonUserId": "AudScore:0.5-1|VarScore:0-1|0000",
+        "tenant": "IE",
+        "appVersion": "74.0"
+      },
+      "feature": "int-feature",
+      "valueType": "int",
+      "expectation": {
+        "value": 234,
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Zero returned from default.",
+      "context": {
+        "anonUserId": "AudScore:0.5-1|VarScore:0-1|0000",
+        "tenant": "AU",
+        "appVersion": "74.0"
+      },
+      "feature": "int-feature",
+      "valueType": "int",
+      "expectation": {
+        "value": 0,
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Negative integer returned from default.",
+      "context": {
+        "anonUserId": "AudScore:0.5-1|VarScore:0-1|0000",
+        "tenant": "UK",
+        "appVersion": "74.0"
+      },
+      "feature": "int-feature",
+      "valueType": "int",
+      "expectation": {
+        "value": -100,
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Bool returned from variant.",
+      "context": {
+        "anonUserId": "AudScore:0-0.5|VarScore:0-1|0001",
+        "tenant": "UK",
+        "appVersion": "74.0"
+      },
+      "feature": "bool-feature",
+      "valueType": "bool",
+      "expectation": {
+        "value": true,
+        "experimentKey": "BoolExperiment",
+        "experimentVariant": "bool var"
+      }
+    },
+    {
+      "description": "False returned from default.",
+      "context": {
+        "anonUserId": "AudScore:0.5-1|VarScore:0-1|0002",
+        "tenant": "IE",
+        "appVersion": "74.0"
+      },
+      "feature": "bool-feature",
+      "valueType": "bool",
+      "expectation": {
+        "value": false,
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "True returned from default.",
+      "context": {
+        "anonUserId": "AudScore:0.5-1|VarScore:0-1|0002",
+        "tenant": "UK",
+        "appVersion": "74.0"
+      },
+      "feature": "bool-feature",
+      "valueType": "bool",
+      "expectation": {
+        "value": true,
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "No logic: 1st default hit (with country case mismatch)",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "uK",
+        "appVersion": "74.0"
+      },
+      "feature": "string-feature-3-no-logic",
+      "valueType": "string",
+      "expectation": {
+        "value": "default 1",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "No logic: 1st default miss due to country",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "IE",
+        "appVersion": "74.0"
+      },
+      "feature": "string-feature-3-no-logic",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-catchall",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "No logic: 1st default miss due to app version",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-3-no-logic",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-catchall",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Flag not found return null (string)",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "flag-does-not-exist",
+      "valueType": "string",
+      "expectation": {
+        "value": null,
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Flag not found return null (int)",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "flag-does-not-exist",
+      "valueType": "int",
+      "expectation": {
+        "value": null,
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Flag not found return null (bool)",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "flag-does-not-exist",
+      "valueType": "bool",
+      "expectation": {
+        "value": null,
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Unknown property name in logic returns default",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-unknown-property-in-logic",
+      "valueType": "string",
+      "expectation": {
+        "value": "valid value",
+        "experimentKey": "StringExperiment",
+        "experimentVariant": "valid variant"
+      }
+    },
+    {
+      "description": "Unknown logic type returns default",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-unknown-logic-type",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-catchall",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Unknown bucketby returns default",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-unknown-bucketby",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-catchall",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Unknown property in defaults moves to next",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-unknown-property-in-defaults",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-catchall",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Extreme weighting 1",
+      "context": {
+        "anonUserId": "AudScore:0-0.99|VarScore:0-0.98|0000",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-extreme-audience-and-variant-weighting",
+      "valueType": "string",
+      "expectation": {
+        "value": "val 1",
+        "experimentKey": "StringExperiment",
+        "experimentVariant": "var 1"
+      }
+    },
+    {
+      "description": "Extreme weighting 2",
+      "context": {
+        "anonUserId": "AudScore:0-0.99|VarScore:0.98-0.99|0147",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-extreme-audience-and-variant-weighting",
+      "valueType": "string",
+      "expectation": {
+        "value": "val 2",
+        "experimentKey": "StringExperiment",
+        "experimentVariant": "var 2"
+      }
+    },
+    {
+      "description": "Extreme weighting 3",
+      "context": {
+        "anonUserId": "AudScore:0-0.99|VarScore:0.99-1|0042",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-extreme-audience-and-variant-weighting",
+      "valueType": "string",
+      "expectation": {
+        "value": "val 3",
+        "experimentKey": "StringExperiment",
+        "experimentVariant": "var 3"
+      }
+    },
+    {
+      "description": "Extreme audience",
+      "context": {
+        "anonUserId": "AudScore:0.99-1|VarScore:0-1|0007",
+        "tenant": "UK",
+        "appVersion": "32.1.2"
+      },
+      "feature": "string-feature-extreme-audience-and-variant-weighting",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-catchall",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: Country eq",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "uk",
+        "appVersion": "10.0"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-1",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: Country in",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "ie",
+        "appVersion": "10.0"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-1",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: AppVersion eq",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "nz",
+        "appVersion": "30.2"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-1",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: AppVersion in",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "nz",
+        "appVersion": "30.4"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-1",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: AppVersion gt",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "nz",
+        "appVersion": "40.1.2"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-1",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: Appversion lt",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "nz",
+        "appVersion": "9.9"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-1",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: Country neq/nin & AppVersion neq/nin/lte(e)",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "nz",
+        "appVersion": "10.1"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-2",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: Country neq/nin & AppVersion neq/nin/gte(e)",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "nz",
+        "appVersion": "40.0"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-2",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: Country neq/nin & AppVersion neq/nin/lte(lt)",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "nz",
+        "appVersion": "10.0.9"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-2",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    },
+    {
+      "description": "Restrictions: Country neq/nin & AppVersion neq/nin/gte(gt)",
+      "context": {
+        "anonUserId": "irrelevant",
+        "tenant": "nz",
+        "appVersion": "40.0.1"
+      },
+      "feature": "string-feature-to-test-restrictions",
+      "valueType": "string",
+      "expectation": {
+        "value": "default-2",
+        "experimentKey": null,
+        "experimentVariant": null
+      }
+    }
+  ]
+}
