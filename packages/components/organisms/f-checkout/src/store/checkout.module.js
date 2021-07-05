@@ -176,6 +176,8 @@ export default {
             const { data } = await axios.get(url, config);
 
             resolveCustomerDetails(data, state);
+
+            // This call can be removed when newly created guest JWT token has phone number claim populated
             await enrichPhoneNumber(data.customer, state, getCustomerUrl, timeout);
 
             commit(UPDATE_STATE, data);
