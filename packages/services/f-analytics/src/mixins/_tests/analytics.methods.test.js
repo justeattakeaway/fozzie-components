@@ -30,12 +30,10 @@ describe('Analytics', () => {
                     store: createStore()
                 };
 
-                // Mocks
+                component.mixins[0].created = jest.fn(() => true);
                 jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
                 jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
                 component.mixins[0].computed.isServerSide = () => false;
-
-                // Spies
                 preparePageSpy = jest.spyOn(component.mixins[0].methods, 'preparePage');
             });
 
@@ -108,11 +106,9 @@ describe('Analytics', () => {
                     }
                 };
 
-                // Mocks
+                component.mixins[0].created = jest.fn(() => true);
                 jest.spyOn(component.mixins[0].methods, 'preparePage').mockImplementationOnce(() => true);
                 jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
-
-                // Spies
                 prepareAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics');
                 storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData');
             });
@@ -175,15 +171,13 @@ describe('Analytics', () => {
                     }
                 };
 
-                // Mocks
+                component.mixins[0].created = jest.fn(() => true);
                 jest.spyOn(component.mixins[0].methods, 'preparePage').mockImplementationOnce(() => true);
                 jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
                 windowsPushMock = jest.fn();
                 window.dataLayer = {
                     push: windowsPushMock
                 };
-
-                // Spies
                 pushAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'pushAnalytics');
             });
 

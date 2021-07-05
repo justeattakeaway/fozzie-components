@@ -21,10 +21,10 @@ This component abstracts away the gathering of the various data values needed fo
 
 ## Benefits (Now)
 - Single source for GTM logic: Currently we have GTM logic scattered throught various components and parent features this will remove that logic and centralise it in this single component.
-- Self sufficient: With only supplying a small amount of props this component will attempt to evaluate, gather and produce all the GA data required for the initial render.
+- Self sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and produce all the GA data required for the initial render.
+- Re-evaluates and re-pushes the `platformData` GA model when the route changes
 
 ## Benefits (Soon)
-- _re-push the `platformData` GA model when we change route_
 - _extend the data properties for the `platformData` GA model_
 - _evaluate, gather and produce data for the `pageData` GA model_
 - _evaluate, gather and produce data for the `userData` GA model_

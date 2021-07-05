@@ -18,6 +18,13 @@ export default {
         }
     },
 
+    watch: {
+        $route () {
+            this.prepareAnalytics();
+            this.pushAnalytics();
+        }
+    },
+
     created () {
         this.registerStoreModule();
         this.prepareServersideAnalytics();
