@@ -9,6 +9,7 @@
             (isInline ? $style['c-formField-label--inline'] : '')
         ]">
         <slot />
+        <slot name="description" />
     </label>
 </template>
 

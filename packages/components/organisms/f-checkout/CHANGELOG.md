@@ -28,7 +28,7 @@ v0.149.0
 
 ### Changed
 - Logging levels for different errors.
-- Using f-card's 1.3.0 version.
+- Using `f-card`'s `1.3.0` version.
 
 
 v0.148.0

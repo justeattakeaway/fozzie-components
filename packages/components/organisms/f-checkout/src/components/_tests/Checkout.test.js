@@ -21,13 +21,17 @@ import {
     defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger, $cookies
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
+import addressService from '../../services/addressService';
 
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
     PlaceOrderError,
-    UpdateCheckoutAccessForbiddenError
+    UpdateCheckoutAccessForbiddenError,
+    GetCheckoutError,
+    GetCheckoutAccessForbiddenError
 } = exceptions;
+
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
@@ -1183,6 +1187,22 @@ xdescribe('Checkout', () => {
                     // Assert
                     expect(loadCheckoutSpy).not.toHaveBeenCalled();
                 });
+
+                it('should call `loadAddressFromLocalStorage` so we can pre-populate the guest checkout address', async () => {
+                    // Arrange & Act
+                    const loadAddressFromLocalStorageSpy = jest.spyOn(VueCheckout.methods, 'loadAddressFromLocalStorage');
+
+                    shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    // Assert
+                    expect(loadAddressFromLocalStorageSpy).toHaveBeenCalled();
+                });
             });
 
             describe('if isLoggedIn set to `true`', () => {
@@ -1201,6 +1221,47 @@ xdescribe('Checkout', () => {
                     // Assert
                     expect(loadCheckoutSpy).toHaveBeenCalled();
                 });
+
+                it('should not call `loadAddressFromLocalStorage`', async () => {
+                    // Arrange & Act
+                    const loadAddressFromLocalStorageSpy = jest.spyOn(VueCheckout.methods, 'loadAddressFromLocalStorage');
+
+                    shallowMount(VueCheckout, {
+                        store: createStore({ ...defaultCheckoutState, isLoggedIn: true }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    // Assert
+                    expect(loadAddressFromLocalStorageSpy).not.toHaveBeenCalled();
+                });
+            });
+        });
+
+        describe('loadAddressFromLocalStorage ::', () => {
+            it('should make a call to `addressService.getAddressFromLocalStorage`', () => {
+                // Arrange
+                const addressServiceSpy = jest.spyOn(addressService, 'getAddressFromLocalStorage');
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            isLoading: true
+                        };
+                    }
+                });
+
+                // Act
+                wrapper.vm.loadAddressFromLocalStorage();
+
+                // Assert
+                expect(addressServiceSpy).toHaveBeenCalled();
             });
         });
 
@@ -1571,7 +1632,7 @@ xdescribe('Checkout', () => {
                     describe('AND the error is of type `PlaceOrderError`', () => {
                         it('should call `handleErrorState` with the place order error info', async () => {
                             // Arrange
-                            const error = new PlaceOrderError('PlaceOrderError exception!');
+                            const error = new PlaceOrderError('PlaceOrderError exception!', 'Error code', $logger);
 
                             jest.spyOn(wrapper.vm, 'submitOrder').mockImplementation(() => {
                                 throw error;
@@ -2018,6 +2079,7 @@ xdescribe('Checkout', () => {
 
             describe('when `getCheckout` request fails', () => {
                 let wrapper;
+                let handleErrorStateSpy;
 
                 const error = {
                     response: {
@@ -2027,62 +2089,55 @@ xdescribe('Checkout', () => {
 
                 beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+                    jest.fn(async () => Promise.reject(error));
 
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject(error)) }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger,
-                            $cookies
-                        }
+                    handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
+                });
+
+                describe('AND the error code is `403', () => {
+                    it('should call `handleErrorState` with `GetCheckoutAccessForbiddenError`', async () => {
+                        // Arrange
+                        wrapper = mount(VueCheckout, {
+                            // eslint-disable-next-line prefer-promise-reject-errors
+                            store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject({ response: { status: 403 } })) }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act
+                        await wrapper.vm.loadCheckout();
+
+                        // Assert
+                        expect(handleErrorStateSpy).toHaveBeenCalledWith(expect.any(GetCheckoutAccessForbiddenError));
                     });
                 });
 
-                it('should emit failure event', async () => {
-                    // Act
-                    await wrapper.vm.loadCheckout();
+                describe('AND the error code is not `403', () => {
+                    it('should call `handleErrorState` with `GetCheckoutError`', async () => {
+                        // Arrange
+                        wrapper = mount(VueCheckout, {
+                            // eslint-disable-next-line prefer-promise-reject-errors
+                            store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject({ response: { status: 400 } })) }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
 
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
-                    expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
-                });
+                        // Act
+                        await wrapper.vm.loadCheckout();
 
-                it('should call `logError`', async () => {
-                    // Act
-                    await wrapper.vm.loadCheckout();
-
-                    // Assert
-                    expect($logger.logError).toHaveBeenCalled();
-                });
-
-                it('should set `errorFormType` to "pageLoad" if error status code is not 403', async () => {
-                    // Act
-                    await wrapper.vm.loadCheckout();
-
-                    // Assert
-                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.default);
-                });
-
-                it('should set `errorFormType` to "accessForbiddenError" if error status code is 403', async () => {
-                    // Assert
-                    wrapper = mount(VueCheckout, {
-                        // eslint-disable-next-line prefer-promise-reject-errors
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject({ response: { status: 403 } })) }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger,
-                            $cookies
-                        }
+                        // Assert
+                        expect(handleErrorStateSpy).toHaveBeenCalledWith(expect.any(GetCheckoutError));
                     });
-                    // Act
-                    await wrapper.vm.loadCheckout();
-
-                    // Assert
-                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.accessForbidden);
                 });
             });
 
@@ -2512,7 +2567,7 @@ xdescribe('Checkout', () => {
                 expect(wrapper.emitted(eventToEmit)[0][0]).toEqual({ ...eventData, error });
             });
 
-            it('should call `logInvoker` to log the error, passing the `eventData` and `error`', () => {
+            it('should call `logInvoker` to log the error, passing the `eventData`, `error` and `logError` as a method by default', () => {
                 // Act
                 wrapper.vm.handleErrorState(error);
 
@@ -2521,6 +2576,22 @@ xdescribe('Checkout', () => {
                     message: 'Consumer Checkout Failure',
                     data: eventData,
                     logMethod: $logger.logError,
+                    error
+                });
+            });
+
+            it('should call `logInvoker` to log the warning, passing the `eventData`, `error` and the logging method specified by the error', () => {
+                // Arrange
+                error = new UpdateCheckoutAccessForbiddenError('An error', $logger);
+
+                // Act
+                wrapper.vm.handleErrorState(error);
+
+                // Assert
+                expect(logInvokerSpy).toHaveBeenCalledWith({
+                    message: 'Checkout Update Failure: Access Forbidden',
+                    data: eventData,
+                    logMethod: $logger.logWarn,
                     error
                 });
             });
@@ -3337,40 +3408,92 @@ xdescribe('Checkout', () => {
             });
 
             describe('when `placeOrder` is unsuccessful', () => {
-                it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
-                    // Arrange
-                    const errorMessage = 'An error';
-                    const error = {
-                        message: errorMessage,
-                        response: {
-                            data: {
-                                errorCode: errorMessage
+                describe('AND `errorCode` is not `DuplicateOrder`', () => {
+                    it('should throw a `PlaceOrderError` error with `logMethod` as `logError`', async () => {
+                        // Arrange
+                        const errorMessage = 'An error - Something happened on the server';
+                        const errorCode = 500;
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    errorCode
+                                }
                             }
-                        }
-                    };
+                        };
 
-                    wrapper = shallowMount(VueCheckout, {
-                        store: createStore(
-                            defaultCheckoutState,
-                            {
-                                ...defaultCheckoutActions,
-                                placeOrder: jest.fn(async () => Promise.reject(error))
+                        wrapper = shallowMount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    placeOrder: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
                             }
-                        ),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger,
-                            $cookies
+                        });
+
+                        try {
+                            // Act
+                            await wrapper.vm.submitOrder();
+                        } catch (e) {
+                            // Assert
+                            expect(e).toBeInstanceOf(PlaceOrderError);
+                            expect(e.message).toEqual(errorMessage);
+                            expect(e.errorCode).toEqual(errorCode);
+                            expect(e.logMethod).toEqual($logger.logError);
                         }
                     });
+                });
 
-                    // Act & Assert
-                    const result = await expect(wrapper.vm.submitOrder());
+                describe('AND `errorCode` is `DuplicateOrder`', () => {
+                    it('should throw a `PlaceOrderError` error with `logMethod` as `logWarn`', async () => {
+                        // Arrange
+                        const errorMessage = 'An error - Your order is a duplicate';
+                        const errorCode = 'DuplicateOrder';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    errorCode
+                                }
+                            }
+                        };
 
-                    result.rejects.toThrow(PlaceOrderError);
-                    result.rejects.toThrow(errorMessage);
+                        wrapper = shallowMount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    placeOrder: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        try {
+                            // Act
+                            await wrapper.vm.submitOrder();
+                        } catch (e) {
+                            // Assert
+                            expect(e).toBeInstanceOf(PlaceOrderError);
+                            expect(e.message).toEqual(errorMessage);
+                            expect(e.errorCode).toEqual(errorCode);
+                            expect(e.logMethod).toEqual($logger.logWarn);
+                        }
+                    });
                 });
             });
         });
