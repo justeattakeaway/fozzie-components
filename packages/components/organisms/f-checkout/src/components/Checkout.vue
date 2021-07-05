@@ -466,16 +466,17 @@ export default {
             if ((!newTokenVal && oldTokenVal) || (!oldTokenVal && newTokenVal)) {
                 await this.initialise();
             }
-        },
-
-        async message () {
-            if (this.message && this.message.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
-                await this.resetFulfilmentTimes({
-                    url: this.checkoutAvailableFulfilmentUrl,
-                    timeout: this.checkoutTimeout
-                });
-            }
         }
+
+        // async message () {
+        //     debugger;
+        //     if (this.message && this.message.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+        //         await this.resetFulfilmentTimes({
+        //             url: this.checkoutAvailableFulfilmentUrl,
+        //             timeout: this.checkoutTimeout
+        //         });
+        //     }
+        // }
     },
 
     async mounted () {
@@ -609,6 +610,10 @@ export default {
                     data,
                     timeout: this.checkoutTimeout
                 });
+
+                if (this.message && this.message.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+                    await this.loadAvailableFulfilment();
+                }
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
