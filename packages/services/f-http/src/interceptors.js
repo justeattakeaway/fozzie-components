@@ -23,9 +23,7 @@ const captureResponseStatistics = ({ interceptors }, statisticsClient) => {
             'time-taken': res.responseTimeMs
         };
 
-        statisticsClient.publish({
-            payload
-        });
+        statisticsClient.publish(payload);
 
         return res;
     });
