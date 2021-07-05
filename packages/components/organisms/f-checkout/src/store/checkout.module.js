@@ -21,7 +21,8 @@ import {
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
     UPDATE_USER_NOTE,
-    UPDATE_ADDRESS
+    UPDATE_ADDRESS,
+    UPDATE_PHONE_NUMBER
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -38,37 +39,6 @@ const getIssueByCode = code => {
     }
 
     return null;
-};
-
-/**
-* @function enrichPhoneNumber
-* If phone number is missing both from chckout api and from
-* `state.AuthToken`, then retrieve the phone number from consumer api
-* This can happen for newly created guest
-* @param  {object} data  - Api response object.
-* @param  {object} state - The current `checkout` state.
-* @param  {object} url - Account api url
-* @param  {object} timeout - Api timeout
-*/
-const enrichPhoneNumber = async (customer, state, url, timeout) => {
-    if (!customer || customer.phoneNumber) {
-        return;
-    }
-
-    const authHeader = state.authToken && `Bearer ${state.authToken}`;
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-            ...(state.authToken && {
-                Authorization: authHeader
-            })
-        },
-        timeout
-    };
-
-    const { data } = await axios.get(url, config);
-
-    customer.phoneNumber = data.PhoneNumber;
 };
 
 /**
@@ -159,7 +129,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state, dispatch }, { url, getCustomerUrl, timeout }) => {
+        getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             // TODO: deal with exceptions.
@@ -176,9 +146,6 @@ export default {
             const { data } = await axios.get(url, config);
 
             resolveCustomerDetails(data, state);
-
-            // This call can be removed when newly created guest JWT token has phone number claim populated
-            await enrichPhoneNumber(data.customer, state, getCustomerUrl, timeout);
 
             commit(UPDATE_STATE, data);
             commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
@@ -333,6 +300,37 @@ export default {
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+        },
+
+        /**
+         * Gets phone number from customer record from backend and updates state
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCustomer: async ({ commit, state, dispatch }, {
+            url,
+            timeout
+        }) => {
+            if (!state.customer || state.customer.phoneNumber) {
+                return;
+            }
+
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(state.authToken && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            commit(UPDATE_PHONE_NUMBER, data.PhoneNumber);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
@@ -622,6 +620,10 @@ export default {
 
             state.address.locality = address.locality;
             state.address.postcode = address.postalCode;
+        },
+
+        [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
+            state.customer.mobileNumber = phoneNumber;
         }
     }
 };

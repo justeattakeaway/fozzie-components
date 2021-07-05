@@ -29,7 +29,8 @@ import {
     UPDATE_USER_NOTE,
     UPDATE_GEO_LOCATION,
     UPDATE_MESSAGE,
-    UPDATE_ADDRESS
+    UPDATE_ADDRESS,
+    UPDATE_PHONE_NUMBER
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -40,6 +41,7 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
+    getCustomer,
     getGeoLocation,
     placeOrder,
     setAuthToken,
@@ -329,6 +331,19 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_PHONE_NUMBER} ::`, () => {
+            it('should update state with received values', () => {
+                // Arrange
+                const phoneNumber = '+447111111112';
+
+                // Act
+                mutations[UPDATE_PHONE_NUMBER](state, phoneNumber);
+
+                // Assert
+                expect(state.customer.mobileNumber).toEqual(phoneNumber);
+            });
+        });
+
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
@@ -380,13 +395,7 @@ describe('CheckoutModule', () => {
                 // Use a new copy per test so any mutations do not affect subsequent tests
                 checkoutDeliveryCopy = Object.assign(checkoutDelivery);
 
-                axios.get = jest.fn(url => {
-                    if (url === 'http://localhost/customer') {
-                        return Promise.resolve({ data: customer });
-                    }
-
-                    return Promise.resolve({ data: checkoutDeliveryCopy });
-                });
+                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDeliveryCopy }));
             });
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
@@ -502,16 +511,16 @@ describe('CheckoutModule', () => {
                     expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
                 });
 
-                it('should assign the phone number from getCustomerUrl endpoint to the `customer.phoneNumber` if both checkout and the AuthToken phone numbers are missing', async () => {
+                it('should assign nothing to the `customer.phoneNumber` if both the AuthToken phone numbers are missing', async () => {
                     // Arrange
                     state.authToken = mockAuthTokenNoNumbers;
                     config.headers.Authorization = `Bearer ${state.authToken}`;
-                    const expectedPhoneNumber = '07111111111'; // get-customer.json phone number
+
                     // Act
                     await getCheckout({ commit, state, dispatch }, payload);
 
                     // Assert
-                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBeUndefined();
                 });
             });
 
@@ -617,6 +626,37 @@ describe('CheckoutModule', () => {
                     locality: expectedAddress.City,
                     postcode: expectedAddress.ZipCode
                 });
+            });
+
+            it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
+                // Act
+                await getAddress({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+            });
+        });
+
+        describe('getCustomer ::', () => {
+            it(`should get the customer details from the backend and call ${UPDATE_PHONE_NUMBER} mutation.`, async () => {
+                // Arrange
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${state.authToken}`
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.get = jest.fn(() => Promise.resolve({ data: customer }));
+                const expectedPhoneNumber = customer.PhoneNumber;
+
+                // Act
+                await getCustomer({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                expect(commit).toHaveBeenCalledWith(UPDATE_PHONE_NUMBER, expectedPhoneNumber);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
