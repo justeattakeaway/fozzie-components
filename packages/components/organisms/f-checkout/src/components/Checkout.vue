@@ -493,7 +493,6 @@ export default {
             'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
-            'resetFulfilmentTimes',
             'getUserNote',
             'saveUserNote'
         ]),
@@ -560,7 +559,7 @@ export default {
          * Display and track issues when updating checkout even though the request was successful.
          * (e.g. request is correct, but the restaurant is now offline).
          */
-        async handleNonFulfillableCheckout () {
+        handleNonFulfillableCheckout () {
             if (this.errors) {
                 this.trackFormErrors();
 

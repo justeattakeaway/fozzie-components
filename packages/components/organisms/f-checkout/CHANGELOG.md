@@ -3,12 +3,32 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.151.0
+------------------------------
+*July 5, 2021*
+
+### Fixed
+- Get new `availableFulfilment` times when no available fulfilment times are available.
+
+### Changed
+- `f-form-field` version to `1.16.1`.
+
+
+v0.150.0
+------------------------------
+*June 30, 2021*
+
+### Fixed
+- Address not populating guest checkout form.
+
+
 v0.149.0
 ------------------------------
-*June 29, 2021*
+*June 30, 2021*
 
-### Added
-- Call to `loadAvailableFulfilment` if fulfilment time is unavailable.
+### Changed
+- Logging levels for different errors.
+- Using f-card's 1.3.0 version.
 
 
 v0.148.0
