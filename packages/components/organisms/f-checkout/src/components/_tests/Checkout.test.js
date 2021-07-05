@@ -100,7 +100,7 @@ const alert = {
     content: alertCode
 };
 
-xdescribe('Checkout', () => {
+describe('Checkout', () => {
     const updateCheckoutUrl = 'http://localhost/updatecheckout';
     const getCheckoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
@@ -1557,7 +1557,7 @@ xdescribe('Checkout', () => {
                             }
                         });
 
-                        const handleNonFulfillableCheckoutSpy = jest.spyOn(wrapper.vm, 'handleNonFulfillableCheckout').mockImplementation();
+                        const handleNonFulfillableCheckoutSpy = jest.spyOn(wrapper.vm, 'handleNonFulfillableCheckout');
 
                         // Act
                         await wrapper.vm.submitCheckout();
@@ -1768,35 +1768,6 @@ xdescribe('Checkout', () => {
             });
 
             describe('when there are errors', () => {
-                describe('when fulfilment time is unavailable', () => {
-                    it('should make a call to `loadAvailableFulfilment`', () => {
-                        // Arrange
-                        const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
-
-                        wrapper = mount(VueCheckout, {
-                            store: createStore({
-                                ...defaultCheckoutState,
-                                errors: [{
-                                    code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-                                }]
-                            }),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $logger,
-                                $cookies
-                            }
-                        });
-
-                        // Act
-                        wrapper.vm.handleNonFulfillableCheckout();
-
-                        // Assert
-                        expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
-                    });
-                });
-
                 it('should make a call to `logInvoker` with a `message` and `eventData`', () => {
                     // Arrange
                     const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
@@ -1863,6 +1834,51 @@ xdescribe('Checkout', () => {
 
                 // Assert
                 expect(updateCheckoutSpy).toHaveBeenCalled();
+            });
+
+            describe(`when 'updateCheckout' returns ${ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE}`, () => {
+                let loadAvailableFulfilmentSpy;
+
+                beforeEach(() => {
+                    // Arrange
+                    loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message: {
+                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
+                    });
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should make a call to `loadAvailableFulfilment`', async () => {
+                    // Act
+                    await wrapper.vm.handleUpdateCheckout();
+
+                    // Assert
+                    expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+                });
+
+                it('should increase `selectorKey` by 1', async () => {
+                    // Act
+                    await wrapper.vm.handleUpdateCheckout();
+
+                    // Assert
+                    expect(wrapper.vm.selectorKey).toEqual(1);
+                });
             });
 
             describe('when `updateCheckout` request succeeds', () => {

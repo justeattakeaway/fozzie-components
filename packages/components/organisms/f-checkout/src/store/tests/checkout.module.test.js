@@ -145,7 +145,7 @@ const defaultState = {
 
 let state = CheckoutModule.state();
 
-xdescribe('CheckoutModule', () => {
+describe('CheckoutModule', () => {
     it('should create default state when initialised.', () => {
         // Assert
         expect(state).toEqual(defaultState);
