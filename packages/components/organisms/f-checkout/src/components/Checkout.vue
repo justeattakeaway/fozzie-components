@@ -94,7 +94,7 @@
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block" />
 
-                    <form-selector :key="selectorKey" />
+                    <form-selector :key="availableFulfilmentTimesKey" />
 
                     <form-field
                         :label-text="$t(`userNote.${serviceType}.title`)"
@@ -309,7 +309,7 @@ export default {
             isLoading: false,
             errorFormType: null,
             isFormSubmitting: false,
-            selectorKey: 0
+            availableFulfilmentTimesKey: 0
         };
     },
 
@@ -615,10 +615,7 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                if (this.message && this.message.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
-                    await this.loadAvailableFulfilment();
-                    this.selectorKey++;
-                }
+                await this.reloadAvailableFulfilmentTimesIfOutdated();
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
@@ -970,6 +967,17 @@ export default {
             return referralCookie && referralCookie.menuReferralState
                 ? 'ReferredByWeb'
                 : 'None';
+        },
+
+        /**
+         * Calls `loadAvailableFulfilment` times if we have no available fulfimnet times avaiable.
+         * Updates the key for the `FromDropdown` component to force the component re-render.
+         */
+        async reloadAvailableFulfilmentTimesIfOutdated () {
+            if (this.message?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+                await this.loadAvailableFulfilment();
+                this.availableFulfilmentTimesKey++;
+            }
         }
     },
 

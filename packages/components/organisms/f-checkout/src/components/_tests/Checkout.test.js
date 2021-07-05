@@ -1836,12 +1836,12 @@ describe('Checkout', () => {
                 expect(updateCheckoutSpy).toHaveBeenCalled();
             });
 
-            describe(`when 'updateCheckout' returns ${ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE}`, () => {
-                let loadAvailableFulfilmentSpy;
+            describe('when `updateCheckout` returns `ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE`', () => {
+                let reloadAvailableFulfilmentTimesIfOutdatedSpy;
 
                 beforeEach(() => {
                     // Arrange
-                    loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+                    reloadAvailableFulfilmentTimesIfOutdatedSpy = jest.spyOn(VueCheckout.methods, 'reloadAvailableFulfilmentTimesIfOutdated');
 
                     wrapper = mount(VueCheckout, {
                         store: createStore({
@@ -1864,20 +1864,12 @@ describe('Checkout', () => {
                     jest.clearAllMocks();
                 });
 
-                it('should make a call to `loadAvailableFulfilment`', async () => {
+                it('should make a call to `reloadAvailableFulfilmentTimesIfOutdated`', async () => {
                     // Act
                     await wrapper.vm.handleUpdateCheckout();
 
                     // Assert
-                    expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
-                });
-
-                it('should increase `selectorKey` by 1', async () => {
-                    // Act
-                    await wrapper.vm.handleUpdateCheckout();
-
-                    // Assert
-                    expect(wrapper.vm.selectorKey).toEqual(1);
+                    expect(reloadAvailableFulfilmentTimesIfOutdatedSpy).toHaveBeenCalled();
                 });
             });
 
@@ -3637,6 +3629,52 @@ describe('Checkout', () => {
                     // Assert
                     expect(result).toBe('None');
                 });
+            });
+        });
+
+        describe('reloadAvailableFulfilmentTimesIfOutdated ::', () => {
+            let wrapper;
+            let loadAvailableFulfilmentSpy;
+
+            beforeEach(() => {
+                // Arrange
+                loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+
+                wrapper = mount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: {
+                            code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    }
+                });
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should make a call to `loadAvailableFulfilment`', async () => {
+                // Act
+                await wrapper.vm.reloadAvailableFulfilmentTimesIfOutdated();
+
+                // Assert
+                expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+            });
+
+            it('should increase `availableFulfilmentTimesKey` by 1', async () => {
+                // Act
+                await wrapper.vm.reloadAvailableFulfilmentTimesIfOutdated();
+
+                // Assert
+                expect(wrapper.vm.availableFulfilmentTimesKey).toEqual(1);
             });
         });
     });
