@@ -76,7 +76,7 @@ export default (options = {}, statsClient = null) => {
 
     if (statsClient) {
         // Only add interceptors when capturing statistics
-        interceptors.addTimingInterceptor(_axiosInstance, _configuration, statsClient);
+        interceptors.captureResponseStatistics(_axiosInstance, statsClient);
     }
 
     const requestDispatchMethods = requestDispatcher(_axiosInstance, _configuration);
