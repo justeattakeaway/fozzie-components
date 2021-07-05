@@ -973,7 +973,7 @@ export default {
          * Calls `loadAvailableFulfilment` times if we have no available fulfilment times available.
          * Updates the key for the `FromDropdown` component to force the component re-render.
          *
-         * When we recieve the new `availableFulfilment` times, the dropdown doesn't automatically set the selected time
+         * When we receive the new `availableFulfilment` times, the dropdown doesn't automatically set the selected time
          * to the first available fulfilment time. It leaves the selected value blank.
          * Forcing the component to re-render ensures that the correct time is selected and displayed.
          */
