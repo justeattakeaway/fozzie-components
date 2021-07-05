@@ -94,7 +94,7 @@
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block" />
 
-                    <form-selector />
+                    <form-selector :key="selectorKey" />
 
                     <form-field
                         :label-text="$t(`userNote.${serviceType}.title`)"
@@ -307,7 +307,8 @@ export default {
             shouldShowSpinner: false,
             isLoading: false,
             errorFormType: null,
-            isFormSubmitting: false
+            isFormSubmitting: false,
+            selectorKey: 0
         };
     },
 
@@ -467,16 +468,6 @@ export default {
                 await this.initialise();
             }
         }
-
-        // async message () {
-        //     debugger;
-        //     if (this.message && this.message.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
-        //         await this.resetFulfilmentTimes({
-        //             url: this.checkoutAvailableFulfilmentUrl,
-        //             timeout: this.checkoutTimeout
-        //         });
-        //     }
-        // }
     },
 
     async mounted () {
@@ -613,6 +604,7 @@ export default {
 
                 if (this.message && this.message.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
                     await this.loadAvailableFulfilment();
+                    this.selectorKey++;
                 }
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);

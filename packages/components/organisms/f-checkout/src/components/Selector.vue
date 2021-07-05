@@ -57,7 +57,6 @@ export default {
         * Returns an array of formatted dates to display as options in a dropdown
         */
         fulfilmentTimes () {
-            console.log('fulfilment Times') // eslint-disable-line
             const times = [];
             this.availableFulfilment.times.forEach(time => {
                 const formattedTime = this.$d(new Date(time.from), 'short');
@@ -95,7 +94,6 @@ export default {
 
     mounted () {
         this.initFulfilmentTime();
-        console.log(this.selectedAvailableFulfilmentTime);
     },
 
     methods: {
@@ -133,7 +131,6 @@ export default {
          * Note; we always need to pre-select a time; if available, so the user can always proceeds with a selected time.
          */
         initFulfilmentTime () {
-            console.log('init');
             const times = this.fulfilmentTimes || [];
             const preSelectedTime = (times.some(i => i.value === this.time.from) && this.time.from);
 
@@ -143,17 +140,16 @@ export default {
 
             selectedTime = selectedTime === 0 ? '' : selectedTime;
 
-            // this.updateFulfilmentTime({
-            //     from: selectedTime,
-            //     to: selectedTime
-            // });
+            this.updateFulfilmentTime({
+                from: selectedTime,
+                to: selectedTime
+            });
 
-            // this.selectedAvailableFulfilmentTime = selectedTime;
-            this.selectionChanged(selectedTime);
+            this.selectedAvailableFulfilmentTime = selectedTime;
 
-            // if (times.length) {
-            //     this.setAsapFlag(selectedTime);
-            // }
+            if (times.length) {
+                this.setAsapFlag(selectedTime);
+            }
         },
 
         /**
@@ -163,7 +159,6 @@ export default {
          * @param selectedFulfilmentTime
          */
         setAsapFlag (selectedFulfilmentTime) {
-            console.log('setAsap');
             const isAsapSelected = this.availableFulfilment.isAsapAvailable
                 && this.availableFulfilment.times[0].from === selectedFulfilmentTime;
 

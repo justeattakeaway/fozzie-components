@@ -25,7 +25,7 @@
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-form-field ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
