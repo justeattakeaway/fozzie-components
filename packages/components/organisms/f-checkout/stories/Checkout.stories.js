@@ -34,6 +34,7 @@ const updateCheckoutUrl = '/update-checkout.json';
 const updateCheckoutRestaurantNotTakingOrdersUrl = '/update-checkout-restaurant-not-taking-orders.json';
 const updateCheckoutAdditionalItemsRequiredUrl = '/update-checkout-additional-items-required.json';
 const updateCheckoutAccessForbiddenUrl = '/update-checkout-403.json';
+const updateCheckoutUnavailableTimeUrl = '/update-checkout-time-unavailable.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
@@ -60,6 +61,7 @@ CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutRestaurantNotTakingOrdersUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutAdditionalItemsRequiredUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutAccessForbiddenUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutUnavailableTimeUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
@@ -80,13 +82,16 @@ const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
 const additionalItemsRequiredIssue = 'additional-items-required';
+const timeNotAvailable = 'Selected time no longer available';
+const timeNotAvailableIssue = 'time-unavailable';
 
 const patchCheckoutErrorOptions = {
     None: null,
     [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
     [additionalItemsRequired]: additionalItemsRequiredIssue,
     [checkoutServerError]: SERVER,
-    [updateCheckoutAccessForbidden]: accessForbiddenErrorCode
+    [updateCheckoutAccessForbidden]: accessForbiddenErrorCode,
+    [timeNotAvailable]: timeNotAvailableIssue
 };
 
 const getCheckoutErrorOptions = {
