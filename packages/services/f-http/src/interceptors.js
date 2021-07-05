@@ -1,16 +1,10 @@
-const outputToConsole = response => {
-    const outputString = `${response.config.method.toUpperCase()}|${response.config.url}|${response.status}|${response.responseTimeMs}ms`;
-
-    console.log(outputString);	// eslint-disable-line
-};
-
 /**
  * Attach interceptors to the axios client to record response time from an API
  *
  * @param {AxiosInstance} axiosInstance
- * @param {Boolean} `isDevelopment` option flag - if provided and is true then the api stats are outputted to the console
+ * @param {object} statsClient An initialised instance of f-statistics
  */
-const addTimingInterceptor = ({ interceptors }, isDevelopment) => {
+const captureResponseStatistics = ({ interceptors }, statisticsClient) => {
     interceptors.request.use(req => {
         req.meta = req.meta || {};
         req.meta.requestStartedAt = new Date().getTime();
@@ -22,16 +16,21 @@ const addTimingInterceptor = ({ interceptors }, isDevelopment) => {
         const timeTakenMs = new Date().getTime() - res.config.meta.requestStartedAt;
         res.responseTimeMs = timeTakenMs;
 
-        if (isDevelopment) {
-            outputToConsole(res);
-        } else {
-            // TODO : Output to stats engine
-        }
+        const payload = {
+            method: res.config.method.toUpperCase(),
+            url: res.config.url,
+            status: res.status,
+            responseTimeMs: res.responseTimeMs
+        };
+
+        statisticsClient.publish({
+            payload
+        });
 
         return res;
     });
 };
 
 export default {
-    addTimingInterceptor
+    captureResponseStatistics
 };

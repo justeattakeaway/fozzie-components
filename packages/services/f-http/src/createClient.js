@@ -59,7 +59,7 @@ const deleteResource = async (resource, headers = {}) => _sendRequest(httpVerbs.
  * @param {object} options - Any options to override - refer to documentation for options
  * @return {object} - Returns an object with restful request methods
  */
-export default (options = {}) => {
+export default (options = {}, statsClient = null) => {
     // Merge default configuration with overrides
     _configuration = {
         ...defaultOptions,
@@ -74,7 +74,10 @@ export default (options = {}) => {
         }
     });
 
-    interceptors.addTimingInterceptor(_axiosInstance, _configuration.isDevelopment);
+    if (statsClient) {
+        // Only add interceptors when capturing statistics
+        interceptors.addTimingInterceptor(_axiosInstance, _configuration, statsClient);
+    }
 
     const requestDispatchMethods = requestDispatcher(_axiosInstance, _configuration);
     _sendRequest = requestDispatchMethods.sendRequest;
