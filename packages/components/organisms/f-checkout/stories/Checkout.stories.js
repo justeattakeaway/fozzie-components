@@ -131,7 +131,8 @@ export const CheckoutComponent = () => ({
             getAddressUrl,
             loginUrl: '/login',
             paymentPageUrlPrefix,
-            getGeoLocationUrl
+            getGeoLocationUrl,
+            getCustomerUrl
         };
     },
     props: {
