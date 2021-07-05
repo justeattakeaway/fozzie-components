@@ -5,6 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import customer from '../../demo/get-customer.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import {
@@ -355,6 +356,7 @@ describe('CheckoutModule', () => {
             state = defaultState;
             payload = {
                 url: 'http://localhost/account/checkout',
+                getCustomerUrl: 'http://localhost/customer',
                 tenant: 'uk',
                 language: 'en-GB',
                 timeout: 10000,
@@ -378,7 +380,13 @@ describe('CheckoutModule', () => {
                 // Use a new copy per test so any mutations do not affect subsequent tests
                 checkoutDeliveryCopy = Object.assign(checkoutDelivery);
 
-                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDeliveryCopy }));
+                axios.get = jest.fn(url => {
+                    if (url === 'http://localhost/customer') {
+                        return Promise.resolve({ data: customer });
+                    }
+
+                    return Promise.resolve({ data: checkoutDeliveryCopy });
+                });
             });
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
@@ -494,16 +502,16 @@ describe('CheckoutModule', () => {
                     expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
                 });
 
-                it('should assign nothing to the `customer.phoneNumber` if both the AuthToken phone numbers are missing', async () => {
+                it('should assign the phone number from getCustomerUrl endpoint to the `customer.phoneNumber` if both checkout and the AuthToken phone numbers are missing', async () => {
                     // Arrange
                     state.authToken = mockAuthTokenNoNumbers;
                     config.headers.Authorization = `Bearer ${state.authToken}`;
-
+                    const expectedPhoneNumber = '07111111111'; // get-customer.json phone number
                     // Act
                     await getCheckout({ commit, state, dispatch }, payload);
 
                     // Assert
-                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBeUndefined();
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
                 });
             });
 
