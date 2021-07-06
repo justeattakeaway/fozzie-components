@@ -9,7 +9,8 @@ v0.155.0
 *July 6, 2021*
 
 ### Changed
-- Email was validating on every keypress but now validating onBlur.
+- Email, Postcode and Mobile was validating on every keypress but now validating onBlur.
+- Added a max length of 50 on email.
 
 
 v0.150.0
