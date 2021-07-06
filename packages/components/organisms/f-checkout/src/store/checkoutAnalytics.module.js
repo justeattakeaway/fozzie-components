@@ -1,6 +1,7 @@
 import {
     mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
 } from '../services/mapper';
+import experimentService from '../services/experimentService';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 import {
@@ -125,6 +126,11 @@ export default {
                     dispatch('trackFormInteraction', { action: 'error', error: mappedError });
                 }
             });
+        },
+
+        trackLowValueOrderExperiment: () => {
+            const event = experimentService.getLowValueOrderExperimentTracking();
+            window.dataLayer.push(event);
         }
     },
 

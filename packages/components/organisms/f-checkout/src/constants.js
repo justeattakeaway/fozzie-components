@@ -37,3 +37,5 @@ export const CHEKOUT_ERROR_FORM_TYPE = {
     default: 'pageLoad',
     accessForbidden: 'accessForbiddenError'
 };
+
+export const HEADER_LOW_VALUE_ORDER_EXPERIMENT = 'x-je-exp-low_value_order_threshold_web';
