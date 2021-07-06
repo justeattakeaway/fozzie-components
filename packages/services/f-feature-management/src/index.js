@@ -1,4 +1,4 @@
-function logValueRequest (func, key, value) {
+const logValueRequest = (func, key, value) => {
     console.log(`${func.name}: ${key} => ${value}`); // es-lint-disable
 }
 
