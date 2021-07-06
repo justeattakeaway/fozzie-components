@@ -304,7 +304,7 @@ export default {
 
         experiments: {
             type: Object,
-            required: true
+            default: () => ({})
         }
     },
 

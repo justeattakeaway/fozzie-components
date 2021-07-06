@@ -1,6 +1,5 @@
-// Can we have this in a public repo?
 function getLowValueOrderExperimentTracking (variant) {
-    if (variant && variant !== 'reserve') {
+    if (variant) {
         return {
             event: 'trackExperimentV2',
             custom: {
