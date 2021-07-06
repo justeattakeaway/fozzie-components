@@ -63,6 +63,17 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'desktop');
     });
+
+    it('should display invalid email address', () => {
+        // Arrange
+        checkout.clearCheckoutForm('emailAddress');
+
+        // Act
+        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com', true);
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Guest - invalid email address Error State', 'desktop');
+    });
 });
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
@@ -85,7 +96,6 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
         browser.percyScreenshot('f-checkout - Collection - Guest - Pre-Order Warning', 'desktop');
     });
 });
-
 
 describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
@@ -154,6 +164,17 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'desktop');
+    });
+
+    it('should display invalid email address', () => {
+        // Arrange
+        checkout.clearCheckoutForm('emailAddress');
+
+        // Act
+        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com', true);
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Guest - invalid email address Error State', 'desktop');
     });
 });
 

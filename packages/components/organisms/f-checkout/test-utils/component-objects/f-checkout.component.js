@@ -137,6 +137,10 @@ module.exports = class Checkout extends Page {
         return this.fields.addressPostcode.typeError.isDisplayed();
     }
 
+    isEmailErrorDisplayed () {
+        return this.fields.emailAddress.error.isDisplayed();
+    }
+
     isTableIdentifierMaxLengthErrorDisplayed () {
         return this.fields.tableIdentifier.maxLengthError.isDisplayed();
     }
@@ -316,9 +320,13 @@ module.exports = class Checkout extends Page {
      *
      * @param {String} Field name
      * @param {String} Value to set
+     * @param {Boolean} Whether to tab out of the field or not
      */
-    setFieldValue (fieldName, value) {
+    setFieldValue (fieldName, value, tabOut = false) {
         this.fields[fieldName].input.setValue(value);
+        if (tabOut) {
+            this.fields[fieldName].input.setValue(['Tab']);
+        }
     }
 
     /**

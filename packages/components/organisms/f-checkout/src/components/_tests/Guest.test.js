@@ -78,13 +78,15 @@ describe('Guest', () => {
 
         describe('isEmailValid ::', () => {
             it.each([
-                [true, true, false],
-                [false, true, true],
-                [false, false, false],
-                [false, false, true]
-            ])('should return %s if email.email = %s and `isFieldEmpty` returns %s for email field', (expected, email, isEmpty) => {
+                [true, true, true, false],
+                [false, true, false, true],
+                [false, false, true, false],
+                [false, false, true, true]
+            ])('should return %s if email.email = %s and email.$dirty = %s and `isFieldEmpty` = %s for email field', (expected, email, dirty, isEmpty) => {
                 // Arrange
                 $v[VALIDATIONS.guest].email.email = email;
+                $v[VALIDATIONS.guest].email.$dirty = dirty;
+
                 isFieldEmptySpy.mockReturnValue(isEmpty);
 
                 // Act
