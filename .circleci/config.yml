@@ -6,6 +6,7 @@ version: 2.1
 
 orbs:
   slack: circleci/slack@4.1.3
+  browser-tools: circleci/browser-tools@1.1.0
 
 commands:
   set_deploy_key:
@@ -238,7 +239,7 @@ executors:
   node:
     docker:
       # specify the version you desire here
-      - image: cimg/node:14.17.2-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: cimg/node:14.17.2-browsers # For latest available images check – https://circleci.com/developer/images/image/cimg/node
 
 jobs:
 
@@ -250,6 +251,7 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - browser-tools/install-browser-tools
       - checkout # special step to check out source code to working directory
       - detect_root_change
       - echo_root
