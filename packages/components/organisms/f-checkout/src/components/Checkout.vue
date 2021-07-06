@@ -95,7 +95,7 @@
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block" />
 
-                    <form-selector />
+                    <form-selector :key="availableFulfilmentTimesKey" />
 
                     <form-field
                         :label-text="$t(`userNote.${serviceType}.title`)"
@@ -173,6 +173,7 @@ import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
+    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -299,6 +300,11 @@ export default {
         getGeoLocationUrl: {
             type: String,
             required: true
+        },
+
+        getCustomerUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -308,7 +314,8 @@ export default {
             shouldShowSpinner: false,
             isLoading: false,
             errorFormType: null,
-            isFormSubmitting: false
+            isFormSubmitting: false,
+            availableFulfilmentTimesKey: 0
         };
     },
 
@@ -389,6 +396,14 @@ export default {
             return this.isLoggedIn &&
                 this.isCheckoutMethodDelivery &&
                 (!this.address || !this.address.line1);
+        },
+
+        /* If phone number is missing both from chckout api and from
+        * `state.AuthToken`, then retrieve the phone number from customer api
+        * This can happen for newly created guest */
+        shouldLoadCustomer () {
+            return this.isLoggedIn &&
+                !this.customer.mobileNumber;
         },
 
         shouldShowCheckoutForm () {
@@ -482,6 +497,7 @@ export default {
             'createGuestUser',
             'getAvailableFulfilment',
             'getAddress',
+            'getCustomer',
             'getCustomerName',
             'getBasket',
             'getCheckout',
@@ -522,6 +538,11 @@ export default {
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
+            }
+
+            // This call can be removed when newly created guest JWT token has phone number claim populated
+            if (this.shouldLoadCustomer) {
+                await this.loadCustomer();
             }
 
             this.getUserNote();
@@ -613,6 +634,8 @@ export default {
                     data,
                     timeout: this.checkoutTimeout
                 });
+
+                await this.reloadAvailableFulfilmentTimesIfOutdated();
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
@@ -771,6 +794,30 @@ export default {
 
                 this.logInvoker({
                     message: 'Get checkout address failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logWarn,
+                    error
+                });
+            }
+        },
+
+        /**
+         * Load the customer while emitting events to communicate its success or failure.
+         *
+         */
+        async loadCustomer () {
+            try {
+                await this.getCustomer({
+                    url: this.getCustomerUrl,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutCustomerGetSuccess);
+            } catch (error) {
+                this.$emit(EventNames.CheckoutCustomerGetFailure, error);
+
+                this.logInvoker({
+                    message: 'Get checkout customer failure',
                     data: this.eventData,
                     logMethod: this.$logger.logWarn,
                     error
@@ -971,6 +1018,21 @@ export default {
             return referralCookie && referralCookie.menuReferralState
                 ? 'ReferredByWeb'
                 : 'None';
+        },
+
+        /**
+         * Calls `loadAvailableFulfilment` times if we have no available fulfilment times available.
+         * Updates the key for the `FromDropdown` component to force the component re-render.
+         *
+         * When we receive the new `availableFulfilment` times, the dropdown doesn't automatically set the selected time
+         * to the first available fulfilment time. It leaves the selected value blank.
+         * Forcing the component to re-render ensures that the correct time is selected and displayed.
+         */
+        async reloadAvailableFulfilmentTimesIfOutdated () {
+            if (this.message?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+                await this.loadAvailableFulfilment();
+                this.availableFulfilmentTimesKey++;
+            }
         }
     },
 

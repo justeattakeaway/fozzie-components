@@ -10,6 +10,7 @@ import {
     CHECKOUT_METHOD_COLLECTION,
     CHECKOUT_METHOD_DINEIN,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
+    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     CHEKOUT_ERROR_FORM_TYPE
 } from '../../constants';
@@ -110,6 +111,7 @@ describe('Checkout', () => {
     const placeOrderUrl = 'http://localhost/placeorder';
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
+    const getCustomerUrl = 'http://localhost/getcustomer';
     const spinnerTimeout = 100;
     const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
@@ -125,6 +127,7 @@ describe('Checkout', () => {
         placeOrderUrl,
         paymentPageUrlPrefix,
         getGeoLocationUrl,
+        getCustomerUrl,
         applicationName,
         spinnerTimeout,
         otacToAuthExchanger
@@ -877,6 +880,71 @@ describe('Checkout', () => {
 
                 // Act
                 const result = wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+        });
+
+        describe('shouldLoadCustomer ::', () => {
+            it('should return `true` if customer is logged in and does not have phone number set', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        customer: {
+                            mobileNumber: ''
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` if customer is not logged in', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: false
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if customer has phone number set', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        customer: {
+                            mobileNumber: '07111111111'
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
 
                 // Assert
                 expect(result).toBe(false);
@@ -1833,6 +1901,39 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(updateCheckoutSpy).toHaveBeenCalled();
+            });
+
+            describe('when `updateCheckout` returns `ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE`', () => {
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should make a call to `reloadAvailableFulfilmentTimesIfOutdated`', async () => {
+                    // Arrange
+                    const reloadAvailableFulfilmentTimesIfOutdatedSpy = jest.spyOn(VueCheckout.methods, 'reloadAvailableFulfilmentTimesIfOutdated');
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message: {
+                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.handleUpdateCheckout();
+
+                    // Assert
+                    expect(reloadAvailableFulfilmentTimesIfOutdatedSpy).toHaveBeenCalled();
+                });
             });
 
             describe('when `updateCheckout` request succeeds', () => {
@@ -3591,6 +3692,52 @@ describe('Checkout', () => {
                     // Assert
                     expect(result).toBe('None');
                 });
+            });
+        });
+
+        describe('reloadAvailableFulfilmentTimesIfOutdated ::', () => {
+            let wrapper;
+            let loadAvailableFulfilmentSpy;
+
+            beforeEach(() => {
+                // Arrange
+                loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+
+                wrapper = mount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: {
+                            code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    }
+                });
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should make a call to `loadAvailableFulfilment`', async () => {
+                // Act
+                await wrapper.vm.reloadAvailableFulfilmentTimesIfOutdated();
+
+                // Assert
+                expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+            });
+
+            it('should increase `availableFulfilmentTimesKey` by 1', async () => {
+                // Act
+                await wrapper.vm.reloadAvailableFulfilmentTimesIfOutdated();
+
+                // Assert
+                expect(wrapper.vm.availableFulfilmentTimesKey).toEqual(1);
             });
         });
     });
