@@ -28,7 +28,7 @@ describe('experimentService', () => {
             });
         });
         describe('when a variant is not present', () => {
-            it('should return empty address with postcode set, when postcode does not match', () => {
+            it('should return null', () => {
                 // Act
                 const actual = experimentService.getLowValueOrderExperimentTracking();
 
