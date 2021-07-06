@@ -301,10 +301,15 @@ export default {
             type: String,
             required: true
         },
-
+        
         experiments: {
             type: Object,
             default: () => ({})
+        },
+        
+        getCustomerUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -398,6 +403,14 @@ export default {
                 (!this.address || !this.address.line1);
         },
 
+        /* If phone number is missing both from chckout api and from
+        * `state.AuthToken`, then retrieve the phone number from customer api
+        * This can happen for newly created guest */
+        shouldLoadCustomer () {
+            return this.isLoggedIn &&
+                !this.customer.mobileNumber;
+        },
+
         shouldShowCheckoutForm () {
             return !this.isLoading && !this.errorFormType;
         },
@@ -489,6 +502,7 @@ export default {
             'createGuestUser',
             'getAvailableFulfilment',
             'getAddress',
+            'getCustomer',
             'getCustomerName',
             'getBasket',
             'getCheckout',
@@ -534,6 +548,11 @@ export default {
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
+            }
+
+            // This call can be removed when newly created guest JWT token has phone number claim populated
+            if (this.shouldLoadCustomer) {
+                await this.loadCustomer();
             }
 
             this.getUserNote();
@@ -785,6 +804,30 @@ export default {
 
                 this.logInvoker({
                     message: 'Get checkout address failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logWarn,
+                    error
+                });
+            }
+        },
+
+        /**
+         * Load the customer while emitting events to communicate its success or failure.
+         *
+         */
+        async loadCustomer () {
+            try {
+                await this.getCustomer({
+                    url: this.getCustomerUrl,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutCustomerGetSuccess);
+            } catch (error) {
+                this.$emit(EventNames.CheckoutCustomerGetFailure, error);
+
+                this.logInvoker({
+                    message: 'Get checkout customer failure',
                     data: this.eventData,
                     logMethod: this.$logger.logWarn,
                     error

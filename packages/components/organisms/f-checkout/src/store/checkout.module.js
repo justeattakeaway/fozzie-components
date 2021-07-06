@@ -21,7 +21,8 @@ import {
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
     UPDATE_USER_NOTE,
-    UPDATE_ADDRESS
+    UPDATE_ADDRESS,
+    UPDATE_PHONE_NUMBER
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -303,6 +304,37 @@ export default {
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+        },
+
+        /**
+         * Gets phone number from customer record from backend and updates state
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCustomer: async ({ commit, state, dispatch }, {
+            url,
+            timeout
+        }) => {
+            if (!state.customer || state.customer.mobileNumber) {
+                return;
+            }
+
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(state.authToken && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            commit(UPDATE_PHONE_NUMBER, data.PhoneNumber);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
@@ -592,6 +624,10 @@ export default {
 
             state.address.locality = address.locality;
             state.address.postcode = address.postalCode;
+        },
+
+        [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
+            state.customer.mobileNumber = phoneNumber;
         }
     }
 };
