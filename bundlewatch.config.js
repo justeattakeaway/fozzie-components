@@ -40,11 +40,5 @@ const files = packagesLocations.map(packageLocation => ({
 }));
 
 module.exports = {
-    files,
-    ci: {
-        trackBranches: [
-            'master',
-            'main'
-        ]
-    }
+    files
 };
