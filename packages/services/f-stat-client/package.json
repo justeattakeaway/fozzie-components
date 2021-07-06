@@ -3,6 +3,7 @@
   "description": "Javascript HTTP client for publishing stats to ElasticSearch",
   "version": "0.1.0",
   "main": "src/index.js",
+  "maxBundleSize": "100kB",
   "files": [
     "src"
   ],

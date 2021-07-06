@@ -94,7 +94,7 @@
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block" />
 
-                    <form-selector />
+                    <form-selector :key="availableFulfilmentTimesKey" />
 
                     <form-field
                         :label-text="$t(`userNote.${serviceType}.title`)"
@@ -172,6 +172,7 @@ import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
+    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -182,6 +183,7 @@ import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
+import addressService from '../services/addressService';
 
 const {
     CreateGuestUserError,
@@ -306,7 +308,8 @@ export default {
             shouldShowSpinner: false,
             isLoading: false,
             errorFormType: null,
-            isFormSubmitting: false
+            isFormSubmitting: false,
+            availableFulfilmentTimesKey: 0
         };
     },
 
@@ -491,6 +494,7 @@ export default {
             'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
+            'updateAddress',
             'getUserNote',
             'saveUserNote'
         ]),
@@ -512,7 +516,7 @@ export default {
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.loadAvailableFulfilment()];
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
             this.resetLoadingState();
@@ -522,6 +526,18 @@ export default {
             }
 
             this.getUserNote();
+        },
+
+        /**
+         * Update address lines if localStorage is populated.
+         *
+         * */
+        loadAddressFromLocalStorage () {
+            const address = addressService.getAddressFromLocalStorage();
+
+            if (address) {
+                this.updateAddress(address);
+            }
         },
 
         /**
@@ -599,12 +615,14 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
+                await this.reloadAvailableFulfilmentTimesIfOutdated();
+
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
                 const statusCode = e.response.data.statusCode || e.response.status;
 
                 if (statusCode === 403) {
-                    throw new UpdateCheckoutAccessForbiddenError(e);
+                    throw new UpdateCheckoutAccessForbiddenError(e, this.$logger);
                 }
 
                 throw new UpdateCheckoutError(e);
@@ -648,7 +666,7 @@ export default {
             } catch (e) {
                 const { errorCode } = e.response.data;
 
-                throw new PlaceOrderError(e.message, errorCode);
+                throw new PlaceOrderError(e.message, errorCode, this.$logger);
             }
         },
 
@@ -694,7 +712,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
                 if (error.response && error.response.status === 403) {
-                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message));
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
                 }
@@ -799,6 +817,7 @@ export default {
             const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
             const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
+            const logMethod = error.logMethod || this.$logger.logError;
             const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
             this.$emit(eventToEmit, { ...this.eventData, error });
@@ -806,10 +825,9 @@ export default {
             this.logInvoker({
                 message: logMessage,
                 data: this.eventData,
-                logMethod: this.$logger.logError,
+                logMethod,
                 error
             });
-
 
             this.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
@@ -949,6 +967,21 @@ export default {
             return referralCookie && referralCookie.menuReferralState
                 ? 'ReferredByWeb'
                 : 'None';
+        },
+
+        /**
+         * Calls `loadAvailableFulfilment` times if we have no available fulfilment times available.
+         * Updates the key for the `FromDropdown` component to force the component re-render.
+         *
+         * When we receive the new `availableFulfilment` times, the dropdown doesn't automatically set the selected time
+         * to the first available fulfilment time. It leaves the selected value blank.
+         * Forcing the component to re-render ensures that the correct time is selected and displayed.
+         */
+        async reloadAvailableFulfilmentTimesIfOutdated () {
+            if (this.message?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+                await this.loadAvailableFulfilment();
+                this.availableFulfilmentTimesKey++;
+            }
         }
     },
 

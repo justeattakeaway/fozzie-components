@@ -1,8 +1,9 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "main": "dist/f-cookie-banner.umd.min.js",
+  "maxBundleSize": "30kB",
   "files": [
     "dist",
     "test-utils"
@@ -26,8 +27,9 @@
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "prepublishOnly": "yarn lint && yarn test && yarn build && yarn build:static-files",
     "build": "vue-cli-service build --target lib --name f-cookie-banner ./src/index.js",
+    "build:static-files": "yarn --cwd ./f-cookie-banner-static build",
     "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",

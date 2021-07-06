@@ -3,6 +3,7 @@
   "description": "Fozzie Error Message – Generic inline error message",
   "version": "0.5.0",
   "main": "dist/f-error-message.umd.min.js",
+  "maxBundleSize": "5kB",
   "files": [
     "dist"
   ],

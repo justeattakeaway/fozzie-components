@@ -109,7 +109,7 @@ v1.8.0
 ------------------------------
 *November 26, 2020*
 
-## Added
+### Added
 - Stub CSS files in jest.
 
 
