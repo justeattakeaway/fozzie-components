@@ -1,12 +1,16 @@
+/* eslint-disable camelcase */
 import defaultOptions from './defaultOptions';
 import configureJustLog from './justLogConfiguration';
 
 let _configuration;
 let _justLogInstance;
 
-const publish = payload => {
-    _justLogInstance.info('test', {
-        statClient: `${_configuration.featureName} - f-statistics`,
+const publish = (message, payload) => {
+    _justLogInstance.info(message, {
+        je_feature_for: _configuration.featureName,
+        je_logType: 'client-stats',
+        je_feature: 'f-statistics',
+        je_environment: _configuration.environment,
         ...payload
     });
 };
