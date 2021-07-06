@@ -496,6 +496,7 @@ export default {
             'createGuestUser',
             'getAvailableFulfilment',
             'getAddress',
+            'getCustomer',
             'getCustomerName',
             'getBasket',
             'getCheckout',

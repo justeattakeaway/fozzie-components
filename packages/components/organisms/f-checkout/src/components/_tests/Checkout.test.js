@@ -886,6 +886,71 @@ describe('Checkout', () => {
             });
         });
 
+        describe('shouldLoadCustomer ::', () => {
+            it('should return `true` if customer is logged in and does not have phone number set', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        customer: {
+                            mobileNumber: ''
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` if customer is logged not logged in', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: false
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if customer has phone number set', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        customer: {
+                            mobileNumber: '07111111111'
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+        });
+
         describe('eventData ::', () => {
             it('should return `isLoggedIn` and `serviceType` in an object`', () => {
                 // Arrange
