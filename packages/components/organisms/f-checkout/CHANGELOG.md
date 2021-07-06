@@ -20,7 +20,6 @@ v0.151.0
 ### Fixed
 - Get new `availableFulfilment` times when no available fulfilment times are available.
 
-
 ### Changed
 - `f-form-field` version to `1.16.1`.
 
