@@ -10,6 +10,7 @@ v0.152.0
 
 ### Added
 - Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
 
 
 v0.151.0
