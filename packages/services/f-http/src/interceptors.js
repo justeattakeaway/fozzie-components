@@ -18,12 +18,12 @@ const captureResponseStatistics = ({ interceptors }, statisticsClient) => {
 
         const payload = {
             'cs-method': res.config.method.toUpperCase(),
-            'cs-uri-stem': res.config.url,
+            'cs-uri-stem': `${res.config.baseURL}${res.config.url}`,
             'sc-status': res.status,
             'time-taken': res.responseTimeMs
         };
 
-        statisticsClient.publish(payload);
+        statisticsClient.publish(`${payload['cs-method']} request to ${payload['cs-uri-stem']} took ${payload['time-taken']}ms`, payload);
 
         return res;
     });
