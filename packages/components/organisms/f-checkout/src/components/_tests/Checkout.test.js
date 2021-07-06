@@ -111,6 +111,7 @@ describe('Checkout', () => {
     const placeOrderUrl = 'http://localhost/placeorder';
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
+    const getCustomerUrl = 'http://localhost/getcustomer';
     const spinnerTimeout = 100;
     const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
@@ -126,6 +127,7 @@ describe('Checkout', () => {
         placeOrderUrl,
         paymentPageUrlPrefix,
         getGeoLocationUrl,
+        getCustomerUrl,
         applicationName,
         spinnerTimeout,
         otacToAuthExchanger
@@ -878,6 +880,71 @@ describe('Checkout', () => {
 
                 // Act
                 const result = wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+        });
+
+        describe('shouldLoadCustomer ::', () => {
+            it('should return `true` if customer is logged in and does not have phone number set', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        customer: {
+                            mobileNumber: ''
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` if customer is not logged in', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: false
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if customer has phone number set', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        customer: {
+                            mobileNumber: '07111111111'
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomer;
 
                 // Assert
                 expect(result).toBe(false);
