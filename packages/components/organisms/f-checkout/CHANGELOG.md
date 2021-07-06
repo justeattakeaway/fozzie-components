@@ -3,12 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.152.0
+------------------------------
+*July 6, 2021*
+
+### Added
+- Experiment headers to PATCH checkout request
+
+
 v0.151.0
 ------------------------------
 *July 5, 2021*
 
 ### Fixed
 - Get new `availableFulfilment` times when no available fulfilment times are available.
+
 
 ### Changed
 - `f-form-field` version to `1.16.1`.
