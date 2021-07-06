@@ -59,7 +59,8 @@ export default {
 
         title () {
             if (this.isAuthenticated) {
-                return `${this.friendlyName},\n ${this.$t('authenticated.header.title')}`;
+                return this.friendlyName ? `${this.friendlyName},\n ${this.$t('authenticated.header.title')}` :
+                    this.$t('authenticated.header.title');
             }
             return this.$t('unauthenticated.header.title');
         },

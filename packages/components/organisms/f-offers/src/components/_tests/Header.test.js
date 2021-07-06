@@ -30,7 +30,7 @@ describe('Header.vue', () => {
             // Arrange
             const getters = {
                 isAuthenticated: () => false,
-                friendlyName: () => 'Matthew'
+                friendlyName: () => null
             };
 
             const store = new Vuex.Store({
@@ -117,6 +117,38 @@ describe('Header.vue', () => {
 
             // Assert
             expect(subtitle.text()).toEqual(tenantConfigs[mockLocale].messages.authenticated.header.subtitle);
+        });
+
+        it('should display the authenticated title without name', () => {
+            // Arrange
+            const g = {
+                isAuthenticated: () => true,
+                friendlyName: () => null
+            };
+
+            const store = new Vuex.Store({
+                modules: {
+                    [VUEX_MODULE_NAMESPACE_OFFERS]: {
+                        namespaced: true,
+                        getters: g
+                    }
+                }
+            });
+
+            const w = mount(Header, {
+                store,
+                i18n,
+                localVue,
+                mocks: {
+                    $t: i18nMocker
+                }
+            });
+            // Act
+            const media = w.findComponent(MediaElement);
+            const title = media.find('h3');
+
+            // Assert
+            expect(title.text()).toEqual(tenantConfigs[mockLocale].messages.authenticated.header.title);
         });
     });
 });

@@ -30,7 +30,8 @@ const createAxiosConfig = (authHeader, timeout) => ({
 const resolveCustomerDetails = (data, authToken) => {
     const tokenData = jwtDecode(authToken);
     return {
-        phoneNumber: data?.customer?.phoneNumber ? data?.customer?.phoneNumber : tokenData?.phone_number,
+        phoneNumber: data?.customer?.phoneNumber ? data?.customer?.phoneNumber :
+            (tokenData?.phone_number || tokenData?.mobile_number),
         firstName: data?.customer?.firstName ? data?.customer?.firstName : tokenData?.given_name,
         lastName: data?.customer?.lastName ? data?.customer?.lastName : tokenData?.family_name
     };
@@ -40,39 +41,16 @@ export default {
     namespaced: true,
 
     state: () => ({
-        authToken: 'test',
+        authToken: null,
 
         customer: {
-            friendlyName: 'Matthew',
-            firstName: '',
-            lastName: ''
+            friendlyName: null,
+            firstName: null,
+            lastName: null
         },
 
-        brazeApiKey: undefined
+        brazeApiKey: null
     }),
-
-    getters: {
-        isAuthenticated: state => !!state.authToken,
-        friendlyName: state => state.customer.friendlyName
-    },
-
-    mutations: {
-        [MUTATION_SET_AUTH_TOKEN]: (state, value) => {
-            state.authToken = value;
-        },
-
-        [MUTATION_SET_CUSTOMER_DATA]: (state, { friendlyName, firstName, lastName }) => {
-            state.customer = {
-                friendlyName,
-                firstName,
-                lastName
-            };
-        },
-
-        [MUTATION_SET_BRAZE_KEY]: (state, value) => {
-            state.brazeApiKey = value;
-        }
-    },
 
     actions: {
         /**
@@ -118,5 +96,28 @@ export default {
                 await dispatch(ACTION_HANDLE_CUSTOMER_DATA, { url, timeout });
             }
         }
+    },
+
+    mutations: {
+        [MUTATION_SET_AUTH_TOKEN]: (state, value) => {
+            state.authToken = value;
+        },
+
+        [MUTATION_SET_CUSTOMER_DATA]: (state, { friendlyName, firstName, lastName }) => {
+            state.customer = {
+                friendlyName,
+                firstName,
+                lastName
+            };
+        },
+
+        [MUTATION_SET_BRAZE_KEY]: (state, value) => {
+            state.brazeApiKey = value;
+        }
+    },
+
+    getters: {
+        isAuthenticated: state => !!state.authToken,
+        friendlyName: state => state.customer.friendlyName
     }
 };
