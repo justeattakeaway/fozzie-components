@@ -56,6 +56,7 @@ module.exports = {
                 'video']
         }],
         'import/no-extraneous-dependencies': 'off',
+        'import/no-unresolved': 'off',
 
         // Setting these to warn temporarily otherwise it breaks the dev experience
         // and makes it hard to actually fix them.
