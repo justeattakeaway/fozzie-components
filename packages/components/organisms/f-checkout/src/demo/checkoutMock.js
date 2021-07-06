@@ -26,6 +26,7 @@ import placeOrderDuplicate from './place-order-duplicate.json';
 import accessForbiddenError from './checkout-403-get-error.json';
 import getCheckoutError from './checkout-500-get-error.json';
 import getGeoLocation from './get-geo-location.json';
+import getCustomer from './get-customer.json';
 
 const mock = new MockAdapter(axios);
 
@@ -109,6 +110,9 @@ export default {
                 break;
             case '/get-geo-location.json':
                 mock.onPost(path).reply(200, getGeoLocation);
+                break;
+            case '/get-customer.json':
+                mock.onGet(path).reply(200, getCustomer);
                 break;
             default:
                 throw new Error(`${path} is not valid`);
