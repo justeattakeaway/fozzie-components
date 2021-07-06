@@ -313,7 +313,7 @@ export default {
             url,
             timeout
         }) => {
-            if (!state.customer || state.customer.phoneNumber) {
+            if (!state.customer || state.customer.mobileNumber) {
                 return;
             }
 
