@@ -22,6 +22,7 @@ export const VALIDATIONS = {
 
 export const VUEX_CHECKOUT_MODULE = 'fCheckoutModule';
 export const VUEX_CHECKOUT_ANALYTICS_MODULE = 'fCheckoutAnalyticsModule';
+export const VUEX_CHECKOUT_EXPERIMENTATION_MODULE = 'fCheckoutExperimentationModule';
 
 export const ERROR_CODE_FULFILMENT_TIME_INVALID = 'FULFILMENT_TIME_INVALID';
 export const ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE = 'FULFILMENT_TIME_UNAVAILABLE';

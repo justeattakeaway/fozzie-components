@@ -2,7 +2,7 @@ import {
     mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
 } from '../services/mapper';
 import experimentService from '../services/experimentService';
-import { VUEX_CHECKOUT_MODULE } from '../constants';
+import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../constants';
 
 import {
     UPDATE_AUTOFILL,
@@ -128,9 +128,12 @@ export default {
             });
         },
 
-        trackLowValueOrderExperiment: () => {
-            const event = experimentService.getLowValueOrderExperimentTracking();
-            window.dataLayer.push(event);
+        trackLowValueOrderExperiment: experimentHeaders => {
+            const lowValueOrderExperimentValue = experimentHeaders[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
+            const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentValue);
+            if (event) {
+                window.dataLayer.push(event);
+            }
         }
     },
 

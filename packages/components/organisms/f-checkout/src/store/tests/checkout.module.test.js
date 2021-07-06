@@ -348,11 +348,13 @@ describe('CheckoutModule', () => {
         let commit;
         let dispatch;
         let payload;
+        let rootGetters;
 
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
             state = defaultState;
+            rootGetters = {};
             payload = {
                 url: 'http://localhost/account/checkout',
                 tenant: 'uk',
@@ -771,7 +773,9 @@ describe('CheckoutModule', () => {
 
             it('should post the checkout details to the backend.', async () => {
                 // Act
-                await updateCheckout({ commit, state, dispatch }, payload);
+                await updateCheckout({
+                    commit, state, dispatch, rootGetters
+                }, payload);
 
                 // Assert
                 expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
@@ -779,7 +783,9 @@ describe('CheckoutModule', () => {
 
             it('should convert an unsupported error into a default error.', async () => {
                 // Act
-                await updateCheckout({ commit, state, dispatch }, payload);
+                await updateCheckout({
+                    commit, state, dispatch, rootGetters
+                }, payload);
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true }]);
@@ -798,7 +804,9 @@ describe('CheckoutModule', () => {
 
                 it('should call `updateErrors` with issue.', async () => {
                     // Act
-                    await updateCheckout({ commit, state, dispatch }, payload);
+                    await updateCheckout({
+                        commit, state, dispatch, rootGetters
+                    }, payload);
 
                     // Assert
                     expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [issue]);
@@ -806,7 +814,9 @@ describe('CheckoutModule', () => {
 
                 it('should call `updateMessage` with first issue.', async () => {
                     // Act
-                    await updateCheckout({ commit, state, dispatch }, payload);
+                    await updateCheckout({
+                        commit, state, dispatch, rootGetters
+                    }, payload);
 
                     // Assert
                     expect(dispatch).toHaveBeenCalledWith('updateMessage', issue);

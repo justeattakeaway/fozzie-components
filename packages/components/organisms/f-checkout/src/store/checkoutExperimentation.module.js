@@ -12,8 +12,8 @@ export default {
     }),
 
     actions: {
-        setExperimentValues: ({ commit }) => { // LVO: Not sure where to call this action. On Checkout mount?
-            const lowValueOrderExperimentValue = ''; // LVO: Read this from state/props
+        setExperimentValues: ({ commit }, experiments) => {
+            const lowValueOrderExperimentValue = experiments.low_value_order_threshold_web ? experiments.low_value_order_threshold_web.Variant : '';
             commit(UPDATE_EXPERIMENTS_STATE, {
                 lowValueOrderExperimentValue
             });
@@ -29,7 +29,6 @@ export default {
     },
 
     getters: {
-        // LVO: Can we read this inside the checkout module? Or does it have to be passed from the component to every API call?
         getExperimentsHeaders: ({ lowValueOrderExperimentValue }) => ({
             [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: lowValueOrderExperimentValue
         })

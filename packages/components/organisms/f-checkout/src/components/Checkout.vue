@@ -176,6 +176,7 @@ import {
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
+    VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
@@ -298,6 +299,11 @@ export default {
 
         getGeoLocationUrl: {
             type: String,
+            required: true
+        },
+
+        experiments: {
+            type: Object,
             required: true
         }
     },
@@ -505,11 +511,16 @@ export default {
             'trackInitialLoad'
         ]),
 
+        ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
+            'setExperimentValues'
+        ]),
+
         /**
          * Loads the necessary data to render a meaningful checkout component.
          *
          */
         async initialise () {
+            this.setExperimentValues(this.experiments);
             this.isLoading = true;
 
             this.startSpinnerCountdown();

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_EXPERIMENTATION_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
 import { version as applicationVerion } from '../../package.json';
 
 import {
@@ -159,23 +159,26 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        updateCheckout: async ({ commit, state, dispatch }, {
-            url, data, timeout
-        }) => {
+        updateCheckout: async ({
+            commit, state, dispatch, rootGetters
+        }, {
+                url, data, timeout
+            }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
+            const experimentationHeaders = rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                     ...(state.authToken && {
                         Authorization: authHeader
-                    })
+                    }),
+                    ...experimentationHeaders
                 },
                 timeout
             };
 
-            const { data: responseData } = await axios.patch(url, data, config);
+            const { data: responseData, headers } = await axios.patch(url, data, config);
             const { issues, isFulfillable } = responseData;
 
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
@@ -184,6 +187,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/trackLowValueOrderExperiment`, headers, { root: true });
             dispatch('updateMessage', detailedIssues[0]);
         },
 

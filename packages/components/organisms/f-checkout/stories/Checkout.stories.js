@@ -7,6 +7,7 @@ import { locales } from '@justeat/storybook/constants/globalisation';
 import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
+import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation.module';
 import CheckoutMock from '../src/demo/checkoutMock';
 
 export default {
@@ -208,7 +209,8 @@ export const CheckoutComponent = () => ({
     store: new Vuex.Store({
         modules: {
             fCheckoutModule,
-            fCheckoutAnalyticsModule
+            fCheckoutAnalyticsModule,
+            fCheckoutExperimentationModule
         }
     }),
 
