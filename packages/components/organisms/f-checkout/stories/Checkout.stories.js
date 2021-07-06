@@ -43,6 +43,7 @@ const getCheckoutAccessForbiddenUrl = '/checkout-403-get-error.json';
 const getCheckoutErrorUrl = '/checkout-500-get-error.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
+const getCustomerUrl = '/get-customer.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryAsapUrl);
@@ -69,6 +70,8 @@ CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutAccessForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
+CheckoutMock.setupCheckoutMethod(getCustomerUrl);
+
 CheckoutMock.passThroughAny();
 
 const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
@@ -129,7 +132,8 @@ export const CheckoutComponent = () => ({
             getAddressUrl,
             loginUrl: '/login',
             paymentPageUrlPrefix,
-            getGeoLocationUrl
+            getGeoLocationUrl,
+            getCustomerUrl
         };
     },
     props: {
@@ -229,6 +233,7 @@ export const CheckoutComponent = () => ({
         ':paymentPageUrlPrefix="paymentPageUrlPrefix" ' +
         'applicationName="Storybook" ' +
         ':getGeoLocationUrl="getGeoLocationUrl" ' +
+        ':getCustomerUrl="getCustomerUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
         ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
 });

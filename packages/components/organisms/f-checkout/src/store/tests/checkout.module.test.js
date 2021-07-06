@@ -5,6 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import customer from '../../demo/get-customer.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import {
@@ -28,7 +29,8 @@ import {
     UPDATE_USER_NOTE,
     UPDATE_GEO_LOCATION,
     UPDATE_MESSAGE,
-    UPDATE_ADDRESS
+    UPDATE_ADDRESS,
+    UPDATE_PHONE_NUMBER
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -39,6 +41,7 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
+    getCustomer,
     getGeoLocation,
     placeOrder,
     setAuthToken,
@@ -328,6 +331,19 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_PHONE_NUMBER} ::`, () => {
+            it('should update state with received values', () => {
+                // Arrange
+                const phoneNumber = '+447111111112';
+
+                // Act
+                mutations[UPDATE_PHONE_NUMBER](state, phoneNumber);
+
+                // Assert
+                expect(state.customer.mobileNumber).toEqual(phoneNumber);
+            });
+        });
+
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
@@ -360,6 +376,7 @@ describe('CheckoutModule', () => {
             };
             payload = {
                 url: 'http://localhost/account/checkout',
+                getCustomerUrl: 'http://localhost/customer',
                 tenant: 'uk',
                 language: 'en-GB',
                 timeout: 10000,
@@ -622,6 +639,76 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+            });
+        });
+
+        describe('getCustomer ::', () => {
+            describe('when phone number is not set', () => {
+                beforeEach(() => {
+                    state.customer.mobileNumber = '';
+                });
+
+                it(`should get the customer details from the backend and call ${UPDATE_PHONE_NUMBER} mutation`, async () => {
+                    // Arrange
+                    const config = {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${state.authToken}`
+                        },
+                        timeout: payload.timeout
+                    };
+
+                    axios.get = jest.fn(() => Promise.resolve({ data: customer }));
+                    const expectedPhoneNumber = customer.PhoneNumber;
+
+                    // Act
+                    await getCustomer({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_PHONE_NUMBER, expectedPhoneNumber);
+                });
+
+                it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
+                    // Arrange
+                    state.customer.mobileNumber = '';
+
+                    // Act
+                    await getCustomer({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+                });
+            });
+
+            describe('when phone number is set', () => {
+                beforeEach(() => {
+                    state.customer.mobileNumber = '07111111111';
+                });
+
+                afterEach(() => {
+                    state.customer.mobileNumber = '';
+                });
+
+                it(`should not get the customer details from the backend and call ${UPDATE_PHONE_NUMBER} mutation`, async () => {
+                    // Arrange
+                    axios.get = jest.fn(() => Promise.resolve({ data: customer }));
+
+                    // Act
+                    await getCustomer({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(axios.get).not.toBeCalled();
+                    expect(commit).not.toBeCalled();
+                });
+
+                it(`should not call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
+                    // Act
+                    await getCustomer({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(dispatch).not.toBeCalled();
+                });
             });
         });
 
