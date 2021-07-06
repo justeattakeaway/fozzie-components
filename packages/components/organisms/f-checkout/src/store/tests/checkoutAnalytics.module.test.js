@@ -433,15 +433,32 @@ describe('CheckoutAnalyticsModule', () => {
                 expect(window.dataLayer).toContainEqual(expected);
             });
 
-            it('should not `push` low value order event to data layer if it is returned in request header`', () => {
+            it('should not `push` low value order event to data layer if it is not returned in request header`', () => {
                 // Arrange
-                const mockedResponseHeaders = {};
+                const expected = {
+                    custom: {
+                        experiment: {
+                            id: 'EX-1862',
+                            name: 'low_value_order_threshold',
+                            platform: 'experiment_api',
+                            variant: {
+                                name: 'not_applied'
+                            },
+                            version: 1
+                        }
+                    },
+                    event: 'trackExperimentV2'
+                };
+
+                const mockedResponseHeaders = {
+                    [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: null
+                };
 
                 // Act
                 trackLowValueOrderExperiment(mockedResponseHeaders);
 
                 // Assert
-                expect(window.dataLayer).toEqual([]);
+                expect(window.dataLayer).toContainEqual(expected);
             });
         });
     });
