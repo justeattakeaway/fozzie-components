@@ -909,7 +909,7 @@ describe('Checkout', () => {
                 expect(result).toBe(true);
             });
 
-            it('should return `false` if customer is logged not logged in', () => {
+            it('should return `false` if customer is not logged in', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
