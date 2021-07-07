@@ -127,15 +127,22 @@ class ContentCards {
      * There's a bug in Braze where duplicate content cards end up being displayed twice
      * This is being fix so in the mean time this function removes cards that have the same title and
      * card type it also orders the cards by the last updated date.
+     *
+     * The ternary ensures the right predicate for findIndex is used, to ensure that cards with deduplicationKeys are
+     * not deduped by cards without deduplication keys, or vice-versa
+     *
      * @property {Object[]} this.cards
      * @returns {ContentCards}
      */
     removeDuplicateContentCards () {
-        this.cards = orderBy(this.cards, 'updated').filter((contentCard, index, item) => index ===
-            findIndex(
-                item,
-                card => card.title === contentCard.title &&
-                    card.type === contentCard.type
+        this.cards = orderBy(this.cards, ['updated'], ['desc'])
+            .filter((contentCard, index, cardsList) => index === findIndex(
+                cardsList,
+                contentCard.deduplicationKey
+                    ? card => card.deduplicationKey === contentCard.deduplicationKey
+                    : card => !card.deduplicationKey
+                        && card.title === contentCard.title
+                        && card.type === contentCard.type
             ));
         return this;
     }

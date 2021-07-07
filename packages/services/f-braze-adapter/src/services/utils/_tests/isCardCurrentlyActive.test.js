@@ -6,12 +6,12 @@ const card = {
 };
 
 describe('services › utils › transformCardData', () => {
-    it('should return true if card contains neither brand nor display times', () => {
+    it('should return true if card contains neither brand, visibility indicator, or display times', () => {
         // Arrange & Act
         const result = isCardCurrentlyActive({});
 
         // Assert
-        expect(result).toBe(true);
+        expect(result).toBeTrue();
     });
 
     it('should return true if card does not contain brand', () => {
@@ -19,7 +19,27 @@ describe('services › utils › transformCardData', () => {
         const result = isCardCurrentlyActive(card);
 
         // Assert
-        expect(result).toBe(true);
+        expect(result).toBeTrue();
+    });
+
+    it('should return true if visibility indicator is true', () => {
+        // Arrange & Act
+        const result = isCardCurrentlyActive({
+            isVisible: true
+        });
+
+        // Assert
+        expect(result).toBeTrue();
+    });
+
+    it('should return false if visibility indicator is false', () => {
+        // Arrange & Act
+        const result = isCardCurrentlyActive({
+            isVisible: false
+        });
+
+        // Assert
+        expect(result).toBeFalse();
     });
 
     it('should return true if card does not contain display times', () => {
@@ -27,7 +47,7 @@ describe('services › utils › transformCardData', () => {
         const result = isCardCurrentlyActive({ id: 'test' });
 
         // Assert
-        expect(result).toBe(true);
+        expect(result).toBeTrue();
     });
 
     it("should return true if current datetime is between today's display times", () => {
@@ -47,7 +67,7 @@ describe('services › utils › transformCardData', () => {
         const result = isCardCurrentlyActive({ displayTimes });
 
         // Assert
-        expect(result).toBe(true);
+        expect(result).toBeTrue();
     });
 
     it('should return true if current datetime is between "Any" display times', () => {
@@ -67,7 +87,7 @@ describe('services › utils › transformCardData', () => {
         const result = isCardCurrentlyActive({ displayTimes });
 
         // Assert
-        expect(result).toBe(true);
+        expect(result).toBeTrue();
     });
 
     it('should return false if current datetime is NOT between provided display times', () => {
@@ -93,6 +113,6 @@ describe('services › utils › transformCardData', () => {
         const result = isCardCurrentlyActive({ displayTimes });
 
         // Assert
-        expect(result).toBe(false);
+        expect(result).toBeFalse();
     });
 });
