@@ -1,6 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import fAnalyticsModule from '../store/analyticsModule';
+import { COUNTRY_INFO, DEFAULT_APP_ID, DEFAULT_APP_TYPE } from '../constants';
 
 export default {
     name: 'Analytics',
@@ -93,13 +94,13 @@ export default {
             const platformData = { ...this.platformData };
 
             platformData.name = this.$route.name;
-            platformData.appType = 'web';
-            platformData.applicationId = 7;
+            platformData.appType = DEFAULT_APP_TYPE;
+            platformData.applicationId = DEFAULT_APP_ID;
             platformData.userAgent = navigator.userAgent || 'N/A';
-            platformData.branding = this.getBrand(this.$i18n.locale);
-            platformData.country = this.getCountry(this.$i18n.locale);
-            platformData.language = this.getLanguage(this.$i18n.locale);
-            platformData.currency = this.getCurrency(this.$i18n.locale);
+            platformData.branding = COUNTRY_INFO[this.$i18n.locale].brand;
+            platformData.country = COUNTRY_INFO[this.$i18n.locale].country;
+            platformData.language = COUNTRY_INFO[this.$i18n.locale].language;
+            platformData.currency = COUNTRY_INFO[this.$i18n.locale].currency;
 
             this.updatePlatformData(platformData);
         },
@@ -107,59 +108,6 @@ export default {
         pushAnalytics () {
             const dataLayer = window.dataLayer || [];
             dataLayer.push({ platformData: { ...this.platformData } });
-        },
-
-        getLanguage (locale) {
-            switch (locale) {
-                case 'it-IT':
-                    return 'it';
-                case 'es-ES':
-                    return 'es';
-                default:
-                    return 'en';
-            }
-        },
-
-        getCountry (locale) {
-            switch (locale) {
-                case 'en-GB':
-                    return 'uk';
-                case 'en-IE':
-                    return 'ie';
-                case 'it-IT':
-                    return 'it';
-                case 'es-ES':
-                    return 'es';
-                case 'en-AU':
-                    return 'au';
-                case 'en-NZ':
-                    return 'nz';
-                default:
-                    return '';
-            }
-        },
-
-        getBrand (locale) {
-            switch (locale) {
-                case 'en-AU':
-                case 'en-NZ':
-                    return 'menulog';
-                default:
-                    return 'justeat';
-            }
-        },
-
-        getCurrency (locale) {
-            switch (locale) {
-                case 'en-GB':
-                    return 'gbp';
-                case 'en-AU':
-                    return 'aud';
-                case 'en-NZ':
-                    return 'nzd';
-                default:
-                    return 'eur';
-            }
         }
     }
 };
