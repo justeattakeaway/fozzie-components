@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-feature-management",
   "version": "0.1.0",
-  "description": "Authentication helper to communicate with open apis",
+  "description": "Service for querying feature values provided by Feature Management",
   "main": "dist/f-feature-management.js",
   "files": [
     "dist"
