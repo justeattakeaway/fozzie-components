@@ -28,23 +28,55 @@ describe('CheckoutExperimentationModule', () => {
         });
 
         describe('setExperimentValues ::', () => {
-            const experiments = {
-                // eslint-disable-next-line camelcase
-                low_value_order_threshold_web: {
-                    Name: 'experiment_test',
-                    Domain: 'Menu',
-                    Variant: 'true',
-                    UseBackendHttpHeaders: true,
-                    Version: 1
-                }
-            };
+            it(`should call ${UPDATE_EXPERIMENTS_STATE} with passed field(s)`, () => {
+                // Arrange
+                const experiments = {
+                    // eslint-disable-next-line camelcase
+                    low_value_order_threshold_web: {
+                        Name: 'experiment_test',
+                        Domain: 'Menu',
+                        Variant: 'true',
+                        UseBackendHttpHeaders: true,
+                        Version: 1
+                    }
+                };
 
-            it(`should call ${UPDATE_EXPERIMENTS_STATE} with passed field`, () => {
                 // Act
                 setExperimentValues({ commit }, experiments);
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_EXPERIMENTS_STATE, { lowValueOrderExperimentVariant: 'true' });
+            });
+
+            it(`should call ${UPDATE_EXPERIMENTS_STATE} with empty string if no variant is present`, () => {
+                // Arrange
+                const experiments = {
+                    // eslint-disable-next-line camelcase
+                    low_value_order_threshold_web: {
+                        Name: 'experiment_test',
+                        Domain: 'Menu',
+                        Variant: undefined,
+                        UseBackendHttpHeaders: true,
+                        Version: 1
+                    }
+                };
+
+                // Act
+                setExperimentValues({ commit }, experiments);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_EXPERIMENTS_STATE, { lowValueOrderExperimentVariant: '' });
+            });
+
+            it(`should call ${UPDATE_EXPERIMENTS_STATE} with empty string if no experiment is present`, () => {
+                // Arrange
+                const experiments = {};
+
+                // Act
+                setExperimentValues({ commit }, experiments);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_EXPERIMENTS_STATE, { lowValueOrderExperimentVariant: '' });
             });
         });
     });

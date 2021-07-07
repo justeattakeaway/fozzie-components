@@ -7,7 +7,7 @@ const getLowValueOrderExperimentTracking = variant => ({
             platform: 'experiment_api',
             version: 1,
             variant: {
-                name: variant ?? 'not_applied'
+                name: variant ?? 'reserve'
             }
         }
     }

@@ -29,7 +29,7 @@ describe('experimentService', () => {
         });
 
         describe('when a variant is not present', () => {
-            it('should return tracking object with variant name "not_applied"', () => {
+            it('should return tracking object with variant name "reserve"', () => {
                 // Arrange
                 const expectedTrackingObject = {
                     event: 'trackExperimentV2',
@@ -40,7 +40,7 @@ describe('experimentService', () => {
                             platform: 'experiment_api',
                             version: 1,
                             variant: {
-                                name: 'not_applied'
+                                name: 'reserve'
                             }
                         }
                     }

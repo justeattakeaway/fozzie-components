@@ -441,7 +441,7 @@ describe('CheckoutAnalyticsModule', () => {
                             name: 'low_value_order_threshold',
                             platform: 'experiment_api',
                             variant: {
-                                name: 'not_applied'
+                                name: 'reserve'
                             },
                             version: 1
                         }
