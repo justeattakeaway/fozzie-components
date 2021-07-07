@@ -7,7 +7,7 @@ v3.44.5
 ------------------------------
 *July 7, 2021*
 
-## Fix
+### Fixed
 - Build all packages when running bundlewatch
 
 v3.44.4
