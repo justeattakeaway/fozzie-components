@@ -320,13 +320,9 @@ module.exports = class Checkout extends Page {
      *
      * @param {String} Field name
      * @param {String} Value to set
-     * @param {Boolean} Whether to tab out of the field or not
      */
-    setFieldValue (fieldName, value, tabOut = false) {
+    setFieldValue (fieldName, value) {
         this.fields[fieldName].input.setValue(value);
-        if (tabOut) {
-            this.fields[fieldName].input.setValue(['Tab']);
-        }
     }
 
     /**

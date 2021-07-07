@@ -33,8 +33,7 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
 
     forEach([
         [100, 'firstName'],
-        [100, 'lastName'],
-        [50, 'emailAddress']
+        [100, 'lastName']
     ])
     .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
         // Arrange
@@ -52,12 +51,13 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         ['jazz.man@tunetown.com'],
         ['jazzman@tunetown.com']
     ])
-    .it('should be validate email addresses ["%s"]', email => {
+    .it('should be valid email address: "%s"', email => {
         // Arrange
         checkout.clearCheckoutForm('emailAddress');
 
         // Act
-        checkout.setFieldValue('emailAddress', email, true);
+        checkout.setFieldValue('emailAddress', email);
+        browser.keys('Tab');
 
         // Assert
         expect(checkout.isEmailErrorDisplayed()).toBe(false);
@@ -70,12 +70,13 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         ['jazzman@'],
         ['jazzman']
     ])
-    .it('should be invalidate email addresses ["%s"]', email => {
+    .it('should be invalid email address: "%s"', email => {
         // Arrange
         checkout.clearCheckoutForm('emailAddress');
 
         // Act
-        checkout.setFieldValue('emailAddress', email, true);
+        checkout.setFieldValue('emailAddress', email);
+        browser.keys('Tab');
 
         // Assert
         expect(checkout.isEmailErrorDisplayed()).toBe(true);

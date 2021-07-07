@@ -69,7 +69,8 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         checkout.clearCheckoutForm('emailAddress');
 
         // Act
-        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com', true);
+        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
+        browser.keys('Tab');
 
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Guest - invalid email address Error State', 'desktop');
@@ -171,7 +172,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         checkout.clearCheckoutForm('emailAddress');
 
         // Act
-        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com', true);
+        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
+        browser.keys('Tab');
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Guest - invalid email address Error State', 'desktop');

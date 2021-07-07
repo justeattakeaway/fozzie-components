@@ -45,7 +45,6 @@
         <form-field
             :value="customer.email"
             name="guest-email"
-            maxlength="50"
             input-type="email"
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
