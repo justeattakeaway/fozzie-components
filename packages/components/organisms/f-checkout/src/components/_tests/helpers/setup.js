@@ -75,6 +75,7 @@ const defaultCheckoutActions = {
     getGeoLocation: jest.fn(),
     getBasket: jest.fn(),
     getAddress: jest.fn(),
+    getCustomer: jest.fn(),
     placeOrder: jest.fn(),
     getCustomerName: jest.fn(),
     updateHasAsapSelected: jest.fn(),
