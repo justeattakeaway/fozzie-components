@@ -2285,13 +2285,6 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-media-element@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-0.3.0.tgz#8927d30936c0af4802862b812909d7f0e308f790"
-  integrity sha512-yZ39eJfNO3vjBILnlZSitXeq2KoYVYpJFmtjmNKyPSRctbZDkzo4JMUxQniQPaJKS/4o3KIrYbrwqarr5rGinw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-mega-modal@0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.3.0.tgz#58a88476ee204264988640b3cd47ac5d295bde4a"
@@ -2321,10 +2314,10 @@
   dependencies:
     lodash.debounce "4.0.8"
 
-"@justeat/f-searchbox@3.13.0":
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-3.13.0.tgz#c2d921ace6524af864743e24d890a334ca964186"
-  integrity sha512-dKPJx+1R/HGWJl6fSwNIDmKoBQwswOIzOLbQxnFtMJGTqW506bDRiNPQW3lvP7xmhBpxFHk49xarD2cph+eqvg==
+"@justeat/f-searchbox@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-4.0.0.tgz#1cf488d537266efbeeb7adcfc162eeec9e68551f"
+  integrity sha512-Swv0wgzfB05yNv1Oe2+W0NIQk1ood2jjYc0VxvX86vjuD4y95KIm6v/Libw935WkiR8I+VOxkLQqOJMte8qa/g==
   dependencies:
     lodash.debounce "4.0.8"
 
