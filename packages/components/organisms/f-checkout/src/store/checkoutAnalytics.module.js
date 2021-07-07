@@ -106,7 +106,7 @@ export default {
         },
 
         /**
-         *Dispatches `trackFormInteraction` with each error in `state.errors`.
+         * Dispatches `trackFormInteraction` with each error in `state.errors`.
          */
         trackFormErrors ({ rootState, dispatch }) {
             const trackedErrors = [];
@@ -122,6 +122,9 @@ export default {
             });
         },
 
+        /**
+         * Fetches the variant of the Low Value Order experiment from the headers and pushes an analytics event.
+         */
         trackLowValueOrderExperiment: experimentHeaders => {
             const lowValueOrderExperimentVariant = experimentHeaders[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
             const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
