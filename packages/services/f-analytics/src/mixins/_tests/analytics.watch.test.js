@@ -31,7 +31,7 @@ describe('Analytics', () => {
             pushAnalyticsMock = jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementation(() => true);
         });
 
-        it('should call `prepareAnalytics` & `pushAnalytics` when route changes', async () => {
+        it('should call prepareAnalytics & pushAnalytics when route changes', async () => {
             // Arrange
             const router = new VueRouter({ routes: [{ path: '/my-new-page', name: 'my-new-page' }] });
             shallowMount(

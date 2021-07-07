@@ -45,17 +45,17 @@ describe('Analytics', () => {
             );
         });
 
-        it('should make a call to `preparePage`', () => {
+        it('should make a call to preparePage', () => {
             // Assert
             expect(preparePageMock).toHaveBeenCalled();
         });
 
-        it('should make a call to `prepareAnalytics`', () => {
+        it('should make a call to prepareAnalytics', () => {
             // Assert
             expect(prepareAnalyticsMock).toHaveBeenCalled();
         });
 
-        it('should make a call to `pushAnalytics`', () => {
+        it('should make a call to pushAnalytics', () => {
             // Assert
             expect(pushAnalyticsMock).toHaveBeenCalled();
         });

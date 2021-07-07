@@ -35,7 +35,7 @@ describe('Analytics', () => {
             prepareServersideAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareServersideAnalytics');
         });
 
-        it('should not attempt set the \'serverside only\' \'platformData\' properties if clientside', () => {
+        it('should not attempt set the serverside only platformData properties if clientside', () => {
             // Mocks
             component.mixins[0].computed.isServerSide = () => false;
 
@@ -56,7 +56,7 @@ describe('Analytics', () => {
             expect(storeUpdatePlatformDataSpy).not.toHaveBeenCalled();
         });
 
-        it('should set the \'serverside only\' \'platformData\' properties with appropriate defaults if serverside but values not available', () => {
+        it('should set the serverside only platformData properties with appropriate defaults if serverside but values not available', () => {
             // Arrange
             const expected = defaultState;
             expected.platformData.environment = 'localhost';
@@ -84,7 +84,7 @@ describe('Analytics', () => {
             expect(storeUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
         });
 
-        it('should set the \'serverside only\' \'platformData\' properties with appropriate values if serverside and available', () => {
+        it('should set the serverside only platformData properties with appropriate values if serverside and available', () => {
             // Arrange
             process.env.justEatEnvironment = 'testing123';
             process.env.FEATURE_VERSION = '4.3.2.1';

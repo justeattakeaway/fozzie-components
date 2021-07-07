@@ -114,7 +114,7 @@ describe('Analytics', () => {
             });
 
             test.each(cases)(
-                'should set the correct \'plaformData\' given %p as the \'locale\'',
+                'should set the correct plaformData given %p as the locale',
                 (localeArg, brandingExpected, countryExpected, currencyExpected, languageExpected) => {
                     // Expected
                     const expected = {
@@ -181,7 +181,7 @@ describe('Analytics', () => {
                 pushAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'pushAnalytics');
             });
 
-            it('should \'push\' the current \'$store.platformData\' data to the dataLayer', () => {
+            it('should push the current store.platformData data to the dataLayer', () => {
                 // Arrange
                 const expected = {
                     platformData: {
