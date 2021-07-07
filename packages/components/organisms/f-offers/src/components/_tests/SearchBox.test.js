@@ -7,7 +7,8 @@ import {
     ACTION_VALID_SEARCH,
     ACTION_INVALID_ADDRESS,
     ACTION_EMPTY_ADDRESS,
-    ACTION_UNKNOWN_ERROR
+    ACTION_UNKNOWN_ERROR,
+    VUEX_MODULE_NAMESPACE_OFFERS_SEARCH
 } from '../../store/types';
 import { POSTCODE_EMPTY, POSTCODE_INVALID } from '../../constants';
 
@@ -39,7 +40,12 @@ describe('SearchBox.vue', () => {
         };
 
         store = new Vuex.Store({
-            actions
+            modules: {
+                [VUEX_MODULE_NAMESPACE_OFFERS_SEARCH]: {
+                    namespaced: true,
+                    actions
+                }
+            }
         });
     });
 
