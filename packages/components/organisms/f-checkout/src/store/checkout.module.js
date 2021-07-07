@@ -5,24 +5,24 @@ import { VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_EXPERIMENTATION_MODULE, D
 import { version as applicationVerion } from '../../package.json';
 
 import {
-    UPDATE_HAS_ASAP_SELECTED,
+    UPDATE_ADDRESS,
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_ERRORS,
     UPDATE_MESSAGE,
     UPDATE_ORDER_PLACED,
+    UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
-    UPDATE_USER_NOTE,
-    UPDATE_ADDRESS,
-    UPDATE_PHONE_NUMBER
+    UPDATE_USER_NOTE
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -162,9 +162,7 @@ export default {
         // eslint-disable-next-line no-unused-vars
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
-        }, {
-                url, data, timeout
-            }) => {
+        }, { url, data, timeout }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
             const experimentationHeaders = rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];

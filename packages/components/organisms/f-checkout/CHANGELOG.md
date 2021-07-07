@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.153.0
 ------------------------------
-*July 6, 2021*
+*July 7, 2021*
 
 ### Added
 - Experiment headers to PATCH checkout request

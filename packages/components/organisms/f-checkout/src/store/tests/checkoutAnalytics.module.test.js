@@ -3,21 +3,18 @@ import * as mapper from '../../services/mapper';
 import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
 import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
 
-import {
-    UPDATE_AUTOFILL,
-    UPDATE_CHANGED_FIELD
-} from '../mutation-types';
+import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from '../mutation-types';
 
 const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
+    trackDuplicateOrderWarnDialog,
     trackFormErrors,
     trackFormInteraction,
     trackInitialLoad,
+    trackLowValueOrderExperiment,
     updateAutofill,
-    updateChangedField,
-    trackDuplicateOrderWarnDialog,
-    trackLowValueOrderExperiment
+    updateChangedField
 } = actions;
 
 Object.defineProperty(global, 'window', {
@@ -37,7 +34,9 @@ describe('CheckoutAnalyticsModule', () => {
     describe('actions ::', () => {
         let commit;
         let dispatch;
-        const rootState = { [VUEX_CHECKOUT_MODULE]: defaultCheckoutState };
+        const rootState = {
+            [VUEX_CHECKOUT_MODULE]: defaultCheckoutState
+        };
 
         beforeEach(() => {
             commit = jest.fn();

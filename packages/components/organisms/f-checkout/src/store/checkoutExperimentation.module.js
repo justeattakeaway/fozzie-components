@@ -1,36 +1,29 @@
 import { HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../constants';
-
-import {
-    UPDATE_EXPERIMENTS_STATE
-} from './mutation-types';
+import { UPDATE_EXPERIMENTS_STATE } from './mutation-types';
 
 export default {
     namespaced: true,
 
     state: () => ({
-        lowValueOrderExperimentValue: ''
+        lowValueOrderExperimentVariant: ''
     }),
 
     actions: {
         setExperimentValues: ({ commit }, experiments) => {
-            const lowValueOrderExperimentValue = experiments.low_value_order_threshold_web ? experiments.low_value_order_threshold_web.Variant : '';
-            commit(UPDATE_EXPERIMENTS_STATE, {
-                lowValueOrderExperimentValue
-            });
+            const lowValueOrderExperimentVariant = experiments.low_value_order_threshold_web ? experiments.low_value_order_threshold_web.Variant : '';
+            commit(UPDATE_EXPERIMENTS_STATE, { lowValueOrderExperimentVariant });
         }
     },
 
     mutations: {
-        [UPDATE_EXPERIMENTS_STATE]: (state, {
-            lowValueOrderExperimentValue
-        }) => {
-            state.lowValueOrderExperimentValue = lowValueOrderExperimentValue;
+        [UPDATE_EXPERIMENTS_STATE]: (state, { lowValueOrderExperimentVariant }) => {
+            state.lowValueOrderExperimentVariant = lowValueOrderExperimentVariant;
         }
     },
 
     getters: {
-        getExperimentsHeaders: ({ lowValueOrderExperimentValue }) => ({
-            [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: lowValueOrderExperimentValue
+        getExperimentsHeaders: ({ lowValueOrderExperimentVariant }) => ({
+            [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: lowValueOrderExperimentVariant
         })
     }
 };

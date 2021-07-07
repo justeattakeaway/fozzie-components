@@ -1,13 +1,7 @@
-import {
-    mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
-} from '../services/mapper';
+import { mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode } from '../services/mapper';
 import experimentService from '../services/experimentService';
 import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../constants';
-
-import {
-    UPDATE_AUTOFILL,
-    UPDATE_CHANGED_FIELD
-} from './mutation-types';
+import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from './mutation-types';
 
 export default {
     namespaced: true,
@@ -129,8 +123,8 @@ export default {
         },
 
         trackLowValueOrderExperiment: experimentHeaders => {
-            const lowValueOrderExperimentValue = experimentHeaders[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
-            const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentValue);
+            const lowValueOrderExperimentVariant = experimentHeaders[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
+            const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
             if (event) {
                 window.dataLayer.push(event);
             }

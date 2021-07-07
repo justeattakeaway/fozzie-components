@@ -64,7 +64,7 @@ const defaultAnalyticsState = {
 };
 
 const defaultExperimentationState = {
-    lowValueOrderExperimentValue: ''
+    lowValueOrderExperimentVariant: ''
 };
 
 const defaultCheckoutActions = {
@@ -170,4 +170,3 @@ export {
     mockAuthTokenNoNumbers,
     mockAuthTokenNoMobileNumber
 };
-

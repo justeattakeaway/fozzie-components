@@ -1,16 +1,11 @@
 import CheckoutExperimentationModule from '../checkoutExperimentation.module';
 import { defaultExperimentationState } from '../../components/_tests/helpers/setup';
 import { HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
-
-import {
-    UPDATE_EXPERIMENTS_STATE
-} from '../mutation-types';
+import { UPDATE_EXPERIMENTS_STATE } from '../mutation-types';
 
 const { actions, getters } = CheckoutExperimentationModule;
 
-const {
-    setExperimentValues
-} = actions;
+const { setExperimentValues } = actions;
 
 describe('CheckoutExperimentationModule', () => {
     let state = CheckoutExperimentationModule.state();
@@ -34,11 +29,11 @@ describe('CheckoutExperimentationModule', () => {
 
         describe('setExperimentValues ::', () => {
             const experiments = {
-                // eslint-disable-next-line
+                // eslint-disable-next-line camelcase
                 low_value_order_threshold_web: {
                     Name: 'experiment_test',
                     Domain: 'Menu',
-                    Variant: true,
+                    Variant: 'true',
                     UseBackendHttpHeaders: true,
                     Version: 1
                 }
@@ -49,7 +44,7 @@ describe('CheckoutExperimentationModule', () => {
                 setExperimentValues({ commit }, experiments);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_EXPERIMENTS_STATE, { lowValueOrderExperimentValue: true });
+                expect(commit).toHaveBeenCalledWith(UPDATE_EXPERIMENTS_STATE, { lowValueOrderExperimentVariant: 'true' });
             });
         });
     });
@@ -62,14 +57,14 @@ describe('CheckoutExperimentationModule', () => {
         describe('getExperimentsHeaders ::', () => {
             it('should get the header values to pass to API calls', () => {
                 // Arrange
-                state.lowValueOrderExperimentValue = true;
+                state.lowValueOrderExperimentVariant = 'true';
 
                 // Act
                 const result = getters.getExperimentsHeaders(state);
 
                 // Assert
                 expect(result).toEqual({
-                    [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: true
+                    [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: 'true'
                 });
             });
         });

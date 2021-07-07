@@ -301,12 +301,12 @@ export default {
             type: String,
             required: true
         },
-        
+
         experiments: {
             type: Object,
             default: () => ({})
         },
-        
+
         getCustomerUrl: {
             type: String,
             required: true
