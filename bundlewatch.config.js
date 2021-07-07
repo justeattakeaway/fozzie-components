@@ -15,7 +15,7 @@ const getPackageLocations = () => {
 
         let command = 'npx lerna ls --json';
 
-        command = process.env.RUN_ALL ? command : command.concat(' --since origin/master');
+        command = process.env.RUN_ALL ? command : command.concat(' --since origin/master --include-dependencies');
 
         outputPackages = execSync(command);
     } catch (error) {
@@ -40,11 +40,5 @@ const files = packagesLocations.map(packageLocation => ({
 }));
 
 module.exports = {
-    files,
-    ci: {
-        trackBranches: [
-            'master',
-            'main'
-        ]
-    }
+    files
 };
