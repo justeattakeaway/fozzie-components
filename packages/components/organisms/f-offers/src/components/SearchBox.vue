@@ -6,7 +6,7 @@
                 queryString: {
                     refine: 'with_discounts'
                 },
-                isShellHidden: true
+                hideShell: true
             }"
             data-test-id="OffersInbox-Searchbox"
             @address-search-focus="addressFocus"
@@ -45,7 +45,7 @@ export default {
     },
 
     methods: {
-        ...mapActions({
+        ...mapActions(VUEX_MODULE_NAMESPACE_OFFERS_SEARCH, {
             addressFocus: ACTION_ADDRESS_FOCUS,
             validSavedAddress: ACTION_VALID_SAVED_ADDRESS_SEARCH,
             validSearch: ACTION_VALID_SEARCH,
