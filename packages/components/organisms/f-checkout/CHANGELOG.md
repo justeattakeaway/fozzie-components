@@ -12,6 +12,15 @@ v0.155.0
 - Email, Postcode and Mobile was validating on every keypress but now validating onBlur.
 
 
+
+v0.153.0
+------------------------------
+*July 6, 2021*
+
+### Added
+- Chosen time to eventData to be captured by the error log.
+
+
 v0.152.0
 ------------------------------
 *July 6, 2021*

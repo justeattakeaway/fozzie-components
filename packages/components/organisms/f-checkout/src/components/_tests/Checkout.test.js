@@ -952,7 +952,7 @@ describe('Checkout', () => {
         });
 
         describe('eventData ::', () => {
-            it('should return `isLoggedIn` and `serviceType` in an object`', () => {
+            it('should return `isLoggedIn`, `serviceType` and `chosenTime` in an object`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -965,7 +965,11 @@ describe('Checkout', () => {
                 const result = wrapper.vm.eventData;
 
                 // Assert
-                expect(result).toEqual({ isLoggedIn: defaultCheckoutState.isLoggedIn, serviceType: defaultCheckoutState.serviceType });
+                expect(result).toEqual({
+                    isLoggedIn: defaultCheckoutState.isLoggedIn,
+                    serviceType: defaultCheckoutState.serviceType,
+                    chosenTime: defaultCheckoutState.time.from
+                });
             });
         });
 
@@ -1760,16 +1764,10 @@ describe('Checkout', () => {
 
             describe('when invoked', () => {
                 it('should call `$logger` with the correct callback assigned', () => {
-                    // Arrange
-                    const eventData = {
-                        isLoggedIn: true,
-                        serviceType: CHECKOUT_METHOD_DELIVERY
-                    };
-
-                    // Act
+                    // Arrange & Act
                     wrapper.vm.logInvoker({
                         message: 'Logger says hi',
-                        data: eventData,
+                        data: wrapper.vm.eventData,
                         logMethod: $logger.logInfo
                     });
 
@@ -1779,10 +1777,6 @@ describe('Checkout', () => {
 
                 it('should call `$logger` with the correct arguments', () => {
                     // Arrange
-                    const eventData = {
-                        isLoggedIn: true,
-                        serviceType: CHECKOUT_METHOD_DELIVERY
-                    };
                     const error = new Error();
                     error.name = 'Test name';
                     error.message = 'Test message';
@@ -1800,13 +1794,13 @@ describe('Checkout', () => {
                     // Act
                     wrapper.vm.logInvoker({
                         message: logMessage,
-                        data: eventData,
+                        data: wrapper.vm.eventData,
                         logMethod: $logger.logError,
                         error
                     });
 
                     // Assert
-                    expect($logger.logError).toHaveBeenCalledWith(logMessage, store, { data: eventData, tags: 'checkout', ...expectedError });
+                    expect($logger.logError).toHaveBeenCalledWith(logMessage, store, { data: wrapper.vm.eventData, tags: 'checkout', ...expectedError });
                 });
             });
         });
@@ -2536,10 +2530,6 @@ describe('Checkout', () => {
                 it('should emit failure event and log a warning', async () => {
                     // Arrange
                     const error = new Error('Doh exception man!');
-                    const eventData = {
-                        isLoggedIn: defaultCheckoutState.isLoggedIn,
-                        serviceType: defaultCheckoutState.serviceType
-                    };
                     const store = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject(error)) });
                     const wrapper = mount(VueCheckout, {
                         store,
@@ -2561,7 +2551,7 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
                     expect(logInvokerSpy).toHaveBeenCalledWith({
                         message: 'Get checkout address failure',
-                        data: eventData,
+                        data: wrapper.vm.eventData,
                         logMethod: $logger.logWarn,
                         error
                     });
@@ -2590,7 +2580,6 @@ describe('Checkout', () => {
 
         describe('handleErrorState ::', () => {
             let wrapper;
-            let eventData;
             let error;
             let eventToEmit;
             let logInvokerSpy;
@@ -2601,11 +2590,6 @@ describe('Checkout', () => {
                 // Arrange
                 error = new Error('An error occurred');
                 eventToEmit = EventNames.CheckoutFailure;
-
-                eventData = {
-                    isLoggedIn: defaultCheckoutState.isLoggedIn,
-                    serviceType: defaultCheckoutState.serviceType
-                };
 
                 wrapper = mount(VueCheckout, {
                     store: createStore({
@@ -2635,7 +2619,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.emitted(eventToEmit).length).toBe(1);
-                expect(wrapper.emitted(eventToEmit)[0][0]).toEqual({ ...eventData, error });
+                expect(wrapper.emitted(eventToEmit)[0][0]).toEqual({ ...wrapper.vm.eventData, error });
             });
 
             it('should call `logInvoker` to log the error, passing the `eventData`, `error` and `logError` as a method by default', () => {
@@ -2645,7 +2629,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(logInvokerSpy).toHaveBeenCalledWith({
                     message: 'Consumer Checkout Failure',
-                    data: eventData,
+                    data: wrapper.vm.eventData,
                     logMethod: $logger.logError,
                     error
                 });
@@ -2661,7 +2645,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(logInvokerSpy).toHaveBeenCalledWith({
                     message: 'Checkout Update Failure: Access Forbidden',
-                    data: eventData,
+                    data: wrapper.vm.eventData,
                     logMethod: $logger.logWarn,
                     error
                 });
@@ -3226,11 +3210,6 @@ describe('Checkout', () => {
 
                     const store = createStore();
 
-                    const eventData = {
-                        isLoggedIn: defaultCheckoutState.isLoggedIn,
-                        serviceType: defaultCheckoutState.serviceType
-                    };
-
                     const wrapper = mount(VueCheckout, {
                         store,
                         i18n,
@@ -3251,7 +3230,7 @@ describe('Checkout', () => {
                     expect(logInvokerSpy).toHaveBeenCalledWith({
                         message: 'Checkout Validation Error',
                         data: {
-                            ...eventData,
+                            ...wrapper.vm.eventData,
                             validationState: mockValidationState
                         },
                         logMethod: $logger.logWarn
