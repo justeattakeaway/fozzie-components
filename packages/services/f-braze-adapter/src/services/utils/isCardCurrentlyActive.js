@@ -33,9 +33,10 @@ function isCardActiveBasedOnTime (displayTimes) {
  * @returns {boolean} - is card active
  */
 const isCardCurrentlyActive = (card = {}, brands = []) => {
-    const { displayTimes, brand } = card;
+    const { displayTimes, brand, isVisible } = card;
 
-    return (!brand || brands.includes(brand))
+    return (isVisible !== false)
+        && (!brand || brands.includes(brand))
         && (!displayTimes || isCardActiveBasedOnTime(displayTimes));
 };
 

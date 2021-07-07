@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.5.0
+------------------------------
+*July 7, 2021*
+
+### Changed
+- Recognises and respects the `is_visible` and `deduplication_key` key-value pairs in the
+  content-card data
+
+
 v3.4.0
 ------------------------------
 *April 28, 2021*
