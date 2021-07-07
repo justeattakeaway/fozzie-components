@@ -26,14 +26,6 @@ export default {
 
 <style lang="scss" module>
 
-.c-takeawaypayActivation-icon {
-    transform: translate(10%);
-    width: 125px;
-}
-
-.c-takeawaypayActivation-title {
-    @include font-size(body-l);
-    font-weight: $font-weight-bold;
-}
+@import './../assets/scss/takeaway-pay-activation';
 
 </style>
