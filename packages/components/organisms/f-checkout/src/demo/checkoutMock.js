@@ -19,12 +19,14 @@ import updateCheckout from './update-checkout.json';
 import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
 import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-items-required.json';
 import updateCheckoutAccessForbidden from './update-checkout-403.json';
+import updateCheckoutUnavailableTimeUrl from './update-checkout-time-unavailable.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
 import accessForbiddenError from './checkout-403-get-error.json';
 import getCheckoutError from './checkout-500-get-error.json';
 import getGeoLocation from './get-geo-location.json';
+import getCustomer from './get-customer.json';
 
 const mock = new MockAdapter(axios);
 
@@ -88,6 +90,9 @@ export default {
             case '/update-checkout-403.json':
                 mock.onPatch(path).reply(403, updateCheckoutAccessForbidden);
                 break;
+            case '/update-checkout-time-unavailable.json':
+                mock.onPatch(path).reply(200, updateCheckoutUnavailableTimeUrl);
+                break;
             case '/get-address.json':
                 mock.onGet(path).reply(200, getAddress);
                 break;
@@ -105,6 +110,9 @@ export default {
                 break;
             case '/get-geo-location.json':
                 mock.onPost(path).reply(200, getGeoLocation);
+                break;
+            case '/get-customer.json':
+                mock.onGet(path).reply(200, getCustomer);
                 break;
             default:
                 throw new Error(`${path} is not valid`);
