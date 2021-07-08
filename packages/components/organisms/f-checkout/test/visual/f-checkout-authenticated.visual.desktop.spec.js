@@ -46,6 +46,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         checkout.open(pageUrl);
         checkout.waitForComponent();
         checkout.goToPayment();
+        browser.pause(500);
 
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Authenticated - "Something went wrong" Error', 'desktop');
