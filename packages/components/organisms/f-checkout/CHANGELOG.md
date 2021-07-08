@@ -3,21 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.155.0
+------------------------------
+*July 8, 2021*
+
+### Added
+- Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
+
+
 v0.154.0
 ------------------------------
 *July 7, 2021*
 
 ### Added
 - Redirect to home when `restaurant.seoName` is falsey.
-
-
-v0.154.0
-------------------------------
-*July 7, 2021*
-
-### Added
-- Experiment headers to PATCH checkout request
-- Track experiments if returned in response headers
 
 
 v0.153.0
