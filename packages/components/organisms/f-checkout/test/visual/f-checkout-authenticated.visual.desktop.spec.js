@@ -248,8 +248,8 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        checkout.clearBlurField('mobileNumber');
         checkout.clearCheckoutForm('tableIdentifier');
+        checkout.clearBlurField('mobileNumber');
         checkout.goToPayment();
 
         // Assert
