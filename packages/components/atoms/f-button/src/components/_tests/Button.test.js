@@ -5,9 +5,122 @@ describe('Button', () => {
     const actionType = 'button';
 
     it('should be defined', () => {
-        const propsData = { };
+        const propsData = {};
         const wrapper = shallowMount(FButton, { propsData });
         expect(wrapper.exists()).toBe(true);
+    });
+
+    describe('methods ::', () => {
+        describe('validateProps ::', () => {
+            let spy;
+
+            beforeEach(() => {
+                spy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
+            });
+            afterEach(() => {
+                spy.mockRestore();
+            });
+
+            it.each([
+                'xsmall',
+                'small',
+                'medium',
+                'large'
+            ])('should not throw an error when buttonSize is set to %s', buttonSize => {
+                // Arrange
+                const propsData = {
+                    buttonSize,
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .not.toThrowError();
+            });
+
+            it('should throw an error when buttonSize is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    buttonSize: 'invalid_value',
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .toThrowError('buttonSize is set to "invalid_value"');
+            });
+
+            it.each([
+                'primary',
+                'secondary',
+                'outline',
+                'ghost',
+                'link'
+            ])('should not throw an error when the component is a standard button (isIcon="false") and buttonType is set to %s', buttonType => {
+                // Arrange
+                const propsData = {
+                    buttonType,
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .not.toThrowError();
+            });
+
+            it('should throw an error when the component is a standard button (isIcon="false") and buttonType is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    buttonType: 'invalid_value',
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .toThrowError('button is set to have buttonType="invalid_value"');
+            });
+
+            it.each([
+                'primary',
+                'secondary',
+                'ghost',
+                'ghostTertiary'
+            ])('should not throw an error when the component is an iconButton (isIcon="true") and buttonType is set to %s', buttonType => {
+                // Arrange
+                const propsData = {
+                    buttonType,
+                    isIcon: true
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .not.toThrowError();
+            });
+
+            it('should throw an error when the component is an iconButton (isIcon="true") and the buttonType is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    buttonType: 'invalid_value',
+                    isIcon: true
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .toThrowError('iconButton is set to have buttonType="invalid_value"');
+            });
+        });
     });
 
     describe('template :: ', () => {
