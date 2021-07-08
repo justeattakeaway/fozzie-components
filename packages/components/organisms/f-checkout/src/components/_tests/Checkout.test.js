@@ -1067,6 +1067,26 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
                 });
+
+                describe('when the `restaurant.seoName` is falsey', () => {
+                    it('should return `/` so the user can be navigated back to the homepage', () => {
+                        // Arrange && Act
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                restaurant: {
+                                    seoName: ''
+                                }
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+
+                        // Assert
+                        expect(wrapper.vm.redirectUrl).toEqual('/');
+                    });
+                });
             });
 
             describe('when service type is dine in', () => {

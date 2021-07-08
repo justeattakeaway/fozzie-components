@@ -465,8 +465,17 @@ export default {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         },
 
+        /**
+         * Redirect to menu if the `restaurant.seoName` exists otherwise redirect to home.
+         *
+         * */
         redirectUrl () {
             const prefix = this.isCheckoutMethodDineIn ? 'dine-in' : 'restaurants';
+
+            if (!this.restaurant.seoName) {
+                return '/';
+            }
+
             return `${prefix}-${this.restaurant.seoName}/menu`;
         }
     },
