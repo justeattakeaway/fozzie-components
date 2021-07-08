@@ -1,13 +1,7 @@
-import { getCookie } from '../utils/helpers';
-
 const storedLocationKey = 'je-full-address-details';
 
 function isFullPostCode (postcode) {
-    if (!postcode) {
-        return false;
-    }
-
-    return postcode.length > 4;
+    return !postcode ? false : postcode.length > 4;
 }
 
 function toFormattedPostcode (postcode) {
@@ -47,11 +41,7 @@ function getAddress (postcode, address) {
 }
 
 function getDefaultAddress (addresses) {
-    if (!addresses) {
-        return null;
-    }
-
-    return addresses.find(a => a && a.IsDefault);
+    return !addresses ? null : addresses.find(a => a && a.IsDefault);
 }
 
 function getAddressClosestToPostcode (postcode, addresses) {
@@ -126,7 +116,6 @@ function getAddressCoordsFromLocalStorage () {
     return null;
 }
 
-
 /**
  * Checkes whether the address values in local storage match what's is in the form.
  * @param storedAddress - The address stored in local storage
@@ -138,19 +127,21 @@ function doesAddressInStorageAndFormMatch (storedAddress, formAddress) {
         && storedAddress.Line2 === formAddress.line2 && storedAddress.City === formAddress.locality;
 }
 
+function getClosestAddress (addresses, tenant) {
+    if (tenant !== 'uk') {
+        // TODO: Add implementation for other tenants
+        return getAddress('', {});
+    }
+
+    const postcode = this.$cookie.get('je-location') || '';
+    const address = getAddressClosestToPostcode(postcode, addresses);
+
+    return getAddress(postcode, address);
+}
+
 export default {
     doesAddressInStorageAndFormMatch,
-    getClosestAddress (addresses, tenant) {
-        if (tenant !== 'uk') {
-            // TODO: Add implementation for other tenants
-            return getAddress('', {});
-        }
-
-        const postcode = getCookie('je-location') || '';
-        const address = getAddressClosestToPostcode(postcode, addresses);
-
-        return getAddress(postcode, address);
-    },
+    getClosestAddress,
     getAddressFromLocalStorage,
     getAddressCoordsFromLocalStorage,
     isAddressInLocalStorage

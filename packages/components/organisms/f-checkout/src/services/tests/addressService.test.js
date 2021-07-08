@@ -1,8 +1,5 @@
 import addressService from '../addressService';
 import localStorageMock from '../../../test-utils/local-storage/local-storage-mock';
-import { getCookie } from '../../utils/helpers';
-
-jest.mock('../../utils/helpers');
 
 const area511Line = {
     City: 'Area 51',
