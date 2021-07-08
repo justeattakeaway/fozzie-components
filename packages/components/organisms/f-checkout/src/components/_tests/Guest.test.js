@@ -86,7 +86,7 @@ describe('Guest', () => {
                 [false, false, true, true],
                 [false, true, false, true],
                 [false, false, true, false]
-            ])('should return %s if `email.email` = %s or `$dirty` = %s and `isFieldEmpty` = %s for email field', (expected, email, dirty, isEmpty) => {
+            ])('should return %s when `email.email` = %s, `$dirty` = %s, `isFieldEmpty` = %s for email field', (expected, email, dirty, isEmpty) => {
                 // Arrange
                 $v[VALIDATIONS.guest].email.email = email;
                 $v[VALIDATIONS.guest].email.$dirty = dirty;

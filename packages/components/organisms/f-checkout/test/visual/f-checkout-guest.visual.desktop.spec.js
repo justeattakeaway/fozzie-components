@@ -25,7 +25,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        checkout.clearCheckoutForm('mobileNumber');
+        checkout.clearBlurField('mobileNumber');
         checkout.goToPayment();
 
         // Assert
@@ -39,6 +39,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateCollectionCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
@@ -65,10 +66,8 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     });
 
     it('should display invalid email address', () => {
-        // Arrange
-        checkout.clearCheckoutForm('emailAddress');
-
         // Act
+        checkout.clearBlurField('emailAddress');
         checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
         browser.keys('Tab');
 
@@ -120,9 +119,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the delivery f-checkout guest mandatory error messages', () => {
         // Act
-        ['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode']
-            .forEach(field => checkout.clearCheckoutForm(field));
-
+        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutForm(field));
+        ['mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
@@ -136,6 +134,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
@@ -168,10 +167,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     });
 
     it('should display invalid email address', () => {
-        // Arrange
-        checkout.clearCheckoutForm('emailAddress');
-
         // Act
+        checkout.clearBlurField('emailAddress');
         checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
         browser.keys('Tab');
 
