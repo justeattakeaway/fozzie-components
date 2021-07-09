@@ -442,7 +442,8 @@ export default {
         },
 
         redirectUrl () {
-            return `restaurants-${this.restaurant.seoName}/menu`;
+            const prefix = this.isCheckoutMethodDineIn ? 'dine-in' : 'restaurants';
+            return `${prefix}-${this.restaurant.seoName}/menu`;
         }
     },
 

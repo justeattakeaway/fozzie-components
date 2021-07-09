@@ -356,7 +356,7 @@ export default {
             if (isAddressInLocalStorage) {
                 const storedAddress = addressService.getAddressFromLocalStorage(false);
                 if (storedAddress.Line1 === state.address.line1 && storedAddress.PostalCode === state.address.postcode) {
-                    addressCoords = [storedAddress.Field1, storedAddress.Field2];
+                    addressCoords = [storedAddress.Field2, storedAddress.Field1];
                     commit(UPDATE_GEO_LOCATION, addressCoords);
                 }
             }

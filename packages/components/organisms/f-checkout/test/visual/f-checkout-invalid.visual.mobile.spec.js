@@ -3,21 +3,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 let checkout;
 
-describe('f-checkout - Invalid - Visual Tests', () => {
-
-    it('should display the error page component', () => {
-        // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'invalid-url');
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
-        // Act
-        checkout.open(pageUrl);
-        checkout.waitForErrorPageComponent();
-        // Assert
-        browser.percyScreenshot('f-checkout - Invalid - Base State', 'shared');
-    });
+describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display the "Get Checkout" error page', () => {
         // Arrange
@@ -28,13 +14,13 @@ describe('f-checkout - Invalid - Visual Tests', () => {
                 .withQuery('&knob-Get Checkout Errors', '500')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        
+
         // Act
         checkout.open(pageUrl);
         checkout.waitForErrorPageComponent();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout" Error Page', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout" Error Page', 'mobile');
     });
 
     it('should display the "Get Checkout 403" error page', () => {
@@ -46,12 +32,12 @@ describe('f-checkout - Invalid - Visual Tests', () => {
                 .withQuery('&knob-Get Checkout Errors', '403')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        
+
         // Act
         checkout.open(pageUrl);
         checkout.waitForErrorPageComponent();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'shared');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'mobile');
     });
 });

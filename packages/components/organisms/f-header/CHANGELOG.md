@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.19.0
+------------------------------
+*June 17, 2021*
+
+### Added
+- Visual regression tests
+
+
+v4.18.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- "Deliver with Just Eat" link
+
+
 v4.17.2
 ------------------------------
 *June 15, 2021*
