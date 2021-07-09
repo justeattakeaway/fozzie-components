@@ -604,7 +604,6 @@ describe('CheckoutModule', () => {
         describe('getAddress ::', () => {
             it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {
                 // Arrange
-                payload = { ...payload, currentPostcode: 'JZ11AA' };
                 const config = {
                     headers: {
                         'Content-Type': 'application/json',
