@@ -46,4 +46,39 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         // Assert
         expect(checkout.getFieldValue(field).length).toEqual(maxlength);
     });
+
+    forEach([
+        ['jazz.man@tunetown.com'],
+        ['jazzman@tunetown.com']
+    ])
+    .it('should be valid email address: "%s"', email => {
+        // Arrange
+        checkout.clearCheckoutForm('emailAddress');
+
+        // Act
+        checkout.setFieldValue('emailAddress', email);
+        browser.keys('Tab');
+
+        // Assert
+        expect(checkout.isEmailErrorDisplayed()).toBe(false);
+    });
+
+    forEach([
+        ['@jazz.man@tunetown.com'],
+        ['.jazzman@tunetown.com'],
+        ['jazzmantunetown.com'],
+        ['jazzman@'],
+        ['jazzman']
+    ])
+    .it('should be invalid email address: "%s"', email => {
+        // Arrange
+        checkout.clearCheckoutForm('emailAddress');
+
+        // Act
+        checkout.setFieldValue('emailAddress', email);
+        browser.keys('Tab');
+
+        // Assert
+        expect(checkout.isEmailErrorDisplayed()).toBe(true);
+    });
 });

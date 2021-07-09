@@ -25,7 +25,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the mandatory error messages.', () => {
         // Act
-        checkout.clearCheckoutForm('mobileNumber');
+        checkout.clearBlurField('mobileNumber');
         checkout.goToPayment();
 
         // Assert
@@ -94,6 +94,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateCollectionCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
@@ -162,12 +163,10 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State', 'mobile');
     });
 
-    it('should display the mandatory error messages', field => {
+    it('should display the mandatory error messages', () => {
         // Act
-
-        ['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode']
-            .forEach(field => checkout.clearCheckoutForm(field));
-
+        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutForm(field));
+        ['mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
@@ -181,6 +180,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('addressPostcode');
         checkout.populateCheckoutForm(addressInfo);
         checkout.goToPayment();
 
@@ -195,6 +195,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
@@ -299,12 +300,10 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
         browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', 'mobile');
     });
 
-    it('should display the mandatory error messages', field => {
+    it('should display the mandatory error messages', () => {
         // Act
-
-        ['mobileNumber', 'tableIdentifier']
-            .forEach(field => checkout.clearCheckoutForm(field));
-
+        checkout.clearCheckoutForm('tableIdentifier');
+        checkout.clearBlurField('mobileNumber');
         checkout.goToPayment();
 
         // Assert
@@ -318,6 +317,7 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateDineInCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
