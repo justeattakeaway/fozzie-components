@@ -281,7 +281,8 @@ export default {
             url,
             tenant,
             language,
-            timeout
+            timeout,
+            currentPostcode
         }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
             const config = {
@@ -297,7 +298,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
+            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });

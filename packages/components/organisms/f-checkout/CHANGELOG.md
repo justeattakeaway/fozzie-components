@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.158.0
+------------------------------
+*July 9, 2021*
+
+### changed
+- Removed the direct get postcode cookie call from `addressService.js` and now pass value in.
+
+
 v0.154.0
 ------------------------------
 *July 7, 2021*

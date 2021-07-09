@@ -117,7 +117,7 @@ function getAddressCoordsFromLocalStorage () {
 }
 
 /**
- * Checkes whether the address values in local storage match what's is in the form.
+ * Checks whether the address values in local storage match what's is in the form.
  * @param storedAddress - The address stored in local storage
  * @param formAddress - The address in form state
  * @returns {boolean} - Whether the form values match
@@ -127,13 +127,20 @@ function doesAddressInStorageAndFormMatch (storedAddress, formAddress) {
         && storedAddress.Line2 === formAddress.line2 && storedAddress.City === formAddress.locality;
 }
 
-function getClosestAddress (addresses, tenant) {
+/**
+ * Attempts to find the closest address; from the addresses
+ * supplied, to the current postcode provided.
+ * @param addresses - The consumers address book
+ * @param tenant - The current tenant
+ * @returns {Object} - The closest formatted address
+ */
+function getClosestAddress (addresses, tenant, currentPostcode) {
     if (tenant !== 'uk') {
         // TODO: Add implementation for other tenants
         return getAddress('', {});
     }
 
-    const postcode = this.$cookie.get('je-location') || '';
+    const postcode = currentPostcode || '';
     const address = getAddressClosestToPostcode(postcode, addresses);
 
     return getAddress(postcode, address);

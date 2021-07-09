@@ -794,7 +794,8 @@ export default {
                     url: this.getAddressUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.checkoutTimeout
+                    timeout: this.checkoutTimeout,
+                    currentPostcode: this.$cookies.get('je-location')
                 });
 
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
