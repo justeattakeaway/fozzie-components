@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.154.0
+------------------------------
+*July 7, 2021*
+
+### Added
+- Redirect to home when `restaurant.seoName` is falsey.
+
+
+v0.155.0
+------------------------------
+*July 6, 2021*
+
+### Changed
+- Email, Postcode and Mobile was validating on every keypress but now validating onBlur.
+
+
 
 v0.154.0
 ------------------------------

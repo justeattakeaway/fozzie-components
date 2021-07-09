@@ -52,6 +52,7 @@
                         aria-describedby="mobile-number-error"
                         :aria-invalid="isMobileNumberInvalid"
                         :aria-label="formattedMobileNumberForScreenReader"
+                        @blur="formFieldBlur('mobileNumber')"
                         @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
@@ -459,8 +460,17 @@ export default {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         },
 
+        /**
+         * Redirect to menu if the `restaurant.seoName` exists otherwise redirect to home.
+         *
+         * */
         redirectUrl () {
             const prefix = this.isCheckoutMethodDineIn ? 'dine-in' : 'restaurants';
+
+            if (!this.restaurant.seoName) {
+                return '/';
+            }
+
             return `${prefix}-${this.restaurant.seoName}/menu`;
         }
     },
@@ -993,6 +1003,13 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, this.spinnerTimeout);
+        },
+
+        formFieldBlur (field) {
+            const fieldValidation = this.$v.customer[field];
+            if (fieldValidation) {
+                fieldValidation.$touch();
+            }
         },
 
         /**
