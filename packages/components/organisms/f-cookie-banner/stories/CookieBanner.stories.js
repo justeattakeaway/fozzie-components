@@ -20,13 +20,18 @@ export const CookieBannerComponent = () => ({
 
         shouldShowLegacyBanner: {
             default: boolean('Show legacy banner', null)
+        },
+
+        useGreyBackground: {
+            default: boolean('Reopen link uses grey background', null)
         }
     },
     template: `<cookie-banner
         :locale="locale"
         :is-hidden="isHidden"
         :key="locale"
-        :should-show-legacy-banner="shouldShowLegacyBanner" />`
+        :should-show-legacy-banner="shouldShowLegacyBanner"
+        :use-grey-background="useGreyBackground" />`
 });
 
 CookieBannerComponent.storyName = 'f-cookie-banner';
