@@ -11,6 +11,15 @@ v0.154.0
 - Redirect to home when `restaurant.seoName` is falsey.
 
 
+v0.155.0
+------------------------------
+*July 6, 2021*
+
+### Changed
+- Email, Postcode and Mobile was validating on every keypress but now validating onBlur.
+
+
+
 v0.153.0
 ------------------------------
 *July 6, 2021*
