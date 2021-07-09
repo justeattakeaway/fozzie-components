@@ -29,6 +29,7 @@ function isCardActiveBasedOnTime (displayTimes) {
  * @param card {object}
  * @param card.displayTimes {object} - Display times
  * @param card.brand {string} - Identifier string for relevant brand
+ * @param card.isVisible {string} - Identifier string for relevant brand
  * @param brands {string[]} - String of current brands
  * @returns {boolean} - is card active
  */
