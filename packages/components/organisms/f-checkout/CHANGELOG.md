@@ -3,6 +3,112 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.154.0
+------------------------------
+*July 7, 2021*
+
+### Added
+- Redirect to home when `restaurant.seoName` is falsey.
+
+
+v0.155.0
+------------------------------
+*July 6, 2021*
+
+### Changed
+- Email, Postcode and Mobile was validating on every keypress but now validating onBlur.
+
+
+
+v0.153.0
+------------------------------
+*July 6, 2021*
+
+### Added
+- Chosen time to eventData to be captured by the error log.
+
+
+v0.152.0
+------------------------------
+*July 6, 2021*
+
+### Fixed
+- Returning guest user's mobile phone number not populating
+
+
+v0.151.0
+------------------------------
+*July 5, 2021*
+
+### Fixed
+- Get new `availableFulfilment` times when no available fulfilment times are available.
+
+### Changed
+- `f-form-field` version to `1.16.1`.
+
+
+v0.150.0
+------------------------------
+*June 30, 2021*
+
+### Fixed
+- Address not populating guest checkout form.
+
+
+v0.149.0
+------------------------------
+*June 30, 2021*
+
+### Changed
+- Logging levels for different errors.
+- Using `f-card`'s `1.3.0` version.
+
+
+v0.148.0
+------------------------------
+*June 24, 2021*
+
+### Added
+- The ability to save to `localStorage` if the address is changed by the user.
+
+
+v0.147.0
+------------------------------
+*June 24, 2021*
+
+### Fix
+- ASAP flag applied when times are initialised.
+
+
+v0.146.0
+------------------------------
+*June 24, 2021*
+
+### Changed
+- When submitting the checkout page and we get a `403` error code, we show the `403` error page.
+
+
+v0.145.0
+------------------------------
+*June 23, 2021*
+
+### Fixed
+- Selector to display previously selected times
+
+### Changed
+- `f-form-field` version
+
+### Added
+- Storybook mocks for pre-selected fulfilment times
+
+
+v0.144.0
+------------------------------
+*June 21, 2021*
+
+### Added
+- More thorough check on whether form address and storage address match
+
 
 v0.143.1
 ------------------------------
@@ -62,7 +168,7 @@ v0.139.0
 
 ### Changed
 - Use loading spinner on submit button
-  
+
 
 v0.138.0
 ------------------------------

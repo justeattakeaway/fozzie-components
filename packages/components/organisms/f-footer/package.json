@@ -2,6 +2,7 @@
   "name": "@justeat/f-footer",
   "version": "4.27.0",
   "main": "dist/f-footer.umd.min.js",
+  "maxBundleSize": "80kB",
   "files": [
     "dist",
     "test-utils"

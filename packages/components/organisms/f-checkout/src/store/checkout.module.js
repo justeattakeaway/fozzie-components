@@ -20,7 +20,9 @@ import {
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTE,
+    UPDATE_ADDRESS,
+    UPDATE_PHONE_NUMBER
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -146,6 +148,7 @@ export default {
             resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);
+            commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
@@ -301,6 +304,37 @@ export default {
         },
 
         /**
+         * Gets phone number from customer record from backend and updates state
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCustomer: async ({ commit, state, dispatch }, {
+            url,
+            timeout
+        }) => {
+            if (!state.customer || state.customer.mobileNumber) {
+                return;
+            }
+
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(state.authToken && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            commit(UPDATE_PHONE_NUMBER, data.PhoneNumber);
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+        },
+
+        /**
          * Post the order details to the Order Placement API and get the `orderId` from the response.
          *
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
@@ -355,9 +389,19 @@ export default {
 
             if (isAddressInLocalStorage) {
                 const storedAddress = addressService.getAddressFromLocalStorage(false);
-                if (storedAddress.Line1 === state.address.line1 && storedAddress.PostalCode === state.address.postcode) {
+
+                if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
                     addressCoords = [storedAddress.Field2, storedAddress.Field1];
                     commit(UPDATE_GEO_LOCATION, addressCoords);
+                } else {
+                    const addressDetails = state.address;
+
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({
+                        PostalCode: addressDetails.postcode,
+                        Line1: addressDetails.line1,
+                        Line2: addressDetails.line2,
+                        City: addressDetails.locality
+                    }));
                 }
             }
 
@@ -432,6 +476,10 @@ export default {
 
         updateMessage:  ({ commit }, message = null) => {
             commit(UPDATE_MESSAGE, message);
+        },
+
+        updateAddress: ({ commit }, address) => {
+            commit(UPDATE_ADDRESS, address);
         }
     },
 
@@ -562,6 +610,20 @@ export default {
 
         [UPDATE_MESSAGE]: (state, message) => {
             state.message = message;
+        },
+
+        [UPDATE_ADDRESS]: (state, address) => {
+            /* eslint-disable prefer-destructuring */
+            state.address.line1 = address.lines[0];
+            state.address.line2 = address.lines[1];
+            /* eslint-enable prefer-destructuring */
+
+            state.address.locality = address.locality;
+            state.address.postcode = address.postalCode;
+        },
+
+        [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
+            state.customer.mobileNumber = phoneNumber;
         }
     }
 };

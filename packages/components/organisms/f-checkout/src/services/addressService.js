@@ -126,7 +126,20 @@ function getAddressCoordsFromLocalStorage () {
     return null;
 }
 
+
+/**
+ * Checkes whether the address values in local storage match what's is in the form.
+ * @param storedAddress - The address stored in local storage
+ * @param formAddress - The address in form state
+ * @returns {boolean} - Whether the form values match
+ */
+function doesAddressInStorageAndFormMatch (storedAddress, formAddress) {
+    return storedAddress.Line1 === formAddress.line1 && storedAddress.PostalCode === formAddress.postcode
+        && storedAddress.Line2 === formAddress.line2 && storedAddress.City === formAddress.locality;
+}
+
 export default {
+    doesAddressInStorageAndFormMatch,
     getClosestAddress (addresses, tenant) {
         if (tenant !== 'uk') {
             // TODO: Add implementation for other tenants

@@ -52,6 +52,7 @@
                         aria-describedby="mobile-number-error"
                         :aria-invalid="isMobileNumberInvalid"
                         :aria-label="formattedMobileNumberForScreenReader"
+                        @blur="formFieldBlur('mobileNumber')"
                         @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
@@ -94,7 +95,7 @@
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block" />
 
-                    <form-selector />
+                    <form-selector :key="availableFulfilmentTimesKey" />
 
                     <form-field
                         :label-text="$t(`userNote.${serviceType}.title`)"
@@ -172,6 +173,7 @@ import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
+    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -182,13 +184,15 @@ import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
+import addressService from '../services/addressService';
 
 const {
     CreateGuestUserError,
     UpdateCheckoutError,
+    UpdateCheckoutAccessForbiddenError,
     PlaceOrderError,
     GetCheckoutError,
-    AccessForbiddenError,
+    GetCheckoutAccessForbiddenError,
     AvailableFulfilmentGetError,
     GetBasketError
 } = exceptions;
@@ -296,6 +300,11 @@ export default {
         getGeoLocationUrl: {
             type: String,
             required: true
+        },
+
+        getCustomerUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -305,7 +314,8 @@ export default {
             shouldShowSpinner: false,
             isLoading: false,
             errorFormType: null,
-            isFormSubmitting: false
+            isFormSubmitting: false,
+            availableFulfilmentTimesKey: 0
         };
     },
 
@@ -388,6 +398,14 @@ export default {
                 (!this.address || !this.address.line1);
         },
 
+        /* If phone number is missing both from chckout api and from
+        * `state.AuthToken`, then retrieve the phone number from customer api
+        * This can happen for newly created guest */
+        shouldLoadCustomer () {
+            return this.isLoggedIn &&
+                !this.customer.mobileNumber;
+        },
+
         shouldShowCheckoutForm () {
             return !this.isLoading && !this.errorFormType;
         },
@@ -395,7 +413,8 @@ export default {
         eventData () {
             return {
                 isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType
+                serviceType: this.serviceType,
+                chosenTime: this.time.from
             };
         },
 
@@ -441,8 +460,17 @@ export default {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         },
 
+        /**
+         * Redirect to menu if the `restaurant.seoName` exists otherwise redirect to home.
+         *
+         * */
         redirectUrl () {
             const prefix = this.isCheckoutMethodDineIn ? 'dine-in' : 'restaurants';
+
+            if (!this.restaurant.seoName) {
+                return '/';
+            }
+
             return `${prefix}-${this.restaurant.seoName}/menu`;
         }
     },
@@ -479,6 +507,7 @@ export default {
             'createGuestUser',
             'getAvailableFulfilment',
             'getAddress',
+            'getCustomer',
             'getCustomerName',
             'getBasket',
             'getCheckout',
@@ -490,6 +519,7 @@ export default {
             'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
+            'updateAddress',
             'getUserNote',
             'saveUserNote'
         ]),
@@ -511,7 +541,7 @@ export default {
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.loadAvailableFulfilment()];
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
             this.resetLoadingState();
@@ -520,7 +550,24 @@ export default {
                 await this.loadAddress();
             }
 
+            // This call can be removed when newly created guest JWT token has phone number claim populated
+            if (this.shouldLoadCustomer) {
+                await this.loadCustomer();
+            }
+
             this.getUserNote();
+        },
+
+        /**
+         * Update address lines if localStorage is populated.
+         *
+         * */
+        loadAddressFromLocalStorage () {
+            const address = addressService.getAddressFromLocalStorage();
+
+            if (address) {
+                this.updateAddress(address);
+            }
         },
 
         /**
@@ -598,8 +645,16 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
+                await this.reloadAvailableFulfilmentTimesIfOutdated();
+
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
+                const statusCode = e.response.data.statusCode || e.response.status;
+
+                if (statusCode === 403) {
+                    throw new UpdateCheckoutAccessForbiddenError(e, this.$logger);
+                }
+
                 throw new UpdateCheckoutError(e);
             }
         },
@@ -641,7 +696,7 @@ export default {
             } catch (e) {
                 const { errorCode } = e.response.data;
 
-                throw new PlaceOrderError(e.message, errorCode);
+                throw new PlaceOrderError(e.message, errorCode, this.$logger);
             }
         },
 
@@ -687,7 +742,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
                 if (error.response && error.response.status === 403) {
-                    this.handleErrorState(new AccessForbiddenError(error.message, error.response.status));
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
                 }
@@ -757,6 +812,30 @@ export default {
         },
 
         /**
+         * Load the customer while emitting events to communicate its success or failure.
+         *
+         */
+        async loadCustomer () {
+            try {
+                await this.getCustomer({
+                    url: this.getCustomerUrl,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutCustomerGetSuccess);
+            } catch (error) {
+                this.$emit(EventNames.CheckoutCustomerGetFailure, error);
+
+                this.logInvoker({
+                    message: 'Get checkout customer failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logWarn,
+                    error
+                });
+            }
+        },
+
+        /**
          * Look up the geo details for the customers address, skip on failure.
          *
          */
@@ -792,6 +871,7 @@ export default {
             const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
             const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
+            const logMethod = error.logMethod || this.$logger.logError;
             const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
             this.$emit(eventToEmit, { ...this.eventData, error });
@@ -799,10 +879,9 @@ export default {
             this.logInvoker({
                 message: logMessage,
                 data: this.eventData,
-                logMethod: this.$logger.logError,
+                logMethod,
                 error
             });
-
 
             this.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
@@ -926,6 +1005,13 @@ export default {
             }, this.spinnerTimeout);
         },
 
+        formFieldBlur (field) {
+            const fieldValidation = this.$v.customer[field];
+            if (fieldValidation) {
+                fieldValidation.$touch();
+            }
+        },
+
         /**
          * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
          * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
@@ -942,6 +1028,21 @@ export default {
             return referralCookie && referralCookie.menuReferralState
                 ? 'ReferredByWeb'
                 : 'None';
+        },
+
+        /**
+         * Calls `loadAvailableFulfilment` times if we have no available fulfilment times available.
+         * Updates the key for the `FromDropdown` component to force the component re-render.
+         *
+         * When we receive the new `availableFulfilment` times, the dropdown doesn't automatically set the selected time
+         * to the first available fulfilment time. It leaves the selected value blank.
+         * Forcing the component to re-render ensures that the correct time is selected and displayed.
+         */
+        async reloadAvailableFulfilmentTimesIfOutdated () {
+            if (this.message?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+                await this.loadAvailableFulfilment();
+                this.availableFulfilmentTimesKey++;
+            }
         }
     },
 
