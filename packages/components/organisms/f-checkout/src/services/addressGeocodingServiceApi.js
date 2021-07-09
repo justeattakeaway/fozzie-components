@@ -12,8 +12,6 @@ export default {
             timeout
         };
 
-        const { data } = await axios.post(url, postData, config);
-
-        return data;
+        return axios.post(url, postData, config);
     }
 };

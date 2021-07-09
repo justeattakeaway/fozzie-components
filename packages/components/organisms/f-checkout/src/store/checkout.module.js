@@ -4,8 +4,8 @@ import addressService from '../services/addressService';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
 import BasketServiceApi from '../services/BasketServiceApi';
 import CheckoutServiceApi from '../services/CheckoutServiceApi';
-import AddressGeocodingServiceApi from '../services/addressGeocodingServiceApi';
-import OrderPlacementServicesApi from '../services/orderPlacementServicesApi';
+import AddressGeocodingServiceApi from '../services/AddressGeocodingServiceApi';
+import OrderPlacementServicesApi from '../services/OrderPlacementServicesApi';
 
 import {
     UPDATE_HAS_ASAP_SELECTED,
@@ -133,7 +133,7 @@ export default {
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             // TODO: deal with exceptions.
-            const data = await CheckoutServiceApi.getCheckout(url, state, timeout);
+            const { data } = await CheckoutServiceApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
 
@@ -155,7 +155,7 @@ export default {
         }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
 
-            const responseData = await CheckoutServiceApi.updateCheckout(url, state, data, timeout);
+            const { data: responseData } = await CheckoutServiceApi.updateCheckout(url, state, data, timeout);
             const { issues, isFulfillable } = responseData;
 
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
@@ -199,7 +199,7 @@ export default {
          */
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
             // TODO: deal with exceptions.
-            const data = await CheckoutServiceApi.getAvailableFulfilment(url, timeout);
+            const { data } = await CheckoutServiceApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
         },
@@ -217,7 +217,7 @@ export default {
             timeout
         }) => {
             // TODO: deal with exceptions.
-            const data = await BasketServiceApi.getBasket(url, tenant, language, timeout);
+            const { data } = await BasketServiceApi.getBasket(url, tenant, language, timeout);
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurant: {
@@ -307,9 +307,9 @@ export default {
             url, data, timeout
         }) => {
             try {
-                const response = await OrderPlacementServicesApi.placeOrder(url, data, timeout, state);
+                const { data: responseData } = await OrderPlacementServicesApi.placeOrder(url, data, timeout, state);
 
-                const { orderId } = response.data;
+                const { orderId } = responseData;
 
                 commit(UPDATE_ORDER_PLACED, orderId);
                 commit(UPDATE_ERRORS, []);
@@ -357,7 +357,7 @@ export default {
             }
 
             if (!addressCoords && state.authToken) {
-                const data = await AddressGeocodingServiceApi.getGeoLocation(url, postData, timeout, state);
+                const { data } = await AddressGeocodingServiceApi.getGeoLocation(url, postData, timeout, state);
 
                 commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
             }

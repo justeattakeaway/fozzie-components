@@ -13,9 +13,7 @@ export default {
             timeout
         };
 
-        const { data } = await axios.get(url, config);
-
-        return data;
+        return axios.get(url, config);
     },
 
 
@@ -31,9 +29,7 @@ export default {
             timeout
         };
 
-        const { data: responseData } = await axios.patch(url, data, config);
-
-        return responseData;
+        return axios.patch(url, data, config);
     },
 
     async getAvailableFulfilment (url, timeout) {
@@ -44,9 +40,7 @@ export default {
             timeout
         };
 
-        const { data } = await axios.get(url, config);
-
-        return data;
+        return axios.get(url, config);
     }
 };
 

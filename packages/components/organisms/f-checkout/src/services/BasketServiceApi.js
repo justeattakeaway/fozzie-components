@@ -11,8 +11,6 @@ export default {
             timeout
         };
 
-        const { data } = await axios.get(url, config);
-
-        return data;
+        return axios.get(url, config);
     }
 };
