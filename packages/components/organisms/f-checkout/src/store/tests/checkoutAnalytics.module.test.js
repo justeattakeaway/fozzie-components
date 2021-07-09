@@ -404,7 +404,7 @@ describe('CheckoutAnalyticsModule', () => {
         });
 
         describe('trackLowValueOrderExperiment ::', () => {
-            it('should `push` low value order event to data layer if it is returned in request header`', () => {
+            it('should `push` low value order event to data layer if it is returned in request header', () => {
                 // Arrange
                 const expected = {
                     custom: {
@@ -432,7 +432,7 @@ describe('CheckoutAnalyticsModule', () => {
                 expect(window.dataLayer).toContainEqual(expected);
             });
 
-            it('should not `push` low value order event to data layer if it is not returned in request header`', () => {
+            it('should not `push` low value order event to data layer if it is not returned in request header', () => {
                 // Arrange
                 const expected = {
                     custom: {
