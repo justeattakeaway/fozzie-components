@@ -14,7 +14,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-cookie-banner/badge.svg)](https://coveralls.io/github/justeat/f-cookie-banner)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-cookie-banner/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-cookie-banner?targetFile=package.json)
 
-
 ## Usage
 
 ### Installation
@@ -34,14 +33,14 @@ npm install @justeat/f-cookie-banner
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import CookieBanner from '@justeat/f-cookie-banner';
-import '@justeat/f-cookie-banner/dist/f-cookie-banner.css';
+import CookieBanner from "@justeat/f-cookie-banner";
+import "@justeat/f-cookie-banner/dist/f-cookie-banner.css";
 
 export default {
-    components: {
-        CookieBanner
-    }
-}
+  components: {
+    CookieBanner
+  }
+};
 ```
 
 If you are using Webpack, you can import the component dynamically to separate the `cookie-banner` bundle from the main `bundle.client.js`:
@@ -64,6 +63,70 @@ Call the component in your template:
     :locale="$i18n.locale" />
 ```
 
+### Non Vue Applications
+
+A static vanilla version of `f-cookie-banner` is available as part of the published component. These self contianed JS & CSS files are compiled from the base Vue component using the Vue CLI [pre-render plugin](https://github.com/SolarLiner/vue-cli-plugin-prerender-spa).
+
+Static files are generated for each locale and added to `dist/static` folder. There is one JS and CSS file for each locale. For example `dist/static/en-GB.js` and `dist/static/en-GB.css`.
+
+Files can be accessed directly via CDN using [unkpg.com](https://unpkg.com/browse/@justeat/f-cookie-banner/dist/static/)
+
+Using the CDN the cookie banner can be added to any web page using basic tags. The page must contain a placeholder element with the id attribute `cookie-banner` for example `<div id="cookie-banner"></div>`
+
+```html
+<html>
+  <head>
+    <link
+      href="https://unpkg.com/@justeat/f-cookie-banner/dist/static/en-GB.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="cookie-banner"></div>
+    <script
+      src="https://unpkg.com/@justeat/f-cookie-banner/dist/static/en-GB.js"
+      type="text/javascript"
+    ></script>
+  </body>
+</html>
+```
+
+A working demo can be found on [codesandbax.io](https://codesandbox.io/s/static-cookie-banner-example-lgs9u)
+
+You can use any modern bundling tool to include this version in a project. For example using [Browserify](https://browserify.org/) with [browserify-css](https://github.com/cheton/browserify-css) plugin:
+
+```css
+/* app.css */
+@import "node_modules/@justeat/f-cookie-banner/dist/static/en-GB.css";
+```
+
+```js
+// app.js
+require("./app.css");
+
+const cookieBanner = require("@justeat/f-cookie-banner/dist/static/en-GB.js");
+
+(function() {
+  cookieBanner();
+})();
+```
+
+Use Browserify to bundle JS & CSS
+
+`browserify -t browserify-css app.js > bundle.js`
+
+Finally use the generated bundle in a HTML page:
+
+```html
+<html>
+  <head></head>
+  <body>
+    <div id="cookie-banner"></div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+```
+
 ## Configuration
 
 ### Props
@@ -72,13 +135,13 @@ Call the component in your template:
 
 The props that can be defined are as follows:
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
-| `locale` | `String` | `''` | Set the tenant for localisation ['da-DK', 'en-AU', 'en-GB', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']. |
-| `isHidden` | `Boolean` | `false` | show/hide the cookie consent banner. |
-| `shouldShowLegacyBanner` | `Boolean` | `false` | Use the legacy "passive" banner markup (UK only). |
-| `cookieExpiry` | `Number` | `7776000` | Expiry time of cookies written to the browser. |
-| `useGreyBackground` | `Boolean` | `false` | Use grey background for the reopen link. |
+| Prop                     | Type      | Default   | Description                                                                                               |
+| ------------------------ | --------- | --------- | --------------------------------------------------------------------------------------------------------- |
+| `locale`                 | `String`  | `''`      | Set the tenant for localisation ['da-DK', 'en-AU', 'en-GB', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']. |
+| `isHidden`               | `Boolean` | `false`   | show/hide the cookie consent banner.                                                                      |
+| `shouldShowLegacyBanner` | `Boolean` | `false`   | Use the legacy "passive" banner markup (UK only).                                                         |
+| `cookieExpiry`           | `Number`  | `7776000` | Expiry time of cookies written to the browser.                                                            |
+| `useGreyBackground`      | `Boolean` | `false`   | Use grey background for the reopen link.                                                                  |
 
 ### CSS Classes
 
@@ -119,3 +182,11 @@ $ yarn storybook:serve
 ```
 
 This will build and serve storybook at [http://localhost:8080](http://localhost:8080).
+
+### Static Vanilla Files
+
+Static file generation is controlled by the `gulp` task `./f-cookie-banner-static/gulpfile.js`. This includes the array of language codes that determine which locale versions are compiled.
+
+The task can be manually executed using `yarn build:static-files` from `f-cookie-banner`. You will need to ensure that you run `yarn build` to generate the `dist` folder and files used by `./f-cookie-banner-static/`
+
+The build task is chained to the main publish task and will run automatically when publishing to NPM or using Yalc.
