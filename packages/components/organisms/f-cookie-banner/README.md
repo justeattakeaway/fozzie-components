@@ -78,7 +78,7 @@ The props that can be defined are as follows:
 | `isHidden` | `Boolean` | `false` | show/hide the cookie consent banner. |
 | `shouldShowLegacyBanner` | `Boolean` | `false` | Use the legacy "passive" banner markup (UK only). |
 | `cookieExpiry` | `Number` | `7776000` | Expiry time of cookies written to the browser. |
-| `useGreyBackground` | `Boolean` | `false` | Use grey background for the reopen link. |
+| `shouldUseGreyBackground` | `Boolean` | `true` | Use grey background for the reopen link. |
 
 ### CSS Classes
 
