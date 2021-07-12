@@ -6,18 +6,36 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.158.0
 ------------------------------
-*July 9, 2021*
+*July 12, 2021*
 
 ### changed
 - Removed the direct get postcode cookie call from `addressService.js` and now pass value in.
 
 
-v0.154.0
+v0.157.0
 ------------------------------
-*July 7, 2021*
+*July 9, 2021*
+
+### Fixed
+- Error handling when there are no responses (e.g. timeout).
+
+
+v0.156.0
+------------------------------
+*July 8, 2021*
 
 ### Added
-- Redirect to home when `restaurant.seoName` is falsey.
+- Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
+
+
+v0.156.0
+------------------------------
+*July 8, 2021*
+
+### Added
+- Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
 
 
 v0.155.0
@@ -27,6 +45,13 @@ v0.155.0
 ### Changed
 - Email, Postcode and Mobile was validating on every keypress but now validating onBlur.
 
+
+v0.154.0
+------------------------------
+*July 7, 2021*
+
+### Added
+- Redirect to home when `restaurant.seoName` is falsey.
 
 
 v0.153.0
