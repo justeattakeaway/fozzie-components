@@ -65,9 +65,11 @@ Call the component in your template:
 
 ### Non Vue Applications
 
-A static vanilla version of `f-cookie-banner` is available as part of the published component. These self contianed JS & CSS files are compiled from the base Vue component using the Vue CLI [pre-render plugin](https://github.com/SolarLiner/vue-cli-plugin-prerender-spa).
+A static vanilla version of `f-cookie-banner` is available as part of the published component. These self-contained JS & CSS files are compiled from the base Vue component using the Vue CLI [pre-render plugin](https://github.com/SolarLiner/vue-cli-plugin-prerender-spa).
 
 Static files are generated for each locale and added to `dist/static` folder. There is one JS and CSS file for each locale. For example `dist/static/en-GB.js` and `dist/static/en-GB.css`.
+
+#### HTML Tag Implementation
 
 Files can be accessed directly via CDN using [unkpg.com](https://unpkg.com/browse/@justeat/f-cookie-banner/dist/static/)
 
@@ -92,6 +94,8 @@ Using the CDN the cookie banner can be added to any web page using basic tags. T
 ```
 
 A working demo can be found on [codesandbax.io](https://codesandbox.io/s/static-cookie-banner-example-lgs9u)
+
+#### Bundling Tool Implementation
 
 You can use any modern bundling tool to include this version in a project. For example using [Browserify](https://browserify.org/) with [browserify-css](https://github.com/cheton/browserify-css) plugin:
 
@@ -142,6 +146,8 @@ The props that can be defined are as follows:
 | `shouldShowLegacyBanner` | `Boolean` | `false`   | Use the legacy "passive" banner markup (UK only).                                                         |
 | `cookieExpiry`           | `Number`  | `7776000` | Expiry time of cookies written to the browser.                                                            |
 | `useGreyBackground`      | `Boolean` | `false`   | Use grey background for the reopen link.                                                                  |
+
+NOTE: the Non Vue version uses default props that cannot currently be changed. A seperate version is generated for each locale.
 
 ### CSS Classes
 
