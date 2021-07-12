@@ -6,6 +6,7 @@ import BasketServiceApi from '../services/BasketServiceApi';
 import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import AddressGeocodingServiceApi from '../services/AddressGeocodingServiceApi';
 import OrderPlacementServicesApi from '../services/OrderPlacementServicesApi';
+import AccountServiceApi from '../services/AccountServiceApi';
 
 import {
     UPDATE_HAS_ASAP_SELECTED,
@@ -176,15 +177,7 @@ export default {
         createGuestUser: async ({ commit }, {
             url, tenant, data, timeout, otacToAuthExchanger
         }) => {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant
-                },
-                timeout
-            };
-
-            const response = await axios.post(url, data, config);
+            const response = await AccountServiceApi.createGuestUser(url, data, timeout, tenant);
             // eslint-disable-next-line no-unused-vars
             const otac = response.data.token;
             const authToken = await otacToAuthExchanger(otac);
