@@ -82,8 +82,9 @@
     </div>
     <div v-else>
         <reopen-banner-link
+            v-if="!legacyBanner"
             :message="copy.reopenCookieBannerLinkText"
-            :use-grey-background="useGreyBackground"
+            :use-grey-background="shouldUseGreyBackground"
             @reopenBanner="reopenBanner" />
     </div>
 </template>
@@ -133,7 +134,8 @@ export default {
             type: Number,
             default: 7776000
         },
-        useGreyBackground: {
+
+        shouldUseGreyBackground: {
             type: Boolean,
             default: true
         }

@@ -1,5 +1,10 @@
 import Vuex from 'vuex';
-import { CHECKOUT_METHOD_DELIVERY, VUEX_CHECKOUT_MODULE, VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../../constants';
+import {
+    CHECKOUT_METHOD_DELIVERY,
+    VUEX_CHECKOUT_MODULE,
+    VUEX_CHECKOUT_ANALYTICS_MODULE,
+    VUEX_CHECKOUT_EXPERIMENTATION_MODULE
+} from '../../../constants';
 import tenantConfigs from '../../../tenants';
 
 const fulfilmentTimes = [
@@ -61,6 +66,10 @@ const defaultAnalyticsState = {
     changedFields: []
 };
 
+const defaultExperimentationState = {
+    lowValueOrderExperimentVariant: ''
+};
+
 const defaultCheckoutActions = {
     getCheckout: jest.fn(),
     updateCheckout: jest.fn(),
@@ -92,6 +101,10 @@ const defaultAnalyticsActions = {
     updateChangedField: jest.fn()
 };
 
+const defaultExperimentationActions = {
+    setExperimentValues: jest.fn()
+};
+
 const i18n = {
     locale: 'en-GB',
     messages: {
@@ -106,7 +119,9 @@ const createStore = (
     checkoutState = defaultCheckoutState,
     checkoutActions = defaultCheckoutActions,
     analyticsState = defaultAnalyticsState,
-    analyticsActions = defaultAnalyticsActions
+    analyticsActions = defaultAnalyticsActions,
+    experimentationState = defaultExperimentationState,
+    experimentationActions = defaultExperimentationActions
 ) => new Vuex.Store({
     modules: {
         [VUEX_CHECKOUT_MODULE]: {
@@ -118,6 +133,11 @@ const createStore = (
             namespaced: true,
             state: analyticsState,
             actions: analyticsActions
+        },
+        [VUEX_CHECKOUT_EXPERIMENTATION_MODULE]: {
+            namespaced: true,
+            state: experimentationState,
+            actions: experimentationActions
         },
         hasModule: jest.fn(() => true)
     }
@@ -144,6 +164,7 @@ export {
     defaultCheckoutState,
     defaultCheckoutActions,
     defaultAnalyticsState,
+    defaultExperimentationState,
     i18n,
     createStore,
     $logger,
@@ -152,4 +173,3 @@ export {
     mockAuthTokenNoNumbers,
     mockAuthTokenNoMobileNumber
 };
-

@@ -177,6 +177,7 @@ import {
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
+    VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
@@ -302,6 +303,11 @@ export default {
             required: true
         },
 
+        experiments: {
+            type: Object,
+            default: () => ({})
+        },
+
         getCustomerUrl: {
             type: String,
             required: true
@@ -414,7 +420,9 @@ export default {
             return {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType,
-                chosenTime: this.time.from
+                chosenTime: this.time.from,
+                isFulfilable: this.isFulfillable,
+                issueMessage: this.message?.code
             };
         },
 
@@ -530,11 +538,16 @@ export default {
             'trackInitialLoad'
         ]),
 
+        ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
+            'setExperimentValues'
+        ]),
+
         /**
          * Loads the necessary data to render a meaningful checkout component.
          *
          */
         async initialise () {
+            this.setExperimentValues(this.experiments);
             this.isLoading = true;
 
             this.startSpinnerCountdown();
@@ -649,7 +662,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
-                const statusCode = e.response.data.statusCode || e.response.status;
+                const statusCode = e?.response?.data?.statusCode || e?.response?.status;
 
                 if (statusCode === 403) {
                     throw new UpdateCheckoutAccessForbiddenError(e, this.$logger);
@@ -694,7 +707,7 @@ export default {
                     logMethod: this.$logger.logInfo
                 });
             } catch (e) {
-                const { errorCode } = e.response.data;
+                const errorCode = e?.response?.data?.errorCode;
 
                 throw new PlaceOrderError(e.message, errorCode, this.$logger);
             }
@@ -741,10 +754,10 @@ export default {
 
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
-                if (error.response && error.response.status === 403) {
+                if (error?.response?.status === 403) {
                     this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));
                 } else {
-                    this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
+                    this.handleErrorState(new GetCheckoutError(error.message, error?.response?.status));
                 }
             }
         },
@@ -764,7 +777,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
             } catch (error) {
-                this.handleErrorState(new GetBasketError(error.message, error.response.status));
+                this.handleErrorState(new GetBasketError(error.message, error?.response?.status));
             }
         },
 
@@ -795,7 +808,8 @@ export default {
                     url: this.getAddressUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.checkoutTimeout
+                    timeout: this.checkoutTimeout,
+                    currentPostcode: this.$cookies.get('je-location')
                 });
 
                 this.$emit(EventNames.CheckoutAddressGetSuccess);

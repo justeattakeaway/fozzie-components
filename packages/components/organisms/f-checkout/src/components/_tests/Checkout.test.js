@@ -29,7 +29,8 @@ const {
     PlaceOrderError,
     UpdateCheckoutAccessForbiddenError,
     GetCheckoutError,
-    GetCheckoutAccessForbiddenError
+    GetCheckoutAccessForbiddenError,
+    GetBasketError
 } = exceptions;
 
 const localVue = createLocalVue();
@@ -795,7 +796,11 @@ describe('Checkout', () => {
                     }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    }
                 });
 
                 // Act
@@ -952,7 +957,7 @@ describe('Checkout', () => {
         });
 
         describe('eventData ::', () => {
-            it('should return `isLoggedIn`, `serviceType` and `chosenTime` in an object`', () => {
+            it('should return `isLoggedIn`, `serviceType`, `chosenTime`, `isFulfilable` and `issueMessage` in an object`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -968,7 +973,9 @@ describe('Checkout', () => {
                 expect(result).toEqual({
                     isLoggedIn: defaultCheckoutState.isLoggedIn,
                     serviceType: defaultCheckoutState.serviceType,
-                    chosenTime: defaultCheckoutState.time.from
+                    chosenTime: defaultCheckoutState.time.from,
+                    isFulfilable: defaultCheckoutState.isFulfillable,
+                    issueMessage: defaultCheckoutState.message?.code
                 });
             });
         });
@@ -1253,7 +1260,11 @@ describe('Checkout', () => {
                         store: createStore(),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
                     });
                     await flushPromises();
 
@@ -1917,39 +1928,6 @@ describe('Checkout', () => {
                 expect(updateCheckoutSpy).toHaveBeenCalled();
             });
 
-            describe('when `updateCheckout` returns `ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE`', () => {
-                afterEach(() => {
-                    jest.clearAllMocks();
-                });
-
-                it('should make a call to `reloadAvailableFulfilmentTimesIfOutdated`', async () => {
-                    // Arrange
-                    const reloadAvailableFulfilmentTimesIfOutdatedSpy = jest.spyOn(VueCheckout.methods, 'reloadAvailableFulfilmentTimesIfOutdated');
-
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            message: {
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger,
-                            $cookies
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.handleUpdateCheckout();
-
-                    // Assert
-                    expect(reloadAvailableFulfilmentTimesIfOutdatedSpy).toHaveBeenCalled();
-                });
-            });
-
             describe('when `updateCheckout` request succeeds', () => {
                 it('should emit `CheckoutUpdateSuccess` event', async () => {
                     // Arrange
@@ -1969,6 +1947,39 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutUpdateSuccess).length).toBe(1);
+                });
+
+                describe('when `updateCheckout` returns `ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE`', () => {
+                    afterEach(() => {
+                        jest.clearAllMocks();
+                    });
+
+                    it('should make a call to `reloadAvailableFulfilmentTimesIfOutdated`', async () => {
+                        // Arrange
+                        const reloadAvailableFulfilmentTimesIfOutdatedSpy = jest.spyOn(VueCheckout.methods, 'reloadAvailableFulfilmentTimesIfOutdated');
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                message: {
+                                    code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+                                }
+                            }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act
+                        await wrapper.vm.handleUpdateCheckout();
+
+                        // Assert
+                        expect(reloadAvailableFulfilmentTimesIfOutdatedSpy).toHaveBeenCalled();
+                    });
                 });
             });
 
@@ -2022,6 +2033,39 @@ describe('Checkout', () => {
                                     statusCode: 500
                                 }
                             }
+                        };
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toThrow(UpdateCheckoutError);
+                        result.rejects.toThrow(errorMessage);
+                    });
+                });
+
+                describe('AND there is no response object (e.g. timeout)', () => {
+                    it('should throw an `UpdateCheckoutError` error with the `message` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'Timeout exceeded 10s';
+                        const error = {
+                            message: errorMessage
                         };
 
                         wrapper = mount(VueCheckout, {
@@ -2208,6 +2252,29 @@ describe('Checkout', () => {
                         wrapper = mount(VueCheckout, {
                             // eslint-disable-next-line prefer-promise-reject-errors
                             store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject({ response: { status: 400 } })) }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act
+                        await wrapper.vm.loadCheckout();
+
+                        // Assert
+                        expect(handleErrorStateSpy).toHaveBeenCalledWith(expect.any(GetCheckoutError));
+                    });
+                });
+
+                describe('AND there is no response object (e.g. timeout)', () => {
+                    it('should call `handleErrorState` with `GetCheckoutError`', async () => {
+                        // Arrange
+                        wrapper = mount(VueCheckout, {
+                            // eslint-disable-next-line prefer-promise-reject-errors
+                            store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject({ message: 'Timeout exceeded 10s' })) }),
                             i18n,
                             localVue,
                             propsData,
@@ -2469,9 +2536,12 @@ describe('Checkout', () => {
             describe('when `getBasket` request fails', () => {
                 // Arrange
                 let wrapper;
+                let handleErrorStateSpy;
 
                 beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
 
                     wrapper = mount(VueCheckout, {
                         // eslint-disable-next-line prefer-promise-reject-errors
@@ -2486,32 +2556,48 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should emit failure event', async () => {
-                    // Act
-                    await wrapper.vm.loadBasket();
-
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
-                });
-
-                it('should call `logError`', async () => {
+                it('should call `handleErrorState` with a new `GetBasketError`', async () => {
                     // Arrange
-                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
+                    wrapper = mount(VueCheckout, {
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getBasket: jest.fn(async () => Promise.reject({ message: 'Error', response: { status: 400 } })) }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
+                    });
 
                     // Act
                     await wrapper.vm.loadBasket();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalled();
+                    expect(handleErrorStateSpy).toHaveBeenCalledWith(expect.any(GetBasketError));
                 });
 
-                it('should set `errorFormType` to "pageLoad"', async () => {
-                    // Act
-                    await wrapper.vm.loadBasket();
+                describe('AND there is no response object (e.g. timeout)', () => {
+                    it('should call `handleErrorState` with a new `GetBasketError`', async () => {
+                        // Arrange
+                        wrapper = mount(VueCheckout, {
+                            // eslint-disable-next-line prefer-promise-reject-errors
+                            store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getBasket: jest.fn(async () => Promise.reject({ message: 'Timeout exceeded 10s' })) }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
 
-                    // Assert
-                    expect(wrapper.vm.errorFormType).toBe(CHEKOUT_ERROR_FORM_TYPE.default);
+                        // Act
+                        await wrapper.vm.loadBasket();
+
+                        // Assert
+                        expect(handleErrorStateSpy).toHaveBeenCalledWith(expect.any(GetBasketError));
+                    });
                 });
             });
 
@@ -2585,7 +2671,11 @@ describe('Checkout', () => {
                         store: createStore(),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
                     });
 
                     // Act
@@ -3562,6 +3652,44 @@ describe('Checkout', () => {
                             expect(e.message).toEqual(errorMessage);
                             expect(e.errorCode).toEqual(errorCode);
                             expect(e.logMethod).toEqual($logger.logWarn);
+                        }
+                    });
+                });
+
+                describe('AND there is no response object (e.g. timeout)', () => {
+                    it('should throw a `PlaceOrderError` error with `logMethod` as `logError` and no `errorCode`', async () => {
+                        // Arrange
+                        const errorMessage = 'Timeout exceeded 10s';
+                        const error = {
+                            message: errorMessage
+                        };
+
+                        wrapper = shallowMount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    placeOrder: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        try {
+                            // Act
+                            await wrapper.vm.submitOrder();
+                        } catch (e) {
+                            // Assert
+                            expect(e).toBeInstanceOf(PlaceOrderError);
+                            expect(e.message).toEqual(errorMessage);
+                            expect(e.errorCode).toBe(undefined);
+                            expect(e.logMethod).toEqual($logger.logError);
                         }
                     });
                 });
