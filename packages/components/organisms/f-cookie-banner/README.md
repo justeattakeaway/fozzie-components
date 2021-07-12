@@ -71,7 +71,7 @@ Static files are generated for each locale and added to `dist/static` folder. Th
 
 #### HTML Tag Implementation
 
-Files can be accessed directly via CDN using [unkpg.com](https://unpkg.com/browse/@justeat/f-cookie-banner/dist/static/)
+Files can be accessed directly via CDN using [unkpg.com](https://unpkg.com/browse/@justeat/f-cookie-banner/dist/static/). By omitting the version/tag unpkg will serve the latest version automatically.
 
 Using the CDN the cookie banner can be added to any web page using basic tags. The page must contain a placeholder element with the id attribute `cookie-banner` for example `<div id="cookie-banner"></div>`
 
@@ -119,7 +119,7 @@ Use Browserify to bundle JS & CSS
 
 `browserify -t browserify-css app.js > bundle.js`
 
-Finally use the generated bundle in a HTML page:
+Finally, use the generated bundle in your HTML page
 
 ```html
 <html>
