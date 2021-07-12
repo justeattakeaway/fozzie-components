@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.20.0
 ------------------------------
-*July 9, 2021*
+*July 12, 2021*
 
 ### Changed
 - Reopen link should not show for tenants where legacy banner is used
-- useGreyBackground prop wired up correctly
+- shouldUseGreyBackground prop wired up correctly
 
 
 v0.19.0
