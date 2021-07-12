@@ -3,12 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v0.157.0
 ------------------------------
 *July 9, 2021*
 
 ### Fixed
 - Error handling when there are no responses (e.g. timeout).
+
+
+v0.156.0
+------------------------------
+*July 8, 2021*
+
+### Added
+- Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
 
 
 v0.156.0
