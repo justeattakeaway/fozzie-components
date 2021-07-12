@@ -1,7 +1,7 @@
 <template>
     <a
         href="#"
-        :class="['o-link--bold', 'o-link--full', $style['reopen-link'], { [$style['reopen-link--greyBg']]: useGreyBackground }]"
+        :class="['o-link--bold', $style['reopen-link'], { [$style['reopen-link--greyBg']]: useGreyBackground }]"
         @click.prevent="reopenBanner">{{ message }}
     </a>
 </template>
