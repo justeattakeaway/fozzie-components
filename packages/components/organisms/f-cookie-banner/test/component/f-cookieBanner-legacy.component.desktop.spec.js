@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const CookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
 
 let cookieBanner;
@@ -30,21 +30,21 @@ describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
         ['en-AU', 'au/info/privacy-policy#cookies_policy'],
         ['en-NZ', 'nz/info/privacy-policy#cookies_policy']
     ])
-    .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
-        // Arrange
-        cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
-        cookieBanner.withQuery('&knob-Locale', tenant);
-        const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
+        .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
+            // Arrange
+            cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+            cookieBanner.withQuery('&knob-Locale', tenant);
+            const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 
-        cookieBanner.open(pageUrl);
-        browser.deleteAllCookies();
-        browser.refresh();
-        cookieBanner.waitForComponent();
+            cookieBanner.open(pageUrl);
+            browser.deleteAllCookies();
+            browser.refresh();
+            cookieBanner.waitForComponent();
 
-        // Act
-        cookieBanner.clickCookiePolicyLink();
+            // Act
+            cookieBanner.clickCookiePolicyLink();
 
-        // Assert
-        expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
-    });
+            // Assert
+            expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
+        });
 });

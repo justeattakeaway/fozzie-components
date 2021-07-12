@@ -1,4 +1,4 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const Button = require('../../test-utils/component-objects/f-button.component');
@@ -24,8 +24,8 @@ describe('Accessibility tests', () => {
         // Act
         button = new Button('atom-folder', 'f-button--button-component');
         button.withQuery('knob-Button Type', 'link')
-                .withQuery('knob-href', 'link')
-                .withQuery('knob-Button Size', 'medium');
+            .withQuery('knob-href', 'link')
+            .withQuery('knob-Button Size', 'medium');
 
         const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
         button.open(pageUrl);
