@@ -137,6 +137,10 @@ module.exports = class Checkout extends Page {
         return this.fields.addressPostcode.typeError.isDisplayed();
     }
 
+    isEmailErrorDisplayed () {
+        return this.fields.emailAddress.error.isDisplayed();
+    }
+
     isTableIdentifierMaxLengthErrorDisplayed () {
         return this.fields.tableIdentifier.maxLengthError.isDisplayed();
     }
@@ -263,11 +267,27 @@ module.exports = class Checkout extends Page {
     *
     * @param {string} method The collection type: either 'delivery' or 'collection'
     */
-
     changeCheckoutMethod (method) {
         const file = `/checkout-${method}.json`;
         this.knobButton.click();
         this.knobCheckoutDropdown.selectByVisibleText(file);
+    }
+
+    /**
+    * @description
+    * Due to the anomalies between webdriver io and Chrome the current `clearField()`
+    * hack to clear a field needs to be different for those fields that have the onBlur
+    * event attached to them.
+    * Select all the text in the field and then performs a backspace to clear the field
+    *
+    * @param {String} fieldName The name of the field input it is clearing
+    */
+    clearBlurField (fieldName) {
+        const CONTROL = '\uE009';
+        const el = this.fields[fieldName].input;
+        el.click();
+        el.keys([CONTROL, 'a']);
+        el.keys(['Backspace']);
     }
 
     /**

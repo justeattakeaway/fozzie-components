@@ -25,7 +25,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        checkout.clearCheckoutForm('mobileNumber');
+        checkout.clearBlurField('mobileNumber');
         checkout.goToPayment();
 
         // Assert
@@ -39,6 +39,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateCollectionCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
@@ -48,7 +49,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
         checkout.waitForComponent();
@@ -62,6 +63,16 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'desktop');
+    });
+
+    it('should display invalid email address', () => {
+        // Act
+        checkout.clearBlurField('emailAddress');
+        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
+        browser.keys('Tab');
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Guest - invalid email address Error State', 'desktop');
     });
 });
 
@@ -86,7 +97,6 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
     });
 });
 
-
 describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
@@ -109,9 +119,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the delivery f-checkout guest mandatory error messages', () => {
         // Act
-        ['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode']
-            .forEach(field => checkout.clearCheckoutForm(field));
-
+        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutForm(field));
+        ['mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
@@ -125,6 +134,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
@@ -134,7 +144,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
         checkout.waitForComponent();
@@ -154,6 +164,16 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'desktop');
+    });
+
+    it('should display invalid email address', () => {
+        // Act
+        checkout.clearBlurField('emailAddress');
+        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
+        browser.keys('Tab');
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Guest - invalid email address Error State', 'desktop');
     });
 });
 
