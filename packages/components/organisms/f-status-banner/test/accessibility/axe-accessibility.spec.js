@@ -1,4 +1,4 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const StatusBanner = require('../../test-utils/component-objects/f-statusBanner.component');
