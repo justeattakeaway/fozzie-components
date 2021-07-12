@@ -7,6 +7,7 @@ import { locales } from '@justeat/storybook/constants/globalisation';
 import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
+import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation.module';
 import CheckoutMock from '../src/demo/checkoutMock';
 
 export default {
@@ -24,22 +25,26 @@ const getCheckoutCollectionUrl = '/checkout-collection.json';
 const getCheckoutCollectionAsapUrl = '/checkout-collection-user-selected-asap.json';
 const getCheckoutCollectionLaterUrl = '/checkout-collection-user-selected-later.json';
 const getCheckoutDineInUrl = '/checkout-dinein.json';
+const getCheckoutTimeoutUrl = '/checkout-timeout-get-error.json';
+const getCheckoutAccessForbiddenUrl = '/checkout-403-get-error.json';
+const getCheckoutErrorUrl = '/checkout-500-get-error.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const checkoutAvailableFulfilmentPreorderUrl = '/checkout-available-fulfilment-preorder.json';
 const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
 const getBasketDineInUrl = '/get-basket-dinein.json';
+const getBasketTimeoutUrl = '/get-basket-timeout.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const updateCheckoutRestaurantNotTakingOrdersUrl = '/update-checkout-restaurant-not-taking-orders.json';
 const updateCheckoutAdditionalItemsRequiredUrl = '/update-checkout-additional-items-required.json';
 const updateCheckoutAccessForbiddenUrl = '/update-checkout-403.json';
 const updateCheckoutUnavailableTimeUrl = '/update-checkout-time-unavailable.json';
+const updateCheckoutTimeoutUrl = '/update-checkout-timeout.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const placeOrderDuplicateUrl = '/place-order-duplicate.json';
-const getCheckoutAccessForbiddenUrl = '/checkout-403-get-error.json';
-const getCheckoutErrorUrl = '/checkout-500-get-error.json';
+const placeOrderTimeout = '/place-order-timeout.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
 const getCustomerUrl = '/get-customer.json';
@@ -52,20 +57,24 @@ CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionAsapUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionLaterUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDineInUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutTimeoutUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentPreorderUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDineInUrl);
+CheckoutMock.setupCheckoutMethod(getBasketTimeoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutRestaurantNotTakingOrdersUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutAdditionalItemsRequiredUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutAccessForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUnavailableTimeUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutTimeoutUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
+CheckoutMock.setupCheckoutMethod(placeOrderTimeout);
 CheckoutMock.setupCheckoutMethod(getCheckoutAccessForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
@@ -87,6 +96,9 @@ const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
 const additionalItemsRequiredIssue = 'additional-items-required';
 const timeNotAvailable = 'Selected time no longer available';
 const timeNotAvailableIssue = 'time-unavailable';
+const serverTimeout = 'Server timeout';
+const serverTimeoutIssue = 'timeout';
+const duplicateIssue = 'duplicate';
 
 const patchCheckoutErrorOptions = {
     None: null,
@@ -94,18 +106,21 @@ const patchCheckoutErrorOptions = {
     [additionalItemsRequired]: additionalItemsRequiredIssue,
     [checkoutServerError]: SERVER,
     [updateCheckoutAccessForbidden]: accessForbiddenErrorCode,
-    [timeNotAvailable]: timeNotAvailableIssue
+    [timeNotAvailable]: timeNotAvailableIssue,
+    [serverTimeout]: serverTimeoutIssue
 };
 
 const getCheckoutErrorOptions = {
     None: null,
     [accessForbiddenError]: accessForbiddenErrorCode,
-    [getCheckoutError]: getCheckoutErrorCode
+    [getCheckoutError]: getCheckoutErrorCode,
+    [serverTimeout]: serverTimeoutIssue
 };
 
 const placeOrderErrorOptions = {
     None: null,
-    [placeOrderError]: SERVER
+    [placeOrderError]: duplicateIssue,
+    [serverTimeout]: serverTimeoutIssue
 };
 
 const fulfilmentTimeOptions = {
@@ -195,7 +210,7 @@ export const CheckoutComponent = () => ({
         },
 
         placeOrderUrl () {
-            return this.placeOrderError === SERVER ? placeOrderDuplicateUrl : placeOrderUrl;
+            return this.placeOrderError ? `/place-order-${this.placeOrderError}.json` : placeOrderUrl;
         },
 
         checkoutAvailableFulfilmentUrl () {
@@ -212,7 +227,8 @@ export const CheckoutComponent = () => ({
     store: new Vuex.Store({
         modules: {
             fCheckoutModule,
-            fCheckoutAnalyticsModule
+            fCheckoutAnalyticsModule,
+            fCheckoutExperimentationModule
         }
     }),
 
