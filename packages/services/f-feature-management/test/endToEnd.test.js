@@ -6,10 +6,10 @@ const { getBooleanValue, getIntegerValue, getStringValue } = featureManagement('
 const functionMap = { boolean: getBooleanValue, integer: getIntegerValue, string: getStringValue };
 
 describe.skip('End-to-End Tests', () => {
-    expectations.expectations.forEach(ex => {
-        describe(ex.description, () => {
-            const { value: expectedValue, experimentKey: expectedKey, experimentVariant: expectedVariant } = ex.expectation;
-            const feature = functionMap[ex.valueType](ex.feature);
+    describe.each(expectations)('Expectation %# - ', ({ description, expectation, feature, valueType }) => {
+        it(description, () => {
+            const { value: expectedValue, experimentKey: expectedKey, experimentVariant: expectedVariant } = expectation;
+            const feature = functionMap[valueType](feature);
             expect(feature.value).toBe(expectedValue);
             if (expectedKey && expectedVariant) {
                 expect(feature.experimentKey).toBe(expectedKey);

@@ -20,15 +20,14 @@ function getStringValue (key) {
 }
 
 export default function (scope) {
-    function fullKey (key) {
-        return (scope && `${scope}::${key}`) || key;
-    }
-    function forward (fn, key) {
-        return fn(fullKey(key));
-    }
+    const fullKey = key => scope
+        // ternary preferred over && and || operators, and break to indented multi-line for readability
+        ? `${scope}::${key}`)
+        : key;
+
     return {
-        getBooleanValue: key => forward(getBooleanValue, key),
-        getIntegerValue: key => forward(getIntegerValue, key),
-        getStringValue: key => forward(getStringValue, key)
+        getBooleanValue: key => getBooleanValue(fullKey(key)),
+        getIntegerValue: key => getIntegerValue(fullKey(key)),
+        getStringValue: key => getStringValue(fullKey(key))
     };
 }
