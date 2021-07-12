@@ -84,7 +84,7 @@
         <reopen-banner-link
             v-if="!legacyBanner"
             :message="copy.reopenCookieBannerLinkText"
-            :use-grey-background="shouldUseGreyBackground"
+            :use-grey-background="useGreyBackground"
             @reopenBanner="reopenBanner" />
     </div>
 </template>
@@ -134,7 +134,7 @@ export default {
             type: Number,
             default: 7776000
         },
-        useGreyBackground: {
+        shouldUseGreyBackground: {
             type: Boolean,
             default: true
         }
@@ -171,8 +171,8 @@ export default {
          * Check if the reopen cookie link should use a grey background
          * @returns {Boolean}
          */
-        shouldUseGreyBackground () {
-            return this.useGreyBackground;
+        useGreyBackground () {
+            return this.shouldUseGreyBackground;
         }
     },
 
