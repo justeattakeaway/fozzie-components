@@ -796,7 +796,11 @@ describe('Checkout', () => {
                     }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    }
                 });
 
                 // Act
@@ -1254,7 +1258,11 @@ describe('Checkout', () => {
                         store: createStore(),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
                     });
                     await flushPromises();
 
@@ -2661,7 +2669,11 @@ describe('Checkout', () => {
                         store: createStore(),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
                     });
 
                     // Act
