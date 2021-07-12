@@ -1,4 +1,4 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
@@ -10,7 +10,7 @@ describe('Accessibility tests', () => {
         // Act
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true);
+            .withQuery('&knob-Is User Logged In', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
@@ -25,7 +25,7 @@ describe('Accessibility tests', () => {
         // Act
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
-                .withQuery('&knob-Is User Logged In', true);
+            .withQuery('&knob-Is User Logged In', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
@@ -40,7 +40,7 @@ describe('Accessibility tests', () => {
         // Act
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', false);
+            .withQuery('&knob-Is User Logged In', false);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
@@ -55,7 +55,7 @@ describe('Accessibility tests', () => {
         // Act
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'Invalid URL')
-                .withQuery('&knob-Is User Logged In', false);
+            .withQuery('&knob-Is User Logged In', false);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);

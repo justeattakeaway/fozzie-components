@@ -1,4 +1,4 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -9,9 +9,9 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Get Checkout Errors', '500')
+            .withQuery('&knob-Is User Logged In', true)
+            .withQuery('&knob-Is ASAP available', true)
+            .withQuery('&knob-Get Checkout Errors', '500')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -27,9 +27,9 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Get Checkout Errors', '403')
+            .withQuery('&knob-Is User Logged In', true)
+            .withQuery('&knob-Is ASAP available', true)
+            .withQuery('&knob-Get Checkout Errors', '403')
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
