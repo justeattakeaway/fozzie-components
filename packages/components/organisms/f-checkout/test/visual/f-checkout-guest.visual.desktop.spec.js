@@ -49,7 +49,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
         checkout.waitForComponent();
@@ -144,7 +144,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
         checkout.waitForComponent();

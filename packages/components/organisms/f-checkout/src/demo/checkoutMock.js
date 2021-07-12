@@ -60,6 +60,9 @@ export default {
             case '/checkout-dinein.json':
                 mock.onGet(path).reply(200, getCheckoutDineIn);
                 break;
+            case '/checkout-timeout-get-error.json':
+                mock.onGet(path).timeout();
+                break;
             case '/checkout-available-fulfilment.json':
                 mock.onGet(path).reply(200, checkoutAvailableFulfilment);
                 break;
@@ -78,6 +81,9 @@ export default {
             case '/get-basket-dinein.json':
                 mock.onGet(path).reply(200, getBasketDineIn);
                 break;
+            case '/get-basket-timeout.json':
+                mock.onGet(path).timeout();
+                break;
             case '/update-checkout.json':
                 mock.onPatch(path).reply(200, updateCheckout);
                 break;
@@ -93,6 +99,9 @@ export default {
             case '/update-checkout-time-unavailable.json':
                 mock.onPatch(path).reply(200, updateCheckoutUnavailableTimeUrl);
                 break;
+            case '/update-checkout-timeout.json':
+                mock.onPatch(path).timeout();
+                break;
             case '/get-address.json':
                 mock.onGet(path).reply(200, getAddress);
                 break;
@@ -101,6 +110,9 @@ export default {
                 break;
             case '/place-order-duplicate.json':
                 mock.onPost(path).reply(400, placeOrderDuplicate);
+                break;
+            case '/place-order-timeout.json':
+                mock.onPost(path).timeout();
                 break;
             case '/checkout-403-get-error.json':
                 mock.onGet(path).reply(403, accessForbiddenError);
