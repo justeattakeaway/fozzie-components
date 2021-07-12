@@ -134,7 +134,7 @@ export default {
             type: Number,
             default: 7776000
         },
-        
+
         shouldUseGreyBackground: {
             type: Boolean,
             default: true
