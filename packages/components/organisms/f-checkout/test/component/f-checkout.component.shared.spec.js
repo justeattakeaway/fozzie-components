@@ -97,7 +97,7 @@ describe('f-checkout component tests - @browserstack', () => {
     describe('when the "Duplicate Order Warning" modal is displayed', () => {
         beforeEach(() => {
             // Arrange
-            checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+            checkout.withQuery('&knob-Place Order Errors', 'duplicate');
             const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
             // Act

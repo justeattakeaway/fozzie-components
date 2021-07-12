@@ -91,7 +91,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Place Order Errors', 'SERVER');
+                .withQuery('&knob-Place Order Errors', 'duplicate');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -192,7 +192,7 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Place Order Errors', 'SERVER');
+                .withQuery('&knob-Place Order Errors', 'duplicate');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -278,7 +278,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'dinein')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Place Order Errors', 'SERVER');
+                .withQuery('&knob-Place Order Errors', 'duplicate');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
