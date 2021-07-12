@@ -9,6 +9,7 @@
 import VueCheckout from '@/components/Checkout.vue';
 import fCheckoutModule from '@/store/checkout.module';
 import fCheckoutAnalyticsModule from '@/store/checkoutAnalytics.module';
+import fCheckoutExperimentationModule from '@/store/checkoutExperimentation.module';
 
 export { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from './constants';
 
@@ -39,5 +40,6 @@ if (GlobalVue) {
 export {
     VueCheckout,
     fCheckoutModule,
-    fCheckoutAnalyticsModule
+    fCheckoutAnalyticsModule,
+    fCheckoutExperimentationModule
 };
