@@ -420,7 +420,9 @@ export default {
             return {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType,
-                chosenTime: this.time.from
+                chosenTime: this.time.from,
+                isFulfilable: this.isFulfillable,
+                issueMessage: this.message?.code
             };
         },
 
