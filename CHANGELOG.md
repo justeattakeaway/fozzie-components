@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.45.0
+------------------------------
+*July 6, 2021*
+
+### Added
+- Feature Management service component (initial skeleton).
+
 v3.44.5
 ------------------------------
 *July 7, 2021*
@@ -23,12 +30,6 @@ v3.44.3
 
 ## Fix
 - Fix Bundlewatch fails
-v3.45.0
-------------------------------
-*July 6, 2021*
-
-### Added
-- Feature Management service component (initial skeleton).
 
 v3.44.2
 ------------------------------

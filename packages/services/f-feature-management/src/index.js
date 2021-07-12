@@ -1,6 +1,6 @@
 const logValueRequest = (func, key, value) => {
     console.log(`${func.name}: ${key} => ${value}`); // es-lint-disable
-}
+};
 
 function getBooleanValue (key) {
     logValueRequest(getBooleanValue, key, true);
@@ -20,10 +20,9 @@ function getStringValue (key) {
 }
 
 export default function (scope) {
-    const fullKey = key => scope
-        // ternary preferred over && and || operators, and break to indented multi-line for readability
-        ? `${scope}::${key}`)
-        : key;
+    const fullKey = key => (scope
+        ? `${scope}::${key}`
+        : key);
 
     return {
         getBooleanValue: key => getBooleanValue(fullKey(key)),
