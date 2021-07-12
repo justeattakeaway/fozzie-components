@@ -380,6 +380,7 @@ describe('CheckoutModule', () => {
                 tenant: 'uk',
                 language: 'en-GB',
                 timeout: 10000,
+                currentPostcode: null,
                 postData: null
             };
         });
@@ -616,21 +617,23 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
-
-                axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
                 const [expectedAddress] = customerAddresses.Addresses;
+                const expectedFormattedAddress = {
+                    line1: expectedAddress.Line1,
+                    line2: expectedAddress.Line2,
+                    locality: expectedAddress.City,
+                    postcode: expectedAddress.ZipCode
+                };
+                const addressServiceSpy = jest.spyOn(addressService, 'getClosestAddress').mockReturnValue(expectedFormattedAddress);
+                axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
 
                 // Act
                 await getAddress(context, payload);
 
                 // Assert
+                expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses.Addresses, payload.tenant, payload.currentPostcode);
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, {
-                    line1: expectedAddress.Line1,
-                    line2: expectedAddress.Line2,
-                    locality: expectedAddress.City,
-                    postcode: expectedAddress.ZipCode
-                });
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, expectedFormattedAddress);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
