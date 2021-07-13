@@ -2,7 +2,7 @@
   "description": "Fozzie Cookie Banner configuration to compile via vue cli prerender to vanilla js/css",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "yarn install && yarn cache clean --all && yarn exec gulp"
+    "build": "yarn install && yarn cache clean --all && yarn gulp"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
