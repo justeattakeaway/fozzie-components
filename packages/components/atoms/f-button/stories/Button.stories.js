@@ -5,6 +5,7 @@ import {
     text
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
+import { VALID_BUTTON_TYPES, VALID_BUTTON_SIZES } from '../src/constants';
 import FButton from '../src/components/Button.vue';
 
 export default {
@@ -19,11 +20,11 @@ export const ButtonComponent = () => ({
 
     props: {
         buttonType: {
-            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link'], 'primary')
+            default: select('Button Type', VALID_BUTTON_TYPES.button, 'primary')
         },
 
         buttonSize: {
-            default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
+            default: select('Button Size', VALID_BUTTON_SIZES, 'medium')
         },
 
         disabled: {

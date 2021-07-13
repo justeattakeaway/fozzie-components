@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { VUEX_CHECKOUT_EXPERIMENTATION_MODULE } from '../constants';
 
 export default {
     async getCheckout (url, state, timeout) {
@@ -17,17 +18,22 @@ export default {
     },
 
 
-    async updateCheckout (url, state, data, timeout) {
+    async updateCheckout (url, state, rootGetters, data, timeout) {
         const authHeader = state.authToken && `Bearer ${state.authToken}`;
+        const experimentationHeaders = rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];
         const config = {
             headers: {
                 'Content-Type': 'application/json',
                 ...(state.authToken && {
                     Authorization: authHeader
-                })
+                }),
+                ...experimentationHeaders
             },
             timeout
         };
+
+        // eslint-disable-next-line no-console
+        console.log('heyyyy', rootGetters);
 
         return axios.patch(url, data, config);
     },

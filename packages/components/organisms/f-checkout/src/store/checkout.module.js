@@ -9,24 +9,24 @@ import OrderPlacementServicesApi from '../services/OrderPlacementServicesApi';
 import AccountServiceApi from '../services/AccountServiceApi';
 
 import {
-    UPDATE_HAS_ASAP_SELECTED,
+    UPDATE_ADDRESS,
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_ERRORS,
     UPDATE_MESSAGE,
     UPDATE_ORDER_PLACED,
+    UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
-    UPDATE_USER_NOTE,
-    UPDATE_ADDRESS,
-    UPDATE_PHONE_NUMBER
+    UPDATE_USER_NOTE
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -151,12 +151,13 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        updateCheckout: async ({ commit, state, dispatch }, {
-            url, data, timeout
-        }) => {
+        updateCheckout: async ({
+            commit, state, dispatch, rootGetters
+        }, { url, data, timeout }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
 
-            const { data: responseData } = await CheckoutServiceApi.updateCheckout(url, state, data, timeout);
+            const { data: responseData, headers } = await CheckoutServiceApi.updateCheckout(url, state, rootGetters, data, timeout);
+
             const { issues, isFulfillable } = responseData;
 
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
@@ -165,6 +166,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/trackLowValueOrderExperiment`, headers, { root: true });
             dispatch('updateMessage', detailedIssues[0]);
         },
 
@@ -237,7 +239,8 @@ export default {
             url,
             tenant,
             language,
-            timeout
+            timeout,
+            currentPostcode
         }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
             const config = {
@@ -253,7 +256,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
+            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
