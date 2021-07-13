@@ -10,7 +10,7 @@ const defaultParams = {
     customer: {},
     isCheckoutMethodDelivery: true,
     time: {},
-    userNote: '',
+    userNotes: [],
     geolocation: null,
     asap: false
 };
@@ -134,19 +134,25 @@ describe('checkout mapper', () => {
 
     it('should map user note correctly', () => {
         // Arrange
-        const userNote = 'Beware of the dachshund';
+        const userNotes = {
+            delivery: 'Beware of the dachshund'
+        };
 
         // Act
         const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
-            userNote
+            userNotes
         });
+
+        console.log({ ...defaultParams }, userNotes);
 
         const notesRequest = requestBody[2].value;
 
         // Assert
+        console.log('notesRequest', notesRequest);
         expect(notesRequest.length).toBe(1);
-        expect(notesRequest[0].note).toBe(userNote);
+        expect(notesRequest[0].note).toBe('Beware of the dachshund');
+        expect(notesRequest[0].type).toBe('delivery');
     });
 
     it('should map geo location correctly', () => {

@@ -10,7 +10,7 @@ const mapUpdateCheckoutRequest = ({
     isCheckoutMethodDelivery,
     isCheckoutMethodDineIn, // Should probably just pass the service type here instead
     time,
-    userNote,
+    userNotes,
     geolocation,
     asap,
     tableIdentifier
@@ -58,12 +58,7 @@ const mapUpdateCheckoutRequest = ({
     {
         op: 'add',
         path: '/notes',
-        value: [
-            {
-                type: 'delivery',
-                note: userNote
-            }
-        ]
+        value: Object.entries(userNotes).map(([key, value]) => ({ type: key, note: value }))
     }
 ]);
 

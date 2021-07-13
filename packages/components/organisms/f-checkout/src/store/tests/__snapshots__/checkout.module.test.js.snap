@@ -45,7 +45,9 @@ Object {
       "type": "information",
     },
   ],
-  "noteTypes": undefined,
+  "noteTypes": Array [
+    "restaurant",
+  ],
   "notices": Array [
     Object {
       "notice": Object {
@@ -65,6 +67,6 @@ Object {
     "from": "",
     "to": "",
   },
-  "userNote": Object {},
+  "userNotes": Object {},
 }
 `;

@@ -51,5 +51,15 @@
       }
     }
   ],
-  "noteTypes": ["kitchen", "delivery"]
+  "noteTypes": ["kitchen", "delivery"],
+  "notes": [
+    {
+      "type": "kitchen",
+      "note": "No ketchup on burger please"
+    },
+    {
+      "type": "delivery",
+      "note": "Phone when outside"
+    }
+  ]
 }

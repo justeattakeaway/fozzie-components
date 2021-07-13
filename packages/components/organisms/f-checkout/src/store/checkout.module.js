@@ -20,7 +20,7 @@ import {
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTES
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -103,7 +103,7 @@ export default {
             locality: '',
             postcode: ''
         },
-        userNote: {},
+        userNotes: {},
         isFulfillable: true,
         errors: [],
         notices: [],
@@ -417,7 +417,7 @@ export default {
         },
 
         updateUserNote ({ commit, dispatch }, payload) {
-            commit(UPDATE_USER_NOTE, payload);
+            commit(UPDATE_USER_NOTES, payload);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
         },
 
@@ -456,7 +456,8 @@ export default {
             isFulfillable,
             notices,
             messages,
-            noteTypes
+            noteTypes,
+            notes
         }) => {
             state.id = id;
             state.serviceType = serviceType;
@@ -494,7 +495,12 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
+            // TODO: Maybe there's a way to make this nicer
+            // TODO: There is definitely a way to make this nicer
+            state.userNotes = notes?.length > 0 ? { ...notes.map(({ type, note }) => ({ [type]: note })) } : {};
             state.noteTypes = noteTypes;
+
+            console.log(state);
         },
 
         [UPDATE_AUTH]: (state, authToken) => {
@@ -559,8 +565,11 @@ export default {
             state.errors = issues;
         },
 
-        [UPDATE_USER_NOTE]: (state, userNote) => {
-            state.userNote = { ...state.userNote, [`${userNote.type}`]: userNote.note };
+        [UPDATE_USER_NOTES]: (state, userNote) => {
+            state.userNotes = {
+                ...state.userNotes,
+                [userNote.type]: userNote.note
+            };
         },
 
         [UPDATE_ORDER_PLACED]: (state, orderId) => {

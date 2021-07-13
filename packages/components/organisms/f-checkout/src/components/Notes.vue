@@ -1,32 +1,32 @@
 <template>
     <div>
         <form-field
-            :label-text="$t(`userNote.${serviceType}.title`)"
+            :label-text="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)"
             input-type="textarea"
-            :placeholder="$t(`userNote.${serviceType}.placeholder`)"
-            :value="userNote.restaurant"
+            :placeholder="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.placeholder`)"
+            :value="userNotes[noteTypeDeliveryOrRestaurant]"
             cols="30"
             rows="7"
             maxlength="200"
             name="Note"
             has-input-description
-            @input="updateUserNote({ note: $event, type: 'restaurant' })">
-            {{ $t(`userNote.${serviceType}.text`) }}
+            @input="updateUserNote({ note: $event, type: noteTypeDeliveryOrRestaurant })">
+            {{ $t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.text`) }}
         </form-field>
 
         <form-field
             v-if="shouldShowKitchenNotes"
-            :label-text="$t(`userNote.${serviceType}.title`)"
+            :label-text="$t(`userNote.kitchen.${serviceType}.title`)"
             input-type="textarea"
-            :placeholder="$t(`userNote.${serviceType}.placeholder`)"
-            :value="userNote.kitchen"
+            :placeholder="$t(`userNote.kitchen.${serviceType}.placeholder`)"
+            :value="userNotes.kitchen"
             cols="30"
             rows="7"
             maxlength="200"
             name="Note"
             has-input-description
             @input="updateUserNote({ note: $event, type: 'kitchen' })">
-            {{ $t(`userNote.${serviceType}.text`) }}
+            {{ $t(`userNote.kitchen.${serviceType}.text`) }}
         </form-field>
     </div>
 </template>
@@ -36,6 +36,7 @@ import { mapActions, mapState } from 'vuex';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import {
+    CHECKOUT_METHOD_DELIVERY,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import loggerMixin from '../mixins/logger.mixin';
@@ -52,11 +53,15 @@ export default {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'noteTypes',
             'serviceType',
-            'userNote'
+            'userNotes'
         ]),
 
         shouldShowKitchenNotes () {
-            return this.noteTypes && this.noteTypes.includes('kitchen');
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY && this.noteTypes.includes('kitchen');
+        },
+
+        noteTypeDeliveryOrRestaurant () {
+            return this.noteTypes?.includes('delivery') ? 'delivery' : 'restaurant';
         }
     },
 

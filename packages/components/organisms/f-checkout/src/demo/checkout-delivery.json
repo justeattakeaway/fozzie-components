@@ -8,7 +8,7 @@
     "dateOfBirth": "1980-01-30",
     "emailAddress": "joe.bloggs@justeattakeaway.com"
   },
-  "fulfilment" :{
+  "fulfilment": {
     "location": {
       "address": {
         "lines": ["1 Bristol Road", "Flat 1", "", "Somerset"],
@@ -34,6 +34,7 @@
       }
     }
   ],
+  "noteTypes": ["restaurant"],
   "messages": [
     {
       "type": "warning",

@@ -342,7 +342,7 @@ export default {
             'serviceType',
             'tableIdentifier',
             'time',
-            'userNote'
+            'userNotes'
         ]),
 
         wasMobileNumberFocused () {
@@ -480,7 +480,6 @@ export default {
             'updateCustomerDetails',
             'updateTableIdentifier',
             'updateMessage',
-            'updateUserNote',
             'getUserNote',
             'saveUserNote'
         ]),
@@ -511,7 +510,7 @@ export default {
                 await this.loadAddress();
             }
 
-            this.getUserNote();
+            // this.getUserNote();
         },
 
         /**
@@ -577,7 +576,7 @@ export default {
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                     isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
                     time: this.time,
-                    userNote: this.userNote,
+                    userNotes: this.userNotes,
                     geolocation: this.geolocation,
                     asap: this.hasAsapSelected,
                     tableIdentifier: this.tableIdentifier
@@ -591,7 +590,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
-                const statusCode = e.response.data.statusCode || e.response.status;
+                const statusCode = e.response.data.statusCode || e.response?.status;
 
                 if (statusCode === 403) {
                     throw new UpdateCheckoutAccessForbiddenError(e, this.$logger);
@@ -616,7 +615,8 @@ export default {
                 const data = {
                     basketId: this.basket.id,
                     customerNotes: {
-                        noteForRestaurant: this.userNote
+                        noteForRestaurant: this.userNotes.delivery?.note || this.userNotes.restaurant?.note,
+                        noteForKitchen: this.userNotes.kitchen
                     },
                     referralState: this.getReferralState()
                 };
@@ -683,10 +683,10 @@ export default {
 
                 this.$emit(EventNames.CheckoutGetSuccess);
             } catch (error) {
-                if (error.response && error.response.status === 403) {
+                if (error.response && error.response?.status === 403) {
                     this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));
                 } else {
-                    this.handleErrorState(new GetCheckoutError(error.message, error.response.status));
+                    this.handleErrorState(new GetCheckoutError(error.message, error.response?.status));
                 }
             }
         },
@@ -706,7 +706,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
             } catch (error) {
-                this.handleErrorState(new GetBasketError(error.message, error.response.status));
+                this.handleErrorState(new GetBasketError(error.message, error.response?.status));
             }
         },
 
@@ -723,7 +723,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
             } catch (error) {
-                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
+                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response?.status));
             }
         },
 
