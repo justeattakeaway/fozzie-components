@@ -32,9 +32,6 @@ export default {
             timeout
         };
 
-        // eslint-disable-next-line no-console
-        console.log('heyyyy', rootGetters);
-
         return axios.patch(url, data, config);
     },
 
