@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.45.0
 ------------------------------
-*July 6, 2021*
+*July 13, 2021*
 
 ### Added
 - Feature Management service component (initial skeleton).

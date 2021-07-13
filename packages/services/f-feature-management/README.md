@@ -17,5 +17,3 @@ const { getBooleanValue, getIntegerValue, getStringValue } = featureManagement(s
 // e.g.
 const myFeatureValue = getBooleanValue('my-feature-value');
 ```
-
-*NOTE: if you're unsure what scope to use, please reach out to us in #team-experimentation-platform.*
