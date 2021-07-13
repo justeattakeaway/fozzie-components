@@ -1,4 +1,4 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Card = require('../../test-utils/component-objects/f-card.component');
 
 const card = new Card('atom', 'card-component');

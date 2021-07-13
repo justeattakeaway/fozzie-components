@@ -10,6 +10,14 @@ v3.45.0
 ### Added
 - Feature Management service component (initial skeleton).
 
+v3.44.6
+------------------------------
+*July 12, 2021*
+
+### Fixed
+- A few linting and formatting issues across files.
+
+
 v3.44.5
 ------------------------------
 *July 7, 2021*
