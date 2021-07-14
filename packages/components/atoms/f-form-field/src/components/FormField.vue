@@ -15,6 +15,7 @@
                 :label-style="normalisedLabelStyle"
                 :label-for="uniqueId"
                 :is-inline="isInline"
+                :disabled="$attrs.disabled"
                 :data-test-id="testId.label">
                 {{ labelText }}
                 <template #description>
@@ -38,7 +39,7 @@
                 :value="value"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--defaultHeight'],
+                    $style[`c-formField-field--${fieldSize}`],
                     $style['c-formField-dropdownContainer']
                 ]"
                 :dropdown-options="dropdownOptions"
@@ -70,7 +71,7 @@
                 :data-test-id="testId.input"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--defaultHeight'],
+                    $style[`c-formField-field--${fieldSize}`],
                     { [$style['c-formField-field--noFocus']]: isSelectionControl }
                 ]"
                 v-on="listeners"
@@ -100,6 +101,8 @@ import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
+    DEFAULT_FIELD_SIZE,
+    VALID_FIELD_SIZES,
     VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
@@ -135,6 +138,12 @@ export default {
             type: String,
             default: 'default',
             validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+        },
+
+        fieldSize: {
+            type: String,
+            default: DEFAULT_FIELD_SIZE,
+            validator: value => (VALID_FIELD_SIZES.indexOf(value) !== -1) // The prop value must match one of the valid input types
         },
 
         value: {
@@ -282,17 +291,31 @@ export default {
 $form-input-textColour                    : $color-content-default;
 $form-input-textColour--disabled          : $color-content-disabled;
 $form-input-bg--disabled                  : $color-disabled-01;
+
 $form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $color-border-strong;
+$form-input-borderColour                  : $color-border-default;
 $form-input-borderColour--focus           : $color-grey-50;
 $form-input-borderColour--invalid         : $color-support-error;
 $form-input-borderColour--disabled        : $color-disabled-01;
-$form-input-height                        : 46px; // height is 46px + 1px border = 48px
-$form-input-padding                       : spacing(x1.5) spacing(x2);
+
+$form-input-height-small                  : spacing(x5);
+$form-input-padding-small                 : spacing(x1) spacing(x2);
+
+$form-input-height-medium                 : spacing(x6);
+$form-input-padding-medium                : spacing(x1.5) spacing(x2);
+
+$form-input-height-large                  : spacing(x7);
+$form-input-padding-large                 : spacing(x2);
+
 $form-input-fontSize                      : 'body-l';
-$form-input-focus                         : $color-focus;
-$form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
+$form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
+
+
+@mixin form-field-size($height, $padding) {
+    @include rem(height, $height);
+    padding: $padding;
+}
 
 .c-formField {
     & + & {
@@ -304,12 +327,21 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         position: relative;
     }
 
-    .c-formField-field--defaultHeight {
-        @include rem(height, $form-input-height); //convert height to rem
+    .c-formField-field--small {
+        @include form-field-size($form-input-height-small, $form-input-padding-small); //convert height to rem
+    }
+
+    .c-formField-field--medium {
+        @include form-field-size($form-input-height-medium, $form-input-padding-medium); //convert height to rem
+    }
+
+    .c-formField-field--large {
+        @include form-field-size($form-input-height-large, $form-input-padding-large); //convert height to rem
     }
 
     .c-formField-field {
         width: 100%;
+        box-sizing: border-box;
         font-family: $font-family-base;
         @include font-size($form-input-fontSize);
         font-weight: $font-weight-regular;
@@ -319,7 +351,6 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         border: $form-input-borderWidth solid $form-input-borderColour;
         border-radius: $form-input-borderRadius;
         background-clip: padding-box;
-        padding: $form-input-padding;
 
         &:hover {
             background-color: $form-input-bg--hover;
