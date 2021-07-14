@@ -1,4 +1,4 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout = new Checkout();
@@ -8,8 +8,8 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
-                .withQuery('&knob-Is User Logged In', false)
-                .withQuery('&knob-Is ASAP available', true);
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -81,8 +81,8 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
-                .withQuery('&knob-Is User Logged In', false)
-                .withQuery('&knob-Is ASAP available', false);
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', false);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -102,8 +102,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', false)
-                .withQuery('&knob-Is ASAP available', true);
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -182,8 +182,8 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual 
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', false)
-                .withQuery('&knob-Is ASAP available', false);
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', false);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
