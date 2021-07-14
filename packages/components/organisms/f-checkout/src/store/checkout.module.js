@@ -2,11 +2,11 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
-import BasketServiceApi from '../services/BasketServiceApi';
-import CheckoutServiceApi from '../services/CheckoutServiceApi';
-import AddressGeocodingServiceApi from '../services/AddressGeocodingServiceApi';
-import OrderPlacementServicesApi from '../services/OrderPlacementServicesApi';
-import AccountServiceApi from '../services/AccountServiceApi';
+import basketApi from '../services/basketApi';
+import checkoutApi from '../services/checkoutApi';
+import addressGeocodingApi from '../services/addressGeocodingApi';
+import orderPlacementApi from '../services/orderPlacementApi';
+import accountApi from '../services/accountApi';
 
 import {
     UPDATE_ADDRESS,
@@ -134,7 +134,7 @@ export default {
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             // TODO: deal with exceptions.
-            const { data } = await CheckoutServiceApi.getCheckout(url, state, timeout);
+            const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
 
@@ -156,7 +156,7 @@ export default {
         }, { url, data, timeout }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
 
-            const { data: responseData, headers } = await CheckoutServiceApi.updateCheckout(url, state, rootGetters, data, timeout);
+            const { data: responseData, headers } = await checkoutApi.updateCheckout(url, state, rootGetters, data, timeout);
 
             const { issues, isFulfillable } = responseData;
 
@@ -179,7 +179,7 @@ export default {
         createGuestUser: async ({ commit }, {
             url, tenant, data, timeout, otacToAuthExchanger
         }) => {
-            const response = await AccountServiceApi.createGuestUser(url, data, timeout, tenant);
+            const response = await accountApi.createGuestUser(url, data, timeout, tenant);
             // eslint-disable-next-line no-unused-vars
             const otac = response.data.token;
             const authToken = await otacToAuthExchanger(otac);
@@ -194,7 +194,7 @@ export default {
          */
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
             // TODO: deal with exceptions.
-            const { data } = await CheckoutServiceApi.getAvailableFulfilment(url, timeout);
+            const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
         },
@@ -212,7 +212,7 @@ export default {
             timeout
         }) => {
             // TODO: deal with exceptions.
-            const { data } = await BasketServiceApi.getBasket(url, tenant, language, timeout);
+            const { data } = await basketApi.getBasket(url, tenant, language, timeout);
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurant: {
@@ -303,7 +303,7 @@ export default {
             url, data, timeout
         }) => {
             try {
-                const { data: responseData } = await OrderPlacementServicesApi.placeOrder(url, data, timeout, state);
+                const { data: responseData } = await orderPlacementApi.placeOrder(url, data, timeout, state);
 
                 const { orderId } = responseData;
 
@@ -353,7 +353,7 @@ export default {
             }
 
             if (!addressCoords && state.authToken) {
-                const { data } = await AddressGeocodingServiceApi.getGeoLocation(url, postData, timeout, state);
+                const { data } = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
 
                 commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
             }
