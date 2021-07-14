@@ -126,11 +126,13 @@ export default {
          * Fetches the variant of the Low Value Order experiment from the headers and pushes an analytics event.
          */
         trackLowValueOrderExperiment: (_, experimentHeaders) => {
-            const lowValueOrderExperimentVariant = experimentHeaders[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
-            const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
+            const lowValueOrderExperimentVariant = experimentHeaders?.[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
+            if (lowValueOrderExperimentVariant) {
+                const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
 
-            if (event) {
-                window.dataLayer.push(event);
+                if (event) {
+                    window.dataLayer.push(event);
+                }
             }
         }
     },
