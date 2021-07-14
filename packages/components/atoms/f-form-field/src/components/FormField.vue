@@ -137,13 +137,13 @@ export default {
         labelStyle: {
             type: String,
             default: 'default',
-            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid label types
         },
 
         fieldSize: {
             type: String,
             default: DEFAULT_FIELD_SIZE,
-            validator: value => (VALID_FIELD_SIZES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+            validator: value => (VALID_FIELD_SIZES.indexOf(value) !== -1) // The prop value must match one of the valid field sizes
         },
 
         value: {
