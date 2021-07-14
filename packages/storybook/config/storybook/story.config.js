@@ -22,6 +22,22 @@ const getChangedPackageStories = () => {
     return storyPaths;
 };
 
+const getStoryFiles = () => {
+
+    if(process.env.VS_DEBUGGER) {
+        return [process.env.CURRENT_STORY_FILE]
+    }
+    else if(process.env.CHANGED_ONLY) {
+        return getChangedPackageStories();
+    }
+    else {
+        return [
+            '../../../**/*.stories.@(js|mdx)',
+            '../../../../stories/**/*.stories.@(js|mdx)'
+        ];
+    }
+}
+
 module.exports = {
-    getChangedPackageStories
+    getStoryFiles
 };

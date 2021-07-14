@@ -82,7 +82,7 @@ To run storybook first you must run the following at the the top level
 
 `yarn build` to build the require packages for storybook to run.
 
-Then run `yarn storybook:serve` to start storybook, which will open on `localhost:6006`.
+Then run `yarn storybook:serve` to start storybook, which will open on `localhost:8080`.
 
 ## Committing Code
 
