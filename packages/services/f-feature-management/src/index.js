@@ -9,14 +9,19 @@ function getBooleanValue (key) {
 
 
 function getIntegerValue (key) {
-    logValueRequest(getIntegerValue, key, true);
+    logValueRequest(getIntegerValue, key, 0);
     return 0; // TODO: implementation
 }
 
 
 function getStringValue (key) {
-    logValueRequest(getStringValue, key, true);
+    logValueRequest(getStringValue, key, '');
     return ''; // TODO: implementation
+}
+
+function getValue (key) {
+    logValueRequest(getValue, key, null);
+    return null; // TODO: implementation
 }
 
 export default function (scope) {
@@ -27,6 +32,7 @@ export default function (scope) {
     return {
         getBooleanValue: key => getBooleanValue(fullKey(key)),
         getIntegerValue: key => getIntegerValue(fullKey(key)),
-        getStringValue: key => getStringValue(fullKey(key))
+        getStringValue: key => getStringValue(fullKey(key)),
+        getValue: key => getValue(fullKey(key))
     };
 }

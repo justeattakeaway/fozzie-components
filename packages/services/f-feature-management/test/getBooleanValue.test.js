@@ -1,6 +1,6 @@
 import featureManagement from '../src/index';
 
-const { getBooleanValue } = featureManagement('je-web-core');
+const { getBooleanValue } = featureManagement('');
 
 describe.skip('Boolean value retrieval', () => {
     it('Get positive boolean value', () => {
