@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
@@ -11,58 +11,58 @@ describe('f-footer - Mobile Visual Tests', () => {
     });
 
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'])
-    .it('should display the base footer for tenant: "%s"', tenant => {
+        .it('should display the base footer for tenant: "%s"', tenant => {
 
-        // Arrange
-        footer.withQuery('&knob-Locale', tenant);
-        footer.withQuery('&knob-Show country selector', 'false');
-        footer.withQuery('&knob-Show courier links', 'false');
-        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
+            // Arrange
+            footer.withQuery('&knob-Locale', tenant);
+            footer.withQuery('&knob-Show country selector', 'false');
+            footer.withQuery('&knob-Show courier links', 'false');
+            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-        footer.open(pageUrl);
-        footer.waitForComponent();
-        browser.percyScreenshot(`f-footer - Base - ${tenant}`, 'mobile')
-    });
+            footer.open(pageUrl);
+            footer.waitForComponent();
+            browser.percyScreenshot(`f-footer - Base - ${tenant}`, 'mobile')
+        });
 
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'])
-    .it('should display the footer with country selector for tenant: "%s"', tenant => {
+        .it('should display the footer with country selector for tenant: "%s"', tenant => {
 
-        // Arrange
-        footer.withQuery('&knob-Locale', tenant);
-        footer.withQuery('&knob-Show country selector', 'true');
-        footer.withQuery('&knob-Show courier links', 'false');
-        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
+            // Arrange
+            footer.withQuery('&knob-Locale', tenant);
+            footer.withQuery('&knob-Show country selector', 'true');
+            footer.withQuery('&knob-Show courier links', 'false');
+            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-        footer.open(pageUrl);
-        footer.waitForComponent();
-        browser.percyScreenshot(`f-footer - Country Selector - ${tenant}`, 'mobile')
-    });
-
-    forEach(['en-AU', 'en-NZ'])
-    .it('should display the footer with courier links for tenant: "%s"', tenant => {
-
-        // Arrange
-        footer.withQuery('&knob-Locale', tenant);
-        footer.withQuery('&knob-Show country selector', 'false');
-        footer.withQuery('&knob-Show courier links', 'true');
-        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
-
-        footer.open(pageUrl);
-        footer.waitForComponent();
-        browser.percyScreenshot(`f-footer - Courier Links - ${tenant}`, 'mobile')
-    });
+            footer.open(pageUrl);
+            footer.waitForComponent();
+            browser.percyScreenshot(`f-footer - Country Selector - ${tenant}`, 'mobile')
+        });
 
     forEach(['en-AU', 'en-NZ'])
-    .it('should display the footer with courier links and country selector for tenant: "%s"', tenant => {
+        .it('should display the footer with courier links for tenant: "%s"', tenant => {
 
-        // Arrange
-        footer.withQuery('&knob-Locale', tenant);
-        footer.withQuery('&knob-Show country selector', 'true');
-        footer.withQuery('&knob-Show courier links', 'true');
-        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
+            // Arrange
+            footer.withQuery('&knob-Locale', tenant);
+            footer.withQuery('&knob-Show country selector', 'false');
+            footer.withQuery('&knob-Show courier links', 'true');
+            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-        footer.open(pageUrl);
-        footer.waitForComponent();
-        browser.percyScreenshot(`f-footer - Courier Links and Country Selector - ${tenant}`, 'mobile')
-    });
+            footer.open(pageUrl);
+            footer.waitForComponent();
+            browser.percyScreenshot(`f-footer - Courier Links - ${tenant}`, 'mobile')
+        });
+
+    forEach(['en-AU', 'en-NZ'])
+        .it('should display the footer with courier links and country selector for tenant: "%s"', tenant => {
+
+            // Arrange
+            footer.withQuery('&knob-Locale', tenant);
+            footer.withQuery('&knob-Show country selector', 'true');
+            footer.withQuery('&knob-Show courier links', 'true');
+            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
+
+            footer.open(pageUrl);
+            footer.waitForComponent();
+            browser.percyScreenshot(`f-footer - Courier Links and Country Selector - ${tenant}`, 'mobile')
+        });
 });

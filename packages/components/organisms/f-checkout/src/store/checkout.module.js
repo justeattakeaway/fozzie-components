@@ -1,27 +1,28 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_EXPERIMENTATION_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
 import { version as applicationVerion } from '../../package.json';
 
 import {
-    UPDATE_HAS_ASAP_SELECTED,
+    UPDATE_ADDRESS,
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_ERRORS,
     UPDATE_MESSAGE,
     UPDATE_ORDER_PLACED,
+    UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
-    UPDATE_USER_NOTE,
-    UPDATE_ADDRESS
+    UPDATE_USER_NOTE
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
@@ -159,23 +160,24 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        updateCheckout: async ({ commit, state, dispatch }, {
-            url, data, timeout
-        }) => {
+        updateCheckout: async ({
+            commit, state, dispatch, rootGetters
+        }, { url, data, timeout }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
+            const experimentationHeaders = rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                     ...(state.authToken && {
                         Authorization: authHeader
-                    })
+                    }),
+                    ...experimentationHeaders
                 },
                 timeout
             };
 
-            const { data: responseData } = await axios.patch(url, data, config);
+            const { data: responseData, headers } = await axios.patch(url, data, config);
             const { issues, isFulfillable } = responseData;
 
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
@@ -184,6 +186,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/trackLowValueOrderExperiment`, headers, { root: true });
             dispatch('updateMessage', detailedIssues[0]);
         },
 
@@ -280,7 +283,8 @@ export default {
             url,
             tenant,
             language,
-            timeout
+            timeout,
+            currentPostcode
         }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
             const config = {
@@ -296,9 +300,40 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
+            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+        },
+
+        /**
+         * Gets phone number from customer record from backend and updates state
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCustomer: async ({ commit, state, dispatch }, {
+            url,
+            timeout
+        }) => {
+            if (!state.customer || state.customer.mobileNumber) {
+                return;
+            }
+
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(state.authToken && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            commit(UPDATE_PHONE_NUMBER, data.PhoneNumber);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
@@ -588,6 +623,10 @@ export default {
 
             state.address.locality = address.locality;
             state.address.postcode = address.postalCode;
+        },
+
+        [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
+            state.customer.mobileNumber = phoneNumber;
         }
     }
 };

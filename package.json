@@ -1,10 +1,10 @@
 {
   "name": "root",
-  "version": "3.44.2",
+  "version": "3.44.6",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
-    "bundlewatch": "cross-env-shell \"bundlewatch --config bundlewatch.config.js\"",
+    "bundlewatch": "cross-env-shell \"yarn build && bundlewatch --config bundlewatch.config.js\"",
     "lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --stream\"",
     "lint:fix": "lerna run lint -- --fix",
     "lint:style": "lerna run lint:style --stream",

@@ -1,10 +1,8 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import { VueI18n } from '@justeat/f-globalisation';
 import CookieHelper from 'js-cookie';
 import CookieBanner from '../CookieBanner.vue';
 
 const localVue = createLocalVue();
-localVue.use(VueI18n);
 const i18n = {
     locale: 'en-IE'
 };

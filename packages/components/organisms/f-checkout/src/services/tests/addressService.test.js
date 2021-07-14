@@ -1,8 +1,5 @@
 import addressService from '../addressService';
 import localStorageMock from '../../../test-utils/local-storage/local-storage-mock';
-import { getCookie } from '../../utils/helpers';
-
-jest.mock('../../utils/helpers');
 
 const area511Line = {
     City: 'Area 51',
@@ -40,11 +37,8 @@ describe('addressService', () => {
             const postcode = '';
 
             it('should return empty address if addresses is empty', () => {
-                // Arrange
-                getCookie.mockReturnValue(postcode);
-
                 // Act
-                const actual = addressService.getClosestAddress([], tenant);
+                const actual = addressService.getClosestAddress([], tenant, postcode);
 
                 // Assert
                 expect(actual).toEqual({
@@ -56,11 +50,8 @@ describe('addressService', () => {
             });
 
             it('should return default address if default address is present', () => {
-                // Arrange
-                getCookie.mockReturnValue(postcode);
-
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant);
+                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
 
                 // Assert
                 expect(actual).toEqual({
@@ -75,10 +66,9 @@ describe('addressService', () => {
             it('should return empty address with postcode set, when postcode does not match', () => {
                 // Arrange
                 const postcode = 'EN1 1AA';
-                getCookie.mockReturnValue(postcode);
 
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant);
+                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
 
                 // Assert
                 expect(actual).toEqual({
@@ -92,10 +82,9 @@ describe('addressService', () => {
             it('should return empty address with formatted postcode set, when postcode does not match and has no spaces', () => {
                 // Arrange
                 const postcode = 'EN11AA';
-                getCookie.mockReturnValue(postcode);
 
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant);
+                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
 
                 // Assert
                 expect(actual).toEqual({
@@ -109,10 +98,9 @@ describe('addressService', () => {
             it('should return empty address with postcode set, when postcode does not match', () => {
                 // Arrange
                 const postcode = 'EN1 1AA';
-                getCookie.mockReturnValue(postcode);
 
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant);
+                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
 
                 // Assert
                 expect(actual).toEqual({
@@ -126,10 +114,9 @@ describe('addressService', () => {
             it('should return address with full postcode match', () => {
                 // Arrange
                 const postcode = 'BS1 1AA';
-                getCookie.mockReturnValue(postcode);
 
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant);
+                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
 
                 // Assert
                 expect(actual).toEqual({
@@ -143,10 +130,9 @@ describe('addressService', () => {
             it('should return address with full postcode match when address has no spaces', () => {
                 // Arrange
                 const postcode = 'EC4M7RF';
-                getCookie.mockReturnValue(postcode);
 
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant);
+                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
 
                 // Assert
                 expect(actual).toEqual({
@@ -160,10 +146,9 @@ describe('addressService', () => {
             it('should return address with postcode partial match', () => {
                 // Arrange
                 const postcode = 'AR51';
-                getCookie.mockReturnValue(postcode);
 
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant);
+                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
 
                 // Assert
                 expect(actual).toEqual({
