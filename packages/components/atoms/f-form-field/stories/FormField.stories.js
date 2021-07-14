@@ -1,5 +1,5 @@
 import {
-    withKnobs, select, text, boolean, object, number
+    withKnobs, select, text, boolean, object
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
