@@ -85,6 +85,8 @@ To run storybook first you must run the following at the the top level
 Then run `yarn storybook:serve` to start storybook, which will open on `localhost:8080`.
 
 
+### Running a single component in Storybook
+
 If you wish to view a single component in Storybook during development, you can do this by opening the components `*.stories.js` file in your IDE and running the `Storybook - Run Currently Open Story File` task. (This only works with VS Code).
 This is particuarly useful as it prevents a bug where Storybook pulls in other components stylesheets ([See here](https://github.com/storybookjs/storybook/issues/729)).
 
