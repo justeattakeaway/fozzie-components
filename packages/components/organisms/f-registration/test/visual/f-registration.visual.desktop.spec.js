@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Registration = require('../../test-utils/component-objects/f-registration.component');
 
 let registration;
@@ -15,7 +15,7 @@ describe('f-registration - Desktop visual tests', () => {
 
     it('should display component', () => {
         // Assert
-        browser.percyScreenshot(`f-registration - Base`, 'desktop')
+        browser.percyScreenshot('f-registration - Base', 'desktop');
     });
 
     it('should display the "Email address is already registered" error', () => {
@@ -31,7 +31,7 @@ describe('f-registration - Desktop visual tests', () => {
         registration.submitForm(userInfo);
 
         // Assert
-        browser.percyScreenshot(`f-registration - "Email is already registered error"`, 'desktop')
+        browser.percyScreenshot('f-registration - "Email is already registered error"', 'desktop');
     });
 
     it('should display error when "%s" field is empty', field => {
@@ -47,7 +47,7 @@ describe('f-registration - Desktop visual tests', () => {
         registration.submitForm(userInfo);
 
         // Assert
-        browser.percyScreenshot(`f-registration - "Mandatory field errors"`, 'desktop')
+        browser.percyScreenshot('f-registration - "Mandatory field errors"', 'desktop');
     });
 
     it('should display error when "%s" input is invalid', () => {
@@ -63,7 +63,7 @@ describe('f-registration - Desktop visual tests', () => {
         registration.submitForm(userInfo);
 
         // Assert
-        browser.percyScreenshot(`f-registration - "Invalid input error"`, 'desktop')
+        browser.percyScreenshot('f-registration - "Invalid input error"', 'desktop');
     });
 
     it('should display error when "%s" input is too long', field => {
@@ -79,6 +79,6 @@ describe('f-registration - Desktop visual tests', () => {
         registration.submitForm(userInfo);
 
         // Assert
-        browser.percyScreenshot(`f-registration - "Input exceed max length error"`, 'desktop')
+        browser.percyScreenshot('f-registration - "Input exceed max length error"', 'desktop');
     });
 });
