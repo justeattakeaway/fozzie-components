@@ -34,7 +34,7 @@
                         :class="[$style['c-megaModal-closeBtn'], {
                             [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                         }]"
-                        button-type="secondary"
+                        button-type="ghostTertiary"
                         button-size="xsmall"
                         data-test-id="close-modal"
                         @click.native="close">
@@ -398,10 +398,6 @@ export default {
 
     .c-megaModal-closeBtn--fixed {
         position: fixed;
-    }
-
-    .c-megaModal-closeIcon * {
-        fill: $color-content-link;
     }
 }
 
