@@ -21,9 +21,10 @@
             <f-button
                 v-if="isDismissible"
                 type="button"
+                is-icon
                 :class="[$style['c-alert-dismiss']]"
-                button-type="icon"
                 button-size="xsmall"
+                button-type="ghostTertiary"
                 data-test-id="alert-dismiss"
                 @click.native="dismiss">
                 <cross-icon
@@ -179,7 +180,7 @@ $alert-borderRadius: $border-radius;
         .c-alert-dismiss-icon {
             height: 16px;
 
-            * {
+            path {
                 fill: $color-content-subdued;
             }
         }
