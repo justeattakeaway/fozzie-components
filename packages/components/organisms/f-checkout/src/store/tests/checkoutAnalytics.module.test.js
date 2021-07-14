@@ -426,7 +426,7 @@ describe('CheckoutAnalyticsModule', () => {
                 };
 
                 // Act
-                trackLowValueOrderExperiment(mockedResponseHeaders);
+                trackLowValueOrderExperiment({ rootState, dispatch }, mockedResponseHeaders);
 
                 // Assert
                 expect(window.dataLayer).toContainEqual(expected);
@@ -454,7 +454,7 @@ describe('CheckoutAnalyticsModule', () => {
                 };
 
                 // Act
-                trackLowValueOrderExperiment(mockedResponseHeaders);
+                trackLowValueOrderExperiment({ rootState, dispatch }, mockedResponseHeaders);
 
                 // Assert
                 expect(window.dataLayer).toContainEqual(expected);
