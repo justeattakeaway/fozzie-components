@@ -60,6 +60,11 @@ $form-inlineLabel-weight        : $font-weight-regular;
     @include font-size($form-label-fontSize);
     font-weight: $form-label-weight;
     margin-bottom: spacing();
+
+    &[disabled] {
+        color: $color-content-disabled;
+        pointer-events: none;
+    }
 }
 
 .c-formField-label--inline {
@@ -92,5 +97,4 @@ input {
         z-index: -1;
     }
 }
-
 </style>
