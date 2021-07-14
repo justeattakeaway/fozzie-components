@@ -50,7 +50,7 @@ function setVueProps (locale) {
  */
 function vueBuild () {
     log('running vue-cli-service build ');
-    return exec(`VUE_CLI_SERVICE_CONFIG_PATH=$PWD/vue.config.js npx vue-cli-service build --dest ${PATHS.tempVueFolder}`, (err, stdout, stderr) => {
+    return exec(`npx vue-cli-service build --dest ${PATHS.tempVueFolder}`, (err, stdout, stderr) => {
         log(stdout);
         log(stderr);
         if (err) { log(err); }
