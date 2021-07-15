@@ -3,11 +3,11 @@
 // Instead, the theme is handled via a data-attribute on the component (via the `@mixin theme()` below)
 $theme: 'jet' !default;
 
-@import '~@justeat/fozzie/src/scss/fozzie';
+@import  '~@justeat/fozzie/src/scss/fozzie';
 
-$form-input-bg : $color-container-default;
-$form-input-bg--hover : darken($form-input-bg, $color-hover-01);
+$form-input-bg                            : $color-container-default;
+$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);
 
-$form-input-bg--disabled : $color-disabled-01;
-$form-input-textColour--disabled : $color-content-disabled;
-$form-input-borderColour--disabled : $color-disabled-01;
+$form-input-bg--disabled                  : $color-disabled-01;
+$form-input-textColour--disabled          : $color-content-disabled;
+$form-input-borderColour--disabled        : $color-disabled-01;
