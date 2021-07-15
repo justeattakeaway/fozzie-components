@@ -15,7 +15,7 @@
                 :label-style="normalisedLabelStyle"
                 :label-for="uniqueId"
                 :is-inline="isInline"
-                :disabled="$attrs.disabled"
+                :is-disabled="isDisabled"
                 :data-test-id="testId.label">
                 {{ labelText }}
                 <template #description>
@@ -257,6 +257,10 @@ export default {
 
         isTextarea () {
             return this.inputType === 'textarea';
+        },
+
+        isDisabled () {
+            return this.$attrs.disabled === 'disabled';
         }
     },
 
@@ -341,7 +345,6 @@ $form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
 
     .c-formField-field {
         width: 100%;
-        box-sizing: border-box;
         font-family: $font-family-base;
         @include font-size($form-input-fontSize);
         font-weight: $font-weight-regular;
