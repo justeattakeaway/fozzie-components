@@ -52,8 +52,6 @@ export default {
                 return;
             }
 
-            const pageName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'Overview' : 'Guest';
-
             window.dataLayer.push({
                 checkout: {
                     step: 1
@@ -62,10 +60,6 @@ export default {
                 restaurant: {
                     id: rootState[VUEX_CHECKOUT_MODULE].restaurant.id,
                     seoName: rootState[VUEX_CHECKOUT_MODULE].restaurant.seoName
-                },
-                pageData: {
-                    name: `Checkout 1 ${pageName}`,
-                    group: 'Checkout'
                 },
                 menu: {
                     type: rootState[VUEX_CHECKOUT_MODULE].serviceType
