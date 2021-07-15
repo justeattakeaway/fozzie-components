@@ -180,7 +180,7 @@ export default {
             title: 'Chi siamo',
             links: [
                 {
-                    url: '/informazioni/about-us',
+                    url: 'https://www.justeattakeaway.com/',
                     text: 'Informazioni su Just Eat',
                     gtm: 'click_chi_siamo_informazioni'
                 },
@@ -235,24 +235,6 @@ export default {
                     target: '_blank',
                     rel: 'noopener',
                     gtm: 'click_ethics_hotline'
-                },
-                {
-                    type: 'euro2020',
-                    url: 'https://www.justeat.it/euro2020/',
-                    text: 'UEFA EURO 2020™',
-                    gtm: 'click_euro2020'
-                },
-                {
-                    type: 'euro2020',
-                    url: 'https://www.justeat.it/euro2020/vincere-biglietti/',
-                    text: 'Vincere biglietti',
-                    gtm: 'click_euro2020_vincere_biglietti'
-                },
-                {
-                    type: 'euro2020',
-                    url: 'https://www.justeat.it/euro2020/terms/',
-                    text: 'Vincere biglietti - Termini e condizioni',
-                    gtm: 'click_euro2020_termini'
                 }
             ]
         }
