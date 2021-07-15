@@ -18,6 +18,7 @@ const CheckoutUpdateSuccess = 'checkout-update-success';
 const CheckoutUpdateFailure = 'checkout-update-failure';
 const CheckoutCustomerGetSuccess = 'checkout-customer-get-success';
 const CheckoutCustomerGetFailure = 'checkout-customer-get-failure';
+const CheckoutMounted = 'checkout-mounted';
 
 export default {
     CheckoutSuccess,
@@ -39,5 +40,6 @@ export default {
     CheckoutUpdateSuccess,
     CheckoutUpdateFailure,
     CheckoutCustomerGetSuccess,
-    CheckoutCustomerGetFailure
+    CheckoutCustomerGetFailure,
+    CheckoutMounted
 };
