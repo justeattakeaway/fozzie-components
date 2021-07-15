@@ -15,6 +15,14 @@ v0.160.0
 - `CheckoutMounted` event.
 
 
+v0.159.1
+------------------------------
+*July 14, 2021*
+
+### Fixed
+- Use correct parameter in analytics module to track LVO experiment
+
+
 v0.159.0
 ------------------------------
 *July 12, 2021*
