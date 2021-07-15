@@ -1,13 +1,7 @@
-import { getCookie } from '../utils/helpers';
-
 const storedLocationKey = 'je-full-address-details';
 
 function isFullPostCode (postcode) {
-    if (!postcode) {
-        return false;
-    }
-
-    return postcode.length > 4;
+    return !postcode ? false : postcode.length > 4;
 }
 
 function toFormattedPostcode (postcode) {
@@ -47,11 +41,7 @@ function getAddress (postcode, address) {
 }
 
 function getDefaultAddress (addresses) {
-    if (!addresses) {
-        return null;
-    }
-
-    return addresses.find(a => a && a.IsDefault);
+    return !addresses ? null : addresses.find(a => a && a.IsDefault);
 }
 
 function getAddressClosestToPostcode (postcode, addresses) {
@@ -126,9 +116,8 @@ function getAddressCoordsFromLocalStorage () {
     return null;
 }
 
-
 /**
- * Checkes whether the address values in local storage match what's is in the form.
+ * Checks whether the address values in local storage match what's is in the form.
  * @param storedAddress - The address stored in local storage
  * @param formAddress - The address in form state
  * @returns {boolean} - Whether the form values match
@@ -138,19 +127,28 @@ function doesAddressInStorageAndFormMatch (storedAddress, formAddress) {
         && storedAddress.Line2 === formAddress.line2 && storedAddress.City === formAddress.locality;
 }
 
+/**
+ * Attempts to find the closest address; from the addresses
+ * supplied, to the current postcode provided.
+ * @param addresses - The consumers address book
+ * @param tenant - The current tenant
+ * @returns {Object} - The closest formatted address
+ */
+function getClosestAddress (addresses, tenant, currentPostcode) {
+    if (tenant !== 'uk') {
+        // TODO: Add implementation for other tenants
+        return getAddress('', {});
+    }
+
+    const postcode = currentPostcode || '';
+    const address = getAddressClosestToPostcode(postcode, addresses);
+
+    return getAddress(postcode, address);
+}
+
 export default {
     doesAddressInStorageAndFormMatch,
-    getClosestAddress (addresses, tenant) {
-        if (tenant !== 'uk') {
-            // TODO: Add implementation for other tenants
-            return getAddress('', {});
-        }
-
-        const postcode = getCookie('je-location') || '';
-        const address = getAddressClosestToPostcode(postcode, addresses);
-
-        return getAddress(postcode, address);
-    },
+    getClosestAddress,
     getAddressFromLocalStorage,
     getAddressCoordsFromLocalStorage,
     isAddressInLocalStorage

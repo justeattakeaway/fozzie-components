@@ -3,6 +3,36 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.44.6
+------------------------------
+*July 12, 2021*
+
+### Fixed
+- A few linting and formatting issues across files.
+
+
+v3.44.5
+------------------------------
+*July 7, 2021*
+
+### Fixed
+- Build all packages when running bundlewatch
+
+v3.44.4
+------------------------------
+*July 6, 2021*
+
+## Fix
+- Removed Bundlewatch comparison to master
+
+v3.44.3
+------------------------------
+*July 6, 2021*
+
+## Fix
+- Fix Bundlewatch fails
+
 v3.44.2
 ------------------------------
 *July 5, 2021*
