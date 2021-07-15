@@ -7,7 +7,10 @@
             :data-test-id="testId.icon" />
         <select
             :id="$attrs.id"
-            :class="$style['c-formDropdown-select']"
+            :class="[
+                $style['c-formDropdown-select'],
+                { [$style['c-formDropdown--disabled']]: isDisabled }
+            ]"
             :data-test-id="testId.select"
             v-bind="attributes"
             :value="value"
@@ -45,6 +48,10 @@ export default {
         dropdownOptions: {
             type: Array,
             default: () => null
+        },
+        isDisabled: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -89,7 +96,7 @@ export default {
     width: 100%;
     font: inherit;
     color: inherit;
-    background: transparent;
+    // background: transparent;
     outline: none;
 
     /* Remove default styling */
@@ -98,6 +105,17 @@ export default {
 
     &:hover {
         background-color: $form-input-bg--hover;
+    }
+}
+
+.c-formDropdown--disabled {
+    cursor: not-allowed;
+
+    &,
+    &:hover {
+        background-color: $form-input-bg--disabled;
+        color: $form-input-textColour--disabled;
+        border-color: $form-input-borderColour--disabled;
     }
 }
 </style>

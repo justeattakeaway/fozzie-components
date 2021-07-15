@@ -4,7 +4,8 @@
         :class="[
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
-                [$style['c-formField--grouped']]: isFieldGrouped
+                [$style['c-formField--grouped']]: isFieldGrouped,
+                [$style['c-formField--disabled']]: isDisabled
             }
         ]"
         :data-test-id="testId.container">
@@ -36,6 +37,7 @@
                 :id="uniqueId"
                 :attributes="$attrs"
                 :type="normalisedInputType"
+                :is-disabled="isDisabled"
                 :value="value"
                 :class="[
                     $style['c-formField-field'],
@@ -293,15 +295,12 @@ export default {
 
 <style lang="scss" module>
 $form-input-textColour                    : $color-content-default;
-$form-input-textColour--disabled          : $color-content-disabled;
-$form-input-bg--disabled                  : $color-disabled-01;
 
 $form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $color-border-default;
 $form-input-borderColour--focus           : $color-grey-50;
 $form-input-borderColour--invalid         : $color-support-error;
-$form-input-borderColour--disabled        : $color-disabled-01;
 
 $form-input-height-small                  : spacing(x5);
 $form-input-padding-small                 : spacing(x1) spacing(x2);
@@ -370,8 +369,7 @@ $form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
             border-color: $form-input-borderColour--invalid;
         }
 
-        // Disabled state
-        &[disabled] {
+        .c-formField--disabled & {
             cursor: not-allowed;
 
             &,
