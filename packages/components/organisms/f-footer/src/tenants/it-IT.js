@@ -180,7 +180,7 @@ export default {
             title: 'Chi siamo',
             links: [
                 {
-                    url: '/informazioni/about-us',
+                    url: 'https://www.justeattakeaway.com/',
                     text: 'Informazioni su Just Eat',
                     gtm: 'click_chi_siamo_informazioni'
                 },

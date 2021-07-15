@@ -118,22 +118,32 @@ export default {
             ]
         },
         brands: {
-            title: 'Top brands',
+            title: 'Famous restaurants',
             links: [
+                {
+                    url: '/takeaway/brands/mcdonalds',
+                    text: 'McDs',
+                    gtm: 'click_brands_mcdonalds'
+                },
+                {
+                    url: '/takeaway/brands/greggs',
+                    text: 'Greggs',
+                    gtm: 'click_brands_greggs'
+                },
+                {
+                    url: '/takeaway/brands/costa-coffee',
+                    text: 'Costa Coffee',
+                    gtm: 'click_brands_costacoffee'
+                },
                 {
                     url: '/takeaway/brands/kfc',
                     text: 'KFC',
                     gtm: 'click_brands_kfc'
                 },
                 {
-                    url: '/takeaway/brands/burger-king',
-                    text: 'Burger King',
-                    gtm: 'click_brands_burger_king'
-                },
-                {
-                    url: '/takeaway/brands/pizza-hut',
-                    text: 'Pizza Hut',
-                    gtm: 'click_brands_pizzahut'
+                    url: '/takeaway/brands/starbucks',
+                    text: 'Starbucks',
+                    gtm: 'click_brands_starbucks'
                 },
                 {
                     url: '/takeaway/brands/subway',
@@ -141,9 +151,34 @@ export default {
                     gtm: 'click_brands_subway'
                 },
                 {
-                    url: '/takeaway/brands/yo-sushi',
-                    text: 'YO! Sushi',
-                    gtm: 'click_brands_yo'
+                    url: '/takeaway/brands/burgerking',
+                    text: 'Burger King',
+                    gtm: 'click_brands_burger_king'
+                },
+                {
+                    url: '/takeaway/brands/pret-a-manger',
+                    text: 'Pret',
+                    gtm: 'click_brands_pret_a_manger'
+                },
+                {
+                    url: '/takeaway/brands/leon',
+                    text: 'LEON',
+                    gtm: 'click_brands_leon'
+                },
+                {
+                    url: '/takeaway/brands/papajohns',
+                    text: 'Papa Johns',
+                    gtm: 'click_brands_papajohns'
+                },
+                {
+                    url: '/takeaway/brands/pizza-hut',
+                    text: 'Pizza Hut',
+                    gtm: 'click_brands_pizza_hut'
+                },
+                {
+                    url: '/takeaway/brands/german-doner-kebab',
+                    text: 'German Doner Kebab',
+                    gtm: 'click_brands_german_doner_kebab'
                 },
                 {
                     url: '/takeaway/brands',
@@ -186,12 +221,12 @@ export default {
                     gtm: 'click_about_cookie_policy'
                 },
                 {
-                    url: 'https://www.justeatplc.com/about-us/our-business',
+                    url: 'https://www.justeattakeaway.com/',
                     text: 'About Just Eat',
                     gtm: 'click_about_about_us'
                 },
                 {
-                    url: 'https://www.just-eat.com/',
+                    url: 'https://www.justeattakeaway.com/',
                     text: 'Company Website',
                     gtm: 'click_about_company'
                 },

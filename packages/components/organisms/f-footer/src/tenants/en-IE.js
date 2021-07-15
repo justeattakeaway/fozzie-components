@@ -140,7 +140,7 @@ export default {
             title: 'A bit more about us',
             links: [
                 {
-                    url: '/info/about-us',
+                    url: 'https://www.justeattakeaway.com/',
                     text: 'About Just Eat',
                     gtm: 'click_about_about_justeat'
                 },
