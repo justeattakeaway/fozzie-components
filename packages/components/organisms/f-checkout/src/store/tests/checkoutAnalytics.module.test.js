@@ -189,10 +189,6 @@ describe('CheckoutAnalyticsModule', () => {
                         id: rootState[VUEX_CHECKOUT_MODULE].restaurant.id,
                         seoName: rootState[VUEX_CHECKOUT_MODULE].restaurant.seoName
                     },
-                    pageData: {
-                        name: 'Checkout 1 Guest',
-                        group: 'Checkout'
-                    },
                     menu: {
                         type: rootState[VUEX_CHECKOUT_MODULE].serviceType
                     }
@@ -205,38 +201,6 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(window.dataLayer[0]).toEqual(expectedEvent);
-            });
-
-            describe('when user `isLoggedIn` is true', () => {
-                it('should set `name` to `Checkout 1 Overview`', () => {
-                    // Arrange
-                    const expectedName = 'Checkout 1 Overview';
-
-                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
-                    expectedEvent.pageData.name = expectedName;
-
-                    // Act
-                    trackInitialLoad({ rootState, dispatch });
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
-            });
-
-            describe('when user `isLoggedIn` is false', () => {
-                it('should set `name` to `Checkout 1 Guest`', () => {
-                    // Arrange
-                    const expectedName = 'Checkout 1 Guest';
-
-                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
-                    expectedEvent.pageData.name = expectedName;
-
-                    // Act
-                    trackInitialLoad({ rootState, dispatch });
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
             });
 
             it('should dispatch `trackFormInteraction` with `start` action', () => {
