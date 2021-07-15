@@ -52,8 +52,6 @@ export default {
                 return;
             }
 
-            const pageName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'Overview' : 'Guest';
-
             window.dataLayer.push({
                 checkout: {
                     step: 1
@@ -62,10 +60,6 @@ export default {
                 restaurant: {
                     id: rootState[VUEX_CHECKOUT_MODULE].restaurant.id,
                     seoName: rootState[VUEX_CHECKOUT_MODULE].restaurant.seoName
-                },
-                pageData: {
-                    name: `Checkout 1 ${pageName}`,
-                    group: 'Checkout'
                 },
                 menu: {
                     type: rootState[VUEX_CHECKOUT_MODULE].serviceType
@@ -125,11 +119,14 @@ export default {
         /**
          * Fetches the variant of the Low Value Order experiment from the headers and pushes an analytics event.
          */
-        trackLowValueOrderExperiment: experimentHeaders => {
-            const lowValueOrderExperimentVariant = experimentHeaders[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
-            const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
-            if (event) {
-                window.dataLayer.push(event);
+        trackLowValueOrderExperiment: (_, experimentHeaders) => {
+            const lowValueOrderExperimentVariant = experimentHeaders?.[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
+            if (lowValueOrderExperimentVariant) {
+                const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
+
+                if (event) {
+                    window.dataLayer.push(event);
+                }
             }
         }
     },
