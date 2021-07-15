@@ -1,11 +1,6 @@
-const { getChangedPackageStories } = require('./story.config');
+const { getStoryFiles } = require('./story.config');
 
-const storyFiles = process.env.CHANGED_ONLY ? getChangedPackageStories() :
-    [
-        '../../../**/*.stories.@(js|mdx)',
-        '../../../../stories/**/*.stories.@(js|mdx)'
-    ];
-
+const storyFiles = getStoryFiles();
 module.exports = {
     stories: storyFiles,
     addons: [
