@@ -96,7 +96,7 @@ export default {
     width: 100%;
     font: inherit;
     color: inherit;
-    // background: transparent;
+    background: transparent;
     outline: none;
 
     /* Remove default styling */
