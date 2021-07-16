@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.5.0
 ------------------------------
-*July 7, 2021*
+*July 19, 2021*
 
 ### Changed
 - Recognises and respects the `is_visible` and `deduplication_key` key-value pairs in the

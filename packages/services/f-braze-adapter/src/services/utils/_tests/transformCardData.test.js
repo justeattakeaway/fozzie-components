@@ -160,6 +160,24 @@ describe('services › utils › transformCardData', () => {
         expect(output.image).toBe(imageUrl);
     });
 
+    describe('when deduplication_key is falsey', () => {
+        it('should define duplicationKey as "{type}/{title}"', () => {
+            // Arrange
+            const data = {
+                title: 'foo',
+                extras: {
+                    custom_card_type: 'bar'
+                }
+            };
+
+            // Act
+            const output = transformCardData(data);
+
+            // Assert
+            expect(output.deduplicationKey).toBe(`${data.extras.custom_card_type}/${data.title}`);
+        });
+    });
+
     describe.each([
         ['isVisible', 'is_visible'],
         ['isReadyToClaim', 'is_ready_to_claim']
