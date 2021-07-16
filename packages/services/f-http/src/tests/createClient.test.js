@@ -1,15 +1,15 @@
-import createClient from '../createClient';
+import CreateClient from '../createClient';
 
 describe('createClient', () => {
     describe('initialisation', () => {
         it('should be defined', async () => {
             // Arrange, Act & Assert
-            expect(createClient).toBeDefined();
+            expect(CreateClient).toBeDefined();
         });
 
         it('should expose expected methods', async () => {
             // Arrange & Act
-            const httpClient = createClient();
+            const httpClient = new CreateClient();
 
             // Assert
             expect(httpClient).toBeDefined();
@@ -32,7 +32,7 @@ describe('createClient', () => {
             };
 
             // Act
-            const httpClient = createClient();
+            const httpClient = new CreateClient();
             const mergedOptions = httpClient.readConfiguration();
 
             // Assert
@@ -54,7 +54,7 @@ describe('createClient', () => {
             };
 
             // Act
-            const httpClient = createClient(expectedResult);
+            const httpClient = new CreateClient(expectedResult);
 
             const mergedOptions = httpClient.readConfiguration();
 

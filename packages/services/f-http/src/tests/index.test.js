@@ -10,8 +10,8 @@ describe('httpModule', () => {
 
     it('should define expected properties', async () => {
         // Arrange, Act & Assert
-        expect(httpModule.createClient).toBeDefined();
-        expect(httpModule.mockFactory).toBeDefined();
+        expect(httpModule.CreateClient).toBeDefined();
+        expect(httpModule.MockFactory).toBeDefined();
         expect(httpModule.httpVerbs).toBeDefined();
     });
 });
