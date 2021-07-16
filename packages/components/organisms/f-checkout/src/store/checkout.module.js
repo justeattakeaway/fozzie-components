@@ -303,9 +303,9 @@ export default {
             url, data, timeout
         }) => {
             try {
-                const { data: responseData } = await orderPlacementApi.placeOrder(url, data, timeout, state);
+                const response = await orderPlacementApi.placeOrder(url, data, timeout, state);
 
-                const { orderId } = responseData;
+                const { orderId } = response.data;
 
                 commit(UPDATE_ORDER_PLACED, orderId);
                 commit(UPDATE_ERRORS, []);

@@ -15,6 +15,8 @@ export default {
             timeout
         };
 
+        console.log('heyyy', axios.post(url, data, config));
+
         return axios.post(url, data, config);
     }
 };
