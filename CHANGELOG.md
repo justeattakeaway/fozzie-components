@@ -10,6 +10,15 @@ v3.45.0
 ### Added
 - Feature Management service component (initial skeleton).
 
+
+v3.45.0
+------------------------------
+*July 14, 2021*
+
+### Added
+- `Storybook - Run Currently Open Story File` command in `launch.json`
+
+
 v3.44.6
 ------------------------------
 *July 12, 2021*

@@ -2187,15 +2187,17 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-alert@0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-0.6.1.tgz#b9360a12dad46ddd1024d40095ca7b32f1256f07"
+  integrity sha512-sYTy+fFmL7Aa+kGEQhmVyZPkrEFm0azhTg0QtbFpHfJGNFIN8wu7hMUCaALKoKD479g/GHWw6ODFOJaKeSyiVg==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-button@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.1.tgz#6b735093286422f579bd41cee93400a4d32d1b2d"
   integrity sha512-SL7eTooEY3gZ0DdpPJvsN9W9EZElgxkSEpjYPfiPBHbkGt31Yfnb8OmDmC6MAtlK3Nq5GM5KaZ7bXybljSlPeA==
-
-"@justeat/f-button@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.7.0.tgz#cb4afe9e8773385e5ad84b50f51de90a8020ce69"
-  integrity sha512-Wkhuks8mcjUixpssKX68h7o8ICMQTuKa/BF52SV+MUR0pVw7XuiB8DvTv7GSnpbwec5Fp49IjRWJ9T3wrkXUsw==
 
 "@justeat/f-button@1.1.0":
   version "1.1.0"
