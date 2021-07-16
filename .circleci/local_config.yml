@@ -21,12 +21,12 @@ executors:
   node:
     docker:
       # specify the version you desire here
-      - image: circleci/node:14.16.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/node:14.17.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
 
   working_directory: ~/repo
-  
+
   complete-build:
     executor: node
     environment:
