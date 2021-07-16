@@ -93,7 +93,7 @@ const transformCardData = card => {
         contentBackgroundColor,
         banner,
         ctaText,
-        deduplicationKey,
+        deduplicationKey: deduplicationKey || `${type}/${title}`,
         description,
         discountPercentage,
         earnedStamps,

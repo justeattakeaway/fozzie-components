@@ -4,9 +4,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v4.0.0-beta.x
+v4.0.0-beta.2
 ------------------------------
-*July 7, 2021*
+*July 19, 2021*
 
 ### Changed
 - Recognises and respects the `is_visible` and `deduplication_key` key-value pairs in the
