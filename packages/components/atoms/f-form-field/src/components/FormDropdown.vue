@@ -1,16 +1,14 @@
 <template>
     <div
         :class="$style['c-formDropdown']"
+        :disabled="attributes.disabled"
         :data-test-id="testId.container">
         <caret-icon
             :class="$style['c-formDropdown-icon']"
             :data-test-id="testId.icon" />
         <select
             :id="$attrs.id"
-            :class="[
-                $style['c-formDropdown-select'],
-                { [$style['c-formDropdown--disabled']]: isDisabled }
-            ]"
+            :class="$style['c-formDropdown-select']"
             :data-test-id="testId.select"
             v-bind="attributes"
             :value="value"
@@ -48,10 +46,6 @@ export default {
         dropdownOptions: {
             type: Array,
             default: () => null
-        },
-        isDisabled: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -106,16 +100,16 @@ export default {
     &:hover {
         background-color: $form-input-bg--hover;
     }
-}
 
-.c-formDropdown--disabled {
+    &[disabled] {
     cursor: not-allowed;
 
-    &,
-    &:hover {
-        background-color: $form-input-bg--disabled;
-        color: $form-input-textColour--disabled;
-        border-color: $form-input-borderColour--disabled;
+        &,
+        &:hover {
+            background-color: $form-input-bg--disabled;
+            color: $form-input-textColour--disabled;
+            border-color: $form-input-borderColour--disabled;
+        }
     }
 }
 </style>

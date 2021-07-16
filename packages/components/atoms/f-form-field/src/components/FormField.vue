@@ -4,8 +4,7 @@
         :class="[
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
-                [$style['c-formField--grouped']]: isFieldGrouped,
-                [$style['c-formField--disabled']]: isDisabled
+                [$style['c-formField--grouped']]: isFieldGrouped
             }
         ]"
         :data-test-id="testId.container">
@@ -37,7 +36,6 @@
                 :id="uniqueId"
                 :attributes="$attrs"
                 :type="normalisedInputType"
-                :is-disabled="isDisabled"
                 :value="value"
                 :class="[
                     $style['c-formField-field'],
@@ -369,7 +367,7 @@ $form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
             border-color: $form-input-borderColour--invalid;
         }
 
-        .c-formField--disabled & {
+        &[disabled] {
             cursor: not-allowed;
 
             &,
