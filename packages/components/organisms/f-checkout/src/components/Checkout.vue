@@ -508,6 +508,7 @@ export default {
 
         await this.initialise();
         this.trackInitialLoad();
+        this.$emit(EventNames.CheckoutMounted);
     },
 
     methods: {
