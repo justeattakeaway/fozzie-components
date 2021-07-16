@@ -1157,6 +1157,14 @@ describe('Checkout', () => {
             // Assert
             expect(trackInitialLoadSpy).toHaveBeenCalled();
         });
+
+        it('should emit `CheckoutMounted` event', async () => {
+            // Act
+            await wrapper.vm.initialise();
+
+            // Assert
+            expect(wrapper.emitted(EventNames.CheckoutMounted).length).toBe(1);
+        });
     });
 
     describe('methods ::', () => {
