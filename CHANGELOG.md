@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.46.0
+------------------------------
+*July 16, 2021*
+
+### Added
+- Feature Management service component (initial skeleton).
+
+
+v3.45.0
+------------------------------
+*July 14, 2021*
+
+### Added
+- `Storybook - Run Currently Open Story File` command in `launch.json`
+
 
 v3.44.6
 ------------------------------

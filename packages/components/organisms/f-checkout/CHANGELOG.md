@@ -11,6 +11,25 @@ v0.160.0
 - Extracted APIs from Checkout Store so they are accessible to Contract Tests
 
 
+v0.160.0
+------------------------------
+*July 15, 2021*
+
+### Removed
+- `pageData` from `trackInitialLoad` in the analytics module.
+
+### Added
+- `CheckoutMounted` event.
+
+
+v0.159.1
+------------------------------
+*July 14, 2021*
+
+### Fixed
+- Use correct parameter in analytics module to track LVO experiment
+
+
 v0.159.0
 ------------------------------
 *July 12, 2021*
