@@ -1,0 +1,221 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "type": "object",
+    "required": [ "features", "createdAt" ],
+    "additionalProperties": false,
+    "properties": {
+        "createdAt": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "features": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["key", "valueType", "defaultValueRules"],
+                "additionalProperties": false,
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "The unique key of the feature."
+                    },
+                    "valueType": {
+                        "type": "string",
+                        "enum": ["string", "bool", "int"],
+                        "description": "The type of the value held by the feature."
+                    },
+                    "defaultValueRules": {
+                        "type": "array",
+                        "description": "Default values in case nothing matches in evaluation.",
+                        "items": {
+                            "type": "object",
+                            "required": ["restrictions", "value"],
+                            "additionalProperties": false,
+                            "properties": {
+                                "restrictions": {
+                                    "$ref": "#/definitions/predicate"
+                                },
+                                "value": {
+                                    "$ref": "#/definitions/featureValue",
+                                    "description": "Default value."
+                                }
+                            }
+                        }
+                    },
+                    "evaluationLogic": {
+                        "type": "object",
+                        "description": "Information required to evaluate the value.",
+                        "required": ["type", "detail"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": ["IdHash"],
+                                "description": "The mechanism used for evaluation."
+                            },
+                            "detail": {
+                                "type": "object",
+                                "description": "Can vary depending on 'type'. Only IdHash defined at the moment.",
+                                "required": ["bucketBy", "prefix", "rules"],
+                                "additionalProperties": false,
+                                "properties": {
+                                    "bucketBy": {
+                                        "type": "string",
+                                        "enum": ["AnonUserId"],
+                                        "description": "The id to hash to evaluate the bucket."
+                                    },
+                                    "prefix": {
+                                        "type": "string",
+                                        "description": "The string to prepend to the id to evaluate the buckets."
+                                    },
+                                    "rules": {
+                                        "type": "array",
+                                        "description": "One or more set of variants, with different restrictions.",
+                                        "items": {
+                                            "type": "object",
+                                            "required": ["restrictions", "audienceFraction", "variants"],
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "restrictions": {
+                                                    "$ref": "#/definitions/predicate"
+                                                },
+                                                "audienceFraction": {
+                                                    "type": "number",
+                                                    "minimum": 0,
+                                                    "maximum": 1,
+                                                    "description": "Proportion of users to be evaluated."
+                                                },
+                                                "variants": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "required": ["weight", "value"],
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "weight": {
+                                                                "type": "integer",
+                                                                "minimum": 0,
+                                                                "description": "The relative weight of this variant, for traffic allocation."
+                                                            },
+                                                            "value": {
+                                                                "$ref": "#/definitions/featureValue",
+                                                                "description": "Value to return."
+                                                            },
+                                                            "experimentKey": {
+                                                                "type": "string",
+                                                                "description": "Experiment key to track, if not null."
+                                                            },
+                                                            "experimentVariant": {
+                                                                "type": "string",
+                                                                "description": "Experiment variant name to track, if not null."
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "predicate": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "and": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "Everything in array must evaluate to true.",
+                    "items": {
+                        "$ref": "#/definitions/predicate"
+                    }
+                },
+                "or": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "Something in array must evaluate to true.",
+                    "items": {
+                        "$ref": "#/definitions/predicate"
+                    }
+                },
+                "eq": {
+                    "$ref": "#/definitions/equatable",
+                    "description": "Value must equal this."
+                },
+                "neq": {
+                    "$ref": "#/definitions/equatable",
+                    "description": "Value must not equal this."
+                },
+                "in": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "Value must be in this array.",
+                    "items": {
+                        "$ref": "#/definitions/equatable"
+                    }
+                },
+                "nin": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "Value must not be in this array.",
+                    "items": {
+                        "$ref": "#/definitions/equatable"
+                    }
+                },
+                "gt": {
+                    "$ref": "#/definitions/comparable",
+                    "description": "Value must be greater than this."
+                },
+                "gte": {
+                    "$ref": "#/definitions/comparable",
+                    "description": "Value must be greater than or equal to this."
+                },
+                "lt": {
+                    "$ref": "#/definitions/comparable",
+                    "description": "Value must be less than this."
+                },
+                "lte": {
+                    "$ref": "#/definitions/comparable",
+                    "description": "Value must be less than or equal to this."
+                },
+                "property": {
+                  "type": "string",
+                  "description": "The property to compare against.",
+                  "enum": ["Country", "AppVersion"]
+                }
+            }
+        },
+        "featureValue": {
+            "anyOf": [
+                {"type": "integer"},
+                {"type": "boolean"},
+                {"type": "string"}
+            ]
+        },
+        "equatable": {
+            "$comment": "Note that the presence of string here automatically implies any subtypes of string, e.g. 'versionNumber'.",
+            "anyOf": [
+                {"type": "integer"},
+                {"type": "boolean"},
+                {"type": "string"}
+            ]
+        },
+        "comparable": {
+            "anyOf": [
+                {"type": "integer"},
+                {"$ref": "#/definitions/versionNumber"}
+            ]
+        },
+        "versionNumber": {
+            "description": "Version number of form X.Y.Z... e.g. 2 or 1.10 or 3.1.43.1",
+            "type": "string",
+            "pattern": "^(0|[1-9]\\d*)(\\.(0|[1-9]\\d*))*$"
+        }
+    }
+}
