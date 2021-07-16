@@ -5,7 +5,6 @@ import { mockAuthToken } from '../../components/_tests/helpers/setup';
 
 const authToken = mockAuthToken;
 
-
 describe('BasketApi', () => {
     let payload;
     let config;
