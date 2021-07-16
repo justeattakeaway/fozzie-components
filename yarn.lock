@@ -2432,11 +2432,6 @@
     include-media "1.4.9"
     normalize-scss "7.0.1"
 
-"@justeat/just-log@5.1.0":
-  version "5.1.0"
-  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/just-log/-/just-log-5.1.0.tgz#9ee4a7211482ca02076b8d341c7528cd597c24e3"
-  integrity sha1-nuSnIRSCygIHa400HHUozVl8JOM=
-
 "@justeat/pie-design-tokens@0.18.0":
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-0.18.0.tgz#0f88859ddf31e6be05f86e42e0c0f7d7b39ed41b"

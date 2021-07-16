@@ -1,9 +1,6 @@
 const defaultConfig = {
-    clientVersion: '1.0.0',
     environment: 'test',
-    featureName: 'Generic Front End',
-    endpointUri: '',
-    tenant: 'uk'
+    featureName: 'Generic Front End'
 };
 
 export default defaultConfig;

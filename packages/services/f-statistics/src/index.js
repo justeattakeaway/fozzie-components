@@ -1,33 +1,23 @@
 /* eslint-disable camelcase */
 import defaultOptions from './defaultOptions';
-import configureJustLog from './justLogConfiguration';
 
-let _configuration;
-let _justLogInstance;
+export default class StatisticsClient {
+    constructor (justLogInstance, options = {}) {
+        this.configuration = {
+            ...defaultOptions,
+            ...options
+        };
 
-const publish = (message, payload) => {
-    _justLogInstance.info(message, {
-        je_feature_for: _configuration.featureName,
-        je_logType: 'client-stats',
-        je_feature: 'f-statistics',
-        je_environment: _configuration.environment,
-        ...payload
-    });
-};
-
-export default (options = {}) => {
-    _configuration = {
-        ...defaultOptions,
-        ...options
-    };
-
-    if (!_configuration.endpointUri) {
-        throw new Error('Logging endpoint not configured for f-statistics');
+        this.justLogInstance = justLogInstance;
     }
 
-    _justLogInstance = configureJustLog(_configuration);
-
-    return {
-        publish
-    };
-};
+    publish (message, payload) {
+        this.justLogInstance.info(message, {
+            je_feature: 'f-statistics',
+            je_feature_for: this.configuration?.featureName || 'Unspecified',
+            je_logType: 'client-stats',
+            je_environment: this.configuration?.environment || 'Unspecified',
+            ...payload
+        });
+    }
+}

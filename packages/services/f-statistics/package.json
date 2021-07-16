@@ -36,7 +36,6 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/just-log": "5.1.0",
     "bowser": "2.11.0"
   },
   "devDependencies": {

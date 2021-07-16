@@ -15,17 +15,22 @@ A service for publishing statistics from the client side
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-statistics/badge.svg)](https://coveralls.io/github/justeat/f-statistics)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-statistics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-statistics?targetFile=package.json)
 
+> This package is MVP not designed for production use at this stage.
+
 The purpose of this service is to abstract away the responsibility for pushing statistics. It is not responsible for collecting stats of any kind.
 
-It is abstracted so that a myriad of statistic generators can rely on this interface; and should we wish to redirect where statistics go, this package can isolate those changes in an easily upgradeable format.
+It is abstracted so that a myriad of statistic generators can rely on this interface; and should we wish to redirect where statistics go or apply properties to all statistics, this package can isolate those changes in an easily upgradeable format.
+
+It is likely that the current method of transporting statistics is temporary.
 
 ## Benefits (Now)
 - Easy to provide statistics and not need to worry about how they are transported
-- Ability to switch underlying providers in future if we wish
+- Ability to switch underlying providers in future if we wish - Just Log for now.
 
 ## Benefits (Soon)
 - Batching options
 - Sampling options
+
 <hr></br>
 
 ## Usage
@@ -36,41 +41,53 @@ It is abstracted so that a myriad of statistic generators can rely on this inter
 yarn add @justeat/f-statistics
 ```
 ### Usage
-```js
-import statsModule from '@justeat/f-statistics';
+- It is not possible to instantiate multiple versions of Just Log in a single website, so provide a prepared Just Log instance where you can, or initialise one yourself.
 
-const statsConfiguration = {
-    endpointUri: 'your endpoint',
+```js
+// Import the pre-requisite packages
+import StatisticsModule from '@justeat/f-statistics';
+import { justLog } from '@justeat/just-log';
+
+// Initialise Just Log if one is not already available
+justLog.forFeature({
+    name: 'your website name',
+    tenant: 'your tenant',
+    version: 'your version number',
+    environment: 'your environment name'
+});
+
+// Declare basic options
+const statisticsConfiguration = {
     environment: 'your environment name',
-    tenant: 'uk',
     featureName: 'your website name'
 };
 
-const statsClient = statsModule(statsConfiguration);
+// Initialise a new instance of the statistics client
+const statisticsClient = new StatisticsModule(justLog, statsConfiguration);
 
-statsClient.publish({
+// Publish a statistic
+statisticsClient.publish({
     measureOne: 'Test',
     measureTwo: 'test'
 });
 
+// Optionally (Nuxt) inject the statistics client into context
+inject('statistics', statisticsClient);
 ```
 
 ## Options
 All options are required and should be provided when initialising the `statsModule`
 Parameter | Description | Type
 ------------- | ------------- | -------------
-endpointUri | The endpoint that Just Log will send logs too | String
 environment | The name of the environment being used | String
-tenant | The tenant that is being browsed on | String
 featureName | The name of your feature | String
-clientVersion: | The version of your feature if available | String
 
 <hr></br>
 
 ## Client Methods
-These are all of the methods exposed by the `f-statistics`
+These are all of the methods exposed by `f-statistics`
 
 Method | Description | Parameters | Example
 ------------- | ------------- | ------------- | -------------
-publish | Transports a message containing the payload provided | object | `{ measureOne: 'test', measureTwo: 'test' };`
+publish | Transports a message containing the payload provided | object | `publish('This is a message', { measureOne: 'test', measureTwo: 'test' });`
 </br>
