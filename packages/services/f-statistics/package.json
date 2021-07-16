@@ -35,9 +35,7 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {
-    "bowser": "2.11.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
