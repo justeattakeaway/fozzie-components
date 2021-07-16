@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.160.0
+v0.161.0
 ------------------------------
-*July 15, 2021*
+*July 16, 2021*
 
 ### Added
 - Extracted APIs from Checkout Store so they are accessible to Contract Tests
