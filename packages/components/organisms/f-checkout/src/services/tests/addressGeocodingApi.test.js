@@ -5,13 +5,11 @@ import { mockAuthToken } from '../../components/_tests/helpers/setup';
 const mobileNumber = '+447111111111';
 const authToken = mockAuthToken;
 
-describe('CheckoutApi', () => {
+describe('AddressGeocodingApi', () => {
     let payload;
-    let rootGetters;
     let state;
 
     beforeEach(() => {
-        rootGetters = {};
         payload = {
             url: 'http://localhost/account/checkout',
             timeout: 10000
