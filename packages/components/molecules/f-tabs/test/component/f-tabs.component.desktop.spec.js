@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Tabs = require('../../test-utils/component-objects/f-tabs.component');
 
 const tabs = new Tabs('molecule', 'vue-tabs-component');
@@ -18,11 +18,11 @@ describe('f-tabs component tests', () => {
     });
 
     forEach(['Your Stampcards', 'How it works'])
-    .it('should display individual tabs', tab => {
-        // Arrange
-        tabs.expectedTabButton = tab;
+        .it('should display individual tabs', tab => {
+            // Arrange
+            tabs.expectedTabButton = tab;
 
-        // Assert
-        expect(tabs.isTabButtonDisplayed(tab)).toBe(true);
-    });
+            // Assert
+            expect(tabs.isTabButtonDisplayed(tab)).toBe(true);
+        });
 });

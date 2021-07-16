@@ -3,7 +3,26 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v1.8.0
+
+v1.9.0
+------------------------------
+*July 7, 2021*
+
+### Changed
+- `buttonType` has been tidied up a bit. Have added type validation for when the component is either a standard `button` or an `iconButton` (when `isIcon` is set to `true`). If an invalid type is now set for these variations, the component will throw an error when created.
+- New `buttonType` of `ghostTertiary` has been added for use with the `iconButton` component.
+- Added button sizes to constants and added prop validation these.
+
+
+v1.8.1
+------------------------------
+*July 01, 2021*
+
+### Fixed
+- `$listeners` to button link issue
+ - When `v-on` is set to `f-button` with `href` e.g. link would not trigger
+
+ v1.8.0
 ------------------------------
 *June 17, 2021*
 

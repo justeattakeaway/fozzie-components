@@ -1,22 +1,20 @@
 import CheckoutAnalyticsModule from '../checkoutAnalytics.module';
 import * as mapper from '../../services/mapper';
 import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
-import { VUEX_CHECKOUT_MODULE } from '../../constants';
+import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
 
-import {
-    UPDATE_AUTOFILL,
-    UPDATE_CHANGED_FIELD
-} from '../mutation-types';
+import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from '../mutation-types';
 
 const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
+    trackDuplicateOrderWarnDialog,
     trackFormErrors,
     trackFormInteraction,
     trackInitialLoad,
+    trackLowValueOrderExperiment,
     updateAutofill,
-    updateChangedField,
-    trackDuplicateOrderWarnDialog
+    updateChangedField
 } = actions;
 
 Object.defineProperty(global, 'window', {
@@ -36,7 +34,9 @@ describe('CheckoutAnalyticsModule', () => {
     describe('actions ::', () => {
         let commit;
         let dispatch;
-        const rootState = { [VUEX_CHECKOUT_MODULE]: defaultCheckoutState };
+        const rootState = {
+            [VUEX_CHECKOUT_MODULE]: defaultCheckoutState
+        };
 
         beforeEach(() => {
             commit = jest.fn();
@@ -189,10 +189,6 @@ describe('CheckoutAnalyticsModule', () => {
                         id: rootState[VUEX_CHECKOUT_MODULE].restaurant.id,
                         seoName: rootState[VUEX_CHECKOUT_MODULE].restaurant.seoName
                     },
-                    pageData: {
-                        name: 'Checkout 1 Guest',
-                        group: 'Checkout'
-                    },
                     menu: {
                         type: rootState[VUEX_CHECKOUT_MODULE].serviceType
                     }
@@ -205,38 +201,6 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(window.dataLayer[0]).toEqual(expectedEvent);
-            });
-
-            describe('when user `isLoggedIn` is true', () => {
-                it('should set `name` to `Checkout 1 Overview`', () => {
-                    // Arrange
-                    const expectedName = 'Checkout 1 Overview';
-
-                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
-                    expectedEvent.pageData.name = expectedName;
-
-                    // Act
-                    trackInitialLoad({ rootState, dispatch });
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
-            });
-
-            describe('when user `isLoggedIn` is false', () => {
-                it('should set `name` to `Checkout 1 Guest`', () => {
-                    // Arrange
-                    const expectedName = 'Checkout 1 Guest';
-
-                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
-                    expectedEvent.pageData.name = expectedName;
-
-                    // Act
-                    trackInitialLoad({ rootState, dispatch });
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
             });
 
             it('should dispatch `trackFormInteraction` with `start` action', () => {
@@ -400,6 +364,49 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(window.dataLayer).toContainEqual(expected);
+            });
+        });
+
+        describe('trackLowValueOrderExperiment ::', () => {
+            it('should `push` low value order event to data layer if it is returned in request header', () => {
+                // Arrange
+                const expected = {
+                    custom: {
+                        experiment: {
+                            id: 'EX-1862',
+                            name: 'low_value_order_threshold',
+                            platform: 'experiment_api',
+                            variant: {
+                                name: 'test'
+                            },
+                            version: 1
+                        }
+                    },
+                    event: 'trackExperimentV2'
+                };
+
+                const mockedResponseHeaders = {
+                    [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: 'test'
+                };
+
+                // Act
+                trackLowValueOrderExperiment({ rootState, dispatch }, mockedResponseHeaders);
+
+                // Assert
+                expect(window.dataLayer).toContainEqual(expected);
+            });
+
+            it('should not `push` low value order event to data layer if it is not returned in request header', () => {
+                // Arrange
+                const mockedResponseHeaders = {
+                    [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: null
+                };
+
+                // Act
+                trackLowValueOrderExperiment({ rootState, dispatch }, mockedResponseHeaders);
+
+                // Assert
+                expect(window.dataLayer).toEqual([]);
             });
         });
     });

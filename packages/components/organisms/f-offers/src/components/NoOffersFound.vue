@@ -8,6 +8,7 @@
             image-url="https://d30v2pzvrfyzpo.cloudfront.net/a/hw/img/decoration/oi_no-results-image.svg"
             :image-align="imageAlign"
             :text-size="textSize"
+            stack-when-narrow
         >
             <search-box :class="$style['c-noOffersFound-searchBox']" />
             <f-button
@@ -39,7 +40,7 @@ export default {
     },
 
     data: () => ({
-        imageAlign: ALIGN.RIGHT,
+        imageAlign: ALIGN.CENTER,
         textSize: FONT_SIZE.LG
     })
 };
@@ -53,10 +54,23 @@ export default {
 
     & .c-noOffersFound-link {
         padding: 0;
+
+        @include media('<=narrow') {
+            margin-top: spacing(x3);
+        }
     }
 
     & .c-noOffersFound-searchBox {
         padding-top: spacing(x2);
+
+        @include media('<=mid') {
+            width: 300px;
+        }
+
+        @include media('<=narrowMid') {
+            width: 100%;
+        }
+
         & input {
             background-color: $color-white;
         }

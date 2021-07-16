@@ -3,6 +3,128 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.160.0
+------------------------------
+*July 15, 2021*
+
+### Removed
+- `pageData` from `trackInitialLoad` in the analytics module.
+
+### Added
+- `CheckoutMounted` event.
+
+
+v0.159.1
+------------------------------
+*July 14, 2021*
+
+### Fixed
+- Use correct parameter in analytics module to track LVO experiment
+
+
+v0.159.0
+------------------------------
+*July 12, 2021*
+
+### Added
+- Issue name and isFulfillable value to eventData to be captured by the error log.
+
+
+v0.158.0
+------------------------------
+*July 12, 2021*
+
+### changed
+- Removed the direct get postcode cookie call from `addressService.js` and now pass value in.
+
+
+v0.157.0
+------------------------------
+*July 9, 2021*
+
+### Fixed
+- Error handling when there are no responses (e.g. timeout).
+
+
+v0.156.0
+------------------------------
+*July 8, 2021*
+
+### Added
+- Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
+
+
+v0.156.0
+------------------------------
+*July 8, 2021*
+
+### Added
+- Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
+
+
+v0.155.0
+------------------------------
+*July 6, 2021*
+
+### Changed
+- Email, Postcode and Mobile was validating on every keypress but now validating onBlur.
+
+
+v0.154.0
+------------------------------
+*July 7, 2021*
+
+### Added
+- Redirect to home when `restaurant.seoName` is falsey.
+
+
+v0.153.0
+------------------------------
+*July 6, 2021*
+
+### Added
+- Chosen time to eventData to be captured by the error log.
+
+
+v0.152.0
+------------------------------
+*July 6, 2021*
+
+### Fixed
+- Returning guest user's mobile phone number not populating
+
+
+v0.151.0
+------------------------------
+*July 5, 2021*
+
+### Fixed
+- Get new `availableFulfilment` times when no available fulfilment times are available.
+
+### Changed
+- `f-form-field` version to `1.16.1`.
+
+
+v0.150.0
+------------------------------
+*June 30, 2021*
+
+### Fixed
+- Address not populating guest checkout form.
+
+
+v0.149.0
+------------------------------
+*June 30, 2021*
+
+### Changed
+- Logging levels for different errors.
+- Using `f-card`'s `1.3.0` version.
+
+
 v0.148.0
 ------------------------------
 *June 24, 2021*
