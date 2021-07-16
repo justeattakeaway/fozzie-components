@@ -11,6 +11,7 @@ describe('CheckoutApi', () => {
     let state;
 
     beforeEach(() => {
+        // Arrange
         rootGetters = {};
         payload = {
             url: 'http://localhost/account/checkout',
@@ -25,6 +26,7 @@ describe('CheckoutApi', () => {
         let config;
 
         beforeEach(() => {
+            // Arrange
             config = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,6 +50,7 @@ describe('CheckoutApi', () => {
         let config;
 
         beforeEach(() => {
+            // Arrange
             payload = {
                 mobileNumber
             };
@@ -74,6 +77,7 @@ describe('CheckoutApi', () => {
         let config;
 
         beforeEach(() => {
+            // Arrange
             config = {
                 headers: {
                     'Content-Type': 'application/json'
