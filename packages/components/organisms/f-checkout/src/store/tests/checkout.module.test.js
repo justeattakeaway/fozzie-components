@@ -1118,7 +1118,7 @@ describe('CheckoutModule', () => {
                         }
                     };
 
-                    window.localStorage.setItem('je-full-address-details', JSON.stringify({...storedAddress, Field1: null, Field2: null }));
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({ ...storedAddress, Field1: null, Field2: null }));
 
                     // Act
                     await getGeoLocation({ ...context, state: newState }, payload);
