@@ -12,6 +12,7 @@ describe('AccountApi', () => {
     let config;
 
     beforeEach(() => {
+        // Arrange
         payload = {
             url: 'http://localhost/account/createguest',
             tenant: 'uk',
