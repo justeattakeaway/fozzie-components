@@ -7,8 +7,9 @@ v3.47.0
 ------------------------------
 *July 19, 2021*
 
-### Added
-- Test overview documentation to Storybook
+### Changed
+- Bump dependency of `f-button` across a number of packages (no version bumps as no changes to the actual package were needed).
+- Some other minor package version bumps.
 
 
 v3.46.0
