@@ -12,13 +12,18 @@ import {
     ERROR_CODE_FULFILMENT_TIME_INVALID,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
-    CHEKOUT_ERROR_FORM_TYPE
+    CHECKOUT_ERROR_FORM_TYPE
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger, $cookies
+    defaultCheckoutState,
+    defaultCheckoutActions,
+    i18n,
+    createStore,
+    $logger,
+    $cookies
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
 import addressService from '../../services/addressService';
@@ -299,7 +304,7 @@ describe('Checkout', () => {
         });
 
         describe('errorFormType ::', () => {
-            it('should render the checkout form and not the error page when is null', () => {
+            it('should render the checkout form when its value is null', () => {
                 // Arrange & Act
                 const wrapper = mount(VueCheckout, {
                     i18n,
@@ -322,7 +327,7 @@ describe('Checkout', () => {
             });
 
 
-            it('should render the error page and not the checkout form and spinner when set to `false`', () => {
+            it('should render the error page when its value is not null and spinner set to `false`', () => {
                 // Arrange & Act
                 const wrapper = mount(VueCheckout, {
                     i18n,
@@ -336,7 +341,7 @@ describe('Checkout', () => {
                     data () {
                         return {
                             isLoading: false,
-                            errorFormType: CHEKOUT_ERROR_FORM_TYPE.default
+                            errorFormType: CHECKOUT_ERROR_FORM_TYPE.default
                         };
                     }
                 });
@@ -957,7 +962,7 @@ describe('Checkout', () => {
         });
 
         describe('eventData ::', () => {
-            it('should return `isLoggedIn`, `serviceType`, `chosenTime`, `isFulfilable` and `issueMessage` in an object`', () => {
+            it('should return `isLoggedIn`, `serviceType`, `chosenTime`, `isFulfillable` and `issueMessage` in an object`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -974,7 +979,7 @@ describe('Checkout', () => {
                     isLoggedIn: defaultCheckoutState.isLoggedIn,
                     serviceType: defaultCheckoutState.serviceType,
                     chosenTime: defaultCheckoutState.time.from,
-                    isFulfilable: defaultCheckoutState.isFulfillable,
+                    isFulfillable: defaultCheckoutState.isFulfillable,
                     issueMessage: defaultCheckoutState.message?.code
                 });
             });
@@ -1059,39 +1064,78 @@ describe('Checkout', () => {
 
         describe('redirectUrl ::', () => {
             describe('when service type is delivery or collection', () => {
-                it('should return the URL with a "restaurants" prefix to redirect back to the restaurant menu', () => {
+                let wrapper;
+                beforeEach(() => {
                     // Arrange && Act
-                    const wrapper = shallowMount(VueCheckout, {
+                    wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             restaurant
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $cookies
+                        }
                     });
-
-                    // Assert
-                    expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
                 });
 
-                describe('when the `restaurant.seoName` is falsey', () => {
-                    it('should return `/` so the user can be navigated back to the homepage', () => {
-                        // Arrange && Act
-                        const wrapper = shallowMount(VueCheckout, {
-                            store: createStore({
-                                ...defaultCheckoutState,
-                                restaurant: {
-                                    seoName: ''
-                                }
-                            }),
-                            i18n,
-                            localVue,
-                            propsData
+                describe('AND errorFormType is not `noTimeAvailable`', () => {
+                    it('should return the URL with a "restaurants" prefix to redirect back to the restaurant menu', () => {
+                        // Assert
+                        expect(wrapper.vm.redirectUrl).toEqual(`restaurants-${restaurant.seoName}/menu`);
+                    });
+
+                    describe('when the `restaurant.seoName` is falsey', () => {
+                        it('should return `/` so the user can be navigated back to the homepage', () => {
+                            // Arrange && Act
+                            wrapper = shallowMount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    restaurant: {
+                                        seoName: ''
+                                    }
+                                }),
+                                i18n,
+                                localVue,
+                                propsData
+                            });
+
+                            // Assert
+                            expect(wrapper.vm.redirectUrl).toEqual('/');
+                        });
+                    });
+                });
+
+                describe('AND errorFormType is `noTimeAvailable`', () => {
+                    describe('AND there is no location cookie available', () => {
+                        beforeEach(() => {
+                            // Act
+                            wrapper.setData({ errorFormType: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable });
+                            wrapper.vm.$cookies.get.mockReturnValue(null);
                         });
 
-                        // Assert
-                        expect(wrapper.vm.redirectUrl).toEqual('/');
+                        it('should return `/` so the user can be navigated back to the homepage', () => {
+                            // Assert
+                            expect(wrapper.vm.redirectUrl).toEqual('/');
+                        });
+                    });
+
+                    describe('AND there is location cookie available', () => {
+                        // Arrange
+                        const postCodeCookieValue = 'ar511ar';
+
+                        beforeEach(() => {
+                            // Act
+                            wrapper.setData({ errorFormType: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable });
+                            wrapper.vm.$cookies.get.mockReturnValue(postCodeCookieValue);
+                        });
+
+                        it('should return the URL with an "area" prefix so the user can be navigated back to the search page', () => {
+                            // Assert
+                            expect(wrapper.vm.redirectUrl).toEqual(`area/${postCodeCookieValue}`);
+                        });
                     });
                 });
             });
