@@ -34,6 +34,7 @@ describe('orderPlacementApi', () => {
 
         axios.post = jest.fn(() => Promise.resolve({ status: 200 }));
     });
+
     describe('placeOrder ::', () => {
         it('should post the order details to the backend', async () => {
             // Act

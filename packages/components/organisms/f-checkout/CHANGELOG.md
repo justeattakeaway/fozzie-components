@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.161.0
 ------------------------------
-*July 16, 2021*
+*July 17, 2021*
 
 ### Added
 - Extracted APIs from Checkout Store so they are accessible to Contract Tests

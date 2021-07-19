@@ -177,7 +177,7 @@ export default {
             url, tenant, data, timeout, otacToAuthExchanger
         }) => {
             const response = await accountApi.createGuestUser(url, data, timeout, tenant);
-            const otac = response.data.token;
+            const otac = response.data?.token;
             const authToken = await otacToAuthExchanger(otac);
             commit(UPDATE_AUTH_GUEST, authToken);
         },
