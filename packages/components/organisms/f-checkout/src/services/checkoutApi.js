@@ -18,21 +18,21 @@ export default {
     },
 
 
-    async updateCheckout (url, state, rootGetters, data, timeout) {
-        const authHeader = state.authToken && `Bearer ${state.authToken}`;
-        const experimentationHeaders = rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];
+    async updateCheckout (request) {
+        const authHeader = request.state.authToken && `Bearer ${request.state.authToken}`;
+        const experimentationHeaders = request.rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                ...(state.authToken && {
+                ...(request.state.authToken && {
                     Authorization: authHeader
                 }),
                 ...experimentationHeaders
             },
-            timeout
+            timeout: request.timeout
         };
 
-        return axios.patch(url, data, config);
+        return axios.patch(request.url, request.data, config);
     },
 
     async getAvailableFulfilment (url, timeout) {

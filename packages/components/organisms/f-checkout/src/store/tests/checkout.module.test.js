@@ -841,11 +841,20 @@ describe('CheckoutModule', () => {
             });
 
             it('should post the checkout details to the backend.', async () => {
+                // Arrange
+                const request = {
+                    url: payload.url,
+                    state,
+                    rootGetters,
+                    data: payload.data,
+                    timeout: payload.timeout
+                };
+
                 // Act
                 await updateCheckout(context, payload);
 
                 // Assert
-                expect(checkoutApi.updateCheckout).toHaveBeenCalledWith(payload.url, state, rootGetters, payload.data, payload.timeout);
+                expect(checkoutApi.updateCheckout).toHaveBeenCalledWith(request);
             });
 
             it('should convert an unsupported error into a default error.', async () => {

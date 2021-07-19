@@ -67,8 +67,16 @@ describe('CheckoutApi', () => {
         });
 
         it('should patch the checkout details to the backend', async () => {
+            // Arrange
+            const request = {
+                url: payload.url,
+                state,
+                rootGetters,
+                data: payload.data,
+                timeout: payload.timeout
+            };
             // Act
-            await checkoutApi.updateCheckout(payload.url, state, rootGetters, payload.data, payload.timeout);
+            await checkoutApi.updateCheckout(request);
 
             // Assert
             expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);

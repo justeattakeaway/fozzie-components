@@ -153,7 +153,15 @@ export default {
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
         }, { url, data, timeout }) => {
-            const { data: responseData, headers } = await checkoutApi.updateCheckout(url, state, rootGetters, data, timeout);
+            const request = {
+                url,
+                state,
+                rootGetters,
+                data,
+                timeout
+            };
+
+            const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
 
             const { issues, isFulfillable } = responseData;
 
