@@ -9,7 +9,7 @@ import {
     createStore,
     defaultCheckoutState
 } from './helpers/setup';
-import { CHEKOUT_ERROR_FORM_TYPE } from '../../constants';
+import { CHECKOUT_ERROR_FORM_TYPE } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -32,8 +32,9 @@ describe('Error', () => {
                 }
             }),
             propsData: {
-                errorFormType: CHEKOUT_ERROR_FORM_TYPE.default,
-                redirectUrl: 'menu-jason-1'
+                errorFormType: CHECKOUT_ERROR_FORM_TYPE.default,
+                redirectUrl: 'menu-jason-1',
+                serviceType: 'delivery'
             },
             mocks: {
                 $cookies,
@@ -69,7 +70,7 @@ describe('Error', () => {
     });
 
     describe('methods', () => {
-        describe('`redirectToMenu` ::', () => {
+        describe('`redirectFromErrorPage` ::', () => {
             const oldWindowLocation = window.location;
 
             beforeAll(() => {
@@ -92,17 +93,16 @@ describe('Error', () => {
             });
 
             describe('when invoked', () => {
-                it('should redirect the customer back to the menu page so the user can navigate back from the error', () => {
+                it('should redirect the customer from the error page to the url specified in `redirectUrl` prop', () => {
                     // Act
-                    wrapper.vm.redirectToMenu();
+                    wrapper.vm.redirectFromErrorPage();
 
                     // Assert
-                    expect(window.location.assign).toHaveBeenCalledWith('menu-jason-1');
+                    expect(window.location.assign).toHaveBeenCalledWith(wrapper.vm.redirectUrl);
                 });
-
                 describe('AND errorFormType is accessForbiddenError', () => {
                     beforeEach(async () => {
-                        await wrapper.setProps({ errorFormType: CHEKOUT_ERROR_FORM_TYPE.accessForbidden });
+                        await wrapper.setProps({ errorFormType: CHECKOUT_ERROR_FORM_TYPE.accessForbidden });
                     });
                     describe('AND a menu basket cookie does not exist', () => {
                         it('should not delete the cookie', () => {
@@ -110,7 +110,7 @@ describe('Error', () => {
                             const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
 
                             // Act
-                            wrapper.vm.redirectToMenu();
+                            wrapper.vm.redirectFromErrorPage();
 
                             // Assert
                             expect(cookieRemoveSpy).not.toHaveBeenCalled();
@@ -124,7 +124,7 @@ describe('Error', () => {
                             const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
 
                             // Act
-                            wrapper.vm.redirectToMenu();
+                            wrapper.vm.redirectFromErrorPage();
 
                             // Assert
                             expect(cookieRemoveSpy).toHaveBeenCalledWith('je-mw-basket-301389');
