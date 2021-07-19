@@ -1,8 +1,8 @@
 <template>
     <div
         :class="[
-            $style['c-formDropdown'],
-            { [$style['c-formField--invalid']]: hasError }
+            $style['c-formDropdown']
+
         ]"
         :data-test-id="testId.container">
         <caret-icon
@@ -13,7 +13,8 @@
             :class="[
                 $style['c-formDropdown-select'],
                 $style['c-formField-field'],
-                $style[`c-formField-field--${fieldSize}`]
+                $style[`c-formField-field--${fieldSize}`],
+                { [$style['c-formField--invalid']]: hasError }
             ]"
             :disabled="attributes.disabled"
             :data-test-id="testId.select"

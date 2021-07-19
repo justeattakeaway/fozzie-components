@@ -50,7 +50,8 @@
                 v-bind="$attrs"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--textarea']
+                    $style['c-formField-field--textarea'],
+                    { [$style['c-formField--invalid']]: hasError }
                 ]"
                 data-test-id="formfield-textarea"
                 v-on="listeners" />
@@ -68,9 +69,10 @@
                 :data-test-id="testId.input"
                 :class="[
                     $style['c-formField-field'],
-                    $style[`c-formField-field--${fieldSize}`],
-                    { [$style['c-formField-field--noFocus']]: isSelectionControl }
-                ]"
+                    $style[`c-formField-field--${fieldSize}`], {
+                        [$style['c-formField-field--noFocus']]: isSelectionControl,
+                        [$style['c-formField--invalid']]: hasError
+                    }]"
                 v-on="listeners"
             >
 

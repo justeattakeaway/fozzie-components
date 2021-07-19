@@ -72,10 +72,6 @@ $form-input-padding-large               : spacing(x2);
         outline: none;
     }
 
-    .c-formField--invalid & {
-        border-color: $form-input-borderColour--invalid;
-    }
-
     &[disabled] {
         cursor: not-allowed;
 
@@ -87,4 +83,8 @@ $form-input-padding-large               : spacing(x2);
             opacity: 1; // removes default disabled styling
         }
     }
+}
+
+.c-formField--invalid {
+    border-color: $form-input-borderColour--invalid;
 }
