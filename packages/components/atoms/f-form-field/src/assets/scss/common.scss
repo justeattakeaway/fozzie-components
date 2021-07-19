@@ -3,31 +3,53 @@
 // Instead, the theme is handled via a data-attribute on the component (via the `@mixin theme()` below)
 $theme: 'jet' !default;
 
-@import  '~@justeat/fozzie/src/scss/fozzie';
+@import '~@justeat/fozzie/src/scss/fozzie';
 
-$form-input-bg                            : $color-container-default;
-$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);
+$form-input-bg                          : $color-container-default;
+$form-input-bg--hover                   : darken($form-input-bg, $color-hover-01);
 
-$form-input-bg--disabled                  : $color-disabled-01;
-$form-input-textColour--disabled          : $color-content-disabled;
-$form-input-borderColour--disabled        : $color-disabled-01;
+$form-input-bg--disabled                : $color-disabled-01;
+$form-input-textColour--disabled        : $color-content-disabled;
+$form-input-borderColour--disabled      : $color-disabled-01;
 
-$form-input-fontSize                      : 'body-l';
-$form-input-textColour                    : $color-content-default;
+$form-input-fontSize                    : 'body-l';
+$form-input-textColour                  : $color-content-default;
 
-$form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $color-border-default;
-$form-input-borderRadius                  : $border-radius;
-$form-input-borderColour--invalid         : $color-support-error;
+$form-input-borderWidth                 : 1px;
+$form-input-borderColour                : $color-border-default;
+$form-input-borderRadius                : $border-radius;
+$form-input-borderColour--invalid       : $color-support-error;
 
-$form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
+$form-input-focus--boxShadow            : 0 0 0 2px $color-focus;
+
+$form-input-height-small                : spacing(x5);
+$form-input-padding-small               : spacing(x1) spacing(x2);
+
+$form-input-height-medium               : spacing(x6);
+$form-input-padding-medium              : spacing(x1.5) spacing(x2);
+
+$form-input-height-large                : spacing(x7);
+$form-input-padding-large               : spacing(x2);
+
 
 @mixin form-field-size($height, $padding) {
     @include rem(height, $height);
     padding: $padding;
 }
 
-.c-formField-field-testie {
+.c-formField-field--small {
+    @include form-field-size($form-input-height-small, $form-input-padding-small); //convert height to rem
+}
+
+.c-formField-field--medium {
+    @include form-field-size($form-input-height-medium, $form-input-padding-medium); //convert height to rem
+}
+
+.c-formField-field--large {
+    @include form-field-size($form-input-height-large, $form-input-padding-large); //convert height to rem
+}
+
+.c-formField-field {
     width: 100%;
     font-family: $font-family-base;
     @include font-size($form-input-fontSize);
@@ -62,6 +84,7 @@ $form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
             background-color: $form-input-bg--disabled;
             color: $form-input-textColour--disabled;
             border-color: $form-input-borderColour--disabled;
+            opacity: 1; // removes default disabled styling
         }
     }
 }

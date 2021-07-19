@@ -37,10 +37,8 @@
                 :attributes="$attrs"
                 :type="normalisedInputType"
                 :value="value"
-                :class="[
-                    $style[`c-formField-field--${fieldSize}`],
-                    $style['c-formField-dropdownContainer']
-                ]"
+                :field-size="fieldSize"
+                :has-error="hasError"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
@@ -69,7 +67,7 @@
                 placeholder=" "
                 :data-test-id="testId.input"
                 :class="[
-                    $style['c-formField-field-testie'],
+                    $style['c-formField-field'],
                     $style[`c-formField-field--${fieldSize}`],
                     { [$style['c-formField-field--noFocus']]: isSelectionControl }
                 ]"
@@ -291,32 +289,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-// $form-input-textColour                    : $color-content-default;
-
-// $form-input-borderRadius                  : $border-radius;
-// $form-input-borderWidth                   : 1px;
-// $form-input-borderColour                  : $color-border-default;
-// $form-input-borderColour--focus           : $color-grey-50;
-// $form-input-borderColour--invalid         : $color-support-error;
-
-$form-input-height-small                  : spacing(x5);
-$form-input-padding-small                 : spacing(x1) spacing(x2);
-
-$form-input-height-medium                 : spacing(x6);
-$form-input-padding-medium                : spacing(x1.5) spacing(x2);
-
-$form-input-height-large                  : spacing(x7);
-$form-input-padding-large                 : spacing(x2);
-
-// $form-input-fontSize                      : 'body-l';
-// $form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
-
-
-// @mixin form-field-size($height, $padding) {
-//     @include rem(height, $height);
-//     padding: $padding;
-// }
-
 .c-formField {
     & + & {
         margin-top: spacing(x2);
@@ -325,57 +297,6 @@ $form-input-padding-large                 : spacing(x2);
 
     .c-formField-fieldWrapper {
         position: relative;
-    }
-
-    .c-formField-field--small {
-        @include form-field-size($form-input-height-small, $form-input-padding-small); //convert height to rem
-    }
-
-    .c-formField-field--medium {
-        @include form-field-size($form-input-height-medium, $form-input-padding-medium); //convert height to rem
-    }
-
-    .c-formField-field--large {
-        @include form-field-size($form-input-height-large, $form-input-padding-large); //convert height to rem
-    }
-
-    .c-formField-field {
-        width: 100%;
-        font-family: $font-family-base;
-        @include font-size($form-input-fontSize);
-        font-weight: $font-weight-regular;
-        color: $form-input-textColour;
-
-        background-color: $form-input-bg;
-        border: $form-input-borderWidth solid $form-input-borderColour;
-        border-radius: $form-input-borderRadius;
-        background-clip: padding-box;
-
-        &:hover {
-            background-color: $form-input-bg--hover;
-        }
-
-        &:focus,
-        &:active,
-        &:focus-within {
-            box-shadow: $form-input-focus--boxShadow;
-            outline: none;
-        }
-
-        .c-formField--invalid & {
-            border-color: $form-input-borderColour--invalid;
-        }
-
-        &[disabled] {
-            cursor: not-allowed;
-
-            &,
-            &:hover {
-                background-color: $form-input-bg--disabled;
-                color: $form-input-textColour--disabled;
-                border-color: $form-input-borderColour--disabled;
-            }
-        }
     }
 
     .c-formField-field--textarea {
@@ -390,10 +311,6 @@ $form-input-padding-large                 : spacing(x2);
         &:focus-within {
             box-shadow: none;
         }
-    }
-
-    .c-formField-dropdownContainer {
-        padding: 0;
     }
 
     .c-formField--grouped {
