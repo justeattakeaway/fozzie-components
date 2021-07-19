@@ -1,14 +1,17 @@
 <template>
     <div
         :class="$style['c-formDropdown']"
-        :disabled="attributes.disabled"
         :data-test-id="testId.container">
         <caret-icon
             :class="$style['c-formDropdown-icon']"
             :data-test-id="testId.icon" />
         <select
             :id="$attrs.id"
-            :class="$style['c-formDropdown-select']"
+            :class="[
+                $style['c-formDropdown-select'],
+                $style['c-formField-field-testie']
+            ]"
+            :disabled="attributes.disabled"
             :data-test-id="testId.select"
             v-bind="attributes"
             :value="value"
@@ -85,31 +88,31 @@ export default {
 }
 
 .c-formDropdown-select {
-    padding: 0 spacing(x2);
+    // padding: 0 spacing(x2);
     height: 100%;
     width: 100%;
-    font: inherit;
-    color: inherit;
-    background: transparent;
+    // font: inherit;
+    // color: inherit;
+    // background: transparent;
     outline: none;
 
     /* Remove default styling */
     border: none;
     appearance: none;
 
-    &:hover {
-        background-color: $form-input-bg--hover;
-    }
+    // &:hover {
+    //     background-color: $form-input-bg--hover;
+    // }
 
-    &[disabled] {
-    cursor: not-allowed;
+    // &[disabled] {
+    // cursor: not-allowed;
 
-        &,
-        &:hover {
-            background-color: $form-input-bg--disabled;
-            color: $form-input-textColour--disabled;
-            border-color: $form-input-borderColour--disabled;
-        }
-    }
+    //     &,
+    //     &:hover {
+    //         background-color: $form-input-bg--disabled;
+    //         color: $form-input-textColour--disabled;
+    //         border-color: $form-input-borderColour--disabled;
+    //     }
+    // }
 }
 </style>

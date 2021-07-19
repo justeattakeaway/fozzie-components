@@ -38,7 +38,6 @@
                 :type="normalisedInputType"
                 :value="value"
                 :class="[
-                    $style['c-formField-field'],
                     $style[`c-formField-field--${fieldSize}`],
                     $style['c-formField-dropdownContainer']
                 ]"
@@ -70,7 +69,7 @@
                 placeholder=" "
                 :data-test-id="testId.input"
                 :class="[
-                    $style['c-formField-field'],
+                    $style['c-formField-field-testie'],
                     $style[`c-formField-field--${fieldSize}`],
                     { [$style['c-formField-field--noFocus']]: isSelectionControl }
                 ]"
@@ -292,13 +291,13 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-textColour                    : $color-content-default;
+// $form-input-textColour                    : $color-content-default;
 
-$form-input-borderRadius                  : $border-radius;
-$form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $color-border-default;
-$form-input-borderColour--focus           : $color-grey-50;
-$form-input-borderColour--invalid         : $color-support-error;
+// $form-input-borderRadius                  : $border-radius;
+// $form-input-borderWidth                   : 1px;
+// $form-input-borderColour                  : $color-border-default;
+// $form-input-borderColour--focus           : $color-grey-50;
+// $form-input-borderColour--invalid         : $color-support-error;
 
 $form-input-height-small                  : spacing(x5);
 $form-input-padding-small                 : spacing(x1) spacing(x2);
@@ -309,14 +308,14 @@ $form-input-padding-medium                : spacing(x1.5) spacing(x2);
 $form-input-height-large                  : spacing(x7);
 $form-input-padding-large                 : spacing(x2);
 
-$form-input-fontSize                      : 'body-l';
-$form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
+// $form-input-fontSize                      : 'body-l';
+// $form-input-focus--boxShadow              : 0 0 0 2px $color-focus;
 
 
-@mixin form-field-size($height, $padding) {
-    @include rem(height, $height);
-    padding: $padding;
-}
+// @mixin form-field-size($height, $padding) {
+//     @include rem(height, $height);
+//     padding: $padding;
+// }
 
 .c-formField {
     & + & {
