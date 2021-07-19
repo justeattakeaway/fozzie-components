@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.161.0
+------------------------------
+*July 19, 2021*
+
+### Fixed
+- Ensure coordinates are always retrieved from local storage or fetched from API.
+
+
 v0.160.0
 ------------------------------
 *July 15, 2021*
