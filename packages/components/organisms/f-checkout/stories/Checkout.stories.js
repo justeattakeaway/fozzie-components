@@ -29,6 +29,7 @@ const getCheckoutTimeoutUrl = '/checkout-timeout-get-error.json';
 const getCheckoutAccessForbiddenUrl = '/checkout-403-get-error.json';
 const getCheckoutErrorUrl = '/checkout-500-get-error.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
+const checkoutAvailableFulfilmentNoTimeAvailableUrl = '/checkout-available-fulfilment-no-time-available.json';
 const checkoutAvailableFulfilmentPreorderUrl = '/checkout-available-fulfilment-preorder.json';
 const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
@@ -59,6 +60,7 @@ CheckoutMock.setupCheckoutMethod(getCheckoutCollectionLaterUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDineInUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutTimeoutUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
+CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentNoTimeAvailableUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentPreorderUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
@@ -92,6 +94,8 @@ const getCheckoutError = 'Any other Get Checkout Error (Response from server is 
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
+const noTimeAvailableError = 'No Time Available';
+const noTimeAvailable = 'no-time-available';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
 const additionalItemsRequiredIssue = 'additional-items-required';
 const timeNotAvailable = 'Selected time no longer available';
@@ -114,6 +118,7 @@ const getCheckoutErrorOptions = {
     None: null,
     [accessForbiddenError]: accessForbiddenErrorCode,
     [getCheckoutError]: getCheckoutErrorCode,
+    [noTimeAvailableError]: noTimeAvailable,
     [serverTimeout]: serverTimeoutIssue
 };
 
@@ -172,7 +177,7 @@ export const CheckoutComponent = () => ({
         },
 
         getCheckoutError: {
-            default: select('Get Checkout Errors', getCheckoutErrorOptions)
+            default: select('Get Checkout Errors', getCheckoutErrorOptions, null)
         },
 
         placeOrderError: {
@@ -190,11 +195,13 @@ export const CheckoutComponent = () => ({
                 return `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
             }
 
-            return this.getCheckoutError ? `/checkout-${this.getCheckoutError}-get-error.json` : `/checkout-${this.serviceType}.json`;
+            return this.getCheckoutError && this.getCheckoutError !== noTimeAvailable ?
+                `/checkout-${this.getCheckoutError}-get-error.json` : `/checkout-${this.serviceType}.json`;
         },
 
         getBasketUrl () {
-            return this.getCheckoutError ? `/checkout-${this.getCheckoutError}-get-error.json` : `/get-basket-${this.serviceType}.json`;
+            return this.getCheckoutError && this.getCheckoutError !== noTimeAvailable ?
+                `/checkout-${this.getCheckoutError}-get-error.json` : `/get-basket-${this.serviceType}.json`;
         },
 
         authToken () {
@@ -214,6 +221,9 @@ export const CheckoutComponent = () => ({
         },
 
         checkoutAvailableFulfilmentUrl () {
+            if (this.getCheckoutError === noTimeAvailable) {
+                return checkoutAvailableFulfilmentNoTimeAvailableUrl;
+            }
             return this.isAsapAvailable ? checkoutAvailableFulfilmentUrl : checkoutAvailableFulfilmentPreorderUrl;
         }
     },

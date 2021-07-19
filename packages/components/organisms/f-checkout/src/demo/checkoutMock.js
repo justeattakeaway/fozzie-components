@@ -10,6 +10,7 @@ import getCheckoutCollectionLaterUrl from './checkout-collection-user-selected-l
 import getCheckoutCollectionUnavailableUrl from './checkout-collection-user-selected-unavailable-time.json';
 import getCheckoutDineIn from './checkout-dinein.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
+import checkoutAvailableFulfilmentNoTimeAvailable from './checkout-available-fulfilment-no-time-available.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
 import createGuest from './create-guest.json';
 import getBasketDelivery from './get-basket-delivery.json';
@@ -65,6 +66,9 @@ export default {
                 break;
             case '/checkout-available-fulfilment.json':
                 mock.onGet(path).reply(200, checkoutAvailableFulfilment);
+                break;
+            case '/checkout-available-fulfilment-no-time-available.json':
+                mock.onGet(path).reply(200, checkoutAvailableFulfilmentNoTimeAvailable);
                 break;
             case '/checkout-available-fulfilment-preorder.json':
                 mock.onGet(path).reply(200, checkoutAvailableFulfilmentPreorder);
