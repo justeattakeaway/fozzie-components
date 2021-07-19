@@ -86,22 +86,4 @@ export default {
         }
     }
 
-    .c-takeawaypayActivation-icon {
-        transform: translate(10%);
-        width: 125px;
-    }
-
-    .c-takeawaypayActivation-title {
-        @include font-size(body-l);
-        font-weight: $font-weight-bold;
-    }
-
-    .c-takeawaypayActivation-email {
-        font-weight: $font-weight-bold;
-    }
-
-    .c-takeawaypayActivation-actions {
-        padding-top: spacing(x3);
-    }
-
 </style>

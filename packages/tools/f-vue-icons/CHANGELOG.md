@@ -72,7 +72,7 @@ v2.0.0
 - Chevron split icon.
 - Moped icon.
 
-## Changed
+### Changed
 - Updated npm dependencies.
 - Updated alert icon.
 - Updated celebrate bag icon.

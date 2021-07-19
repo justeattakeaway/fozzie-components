@@ -145,7 +145,7 @@ v4.10.0
 ------------------------------
 *March 12, 2021*
 
-## Added
+### Added
 - Browserstack test config in `package.json`
 
 ### Changed

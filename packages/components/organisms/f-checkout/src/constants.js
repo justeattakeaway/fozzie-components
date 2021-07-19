@@ -26,6 +26,7 @@ export const VALIDATIONS = {
 
 export const VUEX_CHECKOUT_MODULE = 'fCheckoutModule';
 export const VUEX_CHECKOUT_ANALYTICS_MODULE = 'fCheckoutAnalyticsModule';
+export const VUEX_CHECKOUT_EXPERIMENTATION_MODULE = 'fCheckoutExperimentationModule';
 
 export const ERROR_CODE_FULFILMENT_TIME_INVALID = 'FULFILMENT_TIME_INVALID';
 export const ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE = 'FULFILMENT_TIME_UNAVAILABLE';
@@ -37,7 +38,10 @@ export const ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME = 'invalidOrderTime';
 
 export const DEFAULT_CHECKOUT_ISSUE = 'DEFAULT_CHECKOUT_ISSUE';
 
-export const CHEKOUT_ERROR_FORM_TYPE = {
+export const CHECKOUT_ERROR_FORM_TYPE = {
     default: 'pageLoad',
-    accessForbidden: 'accessForbiddenError'
+    accessForbidden: 'accessForbiddenError',
+    noTimeAvailable: 'noTimeAvailable'
 };
+
+export const HEADER_LOW_VALUE_ORDER_EXPERIMENT = 'x-je-exp-low_value_order_threshold_web';

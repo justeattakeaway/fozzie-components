@@ -5,6 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import customer from '../../demo/get-customer.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import {
@@ -27,7 +28,9 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTES,
     UPDATE_GEO_LOCATION,
-    UPDATE_MESSAGE
+    UPDATE_MESSAGE,
+    UPDATE_ADDRESS,
+    UPDATE_PHONE_NUMBER
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -38,6 +41,7 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
+    getCustomer,
     getGeoLocation,
     placeOrder,
     setAuthToken,
@@ -325,6 +329,36 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_ADDRESS} ::`, () => {
+            it('should update state with received values', () => {
+                // Arrange
+                const addressFromLocalStorage = {
+                    lines: ['line 1', 'line 2'],
+                    locality: 'locality',
+                    postalCode: 'postcode'
+                };
+
+                // Act
+                mutations[UPDATE_ADDRESS](state, addressFromLocalStorage);
+
+                // Assert
+                expect(state.address).toEqual(address);
+            });
+        });
+
+        describe(`${UPDATE_PHONE_NUMBER} ::`, () => {
+            it('should update state with received values', () => {
+                // Arrange
+                const phoneNumber = '+447111111112';
+
+                // Act
+                mutations[UPDATE_PHONE_NUMBER](state, phoneNumber);
+
+                // Assert
+                expect(state.customer.mobileNumber).toEqual(phoneNumber);
+            });
+        });
+
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
@@ -344,16 +378,23 @@ describe('CheckoutModule', () => {
         let commit;
         let dispatch;
         let payload;
-
+        let rootGetters;
+        let context;
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
             state = defaultState;
+            rootGetters = {};
+            context = {
+                commit, state, dispatch, rootGetters
+            };
             payload = {
                 url: 'http://localhost/account/checkout',
+                getCustomerUrl: 'http://localhost/customer',
                 tenant: 'uk',
                 language: 'en-GB',
                 timeout: 10000,
+                currentPostcode: null,
                 postData: null
             };
         });
@@ -379,7 +420,7 @@ describe('CheckoutModule', () => {
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
                 // Act
-                await getCheckout({ commit, state, dispatch }, payload);
+                await getCheckout(context, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -391,7 +432,7 @@ describe('CheckoutModule', () => {
                 const expectedAsapValue = checkoutDeliveryCopy.fulfilment.time.asap;
 
                 // Act
-                await getCheckout({ commit, state, dispatch }, payload);
+                await getCheckout(context, payload);
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_HAS_ASAP_SELECTED, expectedAsapValue);
@@ -399,7 +440,7 @@ describe('CheckoutModule', () => {
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
                 // Act
-                await getCheckout({ commit, state, dispatch }, payload);
+                await getCheckout(context, payload);
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
@@ -411,7 +452,7 @@ describe('CheckoutModule', () => {
                     checkoutDeliveryCopy.customer = null;
 
                     // Act
-                    await getCheckout({ commit, state, dispatch }, payload);
+                    await getCheckout(context, payload);
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer).toBe(null);
@@ -429,7 +470,7 @@ describe('CheckoutModule', () => {
                     };
 
                     // Act
-                    await getCheckout({ commit, state, dispatch }, payload);
+                    await getCheckout(context, payload);
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
@@ -445,7 +486,7 @@ describe('CheckoutModule', () => {
                     };
 
                     // Act
-                    await getCheckout({ commit, state, dispatch }, payload);
+                    await getCheckout(context, payload);
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedFirstName);
@@ -471,7 +512,7 @@ describe('CheckoutModule', () => {
                     const expectedPhoneNumber = '9876543210'; // AuthToken Mobile No.
 
                     // Act
-                    await getCheckout({ commit, state, dispatch }, payload);
+                    await getCheckout(context, payload);
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
@@ -484,7 +525,7 @@ describe('CheckoutModule', () => {
                     const expectedPhoneNumber = '0123456789'; // AuthToken Phone No.
 
                     // Act
-                    await getCheckout({ commit, state, dispatch }, payload);
+                    await getCheckout(context, payload);
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
@@ -516,7 +557,7 @@ describe('CheckoutModule', () => {
                     };
 
                     // Act
-                    await getCheckout({ commit, state, dispatch }, payload);
+                    await getCheckout(context, payload);
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedCustomerDetails.firstName);
@@ -537,7 +578,7 @@ describe('CheckoutModule', () => {
                     };
 
                     // Act
-                    await getCheckout({ commit, state, dispatch }, payload);
+                    await getCheckout(context, payload);
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedCustomerDetails.firstName);
@@ -561,7 +602,7 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: basketDelivery }));
 
                 // Act
-                await getBasket({ commit, state, dispatch }, payload);
+                await getBasket(context, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -590,29 +631,101 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
-
-                axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
                 const [expectedAddress] = customerAddresses.Addresses;
-
-                // Act
-                await getAddress({ commit, state, dispatch }, payload);
-
-                // Assert
-                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, {
+                const expectedFormattedAddress = {
                     line1: expectedAddress.Line1,
                     line2: expectedAddress.Line2,
                     locality: expectedAddress.City,
                     postcode: expectedAddress.ZipCode
-                });
+                };
+                const addressServiceSpy = jest.spyOn(addressService, 'getClosestAddress').mockReturnValue(expectedFormattedAddress);
+                axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
+
+                // Act
+                await getAddress(context, payload);
+
+                // Assert
+                expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses.Addresses, payload.tenant, payload.currentPostcode);
+                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, expectedFormattedAddress);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
                 // Act
-                await getAddress({ commit, state, dispatch }, payload);
+                await getAddress(context, payload);
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+            });
+        });
+
+        describe('getCustomer ::', () => {
+            describe('when phone number is not set', () => {
+                beforeEach(() => {
+                    state.customer.mobileNumber = '';
+                });
+
+                it(`should get the customer details from the backend and call ${UPDATE_PHONE_NUMBER} mutation`, async () => {
+                    // Arrange
+                    const config = {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${state.authToken}`
+                        },
+                        timeout: payload.timeout
+                    };
+
+                    axios.get = jest.fn(() => Promise.resolve({ data: customer }));
+                    const expectedPhoneNumber = customer.PhoneNumber;
+
+                    // Act
+                    await getCustomer({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_PHONE_NUMBER, expectedPhoneNumber);
+                });
+
+                it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
+                    // Arrange
+                    state.customer.mobileNumber = '';
+
+                    // Act
+                    await getCustomer({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+                });
+            });
+
+            describe('when phone number is set', () => {
+                beforeEach(() => {
+                    state.customer.mobileNumber = '07111111111';
+                });
+
+                afterEach(() => {
+                    state.customer.mobileNumber = '';
+                });
+
+                it(`should not get the customer details from the backend and call ${UPDATE_PHONE_NUMBER} mutation`, async () => {
+                    // Arrange
+                    axios.get = jest.fn(() => Promise.resolve({ data: customer }));
+
+                    // Act
+                    await getCustomer({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(axios.get).not.toBeCalled();
+                    expect(commit).not.toBeCalled();
+                });
+
+                it(`should not call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
+                    // Act
+                    await getCustomer({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(dispatch).not.toBeCalled();
+                });
             });
         });
 
@@ -646,7 +759,7 @@ describe('CheckoutModule', () => {
                 }));
 
                 // Act
-                await placeOrder({ commit, state }, payload);
+                await placeOrder(context, payload);
 
                 // Assert
                 expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
@@ -668,7 +781,7 @@ describe('CheckoutModule', () => {
 
                         try {
                             // Act
-                            await placeOrder({ commit, state }, payload);
+                            await placeOrder(context, payload);
                         } catch {
                             // Assert
                             expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [message]);
@@ -689,7 +802,7 @@ describe('CheckoutModule', () => {
 
                         try {
                             // Act
-                            await placeOrder({ commit, state }, payload);
+                            await placeOrder(context, payload);
                         } catch {
                             // Assert
                             expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, []);
@@ -710,7 +823,7 @@ describe('CheckoutModule', () => {
 
                         try {
                             // Act
-                            await placeOrder({ commit, state, dispatch }, payload);
+                            await placeOrder(context, payload);
                         } catch {
                             // Assert
                             expect(dispatch).toHaveBeenCalledWith('updateMessage', message);
@@ -726,7 +839,7 @@ describe('CheckoutModule', () => {
                     axios.post = jest.fn(() => Promise.reject(new Error(errorMessage)));
 
                     // Act
-                    const result = await expect(placeOrder({ commit, state }, payload));
+                    const result = await expect(placeOrder(context, payload));
 
                     // Assert
                     result.rejects.toThrow(errorMessage);
@@ -767,7 +880,7 @@ describe('CheckoutModule', () => {
 
             it('should post the checkout details to the backend.', async () => {
                 // Act
-                await updateCheckout({ commit, state, dispatch }, payload);
+                await updateCheckout(context, payload);
 
                 // Assert
                 expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
@@ -775,7 +888,7 @@ describe('CheckoutModule', () => {
 
             it('should convert an unsupported error into a default error.', async () => {
                 // Act
-                await updateCheckout({ commit, state, dispatch }, payload);
+                await updateCheckout(context, payload);
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true }]);
@@ -794,7 +907,7 @@ describe('CheckoutModule', () => {
 
                 it('should call `updateErrors` with issue.', async () => {
                     // Act
-                    await updateCheckout({ commit, state, dispatch }, payload);
+                    await updateCheckout(context, payload);
 
                     // Assert
                     expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [issue]);
@@ -802,7 +915,7 @@ describe('CheckoutModule', () => {
 
                 it('should call `updateMessage` with first issue.', async () => {
                     // Act
-                    await updateCheckout({ commit, state, dispatch }, payload);
+                    await updateCheckout(context, payload);
 
                     // Assert
                     expect(dispatch).toHaveBeenCalledWith('updateMessage', issue);
@@ -842,7 +955,7 @@ describe('CheckoutModule', () => {
 
             it('should post the create guest user request to the backend.', async () => {
                 // Act
-                await createGuestUser({ commit, state }, payload);
+                await createGuestUser(context, payload);
 
                 // Assert
                 expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
@@ -850,7 +963,7 @@ describe('CheckoutModule', () => {
 
             it(`should call ${UPDATE_AUTH_GUEST} mutation.`, async () => {
                 // Act
-                await createGuestUser({ commit, state }, payload);
+                await createGuestUser(context, payload);
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_AUTH_GUEST, authToken);
@@ -873,7 +986,7 @@ describe('CheckoutModule', () => {
 
             it(`should get the checkout available fulfilment details from the backend and call ${UPDATE_AVAILABLE_FULFILMENT_TIMES} mutation.`, async () => {
                 // Act
-                await getAvailableFulfilment({ commit }, payload);
+                await getAvailableFulfilment(context, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -884,7 +997,7 @@ describe('CheckoutModule', () => {
         describe('updateFulfilmentTime ::', () => {
             it(`should call ${UPDATE_FULFILMENT_TIME} mutation.`, () => {
                 // Act
-                updateFulfilmentTime({ commit, state }, time);
+                updateFulfilmentTime(context, time);
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_TIME, time);
@@ -919,7 +1032,7 @@ describe('CheckoutModule', () => {
 
                 it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
                     // Act
-                    await getGeoLocation({ commit, state }, payload);
+                    await getGeoLocation(context, payload);
 
                     // Assert
                     expect(axios.post).toHaveBeenCalledWith(payload.url, locationData, config);
@@ -934,7 +1047,7 @@ describe('CheckoutModule', () => {
 
                 it('should not make api call and should not call mutation.', async () => {
                     // Act
-                    await getGeoLocation({ commit, state }, payload);
+                    await getGeoLocation(context, payload);
 
                     // Assert
                     expect(axios.post).not.toHaveBeenCalled();
@@ -981,7 +1094,7 @@ describe('CheckoutModule', () => {
                     };
 
                     // Act
-                    await getGeoLocation({ commit, state: newState }, payload);
+                    await getGeoLocation({ ...context, state: newState }, payload);
 
                     // Assert
                     expect(axios.post).not.toHaveBeenCalled();
@@ -1001,7 +1114,28 @@ describe('CheckoutModule', () => {
                     };
 
                     // Act
-                    await getGeoLocation({ commit, state: newState }, payload);
+                    await getGeoLocation({ ...context, state: newState }, payload);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+
+                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if local storage has no stored coordinates`, async () => {
+                    // Arrange
+                    const newState = {
+                        ...state,
+                        address: {
+                            line1: 'Flat 101',
+                            line2: 'Made Up House',
+                            locality: 'London',
+                            postcode: 'NW2 3PE'
+                        }
+                    };
+
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({ ...storedAddress, Field1: null, Field2: null }));
+
+                    // Act
+                    await getGeoLocation({ ...context, state: newState }, payload);
 
                     // Assert
                     expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
@@ -1014,7 +1148,7 @@ describe('CheckoutModule', () => {
                         jest.spyOn(addressService, 'doesAddressInStorageAndFormMatch').mockImplementation(() => false);
 
                         // Act
-                        await getGeoLocation({ commit, state }, payload);
+                        await getGeoLocation(context, payload);
 
                         // Assert
                         expect(setItemSpy).toHaveBeenCalledWith(
@@ -1032,7 +1166,7 @@ describe('CheckoutModule', () => {
             [updateMessage, UPDATE_MESSAGE, message]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
-            action({ commit, dispatch }, value);
+            action(context, value);
 
             // Assert
             expect(commit).toHaveBeenCalledWith(mutation, value);
@@ -1043,7 +1177,7 @@ describe('CheckoutModule', () => {
             [updateCustomerDetails, customerDetails]
         ])(`%s should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedFields' action with first key of passed value`, (action, value) => {
             // Act
-            action({ commit, dispatch }, value);
+            action(context, value);
 
             const [field] = Object.keys(value);
 
@@ -1068,7 +1202,7 @@ describe('CheckoutModule', () => {
                         jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(userNote);
 
                         // Act
-                        getUserNote({ dispatch, state });
+                        getUserNote(context);
 
                         // Assert
                         expect(dispatch).toHaveBeenCalledWith('updateUserNote', userNote);
@@ -1081,7 +1215,7 @@ describe('CheckoutModule', () => {
                         jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(undefined);
 
                         // Act
-                        getUserNote({ dispatch, state });
+                        getUserNote(context);
 
                         // Assert
                         expect(dispatch).not.toHaveBeenCalled();
@@ -1101,7 +1235,7 @@ describe('CheckoutModule', () => {
 
                 it('should not call dispatch', () => {
                     // Act
-                    getUserNote({ dispatch, state });
+                    getUserNote(context);
 
                     // Assert
                     expect(dispatch).not.toHaveBeenCalled();
@@ -1127,7 +1261,7 @@ describe('CheckoutModule', () => {
                 const key = `userNote-${testBasketId}`;
 
                 // Act
-                saveUserNote({ state });
+                saveUserNote(context);
 
                 // Assert
                 expect(spy).toHaveBeenCalledWith(key, state.userNote);
