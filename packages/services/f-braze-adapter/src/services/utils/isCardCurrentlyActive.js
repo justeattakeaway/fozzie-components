@@ -28,12 +28,14 @@ export function isCardActiveBasedOnTime (displayTimes) {
  * Can be used in isolation or as part of Array.filter
  * @param card {object}
  * @param card.displayTimes {object} - Display times
- * @param card.brand {string} - Identifier string for relevant brand
+ * @param card.isVisible {string} - Visibility indicator
  * @returns {boolean} - is card active
  */
 const isCardCurrentlyActive = (card = {}) => {
-    const { displayTimes } = card;
-    return (!displayTimes || isCardActiveBasedOnTime(displayTimes));
+    const { displayTimes, isVisible } = card;
+
+    return (isVisible !== false)
+        && (!displayTimes || isCardActiveBasedOnTime(displayTimes));
 };
 
 export default isCardCurrentlyActive;
