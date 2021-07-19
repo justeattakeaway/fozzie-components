@@ -46,6 +46,7 @@ describe('CheckoutApi', () => {
             expect(axios.get).toHaveBeenCalledWith(payload.url, config);
         });
     });
+
     describe('updateCheckout ::', () => {
         let config;
 
@@ -73,6 +74,7 @@ describe('CheckoutApi', () => {
             expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
         });
     });
+
     describe('getAvailableFulfilment ::', () => {
         let config;
 

@@ -24,6 +24,7 @@ describe('BasketApi', () => {
 
         axios.get = jest.fn(() => Promise.resolve({ status: 200 }));
     });
+
     describe('getBasket ::', () => {
         it('should get the basket details from the backend', async () => {
             // Act

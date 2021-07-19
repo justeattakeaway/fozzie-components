@@ -37,8 +37,9 @@ describe('AddressGeocodingApi', () => {
 
         axios.post = jest.fn(() => Promise.resolve({ status: 200 }));
     });
-    describe('getAvailableFulfilment ::', () => {
-        it('should get the checkout available fulfilment details from the backend', async () => {
+
+    describe('getGeoLocation ::', () => {
+        it('should post address and return the geolocation from the backend', async () => {
             // Act
             await addressGeocodingApi.getGeoLocation(payload.url, payload.postData, payload.timeout, state);
 

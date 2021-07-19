@@ -150,12 +150,9 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        // eslint-disable-next-line no-unused-vars
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
         }, { url, data, timeout }) => {
-            // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
-
             const { data: responseData, headers } = await checkoutApi.updateCheckout(url, state, rootGetters, data, timeout);
 
             const { issues, isFulfillable } = responseData;
@@ -180,7 +177,6 @@ export default {
             url, tenant, data, timeout, otacToAuthExchanger
         }) => {
             const response = await accountApi.createGuestUser(url, data, timeout, tenant);
-            // eslint-disable-next-line no-unused-vars
             const otac = response.data.token;
             const authToken = await otacToAuthExchanger(otac);
             commit(UPDATE_AUTH_GUEST, authToken);
@@ -193,7 +189,6 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
-            // TODO: deal with exceptions.
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);

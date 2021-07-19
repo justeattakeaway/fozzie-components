@@ -5,7 +5,7 @@ import { mockAuthToken } from '../../components/_tests/helpers/setup';
 
 const authToken = mockAuthToken;
 
-describe('BasketApi', () => {
+describe('orderPlacementApi', () => {
     let payload;
     let config;
     let state;
@@ -34,8 +34,8 @@ describe('BasketApi', () => {
 
         axios.post = jest.fn(() => Promise.resolve({ status: 200 }));
     });
-    describe('getBasket ::', () => {
-        it('should get the basket details from the backend', async () => {
+    describe('placeOrder ::', () => {
+        it('should post the order details to the backend', async () => {
             // Act
             await placeOrderApi.placeOrder(payload.url, payload.data, payload.timeout, state);
 
