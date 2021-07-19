@@ -1061,6 +1061,27 @@ describe('CheckoutModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
                 });
 
+                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if local storage has no stored coordinates`, async () => {
+                    // Arrange
+                    const newState = {
+                        ...state,
+                        address: {
+                            line1: 'Flat 101',
+                            line2: 'Made Up House',
+                            locality: 'London',
+                            postcode: 'NW2 3PE'
+                        }
+                    };
+
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({ ...storedAddress, Field1: null, Field2: null }));
+
+                    // Act
+                    await getGeoLocation({ ...context, state: newState }, payload);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+
                 describe('When the address in localStorage does not match the address `state`', () => {
                     it('should update localStorage to the changed address', async () => {
                         // Arrange

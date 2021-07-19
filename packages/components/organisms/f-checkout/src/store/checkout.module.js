@@ -341,7 +341,7 @@ export default {
                 const storedAddress = addressService.getAddressFromLocalStorage(false);
 
                 if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
-                    addressCoords = [storedAddress.Field2, storedAddress.Field1];
+                    addressCoords = storedAddress.Field1 && storedAddress.Field2 ? [storedAddress.Field2, storedAddress.Field1] : null;
                     commit(UPDATE_GEO_LOCATION, addressCoords);
                 } else {
                     const addressDetails = state.address;
