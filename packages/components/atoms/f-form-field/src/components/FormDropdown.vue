@@ -1,9 +1,5 @@
 <template>
     <div
-        :class="[
-            $style['c-formDropdown']
-
-        ]"
         :data-test-id="testId.container">
         <caret-icon
             :class="$style['c-formDropdown-icon']"
