@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.47.0
+------------------------------
+*July 19, 2021*
+
+### Changed
+- Bump dependency of `f-button` across a number of packages (no version bumps as no changes to the actual package were needed).
+- Some other minor package version bumps.
+
+
+v3.46.0
+------------------------------
+*July 16, 2021*
+
+### Added
+- Feature Management service component (initial skeleton).
+
+
 v3.45.0
 ------------------------------
 *July 14, 2021*

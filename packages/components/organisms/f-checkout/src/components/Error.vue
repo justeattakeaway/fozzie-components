@@ -19,7 +19,7 @@
         <p
             :class="$style['c-checkout-error-description']"
             data-test-id="checkout-error-page-description">
-            {{ $t(`errorMessages.${errorFormType}.description`) }}
+            {{ $t(`errorMessages.${errorFormType}.description`, { serviceType: serviceType }) }}
         </p>
 
         <f-button
@@ -27,8 +27,8 @@
             button-size="large"
             button-type="primary"
             is-full-width
-            data-test-id="error-page-redirect-to-menu-button"
-            @click.native="redirectToMenu">
+            data-test-id="error-page-redirect-button"
+            @click.native="redirectFromErrorPage">
             {{ $t(`errorMessages.${errorFormType}.buttonText`) }}
         </f-button>
     </card>
@@ -43,7 +43,7 @@ import '@justeat/f-button/dist/f-button.css';
 import '@justeat/f-card/dist/f-card.css';
 import {
     VUEX_CHECKOUT_MODULE,
-    CHEKOUT_ERROR_FORM_TYPE
+    CHECKOUT_ERROR_FORM_TYPE
 } from '../constants';
 import loggerMixin from '../mixins/logger.mixin';
 
@@ -64,6 +64,10 @@ export default {
         redirectUrl: {
             type: String,
             default: ''
+        },
+        serviceType: {
+            type: String,
+            default: ''
         }
     },
 
@@ -82,8 +86,8 @@ export default {
     },
 
     methods: {
-        redirectToMenu () {
-            if (this.errorFormType === CHEKOUT_ERROR_FORM_TYPE.accessForbidden) {
+        redirectFromErrorPage () {
+            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.accessForbidden) {
                 const cookieName = `je-mw-basket-${this.restaurant.id}`;
                 const basketCookie = this.$cookies.get(cookieName);
                 if (basketCookie) {

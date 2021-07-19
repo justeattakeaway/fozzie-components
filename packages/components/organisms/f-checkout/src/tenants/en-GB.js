@@ -61,6 +61,11 @@ const messages = {
             description: 'This basket was created with a different account so we can’t proceed, sorry. Please add your items again.',
             buttonText: 'Go back to order'
         },
+        noTimeAvailable: {
+            heading: 'Something went wrong',
+            description: 'We’re sorry, but there are no times for {serviceType} available. Please choose another restaurant to order from.',
+            buttonText: 'Search for a different restaurant'
+        },
 
         guestUserCreationFailure: 'Guest checkout isn’t available, sorry. Try again soon or sign up',
 
