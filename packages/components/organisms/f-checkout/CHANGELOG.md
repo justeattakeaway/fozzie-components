@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.161.0
+------------------------------
+*July 15, 2021*
+
+### Added
+- Error page if `getCheckout` request returns empty times list.
+
+### Fixed
+- A typo in `CHEKOUT_ERROR_FORM_TYPE` > `CHECKOUT_ERROR_FORM_TYPE`
+
+
 v0.160.0
 ------------------------------
 *July 15, 2021*
