@@ -2,7 +2,7 @@
     <div>
         <component
             :is="messageType.name"
-            v-if="message"
+            v-if="message && !errorFormType"
             ref="errorMessage"
             v-bind="messageType.props">
             <span>{{ messageType.content }}</span>
@@ -138,7 +138,8 @@
         <error-page
             v-else-if="errorFormType"
             :error-form-type="errorFormType"
-            :redirect-url="redirectUrl" />
+            :redirect-url="redirectUrl"
+            :service-type="serviceType" />
     </div>
 </template>
 
@@ -171,6 +172,7 @@ import ErrorPage from './Error.vue';
 import exceptions from '../exceptions/exceptions';
 import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
+    CHECKOUT_ERROR_FORM_TYPE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
@@ -347,7 +349,6 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'availableFulfilment',
             'address',
             'availableFulfilment',
             'basket',
@@ -421,7 +422,7 @@ export default {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType,
                 chosenTime: this.time.from,
-                isFulfilable: this.isFulfillable,
+                isFulfillable: this.isFulfillable,
                 issueMessage: this.message?.code
             };
         },
@@ -469,10 +470,20 @@ export default {
         },
 
         /**
-         * Redirect to menu if the `restaurant.seoName` exists otherwise redirect to home.
+         * If there is no fulfilment times available (errorFormType === noTimeAvailable)
+         * redirect to search if the location cookie exists otherwise redirect to home.
+         *
+         * For all other error form types
+         * redirect to menu if the `restaurant.seoName` exists otherwise redirect to home.
          *
          * */
         redirectUrl () {
+            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable) {
+                const postcodeCookie = this.$cookies.get('je-location');
+
+                return postcodeCookie ? `area/${postcodeCookie}` : '/';
+            }
+
             const prefix = this.isCheckoutMethodDineIn ? 'dine-in' : 'restaurants';
 
             if (!this.restaurant.seoName) {
@@ -558,6 +569,7 @@ export default {
                 : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+
             this.resetLoadingState();
 
             if (this.shouldLoadAddress) {
@@ -792,6 +804,10 @@ export default {
                     url: this.checkoutAvailableFulfilmentUrl,
                     timeout: this.checkoutTimeout
                 });
+
+                if (!this.availableFulfilment.times.length) {
+                    this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable;
+                }
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
             } catch (error) {
