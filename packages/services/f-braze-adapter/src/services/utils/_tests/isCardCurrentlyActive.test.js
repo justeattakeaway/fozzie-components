@@ -22,6 +22,27 @@ describe('services › utils › transformCardData', () => {
         expect(result).toBeTrue();
     });
 
+    it('should return true if visibility indicator is true', () => {
+        // Arrange & Act
+        const result = isCardCurrentlyActive({
+            isVisible: true
+        });
+
+        // Assert
+        expect(result).toBeTrue();
+    });
+
+    it('should return false if visibility indicator is false', () => {
+        // Arrange & Act
+        const result = isCardCurrentlyActive({
+            isVisible: false
+        });
+
+        // Assert
+        expect(result).toBeFalse();
+        expect(result).toBeTrue();
+    });
+
     it('should return true if card does not contain display times', () => {
         // Arrange & Act
         const result = isCardCurrentlyActive({ id: 'test' });
