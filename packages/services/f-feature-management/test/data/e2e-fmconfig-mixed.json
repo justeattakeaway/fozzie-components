@@ -1,0 +1,520 @@
+{
+    "createdAt": "2021-03-08T12:34:32.2405071+00:00",
+    "features": [
+      {
+        "key": "string-feature-1",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {
+              "property": "Country",
+              "eq": "UK"
+            },
+            "value": "default-uk"
+          },
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ],
+        "evaluationLogic": {
+          "type": "IdHash",
+          "detail": {
+            "bucketBy": "AnonUserId",
+            "prefix": "string-feature-prefix-1",
+            "rules": [
+              {
+                "restrictions": {
+                  "and": [
+                    {
+                      "property": "Country",
+                      "in": [
+                        "ES",
+                        "IT"
+                      ]
+                    },
+                    {
+                      "property": "AppVersion",
+                      "gte": "50.0.0"
+                    }
+                  ]
+                },
+                "audienceFraction": 0.5,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": "val r1v1",
+                    "experimentKey": "StringExperiment1",
+                    "experimentVariant": "var r1v1"
+                  },
+                  {
+                    "weight": 1,
+                    "value": "val r1v2",
+                    "experimentKey": "StringExperiment1",
+                    "experimentVariant": "var r1v2"
+                  }
+                ]
+              },
+              {
+                "restrictions": {
+                  "and": [
+                    {
+                      "property": "Country",
+                      "eq": "UK"
+                    },
+                    {
+                      "property": "AppVersion",
+                      "lte": "75.1.0"
+                    }
+                  ]
+                },
+                "audienceFraction": 0.5,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": "val r2v1",
+                    "experimentKey": "StringExperiment1",
+                    "experimentVariant": "var r2v1"
+                  },
+                  {
+                    "weight": 1,
+                    "value": "val r2v2",
+                    "experimentKey": "StringExperiment1",
+                    "experimentVariant": "var r2v2"
+                  }
+                ]
+              },
+              {
+                "restrictions": {},
+                "audienceFraction": 0.75,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": "val catchallv1",
+                    "experimentKey": "StringExperiment1",
+                    "experimentVariant": "var catchallv1"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "string-feature-2-one-exp-rule",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ],
+        "evaluationLogic": {
+          "type": "IdHash",
+          "detail": {
+            "bucketBy": "AnonUserId",
+            "prefix": "string-prefix-2",
+            "rules": [
+              {
+                "restrictions": {
+                  "and": [
+                    {
+                      "property": "Country",
+                      "in": [
+                        "UK",
+                        "IE"
+                      ]
+                    },
+                    {
+                      "property": "AppVersion",
+                      "gte": "75.0.0"
+                    },
+                    {
+                      "property": "AppVersion",
+                      "lt": "76.0.0"
+                    }
+                  ]
+                },
+                "audienceFraction": 0.5,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": "VariantString",
+                    "experimentKey": "StringExperiment",
+                    "experimentVariant": "Variant"
+                  },
+                  {
+                    "weight": 1,
+                    "value": "ControlString",
+                    "experimentKey": "StringExperiment",
+                    "experimentVariant": "Control"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "string-feature-3-no-logic",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {
+              "and": [
+                {
+                  "eq": "UK",
+                  "property": "Country"
+                },
+                {
+                  "gt": "32.1.2",
+                  "property": "AppVersion"
+                }
+              ]
+            },
+            "value": "default 1"
+          },
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ]
+      },
+      {
+        "key": "int-feature",
+        "valueType": "int",
+        "defaultValueRules": [
+          {
+            "restrictions": {
+              "property": "Country",
+              "eq": "UK"
+            },
+            "value": -100
+          },
+          {
+            "restrictions": {
+              "property": "Country",
+              "eq": "IE"
+            },
+            "value": 234
+          },
+          {
+            "restrictions": {},
+            "value": 0
+          }
+        ],
+        "evaluationLogic": {
+          "type": "IdHash",
+          "detail": {
+            "bucketBy": "AnonUserId",
+            "prefix": "int-prefix",
+            "rules": [
+              {
+                "restrictions": {
+                  "and": [
+                    {
+                      "property": "Country",
+                      "eq": "UK"
+                    }
+                  ]
+                },
+                "audienceFraction": 0.5,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": 123,
+                    "experimentKey": "IntExperiment",
+                    "experimentVariant": "int var"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "bool-feature",
+        "valueType": "bool",
+        "defaultValueRules": [
+          {
+            "restrictions": {
+              "property": "Country",
+              "eq": "UK"
+            },
+            "value": true
+          },
+          {
+            "restrictions": {},
+            "value": false
+          }
+        ],
+        "evaluationLogic": {
+          "type": "IdHash",
+          "detail": {
+            "bucketBy": "AnonUserId",
+            "prefix": "bool-prefix",
+            "rules": [
+              {
+                "restrictions": {
+                  "and": [
+                    {
+                      "property": "Country",
+                      "eq": "UK"
+                    }
+                  ]
+                },
+                "audienceFraction": 0.5,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": true,
+                    "experimentKey": "BoolExperiment",
+                    "experimentVariant": "bool var"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "string-feature-unknown-property-in-logic",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ],
+        "evaluationLogic": {
+          "type": "IdHash",
+          "detail": {
+            "bucketBy": "AnonUserId",
+            "prefix": "string-prefix-3",
+            "rules": [
+              {
+                "restrictions": {
+                  "eq": "whatever",
+                  "property": "Invalid"
+                },
+                "audienceFraction": 1,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": "VariantString",
+                    "experimentKey": "StringExperiment",
+                    "experimentVariant": "Variant"
+                  }
+                ]
+              },
+              {
+                "restrictions": {},
+                "audienceFraction": 1,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": "valid value",
+                    "experimentKey": "StringExperiment",
+                    "experimentVariant": "valid variant"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "string-feature-unknown-logic-type",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ],
+        "evaluationLogic": {
+          "type": "Unknown",
+          "detail": {
+          }
+        }
+      },
+      {
+        "key": "string-feature-unknown-bucketby",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ],
+        "evaluationLogic": {
+          "type": "IdHash",
+          "detail": {
+            "bucketBy": "Unknown",
+            "prefix": "string-prefix-3",
+            "rules": [
+              {
+                "restrictions": {
+                  "eq": "whatever",
+                  "property": "Invalid"
+                },
+                "audienceFraction": 1,
+                "variants": [
+                  {
+                    "weight": 1,
+                    "value": "VariantString",
+                    "experimentKey": "StringExperiment",
+                    "experimentVariant": "Variant"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "string-feature-unknown-property-in-defaults",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {
+              "and": [
+                {
+                  "eq": "UK",
+                  "property": "Unknown"
+                },
+                {
+                  "gt": "32.1.2",
+                  "property": "AppVersion"
+                }
+              ]
+            },
+            "value": "default 1"
+          },
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ]
+      },
+      {
+        "key": "string-feature-extreme-audience-and-variant-weighting",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ],
+        "evaluationLogic": {
+          "type": "IdHash",
+          "detail": {
+            "bucketBy": "AnonUserId",
+            "prefix": "string-prefix-3",
+            "rules": [
+              {
+                "restrictions": {},
+                "audienceFraction": 0.99,
+                "variants": [
+                  {
+                    "weight": 98,
+                    "value": "val 1",
+                    "experimentKey": "StringExperiment",
+                    "experimentVariant": "var 1"
+                  },
+                  {
+                    "weight": 1,
+                    "value": "val 2",
+                    "experimentKey": "StringExperiment",
+                    "experimentVariant": "var 2"
+                  },
+                  {
+                    "weight": 1,
+                    "value": "val 3",
+                    "experimentKey": "StringExperiment",
+                    "experimentVariant": "var 3"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "string-feature-to-test-restrictions",
+        "valueType": "string",
+        "defaultValueRules": [
+          {
+            "restrictions": {
+              "or": [
+                {
+                  "eq": "uk",
+                  "property": "Country"
+                },
+                {
+                  "in": [ "ie", "au" ],
+                  "property": "Country"
+                },
+                {
+                  "eq": "30.2",
+                  "property": "AppVersion"
+                },
+                {
+                  "in": [ "30.3", "30.4" ],
+                  "property": "AppVersion"
+                },
+                {
+                  "lt": "10.0",
+                  "property": "AppVersion"
+                },
+                {
+                  "gt": "40.1",
+                  "property": "AppVersion"
+                }
+              ]
+            },
+            "value": "default-1"
+          },
+          {
+            "restrictions": {
+              "and": [
+                {
+                  "neq": "uk",
+                  "property": "Country"
+                },
+                {
+                  "nin": [ "ie", "au" ],
+                  "property": "Country"
+                },
+                {
+                  "neq": "30.2",
+                  "property": "AppVersion"
+                },
+                {
+                  "nin": [ "30.3", "30.4" ],
+                  "property": "AppVersion"
+                },
+                {
+                  "or": [
+                    {
+                      "lte": "10.1",
+                      "property": "AppVersion"
+                    },
+                    {
+                      "gte": "40.0",
+                      "property": "AppVersion"
+                    }
+                  ]
+                }
+              ]
+            },
+            "value": "default-2"
+          },
+          {
+            "restrictions": {},
+            "value": "default-catchall"
+          }
+        ]
+      }
+    ]
+  }

@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import EventNames from '../event-names';
 import checkoutIssues from '../checkout-issues';
-import { CHEKOUT_ERROR_FORM_TYPE } from '../constants';
+import { CHECKOUT_ERROR_FORM_TYPE } from '../constants';
 
 class CreateGuestUserError extends Error {
     constructor (message) {
@@ -29,7 +29,7 @@ class UpdateCheckoutAccessForbiddenError extends UpdateCheckoutError {
         super(error);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.logMessage = 'Checkout Update Failure: Access Forbidden';
-        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
+        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.accessForbidden;
         this.logMethod = logger.logWarn;
     }
 }
@@ -57,7 +57,7 @@ class GetCheckoutError extends Error {
         this.logMessage = 'Get Checkout Failure';
         this.errorCode = errorCode;
         this.shouldShowInDialog = false;
-        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.default;
+        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.default;
     }
 }
 
@@ -66,7 +66,7 @@ class GetCheckoutAccessForbiddenError extends GetCheckoutError {
         super(message, 403);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.logMessage = 'Get Checkout Failure: Access Forbidden';
-        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.accessForbidden;
+        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.accessForbidden;
         this.logMethod = logger.logWarn;
     }
 }
@@ -79,7 +79,7 @@ class AvailableFulfilmentGetError extends Error {
         this.logMessage = 'Get Checkout Available Fulfilment Times Failure';
         this.errorCode = errorCode;
         this.shouldShowInDialog = false;
-        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.default;
+        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.default;
     }
 }
 
@@ -91,7 +91,7 @@ class GetBasketError extends Error {
         this.logMessage = 'Get Basket Failure';
         this.errorCode = errorCode;
         this.shouldShowInDialog = false;
-        this.errorFormType = CHEKOUT_ERROR_FORM_TYPE.default;
+        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.default;
     }
 }
 
