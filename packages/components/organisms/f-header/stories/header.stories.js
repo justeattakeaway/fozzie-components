@@ -18,7 +18,10 @@ const userInfo = {
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs, withA11y]
+    decorators: [withKnobs, withA11y],
+    parameters: {
+        layout: 'fullscreen'
+    }
 };
 
 export const HeaderComponent = () => ({
