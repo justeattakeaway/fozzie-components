@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.10.0
+------------------------------
+*July 20, 2021*
+
+### Added
+- `trailing-icon` and `leading-icon` named slots for ability to add an icon befor or after button text
+- `hasLeadingIcon` and `hasTrailingIcon` props for spacing and icon colours css classes to be added
+
+### Changed
+- Button paddings to be aligned with the PIE designs
+- XSmall button font size to be aligned with the PIE designs
+
+
 v1.9.0
 ------------------------------
 *July 7, 2021*

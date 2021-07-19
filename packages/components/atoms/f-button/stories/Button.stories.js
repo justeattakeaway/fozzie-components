@@ -5,6 +5,7 @@ import {
     text
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
+import { EyeglassIcon } from '@justeat/f-vue-icons';
 import { VALID_BUTTON_TYPES, VALID_BUTTON_SIZES } from '../src/constants';
 import FButton from '../src/components/Button.vue';
 
@@ -15,7 +16,8 @@ export default {
 
 export const ButtonComponent = () => ({
     components: {
-        FButton
+        FButton,
+        EyeglassIcon
     },
 
     props: {
@@ -45,6 +47,14 @@ export const ButtonComponent = () => ({
 
         href: {
             default: text('href', '')
+        },
+
+        showTrailingIcon: {
+            default: boolean('hasTrailingIcon', false)
+        },
+
+        showLeadingIcon: {
+            default: boolean('hasLeadingIcon', false)
         }
     },
 
@@ -57,9 +67,17 @@ export const ButtonComponent = () => ({
             :actionType="actionType"
             :href="href"
             :isIcon="false"
-            :isLoading="isLoading">
+            :isLoading="isLoading"
+            :hasTrailingIcon="showTrailingIcon"
+            :hasLeadingIcon="showLeadingIcon">
+            <template v-if="showLeadingIcon" #leading-icon>
+                <eyeglass-icon />
+            </template>
             Default Button Text
-        </f-button>`
+            <template v-if="showTrailingIcon" #trailing-icon>
+                <eyeglass-icon />
+            </template>
+            </f-button>`
 });
 
 ButtonComponent.storyName = 'Button';

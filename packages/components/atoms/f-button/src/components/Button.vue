@@ -14,19 +14,37 @@
         v-bind="$attrs"
         :aria-live="getAriaLive"
         :aria-busy="isLoading"
-        v-on="!isLoading && $listeners"
-    >
+        v-on="!isLoading && $listeners">
         <span
             v-if="isLoading"
             :class="$style['c-spinner']"
             :data-test-id="`${componentType}-spinner`" />
-
         <span
-            :class="[
-                $style['o-btn-text'],
-                (isLoading ? $style['o-btn-text--hidden'] : '')
-            ]">
-            <slot />
+            :class="$style['o-button-content']">
+
+            <span
+                :class="[
+                    (hasLeadingIcon ? $style['o-btn-icon'] : ''),
+                    (hasLeadingIcon ? $style['o-btn-icon--leading'] : '')
+                ]">
+                <slot name='leading-icon' />
+            </span>
+
+            <span
+                :class="[
+                    $style['o-btn-text'],
+                    (isLoading ? $style['o-btn-text--hidden'] : '')
+                ]">
+                <slot />
+            </span>
+
+            <span
+                :class="[
+                    (hasTrailingIcon ? $style['o-btn-icon'] : ''),
+                    (hasTrailingIcon ? $style['o-btn-icon--trailing'] : '')
+                ]">
+                <slot name='trailing-icon' />
+            </span>
         </span>
     </component>
 </template>
@@ -65,6 +83,14 @@ export default {
             default: false
         },
         isLoading: {
+            type: Boolean,
+            default: false
+        },
+        hasTrailingIcon: {
+            type: Boolean,
+            default: false
+        },
+        hasLeadingIcon: {
             type: Boolean,
             default: false
         }
@@ -145,7 +171,7 @@ $btn-default-borderRadius              : $border-radius;
 $btn-default-font-family               : $font-family-base;
 $btn-default-font-size                 : 'body-l';
 $btn-default-weight                    : $font-weight-bold;
-$btn-default-padding                   : 11px 1.5em 13px;
+$btn-default-padding                   : 12px 24px;
 $btn-default-outline-color             : $color-focus;
 $btn-default-loading-opacity           : 0.35;
 
@@ -192,14 +218,17 @@ $btn-disabled-bgColor                  : $color-disabled-01;
 $btn-disabled-textColor                : $color-content-disabled;
 
 $btn-sizeLarge-font-size               : 'heading-s';
-$btn-sizeLarge-padding                 : 13px 1.2em 15px;
+$btn-sizeLarge-padding                 : 14px 24px;
 $btn-sizeLarge-loading-color           : $color-content-interactive-primary;
 $btn-sizeLarge-loading-colorOpaque     : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
+$btn-sizeLarge-iconHeight              : 23.5px;
 
-$btn-sizeSmall-padding                 : 7px 1em 9px;
+$btn-sizeSmall-padding                 : 8px 16px;
+$btn-sizeSmall-iconHeight              : 20px;
 
-$btn-sizeXSmall-padding                : 5px 0.5em 7px;
-$btn-sizeXSmall-lineHeight             : 1;
+$btn-sizeXSmall-font-size              : 'body-s';
+$btn-sizeXSmall-padding                : 6px 8px;
+$btn-sizeXSmall-iconHeight             : 15.5px;
 
 $btn-icon-sizeLarge-buttonSize         : 56px; // button--icon is a sircle so width and height can use one var
 $btn-icon-sizeLarge-iconSize           : 21px;
@@ -262,17 +291,34 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         text-decoration: none;
     }
 }
-
-    .o-btn-text {
+    .o-button-content {
         display: flex;
         justify-content: center;
+        align-items: center;
     }
+
     // Visually hide button text (used for loading states)
     .o-btn-text--hidden {
         visibility: hidden;
     }
 
+    .o-btn-icon,
+    .o-btn-icon svg {
+        height: $btn-sizeLarge-iconHeight;
+    }
 
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $color-grey-50;
+    }
+
+    .o-btn-icon--leading {
+        margin-right: spacing();
+    }
+
+    .o-btn-icon--trailing {
+        margin-left: spacing();
+    }
 
 /**
  * Modifier – .o-btn--primary
@@ -306,6 +352,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-primary-loading-color, $btn-primary-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-primary-textColor;
+    }
 }
 
 /**
@@ -328,6 +379,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-secondary-loading-color, $btn-secondary-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-secondary-textColor;
+    }
 }
 
 /**
@@ -357,6 +413,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-outline-loading-color, $btn-outline-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-outline-textColor;
+    }
 }
 
 /**
@@ -385,6 +446,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-ghost-loading-color, $btn-ghost-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-ghost-textColor;
+    }
 }
 
 /**
@@ -414,6 +480,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-ghostTertiary-loading-color, $btn-ghostTertiary-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-ghostTertiary-textColor;
+    }
 }
 
 /**
@@ -445,6 +516,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-link-loading-color, $btn-link-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $color-content-link;
+    }
 }
 
 /**
@@ -578,11 +654,21 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
 
 .o-btn--sizeSmall {
     padding: $btn-sizeSmall-padding;
+
+    .o-btn-icon,
+    .o-btn-icon svg {
+        height: $btn-sizeSmall-iconHeight;
+    }
 }
 
 .o-btn--sizeXSmall {
+    @include font-size($btn-sizeXSmall-font-size);
     padding: $btn-sizeXSmall-padding;
-    line-height: $btn-sizeXSmall-lineHeight;
+
+    .o-btn-icon,
+    .o-btn-icon svg {
+        height: $btn-sizeXSmall-iconHeight;
+    }
 }
 
 /**
@@ -623,6 +709,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         &:hover {
             background-color: $btn-disabled-bgColor;
             color: $btn-disabled-textColor;
+        }
+
+        .o-btn-icon svg use,
+        .o-btn-icon svg path {
+            fill: $btn-disabled-textColor;
         }
     }
 }
