@@ -89,7 +89,7 @@ The props that can be defined are as follows:
 | `isLoading`   | `Boolean`         | No         | `false`  | When true, replaces the text with a loading spinner, and it prevents any further interaction with the button (e.g. `click`). |
 | `href`        | `String`          | No         | `null`   | When set, generated markup is Anchor element e.g. <a> |
 | `to`          | `String, Object`  | No         | `null`   | When set, generated markup is Anchor element e.g. <a>. Additionally it allows to work with host App defined routes. |
-|`hasIcon`      | `String, Boolean` | No         | `false`  | Adds css styles for an icon which you can pass via named slot (`leading-icon`/`trailing-icon`).<br>Options: `leading` and `trailing`. |
+|`hasIcon`      | `String, Boolean` | No         | `false`  | When set, allows to add an icon which you can pass via named slot (`leading-icon`/`trailing-icon`).<br>Options: `leading` and `trailing`. |
 
 ### CSS Classes
 

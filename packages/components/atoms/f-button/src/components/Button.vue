@@ -23,6 +23,7 @@
             :class="$style['o-button-content']">
 
             <span
+                v-if="hasIcon && hasIcon === 'leading'"
                 :class="(hasIcon === 'leading' ? [$style['o-btn-icon'], $style['o-btn-icon--leading']] : '')">
                 <slot name='leading-icon' />
             </span>
@@ -36,6 +37,7 @@
             </span>
 
             <span
+                v-if="hasIcon && hasIcon === 'trailing'"
                 :class="(hasIcon === 'trailing' ? [$style['o-btn-icon'], $style['o-btn-icon--trailing']] : '')">
                 <slot name='trailing-icon' />
             </span>
@@ -229,7 +231,7 @@ $btn-sizeSmall-iconSpacing             : 2.5px;
 $btn-sizeSmall-iconSideSpacing         : $btn-sizeSmall-iconSpacing + spacing();
 
 $btn-sizeXSmall-font-size              : 'body-s';
-$btn-sizeXSmall-padding                : 6px 8px;
+$btn-sizeXSmall-padding                : 6px spacing();
 $btn-sizeXSmall-iconHeight             : 12px;
 $btn-sizeXSmall-iconSpacing            : 2px;
 $btn-sizeXSmall-iconSideSpacing        : $btn-sizeXSmall-iconSpacing + spacing();

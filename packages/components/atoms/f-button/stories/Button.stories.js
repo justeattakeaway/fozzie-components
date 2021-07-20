@@ -69,11 +69,11 @@ export const ButtonComponent = () => ({
             :isIcon="false"
             :isLoading="isLoading"
             :hasIcon="hasIcon">
-            <template v-if="hasIcon ==='leading'" #leading-icon>
+            <template #leading-icon>
                 <eyeglass-icon />
             </template>
             Label
-            <template v-if="hasIcon ==='trailing'" #trailing-icon>
+            <template #trailing-icon>
                 <eyeglass-icon />
             </template>
             </f-button>`
