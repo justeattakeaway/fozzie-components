@@ -35,11 +35,9 @@ describe('TakeawaypayActivation', () => {
 
     it('should render ActivationFailed component', () => {
         const wrapper = shallowMount(TakeawaypayActivation, {
-            data: () => {
-                return {
-                    activationState: 'none'
-                }
-            },   
+            data: () => ({
+                activationState: 'none'
+            }),
             i18n,
             localVue,
             propsData
@@ -51,11 +49,9 @@ describe('TakeawaypayActivation', () => {
 
     it('should render ActivationSuccessful component', () => {
         const wrapper = shallowMount(TakeawaypayActivation, {
-            data: () => {
-                return {
-                    activationState: 'succeeded'
-                }
-            },   
+            data: () => ({
+                activationState: 'succeeded'
+            }),
             i18n,
             localVue,
             propsData
@@ -67,11 +63,9 @@ describe('TakeawaypayActivation', () => {
 
     it('should render ActivationLoggedIn component', () => {
         const wrapper = shallowMount(TakeawaypayActivation, {
-            data: () => {
-                return {
-                    activationState: 'available_logged_in'
-                }
-            },   
+            data: () => ({
+                activationState: 'available_logged_in'
+            }),
             i18n,
             localVue,
             propsData
@@ -83,11 +77,9 @@ describe('TakeawaypayActivation', () => {
 
     it('should render ActivationNotLoggedIn component', () => {
         const wrapper = shallowMount(TakeawaypayActivation, {
-            data: () => {
-                return {
-                    activationState: 'available_not_logged_in'
-                }
-            },   
+            data: () => ({
+                activationState: 'available_not_logged_in'
+            }),
             i18n,
             localVue,
             propsData

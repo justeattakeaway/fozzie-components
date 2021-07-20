@@ -20,7 +20,7 @@ describe('ActivationNotLoggedIn', () => {
         locale: 'en-GB'
     };
 
-    it('should be defined', () => {    
+    it('should be defined', () => {
         const wrapper = shallowMount(ActivationNotLoggedIn, {
             i18n,
             localVue,

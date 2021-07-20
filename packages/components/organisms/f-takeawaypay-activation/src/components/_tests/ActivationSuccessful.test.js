@@ -19,7 +19,7 @@ describe('ActivationSuccessful', () => {
         locale: 'en-GB'
     };
 
-    it('should be defined', () => {    
+    it('should be defined', () => {
         const wrapper = shallowMount(ActivationSuccessful, {
             i18n,
             localVue,

@@ -23,7 +23,7 @@ describe('ActivationLoggedIn', () => {
         consumerEmail: 'test@mail.com'
     };
 
-    it('should be defined', () => {    
+    it('should be defined', () => {
         const wrapper = shallowMount(ActivationLoggedIn, {
             i18n,
             localVue,
@@ -45,11 +45,9 @@ describe('ActivationLoggedIn', () => {
 
     it('should be rendered correctly while activation is in progress', () => {
         const wrapper = mount(ActivationLoggedIn, {
-            data: () => {
-                return {
-                    activationInProgress: true
-                }
-            },   
+            data: () => ({
+                activationInProgress: true
+            }),
             i18n,
             localVue,
             propsData
@@ -62,7 +60,7 @@ describe('ActivationLoggedIn', () => {
     describe('methods ::', () => {
         describe('activate ::', () => {
             let wrapper;
-            
+
             afterEach(() => {
                 jest.clearAllMocks();
             });
