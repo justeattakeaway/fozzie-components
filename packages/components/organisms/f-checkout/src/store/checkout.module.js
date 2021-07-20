@@ -1,8 +1,12 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_EXPERIMENTATION_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
-import { version as applicationVerion } from '../../package.json';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
+import basketApi from '../services/basketApi';
+import checkoutApi from '../services/checkoutApi';
+import addressGeocodingApi from '../services/addressGeocodingApi';
+import orderPlacementApi from '../services/orderPlacementApi';
+import accountApi from '../services/accountApi';
 
 import {
     UPDATE_ADDRESS,
@@ -26,7 +30,6 @@ import {
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
-
 /**
  * @param {String} code - The code returned by an API.
  * @returns {object} - An object with the issue's desired behaviours and the code.
@@ -130,20 +133,8 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
             // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    })
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
 
@@ -159,25 +150,19 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        // eslint-disable-next-line no-unused-vars
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
         }, { url, data, timeout }) => {
-            // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-            const experimentationHeaders = rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    }),
-                    ...experimentationHeaders
-                },
+            const request = {
+                url,
+                state,
+                rootGetters,
+                data,
                 timeout
             };
 
-            const { data: responseData, headers } = await axios.patch(url, data, config);
+            const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
+
             const { issues, isFulfillable } = responseData;
 
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
@@ -199,17 +184,8 @@ export default {
         createGuestUser: async ({ commit }, {
             url, tenant, data, timeout, otacToAuthExchanger
         }) => {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant
-                },
-                timeout
-            };
-
-            const response = await axios.post(url, data, config);
-            // eslint-disable-next-line no-unused-vars
-            const otac = response.data.token;
+            const response = await accountApi.createGuestUser(url, data, timeout, tenant);
+            const otac = response?.data?.token;
             const authToken = await otacToAuthExchanger(otac);
             commit(UPDATE_AUTH_GUEST, authToken);
         },
@@ -221,15 +197,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
-            // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
         },
@@ -247,16 +215,7 @@ export default {
             timeout
         }) => {
             // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant,
-                    'Accept-Language': language
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await basketApi.getBasket(url, tenant, language, timeout);
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurant: {
@@ -347,19 +306,7 @@ export default {
             url, data, timeout
         }) => {
             try {
-                const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json;v=2',
-                        'x-je-application-id': 7, // Responsive Web
-                        'x-je-application-version': applicationVerion,
-                        Authorization: authHeader
-                    },
-                    timeout
-                };
-
-                const response = await axios.post(url, data, config);
+                const response = await orderPlacementApi.placeOrder(url, data, timeout, state);
 
                 const { orderId } = response.data;
 
@@ -409,17 +356,7 @@ export default {
             }
 
             if (!addressCoords && state.authToken) {
-                const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: authHeader
-                    },
-                    timeout
-                };
-
-                const { data } = await axios.post(url, postData, config);
+                const { data } = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
 
                 commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
             }
