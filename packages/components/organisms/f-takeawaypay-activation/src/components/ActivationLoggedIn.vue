@@ -8,7 +8,7 @@
         </h1>
 
         <p>
-            {{ $t('messages.descriptionActivationAvailable1') }} <span :class="$style['c-takeawaypayActivation-email']">test@mail.com</span>
+            {{ $t('messages.descriptionActivationAvailable1') }} <span :class="$style['c-takeawaypayActivation-email']">{{ consumerEmail }}</span>
         </p>
 
         <p>
@@ -17,15 +17,18 @@
 
         <div :class="$style['c-takeawaypayActivation-actions']">
             <f-button
-                :class="$style['c-registration-submit']"
+                :disabled="activationInProgress"
+                :is-loading="activationInProgress"
                 data-test-id="takeawaypay-activation-activate-button"
                 button-type="primary"
                 button-size="large"
-                is-full-width>
+                is-full-width
+                @click="activate">
                 {{ $t('actions.activateTakeawayPay') }}
             </f-button>
 
             <f-button
+                v-if="!activationInProgress"
                 :href="loginUrl"
                 data-test-id="takeawaypay-activation-loggedin-login-link"
                 button-type="outline"
@@ -35,6 +38,7 @@
             </f-button>
 
             <f-button
+                v-if="!activationInProgress"
                 :href="registrationUrl"
                 data-test-id="takeawaypay-activation-loggedin-registration-link"
                 button-type="outline"
@@ -50,6 +54,7 @@
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { BagCelebrateBgIcon } from '@justeat/f-vue-icons';
+import TakeawaypayActivationServiceApi from '../services/TakeawaypayActivationServiceApi';
 
 export default {
 
@@ -66,6 +71,37 @@ export default {
         registrationUrl: {
             type: String,
             required: true
+        },
+        activateUrl: {
+            type: String,
+            required: true
+        },
+        authToken: {
+            type: String,
+            required: true
+        },
+        consumerId: {
+            type: String,
+            required: true
+        },
+        consumerEmail: {
+            type: String,
+            required: true
+        }
+    },
+
+    data () {
+        return {
+            activationInProgress: false
+        };
+    },
+
+    methods: {
+        async activate () {
+            this.activationInProgress = true;
+            const activationSuccessful = await TakeawaypayActivationServiceApi.activate(this.activateUrl, this.authToken, this.consumerId);
+            this.$emit('activation-result', activationSuccessful);
+            this.activationInProgress = false;
         }
     }
 };

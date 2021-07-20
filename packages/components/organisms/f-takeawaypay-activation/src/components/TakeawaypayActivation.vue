@@ -6,20 +6,17 @@
             card-heading-position="center"
             data-test-id="takeawaypay-activation-component"
             :class="$style['c-takeawaypayActivation-card']">
-            <activation-logged-in
-                :login-url="loginUrl"
-                :registration-url="registrationUrl" />
-            <activation-not-logged-in
-                :login-url="loginUrl"
-                :registration-url="registrationUrl" />
-            <activation-successful
-                :home-url="homeUrl" />
-            <activation-failed />
+            <component
+                :is="activationStateComponent.name"
+                ref="activationStateComponent"
+                v-bind="activationStateComponent.props"
+                @activation-result="handleActivationResult" />
         </card-component>
     </div>
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
@@ -28,6 +25,14 @@ import ActivationLoggedIn from './ActivationLoggedIn.vue';
 import ActivationNotLoggedIn from './ActivationNotLoggedIn.vue';
 import ActivationSuccessful from './ActivationSuccessful.vue';
 import ActivationFailed from './ActivationFailed.vue';
+import TakeawaypayActivationServiceApi from '../services/TakeawaypayActivationServiceApi';
+import {
+    ACTIVATION_STATE_NONE,
+    ACTIVATION_STATE_AVAILABLE_LOGGED_IN,
+    ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN,
+    ACTIVATION_STATE_SUCCEEDED,
+    ACTIVATION_STATE_FAILED
+} from '../constants';
 
 export default {
 
@@ -44,6 +49,14 @@ export default {
     ],
 
     props: {
+        getActivationStatusUrl: {
+            type: String,
+            required: true
+        },
+        activateUrl: {
+            type: String,
+            required: true
+        },
         loginUrl: {
             type: String,
             required: true
@@ -55,12 +68,107 @@ export default {
         homeUrl: {
             type: String,
             required: true
+        },
+        authToken: {
+            type: String,
+            default: ''
         }
     },
     data () {
         return {
-            tenantConfigs
+            tenantConfigs,
+            consumerId: '',
+            consumerEmail: '',
+            activationState: ACTIVATION_STATE_NONE
         };
+    },
+
+    computed: {
+        activationStateComponent () {
+            if (this.activationState === ACTIVATION_STATE_AVAILABLE_LOGGED_IN) {
+                return this.activationLoggedIn;
+            }
+
+            if (this.activationState === ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN) {
+                return this.activationNotLoggedIn;
+            }
+
+            if (this.activationState === ACTIVATION_STATE_SUCCEEDED) {
+                return this.activationSucceeded;
+            }
+            return this.activationFailed;
+        },
+
+        activationFailed () {
+            return {
+                name: 'activation-failed',
+                props: {
+                    'redirect-url': this.redirectUrl
+                }
+            };
+        },
+
+        activationSucceeded () {
+            return {
+                name: 'activation-successful',
+                props: {
+                    'home-url': this.homeUrl
+                }
+            };
+        },
+
+        activationLoggedIn () {
+            return {
+                name: 'activation-logged-in',
+                props: {
+                    'login-url': this.loginUrl,
+                    'registration-url': this.registrationUrl,
+                    'activate-url': this.activateUrl,
+                    'auth-token': this.authToken,
+                    'consumer-id': this.consumerId,
+                    'consumer-email': this.consumerEmail
+                }
+            };
+        },
+
+        activationNotLoggedIn () {
+            return {
+                name: 'activation-not-logged-in',
+                props: {
+                    'login-url': this.loginUrl,
+                    'registration-url': this.registrationUrl
+                }
+            };
+        }
+    },
+
+    async mounted () {
+        await this.initialize();
+    },
+
+    methods: {
+        async initialize () {
+            const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl);
+
+            if (available) {
+                if (this.authToken) {
+                    this.activationState = ACTIVATION_STATE_AVAILABLE_LOGGED_IN;
+                    this.extractConsumerDetails();
+                } else {
+                    this.activationState = ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN;
+                }
+            } else {
+                this.activationState = ACTIVATION_STATE_FAILED;
+            }
+        },
+        async extractConsumerDetails () {
+            const tokenData = jwtDecode(this.authToken);
+            this.consumerId = tokenData.sub;
+            this.consumerEmail = tokenData.email;
+        },
+        handleActivationResult (successful) {
+            this.activationState = successful ? ACTIVATION_STATE_SUCCEEDED : ACTIVATION_STATE_FAILED;
+        }
     }
 };
 </script>
