@@ -14,7 +14,8 @@ export default {
                     'duplicate-id': { enabled: false }
                 }
             }
-        }
+        },
+        layout: 'fullscreen'
     }
 };
 
