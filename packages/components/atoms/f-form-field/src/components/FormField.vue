@@ -292,16 +292,16 @@ export default {
             return this.$attrs.disabled === 'disabled';
         },
 
-        canDisplayIcon () {
+        isValidIconField () {
             return VALID_ICON_INPUT_TYPES.includes(this.inputType);
         },
 
         hasLeftIcon () {
-            return this.$slots['icon-left'] && this.canDisplayIcon;
+            return this.$slots['icon-left'] && this.isValidIconField;
         },
 
         hasRightIcon () {
-            return this.$slots['icon-right'] && this.canDisplayIcon && !this.isDropdown;
+            return this.$slots['icon-right'] && this.isValidIconField && !this.isDropdown;
         }
     },
 
@@ -335,7 +335,6 @@ export default {
 <style lang="scss" module>
 $small-icon-position            : 11px;
 $medium-icon-position           : 15px;
-$default-icon-position          : 19px;
 
 .c-formField {
     & + & {
@@ -400,6 +399,7 @@ $default-icon-position          : 19px;
             }
         }
     }
+
     .c-formField-icon--disabled {
         svg {
             path {
@@ -407,6 +407,7 @@ $default-icon-position          : 19px;
             }
         }
     }
+
     .c-formField-icon--small {
         @include icon-position($small-icon-position);
     }
@@ -425,5 +426,13 @@ $default-icon-position          : 19px;
 
     .c-formField-icon--right {
         @include icon-position($default-icon-position, 'right');
+    }
+
+    .c-formField-padding--iconLeft {
+        padding-left: $formField-icon-padding;
+    }
+
+    .c-formField-padding--iconRight {
+        padding-right: $formField-icon-padding;
     }
 </style>

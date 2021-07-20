@@ -12,6 +12,8 @@ const $style = {
     'c-formField-field--large': 'c-formField-field--large'
 };
 
+const slot = '<div>ICON</div>';
+
 describe('FormField', () => {
     it('should be defined', () => {
         const propsData = {};
@@ -299,6 +301,161 @@ describe('FormField', () => {
 
                 // Assert
                 expect(wrapper.vm.isDisabled).toEqual(expected);
+            });
+        });
+
+        describe('isValidIconField :: ', () => {
+            it.each([
+                [true, 'email'],
+                [true, 'password'],
+                [true, 'dropdown'],
+                [true, 'number'],
+                [true, 'tel'],
+                [false, 'radio'],
+                [false, 'checkbox']
+            ])('should return %s if `inputType` is %s', (expected, inputType) => {
+                // Arrange
+                const propsData = {
+                    inputType
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                // Assert
+                expect(wrapper.vm.isValidIconField).toEqual(expected);
+            });
+        });
+
+        describe('hasLeftIcon :: ', () => {
+            describe('when `validIconField` is true', () => {
+                // Arrange
+                let wrapper;
+                const propsData = {
+                    inputType: 'text'
+                };
+
+                it('should `true` when slots contain `icon-left`', () => {
+                    // Act
+                    wrapper = shallowMount(FormField, {
+                        propsData,
+                        slots: {
+                            'icon-left': slot
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasLeftIcon).toEqual(true);
+                });
+
+                it('should `undefined` when slots do not contain `icon-left`', () => {
+                    // Act
+                    wrapper = shallowMount(FormField, {
+                        propsData,
+                        slots: null
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasLeftIcon).toEqual(undefined);
+                });
+            });
+
+            describe('when `validIconField` is false', () => {
+                // Arrange
+                let wrapper;
+                const propsData = {
+                    inputType: 'textarea'
+                };
+
+                it('should `false` when slots contain `icon-left`', () => {
+                    // Act
+                    wrapper = shallowMount(FormField, {
+                        propsData,
+                        slots: {
+                            'icon-left': slot
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasLeftIcon).toEqual(false);
+                });
+
+                it('should `false` when slots do not contain `icon-left`', () => {
+                    // Act
+                    wrapper = shallowMount(FormField, {
+                        propsData,
+                        slots: undefined
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasLeftIcon).toEqual(undefined);
+                });
+            });
+        });
+
+        describe('hasRightIcon :: ', () => {
+            describe('when `validIconField` is true', () => {
+                // Arrange
+                let wrapper;
+                const propsData = {
+                    inputType: 'text'
+                };
+
+                it('should `true` when slots contain `icon-right`', () => {
+                    // Act
+                    wrapper = shallowMount(FormField, {
+                        propsData,
+                        slots: {
+                            'icon-right': slot
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasRightIcon).toEqual(true);
+                });
+
+                it('should `undefined` when slots do not contain `icon-right`', () => {
+                    // Act
+                    wrapper = shallowMount(FormField, {
+                        propsData,
+                        slots: null
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasRightIcon).toEqual(undefined);
+                });
+            });
+
+            describe('when `validIconField` is false', () => {
+                // Arrange
+                let wrapper;
+                const propsData = {
+                    inputType: 'textarea'
+                };
+
+                it('should `false` when slots contain `icon-right`', () => {
+                    // Act
+                    wrapper = shallowMount(FormField, {
+                        propsData,
+                        slots: {
+                            'icon-right': slot
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasRightIcon).toEqual(false);
+                });
+
+                it('should `false` when slots do not contain `icon-right`', () => {
+                    // Act
+                    wrapper = shallowMount(FormField, {
+                        propsData,
+                        slots: undefined
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasRightIcon).toEqual(undefined);
+                });
             });
         });
     });
