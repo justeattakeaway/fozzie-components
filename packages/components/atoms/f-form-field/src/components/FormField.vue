@@ -71,7 +71,9 @@
                     $style['c-formField-field'],
                     $style[`c-formField-field--${fieldSize}`], {
                         [$style['c-formField-field--noFocus']]: isSelectionControl,
-                        [$style['c-formField--invalid']]: hasError
+                        [$style['c-formField--invalid']]: hasError,
+                        [$style['c-formField-padding--iconLeft']]: hasLeftIcon,
+                        [$style['c-formField-padding--iconRight']]: hasRightIcon
                     }]"
                 v-on="listeners"
             >
@@ -85,6 +87,32 @@
                 :data-test-id="`${testId.label}--inline`">
                 {{ labelText }}
             </form-label>
+
+            <span
+                v-if="hasLeftIcon"
+                :class="[
+                    $style['c-formField-icon'],
+                    $style[`c-formField-icon--${fieldSize}`] ,
+                    $style[`c-formField-icon--left`],
+                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                ]">
+                <slot
+                    name="icon-left"
+                />
+            </span>
+
+            <span
+                v-if="hasRightIcon"
+                :class="[
+                    $style['c-formField-icon'],
+                    $style[`c-formField-icon--${fieldSize}`] ,
+                    $style[`c-formField-icon--right`],
+                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                ]">
+                <slot
+                    name="icon-right"
+                />
+            </span>
         </div>
         <slot name="error" />
     </div>
@@ -100,6 +128,7 @@ import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
+    VALID_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES,
     VALID_LABEL_STYLES,
@@ -260,6 +289,18 @@ export default {
 
         isDisabled () {
             return this.$attrs.disabled === 'disabled';
+        },
+
+        canDisplayIcon () {
+            return VALID_ICON_INPUT_TYPES.includes(this.inputType);
+        },
+
+        hasLeftIcon () {
+            return this.$slots['icon-left'] && this.canDisplayIcon;
+        },
+
+        hasRightIcon () {
+            return this.$slots['icon-right'] && this.canDisplayIcon && !this.isDropdown;
         }
     },
 
@@ -291,6 +332,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+$small-icon-position            : 11px;
+$medium-icon-position           : 15px;
+$default-icon-position          : 19px;
+$formField-icon-padding         : spacing(x7);
+
 .c-formField {
     & + & {
         margin-top: spacing(x2);
@@ -341,5 +387,51 @@ export default {
     .c-formField-label-description {
         display: block;
         font-weight: normal;
+    }
+
+    .c-formField-icon {
+        svg {
+            position: absolute;
+            display: block;
+            height: 18px;
+            width: 18px;
+            path {
+                fill: $color-content-subdued;
+            }
+        }
+    }
+    .c-formField-icon--disabled {
+        svg {
+            path {
+                fill: $color-content-disabled;
+            }
+        }
+    }
+    .c-formField-icon--small {
+        @include icon-position($small-icon-position);
+    }
+
+    .c-formField-icon--medium {
+        @include icon-position($medium-icon-position);
+    }
+
+    .c-formField-icon--large {
+        @include icon-position($default-icon-position);
+    }
+
+    .c-formField-icon--left {
+        @include icon-position($default-icon-position, 'left');
+    }
+
+    .c-formField-icon--right {
+        @include icon-position($default-icon-position, 'right');
+    }
+
+    .c-formField-padding--iconRight {
+        padding-right: $formField-icon-padding;
+    }
+
+    .c-formField-padding--iconLeft {
+        padding-left: $formField-icon-padding;
     }
 </style>
