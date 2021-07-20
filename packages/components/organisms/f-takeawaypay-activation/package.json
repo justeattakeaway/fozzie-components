@@ -3,7 +3,7 @@
   "description": "Fozzie TakeawayPay Activation - Handles Takeaway Pay activation for users",
   "version": "0.4.0",
   "main": "dist/f-takeawaypay-activation.umd.min.js",
-  "maxBundleSize": "20kB",
+  "maxBundleSize": "40kB",
   "files": [
     "dist",
     "test-utils" ,
