@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div data-test-id="activation-logged-in-component">
         <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
         <h1
@@ -26,7 +26,6 @@
                 @click="activate">
                 {{ $t('actions.activateTakeawayPay') }}
             </f-button>
-
             <f-button
                 v-if="!activationInProgress"
                 :href="loginUrl"
@@ -36,7 +35,6 @@
                 is-full-width>
                 {{ $t('actions.loginToAccount1') }}
             </f-button>
-
             <f-button
                 v-if="!activationInProgress"
                 :href="registrationUrl"

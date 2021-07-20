@@ -14,18 +14,86 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 
 describe('TakeawaypayActivation', () => {
+    const propsData = {
+        getActivationStatusUrl: '/status',
+        activateUrl: '/activate',
+        loginUrl: '/login',
+        registrationUrl: '/register',
+        homeUrl: '/',
+        authToken: 'token',
+        locale: 'en-GB'
+    };
+
     it('should be defined', () => {
-        const propsData = {
-            loginUrl: '/login',
-            registrationUrl: '/register',
-            homeUrl: '/',
-            locale: 'en-GB'
-        };
         const wrapper = shallowMount(TakeawaypayActivation, {
             i18n,
             localVue,
             propsData
         });
         expect(wrapper.exists()).toBe(true);
+    });
+
+    it('should render ActivationFailed component', () => {
+        const wrapper = shallowMount(TakeawaypayActivation, {
+            data: () => {
+                return {
+                    activationState: 'none'
+                }
+            },   
+            i18n,
+            localVue,
+            propsData
+        });
+        const container = wrapper.find('[data-test-id="takeawaypay-activation-component"]');
+
+        expect(container).toMatchSnapshot();
+    });
+
+    it('should render ActivationSuccessful component', () => {
+        const wrapper = shallowMount(TakeawaypayActivation, {
+            data: () => {
+                return {
+                    activationState: 'succeeded'
+                }
+            },   
+            i18n,
+            localVue,
+            propsData
+        });
+        const container = wrapper.find('[data-test-id="takeawaypay-activation-component"]');
+
+        expect(container).toMatchSnapshot();
+    });
+
+    it('should render ActivationLoggedIn component', () => {
+        const wrapper = shallowMount(TakeawaypayActivation, {
+            data: () => {
+                return {
+                    activationState: 'available_logged_in'
+                }
+            },   
+            i18n,
+            localVue,
+            propsData
+        });
+        const container = wrapper.find('[data-test-id="takeawaypay-activation-component"]');
+
+        expect(container).toMatchSnapshot();
+    });
+
+    it('should render ActivationNotLoggedIn component', () => {
+        const wrapper = shallowMount(TakeawaypayActivation, {
+            data: () => {
+                return {
+                    activationState: 'available_not_logged_in'
+                }
+            },   
+            i18n,
+            localVue,
+            propsData
+        });
+        const container = wrapper.find('[data-test-id="takeawaypay-activation-component"]');
+
+        expect(container).toMatchSnapshot();
     });
 });
