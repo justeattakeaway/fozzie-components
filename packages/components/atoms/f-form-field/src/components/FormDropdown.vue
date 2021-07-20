@@ -1,13 +1,18 @@
 <template>
     <div
-        :class="$style['c-formDropdown']"
         :data-test-id="testId.container">
         <caret-icon
             :class="$style['c-formDropdown-icon']"
             :data-test-id="testId.icon" />
         <select
             :id="$attrs.id"
-            :class="$style['c-formDropdown-select']"
+            :class="[
+                $style['c-formDropdown-select'],
+                $style['c-formField-field'],
+                $style[`c-formField-field--${fieldSize}`],
+                { [$style['c-formField--invalid']]: hasError }
+            ]"
+            :disabled="attributes.disabled"
             :data-test-id="testId.select"
             v-bind="attributes"
             :value="value"
@@ -45,6 +50,14 @@ export default {
         dropdownOptions: {
             type: Array,
             default: () => null
+        },
+        fieldSize: {
+            type: String,
+            default: 'medium'
+        },
+        hasError: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -84,20 +97,8 @@ export default {
 }
 
 .c-formDropdown-select {
-    padding: 0 spacing(x2);
-    height: 100%;
-    width: 100%;
-    font: inherit;
-    color: inherit;
-    background: transparent;
-    outline: none;
-
     /* Remove default styling */
-    border: none;
+    outline: none;
     appearance: none;
-
-    &:hover {
-        background-color: $form-input-bg--hover;
-    }
 }
 </style>
