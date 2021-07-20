@@ -333,8 +333,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-$small-icon-position            : 11px;
-$medium-icon-position           : 15px;
+$form-input-iconPosition--small            : 11px;
+$form-input-iconPosition--medium           : 15px;
+$form-input-iconSize                       : 18px;
 
 .c-formField {
     & + & {
@@ -391,9 +392,9 @@ $medium-icon-position           : 15px;
     .c-formField-icon {
         svg {
             position: absolute;
-            display: block;
-            height: 18px;
-            width: 18px;
+            height: $form-input-iconSize;
+            width: $form-input-iconSize;
+
             path {
                 fill: $color-content-subdued;
             }
@@ -409,30 +410,30 @@ $medium-icon-position           : 15px;
     }
 
     .c-formField-icon--small {
-        @include icon-position($small-icon-position);
+        @include icon-position($form-input-iconPosition--small);
     }
 
     .c-formField-icon--medium {
-        @include icon-position($medium-icon-position);
+        @include icon-position($form-input-iconPosition--medium);
     }
 
     .c-formField-icon--large {
-        @include icon-position($default-icon-position);
+        @include icon-position($form-input-iconPosition);
     }
 
     .c-formField-icon--left {
-        @include icon-position($default-icon-position, 'left');
+        @include icon-position($form-input-iconPosition, 'left');
     }
 
     .c-formField-icon--right {
-        @include icon-position($default-icon-position, 'right');
+        @include icon-position($form-input-iconPosition, 'right');
     }
 
     .c-formField-padding--iconLeft {
-        padding-left: $formField-icon-padding;
+        padding-left: $form-input-iconPadding;
     }
 
     .c-formField-padding--iconRight {
-        padding-right: $formField-icon-padding;
+        padding-right: $form-input-iconPadding;
     }
 </style>

@@ -89,20 +89,20 @@ export default {
 </script>
 
 <style lang="scss" module>
-$icon-positon--small              : 17px;
-$icon-positon--medium             : 21px;
-$icon-positon--large              : 25px;
+$form-dropdown-iconPosition--small              : 17px;
+$form-dropdown-iconPosition--medium             : 21px;
+$form-dropdown-iconPosition--large              : 25px;
 
 .c-formDropdown-padding-small {
-    @include icon-position($icon-positon--small);
+    @include icon-position($form-dropdown-iconPosition--small);
 }
 
 .c-formDropdown-padding-medium {
-    @include icon-position($icon-positon--medium);
+    @include icon-position($form-dropdown-iconPosition--medium);
 }
 
 .c-formDropdown-padding-large {
-    @include icon-position($icon-positon--large);
+    @include icon-position($form-dropdown-iconPosition--large);
 }
 
 .c-formDropdown-icon {
@@ -122,6 +122,6 @@ $icon-positon--large              : 25px;
     /* Remove default styling */
     outline: none;
     appearance: none;
-    padding-right: $formField-icon-padding;
+    padding-right: $form-input-iconPadding;
 }
 </style>
