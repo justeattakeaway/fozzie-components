@@ -131,6 +131,7 @@
                     button-type="primary"
                     button-size="large"
                     is-full-width
+                    action-type="submit"
                     :disabled="shouldDisableCreateAccountButton">
                     {{ copy.labels.createAccountBtn }}
                 </f-button>

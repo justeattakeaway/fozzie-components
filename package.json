@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.46.0",
+  "version": "3.48.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -30,11 +30,11 @@
     "webpack": "4.36.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.10.5",
-    "@babel/plugin-proposal-class-properties": "7.12.1",
-    "@babel/plugin-proposal-optional-chaining": "7.10.4",
-    "@babel/preset-env": "7.10.4",
-    "@justeat/browserslist-config-fozzie": "1.1.1",
+    "@babel/cli": "7.14.5",
+    "@babel/plugin-proposal-class-properties": "7.14.5",
+    "@babel/plugin-proposal-optional-chaining": "7.14.5",
+    "@babel/preset-env": "7.14.7",
+    "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/fozzie": "5.0.0-beta.8",
     "@justeat/stylelint-config-fozzie": "2.2.0",
