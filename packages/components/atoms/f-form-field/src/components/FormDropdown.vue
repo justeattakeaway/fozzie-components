@@ -1,5 +1,6 @@
 <template>
     <div
+        :class="$style[`c-formDropdown-icon-${fieldSize}`]"
         :data-test-id="testId.container">
         <caret-icon
             :class="$style['c-formDropdown-icon']"
@@ -9,9 +10,11 @@
             :class="[
                 $style['c-formDropdown-select'],
                 $style['c-formField-field'],
-                $style[`c-formField-field--${fieldSize}`],
-                { [$style['c-formField--invalid']]: hasError }
-            ]"
+                $style['c-formField-padding--iconLeft'],
+                $style[`c-formField-field--${fieldSize}`], {
+                    [$style['c-formField--invalid']]: hasError,
+                    [$style['c-formField-padding--iconLeft']]: hasIcon
+                }]"
             :disabled="attributes.disabled"
             :data-test-id="testId.select"
             v-bind="attributes"
@@ -58,6 +61,10 @@ export default {
         hasError: {
             type: Boolean,
             default: false
+        },
+        hasIcon: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -83,6 +90,22 @@ export default {
 </script>
 
 <style lang="scss" module>
+$icon-positon--small              : 17px;
+$icon-positon--medium             : 21px;
+$icon-positon--large              : 25px;
+
+.c-formDropdown-icon-small {
+    @include icon-position($icon-positon--small);
+}
+
+.c-formDropdown-icon-medium {
+    @include icon-position($icon-positon--medium);
+}
+
+.c-formDropdown-icon-large {
+    @include icon-position($icon-positon--large);
+}
+
 .c-formDropdown-icon {
     width: spacing(x1.5);
     position: absolute;
