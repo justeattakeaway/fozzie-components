@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="$style[`c-formDropdown-icon-${fieldSize}`]"
+        :class="$style[`c-formDropdown-padding-${fieldSize}`]"
         :data-test-id="testId.container">
         <caret-icon
             :class="$style['c-formDropdown-icon']"
@@ -10,7 +10,6 @@
             :class="[
                 $style['c-formDropdown-select'],
                 $style['c-formField-field'],
-                $style['c-formField-padding--iconLeft'],
                 $style[`c-formField-field--${fieldSize}`], {
                     [$style['c-formField--invalid']]: hasError,
                     [$style['c-formField-padding--iconLeft']]: hasIcon
@@ -94,15 +93,15 @@ $icon-positon--small              : 17px;
 $icon-positon--medium             : 21px;
 $icon-positon--large              : 25px;
 
-.c-formDropdown-icon-small {
+.c-formDropdown-padding-small {
     @include icon-position($icon-positon--small);
 }
 
-.c-formDropdown-icon-medium {
+.c-formDropdown-padding-medium {
     @include icon-position($icon-positon--medium);
 }
 
-.c-formDropdown-icon-large {
+.c-formDropdown-padding-large {
     @include icon-position($icon-positon--large);
 }
 
@@ -123,5 +122,6 @@ $icon-positon--large              : 25px;
     /* Remove default styling */
     outline: none;
     appearance: none;
+    padding-right: $formField-icon-padding;
 }
 </style>
