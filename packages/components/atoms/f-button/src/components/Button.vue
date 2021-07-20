@@ -23,10 +23,7 @@
             :class="$style['o-button-content']">
 
             <span
-                :class="[
-                    (hasLeadingIcon ? $style['o-btn-icon'] : ''),
-                    (hasLeadingIcon ? $style['o-btn-icon--leading'] : '')
-                ]">
+                :class="(hasIcon === 'leading' ? [$style['o-btn-icon'], $style['o-btn-icon--leading']] : '')">
                 <slot name='leading-icon' />
             </span>
 
@@ -39,10 +36,7 @@
             </span>
 
             <span
-                :class="[
-                    (hasTrailingIcon ? $style['o-btn-icon'] : ''),
-                    (hasTrailingIcon ? $style['o-btn-icon--trailing'] : '')
-                ]">
+                :class="(hasIcon === 'trailing' ? [$style['o-btn-icon'], $style['o-btn-icon--trailing']] : '')">
                 <slot name='trailing-icon' />
             </span>
         </span>
@@ -53,7 +47,11 @@
 import ActionButton from './Action.vue';
 import LinkButton from './Link.vue';
 
-import { VALID_BUTTON_TYPES, VALID_BUTTON_SIZES } from '../constants';
+import {
+    VALID_BUTTON_TYPES,
+    VALID_BUTTON_SIZES,
+    VALID_BUTTON_ICON_POSITION
+} from '../constants';
 
 export default {
     name: 'FButton',
@@ -86,12 +84,8 @@ export default {
             type: Boolean,
             default: false
         },
-        hasTrailingIcon: {
-            type: Boolean,
-            default: false
-        },
-        hasLeadingIcon: {
-            type: Boolean,
+        hasIcon: {
+            type: [Boolean, String],
             default: false
         }
     },
@@ -161,6 +155,10 @@ export default {
             if (!VALID_BUTTON_SIZES.includes(this.buttonSize)) {
                 throw new TypeError(`buttonSize is set to "${this.buttonSize}", but it can only be one of the following buttonSizes: "${VALID_BUTTON_SIZES.join('", "')}"`);
             }
+
+            if (!VALID_BUTTON_ICON_POSITION.includes(this.hasIcon)) {
+                throw new TypeError(`hasIcon is set to "${this.hasIcon}", but it can only be one of the following buttonSizes: "${VALID_BUTTON_ICON_POSITION.join('", "')}"`);
+            }
         }
     }
 };
@@ -174,6 +172,9 @@ $btn-default-weight                    : $font-weight-bold;
 $btn-default-padding                   : 12px 24px;
 $btn-default-outline-color             : $color-focus;
 $btn-default-loading-opacity           : 0.35;
+$btn-default-iconHeight                : 18px;
+$btn-default-iconSpacing               : 3px;
+$btn-default-iconSideSpacing           : $btn-default-iconSpacing + spacing();
 
 $btn-primary-bgColor                   : $color-interactive-primary;
 $btn-primary-bgColor--hover            : darken($color-interactive-primary, $color-hover-01);
@@ -221,14 +222,17 @@ $btn-sizeLarge-font-size               : 'heading-s';
 $btn-sizeLarge-padding                 : 14px 24px;
 $btn-sizeLarge-loading-color           : $color-content-interactive-primary;
 $btn-sizeLarge-loading-colorOpaque     : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
-$btn-sizeLarge-iconHeight              : 23.5px;
 
 $btn-sizeSmall-padding                 : 8px 16px;
-$btn-sizeSmall-iconHeight              : 20px;
+$btn-sizeSmall-iconHeight              : 15px;
+$btn-sizeSmall-iconSpacing             : 2.5px;
+$btn-sizeSmall-iconSideSpacing         : $btn-sizeSmall-iconSpacing + spacing();
 
 $btn-sizeXSmall-font-size              : 'body-s';
 $btn-sizeXSmall-padding                : 6px 8px;
-$btn-sizeXSmall-iconHeight             : 15.5px;
+$btn-sizeXSmall-iconHeight             : 12px;
+$btn-sizeXSmall-iconSpacing            : 2px;
+$btn-sizeXSmall-iconSideSpacing        : $btn-sizeXSmall-iconSpacing + spacing();
 
 $btn-icon-sizeLarge-buttonSize         : 56px; // button--icon is a sircle so width and height can use one var
 $btn-icon-sizeLarge-iconSize           : 21px;
@@ -302,9 +306,14 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         visibility: hidden;
     }
 
+    .o-btn-icon {
+        display: flex;
+        margin: $btn-default-iconSpacing;
+    }
+
     .o-btn-icon,
     .o-btn-icon svg {
-        height: $btn-sizeLarge-iconHeight;
+        height: $btn-default-iconHeight;
     }
 
     .o-btn-icon svg use,
@@ -313,11 +322,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     .o-btn-icon--leading {
-        margin-right: spacing();
+        margin-right: $btn-default-iconSideSpacing;
     }
 
     .o-btn-icon--trailing {
-        margin-left: spacing();
+        margin-left: $btn-default-iconSideSpacing;
     }
 
 /**
@@ -655,9 +664,21 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
 .o-btn--sizeSmall {
     padding: $btn-sizeSmall-padding;
 
+    .o-btn-icon {
+        margin: $btn-sizeSmall-iconSpacing;
+    }
+
     .o-btn-icon,
     .o-btn-icon svg {
         height: $btn-sizeSmall-iconHeight;
+    }
+
+    .o-btn-icon--leading {
+        margin-right: $btn-sizeSmall-iconSideSpacing;
+    }
+
+    .o-btn-icon--trailing {
+        margin-left: $btn-sizeSmall-iconSideSpacing;
     }
 }
 
@@ -665,9 +686,21 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     @include font-size($btn-sizeXSmall-font-size);
     padding: $btn-sizeXSmall-padding;
 
+    .o-btn-icon {
+        margin: $btn-sizeXSmall-iconSpacing;
+    }
+
     .o-btn-icon,
     .o-btn-icon svg {
         height: $btn-sizeXSmall-iconHeight;
+    }
+
+    .o-btn-icon--leading {
+        margin-right: $btn-sizeSmall-iconSideSpacing;
+    }
+
+    .o-btn-icon--trailing {
+        margin-left: $btn-sizeSmall-iconSideSpacing;
     }
 }
 

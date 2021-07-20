@@ -9,7 +9,7 @@ v1.10.0
 *July 20, 2021*
 
 ### Added
-- `trailing-icon` and `leading-icon` named slots for ability to add an icon befor or after button text
+- `trailing-icon` and `leading-icon` named slots for ability to add an icon before or after button text
 - `hasLeadingIcon` and `hasTrailingIcon` props for spacing and icon colours css classes to be added
 
 ### Changed

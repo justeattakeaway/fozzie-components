@@ -6,7 +6,11 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { EyeglassIcon } from '@justeat/f-vue-icons';
-import { VALID_BUTTON_TYPES, VALID_BUTTON_SIZES } from '../src/constants';
+import {
+    VALID_BUTTON_TYPES,
+    VALID_BUTTON_SIZES,
+    VALID_BUTTON_ICON_POSITION
+} from '../src/constants';
 import FButton from '../src/components/Button.vue';
 
 export default {
@@ -49,12 +53,8 @@ export const ButtonComponent = () => ({
             default: text('href', '')
         },
 
-        showTrailingIcon: {
-            default: boolean('hasTrailingIcon', false)
-        },
-
-        showLeadingIcon: {
-            default: boolean('hasLeadingIcon', false)
+        hasIcon: {
+            default: select('Add icon to the button text', VALID_BUTTON_ICON_POSITION, false)
         }
     },
 
@@ -68,13 +68,12 @@ export const ButtonComponent = () => ({
             :href="href"
             :isIcon="false"
             :isLoading="isLoading"
-            :hasTrailingIcon="showTrailingIcon"
-            :hasLeadingIcon="showLeadingIcon">
-            <template v-if="showLeadingIcon" #leading-icon>
+            :hasIcon="hasIcon">
+            <template v-if="hasIcon ==='leading'" #leading-icon>
                 <eyeglass-icon />
             </template>
-            Default Button Text
-            <template v-if="showTrailingIcon" #trailing-icon>
+            Label
+            <template v-if="hasIcon ==='trailing'" #trailing-icon>
                 <eyeglass-icon />
             </template>
             </f-button>`

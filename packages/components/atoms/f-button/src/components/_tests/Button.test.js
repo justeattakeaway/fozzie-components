@@ -120,6 +120,36 @@ describe('Button', () => {
                 })
                     .toThrowError('iconButton is set to have buttonType="invalid_value"');
             });
+
+            it.each([
+                'leading',
+                'trailing',
+                false
+            ])('should not throw an error when "hasIcon" is set to %s', hasIcon => {
+                // Arrange
+                const propsData = {
+                    hasIcon,
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                }).not.toThrowError();
+            });
+
+            it('should throw an error when "hasIcon" is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    hasIcon: 'invalid_value',
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                }).toThrowError('hasIcon is set to "invalid_value"');
+            });
         });
     });
 
