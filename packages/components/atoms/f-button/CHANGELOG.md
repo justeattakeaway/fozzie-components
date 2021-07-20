@@ -10,7 +10,8 @@ v1.10.0
 
 ### Added
 - `trailing-icon` and `leading-icon` named slots for ability to add an icon before or after button text
-- `hasLeadingIcon` and `hasTrailingIcon` props for spacing and icon colours css classes to be added
+- `hasIcon` prop for spacing and icon colours css classes to be added
+- validation for `hasIcon` prop to be able to add only `leading`/`trailing`/false
 
 ### Changed
 - Button paddings to be aligned with the PIE designs
