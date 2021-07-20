@@ -15,6 +15,7 @@
                 :label-style="normalisedLabelStyle"
                 :label-for="uniqueId"
                 :is-inline="isInline"
+                :is-disabled="isDisabled"
                 :data-test-id="testId.label">
                 {{ labelText }}
                 <template #description>
@@ -36,11 +37,8 @@
                 :attributes="$attrs"
                 :type="normalisedInputType"
                 :value="value"
-                :class="[
-                    $style['c-formField-field'],
-                    $style['c-formField-field--defaultHeight'],
-                    $style['c-formField-dropdownContainer']
-                ]"
+                :field-size="fieldSize"
+                :has-error="hasError"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
@@ -52,7 +50,8 @@
                 v-bind="$attrs"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--textarea']
+                    $style['c-formField-field--textarea'],
+                    { [$style['c-formField--invalid']]: hasError }
                 ]"
                 data-test-id="formfield-textarea"
                 v-on="listeners" />
@@ -70,9 +69,10 @@
                 :data-test-id="testId.input"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--defaultHeight'],
-                    { [$style['c-formField-field--noFocus']]: isSelectionControl }
-                ]"
+                    $style[`c-formField-field--${fieldSize}`], {
+                        [$style['c-formField-field--noFocus']]: isSelectionControl,
+                        [$style['c-formField--invalid']]: hasError
+                    }]"
                 v-on="listeners"
             >
 
@@ -100,6 +100,8 @@ import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
+    DEFAULT_FIELD_SIZE,
+    VALID_FIELD_SIZES,
     VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
@@ -134,7 +136,13 @@ export default {
         labelStyle: {
             type: String,
             default: 'default',
-            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid label types
+        },
+
+        fieldSize: {
+            type: String,
+            default: DEFAULT_FIELD_SIZE,
+            validator: value => (VALID_FIELD_SIZES.indexOf(value) !== -1) // The prop value must match one of the valid field sizes
         },
 
         value: {
@@ -248,6 +256,10 @@ export default {
 
         isTextarea () {
             return this.inputType === 'textarea';
+        },
+
+        isDisabled () {
+            return this.$attrs.disabled === 'disabled';
         }
     },
 
@@ -279,21 +291,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-textColour                    : $color-content-default;
-$form-input-textColour--disabled          : $color-content-disabled;
-$form-input-bg--disabled                  : $color-disabled-01;
-$form-input-borderRadius                  : $border-radius;
-$form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $color-border-strong;
-$form-input-borderColour--focus           : $color-grey-50;
-$form-input-borderColour--invalid         : $color-support-error;
-$form-input-borderColour--disabled        : $color-disabled-01;
-$form-input-height                        : 46px; // height is 46px + 1px border = 48px
-$form-input-padding                       : spacing(x1.5) spacing(x2);
-$form-input-fontSize                      : 'body-l';
-$form-input-focus                         : $color-focus;
-$form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
-
 .c-formField {
     & + & {
         margin-top: spacing(x2);
@@ -302,51 +299,6 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
 
     .c-formField-fieldWrapper {
         position: relative;
-    }
-
-    .c-formField-field--defaultHeight {
-        @include rem(height, $form-input-height); //convert height to rem
-    }
-
-    .c-formField-field {
-        width: 100%;
-        font-family: $font-family-base;
-        @include font-size($form-input-fontSize);
-        font-weight: $font-weight-regular;
-        color: $form-input-textColour;
-
-        background-color: $form-input-bg;
-        border: $form-input-borderWidth solid $form-input-borderColour;
-        border-radius: $form-input-borderRadius;
-        background-clip: padding-box;
-        padding: $form-input-padding;
-
-        &:hover {
-            background-color: $form-input-bg--hover;
-        }
-
-        &:focus,
-        &:active,
-        &:focus-within {
-            box-shadow: $form-input-focus--boxShadow;
-            outline: none;
-        }
-
-        .c-formField--invalid & {
-            border-color: $form-input-borderColour--invalid;
-        }
-
-        // Disabled state
-        &[disabled] {
-            cursor: not-allowed;
-
-            &,
-            &:hover {
-                background-color: $form-input-bg--disabled;
-                color: $form-input-textColour--disabled;
-                border-color: $form-input-borderColour--disabled;
-            }
-        }
     }
 
     .c-formField-field--textarea {
@@ -361,10 +313,6 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         &:focus-within {
             box-shadow: none;
         }
-    }
-
-    .c-formField-dropdownContainer {
-        padding: 0;
     }
 
     .c-formField--grouped {
