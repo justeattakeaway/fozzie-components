@@ -54,7 +54,7 @@
     "js-cookie": "2.2.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "1.1.1",
+    "@justeat/f-button": "1.9.0",
     "@justeat/f-mega-modal": "0.7.0",
     "@justeat/f-vue-icons": "2.3.0",
     "@justeat/f-wdio-utils": "0.2.0",
