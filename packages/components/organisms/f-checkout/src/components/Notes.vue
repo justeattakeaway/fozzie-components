@@ -1,39 +1,47 @@
 <template>
     <div>
-        <form-field
-            :label-text="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)"
-            input-type="textarea"
-            :placeholder="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.placeholder`)"
-            :value="userNotes[noteTypeDeliveryOrRestaurant]"
-            cols="30"
-            rows="7"
-            maxlength="200"
-            name="Note"
-            has-input-description
-            @input="updateUserNote({ note: $event, type: noteTypeDeliveryOrRestaurant })">
-            {{ $t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.text`) }}
-        </form-field>
-
-        <form-field
+        <accordion
+            id="bob"
+            :title="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)">
+            <form-field
+                :label-text="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)"
+                input-type="textarea"
+                :placeholder="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.placeholder`)"
+                :value="userNotes[noteTypeDeliveryOrRestaurant]"
+                cols="30"
+                rows="7"
+                maxlength="200"
+                name="Note"
+                has-input-description
+                @input="updateUserNote({ note: $event, type: noteTypeDeliveryOrRestaurant })">
+                {{ $t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.text`) }}
+            </form-field>
+        </accordion>
+        <accordion
             v-if="shouldShowKitchenNotes"
-            :label-text="$t(`userNote.kitchen.${serviceType}.title`)"
-            input-type="textarea"
-            :placeholder="$t(`userNote.kitchen.${serviceType}.placeholder`)"
-            :value="userNotes.kitchen"
-            cols="30"
-            rows="7"
-            maxlength="200"
-            name="Note"
-            has-input-description
-            @input="updateUserNote({ note: $event, type: 'kitchen' })">
-            {{ $t(`userNote.kitchen.${serviceType}.text`) }}
-        </form-field>
+            id="bob"
+            :title="$t(`userNote.kitchen.${serviceType}.title`)">
+            <form-field
+                :label-text="$t(`userNote.kitchen.${serviceType}.title`)"
+                input-type="textarea"
+                :placeholder="$t(`userNote.kitchen.${serviceType}.placeholder`)"
+                :value="userNotes.kitchen"
+                cols="30"
+                rows="7"
+                maxlength="200"
+                name="Note"
+                has-input-description
+                @input="updateUserNote({ note: $event, type: 'kitchen' })">
+                {{ $t(`userNote.kitchen.${serviceType}.text`) }}
+            </form-field>
+        </accordion>
     </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 import FormField from '@justeat/f-form-field';
+import Accordion from './Accordion.vue';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import {
     CHECKOUT_METHOD_DELIVERY,
@@ -43,6 +51,7 @@ import loggerMixin from '../mixins/logger.mixin';
 
 export default {
     components: {
+        Accordion,
         FormField
     },
     mixins: [
@@ -57,7 +66,7 @@ export default {
         ]),
 
         shouldShowKitchenNotes () {
-            return this.serviceType === CHECKOUT_METHOD_DELIVERY && this.noteTypes.includes('kitchen');
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY && this.noteTypes?.includes('kitchen');
         },
 
         noteTypeDeliveryOrRestaurant () {

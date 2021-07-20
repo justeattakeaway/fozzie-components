@@ -144,12 +144,9 @@ describe('checkout mapper', () => {
             userNotes
         });
 
-        console.log({ ...defaultParams }, userNotes);
-
         const notesRequest = requestBody[2].value;
 
         // Assert
-        console.log('notesRequest', notesRequest);
         expect(notesRequest.length).toBe(1);
         expect(notesRequest[0].note).toBe('Beware of the dachshund');
         expect(notesRequest[0].type).toBe('delivery');

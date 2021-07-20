@@ -317,7 +317,6 @@ describe('CheckoutModule', () => {
         describe(`${UPDATE_USER_NOTES} ::`, () => {
             it('should update the state with the new note values', () => {
                 const noteData = { type: 'restaurant', note: 'This is the new note value' };
-                console.log(state.userNotes);
 
                 // Act
                 mutations[UPDATE_USER_NOTES](state, noteData);
