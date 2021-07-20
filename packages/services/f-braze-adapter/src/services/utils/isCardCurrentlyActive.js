@@ -29,13 +29,15 @@ function isCardActiveBasedOnTime (displayTimes) {
  * @param card {object}
  * @param card.displayTimes {object} - Display times
  * @param card.brand {string} - Identifier string for relevant brand
+ * @param card.isVisible {string} - Identifier string for relevant brand
  * @param brands {string[]} - String of current brands
  * @returns {boolean} - is card active
  */
 const isCardCurrentlyActive = (card = {}, brands = []) => {
-    const { displayTimes, brand } = card;
+    const { displayTimes, brand, isVisible } = card;
 
-    return (!brand || brands.includes(brand))
+    return (isVisible !== false)
+        && (!brand || brands.includes(brand))
         && (!displayTimes || isCardActiveBasedOnTime(displayTimes));
 };
 
