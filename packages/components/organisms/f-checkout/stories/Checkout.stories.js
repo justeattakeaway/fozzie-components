@@ -155,6 +155,7 @@ export const CheckoutComponent = () => ({
             getCustomerUrl
         };
     },
+    layout: 'fullscreen',
     props: {
         isLoggedIn: {
             default: boolean('Is User Logged In', false)
