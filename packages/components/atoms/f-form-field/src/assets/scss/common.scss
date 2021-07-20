@@ -37,6 +37,18 @@ $form-input-padding-large               : spacing(x2);
     padding: $padding;
 }
 
+@mixin icon-position($size, $position: 'bottom') {
+    svg {
+        @if $position == 'left' {
+            left: 19px;
+        } @else if $position == 'right' {
+            right: 19px;
+        } @else {
+            bottom: $size;
+        }
+    }
+}
+
 .c-formField-field--small {
     @include form-field-size($form-input-height-small, $form-input-padding-small); //convert height to rem
 }

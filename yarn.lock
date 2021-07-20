@@ -2246,6 +2246,18 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-braze-adapter@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.4.0.tgz#bac8be899ccadac7573f0a8673bfa0694885348b"
+  integrity sha512-iJPs/izz9Ko42gZda4kGrDnH8IXRJhzdBzDRnUiBg3lGijURGx6xFsbbyagQgxEY70Uw/SdpStsF5SvpswQJNw==
+  dependencies:
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
+
 "@justeat/f-card@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-1.2.1.tgz#8b44b73c291c8527beb6351730a90a476cb54325"
