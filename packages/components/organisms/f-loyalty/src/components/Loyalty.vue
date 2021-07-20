@@ -1,31 +1,65 @@
 <template>
     <div
         :class="$style['c-loyalty']"
-        data-test-id="loyalty">
-        {{ copy.text }}
-    </div>
+        data-test-id="loyalty" />
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import { mapActions } from 'vuex';
 import tenantConfigs from '../tenants';
+import loyalty from '../store/loyalty.module';
+import { ACTION_INITIALISE_LOYALTY, VUEX_MODULE_NAMESPACE_LOYALTY } from '../store/types';
 
 export default {
     name: 'VLoyalty',
+
     components: {},
+
+    mixins: [
+        VueGlobalisationMixin
+    ],
+
     props: {
-        locale: {
+        authToken: {
             type: String,
-            default: ''
+            default: undefined
+        },
+        brazeApiKey: {
+            type: String,
+            required: true
         }
     },
-    data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
 
+    data () {
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
+    },
+
+    /**
+     * Set up the loyalty vuex module
+     */
+    beforeCreate () {
+        if (!this.$store.hasModule(VUEX_MODULE_NAMESPACE_LOYALTY)) {
+            this.$store.registerModule(VUEX_MODULE_NAMESPACE_LOYALTY, loyalty);
+        }
+    },
+
+    /**
+     * Initialise the loyalty module by passing in the required values from props
+     */
+    async mounted () {
+        await this.init({
+            brazeApiKey: this.brazeApiKey,
+            authToken: this.authToken
+        });
+    },
+
+    methods: {
+        ...mapActions(VUEX_MODULE_NAMESPACE_LOYALTY, {
+            init: ACTION_INITIALISE_LOYALTY
+        })
     }
 };
 </script>
