@@ -19,6 +19,14 @@ Latest (to be added to next version)
 - Updated version of `f-button`.
 
 
+Latest (to be added to next version)
+------------------------------
+*July 15, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
 v0.162.0
 ------------------------------
 *July 19, 2021*
