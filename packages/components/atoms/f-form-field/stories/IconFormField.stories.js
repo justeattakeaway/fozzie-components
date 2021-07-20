@@ -42,7 +42,7 @@ export const IconFormFieldComponent = () => ({
         },
         dropdownOptions: {
             default: object('Dropdown Options', [
-                { text: 'As soon as possibleAs soon as possibleAs soon as possibleAs soon as possibleAs soon as possible', value: '2021-01-01T01:00:00.000Z' },
+                { text: 'As soon as possible', value: '2021-01-01T01:00:00.000Z' },
                 { text: 'Today in 5 minutes', value: '2021-01-01T01:05:00.000Z' }
             ])
         }

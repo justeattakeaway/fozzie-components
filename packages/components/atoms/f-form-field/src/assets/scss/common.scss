@@ -30,6 +30,7 @@ $form-input-padding-medium              : spacing(x1.5) spacing(x2);
 
 $form-input-height-large                : spacing(x7);
 $form-input-padding-large               : spacing(x2);
+$formField-icon-padding                 : spacing(x7);
 
 
 @mixin form-field-size($height, $padding) {
@@ -99,4 +100,12 @@ $form-input-padding-large               : spacing(x2);
 
 .c-formField--invalid {
     border-color: $form-input-borderColour--invalid;
+}
+
+.c-formField-padding--iconRight {
+    padding-right: $formField-icon-padding;
+}
+
+.c-formField-padding--iconLeft {
+    padding-left: $formField-icon-padding;
 }

@@ -39,6 +39,7 @@
                 :value="value"
                 :field-size="fieldSize"
                 :has-error="hasError"
+                :has-icon="hasLeftIcon"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
@@ -335,7 +336,6 @@ export default {
 $small-icon-position            : 11px;
 $medium-icon-position           : 15px;
 $default-icon-position          : 19px;
-$formField-icon-padding         : spacing(x7);
 
 .c-formField {
     & + & {
@@ -425,13 +425,5 @@ $formField-icon-padding         : spacing(x7);
 
     .c-formField-icon--right {
         @include icon-position($default-icon-position, 'right');
-    }
-
-    .c-formField-padding--iconRight {
-        padding-right: $formField-icon-padding;
-    }
-
-    .c-formField-padding--iconLeft {
-        padding-left: $formField-icon-padding;
     }
 </style>
