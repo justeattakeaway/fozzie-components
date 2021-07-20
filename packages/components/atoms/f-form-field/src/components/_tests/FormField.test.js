@@ -312,7 +312,8 @@ describe('FormField', () => {
                 [true, 'number'],
                 [true, 'tel'],
                 [false, 'radio'],
-                [false, 'checkbox']
+                [false, 'checkbox'],
+                [false, null]
             ])('should return %s if `inputType` is %s', (expected, inputType) => {
                 // Arrange
                 const propsData = {
@@ -330,14 +331,13 @@ describe('FormField', () => {
         describe('hasLeftIcon :: ', () => {
             describe('when `validIconField` is true', () => {
                 // Arrange
-                let wrapper;
                 const propsData = {
                     inputType: 'text'
                 };
 
-                it('should `true` when slots contain `icon-left`', () => {
+                it('should return `true` when slots contain `icon-left`', () => {
                     // Act
-                    wrapper = shallowMount(FormField, {
+                    const wrapper = shallowMount(FormField, {
                         propsData,
                         slots: {
                             'icon-left': slot
@@ -348,9 +348,9 @@ describe('FormField', () => {
                     expect(wrapper.vm.hasLeftIcon).toEqual(true);
                 });
 
-                it('should `undefined` when slots do not contain `icon-left`', () => {
+                it('should return `undefined` when slots do not contain `icon-left`', () => {
                     // Act
-                    wrapper = shallowMount(FormField, {
+                    const wrapper = shallowMount(FormField, {
                         propsData,
                         slots: null
                     });
@@ -362,14 +362,13 @@ describe('FormField', () => {
 
             describe('when `validIconField` is false', () => {
                 // Arrange
-                let wrapper;
                 const propsData = {
                     inputType: 'textarea'
                 };
 
-                it('should `false` when slots contain `icon-left`', () => {
+                it('should return `false` when slots contain `icon-left`', () => {
                     // Act
-                    wrapper = shallowMount(FormField, {
+                    const wrapper = shallowMount(FormField, {
                         propsData,
                         slots: {
                             'icon-left': slot
@@ -380,11 +379,11 @@ describe('FormField', () => {
                     expect(wrapper.vm.hasLeftIcon).toEqual(false);
                 });
 
-                it('should `false` when slots do not contain `icon-left`', () => {
+                it('should return `false` when slots do not contain `icon-left`', () => {
                     // Act
-                    wrapper = shallowMount(FormField, {
+                    const wrapper = shallowMount(FormField, {
                         propsData,
-                        slots: undefined
+                        slots: null
                     });
 
                     // Assert
@@ -396,14 +395,13 @@ describe('FormField', () => {
         describe('hasRightIcon :: ', () => {
             describe('when `validIconField` is true', () => {
                 // Arrange
-                let wrapper;
                 const propsData = {
                     inputType: 'text'
                 };
 
-                it('should `true` when slots contain `icon-right`', () => {
+                it('should return `true` when slots contain `icon-right`', () => {
                     // Act
-                    wrapper = shallowMount(FormField, {
+                    const wrapper = shallowMount(FormField, {
                         propsData,
                         slots: {
                             'icon-right': slot
@@ -414,9 +412,9 @@ describe('FormField', () => {
                     expect(wrapper.vm.hasRightIcon).toEqual(true);
                 });
 
-                it('should `undefined` when slots do not contain `icon-right`', () => {
+                it('should return `undefined` when slots do not contain `icon-right`', () => {
                     // Act
-                    wrapper = shallowMount(FormField, {
+                    const wrapper = shallowMount(FormField, {
                         propsData,
                         slots: null
                     });
@@ -428,14 +426,13 @@ describe('FormField', () => {
 
             describe('when `validIconField` is false', () => {
                 // Arrange
-                let wrapper;
                 const propsData = {
                     inputType: 'textarea'
                 };
 
-                it('should `false` when slots contain `icon-right`', () => {
+                it('should return `false` when slots contain `icon-right`', () => {
                     // Act
-                    wrapper = shallowMount(FormField, {
+                    const wrapper = shallowMount(FormField, {
                         propsData,
                         slots: {
                             'icon-right': slot
@@ -446,9 +443,9 @@ describe('FormField', () => {
                     expect(wrapper.vm.hasRightIcon).toEqual(false);
                 });
 
-                it('should `false` when slots do not contain `icon-right`', () => {
+                it('should return `false` when slots do not contain `icon-right`', () => {
                     // Act
-                    wrapper = shallowMount(FormField, {
+                    const wrapper = shallowMount(FormField, {
                         propsData,
                         slots: undefined
                     });
