@@ -79,5 +79,19 @@
                 "SPEC_FILE": "${file}"
             }
         },
+        {
+            "name": "Storybook - Run Currently Open Story File",
+            "type": "node",
+            "request": "launch",
+            "args": ["run", "storybook:serve", "--stream"],
+            "cwd": "${workspaceFolder}",
+            "autoAttachChildProcesses": true,
+            "program": "${workspaceRoot}/node_modules/.bin/lerna",
+            "console": "integratedTerminal",
+            "env": {
+                "VS_DEBUGGER": "true",
+                "CURRENT_STORY_FILE": "${file}"
+            }
+        }
     ]
 }

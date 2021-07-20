@@ -1,4 +1,4 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout = new Checkout();
@@ -8,8 +8,8 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
-                .withQuery('&knob-Is User Logged In', false)
-                .withQuery('&knob-Is ASAP available', true);
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -25,7 +25,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        checkout.clearCheckoutForm('mobileNumber');
+        checkout.clearBlurField('mobileNumber');
         checkout.goToPayment();
 
         // Assert
@@ -39,6 +39,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateCollectionCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
@@ -48,7 +49,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
         checkout.waitForComponent();
@@ -63,6 +64,16 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'desktop');
     });
+
+    it('should display invalid email address', () => {
+        // Act
+        checkout.clearBlurField('emailAddress');
+        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
+        browser.keys('Tab');
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Guest - invalid email address Error State', 'desktop');
+    });
 });
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
@@ -70,8 +81,8 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'collection')
-                .withQuery('&knob-Is User Logged In', false)
-                .withQuery('&knob-Is ASAP available', false);
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', false);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -86,14 +97,13 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
     });
 });
 
-
 describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', false)
-                .withQuery('&knob-Is ASAP available', true);
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -109,9 +119,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the delivery f-checkout guest mandatory error messages', () => {
         // Act
-        ['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode']
-            .forEach(field => checkout.clearCheckoutForm(field));
-
+        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutForm(field));
+        ['mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
@@ -125,6 +134,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('mobileNumber');
         checkout.populateCheckoutForm(mobileNumberInfo);
         checkout.goToPayment();
 
@@ -134,7 +144,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
+        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
         checkout.waitForComponent();
@@ -155,6 +165,16 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'desktop');
     });
+
+    it('should display invalid email address', () => {
+        // Act
+        checkout.clearBlurField('emailAddress');
+        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
+        browser.keys('Tab');
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Guest - invalid email address Error State', 'desktop');
+    });
 });
 
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
@@ -162,8 +182,8 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual 
         // Arrange
         checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', false)
-                .withQuery('&knob-Is ASAP available', false);
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', false);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 

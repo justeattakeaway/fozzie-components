@@ -1,12 +1,7 @@
-import {
-    mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
-} from '../services/mapper';
-import { VUEX_CHECKOUT_MODULE } from '../constants';
-
-import {
-    UPDATE_AUTOFILL,
-    UPDATE_CHANGED_FIELD
-} from './mutation-types';
+import { mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode } from '../services/mapper';
+import experimentService from '../services/experimentService';
+import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../constants';
+import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from './mutation-types';
 
 export default {
     namespaced: true,
@@ -57,8 +52,6 @@ export default {
                 return;
             }
 
-            const pageName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'Overview' : 'Guest';
-
             window.dataLayer.push({
                 checkout: {
                     step: 1
@@ -67,10 +60,6 @@ export default {
                 restaurant: {
                     id: rootState[VUEX_CHECKOUT_MODULE].restaurant.id,
                     seoName: rootState[VUEX_CHECKOUT_MODULE].restaurant.seoName
-                },
-                pageData: {
-                    name: `Checkout 1 ${pageName}`,
-                    group: 'Checkout'
                 },
                 menu: {
                     type: rootState[VUEX_CHECKOUT_MODULE].serviceType
@@ -111,7 +100,7 @@ export default {
         },
 
         /**
-         *Dispatches `trackFormInteraction` with each error in `state.errors`.
+         * Dispatches `trackFormInteraction` with each error in `state.errors`.
          */
         trackFormErrors ({ rootState, dispatch }) {
             const trackedErrors = [];
@@ -125,6 +114,20 @@ export default {
                     dispatch('trackFormInteraction', { action: 'error', error: mappedError });
                 }
             });
+        },
+
+        /**
+         * Fetches the variant of the Low Value Order experiment from the headers and pushes an analytics event.
+         */
+        trackLowValueOrderExperiment: (_, experimentHeaders) => {
+            const lowValueOrderExperimentVariant = experimentHeaders?.[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
+            if (lowValueOrderExperimentVariant) {
+                const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
+
+                if (event) {
+                    window.dataLayer.push(event);
+                }
+            }
         }
     },
 

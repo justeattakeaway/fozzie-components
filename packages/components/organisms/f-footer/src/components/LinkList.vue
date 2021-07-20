@@ -41,7 +41,7 @@
             :class="$style['c-footer-list']"
             data-test-id="footer-link-list">
             <li
-                v-for="(link, i) in filteredLinkList"
+                v-for="(link, i) in linkList.links"
                 :key="i + '_Link'">
                 <a
                     :href="link.url"
@@ -73,10 +73,6 @@ export default {
         linkList: {
             type: Object,
             default: () => ({})
-        },
-        showEuro2020Links: {
-            type: Boolean,
-            default: false
         }
     },
     data () {
@@ -101,17 +97,6 @@ export default {
 
         testId () {
             return this.panelCollapsed ? 'linkList-wrapper-collapsed' : 'linkList-wrapper';
-        },
-
-        /**
-         * Removes euro2020 links from the footer if `showEuro2020Links` prop is false
-         * by eliminating links with type 'euro2020' from link list
-         */
-        filteredLinkList () {
-            if (this.showEuro2020Links) {
-                return this.linkList.links;
-            }
-            return this.linkList.links.filter(link => link.type !== 'euro2020');
         }
     },
     mounted () {
