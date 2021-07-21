@@ -353,9 +353,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-iconPosition--small            : 11px;
-$form-input-iconPosition--medium           : 15px;
-$form-input-iconSize                       : 18px;
+$form-input-icon-verticalIndent                : 15px;
+$form-input-icon-verticalIndent--small         : 11px;
+$form-input-icon-verticalIndent--large         : 19px;
+$form-input-iconSize                           : 18px;
 
 .c-formField {
     & + & {
@@ -430,23 +431,23 @@ $form-input-iconSize                       : 18px;
     }
 
     .c-formField-icon--small {
-        @include icon-position($form-input-iconPosition--small);
+        @include indent-icon('bottom', $form-input-icon-verticalIndent--small);
     }
 
     .c-formField-icon--medium {
-        @include icon-position($form-input-iconPosition--medium);
+        @include indent-icon('bottom', $form-input-icon-verticalIndent);
     }
 
     .c-formField-icon--large {
-        @include icon-position($form-input-iconPosition);
+        @include indent-icon('bottom', $form-input-icon-verticalIndent--large);
     }
 
     .c-formField-icon--leading {
-        @include icon-position($form-input-iconPosition, 'leading');
+        @include indent-icon('leading', $form-input-icon-verticalIndent);
     }
 
     .c-formField-icon--trailing {
-        @include icon-position($form-input-iconPosition, 'trailing');
+        @include indent-icon('trailing', $form-input-icon-verticalIndent);
     }
 
     .c-formField-padding--iconTrailing {

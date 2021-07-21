@@ -4,7 +4,7 @@
         <caret-icon
             :class="[
                 $style['c-formDropdown-icon'],
-                $style[`c-formDropdown-iconPosition-${fieldSize}`]
+                $style[`c-formDropdown-iconIndent--${fieldSize}`]
             ]"
             :data-test-id="testId.icon" />
         <select
@@ -91,9 +91,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-dropdown-iconPosition--small              : 17px;
-$form-dropdown-iconPosition--medium             : 21px;
-$form-dropdown-iconPosition--large              : 25px;
+$form-dropdown-iconIndent                     : 21px;
+$form-dropdown-iconIndent--small              : 17px;
+$form-dropdown-iconIndent--large              : 25px;
 
 .c-formDropdown-icon {
     width: spacing(x1.5);
@@ -107,16 +107,16 @@ $form-dropdown-iconPosition--large              : 25px;
     }
 }
 
-.c-formDropdown-iconPosition-small {
-    bottom: $form-dropdown-iconPosition--small;
+.c-formDropdown-iconIndent--small {
+    bottom: $form-dropdown-iconIndent--small;
 }
 
-.c-formDropdown-iconPosition-medium {
-    bottom: $form-dropdown-iconPosition--medium;
+.c-formDropdown-iconIndent--medium {
+    bottom: $form-dropdown-iconIndent;
 }
 
-.c-formDropdown-iconPosition-large {
-    bottom: $form-dropdown-iconPosition--large;
+.c-formDropdown-iconIndent--large {
+    bottom: $form-dropdown-iconIndent--large;
 }
 
 .c-formDropdown-select {
