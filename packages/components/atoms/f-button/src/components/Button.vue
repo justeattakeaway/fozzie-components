@@ -24,21 +24,24 @@
 
             <span
                 v-if="hasIcon && hasIcon === 'leading'"
-                :class="(hasIcon === 'leading' ? [$style['o-btn-icon'], $style['o-btn-icon--leading']] : '')">
+                :class="[{
+                    [$style['o-btn-icon']]: hasIcon === 'leading',
+                    [$style['o-btn-icon--leading']]: hasIcon === 'leading' }]">
                 <slot name='leading-icon' />
             </span>
 
             <span
-                :class="[
-                    $style['o-btn-text'],
-                    (isLoading ? $style['o-btn-text--hidden'] : '')
-                ]">
+                :class="[$style['o-btn-text'], {
+                    [$style['o-btn-text--hidden']]: isLoading
+                }]">
                 <slot />
             </span>
 
             <span
                 v-if="hasIcon && hasIcon === 'trailing'"
-                :class="(hasIcon === 'trailing' ? [$style['o-btn-icon'], $style['o-btn-icon--trailing']] : '')">
+                :class="[{
+                    [$style['o-btn-icon']]: hasIcon === 'trailing',
+                    [$style['o-btn-icon--trailing']]: hasIcon === 'trailing' }]">
                 <slot name='trailing-icon' />
             </span>
         </span>
