@@ -1,5 +1,4 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { default: $ } = require('webdriverio/build/commands/browser/$');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
