@@ -1,14 +1,7 @@
 import { mount, shallowMount, createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import ActivationLoggedIn from '../ActivationLoggedIn.vue';
-import tenantConfigs from '../../tenants';
-
-const i18n = {
-    locale: 'en-GB',
-    messages: {
-        'en-GB': tenantConfigs['en-GB'].messages
-    }
-};
+import i18n from './helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
@@ -22,23 +15,18 @@ describe('ActivationLoggedIn', () => {
         consumerId: '12345',
         consumerEmail: 'test@mail.com'
     };
+    const wrapperShallow = shallowMount(ActivationLoggedIn, {
+        i18n,
+        localVue,
+        propsData
+    });
 
     it('should be defined', () => {
-        const wrapper = shallowMount(ActivationLoggedIn, {
-            i18n,
-            localVue,
-            propsData
-        });
-        expect(wrapper.exists()).toBe(true);
+        expect(wrapperShallow.exists()).toBe(true);
     });
 
     it('should be rendered correctly', () => {
-        const wrapper = shallowMount(ActivationLoggedIn, {
-            i18n,
-            localVue,
-            propsData
-        });
-        const container = wrapper.find('[data-test-id="activation-logged-in-component"]');
+        const container = wrapperShallow.find('[data-test-id="activation-logged-in-component"]');
 
         expect(container).toMatchSnapshot();
     });
@@ -61,18 +49,19 @@ describe('ActivationLoggedIn', () => {
         describe('activate ::', () => {
             let wrapper;
 
+            const createWrapper = () => mount(ActivationLoggedIn, {
+                i18n,
+                localVue,
+                propsData
+            });
+
             afterEach(() => {
                 jest.clearAllMocks();
             });
 
             it('should be called after click on activate button', async () => {
                 const activateSpy = jest.spyOn(ActivationLoggedIn.methods, 'activate');
-
-                wrapper = mount(ActivationLoggedIn, {
-                    i18n,
-                    localVue,
-                    propsData
-                });
+                wrapper = createWrapper();
 
                 await wrapper.find('[data-test-id="takeawaypay-activation-activate-button"]').trigger('click');
                 await wrapper.vm.$nextTick();
@@ -81,11 +70,7 @@ describe('ActivationLoggedIn', () => {
             });
 
             it('should emit `activation-result` event', async () => {
-                wrapper = mount(ActivationLoggedIn, {
-                    i18n,
-                    localVue,
-                    propsData
-                });
+                wrapper = createWrapper();
 
                 await wrapper.vm.activate();
 

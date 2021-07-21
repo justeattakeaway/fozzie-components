@@ -103,7 +103,7 @@ export default {
             return {
                 name: 'activation-failed',
                 props: {
-                    'redirect-url': this.redirectUrl
+                    redirectUrl: this.redirectUrl
                 }
             };
         },
@@ -112,7 +112,7 @@ export default {
             return {
                 name: 'activation-successful',
                 props: {
-                    'home-url': this.homeUrl
+                    homeUrl: this.homeUrl
                 }
             };
         },
@@ -121,12 +121,12 @@ export default {
             return {
                 name: 'activation-logged-in',
                 props: {
-                    'login-url': this.loginUrl,
-                    'registration-url': this.registrationUrl,
-                    'activate-url': this.activateUrl,
-                    'auth-token': this.authToken,
-                    'consumer-id': this.consumerId,
-                    'consumer-email': this.consumerEmail
+                    loginUrl: this.loginUrl,
+                    registrationUrl: this.registrationUrl,
+                    activateUrl: this.activateUrl,
+                    authToken: this.authToken,
+                    consumerId: this.consumerId,
+                    consumerEmail: this.consumerEmail
                 }
             };
         },
@@ -135,8 +135,8 @@ export default {
             return {
                 name: 'activation-not-logged-in',
                 props: {
-                    'login-url': this.loginUrl,
-                    'registration-url': this.registrationUrl
+                    loginUrl: this.loginUrl,
+                    registrationUrl: this.registrationUrl
                 }
             };
         }
