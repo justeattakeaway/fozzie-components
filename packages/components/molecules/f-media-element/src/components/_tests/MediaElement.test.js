@@ -1,8 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import MediaElement from '../MediaElement.vue';
-import {
-    ALIGN, FONT_SIZE, MODIFIER_OPPOSITES_RULES_MAP, MODIFIER_RULES_MAP
-} from '../../constants';
+import {ALIGN, FONT_SIZE, MODIFIER_OPPOSITES_RULES_MAP, MODIFIER_RULES_MAP} from '../../constants';
 
 const mockTitle = '__TEST_TITLE__';
 const mockText = '__TEST_TEXT__';
