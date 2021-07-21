@@ -473,11 +473,8 @@ export default {
             state.notices = notices;
             state.messages = messages;
             // TODO: Maybe there's a way to make this nicer
-            // TODO: There is definitely a way to make this nicer
             state.userNotes = notes?.length > 0 ? { ...notes.map(({ type, note }) => ({ [type]: note })) } : {};
             state.noteTypes = noteTypes;
-
-            console.log(state);
         },
 
         [UPDATE_AUTH]: (state, authToken) => {

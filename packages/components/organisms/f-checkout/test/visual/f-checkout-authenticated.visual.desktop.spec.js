@@ -23,6 +23,17 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State', 'desktop');
     });
 
+    it('should display the two notes fields if there is two noteTypes.', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'collection')
+            .withQuery('&knob-Is User Logged In', true)
+            .withQuery('&knob-Is ASAP available', true)
+            .withQuery('$knob-Note%20types', 'split-notes-delivery-kitchen');
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', 'desktop');
+    });
+
     it('should display the mandatory error messages.', () => {
         // Act
         checkout.clearBlurField('mobileNumber');

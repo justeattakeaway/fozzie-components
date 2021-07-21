@@ -1,4 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { default: $ } = require('webdriverio/build/commands/browser/$');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
@@ -18,7 +19,8 @@ const {
     ERROR_PAGE_COMPONENT,
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
-    ERROR_PAGE_IMAGE
+    ERROR_PAGE_IMAGE,
+    ACCORDION_HEADER
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -57,6 +59,8 @@ module.exports = class Checkout extends Page {
     get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
 
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
+
+    get accordionHeader () { return $(ACCORDION_HEADER); }
 
     fields = {
         firstName: {
@@ -167,6 +171,10 @@ module.exports = class Checkout extends Page {
 
     clickDupOrderGoToHistoryButton () {
         return this.errorMessageDupOrderGoToHistory.click();
+    }
+
+    clickAccordionHeader () {
+        return this.accordionHeader.click();
     }
 
     /**
