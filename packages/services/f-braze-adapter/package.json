@@ -1,10 +1,10 @@
 {
   "name": "@justeat/f-braze-adapter",
   "description": "Fozzie Metadata Service",
-  "version": "4.0.0-beta.2",
-  "main": "src/index.js",
+  "version": "4.0.0-beta.3",
+  "main": "dist/f-braze-adapter.umd.js",
   "files": [
-    "src"
+    "dist"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-braze-adapter",
   "contributors": [
@@ -25,7 +25,8 @@
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn lint:fix && yarn test",
+    "prepublishOnly": "yarn lint:fix && yarn test && yarn build",
+    "build": "vite build",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
@@ -35,7 +36,6 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "appboy-web-sdk": "2.5.2",
     "date-fns": "2.16.1",
     "lodash.findindex": "4.6.0",
     "lodash.orderby": "4.6.0",
@@ -43,15 +43,18 @@
     "lodash.uniq": "4.5.0"
   },
   "devDependencies": {
+    "@braze/web-sdk": "3.3.0",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "core-js": "3.6.5",
     "jest-extended": "0.11.5",
     "mockdate": "3.0.2",
-    "js-cookie": "2.2.1"
+    "js-cookie": "2.2.1",
+    "vite": "2.4.2"
   },
   "peerDependencies": {
-    "js-cookie": ">=2.2.1"
+    "js-cookie": ">=2.2.1",
+    "@braze/web-sdk": "3.3.0"
   }
 }

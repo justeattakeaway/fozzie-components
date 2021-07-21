@@ -1,9 +1,10 @@
-import isAppboyInitialised from './utils/isAppboyInitialised';
-import { removeDuplicateContentCards } from './utils';
+import appboy from '@braze/web-sdk';
 import transformCardData from './utils/transformCardData';
+import removeDuplicateContentCards from './utils/removeDuplicateContentCards';
 import areCookiesPermitted from './utils/areCookiesPermitted';
-import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME, LOGGER } from './types/events';
+import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME } from './types/events';
 import dispatcherEventStream from './DispatcherEventStream';
+import isAppboyInitialised from './utils/isAppboyInitialised';
 
 /* braze event handler callbacks */
 
@@ -21,29 +22,23 @@ function interceptInAppMessageClickEventsHandler (message) {
  * click events of the CTA button
  * @param message
  * @this BrazeDispatcher
- * @return Promise
  */
 function interceptInAppMessagesHandler (message) {
-    return this.appboyPromise
-        .then(appboy => {
-            if (message instanceof appboy.ab.InAppMessage) {
-                /**
-                 * Always subscribe click action to second button
-                 * as this is always "success" as opposed to "dismiss"
-                 * as confirmed with CRM (AS)
-                 */
-                dispatcherEventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
-                if (message.buttons && message.buttons.length >= 2) {
-                    const [, button] = message.buttons;
-                    // Note that the below subscription returns an ID that could later be used to unsubscribe
-                    button.subscribeToClickedEvent(() => interceptInAppMessageClickEventsHandler.bind(this)(message));
-                }
-            }
-            appboy.display.showInAppMessage(message);
-        })
-        .catch(error => {
-            dispatcherEventStream.publish(LOGGER, ['error', `Error handling message - ${error}`, { message, error }]);
-        });
+    if (message instanceof appboy.InAppMessage) {
+        /**
+         * Always subscribe click action to second button
+         * as this is always "success" as opposed to "dismiss"
+         * as confirmed with CRM (AS)
+         */
+        dispatcherEventStream.publish(IN_APP_MESSAGE_EVENT_NAME, message);
+
+        if (message.buttons && message.buttons.length >= 2) {
+            const [, button] = message.buttons;
+            // Note that the below subscription returns an ID that could later be used to unsubscribe
+            button.subscribeToClickedEvent(() => interceptInAppMessageClickEventsHandler(message));
+        }
+    }
+    appboy.display.showInAppMessage(message);
 }
 /**
  * Internal handler for content cards that dispatches to component-registered callbacks
@@ -53,60 +48,57 @@ function interceptInAppMessagesHandler (message) {
 function contentCardsHandler (postCardsAppboy) {
     this.refreshRequested = false;
 
-    const { rawCards = [] } = postCardsAppboy;
+    const { cards = [] } = postCardsAppboy;
 
-    const cards = removeDuplicateContentCards(rawCards.map(transformCardData));
+    const processedCards = removeDuplicateContentCards(cards.map(transformCardData));
 
-    dispatcherEventStream.publish(CONTENT_CARDS_EVENT_NAME, cards);
+    dispatcherEventStream.publish(CONTENT_CARDS_EVENT_NAME, processedCards);
 
-    this.rawCards = rawCards;
+    this.rawCards = cards;
 
     this.rawCardIndex = Object.fromEntries(this.rawCards.map((rawCard, idx) => [rawCard.id, idx]));
 }
 
 /* BrazeDispatcher */
 class BrazeDispatcher {
+    dispatcherOptions = null;
+
+    rawCards = null;
+
+    rawCardIndex = {};
+
+    refreshRequested = false;
+
+    eventSignifier = 'BrazeContent';
+
+    loggerCallbackInstances = [];
+
     /**
-     * Sets defaults, checks environment, checks for reinstantiation
-     * @param {Number} sessionTimeoutInSeconds
+     * Abstracts card interaction reports to braze SDK
+     * @param {String} type
+     * @param {Card} payload
+     * @return {boolean|*}
      */
-    constructor (sessionTimeoutInSeconds) {
-        if (typeof window === 'undefined') throw new Error('window is not defined');
-
-        this.appboyPromise = null;
-
-        // set during configure
-        this.appboy = null;
-
-        this.dispatcherOptions = null;
-
-        this.rawCards = null;
-
-        this.rawCardIndex = {};
-
-        this.refreshRequested = false;
-
-        this.sessionTimeoutInSeconds = sessionTimeoutInSeconds;
-
-        this.eventSignifier = 'BrazeContent';
-
-        this.loggerCallbackInstances = [];
+    static logEvent (type, payload) {
+        const output = appboy[type](payload, true);
+        appboy.requestImmediateDataFlush();
+        return output;
     }
 
     /**
-     * Checks and sets configuration, appends given callbacks to internal registries and sets internal promise
-     * resolving to appboy SDK.
-     * Opens session, sets user ID and/or subscribes internal callbacks if necessary
-     *
-     * @param {Object} options
-     * @return {Promise<null|*>}
+     * Sets defaults, checks environment, checks for reinstantiation
+     * @param {Number} sessionTimeoutInSeconds
+     * @param apiKey
+     * @param enableLogging
+     * @param userId
      */
-    async configure (options = {}) {
-        const {
-            apiKey,
-            userId,
-            enableLogging
-        } = options;
+    constructor ({
+        sessionTimeoutInSeconds = 0,
+        apiKey,
+        enableLogging,
+        userId
+    }) {
+        if (typeof window === 'undefined') throw new Error('window is not defined');
 
         if (!this.dispatcherOptions) {
             this.dispatcherOptions = {
@@ -119,64 +111,40 @@ class BrazeDispatcher {
 
         window.dataLayer = window.dataLayer || [];
 
-        // Note that appBoyPromise will not be set if this is the first time running this method -
-        // this is a guard against initialise() being called more than once, and attempting to
-        // reboot the entire appboy sdk.
-        if (this.appboyPromise) {
-            this.appboyPromise
-                .then(appboy => this.requestRefresh(appboy));
-            return this.appboyPromise;
-        }
-
-        const isInitialised = await isAppboyInitialised(window.appboy);
-
-        if (isInitialised) {
-            this.appboyPromise = Promise.resolve(window.appboy);
-            this.subscribeBraze(window.appboy);
-            return this.appboyPromise;
-        }
-
         if (!apiKey || !userId) {
-            this.appboyPromise = Promise.reject(new Error('Not initialising braze due to config'));
-            return this.appboyPromise;
+            throw new Error('Not initialising braze due to config');
         }
 
-        try {
-            this.appboyPromise = import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
-                .then(({ default: appboy }) => {
-                    appboy.initialize(apiKey, {
-                        enableLogging,
-                        sessionTimeoutInSeconds: this.sessionTimeoutInSeconds,
-                        noCookies: !areCookiesPermitted()
+        if (!isAppboyInitialised()) {
+            const initialised = appboy.initialize(apiKey, {
+                baseUrl: 'sdk.iad-03.appboy.com',
+                enableLogging,
+                sessionTimeoutInSeconds,
+                noCookies: !areCookiesPermitted()
+            });
+
+            if (initialised) {
+                appboy.openSession();
+
+                this.subscribeBraze();
+
+                appboy.changeUser(userId, () => {
+                    window.dataLayer.push({
+                        event: 'appboyReady'
                     });
-                    appboy.openSession();
-
-                    window.appboy = appboy;
-
-                    this.appboy = appboy;
-
-                    this.subscribeBraze(appboy);
-
-                    appboy.changeUser(userId, () => {
-                        window.dataLayer.push({
-                            event: 'appboyReady'
-                        });
-                    });
-
-                    return window.appboy;
                 });
-
-            return await this.appboyPromise;
-        } catch (error) {
-            throw new Error(`An error occurred while loading the component: ${error}`);
+            } else {
+                throw new Error('Not initialising braze due to config');
+            }
+        } else {
+            this.subscribeBraze();
         }
     }
 
     /**
      * Subscribes internal callbacks to Braze SDK hooks
-     * @param appboy
      */
-    subscribeBraze (appboy) {
+    subscribeBraze () {
         // Note that the below subscriptions return an ID that could later be used to unsubscribe
         appboy.subscribeToInAppMessage(interceptInAppMessagesHandler.bind(this));
         appboy.subscribeToContentCardsUpdates(contentCardsHandler.bind(this));
@@ -186,28 +154,12 @@ class BrazeDispatcher {
 
     /**
      * Ensures only one card refresh request is queued at once
-     * @param appboy
      */
-    requestRefresh (appboy) {
+    requestRefresh () {
         if (!this.refreshRequested) {
             this.refreshRequested = true;
             appboy.requestContentCardsRefresh();
         }
-    }
-
-    /**
-     * Abstracts card interaction reports to braze SDK
-     * @param {String} type
-     * @param {Card} payload
-     * @return {boolean|*}
-     */
-    logEvent (type, payload) {
-        if (!this.appboy) return false;
-
-        const output = this.appboy[type](payload, true);
-        this.appboy.requestImmediateDataFlush();
-
-        return output;
     }
 
     /**
@@ -218,7 +170,7 @@ class BrazeDispatcher {
     logCardClick (cardId) {
         const cardIndex = this.rawCardIndex[cardId];
         const card = this.rawCards[cardIndex];
-        return this.logEvent('logCardClick', card);
+        return BrazeDispatcher.logEvent('logCardClick', card);
     }
 
     /**
@@ -230,7 +182,7 @@ class BrazeDispatcher {
         const cardsShown = cardIds.map(cardId => this.rawCardIndex[cardId])
             .filter(a => a !== undefined)
             .map(cardIndex => this.rawCards[cardIndex]);
-        return this.logEvent('logCardImpressions', cardsShown);
+        return BrazeDispatcher.logEvent('logCardImpressions', cardsShown);
     }
 
     /**

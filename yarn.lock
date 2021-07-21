@@ -1355,6 +1355,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@braze/web-sdk@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-3.3.0.tgz#d5c6cf322ad2b8d7e7556834690cf7757f2b9434"
+  integrity sha512-mjor7k9g6wGF+q67k9r0NSjW7FGgYuRrsLTZzbEhK3u2uwqry4ngeuYmxZosJFqH19T+j7ZSvjkYb99+NYURLA==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -2186,6 +2191,18 @@
   dependencies:
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
+
+"@justeat/f-braze-adapter@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.4.0.tgz#bac8be899ccadac7573f0a8673bfa0694885348b"
+  integrity sha512-iJPs/izz9Ko42gZda4kGrDnH8IXRJhzdBzDRnUiBg3lGijURGx6xFsbbyagQgxEY70Uw/SdpStsF5SvpswQJNw==
+  dependencies:
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
 
 "@justeat/f-button@0.4.1":
   version "0.4.1"
@@ -10679,6 +10696,11 @@ es6-shim@^0.35.5:
   version "0.35.6"
   resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.6.tgz#d10578301a83af2de58b9eadb7c2c9945f7388a0"
   integrity sha512-EmTr31wppcaIAgblChZiuN/l9Y7DPyw8Xtbg7fIVngn6zMW+IEBJDJngeKC3x6wr0V/vcA2wqeFnaw1bFJbDdA==
+
+esbuild@^0.12.8:
+  version "0.12.15"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.15.tgz#9d99cf39aeb2188265c5983e983e236829f08af0"
+  integrity sha512-72V4JNd2+48eOVCXx49xoSWHgC3/cCy96e7mbXKY+WOWghN00cCmlGnwVLRhRHorvv0dgCyuMYBZlM2xDM5OQw==
 
 esbuild@^0.9.3:
   version "0.9.7"
@@ -20127,7 +20149,7 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.2, postcss@^7.0.21
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.1.10, postcss@^8.2.1:
+postcss@^8.1.10, postcss@^8.2.1, postcss@^8.3.5:
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.5.tgz#982216b113412bc20a86289e91eb994952a5b709"
   integrity sha512-NxTuJocUhYGsMiMFHDUkmjSKT3EdH4/WbGF6GCi1NDGk+vbcUTun4fpbOqaPtD8IIsztA2ilZm2DhYCuyN58gA==
@@ -24790,6 +24812,18 @@ vite@2.1.2:
     rollup "^2.38.5"
   optionalDependencies:
     fsevents "~2.3.1"
+
+vite@2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.4.2.tgz#07d00615775c808530bc9f65641062b349b67929"
+  integrity sha512-2MifxD2I9fjyDmmEzbULOo3kOUoqX90A58cT6mECxoVQlMYFuijZsPQBuA14mqSwvV3ydUsqnq+BRWXyO9Qa+w==
+  dependencies:
+    esbuild "^0.12.8"
+    postcss "^8.3.5"
+    resolve "^1.20.0"
+    rollup "^2.38.5"
+  optionalDependencies:
+    fsevents "~2.3.2"
 
 vlq@^0.2.2:
   version "0.2.3"

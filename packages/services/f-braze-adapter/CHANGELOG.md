@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0-beta.3
+------------------------------
+*July 20, 2021*
+
+### Changed
+- Changed how braze adapter is initialised, it is no longer async
+- Increased Braze sdk to the latest version
+- Modified tests to account for changes
+- Made Braze SDK a peer dependency
+
+
 v4.0.0-beta.2
 ------------------------------
 *July 19, 2021*
