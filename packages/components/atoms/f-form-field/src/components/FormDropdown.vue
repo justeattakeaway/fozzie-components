@@ -120,9 +120,10 @@ $form-dropdown-iconPosition--large              : 25px;
 }
 
 .c-formDropdown-select {
+    padding-right: $form-input-iconPadding;
+
     /* Remove default styling */
     outline: none;
     appearance: none;
-    padding-right: $form-input-iconPadding;
 }
 </style>

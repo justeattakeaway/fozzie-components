@@ -9,7 +9,7 @@ v1.19.0
 *July 22, 2021*
 
 ### Added
-- Icon slots for valid input types.
+- Leading and Trailing icon slots.
 - Tests to cover changes.
 
 
