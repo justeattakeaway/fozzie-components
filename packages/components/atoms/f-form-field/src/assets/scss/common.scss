@@ -22,14 +22,14 @@ $form-input-borderColour--invalid       : $color-support-error;
 
 $form-input-focus--boxShadow            : 0 0 0 2px $color-focus;
 
-$form-inputHeight--small                : spacing(x5);
-$form-inputPadding--small               : spacing(x1) spacing(x2);
+$form-input-height--small                : spacing(x5);
+$form-input-padding--small               : spacing(x1) spacing(x2);
 
-$form-inputHeight--medium               : spacing(x6);
-$form-inputPadding--medium              : spacing(x1.5) spacing(x2);
+$form-input-height--medium               : spacing(x6);
+$form-input-padding--medium              : spacing(x1.5) spacing(x2);
 
-$form-inputHeight--large                : spacing(x7);
-$form-inputPadding--large               : spacing(x2);
+$form-input-height--large                : spacing(x7);
+$form-input-padding--large               : spacing(x2);
 
 $form-input-iconPadding                 : spacing(x7);
 $form-input-iconPosition                : 19px;
@@ -41,9 +41,9 @@ $form-input-iconPosition                : 19px;
 
 @mixin icon-position($size, $position: 'bottom') {
     svg {
-        @if $position == 'left' {
+        @if $position == 'leading' {
             left: $form-input-iconPosition;
-        } @else if $position == 'right' {
+        } @else if $position == 'trailing' {
             right: $form-input-iconPosition;
         } @else {
             bottom: $size;
@@ -52,15 +52,15 @@ $form-input-iconPosition                : 19px;
 }
 
 .c-formField-field--small {
-    @include form-field-size($form-inputHeight--small, $form-inputPadding--small); //convert height to rem
+    @include form-field-size($form-input-height--small, $form-input-padding--small); //convert height to rem
 }
 
 .c-formField-field--medium {
-    @include form-field-size($form-inputHeight--medium, $form-inputPadding--medium); //convert height to rem
+    @include form-field-size($form-input-height--medium, $form-input-padding--medium); //convert height to rem
 }
 
 .c-formField-field--large {
-    @include form-field-size($form-inputHeight--large, $form-inputPadding--large); //convert height to rem
+    @include form-field-size($form-input-height--large, $form-input-padding--large); //convert height to rem
 }
 
 .c-formField-field {
@@ -101,4 +101,8 @@ $form-input-iconPosition                : 19px;
 
 .c-formField--invalid {
     border-color: $form-input-borderColour--invalid;
+}
+
+.c-formField-padding--iconLeading {
+    padding-left: $form-input-iconPadding;
 }

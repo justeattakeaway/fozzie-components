@@ -7,11 +7,6 @@ import {
     DriverIcon
 } from '@justeat/f-vue-icons';
 import FormField from '../src/components/FormField.vue';
-import {
-    DEFAULT_FIELD_SIZE,
-    VALID_FIELD_SIZES,
-    VALID_ICON_INPUT_TYPES
-} from '../src/constants';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -28,14 +23,8 @@ export const IconFormFieldComponent = () => ({
         locale: {
             default: select('Locale', ['en-GB', 'en-AU'])
         },
-        fieldSize: {
-            default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
-        },
         isDisabled: {
             default: select('isDisabled', [null, 'disabled'])
-        },
-        inputType: {
-            default: select('Input Type', VALID_ICON_INPUT_TYPES)
         },
         hasError: {
             default: boolean('hasError', false)
@@ -54,40 +43,49 @@ export const IconFormFieldComponent = () => ({
     <div class="wrapper--vertical">
         <form-field
             locale="en-GB"
-            label-text="Left Icon"
-            :input-type="inputType"
-            :field-size="fieldSize"
-            :has-error="hasError"
-            :dropdown-options="dropdownOptions">
-                <template v-slot:icon-left>
+            label-text="Text input - Left Icon"
+            input-type="text"
+            field-size="small"
+            :has-error="hasError">
+                <template v-slot:icon-leading>
                     <AllergyNutIcon />
                 </template>
         </form-field>
 
         <form-field
             locale="en-GB"
-            label-text="Right Icon"
-            :input-type="inputType"
-            :field-size="fieldSize"
-            :has-error="hasError"
-            :dropdown-options="dropdownOptions">
-                <template v-slot:icon-right>
+            label-text="Text input - Right Icon"
+            input-type="text"
+            field-size="medium"
+            :has-error="hasError">
+                <template v-slot:icon-trailing>
                     <DriverIcon />
                 </template>
         </form-field>
 
         <form-field
             locale="en-GB"
-            label-text="Both Icons"
-            :input-type="inputType"
-            :field-size="fieldSize"
-            :has-error="hasError"
-            :dropdown-options="dropdownOptions">
-                <template v-slot:icon-left>
+            label-text="Text input - Both Icons"
+            input-type="text"
+            field-size="large"
+            :has-error="hasError">
+                <template v-slot:icon-leading>
                     <AllergyNutIcon />
                 </template>
-                <template v-slot:icon-right>
+                <template v-slot:icon-trailing>
                     <DriverIcon />
+                </template>
+        </form-field>
+
+        <form-field
+            locale="en-GB"
+            label-text="Dropdown - Left Icon"
+            input-type="dropdown"
+            field-size="medium"
+            :has-error="hasError"
+            :dropdown-options="dropdownOptions">
+                <template v-slot:icon-leading>
+                    <AllergyNutIcon />
                 </template>
         </form-field>
     </div>`
