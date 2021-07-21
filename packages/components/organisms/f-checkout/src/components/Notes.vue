@@ -1,7 +1,7 @@
 <template>
     <div>
         <accordion
-            id="bob"
+            :id="noteTypeDeliveryOrRestaurant"
             :title="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)">
             <form-field
                 :label-text="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)"
@@ -11,7 +11,7 @@
                 cols="30"
                 rows="7"
                 maxlength="200"
-                name="Note"
+                :name="noteTypeDeliveryOrRestaurant + '-note'"
                 has-input-description
                 @input="updateUserNote({ note: $event, type: noteTypeDeliveryOrRestaurant })">
                 {{ $t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.text`) }}
@@ -19,7 +19,7 @@
         </accordion>
         <accordion
             v-if="shouldShowKitchenNotes"
-            id="bob"
+            id="kitchen"
             :title="$t(`userNote.kitchen.${serviceType}.title`)">
             <form-field
                 :label-text="$t(`userNote.kitchen.${serviceType}.title`)"
@@ -29,7 +29,7 @@
                 cols="30"
                 rows="7"
                 maxlength="200"
-                name="Note"
+                name="kitchen-note"
                 has-input-description
                 @input="updateUserNote({ note: $event, type: 'kitchen' })">
                 {{ $t(`userNote.kitchen.${serviceType}.text`) }}

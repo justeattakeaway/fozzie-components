@@ -1,7 +1,7 @@
 <template>
     <div>
         <button
-            :id="id"
+            :id="id + '-accordion-header'"
             :aria-controls="id + '-header'"
             :aria-expanded="isExpanded"
             :class="$style['c-checkout-accordion-header']"
@@ -15,7 +15,7 @@
                     }]" />
         </button>
         <section
-            :id="id"
+            :id="id + '-accordion-section'"
             :aria-labelledby="id + '-section'"
             :class="[
                 $style['c-checkout-accordion-section'], {
