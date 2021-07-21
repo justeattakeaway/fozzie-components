@@ -16,6 +16,7 @@
                 :label-for="uniqueId"
                 :is-inline="isInline"
                 :is-disabled="isDisabled"
+                :label-details="labelDetails"
                 :data-test-id="testId.label">
                 {{ labelText }}
                 <template #description>
@@ -66,7 +67,6 @@
                 :type="normalisedInputType"
                 :min="normalisedInputType === 'number' ? minNumber : false"
                 :max="normalisedInputType === 'number' ? maxNumber : false"
-                placeholder=" "
                 :data-test-id="testId.input"
                 :class="[
                     $style['c-formField-field'],
@@ -114,7 +114,14 @@
                     name="icon-trailing"
                 />
             </span>
+
+            <div
+                v-if="assistiveText"
+                :class="$style['c-formField-assitiveText']">
+                {{ assistiveText }}
+            </div>
         </div>
+
         <slot name="error" />
     </div>
 </template>
@@ -209,6 +216,16 @@ export default {
         hasInputDescription: {
             type: Boolean,
             default: false
+        },
+
+        labelDetails: {
+            type: String,
+            default: ''
+        },
+
+        assistiveText: {
+            type: String,
+            default: ''
         }
     },
 
@@ -368,6 +385,10 @@ $form-input-iconSize                           : 18px;
         position: relative;
     }
 
+    ::placeholder {
+        color: $form-input-secondaryTextColour;
+    }
+
     .c-formField-field--textarea {
         background-clip: padding-box;
         padding: spacing(x2);
@@ -417,7 +438,7 @@ $form-input-iconSize                           : 18px;
             width: $form-input-iconSize;
 
             path {
-                fill: $color-content-subdued;
+                fill: $form-input-secondaryTextColour;
             }
         }
     }
@@ -452,5 +473,11 @@ $form-input-iconSize                           : 18px;
 
     .c-formField-padding--iconTrailing {
         padding-right: $form-input-iconPadding;
+    }
+
+    .c-formField-assitiveText {
+        font-weight: $font-weight-regular;
+        color: $color-content-subdued;
+        margin-top: spacing(x0.5);
     }
 </style>
