@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.18.0
 ------------------------------
-*July 21, 2021*
+*July 22, 2021*
 
 ### Added
 - Leading and Trailing icon slots.
