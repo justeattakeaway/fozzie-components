@@ -130,6 +130,7 @@ import {
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
     VALID_ICON_INPUT_TYPES,
+    VALID_TRAILING_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES,
     VALID_LABEL_STYLES,
@@ -340,11 +341,11 @@ export default {
 
         validateProps () {
             if (!this.isValidIconField && (this.hasLeadingIcon || this.hasTrailingIcon)) {
-                throw new TypeError(`Fields of type ${this.inputType} do not display icons`);
+                throw new TypeError(`Form field is set to have inputType="${this.inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
             }
 
             if (this.isDropdown && this.hasTrailingIcon) {
-                throw new TypeError('Dropdown component does not allow Trailing Icons');
+                throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
             }
         }
     }
