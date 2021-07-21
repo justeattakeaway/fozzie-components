@@ -2,7 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
-    DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES
+    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES
 } from '../../constants';
 
 const $style = {
@@ -328,131 +328,65 @@ describe('FormField', () => {
             });
         });
 
-        describe('hasLeftIcon :: ', () => {
-            describe('when `validIconField` is true', () => {
-                // Arrange
-                const propsData = {
-                    inputType: 'text'
-                };
+        describe('hasLeadingIcon :: ', () => {
+            // Arrange
+            const propsData = {
+                inputType: 'text'
+            };
 
-                it('should return `true` when slots contain `icon-left`', () => {
-                    // Act
-                    const wrapper = shallowMount(FormField, {
-                        propsData,
-                        slots: {
-                            'icon-left': slot
-                        }
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.hasLeftIcon).toEqual(true);
+            it('should return `true` when slots contain `icon-leading`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: {
+                        'icon-leading': slot
+                    }
                 });
 
-                it('should return `undefined` when slots do not contain `icon-left`', () => {
-                    // Act
-                    const wrapper = shallowMount(FormField, {
-                        propsData,
-                        slots: null
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.hasLeftIcon).toEqual(undefined);
-                });
+                // Assert
+                expect(wrapper.vm.hasLeadingIcon).toEqual(true);
             });
 
-            describe('when `validIconField` is false', () => {
-                // Arrange
-                const propsData = {
-                    inputType: 'textarea'
-                };
-
-                it('should return `false` when slots contain `icon-left`', () => {
-                    // Act
-                    const wrapper = shallowMount(FormField, {
-                        propsData,
-                        slots: {
-                            'icon-left': slot
-                        }
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.hasLeftIcon).toEqual(false);
+            it('should return `false` when slots do not contain `icon-leading`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: null
                 });
 
-                it('should return `false` when slots do not contain `icon-left`', () => {
-                    // Act
-                    const wrapper = shallowMount(FormField, {
-                        propsData,
-                        slots: null
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.hasLeftIcon).toEqual(undefined);
-                });
+                // Assert
+                expect(wrapper.vm.hasLeadingIcon).toEqual(false);
             });
         });
 
-        describe('hasRightIcon :: ', () => {
-            describe('when `validIconField` is true', () => {
-                // Arrange
-                const propsData = {
-                    inputType: 'text'
-                };
+        describe('hasTrailingIcon :: ', () => {
+            // Arrange
+            const propsData = {
+                inputType: 'text'
+            };
 
-                it('should return `true` when slots contain `icon-right`', () => {
-                    // Act
-                    const wrapper = shallowMount(FormField, {
-                        propsData,
-                        slots: {
-                            'icon-right': slot
-                        }
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.hasRightIcon).toEqual(true);
+            it('should return `true` when slots contain `icon-trailing`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: {
+                        'icon-trailing': slot
+                    }
                 });
 
-                it('should return `undefined` when slots do not contain `icon-right`', () => {
-                    // Act
-                    const wrapper = shallowMount(FormField, {
-                        propsData,
-                        slots: null
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.hasRightIcon).toEqual(undefined);
-                });
+                // Assert
+                expect(wrapper.vm.hasTrailingIcon).toEqual(true);
             });
 
-            describe('when `validIconField` is false', () => {
-                // Arrange
-                const propsData = {
-                    inputType: 'textarea'
-                };
-
-                it('should return `false` when slots contain `icon-right`', () => {
-                    // Act
-                    const wrapper = shallowMount(FormField, {
-                        propsData,
-                        slots: {
-                            'icon-right': slot
-                        }
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.hasRightIcon).toEqual(false);
+            it('should return `false` when slots do not contain `icon-trailing`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: null
                 });
 
-                it('should return `false` when slots do not contain `icon-right`', () => {
-                    // Act
-                    const wrapper = shallowMount(FormField, {
-                        propsData,
-                        slots: undefined
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.hasRightIcon).toEqual(undefined);
-                });
+                // Assert
+                expect(wrapper.vm.hasTrailingIcon).toEqual(false);
             });
         });
     });
@@ -570,6 +504,105 @@ describe('FormField', () => {
 
                 // Assert
                 expect(wrapper.emitted().input).toHaveLength(1);
+            });
+        });
+    });
+
+    describe('methods ::', () => {
+        describe('validateProps ::', () => {
+            let spy;
+
+            beforeEach(() => {
+                spy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
+            });
+
+            afterEach(() => {
+                spy.mockRestore();
+            });
+
+            describe('when `hasLeadingIcon` is true', () => {
+                it.each(VALID_ICON_INPUT_TYPES)('should not throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each(['textarea', 'checkbox', 'radio'])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).toThrowError(`Fields of type ${inputType} do not display icons`);
+                });
+            });
+
+            describe('when `hasTrailingIcon` is true', () => {
+                it.each([
+                    'text',
+                    'email',
+                    'password',
+                    'number',
+                    'tel'
+                ])('should not throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each(['textarea', 'checkbox', 'radio'])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError(`Fields of type ${inputType} do not display icons`);
+                });
+
+                it('should throw an error when `inputType` is set to `dropdown`', () => {
+                    // Arrange
+                    const propsData = { inputType: 'dropdown' };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError('Dropdown component does not allow Trailing Icons');
+                });
             });
         });
     });

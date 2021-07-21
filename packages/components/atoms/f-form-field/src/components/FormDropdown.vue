@@ -1,9 +1,11 @@
 <template>
     <div
-        :class="$style[`c-formDropdown-padding-${fieldSize}`]"
         :data-test-id="testId.container">
         <caret-icon
-            :class="$style['c-formDropdown-icon']"
+            :class="[
+                $style['c-formDropdown-icon'],
+                $style[`c-formDropdown-iconPosition-${fieldSize}`]
+            ]"
             :data-test-id="testId.icon" />
         <select
             :id="$attrs.id"
@@ -12,7 +14,7 @@
                 $style['c-formField-field'],
                 $style[`c-formField-field--${fieldSize}`], {
                     [$style['c-formField--invalid']]: hasError,
-                    [$style['c-formField-padding--iconLeft']]: hasIcon
+                    [$style['c-formField-padding--iconLeading']]: hasIcon
                 }]"
             :disabled="attributes.disabled"
             :data-test-id="testId.select"
@@ -93,29 +95,28 @@ $form-dropdown-iconPosition--small              : 17px;
 $form-dropdown-iconPosition--medium             : 21px;
 $form-dropdown-iconPosition--large              : 25px;
 
-.c-formDropdown-padding-small {
-    @include icon-position($form-dropdown-iconPosition--small);
-}
-
-.c-formDropdown-padding-medium {
-    @include icon-position($form-dropdown-iconPosition--medium);
-}
-
-.c-formDropdown-padding-large {
-    @include icon-position($form-dropdown-iconPosition--large);
-}
-
 .c-formDropdown-icon {
     width: spacing(x1.5);
     position: absolute;
     right: spacing(x3);
-    bottom: 20px;
     transform: rotate(180deg);
     pointer-events: none;
 
     path {
         fill: $color-content-subdued;
     }
+}
+
+.c-formDropdown-iconPosition-small {
+    bottom: $form-dropdown-iconPosition--small;
+}
+
+.c-formDropdown-iconPosition-medium {
+    bottom: $form-dropdown-iconPosition--medium;
+}
+
+.c-formDropdown-iconPosition-large {
+    bottom: $form-dropdown-iconPosition--large;
 }
 
 .c-formDropdown-select {

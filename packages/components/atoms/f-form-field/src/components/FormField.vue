@@ -39,7 +39,7 @@
                 :value="value"
                 :field-size="fieldSize"
                 :has-error="hasError"
-                :has-icon="hasLeftIcon"
+                :has-icon="hasLeadingIcon"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
@@ -73,8 +73,8 @@
                     $style[`c-formField-field--${fieldSize}`], {
                         [$style['c-formField-field--noFocus']]: isSelectionControl,
                         [$style['c-formField--invalid']]: hasError,
-                        [$style['c-formField-padding--iconLeft']]: hasLeftIcon,
-                        [$style['c-formField-padding--iconRight']]: hasRightIcon
+                        [$style['c-formField-padding--iconLeading']]: hasLeadingIcon,
+                        [$style['c-formField-padding--iconTrailing']]: hasTrailingIcon
                     }]"
                 v-on="listeners"
             >
@@ -90,28 +90,28 @@
             </form-label>
 
             <span
-                v-if="hasLeftIcon"
+                v-if="hasLeadingIcon"
                 :class="[
                     $style['c-formField-icon'],
                     $style[`c-formField-icon--${fieldSize}`] ,
-                    $style[`c-formField-icon--left`],
+                    $style[`c-formField-icon--leading`],
                     { [$style[`c-formField-icon--disabled`]]: isDisabled }
                 ]">
                 <slot
-                    name="icon-left"
+                    name="icon-leading"
                 />
             </span>
 
             <span
-                v-if="hasRightIcon"
+                v-if="hasTrailingIcon"
                 :class="[
                     $style['c-formField-icon'],
                     $style[`c-formField-icon--${fieldSize}`] ,
-                    $style[`c-formField-icon--right`],
+                    $style[`c-formField-icon--trailing`],
                     { [$style[`c-formField-icon--disabled`]]: isDisabled }
                 ]">
                 <slot
-                    name="icon-right"
+                    name="icon-trailing"
                 />
             </span>
         </div>
@@ -296,12 +296,21 @@ export default {
             return VALID_ICON_INPUT_TYPES.includes(this.inputType);
         },
 
-        hasLeftIcon () {
-            return this.$slots['icon-left'] && this.isValidIconField;
+        hasLeadingIcon () {
+            return Boolean(this.$slots['icon-leading']);
         },
 
-        hasRightIcon () {
-            return this.$slots['icon-right'] && this.isValidIconField && !this.isDropdown;
+        hasTrailingIcon () {
+            return Boolean(this.$slots['icon-trailing']);
+        }
+    },
+
+    watch: {
+        $props: {
+            immediate: true,
+            handler () {
+                this.validateProps();
+            }
         }
     },
 
@@ -326,6 +335,16 @@ export default {
         updateWidth () {
             if (typeof (window) !== 'undefined') {
                 this.windowWidth = window.innerWidth;
+            }
+        },
+
+        validateProps () {
+            if (!this.isValidIconField && (this.hasLeadingIcon || this.hasTrailingIcon)) {
+                throw new TypeError(`Fields of type ${this.inputType} do not display icons`);
+            }
+
+            if (this.isDropdown && this.hasTrailingIcon) {
+                throw new TypeError('Dropdown component does not allow Trailing Icons');
             }
         }
     }
@@ -421,19 +440,15 @@ $form-input-iconSize                       : 18px;
         @include icon-position($form-input-iconPosition);
     }
 
-    .c-formField-icon--left {
-        @include icon-position($form-input-iconPosition, 'left');
+    .c-formField-icon--leading {
+        @include icon-position($form-input-iconPosition, 'leading');
     }
 
-    .c-formField-icon--right {
-        @include icon-position($form-input-iconPosition, 'right');
+    .c-formField-icon--trailing {
+        @include icon-position($form-input-iconPosition, 'trailing');
     }
 
-    .c-formField-padding--iconLeft {
-        padding-left: $form-input-iconPadding;
-    }
-
-    .c-formField-padding--iconRight {
+    .c-formField-padding--iconTrailing {
         padding-right: $form-input-iconPadding;
     }
 </style>
