@@ -30,7 +30,8 @@ const transformCardData = card => {
         title,
         linkText,
         description: subtitleDescription,
-        pinned
+        pinned,
+        updated
     } = card;
 
     const {
@@ -39,6 +40,7 @@ const transformCardData = card => {
         content_container_background: contentBackgroundColor,
         banner,
         button_1: ctaText = linkText,
+        deduplication_key: deduplicationKey,
         discount_percentage: discountPercentage,
         earned_stamps: earnedStamps,
         expiry_date: expiryDate,
@@ -55,7 +57,6 @@ const transformCardData = card => {
         subtitle = subtitleDescription,
         total_required_stamps: totalRequiredStamps,
         custom_card_type: type,
-        updated,
         voucher_code: voucherCode,
         headline,
         display_times_json: displayTimesJson
@@ -82,12 +83,17 @@ const transformCardData = card => {
         ? ['true', true].includes(extras.is_ready_to_claim)
         : undefined;
 
-    return {
+    const isVisible = extrasMembers.includes('is_visible')
+        ? ['true', true].includes(extras.is_visible)
+        : undefined;
+
+    const output = {
         backgroundColor,
         brand,
         contentBackgroundColor,
         banner,
         ctaText,
+        deduplicationKey: deduplicationKey || `${type}/${title}`,
         description,
         discountPercentage,
         earnedStamps,
@@ -100,6 +106,7 @@ const transformCardData = card => {
         id,
         image,
         isReadyToClaim,
+        isVisible,
         location,
         offerAuthRequired,
         order,
@@ -115,6 +122,12 @@ const transformCardData = card => {
         voucherCode,
         displayTimes
     };
+
+    Object.keys(output)
+        .filter(k => output[k] === undefined)
+        .forEach(k => delete output[k]);
+
+    return output;
 };
 
 export default transformCardData;

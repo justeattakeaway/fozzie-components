@@ -12,7 +12,10 @@ import CheckoutMock from '../src/demo/checkoutMock';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withA11y]
+    decorators: [withA11y],
+    parameters: {
+        layout: 'fullscreen'
+    }
 };
 
 Vue.use(Vuex);
