@@ -1,13 +1,13 @@
 {
-  "name": "@justeat/f-stat-client",
-  "description": "Javascript HTTP client for publishing stats to ElasticSearch",
+  "name": "@justeat/f-statistics",
+  "description": "Javascript client for transporting statistics",
   "version": "0.1.0",
   "main": "src/index.js",
   "maxBundleSize": "100kB",
   "files": [
     "src"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-stat-client",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-statistics",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint:fix && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-stat-client ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-statistics ./src/index.js",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
@@ -36,11 +36,8 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {
-    "@elastic/elasticsearch": "^7.12.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@elastic/elasticsearch-mock": "^0.3.0",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",

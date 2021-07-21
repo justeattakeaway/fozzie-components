@@ -6,7 +6,10 @@ import {
 } from '../../constants';
 
 const $style = {
-    'c-formField-field--noFocus': 'c-formField-field--noFocus'
+    'c-formField-field--noFocus': 'c-formField-field--noFocus',
+    'c-formField-field--small': 'c-formField-field--small',
+    'c-formField-field--medium': 'c-formField-field--medium',
+    'c-formField-field--large': 'c-formField-field--large'
 };
 
 describe('FormField', () => {
@@ -234,6 +237,32 @@ describe('FormField', () => {
                 });
             });
         });
+
+        describe('fieldSize ::', () => {
+            it.each([
+                ['c-formField-field--small', 'small'],
+                ['c-formField-field--medium', 'medium'],
+                ['c-formField-field--large', 'large']
+            ])('should apply %s class to input when set to %s', (className, fieldSize) => {
+                // Arrange
+                const propsData = {
+                    fieldSize
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    mocks: {
+                        $style
+                    }
+                });
+
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('class')).toContain(className);
+            });
+        });
     });
 
     describe('computed :: ', () => {
@@ -252,6 +281,24 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formInput.attributes('class')).toContain('c-formField-field--noFocus');
+            });
+        });
+
+        describe('isDisabled :: ', () => {
+            it.each([
+                [true, 'disabled'],
+                [false, null]
+            ])('should return %s if disabled attribute is %s', (expected, disabled) => {
+                // Arrange
+                const propsData = {
+                    disabled
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                // Assert
+                expect(wrapper.vm.isDisabled).toEqual(expected);
             });
         });
     });

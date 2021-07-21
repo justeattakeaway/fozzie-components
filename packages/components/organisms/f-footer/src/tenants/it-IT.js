@@ -195,7 +195,7 @@ export default {
                     gtm: 'click_chi_siamo_ristoranti'
                 },
                 {
-                    url: 'https://rider.justeat.it/application',
+                    url: 'https://www.justeat.it/rider',
                     text: 'Diventa un Rider',
                     gtm: 'click_chi_siamo_diventa_un_rider'
                 },
