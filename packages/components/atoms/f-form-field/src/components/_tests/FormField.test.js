@@ -2,7 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
-    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES
+    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES, VALID_TRAILING_ICON_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
@@ -548,7 +548,7 @@ describe('FormField', () => {
                                 'icon-leading': slot
                             }
                         });
-                    }).toThrowError(`Fields of type ${inputType} do not display icons`);
+                    }).toThrowError(`Form field is set to have inputType="${inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
                 });
             });
 
@@ -586,7 +586,7 @@ describe('FormField', () => {
                                 'icon-trailing': slot
                             }
                         });
-                    }).toThrowError(`Fields of type ${inputType} do not display icons`);
+                    }).toThrowError(`Form field is set to have inputType="${inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
                 });
 
                 it('should throw an error when `inputType` is set to `dropdown`', () => {
@@ -601,7 +601,7 @@ describe('FormField', () => {
                                 'icon-trailing': slot
                             }
                         });
-                    }).toThrowError('Dropdown component does not allow Trailing Icons');
+                    }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
                 });
             });
         });
