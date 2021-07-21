@@ -18,7 +18,7 @@ v1.18.0
 *July 22, 2021*
 
 ### Added
-- Leading and Trailing con slots.
+- Leading and Trailing icon slots.
 - Tests to cover changes.
 
 

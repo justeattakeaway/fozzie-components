@@ -80,7 +80,6 @@ $form-inlineLabel-weight        : $font-weight-regular;
     @include font-size($form-label-fontSize);
     font-weight: $form-label-weight;
     margin-bottom: spacing();
-    width: 100%;
 }
 
 .c-formField-label--disabled {
