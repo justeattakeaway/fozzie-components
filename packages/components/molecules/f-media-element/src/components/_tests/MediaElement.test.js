@@ -308,7 +308,7 @@ describe('MediaElement.vue', () => {
                 expect(style.exists()).toBe(true);
             });
         });
-        
+
     });
 
     describe('slot', () => {
