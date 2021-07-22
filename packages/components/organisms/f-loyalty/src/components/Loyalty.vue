@@ -1,7 +1,9 @@
 <template>
     <div
         :class="$style['c-loyalty']"
-        data-test-id="loyalty" />
+        data-test-id="loyalty">
+        <loyalty-header />
+    </div>
 </template>
 
 <script>
@@ -10,11 +12,14 @@ import { mapActions } from 'vuex';
 import tenantConfigs from '../tenants';
 import loyalty from '../store/loyalty.module';
 import { ACTION_INITIALISE_LOYALTY, VUEX_MODULE_NAMESPACE_LOYALTY } from '../store/types';
+import LoyaltyHeader from './Header.vue';
 
 export default {
     name: 'VLoyalty',
 
-    components: {},
+    components: {
+        LoyaltyHeader
+    },
 
     mixins: [
         VueGlobalisationMixin
@@ -68,13 +73,11 @@ export default {
 
 .c-loyalty {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
+    width: 100%;
     margin: auto;
-    border: 1px solid $color-red;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
+    background-color: $color-grey-10;
 }
 
 </style>
