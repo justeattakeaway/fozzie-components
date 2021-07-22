@@ -2232,6 +2232,16 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.7.0.tgz#aa6aec60198623f95f59ab34b508362271976b2e"
   integrity sha512-tICH7QOafDpUC/p9Lz015K/1UTSjak75BSLLvirA1LuL6CDkzweiqsYK9xm98LksdgwYL5qou2HAeYUDhGfTgQ==
 
+"@justeat/f-button@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.7.0.tgz#aa6aec60198623f95f59ab34b508362271976b2e"
+  integrity sha512-tICH7QOafDpUC/p9Lz015K/1UTSjak75BSLLvirA1LuL6CDkzweiqsYK9xm98LksdgwYL5qou2HAeYUDhGfTgQ==
+
+"@justeat/f-button@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.9.0.tgz#ff7f5dc0ccae943d80ba9affad29c89b11e18156"
+  integrity sha512-HJqDqiTEJ/vuo5PAhvcm7Cn0WRZS8EfOxbdpQ+wswXVzvZTwr9nd3xL30HMfP6p8yb/YlpjsaAU6StILoGqOLA==
+
 "@justeat/f-card@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-1.2.1.tgz#8b44b73c291c8527beb6351730a90a476cb54325"
@@ -2457,23 +2467,23 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@5.0.0-beta.8":
-  version "5.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.8.tgz#40e07dddd107e8b38dfdc18da69fda8ca632863a"
-  integrity sha512-XALec51+e/VfcmK5gJTEXxhBjUmcLqZZlWHF384dSu+ujBK3c2QNBfeLJMfuBRa9mV3nXMCqbsJvxSZmty56Yw==
+"@justeat/fozzie@5.0.0-beta.10":
+  version "5.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.10.tgz#b1d57e5b096553ebcb5bf1625806b7a250eca6f1"
+  integrity sha512-II3fgXXxkVJYLa39URqIQJCrhFO83cMXgR9Q3kH1ZkibC/pihZ1jXCmTMOWpr6C9gSaxlZ7+wwninv+DHXnYww==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
     "@justeat/f-utils" "2.0.0"
-    "@justeat/pie-design-tokens" "0.18.0"
+    "@justeat/pie-design-tokens" "0.19.0"
     fontfaceobserver "2.1.0"
     include-media "1.4.9"
     normalize-scss "7.0.1"
 
-"@justeat/pie-design-tokens@0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-0.18.0.tgz#0f88859ddf31e6be05f86e42e0c0f7d7b39ed41b"
-  integrity sha512-vxUuc4mdSU8ojIjuE7TtotSmastITeZ5WlUWmvjVl1tvbXzHdr6cJCSJV1WaQ4N2hjjrEpL9FfPAV5kPzGKxwA==
+"@justeat/pie-design-tokens@0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-0.19.0.tgz#5110e0a607eb215353de4313ba457dab7dd6d459"
+  integrity sha512-YfQ2GkKaq36ZzgShkcKxZx1tefAr2I/19RY0G1aUhf7meq5fSkzkViHWlhGQHFO5t9syLgJ1oCHiwk2LPdaWZw==
   dependencies:
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"

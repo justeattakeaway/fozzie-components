@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.49.0
+------------------------------
+*July 20, 2021*
+
+### Updated
+- Fozzie version to v5.0.0-beta.10 which has the latest pie design token variables.
+
+
 v3.48.0
 ------------------------------
 *July 19, 2021*
