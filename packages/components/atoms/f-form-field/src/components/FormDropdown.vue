@@ -117,6 +117,18 @@ $form-dropdown-iconIndent--large              : 25px;
     }
 }
 
+.c-formDropdown-iconIndent--small {
+    bottom: $form-dropdown-iconIndent--small;
+}
+
+.c-formDropdown-iconIndent--medium {
+    bottom: $form-dropdown-iconIndent;
+}
+
+.c-formDropdown-iconIndent--large {
+    bottom: $form-dropdown-iconIndent--large;
+}
+
 .c-formDropdown-select {
     padding-right: $form-input-iconPadding;
 
