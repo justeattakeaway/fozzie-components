@@ -1,10 +1,10 @@
 /**
  * @jest-environment node
  */
-import appboy from 'appboy-web-sdk';
+import appboy from '@braze/web-sdk';
 import BrazeDispatcher from '../BrazeDispatcher';
 
-jest.mock('appboy-web-sdk', () => ({
+jest.mock('@braze/web-sdk', () => ({
     initialize: jest.fn()
 }));
 jest.mock('../utils/isAppboyInitialised');
@@ -22,8 +22,8 @@ describe('BrazeDispatcher › node', () => {
         expect.assertions(2);
 
         try {
-            const Dispatcher = new BrazeDispatcher(0);
-            await Dispatcher.configure({
+            // eslint-disable-next-line no-unused-vars
+            const Dispatcher = new BrazeDispatcher({
                 userId,
                 apiKey
             });

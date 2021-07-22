@@ -41,27 +41,28 @@ describe('BrazeAdapter', () => {
             GetConsumerRegistry.mockReset();
         });
 
-        it('should create an instance of the BrazeAdapter', async () => {
+        it('should create an instance of the BrazeAdapter', () => {
             // Arrange
             GetConsumerRegistry.mockImplementation(() => ({
                 register: jest.fn()
             }));
 
             // Act
-            const brazeAdapter = await BrazeAdapter.initialise(mockConfig);
+            const brazeAdapter = new BrazeAdapter(mockConfig);
 
             // Assert
             expect(brazeAdapter).toBeInstanceOf(BrazeAdapter);
         });
 
-        it('should call the GetConsumerRegistry function', async () => {
+        it('should call the GetConsumerRegistry function', () => {
             // Arrange
             GetConsumerRegistry.mockImplementation(() => ({
                 register: jest.fn()
             }));
 
             // Act
-            await BrazeAdapter.initialise(mockConfig);
+            // eslint-disable-next-line no-unused-vars
+            const adapter = new BrazeAdapter(mockConfig);
 
             // Assert
             expect(GetConsumerRegistry).toHaveBeenCalledTimes(1);
@@ -70,36 +71,47 @@ describe('BrazeAdapter', () => {
         it('should handle errors in instantiating the consumer registry', async () => {
             // Arrange
             const error = new Error('Test error');
-            GetConsumerRegistry.mockImplementation(() => new Promise((resolve, reject) => {
-                reject(error);
-            }));
+            GetConsumerRegistry.mockImplementation(() => {
+                throw error;
+            });
+
+            function mockFunction () {
+                // eslint-disable-next-line no-unused-vars
+                const adapter = new BrazeAdapter(mockConfig);
+            }
 
             // Assert
-            expect(BrazeAdapter.initialise(mockConfig)).rejects.toEqual(error);
+            expect(mockFunction).toThrowError(error);
         });
 
         it('should handle errors in registering a consumer', async () => {
             // Arrange
+            const error = new Error('Test error');
             GetConsumerRegistry.mockImplementation(() => ({
                 register: () => {
-                    throw new Error('Test error');
+                    throw error;
                 }
             }));
 
+            function mockFunction () {
+                // eslint-disable-next-line no-unused-vars
+                const adapter = new BrazeAdapter(mockConfig);
+            }
+
             // Assert
-            expect(BrazeAdapter.initialise(mockConfig)).rejects.toThrowError('Test error');
+            expect(mockFunction).toThrowError(error);
         });
 
-        it('should NOT be a singleton class', async () => {
+        it('should NOT be a singleton class', () => {
             // Arrange
             GetConsumerRegistry.mockImplementation(() => ({
                 register: jest.fn()
             }));
 
             // Act
-            const brazeAdapter = await BrazeAdapter.initialise(mockConfig);
+            const brazeAdapter = new BrazeAdapter(mockConfig);
 
-            const brazeAdapter2 = await BrazeAdapter.initialise(mockConfig);
+            const brazeAdapter2 = new BrazeAdapter(mockConfig);
 
             // Assert
             expect(brazeAdapter).not.toEqual(brazeAdapter2);
@@ -113,7 +125,7 @@ describe('BrazeAdapter', () => {
 
         let brazeAdapter;
 
-        beforeEach(async () => {
+        beforeEach(() => {
             // Arrange
             GetConsumerRegistry.mockImplementation(() => ({
                 consumers: [],
@@ -126,7 +138,7 @@ describe('BrazeAdapter', () => {
                 unregister: jest.fn()
             }));
 
-            brazeAdapter = await BrazeAdapter.initialise(mockConfig);
+            brazeAdapter = new BrazeAdapter(mockConfig);
         });
 
         it('should pushShapedEventToDataLayer via dispatcher', () => {

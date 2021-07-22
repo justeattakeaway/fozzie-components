@@ -1,21 +1,7 @@
 import GetConsumerRegistry from './services/BrazeConsumerRegistry';
 
 export default class BrazeAdapter {
-    /**
-     * Initializes the braze adapter and returns instance of the braze adapter class
-     * @param apiKey
-     * @param userId
-     * @param enableLogging
-     * @param sessionTimeout
-     * @param enabledCardTypes
-     * @param brands
-     * @param callbacks
-     * @param interceptInAppMessages
-     * @param interceptInAppMessageClickEvents
-     * @param customFilters
-     * @returns {Promise<BrazeAdapter>}
-     */
-    static async initialise ({
+    constructor ({
         apiKey,
         userId,
         enableLogging,
@@ -25,44 +11,10 @@ export default class BrazeAdapter {
         callbacks,
         interceptInAppMessages,
         interceptInAppMessageClickEvents,
-        customFilters
-    }) {
-        const registry = await GetConsumerRegistry({
-            apiKey,
-            userId,
-            enableLogging,
-            sessionTimeout
-        });
-
-        return new BrazeAdapter({
-            enabledCardTypes,
-            brands,
-            callbacks,
-            interceptInAppMessages,
-            interceptInAppMessageClickEvents,
-            customFilters,
-            registry
-        });
-    }
-
-    get dispatcher () {
-        return this._consumerRegistry.dispatcher;
-    }
-
-    constructor ({
-        enabledCardTypes,
-        brands,
-        callbacks,
-        interceptInAppMessages,
-        interceptInAppMessageClickEvents,
         customFilters,
-        loggerCallbacks,
-        registry
+        loggerCallbacks
     }) {
-        // create / get the registry
-        this._consumerRegistry = registry;
-        // register the consumer
-        this._consumer = this._consumerRegistry.register({
+        const consumerOptions = {
             enabledCardTypes,
             brands,
             callbacks,
@@ -70,7 +22,20 @@ export default class BrazeAdapter {
             interceptInAppMessageClickEvents,
             customFilters,
             loggerCallbacks
+        };
+
+        this._consumerRegistry = GetConsumerRegistry({
+            apiKey,
+            userId,
+            enableLogging,
+            sessionTimeout
         });
+
+        this._consumer = this._consumerRegistry.register(consumerOptions);
+    }
+
+    get dispatcher () {
+        return this._consumerRegistry.dispatcher;
     }
 
     /**
