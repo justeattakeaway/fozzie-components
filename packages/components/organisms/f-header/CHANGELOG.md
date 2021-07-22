@@ -11,6 +11,9 @@ Latest (to be added to next version)
 ### Changed
 - Updated version of `f-button`.
 
+### Fixed
+- 'Contact Preferences' URL for en-IE tenant.
+
 
 v4.19.0
 ------------------------------
