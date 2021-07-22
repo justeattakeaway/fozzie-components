@@ -10,7 +10,7 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 describe('Address', () => {
-    const propsData = { title: 'Accordion Header', id: '5' };
+    const propsData = { title: 'Accordion Header', id: 'note' };
     const event = { preventDefault: jest.fn() };
 
     it('should be defined', () => {
@@ -80,7 +80,7 @@ describe('Address', () => {
                     }
                 });
 
-                const header = wrapper.find('[data-test-id="accordion-header"]');
+                const header = wrapper.find('[data-test-id="note-accordion-header"]');
                 header.trigger('click');
                 expect(toggleSpy).toHaveBeenCalled();
                 expect(wrapper.vm.$data.isExpanded).toBe(true);

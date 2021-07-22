@@ -30,4 +30,10 @@ describe('f-checkout "delivery" component tests', () => {
         // Assert
         expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
     });
+
+    it('should open the notes accordion and populate it', () => {
+        checkout.expandAndPopulateNote();
+
+        checkout.goToPayment();
+    });
 });

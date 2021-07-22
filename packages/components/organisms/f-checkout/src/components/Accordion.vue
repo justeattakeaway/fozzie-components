@@ -5,7 +5,7 @@
             :aria-controls="id + '-header'"
             :aria-expanded="isExpanded"
             :class="$style['c-checkout-accordion-header']"
-            data-test-id="accordion-header"
+            :data-test-id="id + '-accordion-header'"
             @click="toggle">
             {{ title }}
             <chevron-icon
