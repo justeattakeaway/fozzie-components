@@ -23,23 +23,22 @@ class BrazeConsumerRegistry {
      * @return {BrazeConsumerRegistry}
      * @constructor
      */
-    static async GetConsumerRegistry ({
+    static GetConsumerRegistry ({
         sessionTimeout = sessionTimeoutInSeconds,
         apiKey,
         userId,
         enableLogging
     }) {
         if (!registryInstance) {
-            const dispatcher = new BrazeDispatcher(sessionTimeout);
+            const dispatcher = new BrazeDispatcher({
+                sessionTimeout,
+                apiKey,
+                userId,
+                enableLogging
+            });
 
             registryInstance = new BrazeConsumerRegistry(dispatcher);
         }
-
-        await registryInstance.dispatcher.configure({
-            apiKey,
-            userId,
-            enableLogging
-        });
 
         return registryInstance;
     }
@@ -52,9 +51,9 @@ class BrazeConsumerRegistry {
         this.consumers = [];
 
         // subscribe to event stream for braze cards and messages
-        dispatcherEventStream.subscribe(CONTENT_CARDS_EVENT_NAME, this.applyContentCardCallbacks);
-        dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, this.applyInAppMessageCallbacks);
-        dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, this.applyInAppMessageClickEventsCallbacks);
+        dispatcherEventStream.subscribe(CONTENT_CARDS_EVENT_NAME, cards => this.applyContentCardCallbacks(cards));
+        dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, message => this.applyInAppMessageCallbacks(message));
+        dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, message => this.applyInAppMessageClickEventsCallbacks(message));
         dispatcherEventStream.subscribe(LOGGER, log => this.applyLoggerCallbacks(...log));
 
         this._dispatcher = dispatcher;

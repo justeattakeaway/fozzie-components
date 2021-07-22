@@ -1,40 +1,32 @@
+import appboy from '@braze/web-sdk';
 import isAppboyInitialised from '../isAppboyInitialised';
 
-const id = '__ID__';
-const getUserId = jest.fn();
-const appboy = {
-    getUser: () => ({
-        getUserId
-    })
-};
+jest.mock('@braze/web-sdk');
 
 describe('f-braze-adapter › isAppboyInitialised', () => {
     afterEach(() => {
         jest.resetAllMocks();
     });
 
-    it('should return false when appboy is undefined', async () => {
-        const isAppboyInitialisedReturn = await isAppboyInitialised();
-        expect(isAppboyInitialisedReturn).toBe(false);
-    });
-
-    it('should return false when getUser is undefined', async () => {
+    it('should return false when appboy is not initialised', () => {
         // Arrange
-        getUserId.mockImplementation(hasUserId => hasUserId(null));
+        appboy.getUser.mockImplementation(() => {
+            throw new Error('Appboy must be initialized before calling methods.');
+        });
 
         // Act
-        const isAppboyInitialisedReturn = await isAppboyInitialised(appboy);
+        const isAppboyInitialisedReturn = isAppboyInitialised();
 
         // Assert
         expect(isAppboyInitialisedReturn).toBe(false);
     });
 
-    it('should return true when getUserId returns a truthy value', async () => {
+    it('should return true when getUser does not throw exception', () => {
         // Arrange
-        getUserId.mockImplementation(hasUserId => hasUserId(id));
+        appboy.getUser.mockImplementation(() => jest.fn());
 
         // Act
-        const isAppboyInitialisedReturn = await isAppboyInitialised(appboy);
+        const isAppboyInitialisedReturn = isAppboyInitialised();
 
         // Assert
         expect(isAppboyInitialisedReturn).toBe(true);
