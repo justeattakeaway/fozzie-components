@@ -19,7 +19,8 @@ const {
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
     ERROR_PAGE_IMAGE,
-    ACCORDION_HEADER
+    DELIVERY_ACCORDION_HEADER,
+    KITCHEN_ACCORDION_HEADER
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -59,7 +60,9 @@ module.exports = class Checkout extends Page {
 
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
-    get accordionHeader () { return $(ACCORDION_HEADER); }
+    get deliveryAccordionHeader () { return $(DELIVERY_ACCORDION_HEADER); }
+
+    get kitchenAccordionHeader () { return $(KITCHEN_ACCORDION_HEADER); }
 
     fields = {
         firstName: {
@@ -173,7 +176,7 @@ module.exports = class Checkout extends Page {
     }
 
     clickAccordionHeader () {
-        return this.accordionHeader.click();
+        return this.deliveryAccordionHeader.click();
     }
 
     /**
@@ -216,7 +219,6 @@ module.exports = class Checkout extends Page {
     * @param {String} addressInfo.line2 Second line of the user's address
     * @param {String} addressInfo.locality Locality of the user's address
     * @param {String} addressInfo.postcode Postcode of the user's address
-    * @param {String} addressInfo.note The user's extra note
     */
     populateCheckoutForm (addressInfo) {
         this.waitForComponent();
@@ -225,7 +227,6 @@ module.exports = class Checkout extends Page {
         this.fields.addressLine2.input.setValue(addressInfo.line2);
         this.fields.addressLocality.input.setValue(addressInfo.locality);
         this.fields.addressPostcode.input.setValue(addressInfo.postcode);
-        this.fields.userNote.input.setValue(addressInfo.note);
     }
 
     /**
@@ -239,7 +240,6 @@ module.exports = class Checkout extends Page {
     * @param {String} addressInfo.line2 Second line of the user's address
     * @param {String} addressInfo.locality Locality of the user's address
     * @param {String} addressInfo.postcode Postcode of the user's address
-    * @param {String} addressInfo.note The user's extra note
     */
     populateGuestCheckoutForm (addressInfo) {
         this.waitForComponent();
@@ -249,7 +249,6 @@ module.exports = class Checkout extends Page {
         this.fields.addressLine2.input.setValue(addressInfo.line2);
         this.fields.addressLocality.input.setValue(addressInfo.locality);
         this.fields.addressPostcode.input.setValue(addressInfo.postcode);
-        this.fields.userNote.input.setValue(addressInfo.note);
     }
 
     /**
@@ -259,13 +258,11 @@ module.exports = class Checkout extends Page {
     * @param {Object} customerInfo
     * @param {String} customerInfo.mobileNumber The user's mobile number
     * @param {String} customerInfo.tableIdentifier The user's table ID
-    * @param {String} customerInfo.note The user's extra note
     */
     populateDineInCheckoutForm (customerInfo) {
         this.waitForComponent();
         this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
         this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
-        this.fields.userNote.input.setValue(customerInfo.note);
     }
 
     /**
