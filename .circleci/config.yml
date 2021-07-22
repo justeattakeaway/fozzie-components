@@ -238,11 +238,7 @@ executors:
   node:
     docker:
       # specify the version you desire here
-<<<<<<< HEAD
       - image: circleci/node:14.17.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
-=======
-      - image: circleci/node:14.16.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
->>>>>>> 67fd4498 (Update CircleCI container to use node LTS)
 
 jobs:
 
