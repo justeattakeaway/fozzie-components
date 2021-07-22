@@ -93,7 +93,7 @@
                 v-if="hasLeadingIcon"
                 :class="[
                     $style['c-formField-icon'],
-                    $style[`c-formField-icon--${fieldSize}`] ,
+                    $style[`c-formField-icon--${fieldSize}`],
                     $style[`c-formField-icon--leading`],
                     { [$style[`c-formField-icon--disabled`]]: isDisabled }
                 ]">
@@ -106,7 +106,7 @@
                 v-if="hasTrailingIcon"
                 :class="[
                     $style['c-formField-icon'],
-                    $style[`c-formField-icon--${fieldSize}`] ,
+                    $style[`c-formField-icon--${fieldSize}`],
                     $style[`c-formField-icon--trailing`],
                     { [$style[`c-formField-icon--disabled`]]: isDisabled }
                 ]">
