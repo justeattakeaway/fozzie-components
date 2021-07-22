@@ -87,6 +87,10 @@ export default {
         }
     }
 
+    .c-checkout-accordion-section {
+        padding: spacing(x2) 0;
+    }
+
     .c-checkout-accordion-section--hidden {
         display: none;
     }
