@@ -419,10 +419,7 @@ export default {
         eventData () {
             return {
                 isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType,
-                chosenTime: this.time.from,
-                isFulfillable: this.isFulfillable,
-                issueMessage: this.message?.code
+                serviceType: this.serviceType
             };
         },
 

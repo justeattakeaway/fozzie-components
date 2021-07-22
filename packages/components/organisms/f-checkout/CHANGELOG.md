@@ -3,9 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (to be added to next version)
+------------------------------
+*August 9, 2021*
+
+### Removed
+- Some eventData values which were added for testing specific case
+
+
 v0.167.0
 ------------------------------
-*August 05, 2021*
+*August 5, 2021*
 
 ### Added
 - `max-length` property to guest email field.
@@ -17,7 +26,7 @@ v0.166.0
 *August 4, 2021*
 
 ### Changed
-- reduce character limit on address fields to 100
+- Reduce character limit on address fields to 100
 
 
 v0.165.0
@@ -42,19 +51,6 @@ v0.163.0
 
 ### Added
 - Extracted APIs from Checkout Store so they are accessible to Contract Tests
-
-
-Latest (to be added to next version)
-------------------------------
-*July 15, 2021*
-
-### Changed
-- Updated version of `f-button`.
-
-
-Latest (to be added to next version)
-------------------------------
-*July 15, 2021*
 
 ### Changed
 - Updated version of `f-button`.
