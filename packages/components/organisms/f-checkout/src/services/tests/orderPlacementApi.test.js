@@ -25,6 +25,7 @@ describe('orderPlacementApi', () => {
         config = {
             headers: {
                 'Content-Type': 'application/json;v=2',
+                'x-je-feature': 'CoreWeb',
                 'x-je-application-id': 7, // Responsive Web
                 'x-je-application-version': applicationVersion,
                 Authorization: `Bearer ${authToken}`
