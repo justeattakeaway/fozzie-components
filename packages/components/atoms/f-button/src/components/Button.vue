@@ -23,10 +23,9 @@
             :class="$style['o-button-content']">
 
             <span
-                v-if="hasIcon && hasIcon === 'leading'"
-                :class="[{
-                    [$style['o-btn-icon']]: hasIcon === 'leading',
-                    [$style['o-btn-icon--leading']]: hasIcon === 'leading' }]">
+                v-if="hasLeadingIcon"
+                :class="[$style['o-btn-icon'], $style['o-btn-icon--leading']]"
+                data-test-id="button-leading-icon">
                 <slot name='leading-icon' />
             </span>
 
@@ -38,10 +37,9 @@
             </span>
 
             <span
-                v-if="hasIcon && hasIcon === 'trailing'"
-                :class="[{
-                    [$style['o-btn-icon']]: hasIcon === 'trailing',
-                    [$style['o-btn-icon--trailing']]: hasIcon === 'trailing' }]">
+                v-if="hasTrailingIcon"
+                :class="[$style['o-btn-icon'], $style['o-btn-icon--trailing']]"
+                data-test-id="button-trailing-icon">
                 <slot name='trailing-icon' />
             </span>
         </span>
@@ -134,6 +132,14 @@ export default {
          */
         getAriaLive () {
             return this.isLoading ? 'polite' : 'off';
+        },
+
+        hasTrailingIcon () {
+            return this.hasIcon && this.hasIcon === 'trailing';
+        },
+
+        hasLeadingIcon () {
+            return this.hasIcon && this.hasIcon === 'leading';
         }
     },
     watch: {
