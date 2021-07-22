@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.164.0
+------------------------------
+*July 22, 2021*
+
+### Added
+- Split Notes for both kitchen and delivery notes
+- Accordions to toggle visibility of notes
+
+### Changed
+- Small changes so the split notes will work with the current API
+
+
 v0.163.0
 ------------------------------
 *July 17, 2021*
