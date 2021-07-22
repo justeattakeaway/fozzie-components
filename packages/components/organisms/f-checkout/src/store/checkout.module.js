@@ -399,7 +399,7 @@ export default {
                 const key = getUserNoteSessionStorageKey(state);
                 const note = window.sessionStorage.getItem(key);
                 if (note) {
-                    dispatch('updateUserNote', note);
+                    dispatch('updateUserNote', { type: 'delivery', note });
                 }
             }
         },

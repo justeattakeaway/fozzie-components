@@ -571,7 +571,7 @@ export default {
                 await this.loadCustomer();
             }
 
-            // this.getUserNote();
+            this.getUserNote();
         },
 
         /**

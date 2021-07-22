@@ -1159,7 +1159,7 @@ describe('CheckoutModule', () => {
                         getUserNote(context);
 
                         // Assert
-                        expect(dispatch).toHaveBeenCalledWith('updateUserNote', userNote);
+                        expect(dispatch).toHaveBeenCalledWith('updateUserNote', { type: 'delivery', note: userNote });
                     });
                 });
 
