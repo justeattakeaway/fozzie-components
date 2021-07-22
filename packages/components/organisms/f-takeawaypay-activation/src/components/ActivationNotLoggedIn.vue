@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div data-test-id="activation-not-logged-in-component">
         <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
         <h1 :class="$style['c-takeawaypayActivation-title']">
