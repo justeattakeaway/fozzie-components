@@ -331,7 +331,7 @@ describe('FormField', () => {
                 expect(wrapper.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}`);
             });
 
-            it('should include attribute `name` in the generated input data-test-id when it is set', () => {
+            it('should include attribute `name` and an `input` suffix` in the generated input data-test-id when it is set', () => {
                 // Arrange
                 const attrsData = {
                     attrs: {
@@ -345,6 +345,24 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formInput.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}-input`);
+            });
+
+            it('should include attribute `name` and a `textarea` suffix in the generated textarea data-test-id when it is set', () => {
+                // Arrange
+                const attrs = {
+                    name: 'email'
+                };
+
+                const propsData = {
+                    inputType: 'textarea'
+                };
+
+                // Act
+                const wrapper = mount(FormField, { attrs, propsData });
+                const formInput = wrapper.find('textarea');
+
+                // Assert
+                expect(formInput.attributes('data-test-id')).toBe(`formfield-${attrs.name}-textarea`);
             });
 
             it('when name is set, it should be included in the generated testId.input data-test-id', () => {
