@@ -58,7 +58,7 @@ const defaultCheckoutState = {
     isLoggedIn: false,
     errors: [],
     noteTypes: ['restaurant'],
-    userNotes: { type: 'restaurant', note: 'No ketchup please' },
+    userNotes: { delivery: 'Please do not knock', kitchen: 'No ketchup please' },
     geolocation: null
 };
 

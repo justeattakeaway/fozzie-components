@@ -691,7 +691,7 @@ export default {
                     basketId: this.basket.id,
                     customerNotes: {
                         noteForRestaurant: this.userNotes.delivery?.note || this.userNotes.restaurant?.note,
-                        noteForKitchen: this.userNotes.kitchen
+                        noteForKitchen: this.userNotes.kitchen.note
                     },
                     referralState: this.getReferralState()
                 };

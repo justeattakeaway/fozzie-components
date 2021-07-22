@@ -68,6 +68,6 @@ export const FIELDS = {
         input: '[data-test-id="formfield-kitchen-note-textarea"]'
     },
     restaurantNote: {
-        input: '[data-test-id="formfield-textarea"]'
+        input: '[data-test-id="formfield-restaurant-note-textarea"]'
     }
 };

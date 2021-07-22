@@ -2239,6 +2239,11 @@
     lodash.startswith "4.2.1"
     lodash.uniq "4.5.0"
 
+"@justeat/f-button@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.7.0.tgz#aa6aec60198623f95f59ab34b508362271976b2e"
+  integrity sha512-tICH7QOafDpUC/p9Lz015K/1UTSjak75BSLLvirA1LuL6CDkzweiqsYK9xm98LksdgwYL5qou2HAeYUDhGfTgQ==
+
 "@justeat/f-card@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-1.2.1.tgz#8b44b73c291c8527beb6351730a90a476cb54325"
@@ -2267,10 +2272,10 @@
   dependencies:
     "@justeat/f-vue-icons" "1.10.0"
 
-"@justeat/f-form-field@1.16.1":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.16.1.tgz#4bb456df38fa7a84c5f8b9540c7f33120c77b99a"
-  integrity sha512-jFQcEfGyQdawzfr2y6ZRidWpTPCPGHTM/m/3tLJQAiZRpd+rhwFwI+rfNoY78qcUiY8qFJE7or0+MOXEUk+z+g==
+"@justeat/f-form-field@1.18.0":
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.18.0.tgz#5e0002a6dbc256a59d5e9a24a723745d0aa03317"
+  integrity sha512-vms0N8/mwfgUDKIcmK9UZtydaKikNYyHPfXHJWqk7rUiDXJGvo2uUxHQ9ArHEuR2DaL0uOdTVfgPthS7fz/WOw==
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "1.11.0"
@@ -13151,11 +13156,6 @@ hpack.js@^2.1.6:
     readable-stream "^2.0.1"
     wbuf "^1.1.0"
 
-hpagent@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/hpagent/-/hpagent-0.1.2.tgz#cab39c66d4df2d4377dbd212295d878deb9bdaa9"
-  integrity sha512-ePqFXHtSQWAFXYmj+JtOTHr84iNrII4/QRlAAPPE+zqnKy4xJo7Ie1Y4kC7AdB+LxLxSTTzBMASsEcy0q8YyvQ==
-
 hsl-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hsl-regex/-/hsl-regex-1.0.0.tgz#d49330c789ed819e276a4c0d272dffa30b18fe6e"
@@ -22238,11 +22238,6 @@ secure-compare@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/secure-compare/-/secure-compare-3.0.1.tgz#f1a0329b308b221fae37b9974f3d578d0ca999e3"
   integrity sha1-8aAymzCLIh+uN7mXTz1XjQypmeM=
-
-secure-json-parse@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/secure-json-parse/-/secure-json-parse-2.4.0.tgz#5aaeaaef85c7a417f76271a4f5b0cc3315ddca85"
-  integrity sha512-Q5Z/97nbON5t/L/sH6mY2EacfjVGwrCcSi5D3btRO2GZ8pf1K1UN7Z9H5J57hjVU2Qzxr1xO+FmBhOvEkzCMmg==
 
 select-hose@^2.0.0:
   version "2.0.0"
