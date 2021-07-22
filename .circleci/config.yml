@@ -270,7 +270,7 @@ jobs:
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - detect_root_change
-      - echo_root
+      # - echo_root
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
