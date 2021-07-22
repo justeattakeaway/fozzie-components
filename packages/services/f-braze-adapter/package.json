@@ -44,7 +44,7 @@
     "lodash.uniq": "4.5.0"
   },
   "devDependencies": {
-    "@braze/web-sdk": ">=3.3.0",
+    "@braze/web-sdk": "^3.3.0",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
