@@ -1,5 +1,6 @@
 /* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
-import appboySDK from 'appboy-web-sdk';
+/* eslint-disable no-unused-vars */
+import appboySDK from '@braze/web-sdk';
 
 import 'core-js/modules/es.object.from-entries';
 
@@ -15,7 +16,7 @@ import {
     LOGGER
 } from '../types/events';
 
-jest.mock('appboy-web-sdk');
+jest.mock('@braze/web-sdk');
 jest.mock('../utils/isAppboyInitialised');
 jest.mock('../utils/areCookiesPermitted');
 jest.mock('../utils/removeDuplicateContentCards');
@@ -23,8 +24,8 @@ jest.mock('../utils/removeDuplicateContentCards');
 let appboy;
 jest.isolateModules(() => {
     /* eslint-disable-next-line global-require */
-    appboy = require('appboy-web-sdk');
-    jest.mock('appboy-web-sdk');
+    appboy = require('@braze/web-sdk');
+    jest.mock('@braze/web-sdk');
 });
 
 const dataLayer = {
@@ -37,6 +38,7 @@ const userId = '__USER_ID__';
 const LOG_ERROR = 'error';
 
 const enabledComponentParameters = {
+    baseUrl: 'sdk.iad-03.appboy.com',
     disableComponent: false,
     apiKey,
     userId
@@ -68,25 +70,26 @@ beforeEach(() => {
 });
 
 describe('instantiation', () => {
+    beforeEach(() => {
+        appboySDK.initialize.mockReturnValue(true);
+    });
+
     describe('BrazeDispatcher', () => {
         const sessionTimeoutInSeconds = 0;
-        let brazeDispatcher;
-
-        beforeEach(() => {
-            brazeDispatcher = new BrazeDispatcher(sessionTimeoutInSeconds);
-        });
-
-        it('should have a property `sessionTimeoutInSeconds` with value as supplied to GetDispatcher()', () => {
-            // Assert
-            expect(brazeDispatcher.sessionTimeoutInSeconds).toBe(sessionTimeoutInSeconds);
-        });
 
         it('should have a property `eventSignifier` with default value `BrazeContent`', () => {
+            // Arrange & Act
+            const options = {
+                sessionTimeoutInSeconds,
+                ...enabledComponentParameters
+            };
+            const dispatcher = new BrazeDispatcher(options);
+
             // Assert
-            expect(brazeDispatcher.eventSignifier).toBe('BrazeContent');
+            expect(dispatcher.eventSignifier).toBe('BrazeContent');
         });
 
-        describe('configure', () => {
+        describe('initialisation', () => {
             it.each`
                 parameter             | value
                 ${'apiKey'}           | ${null}
@@ -101,7 +104,12 @@ describe('instantiation', () => {
                 };
 
                 // Act
-                expect(brazeDispatcher.configure(options)).rejects.toEqual(new Error('Not initialising braze due to config'));
+                function mockFunction () {
+                    const dispatcher = new BrazeDispatcher(options);
+                }
+
+                // Act
+                expect(mockFunction).toThrowError(new Error('Not initialising braze due to config'));
 
                 // Assert
                 expect(appboy.subscribeToInAppMessage).not.toHaveBeenCalled();
@@ -122,7 +130,7 @@ describe('instantiation', () => {
                 isAppboyInitialised.mockReturnValue(value);
 
                 // Act
-                await brazeDispatcher.configure(enabledComponentParameters);
+                const dispatcher = new BrazeDispatcher(enabledComponentParameters);
 
                 // Assert
                 expect(appboyInstance.subscribeToInAppMessage).toHaveBeenCalled();
@@ -142,7 +150,7 @@ describe('instantiation', () => {
                     [false, false, false, true],
                     [false, false, true, false],
                     [undefined, undefined, true, false]
-                ])('should initialise appboy with the correct logging (`%p` ➡ `%p`) and cookie (`%p` ➡ `$p`) parameters', async (
+                ])('should initialise appboy with the correct logging (`%p` ➡ `%p`) and cookie (`%p` ➡ `$p`) parameters', (
                     enableLoggingConfig,
                     expectedEnableLoggingParameter,
                     areCookiesPermittedValue,
@@ -152,111 +160,65 @@ describe('instantiation', () => {
                     areCookiesPermitted.mockReturnValue(areCookiesPermittedValue);
 
                     // Act
-                    await brazeDispatcher.configure({
+                    const dispatcher = new BrazeDispatcher({
                         ...enabledComponentParameters,
                         enableLogging: enableLoggingConfig
                     });
 
                     // Assert
                     expect(appboySDK.initialize).toHaveBeenCalledWith(apiKey, {
+                        baseUrl: 'sdk.iad-03.appboy.com',
                         enableLogging: expectedEnableLoggingParameter,
                         sessionTimeoutInSeconds: 0,
                         noCookies: expectedNoCookiesParamater
                     });
                 });
 
-                it('should open a session following initialisation', async () => {
+                it('should open a session following initialisation', () => {
                     // Act
-                    await brazeDispatcher.configure(enabledComponentParameters);
+                    // eslint-disable-next-line no-unused-vars
+                    const dispatcher = new BrazeDispatcher(enabledComponentParameters);
 
                     // Assert
                     expect(appboySDK.openSession).toHaveBeenCalledAfter(appboySDK.initialize);
                 });
 
-                it('should subscribe to callbacks following opening a session', async () => {
-                    // Act
-                    await brazeDispatcher.configure(enabledComponentParameters);
+                it('should subscribe to callbacks following opening a session', () => {
+                    // Arrange & Act
+                    const dispatcher = new BrazeDispatcher(enabledComponentParameters);
 
                     // Assert
                     expect(appboySDK.subscribeToInAppMessage).toHaveBeenCalledAfter(appboySDK.openSession);
                 });
 
-                it('should set the userId following callback subscription', async () => {
-                    // Act
-                    await brazeDispatcher.configure(enabledComponentParameters);
+                it('should set the userId following callback subscription', () => {
+                    // Arrange & Act
+                    const dispatcher = new BrazeDispatcher(enabledComponentParameters);
 
                     // Assert
                     expect(appboySDK.changeUser).toHaveBeenCalledAfter(appboySDK.requestContentCardsRefresh);
                 });
 
-                it('should pass through the userId along with a callback', async () => {
-                    // Act
-                    await brazeDispatcher.configure(enabledComponentParameters);
+                it('should pass through the userId along with a callback', () => {
+                    // Arrange & Act
+                    const dispatcher = new BrazeDispatcher(enabledComponentParameters);
 
                     // Assert
                     expect(appboySDK.changeUser).toHaveBeenCalledWith(userId, expect.any(Function));
                 });
             });
 
-            it.each([
-                [true],
-                [false]
-            ])('should reject being called a second time with different parameters', async appboyInitialised => {
-                // Arrange
-                expect.assertions(1);
-                isAppboyInitialised.mockReturnValue(appboyInitialised);
-                await brazeDispatcher.configure(enabledComponentParameters);
-
-                // Act
-                try {
-                    await brazeDispatcher.configure({
-                        ...enabledComponentParameters,
-                        userId: '__INVALID_USER_ID__'
-                    });
-                } catch (error) {
-                    // Assert
-                    expect(error.message).toBe('Attempt to reinitialise appboy with different parameters');
-                }
-            });
-
-            it.each([
-                [true],
-                [false]
-            ])('should return the same promise if called a second time with similar parameters', async appboyInitialised => {
-                // Arrange
-                isAppboyInitialised.mockReturnValue(appboyInitialised);
-                const promiseA = await brazeDispatcher.configure(enabledComponentParameters);
-
-                // Act
-                const promiseB = await brazeDispatcher.configure(enabledComponentParameters);
-
-                // Assert
-                expect(promiseA).toBe(promiseB);
-            });
-
-            it('should push an event to datalayer when userId set following initialisation', async () => {
+            it('should push an event to datalayer when userId set following initialisation', () => {
                 // Arrange
                 appboySDK.changeUser.mockImplementation((id, callback) => callback());
 
                 // Act
-                await brazeDispatcher.configure(enabledComponentParameters);
+                const dispatcher = new BrazeDispatcher(enabledComponentParameters);
 
                 // Assert
                 expect(dataLayer.push).toHaveBeenCalledWith({
                     event: 'appboyReady'
                 });
-            });
-
-            it('should not request a refresh if an update is already pending', async () => {
-                // Arrange
-                await brazeDispatcher.configure(enabledComponentParameters);
-                appboy.requestContentCardsRefresh.mockReset();
-
-                // Act
-                await brazeDispatcher.configure(enabledComponentParameters);
-
-                // Assert
-                expect(appboy.requestContentCardsRefresh).not.toHaveBeenCalled();
             });
         });
     });
@@ -271,8 +233,9 @@ describe('BrazeDispatcher operation', () => {
         interceptInAppMessagesHandler,
         contentCardsHandler;
 
-    beforeEach(async () => {
-        dispatcher = new BrazeDispatcher(0);
+    beforeEach(() => {
+        appboySDK.initialize.mockReturnValue(true);
+        appboy.initialize.mockReturnValue(true);
 
         appboy.subscribeToInAppMessage.mockImplementation(callback => {
             interceptInAppMessagesHandler = callback;
@@ -281,26 +244,26 @@ describe('BrazeDispatcher operation', () => {
             contentCardsHandler = callback;
         });
 
-        await dispatcher.configure(callbackConfiguredComponentParameters);
+        dispatcher = new BrazeDispatcher(callbackConfiguredComponentParameters);
     });
 
     describe('callbacks', () => {
         describe('contentCardsHandler', () => {
-            const rawCards = [
+            const cards = [
                 { id: 'card1' },
                 { id: 'card2' }
             ];
 
             beforeEach(() => {
-                removeDuplicateContentCards.mockReturnValue(rawCards);
+                removeDuplicateContentCards.mockReturnValue(cards);
             });
 
             it('should call registered callback with returned cards', () => {
                 // Arrange & Act
-                contentCardsHandler({ rawCards });
+                contentCardsHandler({ cards });
 
                 // Assert
-                expect(contentCardsMockCallback).toHaveBeenCalledWith(rawCards);
+                expect(contentCardsMockCallback).toHaveBeenCalledWith(cards);
             });
         });
 
@@ -308,7 +271,7 @@ describe('BrazeDispatcher operation', () => {
             let message;
 
             beforeEach(() => {
-                message = new appboy.ab.InAppMessage();
+                message = new appboy.InAppMessage();
                 message.buttons = inAppMessageButtons;
             });
 
@@ -330,24 +293,6 @@ describe('BrazeDispatcher operation', () => {
                 expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(message);
             });
 
-            describe('when showInAppMessage throws an error', () => {
-                const error = new Error('We have a problem');
-
-                beforeEach(() => {
-                    inAppMessagesMockCallback.mockImplementation(() => {
-                        throw error;
-                    });
-                });
-
-                it('should log the error to the provided callback', async () => {
-                    // Act
-                    await interceptInAppMessagesHandler(message);
-
-                    // Assert
-                    expect(loggerCallback).toHaveBeenCalledWith([LOG_ERROR, `Error handling message - ${error}`, { message, error }]);
-                });
-            });
-
             it('should subscribe internal callback to the CTA button click event', async () => {
                 // Act
                 await interceptInAppMessagesHandler(message);
@@ -362,7 +307,7 @@ describe('BrazeDispatcher operation', () => {
                 messageClickEventsHandler;
 
             beforeEach(() => {
-                message = new appboy.ab.InAppMessage();
+                message = new appboy.InAppMessage();
                 message.buttons = inAppMessageButtons;
                 message.buttons[1].subscribeToClickedEvent.mockImplementation(clickEventsHandler => {
                     messageClickEventsHandler = clickEventsHandler;
@@ -384,28 +329,28 @@ describe('BrazeDispatcher operation', () => {
     });
 
     describe('card logging', () => {
-        const rawCards = [
+        const cards = [
             { id: 'card1' },
             { id: 'card2' }
         ];
 
         beforeEach(() => {
-            removeDuplicateContentCards.mockReturnValue(rawCards);
-            contentCardsHandler({ rawCards });
+            removeDuplicateContentCards.mockReturnValue(cards);
+            contentCardsHandler({ cards });
         });
 
         describe('logCardClick', () => {
             it('should report back to braze a card resolved from its given ID', () => {
                 // Act
-                dispatcher.logCardClick(rawCards[0].id);
+                dispatcher.logCardClick(cards[0].id);
 
                 // Assert
-                expect(appboy.logCardClick).toHaveBeenCalledWith(rawCards[0], true);
+                expect(appboy.logCardClick).toHaveBeenCalledWith(cards[0], true);
             });
 
             it('should request a flush of data', () => {
                 // Act
-                dispatcher.logCardClick(rawCards[0].id);
+                dispatcher.logCardClick(cards[0].id);
 
                 // Assert
                 expect(appboy.requestImmediateDataFlush).toHaveBeenCalledAfter(appboy.logCardClick);
@@ -415,15 +360,15 @@ describe('BrazeDispatcher operation', () => {
         describe('logCardImpressions', () => {
             it('should report back to braze a list of cards resolved from their given IDs', () => {
                 // Act
-                dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
+                dispatcher.logCardImpressions([cards[0].id, cards[1].id]);
 
                 // Assert
-                expect(appboy.logCardImpressions).toHaveBeenCalledWith([rawCards[0], rawCards[1]], true);
+                expect(appboy.logCardImpressions).toHaveBeenCalledWith([cards[0], cards[1]], true);
             });
 
             it('should request a flush of data', () => {
                 // Act
-                dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
+                dispatcher.logCardImpressions([cards[0].id, cards[1].id]);
 
                 // Assert
                 expect(appboy.requestImmediateDataFlush).toHaveBeenCalledAfter(appboy.logCardImpressions);
