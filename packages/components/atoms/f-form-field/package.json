@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
   "description": "Fozzie Form Field – Fozzie Form Field Component",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "main": "dist/f-form-field.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [

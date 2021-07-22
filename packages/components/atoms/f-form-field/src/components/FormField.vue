@@ -55,7 +55,7 @@
                     $style['c-formField-field--textarea'],
                     { [$style['c-formField--invalid']]: hasError }
                 ]"
-                data-test-id="formfield-textarea"
+                :data-test-id="testId.textarea"
                 v-on="listeners" />
 
             <input
@@ -93,7 +93,7 @@
                 v-if="hasLeadingIcon"
                 :class="[
                     $style['c-formField-icon'],
-                    $style[`c-formField-icon--${fieldSize}`] ,
+                    $style[`c-formField-icon--${fieldSize}`],
                     $style[`c-formField-icon--leading`],
                     { [$style[`c-formField-icon--disabled`]]: isDisabled }
                 ]">
@@ -106,7 +106,7 @@
                 v-if="hasTrailingIcon"
                 :class="[
                     $style['c-formField-icon'],
-                    $style[`c-formField-icon--${fieldSize}`] ,
+                    $style[`c-formField-icon--${fieldSize}`],
                     $style[`c-formField-icon--trailing`],
                     { [$style[`c-formField-icon--disabled`]]: isDisabled }
                 ]">
@@ -277,11 +277,11 @@ export default {
 
         testId () {
             const formFieldName = this.$attrs.name;
-
             return {
                 container: formFieldName ? `formfield-${formFieldName}` : 'formfield-container',
                 input: formFieldName ? `formfield-${formFieldName}-input` : 'formfield-input',
-                label: formFieldName ? `formfield-${formFieldName}-label` : 'formfield-label'
+                label: formFieldName ? `formfield-${formFieldName}-label` : 'formfield-label',
+                textarea: formFieldName ? `formfield-${formFieldName}-textarea` : 'formfield-textarea'
             };
         },
 

@@ -1,12 +1,6 @@
 <template>
     <div
         :data-test-id="testId.container">
-        <caret-icon
-            :class="[
-                $style['c-formDropdown-icon'],
-                $style[`c-formDropdown-iconIndent--${fieldSize}`]
-            ]"
-            :data-test-id="testId.icon" />
         <select
             :id="$attrs.id"
             :class="[
@@ -27,6 +21,10 @@
                 :data-test-id="`${testId.option}-${index}`"
                 :value="option.value">{{ option.text }}</option>
         </select>
+
+        <caret-icon
+            :class="$style['c-formDropdown-icon']"
+            :data-test-id="testId.icon" />
     </div>
 </template>
 
@@ -104,6 +102,18 @@ $form-dropdown-iconIndent--large              : 25px;
 
     path {
         fill: $color-content-subdued;
+    }
+
+    .c-formField-field--small ~ & {
+        bottom: $form-dropdown-iconIndent--small;
+    }
+
+    .c-formField-field--medium ~ & {
+        bottom: $form-dropdown-iconIndent;
+    }
+
+    .c-formField-field--large ~ & {
+        bottom: $form-dropdown-iconIndent--large;
     }
 }
 
