@@ -27,7 +27,7 @@
     "prepare": "husky install"
   },
   "resolutions": {
-    "webpack": "4.36.0"
+    "webpack": "4.46.0"
   },
   "devDependencies": {
     "@babel/cli": "7.14.5",
@@ -46,6 +46,7 @@
     "@vue/cli-service": "4.4.6",
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.3",
+    "@vue/babel-preset-app": "4.5.13",
     "@wdio/allure-reporter": "7.6.0",
     "@wdio/browserstack-service": "7.6.0",
     "@wdio/cli": "7.6.0",
