@@ -1,424 +1,143 @@
 const Button = require('../../test-utils/component-objects/f-button.component');
+const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
 
 let button;
 
 describe('f-button Desktop visual tests', () => {
-    describe('primary button', () => {
-        it('should display medium size', () => {
+    describe('primary, secondary, outline and ghost buttons in all 4 sizes', () => {
+        it('should be displayed', () => {
             // Arrange
             button = new Button();
-            button.withQuery('knob-Button Type', 'primary');
-            button.withQuery('knob-Button Size', 'medium');
 
             // Act
             button.load();
 
             // Assert
-            browser.percyScreenshot('f-button - Primary - Medium', 'desktop');
+            browser.percyScreenshot('f-button - Action', 'desktop');
         });
 
-        it('should display large size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'primary');
-            button.withQuery('knob-Button Size', 'large');
-
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Primary - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'primary');
-            button.withQuery('knob-Button Size', 'small');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Primary - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'primary');
-            button.withQuery('knob-Button Size', 'xsmall');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Primary - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
+        describe('in isLoading state', () => {
+            it('should be displayed', () => {
                 // Arrange
                 button = new Button();
-                button.withQuery('knob-Button Type', 'primary');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                
+                button.withQuery('args', 'isLoading');
+
                 // Act
                 button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Primary - Medium - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Action - Loading', 'desktop');
             });
+        });
 
-            it('should display large size in a loading state', () => {
+        describe('in disabled state', () => {
+            it('should be displayed', () => {
                 // Arrange
                 button = new Button();
-                button.withQuery('knob-Button Type', 'primary');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                
+                button.withQuery('args', 'disabled');
+
                 // Act
                 button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Primary - Large - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Action - Disabled', 'desktop');
+            });
+        });
+
+        describe('in state with leading icon', () => {
+            it('should be displayed', () => {
+                // Arrange
+                button = new Button();
+                button.withQuery('args', 'hasIcon:leading');
+
+                // Act
+                button.load();
+
+                // Assert
+                browser.percyScreenshot('f-button - Action - With Leading Icon', 'desktop');
+            });
+        });
+
+        describe('in state with trailing icon', () => {
+            it('should be displayed', () => {
+                // Arrange
+                button = new Button();
+                button.withQuery('args', 'hasIcon:trailing');
+
+                // Act
+                button.load();
+
+                // Assert
+                browser.percyScreenshot('f-button - Action - With Trailing Icon', 'desktop');
             });
         });
     });
 
-    describe('secondary button', () => {
-        it('should display medium size', () => {
+    describe('link button', () => {
+        it('should be desplayed in all 4 sizes', () => {
             // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'secondary');
-            button.withQuery('knob-Button Size', 'medium');
-            
+            button = new LinkButton();
+
             // Act
             button.load();
 
             // Assert
-            browser.percyScreenshot('f-button - Secondary - Medium', 'desktop');
+            browser.percyScreenshot('f-button - Link', 'desktop');
         });
 
-        it('should display large size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'secondary');
-            button.withQuery('knob-Button Size', 'large');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Secondary - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'secondary');
-            button.withQuery('knob-Button Size', 'small');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Secondary - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'secondary');
-            button.withQuery('knob-Button Size', 'xsmall');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Secondary - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
+        describe('in isLoading state', () => {
+            it('should be desplayed in all 4 sizes', () => {
                 // Arrange
-                button = new Button();
-                button.withQuery('knob-Button Type', 'secondary');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                
+                button = new LinkButton();
+                button.withQuery('args', 'isLoading');
+
                 // Act
                 button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Secondary - Medium - Loading', 'desktop');
-            });
-
-            it('should display large size in a loading state', () => {
-                // Arrange
-                button = new Button();
-                button.withQuery('knob-Button Type', 'secondary');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                
-                // Act
-                button.load();
-
-                // Assert
-                browser.percyScreenshot('f-button - Secondary - Large - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Link - Loading', 'desktop');
             });
         });
-    });
 
-    describe('outline button', () => {
-        it('should display medium size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'outline');
-            button.withQuery('knob-Button Size', 'medium');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Outline - Medium', 'desktop');
-        });
-
-        it('should display large size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'outline');
-            button.withQuery('knob-Button Size', 'large');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Outline - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'outline');
-            button.withQuery('knob-Button Size', 'small');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Outline - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'outline');
-            button.withQuery('knob-Button Size', 'xsmall');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Outline - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
+        describe('in disabled state', () => {
+            it('should be displayed', () => {
                 // Arrange
-                button = new Button();
-                button.withQuery('knob-Button Type', 'outline');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                
+                button = new LinkButton();
+                button.withQuery('args', 'disabled');
+
                 // Act
                 button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Outline - Medium - Loading', 'desktop');
-            });
-
-            it('should display large size in a loading state', () => {
-                // Arrange
-                button = new Button();
-                button.withQuery('knob-Button Type', 'outline');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                
-                // Act
-                button.load();
-
-                // Assert
-                browser.percyScreenshot('f-button - Outline - Large - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Action - Disabled', 'desktop');
             });
         });
-    });
 
-    describe('ghost', () => {
-        it('should display medium size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'ghost');
-            button.withQuery('knob-Button Size', 'medium');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Ghost - Medium', 'desktop');
-        });
-
-        it('should display large size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'ghost');
-            button.withQuery('knob-Button Size', 'large');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Ghost - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'ghost');
-            button.withQuery('knob-Button Size', 'small');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Ghost - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'ghost');
-            button.withQuery('knob-Button Size', 'xsmall');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Ghost - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
+        describe('in state with leading icon', () => {
+            it('should be displayed', () => {
                 // Arrange
-                button = new Button();
-                button.withQuery('knob-Button Type', 'ghost');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                
+                button = new LinkButton();
+                button.withQuery('args', 'hasIcon:leading');
+
                 // Act
                 button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Ghost - Medium - Loading', 'desktop');
-            });
-
-            it('should display large size in a loading state', () => {
-                // Arrange
-                button = new Button();
-                button.withQuery('knob-Button Type', 'ghost');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                
-                // Act
-                button.load();
-
-                // Assert
-                browser.percyScreenshot('f-button - Ghost - Large - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Link - With Leading Icon', 'desktop');
             });
         });
-    });
 
-    describe('link', () => {
-        it('should display medium size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'link');
-            button.withQuery('knob-Button Size', 'medium');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Link - Medium', 'desktop');
-        });
-
-        it('should display large size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'link');
-            button.withQuery('knob-Button Size', 'large');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Link - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'link');
-            button.withQuery('knob-Button Size', 'small');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Link - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button();
-            button.withQuery('knob-Button Type', 'link');
-            button.withQuery('knob-Button Size', 'xsmall');
-            
-            // Act
-            button.load();
-
-            // Assert
-            browser.percyScreenshot('f-button - Link - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
+        describe('in state with trailing icon', () => {
+            it('should be displayed', () => {
                 // Arrange
-                button = new Button();
-                button.withQuery('knob-Button Type', 'link');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                
+                button = new LinkButton();
+                button.withQuery('args', 'hasIcon:trailing');
+
                 // Act
                 button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Link - Medium - Loading', 'desktop');
-            });
-
-            it('should display large size in a loading state', () => {
-                // Arrange
-                button = new Button();
-                button.withQuery('knob-Button Type', 'link');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                
-                // Act
-                button.load();
-
-                // Assert
-                browser.percyScreenshot('f-button - Link - Large - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Link - With Trailing Icon', 'desktop');
             });
         });
     });

@@ -123,7 +123,7 @@ export default {
         /**
          * Renders `Link` component if a `href` attribute is applied to the component
          * Renders `RouterLink` component if a `to` attribute is applied to the component, avoids page reload compared to Link with `href`
-         * Renders `Action` component if no `href` attrivute is applied to the component
+         * Renders `Action` component if no `href` attribute is applied to the component
          */
         componentType () {
             if (this.$attrs.href) {
@@ -617,7 +617,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 .o-btn--link {
     border: 0;
     background-color: transparent;
-    padding: 0;
+    padding: 0 !important;
     color: $color-content-link;
     font-weight: $font-weight-bold;
 
@@ -819,6 +819,10 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         .o-btn-icon svg use,
         .o-btn-icon svg path {
             fill: $btn-disabled-textColor;
+        }
+
+        &.o-btn--link {
+            background-color: transparent;
         }
     }
 }
