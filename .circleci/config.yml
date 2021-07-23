@@ -18,117 +18,135 @@ commands:
   detect_root_change:
     description: Detects root file changes
     steps:
-      - run: |
-          set -e
-          trap 'catch $? $LINENO' ERR
+      - run:
+          name: Detect root file changes (if so, treat all packages as updated)
+          command: |
+            set -e
+            trap 'catch $? $LINENO' ERR
 
-          catch() {
-            if [ "$1" != "0" ]; then
-              # error handling goes here
-              echo "Error $1 occurred on $2"
+            catch() {
+              if [ "$1" != "0" ]; then
+                # error handling goes here
+                echo "Error $1 occurred on $2"
+              fi
+            }
+
+            echo 'Checking changes'
+            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+            echo 'Changes detected:'
+            echo $changes
+
+            if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
+              echo 'export RUN_ALL=true' >> $BASH_ENV
+              source $BASH_ENV
+            else
+            echo 'export RUN_ALL=false' >> $BASH_ENV
+              echo 'Root files not changed'
             fi
-          }
 
-          echo 'Checking changes'
-          changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
-          echo 'Changes detected:'
-          echo $changes
-
-          if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
-            echo 'export RUN_ALL=true' >> $BASH_ENV
-            source $BASH_ENV
-          else
-          echo 'export RUN_ALL=false' >> $BASH_ENV
-            echo 'Root files not changed'
-          fi
-
-  echo_root:
-    description: Detects root package.json changes
-    steps:
-      - run: |
-          echo $RUN_ALL
+  # echo_root:
+  #   description: Detects root package.json changes
+  #   steps:
+  #     - run: |
+  #         echo $RUN_ALL
 
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
-      - run: yarn install
+      - run:
+          name: Install node dependencies
+          command: yarn install
 
   build_packages:
     description: Locally builds all packages in the monorepo
     steps:
-      - run: |
-          if [ "${RUN_ALL}" == "true" ];
-          then
-            yarn build
-          else
-            yarn build --since origin/master --include-dependencies
-          fi
+      - run:
+          name: Build updated packages
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn build
+            else
+              yarn build --since origin/master --include-dependencies
+            fi
 
   lint_packages:
     description: Locally lints all packages in the monorepo
     steps:
-      - run: |
-          if [ "${RUN_ALL}" == "true" ];
-          then
-            yarn lint
-          else
-            yarn lint --since origin/master
-          fi
+      - run:
+          name: Lint updated packages
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn lint
+            else
+              yarn lint --since origin/master
+            fi
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
     steps:
-      - run: |
-          if [ "${RUN_ALL}" == "true" ];
-          then
-            yarn test
-          else
-            yarn test --since origin/master
-          fi
+      - run:
+          name: Run unit / integration tests for updated packages
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn test
+            else
+              yarn test --since origin/master
+            fi
 
   build_storybook:
     description: Build Storybook for UI tests
     steps:
-      - run: |
-          if [ "${RUN_ALL}" == "true" ];
-          then
-            yarn storybook:build
-          else
-            yarn storybook:build-changed
-          fi
+      - run:
+          name: Build storybook for updated packages for UI tests
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn storybook:build
+            else
+              yarn storybook:build-changed
+            fi
 
   component_tests:
-    description: Run Components Tests
+    description: Run Component Tests
     steps:
-      - run: |
-          if [ "${RUN_ALL}" == "true" ];
-          then
-            yarn test-component:chrome
-          else
-            yarn test-component:chrome --since origin/master
-          fi
+      - run:
+          name: Run component tests for updated packages
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn test-component:chrome
+            else
+              yarn test-component:chrome --since origin/master
+            fi
 
   accessibility_tests:
     description: Run Accessibility Tests
     steps:
-      - run: |
-          if [ "${RUN_ALL}" == "true" ];
-          then
-            yarn test-a11y:chrome
-          else
-            yarn test-a11y:chrome --since origin/master
-          fi
+      - run:
+          name: Run accessibility tests for updated packages
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn test-a11y:chrome
+            else
+              yarn test-a11y:chrome --since origin/master
+            fi
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
     steps:
-      - run: |
-          if [ "${RUN_ALL}" == "true" ];
-          then
-            yarn test:visual
-          else
-            yarn test:visual --since origin/master
-          fi
+      - run:
+          name: Run Percy visual regression tests for updated packages
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn test:visual
+            else
+              yarn test:visual --since origin/master
+            fi
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
@@ -252,7 +270,7 @@ jobs:
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - detect_root_change
-      - echo_root
+      # - echo_root
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
