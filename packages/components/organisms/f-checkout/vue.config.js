@@ -30,6 +30,5 @@ module.exports = {
     },
     pluginOptions: {
         lintStyleOnBuild: true
-    },
-    configureWebpack: { externals: ['vuex'] }
+    }
 };
