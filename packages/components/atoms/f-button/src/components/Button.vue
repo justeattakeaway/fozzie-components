@@ -28,6 +28,11 @@
                 }]">
 
                 <span
+                    v-if="isLoading"
+                    :class="$style['c-spinner']"
+                    :data-test-id="`${componentType}-spinner`" />
+
+                <span
                     v-if="hasLeadingIcon"
                     :class="[$style['o-btn-icon'], $style['o-btn-icon--leading']]"
                     data-test-id="button-leading-icon">
