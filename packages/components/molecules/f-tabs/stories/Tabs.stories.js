@@ -37,7 +37,7 @@ export const VueTabsComponent = (args, { argTypes }) => ({
 VueTabsComponent.storyName = 'f-tabs';
 VueTabsComponent.args = {
     selected: 'a',
-    tabTitle: 'How it works'
+    tabTitle: 'How it works (I can be renamed)'
 };
 VueTabsComponent.argTypes = {
     selected: { control: { type: 'radio', options: ['a', 'b'] } },
