@@ -41,7 +41,6 @@ export const LinkButtonComponent = (args, { argTypes }) => ({
     </div>`
 });
 
-
 LinkButtonComponent.argTypes = SharedButtonArgTypes;
 
 LinkButtonComponent.args = {
