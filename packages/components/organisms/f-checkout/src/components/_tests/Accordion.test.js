@@ -9,7 +9,7 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-describe('Address', () => {
+describe('Accordion', () => {
     const propsData = { title: 'Accordion Header', id: 'note' };
     const event = { preventDefault: jest.fn() };
 
