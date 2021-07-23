@@ -3,7 +3,6 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
 v0.165.0
 ------------------------------
 *July 22, 2021*
@@ -14,6 +13,14 @@ v0.165.0
 
 ### Changed
 - Small changes so the split notes will work with the current API
+
+
+v0.164.0
+------------------------------
+*July 22, 2021*
+
+### Added
+- Added `x-je-feature` to header config in `services/orderPlacementApi`
 
 
 v0.163.0
