@@ -217,17 +217,21 @@ export const CheckoutComponent = () => ({
     computed: {
         getCheckoutUrl () {
             const noteType = this.noteTypes || '';
+            let url;
 
             if (this.fulfilmentTimeSelection) {
-                return `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
+                url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
             }
 
             if (this.getCheckoutError && this.getCheckoutError !== noTimeAvailable) {
-                return `/checkout-${this.getCheckoutError}-get-error.json`;
+                url = `/checkout-${this.getCheckoutError}-get-error.json`;
             }
 
             // TODO: Get this working alongside the fulfilment time selection
-            return this.serviceType === 'delivery' ? `/checkout-${this.serviceType}${noteType}.json` : `/checkout-${this.serviceType}.json`;
+            url = this.serviceType === 'delivery' ? `/checkout-${this.serviceType}${noteType}.json` : `/checkout-${this.serviceType}.json`;
+
+            console.log(url);
+            return url;
         },
 
         getBasketUrl () {

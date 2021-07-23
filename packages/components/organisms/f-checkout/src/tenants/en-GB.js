@@ -165,6 +165,16 @@ const messages = {
                 title: 'Leave a note for the driver',
                 text: 'Leave a note for the driver with anything they need to know (e.g. the doorbell doesn\'t work).',
                 placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+            },
+            collection: {
+                title: 'Leave a note',
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+            },
+            dinein: {
+                title: 'Leave a note',
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
             }
         },
         kitchen: {
