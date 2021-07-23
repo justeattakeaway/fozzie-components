@@ -6,7 +6,8 @@ import { DIRECTION, INJECTIONS } from '../../constants';
 const {
     REGISTER,
     SELECT,
-    TABS_COMPONENT
+    TABS_COMPONENT,
+    UPDATE_TITLE
 } = INJECTIONS;
 
 const registeredTabsMock = [
@@ -26,7 +27,12 @@ describe('Tabs', () => {
     const Tab = Vue.extend({
         name: 'Tab',
         template: '<div data-tab="true"></div>',
-        inject: [REGISTER, SELECT, TABS_COMPONENT]
+        inject: [
+            REGISTER,
+            SELECT,
+            TABS_COMPONENT,
+            UPDATE_TITLE
+        ]
     });
 
     const arrange = ({ mocks } = {}) => {
@@ -92,6 +98,11 @@ describe('Tabs', () => {
                 });
             });
         });
+
+        it(`should provide a "${UPDATE_TITLE}" callback`, () => {
+            // Assert
+            expect(tabStub.vm[UPDATE_TITLE]).toBeDefined();
+        });
     });
 
     describe('Tabs registration', () => {
@@ -125,7 +136,7 @@ describe('Tabs', () => {
             expect(tabs.length).toBe(2);
         });
 
-        it('should display the name of the registered tab inside the button', async () => {
+        it('should display the title of the registered tab inside the button', async () => {
             // Act
             await tabStub.vm[REGISTER](registeredTabsMock[0]);
 
@@ -254,6 +265,17 @@ describe('Tabs', () => {
 
                 // Assert
                 expect(wrapper.emitted().change).toBeFalsy();
+            });
+
+            it(`should update button text when ${UPDATE_TITLE} is called`, async () => {
+                // Arrange
+                const tabButton = wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[0].name}"]`);
+
+                // Act
+                await tabStub.vm[UPDATE_TITLE](registeredTabsMock[0].name, '__UPDATED_TITLE__');
+
+                // Assert
+                expect(tabButton.text()).toEqual('__UPDATED_TITLE__');
             });
         });
     });

@@ -7,5 +7,6 @@ export const DIRECTION = {
 export const INJECTIONS = {
     REGISTER: 'fTabs_register',
     SELECT: 'fTabs_select',
-    TABS_COMPONENT: 'fTabs_tabsComponent'
+    TABS_COMPONENT: 'fTabs_tabsComponent',
+    UPDATE_TITLE: 'fTabs_updateTitle'
 };
