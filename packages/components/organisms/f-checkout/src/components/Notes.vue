@@ -76,14 +76,8 @@ export default {
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateUserNote',
-            'getUserNote',
-            'saveUserNote'
+            'updateUserNote'
         ])
     }
 };
 </script>
-
-<style lang="scss" module>
-
-</style>

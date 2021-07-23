@@ -58,6 +58,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+    $icon-size: 16px;
 
     .c-checkout-accordion-header {
         padding: spacing(x2) 0;
@@ -77,7 +78,6 @@ export default {
         font-weight: 600;
 
         .c-checkout-accordion-header-arrow {
-            $icon-size: 16px;
             height: $icon-size;
             width: $icon-size;
         }
