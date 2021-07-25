@@ -36,19 +36,6 @@ describe('f-checkout "delivery" component tests', () => {
 
         checkout.goToPayment();
     });
-
-    it('should open both delivery and kitchen notes accordions and populate them', () => {
-        // Arrange
-        checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is ASAP available', true)
-                .withQuery('$knob-Note types', 'split-notes-delivery-kitchen');
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        // Assert
-        checkout.expandAndPopulateNote('delivery', 'This is a delivery note');
-        checkout.expandAndPopulateNote('kitchen', 'This is a kitchen note');
-        checkout.goToPayment();
-    });
 });
 
 describe('f-checkout "delivery" - split notes - component tests', () => {
@@ -60,12 +47,12 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
                 .withQuery('&knob-Note types', '-split-notes-delivery-kitchen');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        console.log('PAGEURL', pageUrl);
+
         checkout.open(pageUrl);
         checkout.waitForComponent();
     });
 
-    it.only('should open both delivery and kitchen notes accordions and populate them', () => {
+    it('should open both delivery and kitchen notes accordions and populate them', () => {
         // Assert
         checkout.expandAndPopulateNote('delivery', 'This is a delivery note');
         checkout.expandAndPopulateNote('kitchen', 'This is a kitchen note');
