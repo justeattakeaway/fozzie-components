@@ -336,7 +336,6 @@ module.exports = class Checkout extends Page {
     populateCollectionCheckoutForm (addressInfo) {
         this.waitForComponent();
         this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
-        this.expandAndPopulateNote('restaurant', addressInfo.note);
     }
 
     /**
