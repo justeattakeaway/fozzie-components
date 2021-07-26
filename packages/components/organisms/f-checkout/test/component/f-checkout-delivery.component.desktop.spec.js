@@ -31,8 +31,9 @@ describe('f-checkout "delivery" component tests', () => {
         expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
     });
 
-    it('should open the restaurant notes accordion and populate it', () => {
-        checkout.expandAndPopulateNote('restaurant', 'This is a restaurant note');
+    it('should open the combined notes accordion and populate it', () => {
+        // Combined notes are named delivery until the new API spec is released
+        checkout.expandAndPopulateNote('delivery', 'This is a combined note');
 
         checkout.goToPayment();
     });

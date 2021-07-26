@@ -475,7 +475,7 @@ export default {
             // TODO: Maybe there's a way to make this nicer
             state.userNotes = notes?.length > 0 ? { ...notes.map(({ type, note }) => ({ [type]: note })) } : {};
             // TODO: Remove this ternary when backend is complete. Currently we send the notes value as delivery but the default will be restaurant
-            state.noteTypes = noteTypes?.length > 0 ? noteTypes : ['restaurant'];
+            state.noteTypes = noteTypes?.length > 0 ? noteTypes : ['delivery'];
         },
 
         [UPDATE_AUTH]: (state, authToken) => {

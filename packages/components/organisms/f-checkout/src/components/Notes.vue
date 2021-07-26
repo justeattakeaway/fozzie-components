@@ -4,7 +4,6 @@
             :id="noteTypeDeliveryOrRestaurant"
             :title="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)">
             <form-field
-                :label-text="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)"
                 input-type="textarea"
                 :placeholder="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.placeholder`)"
                 :value="userNotes[noteTypeDeliveryOrRestaurant]"
@@ -22,7 +21,6 @@
             id="kitchen"
             :title="$t(`userNote.kitchen.${serviceType}.title`)">
             <form-field
-                :label-text="$t(`userNote.kitchen.${serviceType}.title`)"
                 input-type="textarea"
                 :placeholder="$t(`userNote.kitchen.${serviceType}.placeholder`)"
                 :value="userNotes.kitchen"
