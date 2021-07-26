@@ -59,24 +59,23 @@ export default {
 
 <style lang="scss" module>
     $icon-size: 16px;
-    $header-colour: #2a3846;
 
     .c-checkout-accordion-header {
-        background: transparent;
-        padding: spacing(x2) 0;
-        margin-top: spacing(x2);
-        width: 100%;
-        text-decoration: none;
-        text-align: left;
-        outline: none;
-        border: none;
-        border-bottom: 1px solid #c5ccd3;
         display: flex;
-        color: $header-colour;
         justify-content: space-between;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid $color-border-strong;
+        color: $color-content-default;
         cursor: pointer;
         font-size: 1rem;
-        font-weight: 600;
+        font-weight: $font-weight-bold;
+        padding: spacing(x2) 0;
+        margin-top: spacing(x2);
+        outline: none;
+        text-decoration: none;
+        text-align: left;
+        width: 100%;
 
         .c-checkout-accordion-header-arrow {
             height: $icon-size;
