@@ -43,6 +43,9 @@ const DEFAULT_APP_TYPE = 'web';
 /**
  * Allows routes to be mapped to feature names:
  *
+ * Key: Route name.
+ * Value: Feature name.
+ *
  * @type {{'account-register': string, checkout: string}}
  *
  */
