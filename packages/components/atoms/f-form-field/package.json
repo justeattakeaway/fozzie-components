@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
   "description": "Fozzie Form Field – Fozzie Form Field Component",
-  "version": "1.18.0",
+  "version": "1.19.0",
   "main": "dist/f-form-field.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -40,7 +40,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.0.0",
-    "@justeat/f-vue-icons": "1.11.0"
+    "@justeat/f-vue-icons": "2.5.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"

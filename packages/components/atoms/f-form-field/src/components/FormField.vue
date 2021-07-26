@@ -39,6 +39,7 @@
                 :value="value"
                 :field-size="fieldSize"
                 :has-error="hasError"
+                :has-icon="hasLeadingIcon"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
@@ -71,7 +72,9 @@
                     $style['c-formField-field'],
                     $style[`c-formField-field--${fieldSize}`], {
                         [$style['c-formField-field--noFocus']]: isSelectionControl,
-                        [$style['c-formField--invalid']]: hasError
+                        [$style['c-formField--invalid']]: hasError,
+                        [$style['c-formField-padding--iconLeading']]: hasLeadingIcon,
+                        [$style['c-formField-padding--iconTrailing']]: hasTrailingIcon
                     }]"
                 v-on="listeners"
             >
@@ -85,6 +88,32 @@
                 :data-test-id="`${testId.label}--inline`">
                 {{ labelText }}
             </form-label>
+
+            <span
+                v-if="hasLeadingIcon"
+                :class="[
+                    $style['c-formField-icon'],
+                    $style[`c-formField-icon--${fieldSize}`],
+                    $style[`c-formField-icon--leading`],
+                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                ]">
+                <slot
+                    name="icon-leading"
+                />
+            </span>
+
+            <span
+                v-if="hasTrailingIcon"
+                :class="[
+                    $style['c-formField-icon'],
+                    $style[`c-formField-icon--${fieldSize}`],
+                    $style[`c-formField-icon--trailing`],
+                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                ]">
+                <slot
+                    name="icon-trailing"
+                />
+            </span>
         </div>
         <slot name="error" />
     </div>
@@ -100,6 +129,8 @@ import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
+    VALID_ICON_INPUT_TYPES,
+    VALID_TRAILING_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES,
     VALID_LABEL_STYLES,
@@ -260,6 +291,27 @@ export default {
 
         isDisabled () {
             return this.$attrs.disabled === 'disabled';
+        },
+
+        isValidIconField () {
+            return VALID_ICON_INPUT_TYPES.includes(this.inputType);
+        },
+
+        hasLeadingIcon () {
+            return Boolean(this.$slots['icon-leading']);
+        },
+
+        hasTrailingIcon () {
+            return Boolean(this.$slots['icon-trailing']);
+        }
+    },
+
+    watch: {
+        $props: {
+            immediate: true,
+            handler () {
+                this.validateProps();
+            }
         }
     },
 
@@ -285,12 +337,27 @@ export default {
             if (typeof (window) !== 'undefined') {
                 this.windowWidth = window.innerWidth;
             }
+        },
+
+        validateProps () {
+            if (!this.isValidIconField && (this.hasLeadingIcon || this.hasTrailingIcon)) {
+                throw new TypeError(`Form field is set to have inputType="${this.inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.isDropdown && this.hasTrailingIcon) {
+                throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+            }
         }
     }
 };
 </script>
 
 <style lang="scss" module>
+$form-input-icon-verticalIndent                : 15px;
+$form-input-icon-verticalIndent--small         : 11px;
+$form-input-icon-verticalIndent--large         : 19px;
+$form-input-iconSize                           : 18px;
+
 .c-formField {
     & + & {
         margin-top: spacing(x2);
@@ -341,5 +408,49 @@ export default {
     .c-formField-label-description {
         display: block;
         font-weight: normal;
+    }
+
+    .c-formField-icon {
+        svg {
+            position: absolute;
+            height: $form-input-iconSize;
+            width: $form-input-iconSize;
+
+            path {
+                fill: $color-content-subdued;
+            }
+        }
+    }
+
+    .c-formField-icon--disabled {
+        svg {
+            path {
+                fill: $color-content-disabled;
+            }
+        }
+    }
+
+    .c-formField-icon--small {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent--small);
+    }
+
+    .c-formField-icon--medium {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-icon--large {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent--large);
+    }
+
+    .c-formField-icon--leading {
+        @include indent-icon('leading', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-icon--trailing {
+        @include indent-icon('trailing', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-padding--iconTrailing {
+        padding-right: $form-input-iconPadding;
     }
 </style>
