@@ -129,7 +129,7 @@ describe('Analytics', () => {
                         instancePosition: '',
                         jeUserPercentage: null,
                         language: languageExpected,
-                        name: MAP_ROUTE_TO_FEATURE_NAME[$route.name],
+                        name: MAP_ROUTE_TO_FEATURE_NAME[$route.name] || $route.name,
                         userAgent: navigator.userAgent,
                         version: ''
                     };

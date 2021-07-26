@@ -97,7 +97,7 @@ export default {
         prepareAnalytics () {
             const platformData = { ...this.platformData };
 
-            platformData.name = MAP_ROUTE_TO_FEATURE_NAME[this.$route.name];
+            platformData.name = MAP_ROUTE_TO_FEATURE_NAME[this.$route.name] || this.$route.name;
             platformData.appType = DEFAULT_APP_TYPE;
             platformData.applicationId = DEFAULT_APP_ID;
             platformData.userAgent = navigator.userAgent || 'N/A';
