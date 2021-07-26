@@ -53,7 +53,7 @@
                     $style['c-formField-field--textarea'],
                     { [$style['c-formField--invalid']]: hasError }
                 ]"
-                data-test-id="formfield-textarea"
+                :data-test-id="testId.textarea"
                 v-on="listeners" />
 
             <input
@@ -229,11 +229,11 @@ export default {
 
         testId () {
             const formFieldName = this.$attrs.name;
-
             return {
                 container: formFieldName ? `formfield-${formFieldName}` : 'formfield-container',
                 input: formFieldName ? `formfield-${formFieldName}-input` : 'formfield-input',
-                label: formFieldName ? `formfield-${formFieldName}-label` : 'formfield-label'
+                label: formFieldName ? `formfield-${formFieldName}-label` : 'formfield-label',
+                textarea: formFieldName ? `formfield-${formFieldName}-textarea` : 'formfield-textarea'
             };
         },
 

@@ -14,19 +14,32 @@
         v-bind="$attrs"
         :aria-live="getAriaLive"
         :aria-busy="isLoading"
-        v-on="!isLoading && $listeners"
-    >
+        v-on="!isLoading && $listeners">
         <span
             v-if="isLoading"
             :class="$style['c-spinner']"
             :data-test-id="`${componentType}-spinner`" />
 
         <span
-            :class="[
-                $style['o-btn-text'],
-                (isLoading ? $style['o-btn-text--hidden'] : '')
-            ]">
+            :class="[$style['o-button-content'], {
+                [$style['o-btn-content--hidden']]: isLoading
+            }]">
+
+            <span
+                v-if="hasLeadingIcon"
+                :class="[$style['o-btn-icon'], $style['o-btn-icon--leading']]"
+                data-test-id="button-leading-icon">
+                <slot name='leading-icon' />
+            </span>
+
             <slot />
+
+            <span
+                v-if="hasTrailingIcon"
+                :class="[$style['o-btn-icon'], $style['o-btn-icon--trailing']]"
+                data-test-id="button-trailing-icon">
+                <slot name='trailing-icon' />
+            </span>
         </span>
     </component>
 </template>
@@ -35,7 +48,11 @@
 import ActionButton from './Action.vue';
 import LinkButton from './Link.vue';
 
-import { VALID_BUTTON_TYPES, VALID_BUTTON_SIZES } from '../constants';
+import {
+    VALID_BUTTON_TYPES,
+    VALID_BUTTON_SIZES,
+    VALID_BUTTON_ICON_POSITION
+} from '../constants';
 
 export default {
     name: 'FButton',
@@ -66,6 +83,10 @@ export default {
         },
         isLoading: {
             type: Boolean,
+            default: false
+        },
+        hasIcon: {
+            type: [Boolean, String],
             default: false
         }
     },
@@ -109,6 +130,14 @@ export default {
          */
         getAriaLive () {
             return this.isLoading ? 'polite' : 'off';
+        },
+
+        hasTrailingIcon () {
+            return this.hasIcon && this.hasIcon === 'trailing';
+        },
+
+        hasLeadingIcon () {
+            return this.hasIcon && this.hasIcon === 'leading';
         }
     },
     watch: {
@@ -135,6 +164,10 @@ export default {
             if (!VALID_BUTTON_SIZES.includes(this.buttonSize)) {
                 throw new TypeError(`buttonSize is set to "${this.buttonSize}", but it can only be one of the following buttonSizes: "${VALID_BUTTON_SIZES.join('", "')}"`);
             }
+
+            if (!VALID_BUTTON_ICON_POSITION.includes(this.hasIcon)) {
+                throw new TypeError(`hasIcon is set to "${this.hasIcon}", but it can only be one of the following buttonSizes: "${VALID_BUTTON_ICON_POSITION.join('", "')}"`);
+            }
         }
     }
 };
@@ -145,9 +178,12 @@ $btn-default-borderRadius              : $border-radius;
 $btn-default-font-family               : $font-family-base;
 $btn-default-font-size                 : 'body-l';
 $btn-default-weight                    : $font-weight-bold;
-$btn-default-padding                   : 11px 1.5em 13px;
+$btn-default-padding                   : 12px spacing(x3);
 $btn-default-outline-color             : $color-focus;
 $btn-default-loading-opacity           : 0.35;
+$btn-default-iconHeight                : 18px;
+$btn-default-iconSpacing               : 3px;
+$btn-default-iconSideSpacing           : $btn-default-iconSpacing + spacing();
 
 $btn-primary-bgColor                   : $color-interactive-primary;
 $btn-primary-bgColor--hover            : darken($color-interactive-primary, $color-hover-01);
@@ -192,14 +228,20 @@ $btn-disabled-bgColor                  : $color-disabled-01;
 $btn-disabled-textColor                : $color-content-disabled;
 
 $btn-sizeLarge-font-size               : 'heading-s';
-$btn-sizeLarge-padding                 : 13px 1.2em 15px;
+$btn-sizeLarge-padding                 : 14px spacing(x3);
 $btn-sizeLarge-loading-color           : $color-content-interactive-primary;
 $btn-sizeLarge-loading-colorOpaque     : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
 
-$btn-sizeSmall-padding                 : 7px 1em 9px;
+$btn-sizeSmall-padding                 : spacing() spacing(x2);
+$btn-sizeSmall-iconHeight              : 15px;
+$btn-sizeSmall-iconSpacing             : 2.5px;
+$btn-sizeSmall-iconSideSpacing         : $btn-sizeSmall-iconSpacing + spacing();
 
-$btn-sizeXSmall-padding                : 5px 0.5em 7px;
-$btn-sizeXSmall-lineHeight             : 1;
+$btn-sizeXSmall-font-size              : 'body-s';
+$btn-sizeXSmall-padding                : 6px spacing();
+$btn-sizeXSmall-iconHeight             : 12px;
+$btn-sizeXSmall-iconSpacing            : 2px;
+$btn-sizeXSmall-iconSideSpacing        : $btn-sizeXSmall-iconSpacing + spacing();
 
 $btn-icon-sizeLarge-buttonSize         : 56px; // button--icon is a sircle so width and height can use one var
 $btn-icon-sizeLarge-iconSize           : 21px;
@@ -262,17 +304,39 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         text-decoration: none;
     }
 }
-
-    .o-btn-text {
+    .o-button-content {
         display: flex;
         justify-content: center;
+        align-items: center;
     }
-    // Visually hide button text (used for loading states)
-    .o-btn-text--hidden {
+
+    // Visually hide button content (used for loading states)
+    .o-btn-content--hidden {
         visibility: hidden;
     }
 
+    .o-btn-icon {
+        display: flex;
+        margin: $btn-default-iconSpacing;
+    }
 
+    .o-btn-icon,
+    .o-btn-icon svg {
+        height: $btn-default-iconHeight;
+    }
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $color-grey-50;
+    }
+
+    .o-btn-icon--leading {
+        margin-right: $btn-default-iconSideSpacing;
+    }
+
+    .o-btn-icon--trailing {
+        margin-left: $btn-default-iconSideSpacing;
+    }
 
 /**
  * Modifier – .o-btn--primary
@@ -306,6 +370,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-primary-loading-color, $btn-primary-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-primary-textColor;
+    }
 }
 
 /**
@@ -328,6 +397,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-secondary-loading-color, $btn-secondary-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-secondary-textColor;
+    }
 }
 
 /**
@@ -357,6 +431,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-outline-loading-color, $btn-outline-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-outline-textColor;
+    }
 }
 
 /**
@@ -385,6 +464,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-ghost-loading-color, $btn-ghost-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-ghost-textColor;
+    }
 }
 
 /**
@@ -414,6 +498,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-ghostTertiary-loading-color, $btn-ghostTertiary-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $btn-ghostTertiary-textColor;
+    }
 }
 
 /**
@@ -445,6 +534,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     }
 
     @include spinnerColor($btn-link-loading-color, $btn-link-loading-colorOpaque);
+
+    .o-btn-icon svg use,
+    .o-btn-icon svg path {
+        fill: $color-content-link;
+    }
 }
 
 /**
@@ -578,11 +672,45 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
 
 .o-btn--sizeSmall {
     padding: $btn-sizeSmall-padding;
+
+    .o-btn-icon {
+        margin: $btn-sizeSmall-iconSpacing;
+    }
+
+    .o-btn-icon,
+    .o-btn-icon svg {
+        height: $btn-sizeSmall-iconHeight;
+    }
+
+    .o-btn-icon--leading {
+        margin-right: $btn-sizeSmall-iconSideSpacing;
+    }
+
+    .o-btn-icon--trailing {
+        margin-left: $btn-sizeSmall-iconSideSpacing;
+    }
 }
 
 .o-btn--sizeXSmall {
+    @include font-size($btn-sizeXSmall-font-size);
     padding: $btn-sizeXSmall-padding;
-    line-height: $btn-sizeXSmall-lineHeight;
+
+    .o-btn-icon {
+        margin: $btn-sizeXSmall-iconSpacing;
+    }
+
+    .o-btn-icon,
+    .o-btn-icon svg {
+        height: $btn-sizeXSmall-iconHeight;
+    }
+
+    .o-btn-icon--leading {
+        margin-right: $btn-sizeSmall-iconSideSpacing;
+    }
+
+    .o-btn-icon--trailing {
+        margin-left: $btn-sizeSmall-iconSideSpacing;
+    }
 }
 
 /**
@@ -623,6 +751,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         &:hover {
             background-color: $btn-disabled-bgColor;
             color: $btn-disabled-textColor;
+        }
+
+        .o-btn-icon svg use,
+        .o-btn-icon svg path {
+            fill: $btn-disabled-textColor;
         }
     }
 }
