@@ -2,7 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
-    DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES
+    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES, VALID_TRAILING_ICON_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
@@ -11,6 +11,8 @@ const $style = {
     'c-formField-field--medium': 'c-formField-field--medium',
     'c-formField-field--large': 'c-formField-field--large'
 };
+
+const slot = '<div>ICON</div>';
 
 describe('FormField', () => {
     it('should be defined', () => {
@@ -301,6 +303,92 @@ describe('FormField', () => {
                 expect(wrapper.vm.isDisabled).toEqual(expected);
             });
         });
+
+        describe('isValidIconField :: ', () => {
+            it.each([
+                [true, 'email'],
+                [true, 'password'],
+                [true, 'dropdown'],
+                [true, 'number'],
+                [true, 'tel'],
+                [false, 'radio'],
+                [false, 'checkbox'],
+                [false, null]
+            ])('should return %s if `inputType` is %s', (expected, inputType) => {
+                // Arrange
+                const propsData = {
+                    inputType
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                // Assert
+                expect(wrapper.vm.isValidIconField).toEqual(expected);
+            });
+        });
+
+        describe('hasLeadingIcon :: ', () => {
+            // Arrange
+            const propsData = {
+                inputType: 'text'
+            };
+
+            it('should return `true` when slots contain `icon-leading`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: {
+                        'icon-leading': slot
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.hasLeadingIcon).toEqual(true);
+            });
+
+            it('should return `false` when slots do not contain `icon-leading`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: null
+                });
+
+                // Assert
+                expect(wrapper.vm.hasLeadingIcon).toEqual(false);
+            });
+        });
+
+        describe('hasTrailingIcon :: ', () => {
+            // Arrange
+            const propsData = {
+                inputType: 'text'
+            };
+
+            it('should return `true` when slots contain `icon-trailing`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: {
+                        'icon-trailing': slot
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.hasTrailingIcon).toEqual(true);
+            });
+
+            it('should return `false` when slots do not contain `icon-trailing`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: null
+                });
+
+                // Assert
+                expect(wrapper.vm.hasTrailingIcon).toEqual(false);
+            });
+        });
     });
 
     describe('attrs ::', () => {
@@ -416,6 +504,105 @@ describe('FormField', () => {
 
                 // Assert
                 expect(wrapper.emitted().input).toHaveLength(1);
+            });
+        });
+    });
+
+    describe('methods ::', () => {
+        describe('validateProps ::', () => {
+            let spy;
+
+            beforeEach(() => {
+                spy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
+            });
+
+            afterEach(() => {
+                spy.mockRestore();
+            });
+
+            describe('when `hasLeadingIcon` is true', () => {
+                it.each(VALID_ICON_INPUT_TYPES)('should not throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each(['textarea', 'checkbox', 'radio'])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).toThrowError(`Form field is set to have inputType="${inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
+                });
+            });
+
+            describe('when `hasTrailingIcon` is true', () => {
+                it.each([
+                    'text',
+                    'email',
+                    'password',
+                    'number',
+                    'tel'
+                ])('should not throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each(['textarea', 'checkbox', 'radio'])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError(`Form field is set to have inputType="${inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
+                });
+
+                it('should throw an error when `inputType` is set to `dropdown`', () => {
+                    // Arrange
+                    const propsData = { inputType: 'dropdown' };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+                });
             });
         });
     });
