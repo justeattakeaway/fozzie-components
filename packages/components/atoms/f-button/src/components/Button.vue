@@ -19,8 +19,11 @@
             v-if="isLoading"
             :class="$style['c-spinner']"
             :data-test-id="`${componentType}-spinner`" />
+
         <span
-            :class="$style['o-button-content']">
+            :class="[$style['o-button-content'], {
+                [$style['o-btn-content--hidden']]: isLoading
+            }]">
 
             <span
                 v-if="hasLeadingIcon"
@@ -29,12 +32,7 @@
                 <slot name='leading-icon' />
             </span>
 
-            <span
-                :class="[$style['o-btn-text'], {
-                    [$style['o-btn-text--hidden']]: isLoading
-                }]">
-                <slot />
-            </span>
+            <slot />
 
             <span
                 v-if="hasTrailingIcon"
@@ -312,8 +310,8 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         align-items: center;
     }
 
-    // Visually hide button text (used for loading states)
-    .o-btn-text--hidden {
+    // Visually hide button content (used for loading states)
+    .o-btn-content--hidden {
         visibility: hidden;
     }
 
