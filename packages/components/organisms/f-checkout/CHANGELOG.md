@@ -8,7 +8,7 @@ v0.165.0
 *July 26, 2021*
 
 ### Added
-- Added `x-je-feature` to header config in `services/orderPlacementApi`
+- `errorCode` property for failed UpdateCheckout is passed to the log
 
 v0.164.0
 ------------------------------
