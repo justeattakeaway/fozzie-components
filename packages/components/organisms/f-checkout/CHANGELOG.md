@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.165.0
 ------------------------------
-*July 22, 2021*
+*July 26, 2021*
 
 ### Added
 - Added `x-je-feature` to header config in `services/orderPlacementApi`
