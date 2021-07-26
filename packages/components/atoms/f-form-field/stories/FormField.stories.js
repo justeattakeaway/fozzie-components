@@ -12,7 +12,7 @@ import {
 } from '../src/constants';
 
 export default {
-    title: 'Components/Atoms',
+    title: 'Components/Atoms/f-form-field',
     decorators: [withKnobs, withA11y]
 };
 
