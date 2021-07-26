@@ -477,7 +477,7 @@ $form-input-iconSize                           : 18px;
 
     .c-formField-assitiveText {
         font-weight: $font-weight-regular;
-        color: $color-content-subdued;
+        color: $form-input-secondaryTextColour;
         margin-top: spacing(x0.5);
     }
 </style>
