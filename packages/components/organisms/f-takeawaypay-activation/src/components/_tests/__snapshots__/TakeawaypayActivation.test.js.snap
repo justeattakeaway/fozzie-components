@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TakeawaypayActivation should render ActivationFailed component 1`] = `
+<card-component-stub cardheading="" cardheadingposition="center" cardheadingtag="h1" ispagecontentwrapper="true" isrounded="true" data-test-id="takeawaypay-activation-component">
+  <activation-failed-stub></activation-failed-stub>
+</card-component-stub>
+`;
+
+exports[`TakeawaypayActivation should render ActivationLoggedIn component 1`] = `
+<card-component-stub cardheading="" cardheadingposition="center" cardheadingtag="h1" ispagecontentwrapper="true" isrounded="true" data-test-id="takeawaypay-activation-component">
+  <activation-logged-in-stub loginurl="/login" registrationurl="/register" activateurl="/activate" authtoken="token" consumerid="" consumeremail=""></activation-logged-in-stub>
+</card-component-stub>
+`;
+
+exports[`TakeawaypayActivation should render ActivationNotLoggedIn component 1`] = `
+<card-component-stub cardheading="" cardheadingposition="center" cardheadingtag="h1" ispagecontentwrapper="true" isrounded="true" data-test-id="takeawaypay-activation-component">
+  <activation-not-logged-in-stub loginurl="/login" registrationurl="/register"></activation-not-logged-in-stub>
+</card-component-stub>
+`;
+
+exports[`TakeawaypayActivation should render ActivationSuccessful component 1`] = `
+<card-component-stub cardheading="" cardheadingposition="center" cardheadingtag="h1" ispagecontentwrapper="true" isrounded="true" data-test-id="takeawaypay-activation-component">
+  <activation-successful-stub homeurl="/"></activation-successful-stub>
+</card-component-stub>
+`;
