@@ -1,4 +1,4 @@
-export const COUNTRY_INFO = {
+const COUNTRY_INFO = {
     'en-GB': {
         language: 'en',
         country: 'uk',
@@ -37,5 +37,23 @@ export const COUNTRY_INFO = {
     }
 };
 
-export const DEFAULT_APP_ID = 7;
-export const DEFAULT_APP_TYPE = 'web';
+const DEFAULT_APP_ID = 7;
+const DEFAULT_APP_TYPE = 'web';
+
+/**
+ * Allows routes to be mapped to feature names:
+ *
+ * @type {{'account-register': string, checkout: string}}
+ *
+ */
+const MAP_ROUTE_TO_FEATURE_NAME = {
+    'account-register': 'global_registration',
+    checkout: 'global_checkout'
+};
+
+export {
+    COUNTRY_INFO,
+    DEFAULT_APP_ID,
+    DEFAULT_APP_TYPE,
+    MAP_ROUTE_TO_FEATURE_NAME
+};
