@@ -13,19 +13,23 @@ const captureResponseStatistics = ({ interceptors }, statisticsClient) => {
     });
 
     interceptors.response.use(res => {
-        const timeTakenMs = new Date().getTime() - res.config.meta.requestStartedAt;
-        res.responseTimeMs = timeTakenMs;
+        try {
+            const timeTakenMs = new Date().getTime() - res.config.meta.requestStartedAt;
+            res.responseTimeMs = timeTakenMs;
 
-        const payload = {
-            'cs-method': res.config.method.toUpperCase(),
-            'cs-uri-stem': `${res.config.baseURL}${res.config.url}`,
-            'sc-status': res.status,
-            'time-taken': res.responseTimeMs
-        };
+            const payload = {
+                'cs-method': res.config.method.toUpperCase(),
+                'cs-uri-stem': `${res.config.baseURL}${res.config.url}`,
+                'sc-status': res.status,
+                'time-taken': res.responseTimeMs
+            };
 
-        statisticsClient.publish(`${payload['cs-method']} request to ${payload['cs-uri-stem']} took ${payload['time-taken']}ms`, payload);
+            statisticsClient.publish(`${payload['cs-method']} request to ${payload['cs-uri-stem']} took ${payload['time-taken']}ms`, payload);
 
-        return res;
+            return res;
+        } catch {
+            return res;
+        }
     });
 };
 
