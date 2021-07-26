@@ -8,8 +8,8 @@ v0.6.0
 *July 26, 2021*
 
 ### Changed
-- Support for f-statistics added to capture dependency timings
-- Continued MVP development
+- Accept an instance of f-statistics when initialising a client, doing so means that interceptors record response timings and publish a statistic with the details.
+- Several files were changed to objects with constructors because not doing so means that configuration can bleed when more than one instance is initiaised.
 
 
 v0.5.0
