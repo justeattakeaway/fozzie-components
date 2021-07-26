@@ -63,6 +63,7 @@ commands:
       - run:
           name: Build updated packages
           command: |
+            echo "Build updated packages"
             if [ "${RUN_ALL}" == "true" ];
             then
               yarn build
