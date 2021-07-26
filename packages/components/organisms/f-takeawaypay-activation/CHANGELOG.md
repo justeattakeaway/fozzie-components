@@ -4,12 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next version)
+v0.4.0
 ------------------------------
-*July 15, 2021*
+*July 20, 2021*
 
 ### Changed
 - Updated version of `f-button`.
+- Dynamically update UI based on activation states.
 
 
 v0.3.0

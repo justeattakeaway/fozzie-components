@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.8.0
+------------------------------
+*July 22, 2021*
+
+### Changed
+- Bumped version of f-braze-adapter to respect `is_visible` and `deduplication_key` KVPs
+- Marked Terms and Conditions card as Deprecated - as we're handling this in the For You component separately
+
+
 v4.7.0
 ------------------------------
 *June 10, 2021*

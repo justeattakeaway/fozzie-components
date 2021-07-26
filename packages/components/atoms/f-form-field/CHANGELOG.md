@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.20.0
 ------------------------------
-*July 22, 2021*
+*July 26, 2021*
 
 ### Added
 - `labelDetails` and `assistiveText`.
