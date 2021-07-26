@@ -24,7 +24,7 @@ export const VueTabsComponent = (args, { argTypes }) => ({
                 minus vel ad nesciunt voluptatibus numquam nulla distinctio modi,
                 voluptas exercitationem?
             </tab>
-            <tab name="b" title="How it works" :selected="'b' === selected">
+            <tab name="b" :title="tabTitle" :selected="'b' === selected">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi eaque
                 dicta quisquam voluptate inventore repellendus ut itaque, animi, magni
                 consectetur dolore, sapiente error! Eos cupiditate harum quidem sit illo
@@ -36,8 +36,10 @@ export const VueTabsComponent = (args, { argTypes }) => ({
 
 VueTabsComponent.storyName = 'f-tabs';
 VueTabsComponent.args = {
-    selected: 'a'
+    selected: 'a',
+    tabTitle: 'How it works (I can be renamed)'
 };
 VueTabsComponent.argTypes = {
-    selected: { control: { type: 'radio', options: ['a', 'b'] } }
+    selected: { control: { type: 'radio', options: ['a', 'b'] } },
+    tabTitle: { control: { type: 'text' } }
 };

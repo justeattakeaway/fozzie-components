@@ -5,3 +5,5 @@ export const VALID_BUTTON_TYPES = {
 };
 
 export const VALID_BUTTON_SIZES = ['xsmall', 'small', 'medium', 'large'];
+
+export const VALID_BUTTON_ICON_POSITION = ['leading', 'trailing', false];
