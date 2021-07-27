@@ -51,6 +51,15 @@ export const FormFieldComponent = () => ({
         },
         hasInputDescription: {
             default: boolean('hasExtraLabelText', false)
+        },
+        labelDetails: {
+            default: text('Label Details', '')
+        },
+        assistiveText: {
+            default: text('Assistive Text', '')
+        },
+        placeholder: {
+            default: text('Placeholder', '')
         }
     },
     parameters: {
@@ -68,8 +77,11 @@ export const FormFieldComponent = () => ({
             :is-grouped="isGrouped"
             :disabled="isDisabled"
             :cols="30"
+            :placeholder="placeholder"
             :rows="7"
             :maxlength="200"
+            :labelDetails="labelDetails"
+            :assistiveText="assistiveText"
             :has-input-description="hasInputDescription">
                 Here is a bit more text to show
         </form-field>`
