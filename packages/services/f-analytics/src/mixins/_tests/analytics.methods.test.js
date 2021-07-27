@@ -8,6 +8,8 @@ import {
     $i18n
 } from './helpers/setup';
 
+import { MAP_ROUTE_TO_FEATURE_NAME } from '../../constants';
+
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
@@ -125,9 +127,9 @@ describe('Analytics', () => {
                         currency: currencyExpected,
                         environment: '',
                         instancePosition: '',
-                        jeUserPercentage: 0,
+                        jeUserPercentage: null,
                         language: languageExpected,
-                        name: 'test-route-name',
+                        name: MAP_ROUTE_TO_FEATURE_NAME[$route.name] || $route.name,
                         userAgent: navigator.userAgent,
                         version: ''
                     };
