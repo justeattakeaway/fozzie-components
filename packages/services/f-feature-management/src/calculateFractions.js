@@ -6,6 +6,12 @@ import CryptoJS from 'crypto-js/core';
 // note: Crypto-JS works using word arrays, but the algorithm requires we have access to individual bytes
 //      There is probably a more efficient way to manipulate specific bytes without having to convert the whole
 //      word array.  These conversion functions were found on the internet.
+
+/**
+ * Converts byte array to CryptoJS word array
+ * @param {array} ba - byte array
+ * @returns word array, as used by CryptoJS
+ */
 function byteArrayToWordArray (ba) {
     const wa = [];
     for (let i = 0; i < ba.length; i++) {
@@ -15,6 +21,12 @@ function byteArrayToWordArray (ba) {
     return CryptoJS.lib.WordArray.create(wa, ba.length);
 }
 
+/**
+ * Converts CryptoJS "word" to byte array
+ * @param {number} word
+ * @param {number} length
+ * @returns Byte array
+ */
 function wordToByteArray (word, length) {
     const ba = [],
         xFF = 0xFF;
@@ -26,6 +38,12 @@ function wordToByteArray (word, length) {
     return ba;
 }
 
+/**
+ * Converts CryptoJS word array to byte array
+ * @param {array} wordArrayParam
+ * @param {number} lengthParam
+ * @returns Byte array
+ */
 function wordArrayToByteArray (wordArrayParam, lengthParam) {
     let wordArray = wordArrayParam;
     let length = lengthParam;
@@ -46,6 +64,11 @@ function wordArrayToByteArray (wordArrayParam, lengthParam) {
     return [].concat.apply([], result); // eslint-disable-line prefer-spread
 }
 
+/**
+ * Get the fraction between 0 and 1 based on hashing a word array
+ * @param {array} wordArray
+ * @returns number between 0 and 1
+ */
 function getFraction (wordArray) {
     const hashedWordArray = CryptoJSMD5(wordArray);
     const hashedByteArray = wordArrayToByteArray(hashedWordArray);
@@ -57,6 +80,11 @@ function getFraction (wordArray) {
     return fraction;
 }
 
+/**
+ * Calculates the two fractions required by the IdHash logic
+ * @param {string} key to hash
+ * @returns audienceFraction and variantFraction - both between 0 and 1
+ */
 function calculateFractions (key) {
     // the two fractions are calcluated by MD5-hashing the UTF-8 encoded key then
     // taking the first two bytes and calculating the fraction of uint16 that it takes up

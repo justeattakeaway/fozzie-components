@@ -19,6 +19,10 @@ const logger = {
     }
 };
 
+/**
+ * Allows logError, logWarn and logInfo to be overridden with custom implementation.
+ * @param {object} loggerOverrides
+ */
 function setLogger (loggerOverrides) {
     Object.assign(logger, loggerOverrides);
 }

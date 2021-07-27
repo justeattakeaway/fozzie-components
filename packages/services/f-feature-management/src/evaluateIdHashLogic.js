@@ -1,6 +1,12 @@
 import evaluateRestriction from './evaluateRestriction';
 import calculateFractions from './calculateFractions';
 
+/**
+ * Gets the first rule whose restrictions match the context.
+ * @param {object} idHashLogicDetail - the owning object of the rules
+ * @param {object} context
+ * @returns matching rule or null
+ */
 function getFirstRuleMatch (idHashLogicDetail, context) {
     for (let i = 0; i < idHashLogicDetail.rules.length; i++) {
         const rule = idHashLogicDetail.rules[i];
@@ -12,6 +18,12 @@ function getFirstRuleMatch (idHashLogicDetail, context) {
     return null;
 }
 
+/**
+ * Gets the id to hash according to what's set up in the logic.
+ * @param {object} idHashLogicDetail - the detail of the id hash logic
+ * @param {object} context
+ * @returns the relevant id from the context
+ */
 function getIdToHash (idHashLogicDetail, context) {
     switch (idHashLogicDetail.bucketBy) {
         case 'AnonUserId':
@@ -21,6 +33,12 @@ function getIdToHash (idHashLogicDetail, context) {
     }
 }
 
+/**
+ * Gets the relevant variant based on the generated fraction.
+ * @param {object} rule - the rule containing the variants
+ * @param {object} variantFraction - the number between 0 and 1 that has been generated to choose a variant
+ * @returns the variant
+ */
 function getVariant (rule, variantFraction) {
     if (variantFraction > 1) {
         throw new Error(`Variant fraction was ${variantFraction} but shouldn't be > 1`);

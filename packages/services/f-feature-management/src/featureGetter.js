@@ -16,6 +16,10 @@ function init (json) {
     }
 }
 
+/**
+ * Returns the current feature lookup.
+ * @returns Lookup of features by key.
+ */
 function getFeatures () {
     return featureLookup;
 }
