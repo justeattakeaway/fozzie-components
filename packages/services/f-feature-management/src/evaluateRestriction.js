@@ -1,6 +1,9 @@
 import { logger } from './logger';
 
-
+/**
+ * Checks that the restriction object has at most one operator specified
+ * @param {object} restriction. Throws if not.
+ */
 function verifyRestrictionObject (restriction) {
     const operatorsSpecified = ['and', 'or', 'eq', 'neq', 'in', 'nin', 'gt', 'gte', 'lt', 'lte']
     .filter(operator => restriction[operator]);
@@ -10,12 +13,24 @@ function verifyRestrictionObject (restriction) {
     }
 }
 
+/**
+ * Utility function to return true if predicate passes for every item in the array.
+ * @param {array} array
+ * @param {function} predicate - map from the array items
+ * @returns Boolean
+ */
 function all (array, predicate) {
     const passes = array.filter(i => predicate(i));
 
     return passes.length === array.length;
 }
 
+/**
+ * Utility function to return true if predicate passes for at least one item in the array.
+ * @param {array} array
+ * @param {function} predicate - map from the array items
+ * @returns Boolean
+ */
 function any (array, predicate) {
     for (let i = 0; i < array.length; i++) {
         const item = array[i];
@@ -27,8 +42,12 @@ function any (array, predicate) {
     return false;
 }
 
-
-
+/**
+ * Returns the appropriate value from the context, depending on what the restriction is targetting.
+ * @param {object} restriction
+ * @param {object} context
+ * @returns The appropriate value.
+ */
 function getContextValue (restriction, context) {
     switch (restriction.property) {
         case 'Country':
@@ -40,6 +59,13 @@ function getContextValue (restriction, context) {
     }
 }
 
+/**
+ * Checks if the property is equal to the checkValue, according to the appropriate rules for the property.
+ * @param {*} checkValue
+ * @param {object} restriction
+ * @param {object} context
+ * @returns Boolean
+ */
 function isEqual (checkValue, restriction, context) {
     const contextValue = getContextValue(restriction, context);
 
@@ -53,7 +79,13 @@ function isEqual (checkValue, restriction, context) {
     }
 }
 
-
+/**
+ * Compares two version numbers of format x0.x1...xn, where xi are positive integers.
+ * 1.2.0 > 1.2.
+ * @param {string} valueA
+ * @param {string} valueB
+ * @returns 1 if A is larger, 0 if equal, -1 if B is larger
+ */
 function compareVersionNumbers (valueA, valueB) {
     /* eslint-disable radix */
     const partsA = valueA.split('.').map(part => parseInt(part));
@@ -80,6 +112,13 @@ function compareVersionNumbers (valueA, valueB) {
     }
 }
 
+/**
+ * Checks if A is greater than B, using appropriate rules for the property.
+ * @param {*} valueA
+ * @param {*} valueB
+ * @param {object} restriction
+ * @returns Boolean
+ */
 function aIsGreaterThanB (valueA, valueB, restriction) {
     switch (restriction.property) {
         case 'AppVersion':
@@ -92,7 +131,13 @@ function aIsGreaterThanB (valueA, valueB, restriction) {
     }
 }
 
-
+/**
+ * Does a comparison check between a context value and a restriction.
+ * @param {string} operator - one of gt, gte, le, lte
+ * @param {object} restriction
+ * @param {object} context
+ * @returns Boolean
+ */
 function comparableCheck (operator, restriction, context) {
     const contextValue = getContextValue(restriction, context);
     const checkValue = restriction[operator];
@@ -171,6 +216,5 @@ function evaluateRestriction (restriction, context) {
         return false;
     }
 }
-
 
 export default evaluateRestriction;

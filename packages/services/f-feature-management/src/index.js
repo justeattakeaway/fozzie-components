@@ -9,7 +9,11 @@ const logValueRequest = (func, key, value) => {
     logger.logInfo(`${func.name}: ${key} => ${value}`);
 };
 
-
+/**
+ * Gets the value of the feature, and tracks any experiments.
+ * @param {string} key
+ * @returns Value of feature
+ */
 function getValue (key) {
     logValueRequest(getValue, key, null);
 
@@ -43,6 +47,11 @@ function getValue (key) {
     }
 }
 
+/**
+ * Gets feature and tracks any experiments.  Checks it's a boolean before returning.
+ * @param {string} key
+ * @returns Boolean or null
+ */
 function getBooleanValue (key) {
     logValueRequest(getBooleanValue, key, true);
 
@@ -55,6 +64,12 @@ function getBooleanValue (key) {
     return null;
 }
 
+
+/**
+ * Gets feature and tracks any experiments.  Checks it's a number before returning.  (Non-integers not supported.)
+ * @param {string} key
+ * @returns Number or null
+ */
 function getIntegerValue (key) {
     logValueRequest(getIntegerValue, key, 0);
 
@@ -67,6 +82,12 @@ function getIntegerValue (key) {
     return null;
 }
 
+
+/**
+ * Gets feature and tracks any experiments.  Checks it's a string before returning.
+ * @param {string} key
+ * @returns String or null
+ */
 function getStringValue (key) {
     logValueRequest(getStringValue, key, '');
     const value = getValue(key);
@@ -81,6 +102,11 @@ function getStringValue (key) {
 
 let instance = null;
 
+/**
+ * Returns an instance of Feature Management.
+ * @param {object} settings - json and contextGetter must be set
+ * @returns Feature Management object to allow querying of features.
+ */
 export default function (settings) {
     if (instance) return instance;
 
