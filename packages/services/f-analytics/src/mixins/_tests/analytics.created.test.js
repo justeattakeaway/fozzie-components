@@ -62,7 +62,7 @@ describe('Analytics', () => {
             expected.platformData.environment = 'localhost';
             expected.platformData.version = '0.0.0.0';
             expected.platformData.instancePosition = 'N/A';
-            expected.platformData.jeUserPercentage = 0;
+            expected.platformData.jeUserPercentage = null;
 
             // Mocks
             component.mixins[0].computed.isServerSide = () => true;
