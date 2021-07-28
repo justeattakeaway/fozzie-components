@@ -77,7 +77,7 @@ export default {
     justify-content: center;
     width: 100%;
     margin: auto;
-    background-color: $color-grey-10;
+    background-color: $color-background-default;
 }
 
 </style>

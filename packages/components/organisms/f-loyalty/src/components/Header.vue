@@ -24,8 +24,8 @@ import MediaElement from '@justeat/f-media-element';
 import '@justeat/f-media-element/dist/f-media-element.css';
 import '@justeat/f-breadcrumbs/dist/f-breadcrumbs.css';
 import debounce from 'lodash.debounce';
-import { FONT_SIZE } from '@justeat/f-media-element/src/constants';
 
+// this is used to define point at which image is swapped
 const REQUIRED_WINDOW_WIDTH = 600;
 const TEMP_IMG_PATH = 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/';
 
@@ -52,7 +52,7 @@ export default {
                 url: '/offers/stamp-cards'
             }
         ],
-        fontSize: FONT_SIZE.LG,
+        fontSize: 'lg',
         windowWidth: REQUIRED_WINDOW_WIDTH
     }),
 
@@ -108,8 +108,6 @@ export default {
 
 <style lang="scss" module>
 
-$responsive-mobileViewBreakpoint: '<=narrowMid';
-
 .c-loyaltyHeader-container {
     width: 100%;
     max-width: #{$layout-max-width}px;
@@ -132,7 +130,7 @@ $responsive-mobileViewBreakpoint: '<=narrowMid';
 }
 
 .c-loyaltyHeader-media {
-    @include media($responsive-mobileViewBreakpoint) {
+    @include media('<=narrowMid') {
         margin-top: spacing();
     }
 }
