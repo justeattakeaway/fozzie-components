@@ -32,8 +32,20 @@
                 </template>
             </form-label>
 
+            <form-field-afix
+                v-if="isAfixedField"
+                :id="uniqueId"
+                :attributes="$attrs"
+                :type="normalisedInputType"
+                :value="value"
+                :field-size="fieldSize"
+                :prefix="prefix"
+                :suffix="suffix"
+                :has-error="hasError"
+                v-on="listeners" />
+
             <form-dropdown
-                v-if="isDropdown"
+                v-else-if="isDropdown"
                 :id="uniqueId"
                 :attributes="$attrs"
                 :type="normalisedInputType"
@@ -128,6 +140,7 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import FormFieldAfix from './FormFieldAfix.vue';
 import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
 import debounce from '../services/debounce';
@@ -148,6 +161,7 @@ export default {
     name: 'FormField',
 
     components: {
+        FormFieldAfix,
         FormDropdown,
         FormLabel
     },
@@ -224,6 +238,16 @@ export default {
         },
 
         assistiveText: {
+            type: String,
+            default: ''
+        },
+
+        prefix: {
+            type: String,
+            default: ''
+        },
+
+        suffix: {
             type: String,
             default: ''
         }
@@ -320,6 +344,10 @@ export default {
 
         hasTrailingIcon () {
             return Boolean(this.$slots['icon-trailing']);
+        },
+
+        isAfixedField () {
+            return this.prefix || this.suffix;
         }
     },
 
