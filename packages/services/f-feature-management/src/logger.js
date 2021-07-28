@@ -3,17 +3,17 @@
  */
 const logger = {
     logError (logMessage, store, logPayload = {}) {
-        if (console.error) {
+        if (console && console.error) {
             console.error(logMessage, logPayload);
         }
     },
     logWarn (logMessage, store, logPayload = {}) {
-        if (console.warn) {
+        if (console && console.warn) {
             console.warn(logMessage, logPayload);
         }
     },
     logInfo (logMessage, store, logPayload = {}) {
-        if (console.info) {
+        if (console && console.info) {
             console.info(logMessage, logPayload);
         }
     }
