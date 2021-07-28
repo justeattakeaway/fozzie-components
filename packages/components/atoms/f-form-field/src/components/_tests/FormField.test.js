@@ -2,7 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
-    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES, VALID_TRAILING_ICON_INPUT_TYPES
+    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_TRAILING_ICON_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
@@ -170,75 +170,75 @@ describe('FormField', () => {
             });
         });
 
-        describe('labelStyle ::', () => {
-            it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected if labelStyle=%p is specified', definedType => {
-                // Arrange
-                const propsData = {
-                    labelStyle: definedType
-                };
+        // describe('labelStyle ::', () => {
+        //     it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected if labelStyle=%p is specified', definedType => {
+        //         // Arrange
+        //         const propsData = {
+        //             labelStyle: definedType
+        //         };
 
-                // Act
-                const wrapper = shallowMount(FormField, { propsData });
-                const formLabel = wrapper.find('form-label-stub');
+        //         // Act
+        //         const wrapper = shallowMount(FormField, { propsData });
+        //         const formLabel = wrapper.find('form-label-stub');
 
-                // Assert
-                expect(formLabel.attributes('labelstyle')).toBe(definedType);
-            });
+        //         // Assert
+        //         expect(formLabel.attributes('labelstyle')).toBe(definedType);
+        //     });
 
-            describe('when set to `inlineNarrow`', () => {
-                const MOBILE = 767;
-                const DESKTOP = 768;
-                const eventName = 'resize';
-                let resizeWindow;
+        //     describe('when set to `inlineNarrow`', () => {
+        //         const MOBILE = 767;
+        //         const DESKTOP = 768;
+        //         const eventName = 'resize';
+        //         let resizeWindow;
 
-                beforeEach(() => {
-                    resizeWindow = width => {
-                        window.innerWidth = width;
-                        window.dispatchEvent(new Event(eventName));
-                    };
-                });
+        //         beforeEach(() => {
+        //             resizeWindow = width => {
+        //                 window.innerWidth = width;
+        //                 window.dispatchEvent(new Event(eventName));
+        //             };
+        //         });
 
-                it('should append the label above input when window size is not mobile', async () => {
-                    // Arrange
-                    const propsData = {
-                        labelStyle: 'inlineNarrow',
-                        labelText: 'Test Label'
-                    };
+        //         it('should append the label above input when window size is not mobile', async () => {
+        //             // Arrange
+        //             const propsData = {
+        //                 labelStyle: 'inlineNarrow',
+        //                 labelText: 'Test Label'
+        //             };
 
-                    resizeWindow(DESKTOP);
+        //             resizeWindow(DESKTOP);
 
-                    // Act
-                    const wrapper = await shallowMount(FormField, { propsData });
+        //             // Act
+        //             const wrapper = await shallowMount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
-                    const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
+        //             const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
+        //             const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
 
-                    // Assert
-                    expect(defaultLabel.exists()).toBe(true);
-                    expect(inlineLabel.exists()).toBe(false);
-                });
+        //             // Assert
+        //             expect(defaultLabel.exists()).toBe(true);
+        //             expect(inlineLabel.exists()).toBe(false);
+        //         });
 
-                it('should append the label inline with input when window size is mobile', async () => {
-                    // Arrange
-                    const propsData = {
-                        labelStyle: 'inlineNarrow',
-                        labelText: 'Test Label'
-                    };
+        //         it('should append the label inline with input when window size is mobile', async () => {
+        //             // Arrange
+        //             const propsData = {
+        //                 labelStyle: 'inlineNarrow',
+        //                 labelText: 'Test Label'
+        //             };
 
-                    resizeWindow(MOBILE);
+        //             resizeWindow(MOBILE);
 
-                    // Act
-                    const wrapper = await shallowMount(FormField, { propsData });
+        //             // Act
+        //             const wrapper = await shallowMount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
-                    const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
+        //             const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
+        //             const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
 
-                    // Assert
-                    expect(defaultLabel.exists()).toBe(false);
-                    expect(inlineLabel.exists()).toBe(true);
-                });
-            });
-        });
+        //             // Assert
+        //             expect(defaultLabel.exists()).toBe(false);
+        //             expect(inlineLabel.exists()).toBe(true);
+        //         });
+        //     });
+        // });
 
         describe('fieldSize ::', () => {
             it.each([

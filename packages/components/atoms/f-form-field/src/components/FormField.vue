@@ -11,7 +11,7 @@
         <div
             :class="$style['c-formField-fieldWrapper']">
             <form-label
-                v-if="!isInline"
+                v-if="shouldShowLabelText"
                 :label-style="normalisedLabelStyle"
                 :label-for="uniqueId"
                 :is-inline="isInline"
@@ -36,24 +36,15 @@
                 v-if="isAfixedField"
                 :id="uniqueId"
                 :attributes="$attrs"
-                :type="normalisedInputType"
-                :value="value"
-                :field-size="fieldSize"
-                :prefix="prefix"
-                :suffix="suffix"
-                :has-error="hasError"
+                v-bind="$props"
                 v-on="listeners" />
 
             <form-dropdown
                 v-else-if="isDropdown"
                 :id="uniqueId"
                 :attributes="$attrs"
-                :type="normalisedInputType"
-                :value="value"
-                :field-size="fieldSize"
-                :has-error="hasError"
+                v-bind="$props"
                 :has-icon="hasLeadingIcon"
-                :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
             <textarea
@@ -145,6 +136,7 @@ import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
 import debounce from '../services/debounce';
 import tenantConfigs from '../tenants';
+
 import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
@@ -185,6 +177,12 @@ export default {
             validator: value => ((VALID_INPUT_TYPES.indexOf(value) !== -1) || (CUSTOM_INPUT_TYPES.indexOf(value) !== -1))// The prop value must match one of the valid input types
         },
 
+        shouldShowLabelText: {
+            type: Boolean,
+            default: true
+        },
+
+        // TODO: remove as inline/inlineNarrow should no longer be needed
         labelStyle: {
             type: String,
             default: 'default',

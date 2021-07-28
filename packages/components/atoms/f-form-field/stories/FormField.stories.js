@@ -7,8 +7,7 @@ import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_INPUT_TYPES,
-    VALID_FIELD_SIZES,
-    VALID_LABEL_STYLES
+    VALID_FIELD_SIZES
 } from '../src/constants';
 
 export default {
@@ -34,8 +33,8 @@ export const FormFieldComponent = () => ({
         inputType: {
             default: select('Input Type', VALID_INPUT_TYPES.concat(CUSTOM_INPUT_TYPES))
         },
-        labelStyle: {
-            default: select('Label Style', VALID_LABEL_STYLES)
+        shouldShowLabelText: {
+            default: boolean('shouldShowLabelText', true)
         },
         hasError: {
             default: boolean('hasError', false)
@@ -70,6 +69,7 @@ export const FormFieldComponent = () => ({
             :locale="locale"
             :label-text="labelText"
             :input-type="inputType"
+            :shouldShowLabelText="shouldShowLabelText"
             :label-style="labelStyle"
             :field-size="fieldSize"
             :has-error="hasError"

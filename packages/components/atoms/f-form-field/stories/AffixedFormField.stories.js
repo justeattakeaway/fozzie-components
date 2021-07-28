@@ -29,6 +29,9 @@ export const AffixedFormFieldComponent = () => ({
         hasError: {
             default: boolean('hasError', false)
         },
+        shouldShowLabelText: {
+            default: boolean('shouldShowLabelText', true)
+        },
         labelDetails: {
             default: text('Label Details', '')
         },
@@ -53,6 +56,7 @@ export const AffixedFormFieldComponent = () => ({
         locale="en-GB"
         label-text="Affixed Field"
         input-type="text"
+        :shouldShowLabelText="shouldShowLabelText"
         field-size="medium"
         :has-error="hasError"
         :disabled="isDisabled"
