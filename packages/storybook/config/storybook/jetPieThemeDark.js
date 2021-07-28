@@ -6,7 +6,7 @@ export default create({
 
     // Storybook-specific color palette
     colorPrimary: '#f36d00',
-    colorSecondary: '#4996FD',
+    colorSecondary: '#4996fd',
 
     // UI
     appBg: '#162028',
@@ -35,5 +35,6 @@ export default create({
     inputBorderRadius: 2,
 
     brandImage: logo,
-    brandTitle: 'Just Eat Takeaway.com',
+    brandTitle: 'Just Eat Takeaway.com'
+    // brandUrl: '',
 });
