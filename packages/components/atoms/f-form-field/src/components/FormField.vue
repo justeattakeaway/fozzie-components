@@ -394,16 +394,16 @@ export default {
             }
 
             if (this.isAfixedField && this.inputType !== 'text') {
-                const afixType = this.perfix ? 'prefix' : 'suffix';
+                const afixType = this.prefix ? 'prefix' : 'suffix';
 
-                throw new TypeError(`Form field is set to have a '${afixType}' and inputType=${this.inputType}, '${afixType}' is only available when inputType="text"`);
+                throw new TypeError(`Form field is set to have a "${afixType}" and inputType="${this.inputType}", "${afixType}" is only available when inputType="text"`);
             }
 
-            if (this.prefix && this.leadingIcon) {
+            if (this.prefix && this.hasLeadingIcon) {
                 throw new TypeError('Form field is set to have a "prefix" and "leadingIcon" only one can be displayed');
             }
 
-            if (this.suffix && this.trailingIcon) {
+            if (this.suffix && this.hasTrailingIcon) {
                 throw new TypeError('Form field is set to have a "suffix" and "trailingIcon" only one can be displayed');
             }
         }

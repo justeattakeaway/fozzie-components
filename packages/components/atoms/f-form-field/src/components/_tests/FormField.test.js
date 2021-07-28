@@ -692,6 +692,88 @@ describe('FormField', () => {
                     }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
                 });
             });
+
+            describe('when `isAfixedField` is true', () => {
+                it('should throw an error when `inputType` is set to `text', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each([
+                    'dropdown',
+                    'email',
+                    'password',
+                    'number',
+                    'tel',
+                    'textarea',
+                    'checkbox',
+                    'radio',
+                    null
+                ])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = {
+                        inputType,
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData
+                        });
+                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available when inputType="text"`);
+                });
+            });
+
+            describe('when `prefix` is provided', () => {
+                it('should throw an error when `leadingIcon` added', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).toThrowError('Form field is set to have a "prefix" and "leadingIcon" only one can be displayed');
+                });
+            });
+
+            describe('when `suffix` is provided', () => {
+                it('should throw an error when `trailingIcon` added', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        suffix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError('Form field is set to have a "suffix" and "trailingIcon" only one can be displayed');
+                });
+            });
         });
     });
 });
