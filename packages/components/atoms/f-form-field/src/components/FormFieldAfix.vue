@@ -82,10 +82,10 @@ export default {
             const formFieldName = (this.attributes && this.attributes.name ? this.attributes.name : null);
 
             return {
-                afix: formFieldName ? `formfield-${formFieldName}-afixWrapper` : 'formfield-afixWrapper',
-                prefix: formFieldName ? `formfield-${formFieldName}-prefix` : 'formfield-prefix',
-                input: formFieldName ? `formfield-${formFieldName}-input` : 'formfield-input',
-                suffix: formFieldName ? `formfield-${formFieldName}-suffix` : 'formfield-suffix'
+                afix: formFieldName ? `formfield-${formFieldName}-afix-wrapper` : 'formfield-afix-wrapper',
+                prefix: formFieldName ? `formfield-${formFieldName}-afix-prefix` : 'formfield-afix-prefix',
+                input: formFieldName ? `formfield-${formFieldName}-afix-input` : 'formfield-afix-input',
+                suffix: formFieldName ? `formfield-${formFieldName}-afix-suffix` : 'formfield-afix-suffix'
             };
         },
 

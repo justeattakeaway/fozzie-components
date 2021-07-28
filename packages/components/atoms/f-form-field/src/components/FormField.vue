@@ -347,7 +347,7 @@ export default {
         },
 
         isAfixedField () {
-            return this.prefix || this.suffix;
+            return Boolean(this.prefix || this.suffix);
         }
     },
 

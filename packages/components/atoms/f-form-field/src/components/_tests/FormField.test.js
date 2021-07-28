@@ -389,6 +389,94 @@ describe('FormField', () => {
                 expect(wrapper.vm.hasTrailingIcon).toEqual(false);
             });
         });
+
+        describe('isAfixedField :: ', () => {
+            describe('when `prefix` value exists ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text',
+                        prefix: '£'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return true`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAfixedField).toBe(true);
+                });
+
+                it('should display `afixedFormField`', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-afix-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(true);
+                });
+            });
+
+            describe('when `suffix` value exists ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text',
+                        suffix: '£'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return true`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAfixedField).toBe(true);
+                });
+
+                it('should display `afixedFormField`', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-afix-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(true);
+                });
+            });
+
+            describe('when neither `prefix` or `suffix` value exist ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return false`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAfixedField).toBe(false);
+                });
+
+                it('wrapper should display `afixedFormField`', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-afix-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(false);
+                });
+            });
+        });
     });
 
     describe('attrs ::', () => {
