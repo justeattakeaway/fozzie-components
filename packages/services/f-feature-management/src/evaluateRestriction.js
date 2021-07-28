@@ -26,7 +26,7 @@ function getContextValue (restriction, context) {
         case 'AppVersion':
             return context.appVersion;
         default:
-            throw new Error('Unexpected restriction property: ', restriction.property);
+            throw new Error(`Unexpected restriction property: ${restriction.property}`);
     }
 }
 
