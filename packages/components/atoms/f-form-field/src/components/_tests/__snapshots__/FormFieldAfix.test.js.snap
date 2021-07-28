@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormFieldAfix computed :: testId ::  when \`attribues\` does not have name value should return default testIds 1`] = `
+Object {
+  "afix": "formfield-afix-wrapper",
+  "input": "formfield-afix-input",
+  "prefix": "formfield-afix-prefix",
+  "suffix": "formfield-afix-suffix",
+}
+`;
+
+exports[`FormFieldAfix computed :: testId ::  when \`attribues\` has name value should return testIds for form field 1`] = `
+Object {
+  "afix": "formfield-formfield-4-afix-wrapper",
+  "input": "formfield-formfield-4-afix-input",
+  "prefix": "formfield-formfield-4-afix-prefix",
+  "suffix": "formfield-formfield-4-afix-suffix",
+}
+`;
