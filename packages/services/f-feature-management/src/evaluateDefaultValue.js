@@ -1,20 +1,15 @@
 import evaluateRestriction from './evaluateRestriction';
 
 /**
- * Returns the first default value where the contex matches the value's restrictions.
+ * Returns the first default value where the context matches the value's restrictions.
  * @param {object} feature - the feature we are evaluating.
  * @param {object} context - context (e.g. country)
- * @returns Boolean
+ * @returns the value from the first rule whose restrictions match context
  */
 function evaluateDefaultValue (feature, context) {
-    for (let i = 0; i < feature.defaultValueRules.length; i++) {
-        const defaultValueRule = feature.defaultValueRules[i];
-        if (evaluateRestriction(defaultValueRule.restrictions, context)) {
-            return defaultValueRule.value;
-        }
-    }
+    const matchingRule = feature.defaultValueRules.find(rule => evaluateRestriction(rule.restrictions, context));
 
-    return null;
+    return matchingRule ? matchingRule.value : null;
 }
 
 export default evaluateDefaultValue;

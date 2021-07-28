@@ -8,14 +8,9 @@ import calculateFractions from './calculateFractions';
  * @returns matching rule or null
  */
 function getFirstRuleMatch (idHashLogicDetail, context) {
-    for (let i = 0; i < idHashLogicDetail.rules.length; i++) {
-        const rule = idHashLogicDetail.rules[i];
-        if (evaluateRestriction(rule.restrictions, context)) {
-            return rule;
-        }
-    }
+    const matchingRule = idHashLogicDetail.rules.find(rule => evaluateRestriction(rule.restrictions, context));
 
-    return null;
+    return matchingRule || null;
 }
 
 /**
@@ -51,13 +46,15 @@ function getVariant (rule, variantFraction) {
 
     // works through the variants until we have reached the "variantFraction" for the user
     let cumuFraction = 0;
-    for (let i = 0; i < rule.variants.length; i++) {
-        const variant = rule.variants[i];
-        cumuFraction += (variant.weight / totalWeight);
 
-        if (cumuFraction >= variantFraction) {
-            return variant;
-        }
+    const variant = rule.variants.find(v => {
+        cumuFraction += (v.weight / totalWeight);
+
+        return cumuFraction >= variantFraction;
+    });
+
+    if (variant) {
+        return variant;
     }
 
     // This should never happen since the cumulative fraction is always <= 1.
