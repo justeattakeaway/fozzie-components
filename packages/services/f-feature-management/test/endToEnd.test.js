@@ -11,12 +11,12 @@ const logger = {
     logInfo(){}
 }
 
-const { getBooleanValue, getIntegerValue, getStringValue } = featureManagement({
+const fm = featureManagement({
     json: JSON.stringify(config),
     logger: logger
 });
 
-const functionMap = { bool: getBooleanValue, int: getIntegerValue, string: getStringValue };
+const functionMap = { bool: fm.getBooleanValue.bind(fm), int: fm.getIntegerValue.bind(fm), string: fm.getStringValue.bind(fm) };
 
 
 jest.mock('../src/trackExperiment');

@@ -20,8 +20,8 @@ function init (json) {
  * Returns the current feature lookup.
  * @returns Lookup of features by key.
  */
-function getFeatures () {
-    return featureLookup;
+function getFeature (fullKey) {
+    return featureLookup[fullKey];
 }
 
-export { getFeatures, init };
+export { getFeature, init };
