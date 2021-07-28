@@ -1,8 +1,8 @@
 import { logger } from './logger';
 
 /**
- * Checks that the restriction object has at most one operator specified
- * @param {object} restriction. Throws if not.
+ * Checks that the restriction object has at most one operator specified. Throws if not.
+ * @param {object} restriction.
  */
 function verifyRestrictionObject (restriction) {
     const operatorsSpecified = ['and', 'or', 'eq', 'neq', 'in', 'nin', 'gt', 'gte', 'lt', 'lte']
@@ -11,35 +11,6 @@ function verifyRestrictionObject (restriction) {
     if (operatorsSpecified.length > 1) {
         throw new Error(`${operatorsSpecified.length} operators specified`, operatorsSpecified);
     }
-}
-
-/**
- * Utility function to return true if predicate passes for every item in the array.
- * @param {array} array
- * @param {function} predicate - map from the array items
- * @returns Boolean
- */
-function all (array, predicate) {
-    const passes = array.filter(i => predicate(i));
-
-    return passes.length === array.length;
-}
-
-/**
- * Utility function to return true if predicate passes for at least one item in the array.
- * @param {array} array
- * @param {function} predicate - map from the array items
- * @returns Boolean
- */
-function any (array, predicate) {
-    for (let i = 0; i < array.length; i++) {
-        const item = array[i];
-        if (predicate(item)) {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 /**
@@ -171,11 +142,11 @@ function evaluateRestriction (restriction, context) {
         verifyRestrictionObject(restriction);
 
         if (restriction.and) {
-            return all(restriction.and, operand => evaluateRestriction(operand, context));
+            return restriction.and.every(operand => evaluateRestriction(operand, context));
         }
 
         if (restriction.or) {
-            return any(restriction.or, operand => evaluateRestriction(operand, context));
+            return restriction.or.some(operand => evaluateRestriction(operand, context));
         }
 
         if (restriction.eq) {
@@ -187,11 +158,11 @@ function evaluateRestriction (restriction, context) {
         }
 
         if (restriction.in) {
-            return any(restriction.in, value => isEqual(value, restriction, context));
+            return restriction.in.some(value => isEqual(value, restriction, context));
         }
 
         if (restriction.nin) {
-            return all(restriction.nin, value => !isEqual(value, restriction, context));
+            return restriction.nin.every(value => !isEqual(value, restriction, context));
         }
 
         if (restriction.gt) {
