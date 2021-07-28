@@ -392,6 +392,20 @@ export default {
             if (this.isDropdown && this.hasTrailingIcon) {
                 throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
             }
+
+            if (this.isAfixedField && this.inputType !== 'text') {
+                const afixType = this.perfix ? 'prefix' : 'suffix';
+
+                throw new TypeError(`Form field is set to have a '${afixType}' and inputType=${this.inputType}, '${afixType}' is only available when inputType="text"`);
+            }
+
+            if (this.prefix && this.leadingIcon) {
+                throw new TypeError('Form field is set to have a "prefix" and "leadingIcon" only one can be displayed');
+            }
+
+            if (this.suffix && this.trailingIcon) {
+                throw new TypeError('Form field is set to have a "suffix" and "trailingIcon" only one can be displayed');
+            }
         }
     }
 };

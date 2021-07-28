@@ -39,10 +39,10 @@ export const AffixedFormFieldComponent = () => ({
             default: text('Placeholder', '')
         },
         prefix: {
-            default: text('prefix', '')
+            default: text('prefix', '£')
         },
         suffix: {
-            default: text('suffix', '')
+            default: text('suffix', 'GBP')
         }
     },
     parameters: {
@@ -51,7 +51,7 @@ export const AffixedFormFieldComponent = () => ({
     template:
     `<form-field
         locale="en-GB"
-        label-text="Field"
+        label-text="Affixed Field"
         input-type="text"
         field-size="medium"
         :has-error="hasError"
