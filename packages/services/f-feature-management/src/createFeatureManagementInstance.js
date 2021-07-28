@@ -1,7 +1,7 @@
 import { init as initFeatures } from './featureGetter';
 import { setContextGetter } from './contextGetter';
 import { setLogger } from './logger';
-import FeatureManager from './featureManager';
+import FeatureManager from './FeatureManager';
 
 const instance = null;
 
