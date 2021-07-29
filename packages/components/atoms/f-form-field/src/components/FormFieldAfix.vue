@@ -1,8 +1,8 @@
 <template>
     <div
         :class="[
-            $style['c-formField-field--affixed'],
-            $style[`c-formField-field--${fieldSize}`], {
+            $style['c-formField-affixed-wrapper'],
+            $style[`c-formField-affixed-wrapper--${fieldSize}`], {
                 [$style['c-formField--invalid']]: hasError
             }
         ]"
@@ -22,6 +22,7 @@
         <input
             :id="$attrs.id"
             ref="input"
+            :class="$style['c-formField-affixed-field']"
             :disabled="attributes.disabled"
             v-bind="attributes"
             :value="value"
@@ -45,6 +46,10 @@
 
 <script>
 export default {
+    name: 'FormAffixedField',
+
+    inheritAttrs: false,
+
     props: {
         attributes: {
             type: Object,
@@ -113,10 +118,9 @@ export default {
     font-family: $font-family-base;
     @include font-size($form-input-fontSize);
     color: $form-input-secondaryTextColour;
-    padding: $form-input-padding;
 }
 
-.c-formField-field--affixed {
+.c-formField-affixed-wrapper {
     display: flex;
     width: 100%;
 
@@ -126,7 +130,6 @@ export default {
     background-clip: padding-box;
     padding: 0;
 
-    // border-color: $form-input-borderColour--invalid;
     &:hover {
         background-color: $form-input-bg--hover;
     }
@@ -136,39 +139,50 @@ export default {
     &:focus-within {
         box-shadow: $form-input-focus--boxShadow;
     }
+}
 
-    input {
-        border: none;
-        flex-grow: 1;
-        background-color: transparent;
-        font-family: $font-family-base;
-        @include font-size($form-input-fontSize);
-        font-weight: $font-weight-regular;
-        color: $form-input-textColour;
-        padding: spacing(x1.5) 0;
-        height: 100%;
 
-        &:focus,
-        &:active,
-        &:focus-within {
-            outline: none;
-        }
+.c-formField-affixed-wrapper--medium {
+    height: $form-input-height;
 
-        &[disabled] {
-        cursor: not-allowed;
-
-            &,
-            &:hover {
-                background-color: $form-input-bg--disabled;
-                color: $form-input-textColour--disabled;
-                border-color: $form-input-borderColour--disabled;
-                // opacity: 1; // removes default disabled styling
-            }
-        }
+    .c-formField-afix {
+        padding: $form-input-padding;
     }
 }
 
-.c-formField--disabled {
+.c-formField-affixed-wrapper--small {
+    height: $form-input-height--small;
+
+    .c-formField-afix {
+        padding: $form-input-padding--small;
+    }
+}
+
+.c-formField-affixed-wrapper--large {
+    height: $form-input-height--large;
+
+    .c-formField-afix {
+        padding: $form-input-padding--large;
+    }
+}
+
+.c-formField-affixed-field {
+    border: none;
+    flex-grow: 1;
+    background-color: transparent;
+    font-family: $font-family-base;
+    @include font-size($form-input-fontSize);
+    font-weight: $font-weight-regular;
+    color: $form-input-textColour;
+    height: 100%;
+
+    &:focus,
+    &:active,
+    &:focus-within {
+        outline: none;
+    }
+
+    &[disabled] {
     cursor: not-allowed;
 
         &,
@@ -176,9 +190,19 @@ export default {
             background-color: $form-input-bg--disabled;
             color: $form-input-textColour--disabled;
             border-color: $form-input-borderColour--disabled;
-            // opacity: 1; // removes default disabled styling
         }
+    }
+}
 
+.c-formField--disabled {
+    cursor: not-allowed;
+
+    &,
+    &:hover {
+        background-color: $form-input-bg--disabled;
+        color: $form-input-textColour--disabled;
+        border-color: $form-input-borderColour--disabled;
+    }
 }
 
 .c-formField--invalid {
