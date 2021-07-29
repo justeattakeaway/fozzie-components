@@ -6,7 +6,6 @@
         :class="[
             $style['o-form-label'],
             $style['c-formField-label'], {
-                [$style['c-formField-label--inline']]: isInline,
                 [$style['c-formField-label--disabled']]: isDisabled
             }
         ]">
@@ -17,26 +16,24 @@
         </span>
 
         <slot />
-        <slot name="description" />
+
+        <span
+            v-if="labelDescription"
+            :class="[
+                'u-spacingTop',
+                'u-spacingBottom--large',
+                $style['c-formField-label-description']
+            ]">
+            {{ labelDescription }}
+        </span>
     </label>
 </template>
 
 <script>
-import { VALID_LABEL_STYLES } from '../constants';
-
 export default {
     name: 'FormLabel',
     components: {},
     props: {
-        labelStyle: {
-            type: String,
-            default: 'default',
-            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1)
-        },
-        isInline: {
-            type: Boolean,
-            default: false
-        },
         labelFor: {
             type: String,
             required: true
@@ -72,7 +69,6 @@ $form-inlineLabel-padding       : spacing(x1.5) spacing(x2);
 $form-inlineLabel-colour        : $color-content-subdued;
 $form-inlineLabel-fontSize      : 'body-l';
 $form-inlineLabel-weight        : $font-weight-regular;
-
 
 .c-formField-label {
     display: block;
@@ -125,4 +121,9 @@ input {
     right: 0;
 }
 
+
+.c-formField-label-description {
+    display: block;
+    font-weight: normal;
+}
 </style>

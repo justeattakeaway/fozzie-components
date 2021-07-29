@@ -48,8 +48,8 @@ export const FormFieldComponent = () => ({
         isGrouped: {
             default: boolean('isGrouped', false)
         },
-        hasInputDescription: {
-            default: boolean('hasExtraLabelText', false)
+        labelDescription: {
+            default: text('Label Description', '')
         },
         labelDetails: {
             default: text('Label Details', '')
@@ -81,10 +81,8 @@ export const FormFieldComponent = () => ({
             :rows="7"
             :maxlength="200"
             :labelDetails="labelDetails"
-            :assistiveText="assistiveText"
-            :has-input-description="hasInputDescription">
-                Here is a bit more text to show
-        </form-field>`
+            :labelDescription="labelDescription"
+            :assistiveText="assistiveText"/>`
 });
 
-FormFieldComponent.storyName = 'f-form-field';
+FormFieldComponent.storyName = 'Form Field';

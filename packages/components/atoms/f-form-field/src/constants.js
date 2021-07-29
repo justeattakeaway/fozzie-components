@@ -6,8 +6,6 @@ export const VALID_ICON_INPUT_TYPES = VALID_TRAILING_ICON_INPUT_TYPES.concat('dr
 
 export const DEFAULT_INPUT_TYPE = 'text';
 
-export const VALID_LABEL_STYLES = ['default', 'inline', 'inlineNarrow'];
-
 export const DEFAULT_FIELD_SIZE = 'medium';
 export const VALID_FIELD_SIZES = ['small', 'medium', 'large'];
 

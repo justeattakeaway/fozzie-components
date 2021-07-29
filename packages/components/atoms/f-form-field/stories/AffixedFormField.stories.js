@@ -7,6 +7,7 @@ import {
     DriverIcon
 } from '@justeat/f-vue-icons';
 import FormField from '../src/components/FormField.vue';
+import { DEFAULT_FIELD_SIZE, VALID_FIELD_SIZES } from '../src/constants';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -22,6 +23,9 @@ export const AffixedFormFieldComponent = () => ({
     props: {
         locale: {
             default: select('Locale', ['en-GB', 'en-AU'])
+        },
+        fieldSize: {
+            default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
         },
         isDisabled: {
             default: select('isDisabled', [null, 'disabled'])
@@ -57,7 +61,7 @@ export const AffixedFormFieldComponent = () => ({
         label-text="Affixed Field"
         input-type="text"
         :shouldShowLabelText="shouldShowLabelText"
-        field-size="medium"
+        :field-size="fieldSize"
         :has-error="hasError"
         :disabled="isDisabled"
         :placeholder="placeholder"

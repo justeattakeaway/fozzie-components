@@ -12,24 +12,11 @@
             :class="$style['c-formField-fieldWrapper']">
             <form-label
                 v-if="shouldShowLabelText"
-                :label-style="normalisedLabelStyle"
                 :label-for="uniqueId"
-                :is-inline="isInline"
                 :is-disabled="isDisabled"
-                :label-details="labelDetails"
+                v-bind="$props"
                 :data-test-id="testId.label">
                 {{ labelText }}
-                <template #description>
-                    <span
-                        v-if="hasInputDescription"
-                        :class="[
-                            'u-spacingTop',
-                            'u-spacingBottom--large',
-                            $style['c-formField-label-description']
-                        ]">
-                        <slot />
-                    </span>
-                </template>
             </form-label>
 
             <form-field-afix
@@ -81,16 +68,6 @@
                     }]"
                 v-on="listeners"
             >
-
-            <form-label
-                v-if="isInline"
-                :id="`label-${uniqueId}`"
-                :label-for="uniqueId"
-                :label-style="normalisedLabelStyle"
-                :is-inline="isInline"
-                :data-test-id="`${testId.label}--inline`">
-                {{ labelText }}
-            </form-label>
 
             <span
                 v-if="hasLeadingIcon"
@@ -145,7 +122,6 @@ import {
     VALID_TRAILING_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES,
-    VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
 
@@ -180,13 +156,6 @@ export default {
         shouldShowLabelText: {
             type: Boolean,
             default: true
-        },
-
-        // TODO: remove as inline/inlineNarrow should no longer be needed
-        labelStyle: {
-            type: String,
-            default: 'default',
-            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid label types
         },
 
         fieldSize: {
@@ -225,9 +194,9 @@ export default {
             default: undefined
         },
 
-        hasInputDescription: {
-            type: Boolean,
-            default: false
+        labelDescription: {
+            type: String,
+            default: ''
         },
 
         labelDetails: {
@@ -263,13 +232,6 @@ export default {
                 return this.inputType;
             }
             return DEFAULT_INPUT_TYPE;
-        },
-
-        normalisedLabelStyle () {
-            if (VALID_LABEL_STYLES.includes(this.labelStyle)) {
-                return this.labelStyle;
-            }
-            return '';
         },
 
         formFieldLocale () {
@@ -464,11 +426,6 @@ $form-input-iconSize                           : 18px;
         .c-formField-field {
             border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
-    }
-
-    .c-formField-label-description {
-        display: block;
-        font-weight: normal;
     }
 
     .c-formField-icon {
