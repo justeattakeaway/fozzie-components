@@ -6,7 +6,7 @@
                 :router-links="true" />
             <media-element
                 :class="$style['c-loyaltyHeader-media']"
-                :text-size="fontSize"
+                :text-size="getFontSizeBasedOnScreenSize"
                 :title="$t('header.title')"
                 :text="$t('header.text')"
                 :image-url="getImageBasedOnScreenSize"

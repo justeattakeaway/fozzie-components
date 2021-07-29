@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
-*July 20, 2021*
+*July 29, 2021*
 
 ### Added
 - Header component and associated i18n text
