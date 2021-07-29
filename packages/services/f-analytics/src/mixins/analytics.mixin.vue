@@ -1,13 +1,17 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import fAnalyticsModule from '../store/analyticsModule';
-import { COUNTRY_INFO, DEFAULT_APP_ID, DEFAULT_APP_TYPE } from '../constants';
+import {
+    COUNTRY_INFO,
+    DEFAULT_APP_ID,
+    DEFAULT_APP_TYPE,
+    MAP_ROUTE_TO_FEATURE_NAME
+} from '../constants';
 
 export default {
     name: 'Analytics',
 
-    computed:
-    {
+    computed: {
         ...mapState('fAnalyticsModule', ['platformData']),
 
         getGtmSettings () {
@@ -56,7 +60,7 @@ export default {
                 platformData.instancePosition = process.env.INSTANCE_POSITION || 'N/A';
 
                 // Is of type `httponly` so need to read serverside
-                platformData.jeUserPercentage = this.$cookies.get('je-user_percentage') || 0;
+                platformData.jeUserPercentage = this.$cookies.get('je-user_percentage') || null;
 
                 this.updatePlatformData(platformData);
             }
@@ -93,7 +97,7 @@ export default {
         prepareAnalytics () {
             const platformData = { ...this.platformData };
 
-            platformData.name = this.$route.name;
+            platformData.name = MAP_ROUTE_TO_FEATURE_NAME[this.$route.name] || this.$route.name;
             platformData.appType = DEFAULT_APP_TYPE;
             platformData.applicationId = DEFAULT_APP_ID;
             platformData.userAgent = navigator.userAgent || 'N/A';

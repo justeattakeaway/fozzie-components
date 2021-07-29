@@ -3,6 +3,14 @@ import EventNames from '../event-names';
 import checkoutIssues from '../checkout-issues';
 import { CHECKOUT_ERROR_FORM_TYPE } from '../constants';
 
+const formatUpdateCheckoutErrorCode = error => {
+    const errorList = error?.response?.data?.errors ?? [];
+    const errorCodes = errorList.map(el => el.errorCode);
+    const result = errorCodes.join(',');
+
+    return result;
+};
+
 class CreateGuestUserError extends Error {
     constructor (message) {
         super(message);
@@ -19,6 +27,7 @@ class UpdateCheckoutError extends Error {
         this.messageKey = 'errorMessages.genericServerError';
         this.eventToEmit = EventNames.CheckoutUpdateFailure;
         this.logMessage = 'Checkout Update Failure';
+        this.errorCode = formatUpdateCheckoutErrorCode(error);
         this.shouldShowInDialog = false;
         this.traceId = error.response && error.response.data ? error.response.data.traceId : null;
     }
