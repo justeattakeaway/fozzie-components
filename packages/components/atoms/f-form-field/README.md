@@ -72,15 +72,29 @@ The props that can be defined are as follows (if any):
 | `locale` | `String` | `''` | Sets locale for I18n. |
 | `labelText` | `String` | `''` | The text that will be displayed in the form field label. |
 | `inputType` | `String` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox`, `dropdown`, `number`, `tel`, `textarea`  |
-| `labelStyle` | `String` | `'default'` | Defines where the label will be rendered in relation to the form field. <br>Options: <br>`default` - Displays the label above the form field, <br>`inline` Displays the label inside the form field,<br>`inlineNarrow` Displays the label above the form field when in web/tablet. Displays the label inside the form field when in mobile.<br>|
+| `shouldShowLabelText` | `Boolean` | `true` | Hides the label if set to `false` |
+| `fieldSize` | `String` | `medium` | The size of the form field. <br>Options: `small`, `medium`, `large` |
 | `value` | `String` or `Number` | `''` | The value of the form field. |
 | `hasError` | `Boolean` | `false` | When `true` border colour changes to red. |
 | `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. |
 | `isGrouped` | `Boolean` | `false` | When `true` will remove margin between all grouped form fields. |
 | `minNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `min` property when `inputType` is `number` |
 | `maxNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `max` property when `inputType` is `number` |
-| `hasInputDescription` | `Boolean` | `false` | When `true` will add the ability to insert extra html element under form label to the component via slot. |
+| `labelDescription` | `String` | `'` | Extra text that will display underneath the label text. |
+| `labelDetails` | `String` | `'` | Details for the label that will display on the right of label text. |
+| `assistiveText` | `String` | `'` | Text to assist the user that will display underneath the input field. |
+| `prefix` | `String` | `'` | Prefix will display on the left of the input field. |
+| `suffix` | `String` | `'` | Suffix will display on the left of the input field. |
 
+
+### Slots
+
+Available slots that can be used.
+
+| Slot Name  | Type  | Description |
+| ----- | ----- | ----------- |
+| `icon-leading` | Icon | Will display an icon inside the input field on the left hand side. |
+| `icon-trailing` | Icon | Will display an icon inside the input field on the right hand side. |
 ### Events
 
 The events that can be subscribed to are as follows (if any):

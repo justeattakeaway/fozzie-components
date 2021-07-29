@@ -4,13 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v1.21.0
+v2.0.0
 ------------------------------
 *July 28, 2021*
 
+### Remove
+- `labelStyle` prop.
+- `Inline` and `InlineNarrow` styles.
+- `hasInputDescription` prop.
+
 ### Added
-- `AffixedFormField` component.
-- Tests to cover changes.
+- `shouldShowLabelText` prop.
+- `labelDescription` prop.
+- Documentation.
 
 
 v1.20.0
