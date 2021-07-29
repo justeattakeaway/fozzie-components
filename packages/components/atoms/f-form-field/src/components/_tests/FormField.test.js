@@ -2,7 +2,12 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
-    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES, VALID_TRAILING_ICON_INPUT_TYPES
+    DEFAULT_INPUT_TYPE,
+    VALID_ICON_INPUT_TYPES,
+    VALID_AFFIXED_INPUT_TYPES,
+    VALID_INPUT_TYPES,
+    VALID_LABEL_STYLES,
+    VALID_TRAILING_ICON_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
@@ -390,7 +395,7 @@ describe('FormField', () => {
             });
         });
 
-        describe('isAfixedField :: ', () => {
+        describe('isAffixedField :: ', () => {
             describe('when `prefix` value exists ::', () => {
                 let propsData;
                 let wrapper;
@@ -408,7 +413,7 @@ describe('FormField', () => {
 
                 it('should return true`', () => {
                     // Assert
-                    expect(wrapper.vm.isAfixedField).toBe(true);
+                    expect(wrapper.vm.isAffixedField).toBe(true);
                 });
 
                 it('should display `afixedFormField`', () => {
@@ -437,7 +442,7 @@ describe('FormField', () => {
 
                 it('should return true`', () => {
                     // Assert
-                    expect(wrapper.vm.isAfixedField).toBe(true);
+                    expect(wrapper.vm.isAffixedField).toBe(true);
                 });
 
                 it('should display `afixedFormField`', () => {
@@ -465,7 +470,7 @@ describe('FormField', () => {
 
                 it('should return false`', () => {
                     // Assert
-                    expect(wrapper.vm.isAfixedField).toBe(false);
+                    expect(wrapper.vm.isAffixedField).toBe(false);
                 });
 
                 it('wrapper should display `afixedFormField`', () => {
@@ -693,11 +698,11 @@ describe('FormField', () => {
                 });
             });
 
-            describe('when `isAfixedField` is true', () => {
-                it('should throw an error when `inputType` is set to `text', () => {
+            describe('when `isAffixedField` is true', () => {
+                it.each([VALID_AFFIXED_INPUT_TYPES])('should throw an error when `inputType` is set to %s', inputType => {
                     // Arrange
                     const propsData = {
-                        inputType: 'text',
+                        inputType,
                         prefix: '£'
                     };
 
@@ -711,10 +716,6 @@ describe('FormField', () => {
 
                 it.each([
                     'dropdown',
-                    'email',
-                    'password',
-                    'number',
-                    'tel',
                     'textarea',
                     'checkbox',
                     'radio',
@@ -731,7 +732,7 @@ describe('FormField', () => {
                         shallowMount(FormField, {
                             propsData
                         });
-                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available when inputType="text"`);
+                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
                 });
             });
 
