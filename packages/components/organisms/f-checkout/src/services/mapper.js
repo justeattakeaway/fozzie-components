@@ -58,7 +58,7 @@ const mapUpdateCheckoutRequest = ({
     {
         op: 'add',
         path: '/notes',
-        value: Object.entries(userNotes).map(([key, value]) => ({ type: key, note: value }))
+        value: userNotes ? Object.entries(userNotes).map(([key, value]) => ({ type: key, note: value })) : { type: 'delivery', note: '' }
     }
 ]);
 
