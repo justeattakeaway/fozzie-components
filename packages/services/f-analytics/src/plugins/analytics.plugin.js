@@ -25,7 +25,7 @@ const preparePageTags = options => {
                                         dl = l != 'dataLayer' ? '&l=' + l : '',
                                         qs = '${queryString}';
                                     j.async = true;
-                                    j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl + qs;
+                                    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl + qs;
                                     f.parentNode.insertBefore(j, f);
                                 })(window, document, 'script', 'dataLayer', '${options.id}');`;
         const script = document.createElement('script');

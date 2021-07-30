@@ -141,7 +141,7 @@ describe('When registering the store module', () => {
             AnalyticsPlugin(context, inject, options);
 
             // Assert
-            expect(document.head.innerHTML).toContain(`//www.googletagmanager.com/gtm.js?id=${options.id}`);
+            expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${options.id}`);
             expect(document.head.innerHTML).toContain('function (w, d, s, l, i)');
             expect(document.head.innerHTML).toContain(`(window, document, 'script', 'dataLayer', '${options.id}');`);
         });
@@ -159,7 +159,7 @@ describe('When registering the store module', () => {
             AnalyticsPlugin(context, inject, currentRegisteredGtmIdOptions);
 
             // Assert
-            expect(document.head.innerHTML).toContain(`//www.googletagmanager.com/gtm.js?id=${currentRegisteredGtmIdOptions.id}` +
+            expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${currentRegisteredGtmIdOptions.id}` +
             `&amp;gtm_auth=${currentRegisteredGtmIdOptions.auth}` +
             `&amp;gtm_preview=${currentRegisteredGtmIdOptions.preview}` +
             `&amp;gtm_cookies_win=${currentRegisteredGtmIdOptions.cookiesWin}`);
@@ -175,8 +175,8 @@ describe('When registering the store module', () => {
             AnalyticsPlugin(context, inject, newRegisteredGtmIdOptions);
 
             // Assert
-            expect(document.head.innerHTML).not.toContain(`//www.googletagmanager.com/gtm.js?id=${newRegisteredGtmIdOptions.id}`);
-            expect(document.head.innerHTML).toContain(`//www.googletagmanager.com/gtm.js?id=${options.id}`);
+            expect(document.head.innerHTML).not.toContain(`https://www.googletagmanager.com/gtm.js?id=${newRegisteredGtmIdOptions.id}`);
+            expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${options.id}`);
         });
     });
 });
