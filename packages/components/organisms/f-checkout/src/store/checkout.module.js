@@ -7,6 +7,7 @@ import checkoutApi from '../services/checkoutApi';
 import addressGeocodingApi from '../services/addressGeocodingApi';
 import orderPlacementApi from '../services/orderPlacementApi';
 import accountApi from '../services/accountApi';
+import { mapNotesFromApi } from '../services/mapper';
 
 import {
     UPDATE_ADDRESS,
@@ -398,7 +399,7 @@ export default {
             if (window.sessionStorage) {
                 const key = getUserNoteSessionStorageKey(state);
                 const note = window.sessionStorage.getItem(key);
-                if (note) {
+                if (note && note !== 'undefined') {
                     dispatch('updateUserNote', { type: 'delivery', note });
                 }
             }
@@ -406,8 +407,10 @@ export default {
 
         saveUserNote ({ state }) {
             if (window.sessionStorage) {
-                const key = getUserNoteSessionStorageKey(state);
-                window.sessionStorage.setItem(key, state.userNote);
+                if (state.userNotes.delivery) {
+                    const key = getUserNoteSessionStorageKey(state);
+                    window.sessionStorage.setItem(key, state.userNotes.delivery);
+                }
             }
         },
 
@@ -472,10 +475,10 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
-            // TODO: Maybe there's a way to make this nicer
-            state.userNotes = notes?.length > 0 ? { ...notes.map(({ type, note }) => ({ [type]: note })) } : {};
             // TODO: Remove this ternary when backend is complete. Currently we send the notes value as delivery but the default will be restaurant
             state.noteTypes = noteTypes?.length > 0 ? noteTypes : ['delivery'];
+            // TODO: Maybe there's a way to make this nicer
+            state.userNotes = notes?.length > 0 ? mapNotesFromApi(notes) : {};
         },
 
         [UPDATE_AUTH]: (state, authToken) => {

@@ -2,6 +2,7 @@ import {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
+    mapNotesFromApi,
     mapUpdateCheckoutRequest
 } from '../mapper';
 
@@ -248,5 +249,22 @@ describe('getAnalyticsErrorCodeByApiErrorCode :: ', () => {
 
         // Act & Assert
         expect(getAnalyticsErrorCodeByApiErrorCode(error)).toEqual(expected);
+    });
+});
+
+describe('mapNotesFromApi ::', () => {
+    it('should map the notes returned from the API into an object', () => {
+        const notesFromApi = [
+            {
+                type: 'kitchen',
+                note: 'No ketchup on burger please'
+            },
+            {
+                type: 'delivery',
+                note: 'Phone when outside'
+            }
+        ];
+
+        expect(mapNotesFromApi(notesFromApi)).toEqual({ kitchen: 'No ketchup on burger please', delivery: 'Phone when outside' });
     });
 });
