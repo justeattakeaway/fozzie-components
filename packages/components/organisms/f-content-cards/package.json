@@ -52,10 +52,10 @@
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "vue": "2.x",
-    "@braze/web-sdk": "3.3.0"
+    "@braze/web-sdk": ">=3.3.0"
   },
   "devDependencies": {
-    "@braze/web-sdk": "3.3.0",
+    "@braze/web-sdk": "^3.3.0",
     "@justeat/f-braze-adapter": "4.0.0-beta.3",
     "@justeat/f-vue-icons": "1.2.0",
     "@justeat/f-wdio-utils": "0.2.0",

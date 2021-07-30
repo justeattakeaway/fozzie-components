@@ -160,8 +160,8 @@ export default {
             }
         }
     },
-    async mounted () {
-        await this.setupMetadata(this.apiKey, this.userId);
+    mounted () {
+        this.setupMetadata(this.apiKey, this.userId);
     },
     /**
      * Sets up dependencies required by descendant components
@@ -205,7 +205,7 @@ export default {
          * @param {String} apiKey
          * @param {String} userId
          * @param {Boolean} enableLogging
-         * @return {Promise<void>}
+         * @return {void}
          **/
         setupMetadata (apiKey, userId, enableLogging = false) {
             try {
