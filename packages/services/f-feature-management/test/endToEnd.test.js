@@ -39,7 +39,7 @@ describe('End-to-End Tests', () => {
             
             if (expectedKey && expectedVariant) {
 
-                expect(trackExperiment).toHaveBeenCalled()
+                expect(trackExperiment).toHaveBeenCalled();
                 const trackingEventSent = trackExperiment.mock.calls[0][0];
                 
                 expect(trackingEventSent.experimentKey).toBe(expectedKey);

@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.0
 ------------------------------
-*July 27, 2021*
+*July 30, 2021*
 
 ### Added
 - full implementation, aside from fetching config

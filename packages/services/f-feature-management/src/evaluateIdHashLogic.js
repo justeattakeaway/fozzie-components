@@ -78,7 +78,7 @@ function evaluateIdHashLogic (idHashLogicDetail, context) {
     // 3. compute the audienceFraction and variantFraction, based on the relevant id and prefix for the experiment
     const { audienceFraction, variantFraction } = calculateFractions(idHashLogicDetail.prefix + getIdToHash(idHashLogicDetail, context));
 
-    // 4. if the user is not caught in traffic allocated to the experiment, return null - calling code will rever to defaults
+    // 4. if the user is not caught in traffic allocated to the experiment, return null - calling code will revert to defaults
     if (matchingRule.audienceFraction < audienceFraction) {
         return null;
     }
