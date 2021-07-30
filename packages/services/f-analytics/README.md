@@ -16,24 +16,27 @@ Encapsulates the GTM / Google Analytics functionality
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-analytics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-analytics?targetFile=package.json)
 
 ---
-This component abstracts away the gathering of the various data values needed for Google Analytics (GA) and the installing of Google Tag Manager (GTM).  Once declared in your template is will; on render, push these various data values to GA.  You can see this in action by inspecting the `dataLayer` from the browser console in developer tools and looking for the model `{platformData: {…}}`.
+This component abstracts away the gathering of the various data values needed for Google Analytics (GA) and the setting up of Google Tag Manager (GTM).  Once register it will; on render, push these various data values to GA.  You can see the results by inspecting the `dataLayer` from the browser console in developer tools and looking for the model `{platformData: {…}}`.
 
 
 ## Benefits (Now)
-- Single source for GTM logic: Currently we have GTM logic scattered throught various components and parent features this will remove that logic and centralise it in this single component.
-- Self sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and produce all the GA data required for the initial render.
-- Re-evaluates and re-pushes the `platformData` GA model when the route changes
+- Single point to record GA data: Currently we have GA/GTM logic scattered throught various features, this will allow that logic to be removed and centralise it a single component.
+- Self sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and record all the data required for the GA `platformData` model.  Once registered it will perform the pushing of the GA `platformData` model on the correct event/hook.
+- Reactive: When the route changes (i.e. the page changes) it will re-evaluate and re-pushes the GA `platformData` model.
 
 ## Benefits (Soon)
-- _extend the data properties for the `platformData` GA model_
-- _evaluate, gather and produce data for the `pageData` GA model_
-- _evaluate, gather and produce data for the `userData` GA model_
-- _provide the facility to push 'ad-hoc' GA events_
+- _extend the data properties for the GA `platformData` model_
+- _evaluate, gather and produce data for the GA `pageData` model_
+- _evaluate, gather and produce data for the GA `userData` model_
+- _provide the facility to push 'ad-hoc' GA events via a global service_
+- _instead of owning when to push each GA model the consumer will have control over this_
+- _allow extra bespoke/custom properties to be appended to each GA model by the consumer before the model is pushed_
+- _allow 'ad-hoc' GA events to be push even when server side_
 <hr></br>
 
 ## Usage
 
-1.  Install the module using npm or Yarn
+1.  <strong>Install the module using npm or Yarn</strong>
     ```
     yarn add @justeat/f-analytics
     ```
@@ -41,15 +44,18 @@ This component abstracts away the gathering of the various data values needed fo
     npm install @justeat/f-analytics
     ```
 
-2.  Import & Register
+2.  <strong>Import & Register</strong>
 
     <p>
-    F-Analytics contains a mixin which should be imported into your "Smart Component".
+    F-Analytics contains a 'Mixin' which should be imported into your "Smart Component" plus a 'Nuxt - Plugin' that needs to be registered in the "nuxt.config.js" via a local plugin and both need to be present.
     </p>
     <p>
-    As this mixin pushes the analytics; via GTM, to GA you would want to avoid duplication so it is best for it to be imported onlyh once and at the highest level (i.e. the layout vue component).  If you install at a component level then you will end up with duplicate analytics being pushed to GA by each component that installs f-analytics.
+    As this 'Mixin' currently pushes the analytics; via GTM, to GA you would want to avoid duplication so it is best for it to be imported only once and at the highest level (i.e. the layout vue component).  If you install at a component level then you will end up with duplicate analytics being pushed to GA by each component that installs f-analytics.
+
+    <strong>Below is an example of how to include the 'Mixin';</strong>
     </p>
 
+    _../layouts/main.vue_
     ```js
     <template>
       <div>
@@ -73,14 +79,51 @@ This component abstracts away the gathering of the various data values needed fo
 
         ...
     ```
-3.  Configure
 
-    <p>
-    Note; althought f-analytics gathers most of it's analytical data from within it does rely on a specific GTM object to be declared/exposed in your "Smart Component". See object spec. below:
+    <strong>You also need to create a local plugin to reference the external plugin, which then allows you to pass in options </strong>(_see Options section_)<strong>,  In the example below it demonstrates how you can create the 'options' to pass into the plugin;</strong>
     </p>
 
+    _../plugins/f.analytics.plugin.js_
     ```js
-    gtmSettings: {
+    import { AnalyticsPlugin } from '@justeat/f-analytics';
+
+    const options = {
+        id: 'GTM-ABC123X',
+        auth: 'some auth key',
+        preview: 'true',
+        cookiesWin: 'some cookie name'
+    };
+
+    export default (context, inject) => { AnalyticsPlugin(context, inject, options); };
+    ```
+
+    <strong>Then; finally, you need to register the local plugin you have just created in the nuxt config, see below;</strong>
+    </p>
+
+    _nuxt.config.js_
+    ```js
+    const config = async () => {
+      return {
+
+        ...
+
+        plugins: [
+          '~/plugins/f.analytics.plugin.js'
+        ],
+
+        ...
+
+      };
+    };
+
+    export default config;
+    ```
+</br>
+  ## Options
+  Note; althought f-analytics gathers most of it's analytical data from within it does rely on a specific GTM objects to be supplied by your "Smart Component". See object spec. below:
+
+  ```js
+    options: {
         id: '<your gtm id for the current environment>',  // Required
         auth: '<the gtm auth key>',                       // Optional
         preview: '<the gtm preview id>',                  // Optional
@@ -88,52 +131,8 @@ This component abstracts away the gathering of the various data values needed fo
     }
 
     // Speak to the Analytics Team for more information on these values
-    ```
-    <p>
-    Exposing this data; so the f-analytics can read, it can be done in several ways and two examples are shown below:
-    </p>
-
-    #1
-    ```js
-      ...
-
-          data () {
-              return {
-                  gtmSettings: {
-                      id: 'GTM-ABC123X',
-                      auth: 'XhcxXXfZ9sevt9n1QGx_zg',
-                      preview: 'env-281',
-                      cookiesWin: 'x'
-                  }
-              };
-          },
-
-      ...
-
-    };
-    </script>
-    ```
-    #2
-    ```js
-      ...
-
-      computed: {
-
-        gtmSettings () {
-            // Note; the contents of this object need to mirror the `getSettings` object content
-            return this.settings.gtm;
-        },
-
-      },
-
-      ...
-
-    };
-    </script>
-    ```
-</br>
-
-\*  _Note; you don't have to supply the `gtmSettings` object (i.e. if testing) but the component will only operate in a limited capacity without it._
+  ```
+\*  _Note; you don't have to supply the '`options`' objects (i.e. if testing) but the component will only operate in a limited capacity without it.<br>* Also, if you supply the 'auth' value then you need to supply the 'preview' and 'cookieWin' values._
 </br></br>
 
 ## Environment variables
