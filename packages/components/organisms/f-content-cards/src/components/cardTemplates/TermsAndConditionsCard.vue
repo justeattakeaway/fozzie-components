@@ -1,3 +1,4 @@
+<!-- DEPRECATED - we don't need this on the frontend anymore -->
 <template>
     <div
         :data-test-id="dataTestId('shell')"

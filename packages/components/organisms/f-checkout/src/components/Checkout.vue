@@ -409,8 +409,7 @@ export default {
         * `state.AuthToken`, then retrieve the phone number from customer api
         * This can happen for newly created guest */
         shouldLoadCustomer () {
-            return this.isLoggedIn &&
-                !this.customer.mobileNumber;
+            return this.isLoggedIn && !this.customer.mobileNumber;
         },
 
         shouldShowCheckoutForm () {

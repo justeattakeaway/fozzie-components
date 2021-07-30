@@ -34,7 +34,7 @@ export default {
         },
         contactPreferences: {
             text: 'Contact preferences',
-            url: '/account/preferences',
+            url: '/account/contact-preferences',
             gtm: 'click_account_contact_preferences'
         }
     },

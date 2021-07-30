@@ -5,9 +5,17 @@
         :for="labelFor"
         :class="[
             $style['o-form-label'],
-            $style['c-formField-label'],
-            (isInline ? $style['c-formField-label--inline'] : '')
+            $style['c-formField-label'], {
+                [$style['c-formField-label--inline']]: isInline,
+                [$style['c-formField-label--disabled']]: isDisabled
+            }
         ]">
+        <span
+            v-if="labelDetails"
+            :class="$style['c-formField-label-details']">
+            {{ labelDetails }}
+        </span>
+
         <slot />
         <slot name="description" />
     </label>
@@ -32,6 +40,18 @@ export default {
         labelFor: {
             type: String,
             required: true
+        },
+        isDisabled: {
+            type: Boolean,
+            default: false
+        },
+        labelDetails: {
+            type: String,
+            default: null
+        },
+        labelDescription: {
+            type: String,
+            default: null
         }
     },
     computed: {
@@ -60,6 +80,11 @@ $form-inlineLabel-weight        : $font-weight-regular;
     @include font-size($form-label-fontSize);
     font-weight: $form-label-weight;
     margin-bottom: spacing();
+}
+
+.c-formField-label--disabled {
+    color: $color-content-disabled;
+    pointer-events: none;
 }
 
 .c-formField-label--inline {
@@ -91,6 +116,13 @@ input {
         opacity: 0;
         z-index: -1;
     }
+}
+
+.c-formField-label-details {
+    font-weight: $font-weight-regular;
+    color: $form-input-secondaryTextColour;
+    position: absolute;
+    right: 0;
 }
 
 </style>

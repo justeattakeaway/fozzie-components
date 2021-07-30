@@ -2110,6 +2110,124 @@ describe('Checkout', () => {
                         result.rejects.toThrow(UpdateCheckoutError);
                         result.rejects.toThrow(errorMessage);
                     });
+
+                    it('should throw an `UpdateCheckoutError` error with the `errorCode` of the error', async () => {
+                        // Arrange
+                        const errorMessage = 'An error';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 400,
+                                    errors: [{
+                                        description: 'From should be in ISO 8601 Zulu format.',
+                                        errorCode: 'FULFILMENT_TIME_INVALID'
+                                    }]
+                                }
+                            }
+                        };
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toHaveProperty('errorCode', 'FULFILMENT_TIME_INVALID');
+                    });
+
+                    it('should throw an `UpdateCheckoutError` error with comma separated `errorCode` of the error for multiple errors', async () => {
+                        // Arrange
+                        const errorMessage = 'An error';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 400,
+                                    errors: [
+                                        {
+                                            description: 'The tenant is invalid',
+                                            errorCode: 'TENANT_INVALID'
+                                        },
+                                        {
+                                            description: 'From should be in ISO 8601 Zulu format.',
+                                            errorCode: 'FULFILMENT_TIME_INVALID'
+                                        }]
+                                }
+                            }
+                        };
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toHaveProperty('errorCode', 'TENANT_INVALID,FULFILMENT_TIME_INVALID');
+                    });
+
+                    it('should throw an `UpdateCheckoutError` error with empty `errorCode` if errors array is missing', async () => {
+                        // Arrange
+                        const errorMessage = 'An error';
+                        const error = {
+                            message: errorMessage,
+                            response: {
+                                data: {
+                                    statusCode: 400
+                                }
+                            }
+                        };
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger,
+                                $cookies
+                            }
+                        });
+
+                        // Act & Assert
+                        const result = await expect(wrapper.vm.handleUpdateCheckout());
+
+                        result.rejects.toHaveProperty('errorCode', '');
+                    });
                 });
 
                 describe('AND there is no response object (e.g. timeout)', () => {

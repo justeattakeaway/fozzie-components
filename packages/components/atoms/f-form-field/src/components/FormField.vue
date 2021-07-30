@@ -15,6 +15,8 @@
                 :label-style="normalisedLabelStyle"
                 :label-for="uniqueId"
                 :is-inline="isInline"
+                :is-disabled="isDisabled"
+                :label-details="labelDetails"
                 :data-test-id="testId.label">
                 {{ labelText }}
                 <template #description>
@@ -36,11 +38,9 @@
                 :attributes="$attrs"
                 :type="normalisedInputType"
                 :value="value"
-                :class="[
-                    $style['c-formField-field'],
-                    $style['c-formField-field--defaultHeight'],
-                    $style['c-formField-dropdownContainer']
-                ]"
+                :field-size="fieldSize"
+                :has-error="hasError"
+                :has-icon="hasLeadingIcon"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
@@ -52,9 +52,10 @@
                 v-bind="$attrs"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--textarea']
+                    $style['c-formField-field--textarea'],
+                    { [$style['c-formField--invalid']]: hasError }
                 ]"
-                data-test-id="formfield-textarea"
+                :data-test-id="testId.textarea"
                 v-on="listeners" />
 
             <input
@@ -66,13 +67,15 @@
                 :type="normalisedInputType"
                 :min="normalisedInputType === 'number' ? minNumber : false"
                 :max="normalisedInputType === 'number' ? maxNumber : false"
-                placeholder=" "
                 :data-test-id="testId.input"
                 :class="[
                     $style['c-formField-field'],
-                    $style['c-formField-field--defaultHeight'],
-                    { [$style['c-formField-field--noFocus']]: isSelectionControl }
-                ]"
+                    $style[`c-formField-field--${fieldSize}`], {
+                        [$style['c-formField-field--noFocus']]: isSelectionControl,
+                        [$style['c-formField--invalid']]: hasError,
+                        [$style['c-formField-padding--iconLeading']]: hasLeadingIcon,
+                        [$style['c-formField-padding--iconTrailing']]: hasTrailingIcon
+                    }]"
                 v-on="listeners"
             >
 
@@ -85,7 +88,40 @@
                 :data-test-id="`${testId.label}--inline`">
                 {{ labelText }}
             </form-label>
+
+            <span
+                v-if="hasLeadingIcon"
+                :class="[
+                    $style['c-formField-icon'],
+                    $style[`c-formField-icon--${fieldSize}`],
+                    $style[`c-formField-icon--leading`],
+                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                ]">
+                <slot
+                    name="icon-leading"
+                />
+            </span>
+
+            <span
+                v-if="hasTrailingIcon"
+                :class="[
+                    $style['c-formField-icon'],
+                    $style[`c-formField-icon--${fieldSize}`],
+                    $style[`c-formField-icon--trailing`],
+                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                ]">
+                <slot
+                    name="icon-trailing"
+                />
+            </span>
+
+            <div
+                v-if="assistiveText"
+                :class="$style['c-formField-assitiveText']">
+                {{ assistiveText }}
+            </div>
         </div>
+
         <slot name="error" />
     </div>
 </template>
@@ -100,6 +136,10 @@ import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
+    VALID_ICON_INPUT_TYPES,
+    VALID_TRAILING_ICON_INPUT_TYPES,
+    DEFAULT_FIELD_SIZE,
+    VALID_FIELD_SIZES,
     VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
@@ -134,7 +174,13 @@ export default {
         labelStyle: {
             type: String,
             default: 'default',
-            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid label types
+        },
+
+        fieldSize: {
+            type: String,
+            default: DEFAULT_FIELD_SIZE,
+            validator: value => (VALID_FIELD_SIZES.indexOf(value) !== -1) // The prop value must match one of the valid field sizes
         },
 
         value: {
@@ -170,6 +216,16 @@ export default {
         hasInputDescription: {
             type: Boolean,
             default: false
+        },
+
+        labelDetails: {
+            type: String,
+            default: ''
+        },
+
+        assistiveText: {
+            type: String,
+            default: ''
         }
     },
 
@@ -221,11 +277,11 @@ export default {
 
         testId () {
             const formFieldName = this.$attrs.name;
-
             return {
                 container: formFieldName ? `formfield-${formFieldName}` : 'formfield-container',
                 input: formFieldName ? `formfield-${formFieldName}-input` : 'formfield-input',
-                label: formFieldName ? `formfield-${formFieldName}-label` : 'formfield-label'
+                label: formFieldName ? `formfield-${formFieldName}-label` : 'formfield-label',
+                textarea: formFieldName ? `formfield-${formFieldName}-textarea` : 'formfield-textarea'
             };
         },
 
@@ -248,6 +304,31 @@ export default {
 
         isTextarea () {
             return this.inputType === 'textarea';
+        },
+
+        isDisabled () {
+            return this.$attrs.disabled === 'disabled';
+        },
+
+        isValidIconField () {
+            return VALID_ICON_INPUT_TYPES.includes(this.inputType);
+        },
+
+        hasLeadingIcon () {
+            return Boolean(this.$slots['icon-leading']);
+        },
+
+        hasTrailingIcon () {
+            return Boolean(this.$slots['icon-trailing']);
+        }
+    },
+
+    watch: {
+        $props: {
+            immediate: true,
+            handler () {
+                this.validateProps();
+            }
         }
     },
 
@@ -273,26 +354,26 @@ export default {
             if (typeof (window) !== 'undefined') {
                 this.windowWidth = window.innerWidth;
             }
+        },
+
+        validateProps () {
+            if (!this.isValidIconField && (this.hasLeadingIcon || this.hasTrailingIcon)) {
+                throw new TypeError(`Form field is set to have inputType="${this.inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.isDropdown && this.hasTrailingIcon) {
+                throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+            }
         }
     }
 };
 </script>
 
 <style lang="scss" module>
-$form-input-textColour                    : $color-content-default;
-$form-input-textColour--disabled          : $color-content-disabled;
-$form-input-bg--disabled                  : $color-disabled-01;
-$form-input-borderRadius                  : $border-radius;
-$form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $color-border-strong;
-$form-input-borderColour--focus           : $color-grey-50;
-$form-input-borderColour--invalid         : $color-support-error;
-$form-input-borderColour--disabled        : $color-disabled-01;
-$form-input-height                        : 46px; // height is 46px + 1px border = 48px
-$form-input-padding                       : spacing(x1.5) spacing(x2);
-$form-input-fontSize                      : 'body-l';
-$form-input-focus                         : $color-focus;
-$form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
+$form-input-icon-verticalIndent                : 15px;
+$form-input-icon-verticalIndent--small         : 11px;
+$form-input-icon-verticalIndent--large         : 19px;
+$form-input-iconSize                           : 18px;
 
 .c-formField {
     & + & {
@@ -304,49 +385,8 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         position: relative;
     }
 
-    .c-formField-field--defaultHeight {
-        @include rem(height, $form-input-height); //convert height to rem
-    }
-
-    .c-formField-field {
-        width: 100%;
-        font-family: $font-family-base;
-        @include font-size($form-input-fontSize);
-        font-weight: $font-weight-regular;
-        color: $form-input-textColour;
-
-        background-color: $form-input-bg;
-        border: $form-input-borderWidth solid $form-input-borderColour;
-        border-radius: $form-input-borderRadius;
-        background-clip: padding-box;
-        padding: $form-input-padding;
-
-        &:hover {
-            background-color: $form-input-bg--hover;
-        }
-
-        &:focus,
-        &:active,
-        &:focus-within {
-            box-shadow: $form-input-focus--boxShadow;
-            outline: none;
-        }
-
-        .c-formField--invalid & {
-            border-color: $form-input-borderColour--invalid;
-        }
-
-        // Disabled state
-        &[disabled] {
-            cursor: not-allowed;
-
-            &,
-            &:hover {
-                background-color: $form-input-bg--disabled;
-                color: $form-input-textColour--disabled;
-                border-color: $form-input-borderColour--disabled;
-            }
-        }
+    ::placeholder {
+        color: $form-input-secondaryTextColour;
     }
 
     .c-formField-field--textarea {
@@ -361,10 +401,6 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
         &:focus-within {
             box-shadow: none;
         }
-    }
-
-    .c-formField-dropdownContainer {
-        padding: 0;
     }
 
     .c-formField--grouped {
@@ -393,5 +429,55 @@ $form-input-focus--boxShadow              : 0 0 0 2px $form-input-focus;
     .c-formField-label-description {
         display: block;
         font-weight: normal;
+    }
+
+    .c-formField-icon {
+        svg {
+            position: absolute;
+            height: $form-input-iconSize;
+            width: $form-input-iconSize;
+
+            path {
+                fill: $form-input-secondaryTextColour;
+            }
+        }
+    }
+
+    .c-formField-icon--disabled {
+        svg {
+            path {
+                fill: $color-content-disabled;
+            }
+        }
+    }
+
+    .c-formField-icon--small {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent--small);
+    }
+
+    .c-formField-icon--medium {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-icon--large {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent--large);
+    }
+
+    .c-formField-icon--leading {
+        @include indent-icon('leading', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-icon--trailing {
+        @include indent-icon('trailing', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-padding--iconTrailing {
+        padding-right: $form-input-iconPadding;
+    }
+
+    .c-formField-assitiveText {
+        font-weight: $font-weight-regular;
+        color: $form-input-secondaryTextColour;
+        margin-top: spacing(x0.5);
     }
 </style>
