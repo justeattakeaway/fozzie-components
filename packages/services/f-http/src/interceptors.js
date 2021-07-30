@@ -1,16 +1,10 @@
-const outputToConsole = response => {
-    const outputString = `${response.config.method.toUpperCase()}|${response.config.url}|${response.status}|${response.responseTimeMs}ms`;
-
-    console.log(outputString);	// eslint-disable-line
-};
-
 /**
  * Attach interceptors to the axios client to record response time from an API
  *
  * @param {AxiosInstance} axiosInstance
- * @param {Boolean} `isDevelopment` option flag - if provided and is true then the api stats are outputted to the console
+ * @param {object} statsClient An initialised instance of f-statistics
  */
-const addTimingInterceptor = ({ interceptors }, isDevelopment) => {
+const captureResponseStatistics = ({ interceptors }, statisticsClient) => {
     interceptors.request.use(req => {
         req.meta = req.meta || {};
         req.meta.requestStartedAt = new Date().getTime();
@@ -19,19 +13,26 @@ const addTimingInterceptor = ({ interceptors }, isDevelopment) => {
     });
 
     interceptors.response.use(res => {
-        const timeTakenMs = new Date().getTime() - res.config.meta.requestStartedAt;
-        res.responseTimeMs = timeTakenMs;
+        try {
+            const timeTakenMs = new Date().getTime() - res.config.meta.requestStartedAt;
+            res.responseTimeMs = timeTakenMs;
 
-        if (isDevelopment) {
-            outputToConsole(res);
-        } else {
-            // TODO : Output to stats engine
+            const payload = {
+                'cs-method': res.config.method.toUpperCase(),
+                'cs-uri-stem': `${res.config.baseURL}${res.config.url}`,
+                'sc-status': res.status,
+                'time-taken': res.responseTimeMs
+            };
+
+            statisticsClient.publish(`${payload['cs-method']} request to ${payload['cs-uri-stem']} took ${payload['time-taken']}ms`, payload);
+
+            return res;
+        } catch {
+            return res;
         }
-
-        return res;
     });
 };
 
 export default {
-    addTimingInterceptor
+    captureResponseStatistics
 };

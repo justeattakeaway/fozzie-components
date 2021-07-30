@@ -10,6 +10,12 @@
                 [$style['c-formField-label--disabled']]: isDisabled
             }
         ]">
+        <span
+            v-if="labelDetails"
+            :class="$style['c-formField-label-details']">
+            {{ labelDetails }}
+        </span>
+
         <slot />
         <slot name="description" />
     </label>
@@ -38,6 +44,14 @@ export default {
         isDisabled: {
             type: Boolean,
             default: false
+        },
+        labelDetails: {
+            type: String,
+            default: null
+        },
+        labelDescription: {
+            type: String,
+            default: null
         }
     },
     computed: {
@@ -103,4 +117,12 @@ input {
         z-index: -1;
     }
 }
+
+.c-formField-label-details {
+    font-weight: $font-weight-regular;
+    color: $form-input-secondaryTextColour;
+    position: absolute;
+    right: 0;
+}
+
 </style>

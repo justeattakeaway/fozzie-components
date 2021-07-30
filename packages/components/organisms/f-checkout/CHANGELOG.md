@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.165.0
+v0.166.0
 ------------------------------
 *July 22, 2021*
 
@@ -14,6 +14,13 @@ v0.165.0
 ### Changed
 - Small changes so the split notes will work with the current API
 
+
+v0.165.0
+------------------------------
+*July 26, 2021*
+
+### Added
+- `errorCode` property for failed UpdateCheckout is passed to the log
 
 v0.164.0
 ------------------------------
