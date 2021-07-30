@@ -1,11 +1,12 @@
 <template>
     <div>
         <button
-            :id="id + '-accordion-header'"
-            :aria-controls="id + '-header'"
+            :id="`${id}-accordion-header`"
+            :aria-controls="`${id}-header`"
             :aria-expanded="isExpanded"
             :class="$style['c-checkout-accordion-header']"
-            :data-test-id="id + '-accordion-header'"
+            :data-test-id="`${id}-accordion-header`"
+            type="button"
             @click="toggle">
             {{ title }}
             <chevron-icon
@@ -15,8 +16,8 @@
                     }]" />
         </button>
         <section
-            :id="id + '-accordion-section'"
-            :aria-labelledby="id + '-section'"
+            :id="`${id}-accordion-section`"
+            :aria-labelledby="`${id}-section`"
             :class="[
                 $style['c-checkout-accordion-section'], {
                     [$style['c-checkout-accordion-section--hidden']]: !isExpanded
@@ -31,15 +32,19 @@
 import { ChevronIcon } from '@justeat/f-vue-icons';
 
 export default {
-    name: 'Accordion',
-
     components: {
         ChevronIcon
     },
 
     props: {
-        id: { type: String, required: true },
-        title: { type: String, required: true }
+        id: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
+        }
     },
 
     data () {
@@ -49,8 +54,7 @@ export default {
     },
 
     methods: {
-        toggle (e) {
-            e.preventDefault();
+        toggle () {
             this.isExpanded = !this.isExpanded;
         }
     }

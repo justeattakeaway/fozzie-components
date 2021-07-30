@@ -11,7 +11,6 @@ localVue.use(Vuex);
 
 describe('Accordion', () => {
     const propsData = { title: 'Accordion Header', id: 'note' };
-    const event = { preventDefault: jest.fn() };
 
     it('should be defined', () => {
         // Arrange
@@ -43,8 +42,7 @@ describe('Accordion', () => {
                     }
                 });
 
-                wrapper.vm.toggle(event);
-                expect(event.preventDefault).toHaveBeenCalled();
+                wrapper.vm.toggle();
                 expect(wrapper.vm.$data.isExpanded).toBe(true);
             });
 
@@ -61,8 +59,7 @@ describe('Accordion', () => {
                     }
                 });
 
-                wrapper.vm.toggle(event);
-                expect(event.preventDefault).toHaveBeenCalled();
+                wrapper.vm.toggle();
                 expect(wrapper.vm.$data.isExpanded).toBe(false);
             });
 
