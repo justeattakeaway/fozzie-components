@@ -3,7 +3,7 @@ import { setContextGetter } from './contextGetter';
 import { setLogger } from './logger';
 import FeatureManager from './FeatureManager';
 
-const instance = null;
+let instance = null;
 
 /**
  * Returns singleton FeatureManagement object + initialises components on first use.
@@ -21,5 +21,7 @@ export default function (settings) {
 
     setContextGetter(settings.contextGetter);
 
-    return new FeatureManager(settings);
+    instance = new FeatureManager(settings);
+
+    return instance;
 }
