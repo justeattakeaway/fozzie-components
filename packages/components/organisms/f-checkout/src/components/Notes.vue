@@ -43,6 +43,9 @@ import Accordion from './Accordion.vue';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import {
     CHECKOUT_METHOD_DELIVERY,
+    CHECKOUT_NOTE_TYPE_DELIVERY,
+    CHECKOUT_NOTE_TYPE_KITCHEN,
+    CHECKOUT_NOTE_TYPE_RESTAURANT,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import loggerMixin from '../mixins/logger.mixin';
@@ -64,11 +67,11 @@ export default {
         ]),
 
         shouldShowKitchenNotes () {
-            return this.serviceType === CHECKOUT_METHOD_DELIVERY && this.noteTypes?.includes('kitchen');
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY && this.noteTypes?.includes(CHECKOUT_NOTE_TYPE_KITCHEN);
         },
 
         noteTypeDeliveryOrRestaurant () {
-            return this.noteTypes?.includes('delivery') ? 'delivery' : 'restaurant';
+            return this.noteTypes?.includes(CHECKOUT_NOTE_TYPE_DELIVERY) ? CHECKOUT_NOTE_TYPE_DELIVERY : CHECKOUT_NOTE_TYPE_RESTAURANT;
         }
     },
 

@@ -62,9 +62,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-    $icon-size: 16px;
+    $icon-size: spacing(x2);
 
     .c-checkout-accordion-header {
+        @include font-size(heading-s);
         display: flex;
         justify-content: space-between;
         background: transparent;
@@ -72,7 +73,6 @@ export default {
         border-bottom: 1px solid $color-border-strong;
         color: $color-content-default;
         cursor: pointer;
-        font-size: 1rem;
         font-weight: $font-weight-bold;
         padding: spacing(x2) 0;
         margin-top: spacing(x2);

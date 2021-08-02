@@ -30,6 +30,7 @@ describe('Accordion', () => {
             let wrapper;
 
             it('should change `isExpanded` to true when it is initally set to false', () => {
+                // Arrange
                 wrapper = shallowMount(Accordion, {
                     i18n,
                     store: createStore(),
@@ -42,11 +43,15 @@ describe('Accordion', () => {
                     }
                 });
 
+                // Act
                 wrapper.vm.toggle();
+
+                // Assert
                 expect(wrapper.vm.$data.isExpanded).toBe(true);
             });
 
             it('should change `isExpanded` to false when it is initally set to true', () => {
+                // Arrange
                 wrapper = shallowMount(Accordion, {
                     i18n,
                     store: createStore(),
@@ -59,11 +64,15 @@ describe('Accordion', () => {
                     }
                 });
 
+                // Act
                 wrapper.vm.toggle();
+
+                // Assert
                 expect(wrapper.vm.$data.isExpanded).toBe(false);
             });
 
             it('should be called when the accordion header is clicked', () => {
+                // Arrange
                 const toggleSpy = jest.spyOn(Accordion.methods, 'toggle');
                 wrapper = shallowMount(Accordion, {
                     i18n,
@@ -77,8 +86,11 @@ describe('Accordion', () => {
                     }
                 });
 
+                // Act
                 const header = wrapper.find('[data-test-id="note-accordion-header"]');
                 header.trigger('click');
+
+                // Assert
                 expect(toggleSpy).toHaveBeenCalled();
                 expect(wrapper.vm.$data.isExpanded).toBe(true);
             });
