@@ -57,8 +57,8 @@ const defaultCheckoutState = {
     authToken: '',
     isLoggedIn: false,
     errors: [],
-    noteTypes: ['restaurant'],
-    userNotes: { delivery: 'Please do not knock', kitchen: 'No ketchup please' },
+    notesConfiguration: {},
+    notes: { courier: 'Please do not knock', kitchen: 'No ketchup please' },
     geolocation: null
 };
 
@@ -83,14 +83,13 @@ const defaultCheckoutActions = {
     updateTableIdentifier: jest.fn(),
     updateFulfilmentTime: jest.fn(),
     getGeoLocation: jest.fn(),
+    getNotesConfiguration: jest.fn(),
     getBasket: jest.fn(),
     getAddress: jest.fn(),
     getCustomer: jest.fn(),
     placeOrder: jest.fn(),
     getCustomerName: jest.fn(),
-    updateHasAsapSelected: jest.fn(),
-    getUserNote: jest.fn(),
-    saveUserNote: jest.fn()
+    updateHasAsapSelected: jest.fn()
 };
 
 const defaultAnalyticsActions = {

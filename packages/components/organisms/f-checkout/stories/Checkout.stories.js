@@ -54,6 +54,8 @@ const placeOrderTimeout = '/place-order-timeout.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
 const getCustomerUrl = '/get-customer.json';
+const getNotesConfigUrl = '/get-notes-config.json';
+const getSplitNotesConfigUrl = '/get-notes-config-split.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryAsapUrl);
@@ -88,6 +90,8 @@ CheckoutMock.setupCheckoutMethod(getCheckoutAccessForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.setupCheckoutMethod(getCustomerUrl);
+CheckoutMock.setupCheckoutMethod(getNotesConfigUrl);
+CheckoutMock.setupCheckoutMethod(getSplitNotesConfigUrl);
 
 CheckoutMock.passThroughAny();
 
@@ -103,13 +107,9 @@ const getCheckoutError = 'Any other Get Checkout Error (Response from server is 
 const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
 const noteTypesDelivery = 'Delivery notes only';
 
-const splitNotesDeliveryKitchen = '-split-notes-delivery-kitchen';
-const splitNotesDelivery = '-split-notes-delivery';
-
 const noteTypeOptions = {
-    None: null,
-    [noteTypesDelivery]: splitNotesDelivery,
-    [noteTypesDeliveryAndKitchen]: splitNotesDeliveryKitchen
+    [noteTypesDelivery]: getNotesConfigUrl,
+    [noteTypesDeliveryAndKitchen]: getSplitNotesConfigUrl
 };
 
 const SERVER = 'SERVER';
@@ -205,7 +205,7 @@ export const CheckoutComponent = () => ({
             default: select('Place Order Errors', placeOrderErrorOptions)
         },
 
-        noteTypes: {
+        noteType: {
             default: select('Note types', noteTypeOptions)
         },
 
@@ -216,7 +216,6 @@ export const CheckoutComponent = () => ({
 
     computed: {
         getCheckoutUrl () {
-            const noteType = this.noteTypes || '';
             let url;
 
             if (this.fulfilmentTimeSelection) {
@@ -228,9 +227,8 @@ export const CheckoutComponent = () => ({
             }
 
             // TODO: Get this working alongside the fulfilment time selection
-            url = this.serviceType === 'delivery' ? `/checkout-${this.serviceType}${noteType}.json` : `/checkout-${this.serviceType}.json`;
+            url = `/checkout-${this.serviceType}.json`;
 
-            console.log(url);
             return url;
         },
 
@@ -260,6 +258,10 @@ export const CheckoutComponent = () => ({
                 return checkoutAvailableFulfilmentNoTimeAvailableUrl;
             }
             return this.isAsapAvailable ? checkoutAvailableFulfilmentUrl : checkoutAvailableFulfilmentPreorderUrl;
+        },
+
+        getNoteConfigUrl () {
+            return this.noteType || getNotesConfigUrl;
         }
     },
 
@@ -293,8 +295,9 @@ export const CheckoutComponent = () => ({
         'applicationName="Storybook" ' +
         ':getGeoLocationUrl="getGeoLocationUrl" ' +
         ':getCustomerUrl="getCustomerUrl" ' +
+        ':getNoteConfigUrl="getNoteConfigUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

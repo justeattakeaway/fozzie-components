@@ -1,19 +1,19 @@
 <template>
     <div>
         <accordion
-            :id="noteTypeDeliveryOrRestaurant"
-            :title="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.title`)">
+            :id="noteTypeCourierOrOrder"
+            :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
             <form-field
                 input-type="textarea"
-                :placeholder="$t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.placeholder`)"
-                :value="userNotes[noteTypeDeliveryOrRestaurant]"
+                :placeholder="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.placeholder`)"
+                :value="noteValue"
                 cols="30"
                 rows="7"
                 maxlength="200"
-                :name="noteTypeDeliveryOrRestaurant + '-note'"
+                :name="noteTypeCourierOrOrder + '-note'"
                 has-input-description
-                @input="updateUserNote({ note: $event, type: noteTypeDeliveryOrRestaurant })">
-                {{ $t(`userNote.${noteTypeDeliveryOrRestaurant}.${serviceType}.text`) }}
+                @input="updateUserNote({ note: $event, type: noteTypeCourierOrOrder })">
+                {{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}
             </form-field>
         </accordion>
         <accordion
@@ -23,7 +23,7 @@
             <form-field
                 input-type="textarea"
                 :placeholder="$t(`userNote.kitchen.${serviceType}.placeholder`)"
-                :value="userNotes.kitchen"
+                :value="kitchenNoteValue"
                 cols="30"
                 rows="7"
                 maxlength="200"
@@ -42,10 +42,8 @@ import FormField from '@justeat/f-form-field';
 import Accordion from './Accordion.vue';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import {
-    CHECKOUT_METHOD_DELIVERY,
-    CHECKOUT_NOTE_TYPE_DELIVERY,
-    CHECKOUT_NOTE_TYPE_KITCHEN,
-    CHECKOUT_NOTE_TYPE_RESTAURANT,
+    CHECKOUT_NOTE_TYPE_ORDER,
+    CHECKOUT_NOTE_TYPE_COURIER,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import loggerMixin from '../mixins/logger.mixin';
@@ -61,17 +59,29 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'noteTypes',
+            'notesConfiguration',
             'serviceType',
-            'userNotes'
+            'notes'
         ]),
 
         shouldShowKitchenNotes () {
-            return this.serviceType === CHECKOUT_METHOD_DELIVERY && this.noteTypes?.includes(CHECKOUT_NOTE_TYPE_KITCHEN);
+            return this.notesConfiguration[this.capitalisedServiceType]?.KitchenNoteAccepted;
         },
 
-        noteTypeDeliveryOrRestaurant () {
-            return this.noteTypes?.includes(CHECKOUT_NOTE_TYPE_DELIVERY) ? CHECKOUT_NOTE_TYPE_DELIVERY : CHECKOUT_NOTE_TYPE_RESTAURANT;
+        noteTypeCourierOrOrder () {
+            return this.notesConfiguration[this.capitalisedServiceType]?.CourierNoteAccepted ? CHECKOUT_NOTE_TYPE_ORDER : CHECKOUT_NOTE_TYPE_COURIER;
+        },
+
+        capitalisedServiceType () {
+            return this.serviceType.charAt(0).toUpperCase() + this.serviceType.slice(1);
+        },
+
+        noteValue () {
+            return this.noteTypeCourierOrOrder === CHECKOUT_NOTE_TYPE_ORDER ? this.notes.courier?.value : this.notes.order?.value;
+        },
+
+        kitchenNoteValue () {
+            return this.notes.kitchen?.value || '';
         }
     },
 

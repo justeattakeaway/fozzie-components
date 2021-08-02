@@ -2,9 +2,9 @@ export const CHECKOUT_METHOD_COLLECTION = 'collection';
 export const CHECKOUT_METHOD_DELIVERY = 'delivery';
 export const CHECKOUT_METHOD_DINEIN = 'dinein';
 
-export const CHECKOUT_NOTE_TYPE_DELIVERY = 'delivery';
+export const CHECKOUT_NOTE_TYPE_ORDER = 'order';
 export const CHECKOUT_NOTE_TYPE_KITCHEN = 'kitchen';
-export const CHECKOUT_NOTE_TYPE_RESTAURANT = 'restaurant';
+export const CHECKOUT_NOTE_TYPE_COURIER = 'courier';
 
 export const VALID_CHECKOUT_METHODS = [CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN];
 

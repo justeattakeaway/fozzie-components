@@ -44,5 +44,16 @@ export default {
         };
 
         return axios.get(url, config);
+    },
+
+    async getNoteConfiguration (url, timeout) {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            timeout
+        };
+
+        return axios.get(url, config);
     }
 };

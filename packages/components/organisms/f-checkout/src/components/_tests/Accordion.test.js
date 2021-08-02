@@ -13,7 +13,7 @@ describe('Accordion', () => {
     const propsData = { title: 'Accordion Header', id: 'note' };
 
     it('should be defined', () => {
-        // Arrange
+        // Arrange & Act
         const wrapper = shallowMount(Accordion, {
             i18n,
             store: createStore(),
@@ -70,8 +70,12 @@ describe('Accordion', () => {
                 // Assert
                 expect(wrapper.vm.$data.isExpanded).toBe(false);
             });
+        });
 
-            it('should be called when the accordion header is clicked', () => {
+        describe('template ::', () => {
+            let wrapper;
+
+            it('should toggle the accordion visibility when heading is clicked', () => {
                 // Arrange
                 const toggleSpy = jest.spyOn(Accordion.methods, 'toggle');
                 wrapper = shallowMount(Accordion, {

@@ -23,6 +23,8 @@ import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restauran
 import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-items-required.json';
 import updateCheckoutAccessForbidden from './update-checkout-403.json';
 import updateCheckoutUnavailableTimeUrl from './update-checkout-time-unavailable.json';
+import getNotesConfig from './get-notes-config.json';
+import getSplitNotesConfig from './get-notes-config-split.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
@@ -96,6 +98,12 @@ export default {
             case '/get-basket-timeout.json':
                 mock.onGet(path).timeout();
                 break;
+            case '/get-notes-config.json':
+                mock.onGet(path).reply(200, getNotesConfig);
+                break;
+            case '/get-notes-config-split.json':
+                mock.onGet(path).reply(200, getSplitNotesConfig);
+                break;
             case '/update-checkout.json':
                 mock.onPatch(path).reply(200, updateCheckout);
                 break;
@@ -139,7 +147,7 @@ export default {
                 mock.onGet(path).reply(200, getCustomer);
                 break;
             default:
-                throw new Error(`${path} is not valid`);
+                console.log((`${path} is not valid`));
         }
     },
 

@@ -1,0 +1,18 @@
+{
+    "CustomerNotes": {
+        "ServiceTypes": {
+            "Collection": {
+                "OrderNoteAccepted": false,
+                "KitchenNoteAccepted": true
+            },
+            "Delivery": {
+                "OrderNoteAccepted": false,
+                "KitchenNoteAccepted": true,
+                "CourierNoteAccepted": true
+            },
+            "DineIn": {
+                "OrderNoteAccepted": true
+            }
+        }
+    }
+} 

@@ -11,7 +11,7 @@ const defaultParams = {
     customer: {},
     isCheckoutMethodDelivery: true,
     time: {},
-    userNotes: [],
+    notes: [],
     geolocation: null,
     asap: false
 };
@@ -135,22 +135,26 @@ describe('checkout mapper', () => {
 
     it('should map user note correctly', () => {
         // Arrange
-        const userNotes = {
-            delivery: 'Beware of the dachshund'
+        const notes = {
+            courier: {
+                value: 'Beware of the pug'
+            },
+            kitchen: {
+                value: 'No ham in my hamburger'
+            }
         };
 
         // Act
         const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
-            userNotes
+            notes
         });
 
         const notesRequest = requestBody[2].value;
 
         // Assert
-        expect(notesRequest.length).toBe(1);
-        expect(notesRequest[0].note).toBe('Beware of the dachshund');
-        expect(notesRequest[0].type).toBe('delivery');
+        expect(notesRequest.courier.value).toBe('Beware of the pug');
+        expect(notesRequest.kitchen.value).toBe('No ham in my hamburger');
     });
 
     it('should map geo location correctly', () => {
@@ -260,11 +264,11 @@ describe('mapNotesFromApi ::', () => {
                 note: 'No ketchup on burger please'
             },
             {
-                type: 'delivery',
+                type: 'courier',
                 note: 'Phone when outside'
             }
         ];
 
-        expect(mapNotesFromApi(notesFromApi)).toEqual({ kitchen: 'No ketchup on burger please', delivery: 'Phone when outside' });
+        expect(mapNotesFromApi(notesFromApi)).toEqual({ kitchen: 'No ketchup on burger please', courier: 'Phone when outside' });
     });
 });

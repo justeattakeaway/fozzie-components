@@ -143,7 +143,7 @@ const messages = {
     buttonText: 'Go to payment',
 
     userNote: {
-        restaurant: {
+        courier: {
             delivery: {
                 title: 'Leave a note',
                 text: 'Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
@@ -160,7 +160,7 @@ const messages = {
                 placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
             }
         },
-        delivery: {
+        order: {
             delivery: {
                 title: 'Leave a note',
                 text: 'Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
