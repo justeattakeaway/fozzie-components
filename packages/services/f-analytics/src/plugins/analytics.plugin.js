@@ -55,5 +55,7 @@ export default ({ store }, inject, _options) => {
 
     registerStoreModule(store, options);
 
-    inject(options.globalVarName, new AnalyticService(store, options));
+    const service = new AnalyticService(store, options);
+
+    inject(options.globalVarName, service);
 };
