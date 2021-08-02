@@ -4,7 +4,8 @@ import analyticsMixin from '../analytics.mixin.vue';
 import {
     createStore,
     $route,
-    $i18n
+    $i18n,
+    $cookies
 } from '../../tests/helpers/setup';
 
 import { MAP_ROUTE_TO_FEATURE_NAME } from '../../constants';
@@ -13,10 +14,6 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('Analytics', () => {
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
     describe('methods ::', () => {
         // 1 == locale, 2 == branding, 3 == country, 4 == currency, 5 == language
         const cases = [
@@ -27,16 +24,14 @@ describe('Analytics', () => {
             ['en-AU', 'menulog', 'au', 'aud', 'en'],
             ['en-NZ', 'menulog', 'nz', 'nzd', 'en']
         ];
-        describe('prepareAnalytics ::', () => {
+        describe('preparePlatformData ::', () => {
             let component;
-            let prepareAnalyticsSpy;
             let storeUpdatePlatformDataSpy;
 
             beforeEach(() => {
                 component = {
                     render () {},
                     mixins: [analyticsMixin],
-                    store: createStore(),
                     computed: {
                         isServer () {
                             return false;
@@ -45,15 +40,13 @@ describe('Analytics', () => {
                 };
 
                 component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
-                prepareAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics');
                 storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData');
             });
 
             test.each(cases)(
                 'should set the correct plaformData given %p as the locale',
                 (localeArg, brandingExpected, countryExpected, currencyExpected, languageExpected) => {
-                    // Expected
+                    // Arrange
                     const expected = {
                         appType: 'web',
                         applicationId: 7,
@@ -62,7 +55,7 @@ describe('Analytics', () => {
                         currency: currencyExpected,
                         environment: '',
                         instancePosition: '',
-                        jeUserPercentage: null,
+                        jeUserPercentage: undefined,
                         language: languageExpected,
                         name: MAP_ROUTE_TO_FEATURE_NAME[$route.name] || $route.name,
                         userAgent: navigator.userAgent,
@@ -71,11 +64,11 @@ describe('Analytics', () => {
 
                     $i18n.locale = localeArg;
 
-                    // Act
-                    shallowMount(
+                    const wrapper = shallowMount(
                         component,
                         {
                             localVue,
+                            store: createStore(),
                             mocks:
                             {
                                 $route,
@@ -84,70 +77,80 @@ describe('Analytics', () => {
                         }
                     );
 
+                    // Act
+                    wrapper.vm.preparePlatformData();
+
                     // Assert
-                    expect(prepareAnalyticsSpy).toHaveBeenCalled();
-                    expect(storeUpdatePlatformDataSpy).lastCalledWith(expected);
+                    expect(storeUpdatePlatformDataSpy).toHaveBeenCalledWith(expected);
                 }
             );
         });
 
-        describe('pushAnalytics ::', () => {
-            let pushAnalyticsSpy;
-            let windowsPushMock;
-            let component;
+        describe('prepareUserData ::', () => {
+            const userIdFromCookie = 'fjdhskgshjgk';
+
+            const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+            + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
+            + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
+            + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
+            + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
+            + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
+
+            const userDataWithMockAuthToken = {
+                'a-UserId': userIdFromCookie,
+                authType: 'Login',
+                email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
+                globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
+                signinType: 'Email',
+                signupDate: '2021-02-08T10:27:49.1930000Z'
+            };
+
+            const userDataWithoutMockAuthToken = {
+                'a-UserId': userIdFromCookie,
+                authType: undefined,
+                email: undefined,
+                globalUserId: undefined,
+                signinType: undefined,
+                signupDate: undefined
+            };
+
+            const component = {
+                render () {},
+                mixins: [analyticsMixin]
+            };
+            let wrapper;
+
+            component.mixins[0].created = jest.fn(() => true);
+            const storeUpdateUserDataSpy = jest.spyOn(component.mixins[0].methods, 'updateUserData');
 
             beforeEach(() => {
-                // Arrange
-                component = {
-                    render () {},
+                wrapper = shallowMount(component, {
                     mixins: [analyticsMixin],
-                    computed: {
-                        isServer () {
-                            return false;
-                        }
+                    localVue,
+                    store: createStore(),
+                    mocks: {
+                        $i18n,
+                        $cookies
                     }
-                };
+                });
 
-                component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
-                windowsPushMock = jest.fn();
-                window.dataLayer = {
-                    push: windowsPushMock
-                };
-                pushAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'pushAnalytics');
+                wrapper.vm.$cookies.get.mockReturnValue(userIdFromCookie);
             });
 
-            it('should push the current store.platformData data to the dataLayer', () => {
-                // Arrange
-                const expected = {
-                    platformData: {
-                        applicationId: 7,
-                        appType: 'web',
-                        branding: 'test',
-                        country: 'zu',
-                        currency: 'zud',
-                        environment: 'mo',
-                        instancePosition: '009',
-                        jeUserPercentage: 99,
-                        language: 'zu',
-                        name: 'test_harness',
-                        userAgent: 'testweb',
-                        version: '9'
-                    }
-                };
-                component.store = createStore({ state: expected });
-
+            it('should call `updateUserData` action only with userId if authToken has not been passed', () => {
                 // Act
-                shallowMount(
-                    component,
-                    {
-                        localVue
-                    }
-                );
+                wrapper.vm.prepareUserData();
 
                 // Assert
-                expect(pushAnalyticsSpy).toHaveBeenCalled();
-                expect(windowsPushMock).lastCalledWith(expected);
+                expect(storeUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithoutMockAuthToken);
+            });
+
+            it('should call `updateUserData` action with useauthToken data if authToken has been passed', () => {
+                // Act
+                wrapper.vm.prepareUserData(mockAuthToken);
+
+                // Assert
+                expect(storeUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthToken);
             });
         });
     });

@@ -21,13 +21,11 @@ This component abstracts away the gathering of the various data values needed fo
 
 ## Benefits (Now)
 - Single point to record GA data: Currently we have GA/GTM logic scattered throught various features, this will allow that logic to be removed and centralise it a single component.
-- Self sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and record all the data required for the GA `platformData` model.  Once registered it will perform the pushing of the GA `platformData` model on the correct event/hook.
-- Reactive: When the route changes (i.e. the page changes) it will re-evaluate and re-pushes the GA `platformData` model.
+- Self sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and record all the data required for the GA `platformData` and `userData` model.
 
 ## Benefits (Soon)
 - _extend the data properties for the GA `platformData` model_
 - _evaluate, gather and produce data for the GA `pageData` model_
-- _evaluate, gather and produce data for the GA `userData` model_
 - _provide the facility to push 'ad-hoc' GA events via a global service_
 - _instead of owning when to push each GA model the consumer will have control over this_
 - _allow extra bespoke/custom properties to be appended to each GA model by the consumer before the model is pushed_
@@ -50,22 +48,19 @@ This component abstracts away the gathering of the various data values needed fo
     F-Analytics contains a 'Mixin' which should be imported into your "Smart Component" plus a 'Nuxt - Plugin' that needs to be registered in the "nuxt.config.js" via a local plugin and both need to be present.
     </p>
     <p>
-    As this 'Mixin' currently pushes the analytics; via GTM, to GA you would want to avoid duplication so it is best for it to be imported only once and at the highest level (i.e. the layout vue component).  If you install at a component level then you will end up with duplicate analytics being pushed to GA by each component that installs f-analytics.
+    As this mixin uses authentication token for some of its data it is needed for it to be added on the page level. There are three public methods available to use:
+    - `preparePlatformData` - evaluates and gather data for the `platformData` GA model.
+    - `prepareUserData` - evaluates and gather data for the `userData` GA model. Can take optional `authToken` prop to push data related to authToken. Without the prop userData will contain only userId.
+    - `pushAnalytics` - pushes `platformData` and `userData` to the dataLayer.
 
-    <strong>Below is an example of how to include the 'Mixin';</strong>
+    <strong>Below is an example of how to include the 'Mixin':</strong>
     </p>
 
     _../layouts/main.vue_
     ```js
     <template>
       <div>
-          <page-header ... />
-
-          <nuxt
-              id="pagePlaceHolder"
-          />
-
-          <cookie-banner />
+          <vue-checkout />
       </div>
     </template>
 
@@ -75,9 +70,25 @@ This component abstracts away the gathering of the various data values needed fo
     export default {
         ...
 
-        mixins: [AnalyticsMixin]
+        mixins: [AnalyticsMixin],
 
         ...
+
+        watch: {
+        // Watch for authentication token to become available
+        isAuthFinished (newVal) {
+            if (newVal === true) {
+                this.prepareUserData(this.authToken);
+                this.pushAnalytics();
+            }
+        },
+
+        ...
+
+        mounted () {
+            this.preparePlatformData();
+        }
+    }
     ```
 
     <strong>You also need to create a local plugin to reference the external plugin, which then allows you to pass in options </strong>(_see Options section_)<strong>,  In the example below it demonstrates how you can create the 'options' to pass into the plugin;</strong>
@@ -97,7 +108,7 @@ This component abstracts away the gathering of the various data values needed fo
     export default (context, inject) => { AnalyticsPlugin(context, inject, options); };
     ```
 
-    <strong>Then; finally, you need to register the local plugin you have just created in the nuxt config, see below;</strong>
+    <strong>Then, finally, you need to register the local plugin you have just created in the nuxt config, see below;</strong>
     </p>
 
     _nuxt.config.js_
@@ -137,7 +148,7 @@ This component abstracts away the gathering of the various data values needed fo
 </br></br>
 
 ## Environment variables
-Although this component can gather most data with only the `gtmSettings` object supplied it also needs some values only available on the serverside and will expect these to be present to fulfil all of it's functionality.
+Although this component can gather most data with only the `options` object supplied it also needs some values only available on the serverside and will expect these to be present to fulfil all of it's functionality.
 
 | Prop Name | Type | Example |  Description |
 | :----- | :----- | :----- | :----------- |

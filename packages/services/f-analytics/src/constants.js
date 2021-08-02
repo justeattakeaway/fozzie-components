@@ -40,6 +40,21 @@ const COUNTRY_INFO = {
 const DEFAULT_APP_ID = 7;
 const DEFAULT_APP_TYPE = 'web';
 
+const IDENTITY_PROVIDERS = {
+    facebook: 'Facebook',
+    google: 'Google',
+    idsrv: 'Email',
+    otac: 'Guest',
+    default: 'Email'
+};
+
+const GRANT_TYPES = {
+    // eslint-disable-next-line quote-props
+    'refresh_token': 'Resume',
+    registration: 'Sign up',
+    default: 'Login'
+};
+
 /**
  * Allows routes to be mapped to feature names:
  *
@@ -58,5 +73,7 @@ export {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME
+    MAP_ROUTE_TO_FEATURE_NAME,
+    IDENTITY_PROVIDERS,
+    GRANT_TYPES
 };
