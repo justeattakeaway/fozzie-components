@@ -31,6 +31,32 @@ const activationBadRequest = '400';
 const activationInternalError = '500';
 const activateSuccessDescription = 'Activation successful';
 
+const authenticationLoggedInRegistered = 'Logged In (registered)';
+const authenticationLoggedInGuest = 'Logged In (guest)';
+
+// eslint-disable-next-line
+const mockAuthTokenRegistered = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+  + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
+  + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
+  + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
+  + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
+  + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
+
+// eslint-disable-next-line
+const mockAuthTokenGuest = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+  + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImN'
+  + 'yZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJ'
+  + 'zdWIiOiIxODcwMzA5MyIsIm5hbWUiOiJKb2UgQmxvZ2dzIiwiZ2xvYmFsX3V'
+  + 'zZXJfaWQiOiJVN05SQWxXQWc1ek9kc2RSZ2Y3bmtUeW9pOTBYRW89IiwiZ2l2'
+  + 'ZW5fbmFtZSI6IkpvZSIsImZhbWlseV9uYW1lIjoiQmxvZ2dzIiwicm9sZSI6Ik'
+  + 'd1ZXN0IiwiaWF0IjoxNjE1NDY5NTE2fQ.d-dLpZM8vi7IR1GdqZI9IPzUcjnidU-7qO62B3Nfk6I';
+
+const authenticationOptions = {
+    None: null,
+    [authenticationLoggedInRegistered]: mockAuthTokenRegistered,
+    [authenticationLoggedInGuest]: mockAuthTokenGuest
+};
+
 const activationStatusOptions = {
     None: null,
     [activationBadRequestDescription]: activationBadRequest,
@@ -43,19 +69,11 @@ const activateOptions = {
     [activationInternalErrorDescription]: activationInternalError
 };
 
-// eslint-disable-next-line
-const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-    + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
-    + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
-    + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
-    + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
-    + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
-
 export const TakeawaypayActivationComponent = () => ({
     components: { TakeawaypayActivation },
     props: {
-        isLoggedIn: {
-            default: boolean('Is User Logged In', false)
+        authentication: {
+            default: select('Authentication', authenticationOptions)
         },
         activationStatusResponse: {
             default: select('Activation Status Response', activationStatusOptions)
@@ -75,7 +93,7 @@ export const TakeawaypayActivationComponent = () => ({
     },
     computed: {
         authToken () {
-            return this.isLoggedIn ? mockAuthToken : '';
+            return this.authentication ? this.authentication : '';
         },
         getActivationStatusUrl () {
             return this.activationStatusResponse ? `/activation-status-${this.activationStatusResponse}.json` : '/activation-status-200.json';

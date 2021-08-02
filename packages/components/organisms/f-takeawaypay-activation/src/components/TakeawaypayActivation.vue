@@ -31,7 +31,8 @@ import {
     ACTIVATION_STATE_AVAILABLE_LOGGED_IN,
     ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN,
     ACTIVATION_STATE_SUCCEEDED,
-    ACTIVATION_STATE_FAILED
+    ACTIVATION_STATE_FAILED,
+    USER_ROLE_GUEST
 } from '../constants';
 
 export default {
@@ -79,6 +80,8 @@ export default {
             tenantConfigs,
             consumerId: '',
             consumerEmail: '',
+            consumerGivenName: '',
+            consumerRole: '',
             activationState: ACTIVATION_STATE_NONE
         };
     },
@@ -126,7 +129,8 @@ export default {
                     activateUrl: this.activateUrl,
                     authToken: this.authToken,
                     consumerId: this.consumerId,
-                    consumerEmail: this.consumerEmail
+                    consumerEmail: this.consumerEmail,
+                    consumerGivenName: this.consumerGivenName
                 }
             };
         },
@@ -152,8 +156,13 @@ export default {
 
             if (available) {
                 if (this.authToken) {
-                    this.activationState = ACTIVATION_STATE_AVAILABLE_LOGGED_IN;
                     this.extractConsumerDetails();
+
+                    if (this.consumerRole === USER_ROLE_GUEST) {
+                        this.activationState = ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN;
+                    } else {
+                        this.activationState = ACTIVATION_STATE_AVAILABLE_LOGGED_IN;
+                    }
                 } else {
                     this.activationState = ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN;
                 }
@@ -165,6 +174,8 @@ export default {
             const tokenData = jwtDecode(this.authToken);
             this.consumerId = tokenData.sub;
             this.consumerEmail = tokenData.email;
+            this.consumerGivenName = tokenData.given_name;
+            this.consumerRole = (tokenData.role || '').toLowerCase();
         },
         handleActivationResult (successful) {
             this.activationState = successful ? ACTIVATION_STATE_SUCCEEDED : ACTIVATION_STATE_FAILED;
