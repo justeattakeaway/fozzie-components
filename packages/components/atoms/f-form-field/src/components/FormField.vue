@@ -15,12 +15,13 @@
                 :label-for="uniqueId"
                 :is-disabled="isDisabled"
                 v-bind="$props"
-                :data-test-id="testId.label">
+                :data-test-id="testId.label"
+                @change-hover-state="toggleHoverState">
                 {{ labelText }}
             </form-label>
 
-            <form-field-afix
-                v-if="isAfixedField"
+            <form-field-affixed
+                v-if="isAffixedField"
                 :id="uniqueId"
                 :attributes="$attrs"
                 v-bind="$props"
@@ -108,7 +109,7 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
-import FormFieldAfix from './FormFieldAfix.vue';
+import FormFieldAffixed from './FormFieldAffixed.vue';
 import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
 import debounce from '../services/debounce';
@@ -119,6 +120,7 @@ import {
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
     VALID_ICON_INPUT_TYPES,
+    VALID_AFFIXED_INPUT_TYPES,
     VALID_TRAILING_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES,
@@ -129,7 +131,7 @@ export default {
     name: 'FormField',
 
     components: {
-        FormFieldAfix,
+        FormFieldAffixed,
         FormDropdown,
         FormLabel
     },
@@ -222,7 +224,8 @@ export default {
 
     data () {
         return {
-            windowWidth: null
+            windowWidth: null,
+            hoverState: false
         };
     },
 
@@ -306,8 +309,12 @@ export default {
             return Boolean(this.$slots['icon-trailing']);
         },
 
-        isAfixedField () {
+        isAffixedField () {
             return Boolean(this.prefix || this.suffix);
+        },
+
+        isAffixedType () {
+            return VALID_AFFIXED_INPUT_TYPES.includes(this.inputType);
         }
     },
 
@@ -353,19 +360,31 @@ export default {
                 throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
             }
 
-            if (this.isAfixedField && this.inputType !== 'text') {
+            if (this.isAffixedField && !this.isAffixedType) {
                 const afixType = this.prefix ? 'prefix' : 'suffix';
 
-                throw new TypeError(`Form field is set to have a "${afixType}" and inputType="${this.inputType}", "${afixType}" is only available when inputType="text"`);
+                throw new TypeError(`Form field is set to have a "${afixType}" and inputType="${this.inputType}", "${afixType}" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
             }
 
             if (this.prefix && this.hasLeadingIcon) {
-                throw new TypeError('Form field is set to have a "prefix" and "leadingIcon" only one can be displayed');
+                throw new TypeError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
             }
 
             if (this.suffix && this.hasTrailingIcon) {
-                throw new TypeError('Form field is set to have a "suffix" and "trailingIcon" only one can be displayed');
+                throw new TypeError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
             }
+
+            if (this.prefix.length > 3) {
+                throw new TypeError(`Form field is set to have a "prefix" of ${this.prefix.length} characters long. Prefix has a max length of 3 characters`);
+            }
+
+            if (this.suffix.length > 3) {
+                throw new TypeError(`Form field is set to have a "suffix" of ${this.suffix.length} characters long. Suffix has a max length of 3 characters`);
+            }
+        },
+
+        toggleHoverState () {
+            this.hoverState = !this.hoverState;
         }
     }
 };

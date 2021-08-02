@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import FormFieldAfix from '../FormFieldAfix.vue';
+import FormFieldAffixed from '../FormFieldAffixed.vue';
 
-describe('FormFieldAfix', () => {
+describe('FormFieldAffixed', () => {
     const attributes = {
         disabled: null
     };
@@ -9,7 +9,7 @@ describe('FormFieldAfix', () => {
     const propsData = { attributes };
 
     it('should be defined', () => {
-        const wrapper = shallowMount(FormFieldAfix, { propsData });
+        const wrapper = shallowMount(FormFieldAffixed, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
 
@@ -24,7 +24,7 @@ describe('FormFieldAfix', () => {
                     // Arrange & Act
                     propsData.prefix = prefixValue;
 
-                    const wrapper = shallowMount(FormFieldAfix, { propsData });
+                    const wrapper = shallowMount(FormFieldAffixed, { propsData });
                     const formPrefix = wrapper.find('[data-test-id="formfield-afix-prefix"]');
 
                     // Assert
@@ -43,7 +43,7 @@ describe('FormFieldAfix', () => {
                     // Arrange & Act
                     propsData.suffix = suffixValue;
 
-                    const wrapper = shallowMount(FormFieldAfix, { propsData });
+                    const wrapper = shallowMount(FormFieldAffixed, { propsData });
                     const formSuffix = wrapper.find('[data-test-id="formfield-afix-suffix"]');
 
                     // Assert
@@ -63,7 +63,7 @@ describe('FormFieldAfix', () => {
                     };
 
                     // Act
-                    const wrapper = shallowMount(FormFieldAfix, { propsData });
+                    const wrapper = shallowMount(FormFieldAffixed, { propsData });
 
                     // Assert
                     expect(wrapper.vm.testId).toMatchSnapshot();
@@ -78,7 +78,7 @@ describe('FormFieldAfix', () => {
                     };
 
                     // Act
-                    const wrapper = shallowMount(FormFieldAfix, { propsData });
+                    const wrapper = shallowMount(FormFieldAffixed, { propsData });
 
                     // Assert
                     expect(wrapper.vm.testId).toMatchSnapshot();
@@ -91,7 +91,7 @@ describe('FormFieldAfix', () => {
         describe('updateInput ::', () => {
             it('should emit `update` when an option is selected', async () => {
                 // Arrange
-                const wrapper = shallowMount(FormFieldAfix, { propsData });
+                const wrapper = shallowMount(FormFieldAffixed, { propsData });
 
                 const event = {
                     target: {

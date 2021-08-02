@@ -23,14 +23,16 @@ $form-input-borderColour--invalid       : $color-support-error;
 
 $form-input-focus--boxShadow            : 0 0 0 2px $color-focus;
 
+$form-input-padding--side              : spacing(x2);
+
 $form-input-height                      : spacing(x6);
-$form-input-padding                     : spacing(x1.5) spacing(x2);
+$form-input-padding                     : 11px $form-input-padding--side 13px;
 
 $form-input-height--small               : spacing(x5);
-$form-input-padding--small              : spacing(x1) spacing(x2);
+$form-input-padding--small              : 7px $form-input-padding--side 9px;
 
 $form-input-height--large               : spacing(x7);
-$form-input-padding--large              : spacing(x2);
+$form-input-padding--large              : 15px $form-input-padding--side 17px;
 
 $form-input-iconPadding                 : spacing(x7);
 $form-input-icon-horizontalIndent       : 19px;
@@ -49,6 +51,17 @@ $form-input-icon-horizontalIndent       : 19px;
         } @else {
             bottom: $indent;
         }
+    }
+}
+
+@mixin disabled-field() {
+    cursor: not-allowed;
+
+    &,
+    &:hover {
+        background-color: $form-input-bg--disabled;
+        color: $form-input-textColour--disabled;
+        border-color: $form-input-borderColour--disabled;
     }
 }
 
@@ -88,20 +101,12 @@ $form-input-icon-horizontalIndent       : 19px;
     }
 
     &[disabled] {
-        cursor: not-allowed;
-
-        &,
-        &:hover {
-            background-color: $form-input-bg--disabled;
-            color: $form-input-textColour--disabled;
-            border-color: $form-input-borderColour--disabled;
-            opacity: 1; // removes default disabled styling
-        }
+        @include disabled-field();
     }
 }
 
 .c-formField--invalid {
-    border-color: $form-input-borderColour--invalid;
+    border-color: $form-input-borderColour--invalid !important;
 }
 
 .c-formField-padding--iconLeading {

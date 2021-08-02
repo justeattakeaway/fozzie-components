@@ -1,8 +1,9 @@
 <template>
     <div
         :class="[
-            $style['c-formField-field--affixed'],
-            $style[`c-formField-field--${fieldSize}`], {
+            $style['c-formField-field'],
+            $style['c-formField-field--affixedWrapper'],
+            $style[`c-formField-affixed-wrapper--${fieldSize}`], {
                 [$style['c-formField--invalid']]: hasError
             }
         ]"
@@ -10,9 +11,10 @@
         <div
             v-if="prefix"
             :class="[
-                $style['c-formField-afix'],
-                $style['c-formField-prefix'],
-                { [$style['c-formField--disabled']]: isDisabled }
+                $style['c-formField-afix'],{
+                    [$style['c-formField--disabled']]: isDisabled,
+                    [$style['c-formField--hovered']]: hoverState
+                }
             ]"
             :data-test-id="testId.prefix"
             @click="addFocus">
@@ -22,6 +24,11 @@
         <input
             :id="$attrs.id"
             ref="input"
+            :class="[
+                $style['c-formField-field'],
+                $style['c-formField-field--affixed'],
+                $style[`c-formField-field--${fieldSize}`]
+            ]"
             :disabled="attributes.disabled"
             v-bind="attributes"
             :value="value"
@@ -31,10 +38,10 @@
         <div
             v-if="suffix"
             :class="[
-                $style['c-formField-afix'],
-                $style['c-formField-suffix'],
-                { [$style['c-formField--disabled']]: isDisabled }
-
+                $style['c-formField-afix'],{
+                    [$style['c-formField--disabled']]: isDisabled,
+                    [$style['c-formField--hovered']]: hoverState
+                }
             ]"
             :data-test-id="testId.suffix"
             @click="addFocus">
@@ -45,6 +52,10 @@
 
 <script>
 export default {
+    name: 'FormAffixedField',
+
+    inheritAttrs: false,
+
     props: {
         attributes: {
             type: Object,
@@ -74,6 +85,11 @@ export default {
         value: {
             type: String,
             default: ''
+        },
+
+        hoverState: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -107,81 +123,68 @@ export default {
 </script>
 
 <style lang="scss" module>
+$form-afix-padding                     : 10px $form-input-padding--side 12px;
+$form-afix-padding--small              : 6px $form-input-padding--side 8px;
+$form-afix-padding--large              : 14px $form-input-padding--side 16px;
 
 .c-formField-afix {
     height: 100%;
     font-family: $font-family-base;
     @include font-size($form-input-fontSize);
     color: $form-input-secondaryTextColour;
-    padding: $form-input-padding;
+}
+
+.c-formField-field--affixedWrapper {
+    display: flex;
+}
+
+
+.c-formField-affixed-wrapper--medium {
+    height: $form-input-height;
+
+    .c-formField-afix {
+        padding: $form-afix-padding;
+    }
+}
+
+.c-formField-affixed-wrapper--small {
+    height: $form-input-height--small;
+
+    .c-formField-afix {
+        padding: $form-afix-padding--small;
+    }
+}
+
+.c-formField-affixed-wrapper--large {
+    height: $form-input-height--large;
+
+    .c-formField-afix {
+        padding: $form-afix-padding--large;
+    }
 }
 
 .c-formField-field--affixed {
-    display: flex;
-    width: 100%;
+    background-color: transparent;
+    border: none;
 
-    background-color: $form-input-bg;
-    border: $form-input-borderWidth solid $form-input-borderColour;
-    border-radius: $form-input-borderRadius;
-    background-clip: padding-box;
-    padding: 0;
+    flex-grow: 1;
+    height: 100%;
 
-    // border-color: $form-input-borderColour--invalid;
-    &:hover {
-        background-color: $form-input-bg--hover;
-    }
+    padding-left: 0;
+    padding-right: 0;
 
     &:focus,
     &:active,
     &:focus-within {
-        box-shadow: $form-input-focus--boxShadow;
-    }
-
-    input {
-        border: none;
-        flex-grow: 1;
-        background-color: transparent;
-        font-family: $font-family-base;
-        @include font-size($form-input-fontSize);
-        font-weight: $font-weight-regular;
-        color: $form-input-textColour;
-        padding: spacing(x1.5) 0;
-        height: 100%;
-
-        &:focus,
-        &:active,
-        &:focus-within {
-            outline: none;
-        }
-
-        &[disabled] {
-        cursor: not-allowed;
-
-            &,
-            &:hover {
-                background-color: $form-input-bg--disabled;
-                color: $form-input-textColour--disabled;
-                border-color: $form-input-borderColour--disabled;
-                // opacity: 1; // removes default disabled styling
-            }
-        }
+        box-shadow: none;
     }
 }
 
 .c-formField--disabled {
-    cursor: not-allowed;
-
-        &,
-        &:hover {
-            background-color: $form-input-bg--disabled;
-            color: $form-input-textColour--disabled;
-            border-color: $form-input-borderColour--disabled;
-            // opacity: 1; // removes default disabled styling
-        }
-
+    @include disabled-field();
 }
 
-.c-formField--invalid {
-    border-color: $form-input-borderColour--invalid;
+.c-formField--hovered {
+    background: $form-input-bg--hover;
 }
 </style>

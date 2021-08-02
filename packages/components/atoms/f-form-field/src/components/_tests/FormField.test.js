@@ -320,7 +320,7 @@ describe('FormField', () => {
             });
         });
 
-        describe('isAfixedField :: ', () => {
+        describe('isAffixedField :: ', () => {
             describe('when `prefix` value exists ::', () => {
                 let propsData;
                 let wrapper;
@@ -338,7 +338,7 @@ describe('FormField', () => {
 
                 it('should return true`', () => {
                     // Assert
-                    expect(wrapper.vm.isAfixedField).toBe(true);
+                    expect(wrapper.vm.isAffixedField).toBe(true);
                 });
 
                 it('should display `afixedFormField`', () => {
@@ -367,7 +367,7 @@ describe('FormField', () => {
 
                 it('should return true`', () => {
                     // Assert
-                    expect(wrapper.vm.isAfixedField).toBe(true);
+                    expect(wrapper.vm.isAffixedField).toBe(true);
                 });
 
                 it('should display `afixedFormField`', () => {
@@ -395,7 +395,7 @@ describe('FormField', () => {
 
                 it('should return false`', () => {
                     // Assert
-                    expect(wrapper.vm.isAfixedField).toBe(false);
+                    expect(wrapper.vm.isAffixedField).toBe(false);
                 });
 
                 it('wrapper should display `afixedFormField`', () => {
@@ -623,11 +623,11 @@ describe('FormField', () => {
                 });
             });
 
-            describe('when `isAfixedField` is true', () => {
-                it('should throw an error when `inputType` is set to `text', () => {
+            describe('when `isAffixedField` is true', () => {
+                it.each([VALID_AFFIXED_INPUT_TYPES])('should throw an error when `inputType` is set to %s', inputType => {
                     // Arrange
                     const propsData = {
-                        inputType: 'text',
+                        inputType,
                         prefix: '£'
                     };
 
@@ -641,10 +641,6 @@ describe('FormField', () => {
 
                 it.each([
                     'dropdown',
-                    'email',
-                    'password',
-                    'number',
-                    'tel',
                     'textarea',
                     'checkbox',
                     'radio',
@@ -661,7 +657,7 @@ describe('FormField', () => {
                         shallowMount(FormField, {
                             propsData
                         });
-                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available when inputType="text"`);
+                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
                 });
             });
 
@@ -681,7 +677,20 @@ describe('FormField', () => {
                                 'icon-leading': slot
                             }
                         });
-                    }).toThrowError('Form field is set to have a "prefix" and "leadingIcon" only one can be displayed');
+                    }).toThrowError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
+                });
+
+                it('should throw an error when `prefix` is longer than 3 characters', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        prefix: '££££'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, { propsData });
+                    }).toThrowError('Form field is set to have a "prefix" of 4 characters long. Prefix has a max length of 3 characters');
                 });
             });
 
@@ -701,7 +710,20 @@ describe('FormField', () => {
                                 'icon-trailing': slot
                             }
                         });
-                    }).toThrowError('Form field is set to have a "suffix" and "trailingIcon" only one can be displayed');
+                    }).toThrowError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
+                });
+
+                it('should throw an error when `suffix` is longer than 3 characters', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        suffix: '££££'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, { propsData });
+                    }).toThrowError('Form field is set to have a "suffix" of 4 characters long. Suffix has a max length of 3 characters');
                 });
             });
         });

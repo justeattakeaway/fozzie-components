@@ -2,10 +2,6 @@ import {
     withKnobs, select, boolean, text
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import {
-    AllergyNutIcon,
-    DriverIcon
-} from '@justeat/f-vue-icons';
 import FormField from '../src/components/FormField.vue';
 import { DEFAULT_FIELD_SIZE, VALID_FIELD_SIZES } from '../src/constants';
 
@@ -16,9 +12,7 @@ export default {
 
 export const AffixedFormFieldComponent = () => ({
     components: {
-        FormField,
-        AllergyNutIcon,
-        DriverIcon
+        FormField
     },
     props: {
         locale: {
