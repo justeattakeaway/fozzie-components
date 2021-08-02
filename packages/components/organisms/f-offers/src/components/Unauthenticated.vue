@@ -2,8 +2,12 @@
     <div
         :class="$style['c-unauthenticated-wrapper']"
         data-test-id="OffersInbox-Content">
-        <h2 :class="$style['c-title']">{{ $t('unauthenticated.title') }}</h2>
-        <p :class="$style['c-subtitle']">{{ $t('unauthenticated.subtitle') }}</p>
+        <h2 :class="$style['c-title']">
+            {{ $t('unauthenticated.title') }}
+        </h2>
+        <p :class="$style['c-subtitle']">
+            {{ $t('unauthenticated.subtitle') }}
+        </p>
         <div :class="$style['c-unauthenticated-buttons']">
             <f-button
                 :class="$style['c-login-button']"
