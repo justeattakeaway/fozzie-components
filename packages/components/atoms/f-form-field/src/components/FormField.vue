@@ -17,7 +17,8 @@
                 :is-inline="isInline"
                 :is-disabled="isDisabled"
                 :label-details="labelDetails"
-                :data-test-id="testId.label">
+                :data-test-id="testId.label"
+                @change-hover-state="toggleHoverState">
                 {{ labelText }}
                 <template #description>
                     <span
@@ -40,6 +41,7 @@
                 :value="value"
                 :field-size="fieldSize"
                 :prefix="prefix"
+                :hover-state="hoverState"
                 :suffix="suffix"
                 :has-error="hasError"
                 v-on="listeners" />
@@ -256,7 +258,8 @@ export default {
 
     data () {
         return {
-            windowWidth: null
+            windowWidth: null,
+            hoverState: false
         };
     },
 
@@ -405,12 +408,24 @@ export default {
             }
 
             if (this.prefix && this.hasLeadingIcon) {
-                throw new TypeError('Form field is set to have a "prefix" and "leadingIcon" only one can be displayed');
+                throw new TypeError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
             }
 
             if (this.suffix && this.hasTrailingIcon) {
-                throw new TypeError('Form field is set to have a "suffix" and "trailingIcon" only one can be displayed');
+                throw new TypeError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
             }
+
+            if (this.prefix.length > 3) {
+                throw new TypeError(`Form field is set to have a "prefix" of ${this.prefix.length} characters long. Prefix has a max length of 3 characters`);
+            }
+
+            if (this.suffix.length > 3) {
+                throw new TypeError(`Form field is set to have a "suffix" of ${this.suffix.length} characters long. Suffix has a max length of 3 characters`);
+            }
+        },
+
+        toggleHoverState () {
+            this.hoverState = !this.hoverState;
         }
     }
 };
