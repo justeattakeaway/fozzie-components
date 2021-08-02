@@ -143,7 +143,7 @@ $form-afix-padding--large              : 14px $form-input-padding--side 16px;
     height: $form-input-height;
 
     .c-formField-afix {
-        padding: $form-afix-padding ;
+        padding: $form-afix-padding;
     }
 }
 
@@ -151,7 +151,7 @@ $form-afix-padding--large              : 14px $form-input-padding--side 16px;
     height: $form-input-height--small;
 
     .c-formField-afix {
-        padding: $form-afix-padding--small ;
+        padding: $form-afix-padding--small;
     }
 }
 
