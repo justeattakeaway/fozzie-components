@@ -10,7 +10,7 @@ describe('f-form-field component tests', () => {
         formfield.waitForComponent();
     });
 
-    it('should display f-form-field', () => {
+    it.only('should display f-form-field', () => {
         // Assert
         expect(formfield.isComponentDisplayed()).toBe(true);
     });

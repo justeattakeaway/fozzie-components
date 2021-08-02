@@ -25,6 +25,7 @@
                 :id="uniqueId"
                 :attributes="$attrs"
                 v-bind="$props"
+                :hover-state="hoverState"
                 v-on="listeners" />
 
             <form-dropdown
@@ -123,8 +124,7 @@ import {
     VALID_AFFIXED_INPUT_TYPES,
     VALID_TRAILING_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
-    VALID_FIELD_SIZES,
-    MOBILE_WIDTH
+    VALID_FIELD_SIZES
 } from '../constants';
 
 export default {
@@ -270,11 +270,6 @@ export default {
                 label: formFieldName ? `formfield-${formFieldName}-label` : 'formfield-label',
                 textarea: formFieldName ? `formfield-${formFieldName}-textarea` : 'formfield-textarea'
             };
-        },
-
-        isInline () {
-            return (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') ||
-                this.labelStyle === 'inline';
         },
 
         isDropdown () {

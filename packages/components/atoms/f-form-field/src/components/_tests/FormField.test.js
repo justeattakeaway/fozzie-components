@@ -2,7 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
-    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_TRAILING_ICON_INPUT_TYPES
+    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_AFFIXED_INPUT_TYPES, VALID_INPUT_TYPES, VALID_TRAILING_ICON_INPUT_TYPES
 } from '../../constants';
 
 const $style = {

@@ -10,5 +10,3 @@ export const DEFAULT_INPUT_TYPE = 'text';
 
 export const DEFAULT_FIELD_SIZE = 'medium';
 export const VALID_FIELD_SIZES = ['small', 'medium', 'large'];
-
-export const MOBILE_WIDTH = 768;
