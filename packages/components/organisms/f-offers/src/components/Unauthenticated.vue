@@ -66,7 +66,7 @@ export default {
 }
 
 .c-subtitle {
-    @include font-size(subheading-s)
+    @include font-size(subheading-s);
 }
 
 .c-unauthenticated-image {
