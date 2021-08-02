@@ -22,6 +22,15 @@ v5.0.0-beta.0
 - New font JETSansDigital
 
 
+v5.0.0-beta.1
+------------------------------
+*July 26, 2021*
+
+### Changed
+- Updated content cards to use beta 4 of braze adapter
+- Updated tests to account for change in braze adapter
+
+
 v4.8.0
 ------------------------------
 *July 22, 2021*
