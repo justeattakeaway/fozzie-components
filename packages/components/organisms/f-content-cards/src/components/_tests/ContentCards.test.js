@@ -1,7 +1,7 @@
 /* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
 import { shallowMount, mount } from '@vue/test-utils';
 import Vue from 'vue';
-import initialiseMetadata from '@justeat/f-braze-adapter';
+import BrazeAdapter from '@justeat/f-braze-adapter';
 import ContentCards, {
     CARDSOURCE_METADATA,
     CARDSOURCE_CUSTOM,
@@ -33,12 +33,6 @@ const voucherCode = '__VOUCHERCODE__';
 const order = '__ORDER__';
 const id = btoa('ABC123');
 
-const metadataDispatcher = {
-    logCardClick: jest.fn(),
-    logCardImpressions: jest.fn(),
-    pushShapedEventToDataLayer: jest.fn()
-};
-
 const createCard = type => ({
     id,
     url,
@@ -66,13 +60,12 @@ const scopedSlots = {
 
 beforeEach(() => {
     jest.resetAllMocks();
-    initialiseMetadata.mockResolvedValue(metadataDispatcher);
 });
 
 describe('ContentCards', () => {
-    it('should call intitialiseMetadata when mounted', () => {
+    it('should call BrazeAdapter when mounted', () => {
         // Arrange & Act
-        shallowMount(ContentCards, {
+        const wrapper = shallowMount(ContentCards, {
             propsData: {
                 apiKey,
                 userId
@@ -83,22 +76,21 @@ describe('ContentCards', () => {
         });
 
         // Assert
-        const [[settings]] = initialiseMetadata.mock.calls;
-        expect(settings.apiKey).toBe(apiKey);
-        expect(settings.userId).toBe(userId);
-        expect(settings.enableLogging).toBe(false);
+        expect(wrapper.vm.brazeAdapter).toBeInstanceOf(BrazeAdapter);
     });
 
 
 
-    describe('when a rejection from the promise returned by intitialiseMetadata has been encountered during loading', () => {
+    describe('when a error is thrown from the instantiation of BrazeAdapter during loading', () => {
         const error = new Error('foo');
         let instance;
 
         beforeEach(async () => {
             // Arrange
-            initialiseMetadata.mockReset();
-            initialiseMetadata.mockRejectedValue(error);
+            BrazeAdapter.mockReset();
+            BrazeAdapter.mockImplementation(() => {
+                throw error;
+            });
 
             // Act
             instance = shallowMount(ContentCards, {
@@ -296,8 +288,10 @@ describe('ContentCards', () => {
         instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
 
+        expect(BrazeAdapter).toHaveBeenCalled();
+
         // Assert
-        expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cards.map(card => card.id));
+        expect(instance.vm.brazeAdapter.logCardImpressions).toHaveBeenCalledWith(cards.map(card => card.id));
     });
 
     describe('when mounting descendants', () => {
@@ -365,7 +359,7 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardView(cardViewDetails);
 
                 // Assert
-                expect(metadataDispatcher.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
+                expect(instance.vm.brazeAdapter.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
                     contentId: id,
                     contentAction: 'view',
                     contentType: 'contentCard',
@@ -462,7 +456,7 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);
 
                 // Assert
-                expect(metadataDispatcher.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
+                expect(instance.vm.brazeAdapter.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
                     contentId: id,
                     contentAction: 'click',
                     contentType: 'contentCard',
@@ -484,7 +478,7 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);
 
                 // Assert
-                expect(metadataDispatcher.logCardClick).toHaveBeenCalledWith('foo');
+                expect(instance.vm.brazeAdapter.logCardClick).toHaveBeenCalledWith('foo');
             });
         });
 

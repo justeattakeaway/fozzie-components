@@ -1,4 +1,4 @@
-import initialiseMetadataDispatcher from '@justeat/f-braze-adapter';
+import BrazeAdapter from '@justeat/f-braze-adapter';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 import {
@@ -132,7 +132,7 @@ export default {
             this.$emit(GET_CARD_COUNT, current.length);
 
             if (current.length && (current.length !== previous.length)) {
-                this.metadataDispatcher.logCardImpressions(this.cards.map(({ id }) => id));
+                this.brazeAdapter.logCardImpressions(this.cards.map(({ id }) => id));
             }
             if ((current.length > 0) && (previous.length === 0)) {
                 this.state = STATE_DEFAULT;
@@ -160,8 +160,8 @@ export default {
             }
         }
     },
-    async mounted () {
-        await this.setupMetadata(this.apiKey, this.userId);
+    mounted () {
+        this.setupMetadata(this.apiKey, this.userId);
     },
     /**
      * Sets up dependencies required by descendant components
@@ -205,44 +205,42 @@ export default {
          * @param {String} apiKey
          * @param {String} userId
          * @param {Boolean} enableLogging
-         * @return {Promise<void>}
+         * @return {void}
          **/
         setupMetadata (apiKey, userId, enableLogging = false) {
-            return initialiseMetadataDispatcher({
-                apiKey,
-                userId,
-                enableLogging,
-                enabledCardTypes: [
-                    'Header_Card',
-                    'Promotion_Card_1',
-                    'Promotion_Card_2',
-                    'Recommendation_Card_1',
-                    'Restaurant_FTC_Offer_Card',
-                    'Voucher_Card_1',
-                    'Terms_And_Conditions_Card',
-                    'Terms_And_Conditions_Card_2',
-                    'Anniversary_Card_1',
-                    'Post_Order_Card_1',
-                    'Home_Promotion_Card_1',
-                    'Home_Promotion_Card_2',
-                    'Stamp_Card_1',
-                    'StampCard_Promotion_Card_1'
-                ],
-                brands: this.brands,
-                callbacks: {
-                    handleContentCards: this.metadataContentCards
-                },
-                loggerCallbacks: {
-                    logger: this.handleLogging(this.$logger)
-                }
-            })
-                .then(dispatcher => {
-                    this.metadataDispatcher = dispatcher;
-                })
-                .catch(error => {
-                    this.state = STATE_ERROR;
-                    this.$emit(ON_ERROR, error);
+            try {
+                this.brazeAdapter = new BrazeAdapter({
+                    apiKey,
+                    userId,
+                    enableLogging,
+                    enabledCardTypes: [
+                        'Header_Card',
+                        'Promotion_Card_1',
+                        'Promotion_Card_2',
+                        'Recommendation_Card_1',
+                        'Restaurant_FTC_Offer_Card',
+                        'Voucher_Card_1',
+                        'Terms_And_Conditions_Card',
+                        'Terms_And_Conditions_Card_2',
+                        'Anniversary_Card_1',
+                        'Post_Order_Card_1',
+                        'Home_Promotion_Card_1',
+                        'Home_Promotion_Card_2',
+                        'Stamp_Card_1',
+                        'StampCard_Promotion_Card_1'
+                    ],
+                    brands: this.brands,
+                    callbacks: {
+                        handleContentCards: this.metadataContentCards
+                    },
+                    loggerCallbacks: {
+                        logger: this.handleLogging(this.$logger)
+                    }
                 });
+            } catch (e) {
+                this.state = STATE_ERROR;
+                this.$emit(ON_ERROR, e);
+            }
         },
         /**
          * Common method for handling card ingestion to component. Card list length of 0 (after filtering) is considered
@@ -300,7 +298,7 @@ export default {
             switch (card.source) {
                 case CARDSOURCE_METADATA:
                     this.trackMetadataCardClick(card);
-                    this.metadataDispatcher.logCardClick(card.id);
+                    this.brazeAdapter.logCardClick(card.id);
                     break;
                 case CARDSOURCE_CUSTOM:
                     this.trackCustomCardClick(card);
@@ -333,7 +331,7 @@ export default {
          */
         trackMetadataCardClick (card) {
             const event = createMetadataCardEvent('click', card);
-            this.metadataDispatcher.pushShapedEventToDataLayer(this.pushToDataLayer, event);
+            this.brazeAdapter.pushShapedEventToDataLayer(this.pushToDataLayer, event);
         },
 
         /**
@@ -351,7 +349,7 @@ export default {
          */
         trackMetadataCardVisibility (card) {
             const event = createMetadataCardEvent('view', card);
-            this.metadataDispatcher.pushShapedEventToDataLayer(this.pushToDataLayer, event);
+            this.brazeAdapter.pushShapedEventToDataLayer(this.pushToDataLayer, event);
         },
 
         /**
