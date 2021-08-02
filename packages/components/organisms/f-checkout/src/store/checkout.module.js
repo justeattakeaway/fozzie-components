@@ -7,7 +7,6 @@ import checkoutApi from '../services/checkoutApi';
 import addressGeocodingApi from '../services/addressGeocodingApi';
 import orderPlacementApi from '../services/orderPlacementApi';
 import accountApi from '../services/accountApi';
-import { mapNotesFromApi } from '../services/mapper';
 
 import {
     UPDATE_ADDRESS,
@@ -23,6 +22,7 @@ import {
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
     UPDATE_MESSAGE,
+    UPDATE_NOTES_CONFIGURATION,
     UPDATE_ORDER_PLACED,
     UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
@@ -71,12 +71,6 @@ const resolveCustomerDetails = (data, state) => {
     }
 };
 
-/**
- * @param {object} state - The current `checkout` state.
- * @returns {String} - session storage key where we save user note.
- */
-const getUserNoteSessionStorageKey = state => `userNote-${state.basket.id}`;
-
 export default {
     namespaced: true,
 
@@ -115,7 +109,7 @@ export default {
         notices: [],
         message: null,
         messages: [],
-        noteTypes: [],
+        notesConfiguration: {},
         availableFulfilment: {
             times: [],
             isAsapAvailable: false
@@ -202,6 +196,18 @@ export default {
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
+        },
+
+        /**
+         * Get the note configuration details from the backend and update the state.
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getNotesConfiguration: async ({ commit }, { url, timeout }) => {
+            const { data } = await checkoutApi.getNoteConfiguration(url, timeout);
+
+            commit(UPDATE_NOTES_CONFIGURATION, data);
         },
 
         /**
@@ -395,25 +401,6 @@ export default {
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
         },
 
-        getUserNote: ({ dispatch, state }) => {
-            if (window.sessionStorage) {
-                const key = getUserNoteSessionStorageKey(state);
-                const note = window.sessionStorage.getItem(key);
-                if (note && note !== 'undefined') {
-                    dispatch('updateUserNote', { type: 'delivery', note });
-                }
-            }
-        },
-
-        saveUserNote ({ state }) {
-            if (window.sessionStorage) {
-                if (state.userNotes.delivery) {
-                    const key = getUserNoteSessionStorageKey(state);
-                    window.sessionStorage.setItem(key, state.userNotes.delivery);
-                }
-            }
-        },
-
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
         },
@@ -436,7 +423,6 @@ export default {
             isFulfillable,
             notices,
             messages,
-            noteTypes,
             notes
         }) => {
             state.id = id;
@@ -475,10 +461,8 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
-            // TODO: Remove this ternary when backend is complete. Currently we send the notes value as delivery but the default will be restaurant
-            state.noteTypes = noteTypes?.length > 0 ? noteTypes : ['delivery'];
             // TODO: Maybe there's a way to make this nicer
-            state.userNotes = notes?.length > 0 ? mapNotesFromApi(notes) : {};
+            state.userNotes = notes?.length > 0 ? { ...notes.map(({ type, note }) => ({ [type]: { value: note } })) } : { };
         },
 
         [UPDATE_AUTH]: (state, authToken) => {
@@ -546,7 +530,7 @@ export default {
         [UPDATE_USER_NOTES]: (state, userNote) => {
             state.userNotes = {
                 ...state.userNotes,
-                [userNote.type]: userNote.note
+                [userNote.type]: { value: userNote.note }
             };
         },
 
@@ -577,6 +561,10 @@ export default {
 
         [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
             state.customer.mobileNumber = phoneNumber;
+        },
+
+        [UPDATE_NOTES_CONFIGURATION]: (state, notesConfig) => {
+            state.notesConfiguration = notesConfig;
         }
     }
 };

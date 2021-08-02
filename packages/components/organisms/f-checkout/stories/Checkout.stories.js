@@ -54,6 +54,8 @@ const placeOrderTimeout = '/place-order-timeout.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
 const getCustomerUrl = '/get-customer.json';
+const getNoteConfigUrl = 'get-customer-notes-config.json';
+const getSplitNotesConfigUrl = 'get-customer-notes-config-split.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryAsapUrl);
@@ -88,6 +90,8 @@ CheckoutMock.setupCheckoutMethod(getCheckoutAccessForbiddenUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutErrorUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.setupCheckoutMethod(getCustomerUrl);
+CheckoutMock.setupCheckoutMethod(getNoteConfigUrl);
+CheckoutMock.setupCheckoutMethod(getSplitNotesConfigUrl);
 
 CheckoutMock.passThroughAny();
 
@@ -173,7 +177,8 @@ export const CheckoutComponent = () => ({
             loginUrl: '/login',
             paymentPageUrlPrefix,
             getGeoLocationUrl,
-            getCustomerUrl
+            getCustomerUrl,
+            getNoteConfigUrl
         };
     },
     props: {
@@ -230,7 +235,6 @@ export const CheckoutComponent = () => ({
             // TODO: Get this working alongside the fulfilment time selection
             url = this.serviceType === 'delivery' ? `/checkout-${this.serviceType}${noteType}.json` : `/checkout-${this.serviceType}.json`;
 
-            console.log(url);
             return url;
         },
 
@@ -293,8 +297,9 @@ export const CheckoutComponent = () => ({
         'applicationName="Storybook" ' +
         ':getGeoLocationUrl="getGeoLocationUrl" ' +
         ':getCustomerUrl="getCustomerUrl" ' +
+        ':getNoteConfigUrl="getNoteConfigUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

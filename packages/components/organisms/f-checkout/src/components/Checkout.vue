@@ -295,6 +295,11 @@ export default {
             required: true
         },
 
+        getNoteConfigUrl: {
+            type: String,
+            required: true
+        },
+
         experiments: {
             type: Object,
             default: () => ({})
@@ -521,6 +526,7 @@ export default {
             'getBasket',
             'getCheckout',
             'getGeoLocation',
+            'getNotesConfiguration',
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
@@ -529,7 +535,6 @@ export default {
             'updateMessage',
             'updateUserNote',
             'updateAddress',
-            'getUserNote',
             'saveUserNote'
         ]),
 
@@ -554,8 +559,8 @@ export default {
             this.startSpinnerCountdown();
 
             const promises = this.isLoggedIn
-                ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
+                ? [this.loadBasket(), this.loadCheckout(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()]
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.getNotesConfiguration(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
 
@@ -569,8 +574,6 @@ export default {
             if (this.shouldLoadCustomer) {
                 await this.loadCustomer();
             }
-
-            this.getUserNote();
         },
 
         /**
@@ -769,6 +772,27 @@ export default {
          * Load the basket details while emitting events to communicate its success or failure.
          *
          */
+        async loadNoteConfig () {
+            try {
+                await this.getNoteConfig({
+                    url: this.getNoteConfigUrl,
+                    tenant: this.tenant,
+                    language: this.$i18n.locale,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutBasketGetSuccess);
+            } catch (error) {
+                // eslint-disable-next-line
+                console.log(error);
+                // this.handleErrorState(new GetBasketError(error.message, error?.response?.status));
+            }
+        },
+
+        /**
+         * Load the basket details while emitting events to communicate its success or failure.
+         *
+         */
         async loadBasket () {
             try {
                 await this.getBasket({
@@ -802,6 +826,18 @@ export default {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
             } catch (error) {
                 this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response?.status));
+            }
+        },
+
+        async loadNotesConfiguration () {
+            try {
+                await this.getNotesConfiguration({
+                    url: this.getNoteConfigUrl,
+                    timeout: this.checkoutTimeout
+                });
+            } catch (error) {
+                // eslint-disable-next-line
+                console.error(error);
             }
         },
 

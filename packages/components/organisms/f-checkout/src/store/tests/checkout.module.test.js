@@ -54,9 +54,7 @@ const {
     updateAddressDetails,
     updateCustomerDetails,
     updateFulfilmentTime,
-    updateMessage,
-    getUserNote,
-    saveUserNote
+    updateMessage
 } = actions;
 
 const mobileNumber = '+447111111111';
@@ -148,7 +146,7 @@ const defaultState = {
     userNotes: {},
     geolocation: null,
     hasAsapSelected: false,
-    noteTypes: []
+    notesConfiguration: {}
 };
 
 let state = CheckoutModule.state();
@@ -322,13 +320,14 @@ describe('CheckoutModule', () => {
         describe(`${UPDATE_USER_NOTES} ::`, () => {
             it('should update the state with the new note values', () => {
                 const noteData = { type: 'kitchen', note: 'This is the new note value' };
-                console.log(state);
+                
                 // Act
                 mutations[UPDATE_USER_NOTES](state, noteData);
 
+                console.log(state.userNotes);
                 // Assert
                 expect(state.userNotes).toEqual({
-                    [noteData.type]: noteData.note
+                    [noteData.type]: { value: noteData.note }
                 });
             });
         });
@@ -1137,95 +1136,6 @@ describe('CheckoutModule', () => {
 
             // Assert
             expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-        });
-
-        describe('getUserNote ::', () => {
-            describe('if sessionStorage exists', () => {
-                beforeEach(() => {
-                    Object.defineProperty(window, 'sessionStorage', { value: storageMock });
-                });
-
-                afterEach(() => {
-                    window.sessionStorage.clear();
-                    jest.resetAllMocks();
-                });
-
-                // describe('when the user note exists in session storage', () => {
-                //     it('should call dispatch with updateUserNote action and the user note', () => {
-                //         // Arrange
-                //         jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(userNote);
-
-                //         // Act
-                //         getUserNote(context);
-
-                //         // Assert
-                //         expect(dispatch).toHaveBeenCalledWith('updateUserNote', { type: 'delivery', note: userNote });
-                //     });
-                // });
-
-                describe('when the user note does NOT exist in session storage', () => {
-                    it('should not call dispatch', () => {
-                        // Arrange
-                        jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(undefined);
-
-                        // Act
-                        getUserNote(context);
-
-                        // Assert
-                        expect(dispatch).not.toHaveBeenCalled();
-                    });
-                });
-            });
-
-            describe('if sessionStorage does NOT exist', () => {
-                beforeAll(() => {
-                    Object.defineProperty(window, 'sessionStorage', { value: null });
-                });
-
-                afterAll(() => {
-                    window.sessionStorage.clear();
-                    jest.resetAllMocks();
-                });
-
-                it('should not call dispatch', () => {
-                    // Act
-                    getUserNote(context);
-
-                    // Assert
-                    expect(dispatch).not.toHaveBeenCalled();
-                });
-            });
-        });
-
-        describe('saveUserNote ::', () => {
-            beforeEach(() => {
-                Object.defineProperty(window, 'sessionStorage', { value: storageMock });
-            });
-
-            afterEach(() => {
-                window.sessionStorage.clear();
-                jest.resetAllMocks();
-            });
-
-
-            it('should save userNote to sessionStorage', () => {
-                // Arrange
-                const spy = jest.spyOn(window.sessionStorage, 'setItem');
-                const testBasketId = '11111';
-                const key = `userNote-${testBasketId}`;
-                const newState = {
-                    ...state,
-                    userNotes: {
-                        delivery: 'Phone when outside please'
-                    }
-                };
-
-                // Act
-                saveUserNote({ ...context, state: newState });
-
-                // Assert
-                expect(spy).toHaveBeenCalledWith(key, newState.userNotes.delivery);
-            });
         });
     });
 });

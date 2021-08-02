@@ -83,6 +83,7 @@ const defaultCheckoutActions = {
     updateTableIdentifier: jest.fn(),
     updateFulfilmentTime: jest.fn(),
     getGeoLocation: jest.fn(),
+    getNotesConfiguration: jest.fn(),
     getBasket: jest.fn(),
     getAddress: jest.fn(),
     getCustomer: jest.fn(),

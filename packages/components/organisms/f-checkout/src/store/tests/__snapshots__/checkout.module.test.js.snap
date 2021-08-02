@@ -45,9 +45,7 @@ Object {
       "type": "information",
     },
   ],
-  "noteTypes": Array [
-    "delivery",
-  ],
+  "notesConfiguration": Object {},
   "notices": Array [
     Object {
       "notice": Object {
