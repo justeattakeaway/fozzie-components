@@ -17,7 +17,7 @@
         </button>
         <section
             :id="`${id}-accordion-section`"
-            :aria-labelledby="`${id}-section`"
+            :aria-labelledby="`${id}accordion-section`"
             :class="[
                 $style['c-checkout-accordion-section'], {
                     [$style['c-checkout-accordion-section--hidden']]: !isExpanded

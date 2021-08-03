@@ -689,7 +689,7 @@ export default {
                 const data = {
                     basketId: this.basket.id,
                     customerNotes: {
-                        noteForRestaurant: this.notes.delivery || this.notes.restaurant,
+                        noteForRestaurant: this.notes.courier || this.notes.order,
                         noteForKitchen: this.notes.kitchen || ''
                     },
                     referralState: this.getReferralState()

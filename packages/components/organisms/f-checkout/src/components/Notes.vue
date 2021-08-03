@@ -10,7 +10,7 @@
                 cols="30"
                 rows="7"
                 maxlength="200"
-                :name="noteTypeCourierOrOrder + '-note'"
+                :name="`${noteTypeDeliveryOrRestaurant}-note`"
                 has-input-description
                 @input="updateUserNote({ note: $event, type: noteTypeCourierOrOrder })">
                 {{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}
@@ -53,6 +53,7 @@ export default {
         Accordion,
         FormField
     },
+
     mixins: [
         loggerMixin
     ],
