@@ -59,13 +59,13 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should prevent a user from entering more than 250 characters in the notes field', () => {
         // Arrange
-        const field = 'deliveryNote';
+        const field = 'orderNote';
         const maxlength = 200;
 
         const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
         // Act
-        checkout.expandAndPopulateNote('delivery', userEntry);
+        checkout.expandAndPopulateNote('orderAccordionHeader', field, userEntry);
 
         // Assert
         expect(checkout.getFieldValue(field).length).toEqual(maxlength);

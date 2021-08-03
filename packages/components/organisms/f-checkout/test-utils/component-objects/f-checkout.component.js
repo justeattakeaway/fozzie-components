@@ -385,22 +385,12 @@ module.exports = class Checkout extends Page {
     * @description
     * Clicks accordion header of delivery notes and sets the value of the text area
     *
-    * @param {String} noteType The note type to be opened and populated
+    * @param {String} header The accordion header to be opened
+    * @param {String} noteType The note type to be populated
     * @param {String} note The value of the note
     */
-    expandAndPopulateNote (noteType, note) {
-        switch (noteType) {
-            case 'courier':
-                this.courierAccordionHeader.click();
-                this.fields.courierNote.input.setValue(note);
-                break;
-            case 'kitchen':
-                this.kitchenAccordionHeader.click();
-                this.fields.kitchenNote.input.setValue(note);
-                break;
-            default:
-                this.orderAccordionHeader.click();
-                this.fields.orderNote.input.setValue(note || 'order note');
-        }
+    expandAndPopulateNote (header, noteType, note) {
+        this[header].click();
+        this.fields[noteType].input.setValue(note);
     }
 };

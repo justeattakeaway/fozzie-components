@@ -32,8 +32,7 @@ describe('f-checkout "delivery" component tests', () => {
     });
 
     it('should open the combined notes accordion and populate it', () => {
-        // Combined notes are named delivery until the new API spec is released
-        checkout.expandAndPopulateNote('delivery', 'This is a combined note');
+        checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is an order note');
 
         checkout.goToPayment();
     });
@@ -55,8 +54,8 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
 
     it('should open both delivery and kitchen notes accordions and populate them', () => {
         // Assert
-        checkout.expandAndPopulateNote('delivery', 'This is a delivery note');
-        checkout.expandAndPopulateNote('kitchen', 'This is a kitchen note');
+        checkout.expandAndPopulateNote('courierAccordionHeader', 'courierNote', 'This is a delivery note');
+        checkout.expandAndPopulateNote('kitchenAccordionHeader', 'kitchenNote', 'This is a kitchen note');
         checkout.goToPayment();
     });
 });
