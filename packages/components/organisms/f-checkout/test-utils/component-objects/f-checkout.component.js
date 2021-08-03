@@ -19,9 +19,9 @@ const {
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
     ERROR_PAGE_IMAGE,
-    DELIVERY_ACCORDION_HEADER,
+    COURIER_ACCORDION_HEADER,
     KITCHEN_ACCORDION_HEADER,
-    RESTAURANT_ACCORDION_HEADER
+    ORDER_ACCORDION_HEADER
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -61,11 +61,11 @@ module.exports = class Checkout extends Page {
 
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
-    get deliveryAccordionHeader () { return $(DELIVERY_ACCORDION_HEADER); }
+    get courierAccordionHeader () { return $(COURIER_ACCORDION_HEADER); }
 
     get kitchenAccordionHeader () { return $(KITCHEN_ACCORDION_HEADER); }
 
-    get restaurantAccordionHeader () { return $(RESTAURANT_ACCORDION_HEADER); }
+    get orderAccordionHeader () { return $(ORDER_ACCORDION_HEADER); }
 
     fields = {
         firstName: {
@@ -110,16 +110,16 @@ module.exports = class Checkout extends Page {
             get input () { return $(FIELDS.tableIdentifier.input); },
             get maxLengthError () { return $(FIELDS.tableIdentifier.maxLengthError); }
         },
-        deliveryNote: {
-            get input () { return $(FIELDS.deliveryNote.input); },
+        courierNote: {
+            get input () { return $(FIELDS.courierNote.input); },
             get error () { return ''; }
         },
         kitchenNote: {
             get input () { return $(FIELDS.kitchenNote.input); },
             get error () { return ''; }
         },
-        restaurantNote: {
-            get input () { return $(FIELDS.restaurantNote.input); },
+        orderNote: {
+            get input () { return $(FIELDS.orderNote.input); },
             get error () { return ''; }
         }
     }
@@ -390,17 +390,17 @@ module.exports = class Checkout extends Page {
     */
     expandAndPopulateNote (noteType, note) {
         switch (noteType) {
-            case 'delivery':
-                this.deliveryAccordionHeader.click();
-                this.fields.deliveryNote.input.setValue(note);
+            case 'courier':
+                this.courierAccordionHeader.click();
+                this.fields.courierNote.input.setValue(note);
                 break;
             case 'kitchen':
                 this.kitchenAccordionHeader.click();
                 this.fields.kitchenNote.input.setValue(note);
                 break;
             default:
-                this.restaurantAccordionHeader.click();
-                this.fields.restaurantNote.input.setValue(note || 'restaurant note');
+                this.orderAccordionHeader.click();
+                this.fields.orderNote.input.setValue(note || 'order note');
         }
     }
 };
