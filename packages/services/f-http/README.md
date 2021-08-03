@@ -15,26 +15,25 @@ Javascript HTTP client for interacting with restful services
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-http/badge.svg)](https://coveralls.io/github/justeat/f-http)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-http/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-http?targetFile=package.json)
 
-This package exposes methods for interacting with restful services, it may abstract any number of popular NPM packages which provide the ability to perform GET, PUT, POST, PATH, DELETE requests; while also adding lots of additional benefits.
+This package exposes methods for interacting with restful services, it may abstract any number of popular NPM packages which provide the ability to perform GET, PUT, POST, PATH, DELETE requests; while also adding some additional benefits.
 
 ## Benefits (Now)
 - Easy configuration of reusable clients which can be retrieved from context
 - Enables us to switch to alternative HTTP packages when desired
 - Sensible defaults, with the ability to override everything
 - Ability to set authorisation tokens for all requests for specific clients
-- Ability to name each client, so output from it is grouped and labelled
-- Automatically collect stats showing how long real API calls take
+- Ability to automatically collect stats showing how long real API calls take
 
 ## Benefits (Soon)
-- _Opt-in automatic logging of errors_
 - _Opt-in ability to use dynamic timeouts_
-- _Opt-in automatic providing of diagnostic headers, such as Conversation ID_
+- _Opt-in automatic providing of diagnostic headers, such as je-conversation
+- _Opt-in automatic providing of headers, such as accept-tenant
 
 ## Usage
 
 ### Installation
 
-Install the module using npm or Yarn:
+Install the module using npm or yarn
 
 ```sh
 yarn add @justeat/f-http
@@ -44,53 +43,25 @@ yarn add @justeat/f-http
 ### Initialisation
 Ideally the package should be initialised by your website and the httpClient placed in context or a prototype, rather than initialising it in each individual component or every time you make a request.
 
-#### Initialise in a Nuxt Plugin (Works on Server and Client)
+#### Initialise an httpClient
 ```js
 import httpModule from '@justeat/f-http';
 
-const errorCallback = error => { // This is optional
-    console.error(error);
+const options = { // Options are described later
+    baseUrl: 'https://jsonplaceholder.typicode.com'
 };
 
-export default (context, inject) => {
-    const options = { // Options are described later
-        instanceName: 'Example Nuxt client'
-        baseUrl: 'https://jsonplaceholder.typicode.com',
-        errorCallback
-    };
+const httpClient = new httpModule.CreateClient(options);
 
-    const httpClient = httpModule.createClient(options);
+// WHEN: Using a Nuxt Plugin
+inject('http', httpClient);
 
-    inject('http', httpClient); // Exposes GET, PUT, POST, PATCH, DELETE
-};
-
+// WHEN: Using Vue CLI
+Vue.prototype.$http = httpClient;
 ```
 
-#### Initialise in NodeServices or Vue CLI
-```js
-import Vue from 'vue';
-import httpModule from '@justeat/f-http';
-
-const errorCallback = error => { // This is optional
-    console.error(`Handled HTTP Error: ${error.message}`);
-};
-
-export default () => {
-    const configuration = { // Options are described later
-        instanceName: 'Example client'
-        baseUrl: 'https://jsonplaceholder.typicode.com',
-        errorCallback
-    };
-
-    const httpClient = httpModule.createClient(configuration);
-
-    Vue.prototype.$http = httpClient; // Exposes GET, PUT, POST, PATCH, DELETE
-};
-
-```
-
-### Basic Implementation
-**Recommended**: Using the prototype (Vue) or context (Nuxt). You can access $http in components, or anywhere the context is available including VueX
+### Basic Usage
+**Recommended**: Using the prototype (Vue) or context (Nuxt). You can access $http in components, or anywhere the context is available including vuex modules.
 
 ```js
 export default {
@@ -112,11 +83,10 @@ If you would rather create the HTTPClient when you use it, that's fine too; it j
 export default {
   async mounted () {
     const configuration = { // Options are described later
-        instanceName: 'Example client'
         baseUrl: 'https://jsonplaceholder.typicode.com'
     };
 
-    const httpClient = httpModule.createClient(configuration);
+    const httpClient = new httpModule.CreateClient(configuration);
 
     const result = await httpClient.get('/todos/1');
   }
@@ -124,16 +94,13 @@ export default {
 ```
 
 ### Setting Authorisation Token
-If you need to call an authorised endpoint, you could pass the authorisation token through as a header in every request; but if you group clients correctly you may be able to benefit from applying it once for the lifetime of that client.
+You can optionally set an authorisation token globally so that all requests provide it
 
 ```js
 // Some event happened that means we now have a token
 export default {
-  async mounted () {
+  mounted () {
     this.$http.setAuthorisationToken('my token');
-
-    // This and all future requests will use the provided token
-    const result = await this.$http.get('/todos/1');
   }
 }
 ```
@@ -151,31 +118,26 @@ const wrapper = mount(MyComponent, {
 });
 ```
 
-### Integration Testing Guidance
-F-Http exposes a way to create a mockClient, this enables you to mock the underlying HTTPProvider with responses.
+### Integration / System Testing Guidance
+The module exposes a way to create a MockClient, so you can mock the underlying API with pre-configured responses.
 
 ```js
-import httpModule from '@justeat/f-http';
+import { httpVerbs, MockFactory, CreateClient } from '@justeat/f-http';
 
-const { mockFactory, httpVerbs } = httpModule;
-
-mockFactory.setupMockResponse(httpVerbs.POST, '/URL', REQUEST_DATA, 201);
-
-// Accepts options payload
-const $http = mockFactory.createMockClient({ instanceName: 'Integration Test Client'});
+const mockFactory = new MockFactory();
+const httpClient = new CreateClient();
 
 const wrapper = mount(MyComponent, {
   mocks: {
-    $http
+    $http: httpClient
   }
 });
-```
 
-### Output API stats
-F-Http automatically injects an interceptor to record details about the call and if the `isDevelopment` flag is set to `true` then these details are outputted to the Console in the format of `<verb>|<url segment>|<status code>|<milliseconds>ms` e.g. see below;
+// Reset all previously configured responses
+mockFactory.reset();
 
-```
-GET|/test|200|532ms
+// Setup a fake response
+mockFactory.setupMockResponse(httpVerbs.POST, '/URL', REQUEST_DATA, 201);
 ```
 
 ## Options
@@ -187,13 +149,11 @@ baseUrl | Ensure all requests from this client use a relative url | string | ''
 timeout | How long each request takes to timeout | number | 10000
 errorCallback | A function you can use to globally handle errors (accepts error object) | function | null
 contentType | Specify a value for the content type header | string | 'application/json'
-instanceName | Name the client so that stats and logs can be grouped by a specific API | string | 'Generic Front End'
-isDevelopment | Flag to indicate that execution is within a development environment | Boolean | false
 
 <hr>
 
 ## Client Methods
-These are all of the methods exposed by the httpClient
+These are all of the methods exposed by the `httpClient`
 
 Method | Description | Parameters
 ------------- | ------------- | -------------
@@ -203,4 +163,4 @@ put | PUT a resource | resource URL _[string]_, body _[object]_, headers _[array
 patch | PATCH a resource | resource URL _[string]_, body _[object]_, headers _[array]_
 delete | DELETE a resource | resource URL _[string]_, headers _[array]_
 setAuthorisationToken | Set the authorisation token for all requests | authorisationToken _[string]_
-readConfiguration | Returns the configuration which has been applied | None
+readConfiguration | Returns the configuration which has been provided | None

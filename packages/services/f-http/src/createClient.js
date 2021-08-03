@@ -3,14 +3,14 @@ import defaultOptions from './defaultOptions';
 import setAuthorisationToken from './authorisationHandler';
 import httpVerbs from './httpVerbs';
 import interceptors from './interceptors';
-import RequestDispatcher from './requestDispatcher';
+import RequestDispatcher from './RequestDispatcher';
 
 /**
  * Create a httpClient
  * @param {object} options - Any options to override - refer to documentation for options
  * @return {object} - Returns an object with restful request methods
  */
-export default class StatClient {
+export default class HttpClient {
     constructor (options = {}, statsClient = null) {
         // Merge default configuration with overrides
         this.configuration = {
