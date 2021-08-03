@@ -69,7 +69,7 @@ export default {
         },
 
         noteTypeCourierOrOrder () {
-            return this.notesConfiguration[this.capitalisedServiceType]?.CourierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER;
+            return this.notesConfiguration[this.capitalisedServiceType]?.OrderNoteAccepted ? CHECKOUT_NOTE_TYPE_ORDER : CHECKOUT_NOTE_TYPE_COURIER;
         },
 
         capitalisedServiceType () {
@@ -77,7 +77,7 @@ export default {
         },
 
         noteValue () {
-            return this.noteTypeCourierOrOrder === CHECKOUT_NOTE_TYPE_ORDER ? this.notes.courier?.value : this.notes.order?.value;
+            return this.noteTypeCourierOrOrder === CHECKOUT_NOTE_TYPE_COURIER ? this.notes.courier?.value : this.notes.order?.value;
         },
 
         kitchenNoteValue () {
