@@ -54,7 +54,6 @@ const errorCallback = error => { // This is optional
 
 export default (context, inject) => {
     const options = { // Options are described later
-        instanceName: 'Example Nuxt client'
         baseUrl: 'https://jsonplaceholder.typicode.com',
         errorCallback
     };
@@ -77,7 +76,6 @@ const errorCallback = error => { // This is optional
 
 export default () => {
     const configuration = { // Options are described later
-        instanceName: 'Example client'
         baseUrl: 'https://jsonplaceholder.typicode.com',
         errorCallback
     };
