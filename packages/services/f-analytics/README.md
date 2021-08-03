@@ -16,7 +16,7 @@ Encapsulates the GTM / Google Analytics functionality
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-analytics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-analytics?targetFile=package.json)
 
 ---
-This component abstracts away the gathering of the various data values needed for Google Analytics (GA) and the setting up of Google Tag Manager (GTM).  Once register it will; on render, push these various data values to GA.  You can see the results by inspecting the `dataLayer` from the browser console in developer tools and looking for the model `{platformData: {…}}`.
+This component abstracts away the gathering of the various data values needed for Google Analytics (GA) and the setting up of Google Tag Manager (GTM).  Once registered it will; on render, push these various data values to GA.  You can see the results by inspecting the `dataLayer` from the browser console in developer tools and looking for the model `{platformData: {…}}`.
 
 
 ## Benefits (Now)
@@ -119,8 +119,9 @@ This component abstracts away the gathering of the various data values needed fo
     export default config;
     ```
 </br>
+
   ## Options
-  Note; althought f-analytics gathers most of it's analytical data from within it does rely on a specific GTM objects to be supplied by your "Smart Component". See object spec. below:
+  Note: although f-analytics gathers most of it's analytical data from within it does rely on a specific GTM objects to be supplied by your "Smart Component". See object spec. below:
 
   ```js
     options: {
