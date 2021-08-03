@@ -190,11 +190,14 @@ export default {
     display: flex;
     justify-content: center;
     min-height: 80vh;
-    width: 80vw;
     margin: auto;
     font-family: $font-family-base;
     @include font-size(heading-m);
     text-align: center;
+
+    @include media('>=narrow') {
+        width: 80vw;
+    }
 }
 
     .c-takeawaypayActivation-card {
