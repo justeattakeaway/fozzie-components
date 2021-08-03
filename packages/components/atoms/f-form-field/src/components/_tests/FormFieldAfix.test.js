@@ -20,12 +20,12 @@ describe('FormFieldAffixed', () => {
                 ['', false],
                 ['$', true]
             ])('when prefix value is', (prefixValue, prefixVisible) => {
-                it(`should ${prefixVisible ? '' : 'not '}display 'c-formField-afix-prefix'`, () => {
+                it(`should ${prefixVisible ? '' : 'not '}display 'c-formField-affixed-prefix'`, () => {
                     // Arrange & Act
                     propsData.prefix = prefixValue;
 
                     const wrapper = shallowMount(FormFieldAffixed, { propsData });
-                    const formPrefix = wrapper.find('[data-test-id="formfield-afix-prefix"]');
+                    const formPrefix = wrapper.find('[data-test-id="formfield-affixed-prefix"]');
 
                     // Assert
                     expect(formPrefix.exists()).toBe(prefixVisible);
@@ -39,12 +39,12 @@ describe('FormFieldAffixed', () => {
                 ['', false],
                 ['GBP', true]
             ])('when suffix value is', (suffixValue, suffixVisible) => {
-                it(`should ${suffixVisible ? '' : 'not '}display 'c-formField-afix-suffix'`, () => {
+                it(`should ${suffixVisible ? '' : 'not '}display 'c-formField-affixed-suffix'`, () => {
                     // Arrange & Act
                     propsData.suffix = suffixValue;
 
                     const wrapper = shallowMount(FormFieldAffixed, { propsData });
-                    const formSuffix = wrapper.find('[data-test-id="formfield-afix-suffix"]');
+                    const formSuffix = wrapper.find('[data-test-id="formfield-affixed-suffix"]');
 
                     // Assert
                     expect(formSuffix.exists()).toBe(suffixVisible);
@@ -55,7 +55,7 @@ describe('FormFieldAffixed', () => {
 
     describe('computed ::', () => {
         describe('testId :: ', () => {
-            describe('when `attribues` has name value', () => {
+            describe('when `attributes` has name value', () => {
                 it('should return testIds for form field', () => {
                     // Arrange
                     propsData.attributes = {
@@ -70,7 +70,7 @@ describe('FormFieldAffixed', () => {
                 });
             });
 
-            describe('when `attribues` does not have name value', () => {
+            describe('when `attributes` does not have name value', () => {
                 it('should return default testIds', () => {
                     // Arrange
                     propsData.attributes = {

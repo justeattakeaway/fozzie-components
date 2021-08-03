@@ -416,9 +416,9 @@ describe('FormField', () => {
                     expect(wrapper.vm.isAffixedField).toBe(true);
                 });
 
-                it('should display `afixedFormField`', () => {
+                it('should display `affixedFormField`', () => {
                     // Arrange
-                    const affixedFormField = wrapper.find('[data-test-id="formfield-afix-input"]');
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affixed-input"]');
 
                     // Assert
                     expect(affixedFormField.exists()).toBe(true);
@@ -445,9 +445,9 @@ describe('FormField', () => {
                     expect(wrapper.vm.isAffixedField).toBe(true);
                 });
 
-                it('should display `afixedFormField`', () => {
+                it('should display `affixedFormField`', () => {
                     // Arrange
-                    const affixedFormField = wrapper.find('[data-test-id="formfield-afix-input"]');
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affixed-input"]');
 
                     // Assert
                     expect(affixedFormField.exists()).toBe(true);
@@ -473,9 +473,9 @@ describe('FormField', () => {
                     expect(wrapper.vm.isAffixedField).toBe(false);
                 });
 
-                it('wrapper should display `afixedFormField`', () => {
+                it('wrapper should display `affixedFormField`', () => {
                     // Arrange
-                    const affixedFormField = wrapper.find('[data-test-id="formfield-afix-input"]');
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affix-input"]');
 
                     // Assert
                     expect(affixedFormField.exists()).toBe(false);

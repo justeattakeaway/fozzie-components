@@ -17,8 +17,7 @@
                 :is-inline="isInline"
                 :is-disabled="isDisabled"
                 :label-details="labelDetails"
-                :data-test-id="testId.label"
-                @change-hover-state="toggleHoverState">
+                :data-test-id="testId.label">
                 {{ labelText }}
                 <template #description>
                     <span
@@ -41,7 +40,6 @@
                 :value="value"
                 :field-size="fieldSize"
                 :prefix="prefix"
-                :hover-state="hoverState"
                 :suffix="suffix"
                 :has-error="hasError"
                 v-on="listeners" />
@@ -258,8 +256,7 @@ export default {
 
     data () {
         return {
-            windowWidth: null,
-            hoverState: false
+            windowWidth: null
         };
     },
 
@@ -422,10 +419,6 @@ export default {
             if (this.suffix.length > 3) {
                 throw new TypeError(`Form field is set to have a "suffix" of ${this.suffix.length} characters long. Suffix has a max length of 3 characters`);
             }
-        },
-
-        toggleHoverState () {
-            this.hoverState = !this.hoverState;
         }
     }
 };
