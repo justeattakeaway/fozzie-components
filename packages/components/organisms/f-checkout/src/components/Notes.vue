@@ -10,7 +10,7 @@
                 cols="30"
                 rows="7"
                 maxlength="200"
-                :name="`${noteTypeDeliveryOrRestaurant}-note`"
+                :name="`${noteTypeCourierOrOrder}-note`"
                 has-input-description
                 @input="updateUserNote({ note: $event, type: noteTypeCourierOrOrder })">
                 {{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}
