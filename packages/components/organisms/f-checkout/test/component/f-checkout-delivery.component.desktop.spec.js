@@ -44,7 +44,7 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Note types', '-split-notes-delivery-kitchen');
+                .withQuery('&knob-Note types', 'get-notes-config-split');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 

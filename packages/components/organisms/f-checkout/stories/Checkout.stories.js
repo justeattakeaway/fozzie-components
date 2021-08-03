@@ -108,8 +108,8 @@ const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
 const noteTypesDelivery = 'Delivery notes only';
 
 const noteTypeOptions = {
-    [noteTypesDelivery]: getNotesConfigUrl,
-    [noteTypesDeliveryAndKitchen]: getSplitNotesConfigUrl
+    [noteTypesDelivery]: 'get-notes-config',
+    [noteTypesDeliveryAndKitchen]: 'get-notes-config-split'
 };
 
 const SERVER = 'SERVER';
@@ -261,7 +261,7 @@ export const CheckoutComponent = () => ({
         },
 
         getNoteConfigUrl () {
-            return this.noteType || getNotesConfigUrl;
+            return this.noteType ? `/${this.noteType}.json` : '/get-notes-config.json';
         }
     },
 
