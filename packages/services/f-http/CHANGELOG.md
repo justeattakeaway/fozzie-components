@@ -16,7 +16,6 @@ v0.6.1
 ### Fixed
 - Corrections to a few class names
 - Removed async from the Mock Factory
-- Casing of file names which are classes
 
 
 v0.6.0

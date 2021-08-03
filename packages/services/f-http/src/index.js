@@ -1,5 +1,5 @@
-import CreateClient from './CreateClient';
-import MockFactory from './MockFactory';
+import CreateClient from './createClient';
+import MockFactory from './mockFactory';
 import httpVerbs from './httpVerbs';
 
 /**

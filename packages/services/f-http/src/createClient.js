@@ -3,7 +3,7 @@ import defaultOptions from './defaultOptions';
 import setAuthorisationToken from './authorisationHandler';
 import httpVerbs from './httpVerbs';
 import interceptors from './interceptors';
-import RequestDispatcher from './RequestDispatcher';
+import RequestDispatcher from './requestDispatcher';
 
 /**
  * Create a httpClient

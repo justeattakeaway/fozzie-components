@@ -1,6 +1,6 @@
-import CreateClient from '../CreateClient';
+import CreateClient from '../createClient';
 
-describe('CreateClient', () => {
+describe('createClient', () => {
     describe('initialisation', () => {
         it('should be defined', async () => {
             // Arrange, Act & Assert
