@@ -15,8 +15,7 @@
                 :label-for="uniqueId"
                 :is-disabled="isDisabled"
                 v-bind="$props"
-                :data-test-id="testId.label"
-                @change-hover-state="toggleHoverState">
+                :data-test-id="testId.label">
                 {{ labelText }}
             </form-label>
 
@@ -25,7 +24,6 @@
                 :id="uniqueId"
                 :attributes="$attrs"
                 v-bind="$props"
-                :hover-state="hoverState"
                 v-on="listeners" />
 
             <form-dropdown
@@ -224,8 +222,7 @@ export default {
 
     data () {
         return {
-            windowWidth: null,
-            hoverState: false
+            windowWidth: null
         };
     },
 
@@ -376,10 +373,6 @@ export default {
             if (this.suffix.length > 3) {
                 throw new TypeError(`Form field is set to have a "suffix" of ${this.suffix.length} characters long. Suffix has a max length of 3 characters`);
             }
-        },
-
-        toggleHoverState () {
-            this.hoverState = !this.hoverState;
         }
     }
 };

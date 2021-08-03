@@ -77,7 +77,8 @@ $form-input-icon-horizontalIndent       : 19px;
     @include form-field-size($form-input-height--large, $form-input-padding--large); //convert height to rem
 }
 
-.c-formField-field {
+.c-formField-field,
+%c-formField-field {
     width: 100%;
     font-family: $font-family-base;
     @include font-size($form-input-fontSize);

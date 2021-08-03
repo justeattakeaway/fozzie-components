@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0
 ------------------------------
-*July 28, 2021*
+*August 3, 2021*
 
 ### Remove
 - `labelStyle` prop.
@@ -17,6 +17,15 @@ v2.0.0
 - `shouldShowLabelText` prop.
 - `labelDescription` prop.
 - Documentation.
+
+
+v1.21.0
+------------------------------
+*August 3, 2021*
+
+### Added
+- `AffixedFormField` component.
+- Tests to cover changes.
 
 
 v1.20.0
