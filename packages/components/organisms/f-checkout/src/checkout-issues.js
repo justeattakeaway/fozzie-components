@@ -39,6 +39,11 @@ const checkoutIssues = {
         shouldRedirectToMenu: false
     },
 
+    NOTE_NOT_ACCEPTED: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: false
+    },
+
     GENERIC_CHECKOUT_ISSUE: {
         shouldShowInDialog: true,
         shouldRedirectToMenu: false

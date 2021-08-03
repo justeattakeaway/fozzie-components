@@ -118,6 +118,12 @@ const messages = {
                 buttonText: 'Ok'
             },
 
+            NOTE_NOT_ACCEPTED: {
+                title: 'Invalid note(s)',
+                message: 'We’re sorry, one or more of your notes has not been accepted',
+                buttonText: 'Ok'
+            },
+
             DEFAULT_CHECKOUT_ISSUE: {
                 title: 'Something went wrong',
                 message: 'Please try again',
