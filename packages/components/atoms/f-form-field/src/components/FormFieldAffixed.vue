@@ -111,10 +111,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-affix-padding            : 10px $form-input-padding--side 12px;
-$form-affix-padding--small     : 6px $form-input-padding--side 8px;
-$form-affix-padding--large     : 14px $form-input-padding--side 16px;
-
 .c-formField--affixed {
     @extend %c-formField-field;
     display: flex;
@@ -163,7 +159,7 @@ $form-affix-padding--large     : 14px $form-input-padding--side 16px;
     height: $form-input-height;
 
     .c-formField-affix {
-        padding: $form-affix-padding;
+        padding: $form-input-padding;
     }
 }
 
@@ -171,7 +167,7 @@ $form-affix-padding--large     : 14px $form-input-padding--side 16px;
     height: $form-input-height--small;
 
     .c-formField-affix {
-        padding: $form-affix-padding--small;
+        padding: $form-input-padding--small;
     }
 }
 
@@ -179,11 +175,15 @@ $form-affix-padding--large     : 14px $form-input-padding--side 16px;
     height: $form-input-height--large;
 
     .c-formField-affix {
-        padding: $form-affix-padding--large;
+        padding: $form-input-padding--large;
     }
 }
 
 .c-formField--disabled {
     @include disabled-field();
+
+    .c-formField-affix {
+        @include disabled-field();
+    }
 }
 </style>
