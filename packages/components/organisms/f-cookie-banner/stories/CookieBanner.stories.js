@@ -23,7 +23,7 @@ export const CookieBannerComponent = () => ({
         },
 
         shouldUseGreyBackground: {
-            default: boolean('Reopen link uses grey background', null)
+            default: boolean('Reopen link uses grey background', true)
         }
     },
     template: `<cookie-banner
