@@ -754,19 +754,6 @@ describe('FormField', () => {
                         });
                     }).toThrowError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
                 });
-
-                it('should throw an error when `prefix` is longer than 3 characters', () => {
-                    // Arrange
-                    const propsData = {
-                        inputType: 'text',
-                        prefix: '££££'
-                    };
-
-                    // Act & Assert
-                    expect(() => {
-                        shallowMount(FormField, { propsData });
-                    }).toThrowError('Form field is set to have a "prefix" of 4 characters long. Prefix has a max length of 3 characters');
-                });
             });
 
             describe('when `suffix` is provided', () => {
@@ -786,19 +773,6 @@ describe('FormField', () => {
                             }
                         });
                     }).toThrowError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
-                });
-
-                it('should throw an error when `suffix` is longer than 3 characters', () => {
-                    // Arrange
-                    const propsData = {
-                        inputType: 'text',
-                        suffix: '££££'
-                    };
-
-                    // Act & Assert
-                    expect(() => {
-                        shallowMount(FormField, { propsData });
-                    }).toThrowError('Form field is set to have a "suffix" of 4 characters long. Suffix has a max length of 3 characters');
                 });
             });
         });
