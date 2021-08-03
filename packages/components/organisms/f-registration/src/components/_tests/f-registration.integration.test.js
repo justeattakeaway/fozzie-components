@@ -1,17 +1,10 @@
-import httpModule from '@justeat/f-http';
-import {
-    mount
-} from '@vue/test-utils';
+import { httpVerbs, CreateClient, MockFactory } from '@justeat/f-http';
+import { mount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
 import CONSUMERS_REQUEST_DATA from '../../../test/constants/consumer';
-
-const {
-    mockFactory,
-    httpVerbs
-} = httpModule;
 
 const propsData = {
     locale: 'en-GB',
@@ -30,13 +23,17 @@ const setFormFieldValues = wrapper => {
 
 describe('Registration API service', () => {
     let wrapper;
+    const mockFactory = new MockFactory();
 
     beforeEach(() => {
         const div = document.createElement('div');
         document.body.appendChild(div);
         wrapper = mount(Registration, {
             propsData,
-            attachTo: div
+            attachTo: div,
+            mocks: {
+                $http: new CreateClient()
+            }
         });
 
         setFormFieldValues(wrapper);
@@ -44,6 +41,7 @@ describe('Registration API service', () => {
 
     afterEach(() => {
         wrapper.destroy();
+        mockFactory.reset();
         jest.clearAllMocks();
     });
 
