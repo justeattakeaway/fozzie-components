@@ -211,12 +211,14 @@ export default {
 
         prefix: {
             type: String,
-            default: ''
+            default: '',
+            validator: value => (value.length <= 3)
         },
 
         suffix: {
             type: String,
-            default: ''
+            default: '',
+            validator: value => (value.length <= 3)
         }
     },
 
@@ -364,14 +366,6 @@ export default {
 
             if (this.suffix && this.hasTrailingIcon) {
                 throw new TypeError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
-            }
-
-            if (this.prefix.length > 3) {
-                throw new TypeError(`Form field is set to have a "prefix" of ${this.prefix.length} characters long. Prefix has a max length of 3 characters`);
-            }
-
-            if (this.suffix.length > 3) {
-                throw new TypeError(`Form field is set to have a "suffix" of ${this.suffix.length} characters long. Suffix has a max length of 3 characters`);
             }
         }
     }

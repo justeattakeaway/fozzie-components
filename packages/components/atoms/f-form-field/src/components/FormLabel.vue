@@ -8,9 +8,7 @@
             $style['c-formField-label'], {
                 [$style['c-formField-label--disabled']]: isDisabled
             }
-        ]"
-        @mouseenter="toggleHoverState"
-        @mouseleave="toggleHoverState">
+        ]">
         <span
             v-if="labelDetails"
             :class="$style['c-formField-label-details']">
@@ -56,12 +54,6 @@ export default {
     computed: {
         hasLabelText () {
             return this.$slots.default && !!this.$slots.default[0].text.length;
-        }
-    },
-
-    methods: {
-        toggleHoverState () {
-            this.$emit('change-hover-state');
         }
     }
 };
