@@ -118,9 +118,21 @@ const messages = {
                 buttonText: 'Ok'
             },
 
-            NOTE_NOT_ACCEPTED: {
-                title: 'Invalid note(s)',
-                message: 'We’re sorry, one or more of your notes has not been accepted',
+            KITCHEN_NOTE_NOT_ACCEPTED: {
+                title: 'Invalid note for the kitchen',
+                message: 'We’re sorry, it appears your kitchen note has not been accepted',
+                buttonText: 'Ok'
+            },
+
+            COURIER_NOTE_NOT_ACCEPTED: {
+                title: 'Invalid note for the courier',
+                message: 'We’re sorry, it appears your courier note has not been accepted',
+                buttonText: 'Ok'
+            },
+
+            ORDER_NOTE_NOT_ACCEPTED: {
+                title: 'Invalid note',
+                message: 'We’re sorry, it appears your note has not been accepted',
                 buttonText: 'Ok'
             },
 
