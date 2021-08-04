@@ -26,14 +26,14 @@ This package exposes methods for interacting with restful services, it may abstr
 
 ## Benefits (Soon)
 - _Opt-in ability to use dynamic timeouts_
-- _Opt-in automatic providing of diagnostic headers, such as je-conversation
-- _Opt-in automatic providing of headers, such as accept-tenant
+- _Opt-in automatic providing of diagnostic headers, such as je-conversation_
+- _Opt-in automatic providing of headers, such as accept-tenant_
 
 ## Usage
 
 ### Installation
 
-Install the module using npm or yarn
+Install the module using npm or Yarn
 
 ```sh
 yarn add @justeat/f-http
@@ -43,7 +43,7 @@ yarn add @justeat/f-http
 ### Initialisation
 Ideally the package should be initialised by your website and the httpClient placed in context or a prototype, rather than initialising it in each individual component or every time you make a request.
 
-#### Initialise an httpClient
+#### Initialise an `httpClient`
 ```js
 import httpModule from '@justeat/f-http';
 
@@ -94,7 +94,7 @@ export default {
 ```
 
 ### Setting Authorisation Token
-You can optionally set an authorisation token globally so that all requests provide it
+You can globally set the authorisation token so that all requests provide it
 
 ```js
 // Some event happened that means we now have a token
@@ -163,4 +163,4 @@ put | PUT a resource | resource URL _[string]_, body _[object]_, headers _[array
 patch | PATCH a resource | resource URL _[string]_, body _[object]_, headers _[array]_
 delete | DELETE a resource | resource URL _[string]_, headers _[array]_
 setAuthorisationToken | Set the authorisation token for all requests | authorisationToken _[string]_
-readConfiguration | Returns the configuration which has been provided | None
+readConfiguration | Returns the provided options | None
