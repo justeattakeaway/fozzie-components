@@ -1,8 +1,8 @@
-import AnalyticsModule from '../analyticsModule';
+import AnalyticsModule from '../analytics.module';
 import {
     defaultState,
     modifieldState
-} from '../../mixins/_tests/helpers/setup';
+} from '../../tests/helpers/setup';
 
 const { actions, mutations } = AnalyticsModule;
 const { updatePlatformData } = actions;
