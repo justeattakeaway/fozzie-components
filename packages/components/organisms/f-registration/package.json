@@ -51,14 +51,14 @@
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/f-http": ">=0.6.1"
+    "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
     "@justeat/f-button": "1.9.0",
     "@justeat/f-card": "1.2.1",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.6.1",
+    "@justeat/f-http": "0.6.1",
     "@justeat/f-link": "0.4.0",
     "@justeat/f-vue-icons": "1.10.0",
     "@justeat/f-wdio-utils": "0.2.0",
