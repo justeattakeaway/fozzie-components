@@ -38,12 +38,18 @@ const defaultActions = {
     updatePlatformData: jest.fn()
 };
 
-const createStore = (
+const gtmSettings = {
+    namespace: 'f-analytics',
+    id: 'GTM-123456A'
+};
+
+const createStore = ({
+    name = 'f-analytics',
     state = defaultState,
     actions = defaultActions
-) => new Vuex.Store({
+} = {}) => new Vuex.Store({
     modules: {
-        fAnalyticsModule: {
+        [`${name}`]: {
             namespaced: true,
             state,
             actions
@@ -51,10 +57,6 @@ const createStore = (
         hasModule: jest.fn(() => true)
     }
 });
-
-const gtmSettings = {
-    id: 'GTM-123456A'
-};
 
 const $cookies = {
     get: jest.fn()
