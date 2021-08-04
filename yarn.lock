@@ -2283,14 +2283,6 @@
   dependencies:
     vue-i18n "8.0.0"
 
-"@justeat/f-http@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-http/-/f-http-0.4.1.tgz#341c6e67637c9346ab14cd4de4928fc7ff1e6fc9"
-  integrity sha512-kzkl7r+5r2wZ+1/5be2s12qJvu2KEw3zW6jA9UIPXhWGtvzP+lsy9z/7cgomF4XyNSgHidlUD9dFwpeG/I+p8w==
-  dependencies:
-    axios "0.21.1"
-    axios-mock-adapter "1.19.0"
-
 "@justeat/f-icons@3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.5.1.tgz#a8211d31c3310f5403cee2a72de899a53bcf3d20"
