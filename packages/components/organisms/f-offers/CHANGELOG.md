@@ -4,9 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next version)
+v0.7.0
 ------------------------------
-*July 15, 2021*
+*August 02, 2021*
+
+### Added
+- Unauthenticated state component
+- unit tests for new component
 
 ### Changed
 - Updated version of `f-button`.
