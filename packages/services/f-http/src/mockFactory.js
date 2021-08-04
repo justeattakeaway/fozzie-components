@@ -2,7 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import httpVerbs from './httpVerbs';
 
-export default class StatClient {
+export default class MockFactory {
     constructor () {
         this.axiosMockAdapter = new MockAdapter(axios);
     }
@@ -15,7 +15,7 @@ export default class StatClient {
      * @param {object} statusCode - The status code to return
      * @param {object} data - The data to return
      */
-    async setupMockResponse (method, url, requestData, statusCode, data) {
+    setupMockResponse (method, url, requestData, statusCode, data) {
         const supportedFunctions = {
             [httpVerbs.GET]: 'onGet',
             [httpVerbs.POST]: 'onPost',
@@ -27,5 +27,9 @@ export default class StatClient {
         const mockMethod = supportedFunctions[method];
 
         this.axiosMockAdapter[mockMethod](url, requestData).reply(statusCode, data);
+    }
+
+    reset () {
+        this.axiosMockAdapter.reset();
     }
 }
