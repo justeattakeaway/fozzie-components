@@ -10,7 +10,7 @@ import RequestDispatcher from './requestDispatcher';
  * @param {object} options - Any options to override - refer to documentation for options
  * @return {object} - Returns an object with restful request methods
  */
-export default class StatClient {
+export default class HttpClient {
     constructor (options = {}, statsClient = null) {
         // Merge default configuration with overrides
         this.configuration = {
