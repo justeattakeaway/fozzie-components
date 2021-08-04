@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.39.0
 ------------------------------
-*July 14, 2021*
+*August 04, 2021*
 
 ### Added
 - Upgrade to f-http@v0.6.1
