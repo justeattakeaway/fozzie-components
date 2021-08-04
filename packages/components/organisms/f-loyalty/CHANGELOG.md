@@ -4,12 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v0.3.0
 ------------------------------
-*July 23, 2021*
+*July 29, 2021*
 
-### Removed
-- Unused f-button and f-card component dev dependencies
+### Added
+- Header component and associated i18n text
+- Unit tests for Header component
 
 
 v0.2.0
