@@ -1,7 +1,7 @@
 import handleError from './errorHandler';
 import configBuilder from './configBuilder';
 
-export default class StatClient {
+export default class RequestDispatcher {
     constructor (axiosInstance, configuration) {
         this.axiosInstance = axiosInstance;
         this.configuration = configuration;

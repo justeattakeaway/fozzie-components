@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-offers",
   "description": "Fozzie Offers - displays offers to the customers",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "main": "dist/f-offers.umd.min.js",
   "maxBundleSize": "70kB",
   "files": [

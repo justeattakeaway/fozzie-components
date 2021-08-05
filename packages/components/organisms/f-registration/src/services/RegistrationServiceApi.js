@@ -1,11 +1,5 @@
-import httpModule from '@justeat/f-http';
-
 export default {
-    async createAccount (url, data, tenant) {
-        const httpClient = httpModule.createClient({
-            instanceName: 'Account Web'
-        });
-
+    async createAccount (httpClient, url, data, tenant) {
         return httpClient.post(url, data, {
             'Accept-Tenant': tenant
         });
