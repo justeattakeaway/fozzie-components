@@ -39,8 +39,8 @@ describe('f-checkout component tests - @browserstack', () => {
     });
 
     forEach([
-        [255, 'addressLine1'],
-        [255, 'addressLine2'],
+        [100, 'addressLine1'],
+        [100, 'addressLine2'],
         [50, 'addressLocality'],
         [50, 'addressPostcode'],
         [16, 'mobileNumber'],
