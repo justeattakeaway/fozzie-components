@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0
 ------------------------------
-*August 3, 2021*
+*August 5, 2021*
 
 ### Remove
 - `labelStyle` prop.

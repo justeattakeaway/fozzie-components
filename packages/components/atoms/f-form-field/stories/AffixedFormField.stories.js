@@ -3,7 +3,7 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
-import { DEFAULT_FIELD_SIZE, VALID_FIELD_SIZES } from '../src/constants';
+import { DEFAULT_FIELD_SIZE, VALID_AFFIXED_INPUT_TYPES, VALID_FIELD_SIZES } from '../src/constants';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -20,6 +20,9 @@ export const AffixedFormFieldComponent = () => ({
         },
         fieldSize: {
             default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
+        },
+        inputType: {
+            default: select('Input Type', VALID_AFFIXED_INPUT_TYPES)
         },
         isDisabled: {
             default: select('isDisabled', [null, 'disabled'])
@@ -53,8 +56,8 @@ export const AffixedFormFieldComponent = () => ({
     `<form-field
         locale="en-GB"
         label-text="Affixed Field"
-        input-type="text"
         :shouldShowLabelText="shouldShowLabelText"
+        :input-type="inputType"
         :field-size="fieldSize"
         :has-error="hasError"
         :disabled="isDisabled"

@@ -24,6 +24,7 @@
                 :id="uniqueId"
                 :attributes="$attrs"
                 v-bind="$props"
+                :type="normalisedInputType"
                 v-on="listeners" />
 
             <form-dropdown
