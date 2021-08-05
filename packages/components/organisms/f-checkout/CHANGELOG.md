@@ -12,12 +12,21 @@ v0.167.0
 - `max-length` to component tests.
 
 
+v0.166.0
+------------------------------
+*August 4, 2021*
+
+### Changed
+- reduce character limit on address fields to 100
+
+
 v0.165.0
 ------------------------------
 *July 26, 2021*
 
 ### Added
 - `errorCode` property for failed UpdateCheckout is passed to the log
+
 
 v0.164.0
 ------------------------------
