@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-http",
   "description": "Javascript HTTP client for interacting with restful services",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "main": "src/index.js",
   "maxBundleSize": "15kB",
   "files": [

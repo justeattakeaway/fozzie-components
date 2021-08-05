@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.7.0
+------------------------------
+*August 05, 2021*
+
+### Added
+- Mock Factory: Now supports passing through of requests
+
+### Changed
+- Mock Factory: Setup Mock Response does not require request data to be provided
+
+
 v0.6.1
 ------------------------------
 *August 03, 2021*
