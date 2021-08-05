@@ -3,16 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.166.0
+v0.167.0
 ------------------------------
-*July 22, 2021*
+*August 05, 2021*
 
 ### Added
-- Split Notes for both kitchen and delivery notes
-- Accordions to toggle visibility of notes
+- `max-length` property to guest email field.
+- `max-length` to component tests.
+
+
+v0.166.0
+------------------------------
+*August 4, 2021*
 
 ### Changed
-- Small changes so the split notes will work with the current API
+- reduce character limit on address fields to 100
 
 
 v0.165.0
@@ -21,6 +26,7 @@ v0.165.0
 
 ### Added
 - `errorCode` property for failed UpdateCheckout is passed to the log
+
 
 v0.164.0
 ------------------------------
