@@ -4,42 +4,45 @@
         has-outline
         is-page-content-wrapper
         card-heading-position="center"
+        :card-heading="$t(`ageVerification.heading`)"
         data-test-id="checkout-age-verification-component"
         :class="[$style['c-checkout-ageVerification'], $style['c-checkout-ageVerification--verticalPadding']]">
-        <h1
-            :class="$style['c-checkout-ageVerification-heading']"
-            data-test-id="checkout-age-verification-heading">
-            {{ $t(`ageVerification.heading`) }}
-        </h1>
-
         <p
             :class="$style['c-checkout-ageVerification-description']"
             data-test-id="checkout-age-verification-description">
             {{ $t(`ageVerification.description`) }}
         </p>
 
-        <form-field
-            id="day-selection"
-            input-type="dropdown"
-            :label-text="$t(`ageVerification.ageSelection.day`)"
-            :dropdown-options="days"
-            :value="days[0]" />
+        <div
+            :class="$style['c-checkout-ageVerification-fields']">
+            <form-field
+                id="day-selection"
+                input-type="dropdown"
+                :class="$style['c-checkout-ageVerification-field']"
+                :label-text="$t(`ageVerification.ageSelection.day`)"
+                :dropdown-options="days"
+                :value="days[0].text" />
 
-        <form-field
-            id="month-selection"
-            input-type="dropdown"
-            :label-text="$t(`ageVerification.ageSelection.month`)"
-            :dropdown-options="months"
-            :value="months[0]" />
-        <form-field
-            id="year-selection"
-            input-type="dropdown"
-            :label-text="$t(`ageVerification.ageSelection.year`)"
-            :dropdown-options="years"
-            :value="years[0]" />
+            <form-field
+                id="month-selection"
+                input-type="dropdown"
+                :class="$style['c-checkout-ageVerification-field']"
+                :label-text="$t(`ageVerification.ageSelection.month`)"
+                :dropdown-options="months"
+                :value="months[0].text" />
+
+            <form-field
+                id="year-selection"
+                input-type="dropdown"
+                :class="$style['c-checkout-ageVerification-field']"
+                :label-text="$t(`ageVerification.ageSelection.year`)"
+                :dropdown-options="years"
+                :value="years[0].text" />
+        </div>
+
 
         <p
-            :class="$style['c-checkout-ageVerification-askForIdDescription']"
+            :class="$style['c-checkout-ageVerification-description']"
             data-test-id="checkout-age-verification-askForIdDescription">
             {{ $t(`ageVerification.askForIdDescription`) }}
         </p>
@@ -101,13 +104,41 @@ export default {
         //         'restaurant'
         //     ])
         days () {
-            return [1, 2, 3, 4, 5];
+            return [
+                { text: '1', value: '1' },
+                { text: '2', value: '2' },
+                { text: '3', value: '3' },
+                { text: '4', value: '4' },
+                { text: '5', value: '5' },
+                { text: '6', value: '6' }
+            ];
         },
         months () {
-            return [1, 2, 3, 4, 5];
+            return [
+                { text: 'Jan', value: '1' },
+                { text: 'Feb', value: '2' },
+                { text: 'Mar', value: '3' },
+                { text: 'Apr', value: '4' },
+                { text: 'May', value: '5' },
+                { text: 'June', value: '6' },
+                { text: 'July', value: '7' },
+                { text: 'Aug', value: '8' },
+                { text: 'Sept', value: '9' },
+                { text: 'Oct', value: '10' },
+                { text: 'Nov', value: '11' },
+                { text: 'Dec', value: '12' }
+            ];
         },
         years () {
-            return [1, 2, 3, 4, 5];
+            return [
+                { text: '1990', value: '1990' },
+                { text: '1991', value: '1991' },
+                { text: '1992', value: '1992' },
+                { text: '1993', value: '1993' },
+                { text: '1994', value: '1994' },
+                { text: '1995', value: '1995' },
+                { text: '1996', value: '1996' }
+            ];
         }
         // },
 
@@ -136,33 +167,37 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-checkout-error {
+// .c-checkout-error {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     text-align: center;
+
+//     &.c-checkout-error--verticalPadding {
+//         @include media('<=narrow') {
+//             border: none;
+//             padding-top: spacing(x2);
+//             padding-bottom: spacing(x2);
+//         }
+//     }
+// }
+
+.c-checkout-ageVerification-description {
+    margin: spacing(x2) 0 spacing(x2);
+}
+
+.c-checkout-ageVerification-button {
+    margin: spacing(x2) 0 spacing();
+}
+
+.c-checkout-ageVerification-fields {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    flex-wrap: nowrap;
+    justify-content: stretch;
+    gap: spacing();
 
-    &.c-checkout-error--verticalPadding {
-        @include media('<=narrow') {
-            border: none;
-            padding-top: spacing(x2);
-            padding-bottom: spacing(x2);
-        }
-    }
 }
-
-.c-checkout-error-heading {
-    @include font-size(heading-s);
-    margin-top: spacing(x8);
-    margin-bottom: 0;
-}
-
-.c-checkout-error-description {
-    @include font-size(body-l);
-    margin-top: spacing();
-}
-
-.c-checkout-error-button {
-    margin: spacing(x4) 0 spacing(x0.5);
+.c-checkout-ageVerification-field {
+    flex-basis: calc(100% /3);
 }
 </style>

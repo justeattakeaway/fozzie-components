@@ -198,7 +198,7 @@ const messages = {
     cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy',
 
     ageVerification: {
-        heading: 'Confirm your date of birth',
+        heading: 'Please confirm your date of birth',
         description: 'You\'re ordering something alcoholic so we need to double-check you\'re 18 or over.',
         ageSelection: {
             day: 'Day',
