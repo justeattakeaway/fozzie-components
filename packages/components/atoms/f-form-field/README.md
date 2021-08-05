@@ -84,7 +84,7 @@ The props that can be defined are as follows (if any):
 | `labelDetails` | `String` | `'` | Details for the label that will display on the right of label text. |
 | `assistiveText` | `String` | `'` | Text to assist the user that will display underneath the input field. |
 | `prefix` | `String` | `'` | Prefix will display on the left of the input field. |
-| `suffix` | `String` | `'` | Suffix will display on the left of the input field. |
+| `suffix` | `String` | `'` | Suffix will display on the right of the input field. |
 
 
 ### Slots

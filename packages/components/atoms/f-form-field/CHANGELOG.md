@@ -9,14 +9,15 @@ v2.0.0
 *August 5, 2021*
 
 ### Remove
-- `labelStyle` prop.
-- `Inline` and `InlineNarrow` styles.
-- `hasInputDescription` prop.
+- **Breaking Change**: `labelStyle` prop.
+- **Breaking Change**: `Inline` and `InlineNarrow` styles.
 
 ### Added
 - `shouldShowLabelText` prop.
-- `labelDescription` prop.
 - Documentation.
+
+### Changed
+- **Breaking Change**: Replaced `description` slot and `hasInputDescription` prop with `labelDescription` prop.
 
 
 v1.21.0
