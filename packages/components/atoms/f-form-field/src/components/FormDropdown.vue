@@ -32,7 +32,7 @@
 import { CaretIcon } from '@justeat/f-vue-icons';
 
 export default {
-    name: 'FormField',
+    name: 'FormDropdown',
 
     components: {
         CaretIcon
