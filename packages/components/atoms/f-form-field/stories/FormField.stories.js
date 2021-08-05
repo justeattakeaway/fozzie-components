@@ -70,7 +70,6 @@ export const FormFieldComponent = () => ({
             :label-text="labelText"
             :input-type="inputType"
             :shouldShowLabelText="shouldShowLabelText"
-            :label-style="labelStyle"
             :field-size="fieldSize"
             :has-error="hasError"
             :dropdown-options="dropdownOptions"
