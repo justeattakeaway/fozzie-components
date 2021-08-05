@@ -14,6 +14,7 @@
             data-test-id="checkout-loading-spinner">
             <div :class="$style['c-spinner']" />
         </div>
+        <!-- <age-verification v-if="shouldShowAgeVerifcation" /> -->
         <div
             v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
@@ -163,6 +164,7 @@ import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
 import AddressBlock from './Address.vue';
+import AgeVerification from './AgeVerification.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
@@ -205,6 +207,7 @@ export default {
 
     components: {
         AddressBlock,
+        AgeVerification,
         Alert,
         FButton,
         Card,
@@ -226,6 +229,11 @@ export default {
     ],
 
     props: {
+        shouldShowAgeVerifcation: {
+            type: Boolean,
+            required: true
+        },
+
         getCheckoutUrl: {
             type: String,
             required: true
