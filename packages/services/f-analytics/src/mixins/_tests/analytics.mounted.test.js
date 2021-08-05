@@ -5,7 +5,7 @@ import analyticsMixin from '../analytics.mixin.vue';
 import {
     createStore,
     $cookies
-} from './helpers/setup';
+} from '../../tests/helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -17,7 +17,6 @@ describe('Analytics', () => {
     });
 
     describe('mounted ::', () => {
-        let preparePageMock;
         let prepareAnalyticsMock;
         let pushAnalyticsMock;
 
@@ -29,7 +28,6 @@ describe('Analytics', () => {
                 store: createStore()
             };
             component.mixins[0].created = jest.fn(() => true);
-            preparePageMock = jest.spyOn(component.mixins[0].methods, 'preparePage').mockImplementationOnce(() => true);
             prepareAnalyticsMock = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
             pushAnalyticsMock = jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
 
@@ -43,11 +41,6 @@ describe('Analytics', () => {
                     }
                 }
             );
-        });
-
-        it('should make a call to preparePage', () => {
-            // Assert
-            expect(preparePageMock).toHaveBeenCalled();
         });
 
         it('should make a call to prepareAnalytics', () => {
