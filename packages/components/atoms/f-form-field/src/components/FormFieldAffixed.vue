@@ -19,7 +19,7 @@
             :data-test-id="testId.input"
             @change="updateInput">
 
-        <div
+        <span
             v-if="prefix"
             :class="[
                 $style['c-formField-affix'],
@@ -28,9 +28,9 @@
             :data-test-id="testId.prefix"
             @click="addFocus">
             {{ prefix }}
-        </div>
+        </span>
 
-        <div
+        <span
             v-if="suffix"
             :class="[
                 $style['c-formField-affix'],
@@ -39,7 +39,7 @@
             :data-test-id="testId.suffix"
             @click="addFocus">
             {{ suffix }}
-        </div>
+        </span>
     </div>
 </template>
 
