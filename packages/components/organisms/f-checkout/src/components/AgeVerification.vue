@@ -18,6 +18,32 @@
             {{ $t(`ageVerification.description`) }}
         </p>
 
+        <form-field
+            id="day-selection"
+            input-type="dropdown"
+            :label-text="$t(`ageVerification.ageSelection.day`)"
+            :dropdown-options="days"
+            :value="days[0]" />
+
+        <form-field
+            id="month-selection"
+            input-type="dropdown"
+            :label-text="$t(`ageVerification.ageSelection.month`)"
+            :dropdown-options="months"
+            :value="months[0]" />
+        <form-field
+            id="year-selection"
+            input-type="dropdown"
+            :label-text="$t(`ageVerification.ageSelection.year`)"
+            :dropdown-options="years"
+            :value="years[0]" />
+
+        <p
+            :class="$style['c-checkout-ageVerification-askForIdDescription']"
+            data-test-id="checkout-age-verification-askForIdDescription">
+            {{ $t(`ageVerification.askForIdDescription`) }}
+        </p>
+
         <f-button
             :class="$style['c-checkout-ageVerification-button']"
             button-size="large"
@@ -34,7 +60,9 @@
 // import { mapState } from 'vuex';
 import Card from '@justeat/f-card';
 import FButton from '@justeat/f-button';
+import FormField from '@justeat/f-form-field';
 // import SadBagIconDecorator from '../assets/images/jet-sad-bag.svg';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import '@justeat/f-button/dist/f-button.css';
 import '@justeat/f-card/dist/f-card.css';
 // import {
@@ -46,7 +74,8 @@ import '@justeat/f-card/dist/f-card.css';
 export default {
     components: {
         Card,
-        FButton
+        FButton,
+        FormField
         // SadBagIconDecorator
         // },
         // mixins: [
@@ -65,12 +94,21 @@ export default {
         //         type: String,
         //         default: ''
         //     }
-        // },
+    },
 
-        // computed: {
+    computed: {
         //     ...mapState(VUEX_CHECKOUT_MODULE, [
         //         'restaurant'
         //     ])
+        days () {
+            return [1, 2, 3, 4, 5];
+        },
+        months () {
+            return [1, 2, 3, 4, 5];
+        },
+        years () {
+            return [1, 2, 3, 4, 5];
+        }
         // },
 
         // mounted () {

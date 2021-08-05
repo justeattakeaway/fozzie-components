@@ -14,7 +14,7 @@
             data-test-id="checkout-loading-spinner">
             <div :class="$style['c-spinner']" />
         </div>
-        <!-- <age-verification v-if="shouldShowAgeVerifcation" /> -->
+        <age-verification v-if="shouldShowAgeVerification" />
         <div
             v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
@@ -229,7 +229,7 @@ export default {
     ],
 
     props: {
-        shouldShowAgeVerifcation: {
+        shouldShowAgeVerification: {
             type: Boolean,
             required: true
         },
