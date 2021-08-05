@@ -32,8 +32,20 @@
                 </template>
             </form-label>
 
+            <form-field-affixed
+                v-if="isAffixedField"
+                :id="uniqueId"
+                :attributes="$attrs"
+                :type="normalisedInputType"
+                :value="value"
+                :field-size="fieldSize"
+                :prefix="prefix"
+                :suffix="suffix"
+                :has-error="hasError"
+                v-on="listeners" />
+
             <form-dropdown
-                v-if="isDropdown"
+                v-else-if="isDropdown"
                 :id="uniqueId"
                 :attributes="$attrs"
                 :type="normalisedInputType"
@@ -128,6 +140,7 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import FormFieldAffixed from './FormFieldAffixed.vue';
 import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
 import debounce from '../services/debounce';
@@ -137,6 +150,7 @@ import {
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
     VALID_ICON_INPUT_TYPES,
+    VALID_AFFIXED_INPUT_TYPES,
     VALID_TRAILING_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES,
@@ -148,6 +162,7 @@ export default {
     name: 'FormField',
 
     components: {
+        FormFieldAffixed,
         FormDropdown,
         FormLabel
     },
@@ -226,6 +241,18 @@ export default {
         assistiveText: {
             type: String,
             default: ''
+        },
+
+        prefix: {
+            type: String,
+            default: '',
+            validator: value => (value.length <= 3)
+        },
+
+        suffix: {
+            type: String,
+            default: '',
+            validator: value => (value.length <= 3)
         }
     },
 
@@ -320,6 +347,14 @@ export default {
 
         hasTrailingIcon () {
             return Boolean(this.$slots['icon-trailing']);
+        },
+
+        isAffixedField () {
+            return Boolean(this.prefix || this.suffix);
+        },
+
+        isAffixedType () {
+            return VALID_AFFIXED_INPUT_TYPES.includes(this.inputType);
         }
     },
 
@@ -363,6 +398,20 @@ export default {
 
             if (this.isDropdown && this.hasTrailingIcon) {
                 throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.isAffixedField && !this.isAffixedType) {
+                const afixType = this.prefix ? 'prefix' : 'suffix';
+
+                throw new TypeError(`Form field is set to have a "${afixType}" and inputType="${this.inputType}", "${afixType}" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.prefix && this.hasLeadingIcon) {
+                throw new TypeError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
+            }
+
+            if (this.suffix && this.hasTrailingIcon) {
+                throw new TypeError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
             }
         }
     }

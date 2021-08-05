@@ -2,7 +2,12 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
-    DEFAULT_INPUT_TYPE, VALID_ICON_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES, VALID_TRAILING_ICON_INPUT_TYPES
+    DEFAULT_INPUT_TYPE,
+    VALID_ICON_INPUT_TYPES,
+    VALID_AFFIXED_INPUT_TYPES,
+    VALID_INPUT_TYPES,
+    VALID_LABEL_STYLES,
+    VALID_TRAILING_ICON_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
@@ -389,6 +394,94 @@ describe('FormField', () => {
                 expect(wrapper.vm.hasTrailingIcon).toEqual(false);
             });
         });
+
+        describe('isAffixedField :: ', () => {
+            describe('when `prefix` value exists ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text',
+                        prefix: '£'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return true`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAffixedField).toBe(true);
+                });
+
+                it('should display `affixedFormField` wrapper', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affixed-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(true);
+                });
+            });
+
+            describe('when `suffix` value exists ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text',
+                        suffix: '£'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return true`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAffixedField).toBe(true);
+                });
+
+                it('should display `affixedFormField` wrapper', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affixed-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(true);
+                });
+            });
+
+            describe('when neither `prefix` or `suffix` value exist ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return false`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAffixedField).toBe(false);
+                });
+
+                it('should not display `affixedFormField` wrapper', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affix-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(false);
+                });
+            });
+        });
     });
 
     describe('attrs ::', () => {
@@ -602,6 +695,84 @@ describe('FormField', () => {
                             }
                         });
                     }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+                });
+            });
+
+            describe('when `isAffixedField` is true', () => {
+                it.each([VALID_AFFIXED_INPUT_TYPES])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = {
+                        inputType,
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each([
+                    'dropdown',
+                    'textarea',
+                    'checkbox',
+                    'radio',
+                    null
+                ])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = {
+                        inputType,
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData
+                        });
+                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
+                });
+            });
+
+            describe('when `prefix` is provided', () => {
+                it('should throw an error when `leadingIcon` added', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).toThrowError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
+                });
+            });
+
+            describe('when `suffix` is provided', () => {
+                it('should throw an error when `trailingIcon` added', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        suffix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
                 });
             });
         });
