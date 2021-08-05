@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import analyticsMixin from '../analytics.mixin.vue';
+import * as utils from '../../utils/helpers';
 import {
     createStore,
     $route,
@@ -148,6 +149,64 @@ describe('Analytics', () => {
                 // Assert
                 expect(pushAnalyticsSpy).toHaveBeenCalled();
                 expect(windowsPushMock).lastCalledWith(expected);
+            });
+        });
+
+        describe('preparePageData ::', () => {
+            let component;
+            let prepareAnalyticsSpy;
+            let storeUpdatePageDataSpy;
+
+            beforeEach(() => {
+                component = {
+                    render () {},
+                    mixins: [analyticsMixin],
+                    store: createStore(),
+                    computed: {
+                        isServer () {
+                            return false;
+                        }
+                    }
+                };
+
+                component.mixins[0].created = jest.fn(() => true);
+                jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
+                prepareAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics');
+                storeUpdatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePageData');
+            });
+            it('should should set the correct pageData', () => {
+                const expected = {
+                    name: 'test-route-name',
+                    group: 'test-group',
+                    httpStatusCode: 0,
+                    isCached: false,
+                    conversationId: '',
+                    requestId: '',
+                    orientation: 'Landscape',
+                    display: 'full-size'
+                };
+
+                jest.spyOn(utils, 'getDisplaySize').mockImplementation(() => expected.display);
+                jest.spyOn(utils, 'getOrientation').mockImplementation(() => expected.orientation);
+                jest.spyOn(utils, 'mapRouteToGroup').mockImplementation(() => expected.group);
+                jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
+
+                // Act
+                shallowMount(
+                    component,
+                    {
+                        localVue,
+                        mocks:
+                        {
+                            $route,
+                            $i18n
+                        }
+                    }
+                );
+
+                // Assert
+                expect(prepareAnalyticsSpy).toHaveBeenCalled();
+                expect(storeUpdatePageDataSpy).lastCalledWith(expected);
             });
         });
     });

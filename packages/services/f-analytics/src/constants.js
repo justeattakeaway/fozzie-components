@@ -54,9 +54,25 @@ const MAP_ROUTE_TO_FEATURE_NAME = {
     checkout: 'global_checkout'
 };
 
+const GROUPS_FEATURES_ROUTES = [
+    {
+        group: 'Account',
+        features: [
+            { feature: 'global_registration', routes: ['account-register'] }
+        ]
+    },
+    {
+        group: 'CheckoutXXXß',
+        features: [
+            { feature: 'global_checkout', routes: ['checkout', 'test-route-name'] }
+        ]
+    }
+];
+
 export {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME
+    MAP_ROUTE_TO_FEATURE_NAME,
+    GROUPS_FEATURES_ROUTES
 };

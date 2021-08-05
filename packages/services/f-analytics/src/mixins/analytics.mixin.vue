@@ -6,12 +6,18 @@ import {
     DEFAULT_APP_TYPE,
     MAP_ROUTE_TO_FEATURE_NAME
 } from '../constants';
+import {
+    getDisplaySize,
+    getOrientation,
+    mapRouteToGroup,
+    mapRouteToFeature
+} from '../utils/helpers';
 
 export default {
     name: 'Analytics',
 
     computed: {
-        ...mapState('f-analytics', ['platformData']),
+        ...mapState('f-analytics', ['platformData', 'pageData']),
 
         isServerSide () {
             return typeof (window) === 'undefined';
@@ -35,13 +41,12 @@ export default {
     },
 
     methods: {
-        ...mapActions('f-analytics', ['updatePlatformData']),
+        ...mapActions('f-analytics', ['updatePlatformData', 'updatePageData']),
 
         prepareServersideAnalytics () {
             if (this.isServerSide) {
                 // Only available serverside
                 const platformData = { ...this.platformData };
-
                 platformData.environment = process.env.justEatEnvironment || 'localhost';
                 platformData.version = process.env.FEATURE_VERSION || '0.0.0.0';
                 platformData.instancePosition = process.env.INSTANCE_POSITION || 'N/A';
@@ -66,6 +71,28 @@ export default {
             platformData.currency = COUNTRY_INFO[this.$i18n.locale].currency;
 
             this.updatePlatformData(platformData);
+
+            this.preparePageData();
+        },
+
+        // TODO: pass auth, conversationid etc...
+        preparePageData () {
+            const pageData = {
+                ...this.pageData,
+                group: mapRouteToGroup(this.$route.name),
+                name: mapRouteToFeature(this.$route.name)
+            };
+
+            pageData.httpStatusCode = 0;
+            pageData.isCached = false;
+            pageData.conversationId = '';
+            pageData.requestId = '';
+
+            // TODO: process.client & update tests
+            pageData.display = getDisplaySize();
+            pageData.orientation = getOrientation();
+
+            this.updatePageData(pageData);
         },
 
         pushAnalytics () {

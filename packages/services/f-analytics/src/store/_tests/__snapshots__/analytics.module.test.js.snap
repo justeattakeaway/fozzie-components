@@ -6,6 +6,16 @@ exports[`AnalyticsModule mutations :: ({
       commit('updatePlatformData', platformData);
     } :: should update state with \`platformData\` 1`] = `
 Object {
+  "pageData": Object {
+    "conversationId": "",
+    "display": "",
+    "group": "",
+    "httpStatusCode": 0,
+    "isCached": false,
+    "name": "",
+    "orientation": "",
+    "requestId": "",
+  },
   "platformData": Object {
     "platformData": Object {
       "appType": "test-appType",

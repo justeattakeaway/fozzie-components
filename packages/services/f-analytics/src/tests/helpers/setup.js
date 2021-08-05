@@ -14,6 +14,16 @@ const defaultState = {
         currency: '',
         version: '',
         instancePosition: ''
+    },
+    pageData: {
+        name: '',
+        group: '',
+        httpStatusCode: 0,
+        isCached: false,
+        conversationId: '',
+        requestId: '',
+        orientation: '',
+        display: ''
     }
 };
 
@@ -35,7 +45,8 @@ const modifieldState = {
 };
 
 const defaultActions = {
-    updatePlatformData: jest.fn()
+    updatePlatformData: jest.fn(),
+    updatePageData: jest.fn()
 };
 
 const gtmSettings = {
