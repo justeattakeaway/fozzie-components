@@ -416,7 +416,7 @@ describe('FormField', () => {
                     expect(wrapper.vm.isAffixedField).toBe(true);
                 });
 
-                it('should display `affixedFormField`', () => {
+                it('should display `affixedFormField` wrapper', () => {
                     // Arrange
                     const affixedFormField = wrapper.find('[data-test-id="formfield-affixed-input"]');
 
@@ -445,7 +445,7 @@ describe('FormField', () => {
                     expect(wrapper.vm.isAffixedField).toBe(true);
                 });
 
-                it('should display `affixedFormField`', () => {
+                it('should display `affixedFormField` wrapper', () => {
                     // Arrange
                     const affixedFormField = wrapper.find('[data-test-id="formfield-affixed-input"]');
 
@@ -473,7 +473,7 @@ describe('FormField', () => {
                     expect(wrapper.vm.isAffixedField).toBe(false);
                 });
 
-                it('wrapper should display `affixedFormField`', () => {
+                it('should not display `affixedFormField` wrapper', () => {
                     // Arrange
                     const affixedFormField = wrapper.find('[data-test-id="formfield-affix-input"]');
 

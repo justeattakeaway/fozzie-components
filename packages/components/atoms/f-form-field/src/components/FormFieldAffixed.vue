@@ -111,6 +111,12 @@ export default {
 </script>
 
 <style lang="scss" module>
+$affixed-field-sizes: (
+    small:  ($form-input-height--small, $form-input-padding--small),
+    medium: ($form-input-height, $form-input-padding),
+    large: ($form-input-height--large, $form-input-padding--large),
+);
+
 .c-formField--affixed {
     @extend %c-formField-field;
     display: flex;
@@ -139,43 +145,28 @@ export default {
     }
 }
 
-    // Styling for either the prefix or suffix
-    .c-formField-affix {
-        height: 100%;
-        font-family: $font-family-base;
-        @include font-size($form-input-fontSize);
-        color: $form-input-secondaryTextColour;
-    }
-
-    .c-formField-prefix {
-        order: 1;
-    }
-    .c-formField-suffix {
-        order: 3;
-    }
-
-
-.c-formField--affixed--medium {
-    height: $form-input-height;
-
-    .c-formField-affix {
-        padding: $form-input-padding;
-    }
+// Styling for either the prefix or suffix
+.c-formField-affix {
+    height: 100%;
+    font-family: $font-family-base;
+    @include font-size($form-input-fontSize);
+    color: $form-input-secondaryTextColour;
 }
 
-.c-formField--affixed--small {
-    height: $form-input-height--small;
-
-    .c-formField-affix {
-        padding: $form-input-padding--small;
-    }
+.c-formField-prefix {
+    order: 1;
+}
+.c-formField-suffix {
+    order: 3;
 }
 
-.c-formField--affixed--large {
-    height: $form-input-height--large;
+@each $size, $properties in $affixed-field-sizes {
+    .c-formField--affixed--#{$size} {
+        height: nth($properties, 1);
 
-    .c-formField-affix {
-        padding: $form-input-padding--large;
+        .c-formField-affix {
+            padding: nth($properties, 2);
+        }
     }
 }
 
