@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0
+------------------------------
+*August 5, 2021*
+
+### Remove
+- **Breaking Change**: `labelStyle` prop.
+- **Breaking Change**: `Inline` and `InlineNarrow` styles.
+
+### Added
+- `shouldShowLabelText` prop.
+- Documentation.
+
+### Changed
+- **Breaking Change**: Replaced `description` slot and `hasInputDescription` prop with `labelDescription` prop.
+
+
 v1.21.0
 ------------------------------
 *August 3, 2021*
