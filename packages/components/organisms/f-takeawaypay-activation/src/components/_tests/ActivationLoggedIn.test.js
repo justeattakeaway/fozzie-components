@@ -8,9 +8,7 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-const createStore = () => {
-    return new Vuex.Store({});
-};
+const createStore = () => new Vuex.Store({});
 
 describe('ActivationLoggedIn', () => {
     const propsData = {
