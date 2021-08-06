@@ -31,13 +31,13 @@ export default {
                 timeout: 20000
             };
 
-            const request = {
+            const request = [{
                 op: 'replace',
                 path: '/consumer',
                 value: {
                     id: consumerId
                 }
-            };
+            }];
 
             const { status } = await axios.patch(url, request, config);
             return status === 200;
