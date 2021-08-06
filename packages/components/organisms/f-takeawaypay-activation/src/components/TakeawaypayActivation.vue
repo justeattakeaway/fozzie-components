@@ -148,7 +148,7 @@ export default {
 
     methods: {
         async initialize () {
-            const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl);
+            const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl, this.$store, this.$logger);
 
             if (available) {
                 if (this.authToken) {

@@ -1,10 +1,16 @@
+import Vuex from 'vuex';
 import { mount, shallowMount, createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import ActivationLoggedIn from '../ActivationLoggedIn.vue';
-import i18n from './helpers/setup';
+import { i18n, $logger } from './helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
+localVue.use(Vuex);
+
+const createStore = () => {
+    return new Vuex.Store({});
+};
 
 describe('ActivationLoggedIn', () => {
     const propsData = {
@@ -50,9 +56,13 @@ describe('ActivationLoggedIn', () => {
             let wrapper;
 
             const createWrapper = () => mount(ActivationLoggedIn, {
+                store: createStore(),
                 i18n,
                 localVue,
-                propsData
+                propsData,
+                mocks: {
+                    $logger
+                }
             });
 
             afterEach(() => {
