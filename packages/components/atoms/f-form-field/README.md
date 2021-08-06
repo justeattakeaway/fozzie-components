@@ -69,22 +69,22 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| `locale` | `String` | `''` | Sets locale for I18n. |
-| `labelText` | `String` | `''` | The text that will be displayed in the form field label. |
-| `inputType` | `String` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox`, `dropdown`, `number`, `tel`, `textarea`  |
-| `shouldShowLabelText` | `Boolean` | `true` | Hides the label if set to `false` |
-| `fieldSize` | `String` | `medium` | The size of the form field. <br>Options: `small`, `medium`, `large` |
-| `value` | `String` or `Number` | `''` | The value of the form field. |
-| `hasError` | `Boolean` | `false` | When `true` border colour changes to red. |
+| `assistiveText` | `String` | `''` | Text to assist the user that will display underneath the input field. |
 | `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. |
+| `fieldSize` | `String` | `medium` | The size of the form field. <br>Options: `small`, `medium`, `large` |
+| `hasError` | `Boolean` | `false` | When `true` border colour changes to red. |
+| `inputType` | `String` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox`, `dropdown`, `number`, `tel`, `textarea`  |
 | `isGrouped` | `Boolean` | `false` | When `true` will remove margin between all grouped form fields. |
-| `minNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `min` property when `inputType` is `number` |
+| `labelDescription` | `String` | `''` | Extra text that will display underneath the label text. |
+| `labelDetails` | `String` | `''` | Details for the label that will display on the right of label text. |
+| `labelText` | `String` | `''` | The text that will be displayed in the form field label. |
+| `locale` | `String` | `''` | Sets locale for I18n. |
 | `maxNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `max` property when `inputType` is `number` |
-| `labelDescription` | `String` | `'` | Extra text that will display underneath the label text. |
-| `labelDetails` | `String` | `'` | Details for the label that will display on the right of label text. |
-| `assistiveText` | `String` | `'` | Text to assist the user that will display underneath the input field. |
-| `prefix` | `String` | `'` | Prefix will display on the left of the input field. |
-| `suffix` | `String` | `'` | Suffix will display on the right of the input field. |
+| `minNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `min` property when `inputType` is `number` |
+| `prefix` | `String` | `''` | Prefix will display on the left of the input field. |
+| `shouldShowLabelText` | `Boolean` | `true` | Hides the label if set to `false` |
+| `suffix` | `String` | `''` | Suffix will display on the right of the input field. |
+| `value` | `String` or `Number` | `''` | The value of the form field. |
 
 
 ### Slots
@@ -95,6 +95,7 @@ Available slots that can be used.
 | ----- | ----- | ----------- |
 | `icon-leading` | Icon | Will display an icon inside the input field on the left hand side. |
 | `icon-trailing` | Icon | Will display an icon inside the input field on the right hand side. |
+
 ### Events
 
 The events that can be subscribed to are as follows (if any):

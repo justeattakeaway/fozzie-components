@@ -199,6 +199,104 @@ describe('FormField', () => {
                 expect(formInput.attributes('class')).toContain(className);
             });
         });
+
+        describe('shouldShowLabelText ::', () => {
+            it('should display `FormLabel` when set to `true`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: true
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
+
+                // Assert
+                expect(formLabel.exists()).toBe(true);
+            });
+
+            it('should not display `FormLabel` when set to `false`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: false
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
+
+                // Assert
+                expect(formLabel.exists()).toBe(false);
+            });
+        });
+
+        describe('LabelDetails ::', () => {
+            it('should display `LabelDetails` when description is provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDetails: 'labelDetails'
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDetails = wrapper.find('[data-test-id="formfield-label-details"]');
+
+                // Assert
+                expect(formLabelDetails.exists()).toBe(true);
+            });
+
+            it('should not display `LabelDetails` when description is not provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDetails: null
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDetails = wrapper.find('[data-test-id="formfield-label-details"]');
+
+                // Assert
+                expect(formLabelDetails.exists()).toBe(false);
+            });
+        });
+
+        describe('labelDescription ::', () => {
+            it('should display `labelDescription` when description is provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDescription: 'labelDescription'
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDescription = wrapper.find('[data-test-id="formfield-label-description"]');
+
+                // Assert
+                expect(formLabelDescription.exists()).toBe(true);
+            });
+
+            it('should not display `labelDescription` when description is not provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDescription: null
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDescription = wrapper.find('[data-test-id="formfield-label-description"]');
+
+                // Assert
+                expect(formLabelDescription.exists()).toBe(false);
+            });
+        });
     });
 
     describe('computed :: ', () => {

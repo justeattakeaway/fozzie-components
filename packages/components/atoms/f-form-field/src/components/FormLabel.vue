@@ -11,6 +11,7 @@
         ]">
         <span
             v-if="labelDetails"
+            :data-test-id="testId.details"
             :class="$style['c-formField-label-details']">
             {{ labelDetails }}
         </span>
@@ -19,6 +20,7 @@
 
         <span
             v-if="labelDescription"
+            :data-test-id="testId.description"
             :class="[
                 'u-spacingTop',
                 'u-spacingBottom--large',
@@ -34,6 +36,10 @@ export default {
     name: 'FormLabel',
     components: {},
     props: {
+        attributes: {
+            type: Object,
+            default: () => {}
+        },
         labelFor: {
             type: String,
             required: true
@@ -54,6 +60,15 @@ export default {
     computed: {
         hasLabelText () {
             return this.$slots.default && !!this.$slots.default[0].text.length;
+        },
+
+        testId () {
+            const formFieldName = (this.attributes && this.attributes.name ? this.attributes.name : null);
+
+            return {
+                details: formFieldName ? `formfield-${formFieldName}-label-details` : 'formfield-label-details',
+                description: formFieldName ? `formfield-${formFieldName}-label-description` : 'formfield-label-description'
+            };
         }
     }
 };
@@ -64,11 +79,6 @@ export default {
 $form-label-colour              : $color-content-default; // Text colour of form labels
 $form-label-fontSize            : 'body-s';
 $form-label-weight              : $font-weight-bold;
-
-$form-inlineLabel-padding       : spacing(x1.5) spacing(x2);
-$form-inlineLabel-colour        : $color-content-subdued;
-$form-inlineLabel-fontSize      : 'body-l';
-$form-inlineLabel-weight        : $font-weight-regular;
 
 .c-formField-label {
     display: block;
@@ -81,37 +91,6 @@ $form-inlineLabel-weight        : $font-weight-regular;
 .c-formField-label--disabled {
     color: $color-content-disabled;
     pointer-events: none;
-}
-
-.c-formField-label--inline {
-    position: absolute;
-    top: 50%;
-    left: 1px;  // Adds pixel to match `FormField` border
-    padding: $form-inlineLabel-padding;
-    margin-bottom: 0;
-    transform: translateY(-50%);
-
-    @include font-size($form-inlineLabel-fontSize);
-    font-weight: $form-inlineLabel-weight;
-    color: $form-inlineLabel-colour;
-    cursor: text; // make the cursor the same as the default input hover cursor
-}
-
-input {
-    &:focus {
-        // select the .c-formField-label--inline element if it's preceded by an input
-        & + .c-formField-label--inline {
-            opacity: 0;
-            z-index: -1;
-        }
-    }
-
-    // select the .c-formField-label--inline element
-    // if it's preceded by an input whose placeholder isn't being shown (i.e. the input has a value)
-    &:not(:placeholder-shown) + .c-formField-label--inline {
-        opacity: 0;
-        z-index: -1;
-    }
 }
 
 .c-formField-label-details {
