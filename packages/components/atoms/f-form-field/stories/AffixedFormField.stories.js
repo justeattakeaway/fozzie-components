@@ -18,6 +18,9 @@ export const AffixedFormFieldComponent = () => ({
         locale: {
             default: select('Locale', ['en-GB', 'en-AU'])
         },
+        fieldSize: {
+            default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
+        },
         inputType: {
             default: select('Input Type', VALID_AFFIXED_INPUT_TYPES)
         },
@@ -27,8 +30,8 @@ export const AffixedFormFieldComponent = () => ({
         hasError: {
             default: boolean('hasError', false)
         },
-        fieldSize: {
-            default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
+        shouldShowLabelText: {
+            default: boolean('shouldShowLabelText', true)
         },
         labelDetails: {
             default: text('Label Details', '')
@@ -53,6 +56,7 @@ export const AffixedFormFieldComponent = () => ({
     `<form-field
         locale="en-GB"
         label-text="Affixed Field"
+        :shouldShowLabelText="shouldShowLabelText"
         :input-type="inputType"
         :field-size="fieldSize"
         :has-error="hasError"
