@@ -13,6 +13,9 @@ v0.7.0
 ### Changed
 - Mock Factory: Setup Mock Response does not require request data to be provided
 
+### Fixed
+- Correctly point the main entry point at the dist folder
+
 
 v0.6.1
 ------------------------------
