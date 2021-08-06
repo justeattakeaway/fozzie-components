@@ -8,7 +8,7 @@ import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation.module';
-import CheckoutMock from '../src/demo/checkoutMock';
+import CheckoutMock, { mockedRequests } from '../src/demo/checkoutMock';
 
 export default {
     title: 'Components/Organisms',
@@ -22,41 +22,7 @@ Vue.use(Vuex);
 
 const paymentPageUrlPrefix = '#/pay';
 
-const urls = {
-    getCheckoutDeliveryUrl: '/checkout-delivery.json',
-    getCheckoutDeliveryAsapUrl: '/checkout-delivery-user-selected-asap.json',
-    getCheckoutDeliveryLaterUrl: '/checkout-delivery-user-selected-later.json',
-    getCheckoutDeliveryUnavailableUrl: '/checkout-delivery-user-selected-unavailable-time.json',
-    getCheckoutCollectionUrl: '/checkout-collection.json',
-    getCheckoutCollectionAsapUrl: '/checkout-collection-user-selected-asap.json',
-    getCheckoutCollectionLaterUrl: '/checkout-collection-user-selected-later.json',
-    getCheckoutDineInUrl: '/checkout-dinein.json',
-    getCheckoutTimeoutUrl: '/checkout-timeout-get-error.json',
-    getCheckoutAccessForbiddenUrl: '/checkout-403-get-error.json',
-    getCheckoutErrorUrl: '/checkout-500-get-error.json',
-    checkoutAvailableFulfilmentUrl: '/checkout-available-fulfilment.json',
-    checkoutAvailableFulfilmentNoTimeAvailableUrl: '/checkout-available-fulfilment-no-time-available.json',
-    checkoutAvailableFulfilmentPreorderUrl: '/checkout-available-fulfilment-preorder.json',
-    createGuestUrl: '/create-guest.json',
-    getBasketDeliveryUrl: '/get-basket-delivery.json',
-    getBasketCollectionUrl: '/get-basket-collection.json',
-    getBasketDineInUrl: '/get-basket-dinein.json',
-    getBasketTimeoutUrl: '/get-basket-timeout.json',
-    updateCheckoutUrl: '/update-checkout.json',
-    updateCheckoutRestaurantNotTakingOrdersUrl: '/update-checkout-restaurant-not-taking-orders.json',
-    updateCheckoutAdditionalItemsRequiredUrl: '/update-checkout-additional-items-required.json',
-    updateCheckoutAccessForbiddenUrl: '/update-checkout-403.json',
-    updateCheckoutUnavailableTimeUrl: '/update-checkout-time-unavailable.json',
-    updateCheckoutTimeoutUrl: '/update-checkout-timeout.json',
-    getAddressUrl: '/get-address.json',
-    placeOrderUrl: '/place-order.json',
-    placeOrderDuplicateUrl: '/place-order-duplicate.json',
-    placeOrderTimeout: '/place-order-timeout.json',
-    getGeoLocationUrl: '/get-geo-location.json',
-    getCustomerUrl: '/get-customer.json'
-};
-
-CheckoutMock(urls);
+CheckoutMock();
 
 const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
 const additionalItemsRequired = 'Additional Items Required Issue (Response from server but order not fulfillable)';
@@ -116,19 +82,18 @@ const fulfilmentTimeOptions = {
     'Selected Unavailable Time': 'user-selected-unavailable-time'
 };
 
-const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU'
+const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
 
 export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            urls,
-            createGuestUrl: urls.createGuestUrl,
-            getAddressUrl: urls.getAddressUrl,
+            createGuestUrl: mockedRequests.createGuest.url,
+            getAddressUrl: mockedRequests.getAddress.url,
             loginUrl: '/login',
             paymentPageUrlPrefix,
-            getGeoLocationUrl: urls.getGeoLocationUrl,
-            getCustomerUrl: urls.getCustomerUrl
+            getGeoLocationUrl: mockedRequests.getGeoLocation.url,
+            getCustomerUrl: mockedRequests.getCustomer.url
         };
     },
     props: {
@@ -197,18 +162,18 @@ export const CheckoutComponent = () => ({
                 return `/update-checkout-${this.patchCheckoutError}.json`;
             }
 
-            return urls.updateCheckoutUrl;
+            return mockedRequests.updateCheckout.url;
         },
 
         placeOrderUrl () {
-            return this.placeOrderError ? `/place-order-${this.placeOrderError}.json` : urls.placeOrderUrl;
+            return this.placeOrderError ? `/place-order-${this.placeOrderError}.json` : mockedRequests.placeOrder.url;
         },
 
         checkoutAvailableFulfilmentUrl () {
             if (this.getCheckoutError === noTimeAvailable) {
-                return urls.checkoutAvailableFulfilmentNoTimeAvailableUrl;
+                return mockedRequests.checkoutAvailableFulfilmentNoTimeAvailable.url;
             }
-            return this.isAsapAvailable ? urls.checkoutAvailableFulfilmentUrl : urls.checkoutAvailableFulfilmentPreorderUrl;
+            return this.isAsapAvailable ? mockedRequests.checkoutAvailableFulfilment.url : mockedRequests.checkoutAvailableFulfilmentPreorder.url;
         }
     },
 
