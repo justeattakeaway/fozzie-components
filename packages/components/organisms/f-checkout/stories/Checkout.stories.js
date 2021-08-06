@@ -56,37 +56,9 @@ const urls = {
     getCustomerUrl: '/get-customer.json'
 };
 
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutDeliveryUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutDeliveryAsapUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutDeliveryLaterUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutDeliveryUnavailableUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutCollectionUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutCollectionAsapUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutCollectionLaterUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutDineInUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutTimeoutUrl);
-CheckoutMock.setupCheckoutMethod(urls.checkoutAvailableFulfilmentUrl);
-CheckoutMock.setupCheckoutMethod(urls.checkoutAvailableFulfilmentNoTimeAvailableUrl);
-CheckoutMock.setupCheckoutMethod(urls.checkoutAvailableFulfilmentPreorderUrl);
-CheckoutMock.setupCheckoutMethod(urls.createGuestUrl);
-CheckoutMock.setupCheckoutMethod(urls.getBasketDeliveryUrl);
-CheckoutMock.setupCheckoutMethod(urls.getBasketCollectionUrl);
-CheckoutMock.setupCheckoutMethod(urls.getBasketDineInUrl);
-CheckoutMock.setupCheckoutMethod(urls.getBasketTimeoutUrl);
-CheckoutMock.setupCheckoutMethod(urls.updateCheckoutUrl);
-CheckoutMock.setupCheckoutMethod(urls.updateCheckoutRestaurantNotTakingOrdersUrl);
-CheckoutMock.setupCheckoutMethod(urls.updateCheckoutAdditionalItemsRequiredUrl);
-CheckoutMock.setupCheckoutMethod(urls.updateCheckoutAccessForbiddenUrl);
-CheckoutMock.setupCheckoutMethod(urls.updateCheckoutUnavailableTimeUrl);
-CheckoutMock.setupCheckoutMethod(urls.updateCheckoutTimeoutUrl);
-CheckoutMock.setupCheckoutMethod(urls.getAddressUrl);
-CheckoutMock.setupCheckoutMethod(urls.placeOrderUrl);
-CheckoutMock.setupCheckoutMethod(urls.placeOrderDuplicateUrl);
-CheckoutMock.setupCheckoutMethod(urls.placeOrderTimeout);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutAccessForbiddenUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCheckoutErrorUrl);
-CheckoutMock.setupCheckoutMethod(urls.getGeoLocationUrl);
-CheckoutMock.setupCheckoutMethod(urls.getCustomerUrl);
+for (let [,value] of Object.entries(urls)) {
+    CheckoutMock.setupCheckoutMethod(value);
+}
 
 CheckoutMock.passThroughAny();
 
