@@ -1,0 +1,182 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import MediaElement from '../src/components/MediaElement.vue';
+import { ALIGN, FONT_SIZE } from '../src/constants';
+
+<Meta
+    title="Components/Molecules/Media Element (f-media-element)"
+    component={MediaElement}
+    argTypes={{
+        textSize: {
+            control: { type: 'select', options: [...Object.entries(FONT_SIZE).map(([, value]) => value)] },
+            defaultValue: 'md'
+        },
+        contentAlign: {
+            control: { type: 'select', options: [...Object.entries(ALIGN).map(([, value]) => value)] },
+            defaultValue: 'left'
+        },
+        imageAlign: {
+            control: { type: 'select', options: [...Object.entries(ALIGN).map(([, value]) => value)] },
+            defaultValue: 'center'
+        }
+    }}
+/>
+
+# Media Element
+
+This document describes the `f-media-element` and how to implement it within a page. The `f-media-element` can be
+displayed in different ways with a few props affecting how its displayed.
+
+## Default
+
+Below is the default state of `f-media-element`
+
+export const MediaElementComponent = (args, { argTypes }) => ({
+    components: { MediaElement },
+    props: Object.keys(argTypes),
+    template: '<media-element v-bind="$props" />'
+});
+
+<Canvas>
+    <Story
+        name="Default"
+        args={{
+            title: 'Example Title',
+            text: 'Example description text to show what the body text looks like.',
+            altText: 'Test alt text',
+            imageUrl: 'https://via.placeholder.com/200',
+        }}
+    >
+        {MediaElementComponent.bind({})}
+    </Story>
+</Canvas>
+
+## Text Size
+
+We can adjust the text size of the content block by changing the `textSize` prop. This can be set to *five* different
+sizes adjusted with a string passed to the prop.
+
+**XX Large** `xxl`
+<Story
+    name="Text Size XXL"
+    args={{
+        title: 'Example Title',
+        text: 'Example description text to show what the body text looks like.',
+        altText: 'Test alt text',
+        imageUrl: 'https://via.placeholder.com/200',
+        textSize: 'xxl'
+    }}
+>
+    {MediaElementComponent.bind({})}
+</Story>
+
+**Extra Large** `xl`
+<Story
+    name="Text Size XL"
+    args={{
+        title: 'Example Title',
+        text: 'Example description text to show what the body text looks like.',
+        altText: 'Test alt text',
+        imageUrl: 'https://via.placeholder.com/175',
+        textSize: 'xl'
+    }}
+>
+    {MediaElementComponent.bind({})}
+</Story>
+
+**Large** `lg`
+<Story
+    name="Text Size Large"
+    args={{
+        title: 'Example Title',
+        text: 'Example description text to show what the body text looks like.',
+        altText: 'Test alt text',
+        imageUrl: 'https://via.placeholder.com/150',
+        textSize: 'lg'
+    }}
+>
+    {MediaElementComponent.bind({})}
+</Story>
+
+**Medium** `md`
+<Story
+    name="Text Size Medium"
+    args={{
+        title: 'Example Title',
+        text: 'Example description text to show what the body text looks like.',
+        altText: 'Test alt text',
+        imageUrl: 'https://via.placeholder.com/125',
+        textSize: 'md'
+    }}
+>
+    {MediaElementComponent.bind({})}
+</Story>
+
+**Small** `sm`
+<Story
+    name="Text Size Small"
+    args={{
+        title: 'Example Title',
+        text: 'Example description text to show what the body text looks like.',
+        altText: 'Test alt text',
+        imageUrl: 'https://via.placeholder.com/100',
+        textSize: 'sm'
+    }}
+>
+    {MediaElementComponent.bind({})}
+</Story>
+
+## Image Align
+
+We can also adjust the image alignment with the `imageAlign` prop. This enables the image to be aligned within its
+parent using one of the following options.
+
+**Image Align Left** `left`
+<Story
+    name="Image Align Left"
+    args={{
+        title: 'Example Title',
+        text: 'Example description text to show what the body text looks like.',
+        altText: 'Test alt text',
+        imageUrl: 'https://via.placeholder.com/100',
+        textSize: 'sm',
+        imageAlign: 'left'
+    }}
+>
+    {MediaElementComponent.bind({})}
+</Story>
+
+**Image Align Center** `center`
+<Story
+    name="Image Align Center"
+    args={{
+        title: 'Example Title',
+        text: 'Example description text to show what the body text looks like.',
+        altText: 'Test alt text',
+        imageUrl: 'https://via.placeholder.com/100',
+        textSize: 'sm',
+        imageAlign: 'center'
+    }}
+>
+    {MediaElementComponent.bind({})}
+</Story>
+
+
+**Image Align Right** `right`
+<Story
+    name="Image Align Right"
+    args={{
+        title: 'Example Title',
+        text: 'Example description text to show what the body text looks like.',
+        altText: 'Test alt text',
+        imageUrl: 'https://via.placeholder.com/100',
+        textSize: 'sm',
+        imageAlign: 'right'
+    }}
+>
+    {MediaElementComponent.bind({})}
+</Story>
+
+## Content Align
+
+We can also apply an alignment to the content by using the `contentAlign` prop. This allows all the content including
+the `slot` to be aligned within its parent using one of the following options.
