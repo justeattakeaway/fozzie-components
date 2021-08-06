@@ -33,7 +33,8 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
 
     forEach([
         [100, 'firstName'],
-        [100, 'lastName']
+        [100, 'lastName'],
+        [50, 'emailAddress']
     ])
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
             // Arrange
