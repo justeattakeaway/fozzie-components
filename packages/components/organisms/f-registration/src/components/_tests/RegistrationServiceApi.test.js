@@ -1,4 +1,3 @@
-import httpModule from '@justeat/f-http';
 import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 
 describe('RegistrationServiceApi', () => {
@@ -8,12 +7,12 @@ describe('RegistrationServiceApi', () => {
             let receivedData = null;
             let receivedHeaders = null;
 
-            httpModule.createClient = () => ({
+            const httpClient = {
                 post: (url, data, headers) => {
                     receivedData = data;
                     receivedHeaders = headers;
                 }
-            });
+            };
 
             const tenant = 'uk';
             const url = 'http://localhost/account/register';
@@ -25,7 +24,7 @@ describe('RegistrationServiceApi', () => {
             };
 
             // Act
-            await RegistrationServiceApi.createAccount(url, data, tenant);
+            await RegistrationServiceApi.createAccount(httpClient, url, data, tenant);
 
             // Assert
             expect(receivedData).toBe(data);

@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import http from '@justeat/f-http';
+import httpModule from '@justeat/f-http';
 
 // Refer to f-http documentation for usage
 export default () => {
-    const httpClient = http.createClient();
+    const httpClient = new httpModule.CreateClient();
 
     Vue.prototype.$http = httpClient;
 };

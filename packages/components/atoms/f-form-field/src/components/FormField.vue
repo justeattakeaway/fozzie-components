@@ -11,37 +11,28 @@
         <div
             :class="$style['c-formField-fieldWrapper']">
             <form-label
-                v-if="!isInline"
-                :label-style="normalisedLabelStyle"
+                v-if="shouldShowLabelText"
                 :label-for="uniqueId"
-                :is-inline="isInline"
                 :is-disabled="isDisabled"
-                :label-details="labelDetails"
+                v-bind="$props"
                 :data-test-id="testId.label">
                 {{ labelText }}
-                <template #description>
-                    <span
-                        v-if="hasInputDescription"
-                        :class="[
-                            'u-spacingTop',
-                            'u-spacingBottom--large',
-                            $style['c-formField-label-description']
-                        ]">
-                        <slot />
-                    </span>
-                </template>
             </form-label>
 
-            <form-dropdown
-                v-if="isDropdown"
+            <form-field-affixed
+                v-if="isAffixedField"
                 :id="uniqueId"
                 :attributes="$attrs"
+                v-bind="$props"
                 :type="normalisedInputType"
-                :value="value"
-                :field-size="fieldSize"
-                :has-error="hasError"
+                v-on="listeners" />
+
+            <form-dropdown
+                v-else-if="isDropdown"
+                :id="uniqueId"
+                :attributes="$attrs"
+                v-bind="$props"
                 :has-icon="hasLeadingIcon"
-                :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
             <textarea
@@ -78,16 +69,6 @@
                     }]"
                 v-on="listeners"
             >
-
-            <form-label
-                v-if="isInline"
-                :id="`label-${uniqueId}`"
-                :label-for="uniqueId"
-                :label-style="normalisedLabelStyle"
-                :is-inline="isInline"
-                :data-test-id="`${testId.label}--inline`">
-                {{ labelText }}
-            </form-label>
 
             <span
                 v-if="hasLeadingIcon"
@@ -128,26 +109,28 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import FormFieldAffixed from './FormFieldAffixed.vue';
 import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
 import debounce from '../services/debounce';
 import tenantConfigs from '../tenants';
+
 import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
     VALID_ICON_INPUT_TYPES,
+    VALID_AFFIXED_INPUT_TYPES,
     VALID_TRAILING_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
-    VALID_FIELD_SIZES,
-    VALID_LABEL_STYLES,
-    MOBILE_WIDTH
+    VALID_FIELD_SIZES
 } from '../constants';
 
 export default {
     name: 'FormField',
 
     components: {
+        FormFieldAffixed,
         FormDropdown,
         FormLabel
     },
@@ -171,10 +154,9 @@ export default {
             validator: value => ((VALID_INPUT_TYPES.indexOf(value) !== -1) || (CUSTOM_INPUT_TYPES.indexOf(value) !== -1))// The prop value must match one of the valid input types
         },
 
-        labelStyle: {
-            type: String,
-            default: 'default',
-            validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid label types
+        shouldShowLabelText: {
+            type: Boolean,
+            default: true
         },
 
         fieldSize: {
@@ -213,9 +195,9 @@ export default {
             default: undefined
         },
 
-        hasInputDescription: {
-            type: Boolean,
-            default: false
+        labelDescription: {
+            type: String,
+            default: ''
         },
 
         labelDetails: {
@@ -226,6 +208,18 @@ export default {
         assistiveText: {
             type: String,
             default: ''
+        },
+
+        prefix: {
+            type: String,
+            default: '',
+            validator: value => (value.length <= 3)
+        },
+
+        suffix: {
+            type: String,
+            default: '',
+            validator: value => (value.length <= 3)
         }
     },
 
@@ -241,13 +235,6 @@ export default {
                 return this.inputType;
             }
             return DEFAULT_INPUT_TYPE;
-        },
-
-        normalisedLabelStyle () {
-            if (VALID_LABEL_STYLES.includes(this.labelStyle)) {
-                return this.labelStyle;
-            }
-            return '';
         },
 
         formFieldLocale () {
@@ -285,11 +272,6 @@ export default {
             };
         },
 
-        isInline () {
-            return (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') ||
-                this.labelStyle === 'inline';
-        },
-
         isDropdown () {
             return this.inputType === 'dropdown';
         },
@@ -320,6 +302,14 @@ export default {
 
         hasTrailingIcon () {
             return Boolean(this.$slots['icon-trailing']);
+        },
+
+        isAffixedField () {
+            return Boolean(this.prefix || this.suffix);
+        },
+
+        isAffixedType () {
+            return VALID_AFFIXED_INPUT_TYPES.includes(this.inputType);
         }
     },
 
@@ -363,6 +353,20 @@ export default {
 
             if (this.isDropdown && this.hasTrailingIcon) {
                 throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.isAffixedField && !this.isAffixedType) {
+                const afixType = this.prefix ? 'prefix' : 'suffix';
+
+                throw new TypeError(`Form field is set to have a "${afixType}" and inputType="${this.inputType}", "${afixType}" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.prefix && this.hasLeadingIcon) {
+                throw new TypeError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
+            }
+
+            if (this.suffix && this.hasTrailingIcon) {
+                throw new TypeError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
             }
         }
     }
@@ -424,11 +428,6 @@ $form-input-iconSize                           : 18px;
         .c-formField-field {
             border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
-    }
-
-    .c-formField-label-description {
-        display: block;
-        font-weight: normal;
     }
 
     .c-formField-icon {
