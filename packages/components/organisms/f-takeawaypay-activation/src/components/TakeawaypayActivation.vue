@@ -155,28 +155,31 @@ export default {
             const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl);
 
             if (available) {
-                if (this.authToken) {
-                    this.extractConsumerDetails();
-
-                    if (this.consumerRole === USER_ROLE_GUEST) {
-                        this.activationState = ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN;
-                    } else {
-                        this.activationState = ACTIVATION_STATE_AVAILABLE_LOGGED_IN;
-                    }
-                } else {
-                    this.activationState = ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN;
-                }
+                this.determineActivationState();
             } else {
                 this.activationState = ACTIVATION_STATE_FAILED;
             }
         },
-        async extractConsumerDetails () {
+
+        extractConsumerDetails () {
             const tokenData = jwtDecode(this.authToken);
             this.consumerId = tokenData.sub;
             this.consumerEmail = tokenData.email;
             this.consumerGivenName = tokenData.given_name;
             this.consumerRole = (tokenData.role || '').toLowerCase();
         },
+
+        determineActivationState () {
+            if (this.authToken) {
+                this.extractConsumerDetails();
+                this.activationState = this.consumerRole === USER_ROLE_GUEST ?
+                    ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN :
+                    ACTIVATION_STATE_AVAILABLE_LOGGED_IN;
+            } else {
+                this.activationState = ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN;
+            }
+        },
+
         handleActivationResult (successful) {
             this.activationState = successful ? ACTIVATION_STATE_SUCCEEDED : ACTIVATION_STATE_FAILED;
         }

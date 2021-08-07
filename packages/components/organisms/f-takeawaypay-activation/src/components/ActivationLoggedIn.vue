@@ -4,7 +4,7 @@
 
         <h1
             :class="$style['c-takeawaypayActivation-title']">
-            {{ $t('messages.titleActivationAvailable1') }}{{ consumerGivenName }}. {{ $t('messages.titleActivationAvailable2') }}
+            {{ welcomeText }}
         </h1>
 
         <p>
@@ -96,6 +96,12 @@ export default {
         return {
             activationInProgress: false
         };
+    },
+
+    computed: {
+        welcomeText () {
+            return `${this.$t('messages.titleActivationAvailable1')}${this.consumerGivenName}. ${this.$t('messages.titleActivationAvailable2')}`;
+        }
     },
 
     methods: {
