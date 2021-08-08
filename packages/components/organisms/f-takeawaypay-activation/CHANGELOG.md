@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.5.0
 ------------------------------
-*August 3, 2021*
+*August 9, 2021*
 
 ### Added
 - Added logic to handle guest users
