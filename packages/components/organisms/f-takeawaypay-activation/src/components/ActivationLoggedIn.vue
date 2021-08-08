@@ -85,6 +85,10 @@ export default {
         consumerEmail: {
             type: String,
             required: true
+        },
+        employeeId: {
+            type: String,
+            default: ''
         }
     },
 
@@ -97,7 +101,7 @@ export default {
     methods: {
         async activate () {
             this.activationInProgress = true;
-            const activationSuccessful = await TakeawaypayActivationServiceApi.activate(this.activateUrl, this.authToken, this.consumerId, this.$store, this.$logger);
+            const activationSuccessful = await TakeawaypayActivationServiceApi.activate(this.activateUrl, this.employeeId, this.authToken, this.consumerId, this.$store, this.$logger);
             this.$emit('activation-result', activationSuccessful);
             this.activationInProgress = false;
         }

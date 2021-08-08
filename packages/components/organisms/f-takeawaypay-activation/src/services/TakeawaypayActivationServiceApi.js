@@ -1,12 +1,18 @@
 import axios from 'axios';
 import logInvoker from './LoggingService';
 
-const activateLogData = consumerId => ({
+const availabilityLogData = (employeeId, linkingAvailable = false) => ({
+    TakeawayPayEmployeeId: employeeId,
+    TakeawayPayLinkingAvailable: linkingAvailable
+});
+
+const activateLogData = (employeeId, consumerId) => ({
+    TakeawayPayEmployeeId: employeeId,
     ConsumerId: consumerId
 });
 
 export default {
-    async isActivationAvailable (url, store, logger) {
+    async isActivationAvailable (url, employeeId, store, logger) {
         try {
             const config = {
                 headers: {
@@ -16,12 +22,20 @@ export default {
             };
 
             const { data } = await axios.get(url, config);
+
+            logInvoker({
+                message: 'TakeawayPay account linking fetched availability',
+                data: availabilityLogData(employeeId, data.available),
+                logMethod: logger.logInfo,
+                store
+            });
+
             return data.available;
         } catch (error) {
             logInvoker({
-                message: 'Fetching TakeawayPay account linking availability failed',
-                data: {},
-                logMethod: logger.logError,
+                message: 'TakeawayPay account linking not available',
+                data: availabilityLogData(employeeId),
+                logMethod: logger.logWarn,
                 error,
                 store
             });
@@ -29,7 +43,7 @@ export default {
         }
     },
 
-    async activate (url, authToken, consumerId, store, logger) {
+    async activate (url, employeeId, authToken, consumerId, store, logger) {
         try {
             const authHeader = authToken && `Bearer ${authToken}`;
 
@@ -56,7 +70,7 @@ export default {
             if (status === 200) {
                 logInvoker({
                     message: 'TakeawayPay account linking succeeded',
-                    data: activateLogData(consumerId),
+                    data: activateLogData(employeeId, consumerId),
                     logMethod: logger.logInfo,
                     store
                 });
@@ -67,7 +81,7 @@ export default {
         } catch (error) {
             logInvoker({
                 message: 'TakeawayPay account linking failed',
-                data: activateLogData(consumerId),
+                data: activateLogData(employeeId, consumerId),
                 logMethod: logger.logError,
                 error,
                 store

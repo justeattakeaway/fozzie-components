@@ -14,7 +14,8 @@ describe('TakeawaypayActivation', () => {
         registrationUrl: '/register',
         homeUrl: '/',
         authToken: 'token',
-        locale: 'en-GB'
+        locale: 'en-GB',
+        employeeId: '12345'
     };
     const wrapper = shallowMount(TakeawaypayActivation, {
         i18n,

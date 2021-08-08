@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.6.0
 ------------------------------
-*August 06, 2021*
+*August 09, 2021*
 
 ### Added
 - Added logging around API requests
