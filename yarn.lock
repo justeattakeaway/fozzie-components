@@ -2260,21 +2260,13 @@
   dependencies:
     "@justeat/f-vue-icons" "1.10.0"
 
-"@justeat/f-form-field@1.16.1":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.16.1.tgz#4bb456df38fa7a84c5f8b9540c7f33120c77b99a"
-  integrity sha512-jFQcEfGyQdawzfr2y6ZRidWpTPCPGHTM/m/3tLJQAiZRpd+rhwFwI+rfNoY78qcUiY8qFJE7or0+MOXEUk+z+g==
+"@justeat/f-form-field@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-2.0.0.tgz#fe40f657002e4bef2bfae1aefc02ece4882bff2c"
+  integrity sha512-998BfTlHBAkh8ZCdbuPkb9KNZItwXnKf25kn0nFmgtJKQJQzXHdB1vrWdCjkv4scTCDh+s/a05Q1YR5pYzgCag==
   dependencies:
     "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "1.11.0"
-
-"@justeat/f-form-field@1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.6.1.tgz#47b014847a42467737b65997cfcab212d0385ba7"
-  integrity sha512-E7aLPJhJBUoHcBWyaiCdOUyXyNtO24P/PhtNRpKJh50amCZU9yeYJjuT1rlifmS+h00kcIcoXfTcwb6VI7b/wg==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "1.11.0"
+    "@justeat/f-vue-icons" "2.5.0"
 
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
@@ -2404,13 +2396,6 @@
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.10.0.tgz#1ae551701ec73b4f6e39651d2a0fab5e105e75c5"
   integrity sha512-6+JLiYsZzQqNsWoJVOa+ux7KuHT58J5dtJcH6Y+9rukbxidTk22j/0sAvWC7ME6SuKxyYY7MxDL0B6YL875VNQ==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
-"@justeat/f-vue-icons@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.11.0.tgz#3c5c91dcc04cd72e81d12f09bc8c9fec893909a5"
-  integrity sha512-xw/Y0tOd1XQXUy6bl8VA3prBmgP2n0n2IHDKQFUOvGwupkAJ+3vwnlkhiMGlN8bripAPK80g01Abt/ZBBbXrUw==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 

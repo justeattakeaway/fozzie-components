@@ -15,6 +15,7 @@ import {
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_DATE_OF_BIRTH,
     UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
@@ -67,6 +68,13 @@ const resolveCustomerDetails = (data, state) => {
             data.customer.firstName = tokenData.given_name;
             data.customer.lastName = tokenData.family_name;
         }
+
+        if (!data.customer.dateOfBirth) {
+            console.log('here');
+            tokenData = tokenData || jwtDecode(state.authToken);
+
+            data.customer.dateOfBirth = tokenData.birthdate;
+        }
     }
 };
 
@@ -95,7 +103,8 @@ export default {
             firstName: '',
             lastName: '',
             email: '',
-            mobileNumber: ''
+            mobileNumber: '',
+            dateOfBirth: null
         },
         orderId: '',
         time: {
@@ -110,7 +119,7 @@ export default {
         },
         userNote: '',
         isFulfillable: true,
-        errors: [],
+        errors: ['AGE_VERIFICATION_REQUIRED'],
         notices: [],
         message: null,
         messages: [],
@@ -420,6 +429,10 @@ export default {
 
         updateAddress: ({ commit }, address) => {
             commit(UPDATE_ADDRESS, address);
+        },
+
+        updateDateOfBirth: ({ commit }, dob) => {
+            commit(UPDATE_DATE_OF_BIRTH, dob);
         }
     },
 
@@ -564,6 +577,10 @@ export default {
 
         [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
             state.customer.mobileNumber = phoneNumber;
+        },
+
+        [UPDATE_DATE_OF_BIRTH]: (state, dob) => {
+            state.customer.dateOfBirth = dob;
         }
     }
 };

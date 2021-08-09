@@ -3,6 +3,7 @@
         is-rounded
         is-page-content-wrapper
         card-heading-position="center"
+        has-outline
         :card-heading="$t(`ageVerification.heading`)"
         data-test-id="checkout-age-verification-component"
         :class="[$style['c-checkout-ageVerification'], $style['c-checkout-ageVerification--verticalPadding']]">
@@ -20,7 +21,7 @@
                 :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.day`)"
                 :dropdown-options="days"
-                :value="days[0].text"
+                :value="selectedDate.day"
                 @input="selectionChanged($event, 'day')" />
 
             <form-field
@@ -29,7 +30,7 @@
                 :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.month`)"
                 :dropdown-options="months"
-                :value="selectedMonth"
+                :value="selectedDate.month"
                 @input="selectionChanged($event, 'month')" />
 
             <form-field
@@ -38,7 +39,7 @@
                 :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.year`)"
                 :dropdown-options="years"
-                :value="years[0].text"
+                :value="selectedDate.year"
                 @input="selectionChanged($event, 'year')" />
         </div>
 
@@ -67,6 +68,8 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import { mapState, mapActions } from 'vuex';
+import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: {
@@ -79,18 +82,20 @@ export default {
         return {
             currentYear: new Date().getUTCFullYear(),
             selectedDate: {
-                day: '1',
-                month: '0',
-                year: this.currentYear
+                day: '',
+                month: '',
+                year: ''
             },
             selectedMonth: '0'
         };
     },
 
     computed: {
+        ...mapState(VUEX_CHECKOUT_MODULE, ['customer']),
+
         days () {
-            const days = Array.from({ length: 31 }, (x, i) => {
-                const day = (i + 1).toString();
+            const days = Array.from({ length: 31 }, (_, index) => {
+                const day = (index + 1).toString();
 
                 return {
                     text: day,
@@ -107,8 +112,7 @@ export default {
 
                 const monthValue = {
                     text: date.toLocaleDateString(undefined, { month: 'long' }),
-                    value: date.toLocaleDateString(undefined, { month: 'numeric' }) - 1,
-                    shortText: date.toLocaleDateString(undefined, { month: 'short' })
+                    value: date.toLocaleDateString(undefined, { month: 'numeric' }) - 1
                 };
 
                 return monthValue;
@@ -118,8 +122,8 @@ export default {
         },
 
         years () {
-            const years = Array(this.currentYear - (this.currentYear - 101)).fill('').map((v, idx) => {
-                const year = (this.currentYear - idx).toString();
+            const years = Array(this.currentYear - (this.currentYear - 101)).fill('').map((_, index) => {
+                const year = (this.currentYear - index).toString();
 
                 const yearRange = {
                     text: year,
@@ -133,28 +137,34 @@ export default {
         }
     },
 
+    mounted () {
+        this.initDateOfBirth();
+    },
+
     methods: {
+        ...mapActions(VUEX_CHECKOUT_MODULE, ['updateDateOfBirth']),
+
+        initDateOfBirth () {
+            this.selectedDate.day = this.customer.dateOfBirth?.getDate().toString() || this.days[0].text;
+            this.selectedDate.month = this.customer.dateOfBirth?.getMonth().toString() || this.months[0].value.toString();
+            this.selectedDate.year = this.customer.dateOfBirth?.getFullYear().toString() || this.years[0].text;
+        },
+
         selectionChanged (selection, type) {
             this.selectedDate[type] = selection;
-            console.log(this.selectedDate);
-            // if (type === 'month') {
-            //     this.selectedMonth = this.months[selection].shortText;
-            //     console.log(this.selectedMonth);
-            // }
         },
 
         continueToCheckout () {
-            console.log(this.selectedDate);
-            console.log(new Date(this.selectedDate.year, this.selectedDate.month, this.selectedDate.day));
+            const dateOfBirth = new Date(this.selectedDate.year, this.selectedDate.month, this.selectedDate.day);
+
+            this.updateDateOfBirth(dateOfBirth);
+            this.$emit('verify-age');
         }
     }
 };
 </script>
 
 <style lang="scss" module>
-.c-checkout-ageVerification {
-    // width: 600px;
-}
 .c-checkout-ageVerification-description {
     margin: spacing(x2) 0 spacing(x2);
 }
@@ -162,16 +172,15 @@ export default {
 .c-checkout-ageVerification-button {
     margin: spacing(x2) 0 spacing();
 }
+// .c-checkout-ageVerification-fields {
+//     display: flex;
+//     flex-wrap: nowrap;
+//     justify-content: stretch;
+//     gap: spacing(x0.5);
 
-.c-checkout-ageVerification-fields {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: stretch;
-    gap: spacing();
-
-}
-.c-checkout-ageVerification-field {
-    margin-top: 0px !important;
-    flex-basis: calc(100% /3);
-}
+// }
+// .c-checkout-ageVerification-field {
+//     margin-top: 0px !important;
+//     flex-basis: calc(100% /3);
+// }
 </style>

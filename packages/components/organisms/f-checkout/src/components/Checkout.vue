@@ -14,7 +14,11 @@
             data-test-id="checkout-loading-spinner">
             <div :class="$style['c-spinner']" />
         </div>
-        <age-verification v-if="shouldShowAgeVerification" />
+
+        <age-verification
+            v-if="shouldShowAgeVerification"
+            @verify-age="handleUpdateCheckout" />
+
         <div
             v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
@@ -107,10 +111,8 @@
                         rows="7"
                         maxlength="200"
                         name="Note"
-                        has-input-description
-                        @input="updateUserNote($event)">
-                        {{ $t(`userNote.${serviceType}.text`) }}
-                    </form-field>
+                        :label-description="$t(`userNote.${serviceType}.text`)"
+                        @input="updateUserNote($event)" />
 
                     <f-button
                         :class="[
@@ -229,11 +231,6 @@ export default {
     ],
 
     props: {
-        shouldShowAgeVerification: {
-            type: Boolean,
-            required: false
-        },
-
         getCheckoutUrl: {
             type: String,
             required: true
@@ -361,6 +358,7 @@ export default {
             'availableFulfilment',
             'basket',
             'customer',
+            'dateOfBirth',
             'errors',
             'geolocation',
             'isGuestCreated',
@@ -378,6 +376,10 @@ export default {
             'time',
             'userNote'
         ]),
+
+        shouldShowAgeVerification () {
+            return this.errors[0] === 'AGE_VERIFICATION_REQUIRED';
+        },
 
         wasMobileNumberFocused () {
             return this.$v.customer.mobileNumber.$dirty;
