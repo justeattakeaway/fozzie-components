@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.40.0
+------------------------------
+*August 5, 2021*
+
+### Added
+- MDX file for media element
+
+### Changed
+- Upgraded the version of storybook to 6.3
+- Modified the config for themes to make it work as much as possible
+
+
 v0.39.0
 ------------------------------
 *August 04, 2021*

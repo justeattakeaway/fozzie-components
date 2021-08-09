@@ -23,6 +23,9 @@ export const IconFormFieldComponent = () => ({
         locale: {
             default: select('Locale', ['en-GB', 'en-AU'])
         },
+        shouldShowLabelText: {
+            default: boolean('shouldShowLabelText', true)
+        },
         isDisabled: {
             default: select('isDisabled', [null, 'disabled'])
         },
@@ -44,6 +47,7 @@ export const IconFormFieldComponent = () => ({
         <form-field
             locale="en-GB"
             label-text="Text input - Left Icon"
+            :shouldShowLabelText="shouldShowLabelText"
             input-type="text"
             field-size="small"
             :has-error="hasError">
@@ -55,6 +59,7 @@ export const IconFormFieldComponent = () => ({
         <form-field
             locale="en-GB"
             label-text="Text input - Right Icon"
+            :shouldShowLabelText="shouldShowLabelText"
             input-type="text"
             field-size="medium"
             :has-error="hasError">

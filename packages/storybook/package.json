@@ -1,6 +1,6 @@
 {
   "name": "@justeat/storybook",
-  "version": "0.39.0",
+  "version": "0.40.0",
   "scripts": {
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
@@ -15,12 +15,13 @@
   "devDependencies": {
     "@justeat/f-http": "0.6.1",
     "@kazupon/vue-i18n-loader": "0.5.0",
-    "@storybook/addon-a11y": "6.0.28",
-    "@storybook/addon-essentials": "6.0.28",
-    "@storybook/addon-knobs": "6.0.28",
-    "@storybook/addon-links": "6.0.28",
+    "@storybook/addon-a11y": "6.3.4",
+    "@storybook/addon-essentials": "6.3.4",
+    "@storybook/addon-knobs": "6.3.0",
+    "@storybook/addon-links": "6.3.4",
     "@storybook/storybook-deployer": "2.8.6",
-    "@storybook/vue": "6.0.28",
+    "@storybook/theming": "6.3.4",
+    "@storybook/vue": "6.3.4",
     "cookie-universal": "2.1.4",
     "node-sass-magic-importer": "5.3.2",
     "npm-run-all": "4.1.5",
