@@ -7,4 +7,13 @@ const i18n = {
     }
 };
 
-export default i18n;
+const $logger = {
+    logInfo: jest.fn(),
+    logWarn: jest.fn(),
+    logError: jest.fn()
+};
+
+export {
+    i18n,
+    $logger
+};

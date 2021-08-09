@@ -8,9 +8,5 @@ export const VALID_AFFIXED_INPUT_TYPES = ['text', 'email', 'password', 'number',
 
 export const DEFAULT_INPUT_TYPE = 'text';
 
-export const VALID_LABEL_STYLES = ['default', 'inline', 'inlineNarrow'];
-
 export const DEFAULT_FIELD_SIZE = 'medium';
 export const VALID_FIELD_SIZES = ['small', 'medium', 'large'];
-
-export const MOBILE_WIDTH = 768;
