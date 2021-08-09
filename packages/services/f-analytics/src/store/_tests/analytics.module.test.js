@@ -33,7 +33,7 @@ describe('AnalyticsModule', () => {
         });
 
         describe(`${pushPageData} ::`, () => {
-            it('should update state with `userData`', () => {
+            it('should update state with `pageData`', () => {
                 // Act
                 mutations.pushPageData(state, updatedPageData);
 

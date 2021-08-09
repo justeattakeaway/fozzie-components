@@ -1,43 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AnalyticsModule mutations :: ({
-      commit
-    }, platformData) => {
-      commit('updatePlatformData', platformData);
-    } :: should update state with \`platformData\` 1`] = `
-Object {
-  "pageData": Object {
-    "conversationId": "",
-    "display": "",
-    "group": "",
-    "httpStatusCode": 0,
-    "isCached": false,
-    "name": "",
-    "orientation": "",
-    "requestId": "",
-  },
-  "platformData": Object {
-    "platformData": Object {
-      "appType": "test-appType",
-      "applicationId": 9,
-      "branding": "test-branding",
-      "country": "zu",
-      "currency": "zud",
-      "environment": "test-environment",
-      "instancePosition": "999",
-      "jeUserPercentage": 88,
-      "language": "ze",
-      "name": "test-name",
-      "userAgent": "test-userAgent",
-      "version": "9.8.7.6",
-    },
-  },
-}
-`;
-
 exports[`AnalyticsModule mutations :: (state, pageData) => {
       state.pageData = pageData;
-    } :: should update state with \`userData\` 1`] = `
+    } :: should update state with \`pageData\` 1`] = `
 Object {
   "pageData": Object {
     "conversationId": "460cc3a8-83f7-4e80-bb46-c8a69967f249",
