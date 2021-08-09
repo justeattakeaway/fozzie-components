@@ -30,18 +30,18 @@ export default {
 
     actions: {
         updatePlatformData: ({ commit }, platformData) => {
-            commit('updatePlatformData', platformData);
+            commit('pushPlatformData', platformData);
         },
         updatePageData: ({ commit }, pageData) => {
-            commit('updatePageData', pageData);
+            commit('pushPageData', pageData);
         }
     },
 
     mutations: {
-        updatePlatformData: (state, platformData) => {
+        pushPlatformData: (state, platformData) => {
             state.platformData = platformData;
         },
-        updatePageData: (state, pageData) => {
+        pushPageData: (state, pageData) => {
             state.pageData = pageData;
         }
     }

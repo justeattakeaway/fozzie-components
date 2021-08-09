@@ -27,21 +27,30 @@ const defaultState = {
     }
 };
 
-const modifieldState = {
-    platformData: {
-        environment: 'test-environment',
-        name: 'test-name',
-        appType: 'test-appType',
-        applicationId: 9,
-        userAgent: 'test-userAgent',
-        branding: 'test-branding',
-        country: 'zu',
-        language: 'ze',
-        jeUserPercentage: 88,
-        currency: 'zud',
-        version: '9.8.7.6',
-        instancePosition: '999'
-    }
+const updatedPlatformData = {
+    environment: 'test-environment',
+    name: 'test-name',
+    appType: 'test-appType',
+    applicationId: 9,
+    userAgent: 'test-userAgent',
+    branding: 'test-branding',
+    country: 'zu',
+    language: 'ze',
+    jeUserPercentage: 88,
+    currency: 'zud',
+    version: '9.8.7.6',
+    instancePosition: '999'
+};
+
+const updatedPageData = {
+    name: 'test-name',
+    group: 'test-group',
+    httpStatusCode: 200,
+    isCached: false,
+    conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
+    requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
+    orientation: 'Landscape',
+    display: 'wide'
 };
 
 const defaultActions = {
@@ -81,19 +90,15 @@ const $i18n = {
     locale: 'en-GB'
 };
 
-const $ssrContext = {
-    get: jest.fn(() => {})
-};
-
 export {
     defaultState,
     defaultActions,
-    modifieldState,
+    updatedPlatformData,
+    updatedPageData,
     createStore,
     gtmSettings,
     $cookies,
     $route,
-    $i18n,
-    $ssrContext
+    $i18n
 };
 
