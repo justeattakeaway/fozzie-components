@@ -6,11 +6,13 @@ import {
     defaultState,
     createStore,
     $cookies
-} from './helpers/setup';
+} from '../../tests/helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(VueRouter);
+
+const defaultStore = createStore();
 
 describe('Analytics', () => {
     afterEach(() => {
@@ -20,24 +22,23 @@ describe('Analytics', () => {
     describe('created ::', () => {
         let component;
         let prepareServersideAnalyticsSpy;
-        let registerStoreModuleSpy;
         let storeUpdatePlatformDataSpy;
+
         beforeEach(() => {
             // Arrange
             component = {
                 render () {},
                 mixins: [analyticsMixin],
-                store: createStore()
+                store: defaultStore
             };
             component.mixins[0].mounted = jest.fn(() => true);
             storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData').mockImplementationOnce(() => true);
-            registerStoreModuleSpy = jest.spyOn(component.mixins[0].methods, 'registerStoreModule');
             prepareServersideAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareServersideAnalytics');
         });
 
         it('should not attempt set the serverside only platformData properties if clientside', () => {
             // Mocks
-            component.mixins[0].computed.isServerSide = () => false;
+            component.mixins[0].computed.isServerSide = jest.fn(() => false);
 
             // Act
             shallowMount(
@@ -51,7 +52,6 @@ describe('Analytics', () => {
             );
 
             // Assert
-            expect(registerStoreModuleSpy).toHaveBeenCalled();
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
             expect(storeUpdatePlatformDataSpy).not.toHaveBeenCalled();
         });
@@ -62,10 +62,10 @@ describe('Analytics', () => {
             expected.platformData.environment = 'localhost';
             expected.platformData.version = '0.0.0.0';
             expected.platformData.instancePosition = 'N/A';
-            expected.platformData.jeUserPercentage = 0;
+            expected.platformData.jeUserPercentage = null;
 
             // Mocks
-            component.mixins[0].computed.isServerSide = () => true;
+            component.mixins[0].computed.isServerSide = jest.fn(() => true);
 
             // Act
             shallowMount(
@@ -79,7 +79,6 @@ describe('Analytics', () => {
             );
 
             // Assert
-            expect(registerStoreModuleSpy).toHaveBeenCalled();
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
             expect(storeUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
         });
@@ -97,7 +96,7 @@ describe('Analytics', () => {
 
             // Mocks
             $cookies.get = jest.fn(() => 99);
-            component.mixins[0].computed.isServerSide = () => true;
+            component.mixins[0].computed.isServerSide = jest.fn(() => true);
 
             // Act
             shallowMount(
@@ -111,7 +110,6 @@ describe('Analytics', () => {
             );
 
             // Assert
-            expect(registerStoreModuleSpy).toHaveBeenCalled();
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
             expect(storeUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
         });

@@ -4,6 +4,7 @@
         data-test-id="offers">
         <offers-header />
         <div :class="$style['c-offers-wrapper']">
+            <unauthenticated />
             <no-offers-found />
         </div>
     </div>
@@ -14,6 +15,7 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import { mapActions } from 'vuex';
 import tenantConfigs from '../tenants';
 import NoOffersFound from './NoOffersFound.vue';
+import Unauthenticated from './Unauthenticated.vue';
 import '@justeat/f-searchbox/dist/f-searchbox.css';
 import OffersHeader from './Header.vue';
 import { ACTION_INITIALISE_OFFERS, VUEX_MODULE_NAMESPACE_OFFERS } from '../store/types';
@@ -26,7 +28,8 @@ export default {
 
     components: {
         NoOffersFound,
-        OffersHeader
+        OffersHeader,
+        Unauthenticated
     },
 
     mixins: [

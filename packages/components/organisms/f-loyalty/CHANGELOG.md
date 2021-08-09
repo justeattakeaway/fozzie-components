@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.3.0
+------------------------------
+*July 29, 2021*
+
+### Added
+- Header component and associated i18n text
+- Unit tests for Header component
+
+
 v0.2.0
 ------------------------------
 *July 20, 2021*

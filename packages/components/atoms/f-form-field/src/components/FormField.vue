@@ -16,6 +16,7 @@
                 :label-for="uniqueId"
                 :is-inline="isInline"
                 :is-disabled="isDisabled"
+                :label-details="labelDetails"
                 :data-test-id="testId.label">
                 {{ labelText }}
                 <template #description>
@@ -31,14 +32,27 @@
                 </template>
             </form-label>
 
+            <form-field-affixed
+                v-if="isAffixedField"
+                :id="uniqueId"
+                :attributes="$attrs"
+                :type="normalisedInputType"
+                :value="value"
+                :field-size="fieldSize"
+                :prefix="prefix"
+                :suffix="suffix"
+                :has-error="hasError"
+                v-on="listeners" />
+
             <form-dropdown
-                v-if="isDropdown"
+                v-else-if="isDropdown"
                 :id="uniqueId"
                 :attributes="$attrs"
                 :type="normalisedInputType"
                 :value="value"
                 :field-size="fieldSize"
                 :has-error="hasError"
+                :has-icon="hasLeadingIcon"
                 :dropdown-options="dropdownOptions"
                 v-on="listeners" />
 
@@ -65,13 +79,14 @@
                 :type="normalisedInputType"
                 :min="normalisedInputType === 'number' ? minNumber : false"
                 :max="normalisedInputType === 'number' ? maxNumber : false"
-                placeholder=" "
                 :data-test-id="testId.input"
                 :class="[
                     $style['c-formField-field'],
                     $style[`c-formField-field--${fieldSize}`], {
                         [$style['c-formField-field--noFocus']]: isSelectionControl,
-                        [$style['c-formField--invalid']]: hasError
+                        [$style['c-formField--invalid']]: hasError,
+                        [$style['c-formField-padding--iconLeading']]: hasLeadingIcon,
+                        [$style['c-formField-padding--iconTrailing']]: hasTrailingIcon
                     }]"
                 v-on="listeners"
             >
@@ -85,13 +100,47 @@
                 :data-test-id="`${testId.label}--inline`">
                 {{ labelText }}
             </form-label>
+
+            <span
+                v-if="hasLeadingIcon"
+                :class="[
+                    $style['c-formField-icon'],
+                    $style[`c-formField-icon--${fieldSize}`],
+                    $style[`c-formField-icon--leading`],
+                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                ]">
+                <slot
+                    name="icon-leading"
+                />
+            </span>
+
+            <span
+                v-if="hasTrailingIcon"
+                :class="[
+                    $style['c-formField-icon'],
+                    $style[`c-formField-icon--${fieldSize}`],
+                    $style[`c-formField-icon--trailing`],
+                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                ]">
+                <slot
+                    name="icon-trailing"
+                />
+            </span>
+
+            <div
+                v-if="assistiveText"
+                :class="$style['c-formField-assitiveText']">
+                {{ assistiveText }}
+            </div>
         </div>
+
         <slot name="error" />
     </div>
 </template>
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import FormFieldAffixed from './FormFieldAffixed.vue';
 import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
 import debounce from '../services/debounce';
@@ -100,6 +149,9 @@ import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
+    VALID_ICON_INPUT_TYPES,
+    VALID_AFFIXED_INPUT_TYPES,
+    VALID_TRAILING_ICON_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES,
     VALID_LABEL_STYLES,
@@ -110,6 +162,7 @@ export default {
     name: 'FormField',
 
     components: {
+        FormFieldAffixed,
         FormDropdown,
         FormLabel
     },
@@ -178,6 +231,28 @@ export default {
         hasInputDescription: {
             type: Boolean,
             default: false
+        },
+
+        labelDetails: {
+            type: String,
+            default: ''
+        },
+
+        assistiveText: {
+            type: String,
+            default: ''
+        },
+
+        prefix: {
+            type: String,
+            default: '',
+            validator: value => (value.length <= 3)
+        },
+
+        suffix: {
+            type: String,
+            default: '',
+            validator: value => (value.length <= 3)
         }
     },
 
@@ -260,6 +335,35 @@ export default {
 
         isDisabled () {
             return this.$attrs.disabled === 'disabled';
+        },
+
+        isValidIconField () {
+            return VALID_ICON_INPUT_TYPES.includes(this.inputType);
+        },
+
+        hasLeadingIcon () {
+            return Boolean(this.$slots['icon-leading']);
+        },
+
+        hasTrailingIcon () {
+            return Boolean(this.$slots['icon-trailing']);
+        },
+
+        isAffixedField () {
+            return Boolean(this.prefix || this.suffix);
+        },
+
+        isAffixedType () {
+            return VALID_AFFIXED_INPUT_TYPES.includes(this.inputType);
+        }
+    },
+
+    watch: {
+        $props: {
+            immediate: true,
+            handler () {
+                this.validateProps();
+            }
         }
     },
 
@@ -285,12 +389,41 @@ export default {
             if (typeof (window) !== 'undefined') {
                 this.windowWidth = window.innerWidth;
             }
+        },
+
+        validateProps () {
+            if (!this.isValidIconField && (this.hasLeadingIcon || this.hasTrailingIcon)) {
+                throw new TypeError(`Form field is set to have inputType="${this.inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.isDropdown && this.hasTrailingIcon) {
+                throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.isAffixedField && !this.isAffixedType) {
+                const afixType = this.prefix ? 'prefix' : 'suffix';
+
+                throw new TypeError(`Form field is set to have a "${afixType}" and inputType="${this.inputType}", "${afixType}" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
+            }
+
+            if (this.prefix && this.hasLeadingIcon) {
+                throw new TypeError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
+            }
+
+            if (this.suffix && this.hasTrailingIcon) {
+                throw new TypeError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
+            }
         }
     }
 };
 </script>
 
 <style lang="scss" module>
+$form-input-icon-verticalIndent                : 15px;
+$form-input-icon-verticalIndent--small         : 11px;
+$form-input-icon-verticalIndent--large         : 19px;
+$form-input-iconSize                           : 18px;
+
 .c-formField {
     & + & {
         margin-top: spacing(x2);
@@ -299,6 +432,10 @@ export default {
 
     .c-formField-fieldWrapper {
         position: relative;
+    }
+
+    ::placeholder {
+        color: $form-input-secondaryTextColour;
     }
 
     .c-formField-field--textarea {
@@ -341,5 +478,55 @@ export default {
     .c-formField-label-description {
         display: block;
         font-weight: normal;
+    }
+
+    .c-formField-icon {
+        svg {
+            position: absolute;
+            height: $form-input-iconSize;
+            width: $form-input-iconSize;
+
+            path {
+                fill: $form-input-secondaryTextColour;
+            }
+        }
+    }
+
+    .c-formField-icon--disabled {
+        svg {
+            path {
+                fill: $color-content-disabled;
+            }
+        }
+    }
+
+    .c-formField-icon--small {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent--small);
+    }
+
+    .c-formField-icon--medium {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-icon--large {
+        @include indent-icon('bottom', $form-input-icon-verticalIndent--large);
+    }
+
+    .c-formField-icon--leading {
+        @include indent-icon('leading', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-icon--trailing {
+        @include indent-icon('trailing', $form-input-icon-verticalIndent);
+    }
+
+    .c-formField-padding--iconTrailing {
+        padding-right: $form-input-iconPadding;
+    }
+
+    .c-formField-assitiveText {
+        font-weight: $font-weight-regular;
+        color: $form-input-secondaryTextColour;
+        margin-top: spacing(x0.5);
     }
 </style>

@@ -14,6 +14,7 @@ $form-input-borderColour--disabled      : $color-disabled-01;
 
 $form-input-fontSize                    : 'body-l';
 $form-input-textColour                  : $color-content-default;
+$form-input-secondaryTextColour         : $color-content-subdued;
 
 $form-input-borderWidth                 : 1px;
 $form-input-borderColour                : $color-border-default;
@@ -22,34 +23,62 @@ $form-input-borderColour--invalid       : $color-support-error;
 
 $form-input-focus--boxShadow            : 0 0 0 2px $color-focus;
 
-$form-input-height-small                : spacing(x5);
-$form-input-padding-small               : spacing(x1) spacing(x2);
+$form-input-padding--side              : spacing(x2);
 
-$form-input-height-medium               : spacing(x6);
-$form-input-padding-medium              : spacing(x1.5) spacing(x2);
+$form-input-height                      : spacing(x6);
+$form-input-padding                     : 11px $form-input-padding--side 13px;
 
-$form-input-height-large                : spacing(x7);
-$form-input-padding-large               : spacing(x2);
+$form-input-height--small               : spacing(x5);
+$form-input-padding--small              : 7px $form-input-padding--side 9px;
 
+$form-input-height--large               : spacing(x7);
+$form-input-padding--large              : 15px $form-input-padding--side 17px;
+
+$form-input-iconPadding                 : spacing(x7);
+$form-input-icon-horizontalIndent       : 19px;
 
 @mixin form-field-size($height, $padding) {
     @include rem(height, $height);
     padding: $padding;
 }
 
+@mixin indent-icon($position, $indent: $form-input-icon-horizontalIndent) {
+    svg {
+        @if $position == 'leading' {
+            left: $indent;
+        } @else if $position == 'trailing' {
+            right: $indent;
+        } @else {
+            bottom: $indent;
+        }
+    }
+}
+
+@mixin disabled-field() {
+    cursor: not-allowed;
+
+    &,
+    &:hover {
+        background-color: $form-input-bg--disabled;
+        color: $form-input-textColour--disabled;
+        border-color: $form-input-borderColour--disabled;
+    }
+}
+
 .c-formField-field--small {
-    @include form-field-size($form-input-height-small, $form-input-padding-small); //convert height to rem
+    @include form-field-size($form-input-height--small, $form-input-padding--small); //convert height to rem
 }
 
 .c-formField-field--medium {
-    @include form-field-size($form-input-height-medium, $form-input-padding-medium); //convert height to rem
+    @include form-field-size($form-input-height, $form-input-padding); //convert height to rem
 }
 
 .c-formField-field--large {
-    @include form-field-size($form-input-height-large, $form-input-padding-large); //convert height to rem
+    @include form-field-size($form-input-height--large, $form-input-padding--large); //convert height to rem
 }
 
-.c-formField-field {
+.c-formField-field,
+%c-formField-field {
     width: 100%;
     font-family: $font-family-base;
     @include font-size($form-input-fontSize);
@@ -73,18 +102,14 @@ $form-input-padding-large               : spacing(x2);
     }
 
     &[disabled] {
-        cursor: not-allowed;
-
-        &,
-        &:hover {
-            background-color: $form-input-bg--disabled;
-            color: $form-input-textColour--disabled;
-            border-color: $form-input-borderColour--disabled;
-            opacity: 1; // removes default disabled styling
-        }
+        @include disabled-field();
     }
 }
 
 .c-formField--invalid {
-    border-color: $form-input-borderColour--invalid;
+    border-color: $form-input-borderColour--invalid !important;
+}
+
+.c-formField-padding--iconLeading {
+    padding-left: $form-input-iconPadding;
 }

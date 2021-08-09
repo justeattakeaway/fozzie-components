@@ -3,10 +3,11 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import analyticsMixin from '../analytics.mixin.vue';
 import {
     createStore,
-    gtmSettings,
     $route,
     $i18n
-} from './helpers/setup';
+} from '../../tests/helpers/setup';
+
+import { MAP_ROUTE_TO_FEATURE_NAME } from '../../constants';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -17,69 +18,6 @@ describe('Analytics', () => {
     });
 
     describe('methods ::', () => {
-        describe('preparePage ::', () => {
-            let component;
-            let preparePageSpy;
-
-            beforeEach(() => {
-                // Arrange
-                document.head.innerHTML = '';
-                component = {
-                    render () {},
-                    mixins: [analyticsMixin],
-                    store: createStore()
-                };
-
-                component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
-                jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
-                component.mixins[0].computed.isServerSide = () => false;
-                preparePageSpy = jest.spyOn(component.mixins[0].methods, 'preparePage');
-            });
-
-            it('should append the GTM tag if the dataLayer is not already present', () => {
-                // Arrange
-                window.dataLayer = undefined;
-
-                // Act
-                shallowMount(
-                    component,
-                    {
-                        localVue,
-                        mocks: {
-                            gtmSettings
-                        }
-                    }
-                );
-
-                // Assert
-                expect(preparePageSpy).toHaveBeenCalled();
-                expect(document.head.innerHTML).toContain('src="https://www.googletagmanager.com/gtm.js?id=GTM-123456A"');
-                expect(document.head.innerHTML).toContain(`function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);`);
-                expect(document.head.innerHTML).toContain('(window,document,\'script\',\'dataLayer\',\'GTM-123456A\');');
-            });
-
-            it('should not attempt to re-append the GTM tag if the dataLayer is already present', () => {
-                // Arrange
-                window.dataLayer = jest.fn();
-
-                // Act
-                shallowMount(
-                    component,
-                    {
-                        localVue
-                    }
-                );
-
-                // Assert
-                expect(preparePageSpy).toHaveBeenCalled();
-                expect(document.head.innerHTML).toBe('');
-            });
-        });
-
         // 1 == locale, 2 == branding, 3 == country, 4 == currency, 5 == language
         const cases = [
             ['en-GB', 'justeat', 'uk', 'gbp', 'en'],
@@ -107,7 +45,6 @@ describe('Analytics', () => {
                 };
 
                 component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'preparePage').mockImplementationOnce(() => true);
                 jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
                 prepareAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics');
                 storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData');
@@ -125,9 +62,9 @@ describe('Analytics', () => {
                         currency: currencyExpected,
                         environment: '',
                         instancePosition: '',
-                        jeUserPercentage: 0,
+                        jeUserPercentage: null,
                         language: languageExpected,
-                        name: 'test-route-name',
+                        name: MAP_ROUTE_TO_FEATURE_NAME[$route.name] || $route.name,
                         userAgent: navigator.userAgent,
                         version: ''
                     };
@@ -172,7 +109,6 @@ describe('Analytics', () => {
                 };
 
                 component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'preparePage').mockImplementationOnce(() => true);
                 jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
                 windowsPushMock = jest.fn();
                 window.dataLayer = {
@@ -199,7 +135,7 @@ describe('Analytics', () => {
                         version: '9'
                     }
                 };
-                component.store = createStore(expected);
+                component.store = createStore({ state: expected });
 
                 // Act
                 shallowMount(

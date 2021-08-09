@@ -46,6 +46,7 @@
             :value="customer.email"
             name="guest-email"
             input-type="email"
+            maxlength="50"
             :label-text="$t('guest.email')"
             :has-error="!isEmailValid"
             aria-describedby="email-error"

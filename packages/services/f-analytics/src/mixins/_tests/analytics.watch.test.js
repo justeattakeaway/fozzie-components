@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 import analyticsMixin from '../analytics.mixin.vue';
 import {
     createStore
-} from './helpers/setup';
+} from '../../tests/helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
