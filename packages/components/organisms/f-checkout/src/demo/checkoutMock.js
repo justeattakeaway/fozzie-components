@@ -5,36 +5,26 @@ import mockedRequests, { httpMethods, httpStatusCodes } from './mockResponses';
 const mock = new MockAdapter(axios);
 
 function setupCheckoutMethod (mockedRequest) {
-    if (mockedRequest.responseStatus === httpStatusCodes.noResponse) {
-        switch (mockedRequest.method) {
-            case httpMethods.post:
-                mock.onPost(mockedRequest.url).timeout();
-                break;
-            case httpMethods.get:
-                mock.onGet(mockedRequest.url).timeout();
-                break;
-            case httpMethods.patch:
-                mock.onPatch(mockedRequest.url).timeout();
-                break;
-            default:
-                throw new Error(`Unknown HTTP method '${mockedRequest.method}'.`);
-        }
-    } else {
-        const { payload } = mockedRequest;
+    let methodMock;
 
-        switch (mockedRequest.method) {
-            case httpMethods.post:
-                mock.onPost(mockedRequest.url).reply(mockedRequest.responseStatus, payload);
-                break;
-            case httpMethods.get:
-                mock.onGet(mockedRequest.url).reply(mockedRequest.responseStatus, payload);
-                break;
-            case httpMethods.patch:
-                mock.onPatch(mockedRequest.url).reply(mockedRequest.responseStatus, payload);
-                break;
-            default:
-                throw new Error(`Unknown HTTP method '${mockedRequest.method}'.`);
-        }
+    switch (mockedRequest.method) {
+        case httpMethods.post:
+            methodMock = mock.onPost(mockedRequest.url);
+            break;
+        case httpMethods.get:
+            methodMock = mock.onGet(mockedRequest.url);
+            break;
+        case httpMethods.patch:
+            methodMock = mock.onPatch(mockedRequest.url);
+            break;
+        default:
+            throw new Error(`Unknown HTTP method '${mockedRequest.method}'.`);
+    }
+
+    if (mockedRequest.responseStatus === httpStatusCodes.noResponse) {
+        methodMock.timeout();
+    } else {
+        methodMock.reply(mockedRequest.responseStatus, mockedRequest.payload);
     }
 }
 
