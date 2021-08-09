@@ -8,8 +8,10 @@ v0.8.0
 ------------------------------
 *August 9, 2021*
 
-### Changed
+### Added
 - Added push ad-hoc event method to global var
+
+### Changed
 - Moved the preparation of the server side plaform data to a plugin.
 - Refactored the Store to allow store serverside events to be stored until clientside.
 
