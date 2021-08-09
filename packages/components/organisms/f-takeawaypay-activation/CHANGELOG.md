@@ -20,6 +20,14 @@ v0.6.0
 - Added logging around API requests
 
 
+Latest (to be added to next release)
+------------------------------
+*July 26, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
 v0.4.0
 ------------------------------
 *July 20, 2021*
