@@ -19,6 +19,20 @@ class Page {
         this.path += `&${name}=${value}`;
         return this;
     }
+
+    // eslint-disable-next-line class-methods-use-this
+    testTabOrder (tabOrderArray) {
+        const expectedTabOrder = tabOrderArray.concat(tabOrderArray[0]);
+        const tabOrderValue = [];
+        expectedTabOrder.forEach(el => {
+            browser.keys('\uE004');
+            tabOrderValue.push({
+                selector: el.getAttribute('data-test-id'),
+                isFocused: el.isFocused()
+            });
+        });
+        return tabOrderValue;
+    }
 }
 
 module.exports = Page;

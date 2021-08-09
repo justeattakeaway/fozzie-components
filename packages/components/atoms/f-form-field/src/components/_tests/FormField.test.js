@@ -6,7 +6,6 @@ import {
     VALID_ICON_INPUT_TYPES,
     VALID_AFFIXED_INPUT_TYPES,
     VALID_INPUT_TYPES,
-    VALID_LABEL_STYLES,
     VALID_TRAILING_ICON_INPUT_TYPES
 } from '../../constants';
 
@@ -175,76 +174,6 @@ describe('FormField', () => {
             });
         });
 
-        describe('labelStyle ::', () => {
-            it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected if labelStyle=%p is specified', definedType => {
-                // Arrange
-                const propsData = {
-                    labelStyle: definedType
-                };
-
-                // Act
-                const wrapper = shallowMount(FormField, { propsData });
-                const formLabel = wrapper.find('form-label-stub');
-
-                // Assert
-                expect(formLabel.attributes('labelstyle')).toBe(definedType);
-            });
-
-            describe('when set to `inlineNarrow`', () => {
-                const MOBILE = 767;
-                const DESKTOP = 768;
-                const eventName = 'resize';
-                let resizeWindow;
-
-                beforeEach(() => {
-                    resizeWindow = width => {
-                        window.innerWidth = width;
-                        window.dispatchEvent(new Event(eventName));
-                    };
-                });
-
-                it('should append the label above input when window size is not mobile', async () => {
-                    // Arrange
-                    const propsData = {
-                        labelStyle: 'inlineNarrow',
-                        labelText: 'Test Label'
-                    };
-
-                    resizeWindow(DESKTOP);
-
-                    // Act
-                    const wrapper = await shallowMount(FormField, { propsData });
-
-                    const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
-                    const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
-
-                    // Assert
-                    expect(defaultLabel.exists()).toBe(true);
-                    expect(inlineLabel.exists()).toBe(false);
-                });
-
-                it('should append the label inline with input when window size is mobile', async () => {
-                    // Arrange
-                    const propsData = {
-                        labelStyle: 'inlineNarrow',
-                        labelText: 'Test Label'
-                    };
-
-                    resizeWindow(MOBILE);
-
-                    // Act
-                    const wrapper = await shallowMount(FormField, { propsData });
-
-                    const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
-                    const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
-
-                    // Assert
-                    expect(defaultLabel.exists()).toBe(false);
-                    expect(inlineLabel.exists()).toBe(true);
-                });
-            });
-        });
-
         describe('fieldSize ::', () => {
             it.each([
                 ['c-formField-field--small', 'small'],
@@ -268,6 +197,104 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formInput.attributes('class')).toContain(className);
+            });
+        });
+
+        describe('shouldShowLabelText ::', () => {
+            it('should display `FormLabel` when set to `true`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: true
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
+
+                // Assert
+                expect(formLabel.exists()).toBe(true);
+            });
+
+            it('should not display `FormLabel` when set to `false`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: false
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
+
+                // Assert
+                expect(formLabel.exists()).toBe(false);
+            });
+        });
+
+        describe('LabelDetails ::', () => {
+            it('should display `LabelDetails` when description is provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDetails: 'labelDetails'
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDetails = wrapper.find('[data-test-id="formfield-label-details"]');
+
+                // Assert
+                expect(formLabelDetails.exists()).toBe(true);
+            });
+
+            it('should not display `LabelDetails` when description is not provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDetails: null
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDetails = wrapper.find('[data-test-id="formfield-label-details"]');
+
+                // Assert
+                expect(formLabelDetails.exists()).toBe(false);
+            });
+        });
+
+        describe('labelDescription ::', () => {
+            it('should display `labelDescription` when description is provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDescription: 'labelDescription'
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDescription = wrapper.find('[data-test-id="formfield-label-description"]');
+
+                // Assert
+                expect(formLabelDescription.exists()).toBe(true);
+            });
+
+            it('should not display `labelDescription` when description is not provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDescription: null
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDescription = wrapper.find('[data-test-id="formfield-label-description"]');
+
+                // Assert
+                expect(formLabelDescription.exists()).toBe(false);
             });
         });
     });
