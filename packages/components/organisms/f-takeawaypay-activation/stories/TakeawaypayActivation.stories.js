@@ -89,6 +89,9 @@ export const TakeawaypayActivationComponent = () => ({
         },
         homeUrl: {
             default: text('Home URL', '/home')
+        },
+        employeeId: {
+            default: text('Employee Id', '12345')
         }
     },
     computed: {
@@ -111,6 +114,7 @@ export const TakeawaypayActivationComponent = () => ({
             ':get-activation-status-url="getActivationStatusUrl" ' +
             ':activate-url="activationUrl" ' +
             ':authToken="authToken" ' +
+            ':employee-id="employeeId" ' +
             // eslint-disable-next-line no-template-curly-in-string
             ':key="`${authToken},${getActivationStatusUrl},${activationUrl}`" />'
 });

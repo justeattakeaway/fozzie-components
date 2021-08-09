@@ -73,6 +73,10 @@ export default {
         authToken: {
             type: String,
             default: ''
+        },
+        employeeId: {
+            type: String,
+            default: ''
         }
     },
     data () {
@@ -130,7 +134,8 @@ export default {
                     authToken: this.authToken,
                     consumerId: this.consumerId,
                     consumerEmail: this.consumerEmail,
-                    consumerGivenName: this.consumerGivenName
+                    consumerGivenName: this.consumerGivenName,
+                    employeeId: this.employeeId
                 }
             };
         },
@@ -152,7 +157,7 @@ export default {
 
     methods: {
         async initialize () {
-            const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl);
+            const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl, this.employeeId, this.$store, this.$logger);
 
             if (available) {
                 this.determineActivationState();
