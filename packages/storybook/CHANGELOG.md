@@ -5,10 +5,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.40.0
 ------------------------------
+<<<<<<< HEAD
 *August 05, 2021*
 
 ### Added
 - Add the f-http mockFactory to process within Storybook to support story API mocks
+=======
+*August 5, 2021*
+
+### Added
+- MDX file for media element
+
+### Changed
+- Upgraded the version of storybook to 6.3
+- Modified the config for themes to make it work as much as possible
+>>>>>>> upstream/master
 
 
 v0.39.0
