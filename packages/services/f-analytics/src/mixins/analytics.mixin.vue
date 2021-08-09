@@ -21,7 +21,6 @@ export default {
     watch: {
         $route () {
             this.prepareAnalytics();
-            this.pushAnalytics();
         }
     },
 
@@ -31,25 +30,27 @@ export default {
 
     mounted () {
         this.prepareAnalytics();
-        this.pushAnalytics();
     },
 
     methods: {
-        ...mapActions('f-analytics', ['updatePlatformData']),
+        ...mapActions('f-analytics', ['pushPlatformData']),
 
         prepareServersideAnalytics () {
             if (this.isServerSide) {
                 // Only available serverside
                 const platformData = { ...this.platformData };
 
-                platformData.environment = process.env.justEatEnvironment || 'localhost';
-                platformData.version = process.env.FEATURE_VERSION || '0.0.0.0';
-                platformData.instancePosition = process.env.INSTANCE_POSITION || 'N/A';
+                if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
+                if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
+                if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
 
-                // Is of type `httponly` so need to read serverside
-                platformData.jeUserPercentage = this.$cookies.get('je-user_percentage') || null;
+                if (this.$cookies) {
+                    // This cookie is marked as `httponly` so need to read serverside
+                    const value = this.$cookies.get('je-user_percentage');
+                    if (value) platformData.jeUserPercentage = value;
+                }
 
-                this.updatePlatformData(platformData);
+                this.pushPlatformData(platformData);
             }
         },
 
@@ -65,12 +66,7 @@ export default {
             platformData.language = COUNTRY_INFO[this.$i18n.locale].language;
             platformData.currency = COUNTRY_INFO[this.$i18n.locale].currency;
 
-            this.updatePlatformData(platformData);
-        },
-
-        pushAnalytics () {
-            const dataLayer = window.dataLayer || [];
-            dataLayer.push({ platformData: { ...this.platformData } });
+            this.pushPlatformData(platformData);
         }
     }
 };

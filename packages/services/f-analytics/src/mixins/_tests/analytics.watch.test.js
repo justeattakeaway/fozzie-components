@@ -18,7 +18,7 @@ describe('Analytics', () => {
     describe('watch ::', () => {
         let component;
         let prepareAnalyticsMock;
-        let pushAnalyticsMock;
+
         beforeEach(() => {
             // Arrange
             component = {
@@ -28,7 +28,6 @@ describe('Analytics', () => {
             };
             component.mixins[0].created = jest.fn(() => true);
             prepareAnalyticsMock = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementation(() => true);
-            pushAnalyticsMock = jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementation(() => true);
         });
 
         it('should call prepareAnalytics & pushAnalytics when route changes', async () => {
@@ -47,7 +46,6 @@ describe('Analytics', () => {
 
             // Assert
             expect(prepareAnalyticsMock).toHaveBeenCalled();
-            expect(pushAnalyticsMock).toHaveBeenCalled();
         });
     });
 });

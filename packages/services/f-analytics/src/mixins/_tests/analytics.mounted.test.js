@@ -18,7 +18,6 @@ describe('Analytics', () => {
 
     describe('mounted ::', () => {
         let prepareAnalyticsMock;
-        let pushAnalyticsMock;
 
         beforeEach(() => {
             // Arrange
@@ -29,7 +28,6 @@ describe('Analytics', () => {
             };
             component.mixins[0].created = jest.fn(() => true);
             prepareAnalyticsMock = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
-            pushAnalyticsMock = jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
 
             // Act
             shallowMount(
@@ -46,11 +44,6 @@ describe('Analytics', () => {
         it('should make a call to prepareAnalytics', () => {
             // Assert
             expect(prepareAnalyticsMock).toHaveBeenCalled();
-        });
-
-        it('should make a call to pushAnalytics', () => {
-            // Assert
-            expect(pushAnalyticsMock).toHaveBeenCalled();
         });
     });
 });

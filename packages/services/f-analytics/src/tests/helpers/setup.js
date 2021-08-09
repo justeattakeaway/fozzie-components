@@ -1,20 +1,22 @@
 import Vuex from 'vuex';
+import Vue from 'vue';
 
 const defaultState = {
     platformData: {
-        environment: '',
+        environment: 'localhost',
         name: '',
         appType: '',
         applicationId: null,
-        userAgent: '',
+        userAgent: 'N/A',
         branding: '',
         country: '',
         language: '',
-        jeUserPercentage: null,
+        jeUserPercentage: undefined,
         currency: '',
-        version: '',
-        instancePosition: ''
-    }
+        version: '0.0.0.0',
+        instancePosition: 'N/A'
+    },
+    events: []
 };
 
 const modifieldState = {
@@ -31,32 +33,45 @@ const modifieldState = {
         currency: 'zud',
         version: '9.8.7.6',
         instancePosition: '999'
+    },
+    events: []
+};
+
+const newEvent = {
+    event: 'jazzy',
+    experiment: {
+        id: 'EX-1234',
+        name: 'Some very special experiment',
+        platform: 'experiment_api',
+        variant: {
+            name: 'increase_a'
+        },
+        version: 1
     }
 };
 
 const defaultActions = {
-    updatePlatformData: jest.fn()
-};
-
-const gtmSettings = {
-    namespace: 'f-analytics',
-    id: 'GTM-123456A'
+    pushPlatformData: jest.fn(),
+    pushEvent: jest.fn()
 };
 
 const createStore = ({
     name = 'f-analytics',
     state = defaultState,
     actions = defaultActions
-} = {}) => new Vuex.Store({
-    modules: {
-        [`${name}`]: {
-            namespaced: true,
-            state,
-            actions
-        },
-        hasModule: jest.fn(() => true)
-    }
-});
+} = {}) => {
+    Vue.use(Vuex);
+    return new Vuex.Store({
+        modules: {
+            [`${name}`]: {
+                namespaced: true,
+                state,
+                actions
+            },
+            hasModule: jest.fn(() => true)
+        }
+    });
+};
 
 const $cookies = {
     get: jest.fn()
@@ -70,14 +85,22 @@ const $i18n = {
     locale: 'en-GB'
 };
 
+const options = {
+    namespace: 'f-analytics',
+    featureName: 'test-route-name',
+    locale: 'en-GB',
+    id: 'GTM-0000000'
+};
+
 export {
     defaultState,
     defaultActions,
     modifieldState,
+    newEvent,
     createStore,
-    gtmSettings,
     $cookies,
     $route,
-    $i18n
+    $i18n,
+    options
 };
 

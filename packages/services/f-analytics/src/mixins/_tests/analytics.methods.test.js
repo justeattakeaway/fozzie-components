@@ -45,9 +45,8 @@ describe('Analytics', () => {
                 };
 
                 component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
+                storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPlatformData').mockImplementationOnce(() => true);
                 prepareAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics');
-                storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData');
             });
 
             test.each(cases)(
@@ -60,13 +59,13 @@ describe('Analytics', () => {
                         branding: brandingExpected,
                         country: countryExpected,
                         currency: currencyExpected,
-                        environment: '',
-                        instancePosition: '',
-                        jeUserPercentage: null,
+                        environment: 'localhost',
+                        instancePosition: 'N/A',
+                        jeUserPercentage: undefined,
                         language: languageExpected,
                         name: MAP_ROUTE_TO_FEATURE_NAME[$route.name] || $route.name,
                         userAgent: navigator.userAgent,
-                        version: ''
+                        version: '0.0.0.0'
                     };
 
                     $i18n.locale = localeArg;
@@ -89,66 +88,6 @@ describe('Analytics', () => {
                     expect(storeUpdatePlatformDataSpy).lastCalledWith(expected);
                 }
             );
-        });
-
-        describe('pushAnalytics ::', () => {
-            let pushAnalyticsSpy;
-            let windowsPushMock;
-            let component;
-
-            beforeEach(() => {
-                // Arrange
-                component = {
-                    render () {},
-                    mixins: [analyticsMixin],
-                    computed: {
-                        isServer () {
-                            return false;
-                        }
-                    }
-                };
-
-                component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
-                windowsPushMock = jest.fn();
-                window.dataLayer = {
-                    push: windowsPushMock
-                };
-                pushAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'pushAnalytics');
-            });
-
-            it('should push the current store.platformData data to the dataLayer', () => {
-                // Arrange
-                const expected = {
-                    platformData: {
-                        applicationId: 7,
-                        appType: 'web',
-                        branding: 'test',
-                        country: 'zu',
-                        currency: 'zud',
-                        environment: 'mo',
-                        instancePosition: '009',
-                        jeUserPercentage: 99,
-                        language: 'zu',
-                        name: 'test_harness',
-                        userAgent: 'testweb',
-                        version: '9'
-                    }
-                };
-                component.store = createStore({ state: expected });
-
-                // Act
-                shallowMount(
-                    component,
-                    {
-                        localVue
-                    }
-                );
-
-                // Assert
-                expect(pushAnalyticsSpy).toHaveBeenCalled();
-                expect(windowsPushMock).lastCalledWith(expected);
-            });
         });
     });
 });

@@ -32,7 +32,7 @@ describe('Analytics', () => {
                 store: defaultStore
             };
             component.mixins[0].mounted = jest.fn(() => true);
-            storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData').mockImplementationOnce(() => true);
+            storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPlatformData').mockImplementationOnce(() => true);
             prepareServersideAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareServersideAnalytics');
         });
 
