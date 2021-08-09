@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import ActivationFailed from '../ActivationFailed.vue';
-import i18n from './helpers/setup';
+import { i18n } from './helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
