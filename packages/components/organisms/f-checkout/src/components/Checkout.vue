@@ -231,7 +231,7 @@ export default {
     props: {
         shouldShowAgeVerification: {
             type: Boolean,
-            required: true
+            required: false
         },
 
         getCheckoutUrl: {

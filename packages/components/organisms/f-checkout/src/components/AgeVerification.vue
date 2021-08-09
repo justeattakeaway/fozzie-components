@@ -1,7 +1,6 @@
 <template>
     <card
         is-rounded
-        has-outline
         is-page-content-wrapper
         card-heading-position="center"
         :card-heading="$t(`ageVerification.heading`)"
@@ -21,7 +20,8 @@
                 :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.day`)"
                 :dropdown-options="days"
-                :value="days[0].text" />
+                :value="days[0].text"
+                @input="selectionChanged($event, 'day')" />
 
             <form-field
                 id="month-selection"
@@ -29,7 +29,8 @@
                 :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.month`)"
                 :dropdown-options="months"
-                :value="months[0].text" />
+                :value="selectedMonth"
+                @input="selectionChanged($event, 'month')" />
 
             <form-field
                 id="year-selection"
@@ -37,9 +38,9 @@
                 :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.year`)"
                 :dropdown-options="years"
-                :value="years[0].text" />
+                :value="years[0].text"
+                @input="selectionChanged($event, 'year')" />
         </div>
-
 
         <p
             :class="$style['c-checkout-ageVerification-description']"
@@ -53,135 +54,107 @@
             button-type="primary"
             is-full-width
             data-test-id="age-verification-redirect-button"
-            @click.native="redirectFromErrorPage">
+            @click.native="continueToCheckout">
             {{ $t(`ageVerification.buttonText`) }}
         </f-button>
     </card>
 </template>
 
 <script>
-// import { mapState } from 'vuex';
 import Card from '@justeat/f-card';
-import FButton from '@justeat/f-button';
-import FormField from '@justeat/f-form-field';
-// import SadBagIconDecorator from '../assets/images/jet-sad-bag.svg';
-import '@justeat/f-form-field/dist/f-form-field.css';
-import '@justeat/f-button/dist/f-button.css';
 import '@justeat/f-card/dist/f-card.css';
-// import {
-//     VUEX_CHECKOUT_MODULE,
-//     CHECKOUT_ERROR_FORM_TYPE
-// } from '../constants';
-// import loggerMixin from '../mixins/logger.mixin';
+import FButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
+import FormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
 
 export default {
     components: {
         Card,
         FButton,
         FormField
-        // SadBagIconDecorator
-        // },
-        // mixins: [
-        //     loggerMixin
-        // ],
-        // props: {
-        //     errorFormType: {
-        //         type: String,
-        //         required: true
-        //     },
-        //     redirectUrl: {
-        //         type: String,
-        //         default: ''
-        //     },
-        //     serviceType: {
-        //         type: String,
-        //         default: ''
-        //     }
+    },
+
+    data () {
+        return {
+            currentYear: new Date().getUTCFullYear(),
+            selectedDate: {
+                day: '1',
+                month: '0',
+                year: this.currentYear
+            },
+            selectedMonth: '0'
+        };
     },
 
     computed: {
-        //     ...mapState(VUEX_CHECKOUT_MODULE, [
-        //         'restaurant'
-        //     ])
         days () {
-            return [
-                { text: '1', value: '1' },
-                { text: '2', value: '2' },
-                { text: '3', value: '3' },
-                { text: '4', value: '4' },
-                { text: '5', value: '5' },
-                { text: '6', value: '6' }
-            ];
+            const days = Array.from({ length: 31 }, (x, i) => {
+                const day = (i + 1).toString();
+
+                return {
+                    text: day,
+                    value: day
+                };
+            });
+
+            return days;
         },
+
         months () {
-            return [
-                { text: 'Jan', value: '1' },
-                { text: 'Feb', value: '2' },
-                { text: 'Mar', value: '3' },
-                { text: 'Apr', value: '4' },
-                { text: 'May', value: '5' },
-                { text: 'June', value: '6' },
-                { text: 'July', value: '7' },
-                { text: 'Aug', value: '8' },
-                { text: 'Sept', value: '9' },
-                { text: 'Oct', value: '10' },
-                { text: 'Nov', value: '11' },
-                { text: 'Dec', value: '12' }
-            ];
+            const months = new Array(12).fill(0).map((_, i) => {
+                const date = new Date(`${i + 1}/1`);
+
+                const monthValue = {
+                    text: date.toLocaleDateString(undefined, { month: 'long' }),
+                    value: date.toLocaleDateString(undefined, { month: 'numeric' }) - 1,
+                    shortText: date.toLocaleDateString(undefined, { month: 'short' })
+                };
+
+                return monthValue;
+            });
+
+            return months;
         },
+
         years () {
-            return [
-                { text: '1990', value: '1990' },
-                { text: '1991', value: '1991' },
-                { text: '1992', value: '1992' },
-                { text: '1993', value: '1993' },
-                { text: '1994', value: '1994' },
-                { text: '1995', value: '1995' },
-                { text: '1996', value: '1996' }
-            ];
+            const years = Array(this.currentYear - (this.currentYear - 101)).fill('').map((v, idx) => {
+                const year = (this.currentYear - idx).toString();
+
+                const yearRange = {
+                    text: year,
+                    value: year
+                };
+
+                return yearRange;
+            });
+
+            return years;
         }
-        // },
+    },
 
-        // mounted () {
-        //     this.logInvoker({
-        //         message: 'Consumer Checkout Error Page',
-        //         data: {},
-        //         logMethod: this.$logger.logWarn
-        //     });
-        // },
+    methods: {
+        selectionChanged (selection, type) {
+            this.selectedDate[type] = selection;
+            console.log(this.selectedDate);
+            // if (type === 'month') {
+            //     this.selectedMonth = this.months[selection].shortText;
+            //     console.log(this.selectedMonth);
+            // }
+        },
 
-        // methods: {
-        //     redirectFromErrorPage () {
-        //         if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.accessForbidden) {
-        //             const cookieName = `je-mw-basket-${this.restaurant.id}`;
-        //             const basketCookie = this.$cookies.get(cookieName);
-        //             if (basketCookie) {
-        //                 this.$cookies.remove(cookieName);
-        //             }
-        //         }
-
-    //         window.location.assign(this.redirectUrl);
-    //     }
+        continueToCheckout () {
+            console.log(this.selectedDate);
+            console.log(new Date(this.selectedDate.year, this.selectedDate.month, this.selectedDate.day));
+        }
     }
 };
 </script>
 
 <style lang="scss" module>
-// .c-checkout-error {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     text-align: center;
-
-//     &.c-checkout-error--verticalPadding {
-//         @include media('<=narrow') {
-//             border: none;
-//             padding-top: spacing(x2);
-//             padding-bottom: spacing(x2);
-//         }
-//     }
-// }
-
+.c-checkout-ageVerification {
+    // width: 600px;
+}
 .c-checkout-ageVerification-description {
     margin: spacing(x2) 0 spacing(x2);
 }
@@ -198,6 +171,7 @@ export default {
 
 }
 .c-checkout-ageVerification-field {
+    margin-top: 0px !important;
     flex-basis: calc(100% /3);
 }
 </style>

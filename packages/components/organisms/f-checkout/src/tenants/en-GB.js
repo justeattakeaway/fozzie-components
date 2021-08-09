@@ -199,13 +199,13 @@ const messages = {
 
     ageVerification: {
         heading: 'Please confirm your date of birth',
-        description: 'You\'re ordering something alcoholic so we need to double-check you\'re 18 or over.',
+        description: 'You’re ordering something alcoholic so we need to double-check you’re 18 or over.',
         ageSelection: {
             day: 'Day',
             month: 'Month',
             year: 'Year'
         },
-        askForIdDescription: 'You might be asked for photographic ID when your order is delivered. Thanks for your patience.',
+        askForIdDescription: 'You might be asked for photographic ID when your order is delivered. The driver won’t hand over your order if the name on your order doesn’t match the name on your ID or to anyone who appears to be intoxicated.',
         buttonText: 'Continue'
     }
 };
