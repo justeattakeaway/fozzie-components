@@ -23,6 +23,7 @@ This component abstracts away the gathering of the various data values needed fo
 - Single point to record GA data: Currently we have GA/GTM logic scattered throught various features, this will allow that logic to be removed and centralise it a single component.
 - Self sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and record all the data required for the GA `platformData` model.  Once registered it will perform the pushing of the GA `platformData` model on the correct event/hook.
 - Reactive: When the route changes (i.e. the page changes) it will re-evaluate and re-pushes the GA `platformData` model.
+- Provide the facility to push 'ad-hoc' GA events via a global service (even if serverside).
 
 ## Benefits (Soon)
 - _extend the data properties for the GA `platformData` model_
