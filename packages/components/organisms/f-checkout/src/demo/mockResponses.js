@@ -41,7 +41,7 @@ const httpMethods = {
     patch: 'patch'
 };
 
-export default {
+const requestDefinitions = {
     checkoutDelivery: {
         url: '/checkout-delivery.json',
         method: httpMethods.get,
@@ -232,4 +232,8 @@ export default {
     }
 };
 
-export { httpMethods, httpStatusCodes };
+export {
+    requestDefinitions as default,
+    httpMethods,
+    httpStatusCodes
+};

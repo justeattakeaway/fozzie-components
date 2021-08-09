@@ -32,12 +32,10 @@ function setupCheckoutMethods () {
     const requests = Object.entries(mockedRequests);
 
     for (let i = 0; i < requests.length; i++) {
-        const [key, value] = requests[i];
+        const [, value] = requests[i];
 
-        console.dir({ i, key, value });
         setupCheckoutMethod(value);
     }
-
     mock.onAny().passThrough();
 }
 
