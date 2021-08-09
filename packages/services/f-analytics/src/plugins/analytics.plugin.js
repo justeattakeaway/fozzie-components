@@ -7,10 +7,6 @@ import {
 
 const defaults = require('./defaults');
 
-const isClientSide = () => typeof (window) !== 'undefined';
-
-const isServerSide = () => typeof (window) === 'undefined';
-
 const getCookie = (name, req) => {
     if (req && req.headers && req.headers.cookie) {
         const value = `; ${req.headers.cookie}`;
@@ -25,7 +21,7 @@ const getCookie = (name, req) => {
 
 const mapServersideValues = (store, req, options) => {
     // Only available serverside
-    if (isServerSide()) {
+    if (typeof (window) === 'undefined') {
         const platformData = { ...store.state[`${options.namespace}`].platformData };
 
         if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
@@ -47,7 +43,7 @@ const registerStoreModule = (store, options) => {
 
 const preparePageTags = options => {
     // Only add tags if clientside and if not already added
-    if (isClientSide() && !window.dataLayer) {
+    if (typeof (window) !== 'undefined' && !window.dataLayer) {
         const queryString = options.auth ? `&gtm_auth=${options.auth}&gtm_preview=${options.preview}&gtm_cookies_win=${options.cookiesWin}` : '';
         // See : https://developers.google.com/tag-manager/quickstart
         const headJsGtmTag = `(function (w, d, s, l, i) {

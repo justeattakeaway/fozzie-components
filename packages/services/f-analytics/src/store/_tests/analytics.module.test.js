@@ -140,6 +140,43 @@ describe('Analytics Module ::', () => {
                 expect(state.events).toEqual([]);
             });
 
+            it('should wait until clientside to push the server side & client side `events` then clear `events`', () => {
+                // Arrange - Serverside
+                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
+                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
+                const serversideEvent = { ...newEvent, event: 'serverside-event' };
+
+                // Act -1
+                pushEvent({ commit, state }, serversideEvent);
+
+                // Assert - 1
+                expect(commit).toHaveBeenLastCalledWith('pushEvent', serversideEvent);
+                expect(windowsPushSpy).not.toHaveBeenCalled();
+                expect(commit).not.toHaveBeenCalledWith(CLEAR_EVENTS);
+                expect(state.events).toEqual([{ ...serversideEvent }]);
+
+                // Arrange - Clientside
+                const originalWindow = { ...window };
+                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
+                const clientsideEvent = { ...newEvent, event: 'clientside-event' };
+
+                // Act -2
+                pushEvent({ commit, state }, clientsideEvent);
+
+                // Assert - 2
+                expect(windowsPushSpy).toHaveBeenCalledTimes(2);
+                expect(windowsPushSpy).toHaveBeenCalledWith({ ...serversideEvent });
+                expect(windowsPushSpy).toHaveBeenCalledWith({ ...clientsideEvent });
+                expect(commit).toHaveBeenCalledWith('pushEvent', clientsideEvent);
+                expect(commit).toHaveBeenLastCalledWith(CLEAR_EVENTS);
+                expect(state.events).toEqual([]);
+            });
+
             it('should not push the `events` nor clear `events` if serverside', () => {
                 // Arrange
                 const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');

@@ -8,11 +8,9 @@ import {
     DEFAULT_APP_ID
 } from '../../constants';
 
-const isClientSide = () => typeof (window) !== 'undefined';
-
 const mapUserAgent = (platformData, req) => {
     let userAgentString;
-    if (isClientSide() && navigator) {
+    if (typeof (window) !== 'undefined' && navigator) {
         userAgentString = navigator.userAgent;
     } else if (req && req.headers) {
         userAgentString = req.headers['user-agent'];
