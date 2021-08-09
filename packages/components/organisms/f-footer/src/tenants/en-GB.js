@@ -122,7 +122,7 @@ export default {
             links: [
                 {
                     url: '/takeaway/brands/mcdonalds',
-                    text: 'McDs',
+                    text: 'McDonald\'s',
                     gtm: 'click_brands_mcdonalds'
                 },
                 {
@@ -157,7 +157,7 @@ export default {
                 },
                 {
                     url: '/takeaway/brands/pret-a-manger',
-                    text: 'Pret',
+                    text: 'Pret A Manger',
                     gtm: 'click_brands_pret_a_manger'
                 },
                 {
@@ -167,7 +167,7 @@ export default {
                 },
                 {
                     url: '/takeaway/brands/papajohns',
-                    text: 'Papa Johns',
+                    text: 'Papa John\'s',
                     gtm: 'click_brands_papajohns'
                 },
                 {
