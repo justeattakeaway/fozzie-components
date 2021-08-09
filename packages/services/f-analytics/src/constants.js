@@ -40,20 +40,6 @@ const COUNTRY_INFO = {
 const DEFAULT_APP_ID = 7;
 const DEFAULT_APP_TYPE = 'web';
 
-/**
- * Allows routes to be mapped to feature names:
- *
- * Key: Route name.
- * Value: Feature name.
- *
- * @type {{'account-register': string, checkout: string}}
- *
- */
-const MAP_ROUTE_TO_FEATURE_NAME = {
-    'account-register': 'global_registration',
-    checkout: 'global_checkout'
-};
-
 const GROUPS_FEATURES_ROUTES = [
     {
         group: 'Account',
@@ -62,9 +48,9 @@ const GROUPS_FEATURES_ROUTES = [
         ]
     },
     {
-        group: 'CheckoutXXXß',
+        group: 'Checkout',
         features: [
-            { feature: 'global_checkout', routes: ['checkout', 'test-route-name'] }
+            { feature: 'Checkout 1 Overview', routes: ['checkout'] }
         ]
     }
 ];
@@ -73,6 +59,5 @@ export {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME,
     GROUPS_FEATURES_ROUTES
 };

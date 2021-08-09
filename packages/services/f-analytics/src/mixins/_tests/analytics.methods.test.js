@@ -8,8 +8,6 @@ import {
     $i18n
 } from '../../tests/helpers/setup';
 
-import { MAP_ROUTE_TO_FEATURE_NAME } from '../../constants';
-
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
@@ -28,9 +26,8 @@ describe('Analytics', () => {
             ['en-AU', 'menulog', 'au', 'aud', 'en'],
             ['en-NZ', 'menulog', 'nz', 'nzd', 'en']
         ];
-        describe('prepareAnalytics ::', () => {
+        describe('preparePlatformData ::', () => {
             let component;
-            let prepareAnalyticsSpy;
             let storeUpdatePlatformDataSpy;
 
             beforeEach(() => {
@@ -46,15 +43,13 @@ describe('Analytics', () => {
                 };
 
                 component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
-                prepareAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics');
                 storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData');
             });
 
             test.each(cases)(
                 'should set the correct plaformData given %p as the locale',
                 (localeArg, brandingExpected, countryExpected, currencyExpected, languageExpected) => {
-                    // Expected
+                    // Arrange
                     const expected = {
                         appType: 'web',
                         applicationId: 7,
@@ -63,20 +58,22 @@ describe('Analytics', () => {
                         currency: currencyExpected,
                         environment: '',
                         instancePosition: '',
-                        jeUserPercentage: null,
+                        jeUserPercentage: undefined,
                         language: languageExpected,
-                        name: MAP_ROUTE_TO_FEATURE_NAME[$route.name] || $route.name,
+                        name: 'test-feature-name',
                         userAgent: navigator.userAgent,
                         version: ''
                     };
 
+                    jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
+
                     $i18n.locale = localeArg;
 
-                    // Act
-                    shallowMount(
+                    const wrapper = shallowMount(
                         component,
                         {
                             localVue,
+                            store: createStore(),
                             mocks:
                             {
                                 $route,
@@ -85,128 +82,105 @@ describe('Analytics', () => {
                         }
                     );
 
+                    // Act
+                    wrapper.vm.preparePlatformData();
+
                     // Assert
-                    expect(prepareAnalyticsSpy).toHaveBeenCalled();
-                    expect(storeUpdatePlatformDataSpy).lastCalledWith(expected);
+                    expect(storeUpdatePlatformDataSpy).toHaveBeenCalledWith(expected);
                 }
             );
         });
 
-        describe('pushAnalytics ::', () => {
-            let pushAnalyticsSpy;
-            let windowsPushMock;
-            let component;
-
-            beforeEach(() => {
-                // Arrange
-                component = {
-                    render () {},
-                    mixins: [analyticsMixin],
-                    computed: {
-                        isServer () {
-                            return false;
-                        }
-                    }
-                };
-
-                component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'prepareAnalytics').mockImplementationOnce(() => true);
-                windowsPushMock = jest.fn();
-                window.dataLayer = {
-                    push: windowsPushMock
-                };
-                pushAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'pushAnalytics');
-            });
-
-            it('should push the current store.platformData data to the dataLayer', () => {
-                // Arrange
-                const expected = {
-                    platformData: {
-                        applicationId: 7,
-                        appType: 'web',
-                        branding: 'test',
-                        country: 'zu',
-                        currency: 'zud',
-                        environment: 'mo',
-                        instancePosition: '009',
-                        jeUserPercentage: 99,
-                        language: 'zu',
-                        name: 'test_harness',
-                        userAgent: 'testweb',
-                        version: '9'
-                    }
-                };
-                component.store = createStore({ state: expected });
-
-                // Act
-                shallowMount(
-                    component,
-                    {
-                        localVue
-                    }
-                );
-
-                // Assert
-                expect(pushAnalyticsSpy).toHaveBeenCalled();
-                expect(windowsPushMock).lastCalledWith(expected);
-            });
-        });
-
         describe('preparePageData ::', () => {
-            let component;
-            let prepareAnalyticsSpy;
-            let storeUpdatePageDataSpy;
+            const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+            + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
+            + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
+            + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
+            + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
+            + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
+
+            const basePageDataObject = {
+                name: 'test-route-name',
+                group: 'test-group',
+                httpStatusCode: 0,
+                isCached: false,
+                conversationId: '',
+                requestId: '',
+                orientation: 'Landscape',
+                display: 'full-size'
+            };
+
+            const component = {
+                render () {},
+                mixins: [analyticsMixin]
+            };
+            let wrapper;
+
+            component.mixins[0].created = jest.fn(() => true);
+            const storeUpdatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePageData');
 
             beforeEach(() => {
-                component = {
-                    render () {},
+                wrapper = shallowMount(component, {
                     mixins: [analyticsMixin],
+                    localVue,
                     store: createStore(),
-                    computed: {
-                        isServer () {
-                            return false;
-                        }
+                    mocks: {
+                        $route,
+                        $i18n
                     }
-                };
-
-                component.mixins[0].created = jest.fn(() => true);
-                jest.spyOn(component.mixins[0].methods, 'pushAnalytics').mockImplementationOnce(() => true);
-                prepareAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareAnalytics');
-                storeUpdatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePageData');
+                });
             });
             it('should should set the correct pageData', () => {
+                // Arrange
                 const expected = {
-                    name: 'test-route-name',
-                    group: 'test-group',
-                    httpStatusCode: 0,
-                    isCached: false,
-                    conversationId: '',
-                    requestId: '',
-                    orientation: 'Landscape',
-                    display: 'full-size'
+                    ...basePageDataObject
                 };
-
                 jest.spyOn(utils, 'getDisplaySize').mockImplementation(() => expected.display);
                 jest.spyOn(utils, 'getOrientation').mockImplementation(() => expected.orientation);
                 jest.spyOn(utils, 'mapRouteToGroup').mockImplementation(() => expected.group);
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
 
                 // Act
-                shallowMount(
-                    component,
-                    {
-                        localVue,
-                        mocks:
-                        {
-                            $route,
-                            $i18n
-                        }
-                    }
-                );
+                wrapper.vm.preparePageData();
 
                 // Assert
-                expect(prepareAnalyticsSpy).toHaveBeenCalled();
-                expect(storeUpdatePageDataSpy).lastCalledWith(expected);
+                expect(storeUpdatePageDataSpy).toHaveBeenCalledWith(expected);
+            });
+
+            it('should override name attribute when name = Checkout 1 Overview and no authToken', () => {
+                // Arrange
+                const expected = {
+                    ...basePageDataObject,
+                    name: 'Checkout 1 Guest'
+                };
+                jest.spyOn(utils, 'getDisplaySize').mockImplementation(() => expected.display);
+                jest.spyOn(utils, 'getOrientation').mockImplementation(() => expected.orientation);
+                jest.spyOn(utils, 'mapRouteToGroup').mockImplementation(() => expected.group);
+                jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => 'Checkout 1 Overview');
+
+                // Act
+                wrapper.vm.preparePageData();
+
+                // Assert
+                expect(storeUpdatePageDataSpy).toHaveBeenCalledWith(expected);
+            });
+
+            it('should not override name attribute when name = Checkout 1 Overview and authToken', () => {
+                // Arrange
+                const expected = {
+                    ...basePageDataObject,
+                    name: 'Checkout 1 Overview'
+                };
+                jest.spyOn(utils, 'getDisplaySize').mockImplementation(() => expected.display);
+                jest.spyOn(utils, 'getOrientation').mockImplementation(() => expected.orientation);
+                jest.spyOn(utils, 'mapRouteToGroup').mockImplementation(() => expected.group);
+                jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
+
+                // Act
+                wrapper.vm.preparePageData({ authToken: mockAuthToken });
+
+                // Assert
+                expect(storeUpdatePageDataSpy).toHaveBeenCalledWith(expected);
             });
         });
     });

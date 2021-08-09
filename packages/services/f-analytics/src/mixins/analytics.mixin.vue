@@ -3,8 +3,7 @@ import { mapState, mapActions } from 'vuex';
 import {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
-    DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME
+    DEFAULT_APP_TYPE
 } from '../constants';
 import {
     getDisplaySize,
@@ -14,30 +13,17 @@ import {
 } from '../utils/helpers';
 
 export default {
-    name: 'Analytics',
-
     computed: {
         ...mapState('f-analytics', ['platformData', 'pageData']),
 
         isServerSide () {
             return typeof (window) === 'undefined';
         }
-    },
 
-    watch: {
-        $route () {
-            this.prepareAnalytics();
-            this.pushAnalytics();
-        }
     },
 
     created () {
         this.prepareServersideAnalytics();
-    },
-
-    mounted () {
-        this.prepareAnalytics();
-        this.pushAnalytics();
     },
 
     methods: {
@@ -47,21 +33,25 @@ export default {
             if (this.isServerSide) {
                 // Only available serverside
                 const platformData = { ...this.platformData };
+                const pageData = { ...this.pageData };
+
                 platformData.environment = process.env.justEatEnvironment || 'localhost';
                 platformData.version = process.env.FEATURE_VERSION || '0.0.0.0';
                 platformData.instancePosition = process.env.INSTANCE_POSITION || 'N/A';
-
                 // Is of type `httponly` so need to read serverside
                 platformData.jeUserPercentage = this.$cookies.get('je-user_percentage') || null;
 
+                pageData.httpStatusCode = this.$ssrContext?.res?.statusCode || 0;
+
                 this.updatePlatformData(platformData);
+                this.updatePageData(pageData);
             }
         },
 
-        prepareAnalytics () {
+        preparePlatformData () {
             const platformData = { ...this.platformData };
 
-            platformData.name = MAP_ROUTE_TO_FEATURE_NAME[this.$route.name] || this.$route.name;
+            platformData.name = mapRouteToFeature(this.$route.name);
             platformData.appType = DEFAULT_APP_TYPE;
             platformData.applicationId = DEFAULT_APP_ID;
             platformData.userAgent = navigator.userAgent || 'N/A';
@@ -71,26 +61,28 @@ export default {
             platformData.currency = COUNTRY_INFO[this.$i18n.locale].currency;
 
             this.updatePlatformData(platformData);
-
-            this.preparePageData();
         },
 
-        // TODO: pass auth, conversationid etc...
-        preparePageData () {
+        preparePageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
             const pageData = {
-                ...this.pageData,
-                group: mapRouteToGroup(this.$route.name),
-                name: mapRouteToFeature(this.$route.name)
+                ...this.pageData
             };
 
-            pageData.httpStatusCode = 0;
-            pageData.isCached = false;
-            pageData.conversationId = '';
-            pageData.requestId = '';
+            pageData.group = mapRouteToGroup(this.$route.name);
+            pageData.name = mapRouteToFeature(this.$route.name);
 
-            // TODO: process.client & update tests
-            pageData.display = getDisplaySize();
-            pageData.orientation = getOrientation();
+            if (pageData.name === 'Checkout 1 Overview' && !authToken) {
+                pageData.name = 'Checkout 1 Guest';
+            }
+
+            pageData.isCached = false;
+            pageData.conversationId = conversationId;
+            pageData.requestId = requestId;
+
+            if (!this.isServerSide) {
+                pageData.display = getDisplaySize();
+                pageData.orientation = getOrientation();
+            }
 
             this.updatePageData(pageData);
         },
@@ -98,6 +90,7 @@ export default {
         pushAnalytics () {
             const dataLayer = window.dataLayer || [];
             dataLayer.push({ platformData: { ...this.platformData } });
+            dataLayer.push({ pageData: { ...this.pageData } });
         }
     }
 };

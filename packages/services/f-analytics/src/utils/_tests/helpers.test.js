@@ -103,12 +103,10 @@ describe('Analytics', () => {
                 }
             );
 
-            it('should return default object if route does not match', () => {
-
-            });
-
-            it('should return group and feature based on route when multiple features exist under group', () => {
-
+            it('should return route when it does not match', () => {
+                const expected = 'no-route-match';
+                const result = mapRouteToFeature('no-route-match');
+                expect(result).toEqual(expected);
             });
         });
     });

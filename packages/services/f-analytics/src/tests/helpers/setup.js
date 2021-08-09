@@ -5,12 +5,12 @@ const defaultState = {
         environment: '',
         name: '',
         appType: '',
-        applicationId: null,
+        applicationId: undefined,
         userAgent: '',
         branding: '',
         country: '',
         language: '',
-        jeUserPercentage: null,
+        jeUserPercentage: undefined,
         currency: '',
         version: '',
         instancePosition: ''
@@ -81,6 +81,10 @@ const $i18n = {
     locale: 'en-GB'
 };
 
+const $ssrContext = {
+    get: jest.fn(() => {})
+};
+
 export {
     defaultState,
     defaultActions,
@@ -89,6 +93,7 @@ export {
     gtmSettings,
     $cookies,
     $route,
-    $i18n
+    $i18n,
+    $ssrContext
 };
 
