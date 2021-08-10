@@ -90,19 +90,36 @@ describe('Analytics', () => {
         describe('prepareUserData ::', () => {
             const userIdFromCookie = 'fjdhskgshjgk';
 
-            const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+            const mockAuthTokenRegistered = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
             + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
             + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
             + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
             + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
             + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
 
-            const userDataWithMockAuthToken = {
+            const mockAuthTokenGuest = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+            + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZ'
+            + 'WF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW'
+            + '1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXp'
+            + 'PZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1p'
+            + 'bHlfbmFtZSI6IkJsb2dncyIsInN1YiI6IjEyMzQ1Iiwicm9sZSI6Ikd1ZXN0Ii'
+            + 'wiaWF0IjoxNjE1NDY5NTE2fQ.ngfAKpiMH4Gk0Y4gAVC4KeLadWFtVXx4hD1_BSW9SN0';
+
+            const userDataWithMockAuthTokenRegistered = {
                 'a-UserId': userIdFromCookie,
                 authType: 'Login',
                 email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
                 globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
                 signinType: 'Email',
+                signupDate: '2021-02-08T10:27:49.1930000Z'
+            };
+
+            const userDataWithMockAuthTokenGuest = {
+                'a-UserId': userIdFromCookie,
+                authType: 'Login',
+                email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
+                globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
+                signinType: 'Guest',
                 signupDate: '2021-02-08T10:27:49.1930000Z'
             };
 
@@ -146,12 +163,25 @@ describe('Analytics', () => {
                 expect(storeUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithoutMockAuthToken);
             });
 
-            it('should call `updateUserData` action with useauthToken data if authToken has been passed', () => {
-                // Act
-                wrapper.vm.prepareUserData(mockAuthToken);
+            describe('if authToken has been passed', () => {
+                describe('and user is logged in', () => {
+                    it('should call `updateUserData` action with `userDataWithMockAuthTokenRegistered`', () => {
+                        // Act
+                        wrapper.vm.prepareUserData(mockAuthTokenRegistered);
 
-                // Assert
-                expect(storeUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthToken);
+                        // Assert
+                        expect(storeUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthTokenRegistered);
+                    });
+                });
+                describe('and user is a guest', () => {
+                    it('should call `updateUserData` action with `userDataWithMockAuthTokenGuest`', () => {
+                        // Act
+                        wrapper.vm.prepareUserData(mockAuthTokenGuest);
+
+                        // Assert
+                        expect(storeUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthTokenGuest);
+                    });
+                });
             });
         });
 
