@@ -79,8 +79,7 @@ export default {
                 day: '',
                 month: '',
                 year: ''
-            },
-            selectedMonth: '0'
+            }
         };
     },
 
