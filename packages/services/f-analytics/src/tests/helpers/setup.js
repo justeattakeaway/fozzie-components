@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import Vuex from 'vuex';
 
 const defaultState = {
@@ -5,42 +6,53 @@ const defaultState = {
         environment: '',
         name: '',
         appType: '',
-        applicationId: null,
+        applicationId: undefined,
         userAgent: '',
         branding: '',
         country: '',
         language: '',
-        jeUserPercentage: null,
+        jeUserPercentage: undefined,
         currency: '',
         version: '',
         instancePosition: ''
+    },
+    userData: {
+        'a-UserId': '',
+        authType: undefined,
+        email: undefined,
+        globalUserId: undefined,
+        signinType: undefined,
+        signupDate: undefined
     }
 };
 
-const modifieldState = {
-    platformData: {
-        environment: 'test-environment',
-        name: 'test-name',
-        appType: 'test-appType',
-        applicationId: 9,
-        userAgent: 'test-userAgent',
-        branding: 'test-branding',
-        country: 'zu',
-        language: 'ze',
-        jeUserPercentage: 88,
-        currency: 'zud',
-        version: '9.8.7.6',
-        instancePosition: '999'
-    }
+const updatedPlatformData = {
+    environment: 'test-environment',
+    name: 'test-name',
+    appType: 'test-appType',
+    applicationId: 9,
+    userAgent: 'test-userAgent',
+    branding: 'test-branding',
+    country: 'zu',
+    language: 'ze',
+    jeUserPercentage: 88,
+    currency: 'zud',
+    version: '9.8.7.6',
+    instancePosition: '999'
+};
+
+const updatedUserData = {
+    'a-UserId': 'xxxx-xxxx',
+    authType: 'Login',
+    email: 'gjfkdgjdkgjhd',
+    globalUserId: 'fdsgsgsgsg',
+    signinType: 'Email',
+    signupDate: '2021-05-12T10:57:05.9130000Z'
 };
 
 const defaultActions = {
-    updatePlatformData: jest.fn()
-};
-
-const gtmSettings = {
-    namespace: 'f-analytics',
-    id: 'GTM-123456A'
+    updatePlatformData: jest.fn(),
+    updateUserData: jest.fn()
 };
 
 const createStore = ({
@@ -73,9 +85,9 @@ const $i18n = {
 export {
     defaultState,
     defaultActions,
-    modifieldState,
+    updatedPlatformData,
+    updatedUserData,
     createStore,
-    gtmSettings,
     $cookies,
     $route,
     $i18n

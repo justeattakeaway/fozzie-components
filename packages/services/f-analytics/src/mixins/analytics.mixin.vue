@@ -1,27 +1,26 @@
 <script>
+import jwtDecode from 'jwt-decode';
+import SHA256 from 'crypto-js/sha256';
 import { mapState, mapActions } from 'vuex';
 import {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME
+    MAP_ROUTE_TO_FEATURE_NAME,
+    IDENTITY_PROVIDERS,
+    GRANT_TYPES
 } from '../constants';
 
 export default {
-    name: 'Analytics',
-
-    computed: {
-        ...mapState('f-analytics', ['platformData']),
+    computed:
+    {
+        ...mapState('f-analytics', [
+            'platformData',
+            'userData'
+        ]),
 
         isServerSide () {
             return typeof (window) === 'undefined';
-        }
-    },
-
-    watch: {
-        $route () {
-            this.prepareAnalytics();
-            this.pushAnalytics();
         }
     },
 
@@ -29,13 +28,11 @@ export default {
         this.prepareServersideAnalytics();
     },
 
-    mounted () {
-        this.prepareAnalytics();
-        this.pushAnalytics();
-    },
-
     methods: {
-        ...mapActions('f-analytics', ['updatePlatformData']),
+        ...mapActions('f-analytics', [
+            'updatePlatformData',
+            'updateUserData'
+        ]),
 
         prepareServersideAnalytics () {
             if (this.isServerSide) {
@@ -53,7 +50,7 @@ export default {
             }
         },
 
-        prepareAnalytics () {
+        preparePlatformData () {
             const platformData = { ...this.platformData };
 
             platformData.name = MAP_ROUTE_TO_FEATURE_NAME[this.$route.name] || this.$route.name;
@@ -68,9 +65,30 @@ export default {
             this.updatePlatformData(platformData);
         },
 
+        prepareUserData (authToken) {
+            const userData = { ...this.userData };
+
+            userData['a-UserId'] = this.$cookies.get('je-auser') || undefined;
+
+            if (authToken) {
+                const tokenData = jwtDecode(authToken);
+
+                userData.authType = tokenData?.is_new_registration ? GRANT_TYPES.registration : GRANT_TYPES[tokenData?.grant_type] || GRANT_TYPES.default;
+                userData.email = tokenData?.email ? SHA256(tokenData?.email).toString() : undefined;
+                userData.globalUserId = tokenData?.global_user_id || undefined;
+                userData.signinType = tokenData?.role === IDENTITY_PROVIDERS.otac ? IDENTITY_PROVIDERS.otac || IDENTITY_PROVIDERS[tokenData?.idp] : IDENTITY_PROVIDERS.default;
+                userData.signupDate = tokenData?.created_date || undefined;
+            }
+
+            this.updateUserData(userData);
+        },
+
         pushAnalytics () {
             const dataLayer = window.dataLayer || [];
-            dataLayer.push({ platformData: { ...this.platformData } });
+            dataLayer.push({
+                platformData: { ...this.platformData },
+                userData: { ...this.userData }
+            });
         }
     }
 };
