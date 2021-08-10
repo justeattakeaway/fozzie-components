@@ -4,11 +4,9 @@ let contextGetter = null;
  * @returns Context required to evaluate features at current time current request, e.g. country.
  */
 function getContext () {
-    if (contextGetter) {
-        return contextGetter();
-    }
-
-    return null;
+    return (contextGetter)
+        ? contextGetter()
+        : null;
 }
 
 /**
