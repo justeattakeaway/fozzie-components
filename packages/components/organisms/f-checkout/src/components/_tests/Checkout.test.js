@@ -27,6 +27,7 @@ import {
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
 import addressService from '../../services/addressService';
+import checkoutIssues from '../../checkout-issues';
 
 const {
     CreateGuestUserError,
@@ -962,7 +963,7 @@ describe('Checkout', () => {
         });
 
         describe('eventData ::', () => {
-            it('should return `isLoggedIn`, `serviceType`, `chosenTime`, `isFulfillable` and `issueMessage` in an object`', () => {
+            it('should return `isLoggedIn` and `serviceType` in an object`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -977,10 +978,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(result).toEqual({
                     isLoggedIn: defaultCheckoutState.isLoggedIn,
-                    serviceType: defaultCheckoutState.serviceType,
-                    chosenTime: defaultCheckoutState.time.from,
-                    isFulfillable: defaultCheckoutState.isFulfillable,
-                    issueMessage: defaultCheckoutState.message?.code
+                    serviceType: defaultCheckoutState.serviceType
                 });
             });
         });
@@ -1157,6 +1155,24 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.redirectUrl).toEqual(`dine-in-${restaurant.seoName}/menu`);
                 });
+            });
+        });
+
+        describe('shouldShowAgeVerification ::', () => {
+            it('should return `true` when first error is `AGE_VERIFICATION_REQUIRED`', () => {
+                // Arrange && Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        errors: [checkoutIssues.AGE_VERIFICATION_REQUIRED]
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.shouldShowAgeVerification).toBe(true);
             });
         });
     });

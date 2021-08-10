@@ -89,7 +89,8 @@ const defaultCheckoutActions = {
     getCustomerName: jest.fn(),
     updateHasAsapSelected: jest.fn(),
     getUserNote: jest.fn(),
-    saveUserNote: jest.fn()
+    saveUserNote: jest.fn(),
+    updateDateOfBirth: jest.fn()
 };
 
 const defaultAnalyticsActions = {

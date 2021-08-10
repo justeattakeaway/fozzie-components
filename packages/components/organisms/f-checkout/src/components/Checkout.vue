@@ -16,7 +16,7 @@
         </div>
 
         <age-verification
-            v-if="shouldShowAgeVerification"
+            v-else-if="shouldShowAgeVerification"
             @verify-age="handleUpdateCheckout" />
 
         <div
@@ -192,6 +192,7 @@ import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
+import checkoutIssues from '../checkout-issues';
 
 const {
     CreateGuestUserError,
@@ -358,7 +359,6 @@ export default {
             'availableFulfilment',
             'basket',
             'customer',
-            'dateOfBirth',
             'errors',
             'geolocation',
             'isGuestCreated',
@@ -378,7 +378,7 @@ export default {
         ]),
 
         shouldShowAgeVerification () {
-            return this.errors[0] === 'AGE_VERIFICATION_REQUIRED';
+            return this.errors[0] === checkoutIssues.AGE_VERIFICATION_REQUIRED;
         },
 
         wasMobileNumberFocused () {
@@ -429,10 +429,7 @@ export default {
         eventData () {
             return {
                 isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType,
-                chosenTime: this.time.from,
-                isFulfillable: this.isFulfillable,
-                issueMessage: this.message?.code
+                serviceType: this.serviceType
             };
         },
 

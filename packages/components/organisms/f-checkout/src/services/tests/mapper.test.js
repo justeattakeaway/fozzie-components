@@ -28,7 +28,8 @@ describe('checkout mapper', () => {
         const customer = {
             firstName: 'Test',
             lastName: 'Tester',
-            mobileNumber: '07890123456'
+            mobileNumber: '07890123456',
+            dateOfBirth: new Date(2020, 7, 5)
         };
 
         // Act
@@ -43,7 +44,7 @@ describe('checkout mapper', () => {
         expect(customerRequest.firstName).toBe(customer.firstName);
         expect(customerRequest.lastName).toBe(customer.lastName);
         expect(customerRequest.phoneNumber).toBe(customer.mobileNumber);
-        expect(customerRequest.dateOfBirth).toBe(null);
+        expect(customerRequest.dateOfBirth).toBe(customer.dateOfBirth);
     });
 
     it('should map address correctly', () => {

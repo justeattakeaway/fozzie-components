@@ -5,20 +5,17 @@
         card-heading-position="center"
         has-outline
         :card-heading="$t(`ageVerification.heading`)"
-        data-test-id="checkout-age-verification-component"
-        :class="[$style['c-checkout-ageVerification'], $style['c-checkout-ageVerification--verticalPadding']]">
+        data-test-id="checkout-age-verification-component">
         <p
             :class="$style['c-checkout-ageVerification-description']"
             data-test-id="checkout-age-verification-description">
             {{ $t(`ageVerification.description`) }}
         </p>
 
-        <div
-            :class="$style['c-checkout-ageVerification-fields']">
+        <div>
             <form-field
                 id="day-selection"
                 input-type="dropdown"
-                :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.day`)"
                 :dropdown-options="days"
                 :value="selectedDate.day"
@@ -27,7 +24,6 @@
             <form-field
                 id="month-selection"
                 input-type="dropdown"
-                :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.month`)"
                 :dropdown-options="months"
                 :value="selectedDate.month"
@@ -36,7 +32,6 @@
             <form-field
                 id="year-selection"
                 input-type="dropdown"
-                :class="$style['c-checkout-ageVerification-field']"
                 :label-text="$t(`ageVerification.ageSelection.year`)"
                 :dropdown-options="years"
                 :value="selectedDate.year"
@@ -55,7 +50,7 @@
             button-type="primary"
             is-full-width
             data-test-id="age-verification-redirect-button"
-            @click.native="continueToCheckout">
+            @click.native="handleAgeVerifcation">
             {{ $t(`ageVerification.buttonText`) }}
         </f-button>
     </card>
@@ -80,7 +75,6 @@ export default {
 
     data () {
         return {
-            currentYear: new Date().getUTCFullYear(),
             selectedDate: {
                 day: '',
                 month: '',
@@ -94,7 +88,7 @@ export default {
         ...mapState(VUEX_CHECKOUT_MODULE, ['customer']),
 
         days () {
-            const days = Array.from({ length: 31 }, (_, index) => {
+            return Array.from({ length: 31 }, (_, index) => {
                 const day = (index + 1).toString();
 
                 return {
@@ -102,38 +96,30 @@ export default {
                     value: day
                 };
             });
-
-            return days;
         },
 
         months () {
-            const months = new Array(12).fill(0).map((_, i) => {
+            return new Array(12).fill(0).map((_, i) => {
                 const date = new Date(`${i + 1}/1`);
 
-                const monthValue = {
+                return {
                     text: date.toLocaleDateString(undefined, { month: 'long' }),
                     value: date.toLocaleDateString(undefined, { month: 'numeric' }) - 1
                 };
-
-                return monthValue;
             });
-
-            return months;
         },
 
         years () {
-            const years = Array(this.currentYear - (this.currentYear - 101)).fill('').map((_, index) => {
-                const year = (this.currentYear - index).toString();
+            const currentYear = new Date().getUTCFullYear();
 
-                const yearRange = {
+            return Array(currentYear - (currentYear - 100)).fill('').map((_, index) => {
+                const year = (currentYear - index).toString();
+
+                return {
                     text: year,
                     value: year
                 };
-
-                return yearRange;
             });
-
-            return years;
         }
     },
 
@@ -154,7 +140,7 @@ export default {
             this.selectedDate[type] = selection;
         },
 
-        continueToCheckout () {
+        handleAgeVerifcation () {
             const dateOfBirth = new Date(this.selectedDate.year, this.selectedDate.month, this.selectedDate.day);
 
             this.updateDateOfBirth(dateOfBirth);
@@ -172,15 +158,4 @@ export default {
 .c-checkout-ageVerification-button {
     margin: spacing(x2) 0 spacing();
 }
-// .c-checkout-ageVerification-fields {
-//     display: flex;
-//     flex-wrap: nowrap;
-//     justify-content: stretch;
-//     gap: spacing(x0.5);
-
-// }
-// .c-checkout-ageVerification-field {
-//     margin-top: 0px !important;
-//     flex-basis: calc(100% /3);
-// }
 </style>

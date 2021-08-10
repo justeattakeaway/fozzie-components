@@ -70,7 +70,6 @@ const resolveCustomerDetails = (data, state) => {
         }
 
         if (!data.customer.dateOfBirth) {
-            console.log('here');
             tokenData = tokenData || jwtDecode(state.authToken);
 
             data.customer.dateOfBirth = tokenData.birthdate;
@@ -119,7 +118,7 @@ export default {
         },
         userNote: '',
         isFulfillable: true,
-        errors: ['AGE_VERIFICATION_REQUIRED'],
+        errors: [],
         notices: [],
         message: null,
         messages: [],
@@ -431,8 +430,8 @@ export default {
             commit(UPDATE_ADDRESS, address);
         },
 
-        updateDateOfBirth: ({ commit }, dob) => {
-            commit(UPDATE_DATE_OF_BIRTH, dob);
+        updateDateOfBirth: ({ commit }, dateOfBirth) => {
+            commit(UPDATE_DATE_OF_BIRTH, dateOfBirth);
         }
     },
 
@@ -579,8 +578,8 @@ export default {
             state.customer.mobileNumber = phoneNumber;
         },
 
-        [UPDATE_DATE_OF_BIRTH]: (state, dob) => {
-            state.customer.dateOfBirth = dob;
+        [UPDATE_DATE_OF_BIRTH]: (state, dateOfBirth) => {
+            state.customer.dateOfBirth = dateOfBirth;
         }
     }
 };
