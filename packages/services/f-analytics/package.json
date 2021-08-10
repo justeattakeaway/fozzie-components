@@ -36,7 +36,9 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0"
+    "@justeat/f-services": "1.7.0",
+    "crypto-js": "4.0.0",
+    "jwt-decode": "3.1.2"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"

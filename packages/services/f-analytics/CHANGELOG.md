@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.7.0
 ------------------------------
-*August 9, 2021*
+*August 10, 2021*
 
 ### Added
 - `PreparePageData` method
@@ -18,6 +18,14 @@ v0.7.0
 v0.6.0
 ------------------------------
 *August 9, 2021*
+- `PrepareUserData` method
+
+### Changed
+- `PrepareAnalytics` method renamed to `PreparePlatformData`
+- `null` values changed to `undefined` because of analytics team requirement
+
+### Removed
+- Watch and mounted hook for prepare and push functions as now they will be called from a consuming app
 
 
 v0.5.0

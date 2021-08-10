@@ -1,9 +1,13 @@
 <script>
+import jwtDecode from 'jwt-decode';
+import SHA256 from 'crypto-js/sha256';
 import { mapState, mapActions } from 'vuex';
 import {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
-    DEFAULT_APP_TYPE
+    DEFAULT_APP_TYPE,
+    IDENTITY_PROVIDERS,
+    GRANT_TYPES
 } from '../constants';
 import {
     getDisplaySize,
@@ -13,8 +17,13 @@ import {
 } from '../utils/helpers';
 
 export default {
-    computed: {
-        ...mapState('f-analytics', ['platformData', 'pageData']),
+    computed:
+    {
+        ...mapState('f-analytics', [
+            'platformData',
+            'userData',
+            'pageData'
+        ]),
 
         isServerSide () {
             return typeof (window) === 'undefined';
@@ -27,7 +36,11 @@ export default {
     },
 
     methods: {
-        ...mapActions('f-analytics', ['updatePlatformData', 'updatePageData']),
+        ...mapActions('f-analytics', [
+            'updatePlatformData',
+            'updateUserData',
+            'updatePageData'
+        ]),
 
         prepareServersideAnalytics () {
             if (this.isServerSide) {
@@ -63,6 +76,24 @@ export default {
             this.updatePlatformData(platformData);
         },
 
+        prepareUserData (authToken) {
+            const userData = { ...this.userData };
+
+            userData['a-UserId'] = this.$cookies.get('je-auser') || undefined;
+
+            if (authToken) {
+                const tokenData = jwtDecode(authToken);
+
+                userData.authType = tokenData?.is_new_registration ? GRANT_TYPES.registration : GRANT_TYPES[tokenData?.grant_type] || GRANT_TYPES.default;
+                userData.email = tokenData?.email ? SHA256(tokenData?.email).toString() : undefined;
+                userData.globalUserId = tokenData?.global_user_id || undefined;
+                userData.signinType = tokenData?.role === IDENTITY_PROVIDERS.otac ? IDENTITY_PROVIDERS.otac || IDENTITY_PROVIDERS[tokenData?.idp] : IDENTITY_PROVIDERS.default;
+                userData.signupDate = tokenData?.created_date || undefined;
+            }
+
+            this.updateUserData(userData);
+        },
+
         preparePageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
             const pageData = {
                 ...this.pageData
@@ -89,8 +120,11 @@ export default {
 
         pushAnalytics () {
             const dataLayer = window.dataLayer || [];
-            dataLayer.push({ platformData: { ...this.platformData } });
-            dataLayer.push({ pageData: { ...this.pageData } });
+            dataLayer.push({
+                platformData: { ...this.platformData },
+                userData: { ...this.userData },
+                pageData: { ...this.pageData }
+            });
         }
     }
 };

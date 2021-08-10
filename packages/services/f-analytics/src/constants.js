@@ -40,6 +40,21 @@ const COUNTRY_INFO = {
 const DEFAULT_APP_ID = 7;
 const DEFAULT_APP_TYPE = 'web';
 
+const IDENTITY_PROVIDERS = {
+    facebook: 'Facebook',
+    google: 'Google',
+    idsrv: 'Email',
+    otac: 'Guest',
+    default: 'Email'
+};
+
+const GRANT_TYPES = {
+    // eslint-disable-next-line quote-props
+    'refresh_token': 'Resume',
+    registration: 'Sign up',
+    default: 'Login'
+};
+
 const GROUPS_FEATURES_ROUTES = [
     {
         group: 'Account',
@@ -55,9 +70,12 @@ const GROUPS_FEATURES_ROUTES = [
     }
 ];
 
+
 export {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
-    GROUPS_FEATURES_ROUTES
+    GROUPS_FEATURES_ROUTES,
+    IDENTITY_PROVIDERS,
+    GRANT_TYPES
 };

@@ -2,12 +2,13 @@ import AnalyticsModule from '../analytics.module';
 import {
     defaultState,
     updatedPlatformData,
+    updatedUserData,
     updatedPageData
 } from '../../tests/helpers/setup';
 
 const { actions, mutations } = AnalyticsModule;
-const { updatePlatformData, updatePageData } = actions;
-const { pushPlatformData, pushPageData } = mutations;
+const { updatePlatformData, updateUserData, updatePageData } = actions;
+const { pushPlatformData, pushUserData, pushPageData } = mutations;
 let state = AnalyticsModule.state();
 
 describe('AnalyticsModule', () => {
@@ -26,6 +27,16 @@ describe('AnalyticsModule', () => {
             it('should update state with `platformData`', () => {
                 // Act
                 mutations.pushPlatformData(state, updatedPlatformData);
+
+                // Assert
+                expect(state).toMatchSnapshot();
+            });
+        });
+
+        describe(`${pushUserData} ::`, () => {
+            it('should update state with `userData`', () => {
+                // Act
+                mutations.pushUserData(state, updatedUserData);
 
                 // Assert
                 expect(state).toMatchSnapshot();
@@ -54,6 +65,18 @@ describe('AnalyticsModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith('pushPlatformData', updatedPlatformData);
+            });
+        });
+        describe(`${updateUserData} ::`, () => {
+            it('should call the `pushUserData` mutation', () => {
+                // Arrange
+                const commit = jest.fn();
+
+                // Act
+                updateUserData({ commit }, updatedUserData);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith('pushUserData', updatedUserData);
             });
         });
         describe(`${updatePageData} ::`, () => {

@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import Vuex from 'vuex';
 
 const defaultState = {
@@ -14,6 +15,14 @@ const defaultState = {
         currency: '',
         version: '',
         instancePosition: ''
+    },
+    userData: {
+        'a-UserId': '',
+        authType: undefined,
+        email: undefined,
+        globalUserId: undefined,
+        signinType: undefined,
+        signupDate: undefined
     },
     pageData: {
         name: '',
@@ -53,14 +62,19 @@ const updatedPageData = {
     display: 'wide'
 };
 
-const defaultActions = {
-    updatePlatformData: jest.fn(),
-    updatePageData: jest.fn()
+const updatedUserData = {
+    'a-UserId': 'xxxx-xxxx',
+    authType: 'Login',
+    email: 'gjfkdgjdkgjhd',
+    globalUserId: 'fdsgsgsgsg',
+    signinType: 'Email',
+    signupDate: '2021-05-12T10:57:05.9130000Z'
 };
 
-const gtmSettings = {
-    namespace: 'f-analytics',
-    id: 'GTM-123456A'
+const defaultActions = {
+    updatePlatformData: jest.fn(),
+    updateUserData: jest.fn(),
+    updatePageData: jest.fn()
 };
 
 const createStore = ({
@@ -95,8 +109,8 @@ export {
     defaultActions,
     updatedPlatformData,
     updatedPageData,
+    updatedUserData,
     createStore,
-    gtmSettings,
     $cookies,
     $route,
     $i18n

@@ -1,4 +1,6 @@
 export default {
+    name: 'Analytics',
+
     namespaced: true,
 
     state: () => ({
@@ -16,6 +18,14 @@ export default {
             version: '',
             instancePosition: ''
         },
+        userData: {
+            'a-UserId': '',
+            authType: undefined,
+            email: undefined,
+            globalUserId: undefined,
+            signinType: undefined,
+            signupDate: undefined
+        },
         pageData: {
             name: '',
             group: '',
@@ -32,6 +42,9 @@ export default {
         updatePlatformData: ({ commit }, platformData) => {
             commit('pushPlatformData', platformData);
         },
+        updateUserData: ({ commit }, userData) => {
+            commit('pushUserData', userData);
+        },
         updatePageData: ({ commit }, pageData) => {
             commit('pushPageData', pageData);
         }
@@ -40,6 +53,9 @@ export default {
     mutations: {
         pushPlatformData: (state, platformData) => {
             state.platformData = platformData;
+        },
+        pushUserData: (state, userData) => {
+            state.userData = userData;
         },
         pushPageData: (state, pageData) => {
             state.pageData = pageData;
