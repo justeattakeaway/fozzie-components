@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import Vuex from 'vuex';
 import Vue from 'vue';
 
@@ -15,6 +16,14 @@ const defaultState = {
         currency: '',
         version: '0.0.0.0',
         instancePosition: 'N/A'
+    },
+    userData: {
+        'a-UserId': '',
+        authType: undefined,
+        email: undefined,
+        globalUserId: undefined,
+        signinType: undefined,
+        signupDate: undefined
     },
     events: []
 };
@@ -34,6 +43,14 @@ const modifieldState = {
         version: '9.8.7.6',
         instancePosition: '999'
     },
+    userData: {
+        'a-UserId': 'xxxx-xxxx',
+        authType: 'Login',
+        email: 'gjfkdgjdkgjhd',
+        globalUserId: 'fdsgsgsgsg',
+        signinType: 'Email',
+        signupDate: '2021-05-12T10:57:05.9130000Z'
+    },
     events: []
 };
 
@@ -52,6 +69,7 @@ const newEvent = {
 
 const defaultActions = {
     pushPlatformData: jest.fn(),
+    pushUserData: jest.fn(),
     pushEvent: jest.fn()
 };
 

@@ -6,12 +6,13 @@ import {
 } from '../../tests/helpers/setup';
 import {
     PUSH_PLATFORM_DATA,
+    PUSH_USER_DATA,
     PUSH_EVENT,
     CLEAR_EVENTS
 } from '../mutation-types';
 
 const { actions, mutations } = AnalyticsModule;
-const { pushPlatformData, pushEvent } = actions;
+const { pushPlatformData, pushUserData, pushEvent } = actions;
 
 describe('Analytics Module ::', () => {
     let state;
@@ -25,6 +26,9 @@ describe('Analytics Module ::', () => {
             // thus allow assertions on the final state
             if (mutation === PUSH_PLATFORM_DATA) {
                 state.platformData = { ...state.platformData, ...mutationPayload };
+            }
+            if (mutation === PUSH_USER_DATA) {
+                state.userData = mutationPayload;
             }
             if (mutation === PUSH_EVENT) {
                 state.events = [...state.events, mutationPayload];
@@ -108,6 +112,72 @@ describe('Analytics Module ::', () => {
                 // Assert
                 expect(windowsPushSpy).not.toHaveBeenCalled();
                 expect(state.platformData).toEqual(modifieldState.platformData);
+            });
+        });
+
+        describe('pushUserData ::', () => {
+            it('should call the `pushUserData` mutation', () => {
+                // Act
+                pushUserData({ commit }, modifieldState.userData);
+
+                // Assert
+                expect(commit).toHaveBeenLastCalledWith('pushUserData', modifieldState.userData);
+            });
+
+            it('should push the `pushUserData` if clientside & dataLayer present', () => {
+                // Arrange
+                const windowsPushSpy = jest.fn();
+                const originalWindow = { ...window };
+                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
+
+                // Act
+                pushUserData({ commit, state }, modifieldState.userData);
+
+                // Assert
+                expect(windowsPushSpy).toHaveBeenLastCalledWith({ userData: { ...modifieldState.userData } });
+                expect(state.userData).toEqual(modifieldState.userData);
+            });
+
+            it('should not push the `pushUserData` if serverside', () => {
+                // Arrange
+                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
+                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
+
+                // Act
+                pushUserData({ commit, state }, modifieldState.userData);
+
+                // Assert
+                expect(windowsPushSpy).not.toHaveBeenCalled();
+                expect(state.userData).toEqual(modifieldState.userData);
+            });
+
+            it('should not push the `pushUserData` if clientside & dataLayer not present', () => {
+                // Arrange
+                const windowsPushSpy = jest.fn();
+                const originalWindow = { ...window };
+                const windowSpy = jest.spyOn(global, 'window', 'get');
+                windowSpy.mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
+                windowSpy.mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: undefined
+                }));
+
+                // Act
+                pushUserData({ commit, state }, modifieldState.userData);
+
+                // Assert
+                expect(windowsPushSpy).not.toHaveBeenCalled();
+                expect(state.userData).toEqual(modifieldState.userData);
             });
         });
 
@@ -223,7 +293,7 @@ describe('Analytics Module ::', () => {
                 mutations[PUSH_PLATFORM_DATA](state, modifieldState.platformData);
 
                 // Assert
-                expect(state).toEqual(modifieldState);
+                expect(state.platformData).toEqual(modifieldState.platformData);
             });
 
             it('should not overwrite the serverside platformData when saving the clientside platformData', () => {
@@ -253,6 +323,16 @@ describe('Analytics Module ::', () => {
 
                 // Assert
                 expect(currentState.platformData).toEqual(expected);
+            });
+        });
+
+        describe(`${PUSH_USER_DATA} ::`, () => {
+            it('should update state with `userData`', () => {
+                // Act
+                mutations.pushUserData(state, modifieldState.userData);
+
+                // Assert
+                expect(state.userData).toEqual(modifieldState.userData);
             });
         });
 
