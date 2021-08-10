@@ -159,11 +159,6 @@ export const CheckoutComponent = () => ({
         };
     },
     props: {
-
-        shouldShowAgeVerification: {
-            default: boolean('shouldShowAgeVerification', true)
-        },
-
         isLoggedIn: {
             default: boolean('Is User Logged In', false)
         },
@@ -251,7 +246,6 @@ export const CheckoutComponent = () => ({
     }),
 
     template: '<vue-checkout ' +
-        ':shouldShowAgeVerification="shouldShowAgeVerification" ' +
         ':getCheckoutUrl="getCheckoutUrl" ' +
         ':updateCheckoutUrl="updateCheckoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
