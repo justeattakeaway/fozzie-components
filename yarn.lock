@@ -2361,6 +2361,11 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-button@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.9.0.tgz#ff7f5dc0ccae943d80ba9affad29c89b11e18156"
+  integrity sha512-HJqDqiTEJ/vuo5PAhvcm7Cn0WRZS8EfOxbdpQ+wswXVzvZTwr9nd3xL30HMfP6p8yb/YlpjsaAU6StILoGqOLA==
+
 "@justeat/f-card@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-1.2.1.tgz#8b44b73c291c8527beb6351730a90a476cb54325"
@@ -2411,14 +2416,6 @@
   integrity sha512-WXBBl/nu88HxVKIuEt1/1KYnAB2XUImi+CK9ZdKQt/FiQolDMe+9hqxTRr2YSbeLXulGXR17WOCDAJQKwHU2Og==
   dependencies:
     vue-i18n "8.0.0"
-
-"@justeat/f-http@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-http/-/f-http-0.6.1.tgz#3252c0767f3db6bbd1d932644281f8d1283e3f2d"
-  integrity sha512-CtZ5XfB2dRox7YxSUO3sR91sgCgCgjv60m7I6YCl9zVchFZqPoejp87y3HGMFJ3HDyEjGmJHDAEs1y6KshjsAA==
-  dependencies:
-    axios "0.21.1"
-    axios-mock-adapter "1.19.0"
 
 "@justeat/f-icons@3.5.1":
   version "3.5.1"
@@ -8545,17 +8542,16 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromedriver@90.0.0:
-  version "90.0.0"
-  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-90.0.0.tgz#1b18960a31a12884981bdc270b43c4356ce7a65a"
-  integrity sha512-k+GMmNb7cmuCCctQvUIeNxDGSq8DJauO+UKQS2qLT8aA36CPEcv8rpFepf6lRkNaIlfwdCUt/0B5bZDw3wY2yw==
+chromedriver@92.0.0:
+  version "92.0.0"
+  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-92.0.0.tgz#7860efe7d082ec877dc8146aa920d30340fcbb47"
+  integrity sha512-IdJ5n5jLL6tCsGQF/fQHF2gDEhVzoYIqktUn6hE/BSsXlCcyDTi45fQbhTEhZlmshM8+BpnRtPuIT5DRbxNqKg==
   dependencies:
     "@testim/chrome-version" "^1.0.7"
     axios "^0.21.1"
     del "^6.0.0"
     extract-zip "^2.0.1"
     https-proxy-agent "^5.0.0"
-    mkdirp "^1.0.4"
     proxy-from-env "^1.1.0"
     tcp-port-used "^1.0.1"
 
