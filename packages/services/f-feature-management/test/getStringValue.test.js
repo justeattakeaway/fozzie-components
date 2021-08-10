@@ -1,6 +1,6 @@
 import featureManagement from '../src/index';
 
-const { getStringValue } = featureManagement('');
+const { getStringValue } = featureManagement({});
 
 describe.skip('String value retrieval', () => {
     it('Get empty string value', () => {
