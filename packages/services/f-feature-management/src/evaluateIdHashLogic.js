@@ -1,0 +1,77 @@
+import evaluateRestriction from './evaluateRestriction';
+import calculateFractions from './calculateFractions';
+
+function getFirstRuleMatch (idHashLogicDetail, context) {
+    for (let i = 0; i < idHashLogicDetail.rules.length; i++) {
+        const rule = idHashLogicDetail.rules[i];
+        if (evaluateRestriction(rule.restrictions, context)) {
+            return rule;
+        }
+    }
+
+    return null;
+}
+
+function getIdToHash (idHashLogicDetail, context) {
+    switch (idHashLogicDetail.bucketBy) {
+        case 'AnonUserId':
+            return context.anonUserId;
+        default:
+            throw new Error('Unexpected bucketBy ', idHashLogicDetail.bucketBy);
+    }
+}
+
+function getVariant (rule, variantFraction) {
+    if (variantFraction > 1) {
+        throw new Error(`Variant fraction was ${variantFraction} but shouldn't be > 1`);
+    }
+
+    let totalWeight = 0;
+    rule.variants.forEach(v => {
+        totalWeight += v.weight;
+    });
+
+    // works through the variants until we have reached the "variantFraction" for the user
+    let cumuFraction = 0;
+    for (let i = 0; i < rule.variants.length; i++) {
+        const variant = rule.variants[i];
+        cumuFraction += (variant.weight / totalWeight);
+
+        if (cumuFraction >= variantFraction) {
+            return variant;
+        }
+    }
+
+    // This should never happen since the cumulative fraction is always <= 1.
+    throw new Error('No matching variant found.');
+}
+
+/**
+ * Returns the relevant variant for this user, using the IdHash rules.
+ * @param {object} idHashLogicDetail - The detail of the IdHash rules set up for this feature.
+ * @param {object} context - User's id, country, etc.
+ */
+function evaluateIdHashLogic (idHashLogicDetail, context) {
+    // 1. find the first rule where the context matches the rule's restrictions
+    const matchingRule = getFirstRuleMatch(idHashLogicDetail, context);
+
+    // 2. if no matching rule, return null - calling code will revert to defaults
+    if (!matchingRule) {
+        return null;
+    }
+
+    // 3. compute the audienceFraction and variantFraction, based on the relevant id and prefix for the experiment
+    const { audienceFraction, variantFraction } = calculateFractions(idHashLogicDetail.prefix + getIdToHash(idHashLogicDetail, context));
+
+    // 4. if the user is not caught in traffic allocated to the experiment, return null - calling code will rever to defaults
+    if (matchingRule.audienceFraction < audienceFraction) {
+        return null;
+    }
+
+    // 5. get and return the variant that the user falls into
+    const variant = getVariant(matchingRule, variantFraction);
+
+    return variant;
+}
+
+export default evaluateIdHashLogic;
