@@ -1,11 +1,13 @@
 {
   "name": "@justeat/f-statistics",
   "description": "Javascript client for transporting statistics",
-  "version": "0.1.0",
-  "main": "src/index.js",
+  "version": "0.2.0",
   "maxBundleSize": "100kB",
+  "main": "dist/f-statistics.umd.js",
+  "module": "dist/f-statistics.es.js",
+  "source": "src/index.js",
   "files": [
-    "src"
+    "dist"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-statistics",
   "contributors": [
@@ -26,22 +28,20 @@
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn lint:fix && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-statistics ./src/index.js",
-    "lint": "vue-cli-service lint --no-fix",
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "vite build",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit",
-    "test:coverage": "vue-cli-service test:unit --coverage"
+    "test": "jest",
+    "test:coverage": "jest test:unit --coverage"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {},
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
     "core-js": "3.6.5",
-    "jest-extended": "0.11.5"
+    "eslint": "7.32.0",
+    "jest-extended": "0.11.5",
+    "vite": "2.4.4"
   }
 }
