@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.6.0
+------------------------------
+*August 9, 2021*
+
+### Added
+- `PrepareUserData` method
+
+### Changed
+- `PrepareAnalytics` method renamed to `PreparePlatformData`
+- `null` values changed to `undefined` because of analytics team requirement 
+
+### Removed
+- Watch and mounted hook for prepare and push functions as now they will be called from a consuming app
+
+
 v0.5.0
 ------------------------------
 *July 28, 2021*

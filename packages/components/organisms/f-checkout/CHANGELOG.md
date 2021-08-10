@@ -12,12 +12,21 @@ v0.168.1
 
 
 
+Latest (to be added to next release)
+------------------------------
+*August 9, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
 v0.168.0
 ------------------------------
 *August 5, 2021*
 
 ### Added
 - Modal specific tab looping tests to `axe-accessibility.spec.js` that support `dinein`, `collection` and `delivery` variants of checkout.
+Latest (to be added to next release)
 
 
 v0.167.0
@@ -59,19 +68,6 @@ v0.163.0
 
 ### Added
 - Extracted APIs from Checkout Store so they are accessible to Contract Tests
-
-
-Latest (to be added to next version)
-------------------------------
-*July 15, 2021*
-
-### Changed
-- Updated version of `f-button`.
-
-
-Latest (to be added to next version)
-------------------------------
-*July 15, 2021*
 
 ### Changed
 - Updated version of `f-button`.

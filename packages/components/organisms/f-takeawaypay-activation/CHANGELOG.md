@@ -3,12 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.7.0
+------------------------------
+*August 9, 2021*
+
+### Added
+- Added logic to handle guest users
+- Code cleanup
+
+
 v0.6.0
 ------------------------------
 *August 09, 2021*
 
 ### Added
 - Added logging around API requests
+
+
+Latest (to be added to next release)
+------------------------------
+*July 26, 2021*
+
+### Changed
+- Updated version of `f-button`.
 
 
 v0.4.0
