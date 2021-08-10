@@ -6,7 +6,7 @@ const defaultState = {
         environment: 'localhost',
         name: '',
         appType: '',
-        applicationId: null,
+        applicationId: undefined,
         userAgent: 'N/A',
         branding: '',
         country: '',
