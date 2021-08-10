@@ -18,6 +18,8 @@ v0.7.0
 v0.6.0
 ------------------------------
 *August 9, 2021*
+
+ ### Added
 - `PrepareUserData` method
 
 ### Changed
