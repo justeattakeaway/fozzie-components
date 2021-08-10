@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-analytics",
   "description": "Fozzie Analytics - A utility that encapsulates the GTM / Google Analytics functionality",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "main": "dist/f-analytics.umd.min.js",
-  "maxBundleSize": "10kB",
+  "maxBundleSize": "170kB",
   "files": [
     "dist"
   ],
@@ -36,7 +36,9 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0"
+    "@justeat/f-services": "1.7.0",
+    "crypto-js": "4.0.0",
+    "jwt-decode": "3.1.2"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"

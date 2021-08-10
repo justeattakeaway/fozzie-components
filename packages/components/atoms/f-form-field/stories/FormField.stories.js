@@ -7,8 +7,7 @@ import {
     CUSTOM_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_INPUT_TYPES,
-    VALID_FIELD_SIZES,
-    VALID_LABEL_STYLES
+    VALID_FIELD_SIZES
 } from '../src/constants';
 
 export default {
@@ -34,8 +33,8 @@ export const FormFieldComponent = () => ({
         inputType: {
             default: select('Input Type', VALID_INPUT_TYPES.concat(CUSTOM_INPUT_TYPES))
         },
-        labelStyle: {
-            default: select('Label Style', VALID_LABEL_STYLES)
+        shouldShowLabelText: {
+            default: boolean('shouldShowLabelText', true)
         },
         hasError: {
             default: boolean('hasError', false)
@@ -49,8 +48,8 @@ export const FormFieldComponent = () => ({
         isGrouped: {
             default: boolean('isGrouped', false)
         },
-        hasInputDescription: {
-            default: boolean('hasExtraLabelText', false)
+        labelDescription: {
+            default: text('Label Description', '')
         },
         labelDetails: {
             default: text('Label Details', '')
@@ -70,7 +69,7 @@ export const FormFieldComponent = () => ({
             :locale="locale"
             :label-text="labelText"
             :input-type="inputType"
-            :label-style="labelStyle"
+            :shouldShowLabelText="shouldShowLabelText"
             :field-size="fieldSize"
             :has-error="hasError"
             :dropdown-options="dropdownOptions"
@@ -81,10 +80,8 @@ export const FormFieldComponent = () => ({
             :rows="7"
             :maxlength="200"
             :labelDetails="labelDetails"
-            :assistiveText="assistiveText"
-            :has-input-description="hasInputDescription">
-                Here is a bit more text to show
-        </form-field>`
+            :labelDescription="labelDescription"
+            :assistiveText="assistiveText"/>`
 });
 
-FormFieldComponent.storyName = 'f-form-field';
+FormFieldComponent.storyName = 'Form Field';

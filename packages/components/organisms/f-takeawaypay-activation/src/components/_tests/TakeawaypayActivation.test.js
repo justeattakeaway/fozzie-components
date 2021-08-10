@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import TakeawaypayActivation from '../TakeawaypayActivation.vue';
-import i18n from './helpers/setup';
+import { i18n } from './helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
@@ -14,7 +14,8 @@ describe('TakeawaypayActivation', () => {
         registrationUrl: '/register',
         homeUrl: '/',
         authToken: 'token',
-        locale: 'en-GB'
+        locale: 'en-GB',
+        employeeId: '12345'
     };
     const wrapper = shallowMount(TakeawaypayActivation, {
         i18n,

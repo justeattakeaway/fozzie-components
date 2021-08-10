@@ -9,7 +9,7 @@
                 :value="address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
-                maxlength="255"
+                maxlength="100"
                 :label-text="$t('labels.line1')"
                 :placeholder="$t('labels.line1')"
                 is-grouped
@@ -34,8 +34,8 @@
                 :value="address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
-                maxlength="255"
                 :should-show-label-text="false"
+                maxlength="100"
                 :label-text="$t('labels.line2')"
                 :placeholder="$t('labels.line2')"
                 is-grouped
