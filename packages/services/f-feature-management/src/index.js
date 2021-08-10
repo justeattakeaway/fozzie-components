@@ -1,38 +1,10 @@
-const logValueRequest = (func, key, value) => {
-    console.log(`${func.name}: ${key} => ${value}`); // es-lint-disable
-};
+import createFeatureManagementInstance from './createFeatureManagementInstance';
 
-function getBooleanValue (key) {
-    logValueRequest(getBooleanValue, key, true);
-    return true; // TODO: implementation
-}
-
-
-function getIntegerValue (key) {
-    logValueRequest(getIntegerValue, key, 0);
-    return 0; // TODO: implementation
-}
-
-
-function getStringValue (key) {
-    logValueRequest(getStringValue, key, '');
-    return ''; // TODO: implementation
-}
-
-function getValue (key) {
-    logValueRequest(getValue, key, null);
-    return null; // TODO: implementation
-}
-
-export default function (scope) {
-    const fullKey = key => (scope
-        ? `${scope}::${key}`
-        : key);
-
-    return {
-        getBooleanValue: key => getBooleanValue(fullKey(key)),
-        getIntegerValue: key => getIntegerValue(fullKey(key)),
-        getStringValue: key => getStringValue(fullKey(key)),
-        getValue: key => getValue(fullKey(key))
-    };
+/**
+ * Returns an instance of Feature Management.
+ * @param {object} settings - json and contextGetter must be set
+ * @returns Feature Management object to allow querying of features.
+ */
+export default function (settings) {
+    return createFeatureManagementInstance(settings);
 }
