@@ -4,7 +4,7 @@
 
         <h1
             :class="$style['c-takeawaypayActivation-title']">
-            {{ $t('messages.titleActivationAvailable') }}
+            {{ $t('messages.titleActivationAvailable', { consumerGivenName }) }}
         </h1>
 
         <p>
@@ -83,6 +83,10 @@ export default {
             required: true
         },
         consumerEmail: {
+            type: String,
+            required: true
+        },
+        consumerGivenName: {
             type: String,
             required: true
         },
