@@ -1,26 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AnalyticsModule mutations :: ({
-      commit
-    }, platformData) => {
-      commit('updatePlatformData', platformData);
+exports[`AnalyticsModule mutations :: (state, platformData) => {
+      state.platformData = platformData;
     } :: should update state with \`platformData\` 1`] = `
 Object {
   "platformData": Object {
-    "platformData": Object {
-      "appType": "test-appType",
-      "applicationId": 9,
-      "branding": "test-branding",
-      "country": "zu",
-      "currency": "zud",
-      "environment": "test-environment",
-      "instancePosition": "999",
-      "jeUserPercentage": 88,
-      "language": "ze",
-      "name": "test-name",
-      "userAgent": "test-userAgent",
-      "version": "9.8.7.6",
-    },
+    "appType": "test-appType",
+    "applicationId": 9,
+    "branding": "test-branding",
+    "country": "zu",
+    "currency": "zud",
+    "environment": "test-environment",
+    "instancePosition": "999",
+    "jeUserPercentage": 88,
+    "language": "ze",
+    "name": "test-name",
+    "userAgent": "test-userAgent",
+    "version": "9.8.7.6",
+  },
+  "userData": Object {
+    "a-UserId": "",
+    "authType": undefined,
+    "email": undefined,
+    "globalUserId": undefined,
+    "signinType": undefined,
+    "signupDate": undefined,
+  },
+}
+`;
+
+exports[`AnalyticsModule mutations :: (state, userData) => {
+      state.userData = userData;
+    } :: should update state with \`userData\` 1`] = `
+Object {
+  "platformData": Object {
+    "appType": "test-appType",
+    "applicationId": 9,
+    "branding": "test-branding",
+    "country": "zu",
+    "currency": "zud",
+    "environment": "test-environment",
+    "instancePosition": "999",
+    "jeUserPercentage": 88,
+    "language": "ze",
+    "name": "test-name",
+    "userAgent": "test-userAgent",
+    "version": "9.8.7.6",
+  },
+  "userData": Object {
+    "a-UserId": "xxxx-xxxx",
+    "authType": "Login",
+    "email": "gjfkdgjdkgjhd",
+    "globalUserId": "fdsgsgsgsg",
+    "signinType": "Email",
+    "signupDate": "2021-05-12T10:57:05.9130000Z",
   },
 }
 `;

@@ -54,7 +54,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "1.9.0",
+    "@justeat/f-button": "1.10.1",
     "@justeat/f-card": "1.2.1",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.6.1",

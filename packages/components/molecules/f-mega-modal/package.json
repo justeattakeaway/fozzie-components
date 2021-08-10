@@ -43,7 +43,7 @@
     "body-scroll-lock": "3.x"
   },
   "devDependencies": {
-    "@justeat/f-button": "1.9.0",
+    "@justeat/f-button": "1.10.1",
     "@justeat/f-vue-icons": "2.4.0",
     "@justeat/f-wdio-utils": "0.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
