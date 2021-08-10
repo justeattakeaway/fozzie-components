@@ -31,7 +31,8 @@ import {
     ACTIVATION_STATE_AVAILABLE_LOGGED_IN,
     ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN,
     ACTIVATION_STATE_SUCCEEDED,
-    ACTIVATION_STATE_FAILED
+    ACTIVATION_STATE_FAILED,
+    USER_ROLE_GUEST
 } from '../constants';
 
 export default {
@@ -83,6 +84,8 @@ export default {
             tenantConfigs,
             consumerId: '',
             consumerEmail: '',
+            consumerGivenName: '',
+            consumerRole: '',
             activationState: ACTIVATION_STATE_NONE
         };
     },
@@ -131,6 +134,7 @@ export default {
                     authToken: this.authToken,
                     consumerId: this.consumerId,
                     consumerEmail: this.consumerEmail,
+                    consumerGivenName: this.consumerGivenName,
                     employeeId: this.employeeId
                 }
             };
@@ -156,21 +160,31 @@ export default {
             const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl, this.employeeId, this.$store, this.$logger);
 
             if (available) {
-                if (this.authToken) {
-                    this.activationState = ACTIVATION_STATE_AVAILABLE_LOGGED_IN;
-                    this.extractConsumerDetails();
-                } else {
-                    this.activationState = ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN;
-                }
+                this.determineActivationState();
             } else {
                 this.activationState = ACTIVATION_STATE_FAILED;
             }
         },
-        async extractConsumerDetails () {
+
+        extractConsumerDetails () {
             const tokenData = jwtDecode(this.authToken);
             this.consumerId = tokenData.sub;
             this.consumerEmail = tokenData.email;
+            this.consumerGivenName = tokenData.given_name;
+            this.consumerRole = (tokenData.role || '').toLowerCase();
         },
+
+        determineActivationState () {
+            if (this.authToken) {
+                this.extractConsumerDetails();
+                this.activationState = this.consumerRole === USER_ROLE_GUEST ?
+                    ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN :
+                    ACTIVATION_STATE_AVAILABLE_LOGGED_IN;
+            } else {
+                this.activationState = ACTIVATION_STATE_AVAILABLE_NOT_LOGGED_IN;
+            }
+        },
+
         handleActivationResult (successful) {
             this.activationState = successful ? ACTIVATION_STATE_SUCCEEDED : ACTIVATION_STATE_FAILED;
         }
@@ -184,11 +198,14 @@ export default {
     display: flex;
     justify-content: center;
     min-height: 80vh;
-    width: 80vw;
     margin: auto;
     font-family: $font-family-base;
     @include font-size(heading-m);
     text-align: center;
+
+    @include media('>=narrow') {
+        width: 80vw;
+    }
 }
 
     .c-takeawaypayActivation-card {

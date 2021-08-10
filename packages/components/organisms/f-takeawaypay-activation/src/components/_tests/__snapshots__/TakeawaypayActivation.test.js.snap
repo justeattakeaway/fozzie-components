@@ -8,7 +8,7 @@ exports[`TakeawaypayActivation should render ActivationFailed component 1`] = `
 
 exports[`TakeawaypayActivation should render ActivationLoggedIn component 1`] = `
 <card-component-stub cardheading="" cardheadingposition="center" cardheadingtag="h1" ispagecontentwrapper="true" isrounded="true" data-test-id="takeawaypay-activation-component">
-  <activation-logged-in-stub loginurl="/login" registrationurl="/register" activateurl="/activate" authtoken="token" consumerid="" consumeremail="" employeeid="12345"></activation-logged-in-stub>
+  <activation-logged-in-stub loginurl="/login" registrationurl="/register" activateurl="/activate" authtoken="token" consumerid="" consumeremail="" consumergivenname="" employeeid="12345"></activation-logged-in-stub>
 </card-component-stub>
 `;
 
