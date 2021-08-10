@@ -192,7 +192,6 @@ import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
-import checkoutIssues from '../checkout-issues';
 
 const {
     CreateGuestUserError,
@@ -378,7 +377,7 @@ export default {
         ]),
 
         shouldShowAgeVerification () {
-            return this.errors[0] === checkoutIssues.AGE_VERIFICATION_REQUIRED;
+            return false; // TODO: Will be updated as part of Charlies PR
         },
 
         wasMobileNumberFocused () {

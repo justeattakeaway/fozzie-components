@@ -27,7 +27,6 @@ import {
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
 import addressService from '../../services/addressService';
-import checkoutIssues from '../../checkout-issues';
 
 const {
     CreateGuestUserError,
@@ -1155,24 +1154,6 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.redirectUrl).toEqual(`dine-in-${restaurant.seoName}/menu`);
                 });
-            });
-        });
-
-        describe('shouldShowAgeVerification ::', () => {
-            it('should return `true` when first error is `AGE_VERIFICATION_REQUIRED`', () => {
-                // Arrange && Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        errors: [checkoutIssues.AGE_VERIFICATION_REQUIRED]
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.shouldShowAgeVerification).toBe(true);
             });
         });
     });
