@@ -3,9 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.41.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Add the f-http mockFactory to process within Storybook to support story API mocks
+
+
 v0.40.0
 ------------------------------
-*August 5, 2021*
+*August 05, 2021*
 
 ### Added
 - MDX file for media element
