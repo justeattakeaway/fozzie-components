@@ -1,4 +1,6 @@
 export default {
+    name: 'Analytics',
+
     namespaced: true,
 
     state: () => ({
@@ -6,27 +8,41 @@ export default {
             environment: '',
             name: '',
             appType: '',
-            applicationId: null,
+            applicationId: undefined,
             userAgent: '',
             branding: '',
             country: '',
             language: '',
-            jeUserPercentage: null,
+            jeUserPercentage: undefined,
             currency: '',
             version: '',
             instancePosition: ''
+        },
+        userData: {
+            'a-UserId': '',
+            authType: undefined,
+            email: undefined,
+            globalUserId: undefined,
+            signinType: undefined,
+            signupDate: undefined
         }
     }),
 
     actions: {
         updatePlatformData: ({ commit }, platformData) => {
-            commit('updatePlatformData', platformData);
+            commit('pushPlatformData', platformData);
+        },
+        updateUserData: ({ commit }, userData) => {
+            commit('pushUserData', userData);
         }
     },
 
     mutations: {
-        updatePlatformData: (state, platformData) => {
+        pushPlatformData: (state, platformData) => {
             state.platformData = platformData;
+        },
+        pushUserData: (state, userData) => {
+            state.userData = userData;
         }
     }
 };
