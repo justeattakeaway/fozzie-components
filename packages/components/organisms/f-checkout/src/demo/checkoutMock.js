@@ -1,6 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import getCheckoutDelivery from './checkout-delivery.json';
+import getBasketDeliveryAgeRestricted from './get-basket-delivery-age-restriction.json';
 import getCheckoutDeliveryAsapUrl from './checkout-delivery-user-selected-asap.json';
 import getCheckoutDeliveryLaterUrl from './checkout-delivery-user-selected-later.json';
 import getCheckoutDeliveryUnavailableUrl from './checkout-delivery-user-selected-unavailable-time.json';
@@ -33,6 +34,9 @@ const mock = new MockAdapter(axios);
 
 export default {
     setupCheckoutMethod (path) {
+        if (path.includes('dob')) {
+            debugger;
+        }
         switch (path) {
             case '/checkout-delivery.json':
                 mock.onGet(path).reply(200, getCheckoutDelivery);
@@ -63,6 +67,9 @@ export default {
                 break;
             case '/checkout-timeout-get-error.json':
                 mock.onGet(path).timeout();
+                break;
+            case '/get-basket-delivery-age-restriction.json':
+                mock.onGet(path).reply(200, getBasketDeliveryAgeRestricted);
                 break;
             case '/checkout-available-fulfilment.json':
                 mock.onGet(path).reply(200, checkoutAvailableFulfilment);

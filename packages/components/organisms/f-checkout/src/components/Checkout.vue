@@ -399,6 +399,10 @@ export default {
             return TENANT_MAP[this.$i18n.locale];
         },
 
+        shouldShowAgeVerificationForm () {
+            return this.errors.some(error => error.code === 'DATE_OF_BIRTH_REQUIRED');
+        },
+
         shouldLoadAddress () {
             return this.isLoggedIn &&
                 this.isCheckoutMethodDelivery &&
@@ -413,7 +417,7 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.isLoading && !this.errorFormType;
+            return !this.isLoading && !this.errorFormType && !this.shouldShowAgeVerificationForm;
         },
 
         eventData () {
@@ -642,6 +646,7 @@ export default {
             }
         },
 
+
         /**
          * Handles call of `updateCheckout` and catches and throws any returned errors.
          * 1. Maps checkout data.
@@ -764,7 +769,11 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                this.$emit(EventNames.CheckoutGetSuccess);
+                if (!this.isFulfillable) {
+                    // do something
+                } else {
+                    this.$emit(EventNames.CheckoutGetSuccess);
+                }
             } catch (error) {
                 if (error?.response?.status === 403) {
                     this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));

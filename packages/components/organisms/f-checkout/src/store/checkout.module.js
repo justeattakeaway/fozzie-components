@@ -225,8 +225,14 @@ export default {
                 basket: {
                     id: data.BasketId,
                     total: data.BasketSummary.BasketTotals.Total
-                }
+                },
+                ageRestricted: data.BasketSummary.Prompts.Restrictions.some(restriction => restriction.Type === 'Alcohol')
             };
+
+            if (basketDetails.ageRestricted) {
+                commit(UPDATE_IS_FULFILLABLE, false);
+                commit(UPDATE_ERRORS, [{ code: 'DATE_OF_BIRTH_REQUIRED' }]);
+            }
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });

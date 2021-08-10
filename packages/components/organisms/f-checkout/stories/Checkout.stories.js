@@ -21,6 +21,7 @@ export default {
 Vue.use(Vuex);
 
 const getCheckoutDeliveryUrl = '/checkout-delivery.json';
+const getAgeRestrictedBasketUrl = '/get-basket-delivery-age-restriction.json';
 const getCheckoutDeliveryAsapUrl = '/checkout-delivery-user-selected-asap.json';
 const getCheckoutDeliveryLaterUrl = '/checkout-delivery-user-selected-later.json';
 const getCheckoutDeliveryUnavailableUrl = '/checkout-delivery-user-selected-unavailable-time.json';
@@ -54,6 +55,7 @@ const getGeoLocationUrl = '/get-geo-location.json';
 const getCustomerUrl = '/get-customer.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
+CheckoutMock.setupCheckoutMethod(getAgeRestrictedBasketUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryAsapUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryLaterUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUnavailableUrl);
@@ -99,6 +101,8 @@ const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
 const noTimeAvailableError = 'No Time Available';
 const noTimeAvailable = 'no-time-available';
+const ageRestriction = 'Age restricted';
+const ageRestrictionIssue = 'age-restriction';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
 const additionalItemsRequiredIssue = 'additional-items-required';
 const timeNotAvailable = 'Selected time no longer available';
@@ -129,6 +133,11 @@ const placeOrderErrorOptions = {
     None: null,
     [placeOrderError]: duplicateIssue,
     [serverTimeout]: serverTimeoutIssue
+};
+
+const restrictionOptions = {
+    None: null,
+    [ageRestriction]: ageRestrictionIssue
 };
 
 const fulfilmentTimeOptions = {
@@ -189,6 +198,10 @@ export const CheckoutComponent = () => ({
 
         fulfilmentTimeSelection: {
             default: select('Fulfilment Time Options', fulfilmentTimeOptions)
+        },
+
+        restriction: {
+            default: select('Restrictions', restrictionOptions)
         }
     },
 
@@ -203,8 +216,12 @@ export const CheckoutComponent = () => ({
         },
 
         getBasketUrl () {
-            return this.getCheckoutError && this.getCheckoutError !== noTimeAvailable ?
-                `/checkout-${this.getCheckoutError}-get-error.json` : `/get-basket-${this.serviceType}.json`;
+            if (this.getCheckoutError) {
+                if (this.getCheckoutError !== noTimeAvailable) {
+                    return `/checkout-${this.getCheckoutError}-get-error.json`;
+                }
+            }
+            return this.restriction ? `/get-basket-delivery-${this.restriction}.json` : `/get-basket-${this.serviceType}.json`;
         },
 
         authToken () {

@@ -39,6 +39,11 @@ const checkoutIssues = {
         shouldRedirectToMenu: false
     },
 
+    DATE_OF_BIRTH_REQUIRED: {
+        shouldShowInDialog: false,
+        shouldRedirectToMenu: false
+    },
+
     GENERIC_CHECKOUT_ISSUE: {
         shouldShowInDialog: true,
         shouldRedirectToMenu: false

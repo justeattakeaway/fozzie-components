@@ -1,0 +1,59 @@
+{
+  "BasketId": "11111111",
+  "RestaurantSeoName": "quickbottle-alcohol-delivery",
+  "RestaurantId": "99999",
+  "MenuGroupId": "8891",
+  "ServiceType": "Delivery",
+  "BasketSummary": {
+    "Products": [
+      {
+        "BasketProductIds": [
+          "111111"
+        ],
+        "ProductId": "299994",
+        "Variation": "",
+        "Name": "Alcoholic beverage",
+        "Quantity": 3,
+        "TotalPrice": 13.35,
+        "CategoryId": "1013",
+        "ModifierGroups": [],
+        "RemovedIngredients": [],
+        "UnitPrice": 4.45,
+        "Restrictions": [
+          {
+            "Type": "Alcohol"
+          }
+        ]
+      }
+    ],
+    "BasketTotals": {
+      "SubTotal": 109.05,
+      "AdjustmentsTotal": 0,
+      "Total": 13.35
+    },
+    "Prompts": {
+      "SpendMore": null,
+      "DiscountApplied": {
+        "Amount": 0
+      },
+      "Offers": [],
+      "InvalidProducts": [],
+      "OfflineProducts": [],
+      "RequiresOther": false,
+      "RefreshMenu": false,
+      "Restrictions": [
+        {
+          "Type": "Alcohol"
+        }
+      ],
+      "ItemDiscounts": []
+    },
+    "MaximumAdditionalOrderItems": 90,
+    "PaymentDirectives": {
+      "DisableCashPayment": false
+    },
+    "TotalDiscount": 0,
+    "TotalMultibuyDiscount": 0
+  },
+  "IsOrderable": true
+}
