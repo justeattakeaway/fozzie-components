@@ -1,11 +1,13 @@
 import AnalyticsModule from '../analytics.module';
 import {
     defaultState,
-    modifieldState
+    updatedPlatformData,
+    updatedUserData
 } from '../../tests/helpers/setup';
 
 const { actions, mutations } = AnalyticsModule;
-const { updatePlatformData } = actions;
+const { updatePlatformData, updateUserData } = actions;
+const { pushPlatformData, pushUserData } = mutations;
 let state = AnalyticsModule.state();
 
 describe('AnalyticsModule', () => {
@@ -20,10 +22,20 @@ describe('AnalyticsModule', () => {
             state = defaultState;
         });
 
-        describe(`${updatePlatformData} ::`, () => {
+        describe(`${pushPlatformData} ::`, () => {
             it('should update state with `platformData`', () => {
                 // Act
-                mutations.updatePlatformData(state, modifieldState);
+                mutations.pushPlatformData(state, updatedPlatformData);
+
+                // Assert
+                expect(state).toMatchSnapshot();
+            });
+        });
+
+        describe(`${pushUserData} ::`, () => {
+            it('should update state with `userData`', () => {
+                // Act
+                mutations.pushUserData(state, updatedUserData);
 
                 // Assert
                 expect(state).toMatchSnapshot();
@@ -33,15 +45,27 @@ describe('AnalyticsModule', () => {
 
     describe('actions ::', () => {
         describe(`${updatePlatformData} ::`, () => {
-            it('should call the `updatePlatformData` mutation', () => {
+            it('should call the `pushPlatformData` mutation', () => {
                 // Arrange
                 const commit = jest.fn();
 
                 // Act
-                updatePlatformData({ commit }, modifieldState);
+                updatePlatformData({ commit }, updatedPlatformData);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith('updatePlatformData', modifieldState);
+                expect(commit).toHaveBeenCalledWith('pushPlatformData', updatedPlatformData);
+            });
+        });
+        describe(`${updateUserData} ::`, () => {
+            it('should call the `pushUserData` mutation', () => {
+                // Arrange
+                const commit = jest.fn();
+
+                // Act
+                updateUserData({ commit }, updatedUserData);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith('pushUserData', updatedUserData);
             });
         });
     });

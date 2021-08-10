@@ -2,8 +2,8 @@ const messages = {
     locale: 'en-GB',
 
     messages: {
-        titleActivationAvailable: 'Welcome back. Let\'s activate Takeaway Pay on your account.',
-        titleActivationNotLoggedIn: 'Let\'s get you started with Takeaway Pay',
+        titleActivationAvailable: 'Welcome back, {consumerGivenName}. Let\'s activate Takeaway Pay on your account.',
+        titleActivationNotLoggedIn: 'Let\'s get you started with Takeaway Pay.',
         titleActivationSuccessful: 'All systems go.',
         titleActivationFailed: ' We can\'t activate Takeaway Pay on your account right now, sorry.',
         descriptionActivationAvailable1: 'Takeaway Pay will be activated for',
