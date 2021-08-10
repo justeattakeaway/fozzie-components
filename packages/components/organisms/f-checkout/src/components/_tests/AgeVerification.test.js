@@ -73,9 +73,9 @@ describe('AgeVerification', () => {
                 });
             });
 
-            it('should return an array of 100 year objects', () => {
+            it('should return an array of 90 year objects', () => {
                 // Assert
-                expect(wrapper.vm.years.length).toEqual(100);
+                expect(wrapper.vm.years.length).toEqual(90);
                 expect(wrapper.vm.years).toMatchSnapshot();
             });
         });
@@ -118,7 +118,7 @@ describe('AgeVerification', () => {
 
                 beforeEach(() => {
                     // Arrange
-                    jest.spyOn(Date.prototype, 'getUTCFullYear').mockImplementation(() => currentYear);
+                    jest.spyOn(Date.prototype, 'getFullYear').mockImplementation(() => currentYear);
 
                     wrapper = shallowMount(AgeVerification, {
                         i18n,
@@ -145,10 +145,12 @@ describe('AgeVerification', () => {
                     expect(wrapper.vm.selectedDate.month).toEqual('0');
                 });
 
-                it('should update `selectedDate.year` with the current year', () => {
+                it('should update `selectedDate.year` with the most recent year', () => {
+                    // Arrange
+                    const expectedDate = (currentYear - 10).toString();
+
                     // Assert
-                    // expect(dateNowSpy).toHaveBeenCalled();
-                    expect(wrapper.vm.selectedDate.year).toEqual(currentYear);
+                    expect(wrapper.vm.selectedDate.year).toEqual(expectedDate);
                 });
             });
         });

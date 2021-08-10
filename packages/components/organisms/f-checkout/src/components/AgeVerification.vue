@@ -12,7 +12,7 @@
             {{ $t(`ageVerification.description`) }}
         </p>
 
-        <div>
+        <form>
             <form-field
                 id="day-selection"
                 input-type="dropdown"
@@ -36,23 +36,23 @@
                 :dropdown-options="years"
                 :value="selectedDate.year"
                 @input="selectionChanged($event, 'year')" />
-        </div>
 
-        <p
-            :class="$style['c-checkout-ageVerification-description']"
-            data-test-id="checkout-age-verification-askForIdDescription">
-            {{ $t(`ageVerification.askForIdDescription`) }}
-        </p>
+            <p
+                :class="$style['c-checkout-ageVerification-description']"
+                data-test-id="checkout-age-verification-askForIdDescription">
+                {{ $t(`ageVerification.askForIdDescription`) }}
+            </p>
 
-        <f-button
-            :class="$style['c-checkout-ageVerification-button']"
-            button-size="large"
-            button-type="primary"
-            is-full-width
-            data-test-id="age-verification-redirect-button"
-            @click.native="handleAgeVerifcation">
-            {{ $t(`ageVerification.buttonText`) }}
-        </f-button>
+            <f-button
+                :class="$style['c-checkout-ageVerification-button']"
+                button-size="large"
+                button-type="primary"
+                is-full-width
+                data-test-id="age-verification-redirect-button"
+                @click.native="handleAgeVerifcation">
+                {{ $t(`ageVerification.buttonText`) }}
+            </f-button>
+        </form>
     </card>
 </template>
 
@@ -109,16 +109,20 @@ export default {
         },
 
         years () {
-            const currentYear = new Date().getUTCFullYear();
+            const currentYear = new Date().getFullYear();
+            const start = currentYear - 10;
+            const end = currentYear - 100;
 
-            return Array(currentYear - (currentYear - 100)).fill('').map((_, index) => {
-                const year = (currentYear - index).toString();
+            return Array(start - end)
+                    .fill('')
+                    .map((_, index) => {
+                        const year = (start - index).toString();
 
-                return {
-                    text: year,
-                    value: year
-                };
-            });
+                        return {
+                            text: year,
+                            value: year
+                        };
+                    });
         }
     },
 

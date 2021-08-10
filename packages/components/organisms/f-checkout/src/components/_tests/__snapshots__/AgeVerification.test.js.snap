@@ -182,48 +182,8 @@ Array [
 ]
 `;
 
-exports[`AgeVerification computed :: years :: should return an array of 100 year objects 1`] = `
+exports[`AgeVerification computed :: years :: should return an array of 90 year objects 1`] = `
 Array [
-  Object {
-    "text": "2021",
-    "value": "2021",
-  },
-  Object {
-    "text": "2020",
-    "value": "2020",
-  },
-  Object {
-    "text": "2019",
-    "value": "2019",
-  },
-  Object {
-    "text": "2018",
-    "value": "2018",
-  },
-  Object {
-    "text": "2017",
-    "value": "2017",
-  },
-  Object {
-    "text": "2016",
-    "value": "2016",
-  },
-  Object {
-    "text": "2015",
-    "value": "2015",
-  },
-  Object {
-    "text": "2014",
-    "value": "2014",
-  },
-  Object {
-    "text": "2013",
-    "value": "2013",
-  },
-  Object {
-    "text": "2012",
-    "value": "2012",
-  },
   Object {
     "text": "2011",
     "value": "2011",
