@@ -1,14 +1,7 @@
 import {
-    withKnobs,
-    select,
-    text,
-    boolean
+    withKnobs, select, text, boolean
 } from '@storybook/addon-knobs';
-
-import {
-    withA11y
-} from '@storybook/addon-a11y';
-
+import { withA11y } from '@storybook/addon-a11y';
 import Registration from '../src/components/Registration.vue';
 import RegistrationMock from '../src/mocks/registrationMock';
 
@@ -18,14 +11,12 @@ export default {
 };
 
 const createAccountUrl = '/account/register';
-
 RegistrationMock.setupEmailInUse(createAccountUrl);
 RegistrationMock.passThroughAny();
 
+
 export const RegistrationComponent = () => ({
-    components: {
-        Registration
-    },
+    components: { Registration },
     props: {
         locale: {
             default: select('Locale', ['en-GB', 'en-AU'])
