@@ -413,7 +413,11 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.isLoading && !this.errorFormType;
+            return !this.isLoading && !this.errorFormType && !this.shouldShowAgeVerificationForm;
+        },
+
+        shouldShowAgeVerificationForm () {
+            return this.errors.some(error => error.code === 'DATE_OF_BIRTH_REQUIRED');
         },
 
         eventData () {

@@ -1159,6 +1159,60 @@ describe('Checkout', () => {
                 });
             });
         });
+
+        describe('shouldShowAgeVerificationForm ::', () => {
+            describe('when the `DATE_OF_BIRTH_REQUIRED` issue exists in errors', () => {
+                let wrapper;
+                beforeEach(() => {
+                    // Arrange && Act
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            errors: [
+                                {
+                                    code: 'DATE_OF_BIRTH_REQUIRED',
+                                    shouldShowInDialog: false
+                                }
+                            ]
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $cookies
+                        }
+                    });
+                });
+
+                it('should return true', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowAgeVerificationForm).toBe(true);
+                });
+            });
+
+            describe('when the `DATE_OF_BIRTH_REQUIRED` issue does not exist in errors', () => {
+                let wrapper;
+                beforeEach(() => {
+                    // Arrange && Act
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $cookies
+                        }
+                    });
+                });
+
+                it('should return false', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowAgeVerificationForm).toBe(false);
+                });
+            });
+        });
     });
 
     describe('mounted ::', () => {
