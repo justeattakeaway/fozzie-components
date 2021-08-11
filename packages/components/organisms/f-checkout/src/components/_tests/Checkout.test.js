@@ -1177,10 +1177,7 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData,
-                        mocks: {
-                            $cookies
-                        }
+                        propsData
                     });
                 });
 
@@ -1200,10 +1197,7 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData,
-                        mocks: {
-                            $cookies
-                        }
+                        propsData
                     });
                 });
 
