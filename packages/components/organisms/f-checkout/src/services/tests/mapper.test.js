@@ -137,10 +137,10 @@ describe('checkout mapper', () => {
         // Arrange
         const notes = {
             courier: {
-                value: 'Beware of the pug'
+                note: 'Beware of the pug'
             },
             kitchen: {
-                value: 'No ham in my hamburger'
+                note: 'No ham in my hamburger'
             }
         };
 
@@ -153,8 +153,8 @@ describe('checkout mapper', () => {
         const notesRequest = requestBody[2].value;
 
         // Assert
-        expect(notesRequest.courier.value).toBe('Beware of the pug');
-        expect(notesRequest.kitchen.value).toBe('No ham in my hamburger');
+        expect(notesRequest.courier.note).toBe('Beware of the pug');
+        expect(notesRequest.kitchen.note).toBe('No ham in my hamburger');
     });
 
     it('should map geo location correctly', () => {

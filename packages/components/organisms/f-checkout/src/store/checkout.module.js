@@ -532,7 +532,7 @@ export default {
         [UPDATE_USER_NOTES]: (state, userNote) => {
             state.notes = {
                 ...state.notes,
-                [userNote.type]: { value: userNote.note }
+                [userNote.type]: { note: userNote.note }
             };
         },
 

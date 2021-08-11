@@ -327,7 +327,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(state.notes).toEqual({
-                    [noteData.type]: { value: noteData.note }
+                    [noteData.type]: { note: noteData.note }
                 });
             });
         });
