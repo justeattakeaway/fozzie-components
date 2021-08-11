@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.51.0",
+  "version": "3.52.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -30,10 +30,10 @@
     "webpack": "4.46.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.14.5",
+    "@babel/cli": "7.14.8",
     "@babel/plugin-proposal-class-properties": "7.14.5",
     "@babel/plugin-proposal-optional-chaining": "7.14.5",
-    "@babel/preset-env": "7.14.7",
+    "@babel/preset-env": "7.14.9",
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/fozzie": "5.0.0-beta.10",
@@ -42,8 +42,8 @@
     "@percy/webdriverio": "2.0.0",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@vue/cli-service": "4.4.6",
+    "@vue/cli-plugin-unit-jest": "4.5.13",
+    "@vue/cli-service": "4.5.13",
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.3",
     "@vue/babel-preset-app": "4.5.13",
