@@ -2,7 +2,6 @@ import AnalyticsModule from '../analytics.module';
 import {
     defaultState,
     modifieldState,
-    modifiedUserData,
     newEvent
 } from '../../tests/helpers/setup';
 import {
@@ -124,10 +123,10 @@ describe('Analytics Module ::', () => {
                 }));
 
                 // Act
-                pushUserData(modifiedUserData);
+                pushUserData(modifieldState.userData);
 
                 // Assert
-                expect(windowsPushSpy).toHaveBeenLastCalledWith({ userData: { ...modifiedUserData } });
+                expect(windowsPushSpy).toHaveBeenLastCalledWith({ userData: { ...modifieldState.userData } });
             });
 
             it('should not push the `pushUserData` if serverside', () => {
@@ -136,7 +135,7 @@ describe('Analytics Module ::', () => {
                 jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
 
                 // Act
-                pushUserData(modifiedUserData);
+                pushUserData(modifieldState.userData);
 
                 // Assert
                 expect(windowsPushSpy).not.toHaveBeenCalled();
@@ -159,7 +158,7 @@ describe('Analytics Module ::', () => {
                 }));
 
                 // Act
-                pushUserData(modifiedUserData);
+                pushUserData(modifieldState.userData);
 
                 // Assert
                 expect(windowsPushSpy).not.toHaveBeenCalled();

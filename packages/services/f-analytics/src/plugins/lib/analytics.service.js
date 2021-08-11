@@ -70,7 +70,7 @@ export default class AnalyticService {
     }
 
     pushUserData (authToken) {
-        const userData = { ...this.store.getters[`${this.namespace}/getUserDataDefaults`] };
+        const userData = { ...this.store.state[`${this.namespace}`].userData };
 
         mapAnonymousUserId(userData, this.req);
 

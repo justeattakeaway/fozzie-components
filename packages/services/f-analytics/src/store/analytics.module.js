@@ -24,6 +24,14 @@ export default {
             version: '0.0.0.0',
             instancePosition: 'N/A'
         },
+        userData: {
+            'a-UserId': '',
+            authType: undefined,
+            email: undefined,
+            globalUserId: undefined,
+            signinType: undefined,
+            signupDate: undefined
+        },
         events: []
     }),
 
@@ -68,16 +76,5 @@ export default {
         [CLEAR_EVENTS]: state => {
             state.events = [];
         }
-    },
-
-    getters: {
-        getUserDataDefaults: () => ({
-            'a-UserId': '',
-            authType: undefined,
-            email: undefined,
-            globalUserId: undefined,
-            signinType: undefined,
-            signupDate: undefined
-        })
     }
 };

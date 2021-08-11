@@ -17,6 +17,14 @@ const defaultState = {
         version: '0.0.0.0',
         instancePosition: 'N/A'
     },
+    userData: {
+        'a-UserId': '',
+        authType: undefined,
+        email: undefined,
+        globalUserId: undefined,
+        signinType: undefined,
+        signupDate: undefined
+    },
     events: []
 };
 
@@ -35,6 +43,14 @@ const modifieldState = {
         version: '9.8.7.6',
         instancePosition: '999'
     },
+    userData: {
+        'a-UserId': 'xxxx-xxxx',
+        authType: 'Login',
+        email: 'gjfkdgjdkgjhd',
+        globalUserId: 'fdsgsgsgsg',
+        signinType: 'Email',
+        signupDate: '2021-05-12T10:57:05.9130000Z'
+    },
     events: []
 };
 
@@ -51,39 +67,16 @@ const newEvent = {
     }
 };
 
-const defaultUserData = {
-    'a-UserId': '',
-    authType: undefined,
-    email: undefined,
-    globalUserId: undefined,
-    signinType: undefined,
-    signupDate: undefined
-};
-
-const modifiedUserData = {
-    'a-UserId': 'xxxx-xxxx',
-    authType: 'Login',
-    email: 'gjfkdgjdkgjhd',
-    globalUserId: 'fdsgsgsgsg',
-    signinType: 'Email',
-    signupDate: '2021-05-12T10:57:05.9130000Z'
-};
-
 const defaultActions = {
     pushPlatformData: jest.fn(),
     pushUserData: jest.fn(),
     pushEvent: jest.fn()
 };
 
-const defaultGetters = {
-    getUserDataDefaults: () => ({ ...defaultUserData })
-};
-
 const createStore = ({
     name = 'f-analytics',
     state = defaultState,
-    actions = defaultActions,
-    getters = defaultGetters
+    actions = defaultActions
 } = {}) => {
     Vue.use(Vuex);
     return new Vuex.Store({
@@ -91,8 +84,7 @@ const createStore = ({
             [`${name}`]: {
                 namespaced: true,
                 state,
-                actions,
-                getters
+                actions
             },
             hasModule: jest.fn(() => true)
         }
@@ -122,8 +114,6 @@ export {
     defaultState,
     defaultActions,
     modifieldState,
-    defaultUserData,
-    modifiedUserData,
     newEvent,
     createStore,
     $cookies,
