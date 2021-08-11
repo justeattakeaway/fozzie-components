@@ -31,8 +31,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/core": "7.9.0",
-    "@babel/preset-env": "7.9.0",
+    "@babel/core": "7.14.8",
+    "@babel/preset-env": "7.14.9",
     "babel-loader": "8.1.0",
     "jest": "25.4.0",
     "jest-teamcity": "1.7.0",
