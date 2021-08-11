@@ -75,7 +75,7 @@ export default {
         },
 
         [PUSH_USER_DATA]: (state, userData) => {
-            state.userData = userData;
+            state.userData = { ...state.userData, ...userData };
         },
 
         [PUSH_EVENT]: (state, event) => {

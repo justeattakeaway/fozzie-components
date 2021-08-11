@@ -74,7 +74,6 @@ describe('Analytics Module ::', () => {
 
                 // Assert
                 expect(windowsPushSpy).toHaveBeenLastCalledWith({ platformData: { ...modifieldState.platformData } });
-                expect(state.platformData).toEqual(modifieldState.platformData);
             });
 
             it('should not push the `platformData` if serverside', () => {
