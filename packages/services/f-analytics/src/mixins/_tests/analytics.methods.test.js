@@ -224,7 +224,7 @@ describe('Analytics', () => {
                     }
                 });
             });
-            it('should should set the correct pageData', () => {
+            it('should set the correct pageData', () => {
                 // Arrange
                 const expected = {
                     ...basePageDataObject
@@ -298,5 +298,4 @@ describe('Analytics', () => {
         });
     });
 });
-
 
