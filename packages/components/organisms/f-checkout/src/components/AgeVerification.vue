@@ -155,7 +155,7 @@ export default {
 
 <style lang="scss" module>
 .c-checkout-ageVerification-description {
-    margin: spacing(x2) 0 spacing(x2);
+    margin: spacing(x2) 0;
 }
 
 .c-checkout-ageVerification-button {
