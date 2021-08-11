@@ -1,14 +1,10 @@
 <script>
-import jwtDecode from 'jwt-decode';
-import SHA256 from 'crypto-js/sha256';
 import { mapState, mapActions } from 'vuex';
 import {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME,
-    IDENTITY_PROVIDERS,
-    GRANT_TYPES
+    MAP_ROUTE_TO_FEATURE_NAME
 } from '../constants';
 
 export default {
@@ -30,8 +26,8 @@ export default {
 
     methods: {
         ...mapActions('f-analytics', [
-            'updatePlatformData',
-            'updateUserData'
+            'pushPlatformData',
+            'pushUserData'
         ]),
 
         prepareServersideAnalytics () {
@@ -39,14 +35,18 @@ export default {
                 // Only available serverside
                 const platformData = { ...this.platformData };
 
-                platformData.environment = process.env.justEatEnvironment || 'localhost';
-                platformData.version = process.env.FEATURE_VERSION || '0.0.0.0';
-                platformData.instancePosition = process.env.INSTANCE_POSITION || 'N/A';
+                if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
+                if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
+                if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
 
-                // Is of type `httponly` so need to read serverside
-                platformData.jeUserPercentage = this.$cookies.get('je-user_percentage') || null;
+                // TODO - Read manually to reduce need on global '$cookies'
+                if (this.$cookies) {
+                    // This cookie is marked as `httponly` so need to read serverside
+                    const value = this.$cookies.get('je-user_percentage');
+                    if (value) platformData.jeUserPercentage = value;
+                }
 
-                this.updatePlatformData(platformData);
+                this.pushPlatformData(platformData);
             }
         },
 
@@ -62,33 +62,7 @@ export default {
             platformData.language = COUNTRY_INFO[this.$i18n.locale].language;
             platformData.currency = COUNTRY_INFO[this.$i18n.locale].currency;
 
-            this.updatePlatformData(platformData);
-        },
-
-        prepareUserData (authToken) {
-            const userData = { ...this.userData };
-
-            userData['a-UserId'] = this.$cookies.get('je-auser') || undefined;
-
-            if (authToken) {
-                const tokenData = jwtDecode(authToken);
-
-                userData.authType = tokenData?.is_new_registration ? GRANT_TYPES.registration : GRANT_TYPES[tokenData?.grant_type] || GRANT_TYPES.default;
-                userData.email = tokenData?.email ? SHA256(tokenData?.email).toString() : undefined;
-                userData.globalUserId = tokenData?.global_user_id || undefined;
-                userData.signinType = tokenData?.role === IDENTITY_PROVIDERS.otac ? IDENTITY_PROVIDERS.otac || IDENTITY_PROVIDERS[tokenData?.idp] : IDENTITY_PROVIDERS.default;
-                userData.signupDate = tokenData?.created_date || undefined;
-            }
-
-            this.updateUserData(userData);
-        },
-
-        pushAnalytics () {
-            const dataLayer = window.dataLayer || [];
-            dataLayer.push({
-                platformData: { ...this.platformData },
-                userData: { ...this.userData }
-            });
+            this.pushPlatformData(platformData);
         }
     }
 };

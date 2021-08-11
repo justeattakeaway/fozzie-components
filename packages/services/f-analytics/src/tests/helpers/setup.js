@@ -1,47 +1,66 @@
 /* eslint-disable quote-props */
 import Vuex from 'vuex';
+import Vue from 'vue';
 
 const defaultState = {
     platformData: {
-        environment: '',
+        environment: 'localhost',
         name: '',
         appType: '',
         applicationId: undefined,
-        userAgent: '',
+        userAgent: 'N/A',
         branding: '',
         country: '',
         language: '',
         jeUserPercentage: undefined,
         currency: '',
-        version: '',
-        instancePosition: ''
+        version: '0.0.0.0',
+        instancePosition: 'N/A'
     },
-    userData: {
-        'a-UserId': '',
-        authType: undefined,
-        email: undefined,
-        globalUserId: undefined,
-        signinType: undefined,
-        signupDate: undefined
+    events: []
+};
+
+const modifieldState = {
+    platformData: {
+        environment: 'test-environment',
+        name: 'test-name',
+        appType: 'test-appType',
+        applicationId: 9,
+        userAgent: 'test-userAgent',
+        branding: 'test-branding',
+        country: 'zu',
+        language: 'ze',
+        jeUserPercentage: 88,
+        currency: 'zud',
+        version: '9.8.7.6',
+        instancePosition: '999'
+    },
+    events: []
+};
+
+const newEvent = {
+    event: 'jazzy',
+    experiment: {
+        id: 'EX-1234',
+        name: 'Some very special experiment',
+        platform: 'experiment_api',
+        variant: {
+            name: 'increase_a'
+        },
+        version: 1
     }
 };
 
-const updatedPlatformData = {
-    environment: 'test-environment',
-    name: 'test-name',
-    appType: 'test-appType',
-    applicationId: 9,
-    userAgent: 'test-userAgent',
-    branding: 'test-branding',
-    country: 'zu',
-    language: 'ze',
-    jeUserPercentage: 88,
-    currency: 'zud',
-    version: '9.8.7.6',
-    instancePosition: '999'
+const defaultUserData = {
+    'a-UserId': '',
+    authType: undefined,
+    email: undefined,
+    globalUserId: undefined,
+    signinType: undefined,
+    signupDate: undefined
 };
 
-const updatedUserData = {
+const modifiedUserData = {
     'a-UserId': 'xxxx-xxxx',
     authType: 'Login',
     email: 'gjfkdgjdkgjhd',
@@ -51,24 +70,34 @@ const updatedUserData = {
 };
 
 const defaultActions = {
-    updatePlatformData: jest.fn(),
-    updateUserData: jest.fn()
+    pushPlatformData: jest.fn(),
+    pushUserData: jest.fn(),
+    pushEvent: jest.fn()
+};
+
+const defaultGetters = {
+    getUserDataDefaults: () => ({ ...defaultUserData })
 };
 
 const createStore = ({
     name = 'f-analytics',
     state = defaultState,
-    actions = defaultActions
-} = {}) => new Vuex.Store({
-    modules: {
-        [`${name}`]: {
-            namespaced: true,
-            state,
-            actions
-        },
-        hasModule: jest.fn(() => true)
-    }
-});
+    actions = defaultActions,
+    getters = defaultGetters
+} = {}) => {
+    Vue.use(Vuex);
+    return new Vuex.Store({
+        modules: {
+            [`${name}`]: {
+                namespaced: true,
+                state,
+                actions,
+                getters
+            },
+            hasModule: jest.fn(() => true)
+        }
+    });
+};
 
 const $cookies = {
     get: jest.fn()
@@ -82,14 +111,24 @@ const $i18n = {
     locale: 'en-GB'
 };
 
+const options = {
+    namespace: 'f-analytics',
+    featureName: 'test-route-name',
+    locale: 'en-GB',
+    id: 'GTM-0000000'
+};
+
 export {
     defaultState,
     defaultActions,
-    updatedPlatformData,
-    updatedUserData,
+    modifieldState,
+    defaultUserData,
+    modifiedUserData,
+    newEvent,
     createStore,
     $cookies,
     $route,
-    $i18n
+    $i18n,
+    options
 };
 

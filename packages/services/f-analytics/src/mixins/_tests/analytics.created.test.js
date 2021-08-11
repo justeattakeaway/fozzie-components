@@ -22,7 +22,7 @@ describe('Analytics', () => {
     describe('created ::', () => {
         let component;
         let prepareServersideAnalyticsSpy;
-        let storeUpdatePlatformDataSpy;
+        let pushUpdatePlatformDataSpy;
 
         beforeEach(() => {
             // Arrange
@@ -32,7 +32,7 @@ describe('Analytics', () => {
                 store: defaultStore
             };
             component.mixins[0].mounted = jest.fn(() => true);
-            storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData').mockImplementationOnce(() => true);
+            pushUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPlatformData').mockImplementationOnce(() => true);
             prepareServersideAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareServersideAnalytics');
         });
 
@@ -53,7 +53,7 @@ describe('Analytics', () => {
 
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
-            expect(storeUpdatePlatformDataSpy).not.toHaveBeenCalled();
+            expect(pushUpdatePlatformDataSpy).not.toHaveBeenCalled();
         });
 
         it('should set the serverside only platformData properties with appropriate defaults if serverside but values not available', () => {
@@ -80,7 +80,7 @@ describe('Analytics', () => {
 
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
-            expect(storeUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
+            expect(pushUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
         });
 
         it('should set the serverside only platformData properties with appropriate values if serverside and available', () => {
@@ -111,7 +111,7 @@ describe('Analytics', () => {
 
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
-            expect(storeUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
+            expect(pushUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
         });
     });
 });
