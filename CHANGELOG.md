@@ -15,8 +15,8 @@ v3.52.1
 ------------------------------
 *August 11, 2021*
 
-### Updated
-- Various packages to latest version of `f-wdio-utils - v0.3.0`
+### Changed
+- Refactoring of f-checkout.
 
 
 v3.52.0
