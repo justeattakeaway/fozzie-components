@@ -103,7 +103,7 @@ export default {
 
                 return {
                     text: date.toLocaleDateString(undefined, { month: 'long' }),
-                    value: date.toLocaleDateString(undefined, { month: 'numeric' }) - 1
+                    value: date.getMonth()
                 };
             });
         },

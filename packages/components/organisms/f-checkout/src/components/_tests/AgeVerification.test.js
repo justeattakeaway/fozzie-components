@@ -140,9 +140,9 @@ describe('AgeVerification', () => {
                     expect(wrapper.vm.selectedDate.day).toEqual('1');
                 });
 
-                it('should update `selectedDate.month` with "0"', () => {
+                it('should update `selectedDate.month` with the first month', () => {
                     // Assert
-                    expect(wrapper.vm.selectedDate.month).toEqual('0');
+                    expect(wrapper.vm.selectedDate.month).toEqual('0'); // where 0 = January, 1 = February etc.
                 });
 
                 it('should update `selectedDate.year` with the most recent year', () => {
