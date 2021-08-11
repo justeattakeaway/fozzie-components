@@ -171,10 +171,12 @@ import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 import exceptions from '../exceptions/exceptions';
 import {
+    AGE_VERIFICATION_ISSUE,
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_ERROR_FORM_TYPE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
+    DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     VALIDATIONS,
@@ -417,7 +419,7 @@ export default {
         },
 
         shouldShowAgeVerificationForm () {
-            return this.errors.some(error => error.code === 'DATE_OF_BIRTH_REQUIRED');
+            return this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
