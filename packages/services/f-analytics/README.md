@@ -79,7 +79,11 @@ This component abstracts away the gathering of the various data values needed fo
         isAuthFinished (newVal) {
             if (newVal === true) {
                 this.prepareUserData(this.authToken);
-                this.preparePageData({authToken: this.authToken});
+                this.preparePageData({
+                    conversationId: 'some conversationId',
+                    requestId: 'some requestId',
+                    authToken: this.authToken
+                });
                 this.pushAnalytics();
             }
         },
