@@ -105,10 +105,10 @@ const getCheckoutError = 'Any other Get Checkout Error (Response from server is 
 
 // Note types
 const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
-const noteTypesDelivery = 'Delivery notes only';
+const noteTypesCombined = 'Combined note';
 
 const noteTypeOptions = {
-    [noteTypesDelivery]: 'get-notes-config',
+    [noteTypesCombined]: 'get-notes-config',
     [noteTypesDeliveryAndKitchen]: 'get-notes-config-split'
 };
 

@@ -3686,8 +3686,8 @@ describe('Checkout', () => {
                     data: {
                         basketId,
                         customerNotes: {
-                            noteForRestaurant: defaultCheckoutState.notes.courier,
-                            noteForKitchen: defaultCheckoutState.notes.kitchen
+                            courier: defaultCheckoutState.notes.courier,
+                            kitchen: defaultCheckoutState.notes.kitchen
                         },
                         referralState: 'MockReferralState'
                     },

@@ -70,7 +70,7 @@ export default {
         },
 
         noteTypeCourierOrOrder () {
-            return this.notesConfiguration[this.capitalisedServiceType]?.OrderNoteAccepted ? CHECKOUT_NOTE_TYPE_ORDER : CHECKOUT_NOTE_TYPE_COURIER;
+            return this.notesConfiguration[this.capitalisedServiceType]?.CourierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER;
         },
 
         capitalisedServiceType () {

@@ -566,7 +566,7 @@ export default {
         },
 
         [UPDATE_NOTES_CONFIGURATION]: (state, notesConfig) => {
-            state.notesConfiguration = notesConfig.CustomerNotes.ServiceTypes;
+            state.notesConfiguration = notesConfig?.CustomerNotes?.ServiceTypes || {};
         }
     }
 };

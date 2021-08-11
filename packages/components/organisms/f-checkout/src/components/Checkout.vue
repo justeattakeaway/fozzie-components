@@ -689,8 +689,7 @@ export default {
                 const data = {
                     basketId: this.basket.id,
                     customerNotes: {
-                        noteForRestaurant: this.notes.courier || this.notes.order,
-                        noteForKitchen: this.notes.kitchen || ''
+                        ...this.notes
                     },
                     referralState: this.getReferralState()
                 };
@@ -812,8 +811,11 @@ export default {
                     timeout: this.checkoutTimeout
                 });
             } catch (error) {
-                // eslint-disable-next-line
-                console.error(error);
+                this.logInvoker({
+                    message: 'Notes configuration failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logWarn
+                });
             }
         },
 

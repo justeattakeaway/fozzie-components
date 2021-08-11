@@ -1,15 +1,3 @@
 {
-    "CustomerNotes": {
-        "ServiceTypes": {
-            "Collection": {
-                "OrderNoteAccepted": true
-            },
-            "Delivery": {
-                "OrderNoteAccepted": true
-            },
-            "DineIn": {
-                "OrderNoteAccepted": true
-            }
-        }
-    }
+    
 } 
