@@ -43,8 +43,7 @@ describe('f-checkout component tests - @browserstack', () => {
         [100, 'addressLine2'],
         [50, 'addressLocality'],
         [50, 'addressPostcode'],
-        [16, 'mobileNumber'],
-        [200, 'userNote']
+        [16, 'mobileNumber']
     ])
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
             // Arrange
@@ -57,6 +56,20 @@ describe('f-checkout component tests - @browserstack', () => {
             // Assert
             expect(checkout.getFieldValue(field).length).toEqual(maxlength);
         });
+
+    it('should prevent a user from entering more than 250 characters in the notes field', () => {
+        // Arrange
+        const field = 'orderNote';
+        const maxlength = 200;
+
+        const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
+
+        // Act
+        checkout.expandAndPopulateNote('orderAccordionHeader', field, userEntry);
+
+        // Assert
+        expect(checkout.getFieldValue(field).length).toEqual(maxlength);
+    });
 
     it.skip('should enable a user to submit without adding a note', () => {
         // Arrange

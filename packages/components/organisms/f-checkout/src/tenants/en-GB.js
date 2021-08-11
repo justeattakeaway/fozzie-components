@@ -118,6 +118,24 @@ const messages = {
                 buttonText: 'Ok'
             },
 
+            KITCHEN_NOTE_NOT_ACCEPTED: {
+                title: 'Invalid note for the kitchen',
+                message: 'We’re sorry, it appears your kitchen note has not been accepted',
+                buttonText: 'Ok'
+            },
+
+            COURIER_NOTE_NOT_ACCEPTED: {
+                title: 'Invalid note for the courier',
+                message: 'We’re sorry, it appears your courier note has not been accepted',
+                buttonText: 'Ok'
+            },
+
+            ORDER_NOTE_NOT_ACCEPTED: {
+                title: 'Invalid note',
+                message: 'We’re sorry, it appears your note has not been accepted',
+                buttonText: 'Ok'
+            },
+
             DEFAULT_CHECKOUT_ISSUE: {
                 title: 'Something went wrong',
                 message: 'Please try again',
@@ -143,20 +161,56 @@ const messages = {
     buttonText: 'Go to payment',
 
     userNote: {
-        delivery: {
-            title: 'Leave a note',
-            text: 'Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
-            placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+        courier: {
+            delivery: {
+                title: 'Leave a note for the driver',
+                text: 'Leave a note for the driver with anything they need to know (e.g. the doorbell doesn\'t work).',
+                placeholder: 'e.g. the doorbell doesn’t work.'
+            },
+            collection: {
+                title: 'Leave a note',
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+            },
+            dinein: {
+                title: 'Leave a note',
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
+            }
         },
-        collection: {
-            title: 'Leave a note',
-            text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
-            placeholder: 'Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+        order: {
+            delivery: {
+                title: 'Leave a note',
+                text: 'Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
+                placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+            },
+            collection: {
+                title: 'Leave a note',
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'Do not include details about any allergies here.'
+            },
+            dinein: {
+                title: 'Leave a note',
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
+            }
         },
-        dinein: {
-            title: 'Leave a note',
-            text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
-            placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
+        kitchen: {
+            delivery: {
+                title: 'Leave a note for the kitchen',
+                text: 'Leave a note for the restaurant with anything they need to know.',
+                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+            },
+            dinein: {
+                title: 'Leave a note for the kitchen',
+                text: 'Leave a note for the restaurant with anything they need to know.',
+                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+            },
+            collection: {
+                title: 'Leave a note for the kitchen',
+                text: 'Leave a note for the restaurant with anything they need to know.',
+                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+            }
         }
 
     },

@@ -97,19 +97,7 @@
 
                     <form-selector :key="availableFulfilmentTimesKey" />
 
-                    <form-field
-                        :label-text="$t(`userNote.${serviceType}.title`)"
-                        input-type="textarea"
-                        :placeholder="$t(`userNote.${serviceType}.placeholder`)"
-                        :value="userNote"
-                        cols="30"
-                        rows="7"
-                        maxlength="200"
-                        name="Note"
-                        has-input-description
-                        @input="updateUserNote($event)">
-                        {{ $t(`userNote.${serviceType}.text`) }}
-                    </form-field>
+                    <checkout-notes />
 
                     <f-button
                         :class="[
@@ -164,6 +152,7 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
+import CheckoutNotes from './Notes.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
@@ -209,6 +198,7 @@ export default {
         FButton,
         Card,
         CheckoutHeader,
+        CheckoutNotes,
         CheckoutTermsAndConditions,
         ErrorPage,
         ErrorMessage,
@@ -313,6 +303,11 @@ export default {
         getCustomerUrl: {
             type: String,
             required: true
+        },
+
+        getNoteConfigUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -368,7 +363,7 @@ export default {
             'serviceType',
             'tableIdentifier',
             'time',
-            'userNote'
+            'notes'
         ]),
 
         wasMobileNumberFocused () {
@@ -531,6 +526,7 @@ export default {
             'getBasket',
             'getCheckout',
             'getGeoLocation',
+            'getNotesConfiguration',
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
@@ -538,9 +534,7 @@ export default {
             'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
-            'updateAddress',
-            'getUserNote',
-            'saveUserNote'
+            'updateAddress'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -564,8 +558,8 @@ export default {
             this.startSpinnerCountdown();
 
             const promises = this.isLoggedIn
-                ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
+                ? [this.loadBasket(), this.loadCheckout(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()]
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
 
@@ -579,8 +573,6 @@ export default {
             if (this.shouldLoadCustomer) {
                 await this.loadCustomer();
             }
-
-            this.getUserNote();
         },
 
         /**
@@ -602,8 +594,6 @@ export default {
          */
         async submitCheckout () {
             try {
-                this.saveUserNote();
-
                 if (!this.isLoggedIn && !this.isGuestCreated) {
                     await this.setupGuestUser();
                 }
@@ -658,7 +648,7 @@ export default {
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                     isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
                     time: this.time,
-                    userNote: this.userNote,
+                    notes: this.notes,
                     geolocation: this.geolocation,
                     asap: this.hasAsapSelected,
                     tableIdentifier: this.tableIdentifier
@@ -699,7 +689,8 @@ export default {
                 const data = {
                     basketId: this.basket.id,
                     customerNotes: {
-                        noteForRestaurant: this.userNote
+                        noteForRestaurant: this.notes.courier || this.notes.order,
+                        noteForKitchen: this.notes.kitchen || ''
                     },
                     referralState: this.getReferralState()
                 };
@@ -810,7 +801,19 @@ export default {
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
             } catch (error) {
-                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
+                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response?.status));
+            }
+        },
+
+        async loadNotesConfiguration () {
+            try {
+                await this.getNotesConfiguration({
+                    url: this.getNoteConfigUrl,
+                    timeout: this.checkoutTimeout
+                });
+            } catch (error) {
+                // eslint-disable-next-line
+                console.error(error);
             }
         },
 

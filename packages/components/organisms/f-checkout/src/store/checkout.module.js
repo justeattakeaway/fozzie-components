@@ -22,14 +22,17 @@ import {
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
     UPDATE_MESSAGE,
+    UPDATE_NOTES_CONFIGURATION,
     UPDATE_ORDER_PLACED,
     UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTES
 } from './mutation-types';
 
+
 import checkoutIssues from '../checkout-issues';
+
 /**
  * @param {String} code - The code returned by an API.
  * @returns {object} - An object with the issue's desired behaviours and the code.
@@ -70,11 +73,6 @@ const resolveCustomerDetails = (data, state) => {
     }
 };
 
-/**
- * @param {object} state - The current `checkout` state.
- * @returns {String} - session storage key where we save user note.
- */
-const getUserNoteSessionStorageKey = state => `userNote-${state.basket.id}`;
 
 export default {
     namespaced: true,
@@ -108,12 +106,13 @@ export default {
             locality: '',
             postcode: ''
         },
-        userNote: '',
+        notes: {},
         isFulfillable: true,
         errors: [],
         notices: [],
         message: null,
         messages: [],
+        notesConfiguration: {},
         availableFulfilment: {
             times: [],
             isAsapAvailable: false
@@ -200,6 +199,18 @@ export default {
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
+        },
+
+        /**
+         * Get the note configuration details from the backend and update the state.
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getNotesConfiguration: async ({ commit }, { url, timeout }) => {
+            const { data } = await checkoutApi.getNoteConfiguration(url, timeout);
+
+            commit(UPDATE_NOTES_CONFIGURATION, data);
         },
 
         /**
@@ -389,25 +400,8 @@ export default {
         },
 
         updateUserNote ({ commit, dispatch }, payload) {
-            commit(UPDATE_USER_NOTE, payload);
+            commit(UPDATE_USER_NOTES, payload);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
-        },
-
-        getUserNote: ({ dispatch, state }) => {
-            if (window.sessionStorage) {
-                const key = getUserNoteSessionStorageKey(state);
-                const note = window.sessionStorage.getItem(key);
-                if (note) {
-                    dispatch('updateUserNote', note);
-                }
-            }
-        },
-
-        saveUserNote ({ state }) {
-            if (window.sessionStorage) {
-                const key = getUserNoteSessionStorageKey(state);
-                window.sessionStorage.setItem(key, state.userNote);
-            }
         },
 
         updateHasAsapSelected ({ commit }, payload) {
@@ -431,7 +425,8 @@ export default {
             fulfilment,
             isFulfillable,
             notices,
-            messages
+            messages,
+            notes
         }) => {
             state.id = id;
             state.serviceType = serviceType;
@@ -469,6 +464,7 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
+            state.notes = notes || {};
         },
 
         [UPDATE_AUTH]: (state, authToken) => {
@@ -533,8 +529,11 @@ export default {
             state.errors = issues;
         },
 
-        [UPDATE_USER_NOTE]: (state, userNote) => {
-            state.userNote = userNote;
+        [UPDATE_USER_NOTES]: (state, userNote) => {
+            state.notes = {
+                ...state.notes,
+                [userNote.type]: { value: userNote.note }
+            };
         },
 
         [UPDATE_ORDER_PLACED]: (state, orderId) => {
@@ -564,6 +563,10 @@ export default {
 
         [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
             state.customer.mobileNumber = phoneNumber;
+        },
+
+        [UPDATE_NOTES_CONFIGURATION]: (state, notesConfig) => {
+            state.notesConfiguration = notesConfig.CustomerNotes.ServiceTypes;
         }
     }
 };

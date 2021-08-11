@@ -30,6 +30,7 @@ describe('CheckoutApi', () => {
             config = {
                 headers: {
                     'Content-Type': 'application/json',
+                    Accept: 'application/json;v=2',
                     Authorization: `Bearer ${state.authToken}`
                 },
                 timeout: payload.timeout
@@ -57,7 +58,7 @@ describe('CheckoutApi', () => {
             };
             config = {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json-patch+json;v=2',
                     Authorization: `Bearer ${state.authToken}`
                 },
                 timeout: payload.timeout
