@@ -4,7 +4,8 @@
         data-test-id="offers">
         <offers-header />
         <div :class="$style['c-offers-wrapper']">
-            <unauthenticated />
+            <offers-results v-if="isAuthenticated" />
+            <unauthenticated v-else />
             <no-offers-found />
         </div>
     </div>
@@ -12,12 +13,13 @@
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import tenantConfigs from '../tenants';
 import NoOffersFound from './NoOffersFound.vue';
 import Unauthenticated from './Unauthenticated.vue';
 import '@justeat/f-searchbox/dist/f-searchbox.css';
 import OffersHeader from './Header.vue';
+import OffersResults from './Results.vue';
 import { ACTION_INITIALISE_OFFERS, VUEX_MODULE_NAMESPACE_OFFERS } from '../store/types';
 import offers from '../store/offers.module';
 
@@ -29,6 +31,7 @@ export default {
     components: {
         NoOffersFound,
         OffersHeader,
+        OffersResults,
         Unauthenticated
     },
 
@@ -55,6 +58,12 @@ export default {
         return {
             tenantConfigs
         };
+    },
+
+    computed: {
+        ...mapGetters(VUEX_MODULE_NAMESPACE_OFFERS, [
+            'isAuthenticated'
+        ])
     },
 
     /**
