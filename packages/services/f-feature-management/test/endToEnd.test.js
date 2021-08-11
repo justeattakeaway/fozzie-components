@@ -1,21 +1,51 @@
 import featureManagement from '../src/index';
-import expectations from './data/e2e-expectations.json';
+import { setContextGetter } from '../src/contextGetter';
+import trackExperiment from '../src/trackExperiment';
 
-const { getBooleanValue, getIntegerValue, getStringValue } = featureManagement('je-web-core');
+const expectations = require('./data/e2e-expectations.json');
+const config = require('./data/e2e-fmconfig-mixed.json');
 
-const functionMap = { boolean: getBooleanValue, integer: getIntegerValue, string: getStringValue };
+const logger = {
+    logError(){},
+    logWarn(){},
+    logInfo(){}
+}
 
-describe.skip('End-to-End Tests', () => {
-    describe.each(expectations)('Expectation %# - ', ({
-        description, expectation, feature, valueType
-    }) => {
+const fm = featureManagement({
+    json: JSON.stringify(config),
+    logger: logger
+});
+
+const functionMap = { bool: fm.getBooleanValue.bind(fm), int: fm.getIntegerValue.bind(fm), string: fm.getStringValue.bind(fm) };
+
+
+jest.mock('../src/trackExperiment');
+
+
+describe('End-to-End Tests', () => {
+    describe.each(expectations.expectations)('Expectation %# - ', ({
+        description, expectation, feature, valueType, context
+    }) => {       
+
         it(description, () => {
+            setContextGetter(() => ({anonUserId: context.anonUserId, country: context.tenant, appVersion: context.appVersion}));
+
+            trackExperiment.mockClear();
+
             const { value: expectedValue, experimentKey: expectedKey, experimentVariant: expectedVariant } = expectation;
             const featureValue = functionMap[valueType](feature);
-            expect(featureValue.value).toBe(expectedValue);
+            expect(featureValue).toBe(expectedValue);
+
+            
             if (expectedKey && expectedVariant) {
-                expect(feature.experimentKey).toBe(expectedKey);
-                expect(feature.experimentVariant).toBe(expectedVariant);
+
+                expect(trackExperiment).toHaveBeenCalled();
+                const trackingEventSent = trackExperiment.mock.calls[0][0];
+                
+                expect(trackingEventSent.experimentKey).toBe(expectedKey);
+                expect(trackingEventSent.experimentVariant).toBe(expectedVariant);
+            } else {
+                expect(trackExperiment).not.toHaveBeenCalled();
             }
         });
     });

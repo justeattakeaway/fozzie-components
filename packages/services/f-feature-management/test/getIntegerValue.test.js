@@ -1,6 +1,6 @@
 import featureManagement from '../src/index';
 
-const { getIntegerValue } = featureManagement('');
+const { getIntegerValue } = featureManagement({});
 
 describe.skip('Integer value retrieval', () => {
     it('Get zero integer value', () => {

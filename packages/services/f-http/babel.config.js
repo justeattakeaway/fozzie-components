@@ -7,12 +7,13 @@ module.exports = api => {
     ];
 
     if (isTest) {
-        plugins.push('dynamic-import-node'); // to support dynamic imports (and webpack dynamic imports) when running unit tests
-        presets.push(['@babel/env', { targets: { node: 'current' } }]);
+        plugins.push('@babel/plugin-transform-runtime');
     } else {
         api.cache(true);
-        presets.push('@babel/env');
     }
+
+    // use for both test and dev/live
+    presets.push('@babel/env');
 
     return {
         presets,

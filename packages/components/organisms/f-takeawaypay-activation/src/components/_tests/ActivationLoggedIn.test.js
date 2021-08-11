@@ -17,7 +17,8 @@ describe('ActivationLoggedIn', () => {
         activateUrl: '/activate',
         authToken: 'token',
         consumerId: '12345',
-        consumerEmail: 'test@mail.com'
+        consumerEmail: 'test@mail.com',
+        consumerGivenName: 'Joe'
     };
     const wrapperShallow = shallowMount(ActivationLoggedIn, {
         i18n,
