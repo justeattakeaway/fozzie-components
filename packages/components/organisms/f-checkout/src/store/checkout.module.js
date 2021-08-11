@@ -229,7 +229,9 @@ export default {
                 ageRestricted: data.BasketSummary.Prompts.Restrictions.some(restriction => restriction.Type === 'Alcohol')
             };
 
-            if (basketDetails.ageRestricted) {
+            // This logic is temporary while a new endpoint is built for fulfilment status.
+            // We can't call GET checkout as a guest so we're now having to use the basket response for age restrictions until then
+            if (basketDetails.ageRestricted && (tenant === 'au' || tenant === 'nz')) {
                 commit(UPDATE_IS_FULFILLABLE, false);
                 commit(UPDATE_ERRORS, [{ code: 'DATE_OF_BIRTH_REQUIRED' }]);
             }
