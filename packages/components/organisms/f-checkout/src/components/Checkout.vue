@@ -110,7 +110,7 @@
                         cols="30"
                         rows="7"
                         maxlength="200"
-                        name="Note"
+                        name="note"
                         :label-description="$t(`userNote.${serviceType}.text`)"
                         @input="updateUserNote($event)" />
 
