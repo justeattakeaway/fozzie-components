@@ -34,7 +34,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "7.11.0",
+    "@babel/plugin-transform-runtime": "7.14.5",
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-json": "4.0.2",
     "@rollup/plugin-node-resolve": "7.1.1",
