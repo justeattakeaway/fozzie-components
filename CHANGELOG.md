@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.52.1
+------------------------------
+*August 11, 2021*
+
+### Fixed
+- Include dependencies when building Storybook.
+
+
 v3.52.0
 ------------------------------
 *August 5, 2021*
