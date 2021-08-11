@@ -26,7 +26,7 @@ export const getOrientation = () => {
 };
 
 /**
- * Returns array, filtered when a feature invludes the route param
+ * Returns array, filtered when a feature includes the route param
  * @param {String} route
  */
 const getGroupObjectFromRoute = route => GROUPS_FEATURES_ROUTES.filter(groups => groups.features.find(x => x.routes.includes(route)));
@@ -45,4 +45,3 @@ export const mapRouteToFeature = route => {
     const feature = getGroupObjectFromRoute(route).map(group => group.features.filter(x => x.routes.includes(route)).map(x => x.feature)).toString();
     return feature || route;
 };
-
