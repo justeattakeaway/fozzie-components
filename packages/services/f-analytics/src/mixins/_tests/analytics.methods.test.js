@@ -138,7 +138,7 @@ describe('Analytics', () => {
             let wrapper;
 
             component.mixins[0].created = jest.fn(() => true);
-            const pushUpdateUserDataSpy = jest.spyOn(component.mixins[0].methods, 'pushUserData');
+            const pushUserDataSpy = jest.spyOn(component.mixins[0].methods, 'pushUserData');
 
             beforeEach(() => {
                 wrapper = shallowMount(component, {
@@ -159,7 +159,7 @@ describe('Analytics', () => {
                 wrapper.vm.prepareUserData();
 
                 // Assert
-                expect(pushUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithoutMockAuthToken);
+                expect(pushUserDataSpy).toHaveBeenCalledWith(userDataWithoutMockAuthToken);
             });
 
             describe('if authToken has been passed', () => {
@@ -169,7 +169,7 @@ describe('Analytics', () => {
                         wrapper.vm.prepareUserData(mockAuthTokenRegistered);
 
                         // Assert
-                        expect(pushUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthTokenRegistered);
+                        expect(pushUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthTokenRegistered);
                     });
                 });
 
@@ -179,7 +179,7 @@ describe('Analytics', () => {
                         wrapper.vm.prepareUserData(mockAuthTokenGuest);
 
                         // Assert
-                        expect(pushUpdateUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthTokenGuest);
+                        expect(pushUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthTokenGuest);
                     });
                 });
             });

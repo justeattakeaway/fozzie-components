@@ -22,7 +22,7 @@ describe('Analytics', () => {
     describe('created ::', () => {
         let component;
         let prepareServersideAnalyticsSpy;
-        let pushUpdatePlatformDataSpy;
+        let pushPlatformDataSpy;
 
         beforeEach(() => {
             // Arrange
@@ -32,7 +32,7 @@ describe('Analytics', () => {
                 store: defaultStore
             };
             component.mixins[0].mounted = jest.fn(() => true);
-            pushUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPlatformData').mockImplementationOnce(() => true);
+            pushPlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPlatformData').mockImplementationOnce(() => true);
             prepareServersideAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareServersideAnalytics');
         });
 
@@ -53,7 +53,7 @@ describe('Analytics', () => {
 
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
-            expect(pushUpdatePlatformDataSpy).not.toHaveBeenCalled();
+            expect(pushPlatformDataSpy).not.toHaveBeenCalled();
         });
 
         it('should set the serverside only platformData properties with appropriate defaults if serverside but values not available', () => {
@@ -80,7 +80,7 @@ describe('Analytics', () => {
 
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
-            expect(pushUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
+            expect(pushPlatformDataSpy).lastCalledWith(expected.platformData);
         });
 
         it('should set the serverside only platformData properties with appropriate values if serverside and available', () => {
@@ -111,7 +111,7 @@ describe('Analytics', () => {
 
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
-            expect(pushUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
+            expect(pushPlatformDataSpy).lastCalledWith(expected.platformData);
         });
     });
 });
