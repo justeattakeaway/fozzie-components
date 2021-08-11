@@ -34,6 +34,8 @@
 
             <clear-button
                 v-if="shouldDisplayClearButton"
+                is-icon
+                button-type="ghost"
                 :class="$style['c-search-btn-clear']"
                 data-test-id="search-btn-clear"
                 @click="onClearAddress">

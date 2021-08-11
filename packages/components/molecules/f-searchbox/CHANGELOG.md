@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (to be added to next release)
+------------------------------
+*July 26, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v4.0.0-beta.31
+------------------------------
+*July 14, 2021*
+
+### Changed
+- Updated version of `f-button` and buttonType changed to `ghost`.
+
+
 v4.0.0-beta.30
 ------------------------------
 *May 26, 2021*
@@ -206,7 +222,7 @@ v4.0.0-beta.13
 *January 05, 2021*
 
 ### Fixed
-- DK & NO field options - provides component with custom attributes, 
+- DK & NO field options - provides component with custom attributes,
 supplied via tenant config `addressField`.
 - DK & NO uses the `where` form value now.
 - Google test from failing silently in CI.

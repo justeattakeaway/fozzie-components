@@ -1,8 +1,9 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header – Globalised Header Component",
-  "version": "4.17.2",
+  "version": "4.19.1",
   "main": "dist/f-header.umd.min.js",
+  "maxBundleSize": "40kB",
   "files": [
     "dist",
     "test-utils"
@@ -34,6 +35,7 @@
     "test": "vue-cli-service test:unit",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component wdio ../../../../wdio-browserstack.conf.js --mochaOpts.grep '@browserstack'",
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_HEADER} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "report:test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn allure:open",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
     "allure:open": "yarn allure:clean && allure open",
@@ -51,7 +53,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
-    "@justeat/f-button": "1.1.0",
+    "@justeat/f-button": "1.10.1",
     "@justeat/f-popover": "0.2.1",
     "@justeat/f-vue-icons": "2.4.0",
     "@justeat/f-wdio-utils": "0.2.0",

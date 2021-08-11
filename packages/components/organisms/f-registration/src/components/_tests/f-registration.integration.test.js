@@ -1,17 +1,10 @@
 import httpModule from '@justeat/f-http';
-import {
-    mount
-} from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
 import CONSUMERS_REQUEST_DATA from '../../../test/constants/consumer';
-
-const {
-    mockFactory,
-    httpVerbs
-} = httpModule;
 
 const propsData = {
     locale: 'en-GB',
@@ -30,13 +23,17 @@ const setFormFieldValues = wrapper => {
 
 describe('Registration API service', () => {
     let wrapper;
+    const mockFactory = new httpModule.MockFactory();
 
     beforeEach(() => {
         const div = document.createElement('div');
         document.body.appendChild(div);
         wrapper = mount(Registration, {
             propsData,
-            attachTo: div
+            attachTo: div,
+            mocks: {
+                $http: new httpModule.CreateClient()
+            }
         });
 
         setFormFieldValues(wrapper);
@@ -44,12 +41,13 @@ describe('Registration API service', () => {
 
     afterEach(() => {
         wrapper.destroy();
+        mockFactory.reset();
         jest.clearAllMocks();
     });
 
     it('responds with 201 when request is made with valid details', async () => {
         // Arrange
-        mockFactory.setupMockResponse(httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 201);
+        mockFactory.setupMockResponse(httpModule.httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 201);
 
         // Act
         await wrapper.vm.onFormSubmit();
@@ -61,7 +59,7 @@ describe('Registration API service', () => {
 
     it('responds with 409 when request is made with e-mail in use', async () => {
         // Arrange
-        mockFactory.setupMockResponse(httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 409, {
+        mockFactory.setupMockResponse(httpModule.httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 409, {
             faultId: '00000000-0000-0000-0000-000000000000',
             traceId: '80000806-0000-fd00-b63f-84710c7967bb',
             errors: [{
@@ -75,13 +73,13 @@ describe('Registration API service', () => {
         await flushPromises();
 
         // Assert
-        expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+        expect(wrapper.emitted(EventNames.CreateAccountWarning).length).toBe(1);
         expect(wrapper.vm.conflictedEmailAddress).toBe(CONSUMERS_REQUEST_DATA.emailAddress);
     });
 
     it('responds with 403 when login blocked by ravelin or recaptcha', async () => {
         // Arrange
-        mockFactory.setupMockResponse(httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 403, {
+        mockFactory.setupMockResponse(httpModule.httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 403, {
             faultId: '00000000-0000-0000-0000-000000000000',
             traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
             errors: [{

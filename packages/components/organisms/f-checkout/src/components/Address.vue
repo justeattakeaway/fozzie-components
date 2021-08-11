@@ -9,7 +9,7 @@
                 :value="address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
-                maxlength="255"
+                maxlength="100"
                 :label-text="$t('labels.line1')"
                 label-style="inline"
                 is-grouped
@@ -33,7 +33,7 @@
                 :value="address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
-                maxlength="255"
+                maxlength="100"
                 :label-text="$t('labels.line2')"
                 is-grouped
                 label-style="inline"
@@ -68,6 +68,7 @@
             :has-error="!isAddressPostcodeValid"
             aria-describedby="postcode-error"
             :aria-invalid="!isAddressPostcodeValid"
+            @blur="formFieldBlur('postcode')"
             @input="updateAddressDetails({ ['postcode']: $event })">
             <template #error>
                 <error-message
@@ -143,7 +144,14 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateAddressDetails'
-        ])
+        ]),
+
+        formFieldBlur (field) {
+            const fieldValidation = this.$v[VALIDATIONS.address][field];
+            if (fieldValidation) {
+                fieldValidation.$touch();
+            }
+        }
     }
 };
 </script>

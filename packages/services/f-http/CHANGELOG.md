@@ -3,6 +3,51 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.8.0
+------------------------------
+*August 09, 2021*
+
+### Changed
+- Converted from vue-cli-service to vite
+
+
+v0.7.0
+------------------------------
+*August 05, 2021*
+
+### Added
+- Mock Factory: Now supports passing through of requests
+
+### Changed
+- Mock Factory: Setup Mock Response does not require request data to be provided
+
+### Fixed
+- Correctly point the main entry point at the dist folder
+
+
+v0.6.1
+------------------------------
+*August 03, 2021*
+
+### Added
+- Support for resetting mocks between tests
+
+### Changed
+- Updated and simplfiied documentation
+
+### Fixed
+- Corrections to a few class names
+- Removed async from the Mock Factory
+
+
+v0.6.0
+------------------------------
+*July 26, 2021*
+
+### Changed
+- Accept an instance of f-statistics when initialising a client, doing so means that interceptors record response timings and publish a statistic with the details.
+- Several files were changed to objects with constructors because not doing so means that configuration can bleed when more than one instance is initiaised.
+
 
 v0.5.0
 ------------------------------

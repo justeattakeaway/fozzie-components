@@ -131,6 +131,7 @@
                     button-type="primary"
                     button-size="large"
                     is-full-width
+                    action-type="submit"
                     :disabled="shouldDisableCreateAccountButton">
                     {{ copy.labels.createAccountBtn }}
                 </f-button>
@@ -469,7 +470,8 @@ export default {
                     registrationSource: 'Native',
                     marketingPreferences: []
                 };
-                await RegistrationServiceApi.createAccount(this.createAccountUrl, registrationData, this.tenant);
+
+                await RegistrationServiceApi.createAccount(this.$http, this.createAccountUrl, registrationData, this.tenant);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
                 if (error.response && error.response.status) {
@@ -477,7 +479,7 @@ export default {
 
                     if (status === 409) {
                         this.conflictedEmailAddress = this.email;
-                        this.$emit(EventNames.CreateAccountFailure, error);
+                        this.$emit(EventNames.CreateAccountWarning, error);
                         return;
                     }
 

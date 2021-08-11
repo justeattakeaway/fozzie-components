@@ -191,7 +191,7 @@ describe('Registration', () => {
 
                 // Assert
                 expect(wrapper.vm.conflictedEmailAddress).toBe(testEmailAddress);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CreateAccountWarning).length).toBe(1);
             });
 
             it('should emit login blocked event when service responds with a 403', async () => {

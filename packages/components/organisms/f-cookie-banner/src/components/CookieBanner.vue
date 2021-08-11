@@ -82,8 +82,10 @@
     </div>
     <div v-else>
         <reopen-banner-link
+            v-if="!legacyBanner"
             :message="copy.reopenCookieBannerLinkText"
-            :use-grey-background="useGreyBackground"
+            :use-grey-background="shouldUseGreyBackground"
+            :class="{ [$style['reopen-link-wrapper']]: reopenLinkToBottom }"
             @reopenBanner="reopenBanner" />
     </div>
 </template>
@@ -133,7 +135,8 @@ export default {
             type: Number,
             default: 7776000
         },
-        useGreyBackground: {
+
+        shouldUseGreyBackground: {
             type: Boolean,
             default: true
         }
@@ -146,6 +149,7 @@ export default {
         const copy = localeConfig.messages;
         const consentCookieName = 'je-cookieConsent';
         const legacyConsentCookieName = 'je-banner_cookie';
+        const reopenLinkToBottom = this.isBodyHeightLessThanWindowHeight();
 
         return {
             config: { ...localeConfig },
@@ -154,7 +158,8 @@ export default {
             shouldHideBanner: true,
             consentCookieName,
             legacyConsentCookieName,
-            isIosBrowser: false
+            isIosBrowser: false,
+            reopenLinkToBottom
         };
     },
 
@@ -332,6 +337,13 @@ export default {
                     break;
                 }
             }
+        },
+
+        /**
+         * Check to see if we need to absolute position reopen link
+         */
+        isBodyHeightLessThanWindowHeight () {
+            return window.innerHeight - document.body.offsetHeight > 0;
         }
     }
 };
@@ -381,6 +393,12 @@ export default {
     .c-cookieBanner-cta {
         margin: 0 auto;
         padding: spacing(x4);
+    }
+
+    .reopen-link-wrapper {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 
     @include media ('<mid') {

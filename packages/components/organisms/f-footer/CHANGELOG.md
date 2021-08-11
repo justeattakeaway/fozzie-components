@@ -4,6 +4,41 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.30.0
+------------------------------
+*August 9, 2021*
+
+### Changed
+- SEO updates for Brand links
+
+
+v4.29.0
+------------------------------
+*July 19, 2021*
+
+### Changed
+- Become a rider link
+
+
+v4.28.0
+------------------------------
+*July 15, 2021*
+
+### Changed
+- Update various links
+
+### Removed
+- Euro2020 links
+
+
+v4.27.0
+------------------------------
+*June 17, 2021*
+
+### Added
+- Percy visual regression tests
+
+
 v4.26.0
 ------------------------------
 *June 17, 2021*
@@ -17,7 +52,7 @@ v4.25.0
 *June 9, 2021*
 
 ### Added
-- Added a link “Just Eat for Business” to the bottom of the “Get to know us” column for the UK. 
+- Added a link “Just Eat for Business” to the bottom of the “Get to know us” column for the UK.
 
 
 v4.24.1
@@ -125,7 +160,7 @@ v4.15.0
 ------------------------------
 *March 30, 2021*
 
-## Fixed
+### Fixed
 - Confianza computed styles.
 
 
@@ -133,7 +168,7 @@ v4.14.0
 ------------------------------
 *March 25, 2021*
 
-## Changed
+### Changed
 - 'Footer' to use CSS modules.
 
 
@@ -141,10 +176,10 @@ v4.13.0
 ------------------------------
 *March 25, 2021*
 
-## Added
+### Added
 - 'headings.scss' and 'lists.scss' to assets.
 
-## Changed
+### Changed
 - Components to use shared scss assets.
 - Add test-ids to `IconList`.
 - Tests to cover changes
@@ -154,7 +189,7 @@ v4.12.0
 ------------------------------
 *March 18, 2021*
 
-## Added
+### Added
 - Courier links and country selector component tests for tenants: 'ie', 'nz', 'dk', 'es', 'it', 'no',
 - Canada(FR) to dropdown country selector list
 - Accessibility tests for the above tenants
@@ -164,14 +199,15 @@ v4.11.0
 ------------------------------
 *March 15, 2021*
 
-## Changed
+### Changed
 - Updated links to match SiteCore
+
 
 v4.10.0
 ------------------------------
 *March 12, 2021*
 
-## Added
+### Added
 - Browserstack test config in `package.json`
 
 ### Changed
@@ -182,7 +218,7 @@ v4.9.1
 ------------------------------
 *March 3, 2021*
 
-## Fixed
+### Fixed
 - Mobile Link lists collapse on scroll
 
 ### Added
@@ -193,7 +229,7 @@ v4.9.0
 ------------------------------
 *March 2, 2021*
 
-## Added
+### Added
 - Codice Etico (Ethical Code) link added for Italy
 
 ### Changed

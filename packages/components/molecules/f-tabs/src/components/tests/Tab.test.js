@@ -5,7 +5,8 @@ import { INJECTIONS } from '../../constants';
 const {
     REGISTER,
     SELECT,
-    TABS_COMPONENT
+    TABS_COMPONENT,
+    UPDATE_TITLE
 } = INJECTIONS;
 
 const REGISTER_DATA = {
@@ -14,25 +15,29 @@ const REGISTER_DATA = {
     selected: true
 };
 
+const updateTitleMock = jest.fn();
+
+const baseProvide = {
+    [REGISTER]: jest.fn(),
+    [SELECT]: jest.fn(),
+    [TABS_COMPONENT]: {
+        activeTab: REGISTER_DATA.name,
+        animationDirection: 'LEFT',
+        animate: true
+    },
+    [UPDATE_TITLE]: updateTitleMock
+};
+
 describe('Tab.vue', () => {
     let activeWrapper;
 
     function defineActiveComponent () {
         activeWrapper = shallowMount(Tab, {
             propsData: {
-                name: REGISTER_DATA.name,
-                title: REGISTER_DATA.title,
+                ...REGISTER_DATA,
                 selected: true
             },
-            provide: {
-                [REGISTER]: jest.fn(),
-                [SELECT]: jest.fn(),
-                [TABS_COMPONENT]: {
-                    activeTab: REGISTER_DATA.name,
-                    animationDirection: 'LEFT',
-                    animate: true
-                }
-            }
+            provide: baseProvide
         });
     }
 
@@ -74,13 +79,11 @@ describe('Tab.vue', () => {
             // Arrange & Act
             inactiveWrapper = shallowMount(Tab, {
                 propsData: {
-                    name: REGISTER_DATA.name,
-                    title: REGISTER_DATA.title,
+                    ...REGISTER_DATA,
                     selected: false
                 },
                 provide: {
-                    [REGISTER]: jest.fn(),
-                    [SELECT]: jest.fn(),
+                    ...baseProvide,
                     [TABS_COMPONENT]: {
                         activeTab: '',
                         animationDirection: 'LEFT',
@@ -119,14 +122,9 @@ describe('Tab.vue', () => {
         it('should apply the fade-in-right class when animationDirection is LEFT', () => {
             // Arrange
             const leftWrapper = shallowMount(Tab, {
-                propsData: {
-                    name: REGISTER_DATA.name,
-                    title: REGISTER_DATA.title,
-                    selected: REGISTER_DATA.selected
-                },
+                propsData: REGISTER_DATA,
                 provide: {
-                    [REGISTER]: jest.fn(),
-                    [SELECT]: jest.fn(),
+                    ...baseProvide,
                     [TABS_COMPONENT]: {
                         activeTab: '',
                         animationDirection: 'LEFT',
@@ -142,14 +140,9 @@ describe('Tab.vue', () => {
         it('should apply the fade-in-left class when animationDirection is RIGHT', () => {
             // Arrange
             const rightWrapper = shallowMount(Tab, {
-                propsData: {
-                    name: REGISTER_DATA.name,
-                    title: REGISTER_DATA.title,
-                    selected: REGISTER_DATA.selected
-                },
+                propsData: REGISTER_DATA,
                 provide: {
-                    [REGISTER]: jest.fn(),
-                    [SELECT]: jest.fn(),
+                    ...baseProvide,
                     [TABS_COMPONENT]: {
                         activeTab: '',
                         animationDirection: 'RIGHT',
@@ -160,6 +153,24 @@ describe('Tab.vue', () => {
 
             // Assert
             expect(rightWrapper.vm.transitionName).toEqual('fade-in-left');
+        });
+    });
+
+    describe('Updating title', () => {
+        it('should call method to update title', async () => {
+            // Arrange
+            const wrapper = shallowMount(Tab, {
+                propsData: REGISTER_DATA,
+                provide: baseProvide
+            });
+
+            // Act
+            await wrapper.setProps({
+                title: '__UPDATED_TITLE__'
+            });
+
+            // Assert
+            expect(updateTitleMock).toHaveBeenCalledWith(REGISTER_DATA.name, '__UPDATED_TITLE__');
         });
     });
 });

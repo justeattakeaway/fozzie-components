@@ -2,37 +2,86 @@
     <div
         :class="$style['c-offers']"
         data-test-id="offers">
-        <offers-search-box />
+        <offers-header />
+        <div :class="$style['c-offers-wrapper']">
+            <unauthenticated />
+            <no-offers-found />
+        </div>
     </div>
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import { mapActions } from 'vuex';
 import tenantConfigs from '../tenants';
-import OffersSearchBox from './SearchBox.vue';
+import NoOffersFound from './NoOffersFound.vue';
+import Unauthenticated from './Unauthenticated.vue';
 import '@justeat/f-searchbox/dist/f-searchbox.css';
+import OffersHeader from './Header.vue';
+import { ACTION_INITIALISE_OFFERS, VUEX_MODULE_NAMESPACE_OFFERS } from '../store/types';
+import offers from '../store/offers.module';
+
+const TIMEOUT = 3000;
 
 export default {
     name: 'VOffers',
 
     components: {
-        OffersSearchBox
+        NoOffersFound,
+        OffersHeader,
+        Unauthenticated
     },
 
+    mixins: [
+        VueGlobalisationMixin
+    ],
+
     props: {
-        locale: {
+        getOffersUrl: {
             type: String,
-            default: ''
+            default: undefined
+        },
+        authToken: {
+            type: String,
+            default: undefined
+        },
+        brazeApiKey: {
+            type: String,
+            required: true
         }
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
+    },
+
+    /**
+     * Set up the offers vuex module
+    */
+    beforeCreate () {
+        if (!this.$store.hasModule(VUEX_MODULE_NAMESPACE_OFFERS)) {
+            this.$store.registerModule(VUEX_MODULE_NAMESPACE_OFFERS, offers);
+        }
+    },
+
+    /**
+     * Initialise the offers module by passing in the required values from props
+     */
+    async mounted () {
+        await this.init({
+            url: this.getOffersUrl,
+            timeout: TIMEOUT,
+            brazeApiKey: this.brazeApiKey,
+            authToken: this.authToken
+        });
+    },
+
+    methods: {
+        ...mapActions(VUEX_MODULE_NAMESPACE_OFFERS, {
+            init: ACTION_INITIALISE_OFFERS
+        })
     }
 };
 </script>
@@ -41,13 +90,26 @@ export default {
 
 .c-offers {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
+    width: 100%;
     margin: auto;
-    border: 1px solid $color-red;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
+    background-color: $color-grey-10;
+}
+
+.c-offers-wrapper {
+    width: 100%;
+    max-width: #{$layout-max-width}px;
+    margin: 0 auto;
+    padding: #{$layout-margin}px;
+
+    @include media('<mid') {
+        padding: #{$layout-margin--mid}px;
+    }
+
+    @include media('<narrow') {
+        padding: #{$layout-margin--narrow}px;
+    }
 }
 
 </style>

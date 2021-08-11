@@ -3,6 +3,42 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (to be added to next release)
+------------------------------
+*July 26, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v4.19.1
+------------------------------
+*July 22, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+### Fixed
+- 'Contact Preferences' URL for en-IE tenant.
+
+
+v4.19.0
+------------------------------
+*June 17, 2021*
+
+### Added
+- Visual regression tests
+
+
+v4.18.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- "Deliver with Just Eat" link
+
+
 v4.17.2
 ------------------------------
 *June 15, 2021*
@@ -129,7 +165,7 @@ v4.10.0
 ------------------------------
 *March 12, 2021*
 
-## Added
+### Added
 - Browserstack test config in `package.json`
 
 ### Changed

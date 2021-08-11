@@ -2,30 +2,69 @@
     <div
         :class="$style['c-loyalty']"
         data-test-id="loyalty">
-        {{ copy.text }}
+        <loyalty-header />
     </div>
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import { mapActions } from 'vuex';
 import tenantConfigs from '../tenants';
+import loyalty from '../store/loyalty.module';
+import { ACTION_INITIALISE_LOYALTY, VUEX_MODULE_NAMESPACE_LOYALTY } from '../store/types';
+import LoyaltyHeader from './Header.vue';
 
 export default {
     name: 'VLoyalty',
-    components: {},
+
+    components: {
+        LoyaltyHeader
+    },
+
+    mixins: [
+        VueGlobalisationMixin
+    ],
+
     props: {
-        locale: {
+        authToken: {
             type: String,
-            default: ''
+            default: undefined
+        },
+        brazeApiKey: {
+            type: String,
+            required: true
         }
     },
-    data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
 
+    data () {
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
+    },
+
+    /**
+     * Set up the loyalty vuex module
+     */
+    beforeCreate () {
+        if (!this.$store.hasModule(VUEX_MODULE_NAMESPACE_LOYALTY)) {
+            this.$store.registerModule(VUEX_MODULE_NAMESPACE_LOYALTY, loyalty);
+        }
+    },
+
+    /**
+     * Initialise the loyalty module by passing in the required values from props
+     */
+    async mounted () {
+        await this.init({
+            brazeApiKey: this.brazeApiKey,
+            authToken: this.authToken
+        });
+    },
+
+    methods: {
+        ...mapActions(VUEX_MODULE_NAMESPACE_LOYALTY, {
+            init: ACTION_INITIALISE_LOYALTY
+        })
     }
 };
 </script>
@@ -34,13 +73,11 @@ export default {
 
 .c-loyalty {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
+    width: 100%;
     margin: auto;
-    border: 1px solid $color-red;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
+    background-color: $color-background-default;
 }
 
 </style>

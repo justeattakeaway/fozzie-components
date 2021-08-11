@@ -3,6 +3,56 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.21.0
+------------------------------
+*July 30, 2021*
+
+### Changed
+- Reopen link should appear at the bottom of the window, even when the main content is less than 100% height
+
+
+Latest (to be added to next version)
+------------------------------
+*July 15, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v0.20.0
+------------------------------
+*July 12, 2021*
+
+### Changed
+- Reopen link should not show for tenants where legacy banner is used
+- shouldUseGreyBackground prop wired up correctly
+
+
+v0.19.0
+------------------------------
+*June 24, 2021*
+
+### Added
+- Config to generate compiled vanilla js versions of the vue component
+
+
+v0.18.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- UK to two-button banner
+
+
+v0.17.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- Percy to run desktop / mobile in separate specs
+
+
 v0.16.1
 ------------------------------
 *June 15, 2021*

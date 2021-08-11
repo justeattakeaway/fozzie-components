@@ -22,10 +22,22 @@ MediaElementComponent.storyName = 'f-media-element';
 MediaElementComponent.args = {
     title: 'Stampcards',
     text: 'See the stamps you’ve collected and any discounts you’ve earned.',
-    stacked: false,
-    reverse: true,
+    flex: {
+        default: {
+            column: false,
+            reverse: false
+        },
+        modifier: {
+            rule: [
+                '<',
+                'narrowMid'
+            ],
+            column: true,
+            reverse: true
+        }
+    },
     altText: 'Test alt text',
-    imageUrl: 'https://via.placeholder.com/250',
+    imageUrl: 'https://via.placeholder.com/250'
 };
 
 MediaElementComponent.argTypes = {

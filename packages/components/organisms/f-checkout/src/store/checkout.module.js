@@ -2,29 +2,34 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
-import { version as applicationVerion } from '../../package.json';
+import basketApi from '../services/basketApi';
+import checkoutApi from '../services/checkoutApi';
+import addressGeocodingApi from '../services/addressGeocodingApi';
+import orderPlacementApi from '../services/orderPlacementApi';
+import accountApi from '../services/accountApi';
 
 import {
-    UPDATE_HAS_ASAP_SELECTED,
+    UPDATE_ADDRESS,
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_ERRORS,
     UPDATE_MESSAGE,
     UPDATE_ORDER_PLACED,
+    UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
     UPDATE_TABLE_IDENTIFIER,
     UPDATE_USER_NOTE
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
-
 /**
  * @param {String} code - The code returned by an API.
  * @returns {object} - An object with the issue's desired behaviours and the code.
@@ -128,24 +133,13 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
             // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    })
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);
+            commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
@@ -156,24 +150,19 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        // eslint-disable-next-line no-unused-vars
-        updateCheckout: async ({ commit, state, dispatch }, {
-            url, data, timeout
-        }) => {
-            // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    })
-                },
+        updateCheckout: async ({
+            commit, state, dispatch, rootGetters
+        }, { url, data, timeout }) => {
+            const request = {
+                url,
+                state,
+                rootGetters,
+                data,
                 timeout
             };
 
-            const { data: responseData } = await axios.patch(url, data, config);
+            const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
+
             const { issues, isFulfillable } = responseData;
 
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
@@ -182,6 +171,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/trackLowValueOrderExperiment`, headers, { root: true });
             dispatch('updateMessage', detailedIssues[0]);
         },
 
@@ -194,17 +184,8 @@ export default {
         createGuestUser: async ({ commit }, {
             url, tenant, data, timeout, otacToAuthExchanger
         }) => {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant
-                },
-                timeout
-            };
-
-            const response = await axios.post(url, data, config);
-            // eslint-disable-next-line no-unused-vars
-            const otac = response.data.token;
+            const response = await accountApi.createGuestUser(url, data, timeout, tenant);
+            const otac = response?.data?.token;
             const authToken = await otacToAuthExchanger(otac);
             commit(UPDATE_AUTH_GUEST, authToken);
         },
@@ -216,15 +197,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
-            // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
         },
@@ -242,16 +215,7 @@ export default {
             timeout
         }) => {
             // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant,
-                    'Accept-Language': language
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await basketApi.getBasket(url, tenant, language, timeout);
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurant: {
@@ -278,7 +242,8 @@ export default {
             url,
             tenant,
             language,
-            timeout
+            timeout,
+            currentPostcode
         }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
             const config = {
@@ -294,9 +259,40 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
+            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+        },
+
+        /**
+         * Gets phone number from customer record from backend and updates state
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCustomer: async ({ commit, state, dispatch }, {
+            url,
+            timeout
+        }) => {
+            if (!state.customer || state.customer.mobileNumber) {
+                return;
+            }
+
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(state.authToken && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            commit(UPDATE_PHONE_NUMBER, data.PhoneNumber);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
@@ -310,19 +306,7 @@ export default {
             url, data, timeout
         }) => {
             try {
-                const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json;v=2',
-                        'x-je-application-id': 7, // Responsive Web
-                        'x-je-application-version': applicationVerion,
-                        Authorization: authHeader
-                    },
-                    timeout
-                };
-
-                const response = await axios.post(url, data, config);
+                const response = await orderPlacementApi.placeOrder(url, data, timeout, state);
 
                 const { orderId } = response.data;
 
@@ -355,24 +339,24 @@ export default {
 
             if (isAddressInLocalStorage) {
                 const storedAddress = addressService.getAddressFromLocalStorage(false);
-                if (storedAddress.Line1 === state.address.line1 && storedAddress.PostalCode === state.address.postcode) {
-                    addressCoords = [storedAddress.Field1, storedAddress.Field2];
+
+                if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
+                    addressCoords = storedAddress.Field1 && storedAddress.Field2 ? [storedAddress.Field2, storedAddress.Field1] : null;
                     commit(UPDATE_GEO_LOCATION, addressCoords);
+                } else {
+                    const addressDetails = state.address;
+
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({
+                        PostalCode: addressDetails.postcode,
+                        Line1: addressDetails.line1,
+                        Line2: addressDetails.line2,
+                        City: addressDetails.locality
+                    }));
                 }
             }
 
             if (!addressCoords && state.authToken) {
-                const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: authHeader
-                    },
-                    timeout
-                };
-
-                const { data } = await axios.post(url, postData, config);
+                const { data } = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
 
                 commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
             }
@@ -432,6 +416,10 @@ export default {
 
         updateMessage:  ({ commit }, message = null) => {
             commit(UPDATE_MESSAGE, message);
+        },
+
+        updateAddress: ({ commit }, address) => {
+            commit(UPDATE_ADDRESS, address);
         }
     },
 
@@ -562,6 +550,20 @@ export default {
 
         [UPDATE_MESSAGE]: (state, message) => {
             state.message = message;
+        },
+
+        [UPDATE_ADDRESS]: (state, address) => {
+            /* eslint-disable prefer-destructuring */
+            state.address.line1 = address.lines[0];
+            state.address.line2 = address.lines[1];
+            /* eslint-enable prefer-destructuring */
+
+            state.address.locality = address.locality;
+            state.address.postcode = address.postalCode;
+        },
+
+        [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
+            state.customer.mobileNumber = phoneNumber;
         }
     }
 };

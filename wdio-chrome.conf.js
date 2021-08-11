@@ -199,12 +199,9 @@ exports.config = {
                 case 'mobile':
                     viewportWidths = [MOBILE_NARROW_WIDTH];
                     break;
-                case 'shared':
-                    viewportWidths = [MOBILE_NARROW_WIDTH, DESKTOP_HUGE_WIDTH];
-                    break;
             }
 
-            browser.call(async () => await percySnapshot(`${screenshotName}`, {
+            browser.call(async () => await percySnapshot(`${screenshotName} - ${featureType}`, {
                 widths: viewportWidths
             }));
         });

@@ -3,6 +3,40 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+To be added to next Release
+------------------------------
+
+### Added
+- New MDX documentation for showing use cases as example for new storybook upgrade
+
+
+v1.0.0
+------------------------------
+*July 02, 2021*
+
+### Added
+- Added new prop called flex, which allows custom flex rules when implementing
+
+### Removed
+- removed stackOnNarrow as we now allow breakpoints to be passed into flex prop
+- removed stacked as we now allow breakpoints to be passed into flex prop
+- removed reverse as we now allow reverse to be passed into flex prop
+
+
+v0.4.0
+------------------------------
+*June 21, 2021*
+
+### Added
+- stackWhenNarrow prop to stack when on device sizes <=narrowMid
+- `white-space: pre-line` to enable newlines to be preserved when used in title or text
+- Additional unit tests for new features
+
+### Fixed
+- Styling fix to make sure reverse prop works when not in stacked mode
+
+
 v0.3.0
 ------------------------------
 *June 09, 2021*

@@ -1,4 +1,4 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('../../../../../services/f-wdio-utils/src/page.object');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
@@ -14,6 +14,7 @@ const {
     PRE_ORDER_WARNING,
     CHECKOUT_ERROR_MESSAGE,
     RETRY_BUTTON,
+    CLOSE_MODAL,
     DUP_ORDER_GO_TO_HISTORY_BUTTON,
     ERROR_PAGE_COMPONENT,
     ERROR_PAGE_HEADING,
@@ -47,6 +48,8 @@ module.exports = class Checkout extends Page {
     get checkoutErrorMessage () { return $(CHECKOUT_ERROR_MESSAGE); }
 
     get errorMessageRetry () { return $(RETRY_BUTTON); }
+
+    get closeMessageModal () { return $(CLOSE_MODAL); }
 
     get errorMessageDupOrderGoToHistory () { return $(DUP_ORDER_GO_TO_HISTORY_BUTTON); }
 
@@ -137,6 +140,10 @@ module.exports = class Checkout extends Page {
         return this.fields.addressPostcode.typeError.isDisplayed();
     }
 
+    isEmailErrorDisplayed () {
+        return this.fields.emailAddress.error.isDisplayed();
+    }
+
     isTableIdentifierMaxLengthErrorDisplayed () {
         return this.fields.tableIdentifier.maxLengthError.isDisplayed();
     }
@@ -163,6 +170,32 @@ module.exports = class Checkout extends Page {
 
     clickDupOrderGoToHistoryButton () {
         return this.errorMessageDupOrderGoToHistory.click();
+    }
+
+    getCheckoutErrorTabOrder () {
+        const tabOrder = [this.errorMessageRetry, this.closeMessageModal];
+        const tabOrderResult = super.testTabOrder(tabOrder);
+        const expectedTabOrder = tabOrder.map(el => ({
+            selector: el.getAttribute('data-test-id'),
+            isFocused: true
+        }));
+        return {
+            actual: tabOrderResult,
+            expected: expectedTabOrder.concat(expectedTabOrder[0])
+        };
+    }
+
+    getPlaceOrderErrorTabOrder () {
+        const tabOrder = [this.errorMessageRetry, this.errorMessageDupOrderGoToHistory, this.closeMessageModal];
+        const tabOrderResult = super.testTabOrder(tabOrder);
+        const expectedTabOrder = tabOrder.map(el => ({
+            selector: el.getAttribute('data-test-id'),
+            isFocused: true
+        }));
+        return {
+            actual: tabOrderResult,
+            expected: expectedTabOrder.concat(expectedTabOrder[0])
+        };
     }
 
     /**
@@ -243,6 +276,22 @@ module.exports = class Checkout extends Page {
 
     /**
     * @description
+    * Inputs address details into the checkout component.
+    *
+    * @param {Object} addressInfo
+    * @param {String} addressInfo.emailAddress The user's email addess
+    * @param {String} addressInfo.mobileNumber The user's mobile number
+    * @param {String} addressInfo.note The user's extra note
+    */
+    populateGuestCollectionCheckoutForm (addressInfo) {
+        this.waitForComponent();
+        this.fields.emailAddress.input.setValue(addressInfo.emailAddress);
+        this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
+        this.fields.userNote.input.setValue(addressInfo.note);
+    }
+
+    /**
+    * @description
     * Inputs customer details into the checkout component.
     *
     * @param {Object} customerInfo
@@ -259,15 +308,49 @@ module.exports = class Checkout extends Page {
 
     /**
     * @description
+    * Inputs customer details into the checkout component.
+    *
+    * @param {Object} customerInfo
+    * @param {String} customerInfo.email The user's e-mail address
+    * @param {String} customerInfo.mobileNumber The user's mobile number
+    * @param {String} customerInfo.tableIdentifier The user's table ID
+    * @param {String} customerInfo.note The user's extra note
+    */
+    populateGuestDineInCheckoutForm (customerInfo) {
+        this.waitForComponent();
+        this.fields.emailAddress.input.setValue(customerInfo.emailAddress);
+        this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
+        this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
+        this.fields.userNote.input.setValue(customerInfo.note);
+    }
+
+    /**
+    * @description
     * Changes checkout page to reflect checkout method to either delivery or collection depending on index given.
     *
     * @param {string} method The collection type: either 'delivery' or 'collection'
     */
-
     changeCheckoutMethod (method) {
         const file = `/checkout-${method}.json`;
         this.knobButton.click();
         this.knobCheckoutDropdown.selectByVisibleText(file);
+    }
+
+    /**
+    * @description
+    * Due to the anomalies between webdriver io and Chrome the current `clearField()`
+    * hack to clear a field needs to be different for those fields that have the onBlur
+    * event attached to them.
+    * Select all the text in the field and then performs a backspace to clear the field
+    *
+    * @param {String} fieldName The name of the field input it is clearing
+    */
+    clearBlurField (fieldName) {
+        const CONTROL = '\uE009';
+        const el = this.fields[fieldName].input;
+        el.click();
+        el.keys([CONTROL, 'a']);
+        el.keys(['Backspace']);
     }
 
     /**

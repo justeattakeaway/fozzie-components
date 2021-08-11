@@ -3,6 +3,69 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.41.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Add the f-http mockFactory to process within Storybook to support story API mocks
+
+
+v0.40.0
+------------------------------
+*August 05, 2021*
+
+### Added
+- MDX file for media element
+
+### Changed
+- Upgraded the version of storybook to 6.3
+- Modified the config for themes to make it work as much as possible
+
+
+v0.39.0
+------------------------------
+*August 04, 2021*
+
+### Added
+- Upgrade to f-http@v0.6.1
+
+
+v0.38.0
+------------------------------
+*July 14, 2021*
+
+### Added
+- Support for loading currently open story files via VS Code `launch.json`.
+
+
+v0.37.0
+------------------------------
+*June 30, 2021*
+
+### Changed
+- Modified the storybook main.js config to make optional chaining work with babel, had to do in odd way as yarn workspaces affects the way babel works in storybook
+
+
+v0.36.0
+------------------------------
+*June 24, 2021*
+
+### Changed
+- Storybook config now changed to only build changed components when run as part of CI (as we only test changed components, not all components on builds now).
+
+
+v0.35.0
+------------------------------
+*June 17, 2021*
+
+### Added
+- `CNAME` record for custom `vue.pie.design` domain.
+
+### Fixed
+- Storybook deployer moved to the storybook package (so that it deploys the `index.html` to the root of `gh-pages` correctly).
+
+
 v0.34.0
 ------------------------------
 *May 14, 2021*

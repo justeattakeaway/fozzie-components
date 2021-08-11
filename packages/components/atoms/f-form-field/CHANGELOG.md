@@ -4,6 +4,88 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0
+------------------------------
+*August 5, 2021*
+
+### Remove
+- **Breaking Change**: `labelStyle` prop.
+- **Breaking Change**: `Inline` and `InlineNarrow` styles.
+
+### Added
+- `shouldShowLabelText` prop.
+- Documentation.
+
+### Changed
+- **Breaking Change**: Replaced `description` slot and `hasInputDescription` prop with `labelDescription` prop.
+
+
+v1.21.0
+------------------------------
+*August 3, 2021*
+
+### Added
+- `AffixedFormField` component.
+- Tests to cover changes.
+
+
+v1.20.0
+------------------------------
+*July 26, 2021*
+
+### Added
+- `labelDetails` and `assistiveText`.
+- Styling to placeholder.
+
+
+v1.19.0
+------------------------------
+*July 22, 2021*
+
+### Added
+- Leading and Trailing icon slots.
+- Tests to cover changes.
+
+
+v1.18.0
+------------------------------
+*July 22, 2021*
+
+### Changed
+- Made text area data test id dynamic based on name attribute
+
+
+v1.17.0
+------------------------------
+*July 19, 2021*
+
+### Changed
+- Updates to match PIE designs.
+- Disabled label style.
+
+### Added
+- `fieldSize` prop.
+
+
+v1.16.1
+------------------------------
+*June 30, 2021*
+
+### Changed
+- Label description class name.
+- Label description from `<p>` to `<span>`.
+- Background colours to `common.scss`
+
+
+v1.16.0
+------------------------------
+*June 28, 2021*
+
+### Fixed
+- Hover state to be consistent across all field types.
+- First grouped form field to have correct `border-radius`.
+
+
 v1.15.1
 ------------------------------
 *June 15, 2021*

@@ -1,6 +1,6 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 const Offers = require('../../test-utils/component-objects/f-offers.component');
 

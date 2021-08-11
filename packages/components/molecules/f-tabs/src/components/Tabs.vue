@@ -28,7 +28,12 @@
 
 import { DIRECTION, INJECTIONS } from '../constants';
 
-const { REGISTER, TABS_COMPONENT, SELECT } = INJECTIONS;
+const {
+    REGISTER,
+    SELECT,
+    TABS_COMPONENT,
+    UPDATE_TITLE
+} = INJECTIONS;
 
 export default {
     name: 'Tabs',
@@ -69,10 +74,16 @@ export default {
             [REGISTER]: tab => {
                 component.addTab(tab);
             },
+
             [SELECT]: name => {
                 component.selectTabIndex(name);
             },
-            [TABS_COMPONENT]: tabsComponent
+
+            [TABS_COMPONENT]: tabsComponent,
+
+            [UPDATE_TITLE]: (name, title) => {
+                component.updateTabTitle(name, title);
+            }
         };
     },
     methods: {
@@ -107,6 +118,18 @@ export default {
                 this.activeTab = tab.name;
             }
             this.tabs = [...this.tabs, tab];
+        },
+
+        /**
+         * This function looks for a tab with the given name and updates its title
+         * @param name {string}
+         * @param title {string}
+         */
+        updateTabTitle (name, title) {
+            const tab = this.tabs.find(t => t.name === name);
+            if (tab) {
+                tab.title = title;
+            }
         }
     }
 };

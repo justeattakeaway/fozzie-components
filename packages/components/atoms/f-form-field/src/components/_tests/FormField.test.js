@@ -2,12 +2,21 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
-    DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES
+    DEFAULT_INPUT_TYPE,
+    VALID_ICON_INPUT_TYPES,
+    VALID_AFFIXED_INPUT_TYPES,
+    VALID_INPUT_TYPES,
+    VALID_TRAILING_ICON_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
-    'c-formField-field--noFocus': 'c-formField-field--noFocus'
+    'c-formField-field--noFocus': 'c-formField-field--noFocus',
+    'c-formField-field--small': 'c-formField-field--small',
+    'c-formField-field--medium': 'c-formField-field--medium',
+    'c-formField-field--large': 'c-formField-field--large'
 };
+
+const slot = '<div>ICON</div>';
 
 describe('FormField', () => {
     it('should be defined', () => {
@@ -165,73 +174,127 @@ describe('FormField', () => {
             });
         });
 
-        describe('labelStyle ::', () => {
-            it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected if labelStyle=%p is specified', definedType => {
+        describe('fieldSize ::', () => {
+            it.each([
+                ['c-formField-field--small', 'small'],
+                ['c-formField-field--medium', 'medium'],
+                ['c-formField-field--large', 'large']
+            ])('should apply %s class to input when set to %s', (className, fieldSize) => {
                 // Arrange
                 const propsData = {
-                    labelStyle: definedType
+                    fieldSize
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    mocks: {
+                        $style
+                    }
+                });
+
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('class')).toContain(className);
+            });
+        });
+
+        describe('shouldShowLabelText ::', () => {
+            it('should display `FormLabel` when set to `true`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: true
                 };
 
                 // Act
                 const wrapper = shallowMount(FormField, { propsData });
-                const formLabel = wrapper.find('form-label-stub');
+
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
 
                 // Assert
-                expect(formLabel.attributes('labelstyle')).toBe(definedType);
+                expect(formLabel.exists()).toBe(true);
             });
 
-            describe('when set to `inlineNarrow`', () => {
-                const MOBILE = 767;
-                const DESKTOP = 768;
-                const eventName = 'resize';
-                let resizeWindow;
+            it('should not display `FormLabel` when set to `false`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: false
+                };
 
-                beforeEach(() => {
-                    resizeWindow = width => {
-                        window.innerWidth = width;
-                        window.dispatchEvent(new Event(eventName));
-                    };
-                });
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
 
-                it('should append the label above input when window size is not mobile', async () => {
-                    // Arrange
-                    const propsData = {
-                        labelStyle: 'inlineNarrow',
-                        labelText: 'Test Label'
-                    };
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
 
-                    resizeWindow(DESKTOP);
+                // Assert
+                expect(formLabel.exists()).toBe(false);
+            });
+        });
 
-                    // Act
-                    const wrapper = await shallowMount(FormField, { propsData });
+        describe('LabelDetails ::', () => {
+            it('should display `LabelDetails` when description is provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDetails: 'labelDetails'
+                };
 
-                    const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
-                    const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
+                // Act
+                const wrapper = mount(FormField, { propsData });
 
-                    // Assert
-                    expect(defaultLabel.exists()).toBe(true);
-                    expect(inlineLabel.exists()).toBe(false);
-                });
+                const formLabelDetails = wrapper.find('[data-test-id="formfield-label-details"]');
 
-                it('should append the label inline with input when window size is mobile', async () => {
-                    // Arrange
-                    const propsData = {
-                        labelStyle: 'inlineNarrow',
-                        labelText: 'Test Label'
-                    };
+                // Assert
+                expect(formLabelDetails.exists()).toBe(true);
+            });
 
-                    resizeWindow(MOBILE);
+            it('should not display `LabelDetails` when description is not provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDetails: null
+                };
 
-                    // Act
-                    const wrapper = await shallowMount(FormField, { propsData });
+                // Act
+                const wrapper = mount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
-                    const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
+                const formLabelDetails = wrapper.find('[data-test-id="formfield-label-details"]');
 
-                    // Assert
-                    expect(defaultLabel.exists()).toBe(false);
-                    expect(inlineLabel.exists()).toBe(true);
-                });
+                // Assert
+                expect(formLabelDetails.exists()).toBe(false);
+            });
+        });
+
+        describe('labelDescription ::', () => {
+            it('should display `labelDescription` when description is provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDescription: 'labelDescription'
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDescription = wrapper.find('[data-test-id="formfield-label-description"]');
+
+                // Assert
+                expect(formLabelDescription.exists()).toBe(true);
+            });
+
+            it('should not display `labelDescription` when description is not provided', () => {
+                // Arrange
+                const propsData = {
+                    labelDescription: null
+                };
+
+                // Act
+                const wrapper = mount(FormField, { propsData });
+
+                const formLabelDescription = wrapper.find('[data-test-id="formfield-label-description"]');
+
+                // Assert
+                expect(formLabelDescription.exists()).toBe(false);
             });
         });
     });
@@ -252,6 +315,198 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formInput.attributes('class')).toContain('c-formField-field--noFocus');
+            });
+        });
+
+        describe('isDisabled :: ', () => {
+            it.each([
+                [true, 'disabled'],
+                [false, null]
+            ])('should return %s if disabled attribute is %s', (expected, disabled) => {
+                // Arrange
+                const propsData = {
+                    disabled
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                // Assert
+                expect(wrapper.vm.isDisabled).toEqual(expected);
+            });
+        });
+
+        describe('isValidIconField :: ', () => {
+            it.each([
+                [true, 'email'],
+                [true, 'password'],
+                [true, 'dropdown'],
+                [true, 'number'],
+                [true, 'tel'],
+                [false, 'radio'],
+                [false, 'checkbox'],
+                [false, null]
+            ])('should return %s if `inputType` is %s', (expected, inputType) => {
+                // Arrange
+                const propsData = {
+                    inputType
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                // Assert
+                expect(wrapper.vm.isValidIconField).toEqual(expected);
+            });
+        });
+
+        describe('hasLeadingIcon :: ', () => {
+            // Arrange
+            const propsData = {
+                inputType: 'text'
+            };
+
+            it('should return `true` when slots contain `icon-leading`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: {
+                        'icon-leading': slot
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.hasLeadingIcon).toEqual(true);
+            });
+
+            it('should return `false` when slots do not contain `icon-leading`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: null
+                });
+
+                // Assert
+                expect(wrapper.vm.hasLeadingIcon).toEqual(false);
+            });
+        });
+
+        describe('hasTrailingIcon :: ', () => {
+            // Arrange
+            const propsData = {
+                inputType: 'text'
+            };
+
+            it('should return `true` when slots contain `icon-trailing`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: {
+                        'icon-trailing': slot
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.hasTrailingIcon).toEqual(true);
+            });
+
+            it('should return `false` when slots do not contain `icon-trailing`', () => {
+                // Act
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    slots: null
+                });
+
+                // Assert
+                expect(wrapper.vm.hasTrailingIcon).toEqual(false);
+            });
+        });
+
+        describe('isAffixedField :: ', () => {
+            describe('when `prefix` value exists ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text',
+                        prefix: '£'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return true`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAffixedField).toBe(true);
+                });
+
+                it('should display `affixedFormField` wrapper', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affixed-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(true);
+                });
+            });
+
+            describe('when `suffix` value exists ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text',
+                        suffix: '£'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return true`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAffixedField).toBe(true);
+                });
+
+                it('should display `affixedFormField` wrapper', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affixed-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(true);
+                });
+            });
+
+            describe('when neither `prefix` or `suffix` value exist ::', () => {
+                let propsData;
+                let wrapper;
+
+                beforeEach(() => {
+                    // Arrange
+                    propsData = {
+                        inputType: 'text'
+                    };
+
+                    // Act
+                    wrapper = mount(FormField, { propsData });
+                });
+
+                it('should return false`', () => {
+                    // Assert
+                    expect(wrapper.vm.isAffixedField).toBe(false);
+                });
+
+                it('should not display `affixedFormField` wrapper', () => {
+                    // Arrange
+                    const affixedFormField = wrapper.find('[data-test-id="formfield-affix-input"]');
+
+                    // Assert
+                    expect(affixedFormField.exists()).toBe(false);
+                });
             });
         });
     });
@@ -284,7 +539,7 @@ describe('FormField', () => {
                 expect(wrapper.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}`);
             });
 
-            it('should include attribute `name` in the generated input data-test-id when it is set', () => {
+            it('should include attribute `name` and an `input` suffix` in the generated input data-test-id when it is set', () => {
                 // Arrange
                 const attrsData = {
                     attrs: {
@@ -298,6 +553,24 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formInput.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}-input`);
+            });
+
+            it('should include attribute `name` and a `textarea` suffix in the generated textarea data-test-id when it is set', () => {
+                // Arrange
+                const attrs = {
+                    name: 'email'
+                };
+
+                const propsData = {
+                    inputType: 'textarea'
+                };
+
+                // Act
+                const wrapper = mount(FormField, { attrs, propsData });
+                const formInput = wrapper.find('textarea');
+
+                // Assert
+                expect(formInput.attributes('data-test-id')).toBe(`formfield-${attrs.name}-textarea`);
             });
 
             it('when name is set, it should be included in the generated testId.input data-test-id', () => {
@@ -351,6 +624,183 @@ describe('FormField', () => {
 
                 // Assert
                 expect(wrapper.emitted().input).toHaveLength(1);
+            });
+        });
+    });
+
+    describe('methods ::', () => {
+        describe('validateProps ::', () => {
+            let spy;
+
+            beforeEach(() => {
+                spy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
+            });
+
+            afterEach(() => {
+                spy.mockRestore();
+            });
+
+            describe('when `hasLeadingIcon` is true', () => {
+                it.each(VALID_ICON_INPUT_TYPES)('should not throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each(['textarea', 'checkbox', 'radio'])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).toThrowError(`Form field is set to have inputType="${inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
+                });
+            });
+
+            describe('when `hasTrailingIcon` is true', () => {
+                it.each([
+                    'text',
+                    'email',
+                    'password',
+                    'number',
+                    'tel'
+                ])('should not throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each(['textarea', 'checkbox', 'radio'])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = { inputType };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError(`Form field is set to have inputType="${inputType}", but icons can only be displayed one of the following inputTypes: "${VALID_ICON_INPUT_TYPES.join('", "')}"`);
+                });
+
+                it('should throw an error when `inputType` is set to `dropdown`', () => {
+                    // Arrange
+                    const propsData = { inputType: 'dropdown' };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+                });
+            });
+
+            describe('when `isAffixedField` is true', () => {
+                it.each([VALID_AFFIXED_INPUT_TYPES])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = {
+                        inputType,
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData
+                        });
+                    }).not.toThrowError();
+                });
+
+                it.each([
+                    'dropdown',
+                    'textarea',
+                    'checkbox',
+                    'radio',
+                    null
+                ])('should throw an error when `inputType` is set to %s', inputType => {
+                    // Arrange
+                    const propsData = {
+                        inputType,
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData
+                        });
+                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
+                });
+            });
+
+            describe('when `prefix` is provided', () => {
+                it('should throw an error when `leadingIcon` added', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        prefix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-leading': slot
+                            }
+                        });
+                    }).toThrowError('Form field is set to have a "prefix" and "leadingIcon", only one can be displayed');
+                });
+            });
+
+            describe('when `suffix` is provided', () => {
+                it('should throw an error when `trailingIcon` added', () => {
+                    // Arrange
+                    const propsData = {
+                        inputType: 'text',
+                        suffix: '£'
+                    };
+
+                    // Act & Assert
+                    expect(() => {
+                        shallowMount(FormField, {
+                            propsData,
+                            slots: {
+                                'icon-trailing': slot
+                            }
+                        });
+                    }).toThrowError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
+                });
             });
         });
     });

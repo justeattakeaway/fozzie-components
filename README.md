@@ -82,7 +82,14 @@ To run storybook first you must run the following at the the top level
 
 `yarn build` to build the require packages for storybook to run.
 
-Then run `yarn storybook:serve` to start storybook, which will open on `localhost:6006`.
+Then run `yarn storybook:serve` to start storybook, which will open on `localhost:8080`.
+
+
+### Running a single component in Storybook
+
+If you wish to view a single component in Storybook during development, you can do this by opening the components `*.stories.js` file in your IDE and running the `Storybook - Run Currently Open Story File` task which can be found in the debug tab on the left. (This only works with VS Code).
+
+This is particuarly useful as it prevents a bug where Storybook pulls in other components stylesheets ([See here](https://github.com/storybookjs/storybook/issues/729)).
 
 ## Committing Code
 
@@ -96,6 +103,6 @@ For example: `git commit -m "Refactor f-button" --no-verify `.
 
 ## Publishing Components
 
-More information about how to contribute to this repo can be found in our Storybook [Documentation section](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-contributing--page)
+More information about how to contribute to this repo can be found in our Storybook [Documentation section](https://vue.pie.design/?path=/story/documentation-getting-started-contributing--page)
 
-### [Just Eat Storybook production](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html)
+### [Just Eat Storybook production](https://vue.pie.design/)

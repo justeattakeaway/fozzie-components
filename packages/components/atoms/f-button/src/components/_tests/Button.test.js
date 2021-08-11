@@ -5,9 +5,152 @@ describe('Button', () => {
     const actionType = 'button';
 
     it('should be defined', () => {
-        const propsData = { };
+        const propsData = {};
         const wrapper = shallowMount(FButton, { propsData });
         expect(wrapper.exists()).toBe(true);
+    });
+
+    describe('methods ::', () => {
+        describe('validateProps ::', () => {
+            let spy;
+
+            beforeEach(() => {
+                spy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
+            });
+            afterEach(() => {
+                spy.mockRestore();
+            });
+
+            it.each([
+                'xsmall',
+                'small',
+                'medium',
+                'large'
+            ])('should not throw an error when buttonSize is set to %s', buttonSize => {
+                // Arrange
+                const propsData = {
+                    buttonSize,
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .not.toThrowError();
+            });
+
+            it('should throw an error when buttonSize is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    buttonSize: 'invalid_value',
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .toThrowError('buttonSize is set to "invalid_value"');
+            });
+
+            it.each([
+                'primary',
+                'secondary',
+                'outline',
+                'ghost',
+                'link'
+            ])('should not throw an error when the component is a standard button (isIcon="false") and buttonType is set to %s', buttonType => {
+                // Arrange
+                const propsData = {
+                    buttonType,
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .not.toThrowError();
+            });
+
+            it('should throw an error when the component is a standard button (isIcon="false") and buttonType is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    buttonType: 'invalid_value',
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .toThrowError('button is set to have buttonType="invalid_value"');
+            });
+
+            it.each([
+                'primary',
+                'secondary',
+                'ghost',
+                'ghostTertiary'
+            ])('should not throw an error when the component is an iconButton (isIcon="true") and buttonType is set to %s', buttonType => {
+                // Arrange
+                const propsData = {
+                    buttonType,
+                    isIcon: true
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .not.toThrowError();
+            });
+
+            it('should throw an error when the component is an iconButton (isIcon="true") and the buttonType is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    buttonType: 'invalid_value',
+                    isIcon: true
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                })
+                    .toThrowError('iconButton is set to have buttonType="invalid_value"');
+            });
+
+            it.each([
+                'leading',
+                'trailing',
+                false
+            ])('should not throw an error when "hasIcon" is set to %s', hasIcon => {
+                // Arrange
+                const propsData = {
+                    hasIcon,
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                }).not.toThrowError();
+            });
+
+            it('should throw an error when "hasIcon" is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    hasIcon: 'invalid_value',
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                }).toThrowError('hasIcon is set to "invalid_value"');
+            });
+        });
     });
 
     describe('template :: ', () => {
@@ -101,6 +244,26 @@ describe('Button', () => {
                             const onClick = jest.fn();
                             const wrapper = mount(FButton, { listeners: { click: onClick }, propsData });
                             const button = wrapper.find('[data-test-id="action-button-component"]');
+
+                            // Act
+                            button.trigger('click');
+
+                            // Assert
+                            expect(onClick).toHaveBeenCalled();
+                        });
+                    });
+
+                    describe('when loaded and `href` is not empty :: ', () => {
+                        it('should be triggered', () => {
+                            // Arrange
+                            const propsData = {
+                                isLoading: false,
+                                href: '#'
+                            };
+
+                            const onClick = jest.fn();
+                            const wrapper = mount(FButton, { listeners: { click: onClick }, propsData });
+                            const button = wrapper.find('[data-test-id="link-button-component"]');
 
                             // Act
                             button.trigger('click');
@@ -275,6 +438,50 @@ describe('Button', () => {
 
                     // Assert
                     expect(wrapper.vm.getAriaLive).toEqual('off');
+                });
+            });
+        });
+
+        describe('hasTrailingIcon :: ', () => {
+            describe.each([
+                ['trailing', true],
+                ['leading', false],
+                [false, false]
+            ])('when `hasIcon` prop is %s :: ', (hasIcon, expected) => {
+                // Arrange
+                const propsData = {
+                    hasIcon
+                };
+
+                // Act
+                const wrapper = shallowMount(FButton, { propsData });
+                const element = wrapper.find('[data-test-id="button-trailing-icon"]');
+
+                it(`should ${hasIcon !== 'trailing' ? 'not' : ''} render the icon`, () => {
+                    // Assert
+                    expect(element.exists()).toBe(expected);
+                });
+            });
+        });
+
+        describe('hasLeadingIcon :: ', () => {
+            describe.each([
+                ['trailing', false],
+                ['leading', true],
+                [false, false]
+            ])('when `hasIcon` prop is %s :: ', (hasIcon, expected) => {
+                // Arrange
+                const propsData = {
+                    hasIcon
+                };
+
+                // Act
+                const wrapper = shallowMount(FButton, { propsData });
+                const element = wrapper.find('[data-test-id="button-leading-icon"]');
+
+                it(`should ${hasIcon !== 'leading' ? 'not' : ''} render the icon`, () => {
+                    // Assert
+                    expect(element.exists()).toBe(expected);
                 });
             });
         });

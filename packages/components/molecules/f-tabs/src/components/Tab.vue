@@ -25,7 +25,8 @@ import { DIRECTION, INJECTIONS } from '../constants';
 const {
     REGISTER,
     SELECT,
-    TABS_COMPONENT
+    TABS_COMPONENT,
+    UPDATE_TITLE
 } = INJECTIONS;
 
 export default {
@@ -48,7 +49,12 @@ export default {
         }
     },
 
-    inject: [REGISTER, SELECT, TABS_COMPONENT],
+    inject: [
+        REGISTER,
+        SELECT,
+        TABS_COMPONENT,
+        UPDATE_TITLE
+    ],
 
     computed: {
         isActive () {
@@ -70,6 +76,12 @@ export default {
         selected (current, previous) {
             if (current && !previous) {
                 this[SELECT](this.name);
+            }
+        },
+
+        title (current, previous) {
+            if (current && current !== previous) {
+                this[UPDATE_TITLE](this.name, current);
             }
         }
     },

@@ -4,6 +4,281 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (to be added to next release)
+------------------------------
+*August 9, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v0.168.0
+------------------------------
+*August 5, 2021*
+
+### Added
+- Modal specific tab looping tests to `axe-accessibility.spec.js` that support `dinein`, `collection` and `delivery` variants of checkout.
+Latest (to be added to next release)
+
+
+v0.167.0
+------------------------------
+*August 5, 2021*
+
+### Added
+- `max-length` property to guest email field.
+- `max-length` to component tests.
+
+
+v0.166.0
+------------------------------
+*August 4, 2021*
+
+### Changed
+- reduce character limit on address fields to 100
+
+
+v0.165.0
+------------------------------
+*July 26, 2021*
+
+### Added
+- `errorCode` property for failed UpdateCheckout is passed to the log
+
+
+v0.164.0
+------------------------------
+*July 22, 2021*
+
+### Added
+- Added `x-je-feature` to header config in `services/orderPlacementApi`
+
+
+v0.163.0
+------------------------------
+*July 17, 2021*
+
+### Added
+- Extracted APIs from Checkout Store so they are accessible to Contract Tests
+
+### Changed
+- Updated version of `f-button`.
+
+
+v0.162.0
+------------------------------
+*July 19, 2021*
+
+### Fixed
+- Ensure coordinates are always retrieved from local storage or fetched from API.
+
+
+v0.161.0
+------------------------------
+*July 15, 2021*
+
+### Added
+- Error page if `getCheckout` request returns empty times list.
+
+### Fixed
+- A typo in `CHEKOUT_ERROR_FORM_TYPE` > `CHECKOUT_ERROR_FORM_TYPE`
+
+
+v0.160.0
+------------------------------
+*July 15, 2021*
+
+### Removed
+- `pageData` from `trackInitialLoad` in the analytics module.
+
+### Added
+- `CheckoutMounted` event.
+
+
+v0.159.1
+------------------------------
+*July 14, 2021*
+
+### Fixed
+- Use correct parameter in analytics module to track LVO experiment
+
+
+v0.159.0
+------------------------------
+*July 12, 2021*
+
+### Added
+- Issue name and isFulfillable value to eventData to be captured by the error log.
+
+
+v0.158.0
+------------------------------
+*July 12, 2021*
+
+### changed
+- Removed the direct get postcode cookie call from `addressService.js` and now pass value in.
+
+
+v0.157.0
+------------------------------
+*July 9, 2021*
+
+### Fixed
+- Error handling when there are no responses (e.g. timeout).
+
+
+v0.156.0
+------------------------------
+*July 8, 2021*
+
+### Added
+- Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
+
+
+v0.156.0
+------------------------------
+*July 8, 2021*
+
+### Added
+- Experiment headers to PATCH checkout request
+- Track experiments if returned in response headers
+
+
+v0.155.0
+------------------------------
+*July 6, 2021*
+
+### Changed
+- Email, Postcode and Mobile was validating on every keypress but now validating onBlur.
+
+
+v0.154.0
+------------------------------
+*July 7, 2021*
+
+### Added
+- Redirect to home when `restaurant.seoName` is falsey.
+
+
+v0.153.0
+------------------------------
+*July 6, 2021*
+
+### Added
+- Chosen time to eventData to be captured by the error log.
+
+
+v0.152.0
+------------------------------
+*July 6, 2021*
+
+### Fixed
+- Returning guest user's mobile phone number not populating
+
+
+v0.151.0
+------------------------------
+*July 5, 2021*
+
+### Fixed
+- Get new `availableFulfilment` times when no available fulfilment times are available.
+
+### Changed
+- `f-form-field` version to `1.16.1`.
+
+
+v0.150.0
+------------------------------
+*June 30, 2021*
+
+### Fixed
+- Address not populating guest checkout form.
+
+
+v0.149.0
+------------------------------
+*June 30, 2021*
+
+### Changed
+- Logging levels for different errors.
+- Using `f-card`'s `1.3.0` version.
+
+
+v0.148.0
+------------------------------
+*June 24, 2021*
+
+### Added
+- The ability to save to `localStorage` if the address is changed by the user.
+
+
+v0.147.0
+------------------------------
+*June 24, 2021*
+
+### Fix
+- ASAP flag applied when times are initialised.
+
+
+v0.146.0
+------------------------------
+*June 24, 2021*
+
+### Changed
+- When submitting the checkout page and we get a `403` error code, we show the `403` error page.
+
+
+v0.145.0
+------------------------------
+*June 23, 2021*
+
+### Fixed
+- Selector to display previously selected times
+
+### Changed
+- `f-form-field` version
+
+### Added
+- Storybook mocks for pre-selected fulfilment times
+
+
+v0.144.0
+------------------------------
+*June 21, 2021*
+
+### Added
+- More thorough check on whether form address and storage address match
+
+
+v0.143.1
+------------------------------
+*June 21, 2021*
+
+### Changed
+- Flipped coordinates from local storage
+
+
+v0.143.0
+------------------------------
+*June 18, 2021*
+
+### Changed
+- Fixed redirect link for Dine In orders
+
+
+v0.142.0
+------------------------------
+*June 17, 2021*
+
+### Changed
+- Percy to run desktop / mobile in separate specs
+
+
+### Fixed
+- Percy visual regression test
+
+
 v0.141.1
 ------------------------------
 *June 17, 2021*
@@ -34,7 +309,7 @@ v0.139.0
 
 ### Changed
 - Use loading spinner on submit button
-  
+
 
 v0.138.0
 ------------------------------
