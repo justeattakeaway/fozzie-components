@@ -147,9 +147,9 @@ export default {
 
         isValidAge () {
             const currentDate = new Date();
-            const minimumAge = new Date((currentDate.getFullYear() - 18), currentDate.getMonth(), currentDate.getDate());
+            const maximumAgeDifference = new Date((currentDate.getFullYear() - 18), currentDate.getMonth(), currentDate.getDate());
 
-            return this.userDateOfBirth <= minimumAge;
+            return Number(this.userDateOfBirth) <= Number(maximumAgeDifference);
         },
 
         shouldShowErrorMessage () {
