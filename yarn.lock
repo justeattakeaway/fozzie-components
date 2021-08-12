@@ -2231,6 +2231,14 @@
   dependencies:
     vue-i18n "8.0.0"
 
+"@justeat/f-http@0.8.0":
+  version "0.8.0"
+  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-http/-/f-http-0.8.0.tgz#46a99a274d3611186d387a26920de02d5f1a05d7"
+  integrity sha1-RqmaJ002ERhtOHomkg3gLV8aBdc=
+  dependencies:
+    axios "0.21.1"
+    axios-mock-adapter "1.19.0"
+
 "@justeat/f-icons@3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.5.1.tgz#a8211d31c3310f5403cee2a72de899a53bcf3d20"
@@ -2389,6 +2397,13 @@
   integrity sha512-jeWACUUp0LfQbKO+BS8KiMIQ/RlaLNuinIHwrmDAxHfxCj2RoElS/Z426cVzGWkIuvs20RiaNFMF31pasHq4QQ==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-wdio-utils@0.1.0":
+  version "0.1.0"
+  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-wdio-utils/-/f-wdio-utils-0.1.0.tgz#e8a62dd2d03c2cf14ce1fa7d50540c2171b8fc38"
+  integrity sha1-6KYt0tA8LPFM4fp9UFQMIXG4/Dg=
+  dependencies:
+    "@justeat/f-services" "1.7.0"
 
 "@justeat/fozzie@5.0.0-beta.10":
   version "5.0.0-beta.10"
@@ -8405,16 +8420,17 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromedriver@92.0.0:
-  version "92.0.0"
-  resolved "http://packages.je-labs.com/npm/private-npm/chromedriver/-/chromedriver-92.0.0.tgz#7860efe7d082ec877dc8146aa920d30340fcbb47"
-  integrity sha1-eGDv59CC7Id9yBRqqSDTA0D8u0c=
+chromedriver@90.0.0:
+  version "90.0.0"
+  resolved "http://packages.je-labs.com/npm/private-npm/chromedriver/-/chromedriver-90.0.0.tgz#1b18960a31a12884981bdc270b43c4356ce7a65a"
+  integrity sha1-GxiWCjGhKISYG9wnC0PENWznplo=
   dependencies:
     "@testim/chrome-version" "^1.0.7"
     axios "^0.21.1"
     del "^6.0.0"
     extract-zip "^2.0.1"
     https-proxy-agent "^5.0.0"
+    mkdirp "^1.0.4"
     proxy-from-env "^1.1.0"
     tcp-port-used "^1.0.1"
 
