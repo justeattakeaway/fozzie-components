@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Selector computed :: orderMethod should show the collection label when the \`serviceType\` is \`collection\` 1`] = `
-<select id="formField-order-time" data-test-id="formfield-order-time-dropdown-select" name="order-time" class="FormDropdown_c-formDropdown-select_ROvjN">
+<select id="formField-order-time" data-test-id="formfield-order-time-dropdown-select" name="order-time" class="FormDropdown_c-formDropdown-select_ROvjN FormDropdown_c-formField-field_2SIjk FormDropdown_c-formField-field--medium_3XEY1">
   <option data-test-id="formfield-order-time-dropdown-option-0" value="2020-01-01T01:00:00.000Z">As soon as possible</option>
   <option data-test-id="formfield-order-time-dropdown-option-1" value="2020-01-01T01:15:00.000Z">Wednesday 01:15</option>
 </select>
 `;
 
 exports[`Selector computed :: orderMethod should show the delivery label when the \`serviceType\` is \`delivery\` 1`] = `
-<select id="formField-order-time" data-test-id="formfield-order-time-dropdown-select" name="order-time" class="FormDropdown_c-formDropdown-select_ROvjN">
+<select id="formField-order-time" data-test-id="formfield-order-time-dropdown-select" name="order-time" class="FormDropdown_c-formDropdown-select_ROvjN FormDropdown_c-formField-field_2SIjk FormDropdown_c-formField-field--medium_3XEY1">
   <option data-test-id="formfield-order-time-dropdown-option-0" value="2020-01-01T01:00:00.000Z">As soon as possible</option>
   <option data-test-id="formfield-order-time-dropdown-option-1" value="2020-01-01T01:15:00.000Z">Wednesday 01:15</option>
 </select>

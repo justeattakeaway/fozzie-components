@@ -3,13 +3,36 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.52.2
+------------------------------
+*August 12, 2021*
 
-v3.51.0
+### Fixed
+- Issue with deps not getting build when building Storybook.
+
+
+v3.52.1
+------------------------------
+*August 11, 2021*
+
+### Updated
+- Various packages to latest version of `f-wdio-utils - v0.3.0`
+
+
+v3.52.0
 ------------------------------
 *August 5, 2021*
 
 ### Changed
 - Upgraded webpack resolution to support storybook upgrade.
+
+
+v3.51.0
+------------------------------
+*August 4, 2021*
+
+### Changed
+- Storybook documentation update and updating some minor package versions.
 
 
 v3.50.0
@@ -24,7 +47,7 @@ v3.49.0
 ------------------------------
 *July 20, 2021*
 
-### Updated
+### Changed
 - Fozzie version to v5.0.0-beta.10 which has the latest pie design token variables.
 
 
