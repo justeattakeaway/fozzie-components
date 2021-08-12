@@ -1188,7 +1188,7 @@ describe('Checkout', () => {
                 });
             });
 
-            describe('when the `DATE_OF_BIRTH_REQUIRED` issue does not exist in errors', () => {
+            describe(`when the ${DOB_REQUIRED_ISSUE} issue does not exist in errors`, () => {
                 let wrapper;
                 beforeEach(() => {
                     // Arrange && Act
