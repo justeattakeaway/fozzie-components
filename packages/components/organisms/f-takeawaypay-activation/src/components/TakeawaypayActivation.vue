@@ -6,7 +6,15 @@
             card-heading-position="center"
             data-test-id="takeawaypay-activation-component"
             :class="$style['c-takeawaypayActivation-card']">
+            <div
+                v-if="shouldShowSpinner"
+                :class="$style['c-spinner-wrapper']"
+                data-test-id="takeawaypay-loading-spinner">
+                <div :class="$style['c-spinner']" />
+            </div>
+
             <component
+                v-if="!shouldShowSpinner"
                 :is="activationStateComponent.name"
                 ref="activationStateComponent"
                 v-bind="activationStateComponent.props"
@@ -86,7 +94,8 @@ export default {
             consumerEmail: '',
             consumerGivenName: '',
             consumerRole: '',
-            activationState: ACTIVATION_STATE_NONE
+            activationState: ACTIVATION_STATE_NONE,
+            shouldShowSpinner: false
         };
     },
 
@@ -157,6 +166,7 @@ export default {
 
     methods: {
         async initialize () {
+            this.shouldShowSpinner = true;
             const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl, this.employeeId, this.$store, this.$logger);
 
             if (available) {
@@ -164,6 +174,7 @@ export default {
             } else {
                 this.activationState = ACTIVATION_STATE_FAILED;
             }
+            this.shouldShowSpinner = false;
         },
 
         extractConsumerDetails () {
@@ -193,6 +204,21 @@ export default {
 </script>
 
 <style lang="scss" module>
+
+@include loadingIndicator('large');
+
+.c-spinner-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .c-spinner {
+        margin: 0 auto;
+        border: 3px solid $color-content-brand;
+        border-top: 3px solid rgba(243, 109, 0, 0.2);
+    }
+}
 
 .c-takeawaypayActivation {
     display: flex;

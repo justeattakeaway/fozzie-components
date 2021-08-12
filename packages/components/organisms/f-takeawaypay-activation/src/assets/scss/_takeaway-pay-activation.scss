@@ -4,8 +4,12 @@
 }
 
 .c-takeawaypayActivation-title {
-    @include font-size(body-l);
+    @include font-size(subheading-s);
     padding-top: spacing(x2);
+}
+
+.c-takeawaypayActivation-description {
+    @include font-size(body-l);
 }
 
 .c-takeawaypayActivation-email {
