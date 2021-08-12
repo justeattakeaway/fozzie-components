@@ -9,6 +9,7 @@ import {
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
     CHECKOUT_METHOD_DINEIN,
+    DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
@@ -1161,7 +1162,7 @@ describe('Checkout', () => {
         });
 
         describe('shouldShowAgeVerificationForm ::', () => {
-            describe('when the `DATE_OF_BIRTH_REQUIRED` issue exists in errors', () => {
+            describe(`when the ${DOB_REQUIRED_ISSUE} issue exists in errors`, () => {
                 let wrapper;
                 beforeEach(() => {
                     // Arrange && Act
@@ -1170,7 +1171,7 @@ describe('Checkout', () => {
                             ...defaultCheckoutState,
                             errors: [
                                 {
-                                    code: 'DATE_OF_BIRTH_REQUIRED',
+                                    code: DOB_REQUIRED_ISSUE,
                                     shouldShowInDialog: false
                                 }
                             ]
