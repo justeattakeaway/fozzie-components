@@ -1,5 +1,5 @@
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import AgeVerification from '../AgeVerification.vue';
 import {
@@ -302,7 +302,7 @@ describe('AgeVerification', () => {
             describe('when `isValidAge` returns `false`', () => {
                 beforeEach(() => {
                     // Arrange
-                    wrapper = shallowMount(AgeVerification, {
+                    wrapper = mount(AgeVerification, {
                         i18n,
                         localVue,
                         store: createStore(),
@@ -332,6 +332,17 @@ describe('AgeVerification', () => {
 
                     // Assert
                     expect(wrapper.emitted('verify-age')).toBeUndefined();
+                });
+
+                it('should focus on error message', async () => {
+                    // Act
+                    wrapper.vm.handleAgeVerifcation();
+                    await wrapper.vm.$nextTick();
+
+                    const errorMessage = wrapper.vm.$refs.AgeVerificationError;
+
+                    // Assert
+                    expect(document.activeElement).toEqual(errorMessage);
                 });
             });
         });

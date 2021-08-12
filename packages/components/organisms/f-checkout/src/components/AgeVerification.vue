@@ -37,12 +37,17 @@
                 :value="selectedDate.year"
                 @input="selectionChanged($event, 'year')" />
 
-            <error-message
-                v-if="shouldShowErrorMessage"
-                data-js-error-message
-                data-test-id="age-verification-error-message">
-                {{ $t('ageVerification.errorMessage') }}
-            </error-message>
+            <div
+                ref="AgeVerificationError"
+                tabindex="-1">
+                <error-message
+                    v-if="shouldShowErrorMessage"
+                    id="age-verification-error"
+                    data-js-error-message
+                    data-test-id="age-verification-error-message">
+                    {{ $t('ageVerification.errorMessage') }}
+                </error-message>
+            </div>
 
             <p
                 :class="$style['c-checkout-ageVerification-description']"
@@ -175,6 +180,10 @@ export default {
             if (this.isValidAge) {
                 this.updateDateOfBirth(this.userDateOfBirth);
                 this.$emit('verify-age');
+            } else {
+                this.$nextTick(() => {
+                    this.$refs.AgeVerificationError.focus();
+                });
             }
         }
     }
@@ -184,6 +193,15 @@ export default {
 <style lang="scss" module>
 .c-checkout-ageVerification-description {
     margin: spacing(x2) 0;
+}
+
+.test {
+    padding: 5px;
+        background: pink;
+    &:focus {
+        background: purple;
+        padding: 10px;
+    }
 }
 
 .c-checkout-ageVerification-button {
