@@ -962,7 +962,7 @@ describe('Checkout', () => {
         });
 
         describe('eventData ::', () => {
-            it('should return `isLoggedIn`, `serviceType`, `chosenTime`, `isFulfillable` and `issueMessage` in an object`', () => {
+            it('should return `isLoggedIn` and `serviceType` in an object`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -977,10 +977,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(result).toEqual({
                     isLoggedIn: defaultCheckoutState.isLoggedIn,
-                    serviceType: defaultCheckoutState.serviceType,
-                    chosenTime: defaultCheckoutState.time.from,
-                    isFulfillable: defaultCheckoutState.isFulfillable,
-                    issueMessage: defaultCheckoutState.message?.code
+                    serviceType: defaultCheckoutState.serviceType
                 });
             });
         });

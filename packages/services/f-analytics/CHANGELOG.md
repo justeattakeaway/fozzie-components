@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.8.0
+------------------------------
+*August 12, 2021*
+
+### Added
+- Added push ad-hoc event method to global var
+
+### Changed
+- Moved the preparation of the server side plaform data to a plugin.
+- Refactored the Store to allow store serverside events to be stored until clientside.
+
+
 v0.7.0
 ------------------------------
 *August 10, 2021*
@@ -12,19 +25,6 @@ v0.7.0
 
 ### Changed
 - Replaced `MAP_ROUTE_TO_FEATURE_NAME` const with `mapRouteToGroup` & `mapRouteToFeature`
-
-
-
-v0.8.0
-------------------------------
-*August 9, 2021*
-
-### Added
-- Added push ad-hoc event method to global var
-
-### Changed
-- Moved the preparation of the server side plaform data to a plugin.
-- Refactored the Store to allow store serverside events to be stored until clientside.
 
 
 v0.6.0

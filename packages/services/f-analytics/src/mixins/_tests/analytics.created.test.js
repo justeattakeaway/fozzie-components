@@ -23,7 +23,7 @@ describe('Analytics', () => {
         let component;
         let prepareServersideAnalyticsSpy;
         let pushPlatformDataSpy;
-        let storeUpdatePageDataSpy;
+        let pushPageDataSpy;
 
         beforeEach(() => {
             // Arrange
@@ -34,7 +34,7 @@ describe('Analytics', () => {
             };
             component.mixins[0].mounted = jest.fn(() => true);
             pushPlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPlatformData').mockImplementationOnce(() => true);
-            storeUpdatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPageData').mockImplementationOnce(() => true);
+            pushPageDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPageData').mockImplementationOnce(() => true);
             prepareServersideAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareServersideAnalytics');
         });
 
@@ -84,7 +84,8 @@ describe('Analytics', () => {
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
             expect(pushPlatformDataSpy).lastCalledWith(expected.platformData);
-            expect(storeUpdatePageDataSpy).lastCalledWith(expected.pageData);
+            expect(pushPageDataSpy).lastCalledWith(expected.pageData);
+            expect(pushPageDataSpy).lastCalledWith(expected.pageData);
         });
 
         it('should set the serverside only platformData properties with appropriate values if serverside and available', () => {
