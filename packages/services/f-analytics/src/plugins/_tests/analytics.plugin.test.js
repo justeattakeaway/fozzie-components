@@ -1,15 +1,15 @@
 import AnalyticsPlugin from '@/plugins/analytics.plugin';
-import AnalyticService from '@/plugins/lib/analytics.service';
+import AnalyticService from '@/services/analytics.service';
 import {
     defaultState,
     options
-} from '../../tests/helpers/setup';
+} from '@/tests/helpers/setup';
 import {
     PUSH_PLATFORM_DATA,
     PUSH_EVENT
-} from '../../store/mutation-types';
+} from '@/store/mutation-types';
 
-const defaults = require('../defaults');
+const defaultOptions = require('../../../defaultOptions');
 
 describe('Analytics Plugin ::', () => {
     afterEach(() => {
@@ -45,12 +45,12 @@ describe('Analytics Plugin ::', () => {
             AnalyticsPlugin(context, injectSpy, null);
 
             // Assert that all the default options where used
-            expect(storeModuleSpy).toHaveBeenCalledWith(defaults.namespace);
-            expect(document.head.innerHTML).toContain(`${defaults.id}`);
-            expect(document.head.innerHTML).not.toContain(`${defaults.auth}`);
-            expect(document.head.innerHTML).not.toContain(`${defaults.preview}`);
-            expect(document.head.innerHTML).not.toContain(`${defaults.cookiesWin}`);
-            expect(injectSpy).toHaveBeenCalledWith(defaults.globalVarName, expect.anything());
+            expect(storeModuleSpy).toHaveBeenCalledWith(defaultOptions.namespace);
+            expect(document.head.innerHTML).toContain(`${defaultOptions.id}`);
+            expect(document.head.innerHTML).not.toContain(`${defaultOptions.auth}`);
+            expect(document.head.innerHTML).not.toContain(`${defaultOptions.preview}`);
+            expect(document.head.innerHTML).not.toContain(`${defaultOptions.cookiesWin}`);
+            expect(injectSpy).toHaveBeenCalledWith(defaultOptions.globalVarName, expect.anything());
         });
 
         it('should substitute missing options with defaults', () => {
@@ -71,7 +71,7 @@ describe('Analytics Plugin ::', () => {
             expect(document.head.innerHTML).toContain(`${partialOptions.auth}`);
             expect(document.head.innerHTML).toContain(`${partialOptions.preview}`);
             expect(document.head.innerHTML).toContain(`${partialOptions.cookiesWin}`);
-            expect(injectSpy).toHaveBeenCalledWith(defaults.globalVarName, expect.anything()); // Default used because no option supplied
+            expect(injectSpy).toHaveBeenCalledWith(defaultOptions.globalVarName, expect.anything()); // Default used because no option supplied
         });
 
         it('should inject the global object', () => {

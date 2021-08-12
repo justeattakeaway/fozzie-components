@@ -1,11 +1,11 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import analyticsMixin from '../analytics.mixin.vue';
 import {
     createStore,
     $route,
     $i18n
-} from '../../tests/helpers/setup';
+} from '@/tests/helpers/setup';
+import analyticsMixin from '../analytics.mixin.vue';
 
 import { MAP_ROUTE_TO_FEATURE_NAME } from '../../constants';
 

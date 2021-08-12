@@ -1,4 +1,4 @@
-import AnalyticService from '@/plugins/lib/analytics.service';
+import AnalyticService from '@/services/analytics.service';
 import {
     createStore,
     newEvent,

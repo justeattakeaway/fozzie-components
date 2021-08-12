@@ -5,7 +5,7 @@ import {
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
     MAP_ROUTE_TO_FEATURE_NAME
-} from '../constants';
+} from '@/constants';
 
 export default {
     computed:

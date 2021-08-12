@@ -1,9 +1,9 @@
-import AnalyticsModule from '../analytics.module';
+import AnalyticsModule from '@/store/analytics.module';
 import {
     defaultState,
     modifieldState,
     newEvent
-} from '../../tests/helpers/setup';
+} from '@/tests/helpers/setup';
 import {
     PUSH_PLATFORM_DATA,
     PUSH_EVENT,

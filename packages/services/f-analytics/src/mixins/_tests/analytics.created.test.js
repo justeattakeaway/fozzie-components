@@ -1,12 +1,12 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import analyticsMixin from '../analytics.mixin.vue';
 import {
     defaultState,
     createStore,
     $cookies
-} from '../../tests/helpers/setup';
+} from '@/tests/helpers/setup';
+import analyticsMixin from '../analytics.mixin.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);

@@ -1,4 +1,4 @@
-const defaults = {
+const defaultOptions = {
     namespace: 'f-analytics',
     globalVarName: 'gtm',
     featureName: 'feature-name-unset',
@@ -9,4 +9,4 @@ const defaults = {
     cookiesWin: null
 };
 
-module.exports = defaults;
+module.exports = defaultOptions;

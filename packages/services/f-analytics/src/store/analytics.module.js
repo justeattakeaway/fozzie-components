@@ -1,5 +1,6 @@
 import {
     PUSH_PLATFORM_DATA,
+    PUSH_USER_DATA,
     PUSH_EVENT,
     CLEAR_EVENTS
 } from './mutation-types';
@@ -36,7 +37,7 @@ export default {
     }),
 
     actions: {
-        pushPlatformData: ({ commit, state }, platformData) => {
+        [PUSH_PLATFORM_DATA]: ({ commit, state }, platformData) => {
             if (platformData) {
                 commit(PUSH_PLATFORM_DATA, platformData);
             }
@@ -46,13 +47,13 @@ export default {
             }
         },
 
-        pushUserData: userData => {
+        [PUSH_USER_DATA]: userData => {
             if (userData && isDataLayerPresent()) {
                 window.dataLayer.push({ userData: { ...userData } });
             }
         },
 
-        pushEvent: ({ commit, state }, event) => {
+        [PUSH_EVENT]: ({ commit, state }, event) => {
             if (event) {
                 commit(PUSH_EVENT, event);
             }
