@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE } from '../constants';
 import basketApi from '../services/basketApi';
 import checkoutApi from '../services/checkoutApi';
 import addressGeocodingApi from '../services/addressGeocodingApi';
@@ -233,8 +233,16 @@ export default {
                 basket: {
                     id: data.BasketId,
                     total: data.BasketSummary.BasketTotals.Total
-                }
+                },
+                ageRestricted: data.BasketSummary.Prompts.Restrictions.some(restriction => restriction.Type === 'Alcohol')
             };
+
+            // This logic is temporary while a new endpoint is built for fulfilment status.
+            // We can't call GET checkout as a guest so we're now having to use the basket response for age restrictions until then
+            if (basketDetails.ageRestricted && (tenant === 'au' || tenant === 'nz')) {
+                commit(UPDATE_IS_FULFILLABLE, false);
+                commit(UPDATE_ERRORS, [{ code: DOB_REQUIRED_ISSUE }]);
+            }
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
