@@ -2390,20 +2390,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-wdio-utils@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.1.0.tgz#e8a62dd2d03c2cf14ce1fa7d50540c2171b8fc38"
-  integrity sha512-m2WfTJWR5Yako3hKEZ7SL3zDvZQA7VQ9hbUBnk02lxMYSKSqeHmLPICaLGtPXCIDBEuESFk2kscHSQc3GBxxmg==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
-"@justeat/f-wdio-utils@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.2.0.tgz#3dfff715074fdafc3cd49def921d4891c684d140"
-  integrity sha512-ZrbtslLSctryXPY+obkG8IqYA5X+sVcBI6/BMquxl+C5sGZ+kPU81qyL1n03Y7BmQvk4yj4OmzwtGYeKAiYVbw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/fozzie@5.0.0-beta.10":
   version "5.0.0-beta.10"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.10.tgz#b1d57e5b096553ebcb5bf1625806b7a250eca6f1"
