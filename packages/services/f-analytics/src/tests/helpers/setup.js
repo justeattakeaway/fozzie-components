@@ -23,6 +23,16 @@ const defaultState = {
         globalUserId: undefined,
         signinType: undefined,
         signupDate: undefined
+    },
+    pageData: {
+        name: '',
+        group: '',
+        httpStatusCode: 0,
+        isCached: false,
+        conversationId: '',
+        requestId: '',
+        orientation: '',
+        display: ''
     }
 };
 
@@ -41,6 +51,17 @@ const updatedPlatformData = {
     instancePosition: '999'
 };
 
+const updatedPageData = {
+    name: 'test-name',
+    group: 'test-group',
+    httpStatusCode: 200,
+    isCached: false,
+    conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
+    requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
+    orientation: 'Landscape',
+    display: 'wide'
+};
+
 const updatedUserData = {
     'a-UserId': 'xxxx-xxxx',
     authType: 'Login',
@@ -52,7 +73,8 @@ const updatedUserData = {
 
 const defaultActions = {
     updatePlatformData: jest.fn(),
-    updateUserData: jest.fn()
+    updateUserData: jest.fn(),
+    updatePageData: jest.fn()
 };
 
 const createStore = ({
@@ -86,6 +108,7 @@ export {
     defaultState,
     defaultActions,
     updatedPlatformData,
+    updatedPageData,
     updatedUserData,
     createStore,
     $cookies,
