@@ -71,8 +71,11 @@
 <script>
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+<<<<<<< HEAD
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
+=======
+>>>>>>> c91c7ae18c3647c5a2b866d4c959099ac26bfd94
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FormField from '@justeat/f-form-field';
@@ -83,7 +86,10 @@ import { VUEX_CHECKOUT_MODULE } from '../constants';
 export default {
     components: {
         Card,
+<<<<<<< HEAD
         ErrorMessage,
+=======
+>>>>>>> c91c7ae18c3647c5a2b866d4c959099ac26bfd94
         FButton,
         FormField
     },
@@ -94,8 +100,12 @@ export default {
                 day: '',
                 month: '',
                 year: ''
+<<<<<<< HEAD
             },
             hasSelectedDateOfBirth: false
+=======
+            }
+>>>>>>> c91c7ae18c3647c5a2b866d4c959099ac26bfd94
         };
     },
 
@@ -139,6 +149,7 @@ export default {
                             value: year
                         };
                     });
+<<<<<<< HEAD
         },
 
         userDateOfBirth () {
@@ -154,6 +165,8 @@ export default {
 
         shouldShowErrorMessage () {
             return this.hasSelectedDateOfBirth && !this.isValidAge;
+=======
+>>>>>>> c91c7ae18c3647c5a2b866d4c959099ac26bfd94
         }
     },
 

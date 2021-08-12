@@ -38,6 +38,7 @@ const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
 const getBasketDineInUrl = '/get-basket-dinein.json';
+const getAgeRestrictedBasketUrl = '/get-basket-delivery-age-restriction.json';
 const getBasketTimeoutUrl = '/get-basket-timeout.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const updateCheckoutRestaurantNotTakingOrdersUrl = '/update-checkout-restaurant-not-taking-orders.json';
@@ -69,6 +70,7 @@ CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDineInUrl);
+CheckoutMock.setupCheckoutMethod(getAgeRestrictedBasketUrl);
 CheckoutMock.setupCheckoutMethod(getBasketTimeoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutRestaurantNotTakingOrdersUrl);
@@ -99,6 +101,8 @@ const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
 const noTimeAvailableError = 'No Time Available';
 const noTimeAvailable = 'no-time-available';
+const ageRestriction = 'Age restricted';
+const ageRestrictionIssue = 'age-restriction';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
 const additionalItemsRequiredIssue = 'additional-items-required';
 const timeNotAvailable = 'Selected time no longer available';
@@ -115,6 +119,11 @@ const patchCheckoutErrorOptions = {
     [updateCheckoutAccessForbidden]: accessForbiddenErrorCode,
     [timeNotAvailable]: timeNotAvailableIssue,
     [serverTimeout]: serverTimeoutIssue
+};
+
+const restrictionOptions = {
+    None: null,
+    [ageRestriction]: ageRestrictionIssue
 };
 
 const getCheckoutErrorOptions = {
@@ -189,6 +198,10 @@ export const CheckoutComponent = () => ({
 
         fulfilmentTimeSelection: {
             default: select('Fulfilment Time Options', fulfilmentTimeOptions)
+        },
+
+        restriction: {
+            default: select('Restrictions', restrictionOptions)
         }
     },
 
@@ -203,8 +216,12 @@ export const CheckoutComponent = () => ({
         },
 
         getBasketUrl () {
-            return this.getCheckoutError && this.getCheckoutError !== noTimeAvailable ?
-                `/checkout-${this.getCheckoutError}-get-error.json` : `/get-basket-${this.serviceType}.json`;
+            if (this.getCheckoutError) {
+                if (this.getCheckoutError !== noTimeAvailable) {
+                    return `/checkout-${this.getCheckoutError}-get-error.json`;
+                }
+            }
+            return this.restriction ? `/get-basket-delivery-${this.restriction}.json` : `/get-basket-${this.serviceType}.json`;
         },
 
         authToken () {

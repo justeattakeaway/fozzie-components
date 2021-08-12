@@ -44,6 +44,11 @@ const checkoutIssues = {
         shouldRedirectToMenu: false
     },
 
+    DATE_OF_BIRTH_REQUIRED: {
+        shouldShowInDialog: false,
+        shouldRedirectToMenu: false
+    },
+
     // Different casing since this issue is provided by a different API with different naming conventions
     DuplicateOrder: {
         shouldShowInDialog: true,

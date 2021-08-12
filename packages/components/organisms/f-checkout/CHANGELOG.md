@@ -12,6 +12,14 @@ v0.172.0
 - Error Message to Age Verification page.
 
 
+v0.170.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Check on basket API call to see if age verification prompt needs to be shown
+
+
 v0.169.0
 ------------------------------
 *August 10, 2021*
