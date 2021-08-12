@@ -11,8 +11,9 @@
                 name="address-line-1"
                 maxlength="100"
                 :label-text="$t('labels.line1')"
-                label-style="inline"
+                :placeholder="$t('labels.line1')"
                 is-grouped
+                :should-show-label-text="false"
                 :has-error="isAddressLine1Empty"
                 aria-describedby="line1-error"
                 :aria-invalid="isAddressLine1Empty"
@@ -33,10 +34,11 @@
                 :value="address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
+                :should-show-label-text="false"
                 maxlength="100"
                 :label-text="$t('labels.line2')"
+                :placeholder="$t('labels.line2')"
                 is-grouped
-                label-style="inline"
                 @input="updateAddressDetails({ ['line2']: $event })" />
         </fieldset>
 

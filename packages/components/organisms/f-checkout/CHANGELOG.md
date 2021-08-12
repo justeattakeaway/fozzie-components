@@ -4,8 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v0.169.0
 ------------------------------
+*August 10, 2021*
+
+### Added
+- Age Verification Page.
+- Tests to cover changes.
+
+### Removed
+- Some eventData values which were added for testing specific case
+
+### Changed
+- `f-form-field` version.
+
+
 *August 9, 2021*
 
 ### Changed

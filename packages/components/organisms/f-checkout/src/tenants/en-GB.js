@@ -195,7 +195,19 @@ const messages = {
     privacyPolicyLinkUrl: 'https://www.just-eat.co.uk/privacypolicy',
 
     cookiePolicyLinkText: 'Cookie Policy',
-    cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy'
+    cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy',
+
+    ageVerification: {
+        heading: 'Please confirm your date of birth',
+        description: 'You’re ordering something alcoholic so we need to double-check you’re 18 or over.',
+        ageSelection: {
+            day: 'Day',
+            month: 'Month',
+            year: 'Year'
+        },
+        askForIdDescription: 'You might be asked for photographic ID when your order is delivered. The driver won’t hand over your order if the name on your order doesn’t match the name on your ID or to anyone who appears to be intoxicated.',
+        buttonText: 'Continue'
+    }
 };
 
 const dateTimeFormats = {

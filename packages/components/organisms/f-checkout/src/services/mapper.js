@@ -22,7 +22,7 @@ const mapUpdateCheckoutRequest = ({
             firstName: customer.firstName || null,
             lastName: customer.lastName || null,
             phoneNumber: customer.mobileNumber || null,
-            dateOfBirth: null
+            dateOfBirth: customer.dateOfBirth || null
         }
     },
     {
