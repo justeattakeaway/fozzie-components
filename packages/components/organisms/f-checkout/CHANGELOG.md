@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.171.0
+------------------------------
+*August 12, 2021*
+
+### Changed
+- Low value order experiment header to phase 2
+
+
 Latest (to be added to next release)
 ------------------------------
 *August 9, 2021*

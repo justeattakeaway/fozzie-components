@@ -40,4 +40,4 @@ export const CHECKOUT_ERROR_FORM_TYPE = {
     noTimeAvailable: 'noTimeAvailable'
 };
 
-export const HEADER_LOW_VALUE_ORDER_EXPERIMENT = 'x-je-exp-low_value_order_threshold_web';
+export const HEADER_LOW_VALUE_ORDER_EXPERIMENT = 'x-je-exp-low_value_order_phase_2_web';
