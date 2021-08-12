@@ -1193,9 +1193,7 @@ describe('Checkout', () => {
                 beforeEach(() => {
                     // Arrange && Act
                     wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState
-                        }),
+                        store: createStore(),
                         i18n,
                         localVue,
                         propsData
