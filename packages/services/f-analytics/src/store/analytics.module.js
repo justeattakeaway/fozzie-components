@@ -25,6 +25,16 @@ export default {
             globalUserId: undefined,
             signinType: undefined,
             signupDate: undefined
+        },
+        pageData: {
+            name: '',
+            group: '',
+            httpStatusCode: 0,
+            isCached: false,
+            conversationId: '',
+            requestId: '',
+            orientation: '',
+            display: ''
         }
     }),
 
@@ -34,6 +44,9 @@ export default {
         },
         updateUserData: ({ commit }, userData) => {
             commit('pushUserData', userData);
+        },
+        updatePageData: ({ commit }, pageData) => {
+            commit('pushPageData', pageData);
         }
     },
 
@@ -43,6 +56,9 @@ export default {
         },
         pushUserData: (state, userData) => {
             state.userData = userData;
+        },
+        pushPageData: (state, pageData) => {
+            state.pageData = pageData;
         }
     }
 };
