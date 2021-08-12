@@ -18,6 +18,7 @@ Object {
     "total": 0,
   },
   "customer": Object {
+    "dateOfBirth": null,
     "email": "",
     "firstName": "Joe",
     "lastName": "Bloggs",
