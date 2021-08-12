@@ -3,17 +3,28 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.7.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- `PreparePageData` method
+
+### Changed
+- Replaced `MAP_ROUTE_TO_FEATURE_NAME` const with `mapRouteToGroup` & `mapRouteToFeature`
+
+
 
 v0.6.0
 ------------------------------
 *August 9, 2021*
 
-### Added
+ ### Added
 - `PrepareUserData` method
 
 ### Changed
 - `PrepareAnalytics` method renamed to `PreparePlatformData`
-- `null` values changed to `undefined` because of analytics team requirement 
+- `null` values changed to `undefined` because of analytics team requirement
 
 ### Removed
 - Watch and mounted hook for prepare and push functions as now they will be called from a consuming app

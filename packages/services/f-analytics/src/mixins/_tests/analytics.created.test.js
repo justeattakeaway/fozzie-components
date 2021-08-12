@@ -23,6 +23,7 @@ describe('Analytics', () => {
         let component;
         let prepareServersideAnalyticsSpy;
         let storeUpdatePlatformDataSpy;
+        let storeUpdatePageDataSpy;
 
         beforeEach(() => {
             // Arrange
@@ -33,6 +34,7 @@ describe('Analytics', () => {
             };
             component.mixins[0].mounted = jest.fn(() => true);
             storeUpdatePlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePlatformData').mockImplementationOnce(() => true);
+            storeUpdatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePageData').mockImplementationOnce(() => true);
             prepareServersideAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareServersideAnalytics');
         });
 
@@ -63,6 +65,7 @@ describe('Analytics', () => {
             expected.platformData.version = '0.0.0.0';
             expected.platformData.instancePosition = 'N/A';
             expected.platformData.jeUserPercentage = null;
+            expected.pageData.httpStatusCode = 0;
 
             // Mocks
             component.mixins[0].computed.isServerSide = jest.fn(() => true);
@@ -81,6 +84,7 @@ describe('Analytics', () => {
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
             expect(storeUpdatePlatformDataSpy).lastCalledWith(expected.platformData);
+            expect(storeUpdatePageDataSpy).lastCalledWith(expected.pageData);
         });
 
         it('should set the serverside only platformData properties with appropriate values if serverside and available', () => {
