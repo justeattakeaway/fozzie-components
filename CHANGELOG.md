@@ -3,12 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.52.2
+------------------------------
+*August 12, 2021*
+
+### Fixed
+- Issue with deps not getting build when building Storybook.
+
+
 v3.52.1
 ------------------------------
 *August 11, 2021*
 
-### Fixed
-- Include dependencies when building Storybook.
+### Updated
+- Various packages to latest version of `f-wdio-utils - v0.3.0`
 
 
 v3.52.0
