@@ -94,9 +94,7 @@ describe('AgeVerification', () => {
                     localVue,
                     store: createStore(),
                     computed: {
-                        userDateOfBirth () {
-                            return dateOfBirth;
-                        }
+                        userDateOfBirth: () => dateOfBirth
                     }
                 });
 
@@ -118,9 +116,7 @@ describe('AgeVerification', () => {
                     localVue,
                     store: createStore(),
                     computed: {
-                        isValidAge () {
-                            return isValidAge;
-                        }
+                        isValidAge: () => isValidAge
                     }
                 });
 
@@ -271,12 +267,8 @@ describe('AgeVerification', () => {
                         localVue,
                         store: createStore(),
                         computed: {
-                            userDateOfBirth () {
-                                return date;
-                            },
-                            isValidAge () {
-                                return true;
-                            }
+                            userDateOfBirth: () => date,
+                            isValidAge: () => true
                         }
                     });
 
@@ -307,9 +299,7 @@ describe('AgeVerification', () => {
                         localVue,
                         store: createStore(),
                         computed: {
-                            isValidAge () {
-                                return false;
-                            }
+                            isValidAge: () => false
                         }
                     });
                 });
