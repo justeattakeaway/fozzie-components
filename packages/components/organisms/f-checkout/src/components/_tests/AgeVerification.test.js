@@ -1,5 +1,5 @@
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import AgeVerification from '../AgeVerification.vue';
 import {
@@ -302,7 +302,7 @@ describe('AgeVerification', () => {
             describe('when `isValidAge` returns `false`', () => {
                 beforeEach(() => {
                     // Arrange
-                    wrapper = mount(AgeVerification, {
+                    wrapper = shallowMount(AgeVerification, {
                         i18n,
                         localVue,
                         store: createStore(),

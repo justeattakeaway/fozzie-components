@@ -195,15 +195,6 @@ export default {
     margin: spacing(x2) 0;
 }
 
-.test {
-    padding: 5px;
-        background: pink;
-    &:focus {
-        background: purple;
-        padding: 10px;
-    }
-}
-
 .c-checkout-ageVerification-button {
     margin: spacing(x2) 0 spacing();
 }
