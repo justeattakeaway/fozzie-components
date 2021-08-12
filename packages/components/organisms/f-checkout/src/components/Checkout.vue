@@ -14,6 +14,11 @@
             data-test-id="checkout-loading-spinner">
             <div :class="$style['c-spinner']" />
         </div>
+
+        <age-verification
+            v-else-if="shouldShowAgeVerification"
+            @verify-age="handleUpdateCheckout" />
+
         <div
             v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
@@ -105,11 +110,9 @@
                         cols="30"
                         rows="7"
                         maxlength="200"
-                        name="Note"
-                        has-input-description
-                        @input="updateUserNote($event)">
-                        {{ $t(`userNote.${serviceType}.text`) }}
-                    </form-field>
+                        name="note"
+                        :label-description="$t(`userNote.${serviceType}.text`)"
+                        @input="updateUserNote($event)" />
 
                     <f-button
                         :class="[
@@ -163,6 +166,7 @@ import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
 import AddressBlock from './Address.vue';
+import AgeVerification from './AgeVerification.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
@@ -207,6 +211,7 @@ export default {
 
     components: {
         AddressBlock,
+        AgeVerification,
         Alert,
         FButton,
         Card,
@@ -373,6 +378,10 @@ export default {
             'userNote'
         ]),
 
+        shouldShowAgeVerification () {
+            return false; // TODO: Will be updated as part of Charlies PR
+        },
+
         wasMobileNumberFocused () {
             return this.$v.customer.mobileNumber.$dirty;
         },
@@ -425,10 +434,7 @@ export default {
         eventData () {
             return {
                 isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType,
-                chosenTime: this.time.from,
-                isFulfillable: this.isFulfillable,
-                issueMessage: this.message?.code
+                serviceType: this.serviceType
             };
         },
 

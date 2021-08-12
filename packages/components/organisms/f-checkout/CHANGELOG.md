@@ -12,8 +12,21 @@ v0.170.0
 - Check on basket API call to see if age verification prompt needs to be shown
 
 
-Latest (to be added to next release)
+v0.169.0
 ------------------------------
+*August 10, 2021*
+
+### Added
+- Age Verification Page.
+- Tests to cover changes.
+
+### Removed
+- Some eventData values which were added for testing specific case
+
+### Changed
+- `f-form-field` version.
+
+
 *August 9, 2021*
 
 ### Changed

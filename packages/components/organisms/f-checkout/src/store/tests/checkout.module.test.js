@@ -36,7 +36,8 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_MESSAGE,
     UPDATE_ADDRESS,
-    UPDATE_PHONE_NUMBER
+    UPDATE_PHONE_NUMBER,
+    UPDATE_DATE_OF_BIRTH
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -54,6 +55,7 @@ const {
     updateCheckout,
     updateAddressDetails,
     updateCustomerDetails,
+    updateDateOfBirth,
     updateFulfilmentTime,
     updateMessage,
     updateUserNote,
@@ -85,6 +87,7 @@ const locationData = {
 };
 
 const basketId = 'newbasketid0001-v1';
+const dateOfBirth = new Date(1987, 7, 4);
 
 const time = {
     from: 'fromTime',
@@ -122,7 +125,8 @@ const defaultState = {
         firstName: '',
         lastName: '',
         email: '',
-        mobileNumber: ''
+        mobileNumber: '',
+        dateOfBirth: null
     },
     orderId: '',
     time: {
@@ -347,6 +351,16 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(state.customer.mobileNumber).toEqual(phoneNumber);
+            });
+        });
+
+        describe(`${UPDATE_DATE_OF_BIRTH} ::`, () => {
+            it('should update state with received values', () => {
+                // Act
+                mutations[UPDATE_DATE_OF_BIRTH](state, dateOfBirth);
+
+                // Assert
+                expect(state.customer.dateOfBirth).toEqual(dateOfBirth);
             });
         });
 
@@ -1131,6 +1145,7 @@ describe('CheckoutModule', () => {
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateUserNote, UPDATE_USER_NOTE, userNote],
+            [updateDateOfBirth, UPDATE_DATE_OF_BIRTH, dateOfBirth],
             [updateMessage, UPDATE_MESSAGE, message]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
