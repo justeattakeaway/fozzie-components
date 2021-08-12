@@ -1,13 +1,13 @@
 import AnalyticService from '@/plugins/lib/analytics.service';
 import {
+    PUSH_PLATFORM_DATA,
+    PUSH_EVENT
+} from '@/store/mutation-types';
+import {
     createStore,
     newEvent,
     options
-} from '../../tests/helpers/setup';
-import {
-    PUSH_PLATFORM_DATA,
-    PUSH_EVENT
-} from '../../store/mutation-types';
+} from '@/tests/helpers/setup';
 
 describe('Analytic Service ::', () => {
     let store;

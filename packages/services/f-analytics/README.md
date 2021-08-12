@@ -21,12 +21,11 @@ This component abstracts away the gathering of the various data values needed fo
 
 ## Benefits (Now)
 - Single point to record GA data: Currently we have GA/GTM logic scattered throught various features, this will allow that logic to be removed and centralise it a single component.
-- Self sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and record all the data required for the GA `platformData` and `userData` model.
+- Self-sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and record all the data required for the GA `platformData`, `userData` and `pageData` models.
 - Provide the facility to push 'ad-hoc' GA events via a global service (even if serverside).
 
 ## Benefits (Soon)
 - _extend the data properties for the GA `platformData` model_
-- _evaluate, gather and produce data for the GA `pageData` model_
 - _instead of owning when to push each GA model the consumer will have control over this_
 - _allow extra bespoke/custom properties to be appended to each GA model by the consumer before the model is pushed_
 <hr></br>
@@ -50,6 +49,7 @@ This component abstracts away the gathering of the various data values needed fo
     As this mixin uses authentication token for some of its data it is needed for it to be added on the page level. There are three public methods available to use:
     - `preparePlatformData` - evaluates and gather data for the `platformData` GA model.
     - `prepareUserData` - evaluates and gather data for the `userData` GA model. Can take optional `authToken` prop to push data related to authToken. Without the prop userData will contain only userId.
+    - `preparePageData` - evaluates and gather data for the `pageData` GA model. Can take optional object containing `conversationId, requestId, authToken` prop to push data related to these attributes.
     - `pushAnalytics` - pushes `platformData` and `userData` to the dataLayer.
 
     <strong>Below is an example of how to include the 'Mixin':</strong>
@@ -78,6 +78,11 @@ This component abstracts away the gathering of the various data values needed fo
         isAuthFinished (newVal) {
             if (newVal === true) {
                 this.prepareUserData(this.authToken);
+                this.preparePageData({
+                    conversationId: 'some conversationId',
+                    requestId: 'some requestId',
+                    authToken: this.authToken
+                });
                 this.pushAnalytics();
             }
         },
@@ -86,6 +91,7 @@ This component abstracts away the gathering of the various data values needed fo
 
         mounted () {
             this.preparePlatformData();
+            this.preparePageData({conversationId: 'some conversationId', requestId: 'some requestId' });
         }
     }
     ```

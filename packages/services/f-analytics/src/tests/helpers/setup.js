@@ -25,6 +25,16 @@ const defaultState = {
         signinType: undefined,
         signupDate: undefined
     },
+    pageData: {
+        name: '',
+        group: '',
+        httpStatusCode: 0,
+        isCached: false,
+        conversationId: '',
+        requestId: '',
+        orientation: '',
+        display: ''
+    },
     events: []
 };
 
@@ -51,7 +61,16 @@ const modifieldState = {
         signinType: 'Email',
         signupDate: '2021-05-12T10:57:05.9130000Z'
     },
-    events: []
+    pageData: {
+        name: 'test-name',
+        group: 'test-group',
+        httpStatusCode: 200,
+        isCached: false,
+        conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
+        requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
+        orientation: 'Landscape',
+        display: 'wide'
+    }
 };
 
 const newEvent = {
@@ -70,6 +89,7 @@ const newEvent = {
 const defaultActions = {
     pushPlatformData: jest.fn(),
     pushUserData: jest.fn(),
+    pushPageData: jest.fn(),
     pushEvent: jest.fn()
 };
 

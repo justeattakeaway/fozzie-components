@@ -1,12 +1,12 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import analyticsMixin from '../analytics.mixin.vue';
 import {
     defaultState,
     createStore,
     $cookies
-} from '../../tests/helpers/setup';
+} from '@/tests/helpers/setup';
+import analyticsMixin from '../analytics.mixin.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -23,6 +23,7 @@ describe('Analytics', () => {
         let component;
         let prepareServersideAnalyticsSpy;
         let pushPlatformDataSpy;
+        let storeUpdatePageDataSpy;
 
         beforeEach(() => {
             // Arrange
@@ -33,6 +34,7 @@ describe('Analytics', () => {
             };
             component.mixins[0].mounted = jest.fn(() => true);
             pushPlatformDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPlatformData').mockImplementationOnce(() => true);
+            storeUpdatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPageData').mockImplementationOnce(() => true);
             prepareServersideAnalyticsSpy = jest.spyOn(component.mixins[0].methods, 'prepareServersideAnalytics');
         });
 
@@ -63,6 +65,7 @@ describe('Analytics', () => {
             expected.platformData.version = '0.0.0.0';
             expected.platformData.instancePosition = 'N/A';
             expected.platformData.jeUserPercentage = null;
+            expected.pageData.httpStatusCode = 0;
 
             // Mocks
             component.mixins[0].computed.isServerSide = jest.fn(() => true);
@@ -81,6 +84,7 @@ describe('Analytics', () => {
             // Assert
             expect(prepareServersideAnalyticsSpy).toHaveBeenCalled();
             expect(pushPlatformDataSpy).lastCalledWith(expected.platformData);
+            expect(storeUpdatePageDataSpy).lastCalledWith(expected.pageData);
         });
 
         it('should set the serverside only platformData properties with appropriate values if serverside and available', () => {

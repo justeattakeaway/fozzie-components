@@ -1,6 +1,7 @@
 import {
     PUSH_PLATFORM_DATA,
     PUSH_USER_DATA,
+    PUSH_PAGE_DATA,
     PUSH_EVENT,
     CLEAR_EVENTS
 } from './mutation-types';
@@ -33,11 +34,21 @@ export default {
             signinType: undefined,
             signupDate: undefined
         },
+        pageData: {
+            name: '',
+            group: '',
+            httpStatusCode: 0,
+            isCached: false,
+            conversationId: '',
+            requestId: '',
+            orientation: '',
+            display: ''
+        },
         events: []
     }),
 
     actions: {
-        pushPlatformData: ({ commit, state }, platformData) => {
+        [PUSH_PLATFORM_DATA]: ({ commit, state }, platformData) => {
             if (platformData) {
                 commit(PUSH_PLATFORM_DATA, platformData);
             }
@@ -47,17 +58,23 @@ export default {
             }
         },
 
-        pushUserData: ({ commit, state }, userData) => {
-            if (userData) {
-                commit(PUSH_USER_DATA, userData);
-            }
-
-            if (isDataLayerPresent()) {
-                window.dataLayer.push({ userData: { ...state.userData } });
+        [PUSH_USER_DATA]: userData => {
+            if (userData && isDataLayerPresent()) {
+                window.dataLayer.push({ userData: { ...userData } });
             }
         },
 
-        pushEvent: ({ commit, state }, event) => {
+        [PUSH_PAGE_DATA]: ({ commit, state }, pageData) => {
+            if (pageData) {
+                commit(PUSH_PAGE_DATA, pageData);
+            }
+
+            if (isDataLayerPresent()) {
+                window.dataLayer.push({ pageData: { ...state.pageData } });
+            }
+        },
+
+        [PUSH_EVENT]: ({ commit, state }, event) => {
             if (event) {
                 commit(PUSH_EVENT, event);
             }
@@ -74,8 +91,8 @@ export default {
             state.platformData = { ...state.platformData, ...platformData };
         },
 
-        [PUSH_USER_DATA]: (state, userData) => {
-            state.userData = { ...state.userData, ...userData };
+        [PUSH_PAGE_DATA]: (state, pageData) => {
+            state.pageData = { ...state.pageData, ...pageData };
         },
 
         [PUSH_EVENT]: (state, event) => {

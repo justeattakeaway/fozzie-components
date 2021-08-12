@@ -1,18 +1,23 @@
-import AnalyticsModule from '../analytics.module';
 import {
     defaultState,
     modifieldState,
     newEvent
-} from '../../tests/helpers/setup';
+} from '@/tests/helpers/setup';
+import AnalyticsModule from '@/store/analytics.module';
 import {
     PUSH_PLATFORM_DATA,
-    PUSH_USER_DATA,
+    PUSH_PAGE_DATA,
     PUSH_EVENT,
     CLEAR_EVENTS
-} from '../mutation-types';
+} from '@/store/mutation-types';
 
 const { actions, mutations } = AnalyticsModule;
-const { pushPlatformData, pushUserData, pushEvent } = actions;
+const {
+    pushPlatformData,
+    pushUserData,
+    pushPageData,
+    pushEvent
+} = actions;
 
 describe('Analytics Module ::', () => {
     let state;
@@ -27,8 +32,8 @@ describe('Analytics Module ::', () => {
             if (mutation === PUSH_PLATFORM_DATA) {
                 state.platformData = { ...state.platformData, ...mutationPayload };
             }
-            if (mutation === PUSH_USER_DATA) {
-                state.userData = mutationPayload;
+            if (mutation === PUSH_PAGE_DATA) {
+                state.pageData = mutationPayload;
             }
             if (mutation === PUSH_EVENT) {
                 state.events = [...state.events, mutationPayload];
@@ -115,14 +120,6 @@ describe('Analytics Module ::', () => {
         });
 
         describe('pushUserData ::', () => {
-            it('should call the `pushUserData` mutation', () => {
-                // Act
-                pushUserData({ commit }, modifieldState.userData);
-
-                // Assert
-                expect(commit).toHaveBeenLastCalledWith('pushUserData', modifieldState.userData);
-            });
-
             it('should push the `pushUserData` if clientside & dataLayer present', () => {
                 // Arrange
                 const windowsPushSpy = jest.fn();
@@ -135,24 +132,10 @@ describe('Analytics Module ::', () => {
                 }));
 
                 // Act
-                pushUserData({ commit, state }, modifieldState.userData);
+                pushUserData(modifieldState.userData);
 
                 // Assert
                 expect(windowsPushSpy).toHaveBeenLastCalledWith({ userData: { ...modifieldState.userData } });
-                expect(state.userData).toEqual(modifieldState.userData);
-            });
-
-            it('should not push the `pushUserData` if serverside', () => {
-                // Arrange
-                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
-
-                // Act
-                pushUserData({ commit, state }, modifieldState.userData);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(state.userData).toEqual(modifieldState.userData);
             });
 
             it('should not push the `pushUserData` if clientside & dataLayer not present', () => {
@@ -176,7 +159,71 @@ describe('Analytics Module ::', () => {
 
                 // Assert
                 expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(state.userData).toEqual(modifieldState.userData);
+            });
+        });
+
+        describe('pushPageData ::', () => {
+            it('should call the `pushPageData` mutation', () => {
+                // Act
+                pushPageData({ commit, state }, modifieldState.pageData);
+
+                // Assert
+                expect(commit).toHaveBeenLastCalledWith('pushPageData', modifieldState.pageData);
+            });
+
+            it('should push the `pushPageData` if clientside & dataLayer present', () => {
+                // Arrange
+                const windowsPushSpy = jest.fn();
+                const originalWindow = { ...window };
+                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
+
+                // Act
+                pushPageData({ commit, state }, modifieldState.pageData);
+
+                // Assert
+                expect(windowsPushSpy).toHaveBeenLastCalledWith({ pageData: { ...modifieldState.pageData } });
+            });
+
+            it('should not push the `pushPageData` if serverside', () => {
+                // Arrange
+                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
+                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
+
+                // Act
+                pushPageData({ commit, state }, modifieldState.pageData);
+
+                // Assert
+                expect(windowsPushSpy).not.toHaveBeenCalled();
+                expect(state.pageData).toEqual(modifieldState.pageData);
+            });
+
+            it('should not push the `pushPageData` if clientside & dataLayer not present', () => {
+                // Arrange
+                const windowsPushSpy = jest.fn();
+                const originalWindow = { ...window };
+                const windowSpy = jest.spyOn(global, 'window', 'get');
+                windowSpy.mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
+                windowSpy.mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: undefined
+                }));
+
+                // Act
+                pushPageData({ commit, state }, modifieldState.pageData);
+
+                // Assert
+                expect(windowsPushSpy).not.toHaveBeenCalled();
+                expect(state.pageData).toEqual(modifieldState.pageData);
             });
         });
 
@@ -245,43 +292,6 @@ describe('Analytics Module ::', () => {
                 expect(commit).toHaveBeenLastCalledWith(CLEAR_EVENTS);
                 expect(state.events).toEqual([]);
             });
-
-            it('should not push the `events` nor clear `events` if serverside', () => {
-                // Arrange
-                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
-
-                // Act
-                pushEvent({ commit, state }, newEvent);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(state.events).toEqual([newEvent]);
-            });
-
-            it('should not push the the `events` nor clear `events` if clientside & dataLayer not present', () => {
-                // Arrange
-                const windowsPushSpy = jest.fn();
-                const originalWindow = { ...window };
-                const windowSpy = jest.spyOn(global, 'window', 'get');
-                windowSpy.mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: {
-                        push: windowsPushSpy
-                    }
-                }));
-                windowSpy.mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: undefined
-                }));
-
-                // Act
-                pushEvent({ commit, state }, newEvent);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(state.events).toEqual([newEvent]);
-            });
         });
     });
 
@@ -325,13 +335,38 @@ describe('Analytics Module ::', () => {
             });
         });
 
-        describe(`${PUSH_USER_DATA} ::`, () => {
-            it('should update state with `userData`', () => {
+        describe(`${PUSH_PAGE_DATA} ::`, () => {
+            it('should update state with `pageData`', () => {
                 // Act
-                mutations.pushUserData(state, modifieldState.userData);
+                mutations[PUSH_PAGE_DATA](state, modifieldState.pageData);
 
                 // Assert
-                expect(state.userData).toEqual(modifieldState.userData);
+                expect(state.pageData).toEqual(modifieldState.pageData);
+            });
+
+            it('should not overwrite the serverside pageData when saving the clientside pageData', () => {
+                // Arrange
+                const currentState = {
+                    pageData: {
+                        httpStatusCode: 200
+                    }
+                };
+                const clientsidePageData = {
+                    name: 'test-name',
+                    group: 'test-group',
+                    isCached: false,
+                    conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
+                    requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
+                    orientation: 'Landscape',
+                    display: 'wide'
+                };
+                const expected = { ...currentState.pageData, ...clientsidePageData };
+
+                // Act
+                mutations.pushPageData(currentState, clientsidePageData);
+
+                // Assert
+                expect(currentState.pageData).toEqual(expected);
             });
         });
 

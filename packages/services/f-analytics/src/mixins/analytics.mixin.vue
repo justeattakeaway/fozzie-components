@@ -6,22 +6,29 @@ import {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME,
     IDENTITY_PROVIDERS,
     GRANT_TYPES
 } from '../constants';
+import {
+    getDisplaySize,
+    getOrientation,
+    mapRouteToGroup,
+    mapRouteToFeature
+} from '../utils/helpers';
 
 export default {
     computed:
     {
         ...mapState('f-analytics', [
             'platformData',
-            'userData'
+            'userData',
+            'pageData'
         ]),
 
         isServerSide () {
             return typeof (window) === 'undefined';
         }
+
     },
 
     created () {
@@ -31,6 +38,7 @@ export default {
     methods: {
         ...mapActions('f-analytics', [
             'pushPlatformData',
+            'pushPageData',
             'pushUserData'
         ]),
 
@@ -38,11 +46,11 @@ export default {
             if (this.isServerSide) {
                 // Only available serverside
                 const platformData = { ...this.platformData };
+                const pageData = { ...this.pageData };
 
                 if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
                 if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
                 if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
-
                 // TODO - Read manually to reduce need on global '$cookies'
                 if (this.$cookies) {
                     // This cookie is marked as `httponly` so need to read serverside
@@ -50,14 +58,17 @@ export default {
                     if (value) platformData.jeUserPercentage = value;
                 }
 
+                pageData.httpStatusCode = this.$ssrContext?.res?.statusCode || 0;
+
                 this.pushPlatformData(platformData);
+                this.pushPageData(pageData);
             }
         },
 
         preparePlatformData () {
             const platformData = { ...this.platformData };
 
-            platformData.name = MAP_ROUTE_TO_FEATURE_NAME[this.$route.name] || this.$route.name;
+            platformData.name = mapRouteToFeature(this.$route.name);
             platformData.appType = DEFAULT_APP_TYPE;
             platformData.applicationId = DEFAULT_APP_ID;
             platformData.userAgent = navigator.userAgent || 'N/A';
@@ -90,6 +101,28 @@ export default {
             }
 
             this.pushUserData(userData);
+        },
+
+        preparePageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
+            const pageData = { ...this.pageData };
+
+            pageData.group = mapRouteToGroup(this.$route.name);
+            pageData.name = mapRouteToFeature(this.$route.name);
+
+            if (pageData.name === 'Checkout 1 Overview' && !authToken) {
+                pageData.name = 'Checkout 1 Guest';
+            }
+
+            pageData.isCached = false;
+            pageData.conversationId = conversationId;
+            pageData.requestId = requestId;
+
+            if (!this.isServerSide) {
+                pageData.display = getDisplaySize();
+                pageData.orientation = getOrientation();
+            }
+
+            this.pushPageData(pageData);
         }
     }
 };
