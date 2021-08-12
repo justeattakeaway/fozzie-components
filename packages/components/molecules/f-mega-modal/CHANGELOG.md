@@ -4,13 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v0.11.1
 ------------------------------
-*July 26, 2021*
+*August 12, 2021*
 
 ### Changed
 - Updated version of `f-button`.
-
+- Fixed bug where scrolling is not re-enabled if the modal is destroyed while open for whatever reason.
 
 v0.11.0
 ------------------------------
