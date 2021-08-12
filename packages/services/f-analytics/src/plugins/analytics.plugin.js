@@ -2,6 +2,7 @@ import analyticsModule from '../store/analytics.module';
 import AnalyticService from './lib/analytics.service';
 import {
     PUSH_PLATFORM_DATA,
+    PUSH_PAGE_DATA,
     PUSH_EVENT
 } from '../store/mutation-types';
 
@@ -19,9 +20,10 @@ const getCookie = (name, req) => {
     return undefined;
 };
 
-const mapServersideValues = (store, req, options) => {
+const prepareServersideValues = (store, req, res, options) => {
     // Only available serverside
     if (typeof (window) === 'undefined') {
+        // Platform Data
         const platformData = { ...store.state[`${options.namespace}`].platformData };
 
         if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
@@ -32,6 +34,13 @@ const mapServersideValues = (store, req, options) => {
         if (userPercent) platformData.jeUserPercentage = userPercent;
 
         store.dispatch(`${options.namespace}/${PUSH_PLATFORM_DATA}`, platformData);
+
+        // Page Data
+        const pageData = { ...store.state[`${options.namespace}`].pageData };
+
+        if (res.statusCode) pageData.httpStatusCode = res.statusCode;
+
+        store.dispatch(`${options.namespace}/${PUSH_PAGE_DATA}`, pageData);
     }
 };
 
@@ -77,7 +86,7 @@ const preparePageTags = options => {
     }
 };
 
-export default ({ store, req }, inject, _options) => {
+export default ({ store, req, res }, inject, _options) => {
     const options = {
         ...defaults,
         ..._options
@@ -87,7 +96,7 @@ export default ({ store, req }, inject, _options) => {
 
     registerStoreModule(store, options);
 
-    mapServersideValues(store, req, options);
+    prepareServersideValues(store, req, res, options);
 
     const service = new AnalyticService(store, req, options);
 

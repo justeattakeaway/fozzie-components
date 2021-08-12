@@ -6,6 +6,7 @@ import {
 } from '../../tests/helpers/setup';
 import {
     PUSH_PLATFORM_DATA,
+    PUSH_PAGE_DATA,
     PUSH_EVENT
 } from '../../store/mutation-types';
 
@@ -31,7 +32,7 @@ describe('Analytics Plugin ::', () => {
                 dispatch: storeDispatchSpy,
                 hasModule: storeModuleSpy
             };
-            context = { store: defaultStore, req: jest.fn() };
+            context = { store: defaultStore, req: jest.fn(), res: jest.fn() };
             injectSpy = jest.fn(() => {});
             const originalWindow = { ...window };
             jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
@@ -117,7 +118,8 @@ describe('Analytics Plugin ::', () => {
                     hasModule: jest.fn(() => false),
                     registerModule: registerStoreModuleSpy
                 },
-                req: jest.fn()
+                req: jest.fn(),
+                res: jest.fn()
             };
 
             // Act
@@ -136,7 +138,8 @@ describe('Analytics Plugin ::', () => {
                     hasModule: jest.fn(() => true),
                     registerModule: registerStoreModuleSpy
                 },
-                req: jest.fn()
+                req: jest.fn(),
+                res: jest.fn()
             };
 
             // Act
@@ -157,7 +160,8 @@ describe('Analytics Plugin ::', () => {
                     dispatch: jest.fn(),
                     hasModule: jest.fn(() => true)
                 },
-                req: jest.fn()
+                req: jest.fn(),
+                res: jest.fn()
             };
             const originalWindow = { ...window };
             jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
@@ -221,7 +225,7 @@ describe('Analytics Plugin ::', () => {
         beforeEach(() => {
             // Arrange
             state = [`${options.namespace}`];
-            state[`${options.namespace}`] = { platformData: defaultState };
+            state[`${options.namespace}`] = { ...defaultState };
             storeDispatchSpy = jest.fn();
             context = {
                 store: {
@@ -233,6 +237,9 @@ describe('Analytics Plugin ::', () => {
                     headers: {
                         cookie: 'je-user_percentage=35'
                     }
+                },
+                res: {
+                    statusCode: 201
                 }
             };
             jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
@@ -252,18 +259,7 @@ describe('Analytics Plugin ::', () => {
             expect(storeDispatchSpy).not.toHaveBeenCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expect.anything());
         });
 
-        it('should leave the platformData environment properties with appropriate defaults if values not available and serverside', () => {
-            // Arrange
-            const expected = { ...defaultState, jeUserPercentage: '35' };
-
-            // Act
-            AnalyticsPlugin(context, jest.fn(), options);
-
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expected);
-        });
-
-        it('should leave the platformData jeUserPercentage property with default if not available and serverside', () => {
+        it('should leave the platformData properties with defaults if data not available and serverside', () => {
             // Arrange
             const ctx = {
                 ...context,
@@ -273,7 +269,7 @@ describe('Analytics Plugin ::', () => {
                     }
                 }
             };
-            const expected = defaultState;
+            const expected = { ...defaultState.platformData };
 
             // Act
             AnalyticsPlugin(ctx, jest.fn(), options);
@@ -282,13 +278,13 @@ describe('Analytics Plugin ::', () => {
             expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expected);
         });
 
-        it('should set the platformData properties with appropriate values if available and serverside', () => {
+        it('should set the platformData properties with data if available and serverside', () => {
             // Arrange
             process.env.justEatEnvironment = 'testing123';
             process.env.FEATURE_VERSION = '4.3.2.1';
             process.env.INSTANCE_POSITION = '099';
             const expected = {
-                ...defaultState,
+                ...defaultState.platformData,
                 environment: process.env.justEatEnvironment,
                 version: process.env.FEATURE_VERSION,
                 instancePosition: process.env.INSTANCE_POSITION,
@@ -300,6 +296,37 @@ describe('Analytics Plugin ::', () => {
 
             // Assert
             expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expected);
+        });
+
+        it('should leave the pageData properties with defaults if data not available and serverside', () => {
+            // Arrange
+            const ctx = {
+                ...context,
+                res: {
+                    httpStatusCode: undefined
+                }
+            };
+            const expected = { ...defaultState.pageData, httpStatusCode: 0 };
+
+            // Act
+            AnalyticsPlugin(ctx, jest.fn(), options);
+
+            // Assert
+            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${PUSH_PAGE_DATA}`, expected);
+        });
+
+        it('should set the pageData properties with data if available and serverside', () => {
+            // Arrange
+            const expected = {
+                ...defaultState.pageData,
+                httpStatusCode: 201
+            };
+
+            // Act
+            AnalyticsPlugin(context, jest.fn(), options);
+
+            // Assert
+            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${PUSH_PAGE_DATA}`, expected);
         });
     });
 });

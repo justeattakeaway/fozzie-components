@@ -40,7 +40,7 @@ describe('Analytic Service ::', () => {
         expect(instance).not.toBeNull();
     });
 
-    describe('When pushing an event', () => {
+    describe('When calling the pushEvent', () => {
         it('should dispatch the `event` to the store', () => {
             // Arrange
             const expectedEvent = { ...newEvent };
@@ -53,29 +53,44 @@ describe('Analytic Service ::', () => {
         });
     });
 
-    describe('When pushing platformData', () => {
-        it('should dispatch the `platformData` to the store', () => {
-            // Arrange
-            const expectedPlatformData = {
-                environment: 'localhost',
-                name: 'test-route-name',
-                appType: 'web',
-                applicationId: 7,
-                userAgent: 'test-agent-string',
-                branding: 'justeat',
-                country: 'uk',
-                language: 'en',
-                jeUserPercentage: undefined,
-                currency: 'gbp',
-                version: '0.0.0.0',
-                instancePosition: 'N/A'
-            };
+    describe('When calling the pushPlatformData', () => {
+        // 1 == locale, 2 == branding, 3 == country, 4 == currency, 5 == language
+        const cases = [
+            ['en-GB', 'justeat', 'uk', 'gbp', 'en'],
+            ['en-IE', 'justeat', 'ie', 'eur', 'en'],
+            ['it-IT', 'justeat', 'it', 'eur', 'it'],
+            ['es-ES', 'justeat', 'es', 'eur', 'es'],
+            ['en-AU', 'menulog', 'au', 'aud', 'en'],
+            ['en-NZ', 'menulog', 'nz', 'nzd', 'en']
+        ];
 
-            // Act
-            service.pushPlatformData();
+        test.each(cases)(
+            'should dispatch the correct `plaformData` to the store given %p as the locale',
+            (localeArg, brandingExpected, countryExpected, currencyExpected, languageExpected) => {
+                // Arrange
+                const expectedPlatformData = {
+                    appType: 'web',
+                    applicationId: 7,
+                    branding: brandingExpected,
+                    country: countryExpected,
+                    currency: currencyExpected,
+                    environment: 'localhost',
+                    instancePosition: 'N/A',
+                    jeUserPercentage: undefined,
+                    language: languageExpected,
+                    name: options.featureName,
+                    userAgent: navigator.userAgent,
+                    version: '0.0.0.0'
+                };
+                options.locale = localeArg;
+                service = new AnalyticService(store, req, options);
 
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expectedPlatformData);
-        });
+                // Act
+                service.pushPlatformData();
+
+                // Assert
+                expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expectedPlatformData);
+            }
+        );
     });
 });
