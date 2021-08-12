@@ -2,6 +2,7 @@ import axios from 'axios';
 import CheckoutModule from '../checkout.module';
 import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
+import basketDeliveryAgeRestricted from '../../demo/get-basket-delivery-age-restriction.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
@@ -611,7 +612,32 @@ describe('CheckoutModule', () => {
                     basket: {
                         id: basketDelivery.BasketId,
                         total: basketDelivery.BasketSummary.BasketTotals.Total
-                    }
+                    },
+                    ageRestricted: false
+                });
+            });
+            describe('When there are age restricted items', () => {
+                it(`should get the basket details from the backend, set ageRestricted to 'true' and call ${UPDATE_BASKET_DETAILS} mutation.`, async () => {
+                    // Arrange
+                    basketApi.getBasket = jest.fn(() => Promise.resolve({ data: basketDeliveryAgeRestricted }));
+
+                    // Act
+                    await getBasket(context, payload);
+
+                    // Assert
+                    expect(basketApi.getBasket).toHaveBeenCalledWith(payload.url, payload.tenant, payload.language, payload.timeout);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
+                        serviceType: basketDeliveryAgeRestricted.ServiceType.toLowerCase(),
+                        restaurant: {
+                            id: basketDeliveryAgeRestricted.RestaurantId,
+                            seoName: basketDeliveryAgeRestricted.RestaurantSeoName
+                        },
+                        basket: {
+                            id: basketDeliveryAgeRestricted.BasketId,
+                            total: basketDeliveryAgeRestricted.BasketSummary.BasketTotals.Total
+                        },
+                        ageRestricted: true
+                    });
                 });
             });
         });
