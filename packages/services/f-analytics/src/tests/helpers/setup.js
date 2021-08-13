@@ -18,7 +18,7 @@ const defaultState = {
         instancePosition: 'N/A'
     },
     userData: {
-        'a-UserId': '',
+        'a-UserId': undefined,
         authType: undefined,
         email: undefined,
         globalUserId: undefined,
@@ -87,10 +87,9 @@ const newEvent = {
 };
 
 const defaultActions = {
-    pushPlatformData: jest.fn(),
-    pushUserData: jest.fn(),
-    pushPageData: jest.fn(),
-    pushEvent: jest.fn()
+    updatePlatformData: jest.fn(),
+    updatePageData: jest.fn(),
+    updateEvents: jest.fn()
 };
 
 const createStore = ({

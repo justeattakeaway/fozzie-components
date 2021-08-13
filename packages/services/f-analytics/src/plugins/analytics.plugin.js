@@ -1,12 +1,12 @@
-import analyticsModule from '../store/analytics.module';
+import analyticsModule from '@/store/analytics.module';
 import AnalyticService from './lib/analytics.service';
 import {
-    PUSH_PLATFORM_DATA,
-    PUSH_PAGE_DATA,
-    PUSH_EVENT
+    UPDATE_PLATFORM_DATA,
+    UPDATE_PAGE_DATA,
+    UPDATE_EVENTS
 } from '../store/mutation-types';
 
-const defaults = require('./defaults');
+const defaultOptions = require('../defaultOptions');
 
 const getCookie = (name, req) => {
     if (req && req.headers && req.headers.cookie) {
@@ -33,14 +33,14 @@ const prepareServersideValues = (store, req, res, options) => {
         const userPercent = getCookie('je-user_percentage', req);
         if (userPercent) platformData.jeUserPercentage = userPercent;
 
-        store.dispatch(`${options.namespace}/${PUSH_PLATFORM_DATA}`, platformData);
+        store.dispatch(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, platformData);
 
         // Page Data
         const pageData = { ...store.state[`${options.namespace}`].pageData };
 
         if (res.statusCode) pageData.httpStatusCode = res.statusCode;
 
-        store.dispatch(`${options.namespace}/${PUSH_PAGE_DATA}`, pageData);
+        store.dispatch(`${options.namespace}/${UPDATE_PAGE_DATA}`, pageData);
     }
 };
 
@@ -88,7 +88,7 @@ const preparePageTags = options => {
 
 export default ({ store, req, res }, inject, _options) => {
     const options = {
-        ...defaults,
+        ...defaultOptions,
         ..._options
     };
 
@@ -103,5 +103,5 @@ export default ({ store, req, res }, inject, _options) => {
     inject(options.globalVarName, service);
 
     // Flush any stored events
-    store.dispatch(`${options.namespace}/${PUSH_EVENT}`);
+    store.dispatch(`${options.namespace}/${UPDATE_EVENTS}`);
 };

@@ -1,12 +1,9 @@
 import {
-    PUSH_PLATFORM_DATA,
-    PUSH_USER_DATA,
-    PUSH_PAGE_DATA,
-    PUSH_EVENT,
+    UPDATE_PLATFORM_DATA,
+    UPDATE_PAGE_DATA,
+    UPDATE_EVENTS,
     CLEAR_EVENTS
 } from './mutation-types';
-
-const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
 
 export default {
     namespaced: true,
@@ -27,7 +24,7 @@ export default {
             instancePosition: 'N/A'
         },
         userData: {
-            'a-UserId': '',
+            'a-UserId': undefined,
             authType: undefined,
             email: undefined,
             globalUserId: undefined,
@@ -48,54 +45,33 @@ export default {
     }),
 
     actions: {
-        [PUSH_PLATFORM_DATA]: ({ commit, state }, platformData) => {
-            if (platformData) {
-                commit(PUSH_PLATFORM_DATA, platformData);
-            }
-
-            if (isDataLayerPresent()) {
-                window.dataLayer.push({ platformData: { ...state.platformData } });
-            }
+        updatePlatformData: ({ commit }, platformData) => {
+            commit(UPDATE_PLATFORM_DATA, platformData);
         },
 
-        [PUSH_USER_DATA]: userData => {
-            if (userData && isDataLayerPresent()) {
-                window.dataLayer.push({ userData: { ...userData } });
-            }
+        updatePageData: ({ commit }, pageData) => {
+            commit(UPDATE_PAGE_DATA, pageData);
         },
 
-        [PUSH_PAGE_DATA]: ({ commit, state }, pageData) => {
-            if (pageData) {
-                commit(PUSH_PAGE_DATA, pageData);
-            }
-
-            if (isDataLayerPresent()) {
-                window.dataLayer.push({ pageData: { ...state.pageData } });
-            }
+        updateEvents: ({ commit }, event) => {
+            commit(UPDATE_EVENTS, event);
         },
 
-        [PUSH_EVENT]: ({ commit, state }, event) => {
-            if (event) {
-                commit(PUSH_EVENT, event);
-            }
-
-            if (isDataLayerPresent() && state.events) {
-                state.events.forEach(e => window.dataLayer.push({ ...e }));
-                commit(CLEAR_EVENTS);
-            }
+        clearEvents: ({ commit }) => {
+            commit(CLEAR_EVENTS);
         }
     },
 
     mutations: {
-        [PUSH_PLATFORM_DATA]: (state, platformData) => {
+        [UPDATE_PLATFORM_DATA]: (state, platformData) => {
             state.platformData = { ...state.platformData, ...platformData };
         },
 
-        [PUSH_PAGE_DATA]: (state, pageData) => {
+        [UPDATE_PAGE_DATA]: (state, pageData) => {
             state.pageData = { ...state.pageData, ...pageData };
         },
 
-        [PUSH_EVENT]: (state, event) => {
+        [UPDATE_EVENTS]: (state, event) => {
             state.events = [...state.events, event];
         },
 

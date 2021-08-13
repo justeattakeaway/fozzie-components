@@ -1,12 +1,10 @@
 import {
-    PUSH_PLATFORM_DATA,
-    PUSH_EVENT
-} from '../../store/mutation-types';
-import {
     COUNTRY_INFO,
     DEFAULT_APP_TYPE,
     DEFAULT_APP_ID
 } from '../../constants';
+
+const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
 
 const mapUserAgent = (platformData, req) => {
     let userAgentString;
@@ -39,13 +37,27 @@ export default class AnalyticService {
         platformData.language = COUNTRY_INFO[this.locale].language;
         platformData.currency = COUNTRY_INFO[this.locale].currency;
 
-        this.store.dispatch(`${this.namespace}/${PUSH_PLATFORM_DATA}`, platformData);
+        this.store.dispatch(`${this.namespace}/updatePlatformData`, platformData);
+
+        if (isDataLayerPresent()) {
+            window.dataLayer.push({ platformData: { ...this.store.state[`${this.namespace}`].platformData } });
+        }
 
         return platformData;
     }
 
     pushEvent (event) {
-        this.store.dispatch(`${this.namespace}/${PUSH_EVENT}`, event);
+        if (event) {
+            this.store.dispatch(`${this.namespace}/updateEvents`, event);
+        }
+
+        if (isDataLayerPresent()) {
+            const events = { ...this.store.state[`${this.namespace}`].events };
+
+            events.forEach(e => window.dataLayer.push({ ...e }));
+
+            this.store.dispatch(`${this.namespace}/clearEvents`);
+        }
 
         return event;
     }

@@ -12,63 +12,88 @@ import analyticsMixin from '../analytics.mixin.vue';
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
+const mockAuthTokenRegistered = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
++ 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
++ 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
++ 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
++ 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
++ 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
+
+const mockAuthTokenGuest = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
++ 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZ'
++ 'WF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW'
++ '1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXp'
++ 'PZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1p'
++ 'bHlfbmFtZSI6IkJsb2dncyIsInN1YiI6IjEyMzQ1Iiwicm9sZSI6Ikd1ZXN0Ii'
++ 'wiaWF0IjoxNjE1NDY5NTE2fQ.ngfAKpiMH4Gk0Y4gAVC4KeLadWFtVXx4hD1_BSW9SN0';
+
+const userIdFromCookie = 'fjdhskgshjgk';
+
+const userDataWithMockAuthTokenRegistered = {
+    'a-UserId': userIdFromCookie,
+    authType: 'Login',
+    email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
+    globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
+    signinType: 'Email',
+    signupDate: '2021-02-08T10:27:49.1930000Z'
+};
+
+const userDataWithMockAuthTokenGuest = {
+    'a-UserId': userIdFromCookie,
+    authType: 'Login',
+    email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
+    globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
+    signinType: 'Guest',
+    signupDate: '2021-02-08T10:27:49.1930000Z'
+};
+
+const userDataWithoutMockAuthToken = {
+    'a-UserId': userIdFromCookie,
+    authType: undefined,
+    email: undefined,
+    globalUserId: undefined,
+    signinType: undefined,
+    signupDate: undefined
+};
+
+const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
++ 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
++ 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
++ 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
++ 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
++ 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
+
+const basePageDataObject = {
+    name: 'test-route-name',
+    group: 'test-group',
+    httpStatusCode: 0,
+    isCached: false,
+    conversationId: '',
+    requestId: '',
+    orientation: 'Landscape',
+    display: 'full-size'
+};
+
 describe('Analytics', () => {
     describe('methods ::', () => {
-        describe('prepareUserData ::', () => {
-            const userIdFromCookie = 'fjdhskgshjgk';
-
-            const mockAuthTokenRegistered = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-            + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
-            + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
-            + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
-            + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
-            + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
-
-            const mockAuthTokenGuest = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-            + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZ'
-            + 'WF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW'
-            + '1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXp'
-            + 'PZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1p'
-            + 'bHlfbmFtZSI6IkJsb2dncyIsInN1YiI6IjEyMzQ1Iiwicm9sZSI6Ikd1ZXN0Ii'
-            + 'wiaWF0IjoxNjE1NDY5NTE2fQ.ngfAKpiMH4Gk0Y4gAVC4KeLadWFtVXx4hD1_BSW9SN0';
-
-            const userDataWithMockAuthTokenRegistered = {
-                'a-UserId': userIdFromCookie,
-                authType: 'Login',
-                email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
-                globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
-                signinType: 'Email',
-                signupDate: '2021-02-08T10:27:49.1930000Z'
-            };
-
-            const userDataWithMockAuthTokenGuest = {
-                'a-UserId': userIdFromCookie,
-                authType: 'Login',
-                email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
-                globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
-                signinType: 'Guest',
-                signupDate: '2021-02-08T10:27:49.1930000Z'
-            };
-
-            const userDataWithoutMockAuthToken = {
-                'a-UserId': userIdFromCookie,
-                authType: undefined,
-                email: undefined,
-                globalUserId: undefined,
-                signinType: undefined,
-                signupDate: undefined
-            };
-
+        describe('pushUserData ::', () => {
             const component = {
                 render () {},
                 mixins: [analyticsMixin]
             };
             let wrapper;
-
+            let windowsPushSpy;
             component.mixins[0].created = jest.fn(() => true);
-            const pushUserDataSpy = jest.spyOn(component.mixins[0].methods, 'pushUserData');
 
             beforeEach(() => {
+                windowsPushSpy = jest.fn();
+                const originalWindow = { ...window };
+                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
                 wrapper = shallowMount(component, {
                     mixins: [analyticsMixin],
                     localVue,
@@ -82,66 +107,79 @@ describe('Analytics', () => {
                 wrapper.vm.$cookies.get.mockReturnValue(userIdFromCookie);
             });
 
-            it('should call `updateUserData` action only with userId if authToken has not been passed', () => {
+            it('should not push userData to datalayer if datalayer not present', () => {
+                // Arrange
+                windowsPushSpy = jest.fn();
+                const originalWindow = { ...window };
+                const windowSpy = jest.spyOn(global, 'window', 'get');
+                windowSpy.mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
+                windowSpy.mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: undefined
+                }));
+
                 // Act
-                wrapper.vm.prepareUserData();
+                wrapper.vm.pushUserData();
 
                 // Assert
-                expect(pushUserDataSpy).toHaveBeenCalledWith(userDataWithoutMockAuthToken);
+                expect(windowsPushSpy).not.toHaveBeenCalled();
+            });
+
+            it('should push userData to datalayer only with userId if authToken has not been passed', () => {
+                // Act
+                wrapper.vm.pushUserData();
+
+                // Assert
+                expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithoutMockAuthToken } });
             });
 
             describe('if authToken has been passed', () => {
                 describe('and user is logged in', () => {
-                    it('should call `updateUserData` action with `userDataWithMockAuthTokenRegistered`', () => {
+                    it('should push userData to datalayer with registered auth token details', () => {
                         // Act
-                        wrapper.vm.prepareUserData(mockAuthTokenRegistered);
+                        wrapper.vm.pushUserData(mockAuthTokenRegistered);
 
                         // Assert
-                        expect(pushUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthTokenRegistered);
+                        expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithMockAuthTokenRegistered } });
                     });
                 });
 
                 describe('and user is a guest', () => {
-                    it('should call `updateUserData` action with `userDataWithMockAuthTokenGuest`', () => {
+                    it('should push userData to datalayer with guest auth token details', () => {
                         // Act
-                        wrapper.vm.prepareUserData(mockAuthTokenGuest);
+                        wrapper.vm.pushUserData(mockAuthTokenGuest);
 
                         // Assert
-                        expect(pushUserDataSpy).toHaveBeenCalledWith(userDataWithMockAuthTokenGuest);
+                        expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithMockAuthTokenGuest } });
                     });
                 });
             });
         });
 
-        describe('preparePageData ::', () => {
-            const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-            + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
-            + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
-            + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
-            + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
-            + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
-
-            const basePageDataObject = {
-                name: 'test-route-name',
-                group: 'test-group',
-                httpStatusCode: 0,
-                isCached: false,
-                conversationId: '',
-                requestId: '',
-                orientation: 'Landscape',
-                display: 'full-size'
-            };
-
+        describe('updatePageData ::', () => {
             const component = {
                 render () {},
                 mixins: [analyticsMixin]
             };
             let wrapper;
-
+            let windowsPushSpy;
             component.mixins[0].created = jest.fn(() => true);
-            const storeUpdatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'pushPageData');
+            const updatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePageData');
 
             beforeEach(() => {
+                windowsPushSpy = jest.fn();
+                const originalWindow = { ...window };
+                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
                 wrapper = shallowMount(component, {
                     mixins: [analyticsMixin],
                     localVue,
@@ -151,6 +189,29 @@ describe('Analytics', () => {
                         $i18n
                     }
                 });
+            });
+
+            it('should not push pageData to datalayer if datalayer not present', () => {
+                // Arrange
+                windowsPushSpy = jest.fn();
+                const originalWindow = { ...window };
+                const windowSpy = jest.spyOn(global, 'window', 'get');
+                windowSpy.mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: {
+                        push: windowsPushSpy
+                    }
+                }));
+                windowSpy.mockImplementation(() => ({
+                    ...originalWindow,
+                    dataLayer: undefined
+                }));
+
+                // Act
+                wrapper.vm.pushPageData();
+
+                // Assert
+                expect(windowsPushSpy).not.toHaveBeenCalled();
             });
 
             it('should set the correct pageData', () => {
@@ -164,10 +225,12 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
 
                 // Act
-                wrapper.vm.preparePageData();
+                wrapper.vm.pushPageData();
 
                 // Assert
-                expect(storeUpdatePageDataSpy).toHaveBeenCalledWith(expected);
+                expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
+                expect(windowsPushSpy).toHaveBeenCalled();
+                // expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
             });
 
             it('should override name attribute when name = Checkout 1 Overview and no authToken', () => {
@@ -182,10 +245,11 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => 'Checkout 1 Overview');
 
                 // Act
-                wrapper.vm.preparePageData();
+                wrapper.vm.pushPageData();
 
                 // Assert
-                expect(storeUpdatePageDataSpy).toHaveBeenCalledWith(expected);
+                expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
+                expect(windowsPushSpy).toHaveBeenCalled();
             });
 
             it('should not override name attribute when name = Checkout 1 Overview and authToken', () => {
@@ -200,10 +264,11 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
 
                 // Act
-                wrapper.vm.preparePageData({ authToken: mockAuthToken });
+                wrapper.vm.pushPageData({ authToken: mockAuthToken });
 
                 // Assert
-                expect(storeUpdatePageDataSpy).toHaveBeenCalledWith(expected);
+                expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
+                expect(windowsPushSpy).toHaveBeenCalled();
             });
 
             it('should add conversationId and requestId values when passed in param object', () => {
@@ -219,10 +284,11 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
 
                 // Act
-                wrapper.vm.preparePageData({ conversationId: expected.conversationId, requestId: expected.requestId });
+                wrapper.vm.pushPageData({ conversationId: expected.conversationId, requestId: expected.requestId });
 
                 // Assert
-                expect(storeUpdatePageDataSpy).toHaveBeenCalledWith(expected);
+                expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
+                expect(windowsPushSpy).toHaveBeenCalled();
             });
         });
     });

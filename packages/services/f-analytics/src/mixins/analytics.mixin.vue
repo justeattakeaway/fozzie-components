@@ -23,20 +23,21 @@ export default {
 
         isServerSide () {
             return typeof (window) === 'undefined';
-        }
+        },
 
+        isDataLayerPresent () {
+            return typeof (window) !== 'undefined' && window.dataLayer;
+        }
     },
 
     methods: {
         ...mapActions('f-analytics', [
-            'pushPageData',
-            'pushUserData'
+            'updatePageData'
         ]),
 
-        prepareUserData (authToken) {
+        pushUserData (authToken) {
             const userData = { ...this.userData };
 
-            userData['a-UserId'] = undefined;
             // TODO - Read manually to reduce need on global '$cookies'
             if (this.$cookies) {
                 const value = this.$cookies.get('je-auser');
@@ -53,10 +54,12 @@ export default {
                 userData.signupDate = tokenData?.created_date || undefined;
             }
 
-            this.pushUserData(userData);
+            if (this.isDataLayerPresent) {
+                window.dataLayer.push({ userData: { ...userData } });
+            }
         },
 
-        preparePageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
+        pushPageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
             const pageData = { ...this.pageData };
 
             pageData.group = mapRouteToGroup(this.$route.name);
@@ -75,7 +78,11 @@ export default {
                 pageData.orientation = getOrientation();
             }
 
-            this.pushPageData(pageData);
+            this.updatePageData(pageData);
+
+            if (this.isDataLayerPresent) {
+                window.dataLayer.push({ pageData: { ...this.pageData } });
+            }
         }
     }
 };

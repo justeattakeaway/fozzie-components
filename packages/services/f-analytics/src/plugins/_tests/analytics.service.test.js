@@ -1,7 +1,7 @@
 import AnalyticService from '@/plugins/lib/analytics.service';
 import {
-    PUSH_PLATFORM_DATA,
-    PUSH_EVENT
+    UPDATE_PLATFORM_DATA,
+    UPDATE_EVENTS
 } from '@/store/mutation-types';
 import {
     createStore,
@@ -49,7 +49,7 @@ describe('Analytic Service ::', () => {
             service.pushEvent(newEvent);
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${PUSH_EVENT}`, expectedEvent);
+            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${UPDATE_EVENTS}`, expectedEvent);
         });
     });
 
@@ -89,7 +89,7 @@ describe('Analytic Service ::', () => {
                 service.pushPlatformData();
 
                 // Assert
-                expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expectedPlatformData);
+                expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expectedPlatformData);
             }
         );
     });

@@ -1,6 +1,5 @@
 // Analytics module
-export const PUSH_PLATFORM_DATA = 'pushPlatformData';
-export const PUSH_USER_DATA = 'pushUserData';
-export const PUSH_PAGE_DATA = 'pushPageData';
-export const PUSH_EVENT = 'pushEvent';
+export const UPDATE_PLATFORM_DATA = 'updatePlatformData';
+export const UPDATE_PAGE_DATA = 'updatePageData';
+export const UPDATE_EVENTS = 'updateEvents';
 export const CLEAR_EVENTS = 'clearEvents';
