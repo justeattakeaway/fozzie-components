@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --report --target lib --name f-searchbox ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-searchbox ./src/index.js",
     "demo": "vue serve --port 8080 ./src/demo/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
