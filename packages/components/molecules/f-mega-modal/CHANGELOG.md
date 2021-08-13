@@ -22,7 +22,6 @@ v0.11.0
 - Updated version of `f-button`.
 - Close button now uses type `ghostTertiary`.
 
-
 v0.10.0
 ------------------------------
 *May 25, 2021*
