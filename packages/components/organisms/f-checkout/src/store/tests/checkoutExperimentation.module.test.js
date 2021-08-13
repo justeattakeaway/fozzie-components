@@ -32,7 +32,7 @@ describe('CheckoutExperimentationModule', () => {
                 // Arrange
                 const experiments = {
                     // eslint-disable-next-line camelcase
-                    low_value_order_threshold_web: {
+                    low_value_order_phase_2_web: {
                         Name: 'experiment_test',
                         Domain: 'Menu',
                         Variant: 'true',
