@@ -6,7 +6,8 @@
             {{ $t('messages.titleActivationNotLoggedIn') }}
         </h1>
 
-        <p>
+        <p
+            :class="$style['c-takeawaypayActivation-description']">
             {{ $t('messages.descriptionActivationNotLoggedIn') }}
         </p>
 
