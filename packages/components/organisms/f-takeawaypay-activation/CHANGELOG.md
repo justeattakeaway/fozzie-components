@@ -8,8 +8,10 @@ v0.8.0
 *August 13, 2021*
 
 ### Added
-- Cleanup styles
+- Loading spinner
 
+### Changed
+- Cleanup styles
 
 v0.7.0
 ------------------------------
