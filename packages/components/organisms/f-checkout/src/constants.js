@@ -33,6 +33,8 @@ export const ANALYTICS_ERROR_CODE_SET_ORDER_TIME = 'setOrderTime';
 export const ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME = 'invalidOrderTime';
 
 export const DEFAULT_CHECKOUT_ISSUE = 'DEFAULT_CHECKOUT_ISSUE';
+export const DOB_REQUIRED_ISSUE = 'DATE_OF_BIRTH_REQUIRED';
+export const AGE_VERIFICATION_ISSUE = 'AGE_VERIFICATION_FAILED';
 
 export const CHECKOUT_ERROR_FORM_TYPE = {
     default: 'pageLoad',
