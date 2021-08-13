@@ -16,7 +16,7 @@
         </div>
 
         <age-verification
-            v-else-if="shouldShowAgeVerification"
+            v-else-if="shouldShowAgeVerificationForm"
             @verify-age="handleUpdateCheckout" />
 
         <div
@@ -377,10 +377,6 @@ export default {
             'time',
             'userNote'
         ]),
-
-        shouldShowAgeVerification () {
-            return false; // TODO: Will be updated as part of Charlies PR
-        },
 
         wasMobileNumberFocused () {
             return this.$v.customer.mobileNumber.$dirty;
