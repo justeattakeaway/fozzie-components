@@ -8,7 +8,8 @@ v0.173.0
 *August 12, 2021*
 
 ### Added
-- 
+- Guest dine in visual test.
+
 
 v0.169.0
 ------------------------------
