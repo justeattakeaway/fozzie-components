@@ -8,6 +8,9 @@ v0.11.1
 ------------------------------
 *August 13, 2021*
 
+### Added
+- Webpack config for chunk splitting bundles
+
 ### Fixed
 - Serve minified JS instead of common JS.
 
