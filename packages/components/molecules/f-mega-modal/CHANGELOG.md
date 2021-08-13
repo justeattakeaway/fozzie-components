@@ -11,6 +11,8 @@ v0.11.1
 ### Fixed
 - Serve minified JS instead of common JS.
 
+### Changed
+ - Updated version of `f-button`.
 
 v0.11.0
 ------------------------------
