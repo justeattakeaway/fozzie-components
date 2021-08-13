@@ -267,6 +267,7 @@ jobs:
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
+      NODE_OPTIONS: --max_old_space_size=4096
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - detect_root_change
