@@ -2231,6 +2231,14 @@
   dependencies:
     vue-i18n "8.0.0"
 
+"@justeat/f-http@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-http/-/f-http-0.8.0.tgz#46a99a274d3611186d387a26920de02d5f1a05d7"
+  integrity sha512-wWDbLYXdc4bOUkMpATC9ZEB3g8x85GeajH6x4Xeo22r/GM1bG8k+1/SimbeoGQirA8acYSpkKywawGbgMuExmQ==
+  dependencies:
+    axios "0.21.1"
+    axios-mock-adapter "1.19.0"
+
 "@justeat/f-icons@3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.5.1.tgz#a8211d31c3310f5403cee2a72de899a53bcf3d20"
@@ -2252,11 +2260,6 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.7.0.tgz#e7f4aedfbaa614386f7fe5a180111e884c7db694"
   integrity sha512-IGknAfUH9vExdkY8hg/tcK1iAHFzA1DusKiKMHFOf3obQ/cAMA2hK7I9JCSCGjBUrcBYhpY3WdlLxu9hInJREw==
-
-"@justeat/f-mega-modal@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.9.0.tgz#834750c3ca4f66aeabd5b689628ccb5ed2d14db2"
-  integrity sha512-1OZay+2ZpelgdYvlVPV5cveZHY9Cls6yH9aQkGAYxXLzIEgmC8GfiQqtlwvLR0BQSNXr/K83asa0RUays3PE+w==
 
 "@justeat/f-popover@0.2.1":
   version "0.2.1"
@@ -2389,6 +2392,13 @@
   integrity sha512-jeWACUUp0LfQbKO+BS8KiMIQ/RlaLNuinIHwrmDAxHfxCj2RoElS/Z426cVzGWkIuvs20RiaNFMF31pasHq4QQ==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-wdio-utils@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.1.0.tgz#e8a62dd2d03c2cf14ce1fa7d50540c2171b8fc38"
+  integrity sha512-m2WfTJWR5Yako3hKEZ7SL3zDvZQA7VQ9hbUBnk02lxMYSKSqeHmLPICaLGtPXCIDBEuESFk2kscHSQc3GBxxmg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
 
 "@justeat/fozzie@5.0.0-beta.10":
   version "5.0.0-beta.10"
