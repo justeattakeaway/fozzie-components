@@ -8,6 +8,9 @@ v0.172.0
 ------------------------------
 *August 13, 2021*
 
+### Added
+- Webpack config for chunk splitting bundles
+
 ### Changed
 - Version of f-mega-modal package to reduce checkout bundle size.
 

@@ -8,6 +8,9 @@ v4.0.0-beta.32
 ------------------------------
 *August 13, 2021*
 
+### Added
+- Webpack config for chunk splitting bundles
+
 ### Changed
 - Updated version of `f-button`.
 - Updated version of `f-mega-modal`.
