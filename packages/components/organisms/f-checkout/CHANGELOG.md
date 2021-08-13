@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.172.0
+v0.173.0
 ------------------------------
 *August 13, 2021*
 
@@ -13,6 +13,14 @@ v0.172.0
 
 ### Changed
 - Version of f-mega-modal package to reduce checkout bundle size.
+
+
+v0.172.0
+------------------------------
+*August 102, 2021*
+
+### Added
+- Error Message to Age Verification page.
 
 
 v0.171.0
