@@ -17,7 +17,7 @@
 
         <age-verification
             v-else-if="shouldShowAgeVerificationForm"
-            @verify-age="handleUpdateCheckout" />
+            @checkout-verify-age="handleUpdateCheckout" />
 
         <div
             v-else-if="shouldShowCheckoutForm"
