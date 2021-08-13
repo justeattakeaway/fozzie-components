@@ -9,7 +9,7 @@ module.exports = {
         optimization: {
             splitChunks: {
                 cacheGroups: {
-                    node_vendors: {
+                    nodeVendors: {
                         test: /[\\/]node_modules[\\/]/,
                         chunks: 'all',
                         priority: 1
