@@ -14,6 +14,11 @@
             data-test-id="checkout-loading-spinner">
             <div :class="$style['c-spinner']" />
         </div>
+
+        <age-verification
+            v-else-if="shouldShowAgeVerificationForm"
+            @verify-age="handleUpdateCheckout" />
+
         <div
             v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
@@ -105,11 +110,9 @@
                         cols="30"
                         rows="7"
                         maxlength="200"
-                        name="Note"
-                        has-input-description
-                        @input="updateUserNote($event)">
-                        {{ $t(`userNote.${serviceType}.text`) }}
-                    </form-field>
+                        name="note"
+                        :label-description="$t(`userNote.${serviceType}.text`)"
+                        @input="updateUserNote($event)" />
 
                     <f-button
                         :class="[
@@ -163,6 +166,7 @@ import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
 import AddressBlock from './Address.vue';
+import AgeVerification from './AgeVerification.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
@@ -171,10 +175,12 @@ import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 import exceptions from '../exceptions/exceptions';
 import {
+    AGE_VERIFICATION_ISSUE,
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_ERROR_FORM_TYPE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
+    DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     VALIDATIONS,
@@ -205,6 +211,7 @@ export default {
 
     components: {
         AddressBlock,
+        AgeVerification,
         Alert,
         FButton,
         Card,
@@ -413,16 +420,17 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.isLoading && !this.errorFormType;
+            return !this.isLoading && !this.errorFormType && !this.shouldShowAgeVerificationForm;
+        },
+
+        shouldShowAgeVerificationForm () {
+            return this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
             return {
                 isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType,
-                chosenTime: this.time.from,
-                isFulfillable: this.isFulfillable,
-                issueMessage: this.message?.code
+                serviceType: this.serviceType
             };
         },
 
