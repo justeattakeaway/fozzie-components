@@ -6,18 +6,18 @@ const sassOptions = require('../../../../config/sassOptions')(rootDir);
 // vue.config.js
 module.exports = {
     parallel: !process.env.CIRCLECI,
-    configureWebpack : {
+    configureWebpack: {
         optimization: {
             splitChunks: {
-				cacheGroups: {
-					nodeVendors: {
-						test: /[\\/]node_modules[\\/]/,
-						chunks: "all",
-						priority: 1
-					}
-				}
+                cacheGroups: {
+                    nodeVendors: {
+                        test: /[\\/]node_modules[\\/]/,
+                        chunks: 'all',
+                        priority: 1
+                    }
+                }
             }
-          }
+        }
     },
     chainWebpack: config => {
         config.module
