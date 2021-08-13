@@ -79,6 +79,7 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
+import EventNames from '../event-names';
 
 export default {
     components: {
@@ -179,7 +180,7 @@ export default {
 
             if (this.isValidAge) {
                 this.updateDateOfBirth(this.userDateOfBirth);
-                this.$emit('verify-age');
+                this.$emit(EventNames.CheckoutVerifyAge);
             } else {
                 this.$nextTick(() => {
                     this.$refs.AgeVerificationError.focus();

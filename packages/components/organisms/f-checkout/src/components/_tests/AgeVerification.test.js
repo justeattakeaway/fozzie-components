@@ -7,6 +7,7 @@ import {
     createStore,
     defaultCheckoutState
 } from './helpers/setup';
+import EventNames from '../../event-names';
 
 const localVue = createLocalVue();
 
@@ -285,9 +286,9 @@ describe('AgeVerification', () => {
                     expect(updateDateOfBirthSpy).toHaveBeenCalledWith(date);
                 });
 
-                it('should emit `verify-age`', () => {
+                it('should emit `CheckoutVerifyAge`', () => {
                     // Assert
-                    expect(wrapper.emitted('verify-age').length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutVerifyAge).length).toBe(1);
                 });
             });
 
