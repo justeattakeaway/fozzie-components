@@ -7,7 +7,7 @@ v0.8.0
 ------------------------------
 *August 13, 2021*
 
-### Changed
+### Added
 - Cleanup styles
 
 

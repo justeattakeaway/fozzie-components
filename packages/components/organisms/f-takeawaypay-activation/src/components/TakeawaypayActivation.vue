@@ -14,8 +14,8 @@
             </div>
 
             <component
-                v-if="!shouldShowSpinner"
                 :is="activationStateComponent.name"
+                v-if="!shouldShowSpinner"
                 ref="activationStateComponent"
                 v-bind="activationStateComponent.props"
                 @activation-result="handleActivationResult" />
