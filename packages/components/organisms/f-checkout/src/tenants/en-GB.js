@@ -206,6 +206,7 @@ const messages = {
             year: 'Year'
         },
         askForIdDescription: 'You might be asked for photographic ID when your order is delivered. The driver won’t hand over your order if the name on your order doesn’t match the name on your ID or to anyone who appears to be intoxicated.',
+        errorMessage: 'You must be over 18 to order alcohol.',
         buttonText: 'Continue'
     }
 };

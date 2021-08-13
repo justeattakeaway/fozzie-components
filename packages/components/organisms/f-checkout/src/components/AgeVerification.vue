@@ -37,6 +37,18 @@
                 :value="selectedDate.year"
                 @input="selectionChanged($event, 'year')" />
 
+            <div
+                ref="AgeVerificationError"
+                tabindex="-1">
+                <error-message
+                    v-if="shouldShowErrorMessage"
+                    id="age-verification-error"
+                    data-js-error-message
+                    data-test-id="age-verification-error-message">
+                    {{ $t('ageVerification.errorMessage') }}
+                </error-message>
+            </div>
+
             <p
                 :class="$style['c-checkout-ageVerification-description']"
                 data-test-id="checkout-age-verification-askForIdDescription">
@@ -59,16 +71,20 @@
 <script>
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
+import EventNames from '../event-names';
 
 export default {
     components: {
         Card,
+        ErrorMessage,
         FButton,
         FormField
     },
@@ -79,7 +95,8 @@ export default {
                 day: '',
                 month: '',
                 year: ''
-            }
+            },
+            hasSelectedDateOfBirth: false
         };
     },
 
@@ -123,6 +140,21 @@ export default {
                             value: year
                         };
                     });
+        },
+
+        userDateOfBirth () {
+            return new Date(this.selectedDate.year, this.selectedDate.month, this.selectedDate.day);
+        },
+
+        isValidAge () {
+            const currentDate = new Date();
+            const maximumAgeDifference = new Date((currentDate.getFullYear() - 18), currentDate.getMonth(), currentDate.getDate());
+
+            return Number(this.userDateOfBirth) <= Number(maximumAgeDifference);
+        },
+
+        shouldShowErrorMessage () {
+            return this.hasSelectedDateOfBirth && !this.isValidAge;
         }
     },
 
@@ -144,10 +176,16 @@ export default {
         },
 
         handleAgeVerifcation () {
-            const dateOfBirth = new Date(this.selectedDate.year, this.selectedDate.month, this.selectedDate.day);
+            this.hasSelectedDateOfBirth = true;
 
-            this.updateDateOfBirth(dateOfBirth);
-            this.$emit('verify-age');
+            if (this.isValidAge) {
+                this.updateDateOfBirth(this.userDateOfBirth);
+                this.$emit(EventNames.CheckoutVerifyAge);
+            } else {
+                this.$nextTick(() => {
+                    this.$refs.AgeVerificationError.focus();
+                });
+            }
         }
     }
 };
