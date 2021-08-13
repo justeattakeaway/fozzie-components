@@ -7,6 +7,7 @@ import {
     createStore,
     defaultCheckoutState
 } from './helpers/setup';
+import EventNames from '../../event-names';
 
 const localVue = createLocalVue();
 
@@ -77,6 +78,53 @@ describe('AgeVerification', () => {
                 // Assert
                 expect(wrapper.vm.years.length).toEqual(90);
                 expect(wrapper.vm.years).toMatchSnapshot();
+            });
+        });
+
+        describe('isValidAge ::', () => {
+            const validDateOfBirth = new Date(1990, 4, 7);
+            const invalidDateOfBirth = new Date(2021, 4, 7);
+
+            it.each([
+                [true, validDateOfBirth],
+                [false, invalidDateOfBirth]
+            ])('should return %s when dateOfBirth is set to %s', (expectedValue, dateOfBirth) => {
+                // Arrange
+                wrapper = shallowMount(AgeVerification, {
+                    i18n,
+                    localVue,
+                    store: createStore(),
+                    computed: {
+                        userDateOfBirth: () => dateOfBirth
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.isValidAge).toBe(expectedValue);
+            });
+        });
+
+        describe('shouldShowErrorMessage ::', () => {
+            it.each([
+                [true, true, false],
+                [false, true, true],
+                [false, false, true],
+                [false, false, false]
+            ])('should return %s when hasSelectedDateOfBirth is set to %s and isValidAge is %s', (expected, hasSelectedDateOfBirth, isValidAge) => {
+                // Arrange
+                wrapper = shallowMount(AgeVerification, {
+                    i18n,
+                    localVue,
+                    store: createStore(),
+                    computed: {
+                        isValidAge: () => isValidAge
+                    }
+                });
+
+                wrapper.setData({ hasSelectedDateOfBirth });
+
+                // Assert
+                expect(wrapper.vm.shouldShowErrorMessage).toBe(expected);
             });
         });
     });
@@ -183,50 +231,110 @@ describe('AgeVerification', () => {
 
         describe('`handleAgeVerifcation` ::', () => {
             // Arrange
-            let selectedDate;
-            let date;
             let updateDateOfBirthSpy;
 
             beforeEach(() => {
-                // Arrange
-                selectedDate = {
-                    day: '1',
-                    month: '7',
-                    year: '1987'
-                };
-
-                date = new Date(selectedDate.year, selectedDate.month, selectedDate.day);
                 updateDateOfBirthSpy = jest.spyOn(AgeVerification.methods, 'updateDateOfBirth');
+            });
 
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should set `hasSelectedDateOfBirth` to `true`', () => {
+                // Arrange
                 wrapper = shallowMount(AgeVerification, {
                     i18n,
                     localVue,
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        customer: {
-                            dateOfBirth: new Date('2010', '9', '2')
+                    store: createStore()
+                });
+
+                // Act
+                wrapper.vm.handleAgeVerifcation();
+
+                // Assert
+                expect(wrapper.vm.hasSelectedDateOfBirth).toBe(true);
+            });
+
+            describe('when `isValidAge` returns `true`', () => {
+                let date;
+
+                beforeEach(() => {
+                    // Arrange
+                    date = new Date('1987', '4', '7');
+
+                    wrapper = shallowMount(AgeVerification, {
+                        i18n,
+                        localVue,
+                        store: createStore(),
+                        computed: {
+                            userDateOfBirth: () => date,
+                            isValidAge: () => true
                         }
-                    })
+                    });
+
+                    // Act
+                    wrapper.vm.handleAgeVerifcation();
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should call `updateDateOfBirth` with `selectedDate`', () => {
+                    // Assert
+                    expect(updateDateOfBirthSpy).toHaveBeenCalledWith(date);
+                });
+
+                it('should emit `CheckoutVerifyAge`', () => {
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutVerifyAge).length).toBe(1);
                 });
             });
 
-            it('should call `updateDateOfBirth` with `selectedDate`', () => {
-                // Arrange
-                wrapper.setData({ selectedDate });
+            describe('when `isValidAge` returns `false`', () => {
+                beforeEach(() => {
+                    // Arrange
+                    wrapper = shallowMount(AgeVerification, {
+                        i18n,
+                        localVue,
+                        store: createStore(),
+                        computed: {
+                            isValidAge: () => false
+                        }
+                    });
+                });
 
-                // Act
-                wrapper.vm.handleAgeVerifcation();
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
 
-                // Assert
-                expect(updateDateOfBirthSpy).toHaveBeenCalledWith(date);
-            });
+                it('should call not `updateDateOfBirth` with `selectedDate`', () => {
+                    // Act
+                    wrapper.vm.handleAgeVerifcation();
 
-            it('should emit `verify-age`', () => {
-                // Act
-                wrapper.vm.handleAgeVerifcation();
+                    // Assert
+                    expect(updateDateOfBirthSpy).not.toHaveBeenCalled();
+                });
 
-                // Assert
-                expect(wrapper.emitted('verify-age').length).toBe(1);
+                it('should not emit `verify-age`', () => {
+                    // Act
+                    wrapper.vm.handleAgeVerifcation();
+
+                    // Assert
+                    expect(wrapper.emitted('verify-age')).toBeUndefined();
+                });
+
+                it('should focus on error message', async () => {
+                    // Act
+                    wrapper.vm.handleAgeVerifcation();
+                    await wrapper.vm.$nextTick();
+
+                    const errorMessage = wrapper.vm.$refs.AgeVerificationError;
+
+                    // Assert
+                    expect(document.activeElement).toEqual(errorMessage);
+                });
             });
         });
     });

@@ -11,6 +11,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Guest dine in visual test.
 
 
+v0.172.0
+------------------------------
+*August 102, 2021*
+
+### Added
+- Error Message to Age Verification page.
+
+
+v0.171.0
+------------------------------
+*August 12, 2021*
+
+### Changed
+- Low value order experiment header to phase 2
+
+
 v0.170.0
 ------------------------------
 *August 10, 2021*
