@@ -38,7 +38,7 @@ const defaultState = {
     events: []
 };
 
-const modifieldState = {
+const modifiedState = {
     platformData: {
         environment: 'test-environment',
         name: 'test-name',
@@ -86,16 +86,34 @@ const newEvent = {
     }
 };
 
+const options = {
+    namespace: 'f-analytics',
+    featureName: 'test-route-name',
+    locale: 'en-GB',
+    id: 'GTM-0000000'
+};
+
 const defaultActions = {
     updatePlatformData: jest.fn(),
     updatePageData: jest.fn(),
     updateEvents: jest.fn()
 };
 
+const defaultGetters = {};
+
+const defaultMutations = {
+    updatePlatformData: jest.fn(),
+    updatePageData: jest.fn(),
+    updateEvents: jest.fn(),
+    clearEvents: jest.fn()
+};
+
 const createStore = ({
-    name = 'f-analytics',
+    name = options.namespace,
     state = defaultState,
-    actions = defaultActions
+    actions = defaultActions,
+    getters = defaultGetters,
+    mutations = defaultMutations
 } = {}) => {
     Vue.use(Vuex);
     return new Vuex.Store({
@@ -103,7 +121,9 @@ const createStore = ({
             [`${name}`]: {
                 namespaced: true,
                 state,
-                actions
+                actions,
+                getters,
+                mutations
             },
             hasModule: jest.fn(() => true)
         }
@@ -122,17 +142,10 @@ const $i18n = {
     locale: 'en-GB'
 };
 
-const options = {
-    namespace: 'f-analytics',
-    featureName: 'test-route-name',
-    locale: 'en-GB',
-    id: 'GTM-0000000'
-};
-
 export {
     defaultState,
     defaultActions,
-    modifieldState,
+    modifiedState,
     newEvent,
     createStore,
     $cookies,

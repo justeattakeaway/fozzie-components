@@ -1,10 +1,11 @@
-import AnalyticService from '@/plugins/lib/analytics.service';
+import AnalyticService from '@/services/analytics.service';
 import {
     UPDATE_PLATFORM_DATA,
-    UPDATE_EVENTS
+    UPDATE_EVENTS,
+    CLEAR_EVENTS
 } from '@/store/mutation-types';
 import {
-    createStore,
+    defaultState,
     newEvent,
     options
 } from '@/tests/helpers/setup';
@@ -14,17 +15,33 @@ describe('Analytic Service ::', () => {
     let storeDispatchSpy;
     let service;
     let req;
+    let windowsPushSpy;
+    let state;
 
     beforeEach(() => {
-        // Arrange
-        store = createStore();
+        // Arrange - store
         storeDispatchSpy = jest.fn();
-        store.dispatch = storeDispatchSpy;
+        state = [`${options.namespace}`];
+        state[`${options.namespace}`] = { ...defaultState };
+        store = {
+            state,
+            dispatch: storeDispatchSpy
+        };
+        // Arrange - request
         req = {
             headers: jest.fn(() => ['user-agent'])
         };
-        service = new AnalyticService(store, req, options);
+        // Arrange - window state
         jest.spyOn(window.navigator, 'userAgent', 'get').mockReturnValue('test-agent-string');
+        windowsPushSpy = jest.fn();
+        const originalWindow = { ...window };
+        jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
+            ...originalWindow,
+            dataLayer: {
+                push: windowsPushSpy
+            }
+        }));
+        service = new AnalyticService(store, req, options);
     });
 
     afterEach(() => {
@@ -44,12 +61,15 @@ describe('Analytic Service ::', () => {
         it('should dispatch the `event` to the store', () => {
             // Arrange
             const expectedEvent = { ...newEvent };
+            store.state[`${options.namespace}`].events.push(expectedEvent);
 
             // Act
             service.pushEvent(newEvent);
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${UPDATE_EVENTS}`, expectedEvent);
+            expect(windowsPushSpy).toHaveBeenCalledWith({ ...expectedEvent });
+            expect(storeDispatchSpy).toHaveBeenNthCalledWith(1, `${options.namespace}/${UPDATE_EVENTS}`, expectedEvent);
+            expect(storeDispatchSpy).toHaveBeenNthCalledWith(2, `${options.namespace}/${CLEAR_EVENTS}`);
         });
     });
 
@@ -82,6 +102,7 @@ describe('Analytic Service ::', () => {
                     userAgent: navigator.userAgent,
                     version: '0.0.0.0'
                 };
+                store.state[`${options.namespace}`].platformData = expectedPlatformData;
                 options.locale = localeArg;
                 service = new AnalyticService(store, req, options);
 
@@ -89,6 +110,7 @@ describe('Analytic Service ::', () => {
                 service.pushPlatformData();
 
                 // Assert
+                expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
                 expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expectedPlatformData);
             }
         );

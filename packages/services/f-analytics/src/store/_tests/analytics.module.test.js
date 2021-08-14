@@ -1,6 +1,6 @@
 import {
     defaultState,
-    modifieldState,
+    modifiedState,
     newEvent
 } from '@/tests/helpers/setup';
 import AnalyticsModule from '@/store/analytics.module';
@@ -42,20 +42,20 @@ describe('Analytics Module ::', () => {
         describe('updatePlatformData ::', () => {
             it('should call the `updatePlatformData` mutation', () => {
                 // Act
-                updatePlatformData({ commit }, modifieldState.platformData);
+                updatePlatformData({ commit }, modifiedState.platformData);
 
                 // Assert
-                expect(commit).toHaveBeenLastCalledWith('updatePlatformData', modifieldState.platformData);
+                expect(commit).toHaveBeenLastCalledWith('updatePlatformData', modifiedState.platformData);
             });
         });
 
         describe('updatePageData ::', () => {
             it('should call the `updatePageData` mutation', () => {
                 // Act
-                updatePageData({ commit }, modifieldState.pageData);
+                updatePageData({ commit }, modifiedState.pageData);
 
                 // Assert
-                expect(commit).toHaveBeenLastCalledWith('updatePageData', modifieldState.pageData);
+                expect(commit).toHaveBeenLastCalledWith('updatePageData', modifiedState.pageData);
             });
         });
 
@@ -84,10 +84,10 @@ describe('Analytics Module ::', () => {
         describe(`${UPDATE_PLATFORM_DATA} ::`, () => {
             it('should update state with `platformData`', () => {
                 // Act
-                mutations[UPDATE_PLATFORM_DATA](state, modifieldState.platformData);
+                mutations[UPDATE_PLATFORM_DATA](state, modifiedState.platformData);
 
                 // Assert
-                expect(state.platformData).toEqual(modifieldState.platformData);
+                expect(state.platformData).toEqual(modifiedState.platformData);
             });
 
             it('should not overwrite the serverside platformData when saving the clientside platformData', () => {
@@ -123,10 +123,10 @@ describe('Analytics Module ::', () => {
         describe(`${UPDATE_PAGE_DATA} ::`, () => {
             it('should update state with `pageData`', () => {
                 // Act
-                mutations[UPDATE_PAGE_DATA](state, modifieldState.pageData);
+                mutations[UPDATE_PAGE_DATA](state, modifiedState.pageData);
 
                 // Assert
-                expect(state.pageData).toEqual(modifieldState.pageData);
+                expect(state.pageData).toEqual(modifiedState.pageData);
             });
 
             it('should not overwrite the serverside pageData when saving the clientside pageData', () => {

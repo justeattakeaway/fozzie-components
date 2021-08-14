@@ -7,6 +7,7 @@ import {
     $cookies
 } from '@/tests/helpers/setup';
 import * as utils from '@/utils/helpers';
+import analyticModule from '@/store/analytics.module';
 import analyticsMixin from '../analytics.mixin.vue';
 
 const localVue = createLocalVue();
@@ -86,6 +87,7 @@ describe('Analytics', () => {
             component.mixins[0].created = jest.fn(() => true);
 
             beforeEach(() => {
+                // Arrange - window state
                 windowsPushSpy = jest.fn();
                 const originalWindow = { ...window };
                 jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
@@ -94,6 +96,7 @@ describe('Analytics', () => {
                         push: windowsPushSpy
                     }
                 }));
+                // Arrange - sut
                 wrapper = shallowMount(component, {
                     mixins: [analyticsMixin],
                     localVue,
@@ -103,11 +106,11 @@ describe('Analytics', () => {
                         $cookies
                     }
                 });
-
+                // Arrange - cookies
                 wrapper.vm.$cookies.get.mockReturnValue(userIdFromCookie);
             });
 
-            it('should not push userData to datalayer if datalayer not present', () => {
+            it('should not push userData to datalayer if datalayer not present', async () => {
                 // Arrange
                 windowsPushSpy = jest.fn();
                 const originalWindow = { ...window };
@@ -124,15 +127,15 @@ describe('Analytics', () => {
                 }));
 
                 // Act
-                wrapper.vm.pushUserData();
+                await wrapper.vm.pushUserData();
 
                 // Assert
                 expect(windowsPushSpy).not.toHaveBeenCalled();
             });
 
-            it('should push userData to datalayer only with userId if authToken has not been passed', () => {
+            it('should push userData to datalayer only with userId if authToken has not been passed', async () => {
                 // Act
-                wrapper.vm.pushUserData();
+                await wrapper.vm.pushUserData();
 
                 // Assert
                 expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithoutMockAuthToken } });
@@ -140,9 +143,9 @@ describe('Analytics', () => {
 
             describe('if authToken has been passed', () => {
                 describe('and user is logged in', () => {
-                    it('should push userData to datalayer with registered auth token details', () => {
+                    it('should push userData to datalayer with registered auth token details', async () => {
                         // Act
-                        wrapper.vm.pushUserData(mockAuthTokenRegistered);
+                        await wrapper.vm.pushUserData(mockAuthTokenRegistered);
 
                         // Assert
                         expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithMockAuthTokenRegistered } });
@@ -150,9 +153,9 @@ describe('Analytics', () => {
                 });
 
                 describe('and user is a guest', () => {
-                    it('should push userData to datalayer with guest auth token details', () => {
+                    it('should push userData to datalayer with guest auth token details', async () => {
                         // Act
-                        wrapper.vm.pushUserData(mockAuthTokenGuest);
+                        await wrapper.vm.pushUserData(mockAuthTokenGuest);
 
                         // Assert
                         expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithMockAuthTokenGuest } });
@@ -172,6 +175,7 @@ describe('Analytics', () => {
             const updatePageDataSpy = jest.spyOn(component.mixins[0].methods, 'updatePageData');
 
             beforeEach(() => {
+                // Arrange - window state
                 windowsPushSpy = jest.fn();
                 const originalWindow = { ...window };
                 jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
@@ -180,10 +184,14 @@ describe('Analytics', () => {
                         push: windowsPushSpy
                     }
                 }));
+                // Arrange - sut
                 wrapper = shallowMount(component, {
                     mixins: [analyticsMixin],
                     localVue,
-                    store: createStore(),
+                    store: createStore({
+                        actions: analyticModule.actions,
+                        mutations: analyticModule.mutations
+                    }),
                     mocks: {
                         $route,
                         $i18n
@@ -191,8 +199,8 @@ describe('Analytics', () => {
                 });
             });
 
-            it('should not push pageData to datalayer if datalayer not present', () => {
-                // Arrange
+            it('should not push pageData to datalayer if datalayer not present', async () => {
+                // Arrange - window state
                 windowsPushSpy = jest.fn();
                 const originalWindow = { ...window };
                 const windowSpy = jest.spyOn(global, 'window', 'get');
@@ -208,13 +216,13 @@ describe('Analytics', () => {
                 }));
 
                 // Act
-                wrapper.vm.pushPageData();
+                await wrapper.vm.pushPageData();
 
                 // Assert
                 expect(windowsPushSpy).not.toHaveBeenCalled();
             });
 
-            it('should set the correct pageData', () => {
+            it('should set the correct pageData', async () => {
                 // Arrange
                 const expected = {
                     ...basePageDataObject
@@ -225,15 +233,14 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
 
                 // Act
-                wrapper.vm.pushPageData();
+                await wrapper.vm.pushPageData();
 
                 // Assert
                 expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
-                expect(windowsPushSpy).toHaveBeenCalled();
-                // expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+                expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
             });
 
-            it('should override name attribute when name = Checkout 1 Overview and no authToken', () => {
+            it('should override name attribute when name = Checkout 1 Overview and no authToken', async () => {
                 // Arrange
                 const expected = {
                     ...basePageDataObject,
@@ -245,14 +252,14 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => 'Checkout 1 Overview');
 
                 // Act
-                wrapper.vm.pushPageData();
+                await wrapper.vm.pushPageData();
 
                 // Assert
                 expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
-                expect(windowsPushSpy).toHaveBeenCalled();
+                expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
             });
 
-            it('should not override name attribute when name = Checkout 1 Overview and authToken', () => {
+            it('should not override name attribute when name = Checkout 1 Overview and authToken', async () => {
                 // Arrange
                 const expected = {
                     ...basePageDataObject,
@@ -264,14 +271,14 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
 
                 // Act
-                wrapper.vm.pushPageData({ authToken: mockAuthToken });
+                await wrapper.vm.pushPageData({ authToken: mockAuthToken });
 
                 // Assert
                 expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
-                expect(windowsPushSpy).toHaveBeenCalled();
+                expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
             });
 
-            it('should add conversationId and requestId values when passed in param object', () => {
+            it('should add conversationId and requestId values when passed in param object', async () => {
                 // Arrange
                 const expected = {
                     ...basePageDataObject,
@@ -284,11 +291,11 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
 
                 // Act
-                wrapper.vm.pushPageData({ conversationId: expected.conversationId, requestId: expected.requestId });
+                await wrapper.vm.pushPageData({ conversationId: expected.conversationId, requestId: expected.requestId });
 
                 // Assert
                 expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
-                expect(windowsPushSpy).toHaveBeenCalled();
+                expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
             });
         });
     });

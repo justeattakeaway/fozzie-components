@@ -3,15 +3,15 @@ import jwtDecode from 'jwt-decode';
 import SHA256 from 'crypto-js/sha256';
 import { mapState, mapActions } from 'vuex';
 import {
-    IDENTITY_PROVIDERS,
-    GRANT_TYPES
-} from '../constants';
-import {
     getDisplaySize,
     getOrientation,
     mapRouteToGroup,
     mapRouteToFeature
-} from '../utils/helpers';
+} from '@/utils/helpers';
+import {
+    IDENTITY_PROVIDERS,
+    GRANT_TYPES
+} from '@/constants';
 
 export default {
     computed:

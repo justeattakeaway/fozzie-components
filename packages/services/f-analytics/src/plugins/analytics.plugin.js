@@ -1,10 +1,9 @@
 import analyticsModule from '@/store/analytics.module';
-import AnalyticService from './lib/analytics.service';
 import {
     UPDATE_PLATFORM_DATA,
-    UPDATE_PAGE_DATA,
-    UPDATE_EVENTS
-} from '../store/mutation-types';
+    UPDATE_PAGE_DATA
+} from '@/store/mutation-types';
+import AnalyticService from '@/services/analytics.service';
 
 const defaultOptions = require('../defaultOptions');
 
@@ -102,6 +101,6 @@ export default ({ store, req, res }, inject, _options) => {
 
     inject(options.globalVarName, service);
 
-    // Flush any stored events
-    store.dispatch(`${options.namespace}/${UPDATE_EVENTS}`);
+    // If clientside, flush any stored serverside events
+    service.pushEvent();
 };

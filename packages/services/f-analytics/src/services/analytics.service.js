@@ -2,7 +2,7 @@ import {
     COUNTRY_INFO,
     DEFAULT_APP_TYPE,
     DEFAULT_APP_ID
-} from '../../constants';
+} from '@/constants';
 
 const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
 
@@ -52,7 +52,7 @@ export default class AnalyticService {
         }
 
         if (isDataLayerPresent()) {
-            const events = { ...this.store.state[`${this.namespace}`].events };
+            const events = [...this.store.state[`${this.namespace}`].events];
 
             events.forEach(e => window.dataLayer.push({ ...e }));
 
