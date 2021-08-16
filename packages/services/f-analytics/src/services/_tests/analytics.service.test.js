@@ -54,7 +54,7 @@ describe('Analytic Service ::', () => {
 
         // Assert
         expect(instance).not.toThrowError();
-        expect(instance).not.toBeNull();
+        expect(instance).toBeDefined();
     });
 
     describe('When calling the pushEvent', () => {

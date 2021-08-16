@@ -22,7 +22,6 @@ const getCookie = (name, req) => {
 const prepareServersideValues = (store, req, res, options) => {
     // Only available serverside
     if (typeof (window) === 'undefined') {
-        // Platform Data
         const platformData = { ...store.state[`${options.namespace}`].platformData };
 
         if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
@@ -34,7 +33,6 @@ const prepareServersideValues = (store, req, res, options) => {
 
         store.dispatch(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, platformData);
 
-        // Page Data
         const pageData = { ...store.state[`${options.namespace}`].pageData };
 
         if (res.statusCode) pageData.httpStatusCode = res.statusCode;
