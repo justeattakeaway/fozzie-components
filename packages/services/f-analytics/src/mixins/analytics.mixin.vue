@@ -3,83 +3,46 @@ import jwtDecode from 'jwt-decode';
 import SHA256 from 'crypto-js/sha256';
 import { mapState, mapActions } from 'vuex';
 import {
-    COUNTRY_INFO,
-    DEFAULT_APP_ID,
-    DEFAULT_APP_TYPE,
-    IDENTITY_PROVIDERS,
-    GRANT_TYPES
-} from '../constants';
-import {
     getDisplaySize,
     getOrientation,
     mapRouteToGroup,
     mapRouteToFeature
-} from '../utils/helpers';
+} from '@/utils/helpers';
+import {
+    IDENTITY_PROVIDERS,
+    GRANT_TYPES
+} from '@/constants';
 
 export default {
     computed:
     {
         ...mapState('f-analytics', [
-            'platformData',
             'userData',
             'pageData'
         ]),
 
         isServerSide () {
             return typeof (window) === 'undefined';
+        },
+
+        isDataLayerPresent () {
+            return typeof (window) !== 'undefined' && window.dataLayer;
         }
-
-    },
-
-    created () {
-        this.prepareServersideAnalytics();
     },
 
     methods: {
         ...mapActions('f-analytics', [
-            'updatePlatformData',
-            'updateUserData',
             'updatePageData'
         ]),
 
-        prepareServersideAnalytics () {
-            if (this.isServerSide) {
-                // Only available serverside
-                const platformData = { ...this.platformData };
-                const pageData = { ...this.pageData };
-
-                platformData.environment = process.env.justEatEnvironment || 'localhost';
-                platformData.version = process.env.FEATURE_VERSION || '0.0.0.0';
-                platformData.instancePosition = process.env.INSTANCE_POSITION || 'N/A';
-                // Is of type `httponly` so need to read serverside
-                platformData.jeUserPercentage = this.$cookies.get('je-user_percentage') || null;
-
-                pageData.httpStatusCode = this.$ssrContext?.res?.statusCode || 0;
-
-                this.updatePlatformData(platformData);
-                this.updatePageData(pageData);
-            }
-        },
-
-        preparePlatformData () {
-            const platformData = { ...this.platformData };
-
-            platformData.name = mapRouteToFeature(this.$route.name);
-            platformData.appType = DEFAULT_APP_TYPE;
-            platformData.applicationId = DEFAULT_APP_ID;
-            platformData.userAgent = navigator.userAgent || 'N/A';
-            platformData.branding = COUNTRY_INFO[this.$i18n.locale].brand;
-            platformData.country = COUNTRY_INFO[this.$i18n.locale].country;
-            platformData.language = COUNTRY_INFO[this.$i18n.locale].language;
-            platformData.currency = COUNTRY_INFO[this.$i18n.locale].currency;
-
-            this.updatePlatformData(platformData);
-        },
-
-        prepareUserData (authToken) {
+        pushUserData (authToken) {
             const userData = { ...this.userData };
 
-            userData['a-UserId'] = this.$cookies.get('je-auser') || undefined;
+            // TODO - Read manually to reduce need on global '$cookies'
+            if (this.$cookies) {
+                const value = this.$cookies.get('je-auser');
+                if (value) userData['a-UserId'] = value;
+            }
 
             if (authToken) {
                 const tokenData = jwtDecode(authToken);
@@ -91,13 +54,13 @@ export default {
                 userData.signupDate = tokenData?.created_date || undefined;
             }
 
-            this.updateUserData(userData);
+            if (this.isDataLayerPresent) {
+                window.dataLayer.push({ userData: { ...userData } });
+            }
         },
 
-        preparePageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
-            const pageData = {
-                ...this.pageData
-            };
+        pushPageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
+            const pageData = { ...this.pageData };
 
             pageData.group = mapRouteToGroup(this.$route.name);
             pageData.name = mapRouteToFeature(this.$route.name);
@@ -116,15 +79,10 @@ export default {
             }
 
             this.updatePageData(pageData);
-        },
 
-        pushAnalytics () {
-            const dataLayer = window.dataLayer || [];
-            dataLayer.push({
-                platformData: { ...this.platformData },
-                userData: { ...this.userData },
-                pageData: { ...this.pageData }
-            });
+            if (this.isDataLayerPresent) {
+                window.dataLayer.push({ pageData: { ...this.pageData } });
+            }
         }
     }
 };
