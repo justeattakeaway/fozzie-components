@@ -2,6 +2,7 @@ import axios from 'axios';
 import CheckoutModule from '../checkout.module';
 import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
+import basketDeliveryAgeRestricted from '../../demo/get-basket-delivery-age-restriction.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
@@ -35,7 +36,8 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_MESSAGE,
     UPDATE_ADDRESS,
-    UPDATE_PHONE_NUMBER
+    UPDATE_PHONE_NUMBER,
+    UPDATE_DATE_OF_BIRTH
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -53,6 +55,7 @@ const {
     updateCheckout,
     updateAddressDetails,
     updateCustomerDetails,
+    updateDateOfBirth,
     updateFulfilmentTime,
     updateMessage,
     updateUserNote,
@@ -84,6 +87,7 @@ const locationData = {
 };
 
 const basketId = 'newbasketid0001-v1';
+const dateOfBirth = new Date(1987, 7, 4);
 
 const time = {
     from: 'fromTime',
@@ -121,7 +125,8 @@ const defaultState = {
         firstName: '',
         lastName: '',
         email: '',
-        mobileNumber: ''
+        mobileNumber: '',
+        dateOfBirth: null
     },
     orderId: '',
     time: {
@@ -346,6 +351,16 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(state.customer.mobileNumber).toEqual(phoneNumber);
+            });
+        });
+
+        describe(`${UPDATE_DATE_OF_BIRTH} ::`, () => {
+            it('should update state with received values', () => {
+                // Act
+                mutations[UPDATE_DATE_OF_BIRTH](state, dateOfBirth);
+
+                // Assert
+                expect(state.customer.dateOfBirth).toEqual(dateOfBirth);
             });
         });
 
@@ -597,7 +612,32 @@ describe('CheckoutModule', () => {
                     basket: {
                         id: basketDelivery.BasketId,
                         total: basketDelivery.BasketSummary.BasketTotals.Total
-                    }
+                    },
+                    ageRestricted: false
+                });
+            });
+            describe('When there are age restricted items', () => {
+                it(`should get the basket details from the backend, set ageRestricted to 'true' and call ${UPDATE_BASKET_DETAILS} mutation.`, async () => {
+                    // Arrange
+                    basketApi.getBasket = jest.fn(() => Promise.resolve({ data: basketDeliveryAgeRestricted }));
+
+                    // Act
+                    await getBasket(context, payload);
+
+                    // Assert
+                    expect(basketApi.getBasket).toHaveBeenCalledWith(payload.url, payload.tenant, payload.language, payload.timeout);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
+                        serviceType: basketDeliveryAgeRestricted.ServiceType.toLowerCase(),
+                        restaurant: {
+                            id: basketDeliveryAgeRestricted.RestaurantId,
+                            seoName: basketDeliveryAgeRestricted.RestaurantSeoName
+                        },
+                        basket: {
+                            id: basketDeliveryAgeRestricted.BasketId,
+                            total: basketDeliveryAgeRestricted.BasketSummary.BasketTotals.Total
+                        },
+                        ageRestricted: true
+                    });
                 });
             });
         });
@@ -1105,6 +1145,7 @@ describe('CheckoutModule', () => {
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateUserNote, UPDATE_USER_NOTE, userNote],
+            [updateDateOfBirth, UPDATE_DATE_OF_BIRTH, dateOfBirth],
             [updateMessage, UPDATE_MESSAGE, message]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act

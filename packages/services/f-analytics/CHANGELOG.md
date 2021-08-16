@@ -6,10 +6,33 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.9.0
 ------------------------------
-*August 11, 2021*
+*August 16, 2021*
 
 ### Changed
 - Moved the prepUserData from Mixin into Service to allow the consumer to dictate when to push the GA data.
+
+
+v0.8.0
+------------------------------
+*August 12, 2021*
+
+### Added
+- Added push ad-hoc event method to global var
+
+### Changed
+- Moved the preparation of the server side plaform data to a plugin.
+- Refactored the Store to allow store serverside events to be stored until clientside.
+
+
+v0.7.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- `PreparePageData` method
+
+### Changed
+- Replaced `MAP_ROUTE_TO_FEATURE_NAME` const with `mapRouteToGroup` & `mapRouteToFeature`
 
 
 v0.6.0

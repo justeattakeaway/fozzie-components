@@ -6,6 +6,19 @@
   "BasketSummary": {
     "BasketTotals": {
       "Total": 23.55
+    },
+    "Prompts": {
+      "SpendMore": null,
+      "DiscountApplied": {
+        "Amount": 0
+      },
+      "Offers": [],
+      "InvalidProducts": [],
+      "OfflineProducts": [],
+      "RequiresOther": false,
+      "RefreshMenu": false,
+      "Restrictions": [],
+      "ItemDiscounts": []
     }
   }
 }

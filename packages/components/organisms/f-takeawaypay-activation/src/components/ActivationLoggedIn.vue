@@ -7,11 +7,13 @@
             {{ $t('messages.titleActivationAvailable', { consumerGivenName }) }}
         </h1>
 
-        <p>
+        <p
+            :class="$style['c-takeawaypayActivation-description']">
             {{ $t('messages.descriptionActivationAvailable1') }} <span :class="$style['c-takeawaypayActivation-email']">{{ consumerEmail }}</span>
         </p>
 
-        <p>
+        <p
+            :class="$style['c-takeawaypayActivation-description']">
             {{ $t('messages.descriptionActivationAvailable2') }}
         </p>
 
