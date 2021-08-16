@@ -17,6 +17,8 @@ export { default as AppMicrosoftDkIcon } from '../icons/AppMicrosoftDkIcon';
 export { default as ArrowIcon } from '../icons/ArrowIcon';
 export { default as BagCelebrateBgIcon } from '../icons/BagCelebrateBgIcon';
 export { default as BagCelebrateIcon } from '../icons/BagCelebrateIcon';
+export { default as BagRunBgIcon } from '../icons/BagRunBgIcon';
+export { default as BagSadBgIcon } from '../icons/BagSadBgIcon';
 export { default as BagIcon } from '../icons/BagIcon';
 export { default as BasketIcon } from '../icons/BasketIcon';
 export { default as BinIcon } from '../icons/BinIcon';
