@@ -1,21 +1,23 @@
-import AnalyticService from '@/services/analytics.service';
 import analyticsModule from '@/store/analytics.module';
-import {
-    PUSH_PLATFORM_DATA,
-    PUSH_EVENT
-} from '@/store/mutation-types';
-import { mapServersidePlatformData } from '@/services/analytics.mapper';
+import AnalyticService from '@/services/analytics.service';
+import { mapServersidePlatformData, mapServersidePageData } from '@/services/analytics.mapper';
 
-const defaultOptions = require('../../defaultOptions');
+const defaultOptions = require('../defaultOptions');
 
-const prepareServersideValues = (store, req, options) => {
+const prepareServersideValues = (store, req, res, options) => {
     // Only available serverside
     if (typeof (window) === 'undefined') {
         const platformData = { ...store.state[`${options.namespace}`].platformData };
 
         mapServersidePlatformData(platformData, req);
 
-        store.dispatch(`${options.namespace}/${PUSH_PLATFORM_DATA}`, platformData);
+        store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
+
+        const pageData = { ...store.state[`${options.namespace}`].pageData };
+
+        mapServersidePageData(pageData, res);
+
+        store.dispatch(`${options.namespace}/updatePageData`, pageData);
     }
 };
 
@@ -62,7 +64,7 @@ const preparePageTags = options => {
     }
 };
 
-export default ({ store, req }, inject, _options) => {
+export default ({ store, req, res }, inject, _options) => {
     const options = {
         ...defaultOptions,
         ..._options
@@ -72,12 +74,12 @@ export default ({ store, req }, inject, _options) => {
 
     registerStoreModule(store, options);
 
-    prepareServersideValues(store, req, options);
+    prepareServersideValues(store, req, res, options);
 
     const service = new AnalyticService(store, req, options);
 
     inject(options.globalVarName, service);
 
-    // Flush any stored events
-    store.dispatch(`${options.namespace}/${PUSH_EVENT}`);
+    // If clientside, flush any stored serverside events
+    service.pushEvent();
 };

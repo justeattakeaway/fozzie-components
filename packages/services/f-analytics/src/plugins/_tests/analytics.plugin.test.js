@@ -2,14 +2,16 @@ import AnalyticsPlugin from '@/plugins/analytics.plugin';
 import AnalyticService from '@/services/analytics.service';
 import {
     defaultState,
+    newEvent,
     options
 } from '@/tests/helpers/setup';
 import {
-    PUSH_PLATFORM_DATA,
-    PUSH_EVENT
+    UPDATE_PLATFORM_DATA,
+    UPDATE_PAGE_DATA,
+    CLEAR_EVENTS
 } from '@/store/mutation-types';
 
-const defaultOptions = require('../../../defaultOptions');
+const defaultOptions = require('../../defaultOptions');
 
 describe('Analytics Plugin ::', () => {
     afterEach(() => {
@@ -22,17 +24,23 @@ describe('Analytics Plugin ::', () => {
         let context;
         let injectSpy;
         let defaultStore;
+        let state;
 
         beforeEach(() => {
-            // Arrange
+            // Arrange - store
             storeDispatchSpy = jest.fn();
             storeModuleSpy = jest.fn(() => true);
+            state = [`${options.namespace}`];
+            state[`${options.namespace}`] = { ...defaultState };
             defaultStore = {
+                state,
                 dispatch: storeDispatchSpy,
                 hasModule: storeModuleSpy
             };
-            context = { store: defaultStore, req: jest.fn() };
+            // Arrange - context
+            context = { store: defaultStore, req: jest.fn(), res: jest.fn() };
             injectSpy = jest.fn(() => {});
+            // Arrange - window state
             const originalWindow = { ...window };
             jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
                 ...originalWindow,
@@ -87,37 +95,58 @@ describe('Analytics Plugin ::', () => {
         });
 
         it('should flush any stored events', () => {
+            // Arrange - context
+            context.store.state[`${options.namespace}`].events.push(newEvent);
+            // Arrange - window state
+            const windowsPushSpy = jest.fn();
+            const originalWindow = { ...window };
+            jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
+                ...originalWindow,
+                dataLayer: {
+                    push: windowsPushSpy
+                }
+            }));
+
             // Act
             AnalyticsPlugin(context, injectSpy, options);
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${PUSH_EVENT}`);
+            expect(windowsPushSpy).toHaveBeenCalledWith({ ...newEvent });
+            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${CLEAR_EVENTS}`);
         });
     });
 
     describe('When registering the store module', () => {
         let registerStoreModuleSpy;
         let context;
+        let state;
 
         beforeEach(() => {
-            // Arrange
+            // Arrange - store
+            state = [`${options.namespace}`];
+            state[`${options.namespace}`] = { ...defaultState };
+            // Arrange - window state
             const originalWindow = { ...window };
             jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
                 ...originalWindow,
-                dataLayer: {}
+                dataLayer: {
+                    push: jest.fn()
+                }
             }));
         });
 
         it('should register the module if not already registered', () => {
-            // Arrange
+            // Arrange - store
             registerStoreModuleSpy = jest.fn(() => true);
             context = {
                 store: {
+                    state,
                     dispatch: jest.fn(),
                     hasModule: jest.fn(() => false),
                     registerModule: registerStoreModuleSpy
                 },
-                req: jest.fn()
+                req: jest.fn(),
+                res: jest.fn()
             };
 
             // Act
@@ -128,15 +157,17 @@ describe('Analytics Plugin ::', () => {
         });
 
         it('should not register the module if already registered', () => {
-            // Arrange
+            // Arrange - store
             registerStoreModuleSpy = jest.fn(() => true);
             context = {
                 store: {
+                    state,
                     dispatch: jest.fn(),
                     hasModule: jest.fn(() => true),
                     registerModule: registerStoreModuleSpy
                 },
-                req: jest.fn()
+                req: jest.fn(),
+                res: jest.fn()
             };
 
             // Act
@@ -149,16 +180,22 @@ describe('Analytics Plugin ::', () => {
 
     describe('When preparing the page with GTM Tags', () => {
         let context;
+        let state;
 
         beforeEach(() => {
-            // Arrange
+            // Arrange - store
+            state = [`${options.namespace}`];
+            state[`${options.namespace}`] = { ...defaultState };
             context = {
                 store: {
+                    state,
                     dispatch: jest.fn(),
                     hasModule: jest.fn(() => true)
                 },
-                req: jest.fn()
+                req: jest.fn(),
+                res: jest.fn()
             };
+            // Arrange - window state
             const originalWindow = { ...window };
             jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
                 ...originalWindow,
@@ -177,7 +214,7 @@ describe('Analytics Plugin ::', () => {
         });
 
         it('should append the querystring within tags if options supplied', () => {
-            // Arrange
+            // Arrange - options
             const currentRegisteredGtmIdOptions = {
                 ...options,
                 auth: 'someAuthKey',
@@ -196,12 +233,15 @@ describe('Analytics Plugin ::', () => {
         });
 
         it('should not attempt to re-append the tags if already present', () => {
-            // Arrange
+            // Arrange - window state
             const originalWindow = { ...window };
             jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
                 ...originalWindow,
-                dataLayer: {}
+                dataLayer: {
+                    push: jest.fn()
+                }
             }));
+            // Arrange - options
             const newRegisteredGtmIdOptions = { ...options, id: 'GTM-9999999' };
 
             // Act
@@ -217,29 +257,42 @@ describe('Analytics Plugin ::', () => {
         let context;
         let storeDispatchSpy;
         let state;
+        let store;
+        let req;
+        let res;
 
         beforeEach(() => {
-            // Arrange
+            // Arrange - store
             state = [`${options.namespace}`];
-            state[`${options.namespace}`] = { platformData: defaultState };
+            state[`${options.namespace}`] = { ...defaultState };
             storeDispatchSpy = jest.fn();
-            context = {
-                store: {
-                    state,
-                    dispatch: storeDispatchSpy,
-                    hasModule: jest.fn(() => true)
-                },
-                req: {
-                    headers: {
-                        cookie: 'je-user_percentage=35'
-                    }
+            store = {
+                state,
+                dispatch: storeDispatchSpy,
+                hasModule: jest.fn(() => true)
+            };
+            // Arrange - request
+            req = {
+                headers: {
+                    cookie: 'je-user_percentage=35'
                 }
             };
+            // Arrange - response
+            res = {
+                statusCode: 201
+            };
+            // Arrange - context
+            context = {
+                store,
+                req,
+                res
+            };
+            // Arrange - window state
             jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
         });
 
         it('should not attempt set the serverside only platformData properties if clientside', () => {
-            // Arrange
+            // Arrange - window state
             const originalWindow = { ...window };
             jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
                 ...originalWindow
@@ -249,22 +302,11 @@ describe('Analytics Plugin ::', () => {
             AnalyticsPlugin(context, jest.fn(), options);
 
             // Assert
-            expect(storeDispatchSpy).not.toHaveBeenCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expect.anything());
+            expect(storeDispatchSpy).not.toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expect.anything());
         });
 
-        it('should leave the platformData environment properties with appropriate defaults if values not available and serverside', () => {
-            // Arrange
-            const expected = { ...defaultState, jeUserPercentage: '35' };
-
-            // Act
-            AnalyticsPlugin(context, jest.fn(), options);
-
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expected);
-        });
-
-        it('should leave the platformData jeUserPercentage property with default if not available and serverside', () => {
-            // Arrange
+        it('should leave the platformData properties with defaults if data not available and serverside', () => {
+            // Arrange - context
             const ctx = {
                 ...context,
                 req: {
@@ -273,22 +315,22 @@ describe('Analytics Plugin ::', () => {
                     }
                 }
             };
-            const expected = defaultState;
+            const expected = { ...defaultState.platformData };
 
             // Act
             AnalyticsPlugin(ctx, jest.fn(), options);
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expected);
+            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expected);
         });
 
-        it('should set the platformData properties with appropriate values if available and serverside', () => {
+        it('should set the platformData properties with data if available and serverside', () => {
             // Arrange
             process.env.justEatEnvironment = 'testing123';
             process.env.FEATURE_VERSION = '4.3.2.1';
             process.env.INSTANCE_POSITION = '099';
             const expected = {
-                ...defaultState,
+                ...defaultState.platformData,
                 environment: process.env.justEatEnvironment,
                 version: process.env.FEATURE_VERSION,
                 instancePosition: process.env.INSTANCE_POSITION,
@@ -299,7 +341,38 @@ describe('Analytics Plugin ::', () => {
             AnalyticsPlugin(context, jest.fn(), options);
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${PUSH_PLATFORM_DATA}`, expected);
+            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expected);
+        });
+
+        it('should leave the pageData properties with defaults if data not available and serverside', () => {
+            // Arrange - context
+            const ctx = {
+                ...context,
+                res: {
+                    httpStatusCode: undefined
+                }
+            };
+            const expected = { ...defaultState.pageData, httpStatusCode: 0 };
+
+            // Act
+            AnalyticsPlugin(ctx, jest.fn(), options);
+
+            // Assert
+            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PAGE_DATA}`, expected);
+        });
+
+        it('should set the pageData properties with data if available and serverside', () => {
+            // Arrange
+            const expected = {
+                ...defaultState.pageData,
+                httpStatusCode: 201
+            };
+
+            // Act
+            AnalyticsPlugin(context, jest.fn(), options);
+
+            // Assert
+            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PAGE_DATA}`, expected);
         });
     });
 });

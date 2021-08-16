@@ -18,17 +18,27 @@ const defaultState = {
         instancePosition: 'N/A'
     },
     userData: {
-        'a-UserId': '',
+        'a-UserId': undefined,
         authType: undefined,
         email: undefined,
         globalUserId: undefined,
         signinType: undefined,
         signupDate: undefined
     },
+    pageData: {
+        name: '',
+        group: '',
+        httpStatusCode: 0,
+        isCached: false,
+        conversationId: '',
+        requestId: '',
+        orientation: '',
+        display: ''
+    },
     events: []
 };
 
-const modifieldState = {
+const modifiedState = {
     platformData: {
         environment: 'test-environment',
         name: 'test-name',
@@ -51,7 +61,16 @@ const modifieldState = {
         signinType: 'Email',
         signupDate: '2021-05-12T10:57:05.9130000Z'
     },
-    events: []
+    pageData: {
+        name: 'test-name',
+        group: 'test-group',
+        httpStatusCode: 200,
+        isCached: false,
+        conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
+        requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
+        orientation: 'Landscape',
+        display: 'wide'
+    }
 };
 
 const newEvent = {
@@ -67,16 +86,34 @@ const newEvent = {
     }
 };
 
+const options = {
+    namespace: 'f-analytics',
+    featureName: 'test-route-name',
+    locale: 'en-GB',
+    id: 'GTM-0000000'
+};
+
 const defaultActions = {
-    pushPlatformData: jest.fn(),
-    pushUserData: jest.fn(),
-    pushEvent: jest.fn()
+    updatePlatformData: jest.fn(),
+    updatePageData: jest.fn(),
+    updateEvents: jest.fn()
+};
+
+const defaultGetters = {};
+
+const defaultMutations = {
+    updatePlatformData: jest.fn(),
+    updatePageData: jest.fn(),
+    updateEvents: jest.fn(),
+    clearEvents: jest.fn()
 };
 
 const createStore = ({
-    name = 'f-analytics',
+    name = options.namespace,
     state = defaultState,
-    actions = defaultActions
+    actions = defaultActions,
+    getters = defaultGetters,
+    mutations = defaultMutations
 } = {}) => {
     Vue.use(Vuex);
     return new Vuex.Store({
@@ -84,7 +121,9 @@ const createStore = ({
             [`${name}`]: {
                 namespaced: true,
                 state,
-                actions
+                actions,
+                getters,
+                mutations
             },
             hasModule: jest.fn(() => true)
         }
@@ -103,17 +142,10 @@ const $i18n = {
     locale: 'en-GB'
 };
 
-const options = {
-    namespace: 'f-analytics',
-    featureName: 'test-route-name',
-    locale: 'en-GB',
-    id: 'GTM-0000000'
-};
-
 export {
     defaultState,
     defaultActions,
-    modifieldState,
+    modifiedState,
     newEvent,
     createStore,
     $cookies,
@@ -121,4 +153,3 @@ export {
     $i18n,
     options
 };
-

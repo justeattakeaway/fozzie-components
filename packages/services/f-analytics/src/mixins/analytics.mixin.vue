@@ -1,68 +1,57 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import {
-    COUNTRY_INFO,
-    DEFAULT_APP_ID,
-    DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME
-} from '@/constants';
+    getDisplaySize,
+    getOrientation,
+    mapRouteToGroup,
+    mapRouteToFeature
+} from '@/utils/helpers';
 
 export default {
     computed:
     {
         ...mapState('f-analytics', [
-            'platformData',
-            'userData'
+            'pageData'
         ]),
 
         isServerSide () {
             return typeof (window) === 'undefined';
-        }
-    },
+        },
 
-    created () {
-        this.prepareServersideAnalytics();
+        isDataLayerPresent () {
+            return typeof (window) !== 'undefined' && window.dataLayer;
+        }
     },
 
     methods: {
         ...mapActions('f-analytics', [
-            'pushPlatformData',
-            'pushUserData'
+            'updatePageData'
         ]),
 
-        prepareServersideAnalytics () {
-            if (this.isServerSide) {
-                // Only available serverside
-                const platformData = { ...this.platformData };
+        pushPageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
+            const pageData = { ...this.pageData };
 
-                if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
-                if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
-                if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
+            pageData.group = mapRouteToGroup(this.$route.name);
+            pageData.name = mapRouteToFeature(this.$route.name);
 
-                // TODO - Read manually to reduce need on global '$cookies'
-                if (this.$cookies) {
-                    // This cookie is marked as `httponly` so need to read serverside
-                    const value = this.$cookies.get('je-user_percentage');
-                    if (value) platformData.jeUserPercentage = value;
-                }
-
-                this.pushPlatformData(platformData);
+            if (pageData.name === 'Checkout 1 Overview' && !authToken) {
+                pageData.name = 'Checkout 1 Guest';
             }
-        },
 
-        preparePlatformData () {
-            const platformData = { ...this.platformData };
+            pageData.isCached = false;
+            pageData.conversationId = conversationId;
+            pageData.requestId = requestId;
 
-            platformData.name = MAP_ROUTE_TO_FEATURE_NAME[this.$route.name] || this.$route.name;
-            platformData.appType = DEFAULT_APP_TYPE;
-            platformData.applicationId = DEFAULT_APP_ID;
-            platformData.userAgent = navigator.userAgent || 'N/A';
-            platformData.branding = COUNTRY_INFO[this.$i18n.locale].brand;
-            platformData.country = COUNTRY_INFO[this.$i18n.locale].country;
-            platformData.language = COUNTRY_INFO[this.$i18n.locale].language;
-            platformData.currency = COUNTRY_INFO[this.$i18n.locale].currency;
+            if (!this.isServerSide) {
+                pageData.display = getDisplaySize();
+                pageData.orientation = getOrientation();
+            }
 
-            this.pushPlatformData(platformData);
+            this.updatePageData(pageData);
+
+            if (this.isDataLayerPresent) {
+                window.dataLayer.push({ pageData: { ...this.pageData } });
+            }
         }
     }
 };

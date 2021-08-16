@@ -1,17 +1,23 @@
-import AnalyticsModule from '@/store/analytics.module';
 import {
     defaultState,
-    modifieldState,
+    modifiedState,
     newEvent
 } from '@/tests/helpers/setup';
+import AnalyticsModule from '@/store/analytics.module';
 import {
-    PUSH_PLATFORM_DATA,
-    PUSH_EVENT,
+    UPDATE_PLATFORM_DATA,
+    UPDATE_PAGE_DATA,
+    UPDATE_EVENTS,
     CLEAR_EVENTS
-} from '../mutation-types';
+} from '@/store/mutation-types';
 
 const { actions, mutations } = AnalyticsModule;
-const { pushPlatformData, pushUserData, pushEvent } = actions;
+const {
+    updatePlatformData,
+    updatePageData,
+    updateEvents,
+    clearEvents
+} = actions;
 
 describe('Analytics Module ::', () => {
     let state;
@@ -20,19 +26,7 @@ describe('Analytics Module ::', () => {
     beforeEach(() => {
         // Arrange
         state = Object.assign({}, defaultState); // eslint-disable-line
-        commit = jest.fn((mutation, mutationPayload) => {
-            // Replace the current state with the modified during the test
-            // thus allow assertions on the final state
-            if (mutation === PUSH_PLATFORM_DATA) {
-                state.platformData = { ...state.platformData, ...mutationPayload };
-            }
-            if (mutation === PUSH_EVENT) {
-                state.events = [...state.events, mutationPayload];
-            }
-            if (mutation === CLEAR_EVENTS) {
-                state.events = [];
-            }
-        });
+        commit = jest.fn();
     });
 
     afterEach(() => {
@@ -45,239 +39,55 @@ describe('Analytics Module ::', () => {
     });
 
     describe('actions ::', () => {
-        describe('pushPlatformData ::', () => {
-            it('should call the `pushPlatformData` mutation', () => {
+        describe('updatePlatformData ::', () => {
+            it('should call the `updatePlatformData` mutation', () => {
                 // Act
-                pushPlatformData({ commit, state }, modifieldState.platformData);
+                updatePlatformData({ commit }, modifiedState.platformData);
 
                 // Assert
-                expect(commit).toHaveBeenLastCalledWith('pushPlatformData', modifieldState.platformData);
-            });
-
-            it('should push the `platformData` if clientside & dataLayer present', () => {
-                // Arrange
-                const windowsPushSpy = jest.fn();
-                const originalWindow = { ...window };
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: {
-                        push: windowsPushSpy
-                    }
-                }));
-
-                // Act
-                pushPlatformData({ commit, state }, modifieldState.platformData);
-
-                // Assert
-                expect(windowsPushSpy).toHaveBeenLastCalledWith({ platformData: { ...modifieldState.platformData } });
-            });
-
-            it('should not push the `platformData` if serverside', () => {
-                // Arrange
-                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
-
-                // Act
-                pushPlatformData({ commit, state }, modifieldState.platformData);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(state.platformData).toEqual(modifieldState.platformData);
-            });
-
-            it('should not push the `platformData` if clientside & dataLayer not present', () => {
-                // Arrange
-                const windowsPushSpy = jest.fn();
-                const originalWindow = { ...window };
-                const windowSpy = jest.spyOn(global, 'window', 'get');
-                windowSpy.mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: {
-                        push: windowsPushSpy
-                    }
-                }));
-                windowSpy.mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: undefined
-                }));
-
-                // Act
-                pushPlatformData({ commit, state }, modifieldState.platformData);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(state.platformData).toEqual(modifieldState.platformData);
+                expect(commit).toHaveBeenLastCalledWith('updatePlatformData', modifiedState.platformData);
             });
         });
 
-        describe('pushUserData ::', () => {
-            it('should push the `pushUserData` if clientside & dataLayer present', () => {
-                // Arrange
-                const windowsPushSpy = jest.fn();
-                const originalWindow = { ...window };
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: {
-                        push: windowsPushSpy
-                    }
-                }));
-
+        describe('updatePageData ::', () => {
+            it('should call the `updatePageData` mutation', () => {
                 // Act
-                pushUserData(modifieldState.userData);
+                updatePageData({ commit }, modifiedState.pageData);
 
                 // Assert
-                expect(windowsPushSpy).toHaveBeenLastCalledWith({ userData: { ...modifieldState.userData } });
-            });
-
-            it('should not push the `pushUserData` if serverside', () => {
-                // Arrange
-                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
-
-                // Act
-                pushUserData(modifieldState.userData);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-            });
-
-            it('should not push the `pushUserData` if clientside & dataLayer not present', () => {
-                // Arrange
-                const windowsPushSpy = jest.fn();
-                const originalWindow = { ...window };
-                const windowSpy = jest.spyOn(global, 'window', 'get');
-                windowSpy.mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: {
-                        push: windowsPushSpy
-                    }
-                }));
-                windowSpy.mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: undefined
-                }));
-
-                // Act
-                pushUserData(modifieldState.userData);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
+                expect(commit).toHaveBeenLastCalledWith('updatePageData', modifiedState.pageData);
             });
         });
 
-        describe('pushEvent ::', () => {
-            it('should call the `pushEvent` mutation', () => {
+        describe('updateEvents ::', () => {
+            it('should call the `updateEvents` mutation', () => {
                 // Act
-                pushEvent({ commit, state }, newEvent);
+                updateEvents({ commit }, newEvent);
 
                 // Assert
-                expect(commit).toHaveBeenLastCalledWith('pushEvent', newEvent);
+                expect(commit).toHaveBeenLastCalledWith('updateEvents', newEvent);
             });
+        });
 
-            it('should push the `events` then clear `events` if clientside & dataLayer present', () => {
-                // Arrange
-                const windowsPushSpy = jest.fn();
-                const originalWindow = { ...window };
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: {
-                        push: windowsPushSpy
-                    }
-                }));
-
+        describe('clearEvents ::', () => {
+            it('should call the `clearEvents` mutation', () => {
                 // Act
-                pushEvent({ commit, state }, newEvent);
+                clearEvents({ commit });
 
                 // Assert
-                expect(windowsPushSpy).toHaveBeenLastCalledWith({ ...newEvent });
                 expect(commit).toHaveBeenLastCalledWith(CLEAR_EVENTS);
-                expect(state.events).toEqual([]);
-            });
-
-            it('should wait until clientside to push the server side & client side `events` then clear `events`', () => {
-                // Arrange - Serverside
-                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
-                const serversideEvent = { ...newEvent, event: 'serverside-event' };
-
-                // Act -1
-                pushEvent({ commit, state }, serversideEvent);
-
-                // Assert - 1
-                expect(commit).toHaveBeenLastCalledWith('pushEvent', serversideEvent);
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(commit).not.toHaveBeenCalledWith(CLEAR_EVENTS);
-                expect(state.events).toEqual([{ ...serversideEvent }]);
-
-                // Arrange - Clientside
-                const originalWindow = { ...window };
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: {
-                        push: windowsPushSpy
-                    }
-                }));
-                const clientsideEvent = { ...newEvent, event: 'clientside-event' };
-
-                // Act -2
-                pushEvent({ commit, state }, clientsideEvent);
-
-                // Assert - 2
-                expect(windowsPushSpy).toHaveBeenCalledTimes(2);
-                expect(windowsPushSpy).toHaveBeenCalledWith({ ...serversideEvent });
-                expect(windowsPushSpy).toHaveBeenCalledWith({ ...clientsideEvent });
-                expect(commit).toHaveBeenCalledWith('pushEvent', clientsideEvent);
-                expect(commit).toHaveBeenLastCalledWith(CLEAR_EVENTS);
-                expect(state.events).toEqual([]);
-            });
-
-            it('should not push the `events` nor clear `events` if serverside', () => {
-                // Arrange
-                const windowsPushSpy = jest.spyOn(window.dataLayer, 'push');
-                jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
-
-                // Act
-                pushEvent({ commit, state }, newEvent);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(state.events).toEqual([newEvent]);
-            });
-
-            it('should not push the the `events` nor clear `events` if clientside & dataLayer not present', () => {
-                // Arrange
-                const windowsPushSpy = jest.fn();
-                const originalWindow = { ...window };
-                const windowSpy = jest.spyOn(global, 'window', 'get');
-                windowSpy.mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: {
-                        push: windowsPushSpy
-                    }
-                }));
-                windowSpy.mockImplementation(() => ({
-                    ...originalWindow,
-                    dataLayer: undefined
-                }));
-
-                // Act
-                pushEvent({ commit, state }, newEvent);
-
-                // Assert
-                expect(windowsPushSpy).not.toHaveBeenCalled();
-                expect(state.events).toEqual([newEvent]);
             });
         });
     });
 
     describe('mutations ::', () => {
-        describe(`${PUSH_PLATFORM_DATA} ::`, () => {
+        describe(`${UPDATE_PLATFORM_DATA} ::`, () => {
             it('should update state with `platformData`', () => {
                 // Act
-                mutations[PUSH_PLATFORM_DATA](state, modifieldState.platformData);
+                mutations[UPDATE_PLATFORM_DATA](state, modifiedState.platformData);
 
                 // Assert
-                expect(state.platformData).toEqual(modifieldState.platformData);
+                expect(state.platformData).toEqual(modifiedState.platformData);
             });
 
             it('should not overwrite the serverside platformData when saving the clientside platformData', () => {
@@ -303,17 +113,55 @@ describe('Analytics Module ::', () => {
                 const expected = { ...currentState.platformData, ...clientsidePlatformData };
 
                 // Act
-                mutations.pushPlatformData(currentState, clientsidePlatformData);
+                mutations[UPDATE_PLATFORM_DATA](currentState, clientsidePlatformData);
 
                 // Assert
                 expect(currentState.platformData).toEqual(expected);
             });
         });
 
-        describe(`${PUSH_EVENT} ::`, () => {
-            it('should update state with a new `event`', () => {
+        describe(`${UPDATE_PAGE_DATA} ::`, () => {
+            it('should update state with `pageData`', () => {
                 // Act
-                mutations[PUSH_EVENT](state, newEvent);
+                mutations[UPDATE_PAGE_DATA](state, modifiedState.pageData);
+
+                // Assert
+                expect(state.pageData).toEqual(modifiedState.pageData);
+            });
+
+            it('should not overwrite the serverside pageData when saving the clientside pageData', () => {
+                // Arrange
+                const currentState = {
+                    pageData: {
+                        httpStatusCode: 200
+                    }
+                };
+                const clientsidePageData = {
+                    name: 'test-name',
+                    group: 'test-group',
+                    isCached: false,
+                    conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
+                    requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
+                    orientation: 'Landscape',
+                    display: 'wide'
+                };
+                const expected = { ...currentState.pageData, ...clientsidePageData };
+
+                // Act
+                mutations[UPDATE_PAGE_DATA](currentState, clientsidePageData);
+
+                // Assert
+                expect(currentState.pageData).toEqual(expected);
+            });
+        });
+
+        describe(`${UPDATE_EVENTS} ::`, () => {
+            it('should update state with a new `event`', () => {
+                // Arrange
+                state.events = [];
+
+                // Act
+                mutations[UPDATE_EVENTS](state, newEvent);
 
                 // Assert
                 expect(state.events).toEqual([newEvent]);
@@ -323,6 +171,7 @@ describe('Analytics Module ::', () => {
         describe(`${CLEAR_EVENTS} ::`, () => {
             it('should clear the state `events`', () => {
                 // Arrange
+                state.events = [];
                 state.events.push(newEvent);
 
                 // Act

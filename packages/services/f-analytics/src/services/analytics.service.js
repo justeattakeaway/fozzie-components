@@ -1,9 +1,6 @@
-import {
-    PUSH_PLATFORM_DATA,
-    PUSH_USER_DATA,
-    PUSH_EVENT
-} from '@/store/mutation-types';
 import { mapPlatformData, mapUserData } from './analytics.mapper';
+
+const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
 
 export default class AnalyticService {
     constructor (store, req, options) {
@@ -19,7 +16,11 @@ export default class AnalyticService {
 
         mapPlatformData(platformData, this.featureName, this.locale, this.req);
 
-        this.store.dispatch(`${this.namespace}/${PUSH_PLATFORM_DATA}`, platformData);
+        this.store.dispatch(`${this.namespace}/updatePlatformData`, platformData);
+
+        if (isDataLayerPresent()) {
+            window.dataLayer.push({ platformData: { ...this.store.state[`${this.namespace}`].platformData } });
+        }
 
         return platformData;
     }
@@ -29,13 +30,25 @@ export default class AnalyticService {
 
         mapUserData(userData, authToken, this.req);
 
-        this.store.dispatch(`${this.namespace}/${PUSH_USER_DATA}`, userData);
+        if (isDataLayerPresent()) {
+            window.dataLayer.push({ userData: { ...userData } });
+        }
 
         return userData;
     }
 
     pushEvent (event) {
-        this.store.dispatch(`${this.namespace}/${PUSH_EVENT}`, event);
+        if (event) {
+            this.store.dispatch(`${this.namespace}/updateEvents`, event);
+        }
+
+        if (isDataLayerPresent()) {
+            const events = [...this.store.state[`${this.namespace}`].events];
+
+            events.forEach(e => window.dataLayer.push({ ...e }));
+
+            this.store.dispatch(`${this.namespace}/clearEvents`);
+        }
 
         return event;
     }

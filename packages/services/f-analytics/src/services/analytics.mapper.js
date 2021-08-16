@@ -46,6 +46,10 @@ export const mapServersidePlatformData = (platformData, req) => {
     if (userPercent) platformData.jeUserPercentage = userPercent;
 };
 
+export const mapServersidePageData = (pageData, res) => {
+    if (res.statusCode) pageData.httpStatusCode = res.statusCode;
+};
+
 export const mapPlatformData = (platformData, featureName, locale, req) => {
     platformData.name = featureName;
     platformData.appType = DEFAULT_APP_TYPE;
