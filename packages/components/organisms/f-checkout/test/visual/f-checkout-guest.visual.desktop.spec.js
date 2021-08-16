@@ -197,3 +197,68 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual 
         browser.percyScreenshot('f-checkout - Delivery - Guest - Pre-Order Warning', 'desktop');
     });
 });
+
+describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
+    beforeEach(() => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'dinein')
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', false);
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+    });
+
+    it('should display the component base state.', () => {
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine in - Guest - Base State', 'desktop');
+    });
+
+    it('should display the mandatory error messages', () => {
+        // Act
+        checkout.clearCheckoutForm('tableIdentifier');
+        checkout.clearBlurField('mobileNumber');
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine In - Guest - Manadatory Errors', 'desktop');
+    });
+
+    it('should display the illegal mobile number error message', () => {
+        // Arrange
+        const mobileNumberInfo = {
+            mobileNumber: '123'
+        };
+
+        // Act
+        checkout.clearBlurField('mobileNumber');
+        checkout.populateDineInCheckoutForm(mobileNumberInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine In - Guest - Illegal Mobile Number Error State', 'desktop');
+    });
+
+    it('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'dinein')
+            .withQuery('&knob-Is User Logged In', false)
+            .withQuery('&knob-Is ASAP available', false)
+            .withQuery('&knob-Place Order Errors', 'duplicate');
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine in - Guest - "Duplicate Order Warning" Modal', 'desktop');
+    });
+});
