@@ -2,7 +2,13 @@ import AnalyticService from '@/services/analytics.service';
 import {
     createStore,
     newEvent,
-    options
+    options,
+    userIdFromCookie,
+    authTokenRegistered,
+    authTokenGuest,
+    userDataWithAuthTokenRegistered,
+    userDataWithAuthTokenGuest,
+    userDataWithoutAuthToken
 } from '@/tests/helpers/setup';
 import analyticModule from '@/store/analytics.module';
 
@@ -55,7 +61,6 @@ describe('Analytic Service ::', () => {
         it('should dispatch the `event` to the store', () => {
             // Arrange
             const expectedEvent = { ...newEvent };
-            // store.state[`${options.namespace}`].events.push(expectedEvent);
 
             // Act
             service.pushEvent(newEvent);
@@ -96,7 +101,6 @@ describe('Analytic Service ::', () => {
                     userAgent: navigator.userAgent,
                     version: '0.0.0.0'
                 };
-                // store.state[`${options.namespace}`].platformData = expectedPlatformData;
                 options.locale = localeArg;
                 service = new AnalyticService(store, req, options);
 
@@ -111,50 +115,6 @@ describe('Analytic Service ::', () => {
     });
 
     describe('When pushing userData ::', () => {
-        const userIdFromCookie = 'fjdhskgshjgk';
-
-        const mockAuthTokenRegistered = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-        + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
-        + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
-        + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
-        + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
-        + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
-
-        const mockAuthTokenGuest = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-        + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZ'
-        + 'WF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW'
-        + '1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXp'
-        + 'PZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1p'
-        + 'bHlfbmFtZSI6IkJsb2dncyIsInN1YiI6IjEyMzQ1Iiwicm9sZSI6Ikd1ZXN0Ii'
-        + 'wiaWF0IjoxNjE1NDY5NTE2fQ.ngfAKpiMH4Gk0Y4gAVC4KeLadWFtVXx4hD1_BSW9SN0';
-
-        const userDataWithMockAuthTokenRegistered = {
-            'a-UserId': userIdFromCookie,
-            authType: 'Login',
-            email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
-            globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
-            signinType: 'Email',
-            signupDate: '2021-02-08T10:27:49.1930000Z'
-        };
-
-        const userDataWithMockAuthTokenGuest = {
-            'a-UserId': userIdFromCookie,
-            authType: 'Login',
-            email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
-            globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
-            signinType: 'Guest',
-            signupDate: '2021-02-08T10:27:49.1930000Z'
-        };
-
-        const userDataWithoutMockAuthToken = {
-            'a-UserId': userIdFromCookie,
-            authType: undefined,
-            email: undefined,
-            globalUserId: undefined,
-            signinType: undefined,
-            signupDate: undefined
-        };
-
         beforeEach(() => {
             // Arrange
             req = {
@@ -193,27 +153,27 @@ describe('Analytic Service ::', () => {
             service.pushUserData();
 
             // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithoutMockAuthToken } });
+            expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithoutAuthToken } });
         });
 
         describe('if authToken has been passed', () => {
             describe('and user is logged in', () => {
                 it('should push userData to datalayer with registered auth token details', () => {
                     // Act
-                    service.pushUserData(mockAuthTokenRegistered);
+                    service.pushUserData(authTokenRegistered);
 
                     // Assert
-                    expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithMockAuthTokenRegistered } });
+                    expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithAuthTokenRegistered } });
                 });
             });
 
             describe('and user is a guest', () => {
                 it('should push userData to datalayer with guest auth token details', () => {
                     // Act
-                    service.pushUserData((mockAuthTokenGuest));
+                    service.pushUserData(authTokenGuest);
 
                     // Assert
-                    expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithMockAuthTokenGuest } });
+                    expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithAuthTokenGuest } });
                 });
             });
         });
