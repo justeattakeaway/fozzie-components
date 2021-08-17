@@ -7,6 +7,14 @@ v1.11.0
 ------------------------------
 *May 5, 2021*
 
+### Added
+- Postcode validations for AUS/NZ
+
+
+v1.11.0
+------------------------------
+*May 5, 2021*
+
 ### Changed
 - Reverted the Tel. no. regex for en-GB back to v1.9.0.
 
