@@ -8,7 +8,8 @@ import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation.module';
-import CheckoutMock, { mockedRequests } from '../src/demo/checkoutMock';
+import CheckoutMock from '../src/demo/checkoutMock';
+import mockedRequests from '../src/demo/mockResponses';
 
 export default {
     title: 'Components/Organisms',

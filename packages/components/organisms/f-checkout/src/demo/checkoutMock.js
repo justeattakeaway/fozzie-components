@@ -40,7 +40,3 @@ function setupCheckoutMethods () {
 }
 
 export default setupCheckoutMethods;
-
-export {
-    mockedRequests
-};
