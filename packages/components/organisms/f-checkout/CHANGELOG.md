@@ -9,10 +9,9 @@ v0.173.0
 *August 16, 2021*
 
 ### Added
-- New file responsible for the mack response data.
+- New file responsible for the mock response data.
 
 ### Changed
-
 - `checkoutMocks.js` & `checkout.stories.js` refactored substantially.
 
 (To be added to next release)
