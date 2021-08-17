@@ -1,43 +1,23 @@
 import analyticsModule from '@/store/analytics.module';
-import {
-    UPDATE_PLATFORM_DATA,
-    UPDATE_PAGE_DATA
-} from '@/store/mutation-types';
 import AnalyticService from '@/services/analytics.service';
+import { mapServersidePlatformData, mapServersidePageData } from '@/services/analytics.mapper';
 
 const defaultOptions = require('../defaultOptions');
-
-const getCookie = (name, req) => {
-    if (req && req.headers && req.headers.cookie) {
-        const value = `; ${req.headers.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) {
-            return parts.pop().split(';').shift();
-        }
-    }
-
-    return undefined;
-};
 
 const prepareServersideValues = (store, req, res, options) => {
     // Only available serverside
     if (typeof (window) === 'undefined') {
         const platformData = { ...store.state[`${options.namespace}`].platformData };
 
-        if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
-        if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
-        if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
+        mapServersidePlatformData(platformData, req);
 
-        const userPercent = getCookie('je-user_percentage', req);
-        if (userPercent) platformData.jeUserPercentage = userPercent;
-
-        store.dispatch(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, platformData);
+        store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
 
         const pageData = { ...store.state[`${options.namespace}`].pageData };
 
-        if (res.statusCode) pageData.httpStatusCode = res.statusCode;
+        mapServersidePageData(pageData, res);
 
-        store.dispatch(`${options.namespace}/${UPDATE_PAGE_DATA}`, pageData);
+        store.dispatch(`${options.namespace}/updatePageData`, pageData);
     }
 };
 
@@ -51,6 +31,7 @@ const preparePageTags = options => {
     // Only add tags if clientside and if not already added
     if (typeof (window) !== 'undefined' && !window.dataLayer) {
         const queryString = options.auth ? `&gtm_auth=${options.auth}&gtm_preview=${options.preview}&gtm_cookies_win=${options.cookiesWin}` : '';
+
         // See : https://developers.google.com/tag-manager/quickstart
         const headJsGtmTag = `(function (w, d, s, l, i) {
                                     w[l] = w[l] || [];
