@@ -177,7 +177,7 @@ export const CheckoutComponent = () => ({
         },
 
         locale: {
-            default: select('Locale', [locales.gb])
+            default: select('Locale', [locales.gb, locales.au, locales.nz])
         },
 
         isAsapAvailable: {
