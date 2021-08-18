@@ -1,6 +1,6 @@
 <template>
     <div data-test-id="activation-failed-component">
-        <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
+        <bag-sad-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
         <h1
             :class="$style['c-takeawaypayActivation-title']">
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import { BagCelebrateBgIcon } from '@justeat/f-vue-icons';
+import { BagSadBgIcon } from '@justeat/f-vue-icons';
 
 export default {
 
     components: {
-        BagCelebrateBgIcon
+        BagSadBgIcon
     }
 };
 </script>

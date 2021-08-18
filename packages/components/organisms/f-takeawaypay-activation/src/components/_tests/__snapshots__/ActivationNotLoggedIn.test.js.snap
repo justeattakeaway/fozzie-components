@@ -2,7 +2,7 @@
 
 exports[`ActivationNotLoggedIn should be rendered correctly 1`] = `
 <div data-test-id="activation-not-logged-in-component" locale="en-GB">
-  <bag-celebrate-bg-icon-stub></bag-celebrate-bg-icon-stub>
+  <bag-run-bg-icon-stub></bag-run-bg-icon-stub>
   <h1>
     Let's get you started with Takeaway Pay.
   </h1>
