@@ -16,6 +16,7 @@ import createGuest from './create-guest.json';
 import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
 import getBasketDineIn from './get-basket-dinein.json';
+import getBasketDeliveryAgeRestricted from './get-basket-delivery-age-restriction.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
 import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-items-required.json';
@@ -84,6 +85,9 @@ export default {
                 break;
             case '/get-basket-dinein.json':
                 mock.onGet(path).reply(200, getBasketDineIn);
+                break;
+            case '/get-basket-delivery-age-restriction.json':
+                mock.onGet(path).reply(200, getBasketDeliveryAgeRestricted);
                 break;
             case '/get-basket-timeout.json':
                 mock.onGet(path).timeout();

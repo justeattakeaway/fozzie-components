@@ -3,9 +3,53 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (to be added to next release)
+(To be added to next release)
 ------------------------------
+*August 12, 2021*
+
+### Added
+- Guest dine in visual test.
+
+
+v0.172.0
+------------------------------
+*August 102, 2021*
+
+### Added
+- Error Message to Age Verification page.
+
+
+v0.171.0
+------------------------------
+*August 12, 2021*
+
+### Changed
+- Low value order experiment header to phase 2
+
+
+v0.170.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Check on basket API call to see if age verification prompt needs to be shown
+
+
+v0.169.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Age Verification Page.
+- Tests to cover changes.
+
+### Removed
+- Some eventData values which were added for testing specific case
+
+### Changed
+- `f-form-field` version.
+
+
 *August 9, 2021*
 
 ### Changed

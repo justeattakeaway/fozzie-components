@@ -1,17 +1,19 @@
 <template>
     <div data-test-id="activation-logged-in-component">
-        <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
+        <bag-run-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
         <h1
             :class="$style['c-takeawaypayActivation-title']">
             {{ $t('messages.titleActivationAvailable', { consumerGivenName }) }}
         </h1>
 
-        <p>
+        <p
+            :class="$style['c-takeawaypayActivation-description']">
             {{ $t('messages.descriptionActivationAvailable1') }} <span :class="$style['c-takeawaypayActivation-email']">{{ consumerEmail }}</span>
         </p>
 
-        <p>
+        <p
+            :class="$style['c-takeawaypayActivation-description']">
             {{ $t('messages.descriptionActivationAvailable2') }}
         </p>
 
@@ -51,14 +53,14 @@
 <script>
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-import { BagCelebrateBgIcon } from '@justeat/f-vue-icons';
+import { BagRunBgIcon } from '@justeat/f-vue-icons';
 import TakeawaypayActivationServiceApi from '../services/TakeawaypayActivationServiceApi';
 
 export default {
 
     components: {
         FButton,
-        BagCelebrateBgIcon
+        BagRunBgIcon
     },
 
     props: {

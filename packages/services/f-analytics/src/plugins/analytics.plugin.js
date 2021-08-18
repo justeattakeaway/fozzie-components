@@ -1,7 +1,45 @@
-import analyticsModule from '../store/analytics.module';
-import AnalyticService from './lib/analytics.service';
+import analyticsModule from '@/store/analytics.module';
+import {
+    UPDATE_PLATFORM_DATA,
+    UPDATE_PAGE_DATA
+} from '@/store/mutation-types';
+import AnalyticService from '@/services/analytics.service';
 
-const defaults = require('./defaults');
+const defaultOptions = require('../defaultOptions');
+
+const getCookie = (name, req) => {
+    if (req && req.headers && req.headers.cookie) {
+        const value = `; ${req.headers.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+            return parts.pop().split(';').shift();
+        }
+    }
+
+    return undefined;
+};
+
+const prepareServersideValues = (store, req, res, options) => {
+    // Only available serverside
+    if (typeof (window) === 'undefined') {
+        const platformData = { ...store.state[`${options.namespace}`].platformData };
+
+        if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
+        if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
+        if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
+
+        const userPercent = getCookie('je-user_percentage', req);
+        if (userPercent) platformData.jeUserPercentage = userPercent;
+
+        store.dispatch(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, platformData);
+
+        const pageData = { ...store.state[`${options.namespace}`].pageData };
+
+        if (res.statusCode) pageData.httpStatusCode = res.statusCode;
+
+        store.dispatch(`${options.namespace}/${UPDATE_PAGE_DATA}`, pageData);
+    }
+};
 
 const registerStoreModule = (store, options) => {
     if (!store.hasModule(options.namespace)) {
@@ -45,9 +83,9 @@ const preparePageTags = options => {
     }
 };
 
-export default ({ store }, inject, _options) => {
+export default ({ store, req, res }, inject, _options) => {
     const options = {
-        ...defaults,
+        ...defaultOptions,
         ..._options
     };
 
@@ -55,7 +93,12 @@ export default ({ store }, inject, _options) => {
 
     registerStoreModule(store, options);
 
-    const service = new AnalyticService(store, options);
+    prepareServersideValues(store, req, res, options);
+
+    const service = new AnalyticService(store, req, options);
 
     inject(options.globalVarName, service);
+
+    // If clientside, flush any stored serverside events
+    service.pushEvent();
 };

@@ -15,7 +15,7 @@ export default {
          * @param {Object} experiments - Payload containing the experiment values to be destructured and committed to the state.
          */
         setExperimentValues: ({ commit }, experiments) => {
-            const lowValueOrderExperimentVariant = experiments.low_value_order_threshold_web?.Variant || '';
+            const lowValueOrderExperimentVariant = experiments.low_value_order_phase_2_web?.Variant || '';
             commit(UPDATE_EXPERIMENTS_STATE, { lowValueOrderExperimentVariant });
         }
     },
