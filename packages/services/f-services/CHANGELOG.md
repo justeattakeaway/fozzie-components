@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.12.0
 ------------------------------
-*August 17, 2021*
+*August 18, 2021*
 
 ### Added
 - Postcode validations for AUS/NZ
