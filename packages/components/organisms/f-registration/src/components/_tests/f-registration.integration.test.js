@@ -32,7 +32,10 @@ describe('Registration API service', () => {
             propsData,
             attachTo: div,
             mocks: {
-                $http: new httpModule.CreateClient()
+                $http: new httpModule.CreateClient(),
+                $cookies: {
+                    remove: jest.fn()
+                }
             }
         });
 
