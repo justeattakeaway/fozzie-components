@@ -471,6 +471,8 @@ export default {
                     marketingPreferences: []
                 };
 
+                this.$cookies.remove('je-oidc');
+
                 await RegistrationServiceApi.createAccount(this.$http, this.createAccountUrl, registrationData, this.tenant);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
