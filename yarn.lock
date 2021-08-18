@@ -2239,10 +2239,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.5.1.tgz#a8211d31c3310f5403cee2a72de899a53bcf3d20"
-  integrity sha512-Erb2sYftVUYt+aF1nsFr1ZyKFZiEakTmHk6No3OWxRCWP0rfkT3NYkZ4vn3bIjcVFK0s9igZSZ5ZOeFUIt5xeg==
+"@justeat/f-icons@3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.7.0.tgz#7d0912995cb46f50d72aa80b880b719156cc21f5"
+  integrity sha512-JeUN84qJwIfDGHAgbaqBJ3ecZNVTzAxC1s9Ew375W2EKo5EWxe9fFonPKqDmQhimObS67NqbCHgGA3O1PeJHPg==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
@@ -2395,6 +2395,13 @@
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.4.0.tgz#aad0aa3563ff726043da9d29e8456435176ae913"
   integrity sha512-jeWACUUp0LfQbKO+BS8KiMIQ/RlaLNuinIHwrmDAxHfxCj2RoElS/Z426cVzGWkIuvs20RiaNFMF31pasHq4QQ==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.5.0.tgz#769e2ff3725599cf17fdb5a618968f9f814d7179"
+  integrity sha512-eli7NQKc5M8o232QOG6BX6jl1zjs3kJwc1xjWpoN0u17iIWqa9xCsLwqLKWEPXUeZ91xRXYhr8bEccWzMANNUQ==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
