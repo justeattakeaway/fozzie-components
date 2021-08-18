@@ -7,7 +7,7 @@ describe('FormDropdown', () => {
         { text: 'text 1', value: 'value 1' },
         { text: 'text 2', value: 'value 2' },
         { text: 'text 3', value: 'value 3' },
-        { text: 'text 4', value: 'value 4' }
+        { disabled: true, text: 'text 4', value: 'value 4' }
     ];
 
     const attributes = {
@@ -45,6 +45,24 @@ describe('FormDropdown', () => {
 
                 // Assert
                 expect(option.exists()).toBe(false);
+            });
+
+            it('should apply `disabled` attribute if passed in', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormDropdown, { propsData });
+                const option = wrapper.find('[data-test-id="formfield-dropdown-option-4"]');
+
+                // Assert
+                expect(option.attributes().disabled).toBe('disabled');
+            });
+
+            it('should not apply disabled attribute if not passed in', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormDropdown, { propsData });
+                const option = wrapper.find('[data-test-id="formfield-dropdown-option-1"]');
+
+                // Assert
+                expect(option.attributes().disabled).toBeUndefined();
             });
         });
 
