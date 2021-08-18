@@ -112,7 +112,7 @@ export const mapPlatformData = (platformData, featureName, locale, req) => {
  * Maps various static/computed variables to the UserData.
  * Note: if the authToken is supplied then this is decoded to reveal
  * various fields of user data.
- * 
+ *
  * @param {object} userData - A reference to the current UserData instance
  * @param {string} authToken - The current authorisation token
  * @param {object} req - The `request` context
