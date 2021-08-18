@@ -1,6 +1,6 @@
 <template>
     <div data-test-id="activation-not-logged-in-component">
-        <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
+        <bag-run-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
         <h1 :class="$style['c-takeawaypayActivation-title']">
             {{ $t('messages.titleActivationNotLoggedIn') }}
@@ -36,13 +36,13 @@
 <script>
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-import { BagCelebrateBgIcon } from '@justeat/f-vue-icons';
+import { BagRunBgIcon } from '@justeat/f-vue-icons';
 
 export default {
 
     components: {
         FButton,
-        BagCelebrateBgIcon
+        BagRunBgIcon
     },
 
     props: {

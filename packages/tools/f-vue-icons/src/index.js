@@ -30,6 +30,7 @@ export { default as ChevronIcon } from '../icons/ChevronIcon';
 export { default as ClockFilledIcon } from '../icons/ClockFilledIcon';
 export { default as ClockIcon } from '../icons/ClockIcon';
 export { default as CloseCircleIcon } from '../icons/CloseCircleIcon';
+export { default as CollectionIcon } from '../icons/CollectionIcon';
 export { default as CrossIcon } from '../icons/CrossIcon';
 export { default as CuisineIcon } from '../icons/CuisineIcon';
 export { default as DangerIcon } from '../icons/DangerIcon';
