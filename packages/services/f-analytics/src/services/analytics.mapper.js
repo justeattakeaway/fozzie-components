@@ -10,7 +10,7 @@ import {
 
 /**
  * Returns the contents of the cookie on the request.
- * @private
+ *
  * @param {string} name - The name of the cookie
  * @param {object} req - The `request` context
  * @return {string} The contents of the cookie (if present)
@@ -29,7 +29,7 @@ const getCookie = (name, req) => {
 
 /**
  * Maps the anonymous User Id (if present) to the UserData 'a-UserId' field.
- * @private
+ *
  * @param {object} userData - A reference to the current UserData instance
  * @param {object} req - The `request` context
  */
@@ -44,7 +44,7 @@ const mapAnonymousUserId = (userData, req) => {
  * Maps the user agent string (if present) to the PlatformData 'userAgent' field
  * Note: if executed clientside then the value will be read from the `window.navigator`
  * otherside it is read from the 'user-agent' header.
- * @private
+ *
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
  */
@@ -64,7 +64,7 @@ const mapUserAgent = (platformData, req) => {
  * Also maps the user percentage experiment value (if present) to the PlatformData; again
  * only available serverside due to it's protection.
  * Note: this is stored until the rest of the PlatformData is collated and sent clientside.
- * @public
+ *
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
  */
@@ -81,7 +81,7 @@ export const mapServersidePlatformData = (platformData, req) => {
  * Maps the `response` http status code (if present); only available when executed
  * serverside, to the PageData.
  * Note: this is stored until the rest of the PageData is collated and sent clientside.
- * @public
+ *
  * @param {object} pageData - A reference to the current PageData instance
  * @param {object} res - The `response` context
  */
@@ -91,7 +91,7 @@ export const mapServersidePageData = (pageData, res) => {
 
 /**
  * Maps various static/computed variables to the PlatformData.
- * @public
+ *
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {string} featureName - The name of the feature
  * @param {string} locale - The current locale
@@ -111,8 +111,8 @@ export const mapPlatformData = (platformData, featureName, locale, req) => {
 /**
  * Maps various static/computed variables to the UserData.
  * Note: if the authToken is supplied then this is decoded to reveal
- * various fields of user data
- * @public
+ * various fields of user data.
+ * 
  * @param {object} userData - A reference to the current UserData instance
  * @param {string} authToken - The current authorisation token
  * @param {object} req - The `request` context
