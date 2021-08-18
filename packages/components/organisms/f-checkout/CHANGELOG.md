@@ -3,17 +3,71 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.168.1
+v0.173.1
 ------------------------------
-*August 9, 2021*
+*August 18, 2021*
 
 ### Fixed
 - Exports in test selector file.
 
 
-
-Latest (to be added to next release)
+v0.173.0
 ------------------------------
+*August 16, 2021*
+
+### Added
+- New file responsible for the mock response data.
+
+### Changed
+- `checkoutMocks.js` & `checkout.stories.js` refactored substantially.
+
+(To be added to next release)
+------------------------------
+*August 12, 2021*
+
+### Added
+- Guest dine in visual test.
+
+
+v0.172.0
+------------------------------
+*August 102, 2021*
+
+### Added
+- Error Message to Age Verification page.
+
+
+v0.171.0
+------------------------------
+*August 12, 2021*
+
+### Changed
+- Low value order experiment header to phase 2
+
+
+v0.170.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Check on basket API call to see if age verification prompt needs to be shown
+
+
+v0.169.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Age Verification Page.
+- Tests to cover changes.
+
+### Removed
+- Some eventData values which were added for testing specific case
+
+### Changed
+- `f-form-field` version.
+
+
 *August 9, 2021*
 
 ### Changed

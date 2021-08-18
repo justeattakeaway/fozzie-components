@@ -1,0 +1,548 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AgeVerification computed :: days :: should return an array of 31 day objects 1`] = `
+Array [
+  Object {
+    "text": "1",
+    "value": "1",
+  },
+  Object {
+    "text": "2",
+    "value": "2",
+  },
+  Object {
+    "text": "3",
+    "value": "3",
+  },
+  Object {
+    "text": "4",
+    "value": "4",
+  },
+  Object {
+    "text": "5",
+    "value": "5",
+  },
+  Object {
+    "text": "6",
+    "value": "6",
+  },
+  Object {
+    "text": "7",
+    "value": "7",
+  },
+  Object {
+    "text": "8",
+    "value": "8",
+  },
+  Object {
+    "text": "9",
+    "value": "9",
+  },
+  Object {
+    "text": "10",
+    "value": "10",
+  },
+  Object {
+    "text": "11",
+    "value": "11",
+  },
+  Object {
+    "text": "12",
+    "value": "12",
+  },
+  Object {
+    "text": "13",
+    "value": "13",
+  },
+  Object {
+    "text": "14",
+    "value": "14",
+  },
+  Object {
+    "text": "15",
+    "value": "15",
+  },
+  Object {
+    "text": "16",
+    "value": "16",
+  },
+  Object {
+    "text": "17",
+    "value": "17",
+  },
+  Object {
+    "text": "18",
+    "value": "18",
+  },
+  Object {
+    "text": "19",
+    "value": "19",
+  },
+  Object {
+    "text": "20",
+    "value": "20",
+  },
+  Object {
+    "text": "21",
+    "value": "21",
+  },
+  Object {
+    "text": "22",
+    "value": "22",
+  },
+  Object {
+    "text": "23",
+    "value": "23",
+  },
+  Object {
+    "text": "24",
+    "value": "24",
+  },
+  Object {
+    "text": "25",
+    "value": "25",
+  },
+  Object {
+    "text": "26",
+    "value": "26",
+  },
+  Object {
+    "text": "27",
+    "value": "27",
+  },
+  Object {
+    "text": "28",
+    "value": "28",
+  },
+  Object {
+    "text": "29",
+    "value": "29",
+  },
+  Object {
+    "text": "30",
+    "value": "30",
+  },
+  Object {
+    "text": "31",
+    "value": "31",
+  },
+]
+`;
+
+exports[`AgeVerification computed :: months :: should return an array of 12 month objects 1`] = `
+Array [
+  Object {
+    "text": "January",
+    "value": 0,
+  },
+  Object {
+    "text": "February",
+    "value": 1,
+  },
+  Object {
+    "text": "March",
+    "value": 2,
+  },
+  Object {
+    "text": "April",
+    "value": 3,
+  },
+  Object {
+    "text": "May",
+    "value": 4,
+  },
+  Object {
+    "text": "June",
+    "value": 5,
+  },
+  Object {
+    "text": "July",
+    "value": 6,
+  },
+  Object {
+    "text": "August",
+    "value": 7,
+  },
+  Object {
+    "text": "September",
+    "value": 8,
+  },
+  Object {
+    "text": "October",
+    "value": 9,
+  },
+  Object {
+    "text": "November",
+    "value": 10,
+  },
+  Object {
+    "text": "December",
+    "value": 11,
+  },
+]
+`;
+
+exports[`AgeVerification computed :: years :: should return an array of 90 year objects 1`] = `
+Array [
+  Object {
+    "text": "2011",
+    "value": "2011",
+  },
+  Object {
+    "text": "2010",
+    "value": "2010",
+  },
+  Object {
+    "text": "2009",
+    "value": "2009",
+  },
+  Object {
+    "text": "2008",
+    "value": "2008",
+  },
+  Object {
+    "text": "2007",
+    "value": "2007",
+  },
+  Object {
+    "text": "2006",
+    "value": "2006",
+  },
+  Object {
+    "text": "2005",
+    "value": "2005",
+  },
+  Object {
+    "text": "2004",
+    "value": "2004",
+  },
+  Object {
+    "text": "2003",
+    "value": "2003",
+  },
+  Object {
+    "text": "2002",
+    "value": "2002",
+  },
+  Object {
+    "text": "2001",
+    "value": "2001",
+  },
+  Object {
+    "text": "2000",
+    "value": "2000",
+  },
+  Object {
+    "text": "1999",
+    "value": "1999",
+  },
+  Object {
+    "text": "1998",
+    "value": "1998",
+  },
+  Object {
+    "text": "1997",
+    "value": "1997",
+  },
+  Object {
+    "text": "1996",
+    "value": "1996",
+  },
+  Object {
+    "text": "1995",
+    "value": "1995",
+  },
+  Object {
+    "text": "1994",
+    "value": "1994",
+  },
+  Object {
+    "text": "1993",
+    "value": "1993",
+  },
+  Object {
+    "text": "1992",
+    "value": "1992",
+  },
+  Object {
+    "text": "1991",
+    "value": "1991",
+  },
+  Object {
+    "text": "1990",
+    "value": "1990",
+  },
+  Object {
+    "text": "1989",
+    "value": "1989",
+  },
+  Object {
+    "text": "1988",
+    "value": "1988",
+  },
+  Object {
+    "text": "1987",
+    "value": "1987",
+  },
+  Object {
+    "text": "1986",
+    "value": "1986",
+  },
+  Object {
+    "text": "1985",
+    "value": "1985",
+  },
+  Object {
+    "text": "1984",
+    "value": "1984",
+  },
+  Object {
+    "text": "1983",
+    "value": "1983",
+  },
+  Object {
+    "text": "1982",
+    "value": "1982",
+  },
+  Object {
+    "text": "1981",
+    "value": "1981",
+  },
+  Object {
+    "text": "1980",
+    "value": "1980",
+  },
+  Object {
+    "text": "1979",
+    "value": "1979",
+  },
+  Object {
+    "text": "1978",
+    "value": "1978",
+  },
+  Object {
+    "text": "1977",
+    "value": "1977",
+  },
+  Object {
+    "text": "1976",
+    "value": "1976",
+  },
+  Object {
+    "text": "1975",
+    "value": "1975",
+  },
+  Object {
+    "text": "1974",
+    "value": "1974",
+  },
+  Object {
+    "text": "1973",
+    "value": "1973",
+  },
+  Object {
+    "text": "1972",
+    "value": "1972",
+  },
+  Object {
+    "text": "1971",
+    "value": "1971",
+  },
+  Object {
+    "text": "1970",
+    "value": "1970",
+  },
+  Object {
+    "text": "1969",
+    "value": "1969",
+  },
+  Object {
+    "text": "1968",
+    "value": "1968",
+  },
+  Object {
+    "text": "1967",
+    "value": "1967",
+  },
+  Object {
+    "text": "1966",
+    "value": "1966",
+  },
+  Object {
+    "text": "1965",
+    "value": "1965",
+  },
+  Object {
+    "text": "1964",
+    "value": "1964",
+  },
+  Object {
+    "text": "1963",
+    "value": "1963",
+  },
+  Object {
+    "text": "1962",
+    "value": "1962",
+  },
+  Object {
+    "text": "1961",
+    "value": "1961",
+  },
+  Object {
+    "text": "1960",
+    "value": "1960",
+  },
+  Object {
+    "text": "1959",
+    "value": "1959",
+  },
+  Object {
+    "text": "1958",
+    "value": "1958",
+  },
+  Object {
+    "text": "1957",
+    "value": "1957",
+  },
+  Object {
+    "text": "1956",
+    "value": "1956",
+  },
+  Object {
+    "text": "1955",
+    "value": "1955",
+  },
+  Object {
+    "text": "1954",
+    "value": "1954",
+  },
+  Object {
+    "text": "1953",
+    "value": "1953",
+  },
+  Object {
+    "text": "1952",
+    "value": "1952",
+  },
+  Object {
+    "text": "1951",
+    "value": "1951",
+  },
+  Object {
+    "text": "1950",
+    "value": "1950",
+  },
+  Object {
+    "text": "1949",
+    "value": "1949",
+  },
+  Object {
+    "text": "1948",
+    "value": "1948",
+  },
+  Object {
+    "text": "1947",
+    "value": "1947",
+  },
+  Object {
+    "text": "1946",
+    "value": "1946",
+  },
+  Object {
+    "text": "1945",
+    "value": "1945",
+  },
+  Object {
+    "text": "1944",
+    "value": "1944",
+  },
+  Object {
+    "text": "1943",
+    "value": "1943",
+  },
+  Object {
+    "text": "1942",
+    "value": "1942",
+  },
+  Object {
+    "text": "1941",
+    "value": "1941",
+  },
+  Object {
+    "text": "1940",
+    "value": "1940",
+  },
+  Object {
+    "text": "1939",
+    "value": "1939",
+  },
+  Object {
+    "text": "1938",
+    "value": "1938",
+  },
+  Object {
+    "text": "1937",
+    "value": "1937",
+  },
+  Object {
+    "text": "1936",
+    "value": "1936",
+  },
+  Object {
+    "text": "1935",
+    "value": "1935",
+  },
+  Object {
+    "text": "1934",
+    "value": "1934",
+  },
+  Object {
+    "text": "1933",
+    "value": "1933",
+  },
+  Object {
+    "text": "1932",
+    "value": "1932",
+  },
+  Object {
+    "text": "1931",
+    "value": "1931",
+  },
+  Object {
+    "text": "1930",
+    "value": "1930",
+  },
+  Object {
+    "text": "1929",
+    "value": "1929",
+  },
+  Object {
+    "text": "1928",
+    "value": "1928",
+  },
+  Object {
+    "text": "1927",
+    "value": "1927",
+  },
+  Object {
+    "text": "1926",
+    "value": "1926",
+  },
+  Object {
+    "text": "1925",
+    "value": "1925",
+  },
+  Object {
+    "text": "1924",
+    "value": "1924",
+  },
+  Object {
+    "text": "1923",
+    "value": "1923",
+  },
+  Object {
+    "text": "1922",
+    "value": "1922",
+  },
+]
+`;
