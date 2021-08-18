@@ -3,72 +3,46 @@ import jwtDecode from 'jwt-decode';
 import SHA256 from 'crypto-js/sha256';
 import { mapState, mapActions } from 'vuex';
 import {
-    COUNTRY_INFO,
-    DEFAULT_APP_ID,
-    DEFAULT_APP_TYPE,
-    MAP_ROUTE_TO_FEATURE_NAME,
+    getDisplaySize,
+    getOrientation,
+    mapRouteToGroup,
+    mapRouteToFeature
+} from '@/utils/helpers';
+import {
     IDENTITY_PROVIDERS,
     GRANT_TYPES
-} from '../constants';
+} from '@/constants';
 
 export default {
     computed:
     {
         ...mapState('f-analytics', [
-            'platformData',
-            'userData'
+            'userData',
+            'pageData'
         ]),
 
         isServerSide () {
             return typeof (window) === 'undefined';
-        }
-    },
+        },
 
-    created () {
-        this.prepareServersideAnalytics();
+        isDataLayerPresent () {
+            return typeof (window) !== 'undefined' && window.dataLayer;
+        }
     },
 
     methods: {
         ...mapActions('f-analytics', [
-            'updatePlatformData',
-            'updateUserData'
+            'updatePageData'
         ]),
 
-        prepareServersideAnalytics () {
-            if (this.isServerSide) {
-                // Only available serverside
-                const platformData = { ...this.platformData };
-
-                platformData.environment = process.env.justEatEnvironment || 'localhost';
-                platformData.version = process.env.FEATURE_VERSION || '0.0.0.0';
-                platformData.instancePosition = process.env.INSTANCE_POSITION || 'N/A';
-
-                // Is of type `httponly` so need to read serverside
-                platformData.jeUserPercentage = this.$cookies.get('je-user_percentage') || null;
-
-                this.updatePlatformData(platformData);
-            }
-        },
-
-        preparePlatformData () {
-            const platformData = { ...this.platformData };
-
-            platformData.name = MAP_ROUTE_TO_FEATURE_NAME[this.$route.name] || this.$route.name;
-            platformData.appType = DEFAULT_APP_TYPE;
-            platformData.applicationId = DEFAULT_APP_ID;
-            platformData.userAgent = navigator.userAgent || 'N/A';
-            platformData.branding = COUNTRY_INFO[this.$i18n.locale].brand;
-            platformData.country = COUNTRY_INFO[this.$i18n.locale].country;
-            platformData.language = COUNTRY_INFO[this.$i18n.locale].language;
-            platformData.currency = COUNTRY_INFO[this.$i18n.locale].currency;
-
-            this.updatePlatformData(platformData);
-        },
-
-        prepareUserData (authToken) {
+        pushUserData (authToken) {
             const userData = { ...this.userData };
 
-            userData['a-UserId'] = this.$cookies.get('je-auser') || undefined;
+            // TODO - Read manually to reduce need on global '$cookies'
+            if (this.$cookies) {
+                const value = this.$cookies.get('je-auser');
+                if (value) userData['a-UserId'] = value;
+            }
 
             if (authToken) {
                 const tokenData = jwtDecode(authToken);
@@ -80,15 +54,35 @@ export default {
                 userData.signupDate = tokenData?.created_date || undefined;
             }
 
-            this.updateUserData(userData);
+            if (this.isDataLayerPresent) {
+                window.dataLayer.push({ userData: { ...userData } });
+            }
         },
 
-        pushAnalytics () {
-            const dataLayer = window.dataLayer || [];
-            dataLayer.push({
-                platformData: { ...this.platformData },
-                userData: { ...this.userData }
-            });
+        pushPageData ({ conversationId = '', requestId = '', authToken = undefined } = {}) {
+            const pageData = { ...this.pageData };
+
+            pageData.group = mapRouteToGroup(this.$route.name);
+            pageData.name = mapRouteToFeature(this.$route.name);
+
+            if (pageData.name === 'Checkout 1 Overview' && !authToken) {
+                pageData.name = 'Checkout 1 Guest';
+            }
+
+            pageData.isCached = false;
+            pageData.conversationId = conversationId;
+            pageData.requestId = requestId;
+
+            if (!this.isServerSide) {
+                pageData.display = getDisplaySize();
+                pageData.orientation = getOrientation();
+            }
+
+            this.updatePageData(pageData);
+
+            if (this.isDataLayerPresent) {
+                window.dataLayer.push({ pageData: { ...this.pageData } });
+            }
         }
     }
 };

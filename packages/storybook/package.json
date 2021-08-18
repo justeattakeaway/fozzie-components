@@ -1,6 +1,6 @@
 {
   "name": "@justeat/storybook",
-  "version": "0.40.0",
+  "version": "0.41.0",
   "scripts": {
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
@@ -13,7 +13,7 @@
     "vue-i18n": "8.22.1"
   },
   "devDependencies": {
-    "@justeat/f-http": "0.6.1",
+    "@justeat/f-http": "0.8.0",
     "@kazupon/vue-i18n-loader": "0.5.0",
     "@storybook/addon-a11y": "6.3.4",
     "@storybook/addon-essentials": "6.3.4",

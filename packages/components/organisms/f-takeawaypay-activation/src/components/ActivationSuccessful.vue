@@ -6,7 +6,8 @@
             {{ $t('messages.titleActivationSuccessful') }}
         </h1>
 
-        <p>
+        <p
+            :class="$style['c-takeawaypayActivation-description']">
             {{ $t('messages.descriptionActivationSuccessful') }}
         </p>
 
