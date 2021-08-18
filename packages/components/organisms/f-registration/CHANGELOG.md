@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.61.0
+------------------------------
+*August 19, 2021*
+
+### Fixed
+- Removing the `je-oidc` cookie when registering to avoid logged in users from being kept logged in to the previous account.
+
+
 v0.60.0
 ------------------------------
 *August 05, 2021*
