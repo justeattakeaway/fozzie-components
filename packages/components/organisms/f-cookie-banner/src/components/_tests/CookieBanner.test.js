@@ -170,7 +170,7 @@ describe('CookieBanner', () => {
                 const payloadValue = 'foo';
                 const payloadObj = {
                     path: '/',
-                    expires: 7776000
+                    expires: 90
                 };
 
                 wrapper.vm.setCookieBannerCookie('foo');
@@ -196,7 +196,7 @@ describe('CookieBanner', () => {
                 const payloadValue = '130315';
                 const payloadObj = {
                     path: '/',
-                    expires: 7776000
+                    expires: 90
                 };
 
                 wrapper.vm.setLegacyCookieBannerCookie();
