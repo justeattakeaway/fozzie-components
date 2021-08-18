@@ -129,14 +129,38 @@ describe('Registration', () => {
         const mountComponentAndAttachToDocument = () => {
             const div = document.createElement('div');
             document.body.appendChild(div);
+
             return mount(Registration, {
                 propsData,
-                attachTo: div
+                attachTo: div,
+                mocks: {
+                    $cookies: {
+                        remove: jest.fn()
+                    }
+                }
             });
         };
 
         afterEach(() => {
             wrapper.destroy();
+        });
+
+        it('should remove the existing `je-oidc` cookie', async () => {
+            // Arrange
+            wrapper = mountComponentAndAttachToDocument();
+
+            Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                get: jest.fn(() => false)
+            });
+
+            const cookieRemoveSpy = jest.spyOn(wrapper.vm.$cookies, 'remove');
+
+            // Act
+            await wrapper.vm.onFormSubmit();
+            await flushPromises();
+
+            // Assert
+            expect(cookieRemoveSpy).toHaveBeenCalledWith('je-oidc');
         });
 
         describe('with a faulty registration service', () => {
