@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.12.0
 ------------------------------
-*August 8, 2021*
+*August 18, 2021*
 
 ### Changed
 - Aligned to PIE designs
