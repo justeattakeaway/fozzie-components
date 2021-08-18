@@ -1,14 +1,16 @@
 import AnalyticService from '@/services/analytics.service';
 import {
-    UPDATE_PLATFORM_DATA,
-    UPDATE_EVENTS,
-    CLEAR_EVENTS
-} from '@/store/mutation-types';
-import {
-    defaultState,
+    createStore,
     newEvent,
-    options
+    options,
+    userIdFromCookie,
+    authTokenRegistered,
+    authTokenGuest,
+    userDataWithAuthTokenRegistered,
+    userDataWithAuthTokenGuest,
+    userDataWithoutAuthToken
 } from '@/tests/helpers/setup';
+import analyticModule from '@/store/analytics.module';
 
 describe('Analytic Service ::', () => {
     let store;
@@ -16,17 +18,14 @@ describe('Analytic Service ::', () => {
     let service;
     let req;
     let windowsPushSpy;
-    let state;
 
     beforeEach(() => {
         // Arrange - store
-        storeDispatchSpy = jest.fn();
-        state = [`${options.namespace}`];
-        state[`${options.namespace}`] = { ...defaultState };
-        store = {
-            state,
-            dispatch: storeDispatchSpy
-        };
+        store = createStore({
+            actions: analyticModule.actions,
+            mutations: analyticModule.mutations
+        });
+        storeDispatchSpy = jest.spyOn(store, 'dispatch');
         // Arrange - request
         req = {
             headers: jest.fn(() => ['user-agent'])
@@ -41,6 +40,7 @@ describe('Analytic Service ::', () => {
                 push: windowsPushSpy
             }
         }));
+        // Arrange - sut
         service = new AnalyticService(store, req, options);
     });
 
@@ -61,15 +61,14 @@ describe('Analytic Service ::', () => {
         it('should dispatch the `event` to the store', () => {
             // Arrange
             const expectedEvent = { ...newEvent };
-            store.state[`${options.namespace}`].events.push(expectedEvent);
 
             // Act
             service.pushEvent(newEvent);
 
             // Assert
             expect(windowsPushSpy).toHaveBeenCalledWith({ ...expectedEvent });
-            expect(storeDispatchSpy).toHaveBeenNthCalledWith(1, `${options.namespace}/${UPDATE_EVENTS}`, expectedEvent);
-            expect(storeDispatchSpy).toHaveBeenNthCalledWith(2, `${options.namespace}/${CLEAR_EVENTS}`);
+            expect(storeDispatchSpy).toHaveBeenNthCalledWith(1, `${options.namespace}/updateEvents`, expectedEvent);
+            expect(storeDispatchSpy).toHaveBeenNthCalledWith(2, `${options.namespace}/clearEvents`);
         });
     });
 
@@ -102,7 +101,6 @@ describe('Analytic Service ::', () => {
                     userAgent: navigator.userAgent,
                     version: '0.0.0.0'
                 };
-                store.state[`${options.namespace}`].platformData = expectedPlatformData;
                 options.locale = localeArg;
                 service = new AnalyticService(store, req, options);
 
@@ -111,8 +109,73 @@ describe('Analytic Service ::', () => {
 
                 // Assert
                 expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
-                expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expectedPlatformData);
+                expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
             }
         );
+    });
+
+    describe('When pushing userData ::', () => {
+        beforeEach(() => {
+            // Arrange
+            req = {
+                headers: {
+                    cookie: `je-auser=${userIdFromCookie}`
+                }
+            };
+            service = new AnalyticService(store, req, options);
+        });
+
+        it('should not push userData to datalayer if datalayer not present', async () => {
+            // Arrange
+            windowsPushSpy = jest.fn();
+            const originalWindow = { ...window };
+            const windowSpy = jest.spyOn(global, 'window', 'get');
+            windowSpy.mockImplementation(() => ({
+                ...originalWindow,
+                dataLayer: {
+                    push: windowsPushSpy
+                }
+            }));
+            windowSpy.mockImplementation(() => ({
+                ...originalWindow,
+                dataLayer: undefined
+            }));
+
+            // Act
+            service.pushUserData();
+
+            // Assert
+            expect(windowsPushSpy).not.toHaveBeenCalled();
+        });
+
+        it('should push userData to datalayer only with userId if authToken has not been passed', () => {
+            // Act
+            service.pushUserData();
+
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithoutAuthToken } });
+        });
+
+        describe('if authToken has been passed', () => {
+            describe('and user is logged in', () => {
+                it('should push userData to datalayer with registered auth token details', () => {
+                    // Act
+                    service.pushUserData(authTokenRegistered);
+
+                    // Assert
+                    expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithAuthTokenRegistered } });
+                });
+            });
+
+            describe('and user is a guest', () => {
+                it('should push userData to datalayer with guest auth token details', () => {
+                    // Act
+                    service.pushUserData(authTokenGuest);
+
+                    // Assert
+                    expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithAuthTokenGuest } });
+                });
+            });
+        });
     });
 });
