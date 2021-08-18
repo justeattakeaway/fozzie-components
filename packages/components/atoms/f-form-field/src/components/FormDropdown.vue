@@ -18,6 +18,8 @@
             <option
                 v-for="(option, index) in dropdownOptions"
                 :key="index"
+                :disabled="option.disabled"
+                :selected="option.selected"
                 :data-test-id="`${testId.option}-${index}`"
                 :value="option.value">{{ option.text }}</option>
         </select>
