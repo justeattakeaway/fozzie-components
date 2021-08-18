@@ -23,12 +23,8 @@ This component abstracts away the gathering of the various data values needed fo
 - Single point to record GA data: Currently we have GA/GTM logic scattered throught various features, this will allow that logic to be removed and centralise it a single component.
 - Self-sufficient: With only supplying a small amount of global data this component will attempt to evaluate, gather and record all the data required for the GA `platformData`, `userData` and `pageData` models.
 - Provide the facility to push 'ad-hoc' GA events via a global service (even if serverside).
-- Provide the facility to push 'ad-hoc' GA events via a global service (even if serverside).
 
 ## Benefits (Soon)
-- _extend the data properties for the GA `platformData` model_
-- _evaluate, gather and produce data for the GA `pageData` model_
-- _instead of owning when to push each GA model the consumer will have control over this_
 - _allow extra bespoke/custom properties to be appended to each GA model by the consumer before the model is pushed_
 <hr></br>
 
@@ -79,21 +75,20 @@ This component abstracts away the gathering of the various data values needed fo
         // Watch for authentication token to become available
         isAuthFinished (newVal) {
             if (newVal === true) {
-                this.prepareUserData(this.authToken);
-                this.preparePageData({
+                this.$gtm.pushUserData(this.authToken);
+                this.pushPageData({
                     conversationId: 'some conversationId',
                     requestId: 'some requestId',
                     authToken: this.authToken
                 });
-                this.pushAnalytics();
             }
         },
 
         ...
 
         mounted () {
-            this.preparePlatformData();
-            this.preparePageData({conversationId: 'some conversationId', requestId: 'some requestId' });
+            this.$gtm.pushPlatformData();
+            this.pushPageData({conversationId: 'some conversationId', requestId: 'some requestId' });
         }
     }
     ```

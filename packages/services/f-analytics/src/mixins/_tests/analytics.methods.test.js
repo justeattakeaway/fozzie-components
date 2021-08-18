@@ -3,7 +3,8 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import {
     createStore,
     $route,
-    $i18n
+    $i18n,
+    authTokenRegistered
 } from '@/tests/helpers/setup';
 import * as utils from '@/utils/helpers';
 import analyticModule from '@/store/analytics.module';
@@ -11,13 +12,6 @@ import analyticsMixin from '../analytics.mixin.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
-
-const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-+ 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
-+ 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
-+ 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
-+ 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
-+ 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
 
 const basePageDataObject = {
     name: 'test-route-name',
@@ -139,7 +133,7 @@ describe('Analytics', () => {
                 jest.spyOn(utils, 'mapRouteToFeature').mockImplementation(() => expected.name);
 
                 // Act
-                await wrapper.vm.pushPageData({ authToken: mockAuthToken });
+                await wrapper.vm.pushPageData({ authToken: authTokenRegistered });
 
                 // Assert
                 expect(updatePageDataSpy).toHaveBeenCalledWith(expected);
