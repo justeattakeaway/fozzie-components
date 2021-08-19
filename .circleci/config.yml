@@ -147,7 +147,7 @@ commands:
         type: string
       command_name:
         type: string
-    description: << parameters.command_description >>
+    description: Runs commands based on passed parameters
     steps:
       - run:
           name: << parameters.command_description >>
