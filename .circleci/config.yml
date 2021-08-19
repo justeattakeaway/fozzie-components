@@ -511,7 +511,7 @@ jobs:
       - checkout
       - cache_checksum
       - restore_nod_modules_cache
-      - install_node_dependencies
+#      - install_node_dependencies
       - restore_cache_dist_directories
       - unit_integration_tests:
           run_all: << parameters.run_all >>
