@@ -131,21 +131,25 @@ commands:
           keys:
             - build-cache-molecules-{{ .Branch }}-
             - build-cache-molecules-master-
+            - build-cache-molecules-
       - restore_cache:
           name: Restore atoms Cache
           keys:
             - build-cache-atoms-{{ .Branch }}-
             - build-cache-atoms-master-
+            - build-cache-atoms-
       - restore_cache:
           name: Restore organisms Cache
           keys:
             - build-cache-organisms-{{ .Branch }}-
             - build-cache-organisms-master-
+            - build-cache-organisms-
       - restore_cache:
           name: Restore services Cache
           keys:
             - build-cache-services-{{ .Branch }}-
             - build-cache-services-master-
+            - build-cache-services-
 
   build_packages:
     description: Locally builds all packages in the monorepo
