@@ -160,6 +160,14 @@ commands:
             mkdir -p ~/.tmp/checksumfiles
             find . -type f -name 'yarn.lock' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/yarn.lock
 
+  restore_nod_modules_cache:
+    description: Restore node_modules folder
+    steps:
+      - restore_cache:
+          name: Restore node_modules
+          keys:
+            - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
+
   build_packages:
     description: Locally builds all packages in the monorepo
     parameters:
@@ -183,7 +191,6 @@ commands:
             - run:
                 name: Build All Packages
                 command: yarn build
-      - save_cache_dist_directories
 
   lint_packages:
     description: Locally lints all packages in the monorepo
@@ -478,14 +485,11 @@ jobs:
 #      - detect_root_change
       - checkout
       - cache_checksum
+      - restore_nod_modules_cache
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          name: Restore node_modules
-          keys:
-            - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
       - run:
           name: Test check node_modules
           command: cd node_modules && ls -al
@@ -505,6 +509,8 @@ jobs:
     steps:
 #      - detect_root_change
       - checkout
+      - cache_checksum
+      - restore_nod_modules_cache
       - install_node_dependencies
       - restore_cache_dist_directories
       - unit_integration_tests:
@@ -522,6 +528,8 @@ jobs:
     steps:
 #      - detect_root_change
       - checkout
+      - cache_checksum
+      - restore_nod_modules_cache
       - install_node_dependencies
       - restore_cache_dist_directories
       - run: # Install Component Test Dependencies
