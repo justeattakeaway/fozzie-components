@@ -3,6 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v0.174.0
 ------------------------------
 *August 18, 2021*
@@ -10,6 +11,17 @@ v0.174.0
 ### Added
 - Add copy for AU/NZ locales
 - Guest dine in visual test.
+
+
+v0.173.0
+------------------------------
+*August 16, 2021*
+
+### Added
+- New file responsible for the mock response data.
+
+### Changed
+- `checkoutMocks.js` & `checkout.stories.js` refactored substantially.
 
 
 v0.172.0

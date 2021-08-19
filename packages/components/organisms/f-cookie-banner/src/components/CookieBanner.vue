@@ -133,7 +133,7 @@ export default {
 
         cookieExpiry: {
             type: Number,
-            default: 7776000
+            default: 90
         },
 
         shouldUseGreyBackground: {
@@ -343,7 +343,10 @@ export default {
          * Check to see if we need to absolute position reopen link
          */
         isBodyHeightLessThanWindowHeight () {
-            return window.innerHeight - document.body.offsetHeight > 0;
+            if (typeof window === 'object') {
+                return window.innerHeight - document.body.offsetHeight > 0;
+            }
+            return false;
         }
     }
 };
