@@ -50,16 +50,6 @@ commands:
   #     - run: |
   #         echo $RUN_ALL
 
-#  dist_directories_to_cache:
-#    description: Saves list of directories to cache to ENV variable
-#    steps:
-#      - run:
-#          name: find dist folder excluding the nod_modules
-#          command: |
-#            dist_list=`find . -type d \( -name node_modules -o -path name \) -prune -false -o -name 'dist' | xargs echo | sed 's/ /,/g'`
-#            echo $dist_list
-#            echo 'export DIST_DIRECTORIES=$dist_list' >> $BASH_ENV
-#            source $BASH_ENV
 
   install_node_dependencies:
     description: Installs the node dependencies
@@ -153,9 +143,11 @@ commands:
 
   run_command:
     parameters:
+      command_description:
+        type: string
       command_name:
         type: string
-    description: Runs << command_name >> against updated packages if RUN_ALL is false, all if true
+    description: << parameters.command_description >>
     steps:
       - run:
           name: Lint Changed Packages
@@ -212,117 +204,49 @@ commands:
     description: Locally lints all packages in the monorepo
     steps:
       - run_command:
+          command_description: Run liniting for packages
           command_name: "lint"
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     steps:
-      - when:
-          condition:
-            equal: [ "false", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Run unit / integration tests for updated packages
-                command: yarn test --since master...HEAD
-      - when:
-          condition:
-            equal: [ "true", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Run unit / integration tests for all packages
-                command: yarn test
+      - run_command:
+          command_description: Run unit / integration tests for packages
+          command_name: "test"
 
   build_storybook:
     description: Build Storybook for UI tests
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     steps:
-      - when:
-          condition:
-            equal: [ "false", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Build storybook for updated packages for UI tests
-                command: yarn storybook:build-changed
-      - when:
-          condition:
-            equal: [ "true", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Build storybook for all packages for UI tests
-                command: yarn storybook:build
+      - run:
+          name: Build storybook for updated packages for UI tests
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn storybook:build
+            else
+              yarn <storybook:build-changed
+            fi
 
   component_tests:
     description: Run Component Tests
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     steps:
-      - when:
-          condition:
-            equal: [ "false", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Run component tests for updated packages
-                command: yarn test-component:chrome --since master...HEAD
-      - when:
-          condition:
-            equal: [ "true", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Run component tests for all packages
-                command: yarn test-component:chrome
+      - run_command:
+          command_description: Run component tests for packages
+          command_name: "test-component:chrome"
 
   accessibility_tests:
-    description: Run Accessibility Tests\
-    parameters:
-      run_all:
-        default: "true"
-        type: string
+    description: Run Accessibility Tests
     steps:
-      - when:
-          condition:
-            equal: [ "false", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Run accessibility tests for updated packages
-                command: yarn test-a11y:chrome --since master...HEAD
-      - when:
-          condition:
-            equal: [ "true", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Run accessibility tests for all packages
-                command: yarn test-a11y:chrome
+      - run_command:
+          command_description: Run accessibility tests for packages
+          command_name: "test-a11y:chrome"
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     steps:
-      - when:
-          condition:
-            equal: [ "false", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Run Percy visual regression tests for updated packages
-                command: yarn test:visual --since master...HEAD
-      - when:
-          condition:
-            equal: [ "true", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Run Percy visual regression tests for all packages
-                command: yarn test:visual
+      - run_command:
+          command_description: un Percy visual regression tests for packages
+          command_name: "test:visual"
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
