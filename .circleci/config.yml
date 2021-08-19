@@ -444,7 +444,6 @@ jobs:
 #      - detect_root_change
       - checkout
       - cache_checksum
-      - run: ls -al
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
