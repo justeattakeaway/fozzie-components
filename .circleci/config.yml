@@ -364,10 +364,6 @@ jobs:
 
   build:
     executor: node
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
@@ -393,40 +389,30 @@ jobs:
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
-      - build_packages:
-          run_all: << parameters.run_all >>
+      - build_packages
       - lint_packages
 
   unit_tests:
     executor: node
     environment:
       LERNA_ARGS: --concurrency 1
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     steps:
-#      - detect_root_change
       - checkout
+      - detect_root_change
       - cache_checksum
       - restore_node_modules_cache
       - install_node_dependencies
       - restore_cache_dist_directories
-      - unit_integration_tests:
-          run_all: << parameters.run_all >>
+      - unit_integration_tests
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
 
   browser_tests:
     executor: node
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     steps:
-#      - detect_root_change
       - checkout
+      - detect_root_change
       - cache_checksum
       - restore_node_modules_cache
       - install_node_dependencies
@@ -434,18 +420,14 @@ jobs:
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
-      - build_storybook:
-          run_all: << parameters.run_all >>
+      - build_storybook
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
           background: true
-      - component_tests:
-          run_all: << parameters.run_all >>
-      - accessibility_tests:
-          run_all: << parameters.run_all >>
-      - visual_regression_tests:
-          run_all: << parameters.run_all >>
+      - component_tests
+      - accessibility_tests
+      - visual_regression_tests
       - store_artifacts:
           path: test/results/axe-violations
       - store_artifacts:
@@ -524,59 +506,29 @@ jobs:
 workflows:
   version: 2
 
-  pull_requests:
+  build_and_test:
     jobs:
       - build:
-          run_all: "false"
           context: web-core
           filters:
             branches:
-              ignore: ['gh-pages', 'master']
+              ignore: ['gh-pages']
 
       - unit_tests:
-          run_all: "false"
           requires:
             - build
           context: web-core
           filters:
             branches:
-              ignore: ['gh-pages', 'master']
+              ignore: ['gh-pages']
 
       - browser_tests:
-          run_all: "false"
           requires:
             - build
           context: web-core
           filters:
             branches:
-              ignore: ['gh-pages', 'master']
-
-  master:
-    jobs:
-      - build:
-          run_all: "true"
-          context: web-core
-          filters:
-            branches:
-              only: master
-
-      - unit_tests:
-          run_all: "true"
-          requires:
-            - build
-          context: web-core
-          filters:
-            branches:
-              only: master
-
-      - browser_tests:
-          run_all: "true"
-          requires:
-            - build
-          context: web-core
-          filters:
-            branches:
-              only: master
+              ignore: ['gh-pages']
 
   deploy-storybook:
     jobs:
