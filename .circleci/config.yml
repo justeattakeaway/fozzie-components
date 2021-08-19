@@ -150,7 +150,7 @@ commands:
     description: << parameters.command_description >>
     steps:
       - run:
-          name: Lint Changed Packages
+          name: << parameters.command_description >>
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
