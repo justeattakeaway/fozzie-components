@@ -196,18 +196,17 @@ commands:
     description: Locally lints all packages in the monorepo
     parameters:
       runtime_run_all:
-        default: RUN_ALL
-        type: env_var_name
+        default: "false"
+        type: string
       run_all:
         default: "true"
         type: string
     steps:
-      - run: echo ${<< parameters.runtime_run_all >>}
       - when:
           condition:
             and:
               - equal: [ "false", << parameters.run_all >> ]
-              - equal: [<< parameters.run_all >>, "${<< parameters.runtime_run_all >>}" ]
+              - equal: [<< parameters.run_all >>, << parameters.runtime_run_all >> ]
           steps:
             - run:
                 name: Lint Changed Packages
@@ -218,7 +217,7 @@ commands:
               - and:
                 - equal: [ "true", << parameters.run_all >> ]
               - or:
-                - equal: ["true", "${<< parameters.runtime_run_all >>}" ]
+                - equal: ["true", << parameters.runtime_run_all >>]
           steps:
             - run:
                 name: Lint All Packages
@@ -451,6 +450,9 @@ jobs:
   build:
     executor: node
     parameters:
+      runtime_run_all:
+        default: RUN_ALL
+        type: env_var_name
       run_all:
         default: "true"
         type: string
@@ -482,8 +484,8 @@ jobs:
       - build_packages:
           run_all: << parameters.run_all >>
       - lint_packages:
+          runtime_run_all: ${<< parameters.runtime_run_all >>}
           run_all: << parameters.run_all >>
-      - run: echo "test here"
 
   unit_tests:
     executor: node
