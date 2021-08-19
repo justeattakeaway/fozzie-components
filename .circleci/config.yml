@@ -165,7 +165,7 @@ commands:
             - restore_cache_dist_directories
             - run:
                 name: Build Changed Packages
-                command: yarn build --since origin/master --include-dependencies
+                command: yarn build --since origin/master
             - save_cache_dist_directories
       - when:
           condition:
