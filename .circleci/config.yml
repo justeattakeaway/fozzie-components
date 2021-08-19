@@ -207,7 +207,7 @@ commands:
           condition:
             and:
               - equal: [ "false", << parameters.run_all >> ]
-              - equal: [<< parameters.run_all >>, ${<< parameters.runtime_run_all >>} ]
+              - equal: [<< parameters.run_all >>, "${<< parameters.runtime_run_all >>}" ]
           steps:
             - run:
                 name: Lint Changed Packages
@@ -218,7 +218,7 @@ commands:
               - and:
                 - equal: [ "true", << parameters.run_all >> ]
               - or:
-                - equal: ["true", ${<< parameters.runtime_run_all >>} ]
+                - equal: ["true", "${<< parameters.runtime_run_all >>}" ]
           steps:
             - run:
                 name: Lint All Packages
