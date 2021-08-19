@@ -37,10 +37,10 @@ commands:
             echo $changes
 
             if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
-              echo 'export RUN_ALL="true"' >> $BASH_ENV
+              echo 'export RUN_ALL=true' >> $BASH_ENV
               source $BASH_ENV
             else
-            echo 'export RUN_ALL="false"' >> $BASH_ENV
+            echo 'export RUN_ALL=false' >> $BASH_ENV
               echo 'Root files not changed'
             fi
 
@@ -205,7 +205,15 @@ commands:
           steps:
             - run:
                 name: Lint Changed Packages
-                command: yarn lint --since master...HEAD
+#                command: yarn lint --since master...HEAD
+                command: |
+                    if [ "${RUN_ALL}" == "true" ];
+                    then
+                      yarn lint
+                    else
+                      yarn lint --since master...HEAD
+                    fi
+
       - when:
           condition:
             equal: [ "true", << parameters.run_all >> ]
@@ -442,8 +450,8 @@ jobs:
     executor: node
     parameters:
       run_all:
-        default: RUN_ALL
-        type: env_var_name
+        default: "true"
+        type: string
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
@@ -470,9 +478,9 @@ jobs:
           name: Run PR Checks
           command: yarn danger ci
       - build_packages:
-          run_all: ${<< parameters.run_all >>}
+          run_all: << parameters.run_all >>
       - lint_packages:
-          run_all: ${<< parameters.run_all >>}
+          run_all: << parameters.run_all >>
 
   unit_tests:
     executor: node
@@ -601,13 +609,41 @@ jobs:
 workflows:
   version: 2
 
-  build_and_test:
+  pull_requests:
     jobs:
       - build:
+          run_all: "false"
           context: web-core
           filters:
             branches:
-              ignore: ['gh-pages']
+              ignore: ['gh-pages', 'master']
+
+      - unit_tests:
+          run_all: "false"
+          requires:
+            - build
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+
+      - browser_tests:
+          run_all: "false"
+          requires:
+            - build
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+
+  master:
+    jobs:
+      - build:
+          run_all: "true"
+          context: web-core
+          filters:
+            branches:
+              only: master
 
       - unit_tests:
           run_all: "true"
@@ -616,7 +652,7 @@ workflows:
           context: web-core
           filters:
             branches:
-              ignore: ['gh-pages']
+              only: master
 
       - browser_tests:
           run_all: "true"
@@ -625,7 +661,7 @@ workflows:
           context: web-core
           filters:
             branches:
-              ignore: ['gh-pages']
+              only: master
 
   deploy-storybook:
     jobs:
