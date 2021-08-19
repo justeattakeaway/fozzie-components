@@ -162,9 +162,9 @@ commands:
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
-              yarn ${<< command_name >>}
+              yarn << command_name >>
             else
-              yarn ${<< command_name >>} --since master...HEAD
+              yarn << command_name >> --since master...HEAD
             fi
 
   cache_checksum:
