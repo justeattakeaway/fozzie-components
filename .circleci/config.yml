@@ -66,7 +66,7 @@ commands:
     steps:
       - run:
           name: Install node dependencies
-          command: yarn install --cache-folder ~/.cache/yarn
+          command: yarn
 
   save_cache_dist_directories:
     description: Saves cache for dist directories
