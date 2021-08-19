@@ -480,6 +480,7 @@ jobs:
           run_all: << parameters.run_all >>
       - lint_packages:
           run_all: << parameters.run_all >>
+      - run: echo "test here"
 
   unit_tests:
     executor: node
