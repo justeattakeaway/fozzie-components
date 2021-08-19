@@ -202,6 +202,7 @@ commands:
         default: "true"
         type: string
     steps:
+      - run: echo ${<< parameters.runtime_run_all >>}
       - when:
           condition:
             and:
