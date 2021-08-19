@@ -471,8 +471,7 @@ jobs:
           command: yarn danger ci
       - build_packages:
           run_all: << parameters.run_all >>
-      - lint_packages:
-          run_all: << parameters.run_all >>
+      - lint_packages
 
   unit_tests:
     executor: node
