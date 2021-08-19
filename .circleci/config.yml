@@ -151,6 +151,22 @@ commands:
             - build-cache-services-master-
             - build-cache-services-
 
+  run_command:
+    parameters:
+      command_name:
+        type: string
+    description: Runs << command_name >> against updated packages if RUN_ALL is false, all if true
+    steps:
+      - run:
+          name: Lint Changed Packages
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn ${<< command_name >>}
+            else
+              yarn ${<< command_name >>} --since master...HEAD
+            fi
+
   cache_checksum:
     description: Yarn node_modules cache checksum
     steps:
@@ -194,33 +210,9 @@ commands:
 
   lint_packages:
     description: Locally lints all packages in the monorepo
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     steps:
-      - when:
-          condition:
-            equal: [ "false", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Lint Changed Packages
-#                command: yarn lint --since master...HEAD
-                command: |
-                    if [ "${RUN_ALL}" == "true" ];
-                    then
-                      yarn lint
-                    else
-                      yarn lint --since master...HEAD
-                    fi
-
-      - when:
-          condition:
-            equal: [ "true", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Lint All Packages
-                command: yarn lint
+      - run_command:
+          command_name: "lint"
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
