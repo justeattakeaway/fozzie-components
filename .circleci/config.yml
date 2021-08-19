@@ -189,7 +189,7 @@ commands:
           steps:
             - run:
                 name: Lint Changed Packages
-                command: yarn lint --since origin/master
+                command: yarn lint --since master...HEAD
       - when:
           condition:
             equal: [ "true", << parameters.run_all >> ]
@@ -211,7 +211,7 @@ commands:
           steps:
             - run:
                 name: Run unit / integration tests for updated packages
-                command: yarn test --since origin/master
+                command: yarn test --since master...HEAD
       - when:
           condition:
             equal: [ "true", << parameters.run_all >> ]
@@ -255,7 +255,7 @@ commands:
           steps:
             - run:
                 name: Run component tests for updated packages
-                command: yarn test-component:chrome --since origin/master
+                command: yarn test-component:chrome --since master...HEAD
       - when:
           condition:
             equal: [ "true", << parameters.run_all >> ]
@@ -277,7 +277,7 @@ commands:
           steps:
             - run:
                 name: Run accessibility tests for updated packages
-                command: yarn test-a11y:chrome --since origin/master
+                command: yarn test-a11y:chrome --since master...HEAD
       - when:
           condition:
             equal: [ "true", << parameters.run_all >> ]
@@ -299,7 +299,7 @@ commands:
           steps:
             - run:
                 name: Run Percy visual regression tests for updated packages
-                command: yarn test:visual --since origin/master
+                command: yarn test:visual --since master...HEAD
       - when:
           condition:
             equal: [ "true", << parameters.run_all >> ]
