@@ -643,7 +643,8 @@ workflows:
           filters:
             branches:
               only: master
-      - lint:
+
+      - unit_tests:
           run_all: "true"
           requires:
             - build
@@ -652,16 +653,7 @@ workflows:
             branches:
               only: master
 
-      - test:
-          run_all: "true"
-          requires:
-            - build
-          context: web-core
-          filters:
-            branches:
-              only: master
-
-      - e2e:
+      - browser_tests:
           run_all: "true"
           requires:
             - build
