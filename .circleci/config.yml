@@ -438,12 +438,25 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Create cache checksum file
+          command: |
+            mkdir -p ~/.tmp/checksumfiles
+            find . -type f -name 'yarn.lock' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/yarn.lock
+      - restore_cache:
+          name: Restore node_modules
+          keys:
+            - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - save_cache:
+          key: yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
+          paths:
+            - node_modules
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
@@ -463,6 +476,13 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          name: Restore node_modules
+          keys:
+            - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
+      - run:
+          name: Test check node_modules
+          command: cd node_modules && ls -al
       - install_node_dependencies
       - restore_cache_dist_directories
       - lint_packages:
