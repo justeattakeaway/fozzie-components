@@ -178,27 +178,12 @@ commands:
 
   build_packages:
     description: Locally builds all packages in the monorepo
-    parameters:
-      run_all:
-        default: "true"
-        type: string
     steps:
-      - when:
-          condition:
-            equal: [ "false", << parameters.run_all >> ]
-          steps:
-            - restore_cache_dist_directories
-            - run:
-                name: Build Changed Packages
-                command: yarn build --since master...HEAD
-            - save_cache_dist_directories
-      - when:
-          condition:
-            equal: [ "true", << parameters.run_all >> ]
-          steps:
-            - run:
-                name: Build All Packages
-                command: yarn build
+      - restore_cache_dist_directories
+      - run_command:
+          command_description: Build packages
+          command_name: "build"
+      - save_cache_dist_directories
 
   lint_packages:
     description: Locally lints all packages in the monorepo
