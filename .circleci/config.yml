@@ -195,20 +195,27 @@ commands:
   lint_packages:
     description: Locally lints all packages in the monorepo
     parameters:
+      runtime_run_all:
+        default: RUN_ALL
+        type: env_var_name
       run_all:
         default: "true"
         type: string
     steps:
       - when:
           condition:
-            equal: [ "false", << parameters.run_all >> ]
+            and:
+              - equal: [ "false", << parameters.run_all >> ]
+              - equal: [<< parameters.run_all >>, << parameters.runtime_run_all >> ]
           steps:
             - run:
                 name: Lint Changed Packages
                 command: yarn lint --since master...HEAD
       - when:
           condition:
-            equal: [ "true", << parameters.run_all >> ]
+            and:
+              - equal: [ "true", << parameters.run_all >> ]
+              - or: ["true", << parameters.runtime_run_all >> ]
           steps:
             - run:
                 name: Lint All Packages
@@ -448,7 +455,7 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps:
-#      - detect_root_change
+      - detect_root_change
       - checkout
       - cache_checksum
       - restore_cache:
@@ -471,30 +478,10 @@ jobs:
           command: yarn danger ci
       - build_packages:
           run_all: << parameters.run_all >>
-
-  lint:
-    executor: node
-    parameters:
-      run_all:
-        default: "true"
-        type: string
-    steps:
-#      - detect_root_change
-      - checkout
-      - cache_checksum
-      - restore_node_modules_cache
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Test check node_modules
-          command: cd node_modules && ls -al
-      - restore_cache_dist_directories
       - lint_packages:
           run_all: << parameters.run_all >>
 
-  test:
+  unit_tests:
     executor: node
     environment:
       LERNA_ARGS: --concurrency 1
@@ -507,6 +494,7 @@ jobs:
       - checkout
       - cache_checksum
       - restore_node_modules_cache
+      - install_node_dependencies
       - restore_cache_dist_directories
       - unit_integration_tests:
           run_all: << parameters.run_all >>
@@ -514,7 +502,7 @@ jobs:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
 
-  e2e:
+  browser_tests:
     executor: node
     parameters:
       run_all:
@@ -525,6 +513,7 @@ jobs:
       - checkout
       - cache_checksum
       - restore_node_modules_cache
+      - install_node_dependencies
       - restore_cache_dist_directories
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
@@ -627,7 +616,8 @@ workflows:
           filters:
             branches:
               ignore: ['gh-pages', 'master']
-      - lint:
+
+      - unit_tests:
           run_all: "false"
           requires:
             - build
@@ -636,16 +626,7 @@ workflows:
             branches:
               ignore: ['gh-pages', 'master']
 
-      - test:
-          run_all: "false"
-          requires:
-            - build
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages', 'master']
-
-      - e2e:
+      - browser_tests:
           run_all: "false"
           requires:
             - build
