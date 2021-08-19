@@ -160,7 +160,7 @@ commands:
             mkdir -p ~/.tmp/checksumfiles
             find . -type f -name 'yarn.lock' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/yarn.lock
 
-  restore_nod_modules_cache:
+  restore_node_modules_cache:
     description: Restore node_modules folder
     steps:
       - restore_cache:
@@ -455,10 +455,7 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          name: Restore node_modules
-          keys:
-            - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
+      - restore_node_modules_cache
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
@@ -485,7 +482,7 @@ jobs:
 #      - detect_root_change
       - checkout
       - cache_checksum
-      - restore_nod_modules_cache
+      - restore_node_modules_cache
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -493,7 +490,6 @@ jobs:
       - run:
           name: Test check node_modules
           command: cd node_modules && ls -al
-      - install_node_dependencies
       - restore_cache_dist_directories
       - lint_packages:
           run_all: << parameters.run_all >>
@@ -510,8 +506,7 @@ jobs:
 #      - detect_root_change
       - checkout
       - cache_checksum
-      - restore_nod_modules_cache
-#      - install_node_dependencies
+      - restore_node_modules_cache
       - restore_cache_dist_directories
       - unit_integration_tests:
           run_all: << parameters.run_all >>
@@ -529,8 +524,7 @@ jobs:
 #      - detect_root_change
       - checkout
       - cache_checksum
-      - restore_nod_modules_cache
-      - install_node_dependencies
+      - restore_node_modules_cache
       - restore_cache_dist_directories
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
