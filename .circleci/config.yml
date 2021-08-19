@@ -151,6 +151,15 @@ commands:
             - build-cache-services-master-
             - build-cache-services-
 
+  cache_checksum:
+    description: Yarn node_modules cache checksum
+    steps:
+      - run:
+          name: Create cache checksum file
+          command: |
+            mkdir -p ~/.tmp/checksumfiles
+            find . -type f -name 'yarn.lock' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/yarn.lock
+
   build_packages:
     description: Locally builds all packages in the monorepo
     parameters:
@@ -434,15 +443,11 @@ jobs:
     steps:
 #      - detect_root_change
       - checkout
+      - cache_checksum
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Create cache checksum file
-          command: |
-            mkdir -p ~/.tmp/checksumfiles
-            find . -type f -name 'yarn.lock' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/yarn.lock
       - restore_cache:
           name: Restore node_modules
           keys:
@@ -472,6 +477,7 @@ jobs:
     steps:
 #      - detect_root_change
       - checkout
+      - cache_checksum
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
