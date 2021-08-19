@@ -108,11 +108,6 @@ export default {
             default: false
         },
 
-        isCloseRounded: {
-            type: Boolean,
-            default: false
-        },
-
         isPositionedBottom: {
             type: Boolean,
             default: false
@@ -314,7 +309,7 @@ export default {
     text-align: center;
     top: 50%;
     transform: translate(50%, -50%);
-    width: 75%;
+    width: 85%;
 
     &.is-positioned-bottom {
         border-radius: 0;
@@ -332,6 +327,10 @@ export default {
         }
     }
 
+    @include media('>=narrow') {
+        width: 75%;
+    }
+
     @include media('<mid') {
         min-width: em(22);
 
@@ -343,7 +342,6 @@ export default {
     @include media('>=mid') {
         max-height: 90vh;
         max-width: 600px;
-        padding: spacing(x5);
     }
 }
 
@@ -352,15 +350,22 @@ export default {
     }
 
     .c-megaModal-content--narrow {
-        max-width: 100%;
-
         @include media('>=narrowMid') {
             max-width: 450px;
         }
     }
 
     .c-megaModal-content--wide {
-        max-width: 1005px;
+        max-width: 1080px;
+
+        @include media('<huge') {
+            max-width: 75%;
+        }
+
+        @include media('<mid') {
+            width: 100%;
+            max-width: 100%;
+        }
     }
 
     .c-megaModal-content--flush {
@@ -388,7 +393,7 @@ export default {
         opacity: 0.9;
         position: absolute;
         right: spacing(x2);
-        top: spacing(x1.5);
+        top: spacing(x2);
         z-index: zIndex(high);
 
         @include media('>=mid') {

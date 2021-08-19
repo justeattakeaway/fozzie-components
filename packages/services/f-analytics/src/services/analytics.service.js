@@ -1,20 +1,6 @@
-import {
-    COUNTRY_INFO,
-    DEFAULT_APP_TYPE,
-    DEFAULT_APP_ID
-} from '@/constants';
+import { mapPlatformData, mapUserData } from './analytics.mapper';
 
 const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
-
-const mapUserAgent = (platformData, req) => {
-    let userAgentString;
-    if (typeof (window) !== 'undefined' && navigator) {
-        userAgentString = navigator.userAgent;
-    } else if (req && req.headers) {
-        userAgentString = req.headers['user-agent'];
-    }
-    if (userAgentString) platformData.userAgent = userAgentString;
-};
 
 export default class AnalyticService {
     constructor (store, req, options) {
@@ -28,14 +14,7 @@ export default class AnalyticService {
     pushPlatformData () {
         const platformData = { ...this.store.state[`${this.namespace}`].platformData };
 
-        platformData.name = this.featureName;
-        platformData.appType = DEFAULT_APP_TYPE;
-        platformData.applicationId = DEFAULT_APP_ID;
-        mapUserAgent(platformData, this.req);
-        platformData.branding = COUNTRY_INFO[this.locale].brand;
-        platformData.country = COUNTRY_INFO[this.locale].country;
-        platformData.language = COUNTRY_INFO[this.locale].language;
-        platformData.currency = COUNTRY_INFO[this.locale].currency;
+        mapPlatformData(platformData, this.featureName, this.locale, this.req);
 
         this.store.dispatch(`${this.namespace}/updatePlatformData`, platformData);
 
@@ -44,6 +23,18 @@ export default class AnalyticService {
         }
 
         return platformData;
+    }
+
+    pushUserData (authToken) {
+        const userData = { ...this.store.state[`${this.namespace}`].userData };
+
+        mapUserData(userData, authToken, this.req);
+
+        if (isDataLayerPresent()) {
+            window.dataLayer.push({ userData: { ...userData } });
+        }
+
+        return userData;
     }
 
     pushEvent (event) {
@@ -62,3 +53,4 @@ export default class AnalyticService {
         return event;
     }
 }
+
