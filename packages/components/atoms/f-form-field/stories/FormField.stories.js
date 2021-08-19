@@ -41,8 +41,20 @@ export const FormFieldComponent = () => ({
         },
         dropdownOptions: {
             default: object('Dropdown Options', [
-                { text: 'As soon as possible', value: '2021-01-01T01:00:00.000Z' },
-                { text: 'Today in 5 minutes', value: '2021-01-01T01:05:00.000Z' }
+                {
+                    disabled: true,
+                    selected: true,
+                    text: 'Disabled option',
+                    value: ''
+                },
+                {
+                    text: 'As soon as possible',
+                    value: '2021-01-01T01:00:00.000Z'
+                },
+                {
+                    text: 'Today in 5 minutes',
+                    value: '2021-01-01T01:05:00.000Z'
+                }
             ])
         },
         isGrouped: {
