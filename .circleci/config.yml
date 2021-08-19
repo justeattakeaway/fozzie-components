@@ -455,8 +455,8 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps:
-      - detect_root_change
       - checkout
+      - detect_root_change
       - cache_checksum
       - restore_cache:
           name: Restore Yarn Package Cache
