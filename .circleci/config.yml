@@ -50,103 +50,259 @@ commands:
   #     - run: |
   #         echo $RUN_ALL
 
+#  dist_directories_to_cache:
+#    description: Saves list of directories to cache to ENV variable
+#    steps:
+#      - run:
+#          name: find dist folder excluding the nod_modules
+#          command: |
+#            dist_list=`find . -type d \( -name node_modules -o -path name \) -prune -false -o -name 'dist' | xargs echo | sed 's/ /,/g'`
+#            echo $dist_list
+#            echo 'export DIST_DIRECTORIES=$dist_list' >> $BASH_ENV
+#            source $BASH_ENV
+
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
       - run:
           name: Install node dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+
+  save_cache_dist_directories:
+    description: Saves cache for dist directories
+    steps:
+      - save_cache:
+          name: Cache for molecules
+          key: build-cache-molecules-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/tools/f-vue-icons/dist
+            - packages/components/molecules/f-user-message/dist
+            - packages/components/molecules/f-mega-modal/dist
+            - packages/components/molecules/f-skeleton-loader/dist
+            - packages/components/molecules/f-breadcrumbs/dist
+            - packages/components/molecules/f-media-element/dist
+            - packages/components/molecules/f-alert/dist
+            - packages/components/molecules/f-searchbox/dist
+            - packages/components/molecules/f-tabs/dist
+      - save_cache:
+          name: Cache for atoms
+          key: build-cache-atoms-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/atoms/f-popover/dist
+            - packages/components/atoms/f-link/dist
+            - packages/components/atoms/f-error-message/dist
+            - packages/components/atoms/f-form-field/dist
+            - packages/components/atoms/f-card/dist
+            - packages/components/atoms/f-button/dist
+
+      - save_cache:
+          name: Cache for organisms
+          key: build-cache-organisms-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/organisms/f-takeawaypay-activation/dist
+            - packages/components/organisms/f-cookie-banner/dist
+            - packages/components/organisms/f-footer/dist
+            - packages/components/organisms/f-checkout/dist
+            - packages/components/organisms/f-offers/dist
+            - packages/components/organisms/f-registration/dist
+            - packages/components/organisms/f-loyalty/dist
+            - packages/components/organisms/f-header/dist
+            - packages/components/organisms/f-content-cards/dist
+            - packages/components/organisms/f-status-banner/dist
+
+      - save_cache:
+          name: Cache for services
+          key: build-cache-services-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/services/f-statistics/dist
+            - packages/services/f-feature-management/dist
+            - packages/services/f-http/dist
+            - packages/services/f-globalisation/dist
+            - packages/services/f-consumer-oidc/dist
+            - packages/services/f-development-context/dist
+            - packages/services/f-analytics/dist
+            - packages/services/f-services/dist
+
+  restore_cache_dist_directories:
+    description: Restores all the dist dircetories
+    steps:
+      - restore_cache:
+          name: Restore molecules Cache
+          keys:
+            - build-cache-molecules-{{ .Branch }}-
+            - build-cache-molecules-master-
+      - restore_cache:
+          name: Restore atoms Cache
+          keys:
+            - build-cache-atoms-{{ .Branch }}-
+            - build-cache-atoms-master-
+      - restore_cache:
+          name: Restore organisms Cache
+          keys:
+            - build-cache-organisms-{{ .Branch }}-
+            - build-cache-organisms-master-
+      - restore_cache:
+          name: Restore services Cache
+          keys:
+            - build-cache-services-{{ .Branch }}-
+            - build-cache-services-master-
 
   build_packages:
     description: Locally builds all packages in the monorepo
+    parameters:
+      run_all:
+        default: "true"
+        type: string
     steps:
-      - run:
-          name: Build updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn build
-            else
-              yarn build --since origin/master --include-dependencies
-            fi
+      - when:
+          condition:
+            equal: [ "false", << parameters.run_all >> ]
+          steps:
+            - restore_cache_dist_directories
+            - run:
+                name: Build Changed Packages
+                command: yarn build --since origin/master --include-dependencies
+            - save_cache_dist_directories
+      - when:
+          condition:
+            equal: [ "true", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Build All Packages
+                command: yarn build
+      - save_cache_dist_directories
 
   lint_packages:
     description: Locally lints all packages in the monorepo
+    parameters:
+      run_all:
+        default: "true"
+        type: string
     steps:
-      - run:
-          name: Lint updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn lint
-            else
-              yarn lint --since origin/master
-            fi
+      - when:
+          condition:
+            equal: [ "false", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Lint Changed Packages
+                command: yarn lint --since origin/master
+      - when:
+          condition:
+            equal: [ "true", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Lint All Packages
+                command: yarn lint
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
+    parameters:
+      run_all:
+        default: "true"
+        type: string
     steps:
-      - run:
-          name: Run unit / integration tests for updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn test
-            else
-              yarn test --since origin/master
-            fi
+      - when:
+          condition:
+            equal: [ "false", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Run unit / integration tests for updated packages
+                command: yarn test --since origin/master
+      - when:
+          condition:
+            equal: [ "true", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Run unit / integration tests for all packages
+                command: yarn test
 
   build_storybook:
     description: Build Storybook for UI tests
+    parameters:
+      run_all:
+        default: "true"
+        type: string
     steps:
-      - run:
-          name: Build storybook for updated packages for UI tests
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn storybook:build
-            else
-              yarn storybook:build-changed
-            fi
+      - when:
+          condition:
+            equal: [ "false", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Build storybook for updated packages for UI tests
+                command: yarn storybook:build-changed
+      - when:
+          condition:
+            equal: [ "true", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Build storybook for all packages for UI tests
+                command: yarn storybook:build
 
   component_tests:
     description: Run Component Tests
+    parameters:
+      run_all:
+        default: "true"
+        type: string
     steps:
-      - run:
-          name: Run component tests for updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn test-component:chrome
-            else
-              yarn test-component:chrome --since origin/master
-            fi
+      - when:
+          condition:
+            equal: [ "false", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Run component tests for updated packages
+                command: yarn test-component:chrome --since origin/master
+      - when:
+          condition:
+            equal: [ "true", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Run component tests for all packages
+                command: yarn test-component:chrome
 
   accessibility_tests:
-    description: Run Accessibility Tests
+    description: Run Accessibility Tests\
+    parameters:
+      run_all:
+        default: "true"
+        type: string
     steps:
-      - run:
-          name: Run accessibility tests for updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn test-a11y:chrome
-            else
-              yarn test-a11y:chrome --since origin/master
-            fi
+      - when:
+          condition:
+            equal: [ "false", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Run accessibility tests for updated packages
+                command: yarn test-a11y:chrome --since origin/master
+      - when:
+          condition:
+            equal: [ "true", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Run accessibility tests for all packages
+                command: yarn test-a11y:chrome
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
+    parameters:
+      run_all:
+        default: "true"
+        type: string
     steps:
-      - run:
-          name: Run Percy visual regression tests for updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn test:visual
-            else
-              yarn test:visual --since origin/master
-            fi
+      - when:
+          condition:
+            equal: [ "false", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Run Percy visual regression tests for updated packages
+                command: yarn test:visual --since origin/master
+      - when:
+          condition:
+            equal: [ "true", << parameters.run_all >> ]
+          steps:
+            - run:
+                name: Run Percy visual regression tests for all packages
+                command: yarn test:visual
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
@@ -264,17 +420,20 @@ jobs:
 
   build:
     executor: node
+    parameters:
+      run_all:
+        default: "true"
+        type: string
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
-      - detect_root_change
-      # - echo_root
+    steps:
+#      - detect_root_change
+      - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
@@ -284,31 +443,126 @@ jobs:
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
-      - build_packages
-      - lint_packages
-      - unit_integration_tests
+      - build_packages:
+          run_all: << parameters.run_all >>
+
+  lint:
+    executor: node
+    parameters:
+      run_all:
+        default: "true"
+        type: string
+    steps:
+#      - detect_root_change
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
+      - restore_cache_dist_directories
+      - lint_packages:
+          run_all: << parameters.run_all >>
+
+  test:
+    executor: node
+    environment:
+      LERNA_ARGS: --concurrency 1
+    parameters:
+      run_all:
+        default: "true"
+        type: string
+    steps:
+#      - detect_root_change
+      - checkout
+      - install_node_dependencies
+      - restore_cache_dist_directories
+      - unit_integration_tests:
+          run_all: << parameters.run_all >>
+      - run:
+          name: Run Bundlewatch checks
+          command: yarn bundlewatch
+
+  e2e:
+    executor: node
+    parameters:
+      run_all:
+        default: "true"
+        type: string
+    steps:
+#      - detect_root_change
+      - checkout
+      - install_node_dependencies
+      - restore_cache_dist_directories
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
-      - build_storybook
+      - build_storybook:
+          run_all: << parameters.run_all >>
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
           background: true
-      - component_tests
-      - accessibility_tests
-      - visual_regression_tests
+      - component_tests:
+          run_all: << parameters.run_all >>
+      - accessibility_tests:
+          run_all: << parameters.run_all >>
+      - visual_regression_tests:
+          run_all: << parameters.run_all >>
       - store_artifacts:
           path: test/results/axe-violations
       - store_artifacts:
           path: test/results/allure/failure-videos
       - store_test_results:
           path: test/results/ci
-      - run:
-          name: Run Bundlewatch checks
-          command: yarn bundlewatch
-      - slack_notify_fail
-      - slack_notify_success
+
+#  build:
+#    executor: node
+#    environment:
+#      # required to prevent ENOMEM errors
+#      LERNA_ARGS: --concurrency 1
+#    steps: # a collection of executable commands
+#      - checkout # special step to check out source code to working directory
+#      - detect_root_change
+#      # - echo_root
+#      - restore_cache:
+#          name: Restore Yarn Package Cache
+#          keys:
+#              - yarn-packages-{{ checksum "yarn.lock" }}
+#      - install_node_dependencies
+#      - save_cache:
+#          name: Save Yarn Package Cache
+#          key: yarn-packages-{{ checksum "yarn.lock" }}
+#          paths:
+#            - ~/.cache/yarn
+#      - run: # Run PR Checks
+#          name: Run PR Checks
+#          command: yarn danger ci
+#      - build_packages
+#      - lint_packages
+#      - unit_integration_tests
+#      - run: # Install Component Test Dependencies
+#          name: Install Component Test Dependencies
+#          command: yarn global add @vue/cli @vue/cli-service-global
+#      - build_storybook
+#      - run: # Serve Storybook
+#          name: Serve Storybook
+#          command: yarn storybook:serve-static
+#          background: true
+#      - component_tests
+#      - accessibility_tests
+#      - visual_regression_tests
+#      - store_artifacts:
+#          path: test/results/axe-violations
+#      - store_artifacts:
+#          path: test/results/allure/failure-videos
+#      - store_test_results:
+#          path: test/results/ci
+#      - run:
+#          name: Run Bundlewatch checks
+#          command: yarn bundlewatch
+#      - slack_notify_fail
+#      - slack_notify_success
 
   deploy-storybook:
     executor: node
@@ -333,13 +587,75 @@ jobs:
 workflows:
   version: 2
 
-  build:
+  pull_requests:
     jobs:
       - build:
+          run_all: "false"
           context: web-core
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore: ['gh-pages', 'master']
+      - lint:
+          run_all: "false"
+          requires:
+            - build
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+
+      - test:
+          run_all: "false"
+          requires:
+            - build
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+
+      - e2e:
+          run_all: "false"
+          requires:
+            - build
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+
+  master:
+    jobs:
+      - build:
+          run_all: "true"
+          context: web-core
+          filters:
+            branches:
+              only: master
+      - lint:
+          run_all: "true"
+          requires:
+            - build
+          context: web-core
+          filters:
+            branches:
+              only: master
+
+      - test:
+          run_all: "true"
+          requires:
+            - build
+          context: web-core
+          filters:
+            branches:
+              only: master
+
+      - e2e:
+          run_all: "true"
+          requires:
+            - build
+          context: web-core
+          filters:
+            branches:
+              only: master
 
   deploy-storybook:
     jobs:
