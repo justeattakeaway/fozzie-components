@@ -37,10 +37,10 @@ commands:
             echo $changes
 
             if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
-              echo 'export RUN_ALL=true' >> $BASH_ENV
+              echo 'export RUN_ALL="true"' >> $BASH_ENV
               source $BASH_ENV
             else
-            echo 'export RUN_ALL=false' >> $BASH_ENV
+            echo 'export RUN_ALL="false"' >> $BASH_ENV
               echo 'Root files not changed'
             fi
 
@@ -195,29 +195,20 @@ commands:
   lint_packages:
     description: Locally lints all packages in the monorepo
     parameters:
-      runtime_run_all:
-        default: "false"
-        type: string
       run_all:
         default: "true"
         type: string
     steps:
       - when:
           condition:
-            and:
-              - equal: [ "false", << parameters.run_all >> ]
-              - equal: [<< parameters.run_all >>, << parameters.runtime_run_all >> ]
+            equal: [ "false", << parameters.run_all >> ]
           steps:
             - run:
                 name: Lint Changed Packages
                 command: yarn lint --since master...HEAD
       - when:
           condition:
-            and:
-              - and:
-                - equal: [ "true", << parameters.run_all >> ]
-              - or:
-                - equal: ["true", << parameters.runtime_run_all >>]
+            equal: [ "true", << parameters.run_all >> ]
           steps:
             - run:
                 name: Lint All Packages
@@ -450,18 +441,15 @@ jobs:
   build:
     executor: node
     parameters:
-      runtime_run_all:
+      run_all:
         default: RUN_ALL
         type: env_var_name
-      run_all:
-        default: "true"
-        type: string
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps:
+#      - detect_root_change
       - checkout
-      - detect_root_change
       - cache_checksum
       - restore_cache:
           name: Restore Yarn Package Cache
@@ -482,10 +470,9 @@ jobs:
           name: Run PR Checks
           command: yarn danger ci
       - build_packages:
-          run_all: << parameters.run_all >>
+          run_all: ${<< parameters.run_all >>}
       - lint_packages:
-          runtime_run_all: ${<< parameters.runtime_run_all >>}
-          run_all: << parameters.run_all >>
+          run_all: ${<< parameters.run_all >>}
 
   unit_tests:
     executor: node
@@ -614,41 +601,13 @@ jobs:
 workflows:
   version: 2
 
-  pull_requests:
+  build_and_test:
     jobs:
       - build:
-          run_all: "false"
           context: web-core
           filters:
             branches:
-              ignore: ['gh-pages', 'master']
-
-      - unit_tests:
-          run_all: "false"
-          requires:
-            - build
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages', 'master']
-
-      - browser_tests:
-          run_all: "false"
-          requires:
-            - build
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages', 'master']
-
-  master:
-    jobs:
-      - build:
-          run_all: "true"
-          context: web-core
-          filters:
-            branches:
-              only: master
+              ignore: ['gh-pages']
 
       - unit_tests:
           run_all: "true"
@@ -657,7 +616,7 @@ workflows:
           context: web-core
           filters:
             branches:
-              only: master
+              ignore: ['gh-pages']
 
       - browser_tests:
           run_all: "true"
@@ -666,7 +625,7 @@ workflows:
           context: web-core
           filters:
             branches:
-              only: master
+              ignore: ['gh-pages']
 
   deploy-storybook:
     jobs:
