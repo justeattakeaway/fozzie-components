@@ -16,7 +16,7 @@ describe('Analytic Service ::', () => {
     let windowSpy;
     let windowsPushSpy;
 
-    const mockWindow = ({ winWidth = 667, winHeight = 375 } = {}) => {        
+    const mockWindow = ({ winWidth = 667, winHeight = 375 } = {}) => {
         windowsPushSpy = jest.fn();
         windowCopy = { ...window };
         jest.spyOn(windowCopy.navigator, 'userAgent', 'get').mockReturnValue('test-agent-string');

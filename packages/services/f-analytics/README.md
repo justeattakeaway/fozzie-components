@@ -46,7 +46,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
 *  <strong>Import & Register</strong>
 
-    F-Analytics is a 'Nuxt - Plugin' that needs to be registered in the "nuxt.config.js" but as it is contained in a fozzie service you need to create a local plugin to reference the external plugin, which then allows you to pass in options (see the `Options` section).<br><br>
+    F-Analytics is a 'Nuxt - Plugin' that needs to be registered in the "nuxt.config.js" but as it is contained in a fozzie service you need to create a local plugin to reference the external plugin, which then allows you to pass in options (see the <a href="#options">_`Options`_</a> section).<br><br>
     In the example below it demonstrates how to create a local plugin; that references the `f-analytics` plugin, and how you can create the `options` to pass into the plugin;
 
 
