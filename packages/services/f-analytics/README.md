@@ -23,7 +23,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
 ## Benefits
 - Single component to record GA data rather than having logic & implementations scattered around in various features.
-- Self-sufficient: With only supplying a small amount of data this component will attempt to evaluate, gather and record all the data required (serverside and clientside) for the GA models; `platformData`, `userData` and `pageData`.
+- Self-sufficient: With only supplying a small amount of data this component will attempt to evaluate, gather and record all the data required (serverside and clientside) for the GA models: `platformData`, `userData` and `pageData`.
 - Provide the facility to push 'ad-hoc' GA events (even if serverside).
 - Allows the consumer to dictate if & when to push analytics to GA.
 - Allows the consumer to access this service globally via the name `$gtm`, i.e. `this.$gtm.pushEvent({...}`).
