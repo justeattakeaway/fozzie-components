@@ -19,7 +19,10 @@ export default class AnalyticService {
         const platformData = { ...this.store.state[`${this.namespace}`].platformData };
 
         mapPlatformData({
-            platformData, featureName: this.featureName, locale: this.locale, req: this.req
+            platformData,
+            featureName: this.featureName,
+            locale: this.locale,
+            req: this.req
         });
 
         this.store.dispatch(`${this.namespace}/updatePlatformData`, platformData);
