@@ -55,7 +55,12 @@ export default class AnalyticService {
         const pageData = { ...this.store.state[`${this.namespace}`].pageData };
 
         mapPageData({
-            pageData, featureName: this.featureName, pageName, conversationId, requestId, httpStatusCode
+            pageData,
+            featureName: this.featureName,
+            pageName,
+            conversationId,
+            requestId,
+            httpStatusCode
         });
 
         if (isDataLayerPresent()) {
