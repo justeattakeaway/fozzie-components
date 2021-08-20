@@ -34,7 +34,7 @@ export const parameters = {
                         'Testing',
                         [
                             'Test Level Overview'
-                        ],
+                        ]
                     ],
                     'Capabilities',
                     [
