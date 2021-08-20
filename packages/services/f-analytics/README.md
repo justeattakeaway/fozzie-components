@@ -18,7 +18,7 @@ Encapsulates the GTM / Google Analytics functionality
 ---
 This component abstracts away the gathering of the various data values needed for Google Analytics (GA) and the setting up of Google Tag Manager (GTM).<br>
 Once registered and the site is running it will prepare each page with the required GTM tags for pushing analytics to GA plus it will gather and store any serverside values to be used in analytics that are pushed to GA clientside.<br>
-You can see the GTM tags and any GA data by inspecting the `header` of the page and the `dataLayer` from the browser console in developer tools.  If you excerise all the current functionality you will be able to see the following models `{platformData: {…}}`, `{userData: {…}}`, `{pageData: {…}}` & `{event: ...}` in the `dataLayer`.
+You can see the GTM tags and any GA data by inspecting the `header` of the page and the `dataLayer` from the browser console in developer tools.  If you exercise all the current functionality you will be able to see the following models `{platformData: {…}}`, `{userData: {…}}`, `{pageData: {…}}` & `{event: ...}` in the `dataLayer`.
 
 
 ## Benefits
