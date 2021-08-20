@@ -29,7 +29,7 @@ export default class AnalyticService {
         return platformData;
     }
 
-    pushUserData (authToken) {
+    pushUserData ({ authToken = '' } = {}) {
         const userData = { ...this.store.state[`${this.namespace}`].userData };
 
         mapUserData(userData, authToken, this.req);

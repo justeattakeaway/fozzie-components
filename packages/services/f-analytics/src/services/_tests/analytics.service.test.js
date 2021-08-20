@@ -155,7 +155,7 @@ describe('Analytic Service ::', () => {
             describe('and user is logged in', () => {
                 it('should push userData to datalayer with registered auth token details', () => {
                     // Act
-                    service.pushUserData(authTokenRegistered);
+                    service.pushUserData({ authToken: authTokenRegistered });
 
                     // Assert
                     expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithAuthTokenRegistered } });
@@ -165,7 +165,7 @@ describe('Analytic Service ::', () => {
             describe('and user is a guest', () => {
                 it('should push userData to datalayer with guest auth token details', () => {
                     // Act
-                    service.pushUserData(authTokenGuest);
+                    service.pushUserData({ authToken: authTokenGuest });
 
                     // Assert
                     expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...userDataWithAuthTokenGuest } });
