@@ -22,10 +22,10 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
 
 ## Benefits
-- Single component to record GA data rather than having logic & implementations scattered throught various features.
+- Single component to record GA data rather than having logic & implementations scattered around in various features.
 - Self-sufficient: With only supplying a small amount of data this component will attempt to evaluate, gather and record all the data required (serverside and clientside) for the GA models; `platformData`, `userData` and `pageData`.
 - Provide the facility to push 'ad-hoc' GA events (even if serverside).
-- Allows the consumer to dictate if & when to push what analytics to GA.
+- Allows the consumer to dictate if & when to push analytics to GA.
 - Allows the consumer to access this service globally via the name `$gtm`, i.e. `this.$gtm.pushEvent({...}`).
 - Customisation (via `options`) of the global variable name and also of the `namespace` used by the internal vuex store (i.e. if they clashes with names already in use within your site).
 - Each method returns the model it attempted to push to GA thus allowing you to view/test what has been constructed within each method.
@@ -171,6 +171,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
       > - (**string**) `pageName`
       > - (**string**) `conversationId` (_optional_)
       > - (**string**) `requestId` (_optional_)
+      > - (**number**) `httpStatusCode` (_optional_)(_only override this if you wish to change the default 200, i.e you may be displaying a custom static 404 page and want to record the value 404 instead of 200 or you may be displaying a successful account creation page and want to record the value 201 rather than 200_)
       ><br>}
       #### **Return value**.
       > (**object**) `pageData` model
