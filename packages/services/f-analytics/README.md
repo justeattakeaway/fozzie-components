@@ -171,6 +171,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
       > - (**string**) `pageName`
       > - (**string**) `conversationId` (_optional_)
       > - (**string**) `requestId` (_optional_)
+      > - (**number**) `httpStatusCode` (_optional_)(_only override this if you wish to change the default 200, i.e you may be displaying a custom static 404 page and want to record the value 404 instead of 200 or you may be displaying a successful account creation page and want to record the value 201 rather than 200_)
       ><br>}
       #### **Return value**.
       > (**object**) `pageData` model
