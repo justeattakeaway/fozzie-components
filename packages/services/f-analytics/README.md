@@ -18,12 +18,12 @@ Encapsulates the GTM / Google Analytics functionality
 ---
 This component abstracts away the gathering of the various data values needed for Google Analytics (GA) and the setting up of Google Tag Manager (GTM).<br>
 Once registered and the site is running it will prepare each page with the required GTM tags for pushing analytics to GA plus it will gather and store any serverside values to be used in analytics that are pushed to GA clientside.<br>
-You can see the GTM tags and any GA data by inspecting the `header` of the page and the `dataLayer` from the browser console in developer tools.  If you excerise all the current functionality you will be able to see the following models `{platformData: {…}}`, `{userData: {…}}`, `{pageData: {…}}` & `{event: ...}` in the `dataLayer`.
+You can see the GTM tags and any GA data by inspecting the `header` of the page and the `dataLayer` from the browser console in developer tools.  If you exercise all the current functionality you will be able to see the following models `{platformData: {…}}`, `{userData: {…}}`, `{pageData: {…}}` & `{event: ...}` in the `dataLayer`.
 
 
 ## Benefits
 - Single component to record GA data rather than having logic & implementations scattered around in various features.
-- Self-sufficient: With only supplying a small amount of data this component will attempt to evaluate, gather and record all the data required (serverside and clientside) for the GA models; `platformData`, `userData` and `pageData`.
+- Self-sufficient: With only supplying a small amount of data this component will attempt to evaluate, gather and record all the data required (serverside and clientside) for the GA models: `platformData`, `userData` and `pageData`.
 - Provide the facility to push 'ad-hoc' GA events (even if serverside).
 - Allows the consumer to dictate if & when to push analytics to GA.
 - Allows the consumer to access this service globally via the name `$gtm`, i.e. `this.$gtm.pushEvent({...}`).
@@ -47,7 +47,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 *  <strong>Import & Register</strong>
 
     F-Analytics is a 'Nuxt - Plugin' that needs to be registered in the "nuxt.config.js" but as it is contained in a fozzie service you need to create a local plugin to reference the external plugin, which then allows you to pass in options (see the <a href="#options">_`Options`_</a> section).<br><br>
-    In the example below it demonstrates how to create a local plugin; that references the `f-analytics` plugin, and how you can create the `options` to pass into the plugin;
+    In the example below it demonstrates how to create a local plugin that references the `f-analytics` plugin, and how you can create the `options` to pass into the plugin;
 
 
     _./plugins/f.analytics.plugin.js_
