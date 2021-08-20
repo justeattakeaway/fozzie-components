@@ -1,10 +1,14 @@
-import AnalyticService from '@/services/analytics.service';
-import analyticModule from '@/store/analytics.module';
+import { when } from 'jest-when';
+import Cookies from 'universal-cookie';
+import AnalyticService from '../analytics.service';
+import analyticModule from '../../store/analytics.module';
 import {
     createStore,
     newEvent,
     options
-} from '@/tests/helpers/setup';
+} from '../../tests/helpers/setup';
+
+jest.mock('universal-cookie', () => jest.fn());
 
 describe('Analytic Service ::', () => {
     const auserId = 'fjdhskgshjgk';
@@ -15,6 +19,7 @@ describe('Analytic Service ::', () => {
     let windowCopy;
     let windowSpy;
     let windowsPushSpy;
+    let get;
 
     const mockWindow = ({ winWidth = 667, winHeight = 375 } = {}) => {
         windowsPushSpy = jest.fn();
@@ -40,12 +45,10 @@ describe('Analytic Service ::', () => {
             mutations: analyticModule.mutations
         });
         storeDispatchSpy = jest.spyOn(store, 'dispatch');
-        // Arrange - request
-        req = {
-            headers: {
-                cookie: `je-auser=${auserId}`
-            }
-        };
+        // Arrange - cookies
+        get = jest.fn();
+        when(get).calledWith('je-auser').mockReturnValue(auserId);
+        Cookies.mockImplementation(() => ({ get }));
         // Arrange - window state
         mockWindow();
         // Arrange - sut

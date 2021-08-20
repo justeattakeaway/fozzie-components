@@ -1,8 +1,7 @@
-import analyticsModule from '@/store/analytics.module';
-import AnalyticService from '@/services/analytics.service';
-import { mapServersidePlatformData } from '@/services/analytics.mapper';
-
-const defaultOptions = require('../defaultOptions');
+import analyticsModule from '../store/analytics.module';
+import AnalyticService from '../services/analytics.service';
+import { mapServersidePlatformData } from '../services/analytics.mapper';
+import defaultOptions from '../defaultOptions';
 
 const prepareServersideValues = (store, req, options) => {
     // Only available serverside

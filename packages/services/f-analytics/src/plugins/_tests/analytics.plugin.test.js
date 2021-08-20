@@ -1,16 +1,19 @@
-import AnalyticsPlugin from '@/plugins/analytics.plugin';
-import AnalyticService from '@/services/analytics.service';
+import { when } from 'jest-when';
+import Cookies from 'universal-cookie';
+import AnalyticsPlugin from '../analytics.plugin';
+import AnalyticService from '../../services/analytics.service';
+import defaultOptions from '../../defaultOptions';
 import {
     defaultState,
     newEvent,
     options
-} from '@/tests/helpers/setup';
+} from '../../tests/helpers/setup';
 import {
     UPDATE_PLATFORM_DATA,
     CLEAR_EVENTS
-} from '@/store/mutation-types';
+} from '../../store/mutation-types';
 
-const defaultOptions = require('../../defaultOptions');
+jest.mock('universal-cookie', () => jest.fn());
 
 describe('Analytics Plugin ::', () => {
     afterEach(() => {
@@ -258,7 +261,7 @@ describe('Analytics Plugin ::', () => {
         let state;
         let store;
         let req;
-        let res;
+        let get;
 
         beforeEach(() => {
             // Arrange - store
@@ -270,17 +273,14 @@ describe('Analytics Plugin ::', () => {
                 dispatch: storeDispatchSpy,
                 hasModule: jest.fn(() => true)
             };
-            // Arrange - request
-            req = {
-                headers: {
-                    cookie: 'je-user_percentage=35'
-                }
-            };
+            // Arrange - cookies
+            get = jest.fn();
+            when(get).calledWith('je-user_percentage').mockReturnValue('35');
+            Cookies.mockImplementation(() => ({ get }));
             // Arrange - context
             context = {
                 store,
-                req,
-                res
+                req
             };
             // Arrange - window state
             jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
@@ -301,19 +301,12 @@ describe('Analytics Plugin ::', () => {
         });
 
         it('should leave the platformData properties with defaults if data not available and serverside', () => {
-            // Arrange - context
-            const ctx = {
-                ...context,
-                req: {
-                    headers: {
-                        cookie: undefined
-                    }
-                }
-            };
+            // Arrange
+            get = jest.fn();
             const expected = { ...defaultState.platformData };
 
             // Act
-            AnalyticsPlugin(ctx, jest.fn(), options);
+            AnalyticsPlugin(context, jest.fn(), options);
 
             // Assert
             expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expected);

@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import SHA256 from 'crypto-js/sha256';
+import Cookies from 'universal-cookie';
 import {
     COUNTRY_INFO,
     DEFAULT_APP_TYPE,
@@ -9,55 +10,58 @@ import {
 } from '../constants';
 
 /**
- * Returns the current display width name.
+ * Returns the current display width name (if clientside).
  *
  * @return {string} The display width name
  */
 const getDisplaySize = () => {
-    const width = window.innerWidth;
+    if (typeof (window) !== 'undefined') {
+        const width = window.innerWidth;
 
-    // Use fozzie for breakpoints?
-    if (width > 1280) return 'full-size';
-    else if (width > 1025) return 'huge';
-    else if (width > 768) return 'wide';
-    else if (width > 414) return 'mid';
+        // Use fozzie for breakpoints?
+        if (width > 1280) return 'full-size';
+        else if (width > 1025) return 'huge';
+        else if (width > 768) return 'wide';
+        else if (width > 414) return 'mid';
 
-    return 'narrow';
-};
-
-/**
- * Returns the current orientation name.
- *
- * @return {string} The orientation name
- */
-const getOrientation = () => {
-    const height = window.innerHeight;
-    const width = window.innerWidth;
-
-    return height > width ? 'Portrait' : 'Landscape';
-};
-
-/**
- * Returns the contents of the cookie on the request.
- *
- * @param {string} name - The name of the cookie
- * @param {object} req - The `request` context
- * @return {string} The contents of the cookie (if present)
- */
-const getCookie = (name, req) => {
-    if (req && req.headers && req.headers.cookie) {
-        const value = `; ${req.headers.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) {
-            return parts.pop().split(';').shift();
-        }
+        return 'narrow';
     }
 
     return undefined;
 };
 
 /**
- * Maps the anonymous User Id (if present) to the UserData 'a-UserId' field.
+ * Returns the current orientation name (if clientside).
+ *
+ * @return {string} The orientation name
+ */
+const getOrientation = () => {
+    if (typeof (window) !== 'undefined') {
+        const height = window.innerHeight;
+        const width = window.innerWidth;
+
+        return height > width ? 'Portrait' : 'Landscape';
+    }
+
+    return undefined;
+};
+
+/**
+ * Returns the contents of a cookie
+ *
+ * @param {string} name - The name of the cookie
+ * @param {object} req - The `request` context
+ * @return {string} The contents of the cookie
+ */
+const getCookie = (cookieName, req) => {
+    const cookies = req && req.headers && req.headers.cookie ? new Cookies(req.headers.cookie) : new Cookies();
+    const value = cookies.get(cookieName);
+
+    return value;
+};
+
+/**
+ * Maps the anonymous User Id to the UserData 'a-UserId' field.
  *
  * @param {object} userData - A reference to the current UserData instance
  * @param {object} req - The `request` context
@@ -160,7 +164,12 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  * @param {number} httpStatusCode - The httpStatusCode (only supplied when 200 needs to be overriden)
  */
 export const mapPageData = ({
-    pageData, featureName, pageName, conversationId, requestId, httpStatusCode
+    pageData,
+    featureName,
+    pageName,
+    conversationId,
+    requestId,
+    httpStatusCode
 } = {}) => {
     pageData.group = featureName;
     if (pageName) pageData.name = pageName;
@@ -168,11 +177,8 @@ export const mapPageData = ({
     if (conversationId) pageData.conversationId = conversationId;
     if (requestId) pageData.requestId = requestId;
     if (httpStatusCode) pageData.httpStatusCode = httpStatusCode;
-
-    if (typeof (window) !== 'undefined') {
-        const diplaySize = getDisplaySize();
-        if (diplaySize) pageData.display = diplaySize;
-        const orientation = getOrientation();
-        if (orientation) pageData.orientation = orientation;
-    }
+    const diplaySize = getDisplaySize();
+    if (diplaySize) pageData.display = diplaySize;
+    const orientation = getOrientation();
+    if (orientation) pageData.orientation = orientation;
 };

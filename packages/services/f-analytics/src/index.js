@@ -6,4 +6,6 @@
 
 import AnalyticsPlugin from './plugins/analytics.plugin';
 
-export default AnalyticsPlugin;
+const AnalyticsModule = { AnalyticsPlugin };
+
+export default AnalyticsModule;

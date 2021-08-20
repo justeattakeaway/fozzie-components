@@ -1,14 +1,14 @@
-import analyticsModule from '@/store/analytics.module';
+import analyticsModule from '../analytics.module';
 import {
     defaultState,
     modifiedState,
     newEvent
-} from '@/tests/helpers/setup';
+} from '../../tests/helpers/setup';
 import {
     UPDATE_PLATFORM_DATA,
     UPDATE_EVENTS,
     CLEAR_EVENTS
-} from '@/store/mutation-types';
+} from '../mutation-types';
 
 describe('Analytics Module ::', () => {
     let state;

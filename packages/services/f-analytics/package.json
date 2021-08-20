@@ -2,8 +2,10 @@
   "name": "@justeat/f-analytics",
   "description": "Fozzie Analytics - A utility that encapsulates the GTM / Google Analytics functionality",
   "version": "0.10.0",
-  "main": "dist/f-analytics.umd.min.js",
   "maxBundleSize": "200kB",
+  "main": "dist/f-analytics.umd.js",
+  "module": "dist/f-analytics.es.js",
+  "source": "src/index.js",
   "files": [
     "dist"
   ],
@@ -26,27 +28,24 @@
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-analytics ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "XprepublishOnly": "yarn lint && yarn test && yarn build",
+    "prepublishOnly": "yarn build",
+    "build": "vite build",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit"
+    "test": "jest",
+    "test:coverage": "jest test:unit --coverage"
   },
-  "browserslist": [
-    "extends @justeat/browserslist-config-fozzie"
-  ],
   "dependencies": {
     "crypto-js": "4.0.0",
-    "jwt-decode": "3.1.2"
-  },
-  "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "jwt-decode": "^3.1.2",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@vue/test-utils": "1.0.3"
+    "core-js": "3.6.5",
+    "eslint": "7.32.0",
+    "jest-extended": "0.11.5",
+    "jest-when": "^3.3.1",
+    "vite": "2.4.4"
   }
 }
