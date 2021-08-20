@@ -7,7 +7,6 @@ import {
 } from '@/tests/helpers/setup';
 import {
     UPDATE_PLATFORM_DATA,
-    UPDATE_PAGE_DATA,
     CLEAR_EVENTS
 } from '@/store/mutation-types';
 
@@ -38,7 +37,7 @@ describe('Analytics Plugin ::', () => {
                 hasModule: storeModuleSpy
             };
             // Arrange - context
-            context = { store: defaultStore, req: jest.fn(), res: jest.fn() };
+            context = { store: defaultStore, req: jest.fn() };
             injectSpy = jest.fn(() => {});
             // Arrange - window state
             const originalWindow = { ...window };
@@ -277,10 +276,6 @@ describe('Analytics Plugin ::', () => {
                     cookie: 'je-user_percentage=35'
                 }
             };
-            // Arrange - response
-            res = {
-                statusCode: 201
-            };
             // Arrange - context
             context = {
                 store,
@@ -342,37 +337,6 @@ describe('Analytics Plugin ::', () => {
 
             // Assert
             expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expected);
-        });
-
-        it('should leave the pageData properties with defaults if data not available and serverside', () => {
-            // Arrange - context
-            const ctx = {
-                ...context,
-                res: {
-                    httpStatusCode: undefined
-                }
-            };
-            const expected = { ...defaultState.pageData, httpStatusCode: 0 };
-
-            // Act
-            AnalyticsPlugin(ctx, jest.fn(), options);
-
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PAGE_DATA}`, expected);
-        });
-
-        it('should set the pageData properties with data if available and serverside', () => {
-            // Arrange
-            const expected = {
-                ...defaultState.pageData,
-                httpStatusCode: 201
-            };
-
-            // Act
-            AnalyticsPlugin(context, jest.fn(), options);
-
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PAGE_DATA}`, expected);
         });
     });
 });
