@@ -52,7 +52,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
     _./plugins/f.analytics.plugin.js_
     ```js
-    import { AnalyticsPlugin } from '@justeat/f-analytics';
+    import AnalyticsModule from '@justeat/f-analytics';
 
     const options = {
         featureName: 'checkout-web',
@@ -60,7 +60,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
         id: 'GTM-ABC123X'
     };
 
-    export default (context, inject) => { AnalyticsPlugin(context, inject, options); };
+    export default (context, inject) => { AnalyticsModule.AnalyticsPlugin(context, inject, options); };
     ```
 
     Then, finally, you need to register the local plugin you have just created in the nuxt config, see below;
