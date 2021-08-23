@@ -1,6 +1,5 @@
 import {
     UPDATE_PLATFORM_DATA,
-    UPDATE_PAGE_DATA,
     UPDATE_EVENTS,
     CLEAR_EVENTS
 } from './mutation-types';
@@ -11,17 +10,17 @@ export default {
     state: () => ({
         platformData: {
             environment: 'localhost',
-            name: '',
-            appType: '',
+            name: undefined,
+            appType: undefined,
             applicationId: undefined,
-            userAgent: 'N/A',
-            branding: '',
-            country: '',
-            language: '',
+            userAgent: undefined,
+            branding: undefined,
+            country: undefined,
+            language: undefined,
             jeUserPercentage: undefined,
-            currency: '',
-            version: '0.0.0.0',
-            instancePosition: 'N/A'
+            currency: undefined,
+            version: undefined,
+            instancePosition: undefined
         },
         userData: {
             'a-UserId': undefined,
@@ -32,14 +31,14 @@ export default {
             signupDate: undefined
         },
         pageData: {
-            name: '',
-            group: '',
-            httpStatusCode: 0,
+            group: undefined,
+            name: undefined,
+            httpStatusCode: 200,
             isCached: false,
-            conversationId: '',
-            requestId: '',
-            orientation: '',
-            display: ''
+            conversationId: undefined,
+            requestId: undefined,
+            orientation: undefined,
+            display: undefined
         },
         events: []
     }),
@@ -47,10 +46,6 @@ export default {
     actions: {
         updatePlatformData: ({ commit }, platformData) => {
             commit(UPDATE_PLATFORM_DATA, platformData);
-        },
-
-        updatePageData: ({ commit }, pageData) => {
-            commit(UPDATE_PAGE_DATA, pageData);
         },
 
         updateEvents: ({ commit }, event) => {
@@ -65,10 +60,6 @@ export default {
     mutations: {
         [UPDATE_PLATFORM_DATA]: (state, platformData) => {
             state.platformData = { ...state.platformData, ...platformData };
-        },
-
-        [UPDATE_PAGE_DATA]: (state, pageData) => {
-            state.pageData = { ...state.pageData, ...pageData };
         },
 
         [UPDATE_EVENTS]: (state, event) => {

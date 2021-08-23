@@ -9,4 +9,4 @@ const defaultOptions = {
     cookiesWin: null
 };
 
-module.exports = defaultOptions;
+export default defaultOptions;
