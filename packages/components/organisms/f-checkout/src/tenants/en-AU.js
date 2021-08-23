@@ -176,7 +176,7 @@ const messages = {
             loginTitle: 'How do you want to continue?',
             loginButton: 'Log in or sign up',
             option: 'or',
-            guestTitle: 'Checkout as a cobber',
+            guestTitle: 'Checkout as a guest',
             confirmation: 'Please confirm your {serviceType} details'
         }
     },
