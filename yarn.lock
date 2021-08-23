@@ -1341,6 +1341,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@braze/web-sdk@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-3.3.0.tgz#d5c6cf322ad2b8d7e7556834690cf7757f2b9434"
+  integrity sha512-mjor7k9g6wGF+q67k9r0NSjW7FGgYuRrsLTZzbEhK3u2uwqry4ngeuYmxZosJFqH19T+j7ZSvjkYb99+NYURLA==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -2188,6 +2193,15 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.9.0.tgz#ff7f5dc0ccae943d80ba9affad29c89b11e18156"
   integrity sha512-HJqDqiTEJ/vuo5PAhvcm7Cn0WRZS8EfOxbdpQ+wswXVzvZTwr9nd3xL30HMfP6p8yb/YlpjsaAU6StILoGqOLA==
 
+"@justeat/f-content-cards@5.0.0-beta.1":
+  version "5.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-5.0.0-beta.1.tgz#4b89212580dd9fa63c8a2e0dfbe5fd144f7ace3d"
+  integrity sha512-wCydSKICR2cxqewrWqSk8a6RL1XYGksrJK+gR6JjmH096Dc2tt4UOCUWayra2gxAy3Z3DOhaOuauTvSEkgoZNA==
+  dependencies:
+    "@babel/plugin-proposal-class-properties" "7.12.13"
+    "@justeat/f-services" "1.0.1"
+    core-js "3.6.5"
+
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2243,6 +2257,11 @@
   integrity sha512-owV/JWeve1Bc4HrSu2zFIgXjuAqAD5PYflw2iAMFk7SVbl2gGvewUgKszf61ZOg9qjADdxmCkW5sZPQkRzHmbQ==
   dependencies:
     window-or-global "^1.0.1"
+
+"@justeat/f-mega-modal@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.10.0.tgz#08e9b9409c024ff28576ad2e54abbb9e346106c5"
+  integrity sha512-vIu5L58bXO300HL3ACYVBhMdwPgWWu3csIW6KxL1QfsjK4ioehaX4aCLSOzGiEvICTdgK/XuonvDv7UIuRu2EQ==
 
 "@justeat/f-mega-modal@0.3.0":
   version "0.3.0"
@@ -25457,6 +25476,11 @@ vuex@3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.5.1.tgz#f1b8dcea649bc25254cf4f4358081dbf5da18b3d"
   integrity sha512-w7oJzmHQs0FM9LXodfskhw9wgKBiaB+totOdb8sNzbTB2KDCEEwEs29NzBZFh/lmEK1t5tDmM1vtsO7ubG1DFw==
+
+vuex@^3.5.1:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
+  integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==
 
 w3c-hr-time@^1.0.1, w3c-hr-time@^1.0.2:
   version "1.0.2"
