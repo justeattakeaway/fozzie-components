@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.10.0
+------------------------------
+*August 19, 2021*
+
+### Changed
+- Moved the prepPageData from Mixin into Service to allow the consumer to dictate when to push the GA data.
+- Remove redundant Mixin
+- Updated readme
+
+
 v0.9.0
 ------------------------------
 *August 16, 2021*
