@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.53.0
+------------------------------
+*August 23, 2021*
+
+### Changed
+- Changed the circle CI config to implement caching for our builds and splitting the build process into test and build
+
+
 v3.52.2
 ------------------------------
 *August 12, 2021*
