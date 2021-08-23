@@ -2188,13 +2188,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.9.0.tgz#ff7f5dc0ccae943d80ba9affad29c89b11e18156"
   integrity sha512-HJqDqiTEJ/vuo5PAhvcm7Cn0WRZS8EfOxbdpQ+wswXVzvZTwr9nd3xL30HMfP6p8yb/YlpjsaAU6StILoGqOLA==
 
-"@justeat/f-card@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-1.2.1.tgz#8b44b73c291c8527beb6351730a90a476cb54325"
-  integrity sha512-kLu3vGhpkKZJFvMN0yutDUytQp/9ula4CsZfQeDAXPjQS+r3W6IsuqOR7cQMoO/HXRu1ccd1fS0TUHkSqgkQcA==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2215,14 +2208,6 @@
   integrity sha512-KANckjkK0ay/r9FqK2yEQOCzCASNrnJjHRdLIKvMgl4mVo8WxSSVyjIhfJtnVKQwfWv6bg0kkm1xpxxuQffokg==
   dependencies:
     "@justeat/f-vue-icons" "1.10.0"
-
-"@justeat/f-form-field@1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.6.1.tgz#47b014847a42467737b65997cfcab212d0385ba7"
-  integrity sha512-E7aLPJhJBUoHcBWyaiCdOUyXyNtO24P/PhtNRpKJh50amCZU9yeYJjuT1rlifmS+h00kcIcoXfTcwb6VI7b/wg==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "1.11.0"
 
 "@justeat/f-form-field@2.0.0":
   version "2.0.0"
@@ -2328,6 +2313,14 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
+"@justeat/f-services@1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.11.0.tgz#2705cdcb83434527c9fe1bccfbdd0222e25ab38b"
+  integrity sha512-/DCnsOQmfEkz/dyD/u5VMaKDwEzAAjwW+qePXh6ofxNRm7SR9dWS0Qvwzg+kQvZ3ktN6b20PfcUcalLf00guFw==
+  dependencies:
+    lodash-es "4.17.21"
+    window-or-global "1.0.1"
+
 "@justeat/f-services@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.3.0.tgz#0165f7fe3f69e0b6e6388bce7194e080bbfc9445"
@@ -2368,13 +2361,6 @@
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.10.0.tgz#1ae551701ec73b4f6e39651d2a0fab5e105e75c5"
   integrity sha512-6+JLiYsZzQqNsWoJVOa+ux7KuHT58J5dtJcH6Y+9rukbxidTk22j/0sAvWC7ME6SuKxyYY7MxDL0B6YL875VNQ==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
-"@justeat/f-vue-icons@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.11.0.tgz#3c5c91dcc04cd72e81d12f09bc8c9fec893909a5"
-  integrity sha512-xw/Y0tOd1XQXUy6bl8VA3prBmgP2n0n2IHDKQFUOvGwupkAJ+3vwnlkhiMGlN8bripAPK80g01Abt/ZBBbXrUw==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
