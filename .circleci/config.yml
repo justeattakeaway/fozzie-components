@@ -209,7 +209,7 @@ commands:
             then
               yarn storybook:build
             else
-              yarn <storybook:build-changed
+              yarn storybook:build-changed
             fi
 
   component_tests:
@@ -230,7 +230,7 @@ commands:
     description: Run Percy Visual Regression Tests
     steps:
       - run_command:
-          command_description: un Percy visual regression tests for packages
+          command_description: Run Percy visual regression tests for packages
           command_name: "test:visual"
 
   slack_notify_fail:
@@ -388,10 +388,10 @@ jobs:
       - restore_node_modules_cache
       - install_node_dependencies
       - restore_cache_dist_directories
-      - unit_integration_tests
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
+      - unit_integration_tests
 
   browser_tests:
     executor: node

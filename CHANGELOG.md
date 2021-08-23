@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.53.0
 ------------------------------
-*August 12, 2021*
+*August 23, 2021*
 
 ### Changed
 - Changed the circle CI config to implement caching for our builds and splitting the build process into test and build
