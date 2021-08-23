@@ -348,7 +348,7 @@ export default {
 
         Object.defineProperty($v, VALIDATIONS.guest, {
             enumerable: true,
-            get: () => this.$v.customer
+            get: () => this.$v?.customer
         });
 
         return { $v };

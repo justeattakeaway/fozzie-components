@@ -2224,6 +2224,14 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "1.11.0"
 
+"@justeat/f-form-field@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-2.0.0.tgz#fe40f657002e4bef2bfae1aefc02ece4882bff2c"
+  integrity sha512-998BfTlHBAkh8ZCdbuPkb9KNZItwXnKf25kn0nFmgtJKQJQzXHdB1vrWdCjkv4scTCDh+s/a05Q1YR5pYzgCag==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "2.5.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2239,10 +2247,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@3.7.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.7.0.tgz#7d0912995cb46f50d72aa80b880b719156cc21f5"
-  integrity sha512-JeUN84qJwIfDGHAgbaqBJ3ecZNVTzAxC1s9Ew375W2EKo5EWxe9fFonPKqDmQhimObS67NqbCHgGA3O1PeJHPg==
+"@justeat/f-icons@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.8.0.tgz#7b40a4ceafaae1103446bf7ec88a01801860746c"
+  integrity sha512-nxaxRCa65B4ei4Fb/Nrh3JJDMm/skNv8o+cJBk817WNARpqZiTtoZa01lV9x1xpN0tzsY9asRBPqeYcQFGLAHA==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
@@ -2402,6 +2410,13 @@
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.5.0.tgz#769e2ff3725599cf17fdb5a618968f9f814d7179"
   integrity sha512-eli7NQKc5M8o232QOG6BX6jl1zjs3kJwc1xjWpoN0u17iIWqa9xCsLwqLKWEPXUeZ91xRXYhr8bEccWzMANNUQ==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.6.0.tgz#458e7b3c2e963eca0390e9c668e3ecf726544805"
+  integrity sha512-dmsS9er38s7yMcDTX/N7qvK2aHCS0TqL9EP5RZ5HeilySbPhgq2Mvbk0ePFlGaXqXuNCH03kX6qBa5k0IIxP+g==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
@@ -8427,16 +8442,17 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromedriver@92.0.0:
-  version "92.0.0"
-  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-92.0.0.tgz#7860efe7d082ec877dc8146aa920d30340fcbb47"
-  integrity sha512-IdJ5n5jLL6tCsGQF/fQHF2gDEhVzoYIqktUn6hE/BSsXlCcyDTi45fQbhTEhZlmshM8+BpnRtPuIT5DRbxNqKg==
+chromedriver@90.0.0:
+  version "90.0.0"
+  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-90.0.0.tgz#1b18960a31a12884981bdc270b43c4356ce7a65a"
+  integrity sha512-k+GMmNb7cmuCCctQvUIeNxDGSq8DJauO+UKQS2qLT8aA36CPEcv8rpFepf6lRkNaIlfwdCUt/0B5bZDw3wY2yw==
   dependencies:
     "@testim/chrome-version" "^1.0.7"
     axios "^0.21.1"
     del "^6.0.0"
     extract-zip "^2.0.1"
     https-proxy-agent "^5.0.0"
+    mkdirp "^1.0.4"
     proxy-from-env "^1.1.0"
     tcp-port-used "^1.0.1"
 
