@@ -66,7 +66,7 @@ export default {
 
     computed: {
         element () {
-            if (this.config && this.config?.isShellHidden) {
+            if (this.config && this.config.isShellHidden) {
                 return 'search-no-shell';
             }
 
