@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.173.2
+------------------------------
+*August 23, 2021*
+
+### Changed
+- Build in parallel to false
+
+
 v0.173.1
 ------------------------------
 *August 18, 2021*

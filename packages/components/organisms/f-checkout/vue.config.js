@@ -5,6 +5,7 @@ const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
 // vue.config.js
 module.exports = {
+    parallel: false,
     chainWebpack: config => {
         config.module
             .rule('scss-importer')

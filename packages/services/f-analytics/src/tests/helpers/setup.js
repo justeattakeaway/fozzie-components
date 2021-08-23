@@ -5,17 +5,17 @@ import Vue from 'vue';
 const defaultState = {
     platformData: {
         environment: 'localhost',
-        name: '',
-        appType: '',
+        name: undefined,
+        appType: undefined,
         applicationId: undefined,
-        userAgent: 'N/A',
-        branding: '',
-        country: '',
-        language: '',
+        userAgent: undefined,
+        branding: undefined,
+        country: undefined,
+        language: undefined,
         jeUserPercentage: undefined,
-        currency: '',
-        version: '0.0.0.0',
-        instancePosition: 'N/A'
+        currency: undefined,
+        version: undefined,
+        instancePosition: undefined
     },
     userData: {
         'a-UserId': undefined,
@@ -26,14 +26,14 @@ const defaultState = {
         signupDate: undefined
     },
     pageData: {
-        name: '',
-        group: '',
-        httpStatusCode: 0,
+        group: undefined,
+        name: undefined,
+        httpStatusCode: 200,
         isCached: false,
-        conversationId: '',
-        requestId: '',
-        orientation: '',
-        display: ''
+        conversationId: undefined,
+        requestId: undefined,
+        orientation: undefined,
+        display: undefined
     },
     events: []
 };
@@ -88,7 +88,7 @@ const newEvent = {
 
 const options = {
     namespace: 'f-analytics',
-    featureName: 'test-route-name',
+    featureName: 'test-feature-name',
     locale: 'en-GB',
     id: 'GTM-0000000'
 };
@@ -130,76 +130,11 @@ const createStore = ({
     });
 };
 
-const $cookies = {
-    get: jest.fn()
-};
-
-const $route = {
-    name: 'test-route-name'
-};
-
-const $i18n = {
-    locale: 'en-GB'
-};
-
-const userIdFromCookie = 'fjdhskgshjgk';
-
-const authTokenRegistered = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-+ 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
-+ 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
-+ 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
-+ 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
-+ 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
-
-const authTokenGuest = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-+ 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZ'
-+ 'WF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW'
-+ '1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXp'
-+ 'PZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1p'
-+ 'bHlfbmFtZSI6IkJsb2dncyIsInN1YiI6IjEyMzQ1Iiwicm9sZSI6Ikd1ZXN0Ii'
-+ 'wiaWF0IjoxNjE1NDY5NTE2fQ.ngfAKpiMH4Gk0Y4gAVC4KeLadWFtVXx4hD1_BSW9SN0';
-
-const userDataWithAuthTokenRegistered = {
-    'a-UserId': userIdFromCookie,
-    authType: 'Login',
-    email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
-    globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
-    signinType: 'Email',
-    signupDate: '2021-02-08T10:27:49.1930000Z'
-};
-
-const userDataWithAuthTokenGuest = {
-    'a-UserId': userIdFromCookie,
-    authType: 'Login',
-    email: '1a9a31f72fbb57efd148bbfe06c169b97f6868200b422a5ae7fed7e3f853002a',
-    globalUserId: 'U7NRAlWAg5zOdsdRgf7nkTyoi90XEo=',
-    signinType: 'Guest',
-    signupDate: '2021-02-08T10:27:49.1930000Z'
-};
-
-const userDataWithoutAuthToken = {
-    'a-UserId': userIdFromCookie,
-    authType: undefined,
-    email: undefined,
-    globalUserId: undefined,
-    signinType: undefined,
-    signupDate: undefined
-};
-
 export {
     defaultState,
     defaultActions,
     modifiedState,
     newEvent,
     createStore,
-    $cookies,
-    $route,
-    $i18n,
-    options,
-    userIdFromCookie,
-    authTokenRegistered,
-    authTokenGuest,
-    userDataWithAuthTokenRegistered,
-    userDataWithAuthTokenGuest,
-    userDataWithoutAuthToken
+    options
 };
