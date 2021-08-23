@@ -1,23 +1,16 @@
-import analyticsModule from '@/store/analytics.module';
-import AnalyticService from '@/services/analytics.service';
-import { mapServersidePlatformData, mapServersidePageData } from '@/services/analytics.mapper';
+import analyticsModule from '../store/analytics.module';
+import AnalyticService from '../services/analytics.service';
+import { mapServersidePlatformData } from '../services/analytics.mapper';
+import defaultOptions from '../defaultOptions';
 
-const defaultOptions = require('../defaultOptions');
-
-const prepareServersideValues = (store, req, res, options) => {
+const prepareServersideValues = (store, req, options) => {
     // Only available serverside
     if (typeof (window) === 'undefined') {
         const platformData = { ...store.state[`${options.namespace}`].platformData };
 
-        mapServersidePlatformData(platformData, req);
+        mapServersidePlatformData({ platformData, req });
 
         store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
-
-        const pageData = { ...store.state[`${options.namespace}`].pageData };
-
-        mapServersidePageData(pageData, res);
-
-        store.dispatch(`${options.namespace}/updatePageData`, pageData);
     }
 };
 
@@ -64,7 +57,7 @@ const preparePageTags = options => {
     }
 };
 
-export default ({ store, req, res }, inject, _options) => {
+export default ({ store, req }, inject, _options) => {
     const options = {
         ...defaultOptions,
         ..._options
@@ -74,7 +67,7 @@ export default ({ store, req, res }, inject, _options) => {
 
     registerStoreModule(store, options);
 
-    prepareServersideValues(store, req, res, options);
+    prepareServersideValues(store, req, options);
 
     const service = new AnalyticService(store, req, options);
 

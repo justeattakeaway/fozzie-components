@@ -1,17 +1,19 @@
-import AnalyticsPlugin from '@/plugins/analytics.plugin';
-import AnalyticService from '@/services/analytics.service';
+import { when } from 'jest-when';
+import Cookies from 'universal-cookie';
+import AnalyticsPlugin from '../analytics.plugin';
+import AnalyticService from '../../services/analytics.service';
+import defaultOptions from '../../defaultOptions';
 import {
     defaultState,
     newEvent,
     options
-} from '@/tests/helpers/setup';
+} from '../../tests/helpers/setup';
 import {
     UPDATE_PLATFORM_DATA,
-    UPDATE_PAGE_DATA,
     CLEAR_EVENTS
-} from '@/store/mutation-types';
+} from '../../store/mutation-types';
 
-const defaultOptions = require('../../defaultOptions');
+jest.mock('universal-cookie', () => jest.fn());
 
 describe('Analytics Plugin ::', () => {
     afterEach(() => {
@@ -38,7 +40,7 @@ describe('Analytics Plugin ::', () => {
                 hasModule: storeModuleSpy
             };
             // Arrange - context
-            context = { store: defaultStore, req: jest.fn(), res: jest.fn() };
+            context = { store: defaultStore, req: jest.fn() };
             injectSpy = jest.fn(() => {});
             // Arrange - window state
             const originalWindow = { ...window };
@@ -259,7 +261,7 @@ describe('Analytics Plugin ::', () => {
         let state;
         let store;
         let req;
-        let res;
+        let get;
 
         beforeEach(() => {
             // Arrange - store
@@ -271,21 +273,14 @@ describe('Analytics Plugin ::', () => {
                 dispatch: storeDispatchSpy,
                 hasModule: jest.fn(() => true)
             };
-            // Arrange - request
-            req = {
-                headers: {
-                    cookie: 'je-user_percentage=35'
-                }
-            };
-            // Arrange - response
-            res = {
-                statusCode: 201
-            };
+            // Arrange - cookies
+            get = jest.fn();
+            when(get).calledWith('je-user_percentage').mockReturnValue('35');
+            Cookies.mockImplementation(() => ({ get }));
             // Arrange - context
             context = {
                 store,
-                req,
-                res
+                req
             };
             // Arrange - window state
             jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
@@ -306,19 +301,12 @@ describe('Analytics Plugin ::', () => {
         });
 
         it('should leave the platformData properties with defaults if data not available and serverside', () => {
-            // Arrange - context
-            const ctx = {
-                ...context,
-                req: {
-                    headers: {
-                        cookie: undefined
-                    }
-                }
-            };
+            // Arrange
+            get = jest.fn();
             const expected = { ...defaultState.platformData };
 
             // Act
-            AnalyticsPlugin(ctx, jest.fn(), options);
+            AnalyticsPlugin(context, jest.fn(), options);
 
             // Assert
             expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expected);
@@ -342,37 +330,6 @@ describe('Analytics Plugin ::', () => {
 
             // Assert
             expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PLATFORM_DATA}`, expected);
-        });
-
-        it('should leave the pageData properties with defaults if data not available and serverside', () => {
-            // Arrange - context
-            const ctx = {
-                ...context,
-                res: {
-                    httpStatusCode: undefined
-                }
-            };
-            const expected = { ...defaultState.pageData, httpStatusCode: 0 };
-
-            // Act
-            AnalyticsPlugin(ctx, jest.fn(), options);
-
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PAGE_DATA}`, expected);
-        });
-
-        it('should set the pageData properties with data if available and serverside', () => {
-            // Arrange
-            const expected = {
-                ...defaultState.pageData,
-                httpStatusCode: 201
-            };
-
-            // Act
-            AnalyticsPlugin(context, jest.fn(), options);
-
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/${UPDATE_PAGE_DATA}`, expected);
         });
     });
 });

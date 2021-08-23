@@ -4,23 +4,23 @@
 
 ## Font loading
 
-On the Just Eat and Menulog platform, we use our custom font `JustEatBasis`, of which we currently use two weights; Regular and Bold.
+On the Just Eat and Menulog platform, we use our custom font `JETSansDigital`, of which we currently use three weights: Regular, Bold and ExtraBold.
 
 For any platform wanting to consume these fonts, we recommend following the implementation, which closely follows the [Critical FOFT with Preload](https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-preload) technique as outlined by Zach Leat. A working demo can also be found of this loading strategy [on Codepen](https://codepen.io/ashleynolan/pen/gOrMpex).
 
-The basic strategy is to load in the `JustEatBasis-Regular` webfont as soon as possible. A faux bold is applied to this regular font while we lazy load in the `JustEatBasis-Bold` webfont, which then re-renders the faux bold as the intended bold typeface.
+The basic strategy is to load in the `JETSansDigital-Regular` webfont as soon as possible. A faux bold is applied to this regular font while we lazy load in the `JETSansDigital-Bold` and `JETSansDigital-ExtraBold` webfonts, which then re-renders the faux bold as the intended bold typeface.
 
 ## Implementation
 
 1. Add the following code into the `<head>` of your application.
 
 ```html
-<link rel="preload" href="https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face {
-    font-family: JustEatBasis;
-    src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2') format("woff2"),
-       url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff') format("woff");
+    font-family: JETSansDigital;
+    src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff2') format("woff2"),
+       url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff') format("woff");
     font-weight: 400;
     font-display: swap;
 }
@@ -30,20 +30,22 @@ body {
 </style>
 ```
 
-   The first `link` tag will load in the `JustEatBasis-Regular` font file. The `rel=preload` attribute tells the browser to download and cache it as soon as possible.
+   The first `link` tag will load in the `JETSansDigital-Regular` font file. The `rel=preload` attribute tells the browser to download and cache it as soon as possible.
 
-   The `@font-face` declaration is then to apply the `JustEatBasis` font as soon as it's available (and as it's inline in the `head` of the page, it won't wait for the rest of the CSS to be parsed until it renders the font).
+   The `@font-face` declaration is then to apply the `JETSansDigital` font as soon as it's available (and as it's inline in the `head` of the page, it won't wait for the rest of the CSS to be parsed until it renders the font).
 
 2. Add the following JS as an inline `<script>` block at the end of your HTML (just before your main JS bundle for example).
 
 ```js
 (function () {
-    var fontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff") format("woff")';
+    var boldFontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Bold-optimised.woff") format("woff")';
+    var extraboldFontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-ExtraBold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-ExtraBold-optimised.woff") format("woff")';
 
     if('fonts' in document ) {
-        var bold = new FontFace('JustEatBasis', fontUrls, { weight: '600' });
+        var bold = new FontFace('JETSansDigital', boldFontUrls, { weight: '700' });
+        var extrabold = new FontFace('JETSansDigital', extraboldFontUrls, { weight: '800' });
 
-        Promise.all([bold.load()])
+        Promise.all([bold.load(), extrabold.load()])
             .then(function (fonts) {
                 fonts.forEach(function (font) {
                     document.fonts.add(font);
@@ -59,29 +61,30 @@ body {
         // Awkwardly dump the second stage @font-face blocks in the head
         var style = document.createElement('style');
         // Note: Edge supports WOFF2
-        style.innerHTML = '@font-face { font-family: JustEatBasis; font-weight: 600; src: ' + fontUrls + '; }';
+        style.innerHTML = '@font-face { font-family: JETSansDigital; font-weight: 700; src: ' + boldFontUrls + '; }';
+        style.innerHTML = '@font-face { font-family: JETSansDigital; font-weight: 800; src: ' + extraboldFontUrls + '; }';
         document.head.appendChild(style);
         document.documentElement.classList.add('webfonts-loaded');
     }
 })();
 ```
 
-This lazily loads in the `JustEatBasis-Bold` font to take over from the Faux Bold rendering of the Regular font.
+This lazily loads in the `JETSansDigital-Bold` and `JETSansDigital-ExtraBold` fonts to take over from the Faux Bold rendering of the Regular font.
 
 N.b. You should also put the two webfont URLs into your service worker so that they are cached at browser level, saving additional requests on repeat vists.
 
-3. You should now be able to use the `JustEatBasis` font when defining your `font-family` in CSS. If you use `fozzie`, this will automatically get set as part of the typography styles. If not, then you will need to set `font-family: 'JustEatBasis';` in your CSS to use it. Bold is under the same font name at `font-weight: 600;`.
+3. You should now be able to use the `JETSansDigital` font when defining your `font-family` in CSS. If you use `fozzie`, this will automatically get set as part of the typography styles. If not, then you will need to set `font-family: 'JETSansDigital';` in your CSS to use it. Bold is under the same font name at `font-weight: 700;`. ExtraBold is under the same font name at `font-weight: 800;`.
 
 
 ## Font Optimisation (subsetting)
 
-We currently use the JustEatBasis font on Just Eat platforms; a custom typeface created for use on our products.
+We currently use the JETSansDigital font on JET platforms: a custom typeface created for use on our products.
 
 The base fontset comes with a huge number of glyphs and layout features that aren't required for use on the web. Therefore we optimise this base font using a process called font-subsetting. Subsetting is the process of removing parts of the base fontset, to leave only the glyphs and features that you require.
 
-For reference, the base Just Eat Regular font has the following properties when ijnspected using the [Wakamai Fondue tool](https://wakamaifondue.com/):
+For reference, the base JETSans Digital Regular font has the following properties when inspected using the [Wakamai Fondue tool](https://wakamaifondue.com/):
 
-![Overview of the main font specification for Just Eat Basis](./justeatbasis-base.png)
+![Overview of the main font specification for JETSans Digital](./jetsansdigital-base.png)
 
 ### How to subset a font
 
@@ -89,31 +92,36 @@ To subset a base font like the one we use, you will need to use a command line t
 
 Once you have `pyftsubset` installed, you can then optimise your font!
 
-For JustEatBasis, we subset both the `JustEatBasis-Regular.ttf` and `JustEatBasis-Bold.ttf`, with the following rules:
+For JETSansDigital, we subset the `JETSansDigital-Regular.ttf, `JETSansDigital-Bold.ttf` and `JETSansDigital-ExtraBold.ttf`, with the following rules:
 
 ```sh
-# JustEatBasis-Regular
-pyftsubset "JustEatBasis-Regular.ttf" --output-file="JustEatBasis-Regular-optimised.woff2" --flavor=woff2 --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
+# JETSansDigital-Regular
+pyftsubset "JETSansDigital-Regular.ttf" --output-file="JETSansDigital-Regular-optimised.woff2" --flavor=woff2 --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
 
-# JustEatBasis-Bold
-pyftsubset "JustEatBasis-Bold.ttf" --output-file="JustEatBasis-Bold-optimised.woff2" --flavor=woff2 --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
+# JETSansDigital-Bold
+pyftsubset "JETSansDigital-Bold.ttf" --output-file="JETSansDigital-Bold-optimised.woff2" --flavor=woff2 --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
 
+# JETSansDigital-ExtraBold
+pyftsubset "JETSansDigital-ExtraBold.ttf" --output-file="JETSansDigital-ExtraBold-optimised.woff2" --flavor=woff2 --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
 
 # And to generate .woff files for legacy browsers
-# JustEatBasis-Regular
-pyftsubset "JustEatBasis-Regular.ttf" --output-file="JustEatBasis-Regular-optimised.woff" --flavor=woff --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
+# JETSansDigital-Regular
+pyftsubset "JETSansDigital-Regular.ttf" --output-file="JETSansDigital-Regular-optimised.woff" --flavor=woff --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
 
-# JustEatBasis-Bold
-pyftsubset "JustEatBasis-Bold.ttf" --output-file="JustEatBasis-Bold-optimised.woff" --flavor=woff --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
+# JETSansDigital-Bold
+pyftsubset "JETSansDigital-Bold.ttf" --output-file="JETSansDigital-Bold-optimised.woff" --flavor=woff --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
+
+# JETSansDigital-ExtraBold
+pyftsubset "JETSansDigital-ExtraBold.ttf" --output-file="JETSansDigital-ExtraBold-optimised.woff" --flavor=woff --layout-features=ccmp,locl,mark,mkmk,kern,dnom,numr,frac,tnum --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
 ```
 
 Breaking down the above commands, this does the following:
 
 - ```sh
-  pyftsubset "JustEatBasis-Regular.ttf" --output-file="JustEatBasis-Regular-optimised.woff2"
+  pyftsubset "JETSansDigital-Regular.ttf" --output-file="JETSansDigital-Regular-optimised.woff2"
   ```
 
-  This runs the pyftsubset tool on the `JustEatBasis-Regular.ttf` file and outputs the results file as `JustEatBasis-Regular-optimised.woff2`.
+  This runs the pyftsubset tool on the `JETSansDigital-Regular.ttf` file and outputs the results file as `JETSansDigital-Regular-optimised.woff2`.
 
 - ```sh
   --flavor=woff2
