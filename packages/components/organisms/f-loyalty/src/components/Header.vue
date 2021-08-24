@@ -112,7 +112,7 @@ export default {
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: 0 auto;
-    padding: #{$layout-margin}px;
+    padding: 0 #{$layout-margin}px;
 
     @include media('<mid') {
         padding: #{$layout-margin--mid}px;
