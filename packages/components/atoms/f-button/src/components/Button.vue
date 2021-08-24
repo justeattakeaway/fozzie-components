@@ -3,11 +3,12 @@
         :is="componentType"
         :class="[
             $style['o-btn'],
-            (isIcon ? $style['o-btn--icon'] : ''),
             $style[`o-btn--${buttonType}`],
-            $style[`o-btn--size${buttonSizeClassname}`],
-            (isFullWidth ? $style['o-btn--fullWidth'] : ''),
-            (isLoading ? $style['o-btn--loading'] : '')
+            $style[`o-btn--size${buttonSizeClassname}`], {
+                [$style['o-btn--icon']]: isIcon,
+                [$style['o-btn--fullWidth']]: isFullWidth,
+                [$style['o-btn--loading']]: isLoading
+            }
         ]"
         :action-type="buttonActionType"
         :data-test-id="`${componentType}-component`"
@@ -15,32 +16,38 @@
         :aria-live="getAriaLive"
         :aria-busy="isLoading"
         v-on="!isLoading && $listeners">
-        <span
-            v-if="isLoading"
-            :class="$style['c-spinner']"
-            :data-test-id="`${componentType}-spinner`" />
-
-        <span
-            :class="[$style['o-button-content'], {
-                [$style['o-btn-content--hidden']]: isLoading
-            }]">
+        <template v-if="hasNestedContent">
+            <span
+                v-if="isLoading"
+                :class="$style['c-spinner']"
+                :data-test-id="`${componentType}-spinner`" />
 
             <span
-                v-if="hasLeadingIcon"
-                :class="[$style['o-btn-icon'], $style['o-btn-icon--leading']]"
-                data-test-id="button-leading-icon">
-                <slot name='leading-icon' />
-            </span>
+                :class="[$style['o-button-content'], {
+                    [$style['o-btn-content--hidden']]: isLoading
+                }]">
 
+                <span
+                    v-if="hasLeadingIcon"
+                    :class="[$style['o-btn-icon'], $style['o-btn-icon--leading']]"
+                    data-test-id="button-leading-icon">
+                    <slot name='leading-icon' />
+                </span>
+
+                <slot />
+
+                <span
+                    v-if="hasTrailingIcon"
+                    :class="[$style['o-btn-icon'], $style['o-btn-icon--trailing']]"
+                    data-test-id="button-trailing-icon">
+                    <slot name='trailing-icon' />
+                </span>
+            </span>
+        </template>
+
+        <template v-else>
             <slot />
-
-            <span
-                v-if="hasTrailingIcon"
-                :class="[$style['o-btn-icon'], $style['o-btn-icon--trailing']]"
-                data-test-id="button-trailing-icon">
-                <slot name='trailing-icon' />
-            </span>
-        </span>
+        </template>
     </component>
 </template>
 
@@ -138,6 +145,12 @@ export default {
 
         hasLeadingIcon () {
             return this.hasIcon && this.hasIcon === 'leading';
+        },
+
+        hasNestedContent () {
+            return this.isLoading
+                || this.hasLeadingIcon
+                || this.hasTrailingIcon;
         }
     },
     watch: {

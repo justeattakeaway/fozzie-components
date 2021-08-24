@@ -2120,6 +2120,11 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-button@1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.10.1.tgz#2e441cd5ea6b3235d5bc9b01f9ee567ca38a9d24"
+  integrity sha512-YffprAYs/vUG5Pgy2avSzKacXHXDwlP+yLUCz+rxhCYcaKUiXcKC/22FgwB7iwFbz6uYND4G2MQYo8w24CurvQ==
+
 "@justeat/f-button@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-1.9.0.tgz#ff7f5dc0ccae943d80ba9affad29c89b11e18156"
