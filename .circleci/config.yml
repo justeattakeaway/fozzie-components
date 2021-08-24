@@ -119,27 +119,19 @@ commands:
       - restore_cache:
           name: Restore molecules Cache
           keys:
-            - build-cache-molecules-{{ .Branch }}-
             - build-cache-molecules-master-
-            - build-cache-molecules-
       - restore_cache:
           name: Restore atoms Cache
           keys:
-            - build-cache-atoms-{{ .Branch }}-
             - build-cache-atoms-master-
-            - build-cache-atoms-
       - restore_cache:
           name: Restore organisms Cache
           keys:
-            - build-cache-organisms-{{ .Branch }}-
             - build-cache-organisms-master-
-            - build-cache-organisms-
       - restore_cache:
           name: Restore services Cache
           keys:
-            - build-cache-services-{{ .Branch }}-
             - build-cache-services-master-
-            - build-cache-services-
 
   run_command:
     parameters:
@@ -376,6 +368,8 @@ jobs:
           command: yarn danger ci
       - build_packages
       - lint_packages
+      - slack_notify_fail
+      - slack_notify_success
 
   unit_tests:
     executor: node
@@ -392,6 +386,8 @@ jobs:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
       - unit_integration_tests
+      - slack_notify_fail
+      - slack_notify_success
 
   browser_tests:
     executor: node
@@ -419,54 +415,8 @@ jobs:
           path: test/results/allure/failure-videos
       - store_test_results:
           path: test/results/ci
-
-#  build:
-#    executor: node
-#    environment:
-#      # required to prevent ENOMEM errors
-#      LERNA_ARGS: --concurrency 1
-#    steps: # a collection of executable commands
-#      - checkout # special step to check out source code to working directory
-#      - detect_root_change
-#      # - echo_root
-#      - restore_cache:
-#          name: Restore Yarn Package Cache
-#          keys:
-#              - yarn-packages-{{ checksum "yarn.lock" }}
-#      - install_node_dependencies
-#      - save_cache:
-#          name: Save Yarn Package Cache
-#          key: yarn-packages-{{ checksum "yarn.lock" }}
-#          paths:
-#            - ~/.cache/yarn
-#      - run: # Run PR Checks
-#          name: Run PR Checks
-#          command: yarn danger ci
-#      - build_packages
-#      - lint_packages
-#      - unit_integration_tests
-#      - run: # Install Component Test Dependencies
-#          name: Install Component Test Dependencies
-#          command: yarn global add @vue/cli @vue/cli-service-global
-#      - build_storybook
-#      - run: # Serve Storybook
-#          name: Serve Storybook
-#          command: yarn storybook:serve-static
-#          background: true
-#      - component_tests
-#      - accessibility_tests
-#      - visual_regression_tests
-#      - store_artifacts:
-#          path: test/results/axe-violations
-#      - store_artifacts:
-#          path: test/results/allure/failure-videos
-#      - store_test_results:
-#          path: test/results/ci
-#      - run:
-#          name: Run Bundlewatch checks
-#          command: yarn bundlewatch
-#      - slack_notify_fail
-#      - slack_notify_success
+      - slack_notify_fail
+      - slack_notify_success
 
   deploy-storybook:
     executor: node
