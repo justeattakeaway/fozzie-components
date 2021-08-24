@@ -23,6 +23,7 @@
                             :card="card"
                             :test-id="testIdForItemWithIndex(i)"
                             :tenant="tenant"
+                            @voucher-code-click="openModal($event)"
                         />
                     </template>
                 </div>
@@ -36,7 +37,8 @@
         <modal-copied-voucher-code
             :is-open="isModalOpen"
             :url="modalOngoingUrl"
-            :close-modal="closeModal" />
+            @close-modal="closeModal"
+        />
     </div>
 </template>
 
@@ -83,8 +85,6 @@ export default {
         hasMounted: false,
         contentCardsHaveLoaded: false,
         error: undefined,
-        showContentCards: true,
-        tries: 0,
         isModalOpen: false,
         modalOngoingUrl: '',
         loadingCard: { type: 'postOrder', count: 3 },
@@ -141,9 +141,6 @@ export default {
                 case 'Promotion_Card_1':
                 case 'Promotion_Card_2':
                     return 'PromotionCard';
-                case 'Terms_And_Conditions_Card':
-                case 'Terms_And_Conditions_Card_2':
-                    return 'TermsAndConditionsCard';
                 default:
                     break;
             }
@@ -165,7 +162,6 @@ export default {
          */
         hasLoaded () {
             this.contentCardsHaveLoaded = true;
-            this.tries = 0;
         },
 
         /**

@@ -18,6 +18,7 @@ import tenantConfigs from '../tenants';
 import NoOffersFound from './NoOffersFound.vue';
 import Unauthenticated from './Unauthenticated.vue';
 import '@justeat/f-searchbox/dist/f-searchbox.css';
+import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import OffersHeader from './Header.vue';
 import OffersResults from './Results.vue';
 import { ACTION_INITIALISE_OFFERS, VUEX_MODULE_NAMESPACE_OFFERS } from '../store/types';

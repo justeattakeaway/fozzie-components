@@ -4,24 +4,21 @@
         :is-open="isOpen"
         is-narrow
         :data-test-id="testIds.modal"
-        @close="closeModal"
-    >
+        @close="close">
         <h3>{{ $t('offersInbox.voucherCodeModal.title') }}</h3>
         <p v-html="$t('offersInbox.voucherCodeModal.body')" />
         <a
             v-if="hasLink"
             :href="url"
             :data-test-id="testIds.confirm"
-            class="o-btn o-btn--primary o-btn--block o-btn--rounded"
-        >
+            class="o-btn o-btn--primary o-btn--block o-btn--rounded">
             {{ $t('offersInbox.voucherCodeModal.confirmButton') }}
         </a>
         <button
             type="button"
             class="o-btn o-btn--tertiary o-btn--block"
             :data-test-id="testIds.dismiss"
-            @click="closeModal"
-        >
+            @click="close">
             {{ $t('offersInbox.voucherCodeModal.dismissButton') }}
         </button>
     </mega-modal>
@@ -29,7 +26,6 @@
 
 <script>
 import MegaModal from '@justeat/f-mega-modal';
-import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 
 export default {
     components: {
@@ -40,10 +36,6 @@ export default {
         isOpen: {
             type: Boolean,
             default: false
-        },
-        closeModal: {
-            type: Function,
-            default: () => {}
         },
         url: {
             type: String,
@@ -64,6 +56,12 @@ export default {
          */
         hasLink () {
             return !!this.url;
+        }
+    },
+
+    methods: {
+        close () {
+            this.$emit('close-modal');
         }
     }
 };

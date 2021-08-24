@@ -5,7 +5,13 @@ const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
 // vue.config.js
 module.exports = {
-    configureWebpack: { externals: ['@braze/web-sdk', 'vuex', 'js-cookie'] },
+    configureWebpack: {
+        externals: [
+            '@braze/web-sdk',
+            'vuex',
+            'js-cookie'
+        ]
+    },
     chainWebpack: config => {
         config.module
             .rule('scss-importer')
