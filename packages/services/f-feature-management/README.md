@@ -1,19 +1,32 @@
 # Feature Management 
 
-**This is a WIP**
-
-This service allows querying of feature flags as provided by our backend Feature Management service.
+This service allows querying of feature flags as configured using the Feature Management service.
 
 ## Usage
+
+**This service is a WIP. The instructions cover the current way of working. This is subject to change.**
 
 To instantiate the SDK:
 
 ```javascript
-import featureManagement from '@justeat/f-feature-management';
+import createFeatureManagementInstance from '@justeat/f-feature-management';
 
-const scope = 'je-my-team-scope';
-const { getBooleanValue, getIntegerValue, getStringValue } = featureManagement(scope);
+const configJson = //string containing configuration json.  The remote load functionality has not yet been added to this lib.
+
+const contextGetter = function(){
+  return {
+    country: 'uk',
+    anonUserId: getCookieValue('je-auser-id') //getCookieValue() implementation to be provided by integrator
+  };
+}
+
+const settings = {
+  json: configJson,
+  contextGetter
+};
+
+const featureManagement = createFeatureManagementInstance(settings);
 
 // e.g.
-const myFeatureValue = getBooleanValue('my-feature-value');
+const myFeatureValue = featureManagement.getValue('my-feature-value');
 ```
