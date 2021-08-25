@@ -26,8 +26,7 @@
   ],
   "scripts": {
     "lint": "vue-cli-service lint",
-    "lint:fix": "yarn lint --fix",
-    "test": "jest"
+    "lint:fix": "yarn lint --fix"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
