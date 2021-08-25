@@ -378,6 +378,10 @@ export default {
             'userNote'
         ]),
 
+        ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+            'changedFields'
+        ]),
+
         wasMobileNumberFocused () {
             return this.$v.customer.mobileNumber.$dirty;
         },
@@ -988,9 +992,18 @@ export default {
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
 
+            const expandedData = {
+                ...this.eventData,
+                enteredPostcode: this.address?.postcode,
+                location: this.$cookies.get('je-location'),
+                locationUk: this.$cookies.get('je-location-uk'),
+                changedFields: this.changedFields,
+                isPostcodeChanged: this.changedFields.includes('addressPostcode')
+            };
+
             this.logInvoker({
                 message: 'Checkout Validation Error',
-                data: { ...this.eventData, validationState },
+                data: { ...expandedData, validationState },
                 logMethod: this.$logger.logWarn
             });
         },
