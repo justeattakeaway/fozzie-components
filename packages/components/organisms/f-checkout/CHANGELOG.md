@@ -3,13 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v0.174.0
-------------------------------
 *August 24, 2021*
 
 ### Added
 - Add copy for AU/NZ locales
 - Guest dine in visual test.
+
+
+v0.173.3
+------------------------------
+*August 24, 2021*
+
+### Added
+- Logging items on invalid checkout.
 
 
 v0.173.2
