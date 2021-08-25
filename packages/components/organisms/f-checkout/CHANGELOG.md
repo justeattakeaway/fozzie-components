@@ -5,11 +5,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 v0.174.0
-*August 24, 2021*
+*August 25, 2021*
 
 ### Added
 - Add copy for AU/NZ locales
 - Guest dine in visual test.
+
+
+v0.173.4
+------------------------------
+*August 25, 2021*
+
+### Changed
+- Increased timeout to 60s.
 
 
 v0.173.3
