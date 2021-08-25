@@ -49,7 +49,9 @@ export default {
             lastName: null
         },
 
-        brazeApiKey: null
+        brazeApiKey: null,
+
+        globalUserId: 'test'
     }),
 
     actions: {

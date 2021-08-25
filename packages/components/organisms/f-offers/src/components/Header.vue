@@ -48,7 +48,7 @@ export default {
                 },
                 modifier: {
                     rule: [
-                        '<=',
+                        '<',
                         this.isAuthenticated ? 'narrowMid' : 'mid'
                     ],
                     column: true,
@@ -119,7 +119,7 @@ $header-height: 275px;
     width: 100%;
     height: 40%;
     background-color: $color-content-brand;
-    transform: skewY(6deg);
+    transform: skewY(4.5deg);
     transform-origin: top right;
 
     @include media('>=narrow') {
@@ -131,7 +131,7 @@ $header-height: 275px;
     }
 
     @include media('>=mid') {
-        height: 60%;
+        height: 55%;
     }
 
     @include media('>=wide') {
@@ -139,7 +139,7 @@ $header-height: 275px;
     }
 
     @include media('>=huge') {
-        height: 80%;
+        height: 75%;
     }
 }
 

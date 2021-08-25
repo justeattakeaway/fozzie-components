@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.11.0
+------------------------------
+*August 24, 2021*
+
+### Added
+- `hasNestedContent` computed property that checks whether button content should be nested inside span tags.
+- Secondary default slot to be used when content is not nested.
+- Unit tests for `hasNestedContent` computed property.
+
+### Changed
+- Wrap nested content only when necessary.
+- Use Vue object syntax to add optional classes.
+
+
 v1.10.1
 ------------------------------
 *July 23, 2021*
