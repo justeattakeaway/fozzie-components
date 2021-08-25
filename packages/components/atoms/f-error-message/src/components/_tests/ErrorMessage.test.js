@@ -40,4 +40,15 @@ describe('ErrorMessage', () => {
         // Assert
         expect(content.element.innerHTML).toBe(propsData.slots.default);
     });
+
+    it('should contain the `aria-live="assertive"` attribute so screen readers can read back errors correctly', () => {
+        // Arrange
+        const wrapper = shallowMount(ErrorMessage, propsData);
+
+        // Act
+        const content = wrapper.find('[data-test-id="content"]');
+
+        // Assert
+        expect(content.attributes('aria-live')).toMatchSnapshot();
+    });
 });

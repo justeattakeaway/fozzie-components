@@ -6,6 +6,7 @@
         <danger-icon :class="$style['c-errorMessage-icon']" />
         <span
             data-test-id="content"
+            aria-live="assertive"
             :class="$style['c-errorMessage-content']">
             <slot />
         </span>
