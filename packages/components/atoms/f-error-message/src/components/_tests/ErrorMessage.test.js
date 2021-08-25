@@ -40,4 +40,15 @@ describe('ErrorMessage', () => {
         // Assert
         expect(content.element.innerHTML).toBe(propsData.slots.default);
     });
+
+    it('should contain the `role="alert"` attribute so screen readers can read back the error correctly', () => {
+        // Arrange
+        const wrapper = shallowMount(ErrorMessage, propsData);
+
+        // Act
+        const content = wrapper.find('[data-test-id="content"]');
+
+        // Assert
+        expect(content.attributes('role')).toBe('alert');
+    });
 });
