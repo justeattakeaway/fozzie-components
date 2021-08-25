@@ -189,13 +189,13 @@ const messages = {
     checkoutTermsAndConditions: 'By placing an order you agree to our {termsAndConditions}. Please read our {privacyPolicy} and {cookiePolicy}.',
 
     termsAndConditionsLinkText: 'Terms and Conditions',
-    termsAndConditionsLinkUrl: 'https://www.menulog.com.au/info/privacy-policy',
+    termsAndConditionsLinkUrl: 'https://www.menulog.com.nz/info/privacy-policy',
 
     privacyPolicyLinkText: 'Privacy Policy',
-    privacyPolicyLinkUrl: 'https://www.menulog.com.au/info/privacy-policy',
+    privacyPolicyLinkUrl: 'https://www.menulog.com.nz/info/privacy-policy',
 
     cookiePolicyLinkText: 'Cookie Policy',
-    cookiePolicyLinkUrl: 'https://www.menulog.com.au/info/privacy-policy#cookies_policy',
+    cookiePolicyLinkUrl: 'https://www.menulog.com.nz/info/privacy-policy#cookies_policy',
 
     ageVerification: {
         heading: 'Please confirm your date of birth',
