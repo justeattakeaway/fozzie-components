@@ -169,6 +169,48 @@ describe('isValidPostcode', () => {
         // Assert
         expect(actual).toBe(expected);
     });
+
+    it.each([
+        ['0100', true],
+        ['5243', true],
+        ['342567', false],
+        ['4521', true],
+        ['AR51 1AA', false],
+        ['ATEGD', false],
+        ['00 000', false],
+        ['23', false],
+        ['not even trying', false],
+        ['01!23', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-AU` locale', (postcode, expected) => {
+        // Act
+        const actual = isValidPostcode(postcode, 'en-AU');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
+        ['0100', true],
+        ['5243', true],
+        ['342567', false],
+        ['4521', true],
+        ['AR51 1AA', false],
+        ['ATEGD', false],
+        ['00 000', false],
+        ['2311', true],
+        ['not even trying', false],
+        ['01!23', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-NZ` locale', (postcode, expected) => {
+        // Act
+        const actual = isValidPostcode(postcode, 'en-NZ');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
 });
 
 describe('isValidPhoneNumber', () => {

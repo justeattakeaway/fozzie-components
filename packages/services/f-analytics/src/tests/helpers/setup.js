@@ -5,17 +5,17 @@ import Vue from 'vue';
 const defaultState = {
     platformData: {
         environment: 'localhost',
-        name: '',
-        appType: '',
+        name: undefined,
+        appType: undefined,
         applicationId: undefined,
-        userAgent: 'N/A',
-        branding: '',
-        country: '',
-        language: '',
+        userAgent: undefined,
+        branding: undefined,
+        country: undefined,
+        language: undefined,
         jeUserPercentage: undefined,
-        currency: '',
-        version: '0.0.0.0',
-        instancePosition: 'N/A'
+        currency: undefined,
+        version: undefined,
+        instancePosition: undefined
     },
     userData: {
         'a-UserId': undefined,
@@ -26,14 +26,14 @@ const defaultState = {
         signupDate: undefined
     },
     pageData: {
-        name: '',
-        group: '',
-        httpStatusCode: 0,
+        group: undefined,
+        name: undefined,
+        httpStatusCode: 200,
         isCached: false,
-        conversationId: '',
-        requestId: '',
-        orientation: '',
-        display: ''
+        conversationId: undefined,
+        requestId: undefined,
+        orientation: undefined,
+        display: undefined
     },
     events: []
 };
@@ -88,7 +88,7 @@ const newEvent = {
 
 const options = {
     namespace: 'f-analytics',
-    featureName: 'test-route-name',
+    featureName: 'test-feature-name',
     locale: 'en-GB',
     id: 'GTM-0000000'
 };
@@ -130,27 +130,11 @@ const createStore = ({
     });
 };
 
-const $cookies = {
-    get: jest.fn()
-};
-
-const $route = {
-    name: 'test-route-name'
-};
-
-const $i18n = {
-    locale: 'en-GB'
-};
-
 export {
     defaultState,
     defaultActions,
     modifiedState,
     newEvent,
     createStore,
-    $cookies,
-    $route,
-    $i18n,
     options
 };
-
