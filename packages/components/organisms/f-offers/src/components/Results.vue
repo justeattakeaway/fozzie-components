@@ -8,6 +8,7 @@
             :push-to-data-layer="pushToDataLayer"
             @has-loaded="hasLoaded"
             @get-card-count="cardsReceived"
+            @voucher-code-click="openModal($event)"
             @on-error="onError">
             <template #default="{ cards }">
                 <div :class="$style['c-offersResults-contentCards']">
@@ -23,7 +24,6 @@
                             :card="card"
                             :test-id="testIdForItemWithIndex(i)"
                             :tenant="tenant"
-                            @voucher-code-click="openModal($event)"
                         />
                     </template>
                 </div>
@@ -49,7 +49,6 @@ import {
     VoucherCard,
     GroupHeaderCard,
     FirstTimeCustomerCard,
-    TermsAndConditionsCard,
     SkeletonLoader
 } from '@justeat/f-content-cards';
 import '@justeat/f-content-cards/dist/f-content-cards.css';
@@ -66,7 +65,6 @@ export default {
         VoucherCard,
         GroupHeaderCard,
         FirstTimeCustomerCard,
-        TermsAndConditionsCard,
         SkeletonLoader,
         ModalCopiedVoucherCode
     },
