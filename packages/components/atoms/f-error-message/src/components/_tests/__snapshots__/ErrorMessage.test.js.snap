@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ErrorMessage should contain the \`aria-live="assertive"\` attribute so screen readers can read back errors correctly 1`] = `"assertive"`;

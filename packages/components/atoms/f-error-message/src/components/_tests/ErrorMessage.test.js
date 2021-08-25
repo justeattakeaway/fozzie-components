@@ -41,7 +41,7 @@ describe('ErrorMessage', () => {
         expect(content.element.innerHTML).toBe(propsData.slots.default);
     });
 
-    it('should contain the `aria-live="assertive"` attribute so screen readers can read back errors correctly', () => {
+    it('should contain the `role="alert"` attribute so screen readers can read back the error correctly', () => {
         // Arrange
         const wrapper = shallowMount(ErrorMessage, propsData);
 
@@ -49,6 +49,6 @@ describe('ErrorMessage', () => {
         const content = wrapper.find('[data-test-id="content"]');
 
         // Assert
-        expect(content.attributes('aria-live')).toMatchSnapshot();
+        expect(content.attributes('role')).toBe('alert');
     });
 });

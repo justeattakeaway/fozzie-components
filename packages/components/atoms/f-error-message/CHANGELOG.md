@@ -8,8 +8,8 @@ v0.6.0
 *August 25, 2021*
 
 ### Added
-- `aria-live` attribute to error component.
-- Tests to cover `aria-live` addition.
+- `role="alert"` attribute to error component.
+- Tests to cover `role="alert"` addition.
 
 
 v0.5.0
