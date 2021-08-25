@@ -13,12 +13,10 @@ import createFeatureManagementInstance from '@justeat/f-feature-management';
 
 const configJson = //string containing configuration json.  The remote load functionality has not yet been added to this lib.
 
-const contextGetter = function(){
-  return {
-    country: 'uk',
-    anonUserId: getCookieValue('je-auser-id') //getCookieValue() implementation to be provided by integrator
-  };
-}
+const contextGetter = () => ({
+  country: 'uk',
+  anonUserId: getCookieValue('je-auser-id') // getCookieValue() implementation to be provided by integrator
+})
 
 const settings = {
   json: configJson,
