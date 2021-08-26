@@ -385,7 +385,7 @@ export default {
         updateAddressDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
             Object.keys(payload).forEach(k => {
-                payload[k] = typeof payload[k] === 'string' ? payload[k].trim() : payload[k];
+                payload[k] = payload[k].trim();
             });
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
