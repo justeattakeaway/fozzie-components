@@ -88,27 +88,6 @@ describe('checkout mapper', () => {
         ]);
     });
 
-    it('should map the address correctly and remove any unnecessary whitespace from postcode', () => {
-        // Act
-        const requestBody = mapUpdateCheckoutRequest({
-            ...defaultParams,
-            address: {
-                ...address,
-                postcode: ' BS1 1AA '
-            }
-        });
-
-        const locationRequest = requestBody[1].value.location;
-
-        // Assert
-        expect(locationRequest.address.postalCode).toBe(address.postcode);
-        expect(locationRequest.address.locality).toBe(address.locality);
-        expect(locationRequest.address.lines).toStrictEqual([
-            address.line1,
-            address.line2
-        ]);
-    });
-
     it('should map time correctly', () => {
         // Arrange
         const time = {

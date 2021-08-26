@@ -1168,6 +1168,21 @@ describe('CheckoutModule', () => {
             expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
         });
 
+        describe('updateAddressDetails ::', () => {
+            it('should remove all leading and trailing whitespace from address fields', () => {
+                const addressWithWhitespace = {
+                    line1: 'line 1 ',
+                    line2: ' line 2',
+                    locality: ' locality ',
+                    postcode: ' postcode '
+                };
+
+                updateAddressDetails(context, addressWithWhitespace);
+
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, address);
+            });
+        });
+
         describe('getUserNote ::', () => {
             describe('if sessionStorage exists', () => {
                 beforeEach(() => {
