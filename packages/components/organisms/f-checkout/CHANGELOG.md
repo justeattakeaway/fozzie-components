@@ -5,13 +5,30 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 v0.176.0
+------------------------------
 *August 25, 2021*
 
 ### Changed
 - Map checkout update request now trims whitespace from postcode
 
 
+v0.175.0
+------------------------------
+*August 25, 2021*
+
+### Removed
+- Age verification div wrapper from `AgeVerification.vue` component.
+
+### Changed
+- `AgeVerificationError` ref location from wrapper to `errorMessage` component.
+- `handleAgeVerifcation` method to look for correct component when error appears.
+
+### Fixed
+- Typo in `AgeVerification.vue` component.
+
+
 v0.174.0
+------------------------------
 *August 25, 2021*
 
 ### Added
