@@ -20,10 +20,12 @@ describe('f-checkout "delivery" component tests', () => {
     it('should enable a user to submit a postcode with correct characters', () => {
         // Arrange
         const addressInfo = {
+            line1: 'line 1 of address',
             postcode: 'AR51 1AA'
         };
 
         // Act
+        checkout.clearBlurField('addressPostcode');
         checkout.populateCheckoutForm(addressInfo);
         checkout.goToPayment();
 
