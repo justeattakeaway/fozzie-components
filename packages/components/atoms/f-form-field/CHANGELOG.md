@@ -12,6 +12,14 @@ v2.1.0
 - Support for `disabled` and `selected` attributes for dropdown options.
 
 
+v3.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
 v2.0.0
 ------------------------------
 *August 5, 2021*

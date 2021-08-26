@@ -15,7 +15,7 @@ export default create({
     appBorderRadius: 4,
 
     // Fonts
-    fontBase: '"JustEatBasis", Arial, sans-serif',
+    fontBase: '"JETSansDigital", Arial, sans-serif',
     fontCode: typography.fonts.mono,
 
     // Text colors

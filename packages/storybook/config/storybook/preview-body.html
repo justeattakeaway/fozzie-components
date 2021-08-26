@@ -1,11 +1,13 @@
 <script>
 (function () {
-    var fontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff") format("woff")';
+    var boldFontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Bold-optimised.woff") format("woff")';
+    var extraboldFontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-ExtraBold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-ExtraBold-optimised.woff") format("woff")';
 
-    if('fonts' in document ) {
-        var bold = new FontFace('JustEatBasis', fontUrls, { weight: '600' });
+    if ('fonts' in document) {
+        var bold = new FontFace('JETSansDigital', boldFontUrls, { weight: '700' });
+        var extrabold = new FontFace('JETSansDigital', extraboldFontUrls, { weight: '800' });
 
-        Promise.all([bold.load()])
+        Promise.all([bold.load(), extrabold.load()])
             .then(function (fonts) {
                 fonts.forEach(function (font) {
                     document.fonts.add(font);
@@ -17,11 +19,12 @@
     }
 
     // This next block is for IE11 and old Edge support, which don't support the new Font loading API
-    if(!('fonts' in document) && 'head' in document) {
+    if (!('fonts' in document) && 'head' in document) {
         // Awkwardly dump the second stage @font-face blocks in the head
         var style = document.createElement('style');
         // Note: Edge supports WOFF2
-        style.innerHTML = '@font-face { font-family: JustEatBasis; font-weight: 600; src: ' + fontUrls + '; }';
+        style.innerHTML = '@font-face { font-family: JETSansDigital; font-weight: 700; src: ' + boldFontUrls + '; }';
+        style.innerHTML = '@font-face { font-family: JETSansDigital; font-weight: 800; src: ' + extraboldFontUrls + '; }';
         document.head.appendChild(style);
         document.documentElement.classList.add('webfonts-loaded');
     }

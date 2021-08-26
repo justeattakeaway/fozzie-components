@@ -2381,23 +2381,23 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@5.0.0-beta.10":
-  version "5.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.10.tgz#b1d57e5b096553ebcb5bf1625806b7a250eca6f1"
-  integrity sha512-II3fgXXxkVJYLa39URqIQJCrhFO83cMXgR9Q3kH1ZkibC/pihZ1jXCmTMOWpr6C9gSaxlZ7+wwninv+DHXnYww==
+"@justeat/fozzie@6.0.0-beta.0":
+  version "6.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.0.tgz#cdd4ddd0b718c2361d33cc1c411d12d061d4c4b9"
+  integrity sha512-BhRJN5OPBoxQQ5H2c+qVgV0104ZVIHn+vcG4Uk+4N6rhWztVJeHIHBYgTvXAeshwkYcvMbItwvcqvDJa3nXcRQ==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
     "@justeat/f-utils" "2.0.0"
-    "@justeat/pie-design-tokens" "0.19.0"
+    "@justeat/pie-design-tokens" "1.0.0-beta.0"
     fontfaceobserver "2.1.0"
-    include-media "1.4.9"
+    include-media "1.4.10"
     normalize-scss "7.0.1"
 
-"@justeat/pie-design-tokens@0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-0.19.0.tgz#5110e0a607eb215353de4313ba457dab7dd6d459"
-  integrity sha512-YfQ2GkKaq36ZzgShkcKxZx1tefAr2I/19RY0G1aUhf7meq5fSkzkViHWlhGQHFO5t9syLgJ1oCHiwk2LPdaWZw==
+"@justeat/pie-design-tokens@1.0.0-beta.0":
+  version "1.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.0.0-beta.0.tgz#272457e7f806ac931800935cd54b10801c45a589"
+  integrity sha512-egiGduhwftk8O9KSnTnK5rN3cP/FY1TurdvFiC12C3mkXEImEZnpLTbf/sZ/StV95m4E69y45jiaPB87FXzSVw==
   dependencies:
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"
@@ -13915,6 +13915,11 @@ in-publish@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/in-publish/-/in-publish-2.0.1.tgz#948b1a535c8030561cea522f73f78f4be357e00c"
   integrity sha512-oDM0kUSNFC31ShNxHKUyfZKy8ZeXZBWMjMdZHKLOk13uvT27VTL/QzRGfRUcevJhpkZAvlhPYuXkF7eNWrtyxQ==
+
+include-media@1.4.10:
+  version "1.4.10"
+  resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.10.tgz#7a311c92c396c808504ec6a5365115d30571f259"
+  integrity sha512-TymQzKF7oWHbItEcEHOCponZ90lRr1I9QbYeD+qCxXy4Z0/pSpS4Ocz2bq3FMOERlXXrY9Sawsh9GjiObVQA6A==
 
 include-media@1.4.9:
   version "1.4.9"
