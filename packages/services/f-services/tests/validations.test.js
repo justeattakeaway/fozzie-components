@@ -131,8 +131,11 @@ describe('getFormValidationState', () => {
 describe('isValidPostcode', () => {
     it.each([
         ['AR51 1AA', true],
+        [' AR51 1AA ', true],
         ['BS1 4DJ', true],
+        [' BS1 4DJ', true],
         ['bs14dj', true],
+        ['bs14dj ', true],
         ['ec4m 7rf', true],
         ['EC4M7RF', true],
         ['A11A', false],
