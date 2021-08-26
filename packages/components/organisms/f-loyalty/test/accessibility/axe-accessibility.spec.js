@@ -4,7 +4,7 @@ const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 const Loyalty = require('../../test-utils/component-objects/f-loyalty.component');
 
-const loyalty = new Loyalty('organism', 'v-loyalty-component');
+const loyalty = new Loyalty();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
