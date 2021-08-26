@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0-beta.0
+------------------------------
+*August 25, 2021*
+
+### Updated
+- fozzie version to include new font
+
+### Changed
+- Storybook font to become new JETSansDigital instead of JustEatBasis
+
+
 v3.54.0
 ------------------------------
 *September 2, 2021*
