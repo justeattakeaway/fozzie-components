@@ -11,7 +11,6 @@ v0.175.0
 - Map checkout update request now trims whitespace from postcode
 
 
-
 v0.174.0
 *August 25, 2021*
 
