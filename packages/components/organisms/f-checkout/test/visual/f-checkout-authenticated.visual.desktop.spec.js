@@ -6,7 +6,7 @@ let checkout;
 describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true);
@@ -34,7 +34,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Something went wrong" error.', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Patch Checkout Errors', 'SERVER')
@@ -54,7 +54,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true)
@@ -87,7 +87,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true)
@@ -108,7 +108,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', false);
@@ -129,7 +129,7 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Deskt
 describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true);
@@ -188,7 +188,7 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true)
@@ -209,7 +209,7 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', false);
@@ -230,7 +230,7 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop
 describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'dinein')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true);
@@ -274,7 +274,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'dinein')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true)
