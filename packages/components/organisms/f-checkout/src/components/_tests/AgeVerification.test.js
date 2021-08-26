@@ -229,7 +229,7 @@ describe('AgeVerification', () => {
             });
         });
 
-        describe('`handleAgeVerifcation` ::', () => {
+        describe('`handleAgeVerification` ::', () => {
             // Arrange
             let updateDateOfBirthSpy;
 
@@ -250,7 +250,7 @@ describe('AgeVerification', () => {
                 });
 
                 // Act
-                wrapper.vm.handleAgeVerifcation();
+                wrapper.vm.handleAgeVerification();
 
                 // Assert
                 expect(wrapper.vm.hasSelectedDateOfBirth).toBe(true);
@@ -274,7 +274,7 @@ describe('AgeVerification', () => {
                     });
 
                     // Act
-                    wrapper.vm.handleAgeVerifcation();
+                    wrapper.vm.handleAgeVerification();
                 });
 
                 afterEach(() => {
@@ -311,7 +311,7 @@ describe('AgeVerification', () => {
 
                 it('should call not `updateDateOfBirth` with `selectedDate`', () => {
                     // Act
-                    wrapper.vm.handleAgeVerifcation();
+                    wrapper.vm.handleAgeVerification();
 
                     // Assert
                     expect(updateDateOfBirthSpy).not.toHaveBeenCalled();
@@ -319,21 +319,10 @@ describe('AgeVerification', () => {
 
                 it('should not emit `verify-age`', () => {
                     // Act
-                    wrapper.vm.handleAgeVerifcation();
+                    wrapper.vm.handleAgeVerification();
 
                     // Assert
                     expect(wrapper.emitted('verify-age')).toBeUndefined();
-                });
-
-                it('should focus on error message', async () => {
-                    // Act
-                    wrapper.vm.handleAgeVerifcation();
-                    await wrapper.vm.$nextTick();
-
-                    const errorMessage = wrapper.vm.$refs.AgeVerificationError;
-
-                    // Assert
-                    expect(document.activeElement).toEqual(errorMessage);
                 });
             });
         });
