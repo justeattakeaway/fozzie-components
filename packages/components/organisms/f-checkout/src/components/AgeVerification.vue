@@ -58,7 +58,7 @@
                 button-type="primary"
                 is-full-width
                 data-test-id="age-verification-redirect-button"
-                @click.native="handleAgeVerifcation">
+                @click.native="handleAgeVerification">
                 {{ $t(`ageVerification.buttonText`) }}
             </f-button>
         </form>
@@ -172,7 +172,7 @@ export default {
             this.selectedDate[type] = selection;
         },
 
-        handleAgeVerifcation () {
+        handleAgeVerification () {
             this.hasSelectedDateOfBirth = true;
 
             if (this.isValidAge) {
