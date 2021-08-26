@@ -4,15 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.0.0-beta.1
+------------------------------
+*September 1, 2021*
+
+### Changed
+- `f-button` to v2.0.0-beta.0 which use the new font
+
+
 v5.0.0-beta.0
 ------------------------------
 *August 26, 2021*
 
-### Updated
-- New font JETSansDigital
-
 ### Changed
-- Updated version of `f-button`.
+- New font JETSansDigital
 
 
 v4.19.1
