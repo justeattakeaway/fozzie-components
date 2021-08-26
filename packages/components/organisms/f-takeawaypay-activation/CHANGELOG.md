@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
 v0.9.0
 ------------------------------
 *August 17, 2021*
