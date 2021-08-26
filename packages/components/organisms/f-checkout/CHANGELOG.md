@@ -3,7 +3,6 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
 v0.175.0
 ------------------------------
 *August 25, 2021*
@@ -17,6 +16,15 @@ v0.175.0
 
 ### Fixed
 - Typo in `AgeVerification.vue` component.
+
+
+v0.174.0
+------------------------------
+*August 25, 2021*
+
+### Added
+- Add copy for AU/NZ locales
+- Guest dine in visual test.
 
 
 v0.173.4
@@ -60,13 +68,6 @@ v0.173.0
 
 ### Changed
 - `checkoutMocks.js` & `checkout.stories.js` refactored substantially.
-
-(To be added to next release)
-------------------------------
-*August 12, 2021*
-
-### Added
-- Guest dine in visual test.
 
 
 v0.172.0
