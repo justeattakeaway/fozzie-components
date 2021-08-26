@@ -383,10 +383,10 @@ export default {
         },
 
         updateAddressDetails ({ commit, dispatch }, payload) {
-            const [[field, value]] = Object.entries(payload);
+            const [field] = Object.keys(payload);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-            commit(UPDATE_FULFILMENT_ADDRESS, value.trim());
+            commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
         updateCustomerDetails ({ commit, dispatch }, payload) {

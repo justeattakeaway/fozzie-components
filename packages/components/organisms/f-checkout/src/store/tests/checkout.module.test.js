@@ -1143,6 +1143,7 @@ describe('CheckoutModule', () => {
 
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
+            [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateUserNote, UPDATE_USER_NOTE, userNote],
             [updateDateOfBirth, UPDATE_DATE_OF_BIRTH, dateOfBirth],
             [updateMessage, UPDATE_MESSAGE, message]
@@ -1165,35 +1166,6 @@ describe('CheckoutModule', () => {
 
             // Assert
             expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-        });
-
-        describe('updateAddressDetails ::', () => {
-            it.each([
-                ['line1', 'line 1'],
-                ['line2', 'line 2'],
-                ['locality', 'locality'],
-                ['postcode', 'postcode']
-            ])(`should call mutation with field: %s and value %s and dispatch ${VUEX_CHECKOUT_ANALYTICS_MODULE}`, (field, value) => {
-                const addressWithWhitespace = {
-                    [field]: value
-                };
-
-                updateAddressDetails(context, addressWithWhitespace);
-
-                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, addressWithWhitespace[field]);
-            });
-
-            it('should remove all leading and trailing whitespace from address fields', () => {
-                const addressWithWhitespace = {
-                    postcode: ' postcode'
-                };
-
-                updateAddressDetails(context, addressWithWhitespace);
-
-                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'postcode', { root: true });
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, 'postcode');
-            });
         });
 
         describe('getUserNote ::', () => {
