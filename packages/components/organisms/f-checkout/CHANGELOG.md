@@ -15,6 +15,9 @@ v0.175.0
 - `AgeVerificationError` ref location from wrapper to `errorMessage` component.
 - `handleAgeVerifcation` method to look for correct component when error appears.
 
+### Fixed
+- Typo in `AgeVerification.vue` component.
+
 
 v0.173.4
 ------------------------------
