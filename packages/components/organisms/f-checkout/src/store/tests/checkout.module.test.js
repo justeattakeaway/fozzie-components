@@ -1171,10 +1171,9 @@ describe('CheckoutModule', () => {
         describe('updateAddressDetails ::', () => {
             it('should remove all leading and trailing whitespace from address fields', () => {
                 const addressWithWhitespace = {
-                    line1: 'line 1 ',
-                    line2: ' line 2',
-                    locality: ' locality ',
-                    postcode: ' postcode '
+                    ...address,
+                    line1: ' line 1 ',
+                    postcode: 'postcode '
                 };
 
                 updateAddressDetails(context, addressWithWhitespace);
