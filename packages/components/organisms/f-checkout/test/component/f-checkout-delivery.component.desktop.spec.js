@@ -24,6 +24,7 @@ describe('f-checkout "delivery" component tests', () => {
         };
 
         // Act
+        checkout.clearBlurField('addressPostcode');
         checkout.populateCheckoutForm(addressInfo);
         checkout.goToPayment();
 
