@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const Card = require('../../test-utils/component-objects/f-card.component');
 
-const card = new Card('atom', 'card-component');
+const card = new Card();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
