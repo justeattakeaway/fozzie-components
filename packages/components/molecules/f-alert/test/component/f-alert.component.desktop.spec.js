@@ -1,13 +1,10 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Alert = require('../../test-utils/component-objects/f-alert.component');
 
 const alert = new Alert();
 
 describe('f-alert component tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(alert.componentType, alert.componentName, alert.path);
-        alert.open(pageUrl);
-        alert.waitForComponent();
+        alert.load();
     });
 
     it('should display Alert', () => {

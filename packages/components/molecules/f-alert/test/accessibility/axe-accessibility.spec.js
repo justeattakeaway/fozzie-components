@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 const Alert = require('../../test-utils/component-objects/f-alert.component');
 
@@ -6,9 +5,7 @@ const alert = new Alert();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(alert.componentType, alert.componentName, alert.path);
-        alert.open(pageUrl);
-        alert.waitForComponent();
+        alert.load();
     });
 
     it('a11y - should test f-alert component WCAG compliance', () => {
