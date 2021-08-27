@@ -8,7 +8,7 @@ let button;
 describe('Accessibility tests', () => {
     it('a11y - should test f-button action component WCAG compliance', () => {
         // Act
-        button = new Button('atom-folder', 'f-button--button-component');
+        button = new Button();
         button.withQuery('knob-Button Type', 'primary');
         button.withQuery('knob-Button Size', 'medium');
         const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -22,7 +22,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-button link component WCAG compliance', () => {
         // Act
-        button = new Button('atom-folder', 'f-button--button-component');
+        button = new Button();
         button.withQuery('knob-Button Type', 'link')
             .withQuery('knob-href', 'link')
             .withQuery('knob-Button Size', 'medium');
