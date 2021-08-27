@@ -5,7 +5,7 @@ let card;
 
 describe('home promotion card 2 component tests - @browserstack', () => {
     beforeEach(() => {
-        card = new HomePromotionCard2('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
+        card = new HomePromotionCard2();
         const pageUrl = buildUrl(card.componentType, card.componentName, card.path);
 
         card.open(pageUrl);
