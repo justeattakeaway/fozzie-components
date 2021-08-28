@@ -1,5 +1,4 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
@@ -124,20 +123,12 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
-    load (componentToWaitFor='default') {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
-        this.open(pageUrl);
+    load () {
+        super.load(this.component);
+    }
 
-        switch (componentToWaitFor) {
-            case 'error':
-                this.waitForErrorPageComponent();
-                break;
-
-            case 'default':
-            default:
-                this.waitForComponent();
-                break;
-        }
+    loadError() {
+        super.load(this.errorPageComponent);
     }
 
     open (url) {
@@ -149,8 +140,8 @@ module.exports = class Checkout extends Page {
         return this;
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    waitForComponent (component=this.component) {
+        super.waitForComponent(component);
     }
 
     waitForErrorPageComponent () {
