@@ -5,8 +5,7 @@ const takeawaypayActivation = new TakeawaypayActivation();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        takeawaypayActivation.open();
-        takeawaypayActivation.waitForComponent();
+        takeawaypayActivation.load();
     });
     it('a11y - should test f-takeawaypayActivation component WCAG compliance', () => {
         // Act
