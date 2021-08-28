@@ -123,21 +123,16 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
-    load () {
-        super.load(this.component);
+    load (queries) {
+        super.load(this.component, queries);
     }
 
-    loadError() {
-        super.load(this.errorPageComponent);
+    loadError(queries) {
+        super.load(this.errorPageComponent, queries);
     }
 
     open (url) {
         super.open(url);
-    }
-
-    withQuery (name, value) {
-        super.withQuery(name, value);
-        return this;
     }
 
     waitForComponent (component = this.component) {

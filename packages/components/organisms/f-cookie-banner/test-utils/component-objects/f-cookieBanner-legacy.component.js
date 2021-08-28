@@ -14,8 +14,8 @@ module.exports = class CookieBanner extends Page {
 
     get closeButton () { return this.component.$('[data-test-id="cookieBanner-close-button"]'); }
 
-    load () {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+    load (queries) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, super.composePath(queries));
         this.open(pageUrl);
         browser.deleteAllCookies();
         browser.refresh();

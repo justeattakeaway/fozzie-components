@@ -2,13 +2,13 @@ import forEach from 'mocha-each';
 
 const CookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
 
-let cookieBanner;
+let cookieBanner = new CookieBanner();
 
 describe('Legacy - f-cookieBanner component tests @browserstack', () => {
     beforeEach(() => {
-        cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', 'en-AU');
-        cookieBanner.load();
+        cookieBanner.load({
+            'Locale': 'en-AU'
+        });
     });
 
     it('should set "je-cookie_banner" cookie when dismissed.', () => {
@@ -28,11 +28,7 @@ describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
         ['en-NZ', 'nz/info/privacy-policy#cookies_policy']
     ])
         .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
-            // Arrange
-            cookieBanner = new CookieBanner();
-            cookieBanner.withQuery('&knob-Locale', tenant);
-
-            cookieBanner.load();
+            cookieBanner.load({ 'Locale': tenant });
 
             // Act
             cookieBanner.clickCookiePolicyLink();

@@ -2,16 +2,15 @@ import forEach from 'mocha-each';
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
-let checkout;
+let checkout = new Checkout();
 
 describe('f-checkout "guest" component tests - @browserstack', () => {
     beforeEach(() => {
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', true);
-
-        checkout.load();
+        checkout.load({
+            'Service Type': 'delivery',
+            'Is User Logged In': false,
+            'Is ASAP available': true,
+        });
     });
 
     it('should navigate to correct url when the login link is clicked', () => {

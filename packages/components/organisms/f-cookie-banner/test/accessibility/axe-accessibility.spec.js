@@ -12,8 +12,9 @@ describe('Legacy Accessibility tests', () => {
     it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {
         // Arrange
         const formattedLocale = 'en-AU';
-        legacyCookieBanner.withQuery('&knob-Locale', formattedLocale);
-        legacyCookieBanner.load();
+        legacyCookieBanner.load({
+            'Locale': formattedLocale
+        });
 
         // Act
         const axeResults = getAccessibilityTestResults('f-cookie-banner');
@@ -25,8 +26,9 @@ describe('Legacy Accessibility tests', () => {
     it('a11y - should test new f-cookie-banner component WCAG compliance', () => {
         // Arrange
         const formattedLocale = 'en-GB';
-        cookieConsentBanner.withQuery('&knob-Locale', formattedLocale);
-        cookieConsentBanner.load();
+        cookieConsentBanner.load({
+            'Locale': formattedLocale
+        });
 
         // Act
         const axeResults = getAccessibilityTestResults('f-cookie-banner');

@@ -68,8 +68,8 @@ module.exports = class Footer extends Page {
         this.countryValue = this.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
-    load () {
-        super.load(this.component);
+    load (queries) {
+        super.load(this.component, queries);
     }
 
     open (url) {

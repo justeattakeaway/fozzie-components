@@ -2,17 +2,16 @@ import forEach from 'mocha-each';
 
 const Header = require('../../test-utils/component-objects/f-header.component');
 
-let header;
+let header = new Header();
 
 describe('Desktop - f-header component tests - @browserstack', () => {
     beforeEach(() => {
-        // Arrange
-        header = new Header();
-        header.withQuery('&knob-Show offers link', 'true');
-        header.withQuery('&knob-Show delivery enquiry', 'true');
-
         // Act
-        header.load();
+        header.load({
+            'Show offers link': 'true',
+            'Show delivery enquiry': 'true'
+        });
+
         browser.maximizeWindow();
     });
 
@@ -25,11 +24,12 @@ describe('Desktop - f-header component tests - @browserstack', () => {
     // Make sure tenant is appended to screenshot for Percy tests
     forEach(['en-AU', 'en-IE', 'en-NZ'])
         .it('should display the below navigation links for country code "%s" - @percy', tenant => {
-            // Arrange
-            header.withQuery('&knob-Locale', tenant);
-
             // Act
-            header.load();
+            header.load({
+                'Locale': tenant,
+                'Show offers link': 'true',
+                'Show delivery enquiry': 'true'
+            });
             ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
                 // Assert
                 expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -39,13 +39,12 @@ describe('Desktop - f-header component tests - @browserstack', () => {
 
     forEach(['it-IT', 'es-ES', 'da-DK', 'nb-NO'])
         .it('should display the below navigation links', tenant => {
-            // Arrange
-            header.withQuery('&knob-Locale', tenant);
-            header.withQuery('&knob-Show offers link', 'true');
-            header.withQuery('&knob-Show delivery enquiry', 'true');
-
             // Act
-            header.load();
+            header.load({
+                'Locale': tenant,
+                'Show offers link': 'true',
+                'Show delivery enquiry': 'true'
+            });
             ['userAccount', 'help', 'countrySelector'].forEach(link => {
                 // Assert
                 expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -56,14 +55,13 @@ describe('Desktop - f-header component tests - @browserstack', () => {
     // Make sure tenant is appended to screenshot for Percy tests
     forEach(['it-IT', 'es-ES', 'da-DK', 'nb-NO'])
         .it('should display the below navigation links for country code "%s" - @percy', tenant => {
-            // Arrange
-            header.withQuery('&knob-Locale', tenant);
-            header.withQuery('&knob-Show offers link', 'true');
-            header.withQuery('&knob-Show delivery enquiry', 'true');
-
             ['userAccount', 'help', 'countrySelector'].forEach(link => {
                 // Act
-                header.load();
+                header.load({
+                    'Locale': tenant,
+                    'Show offers link': 'true',
+                    'Show delivery enquiry': 'true'
+                });
 
                 // Assert
                 expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -118,11 +116,14 @@ describe('Desktop - f-header component tests - @browserstack', () => {
         .describe('for country code "%s" - @percy', tenant => {
             it('should display correct selector icon - @percy', () => {
                 // Arrange
-                header.withQuery('&knob-Locale', tenant);
                 const countryIcon = tenant.split('-');
 
                 // Act
-                header.load();
+                header.load({
+                    'Locale': tenant,
+                    'Show offers link': 'true',
+                    'Show delivery enquiry': 'true'
+                });
 
                 // Assert
                 expect(header.isCurrentCountryIconDisplayed(countryIcon[1].toLowerCase())).toBe(true);

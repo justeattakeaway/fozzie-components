@@ -18,8 +18,8 @@ module.exports = class CookieBanner extends Page {
 
     get componentContent () { return $('[data-test-id="cookieBannerContent"]'); }
 
-    load () {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+    load (queries) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, super.composePath(queries));
         this.open(pageUrl);
         browser.deleteAllCookies();
         browser.refresh();

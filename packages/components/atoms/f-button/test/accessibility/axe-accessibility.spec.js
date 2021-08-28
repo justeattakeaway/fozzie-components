@@ -2,15 +2,15 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const Button = require('../../test-utils/component-objects/f-button.component');
 
-let button;
+let button = new Button();
 
 describe('Accessibility tests', () => {
     it('a11y - should test f-button action component WCAG compliance', () => {
         // Act
-        button = new Button();
-        button.withQuery('knob-Button Type', 'primary');
-        button.withQuery('knob-Button Size', 'medium');
-        button.load();
+        button.load( {
+            'Button Type': 'primary',
+            'Button Size': 'medium',
+        });
         
         const axeResults = getAccessibilityTestResults('f-button - action');
 
@@ -19,12 +19,11 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-button link component WCAG compliance', () => {
         // Act
-        button = new Button();
-        button.withQuery('knob-Button Type', 'link')
-            .withQuery('knob-href', 'link')
-            .withQuery('knob-Button Size', 'medium');
-
-        button.load("link");
+        button.loadLink({
+            'Button Type': 'link',
+            'href': 'link',
+            'Button Size': 'medium',
+        });
         
         const axeResults = getAccessibilityTestResults('f-button - link');
 

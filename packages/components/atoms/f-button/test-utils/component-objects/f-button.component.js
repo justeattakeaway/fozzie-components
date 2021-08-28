@@ -13,12 +13,12 @@ module.exports = class Buttons extends Page {
         super.open(url);
     }
 
-    load (type = 'action') {
-        if (type === 'action') {
-            super.load(this.actionComponent);
-        } else {
-            super.load(this.linkComponent);
-        }
+    load (queries) {
+        super.load(this.actionComponent, queries);
+    }
+
+    loadLink (queries) {
+        super.load(this.linkComponent, queries);
     }
 
     /**

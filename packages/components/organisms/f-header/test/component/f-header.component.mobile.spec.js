@@ -2,17 +2,15 @@ import forEach from 'mocha-each';
 
 const Header = require('../../test-utils/component-objects/f-header.component');
 
-let header;
+let header = new Header();
 
 describe('Mobile - f-header component tests - @browserstack', () => {
     beforeEach(() => {
-        // Arrange
-        header = new Header();
-        header.withQuery('&knob-Show offers link', 'true');
-        header.withQuery('&knob-Show delivery enquiry', 'true');
-
         // Act
-        header.load();
+        header.load({
+            'Show offers link': 'true',
+            'Show delivery enquiry': 'true'
+        });
         header.openMobileNavigationBar();
 
         if (process.env.JE_ENV !== 'browserstack') {
@@ -42,8 +40,11 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         .describe('closed navigation for country code "%s" - @percy', tenant => {
             beforeEach(() => {
                 // Act
-                header.withQuery('&knob-Locale', tenant);
-                header.load();
+                header.load({
+                    'Locale': tenant,
+                    'Show offers link': 'true',
+                    'Show delivery enquiry': 'true'
+                });
             });
 
             forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
@@ -61,11 +62,12 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     forEach(['en-AU', 'en-IE', 'en-NZ'])
         .describe('open navigation for country code "%s" - @percy', tenant => {
             beforeEach(() => {
-                // Arrange
-                header.withQuery('&knob-Locale', tenant);
-
                 // Act
-                header.load();
+                header.load({
+                    'Locale': tenant,
+                    'Show offers link': 'true',
+                    'Show delivery enquiry': 'true'
+                });
                 header.openMobileNavigationBar();
             });
 
@@ -84,11 +86,12 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     forEach(['it-IT', 'es-ES', 'da-DK', 'nb-NO'])
         .describe('closed navigation for country code "%s" - @percy', tenant => {
             beforeEach(() => {
-                // Arrange
-                header.withQuery('&knob-Locale', tenant);
-
                 // Act
-                header.load();
+                header.load({
+                    'Locale': tenant,
+                    'Show offers link': 'true',
+                    'Show delivery enquiry': 'true'
+                });
             });
 
             forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
@@ -106,11 +109,12 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     forEach(['it-IT', 'es-ES', 'da-DK', 'nb-NO'])
         .describe.only('open navigation for country code "%s" - @percy', tenant => {
             beforeEach(() => {
-                // Arrange
-                header.withQuery('&knob-Locale', tenant);
-
                 // Act
-                header.load();
+                header.load({
+                    'Locale': tenant,
+                    'Show offers link': 'true',
+                    'Show delivery enquiry': 'true'
+                });
                 header.openMobileNavigationBar();
             });
 

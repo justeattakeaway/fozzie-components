@@ -1,14 +1,13 @@
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
-let checkout;
+let checkout = new Checkout();
 
 describe('f-checkout "dinein" component tests', () => {
     beforeEach(() => {
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'dinein')
-            .withQuery('&knob-Is User Logged In', true);
-
-        checkout.load();
+        checkout.load({
+            'Service Type': 'dinein',
+            'Is User Logged In': true,
+        });
     });
 
     it('should prevent a user from entering more than 12 characters in the tableIdentifier field', () => {

@@ -5,8 +5,7 @@ const cookieBanner = new CookieBanner();
 describe('Legacy - f-cookieBanner component tests - @browserstack', () => {
     it('should display the f-cookieBanner component', () => {
         // Arrange
-        cookieBanner.withQuery('&knob-Locale', 'en-AU');
-        cookieBanner.load();
+        cookieBanner.load({'Locale': 'en-AU'});
 
         // Assert
         expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);

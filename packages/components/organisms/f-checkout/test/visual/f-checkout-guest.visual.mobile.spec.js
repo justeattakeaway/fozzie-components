@@ -4,14 +4,12 @@ let checkout = new Checkout();
 
 describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
     beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', true);
-
         // Act
-        checkout.load();
+        checkout.load({
+            'Service Type': 'collection',
+            'Is User Logged In': false,
+            'Is ASAP available': true
+        });
     });
 
     it('should display the component base state.', () => {
@@ -45,8 +43,9 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-        checkout.load();
+        checkout.load({
+            'Place Order Errors': 'duplicate'
+        });
         checkout.setFieldValue('firstName', 'Jerry');
         checkout.setFieldValue('lastName', 'Jazzman');
         checkout.setFieldValue('emailAddress', 'jerry.jazzman@ronniescotts.co.uk');
@@ -62,14 +61,12 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
     beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', false);
-
         // Act
-        checkout.load();
+        checkout.load({
+            'Service Type': 'collection',
+            'Is User Logged In': false,
+            'Is ASAP available': false
+        });
     });
 
     it('should display the pre-order warning.', () => {
@@ -81,14 +78,12 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Mobile Visual
 
 describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
     beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', true);
-
         // Act
-        checkout.load();
+        checkout.load({
+            'Service Type': 'delivery',
+            'Is User Logged In': false,
+            'Is ASAP available': true
+        });
     });
 
     it('should display the delivery f-checkout component guest base state.', () => {
@@ -123,8 +118,9 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-        checkout.load();
+        checkout.load({
+            'Place Order Errors': 'duplicate'
+        });
         checkout.setFieldValue('firstName', 'Jerry');
         checkout.setFieldValue('lastName', 'Jazzman');
         const addressInfo = {
@@ -146,14 +142,12 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
     beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', false);
-
         // Act
-        checkout.load();
+        checkout.load({
+            'Service Type': 'delivery',
+            'Is User Logged In': false,
+            'Is ASAP available': false
+        });
     });
 
     it('should display the pre-order warning.', () => {
@@ -164,14 +158,12 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Mobile Visual T
 
 describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
     beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'dinein')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', false);
-
         // Act
-        checkout.load();
+        checkout.load({
+            'Service Type': 'dinein',
+            'Is User Logged In': false,
+            'Is ASAP available': false
+        });
     });
 
     it('should display the component base state.', () => {
@@ -205,15 +197,13 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'dinein')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', false)
-            .withQuery('&knob-Place Order Errors', 'duplicate');
-
         // Act
-        checkout.load();
+        checkout.load({
+            'Service Type': 'dinein',
+            'Is User Logged In': false,
+            'Is ASAP available': false,
+            'Place Order Errors': 'duplicate'
+        });
         checkout.goToPayment();
 
         // Assert

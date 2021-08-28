@@ -4,12 +4,10 @@ let checkout;
 
 describe('f-checkout - Invalid - Desktop Visual Tests', () => {
     beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'invalid-url');
-
         // Act
-        checkout.loadError();
+        checkout.loadError({
+            'Service Type': 'invalid-url'
+        });
     });
 
     it('should display the error page component', () => {

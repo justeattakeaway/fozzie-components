@@ -8,8 +8,8 @@ class Page {
         this.path = '';
     }
 
-    load (component) {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+    load (component, queries) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.composePath(queries));
         this.open(pageUrl);
         this.waitForComponent(component);
     }
@@ -23,9 +23,12 @@ class Page {
         component.waitForExist();
     }
 
-    withQuery (name, value) {
-        this.path += `&${name}=${value}`;
-        return this;
+    composePath (queries) {
+        if (!queries) { return ""; }
+
+        return "&" + Object.keys(queries)
+        .map(name => `knob-${name}=${queries[name]}`)
+        .join("&");
     }
 
     // eslint-disable-next-line class-methods-use-this

@@ -2,7 +2,7 @@ import forEach from 'mocha-each';
 
 const Header = require('../../test-utils/component-objects/f-header.component');
 
-let header;
+let header = new Header();
 
 describe('Shared - f-header component tests', () => {
     forEach([['en-GB', true], ['en-GB', false],
@@ -14,18 +14,19 @@ describe('Shared - f-header component tests', () => {
     ])
         .it('should display component', (tenant, isLoggedIn) => {
             // Arrange
-            header = new Header();
-            header.withQuery('&knob-Locale', tenant);
-            // Both props below should only show for UK
-            header.withQuery('&knob-Show offers link', 'true');
-            header.withQuery('&knob-Show delivery enquiry', 'true');
+            const queries = {
+                'Locale': tenant,
+                // Both props below should only show for UK
+                'Show offers link': 'true',
+                'Show delivery enquiry': 'true'
+            };
 
             if (!isLoggedIn) {
-                header.withQuery('&knob-User info', isLoggedIn);
+                queries['User info'] = isLoggedIn;
             }
 
             // Act
-            header.load();
+            header.load(queries);
             header.openMobileNavigationBar();
 
             // Assert
@@ -34,24 +35,19 @@ describe('Shared - f-header component tests', () => {
 
     forEach(['white', 'highlight', 'transparent'])
         .it('should display the "%s" header theme', theme => {
-            // Arrange
-            header = new Header();
-            header.withQuery('&knob-Locale', 'en-GB');
-            header.withQuery('&knob-Header theme', theme);
-
             // Act
-            header.load();
+            header.load({
+                'Locale': 'en-GB',
+                'Header theme': theme
+            });
 
             // Assert
             browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'mobile');
         });
 
     it('should display all avalible countries', () => {
-        header = new Header();
-        header.withQuery('&knob-Locale', 'en-GB');
-
         // Act
-        header.load();
+        header.load({ 'Locale': 'en-GB' });
         header.openMobileNavigationBar();
         header.openCountrySelector();
 
@@ -61,12 +57,11 @@ describe('Shared - f-header component tests', () => {
 
     forEach(['Show login/user info link', 'Show help link', 'Show country selector'])
         .it('should not display "%s" ', knobName => {
-            header = new Header();
-            header.withQuery('&knob-Locale', 'en-GB');
-            header.withQuery(`&knob-${knobName}`, 'false');
-
             // Act
-            header.load();
+            header.load({
+                'Locale': 'en-GB',
+                [knobName]: 'false'
+            });
             header.openMobileNavigationBar();
 
             // Assert

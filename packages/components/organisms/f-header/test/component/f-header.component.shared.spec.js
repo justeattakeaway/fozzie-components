@@ -1,16 +1,15 @@
 const Header = require('../../test-utils/component-objects/f-header.component');
 
-let header;
+let header = new Header();
 
 describe('Shared - f-header component tests - @percy', () => {
     beforeEach(() => {
-        header = new Header();
-        header.withQuery('&knob-Locale', 'en-GB');
-        header.withQuery('&knob-Show offers link', 'true');
-        header.withQuery('&knob-Show delivery enquiry', 'true');
-
         // Act
-        header.load();
+        header.load({
+            'Locale': 'en-GB',
+            'Show offers link': 'true',
+            'Show delivery enquiry': 'true'
+        });
     });
 
     it('should display component', () => {

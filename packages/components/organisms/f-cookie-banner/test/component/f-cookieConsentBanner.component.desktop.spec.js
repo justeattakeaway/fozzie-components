@@ -2,13 +2,11 @@ import forEach from 'mocha-each';
 
 const CookieBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
 
-let cookieBanner;
+let cookieBanner = new CookieBanner();
 
 describe('New - f-cookieBanner component tests - @browserstack', () => {
     beforeEach(() => {
-        cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', 'en-IE');
-        cookieBanner.load();
+        cookieBanner.load({ 'Locale': 'en-IE' });
     });
 
     forEach(['full', 'necessary'])
@@ -38,10 +36,7 @@ describe('New - Multi-tenant - f-cookieBanner component tests', () => {
     ])
         .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
             // Arrange
-            cookieBanner = new CookieBanner();
-            cookieBanner.withQuery('&knob-Locale', tenant);
-
-            cookieBanner.load();
+            cookieBanner.load({ 'Locale': tenant });
 
             // Act
             cookieBanner.clickCookiePolicyLink();

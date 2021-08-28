@@ -2,16 +2,15 @@ import forEach from 'mocha-each';
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
-let checkout;
+let checkout = new Checkout();
 
 describe('f-checkout component tests - @browserstack', () => {
     beforeEach(() => {
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true);
-
-        checkout.load();
+        checkout.load({
+            'Service Type': 'delivery',
+            'Is User Logged In': true,
+            'Is ASAP available': true,
+        });
     });
 
     it.skip('should submit the checkout form', () => {
@@ -75,11 +74,13 @@ describe('f-checkout component tests - @browserstack', () => {
     });
 
     it('should close the checkout error when "Retry" is clicked', () => {
-        // Arrange
-        checkout.withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
-
         // Act
-        checkout.load();
+        checkout.load({
+            'Service Type': 'delivery',
+            'Is User Logged In': true,
+            'Is ASAP available': true,
+            'Patch Checkout Errors': 'restaurant-not-taking-orders',
+        });
         checkout.goToPayment();
         checkout.clickRetryButton();
         browser.pause(2000);
@@ -90,11 +91,13 @@ describe('f-checkout component tests - @browserstack', () => {
 
     describe('when the "Duplicate Order Warning" modal is displayed', () => {
         beforeEach(() => {
-            // Arrange
-            checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-
             // Act
-            checkout.load();
+            checkout.load({
+                'Service Type': 'delivery',
+                'Is User Logged In': true,
+                'Is ASAP available': true,
+                'Place Order Errors': 'duplicate',
+            });
             checkout.goToPayment();
         });
 

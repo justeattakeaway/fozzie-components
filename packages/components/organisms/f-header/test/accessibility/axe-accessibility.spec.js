@@ -9,10 +9,11 @@ describe('Accessibility tests', () => {
     forEach(['en-GB', 'en-AU', 'en-NZ', 'en-IE', 'it-IT', 'es-ES', 'da-DK', 'nb-NO'])
         .it('a11y - should test f-header component WCAG compliance for "%s"', tenant => {
             // Act
-            header.withQuery('&knob-Locale', tenant);
-            header.withQuery('&knob-Show offers link', 'true');
-            header.withQuery('&knob-Show delivery enquiry', 'true');
-            header.load();
+            header.load({
+                'Locale': tenant,
+                'Show offers link': 'true',
+                'Show delivery enquiry': 'true'
+            });
             const axeResults = getAccessibilityTestResults('f-header');
 
             // Assert

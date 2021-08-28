@@ -46,8 +46,8 @@ module.exports = class Header extends Page {
         this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
-    load () {
-        super.load(this.component);
+    load (queries) {
+        super.load(this.component, queries);
     }
 
     open (url) {
