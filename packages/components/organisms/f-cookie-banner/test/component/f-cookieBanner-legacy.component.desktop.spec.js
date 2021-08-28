@@ -1,6 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const CookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
 
 let cookieBanner;
@@ -9,9 +8,7 @@ describe('Legacy - f-cookieBanner component tests @browserstack', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', 'en-AU');
-        const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
-        cookieBanner.open(pageUrl);
-        cookieBanner.waitForComponent();
+        cookieBanner.load();
     });
 
     it('should set "je-cookie_banner" cookie when dismissed.', () => {
@@ -34,12 +31,9 @@ describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
             // Arrange
             cookieBanner = new CookieBanner();
             cookieBanner.withQuery('&knob-Locale', tenant);
-            const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
-
-            cookieBanner.open(pageUrl);
+            cookieBanner.load();
             browser.deleteAllCookies();
             browser.refresh();
-            cookieBanner.waitForComponent();
 
             // Act
             cookieBanner.clickCookiePolicyLink();

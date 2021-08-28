@@ -14,9 +14,7 @@ describe('Legacy Accessibility tests', () => {
         // Arrange
         const formattedLocale = 'en-AU';
         legacyCookieBanner.withQuery('&knob-Locale', formattedLocale);
-        const pageUrl = buildUrl(legacyCookieBanner.componentType, legacyCookieBanner.componentName, legacyCookieBanner.path);
-        legacyCookieBanner.open(pageUrl);
-        legacyCookieBanner.waitForComponent();
+        legacyCookieBanner.load();
 
         // Act
         const axeResults = getAccessibilityTestResults('f-cookie-banner');
