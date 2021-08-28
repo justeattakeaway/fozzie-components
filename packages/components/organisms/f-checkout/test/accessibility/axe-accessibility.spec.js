@@ -1,6 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
@@ -14,9 +13,7 @@ describe('Accessibility tests', () => {
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         const axeResults = getAccessibilityTestResults('f-checkout-delivery');
 
         // Assert
@@ -29,9 +26,7 @@ describe('Accessibility tests', () => {
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         const axeResults = getAccessibilityTestResults('f-checkout-collection');
 
         // Assert
@@ -44,9 +39,7 @@ describe('Accessibility tests', () => {
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', false);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         const axeResults = getAccessibilityTestResults('f-checkout-guest');
 
         // Assert
@@ -59,9 +52,7 @@ describe('Accessibility tests', () => {
         checkout.withQuery('&knob-Service Type', 'Invalid URL')
             .withQuery('&knob-Is User Logged In', false);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForErrorPageComponent();
+        checkout.load('error');
         const axeResults = getAccessibilityTestResults('f-checkout-error-page');
 
         // Assert
@@ -86,11 +77,8 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -109,11 +97,8 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -133,9 +118,7 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
 
         // Act
         checkout.setFieldValue('firstName', 'Jerry');
@@ -164,9 +147,7 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
 
         // Act
         checkout.setFieldValue('firstName', 'Jerry');
@@ -198,9 +179,7 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
 
         // Act
         checkout.setFieldValue('firstName', 'Jerry');
@@ -225,9 +204,7 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
 
         // Act
         checkout.setFieldValue('firstName', 'Jerry');
@@ -251,9 +228,7 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
 
         // Act
         checkout.setFieldValue('firstName', 'Jerry');
@@ -280,9 +255,7 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
 
         // Act
         checkout.setFieldValue('firstName', 'Jerry');
