@@ -497,7 +497,7 @@ export default {
                     }
                 }
 
-                this.genericErrorMessage = error.message || this.copy.genericErrorMessage;
+                this.genericErrorMessage = this.copy.genericErrorMessage;
                 this.$emit(EventNames.CreateAccountFailure, this.genericErrorMessage);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
