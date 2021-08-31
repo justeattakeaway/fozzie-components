@@ -16,6 +16,7 @@
             ]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="copy.openMenuText"
+            aria-haspopup="true"
             data-test-id="nav-toggle"
             type="button"
             @click="onNavToggle">
@@ -70,10 +71,12 @@
         </a>
 
         <div
+            :aria-hidden="!navIsOpen"
             :class="[
                 $style['c-nav-container'],
                 { [$style['is-visible']]: navIsOpen }
-            ]">
+            ]"
+            data-test-id="nav-list-container">
             <ul
                 :class="$style['c-nav-list']"
                 data-test-id="nav-list">
@@ -292,6 +295,8 @@
                     </button>
 
                     <v-popover
+                        data-test-id="countrySelector-popover"
+                        :aria-hidden="!countrySelectorIsOpen"
                         :class="[
                             $style['c-nav-popover'],
                             $style['c-nav-popover--countrySelector']

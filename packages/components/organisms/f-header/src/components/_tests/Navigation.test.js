@@ -253,6 +253,50 @@ describe('Navigation', () => {
                 // Assert
                 expect(wrapper.find('[data-test-id="nav-toggle"]').classes()).not.toContain('is-open');
             });
+
+            it('should set aria-hidden attribute to true when navigation is closed ("navIsOpen" is false)', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: defaultPropsData,
+                    mocks: {
+                        $style
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    userInfo: {
+                        isAuthenticated: true
+                    },
+                    navIsOpen: false
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="nav-list-container"]').attributes('aria-hidden')).toBeTruthy();
+            });
+
+            it('should set aria-hidden attribute to false when navigation is open ("navIsOpen" is true)', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: defaultPropsData,
+                    mocks: {
+                        $style
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    userInfo: {
+                        isAuthenticated: true
+                    },
+                    navIsOpen: true
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="nav-list-container"]').attributes('aria-hidden')).toBeFalsy();
+            });
         });
 
         it('should be white when "headerBackgroundTheme" is set to "highlight"', () => {
