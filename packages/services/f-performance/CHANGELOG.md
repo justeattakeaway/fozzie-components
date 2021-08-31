@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*August 25, 2021*
+*August 31, 2021*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
+- Added base setup / contents for f-performance package
