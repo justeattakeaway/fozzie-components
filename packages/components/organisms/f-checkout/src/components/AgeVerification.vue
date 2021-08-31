@@ -37,17 +37,14 @@
                 :value="selectedDate.year"
                 @input="selectionChanged($event, 'year')" />
 
-            <div
+            <error-message
+                v-if="shouldShowErrorMessage"
+                id="age-verification-error"
                 ref="AgeVerificationError"
-                tabindex="-1">
-                <error-message
-                    v-if="shouldShowErrorMessage"
-                    id="age-verification-error"
-                    data-js-error-message
-                    data-test-id="age-verification-error-message">
-                    {{ $t('ageVerification.errorMessage') }}
-                </error-message>
-            </div>
+                data-js-error-message
+                data-test-id="age-verification-error-message">
+                {{ $t('ageVerification.errorMessage') }}
+            </error-message>
 
             <p
                 :class="$style['c-checkout-ageVerification-description']"
@@ -61,7 +58,7 @@
                 button-type="primary"
                 is-full-width
                 data-test-id="age-verification-redirect-button"
-                @click.native="handleAgeVerifcation">
+                @click.native="handleAgeVerification">
                 {{ $t(`ageVerification.buttonText`) }}
             </f-button>
         </form>
@@ -175,7 +172,7 @@ export default {
             this.selectedDate[type] = selection;
         },
 
-        handleAgeVerifcation () {
+        handleAgeVerification () {
             this.hasSelectedDateOfBirth = true;
 
             if (this.isValidAge) {
@@ -183,7 +180,7 @@ export default {
                 this.$emit(EventNames.CheckoutVerifyAge);
             } else {
                 this.$nextTick(() => {
-                    this.$refs.AgeVerificationError.focus();
+                    this.$refs.AgeVerificationError.$el.focus();
                 });
             }
         }
