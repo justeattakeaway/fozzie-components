@@ -373,7 +373,7 @@ describe('CookieBanner', () => {
         });
 
         describe('when `isBodyHeightLessThanWindowHeight` is truthy', () => {
-            it('should return true when the window object exist', () => {
+            it('should return true when the window object exists', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
