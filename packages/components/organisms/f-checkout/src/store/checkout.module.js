@@ -374,8 +374,8 @@ export default {
             if (!addressCoords && state.authToken) {
                 const response = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
 
-                if (response.data) {
-                    commit(UPDATE_GEO_LOCATION, response.data?.geometry.coordinates);
+                if (response.data?.geometry) {
+                    commit(UPDATE_GEO_LOCATION, response.data.geometry.coordinates);
                 }
             }
         },
