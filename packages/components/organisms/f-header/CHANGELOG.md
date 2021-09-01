@@ -11,8 +11,8 @@ v4.20.0
 ### Changed
 - Updated version of `f-button`.
 
-### Added
-- `aria-hidden` attributes to ensure screen readers don't read links from closed/collapsed navigation lists
+### Fixed
+- Ensure main navigation and country selector links are hidden from screen readers when visually hidden.
 
 
 v4.19.1
