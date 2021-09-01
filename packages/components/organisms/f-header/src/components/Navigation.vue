@@ -71,7 +71,6 @@
         </a>
 
         <div
-            :aria-hidden="!navIsOpen"
             :class="[
                 $style['c-nav-container'],
                 { [$style['is-visible']]: navIsOpen }
@@ -661,6 +660,16 @@ $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
 $nav-popover-width                 : 300px;
+
+    .c-nav-container {
+        display: none;
+        @include media('>mid') {
+            display: block;
+        }
+        &.is-visible {
+            display: block;
+        }
+    }
 
     // TODO: MAKE THIS NOT USE FLOATS
     // global modifier for list items horizontally aligned
