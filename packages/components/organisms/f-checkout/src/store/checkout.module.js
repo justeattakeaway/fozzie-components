@@ -372,9 +372,11 @@ export default {
             }
 
             if (!addressCoords && state.authToken) {
-                const { data } = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
+                const response = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
 
-                commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
+                if (response.data) {
+                    commit(UPDATE_GEO_LOCATION, response.data?.geometry.coordinates);
+                }
             }
         },
 
