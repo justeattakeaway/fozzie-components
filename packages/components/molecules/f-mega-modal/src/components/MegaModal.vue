@@ -164,9 +164,7 @@ export default {
 
     beforeDestroy () {
         // In case modal is destroyed without being closed first, re-enable scrolling
-        const { megaModalDocument } = this.$refs;
-
-        enableBodyScroll(megaModalDocument);
+        enableBodyScroll(this.$refs.megaModalDocument);
     },
 
     methods: {
