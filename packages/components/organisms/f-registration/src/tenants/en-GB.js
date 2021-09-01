@@ -1,6 +1,6 @@
 export default {
     locale: 'en-GB',
-    genericErrorMessage: 'Something went wrong, please try again later',
+    genericErrorMessage: 'Unable to Create Account at this time',
 
     navLinks: {
         termsAndConditions: {
