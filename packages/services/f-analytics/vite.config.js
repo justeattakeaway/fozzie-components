@@ -6,6 +6,7 @@ export default {
         lib: {
             entry: path.resolve(__dirname, 'src/index.js'),
             name: 'f-analytics'
-        }
+        },
+        sourcemap: true
     }
 };
