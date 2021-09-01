@@ -4,6 +4,54 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.176.0
+------------------------------
+*August 25, 2021*
+
+### Changed
+- Map checkout update request now trims whitespace from postcode
+
+
+v0.175.0
+------------------------------
+*August 25, 2021*
+
+### Removed
+- Age verification div wrapper from `AgeVerification.vue` component.
+
+### Changed
+- `AgeVerificationError` ref location from wrapper to `errorMessage` component.
+- `handleAgeVerifcation` method to look for correct component when error appears.
+
+### Fixed
+- Typo in `AgeVerification.vue` component.
+
+
+v0.174.0
+------------------------------
+*August 25, 2021*
+
+### Added
+- Add copy for AU/NZ locales
+- Guest dine in visual test.
+
+
+v0.173.4
+------------------------------
+*August 25, 2021*
+
+### Changed
+- Increased timeout to 60s.
+
+
+v0.173.3
+------------------------------
+*August 24, 2021*
+
+### Added
+- Logging items on invalid checkout.
+
+
 v0.173.2
 ------------------------------
 *August 23, 2021*
@@ -29,13 +77,6 @@ v0.173.0
 
 ### Changed
 - `checkoutMocks.js` & `checkout.stories.js` refactored substantially.
-
-(To be added to next release)
-------------------------------
-*August 12, 2021*
-
-### Added
-- Guest dine in visual test.
 
 
 v0.172.0
