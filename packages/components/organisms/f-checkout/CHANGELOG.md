@@ -11,6 +11,7 @@ v0.177.0
 ### Changed
 - Gelocation warning to error for more details in Sentry
 
+
 v0.176.0
 ------------------------------
 *August 25, 2021*
