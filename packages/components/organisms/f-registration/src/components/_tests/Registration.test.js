@@ -283,13 +283,14 @@ describe('Registration', () => {
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             });
 
-            it('should show default error message and emit failure event when service with an error with no description', async () => {
+            it('should show generic error message and emit failure event when service returns unkown error', async () => {
                 // Arrange
                 const err = {
                     response: {
                         data: {
                             errors: [{
-                                errorCode: 'XXX'
+                                errorCode: 'XXX',
+                                description: 'an unknown error'
                             }]
                         }
                     }
@@ -307,7 +308,7 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.genericErrorMessage).toEqual('Something went wrong, please try again later');
+                expect(wrapper.vm.genericErrorMessage).toEqual('Unable to Create Account at this time');
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             });
         });
