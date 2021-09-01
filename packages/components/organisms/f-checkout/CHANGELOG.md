@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.177.0
 ------------------------------
-*August 25, 2021*
+*September 1, 2021*
 
 ### Changed
 - Gelocation warning to error for more details in Sentry
