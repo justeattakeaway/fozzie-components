@@ -5,6 +5,7 @@ import { VueI18n } from '@justeat/f-globalisation/src';
 import { VUEX_MODULE_NAMESPACE_LOYALTY } from '../../store/types';
 import Header from '../Header.vue';
 import tenantConfigs from '../../tenants';
+import i18nMocker from './helper';
 
 const localVue = createLocalVue();
 
@@ -19,8 +20,6 @@ const i18n = {
         'en-GB': tenantConfigs['en-GB'].messages
     }
 };
-
-const i18nMocker = key => key.split('.').reduce((acc, current) => acc[current], tenantConfigs[mockLocale].messages);
 
 describe('Header.vue', () => {
     let wrapper;
@@ -46,7 +45,7 @@ describe('Header.vue', () => {
             i18n,
             localVue,
             mocks: {
-                $t: i18nMocker
+                $t: t => i18nMocker(t, mockLocale)
             }
         });
     });
