@@ -1,8 +1,10 @@
 {
   "name": "@justeat/f-feature-management",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Service for querying feature values provided by Feature Management",
-  "main": "dist/f-feature-management.js",
+  "main": "dist/f-feature-management.umd.js",
+  "module": "dist/f-feature-management.es.js",
+  "source": "src/index.js",
   "files": [
     "dist"
   ],
@@ -26,7 +28,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn build",
-    "build": "webpack",
+    "build": "vite build",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "jest"
@@ -40,9 +42,7 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "jest": "25.4.0",
     "jest-teamcity": "1.7.0",
-    "uglifyjs-webpack-plugin": "2.2.0",
-    "webpack": "4.42.1",
-    "webpack-cli": "3.3.11"
+    "vite": "2.4.4"
   },
   "peerDependencies": {},
   "dependencies": {
