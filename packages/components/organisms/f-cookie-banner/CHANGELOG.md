@@ -3,6 +3,30 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.24.0
+------------------------------
+*August 27, 2021*
+
+### Fixed
+- Moved `isBodyHeightLessThanWindowHeight` to computed so it can re-calculate cookie position.
+
+
+v0.23.0
+------------------------------
+*August 19, 2021*
+
+### Added
+- `dk-DK` to the list of locales in the banner's static version.
+
+
+v0.22.0
+------------------------------
+*August 18, 2021*
+
+### Changed
+- Expiry date set to 90 days
+- Check for "window" object when checking height to avoid SSR error
+
 
 v0.21.0
 ------------------------------

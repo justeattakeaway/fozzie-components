@@ -1,7 +1,18 @@
 import analyticsModule from '../store/analytics.module';
-import AnalyticService from './lib/analytics.service';
+import AnalyticService from '../services/analytics.service';
+import { mapServersidePlatformData } from '../services/analytics.mapper';
+import defaultOptions from '../defaultOptions';
 
-const defaults = require('./defaults');
+const prepareServersideValues = (store, req, options) => {
+    // Only available serverside
+    if (typeof (window) === 'undefined') {
+        const platformData = { ...store.state[`${options.namespace}`].platformData };
+
+        mapServersidePlatformData({ platformData, req });
+
+        store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
+    }
+};
 
 const registerStoreModule = (store, options) => {
     if (!store.hasModule(options.namespace)) {
@@ -13,6 +24,7 @@ const preparePageTags = options => {
     // Only add tags if clientside and if not already added
     if (typeof (window) !== 'undefined' && !window.dataLayer) {
         const queryString = options.auth ? `&gtm_auth=${options.auth}&gtm_preview=${options.preview}&gtm_cookies_win=${options.cookiesWin}` : '';
+
         // See : https://developers.google.com/tag-manager/quickstart
         const headJsGtmTag = `(function (w, d, s, l, i) {
                                     w[l] = w[l] || [];
@@ -45,9 +57,9 @@ const preparePageTags = options => {
     }
 };
 
-export default ({ store }, inject, _options) => {
+export default ({ store, req }, inject, _options) => {
     const options = {
-        ...defaults,
+        ...defaultOptions,
         ..._options
     };
 
@@ -55,7 +67,12 @@ export default ({ store }, inject, _options) => {
 
     registerStoreModule(store, options);
 
-    const service = new AnalyticService(store, options);
+    prepareServersideValues(store, req, options);
+
+    const service = new AnalyticService(store, req, options);
 
     inject(options.globalVarName, service);
+
+    // If clientside, flush any stored serverside events
+    service.pushEvent();
 };

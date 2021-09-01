@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-offers",
   "description": "Fozzie Offers - displays offers to the customers",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "main": "dist/f-offers.umd.min.js",
-  "maxBundleSize": "70kB",
+  "maxBundleSize": "130kB",
   "files": [
     "dist",
     "test-utils"
@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-offers ./src/index.js",
+    "build": "vue-cli-service build --report --target lib --name f-offers ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
@@ -51,21 +51,27 @@
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
     "js-cookie": "2.2.1",
-    "@justeat/f-trak": "0.7.1"
+    "@justeat/f-trak": "0.7.1",
+    "@braze/web-sdk": "3.3.0",
+    "vuex": ">=3.5.1"
   },
   "devDependencies": {
+    "@braze/web-sdk": "3.3.0",
+    "@justeat/f-button": "1.9.0",
+    "@justeat/f-content-cards": "5.0.0-beta.1",
+    "@justeat/f-media-element": "1.0.0",
+    "@justeat/f-searchbox": "4.0.0",
+    "@justeat/f-trak": "0.7.1",
+    "@justeat/f-mega-modal": "0.10.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "js-cookie": "2.2.1",
-    "@justeat/f-trak": "0.7.1",
-    "@justeat/f-media-element": "1.0.0",
-    "@justeat/f-button": "1.10.1",
-    "@justeat/f-searchbox": "4.0.0",
-    "miragejs": "0.1.41",
     "faker": "5.5.3",
-    "node-sass-magic-importer": "5.3.2"
+    "js-cookie": "2.2.1",
+    "miragejs": "0.1.41",
+    "node-sass-magic-importer": "5.3.2",
+    "vuex": "3.5.1"
   }
 }

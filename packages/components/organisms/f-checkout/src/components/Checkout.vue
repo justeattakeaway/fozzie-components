@@ -16,8 +16,8 @@
         </div>
 
         <age-verification
-            v-else-if="shouldShowAgeVerification"
-            @verify-age="handleUpdateCheckout" />
+            v-else-if="shouldShowAgeVerificationForm"
+            @checkout-verify-age="handleUpdateCheckout" />
 
         <div
             v-else-if="shouldShowCheckoutForm"
@@ -175,10 +175,12 @@ import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 import exceptions from '../exceptions/exceptions';
 import {
+    AGE_VERIFICATION_ISSUE,
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_ERROR_FORM_TYPE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
+    DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
     VALIDATIONS,
@@ -269,7 +271,7 @@ export default {
         checkoutTimeout: {
             type: Number,
             required: false,
-            default: 10000
+            default: 60000
         },
 
         spinnerTimeout: {
@@ -376,9 +378,9 @@ export default {
             'userNote'
         ]),
 
-        shouldShowAgeVerification () {
-            return false; // TODO: Will be updated as part of Charlies PR
-        },
+        ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+            'changedFields'
+        ]),
 
         wasMobileNumberFocused () {
             return this.$v.customer.mobileNumber.$dirty;
@@ -422,7 +424,11 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.isLoading && !this.errorFormType;
+            return !this.isLoading && !this.errorFormType && !this.shouldShowAgeVerificationForm;
+        },
+
+        shouldShowAgeVerificationForm () {
+            return this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
@@ -986,9 +992,18 @@ export default {
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
 
+            const expandedData = {
+                ...this.eventData,
+                enteredPostcode: this.address?.postcode,
+                location: this.$cookies.get('je-location'),
+                locationUk: this.$cookies.get('je-location-uk'),
+                changedFields: this.changedFields,
+                isPostcodeChanged: this.changedFields.includes('addressPostcode')
+            };
+
             this.logInvoker({
                 message: 'Checkout Validation Error',
-                data: { ...this.eventData, validationState },
+                data: { ...expandedData, validationState },
                 logMethod: this.$logger.logWarn
             });
         },

@@ -55,27 +55,10 @@ const GRANT_TYPES = {
     default: 'Login'
 };
 
-const GROUPS_FEATURES_ROUTES = [
-    {
-        group: 'Account',
-        features: [
-            { feature: 'global_registration', routes: ['account-register'] }
-        ]
-    },
-    {
-        group: 'Checkout',
-        features: [
-            { feature: 'Checkout 1 Overview', routes: ['checkout'] }
-        ]
-    }
-];
-
-
 export {
     COUNTRY_INFO,
     DEFAULT_APP_ID,
     DEFAULT_APP_TYPE,
-    GROUPS_FEATURES_ROUTES,
     IDENTITY_PROVIDERS,
     GRANT_TYPES
 };

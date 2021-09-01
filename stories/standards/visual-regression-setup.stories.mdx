@@ -1,0 +1,71 @@
+<Meta title="Documentation/Standards/Testing/Visual Regression Setup"/>
+
+# Visual Regression – Setup & Approval
+
+As mentioned in our [testing standards guide](https://vue.pie.design/?path=/story/documentation-standards-testing-overview--page), we use Percy in combination with WebdriverIO to run our visual regression tests. These tests allow us to check to ensure our components look the way they are supposed to in supported browsers/viewports.
+
+Enabling these tests can be a complicated process but with this guide, you will be able to get these tests created and running after you've created your new component. You'll need access to Percy to create a new project to house all the tests relating to the new component. If you don't have access to this, please reach out to the web core testing team for support.
+
+## The Setup
+
+#### 1 - Creating the files and folders
+To get started, you want to go into the test folder of the new component and create a new folder called, 'Visual'. Within this folder, you want to create a spec file named 'F-YOUR-COMPONENT-NAME-HERE.visual.shared.spec.js .
+
+#### 2 - Writing tests
+Once you have created your spec file, you can start writing your tests for visual checks.
+Tests asserts must be given unique names as these tests define the names of the screenshots found in Percy. We follow the naming convention that allows the state of the component to be easily identifiable by incorporating the Vue prop values.
+
+For example, `f-checkout - delivery - guest - Invalid Postcode Error State`
+
+You can refer to other components within the fozzie-components repo for reference as to the types of tests we write.
+```
+it('should display the mandatory error messages.', ()  => {
+
+	// Act
+	checkout.clearBlurField('mobileNumber');
+	checkout.goToPayment();
+
+	// Assert
+	browser.percyScreenshot('f-checkout - Collection - Authenticated - Mandatory Errors State', 'desktop');
+});
+```
+
+#### 3 - Creating a Percy Project
+The next step would be to create a new project to house all your new tests on Percy.
+
+Go to Percy and log in. On the home page, click 'create new project' and from this page, you can name your project the name of your new component with the same naming convention.
+
+Below this you can connect it to the Fozzie-Components repo.
+
+![Creating a new percy project](./percy-new-project.png)
+
+Once this is done, you can then go to the project settings and get the new Percy token key.
+
+![Where to get your Percy token](./percy-project.png)
+
+
+#### 4 - Adding your environment variables to CircleCI
+Next you want to go to the project settings of the Fozzie Components repo and go to the environment variables tab. From here you can click, 'Add Environment Variable'. Here you want to add your environment variable name following the format, `PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE` for the name and then paste in your Percy token in the value box below.
+
+![Adding your Percy token to CircleCI](./percy-circleci-env-var.png)
+
+
+#### 5- Testing your tests
+After creating your new project, you must create the script that will run your tests.
+To do this, you can add the below line to the 'package.json' file in the root of your new component.
+
+    "test:visual":  "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+
+To run your tests locally, you can go to the Percy project settings, copy the Percy token and paste this into your component's 'package.json' file. You can replace the `${PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE}` with your Percy token.
+Once you have saved, you can run `yarn test:visual` whilst in your component file to run your tests locally.
+
+***Please note:** Do not push your changes with the Percy token in the package.json. Make sure if testing locally, please revert your changes to `${PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE}`.* 
+
+
+## Approving New Visual Changes
+
+Whenever changes are made to a component, CircleCI will run the Percy checks to look for visual changes when you create a new pull request. If it's the first time a test is run and there isn't a baseline image to compare, it will take these new screenshots as the new baseline image that future changes will be compared against.
+
+When visual changes are detected, Percy will flag this and you will be able to log in to Percy and view these visual changes. We recommend that these visual changes are checked by 2 members of the team to make sure the visual changes are correct before approving.
+
+![View of visual changes](./percy-visual-changes.png)

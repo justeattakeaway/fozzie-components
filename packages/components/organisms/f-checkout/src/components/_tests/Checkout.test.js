@@ -9,6 +9,7 @@ import {
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
     CHECKOUT_METHOD_DINEIN,
+    DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
@@ -1156,6 +1157,52 @@ describe('Checkout', () => {
                 });
             });
         });
+
+        describe('shouldShowAgeVerificationForm ::', () => {
+            describe(`when the ${DOB_REQUIRED_ISSUE} issue exists in errors`, () => {
+                let wrapper;
+                beforeEach(() => {
+                    // Arrange && Act
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            errors: [
+                                {
+                                    code: DOB_REQUIRED_ISSUE,
+                                    shouldShowInDialog: false
+                                }
+                            ]
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should return true', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowAgeVerificationForm).toBe(true);
+                });
+            });
+
+            describe(`when the ${DOB_REQUIRED_ISSUE} issue does not exist in errors`, () => {
+                let wrapper;
+                beforeEach(() => {
+                    // Arrange && Act
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should return false', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowAgeVerificationForm).toBe(false);
+                });
+            });
+        });
     });
 
     describe('mounted ::', () => {
@@ -2281,7 +2328,7 @@ describe('Checkout', () => {
                         registrationSource: 'Guest'
                     },
                     otacToAuthExchanger,
-                    timeout: 10000
+                    timeout: 60000
                 };
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
                 const wrapper = shallowMount(VueCheckout, {
@@ -2574,7 +2621,7 @@ describe('Checkout', () => {
                             'BS1 1AA'
                         ]
                     },
-                    timeout: 10000
+                    timeout: 60000
                 };
 
                 beforeEach(async () => {
@@ -3414,7 +3461,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3442,7 +3490,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3467,7 +3516,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3494,7 +3544,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3503,11 +3554,20 @@ describe('Checkout', () => {
                     // Act
                     await wrapper.vm.onFormSubmit();
 
+                    const expandedData = {
+                        ...wrapper.vm.eventData,
+                        enteredPostcode: 'BS1 1AA',
+                        location: 'ar511ar',
+                        locationUk: 'ar511ar',
+                        changedFields: [],
+                        isPostcodeChanged: false
+                    };
+
                     // Assert
                     expect(logInvokerSpy).toHaveBeenCalledWith({
                         message: 'Checkout Validation Error',
                         data: {
-                            ...wrapper.vm.eventData,
+                            ...expandedData,
                             validationState: mockValidationState
                         },
                         logMethod: $logger.logWarn
@@ -3685,7 +3745,7 @@ describe('Checkout', () => {
                         },
                         referralState: 'MockReferralState'
                     },
-                    timeout: 10000
+                    timeout: 60000
                 };
 
                 // Act

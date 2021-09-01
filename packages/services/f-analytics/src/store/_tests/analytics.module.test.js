@@ -1,94 +1,130 @@
-import AnalyticsModule from '../analytics.module';
+import analyticsModule from '../analytics.module';
 import {
     defaultState,
-    updatedPlatformData,
-    updatedUserData,
-    updatedPageData
+    modifiedState,
+    newEvent
 } from '../../tests/helpers/setup';
+import {
+    UPDATE_PLATFORM_DATA,
+    UPDATE_EVENTS,
+    CLEAR_EVENTS
+} from '../mutation-types';
 
-const { actions, mutations } = AnalyticsModule;
-const { updatePlatformData, updateUserData, updatePageData } = actions;
-const { pushPlatformData, pushUserData, pushPageData } = mutations;
-let state = AnalyticsModule.state();
+describe('Analytics Module ::', () => {
+    let state;
+    let commit;
 
-describe('AnalyticsModule', () => {
-    it('should create default state when initialised.', () => {
-        // Assert
-        expect(state).toEqual(defaultState);
+    beforeEach(() => {
+        // Arrange
+        state = { ...defaultState };
+        commit = jest.fn();
     });
 
-    describe('mutations ::', () => {
-        beforeEach(() => {
-            // Arrange
-            state = defaultState;
-        });
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
 
-        describe(`${pushPlatformData} ::`, () => {
-            it('should update state with `platformData`', () => {
-                // Act
-                mutations.pushPlatformData(state, updatedPlatformData);
-
-                // Assert
-                expect(state).toMatchSnapshot();
-            });
-        });
-
-        describe(`${pushUserData} ::`, () => {
-            it('should update state with `userData`', () => {
-                // Act
-                mutations.pushUserData(state, updatedUserData);
-
-                // Assert
-                expect(state).toMatchSnapshot();
-            });
-        });
-
-        describe(`${pushPageData} ::`, () => {
-            it('should update state with `pageData`', () => {
-                // Act
-                mutations.pushPageData(state, updatedPageData);
-
-                // Assert
-                expect(state).toMatchSnapshot();
-            });
-        });
+    it('should create default state when initialised.', () => {
+        // Assert
+        expect(analyticsModule.state()).toEqual(defaultState);
     });
 
     describe('actions ::', () => {
-        describe(`${updatePlatformData} ::`, () => {
-            it('should call the `pushPlatformData` mutation', () => {
-                // Arrange
-                const commit = jest.fn();
-
+        describe('updatePlatformData ::', () => {
+            it('should call the `updatePlatformData` mutation', () => {
                 // Act
-                updatePlatformData({ commit }, updatedPlatformData);
+                analyticsModule.actions.updatePlatformData({ commit }, modifiedState.platformData);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith('pushPlatformData', updatedPlatformData);
+                expect(commit).toHaveBeenLastCalledWith('updatePlatformData', modifiedState.platformData);
             });
         });
-        describe(`${updateUserData} ::`, () => {
-            it('should call the `pushUserData` mutation', () => {
-                // Arrange
-                const commit = jest.fn();
 
+        describe('updateEvents ::', () => {
+            it('should call the `updateEvents` mutation', () => {
                 // Act
-                updateUserData({ commit }, updatedUserData);
+                analyticsModule.actions.updateEvents({ commit }, newEvent);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith('pushUserData', updatedUserData);
+                expect(commit).toHaveBeenLastCalledWith('updateEvents', newEvent);
             });
         });
-        describe(`${updatePageData} ::`, () => {
-            it('should call the `pushPageData` mutation', () => {
-                // Arrange
-                const commit = jest.fn();
 
+        describe('clearEvents ::', () => {
+            it('should call the `clearEvents` mutation', () => {
                 // Act
-                updatePageData({ commit }, updatedPageData);
+                analyticsModule.actions.clearEvents({ commit });
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith('pushPageData', updatedPageData);
+                expect(commit).toHaveBeenLastCalledWith(CLEAR_EVENTS);
+            });
+        });
+    });
+
+    describe('mutations ::', () => {
+        describe(`${UPDATE_PLATFORM_DATA} ::`, () => {
+            it('should update state with `platformData`', () => {
+                // Act
+                analyticsModule.mutations[UPDATE_PLATFORM_DATA](state, modifiedState.platformData);
+
+                // Assert
+                expect(state.platformData).toEqual(modifiedState.platformData);
+            });
+
+            it('should not overwrite the serverside platformData when saving the clientside platformData', () => {
+                // Arrange
+                const currentState = {
+                    platformData: {
+                        environment: 'test-environment',
+                        jeUserPercentage: 88,
+                        version: '9.8.7.6',
+                        instancePosition: '999'
+                    }
+                };
+                const clientsidePlatformData = {
+                    name: 'test-name',
+                    appType: 'test-appType',
+                    applicationId: 9,
+                    userAgent: 'test-userAgent',
+                    branding: 'test-branding',
+                    country: 'zu',
+                    language: 'ze',
+                    currency: 'zud'
+                };
+                const expected = { ...currentState.platformData, ...clientsidePlatformData };
+
+                // Act
+                analyticsModule.mutations[UPDATE_PLATFORM_DATA](currentState, clientsidePlatformData);
+
+                // Assert
+                expect(currentState.platformData).toEqual(expected);
+            });
+        });
+
+        describe(`${UPDATE_EVENTS} ::`, () => {
+            it('should update state with a new `event`', () => {
+                // Arrange
+                state.events = [];
+
+                // Act
+                analyticsModule.mutations[UPDATE_EVENTS](state, newEvent);
+
+                // Assert
+                expect(state.events).toEqual([newEvent]);
+            });
+        });
+
+        describe(`${CLEAR_EVENTS} ::`, () => {
+            it('should clear the state `events`', () => {
+                // Arrange
+                state.events = [];
+                state.events.push(newEvent);
+
+                // Act
+                analyticsModule.mutations[CLEAR_EVENTS](state);
+
+                // Assert
+                expect(state.events).toEqual([]);
             });
         });
     });

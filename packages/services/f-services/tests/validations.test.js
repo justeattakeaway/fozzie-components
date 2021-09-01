@@ -131,8 +131,11 @@ describe('getFormValidationState', () => {
 describe('isValidPostcode', () => {
     it.each([
         ['AR51 1AA', true],
+        [' AR51 1AA ', true],
         ['BS1 4DJ', true],
+        [' BS1 4DJ', true],
         ['bs14dj', true],
+        ['bs14dj ', true],
         ['ec4m 7rf', true],
         ['EC4M7RF', true],
         ['A11A', false],
@@ -165,6 +168,48 @@ describe('isValidPostcode', () => {
     ])('should validate %s as %s with `es-ES` locale', (postcode, expected) => {
         // Act
         const actual = isValidPostcode(postcode, 'es-ES');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
+        ['0100', true],
+        ['5243', true],
+        ['342567', false],
+        ['4521', true],
+        ['AR51 1AA', false],
+        ['ATEGD', false],
+        ['00 000', false],
+        ['23', false],
+        ['not even trying', false],
+        ['01!23', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-AU` locale', (postcode, expected) => {
+        // Act
+        const actual = isValidPostcode(postcode, 'en-AU');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
+        ['0100', true],
+        ['5243', true],
+        ['342567', false],
+        ['4521', true],
+        ['AR51 1AA', false],
+        ['ATEGD', false],
+        ['00 000', false],
+        ['2311', true],
+        ['not even trying', false],
+        ['01!23', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-NZ` locale', (postcode, expected) => {
+        // Act
+        const actual = isValidPostcode(postcode, 'en-NZ');
 
         // Assert
         expect(actual).toBe(expected);

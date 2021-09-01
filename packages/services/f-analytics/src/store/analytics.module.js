@@ -1,25 +1,29 @@
-export default {
-    name: 'Analytics',
+import {
+    UPDATE_PLATFORM_DATA,
+    UPDATE_EVENTS,
+    CLEAR_EVENTS
+} from './mutation-types';
 
+export default {
     namespaced: true,
 
     state: () => ({
         platformData: {
-            environment: '',
-            name: '',
-            appType: '',
+            environment: 'localhost',
+            name: undefined,
+            appType: undefined,
             applicationId: undefined,
-            userAgent: '',
-            branding: '',
-            country: '',
-            language: '',
+            userAgent: undefined,
+            branding: undefined,
+            country: undefined,
+            language: undefined,
             jeUserPercentage: undefined,
-            currency: '',
-            version: '',
-            instancePosition: ''
+            currency: undefined,
+            version: undefined,
+            instancePosition: undefined
         },
         userData: {
-            'a-UserId': '',
+            'a-UserId': undefined,
             authType: undefined,
             email: undefined,
             globalUserId: undefined,
@@ -27,38 +31,43 @@ export default {
             signupDate: undefined
         },
         pageData: {
-            name: '',
-            group: '',
-            httpStatusCode: 0,
+            group: undefined,
+            name: undefined,
+            httpStatusCode: 200,
             isCached: false,
-            conversationId: '',
-            requestId: '',
-            orientation: '',
-            display: ''
-        }
+            conversationId: undefined,
+            requestId: undefined,
+            orientation: undefined,
+            display: undefined
+        },
+        events: []
     }),
 
     actions: {
         updatePlatformData: ({ commit }, platformData) => {
-            commit('pushPlatformData', platformData);
+            commit(UPDATE_PLATFORM_DATA, platformData);
         },
-        updateUserData: ({ commit }, userData) => {
-            commit('pushUserData', userData);
+
+        updateEvents: ({ commit }, event) => {
+            commit(UPDATE_EVENTS, event);
         },
-        updatePageData: ({ commit }, pageData) => {
-            commit('pushPageData', pageData);
+
+        clearEvents: ({ commit }) => {
+            commit(CLEAR_EVENTS);
         }
     },
 
     mutations: {
-        pushPlatformData: (state, platformData) => {
-            state.platformData = platformData;
+        [UPDATE_PLATFORM_DATA]: (state, platformData) => {
+            state.platformData = { ...state.platformData, ...platformData };
         },
-        pushUserData: (state, userData) => {
-            state.userData = userData;
+
+        [UPDATE_EVENTS]: (state, event) => {
+            state.events = [...state.events, event];
         },
-        pushPageData: (state, pageData) => {
-            state.pageData = pageData;
+
+        [CLEAR_EVENTS]: state => {
+            state.events = [];
         }
     }
 };
