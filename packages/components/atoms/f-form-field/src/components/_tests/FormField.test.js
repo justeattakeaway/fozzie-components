@@ -5,8 +5,7 @@ import {
     DEFAULT_INPUT_TYPE,
     VALID_ICON_INPUT_TYPES,
     VALID_TEXT_INPUT_TYPES,
-    VALID_INPUT_TYPES,
-    VALID_TRAILING_ICON_INPUT_TYPES
+    VALID_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
@@ -721,7 +720,7 @@ describe('FormField', () => {
                                 'icon-trailing': slot
                             }
                         });
-                    }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+                    }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TEXT_INPUT_TYPES.join('", "')}"`);
                 });
             });
 

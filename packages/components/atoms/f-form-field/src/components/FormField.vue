@@ -352,7 +352,7 @@ export default {
             }
 
             if (this.isDropdown && this.hasTrailingIcon) {
-                throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+                throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TEXT_INPUT_TYPES.join('", "')}"`);
             }
 
             if (this.isAffixedField && !this.isAffixedType) {
