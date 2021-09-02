@@ -1407,7 +1407,7 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@braze/web-sdk@3.3.0":
+"@braze/web-sdk@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-3.3.0.tgz#d5c6cf322ad2b8d7e7556834690cf7757f2b9434"
   integrity sha512-mjor7k9g6wGF+q67k9r0NSjW7FGgYuRrsLTZzbEhK3u2uwqry4ngeuYmxZosJFqH19T+j7ZSvjkYb99+NYURLA==
@@ -2232,10 +2232,10 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-braze-adapter@4.0.0-beta.3":
-  version "4.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-4.0.0-beta.3.tgz#af1dada6792b4afae8b8816f07fb3783ea7ea414"
-  integrity sha512-KvozKMihLb3L3tC+8TCqbbpCYgdxvsB/zwLdyt3cxG9fE0tNG2o2hcli6T1IScYS7MF5UEnpENwRtbq0cjDr4A==
+"@justeat/f-braze-adapter@4.0.0-beta.4":
+  version "4.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-4.0.0-beta.4.tgz#c5ba0da5e489f3d55f626ccc9a279ab05e307b5c"
+  integrity sha512-OfO1r0D2bkDGqYBD66mtuciTtpldkqJE5KCNyA56KJQp6ES8/oJ8S/xAfoEz1usJmPauRj4kehFds5yepKBcBg==
   dependencies:
     date-fns "2.16.1"
     lodash.findindex "4.6.0"
