@@ -310,7 +310,7 @@ describe('CheckoutModule', () => {
 
         describe(`${UPDATE_GEO_LOCATION} ::`, () => {
             it('should NOT update state if value from endpoint is not an array', () => {
-                // Arrange (Long / Lat)
+                // Arrange - coordinates array not returned from API
                 const coordinates = undefined;
 
                 // Act
