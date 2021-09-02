@@ -2694,7 +2694,7 @@ describe('Checkout', () => {
                     expect(logInvokerSpy).toHaveBeenCalledWith({
                         message: 'Geo Location Lookup Failed',
                         data: wrapper.vm.eventData,
-                        logMethod: $logger.logWarn,
+                        logMethod: $logger.logError,
                         error
                     });
                 });
