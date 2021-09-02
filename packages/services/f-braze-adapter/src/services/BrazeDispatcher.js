@@ -117,7 +117,7 @@ class BrazeDispatcher {
 
         if (!isAppboyInitialised()) {
             const initialised = appboy.initialize(apiKey, {
-                baseUrl: 'sdk.iad-03.appboy.com',
+                baseUrl: 'sdk.iad-01.braze.com',
                 enableLogging,
                 sessionTimeoutInSeconds,
                 noCookies: !areCookiesPermitted()
