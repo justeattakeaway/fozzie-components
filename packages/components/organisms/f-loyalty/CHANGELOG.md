@@ -13,6 +13,14 @@ v0.4.0
 - Unit tests for how it works page
 
 
+Latest (to be added to next release)
+------------------------------
+*August 26, 2021*
+
+### Removed
+- Unused f-button and f-card dependencies
+
+
 v0.3.0
 ------------------------------
 *July 29, 2021*

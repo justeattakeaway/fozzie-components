@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.0.0-beta.0
+------------------------------
+*September 9, 2021*
+
+### Changed
+- Updated version of `f-button` (JETSans Update)
+
+
 v0.25.0
 ------------------------------
 *September 9, 2021*
@@ -20,6 +29,14 @@ v0.24.0
 
 ### Fixed
 - Moved `isBodyHeightLessThanWindowHeight` to computed so it can re-calculate cookie position.
+
+
+Latest (to be added to next release)
+------------------------------
+*August 26, 2021*
+
+### Changed
+- Updated version of `f-button`.
 
 
 v0.23.0
