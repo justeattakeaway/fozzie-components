@@ -45,14 +45,6 @@ v0.24.0
 - Updated version of `f-button`.
 
 
-Latest (to be added to next release)
-------------------------------
-*August 26, 2021*
-
-### Changed
-- Updated version of `f-button`.
-
-
 v0.23.0
 ------------------------------
 *August 19, 2021*
