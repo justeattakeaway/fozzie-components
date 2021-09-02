@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.12.0
+------------------------------
+*September 1, 2021*
+
+### Added
+- The ability to override/reset the Options `Feature Name` and/or `Locale` after plugin registration via the `pushPlatformData()` method.
+- The ability to add a list of fields to pushPlatformData(), pushPageData() & pushUserData() methods that overrides any of the fields already present and if not present then adds the fields.
+
+
 v0.10.0
 ------------------------------
 *August 19, 2021*
