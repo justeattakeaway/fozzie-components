@@ -12,11 +12,6 @@ v0.4.0
 - How it works page
 - Unit tests for how it works page
 
-
-Latest (to be added to next release)
-------------------------------
-*August 26, 2021*
-
 ### Removed
 - Unused f-button and f-card dependencies
 

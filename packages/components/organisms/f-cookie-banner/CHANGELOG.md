@@ -30,11 +30,6 @@ v0.24.0
 ### Fixed
 - Moved `isBodyHeightLessThanWindowHeight` to computed so it can re-calculate cookie position.
 
-
-Latest (to be added to next release)
-------------------------------
-*August 26, 2021*
-
 ### Changed
 - Updated version of `f-button`.
 

@@ -8,7 +8,7 @@ v1.0.0-beta.0
 ------------------------------
 *August 26, 2021*
 
-### Updated
+### Changed
 - New font JETSansDigital
 - `f-button` to v2.0.0-beta.0 which use the new font
 
