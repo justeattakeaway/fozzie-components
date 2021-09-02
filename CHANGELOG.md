@@ -12,6 +12,14 @@ v3.54.0
 - Adding logging for local testing so it's easier to troubleshoot component tests.
 
 
+v3.53.2
+------------------------------
+*September 2, 2021*
+
+### Fixed
+- Typography documentation updated with correct syntax.
+
+
 v3.53.1
 ------------------------------
 *August 23, 2021*
