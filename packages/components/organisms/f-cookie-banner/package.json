@@ -55,7 +55,11 @@
   },
   "devDependencies": {
     "@justeat/f-button": "2.0.0-beta.0",
+<<<<<<< HEAD
     "@justeat/f-mega-modal": "1.0.0-beta.0",
+=======
+    "@justeat/f-mega-modal": "0.7.0",
+>>>>>>> 81cf27e8... f-button and f-form-field version bumps #globalconfig (#1223)
     "@justeat/f-vue-icons": "2.3.0",
     "@justeat/f-wdio-utils": "0.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",

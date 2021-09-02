@@ -24,6 +24,9 @@ v0.25.0
 ------------------------------
 *September 9, 2021*
 
+### Changed
+- Updated version of `f-button` (JETSans Update)
+
 ### Added
 - Tests to cover version changes in v0.24.0.
 
@@ -37,6 +40,14 @@ v0.24.0
 
 ### Fixed
 - Moved `isBodyHeightLessThanWindowHeight` to computed so it can re-calculate cookie position.
+
+### Changed
+- Updated version of `f-button`.
+
+
+Latest (to be added to next release)
+------------------------------
+*August 26, 2021*
 
 ### Changed
 - Updated version of `f-button`.

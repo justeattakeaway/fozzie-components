@@ -24,9 +24,6 @@ v4.20.0
 ------------------------------
 *August 26, 2021*
 
-### Updated
-- New font JETSansDigital
-
 ### Changed
 - Updated version of f-button.
 
