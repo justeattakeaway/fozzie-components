@@ -3,8 +3,7 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
-    AllergyNutIcon,
-    DriverIcon
+    AllergyNutIcon
 } from '@justeat/f-vue-icons';
 import FormField from '../src/components/FormField.vue';
 import {
@@ -20,8 +19,7 @@ export default {
 export const DropdownIconComponent = () => ({
     components: {
         FormField,
-        AllergyNutIcon,
-        DriverIcon
+        AllergyNutIcon
     },
     props: {
         locale: {
