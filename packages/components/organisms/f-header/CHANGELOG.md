@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.20.0
 ------------------------------
-*August 21, 2021*
+*September 2, 2021*
 
 ### Changed
 - Updated version of `f-button`.
