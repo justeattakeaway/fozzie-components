@@ -120,8 +120,7 @@ import {
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
     VALID_ICON_INPUT_TYPES,
-    VALID_AFFIXED_INPUT_TYPES,
-    VALID_TRAILING_ICON_INPUT_TYPES,
+    VALID_TEXT_INPUT_TYPES,
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES
 } from '../constants';
@@ -309,7 +308,7 @@ export default {
         },
 
         isAffixedType () {
-            return VALID_AFFIXED_INPUT_TYPES.includes(this.inputType);
+            return VALID_TEXT_INPUT_TYPES.includes(this.inputType);
         }
     },
 
@@ -352,13 +351,13 @@ export default {
             }
 
             if (this.isDropdown && this.hasTrailingIcon) {
-                throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+                throw new TypeError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TEXT_INPUT_TYPES.join('", "')}"`);
             }
 
             if (this.isAffixedField && !this.isAffixedType) {
                 const afixType = this.prefix ? 'prefix' : 'suffix';
 
-                throw new TypeError(`Form field is set to have a "${afixType}" and inputType="${this.inputType}", "${afixType}" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
+                throw new TypeError(`Form field is set to have a "${afixType}" and inputType="${this.inputType}", "${afixType}" is only available with one of the following inputTypes: "${VALID_TEXT_INPUT_TYPES.join('", "')}"`);
             }
 
             if (this.prefix && this.hasLeadingIcon) {
