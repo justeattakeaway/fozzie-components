@@ -60,7 +60,6 @@ export const TextareaComponent = () => ({
             :label-text="labelText"
             input-type="textarea"
             :shouldShowLabelText="shouldShowLabelText"
-            :field-size="fieldSize"
             :has-error="hasError"
             :is-grouped="isGrouped"
             :disabled="isDisabled"
