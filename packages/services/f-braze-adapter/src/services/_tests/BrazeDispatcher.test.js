@@ -38,7 +38,7 @@ const userId = '__USER_ID__';
 const LOG_ERROR = 'error';
 
 const enabledComponentParameters = {
-    baseUrl: 'sdk.iad-03.appboy.com',
+    baseUrl: 'sdk.iad-01.braze.com',
     disableComponent: false,
     apiKey,
     userId
@@ -167,7 +167,7 @@ describe('instantiation', () => {
 
                     // Assert
                     expect(appboySDK.initialize).toHaveBeenCalledWith(apiKey, {
-                        baseUrl: 'sdk.iad-03.appboy.com',
+                        baseUrl: 'sdk.iad-01.braze.com',
                         enableLogging: expectedEnableLoggingParameter,
                         sessionTimeoutInSeconds: 0,
                         noCookies: expectedNoCookiesParamater
