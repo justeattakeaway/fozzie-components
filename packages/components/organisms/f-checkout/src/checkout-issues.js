@@ -6,12 +6,12 @@ const checkoutIssues = {
 
     RESTAURANT_NOT_TAKING_ORDERS: {
         shouldShowInDialog: true,
-        shouldRedirectToMenu: false
+        shouldRedirectToMenu: true
     },
 
     SERVICE_TYPE_UNAVAILABLE: {
         shouldShowInDialog: true,
-        shouldRedirectToMenu: false
+        shouldRedirectToMenu: true
     },
 
     ADDITIONAL_ITEMS_REQUIRED: {
