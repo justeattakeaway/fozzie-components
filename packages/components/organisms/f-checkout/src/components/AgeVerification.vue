@@ -101,7 +101,10 @@ export default {
         ...mapState(VUEX_CHECKOUT_MODULE, ['customer']),
 
         days () {
-            return Array.from({ length: 31 }, (_, index) => {
+            const month = Number(this.selectedDate.month) + 1;
+            const daysInMonth = new Date(this.selectedDate.year, month, 0).getDate();
+
+            return Array.from({ length: daysInMonth }, (_, index) => {
                 const day = (index + 1).toString();
 
                 return {

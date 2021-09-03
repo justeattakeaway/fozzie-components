@@ -31,19 +31,111 @@ describe('AgeVerification', () => {
 
     describe('computed ::', () => {
         describe('days ::', () => {
-            beforeEach(() => {
-                // Arrange
-                wrapper = shallowMount(AgeVerification, {
-                    i18n,
-                    localVue,
-                    store: createStore()
+            describe('when selected month should has 31 days', () => {
+                it.each([
+                    [0, 'January'],
+                    [2, 'March'],
+                    [4, 'May'],
+                    [6, 'July'],
+                    [7, 'August'],
+                    [9, 'October'],
+                    [11, 'December']
+                ])('should return an array of 31 day objects for %s', month => {
+                    beforeEach(() => {
+                        // Arrange
+                        wrapper = shallowMount(AgeVerification, {
+                            i18n,
+                            localVue,
+                            store: createStore()
+                        });
+                    });
+
+                    // Act
+                    wrapper.setData({
+                        selectedDate: {
+                            ...wrapper.vm.selectedDate,
+                            month
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.days.length).toEqual(31);
                 });
             });
 
-            it('should return an array of 31 day objects', () => {
-                // Assert
-                expect(wrapper.vm.days.length).toEqual(31);
-                expect(wrapper.vm.days).toMatchSnapshot();
+            describe('when selected month should has 30 days', () => {
+                it.each([
+                    [3, 'April'],
+                    [5, 'June'],
+                    [8, 'September'],
+                    [10, 'November']
+                ])('should return an array of 30 day objects for %s', month => {
+                    beforeEach(() => {
+                        // Arrange
+                        wrapper = shallowMount(AgeVerification, {
+                            i18n,
+                            localVue,
+                            store: createStore()
+                        });
+                    });
+
+                    // Act
+                    wrapper.setData({
+                        selectedDate: {
+                            ...wrapper.vm.selectedDate,
+                            month
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.days.length).toEqual(30);
+                });
+            });
+
+            describe('when selected month is February', () => {
+                it('should return an array of 28 day objects if it is not a leap year', () => {
+                    beforeEach(() => {
+                        // Arrange
+                        wrapper = shallowMount(AgeVerification, {
+                            i18n,
+                            localVue,
+                            store: createStore()
+                        });
+                    });
+
+                    // Act
+                    wrapper.setData({
+                        selectedDate: {
+                            month: 1,
+                            year: 2010
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.days.length).toEqual(28);
+                });
+
+                it('should return an array of 29 day objects if it is a leap year', () => {
+                    beforeEach(() => {
+                        // Arrange
+                        wrapper = shallowMount(AgeVerification, {
+                            i18n,
+                            localVue,
+                            store: createStore()
+                        });
+                    });
+
+                    // Act
+                    wrapper.setData({
+                        selectedDate: {
+                            month: 1,
+                            year: 2008
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.days.length).toEqual(29);
+                });
             });
         });
 
