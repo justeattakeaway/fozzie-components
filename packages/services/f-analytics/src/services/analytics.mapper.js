@@ -173,7 +173,6 @@ export const mapPageData = ({
 } = {}) => {
     pageData.group = featureName;
     if (pageName) pageData.name = pageName;
-    pageData.isCached = false;
     if (conversationId) pageData.conversationId = conversationId;
     if (requestId) pageData.requestId = requestId;
     if (httpStatusCode) pageData.httpStatusCode = httpStatusCode;
