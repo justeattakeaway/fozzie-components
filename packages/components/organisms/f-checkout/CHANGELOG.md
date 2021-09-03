@@ -6,10 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.179.0
 ------------------------------
-*September 1, 2021*
+*September 3, 2021*
 
 ### Changed
 - `AgeVerification` page to show correct days per month.
+
+
+v0.178.0
+------------------------------
+*September 3, 2021*
+
+### Changed
+- Redirect to search or home if restaurant is not taking orders.
+- Redirect to menu if service is not available.
 
 
 v0.177.0

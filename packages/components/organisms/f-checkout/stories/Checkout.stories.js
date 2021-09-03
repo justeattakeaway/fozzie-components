@@ -26,6 +26,7 @@ const paymentPageUrlPrefix = '#/pay';
 CheckoutMock();
 
 const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
+const serviceTypeUnavailable = 'ServiceType is not available (Response from server but order not fulfillable)';
 const additionalItemsRequired = 'Additional Items Required Issue (Response from server but order not fulfillable)';
 const updateCheckoutAccessForbidden = 'Access Forbidden (Response from server is 403)';
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
@@ -40,6 +41,7 @@ const noTimeAvailable = 'no-time-available';
 const ageRestriction = 'Age restricted';
 const ageRestrictionIssue = 'age-restriction';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
+const serviceTypeUnavailableIssue = 'service-type-unavailable';
 const additionalItemsRequiredIssue = 'additional-items-required';
 const timeNotAvailable = 'Selected time no longer available';
 const timeNotAvailableIssue = 'time-unavailable';
@@ -50,6 +52,7 @@ const duplicateIssue = 'duplicate';
 const patchCheckoutErrorOptions = {
     None: null,
     [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
+    [serviceTypeUnavailable]: serviceTypeUnavailableIssue,
     [additionalItemsRequired]: additionalItemsRequiredIssue,
     [checkoutServerError]: SERVER,
     [updateCheckoutAccessForbidden]: accessForbiddenErrorCode,
