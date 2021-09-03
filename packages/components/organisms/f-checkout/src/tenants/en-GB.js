@@ -79,7 +79,7 @@ const messages = {
             RESTAURANT_NOT_TAKING_ORDERS: {
                 title: 'Restaurant not taking orders',
                 message: 'We’re sorry, but the restaurant is not currently taking orders. Please choose another restaurant to order from.',
-                buttonText: 'Ok'
+                buttonText: 'Back to search'
             },
 
             SERVICE_TYPE_UNAVAILABLE: {
