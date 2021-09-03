@@ -6,11 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.178.0
 ------------------------------
-*September 2, 2021*
+*September 3, 2021*
 
 ### Changed
 - Redirect to search or home if restaurant is not taking orders.
 - Redirect to menu if service is not available.
+
+
+v0.177.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- Gelocation warning to error for more details in Sentry
 
 
 v0.176.0
