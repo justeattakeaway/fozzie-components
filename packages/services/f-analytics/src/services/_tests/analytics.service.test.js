@@ -127,18 +127,16 @@ describe('Analytic Service ::', () => {
         it('should override the `featureName` when supplied', () => {
             // Arrange
             const expectedPlatformData = {
+                ...defaultState.platformData,
                 appType: 'web',
                 applicationId: 7,
                 branding: 'justeat',
                 country: 'uk',
                 currency: 'gbp',
                 environment: 'localhost',
-                instancePosition: undefined,
-                jeUserPercentage: undefined,
                 language: 'en',
                 name: 'new-feature-name',
-                userAgent: navigator.userAgent,
-                version: undefined
+                userAgent: navigator.userAgent
             };
 
             // Act
@@ -152,18 +150,16 @@ describe('Analytic Service ::', () => {
         it('should override the `locale` when supplied', () => {
             // Arrange
             const expectedPlatformData = {
+                ...defaultState.platformData,
                 appType: 'web',
                 applicationId: 7,
                 branding: 'menulog',
                 country: 'au',
                 currency: 'aud',
                 environment: 'localhost',
-                instancePosition: undefined,
-                jeUserPercentage: undefined,
                 language: 'en',
                 name: options.featureName,
-                userAgent: navigator.userAgent,
-                version: undefined
+                userAgent: navigator.userAgent
             };
 
             // Act
@@ -177,18 +173,16 @@ describe('Analytic Service ::', () => {
         it('should append custom fields when supplied', () => {
             // Arrange
             const expectedPlatformData = {
+                ...defaultState.platformData,
                 appType: 'web',
                 applicationId: 7,
                 branding: 'justeat',
                 country: 'uk',
                 currency: 'gbp',
                 environment: 'localhost',
-                instancePosition: undefined,
-                jeUserPercentage: undefined,
                 language: 'en',
                 name: 'new-feature-name',
-                userAgent: navigator.userAgent,
-                version: undefined
+                userAgent: navigator.userAgent
             };
 
             // Act
