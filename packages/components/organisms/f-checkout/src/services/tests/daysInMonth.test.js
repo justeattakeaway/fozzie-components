@@ -3,8 +3,9 @@ import getDaysInMonth from '../daysInMonth';
 describe('getDaysInMonth', () => {
     it.each([
         [31, 'January', 0],
+        [28, 'February', 1],
         [31, 'March', 2],
-        [30, 'April', 8],
+        [30, 'April', 3],
         [31, 'May', 4],
         [30, 'June', 5],
         [31, 'July', 6],
@@ -17,7 +18,7 @@ describe('getDaysInMonth', () => {
         // Arrange
         const date = {
             month,
-            year: 2020
+            year: 2010
         };
 
         // Act
@@ -27,27 +28,11 @@ describe('getDaysInMonth', () => {
         expect(daysInMonth).toEqual(expected);
     });
 
-    describe('when month is February', () => {
-        const february = 1;
-
-        it('should return 28 for a non-leap year', () => {
+    describe('when year is a leap year and month is February', () => {
+        it('should return 29', () => {
             // Arrange
             const date = {
-                month: february,
-                year: 2010
-            };
-
-            // Act
-            const daysInMonth = getDaysInMonth(date);
-
-            // Assert
-            expect(daysInMonth).toEqual(28);
-        });
-
-        it('should return 29 for a leap year', () => {
-            // Arrange
-            const date = {
-                month: february,
+                month: 1,
                 year: 2008
             };
 
