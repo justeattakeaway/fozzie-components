@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 import AnalyticService from '../analytics.service';
 import analyticModule from '../../store/analytics.module';
 import {
+    defaultState,
     createStore,
     newEvent,
     options
@@ -98,18 +99,15 @@ describe('Analytic Service ::', () => {
             (localeArg, brandingExpected, countryExpected, currencyExpected, languageExpected) => {
                 // Arrange
                 const expectedPlatformData = {
+                    ...defaultState.platformData,
                     appType: 'web',
                     applicationId: 7,
                     branding: brandingExpected,
                     country: countryExpected,
                     currency: currencyExpected,
-                    environment: 'localhost',
-                    instancePosition: undefined,
-                    jeUserPercentage: undefined,
                     language: languageExpected,
                     name: options.featureName,
-                    userAgent: navigator.userAgent,
-                    version: undefined
+                    userAgent: navigator.userAgent
                 };
                 options.locale = localeArg;
                 service = new AnalyticService(store, req, options);
@@ -120,8 +118,80 @@ describe('Analytic Service ::', () => {
                 // Assert
                 expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
                 expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
+
+                // Reset options
+                options.locale = 'en-GB';
             }
         );
+
+        it('should override the `featureName` when supplied', () => {
+            // Arrange
+            const expectedPlatformData = {
+                ...defaultState.platformData,
+                appType: 'web',
+                applicationId: 7,
+                branding: 'justeat',
+                country: 'uk',
+                currency: 'gbp',
+                environment: 'localhost',
+                language: 'en',
+                name: 'new-feature-name',
+                userAgent: navigator.userAgent
+            };
+
+            // Act
+            service.pushPlatformData({ featureName: expectedPlatformData.name });
+
+            // Assert
+            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
+            expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
+        });
+
+        it('should override the `locale` when supplied', () => {
+            // Arrange
+            const expectedPlatformData = {
+                ...defaultState.platformData,
+                appType: 'web',
+                applicationId: 7,
+                branding: 'menulog',
+                country: 'au',
+                currency: 'aud',
+                environment: 'localhost',
+                language: 'en',
+                name: options.featureName,
+                userAgent: navigator.userAgent
+            };
+
+            // Act
+            service.pushPlatformData({ locale: 'en-AU' });
+
+            // Assert
+            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
+            expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
+        });
+
+        it('should append custom fields when supplied', () => {
+            // Arrange
+            const expectedPlatformData = {
+                ...defaultState.platformData,
+                appType: 'web',
+                applicationId: 7,
+                branding: 'justeat',
+                country: 'uk',
+                currency: 'gbp',
+                environment: 'localhost',
+                language: 'en',
+                name: 'new-feature-name',
+                userAgent: navigator.userAgent
+            };
+
+            // Act
+            service.pushPlatformData({ featureName: expectedPlatformData.name, customFields: { custom1: 'one', custom2: 'two' } });
+
+            // Assert
+            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
+            expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData, custom1: 'one', custom2: 'two' } });
+        });
     });
 
     describe('When calling pushUserData ::', () => {
@@ -143,16 +213,28 @@ describe('Analytic Service ::', () => {
         it('should push userData to datalayer only with userId if authToken has not been passed', () => {
             // Arrange
             const expectedUserDataWithoutAuthToken = {
-                'a-UserId': auserId,
-                authType: undefined,
-                email: undefined,
-                globalUserId: undefined,
-                signinType: undefined,
-                signupDate: undefined
+                ...defaultState.userData,
+                'a-UserId': auserId
             };
 
             // Act
             service.pushUserData();
+
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...expectedUserDataWithoutAuthToken } });
+        });
+
+        it('should append custom fields when supplied', () => {
+            // Arrange
+            const expectedUserDataWithoutAuthToken = {
+                ...defaultState.userData,
+                'a-UserId': auserId,
+                custom1: 'one',
+                custom2: 'two'
+            };
+
+            // Act
+            service.pushUserData({ customFields: { custom1: 'one', custom2: 'two' } });
 
             // Assert
             expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...expectedUserDataWithoutAuthToken } });
@@ -250,12 +332,9 @@ describe('Analytic Service ::', () => {
             (winWidth, winHeight, displayExpected, orientationExpected) => {
                 // Arrange
                 const expected = {
+                    ...defaultState.pageData,
                     name: 'test-page-name',
                     group: 'test-feature-name',
-                    httpStatusCode: 200,
-                    isCached: false,
-                    conversationId: undefined,
-                    requestId: undefined,
                     orientation: orientationExpected,
                     display: displayExpected
                 };
@@ -272,10 +351,9 @@ describe('Analytic Service ::', () => {
         it('should set conversationId and requestId values when provided', () => {
             // Arrange
             const expected = {
+                ...defaultState.pageData,
                 group: 'test-feature-name',
                 name: 'test-page-name',
-                httpStatusCode: 200,
-                isCached: false,
                 conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
                 requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
                 orientation: 'Landscape',
@@ -292,12 +370,10 @@ describe('Analytic Service ::', () => {
         it('should override the httpStatusCode when provided', () => {
             // Arrange
             const expected = {
+                ...defaultState.pageData,
                 name: 'test-page-name',
                 group: 'test-feature-name',
                 httpStatusCode: 404,
-                isCached: false,
-                conversationId: undefined,
-                requestId: undefined,
                 orientation: 'Landscape',
                 display: 'mid'
             };
@@ -307,6 +383,55 @@ describe('Analytic Service ::', () => {
 
             // Assert
             expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+        });
+
+        it('should append custom fields when supplied', () => {
+            // Arrange
+            const expected = {
+                ...defaultState.pageData,
+                name: 'test-page-name',
+                group: 'test-feature-name',
+                orientation: 'Landscape',
+                display: 'mid',
+                custom1: 'one',
+                custom2: 'two'
+            };
+
+            // Act
+            service.pushPageData({ pageName: expected.name, customFields: { custom1: 'one', custom2: 'two' } });
+
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+        });
+    });
+
+    describe('When calling setOptions ::', () => {
+        it('should override `featureName` if supplied', () => {
+            // Arrange
+            const expectedOptions = {
+                ...options,
+                featureName: 'test-feature-new-name'
+            };
+
+            // Act
+            const actualOptions = service.setOptions(expectedOptions);
+
+            // Assert
+            expect(actualOptions).toEqual(expectedOptions);
+        });
+
+        it('should override `locale` if supplied', () => {
+            // Arrange
+            const expectedOptions = {
+                ...options,
+                locale: 'zu-ZU'
+            };
+
+            // Act
+            const actualOptions = service.setOptions(expectedOptions);
+
+            // Assert
+            expect(actualOptions).toEqual(expectedOptions);
         });
     });
 });
