@@ -16,7 +16,6 @@ describe('getDaysInMonth', () => {
     ])('should return %s when month is %s', (expected, monthName, month) => {
         // Arrange
         const date = {
-            day: 1,
             month,
             year: 2020
         };
@@ -32,7 +31,6 @@ describe('getDaysInMonth', () => {
         it('should return 28', () => {
             // Arrange
             const date = {
-                day: 1,
                 month: 1,
                 year: 2010
             };
@@ -47,7 +45,6 @@ describe('getDaysInMonth', () => {
         it('should return 29', () => {
             // Arrange
             const date = {
-                day: 1,
                 month: 1,
                 year: 2008
             };
