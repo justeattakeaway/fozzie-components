@@ -28,10 +28,12 @@ describe('getDaysInMonth', () => {
     });
 
     describe('when month is February', () => {
-        it('should return 28', () => {
+        const february = 1;
+
+        it('should return 28 for a non-leap year', () => {
             // Arrange
             const date = {
-                month: 1,
+                month: february,
                 year: 2010
             };
 
@@ -42,10 +44,10 @@ describe('getDaysInMonth', () => {
             expect(daysInMonth).toEqual(28);
         });
 
-        it('should return 29', () => {
+        it('should return 29 for a leap year', () => {
             // Arrange
             const date = {
-                month: 1,
+                month: february,
                 year: 2008
             };
 
