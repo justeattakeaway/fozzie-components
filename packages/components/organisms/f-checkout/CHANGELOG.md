@@ -9,7 +9,9 @@ v0.178.0
 *September 2, 2021*
 
 ### Changed
-- Redirect to search or home if restaurant is not taking orders
+- Redirect to search or home if restaurant is not taking orders.
+- Redirect to menu if service is not available.
+
 
 v0.176.0
 ------------------------------
