@@ -16,6 +16,7 @@
             ]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="copy.openMenuText"
+            aria-haspopup="true"
             data-test-id="nav-toggle"
             type="button"
             @click="onNavToggle">
@@ -73,7 +74,8 @@
             :class="[
                 $style['c-nav-container'],
                 { [$style['is-visible']]: navIsOpen }
-            ]">
+            ]"
+            data-test-id="nav-list-container">
             <ul
                 :class="$style['c-nav-list']"
                 data-test-id="nav-list">
@@ -292,6 +294,8 @@
                     </button>
 
                     <v-popover
+                        data-test-id="countrySelector-popover"
+                        :aria-hidden="!countrySelectorIsOpen"
                         :class="[
                             $style['c-nav-popover'],
                             $style['c-nav-popover--countrySelector']
@@ -656,6 +660,16 @@ $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
 $nav-popover-width                 : 300px;
+
+    .c-nav-container {
+        display: none;
+        @include media('>mid') {
+            display: block;
+        }
+        &.is-visible {
+            display: block;
+        }
+    }
 
     // TODO: MAKE THIS NOT USE FLOATS
     // global modifier for list items horizontally aligned
