@@ -875,7 +875,7 @@ describe('CheckoutModule', () => {
             const issue = {
                 code: 'RESTAURANT_NOT_TAKING_ORDERS',
                 shouldShowInDialog: true,
-                shouldRedirectToMenu: false
+                shouldRedirectToMenu: true
             };
 
             beforeEach(() => {
