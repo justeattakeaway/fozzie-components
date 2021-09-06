@@ -15,6 +15,22 @@ v4.0.0-beta.0
 - Storybook font to become new JETSansDigital instead of JustEatBasis
 
 
+v3.54.0
+------------------------------
+*September 2, 2021*
+
+### Changed
+- Adding logging for local testing so it's easier to troubleshoot component tests.
+
+
+v3.53.2
+------------------------------
+*September 2, 2021*
+
+### Fixed
+- Typography documentation updated with correct syntax.
+
+
 v3.53.1
 ------------------------------
 *August 23, 2021*

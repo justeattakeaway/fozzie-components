@@ -22,6 +22,31 @@ v1.0.0-beta.0
 - `f-form-field` to v3.0.0-beta.0 which use the new font
 
 
+v0.179.0
+------------------------------
+*September 3, 2021*
+
+### Changed
+- `AgeVerification` page to show correct days per month.
+
+
+v0.178.0
+------------------------------
+*September 3, 2021*
+
+### Changed
+- Redirect to search or home if restaurant is not taking orders.
+- Redirect to menu if service is not available.
+
+
+v0.177.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- Gelocation warning to error for more details in Sentry
+
+
 v0.176.0
 ------------------------------
 *August 25, 2021*
