@@ -63,6 +63,27 @@
         </form-field>
 
         <form-field
+            v-if="shouldShowAdministrativeArea"
+            :value="address.administrativeArea"
+            name="address-administrative-area"
+            maxlength="50"
+            :label-text="$t('labels.administrativeArea')"
+            :has-error="isAddressAdministrativeAreaEmpty"
+            aria-describedby="administrative-area-error"
+            :aria-invalid="isAddressAdministrativeAreaEmpty"
+            @input="updateAddressDetails({ ['administrativeArea']: $event })">
+            <template #error>
+                <error-message
+                    v-if="isAddressAdministrativeAreaEmpty"
+                    id="administrative-area-error"
+                    data-js-error-message
+                    data-test-id="error-address-administrative-area-empty">
+                    {{ $t('validationMessages.administrativeArea.requiredError') }}
+                </error-message>
+            </template>
+        </form-field>
+
+        <form-field
             :value="address.postcode"
             name="address-postcode"
             maxlength="50"
@@ -112,6 +133,13 @@ export default {
     */
     inject: ['$v'],
 
+    props: {
+        tenant: {
+            type: String,
+            required: true
+        }
+    },
+
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'address'
@@ -135,11 +163,19 @@ export default {
             return this.isFieldEmpty(VALIDATIONS.address, 'postcode');
         },
 
+        isAddressAdministrativeAreaEmpty () {
+            return this.isFieldEmpty(VALIDATIONS.address, 'administrativeArea');
+        },
+
         /*
         * Checks that postcode is a valid postcode and that the field is not empty.
         */
         isAddressPostcodeValid () {
             return (!this.$v[VALIDATIONS.address].postcode.$dirty || this.$v[VALIDATIONS.address].postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
+        },
+
+        shouldShowAdministrativeArea () {
+            return this.tenant === 'au';
         }
     },
 

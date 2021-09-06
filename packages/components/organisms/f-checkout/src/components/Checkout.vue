@@ -98,7 +98,8 @@
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
-                        data-test-id="address-block" />
+                        data-test-id="address-block"
+                        :tenant="tenant" />
 
                     <form-selector :key="availableFulfilmentTimesKey" />
 
@@ -1134,6 +1135,9 @@ export default {
                 },
                 locality: {
                     required
+                },
+                administrativeArea: {
+                    required: requiredIf(() => this.tenant === 'au')
                 },
                 postcode: {
                     required,

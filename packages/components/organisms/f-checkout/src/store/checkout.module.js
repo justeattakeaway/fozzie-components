@@ -480,6 +480,7 @@ export default {
 
                 state.address.locality = address.locality;
                 state.address.postcode = address.postalCode;
+                state.address.administrativeArea = address.administrativeArea;
             }
 
             if (fulfilment.table) {
@@ -582,6 +583,7 @@ export default {
             /* eslint-enable prefer-destructuring */
 
             state.address.locality = address.locality;
+            state.address.administrativeArea = address.administrativeArea;
             state.address.postcode = address.postalCode;
         },
 
