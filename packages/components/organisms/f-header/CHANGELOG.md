@@ -23,6 +23,17 @@ v5.0.0-beta.0
 - Ensure main navigation and country selector links are hidden from screen readers when visually hidden.
 
 
+v4.20.0
+------------------------------
+*September 2, 2021*
+
+### Changed
+- Updated version of f-button.
+
+### Fixed
+- Ensure main navigation and country selector links are hidden from screen readers when visually hidden.
+
+
 v4.19.1
 ------------------------------
 *July 22, 2021*
