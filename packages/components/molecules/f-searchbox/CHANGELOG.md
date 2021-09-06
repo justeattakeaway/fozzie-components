@@ -4,7 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v1.0.0-beta.0
+v4.0.0-beta.33
+------------------------------
+*September 6, 2021*
+
+### Changed
+- Updated version of `f-mega-modal` (JETSans Update)
+
+
+v4.0.0-beta.32
 ------------------------------
 *September 1, 2021*
 
@@ -56,11 +64,6 @@ v4.0.0-beta.27
 
 ### Added
 - Locale switching to `searchbox` inside Storybook
-
-
-Latest (add to next release)
-------------------------------
-*February 25, 2021*
 
 ### Changed
 - Restructured component object into page object model
