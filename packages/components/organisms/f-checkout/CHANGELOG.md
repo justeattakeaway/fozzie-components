@@ -11,11 +11,19 @@ v1.0.0
 - Return beta to master. Component has JETSansDigital font.
 
 
+v1.0.0-beta.1
+------------------------------
+*September 6, 2021*
+
+### Changed
+- Updated versions of `f-alert` and `f-mega-modal` (JETSans Update).
+
+
 v1.0.0-beta.0
 ------------------------------
 *September 1, 2021*
 
-### Updated
+### Changed
 - New font JETSansDigital
 - `f-button` to v2.0.0-beta.0 which use the new font
 - `f-form-field` to v3.0.0-beta.0 which use the new font
