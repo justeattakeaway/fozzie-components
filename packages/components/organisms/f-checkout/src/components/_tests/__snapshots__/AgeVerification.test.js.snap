@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AgeVerification computed :: days :: should return an array of 31 day objects 1`] = `
+exports[`AgeVerification computed :: days :: should return an array of day objects 1`] = `
 Array [
   Object {
     "text": "1",
