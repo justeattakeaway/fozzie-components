@@ -34,7 +34,6 @@ export default {
             group: undefined,
             name: undefined,
             httpStatusCode: 200,
-            isCached: false,
             conversationId: undefined,
             requestId: undefined,
             orientation: undefined,

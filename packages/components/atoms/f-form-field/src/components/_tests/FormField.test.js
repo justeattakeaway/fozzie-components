@@ -4,9 +4,8 @@ import FormDropdown from '../FormDropdown.vue';
 import {
     DEFAULT_INPUT_TYPE,
     VALID_ICON_INPUT_TYPES,
-    VALID_AFFIXED_INPUT_TYPES,
-    VALID_INPUT_TYPES,
-    VALID_TRAILING_ICON_INPUT_TYPES
+    VALID_TEXT_INPUT_TYPES,
+    VALID_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
@@ -721,12 +720,12 @@ describe('FormField', () => {
                                 'icon-trailing': slot
                             }
                         });
-                    }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TRAILING_ICON_INPUT_TYPES.join('", "')}"`);
+                    }).toThrowError(`Form field is set to have inputType="dropdown", but trailing icons can only be displayed one of the following inputTypes: "${VALID_TEXT_INPUT_TYPES.join('", "')}"`);
                 });
             });
 
             describe('when `isAffixedField` is true', () => {
-                it.each([VALID_AFFIXED_INPUT_TYPES])('should throw an error when `inputType` is set to %s', inputType => {
+                it.each([VALID_TEXT_INPUT_TYPES])('should throw an error when `inputType` is set to %s', inputType => {
                     // Arrange
                     const propsData = {
                         inputType,
@@ -759,7 +758,7 @@ describe('FormField', () => {
                         shallowMount(FormField, {
                             propsData
                         });
-                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available with one of the following inputTypes: "${VALID_AFFIXED_INPUT_TYPES.join('", "')}"`);
+                    }).toThrowError(`Form field is set to have a "prefix" and inputType="${inputType}", "prefix" is only available with one of the following inputTypes: "${VALID_TEXT_INPUT_TYPES.join('", "')}"`);
                 });
             });
 
