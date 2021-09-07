@@ -91,6 +91,10 @@ module.exports = class Checkout extends Page {
             get input () { return $(FIELDS.addressLocality.input); },
             get error () { return $(FIELDS.addressLocality.error); }
         },
+        addressAdministrativeArea: {
+            get input () { return $(FIELDS.addressAdministrativeArea.input); },
+            get error () { return $(FIELDS.addressAdministrativeArea.error); }
+        },
         addressPostcode: {
             get input () { return $(FIELDS.addressPostcode.input); },
             get error () { return $(FIELDS.addressPostcode.error); },
