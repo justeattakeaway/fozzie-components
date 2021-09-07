@@ -99,7 +99,7 @@
                     <address-block
                         v-if="isCheckoutMethodDelivery"
                         data-test-id="address-block"
-                        :tenant="tenant" />
+                        :should-show-administrative-area="shouldShowAddressAdministrativeArea" />
 
                     <form-selector :key="availableFulfilmentTimesKey" />
 
@@ -504,6 +504,10 @@ export default {
             }
 
             return `${prefix}-${this.restaurant.seoName}/menu`;
+        },
+
+        shouldShowAddressAdministrativeArea () {
+            return this.tenant === 'au';
         }
     },
 
@@ -1137,7 +1141,7 @@ export default {
                     required
                 },
                 administrativeArea: {
-                    required: requiredIf(() => this.tenant === 'au')
+                    required: requiredIf(() => this.shouldShowAddressAdministrativeArea)
                 },
                 postcode: {
                     required,

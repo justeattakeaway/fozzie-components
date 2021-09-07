@@ -35,7 +35,7 @@ const $v = {
 
 describe('Address', () => {
     const propsData = {
-        tenant: 'au'
+        shouldShowAdministrativeArea: true
     };
 
     it('should be defined', () => {

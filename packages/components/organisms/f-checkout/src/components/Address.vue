@@ -134,9 +134,10 @@ export default {
     inject: ['$v'],
 
     props: {
-        tenant: {
-            type: String,
-            required: true
+        shouldShowAdministrativeArea: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     },
 
@@ -172,11 +173,8 @@ export default {
         */
         isAddressPostcodeValid () {
             return (!this.$v[VALIDATIONS.address].postcode.$dirty || this.$v[VALIDATIONS.address].postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
-        },
-
-        shouldShowAdministrativeArea () {
-            return this.tenant === 'au';
         }
+
     },
 
     methods: {
