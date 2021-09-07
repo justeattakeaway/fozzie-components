@@ -7,7 +7,7 @@ let cookieBanner;
 
 describe('New - f-cookieBanner component tests - @browserstack', () => {
     beforeEach(() => {
-        cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+        cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', 'en-IE');
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 
@@ -42,7 +42,7 @@ describe('New - Multi-tenant - f-cookieBanner component tests', () => {
     ])
         .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
             // Arrange
-            cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+            cookieBanner = new CookieBanner();
             cookieBanner.withQuery('&knob-Locale', tenant);
             const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 

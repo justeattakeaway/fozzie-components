@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const UserMessage = require('../../test-utils/component-objects/f-user-message.component');
 
-const userMessage = new UserMessage('molecule', 'user-message-component');
+const userMessage = new UserMessage();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

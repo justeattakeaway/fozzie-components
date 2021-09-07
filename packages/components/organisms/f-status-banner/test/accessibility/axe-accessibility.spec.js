@@ -7,7 +7,7 @@ let statusBanner;
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        statusBanner = new StatusBanner('organism', 'status-banner-component');
+        statusBanner = new StatusBanner();
         const pageUrl = buildUrl(statusBanner.componentType, statusBanner.componentName, statusBanner.path);
         statusBanner.open(pageUrl);
         statusBanner.waitForComponent();

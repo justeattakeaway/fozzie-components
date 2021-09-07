@@ -7,7 +7,7 @@ let footer;
 describe('Mobile - f-footer component tests - @percy', () => {
     beforeEach(() => {
         // Arrange
-        footer = new Footer('organism', 'footer-component');
+        footer = new Footer();
         footer.withQuery('&knob-Locale', 'en-GB');
         footer.withQuery('&knob-Show country selector', 'false');
         footer.withQuery('&knob-Show courier links', 'false');

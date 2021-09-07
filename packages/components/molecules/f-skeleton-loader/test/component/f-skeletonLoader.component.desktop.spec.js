@@ -1,7 +1,7 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const SkeletonLoader = require('../../test-utils/component-objects/f-skeletonLoader.component');
 
-const skeletonLoader = new SkeletonLoader('molecule', 'skeleton-loader-component');
+const skeletonLoader = new SkeletonLoader();
 
 describe('f-skeletonLoader component tests', () => {
     beforeEach(() => {

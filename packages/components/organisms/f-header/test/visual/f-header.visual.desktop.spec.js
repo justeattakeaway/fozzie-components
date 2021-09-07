@@ -16,7 +16,7 @@ describe('Shared - f-header component tests', () => {
     ])
         .it('should display component', (tenant, isLoggedIn) => {
             // Arrange
-            header = new Header('organism', 'header-component');
+            header = new Header();
             header.withQuery('&knob-Locale', tenant);
             // Both props below should only show for UK
             header.withQuery('&knob-Show offers link', 'true');
@@ -38,7 +38,7 @@ describe('Shared - f-header component tests', () => {
     forEach(['white', 'highlight', 'transparent'])
         .it('should display the "%s" header theme', theme => {
             // Arrange
-            header = new Header('organism', 'header-component');
+            header = new Header();
             header.withQuery('&knob-Locale', 'en-GB');
             header.withQuery('&knob-Header theme', theme);
             const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
@@ -52,7 +52,7 @@ describe('Shared - f-header component tests', () => {
         });
 
     it('should display all avalible countries', () => {
-        header = new Header('organism', 'header-component');
+        header = new Header();
         header.withQuery('&knob-Locale', 'en-GB');
         const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
@@ -67,7 +67,7 @@ describe('Shared - f-header component tests', () => {
 
     forEach(['Show login/user info link', 'Show help link', 'Show country selector'])
         .it('should not display "%s" ', knobName => {
-            header = new Header('organism', 'header-component');
+            header = new Header();
             header.withQuery('&knob-Locale', 'en-GB');
             header.withQuery(`&knob-${knobName}`, 'false');
             const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
@@ -81,7 +81,7 @@ describe('Shared - f-header component tests', () => {
         });
 
     it('should display all user account options', () => {
-        header = new Header('organism', 'header-component');
+        header = new Header();
         header.withQuery('&knob-Locale', 'en-GB');
         const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 

@@ -1,7 +1,7 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const UserMessage = require('../../test-utils/component-objects/f-user-message.component');
 
-const userMessage = new UserMessage('molecule', 'user-message-component');
+const userMessage = new UserMessage();
 
 describe('f-user-message component tests', () => {
     beforeEach(() => {

@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const Tabs = require('../../test-utils/component-objects/f-tabs.component');
 
-const tabs = new Tabs('molecule', 'vue-tabs-component');
+const tabs = new Tabs();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

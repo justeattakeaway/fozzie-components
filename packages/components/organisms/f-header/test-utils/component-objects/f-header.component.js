@@ -7,6 +7,10 @@ const {
 } = require('./f-header.selectors');
 
 module.exports = class Header extends Page {
+    constructor() {
+        super('organism', 'header-component');
+    }
+
     get component () { return $(HEADER_COMPONENT); }
 
     get logo () { return $(HEADER_LOGO); }
