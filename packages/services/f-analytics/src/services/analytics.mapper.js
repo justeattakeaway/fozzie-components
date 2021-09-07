@@ -171,14 +171,18 @@ export const mapPageData = ({
     httpStatusCode,
     req
 } = {}) => {
-    pageData.group = featureName;
-    if (pageName) pageData.name = pageName;
     const conversationId = getCookie('x-je-conversation', req);
-    if (conversationId) pageData.conversationId = conversationId;
-    if (requestId) pageData.requestId = requestId;
-    if (httpStatusCode) pageData.httpStatusCode = httpStatusCode;
     const displaySize = getDisplaySize();
-    if (displaySize) pageData.display = displaySize;
     const orientation = getOrientation();
-    if (orientation) pageData.orientation = orientation;
+
+    return {
+        ...pageData,
+        group: featureName,
+        name: pageName || pageData.pageName,
+        conversationId: conversationId || pageData.conversationId,
+        requestId: requestId || pageData.requestId,
+        httpStatusCode: httpStatusCode || pageData.httpStatusCode,
+        display: displaySize || pageData.display,
+        orientation: orientation || pageData.orientation
+    };
 };

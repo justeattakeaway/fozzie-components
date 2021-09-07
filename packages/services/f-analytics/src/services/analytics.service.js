@@ -67,7 +67,7 @@ export default class AnalyticService {
     } = {}) {
         let pageData = { ...this.store.state[`${this.options.namespace}`].pageData };
 
-        mapPageData({
+        pageData = mapPageData({
             pageData,
             featureName: this.options.featureName,
             pageName,
