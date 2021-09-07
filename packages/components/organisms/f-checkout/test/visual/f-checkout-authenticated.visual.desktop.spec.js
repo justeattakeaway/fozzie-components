@@ -291,3 +291,25 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
         browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
     });
 });
+
+describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Visual Tests', () => {
+    beforeEach(() => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+            .withQuery('&knob-Is User Logged In', true)
+            .withQuery('&knob-Is ASAP available', false)
+            .withQuery('&knob-Locale', 'en-AU');
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+    });
+
+    it('should display the state input.', () => {
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible State field', 'desktop');
+    });
+});
