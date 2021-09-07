@@ -6,7 +6,7 @@ let statusBanner;
 
 describe('f-statusBanner component tests - @browserstack', () => {
     beforeEach(() => {
-        statusBanner = new StatusBanner('organism', 'status-banner-component');
+        statusBanner = new StatusBanner();
         const pageUrl = buildUrl(statusBanner.componentType, statusBanner.componentName, statusBanner.path);
 
         statusBanner.open(pageUrl);

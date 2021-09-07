@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const FormField = require('../../test-utils/component-objects/f-form-field.component');
 
-const formfield = new FormField('atom-folder', 'f-form-field--text-input-default-component');
+const formfield = new FormField();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

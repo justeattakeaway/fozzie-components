@@ -7,7 +7,7 @@ describe('f-button Desktop visual tests', () => {
     describe('primary button', () => {
         it('should display medium size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'primary');
             button.withQuery('knob-Button Size', 'medium');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -22,7 +22,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display large size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'primary');
             button.withQuery('knob-Button Size', 'large');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -37,7 +37,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display small size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'primary');
             button.withQuery('knob-Button Size', 'small');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -52,7 +52,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display xsmall size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'primary');
             button.withQuery('knob-Button Size', 'xsmall');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -68,7 +68,7 @@ describe('f-button Desktop visual tests', () => {
         describe('isLoading', () => {
             it('should display medium size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'primary');
                 button.withQuery('knob-Button Size', 'medium');
                 button.withQuery('knob-isLoading', 'true');
@@ -84,7 +84,7 @@ describe('f-button Desktop visual tests', () => {
 
             it('should display large size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'primary');
                 button.withQuery('knob-Button Size', 'large');
                 button.withQuery('knob-isLoading', 'true');
@@ -103,7 +103,7 @@ describe('f-button Desktop visual tests', () => {
     describe('secondary button', () => {
         it('should display medium size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'secondary');
             button.withQuery('knob-Button Size', 'medium');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -118,7 +118,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display large size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'secondary');
             button.withQuery('knob-Button Size', 'large');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -133,7 +133,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display small size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'secondary');
             button.withQuery('knob-Button Size', 'small');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -148,7 +148,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display xsmall size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'secondary');
             button.withQuery('knob-Button Size', 'xsmall');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -164,7 +164,7 @@ describe('f-button Desktop visual tests', () => {
         describe('isLoading', () => {
             it('should display medium size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'secondary');
                 button.withQuery('knob-Button Size', 'medium');
                 button.withQuery('knob-isLoading', 'true');
@@ -180,7 +180,7 @@ describe('f-button Desktop visual tests', () => {
 
             it('should display large size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'secondary');
                 button.withQuery('knob-Button Size', 'large');
                 button.withQuery('knob-isLoading', 'true');
@@ -199,7 +199,7 @@ describe('f-button Desktop visual tests', () => {
     describe('outline button', () => {
         it('should display medium size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'outline');
             button.withQuery('knob-Button Size', 'medium');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -214,7 +214,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display large size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'outline');
             button.withQuery('knob-Button Size', 'large');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -229,7 +229,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display small size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'outline');
             button.withQuery('knob-Button Size', 'small');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -244,7 +244,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display xsmall size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'outline');
             button.withQuery('knob-Button Size', 'xsmall');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -260,7 +260,7 @@ describe('f-button Desktop visual tests', () => {
         describe('isLoading', () => {
             it('should display medium size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'outline');
                 button.withQuery('knob-Button Size', 'medium');
                 button.withQuery('knob-isLoading', 'true');
@@ -276,7 +276,7 @@ describe('f-button Desktop visual tests', () => {
 
             it('should display large size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'outline');
                 button.withQuery('knob-Button Size', 'large');
                 button.withQuery('knob-isLoading', 'true');
@@ -295,7 +295,7 @@ describe('f-button Desktop visual tests', () => {
     describe('ghost', () => {
         it('should display medium size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'ghost');
             button.withQuery('knob-Button Size', 'medium');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -310,7 +310,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display large size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'ghost');
             button.withQuery('knob-Button Size', 'large');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -325,7 +325,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display small size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'ghost');
             button.withQuery('knob-Button Size', 'small');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -340,7 +340,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display xsmall size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'ghost');
             button.withQuery('knob-Button Size', 'xsmall');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -356,7 +356,7 @@ describe('f-button Desktop visual tests', () => {
         describe('isLoading', () => {
             it('should display medium size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'ghost');
                 button.withQuery('knob-Button Size', 'medium');
                 button.withQuery('knob-isLoading', 'true');
@@ -372,7 +372,7 @@ describe('f-button Desktop visual tests', () => {
 
             it('should display large size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'ghost');
                 button.withQuery('knob-Button Size', 'large');
                 button.withQuery('knob-isLoading', 'true');
@@ -391,7 +391,7 @@ describe('f-button Desktop visual tests', () => {
     describe('link', () => {
         it('should display medium size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'link');
             button.withQuery('knob-Button Size', 'medium');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -406,7 +406,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display large size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'link');
             button.withQuery('knob-Button Size', 'large');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -421,7 +421,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display small size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'link');
             button.withQuery('knob-Button Size', 'small');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -436,7 +436,7 @@ describe('f-button Desktop visual tests', () => {
 
         it('should display xsmall size', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
+            button = new Button();
             button.withQuery('knob-Button Type', 'link');
             button.withQuery('knob-Button Size', 'xsmall');
             const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
@@ -452,7 +452,7 @@ describe('f-button Desktop visual tests', () => {
         describe('isLoading', () => {
             it('should display medium size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'link');
                 button.withQuery('knob-Button Size', 'medium');
                 button.withQuery('knob-isLoading', 'true');
@@ -468,7 +468,7 @@ describe('f-button Desktop visual tests', () => {
 
             it('should display large size in a loading state', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
+                button = new Button();
                 button.withQuery('knob-Button Type', 'link');
                 button.withQuery('knob-Button Size', 'large');
                 button.withQuery('knob-isLoading', 'true');

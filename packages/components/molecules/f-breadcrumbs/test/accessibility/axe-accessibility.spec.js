@@ -2,7 +2,7 @@ const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 const Breadcrumbs = require('../../test-utils/component-objects/f-breadcrumbs.component');
 
-const breadcrumbs = new Breadcrumbs('molecule', 'breadcrumbs-component');
+const breadcrumbs = new Breadcrumbs();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

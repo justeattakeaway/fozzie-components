@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const Popover = require('../../test-utils/component-objects/f-popover.component');
 
-const popover = new Popover('atom', 'popover-component');
+const popover = new Popover();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

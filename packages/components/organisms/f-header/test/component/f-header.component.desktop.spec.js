@@ -9,7 +9,7 @@ let header;
 describe('Desktop - f-header component tests - @browserstack', () => {
     beforeEach(() => {
         // Arrange
-        header = new Header('organism', 'header-component');
+        header = new Header();
         header.withQuery('&knob-Show offers link', 'true');
         header.withQuery('&knob-Show delivery enquiry', 'true');
         const pageUrl = buildUrl(header.componentType, header.componentName, header.path);

@@ -3,7 +3,7 @@ import forEach from 'mocha-each';
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Tabs = require('../../test-utils/component-objects/f-tabs.component');
 
-const tabs = new Tabs('molecule', 'vue-tabs-component');
+const tabs = new Tabs();
 
 describe('f-tabs component tests', () => {
     beforeEach(() => {
