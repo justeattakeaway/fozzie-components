@@ -2194,18 +2194,12 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-searchbox@3.10.0":
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-3.10.0.tgz#1a6b235494f1e22de14bd1d6eea146fd575f419b"
-  integrity sha512-547OSutUh+GMtMR7OnGX7ASVPsU3KpnQN8XELoFJWSRDeTXEpBmcWe3uje7wpQAC7TU8tYnU2wXElxesrRx7gw==
+"@justeat/f-searchbox@5.0.0-beta.0":
+  version "5.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.0.0-beta.0.tgz#d8aa4338a41095ec47756b41188f41cfdc2c1782"
+  integrity sha512-vIufkKIIee4ziI1X8ZoEv9ZtCF7UEqEHPdKfl873J8pht4jvGNDOjvoIxg/0gQjMl+Y2bhoZu7xokF0N9x4TLg==
   dependencies:
-    lodash.debounce "4.0.8"
-
-"@justeat/f-searchbox@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-4.0.0.tgz#1cf488d537266efbeeb7adcfc162eeec9e68551f"
-  integrity sha512-Swv0wgzfB05yNv1Oe2+W0NIQk1ood2jjYc0VxvX86vjuD4y95KIm6v/Libw935WkiR8I+VOxkLQqOJMte8qa/g==
-  dependencies:
+    caniuse-lite "1.0.30001251"
     lodash.debounce "4.0.8"
 
 "@justeat/f-services@0.13.0":
@@ -8188,6 +8182,11 @@ caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   version "1.0.30001255"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001255.tgz#be2065714da62a721a91a0e789a7cc7ae520dacc"
   integrity sha512-+FV7TQX0PoThDIwNvRpoUbhmKJzAB8ZGc8xDNTRltvpbL7d7Si+HTOn1NDdZh4yw2JUqnV6LOYsAcG20lH7gGg==
+
+caniuse-lite@1.0.30001251:
+  version "1.0.30001251"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001251.tgz#6853a606ec50893115db660f82c094d18f096d85"
+  integrity sha512-HOe1r+9VkU4TFmnU70z+r7OLmtR+/chB1rdcJUeQlAinjEeb0cKL20tlAtOagNZhbrtLnCvV19B4FmF1rgzl6A==
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001254:
   version "1.0.30001255"
