@@ -86,14 +86,14 @@ describe('Analytics Plugin ::', () => {
 
         it('should inject the global object', () => {
             // Arrange
-            const incGlobalVarNameOptions = { ...options, globalVarName: 'jazz' };
-            const expected = new AnalyticService(defaultStore, context.req, incGlobalVarNameOptions);
+            const modifiedOptions = { ...options, globalVarName: 'jazz' };
+            const expected = new AnalyticService(defaultStore, context.req, modifiedOptions);
 
             // Act
-            AnalyticsPlugin(context, injectSpy, incGlobalVarNameOptions);
+            AnalyticsPlugin(context, injectSpy, modifiedOptions);
 
             // Assert
-            expect(injectSpy).toHaveBeenCalledWith(incGlobalVarNameOptions.globalVarName, expected);
+            expect(injectSpy).toHaveBeenCalledWith(modifiedOptions.globalVarName, expected);
         });
 
         it('should flush any stored events', () => {

@@ -16,6 +16,7 @@ import getBasketCollection from './get-basket-collection.json';
 import getBasketDinein from './get-basket-dinein.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
+import updateCheckoutServiceTypeUnavailable from './update-checkout-service-type-unavailable.json';
 import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-items-required.json';
 import updateCheckout403 from './update-checkout-403.json';
 import updateCheckoutTimeUnavailable from './update-checkout-time-unavailable.json';
@@ -160,6 +161,12 @@ const requestDefinitions = {
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.ok,
         payload: updateCheckoutRestaurantNotTakingOrders
+    },
+    updateCheckoutServiceTypeUnavailable: {
+        url: '/update-checkout-service-type-unavailable.json',
+        method: httpMethods.patch,
+        responseStatus: httpStatusCodes.ok,
+        payload: updateCheckoutServiceTypeUnavailable
     },
     updateCheckoutAdditionalItemsRequired: {
         url: '/update-checkout-additional-items-required.json',

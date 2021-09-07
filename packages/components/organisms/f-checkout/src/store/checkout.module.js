@@ -374,7 +374,7 @@ export default {
             if (!addressCoords && state.authToken) {
                 const { data } = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
 
-                commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
+                commit(UPDATE_GEO_LOCATION, data?.geometry.coordinates);
             }
         },
 
@@ -561,11 +561,14 @@ export default {
             state.orderId = orderId;
         },
 
-        [UPDATE_GEO_LOCATION]: (state, [lng, lat]) => {
-            state.geolocation = {
-                latitude: lat,
-                longitude: lng
-            };
+        [UPDATE_GEO_LOCATION]: (state, coords) => {
+            if (Array.isArray(coords)) {
+                const [lng, lat] = coords;
+                state.geolocation = {
+                    latitude: lat,
+                    longitude: lng
+                };
+            }
         },
 
         [UPDATE_MESSAGE]: (state, message) => {

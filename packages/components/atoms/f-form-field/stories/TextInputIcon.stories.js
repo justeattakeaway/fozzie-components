@@ -1,5 +1,5 @@
 import {
-    withKnobs, select, boolean, object
+    withKnobs, select, boolean
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
@@ -13,7 +13,7 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-export const IconFormFieldComponent = () => ({
+export const TextInputIconComponent = () => ({
     components: {
         FormField,
         AllergyNutIcon,
@@ -31,12 +31,6 @@ export const IconFormFieldComponent = () => ({
         },
         hasError: {
             default: boolean('hasError', false)
-        },
-        dropdownOptions: {
-            default: object('Dropdown Options', [
-                { text: 'As soon as possible', value: '2021-01-01T01:00:00.000Z' },
-                { text: 'Today in 5 minutes', value: '2021-01-01T01:05:00.000Z' }
-            ])
         }
     },
     parameters: {
@@ -81,19 +75,7 @@ export const IconFormFieldComponent = () => ({
                     <DriverIcon />
                 </template>
         </form-field>
-
-        <form-field
-            locale="en-GB"
-            label-text="Dropdown - Left Icon"
-            input-type="dropdown"
-            field-size="medium"
-            :has-error="hasError"
-            :dropdown-options="dropdownOptions">
-                <template v-slot:icon-leading>
-                    <AllergyNutIcon />
-                </template>
-        </form-field>
     </div>`
 });
 
-IconFormFieldComponent.storyName = 'Icon Form Fields';
+TextInputIconComponent.storyName = 'Text Input - Icon';

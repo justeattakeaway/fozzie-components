@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-consumer-oidc",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Authentication helper to communicate with open apis",
   "main": "dist/f-consumer-oidc.js",
   "maxBundleSize": "5kB",
@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn build",
-    "build": "webpack",
+    "build": "vite build",
     "test": "jest"
   },
   "devDependencies": {
@@ -37,9 +37,7 @@
     "jest": "25.4.0",
     "jest-teamcity": "1.7.0",
     "js-cookie": "2.2.1",
-    "uglifyjs-webpack-plugin": "2.2.0",
-    "webpack": "4.42.1",
-    "webpack-cli": "3.3.11"
+    "vite": "2.4.4"
   },
   "peerDependencies": {
     "js-cookie": ">=2.2.1"

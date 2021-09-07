@@ -347,4 +347,42 @@ describe('CookieBanner', () => {
             });
         });
     });
+
+    describe('`computed`', () => {
+        describe('when `isBodyHeightLessThanWindowHeight` is falsey', () => {
+            let wrapper;
+            const { window } = global;
+
+            beforeAll(() => {
+                wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n
+                });
+
+                delete global.window;
+            });
+
+            afterAll(() => {
+                global.window = window;
+            });
+
+            it('should return `falsey` when the window object does not exist', () => {
+                // Assert
+                expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBe(false);
+            });
+        });
+
+        describe('when `isBodyHeightLessThanWindowHeight` is truthy', () => {
+            it('should return true when the window object exists', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n
+                });
+
+                // Assert
+                expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBe(true);
+            });
+        });
+    });
 });
