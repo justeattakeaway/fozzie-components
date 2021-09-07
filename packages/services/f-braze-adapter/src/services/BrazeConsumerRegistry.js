@@ -29,15 +29,14 @@ class BrazeConsumerRegistry {
         apiKey,
         userId,
         enableLogging,
-        tags = 'global'
+        tags
     }) {
         if (!registryInstance) {
             const dispatcher = new BrazeDispatcher({
                 sessionTimeout,
                 apiKey,
                 userId,
-                enableLogging,
-                tags
+                enableLogging
             });
 
             registryInstance = new BrazeConsumerRegistry(dispatcher, userId, tags);
@@ -52,8 +51,8 @@ class BrazeConsumerRegistry {
 
     constructor (dispatcher, userId, tags) {
         // key to identify logs
-        this.loggingRegistryKey = `BrazeAdapter--registry--${userId}`;
-        this.loggingTags = tags;
+        this.$key = `BrazeAdapter--registry--${userId}`;
+        this.$tags = tags;
 
         this.consumers = [];
 
@@ -61,7 +60,7 @@ class BrazeConsumerRegistry {
         dispatcherEventStream.subscribe(CONTENT_CARDS_EVENT_NAME, cards => this.applyContentCardCallbacks(cards));
         dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_NAME, message => this.applyInAppMessageCallbacks(message));
         dispatcherEventStream.subscribe(IN_APP_MESSAGE_EVENT_CLICKS_NAME, message => this.applyInAppMessageClickEventsCallbacks(message));
-        dispatcherEventStream.subscribe(LOGGER, ({ type, message, data }) => this.applyLogger(type, message, data));
+        dispatcherEventStream.subscribe(LOGGER, ({ type, message, data }) => this.applyLoggerCallbacks(type, message, data));
 
         this._dispatcher = dispatcher;
     }
@@ -72,25 +71,11 @@ class BrazeConsumerRegistry {
      * @param message
      * @param data
      */
-    applyLogger (type, message, data) {
+    applyLoggerCallbacks (type, message, data) {
         this.consumers.reduce((acc, consumer) => [...acc, consumer.getLogger()], [])
-            .forEach(logger => {
-                // this removes any null or undefined values
-                const loggingData = Object.entries({
-                    data,
-                    tags: this.loggingTags,
-                    Count: data.count
-                })
-                .reduce((a, [k, v]) => {
-                    if (v != null) {
-                        a[k] = v;
-                    }
-                    return a;
-                }, {});
+            .forEach(callback => {
                 // adding tags in so logs can be sorted
-                if (logger[type] !== undefined && typeof logger[type] === 'function') {
-                    logger[type](message, null, loggingData);
-                }
+                callback[type](message, { ...data, tags: this.$tags });
             });
     }
 
@@ -136,8 +121,8 @@ class BrazeConsumerRegistry {
         this.consumers.push(consumer);
         dispatcherEventStream.publish(LOGGER, {
             type: LOG_INFO,
-            message: `Braze Adapter Section: (Registry) Key: (${this.loggingRegistryKey}): A Consumer of Braze Content cards has been registered`,
-            data: { key: this.loggingRegistryKey }
+            message: `Braze Adapter Section: (Registry) Key: (${this.$key}): A Consumer of Braze Content cards has been registered`,
+            data: { key: this.$key }
         });
         return consumer;
     }
@@ -151,14 +136,14 @@ class BrazeConsumerRegistry {
             this.consumers.splice(this.consumers.findIndex(c => c === consumer), 1);
             dispatcherEventStream.publish(LOGGER, {
                 type: LOG_INFO,
-                message: `Braze Adapter Section: (Registry) Key: (${this.loggingRegistryKey}): Consumer unregistered from the consumer registry`,
-                data: { key: this.loggingRegistryKey }
+                message: `Braze Adapter Section: (Registry) Key: (${this.$key}): Consumer unregistered from the consumer registry`,
+                data: { key: this.$key }
             });
         } else {
             dispatcherEventStream.publish(LOGGER, {
                 type: LOG_ERROR,
-                message: `Braze Adapter Section: (Registry) Key: (${this.loggingRegistryKey}): Failed to unregister consumer`,
-                data: { key: this.loggingRegistryKey }
+                message: `Braze Adapter Section: (Registry) Key: (${this.$key}): Failed to unregister consumer`,
+                data: { key: this.$key }
             });
             throw new Error('Failed to unregister consumer, consumer not in registry.');
         }

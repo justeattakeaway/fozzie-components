@@ -9,7 +9,7 @@ v4.0.0-beta.5
 *September 07, 2021*
 
 ### Added
-- Finer detailed log events for greater error and event visibility
+- Finner detailed log events for greater error and event visibility
 
 
 v4.0.0-beta.4

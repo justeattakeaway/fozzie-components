@@ -53,22 +53,16 @@ function contentCardsHandler (postCardsAppboy) {
 
     dispatcherEventStream.publish(LOGGER, {
         type: LOG_INFO,
-        message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}):  Raw cards returned count.`,
-        data: {
-            count: cards.length,
-            key: this.loggingKey
-        }
+        message: `Braze Adapter Section: (Dispatcher) Key: (${this.$key}):  Raw cards returned count.`,
+        data: { count: cards.length, key: this.$key }
     });
 
     const processedCards = removeDuplicateContentCards(cards.map(transformCardData));
 
     dispatcherEventStream.publish(LOGGER, {
         type: LOG_INFO,
-        message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): removeDuplicateContentCards cards returned count.`,
-        data: {
-            count: processedCards.length,
-            key: this.loggingKey
-        }
+        message: `Braze Adapter Section: (Dispatcher) Key: (${this.$key}): removeDuplicateContentCards cards returned count.`,
+        data: { count: processedCards.length, key: this.$key }
     });
 
     dispatcherEventStream.publish(CONTENT_CARDS_EVENT_NAME, processedCards);
@@ -110,17 +104,15 @@ class BrazeDispatcher {
      * @param apiKey
      * @param enableLogging
      * @param userId
-     * @param tags
      */
     constructor ({
         sessionTimeoutInSeconds = 0,
         apiKey,
         enableLogging,
-        userId,
-        tags = 'global'
+        userId
     }) {
         // key to identify logs
-        this.loggingKey = `BrazeAdapter--dispatcher--${tags}--${userId}`;
+        this.$key = `BrazeAdapter--dispatcher--${userId}`;
 
         if (typeof window === 'undefined') throw new Error('window is not defined');
 
@@ -132,18 +124,14 @@ class BrazeDispatcher {
 
             dispatcherEventStream.publish(LOGGER, {
                 type: LOG_INFO,
-                message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): Initialising the dispatcher with these dispatcher options.`,
-                data: { dispatcherOptions: this.dispatcherOptions, key: this.loggingKey }
+                message: `Braze Adapter Section: (Dispatcher) Key: (${this.$key}): Initialising the dispatcher with these dispatcher options.`,
+                data: { dispatcherOptions: this.dispatcherOptions, key: this.$key }
             });
         } else if (!(apiKey === this.dispatcherOptions.apiKey && userId === this.dispatcherOptions.userId)) {
             dispatcherEventStream.publish(LOGGER, {
                 type: LOG_ERROR,
-                message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): Attempt to reinitialise appboy with different parameters.`,
-                data: {
-                    oldOptions: this.dispatcherOptions,
-                    newOptions: { apiKey, userId },
-                    key: this.loggingKey
-                }
+                message: `Braze Adapter Section: (Dispatcher) Key: (${this.$key}): Attempt to reinitialise appboy with different parameters.`,
+                data: { oldOptions: this.dispatcherOptions, newOptions: { apiKey, userId }, key: this.$key }
             });
 
             throw new Error('Attempt to reinitialise appboy with different parameters');
@@ -170,11 +158,8 @@ class BrazeDispatcher {
 
                 dispatcherEventStream.publish(LOGGER, {
                     type: LOG_INFO,
-                    message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): Initialised.`,
-                    data: {
-                        config: options,
-                        key: this.loggingKey
-                    }
+                    message: `Braze Adapter Section: (Dispatcher) Key: (${this.$key}): Initialised.`,
+                    data: { config: options, key: this.$key }
                 });
 
                 this.subscribeBraze();
@@ -187,11 +172,8 @@ class BrazeDispatcher {
             } else {
                 dispatcherEventStream.publish(LOGGER, {
                     type: LOG_ERROR,
-                    message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): Could not initialise braze due to an error in the provided config`,
-                    data: {
-                        config: options,
-                        key: this.loggingKey
-                    }
+                    message: `Braze Adapter Section: (Dispatcher) Key: (${this.$key}): Could not initialise braze due to an error in the provided config`,
+                    data: { config: options, key: this.$key }
                 });
 
                 throw new Error('Not initialising braze due to config');

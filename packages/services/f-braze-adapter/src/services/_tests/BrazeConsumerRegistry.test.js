@@ -132,10 +132,10 @@ describe('BrazeConsumerRegistry', () => {
             const mockMessage = '__TEST_MESSAGE__';
             const mockData = { test: '__TEST__' };
             // Act
-            consumerRegistry.applyLogger('logError', mockMessage, mockData);
+            consumerRegistry.applyLoggerCallbacks('logError', mockMessage, mockData);
 
             // Assert
-            expect(mockConsumerOptions.logger.logError).toHaveBeenCalledWith(mockMessage, null, { data: mockData, tags: 'global' });
+            expect(mockConsumerOptions.logger.logError).toHaveBeenCalledWith(mockMessage, mockData);
         });
     });
 
