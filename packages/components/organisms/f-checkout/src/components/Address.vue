@@ -136,7 +136,6 @@ export default {
     props: {
         shouldShowAdministrativeArea: {
             type: Boolean,
-            required: false,
             default: false
         }
     },
