@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-offers",
   "description": "Fozzie Offers - displays offers to the customers",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "main": "dist/f-offers.umd.min.js",
   "maxBundleSize": "130kB",
   "files": [
@@ -60,7 +60,7 @@
     "@justeat/f-button": "2.0.0-beta.0",
     "@justeat/f-content-cards": "5.0.0-beta.1",
     "@justeat/f-media-element": "1.0.0",
-    "@justeat/f-searchbox": "4.0.0",
+    "@justeat/f-searchbox": "5.0.0-beta.0",
     "@justeat/f-trak": "0.7.1",
     "@justeat/f-mega-modal": "1.0.0-beta.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
