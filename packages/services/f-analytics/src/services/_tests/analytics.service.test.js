@@ -353,15 +353,13 @@ describe('Analytic Service ::', () => {
             const expected = {
                 ...defaultState.pageData,
                 group: 'test-feature-name',
-                name: 'test-page-name',
-                conversationId: undefined,
                 requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
                 orientation: 'Landscape',
                 display: 'mid'
             };
 
             // Act
-            service.pushPageData({ pageName: expected.name, requestId: expected.requestId });
+            service.pushPageData({ requestId: expected.requestId });
 
             // Assert
             expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
@@ -409,11 +407,9 @@ describe('Analytic Service ::', () => {
             const expected = {
                 ...defaultState.pageData,
                 group: 'test-feature-name',
-                name: 'test-page-name',
                 conversationId: 'f0740341-4369-437d-bcce-735a71ee5b78',
-                requestId: undefined,
-                orientation: 'Landscape',
-                display: 'mid'
+                display: 'mid',
+                orientation: 'Landscape'
             };
 
             get = jest.fn();
@@ -421,7 +417,7 @@ describe('Analytic Service ::', () => {
             Cookies.mockImplementation(() => ({ get }));
 
             // Act
-            service.pushPageData({ pageName: expected.name });
+            service.pushPageData();
 
             // Assert
             expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });

@@ -177,8 +177,8 @@ export const mapPageData = ({
     if (conversationId) pageData.conversationId = conversationId;
     if (requestId) pageData.requestId = requestId;
     if (httpStatusCode) pageData.httpStatusCode = httpStatusCode;
-    const diplaySize = getDisplaySize();
-    if (diplaySize) pageData.display = diplaySize;
+    const displaySize = getDisplaySize();
+    if (displaySize) pageData.display = displaySize;
     const orientation = getOrientation();
     if (orientation) pageData.orientation = orientation;
 };
