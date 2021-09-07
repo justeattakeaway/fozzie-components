@@ -9,7 +9,7 @@ v5.0.0-beta.1
 *September 1, 2021*
 
 ### Changed
-- `f-button` to v2.0.0-beta.0 which use the new font
+- `f-button` to v2.0.0-beta.0 which uses the new font
 
 
 v5.0.0-beta.0
@@ -18,6 +18,17 @@ v5.0.0-beta.0
 
 ### Changed
 - New font JETSansDigital
+
+### Fixed
+- Ensure main navigation and country selector links are hidden from screen readers when visually hidden.
+
+
+v4.20.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- Updated version of f-button.
 
 ### Fixed
 - Ensure main navigation and country selector links are hidden from screen readers when visually hidden.

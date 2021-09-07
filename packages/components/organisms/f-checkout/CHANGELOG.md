@@ -14,7 +14,7 @@ v1.0.0-beta.1
 
 v1.0.0-beta.0
 ------------------------------
-*September 1, 2021*
+*September 6, 2021*
 
 ### Changed
 - New font JETSansDigital
