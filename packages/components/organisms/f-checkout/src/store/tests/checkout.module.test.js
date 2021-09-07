@@ -309,6 +309,18 @@ describe('CheckoutModule', () => {
         });
 
         describe(`${UPDATE_GEO_LOCATION} ::`, () => {
+            it('should NOT update state if value from endpoint is not an array', () => {
+                // Arrange - coordinates array not returned from API
+                const coordinates = undefined;
+
+                // Act
+                mutations[UPDATE_GEO_LOCATION](state, coordinates);
+
+                // Assert
+                expect(state.geolocation).toBe(null);
+            });
+
+
             it('should update state with received values', () => {
                 // Arrange (Long / Lat)
                 const geometryData = [-0.10358, 51.51469];
@@ -863,7 +875,7 @@ describe('CheckoutModule', () => {
             const issue = {
                 code: 'RESTAURANT_NOT_TAKING_ORDERS',
                 shouldShowInDialog: true,
-                shouldRedirectToMenu: false
+                shouldRedirectToMenu: true
             };
 
             beforeEach(() => {
