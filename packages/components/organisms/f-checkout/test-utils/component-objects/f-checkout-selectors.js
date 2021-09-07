@@ -48,6 +48,10 @@ exports.FIELDS = {
         input: '[data-test-id="formfield-address-locality-input"]',
         error: '[data-test-id="error-address-locality-empty"]'
     },
+    addressAdministrativeArea: {
+        input: '[data-test-id="formfield-address-administrative-area-input"]',
+        error: '[data-test-id="error-address-administrative-area-empty"]'
+    },
     addressPostcode: {
         input: '[data-test-id="formfield-address-postcode-input"]',
         error: '[data-test-id="error-address-postcode-empty"]',
