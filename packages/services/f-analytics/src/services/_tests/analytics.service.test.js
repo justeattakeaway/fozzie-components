@@ -348,20 +348,20 @@ describe('Analytic Service ::', () => {
             }
         );
 
-        it('should set conversationId and requestId values when provided', () => {
+        it('should set requestId value when provided', () => {
             // Arrange
             const expected = {
                 ...defaultState.pageData,
                 group: 'test-feature-name',
                 name: 'test-page-name',
-                conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
+                conversationId: undefined,
                 requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
                 orientation: 'Landscape',
                 display: 'mid'
             };
 
             // Act
-            service.pushPageData({ pageName: expected.name, conversationId: expected.conversationId, requestId: expected.requestId });
+            service.pushPageData({ pageName: expected.name, requestId: expected.requestId });
 
             // Assert
             expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
@@ -399,6 +399,29 @@ describe('Analytic Service ::', () => {
 
             // Act
             service.pushPageData({ pageName: expected.name, customFields: { custom1: 'one', custom2: 'two' } });
+
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+        });
+
+        it('should set the conversationId value when x-je-conversation cookie exists', () => {
+            // Arrange
+            const expected = {
+                ...defaultState.pageData,
+                group: 'test-feature-name',
+                name: 'test-page-name',
+                conversationId: 'f0740341-4369-437d-bcce-735a71ee5b78',
+                requestId: undefined,
+                orientation: 'Landscape',
+                display: 'mid'
+            };
+
+            get = jest.fn();
+            when(get).calledWith('x-je-conversation').mockReturnValue(expected.conversationId);
+            Cookies.mockImplementation(() => ({ get }));
+
+            // Act
+            service.pushPageData({ pageName: expected.name });
 
             // Assert
             expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });

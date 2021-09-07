@@ -73,7 +73,8 @@ export default class AnalyticService {
             pageName,
             conversationId,
             requestId,
-            httpStatusCode
+            httpStatusCode,
+            req: this.req
         });
 
         if (customFields) {

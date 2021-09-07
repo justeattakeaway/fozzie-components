@@ -159,20 +159,21 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  * @param {object} pageData - A reference to the current PageData instance
  * @param {string} featureName - The name of the feature
  * @param {string} pageName - The name of the page
- * @param {string} conversationId - The current conversation Id
  * @param {string} requestId - The current request Id
  * @param {number} httpStatusCode - The httpStatusCode (only supplied when 200 needs to be overriden)
+ * @param {object} req - The `request` context
  */
 export const mapPageData = ({
     pageData,
     featureName,
     pageName,
-    conversationId,
     requestId,
-    httpStatusCode
+    httpStatusCode,
+    req
 } = {}) => {
     pageData.group = featureName;
     if (pageName) pageData.name = pageName;
+    const conversationId = getCookie('x-je-conversation', req);
     if (conversationId) pageData.conversationId = conversationId;
     if (requestId) pageData.requestId = requestId;
     if (httpStatusCode) pageData.httpStatusCode = httpStatusCode;
