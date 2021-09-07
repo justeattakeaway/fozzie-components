@@ -405,11 +405,7 @@ describe('Analytic Service ::', () => {
         it('should set the conversationId value when x-je-conversation cookie exists', () => {
             // Arrange
             const expected = {
-                ...defaultState.pageData,
-                group: 'test-feature-name',
-                conversationId: 'f0740341-4369-437d-bcce-735a71ee5b78',
-                display: 'mid',
-                orientation: 'Landscape'
+                conversationId: 'f0740341-4369-437d-bcce-735a71ee5b78'
             };
 
             get = jest.fn();
@@ -420,7 +416,11 @@ describe('Analytic Service ::', () => {
             service.pushPageData();
 
             // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                pageData: expect.objectContaining({
+                    conversationId: expected.conversationId
+                })
+            }));
         });
     });
 
