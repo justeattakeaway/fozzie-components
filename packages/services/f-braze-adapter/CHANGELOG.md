@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0-beta.5
+------------------------------
+*September 07, 2021*
+
+### Added
+- Finner detailed log events for greater error and event visibility
+
+
 v4.0.0-beta.4
 ------------------------------
 *September 02, 2021*

@@ -52,15 +52,18 @@ const mockConsumerOptions = {
     interceptInAppMessageClickEvents: {
         clickEvents: jest.fn()
     },
-    loggerCallbacks: {
-        logger: jest.fn()
+    logger: {
+        logInfo: jest.fn(),
+        logWarn: jest.fn(),
+        logError: jest.fn()
     },
     brands: [
         'a',
         'b',
         'c',
         'd'
-    ]
+    ],
+    key: `global--${userId}`
 };
 
 const registryOptions = {
@@ -129,10 +132,10 @@ describe('BrazeConsumerRegistry', () => {
             const mockMessage = '__TEST_MESSAGE__';
             const mockData = { test: '__TEST__' };
             // Act
-            consumerRegistry.applyLoggerCallbacks('error', mockMessage, mockData);
+            consumerRegistry.applyLoggerCallbacks('logError', mockMessage, mockData);
 
             // Assert
-            expect(mockConsumerOptions.loggerCallbacks.logger).toHaveBeenCalledWith('logError', mockMessage, mockData);
+            expect(mockConsumerOptions.logger.logError).toHaveBeenCalledWith(mockMessage, mockData);
         });
     });
 

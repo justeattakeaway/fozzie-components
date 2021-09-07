@@ -7,7 +7,6 @@ import {
     sortByCardOrder
 } from './utils/index';
 import InvalidConsumerConfigError from './errors/InvalidConsumerConfigError';
-import { LogService } from './logging/logging.service';
 import {
     HOME_PROMOTION_CARD_1,
     HOME_PROMOTION_CARD_2,
@@ -15,6 +14,9 @@ import {
     PROMOTION_CARD_1,
     PROMOTION_CARD_2
 } from './types/cardTypes';
+import dispatcherEventStream from './DispatcherEventStream';
+import { LOGGER } from './types/events';
+import { LOG_ERROR, LOG_INFO } from './types/logger';
 
 class BrazeConsumer {
     /**
@@ -32,9 +34,17 @@ class BrazeConsumer {
         callbacks = {},
         interceptInAppMessages = {},
         interceptInAppMessageClickEvents = {},
-        loggerCallbacks = {},
-        customFilters = []
+        logger = (type, message, data) => console.log(type, message, data),
+        customFilters = [],
+        key: $key
     }) {
+        this.$logger = logger;
+        // key for logging
+        this.$consumerKey = `BrazeAdapter--consumer--${$key}`;
+        // set timer so we Know how long the process takes between initialisation and receiving content cards
+        this.$consumerRegisteredUnix = Date.now();
+        this.$consumerRegisteredLocale = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
+
         this.defaultEnabledCardTypes = [
             HOME_PROMOTION_CARD_1,
             HOME_PROMOTION_CARD_2,
@@ -56,6 +66,11 @@ class BrazeConsumer {
         this.optionsChecks.forEach(check => {
             Object.keys(check).forEach(key => {
                 if (!check[key]) {
+                    dispatcherEventStream.publish(LOGGER, {
+                        type: LOG_ERROR,
+                        message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Failed to register consumer ${this.$consumerKey}, failed check: ${key}`,
+                        data: { check: check[key], key: this.$consumerKey }
+                    });
                     throw new InvalidConsumerConfigError(key);
                 }
             });
@@ -63,13 +78,23 @@ class BrazeConsumer {
 
         this.enabledCardTypes = enabledCardTypes || this.defaultEnabledCardTypes;
 
+        dispatcherEventStream.publish(LOGGER, {
+            type: LOG_INFO,
+            message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Registering with the following enabled card types.`,
+            data: { enabledCardTypes: this.enabledCardTypes, key: this.$consumerKey }
+        });
+
         this.customFilters = customFilters;
+
+        dispatcherEventStream.publish(LOGGER, {
+            type: LOG_INFO,
+            message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Registering with the following enabled custom filters.`,
+            data: { customFilters: this.customFilters, key: this.$consumerKey }
+        });
 
         this.inAppMessagesCallbacks = interceptInAppMessages;
 
         this.inAppMessageClickEventsCallbacks = interceptInAppMessageClickEvents;
-
-        this.loggerCallbacks = loggerCallbacks;
 
         this.callbacks = callbacks;
 
@@ -88,6 +113,13 @@ class BrazeConsumer {
         // and also accepts a array strings
         Promise.resolve(brands).then(brandsList => {
             this.brands = uniq([...this.brands, ...brandsList]);
+
+            dispatcherEventStream.publish(LOGGER, {
+                type: LOG_INFO,
+                message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Registering with the following enabled brands.`,
+                data: { brands: this.brands, key: this.$consumerKey }
+            });
+
             // check to see if cards has already been set if so re call all the content card callbacks
             if (this._cards.length) {
                 this.getContentCardCallbacks().forEach(callback => {
@@ -109,11 +141,10 @@ class BrazeConsumer {
 
     /**
      * Function that loops over all loggerCallbacks and calls them
-     * @returns {*[]}
+     * @returns {}
      */
-    getLoggerCallbacks () {
-        return Object.keys(this.loggerCallbacks)
-            .map(key => new LogService(this.loggerCallbacks[key]));
+    getLogger () {
+        return this.$logger;
     }
 
     /**
@@ -144,7 +175,30 @@ class BrazeConsumer {
         // eslint-disable-next-line func-names
         return Object.keys(this.callbacks).map(function mapContentCardCallbacks (key) {
             return cards => {
+                dispatcherEventStream.publish(LOGGER, {
+                    type: LOG_INFO,
+                    message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Content Cards count before filtering.`,
+                    data: {
+                        count: cards.length,
+                        key: this.$consumerKey,
+                        registrationTime: this.$consumerRegisteredLocale,
+                        timeElapsedMS: (Date.now() - this.$consumerRegisteredUnix)
+                    }
+                });
+
                 this.cards = cards;
+
+                dispatcherEventStream.publish(LOGGER, {
+                    type: LOG_INFO,
+                    message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Content Cards count after filtering.`,
+                    data: {
+                        count: this._cards.length,
+                        key: this.$consumerKey,
+                        registrationTime: this.$consumerRegisteredLocale,
+                        timeElapsedMS: (Date.now() - this.$consumerRegisteredUnix)
+                    }
+                });
+
                 this.callbacks[key](this._cards);
             };
         }, this);
