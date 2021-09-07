@@ -4,9 +4,9 @@ const messages = {
     labels: {
         mobileNumber: 'Mobile Number',
         addressGroup: 'Address',
-        line1: 'Address line 1',
-        line2: 'Address line 2 (optional)',
-        locality: 'City',
+        line1: 'Building number and street',
+        line2: 'Level or unit number (Optional)',
+        locality: 'Town/suburb',
         administrativeArea: 'State',
         postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
