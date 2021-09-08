@@ -34,16 +34,21 @@ class BrazeConsumer {
         callbacks = {},
         interceptInAppMessages = {},
         interceptInAppMessageClickEvents = {},
-        logger = (type, message, data) => console.log(type, message, data),
+        logger = {},
         customFilters = [],
-        key: $key
+        key
     }) {
         this.$logger = logger;
+        // temp logging function as dispatcher event stream is not available until the consumer is registered
+        const logWhileInitialising = ({ type, message, data }) => {
+            logger[type](message, null, data);
+        };
+
         // key for logging
-        this.$consumerKey = `BrazeAdapter--consumer--${$key}`;
+        this.loggingConsumerKey = `BrazeAdapter--consumer--${key}`;
         // set timer so we Know how long the process takes between initialisation and receiving content cards
-        this.$consumerRegisteredUnix = Date.now();
-        this.$consumerRegisteredLocale = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
+        this.consumerRegisteredUnix = Date.now();
+        this.consumerRegisteredLocale = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
 
         this.defaultEnabledCardTypes = [
             HOME_PROMOTION_CARD_1,
@@ -64,32 +69,32 @@ class BrazeConsumer {
         ];
 
         this.optionsChecks.forEach(check => {
-            Object.keys(check).forEach(key => {
-                if (!check[key]) {
-                    dispatcherEventStream.publish(LOGGER, {
+            Object.keys(check).forEach(k => {
+                if (!check[k]) {
+                    logWhileInitialising({
                         type: LOG_ERROR,
-                        message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Failed to register consumer ${this.$consumerKey}, failed check: ${key}`,
-                        data: { check: check[key], key: this.$consumerKey }
+                        message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Failed to register consumer ${this.loggingConsumerKey}, failed check: ${k}`,
+                        data: { check: check[k], key: this.loggingConsumerKey }
                     });
-                    throw new InvalidConsumerConfigError(key);
+                    throw new InvalidConsumerConfigError(k);
                 }
             });
         });
 
         this.enabledCardTypes = enabledCardTypes || this.defaultEnabledCardTypes;
 
-        dispatcherEventStream.publish(LOGGER, {
+        logWhileInitialising({
             type: LOG_INFO,
-            message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Registering with the following enabled card types.`,
-            data: { enabledCardTypes: this.enabledCardTypes, key: this.$consumerKey }
+            message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Registering with the following enabled card types.`,
+            data: { enabledCardTypes: this.enabledCardTypes, key: this.loggingConsumerKey }
         });
 
         this.customFilters = customFilters;
 
-        dispatcherEventStream.publish(LOGGER, {
+        logWhileInitialising({
             type: LOG_INFO,
-            message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Registering with the following enabled custom filters.`,
-            data: { customFilters: this.customFilters, key: this.$consumerKey }
+            message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Registering with the following enabled custom filters.`,
+            data: { customFilters: this.customFilters, key: this.loggingConsumerKey }
         });
 
         this.inAppMessagesCallbacks = interceptInAppMessages;
@@ -114,10 +119,10 @@ class BrazeConsumer {
         Promise.resolve(brands).then(brandsList => {
             this.brands = uniq([...this.brands, ...brandsList]);
 
-            dispatcherEventStream.publish(LOGGER, {
+            logWhileInitialising({
                 type: LOG_INFO,
-                message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Registering with the following enabled brands.`,
-                data: { brands: this.brands, key: this.$consumerKey }
+                message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Registering with the following enabled brands.`,
+                data: { brands: this.brands, key: this.loggingConsumerKey }
             });
 
             // check to see if cards has already been set if so re call all the content card callbacks
@@ -177,12 +182,12 @@ class BrazeConsumer {
             return cards => {
                 dispatcherEventStream.publish(LOGGER, {
                     type: LOG_INFO,
-                    message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Content Cards count before filtering.`,
+                    message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Content Cards count before filtering.`,
                     data: {
                         count: cards.length,
-                        key: this.$consumerKey,
-                        registrationTime: this.$consumerRegisteredLocale,
-                        timeElapsedMS: (Date.now() - this.$consumerRegisteredUnix)
+                        key: this.loggingConsumerKey,
+                        registrationTime: this.consumerRegisteredLocale,
+                        timeElapsedMS: (Date.now() - this.consumerRegisteredUnix)
                     }
                 });
 
@@ -190,12 +195,12 @@ class BrazeConsumer {
 
                 dispatcherEventStream.publish(LOGGER, {
                     type: LOG_INFO,
-                    message: `Braze Adapter Section: (Consumer) Key: (${this.$consumerKey}): Content Cards count after filtering.`,
+                    message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Content Cards count after filtering.`,
                     data: {
                         count: this._cards.length,
-                        key: this.$consumerKey,
-                        registrationTime: this.$consumerRegisteredLocale,
-                        timeElapsedMS: (Date.now() - this.$consumerRegisteredUnix)
+                        key: this.loggingConsumerKey,
+                        registrationTime: this.consumerRegisteredLocale,
+                        timeElapsedMS: (Date.now() - this.consumerRegisteredUnix)
                     }
                 });
 
