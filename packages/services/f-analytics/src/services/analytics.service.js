@@ -45,7 +45,7 @@ export default class AnalyticService {
     pushUserData ({ authToken, customFields } = {}) {
         let userData = { ...this.store.state[`${this.options.namespace}`].userData };
 
-        mapUserData({ userData, authToken, req: this.req });
+        userData = mapUserData({ userData, authToken, req: this.req });
 
         if (customFields) {
             userData = { ...userData, ...customFields };

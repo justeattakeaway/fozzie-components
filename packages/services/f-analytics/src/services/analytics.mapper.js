@@ -63,14 +63,11 @@ const getCookie = (cookieName, req) => {
 /**
  * Maps the anonymous User Id to the UserData 'a-UserId' field.
  *
- * @param {object} userData - A reference to the current UserData instance
  * @param {object} req - The `request` context
  */
-const mapAnonymousUserId = (userData, req) => {
+const mapAnonymousUserId = req => {
     const value = getCookie('je-auser', req);
-    if (value) {
-        userData['a-UserId'] = value;
-    }
+    return value;
 };
 
 /**
@@ -139,18 +136,34 @@ export const mapPlatformData = ({
  * @param {object} userData - A reference to the current UserData instance
  * @param {string} authToken - The current authorisation token
  * @param {object} req - The `request` context
+ * @return {object} new userData object
  */
 export const mapUserData = ({ userData, authToken, req } = {}) => {
-    mapAnonymousUserId(userData, req);
+    const userId = mapAnonymousUserId(req);
+    let mappedUserData = {
+        ...userData,
+        'a-UserId': userId || userData['a-UserId']
+    };
+
     if (authToken) {
         const tokenData = jwtDecode(authToken);
+        const authType = tokenData?.is_new_registration ? GRANT_TYPES.registration : (GRANT_TYPES[tokenData?.grant_type] || GRANT_TYPES.default);
+        const email = (tokenData?.email) ? SHA256(tokenData?.email).toString() : userData.email;
+        const globalUserId = (tokenData?.global_user_id) ? tokenData?.global_user_id : userData.globalUserId;
+        const signinType = tokenData?.role === IDENTITY_PROVIDERS.otac ? (IDENTITY_PROVIDERS.otac || IDENTITY_PROVIDERS[tokenData?.idp]) : IDENTITY_PROVIDERS.default;
+        const signupDate = (tokenData?.created_date) ? tokenData?.created_date : userData.signupDate;
 
-        userData.authType = tokenData?.is_new_registration ? GRANT_TYPES.registration : (GRANT_TYPES[tokenData?.grant_type] || GRANT_TYPES.default);
-        if (tokenData?.email) userData.email = SHA256(tokenData?.email).toString();
-        if (tokenData?.global_user_id) userData.globalUserId = tokenData?.global_user_id;
-        userData.signinType = tokenData?.role === IDENTITY_PROVIDERS.otac ? (IDENTITY_PROVIDERS.otac || IDENTITY_PROVIDERS[tokenData?.idp]) : IDENTITY_PROVIDERS.default;
-        if (tokenData?.created_date) userData.signupDate = tokenData?.created_date;
+        mappedUserData = {
+            ...mappedUserData,
+            authType,
+            email,
+            globalUserId,
+            signinType,
+            signupDate
+        };
     }
+
+    return mappedUserData;
 };
 
 /**
