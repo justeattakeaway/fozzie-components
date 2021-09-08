@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.3.0
+------------------------------
+* September 8, 2021*
+
+### Fixed
+- `dist` references to resolve import error in consuming application.
+
+
 v1.2.0
 ------------------------------
 * September 3, 2021*
