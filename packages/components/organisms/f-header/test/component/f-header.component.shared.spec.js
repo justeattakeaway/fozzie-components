@@ -6,7 +6,7 @@ let header;
 
 describe('Shared - f-header component tests - @percy', () => {
     beforeEach(() => {
-        header = new Header('organism', 'header-component');
+        header = new Header();
         header.withQuery('&knob-Locale', 'en-GB');
         header.withQuery('&knob-Show offers link', 'true');
         header.withQuery('&knob-Show delivery enquiry', 'true');

@@ -4,7 +4,7 @@ const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 const Offers = require('../../test-utils/component-objects/f-offers.component');
 
-const offers = new Offers('organism', 'v-offers-component');
+const offers = new Offers();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
