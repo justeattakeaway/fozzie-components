@@ -7,6 +7,17 @@ v0.180.1
 ------------------------------
 *September 7, 2021*
 
+### Added
+- Get checkout demo files for AU/NZ
+
+### Changed
+- Moved demo files inside the stories directory
+
+
+v0.180.1
+------------------------------
+*September 7, 2021*
+
 ### Changed
 - Address labels for AU/NZ
 

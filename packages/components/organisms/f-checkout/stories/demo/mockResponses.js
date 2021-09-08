@@ -1,12 +1,14 @@
-import checkoutDelivery from './checkout-delivery.json';
+import checkoutDeliveryUk from './uk/checkout-delivery.json';
+import checkoutDeliveryAu from './au/checkout-delivery.json';
+import checkoutDeliveryNz from './nz/checkout-delivery.json';
 import checkoutDeliveryUserSelectedAsap from './checkout-delivery-user-selected-asap.json';
 import checkoutDeliveryUserSelectedLater from './checkout-delivery-user-selected-later.json';
 import checkoutDeliveryUserSelectedUnavailableTime from './checkout-delivery-user-selected-unavailable-time.json';
-import checkoutCollection from './checkout-collection.json';
+import checkoutCollection from './uk/checkout-collection.json';
 import checkoutCollectionUserSelectedAsap from './checkout-collection-user-selected-asap.json';
 import checkoutCollectionUserSelectedLater from './checkout-collection-user-selected-later.json';
 import checkoutCollectionUserSelectedUnavailableTime from './checkout-collection-user-selected-unavailable-time.json';
-import checkoutDinein from './checkout-dinein.json';
+import checkoutDinein from './uk/checkout-dinein.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import checkoutAvailableFulfilmentNoTimeAvailable from './checkout-available-fulfilment-no-time-available.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
@@ -44,11 +46,23 @@ const httpMethods = {
 };
 
 const requestDefinitions = {
-    checkoutDelivery: {
-        url: '/checkout-delivery.json',
+    checkoutDeliveryUk: {
+        url: '/uk/checkout-delivery.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDelivery
+        payload: checkoutDeliveryUk
+    },
+    checkoutDeliveryAu: {
+        url: '/au/checkout-delivery.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: checkoutDeliveryAu
+    },
+    checkoutDeliveryNz: {
+        url: '/nz/checkout-delivery.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: checkoutDeliveryNz
     },
     checkoutDeliveryUserSelectedAsap: {
         url: '/checkout-delivery-user-selected-asap.json',
@@ -69,7 +83,7 @@ const requestDefinitions = {
         payload: checkoutDeliveryUserSelectedUnavailableTime
     },
     checkoutCollection: {
-        url: '/checkout-collection.json',
+        url: '/uk/checkout-collection.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: checkoutCollection
@@ -93,7 +107,7 @@ const requestDefinitions = {
         payload: checkoutCollectionUserSelectedUnavailableTime
     },
     checkoutDinein: {
-        url: '/checkout-dinein.json',
+        url: '/uk/checkout-dinein.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: checkoutDinein
