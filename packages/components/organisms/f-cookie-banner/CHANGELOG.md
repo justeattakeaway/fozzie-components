@@ -3,12 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (to be added to next version)
+v0.25.0
 ------------------------------
-*September 1, 2021*
+*September 8, 2021*
 
 ### Added
 - Tests to cover version changes in v0.24.0.
+
+### Changed
+- `dk-DK` to `da-DK`. 
 
 
 v0.24.0
