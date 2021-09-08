@@ -162,6 +162,7 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  * @param {string} requestId - The current request Id
  * @param {number} httpStatusCode - The httpStatusCode (only supplied when 200 needs to be overriden)
  * @param {object} req - The `request` context
+ * @return {object} new pageData object
  */
 export const mapPageData = ({
     pageData,
@@ -175,7 +176,7 @@ export const mapPageData = ({
     const displaySize = getDisplaySize();
     const orientation = getOrientation();
 
-    return {
+    const mappedPageData = {
         ...pageData,
         group: featureName,
         name: pageName || pageData.pageName,
@@ -185,4 +186,6 @@ export const mapPageData = ({
         display: displaySize || pageData.display,
         orientation: orientation || pageData.orientation
     };
+
+    return mappedPageData;
 };
