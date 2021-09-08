@@ -1,6 +1,6 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
-import checkoutDelivery from '../../../stories/demo/checkout-delivery.json';
+import checkoutDelivery from '../../../stories/demo/uk/checkout-delivery.json';
 import basketDelivery from '../../../stories/demo/get-basket-delivery.json';
 import basketDeliveryAgeRestricted from '../../../stories/demo/get-basket-delivery-age-restriction.json';
 import checkoutAvailableFulfilment from '../../../stories/demo/checkout-available-fulfilment.json';
