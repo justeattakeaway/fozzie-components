@@ -20,8 +20,6 @@ describe('New - f-cookieBanner Mobile Visual Tests', () => {
         cookieBanner.withQuery('&knob-Locale', tenant);
 
         // Act
-        browser.deleteAllCookies();
-        browser.refresh();
         cookieBanner.load();
 
         // Assert

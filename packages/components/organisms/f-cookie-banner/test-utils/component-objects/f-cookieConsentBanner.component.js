@@ -22,6 +22,8 @@ module.exports = class CookieBanner extends Page {
     load () {
         const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
         this.open(pageUrl);
+        browser.deleteAllCookies();
+        browser.refresh();
         this.waitForComponent();
     }
 

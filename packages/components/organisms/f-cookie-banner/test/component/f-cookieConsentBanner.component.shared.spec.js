@@ -35,8 +35,6 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
             cookieBanner.withQuery('&knob-Locale', tenant);
 
             // Act
-            browser.deleteAllCookies();
-            browser.refresh();
             cookieBanner.load();
 
             // Assert

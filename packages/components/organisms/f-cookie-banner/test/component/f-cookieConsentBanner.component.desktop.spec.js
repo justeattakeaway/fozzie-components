@@ -41,8 +41,6 @@ describe('New - Multi-tenant - f-cookieBanner component tests', () => {
             cookieBanner = new CookieBanner();
             cookieBanner.withQuery('&knob-Locale', tenant);
 
-            browser.deleteAllCookies();
-            browser.refresh();
             cookieBanner.load();
 
             // Act
