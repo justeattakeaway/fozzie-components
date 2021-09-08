@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const SkeletonLoader = require('../../test-utils/component-objects/f-skeletonLoader.component');
 
-const skeletonLoader = new SkeletonLoader('molecule', 'skeleton-loader-component');
+const skeletonLoader = new SkeletonLoader();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

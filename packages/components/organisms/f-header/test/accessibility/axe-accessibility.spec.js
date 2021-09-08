@@ -4,7 +4,7 @@ const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 const Header = require('../../test-utils/component-objects/f-header.component');
 
-const header = new Header('organism', 'header-component');
+const header = new Header();
 
 describe('Accessibility tests', () => {
     forEach(['en-GB', 'en-AU', 'en-NZ', 'en-IE', 'it-IT', 'es-ES', 'da-DK', 'nb-NO'])

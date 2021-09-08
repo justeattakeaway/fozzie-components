@@ -5,30 +5,60 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 
 describe('f-checkout "delivery" component tests', () => {
-    beforeEach(() => {
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true);
+    describe('uk tenant', () => {
+        beforeEach(() => {
+            checkout = new Checkout();
+            checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+            const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+            checkout.open(pageUrl);
+            checkout.waitForComponent();
+        });
+
+        it('should enable a user to submit a postcode with correct characters', () => {
+            // Arrange
+            const addressInfo = {
+                postcode: 'AR51 1AA'
+            };
+
+            // Act
+            checkout.clearBlurField('addressPostcode');
+            checkout.populateCheckoutForm(addressInfo);
+            checkout.goToPayment();
+
+            // Assert
+            expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
+        });
     });
 
-    it('should enable a user to submit a postcode with correct characters', () => {
-        // Arrange
-        const addressInfo = {
-            postcode: 'AR51 1AA'
-        };
+    describe('au tenant', () => {
+        beforeEach(() => {
+            checkout = new Checkout();
+            checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Locale', 'en-AU');
 
-        // Act
-        checkout.clearBlurField('addressPostcode');
-        checkout.populateCheckoutForm(addressInfo);
-        checkout.goToPayment();
+            const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
-        // Assert
-        expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
+            checkout.open(pageUrl);
+            checkout.waitForComponent();
+        });
+
+        it('should prevent more than 50 characters in state field', () => {
+            // Arrange
+            const field = 'addressAdministrativeArea';
+            checkout.clearCheckoutForm(field);
+            const userEntry = 'A'.repeat(50 + 1); // Enter more than allowed
+
+            // Act
+            checkout.setFieldValue(field, userEntry);
+
+            // Assert
+            expect(checkout.getFieldValue(field).length).toEqual(50);
+        });
     });
 });

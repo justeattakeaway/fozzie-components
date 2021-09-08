@@ -3,11 +3,11 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
 
-const legacyCookieBanner = new LegacyCookieBanner('organism', 'cookie-banner-component');
+const legacyCookieBanner = new LegacyCookieBanner();
 
 const CookieConsentBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
 
-const cookieConsentBanner = new CookieConsentBanner('organism', 'cookie-banner-component');
+const cookieConsentBanner = new CookieConsentBanner();
 
 describe('Legacy Accessibility tests', () => {
     it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {

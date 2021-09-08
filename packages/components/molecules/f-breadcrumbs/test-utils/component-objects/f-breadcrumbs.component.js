@@ -1,6 +1,10 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class Breadcrumbs extends Page {
+    constructor() {
+        super('molecule', 'breadcrumbs-component');
+    }
+
     get component () { return $('[data-test-id="breadcrumbs-component"]'); }
 
     open (url) {

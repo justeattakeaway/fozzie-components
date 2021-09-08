@@ -23,6 +23,10 @@ const {
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
+    constructor () {
+        super('organism', 'checkout-component');
+    }
+
     get component () { return $(CHECKOUT_COMPONENT); }
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
@@ -90,6 +94,10 @@ module.exports = class Checkout extends Page {
         addressLocality: {
             get input () { return $(FIELDS.addressLocality.input); },
             get error () { return $(FIELDS.addressLocality.error); }
+        },
+        addressAdministrativeArea: {
+            get input () { return $(FIELDS.addressAdministrativeArea.input); },
+            get error () { return $(FIELDS.addressAdministrativeArea.error); }
         },
         addressPostcode: {
             get input () { return $(FIELDS.addressPostcode.input); },
