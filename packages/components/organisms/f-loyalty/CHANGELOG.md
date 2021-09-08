@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.5.0
 ------------------------------
+*September 08, 2021*
+
+### Added
+- Unauthenticated state for when user is not logged in.
+- Unit tests for the page
+
+
+
+v0.5.0
+------------------------------
 *September 16, 2021*
 
 ### Changed
