@@ -64,6 +64,7 @@ const getCookie = (cookieName, req) => {
  * Maps the anonymous User Id to the UserData 'a-UserId' field.
  *
  * @param {object} req - The `request` context
+ * @return {string} UserId from je-auser cookie
  */
 const mapAnonymousUserId = req => {
     const value = getCookie('je-auser', req);
@@ -75,17 +76,17 @@ const mapAnonymousUserId = req => {
  * Note: if executed clientside then the value will be read from the `window.navigator`
  * otherside it is read from the 'user-agent' header.
  *
- * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
+ * @return {string} userAgentString
  */
-const mapUserAgent = (platformData, req) => {
+const mapUserAgent = req => {
     let userAgentString;
     if (typeof (window) !== 'undefined' && window.navigator) {
         userAgentString = window.navigator.userAgent;
     } else if (req && req.headers) {
         userAgentString = req.headers['user-agent'];
     }
-    if (userAgentString) platformData.userAgent = userAgentString;
+    return userAgentString;
 };
 
 /**
@@ -97,14 +98,20 @@ const mapUserAgent = (platformData, req) => {
  *
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
+ * @return {object} new serversidePlatformData object
  */
 export const mapServersidePlatformData = ({ platformData, req } = {}) => {
-    if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
-    if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
-    if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
-
     const userPercent = getCookie('je-user_percentage', req);
-    if (userPercent) platformData.jeUserPercentage = userPercent;
+
+    const mappedData = {
+        ...platformData,
+        jeUserPercentage: userPercent || platformData.jeUserPercentage,
+        environment: process.env.justEatEnvironment || platformData.environment,
+        version: process.env.FEATURE_VERSION || platformData.version,
+        instancePosition: process.env.INSTANCE_POSITION || platformData.instancePosition
+    };
+
+    return mappedData;
 };
 
 /**
@@ -114,18 +121,25 @@ export const mapServersidePlatformData = ({ platformData, req } = {}) => {
  * @param {string} featureName - The name of the feature
  * @param {string} locale - The current locale
  * @param {object} req - The `request` context
+ * @return {object} new platformData object
  */
 export const mapPlatformData = ({
     platformData, featureName, locale, req
 } = {}) => {
-    platformData.name = featureName;
-    platformData.appType = DEFAULT_APP_TYPE;
-    platformData.applicationId = DEFAULT_APP_ID;
-    mapUserAgent(platformData, req);
-    platformData.branding = COUNTRY_INFO[locale].brand;
-    platformData.country = COUNTRY_INFO[locale].country;
-    platformData.language = COUNTRY_INFO[locale].language;
-    platformData.currency = COUNTRY_INFO[locale].currency;
+    const userAgent = mapUserAgent(req);
+    const mappedPlatformData = {
+        ...platformData,
+        name: featureName,
+        userAgent
+    };
+    mappedPlatformData.appType = DEFAULT_APP_TYPE;
+    mappedPlatformData.applicationId = DEFAULT_APP_ID;
+    mappedPlatformData.branding = COUNTRY_INFO[locale].brand;
+    mappedPlatformData.country = COUNTRY_INFO[locale].country;
+    mappedPlatformData.language = COUNTRY_INFO[locale].language;
+    mappedPlatformData.currency = COUNTRY_INFO[locale].currency;
+
+    return mappedPlatformData;
 };
 
 /**

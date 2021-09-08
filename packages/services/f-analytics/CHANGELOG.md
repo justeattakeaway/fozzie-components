@@ -9,6 +9,7 @@ v0.13.0
 
 ### Changed
 - Read pageData.conversationId from x-je-conversation cookie
+- Updated analytics.mapper functions to return new objects
 
 
 v0.12.0

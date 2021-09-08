@@ -22,7 +22,7 @@ export default class AnalyticService {
     pushPlatformData ({ featureName, locale, customFields } = {}) {
         let platformData = { ...this.store.state[`${this.options.namespace}`].platformData };
 
-        mapPlatformData({
+        platformData = mapPlatformData({
             platformData,
             featureName: featureName || this.options.featureName,
             locale: locale || this.options.locale,
