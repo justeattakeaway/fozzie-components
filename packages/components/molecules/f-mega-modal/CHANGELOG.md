@@ -8,9 +8,15 @@ v0.12.1
 *September 1, 2021*
 
 ### Changed
+- Fixed bug where scrolling is not re-enabled if the modal is destroyed while open for whatever reason.
+
+v0.12.0
+------------------------------
+*August 18, 2021*
+
+### Changed
 - Aligned to PIE designs
 - Updated version of `f-button`.
-- Fixed bug where scrolling is not re-enabled if the modal is destroyed while open for whatever reason.
 
 v0.11.0
 ------------------------------
