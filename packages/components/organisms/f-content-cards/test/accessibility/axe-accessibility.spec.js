@@ -10,8 +10,8 @@ let card2;
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        card1 = new HomePromotionCard1('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
-        card2 = new HomePromotionCard2('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
+        card1 = new HomePromotionCard1();
+        card2 = new HomePromotionCard2();
     });
 
     it('a11y - should test f-contentCard component WCAG compliance', () => {

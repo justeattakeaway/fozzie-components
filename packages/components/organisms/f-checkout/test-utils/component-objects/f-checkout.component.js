@@ -23,6 +23,10 @@ const {
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
+    constructor () {
+        super('organism', 'checkout-component');
+    }
+
     get component () { return $(CHECKOUT_COMPONENT); }
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }

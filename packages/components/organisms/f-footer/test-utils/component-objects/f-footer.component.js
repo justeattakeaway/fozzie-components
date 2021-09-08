@@ -16,6 +16,10 @@ const {
 } = require('./f-footer.selectors');
 
 module.exports = class Footer extends Page {
+    constructor() {
+        super('organism', 'footer-component');
+    }
+
     get component () { return $(FOOTER_COMPONENT); }
 
     get icons () { return $$(FOOTER_ICONS); }

@@ -7,7 +7,7 @@ let footer;
 
 describe('f-footer - Desktop Visual Tests', () => {
     beforeEach(() => {
-        footer = new Footer('organism', 'footer-component');
+        footer = new Footer();
     });
 
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'])

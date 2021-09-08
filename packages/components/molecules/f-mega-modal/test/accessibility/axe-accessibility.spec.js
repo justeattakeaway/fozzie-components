@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const MegaModal = require('../../test-utils/component-objects/f-mega-modal.component');
 
-const megaModal = new MegaModal('molecule', 'mega-modal-component');
+const megaModal = new MegaModal();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

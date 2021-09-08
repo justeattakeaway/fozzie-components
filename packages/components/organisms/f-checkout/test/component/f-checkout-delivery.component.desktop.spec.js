@@ -7,7 +7,7 @@ let checkout;
 describe('f-checkout "delivery" component tests', () => {
     describe('uk tenant', () => {
         beforeEach(() => {
-            checkout = new Checkout('organism', 'checkout-component');
+            checkout = new Checkout();
             checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true);
@@ -36,7 +36,7 @@ describe('f-checkout "delivery" component tests', () => {
 
     describe('au tenant', () => {
         beforeEach(() => {
-            checkout = new Checkout('organism', 'checkout-component');
+            checkout = new Checkout();
             checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
