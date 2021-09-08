@@ -22,7 +22,7 @@ export default class BrazeAdapter {
     }) {
         // create a key to identify the section from which the logs reference for later lookup if needed if no tags
         // apply global keyword
-        const key = `${tags.length ? tags.split('|') : 'global'}--${userId}`;
+        const loggingAdapterKey = `${tags.length > 0 ? tags.split('|') : 'global'}--${userId}`;
 
         const consumerOptions = {
             enabledCardTypes,
@@ -32,7 +32,7 @@ export default class BrazeAdapter {
             interceptInAppMessageClickEvents,
             customFilters,
             logger,
-            key
+            key: loggingAdapterKey
         };
 
         this._consumerRegistry = GetConsumerRegistry({
@@ -47,9 +47,9 @@ export default class BrazeAdapter {
 
         dispatcherEventStream.publish(LOGGER, {
             type: LOG_INFO,
-            message: `Braze Adapter Section: (Adapter) Key: (BrazeAdapter--adapter--${key}): Braze Adapter has been initialised by the consumer.`,
+            message: `Braze Adapter Section: (Adapter) Key: (BrazeAdapter--adapter--${loggingAdapterKey}): Braze Adapter has been initialised by the consumer.`,
             data: {
-                key,
+                key: loggingAdapterKey,
                 enableLogging,
                 sessionTimeout,
                 enabledCardTypes,
