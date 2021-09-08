@@ -270,11 +270,8 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
             .withQuery('&knob-Is ASAP available', false)
             .withQuery('&knob-Locale', 'en-AU');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the state input.', () => {
