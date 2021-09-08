@@ -8,7 +8,7 @@ let checkout;
 
 describe('f-checkout "guest" component tests - @browserstack', () => {
     beforeEach(() => {
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Is ASAP available', true);

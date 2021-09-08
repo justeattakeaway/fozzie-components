@@ -6,7 +6,7 @@ let checkout;
 describe('f-checkout - Invalid - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'invalid-url');
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
