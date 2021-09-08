@@ -388,7 +388,7 @@ describe('Analytic Service ::', () => {
             };
 
             // Act
-            service.pushPageData({ customFields: { custom1: 'one', custom2: 'two' } });
+            service.pushPageData({ customFields: { custom1: expected.custom1, custom2: expected.custom2 } });
 
             // Assert
             expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
