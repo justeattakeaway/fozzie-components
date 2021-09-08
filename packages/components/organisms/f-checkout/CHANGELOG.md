@@ -11,6 +11,14 @@ v1.0.0
 - Return beta to master. Component has JETSansDigital font.
 
 
+v1.0.0-beta.2
+------------------------------
+*September 8, 2021*
+
+### Changed
+- Updated font weights after design review.
+
+
 v1.0.0-beta.1
 ------------------------------
 *September 6, 2021*
