@@ -145,7 +145,7 @@ class BrazeConsumer {
     }
 
     /**
-     * Function that loops over all loggerCallbacks and calls them
+     * Function that returns logger object that is passed as part of the instantiation of the class
      * @returns {}
      */
     getLogger () {
