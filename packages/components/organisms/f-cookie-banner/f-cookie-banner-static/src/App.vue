@@ -1,5 +1,5 @@
 <template>
-    <cookie-banner locale='dk-DK' />
+    <cookie-banner locale='da-DK' />
 </template>
 
 <script>
