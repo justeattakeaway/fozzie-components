@@ -101,10 +101,11 @@ const mapUserAgent = (platformData, req) => {
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
  */
-export const mapServersidePlatformData = ({ platformData, req } = {}) => {
+export const mapServerSidePlatformData = ({ platformData, req } = {}) => {
     if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
     if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
     if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
+    if (process.env.IS_PILOT) platformData.isPilot = process.env.IS_PILOT;
 
     const userPercent = getCookie('je-user_percentage', req);
     if (userPercent) platformData.jeUserPercentage = userPercent;
