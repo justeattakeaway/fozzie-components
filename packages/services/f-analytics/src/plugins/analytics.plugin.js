@@ -6,9 +6,9 @@ import defaultOptions from '../defaultOptions';
 const prepareServersideValues = (store, req, options) => {
     // Only available serverside
     if (typeof (window) === 'undefined') {
-        const platformData = { ...store.state[`${options.namespace}`].platformData };
+        let platformData = { ...store.state[`${options.namespace}`].platformData };
 
-        mapServersidePlatformData({ platformData, req });
+        platformData = mapServersidePlatformData({ platformData, req });
 
         store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
     }
