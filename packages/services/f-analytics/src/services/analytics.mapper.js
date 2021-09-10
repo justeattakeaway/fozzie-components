@@ -63,14 +63,12 @@ const getCookie = (cookieName, req) => {
 /**
  * Maps the anonymous User Id to the UserData 'a-UserId' field.
  *
- * @param {object} userData - A reference to the current UserData instance
  * @param {object} req - The `request` context
+ * @return {string} UserId from je-auser cookie
  */
-const mapAnonymousUserId = (userData, req) => {
+const mapAnonymousUserId = req => {
     const value = getCookie('je-auser', req);
-    if (value) {
-        userData['a-UserId'] = value;
-    }
+    return value;
 };
 
 /**
@@ -78,17 +76,17 @@ const mapAnonymousUserId = (userData, req) => {
  * Note: if executed clientside then the value will be read from the `window.navigator`
  * otherside it is read from the 'user-agent' header.
  *
- * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
+ * @return {string} userAgentString
  */
-const mapUserAgent = (platformData, req) => {
+const mapUserAgent = req => {
     let userAgentString;
     if (typeof (window) !== 'undefined' && window.navigator) {
         userAgentString = window.navigator.userAgent;
     } else if (req && req.headers) {
         userAgentString = req.headers['user-agent'];
     }
-    if (userAgentString) platformData.userAgent = userAgentString;
+    return userAgentString;
 };
 
 /**
@@ -100,15 +98,21 @@ const mapUserAgent = (platformData, req) => {
  *
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
+ * @return {object} new serverSidePlatformData object
  */
 export const mapServerSidePlatformData = ({ platformData, req } = {}) => {
-    if (process.env.justEatEnvironment) platformData.environment = process.env.justEatEnvironment;
-    if (process.env.FEATURE_VERSION) platformData.version = process.env.FEATURE_VERSION;
-    if (process.env.INSTANCE_POSITION) platformData.instancePosition = process.env.INSTANCE_POSITION;
-    if (process.env.IS_PILOT) platformData.isPilot = process.env.IS_PILOT;
-
     const userPercent = getCookie('je-user_percentage', req);
-    if (userPercent) platformData.jeUserPercentage = userPercent;
+
+    const mappedData = {
+        ...platformData,
+        jeUserPercentage: userPercent || platformData.jeUserPercentage,
+        environment: process.env.justEatEnvironment || platformData.environment,
+        version: process.env.FEATURE_VERSION || platformData.version,
+        instancePosition: process.env.INSTANCE_POSITION || platformData.instancePosition,
+        isPilot: process.env.IS_PILOT || platformData.isPilot
+    };
+
+    return mappedData;
 };
 
 /**
@@ -118,18 +122,25 @@ export const mapServerSidePlatformData = ({ platformData, req } = {}) => {
  * @param {string} featureName - The name of the feature
  * @param {string} locale - The current locale
  * @param {object} req - The `request` context
+ * @return {object} new platformData object
  */
 export const mapPlatformData = ({
     platformData, featureName, locale, req
 } = {}) => {
-    platformData.name = featureName;
-    platformData.appType = DEFAULT_APP_TYPE;
-    platformData.applicationId = DEFAULT_APP_ID;
-    mapUserAgent(platformData, req);
-    platformData.branding = COUNTRY_INFO[locale].brand;
-    platformData.country = COUNTRY_INFO[locale].country;
-    platformData.language = COUNTRY_INFO[locale].language;
-    platformData.currency = COUNTRY_INFO[locale].currency;
+    const userAgent = mapUserAgent(req);
+    const mappedPlatformData = {
+        ...platformData,
+        name: featureName,
+        userAgent
+    };
+    mappedPlatformData.appType = DEFAULT_APP_TYPE;
+    mappedPlatformData.applicationId = DEFAULT_APP_ID;
+    mappedPlatformData.branding = COUNTRY_INFO[locale].brand;
+    mappedPlatformData.country = COUNTRY_INFO[locale].country;
+    mappedPlatformData.language = COUNTRY_INFO[locale].language;
+    mappedPlatformData.currency = COUNTRY_INFO[locale].currency;
+
+    return mappedPlatformData;
 };
 
 /**
@@ -140,18 +151,34 @@ export const mapPlatformData = ({
  * @param {object} userData - A reference to the current UserData instance
  * @param {string} authToken - The current authorisation token
  * @param {object} req - The `request` context
+ * @return {object} new userData object
  */
 export const mapUserData = ({ userData, authToken, req } = {}) => {
-    mapAnonymousUserId(userData, req);
+    const userId = mapAnonymousUserId(req);
+    let mappedUserData = {
+        ...userData,
+        'a-UserId': userId || userData['a-UserId']
+    };
+
     if (authToken) {
         const tokenData = jwtDecode(authToken);
+        const authType = tokenData?.is_new_registration ? GRANT_TYPES.registration : (GRANT_TYPES[tokenData?.grant_type] || GRANT_TYPES.default);
+        const email = (tokenData?.email) ? SHA256(tokenData?.email).toString() : userData.email;
+        const globalUserId = (tokenData?.global_user_id) ? tokenData?.global_user_id : userData.globalUserId;
+        const signinType = tokenData?.role === IDENTITY_PROVIDERS.otac ? (IDENTITY_PROVIDERS.otac || IDENTITY_PROVIDERS[tokenData?.idp]) : IDENTITY_PROVIDERS.default;
+        const signupDate = (tokenData?.created_date) ? tokenData?.created_date : userData.signupDate;
 
-        userData.authType = tokenData?.is_new_registration ? GRANT_TYPES.registration : (GRANT_TYPES[tokenData?.grant_type] || GRANT_TYPES.default);
-        if (tokenData?.email) userData.email = SHA256(tokenData?.email).toString();
-        if (tokenData?.global_user_id) userData.globalUserId = tokenData?.global_user_id;
-        userData.signinType = tokenData?.role === IDENTITY_PROVIDERS.otac ? (IDENTITY_PROVIDERS.otac || IDENTITY_PROVIDERS[tokenData?.idp]) : IDENTITY_PROVIDERS.default;
-        if (tokenData?.created_date) userData.signupDate = tokenData?.created_date;
+        mappedUserData = {
+            ...mappedUserData,
+            authType,
+            email,
+            globalUserId,
+            signinType,
+            signupDate
+        };
     }
+
+    return mappedUserData;
 };
 
 /**
@@ -160,25 +187,33 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  * @param {object} pageData - A reference to the current PageData instance
  * @param {string} featureName - The name of the feature
  * @param {string} pageName - The name of the page
- * @param {string} conversationId - The current conversation Id
  * @param {string} requestId - The current request Id
  * @param {number} httpStatusCode - The httpStatusCode (only supplied when 200 needs to be overriden)
+ * @param {object} req - The `request` context
+ * @return {object} new pageData object
  */
 export const mapPageData = ({
     pageData,
     featureName,
     pageName,
-    conversationId,
     requestId,
-    httpStatusCode
+    httpStatusCode,
+    req
 } = {}) => {
-    pageData.group = featureName;
-    if (pageName) pageData.name = pageName;
-    if (conversationId) pageData.conversationId = conversationId;
-    if (requestId) pageData.requestId = requestId;
-    if (httpStatusCode) pageData.httpStatusCode = httpStatusCode;
-    const diplaySize = getDisplaySize();
-    if (diplaySize) pageData.display = diplaySize;
+    const conversationId = getCookie('x-je-conversation', req);
+    const displaySize = getDisplaySize();
     const orientation = getOrientation();
-    if (orientation) pageData.orientation = orientation;
+
+    const mappedPageData = {
+        ...pageData,
+        group: featureName,
+        name: pageName || pageData.pageName,
+        conversationId: conversationId || pageData.conversationId,
+        requestId: requestId || pageData.requestId,
+        httpStatusCode: httpStatusCode || pageData.httpStatusCode,
+        display: displaySize || pageData.display,
+        orientation: orientation || pageData.orientation
+    };
+
+    return mappedPageData;
 };

@@ -4,11 +4,11 @@ import { mapServerSidePlatformData } from '../services/analytics.mapper';
 import defaultOptions from '../defaultOptions';
 
 const prepareServerSideValues = (store, req, options) => {
-    // Only available serverside
+    // Only available server side
     if (typeof (window) === 'undefined') {
-        const platformData = { ...store.state[`${options.namespace}`].platformData };
+        let platformData = { ...store.state[`${options.namespace}`].platformData };
 
-        mapServerSidePlatformData({ platformData, req });
+        platformData = mapServerSidePlatformData({ platformData, req });
 
         store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
     }
