@@ -2125,10 +2125,8 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-braze-adapter@4.0.0-beta.4":
-  version "4.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-4.0.0-beta.4.tgz#c5ba0da5e489f3d55f626ccc9a279ab05e307b5c"
-  integrity sha512-OfO1r0D2bkDGqYBD66mtuciTtpldkqJE5KCNyA56KJQp6ES8/oJ8S/xAfoEz1usJmPauRj4kehFds5yepKBcBg==
+"@justeat/f-braze-adapter@file:packages/components/organisms/f-content-cards/.yalc/@justeat/f-braze-adapter":
+  version "4.0.0-beta.5"
   dependencies:
     date-fns "2.16.1"
     lodash.findindex "4.6.0"
