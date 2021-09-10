@@ -337,6 +337,7 @@ export default {
 
                     // if the address is still missing fields, return here
                     if (!info) {
+                        this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                         return false;
                     }
 
