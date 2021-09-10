@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.14.0
+------------------------------
+*September 10, 2021*
+
+### Added
+- Support for isPilot property
+
+
 v0.13.0
 ------------------------------
 *September 07, 2021*
@@ -10,14 +18,6 @@ v0.13.0
 ### Changed
 - Read pageData.conversationId from x-je-conversation cookie
 - Updated analytics.mapper functions to return new objects
-
-
-v0.13.0
-------------------------------
-*September 9, 2021*
-
-### Added
-- Support for isPilot property
 
 
 v0.12.0
