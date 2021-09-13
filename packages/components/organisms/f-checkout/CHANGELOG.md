@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.181.0
+------------------------------
+*September 14, 2021*
+
+### Changed
+- `trackDuplicateOrderWarnDialog` to `trackDialogEvent` to handle different dialog events.
+
+### Added
+- Analytics tracking for all `ErrorDialog` events.
+
+
 v0.180.1
 ------------------------------
 *September 7, 2021*
