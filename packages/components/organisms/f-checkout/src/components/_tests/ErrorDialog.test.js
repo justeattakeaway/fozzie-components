@@ -393,7 +393,7 @@ describe('ErrorDialog', () => {
             });
         });
 
-        it('should make a call to `trackDialogEvent` with a `duplicateOrderMessage` when `ErrorCode` refers to a duplicate order ', () => {
+        it('should make a call to `trackDialogEvent` with a error message', () => {
             // Arrange
             const trackDialogEventSpy = jest.spyOn(ErrorDialog.methods, 'trackDialogEvent');
 
@@ -410,26 +410,6 @@ describe('ErrorDialog', () => {
 
             // Assert
             expect(trackDialogEventSpy).toHaveBeenCalledWith(duplicateOrderMessage);
-        });
-
-        it('should make a call to `trackDialogEvent` with a `nonDuplicateOrderError` if `ErrorCode` does not refer to a duplicate order ', () => {
-            // Arrange
-            const trackDialogEventSpy = jest.spyOn(ErrorDialog.methods, 'trackDialogEvent');
-            const nonDuplicateOrderError = { code: 'FULFILMENT_TIME_UNAVAILABLE', isDuplicateOrderError: false };
-
-            // Act
-            shallowMount(ErrorDialog, {
-                store: createStore({
-                    ...defaultCheckoutState,
-                    message: defaultMessage
-                }),
-                i18n,
-                localVue,
-                propsData
-            });
-
-            // Assert
-            expect(trackDialogEventSpy).toHaveBeenCalledWith(nonDuplicateOrderError);
         });
     });
 });

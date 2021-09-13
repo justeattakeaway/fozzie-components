@@ -1,10 +1,6 @@
 import { mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode } from '../services/mapper';
 import experimentService from '../services/experimentService';
-import {
-    VUEX_CHECKOUT_MODULE,
-    HEADER_LOW_VALUE_ORDER_EXPERIMENT,
-    ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
-} from '../constants';
+import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../constants';
 import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from './mutation-types';
 
 export default {
@@ -124,9 +120,7 @@ export default {
                 if (!trackedErrors.includes(mappedError)) {
                     trackedErrors.push(mappedError);
 
-                    const action = mappedError === ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE ? 'inline_error' : 'error';
-
-                    dispatch('trackFormInteraction', { action, error: mappedError });
+                    dispatch('trackFormInteraction', { action: 'error', error: mappedError });
                 }
             });
         },
