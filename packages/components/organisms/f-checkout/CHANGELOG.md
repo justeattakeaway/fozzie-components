@@ -5,11 +5,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.181.0
 ------------------------------
-*September 10, 2021*
+*September 13, 2021*
 
 ### Changed
 - Updated `f-checkout.component.js` with simplified tests that accept the tab loop from the tests as a parameter and removed hard coded functions.
 - Updated `axe-accessibility.spec.js` tests to support refactored test structure.
+
+v0.180.2
+------------------------------
+*September 8, 2021*
+
+### Added
+- Get checkout demo files for AU/NZ
+
+### Changed
+- Moved demo files inside the stories directory
 
 
 v0.180.1
