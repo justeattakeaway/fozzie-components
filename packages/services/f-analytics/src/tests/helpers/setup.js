@@ -15,7 +15,8 @@ const defaultState = {
         jeUserPercentage: undefined,
         currency: undefined,
         version: undefined,
-        instancePosition: undefined
+        instancePosition: undefined,
+        isPilot: undefined
     },
     userData: {
         'a-UserId': undefined,
@@ -50,7 +51,8 @@ const modifiedState = {
         jeUserPercentage: 88,
         currency: 'zud',
         version: '9.8.7.6',
-        instancePosition: '999'
+        instancePosition: '999',
+        isPilot: false
     },
     userData: {
         'a-UserId': 'xxxx-xxxx',
