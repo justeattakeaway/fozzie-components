@@ -331,77 +331,90 @@ describe('Analytic Service ::', () => {
             'should set the correct pageData given window width is %p and window height is %p',
             (winWidth, winHeight, displayExpected, orientationExpected) => {
                 // Arrange
-                const expected = {
-                    ...defaultState.pageData,
-                    name: 'test-page-name',
-                    group: 'test-feature-name',
-                    orientation: orientationExpected,
-                    display: displayExpected
-                };
                 mockWindow({ winWidth, winHeight });
 
                 // Act
-                service.pushPageData({ pageName: expected.name });
+                service.pushPageData();
 
                 // Assert
-                expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+                expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                    pageData: expect.objectContaining({
+                        orientation: orientationExpected,
+                        display: displayExpected
+                    })
+                }));
             }
         );
 
-        it('should set conversationId and requestId values when provided', () => {
+        it('should set requestId value when provided', () => {
             // Arrange
             const expected = {
-                ...defaultState.pageData,
-                group: 'test-feature-name',
-                name: 'test-page-name',
-                conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
-                requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
-                orientation: 'Landscape',
-                display: 'mid'
+                requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e'
             };
 
             // Act
-            service.pushPageData({ pageName: expected.name, conversationId: expected.conversationId, requestId: expected.requestId });
+            service.pushPageData({ requestId: expected.requestId });
 
             // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                pageData: expect.objectContaining({
+                    requestId: expected.requestId
+                })
+            }));
         });
 
         it('should override the httpStatusCode when provided', () => {
             // Arrange
             const expected = {
-                ...defaultState.pageData,
-                name: 'test-page-name',
-                group: 'test-feature-name',
-                httpStatusCode: 404,
-                orientation: 'Landscape',
-                display: 'mid'
+                httpStatusCode: 404
             };
 
             // Act
-            service.pushPageData({ pageName: expected.name, httpStatusCode: expected.httpStatusCode });
+            service.pushPageData({ httpStatusCode: expected.httpStatusCode });
 
             // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                pageData: expect.objectContaining({
+                    httpStatusCode: expected.httpStatusCode
+                })
+            }));
         });
 
         it('should append custom fields when supplied', () => {
             // Arrange
             const expected = {
-                ...defaultState.pageData,
-                name: 'test-page-name',
-                group: 'test-feature-name',
-                orientation: 'Landscape',
-                display: 'mid',
                 custom1: 'one',
                 custom2: 'two'
             };
 
             // Act
-            service.pushPageData({ pageName: expected.name, customFields: { custom1: 'one', custom2: 'two' } });
+            service.pushPageData({ customFields: { custom1: expected.custom1, custom2: expected.custom2 } });
 
             // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith({ pageData: { ...expected } });
+            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                pageData: expect.objectContaining({ custom1: expected.custom1, custom2: expected.custom2 })
+            }));
+        });
+
+        it('should set the conversationId value when x-je-conversation cookie exists', () => {
+            // Arrange
+            const expected = {
+                conversationId: 'f0740341-4369-437d-bcce-735a71ee5b78'
+            };
+
+            get = jest.fn();
+            when(get).calledWith('x-je-conversation').mockReturnValue(expected.conversationId);
+            Cookies.mockImplementation(() => ({ get }));
+
+            // Act
+            service.pushPageData();
+
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                pageData: expect.objectContaining({
+                    conversationId: expected.conversationId
+                })
+            }));
         });
     });
 

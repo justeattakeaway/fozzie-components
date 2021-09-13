@@ -317,11 +317,14 @@ describe('Analytics Plugin ::', () => {
             process.env.justEatEnvironment = 'testing123';
             process.env.FEATURE_VERSION = '4.3.2.1';
             process.env.INSTANCE_POSITION = '099';
+            process.env.IS_PILOT = false;
+
             const expected = {
                 ...defaultState.platformData,
                 environment: process.env.justEatEnvironment,
                 version: process.env.FEATURE_VERSION,
                 instancePosition: process.env.INSTANCE_POSITION,
+                isPilot: process.env.IS_PILOT,
                 jeUserPercentage: '35'
             };
 
