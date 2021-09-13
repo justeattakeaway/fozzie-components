@@ -99,8 +99,8 @@ export default {
             default: null
         },
         tags: {
-            type: Array,
-            default: () => ['global']
+            type: String,
+            default: 'content-cards'
         }
     },
     data: () => ({
@@ -166,7 +166,7 @@ export default {
         }
     },
     mounted () {
-        this.loggingKey = `f-content-cards--${this.userId}--${this.tags.join(' ')}`
+        this.loggingKey = `f-content-cards--${this.userId}--${this.tags}`;
         this.setupMetadata(this.apiKey, this.userId);
     },
     /**
@@ -247,8 +247,8 @@ export default {
                     callbacks: {
                         handleContentCards: this.metadataContentCards
                     },
-                    logger: this.$logger
-                    // tags: this.tags
+                    logger: this.$logger,
+                    tags: this.tags
                 });
 
                 this.$logger.logInfo(
