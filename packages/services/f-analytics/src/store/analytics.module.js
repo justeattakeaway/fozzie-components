@@ -20,7 +20,8 @@ export default {
             jeUserPercentage: undefined,
             currency: undefined,
             version: undefined,
-            instancePosition: undefined
+            instancePosition: undefined,
+            isPilot: undefined
         },
         userData: {
             'a-UserId': undefined,

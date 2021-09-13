@@ -1,14 +1,14 @@
 import analyticsModule from '../store/analytics.module';
 import AnalyticService from '../services/analytics.service';
-import { mapServersidePlatformData } from '../services/analytics.mapper';
+import { mapServerSidePlatformData } from '../services/analytics.mapper';
 import defaultOptions from '../defaultOptions';
 
-const prepareServersideValues = (store, req, options) => {
-    // Only available serverside
+const prepareServerSideValues = (store, req, options) => {
+    // Only available server side
     if (typeof (window) === 'undefined') {
         let platformData = { ...store.state[`${options.namespace}`].platformData };
 
-        platformData = mapServersidePlatformData({ platformData, req });
+        platformData = mapServerSidePlatformData({ platformData, req });
 
         store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
     }
@@ -67,7 +67,7 @@ export default ({ store, req }, inject, _options) => {
 
     registerStoreModule(store, options);
 
-    prepareServersideValues(store, req, options);
+    prepareServerSideValues(store, req, options);
 
     const service = new AnalyticService(store, req, options);
 

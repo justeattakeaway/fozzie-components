@@ -98,9 +98,9 @@ const mapUserAgent = req => {
  *
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
- * @return {object} new serversidePlatformData object
+ * @return {object} new serverSidePlatformData object
  */
-export const mapServersidePlatformData = ({ platformData, req } = {}) => {
+export const mapServerSidePlatformData = ({ platformData, req } = {}) => {
     const userPercent = getCookie('je-user_percentage', req);
 
     const mappedData = {
@@ -108,7 +108,8 @@ export const mapServersidePlatformData = ({ platformData, req } = {}) => {
         jeUserPercentage: userPercent || platformData.jeUserPercentage,
         environment: process.env.justEatEnvironment || platformData.environment,
         version: process.env.FEATURE_VERSION || platformData.version,
-        instancePosition: process.env.INSTANCE_POSITION || platformData.instancePosition
+        instancePosition: process.env.INSTANCE_POSITION || platformData.instancePosition,
+        isPilot: process.env.IS_PILOT || platformData.isPilot
     };
 
     return mappedData;
