@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.180.2
+------------------------------
+*September 8, 2021*
+
+### Added
+- Get checkout demo files for AU/NZ
+
+### Changed
+- Moved demo files inside the stories directory
+
+
 v0.180.1
 ------------------------------
 *September 7, 2021*
