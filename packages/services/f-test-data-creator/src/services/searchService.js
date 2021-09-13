@@ -7,8 +7,6 @@ module.exports = class SearchService {
         this.searchApiService = new SearchApiService(configuration);
         this.postcode = configuration.Services.Search.Postcode;
         this.tenant = configuration.tenant;
-        this.restaurantId;
-        this.restaurantSEO;
     }
 
     async getAvailableRestaurants () {
@@ -17,9 +15,8 @@ module.exports = class SearchService {
         const result = data.Restaurants.find(restaurant => restaurant.Id === this.preferredRestaurantIds[0]);
         // throw an exception here if the result is null
 
-        this.restaurantId = result.Id;
-        this.restaurantSEO = result.UniqueName;
+        console.log('result of restaurant SEO and Id', result);
 
-        return `restaurant Id: ${this.restaurantId} and restaurant SEO: ${this.restaurantSEO}`;
+        return result;
     }
 };
