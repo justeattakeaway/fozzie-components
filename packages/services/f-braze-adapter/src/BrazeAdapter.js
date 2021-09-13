@@ -18,11 +18,11 @@ export default class BrazeAdapter {
         interceptInAppMessageClickEvents,
         customFilters,
         logger,
-        tags = []
+        tags = 'global'
     }) {
         // create a key to identify the section from which the logs reference for later lookup if needed if no tags
         // apply global keyword
-        const loggingAdapterKey = `${tags.length > 0 ? tags.split('|') : 'global'}--${userId}`;
+        const loggingAdapterKey = `${tags}--${userId}`;
 
         const consumerOptions = {
             enabledCardTypes,
@@ -32,7 +32,8 @@ export default class BrazeAdapter {
             interceptInAppMessageClickEvents,
             customFilters,
             logger,
-            key: loggingAdapterKey
+            userId,
+            tags
         };
 
         this._consumerRegistry = GetConsumerRegistry({
