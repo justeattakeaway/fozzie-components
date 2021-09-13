@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-development-context",
   "description": "A package to provide development context options for Storybook and WebDriver",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "main": "dist/f-development-context.umd.min.js",
   "module": "dist/f-development-context.esm.js",
   "source": "src/index.js",
