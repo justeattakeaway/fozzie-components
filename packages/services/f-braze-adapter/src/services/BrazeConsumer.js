@@ -36,16 +36,17 @@ class BrazeConsumer {
         interceptInAppMessageClickEvents = {},
         logger = {},
         customFilters = [],
-        key
+        userId,
+        tags
     }) {
         this.$logger = logger;
         // temp logging function as dispatcher event stream is not available until the consumer is registered
         const logWhileInitialising = ({ type, message, data }) => {
-            logger[type](message, null, data);
+            logger[type](message, null, { data, tags });
         };
 
         // key for logging
-        this.loggingConsumerKey = `BrazeAdapter--consumer--${key}`;
+        this.loggingConsumerKey = `BrazeAdapter--consumer--${tags}--${userId}`;
         // set timer so we Know how long the process takes between initialisation and receiving content cards
         this.consumerRegisteredUnix = Date.now();
         this.consumerRegisteredLocale = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });

@@ -29,14 +29,15 @@ class BrazeConsumerRegistry {
         apiKey,
         userId,
         enableLogging,
-        tags = []
+        tags = 'global'
     }) {
         if (!registryInstance) {
             const dispatcher = new BrazeDispatcher({
                 sessionTimeout,
                 apiKey,
                 userId,
-                enableLogging
+                enableLogging,
+                tags
             });
 
             registryInstance = new BrazeConsumerRegistry(dispatcher, userId, tags);
@@ -74,9 +75,21 @@ class BrazeConsumerRegistry {
     applyLogger (type, message, data) {
         this.consumers.reduce((acc, consumer) => [...acc, consumer.getLogger()], [])
             .forEach(logger => {
+                // this removes any null or undefined values
+                const loggingData = Object.entries({
+                    data,
+                    tags: this.loggingTags,
+                    Count: data.count
+                })
+                .reduce((a, [k, v]) => {
+                    if (v != null) {
+                        a[k] = v;
+                    }
+                    return a;
+                }, {});
                 // adding tags in so logs can be sorted
                 if (logger[type] !== undefined && typeof logger[type] === 'function') {
-                    logger[type](message, null, { ...data, tags: this.loggingTags.join(' ') });
+                    logger[type](message, null, loggingData);
                 }
             });
     }

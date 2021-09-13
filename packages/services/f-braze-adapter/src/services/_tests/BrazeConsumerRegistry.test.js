@@ -135,7 +135,7 @@ describe('BrazeConsumerRegistry', () => {
             consumerRegistry.applyLogger('logError', mockMessage, mockData);
 
             // Assert
-            expect(mockConsumerOptions.logger.logError).toHaveBeenCalledWith(mockMessage, null, { ...mockData, tags: '' });
+            expect(mockConsumerOptions.logger.logError).toHaveBeenCalledWith(mockMessage, null, { data: mockData, tags: 'global' });
         });
     });
 
