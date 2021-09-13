@@ -281,6 +281,7 @@ Although this component can gather most data with only the `options` object it a
 | `justEatEnvironment` | Server Environment Variable | `staging` | This will indicate the current environment |
 | `FEATURE_VERSION` | Server Environment Variable | `1.12.345.0` | This will indicate the current version of the feature |
 | `INSTANCE_POSITION` | Server Environment Variable | `004` | This will indicate the current position of the AWD EC2 instance |
+| `IS_PILOT` | Server Environment Variable | false | This will indicate whether the server is a pilot or not |
 | `je-user_percentage` | cookie (httponly) | `34` | This will indicate the user percent value (this assist with experiment bucketing) |
 </br>
 
