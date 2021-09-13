@@ -93,9 +93,10 @@ export default {
             modalContext.open();
         }
 
-        if (this.isDuplicateOrderError) {
-            this.trackDuplicateOrderWarnDialog();
-        }
+        this.trackDialogEvent({
+            code: this.message?.code,
+            isDuplicateOrderError: this.isDuplicateOrderError
+        });
     },
 
     methods: {
@@ -104,7 +105,7 @@ export default {
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackDuplicateOrderWarnDialog'
+            'trackDialogEvent'
         ]),
 
         getModalContext () {

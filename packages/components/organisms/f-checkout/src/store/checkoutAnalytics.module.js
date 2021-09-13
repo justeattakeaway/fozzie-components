@@ -1,6 +1,10 @@
 import { mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode } from '../services/mapper';
 import experimentService from '../services/experimentService';
-import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../constants';
+import {
+    VUEX_CHECKOUT_MODULE,
+    HEADER_LOW_VALUE_ORDER_EXPERIMENT,
+    ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
+} from '../constants';
 import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from './mutation-types';
 
 export default {
@@ -88,13 +92,22 @@ export default {
         },
 
         /**
-         * Pushes details that the Duplicated Order Warning dialog has been loaded
+         * Pushes details that an error dialog has been loaded
          */
-        trackDuplicateOrderWarnDialog () {
+        trackDialogEvent (_, action) {
+            let eventAction;
+
+            if (action.isDuplicateOrderError) {
+                eventAction = 'dialog_duplicate_order_warning';
+            } else {
+                const error = action.code.toLowerCase();
+                eventAction = `dialog_${error}_error`;
+            }
+
             window.dataLayer.push({
                 event: 'trackEvent',
                 eventCategory: 'engagement',
-                eventAction: 'dialog_duplicate_order_warning',
+                eventAction,
                 eventLabel: 'view_dialog'
             });
         },
@@ -111,7 +124,9 @@ export default {
                 if (!trackedErrors.includes(mappedError)) {
                     trackedErrors.push(mappedError);
 
-                    dispatch('trackFormInteraction', { action: 'error', error: mappedError });
+                    const action = mappedError === ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE ? 'inline_error' : 'error';
+
+                    dispatch('trackFormInteraction', { action, error: mappedError });
                 }
             });
         },
