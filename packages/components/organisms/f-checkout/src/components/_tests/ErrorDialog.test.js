@@ -29,7 +29,8 @@ describe('ErrorDialog', () => {
     };
 
     const duplicateOrderMessage = {
-        code: 'DuplicateOrder'
+        code: 'DuplicateOrder',
+        isDuplicateOrderError: true
     };
 
     afterEach(() => {
@@ -392,9 +393,9 @@ describe('ErrorDialog', () => {
             });
         });
 
-        it('should make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` refers to a duplicate order ', () => {
+        it('should make a call to `trackDialogEvent` with a `duplicateOrderMessage` when `ErrorCode` refers to a duplicate order ', () => {
             // Arrange
-            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
+            const trackDialogEventSpy = jest.spyOn(ErrorDialog.methods, 'trackDialogEvent');
 
             // Act
             shallowMount(ErrorDialog, {
@@ -408,12 +409,13 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(trackDuplicateOrderWarnDialogSpy).toHaveBeenCalled();
+            expect(trackDialogEventSpy).toHaveBeenCalledWith(duplicateOrderMessage);
         });
 
-        it('should not make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` does not refer to a duplicate order ', () => {
+        it('should make a call to `trackDialogEvent` with a `nonDuplicateOrderError` if `ErrorCode` does not refer to a duplicate order ', () => {
             // Arrange
-            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
+            const trackDialogEventSpy = jest.spyOn(ErrorDialog.methods, 'trackDialogEvent');
+            const nonDuplicateOrderError = { code: 'FULFILMENT_TIME_UNAVAILABLE', isDuplicateOrderError: false };
 
             // Act
             shallowMount(ErrorDialog, {
@@ -427,7 +429,7 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(trackDuplicateOrderWarnDialogSpy).not.toHaveBeenCalled();
+            expect(trackDialogEventSpy).toHaveBeenCalledWith(nonDuplicateOrderError);
         });
     });
 });
