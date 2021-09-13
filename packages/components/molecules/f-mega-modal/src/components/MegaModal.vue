@@ -162,6 +162,11 @@ export default {
         }
     },
 
+    beforeDestroy () {
+        // In case modal is destroyed without being closed first, re-enable scrolling
+        enableBodyScroll(this.$refs.megaModalDocument);
+    },
+
     methods: {
         /**
          * Handles user key presses to help improve acccessibilty for keyboard users.
