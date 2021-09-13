@@ -8,11 +8,11 @@ module.exports = class BasketService {
         this.emailAddress = emailAddress;
     }
 
-    async createBasket(token, serviceType, menuId, restaurantSEO) {
+    async createBasket (token, serviceType, menuId, restaurantSEO) {
         console.log(`Returning basket Id for menu Id: ${menuId} and restaurant Id ${restaurantSEO}. For tenant: ${this.tenant} and with ${this.postcode}`);
 
         const { data } = await this.basketApi.createBasketForUser(this.tenant, token, serviceType, menuId, restaurantSEO, this.postcode);
 
-        return data.BasketId
+        return data.BasketId;
     }
-}
+};

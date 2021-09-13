@@ -39,9 +39,7 @@ module.exports = class PublicApiService {
             timeout
         };
 
-        const searchParams = Object.keys(params).map((key) => {
-            return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-          }).join('&');
+        const searchParams = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
 
         return axios.post(this.authorizationUrl, searchParams, config)
         .catch(error => {
@@ -57,13 +55,11 @@ module.exports = class PublicApiService {
             timeout
         };
 
-        const searchParams = Object.keys(params).map((key) => {
-            return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-          }).join('&');
+        const searchParams = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
 
         return axios.post(this.authorizationUrl, searchParams, config)
         .catch(error => {
             throw new Error(error.message);
         });
     }
-}
+};

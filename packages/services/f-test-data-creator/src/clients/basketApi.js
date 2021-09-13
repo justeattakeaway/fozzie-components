@@ -18,23 +18,23 @@ module.exports = class BasketApi {
             timeout
         };
 
-        console.log('here is the header', config.headers)
+        console.log('here is the header', config.headers);
 
         const data = {
-                Deals: [],
-                MenuGroupId: menuId,
-                OrderDetails: {
-                  Location: {
+            Deals: [],
+            MenuGroupId: menuId,
+            OrderDetails: {
+                Location: {
                     GeoLocation: {
-                      Latitude: 0,
-                      Longitude: 0
+                        Latitude: 0,
+                        Longitude: 0
                     },
                     ZipCode: postcode
-                  }
-                },
-                Products: [],
-                RestaurantSeoName: restaurantSEO,
-                ServiceType: serviceType
+                }
+            },
+            Products: [],
+            RestaurantSeoName: restaurantSEO,
+            ServiceType: serviceType
         };
 
         return axios.post(`${this.basketUrl}`, data, config)
@@ -79,6 +79,6 @@ module.exports = class BasketApi {
     //         throw new Error(error.message);
     //     });
     // }
-}
+};
 
 

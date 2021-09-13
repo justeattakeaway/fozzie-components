@@ -8,10 +8,10 @@ module.exports = class MenuService {
         this.menuId = '';
     }
 
-    async getMenuId(restaurantSEO) {
-        console.log(`Returning Menu Id for restaurant: ${restaurantSEO}`)
+    async getMenuId (restaurantSEO) {
+        console.log(`Returning Menu Id for restaurant: ${restaurantSEO}`);
 
-        const { data } = await this.menuApiService.getRestaurantManifest(restaurantSEO, this.tenant)
+        const { data } = await this.menuApiService.getRestaurantManifest(restaurantSEO, this.tenant);
 
         this.menuId = data.Menus[0].MenuGroupId;
 
@@ -19,5 +19,4 @@ module.exports = class MenuService {
 
         return this.menuId;
     }
-
-}
+};

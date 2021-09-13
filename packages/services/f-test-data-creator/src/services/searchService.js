@@ -11,15 +11,15 @@ module.exports = class SearchService {
         this.restaurantSEO;
     }
 
-    async getAvailableRestaurants() {
+    async getAvailableRestaurants () {
         console.log(`Searching for restaurants in ${this.postcode} for tenant: ${this.tenant}`);
         const { data } = await this.searchApiService.getRestaurantsByPostcode(this.tenant, this.postcode);
         const result = data.Restaurants.find(restaurant => restaurant.Id === this.preferredRestaurantIds[0]);
         // throw an exception here if the result is null
-        
+
         this.restaurantId = result.Id;
         this.restaurantSEO = result.UniqueName;
 
         return `restaurant Id: ${this.restaurantId} and restaurant SEO: ${this.restaurantSEO}`;
     }
-}
+};

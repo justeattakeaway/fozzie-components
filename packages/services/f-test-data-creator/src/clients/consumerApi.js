@@ -26,5 +26,5 @@ module.exports = class ConsumerApiService {
             throw new Error(error.message);
         });
     }
-}
+};
 

@@ -5,11 +5,11 @@ module.exports = class TestDataGenerator {
 
     get lastName () { return 'Testington'; }
 
-    set emailAddress(val){
+    set emailAddress (val) {
         this._emailAddress = val;
     }
 
-    get emailAddress(){
+    get emailAddress () {
         return this._emailAddress;
     }
 
@@ -31,17 +31,17 @@ module.exports = class TestDataGenerator {
     //     console.log('heyyyy', data.token);
     //     return data.token;
     // }
-}
+};
 
 // how to pass tenant to end points
 // get services to pick up url from configs
 // do we need to pick up different functions depending on int or uk
-// modify current functions - so that we pass in the email address - import the testdatagenerator into checkout and add: 
-  // const emailAddress = testGenerator.emailAddress
+// modify current functions - so that we pass in the email address - import the testdatagenerator into checkout and add:
+// const emailAddress = testGenerator.emailAddress
 // fix cors issue - test int works in checkout
-// create an AuthorizationService with function 'authoriseAsync' - authoriseIntAsync, authoriseUk 
+// create an AuthorizationService with function 'authoriseAsync' - authoriseIntAsync, authoriseUk
 // pass in email address through parameter and password in 'testgenerator.password' into authorizeApi service class
-// the response will be the access token -- 
+// the response will be the access token --
 // see what the urls are for uk and int
 
 // sort out config

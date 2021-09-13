@@ -11,7 +11,7 @@ module.exports = class SearchApiService {
         const config = {
             headers: {
                 'Accept-Language': getLanguageForTenant(tenant),
-                'Accept-Tenant': tenant,
+                'Accept-Tenant': tenant
             },
             timeout
         };
@@ -21,5 +21,5 @@ module.exports = class SearchApiService {
             throw new Error(error.message);
         });
     }
-}
+};
 

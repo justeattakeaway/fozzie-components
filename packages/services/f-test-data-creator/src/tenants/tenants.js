@@ -1,4 +1,4 @@
-exports.getLanguageForTenant = (tenant) => {
+exports.getLanguageForTenant = tenant => {
     const languagesForTenants = {
         au: 'en-AU',
         es: 'es-ES',

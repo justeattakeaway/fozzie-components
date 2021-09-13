@@ -7,48 +7,46 @@ module.exports = class AuthorizationService {
         this.environment = configuration.environment,
         this.consumerApiService = new ConsumerApiService(configuration);
         this.publicApiService = new PublicApiService(configuration);
-        this.accessToken = ''
+        this.accessToken = '';
     }
 
-    async authorizeUserAsync(emailAddress, password, tenant) {
-        console.log(`Authorizing user in ${this.environment} for tenant: ${tenant} with email address: ${emailAddress}`)
+    async authorizeUserAsync (emailAddress, password, tenant) {
+        console.log(`Authorizing user in ${this.environment} for tenant: ${tenant} with email address: ${emailAddress}`);
         if (tenant === 'uk') {
-           return this.authorizeUserForUkAsync(emailAddress, password);
-            
-        } else {
-            return this.authorizeUserForIntAsync(emailAddress, password, tenant);
+            return this.authorizeUserForUkAsync(emailAddress, password);
         }
+        return this.authorizeUserForIntAsync(emailAddress, password, tenant);
     }
-    
-    async authorizeUserForUkAsync(emailAddress, password){
+
+    async authorizeUserForUkAsync (emailAddress, password) {
         const params = {
-            'acr_values': 'tenant:uk language:en-GB',
-            'scope': 'openid mobile_scope offline_access',
-            'grant_type': 'password',
-            'username': emailAddress,
-            'password': password
+            acr_values: 'tenant:uk language:en-GB',
+            scope: 'openid mobile_scope offline_access',
+            grant_type: 'password',
+            username: emailAddress,
+            password
         };
 
-        const { data } = await this.publicApiService.getAuthCodeUk(params);  
+        const { data } = await this.publicApiService.getAuthCodeUk(params);
 
         this.accessToken = data.access_token;
 
         return this.accessToken;
     }
-    
-    async authorizeUserForIntAsync(emailAddress, password, tenant){
+
+    async authorizeUserForIntAsync (emailAddress, password, tenant) {
         const params = {
-            'acr_values': `tenant:${tenant} language:${getLanguageForTenant(tenant)}`,
-            'scope': 'openid mobile_scope offline_access',
-            'grant_type': 'password',
-            'username': emailAddress,
-            'password': password
+            acr_values: `tenant:${tenant} language:${getLanguageForTenant(tenant)}`,
+            scope: 'openid mobile_scope offline_access',
+            grant_type: 'password',
+            username: emailAddress,
+            password
         };
 
-        const { data } = await this.publicApiService.getAuthCodeInt(params);    
-        
+        const { data } = await this.publicApiService.getAuthCodeInt(params);
+
         this.accessToken = data.access_token;
 
         return this.accessToken;
     }
-}
+};
