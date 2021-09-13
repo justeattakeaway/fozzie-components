@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0-beta.34
+------------------------------
+*September 10, 2021*
+
+### Changed
+- Moved `clearAddressValue` later in `submit` function so that address values are not cleared before being set in the location cookie.
+- Moved `onCustomSubmit` later in `submit` function so that the location cookie is set before consuming applications fire the `onSubmit` event.
+
+
 v4.0.0-beta.33
 ------------------------------
 *September 6, 2021*
