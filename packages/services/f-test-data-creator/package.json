@@ -2,9 +2,10 @@
   "name": "@justeat/f-test-data-creator",
   "description": "Fozzie Test Data Creator - ",
   "version": "0.2.0",
-  "main": "dist/f-test-data-creator.umd.min.js", 
+  "main": "dist/f-test-data-creator.umd.min.js",
   "files": [
-    "dist" 
+    "dist",
+    "src"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-test-data-creator",
   "contributors": [
@@ -32,7 +33,11 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0"
+    "@justeat/f-services": "1.7.0",
+    "form-data": "^4.0.0",
+    "http-server": "^13.0.1",
+    "node-fetch": "^3.0.0",
+    "qs": "^6.10.1"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
