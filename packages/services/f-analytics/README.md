@@ -175,11 +175,10 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
     - ### **`pushPageData()`**<br>
       Evaluates and gather data for the `pageData` GA model and pushes it to the `dataLayer`<br>
       #### **Syntax**.
-      > this.`$gtm`.**pushPageData**(_{ pageName: `checkout`, conversationId: `3e8ab8f2-fded-...`, requestId: `021c24d2-86ef-...`, customFields: { custom1: 'one', group: 'diff-grp-name' } }_);
+      > this.`$gtm`.**pushPageData**(_{ pageName: `checkout`, requestId: `021c24d2-86ef-...`, customFields: { custom1: 'one', group: 'diff-grp-name' } }_);
       #### **Parameters**.
       > (**object**) {<br>
       >> - (**string**) `pageName`
-      >> - (**string**) `conversationId` (_optional_)
       >> - (**string**) `requestId` (_optional_)
       >> - (**number**) `httpStatusCode` (_optional_)(_only override this if you wish to change the default 200, i.e you may be displaying a custom static 404 page and want to record the value 404 instead of 200 or you may be displaying a successful account creation page and want to record the value 201 rather than 200_)
       >> - (**object**) `customFields` (_optional_) (_You may want to overwrite/add fields and this parameter allows you to indicate an object of fields/values that if already present will overwrite and if not then will be append to the model_)
@@ -282,6 +281,7 @@ Although this component can gather most data with only the `options` object it a
 | `justEatEnvironment` | Server Environment Variable | `staging` | This will indicate the current environment |
 | `FEATURE_VERSION` | Server Environment Variable | `1.12.345.0` | This will indicate the current version of the feature |
 | `INSTANCE_POSITION` | Server Environment Variable | `004` | This will indicate the current position of the AWD EC2 instance |
+| `IS_PILOT` | Server Environment Variable | false | This will indicate whether the server is a pilot or not |
 | `je-user_percentage` | cookie (httponly) | `34` | This will indicate the user percent value (this assist with experiment bucketing) |
 </br>
 

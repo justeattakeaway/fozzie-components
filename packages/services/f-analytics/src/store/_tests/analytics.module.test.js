@@ -78,7 +78,8 @@ describe('Analytics Module ::', () => {
                         environment: 'test-environment',
                         jeUserPercentage: 88,
                         version: '9.8.7.6',
-                        instancePosition: '999'
+                        instancePosition: '999',
+                        isPilot: false
                     }
                 };
                 const clientsidePlatformData = {
