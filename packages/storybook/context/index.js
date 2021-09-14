@@ -3,6 +3,7 @@ import cookieContext from './cookie.context';
 import loggerContext from './logger.context';
 import dataLayer from './dataLayer.context';
 import httpContext from './http.context';
+import analyticsContext from './analytics.context';
 
 const initialise = () => {
     i18nContext();
@@ -10,6 +11,7 @@ const initialise = () => {
     loggerContext();
     dataLayer();
     httpContext();
+    analyticsContext();
 };
 
 export default initialise;
