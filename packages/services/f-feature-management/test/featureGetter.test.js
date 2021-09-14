@@ -32,7 +32,7 @@ describe('When calling poll', () => {
     await poll(settings);    
   });
 
-  it('Makes an initial call to fetch', async () => {
+  it('should make an initial call to fetch', async () => {
     
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(`https://features.api.justeattakeaway.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
@@ -50,20 +50,27 @@ describe('When calling poll', () => {
     expect(fetch).toHaveBeenNthCalledWith(2, `https://features.api.justeattakeaway.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
   });
 
-  it('Honours different host', async () => {
+  it('should honour different host', async () => {
+    
+    //Arrange
     const newSettings = { ...settings, host: 'https://test.com', pollInterval: 60000 };
 
+    //Act
     await poll(newSettings);
 
+    //Assert
     expect(fetch).toHaveBeenCalledWith(`https://test.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
   });
 
-  it('Honours different pollInterval', async () => {
+  it('should honours different pollInterval', async () => {
 
+    //Arrange
     const newSettings = { ...settings, host: 'https://test.com', pollInterval: 60000 };
 
+    //Act
     await poll(newSettings);
 
+    //Assert
     expect(fetch).toHaveBeenCalledTimes(2);    
 
     jest.advanceTimersByTime(35000);
@@ -74,37 +81,43 @@ describe('When calling poll', () => {
     expect(fetch).toHaveBeenNthCalledWith(3, `https://test.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
   });
 
-  it('Initialises features correctly', async () => {
+  it('should initialise features correctly', async () => {
     expect(getFeature('key2')).toBeFalsy();
     expect(getFeature('key1')).toBeTruthy();
     expect(getFeature('key1').testVal).toBe('val1');
   });
 
-  it('Updates features when config changes', async () => {
+  it('should update features when config changes', async () => {
 
+    //Arrange
     fetchResponse.features[0].key = 'key2';
     fetchResponse.createdAt = '2021-09-11 15:00';
 
     fetch.mockResponse(JSON.stringify(fetchResponse));
 
+    //Act
     jest.advanceTimersToNextTimer();
 
     await flushPromises();
 
+    //Assert
     expect(getFeature('key1')).toBeFalsy();
     expect(getFeature('key2')).toBeTruthy();    
     expect(getFeature('key2').testVal).toBe('val1');
   });
 
-  it('Calls callback when config timestamp changes', async () => {
-    let callbackCalled = false;
-    
+  it('should call callback when config timestamp changes', async () => {
+    // Arrange
+    const callbackMock = jest.fn();
+
     fetchResponse.createdAt = '2021-10-01 09:00';
     fetch.mockResponse(JSON.stringify(fetchResponse));
+    
+    // Act
+    await poll(settings, callbackMock);
 
-    await poll(settings, () => { callbackCalled = true; } );
-
-    expect(callbackCalled).toBeTruthy();
+    // Assert
+    expect(callbackMock).toHaveBeenCalled();
   });
 
   it('should not call callback when config timestamp is not changed', async () => {
