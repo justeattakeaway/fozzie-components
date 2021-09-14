@@ -8,8 +8,9 @@ import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation.module';
-import CheckoutMock from '../src/demo/checkoutMock';
-import mockedRequests from '../src/demo/mockResponses';
+import CheckoutMock from './demo/checkoutMock';
+import mockedRequests from './demo/mockResponses';
+import { TENANT_MAP } from '../src/constants';
 
 export default {
     title: 'Components/Organisms',
@@ -110,7 +111,7 @@ export const CheckoutComponent = () => ({
         },
 
         locale: {
-            default: select('Locale', [locales.gb, locales.au, locales.nz])
+            default: select('Locale', [locales.gb, locales.au, locales.nz], locales.gb)
         },
 
         isAsapAvailable: {
@@ -145,7 +146,7 @@ export const CheckoutComponent = () => ({
             }
 
             return this.getCheckoutError && this.getCheckoutError !== noTimeAvailable ?
-                `/checkout-${this.getCheckoutError}-get-error.json` : `/checkout-${this.serviceType}.json`;
+                `/checkout-${this.getCheckoutError}-get-error.json` : `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
         },
 
         getBasketUrl () {

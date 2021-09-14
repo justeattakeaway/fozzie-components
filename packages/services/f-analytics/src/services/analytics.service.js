@@ -22,7 +22,7 @@ export default class AnalyticService {
     pushPlatformData ({ featureName, locale, customFields } = {}) {
         let platformData = { ...this.store.state[`${this.options.namespace}`].platformData };
 
-        mapPlatformData({
+        platformData = mapPlatformData({
             platformData,
             featureName: featureName || this.options.featureName,
             locale: locale || this.options.locale,
@@ -45,7 +45,7 @@ export default class AnalyticService {
     pushUserData ({ authToken, customFields } = {}) {
         let userData = { ...this.store.state[`${this.options.namespace}`].userData };
 
-        mapUserData({ userData, authToken, req: this.req });
+        userData = mapUserData({ userData, authToken, req: this.req });
 
         if (customFields) {
             userData = { ...userData, ...customFields };
@@ -67,13 +67,14 @@ export default class AnalyticService {
     } = {}) {
         let pageData = { ...this.store.state[`${this.options.namespace}`].pageData };
 
-        mapPageData({
+        pageData = mapPageData({
             pageData,
             featureName: this.options.featureName,
             pageName,
             conversationId,
             requestId,
-            httpStatusCode
+            httpStatusCode,
+            req: this.req
         });
 
         if (customFields) {
