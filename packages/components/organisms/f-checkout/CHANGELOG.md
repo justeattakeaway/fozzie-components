@@ -14,6 +14,14 @@ v0.181.0
 - Analytics tracking for all `ErrorDialog` events.
 
 
+v0.180.3
+------------------------------
+*September 13, 2021*
+
+### Changed
+- Gelocation lookup failure back to warning from error
+
+
 v0.180.2
 ------------------------------
 *September 8, 2021*
