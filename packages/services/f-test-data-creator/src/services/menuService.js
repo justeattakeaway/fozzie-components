@@ -1,4 +1,4 @@
-const MenuApiService = require('../clients/menuApi.js');
+const MenuApiService = require('../clients/menuApi');
 
 module.exports = class MenuService {
     constructor (configuration) {
