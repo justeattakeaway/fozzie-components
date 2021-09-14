@@ -23,7 +23,7 @@ To instantiate the SDK:
 ```javascript
 import createFeatureManagementInstance from '@justeat/f-feature-management';
 
-const configJson = '{ ... }'; //Optional string containing configuration json, which will have been pulled down from he CDN.  
+const configJson = '{ ... }'; //Optional string containing configuration json, which will have been pulled down from the CDN.  
 
 const contextGetter = () => ({
   country: 'uk',
