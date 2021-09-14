@@ -8,7 +8,8 @@ v0.3.1
 *September 14, 2021*
 
 ### Added
-- ability to poll for config
+- Ability to poll for config
+
 
 v0.2.1
 ------------------------------

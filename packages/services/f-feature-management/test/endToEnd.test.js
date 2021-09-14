@@ -29,10 +29,18 @@ describe('End-to-End Tests', () => {
                 logger: logger
             });
             
-            const functionMap = { bool: fm.getBooleanValue.bind(fm), int: fm.getIntegerValue.bind(fm), string: fm.getStringValue.bind(fm) };
+            const functionMap = {
+                bool: fm.getBooleanValue.bind(fm),
+                int: fm.getIntegerValue.bind(fm),
+                string: fm.getStringValue.bind(fm)
+            };
             
 
-            setContextGetter(() => ({anonUserId: context.anonUserId, country: context.tenant, appVersion: context.appVersion}));
+            setContextGetter(() => ({
+                anonUserId: context.anonUserId,
+                appVersion: context.appVersion,
+                country: context.tenant
+            }));
 
             trackExperiment.mockClear();
 

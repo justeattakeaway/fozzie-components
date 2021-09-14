@@ -38,7 +38,7 @@ describe('When calling poll', () => {
     expect(fetch).toHaveBeenCalledWith(`https://features.api.justeattakeaway.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
   });
 
-  it('Starts polling', async () => {
+  it('should start polling', async () => {
     expect(setInterval).toHaveBeenCalledTimes(1);
     expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 30000);
 
@@ -107,12 +107,15 @@ describe('When calling poll', () => {
     expect(callbackCalled).toBeTruthy();
   });
 
-  it("Doesn't call callback when config timestamp doesn't change", async () => {
-    let callbackCalled = false;
+  it('should not call callback when config timestamp is not changed', async () => {
+    // Arrange
+    const callbackMock = jest.fn();
 
-    await poll(settings, () => { callbackCalled = true; } );
+    // Act
+    await poll(settings, callbackMock);
 
-    expect(callbackCalled).toBeFalsy();
+    // Assert
+    expect(callbackMock).not.toHaveBeenCalled();
   });
 
 });

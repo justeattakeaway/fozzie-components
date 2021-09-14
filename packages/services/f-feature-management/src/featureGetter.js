@@ -19,7 +19,7 @@ function init (json, onUpdated) {
 
         configCreatedAt = featuresRootObject.createdAt;
 
-        logger.logInfo(`Loading feature config timestamped ${configCreatedAt}`);
+        logger.logInfo(`Loading feature config created at ${configCreatedAt}`);
 
         featureLookup = {};
 
@@ -27,7 +27,7 @@ function init (json, onUpdated) {
             featureLookup[feature.key] = feature;
         });
 
-        if (onUpdated) {
+        if (typeof onUpdated === 'function') {
             onUpdated();
         }
     }
