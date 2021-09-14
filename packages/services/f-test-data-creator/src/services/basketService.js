@@ -1,8 +1,8 @@
-const BasketApi = require('../clients/basketApi');
+const BasketApiService = require('../clients/basketApi');
 
 module.exports = class BasketService {
     constructor (configuration) {
-        this.basketApi = new BasketApi(configuration);
+        this.basketApi = new BasketApiService(configuration);
     }
 
     async createBasket (basketInfo) {
