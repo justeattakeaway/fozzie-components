@@ -29,9 +29,9 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 - Allows the consumer to access this service globally via the name `$gtm`, i.e. `this.$gtm.pushEvent({...}`).
 - Customisation (via `options`) of the global variable name and also of the `namespace` used by the internal vuex store (i.e. if they clashes with names already in use within your site).
 - Each method returns the model it attempted to push to GA thus allowing you to view/test what has been constructed within each method.
+- Allows extra properties to be appended to each GA model by the consumer before the model is pushed.
+- Allows properties to be overridden on each GA model by the consumer before the model is pushed.
 
-## Benefits (Soon)
-- _Allow extra bespoke/custom properties to be appended to each GA model by the consumer before the model is pushed_
 <hr></br>
 
 ## Usage
@@ -54,13 +54,16 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
     ```js
     import AnalyticsModule from '@justeat/f-analytics';
 
-    const options = {
+    export default (context, inject) => {
+
+      const options = {
         featureName: 'checkout-web',
         locale: 'en-GB',
         id: 'GTM-ABC123X'
-    };
+      };
 
-    export default (context, inject) => { AnalyticsModule.AnalyticsPlugin(context, inject, options); };
+      AnalyticsModule.AnalyticsPlugin(context, inject, options);
+    };
     ```
 
     Then, finally, you need to register the local plugin you have just created in the nuxt config, see below;
@@ -90,9 +93,14 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
     - ### **`pushPlatformData()`**<br>
       Evaluates and gather data for the `platformData` GA model and pushes it to the `dataLayer`<br>
       #### **Syntax**.
-      > this.`$gtm`.**pushPlatformData**();
+      > this.`$gtm`.**pushPlatformData**(_{ featureName: `custom-web`, locale: `en-AU`, customFields: { custom1: 'one', branding: 'new20' } }_);
       #### **Parameters**.
-      > none
+      > (**object**) {<br>
+      >> - (**string**) `featureName` (_optional_) (_default is whatever was set at the point of registration or whatever was reset using the `setOptions()` method.  You may want to change this if working in on a SPA site and you want to change the feature name everytime the active page changed. Note that this will not persist the value unlike the actions of `setOptions()` method_)
+      >> - (**string**) `locale` (_optional_) (_default is whatever was set at the point of registration and if not set at that point then the Options default. Note that this will not persist the value unlike the actions of `setOptions()` method_)
+      >> - (**object**) `customFields` (_optional_) (_You may want to overwrite/add fields and this parameter allows you to indicate an object of fields/values that if already present will overwrite and if not then will be append to the model_)
+
+      ><br>}
       #### **Return value**.
       > (**object**) `platformData` model
 
@@ -127,10 +135,12 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
     - ### **`pushUserData()`**<br>
       Evaluates and gather data for the `userData` GA model and pushes it to the `dataLayer`<br>
       #### **Syntax**.
-      > this.`$gtm`.**pushUserData**(_{ authtoken: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` }_);
+      > this.`$gtm`.**pushUserData**(_{ authtoken: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`, customFields: { custom1: 'one', role: 'admin' } }_);
       #### **Parameters**.
       > (**object**) {<br>
-      > - (**string**) `authToken` (_optional_)
+      >> - (**string**) `authToken` (_optional_)
+      >> - (**object**) `customFields` (_optional_) (_You may want to overwrite/add fields and this parameter allows you to indicate an object of fields/values that if already present will overwrite and if not then will be append to the model_)
+
       ><br>}
       #### **Return value**.
       > (**object**) `userData` model
@@ -165,14 +175,15 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
     - ### **`pushPageData()`**<br>
       Evaluates and gather data for the `pageData` GA model and pushes it to the `dataLayer`<br>
       #### **Syntax**.
-      > this.`$gtm`.**pushPageData**(_{ pageName: `checkout`, conversationId: `3e8ab8f2-fded-...`, requestId: `021c24d2-86ef-...` }_);
+      > this.`$gtm`.**pushPageData**(_{ pageName: `checkout`, requestId: `021c24d2-86ef-...`, customFields: { custom1: 'one', group: 'diff-grp-name' } }_);
       #### **Parameters**.
       > (**object**) {<br>
-      > - (**string**) `pageName`
-      > - (**string**) `conversationId` (_optional_)
-      > - (**string**) `requestId` (_optional_)
-      > - (**number**) `httpStatusCode` (_optional_)(_only override this if you wish to change the default 200, i.e you may be displaying a custom static 404 page and want to record the value 404 instead of 200 or you may be displaying a successful account creation page and want to record the value 201 rather than 200_)
-      ><br>}
+      >> - (**string**) `pageName`
+      >> - (**string**) `requestId` (_optional_)
+      >> - (**number**) `httpStatusCode` (_optional_)(_only override this if you wish to change the default 200, i.e you may be displaying a custom static 404 page and want to record the value 404 instead of 200 or you may be displaying a successful account creation page and want to record the value 201 rather than 200_)
+      >> - (**object**) `customFields` (_optional_) (_You may want to overwrite/add fields and this parameter allows you to indicate an object of fields/values that if already present will overwrite and if not then will be append to the model_)
+
+      >}<br>
       #### **Return value**.
       > (**object**) `pageData` model
 
@@ -181,6 +192,23 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
       This is ideally called everytime the `Page` status changes.<br>
       It gathers most of its data clientside and so needs to be executed in a clientside hook.<br>
       Some of the data it needs can only be read serverside but this has already been gathered at the point the plugin was registered and then store internally until this method is executed.
+      ___
+      <br>
+    - ### **`setOptions()`**<br>
+      Overrides the current `Option` values<br>
+      #### **Syntax**.
+      > this.`$gtm`.**setOptions**(_{ featureName: `checkout-web`, locale: `en-IE` }_);
+      #### **Parameters**.
+      > (**object**) {<br>
+      > - (**string**) `featureName` (_optional_)
+      > - (**string**) `locale` (_optional_) (_default is whatever was set at the point of registration and if not set at that point then the Options default. Note that this method will persist the value_)
+      ><br>}
+      #### **Return value**.
+      > (**object**) `options` model
+
+      This will be the current `Options` model (handy for testing and debugging)
+      #### **Notes**
+      If working in on a SPA site and you want to change the feature name everytime the active page changes then use this method to override the featureName at the same time so all subsequent analytics contain the correct featureName. You may also need to change the current active locale and as such you will need to use this method to reset the locale at the same time so all subsequent analytics contain the correct data.</br>Note that this method will persist the value/s until this method is called again or the plugin is re-registered.
       ___
       <br>
     - ### **`pushEvent()`**<br>
@@ -194,7 +222,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
       This will be the model constructed and pushed to the `datalayer` (handy for testing and debugging)
       #### **Notes**
-      This can be called at ad-hoc times to indicate an action, event or status as required by your Analylics team.  The shape of the event object will be dictate by your Analylics team<br>
+      This can be called at ad-hoc times to indicate an action, event or status as required by your Analytics team.  The shape of the event object will be dictate by your Analylics team<br>
       If this method is executed serverside then although the event cannot be pushed to GA (_because it needs a GTM prepare DOM_) it will be store internally until the plugin has re-registered clientside then any stored events will be pushed to GA.
       #### **Example**
       ```js
@@ -205,7 +233,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
           ...
 
           watch: {
-              isLoggedIn (type) {
+              if (isLoggedIn(type)) {
                   const loggedInEvent = {
                       event: 'loggedIn-`${type}`',
                       experiment: {
@@ -253,6 +281,7 @@ Although this component can gather most data with only the `options` object it a
 | `justEatEnvironment` | Server Environment Variable | `staging` | This will indicate the current environment |
 | `FEATURE_VERSION` | Server Environment Variable | `1.12.345.0` | This will indicate the current version of the feature |
 | `INSTANCE_POSITION` | Server Environment Variable | `004` | This will indicate the current position of the AWD EC2 instance |
+| `IS_PILOT` | Server Environment Variable | false | This will indicate whether the server is a pilot or not |
 | `je-user_percentage` | cookie (httponly) | `34` | This will indicate the user percent value (this assist with experiment bucketing) |
 </br>
 

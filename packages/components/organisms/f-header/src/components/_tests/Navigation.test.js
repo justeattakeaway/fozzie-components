@@ -785,5 +785,43 @@ describe('Navigation', () => {
             // Assert
             expect(wrapper.find('[data-test-id="country-selector"]').classes()).not.toContain('is-open');
         });
+
+        it('should set aria-hidden attribute to false when open ("countrySelectorIsOpen" is true)', async () => {
+            // Arrange
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showCountrySelector: true
+                }
+            });
+
+            // Act
+            await wrapper.setData({
+                ...defaultData,
+                countrySelectorIsOpen: true
+            });
+
+            // Assert
+            expect(wrapper.find('[data-test-id="countrySelector-popover"]').attributes('aria-hidden')).toBeFalsy();
+        });
+
+        it('should set aria-hidden attribute to true when hidden ("countrySelectorIsOpen" is false)', async () => {
+            // Arrange
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showCountrySelector: true
+                }
+            });
+
+            // Act
+            await wrapper.setData({
+                ...defaultData,
+                countrySelectorIsOpen: false
+            });
+
+            // Assert
+            expect(wrapper.find('[data-test-id="countrySelector-popover"]').attributes('aria-hidden')).toBeTruthy();
+        });
     });
 });

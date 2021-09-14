@@ -98,7 +98,8 @@
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
-                        data-test-id="address-block" />
+                        data-test-id="address-block"
+                        :should-show-administrative-area="shouldShowAddressAdministrativeArea" />
 
                     <form-selector :key="availableFulfilmentTimesKey" />
 
@@ -182,6 +183,7 @@ import {
     CHECKOUT_METHOD_DINEIN,
     DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
+    ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -489,7 +491,7 @@ export default {
          *
          * */
         redirectUrl () {
-            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable) {
+            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable || this.message?.code === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
                 const postcodeCookie = this.$cookies.get('je-location');
 
                 return postcodeCookie ? `area/${postcodeCookie}` : '/';
@@ -502,6 +504,10 @@ export default {
             }
 
             return `${prefix}-${this.restaurant.seoName}/menu`;
+        },
+
+        shouldShowAddressAdministrativeArea () {
+            return this.tenant === 'au';
         }
     },
 
@@ -1133,6 +1139,9 @@ export default {
                 },
                 locality: {
                     required
+                },
+                administrativeArea: {
+                    required: requiredIf(() => this.shouldShowAddressAdministrativeArea)
                 },
                 postcode: {
                     required,

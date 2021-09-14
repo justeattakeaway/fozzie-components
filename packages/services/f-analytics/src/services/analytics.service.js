@@ -10,34 +10,46 @@ export default class AnalyticService {
     constructor (store, req, options) {
         this.store = store;
         this.req = req;
-        this.namespace = options.namespace;
-        this.featureName = options.featureName;
-        this.locale = options.locale;
+        this.options = options;
     }
 
-    pushPlatformData () {
-        const platformData = { ...this.store.state[`${this.namespace}`].platformData };
+    setOptions ({ featureName = this.options.featureName, locale = this.options.locale } = {}) {
+        this.options = { ...this.options, featureName, locale };
 
-        mapPlatformData({
+        return this.options;
+    }
+
+    pushPlatformData ({ featureName, locale, customFields } = {}) {
+        let platformData = { ...this.store.state[`${this.options.namespace}`].platformData };
+
+        platformData = mapPlatformData({
             platformData,
-            featureName: this.featureName,
-            locale: this.locale,
+            featureName: featureName || this.options.featureName,
+            locale: locale || this.options.locale,
             req: this.req
         });
 
-        this.store.dispatch(`${this.namespace}/updatePlatformData`, platformData);
+        this.store.dispatch(`${this.options.namespace}/updatePlatformData`, platformData);
+
+        if (customFields) {
+            platformData = { ...this.store.state[`${this.options.namespace}`].platformData, ...customFields };
+        }
 
         if (isDataLayerPresent()) {
-            window.dataLayer.push({ platformData: { ...this.store.state[`${this.namespace}`].platformData } });
+            window.dataLayer.push({ platformData: { ...platformData } });
         }
 
         return platformData;
     }
 
-    pushUserData ({ authToken } = {}) {
-        const userData = { ...this.store.state[`${this.namespace}`].userData };
+    pushUserData ({ authToken, customFields } = {}) {
+        let userData = { ...this.store.state[`${this.options.namespace}`].userData };
 
-        mapUserData({ userData, authToken, req: this.req });
+        userData = mapUserData({ userData, authToken, req: this.req });
+
+        if (customFields) {
+            userData = { ...userData, ...customFields };
+        }
 
         if (isDataLayerPresent()) {
             window.dataLayer.push({ userData: { ...userData } });
@@ -50,18 +62,24 @@ export default class AnalyticService {
         pageName,
         conversationId,
         requestId,
-        httpStatusCode
+        httpStatusCode,
+        customFields
     } = {}) {
-        const pageData = { ...this.store.state[`${this.namespace}`].pageData };
+        let pageData = { ...this.store.state[`${this.options.namespace}`].pageData };
 
-        mapPageData({
+        pageData = mapPageData({
             pageData,
-            featureName: this.featureName,
+            featureName: this.options.featureName,
             pageName,
             conversationId,
             requestId,
-            httpStatusCode
+            httpStatusCode,
+            req: this.req
         });
+
+        if (customFields) {
+            pageData = { ...pageData, ...customFields };
+        }
 
         if (isDataLayerPresent()) {
             window.dataLayer.push({ pageData: { ...pageData } });
@@ -72,15 +90,15 @@ export default class AnalyticService {
 
     pushEvent (event) {
         if (event) {
-            this.store.dispatch(`${this.namespace}/updateEvents`, event);
+            this.store.dispatch(`${this.options.namespace}/updateEvents`, event);
         }
 
         if (isDataLayerPresent()) {
-            const events = [...this.store.state[`${this.namespace}`].events];
+            const events = [...this.store.state[`${this.options.namespace}`].events];
 
             events.forEach(e => window.dataLayer.push({ ...e }));
 
-            this.store.dispatch(`${this.namespace}/clearEvents`);
+            this.store.dispatch(`${this.options.namespace}/clearEvents`);
         }
 
         return event;

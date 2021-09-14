@@ -1,0 +1,52 @@
+{
+  "id": "12345",
+  "serviceType": "collection",
+  "customer": {
+    "firstName": "Joe",
+    "lastName": "Bloggs",
+    "phoneNumber": "0756866102",
+    "dateOfBirth": "1980-01-30",
+    "emailAddress": "joe.bloggs@menulog.au"
+  },
+  "fulfilment": {
+    "time": {
+      "asap": false,
+      "scheduled": {
+        "from": "2020-01-01T02:15:00.000Z",
+        "to": "2020-01-01T02:15:00.000Z"
+      }
+    },
+    "location": {
+      "address": {
+        "lines": null,
+        "locality": null,
+        "administrativeArea": null,
+        "postalCode": null
+      },
+      "geolocation": null
+    }
+  },
+  "isFulfillable": true,
+  "notices": [
+    {
+      "type": "allergy",
+      "notice": {
+        "text": "If you have a food allergy or intolerance (or someone you're ordering for has), <a href=\"https://greggs.co.uk/nutrition\" data-test-id=\"allergen-url-link\" target=\"_blank\" rel=\"noopener\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need."
+      }
+    }
+  ],
+  "messages": [
+    {
+      "type": "warning",
+      "message": {
+        "text": "Please hurry, the restaurant is closing soon"
+      }
+    },
+    {
+      "type": "information",
+      "message": {
+        "text": "We're sorry, some items in your basket are no longer available"
+      }
+    }
+  ]
+}

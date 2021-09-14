@@ -2,6 +2,7 @@ import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import AgeVerification from '../AgeVerification.vue';
+import getDaysInMonth from '../../services/daysInMonth';
 import {
     i18n,
     createStore,
@@ -9,7 +10,12 @@ import {
 } from './helpers/setup';
 import EventNames from '../../event-names';
 
+jest.mock('../../services/daysInMonth');
+
 const localVue = createLocalVue();
+const expectedDaysInMonth = 31;
+
+getDaysInMonth.mockReturnValue(expectedDaysInMonth);
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
@@ -31,18 +37,34 @@ describe('AgeVerification', () => {
 
     describe('computed ::', () => {
         describe('days ::', () => {
-            beforeEach(() => {
-                // Arrange
-                wrapper = shallowMount(AgeVerification, {
-                    i18n,
-                    localVue,
-                    store: createStore()
+            const selectedDate = {
+                day: 1,
+                month: 1,
+                year: 2020
+            };
+
+            it('should call daysInMonthService with selectedDate', () => {
+                beforeEach(() => {
+                    // Arrange
+                    wrapper = shallowMount(AgeVerification, {
+                        i18n,
+                        localVue,
+                        store: createStore()
+                    });
                 });
+
+                // Act
+                wrapper.setData({
+                    selectedDate
+                });
+
+                // Assert
+                expect(getDaysInMonth).toHaveBeenCalledWith(selectedDate);
             });
 
-            it('should return an array of 31 day objects', () => {
+            it('should return an array of day objects', () => {
                 // Assert
-                expect(wrapper.vm.days.length).toEqual(31);
+                expect(wrapper.vm.days.length).toEqual(expectedDaysInMonth);
                 expect(wrapper.vm.days).toMatchSnapshot();
             });
         });

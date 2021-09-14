@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.12.1
+------------------------------
+*September 1, 2021*
+
+### Changed
+- Fixed bug where scrolling is not re-enabled if the modal is destroyed while open for whatever reason.
 
 v0.12.0
 ------------------------------
@@ -11,7 +17,6 @@ v0.12.0
 ### Changed
 - Aligned to PIE designs
 - Updated version of `f-button`.
-
 
 v0.11.0
 ------------------------------

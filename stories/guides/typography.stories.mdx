@@ -62,7 +62,7 @@ body {
         var style = document.createElement('style');
         // Note: Edge supports WOFF2
         style.innerHTML = '@font-face { font-family: JETSansDigital; font-weight: 700; src: ' + boldFontUrls + '; }';
-        style.innerHTML = '@font-face { font-family: JETSansDigital; font-weight: 800; src: ' + extraboldFontUrls + '; }';
+        style.innerHTML += ' @font-face { font-family: JETSansDigital; font-weight: 800; src: ' + extraboldFontUrls + '; }';
         document.head.appendChild(style);
         document.documentElement.classList.add('webfonts-loaded');
     }

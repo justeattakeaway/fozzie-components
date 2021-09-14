@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.63.0
+------------------------------
+*August 31, 2021*
+
+### Updated
+- Updated generic error message and handling on registration failure.
+
 
 v0.62.0
 ------------------------------

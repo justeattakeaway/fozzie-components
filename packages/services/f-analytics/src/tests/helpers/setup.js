@@ -15,7 +15,8 @@ const defaultState = {
         jeUserPercentage: undefined,
         currency: undefined,
         version: undefined,
-        instancePosition: undefined
+        instancePosition: undefined,
+        isPilot: undefined
     },
     userData: {
         'a-UserId': undefined,
@@ -29,7 +30,6 @@ const defaultState = {
         group: undefined,
         name: undefined,
         httpStatusCode: 200,
-        isCached: false,
         conversationId: undefined,
         requestId: undefined,
         orientation: undefined,
@@ -51,7 +51,8 @@ const modifiedState = {
         jeUserPercentage: 88,
         currency: 'zud',
         version: '9.8.7.6',
-        instancePosition: '999'
+        instancePosition: '999',
+        isPilot: false
     },
     userData: {
         'a-UserId': 'xxxx-xxxx',
@@ -65,7 +66,6 @@ const modifiedState = {
         name: 'test-name',
         group: 'test-group',
         httpStatusCode: 200,
-        isCached: false,
         conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
         requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
         orientation: 'Landscape',

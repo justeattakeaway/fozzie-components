@@ -70,6 +70,10 @@ const $v = {
             $dirty: false,
             required: false
         },
+        administrativeArea: {
+            $dirty: false,
+            required: true
+        },
         postcode: {
             $dirty: false,
             required: true,

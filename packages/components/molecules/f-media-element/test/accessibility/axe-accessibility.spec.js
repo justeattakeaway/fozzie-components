@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const MediaElement = require('../../test-utils/component-objects/f-mediaElement.component');
 
-const mediaElement = new MediaElement('molecule', 'media-element-component');
+const mediaElement = new MediaElement();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
