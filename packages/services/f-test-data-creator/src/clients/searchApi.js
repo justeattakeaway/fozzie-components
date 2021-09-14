@@ -1,10 +1,9 @@
 const axios = require('axios');
-const { getLanguageForTenant } = require('../tenants/tenants');
+const { getLanguageForTenant } = require('../configuration/tenants');
 
 module.exports = class SearchApiService {
     constructor (configuration) {
         this.getRestaurantByPostcodeUrl = configuration.Services.Search.BaseAddress;
-        // this.getRestaurantByLatLong = configuration.Services.Search.GetRestaurantByLatLong;
     }
 
     async getRestaurantsByPostcode (tenant, postcode, timeout = 5000) {

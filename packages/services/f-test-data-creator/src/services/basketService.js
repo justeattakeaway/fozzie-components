@@ -1,17 +1,16 @@
 const BasketApi = require('../clients/basketApi');
 
 module.exports = class BasketService {
-    constructor (configuration, emailAddress) {
-        this.tenant = configuration.tenant;
-        this.postcode = configuration.Services.Search.Postcode;
+    constructor (configuration) {
         this.basketApi = new BasketApi(configuration);
-        this.emailAddress = emailAddress;
     }
 
-    async createBasket (token, serviceType, menuId, restaurantSEO) {
-        console.log(`Returning basket Id for menu Id: ${menuId} and restaurant Id ${restaurantSEO}. For tenant: ${this.tenant} and with ${this.postcode}`);
+    async createBasket (basketInfo) {
+        console.log(`Attempting to create basket for menu Id: ${basketInfo.menuId} and restaurant Id ${basketInfo.restaurantSEO}.`);
 
-        const { data } = await this.basketApi.createBasketForUser(this.tenant, token, serviceType, menuId, restaurantSEO, this.postcode);
+        const { data } = await this.basketApi.createBasketForUser(basketInfo);
+
+        console.log(`Successfully created basket: ${data.BasketId}`);
 
         return data.BasketId;
     }

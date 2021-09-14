@@ -14,13 +14,15 @@ module.exports = class UserService {
     }
 
     async createUserAsync () {
-        console.log(`Creating user in ${this.environment} for tenant: ${this.tenant} with email address: ${this.emailAddress}`);
+        console.log(`Attempting to create user in ${this.environment} for tenant: ${this.tenant} with email address: ${this.emailAddress}`);
+        let result;
         if (this.tenant === 'uk') {
-            return this.createUserForUKAsync();
+            result = this.createUserForUKAsync();
+        } else {
+            result = this.createUserForInternationalAsync(this.tenant);
         }
-        return this.createUserForInternationalAsync(this.tenant);
 
-        // console.log('Successfully created user!')
+        return result;
     }
 
     async createUserForUKAsync () {
@@ -31,10 +33,10 @@ module.exports = class UserService {
             password: this.password
         };
 
-        console.log('create user -', userInfo);
-
         const { data } = await this.consumerApiService.createConsumer(userInfo);
-        console.log('uk', data.token);
+
+        console.log(`Successfully created user with email address: ${userInfo.emailAddress} and password: ${userInfo.password}`);
+
         return data.token;
     }
 
@@ -47,10 +49,10 @@ module.exports = class UserService {
             tenant: this.tenant
         };
 
-        console.log(userInfo);
-
         const { data } = await this.publicApiService.createConsumer(userInfo);
-        console.log('int', data);
+
+        console.log(`Successfully created user with email address: ${userInfo.emailAddress} and password: ${userInfo.password}`);
+
         return data.token;
     }
 };

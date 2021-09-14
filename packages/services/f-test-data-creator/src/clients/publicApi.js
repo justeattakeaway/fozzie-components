@@ -1,4 +1,6 @@
+/* eslint-disable camelcase */
 const axios = require('axios');
+const { getLanguageForTenant } = require('../configuration/tenants');
 
 module.exports = class PublicApiService {
     constructor (configuration) {
@@ -31,12 +33,20 @@ module.exports = class PublicApiService {
         });
     }
 
-    async getAuthCodeUk (params, timeout = 5000) {
+    async getAuthCodeUk (emailAddress, password, timeout = 5000) {
         const config = {
             headers: {
                 Authorization: this.token
             },
             timeout
+        };
+
+        const params = {
+            acr_values: 'tenant:uk language:en-GB',
+            scope: 'openid mobile_scope offline_access',
+            grant_type: 'password',
+            username: emailAddress,
+            password
         };
 
         const searchParams = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
@@ -47,12 +57,20 @@ module.exports = class PublicApiService {
         });
     }
 
-    async getAuthCodeInt (params, timeout = 5000) {
+    async getAuthCodeInt (emailAddress, password, tenant, timeout = 5000) {
         const config = {
             headers: {
                 Authorization: this.token
             },
             timeout
+        };
+
+        const params = {
+            acr_values: `tenant:${tenant} language:${getLanguageForTenant(tenant)}`,
+            scope: 'openid mobile_scope offline_access',
+            grant_type: 'password',
+            username: emailAddress,
+            password
         };
 
         const searchParams = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');

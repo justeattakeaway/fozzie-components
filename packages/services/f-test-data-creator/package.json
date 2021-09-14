@@ -27,17 +27,14 @@
   ],
   "scripts": {
     "lint": "vue-cli-service lint",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "lint:style": "vue-cli-service lint:style"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0",
-    "form-data": "^4.0.0",
-    "http-server": "^13.0.1",
-    "node-fetch": "^3.0.0",
-    "qs": "^6.10.1"
+    "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"

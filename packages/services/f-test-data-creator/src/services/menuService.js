@@ -1,22 +1,17 @@
-// const { getLanguageForTenant } = require('../tenants/tenants');
-const MenuApiService = require('../clients/menuApi');
+const MenuApiService = require('../clients/menuApi.js');
 
 module.exports = class MenuService {
     constructor (configuration) {
         this.menuApiService = new MenuApiService(configuration);
-        this.tenant = configuration.tenant;
-        this.menuId = '';
     }
 
     async getMenuId (restaurantSEO) {
-        console.log(`Returning Menu Id for restaurant: ${restaurantSEO}`);
+        console.log(`Attempting to get Menu Id for restaurant: ${restaurantSEO}`);
 
-        const { data } = await this.menuApiService.getRestaurantManifest(restaurantSEO, this.tenant);
+        const { data } = await this.menuApiService.getRestaurantManifest(restaurantSEO);
 
-        this.menuId = data.Menus[0].MenuGroupId;
+        console.log(`Successfully returned Menu Id: ${data.Menus[0].MenuGroupId}`);
 
-        console.log('hellooo', this.menuId);
-
-        return this.menuId;
+        return data.Menus[0].MenuGroupId;
     }
 };

@@ -1,84 +1,46 @@
 const axios = require('axios');
-const { getLanguageForTenant } = require('../tenants/tenants');
+const { getLanguageForTenant } = require('../configuration/tenants');
 
-module.exports = class BasketApi {
+module.exports = class BasketApiService {
     constructor (configuration) {
         this.basketUrl = configuration.Services.Basket.BaseAddress;
+        this.tenant = configuration.tenant;
+        this.postcode = configuration.Services.Search.Postcode;
     }
 
-    async createBasketForUser (tenant, token, serviceType, menuId, restaurantSEO, postcode, timeout = 5000) {
+    async createBasketForUser (basketInfo, timeout = 5000) {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                'Accept-Language': 'en-GB',
-                // 'Accept-Language': getLanguageForTenant(tenant),
-                'Accept-Tenant': tenant,
-                Authorization: `Bearer ${token}`
+                'Accept-Language': getLanguageForTenant(this.tenant),
+                'Accept-Tenant': this.tenant,
+                Authorization: `Bearer ${basketInfo.authToken}`
             },
             timeout
         };
 
-        console.log('here is the header', config.headers);
-
         const data = {
             Deals: [],
-            MenuGroupId: menuId,
+            MenuGroupId: basketInfo.menuId,
             OrderDetails: {
                 Location: {
                     GeoLocation: {
                         Latitude: 0,
                         Longitude: 0
                     },
-                    ZipCode: postcode
+                    ZipCode: this.postcode
                 }
             },
             Products: [],
-            RestaurantSeoName: restaurantSEO,
-            ServiceType: serviceType
+            RestaurantSeoName: basketInfo.restaurantSEO,
+            ServiceType: basketInfo.serviceType
         };
 
         return axios.post(`${this.basketUrl}`, data, config)
         .catch(error => {
-            console.log('there is an error', error);
+            throw new Error(error.message);
         });
     }
-
-    async getBasket (basketId, timeout = 5000) {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: this.token
-            },
-            timeout
-        };
-
-        return axios.get(`${this.basketUrl}/${basketId}`, config)
-        .catch(error => {
-            // throw new Error(error.message);
-            console.log('hey', error);
-        });
-    }
-
-    // async updateBasket (basketId, timeout = 5000) {
-    //     const config = {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             Authorization: this.token
-    //         },
-    //         timeout
-    //     };
-
-    //     const basketInfo = {
-    //         ...BASKET_REQUEST,
-    //         serviceType,
-    //         menuGroupId
-    //     };
-
-    //     return axios.put(`${this.basketUrl}/${basketId}`, basketInfo, config)
-    //     .catch(error => {
-    //         throw new Error(error.message);
-    //     });
-    // }
 };
 
 

@@ -5,7 +5,7 @@ exports.getLanguageForTenant = tenant => {
         it: 'it-IT',
         nz: 'en-NZ',
         uk: 'en-GB',
-        default: 'uk'
+        default: 'en-GB'
     };
     return languagesForTenants[tenant] || languagesForTenants.default;
 };
