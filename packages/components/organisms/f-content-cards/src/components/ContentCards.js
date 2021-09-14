@@ -255,7 +255,9 @@ export default {
                     `Content Cards (setupMetadata) - BrazeAdapter successfully initialised. Key: (${this.loggingKey})`,
                     this.$store,
                     {
-                        key: this.loggingKey,
+                        data: {
+                            key: this.loggingKey
+                        },
                         tags: this.tags
                     }
                 );
@@ -265,8 +267,9 @@ export default {
                     this.$store,
                     {
                         tags: this.tags,
-                        key: this.loggingKey,
-                        source: CARDSOURCE_METADATA,
+                        data: {
+                            key: this.loggingKey
+                        },
                         error: {
                             message: e.message
                         }
@@ -315,9 +318,11 @@ export default {
                         this.$store,
                         {
                             tags: this.tags,
-                            key: this.loggingKey,
-                            source: CARDSOURCE_METADATA,
-                            cardCount: cards.length
+                            data: {
+                                key: this.loggingKey,
+                                source: CARDSOURCE_METADATA
+                            },
+                            Count: cards.length
                         }
                     );
                 },
@@ -327,8 +332,10 @@ export default {
                         this.$store,
                         {
                             tags: this.tags,
-                            key: this.loggingKey,
-                            source: CARDSOURCE_METADATA
+                            data: {
+                                key: this.loggingKey,
+                                source: CARDSOURCE_METADATA
+                            }
                         }
                     );
                 }
@@ -345,9 +352,11 @@ export default {
                 this.$store,
                 {
                     tags: this.tags,
-                    key: this.loggingKey,
-                    source: CARDSOURCE_CUSTOM,
-                    cardCount: cards.length
+                    data: {
+                        key: this.loggingKey,
+                        source: CARDSOURCE_METADATA
+                    },
+                    Count: cards.length
                 }
             );
             this.contentCards({
@@ -375,7 +384,7 @@ export default {
                         {
                             tags: this.tags,
                             key: this.loggingKey,
-                            source: CARDSOURCE_METADATA
+                            source: card.source
                         }
                     );
                     throw new Error('Invalid card source type');
@@ -400,8 +409,10 @@ export default {
                         this.$store,
                         {
                             tags: this.tags,
-                            key: this.loggingKey,
-                            source: CARDSOURCE_METADATA
+                            data: {
+                                key: this.loggingKey,
+                                source: card.source
+                            }
                         }
                     );
                     throw new Error('Invalid card source type');
