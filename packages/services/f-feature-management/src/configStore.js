@@ -6,12 +6,12 @@ let interval = null;
 
 /**
  * Receives json containing the feature config, as downloaded from CDN or otherwise.
- * @param {string} json JSON containing the feature configuration.
+ * @param {string} configAsJson JSON containing the feature configuration.
  * @param {function} onUpdated Optional callback function that gets called when new feature config gets loaded
  */
-function init (json, onUpdated) {
-    if (json) {
-        const featuresRootObject = JSON.parse(json);
+function init (configAsJson, onUpdated) {
+    if (configAsJson) {
+        const featuresRootObject = JSON.parse(configAsJson);
 
         if (configCreatedAt && (configCreatedAt >= featuresRootObject.createdAt)) {
             return;
@@ -34,30 +34,32 @@ function init (json, onUpdated) {
 }
 
 /**
- * Starts polling for updated feature config
- * @param {object} settings Contains scope, environment, key and optionally host override and pollInterval (defaults to 30s).
+ * Loads config from CDN and starts polling if requested.
+ * @param {object} cdnSettings Contains scope, environment, key and optionally host override and pollInterval (defaults to 30s).
  * @param {function} onUpdated Optional callback function called when new config is loaded.
  */
-async function poll (settings, onUpdated) {
-    const suffix = settings.key ? `-${settings.key}` : '';
-    const host = settings.host || 'https://features.api.justeattakeaway.com';
-    const url = `${host}/config/v1/${settings.scope}/${settings.environment}${suffix}`;
+async function loadFromCdn (cdnSettings, onUpdated) {
+    const suffix = cdnSettings.key ? `-${cdnSettings.key}` : '';
+    const host = cdnSettings.host || 'https://features.api.justeattakeaway.com';
+    const url = `${host}/config/v1/${cdnSettings.scope}/${cdnSettings.environment}${suffix}`;
 
     async function fetchAndUpdate () {
         const response = await fetch(url);
 
-        const configJson = await response.text();
+        const configAsJson = await response.text();
 
-        init(configJson, onUpdated);
+        init(configAsJson, onUpdated);
     }
 
     await fetchAndUpdate();
 
     clearInterval(interval);
 
-    interval = setInterval(async () => {
-        await fetchAndUpdate();
-    }, settings.pollInterval || 30000);
+    if (cdnSettings.poll) {
+        interval = setInterval(async () => {
+            await fetchAndUpdate();
+        }, cdnSettings.pollInterval || 30000);
+    }
 }
 
 /**
@@ -65,8 +67,7 @@ async function poll (settings, onUpdated) {
  * @returns Feature object.
  */
 function getFeature (fullKey) {
-    console.log('getFeature', fullKey, configCreatedAt);
     return featureLookup[fullKey];
 }
 
-export { getFeature, init, poll };
+export { getFeature, init, loadFromCdn };

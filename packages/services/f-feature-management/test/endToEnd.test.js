@@ -25,7 +25,7 @@ describe('End-to-End Tests', () => {
         it(description, async () => {
 
             const fm = await createFeatureManagementInstance({
-                json: JSON.stringify(config),
+                initialConfigAsJson: JSON.stringify(config),
                 logger: logger
             });
             

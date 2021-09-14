@@ -1,4 +1,4 @@
-import { init as initFeatures, poll as pollForFeatures } from './featureGetter';
+import { init as initFeatures, loadFromCdn } from './configStore';
 import { setContextGetter } from './contextGetter';
 import { setLogger } from './logger';
 import FeatureManager from './FeatureManager';
@@ -18,16 +18,16 @@ export default async function (settings) {
         setLogger(settings.logger);
     }
 
-    if (settings.json) {
-        initFeatures(settings.json);
+    if (settings.initialConfigAsJson) {
+        initFeatures(settings.initialConfigAsJson);
     }
 
     setContextGetter(settings.contextGetter);
 
     instance = new FeatureManager(settings);
 
-    if (settings.poll) {
-        await pollForFeatures(settings, settings.onUpdated);
+    if (settings.cdn) {
+        await loadFromCdn(settings.cdn, settings.onUpdated);
     }
 
     return instance;

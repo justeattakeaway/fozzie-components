@@ -23,22 +23,22 @@ To instantiate the SDK:
 ```javascript
 import createFeatureManagementInstance from '@justeat/f-feature-management';
 
-const configJson = '{ ... }'; //Optional string containing configuration json, which will have been pulled down from the CDN.  
-
 const contextGetter = () => ({
   country: 'uk',
   anonUserId: getCookieValue('je-auser-id') // getCookieValue() implementation to be provided by integrator
 })
 
-const settings = {
-  json: configJson, //required only if config is available at init time; otherwise can set scope, environment, key
-  poll: true, 
-  scope: 'je-coreweb', //scope, environment, key required to load config from CDN
-  environment: 'production',
-  key: '<key for scope/env>'
+const settings = { //see table below for details
+  initialConfigAsJson: '{ ... }', 
+  cdn: {
+    scope: 'je-coreweb', 
+    environment: 'production',
+    key: '<key for scope/env>',
+    poll: true,
+    pollInterval: 30000
+  },  
   contextGetter,
-  pollInterval: 30000 //defaults to 30000 (ms),
-  onUpdated: () => { /* Callback function to indicate that new config has been loaded */ } 
+  onUpdated: () => { } 
 };
 
 const featureManagement = await createFeatureManagementInstance(settings);
@@ -46,3 +46,20 @@ const featureManagement = await createFeatureManagementInstance(settings);
 // e.g.
 const myFeatureValue = featureManagement.getValue('my-feature-value');
 ```
+
+### Settings parameters:
+
+|Parameter|Type|Required|Notes|
+|--|--|--|--|
+|`initialConfigAsJson`|string|No|Can be passed in if available prior to initialisation. Usually would originate on the Feature Management CDN.|
+|`contextGetter`|function|Yes|Parameterless function that returns object containing `country` and `anonUserId`.|
+|`onUpdated`|function|No|Parameterless function invoked when config is loaded / changed.|
+|`cdn`|object|No|If config is to be loaded from the CDN by this lib this property must be set. See the Feature Management portal for details.|
+|`cdn.scope`|string|Yes (if `cdn` set)|The Feature Management "scope". E.g. `je-coreweb`.|
+|`cdn.environment`|string|Yes (if `cdn` set)|The Feature Management "environment". E.g. `production`.|
+|`cdn.key`|string|Yes (if `cdn` set)|The Feature Management key for the scope/environment.|
+|`cdn.poll`|Boolean|No (defaults to false)|Should we poll for config updates after the initial load.|
+|`cdn.pollInterval`|integer|No (defaults to 30000)|Poll interval in ms.|
+
+## Integration with vue
+The intention is to make a wrapping library that integrates with Vue and makes these configuration values reactive.

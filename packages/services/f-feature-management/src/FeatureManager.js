@@ -1,6 +1,6 @@
 import evaluateLogic from './evaluateLogic';
 import evaluateDefault from './evaluateDefaultValue';
-import { getFeature, init } from './featureGetter';
+import { getFeature, init } from './configStore';
 import { getContext } from './contextGetter';
 import trackExperiment from './trackExperiment';
 import { logger } from './logger';
@@ -121,10 +121,10 @@ class FeatureManager {
     /* eslint-disable class-methods-use-this */
     /**
      * Updates the config with some new JSON, usually downloaded from the FM CDN.
-     * @param {string} The config, in json form.
+     * @param {string} configAsJson The config, in json form.
      */
-    updateConfig (json) {
-        init(json);
+    updateConfig (configAsJson) {
+        init(configAsJson);
     }
     /* eslint-enable class-methods-use-this */
 }

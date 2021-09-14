@@ -1,12 +1,13 @@
-import { getFeature, init, poll } from '../src/featureGetter';
+import { getFeature, init, loadFromCdn } from '../src/configStore';
 import fetchMock from "jest-fetch-mock";
 
 fetchMock.enableMocks();
 
-const settings = {
+const cdnSettings = {
   scope: 'test-scope',
   environment: 'test-env',
-  key: 'test-key'
+  key: 'test-key',
+  poll: true
 };
 
 const fetchResponse = {
@@ -19,9 +20,10 @@ const fetchResponse = {
   ]
 };
 
+//this is used to resolve any promises / awaits called from within a mocked timer
 const flushPromises = () => new Promise(res => process.nextTick(res))
 
-describe('When calling poll', () => {  
+describe('When calling loadFromCdn', () => {  
 
   beforeEach(async () => {
     fetch.resetMocks();
@@ -29,13 +31,13 @@ describe('When calling poll', () => {
 
     fetch.mockResponse(JSON.stringify(fetchResponse));
 
-    await poll(settings);    
+    await loadFromCdn(cdnSettings);    
   });
 
   it('should make an initial call to fetch', async () => {
     
     expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`https://features.api.justeattakeaway.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
+    expect(fetch).toHaveBeenCalledWith(`https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
   });
 
   it('should start polling', async () => {
@@ -45,30 +47,45 @@ describe('When calling poll', () => {
     jest.advanceTimersByTime(29000);
     expect(fetch).toHaveBeenCalledTimes(1);    
 
-    jest.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(5000);
     expect(fetch).toHaveBeenCalledTimes(2);
-    expect(fetch).toHaveBeenNthCalledWith(2, `https://features.api.justeattakeaway.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
+    expect(fetch).toHaveBeenNthCalledWith(2, `https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
+  });
+
+  it.only('should not poll if poll setting false', async () => {
+    //Arrange
+    const newSettings = { ...cdnSettings, poll: false };
+
+    //Act
+    await loadFromCdn(newSettings);
+    await flushPromises();
+    expect(fetch).toHaveBeenCalledTimes(2);
+
+    jest.advanceTimersByTime(100000);
+
+    //Assert
+    expect(fetch).toHaveBeenCalledTimes(2);
   });
 
   it('should honour different host', async () => {
     
     //Arrange
-    const newSettings = { ...settings, host: 'https://test.com', pollInterval: 60000 };
+    const newSettings = { ...cdnSettings, host: 'https://test.com', pollInterval: 60000 };
 
     //Act
-    await poll(newSettings);
+    await loadFromCdn(newSettings);
 
     //Assert
-    expect(fetch).toHaveBeenCalledWith(`https://test.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
+    expect(fetch).toHaveBeenCalledWith(`https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
   });
 
-  it('should honours different pollInterval', async () => {
+  it('should honour different pollInterval', async () => {
 
     //Arrange
-    const newSettings = { ...settings, host: 'https://test.com', pollInterval: 60000 };
+    const newSettings = { ...cdnSettings, host: 'https://test.com', pollInterval: 60000 };
 
     //Act
-    await poll(newSettings);
+    await loadFromCdn(newSettings);
 
     //Assert
     expect(fetch).toHaveBeenCalledTimes(2);    
@@ -78,7 +95,7 @@ describe('When calling poll', () => {
 
     jest.advanceTimersByTime(30000);
     expect(fetch).toHaveBeenCalledTimes(3);
-    expect(fetch).toHaveBeenNthCalledWith(3, `https://test.com/config/v1/${settings.scope}/${settings.environment}-${settings.key}`);
+    expect(fetch).toHaveBeenNthCalledWith(3, `https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
   });
 
   it('should initialise features correctly', async () => {
@@ -114,7 +131,7 @@ describe('When calling poll', () => {
     fetch.mockResponse(JSON.stringify(fetchResponse));
     
     // Act
-    await poll(settings, callbackMock);
+    await loadFromCdn(cdnSettings, callbackMock);
 
     // Assert
     expect(callbackMock).toHaveBeenCalled();
@@ -125,7 +142,7 @@ describe('When calling poll', () => {
     const callbackMock = jest.fn();
 
     // Act
-    await poll(settings, callbackMock);
+    await loadFromCdn(cdnSettings, callbackMock);
 
     // Assert
     expect(callbackMock).not.toHaveBeenCalled();
