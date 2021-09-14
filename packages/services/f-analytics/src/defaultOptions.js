@@ -4,9 +4,9 @@ const defaultOptions = {
     featureName: 'feature-name-unset',
     locale: 'en-GB',
     id: 'gtm-id-unset',
-    auth: null,
-    preview: null,
-    cookiesWin: null
+    auth: undefined,
+    preview: undefined,
+    cookiesWin: undefined
 };
 
 export default defaultOptions;

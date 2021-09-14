@@ -70,6 +70,10 @@ const $v = {
             $dirty: false,
             required: false
         },
+        administrativeArea: {
+            $dirty: false,
+            required: true
+        },
         postcode: {
             $dirty: false,
             required: true,
@@ -2328,7 +2332,7 @@ describe('Checkout', () => {
                         registrationSource: 'Guest'
                     },
                     otacToAuthExchanger,
-                    timeout: 10000
+                    timeout: 60000
                 };
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
                 const wrapper = shallowMount(VueCheckout, {
@@ -2621,7 +2625,7 @@ describe('Checkout', () => {
                             'BS1 1AA'
                         ]
                     },
-                    timeout: 10000
+                    timeout: 60000
                 };
 
                 beforeEach(async () => {
@@ -2694,7 +2698,7 @@ describe('Checkout', () => {
                     expect(logInvokerSpy).toHaveBeenCalledWith({
                         message: 'Geo Location Lookup Failed',
                         data: wrapper.vm.eventData,
-                        logMethod: $logger.logWarn,
+                        logMethod: $logger.logError,
                         error
                     });
                 });
@@ -3461,7 +3465,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3489,7 +3494,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3514,7 +3520,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3541,7 +3548,8 @@ describe('Checkout', () => {
                         propsData,
                         mocks: {
                             $v,
-                            $logger
+                            $logger,
+                            $cookies
                         }
                     });
 
@@ -3550,11 +3558,20 @@ describe('Checkout', () => {
                     // Act
                     await wrapper.vm.onFormSubmit();
 
+                    const expandedData = {
+                        ...wrapper.vm.eventData,
+                        enteredPostcode: 'BS1 1AA',
+                        location: 'ar511ar',
+                        locationUk: 'ar511ar',
+                        changedFields: [],
+                        isPostcodeChanged: false
+                    };
+
                     // Assert
                     expect(logInvokerSpy).toHaveBeenCalledWith({
                         message: 'Checkout Validation Error',
                         data: {
-                            ...wrapper.vm.eventData,
+                            ...expandedData,
                             validationState: mockValidationState
                         },
                         logMethod: $logger.logWarn
@@ -3732,7 +3749,7 @@ describe('Checkout', () => {
                         },
                         referralState: 'MockReferralState'
                     },
-                    timeout: 10000
+                    timeout: 60000
                 };
 
                 // Act

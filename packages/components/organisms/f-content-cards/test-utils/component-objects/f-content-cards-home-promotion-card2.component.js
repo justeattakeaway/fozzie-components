@@ -8,6 +8,10 @@ const {
 } = require('./f-content-cards-home-promotion.selectors');
 
 module.exports = class HomePromotionCard2 extends Page {
+    constructor() {
+        super('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
+    }
+
     get component () { return $(PROMOTION_CARD_2_COMPONENT); }
 
     get callToAction () { return $(CTA); }

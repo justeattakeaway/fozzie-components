@@ -7,7 +7,7 @@ let registration;
 
 describe('Shared - f-registration component tests - @browserstack', () => {
     beforeEach(() => {
-        registration = new Registration('organism', 'registration-component');
+        registration = new Registration();
         const pageUrl = buildUrl(registration.componentType, registration.componentName, registration.path);
         registration.open(pageUrl);
         registration.waitForComponent();

@@ -3,6 +3,7 @@
 exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with delivery response. 1`] = `
 Object {
   "address": Object {
+    "administrativeArea": undefined,
     "line1": "1 Bristol Road",
     "line2": "Flat 1",
     "locality": "Bristol",

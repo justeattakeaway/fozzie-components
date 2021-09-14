@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const ErrorMessage = require('../../test-utils/component-objects/f-error-message.component');
 
-const errorMessage = new ErrorMessage('atom', 'error-message-component');
+const errorMessage = new ErrorMessage();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

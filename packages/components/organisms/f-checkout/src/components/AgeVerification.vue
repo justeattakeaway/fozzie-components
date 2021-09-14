@@ -37,17 +37,14 @@
                 :value="selectedDate.year"
                 @input="selectionChanged($event, 'year')" />
 
-            <div
+            <error-message
+                v-if="shouldShowErrorMessage"
+                id="age-verification-error"
                 ref="AgeVerificationError"
-                tabindex="-1">
-                <error-message
-                    v-if="shouldShowErrorMessage"
-                    id="age-verification-error"
-                    data-js-error-message
-                    data-test-id="age-verification-error-message">
-                    {{ $t('ageVerification.errorMessage') }}
-                </error-message>
-            </div>
+                data-js-error-message
+                data-test-id="age-verification-error-message">
+                {{ $t('ageVerification.errorMessage') }}
+            </error-message>
 
             <p
                 :class="$style['c-checkout-ageVerification-description']"
@@ -61,7 +58,7 @@
                 button-type="primary"
                 is-full-width
                 data-test-id="age-verification-redirect-button"
-                @click.native="handleAgeVerifcation">
+                @click.native="handleAgeVerification">
                 {{ $t(`ageVerification.buttonText`) }}
             </f-button>
         </form>
@@ -78,6 +75,7 @@ import '@justeat/f-button/dist/f-button.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
+import getDaysInMonth from '../services/daysInMonth';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
 import EventNames from '../event-names';
 
@@ -104,7 +102,9 @@ export default {
         ...mapState(VUEX_CHECKOUT_MODULE, ['customer']),
 
         days () {
-            return Array.from({ length: 31 }, (_, index) => {
+            const daysInMonth = getDaysInMonth(this.selectedDate);
+
+            return Array.from({ length: daysInMonth }, (_, index) => {
                 const day = (index + 1).toString();
 
                 return {
@@ -175,7 +175,7 @@ export default {
             this.selectedDate[type] = selection;
         },
 
-        handleAgeVerifcation () {
+        handleAgeVerification () {
             this.hasSelectedDateOfBirth = true;
 
             if (this.isValidAge) {
@@ -183,7 +183,7 @@ export default {
                 this.$emit(EventNames.CheckoutVerifyAge);
             } else {
                 this.$nextTick(() => {
-                    this.$refs.AgeVerificationError.focus();
+                    this.$refs.AgeVerificationError.$el.focus();
                 });
             }
         }

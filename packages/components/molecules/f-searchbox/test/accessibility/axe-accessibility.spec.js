@@ -3,7 +3,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 
 const Searchbox = require('../../test-utils/component-objects/f-searchbox.component');
 
-const searchbox = new Searchbox('molecule', 'searchbox-component');
+const searchbox = new Searchbox();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

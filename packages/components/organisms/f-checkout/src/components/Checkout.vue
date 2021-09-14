@@ -98,7 +98,8 @@
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
-                        data-test-id="address-block" />
+                        data-test-id="address-block"
+                        :should-show-administrative-area="shouldShowAddressAdministrativeArea" />
 
                     <form-selector :key="availableFulfilmentTimesKey" />
 
@@ -182,6 +183,7 @@ import {
     CHECKOUT_METHOD_DINEIN,
     DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
+    ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -271,7 +273,7 @@ export default {
         checkoutTimeout: {
             type: Number,
             required: false,
-            default: 10000
+            default: 60000
         },
 
         spinnerTimeout: {
@@ -376,6 +378,10 @@ export default {
             'tableIdentifier',
             'time',
             'userNote'
+        ]),
+
+        ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+            'changedFields'
         ]),
 
         wasMobileNumberFocused () {
@@ -485,7 +491,7 @@ export default {
          *
          * */
         redirectUrl () {
-            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable) {
+            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable || this.message?.code === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
                 const postcodeCookie = this.$cookies.get('je-location');
 
                 return postcodeCookie ? `area/${postcodeCookie}` : '/';
@@ -498,6 +504,10 @@ export default {
             }
 
             return `${prefix}-${this.restaurant.seoName}/menu`;
+        },
+
+        shouldShowAddressAdministrativeArea () {
+            return this.tenant === 'au';
         }
     },
 
@@ -894,7 +904,7 @@ export default {
                 this.logInvoker({
                     message: 'Geo Location Lookup Failed',
                     data: this.eventData,
-                    logMethod: this.$logger.logWarn,
+                    logMethod: this.$logger.logError,
                     error
                 });
             }
@@ -988,9 +998,18 @@ export default {
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
 
+            const expandedData = {
+                ...this.eventData,
+                enteredPostcode: this.address?.postcode,
+                location: this.$cookies.get('je-location'),
+                locationUk: this.$cookies.get('je-location-uk'),
+                changedFields: this.changedFields,
+                isPostcodeChanged: this.changedFields.includes('addressPostcode')
+            };
+
             this.logInvoker({
                 message: 'Checkout Validation Error',
-                data: { ...this.eventData, validationState },
+                data: { ...expandedData, validationState },
                 logMethod: this.$logger.logWarn
             });
         },
@@ -1120,6 +1139,9 @@ export default {
                 },
                 locality: {
                     required
+                },
+                administrativeArea: {
+                    required: requiredIf(() => this.shouldShowAddressAdministrativeArea)
                 },
                 postcode: {
                     required,

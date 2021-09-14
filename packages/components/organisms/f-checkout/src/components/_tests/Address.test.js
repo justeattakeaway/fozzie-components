@@ -21,6 +21,10 @@ const $v = {
             $dirty: false,
             required: false
         },
+        administrativeArea: {
+            $dirty: false,
+            required: true
+        },
         postcode: {
             $dirty: false,
             required: true,
@@ -30,7 +34,9 @@ const $v = {
 };
 
 describe('Address', () => {
-    const propsData = {};
+    const propsData = {
+        shouldShowAdministrativeArea: true
+    };
 
     it('should be defined', () => {
         // Arrange
@@ -72,6 +78,7 @@ describe('Address', () => {
         it.each([
             ['isAddressLine1Empty', 'line1'],
             ['isAddressLocalityEmpty', 'locality'],
+            ['isAddressAdministrativeAreaEmpty', 'administrativeArea'],
             ['isAddressPostcodeEmpty', 'postcode']
         ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
             // Assert

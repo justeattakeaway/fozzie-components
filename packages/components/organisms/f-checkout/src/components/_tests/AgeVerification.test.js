@@ -2,6 +2,7 @@ import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import AgeVerification from '../AgeVerification.vue';
+import getDaysInMonth from '../../services/daysInMonth';
 import {
     i18n,
     createStore,
@@ -9,7 +10,12 @@ import {
 } from './helpers/setup';
 import EventNames from '../../event-names';
 
+jest.mock('../../services/daysInMonth');
+
 const localVue = createLocalVue();
+const expectedDaysInMonth = 31;
+
+getDaysInMonth.mockReturnValue(expectedDaysInMonth);
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
@@ -31,18 +37,34 @@ describe('AgeVerification', () => {
 
     describe('computed ::', () => {
         describe('days ::', () => {
-            beforeEach(() => {
-                // Arrange
-                wrapper = shallowMount(AgeVerification, {
-                    i18n,
-                    localVue,
-                    store: createStore()
+            const selectedDate = {
+                day: 1,
+                month: 1,
+                year: 2020
+            };
+
+            it('should call daysInMonthService with selectedDate', () => {
+                beforeEach(() => {
+                    // Arrange
+                    wrapper = shallowMount(AgeVerification, {
+                        i18n,
+                        localVue,
+                        store: createStore()
+                    });
                 });
+
+                // Act
+                wrapper.setData({
+                    selectedDate
+                });
+
+                // Assert
+                expect(getDaysInMonth).toHaveBeenCalledWith(selectedDate);
             });
 
-            it('should return an array of 31 day objects', () => {
+            it('should return an array of day objects', () => {
                 // Assert
-                expect(wrapper.vm.days.length).toEqual(31);
+                expect(wrapper.vm.days.length).toEqual(expectedDaysInMonth);
                 expect(wrapper.vm.days).toMatchSnapshot();
             });
         });
@@ -229,7 +251,7 @@ describe('AgeVerification', () => {
             });
         });
 
-        describe('`handleAgeVerifcation` ::', () => {
+        describe('`handleAgeVerification` ::', () => {
             // Arrange
             let updateDateOfBirthSpy;
 
@@ -250,7 +272,7 @@ describe('AgeVerification', () => {
                 });
 
                 // Act
-                wrapper.vm.handleAgeVerifcation();
+                wrapper.vm.handleAgeVerification();
 
                 // Assert
                 expect(wrapper.vm.hasSelectedDateOfBirth).toBe(true);
@@ -274,7 +296,7 @@ describe('AgeVerification', () => {
                     });
 
                     // Act
-                    wrapper.vm.handleAgeVerifcation();
+                    wrapper.vm.handleAgeVerification();
                 });
 
                 afterEach(() => {
@@ -311,7 +333,7 @@ describe('AgeVerification', () => {
 
                 it('should call not `updateDateOfBirth` with `selectedDate`', () => {
                     // Act
-                    wrapper.vm.handleAgeVerifcation();
+                    wrapper.vm.handleAgeVerification();
 
                     // Assert
                     expect(updateDateOfBirthSpy).not.toHaveBeenCalled();
@@ -319,21 +341,10 @@ describe('AgeVerification', () => {
 
                 it('should not emit `verify-age`', () => {
                     // Act
-                    wrapper.vm.handleAgeVerifcation();
+                    wrapper.vm.handleAgeVerification();
 
                     // Assert
                     expect(wrapper.emitted('verify-age')).toBeUndefined();
-                });
-
-                it('should focus on error message', async () => {
-                    // Act
-                    wrapper.vm.handleAgeVerifcation();
-                    await wrapper.vm.$nextTick();
-
-                    const errorMessage = wrapper.vm.$refs.AgeVerificationError;
-
-                    // Assert
-                    expect(document.activeElement).toEqual(errorMessage);
                 });
             });
         });

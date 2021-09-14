@@ -42,8 +42,9 @@ const mapUpdateCheckoutRequest = ({
                             address.line1,
                             ...(address.line2 ? [address.line2] : [])
                         ],
+                        administrativeArea: address.administrativeArea,
                         locality: address.locality || null,
-                        postalCode: address.postcode || null
+                        postalCode: address.postcode?.trim() || null
                     }
                 } : {}),
                 geolocation

@@ -1,7 +1,7 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Alert = require('../../test-utils/component-objects/f-alert.component');
 
-const alert = new Alert('molecule', 'alert-component');
+const alert = new Alert();
 
 describe('f-alert component tests', () => {
     beforeEach(() => {

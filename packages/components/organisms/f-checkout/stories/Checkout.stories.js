@@ -8,8 +8,9 @@ import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation.module';
-import CheckoutMock from '../src/demo/checkoutMock';
-import mockedRequests from '../src/demo/mockResponses';
+import CheckoutMock from './demo/checkoutMock';
+import mockedRequests from './demo/mockResponses';
+import { TENANT_MAP } from '../src/constants';
 
 export default {
     title: 'Components/Organisms',
@@ -26,6 +27,7 @@ const paymentPageUrlPrefix = '#/pay';
 CheckoutMock();
 
 const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
+const serviceTypeUnavailable = 'ServiceType is not available (Response from server but order not fulfillable)';
 const additionalItemsRequired = 'Additional Items Required Issue (Response from server but order not fulfillable)';
 const updateCheckoutAccessForbidden = 'Access Forbidden (Response from server is 403)';
 const checkoutServerError = 'Checkout Error (Response from server is an error)';
@@ -40,6 +42,7 @@ const noTimeAvailable = 'no-time-available';
 const ageRestriction = 'Age restricted';
 const ageRestrictionIssue = 'age-restriction';
 const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
+const serviceTypeUnavailableIssue = 'service-type-unavailable';
 const additionalItemsRequiredIssue = 'additional-items-required';
 const timeNotAvailable = 'Selected time no longer available';
 const timeNotAvailableIssue = 'time-unavailable';
@@ -50,6 +53,7 @@ const duplicateIssue = 'duplicate';
 const patchCheckoutErrorOptions = {
     None: null,
     [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
+    [serviceTypeUnavailable]: serviceTypeUnavailableIssue,
     [additionalItemsRequired]: additionalItemsRequiredIssue,
     [checkoutServerError]: SERVER,
     [updateCheckoutAccessForbidden]: accessForbiddenErrorCode,
@@ -107,7 +111,7 @@ export const CheckoutComponent = () => ({
         },
 
         locale: {
-            default: select('Locale', [locales.gb])
+            default: select('Locale', [locales.gb, locales.au, locales.nz], locales.gb)
         },
 
         isAsapAvailable: {
@@ -142,7 +146,7 @@ export const CheckoutComponent = () => ({
             }
 
             return this.getCheckoutError && this.getCheckoutError !== noTimeAvailable ?
-                `/checkout-${this.getCheckoutError}-get-error.json` : `/checkout-${this.serviceType}.json`;
+                `/checkout-${this.getCheckoutError}-get-error.json` : `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
         },
 
         getBasketUrl () {

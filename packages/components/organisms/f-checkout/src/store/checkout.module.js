@@ -374,7 +374,7 @@ export default {
             if (!addressCoords && state.authToken) {
                 const { data } = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
 
-                commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
+                commit(UPDATE_GEO_LOCATION, data?.geometry.coordinates);
             }
         },
 
@@ -480,6 +480,7 @@ export default {
 
                 state.address.locality = address.locality;
                 state.address.postcode = address.postalCode;
+                state.address.administrativeArea = address.administrativeArea;
             }
 
             if (fulfilment.table) {
@@ -561,11 +562,14 @@ export default {
             state.orderId = orderId;
         },
 
-        [UPDATE_GEO_LOCATION]: (state, [lng, lat]) => {
-            state.geolocation = {
-                latitude: lat,
-                longitude: lng
-            };
+        [UPDATE_GEO_LOCATION]: (state, coords) => {
+            if (Array.isArray(coords)) {
+                const [lng, lat] = coords;
+                state.geolocation = {
+                    latitude: lat,
+                    longitude: lng
+                };
+            }
         },
 
         [UPDATE_MESSAGE]: (state, message) => {
@@ -579,6 +583,7 @@ export default {
             /* eslint-enable prefer-destructuring */
 
             state.address.locality = address.locality;
+            state.address.administrativeArea = address.administrativeArea;
             state.address.postcode = address.postalCode;
         },
 

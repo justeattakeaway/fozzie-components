@@ -1,12 +1,12 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
-import checkoutDelivery from '../../demo/checkout-delivery.json';
-import basketDelivery from '../../demo/get-basket-delivery.json';
-import basketDeliveryAgeRestricted from '../../demo/get-basket-delivery-age-restriction.json';
-import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
-import customerAddresses from '../../demo/get-address.json';
-import geoLocationDetails from '../../demo/get-geo-location.json';
-import customer from '../../demo/get-customer.json';
+import checkoutDelivery from '../../../stories/demo/uk/checkout-delivery.json';
+import basketDelivery from '../../../stories/demo/get-basket-delivery.json';
+import basketDeliveryAgeRestricted from '../../../stories/demo/get-basket-delivery-age-restriction.json';
+import checkoutAvailableFulfilment from '../../../stories/demo/checkout-available-fulfilment.json';
+import customerAddresses from '../../../stories/demo/get-address.json';
+import geoLocationDetails from '../../../stories/demo/get-geo-location.json';
+import customer from '../../../stories/demo/get-customer.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';
@@ -309,6 +309,18 @@ describe('CheckoutModule', () => {
         });
 
         describe(`${UPDATE_GEO_LOCATION} ::`, () => {
+            it('should NOT update state if value from endpoint is not an array', () => {
+                // Arrange - coordinates array not returned from API
+                const coordinates = undefined;
+
+                // Act
+                mutations[UPDATE_GEO_LOCATION](state, coordinates);
+
+                // Assert
+                expect(state.geolocation).toBe(null);
+            });
+
+
             it('should update state with received values', () => {
                 // Arrange (Long / Lat)
                 const geometryData = [-0.10358, 51.51469];
@@ -863,7 +875,7 @@ describe('CheckoutModule', () => {
             const issue = {
                 code: 'RESTAURANT_NOT_TAKING_ORDERS',
                 shouldShowInDialog: true,
-                shouldRedirectToMenu: false
+                shouldRedirectToMenu: true
             };
 
             beforeEach(() => {
