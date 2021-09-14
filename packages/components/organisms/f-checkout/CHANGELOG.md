@@ -7,8 +7,8 @@ Latest (add to next release)
 ------------------------------
 *September 14, 2021*
 
-- Updated `f-checkout.component.js` with simplified tests that accept the tab loop from the tests as a parameter and removed hard coded functions.
-- Updated `axe-accessibility.spec.js` tests to support refactored test structure.
+- Updated `f-checkout.component.js` with simplified tests that accept the tab loop from the tests as a parameter and removed hard coded functions
+- Updated `axe-accessibility.spec.js` tests to support refactored test structure
 
 
 v0.180.3
