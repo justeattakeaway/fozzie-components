@@ -2,9 +2,10 @@ import appboy from '@braze/web-sdk';
 import transformCardData from './utils/transformCardData';
 import removeDuplicateContentCards from './utils/removeDuplicateContentCards';
 import areCookiesPermitted from './utils/areCookiesPermitted';
-import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME } from './types/events';
+import { CONTENT_CARDS_EVENT_NAME, IN_APP_MESSAGE_EVENT_NAME, LOGGER } from './types/events';
 import dispatcherEventStream from './DispatcherEventStream';
 import isAppboyInitialised from './utils/isAppboyInitialised';
+import { LOG_ERROR, LOG_INFO } from './types/logger';
 
 /* braze event handler callbacks */
 
@@ -50,7 +51,25 @@ function contentCardsHandler (postCardsAppboy) {
 
     const { cards = [] } = postCardsAppboy;
 
+    dispatcherEventStream.publish(LOGGER, {
+        type: LOG_INFO,
+        message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}):  Raw cards returned count.`,
+        data: {
+            count: cards.length,
+            key: this.loggingKey
+        }
+    });
+
     const processedCards = removeDuplicateContentCards(cards.map(transformCardData));
+
+    dispatcherEventStream.publish(LOGGER, {
+        type: LOG_INFO,
+        message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): removeDuplicateContentCards cards returned count.`,
+        data: {
+            count: processedCards.length,
+            key: this.loggingKey
+        }
+    });
 
     dispatcherEventStream.publish(CONTENT_CARDS_EVENT_NAME, processedCards);
 
@@ -91,13 +110,18 @@ class BrazeDispatcher {
      * @param apiKey
      * @param enableLogging
      * @param userId
+     * @param tags
      */
     constructor ({
         sessionTimeoutInSeconds = 0,
         apiKey,
         enableLogging,
-        userId
+        userId,
+        tags = 'global'
     }) {
+        // key to identify logs
+        this.loggingKey = `BrazeAdapter--dispatcher--${tags}--${userId}`;
+
         if (typeof window === 'undefined') throw new Error('window is not defined');
 
         if (!this.dispatcherOptions) {
@@ -105,7 +129,23 @@ class BrazeDispatcher {
                 apiKey,
                 userId
             };
+
+            dispatcherEventStream.publish(LOGGER, {
+                type: LOG_INFO,
+                message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): Initialising the dispatcher with these dispatcher options.`,
+                data: { dispatcherOptions: this.dispatcherOptions, key: this.loggingKey }
+            });
         } else if (!(apiKey === this.dispatcherOptions.apiKey && userId === this.dispatcherOptions.userId)) {
+            dispatcherEventStream.publish(LOGGER, {
+                type: LOG_ERROR,
+                message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): Attempt to reinitialise appboy with different parameters.`,
+                data: {
+                    oldOptions: this.dispatcherOptions,
+                    newOptions: { apiKey, userId },
+                    key: this.loggingKey
+                }
+            });
+
             throw new Error('Attempt to reinitialise appboy with different parameters');
         }
 
@@ -116,15 +156,26 @@ class BrazeDispatcher {
         }
 
         if (!isAppboyInitialised()) {
-            const initialised = appboy.initialize(apiKey, {
+            const options = {
                 baseUrl: 'sdk.iad-01.braze.com',
                 enableLogging,
                 sessionTimeoutInSeconds,
                 noCookies: !areCookiesPermitted()
-            });
+            };
+
+            const initialised = appboy.initialize(apiKey, options);
 
             if (initialised) {
                 appboy.openSession();
+
+                dispatcherEventStream.publish(LOGGER, {
+                    type: LOG_INFO,
+                    message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): Initialised.`,
+                    data: {
+                        config: options,
+                        key: this.loggingKey
+                    }
+                });
 
                 this.subscribeBraze();
 
@@ -134,6 +185,15 @@ class BrazeDispatcher {
                     });
                 });
             } else {
+                dispatcherEventStream.publish(LOGGER, {
+                    type: LOG_ERROR,
+                    message: `Braze Adapter Section: (Dispatcher) Key: (${this.loggingKey}): Could not initialise braze due to an error in the provided config`,
+                    data: {
+                        config: options,
+                        key: this.loggingKey
+                    }
+                });
+
                 throw new Error('Not initialising braze due to config');
             }
         } else {

@@ -7,7 +7,6 @@ import {
     sortByCardOrder
 } from './utils/index';
 import InvalidConsumerConfigError from './errors/InvalidConsumerConfigError';
-import { LogService } from './logging/logging.service';
 import {
     HOME_PROMOTION_CARD_1,
     HOME_PROMOTION_CARD_2,
@@ -15,6 +14,9 @@ import {
     PROMOTION_CARD_1,
     PROMOTION_CARD_2
 } from './types/cardTypes';
+import dispatcherEventStream from './DispatcherEventStream';
+import { LOGGER } from './types/events';
+import { LOG_ERROR, LOG_INFO } from './types/logger';
 
 class BrazeConsumer {
     /**
@@ -32,9 +34,23 @@ class BrazeConsumer {
         callbacks = {},
         interceptInAppMessages = {},
         interceptInAppMessageClickEvents = {},
-        loggerCallbacks = {},
-        customFilters = []
+        logger = {},
+        customFilters = [],
+        userId,
+        tags
     }) {
+        this.$logger = logger;
+        // temp logging function as dispatcher event stream is not available until the consumer is registered
+        const logWhileInitialising = ({ type, message, data }) => {
+            logger[type](message, null, { data, tags });
+        };
+
+        // key for logging
+        this.loggingConsumerKey = `BrazeAdapter--consumer--${tags}--${userId}`;
+        // set timer so we Know how long the process takes between initialisation and receiving content cards
+        this.consumerRegisteredUnix = Date.now();
+        this.consumerRegisteredLocale = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
+
         this.defaultEnabledCardTypes = [
             HOME_PROMOTION_CARD_1,
             HOME_PROMOTION_CARD_2,
@@ -54,22 +70,37 @@ class BrazeConsumer {
         ];
 
         this.optionsChecks.forEach(check => {
-            Object.keys(check).forEach(key => {
-                if (!check[key]) {
-                    throw new InvalidConsumerConfigError(key);
+            Object.keys(check).forEach(k => {
+                if (!check[k]) {
+                    logWhileInitialising({
+                        type: LOG_ERROR,
+                        message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Failed to register consumer ${this.loggingConsumerKey}, failed check: ${k}`,
+                        data: { check: check[k], key: this.loggingConsumerKey }
+                    });
+                    throw new InvalidConsumerConfigError(k);
                 }
             });
         });
 
         this.enabledCardTypes = enabledCardTypes || this.defaultEnabledCardTypes;
 
+        logWhileInitialising({
+            type: LOG_INFO,
+            message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Registering with the following enabled card types.`,
+            data: { enabledCardTypes: this.enabledCardTypes, key: this.loggingConsumerKey }
+        });
+
         this.customFilters = customFilters;
+
+        logWhileInitialising({
+            type: LOG_INFO,
+            message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Registering with the following enabled custom filters.`,
+            data: { customFilters: this.customFilters, key: this.loggingConsumerKey }
+        });
 
         this.inAppMessagesCallbacks = interceptInAppMessages;
 
         this.inAppMessageClickEventsCallbacks = interceptInAppMessageClickEvents;
-
-        this.loggerCallbacks = loggerCallbacks;
 
         this.callbacks = callbacks;
 
@@ -88,6 +119,13 @@ class BrazeConsumer {
         // and also accepts a array strings
         Promise.resolve(brands).then(brandsList => {
             this.brands = uniq([...this.brands, ...brandsList]);
+
+            logWhileInitialising({
+                type: LOG_INFO,
+                message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Registering with the following enabled brands.`,
+                data: { brands: this.brands, key: this.loggingConsumerKey }
+            });
+
             // check to see if cards has already been set if so re call all the content card callbacks
             if (this._cards.length) {
                 this.getContentCardCallbacks().forEach(callback => {
@@ -108,12 +146,11 @@ class BrazeConsumer {
     }
 
     /**
-     * Function that loops over all loggerCallbacks and calls them
-     * @returns {*[]}
+     * Function that returns logger object that is passed as part of the instantiation of the class
+     * @returns {}
      */
-    getLoggerCallbacks () {
-        return Object.keys(this.loggerCallbacks)
-            .map(key => new LogService(this.loggerCallbacks[key]));
+    getLogger () {
+        return this.$logger;
     }
 
     /**
@@ -144,7 +181,30 @@ class BrazeConsumer {
         // eslint-disable-next-line func-names
         return Object.keys(this.callbacks).map(function mapContentCardCallbacks (key) {
             return cards => {
+                dispatcherEventStream.publish(LOGGER, {
+                    type: LOG_INFO,
+                    message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Content Cards count before filtering.`,
+                    data: {
+                        count: cards.length,
+                        key: this.loggingConsumerKey,
+                        registrationTime: this.consumerRegisteredLocale,
+                        timeElapsedMS: (Date.now() - this.consumerRegisteredUnix)
+                    }
+                });
+
                 this.cards = cards;
+
+                dispatcherEventStream.publish(LOGGER, {
+                    type: LOG_INFO,
+                    message: `Braze Adapter Section: (Consumer) Key: (${this.loggingConsumerKey}): Content Cards count after filtering.`,
+                    data: {
+                        count: this._cards.length,
+                        key: this.loggingConsumerKey,
+                        registrationTime: this.consumerRegisteredLocale,
+                        timeElapsedMS: (Date.now() - this.consumerRegisteredUnix)
+                    }
+                });
+
                 this.callbacks[key](this._cards);
             };
         }, this);
