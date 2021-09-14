@@ -36,7 +36,7 @@ function init (json, onUpdated) {
 /**
  * Starts polling for updated feature config
  * @param {object} settings Contains scope, environment, key and optionally host override and pollInterval (defaults to 30s).
- * @param {*} onUpdated Optional callback function called when new config is loaded.
+ * @param {function} onUpdated Optional callback function called when new config is loaded.
  */
 async function poll (settings, onUpdated) {
     const suffix = settings.key ? `-${settings.key}` : '';
