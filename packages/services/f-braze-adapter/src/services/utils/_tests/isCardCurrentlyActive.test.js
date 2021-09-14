@@ -40,7 +40,6 @@ describe('services › utils › transformCardData', () => {
 
         // Assert
         expect(result).toBeFalse();
-        expect(result).toBeTrue();
     });
 
     it('should return true if card does not contain display times', () => {
