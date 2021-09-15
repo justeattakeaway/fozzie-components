@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.3.0
+------------------------------
+*September 14, 2021*
+
+### Removed
+- `MainBannerContainer.test.js` due to GA events being deleted.
+- `Services` directory due to GA events being deleted.
+- Mounted hook GA calls.
+
+
 v1.2.0
 ------------------------------
 *June 23, 2021*

@@ -3,6 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v0.181.0
 ------------------------------
 *September 14, 2021*
@@ -14,11 +15,19 @@ v0.181.0
 - Analytics tracking for all `ErrorDialog` events.
 
 
+*September 14, 2021*
+
+### Changed
+- Updated `f-checkout.component.js` with simplified tests that accept the tab loop from the tests as a parameter and removed hard coded functions
+- Updated `axe-accessibility.spec.js` tests to support refactored test structure
+
+
 v0.180.3
 ------------------------------
 *September 13, 2021*
 
 ### Changed
+
 - Gelocation lookup failure back to warning from error
 
 
