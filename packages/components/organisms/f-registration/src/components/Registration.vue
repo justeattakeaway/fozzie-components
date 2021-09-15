@@ -19,8 +19,7 @@
                 @click="visitLoginPage">
                 <v-link
                     is-bold
-                    :href="loginUrl"
-                    :has-text-decoration="false">
+                    :href="loginUrl">
                     {{ copy.navLinks.login.text }}
                 </v-link>
             </p>

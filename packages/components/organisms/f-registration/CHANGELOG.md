@@ -3,6 +3,41 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.2
+------------------------------
+*September 8, 2021*
+
+### Changed
+- Updated font weights after design review.
+- Restored decoration (underline) for link to login page.
+
+
+v1.0.0-beta.1
+------------------------------
+*September 7, 2021*
+
+### Changed
+- Republish to remove JustEatBasis from css output file.
+
+
+v1.0.0-beta.0
+------------------------------
+*September 1, 2021*
+
+### Updated
+- New font JETSansDigital
+- `f-button` to v2.0.0-beta.0 which use the new font
+- `f-form-field` to v3.0.0-beta.0 which use the new font
+
+
 v0.63.0
 ------------------------------
 *August 31, 2021*

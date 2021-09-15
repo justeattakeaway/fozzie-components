@@ -4,12 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.43.0
+v0.44.0
 ------------------------------
 *September 12, 2021*
 
 ### Added
 - Add $gtm (aka f-analytics) into Context so Mono Repo components can do this.$gtm.pushEvent({ ... }});
+
+
+v0.43.0
+------------------------------
+*August 25, 2021*
+
+### Changed
+- Switched to a new font JetSansDigital
 
 
 v0.42.1
