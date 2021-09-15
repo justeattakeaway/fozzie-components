@@ -275,9 +275,6 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
 }
 
 .o-btn {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
     font-family: $btn-default-font-family;
     @include font-size($btn-default-font-size);
     cursor: pointer;
@@ -317,6 +314,7 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         text-decoration: none;
     }
 }
+
     .o-button-content {
         display: flex;
         justify-content: center;
@@ -349,6 +347,10 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
 
     .o-btn-icon--trailing {
         margin-left: $btn-default-iconSideSpacing;
+    }
+
+    .o-btn--loading {
+        position: relative;
     }
 
 /**
@@ -628,6 +630,7 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         height: $btn-icon-sizeLarge-iconSize;
     }
 }
+
 .o-btn--icon.o-btn--sizeMedium {
     width: $btn-icon-sizeMedium-buttonSize;
     height: $btn-icon-sizeMedium-buttonSize;
@@ -638,6 +641,7 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         height: $btn-icon-sizeMedium-iconSize;
     }
 }
+
 .o-btn--icon.o-btn--sizeSmall {
     width: $btn-icon-sizeSmall-buttonSize;
     height: $btn-icon-sizeSmall-buttonSize;
@@ -648,6 +652,7 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         height: $btn-icon-sizeSmall-iconSize;
     }
 }
+
 .o-btn--icon.o-btn--sizeXSmall {
     width: $btn-icon-sizeXSmall-buttonSize;
     height: $btn-icon-sizeXSmall-buttonSize;
