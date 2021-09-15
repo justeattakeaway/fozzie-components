@@ -6,7 +6,7 @@ module.exports = class BasketService {
     }
 
     async createBasket (basketInfo) {
-        console.log(`Attempting to create basket for menu Id: ${basketInfo.menuId} and restaurant Id ${basketInfo.restaurantSEO}.`);
+        console.log(`Attempting to create basket for menu Id: ${basketInfo.menuId} and restaurant Id ${basketInfo.restaurantId}.`);
 
         const { data } = await this.basketApi.createBasketForUser(basketInfo);
 

@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*August 24, 2021*
+*September 15, 2021*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
+- `f-test-data-creator` package for generating test data in our e2e tests in CoreWeb
+- `clients` folder for storing APIs
+- `services` folder for importing the `clients` and completing further logic
+- `test-data-generator` class for creating an innitial user

@@ -13,13 +13,12 @@ module.exports = class SearchService {
 
         const { data } = await this.searchApiService.getRestaurantsByPostcode(this.tenant, this.postcode);
 
-        let result = data.Restaurants.filter(restaurant => this.preferredRestaurantIds.includes(restaurant.Id));
-
+        let result = data.Restaurants.filter(restaurant => this.preferredRestaurantIds.includes(restaurant.Id) || restaurant.CollectionMenuId != null || restaurant.DeliveryMenuId != null);
         if (result === undefined) {
             throw new Error('Unable to find a valid restaurant.');
         }
 
-        result = serviceType === 'collection' ? result.find(restaurant => restaurant.IsCollection) : result.find(restaurant => restaurant.IsDelivery);
+        result = serviceType === 'Collection' ? result.find(restaurant => restaurant.IsCollection) : result.find(restaurant => restaurant.IsDelivery);
 
         console.log(`Successfully returned preferred restaurant: ${result.Id} with SEO Name ${result.UniqueName}`);
 

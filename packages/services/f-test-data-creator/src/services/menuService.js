@@ -3,15 +3,22 @@ const MenuApiService = require('../clients/menuApi');
 module.exports = class MenuService {
     constructor (configuration) {
         this.menuApiService = new MenuApiService(configuration);
+        this.menus = configuration.Menus;
     }
 
-    async getMenuId (restaurantSEO) {
+    async getMenuId (restaurantSEO, serviceType) {
         console.log(`Attempting to get Menu Id for restaurant: ${restaurantSEO}`);
 
         const { data } = await this.menuApiService.getRestaurantManifest(restaurantSEO);
 
-        console.log(`Successfully returned Menu Id: ${data.Menus[0].MenuGroupId}`);
+        const result = data.Menus.filter(menu => this.menus[serviceType].includes(menu.MenuGroupId));
 
-        return data.Menus[0].MenuGroupId;
+        if (result === undefined) {
+            throw new Error(`No Menus available for ${serviceType}`);
+        }
+
+        console.log(`Successfully returned menu for service type: ${serviceType} and restaurant ${restaurantSEO}`);
+
+        return result[0];
     }
 };
