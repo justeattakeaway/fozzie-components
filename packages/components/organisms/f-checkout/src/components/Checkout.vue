@@ -904,7 +904,7 @@ export default {
                 this.logInvoker({
                     message: 'Geo Location Lookup Failed',
                     data: this.eventData,
-                    logMethod: this.$logger.logError,
+                    logMethod: this.$logger.logWarn,
                     error
                 });
             }
