@@ -29,7 +29,8 @@ describe('ErrorDialog', () => {
     };
 
     const duplicateOrderMessage = {
-        code: 'DuplicateOrder'
+        code: 'DuplicateOrder',
+        isDuplicateOrderError: true
     };
 
     afterEach(() => {
@@ -392,9 +393,9 @@ describe('ErrorDialog', () => {
             });
         });
 
-        it('should make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` refers to a duplicate order ', () => {
+        it('should make a call to `trackDialogEvent` with a error message', () => {
             // Arrange
-            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
+            const trackDialogEventSpy = jest.spyOn(ErrorDialog.methods, 'trackDialogEvent');
 
             // Act
             shallowMount(ErrorDialog, {
@@ -408,26 +409,7 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(trackDuplicateOrderWarnDialogSpy).toHaveBeenCalled();
-        });
-
-        it('should not make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` does not refer to a duplicate order ', () => {
-            // Arrange
-            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
-
-            // Act
-            shallowMount(ErrorDialog, {
-                store: createStore({
-                    ...defaultCheckoutState,
-                    message: defaultMessage
-                }),
-                i18n,
-                localVue,
-                propsData
-            });
-
-            // Assert
-            expect(trackDuplicateOrderWarnDialogSpy).not.toHaveBeenCalled();
+            expect(trackDialogEventSpy).toHaveBeenCalledWith(duplicateOrderMessage);
         });
     });
 });
