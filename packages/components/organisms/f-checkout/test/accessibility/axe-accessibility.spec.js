@@ -93,8 +93,10 @@ describe('Accessibility tests', () => {
         checkout.waitForComponent();
         checkout.goToPayment();
 
+        const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
+        const result = checkout.testTabOrder(expectedTabOrder);
+
         // Assert
-        const result = checkout.getCheckoutErrorTabOrder();
         expect(result.actual).toEqual(result.expected);
     });
 
@@ -116,8 +118,10 @@ describe('Accessibility tests', () => {
         checkout.waitForComponent();
         checkout.goToPayment();
 
+        const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
+        const result = checkout.testTabOrder(expectedTabOrder);
+
         // Assert
-        const result = checkout.getPlaceOrderErrorTabOrder();
         expect(result.actual).toEqual(result.expected);
     });
 
@@ -147,8 +151,10 @@ describe('Accessibility tests', () => {
         checkout.populateGuestCollectionCheckoutForm(addressInfo);
         checkout.goToPayment();
 
+        const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
+        const result = checkout.testTabOrder(expectedTabOrder);
+
         // Assert
-        const result = checkout.getCheckoutErrorTabOrder();
         expect(result.actual).toEqual(result.expected);
     });
 
@@ -181,8 +187,10 @@ describe('Accessibility tests', () => {
         checkout.populateGuestCheckoutForm(addressInfo);
         checkout.goToPayment();
 
+        const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
+        const result = checkout.testTabOrder(expectedTabOrder);
+
         // Assert
-        const result = checkout.getCheckoutErrorTabOrder();
         expect(result.actual).toEqual(result.expected);
     });
 
@@ -213,8 +221,10 @@ describe('Accessibility tests', () => {
         checkout.populateGuestDineInCheckoutForm(addressInfo);
         checkout.goToPayment();
 
+        const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
+        const result = checkout.testTabOrder(expectedTabOrder);
+
         // Assert
-        const result = checkout.getCheckoutErrorTabOrder();
         expect(result.actual).toEqual(result.expected);
     });
 
@@ -239,8 +249,10 @@ describe('Accessibility tests', () => {
         checkout.populateGuestCollectionCheckoutForm(addressInfo);
         checkout.goToPayment();
 
+        const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
+        const result = checkout.testTabOrder(expectedTabOrder);
+
         // Assert
-        const result = checkout.getPlaceOrderErrorTabOrder();
         expect(result.actual).toEqual(result.expected);
     });
 
@@ -268,8 +280,10 @@ describe('Accessibility tests', () => {
         checkout.populateGuestCheckoutForm(addressInfo);
         checkout.goToPayment();
 
+        const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
+        const result = checkout.testTabOrder(expectedTabOrder);
+
         // Assert
-        const result = checkout.getPlaceOrderErrorTabOrder();
         expect(result.actual).toEqual(result.expected);
     });
 
@@ -295,8 +309,10 @@ describe('Accessibility tests', () => {
         checkout.populateGuestDineInCheckoutForm(addressInfo);
         checkout.goToPayment();
 
+        const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
+        const result = checkout.testTabOrder(expectedTabOrder);
+
         // Assert
-        const result = checkout.getPlaceOrderErrorTabOrder();
         expect(result.actual).toEqual(result.expected);
     });
 });
