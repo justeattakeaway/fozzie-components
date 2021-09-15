@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0
+------------------------------
+*September 15, 2021*
+
+### Updated
+- fozzie version to make normalize styles optional. This will remove nornalize styles from the components by default.
+- JETSansDigital font instead of JustEatBasis
+
+
 v4.0.0-beta.0
 ------------------------------
 *August 25, 2021*

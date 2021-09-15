@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v3.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
 v2.2.0
 ------------------------------
 *September 2, 2021*
@@ -19,14 +34,6 @@ v2.1.0
 
 ### Added
 - Support for `disabled` and `selected` attributes for dropdown options.
-
-
-v3.0.0-beta.0
-------------------------------
-*August 26, 2021*
-
-### Updated
-- New font JETSansDigital
 
 
 v2.0.0
