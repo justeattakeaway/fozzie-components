@@ -88,13 +88,22 @@ export default {
         },
 
         /**
-         * Pushes details that the Duplicated Order Warning dialog has been loaded
+         * Pushes details that an error dialog has been loaded
          */
-        trackDuplicateOrderWarnDialog () {
+        trackDialogEvent (_, action) {
+            let eventAction;
+
+            if (action.isDuplicateOrderError) {
+                eventAction = 'dialog_duplicate_order_warning';
+            } else {
+                const error = action.code.toLowerCase();
+                eventAction = `dialog_${error}_error`;
+            }
+
             window.dataLayer.push({
                 event: 'trackEvent',
                 eventCategory: 'engagement',
-                eventAction: 'dialog_duplicate_order_warning',
+                eventAction,
                 eventLabel: 'view_dialog'
             });
         },
