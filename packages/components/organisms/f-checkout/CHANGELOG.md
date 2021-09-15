@@ -3,10 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+
+v0.181.0
 ------------------------------
 *September 14, 2021*
 
+### Changed
+- `trackDuplicateOrderWarnDialog` to `trackDialogEvent` to handle different dialog events.
+
+### Added
+- Analytics tracking for all `ErrorDialog` events.
+
+
+*September 14, 2021*
+
+### Changed
 - Updated `f-checkout.component.js` with simplified tests that accept the tab loop from the tests as a parameter and removed hard coded functions
 - Updated `axe-accessibility.spec.js` tests to support refactored test structure
 
