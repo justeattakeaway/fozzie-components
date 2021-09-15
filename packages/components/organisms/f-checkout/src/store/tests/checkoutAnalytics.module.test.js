@@ -8,7 +8,7 @@ import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from '../mutation-types';
 const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
-    trackDuplicateOrderWarnDialog,
+    trackDialogEvent,
     trackFormErrors,
     trackFormInteraction,
     trackInitialLoad,
@@ -349,18 +349,22 @@ describe('CheckoutAnalyticsModule', () => {
             });
         });
 
-        describe('trackDuplicateOrderWarnDialog ::', () => {
-            it('should `push` expected event to `dataLayer`', () => {
+        describe('trackDialogEvent ::', () => {
+            it.each([
+                ['dialog_duplicate_order_warning', 'DuplicateOrder', true],
+                ['dialog_restaurant_not_taking_orders_error', 'RESTAURANT_NOT_TAKING_ORDERS', false],
+                ['dialog_additional_items_required_error', 'ADDITIONAL_ITEMS_REQUIRED', false]
+            ])('should `push` expected event  with %s `eventAction` to `dataLayer` when error is %s', (eventAction, code, isDuplicateOrderError) => {
                 // Arrange
                 const expected = {
                     event: 'trackEvent',
                     eventCategory: 'engagement',
-                    eventAction: 'dialog_duplicate_order_warning',
+                    eventAction,
                     eventLabel: 'view_dialog'
                 };
 
                 // Act
-                trackDuplicateOrderWarnDialog();
+                trackDialogEvent({}, { code, isDuplicateOrderError });
 
                 // Assert
                 expect(window.dataLayer).toContainEqual(expected);
