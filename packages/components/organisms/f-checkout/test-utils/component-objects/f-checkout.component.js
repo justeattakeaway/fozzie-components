@@ -197,21 +197,7 @@ module.exports = class Checkout extends Page {
         return this.errorMessageDupOrderGoToHistory.click();
     }
 
-    getCheckoutErrorTabOrder () {
-        const tabOrder = [this.errorMessageRetry, this.closeMessageModal];
-        const tabOrderResult = super.testTabOrder(tabOrder);
-        const expectedTabOrder = tabOrder.map(el => ({
-            selector: el.getAttribute('data-test-id'),
-            isFocused: true
-        }));
-        return {
-            actual: tabOrderResult,
-            expected: expectedTabOrder.concat(expectedTabOrder[0])
-        };
-    }
-
-    getPlaceOrderErrorTabOrder () {
-        const tabOrder = [this.errorMessageRetry, this.errorMessageDupOrderGoToHistory, this.closeMessageModal];
+    testTabOrder (tabOrder) {
         const tabOrderResult = super.testTabOrder(tabOrder);
         const expectedTabOrder = tabOrder.map(el => ({
             selector: el.getAttribute('data-test-id'),

@@ -5,6 +5,7 @@ import storeContext from './vuex.context';
 
 import './logger.context';
 import './cookie.context';
+import './analytics.context';
 
 Vue.config.productionTip = false;
 

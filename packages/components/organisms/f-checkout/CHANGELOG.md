@@ -4,11 +4,62 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.2
+------------------------------
+*September 8, 2021*
+
+### Changed
+- Updated font weights after design review.
+
+
+v1.0.0-beta.1
+------------------------------
+*September 6, 2021*
+
+### Changed
+- Updated versions of `f-alert` and `f-mega-modal` (JETSans Update).
+
+
+v1.0.0-beta.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- New font JETSansDigital
+- `f-button` to v2.0.0-beta.0 which use the new font
+- `f-form-field` to v3.0.0-beta.0 which use the new font
+
+
+v0.181.0
+------------------------------
+*September 14, 2021*
+
+### Changed
+- `trackDuplicateOrderWarnDialog` to `trackDialogEvent` to handle different dialog events.
+
+### Added
+- Analytics tracking for all `ErrorDialog` events.
+
+*September 14, 2021*
+
+### Changed
+- Updated `f-checkout.component.js` with simplified tests that accept the tab loop from the tests as a parameter and removed hard coded functions
+- Updated `axe-accessibility.spec.js` tests to support refactored test structure
+
+
 v0.180.3
 ------------------------------
 *September 13, 2021*
 
 ### Changed
+
 - Gelocation lookup failure back to warning from error
 
 
