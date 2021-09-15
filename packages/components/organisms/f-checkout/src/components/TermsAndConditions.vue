@@ -40,7 +40,6 @@
     @include font-size('body-s');
     text-align: center;
     color: $color-grey-50;
-    font-weight: $font-weight-bold;
 
     @include media('>=narrow') {
         padding: spacing(x2) spacing(x5);
