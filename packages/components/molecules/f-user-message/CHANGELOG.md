@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v2.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
 v1.3.0
 ------------------------------
 *May 25, 2021*

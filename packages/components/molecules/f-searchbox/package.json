@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-searchbox",
   "description": "Fozzie Searchbox – Just Eat Takeaway Global Searchbox",
-  "version": "4.0.0-beta.31",
+  "version": "4.0.0-beta.34",
   "main": "dist/f-searchbox.umd.min.js",
   "maxBundleSize": "60kB",
   "files": [
@@ -59,10 +59,10 @@
     "vuex": "3.5.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "1.10.1",
+    "@justeat/f-button": "2.0.0-beta.0",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-globalisation": "0.2.0",
-    "@justeat/f-mega-modal": "0.3.0",
+    "@justeat/f-mega-modal": "1.0.0-beta.0",
     "@justeat/f-vue-icons": "1.13.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",

@@ -3,9 +3,44 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.2
+------------------------------
+*September 9, 2021*
+
+### Removed
+- `font-weight` override of the banner title
+
+
+v1.0.0-beta.1
+------------------------------
+*September 6, 2021*
+
+### Changed
+- Updated version of `f-mega-modal` (JETSans Update)
+
+
+v1.0.0-beta.0
+------------------------------
+*September 9, 2021*
+
+### Changed
+- Updated version of `f-button` (JETSans Update)
+
+
 v0.25.0
 ------------------------------
 *September 9, 2021*
+
+### Changed
+- Updated version of `f-button` (JETSans Update)
 
 ### Added
 - Tests to cover version changes in v0.24.0.
@@ -20,6 +55,9 @@ v0.24.0
 
 ### Fixed
 - Moved `isBodyHeightLessThanWindowHeight` to computed so it can re-calculate cookie position.
+
+### Changed
+- Updated version of `f-button`.
 
 
 v0.23.0

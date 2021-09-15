@@ -3,12 +3,35 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.10.0
+v1.1.0
 ------------------------------
 *September 15, 2021*
 
 ### Changed
 - Updated branding for UK
+
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.1
+------------------------------
+*September 1, 2021*
+
+### Updated
+- `f-button` to v2.0.0-beta.0 which use the new font
+
+
+v1.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
 
 
 v0.9.0
