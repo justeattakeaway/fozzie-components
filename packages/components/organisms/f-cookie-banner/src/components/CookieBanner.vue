@@ -397,7 +397,6 @@ export default {
 
     .c-cookieBanner-title {
         @include font-size(heading-m);
-        font-weight: $font-weight-bold;
         margin: spacing() 0;
         padding: 0;
         color: $color-content-default;
