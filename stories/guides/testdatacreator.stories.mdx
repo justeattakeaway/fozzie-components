@@ -1,0 +1,40 @@
+<Meta title="Documentation/Guides/Test Data Creator"/>
+
+# Test Data Creator
+
+## What is it?
+
+Some parts of a user journey require data before we can begin automation testing. For example, in order to complete functional tests for the checkout page, we would first need to acquire user authentication (unless guest), restaurants, menus and more.
+
+This package enables us to simply pass in an environment config and service type, and it will return the respective data. It could also be useful for developers, since it can quickly generate data without the need of a browser. The package currently works for QA1 and staging with an international environment also in progress.
+
+In future, we can add more custom logic for choosing products, populating the basket, selecting the order time etc. There is also some discussion around adding a UI, so people can easily filter and select criteria based on their own requirements.
+
+
+## Implementation
+
+1. Below is a simple example of how the package can be used to quickly choose a restaurant followed by a menu.
+
+```javascript
+// import classes from the `test-data-creator` package
+const SearchService = require('@justeat/f-test-data-creator/src/services/searchService');
+const MenuService = require('@justeat/f-test-data-creator/src/services/menuService');
+
+// create new instance of the class and pass in an environment config.
+const searchService = new SearchService(testType.environmentConfig);
+const menuService = new MenuService(testType.environmentConfig);
+
+exports.getData = async serviceType => {
+    // call the functions from within each class and pass in the serviceType
+    const restaurant = await searchService.getPreferredRestaurants(serviceType);
+    const menu = await menuService.getMenuId(restaurant.UniqueName, serviceType);
+
+    return {
+        restaurantId: restaurant.Id,
+        menuId: menu.MenuGroupId,
+    };
+};
+```
+The package also includes a class for creating a new user and /or authenticating a current user. 
+
+Some configuration files need to be added to your repository in order for this package to work. These configuration files will hold values including, but not limited to, the environment name, relevant endpoints, preferred restaurants and menus. Please reach out if you want to know more about configuring this.
