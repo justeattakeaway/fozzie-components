@@ -11,6 +11,14 @@ v1.1.0
 - Updated branding for UK
 
 
+v1.1.0
+------------------------------
+*September 15, 2021*
+
+### Changed
+- Updated version of `f-button` to remove normalize styles from it.
+
+
 v1.0.0
 ------------------------------
 *September 15, 2021*

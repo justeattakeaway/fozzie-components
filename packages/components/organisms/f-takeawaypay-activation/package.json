@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-button": "2.0.0-beta.0",
+    "@justeat/f-button": "2.0.0",
     "@justeat/f-card": "1.3.0",
     "@justeat/f-vue-icons": "2.6.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
