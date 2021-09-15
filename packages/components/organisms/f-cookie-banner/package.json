@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@justeat/f-button": "2.0.0",
-    "@justeat/f-mega-modal": "1.0.0",
+    "@justeat/f-mega-modal": "1.1.0",
     "@justeat/f-vue-icons": "2.3.0",
     "@justeat/f-wdio-utils": "0.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
