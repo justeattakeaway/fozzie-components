@@ -130,7 +130,6 @@ export default {
     margin-top: spacing(x0.5);
     margin-bottom: 0;
     @include font-size('body-s');
-    font-weight: $font-weight-bold;
     color: $color-content-subdued;
 }
 
