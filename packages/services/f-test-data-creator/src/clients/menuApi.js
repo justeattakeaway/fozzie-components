@@ -3,7 +3,7 @@ const axios = require('axios');
 module.exports = class MenuApiService {
     constructor (configuration) {
         this.getMenuUrl = configuration.Services.Menu.BaseAddress;
-        this.tenant = configuration.tenant;
+        this.tenant = configuration.Tenant;
     }
 
     async getRestaurantManifest (restaurantSEO, timeout = 5000) {

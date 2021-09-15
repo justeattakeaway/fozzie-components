@@ -3,7 +3,7 @@ const PublicApiService = require('../clients/publicApi');
 
 module.exports = class AuthorizationService {
     constructor (configuration) {
-        this.environment = configuration.environment;
+        this.environment = configuration.Environment;
         this.consumerApiService = new ConsumerApiService(configuration);
         this.publicApiService = new PublicApiService(configuration);
     }

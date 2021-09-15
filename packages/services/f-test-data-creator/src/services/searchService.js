@@ -5,7 +5,7 @@ module.exports = class SearchService {
         this.preferredRestaurantIds = configuration.PreferredRestaurants;
         this.searchApiService = new SearchApiService(configuration);
         this.postcode = configuration.Services.Search.Postcode;
-        this.tenant = configuration.tenant;
+        this.tenant = configuration.Tenant;
     }
 
     async getPreferredRestaurants (serviceType) {

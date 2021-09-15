@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-test-data-creator",
-  "description": "Fozzie Test Data Creator - ",
+  "description": "Fozzie Test Data Creator - Generates data for testing purposes",
   "version": "0.1.0",
   "main": "dist/f-test-data-creator.umd.min.js",
   "files": [

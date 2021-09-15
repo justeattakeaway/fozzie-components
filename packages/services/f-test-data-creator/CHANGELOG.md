@@ -9,7 +9,7 @@ v0.1.0
 *September 15, 2021*
 
 ### Added
-- `f-test-data-creator` package for generating test data in our e2e tests in CoreWeb
+- `f-test-data-creator` package for generating test data in e2e tests
 - `clients` folder for storing APIs
 - `services` folder for importing the `clients` and completing further logic
 - `test-data-generator` class for creating an innitial user
