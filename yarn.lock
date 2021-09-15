@@ -2368,10 +2368,10 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@6.0.0-beta.0":
-  version "6.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.0.tgz#cdd4ddd0b718c2361d33cc1c411d12d061d4c4b9"
-  integrity sha512-BhRJN5OPBoxQQ5H2c+qVgV0104ZVIHn+vcG4Uk+4N6rhWztVJeHIHBYgTvXAeshwkYcvMbItwvcqvDJa3nXcRQ==
+"@justeat/fozzie@6.0.0-beta.1":
+  version "6.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.1.tgz#f9ae0ba3bed371770c993fbf297d68e16067a012"
+  integrity sha512-/tTyMrRZcg8fUxIHmlPo1UjFtlVYb+N4AolpLXIpsCmyQblJBkhx9sNCTipQEmJdYACQex4OL5RSdxq0pGewNw==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
@@ -2379,7 +2379,6 @@
     "@justeat/pie-design-tokens" "1.0.0-beta.0"
     fontfaceobserver "2.1.0"
     include-media "1.4.10"
-    normalize-scss "7.0.1"
 
 "@justeat/pie-design-tokens@1.0.0-beta.0":
   version "1.0.0-beta.0"
@@ -18584,11 +18583,6 @@ normalize-range@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
-
-normalize-scss@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/normalize-scss/-/normalize-scss-7.0.1.tgz#74485e82bb5d0526371136422a09fdb868ffc1a4"
-  integrity sha512-qj16bWnYs+9/ac29IgGjySg4R5qQTp1lXfm7ApFOZNVBYFY8RZ3f8+XQNDDLHeDtI3Ba7Jj4+LuPgz9v/fne2A==
 
 normalize-selector@^0.2.0:
   version "0.2.0"

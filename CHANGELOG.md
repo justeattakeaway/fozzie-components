@@ -9,8 +9,8 @@ v4.0.0
 *September 15, 2021*
 
 ### Updated
-- fozzie version to make normalize styles optional. This will remove nornalize styles from the components by default.
-- JETSansDigital font instead of JustEatBasis
+- fozzie version to make normalize styles optional. This will remove normalize styles from the components by default.
+- JETSansDigital font instead of JustEatBasis for the components and storybook.
 
 
 v4.0.0-beta.0
@@ -18,10 +18,10 @@ v4.0.0-beta.0
 *August 25, 2021*
 
 ### Updated
-- fozzie version to include new font
+- fozzie version to include new font.
 
 ### Changed
-- Storybook font to become new JETSansDigital instead of JustEatBasis
+- Storybook font to become new JETSansDigital instead of JustEatBasis.
 
 
 v3.54.0
