@@ -11,19 +11,19 @@ let interval = null;
  */
 function init (configAsJson, onUpdated) {
     if (configAsJson) {
-        const featuresRootObject = JSON.parse(configAsJson);
+        const newConfig = JSON.parse(configAsJson);
 
-        if (configCreatedAt && (configCreatedAt >= featuresRootObject.createdAt)) {
+        if (configCreatedAt && (configCreatedAt >= newConfig.createdAt)) {
             return;
         }
 
-        configCreatedAt = featuresRootObject.createdAt;
+        configCreatedAt = newConfig.createdAt;
 
         logger.logInfo(`Loading feature config created at ${configCreatedAt}`);
 
         featureLookup = {};
 
-        featuresRootObject.features.forEach(feature => {
+        newConfig.features.forEach(feature => {
             featureLookup[feature.key] = feature;
         });
 
