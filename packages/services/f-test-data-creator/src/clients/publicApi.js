@@ -2,14 +2,14 @@
 const axios = require('axios');
 const { getLanguageForTenant } = require('../configuration/tenants');
 
-module.exports = class PublicApiService {
+module.exports = class PublicServiceApi {
     constructor (configuration) {
         this.createUserUrl = configuration.Services.Public.CreateUserUrl;
         this.authorizationUrl = configuration.Services.Public.AuthorizationUrl;
         this.token = configuration.Services.Public.AuthorizationToken;
     }
 
-    async createConsumer (userInfo, timeout = 5000) {
+    async createConsumerAsync (userInfo, timeout = 5000) {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ module.exports = class PublicApiService {
         });
     }
 
-    async getAuthCodeUk (emailAddress, password, timeout = 5000) {
+    async getAuthCodeUkAsync (emailAddress, password, timeout = 5000) {
         const config = {
             headers: {
                 Authorization: this.token
@@ -49,6 +49,7 @@ module.exports = class PublicApiService {
             password
         };
 
+        // turns object into form-data for post request
         const searchParams = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
 
         return axios.post(this.authorizationUrl, searchParams, config)
@@ -57,7 +58,7 @@ module.exports = class PublicApiService {
         });
     }
 
-    async getAuthCodeInt (emailAddress, password, tenant, timeout = 5000) {
+    async getAuthCodeIntAsync (emailAddress, password, tenant, timeout = 5000) {
         const config = {
             headers: {
                 Authorization: this.token

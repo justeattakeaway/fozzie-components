@@ -6,13 +6,9 @@ module.exports = class TestDataGenerator {
 
     get lastName () { return 'Testington'; }
 
-    get emailAddress () {
-        return this._emailAddress;
-    }
+    get emailAddress () { return this._emailAddress; }
 
-    set emailAddress (val) {
-        this._emailAddress = val;
-    }
+    set emailAddress (val) { this._emailAddress = val; }
 
     get password () { return crypto.randomBytes(10).toString('base64'); }
 };

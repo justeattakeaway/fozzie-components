@@ -1,17 +1,17 @@
-const SearchApiService = require('../clients/searchApi');
+const SearchServiceApi = require('../clients/searchApi');
 
 module.exports = class SearchService {
     constructor (configuration) {
         this.preferredRestaurantIds = configuration.PreferredRestaurants;
-        this.searchApiService = new SearchApiService(configuration);
+        this.searchServiceApi = new SearchServiceApi(configuration);
         this.postcode = configuration.Services.Search.Postcode;
         this.tenant = configuration.Tenant;
     }
 
-    async getPreferredRestaurants (serviceType) {
+    async getPreferredRestaurantsAsync (serviceType) {
         console.log(`Attempting to get available restaurants in ${this.postcode} for tenant: ${this.tenant}`);
 
-        const { data } = await this.searchApiService.getRestaurantsByPostcode(this.tenant, this.postcode);
+        const { data } = await this.searchServiceApi.getRestaurantsByPostcodeAsync(this.tenant, this.postcode);
 
         let result = data.Restaurants.filter(restaurant => this.preferredRestaurantIds.includes(restaurant.Id) || restaurant.CollectionMenuId != null || restaurant.DeliveryMenuId != null);
         if (result === undefined) {

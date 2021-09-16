@@ -1,15 +1,15 @@
-const MenuApiService = require('../clients/menuApi');
+const MenuServiceApi = require('../clients/menuApi');
 
 module.exports = class MenuService {
     constructor (configuration) {
-        this.menuApiService = new MenuApiService(configuration);
+        this.menuServiceApi = new MenuServiceApi(configuration);
         this.menus = configuration.Menus;
     }
 
-    async getMenuId (restaurantSEO, serviceType) {
+    async getMenuIdAsync (restaurantSEO, serviceType) {
         console.log(`Attempting to get Menu Id for restaurant: ${restaurantSEO}`);
 
-        const { data } = await this.menuApiService.getRestaurantManifest(restaurantSEO);
+        const { data } = await this.menuServiceApi.getRestaurantManifestAsync(restaurantSEO);
 
         const result = data.Menus.filter(menu => this.menus[serviceType].includes(menu.MenuGroupId));
 

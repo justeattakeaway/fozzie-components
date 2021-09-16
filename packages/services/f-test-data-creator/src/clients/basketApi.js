@@ -1,14 +1,14 @@
 const axios = require('axios');
 const { getLanguageForTenant } = require('../configuration/tenants');
 
-module.exports = class BasketApiService {
+module.exports = class BasketServiceApi {
     constructor (configuration) {
         this.basketUrl = configuration.Services.Basket.BaseAddress;
         this.tenant = configuration.Tenant;
         this.postcode = configuration.Services.Search.Postcode;
     }
 
-    async createBasketForUser (basketInfo, timeout = 5000) {
+    async createBasketForUserAsync (basketInfo, timeout = 5000) {
         const config = {
             headers: {
                 'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
-const ConsumerApiService = require('../clients/consumerApi');
-const PublicApiService = require('../clients/publicApi');
+const ConsumerServiceApi = require('../clients/consumerApi');
+const PublicServiceApi = require('../clients/publicApi');
 const TestDataGenerator = require('../test-data-generator');
 
 module.exports = class UserService {
@@ -7,8 +7,8 @@ module.exports = class UserService {
         this.environment = configuration.Environment;
         this.tenant = tenant;
         this.emailAddress = emailAddress;
-        this.consumerApiService = new ConsumerApiService(configuration);
-        this.publicApiService = new PublicApiService(configuration);
+        this.consumerServiceApi = new ConsumerServiceApi(configuration);
+        this.publicServiceApi = new PublicServiceApi(configuration);
         this.testDataGenerator = new TestDataGenerator(this.emailAddress);
         this.password = this.testDataGenerator.password;
     }
@@ -33,7 +33,7 @@ module.exports = class UserService {
             password: this.password
         };
 
-        const { data } = await this.consumerApiService.createConsumer(userInfo);
+        const { data } = await this.consumerServiceApi.createConsumerAsync(userInfo);
 
         console.log(`Successfully created user with email address: ${userInfo.emailAddress} and password: ${userInfo.password}`);
 
@@ -49,7 +49,7 @@ module.exports = class UserService {
             tenant: this.tenant
         };
 
-        const { data } = await this.publicApiService.createConsumer(userInfo);
+        const { data } = await this.publicServiceApi.createConsumerAsync(userInfo);
 
         console.log(`Successfully created user with email address: ${userInfo.emailAddress} and password: ${userInfo.password}`);
 

@@ -1,11 +1,11 @@
 const axios = require('axios');
 
-module.exports = class ConsumerApiService {
+module.exports = class ConsumerServiceApi {
     constructor (configuration) {
         this.createUserUrl = configuration.Services.SmartGateway.CreateUserUrl;
     }
 
-    async createConsumer (userInfo, timeout = 5000) {
+    async createConsumerAsync (userInfo, timeout = 5000) {
         const config = {
             headers: {
                 'Content-Type': 'application/json'

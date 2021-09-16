@@ -1,11 +1,11 @@
-const ConsumerApiService = require('../clients/consumerApi');
-const PublicApiService = require('../clients/publicApi');
+// const ConsumerApiService = require('../clients/consumerApi');
+const PublicServiceApi = require('../clients/publicApi');
 
 module.exports = class AuthorizationService {
     constructor (configuration) {
         this.environment = configuration.Environment;
-        this.consumerApiService = new ConsumerApiService(configuration);
-        this.publicApiService = new PublicApiService(configuration);
+        // this.consumerServiceApi = new ConsumerApiService(configuration);
+        this.publicServiceApi = new PublicServiceApi(configuration);
     }
 
     async authorizeUserAsync (emailAddress, password, tenant) {
@@ -22,7 +22,7 @@ module.exports = class AuthorizationService {
     }
 
     async authorizeUserForUkAsync (emailAddress, password) {
-        const { data } = await this.publicApiService.getAuthCodeUk(emailAddress, password);
+        const { data } = await this.publicServiceApi.getAuthCodeUkAsync(emailAddress, password);
 
         console.log(`Successfully authorized UK user with auth token: ${data.access_token}`);
 
@@ -30,7 +30,7 @@ module.exports = class AuthorizationService {
     }
 
     async authorizeUserForIntAsync (emailAddress, password, tenant) {
-        const { data } = await this.publicApiService.getAuthCodeInt(emailAddress, password, tenant);
+        const { data } = await this.publicServiceApi.getAuthCodeIntAsync(emailAddress, password, tenant);
 
         console.log(`Successfully authorized ${tenant} user with auth token: ${data.access_token}`);
 

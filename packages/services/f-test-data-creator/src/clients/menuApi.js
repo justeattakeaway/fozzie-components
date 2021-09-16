@@ -1,12 +1,12 @@
 const axios = require('axios');
 
-module.exports = class MenuApiService {
+module.exports = class MenuServiceApi {
     constructor (configuration) {
         this.getMenuUrl = configuration.Services.Menu.BaseAddress;
         this.tenant = configuration.Tenant;
     }
 
-    async getRestaurantManifest (restaurantSEO, timeout = 5000) {
+    async getRestaurantManifestAsync (restaurantSEO, timeout = 5000) {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
