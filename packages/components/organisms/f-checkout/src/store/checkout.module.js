@@ -31,6 +31,7 @@ import {
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
+import { trackLowValueOrderExperiment } from '../services/analytics';
 /**
  * @param {String} code - The code returned by an API.
  * @returns {object} - An object with the issue's desired behaviours and the code.
@@ -179,7 +180,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/trackLowValueOrderExperiment`, headers, { root: true });
+            trackLowValueOrderExperiment(headers);
             dispatch('updateMessage', detailedIssues[0]);
         },
 

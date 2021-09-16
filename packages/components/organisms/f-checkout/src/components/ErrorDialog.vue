@@ -42,10 +42,8 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapActions, mapState } from 'vuex';
-import {
-    VUEX_CHECKOUT_MODULE,
-    VUEX_CHECKOUT_ANALYTICS_MODULE
-} from '../constants';
+import { VUEX_CHECKOUT_MODULE } from '../constants';
+import { trackDialogEvent } from '../services/analytics';
 
 export default {
     components: {
@@ -93,7 +91,7 @@ export default {
             modalContext.open();
         }
 
-        this.trackDialogEvent({
+        trackDialogEvent({
             code: this.message?.code,
             isDuplicateOrderError: this.isDuplicateOrderError
         });
@@ -102,10 +100,6 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateMessage'
-        ]),
-
-        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackDialogEvent'
         ]),
 
         getModalContext () {

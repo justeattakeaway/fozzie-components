@@ -196,6 +196,7 @@ import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
+import AnalyticsService from '../services/analytics';
 
 const {
     CreateGuestUserError,
@@ -333,6 +334,7 @@ export default {
             errorFormType: null,
             isFormSubmitting: false,
             availableFulfilmentTimesKey: 0
+            // analyticsService: null
         };
     },
 
@@ -383,6 +385,10 @@ export default {
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields'
         ]),
+
+        analyticsService () {
+            return new AnalyticsService(this.$store);
+        },
 
         wasMobileNumberFocused () {
             return this.$v.customer.mobileNumber.$dirty;
@@ -535,8 +541,9 @@ export default {
         this.setAuthToken(this.authToken);
 
         await this.initialise();
-        this.trackInitialLoad();
         this.$emit(EventNames.CheckoutMounted);
+
+        this.analyticsService.trackInitialLoad();
     },
 
     methods: {
@@ -559,12 +566,6 @@ export default {
             'updateAddress',
             'getUserNote',
             'saveUserNote'
-        ]),
-
-        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackFormErrors',
-            'trackFormInteraction',
-            'trackInitialLoad'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
@@ -648,7 +649,7 @@ export default {
          */
         handleNonFulfillableCheckout () {
             if (this.errors) {
-                this.trackFormErrors();
+                this.analyticsService.trackFormErrors();
 
                 this.logInvoker({
                     message: 'Consumer Checkout Not Fulfillable',
@@ -931,7 +932,7 @@ export default {
                 error
             });
 
-            this.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
+            this.analyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
             if (!error.shouldShowInDialog && !error.errorFormType) {
                 this.updateMessage(message);
@@ -961,7 +962,7 @@ export default {
          * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
          */
         async onFormSubmit () {
-            this.trackFormInteraction({ action: 'submit' });
+            this.analyticsService.trackFormInteraction({ action: 'submit' });
             this.updateMessage();
             this.setSubmittingState(true);
 
@@ -988,12 +989,12 @@ export default {
             this.scrollToFirstInlineError();
 
             this.$emit(EventNames.CheckoutValidationError, validationState);
-            this.trackFormInteraction({
+            this.analyticsService.trackFormInteraction({
                 action: 'inline_error',
                 error: invalidFields
             });
 
-            this.trackFormInteraction({
+            this.analyticsService.trackFormInteraction({
                 action: 'error',
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
