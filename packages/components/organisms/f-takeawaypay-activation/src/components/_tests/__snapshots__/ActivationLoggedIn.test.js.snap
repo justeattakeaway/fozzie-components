@@ -4,16 +4,16 @@ exports[`ActivationLoggedIn should be rendered correctly 1`] = `
 <div data-test-id="activation-logged-in-component">
   <bag-run-bg-icon-stub></bag-run-bg-icon-stub>
   <h1>
-    Welcome back, Joe. Let's activate Takeaway Pay on your account.
+    Welcome back, Joe. Let's activate Just Eat Pay on your account.
   </h1>
   <p>
-    Takeaway Pay will be activated for <span>test@mail.com</span></p>
+    Just Eat Pay will be activated for <span>test@mail.com</span></p>
   <p>
     Not you? Choose a different account or sign up.
   </p>
   <div>
     <f-button-stub buttontype="primary" buttonsize="large" isfullwidth="true" actiontype="button" data-test-id="takeawaypay-activation-activate-button">
-      Activate Takeaway Pay
+      Activate Just Eat Pay
     </f-button-stub>
     <f-button-stub buttontype="outline" buttonsize="large" isfullwidth="true" actiontype="button" href="/login" data-test-id="takeawaypay-activation-loggedin-login-link">
       Use a different account
@@ -74,15 +74,15 @@ exports[`ActivationLoggedIn should be rendered correctly while activation is in 
     </g>
   </svg>
   <h1>
-    Welcome back, Joe. Let's activate Takeaway Pay on your account.
+    Welcome back, Joe. Let's activate Just Eat Pay on your account.
   </h1>
   <p>
-    Takeaway Pay will be activated for <span>test@mail.com</span></p>
+    Just Eat Pay will be activated for <span>test@mail.com</span></p>
   <p>
     Not you? Choose a different account or sign up.
   </p>
   <div><button type="button" data-test-id="takeawaypay-activation-activate-button" aria-live="polite" aria-busy="true" disabled="disabled" class="Button_o-btn_1KX8u Button_o-btn--primary_NRuBe Button_o-btn--sizeLarge_3A8Ov Button_o-btn--fullWidth_1xkfh Button_o-btn--loading_2up-7"><span data-test-id="action-button-spinner" class="Button_c-spinner_16ib0"></span><span class="Button_o-button-content_3Ow1e Button_o-btn-content--hidden_1592m"><!---->
-            Activate Takeaway Pay
+            Activate Just Eat Pay
         <!----></span></button>
     <!---->
     <!---->
