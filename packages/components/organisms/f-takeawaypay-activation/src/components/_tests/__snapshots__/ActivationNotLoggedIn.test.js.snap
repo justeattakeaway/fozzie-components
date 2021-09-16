@@ -4,7 +4,7 @@ exports[`ActivationNotLoggedIn should be rendered correctly 1`] = `
 <div data-test-id="activation-not-logged-in-component" locale="en-GB">
   <bag-run-bg-icon-stub></bag-run-bg-icon-stub>
   <h1>
-    Let's get you started with Takeaway Pay.
+    Let's get you started with Just Eat Pay.
   </h1>
   <p>
     Do you already have a Just Eat account?
