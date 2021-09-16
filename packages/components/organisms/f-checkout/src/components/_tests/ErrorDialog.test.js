@@ -6,11 +6,14 @@ import {
     i18n, defaultCheckoutState, createStore
 } from './helpers/setup';
 import { ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE } from '../../constants';
+import { trackDialogEvent } from '../../services/analytics';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
+
+jest.mock('../../services/analytics');
 
 describe('ErrorDialog', () => {
     const restaurant = {
@@ -394,9 +397,6 @@ describe('ErrorDialog', () => {
         });
 
         it('should make a call to `trackDialogEvent` with a error message', () => {
-            // Arrange
-            const trackDialogEventSpy = jest.spyOn(ErrorDialog.methods, 'trackDialogEvent');
-
             // Act
             shallowMount(ErrorDialog, {
                 store: createStore({
@@ -409,7 +409,7 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(trackDialogEventSpy).toHaveBeenCalledWith(duplicateOrderMessage);
+            expect(trackDialogEvent).toHaveBeenCalledWith(duplicateOrderMessage);
         });
     });
 });

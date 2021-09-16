@@ -334,7 +334,6 @@ export default {
             errorFormType: null,
             isFormSubmitting: false,
             availableFulfilmentTimesKey: 0
-            // analyticsService: null
         };
     },
 

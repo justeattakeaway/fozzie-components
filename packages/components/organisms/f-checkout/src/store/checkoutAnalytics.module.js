@@ -1,6 +1,4 @@
-import { mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode } from '../services/mapper';
-import experimentService from '../services/experimentService';
-import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../constants';
+import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
 import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from './mutation-types';
 
 export default {

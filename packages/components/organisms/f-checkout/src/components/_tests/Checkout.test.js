@@ -44,6 +44,12 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+jest.mock('../../services/analytics', () => jest.fn().mockImplementation(() => ({
+    trackFormInteraction: jest.fn(),
+    trackInitialLoad: jest.fn(),
+    trackFormErrors: jest.fn()
+})));
+
 const $v = {
     customer: {
         mobileNumber: {
@@ -1212,13 +1218,11 @@ describe('Checkout', () => {
     describe('mounted ::', () => {
         let initialiseSpy;
         let setAuthTokenSpy;
-        let trackInitialLoadSpy;
         let wrapper;
 
         beforeEach(() => {
             initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
             setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
-            trackInitialLoadSpy = jest.spyOn(VueCheckout.methods, 'trackInitialLoad');
 
             wrapper = shallowMount(VueCheckout, {
                 store: createStore(),
@@ -1247,7 +1251,7 @@ describe('Checkout', () => {
             await wrapper.vm.initialise();
 
             // Assert
-            expect(trackInitialLoadSpy).toHaveBeenCalled();
+            expect(wrapper.vm.analyticsService.trackInitialLoad).toHaveBeenCalled();
         });
 
         it('should emit `CheckoutMounted` event', async () => {
@@ -1976,14 +1980,11 @@ describe('Checkout', () => {
                 });
 
                 it('should make a call to `trackFormErrors`', () => {
-                    // Arrange
-                    const trackFormErrorsSpy = jest.spyOn(wrapper.vm, 'trackFormErrors');
-
                     // Act
                     wrapper.vm.handleNonFulfillableCheckout();
 
                     // Assert
-                    expect(trackFormErrorsSpy).toHaveBeenCalled();
+                    expect(wrapper.vm.analyticsService.trackFormErrors).toHaveBeenCalled();
                 });
 
                 it('should emit `CheckoutUpdateFailure` event', async () => {
@@ -2911,7 +2912,6 @@ describe('Checkout', () => {
             let error;
             let eventToEmit;
             let logInvokerSpy;
-            let trackFormInteractionSpy;
             let scrollToElementSpy;
 
             beforeEach(() => {
@@ -2933,7 +2933,6 @@ describe('Checkout', () => {
                 });
 
                 logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
-                trackFormInteractionSpy = jest.spyOn(wrapper.vm, 'trackFormInteraction');
                 scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
             });
 
@@ -2987,7 +2986,7 @@ describe('Checkout', () => {
                 wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.errorCode}-${error.message}` });
+                expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({ action: 'error', error: `error_${error.errorCode}-${error.message}` });
             });
 
             it('should call `trackFormInteraction` without an `errorCode` when it does not exist', () => {
@@ -2998,7 +2997,7 @@ describe('Checkout', () => {
                 wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
+                expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
             });
 
             it('should call `scrollToElement` with the `errorMessage` element', async () => {
@@ -3267,7 +3266,7 @@ describe('Checkout', () => {
                 it('should make a call to `trackFormInteraction` so we can track the action type `submit`', async () => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(true);
-                    const trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
+
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
@@ -3284,7 +3283,7 @@ describe('Checkout', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith({
+                    expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({
                         action: 'submit'
                     });
                 });
@@ -3417,7 +3416,6 @@ describe('Checkout', () => {
             let isFormValidSpy;
             let mockValidationState;
             let getFormValidationStateSpy;
-            let trackFormInteractionSpy;
 
             beforeEach(() => {
                 mockValidationState = {
@@ -3433,7 +3431,6 @@ describe('Checkout', () => {
                 getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
                 getFormValidationStateSpy.mockReturnValue(mockValidationState);
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
-                trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
             });
 
             it('should exist', () => {
@@ -3503,7 +3500,7 @@ describe('Checkout', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith({
+                    expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({
                         action: 'inline_error',
                         error: mockValidationState.invalidFields.toString()
                     });
@@ -3529,7 +3526,7 @@ describe('Checkout', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith({
+                    expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({
                         action: 'error',
                         error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
                     });
