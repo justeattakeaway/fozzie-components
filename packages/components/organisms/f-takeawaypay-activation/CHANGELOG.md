@@ -9,7 +9,10 @@ v1.2.0
 *September 16, 2021*
 
 ### Changed
-- Updated version of `f-button` and `f-card` to remove normalize styles from the build.
+- Updated version of `f-button` and `f-card`.
+
+### Removed
+- normalize styles from the build. Note that now if consuming application doesn't have normilize(reset) styles, there may be some slight style differences after this update. If consuming application uses fozzie, there shouldn't be any style differences as normalize styles should be added as part of fozzie import.
 
 
 v1.1.0

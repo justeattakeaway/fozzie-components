@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-link",
   "description": "Fozzie Link - Fozzie link component",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "main": "dist/f-link.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [

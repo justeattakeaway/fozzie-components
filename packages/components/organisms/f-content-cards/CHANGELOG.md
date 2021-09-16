@@ -10,6 +10,9 @@ v5.0.0
 
 - Return beta to master. Component has JETSansDigital font.
 
+### Removed
+- normalize styles from the build. Note that now if consuming application doesn't have normilize(reset) styles, there may be some slight style differences after this update. If consuming application uses fozzie, there shouldn't be any style differences as normalize styles should be added as part of fozzie import.
+
 
 v5.0.0-beta.0
 ------------------------------

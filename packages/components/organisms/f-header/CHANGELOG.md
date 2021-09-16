@@ -4,12 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v5.1.0
+v6.0.0
 ------------------------------
 *September 16, 2021*
 
 ### Changed
-- Updated version of `f-button` and `f-popover` to remove normalize styles from the build.
+- Updated version of `f-button` and `f-popover`.
+
+### Removed
+- normalize styles from the build. Note that now if consuming application doesn't have normilize(reset) styles, there may be some slight style differences after this update. If consuming application uses fozzie, there shouldn't be any style differences as normalize styles should be added as part of fozzie import.
 
 
 v5.0.0
