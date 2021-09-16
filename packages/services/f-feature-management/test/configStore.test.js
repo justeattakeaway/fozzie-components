@@ -1,5 +1,5 @@
 import { getFeature, init, loadFromCdn } from '../src/configStore';
-import fetchMock from "jest-fetch-mock";
+import fetchMock from 'jest-fetch-mock';
 
 fetchMock.enableMocks();
 

@@ -11,10 +11,7 @@ const logger = {
     logInfo(){}
 }
 
-
-
 jest.mock('../src/trackExperiment');
-
 
 describe('End-to-End Tests', () => {
 
@@ -44,7 +41,12 @@ describe('End-to-End Tests', () => {
 
             trackExperiment.mockClear();
 
-            const { value: expectedValue, experimentKey: expectedKey, experimentVariant: expectedVariant } = expectation;
+            const { 
+                value: expectedValue, 
+                experimentKey: expectedKey, 
+                experimentVariant: expectedVariant 
+            } = expectation;
+
             const featureValue = functionMap[valueType](feature);
 
             expect(featureValue).toBe(expectedValue);
