@@ -2137,20 +2137,6 @@
   dependencies:
     qwery "4.0.0"
 
-"@justeat/f-error-message@0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.3.1.tgz#07195e2621efbe43f4628d0932c2ecc43b51c71c"
-  integrity sha512-KANckjkK0ay/r9FqK2yEQOCzCASNrnJjHRdLIKvMgl4mVo8WxSSVyjIhfJtnVKQwfWv6bg0kkm1xpxxuQffokg==
-  dependencies:
-    "@justeat/f-vue-icons" "1.10.0"
-
-"@justeat/f-error-message@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.5.0.tgz#4b120f4bd2fee3c22c2cdb77d8773d409fd19cff"
-  integrity sha512-PXSomaAuJwvcqwFOoO9JHgXEBv6hMz5h7PQ2a4ABHIrDtu3efOBbybJulhdiGCYRvfLlWQdEWKfVYhrGIbETpw==
-  dependencies:
-    "@justeat/f-vue-icons" "1.10.0"
-
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2178,17 +2164,10 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-popover@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-0.2.1.tgz#0c6780bcf8c452f4b0319c14b86a3cc05904dcb0"
-  integrity sha512-myeYCy8uG5k1isc4D3sPRDFeZJnX54jvFm9zbr7b45gdx/FOVLNAiB3tEQobtakTjmfW8Jl1IxiXtuUiqBD7yg==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
-"@justeat/f-searchbox@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.0.0.tgz#7054541eb59a64424e7dc4238d0a3ee5a8c72f00"
-  integrity sha512-PBt8aYdYNBTdoAnQ8K+6aKWJvAOZZm2hw5xMyHVNFQF7foI1Xae+2FOpuc89U7R2cez7cqOPPqqYdWOO8Ug5YQ==
+"@justeat/f-searchbox@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.1.0.tgz#11d2242bab6c5bef5783392055a0b5f1c58e9adc"
+  integrity sha512-Be/hj8uHMRpLykjOm7iwcT6Xjv/0zE3Dvh3DWrrBYQp5AJxFvTjl1EOdXb8JyEIs/VaicJeKBfym+321ziG0Wg==
   dependencies:
     caniuse-lite "1.0.30001251"
     lodash.debounce "4.0.8"

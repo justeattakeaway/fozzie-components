@@ -10,6 +10,9 @@ v2.0.0
 
 - Return beta to master. Component has JETSansDigital font.
 
+### Removed
+- normalize styles from the build.
+
 
 v2.0.0-beta.0
 ------------------------------

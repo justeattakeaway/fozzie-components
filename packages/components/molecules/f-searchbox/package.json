@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@justeat/f-button": "2.0.0",
-    "@justeat/f-error-message": "0.3.1",
+    "@justeat/f-error-message": "0.7.0",
     "@justeat/f-globalisation": "0.2.0",
     "@justeat/f-mega-modal": "1.1.0",
     "@justeat/f-vue-icons": "1.13.0",

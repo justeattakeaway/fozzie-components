@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.0.0-beta.35
 ------------------------------
-*September 15, 2021*
+*September 16, 2021*
 
 ### Changed
-- Updated version of `f-button` and `f-mega-modal` to remove normalize styles from them.
+- Updated version of `f-button`, `f-error-message` and `f-mega-modal` to remove normalize styles from the build.
 
 
 v4.0.0-beta.34
