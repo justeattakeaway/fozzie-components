@@ -9,7 +9,7 @@ v0.5.0
 *September 16, 2021*
 
 ### Changed
-- Updated version of `f-media-element` to remove normalize styles from the build.
+- Updated version of `f-media-element`, `f-breadcrumbs` and `f-tabs` to remove normalize styles from the build.
 
 ### Removed
 - Unused f-button and f-card dependencies
