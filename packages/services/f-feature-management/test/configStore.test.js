@@ -52,7 +52,7 @@ describe('When calling loadFromCdn', () => {
     expect(fetch).toHaveBeenNthCalledWith(2, `https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
   });
 
-  it.only('should not poll if poll setting false', async () => {
+  it('should not poll if poll setting false', async () => {
     //Arrange
     const newSettings = { ...cdnSettings, poll: false };
 
