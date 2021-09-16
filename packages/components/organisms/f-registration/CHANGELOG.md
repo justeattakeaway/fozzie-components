@@ -12,7 +12,7 @@ v1.1.0
 - Updated version of `f-button`, `f-form-field`, `f-error-message`, `f-link` and `f-card` to remove normalize styles from the build.
 
 ### Removed
-- normalize styles from the build. Note that now if consuming application doesn't have normilize(reset) styles, there may be some slight style differences after this update. If consuming application uses fozzie, there shouldn't be any style differences as normalize styles should be added as part of fozzie import.
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
 
 
 v1.0.0
