@@ -11,12 +11,6 @@ const {
     updateChangedField
 } = actions;
 
-Object.defineProperty(global, 'window', {
-    value: {
-        dataLayer: []
-    }
-});
-
 describe('CheckoutAnalyticsModule', () => {
     let state = CheckoutAnalyticsModule.state();
 
@@ -31,7 +25,6 @@ describe('CheckoutAnalyticsModule', () => {
         beforeEach(() => {
             commit = jest.fn();
             state = CheckoutAnalyticsModule.state();
-            window.dataLayer = [];
         });
 
         afterEach(() => {
