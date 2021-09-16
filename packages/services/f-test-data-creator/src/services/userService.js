@@ -4,7 +4,7 @@ const TestDataGenerator = require('../test-data-generator');
 
 module.exports = class UserService {
     constructor (configuration, tenant, emailAddress) {
-        this.environment = configuration.Environment;
+        this.environment = configuration.environment;
         this.tenant = tenant;
         this.emailAddress = emailAddress;
         this.consumerServiceApi = new ConsumerServiceApi(configuration);

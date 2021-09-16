@@ -2,7 +2,7 @@ const axios = require('axios');
 
 module.exports = class ConsumerServiceApi {
     constructor (configuration) {
-        this.createUserUrl = configuration.Services.SmartGateway.CreateUserUrl;
+        this.createUserUrl = configuration.services.smartGateway.createUserUrl;
     }
 
     async createConsumerAsync (userInfo, timeout = 5000) {

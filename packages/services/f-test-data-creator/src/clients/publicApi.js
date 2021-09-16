@@ -4,9 +4,9 @@ const { getLanguageForTenant } = require('../configuration/tenants');
 
 module.exports = class PublicServiceApi {
     constructor (configuration) {
-        this.createUserUrl = configuration.Services.Public.CreateUserUrl;
-        this.authorizationUrl = configuration.Services.Public.AuthorizationUrl;
-        this.token = configuration.Services.Public.AuthorizationToken;
+        this.createUserUrl = configuration.services.public.createUserUrl;
+        this.authorizationUrl = configuration.services.public.authorizationUrl;
+        this.token = configuration.services.public.authorizationToken;
     }
 
     async createConsumerAsync (userInfo, timeout = 5000) {

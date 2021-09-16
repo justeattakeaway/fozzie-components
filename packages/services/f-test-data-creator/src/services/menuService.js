@@ -3,7 +3,7 @@ const MenuServiceApi = require('../clients/menuApi');
 module.exports = class MenuService {
     constructor (configuration) {
         this.menuServiceApi = new MenuServiceApi(configuration);
-        this.menus = configuration.Menus;
+        this.menus = configuration.menus;
     }
 
     async getMenuIdAsync (restaurantSEO, serviceType) {

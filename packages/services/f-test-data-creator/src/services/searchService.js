@@ -2,10 +2,10 @@ const SearchServiceApi = require('../clients/searchApi');
 
 module.exports = class SearchService {
     constructor (configuration) {
-        this.preferredRestaurantIds = configuration.PreferredRestaurants;
+        this.preferredRestaurantIds = configuration.preferredRestaurants;
         this.searchServiceApi = new SearchServiceApi(configuration);
-        this.postcode = configuration.Services.Search.Postcode;
-        this.tenant = configuration.Tenant;
+        this.postcode = configuration.services.search.postcode;
+        this.tenant = configuration.tenant;
     }
 
     async getPreferredRestaurantsAsync (serviceType) {
