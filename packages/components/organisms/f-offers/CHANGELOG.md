@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.1.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-content-cards`, `f-media-element`, `f-searchbox` and `f-mega-modal` to remove normalize styles from the build.
+
+
 v1.0.0
 ------------------------------
 *September 15, 2021*
