@@ -15,6 +15,7 @@ v1.2.0
 v1.1.0
 ------------------------------
 *September 16, 2021*
+
 ### Changed
 - Updated version of `f-button`, `f-mega-modal`, `f-alert`, `f-card`, `f-error-message` and `f-form-field`.
 
