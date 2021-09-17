@@ -333,7 +333,8 @@ export default {
             isLoading: false,
             errorFormType: null,
             isFormSubmitting: false,
-            availableFulfilmentTimesKey: 0
+            availableFulfilmentTimesKey: 0,
+            analyticsService: new AnalyticsService(this.$store)
         };
     },
 
@@ -384,10 +385,6 @@ export default {
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields'
         ]),
-
-        analyticsService () {
-            return new AnalyticsService(this.$store);
-        },
 
         wasMobileNumberFocused () {
             return this.$v.customer.mobileNumber.$dirty;

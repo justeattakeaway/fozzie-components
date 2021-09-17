@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.1.0
 ------------------------------
-*September 17, 2021*
+*September 20, 2021*
 
 ### Added
 - Analytics service file to handle analytics events.
