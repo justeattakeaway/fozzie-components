@@ -9,13 +9,13 @@ export default {
         },
         sourcemap: true,
         rollupOptions: {
-            external: ['vue', 'f-feature-management'],
+            external: ['vue', '@justeat/f-feature-management'],
             output: {
                 // Provide global variables to use in the UMD build
                 // for externalized deps
                 globals: {
                     vue: 'vue',
-                    'f-feature-management': 'f-feature-management'
+                    '@justeat/f-feature-management': '@justeat/f-feature-management'
                 }
             }
         }
