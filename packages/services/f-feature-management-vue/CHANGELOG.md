@@ -6,8 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*July 6, 2021*
+*September 16, 2021*
 
 ### Added
-- Skeleton interface
-- Disabled tests
+- Vue3 feature management wrapper
