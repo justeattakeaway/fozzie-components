@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.1.0
+------------------------------
+*September 17, 2021*
+
+### Fixed
+- Moved `isBodyHeightLessThanWindowHeight` to methods as computed properties are `undefined` during data creation.
+
+### Added
+- Dispatch "window" event `f-cookie-banner-accepted` after cookie consent is accepted
+
+
 v2.0.0
 ------------------------------
 *September 16, 2021*
@@ -57,7 +68,7 @@ v0.25.0
 - Tests to cover version changes in v0.24.0.
 
 ### Changed
-- `dk-DK` to `da-DK`. 
+- `dk-DK` to `da-DK`.
 
 
 v0.24.0
