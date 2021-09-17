@@ -1,16 +1,88 @@
+import analyticsModule from '../store/analytics.module';
+import defaultOptions from '../defaultOptions';
 import {
     mapPlatformData,
     mapUserData,
-    mapPageData
+    mapPageData,
+    mapServerSidePlatformData
 } from './analytics.mapper';
+import {
+    platformDataDefault,
+    userDataDefault,
+    pageDataDefault
+} from '../store/default-state';
 
 const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
+
+const prepareServerSideValues = (store, req, options) => {
+    // Only available server side
+    if (typeof (window) === 'undefined') {
+        let platformData = { ...store.state[`${options.namespace}`].platformData };
+
+        platformData = mapServerSidePlatformData({ platformData, req });
+
+        store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
+    }
+};
+
+const registerStoreModule = (store, options) => {
+    if (!store.hasModule(options.namespace)) {
+        store.registerModule(options.namespace, analyticsModule);
+    }
+};
+
+const preparePageTags = options => {
+    // Only add tags if clientside and if not already added
+    if (typeof (window) !== 'undefined' && !window.dataLayer) {
+        const queryString = options.auth ? `&gtm_auth=${options.auth}&gtm_preview=${options.preview}&gtm_cookies_win=${options.cookiesWin}` : '';
+
+        // See : https://developers.google.com/tag-manager/quickstart
+        const headJsGtmTag = `(function (w, d, s, l, i) {
+                                    w[l] = w[l] || [];
+                                    w[l].push({
+                                        'gtm.start': new Date().getTime(),
+                                        event: 'gtm.js'
+                                    });
+                                    var f = d.getElementsByTagName(s)[0],
+                                        j = d.createElement(s),
+                                        dl = l != 'dataLayer' ? '&l=' + l : '',
+                                        qs = '${queryString}';
+                                    j.async = true;
+                                    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl + qs;
+                                    f.parentNode.insertBefore(j, f);
+                                })(window, document, 'script', 'dataLayer', '${options.id}');`;
+        const script = document.createElement('script');
+        script.text = headJsGtmTag;
+        document.head.prepend(script);
+
+        // No JS option
+        const iframeTag = document.createElement('iframe');
+        iframeTag.src = `https://www.googletagmanager.com/ns.html?id=${options.id}`;
+        iframeTag.setAttribute('height', 0);
+        iframeTag.setAttribute('width', 0);
+        iframeTag.style.display = 'none';
+        iframeTag.style.visibility = 'hidden';
+        const noScript = document.createElement('noscript');
+        noScript.appendChild(iframeTag);
+        document.body.prepend(noScript);
+    }
+};
 
 export default class AnalyticService {
     constructor (store, req, options) {
         this.store = store;
         this.req = req;
-        this.options = options;
+        this.options = {
+            ...defaultOptions,
+            ...options
+        };
+
+        preparePageTags(this.options);
+        registerStoreModule(this.store, this.options);
+        prepareServerSideValues(this.store, this.req, this.options);
+
+        // Flush any previously stored (serverside) events
+        this.pushEvent();
     }
 
     setOptions ({ featureName = this.options.featureName, locale = this.options.locale } = {}) {
@@ -20,7 +92,7 @@ export default class AnalyticService {
     }
 
     pushPlatformData ({ featureName, locale, customFields } = {}) {
-        let platformData = { ...this.store.state[`${this.options.namespace}`].platformData };
+        let platformData = this.store ? { ...this.store.state[`${this.options.namespace}`].platformData } : { ...platformDataDefault };
 
         platformData = mapPlatformData({
             platformData,
@@ -43,7 +115,7 @@ export default class AnalyticService {
     }
 
     pushUserData ({ authToken, customFields } = {}) {
-        let userData = { ...this.store.state[`${this.options.namespace}`].userData };
+        let userData = { ...userDataDefault };
 
         userData = mapUserData({ userData, authToken, req: this.req });
 
@@ -65,7 +137,7 @@ export default class AnalyticService {
         httpStatusCode,
         customFields
     } = {}) {
-        let pageData = { ...this.store.state[`${this.options.namespace}`].pageData };
+        let pageData = { ...pageDataDefault };
 
         pageData = mapPageData({
             pageData,
@@ -89,16 +161,20 @@ export default class AnalyticService {
     }
 
     pushEvent (event) {
-        if (event) {
-            this.store.dispatch(`${this.options.namespace}/updateEvents`, event);
-        }
+        if (this.store) {
+            if (event) {
+                this.store.dispatch(`${this.options.namespace}/updateEvents`, event);
+            }
 
-        if (isDataLayerPresent()) {
-            const events = [...this.store.state[`${this.options.namespace}`].events];
+            if (isDataLayerPresent()) {
+                const events = [...this.store.state[`${this.options.namespace}`].events];
 
-            events.forEach(e => window.dataLayer.push({ ...e }));
+                events.forEach(e => window.dataLayer.push({ ...e }));
 
-            this.store.dispatch(`${this.options.namespace}/clearEvents`);
+                this.store.dispatch(`${this.options.namespace}/clearEvents`);
+            }
+        } else if (isDataLayerPresent()) {
+            window.dataLayer.push({ ...event });
         }
 
         return event;

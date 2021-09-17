@@ -3,43 +3,19 @@ import {
     UPDATE_EVENTS,
     CLEAR_EVENTS
 } from './mutation-types';
+import {
+    platformDataDefault,
+    userDataDefault,
+    pageDataDefault
+} from './default-state';
 
 export default {
     namespaced: true,
 
     state: () => ({
-        platformData: {
-            environment: 'localhost',
-            name: undefined,
-            appType: undefined,
-            applicationId: undefined,
-            userAgent: undefined,
-            branding: undefined,
-            country: undefined,
-            language: undefined,
-            jeUserPercentage: undefined,
-            currency: undefined,
-            version: undefined,
-            instancePosition: undefined,
-            isPilot: undefined
-        },
-        userData: {
-            'a-UserId': undefined,
-            authType: undefined,
-            email: undefined,
-            globalUserId: undefined,
-            signinType: undefined,
-            signupDate: undefined
-        },
-        pageData: {
-            group: undefined,
-            name: undefined,
-            httpStatusCode: 200,
-            conversationId: undefined,
-            requestId: undefined,
-            orientation: undefined,
-            display: undefined
-        },
+        platformData: { ...platformDataDefault },
+        userData: { ...userDataDefault },
+        pageData: { ...pageDataDefault },
         events: []
     }),
 

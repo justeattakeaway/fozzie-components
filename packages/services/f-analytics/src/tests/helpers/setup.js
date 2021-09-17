@@ -88,9 +88,13 @@ const newEvent = {
 
 const options = {
     namespace: 'f-analytics',
+    globalVarName: 'gtm',
     featureName: 'test-feature-name',
     locale: 'en-GB',
-    id: 'GTM-0000000'
+    id: 'GTM-0000000',
+    auth: undefined,
+    preview: undefined,
+    cookiesWin: undefined
 };
 
 const defaultActions = {
