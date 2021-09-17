@@ -63,7 +63,7 @@ describe('Analytic Service ::', () => {
             expect(window.dataLayer[0]).toEqual(expectedEvent);
         });
 
-        it('should dispatch `trackFormInteraction` with `start` action', () => {
+        it('should call `trackFormInteraction` with `start` action', () => {
             // Assert
             analyticsService.trackInitialLoad();
 
@@ -181,7 +181,7 @@ describe('Analytic Service ::', () => {
             expect(getAnalyticsErrorCodeByApiErrorCodeSpy).toHaveBeenCalled();
         });
 
-        it('should dispatch `trackFormInteraction` with `start` action', () => {
+        it('should call `trackFormInteraction` with `start` action', () => {
             // Assert
             analyticsService.trackFormErrors();
 
@@ -195,7 +195,7 @@ describe('Analytic Service ::', () => {
             ['dialog_duplicate_order_warning', 'DuplicateOrder', true],
             ['dialog_restaurant_not_taking_orders_error', 'RESTAURANT_NOT_TAKING_ORDERS', false],
             ['dialog_additional_items_required_error', 'ADDITIONAL_ITEMS_REQUIRED', false]
-        ])('should `push` expected event  with %s `eventAction` to `dataLayer` when error is %s', (eventAction, code, isDuplicateOrderError) => {
+        ])('should `push` expected event with %s `eventAction` to `dataLayer` when error is %s', (eventAction, code, isDuplicateOrderError) => {
             // Arrange
             const expected = {
                 event: 'trackEvent',

@@ -52,7 +52,7 @@ export default class AnalyticService {
     }
 
     /**
-     * Dispatches `trackFormInteraction` with each error in `state.errors`.
+     * Calls `trackFormInteraction` with each error in `state.errors`.
      */
     trackFormErrors () {
         const trackedErrors = [];

@@ -540,9 +540,8 @@ export default {
         this.setAuthToken(this.authToken);
 
         await this.initialise();
-        this.$emit(EventNames.CheckoutMounted);
-
         this.analyticsService.trackInitialLoad();
+        this.$emit(EventNames.CheckoutMounted);
     },
 
     methods: {
