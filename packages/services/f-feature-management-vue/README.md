@@ -12,7 +12,7 @@ So for example if you have:
 
 ```javascript
   data: () => {
-      featureManagement: createFeatureManagementForVue3({/*settings*/})
+      featureManagement: createFeatureManagementForVue({/*settings*/})
     },
   computed: {    
     myDynamicFeatureStatus: () => {
@@ -29,6 +29,6 @@ So for example if you have:
 
 For this library we are using the `set()` shim (only exists in Vue2).  There is a shim over `reactive()` for Vue2, which relies on the [composition-api](https://github.com/vuejs/composition-api) and converts the object to a Vue2 proxy (rather than creating a new proxy object, as `reactive()` does in Vue3).
 
-We are not making use of this however, and indeed have not made `@vue/compositionapi` a peer dependency.  The use of the Feature Management instance within a Vue2 app will do this for us, and as long we we use the Vue2 `set()` function all should be well.
+We are not making use of this however, and indeed have not made `@vue/compositionapi` a peer dependency.  The use of the Feature Management instance within a Vue2 app will do this for us, and as long we use the Vue2 `set()` function all should be well.
 
 __Note: the tests are set up to run under Vue3. We would ideally have the ability to run the tests under Vue2 as well.__
