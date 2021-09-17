@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-feature-management-vue",
   "version": "0.1.0",
-  "description": "Service for querying feature values provided by Feature Management, made reactive for Vue3.",
+  "description": "Service for querying feature values provided by Feature Management, made reactive for Vue 2/3.",
   "main": "dist/f-feature-management-vue.umd.js",
   "module": "dist/f-feature-management-vue.es.js",
   "source": "src/index.js",
