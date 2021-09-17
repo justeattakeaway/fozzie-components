@@ -2123,27 +2123,6 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-alert@1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-1.0.0-beta.0.tgz#8fd7eef0aa3d2ac6ebf4f7a65e314abfcb32702b"
-  integrity sha512-VaIDKV+NN/2eOl0Vb7YMyWqDr7pT0gKMwI5y1S3+ilXAMqtXxnPGD4rgzEiZZj1RsWlZtXc7wTqwpME0aaYJJQ==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
-"@justeat/f-button@2.0.0-beta.0":
-  version "2.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-2.0.0-beta.0.tgz#bd19130508e66a9e7eb61cd3eb2734a6d5c2b324"
-  integrity sha512-zwQr6e0cpcfFikI4jCyBKGSlwULt+BBkYnWc3u1+ybJ2VdIM/O6UIGCk0ezAwEY1+dGieIWPiro3BhwKiRiryw==
-
-"@justeat/f-content-cards@5.0.0-beta.1":
-  version "5.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-5.0.0-beta.1.tgz#4b89212580dd9fa63c8a2e0dfbe5fd144f7ace3d"
-  integrity sha512-wCydSKICR2cxqewrWqSk8a6RL1XYGksrJK+gR6JjmH096Dc2tt4UOCUWayra2gxAy3Z3DOhaOuauTvSEkgoZNA==
-  dependencies:
-    "@babel/plugin-proposal-class-properties" "7.12.13"
-    "@justeat/f-services" "1.0.1"
-    core-js "3.6.5"
-
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2157,28 +2136,6 @@
   integrity sha512-1XNBr7loJ6o6TlWZxSx38jSZld4Q9zAlH+waNe0TXCdf3AgsR+pe5IHCQYgkmdHCXhHq9hLZW6NXZnz42UnORg==
   dependencies:
     qwery "4.0.0"
-
-"@justeat/f-error-message@0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.3.1.tgz#07195e2621efbe43f4628d0932c2ecc43b51c71c"
-  integrity sha512-KANckjkK0ay/r9FqK2yEQOCzCASNrnJjHRdLIKvMgl4mVo8WxSSVyjIhfJtnVKQwfWv6bg0kkm1xpxxuQffokg==
-  dependencies:
-    "@justeat/f-vue-icons" "1.10.0"
-
-"@justeat/f-error-message@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.5.0.tgz#4b120f4bd2fee3c22c2cdb77d8773d409fd19cff"
-  integrity sha512-PXSomaAuJwvcqwFOoO9JHgXEBv6hMz5h7PQ2a4ABHIrDtu3efOBbybJulhdiGCYRvfLlWQdEWKfVYhrGIbETpw==
-  dependencies:
-    "@justeat/f-vue-icons" "1.10.0"
-
-"@justeat/f-form-field@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-3.0.0-beta.0.tgz#c772b54714ab6d2e0793d8a3426fc00e72071c97"
-  integrity sha512-0BvZ/fTbHhwBBu05pd6CDQBvwOlI6iqTcrRoeLyNks1QYouyXPvfcKBrTwUs/rV7fNChY9DFC7zB1KzVJAImKQ==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "2.5.0"
 
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
@@ -2207,30 +2164,10 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-mega-modal@1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-1.0.0-beta.0.tgz#98d4311cd9740b08fd6362b10c6c637f5b03412d"
-  integrity sha512-B2SA7gJgVS5/1PcKVDkv2wQCnG48RcAuFCDLmRk5rh3jFEhmX+hC0VShso2Po0YmenZsRXu/DHF11pZPd7lnfQ==
-
-"@justeat/f-popover@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-0.2.1.tgz#0c6780bcf8c452f4b0319c14b86a3cc05904dcb0"
-  integrity sha512-myeYCy8uG5k1isc4D3sPRDFeZJnX54jvFm9zbr7b45gdx/FOVLNAiB3tEQobtakTjmfW8Jl1IxiXtuUiqBD7yg==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
-"@justeat/f-searchbox@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.0.0.tgz#7054541eb59a64424e7dc4238d0a3ee5a8c72f00"
-  integrity sha512-PBt8aYdYNBTdoAnQ8K+6aKWJvAOZZm2hw5xMyHVNFQF7foI1Xae+2FOpuc89U7R2cez7cqOPPqqYdWOO8Ug5YQ==
-  dependencies:
-    caniuse-lite "1.0.30001251"
-    lodash.debounce "4.0.8"
-
-"@justeat/f-searchbox@5.0.0-beta.0":
-  version "5.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.0.0-beta.0.tgz#d8aa4338a41095ec47756b41188f41cfdc2c1782"
-  integrity sha512-vIufkKIIee4ziI1X8ZoEv9ZtCF7UEqEHPdKfl873J8pht4jvGNDOjvoIxg/0gQjMl+Y2bhoZu7xokF0N9x4TLg==
+"@justeat/f-searchbox@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.1.0.tgz#11d2242bab6c5bef5783392055a0b5f1c58e9adc"
+  integrity sha512-Be/hj8uHMRpLykjOm7iwcT6Xjv/0zE3Dvh3DWrrBYQp5AJxFvTjl1EOdXb8JyEIs/VaicJeKBfym+321ziG0Wg==
   dependencies:
     caniuse-lite "1.0.30001251"
     lodash.debounce "4.0.8"
@@ -11194,7 +11131,7 @@ eslint-utils@^2.1.0:
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-eslint-utils@^3.0.0:
+"eslint-utils@^2.1.0 || ^3.0.0", eslint-utils@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/eslint-utils/-/eslint-utils-3.0.0.tgz#8aebaface7345bb33559db0a1f13a1d2d48c3672"
   integrity sha512-uuQC43IGctw68pJA1RgbQS8/NP7rch6Cwd4j3ZBtgo4/8Flj4eGE7ZYSZRN3iq5pVUv6GPdW5Z1RFleo84uLDA==
@@ -11205,6 +11142,11 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
   integrity sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
+
+"eslint-visitor-keys@^1.3.0 || ^2.1.0 || ^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.0.0.tgz#e32e99c6cdc2eb063f204eda5db67bfe58bb4186"
+  integrity sha512-mJOZa35trBTb3IyRmo8xmKBZlxf+N7OnUl4+ZhJHs/r+0770Wh/LEACE2pqMGMe27G/4y8P2bYGk4J70IC5k1Q==
 
 eslint-visitor-keys@^2.0.0:
   version "2.1.0"
@@ -11352,16 +11294,7 @@ espree@^3.5.2, espree@^3.5.4:
     acorn "^5.5.0"
     acorn-jsx "^3.0.0"
 
-espree@^6.0.0, espree@^6.1.2, espree@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/espree/-/espree-6.2.1.tgz#77fc72e1fd744a2052c20f38a5b575832e82734a"
-  integrity sha512-ysCxRQY3WaXJz9tdbWOwuWr5Y/XrPTGX9Kiz3yoUXwW0VZ4w30HTkQLaGx/+ttFjF8i+ACbArnB4ce68a9m5hw==
-  dependencies:
-    acorn "^7.1.1"
-    acorn-jsx "^5.2.0"
-    eslint-visitor-keys "^1.1.0"
-
-espree@^7.3.0, espree@^7.3.1:
+"espree@^6.0.0 || ^7.2.0", espree@^7.3.0, espree@^7.3.1:
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/espree/-/espree-7.3.1.tgz#f2df330b752c6f55019f8bd89b7660039c1bbbb6"
   integrity sha512-v3JCNCE64umkFpmkFGqzVKsOT0tN1Zr+ueqLZfpV1Ob8e+CEgPWa+OxCoGH3tnhimMKIaBm4m/vaRpJ/krRz2g==
@@ -11369,6 +11302,15 @@ espree@^7.3.0, espree@^7.3.1:
     acorn "^7.4.0"
     acorn-jsx "^5.3.1"
     eslint-visitor-keys "^1.3.0"
+
+espree@^6.1.2, espree@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-6.2.1.tgz#77fc72e1fd744a2052c20f38a5b575832e82734a"
+  integrity sha512-ysCxRQY3WaXJz9tdbWOwuWr5Y/XrPTGX9Kiz3yoUXwW0VZ4w30HTkQLaGx/+ttFjF8i+ACbArnB4ce68a9m5hw==
+  dependencies:
+    acorn "^7.1.1"
+    acorn-jsx "^5.2.0"
+    eslint-visitor-keys "^1.1.0"
 
 esprima@^2.6.0:
   version "2.7.3"
