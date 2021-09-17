@@ -1,4 +1,4 @@
-import createFeatureManagementForVue3 from './createFeatureManagementForVue3';
+import createFeatureManagementForVue from './createFeatureManagementForVue';
 
 /**
  * Returns an instance of Feature Management as a Vue 3 proxy.
@@ -6,5 +6,5 @@ import createFeatureManagementForVue3 from './createFeatureManagementForVue3';
  * @returns Feature Management object to allow querying of features.
  */
 export default function (settings) {
-    return createFeatureManagementForVue3(settings);
+    return createFeatureManagementForVue(settings);
 }
