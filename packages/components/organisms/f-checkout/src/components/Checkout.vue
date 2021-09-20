@@ -4,7 +4,8 @@
             :is="messageType.name"
             v-if="message && !errorFormType"
             ref="errorMessage"
-            v-bind="messageType.props">
+            v-bind="messageType.props"
+            @dialogCreated="handleDialogCreation">
             <span>{{ messageType.content }}</span>
         </component>
 
@@ -334,7 +335,7 @@ export default {
             errorFormType: null,
             isFormSubmitting: false,
             availableFulfilmentTimesKey: 0,
-            analyticsService: new AnalyticsService(this.$store)
+            analyticsService: new AnalyticsService(this)
         };
     },
 
@@ -681,7 +682,8 @@ export default {
                 await this.updateCheckout({
                     url: this.updateCheckoutUrl,
                     data,
-                    timeout: this.checkoutTimeout
+                    timeout: this.checkoutTimeout,
+                    analyticsService: this.analyticsService
                 });
 
                 await this.reloadAvailableFulfilmentTimesIfOutdated();
@@ -1096,6 +1098,10 @@ export default {
                 await this.loadAvailableFulfilment();
                 this.availableFulfilmentTimesKey++;
             }
+        },
+
+        handleDialogCreation (event) {
+            this.analyticsService.trackDialogEvent(event);
         }
     },
 

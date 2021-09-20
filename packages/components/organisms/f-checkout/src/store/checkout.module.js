@@ -31,7 +31,6 @@ import {
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
-import { trackLowValueOrderExperiment } from '../services/analytics';
 
 /**
  * @param {String} code - The code returned by an API.
@@ -162,7 +161,9 @@ export default {
          */
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
-        }, { url, data, timeout }) => {
+        }, {
+                url, data, timeout, analyticsService
+            }) => {
             const request = {
                 url,
                 state,
@@ -181,7 +182,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            trackLowValueOrderExperiment(headers);
+            analyticsService.trackLowValueOrderExperiment(headers);
             dispatch('updateMessage', detailedIssues[0]);
         },
 

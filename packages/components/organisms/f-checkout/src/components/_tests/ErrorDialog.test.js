@@ -6,7 +6,6 @@ import {
     i18n, defaultCheckoutState, createStore
 } from './helpers/setup';
 import { ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE } from '../../constants';
-import { trackDialogEvent } from '../../services/analytics';
 
 const localVue = createLocalVue();
 
@@ -396,9 +395,9 @@ describe('ErrorDialog', () => {
             });
         });
 
-        it('should make a call to `trackDialogEvent` with a error message', () => {
+        it('should make a emit to `dialogCreated` with a error message', () => {
             // Act
-            shallowMount(ErrorDialog, {
+            const wrapper = shallowMount(ErrorDialog, {
                 store: createStore({
                     ...defaultCheckoutState,
                     message: duplicateOrderMessage
@@ -409,7 +408,8 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(trackDialogEvent).toHaveBeenCalledWith(duplicateOrderMessage);
+            expect(wrapper.emitted('dialogCreated').length).toBe(1);
+            expect(wrapper.emitted('dialogCreated')[0][0]).toEqual(duplicateOrderMessage);
         });
     });
 });

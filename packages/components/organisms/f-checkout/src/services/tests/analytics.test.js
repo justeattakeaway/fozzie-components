@@ -1,6 +1,6 @@
 import { createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import AnalyticsService, { trackDialogEvent, trackLowValueOrderExperiment } from '../analytics';
+import AnalyticsService from '../analytics';
 import { createStore, defaultAnalyticsState, defaultCheckoutState } from '../../components/_tests/helpers/setup';
 import * as mapper from '../mapper';
 import { HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
@@ -9,22 +9,20 @@ const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
-Object.defineProperty(global, 'window', {
-    value: {
-        dataLayer: []
-    }
-});
+const $gtm = {
+    pushEvent: jest.fn()
+};
 
 describe('Analytic Service ::', () => {
-    let store;
+    let $store;
     let analyticsService;
 
     beforeEach(() => {
         // Arrange
-        store = createStore();
+        $store = createStore();
         window.dataLayer = [];
 
-        analyticsService = new AnalyticsService(store);
+        analyticsService = new AnalyticsService({ $store, $gtm });
     });
 
     afterEach(() => {
@@ -55,12 +53,12 @@ describe('Analytic Service ::', () => {
             };
         });
 
-        it('should `push` expected event to `dataLayer`', () => {
+        it('should call `pushEvent` with expected event', () => {
             // Act
             analyticsService.trackInitialLoad();
 
             // Assert
-            expect(window.dataLayer[0]).toEqual(expectedEvent);
+            expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
         });
 
         it('should call `trackFormInteraction` with `start` action', () => {
@@ -104,12 +102,12 @@ describe('Analytic Service ::', () => {
                 expectedEvent.form.error = payload.error;
             });
 
-            it('should `push` expected event to `dataLayer`', () => {
+            it('should call `pushEvent` with expected event', () => {
                 // Act
                 analyticsService.trackFormInteraction(payload);
 
                 // Assert
-                expect(window.dataLayer[0]).toEqual(expectedEvent);
+                expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
             });
         });
 
@@ -119,12 +117,12 @@ describe('Analytic Service ::', () => {
                 expectedEvent.form.error = payload.error;
             });
 
-            it('should `push` expected event to `dataLayer`', () => {
+            it('should call `pushEvent` with expected event', () => {
                 // Act
                 analyticsService.trackFormInteraction(payload);
 
                 // Assert
-                expect(window.dataLayer[0]).toEqual(expectedEvent);
+                expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
             });
         });
 
@@ -140,7 +138,7 @@ describe('Analytic Service ::', () => {
                 analyticsService.trackFormInteraction(payload);
 
                 // Assert
-                expect(window.dataLayer[0]).toEqual(expectedEvent);
+                expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
             });
         });
 
@@ -156,7 +154,7 @@ describe('Analytic Service ::', () => {
                 analyticsService.trackFormInteraction(payload);
 
                 // Assert
-                expect(window.dataLayer[0]).toEqual(expectedEvent);
+                expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
             });
         });
     });
@@ -195,9 +193,9 @@ describe('Analytic Service ::', () => {
             ['dialog_duplicate_order_warning', 'DuplicateOrder', true],
             ['dialog_restaurant_not_taking_orders_error', 'RESTAURANT_NOT_TAKING_ORDERS', false],
             ['dialog_additional_items_required_error', 'ADDITIONAL_ITEMS_REQUIRED', false]
-        ])('should `push` expected event with %s `eventAction` to `dataLayer` when error is %s', (eventAction, code, isDuplicateOrderError) => {
+        ])('should call `pushEvent` with %s `eventAction` when error is %s', (eventAction, code, isDuplicateOrderError) => {
             // Arrange
-            const expected = {
+            const expectedEvent = {
                 event: 'trackEvent',
                 eventCategory: 'engagement',
                 eventAction,
@@ -205,17 +203,17 @@ describe('Analytic Service ::', () => {
             };
 
             // Act
-            trackDialogEvent({ code, isDuplicateOrderError });
+            analyticsService.trackDialogEvent({ code, isDuplicateOrderError });
 
             // Assert
-            expect(window.dataLayer).toContainEqual(expected);
+            expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
         });
     });
 
     describe('trackLowValueOrderExperiment ::', () => {
-        it('should `push` low value order event to data layer if it is returned in request header', () => {
+        it('should call `pushEvent` with low value order if it is returned in request header', () => {
             // Arrange
-            const expected = {
+            const expectedEvent = {
                 custom: {
                     experiment: {
                         id: 'EX-1880',
@@ -235,23 +233,23 @@ describe('Analytic Service ::', () => {
             };
 
             // Act
-            trackLowValueOrderExperiment(mockedResponseHeaders);
+            analyticsService.trackLowValueOrderExperiment(mockedResponseHeaders);
 
             // Assert
-            expect(window.dataLayer).toContainEqual(expected);
+            expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
         });
 
-        it('should not `push` low value order event to data layer if it is not returned in request header', () => {
+        it('should not call `pushEvent` with low value order if it is not returned in request header', () => {
             // Arrange
             const mockedResponseHeaders = {
                 [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: null
             };
 
             // Act
-            trackLowValueOrderExperiment(mockedResponseHeaders);
+            analyticsService.trackLowValueOrderExperiment(mockedResponseHeaders);
 
             // Assert
-            expect(window.dataLayer).toEqual([]);
+            expect($gtm.pushEvent).not.toHaveBeenCalled();
         });
     });
 });

@@ -43,7 +43,6 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapActions, mapState } from 'vuex';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
-import { trackDialogEvent } from '../services/analytics';
 
 export default {
     components: {
@@ -91,7 +90,7 @@ export default {
             modalContext.open();
         }
 
-        trackDialogEvent({
+        this.$emit('dialogCreated', {
             code: this.message?.code,
             isDuplicateOrderError: this.isDuplicateOrderError
         });
