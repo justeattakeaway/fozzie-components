@@ -46,7 +46,7 @@ v5.0.0-beta.0
 - New font JETSansDigital
 
 
-v5.0.0-beta.3
+v6.0.0-beta.1
 ------------------------------
 *September 14, 2021*
 
