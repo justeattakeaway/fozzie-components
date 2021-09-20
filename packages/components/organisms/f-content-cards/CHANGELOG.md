@@ -3,13 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v6.0.0-beta.0
+------------------------------
+*September 20, 2021*
 
-v5.0.0-beta.2
+### Changed
+- Changed version number to prevent conflict with main branch as v5 has now been used
+
+
+v5.0.0-beta.2 (INCORRECT VERSION NOW DUE TO MASTER USING V5)
 ------------------------------
 *September 02, 2021*
 
 ### Changed
 - Updating braze adapter version
+
+
+v5.0.0-beta.1 (INCORRECT VERSION NOW DUE TO MASTER USING V5)
+------------------------------
+*July 26, 2021*
+
+### Changed
+- Updated content cards to use beta 4 of braze adapter
+- Updated tests to account for change in braze adapter
 
 
 v6.0.0
@@ -37,15 +53,6 @@ v5.0.0-beta.0
 
 ### Updated
 - New font JETSansDigital
-
-
-v5.0.0-beta.1
-------------------------------
-*July 26, 2021*
-
-### Changed
-- Updated content cards to use beta 4 of braze adapter
-- Updated tests to account for change in braze adapter
 
 
 v4.8.0
