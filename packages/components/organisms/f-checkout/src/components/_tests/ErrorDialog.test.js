@@ -6,13 +6,16 @@ import {
     i18n, defaultCheckoutState, createStore
 } from './helpers/setup';
 import { ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE } from '../../constants';
+import analyticsMixin from '../../mixins/analytics.mixin';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-xdescribe('ErrorDialog', () => {
+describe('ErrorDialog', () => {
+    let trackDialogEventSpy;
+
     const restaurant = {
         seoName: 'checkout-kofte-farringdon',
         id: '22222'
@@ -32,6 +35,10 @@ xdescribe('ErrorDialog', () => {
         code: 'DuplicateOrder',
         isDuplicateOrderError: true
     };
+
+    beforeEach(() => {
+        trackDialogEventSpy = jest.spyOn(analyticsMixin.methods, 'trackDialogEvent').mockImplementation();
+    });
 
     afterEach(() => {
         jest.clearAllMocks();
@@ -394,9 +401,6 @@ xdescribe('ErrorDialog', () => {
         });
 
         it('should make a call to `trackDialogEvent` with a error message', () => {
-            // Arrange
-            const trackDialogEventSpy = jest.spyOn(ErrorDialog.methods, 'trackDialogEvent');
-
             // Act
             shallowMount(ErrorDialog, {
                 store: createStore({

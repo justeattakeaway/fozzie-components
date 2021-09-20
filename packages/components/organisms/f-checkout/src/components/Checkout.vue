@@ -568,12 +568,6 @@ export default {
             'saveUserNote'
         ]),
 
-        // ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-        //     'trackFormErrors',
-        //     'trackFormInteraction',
-        //     'trackInitialLoad'
-        // ]),
-
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
             'setExperimentValues'
         ]),

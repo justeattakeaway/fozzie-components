@@ -28,6 +28,7 @@ import {
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
 import addressService from '../../services/addressService';
+import analyticsMixin from '../../mixins/analytics.mixin';
 
 const {
     CreateGuestUserError,
@@ -111,7 +112,11 @@ const alert = {
     content: alertCode
 };
 
-xdescribe('Checkout', () => {
+describe('Checkout', () => {
+    let trackInitialLoadSpy;
+    let trackFormInteractionSpy;
+    let trackFormErrorsSpy;
+
     const updateCheckoutUrl = 'http://localhost/updatecheckout';
     const getCheckoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
@@ -153,6 +158,9 @@ xdescribe('Checkout', () => {
 
     beforeEach(() => {
         windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
+        trackInitialLoadSpy = jest.spyOn(analyticsMixin.methods, 'trackInitialLoad').mockImplementation();
+        trackFormInteractionSpy = jest.spyOn(analyticsMixin.methods, 'trackFormInteraction').mockImplementation();
+        trackFormErrorsSpy = jest.spyOn(analyticsMixin.methods, 'trackFormErrors').mockImplementation();
     });
 
     afterEach(() => {
@@ -1212,13 +1220,11 @@ xdescribe('Checkout', () => {
     describe('mounted ::', () => {
         let initialiseSpy;
         let setAuthTokenSpy;
-        let trackInitialLoadSpy;
         let wrapper;
 
         beforeEach(() => {
             initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
             setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
-            trackInitialLoadSpy = jest.spyOn(VueCheckout.methods, 'trackInitialLoad');
 
             wrapper = shallowMount(VueCheckout, {
                 store: createStore(),
@@ -1976,9 +1982,6 @@ xdescribe('Checkout', () => {
                 });
 
                 it('should make a call to `trackFormErrors`', () => {
-                    // Arrange
-                    const trackFormErrorsSpy = jest.spyOn(wrapper.vm, 'trackFormErrors');
-
                     // Act
                     wrapper.vm.handleNonFulfillableCheckout();
 
@@ -2911,7 +2914,6 @@ xdescribe('Checkout', () => {
             let error;
             let eventToEmit;
             let logInvokerSpy;
-            let trackFormInteractionSpy;
             let scrollToElementSpy;
 
             beforeEach(() => {
@@ -2933,7 +2935,6 @@ xdescribe('Checkout', () => {
                 });
 
                 logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
-                trackFormInteractionSpy = jest.spyOn(wrapper.vm, 'trackFormInteraction');
                 scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
             });
 
@@ -3267,7 +3268,7 @@ xdescribe('Checkout', () => {
                 it('should make a call to `trackFormInteraction` so we can track the action type `submit`', async () => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(true);
-                    const trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
+
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
@@ -3417,7 +3418,6 @@ xdescribe('Checkout', () => {
             let isFormValidSpy;
             let mockValidationState;
             let getFormValidationStateSpy;
-            let trackFormInteractionSpy;
 
             beforeEach(() => {
                 mockValidationState = {
@@ -3433,7 +3433,6 @@ xdescribe('Checkout', () => {
                 getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
                 getFormValidationStateSpy.mockReturnValue(mockValidationState);
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
-                trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
             });
 
             it('should exist', () => {
