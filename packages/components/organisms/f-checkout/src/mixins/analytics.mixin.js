@@ -7,6 +7,7 @@ export default {
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'basket',
+            'errors',
             'isLoggedIn',
             'restaurant',
             'serviceType'
@@ -52,7 +53,7 @@ export default {
                     name: formName,
                     action,
                     error: error || null,
-                    autofill: this.autofill,
+                    autofill: this.autofill || null,
                     changes: this.changedFields.toString()
                 }
             });
@@ -99,8 +100,9 @@ export default {
         /**
          * Fetches the variant of the Low Value Order experiment from the headers and pushes an analytics event.
          */
-        trackLowValueOrderExperiment (_, experimentHeaders) {
+        trackLowValueOrderExperiment (experimentHeaders) {
             const lowValueOrderExperimentVariant = experimentHeaders?.[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
+
             if (lowValueOrderExperimentVariant) {
                 const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
 
