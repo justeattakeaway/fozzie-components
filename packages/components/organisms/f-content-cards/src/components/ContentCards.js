@@ -219,7 +219,10 @@ export default {
                     `Content Cards (setupMetadata) - Attempting to initialise BrazeAdapter. Key: (${this.loggingKey})`,
                     this.$store,
                     {
-                        tags: this.tags
+                        tags: this.tags,
+                        data: {
+                            key: this.loggingKey
+                        }
                     }
                 );
 
@@ -383,8 +386,10 @@ export default {
                         this.$store,
                         {
                             tags: this.tags,
-                            key: this.loggingKey,
-                            source: card.source
+                            data: {
+                                key: this.loggingKey,
+                                source: CARDSOURCE_METADATA
+                            }
                         }
                     );
                     throw new Error('Invalid card source type');
