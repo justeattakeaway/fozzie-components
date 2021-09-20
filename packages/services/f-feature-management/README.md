@@ -30,6 +30,7 @@ const contextGetter = () => ({
 
 const settings = { //see table below for details
   initialConfigAsJson: '{ ... }', 
+  keyPrefix: 'je-coreweb',
   cdn: {
     scope: 'je-coreweb', 
     environment: 'production',
@@ -54,6 +55,7 @@ const myFeatureValue = featureManagement.getValue('my-feature-value');
 |`initialConfigAsJson`|string|No|Can be passed in if available prior to initialisation. Usually would originate on the Feature Management CDN.|
 |`contextGetter`|function|Yes|Parameterless function that returns object containing `country` and `anonUserId`.|
 |`onUpdated`|function|No|Parameterless function invoked when config is loaded / changed.|
+|`keyPrefix`|string|No|String to prepend to feature keys, along with `::`.  If omitted, full key including prefix must be passed.  E.g. `<prefix>::<key>` rather than just `<key>`.|
 |`cdn`|object|No|If config is to be loaded from the CDN by this lib this property must be set. See the Feature Management portal for details.|
 |`cdn.scope`|string|Yes (if `cdn` set)|The Feature Management "scope". E.g. `je-coreweb`.|
 |`cdn.environment`|string|Yes (if `cdn` set)|The Feature Management "environment". E.g. `production`.|
