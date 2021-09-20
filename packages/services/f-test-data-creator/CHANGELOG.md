@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*September 15, 2021*
+*September 20, 2021*
 
 ### Added
 - `f-test-data-creator` package for generating test data in e2e tests
