@@ -12,7 +12,7 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-describe('ErrorDialog', () => {
+xdescribe('ErrorDialog', () => {
     const restaurant = {
         seoName: 'checkout-kofte-farringdon',
         id: '22222'

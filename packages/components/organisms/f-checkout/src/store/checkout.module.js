@@ -7,6 +7,7 @@ import checkoutApi from '../services/checkoutApi';
 import addressGeocodingApi from '../services/addressGeocodingApi';
 import orderPlacementApi from '../services/orderPlacementApi';
 import accountApi from '../services/accountApi';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 import {
     UPDATE_ADDRESS,
@@ -179,7 +180,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/trackLowValueOrderExperiment`, headers, { root: true });
+            analyticsMixin.methods.trackLowValueOrderExperiment(headers);
             dispatch('updateMessage', detailedIssues[0]);
         },
 

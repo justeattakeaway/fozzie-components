@@ -23,7 +23,7 @@ Object.defineProperty(global, 'window', {
     }
 });
 
-describe('CheckoutAnalyticsModule', () => {
+xdescribe('CheckoutAnalyticsModule', () => {
     let state = CheckoutAnalyticsModule.state();
 
     it('should create default state when initialised.', () => {

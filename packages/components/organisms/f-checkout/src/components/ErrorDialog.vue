@@ -43,15 +43,18 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapActions, mapState } from 'vuex';
 import {
-    VUEX_CHECKOUT_MODULE,
-    VUEX_CHECKOUT_ANALYTICS_MODULE
+    VUEX_CHECKOUT_MODULE
 } from '../constants';
+import analyticsMixin from '../mixins/analytics.mixin';
+
 
 export default {
     components: {
         FButton,
         MegaModal
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         redirectUrl: {
@@ -102,10 +105,6 @@ export default {
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateMessage'
-        ]),
-
-        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackDialogEvent'
         ]),
 
         getModalContext () {

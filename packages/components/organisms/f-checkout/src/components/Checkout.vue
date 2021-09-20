@@ -148,11 +148,12 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate';
 import {
     required, email, maxLength, requiredIf
 } from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
+import VueScrollTo from 'vue-scrollto';
+
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
@@ -164,8 +165,12 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { validations } from '@justeat/f-services';
+
+import { validationMixin } from 'vuelidate';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-import VueScrollTo from 'vue-scrollto';
+import loggerMixin from '../mixins/logger.mixin';
+import analyticsMixin from '../mixins/analytics.mixin';
+
 import AddressBlock from './Address.vue';
 import AgeVerification from './AgeVerification.vue';
 import CheckoutHeader from './Header.vue';
@@ -174,6 +179,7 @@ import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
+
 import exceptions from '../exceptions/exceptions';
 import {
     AGE_VERIFICATION_ISSUE,
@@ -191,7 +197,7 @@ import {
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
-import loggerMixin from '../mixins/logger.mixin';
+
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
@@ -228,10 +234,11 @@ export default {
     },
 
     mixins: [
-        validationMixin,
-        VueGlobalisationMixin,
+        analyticsMixin,
         checkoutValidationsMixin,
-        loggerMixin
+        loggerMixin,
+        validationMixin,
+        VueGlobalisationMixin
     ],
 
     props: {
@@ -561,11 +568,11 @@ export default {
             'saveUserNote'
         ]),
 
-        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackFormErrors',
-            'trackFormInteraction',
-            'trackInitialLoad'
-        ]),
+        // ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+        //     'trackFormErrors',
+        //     'trackFormInteraction',
+        //     'trackInitialLoad'
+        // ]),
 
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
             'setExperimentValues'
