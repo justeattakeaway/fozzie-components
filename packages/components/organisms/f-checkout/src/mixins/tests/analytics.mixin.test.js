@@ -59,10 +59,9 @@ describe('Analytic Service ::', () => {
 
         afterEach(() => {
             jest.clearAllMocks();
-            jest.resetAllMocks();
         });
 
-        it('should call `pushEvent` with expected event', () => {
+        it('should call `pushEvent` with checkout status', () => {
             // Act
             wrapper.vm.trackInitialLoad();
 
@@ -111,7 +110,7 @@ describe('Analytic Service ::', () => {
                 expectedEvent.form.error = payload.error;
             });
 
-            it('should call `pushEvent` with expected event', () => {
+            it('should call `pushEvent` with checkout status', () => {
                 // Act
                 wrapper.vm.trackFormInteraction(payload);
 
@@ -126,7 +125,7 @@ describe('Analytic Service ::', () => {
                 expectedEvent.form.error = payload.error;
             });
 
-            it('should call `pushEvent` with expected event', () => {
+            it('should call `pushEvent` with checkout status', () => {
                 // Act
                 wrapper.vm.trackFormInteraction(payload);
 
@@ -225,7 +224,7 @@ describe('Analytic Service ::', () => {
     });
 
     describe('trackLowValueOrderExperiment ::', () => {
-        it('should call `pushEvent` with expectedEvent when request header is returned', () => {
+        it('should call `pushEvent` with checkout status when request header is returned', () => {
             // Arrange
             const expectedEvent = {
                 custom: {
@@ -253,7 +252,7 @@ describe('Analytic Service ::', () => {
             expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
         });
 
-        it('should not call `pushEvent` with expectedEvent when request header is not returned', () => {
+        it('should not call `pushEvent` with checkout status when request header is not returned', () => {
             // Arrange
             const mockedResponseHeaders = {
                 [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: null

@@ -21,7 +21,7 @@ export default {
 
     methods: {
         /**
-         * Pushes initial state of checkout to the dataLayer.
+         * Pushes initial state of checkout and checkout analytics to the dataLayer.
          */
         trackInitialLoad () {
             this.$gtm.pushEvent({
@@ -42,7 +42,7 @@ export default {
         },
 
         /**
-         * Pushes `form` event to the dataLayer with correct data
+         * Pushes `form` event to the dataLayer with checkout status
          */
         trackFormInteraction ({ action, error }) {
             const formName = this.isLoggedIn ? 'checkout' : 'checkout_guest';
@@ -81,7 +81,7 @@ export default {
         },
 
         /**
-         * Dispatches `trackFormInteraction` with each error in `state.errors`.
+         * Dispatches `trackFormInteraction` with each error in checkout `state.errors`.
          */
         trackFormErrors () {
             const trackedErrors = [];
