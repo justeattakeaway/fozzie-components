@@ -175,10 +175,11 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
     - ### **`pushPageData()`**<br>
       Evaluates and gather data for the `pageData` GA model and pushes it to the `dataLayer`<br>
       #### **Syntax**.
-      > this.`$gtm`.**pushPageData**(_{ pageName: `checkout`, requestId: `021c24d2-86ef-...`, customFields: { custom1: 'one', group: 'diff-grp-name' } }_);
+      > this.`$gtm`.**pushPageData**(_{ pageName: `sign-up`, groupName: `accounts`, requestId: `021c24d2-86ef-...`, customFields: { custom1: 'one' } }_);
       #### **Parameters**.
       > (**object**) {<br>
       >> - (**string**) `pageName`
+      >> - (**string**) `groupName`
       >> - (**string**) `requestId` (_optional_)
       >> - (**number**) `httpStatusCode` (_optional_)(_only override this if you wish to change the default 200, i.e you may be displaying a custom static 404 page and want to record the value 404 instead of 200 or you may be displaying a successful account creation page and want to record the value 201 rather than 200_)
       >> - (**object**) `customFields` (_optional_) (_You may want to overwrite/add fields and this parameter allows you to indicate an object of fields/values that if already present will overwrite and if not then will be append to the model_)
@@ -262,7 +263,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
   | :--- | :--- | :--- | :--- | :--- |
   | namespace| 'some_unique-namespace' | Optional | `f-analytics` | This is used to ensure uniqueness with regards to internal objects, e.g. the internal Vuex Store used by this service, do not change unless you have an issue and need to use this namespace locally |
   | globalVarName| 'gtm' | Optional | `gtm` | This is used to access the global service/methods, do not change unless you have an issue and need to use this name locally |
-  | featureName| 'coreweb-registration' | Required | | This is used to identify analytics sent by your feature |
+  | featureName| 'coreweb' | Required | | This is used to identify analytics sent by your feature |
   | locale| 'en-GB' | Optional | `en-GB` | This is used to calcualate various platform data values |
   | id| 'GTM-X1234Z' | | | This is used know what GA account to push analytics to |
   | auth| 'authKey' | Optional | | Please speak to your Analytics team for more information about this option |

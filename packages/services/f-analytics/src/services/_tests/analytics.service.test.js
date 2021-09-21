@@ -334,11 +334,13 @@ describe('Analytic Service ::', () => {
                 mockWindow({ winWidth, winHeight });
 
                 // Act
-                service.pushPageData();
+                service.pushPageData({ pageName: 'jazz', groupName: 'man' });
 
                 // Assert
                 expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
                     pageData: expect.objectContaining({
+                        name: 'jazz',
+                        group: 'man',
                         orientation: orientationExpected,
                         display: displayExpected
                     })

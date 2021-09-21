@@ -185,7 +185,7 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  * Maps various static/computed variables to the PageData.
  *
  * @param {object} pageData - A reference to the current PageData instance
- * @param {string} featureName - The name of the feature
+ * @param {string} groupName - The name of the group
  * @param {string} pageName - The name of the page
  * @param {string} requestId - The current request Id
  * @param {number} httpStatusCode - The httpStatusCode (only supplied when 200 needs to be overriden)
@@ -194,7 +194,7 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  */
 export const mapPageData = ({
     pageData,
-    featureName,
+    groupName,
     pageName,
     requestId,
     httpStatusCode,
@@ -206,7 +206,7 @@ export const mapPageData = ({
 
     const mappedPageData = {
         ...pageData,
-        group: featureName,
+        group: groupName || pageData.groupName,
         name: pageName || pageData.pageName,
         conversationId: conversationId || pageData.conversationId,
         requestId: requestId || pageData.requestId,

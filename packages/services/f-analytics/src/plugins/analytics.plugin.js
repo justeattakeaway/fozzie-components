@@ -14,12 +14,6 @@ const prepareServerSideValues = (store, req, options) => {
     }
 };
 
-const registerStoreModule = (store, options) => {
-    if (!store.hasModule(options.namespace)) {
-        store.registerModule(options.namespace, analyticsModule);
-    }
-};
-
 const preparePageTags = options => {
     // Only add tags if clientside and if not already added
     if (typeof (window) !== 'undefined' && !window.dataLayer) {
@@ -65,7 +59,7 @@ export default ({ store, req }, inject, _options) => {
 
     preparePageTags(options);
 
-    registerStoreModule(store, options);
+    store.registerModule(options.namespace, analyticsModule, { preserveState: true });
 
     prepareServerSideValues(store, req, options);
 

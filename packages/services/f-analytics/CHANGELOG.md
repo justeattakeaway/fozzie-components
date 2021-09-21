@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.15.0
+------------------------------
+*September 21, 2021*
+
+### Changed
+- Always attempt to register the store but always preserve state.
+- You can supply the `groupName` when calling pushPageData() rather than is defaulting to `featureName`.
+
+
 v0.14.0
 ------------------------------
 *September 10, 2021*
