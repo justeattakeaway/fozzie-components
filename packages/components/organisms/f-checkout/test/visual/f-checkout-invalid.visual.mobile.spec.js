@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -13,11 +12,8 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Get Checkout Errors', '500')
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForErrorPageComponent();
+        checkout.load('error');
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout" Error Page', 'mobile');
@@ -31,11 +27,8 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Get Checkout Errors', '403')
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForErrorPageComponent();
+        checkout.load('error');
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'mobile');

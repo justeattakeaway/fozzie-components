@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -9,11 +8,7 @@ describe('f-checkout "dinein" component tests', () => {
         checkout.withQuery('&knob-Service Type', 'dinein')
             .withQuery('&knob-Is User Logged In', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
-        // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should prevent a user from entering more than 12 characters in the tableIdentifier field', () => {
