@@ -1,16 +1,12 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-
 const Loyalty = require('../../test-utils/component-objects/f-loyalty.component');
 
 const loyalty = new Loyalty();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(loyalty.componentType, loyalty.componentName, loyalty.path);
-        loyalty.open(pageUrl);
-        loyalty.waitForComponent();
+        loyalty.load();
     });
     it('a11y - should test f-loyalty component WCAG compliance', () => {
         // Act

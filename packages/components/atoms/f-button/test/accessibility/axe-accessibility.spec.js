@@ -11,10 +11,8 @@ describe('Accessibility tests', () => {
         button = new Button();
         button.withQuery('knob-Button Type', 'primary');
         button.withQuery('knob-Button Size', 'medium');
-        const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-        button.open(pageUrl);
-
-        button.waitForActionComponent();
+        button.load();
+        
         const axeResults = getAccessibilityTestResults('f-button - action');
 
         expect(axeResults.violations.length).toBe(0);
@@ -27,10 +25,8 @@ describe('Accessibility tests', () => {
             .withQuery('knob-href', 'link')
             .withQuery('knob-Button Size', 'medium');
 
-        const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-        button.open(pageUrl);
-
-        button.waitForLinkComponent();
+        button.load("link");
+        
         const axeResults = getAccessibilityTestResults('f-button - link');
 
         // Assert

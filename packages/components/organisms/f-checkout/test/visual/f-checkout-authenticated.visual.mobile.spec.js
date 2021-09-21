@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -11,11 +10,8 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -40,11 +36,8 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
             .withQuery('&knob-Patch Checkout Errors', 'SERVER')
             .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -58,11 +51,8 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -76,11 +66,8 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Patch Checkout Errors', 'additional-items-required');
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -110,11 +97,8 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -130,11 +114,8 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Mobil
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', false);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the pre-order warning.', () => {
@@ -151,11 +132,8 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -211,11 +189,8 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -230,10 +205,8 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -248,10 +221,8 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Patch Checkout Errors', 'additional-items-required');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -267,11 +238,8 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Mobile 
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', false);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the pre-order warning.', () => {
@@ -288,11 +256,8 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -333,11 +298,8 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
