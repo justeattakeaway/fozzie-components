@@ -107,7 +107,8 @@ export default {
         cards: [],
         hasLoaded: false,
         state: STATE_LOADING,
-        loggingKey: null
+        loggingKey: null,
+        defaultLoggingData: {}
     }),
     computed: {
         /**
@@ -167,6 +168,12 @@ export default {
     },
     mounted () {
         this.loggingKey = `f-content-cards--${this.userId}--${this.tags}`;
+        this.defaultLoggingData = {
+            tags: this.tags,
+            data: {
+                key: this.loggingKey
+            }
+        };
         this.setupMetadata(this.apiKey, this.userId);
     },
     /**
@@ -219,10 +226,7 @@ export default {
                     `Content Cards (setupMetadata) - Attempting to initialise BrazeAdapter. Key: (${this.loggingKey})`,
                     this.$store,
                     {
-                        tags: this.tags,
-                        data: {
-                            key: this.loggingKey
-                        }
+                        ...this.defaultLoggingData
                     }
                 );
 
@@ -258,10 +262,7 @@ export default {
                     `Content Cards (setupMetadata) - BrazeAdapter successfully initialised. Key: (${this.loggingKey})`,
                     this.$store,
                     {
-                        data: {
-                            key: this.loggingKey
-                        },
-                        tags: this.tags
+                        ...this.defaultLoggingData
                     }
                 );
             } catch (e) {
@@ -269,10 +270,7 @@ export default {
                     `Content Cards (setupMetadata) - Failed to initialise BrazeAdapter successfully. Key: (${this.loggingKey})`,
                     this.$store,
                     {
-                        tags: this.tags,
-                        data: {
-                            key: this.loggingKey
-                        },
+                        ...this.defaultLoggingData,
                         error: {
                             message: e.message
                         }
@@ -320,12 +318,11 @@ export default {
                         `Content Cards (metadataContentCards) - Successfully received content cards. Key: (${this.loggingKey})`,
                         this.$store,
                         {
-                            tags: this.tags,
+                            ...this.defaultLoggingData,
+                            Count: cards.length,
                             data: {
-                                key: this.loggingKey,
                                 source: CARDSOURCE_METADATA
-                            },
-                            Count: cards.length
+                            }
                         }
                     );
                 },
@@ -334,11 +331,7 @@ export default {
                         `Content Cards (metadataContentCards) - Failed to receive content cards array, undefined given. Key: (${this.loggingKey})`,
                         this.$store,
                         {
-                            tags: this.tags,
-                            data: {
-                                key: this.loggingKey,
-                                source: CARDSOURCE_METADATA
-                            }
+                            ...this.defaultLoggingData
                         }
                     );
                 }
@@ -354,12 +347,11 @@ export default {
                 `Content Cards (customContentCards) - Attempting to load cards via custom source. Key: (${this.loggingKey})`,
                 this.$store,
                 {
-                    tags: this.tags,
+                    ...this.defaultLoggingData,
+                    Count: cards.length,
                     data: {
-                        key: this.loggingKey,
                         source: CARDSOURCE_METADATA
-                    },
-                    Count: cards.length
+                    }
                 }
             );
             this.contentCards({
@@ -385,9 +377,8 @@ export default {
                         `Content Cards (handleCardClick) - Invalid card source type. Key: (${this.loggingKey})`,
                         this.$store,
                         {
-                            tags: this.tags,
+                            ...this.defaultLoggingData,
                             data: {
-                                key: this.loggingKey,
                                 source: CARDSOURCE_METADATA
                             }
                         }
@@ -413,9 +404,8 @@ export default {
                         `Content Cards (handleCardView) - Invalid card source type. Key: (${this.loggingKey})`,
                         this.$store,
                         {
-                            tags: this.tags,
+                            ...this.defaultLoggingData,
                             data: {
-                                key: this.loggingKey,
                                 source: card.source
                             }
                         }
