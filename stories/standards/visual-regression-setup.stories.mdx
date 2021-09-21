@@ -82,7 +82,7 @@ When visual changes are detected, Percy will flag this and you will be able to l
 * Create a visual regression test for each state of your component. `F-registration`, for example, would include a test for displaying the components' base state on the initial page load and another for displaying the "mandatory field errors" when the form is left unpopulated, and so on. Creating tests for each state ensures more visual coverage. 
 
 
-* Give screenshots unique, descriptive names. For example, a percy screenshot for an authenticated user in `f-checkout` would look like this: `f-checkout - Collection - Guest - Base State', desktop`.
+* Give screenshots unique, descriptive names. For example, a percy screenshot for an unauthenticated user in `f-checkout` would look like this: `f-checkout - Collection - Guest - Base State', desktop`.
 
 
 * Configure visual tests to only run once system tests in your CI build have passed. By structuring visual tests to be dependent on system tests and placing them towards the bottom of a sequential CI build, we can avoid unnecessarily wasting screenshots.
