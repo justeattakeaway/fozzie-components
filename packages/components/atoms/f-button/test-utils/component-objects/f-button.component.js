@@ -13,7 +13,7 @@ module.exports = class Buttons extends Page {
         super.open(url);
     }
 
-    load (type='action') {
+    load (type = 'action') {
         if ('action' === type) {
             super.load(this.actionComponent);
         } else {
