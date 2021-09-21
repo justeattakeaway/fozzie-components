@@ -1,6 +1,5 @@
 import analyticsModule from '../analytics.module';
 import {
-    defaultState,
     modifiedState,
     newEvent
 } from '../../tests/helpers/setup';
@@ -9,6 +8,7 @@ import {
     UPDATE_EVENTS,
     CLEAR_EVENTS
 } from '../mutation-types';
+import defaultState from '../default-state';
 
 describe('Analytics Module ::', () => {
     let state;
@@ -26,7 +26,8 @@ describe('Analytics Module ::', () => {
 
     it('should create default state when initialised.', () => {
         // Assert
-        expect(analyticsModule.state()).toEqual(defaultState);
+        const actualState = analyticsModule.state();
+        expect(actualState).toEqual(defaultState);
     });
 
     describe('actions ::', () => {

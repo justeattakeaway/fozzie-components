@@ -6,11 +6,7 @@ import {
     mapPageData,
     mapServerSidePlatformData
 } from './analytics.mapper';
-import {
-    platformDataDefault,
-    userDataDefault,
-    pageDataDefault
-} from '../store/default-state';
+import defaultState from '../store/default-state';
 
 const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
 
@@ -22,12 +18,6 @@ const prepareServerSideValues = (store, req, options) => {
         platformData = mapServerSidePlatformData({ platformData, req });
 
         store.dispatch(`${options.namespace}/updatePlatformData`, platformData);
-    }
-};
-
-const registerStoreModule = (store, options) => {
-    if (!store.hasModule(options.namespace)) {
-        store.registerModule(options.namespace, analyticsModule);
     }
 };
 
@@ -78,7 +68,7 @@ export default class AnalyticService {
         };
 
         preparePageTags(this.options);
-        registerStoreModule(this.store, this.options);
+        store.registerModule(this.options.namespace, analyticsModule, { preserveState: true });
         prepareServerSideValues(this.store, this.req, this.options);
 
         // Flush any previously stored (serverside) events
@@ -92,7 +82,7 @@ export default class AnalyticService {
     }
 
     pushPlatformData ({ featureName, locale, customFields } = {}) {
-        let platformData = this.store ? { ...this.store.state[`${this.options.namespace}`].platformData } : { ...platformDataDefault };
+        let platformData = this.store ? { ...this.store.state[`${this.options.namespace}`].platformData } : { ...defaultState.platformData };
 
         platformData = mapPlatformData({
             platformData,
@@ -115,7 +105,7 @@ export default class AnalyticService {
     }
 
     pushUserData ({ authToken, customFields } = {}) {
-        let userData = { ...userDataDefault };
+        let userData = { ...defaultState.userData };
 
         userData = mapUserData({ userData, authToken, req: this.req });
 
@@ -137,7 +127,7 @@ export default class AnalyticService {
         httpStatusCode,
         customFields
     } = {}) {
-        let pageData = { ...pageDataDefault };
+        let pageData = { ...defaultState.pageData };
 
         pageData = mapPageData({
             pageData,

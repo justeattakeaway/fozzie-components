@@ -3,21 +3,12 @@ import {
     UPDATE_EVENTS,
     CLEAR_EVENTS
 } from './mutation-types';
-import {
-    platformDataDefault,
-    userDataDefault,
-    pageDataDefault
-} from './default-state';
+import defaultState from './default-state';
 
 export default {
     namespaced: true,
 
-    state: () => ({
-        platformData: { ...platformDataDefault },
-        userData: { ...userDataDefault },
-        pageData: { ...pageDataDefault },
-        events: []
-    }),
+    state: () => defaultState,
 
     actions: {
         updatePlatformData: ({ commit }, platformData) => {

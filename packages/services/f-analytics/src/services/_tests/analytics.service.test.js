@@ -1,13 +1,14 @@
 import { when } from 'jest-when';
 import Cookies from 'universal-cookie';
+import defaultOptions from '../../defaultOptions';
 import AnalyticService from '../analytics.service';
 import analyticModule from '../../store/analytics.module';
 import {
-    defaultState,
     createStore,
     newEvent,
     options
 } from '../../tests/helpers/setup';
+import defaultState from '../../store/default-state';
 
 jest.mock('universal-cookie', () => jest.fn());
 
@@ -113,19 +114,6 @@ describe('Analytic Service ::', () => {
             expect(instance).toBeDefined();
         });
 
-        it('should register the module if not already registered', () => {
-            // Arrange - override store mock
-            store.hasModule = jest.fn(() => false); // Not registered
-            registerStoreModuleSpy = jest.fn();
-            store.registerModule = registerStoreModuleSpy;
-
-            // Act
-            service = new AnalyticService(store, req, options);
-
-            // Assert
-            expect(registerStoreModuleSpy).toHaveBeenCalledWith(options.namespace, expect.anything());
-        });
-
         it('should append the GTM tags if not already present', () => {
             // Arrange - no datalayer
             mockWindow({ dataLayerPresent: false });
@@ -174,9 +162,9 @@ describe('Analytic Service ::', () => {
             expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${options.id}`);
         });
 
-        it('should not register the module if already registered', () => {
+        it('should register the module', () => {
             // Arrange - override store mock
-            store.hasModule = jest.fn(() => true); // Already registered
+            store.state[`${options.namespace}`].events.push(newEvent);
             registerStoreModuleSpy = jest.fn();
             store.registerModule = registerStoreModuleSpy;
 
@@ -184,7 +172,7 @@ describe('Analytic Service ::', () => {
             service = new AnalyticService(store, req, options);
 
             // Assert
-            expect(registerStoreModuleSpy).not.toHaveBeenCalled();
+            expect(registerStoreModuleSpy).toHaveBeenCalledWith(options.namespace, expect.anything(), { preserveState: true });
         });
 
         it('should not attempt set the `serverside only` platformData properties if clientside', () => {
@@ -237,6 +225,53 @@ describe('Analytic Service ::', () => {
 
             // Assert
             expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/updatePlatformData`, expected);
+        });
+
+        it('should use default options if no options supplied', () => {
+            // Arrange - server side
+            mockWindow({ dataLayerPresent: false });
+
+            // Act
+            service = new AnalyticService(store, req);
+
+            // Assert that all the default options where used
+            expect(document.head.innerHTML).toContain(`${defaultOptions.id}`);
+            expect(document.head.innerHTML).not.toContain(`${defaultOptions.auth}`);
+            expect(document.head.innerHTML).not.toContain(`${defaultOptions.preview}`);
+            expect(document.head.innerHTML).not.toContain(`${defaultOptions.cookiesWin}`);
+        });
+
+        it('should substitute missing options with defaults', () => {
+            // Arrange - server side
+            mockWindow({ dataLayerPresent: false });
+            // Arrange - Supply all new options except one
+            const partialOptions = {
+                ...options,
+                auth: 'some_auth_key',
+                preview: 'true',
+                cookiesWin: 'cookie_name'
+            };
+
+            // Act
+            service = new AnalyticService(store, req, partialOptions);
+
+            // Assert
+            expect(document.head.innerHTML).toContain(`${partialOptions.id}`);
+            expect(document.head.innerHTML).toContain(`${partialOptions.auth}`);
+            expect(document.head.innerHTML).toContain(`${partialOptions.preview}`);
+            expect(document.head.innerHTML).toContain(`${partialOptions.cookiesWin}`);
+        });
+
+        it('should flush any stored events', () => {
+            // Arrange - Pre-populate Store Events
+            store.state[`${options.namespace}`].events.push(newEvent);
+
+            // Act
+            service = new AnalyticService(store, req, options);
+
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith({ ...newEvent });
+            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/clearEvents`);
         });
     });
 

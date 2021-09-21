@@ -1,41 +1,17 @@
-/* eslint-disable quote-props */
 import Vuex from 'vuex';
 import Vue from 'vue';
 
-const defaultState = {
-    platformData: {
-        environment: 'localhost',
-        name: undefined,
-        appType: undefined,
-        applicationId: undefined,
-        userAgent: undefined,
-        branding: undefined,
-        country: undefined,
-        language: undefined,
-        jeUserPercentage: undefined,
-        currency: undefined,
-        version: undefined,
-        instancePosition: undefined,
-        isPilot: undefined
-    },
-    userData: {
-        'a-UserId': undefined,
-        authType: undefined,
-        email: undefined,
-        globalUserId: undefined,
-        signinType: undefined,
-        signupDate: undefined
-    },
-    pageData: {
-        group: undefined,
-        name: undefined,
-        httpStatusCode: 200,
-        conversationId: undefined,
-        requestId: undefined,
-        orientation: undefined,
-        display: undefined
-    },
-    events: []
+const newEvent = {
+    event: 'jazzy',
+    experiment: {
+        id: 'EX-1234',
+        name: 'Some very special experiment',
+        platform: 'experiment_api',
+        variant: {
+            name: 'increase_a'
+        },
+        version: 1
+    }
 };
 
 const modifiedState = {
@@ -70,20 +46,8 @@ const modifiedState = {
         requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
         orientation: 'Landscape',
         display: 'wide'
-    }
-};
-
-const newEvent = {
-    event: 'jazzy',
-    experiment: {
-        id: 'EX-1234',
-        name: 'Some very special experiment',
-        platform: 'experiment_api',
-        variant: {
-            name: 'increase_a'
-        },
-        version: 1
-    }
+    },
+    events: [newEvent]
 };
 
 const options = {
@@ -114,7 +78,7 @@ const defaultMutations = {
 
 const createStore = ({
     name = options.namespace,
-    state = defaultState,
+    state = {},
     actions = defaultActions,
     getters = defaultGetters,
     mutations = defaultMutations
@@ -135,7 +99,6 @@ const createStore = ({
 };
 
 export {
-    defaultState,
     defaultActions,
     modifiedState,
     newEvent,
