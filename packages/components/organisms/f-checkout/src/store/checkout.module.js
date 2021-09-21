@@ -162,7 +162,7 @@ export default {
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
         }, {
-                url, data, timeout, analyticsService
+                url, data, timeout, outHeaders
             }) => {
             const request = {
                 url,
@@ -171,18 +171,15 @@ export default {
                 data,
                 timeout
             };
-
             const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
-
             const { issues, isFulfillable } = responseData;
-
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
-
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            analyticsService.trackLowValueOrderExperiment(headers);
+            outHeaders.headers = headers;
+
             dispatch('updateMessage', detailedIssues[0]);
         },
 

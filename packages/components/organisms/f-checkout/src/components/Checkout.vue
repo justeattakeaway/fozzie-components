@@ -5,7 +5,7 @@
             v-if="message && !errorFormType"
             ref="errorMessage"
             v-bind="messageType.props"
-            @dialogCreated="handleDialogCreation">
+            @created="handleDialogCreation">
             <span>{{ messageType.content }}</span>
         </component>
 
@@ -666,6 +666,7 @@ export default {
          * 4. If `updateCheckout` call fails, throw an UpdateCheckoutError.
          */
         async handleUpdateCheckout () {
+            const outHeaders = { headers: 'none' };
             try {
                 const data = mapUpdateCheckoutRequest({
                     address: this.address,
@@ -683,10 +684,11 @@ export default {
                     url: this.updateCheckoutUrl,
                     data,
                     timeout: this.checkoutTimeout,
-                    analyticsService: this.analyticsService
+                    outHeaders
                 });
 
                 await this.reloadAvailableFulfilmentTimesIfOutdated();
+                this.analyticsService.trackLowValueOrderExperiment(outHeaders);
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {

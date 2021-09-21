@@ -47,7 +47,9 @@ localVue.use(Vuex);
 jest.mock('../../services/analytics', () => jest.fn().mockImplementation(() => ({
     trackFormInteraction: jest.fn(),
     trackInitialLoad: jest.fn(),
-    trackFormErrors: jest.fn()
+    trackFormErrors: jest.fn(),
+    trackDialogEvent: jest.fn(),
+    trackLowValueOrderExperiment: jest.fn()
 })));
 
 const $v = {
@@ -4093,6 +4095,29 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.availableFulfilmentTimesKey).toEqual(1);
+            });
+        });
+
+        describe('handleDialogCreation ::', () => {
+            const event = {
+                code: 'DuplicateOrder',
+                isDuplicateOrderError: true
+            };
+
+            it('should call`trackDialogEvent` wit passed event', () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                wrapper.vm.handleDialogCreation(event);
+
+                // Assert
+                expect(wrapper.vm.analyticsService.trackDialogEvent).toHaveBeenCalledWith(event);
             });
         });
     });

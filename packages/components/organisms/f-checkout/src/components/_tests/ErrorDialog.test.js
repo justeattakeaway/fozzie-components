@@ -408,8 +408,8 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(wrapper.emitted('dialogCreated').length).toBe(1);
-            expect(wrapper.emitted('dialogCreated')[0][0]).toEqual(duplicateOrderMessage);
+            expect(wrapper.emitted('created').length).toBe(1);
+            expect(wrapper.emitted('created')[0][0]).toEqual(duplicateOrderMessage);
         });
     });
 });

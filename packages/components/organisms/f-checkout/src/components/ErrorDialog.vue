@@ -90,7 +90,7 @@ export default {
             modalContext.open();
         }
 
-        this.$emit('dialogCreated', {
+        this.$emit('created', {
             code: this.message?.code,
             isDuplicateOrderError: this.isDuplicateOrderError
         });
