@@ -45,6 +45,16 @@ const createCard = type => ({
     voucherCode
 });
 
+const mockLogger = {
+    logError: jest.fn(),
+    logWarn: jest.fn(),
+    logInfo: jest.fn()
+};
+
+const mocks = {
+    $logger: mockLogger
+};
+
 const createMetadataCards = cardTypes => cardTypes.map(type => createCard(type));
 
 const scopedSlots = {
@@ -72,7 +82,8 @@ describe('ContentCards', () => {
             },
             scopedSlots: {
                 default: '<div></div>'
-            }
+            },
+            mocks
         });
 
         // Assert
@@ -100,7 +111,8 @@ describe('ContentCards', () => {
                 },
                 scopedSlots: {
                     default: '<div></div>'
-                }
+                },
+                mocks
             });
             await instance.vm.$nextTick();
         });
@@ -129,7 +141,8 @@ describe('ContentCards', () => {
                 apiKey,
                 userId
             },
-            scopedSlots
+            scopedSlots,
+            mocks
         });
         instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
@@ -172,7 +185,7 @@ describe('ContentCards', () => {
                     <div :data-test-id="card.type" v-for="card in cards"></div>
                 </content-cards>
             `
-        });
+        }, { mocks });
 
         // Act
         await instance.vm.testCustomCards();
@@ -193,7 +206,8 @@ describe('ContentCards', () => {
                         userId,
                         testId
                     },
-                    scopedSlots
+                    scopedSlots,
+                    mocks
                 });
             });
 
@@ -219,7 +233,8 @@ describe('ContentCards', () => {
                         userId,
                         testId
                     },
-                    scopedSlots
+                    scopedSlots,
+                    mocks
                 });
 
                 // Act
@@ -254,7 +269,8 @@ describe('ContentCards', () => {
                         userId,
                         testId
                     },
-                    scopedSlots
+                    scopedSlots,
+                    mocks
                 });
                 instance.vm.metadataContentCards(cards);
                 await instance.vm.$nextTick();
@@ -283,7 +299,8 @@ describe('ContentCards', () => {
                 apiKey,
                 userId
             },
-            scopedSlots
+            scopedSlots,
+            mocks
         });
         instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
@@ -313,6 +330,7 @@ describe('ContentCards', () => {
                 stubs: {
                     PromotionCard
                 },
+                mocks,
                 scopedSlots: {
                     default: `
                         <div slot-scope="{ cards }">
@@ -579,7 +597,8 @@ describe('ContentCards', () => {
                     apiKey,
                     userId
                 },
-                scopedSlots
+                scopedSlots,
+                mocks
             });
 
             // Act
@@ -607,64 +626,6 @@ describe('ContentCards', () => {
 
         it('should emit an event containing the loading status when appboy is initialised', async () => {
             await testEmitter(HAS_LOADED, true);
-        });
-    });
-
-    describe('logging callback', () => {
-        const testMessage = '__TEST_MESSAGE__';
-        const testPayload = { test: 'PAYLOAD' };
-
-        it('should return a function with the correct logging parameters when callback is called', async () => {
-            // Arrange
-            const loggingType = 'logInfo';
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true,
-                    testId
-                },
-                mocks: {
-                    $logger: {
-                        logInfo: jest.fn()
-                    }
-                },
-                scopedSlots
-            });
-
-            // Act
-            const loggingCallback = instance.vm.handleLogging(instance.vm.$logger);
-            loggingCallback(loggingType, testMessage, testPayload);
-            await instance.vm.$nextTick();
-
-            // Assert
-            expect(instance.vm.$logger.logInfo).toHaveBeenCalledWith(testMessage, null, testPayload);
-        });
-        it('should NOT return a function when the callback is called with incorrect logging type', async () => {
-            // Arrange
-            const loggingType = 'foo';
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true,
-                    testId
-                },
-                mocks: {
-                    $logger: {
-                        logInfo: jest.fn()
-                    }
-                },
-                scopedSlots
-            });
-
-            // Act
-            const loggingCallback = instance.vm.handleLogging(instance.vm.$logger);
-            loggingCallback(loggingType, testMessage, testPayload);
-            await instance.vm.$nextTick();
-
-            // Assert
-            expect(instance.vm.$logger.logInfo).not.toHaveBeenCalled();
         });
     });
 });
