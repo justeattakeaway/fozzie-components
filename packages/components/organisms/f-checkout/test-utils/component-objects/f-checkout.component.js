@@ -140,7 +140,7 @@ module.exports = class Checkout extends Page {
         return this;
     }
 
-    waitForComponent (component=this.component) {
+    waitForComponent (component = this.component) {
         super.waitForComponent(component);
     }
 
