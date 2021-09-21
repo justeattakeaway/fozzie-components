@@ -1,6 +1,6 @@
-<Meta title="Documentation/Standards/Testing/Visual Regression Setup"/>
+<Meta title="Documentation/Standards/Testing/Visual Regression"/>
 
-# Visual Regression – Setup & Approval
+# Visual Regression
 
 As mentioned in our [testing standards guide](https://vue.pie.design/?path=/story/documentation-standards-testing-overview--page), we use Percy in combination with WebdriverIO to run our visual regression tests. These tests allow us to check to ensure our components look the way they are supposed to in supported browsers/viewports.
 
@@ -69,3 +69,31 @@ Whenever changes are made to a component, CircleCI will run the Percy checks to 
 When visual changes are detected, Percy will flag this and you will be able to log in to Percy and view these visual changes. We recommend that these visual changes are checked by 2 members of the team to make sure the visual changes are correct before approving.
 
 ![View of visual changes](./percy-visual-changes.png)
+
+
+## The Do's and Don'ts
+
+
+### Do's:
+
+* Treat components on a case by case basis. Smaller components with lots of variation, like `f-button`, **should** have visual tests to check their many different sizes and colours. Alternatively, components with only one or two variations, such as `f-popover`, would not require these checks, since they are likely already being tested in a parent component.
+
+
+* Create a visual regression test for each state of your component. `F-registration`, for example, would include a test for displaying the components' base state on the initial page load and another for displaying the "mandatory field errors" when the form is left unpopulated, and so on. Creating tests for each state ensures more visual coverage. 
+
+
+* Give screenshots unique, descriptive names. For example, a percy screenshot for an authenticated user in `f-checkout` would look like this: `f-checkout - Collection - Guest - Base State', desktop`.
+
+
+* Configure visual tests to only run once system tests in your CI build have passed. By structuring visual tests to be dependent on system tests and placing them towards the bottom of a sequential CI build, we can avoid unnecessarily wasting screenshots.
+
+
+* In situations where we are over the screenshot limit, disable the browsers Firefox and Edge.
+
+
+### Don'ts:
+
+* Add unnecessary duplication. If a variation of the component is already being tested in a parent component, then there is no need to add additional visual tests.
+
+
+* Use `asserts` in your test. The screenshots act as the assertions.
