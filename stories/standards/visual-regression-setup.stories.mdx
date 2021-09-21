@@ -91,6 +91,9 @@ When visual changes are detected, Percy will flag this and you will be able to l
 * In situations where we are over the screenshot limit, disable the browsers Firefox and Edge.
 
 
+* This only applies if your team uses storybook: For a smaller atom component, we recommend containing all variations inside one storybook document. Please see `f-vue-icons` as an example. This allows us to check all variations under one test and therefore helps reduce the number of screenshots required.
+
+
 ### Don'ts:
 
 * Add unnecessary duplication. If a variation of the component is already being tested in a parent component, then there is no need to add additional visual tests.
