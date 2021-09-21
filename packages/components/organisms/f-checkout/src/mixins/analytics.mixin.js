@@ -1,6 +1,5 @@
 import { mapState } from 'vuex';
 import { HEADER_LOW_VALUE_ORDER_EXPERIMENT, VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
-import experimentService from '../services/experimentService';
 import { getAnalyticsErrorCodeByApiErrorCode } from '../services/mapper';
 
 export default {
@@ -104,7 +103,20 @@ export default {
             const lowValueOrderExperimentVariant = experimentHeaders?.[HEADER_LOW_VALUE_ORDER_EXPERIMENT];
 
             if (lowValueOrderExperimentVariant) {
-                const event = experimentService.getLowValueOrderExperimentTracking(lowValueOrderExperimentVariant);
+                const event = {
+                    event: 'trackExperimentV2',
+                    custom: {
+                        experiment: {
+                            id: 'EX-1880',
+                            name: 'low_value_order_phase_2',
+                            platform: 'experiment_api',
+                            version: 1,
+                            variant: {
+                                name: lowValueOrderExperimentVariant ?? 'reserve'
+                            }
+                        }
+                    }
+                };
 
                 if (event) {
                     this.$gtm.pushEvent(event);

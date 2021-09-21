@@ -1,6 +1,6 @@
 import experimentService from '../experimentService';
 
-describe('experimentService', () => {
+xdescribe('experimentService', () => {
     describe('getLowValueOrderExperimentTracking ::', () => {
         describe('when a variant is passed in', () => {
             it('should return the tracking object with the correct variant name', () => {
