@@ -321,6 +321,7 @@ export default {
                             ...this.defaultLoggingData,
                             Count: cards.length,
                             data: {
+                                ...this.defaultLoggingData.data,
                                 source: CARDSOURCE_METADATA
                             }
                         }
@@ -350,7 +351,8 @@ export default {
                     ...this.defaultLoggingData,
                     Count: cards.length,
                     data: {
-                        source: CARDSOURCE_METADATA
+                        ...this.defaultLoggingData.data,
+                        source: CARDSOURCE_CUSTOM
                     }
                 }
             );
@@ -379,6 +381,7 @@ export default {
                         {
                             ...this.defaultLoggingData,
                             data: {
+                                ...this.defaultLoggingData.data,
                                 source: CARDSOURCE_METADATA
                             }
                         }
@@ -406,6 +409,7 @@ export default {
                         {
                             ...this.defaultLoggingData,
                             data: {
+                                ...this.defaultLoggingData.data,
                                 source: card.source
                             }
                         }
