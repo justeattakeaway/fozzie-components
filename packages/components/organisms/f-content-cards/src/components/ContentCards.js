@@ -97,12 +97,18 @@ export default {
         testId: {
             type: String,
             default: null
+        },
+        tags: {
+            type: String,
+            default: 'content-cards'
         }
     },
     data: () => ({
         cards: [],
         hasLoaded: false,
-        state: STATE_LOADING
+        state: STATE_LOADING,
+        loggingKey: null,
+        defaultLoggingData: {}
     }),
     computed: {
         /**
@@ -161,6 +167,13 @@ export default {
         }
     },
     mounted () {
+        this.loggingKey = `f-content-cards--${this.userId}--${this.tags}`;
+        this.defaultLoggingData = {
+            tags: this.tags,
+            data: {
+                key: this.loggingKey
+            }
+        };
         this.setupMetadata(this.apiKey, this.userId);
     },
     /**
@@ -209,6 +222,14 @@ export default {
          **/
         setupMetadata (apiKey, userId, enableLogging = false) {
             try {
+                this.$logger.logInfo(
+                    `Content Cards (setupMetadata) - Attempting to initialise BrazeAdapter. Key: (${this.loggingKey})`,
+                    this.$store,
+                    {
+                        ...this.defaultLoggingData
+                    }
+                );
+
                 this.brazeAdapter = new BrazeAdapter({
                     apiKey,
                     userId,
@@ -233,11 +254,28 @@ export default {
                     callbacks: {
                         handleContentCards: this.metadataContentCards
                     },
-                    loggerCallbacks: {
-                        logger: this.handleLogging(this.$logger)
-                    }
+                    logger: this.$logger,
+                    tags: this.tags
                 });
+
+                this.$logger.logInfo(
+                    `Content Cards (setupMetadata) - BrazeAdapter successfully initialised. Key: (${this.loggingKey})`,
+                    this.$store,
+                    {
+                        ...this.defaultLoggingData
+                    }
+                );
             } catch (e) {
+                this.$logger.logError(
+                    `Content Cards (setupMetadata) - Failed to initialise BrazeAdapter successfully. Key: (${this.loggingKey})`,
+                    this.$store,
+                    {
+                        ...this.defaultLoggingData,
+                        error: {
+                            message: e.message
+                        }
+                    }
+                );
                 this.state = STATE_ERROR;
                 this.$emit(ON_ERROR, e);
             }
@@ -276,6 +314,27 @@ export default {
                 successCallback: () => {
                     this.$emit('on-braze-init', window.appboy); // deprecated -- for backward compatibility
                     this.$emit(ON_METADATA_INIT, window.appboy);
+                    this.$logger.logInfo(
+                        `Content Cards (metadataContentCards) - Successfully received content cards. Key: (${this.loggingKey})`,
+                        this.$store,
+                        {
+                            ...this.defaultLoggingData,
+                            Count: cards.length,
+                            data: {
+                                ...this.defaultLoggingData.data,
+                                source: CARDSOURCE_METADATA
+                            }
+                        }
+                    );
+                },
+                failCallback: () => {
+                    this.$logger.logError(
+                        `Content Cards (metadataContentCards) - Failed to receive content cards array, undefined given. Key: (${this.loggingKey})`,
+                        this.$store,
+                        {
+                            ...this.defaultLoggingData
+                        }
+                    );
                 }
             }, cards);
         },
@@ -285,6 +344,18 @@ export default {
          * @param {Card[]} cards
          **/
         customContentCards (cards) {
+            this.$logger.logInfo(
+                `Content Cards (customContentCards) - Attempting to load cards via custom source. Key: (${this.loggingKey})`,
+                this.$store,
+                {
+                    ...this.defaultLoggingData,
+                    Count: cards.length,
+                    data: {
+                        ...this.defaultLoggingData.data,
+                        source: CARDSOURCE_CUSTOM
+                    }
+                }
+            );
             this.contentCards({
                 source: CARDSOURCE_CUSTOM
             }, cards);
@@ -304,6 +375,17 @@ export default {
                     this.trackCustomCardClick(card);
                     break;
                 default:
+                    this.$logger.logError(
+                        `Content Cards (handleCardClick) - Invalid card source type. Key: (${this.loggingKey})`,
+                        this.$store,
+                        {
+                            ...this.defaultLoggingData,
+                            data: {
+                                ...this.defaultLoggingData.data,
+                                source: CARDSOURCE_METADATA
+                            }
+                        }
+                    );
                     throw new Error('Invalid card source type');
             }
         },
@@ -321,6 +403,17 @@ export default {
                     this.trackCustomCardVisibility(card);
                     break;
                 default:
+                    this.$logger.logError(
+                        `Content Cards (handleCardView) - Invalid card source type. Key: (${this.loggingKey})`,
+                        this.$store,
+                        {
+                            ...this.defaultLoggingData,
+                            data: {
+                                ...this.defaultLoggingData.data,
+                                source: card.source
+                            }
+                        }
+                    );
                     throw new Error('Invalid card source type');
             }
         },
@@ -359,18 +452,6 @@ export default {
         trackCustomCardVisibility (card) {
             const event = createCustomCardEvent('view', card);
             this.pushToDataLayer(event);
-        },
-
-        /**
-         * Handles logging from f-metadata (callback)
-         * @returns {function(*, *=, *=): void}
-         */
-        handleLogging (logger) {
-            return (type, logMessage, payload) => {
-                if (logger && logger[type]) {
-                    logger[type](logMessage, null, payload);
-                }
-            };
         }
     },
 
