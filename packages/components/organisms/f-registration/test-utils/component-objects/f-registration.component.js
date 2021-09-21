@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const {
     REGISTRATION_COMPONENT,
     CREATE_ACCOUNT_BUTTON,
@@ -67,6 +68,12 @@ module.exports = class Registration extends Page {
             get errorMessage () { return $(PASSWORD_ERROR_MESSAGE).innerText; }
         }
     };
+
+    load () {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+        this.waitForComponent();
+    }
 
     open (url) {
         super.open(url);

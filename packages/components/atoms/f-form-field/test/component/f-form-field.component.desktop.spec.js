@@ -1,13 +1,10 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const FormField = require('../../test-utils/component-objects/f-form-field.component');
 
 const formfield = new FormField();
 
 describe('f-form-field component tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(formfield.componentType, formfield.componentName, formfield.path);
-        formfield.open(pageUrl);
-        formfield.waitForComponent();
+        formfield.load();
     });
 
     it('should display f-form-field', () => {
