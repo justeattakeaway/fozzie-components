@@ -483,6 +483,10 @@ export default {
                 state.address.administrativeArea = address.administrativeArea;
             }
 
+            if (fulfilment.location && fulfilment.location.geolocation) {
+                state.geolocation = fulfilment.location.geolocation;
+            }
+
             if (fulfilment.table) {
                 state.tableIdentifier = fulfilment.table.identifier;
             }
