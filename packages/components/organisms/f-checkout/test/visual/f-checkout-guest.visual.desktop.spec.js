@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout = new Checkout();
@@ -11,11 +10,8 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -50,9 +46,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.setFieldValue('firstName', 'Jerry');
         checkout.setFieldValue('lastName', 'Jazzman');
         checkout.setFieldValue('emailAddress', 'jerry.jazzman@ronniescotts.co.uk');
@@ -84,11 +78,8 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Is ASAP available', false);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the pre-order warning.', () => {
@@ -105,11 +96,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the delivery f-checkout component guest base state.', () => {
@@ -145,9 +133,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.setFieldValue('firstName', 'Jerry');
         checkout.setFieldValue('lastName', 'Jazzman');
         const addressInfo = {
@@ -185,11 +171,8 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual 
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Is ASAP available', false);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the pre-order warning.', () => {
@@ -206,11 +189,8 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Is ASAP available', false);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -251,11 +231,8 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', false)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert

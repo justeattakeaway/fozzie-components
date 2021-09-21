@@ -1,10 +1,9 @@
 import evaluateLogic from './evaluateLogic';
 import evaluateDefault from './evaluateDefaultValue';
-import { getFeature } from './featureGetter';
+import { getFeature, init } from './configStore';
 import { getContext } from './contextGetter';
 import trackExperiment from './trackExperiment';
 import { logger } from './logger';
-
 
 const logValueRequest = (func, key, value) => {
     logger.logInfo(`${func.name}: ${key} => ${value}`);
@@ -118,6 +117,16 @@ class FeatureManager {
 
         return null;
     }
+
+    /* eslint-disable class-methods-use-this */
+    /**
+     * Updates the config with some new JSON, usually downloaded from the FM CDN.
+     * @param {string} configAsJson The config, in json form.
+     */
+    updateConfig (configAsJson) {
+        init(configAsJson);
+    }
+    /* eslint-enable class-methods-use-this */
 }
 
 export default FeatureManager;
