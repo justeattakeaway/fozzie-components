@@ -60,7 +60,6 @@ export default class AnalyticService {
 
     pushPageData ({
         pageName,
-        groupName,
         conversationId,
         requestId,
         httpStatusCode,
@@ -70,7 +69,6 @@ export default class AnalyticService {
 
         pageData = mapPageData({
             pageData,
-            groupName,
             pageName,
             conversationId,
             requestId,

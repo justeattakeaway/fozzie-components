@@ -9,8 +9,8 @@ v0.15.0
 *September 21, 2021*
 
 ### Changed
-- Always attempt to register the store but always preserve state.
-- You can supply the `groupName` when calling pushPageData() rather than is defaulting to `featureName`.
+- Always attempt to register the store but always preserve state, if present.
+- Removed the redundant `groupName` prop from pushPageData().
 
 
 v0.14.0

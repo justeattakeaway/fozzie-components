@@ -59,7 +59,7 @@ export default ({ store, req }, inject, _options) => {
 
     preparePageTags(options);
 
-    store.registerModule(options.namespace, analyticsModule, { preserveState: true });
+    store.registerModule(options.namespace, analyticsModule, { preserveState: !!store.state[`${options.namespace}`] });
 
     prepareServerSideValues(store, req, options);
 
