@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.1.0
 ------------------------------
-*August 4, 2021*
+*September 21, 2021*
 
 ### Changed
 - Updated storybook documentation for visual regression tests.
