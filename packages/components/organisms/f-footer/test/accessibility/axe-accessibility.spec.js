@@ -1,6 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 const Footer = require('../../test-utils/component-objects/f-footer.component');
 
@@ -13,11 +12,9 @@ describe('Accessibility tests', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
             const axeResults = getAccessibilityTestResults('f-footer');
 
             // Assert
@@ -30,11 +27,9 @@ describe('Accessibility tests', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'true');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
             const axeResults = getAccessibilityTestResults('f-footer');
 
             // Assert

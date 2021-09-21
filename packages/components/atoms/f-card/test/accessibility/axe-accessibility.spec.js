@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const Card = require('../../test-utils/component-objects/f-card.component');
@@ -7,9 +6,7 @@ const card = new Card();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(card.componentType, card.componentName, card.path);
-        card.open(pageUrl);
-        card.waitForComponent();
+        card.load();
     });
 
     it('a11y - should test f-card component WCAG compliance', () => {

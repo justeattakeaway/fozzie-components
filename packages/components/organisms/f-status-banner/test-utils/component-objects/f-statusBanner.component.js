@@ -1,4 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 const {
     COMPONENT,
@@ -28,6 +29,12 @@ module.exports = class StatusBanner extends Page {
     get button () { return $(BUTTON); }
 
     get errorMessage () { return $(ERROR_MESSAGE); }
+
+    load () {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+        this.waitForComponent();
+    }
 
     open (url) {
         super.open(url);
