@@ -14,7 +14,7 @@ module.exports = class Buttons extends Page {
     }
 
     load (type = 'action') {
-        if ('action' === type) {
+        if (type === 'action') {
             super.load(this.actionComponent);
         } else {
             super.load(this.linkComponent);
