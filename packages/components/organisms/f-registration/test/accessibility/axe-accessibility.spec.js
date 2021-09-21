@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 const Registration = require('../../test-utils/component-objects/f-registration.component');
 
@@ -7,9 +6,7 @@ const registration = new Registration();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(registration.componentType, registration.componentName, registration.path);
-        registration.open(pageUrl);
-        registration.waitForComponent();
+        registration.load();
     });
 
     it('a11y - should test f-registration component WCAG compliance', () => {

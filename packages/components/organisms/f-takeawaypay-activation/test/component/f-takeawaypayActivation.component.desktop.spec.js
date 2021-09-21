@@ -3,8 +3,7 @@ const takeawaypayActivation = new TakeawaypayActivation();
 
 describe('f-takeawaypayActivation component tests', () => {
     beforeEach(() => {
-        takeawaypayActivation.open();
-        takeawaypayActivation.waitForComponent();
+        takeawaypayActivation.load();
     });
 
     it('should display the f-takeawaypayActivation component', () => {

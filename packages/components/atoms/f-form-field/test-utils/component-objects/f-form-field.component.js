@@ -1,4 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 module.exports = class FormField extends Page {
     constructor() {
@@ -10,6 +11,12 @@ module.exports = class FormField extends Page {
     get label () { return $('[data-test-id="formfield-label"]'); }
 
     get input () { return $('[data-test-id="formfield-input"]'); }
+
+    load () {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+        this.waitForComponent();
+    }
 
     open (url) {
         super.open(url);
