@@ -94,22 +94,24 @@ const mapUserAgent = req => {
  * serverside, to the PlatformData.
  * Also maps the user percentage experiment value (if present) to the PlatformData; again
  * only available serverside due to it's protection.
- * Note: this is stored until the rest of the PlatformData is collated and sent clientside.
+ * Note 1: this is stored until the rest of the PlatformData is collated and sent clientside.
+ * Note 2: dot notation on the env vars does not bundle well so using valid alternative [] approach.
  *
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
- * @return {object} new serverSidePlatformData object
+ * @return {object} new platformData object
  */
 export const mapServerSidePlatformData = ({ platformData, req } = {}) => {
     const userPercent = getCookie('je-user_percentage', req);
 
+    /* eslint-disable dot-notation */
     const mappedData = {
         ...platformData,
         jeUserPercentage: userPercent || platformData.jeUserPercentage,
-        environment: process.env.justEatEnvironment || platformData.environment,
-        version: process.env.FEATURE_VERSION || platformData.version,
-        instancePosition: process.env.INSTANCE_POSITION || platformData.instancePosition,
-        isPilot: process.env.IS_PILOT || platformData.isPilot
+        environment: process.env['justEatEnvironment'] || platformData.environment,
+        version: process.env['FEATURE_VERSION'] || platformData.version,
+        instancePosition: process.env['INSTANCE_POSITION'] || platformData.instancePosition,
+        isPilot: process.env['IS_PILOT'] || platformData.isPilot
     };
 
     return mappedData;
@@ -194,7 +196,6 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  */
 export const mapPageData = ({
     pageData,
-    featureName,
     pageName,
     requestId,
     httpStatusCode,
@@ -206,7 +207,6 @@ export const mapPageData = ({
 
     const mappedPageData = {
         ...pageData,
-        group: featureName,
         name: pageName || pageData.pageName,
         conversationId: conversationId || pageData.conversationId,
         requestId: requestId || pageData.requestId,

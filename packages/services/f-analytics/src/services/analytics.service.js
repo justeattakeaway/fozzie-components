@@ -68,11 +68,15 @@ export default class AnalyticService {
         };
 
         preparePageTags(this.options);
-        store.registerModule(this.options.namespace, analyticsModule, { preserveState: true });
+        store.registerModule(this.options.namespace, analyticsModule, { preserveState: !!store.state[`${this.options.namespace}`] });
         prepareServerSideValues(this.store, this.req, this.options);
 
         // Flush any previously stored (serverside) events
         this.pushEvent();
+    }
+
+    getOptions () {
+        return this.options;
     }
 
     setOptions ({ featureName = this.options.featureName, locale = this.options.locale } = {}) {
@@ -131,7 +135,6 @@ export default class AnalyticService {
 
         pageData = mapPageData({
             pageData,
-            featureName: this.options.featureName,
             pageName,
             conversationId,
             requestId,

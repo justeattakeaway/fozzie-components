@@ -23,7 +23,6 @@ describe('Analytic Service ::', () => {
     let windowsPushSpy;
     let get;
     let registerStoreModuleSpy;
-    let storeHasModuleSpy;
 
     const mockWindow = ({
         winWidth = 667,
@@ -69,9 +68,6 @@ describe('Analytic Service ::', () => {
             }
         });
         store.dispatch = storeDispatchSpy;
-
-        storeHasModuleSpy = jest.fn(() => false);
-        store.hasModule = storeHasModuleSpy;
 
         registerStoreModuleSpy = jest.fn();
         store.registerModule = registerStoreModuleSpy;
@@ -162,16 +158,15 @@ describe('Analytic Service ::', () => {
             expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${options.id}`);
         });
 
-        it('should register the module', () => {
-            // Arrange - override store mock
-            store.state[`${options.namespace}`].events.push(newEvent);
-            registerStoreModuleSpy = jest.fn();
-            store.registerModule = registerStoreModuleSpy;
+        it('should register the module and preserve the state, if present', () => {
+            // Arrange - add some state to store which should be preserved after re-registation
+            store.state[`${options.namespace}`].events.push(newEvent); // add some state to preserve
 
             // Act
             service = new AnalyticService(store, req, options);
 
             // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith({ ...newEvent }); // check state is still present after registration
             expect(registerStoreModuleSpy).toHaveBeenCalledWith(options.namespace, expect.anything(), { preserveState: true });
         });
 
@@ -533,11 +528,12 @@ describe('Analytic Service ::', () => {
                 mockWindow({ winWidth, winHeight });
 
                 // Act
-                service.pushPageData();
+                service.pushPageData({ pageName: 'jazz' });
 
                 // Assert
                 expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
                     pageData: expect.objectContaining({
+                        name: 'jazz',
                         orientation: orientationExpected,
                         display: displayExpected
                     })
@@ -641,6 +637,23 @@ describe('Analytic Service ::', () => {
 
             // Act
             const actualOptions = service.setOptions(expectedOptions);
+
+            // Assert
+            expect(actualOptions).toEqual(expectedOptions);
+        });
+    });
+
+    describe('When calling getOptions ::', () => {
+        it('should return the current options', () => {
+            // Arrange
+            const expectedOptions = {
+                ...options,
+                featureName: 'test-feature-new-name'
+            };
+            service.setOptions(expectedOptions);
+
+            // Act
+            const actualOptions = service.getOptions();
 
             // Assert
             expect(actualOptions).toEqual(expectedOptions);
