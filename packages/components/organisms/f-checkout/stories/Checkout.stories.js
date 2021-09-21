@@ -46,6 +46,8 @@ const serviceTypeUnavailableIssue = 'service-type-unavailable';
 const additionalItemsRequiredIssue = 'additional-items-required';
 const timeNotAvailable = 'Selected time no longer available';
 const timeNotAvailableIssue = 'time-unavailable';
+const geolocationRequired = 'Geolocation required';
+const geolocationRequiredIssue = 'geolocation-required';
 const serverTimeout = 'Server timeout';
 const serverTimeoutIssue = 'timeout';
 const duplicateIssue = 'duplicate';
@@ -58,6 +60,7 @@ const patchCheckoutErrorOptions = {
     [checkoutServerError]: SERVER,
     [updateCheckoutAccessForbidden]: accessForbiddenErrorCode,
     [timeNotAvailable]: timeNotAvailableIssue,
+    [geolocationRequired]: geolocationRequiredIssue,
     [serverTimeout]: serverTimeoutIssue
 };
 
@@ -164,6 +167,7 @@ export const CheckoutComponent = () => ({
 
         updateCheckoutUrl () {
             if (this.patchCheckoutError) {
+                console.log(`/update-checkout-${this.patchCheckoutError}.json`);
                 return `/update-checkout-${this.patchCheckoutError}.json`;
             }
 
