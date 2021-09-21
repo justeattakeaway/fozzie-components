@@ -1,4 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 const {
     PROMOTION_CARD_1_COMPONENT,
@@ -22,6 +23,12 @@ module.exports = class HomePromotionCard1 extends Page {
     get image () { return $(IMAGE); }
 
     get subtitle () { return $(SUBTITLE); }
+
+    load () {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+        this.waitForComponent();
+    }
 
     open (url) {
         super.open(url);
