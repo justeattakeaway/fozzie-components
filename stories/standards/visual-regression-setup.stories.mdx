@@ -76,7 +76,7 @@ When visual changes are detected, Percy will flag this and you will be able to l
 
 ### Do's:
 
-* Treat components on a case by case basis. Smaller components with lots of variation, like `f-button`, **should** have visual tests to check their many different sizes and colours, for example. Alternatively, components with only one or two variations, such as `f-popover`, would not require these checks, since they are likely already being tested in a parent component.
+* Treat components on a case by case basis. Smaller components with lots of variation, like `f-button`, **should** have visual tests to check their many different sizes and colours, for example. Alternatively, components with only one or two variations, such as `f-popover`, would not require these checks, since they are likely already being tested in a parent component. If you are unsure whether a smaller component is already being tested by a parent, you can refer to the Percy `Projects` tab on the dashboard. This gives an overview of the components we have covered.
 
 
 * Create a visual regression test for each state of your component. `F-registration`, for example, would include a test for displaying the components' base state on the initial page load and another for displaying the "mandatory field errors" when the form is left unpopulated, and so on. Creating tests for each state ensures more visual coverage. 
