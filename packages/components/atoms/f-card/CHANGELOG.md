@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.0
+------------------------------
+*September 22, 2021*
+
+### Changed
+- New border radius in line with Icing Phase 2.
+
+### Removed
+- `isRounded` prop as now all the cards should be rounded.
+
+
 v2.0.0
 ------------------------------
 *September 16, 2021*
