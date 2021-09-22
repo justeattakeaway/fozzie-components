@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.2.0
 ------------------------------
-*September 20, 2021*
+*September 22, 2021*
 
 ### Added
 - Analytics service file to handle analytics events.
+- `f-analytics` plugin to handle GTM events.
 
 
 v1.1.0

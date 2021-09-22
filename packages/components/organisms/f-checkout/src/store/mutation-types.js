@@ -22,6 +22,7 @@ export const UPDATE_USER_NOTE = 'UPDATE_USER_NOTE';
 // Analytics module
 export const UPDATE_AUTOFILL = 'UPDATE_AUTOFILL';
 export const UPDATE_CHANGED_FIELD = 'UPDATE_CHANGED_FIELD';
+export const UPDATE_HEADERS = 'UPDATE_HEADERS';
 
 // Experimentation module
 export const UPDATE_EXPERIMENTS_STATE = 'UPDATE_EXPERIMENTS_STATE';

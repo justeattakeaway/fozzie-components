@@ -162,7 +162,7 @@ export default {
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
         }, {
-                url, data, timeout, outHeaders
+                url, data, timeout
             }) => {
             const request = {
                 url,
@@ -178,7 +178,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            outHeaders.headers = headers;
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateHeaders`, headers, { root: true });
 
             dispatch('updateMessage', detailedIssues[0]);
         },

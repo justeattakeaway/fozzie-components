@@ -384,7 +384,8 @@ export default {
         ]),
 
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'changedFields'
+            'changedFields',
+            'headers'
         ]),
 
         wasMobileNumberFocused () {
@@ -666,7 +667,6 @@ export default {
          * 4. If `updateCheckout` call fails, throw an UpdateCheckoutError.
          */
         async handleUpdateCheckout () {
-            const outHeaders = { headers: 'none' };
             try {
                 const data = mapUpdateCheckoutRequest({
                     address: this.address,
@@ -683,12 +683,14 @@ export default {
                 await this.updateCheckout({
                     url: this.updateCheckoutUrl,
                     data,
-                    timeout: this.checkoutTimeout,
-                    outHeaders
+                    timeout: this.checkoutTimeout
                 });
 
                 await this.reloadAvailableFulfilmentTimesIfOutdated();
-                this.analyticsService.trackLowValueOrderExperiment(outHeaders);
+
+                if (this.headers) {
+                    this.analyticsService.trackLowValueOrderExperiment(this.headers);
+                }
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
