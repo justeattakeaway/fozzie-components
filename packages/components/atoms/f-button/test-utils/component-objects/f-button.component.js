@@ -1,8 +1,20 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 module.exports = class Buttons extends Page {
-    constructor() {
+    constructor () {
         super('atom-folder', 'f-button--button-component');
+    }
+
+    load (type='action') {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+
+        if ('action' === type) {
+            this.waitForActionComponent();
+        } else {
+            this.waitForLinkComponent();
+        }
     }
 
     get actionComponent () { return $('[data-test-id="action-button-component"]'); }

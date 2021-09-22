@@ -4,6 +4,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v2.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
 v1.11.0
 ------------------------------
 *August 24, 2021*

@@ -9,11 +9,9 @@ describe('f-button component tests', () => {
         button = new Button();
         button.withQuery('knob-Button Type', 'primary');
         button.withQuery('knob-Button Size', 'medium');
-        const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
 
         // Act
-        button.open(pageUrl);
-        button.waitForActionComponent();
+        button.load();
 
         // Assert
         expect(button.isActionComponentDisplayed()).toBe(true);
@@ -26,11 +24,8 @@ describe('f-button component tests', () => {
             .withQuery('knob-href', 'link')
             .withQuery('knob-Button Size', 'medium');
 
-        const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
         // Act
-        button.open(pageUrl);
-        button.waitForLinkComponent();
+        button.load('link');
 
         // Assert
         expect(button.isLinkComponentDisplayed()).toBe(true);

@@ -6,10 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.16.0
 ------------------------------
-*September 21, 2021*
+*September 22, 2021*
 
 ### Changed
 - Removed the plugin and moved logic to int Service constructor, onus now on consumer to declare as global in local plugin
+
+
+v0.15.0
+------------------------------
+*September 21, 2021*
+
+### Changed
+- Always attempt to register the store but always preserve state, if present.
+- Removed the redundant `groupName` prop from pushPageData().
 
 
 v0.14.0

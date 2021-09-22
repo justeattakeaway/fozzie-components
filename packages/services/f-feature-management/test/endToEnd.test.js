@@ -1,4 +1,4 @@
-import featureManagement from '../src/index';
+import createFeatureManagementInstance from '../src/index';
 import { setContextGetter } from '../src/contextGetter';
 import trackExperiment from '../src/trackExperiment';
 
@@ -11,31 +11,45 @@ const logger = {
     logInfo(){}
 }
 
-const fm = featureManagement({
-    json: JSON.stringify(config),
-    logger: logger
-});
-
-const functionMap = { bool: fm.getBooleanValue.bind(fm), int: fm.getIntegerValue.bind(fm), string: fm.getStringValue.bind(fm) };
-
-
 jest.mock('../src/trackExperiment');
 
-
 describe('End-to-End Tests', () => {
+
     describe.each(expectations.expectations)('Expectation %# - ', ({
         description, expectation, feature, valueType, context
     }) => {       
 
-        it(description, () => {
-            setContextGetter(() => ({anonUserId: context.anonUserId, country: context.tenant, appVersion: context.appVersion}));
+        it(description, async () => {
+
+            const fm = await createFeatureManagementInstance({
+                initialConfigAsJson: JSON.stringify(config),
+                logger: logger
+            });
+            
+            const functionMap = {
+                bool: fm.getBooleanValue.bind(fm),
+                int: fm.getIntegerValue.bind(fm),
+                string: fm.getStringValue.bind(fm)
+            };
+            
+
+            setContextGetter(() => ({
+                anonUserId: context.anonUserId,
+                appVersion: context.appVersion,
+                country: context.tenant
+            }));
 
             trackExperiment.mockClear();
 
-            const { value: expectedValue, experimentKey: expectedKey, experimentVariant: expectedVariant } = expectation;
-            const featureValue = functionMap[valueType](feature);
-            expect(featureValue).toBe(expectedValue);
+            const { 
+                value: expectedValue, 
+                experimentKey: expectedKey, 
+                experimentVariant: expectedVariant 
+            } = expectation;
 
+            const featureValue = functionMap[valueType](feature);
+
+            expect(featureValue).toBe(expectedValue);
             
             if (expectedKey && expectedVariant) {
 

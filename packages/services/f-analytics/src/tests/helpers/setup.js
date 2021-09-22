@@ -40,7 +40,6 @@ const modifiedState = {
     },
     pageData: {
         name: 'test-name',
-        group: 'test-group',
         httpStatusCode: 200,
         conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
         requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',

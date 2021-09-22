@@ -4,6 +4,57 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.2.0
+------------------------------
+*September 21, 2021*
+
+### Changed
+- Correct copy for collection time for AUZ
+
+v1.1.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-mega-modal`, `f-alert`, `f-card`, `f-error-message` and `f-form-field`.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.2
+------------------------------
+*September 8, 2021*
+
+### Changed
+- Updated font weights after design review.
+
+
+v1.0.0-beta.1
+------------------------------
+*September 6, 2021*
+
+### Changed
+- Updated versions of `f-alert` and `f-mega-modal` (JETSans Update).
+
+
+v1.0.0-beta.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- New font JETSansDigital
+- `f-button` to v2.0.0-beta.0 which use the new font
+- `f-form-field` to v3.0.0-beta.0 which use the new font
+
+
 v0.181.0
 ------------------------------
 *September 14, 2021*
@@ -13,7 +64,6 @@ v0.181.0
 
 ### Added
 - Analytics tracking for all `ErrorDialog` events.
-
 
 *September 14, 2021*
 

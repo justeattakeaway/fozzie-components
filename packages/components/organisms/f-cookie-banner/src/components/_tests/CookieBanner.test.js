@@ -368,7 +368,7 @@ describe('CookieBanner', () => {
 
             it('should return `falsey` when the window object does not exist', () => {
                 // Assert
-                expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBe(false);
+                expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(false);
             });
         });
 
@@ -381,7 +381,7 @@ describe('CookieBanner', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBe(true);
+                expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(true);
             });
         });
     });

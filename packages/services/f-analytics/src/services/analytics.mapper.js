@@ -187,7 +187,6 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  * Maps various static/computed variables to the PageData.
  *
  * @param {object} pageData - A reference to the current PageData instance
- * @param {string} featureName - The name of the feature
  * @param {string} pageName - The name of the page
  * @param {string} requestId - The current request Id
  * @param {number} httpStatusCode - The httpStatusCode (only supplied when 200 needs to be overriden)
