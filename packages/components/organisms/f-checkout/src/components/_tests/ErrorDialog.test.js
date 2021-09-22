@@ -395,7 +395,7 @@ describe('ErrorDialog', () => {
             });
         });
 
-        it('should make a emit to `dialogCreated` with a error message', () => {
+        it('should make a emit to `created` event with a error message', () => {
             // Act
             const wrapper = shallowMount(ErrorDialog, {
                 store: createStore({
