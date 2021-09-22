@@ -385,7 +385,7 @@ export default {
 
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields',
-            'headers'
+            'checkoutResponseHeaders'
         ]),
 
         wasMobileNumberFocused () {
@@ -688,8 +688,8 @@ export default {
 
                 await this.reloadAvailableFulfilmentTimesIfOutdated();
 
-                if (this.headers) {
-                    this.analyticsService.trackLowValueOrderExperiment(this.headers);
+                if (this.checkoutResponseHeaders) {
+                    this.analyticsService.trackLowValueOrderExperiment(this.checkoutResponseHeaders);
                 }
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);

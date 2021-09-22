@@ -2,7 +2,7 @@ import CheckoutAnalyticsModule from '../checkoutAnalytics.module';
 import * as mapper from '../../services/mapper';
 import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
 
-import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD, UPDATE_HEADERS } from '../mutation-types';
+import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD, UPDATE_CHECKOUT_RESPONSE_HEADERS } from '../mutation-types';
 import { HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
 
 const { actions, mutations } = CheckoutAnalyticsModule;
@@ -10,7 +10,7 @@ const { actions, mutations } = CheckoutAnalyticsModule;
 const {
     updateAutofill,
     updateChangedField,
-    updateHeaders
+    updateCheckoutResponseHeaders
 } = actions;
 
 const headers = {
@@ -195,13 +195,13 @@ describe('CheckoutAnalyticsModule', () => {
             });
         });
 
-        describe('updateHeaders ::', () => {
-            it(`should call ${UPDATE_HEADERS} with passed field`, () => {
+        describe('updateCheckoutResponseHeaders ::', () => {
+            it(`should call ${UPDATE_CHECKOUT_RESPONSE_HEADERS} with passed field`, () => {
                 // Act
-                updateHeaders({ commit }, headers);
+                updateCheckoutResponseHeaders({ commit }, headers);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_HEADERS, headers);
+                expect(commit).toHaveBeenCalledWith(UPDATE_CHECKOUT_RESPONSE_HEADERS, headers);
             });
         });
     });
@@ -250,13 +250,13 @@ describe('CheckoutAnalyticsModule', () => {
             });
         });
 
-        describe(`${UPDATE_HEADERS} ::`, () => {
+        describe(`${UPDATE_CHECKOUT_RESPONSE_HEADERS} ::`, () => {
             it('should update state `headers` with payload', () => {
                 // Act
-                mutations[UPDATE_HEADERS](state, headers);
+                mutations[UPDATE_CHECKOUT_RESPONSE_HEADERS](state, headers);
 
                 // Assert
-                expect(state.headers).toEqual(headers);
+                expect(state.checkoutResponseHeaders).toEqual(headers);
             });
         });
     });

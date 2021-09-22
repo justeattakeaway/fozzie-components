@@ -178,7 +178,7 @@ export default {
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateHeaders`, headers, { root: true });
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateCheckoutResponseHeaders`, headers, { root: true });
 
             dispatch('updateMessage', detailedIssues[0]);
         },

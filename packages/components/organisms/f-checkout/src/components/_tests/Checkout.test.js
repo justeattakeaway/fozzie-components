@@ -13,7 +13,8 @@ import {
     ERROR_CODE_FULFILMENT_TIME_INVALID,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP,
-    CHECKOUT_ERROR_FORM_TYPE
+    CHECKOUT_ERROR_FORM_TYPE,
+    HEADER_LOW_VALUE_ORDER_EXPERIMENT
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
@@ -21,6 +22,7 @@ import EventNames from '../../event-names';
 import {
     defaultCheckoutState,
     defaultCheckoutActions,
+    defaultAnalyticsState,
     i18n,
     createStore,
     $logger,
@@ -2082,6 +2084,32 @@ describe('Checkout', () => {
 
                         // Assert
                         expect(reloadAvailableFulfilmentTimesIfOutdatedSpy).toHaveBeenCalled();
+                    });
+                });
+
+                describe('when `checkoutResponseHeaders` are not null', () => {
+                    // Arrange
+                    const checkoutResponseHeaders = {
+                        [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: 'test'
+                    };
+
+                    it('should call `trackLowValueOrderExperiment` with `checkoutResponseHeaders`', async () => {
+                        // Arrange
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(defaultCheckoutState, defaultCheckoutActions, {
+                                ...defaultAnalyticsState,
+                                checkoutResponseHeaders
+                            }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+
+                        // Act
+                        await wrapper.vm.handleUpdateCheckout();
+
+                        // Assert
+                        expect(wrapper.vm.analyticsService.trackLowValueOrderExperiment).toHaveBeenCalledWith(checkoutResponseHeaders);
                     });
                 });
             });

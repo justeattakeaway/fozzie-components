@@ -1,5 +1,5 @@
 import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
-import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD, UPDATE_HEADERS } from './mutation-types';
+import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD, UPDATE_CHECKOUT_RESPONSE_HEADERS } from './mutation-types';
 
 export default {
     namespaced: true,
@@ -7,7 +7,7 @@ export default {
     state: () => ({
         autofill: [],
         changedFields: [],
-        headers: {}
+        checkoutResponseHeaders: {}
     }),
 
     actions: {
@@ -45,10 +45,10 @@ export default {
 
 
         /**
-         * Calls `UPDATE_HEADERS` with payload.
+         * Calls `UPDATE_CHECKOUT_RESPONSE_HEADERS` with payload.
          */
-        updateHeaders ({ commit }, headers) {
-            commit(UPDATE_HEADERS, headers);
+        updateCheckoutResponseHeaders ({ commit }, headers) {
+            commit(UPDATE_CHECKOUT_RESPONSE_HEADERS, headers);
         }
     },
 
@@ -65,8 +65,8 @@ export default {
             state.autofill = autofill.toString();
         },
 
-        [UPDATE_HEADERS]: (state, headers) => {
-            state.headers = headers;
+        [UPDATE_CHECKOUT_RESPONSE_HEADERS]: (state, headers) => {
+            state.checkoutResponseHeaders = headers;
         }
     }
 };
