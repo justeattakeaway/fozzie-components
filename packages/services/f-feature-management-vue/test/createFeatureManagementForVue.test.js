@@ -8,7 +8,7 @@ jest.mock('@justeat/f-feature-management', () => {
     };
 
     return {
-        __esModule: true,        
+        __esModule: true,
         default: () => fmMock
     }
 });
