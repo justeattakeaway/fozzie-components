@@ -10,6 +10,14 @@ v4.1.0
 ### Updated
 - Circle CI cached components to include new f-restaurant-card component
 
+v4.1.0
+------------------------------
+*September 22, 2021*
+
+### Changed
+- `fozzie` package version bump to 6.0.0-beta.3 to include new colour theme and radius vars.
+
+
 v4.0.0
 ------------------------------
 *September 15, 2021*
