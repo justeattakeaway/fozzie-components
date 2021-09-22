@@ -69,7 +69,6 @@ export default class AnalyticService {
 
         pageData = mapPageData({
             pageData,
-            featureName: this.options.featureName,
             pageName,
             conversationId,
             requestId,
