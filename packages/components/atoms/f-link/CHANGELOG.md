@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0
+------------------------------
+*September 22, 2021*
+
+### Changed
+- New colour scheme in line with Icing Phase 2.
+
+### Added
+- `o-link--distinct` prop to change default link colour (dark grey) to blue.
+
+
 v1.0.0
 ------------------------------
 *September 16, 2021*
