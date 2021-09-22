@@ -4,13 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v1.2.0
+v1.3.0
 ------------------------------
-*September 22, 2021*
+*September 23, 2021*
 
 ### Added
 - Analytics service file to handle analytics events.
 - `f-analytics` plugin to handle GTM events.
+
+
+v1.2.0
+------------------------------
+*September 21, 2021*
+
+### Changed
+- Correct copy for collection time for AUZ
 
 
 v1.1.0

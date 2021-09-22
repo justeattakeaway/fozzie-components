@@ -5,6 +5,11 @@ module.exports = class TakeawaypayActivation extends Page {
 
     get component () { return $(COMPONENT); }
 
+    load() {
+        this.open();
+        this.waitForComponent();
+    }
+
     open () {
         super.openComponent('organism', 'takeawaypay-activation-component');
     }

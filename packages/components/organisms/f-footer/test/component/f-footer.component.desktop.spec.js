@@ -1,7 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-
 const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
@@ -12,10 +10,8 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         footer.withQuery('&knob-Locale', 'en-GB');
         footer.withQuery('&knob-Show country selector', 'true');
         footer.withQuery('&knob-Show courier links', 'false');
-        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-        footer.open(pageUrl);
-        footer.waitForComponent();
+        footer.load();
     });
 
     forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
@@ -60,11 +56,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.areCourierLinksDisplayed()).toBe(false);
@@ -79,11 +73,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'true');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.areCourierLinksDisplayed()).toBe(true);
@@ -97,11 +89,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'true');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.areCourierLinksDisplayed()).toBe(false);
@@ -115,11 +105,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'true');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isCountrySelectorDisplayed()).toBe(true);
@@ -133,12 +121,10 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'true');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
             const countryIcon = tenant.split('-');
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isCurrentCountryIconDisplayed(countryIcon[1].toLowerCase())).toBe(true);
@@ -190,11 +176,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isSocialIconBlockDisplayed()).toBe(true);
@@ -208,11 +192,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isDownloadIconBlockDisplayed()).toBe(true);
@@ -226,11 +208,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isPaymentIconsBlockDisplayed()).toBe(true);
@@ -244,11 +224,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isFeedbackBlockDisplayed()).toBe(true);

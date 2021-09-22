@@ -1,6 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 const Header = require('../../test-utils/component-objects/f-header.component');
 
@@ -13,9 +12,7 @@ describe('Accessibility tests', () => {
             header.withQuery('&knob-Locale', tenant);
             header.withQuery('&knob-Show offers link', 'true');
             header.withQuery('&knob-Show delivery enquiry', 'true');
-            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
-            header.open(pageUrl);
-            header.waitForComponent();
+            header.load();
             const axeResults = getAccessibilityTestResults('f-header');
 
             // Assert

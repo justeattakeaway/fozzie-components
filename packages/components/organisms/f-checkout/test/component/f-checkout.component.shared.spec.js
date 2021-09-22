@@ -1,6 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -12,10 +11,7 @@ describe('f-checkout component tests - @browserstack', () => {
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it.skip('should submit the checkout form', () => {
@@ -81,11 +77,9 @@ describe('f-checkout component tests - @browserstack', () => {
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
         checkout.withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
         checkout.clickRetryButton();
         browser.pause(2000);
@@ -98,11 +92,9 @@ describe('f-checkout component tests - @browserstack', () => {
         beforeEach(() => {
             // Arrange
             checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-            const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
             // Act
-            checkout.open(pageUrl);
-            checkout.waitForComponent();
+            checkout.load();
             checkout.goToPayment();
         });
 
