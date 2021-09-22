@@ -6,7 +6,6 @@ import {
     mapPageData,
     mapServerSidePlatformData
 } from './analytics.mapper';
-import defaultState from '../store/default-state';
 
 const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
 
@@ -86,7 +85,7 @@ export default class AnalyticService {
     }
 
     pushPlatformData ({ featureName, locale, customFields } = {}) {
-        let platformData = this.store.state[`${this.options.namespace}`] ? { ...this.store.state[`${this.options.namespace}`].platformData } : { ...defaultState.platformData };
+        let platformData = { ...this.store.state[`${this.options.namespace}`].platformData };
 
         platformData = mapPlatformData({
             platformData,
@@ -109,7 +108,7 @@ export default class AnalyticService {
     }
 
     pushUserData ({ authToken, customFields } = {}) {
-        let userData = { ...defaultState.userData };
+        let userData = { ...this.store.state[`${this.options.namespace}`].userData };
 
         userData = mapUserData({ userData, authToken, req: this.req });
 
@@ -131,7 +130,7 @@ export default class AnalyticService {
         httpStatusCode,
         customFields
     } = {}) {
-        let pageData = { ...defaultState.pageData };
+        let pageData = { ...this.store.state[`${this.options.namespace}`].pageData };
 
         pageData = mapPageData({
             pageData,
@@ -154,20 +153,16 @@ export default class AnalyticService {
     }
 
     pushEvent (event) {
-        if (this.store) {
-            if (event) {
-                this.store.dispatch(`${this.options.namespace}/updateEvents`, event);
-            }
+        if (event) {
+            this.store.dispatch(`${this.options.namespace}/updateEvents`, event);
+        }
 
-            if (isDataLayerPresent()) {
-                const events = [...this.store.state[`${this.options.namespace}`].events];
+        if (isDataLayerPresent()) {
+            const events = [...this.store.state[`${this.options.namespace}`].events];
 
-                events.forEach(e => window.dataLayer.push({ ...e }));
+            events.forEach(e => window.dataLayer.push({ ...e }));
 
-                this.store.dispatch(`${this.options.namespace}/clearEvents`);
-            }
-        } else if (isDataLayerPresent()) {
-            window.dataLayer.push({ ...event });
+            this.store.dispatch(`${this.options.namespace}/clearEvents`);
         }
 
         return event;

@@ -1,5 +1,6 @@
 import analyticsModule from '../analytics.module';
 import {
+    defaultState,
     modifiedState,
     newEvent
 } from '../../tests/helpers/setup';
@@ -8,7 +9,6 @@ import {
     UPDATE_EVENTS,
     CLEAR_EVENTS
 } from '../mutation-types';
-import defaultState from '../default-state';
 
 describe('Analytics Module ::', () => {
     let state;

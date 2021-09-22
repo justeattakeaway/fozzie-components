@@ -4,11 +4,11 @@ import defaultOptions from '../../defaultOptions';
 import AnalyticService from '../analytics.service';
 import analyticModule from '../../store/analytics.module';
 import {
+    defaultState,
     createStore,
     newEvent,
     options
 } from '../../tests/helpers/setup';
-import defaultState from '../../store/default-state';
 
 jest.mock('universal-cookie', () => jest.fn());
 
