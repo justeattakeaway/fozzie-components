@@ -187,22 +187,22 @@ export default {
 </script>
 
 <style lang="scss" module>
-$btn-default-borderRadius              : $border-radius;
-$btn-default-font-family               : $font-family-base;
-$btn-default-font-size                 : 'body-l';
+
+$btn-default-borderRadius              : $radius-rounded-e;
+$btn-default-font-size                 : 'heading-s';
 $btn-default-weight                    : $font-weight-bold;
-$btn-default-padding                   : 12px spacing(x3);
+$btn-default-padding                   : 10px spacing(x3);
 $btn-default-outline-color             : $color-focus;
 $btn-default-loading-opacity           : 0.35;
 $btn-default-iconHeight                : 18px;
 $btn-default-iconSpacing               : 3px;
 $btn-default-iconSideSpacing           : $btn-default-iconSpacing + spacing();
 
-$btn-primary-bgColor                   : $color-interactive-primary;
-$btn-primary-bgColor--hover            : darken($color-interactive-primary, $color-hover-01);
-$btn-primary-bgColor--active           : darken($color-interactive-primary, $color-active-01);
-$btn-primary-textColor                 : $color-content-interactive-primary;
-$btn-primary-loading-color             : $color-content-interactive-primary;
+$btn-primary-bgColor                   : $color-interactive-brand;
+$btn-primary-bgColor--hover            : darken($color-interactive-brand, $color-hover-01);
+$btn-primary-bgColor--active           : darken($color-interactive-brand, $color-active-01);
+$btn-primary-textColor                 : $color-content-interactive-light;
+$btn-primary-loading-color             : $color-content-interactive-light;
 $btn-primary-loading-colorOpaque       : rgba($btn-primary-loading-color, $btn-default-loading-opacity);
 
 $btn-secondary-bgColor                 : $color-interactive-secondary;
@@ -240,11 +240,11 @@ $btn-link-loading-colorOpaque          : rgba($btn-link-loading-color, $btn-defa
 $btn-disabled-bgColor                  : $color-disabled-01;
 $btn-disabled-textColor                : $color-content-disabled;
 
-$btn-sizeLarge-font-size               : 'heading-s';
 $btn-sizeLarge-padding                 : 14px spacing(x3);
-$btn-sizeLarge-loading-color           : $color-content-interactive-primary;
+$btn-sizeLarge-loading-color           : $color-content-interactive-light;
 $btn-sizeLarge-loading-colorOpaque     : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
 
+$btn-sizeSmall-font-size               : 'body-l';
 $btn-sizeSmall-padding                 : spacing() spacing(x2);
 $btn-sizeSmall-iconHeight              : 15px;
 $btn-sizeSmall-iconSpacing             : 2.5px;
@@ -278,7 +278,6 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    font-family: $btn-default-font-family;
     @include font-size($btn-default-font-size);
     cursor: pointer;
     padding: $btn-default-padding;
@@ -288,7 +287,7 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     border-radius: $btn-default-borderRadius;
     border: 1px solid transparent;
     user-select: none;
-    color: $color-grey-50;
+    color: $btn-secondary-textColor;
     text-decoration: none;
 
     // Hide focus styles if they're not needed, for example, when an element receives focus via the mouse.
@@ -358,7 +357,7 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
  */
 
 .o-btn--primary,
-.o-btn--icon.o-btn--primary.o-btn--sizeLarge {
+.o-btn--icon.o-btn--primary {
     background-color: $btn-primary-bgColor;
 
     &,
@@ -387,6 +386,34 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     .o-btn-icon svg use,
     .o-btn-icon svg path {
         fill: $btn-primary-textColor;
+    }
+
+    &.o-btn--sizeSmall,
+    &.o-btn--sizeXSmall {
+        background-color: $color-interactive-primary;
+
+        &:hover {
+            background-color: lighten($color-interactive-primary, $color-hover-02);
+        }
+        &:active,
+        &.o-btn--loading {
+            background-color: lighten($color-interactive-primary, $color-active-02);
+        }
+    }
+}
+
+.o-btn--icon.o-btn--primary {
+    &.o-btn--sizeSmall,
+    &.o-btn--sizeXSmall {
+        background-color: $btn-primary-bgColor;
+
+        &:hover {
+            background-color: $btn-primary-bgColor--hover;
+        }
+        &:active,
+        &.o-btn--loading {
+            background-color: $btn-primary-bgColor--active;
+        }
     }
 }
 
@@ -666,24 +693,11 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
  */
 
 .o-btn--sizeLarge {
-    @include font-size($btn-sizeLarge-font-size);
     padding: $btn-sizeLarge-padding;
-
-    &.o-btn--primary {
-        background-color: $color-interactive-brand;
-
-        &:hover {
-            background-color: darken($color-interactive-brand, $color-hover-01);
-        }
-        &:active, &.o-btn--loading {
-            background-color: darken($color-interactive-brand, $color-active-01);
-        }
-
-        @include spinnerColor($btn-sizeLarge-loading-color, $btn-sizeLarge-loading-colorOpaque);
-    }
 }
 
 .o-btn--sizeSmall {
+    @include font-size($btn-sizeSmall-font-size);
     padding: $btn-sizeSmall-padding;
 
     .o-btn-icon {
