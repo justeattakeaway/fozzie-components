@@ -14,7 +14,7 @@ v4.2.0
 
 v4.1.0
 ------------------------------
-*October 04, 2021*
+*October 4, 2021*
 
 ### Updated
 - Circle CI cached components to include new f-restaurant-card component
