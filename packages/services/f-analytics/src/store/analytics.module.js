@@ -32,7 +32,6 @@ export default {
             signupDate: undefined
         },
         pageData: {
-            group: undefined,
             name: undefined,
             httpStatusCode: 200,
             conversationId: undefined,
