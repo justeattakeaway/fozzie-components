@@ -2,20 +2,14 @@ import CheckoutAnalyticsModule from '../checkoutAnalytics.module';
 import * as mapper from '../../services/mapper';
 import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
 
-import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD, UPDATE_CHECKOUT_RESPONSE_HEADERS } from '../mutation-types';
-import { HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
+import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from '../mutation-types';
 
 const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
     updateAutofill,
-    updateChangedField,
-    updateCheckoutResponseHeaders
+    updateChangedField
 } = actions;
-
-const headers = {
-    [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: 'test'
-};
 
 describe('CheckoutAnalyticsModule', () => {
     let state = CheckoutAnalyticsModule.state();
@@ -194,16 +188,6 @@ describe('CheckoutAnalyticsModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_CHANGED_FIELD, field);
             });
         });
-
-        describe('updateCheckoutResponseHeaders ::', () => {
-            it(`should call ${UPDATE_CHECKOUT_RESPONSE_HEADERS} with passed field`, () => {
-                // Act
-                updateCheckoutResponseHeaders({ commit }, headers);
-
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_CHECKOUT_RESPONSE_HEADERS, headers);
-            });
-        });
     });
 
     describe('mutations ::', () => {
@@ -247,16 +231,6 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(state.autofill).toEqual(payload);
-            });
-        });
-
-        describe(`${UPDATE_CHECKOUT_RESPONSE_HEADERS} ::`, () => {
-            it('should update state `headers` with payload', () => {
-                // Act
-                mutations[UPDATE_CHECKOUT_RESPONSE_HEADERS](state, headers);
-
-                // Assert
-                expect(state.checkoutResponseHeaders).toEqual(headers);
             });
         });
     });

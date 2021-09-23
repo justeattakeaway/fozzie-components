@@ -197,7 +197,7 @@ import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
-import AnalyticsService from '../services/analytics';
+import CheckoutAnalyticsService from '../services/analytics';
 
 const {
     CreateGuestUserError,
@@ -335,7 +335,7 @@ export default {
             errorFormType: null,
             isFormSubmitting: false,
             availableFulfilmentTimesKey: 0,
-            analyticsService: new AnalyticsService(this)
+            checkoutAnalyticsService: new CheckoutAnalyticsService(this)
         };
     },
 
@@ -384,8 +384,7 @@ export default {
         ]),
 
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'changedFields',
-            'checkoutResponseHeaders'
+            'changedFields'
         ]),
 
         wasMobileNumberFocused () {
@@ -539,7 +538,7 @@ export default {
         this.setAuthToken(this.authToken);
 
         await this.initialise();
-        this.analyticsService.trackInitialLoad();
+        this.checkoutAnalyticsService.trackInitialLoad();
         this.$emit(EventNames.CheckoutMounted);
     },
 
@@ -646,7 +645,7 @@ export default {
          */
         handleNonFulfillableCheckout () {
             if (this.errors) {
-                this.analyticsService.trackFormErrors();
+                this.checkoutAnalyticsService.trackFormErrors();
 
                 this.logInvoker({
                     message: 'Consumer Checkout Not Fulfillable',
@@ -684,13 +683,14 @@ export default {
                     url: this.updateCheckoutUrl,
                     data,
                     timeout: this.checkoutTimeout
+                }).then(headers => {
+                    if (headers) {
+                        this.checkoutAnalyticsService.trackLowValueOrderExperiment(headers);
+                    }
                 });
 
                 await this.reloadAvailableFulfilmentTimesIfOutdated();
 
-                if (this.checkoutResponseHeaders) {
-                    this.analyticsService.trackLowValueOrderExperiment(this.checkoutResponseHeaders);
-                }
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
@@ -933,7 +933,7 @@ export default {
                 error
             });
 
-            this.analyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
+            this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
             if (!error.shouldShowInDialog && !error.errorFormType) {
                 this.updateMessage(message);
@@ -963,7 +963,7 @@ export default {
          * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
          */
         async onFormSubmit () {
-            this.analyticsService.trackFormInteraction({ action: 'submit' });
+            this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
             this.updateMessage();
             this.setSubmittingState(true);
 
@@ -990,12 +990,12 @@ export default {
             this.scrollToFirstInlineError();
 
             this.$emit(EventNames.CheckoutValidationError, validationState);
-            this.analyticsService.trackFormInteraction({
+            this.checkoutAnalyticsService.trackFormInteraction({
                 action: 'inline_error',
                 error: invalidFields
             });
 
-            this.analyticsService.trackFormInteraction({
+            this.checkoutAnalyticsService.trackFormInteraction({
                 action: 'error',
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
@@ -1105,7 +1105,7 @@ export default {
         },
 
         handleDialogCreation (event) {
-            this.analyticsService.trackDialogEvent(event);
+            this.checkoutAnalyticsService.trackDialogEvent(event);
         }
     },
 

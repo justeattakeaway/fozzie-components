@@ -22,7 +22,6 @@ import EventNames from '../../event-names';
 import {
     defaultCheckoutState,
     defaultCheckoutActions,
-    defaultAnalyticsState,
     i18n,
     createStore,
     $logger,
@@ -1255,7 +1254,7 @@ describe('Checkout', () => {
             await wrapper.vm.initialise();
 
             // Assert
-            expect(wrapper.vm.analyticsService.trackInitialLoad).toHaveBeenCalled();
+            expect(wrapper.vm.checkoutAnalyticsService.trackInitialLoad).toHaveBeenCalled();
         });
 
         it('should emit `CheckoutMounted` event', async () => {
@@ -1988,7 +1987,7 @@ describe('Checkout', () => {
                     wrapper.vm.handleNonFulfillableCheckout();
 
                     // Assert
-                    expect(wrapper.vm.analyticsService.trackFormErrors).toHaveBeenCalled();
+                    expect(wrapper.vm.checkoutAnalyticsService.trackFormErrors).toHaveBeenCalled();
                 });
 
                 it('should emit `CheckoutUpdateFailure` event', async () => {
@@ -2087,18 +2086,22 @@ describe('Checkout', () => {
                     });
                 });
 
-                describe('when `checkoutResponseHeaders` are not null', () => {
+                describe('when `updateCheckout` call returns headers', () => {
                     // Arrange
                     const checkoutResponseHeaders = {
                         [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: 'test'
                     };
 
+                    afterEach(() => {
+                        jest.clearAllMocks();
+                    });
+
                     it('should call `trackLowValueOrderExperiment` with `checkoutResponseHeaders`', async () => {
                         // Arrange
                         wrapper = mount(VueCheckout, {
-                            store: createStore(defaultCheckoutState, defaultCheckoutActions, {
-                                ...defaultAnalyticsState,
-                                checkoutResponseHeaders
+                            store: createStore(defaultCheckoutState, {
+                                ...defaultCheckoutActions,
+                                updateCheckout: jest.fn(() => Promise.resolve(checkoutResponseHeaders))
                             }),
                             i18n,
                             localVue,
@@ -2109,7 +2112,7 @@ describe('Checkout', () => {
                         await wrapper.vm.handleUpdateCheckout();
 
                         // Assert
-                        expect(wrapper.vm.analyticsService.trackLowValueOrderExperiment).toHaveBeenCalledWith(checkoutResponseHeaders);
+                        expect(wrapper.vm.checkoutAnalyticsService.trackLowValueOrderExperiment).toHaveBeenCalledWith(checkoutResponseHeaders);
                     });
                 });
             });
@@ -3016,7 +3019,7 @@ describe('Checkout', () => {
                 wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({ action: 'error', error: `error_${error.errorCode}-${error.message}` });
+                expect(wrapper.vm.checkoutAnalyticsService.trackFormInteraction).toHaveBeenCalledWith({ action: 'error', error: `error_${error.errorCode}-${error.message}` });
             });
 
             it('should call `trackFormInteraction` without an `errorCode` when it does not exist', () => {
@@ -3027,7 +3030,7 @@ describe('Checkout', () => {
                 wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
+                expect(wrapper.vm.checkoutAnalyticsService.trackFormInteraction).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
             });
 
             it('should call `scrollToElement` with the `errorMessage` element', async () => {
@@ -3313,7 +3316,7 @@ describe('Checkout', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({
+                    expect(wrapper.vm.checkoutAnalyticsService.trackFormInteraction).toHaveBeenCalledWith({
                         action: 'submit'
                     });
                 });
@@ -3530,7 +3533,7 @@ describe('Checkout', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({
+                    expect(wrapper.vm.checkoutAnalyticsService.trackFormInteraction).toHaveBeenCalledWith({
                         action: 'inline_error',
                         error: mockValidationState.invalidFields.toString()
                     });
@@ -3556,7 +3559,7 @@ describe('Checkout', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(wrapper.vm.analyticsService.trackFormInteraction).toHaveBeenCalledWith({
+                    expect(wrapper.vm.checkoutAnalyticsService.trackFormInteraction).toHaveBeenCalledWith({
                         action: 'error',
                         error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
                     });
@@ -4145,7 +4148,7 @@ describe('Checkout', () => {
                 wrapper.vm.handleDialogCreation(event);
 
                 // Assert
-                expect(wrapper.vm.analyticsService.trackDialogEvent).toHaveBeenCalledWith(event);
+                expect(wrapper.vm.checkoutAnalyticsService.trackDialogEvent).toHaveBeenCalledWith(event);
             });
         });
     });

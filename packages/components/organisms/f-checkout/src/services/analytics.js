@@ -1,7 +1,7 @@
 import { getAnalyticsErrorCodeByApiErrorCode } from './mapper';
 import { HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../constants';
 
-export default class AnalyticService {
+export default class CheckoutAnalyticService {
     constructor ({ $store, $gtm }) {
         this.analytics = $store.state.fCheckoutAnalyticsModule;
         this.checkout = $store.state.fCheckoutModule;

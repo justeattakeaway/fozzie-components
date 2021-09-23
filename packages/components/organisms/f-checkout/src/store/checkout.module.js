@@ -1,7 +1,9 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE } from '../constants';
+import {
+    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, HEADER_LOW_VALUE_ORDER_EXPERIMENT
+} from '../constants';
 import basketApi from '../services/basketApi';
 import checkoutApi from '../services/checkoutApi';
 import addressGeocodingApi from '../services/addressGeocodingApi';
@@ -171,16 +173,19 @@ export default {
                 data,
                 timeout
             };
-            const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
+            const { data: responseData } = await checkoutApi.updateCheckout(request);
             const { issues, isFulfillable } = responseData;
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateCheckoutResponseHeaders`, headers, { root: true });
-
+            const mockHead = {
+                [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: 'hi'
+            };
             dispatch('updateMessage', detailedIssues[0]);
+
+            return mockHead;
         },
 
         /**

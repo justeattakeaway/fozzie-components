@@ -417,8 +417,7 @@ describe('CheckoutModule', () => {
                 language: 'en-GB',
                 timeout: 10000,
                 currentPostcode: null,
-                postData: null,
-                outHeaders: { headers: 'none' }
+                postData: null
             };
         });
 

@@ -63,8 +63,7 @@ const defaultCheckoutState = {
 
 const defaultAnalyticsState = {
     autofill: [],
-    changedFields: [],
-    checkoutResponseHeaders: {}
+    changedFields: []
 };
 
 const defaultExperimentationState = {

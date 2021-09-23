@@ -1,13 +1,12 @@
 import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
-import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD, UPDATE_CHECKOUT_RESPONSE_HEADERS } from './mutation-types';
+import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from './mutation-types';
 
 export default {
     namespaced: true,
 
     state: () => ({
         autofill: [],
-        changedFields: [],
-        checkoutResponseHeaders: {}
+        changedFields: []
     }),
 
     actions: {
@@ -41,14 +40,6 @@ export default {
             const analyticsName = mapAnalyticsName(field);
 
             commit(UPDATE_CHANGED_FIELD, analyticsName);
-        },
-
-
-        /**
-         * Calls `UPDATE_CHECKOUT_RESPONSE_HEADERS` with payload.
-         */
-        updateCheckoutResponseHeaders ({ commit }, headers) {
-            commit(UPDATE_CHECKOUT_RESPONSE_HEADERS, headers);
         }
     },
 
@@ -63,10 +54,6 @@ export default {
 
         [UPDATE_AUTOFILL]: (state, autofill) => {
             state.autofill = autofill.toString();
-        },
-
-        [UPDATE_CHECKOUT_RESPONSE_HEADERS]: (state, headers) => {
-            state.checkoutResponseHeaders = headers;
         }
     }
 };
