@@ -10,8 +10,7 @@
         <f-button
             v-if="hasLink"
             :href="url"
-            :data-test-id="testIds.confirm"
-            is-full-width>
+            :data-test-id="testIds.confirm">
             {{ $t('authenticated.voucherCodeModal.confirmButton') }}
         </f-button>
         <f-button
