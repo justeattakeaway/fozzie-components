@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.0.0
+------------------------------
+*September 23, 2021*
+
+### Changed
+- `$color-support-brand` pie value to `$color-support-brand-01` in line with icing phase 2.
+- New colour scheme from `pie-design-tokens` in line with icing phase 2.
+Note: This version doesn't contain all the style changes for icing phase 2. More changes will come in the later version.
+
+
 v6.0.0
 ------------------------------
 *September 16, 2021*

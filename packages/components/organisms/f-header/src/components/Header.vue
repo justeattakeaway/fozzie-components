@@ -296,20 +296,6 @@ html:global(.is-navInView) {
         }
     }
 
-    .c-header-buttonCount {
-        top: 0;
-        right: 0;
-        min-width: 16px;
-        padding: 1px 3px 0;
-        text-align: center;
-        border-radius: 8px;
-        position: absolute;
-        @include font-size(caption, false);
-        color: $header-buttonCount-color;
-        background: $header-buttonCount-bg;
-        border: 1px solid $header-buttonCount-borderColor;
-    }
-
     .c-header-button--primary {
         display: block;
         width: 40px;
