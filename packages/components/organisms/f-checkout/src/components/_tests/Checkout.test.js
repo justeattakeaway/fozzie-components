@@ -4135,7 +4135,7 @@ describe('Checkout', () => {
                 isDuplicateOrderError: true
             };
 
-            it('should call`trackDialogEvent` wit passed event', () => {
+            it('should call `trackDialogEvent` with passed event', () => {
                 // Arrange
                 const wrapper = mount(VueCheckout, {
                     store: createStore(),
