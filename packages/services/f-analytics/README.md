@@ -110,7 +110,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
       This will be the model constructed and pushed to the `datalayer` (handy for testing and debugging)<br>
       #### **Notes**
       This is ideally only called **once** per page so it is best suited at parent of the page component.<br>
-      It gathers most of its data clientside and so needs to be executed in **`mounted`** vue hook.<br>
+      It gathers most of its data clientside and so needs to be executed in **`beforeMount`** vue hook.<br>
       Some of the data it needs can only be read serverside but this has already been gathered at the point the plugin was registered and then store internally until this method is executed.
       #### **Example**
       _./pages/checkout/index.vue_
@@ -125,7 +125,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
           ...
 
-          mounted () {
+          beforeMount () {
               this.$gtm.pushPlatformData();
           },
 
@@ -178,11 +178,10 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
     - ### **`pushPageData()`**<br>
       Evaluates and gather data for the `pageData` GA model and pushes it to the `dataLayer`<br>
       #### **Syntax**.
-      > this.`$gtm`.**pushPageData**(_{ pageName: `accounts sign-up`, requestId: `021c24d2-86ef-...`, customFields: { custom1: 'one' } }_);
+      > this.`$gtm`.**pushPageData**(_{ pageName: `accounts sign-up`, customFields: { custom1: 'one' } }_);
       #### **Parameters**.
       > (**object**) {<br>
       >> - (**string**) `pageName`
-      >> - (**string**) `requestId` (_optional_)
       >> - (**number**) `httpStatusCode` (_optional_)(_only override this if you wish to change the default 200, i.e you may be displaying a custom static 404 page and want to record the value 404 instead of 200 or you may be displaying a successful account creation page and want to record the value 201 rather than 200_)
       >> - (**object**) `customFields` (_optional_) (_You may want to overwrite/add fields and this parameter allows you to indicate an object of fields/values that if already present will overwrite and if not then will be append to the model_)
 

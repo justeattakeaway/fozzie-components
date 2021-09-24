@@ -90,8 +90,7 @@ export default class AnalyticService {
         platformData = mapPlatformData({
             platformData,
             featureName: featureName || this.options.featureName,
-            locale: locale || this.options.locale,
-            req: this.req
+            locale: locale || this.options.locale
         });
 
         this.store.dispatch(`${this.options.namespace}/updatePlatformData`, platformData);
@@ -126,7 +125,6 @@ export default class AnalyticService {
     pushPageData ({
         pageName,
         conversationId,
-        requestId,
         httpStatusCode,
         customFields
     } = {}) {
@@ -136,7 +134,6 @@ export default class AnalyticService {
             pageData,
             pageName,
             conversationId,
-            requestId,
             httpStatusCode,
             req: this.req
         });

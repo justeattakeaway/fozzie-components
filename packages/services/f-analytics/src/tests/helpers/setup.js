@@ -20,8 +20,6 @@ const defaultState = {
         name: undefined,
         appType: undefined,
         applicationId: undefined,
-        userAgent: undefined,
-        branding: undefined,
         country: undefined,
         language: undefined,
         jeUserPercentage: undefined,
@@ -42,9 +40,7 @@ const defaultState = {
         name: undefined,
         httpStatusCode: 200,
         conversationId: undefined,
-        requestId: undefined,
-        orientation: undefined,
-        display: undefined
+        orientation: undefined
     },
     events: []
 };
@@ -55,8 +51,6 @@ const modifiedState = {
         name: 'test-name',
         appType: 'test-appType',
         applicationId: 9,
-        userAgent: 'test-userAgent',
-        branding: 'test-branding',
         country: 'zu',
         language: 'ze',
         jeUserPercentage: 88,
@@ -77,9 +71,7 @@ const modifiedState = {
         name: 'test-name',
         httpStatusCode: 200,
         conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
-        requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
-        orientation: 'Landscape',
-        display: 'wide'
+        orientation: 'Landscape'
     },
     events: [newEvent]
 };
