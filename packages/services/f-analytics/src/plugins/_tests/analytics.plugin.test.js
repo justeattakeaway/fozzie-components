@@ -88,7 +88,7 @@ describe('Analytics Plugin ::', () => {
         it('should inject the global object', () => {
             // Arrange
             const modifiedOptions = { ...options, globalVarName: 'jazz' };
-            const expected = new AnalyticService(defaultStore, context.req, modifiedOptions);
+            const expected = new AnalyticService(defaultStore, modifiedOptions);
 
             // Act
             AnalyticsPlugin(context, injectSpy, modifiedOptions);
