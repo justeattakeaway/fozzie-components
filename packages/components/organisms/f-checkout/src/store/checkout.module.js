@@ -161,9 +161,7 @@ export default {
          */
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
-        }, {
-                url, data, timeout
-            }) => {
+        }, { url, data, timeout }) => {
             const request = {
                 url,
                 state,
