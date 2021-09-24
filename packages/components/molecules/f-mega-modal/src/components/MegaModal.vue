@@ -305,7 +305,7 @@ export default {
 
 .c-megaModal-content {
     background-color: $color-container-default;
-    border-radius: $border-radius;
+    border-radius: $radius-rounded-d;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
     display: none;
     padding: spacing(x3);
