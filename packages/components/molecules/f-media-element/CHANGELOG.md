@@ -4,11 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-To be added to next Release
+v2.0.0
 ------------------------------
+*September 16, 2021*
 
 ### Added
 - New MDX documentation for showing use cases as example for new storybook upgrade
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
 
 
 v1.0.0

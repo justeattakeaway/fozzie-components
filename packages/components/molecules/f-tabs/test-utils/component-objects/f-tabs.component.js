@@ -1,4 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 module.exports = class Tabs extends Page {
     constructor() {
@@ -8,6 +9,12 @@ module.exports = class Tabs extends Page {
     get component () { return $('[data-test-id="tabs-component"]'); }
 
     get tabButtons () { return $$('[data-test-id*="tab-button"]'); }
+
+    load () {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+        this.waitForComponent();
+    }
 
     open (url) {
         super.open(url);

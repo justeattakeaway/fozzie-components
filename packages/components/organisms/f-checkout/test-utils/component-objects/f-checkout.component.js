@@ -1,4 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
@@ -123,6 +124,22 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
+    load (componentToWaitFor='default') {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+
+        switch (componentToWaitFor) {
+            case 'error':
+                this.waitForErrorPageComponent();
+                break;
+
+            case 'default':
+            default:
+                this.waitForComponent();
+                break;
+        }
+    }
+
     open (url) {
         super.open(url);
     }
@@ -180,21 +197,7 @@ module.exports = class Checkout extends Page {
         return this.errorMessageDupOrderGoToHistory.click();
     }
 
-    getCheckoutErrorTabOrder () {
-        const tabOrder = [this.errorMessageRetry, this.closeMessageModal];
-        const tabOrderResult = super.testTabOrder(tabOrder);
-        const expectedTabOrder = tabOrder.map(el => ({
-            selector: el.getAttribute('data-test-id'),
-            isFocused: true
-        }));
-        return {
-            actual: tabOrderResult,
-            expected: expectedTabOrder.concat(expectedTabOrder[0])
-        };
-    }
-
-    getPlaceOrderErrorTabOrder () {
-        const tabOrder = [this.errorMessageRetry, this.errorMessageDupOrderGoToHistory, this.closeMessageModal];
+    testTabOrder (tabOrder) {
         const tabOrderResult = super.testTabOrder(tabOrder);
         const expectedTabOrder = tabOrder.map(el => ({
             selector: el.getAttribute('data-test-id'),

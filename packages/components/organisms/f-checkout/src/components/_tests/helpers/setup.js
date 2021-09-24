@@ -94,7 +94,7 @@ const defaultCheckoutActions = {
 };
 
 const defaultAnalyticsActions = {
-    trackDuplicateOrderWarnDialog: jest.fn(),
+    trackDialogEvent: jest.fn(),
     trackFormErrors: jest.fn(),
     trackFormInteraction: jest.fn(),
     trackInitialLoad: jest.fn(),

@@ -1,6 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
@@ -17,10 +16,8 @@ describe('f-footer - Mobile Visual Tests', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
             browser.percyScreenshot(`f-footer - Base - ${tenant}`, 'mobile')
         });
 
@@ -31,10 +28,8 @@ describe('f-footer - Mobile Visual Tests', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'true');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
             browser.percyScreenshot(`f-footer - Country Selector - ${tenant}`, 'mobile')
         });
 
@@ -45,10 +40,8 @@ describe('f-footer - Mobile Visual Tests', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'true');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
             browser.percyScreenshot(`f-footer - Courier Links - ${tenant}`, 'mobile')
         });
 
@@ -59,10 +52,8 @@ describe('f-footer - Mobile Visual Tests', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'true');
             footer.withQuery('&knob-Show courier links', 'true');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
             browser.percyScreenshot(`f-footer - Courier Links and Country Selector - ${tenant}`, 'mobile')
         });
 });

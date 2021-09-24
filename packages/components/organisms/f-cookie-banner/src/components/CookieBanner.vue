@@ -51,7 +51,9 @@
                     </div>
                 </div>
 
-                <div :class="$style['c-cookieBanner-cta']">
+                <div
+                    ref="buttonContainer"
+                    :class="$style['c-cookieBanner-cta']">
                     <button-component
                         data-test-id="accept-all-cookies-button"
                         is-full-width
@@ -149,7 +151,7 @@ export default {
         const copy = localeConfig.messages;
         const consentCookieName = 'je-cookieConsent';
         const legacyConsentCookieName = 'je-banner_cookie';
-        const reopenLinkToBottom = this.isBodyHeightLessThanWindowHeight;
+        const reopenLinkToBottom = this.isBodyHeightLessThanWindowHeight();
 
         return {
             config: { ...localeConfig },
@@ -170,17 +172,6 @@ export default {
          */
         legacyBanner () {
             return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
-        },
-
-        /**
-         * Check to see if we need to absolute position reopen link.
-         * * @returns {Boolean}
-         */
-        isBodyHeightLessThanWindowHeight () {
-            if (typeof window === 'object') {
-                return window.innerHeight - document.body.offsetHeight > 0;
-            }
-            return false;
         }
     },
 
@@ -193,7 +184,10 @@ export default {
     mounted () {
         this.checkCookieBannerCookie();
         if (!this.shouldHideBanner) {
-            this.focusOnTitle();
+            this.$nextTick(() => {
+                this.addKeyboardHandler();
+                this.focusOnTitle();
+            });
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
     },
@@ -208,6 +202,7 @@ export default {
                 this.setLegacyCookieBannerCookie();
                 this.dataLayerPush('full');
                 this.resendEvents();
+                this.dispatchCustomEvent();
                 this.hideAllBanners();
             });
         },
@@ -222,6 +217,7 @@ export default {
                 this.dataLayerPush('necessary');
                 this.resendEvents();
                 this.removeUnnecessaryCookies();
+                this.dispatchCustomEvent();
                 this.hideAllBanners();
             });
         },
@@ -232,6 +228,30 @@ export default {
         focusOnTitle () {
             if (!this.legacyBanner && this.$refs.cookieBannerHeading) {
                 this.$refs.cookieBannerHeading.focus();
+            }
+        },
+
+        /**
+         * Add keyboard handler
+         */
+        addKeyboardHandler () {
+            if (this.$refs.cookieBanner && this.$refs.cookieBanner.$refs.megaModal) {
+                this.$refs.cookieBanner.$refs.megaModal.addEventListener('keydown', this.setTabLoop);
+            }
+        },
+
+        /**
+         * Set the tab loop for accessibility
+         */
+        setTabLoop (e) {
+            if (e.key === 'Tab') {
+                if (e.shiftKey && e.target === this.$refs.cookieBannerHeading) {
+                    this.$refs.buttonContainer.lastChild.focus();
+                    e.preventDefault();
+                } else if (!e.shiftKey && e.target === this.$refs.buttonContainer.lastChild) {
+                    this.$refs.cookieBannerHeading.focus();
+                    e.preventDefault();
+                }
             }
         },
 
@@ -348,6 +368,31 @@ export default {
                     break;
                 }
             }
+        },
+
+        /**
+         * Check to see if we need to absolute position reopen link.
+         * * @returns {Boolean}
+         */
+        isBodyHeightLessThanWindowHeight () {
+            if (typeof window === 'object') {
+                return window.innerHeight - document.body.offsetHeight > 0;
+            }
+            return false;
+        },
+
+        /**
+         * Dispatch custom window event
+         * */
+        dispatchCustomEvent () {
+            if (typeof window === 'object') {
+                window.dispatchEvent(new CustomEvent('f-cookie-banner-accepted', {
+                    detail: {
+                        consentCookieName: this.consentCookieName,
+                        cookieExclusionList: this.config.cookieExclusionList
+                    }
+                }));
+            }
         }
     }
 };
@@ -381,7 +426,6 @@ export default {
 
     .c-cookieBanner-title {
         @include font-size(heading-m);
-        font-weight: $font-weight-bold;
         margin: spacing() 0;
         padding: 0;
         color: $color-content-default;
