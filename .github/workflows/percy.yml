@@ -1,4 +1,4 @@
-name: CI
+name: Percy test
 
 on:
   push:
@@ -20,5 +20,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Get pull request labels
-        run: echo ${{ github.event.pull_request.labels }} JSON ${{ toJSON(github.event.pull_request.labels) }}
+      - name: Check draft PR
+        run: echo Is PR not draft? ${{ github.event.pull_request.draft == false }}
+
+      - name: Get github.event.pull_request details
+        run: echo PR labels ${{ join(github.event.pull_request.labels.*.name, ', ') }}
+
+      - name: Get github.event.workflow_dispatch details
+        run: echo PR labels ${{ join(github.event.workflow_dispatch.labels.*.name, ', ') }}
+
+      - name: Get github.event.push details
+        run: echo PR labels ${{ join(github.event.push.labels.*.name, ', ') }}
