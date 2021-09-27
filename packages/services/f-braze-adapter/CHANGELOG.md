@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0-beta.6
+------------------------------
+*September 24, 2021*
+
+### Changed
+- Updated changeUser method to be the correct implementation based on new brazeSDK
+
+
 v4.0.0-beta.5
 ------------------------------
 *September 07, 2021*

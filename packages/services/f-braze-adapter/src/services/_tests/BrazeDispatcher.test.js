@@ -204,15 +204,12 @@ describe('instantiation', () => {
                     const dispatcher = new BrazeDispatcher(enabledComponentParameters);
 
                     // Assert
-                    expect(appboySDK.changeUser).toHaveBeenCalledWith(userId, expect.any(Function));
+                    expect(appboySDK.changeUser).toHaveBeenCalledWith(userId);
                 });
             });
 
             it('should push an event to datalayer when userId set following initialisation', () => {
-                // Arrange
-                appboySDK.changeUser.mockImplementation((id, callback) => callback());
-
-                // Act
+                // Arrange & Act
                 const dispatcher = new BrazeDispatcher(enabledComponentParameters);
 
                 // Assert

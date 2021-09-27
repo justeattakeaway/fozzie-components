@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-braze-adapter",
   "description": "Fozzie Metadata Service",
-  "version": "4.0.0-beta.5",
+  "version": "4.0.0-beta.6",
   "main": "dist/f-braze-adapter.umd.js",
   "module": "dist/f-braze-adapter.es.js",
   "files": [
