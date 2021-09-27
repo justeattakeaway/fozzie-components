@@ -179,10 +179,10 @@ class BrazeDispatcher {
 
                 this.subscribeBraze();
 
-                appboy.changeUser(userId, () => {
-                    window.dataLayer.push({
-                        event: 'appboyReady'
-                    });
+                appboy.changeUser(userId);
+
+                window.dataLayer.push({
+                    event: 'appboyReady'
                 });
             } else {
                 dispatcherEventStream.publish(LOGGER, {
