@@ -303,7 +303,7 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
 
     &:hover,
     &:active {
-        &:not(.o-btnLink) {
+        &:not(.o-btn--link) {
             outline: 0; // no need as already has a focus/active state
         }
     }
@@ -426,6 +426,12 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
 .o-btn--secondary {
     background-color: $btn-secondary-bgColor;
     color: $btn-secondary-textColor;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $btn-secondary-textColor;
+    }
 
     &:hover {
         background-color: $btn-secondary-bgColor--hover;
@@ -563,13 +569,13 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
 
     &:hover {
         cursor: pointer;
-        color: darken($color-content-link, $color-hover-01);
+        color: lighten($color-content-link, $color-hover-02);
         background-color: transparent;
         text-decoration: underline;
     }
     &:active,
     &:focus {
-        color: darken($color-content-link, $color-active-01);
+        color: lighten($color-content-link, $color-active-02);
         background-color: transparent;
     }
 
