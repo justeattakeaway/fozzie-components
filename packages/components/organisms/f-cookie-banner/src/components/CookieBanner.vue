@@ -279,6 +279,10 @@ export default {
          */
         reopenBanner () {
             this.shouldHideBanner = false;
+            this.$nextTick(() => {
+                this.addKeyboardHandler();
+                this.focusOnTitle();
+            });
         },
 
         /**
