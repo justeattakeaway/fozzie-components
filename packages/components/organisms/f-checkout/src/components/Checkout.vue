@@ -702,7 +702,7 @@ export default {
          * This is to avoid creating too many side effects with the original mapper for update checkout
          */
         async verifyCustomerAge () {
-            const data = this.mapCheckoutUpdateRequest({ ageVerificationOnly: true });
+            const data = this.mapCheckoutUpdateRequest(true);
 
             await this.handleUpdateCheckout(data);
         },
