@@ -83,7 +83,7 @@ describe('Analytic Service ::', () => {
     });
 
     describe('When calling pushPlatformData', () => {
-        // 1 == locale, 2 == country, 3 == currency, 4 == language
+        // 1 = locale, 2 = country, 3 = currency, 4 == language
         const cases = [
             ['en-GB', 'uk', 'gbp', 'en'],
             ['en-IE', 'ie', 'eur', 'en'],
@@ -304,7 +304,7 @@ describe('Analytic Service ::', () => {
             expect(windowsPushSpy).not.toHaveBeenCalled();
         });
 
-        // 1 == window width, 2 == window height, 3 == expected orientation value
+        // 1 = window width, 2 = window height, 3 = expected orientation value
         const cases = [
             [1281, 1282, 'Portrait'],
             [1281, 1280, 'Landscape'],

@@ -9,7 +9,7 @@ v0.16.0
 *September 24, 2021*
 
 ### Changed
-- Removed the redundant properties from  pushPlatformData() & pushPageData().
+- Removed the redundant fields from  pushPlatformData() & pushPageData().
 
 
 v0.15.0
