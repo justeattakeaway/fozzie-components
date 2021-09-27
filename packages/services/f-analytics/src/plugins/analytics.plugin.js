@@ -63,7 +63,7 @@ export default ({ store, req }, inject, _options) => {
 
     prepareServerSideValues(store, req, options);
 
-    const service = new AnalyticService(store, req, options);
+    const service = new AnalyticService(store, options);
 
     inject(options.globalVarName, service);
 
