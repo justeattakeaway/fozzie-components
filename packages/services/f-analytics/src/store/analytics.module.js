@@ -13,8 +13,6 @@ export default {
             name: undefined,
             appType: undefined,
             applicationId: undefined,
-            userAgent: undefined,
-            branding: undefined,
             country: undefined,
             language: undefined,
             jeUserPercentage: undefined,
@@ -35,9 +33,7 @@ export default {
             name: undefined,
             httpStatusCode: 200,
             conversationId: undefined,
-            requestId: undefined,
-            orientation: undefined,
-            display: undefined
+            orientation: undefined
         },
         events: []
     }),
