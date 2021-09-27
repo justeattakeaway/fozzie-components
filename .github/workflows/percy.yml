@@ -21,4 +21,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Get pull request labels
-        run: echo Label contains 'wip' ${{ contains(github.event.pull_request.labels.*.name, 'wip') }}, label contains 'do not merge' ${{ contains(github.event.pull_request.labels.*.name, 'do not merge') }}
+        run: echo Length ${{ github.event.pull_request.labels.length }}, first ${{ github.event.pull_request.labels[0] }}, second ${{ github.event.pull_request.labels[1] }}
