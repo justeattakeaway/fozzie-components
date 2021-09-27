@@ -2123,10 +2123,10 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-braze-adapter@4.0.0-beta.5":
-  version "4.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-4.0.0-beta.5.tgz#2f4b9058238a48a411d705d49d51f8e65c174ad1"
-  integrity sha512-xbJdJSD9Cw/Dgc53pXCoX1wMMIVlgbcj+qXmu3o1GFBvjePf168axf6/+p9b/aHJDHDBarjj9uqOBl9mQwcdrA==
+"@justeat/f-braze-adapter@4.0.0-beta.6":
+  version "4.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-4.0.0-beta.6.tgz#875bdecd7ce0a19ec1146180ada257dc799f5fd6"
+  integrity sha512-y+N9NQRHH8Z+66J5xpda3dAt+TLA5HYLPO/koyg4KYWhRFUIhlki8WJ4pFkUFBBLQ3lFTchl/dWNqxJJ+G2hmA==
   dependencies:
     date-fns "2.16.1"
     lodash.findindex "4.6.0"
