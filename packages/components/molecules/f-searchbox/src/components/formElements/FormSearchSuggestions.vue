@@ -57,13 +57,13 @@ export default {
 @import '../../assets/scss/common';
 
 $suggestions-shadow: $color-grey-45 0 5px 6px -2px;
+$suggestions-borderRadius: $radius-rounded-c;
 
 .c-search-suggestions {
-    $border-radius: 2px;
     background: $color-container-default;
     box-shadow: $suggestions-shadow;
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: $suggestions-borderRadius;
+    border-bottom-right-radius: $suggestions-borderRadius;
     position: absolute;
     left: 0;
     right: 0;

@@ -331,7 +331,7 @@ export default {
 }
 .shell {
     $shell-top-offset: 96;
-    $shell-border-radius: 3px;
+    $shell-border-radius: $radius-rounded-c;
 
     background: $color-container-default;
     border-bottom-left-radius: $shell-border-radius;

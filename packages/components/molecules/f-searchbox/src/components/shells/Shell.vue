@@ -33,7 +33,7 @@ $midWide: 980px;
 .c-searchShell {
     -webkit-font-smoothing: antialiased;
     background-color: $color-container-default;
-    border-radius: $border-radius;
+    border-radius: $radius-rounded-c;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
     color: $color-grey-50;
     @include font-size('heading-xl', false);

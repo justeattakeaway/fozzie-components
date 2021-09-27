@@ -50,9 +50,9 @@ export default {
     align-items: center;
     -webkit-appearance: none;
     -webkit-box-sizing: border-box;
-    background-color: $search-button-bgColor;
+    background-color: $color-interactive-brand;
     border: none;
-    border-radius: 0 $border-radius $border-radius 0;
+    border-radius: 0 $radius-rounded-e $radius-rounded-e 0;
     box-sizing: border-box;
     color: $color-content-interactive-light;
     cursor: pointer;
@@ -64,8 +64,8 @@ export default {
     outline: none;
     text-align: center;
     text-decoration: none;
-    height: 56px;
-    min-width: 56px;
+    height: 64px;
+    min-width: 64px;
     padding: spacing();
     right: 0;
 
@@ -130,7 +130,7 @@ export default {
 
 .c-search-btn--compressed {
     margin: spacing(x0.5);
-    border-radius: $border-radius;
+    border-radius: $radius-rounded-e;
     height: 48px;
     min-width: 48px;
 }
