@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: [ master ]
+    types: [ labeled, unlabeled ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    # if: ${{ !contains(github.event.pull_request.labels.*.name, 'wip') && !contains(github.event.pull_request.labels.*.name, 'do not merge') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Get pull request labels
+        run: echo ${{ github.event.pull_request.labels }}
