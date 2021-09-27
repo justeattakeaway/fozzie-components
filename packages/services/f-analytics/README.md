@@ -65,7 +65,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
       const service = new AnalyticService(store, req, options);
 
-      inject(service.getOptions().globalVarName, service);
+      inject(service.getOptions().globalVarName, service); // Use the default global variable name
     };
     ```
 

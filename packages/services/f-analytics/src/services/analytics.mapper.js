@@ -84,7 +84,6 @@ export const mapServerSidePlatformData = ({ platformData, req } = {}) => {
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {string} featureName - The name of the feature
  * @param {string} locale - The current locale
- * @param {object} req - The `request` context
  * @return {object} new platformData object
  */
 export const mapPlatformData = ({
