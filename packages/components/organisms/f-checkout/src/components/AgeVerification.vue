@@ -116,7 +116,8 @@ export default {
 
         months () {
             return new Array(12).fill(0).map((_, i) => {
-                const date = new Date(`${i + 1}/1`);
+                const year = new Date().getFullYear();
+                const date = new Date(year, i);
 
                 return {
                     text: date.toLocaleDateString(undefined, { month: 'long' }),

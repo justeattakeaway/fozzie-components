@@ -2313,6 +2313,85 @@ describe('Checkout', () => {
             });
         });
 
+        describe('mapCheckoutUpdateRequest', () => {
+            let wrapper;
+            let mapCheckoutUpdateRequestSpy;
+
+            beforeEach(() => {
+                mapCheckoutUpdateRequestSpy = jest.spyOn(VueCheckout.methods, 'mapCheckoutUpdateRequest');
+
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        customer: {
+                            ...defaultCheckoutState.customer,
+                            dateOfBirth: 'Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)'
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    }
+                });
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should map the request successfully', async () => {
+                // Act
+                const mappedRequest = await wrapper.vm.mapCheckoutUpdateRequest();
+
+                // Assert
+                expect(mapCheckoutUpdateRequestSpy).toHaveBeenCalled();
+                expect(mappedRequest[0].value).toEqual({
+                    dateOfBirth: 'Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)',
+                    firstName: 'John',
+                    lastName: 'Smith',
+                    phoneNumber: '0711111111'
+                });
+
+                expect(mappedRequest[1].value).toEqual({
+                    location: {
+                        address: {
+                            administrativeArea: undefined,
+                            lines: [
+                                '1 Bristol Road',
+                                'Flat 1'
+                            ],
+                            locality: 'Bristol',
+                            postalCode: 'BS1 1AA'
+                        },
+                        geolocation: null
+                    },
+                    table: {},
+                    time: {
+                        asap: undefined,
+                        scheduled: {
+                            from: '',
+                            to: ''
+                        }
+                    }
+                });
+            });
+
+            it('should map the request for age verification only successfully', async () => {
+                // Act
+                const mappedRequest = await wrapper.vm.mapCheckoutUpdateRequest(true);
+
+                // Assert
+                expect(mapCheckoutUpdateRequestSpy).toHaveBeenCalled();
+                expect(mappedRequest[0].value).toEqual({
+                    dateOfBirth: 'Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)'
+                });
+                expect(mappedRequest[1].value).toBeNull();
+            });
+        });
+
         describe('setupGuestUser ::', () => {
             it('should call `createGuestUser`', async () => {
                 // Arrange
