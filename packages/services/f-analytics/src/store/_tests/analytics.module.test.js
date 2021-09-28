@@ -86,8 +86,6 @@ describe('Analytics Module ::', () => {
                     name: 'test-name',
                     appType: 'test-appType',
                     applicationId: 9,
-                    userAgent: 'test-userAgent',
-                    branding: 'test-branding',
                     country: 'zu',
                     language: 'ze',
                     currency: 'zud'
