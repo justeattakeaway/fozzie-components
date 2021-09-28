@@ -7,7 +7,7 @@
                 :text-size="fontSize"
                 :title="title"
                 :text="subtitle"
-                image-url="https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/oi_header-image_v2.svg"
+                image-url="https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/oi_header-image_v2.svg"
                 :image-align="imageAlign"
                 :flex="flexLayout"
             />
