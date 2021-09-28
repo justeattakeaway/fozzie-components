@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.0.0-beta.36
 ------------------------------
-*September 24, 2021*
+*September 29, 2021*
 
 ### Changed
 - Updated version of `f-button` and `f-mega-modal`.
