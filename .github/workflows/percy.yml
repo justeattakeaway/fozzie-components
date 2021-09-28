@@ -9,30 +9,28 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # setup:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-  #     - uses: actions/checkout@v2
+  setup:
+    if: ${{ github.event.pull_request.draft == false && !contains(github.event.pull_request.labels.*.name, 'wip') && !contains(github.event.pull_request.labels.*.name, 'do not merge') }}
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '14'
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-  #     - name: Install yarn
-  #       run: npm install -g yarn
+      - name: Install yarn
+        run: npm install -g yarn
 
-  #     - name: Install dependencies
-  #       run: yarn install --frozen-lockfile
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
   build:
-    # needs: setup
+    needs: setup
     # if: ${{ github.event.pull_request.draft == false }}
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'wip') && !contains(github.event.pull_request.labels.*.name, 'do not merge') }}
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Run visual regression tests
-      #   run: yarn test:visual
-      - name: Test log
-        run: Does not have 'wip' or 'do not merge' labels
+      - name: Run visual regression tests
+        run: yarn test:visual
