@@ -28,10 +28,11 @@ jobs:
   build:
     # needs: setup
     # if: ${{ github.event.pull_request.draft == false }}
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'wip') }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'wip') }}
     runs-on: ubuntu-latest
 
     steps:
       # - name: Run visual regression tests
       #   run: yarn test:visual
-      - run: Does not have 'wip' label
+      - name: Test log
+        run: Has 'wip' label
