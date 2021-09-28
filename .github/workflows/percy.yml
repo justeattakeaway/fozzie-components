@@ -9,7 +9,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  setup:
+  setup_and_test:
     if: ${{ github.event.pull_request.draft != true && !contains(github.event.pull_request.labels.*.name, 'wip') && !contains(github.event.pull_request.labels.*.name, 'do not merge') }}
     runs-on: ubuntu-latest
     steps:
@@ -25,17 +25,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-
-  build:
-    needs: setup
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
 
       - name: Run visual regression tests
         run: yarn test:visual
