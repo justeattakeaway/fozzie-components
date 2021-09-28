@@ -14,7 +14,6 @@
             {{ $t('authenticated.voucherCodeModal.confirmButton') }}
         </f-button>
         <f-button
-            type="button"
             :data-test-id="testIds.dismiss"
             @click="close">
             {{ $t('authenticated.voucherCodeModal.dismissButton') }}

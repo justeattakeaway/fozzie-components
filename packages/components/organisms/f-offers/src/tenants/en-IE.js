@@ -1,5 +1,5 @@
 const messages = {
-    locale: 'en-GB',
+    locale: 'en-IE',
 
     noOffersFound: {
         title: 'Can’t find anything?',
