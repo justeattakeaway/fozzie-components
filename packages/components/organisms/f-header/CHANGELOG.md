@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.0.0
 ------------------------------
-*September 23, 2021*
+*September 29, 2021*
 
 ### Changed
 - `$color-support-brand` pie value to `$color-support-brand-01` in line with icing phase 2.

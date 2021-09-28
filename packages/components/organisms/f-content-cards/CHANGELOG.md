@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v6.0.0
 ------------------------------
-*September 23, 2021*
+*September 29, 2021*
 
 ### Changed
 - `$color-content-brand-strong` pie value to `$color-content-default` in line with icing phase 2.

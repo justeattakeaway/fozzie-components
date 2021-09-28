@@ -12,10 +12,10 @@ v4.1.0
 
 v4.1.0
 ------------------------------
-*September 22, 2021*
+*September 29, 2021*
 
 ### Changed
-- `fozzie` package version bump to 6.0.0-beta.3 to include new colour theme and radius vars.
+- `fozzie` package version bump to 6.0.0-beta.5 to include new colour theme and radius vars.
 
 
 v4.0.0
