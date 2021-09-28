@@ -1,33 +1,37 @@
 name: Percy test
 
 on:
-  push:
-    branches: '*'
   pull_request:
-    branches: [ master ]
-    types: [ labeled, unlabeled ]
+    types: [ opened, reopened, labeled, unlabeled, ready_for_review, synchronize ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # setup:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #     - uses: actions/checkout@v2
+
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '14'
+
+  #     - name: Install yarn
+  #       run: npm install -g yarn
+
+  #     - name: Install dependencies
+  #       run: yarn install --frozen-lockfile
+
   build:
-    # if: ${{ !contains(github.event.pull_request.labels.*.name, 'wip') && !contains(github.event.pull_request.labels.*.name, 'do not merge') }}
+    # needs: setup
+    # if: ${{ github.event.pull_request.draft == false }}
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'wip') }}
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name: Check draft PR
-        run: echo Is PR not draft? ${{ github.event.pull_request.draft == false }}
-
-      - name: Get github.event.pull_request details
-        run: echo PR labels ${{ join(github.event.pull_request.labels.*.name, ', ') }}
-
-      - name: Get github.event.workflow_dispatch details
-        run: echo PR labels ${{ join(github.event.workflow_dispatch.labels.*.name, ', ') }}
-
-      - name: Get github.event.push details
-        run: echo PR labels ${{ join(github.event.push.labels.*.name, ', ') }}
+      # - name: Run visual regression tests
+      #   run: yarn test:visual
+      - run: Does not have 'wip' label
