@@ -7,9 +7,8 @@ import {
 const isDataLayerPresent = () => typeof (window) !== 'undefined' && window.dataLayer;
 
 export default class AnalyticService {
-    constructor (store, req, options) {
+    constructor (store, options) {
         this.store = store;
-        this.req = req;
         this.options = options;
     }
 
@@ -25,8 +24,7 @@ export default class AnalyticService {
         platformData = mapPlatformData({
             platformData,
             featureName: featureName || this.options.featureName,
-            locale: locale || this.options.locale,
-            req: this.req
+            locale: locale || this.options.locale
         });
 
         this.store.dispatch(`${this.options.namespace}/updatePlatformData`, platformData);
@@ -61,7 +59,6 @@ export default class AnalyticService {
     pushPageData ({
         pageName,
         conversationId,
-        requestId,
         httpStatusCode,
         customFields
     } = {}) {
@@ -69,10 +66,8 @@ export default class AnalyticService {
 
         pageData = mapPageData({
             pageData,
-            featureName: this.options.featureName,
             pageName,
             conversationId,
-            requestId,
             httpStatusCode,
             req: this.req
         });

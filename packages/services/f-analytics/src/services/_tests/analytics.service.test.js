@@ -16,7 +16,6 @@ describe('Analytic Service ::', () => {
     let store;
     let storeDispatchSpy;
     let service;
-    let req;
     let windowCopy;
     let windowSpy;
     let windowsPushSpy;
@@ -25,7 +24,6 @@ describe('Analytic Service ::', () => {
     const mockWindow = ({ winWidth = 667, winHeight = 375 } = {}) => {
         windowsPushSpy = jest.fn();
         windowCopy = { ...window };
-        jest.spyOn(windowCopy.navigator, 'userAgent', 'get').mockReturnValue('test-agent-string');
         const innerWidthSpy = jest.fn().mockReturnValue(winWidth);
         const innerHeightSpy = jest.fn().mockReturnValue(winHeight);
         windowSpy = jest.spyOn(global, 'window', 'get');
@@ -53,7 +51,7 @@ describe('Analytic Service ::', () => {
         // Arrange - window state
         mockWindow();
         // Arrange - sut
-        service = new AnalyticService(store, req, options);
+        service = new AnalyticService(store, options);
     });
 
     afterEach(() => {
@@ -62,7 +60,7 @@ describe('Analytic Service ::', () => {
 
     it('should instantiate a new instance', () => {
         // Act
-        const instance = () => new AnalyticService(store, req, options);
+        const instance = () => new AnalyticService(store, options);
 
         // Assert
         expect(instance).not.toThrowError();
@@ -85,32 +83,30 @@ describe('Analytic Service ::', () => {
     });
 
     describe('When calling pushPlatformData', () => {
-        // 1 == locale, 2 == branding, 3 == country, 4 == currency, 5 == language
+        // 1 = locale, 2 = country, 3 = currency, 4 == language
         const cases = [
-            ['en-GB', 'justeat', 'uk', 'gbp', 'en'],
-            ['en-IE', 'justeat', 'ie', 'eur', 'en'],
-            ['it-IT', 'justeat', 'it', 'eur', 'it'],
-            ['es-ES', 'justeat', 'es', 'eur', 'es'],
-            ['en-AU', 'menulog', 'au', 'aud', 'en'],
-            ['en-NZ', 'menulog', 'nz', 'nzd', 'en']
+            ['en-GB', 'uk', 'gbp', 'en'],
+            ['en-IE', 'ie', 'eur', 'en'],
+            ['it-IT', 'it', 'eur', 'it'],
+            ['es-ES', 'es', 'eur', 'es'],
+            ['en-AU', 'au', 'aud', 'en'],
+            ['en-NZ', 'nz', 'nzd', 'en']
         ];
         test.each(cases)(
             'should dispatch the correct `plaformData` to the store given %p as the locale',
-            (localeArg, brandingExpected, countryExpected, currencyExpected, languageExpected) => {
+            (localeArg, countryExpected, currencyExpected, languageExpected) => {
                 // Arrange
                 const expectedPlatformData = {
                     ...defaultState.platformData,
                     appType: 'web',
                     applicationId: 7,
-                    branding: brandingExpected,
                     country: countryExpected,
                     currency: currencyExpected,
                     language: languageExpected,
-                    name: options.featureName,
-                    userAgent: navigator.userAgent
+                    name: options.featureName
                 };
                 options.locale = localeArg;
-                service = new AnalyticService(store, req, options);
+                service = new AnalyticService(store, options);
 
                 // Act
                 service.pushPlatformData();
@@ -130,13 +126,11 @@ describe('Analytic Service ::', () => {
                 ...defaultState.platformData,
                 appType: 'web',
                 applicationId: 7,
-                branding: 'justeat',
                 country: 'uk',
                 currency: 'gbp',
                 environment: 'localhost',
                 language: 'en',
-                name: 'new-feature-name',
-                userAgent: navigator.userAgent
+                name: 'new-feature-name'
             };
 
             // Act
@@ -153,13 +147,11 @@ describe('Analytic Service ::', () => {
                 ...defaultState.platformData,
                 appType: 'web',
                 applicationId: 7,
-                branding: 'menulog',
                 country: 'au',
                 currency: 'aud',
                 environment: 'localhost',
                 language: 'en',
-                name: options.featureName,
-                userAgent: navigator.userAgent
+                name: options.featureName
             };
 
             // Act
@@ -176,13 +168,11 @@ describe('Analytic Service ::', () => {
                 ...defaultState.platformData,
                 appType: 'web',
                 applicationId: 7,
-                branding: 'justeat',
                 country: 'uk',
                 currency: 'gbp',
                 environment: 'localhost',
                 language: 'en',
-                name: 'new-feature-name',
-                userAgent: navigator.userAgent
+                name: 'new-feature-name'
             };
 
             // Act
@@ -314,54 +304,37 @@ describe('Analytic Service ::', () => {
             expect(windowsPushSpy).not.toHaveBeenCalled();
         });
 
-        // 1 == window width, 2 == window height, 3 == expected display value, 4 == expected orientation value
+        // 1 = window width, 2 = window height, 3 = expected orientation value
         const cases = [
-            [1281, 1282, 'full-size', 'Portrait'],
-            [1281, 1280, 'full-size', 'Landscape'],
-            [1280, 1025, 'huge', 'Landscape'],
-            [1026, 1025, 'huge', 'Landscape'],
-            [1025, 768, 'wide', 'Landscape'],
-            [769, 768, 'wide', 'Landscape'],
-            [768, 414, 'mid', 'Landscape'],
-            [415, 414, 'mid', 'Landscape'],
-            [414, 413, 'narrow', 'Landscape'],
-            [414, 415, 'narrow', 'Portrait']
+            [1281, 1282, 'Portrait'],
+            [1281, 1280, 'Landscape'],
+            [1280, 1025, 'Landscape'],
+            [1026, 1025, 'Landscape'],
+            [1025, 768, 'Landscape'],
+            [769, 768, 'Landscape'],
+            [768, 414, 'Landscape'],
+            [415, 414, 'Landscape'],
+            [414, 413, 'Landscape'],
+            [414, 415, 'Portrait']
         ];
         test.each(cases)(
             'should set the correct pageData given window width is %p and window height is %p',
-            (winWidth, winHeight, displayExpected, orientationExpected) => {
+            (winWidth, winHeight, orientationExpected) => {
                 // Arrange
                 mockWindow({ winWidth, winHeight });
 
                 // Act
-                service.pushPageData();
+                service.pushPageData({ pageName: 'jazz' });
 
                 // Assert
                 expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
                     pageData: expect.objectContaining({
-                        orientation: orientationExpected,
-                        display: displayExpected
+                        name: 'jazz',
+                        orientation: orientationExpected
                     })
                 }));
             }
         );
-
-        it('should set requestId value when provided', () => {
-            // Arrange
-            const expected = {
-                requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e'
-            };
-
-            // Act
-            service.pushPageData({ requestId: expected.requestId });
-
-            // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
-                pageData: expect.objectContaining({
-                    requestId: expected.requestId
-                })
-            }));
-        });
 
         it('should override the httpStatusCode when provided', () => {
             // Arrange

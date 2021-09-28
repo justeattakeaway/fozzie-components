@@ -23,14 +23,14 @@
         </div>
         <picture>
             <source
-                srcset="https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/oi_unauthenticated-image.jpg"
+                srcset="https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/oi_unauthenticated-image.jpg"
                 media="(min-width: 860px)">
             <source
-                srcset="https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/oi_unauthenticated-image-tablet.jpg"
+                srcset="https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/oi_unauthenticated-image-tablet.jpg"
                 media="(min-width: 600px)">
             <img
                 :class="$style['c-unauthenticated-image']"
-                srcset="https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/oi_unauthenticated-image-mobile.jpg"
+                srcset="https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/oi_unauthenticated-image-mobile.jpg"
                 alt="">
         </picture>
     </div>

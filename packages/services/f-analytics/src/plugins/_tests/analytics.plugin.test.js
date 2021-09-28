@@ -27,6 +27,7 @@ describe('Analytics Plugin ::', () => {
         let injectSpy;
         let defaultStore;
         let state;
+        let registerStoreModuleSpy;
 
         beforeEach(() => {
             // Arrange - store
@@ -39,6 +40,8 @@ describe('Analytics Plugin ::', () => {
                 dispatch: storeDispatchSpy,
                 hasModule: storeModuleSpy
             };
+            registerStoreModuleSpy = jest.fn();
+            defaultStore.registerModule = registerStoreModuleSpy;
             // Arrange - context
             context = { store: defaultStore, req: jest.fn() };
             injectSpy = jest.fn(() => {});
@@ -55,7 +58,6 @@ describe('Analytics Plugin ::', () => {
             AnalyticsPlugin(context, injectSpy, null);
 
             // Assert that all the default options where used
-            expect(storeModuleSpy).toHaveBeenCalledWith(defaultOptions.namespace);
             expect(document.head.innerHTML).toContain(`${defaultOptions.id}`);
             expect(document.head.innerHTML).not.toContain(`${defaultOptions.auth}`);
             expect(document.head.innerHTML).not.toContain(`${defaultOptions.preview}`);
@@ -76,7 +78,6 @@ describe('Analytics Plugin ::', () => {
             AnalyticsPlugin(context, injectSpy, partialOptions);
 
             // Assert
-            expect(storeModuleSpy).toHaveBeenCalledWith(partialOptions.namespace);
             expect(document.head.innerHTML).toContain(`${partialOptions.id}`);
             expect(document.head.innerHTML).toContain(`${partialOptions.auth}`);
             expect(document.head.innerHTML).toContain(`${partialOptions.preview}`);
@@ -87,7 +88,7 @@ describe('Analytics Plugin ::', () => {
         it('should inject the global object', () => {
             // Arrange
             const modifiedOptions = { ...options, globalVarName: 'jazz' };
-            const expected = new AnalyticService(defaultStore, context.req, modifiedOptions);
+            const expected = new AnalyticService(defaultStore, modifiedOptions);
 
             // Act
             AnalyticsPlugin(context, injectSpy, modifiedOptions);
@@ -137,7 +138,7 @@ describe('Analytics Plugin ::', () => {
             }));
         });
 
-        it('should register the module if not already registered', () => {
+        it('should register the module', () => {
             // Arrange - store
             registerStoreModuleSpy = jest.fn(() => true);
             context = {
@@ -155,44 +156,26 @@ describe('Analytics Plugin ::', () => {
             AnalyticsPlugin(context, jest.fn(), options);
 
             // Assert
-            expect(registerStoreModuleSpy).toHaveBeenCalledWith(options.namespace, expect.anything());
-        });
-
-        it('should not register the module if already registered', () => {
-            // Arrange - store
-            registerStoreModuleSpy = jest.fn(() => true);
-            context = {
-                store: {
-                    state,
-                    dispatch: jest.fn(),
-                    hasModule: jest.fn(() => true),
-                    registerModule: registerStoreModuleSpy
-                },
-                req: jest.fn(),
-                res: jest.fn()
-            };
-
-            // Act
-            AnalyticsPlugin(context, jest.fn(), options);
-
-            // Assert
-            expect(registerStoreModuleSpy).not.toHaveBeenCalled();
+            expect(registerStoreModuleSpy).toHaveBeenCalledWith(options.namespace, expect.anything(), { preserveState: true });
         });
     });
 
     describe('When preparing the page with GTM Tags', () => {
         let context;
         let state;
+        let registerStoreModuleSpy;
 
         beforeEach(() => {
             // Arrange - store
+            registerStoreModuleSpy = jest.fn();
             state = [`${options.namespace}`];
             state[`${options.namespace}`] = { ...defaultState };
             context = {
                 store: {
                     state,
                     dispatch: jest.fn(),
-                    hasModule: jest.fn(() => true)
+                    hasModule: jest.fn(() => true),
+                    registerModule: registerStoreModuleSpy
                 },
                 req: jest.fn(),
                 res: jest.fn()
@@ -262,6 +245,7 @@ describe('Analytics Plugin ::', () => {
         let store;
         let req;
         let get;
+        let registerStoreModuleSpy;
 
         beforeEach(() => {
             // Arrange - store
@@ -273,6 +257,8 @@ describe('Analytics Plugin ::', () => {
                 dispatch: storeDispatchSpy,
                 hasModule: jest.fn(() => true)
             };
+            registerStoreModuleSpy = jest.fn();
+            store.registerModule = registerStoreModuleSpy;
             // Arrange - cookies
             get = jest.fn();
             when(get).calledWith('je-user_percentage').mockReturnValue('35');

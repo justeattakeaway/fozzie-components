@@ -11,6 +11,17 @@ v1.4.0
 - `GEOLOCATION_REQUIRED` error handling.
 
 
+v1.3.0
+------------------------------
+*September 27, 2021*
+
+### Added
+- New function to map update checkout request
+
+### Changed
+- Map update checkout data before calling `handleUpdateCheckout`
+
+
 v1.2.0
 ------------------------------
 *September 21, 2021*
