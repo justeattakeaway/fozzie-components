@@ -28,6 +28,11 @@ describe('Offers', () => {
     let store;
 
     beforeEach(() => {
+        const getters = {
+            isAuthenticated: () => false,
+            friendlyName: () => null
+        };
+
         actions = {
             [ACTION_HANDLE_CUSTOMER_DATA]: jest.fn(),
             [ACTION_INITIALISE_OFFERS]: jest.fn()
@@ -37,7 +42,8 @@ describe('Offers', () => {
             modules: {
                 [VUEX_MODULE_NAMESPACE_OFFERS]: {
                     namespaced: true,
-                    actions
+                    actions,
+                    getters
                 }
             }
         });
