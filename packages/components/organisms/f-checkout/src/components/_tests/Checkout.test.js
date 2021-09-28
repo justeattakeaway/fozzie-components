@@ -2381,7 +2381,7 @@ describe('Checkout', () => {
 
             it('should map the request for age verification only successfully', async () => {
                 // Act
-                const mappedRequest = await wrapper.vm.getMappedDataForUpdateCheckout(true);
+                const mappedRequest = await wrapper.vm.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
 
                 // Assert
                 expect(getMappedDataForUpdateCheckoutSpy).toHaveBeenCalled();
