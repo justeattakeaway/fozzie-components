@@ -628,7 +628,7 @@ export default {
 
                 await this.lookupGeoLocation();
 
-                await this.handleUpdateCheckout(this.mapCheckoutUpdateRequest());
+                await this.handleUpdateCheckout(this.getMappedDataForUpdateCheckout());
 
                 if (this.isFulfillable) {
                     await this.submitOrder();
@@ -702,7 +702,7 @@ export default {
          * This is to avoid creating too many side effects with the original mapper for update checkout
          */
         async verifyCustomerAge () {
-            const data = this.mapCheckoutUpdateRequest(true);
+            const data = this.getMappedDataForUpdateCheckout(true);
 
             await this.handleUpdateCheckout(data);
         },
@@ -1100,7 +1100,7 @@ export default {
             }
         },
 
-        mapCheckoutUpdateRequest (ageVerificationOnly) {
+        getMappedDataForUpdateCheckout (ageVerificationOnly) {
             return ageVerificationOnly ?
                 mapUpdateCheckoutRequestForAgeVerification({
                     customer: this.customer

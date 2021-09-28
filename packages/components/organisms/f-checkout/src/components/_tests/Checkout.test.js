@@ -2315,10 +2315,10 @@ describe('Checkout', () => {
 
         describe('mapCheckoutUpdateRequest', () => {
             let wrapper;
-            let mapCheckoutUpdateRequestSpy;
+            let getMappedDataForUpdateCheckoutSpy;
 
             beforeEach(() => {
-                mapCheckoutUpdateRequestSpy = jest.spyOn(VueCheckout.methods, 'mapCheckoutUpdateRequest');
+                getMappedDataForUpdateCheckoutSpy = jest.spyOn(VueCheckout.methods, 'getMappedDataForUpdateCheckout');
 
                 wrapper = shallowMount(VueCheckout, {
                     store: createStore({
@@ -2344,10 +2344,10 @@ describe('Checkout', () => {
 
             it('should map the request successfully', async () => {
                 // Act
-                const mappedRequest = await wrapper.vm.mapCheckoutUpdateRequest();
+                const mappedRequest = await wrapper.vm.getMappedDataForUpdateCheckout();
 
                 // Assert
-                expect(mapCheckoutUpdateRequestSpy).toHaveBeenCalled();
+                expect(getMappedDataForUpdateCheckoutSpy).toHaveBeenCalled();
                 expect(mappedRequest[0].value).toEqual({
                     dateOfBirth: 'Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)',
                     firstName: 'John',
@@ -2381,10 +2381,10 @@ describe('Checkout', () => {
 
             it('should map the request for age verification only successfully', async () => {
                 // Act
-                const mappedRequest = await wrapper.vm.mapCheckoutUpdateRequest(true);
+                const mappedRequest = await wrapper.vm.getMappedDataForUpdateCheckout(true);
 
                 // Assert
-                expect(mapCheckoutUpdateRequestSpy).toHaveBeenCalled();
+                expect(getMappedDataForUpdateCheckoutSpy).toHaveBeenCalled();
                 expect(mappedRequest[0].value).toEqual({
                     dateOfBirth: 'Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)'
                 });
