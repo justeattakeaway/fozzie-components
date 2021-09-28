@@ -103,7 +103,8 @@ export const VOffersComponent = (args, { argTypes }) => ({
 VOffersComponent.storyName = 'f-offers';
 
 VOffersComponent.args = {
-    brazeApiKey: '__TEST_API_KEY__'
+    authToken: '__TEST_TOKEN__',
+    brazeApiKey: '__TEST_BRAZE_SDK_KEY__'
 };
 
 VOffersComponent.argTypes = {

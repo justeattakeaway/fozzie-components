@@ -24,8 +24,6 @@ import OffersResults from './Results.vue';
 import { ACTION_INITIALISE_OFFERS, VUEX_MODULE_NAMESPACE_OFFERS } from '../store/types';
 import offers from '../store/offers.module';
 
-const TIMEOUT = 3000;
-
 export default {
     name: 'VOffers',
 
@@ -41,10 +39,6 @@ export default {
     ],
 
     props: {
-        getOffersUrl: {
-            type: String,
-            default: undefined
-        },
         authToken: {
             type: String,
             default: undefined
@@ -73,6 +67,9 @@ export default {
     beforeCreate () {
         if (!this.$store.hasModule(VUEX_MODULE_NAMESPACE_OFFERS)) {
             this.$store.registerModule(VUEX_MODULE_NAMESPACE_OFFERS, offers);
+            this.$logger.logInfo('f-offers (main) - Vuex module registered for f-offers', this.$store, {
+                tags: 'offers'
+            });
         }
     },
 
@@ -81,10 +78,14 @@ export default {
      */
     async mounted () {
         await this.init({
-            url: this.getOffersUrl,
-            timeout: TIMEOUT,
             brazeApiKey: this.brazeApiKey,
             authToken: this.authToken
+        });
+        this.$logger.logInfo('f-offers (main) - Offers page mounted', this.$store, {
+            tags: 'offers',
+            data: {
+                brazeApiKey: this.brazeApiKey
+            }
         });
     },
 
