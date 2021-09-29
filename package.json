@@ -8,7 +8,6 @@
     "lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --stream\"",
     "lint:fix": "lerna run lint -- --fix",
     "lint:style": "lerna run lint:style --stream",
-    "preflight:visual": "node ./visual-regression-preflight.js",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
     "storybook:build": "lerna run storybook:build --stream",

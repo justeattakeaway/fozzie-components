@@ -218,31 +218,18 @@ commands:
           command_description: Run accessibility tests for packages
           command_name: "test-a11y:chrome"
 
-  visual_regression_preflight:
-    description: Preflight checks for Visual Regression Tests
-    steps:
-      - run:
-          name: Run preflight checks for Visual Regression Tests
-          command: |
-            yarn preflight:visual
-            if [ "${RUN_VISUAL_REGRESSION_TESTS}" == "true" ];
-            then
-              echo 'export RUN_VISUAL_REGRESSION_TESTS=true' >> $BASH_ENV
-              source $BASH_ENV
-            else
-            echo 'export RUN_VISUAL_REGRESSION_TESTS=false' >> $BASH_ENV
-            echo 'Visual regression tests will be skipped'
-            fi
-
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
     steps:
       - run:
           name: Run Percy visual regression tests for packages
           command: |
-            if [ "${RUN_VISUAL_REGRESSION_TESTS}" == "true" ];
+            val=$(node ./visual-regression-preflight.js)
+            if [ $val == "true" ];
             then
               yarn test:visual
+            else
+              echo Skipping visual regression tests
             fi
 
   slack_notify_fail:
@@ -430,7 +417,6 @@ jobs:
           background: true
       - component_tests
       - accessibility_tests
-      - visual_regression_preflight
       - visual_regression_tests
       - store_artifacts:
           path: test/results/axe-violations
