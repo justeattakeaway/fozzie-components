@@ -2,9 +2,9 @@
   "name": "@justeat/f-performance",
   "description": "Fozzie Performance - RUM performance metric collector",
   "version": "0.1.0",
-  "main": "dist/f-performance.umd.min.js", 
+  "main": "dist/f-performance.umd.min.js",
   "files": [
-    "dist" 
+    "dist"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-performance",
   "contributors": [
@@ -27,8 +27,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "lint": "vue-cli-service lint",
-    "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit"
+    "lint:fix": "yarn lint --fix"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -40,7 +39,6 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
