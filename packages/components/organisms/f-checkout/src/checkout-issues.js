@@ -49,6 +49,11 @@ const checkoutIssues = {
         shouldRedirectToMenu: false
     },
 
+    GEOLOCATION_REQUIRED: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: false
+    },
+
     // Different casing since this issue is provided by a different API with different naming conventions
     DuplicateOrder: {
         shouldShowInDialog: true,
