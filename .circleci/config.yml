@@ -181,7 +181,7 @@ commands:
     description: Locally lints all packages in the monorepo
     steps:
       - run_command:
-          command_description: Run liniting for packages
+          command_description: Run linting for packages
           command_name: "lint"
 
   unit_integration_tests:
@@ -221,9 +221,18 @@ commands:
   visual_regression_preflight:
     description: Preflight checks for Visual Regression Tests
     steps:
-      - run_command:
-          command_description: Run preflight checks for Visual Regression Tests
-          command_name: "preflight:visual"
+      - run:
+          name: Run preflight checks for Visual Regression Tests
+          command: |
+            yarn preflight:visual
+            if [ "${RUN_VISUAL_REGRESSION_TESTS}" == "true" ];
+            then
+              echo 'export RUN_VISUAL_REGRESSION_TESTS=true' >> $BASH_ENV
+              source $BASH_ENV
+            else
+            echo 'export RUN_VISUAL_REGRESSION_TESTS=false' >> $BASH_ENV
+            echo 'Visual regression tests will be skipped'
+            fi
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
