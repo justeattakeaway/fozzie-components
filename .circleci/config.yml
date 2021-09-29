@@ -398,8 +398,6 @@ jobs:
 
   browser_tests:
     executor: node
-    environment:
-      RUN_VISUAL_REGRESSION_TESTS: true
     steps:
       - checkout
       - detect_root_change
