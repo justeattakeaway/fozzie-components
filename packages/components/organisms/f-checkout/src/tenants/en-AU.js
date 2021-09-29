@@ -128,6 +128,12 @@ const messages = {
                 buttonText: 'Ok'
             },
 
+            GEOLOCATION_REQUIRED: {
+                title: 'Something went wrong',
+                message: 'We’re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
+                buttonText: 'Back to order'
+            },
+
             DuplicateOrder: {
                 title: 'This order has not been placed',
                 message: 'It’s the same as the one you made a moment ago and we want to check it’s not a mistake. Wait 15 mins or change an item in your order',
