@@ -36,14 +36,12 @@ describe('Analytic Service ::', () => {
             return;
         }
         windowCopy = { ...global.window };
-        const innerWidthSpy = jest.fn().mockReturnValue(winWidth);
-        const innerHeightSpy = jest.fn().mockReturnValue(winHeight);
         windowsPushSpy = jest.fn();
         const windowMock = ({
             ...windowCopy,
             dataLayer: dataLayerPresent ? { push: windowsPushSpy } : undefined,
-            innerWidth: innerWidthSpy(),
-            innerHeight: innerHeightSpy()
+            innerWidth: winWidth,
+            innerHeight: winHeight
         });
         windowSpy = jest.spyOn(global, 'window', 'get');
         windowSpy.mockImplementation(() => windowMock);
@@ -100,7 +98,7 @@ describe('Analytic Service ::', () => {
     });
 
     describe('When creating a new instance', () => {
-        it('should instantiate a new instance', () => {
+        it('should not throw error when instance is created with valid option types', () => {
             // Act
             const instance = () => new AnalyticService(store, req, options);
 
