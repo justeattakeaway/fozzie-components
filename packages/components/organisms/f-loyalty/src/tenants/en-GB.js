@@ -18,6 +18,10 @@ const messages = {
             title: 'How it works'
         }
     },
+    unauthenticated: {
+        loginTitle: 'Log in to get started',
+        loginButtonText: 'Log in'
+    },
     howItWorks: {
         title: 'Save on your favourite flavours',
         text: 'Get rewarded for your loyalty. Start collecting stamps from your favourite restaurants and unlock a tasty little discount on the way…',
