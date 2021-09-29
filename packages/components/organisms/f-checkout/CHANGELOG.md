@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.4.0
 ------------------------------
-*September 27, 2021*
+*September 29, 2021*
 
 ### Changed
 - `GEOLOCATION_REQUIRED` error handling.

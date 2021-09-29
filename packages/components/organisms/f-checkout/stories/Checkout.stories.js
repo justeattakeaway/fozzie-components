@@ -167,7 +167,6 @@ export const CheckoutComponent = () => ({
 
         updateCheckoutUrl () {
             if (this.patchCheckoutError) {
-                console.log(`/update-checkout-${this.patchCheckoutError}.json`);
                 return `/update-checkout-${this.patchCheckoutError}.json`;
             }
 
