@@ -13605,15 +13605,27 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const axios = __nccwpck_require__(6545);
 
+const CIRCLECI_API_URL = 'https://circleci.com/api/v2/project/gh';
+const REF_PREFIX = '/refs/heads/';
+
 try {
+    const { ref } = github.context;
+    const { owner, repo } = github.context.repo;
+
+    // Get current branch name from end of `ref` so Circle knows which build to re-run
+    const payload = {
+        ...(ref.indexOf(REF_PREFIX) > -1 ? {
+            branch: ref.slice(REF_PREFIX.length) // trim prefix
+        } : {})
+    };
+
+    // Authenticate using secret from action input
     const headers = {
         'Circle-Token': core.getInput('CIRCLE_CI_TOKEN')
     };
+    const options = { headers };
 
-    const CIRCLECI_API_URL = 'https://circleci.com/api/v2/project/gh';
-    const { owner, repo } = github.context.repo;
-
-    axios.post(`${CIRCLECI_API_URL}/${owner}/${repo}/pipeline`, {}, { headers })
+    axios.post(`${CIRCLECI_API_URL}/${owner}/${repo}/pipeline`, payload, options)
         .catch(error => core.setFailed(error));
 } catch (error) {
   core.setFailed(error.message);
