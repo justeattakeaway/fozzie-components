@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.5.0
+------------------------------
+*September 30, 2021*
+
+### Changed
+- Only call Geolocation endpoint when the service type is delivery
+
+
 v1.4.0
 ------------------------------
 *September 29, 2021*

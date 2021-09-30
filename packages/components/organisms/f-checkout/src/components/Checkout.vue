@@ -886,25 +886,27 @@ export default {
          *
          */
         async lookupGeoLocation () {
-            try {
-                const locationData = {
-                    addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
-                };
+            if (this.serviceType === CHECKOUT_METHOD_DELIVERY) {
+                try {
+                    const locationData = {
+                        addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
+                    };
 
-                if (locationData.addressLines.length) {
-                    await this.getGeoLocation({
-                        url: this.getGeoLocationUrl,
-                        postData: locationData,
-                        timeout: this.checkoutTimeout
+                    if (locationData.addressLines.length) {
+                        await this.getGeoLocation({
+                            url: this.getGeoLocationUrl,
+                            postData: locationData,
+                            timeout: this.checkoutTimeout
+                        });
+                    }
+                } catch (error) {
+                    this.logInvoker({
+                        message: 'Geo Location Lookup Failed',
+                        data: this.eventData,
+                        logMethod: this.$logger.logWarn,
+                        error
                     });
                 }
-            } catch (error) {
-                this.logInvoker({
-                    message: 'Geo Location Lookup Failed',
-                    data: this.eventData,
-                    logMethod: this.$logger.logWarn,
-                    error
-                });
             }
         },
 
