@@ -17,13 +17,6 @@ jobs:
       # Allows the action to access repository code, in this case, the pipeline_trigger action itself
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: npm install -g yarn
-      - run: yarn install
-      - run: yarn build:action:pipeline-trigger
-
       - name: Trigger pipeline
         with:
           CIRCLE_CI_TOKEN: ${{ secrets.CIRCLE_CI_TOKEN }}
