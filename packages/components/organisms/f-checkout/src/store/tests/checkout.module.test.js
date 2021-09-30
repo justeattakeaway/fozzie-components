@@ -316,6 +316,7 @@ describe('CheckoutModule', () => {
             it('should NOT update state if value from endpoint is not an array', () => {
                 // Arrange - coordinates array not returned from API
                 const coordinates = undefined;
+                state.geolocation = null;
 
                 // Act
                 mutations[UPDATE_GEO_LOCATION](state, coordinates);

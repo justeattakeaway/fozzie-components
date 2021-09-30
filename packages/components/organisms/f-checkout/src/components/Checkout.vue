@@ -18,7 +18,7 @@
 
         <age-verification
             v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="handleUpdateCheckout" />
+            @checkout-verify-age="verifyCustomerAge" />
 
         <div
             v-else-if="shouldShowCheckoutForm"
@@ -195,7 +195,7 @@ import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
 import CheckoutAnalyticsService from '../services/analytics';
 
@@ -625,7 +625,7 @@ export default {
 
                 await this.lookupGeoLocation();
 
-                await this.handleUpdateCheckout();
+                await this.handleUpdateCheckout(this.getMappedDataForUpdateCheckout());
 
                 if (this.isFulfillable) {
                     await this.submitOrder();
@@ -665,23 +665,11 @@ export default {
          *    its parent method
          * 4. If `updateCheckout` call fails, throw an UpdateCheckoutError.
          */
-        async handleUpdateCheckout () {
+        async handleUpdateCheckout (requestData) {
             try {
-                const data = mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
-                    time: this.time,
-                    userNote: this.userNote,
-                    geolocation: this.geolocation,
-                    asap: this.hasAsapSelected,
-                    tableIdentifier: this.tableIdentifier
-                });
-
                 await this.updateCheckout({
                     url: this.updateCheckoutUrl,
-                    data,
+                    data: requestData,
                     timeout: this.checkoutTimeout
                 }).then(headers => {
                     if (headers) {
@@ -709,6 +697,16 @@ export default {
          */
         redirectToPayment () {
             window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
+        },
+
+        /**
+         * Call update checkout with only the user's DOB for age verification
+         * This is to avoid creating too many side effects with the original mapper for update checkout
+         */
+        async verifyCustomerAge () {
+            const data = this.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
+
+            await this.handleUpdateCheckout(data);
         },
 
         /**
@@ -1106,6 +1104,24 @@ export default {
 
         handleDialogCreation (event) {
             this.checkoutAnalyticsService.trackDialogEvent(event);
+        },
+
+        getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
+            const { ageVerificationOnly } = options;
+            return ageVerificationOnly ?
+                mapUpdateCheckoutRequestForAgeVerification({
+                    customer: this.customer
+                }) : mapUpdateCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
+                    time: this.time,
+                    userNote: this.userNote,
+                    geolocation: this.geolocation,
+                    asap: this.hasAsapSelected,
+                    tableIdentifier: this.tableIdentifier
+                });
         }
     },
 

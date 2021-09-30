@@ -3,14 +3,32 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-v1.3.0
+v1.5.0
 ------------------------------
-*September 23, 2021*
+*September 30, 2021*
 
 ### Added
 - Analytics service file to handle analytics events.
 - `f-analytics` plugin to handle GTM events.
+
+
+v1.4.0
+------------------------------
+*September 29, 2021*
+
+### Changed
+- `GEOLOCATION_REQUIRED` error handling.
+
+
+v1.3.0
+------------------------------
+*September 27, 2021*
+
+### Added
+- New function to map update checkout request
+
+### Changed
+- Map update checkout data before calling `handleUpdateCheckout`
 
 
 v1.2.0

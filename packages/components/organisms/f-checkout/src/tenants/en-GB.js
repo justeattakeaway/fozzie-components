@@ -118,6 +118,12 @@ const messages = {
                 buttonText: 'Ok'
             },
 
+            GEOLOCATION_REQUIRED: {
+                title: 'Something went wrong',
+                message: 'We’re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
+                buttonText: 'Back to order'
+            },
+
             DEFAULT_CHECKOUT_ISSUE: {
                 title: 'Something went wrong',
                 message: 'Please try again',

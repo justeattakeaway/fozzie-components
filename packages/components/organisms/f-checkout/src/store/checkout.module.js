@@ -482,6 +482,8 @@ export default {
                 state.address.administrativeArea = address.administrativeArea;
             }
 
+            state.geolocation = fulfilment?.location?.geolocation || null;
+
             if (fulfilment.table) {
                 state.tableIdentifier = fulfilment.table.identifier;
             }
