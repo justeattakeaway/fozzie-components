@@ -68,6 +68,26 @@ const mapUpdateCheckoutRequest = ({
     }
 ]);
 
+const mapUpdateCheckoutRequestForAgeVerification = ({ customer }) => ([
+    {
+        op: 'add',
+        path: '/customer',
+        value: {
+            dateOfBirth: customer.dateOfBirth
+        }
+    },
+    {
+        op: 'add',
+        path: '/fulfilment',
+        value: null
+    },
+    {
+        op: 'add',
+        path: '/notes',
+        value: null
+    }
+]);
+
 /**
  * Maps checkout names to required GA names.
  *
@@ -126,5 +146,6 @@ export {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapUpdateCheckoutRequest
+    mapUpdateCheckoutRequest,
+    mapUpdateCheckoutRequestForAgeVerification
 };
