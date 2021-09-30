@@ -16,4 +16,6 @@ jobs:
     steps:
       # Allows the action to access repository code, in this case, the pipeline_trigger action itself
       - uses: actions/checkout@v2
-      - uses: justeat/fozzie-components/.github/actions/pipeline_trigger
+
+      - name: Trigger pipeline
+        uses: ./.github/actions/pipeline_trigger@v1
