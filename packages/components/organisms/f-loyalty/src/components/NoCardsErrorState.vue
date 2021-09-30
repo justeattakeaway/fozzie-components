@@ -2,7 +2,7 @@
     <div :class="$style['c-noCardsError']">
         <img
             :class="$style['c-noCardsError-icon']"
-            :src="`stampcards-empty-${$t('stampCards.percentage')}.svg`"
+            :src="`stampcards-empty-${$t('percentage')}.svg`"
             alt="">
         <h3 :class="$style['c-noCardsError-title']">
             {{ $t('stamps.errorNoCards.title') }}
