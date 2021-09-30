@@ -13607,7 +13607,7 @@ const axios = __nccwpck_require__(6545);
 
 try {
     const headers = {
-        authorization: core.getInput('CIRCLE_CI_TOKEN')
+        authorization: `Basic ${core.getInput('CIRCLE_CI_TOKEN')}`
     };
 
     const CIRCLECI_API_URL = 'https://circleci.com/api/v2/project/gh';
