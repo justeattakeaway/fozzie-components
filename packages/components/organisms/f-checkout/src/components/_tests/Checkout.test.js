@@ -2741,6 +2741,26 @@ describe('Checkout', () => {
                     // Assert
                     expect(getGeoLocationSpy).toHaveBeenCalledWith(expected);
                 });
+
+                it('should not call `getGeoLocation` if the service type is not delivery', async () => {
+                    // Arrange
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger,
+                            $cookies
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.lookupGeoLocation();
+
+                    // Assert
+                    expect(getGeoLocationSpy).toHaveBeenCalledTimes(0);
+                });
             });
 
             describe('when `getGeoLocation` request fails', () => {
