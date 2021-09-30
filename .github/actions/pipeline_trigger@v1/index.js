@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 try {
     const headers = {
@@ -10,10 +10,7 @@ try {
     const CIRCLECI_API_URL = 'https://circleci.com/api/v2/project/gh';
     const { owner, repo } = github.context.repo;
 
-    fetch(`${CIRCLECI_API_URL}/${owner}/${repo}/pipeline`, {
-        headers,
-        method: 'POST'
-    });
+    axios.post(`${CIRCLECI_API_URL}/${owner}/${repo}/pipeline`, {}, { headers });
 } catch (error) {
   core.setFailed(error.message);
 }
