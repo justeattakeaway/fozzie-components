@@ -16,4 +16,4 @@ jobs:
     steps:
       # Allows the action to access repository code, in this case, the pipeline_trigger action itself
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/pipeline_trigger
+      - uses: .github/actions/pipeline_trigger

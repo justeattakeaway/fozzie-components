@@ -7,7 +7,7 @@ inputs:
     required: true
 
 runs:
-  using: 'node14'
+  using: 'node12'
   with:
     CIRCLE_CI_TOKEN: ${{ secrets.CIRCLE_CI_TOKEN }}
   main: 'index.js'
