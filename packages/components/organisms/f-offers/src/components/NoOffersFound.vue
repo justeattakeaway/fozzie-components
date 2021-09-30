@@ -5,7 +5,7 @@
         <media-element
             :title="$t('noOffersFound.title')"
             :text="$t('noOffersFound.subtitle')"
-            image-url="https://d30v2pzvrfyzpo.cloudfront.net/a/hw/img/decoration/oi_no-results-image.svg"
+            image-url="https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/oi_no-results-image.svg"
             :image-align="imageAlign"
             :text-size="textSize"
             :flex="flexLayout"
