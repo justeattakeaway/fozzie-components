@@ -1,0 +1,47 @@
+{
+  "name": "@justeat/f-compatibility",
+  "description": "Javascript service for detecting browsers that we no longer support",
+  "version": "0.1.0",
+  "maxBundleSize": "100kB",
+  "main": "dist/f-compatibility.umd.js",
+  "module": "dist/f-compatibility.es.js",
+  "source": "src/index.js",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-compatibility",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "vite build",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
+    "lint:fix": "yarn lint --fix",
+    "test": "jest",
+    "test:coverage": "jest test:unit --coverage"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "devDependencies": {
+    "core-js": "3.6.5",
+    "eslint": "7.32.0",
+    "jest-extended": "0.11.5",
+    "vite": "2.4.4"
+  }
+}
