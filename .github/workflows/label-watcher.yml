@@ -11,7 +11,7 @@ on:
 jobs:
   check:
     # If the pull request is not a draft, and the label that has just been removed is 'wip', then trigger the pipeline
-    if: ${{ github.event.pull_request.draft != true && github.event.pull_request.label == 'wip' }}
+    if: ${{ github.event.pull_request.draft != true && github.event.label.name == 'wip' }}
     runs-on: ubuntu-latest
     steps:
       # Allows the action to access repository code, in this case, the pipeline_trigger action itself
