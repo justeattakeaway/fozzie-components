@@ -12,6 +12,8 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+jest.mock('../../services/analytics');
+
 describe('ErrorDialog', () => {
     const restaurant = {
         seoName: 'checkout-kofte-farringdon',
@@ -393,12 +395,9 @@ describe('ErrorDialog', () => {
             });
         });
 
-        it('should make a call to `trackDialogEvent` with a error message', () => {
-            // Arrange
-            const trackDialogEventSpy = jest.spyOn(ErrorDialog.methods, 'trackDialogEvent');
-
+        it('should make a emit to `created` event with a error message', () => {
             // Act
-            shallowMount(ErrorDialog, {
+            const wrapper = shallowMount(ErrorDialog, {
                 store: createStore({
                     ...defaultCheckoutState,
                     message: duplicateOrderMessage
@@ -409,7 +408,8 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(trackDialogEventSpy).toHaveBeenCalledWith(duplicateOrderMessage);
+            expect(wrapper.emitted('created').length).toBe(1);
+            expect(wrapper.emitted('created')[0][0]).toEqual(duplicateOrderMessage);
         });
     });
 });

@@ -31,6 +31,7 @@ import {
 } from './mutation-types';
 
 import checkoutIssues from '../checkout-issues';
+
 /**
  * @param {String} code - The code returned by an API.
  * @returns {object} - An object with the issue's desired behaviours and the code.
@@ -168,19 +169,17 @@ export default {
                 data,
                 timeout
             };
-
             const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
-
             const { issues, isFulfillable } = responseData;
-
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/trackLowValueOrderExperiment`, headers, { root: true });
             dispatch('updateMessage', detailedIssues[0]);
+
+            return headers;
         },
 
         /**
