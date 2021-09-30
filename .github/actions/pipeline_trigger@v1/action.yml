@@ -8,6 +8,4 @@ inputs:
 
 runs:
   using: 'node12'
-  with:
-    CIRCLE_CI_TOKEN: ${{ secrets.CIRCLE_CI_TOKEN }}
   main: 'index.js'
