@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build\"",
+    "build:action:pipeline-trigger": "ncc build .github/actions/pipeline_trigger@v1/index.js -o .github/actions/pipeline_trigger@v1/dist",
     "bundlewatch": "cross-env-shell \"bundlewatch --config bundlewatch.config.js\"",
     "lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --stream\"",
     "lint:fix": "lerna run lint -- --fix",
@@ -43,6 +44,7 @@
     "@octokit/core": "3.5.1",
     "@percy/cli": "1.0.0-beta.52",
     "@percy/webdriverio": "2.0.0",
+    "@vercel/ncc": "0.31.1",
     "@vue/babel-preset-app": "4.5.13",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
