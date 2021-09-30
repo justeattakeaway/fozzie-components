@@ -4,7 +4,8 @@
             :is="messageType.name"
             v-if="message && !errorFormType"
             ref="errorMessage"
-            v-bind="messageType.props">
+            v-bind="messageType.props"
+            @created="handleDialogCreation">
             <span>{{ messageType.content }}</span>
         </component>
 
@@ -196,6 +197,7 @@ import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
+import CheckoutAnalyticsService from '../services/analytics';
 
 const {
     CreateGuestUserError,
@@ -332,7 +334,8 @@ export default {
             isLoading: false,
             errorFormType: null,
             isFormSubmitting: false,
-            availableFulfilmentTimesKey: 0
+            availableFulfilmentTimesKey: 0,
+            checkoutAnalyticsService: new CheckoutAnalyticsService(this)
         };
     },
 
@@ -535,7 +538,7 @@ export default {
         this.setAuthToken(this.authToken);
 
         await this.initialise();
-        this.trackInitialLoad();
+        this.checkoutAnalyticsService.trackInitialLoad();
         this.$emit(EventNames.CheckoutMounted);
     },
 
@@ -559,12 +562,6 @@ export default {
             'updateAddress',
             'getUserNote',
             'saveUserNote'
-        ]),
-
-        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackFormErrors',
-            'trackFormInteraction',
-            'trackInitialLoad'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
@@ -648,7 +645,7 @@ export default {
          */
         handleNonFulfillableCheckout () {
             if (this.errors) {
-                this.trackFormErrors();
+                this.checkoutAnalyticsService.trackFormErrors();
 
                 this.logInvoker({
                     message: 'Consumer Checkout Not Fulfillable',
@@ -674,9 +671,14 @@ export default {
                     url: this.updateCheckoutUrl,
                     data: requestData,
                     timeout: this.checkoutTimeout
+                }).then(headers => {
+                    if (headers) {
+                        this.checkoutAnalyticsService.trackLowValueOrderExperiment(headers);
+                    }
                 });
 
                 await this.reloadAvailableFulfilmentTimesIfOutdated();
+
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
@@ -931,7 +933,7 @@ export default {
                 error
             });
 
-            this.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
+            this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
             if (!error.shouldShowInDialog && !error.errorFormType) {
                 this.updateMessage(message);
@@ -961,7 +963,7 @@ export default {
          * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
          */
         async onFormSubmit () {
-            this.trackFormInteraction({ action: 'submit' });
+            this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
             this.updateMessage();
             this.setSubmittingState(true);
 
@@ -988,12 +990,12 @@ export default {
             this.scrollToFirstInlineError();
 
             this.$emit(EventNames.CheckoutValidationError, validationState);
-            this.trackFormInteraction({
+            this.checkoutAnalyticsService.trackFormInteraction({
                 action: 'inline_error',
                 error: invalidFields
             });
 
-            this.trackFormInteraction({
+            this.checkoutAnalyticsService.trackFormInteraction({
                 action: 'error',
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
@@ -1100,6 +1102,10 @@ export default {
                 await this.loadAvailableFulfilment();
                 this.availableFulfilmentTimesKey++;
             }
+        },
+
+        handleDialogCreation (event) {
+            this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
         getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
