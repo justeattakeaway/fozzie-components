@@ -13599,6 +13599,8 @@ module.exports = require("zlib");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
+// This file must be built using `yarn build:action:pipeline-trigger`
+
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const axios = __nccwpck_require__(6545);
@@ -13611,7 +13613,8 @@ try {
     const CIRCLECI_API_URL = 'https://circleci.com/api/v2/project/gh';
     const { owner, repo } = github.context.repo;
 
-    axios.post(`${CIRCLECI_API_URL}/${owner}/${repo}/pipeline`, {}, { headers });
+    axios.post(`${CIRCLECI_API_URL}/${owner}/${repo}/pipeline`, {}, { headers })
+        .catch(error => core.setFailed(error));
 } catch (error) {
   core.setFailed(error.message);
 }
