@@ -9,4 +9,4 @@ v0.1.0
 *September 30, 2021*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
+- `f-restaurant-card` component structure and config.
