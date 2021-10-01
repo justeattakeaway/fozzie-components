@@ -243,6 +243,13 @@ export default {
                     gtm: 'click_about_modern_slavery_statement'
                 },
                 {
+                    url: '/CmsAssets/media/Files/Common/legal/gender-pay-gap/gender-pay-gap-2019-2021',
+                    text: 'Gender Pay Gap 2019-2021',
+                    target: '_blank',
+                    rel: 'noopener',
+                    gtm: 'click_about_gender-pay-gap-2019-2021'
+                },
+                {
                     url: 'https://secure.ethicspoint.eu/domain/media/en/gui/106834/index.html',
                     text: 'Ethics hotline',
                     target: '_blank',
