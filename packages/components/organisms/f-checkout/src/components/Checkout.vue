@@ -4,7 +4,8 @@
             :is="messageType.name"
             v-if="message && !errorFormType"
             ref="errorMessage"
-            v-bind="messageType.props">
+            v-bind="messageType.props"
+            @created="handleDialogCreation">
             <span>{{ messageType.content }}</span>
         </component>
 
@@ -17,7 +18,7 @@
 
         <age-verification
             v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="handleUpdateCheckout" />
+            @checkout-verify-age="verifyCustomerAge" />
 
         <div
             v-else-if="shouldShowCheckoutForm"
@@ -194,8 +195,9 @@ import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
+import CheckoutAnalyticsService from '../services/analytics';
 
 const {
     CreateGuestUserError,
@@ -332,7 +334,8 @@ export default {
             isLoading: false,
             errorFormType: null,
             isFormSubmitting: false,
-            availableFulfilmentTimesKey: 0
+            availableFulfilmentTimesKey: 0,
+            checkoutAnalyticsService: new CheckoutAnalyticsService(this)
         };
     },
 
@@ -535,7 +538,7 @@ export default {
         this.setAuthToken(this.authToken);
 
         await this.initialise();
-        this.trackInitialLoad();
+        this.checkoutAnalyticsService.trackInitialLoad();
         this.$emit(EventNames.CheckoutMounted);
     },
 
@@ -559,12 +562,6 @@ export default {
             'updateAddress',
             'getUserNote',
             'saveUserNote'
-        ]),
-
-        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackFormErrors',
-            'trackFormInteraction',
-            'trackInitialLoad'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
@@ -628,7 +625,7 @@ export default {
 
                 await this.lookupGeoLocation();
 
-                await this.handleUpdateCheckout();
+                await this.handleUpdateCheckout(this.getMappedDataForUpdateCheckout());
 
                 if (this.isFulfillable) {
                     await this.submitOrder();
@@ -648,7 +645,7 @@ export default {
          */
         handleNonFulfillableCheckout () {
             if (this.errors) {
-                this.trackFormErrors();
+                this.checkoutAnalyticsService.trackFormErrors();
 
                 this.logInvoker({
                     message: 'Consumer Checkout Not Fulfillable',
@@ -668,27 +665,20 @@ export default {
          *    its parent method
          * 4. If `updateCheckout` call fails, throw an UpdateCheckoutError.
          */
-        async handleUpdateCheckout () {
+        async handleUpdateCheckout (requestData) {
             try {
-                const data = mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
-                    time: this.time,
-                    userNote: this.userNote,
-                    geolocation: this.geolocation,
-                    asap: this.hasAsapSelected,
-                    tableIdentifier: this.tableIdentifier
-                });
-
                 await this.updateCheckout({
                     url: this.updateCheckoutUrl,
-                    data,
+                    data: requestData,
                     timeout: this.checkoutTimeout
+                }).then(headers => {
+                    if (headers) {
+                        this.checkoutAnalyticsService.trackLowValueOrderExperiment(headers);
+                    }
                 });
 
                 await this.reloadAvailableFulfilmentTimesIfOutdated();
+
 
                 this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
             } catch (e) {
@@ -707,6 +697,16 @@ export default {
          */
         redirectToPayment () {
             window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
+        },
+
+        /**
+         * Call update checkout with only the user's DOB for age verification
+         * This is to avoid creating too many side effects with the original mapper for update checkout
+         */
+        async verifyCustomerAge () {
+            const data = this.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
+
+            await this.handleUpdateCheckout(data);
         },
 
         /**
@@ -888,25 +888,27 @@ export default {
          *
          */
         async lookupGeoLocation () {
-            try {
-                const locationData = {
-                    addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
-                };
+            if (this.serviceType === CHECKOUT_METHOD_DELIVERY) {
+                try {
+                    const locationData = {
+                        addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
+                    };
 
-                if (locationData.addressLines.length) {
-                    await this.getGeoLocation({
-                        url: this.getGeoLocationUrl,
-                        postData: locationData,
-                        timeout: this.checkoutTimeout
+                    if (locationData.addressLines.length) {
+                        await this.getGeoLocation({
+                            url: this.getGeoLocationUrl,
+                            postData: locationData,
+                            timeout: this.checkoutTimeout
+                        });
+                    }
+                } catch (error) {
+                    this.logInvoker({
+                        message: 'Geo Location Lookup Failed',
+                        data: this.eventData,
+                        logMethod: this.$logger.logWarn,
+                        error
                     });
                 }
-            } catch (error) {
-                this.logInvoker({
-                    message: 'Geo Location Lookup Failed',
-                    data: this.eventData,
-                    logMethod: this.$logger.logWarn,
-                    error
-                });
             }
         },
 
@@ -931,7 +933,7 @@ export default {
                 error
             });
 
-            this.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
+            this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
             if (!error.shouldShowInDialog && !error.errorFormType) {
                 this.updateMessage(message);
@@ -961,7 +963,7 @@ export default {
          * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
          */
         async onFormSubmit () {
-            this.trackFormInteraction({ action: 'submit' });
+            this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
             this.updateMessage();
             this.setSubmittingState(true);
 
@@ -988,12 +990,12 @@ export default {
             this.scrollToFirstInlineError();
 
             this.$emit(EventNames.CheckoutValidationError, validationState);
-            this.trackFormInteraction({
+            this.checkoutAnalyticsService.trackFormInteraction({
                 action: 'inline_error',
                 error: invalidFields
             });
 
-            this.trackFormInteraction({
+            this.checkoutAnalyticsService.trackFormInteraction({
                 action: 'error',
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
@@ -1100,6 +1102,28 @@ export default {
                 await this.loadAvailableFulfilment();
                 this.availableFulfilmentTimesKey++;
             }
+        },
+
+        handleDialogCreation (event) {
+            this.checkoutAnalyticsService.trackDialogEvent(event);
+        },
+
+        getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
+            const { ageVerificationOnly } = options;
+            return ageVerificationOnly ?
+                mapUpdateCheckoutRequestForAgeVerification({
+                    customer: this.customer
+                }) : mapUpdateCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
+                    time: this.time,
+                    userNote: this.userNote,
+                    geolocation: this.geolocation,
+                    asap: this.hasAsapSelected,
+                    tableIdentifier: this.tableIdentifier
+                });
         }
     },
 
