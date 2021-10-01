@@ -85,9 +85,10 @@
     <div v-else>
         <reopen-banner-link
             v-if="!legacyBanner"
+            ref="reopenCookieBannerLink"
             :message="copy.reopenCookieBannerLinkText"
             :use-grey-background="shouldUseGreyBackground"
-            :class="{ [$style['reopen-link-wrapper']]: reopenLinkToBottom }"
+            :class="{ [$style['reopen-link-wrapper']]: isBodyHeightLessThanWindowHeight }"
             @reopenBanner="reopenBanner" />
     </div>
 </template>
@@ -108,6 +109,8 @@ import LegacyBanner from './LegacyBanner.vue';
 import ReopenBannerLink from './ReopenBannerLink.vue';
 
 import tenantConfigs from '../tenants';
+
+
 
 export default {
     components: {
@@ -151,7 +154,6 @@ export default {
         const copy = localeConfig.messages;
         const consentCookieName = 'je-cookieConsent';
         const legacyConsentCookieName = 'je-banner_cookie';
-        const reopenLinkToBottom = this.isBodyHeightLessThanWindowHeight();
 
         return {
             config: { ...localeConfig },
@@ -161,7 +163,8 @@ export default {
             consentCookieName,
             legacyConsentCookieName,
             isIosBrowser: false,
-            reopenLinkToBottom
+            bodyObserver: undefined,
+            isBodyHeightLessThanWindowHeight: false
         };
     },
 
@@ -173,12 +176,16 @@ export default {
         legacyBanner () {
             return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
         }
+
     },
 
     watch: {
         isHidden (newVal) {
             this.shouldHideBanner = !!newVal;
         }
+    },
+    destroyed () {
+        this.bodyObserver.disconnect();
     },
 
     mounted () {
@@ -190,9 +197,21 @@ export default {
             });
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
+
+        this.bodyObserver = new ResizeObserver(this.updateIsBodyHeightLessThanWindowHeight);
+        const bodyNode = document.documentElement || document.body;
+        this.bodyObserver.observe(bodyNode);
     },
 
     methods: {
+
+        updateIsBodyHeightLessThanWindowHeight () {
+            console.log('***** updateIsBodyHeightLessThanWindowHeight');
+            const ropenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight;
+            this.isBodyHeightLessThanWindowHeight =
+                (window.innerHeight - ropenElementHeight) - document.body.offsetHeight > 0;
+        },
+
         /**
          * Actions for "Accept all cookies" button
          */
@@ -375,17 +394,6 @@ export default {
         },
 
         /**
-         * Check to see if we need to absolute position reopen link.
-         * * @returns {Boolean}
-         */
-        isBodyHeightLessThanWindowHeight () {
-            if (typeof window === 'object') {
-                return window.innerHeight - document.body.offsetHeight > 0;
-            }
-            return false;
-        },
-
-        /**
          * Dispatch custom window event
          * */
         dispatchCustomEvent () {
@@ -451,6 +459,7 @@ export default {
         position: absolute;
         bottom: 0;
         width: 100%;
+        border: 4px solid hotpink;
     }
 
     @include media ('<mid') {

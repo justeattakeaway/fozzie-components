@@ -2,6 +2,15 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import CookieHelper from 'js-cookie';
 import CookieBanner from '../CookieBanner.vue';
 
+const resizeObserverMock = jest.fn(function ResizeObserver (callback) {
+    this.observe = jest.fn();
+    this.disconnect = jest.fn();
+    this.trigger = () => {
+        callback('', this);
+    };
+});
+global.ResizeObserver = resizeObserverMock;
+
 const localVue = createLocalVue();
 const i18n = {
     locale: 'en-IE'
@@ -22,6 +31,35 @@ describe('CookieBanner', () => {
 
             // Assert
             expect(wrapper.exists()).toBe(true);
+        });
+    });
+
+    describe('ResizeObserver', () => {
+        it('should call ResizeObserver.observe to watch for body resize', () => {
+            // Arrange
+            const propsData = {};
+
+            // Act
+            shallowMount(CookieBanner, {
+                localVue,
+                i18n,
+                propsData
+            });
+            const [observerInstance] = ResizeObserver.mock.instances;
+
+            const mockBodyHTMLHtmlElement = document.createElement('html');
+            mockBodyHTMLHtmlElement.innerHTML = '<head /><body/>';
+
+            // Assert
+            expect(observerInstance.observe).toHaveBeenCalledTimes(1);
+            expect(observerInstance.observe).toHaveBeenCalledWith(expect.any(HTMLHtmlElement));
+            expect(observerInstance.observe).toHaveBeenCalledWith(mockBodyHTMLHtmlElement);
+
+            // observerInstance.trigger();
+        });
+
+        it.skip('should call updateIsBodyHeightLessThanWindowHeight() when ResizeObserver.observe is triggered', () => {
+
         });
     });
 
@@ -348,41 +386,41 @@ describe('CookieBanner', () => {
         });
     });
 
-    describe('`computed`', () => {
-        describe('when `isBodyHeightLessThanWindowHeight` is falsey', () => {
-            let wrapper;
-            const { window } = global;
+    // describe('`computed`', () => {
+    //     describe('when `isBodyHeightLessThanWindowHeight` is falsey', () => {
+    //         let wrapper;
+    //         const { window } = global;
 
-            beforeAll(() => {
-                wrapper = shallowMount(CookieBanner, {
-                    localVue,
-                    i18n
-                });
+    //         beforeAll(() => {
+    //             wrapper = shallowMount(CookieBanner, {
+    //                 localVue,
+    //                 i18n
+    //             });
 
-                delete global.window;
-            });
+    //             delete global.window;
+    //         });
 
-            afterAll(() => {
-                global.window = window;
-            });
+    //         afterAll(() => {
+    //             global.window = window;
+    //         });
 
-            it('should return `falsey` when the window object does not exist', () => {
-                // Assert
-                expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(false);
-            });
-        });
+    //         it('should return `falsey` when the window object does not exist', () => {
+    //             // Assert
+    //             expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(false);
+    //         });
+    //     });
 
-        describe('when `isBodyHeightLessThanWindowHeight` is truthy', () => {
-            it('should return true when the window object exists', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(CookieBanner, {
-                    localVue,
-                    i18n
-                });
+    //     describe('when `isBodyHeightLessThanWindowHeight` is truthy', () => {
+    //         it('should return true when the window object exists', () => {
+    //             // Arrange & Act
+    //             const wrapper = shallowMount(CookieBanner, {
+    //                 localVue,
+    //                 i18n
+    //             });
 
-                // Assert
-                expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(true);
-            });
-        });
-    });
+    //             // Assert
+    //             expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(true);
+    //         });
+    //     });
+    // });
 });
