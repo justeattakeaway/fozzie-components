@@ -52,7 +52,7 @@ describe('Accessibility tests', () => {
         checkout.withQuery('&knob-Service Type', 'Invalid URL')
             .withQuery('&knob-Is User Logged In', false);
 
-        checkout.load('error');
+        checkout.loadError();
         const axeResults = getAccessibilityTestResults('f-checkout-error-page');
 
         // Assert
