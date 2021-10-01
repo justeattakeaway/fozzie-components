@@ -256,14 +256,13 @@ $btn-sizeXSmall-iconHeight             : 12px;
 $btn-sizeXSmall-iconSpacing            : 2px;
 $btn-sizeXSmall-iconSideSpacing        : $btn-sizeXSmall-iconSpacing + spacing();
 
-$btn-icon-sizeLarge-buttonSize         : 56px; // button--icon is a sircle so width and height can use one var
+$btn-icon-iconSize                     : 18px; // at the moment all the icon buttons except large have the same icon size
+$btn-icon-sizeLarge-buttonSize         : 56px; // icon button is a circle so width and height can use one var
 $btn-icon-sizeLarge-iconSize           : 21px;
 $btn-icon-sizeMedium-buttonSize        : 48px;
-$btn-icon-sizeMedium-iconSize          : 21px;
 $btn-icon-sizeSmall-buttonSize         : 40px;
-$btn-icon-sizeSmall-iconSize           : 18px;
 $btn-icon-sizeXSmall-buttonSize        : 32px;
-$btn-icon-sizeXSmall-iconSize          : 18px;
+
 
 @include loadingIndicator('medium');
 
@@ -613,15 +612,9 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         }
     }
 
-    &.o-btn--outline {
-        path {
-            fill: $btn-outline-textColor;
-        }
-    }
-
     &.o-btn--ghost {
         path {
-            fill: $btn-ghost-textColor;
+            fill: $color-content-interactive-brand;
         }
     }
 
@@ -631,23 +624,22 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
         }
     }
 
-    &.o-btn--link {
-        path {
-            fill: $color-content-link;
-        }
+    &.o-btn--ghost,
+    &.o-btn--ghostTertiary {
+        background-color: $color-interactive-inverse; // for icon button to have a white background when it is located on top of images/dark surfaces
 
         &:hover {
-            path {
-                fill: darken($color-content-link, $color-hover-01);
-            }
+            background-color: $btn-ghost-bgColor--hover;
         }
 
-        &:active,
-        &:focus {
-            path {
-                fill: darken($color-content-link, $color-active-01);
-            }
+        &:active {
+            background-color: $btn-ghost-bgColor--active;
         }
+    }
+
+    svg {
+        width: $btn-icon-iconSize;
+        height: $btn-icon-iconSize;
     }
 }
 
@@ -665,31 +657,16 @@ $btn-icon-sizeXSmall-iconSize          : 18px;
     width: $btn-icon-sizeMedium-buttonSize;
     height: $btn-icon-sizeMedium-buttonSize;
     padding: 0;
-
-    svg {
-        width: $btn-icon-sizeMedium-iconSize;
-        height: $btn-icon-sizeMedium-iconSize;
-    }
 }
 .o-btn--icon.o-btn--sizeSmall {
     width: $btn-icon-sizeSmall-buttonSize;
     height: $btn-icon-sizeSmall-buttonSize;
     padding: 0;
-
-    svg {
-        width: $btn-icon-sizeSmall-iconSize;
-        height: $btn-icon-sizeSmall-iconSize;
-    }
 }
 .o-btn--icon.o-btn--sizeXSmall {
     width: $btn-icon-sizeXSmall-buttonSize;
     height: $btn-icon-sizeXSmall-buttonSize;
     padding: 0;
-
-    svg {
-        width: $btn-icon-sizeXSmall-iconSize;
-        height: $btn-icon-sizeXSmall-iconSize;
-    }
 }
 
 /**
