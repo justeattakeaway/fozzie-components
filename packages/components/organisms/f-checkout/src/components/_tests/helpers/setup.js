@@ -94,10 +94,6 @@ const defaultCheckoutActions = {
 };
 
 const defaultAnalyticsActions = {
-    trackDialogEvent: jest.fn(),
-    trackFormErrors: jest.fn(),
-    trackFormInteraction: jest.fn(),
-    trackInitialLoad: jest.fn(),
     updateAutofill: jest.fn(),
     updateChangedField: jest.fn()
 };

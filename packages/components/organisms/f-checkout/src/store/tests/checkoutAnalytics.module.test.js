@@ -1,27 +1,15 @@
 import CheckoutAnalyticsModule from '../checkoutAnalytics.module';
 import * as mapper from '../../services/mapper';
 import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
-import { VUEX_CHECKOUT_MODULE, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
 
 import { UPDATE_AUTOFILL, UPDATE_CHANGED_FIELD } from '../mutation-types';
 
 const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
-    trackDialogEvent,
-    trackFormErrors,
-    trackFormInteraction,
-    trackInitialLoad,
-    trackLowValueOrderExperiment,
     updateAutofill,
     updateChangedField
 } = actions;
-
-Object.defineProperty(global, 'window', {
-    value: {
-        dataLayer: []
-    }
-});
 
 describe('CheckoutAnalyticsModule', () => {
     let state = CheckoutAnalyticsModule.state();
@@ -33,16 +21,10 @@ describe('CheckoutAnalyticsModule', () => {
 
     describe('actions ::', () => {
         let commit;
-        let dispatch;
-        const rootState = {
-            [VUEX_CHECKOUT_MODULE]: defaultCheckoutState
-        };
 
         beforeEach(() => {
             commit = jest.fn();
-            dispatch = jest.fn();
             state = CheckoutAnalyticsModule.state();
-            window.dataLayer = [];
         });
 
         afterEach(() => {
@@ -146,6 +128,40 @@ describe('CheckoutAnalyticsModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL, autofillFields);
                 });
             });
+
+            describe('when `checkoutState` contains customer address', () => {
+                beforeEach(() => {
+                    checkoutState = {
+                        ...checkoutState,
+                        address: {
+                            line1: '1 Bristol Road',
+                            line2: '',
+                            city: '',
+                            postcode: ''
+                        }
+                    };
+
+                    field = ['addressLine1'];
+                    autofillFields = field;
+                    mapAnalyticsNamesSpy.mockImplementation(() => field);
+                });
+
+                it(`should call ${UPDATE_AUTOFILL} with correct field`, () => {
+                    // Act
+                    updateAutofill({ commit }, checkoutState);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL, autofillFields);
+                });
+
+                it('should call `mapAnalyticsNames` with correct field', () => {
+                    // Act
+                    updateAutofill({ commit }, checkoutState);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL, autofillFields);
+                });
+            });
         });
 
         describe('updateChangedField ::', () => {
@@ -170,247 +186,6 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_CHANGED_FIELD, field);
-            });
-        });
-
-        describe('trackInitialLoad ::', () => {
-            let expectedEvent;
-
-            beforeEach(() => {
-                expectedEvent = {
-                    checkout: {
-                        step: 1
-                    },
-                    basket: {
-                        id: rootState[VUEX_CHECKOUT_MODULE].basket.id,
-                        total: rootState[VUEX_CHECKOUT_MODULE].basket.total
-                    },
-                    restaurant: {
-                        id: rootState[VUEX_CHECKOUT_MODULE].restaurant.id,
-                        seoName: rootState[VUEX_CHECKOUT_MODULE].restaurant.seoName
-                    },
-                    menu: {
-                        type: rootState[VUEX_CHECKOUT_MODULE].serviceType
-                    }
-                };
-            });
-
-            it('should `push` expected event to `dataLayer`', () => {
-                // Act
-                trackInitialLoad({ rootState, dispatch });
-
-                // Assert
-                expect(window.dataLayer[0]).toEqual(expectedEvent);
-            });
-
-            it('should dispatch `trackFormInteraction` with `start` action', () => {
-                // Assert
-                trackInitialLoad({ rootState, dispatch });
-
-                // Assert
-                expect(dispatch).toHaveBeenCalledWith('trackFormInteraction', { action: 'start' });
-            });
-        });
-
-        describe('trackFormInteraction ::', () => {
-            let mapAnalyticsNamesSpy;
-            let payload;
-            let expectedEvent;
-
-            beforeEach(() => {
-                payload = {
-                    action: 'start',
-                    error: null
-                };
-                expectedEvent = {
-                    event: 'Form',
-                    form: {
-                        name: 'checkout_guest',
-                        action: payload.action,
-                        error: null,
-                        autofill: state.autofill,
-                        changes: state.changedFields.toString()
-                    }
-                };
-                mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
-                window.dataLayer = [];
-            });
-
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            describe('when an error is provided', () => {
-                beforeEach(() => {
-                    payload.error = 'postcodeNotDefined';
-                    mapAnalyticsNamesSpy.mockImplementation(() => payload.error);
-                    expectedEvent.form.error = payload.error;
-                });
-
-                it('should call `mapAnalyticsNames` with error', () => {
-                    // Act
-                    trackFormInteraction({ state, rootState }, payload);
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
-
-                it('should `push` expected event to `dataLayer`', () => {
-                    // Act
-                    trackFormInteraction({ state, rootState }, payload);
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
-            });
-
-            describe('when no error is provided', () => {
-                beforeEach(() => {
-                    payload.error = null;
-                    mapAnalyticsNamesSpy.mockImplementation(() => payload.error);
-                    expectedEvent.form.error = payload.error;
-                });
-
-                it('should not call `mapAnalyticsNames`', () => {
-                    // Act
-                    trackFormInteraction({ state, rootState }, payload);
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
-
-                it('should `push` expected event to `dataLayer`', () => {
-                    // Act
-                    trackFormInteraction({ state, rootState }, payload);
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
-            });
-
-            describe('when user `isLoggedIn` is true', () => {
-                it('should set `name` to `checkout`', () => {
-                    // Arrange
-                    const expectedName = 'checkout';
-
-                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
-                    expectedEvent.form.name = expectedName;
-
-                    // Act
-                    trackFormInteraction({ state, rootState }, payload);
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
-            });
-
-            describe('when user `isLoggedIn` is false', () => {
-                it('should set `name` to `checkout_guest`', () => {
-                    // Arrange
-                    const expectedName = 'checkout_guest';
-
-                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
-                    expectedEvent.form.name = expectedName;
-
-                    // Act
-                    trackFormInteraction({ state, rootState }, payload);
-
-                    // Assert
-                    expect(window.dataLayer[0]).toEqual(expectedEvent);
-                });
-            });
-        });
-
-        describe('trackFormErrors ::', () => {
-            const errors = ['error 1'];
-            let getAnalyticsErrorCodeByApiErrorCodeSpy;
-
-            beforeEach(() => {
-                getAnalyticsErrorCodeByApiErrorCodeSpy = jest.spyOn(mapper, 'getAnalyticsErrorCodeByApiErrorCode');
-                getAnalyticsErrorCodeByApiErrorCodeSpy.mockImplementation(() => errors);
-
-                rootState[VUEX_CHECKOUT_MODULE].errors = errors;
-            });
-
-            it('should call `getAnalyticsErrorCodeByApiErrorCode` with each error', () => {
-                // Assert
-                trackFormErrors({ rootState, dispatch });
-
-                // Assert
-                expect(getAnalyticsErrorCodeByApiErrorCodeSpy).toHaveBeenCalled();
-            });
-
-            it('should dispatch `trackFormInteraction` with `start` action', () => {
-                // Assert
-                trackFormErrors({ rootState, dispatch });
-
-                // Assert
-                expect(dispatch).toHaveBeenCalledWith('trackFormInteraction', { action: 'error', error: errors });
-            });
-        });
-
-        describe('trackDialogEvent ::', () => {
-            it.each([
-                ['dialog_duplicate_order_warning', 'DuplicateOrder', true],
-                ['dialog_restaurant_not_taking_orders_error', 'RESTAURANT_NOT_TAKING_ORDERS', false],
-                ['dialog_additional_items_required_error', 'ADDITIONAL_ITEMS_REQUIRED', false]
-            ])('should `push` expected event  with %s `eventAction` to `dataLayer` when error is %s', (eventAction, code, isDuplicateOrderError) => {
-                // Arrange
-                const expected = {
-                    event: 'trackEvent',
-                    eventCategory: 'engagement',
-                    eventAction,
-                    eventLabel: 'view_dialog'
-                };
-
-                // Act
-                trackDialogEvent({}, { code, isDuplicateOrderError });
-
-                // Assert
-                expect(window.dataLayer).toContainEqual(expected);
-            });
-        });
-
-        describe('trackLowValueOrderExperiment ::', () => {
-            it('should `push` low value order event to data layer if it is returned in request header', () => {
-                // Arrange
-                const expected = {
-                    custom: {
-                        experiment: {
-                            id: 'EX-1880',
-                            name: 'low_value_order_phase_2',
-                            platform: 'experiment_api',
-                            variant: {
-                                name: 'test'
-                            },
-                            version: 1
-                        }
-                    },
-                    event: 'trackExperimentV2'
-                };
-
-                const mockedResponseHeaders = {
-                    [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: 'test'
-                };
-
-                // Act
-                trackLowValueOrderExperiment({ rootState, dispatch }, mockedResponseHeaders);
-
-                // Assert
-                expect(window.dataLayer).toContainEqual(expected);
-            });
-
-            it('should not `push` low value order event to data layer if it is not returned in request header', () => {
-                // Arrange
-                const mockedResponseHeaders = {
-                    [HEADER_LOW_VALUE_ORDER_EXPERIMENT]: null
-                };
-
-                // Act
-                trackLowValueOrderExperiment({ rootState, dispatch }, mockedResponseHeaders);
-
-                // Assert
-                expect(window.dataLayer).toEqual([]);
             });
         });
     });
