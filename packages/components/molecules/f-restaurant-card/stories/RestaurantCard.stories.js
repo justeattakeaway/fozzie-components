@@ -6,7 +6,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
 
 export default {
-    title: 'Components/Organisms',
+    title: 'Components/Molecules',
     decorators: [withA11y]
 };
 

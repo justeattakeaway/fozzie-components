@@ -4,7 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-A card component responsible for displaying restaurant data and acting as a link to a restaurant menu
+ Responsible for displaying restaurant data and linking to a restaurant
 
 </div>
 
@@ -69,8 +69,8 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop   | Type    | Required  | Default  | Description |
-| :---   | :---:   | :---:     | :---:    | :---        |
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
 
 ### Events
 
@@ -92,39 +92,35 @@ $ yarn
 Change directory to the `f-restaurant-card` package:
 
 ```sh
-$ cd packages/components/organisms/f-restaurant-card
+$ cd packages/components/molecules/f-restaurant-card
 ```
 
 ## Testing
 
-### Unit, Integration and Contract
-
 To test all components, run from root directory.
-To test only `f-restaurant-card`, run from the `./fozzie-components/packages/components/organisms/f-restaurant-card` directory.
+To test only `f-restaurant-card`, run from the `./fozzie-components/packages/components/molecules/f-restaurant-card` directory.
+
+### Unit and Integration tests
 
 ```sh
 yarn test
 ```
 
-### Component Tests
+### Component and Accessibility Tests
 
 ```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
+# Note: Ensure Storybook is running when running the following commands
 cd ./fozzie-components
 
 yarn storybook:build
 yarn storybook:serve-static
-yarn test-component:chrome
 ```
 
-OR
-
-```bash
-# Run Component tests for f-restaurant-card
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/components/organisms/f-restaurant-card
 yarn test-component:chrome
+```
+### Accessibility tests
+```bash
+yarn test-a11y:chrome
 ```
 ## Documentation to be completed once module is in stable state.
 
