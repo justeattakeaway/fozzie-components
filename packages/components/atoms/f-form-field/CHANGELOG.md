@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.0.0
 ------------------------------
-*September 29, 2021*
+*October 5, 2021*
 
 ### Changed
 - New border radius in line with Icing Phase 2.
