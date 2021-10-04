@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v6.0.0
 ------------------------------
-*October 4, 2021*
+*October 5, 2021*
 
 ### Changed
 - New colour scheme from `pie-design-tokens` in line with icing phase 2.

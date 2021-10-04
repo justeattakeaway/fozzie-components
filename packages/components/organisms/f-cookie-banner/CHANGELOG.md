@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.0.0
 ------------------------------
-*September 28, 2021*
+*October 5, 2021*
 
 ### Changed
 - Updated version of `f-button` and `f-mega-modal` to include icing phase 2 changes.

@@ -2123,13 +2123,6 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-breadcrumbs@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-1.0.0.tgz#fad821e5dd2e8725474466082ccef2053dd25a99"
-  integrity sha512-+BzGqiKZ04qVY5tZ7dWagEQjmyTd9iMUDYgOCwb+oYCyQ/Ry0ye4ONgpNOTDU0naVv4f0zQ5QUqKX6FWXlSlWA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-content-cards@6.0.0-beta.2":
   version "6.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
@@ -2253,13 +2246,6 @@
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
-
-"@justeat/f-tabs@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-1.0.0.tgz#98d4ec17a023f6f074e6d21beca81fec4d118233"
-  integrity sha512-UzwbpD4RZqKlaHq9mgyihwKcT0LZ9Gw3gx3PKRwIaeMsbfaJnsCE32DJZDYWJoHgcL/YnmFyyrxaSOeM48XELQ==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-trak@0.7.1":
   version "0.7.1"
