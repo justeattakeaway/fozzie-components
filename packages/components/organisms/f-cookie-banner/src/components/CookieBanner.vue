@@ -144,7 +144,13 @@ export default {
         shouldUseGreyBackground: {
             type: Boolean,
             default: true
+        },
+
+        shouldAbsolutePositionReopenLink: {
+            type: Boolean,
+            default: true
         }
+
     },
 
     data () {
@@ -198,16 +204,19 @@ export default {
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
 
-        this.bodyObserver = new ResizeObserver(this.updateIsBodyHeightLessThanWindowHeight);
-        const bodyNode = document.documentElement || document.body;
-        this.bodyObserver.observe(bodyNode);
+        if (this.shouldAbsolutePositionReopenLink) {
+            this.bodyObserver = new ResizeObserver(this.updateIsBodyHeightLessThanWindowHeight);
+            const bodyElement = document.documentElement || document.body;
+            this.bodyObserver.observe(bodyElement);
+        }
     },
 
     methods: {
-
+        /**
+         * Triggered by <body> ResizeObserver calculates if the body height less than the window
+         */
         updateIsBodyHeightLessThanWindowHeight () {
-            console.log('***** updateIsBodyHeightLessThanWindowHeight');
-            const ropenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight;
+            const ropenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight || 0;
             this.isBodyHeightLessThanWindowHeight =
                 (window.innerHeight - ropenElementHeight) - document.body.offsetHeight > 0;
         },
@@ -459,7 +468,6 @@ export default {
         position: absolute;
         bottom: 0;
         width: 100%;
-        border: 4px solid hotpink;
     }
 
     @include media ('<mid') {

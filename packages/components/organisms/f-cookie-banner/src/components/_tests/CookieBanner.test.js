@@ -2,21 +2,27 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import CookieHelper from 'js-cookie';
 import CookieBanner from '../CookieBanner.vue';
 
-const resizeObserverMock = jest.fn(function ResizeObserver (callback) {
-    this.observe = jest.fn();
-    this.disconnect = jest.fn();
-    this.trigger = () => {
-        callback('', this);
-    };
-});
-global.ResizeObserver = resizeObserverMock;
-
 const localVue = createLocalVue();
 const i18n = {
     locale: 'en-IE'
 };
 
 describe('CookieBanner', () => {
+    beforeEach(() => {
+        const resizeObserverMock = jest.fn(function ResizeObserver (callback) {
+            this.observe = jest.fn();
+            this.disconnect = jest.fn();
+            this.trigger = () => {
+                callback('', this);
+            };
+        });
+        global.ResizeObserver = resizeObserverMock;
+    });
+
+    afterEach(() => {
+        global.ResizeObserver = undefined;
+    });
+
     describe('components', () => {
         it('should be defined', () => {
             // Arrange
@@ -32,38 +38,113 @@ describe('CookieBanner', () => {
             // Assert
             expect(wrapper.exists()).toBe(true);
         });
-    });
 
-    describe('ResizeObserver', () => {
-        it('should call ResizeObserver.observe to watch for body resize', () => {
-            // Arrange
-            const propsData = {};
+        describe('mounted:: ', () => {
+            it('should not create ResizeObserver when shouldAbsolutePositionReopenLink prop is false', () => {
+                // Arrange
+                const propsData = { shouldAbsolutePositionReopenLink: false };
 
-            // Act
-            shallowMount(CookieBanner, {
-                localVue,
-                i18n,
-                propsData
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.bodyObserver).toBe(undefined);
             });
-            const [observerInstance] = ResizeObserver.mock.instances;
 
-            const mockBodyHTMLHtmlElement = document.createElement('html');
-            mockBodyHTMLHtmlElement.innerHTML = '<head /><body/>';
+            it('should create ResizeObserver and call observe to watch for body resize', () => {
+                // Arrange
+                const propsData = {};
 
-            // Assert
-            expect(observerInstance.observe).toHaveBeenCalledTimes(1);
-            expect(observerInstance.observe).toHaveBeenCalledWith(expect.any(HTMLHtmlElement));
-            expect(observerInstance.observe).toHaveBeenCalledWith(mockBodyHTMLHtmlElement);
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
 
-            // observerInstance.trigger();
-        });
+                const mockBodyHTMLHtmlElement = document.createElement('html');
+                mockBodyHTMLHtmlElement.innerHTML = '<head /><body/>';
 
-        it.skip('should call updateIsBodyHeightLessThanWindowHeight() when ResizeObserver.observe is triggered', () => {
-
+                // Assert
+                expect(wrapper.vm.bodyObserver.observe).toHaveBeenCalledTimes(1);
+                expect(wrapper.vm.bodyObserver.observe).toHaveBeenCalledWith(expect.any(HTMLHtmlElement));
+                expect(wrapper.vm.bodyObserver.observe).toHaveBeenCalledWith(mockBodyHTMLHtmlElement);
+            });
         });
     });
 
     describe('methods', () => {
+        describe('updateIsBodyHeightLessThanWindowHeight', () => {
+            let offsetHeightSpy;
+
+            beforeEach(() => {
+                offsetHeightSpy = jest.spyOn(document.body, 'offsetHeight', 'get');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+                delete window.innerHeight;
+            });
+
+            it('should return false when the body height is greater than window.innerHeight', () => {
+                // Arrange
+                const propsData = {};
+                window.innerHeight = 900;
+                offsetHeightSpy.mockImplementation(() => 1000);
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+                wrapper.vm.updateIsBodyHeightLessThanWindowHeight();
+
+                // Assert
+                expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBeFalsy();
+            });
+
+            it('should return true when the body height is less than window.innerHeight', () => {
+                // Arrange
+                const propsData = {};
+                offsetHeightSpy.mockImplementation(() => 350);
+                window.innerHeight = 9999;
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+                wrapper.vm.updateIsBodyHeightLessThanWindowHeight();
+
+                // Assert
+                expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBeTruthy();
+            });
+
+            it('should be called when ResizeObserver.observe is triggered', () => {
+                // Arrange
+                const propsData = {};
+                const spyMethod = jest.spyOn(CookieBanner.methods, 'updateIsBodyHeightLessThanWindowHeight');
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+
+                wrapper.vm.bodyObserver.trigger();
+
+                // Assert
+                expect(spyMethod).toBeCalled();
+            });
+        });
+
         describe('isNotExcluded', () => {
             it.each([
                 [false, 'je-location'],
