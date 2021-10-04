@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.8.0
 ------------------------------
+*October 04, 2021*
+
+### Added
+- Terms component
+- Unit tests for the component
+
+
+v0.8.0
+------------------------------
 *October 07, 2021*
 
 ### Added
