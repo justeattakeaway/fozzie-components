@@ -2200,13 +2200,6 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-popover@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-1.0.0.tgz#f4e0c31dece638a5ed4fdecb38d1dea536e79731"
-  integrity sha512-5MQRHwAApRnCdmc86OAgFDBhoNmjYZ2gAB2hZDkK1sSEiS7dxIDTvs+rINTggx9ilsTBwPOBAxpsMZm0OkllIw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-searchbox@5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.1.0.tgz#11d2242bab6c5bef5783392055a0b5f1c58e9adc"
