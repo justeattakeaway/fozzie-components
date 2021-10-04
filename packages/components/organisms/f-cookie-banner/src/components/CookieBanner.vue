@@ -190,6 +190,7 @@ export default {
             this.shouldHideBanner = !!newVal;
         }
     },
+
     destroyed () {
         this.bodyObserver.disconnect();
     },
@@ -216,9 +217,11 @@ export default {
          * Triggered by <body> ResizeObserver calculates if the body height less than the window
          */
         updateIsBodyHeightLessThanWindowHeight () {
-            const ropenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight || 0;
-            this.isBodyHeightLessThanWindowHeight =
-                (window.innerHeight - ropenElementHeight) - document.body.offsetHeight > 0;
+            if (typeof window === 'object') {
+                const reopenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight || 0;
+                this.isBodyHeightLessThanWindowHeight =
+                (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
+            }
         },
 
         /**
