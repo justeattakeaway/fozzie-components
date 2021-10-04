@@ -3,17 +3,11 @@
         <a
             :class="$style['c-loyalty-terms-link']"
             data-test-id="terms-and-conditions"
-            :href="parent.$t('termsUrl')">
-            {{ parent.$t("termsText") }}
+            :href="props.termsUrl">
+            {{ props.termsText }}
         </a>
     </div>
 </template>
-
-<script>
-export default {
-    name: 'StampCardsTerms'
-};
-</script>
 
 <style lang="scss" module>
 .c-loyalty-terms {

@@ -26,7 +26,10 @@ describe('Terms.vue', () => {
         components: {
             Terms
         },
-        template: '<div><terms /></div>'
+        template: `
+            <div>
+                <terms :terms-url="$t('termsUrl')" :terms-text="$t('termsText')" />
+            </div>`
     };
 
     const i18n = {
@@ -49,7 +52,7 @@ describe('Terms.vue', () => {
     it.each([
         'en-GB',
         'en-AU'
-    ])('should render the terms url in the href attribute', key => {
+    ])('should render the correct text for the link', key => {
         // Act
         const link = wrapper.find('[data-test-id="terms-and-conditions"]');
 
@@ -60,7 +63,7 @@ describe('Terms.vue', () => {
     it.each([
         'en-GB',
         'en-AU'
-    ])('should render the correct text for the link', key => {
+    ])('should render the terms url in the href attribute', key => {
         // Act
         const link = wrapper.find('[data-test-id="terms-and-conditions"]');
         const href = link.attributes('href');
