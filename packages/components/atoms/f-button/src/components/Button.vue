@@ -612,7 +612,8 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         }
     }
 
-    &.o-btn--ghost {
+    &.o-btn--ghost,
+    &.o-btn--inverse {
         path {
             fill: $color-content-interactive-brand;
         }
@@ -624,8 +625,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         }
     }
 
-    &.o-btn--ghost,
-    &.o-btn--ghostTertiary {
+    &.o-btn--inverse {
         background-color: $color-interactive-inverse; // for icon button to have a white background when it is located on top of images/dark surfaces
 
         &:hover {
@@ -634,6 +634,22 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
         &:active {
             background-color: $btn-ghost-bgColor--active;
+        }
+    }
+
+    &.o-btn--ghostInverse {
+        path {
+            fill: $color-content-inverse;
+        }
+
+        background-color: $btn-ghost-bgColor;
+
+        &:hover {
+            background-color: lighten($color-black, $color-hover-02);
+        }
+
+        &:active {
+            background-color: lighten($color-black, $color-active-02);
         }
     }
 

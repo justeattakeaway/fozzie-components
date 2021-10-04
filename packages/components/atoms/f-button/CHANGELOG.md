@@ -6,13 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.0.0
 ------------------------------
-*September 29, 2021*
+*October 04, 2021*
 
 ### Changed
 - New colour scheme and border radius in line with Icing Phase 2.
 
 ### Removed
 - Font-family declaration from the button styles as we have one font for the whole site and there is no need in declaring it on button level.
+
+### Added
+- `inverse` and `ghostInverse` props for icon buttons
 
 
 v2.0.0
