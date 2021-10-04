@@ -207,6 +207,10 @@ html:global(.is-navInView) {
             top: 0;
         }
     }
+
+    @include media('>mid') {
+        border-radius: 0 0 $radius-rounded-d $radius-rounded-d;
+    }
 }
 
     // Adds a border to the header to separate it from the

@@ -10,8 +10,8 @@ v7.0.0
 
 ### Changed
 - `$color-support-brand` pie value to `$color-support-brand-01` in line with icing phase 2.
-- New colour scheme from `pie-design-tokens` in line with icing phase 2.
-Note: This version doesn't contain all the style changes for icing phase 2. More changes will come in the later version.
+- New colour scheme and border-radius from `pie-design-tokens` in line with icing phase 2.
+- Updated version of `f-button` and `f-popover`.
 
 
 v6.0.0
