@@ -4,11 +4,15 @@ const { getLanguageForTenant } = require('../configuration/tenants');
 module.exports = class BasketServiceApi {
     constructor (configuration) {
         this.basketUrl = configuration.services.basket.baseAddress;
+        this.recommendedBasketUrl = configuration.services.basket.recommendedBasket;
         this.tenant = configuration.tenant;
         this.postcode = configuration.services.search.postcode;
     }
 
     async createBasketForUserAsync (basketInfo, timeout = 5000) {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -20,20 +24,22 @@ module.exports = class BasketServiceApi {
         };
 
         const data = {
-            Deals: [],
-            MenuGroupId: basketInfo.menuId,
-            OrderDetails: {
-                Location: {
-                    GeoLocation: {
-                        Latitude: 0,
-                        Longitude: 0
-                    },
-                    ZipCode: this.postcode
+            restaurantSeoName: basketInfo.restaurantSEO,
+            menuGroupId: basketInfo.menuId,
+            serviceType: basketInfo.serviceType,
+            orderDetails: {
+                location: {
+                    zipCode: this.postcode
                 }
             },
-            Products: [],
-            RestaurantSeoName: basketInfo.restaurantSEO,
-            ServiceType: basketInfo.serviceType
+            products: [{
+                date: today.toISOString(),
+                productId: basketInfo.productId,
+                quantity: 2,
+                modifierGroups: [],
+                dealGroups: []
+            }],
+            deals: []
         };
 
         return axios.post(`${this.basketUrl}`, data, config)
