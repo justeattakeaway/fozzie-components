@@ -1,6 +1,7 @@
 
 @import './common';
 
+$search-button-bgColor: $color-interactive-brand;
 $search-height-small: 56px;
 $search-height-mid: 60px;
 
@@ -9,7 +10,7 @@ $search-height-mid: 60px;
 .c-search-placeholder {
     position: absolute;
     top: spacing();
-    left: 27px;
+    left: spacing(x2);
     text-align: left;
     transition: all 0.3s;
     cursor: text;
@@ -43,7 +44,7 @@ $search-height-mid: 60px;
     width: 100%;
     align-items: center;
     height: $search-height-small;
-    border-radius: $radius-rounded-e 0 0 $radius-rounded-e;
+    border-radius: $border-radius 0 0 $border-radius;
     @include font-size(body-s, false);
     font-weight: $font-weight-regular;
     line-height: 1.3;
@@ -71,7 +72,7 @@ $search-height-mid: 60px;
 
 .c-search-input {
     box-sizing: border-box;
-    padding: 28px 27px 10px;
+    padding: 28px spacing(x2) spacing();
     width: 100%;
     font-weight: $font-weight-bold;
     height: $search-height-small;
