@@ -1,1 +1,1 @@
-export const COMPONENT = '[data-test-id="restaurantCard"]';
+export const COMPONENT = '[data-test-id="restaurantCard-component"]';
