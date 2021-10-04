@@ -1,9 +1,17 @@
+const { buildUrl } = require('./storybook-extensions');
+
 class Page {
     constructor (componentType, componentName) {
         this.title = 'Component URLS';
         this.componentType = componentType;
         this.componentName = componentName;
         this.path = '';
+    }
+
+    load (component) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+        this.waitForComponent(component);
     }
 
     open (url) {

@@ -13,7 +13,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
             .withQuery('&knob-Get Checkout Errors', '500')
 
         // Act
-        checkout.load('error');
+        checkout.loadError();
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout" Error Page', 'mobile');
@@ -28,7 +28,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
             .withQuery('&knob-Get Checkout Errors', '403')
 
         // Act
-        checkout.load('error');
+        checkout.loadError();
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'mobile');

@@ -156,6 +156,10 @@ const defaultState = {
     hasAsapSelected: false
 };
 
+const analyticsService = {
+    trackLowValueOrderExperiment: jest.fn()
+};
+
 let state = CheckoutModule.state();
 
 describe('CheckoutModule', () => {
@@ -883,6 +887,8 @@ describe('CheckoutModule', () => {
                 payload.data = {
                     mobileNumber
                 };
+
+                payload.analyticsService = analyticsService;
 
                 checkoutApi.updateCheckout = jest.fn(() => Promise.resolve({
                     status: 200,
