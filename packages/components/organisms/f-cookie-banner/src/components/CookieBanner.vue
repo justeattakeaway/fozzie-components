@@ -217,7 +217,7 @@ export default {
          * Triggered by <body> ResizeObserver calculates if the body height less than the window
          */
         updateIsBodyHeightLessThanWindowHeight () {
-            if (typeof window === 'object') {
+            if (typeof window === 'object' && this.shouldHideBanner) {
                 const reopenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight || 0;
                 this.isBodyHeightLessThanWindowHeight =
                 (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;

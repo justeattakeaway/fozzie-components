@@ -90,7 +90,7 @@ describe('CookieBanner', () => {
                 delete window.innerHeight;
             });
 
-            it('should return false when the body height is greater than window.innerHeight', () => {
+            it('should return false when the body height is greater than window.innerHeight', async () => {
                 // Arrange
                 const propsData = {};
                 window.innerHeight = 900;
@@ -102,15 +102,17 @@ describe('CookieBanner', () => {
                     i18n,
                     propsData
                 });
+                await wrapper.setData({ shouldHideBanner: true });
                 wrapper.vm.updateIsBodyHeightLessThanWindowHeight();
 
                 // Assert
                 expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBeFalsy();
             });
 
-            it('should return true when the body height is less than window.innerHeight', () => {
+            it('should return true when the body height is less than window.innerHeight', async () => {
                 // Arrange
-                const propsData = {};
+                const propsData = { isHidden: true };
+
                 offsetHeightSpy.mockImplementation(() => 350);
                 window.innerHeight = 9999;
 
@@ -120,13 +122,14 @@ describe('CookieBanner', () => {
                     i18n,
                     propsData
                 });
+                await wrapper.setData({ shouldHideBanner: true });
                 wrapper.vm.updateIsBodyHeightLessThanWindowHeight();
 
                 // Assert
                 expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBeTruthy();
             });
 
-            it('should be called when ResizeObserver.observe is triggered', () => {
+            it('should be called when ResizeObserver.observe is triggered', async () => {
                 // Arrange
                 const propsData = {};
                 const spyMethod = jest.spyOn(CookieBanner.methods, 'updateIsBodyHeightLessThanWindowHeight');
@@ -137,7 +140,7 @@ describe('CookieBanner', () => {
                     i18n,
                     propsData
                 });
-
+                await wrapper.setData({ shouldHideBanner: true });
                 wrapper.vm.bodyObserver.trigger();
 
                 // Assert
