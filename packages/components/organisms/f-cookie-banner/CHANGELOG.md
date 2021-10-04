@@ -8,7 +8,7 @@ v2.2.2
 *October 02, 2021*
 
 ### Fixed
-- Reopen link positioning bug by adding and using a ResizeObserver. This ensures body content changes ouside of f-cookie-banner and recalculate if the link should be absolutely positioned.
+- Reopen link positioning bug by adding and using a ResizeObserver. This ensures body content changes ouside of f-cookie-banner and recalculates if the link should be absolutely positioned.
 
 ### Added
 - New prop `shouldAbsolutePositionReopenLink` so teams or 3rd parties using this component can disable the re-open link absolute positioning
