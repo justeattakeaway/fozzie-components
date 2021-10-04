@@ -1,5 +1,4 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const {
     USER_MESSAGE_COMPONENT,
     USER_MESSAGE_CONTENT
@@ -14,9 +13,7 @@ module.exports = class UserMessage extends Page {
     get content () { return this.component.$(USER_MESSAGE_CONTENT) }
 
     load () {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
-        this.open(pageUrl);
-        this.waitForComponent();
+        super.load(this.component);
     }
 
     waitForComponent () {

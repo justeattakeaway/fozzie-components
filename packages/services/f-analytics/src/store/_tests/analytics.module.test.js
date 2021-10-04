@@ -26,7 +26,8 @@ describe('Analytics Module ::', () => {
 
     it('should create default state when initialised.', () => {
         // Assert
-        expect(analyticsModule.state()).toEqual(defaultState);
+        const actualState = analyticsModule.state();
+        expect(actualState).toEqual(defaultState);
     });
 
     describe('actions ::', () => {

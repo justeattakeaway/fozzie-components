@@ -1,5 +1,4 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { COMPONENT } = require('./f-offers-selectors');
 
 module.exports = class Offers extends Page {
@@ -10,10 +9,7 @@ module.exports = class Offers extends Page {
     get component () { return $(COMPONENT); }
 
     load () {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
-
-        this.open(pageUrl);
-        this.waitForComponent();
+        super.load(this.component);
     }
 
     open (url) {

@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Button = require('../../test-utils/component-objects/f-button.component');
 
 let button;
