@@ -60,7 +60,7 @@ const mapAnonymousUserId = req => {
  *
  * @param {object} platformData - A reference to the current PlatformData instance
  * @param {object} req - The `request` context
- * @return {object} new serverSidePlatformData object
+ * @return {object} new platformData object
  */
 export const mapServerSidePlatformData = ({ platformData, req } = {}) => {
     const userPercent = getCookie('je-user_percentage', req);

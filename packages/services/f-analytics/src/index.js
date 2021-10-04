@@ -4,8 +4,6 @@
  * @module f-analytics
  */
 
-import AnalyticsPlugin from './plugins/analytics.plugin';
+import AnalyticsService from './services/analytics.service';
 
-const AnalyticsModule = { AnalyticsPlugin };
-
-export default AnalyticsModule;
+export default AnalyticsService;
