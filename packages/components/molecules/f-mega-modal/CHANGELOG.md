@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.0.0
 ------------------------------
-*September 29, 2021*
+*October 5, 2021*
 
 ### Changed
 - Updated version of `f-button`.
 - New border radius from `pie-design-tokens` in line with icing phase 2.
+- Close button type from `ghostTertiary` to `iverse`.
 
 
 v2.0.0

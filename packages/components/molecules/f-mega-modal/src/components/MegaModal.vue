@@ -34,7 +34,7 @@
                         :class="[$style['c-megaModal-closeBtn'], {
                             [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                         }]"
-                        button-type="ghostTertiary"
+                        button-type="inverse"
                         button-size="xsmall"
                         data-test-id="close-modal"
                         @click.native="close">
