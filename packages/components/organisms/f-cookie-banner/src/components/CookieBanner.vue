@@ -235,6 +235,7 @@ export default {
                 this.resendEvents();
                 this.dispatchCustomEvent();
                 this.hideAllBanners();
+                this.updateIsBodyHeightLessThanWindowHeight();
             });
         },
 
@@ -250,6 +251,7 @@ export default {
                 this.removeUnnecessaryCookies();
                 this.dispatchCustomEvent();
                 this.hideAllBanners();
+                this.updateIsBodyHeightLessThanWindowHeight();
             });
         },
 
