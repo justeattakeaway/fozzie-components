@@ -35,7 +35,7 @@ module.exports = class BasketServiceApi {
             products: [{
                 date: today.toISOString(),
                 productId: basketInfo.productId,
-                quantity: 2,
+                quantity: 20,
                 modifierGroups: [],
                 dealGroups: []
             }],
