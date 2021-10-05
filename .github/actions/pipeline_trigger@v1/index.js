@@ -14,19 +14,16 @@ try {
     const { ref } = github.context;
     const { owner, repo } = github.context.repo;
 
-    // Remove `refs/` from the start of the ref (if it's present) to trigger correct PR build
-    const payload = {
-        ...(ref.indexOf(REF_PREFIX) > -1 ? {
-            branch: ref.slice(REF_PREFIX.length) // trim prefix
-        } : {})
-    };
+    let branch = ref.replace(REF_PREFIX, ''); // Remove `refs/` from the start of the ref (if it's present) to trigger correct PR build
+    let branch = branch.replace('/merge', '/head');
 
-    core.info(`Running build for branch ${payload.branch}`);
+    core.info(`Running build for branch ${branch}`);
 
     // Authenticate using secret from action input
     const headers = {
         'Circle-Token': core.getInput('CIRCLE_CI_TOKEN')
     };
+    const payload = { branch };
     const options = { headers };
 
     axios.post(`${CIRCLECI_API_URL}/${owner}/${repo}/pipeline`, payload, options)
