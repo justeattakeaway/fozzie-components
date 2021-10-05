@@ -1,7 +1,7 @@
 <template>
     <div
         :class="$style['c-restaurantCard']"
-        data-test-id="restaurantCard">
+        data-test-id="restaurantCard-component">
         I am a RestaurantCard Component (GB)
     </div>
 </template>
