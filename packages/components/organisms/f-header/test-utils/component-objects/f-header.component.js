@@ -1,5 +1,4 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const {
     HEADER_COMPONENT,
     HEADER_LOGO,
@@ -48,9 +47,7 @@ module.exports = class Header extends Page {
     }
 
     load () {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
-        this.open(pageUrl);
-        this.waitForComponent();
+        super.load(this.component);
     }
 
     open (url) {

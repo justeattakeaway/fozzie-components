@@ -46,8 +46,8 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
 *  <strong>Import & Register</strong>
 
-    F-Analytics is a 'Nuxt - Plugin' that needs to be registered in the "nuxt.config.js" but as it is contained in a fozzie service you need to create a local plugin to reference the external plugin, which then allows you to pass in options (see the <a href="#options">_`Options`_</a> section).<br><br>
-    In the example below it demonstrates how to create a local plugin that references the `f-analytics` plugin, and how you can create the `options` to pass into the plugin;
+    F-Analytics is a simple class that performs various steps in the constructor during initialisation to prepare the service for use.  To allow all of it's functionality to be available it is best to be declared/instantiated as a 'Nuxt - Plugin' and exposed as a global varible so it can be widely used without keep declaring and instantiating it.  Once declared as a 'Nuxt - Plugin' it needs to be registered in the "nuxt.config.js".  When instantiating the service it allows you to pass in options (see the <a href="#options">_`Options`_</a> section) that allow you to configure some of the static values that may need to change in your environment. Note when naming the 'Nuxt - Plugin' it needs to be run both client side and server side so do not include the terms client or server in the name of the new plugin<br><br>
+    In the example below it demonstrates how to declare and instantiate the `f-analytics` service in a plugin, and how you can create the `options` to pass into the service;
 
 
     _./plugins/f.analytics.plugin.js_
@@ -56,17 +56,20 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
     export default (context, inject) => {
 
+      const { store, req } = context;
       const options = {
         featureName: 'checkout-web',
         locale: 'en-GB',
         id: 'GTM-ABC123X'
       };
 
-      AnalyticsModule.AnalyticsPlugin(context, inject, options);
+      const service = new AnalyticService(store, req, options);
+
+      inject(service.getOptions().globalVarName, service); // Use the default global variable name
     };
     ```
 
-    Then, finally, you need to register the local plugin you have just created in the nuxt config, see below;
+    Then, finally, you need to register the plugin you have just created in the nuxt config, see below;
 
     _./nuxt.config.js_
     ```js
@@ -107,7 +110,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
       This will be the model constructed and pushed to the `datalayer` (handy for testing and debugging)<br>
       #### **Notes**
       This is ideally only called **once** per page so it is best suited at parent of the page component.<br>
-      It gathers most of its data clientside and so needs to be executed in **`mounted`** vue hook.<br>
+      It gathers most of its data clientside and so needs to be executed in **`beforeMount`** vue hook.<br>
       Some of the data it needs can only be read serverside but this has already been gathered at the point the plugin was registered and then store internally until this method is executed.
       #### **Example**
       _./pages/checkout/index.vue_
@@ -210,6 +213,17 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
       If working in on a SPA site and you want to change the feature name everytime the active page changes then use this method to override the featureName at the same time so all subsequent analytics contain the correct featureName. You may also need to change the current active locale and as such you will need to use this method to reset the locale at the same time so all subsequent analytics contain the correct data.</br>Note that this method will persist the value/s until this method is called again or the plugin is re-registered.
       ___
       <br>
+    - ### **`getOptions()`**<br>
+      Gets the current `Option` values<br>
+      #### **Syntax**.
+      > this.`$gtm`.**getOptions**();
+      #### **Return value**.
+      > (**object**) `options` model
+
+      This will be the current `Options` model.
+      ___
+      <br>
+
     - ### **`pushEvent()`**<br>
       Pushes the given event object to the `dataLayer`<br>
       #### **Syntax**.
