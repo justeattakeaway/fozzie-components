@@ -1,6 +1,18 @@
-/* eslint-disable quote-props */
 import Vuex from 'vuex';
 import Vue from 'vue';
+
+const newEvent = {
+    event: 'jazzy',
+    experiment: {
+        id: 'EX-1234',
+        name: 'Some very special experiment',
+        platform: 'experiment_api',
+        variant: {
+            name: 'increase_a'
+        },
+        version: 1
+    }
+};
 
 const defaultState = {
     platformData: {
@@ -60,27 +72,19 @@ const modifiedState = {
         httpStatusCode: 200,
         conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
         orientation: 'Landscape'
-    }
-};
-
-const newEvent = {
-    event: 'jazzy',
-    experiment: {
-        id: 'EX-1234',
-        name: 'Some very special experiment',
-        platform: 'experiment_api',
-        variant: {
-            name: 'increase_a'
-        },
-        version: 1
-    }
+    },
+    events: [newEvent]
 };
 
 const options = {
     namespace: 'f-analytics',
+    globalVarName: 'gtm',
     featureName: 'test-feature-name',
     locale: 'en-GB',
-    id: 'GTM-0000000'
+    id: 'GTM-0000000',
+    auth: undefined,
+    preview: undefined,
+    cookiesWin: undefined
 };
 
 const defaultActions = {
@@ -100,7 +104,7 @@ const defaultMutations = {
 
 const createStore = ({
     name = options.namespace,
-    state = defaultState,
+    state = {},
     actions = defaultActions,
     getters = defaultGetters,
     mutations = defaultMutations

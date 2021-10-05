@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v6.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- New colour scheme from `pie-design-tokens` in line with icing phase 2.
+
+
+v5.0.1
+------------------------------
+*September 30, 2021*
+
+### Added
+- Add link to "Gender Pay Gap 2019-2021" report for UK
+
+
 v5.0.0
 ------------------------------
 *September 15, 2021*
@@ -20,6 +36,7 @@ v5.0.0-beta.0
 
 ### Updated
 - New font JETSansDigital
+
 
 v4.30.0
 ------------------------------

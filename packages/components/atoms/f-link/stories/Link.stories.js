@@ -1,6 +1,4 @@
-import {
-    withKnobs, text, boolean, select
-} from '@storybook/addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VLink from '../src/components/Link.vue';
 
@@ -14,7 +12,7 @@ export const VLinkComponent = () => ({
     data () {
         return {
             dataTestId: 'link-component'
-        }
+        };
     },
     props: {
         isExternalSite: {
@@ -39,11 +37,14 @@ export const VLinkComponent = () => ({
 
         noLineBreak: {
             default: boolean('noLineBreak', false)
+        },
+        isDistinct: {
+            default: boolean('isDistinct', false)
         }
     },
 
     computed: {
-        target() {
+        target () {
             return this.opensInNewLocation ? '_blank' : null;
         }
     },
@@ -56,7 +57,8 @@ export const VLinkComponent = () => ({
                     :is-full-width="isFullWidth"
                     :no-line-break="noLineBreak"
                     :is-external-site="isExternalSite"
-                    :target="target">
+                    :target="target"
+                    :isDistinct="isDistinct">
                     <span>This is a Link</span>
                 </v-link>`
 });

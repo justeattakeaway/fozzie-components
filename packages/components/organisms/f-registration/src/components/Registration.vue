@@ -3,7 +3,6 @@
         <card-component
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
-            is-rounded
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="registration-component"
@@ -19,6 +18,7 @@
                 @click="visitLoginPage">
                 <v-link
                     is-bold
+                    is-distinct
                     :href="loginUrl">
                     {{ copy.navLinks.login.text }}
                 </v-link>
@@ -142,6 +142,7 @@
                 {{ copy.navLinks.termsAndConditions.prefix }}
                 <v-link
                     is-bold
+                    is-distinct
                     data-test-id="ts-and-cs-link"
                     :href="copy.navLinks.termsAndConditions.url"
                     target="_blank">
@@ -150,6 +151,7 @@
                 {{ copy.navLinks.privacyPolicy.prefix }}
                 <v-link
                     is-bold
+                    is-distinct
                     data-test-id="privacy-policy-link"
                     :href="copy.navLinks.privacyPolicy.url"
                     target="_blank">
@@ -158,6 +160,7 @@
                 {{ copy.navLinks.cookiesPolicy.prefix }}
                 <v-link
                     is-bold
+                    is-distinct
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
                     target="_blank">

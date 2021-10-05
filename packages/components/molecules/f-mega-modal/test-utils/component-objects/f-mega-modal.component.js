@@ -1,5 +1,4 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 module.exports = class MegaModal extends Page {
     constructor() {
@@ -11,9 +10,7 @@ module.exports = class MegaModal extends Page {
     get megaModalContent () { return $('[data-test-id="mega-modal-content"]'); }
 
     load () {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
-        this.open(pageUrl);
-        this.waitForComponent();
+        super.load(this.component);
     }
 
     open (url) {

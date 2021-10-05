@@ -8,8 +8,6 @@ const platformData = {
     name: 'storybook',
     appType: 'web',
     applicationId: 7,
-    userAgent: undefined,
-    branding: undefined,
     country: undefined,
     language: undefined,
     jeUserPercentage: undefined,
@@ -29,13 +27,10 @@ const userData = {
 };
 
 const pageData = {
-    group: 'storybook',
     name: undefined,
     httpStatusCode: 200,
     conversationId: undefined,
-    requestId: undefined,
-    orientation: undefined,
-    display: undefined
+    orientation: undefined
 };
 
 // Just placeholder for Storybook to use in place of the global `$gtm`
@@ -61,10 +56,10 @@ export default () => {
             console.log('pushUserData', { userData: { ...data } });
         },
         pushPageData: ({
-            pageName, requestId, httpStatusCode, customFields
+            pageName, httpStatusCode, customFields
         } = {}) => {
             let data = {
-                ...pageData, name: pageName, requestId, httpStatusCode
+                ...pageData, name: pageName, httpStatusCode
             };
             if (customFields) {
                 data = { ...data, ...customFields };

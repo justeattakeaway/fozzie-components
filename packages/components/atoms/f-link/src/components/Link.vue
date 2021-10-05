@@ -6,7 +6,8 @@
                     [$style['o-link--bold']]: isBold,
                     [$style['o-link--noDecoration']]: !hasTextDecoration,
                     [$style['o-link--full']]: isFullWidth,
-                    [$style['o-link--noBreak']]: noLineBreak
+                    [$style['o-link--noBreak']]: noLineBreak,
+                    [$style['o-link--distinct']]: isDistinct
                 }]"
             data-test-id="link-component"
             :aria-describedby="descriptionId"
@@ -53,6 +54,11 @@ export default {
         },
 
         noLineBreak: {
+            type: Boolean,
+            default: false
+        },
+
+        isDistinct: {
             type: Boolean,
             default: false
         }
@@ -134,5 +140,18 @@ export default {
 
 .o-link--noBreak {
     white-space: nowrap;
+}
+
+.o-link--distinct {
+    color: $color-content-link-distinct;
+
+    &:hover,
+    &:focus {
+        color: darken($color-content-link-distinct, $color-hover-01);
+    }
+
+    &:active {
+        color: darken($color-content-link-distinct, $color-active-01);
+    }
 }
 </style>
