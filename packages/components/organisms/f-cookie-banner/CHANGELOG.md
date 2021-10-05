@@ -14,6 +14,14 @@ v2.3.0
 - New prop `shouldAbsolutePositionReopenLink` so teams or 3rd parties using this component can disable the re-open link absolute positioning
 
 
+v3.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button` and `f-mega-modal` to include icing phase 2 changes.
+
+
 v2.2.1
 ------------------------------
 *September 27, 2021*
