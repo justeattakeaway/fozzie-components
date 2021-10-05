@@ -114,7 +114,7 @@ export default {
 
 <style lang="scss" module>
 
-$alert-borderRadius: $border-radius;
+$alert-borderRadius: $radius-rounded-c;
 
 .c-alert {
     position: relative;
@@ -122,14 +122,11 @@ $alert-borderRadius: $border-radius;
     padding-bottom: spacing(x1.5);
     margin-top: spacing(x2);
     border: 0;
+    border-radius: $alert-borderRadius;
 }
     .c-alert-headingContainer {
         display: flex;
         padding: spacing(x0.5) 0 0;
-    }
-
-    .c-alert--rounded {
-        border-radius: $alert-borderRadius;
     }
 
     .c-alert--success {
