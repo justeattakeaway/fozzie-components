@@ -13620,7 +13620,7 @@ try {
         } : {})
     };
 
-    core.info(`Ref is: ${ref}. Branch is: ${payload.branch}`);
+    core.info(`Running build for branch ${payload.branch}`);
 
     // Authenticate using secret from action input
     const headers = {
