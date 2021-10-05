@@ -10,7 +10,7 @@ const REF_PREFIX = 'refs/';
 try {
     // `ref` should have the form `refs/pull/<PR number>/merge` https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request
     const { ref } = github.context;
-    core.debug(`github.context.ref: ${ref}`);
+    core.info(`github.context.ref: ${ref}`);
 
     const { owner, repo } = github.context.repo;
 
@@ -21,7 +21,7 @@ try {
         } : {})
     };
 
-    core.debug(`payload.branch: ${payload.branch}`);
+    core.info(`payload.branch: ${payload.branch}`);
 
     // Authenticate using secret from action input
     const headers = {
