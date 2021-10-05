@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/prefer-default-export
 export const VALID_BUTTON_TYPES = {
-    iconButton: ['primary', 'secondary', 'ghost', 'ghostTertiary'],
+    iconButton: ['primary', 'secondary', 'ghost', 'ghostTertiary', 'inverse', 'ghostInverse'],
     button: ['primary', 'secondary', 'outline', 'ghost', 'link']
 };
 
