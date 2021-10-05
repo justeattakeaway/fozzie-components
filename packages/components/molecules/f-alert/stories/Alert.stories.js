@@ -27,7 +27,6 @@ export const AlertComponent = () => ({
     template: `
     <vue-card
         locale="en-GB"
-        is-rounded
         has-outline
         is-page-content-wrapper>
         <f-alert

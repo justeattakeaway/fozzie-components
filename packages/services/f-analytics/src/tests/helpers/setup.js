@@ -1,6 +1,18 @@
-/* eslint-disable quote-props */
 import Vuex from 'vuex';
 import Vue from 'vue';
+
+const newEvent = {
+    event: 'jazzy',
+    experiment: {
+        id: 'EX-1234',
+        name: 'Some very special experiment',
+        platform: 'experiment_api',
+        variant: {
+            name: 'increase_a'
+        },
+        version: 1
+    }
+};
 
 const defaultState = {
     platformData: {
@@ -8,8 +20,6 @@ const defaultState = {
         name: undefined,
         appType: undefined,
         applicationId: undefined,
-        userAgent: undefined,
-        branding: undefined,
         country: undefined,
         language: undefined,
         jeUserPercentage: undefined,
@@ -27,13 +37,10 @@ const defaultState = {
         signupDate: undefined
     },
     pageData: {
-        group: undefined,
         name: undefined,
         httpStatusCode: 200,
         conversationId: undefined,
-        requestId: undefined,
-        orientation: undefined,
-        display: undefined
+        orientation: undefined
     },
     events: []
 };
@@ -44,8 +51,6 @@ const modifiedState = {
         name: 'test-name',
         appType: 'test-appType',
         applicationId: 9,
-        userAgent: 'test-userAgent',
-        branding: 'test-branding',
         country: 'zu',
         language: 'ze',
         jeUserPercentage: 88,
@@ -64,33 +69,22 @@ const modifiedState = {
     },
     pageData: {
         name: 'test-name',
-        group: 'test-group',
         httpStatusCode: 200,
         conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
-        requestId: '6cbe6509-9122-4e66-a90a-cc483c34282e',
-        orientation: 'Landscape',
-        display: 'wide'
-    }
-};
-
-const newEvent = {
-    event: 'jazzy',
-    experiment: {
-        id: 'EX-1234',
-        name: 'Some very special experiment',
-        platform: 'experiment_api',
-        variant: {
-            name: 'increase_a'
-        },
-        version: 1
-    }
+        orientation: 'Landscape'
+    },
+    events: [newEvent]
 };
 
 const options = {
     namespace: 'f-analytics',
+    globalVarName: 'gtm',
     featureName: 'test-feature-name',
     locale: 'en-GB',
-    id: 'GTM-0000000'
+    id: 'GTM-0000000',
+    auth: undefined,
+    preview: undefined,
+    cookiesWin: undefined
 };
 
 const defaultActions = {
@@ -110,7 +104,7 @@ const defaultMutations = {
 
 const createStore = ({
     name = options.namespace,
-    state = defaultState,
+    state = {},
     actions = defaultActions,
     getters = defaultGetters,
     mutations = defaultMutations

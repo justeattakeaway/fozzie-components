@@ -12,6 +12,10 @@ module.exports = class UserMessage extends Page {
     get component () { return $(USER_MESSAGE_COMPONENT) }
     get content () { return this.component.$(USER_MESSAGE_CONTENT) }
 
+    load () {
+        super.load(this.component);
+    }
+
     waitForComponent () {
         super.waitForComponent(this.component);
     }

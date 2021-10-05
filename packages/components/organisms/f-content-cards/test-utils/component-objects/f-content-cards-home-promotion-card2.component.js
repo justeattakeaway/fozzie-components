@@ -22,6 +22,10 @@ module.exports = class HomePromotionCard2 extends Page {
 
     get backgroundImage () { return $(BACKGROUND_IMAGE); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

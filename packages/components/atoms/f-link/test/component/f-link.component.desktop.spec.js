@@ -3,8 +3,7 @@ const link = new Link();
 
 describe('f-link component tests', () => {
     beforeEach(() => {
-        link.open();
-        link.waitForComponent();
+        link.load();
     });
 
     it('should display the f-link component', () => {

@@ -51,7 +51,9 @@
                     </div>
                 </div>
 
-                <div :class="$style['c-cookieBanner-cta']">
+                <div
+                    ref="buttonContainer"
+                    :class="$style['c-cookieBanner-cta']">
                     <button-component
                         data-test-id="accept-all-cookies-button"
                         is-full-width
@@ -182,7 +184,10 @@ export default {
     mounted () {
         this.checkCookieBannerCookie();
         if (!this.shouldHideBanner) {
-            this.focusOnTitle();
+            this.$nextTick(() => {
+                this.addKeyboardHandler();
+                this.focusOnTitle();
+            });
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
     },
@@ -227,6 +232,30 @@ export default {
         },
 
         /**
+         * Add keyboard handler
+         */
+        addKeyboardHandler () {
+            if (this.$refs.cookieBanner && this.$refs.cookieBanner.$refs.megaModal) {
+                this.$refs.cookieBanner.$refs.megaModal.addEventListener('keydown', this.setTabLoop);
+            }
+        },
+
+        /**
+         * Set the tab loop for accessibility
+         */
+        setTabLoop (e) {
+            if (e.key === 'Tab') {
+                if (e.shiftKey && e.target === this.$refs.cookieBannerHeading) {
+                    this.$refs.buttonContainer.lastChild.focus();
+                    e.preventDefault();
+                } else if (!e.shiftKey && e.target === this.$refs.buttonContainer.lastChild) {
+                    this.$refs.cookieBannerHeading.focus();
+                    e.preventDefault();
+                }
+            }
+        },
+
+        /**
          * Hide the banner
          */
         hideBanner () {
@@ -250,6 +279,10 @@ export default {
          */
         reopenBanner () {
             this.shouldHideBanner = false;
+            this.$nextTick(() => {
+                this.addKeyboardHandler();
+                this.focusOnTitle();
+            });
         },
 
         /**

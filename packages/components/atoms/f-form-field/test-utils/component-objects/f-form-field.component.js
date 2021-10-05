@@ -11,6 +11,10 @@ module.exports = class FormField extends Page {
 
     get input () { return $('[data-test-id="formfield-input"]'); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

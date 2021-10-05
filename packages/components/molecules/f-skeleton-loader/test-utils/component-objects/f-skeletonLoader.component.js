@@ -8,6 +8,10 @@ module.exports = class SkeletonLoader extends Page {
 
     get component () { return $(COMPONENT); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

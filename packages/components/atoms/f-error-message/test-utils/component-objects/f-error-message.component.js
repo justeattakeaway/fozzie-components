@@ -5,6 +5,10 @@ module.exports = class ErrorMessage extends Page {
         super('atom', 'error-message-component');
     }
 
+    load () {
+        super.load(this.component);
+    }
+
     get component () { return $('[data-test-id="error-message-component"]'); }
 
     open (url) {

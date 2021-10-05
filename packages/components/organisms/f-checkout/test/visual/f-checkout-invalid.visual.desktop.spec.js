@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -9,11 +8,8 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'invalid-url');
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForErrorPageComponent();
+        checkout.loadError();
     });
 
     it('should display the error page component', () => {

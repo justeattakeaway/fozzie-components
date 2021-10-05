@@ -1,7 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class Buttons extends Page {
-    constructor() {
+    constructor () {
         super('atom-folder', 'f-button--button-component');
     }
 
@@ -12,6 +12,15 @@ module.exports = class Buttons extends Page {
     open (url) {
         super.open(url);
     }
+
+    load (type = 'action') {
+        if (type === 'action') {
+            super.load(this.actionComponent);
+        } else {
+            super.load(this.linkComponent);
+        }
+    }
+
     /**
      * @description
      * Sets the data for the button component.

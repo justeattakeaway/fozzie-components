@@ -4,6 +4,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button` and `f-mega-modal` to include icing phase 2 changes.
+
+
+v2.2.1
+------------------------------
+*September 27, 2021*
+
+### Added
+- Add tab loop when reopen banner link is clicked
+
+
+v2.2.0
+------------------------------
+*September 21, 2021*
+
+### Added
+- Banner now has tab loop to keep keyboard navigation users within the banner
+
+
 v2.1.0
 ------------------------------
 *September 17, 2021*
