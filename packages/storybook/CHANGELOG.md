@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.45.0
+------------------------------
+*October 4, 2021*
+
+### Changed
+- Change the f-analytics mock to match version 0.17.0 of the component
+
+
 v0.44.0
 ------------------------------
 *September 12, 2021*
