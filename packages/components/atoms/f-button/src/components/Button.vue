@@ -234,6 +234,12 @@ $btn-ghostTertiary-textColor           : $color-content-interactive-tertiary;
 $btn-ghostTertiary-loading-color       : $color-content-interactive-tertiary;
 $btn-ghostTertiary-loading-colorOpaque : rgba($btn-ghostTertiary-loading-color, $btn-default-loading-opacity);
 
+$btn-inverse-loading-color             : $color-content-interactive-brand;
+$btn-inverse-loading-colorOpaque       : rgba($btn-inverse-loading-color, $btn-default-loading-opacity);
+
+$btn-ghostInverse-loading-color        : $color-content-interactive-light;
+$btn-ghostInverse-loading-colorOpaque  : rgba($btn-ghostInverse-loading-color, $btn-default-loading-opacity);
+
 $btn-link-loading-color                : $color-content-link;
 $btn-link-loading-colorOpaque          : rgba($btn-link-loading-color, $btn-default-loading-opacity);
 
@@ -551,6 +557,50 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 }
 
 /**
+ * Modifier – .o-btn--inverse
+ *
+ * Accompanying button that can be used on solid background colours (such as grey)
+ * this button type should only be used with iconButtons
+ */
+
+.o-btn--inverse {
+    background-color: $color-interactive-inverse; // for icon button to have a white background when it is located on top of images/dark surfaces
+
+    &:hover {
+        background-color: $btn-ghost-bgColor--hover;
+    }
+
+    &:active,
+    &.o-btn--loading {
+        background-color: $btn-ghost-bgColor--active;
+    }
+
+    @include spinnerColor($btn-inverse-loading-color, $btn-inverse-loading-colorOpaque);
+}
+
+/**
+ * Modifier – .o-btn--ghostInverse
+ *
+ * Accompanying button that can be used on solid background colours (such as grey)
+ * this button type should only be used with iconButtons
+ */
+
+.o-btn--ghostInverse {
+    background-color: $btn-ghost-bgColor;
+
+    &:hover {
+        background-color: lighten($color-black, $color-hover-02);
+    }
+
+    &:active,
+    &.o-btn--loading {
+        background-color: lighten($color-black, $color-active-02);
+    }
+
+    @include spinnerColor($btn-ghostInverse-loading-color, $btn-ghostInverse-loading-colorOpaque);
+}
+
+/**
  * Modifier – .o-btn--link
  *
  * Make a button visually look like a default link
@@ -619,37 +669,19 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         }
     }
 
-    &.o-btn--ghostTertiary {
-        path {
-            fill: $btn-ghostTertiary-textColor;
-        }
-    }
-
-    &.o-btn--inverse {
-        background-color: $color-interactive-inverse; // for icon button to have a white background when it is located on top of images/dark surfaces
-
-        &:hover {
-            background-color: $btn-ghost-bgColor--hover;
-        }
-
-        &:active {
-            background-color: $btn-ghost-bgColor--active;
-        }
+    &.o-btn--ghost {
+        @include spinnerColor($btn-inverse-loading-color, $btn-inverse-loading-colorOpaque); // spinner colour for the ghost icon button loading state is the same as for inverse button
     }
 
     &.o-btn--ghostInverse {
         path {
             fill: $color-content-inverse;
         }
+    }
 
-        background-color: $btn-ghost-bgColor;
-
-        &:hover {
-            background-color: lighten($color-black, $color-hover-02);
-        }
-
-        &:active {
-            background-color: lighten($color-black, $color-active-02);
+    &.o-btn--ghostTertiary {
+        path {
+            fill: $btn-ghostTertiary-textColor;
         }
     }
 
