@@ -46,7 +46,7 @@ export default {
     }
 
     .c-skeletonLoader-card {
-        border-radius: $border-radius;
+        border-radius: $radius-rounded-c;
         display: flex;
         flex-direction: column;
         flex: 0 0 40%;

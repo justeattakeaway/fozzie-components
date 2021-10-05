@@ -4,6 +4,3 @@
 $theme: 'jet' !default;
 
 @import  '~@justeat/fozzie/src/scss/fozzie';
-
-// defined separately from the $border-radius variable in order to match the radius for UI elements in OrderWeb
-$post-order-card-radius: 8px;

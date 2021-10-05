@@ -2147,6 +2147,18 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-button@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-2.0.0.tgz#437c7f37eed9b62536ddaab704d4d3536f9a881f"
+  integrity sha512-lCPiIp5+DhP/gKj6fYmZscui/Ajn3CLGBbg59nJlaSQ+OM6+cUr0VZ0b2EdI1mYCL03HZO0aNseGB5B7yYNYBw==
+
+"@justeat/f-card@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-2.0.0.tgz#616a88e149f23643639af33c9aa995d64e671d7a"
+  integrity sha512-H4KXZ4Mk+tLrwOjFjuH2ztNLIBoncAimYCBkAPLI9ISpH4EXLk/H6gmFED4mYkEkFmD1qyLEE4oM45M4KQMWcQ==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
 "@justeat/f-content-cards@6.0.0-beta.2":
   version "6.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
@@ -2170,6 +2182,14 @@
   dependencies:
     qwery "4.0.0"
 
+"@justeat/f-form-field@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-3.0.0.tgz#0e629cfeb13b42e441c14a9d6ff01c4313af7e79"
+  integrity sha512-5+po42XYPhpLB2n3LsMEIBmkq5l4tLqfElRuqkgvCfg6S+xKzT8jGqb++VFrdhyNKFnVEyDW6CP2A4qrCIQ7mA==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "2.5.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2189,6 +2209,13 @@
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.9.0.tgz#9b57f82cdbd98e15c12f2e24ea25c78d3ff2260c"
   integrity sha512-5mE57SuZ2DErEK/K7bfmxhMpB5+vGnCs/Py8ltVTUJh7C8SYRDcIAFgagcJvDLA6NzA2grtSlgNTksIXdKH34g==
+
+"@justeat/f-link@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-1.0.0.tgz#9044cd51473b839826f0cda3f3fb98219ca31352"
+  integrity sha512-Eer68h4NScqJKZz7t77z3TUgb6rDgFjQo+PDEz5wuC2WkkqZYMt0fJtxlfhNuj7nEpnN2aPPs2FCf+hCQcNfrw==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
@@ -2345,22 +2372,22 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@6.0.0-beta.1":
-  version "6.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.1.tgz#f9ae0ba3bed371770c993fbf297d68e16067a012"
-  integrity sha512-/tTyMrRZcg8fUxIHmlPo1UjFtlVYb+N4AolpLXIpsCmyQblJBkhx9sNCTipQEmJdYACQex4OL5RSdxq0pGewNw==
+"@justeat/fozzie@6.0.0-beta.5":
+  version "6.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.5.tgz#a2a357f96cd3e8a9076a9d0e4d58f687a4184398"
+  integrity sha512-YUBCnFGRDXb9DILjo8Ui8YdAZQ95ml25mGcYJQ1lNzlK29xcfnaJzQwSv1U5sfbKfhHZeyHGHRpN3071tREhFA==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
     "@justeat/f-utils" "2.0.0"
-    "@justeat/pie-design-tokens" "1.0.0-beta.0"
+    "@justeat/pie-design-tokens" "1.1.0"
     fontfaceobserver "2.1.0"
     include-media "1.4.10"
 
-"@justeat/pie-design-tokens@1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.0.0-beta.0.tgz#272457e7f806ac931800935cd54b10801c45a589"
-  integrity sha512-egiGduhwftk8O9KSnTnK5rN3cP/FY1TurdvFiC12C3mkXEImEZnpLTbf/sZ/StV95m4E69y45jiaPB87FXzSVw==
+"@justeat/pie-design-tokens@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.1.0.tgz#d93ad0411cd0457522d8bd466de521382682e05d"
+  integrity sha512-YtiJ7Uq+JZgYAJAFYr0e0an+p8RRk9MimAtqNnk2MFI5au7eNMFt3lTugwfoRgk4jKQfNg2RwTZe0tuuzzc8nw==
   dependencies:
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"

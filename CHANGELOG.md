@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v4.2.0
+v4.3.0
 ------------------------------
 *October 5, 2021*
 
@@ -12,6 +12,14 @@ v4.2.0
 - Conditional logic to visual regression tests (via new `visual-regression-preflight.js` script)
 - Auto-labelling for new PRs with `wip` label.
 - Custom Github Action for triggering Circle CI pipeline when `wip` tag is removed.
+
+
+v4.2.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- `fozzie` package version bump to 6.0.0-beta.5 to include new colour theme and radius vars.
 
 
 v4.1.0
