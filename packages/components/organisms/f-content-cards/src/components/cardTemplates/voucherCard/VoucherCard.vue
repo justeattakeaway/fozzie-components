@@ -204,7 +204,7 @@ export default {
     }
 
     .c-contentCard-voucher-copy-copied {
-        color: $color-content-brand-strong;
+        color: $color-content-default;
     }
 
     .c-contentCard-voucher-copy-transition-out {
@@ -220,7 +220,7 @@ export default {
     }
 
     .c-contentCard-voucher-code-cooldown-tick {
-        fill: $color-content-brand-strong;
+        fill: $color-content-default;
         width: spacing(x2);
         height: spacing(x2);
         padding: 0;

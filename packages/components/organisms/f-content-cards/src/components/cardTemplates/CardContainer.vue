@@ -171,7 +171,7 @@ export default {
             .c-contentCard-info {
                 padding-top: spacing(x10) + spacing(x6);
                 padding-bottom: spacing(x2);
-                border-radius: $border-radius;
+                border-radius: $radius-rounded-c;
             }
 
             .c-contentCard-bgImg {
@@ -233,7 +233,7 @@ export default {
         background-color: $color-container-default;
         padding: spacing(x2);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-        border-radius: 0 0 $border-radius $border-radius;
+        border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
     }
 
     .c-contentCard-footer {
@@ -271,7 +271,7 @@ export default {
             @include media ('<mid') {
                 border: 1px solid $color-border-strong;
                 padding: spacing(x3);
-                border-radius: 0 0 $post-order-card-radius $post-order-card-radius;
+                border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
             }
         }
 
@@ -296,10 +296,10 @@ export default {
 
         .c-contentCard-bgImg {
             overflow: hidden;
-            border-radius: $post-order-card-radius;
+            border-radius: $radius-rounded-c;
 
             @include media ('<mid') {
-                border-radius: $post-order-card-radius $post-order-card-radius 0 0;
+                border-radius: $radius-rounded-c $radius-rounded-c 0 0;
             }
         }
 
@@ -330,7 +330,7 @@ export default {
             @include media('<mid') {
                 position: relative;
                 padding: spacing(x2) spacing(x2) spacing(x2) spacing(x9);
-                border-radius: $post-order-card-radius;
+                border-radius: $radius-rounded-c;
             }
         }
     }

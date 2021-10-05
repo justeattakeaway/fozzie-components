@@ -3,7 +3,6 @@
         data-test-id="card-component"
         :class="[
             $style['c-card'], {
-                [$style['c-card--rounded']]: isRounded,
                 [$style['c-card--outline']]: hasOutline,
                 [$style['c-card--pageContentWrapper']]: isPageContentWrapper
             }]">
@@ -56,10 +55,6 @@ export default {
             type: Boolean,
             default: false
         },
-        isRounded: {
-            type: Boolean,
-            default: false
-        },
         hasFullWidthFooter: {
             type: Boolean,
             default: false
@@ -71,26 +66,22 @@ export default {
 <style lang="scss" module>
 
 $card-bgColor                             : $color-container-default;
-$card-borderColor                         : $color-border-strong;
-$card-borderRadius                        : $border-radius;
+$card-borderColor                         : $color-border-default;
+$card-borderRadius                        : $radius-rounded-c;
 $card-padding                             : spacing(x2);
-
 $card--pageContentWrapper-width           : 472px; // so that it falls on our 8px spacing grid
 
 .c-card {
     background-color: $card-bgColor;
     display: block;
+    border-radius: $card-borderRadius;
 }
     .c-card-innerSpacing {
         padding: $card-padding;
     }
 
-    .c-card--rounded {
-        border-radius: $card-borderRadius;
-    }
-
     .c-card--outline {
-        border: solid 1px $card-borderColor;
+        border: 1px solid $card-borderColor;
     }
 
     // .c-card--pageContentWrapper Modifier
