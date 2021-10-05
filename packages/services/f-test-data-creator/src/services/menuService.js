@@ -8,12 +8,16 @@ module.exports = class MenuService {
         this.items = configuration.itemIds;
     }
 
-    async getMenuIdAsync (restaurantSEO, serviceType) {
-        console.log(`Attempting to get Menu Id for restaurant: ${restaurantSEO}`);
+    async getMenuItemsAsync (restaurantSEO, serviceType) {
+        console.log(`Attempting to get menu items for restaurant: ${restaurantSEO}`);
 
         const { data } = await this.menuServiceApi.getRestaurantManifestAsync(restaurantSEO);
 
         const result = data.Menus.filter(menu => this.menus[serviceType].includes(menu.MenuGroupId));
+
+        if (result === undefined) {
+            throw new Error(`No menus available for ${serviceType}`);
+        }
 
         const products = result[0].Categories.filter(category => this.products[serviceType].includes(category.Id));
 
@@ -21,13 +25,9 @@ module.exports = class MenuService {
             throw new Error(`No products available for ${serviceType}`);
         }
 
-        if (result === undefined) {
-            throw new Error(`No Menus available for ${serviceType}`);
-        }
-
         const product = products[0].ItemIds.filter(id => this.items[serviceType].includes(id)).toString();
 
-        console.log(`Successfully returned menu for service type: ${serviceType} and restaurant ${restaurantSEO}`);
+        console.log(`Successfully returned menu items for service type: ${serviceType} and restaurant ${restaurantSEO}`);
 
         const menuResult = {
             productId: product,
