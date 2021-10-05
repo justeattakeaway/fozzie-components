@@ -66,7 +66,6 @@ describe('Card', () => {
 
     describe('props', () => {
         describe.each([
-            ['isRounded', 'c-card--rounded'],
             ['hasOutline', 'c-card--outline'],
             ['isPageContentWrapper', 'c-card--pageContentWrapper']
         ])('%s', (propKey, cssClass) => {
