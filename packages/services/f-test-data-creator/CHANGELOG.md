@@ -9,7 +9,7 @@ v0.2.0
 *October 5, 2021*
 
 ### Added
-- Product options for adding to a basket in `basketApi`
+- Functionality for adding products to a basket in `basketApi`
 
 
 v0.1.0
