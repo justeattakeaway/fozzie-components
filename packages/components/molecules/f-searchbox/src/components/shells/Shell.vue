@@ -68,7 +68,7 @@ $midWide: 980px;
 .c-searchShell-title {
     color: $color-content-brand;
     @include font-size('heading-xxl', true, 'narrow');
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-extrabold;
     margin-bottom: spacing();
 
     @include media('>=narrowMid') {

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-popover",
   "description": "Fozzie Popover - renders recieved content as a popover",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "dist/f-popover.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [

@@ -64,7 +64,7 @@ export default {
 
 $breadcrumbs-text-colour: $color-content-light;
 $breadcrumbs-background-colour: rgba($color-black, 0.6);
-$breadcrumbs-border-radius: 16px;
+$breadcrumbs-border-radius: $radius-rounded-c;
 $breadcrumbs-not-active-font-weight: $font-weight-bold;
 $breadcrumbs-active-font-weight: $font-weight-regular;
 
