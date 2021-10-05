@@ -1,4 +1,6 @@
 // This file must be built using `yarn build:action:pipeline-trigger`
+// The alternative was adding a build step to the action itself
+// but this would make it take minutes rather than seconds
 
 const core = require('@actions/core');
 const github = require('@actions/github');
