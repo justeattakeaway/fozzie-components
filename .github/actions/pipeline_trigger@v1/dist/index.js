@@ -13600,6 +13600,8 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 // This file must be built using `yarn build:action:pipeline-trigger`
+// The alternative was adding a build step to the action itself
+// but this would make it take minutes rather than seconds
 
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
@@ -13613,19 +13615,16 @@ try {
     const { ref } = github.context;
     const { owner, repo } = github.context.repo;
 
-    // Remove `refs/` from the start of the ref (if it's present) to trigger correct PR build
-    const payload = {
-        ...(ref.indexOf(REF_PREFIX) > -1 ? {
-            branch: ref.slice(REF_PREFIX.length) // trim prefix
-        } : {})
-    };
+    let branch = ref.replace(REF_PREFIX, ''); // Remove `refs/` from the start of the ref (if it's present) to trigger correct PR build
+    branch = branch.replace('/merge', '/head');
 
-    core.info(`Running build for branch ${payload.branch}`);
+    core.info(`Running build for branch ${branch}`);
 
     // Authenticate using secret from action input
     const headers = {
         'Circle-Token': core.getInput('CIRCLE_CI_TOKEN')
     };
+    const payload = { branch };
     const options = { headers };
 
     axios.post(`${CIRCLECI_API_URL}/${owner}/${repo}/pipeline`, payload, options)
@@ -13633,6 +13632,7 @@ try {
 } catch (error) {
   core.setFailed(error.message);
 }
+
 })();
 
 module.exports = __webpack_exports__;

@@ -15,7 +15,7 @@ try {
     const { owner, repo } = github.context.repo;
 
     let branch = ref.replace(REF_PREFIX, ''); // Remove `refs/` from the start of the ref (if it's present) to trigger correct PR build
-    let branch = branch.replace('/merge', '/head');
+    branch = branch.replace('/merge', '/head');
 
     core.info(`Running build for branch ${branch}`);
 
