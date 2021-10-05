@@ -1,12 +1,19 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-restaurantCard-selectors')
+const { COMPONENT } = require('./f-restaurantCard-selectors');
 
 module.exports = class RestaurantCard extends Page {
+    constructor () {
+        super('molecule', 'restaurant-card-component');
+    }
 
     get component () { return $(COMPONENT); }
 
-    open () {
-        super.openComponent('molecule', 'restaurantCard-component');
+    load () {
+        super.load(this.component);
+    }
+
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
@@ -16,4 +23,4 @@ module.exports = class RestaurantCard extends Page {
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
-}
+};

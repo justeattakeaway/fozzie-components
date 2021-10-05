@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "main": "dist/f-alert.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -52,7 +52,7 @@
     "@vue/test-utils": "1.0.3",
     "@justeat/f-wdio-utils": "0.3.0",
     "node-sass-magic-importer": "5.3.2",
-    "@justeat/f-button": "2.0.0",
+    "@justeat/f-button": "3.0.0",
     "@justeat/f-vue-icons": "1.13.0"
   }
 }
