@@ -141,6 +141,11 @@ export default {
         shouldUseGreyBackground: {
             type: Boolean,
             default: true
+        },
+
+        nameSuffix: {
+            type: String,
+            default: ''
         }
     },
 
@@ -149,7 +154,6 @@ export default {
         const localeConfig = tenantConfigs[locale];
         const theme = globalisationServices.getTheme(locale);
         const copy = localeConfig.messages;
-        const consentCookieName = 'je-cookieConsent';
         const legacyConsentCookieName = 'je-banner_cookie';
         const reopenLinkToBottom = this.isBodyHeightLessThanWindowHeight();
 
@@ -158,7 +162,6 @@ export default {
             theme,
             copy,
             shouldHideBanner: true,
-            consentCookieName,
             legacyConsentCookieName,
             isIosBrowser: false,
             reopenLinkToBottom
@@ -172,6 +175,18 @@ export default {
          */
         legacyBanner () {
             return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
+        },
+
+        /**
+		 * Return the cookie consent name with the suffix if provided.
+		 * @returns {String}
+		 */
+        consentCookieName () {
+            const baseCookieName = 'je-cookieConsent';
+
+            return this.nameSuffix
+                ? `${baseCookieName}-${this.nameSuffix}`
+                : baseCookieName;
         }
     },
 

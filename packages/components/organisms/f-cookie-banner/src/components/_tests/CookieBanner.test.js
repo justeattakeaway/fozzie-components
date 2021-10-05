@@ -88,6 +88,7 @@ describe('CookieBanner', () => {
             ) => {
                 // Arrange
                 const propsData = {};
+                const cookieName = 'je-cookieConsent';
 
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
@@ -95,10 +96,13 @@ describe('CookieBanner', () => {
                     i18n,
                     propsData,
                     computed: {
-                        legacyBanner: () => false
+                        legacyBanner: () => false,
+                        consentCookieName: () => cookieName
                     }
                 });
-                CookieHelper.set('je-cookieConsent', cookieValue);
+
+                jest.spyOn(CookieHelper, 'get').mockReturnValue(cookieValue);
+                // CookieHelper.set(cookieName, cookieValue);
                 wrapper.vm.checkCookieBannerCookie();
 
                 // Assert
@@ -115,7 +119,7 @@ describe('CookieBanner', () => {
                     }
                 });
                 window.dataLayer = [];
-                CookieHelper.remove('je-cookieConsent');
+                jest.spyOn(CookieHelper, 'get').mockReturnValue(null);
 
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
@@ -139,7 +143,7 @@ describe('CookieBanner', () => {
                     }
                 });
                 window.dataLayer = [];
-                CookieHelper.set('je-cookieConsent', 'full');
+                jest.spyOn(CookieHelper, 'get').mockReturnValue('full');
 
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
@@ -163,7 +167,12 @@ describe('CookieBanner', () => {
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
-                    propsData
+                    propsData,
+                    computed: {
+                        cookieName () {
+                            return 'je-cookieConsent';
+                        }
+                    }
                 });
                 const mockCookieHelper = jest.spyOn(CookieHelper, 'set').mockImplementation(() => {});
                 const payloadName = 'je-cookieConsent';
@@ -382,6 +391,43 @@ describe('CookieBanner', () => {
 
                 // Assert
                 expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(true);
+            });
+        });
+
+        describe('cookieName', () => {
+            describe('`nameSuffix` is provided', () => {
+                it('should return the default consent cookie name with the suffix', () => {
+                    // Arrange
+                    const wrapper = shallowMount(CookieBanner, {
+                        localVue,
+                        i18n,
+                        propsData: {
+                            nameSuffix: 'suffixed'
+                        }
+                    });
+
+                    // Act
+                    const { consentCookieName } = wrapper.vm;
+
+                    // Assert
+                    expect(consentCookieName).toMatchSnapshot();
+                });
+            });
+
+            describe('`nameSuffix` is not provided', () => {
+                it('should return the default consent cookie name', () => {
+                    // Arrange
+                    const wrapper = shallowMount(CookieBanner, {
+                        localVue,
+                        i18n
+                    });
+
+                    // Act
+                    const { consentCookieName } = wrapper.vm;
+
+                    // Assert
+                    expect(consentCookieName).toMatchSnapshot();
+                });
             });
         });
     });
