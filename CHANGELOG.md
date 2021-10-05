@@ -3,21 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v4.1.0
-------------------------------
-*October 04, 2021*
 
-### Updated
-- Circle CI cached components to include new f-restaurant-card component
-
-v4.1.0
+v4.2.0
 ------------------------------
-*September 30, 2021*
+*October 5, 2021*
 
 ### Added
 - Conditional logic to visual regression tests (via new `visual-regression-preflight.js` script)
 - Auto-labelling for new PRs with `wip` label.
 - Custom Github Action for triggering Circle CI pipeline when `wip` tag is removed.
+
+
+v4.1.0
+------------------------------
+*October 4, 2021*
+
+### Updated
+- Circle CI cached components to include new f-restaurant-card component
 
 
 v4.0.0
