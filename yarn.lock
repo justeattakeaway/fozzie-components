@@ -2123,6 +2123,20 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-alert@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-2.0.0.tgz#9030b5cb3600b08fb499a6eeb736d88b00e2adea"
+  integrity sha512-zYGlEcNZa2Q2bBG8mtyA59w72OQNyrQQfizkSh/vUPFWXgqJRv58P+apT5ykt+T7ovRoyCdbN5gJAGTY/qhemw==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
+"@justeat/f-breadcrumbs@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-1.0.0.tgz#fad821e5dd2e8725474466082ccef2053dd25a99"
+  integrity sha512-+BzGqiKZ04qVY5tZ7dWagEQjmyTd9iMUDYgOCwb+oYCyQ/Ry0ye4ONgpNOTDU0naVv4f0zQ5QUqKX6FWXlSlWA==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-button@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-2.0.0.tgz#437c7f37eed9b62536ddaab704d4d3536f9a881f"
@@ -2200,6 +2214,11 @@
   dependencies:
     window-or-global "^1.0.1"
 
+"@justeat/f-mega-modal@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-2.0.0.tgz#2a46e547d484ebcc05423bca9ccacbf0f5f3ca80"
+  integrity sha512-erbSj9RTRtwHBL5TRsBt0SQomG1e6+ImBy/BzISROFMuo3qRln1Rq9SqAzdMhxO2cseYkjvn30tfOXFy4M8bSg==
+
 "@justeat/f-searchbox@5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.1.0.tgz#11d2242bab6c5bef5783392055a0b5f1c58e9adc"
@@ -2272,6 +2291,13 @@
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
+
+"@justeat/f-tabs@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-1.0.0.tgz#98d4ec17a023f6f074e6d21beca81fec4d118233"
+  integrity sha512-UzwbpD4RZqKlaHq9mgyihwKcT0LZ9Gw3gx3PKRwIaeMsbfaJnsCE32DJZDYWJoHgcL/YnmFyyrxaSOeM48XELQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-trak@0.7.1":
   version "0.7.1"
