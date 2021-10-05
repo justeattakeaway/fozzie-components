@@ -325,12 +325,12 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
             serviceType: 'delivery',
             isAuthenticated: true,
             isASAP: false,
-            tenant: 'en-AU'
+            locale: 'en-AU'
         };
         checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Locale', checkoutInfo.tenant);
+            .withQuery('&knob-Locale', checkoutInfo.locale);
             
         // Act
         checkout.load();

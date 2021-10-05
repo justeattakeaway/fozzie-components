@@ -49,7 +49,18 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: false,
+            isASAP: true,
+            orderError: 'duplicate'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
         checkout.load();
 
         const customerInfo = {
@@ -151,7 +162,18 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: false,
+            isASAP: true,
+            orderError: 'duplicate'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
         checkout.load();
 
         const customerInfo = {
@@ -269,8 +291,17 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
             .withQuery('&knob-Place Order Errors', checkoutInfo.orderErrors);
 
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890',
+            tableIdentifier: '10'
+        };
+
         // Act
         checkout.load();
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
