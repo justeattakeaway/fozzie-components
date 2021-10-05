@@ -2123,32 +2123,6 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-alert@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-2.0.0.tgz#9030b5cb3600b08fb499a6eeb736d88b00e2adea"
-  integrity sha512-zYGlEcNZa2Q2bBG8mtyA59w72OQNyrQQfizkSh/vUPFWXgqJRv58P+apT5ykt+T7ovRoyCdbN5gJAGTY/qhemw==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
-"@justeat/f-breadcrumbs@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-1.0.0.tgz#fad821e5dd2e8725474466082ccef2053dd25a99"
-  integrity sha512-+BzGqiKZ04qVY5tZ7dWagEQjmyTd9iMUDYgOCwb+oYCyQ/Ry0ye4ONgpNOTDU0naVv4f0zQ5QUqKX6FWXlSlWA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
-"@justeat/f-button@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-2.0.0.tgz#437c7f37eed9b62536ddaab704d4d3536f9a881f"
-  integrity sha512-lCPiIp5+DhP/gKj6fYmZscui/Ajn3CLGBbg59nJlaSQ+OM6+cUr0VZ0b2EdI1mYCL03HZO0aNseGB5B7yYNYBw==
-
-"@justeat/f-card@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-2.0.0.tgz#616a88e149f23643639af33c9aa995d64e671d7a"
-  integrity sha512-H4KXZ4Mk+tLrwOjFjuH2ztNLIBoncAimYCBkAPLI9ISpH4EXLk/H6gmFED4mYkEkFmD1qyLEE4oM45M4KQMWcQ==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-content-cards@6.0.0-beta.2":
   version "6.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
@@ -2172,14 +2146,6 @@
   dependencies:
     qwery "4.0.0"
 
-"@justeat/f-form-field@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-3.0.0.tgz#0e629cfeb13b42e441c14a9d6ff01c4313af7e79"
-  integrity sha512-5+po42XYPhpLB2n3LsMEIBmkq5l4tLqfElRuqkgvCfg6S+xKzT8jGqb++VFrdhyNKFnVEyDW6CP2A4qrCIQ7mA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "2.5.0"
-
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2200,13 +2166,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.9.0.tgz#9b57f82cdbd98e15c12f2e24ea25c78d3ff2260c"
   integrity sha512-5mE57SuZ2DErEK/K7bfmxhMpB5+vGnCs/Py8ltVTUJh7C8SYRDcIAFgagcJvDLA6NzA2grtSlgNTksIXdKH34g==
 
-"@justeat/f-link@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-1.0.0.tgz#9044cd51473b839826f0cda3f3fb98219ca31352"
-  integrity sha512-Eer68h4NScqJKZz7t77z3TUgb6rDgFjQo+PDEz5wuC2WkkqZYMt0fJtxlfhNuj7nEpnN2aPPs2FCf+hCQcNfrw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-logger/-/f-logger-0.8.1.tgz#10aef6a3d97b75e1ded2367fa0b69972661f76e6"
@@ -2214,18 +2173,14 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-mega-modal@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-2.0.0.tgz#2a46e547d484ebcc05423bca9ccacbf0f5f3ca80"
-  integrity sha512-erbSj9RTRtwHBL5TRsBt0SQomG1e6+ImBy/BzISROFMuo3qRln1Rq9SqAzdMhxO2cseYkjvn30tfOXFy4M8bSg==
-
-"@justeat/f-searchbox@5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.1.0.tgz#11d2242bab6c5bef5783392055a0b5f1c58e9adc"
-  integrity sha512-Be/hj8uHMRpLykjOm7iwcT6Xjv/0zE3Dvh3DWrrBYQp5AJxFvTjl1EOdXb8JyEIs/VaicJeKBfym+321ziG0Wg==
+"@justeat/f-searchbox@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.0.0.tgz#fa6ea41ca3ccde26d5ed65511a96f1a728a9fc88"
+  integrity sha512-QdQHt/vr7WYzchm2RZoJ+E7WIcGmU32UB2ZEOYe6Vnt41gzMwpbjqLeZK6aD7kdSPrZr/UCrsT/69x6LV/33ZA==
   dependencies:
     caniuse-lite "1.0.30001251"
     lodash.debounce "4.0.8"
+    mitt "3.0.0"
 
 "@justeat/f-services@0.13.0":
   version "0.13.0"
@@ -2291,13 +2246,6 @@
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
-
-"@justeat/f-tabs@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-1.0.0.tgz#98d4ec17a023f6f074e6d21beca81fec4d118233"
-  integrity sha512-UzwbpD4RZqKlaHq9mgyihwKcT0LZ9Gw3gx3PKRwIaeMsbfaJnsCE32DJZDYWJoHgcL/YnmFyyrxaSOeM48XELQ==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-trak@0.7.1":
   version "0.7.1"
@@ -18087,6 +18035,11 @@ mississippi@^3.0.0:
     pumpify "^1.3.3"
     stream-each "^1.1.0"
     through2 "^2.0.0"
+
+mitt@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
 
 mixin-deep@^1.2.0:
   version "1.3.2"

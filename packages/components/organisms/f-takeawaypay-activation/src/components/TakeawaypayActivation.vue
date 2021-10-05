@@ -1,7 +1,6 @@
 <template>
     <div :class="$style['c-takeawaypayActivation']">
         <card-component
-            is-rounded
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="takeawaypay-activation-component"
