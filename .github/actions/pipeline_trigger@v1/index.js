@@ -19,7 +19,7 @@ try {
         } : {})
     };
 
-    core.notice(`Ref is: ${ref}. Branch is: ${payload.branch}`);
+    core.info(`Ref is: ${ref}. Branch is: ${payload.branch}`);
 
     // Authenticate using secret from action input
     const headers = {

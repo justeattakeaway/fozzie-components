@@ -13606,18 +13606,21 @@ const github = __nccwpck_require__(5438);
 const axios = __nccwpck_require__(6545);
 
 const CIRCLECI_API_URL = 'https://circleci.com/api/v2/project/gh';
-const REF_PREFIX = '/refs/heads/';
+const REF_PREFIX = 'refs/';
 
 try {
+    // `ref` should have the form `refs/pull/<PR number>/merge` https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request
     const { ref } = github.context;
     const { owner, repo } = github.context.repo;
 
-    // Get current branch name from end of `ref` so Circle knows which build to re-run
+    // Remove `refs/` from the start of the ref (if it's present) to trigger correct PR build
     const payload = {
         ...(ref.indexOf(REF_PREFIX) > -1 ? {
             branch: ref.slice(REF_PREFIX.length) // trim prefix
         } : {})
     };
+
+    core.info(`Ref is: ${ref}. Branch is: ${payload.branch}`);
 
     // Authenticate using secret from action input
     const headers = {
