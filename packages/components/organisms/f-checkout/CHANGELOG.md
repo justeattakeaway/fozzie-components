@@ -10,6 +10,7 @@ v2.0.0
 
 ### Changed
 - Updated version of `f-button`, `f-mega-modal`, `f-alert`, `f-card` and `f-form-field` to include icing phase 2 changes.
+- T&C, Privacy Policy and Cookie Policy links to use f-link component.
 
 ### Removed
 - `o-link--noDecoration` class from the switch account link to add underline.
