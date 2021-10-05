@@ -29,6 +29,15 @@ v0.7.0
 - Updated version of `f-breadcrumbs` and `f-tabs` to include icing phase 2 changes.
 
 
+v1.0.0
+------------------------------
+*October 05, 2021*
+
+### Added
+- Loading state component.
+- Unit tests for the loading state component
+
+
 v0.6.0
 ------------------------------
 *September 22, 2021*
