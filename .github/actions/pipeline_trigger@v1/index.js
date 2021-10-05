@@ -10,8 +10,6 @@ const REF_PREFIX = 'refs/';
 try {
     // `ref` should have the form `refs/pull/<PR number>/merge` https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request
     const { ref } = github.context;
-    core.info(`github.context.ref: ${ref}`);
-
     const { owner, repo } = github.context.repo;
 
     // Remove `refs/` from the start of the ref (if it's present) to trigger correct PR build
@@ -21,7 +19,7 @@ try {
         } : {})
     };
 
-    core.info(`payload.branch: ${payload.branch}`);
+    core.notice(`Ref is: ${ref}. Branch is: ${payload.branch}`);
 
     // Authenticate using secret from action input
     const headers = {
