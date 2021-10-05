@@ -23,7 +23,6 @@ export const CardComponent = (args, { argTypes }) => ({
             :card-heading="cardHeading"
             :card-heading-position="cardHeadingPosition"
             :card-heading-tag="cardHeadingTag"
-            :is-rounded="isRounded"
             :has-outline="hasOutline"
             :is-page-content-wrapper="isPageContentWrapper"
             :has-full-width-footer="hasFullWidthFooter">
@@ -38,7 +37,6 @@ CardComponent.args = {
     cardHeading: 'My Card Heading',
     cardHeadingPosition: 'left',
     cardHeadingTag: 'h1',
-    isRounded: false,
     hasOutline: false,
     isPageContentWrapper: false,
     hasFullWidthFooter: false
