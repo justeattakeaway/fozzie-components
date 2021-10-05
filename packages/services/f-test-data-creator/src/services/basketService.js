@@ -14,14 +14,4 @@ module.exports = class BasketService {
 
         return data.BasketId;
     }
-
-    async getProductsAsync (basketInfo) {
-        console.log(`Attempting to create basket for menu Id: ${basketInfo.menuId} and restaurant Id ${basketInfo.restaurantId}.`);
-
-        const { data } = await this.basketServiceApi.chooseProductsForUser(basketInfo);
-
-        console.log(`Successfully created basket: ${data.BasketId}`);
-
-        return data.BasketId;
-    }
 };

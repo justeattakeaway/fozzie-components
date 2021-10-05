@@ -4,7 +4,6 @@ const { getLanguageForTenant } = require('../configuration/tenants');
 module.exports = class BasketServiceApi {
     constructor (configuration) {
         this.basketUrl = configuration.services.basket.baseAddress;
-        this.recommendedBasketUrl = configuration.services.basket.recommendedBasket;
         this.tenant = configuration.tenant;
         this.postcode = configuration.services.search.postcode;
     }
