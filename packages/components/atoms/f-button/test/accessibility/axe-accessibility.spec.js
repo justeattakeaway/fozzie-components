@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const Button = require('../../test-utils/component-objects/f-button.component');
