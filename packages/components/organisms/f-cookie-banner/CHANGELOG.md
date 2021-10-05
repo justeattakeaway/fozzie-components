@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v2.3.0
+v2.3.1
 ------------------------------
-*October 02, 2021*
+*October 05, 2021*
 
 ### Fixed
 - Reopen link positioning bug by adding and using a ResizeObserver. This ensures body content changes ouside of f-cookie-banner and recalculates if the link should be absolutely positioned.
