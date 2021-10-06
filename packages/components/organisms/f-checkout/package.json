@@ -3,7 +3,7 @@
   "description": "Fozzie Checkout – Fozzie Checkout Component",
   "version": "2.0.0",
   "main": "dist/f-checkout.umd.min.js",
-  "maxBundleSize": "100kB",
+  "maxBundleSize": "105kB",
   "files": [
     "dist",
     "test-utils",

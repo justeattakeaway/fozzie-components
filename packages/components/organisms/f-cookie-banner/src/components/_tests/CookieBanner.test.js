@@ -8,6 +8,21 @@ const i18n = {
 };
 
 describe('CookieBanner', () => {
+    beforeEach(() => {
+        const resizeObserverMock = jest.fn(function ResizeObserver (callback) {
+            this.observe = jest.fn();
+            this.disconnect = jest.fn();
+            this.trigger = () => {
+                callback('', this);
+            };
+        });
+        global.ResizeObserver = resizeObserverMock;
+    });
+
+    afterEach(() => {
+        global.ResizeObserver = undefined;
+    });
+
     describe('components', () => {
         it('should be defined', () => {
             // Arrange
@@ -23,9 +38,116 @@ describe('CookieBanner', () => {
             // Assert
             expect(wrapper.exists()).toBe(true);
         });
+
+        describe('mounted:: ', () => {
+            it('should not create ResizeObserver when shouldAbsolutePositionReopenLink prop is false', () => {
+                // Arrange
+                const propsData = { shouldAbsolutePositionReopenLink: false };
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.bodyObserver).toBe(undefined);
+            });
+
+            it('should create ResizeObserver and call observe to watch for body resize', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+
+                const mockBodyHTMLHtmlElement = document.createElement('html');
+                mockBodyHTMLHtmlElement.innerHTML = '<head /><body/>';
+
+                // Assert
+                expect(wrapper.vm.bodyObserver.observe).toHaveBeenCalledTimes(1);
+                expect(wrapper.vm.bodyObserver.observe).toHaveBeenCalledWith(expect.any(HTMLHtmlElement));
+                expect(wrapper.vm.bodyObserver.observe).toHaveBeenCalledWith(mockBodyHTMLHtmlElement);
+            });
+        });
     });
 
     describe('methods', () => {
+        describe('updateIsBodyHeightLessThanWindowHeight', () => {
+            let offsetHeightSpy;
+
+            beforeEach(() => {
+                offsetHeightSpy = jest.spyOn(document.body, 'offsetHeight', 'get');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+                delete window.innerHeight;
+            });
+
+            it('should return false when the body height is greater than window.innerHeight', async () => {
+                // Arrange
+                const propsData = {};
+                window.innerHeight = 900;
+                offsetHeightSpy.mockImplementation(() => 1000);
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+                await wrapper.setData({ shouldHideBanner: true });
+                wrapper.vm.updateIsBodyHeightLessThanWindowHeight();
+
+                // Assert
+                expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBeFalsy();
+            });
+
+            it('should return true when the body height is less than window.innerHeight', async () => {
+                // Arrange
+                const propsData = { isHidden: true };
+
+                offsetHeightSpy.mockImplementation(() => 350);
+                window.innerHeight = 9999;
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+                await wrapper.setData({ shouldHideBanner: true });
+                wrapper.vm.updateIsBodyHeightLessThanWindowHeight();
+
+                // Assert
+                expect(wrapper.vm.isBodyHeightLessThanWindowHeight).toBeTruthy();
+            });
+
+            it('should be called when ResizeObserver.observe is triggered', async () => {
+                // Arrange
+                const propsData = {};
+                const spyMethod = jest.spyOn(CookieBanner.methods, 'updateIsBodyHeightLessThanWindowHeight');
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+                await wrapper.setData({ shouldHideBanner: true });
+                wrapper.vm.bodyObserver.trigger();
+
+                // Assert
+                expect(spyMethod).toBeCalled();
+            });
+        });
+
         describe('isNotExcluded', () => {
             it.each([
                 [false, 'je-location'],
@@ -356,41 +478,6 @@ describe('CookieBanner', () => {
             });
         });
     });
-
-    describe('`computed`', () => {
-        describe('when `isBodyHeightLessThanWindowHeight` is falsey', () => {
-            let wrapper;
-            const { window } = global;
-
-            beforeAll(() => {
-                wrapper = shallowMount(CookieBanner, {
-                    localVue,
-                    i18n
-                });
-
-                delete global.window;
-            });
-
-            afterAll(() => {
-                global.window = window;
-            });
-
-            it('should return `falsey` when the window object does not exist', () => {
-                // Assert
-                expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(false);
-            });
-        });
-
-        describe('when `isBodyHeightLessThanWindowHeight` is truthy', () => {
-            it('should return true when the window object exists', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(CookieBanner, {
-                    localVue,
-                    i18n
-                });
-
-                // Assert
-                expect(wrapper.vm.isBodyHeightLessThanWindowHeight()).toBe(true);
             });
         });
 
@@ -428,7 +515,4 @@ describe('CookieBanner', () => {
                     // Assert
                     expect(consentCookieName).toMatchSnapshot();
                 });
-            });
-        });
-    });
 });

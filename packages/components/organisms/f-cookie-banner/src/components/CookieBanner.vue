@@ -85,9 +85,10 @@
     <div v-else>
         <reopen-banner-link
             v-if="!legacyBanner"
+            ref="reopenCookieBannerLink"
             :message="copy.reopenCookieBannerLinkText"
             :use-grey-background="shouldUseGreyBackground"
-            :class="{ [$style['reopen-link-wrapper']]: reopenLinkToBottom }"
+            :class="{ [$style['reopen-link-wrapper']]: isBodyHeightLessThanWindowHeight }"
             @reopenBanner="reopenBanner" />
     </div>
 </template>
@@ -108,6 +109,8 @@ import LegacyBanner from './LegacyBanner.vue';
 import ReopenBannerLink from './ReopenBannerLink.vue';
 
 import tenantConfigs from '../tenants';
+
+
 
 export default {
     components: {
@@ -142,11 +145,17 @@ export default {
             type: Boolean,
             default: true
         },
+        
+        shouldAbsolutePositionReopenLink: {
+            type: Boolean,
+            default: true
+        }
 
         nameSuffix: {
             type: String,
             default: ''
         }
+
     },
 
     data () {
@@ -155,7 +164,6 @@ export default {
         const theme = globalisationServices.getTheme(locale);
         const copy = localeConfig.messages;
         const legacyConsentCookieName = 'je-banner_cookie';
-        const reopenLinkToBottom = this.isBodyHeightLessThanWindowHeight();
 
         return {
             config: { ...localeConfig },
@@ -164,7 +172,8 @@ export default {
             shouldHideBanner: true,
             legacyConsentCookieName,
             isIosBrowser: false,
-            reopenLinkToBottom
+            bodyObserver: undefined,
+            isBodyHeightLessThanWindowHeight: false
         };
     },
 
@@ -188,12 +197,17 @@ export default {
                 ? `${baseCookieName}-${this.nameSuffix}`
                 : baseCookieName;
         }
+
     },
 
     watch: {
         isHidden (newVal) {
             this.shouldHideBanner = !!newVal;
         }
+    },
+
+    destroyed () {
+        this.bodyObserver.disconnect();
     },
 
     mounted () {
@@ -205,9 +219,26 @@ export default {
             });
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
+
+        if (this.shouldAbsolutePositionReopenLink) {
+            this.bodyObserver = new ResizeObserver(this.updateIsBodyHeightLessThanWindowHeight);
+            const bodyElement = document.documentElement || document.body;
+            this.bodyObserver.observe(bodyElement);
+        }
     },
 
     methods: {
+        /**
+         * Triggered by <body> ResizeObserver calculates if the body height less than the window
+         */
+        updateIsBodyHeightLessThanWindowHeight () {
+            if (typeof window === 'object' && this.shouldHideBanner) {
+                const reopenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight || 0;
+                this.isBodyHeightLessThanWindowHeight =
+                (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
+            }
+        },
+
         /**
          * Actions for "Accept all cookies" button
          */
@@ -219,6 +250,7 @@ export default {
                 this.resendEvents();
                 this.dispatchCustomEvent();
                 this.hideAllBanners();
+                this.updateIsBodyHeightLessThanWindowHeight();
             });
         },
 
@@ -234,6 +266,7 @@ export default {
                 this.removeUnnecessaryCookies();
                 this.dispatchCustomEvent();
                 this.hideAllBanners();
+                this.updateIsBodyHeightLessThanWindowHeight();
             });
         },
 
@@ -387,17 +420,6 @@ export default {
                     break;
                 }
             }
-        },
-
-        /**
-         * Check to see if we need to absolute position reopen link.
-         * * @returns {Boolean}
-         */
-        isBodyHeightLessThanWindowHeight () {
-            if (typeof window === 'object') {
-                return window.innerHeight - document.body.offsetHeight > 0;
-            }
-            return false;
         },
 
         /**
