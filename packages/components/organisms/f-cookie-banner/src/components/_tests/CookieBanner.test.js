@@ -1,11 +1,14 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import CookieHelper from 'js-cookie';
 import CookieBanner from '../CookieBanner.vue';
+import { LEGACY_CONSENT_COOKIE_NAME, CONSENT_COOKIE_NAME } from '../../constants';
 
 const localVue = createLocalVue();
 const i18n = {
     locale: 'en-IE'
 };
+
+jest.mock('js-cookie');
 
 describe('CookieBanner', () => {
     beforeEach(() => {
@@ -210,7 +213,6 @@ describe('CookieBanner', () => {
             ) => {
                 // Arrange
                 const propsData = {};
-                const cookieName = 'je-cookieConsent';
 
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -218,11 +220,11 @@ describe('CookieBanner', () => {
                     propsData,
                     computed: {
                         legacyBanner: () => false,
-                        consentCookieName: () => cookieName
+                        consentCookieName: () => CONSENT_COOKIE_NAME
                     }
                 });
 
-                jest.spyOn(CookieHelper, 'get').mockReturnValue(cookieValue);
+                CookieHelper.get.mockReturnValue(cookieValue);
 
                 // Act
                 wrapper.vm.checkCookieBannerCookie();
@@ -235,13 +237,15 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
                 const expected = { event: 'trackConsent', userData: { consent: 'shown' } };
+
                 Object.defineProperty(global, 'window', {
                     value: {
                         dataLayer: []
                     }
                 });
+
                 window.dataLayer = [];
-                jest.spyOn(CookieHelper, 'get').mockReturnValue(null);
+                CookieHelper.get.mockReturnValue(null);
 
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -260,13 +264,15 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
                 const expected = { event: 'trackConsent', userData: { consent: 'shown' } };
+
                 Object.defineProperty(global, 'window', {
                     value: {
                         dataLayer: []
                     }
                 });
+
                 window.dataLayer = [];
-                jest.spyOn(CookieHelper, 'get').mockReturnValue('full');
+                CookieHelper.get.mockReturnValue('full');
 
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -293,12 +299,12 @@ describe('CookieBanner', () => {
                     propsData,
                     computed: {
                         cookieName () {
-                            return 'je-cookieConsent';
+                            return CONSENT_COOKIE_NAME;
                         }
                     }
                 });
-                const mockCookieHelper = jest.spyOn(CookieHelper, 'set').mockImplementation(() => {});
-                const payloadName = 'je-cookieConsent';
+
+                const payloadName = CONSENT_COOKIE_NAME;
                 const payloadValue = 'foo';
                 const payloadObj = {
                     path: '/',
@@ -309,7 +315,7 @@ describe('CookieBanner', () => {
                 wrapper.vm.setCookieBannerCookie('foo');
 
                 // Assert
-                expect(mockCookieHelper).toHaveBeenCalledWith(payloadName, payloadValue, payloadObj);
+                expect(CookieHelper.set).toHaveBeenCalledWith(payloadName, payloadValue, payloadObj);
             });
         });
 
@@ -324,7 +330,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const mockCookieHelper = jest.spyOn(CookieHelper, 'set').mockImplementation(() => {});
-                const payloadName = 'je-banner_cookie';
+                const payloadName = LEGACY_CONSENT_COOKIE_NAME;
                 const payloadValue = '130315';
                 const payloadObj = {
                     path: '/',
