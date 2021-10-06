@@ -1,0 +1,24 @@
+name: "Pull Request Labeler"
+on:
+- pull_request_target
+
+jobs:
+  wip:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/labeler@v3
+      with:
+        configuration-path: './.github/wip-labeler.yml'
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
+  categorise:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/labeler@v3
+      with:
+        configuration-path: './.github/component-labeler.yml'
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        # Category labels will be removed if they no longer apply
+        sync-labels: true
