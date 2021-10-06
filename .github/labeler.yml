@@ -1,3 +1,27 @@
 # Add 'wip' label to all PRs
 wip:
-- '**/*'
+- any: [
+  '*',
+  'packages/**/*',
+  'stories/**/*',
+  'test/**/*'
+]
+
+# Component organisation
+atoms:
+- 'packages/components/atoms/**/*'
+
+molecules:
+- 'packages/components/molecules/**/*'
+
+organisms:
+- 'packages/components/organisms/**/*'
+
+services:
+- 'packages/services/**/*'
+
+storybook:
+- 'packages/storybook/**/*'
+
+tools:
+- 'packages/tools/**/*'
