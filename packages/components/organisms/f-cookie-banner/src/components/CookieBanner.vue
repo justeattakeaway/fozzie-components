@@ -186,9 +186,9 @@ export default {
         },
 
         /**
-		 * Return the cookie consent name with the suffix if provided.
-		 * @returns {String}
-		 */
+         * Return the cookie consent name with the suffix if provided.
+         * @returns {String}
+         */
         consentCookieName () {
             const baseCookieName = 'je-cookieConsent';
 
