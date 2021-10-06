@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.3.0
+------------------------------
+*October 6, 2021*
+
+### Added
+- Labeler action
+  - Automatically applies `wip` label to new PRs
+  - Applies category labels based on whether the PR affects `atoms`, `molecules`, `services`, etc.
+
+
 v4.2.0
 ------------------------------
 *October 5, 2021*
@@ -14,7 +24,7 @@ v4.2.0
 
 v4.1.0
 ------------------------------
-*October 04, 2021*
+*October 4, 2021*
 
 ### Updated
 - Circle CI cached components to include new f-restaurant-card component
