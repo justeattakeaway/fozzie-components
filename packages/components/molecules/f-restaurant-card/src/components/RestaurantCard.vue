@@ -6,17 +6,10 @@
 </template>
 
 <script>
-import RestaurantCardV1 from './RestaurantCard.v1.vue';
-
-const componentVersions = {
-    v1: RestaurantCardV1
-};
+import restaurantCardVersions from './restaurantCardVersions';
 
 export default {
     name: 'RestaurantCard',
-    components: {
-        RestaurantCardV1
-    },
     props: {
         // restaurant & display data
         data: {
@@ -36,7 +29,7 @@ export default {
     },
     computed: {
         componentVersion () {
-            return componentVersions[this.version];
+            return restaurantCardVersions.components[this.version];
         }
     }
 };

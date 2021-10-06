@@ -16,7 +16,7 @@
 <script>
 
 export default {
-    name: 'RestaurantCard',
+    name: 'RestaurantCardV1',
     components: {},
     props: {
         // restaurant & display data
