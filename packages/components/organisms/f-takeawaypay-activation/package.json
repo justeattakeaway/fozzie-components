@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-takeawaypay-activation",
   "description": "Fozzie TakeawayPay Activation - Handles Takeaway Pay activation for users",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "main": "dist/f-takeawaypay-activation.umd.min.js",
   "maxBundleSize": "40kB",
   "files": [
