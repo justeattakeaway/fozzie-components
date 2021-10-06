@@ -9,7 +9,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/labeler@v3
       with:
-        configuration-path: './.github/wip-labeler.yml'
+        configuration-path: '.github/wip-labeler.yml'
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
   categorise:
@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/labeler@v3
       with:
-        configuration-path: './.github/component-labeler.yml'
+        configuration-path: '.github/component-labeler.yml'
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         # Category labels will be removed if they no longer apply
         sync-labels: true

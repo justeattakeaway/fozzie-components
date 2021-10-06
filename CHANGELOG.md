@@ -6,11 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.4.0
 ------------------------------
-*October 6, 2021*
+*October 7, 2021*
 
 ### Added
 - Conditional logic to visual regression tests (via new `visual-regression-preflight.js` script)
 - Custom Github Action for triggering Circle CI pipeline when `wip` tag is removed.
+
+
+v4.3.1
+------------------------------
+*October 6, 2021*
+
+### Changed
+- `labeler` workflow config path
 
 
 v4.3.0
