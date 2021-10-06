@@ -33,12 +33,13 @@ RestaurantCardComponent.args = {
             localLegend: false
         },
 
-        flags: {
-            fancyNewTitle: false,
-            experimentalBadges: true
-        },
 
         cloudinaryEnabled: true
+    },
+
+    flags: {
+        fancyNewTitle: false,
+        experimentalBadges: true
     },
 
     version: 'v1'

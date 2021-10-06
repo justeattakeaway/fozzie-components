@@ -1,7 +1,8 @@
 <template>
     <component
         :is="componentVersion"
-        :data="data" />
+        :data="data"
+        :flags="flags" />
 </template>
 
 <script>
@@ -17,10 +18,17 @@ export default {
         RestaurantCardV1
     },
     props: {
+        // restaurant & display data
         data: {
             type: Object,
             required: true
         },
+        // feature flags
+        flags: {
+            type: Object,
+            default: () => ({})
+        },
+        // component version
         version: {
             type: String,
             default: 'v1'

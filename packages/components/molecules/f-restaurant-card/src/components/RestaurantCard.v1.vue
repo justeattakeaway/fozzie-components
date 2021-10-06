@@ -7,7 +7,7 @@
             <p>{{ data.restaurant.name }}</p>
         </a>
 
-        <p v-if="data.flags.experimentalBadges">
+        <p v-if="flags.experimentalBadges">
             Using fancy new badges!
         </p>
     </section>
@@ -19,10 +19,16 @@ export default {
     name: 'RestaurantCard',
     components: {},
     props: {
+        // restaurant & display data
         data: {
             type: Object,
             required: true
-        }
+        },
+        // feature flags
+        flags: {
+            type: Object,
+            default: () => ({})
+        },
     }
 };
 </script>
