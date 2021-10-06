@@ -7,7 +7,7 @@ v2.2.0
 ------------------------------
 *October 06, 2021*
 
-### Added
+### Changed
 - Reverted Takeaway Pay => Just Eat Pay renaming
 
 v2.1.0
