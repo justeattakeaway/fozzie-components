@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.2.0
+------------------------------
+*October 06, 2021*
+
+### Added
+- New prop `nameSuffix` so teams or 3rd parties using this component can save the user's consent under a different cookie name. This allows the cookie banner to work on multiple sub-domains easily.
+
+
 v3.1.0
 ------------------------------
 *October 05, 2021*

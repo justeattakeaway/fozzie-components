@@ -1,4 +1,6 @@
-import { withKnobs, select, boolean } from '@storybook/addon-knobs';
+import {
+    withKnobs, select, boolean, text
+} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import CookieBanner from '../src/components/CookieBanner.vue';
 
@@ -24,6 +26,10 @@ export const CookieBannerComponent = () => ({
 
         shouldUseGreyBackground: {
             default: boolean('Reopen link uses grey background', true)
+        },
+
+        nameSuffix: {
+            default: text('Cookie name suffix', '')
         }
     },
     template: `<cookie-banner
@@ -31,7 +37,8 @@ export const CookieBannerComponent = () => ({
         :is-hidden="isHidden"
         :key="locale"
         :should-show-legacy-banner="shouldShowLegacyBanner"
-        :should-use-grey-background="shouldUseGreyBackground" />`
+        :should-use-grey-background="shouldUseGreyBackground"
+		:nameSuffix="nameSuffix" />`
 });
 
 CookieBannerComponent.storyName = 'f-cookie-banner';
