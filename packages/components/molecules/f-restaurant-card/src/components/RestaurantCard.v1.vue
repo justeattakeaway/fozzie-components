@@ -28,7 +28,7 @@ export default {
         flags: {
             type: Object,
             default: () => ({})
-        },
+        }
     }
 };
 </script>
