@@ -1,12 +1,3 @@
-# Add 'wip' label to all PRs
-wip:
-- any: [
-  '*',
-  'packages/**/*',
-  'stories/**/*',
-  'test/**/*'
-]
-
 # Component organisation
 atoms:
 - 'packages/components/atoms/**/*'
