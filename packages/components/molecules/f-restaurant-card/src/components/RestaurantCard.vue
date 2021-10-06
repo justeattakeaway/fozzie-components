@@ -1,32 +1,35 @@
 <template>
-    <div
-        :class="$style['c-restaurantCard']"
-        data-test-id="restaurantCard-component">
-        I am a RestaurantCard Component (GB)
-    </div>
+    <component
+        :is="componentVersion"
+        :data="data" />
 </template>
 
 <script>
+import RestaurantCardV1 from './RestaurantCard.v1.vue';
+
+const componentVersions = {
+    v1: RestaurantCardV1
+};
 
 export default {
     name: 'RestaurantCard',
-    components: {},
+    components: {
+        RestaurantCardV1
+    },
     props: {
+        data: {
+            type: Object,
+            required: true
+        },
+        version: {
+            type: String,
+            default: 'v1'
+        }
+    },
+    computed: {
+        componentVersion () {
+            return componentVersions[this.version];
+        }
     }
 };
 </script>
-
-<style lang="scss" module>
-
-.c-restaurantCard {
-    display: flex;
-    justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
-    margin: auto;
-    border: 1px solid red;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
-}
-
-</style>
