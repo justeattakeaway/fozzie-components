@@ -4,10 +4,4 @@ export default class Compatibility {
             ...options
         };
     }
-
-    isCompatible () {
-        this.testUAString = this.configuration?.browserUAString;
-        this.testFor = this.configuration?.browserName;
-        return true;
-    }
 }

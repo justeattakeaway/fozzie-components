@@ -5,9 +5,4 @@ describe('f-compatibility', () => {
         // Arrange, Act & Assert
         expect(Compatibility).toBeDefined();
     });
-
-    it('should define expected method', () => {
-        // Arrange, Act & Assert
-        expect(new Compatibility().isCompatible).toBeDefined();
-    });
 });
