@@ -7,7 +7,7 @@ exports[`ActivationSuccessful should be rendered correctly 1`] = `
     All systems go.
   </h1>
   <p>
-    Just Eat Pay is now activated on your account.
+    Takeaway Pay is now activated on your account.
   </p>
   <div>
     <f-button-stub buttontype="primary" buttonsize="large" isfullwidth="true" actiontype="button" href="/home" data-test-id="takeawaypay-activation-home-link">
