@@ -356,6 +356,7 @@ describe('CookieBanner', () => {
                 // Assert
                 expect(cookieSpy).toHaveBeenCalledWith('full');
             });
+
             it('should push `full` to dataLayer', async () => {
                 // Arrange
                 const propsData = {};
@@ -373,6 +374,7 @@ describe('CookieBanner', () => {
                 // Assert
                 expect(dataLayerSpy).toHaveBeenCalledWith('full');
             });
+
             it('should hide the banner', () => {
                 // Arrange
                 const propsData = {};
@@ -409,6 +411,7 @@ describe('CookieBanner', () => {
                 // Assert
                 expect(cookieSpy).toHaveBeenCalledWith('necessary');
             });
+
             it('should push `necessary` to dataLayer', async () => {
                 // Arrange
                 const propsData = {};
@@ -426,6 +429,7 @@ describe('CookieBanner', () => {
                 // Assert
                 expect(dataLayerSpy).toHaveBeenCalledWith('necessary');
             });
+
             it('should remove unnecessary cookies', async () => {
                 // Arrange
                 const propsData = {};
@@ -443,6 +447,7 @@ describe('CookieBanner', () => {
                 // Assert
                 expect(removeCookiesSpy).toHaveBeenCalled();
             });
+
             it('should resend GTM events', async () => {
                 // Arrange
                 const propsData = {};
@@ -460,6 +465,7 @@ describe('CookieBanner', () => {
                 // Assert
                 expect(resendSpy).toHaveBeenCalled();
             });
+
             it('should hide the banner', () => {
                 // Arrange
                 const propsData = {};
@@ -475,9 +481,6 @@ describe('CookieBanner', () => {
 
                 // Assert
                 expect(wrapper.vm.shouldHideBanner).toBe(true);
-            });
-        });
-    });
             });
         });
 
@@ -515,4 +518,7 @@ describe('CookieBanner', () => {
                     // Assert
                     expect(consentCookieName).toMatchSnapshot();
                 });
+            });
+        });
+    });
 });

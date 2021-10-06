@@ -145,17 +145,16 @@ export default {
             type: Boolean,
             default: true
         },
-        
+
         shouldAbsolutePositionReopenLink: {
             type: Boolean,
             default: true
-        }
+        },
 
         nameSuffix: {
             type: String,
             default: ''
         }
-
     },
 
     data () {
