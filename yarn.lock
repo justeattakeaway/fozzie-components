@@ -2123,6 +2123,15 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-content-cards@6.0.0-beta.2":
+  version "6.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
+  integrity sha512-+Z1YqCpYMAZIZzZl7Bb+NAApKGvjNwypsAWcFlmqXpQgnmYV0C5CxJZo2z7VDXaQ7J7IZiTDH62YpvXJt1kP5A==
+  dependencies:
+    "@babel/plugin-proposal-class-properties" "7.12.13"
+    "@justeat/f-services" "1.0.1"
+    core-js "3.6.5"
+
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2164,13 +2173,14 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-searchbox@5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-5.1.0.tgz#11d2242bab6c5bef5783392055a0b5f1c58e9adc"
-  integrity sha512-Be/hj8uHMRpLykjOm7iwcT6Xjv/0zE3Dvh3DWrrBYQp5AJxFvTjl1EOdXb8JyEIs/VaicJeKBfym+321ziG0Wg==
+"@justeat/f-searchbox@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.0.0.tgz#fa6ea41ca3ccde26d5ed65511a96f1a728a9fc88"
+  integrity sha512-QdQHt/vr7WYzchm2RZoJ+E7WIcGmU32UB2ZEOYe6Vnt41gzMwpbjqLeZK6aD7kdSPrZr/UCrsT/69x6LV/33ZA==
   dependencies:
     caniuse-lite "1.0.30001251"
     lodash.debounce "4.0.8"
+    mitt "3.0.0"
 
 "@justeat/f-services@0.13.0":
   version "0.13.0"
@@ -2312,22 +2322,22 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@6.0.0-beta.1":
-  version "6.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.1.tgz#f9ae0ba3bed371770c993fbf297d68e16067a012"
-  integrity sha512-/tTyMrRZcg8fUxIHmlPo1UjFtlVYb+N4AolpLXIpsCmyQblJBkhx9sNCTipQEmJdYACQex4OL5RSdxq0pGewNw==
+"@justeat/fozzie@6.0.0-beta.5":
+  version "6.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.5.tgz#a2a357f96cd3e8a9076a9d0e4d58f687a4184398"
+  integrity sha512-YUBCnFGRDXb9DILjo8Ui8YdAZQ95ml25mGcYJQ1lNzlK29xcfnaJzQwSv1U5sfbKfhHZeyHGHRpN3071tREhFA==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
     "@justeat/f-utils" "2.0.0"
-    "@justeat/pie-design-tokens" "1.0.0-beta.0"
+    "@justeat/pie-design-tokens" "1.1.0"
     fontfaceobserver "2.1.0"
     include-media "1.4.10"
 
-"@justeat/pie-design-tokens@1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.0.0-beta.0.tgz#272457e7f806ac931800935cd54b10801c45a589"
-  integrity sha512-egiGduhwftk8O9KSnTnK5rN3cP/FY1TurdvFiC12C3mkXEImEZnpLTbf/sZ/StV95m4E69y45jiaPB87FXzSVw==
+"@justeat/pie-design-tokens@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.1.0.tgz#d93ad0411cd0457522d8bd466de521382682e05d"
+  integrity sha512-YtiJ7Uq+JZgYAJAFYr0e0an+p8RRk9MimAtqNnk2MFI5au7eNMFt3lTugwfoRgk4jKQfNg2RwTZe0tuuzzc8nw==
   dependencies:
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"
@@ -18025,6 +18035,11 @@ mississippi@^3.0.0:
     pumpify "^1.3.3"
     stream-each "^1.1.0"
     through2 "^2.0.0"
+
+mitt@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
 
 mixin-deep@^1.2.0:
   version "1.3.2"

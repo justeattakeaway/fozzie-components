@@ -1,10 +1,10 @@
 <template>
     <div>
         <content-cards
-            v-if="hasMounted"
             :user-id="globalUserId"
             :api-key="brazeApiKey"
             :locale="$i18n.locale"
+            :tags="tags"
             :push-to-data-layer="pushToDataLayer"
             @has-loaded="hasLoaded"
             @get-card-count="cardsReceived"
@@ -86,7 +86,8 @@ export default {
         isModalOpen: false,
         modalOngoingUrl: '',
         loadingCard: { type: 'postOrder', count: 3 },
-        pushToDataLayer: () => {}
+        pushToDataLayer: () => {},
+        tags: 'offers'
     }),
 
     computed: {
@@ -120,6 +121,12 @@ export default {
     mounted () {
         this.mountTime = Date.now();
         this.hasMounted = true;
+        this.loggingData = {
+            tags: this.tags,
+            data: {
+                timeSinceMount: Date.now() - this.mountTime
+            }
+        };
     },
 
     methods: {
@@ -151,7 +158,10 @@ export default {
          */
         cardsReceived (cards) {
             if (cards || this.contentCardsHaveLoaded) {
-                this.logInfo(`Content cards loaded: ${cards}`, this.getLogPayload(true));
+                this.$logger.logInfo('f-offers (Results) - Content cards received', this.$store, {
+                    ...this.loggingData,
+                    Count: cards
+                });
             }
         },
 
@@ -160,38 +170,28 @@ export default {
          */
         hasLoaded () {
             this.contentCardsHaveLoaded = true;
+            this.$logger.logInfo('f-offers (Results) - Content cards loaded successfully', this.$store, {
+                ...this.loggingData
+            });
         },
 
         /**
          * Handles errors emitted by the content cards component
-         * @param {Error} e
+         * @param {Error} error
          */
-        onError (e) {
-            this.error = e;
-            this.logInfo(`Content cards error reported: "${e}"`, this.getLogPayload());
-        },
-
-        /**
-         * A simple, safe wrapper for $logger.logInfo
-         * @param {String} message
-         * @param {Object} payload
-         */
-        logInfo (message, payload) {
-            if (this.$logger && this.$logger.logInfo) {
-                this.$logger.logInfo(message, null, payload);
-            }
-        },
-
-        /**
-         * Determines the time difference since mount, and the resolution status of the cards, if given
-         * @param {boolean} resolution
-         * @returns {Object}
-         */
-        getLogPayload (resolution = undefined) {
-            return {
-                resolution,
-                timeSinceMount: Date.now() - this.mountTime
-            };
+        onError (error) {
+            this.error = error;
+            this.$logger.logError('f-offers (Results) - An error has occurred during the loading of content cards', this.$store, {
+                ...this.loggingData,
+                error: {
+                    body: error,
+                    exception: error.name,
+                    exceptionMessage: error.message,
+                    exceptionStackTrace: error.stack,
+                    traceId: error.traceId || (error.response && error.response.data.traceId),
+                    errorCode: error.errorCode
+                }
+            });
         },
 
         /**

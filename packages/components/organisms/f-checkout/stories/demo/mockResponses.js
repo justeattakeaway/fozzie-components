@@ -26,6 +26,7 @@ import updateCheckoutServiceTypeUnavailable from './update-checkout-service-type
 import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-items-required.json';
 import updateCheckout403 from './update-checkout-403.json';
 import updateCheckoutTimeUnavailable from './update-checkout-time-unavailable.json';
+import updateCheckoutGeolocationRequired from './update-checkout-geolocation-required.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
@@ -232,6 +233,12 @@ const requestDefinitions = {
         url: '/update-checkout-timeout.json',
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.noResponse
+    },
+    updateCheckoutGeolocationRequired: {
+        url: '/update-checkout-geolocation-required.json',
+        method: httpMethods.patch,
+        responseStatus: httpStatusCodes.ok,
+        payload: updateCheckoutGeolocationRequired
     },
     getAddress: {
         url: '/get-address.json',

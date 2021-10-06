@@ -4,32 +4,47 @@
         :class="$style['c-checkoutTermsAndConditions']">
         <i18n path="checkoutTermsAndConditions">
             <template #termsAndConditions>
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
+                    is-distinct
                     :href="$t('termsAndConditionsLinkUrl')"
                     target="_blank">
-                    <span>{{ $t('termsAndConditionsLinkText') }}</span>
-                </a>
+                    {{ $t('termsAndConditionsLinkText') }}
+                </v-link>
             </template>
             <template #privacyPolicy>
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
+                    is-distinct
                     :href="$t('privacyPolicyLinkUrl')"
                     target="_blank">
-                    <span>{{ $t('privacyPolicyLinkText') }}</span>
-                </a>
+                    {{ $t('privacyPolicyLinkText') }}
+                </v-link>
             </template>
             <template #cookiePolicy>
-                <a
-                    class="o-link--bold"
+                <v-link
+                    is-bold
+                    is-distinct
                     :href="$t('cookiePolicyLinkUrl')"
                     target="_blank">
-                    <span>{{ $t('cookiePolicyLinkText') }}</span>
-                </a>
+                    {{ $t('cookiePolicyLinkText') }}
+                </v-link>
             </template>
         </i18n>
     </div>
 </template>
+
+<script>
+import VLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
+
+export default {
+    components: {
+        VLink
+    }
+};
+</script>
+
 
 <style lang="scss" module>
 

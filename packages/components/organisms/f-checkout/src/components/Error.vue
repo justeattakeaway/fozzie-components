@@ -1,6 +1,5 @@
 <template>
     <card
-        is-rounded
         has-outline
         is-page-content-wrapper
         card-heading-position="center"
