@@ -33,7 +33,6 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
     ])
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
             // Arrange
-            checkout.clearCheckoutForm(field);
             const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
             // Act
@@ -48,9 +47,6 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         ['jazzman@tunetown.com']
     ])
         .it('should be valid email address: "%s"', email => {
-            // Arrange
-            checkout.clearCheckoutForm('emailAddress');
-
             // Act
             checkout.setFieldValue('emailAddress', email);
             browser.keys('Tab');
@@ -67,9 +63,6 @@ describe('f-checkout "guest" component tests - @browserstack', () => {
         ['jazzman']
     ])
         .it('should be invalid email address: "%s"', email => {
-            // Arrange
-            checkout.clearCheckoutForm('emailAddress');
-
             // Act
             checkout.setFieldValue('emailAddress', email);
             browser.keys('Tab');
