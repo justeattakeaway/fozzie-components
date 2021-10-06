@@ -7,6 +7,10 @@ module.exports = class Breadcrumbs extends Page {
 
     get component () { return $('[data-test-id="breadcrumbs-component"]'); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

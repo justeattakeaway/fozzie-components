@@ -26,7 +26,10 @@ Object {
     "mobileNumber": "+447111111111",
   },
   "errors": Array [],
-  "geolocation": null,
+  "geolocation": Object {
+    "latitude": 51.5165,
+    "longitude": 0.1033,
+  },
   "hasAsapSelected": false,
   "id": "12345",
   "isFulfillable": true,

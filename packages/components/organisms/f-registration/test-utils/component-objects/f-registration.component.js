@@ -68,6 +68,10 @@ module.exports = class Registration extends Page {
         }
     };
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

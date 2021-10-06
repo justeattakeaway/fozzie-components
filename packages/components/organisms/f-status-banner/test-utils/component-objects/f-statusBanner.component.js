@@ -29,6 +29,10 @@ module.exports = class StatusBanner extends Page {
 
     get errorMessage () { return $(ERROR_MESSAGE); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

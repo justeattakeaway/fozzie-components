@@ -9,6 +9,10 @@ module.exports = class Tabs extends Page {
 
     get tabButtons () { return $$('[data-test-id*="tab-button"]'); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

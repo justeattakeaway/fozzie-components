@@ -9,6 +9,10 @@ module.exports = class MegaModal extends Page {
     get megaModalTitle () { return $('[data-test-id="mega-modal-title"]'); }
     get megaModalContent () { return $('[data-test-id="mega-modal-content"]'); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

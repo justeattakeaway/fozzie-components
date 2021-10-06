@@ -207,6 +207,10 @@ html:global(.is-navInView) {
             top: 0;
         }
     }
+
+    @include media('>mid') {
+        border-radius: 0 0 $radius-rounded-d $radius-rounded-d;
+    }
 }
 
     // Adds a border to the header to separate it from the
@@ -237,7 +241,7 @@ html:global(.is-navInView) {
     }
 
     .c-header--highlightBg {
-        background-color: $color-support-brand;
+        background-color: $color-support-brand-01;
         min-height: 88px;
     }
 
@@ -294,20 +298,6 @@ html:global(.is-navInView) {
         svg {
             fill: $header-buttonIcon-color;
         }
-    }
-
-    .c-header-buttonCount {
-        top: 0;
-        right: 0;
-        min-width: 16px;
-        padding: 1px 3px 0;
-        text-align: center;
-        border-radius: 8px;
-        position: absolute;
-        @include font-size(caption, false);
-        color: $header-buttonCount-color;
-        background: $header-buttonCount-bg;
-        border: 1px solid $header-buttonCount-borderColor;
     }
 
     .c-header-button--primary {

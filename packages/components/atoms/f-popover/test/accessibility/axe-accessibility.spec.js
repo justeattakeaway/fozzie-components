@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const Popover = require('../../test-utils/component-objects/f-popover.component');
@@ -7,9 +6,7 @@ const popover = new Popover();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(popover.componentType, popover.componentName, popover.path);
-        popover.open(pageUrl);
-        popover.waitForComponent();
+        popover.load();
     });
     it('a11y - should test f-popover component WCAG compliance', () => {
         // Act

@@ -7,6 +7,10 @@ module.exports = class MediaElement extends Page {
 
     get component () { return $('[data-test-id="mediaElement-component"]'); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

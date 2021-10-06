@@ -5,6 +5,11 @@ module.exports = class Link extends Page {
 
     get component () { return $(COMPONENT); }
 
+    load () {
+        this.open();
+        this.waitForComponent();
+    }
+
     open () {
         super.openComponent('atom', 'v-link-component');
     }

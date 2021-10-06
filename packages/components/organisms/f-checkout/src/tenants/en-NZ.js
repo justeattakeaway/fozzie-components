@@ -9,7 +9,7 @@ const messages = {
         locality: 'Town or city',
         postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
-        collectionOrderMethod: 'Collection time',
+        collectionOrderMethod: 'Pick-up time',
         dineinOrderMethod: 'Dine in time',
         tableIdentifier: 'Table number or name'
     },
@@ -108,7 +108,7 @@ const messages = {
 
             LOCATION_UNDELIVERABLE: {
                 title: 'Cannot deliver to address',
-                message: 'We’re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
+                message: 'We’re sorry, but the restaurant does not currently deliver to this address. Please choose to order via pick-up or from another restaurant.',
                 buttonText: 'Ok'
             },
 
@@ -116,6 +116,12 @@ const messages = {
                 title: 'Table number/name is required',
                 message: 'It appears you didn’t tell us how to find you in the restaurant. Please enter your table number and try again.',
                 buttonText: 'Ok'
+            },
+
+            GEOLOCATION_REQUIRED: {
+                title: 'Something went wrong',
+                message: 'We’re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
+                buttonText: 'Back to order'
             },
 
             DEFAULT_CHECKOUT_ISSUE: {
@@ -182,7 +188,7 @@ const messages = {
     },
 
     serviceTypes: {
-        collection: 'Collection',
+        collection: 'Pick-up',
         delivery: 'Delivery'
     },
 

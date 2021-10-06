@@ -9,6 +9,10 @@ module.exports = class Alert extends Page {
 
     get exitButton () { return $('[data-test-id="alert-dismiss"]'); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }

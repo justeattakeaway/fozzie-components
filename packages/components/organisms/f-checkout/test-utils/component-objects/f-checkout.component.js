@@ -123,6 +123,14 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
+    load () {
+        super.load(this.component);
+    }
+
+    loadError() {
+        super.load(this.errorPageComponent);
+    }
+
     open (url) {
         super.open(url);
     }
@@ -132,8 +140,8 @@ module.exports = class Checkout extends Page {
         return this;
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    waitForComponent (component = this.component) {
+        super.waitForComponent(component);
     }
 
     waitForErrorPageComponent () {

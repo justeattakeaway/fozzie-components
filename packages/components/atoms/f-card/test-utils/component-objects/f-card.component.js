@@ -5,6 +5,10 @@ module.exports = class Card extends Page {
         super('atom', 'card-component');
     }
 
+    load () {
+        super.load(this.component);
+    }
+
     get component () { return $('[data-test-id="card-component"]'); }
 
     open (url) {

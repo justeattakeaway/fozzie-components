@@ -23,6 +23,10 @@ module.exports = class HomePromotionCard1 extends Page {
 
     get subtitle () { return $(SUBTITLE); }
 
+    load () {
+        super.load(this.component);
+    }
+
     open (url) {
         super.open(url);
     }
