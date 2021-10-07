@@ -1,16 +1,18 @@
-name: "Pull Request Labeler"
-on:
-- pull_request_target
+name: Pull Request Labeler
+on: pull_request_target
+# By default, pull_request_target runs when the activity type is opened, synchronize, or reopened
+# https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request_target
 
 jobs:
   wip:
+    if: '${{ github.event.action != 'synchronize' }}' # Only apply the label for newly opened/reopened PRs
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions/labeler@v3
       with:
         configuration-path: '.github/wip-labeler.yml'
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        repo-token: '${{ secrets.GITHUB_TOKEN }}'
 
   categorise:
     runs-on: ubuntu-latest
@@ -19,6 +21,6 @@ jobs:
     - uses: actions/labeler@v3
       with:
         configuration-path: '.github/component-labeler.yml'
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        repo-token: '${{ secrets.GITHUB_TOKEN }}'
         # Category labels will be removed if they no longer apply
         sync-labels: true

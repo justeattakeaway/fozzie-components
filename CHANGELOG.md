@@ -13,6 +13,14 @@ v4.4.0
 - Custom Github Action for triggering Circle CI pipeline when `wip` tag is removed.
 
 
+v4.3.2
+------------------------------
+*October 6, 2021*
+
+### Updated
+- Only apply `wip` label to newly opened/reopened PRs.
+
+
 v4.3.1
 ------------------------------
 *October 6, 2021*
