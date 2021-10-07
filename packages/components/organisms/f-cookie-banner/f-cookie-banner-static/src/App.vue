@@ -1,5 +1,8 @@
 <template>
-    <cookie-banner locale='da-DK' />
+    <cookie-banner
+        locale='da-DK'
+        should-absolute-position-reopen-link={false}
+        my-custom-prop="ABC" />
 </template>
 
 <script>
