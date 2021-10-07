@@ -6,7 +6,7 @@
         :class="$style['c-restaurantCard']"
         data-test-id="restaurantCard-component">
         <a
-            :href="'/12345/menu'"
+            :href="url"
             @click="$emit('restaurant-card-clicked')">
 
             <!-- background image -->
@@ -86,6 +86,10 @@ export default {
             default: null
         },
         name: {
+            type: String,
+            default: null
+        },
+        url: {
             type: String,
             default: null
         },
