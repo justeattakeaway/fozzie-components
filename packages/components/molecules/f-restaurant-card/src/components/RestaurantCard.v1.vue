@@ -5,6 +5,15 @@
         <a
             :href="'/12345/menu'"
             @click="$emit('restaurant-card-clicked')">
+
+            <slot name="cuisines">
+                no cuisine slot loaded
+            </slot>
+
+            <slot name="new">
+                no 'new' label slot loaded
+            </slot>
+
             <!-- background image -->
             <img
                 src=""
@@ -29,28 +38,47 @@
             </h3>
 
             <!-- Cuisines -->
+            <!-- START ERROR BOUNDARY -->
             <ul data-test-id="restaurant-cuisines">
                 <li>Pizza</li>
                 <li>Chicken</li>
             </ul>
+            <!-- END ERROR BOUNDARY -->
+
 
             <!-- New label -->
+            <!-- START ERROR BOUNDARY -->
             <strong>New</strong>
+            <!-- END ERROR BOUNDARY -->
 
             <!-- Ratings -->
+            <!-- START ERROR BOUNDARY -->
             <div>5 Stars</div>
+            <!-- END ERROR BOUNDARY -->
 
             <!-- Offline Icon -->
             <div>Offline Icon</div>
 
             <!-- Meta Items List -->
             <ul>
+                <!-- START ERROR BOUNDARY -->
                 <li>Stampcard</li>
+                <!-- END ERROR BOUNDARY -->
+                <!-- START ERROR BOUNDARY -->
                 <li>Offer icon + text</li>
+                <!-- END ERROR BOUNDARY -->
+                <!-- START ERROR BOUNDARY -->
                 <li>Delivery fees</li>
+                <!-- END ERROR BOUNDARY -->
+                <!-- START ERROR BOUNDARY -->
                 <li>Times</li>
+                <!-- END ERROR BOUNDARY -->
+                <!-- START ERROR BOUNDARY -->
                 <li>ETA</li>
+                <!-- END ERROR BOUNDARY -->
+                <!-- START ERROR BOUNDARY -->
                 <li>Location</li>
+                <!-- END ERROR BOUNDARY -->
             </ul>
 
             <!-- Local Legend label -->
@@ -59,10 +87,12 @@
             <!-- Badges -->
             <div>
                 <!-- misc badges -->
+                <!-- START ERROR BOUNDARY -->
                 <ul>
                     <li>Best awards 2020</li>
                     <li>Super restaurant 2019</li>
                 </ul>
+                <!-- END ERROR BOUNDARY -->
 
                 <!-- promoted badge -->
                 <span>Promoted</span>
@@ -70,6 +100,7 @@
 
             <!-- Optional items i.e. dish search results -->
             <ul>
+                <!-- START ERROR BOUNDARY -->
                 <li>
                     Dish results list
                     <ul data-test-id="dishsearch-dish-list">
@@ -77,6 +108,7 @@
                         <li data-test-id="dishsearch-dish-item">Dish 2</li>
                     </ul>
                 </li>
+                <!-- END ERROR BOUNDARY -->
             </ul>
         </a>
     </section>
