@@ -168,7 +168,7 @@ $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 
     .c-stampcards-stampCardsSlot-stampCard {
         margin: spacing();
-
+        overflow: auto;
         @include media($stampCard-responsive-mobileViewBreakpoint) {
             flex: 1 1 90%;
         }
