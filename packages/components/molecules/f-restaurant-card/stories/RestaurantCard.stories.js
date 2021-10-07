@@ -18,16 +18,10 @@ export const RestaurantCardComponent = (args, { argTypes }) => ({
 
 RestaurantCardComponent.args = {
     data: {
-        address: '11 Foo Bar, Baz, XXX XXX',
-        cuisines: ['kebabs', 'pizza', 'halal'],
         id: '00000',
-        isNew: false,
-        isPremier: false,
-        isTemporarilyOffline: false,
-        isTemporaryBoost: false,
-        logo: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/00000.gif',
         name: 'Fake Restaurant',
-        uniqueName: 'fakerestaurant-123'
+        isTemporarilyOffline: false,
+        logo: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/00000.gif'
     },
 
     flags: {
