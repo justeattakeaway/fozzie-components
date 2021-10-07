@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.0
 ------------------------------
-*October 6, 2021*
+*October 7, 2021*
 
 ### Added
 - Functionality for adding products to a basket in `basketApi`
