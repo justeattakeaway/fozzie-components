@@ -95,10 +95,6 @@ module.exports = class Checkout extends Page {
             get input () { return $(FIELDS.addressLocality.input); },
             get error () { return $(FIELDS.addressLocality.error); }
         },
-        addressAdministrativeArea: {
-            get input () { return $(FIELDS.addressAdministrativeArea.input); },
-            get error () { return $(FIELDS.addressAdministrativeArea.error); }
-        },
         addressPostcode: {
             get input () { return $(FIELDS.addressPostcode.input); },
             get error () { return $(FIELDS.addressPostcode.error); },
@@ -111,6 +107,10 @@ module.exports = class Checkout extends Page {
         tableIdentifier: {
             get input () { return $(FIELDS.tableIdentifier.input); },
             get maxLengthError () { return $(FIELDS.tableIdentifier.maxLengthError); }
+        },
+        addressAdministrativeArea: {
+            get input () { return $(FIELDS.addressAdministrativeArea.input); },
+            get error () { return $(FIELDS.addressAdministrativeArea.error); }
         }
     }
     /**
@@ -172,10 +172,6 @@ module.exports = class Checkout extends Page {
         return this.userNoteInput.getAttribute('maxlength');
     }
 
-    clickPaymentButton () {
-        return this.goToPaymentButton.click();
-    }
-
     clickGuestCheckoutLoginButton () {
         return this.guestCheckoutLoginButton.click();
     }
@@ -200,24 +196,6 @@ module.exports = class Checkout extends Page {
         };
     }
 
-    /**
-    * @description
-    * Inputs user details into the registration component and submits the form.
-    *
-    * @param {Object} userInfo
-    * @param {String} userInfo.firstName The user's first name
-    * @param {String} userInfo.lastName The user's last name
-    * @param {String} userInfo.email The user's e-mail address
-    * @param {String} userInfo.password The user's password
-    */
-    submitForm (userInfo) {
-        this.fields.firstName.input.setValue(userInfo.firstName);
-        this.fields.lastName.input.setValue(userInfo.lastName);
-        this.fields.email.input.setValue(userInfo.email);
-        this.fields.password.input.setValue(userInfo.password);
-        this.createAccountButton.click();
-    }
-
     isCheckoutErrorMessageDisplayed () {
         return this.checkoutErrorMessage.isDisplayedInViewport();
     }
@@ -234,108 +212,63 @@ module.exports = class Checkout extends Page {
     * @description
     * Inputs address details into the checkout component.
     *
-    * @param {Object} addressInfo
-    * @param {String} addressInfo.mobileNumber The user's mobile number
-    * @param {String} addressInfo.line1 First line of the user's address
-    * @param {String} addressInfo.line2 Second line of the user's address
-    * @param {String} addressInfo.locality Locality of the user's address
-    * @param {String} addressInfo.postcode Postcode of the user's address
-    * @param {String} addressInfo.note The user's extra note
-    */
-    populateCheckoutForm (addressInfo) {
-        this.waitForComponent();
-        this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
-        this.fields.addressLine1.input.setValue(addressInfo.line1);
-        this.fields.addressLine2.input.setValue(addressInfo.line2);
-        this.fields.addressLocality.input.setValue(addressInfo.locality);
-        this.fields.addressPostcode.input.setValue(addressInfo.postcode);
-        this.fields.userNote.input.setValue(addressInfo.note);
-    }
-
-    /**
-    * @description
-    * Inputs address details into the checkout component.
-    *
-    * @param {Object} addressInfo
-    * @param {String} addressInfo.emailAddress The user's email addess
-    * @param {String} addressInfo.mobileNumber The user's mobile number
-    * @param {String} addressInfo.line1 First line of the user's address
-    * @param {String} addressInfo.line2 Second line of the user's address
-    * @param {String} addressInfo.locality Locality of the user's address
-    * @param {String} addressInfo.postcode Postcode of the user's address
-    * @param {String} addressInfo.note The user's extra note
-    */
-    populateGuestCheckoutForm (addressInfo) {
-        this.waitForComponent();
-        this.fields.emailAddress.input.setValue(addressInfo.emailAddress);
-        this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
-        this.fields.addressLine1.input.setValue(addressInfo.line1);
-        this.fields.addressLine2.input.setValue(addressInfo.line2);
-        this.fields.addressLocality.input.setValue(addressInfo.locality);
-        this.fields.addressPostcode.input.setValue(addressInfo.postcode);
-        this.fields.userNote.input.setValue(addressInfo.note);
-    }
-
-    /**
-    * @description
-    * Inputs address details into the checkout component.
-    *
-    * @param {Object} addressInfo
-    * @param {String} addressInfo.emailAddress The user's email addess
-    * @param {String} addressInfo.mobileNumber The user's mobile number
-    * @param {String} addressInfo.note The user's extra note
-    */
-    populateGuestCollectionCheckoutForm (addressInfo) {
-        this.waitForComponent();
-        this.fields.emailAddress.input.setValue(addressInfo.emailAddress);
-        this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
-        this.fields.userNote.input.setValue(addressInfo.note);
-    }
-
-    /**
-    * @description
-    * Inputs customer details into the checkout component.
-    *
+    * @param {Object} checkoutInfo
+    * @param {String} checkoutInfo.serviceType
+    * @param {boolean} checkoutInfo.isAuthenticated
+    * @param {Object} checkoutInfo.tenant
     * @param {Object} customerInfo
-    * @param {String} customerInfo.mobileNumber The user's mobile number
-    * @param {String} customerInfo.tableIdentifier The user's table ID
-    * @param {String} customerInfo.note The user's extra note
+    * @param {String} customerInfo.emailAddress Email address of the guest user.
+    * @param {String} customerInfo.mobileNumber The user's mobile number - delivery service type.
+    * @param {String} customerInfo.line1 First line of the user's address - delivery service type.
+    * @param {String} customerInfo.line2 Second line of the user's address - delivery service type.
+    * @param {String} customerInfo.locality Locality of the user's address - delivery service type.
+    * @param {String} customerInfo.postcode Postcode of the user's address - delivery service type.
+    * @param {String} customerInfo.orderTime Time of user's requested delivery/collection/dine-in time.
+    * @param {String} customerInfo.tableIdentifier Table number of user.
+    * @param {String} customerInfo.note The user's extra note.
     */
-    populateDineInCheckoutForm (customerInfo) {
-        this.waitForComponent();
-        this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
-        this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
-        this.fields.userNote.input.setValue(customerInfo.note);
+    populateCheckoutForm (checkoutInfo, customerInfo) {
+        if (!checkoutInfo.isAuthenticated) {
+            this.#populateSharedGuestFields(customerInfo)
+        }
+
+        switch (checkoutInfo.serviceType) {
+            case 'delivery':
+                this.#populateDeliveryFields(customerInfo)
+            break;
+            case 'dinein':
+                this.#populateDineInFields(customerInfo)
+            break;
+        }
+
+        if (customerInfo.mobileNumber) {
+            this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
+        }
+
+        if (customerInfo.orderTime) {
+            this.#selectOrderTime(customerInfo.orderTime)
+        }
+
+        if (customerInfo.userNote) {
+            this.fields.userNote.input.setValue(customerInfo.userNote);
+        }
     }
 
-    /**
-    * @description
-    * Inputs customer details into the checkout component.
-    *
-    * @param {Object} customerInfo
-    * @param {String} customerInfo.email The user's e-mail address
-    * @param {String} customerInfo.mobileNumber The user's mobile number
-    * @param {String} customerInfo.tableIdentifier The user's table ID
-    * @param {String} customerInfo.note The user's extra note
-    */
-    populateGuestDineInCheckoutForm (customerInfo) {
-        this.waitForComponent();
+    #populateSharedGuestFields (customerInfo) {
+        this.fields.firstName.input.setValue(customerInfo.firstName);
+        this.fields.lastName.input.setValue(customerInfo.lastName);
         this.fields.emailAddress.input.setValue(customerInfo.emailAddress);
-        this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
-        this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
-        this.fields.userNote.input.setValue(customerInfo.note);
     }
 
-    /**
-    * @description
-    * Changes checkout page to reflect checkout method to either delivery or collection depending on index given.
-    *
-    * @param {string} method The collection type: either 'delivery' or 'collection'
-    */
-    changeCheckoutMethod (method) {
-        const file = `/checkout-${method}.json`;
-        this.knobButton.click();
-        this.knobCheckoutDropdown.selectByVisibleText(file);
+    #populateDeliveryFields (customerInfo) {
+        this.fields.addressLine1.input.setValue(customerInfo.line1);
+        this.fields.addressLine2.input.setValue(customerInfo.line2);
+        this.fields.addressLocality.input.setValue(customerInfo.locality);
+        this.fields.addressPostcode.input.setValue(customerInfo.postcode);
+    }
+
+    #populateDineInFields (customerInfo) {
+        this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
     }
 
     /**
@@ -348,7 +281,8 @@ module.exports = class Checkout extends Page {
     * @param {String} fieldName The name of the field input it is clearing
     */
     clearBlurField (fieldName) {
-        const CONTROL = '\uE009';
+        // Determines the OS
+        const CONTROL = process.platform === 'darwin' ? 'Command' : '\uE009';
         const el = this.fields[fieldName].input;
         el.click();
         el.keys([CONTROL, 'a']);
@@ -374,15 +308,8 @@ module.exports = class Checkout extends Page {
      *
      * @param {String} fields Grabs the fields of the above object and runs a forEach loop to get the keys
      */
-    clearCheckoutForm (fieldName) {
-        this.waitForComponent();
+     clearCheckoutField (fieldName) {
         this.clearField(fieldName);
-    }
-
-    populateCollectionCheckoutForm (addressInfo) {
-        this.waitForComponent();
-        this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
-        this.fields.userNote.input.setValue(addressInfo.note);
     }
 
     /**
@@ -391,7 +318,7 @@ module.exports = class Checkout extends Page {
     *
     * @param {String} orderTime The visible text value of the order time
     */
-    selectOrderTime (orderTime) {
+    #selectOrderTime (orderTime) {
         this.orderTimeDropdown.selectByVisibleText(orderTime);
     }
 
@@ -414,7 +341,7 @@ module.exports = class Checkout extends Page {
     *
     * @returns {String} The value of the field
     */
-    getFieldValue (fieldName) {
+     getFieldValue (fieldName) {
         return this.fields[fieldName].input.getValue();
     }
 
