@@ -2,7 +2,13 @@
     <component
         :is="componentVersion"
         v-bind="data"
-        :flags="flags" />
+        :flags="flags">
+        <template
+            v-for="(_, slotName) in $slots"
+            v-slot:[slotName]>
+            <slot :name="slotName" />
+        </template>
+    </component>
 </template>
 
 <script>
