@@ -97,7 +97,7 @@ export default {
         vertical-align: middle;
 
         padding: spacing() 1.2em;
-        border-radius: $border-radius;
+        border-radius: $radius-rounded-c;
         font-weight: $font-weight-bold;
         font-family: $font-family-base;
         @include font-size('body-l');

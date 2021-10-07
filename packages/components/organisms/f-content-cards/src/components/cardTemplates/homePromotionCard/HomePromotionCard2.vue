@@ -160,7 +160,7 @@ export default {
         display: block;
         width: 100%;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
+        border-radius: $radius-rounded-c;
         padding: spacing(x2) calc(35% + #{spacing()}) spacing(x2) spacing(x2);
         max-width: 800px; //to replicate max-width of searchbox
         margin: auto;

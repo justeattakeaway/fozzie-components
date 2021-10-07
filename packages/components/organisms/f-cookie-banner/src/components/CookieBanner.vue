@@ -85,29 +85,25 @@
     <div v-else>
         <reopen-banner-link
             v-if="!legacyBanner"
+            ref="reopenCookieBannerLink"
             :message="copy.reopenCookieBannerLinkText"
             :use-grey-background="shouldUseGreyBackground"
-            :class="{ [$style['reopen-link-wrapper']]: reopenLinkToBottom }"
+            :class="{ [$style['reopen-link-wrapper']]: isBodyHeightLessThanWindowHeight }"
             @reopenBanner="reopenBanner" />
     </div>
 </template>
 
 <script>
 import CookieHelper from 'js-cookie';
-
 import { globalisationServices } from '@justeat/f-services';
-
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-
 import MegaModal from '@justeat/f-mega-modal';
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
-
 import LegacyBanner from './LegacyBanner.vue';
-
 import ReopenBannerLink from './ReopenBannerLink.vue';
-
 import tenantConfigs from '../tenants';
+import { LEGACY_CONSENT_COOKIE_NAME, CONSENT_COOKIE_NAME } from '../constants';
 
 export default {
     components: {
@@ -141,6 +137,16 @@ export default {
         shouldUseGreyBackground: {
             type: Boolean,
             default: true
+        },
+
+        shouldAbsolutePositionReopenLink: {
+            type: Boolean,
+            default: true
+        },
+
+        nameSuffix: {
+            type: String,
+            default: ''
         }
     },
 
@@ -149,19 +155,15 @@ export default {
         const localeConfig = tenantConfigs[locale];
         const theme = globalisationServices.getTheme(locale);
         const copy = localeConfig.messages;
-        const consentCookieName = 'je-cookieConsent';
-        const legacyConsentCookieName = 'je-banner_cookie';
-        const reopenLinkToBottom = this.isBodyHeightLessThanWindowHeight();
 
         return {
             config: { ...localeConfig },
             theme,
             copy,
             shouldHideBanner: true,
-            consentCookieName,
-            legacyConsentCookieName,
             isIosBrowser: false,
-            reopenLinkToBottom
+            bodyObserver: undefined,
+            isBodyHeightLessThanWindowHeight: false
         };
     },
 
@@ -172,6 +174,16 @@ export default {
          */
         legacyBanner () {
             return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
+        },
+
+        /**
+         * Return the cookie consent name with the suffix if provided.
+         * @returns {String}
+         */
+        consentCookieName () {
+            return this.nameSuffix
+                ? `${CONSENT_COOKIE_NAME}-${this.nameSuffix}`
+                : CONSENT_COOKIE_NAME;
         }
     },
 
@@ -179,6 +191,10 @@ export default {
         isHidden (newVal) {
             this.shouldHideBanner = !!newVal;
         }
+    },
+
+    destroyed () {
+        this.bodyObserver.disconnect();
     },
 
     mounted () {
@@ -190,9 +206,26 @@ export default {
             });
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
+
+        if (this.shouldAbsolutePositionReopenLink) {
+            this.bodyObserver = new ResizeObserver(this.updateIsBodyHeightLessThanWindowHeight);
+            const bodyElement = document.documentElement || document.body;
+            this.bodyObserver.observe(bodyElement);
+        }
     },
 
     methods: {
+        /**
+         * Triggered by <body> ResizeObserver calculates if the body height less than the window
+         */
+        updateIsBodyHeightLessThanWindowHeight () {
+            if (typeof window === 'object' && this.shouldHideBanner) {
+                const reopenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight || 0;
+                this.isBodyHeightLessThanWindowHeight =
+                (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
+            }
+        },
+
         /**
          * Actions for "Accept all cookies" button
          */
@@ -204,6 +237,7 @@ export default {
                 this.resendEvents();
                 this.dispatchCustomEvent();
                 this.hideAllBanners();
+                this.updateIsBodyHeightLessThanWindowHeight();
             });
         },
 
@@ -219,6 +253,7 @@ export default {
                 this.removeUnnecessaryCookies();
                 this.dispatchCustomEvent();
                 this.hideAllBanners();
+                this.updateIsBodyHeightLessThanWindowHeight();
             });
         },
 
@@ -290,7 +325,7 @@ export default {
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.shouldHideBanner = CookieHelper.get(this.legacyConsentCookieName) === '130315';
+                this.shouldHideBanner = CookieHelper.get(LEGACY_CONSENT_COOKIE_NAME) === '130315';
                 this.setLegacyCookieBannerCookie();
             } else {
                 const cookieConsent = CookieHelper.get(this.consentCookieName);
@@ -319,7 +354,7 @@ export default {
          * Set the legacy cookie banner cookie
          */
         setLegacyCookieBannerCookie () {
-            CookieHelper.set(this.legacyConsentCookieName, '130315', {
+            CookieHelper.set(LEGACY_CONSENT_COOKIE_NAME, '130315', {
                 path: '/',
                 expires: this.cookieExpiry
             });
@@ -372,17 +407,6 @@ export default {
                     break;
                 }
             }
-        },
-
-        /**
-         * Check to see if we need to absolute position reopen link.
-         * * @returns {Boolean}
-         */
-        isBodyHeightLessThanWindowHeight () {
-            if (typeof window === 'object') {
-                return window.innerHeight - document.body.offsetHeight > 0;
-            }
-            return false;
         },
 
         /**

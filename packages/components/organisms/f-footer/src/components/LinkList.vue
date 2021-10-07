@@ -169,6 +169,7 @@ export default {
 
 .c-footer-list-link {
     color: $footer-textColor;
+    @include font-size(body-s);
     display: inline-block;
     padding: spacing() spacing(x2);
     text-decoration: none;
