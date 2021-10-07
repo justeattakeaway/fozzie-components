@@ -137,15 +137,17 @@ Finally, use the generated bundle in your HTML page
 
 The Non Vue version is compiled using the Vue CLI [pre-render plugin](https://github.com/SolarLiner/vue-cli-plugin-prerender-spa) this means that prop values are essentially hardcoded at compilation. You can configure your own custom version by simply adding the required props to the base template file used by the pre-renderer.
 
-Props should be added to the [App.vue](https://github.com/justeat/fozzie-components/blob/master/packages/components/organisms/f-cookie-banner/f-cookie-banner-static/src/App.vue) Remember the `locale` prop will be replaced by the gulpfile and build task.
+Props should be added to the [App.vue](https://github.com/justeat/fozzie-components/blob/master/packages/components/organisms/f-cookie-banner/f-cookie-banner-static/src/App.vue) Remember the `locale` prop will be replaced by the and build task.
 
+In the code example below we add the `nameSuffix` prop:
 
 ```html
 <template>
     <cookie-banner
         locale='da-DK'
         should-absolute-position-reopen-link={false}
-        my-custom-prop="ABC" />
+        nameSuffix="myName"
+    />
 </template>
 ```
 
