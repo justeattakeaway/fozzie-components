@@ -546,6 +546,11 @@ export default {
             this.checkoutAnalyticsService.trackInitialLoad();
             this.$emit(EventNames.CheckoutMounted);
         } else {
+            this.logInvoker({
+                message: 'Redirected to Login',
+                logMethod: this.$logger.logInfo
+            });
+
             window.location.assign(this.loginUrl);
         }
     },

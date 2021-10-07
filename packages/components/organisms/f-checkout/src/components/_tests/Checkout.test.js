@@ -1310,16 +1310,25 @@ describe('Checkout', () => {
             let setAuthTokenSpy;
             let wrapper;
 
+            const store = createStore({
+                ...defaultCheckoutState,
+                isLoggedIn: false,
+                serviceType: CHECKOUT_METHOD_DELIVERY
+            });
+
             beforeEach(() => {
                 i18n.locale = 'en-AU';
                 initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
                 setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
 
                 wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
+                    store,
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
                 });
             });
 
@@ -1338,12 +1347,17 @@ describe('Checkout', () => {
 
             it('should not call `initialise`', () => {
                 // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(wrapper.vm.loginUrl);
                 expect(initialiseSpy).toHaveBeenCalledTimes(0);
             });
 
             it('should redirect to login', () => {
+                // Assert
                 expect(windowLocationSpy).toHaveBeenCalledWith(wrapper.vm.loginUrl);
+            });
+
+            it('should log `Redirected to Login', () => {
+                // Assert
+                expect($logger.logInfo).toHaveBeenCalledWith('Redirected to Login', store, { data: undefined, tags: 'checkout' });
             });
         });
     });
