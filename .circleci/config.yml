@@ -231,7 +231,7 @@ commands:
             then
               yarn test:visual
             else
-              echo Skipping visual regression tests (PR is either in draft mode or has 'wip' label applied)
+              echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
             fi
 
   slack_notify_fail:
