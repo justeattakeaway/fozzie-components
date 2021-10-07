@@ -1,11 +1,14 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import CookieHelper from 'js-cookie';
 import CookieBanner from '../CookieBanner.vue';
+import { LEGACY_CONSENT_COOKIE_NAME, CONSENT_COOKIE_NAME } from '../../constants';
 
 const localVue = createLocalVue();
 const i18n = {
     locale: 'en-IE'
 };
+
+jest.mock('js-cookie');
 
 describe('CookieBanner', () => {
     beforeEach(() => {
@@ -211,16 +214,19 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
                     propsData,
                     computed: {
-                        legacyBanner: () => false
+                        legacyBanner: () => false,
+                        consentCookieName: () => CONSENT_COOKIE_NAME
                     }
                 });
-                CookieHelper.set('je-cookieConsent', cookieValue);
+
+                CookieHelper.get.mockReturnValue(cookieValue);
+
+                // Act
                 wrapper.vm.checkCookieBannerCookie();
 
                 // Assert
@@ -231,20 +237,23 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
                 const expected = { event: 'trackConsent', userData: { consent: 'shown' } };
+
                 Object.defineProperty(global, 'window', {
                     value: {
                         dataLayer: []
                     }
                 });
-                window.dataLayer = [];
-                CookieHelper.remove('je-cookieConsent');
 
-                // Act
+                window.dataLayer = [];
+                CookieHelper.get.mockReturnValue(null);
+
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
                     propsData
                 });
+
+                // Act
                 wrapper.vm.checkCookieBannerCookie();
 
                 // Assert
@@ -255,20 +264,23 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
                 const expected = { event: 'trackConsent', userData: { consent: 'shown' } };
+
                 Object.defineProperty(global, 'window', {
                     value: {
                         dataLayer: []
                     }
                 });
-                window.dataLayer = [];
-                CookieHelper.set('je-cookieConsent', 'full');
 
-                // Act
+                window.dataLayer = [];
+                CookieHelper.get.mockReturnValue('full');
+
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
                     propsData
                 });
+
+                // Act
                 wrapper.vm.checkCookieBannerCookie();
 
                 // Assert
@@ -281,24 +293,29 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
-                    propsData
+                    propsData,
+                    computed: {
+                        cookieName () {
+                            return CONSENT_COOKIE_NAME;
+                        }
+                    }
                 });
-                const mockCookieHelper = jest.spyOn(CookieHelper, 'set').mockImplementation(() => {});
-                const payloadName = 'je-cookieConsent';
+
+                const payloadName = CONSENT_COOKIE_NAME;
                 const payloadValue = 'foo';
                 const payloadObj = {
                     path: '/',
                     expires: 90
                 };
 
+                // Act
                 wrapper.vm.setCookieBannerCookie('foo');
 
                 // Assert
-                expect(mockCookieHelper).toHaveBeenCalledWith(payloadName, payloadValue, payloadObj);
+                expect(CookieHelper.set).toHaveBeenCalledWith(payloadName, payloadValue, payloadObj);
             });
         });
 
@@ -307,20 +324,20 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
                     propsData
                 });
                 const mockCookieHelper = jest.spyOn(CookieHelper, 'set').mockImplementation(() => {});
-                const payloadName = 'je-banner_cookie';
+                const payloadName = LEGACY_CONSENT_COOKIE_NAME;
                 const payloadValue = '130315';
                 const payloadObj = {
                     path: '/',
                     expires: 90
                 };
 
+                // Act
                 wrapper.vm.setLegacyCookieBannerCookie();
 
                 // Assert
@@ -333,7 +350,6 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
@@ -342,16 +358,17 @@ describe('CookieBanner', () => {
 
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
 
+                // Act
                 await wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
                 expect(cookieSpy).toHaveBeenCalledWith('full');
             });
+
             it('should push `full` to dataLayer', async () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
@@ -359,22 +376,24 @@ describe('CookieBanner', () => {
                 });
                 const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
 
+                // Act
                 await wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
                 expect(dataLayerSpy).toHaveBeenCalledWith('full');
             });
+
             it('should hide the banner', () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
                     propsData
                 });
 
+                // Act
                 wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
@@ -387,7 +406,6 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
@@ -395,16 +413,17 @@ describe('CookieBanner', () => {
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
 
+                // Act
                 await wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(cookieSpy).toHaveBeenCalledWith('necessary');
             });
+
             it('should push `necessary` to dataLayer', async () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
@@ -412,16 +431,17 @@ describe('CookieBanner', () => {
                 });
                 const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
 
+                // Act
                 await wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(dataLayerSpy).toHaveBeenCalledWith('necessary');
             });
+
             it('should remove unnecessary cookies', async () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
@@ -429,16 +449,17 @@ describe('CookieBanner', () => {
                 });
                 const removeCookiesSpy = jest.spyOn(wrapper.vm, 'removeUnnecessaryCookies');
 
+                // Act
                 await wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(removeCookiesSpy).toHaveBeenCalled();
             });
+
             it('should resend GTM events', async () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
@@ -446,26 +467,65 @@ describe('CookieBanner', () => {
                 });
                 const resendSpy = jest.spyOn(wrapper.vm, 'resendEvents');
 
+                // Act
                 await wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(resendSpy).toHaveBeenCalled();
             });
+
             it('should hide the banner', () => {
                 // Arrange
                 const propsData = {};
 
-                // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
                     propsData
                 });
 
+                // Act
                 wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(wrapper.vm.shouldHideBanner).toBe(true);
+            });
+        });
+
+        describe('cookieName', () => {
+            describe('`nameSuffix` is provided', () => {
+                it('should return the default consent cookie name with the suffix', () => {
+                    // Arrange
+                    const wrapper = shallowMount(CookieBanner, {
+                        localVue,
+                        i18n,
+                        propsData: {
+                            nameSuffix: 'suffixed'
+                        }
+                    });
+
+                    // Act
+                    const { consentCookieName } = wrapper.vm;
+
+                    // Assert
+                    expect(consentCookieName).toMatchSnapshot();
+                });
+            });
+
+            describe('`nameSuffix` is not provided', () => {
+                it('should return the default consent cookie name', () => {
+                    // Arrange
+                    const wrapper = shallowMount(CookieBanner, {
+                        localVue,
+                        i18n
+                    });
+
+                    // Act
+                    const { consentCookieName } = wrapper.vm;
+
+                    // Assert
+                    expect(consentCookieName).toMatchSnapshot();
+                });
             });
         });
     });
