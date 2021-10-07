@@ -1,18 +1,13 @@
 <template>
+    <!-- NOTE: This is all placeholder markup, attributes and comments.
+    This is not indicative of the actual HTML tags and attributes we
+    will use (which will be much more accessible and semantic) -->
     <section
         :class="$style['c-restaurantCard']"
         data-test-id="restaurantCard-component">
         <a
             :href="'/12345/menu'"
             @click="$emit('restaurant-card-clicked')">
-
-            <slot name="cuisines">
-                no cuisine slot loaded
-            </slot>
-
-            <slot name="new">
-                no 'new' label slot loaded
-            </slot>
 
             <!-- background image -->
             <img
@@ -39,59 +34,46 @@
 
             <!-- Cuisines -->
             <!-- START ERROR BOUNDARY -->
-            <ul data-test-id="restaurant-cuisines">
-                <li>Pizza</li>
-                <li>Chicken</li>
-            </ul>
+            <slot name="cuisines">
+                no cuisines slot loaded
+            </slot>
             <!-- END ERROR BOUNDARY -->
 
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
-            <strong>New</strong>
+            <slot name="new">
+                no 'new' label slot loaded
+            </slot>
             <!-- END ERROR BOUNDARY -->
 
             <!-- Ratings -->
             <!-- START ERROR BOUNDARY -->
-            <div>5 Stars</div>
+            <slot name="ratings">
+                no ratings slot loaded
+            </slot>
             <!-- END ERROR BOUNDARY -->
 
             <!-- Offline Icon -->
             <div>Offline Icon</div>
 
             <!-- Meta Items List -->
-            <ul>
-                <!-- START ERROR BOUNDARY -->
-                <li>Stampcard</li>
-                <!-- END ERROR BOUNDARY -->
-                <!-- START ERROR BOUNDARY -->
-                <li>Offer icon + text</li>
-                <!-- END ERROR BOUNDARY -->
-                <!-- START ERROR BOUNDARY -->
-                <li>Delivery fees</li>
-                <!-- END ERROR BOUNDARY -->
-                <!-- START ERROR BOUNDARY -->
-                <li>Times</li>
-                <!-- END ERROR BOUNDARY -->
-                <!-- START ERROR BOUNDARY -->
-                <li>ETA</li>
-                <!-- END ERROR BOUNDARY -->
-                <!-- START ERROR BOUNDARY -->
-                <li>Location</li>
-                <!-- END ERROR BOUNDARY -->
-            </ul>
+            <slot name="meta-items">
+                no meta-items slot loaded
+            </slot>
 
             <!-- Local Legend label -->
-            <span data-test-id="restaurant-premier">Local Legend</span>
+            <slot name="local-legend">
+                no local-legend slot loaded
+            </slot>
 
             <!-- Badges -->
             <div>
                 <!-- misc badges -->
                 <!-- START ERROR BOUNDARY -->
-                <ul>
-                    <li>Best awards 2020</li>
-                    <li>Super restaurant 2019</li>
-                </ul>
+                <slot name="badges">
+                    no badges slot loaded
+                </slot>
                 <!-- END ERROR BOUNDARY -->
 
                 <!-- promoted badge -->
@@ -99,17 +81,9 @@
             </div>
 
             <!-- Optional items i.e. dish search results -->
-            <ul>
-                <!-- START ERROR BOUNDARY -->
-                <li>
-                    Dish results list
-                    <ul data-test-id="dishsearch-dish-list">
-                        <li data-test-id="dishsearch-dish-item">Dish 1</li>
-                        <li data-test-id="dishsearch-dish-item">Dish 2</li>
-                    </ul>
-                </li>
-                <!-- END ERROR BOUNDARY -->
-            </ul>
+            <slot name="optional-items">
+                no optional items slot loaded
+            </slot>
         </a>
     </section>
 </template>
