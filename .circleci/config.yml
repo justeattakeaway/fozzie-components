@@ -183,7 +183,7 @@ commands:
     description: Locally lints all packages in the monorepo
     steps:
       - run_command:
-          command_description: Run liniting for packages
+          command_description: Run linting for packages
           command_name: "lint"
 
   unit_integration_tests:
@@ -223,9 +223,16 @@ commands:
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
     steps:
-      - run_command:
-          command_description: Run Percy visual regression tests for packages
-          command_name: "test:visual"
+      - run:
+          name: Run Percy visual regression tests for packages
+          command: |
+            val=$(node ./visual-regression-preflight.js)
+            if [ $val == "true" ];
+            then
+              yarn test:visual
+            else
+              echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
+            fi
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
