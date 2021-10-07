@@ -92,38 +92,10 @@
 
 export default {
     name: 'RestaurantCardV1',
-    components: {},
+    // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
         // restaurant & display data
-        address: {
-            type: String,
-            default: null
-        },
-        cuisines: {
-            type: Array,
-            default: () => []
-        },
         id: {
-            type: String,
-            default: null
-        },
-        isNew: {
-            type: Boolean,
-            default: false
-        },
-        isPremier: {
-            type: Boolean,
-            default: false
-        },
-        isTemporarilyOffline: {
-            type: Boolean,
-            default: false
-        },
-        isTemporaryBoost: {
-            type: Boolean,
-            default: false
-        },
-        logo: {
             type: String,
             default: null
         },
@@ -131,9 +103,13 @@ export default {
             type: String,
             default: null
         },
-        uniqueName: {
+        logo: {
             type: String,
             default: null
+        },
+        isTemporarilyOffline: {
+            type: Boolean,
+            default: false
         },
         // feature flags
         flags: {
