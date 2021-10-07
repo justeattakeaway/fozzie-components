@@ -25,7 +25,6 @@
             data-theme="jet"
             data-test-id="checkout-component">
             <card
-                is-rounded
                 has-full-width-footer
                 has-outline
                 is-page-content-wrapper

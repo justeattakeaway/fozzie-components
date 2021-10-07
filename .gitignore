@@ -30,6 +30,7 @@ logs
 yalc.lock
 package-lock.json
 dist/
+!.github/actions/**/dist
 coverage/
 /packages/f-content-cards/stories/mocks/
 

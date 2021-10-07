@@ -287,7 +287,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     display: flex;
     flex-direction: column;
     padding: spacing(x2);
-    border-radius: $border-radius;
+    border-radius: $radius-rounded-c;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     0 3px 1px -2px rgba(0, 0, 0, 0.07),
     0 1px 5px 0 rgba(0, 0, 0, 0.06);
@@ -319,7 +319,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     margin-bottom: spacing();
     width: $stampCard-iconSize-landscape;
     height: $stampCard-iconSize-landscape;
-    border-radius: $border-radius;
+    border-radius: $radius-rounded-c;
 
     @include media($stampCard-responsive-mobileViewBreakpoint) {
         width: $stampCard-iconSize-portrait;

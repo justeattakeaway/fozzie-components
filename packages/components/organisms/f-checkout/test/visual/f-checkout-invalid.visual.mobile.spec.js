@@ -1,16 +1,23 @@
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
+let checkoutInfo;
 
 describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display the "Get Checkout" error page', () => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true)
-            .withQuery('&knob-Get Checkout Errors', '500')
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true,
+            isASAP: true,
+            errorCode: '500'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Get Checkout Errors', checkoutInfo.errorCode);
 
         // Act
         checkout.loadError();
@@ -22,10 +29,16 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
     it('should display the "Get Checkout 403" error page', () => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true)
-            .withQuery('&knob-Get Checkout Errors', '403')
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true,
+            isASAP: true,
+            errorCode: '403'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Get Checkout Errors', checkoutInfo.errorCode);
 
         // Act
         checkout.loadError();

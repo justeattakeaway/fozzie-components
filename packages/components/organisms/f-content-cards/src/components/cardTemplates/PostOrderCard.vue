@@ -105,7 +105,7 @@ export default {
 <style lang="scss" module>
     .c-postOrderCard {
         border: 1px solid $color-border-strong;
-        border-radius: $post-order-card-radius;
+        border-radius: $radius-rounded-c;
         padding: spacing(x3);
         max-width: 100%;
         flex: 1 1 0%; // do not remove unit its intentional for IE11
