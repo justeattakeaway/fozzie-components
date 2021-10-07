@@ -13,7 +13,7 @@
 
             <p :class="$style['c-checkoutHeader-loginLink']">
                 <a
-                    class="o-link--bold o-link--noDecoration"
+                    class="o-link--bold"
                     :href="loginUrl"
                     data-test-id="switch-user-link"
                     @click="onVisitLoginPage">

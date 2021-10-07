@@ -4,6 +4,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.2.0
+------------------------------
+*October 06, 2021*
+
+### Added
+- New prop `nameSuffix` so teams or 3rd parties using this component can save the user's consent under a different cookie name. This allows the cookie banner to work on multiple sub-domains easily.
+
+
+v3.1.0
+------------------------------
+*October 05, 2021*
+
+### Fixed
+- Reopen link positioning bug by adding and using a ResizeObserver. This ensures body content changes ouside of f-cookie-banner and recalculates if the link should be absolutely positioned.
+
+### Added
+- New prop `shouldAbsolutePositionReopenLink` so teams or 3rd parties using this component can disable the re-open link absolute positioning
+
+
+v3.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button` and `f-mega-modal` to include icing phase 2 changes.
+
+
 v2.2.1
 ------------------------------
 *September 27, 2021*

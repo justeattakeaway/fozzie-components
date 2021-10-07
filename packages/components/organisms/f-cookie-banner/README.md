@@ -146,6 +146,9 @@ The props that can be defined are as follows:
 | `shouldShowLegacyBanner` | `Boolean` | `false` | Use the legacy "passive" banner markup (UK only). |
 | `cookieExpiry` | `Number` | `90` | Expiry time (days) of cookies written to the browser. |
 | `shouldUseGreyBackground` | `Boolean` | `true` | Use grey background for the reopen link. |
+| `nameSuffix` | `String` | `''` | Add a suffix to the cookie name. This allows the cookie banner to create a cookie with a different name to be able to handle multiple sub-domains. |
+
+**Important: please, be mindful of the amount of cookies your app will be generating when using the `nameSuffix` prop above. If you have questions, please, contact the code owners.**
 
 NOTE: the Non Vue version uses default props that cannot currently be changed. A seperate version is generated for each locale.
 
