@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.8.0
 ------------------------------
-*September 30, 2021*
+*October 07, 2021*
 
 ### Added
 - No card's error state
