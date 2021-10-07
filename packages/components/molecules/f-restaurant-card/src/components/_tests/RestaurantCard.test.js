@@ -4,12 +4,6 @@ import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 import restaurantCardVersions from '../restaurantCardVersions';
 
 describe('RestaurantCard', () => {
-    const getRestaurantData = () => ({
-        id: '12345',
-        url: 'foo/bar',
-        name: 'test restaurant'
-    });
-
     it('should be defined', () => {
         restaurantCardVersions.components = {
             v1: RestaurantCardV1
@@ -31,9 +25,7 @@ describe('RestaurantCard', () => {
         };
 
         const propsData = {
-            data: {
-                restaurant: getRestaurantData()
-            },
+            data: {},
             flags: {}
         };
 
@@ -48,9 +40,7 @@ describe('RestaurantCard', () => {
         };
 
         const propsData = {
-            data: {
-                restaurant: getRestaurantData()
-            },
+            data: {},
             flags: {},
             version: 'v1'
         };
@@ -66,9 +56,7 @@ describe('RestaurantCard', () => {
         };
 
         const propsData = {
-            data: {
-                restaurant: getRestaurantData()
-            },
+            data: {},
             flags: {},
             version: 'v2'
         };
@@ -84,9 +72,7 @@ describe('RestaurantCard', () => {
         };
 
         const propsData = {
-            data: {
-                restaurant: getRestaurantData()
-            },
+            data: {},
             flags: {},
             version: 'a random string that is not a valid version key'
         };
@@ -99,9 +85,7 @@ describe('RestaurantCard', () => {
         restaurantCardVersions.components = {};
 
         const propsData = {
-            data: {
-                restaurant: getRestaurantData()
-            },
+            data: {},
             flags: {},
             version: 'v1'
         };

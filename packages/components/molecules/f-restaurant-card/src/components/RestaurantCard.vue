@@ -1,7 +1,7 @@
 <template>
     <component
         :is="componentVersion"
-        :data="data"
+        v-bind="data"
         :flags="flags" />
 </template>
 

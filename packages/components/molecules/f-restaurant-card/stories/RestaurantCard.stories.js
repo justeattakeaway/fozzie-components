@@ -18,23 +18,16 @@ export const RestaurantCardComponent = (args, { argTypes }) => ({
 
 RestaurantCardComponent.args = {
     data: {
-        restaurant: {
-            id: '12345',
-            name: 'Jamies Kebabs',
-            url: '/restaurants/12345/menu',
-            logoPath: 'some-path/to/logo.png',
-            tempOffline: false
-        },
-
-        display: {
-            ratings: true,
-            cuisines: true,
-            new: true,
-            localLegend: false
-        },
-
-
-        cloudinaryEnabled: true
+        address: '11 Foo Bar, Baz, XXX XXX',
+        cuisines: ['kebabs', 'pizza', 'halal'],
+        id: '00000',
+        isNew: false,
+        isPremier: false,
+        isTemporarilyOffline: false,
+        isTemporaryBoost: false,
+        logo: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/00000.gif',
+        name: 'Fake Restaurant',
+        uniqueName: 'fakerestaurant-123'
     },
 
     flags: {
