@@ -34,46 +34,34 @@
 
             <!-- Cuisines -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="cuisines">
-                no cuisines slot loaded
-            </slot>
+            <slot name="cuisines" />
             <!-- END ERROR BOUNDARY -->
 
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="new">
-                no 'new' label slot loaded
-            </slot>
+            <slot name="new" />
             <!-- END ERROR BOUNDARY -->
 
             <!-- Ratings -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="ratings">
-                no ratings slot loaded
-            </slot>
+            <slot name="ratings" />
             <!-- END ERROR BOUNDARY -->
 
             <!-- Offline Icon -->
             <div>Offline Icon</div>
 
             <!-- Meta Items List -->
-            <slot name="meta-items">
-                no meta-items slot loaded
-            </slot>
+            <slot name="meta-items" />
 
             <!-- Local Legend label -->
-            <slot name="local-legend">
-                no local-legend slot loaded
-            </slot>
+            <slot name="local-legend" />
 
             <!-- Badges -->
             <div>
                 <!-- misc badges -->
                 <!-- START ERROR BOUNDARY -->
-                <slot name="badges">
-                    no badges slot loaded
-                </slot>
+                <slot name="badges" />
                 <!-- END ERROR BOUNDARY -->
 
                 <!-- promoted badge -->
@@ -81,9 +69,7 @@
             </div>
 
             <!-- Optional items i.e. dish search results -->
-            <slot name="optional-items">
-                no optional items slot loaded
-            </slot>
+            <slot name="optional-items" />
         </a>
     </section>
 </template>
