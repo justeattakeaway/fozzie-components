@@ -223,16 +223,20 @@ commands:
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
     steps:
-      - run:
-          name: Run Percy visual regression tests for packages
-          command: |
-            val=$(node ./visual-regression-preflight.js)
-            if [ $val == "true" ];
-            then
-              yarn test:visual
-            else
-              echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
-            fi
+      - when:
+          condition:
+            equal: [ 'true', node ./visual-regression-preflight.js ]
+          steps:
+          - run_command:
+              command_description: Run visual tests for packages
+              command_name: "test:visual"
+      - unless:
+          condition:
+            equal: [ 'true', node ./visual-regression-preflight.js ]
+          steps:
+            - run: echo 'Skipping visual regression tests because PR is either in draft mode or has wip label applied'
+
+
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
