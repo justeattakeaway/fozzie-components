@@ -20,7 +20,7 @@ let shouldRunTests;
         };
     
         // PR is draft or has given labels, skip visual regression tests to save credits
-        const shouldRunTests = !details.draft && !LABELS_TO_STOP.some(label => details.labels.includes(label));
+        shouldRunTests = !details.draft && !LABELS_TO_STOP.some(label => details.labels.includes(label));
     }
 
     // "Returns" the answer so it can be stored by the shell as part of the job
