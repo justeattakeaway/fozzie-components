@@ -97,7 +97,7 @@ export default {
             type: String,
             default: null
         },
-        isTemporarilyOffline: {
+        disabled: {
             type: Boolean,
             default: false
         },
