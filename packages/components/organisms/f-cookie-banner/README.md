@@ -145,13 +145,13 @@ In the code example below we add the `nameSuffix` prop:
 <template>
     <cookie-banner
         locale='da-DK'
-        should-absolute-position-reopen-link={false}
+        should-absolute-position-reopen-link="false"
         nameSuffix="myName"
     />
 </template>
 ```
 
-Next run `yarn build` followed by `yarn build:static-files` The generated files will be added to the root `dist/static` folder.
+Next run `yarn build` followed by `yarn build:static-files`. The generated files will be added to the root `dist/static` folder.
 
 ## Configuration
 
