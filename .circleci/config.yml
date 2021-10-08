@@ -380,6 +380,9 @@ jobs:
           name: Run PR Checks
           command: yarn danger ci
       - build_packages
+      - run:
+          name: Run Bundlewatch checks
+          command: yarn bundlewatch
       - lint_packages
       - slack_notify_fail
       - slack_notify_success
@@ -395,9 +398,6 @@ jobs:
       - restore_node_modules_cache
       - install_node_dependencies
       - restore_cache_dist_directories
-      - run:
-          name: Run Bundlewatch checks
-          command: yarn bundlewatch
       - unit_integration_tests
       - slack_notify_fail
       - slack_notify_success
