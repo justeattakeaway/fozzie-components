@@ -1,7 +1,7 @@
 <template>
     <cookie-banner
         locale='da-DK'
-        should-absolute-position-reopen-link="false" />
+        should-absolute-position-reopen-link='false' />
 </template>
 
 <script>

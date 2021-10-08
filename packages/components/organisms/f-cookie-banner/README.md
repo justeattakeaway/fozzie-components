@@ -145,8 +145,8 @@ In the code example below we add the `nameSuffix` prop:
 <template>
     <cookie-banner
         locale='da-DK'
-        should-absolute-position-reopen-link="false"
-        nameSuffix="myName"
+        should-absolute-position-reopen-link='false'
+        nameSuffix='myName'
     />
 </template>
 ```
