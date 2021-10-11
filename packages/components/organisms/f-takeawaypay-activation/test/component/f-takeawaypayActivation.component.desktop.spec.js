@@ -1,4 +1,8 @@
 const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
+const {
+    AUTHENTICATION_JWT,
+    GUEST_AUTHENTICATION_JWT
+} = require('../../test-utils/constants/f-takeawaypayActivation');
 
 let takeawayPayComponent;
 
@@ -44,7 +48,7 @@ describe('f-takeawaypayActivation component tests - logged in as a guest', () =>
         // Arrange
         takeawayPayComponent = new TakeawaypayActivation();
         takeawayPayComponent
-            .withQuery('knob-Authentication', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJzdWIiOiIxODcwMzA5MyIsIm5hbWUiOiJKb2UgQmxvZ2dzIiwiZ2xvYmFsX3VzZXJfaWQiOiJVN05SQWxXQWc1ek9kc2RSZ2Y3bmtUeW9pOTBYRW89IiwiZ2l2ZW5fbmFtZSI6IkpvZSIsImZhbWlseV9uYW1lIjoiQmxvZ2dzIiwicm9sZSI6Ikd1ZXN0IiwiaWF0IjoxNjE1NDY5NTE2fQ.d-dLpZM8vi7IR1GdqZI9IPzUcjnidU-7qO62B3Nfk6I')
+            .withQuery('knob-Authentication', GUEST_AUTHENTICATION_JWT)
             .withQuery('knob-Employee Id', '12345')
             .withQuery('knob-Home URL', '/home')
             .withQuery('knob-Login URL', '/account/login')
@@ -87,7 +91,7 @@ describe('f-takeawaypayActivation component tests - authenticated', () => {
         // Arrange
         takeawayPayComponent = new TakeawaypayActivation();
         takeawayPayComponent
-            .withQuery('knob-Authentication', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU')
+            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
             .withQuery('knob-Employee Id', '12345')
             .withQuery('knob-Home URL', '/home')
             .withQuery('knob-Login URL', '/account/login')
@@ -153,7 +157,7 @@ describe('f-takeawaypayActivation component tests - error page', () => {
         // Arrange
         takeawayPayComponent = new TakeawaypayActivation();
         takeawayPayComponent
-            .withQuery('knob-Authentication', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU')
+            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
             .withQuery('knob-Employee Id', '12345')
             .withQuery('knob-Home URL', '/home')
             .withQuery('knob-Login URL', '/account/login')

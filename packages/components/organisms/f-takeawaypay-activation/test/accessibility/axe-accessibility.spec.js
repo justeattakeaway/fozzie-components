@@ -1,6 +1,7 @@
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
 const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
+const { AUTHENTICATION_JWT } = require('../../test-utils/constants/f-takeawaypayActivation');
 
 let takeawayPayComponent;
 
@@ -23,7 +24,7 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-takeawaypayActivation component (authenticated) WCAG compliance', () => {
         // Arrange
         takeawayPayComponent
-            .withQuery('knob-Authentication', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU')
+            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
             .withQuery('knob-Employee Id', '12345')
             .withQuery('knob-Home URL', '/home')
             .withQuery('knob-Login URL', '/account/login')
@@ -40,7 +41,7 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-takeawaypayActivation component (successful activation) WCAG compliance', () => {
         // Arrange
         takeawayPayComponent
-            .withQuery('knob-Authentication', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU')
+            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
             .withQuery('knob-Employee Id', '12345')
             .withQuery('knob-Home URL', '/home')
             .withQuery('knob-Login URL', '/account/login')
