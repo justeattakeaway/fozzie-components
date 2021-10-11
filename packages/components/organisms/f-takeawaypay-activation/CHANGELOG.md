@@ -19,8 +19,6 @@ v2.3.0
 ### Changed
 - Takeaway Pay => Just Eat Pay renaming
 
->>>>>>> master
-
 v2.2.1
 ------------------------------
 *October 06, 2021*
