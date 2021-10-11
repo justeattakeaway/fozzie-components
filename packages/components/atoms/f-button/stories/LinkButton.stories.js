@@ -7,42 +7,7 @@ import FButton from '../src/components/Button.vue';
 
 export default {
     title: 'Components/Atoms/f-button',
-    decorators: [withA11y],
-    argTypes: {
-        disabled: {
-            control: { type: 'boolean' },
-            defaultValue: false
-        },
-        isFullWidth: {
-            control: { type: 'boolean' },
-            description: 'Button will take the whole free space of the container',
-            defaultValue: false
-        },
-        isLoading: {
-            control: { type: 'boolean' },
-            description: 'Spinner instead of button text',
-            defaultValue: false
-        },
-        hasIcon: {
-            control: { type: 'select', options: VALID_BUTTON_ICON_POSITION },
-            description: 'Adds icon to the button text',
-            defaultValue: false
-        },
-        href: {
-            control: { type: 'text' },
-            description: 'Should be presented for the button to become a link <a> element',
-            defaultValue: ''
-        }
-    },
-    args: {
-        buttonList: [
-            { size: 'large', text: 'Large Link Button' },
-            { size: 'medium', text: 'Medium Link Button' },
-            { size: 'small', text: 'Small Link Button' },
-            { size: 'xsmall', text: 'Xsmall Link Button' }
-        ],
-        href: 'someUrl'
-    }
+    decorators: [withA11y]
 };
 
 export const LinkButtonComponent = (args, { argTypes }) => ({
@@ -78,5 +43,43 @@ export const LinkButtonComponent = (args, { argTypes }) => ({
         </div>
     </div>`
 });
+
+
+LinkButtonComponent.argTypes = {
+    disabled: {
+        control: { type: 'boolean' },
+        defaultValue: false
+    },
+    isFullWidth: {
+        control: { type: 'boolean' },
+        description: 'Button will take the whole free space of the container',
+        defaultValue: false
+    },
+    isLoading: {
+        control: { type: 'boolean' },
+        description: 'Spinner instead of button text',
+        defaultValue: false
+    },
+    hasIcon: {
+        control: { type: 'select', options: VALID_BUTTON_ICON_POSITION },
+        description: 'Adds icon to the button text',
+        defaultValue: false
+    },
+    href: {
+        control: { type: 'text' },
+        description: 'Should be presented for the button to become a link <a> element',
+        defaultValue: ''
+    }
+};
+
+LinkButtonComponent.args = {
+    buttonList: [
+        { size: 'large', text: 'Large Link Button' },
+        { size: 'medium', text: 'Medium Link Button' },
+        { size: 'small', text: 'Small Link Button' },
+        { size: 'xsmall', text: 'Xsmall Link Button' }
+    ],
+    href: 'someUrl'
+};
 
 LinkButtonComponent.storyName = 'Link Button';
