@@ -10,11 +10,35 @@ export default {
     decorators: [withA11y]
 };
 
-export const RestaurantCardComponent = () => ({
+export const RestaurantCardComponent = (args, { argTypes }) => ({
     components: { RestaurantCard },
-    props: {
-    },
-    template: `<restaurant-card />`
+    props: Object.keys(argTypes),
+    template:  `<restaurant-card v-bind="$props">
+                    <template v-slot:cuisines>
+                        <span>pizza</span>
+                        -
+                        <span>burgers</span>
+                    </template>
+                    <template v-slot:new-label>
+                        <p>Is New</p>
+                    </template>
+                </restaurant-card>`
 });
+
+RestaurantCardComponent.args = {
+    data: {
+        id: '00000',
+        name: 'Fake Restaurant',
+        isTemporarilyOffline: false,
+        logo: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/00000.gif'
+    },
+
+    flags: {
+        fancyNewTitle: false,
+        experimentalBadges: true
+    },
+
+    version: 'v1'
+};
 
 RestaurantCardComponent.storyName = 'f-restaurant-card';
