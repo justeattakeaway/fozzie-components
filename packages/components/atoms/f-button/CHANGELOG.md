@@ -9,7 +9,7 @@ v3.0.3
 *October 18, 2021*
 
 ### Changed
-- Removed the background from the link button in desables state.
+- Removed the background from the link button in disabled state.
 - Button story now shows all the types and sizes of the button component (primary, secondary, outline and ghost).
 - Changed knobs to controls for switching button props.
 - Separate story for Link Button to be able to run tests properly.
