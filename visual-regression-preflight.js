@@ -24,5 +24,5 @@ let shouldRunTests;
     }
 
     // "Returns" the answer so it can be stored by the shell as part of the job
-    console.log(shouldRunTests);
+     console.log(shouldRunTests)
 })();
