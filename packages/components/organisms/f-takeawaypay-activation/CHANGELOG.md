@@ -3,13 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.4.0
+------------------------------
+*October 11, 2021*
+
+### Changed
+- Component tests
+- Accessibility tests
+- Visual regression tests
+
 v2.3.0
 ------------------------------
 *October 08, 2021*
 
 ### Changed
 - Takeaway Pay => Just Eat Pay renaming
-
 
 v2.2.1
 ------------------------------
