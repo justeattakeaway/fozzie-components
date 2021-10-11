@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.2.0
+------------------------------
+*October 7, 2021*
+
+### Added
+- Wrapper component to handle multiple component versions
+- Passing props and slots through wrapper component
+- Placeholder template and logic to component
+- Wrapper component unit tests
 
 v0.1.0
 ------------------------------

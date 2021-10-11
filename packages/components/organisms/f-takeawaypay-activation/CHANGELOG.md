@@ -5,11 +5,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.3.1
 ------------------------------
-*October 08, 2021*
+*October 11, 2021*
 
 ### Changed
 - Component tests
 - Accessibility tests
+
+v2.3.0
+------------------------------
+*October 08, 2021*
+
+### Changed
+- Takeaway Pay => Just Eat Pay renaming
+
+>>>>>>> master
 
 v2.2.1
 ------------------------------
