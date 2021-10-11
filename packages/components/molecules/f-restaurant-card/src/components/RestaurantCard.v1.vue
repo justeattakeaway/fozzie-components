@@ -40,7 +40,7 @@
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="new" />
+            <slot name="new-label" />
             <!-- END ERROR BOUNDARY -->
 
             <!-- Ratings -->
