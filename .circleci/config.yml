@@ -224,19 +224,21 @@ commands:
     description: Run Percy Visual Regression Tests
     steps:
       - run:
-          name: Run Percy visual regression preflight
+          name: Run Percy visual regression tests for packages
           command: |
             VISUAL_TESTS=`node ./visual-regression-preflight.js`
-            echo 'Run visual tests:' $VISUAL_TESTS
 
-            if [ "${VISUAL_TESTS}" == "true" ] || [ "${RUN_ALL}" == "true" ];
+            if [ "${VISUAL_TESTS}" == "true" ];
             then
-              yarn test:visual
+              if [ "${RUN_ALL}" == "true" ];
+              then
+                yarn test:visual
+              else
+                yarn test:visual --since master...HEAD
+              fi
             else
-              yarn test:visual --since master...HEAD
+              echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
             fi
-
-
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
