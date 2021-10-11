@@ -7,7 +7,7 @@ v2.3.0
 ------------------------------
 *October 11, 2021*
 
-### Changed
+### Removed
 - Removed babel private methods.
 
 *October 7, 2021*
