@@ -220,7 +220,7 @@ export default {
          */
         updateIsBodyHeightLessThanWindowHeight () {
             if (typeof window === 'object' && this.shouldHideBanner) {
-                const reopenElementHeight = this.$refs.reopenCookieBannerLink.$el.clientHeight || 0;
+                const reopenElementHeight = this.$refs?.reopenCookieBannerLink?.$el?.clientHeight || 0;
                 this.isBodyHeightLessThanWindowHeight =
                 (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
             }
