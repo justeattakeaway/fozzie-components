@@ -226,10 +226,16 @@ commands:
       - run:
           name: Run Percy visual regression tests for packages
           command: |
-            val=$(node ./visual-regression-preflight.js)
-            if [ $val == "true" ];
+            VISUAL_TESTS=`node ./visual-regression-preflight.js`
+
+            if [ "${VISUAL_TESTS}" == "true" ];
             then
-              yarn test:visual
+              if [ "${RUN_ALL}" == "true" ];
+              then
+                yarn test:visual
+              else
+                yarn test:visual --since master...HEAD
+              fi
             else
               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
             fi
@@ -376,6 +382,9 @@ jobs:
           name: Run PR Checks
           command: yarn danger ci
       - build_packages
+      - run:
+          name: Run Bundlewatch checks
+          command: yarn bundlewatch
       - lint_packages
       - slack_notify_fail
       - slack_notify_success
@@ -391,9 +400,6 @@ jobs:
       - restore_node_modules_cache
       - install_node_dependencies
       - restore_cache_dist_directories
-      - run:
-          name: Run Bundlewatch checks
-          command: yarn bundlewatch
       - unit_integration_tests
       - slack_notify_fail
       - slack_notify_success

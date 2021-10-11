@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.6.0
+ ------------------------------
+ *October 8, 2021*
+
+ ### Changed
+ - Always run visual tests against master
+ - Only run visual tests against changed packages
+
+
+v4.5.0
+------------------------------
+*October 8, 2021*
+
+### Updated
+- webdriverIO to v91
 
 v4.4.0
 ------------------------------
