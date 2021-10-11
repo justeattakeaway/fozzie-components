@@ -1,32 +1,42 @@
 <template>
-    <div
-        :class="$style['c-restaurantCard']"
-        data-test-id="restaurantCard-component">
-        I am a RestaurantCard Component (GB)
-    </div>
+    <component
+        :is="componentVersion"
+        v-bind="data"
+        :flags="flags">
+        <template
+            v-for="(_, slotName) in $slots"
+            v-slot:[slotName]>
+            <slot :name="slotName" />
+        </template>
+    </component>
 </template>
 
 <script>
+import restaurantCardVersions from './restaurantCardVersions';
 
 export default {
     name: 'RestaurantCard',
-    components: {},
     props: {
+        // restaurant & display data
+        data: {
+            type: Object,
+            required: true
+        },
+        // feature flags
+        flags: {
+            type: Object,
+            default: () => ({})
+        },
+        // component version
+        version: {
+            type: String,
+            default: 'v1'
+        }
+    },
+    computed: {
+        componentVersion () {
+            return restaurantCardVersions.components[this.version];
+        }
     }
 };
 </script>
-
-<style lang="scss" module>
-
-.c-restaurantCard {
-    display: flex;
-    justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
-    margin: auto;
-    border: 1px solid red;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
-}
-
-</style>
