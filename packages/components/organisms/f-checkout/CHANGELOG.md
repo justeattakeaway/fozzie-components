@@ -10,6 +10,9 @@ v2.3.0
 ### Added
 - Redirect to login if the user is logged out and guest checkout is disabled
 
+### Changed
+- Increased maxBundleSize to 120Kb.
+
 
 v2.2.0
 ------------------------------
