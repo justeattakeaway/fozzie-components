@@ -74,7 +74,7 @@ describe('f-button Desktop visual tests', () => {
     });
 
     describe('link button', () => {
-        it('should be desplayed in all 4 sizes', () => {
+        it('should be displayed in all 4 sizes', () => {
             // Arrange
             button = new LinkButton();
 
@@ -86,7 +86,7 @@ describe('f-button Desktop visual tests', () => {
         });
 
         describe('in isLoading state', () => {
-            it('should be desplayed in all 4 sizes', () => {
+            it('should be displayed in all 4 sizes', () => {
                 // Arrange
                 button = new LinkButton();
                 button.withQuery('args', 'isLoading');
