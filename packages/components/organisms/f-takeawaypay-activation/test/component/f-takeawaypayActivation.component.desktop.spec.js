@@ -44,11 +44,11 @@ describe('f-takeawaypayActivation component tests - logged in as a guest', () =>
         // Arrange
         takeawayPayComponent = new TakeawaypayActivation();
         takeawayPayComponent
-        .withQuery('knob-Authentication', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJzdWIiOiIxODcwMzA5MyIsIm5hbWUiOiJKb2UgQmxvZ2dzIiwiZ2xvYmFsX3VzZXJfaWQiOiJVN05SQWxXQWc1ek9kc2RSZ2Y3bmtUeW9pOTBYRW89IiwiZ2l2ZW5fbmFtZSI6IkpvZSIsImZhbWlseV9uYW1lIjoiQmxvZ2dzIiwicm9sZSI6Ikd1ZXN0IiwiaWF0IjoxNjE1NDY5NTE2fQ.d-dLpZM8vi7IR1GdqZI9IPzUcjnidU-7qO62B3Nfk6I')
-        .withQuery('knob-Employee Id', '12345')
-        .withQuery('knob-Home URL', '/home')
-        .withQuery('knob-Login URL', '/account/login')
-        .withQuery('knob-Registration URL', '/account/register');
+            .withQuery('knob-Authentication', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJzdWIiOiIxODcwMzA5MyIsIm5hbWUiOiJKb2UgQmxvZ2dzIiwiZ2xvYmFsX3VzZXJfaWQiOiJVN05SQWxXQWc1ek9kc2RSZ2Y3bmtUeW9pOTBYRW89IiwiZ2l2ZW5fbmFtZSI6IkpvZSIsImZhbWlseV9uYW1lIjoiQmxvZ2dzIiwicm9sZSI6Ikd1ZXN0IiwiaWF0IjoxNjE1NDY5NTE2fQ.d-dLpZM8vi7IR1GdqZI9IPzUcjnidU-7qO62B3Nfk6I')
+            .withQuery('knob-Employee Id', '12345')
+            .withQuery('knob-Home URL', '/home')
+            .withQuery('knob-Login URL', '/account/login')
+            .withQuery('knob-Registration URL', '/account/register');
         takeawayPayComponent.load();
     });
 
