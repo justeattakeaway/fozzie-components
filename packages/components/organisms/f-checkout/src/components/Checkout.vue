@@ -664,12 +664,13 @@ export default {
          *    its parent method
          * 4. If `updateCheckout` call fails, throw an UpdateCheckoutError.
          */
-        async handleUpdateCheckout (requestData) {
+        async handleUpdateCheckout (data) {
             try {
                 await this.updateCheckout({
                     url: this.updateCheckoutUrl,
-                    data: requestData,
-                    timeout: this.checkoutTimeout
+                    data: data.requestData,
+                    timeout: this.checkoutTimeout,
+                    ageVerificationOnly: data.ageVerificationOnly
                 }).then(headers => {
                     if (headers) {
                         this.checkoutAnalyticsService.trackLowValueOrderExperiment(headers);
@@ -827,7 +828,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
             } catch (error) {
-                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
+                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error?.response?.status));
             }
         },
 
@@ -1109,7 +1110,7 @@ export default {
 
         getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
             const { ageVerificationOnly } = options;
-            return ageVerificationOnly ?
+            const mappedData = ageVerificationOnly ?
                 mapUpdateCheckoutRequestForAgeVerification({
                     customer: this.customer
                 }) : mapUpdateCheckoutRequest({
@@ -1123,6 +1124,8 @@ export default {
                     asap: this.hasAsapSelected,
                     tableIdentifier: this.tableIdentifier
                 });
+
+            return { requestData: mappedData, ageVerificationOnly };
         }
     },
 

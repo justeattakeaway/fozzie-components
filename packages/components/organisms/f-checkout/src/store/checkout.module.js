@@ -161,7 +161,9 @@ export default {
          */
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
-        }, { url, data, timeout }) => {
+        }, {
+                url, data, timeout, ageVerificationOnly
+            }) => {
             const request = {
                 url,
                 state,
@@ -174,7 +176,10 @@ export default {
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
 
-            commit(UPDATE_IS_FULFILLABLE, isFulfillable);
+
+            if (!ageVerificationOnly) {
+                commit(UPDATE_IS_FULFILLABLE, isFulfillable);
+            }
             commit(UPDATE_ERRORS, detailedIssues);
 
             dispatch('updateMessage', detailedIssues[0]);
