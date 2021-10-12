@@ -7,14 +7,14 @@
             {{ copy.orderUpdates.subtitle }}
         </h2>
 
-        <form submit.prevent="onFormSubmit">
-            <fieldset>
+        <form @submit.prevent="onFormSubmit">
+            <fieldset :class="$style['c-contactPreferences-fieldset']">
                 <label>
                     <input
                         type="checkbox"
                         checked
                         disabled>
-                    <span :class="$style['c-label-text--disabled']">
+                    <span :class="$style['c-contactPreferences-labelText--disabled']">
                         {{ copy.orderUpdates.textMessage }}<br>
                         ({{ copy.orderUpdates.textMessageDescription }})
                     </span>
@@ -25,7 +25,7 @@
                         type="checkbox"
                         checked
                         disabled>
-                    <span :class="$style['c-label-text--disabled']">
+                    <span :class="$style['c-contactPreferences-labelText--disabled']">
                         {{ copy.orderUpdates.email }}<br>
                         ({{ copy.orderUpdates.emailDescription }})
                     </span>
@@ -36,7 +36,7 @@
                 {{ copy.newsAndOffers.subtitle }}
             </h2>
 
-            <fieldset>
+            <fieldset :class="$style['c-contactPreferences-fieldset']">
                 <label>
                     <input type="checkbox">
                     <span>
@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-fieldset {
+.c-contactPreferences-fieldset {
     display: flex;
     flex-flow: column;
     border: none;
@@ -105,7 +105,7 @@ fieldset {
     margin: spacing(x2) 0;
 }
 
-.c-label-text--disabled {
+.c-contactPreferences-labelText--disabled {
     color: $color-content-disabled;
 }
 
