@@ -12,6 +12,14 @@ Latest – to be added to the next release
  - Document for recording agreed Do's and Don'ts on our codebase
 
 
+v4.6.1
+ ------------------------------
+ *October 12, 2021*
+
+### Added
+- `f-contact-preferences` to Circle CI cache
+
+
 v4.6.0
  ------------------------------
  *October 8, 2021*
@@ -27,6 +35,7 @@ v4.5.0
 
 ### Updated
 - webdriverIO to v91
+
 
 v4.4.0
 ------------------------------
