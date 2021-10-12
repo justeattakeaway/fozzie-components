@@ -6,7 +6,9 @@
             <no-cards-error-state engagement-label="no_cards" />
         </div>
         <template v-if="hasRedeemableStampcards">
-            <h2 :class="$style['c-loyalty-stampCardsSlotTitle']">
+            <h2
+                data-test-id="section-readyToClaim-title"
+                :class="$style['c-loyalty-stampCardsSlotTitle']">
                 {{ $t('stamps.readyToClaimTitle') }}
             </h2>
             <div
@@ -20,7 +22,9 @@
             </div>
         </template>
         <template v-if="hasInProgressStampcards">
-            <h2 :class="$style['c-loyalty-stampCardsSlotTitle']">
+            <h2
+                data-test-id="section-inProgress-title"
+                :class="$style['c-loyalty-stampCardsSlotTitle']">
                 {{ $t('stamps.inProgressTitle') }}
             </h2>
             <div
@@ -34,7 +38,9 @@
             </div>
         </template>
         <template v-if="hasParticipatingRestaurantsCards">
-            <h2 :class="$style['c-loyalty-stampCardsSlotTitle']">
+            <h2
+                data-test-id="section-participatingRestaurants-title"
+                :class="$style['c-loyalty-stampCardsSlotTitle']">
                 {{ $t('stamps.participatingRestaurantsTitle') }}
             </h2>
             <i18n
