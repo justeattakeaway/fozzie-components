@@ -229,15 +229,15 @@ module.exports = class Checkout extends Page {
     */
     populateCheckoutForm (checkoutInfo, customerInfo) {
         if (!checkoutInfo.isAuthenticated) {
-            this.#populateSharedGuestFields(customerInfo)
+            this.populateSharedGuestFields(customerInfo)
         }
 
         switch (checkoutInfo.serviceType) {
             case 'delivery':
-                this.#populateDeliveryFields(customerInfo)
+                this.populateDeliveryFields(customerInfo)
             break;
             case 'dinein':
-                this.#populateDineInFields(customerInfo)
+                this.populateDineInFields(customerInfo)
             break;
         }
 
@@ -246,7 +246,7 @@ module.exports = class Checkout extends Page {
         }
 
         if (customerInfo.orderTime) {
-            this.#selectOrderTime(customerInfo.orderTime)
+            this.selectOrderTime(customerInfo.orderTime)
         }
 
         if (customerInfo.userNote) {
@@ -254,20 +254,20 @@ module.exports = class Checkout extends Page {
         }
     }
 
-    #populateSharedGuestFields (customerInfo) {
+    populateSharedGuestFields (customerInfo) {
         this.fields.firstName.input.setValue(customerInfo.firstName);
         this.fields.lastName.input.setValue(customerInfo.lastName);
         this.fields.emailAddress.input.setValue(customerInfo.emailAddress);
     }
 
-    #populateDeliveryFields (customerInfo) {
+    populateDeliveryFields (customerInfo) {
         this.fields.addressLine1.input.setValue(customerInfo.line1);
         this.fields.addressLine2.input.setValue(customerInfo.line2);
         this.fields.addressLocality.input.setValue(customerInfo.locality);
         this.fields.addressPostcode.input.setValue(customerInfo.postcode);
     }
 
-    #populateDineInFields (customerInfo) {
+    populateDineInFields (customerInfo) {
         this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
     }
 
@@ -318,7 +318,7 @@ module.exports = class Checkout extends Page {
     *
     * @param {String} orderTime The visible text value of the order time
     */
-    #selectOrderTime (orderTime) {
+    selectOrderTime (orderTime) {
         this.orderTimeDropdown.selectByVisibleText(orderTime);
     }
 
