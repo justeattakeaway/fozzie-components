@@ -1,12 +1,18 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-compatibility-selectors')
 
 module.exports = class Compatibility extends Page {
+    constructor() {
+        super('atom', 'v-compatibility-component');
+    }
 
-    get component () { return $(COMPONENT); }
+    load () {
+        super.load(this.component);
+    }
 
-    open () {
-        super.openComponent('atom', 'compatibility-component');
+    get component () { return $('[data-test-id="compatibility"]'); }
+
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
@@ -16,4 +22,4 @@ module.exports = class Compatibility extends Page {
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
-}
+};
