@@ -1171,6 +1171,44 @@ describe('Checkout', () => {
             });
         });
 
+        describe('isGuestCheckoutEnabled ::', () => {
+            it('should return false when the tenant does not have guest checkout enabled', () => {
+                i18n.locale = 'en-AU';
+                // Arrange && Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $cookies
+                    }
+                });
+
+                expect(wrapper.vm.isGuestCheckoutEnabled).toBe(false);
+            });
+
+            it('should return true when the tenant is UK', () => {
+                i18n.locale = 'en-GB';
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $cookies
+                    }
+                });
+                expect(wrapper.vm.isGuestCheckoutEnabled).toBe(true);
+            });
+        });
+
         describe('shouldShowAgeVerificationForm ::', () => {
             describe(`when the ${DOB_REQUIRED_ISSUE} issue exists in errors`, () => {
                 let wrapper;
@@ -1219,50 +1257,108 @@ describe('Checkout', () => {
     });
 
     describe('mounted ::', () => {
-        let initialiseSpy;
-        let setAuthTokenSpy;
-        let wrapper;
+        describe('if customer is logged in or guest checkout is enabled', () => {
+            let initialiseSpy;
+            let setAuthTokenSpy;
+            let wrapper;
 
-        beforeEach(() => {
-            initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
-            setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
+            beforeEach(() => {
+                initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
+                setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
 
-            wrapper = shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `setAuthToken`', () => {
+                // Assert
+                expect(setAuthTokenSpy).toHaveBeenCalledWith(wrapper.vm.authToken);
+            });
+
+            it('should call `initialise`', () => {
+                // Assert
+                expect(initialiseSpy).toHaveBeenCalled();
+            });
+
+            it('should call `trackInitialLoad`', async () => {
+                // Act
+                await wrapper.vm.initialise();
+
+                // Assert
+                expect(wrapper.vm.checkoutAnalyticsService.trackInitialLoad).toHaveBeenCalled();
+            });
+
+            it('should emit `CheckoutMounted` event', async () => {
+                // Act
+                await wrapper.vm.initialise();
+
+                // Assert
+                expect(wrapper.emitted(EventNames.CheckoutMounted).length).toBe(1);
             });
         });
 
-        afterEach(() => {
-            jest.clearAllMocks();
-        });
+        describe('if customer is logged out and guest checkout is disabled', () => {
+            let initialiseSpy;
+            let setAuthTokenSpy;
+            let wrapper;
 
-        it('should call `setAuthToken`', () => {
-            // Assert
-            expect(setAuthTokenSpy).toHaveBeenCalledWith(wrapper.vm.authToken);
-        });
+            const store = createStore({
+                ...defaultCheckoutState,
+                isLoggedIn: false,
+                serviceType: CHECKOUT_METHOD_DELIVERY
+            });
 
-        it('should call `initialise`', () => {
-            // Assert
-            expect(initialiseSpy).toHaveBeenCalled();
-        });
+            beforeEach(() => {
+                i18n.locale = 'en-AU';
+                initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
+                setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
 
-        it('should call `trackInitialLoad`', async () => {
-            // Act
-            await wrapper.vm.initialise();
+                wrapper = shallowMount(VueCheckout, {
+                    store,
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+            });
 
-            // Assert
-            expect(wrapper.vm.checkoutAnalyticsService.trackInitialLoad).toHaveBeenCalled();
-        });
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
 
-        it('should emit `CheckoutMounted` event', async () => {
-            // Act
-            await wrapper.vm.initialise();
+            afterAll(() => {
+                i18n.locale = 'en-GB';
+            });
 
-            // Assert
-            expect(wrapper.emitted(EventNames.CheckoutMounted).length).toBe(1);
+            it('should call `setAuthToken`', () => {
+                // Assert
+                expect(setAuthTokenSpy).toHaveBeenCalledWith(wrapper.vm.authToken);
+            });
+
+            it('should not call `initialise`', () => {
+                // Assert
+                expect(initialiseSpy).toHaveBeenCalledTimes(0);
+            });
+
+            it('should redirect to login', () => {
+                // Assert
+                expect(windowLocationSpy).toHaveBeenCalledWith(wrapper.vm.loginUrl);
+            });
+
+            it('should log `Redirected to Login', () => {
+                // Assert
+                expect($logger.logInfo).toHaveBeenCalledWith('Redirected to Login', store, { data: undefined, tags: 'checkout' });
+            });
         });
     });
 
