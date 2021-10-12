@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.2.2
 ------------------------------
-*October 08, 2021*
+*October 12, 2021*
 
 ### Changed
 - Use requestAnimationFrame and watcher to ensure ResizeObserver does not throw `ResizeObserver loop limit exceeded` error.

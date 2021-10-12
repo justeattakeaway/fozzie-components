@@ -47,7 +47,6 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-cookie-banner": "file:.yalc/@justeat/f-cookie-banner",
     "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
