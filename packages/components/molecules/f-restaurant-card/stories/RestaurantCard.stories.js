@@ -29,8 +29,10 @@ RestaurantCardComponent.args = {
     data: {
         id: '00000',
         name: 'Fake Restaurant',
-        isTemporarilyOffline: false,
-        logo: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/00000.gif'
+        disabled: false,
+        logoUrl: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/00000.gif',
+        imgUrl: '',
+        displayMode: 'mobile'
     },
 
     flags: {
