@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "main": "dist/f-cookie-banner.umd.min.js",
   "maxBundleSize": "30kB",
   "files": [
@@ -47,6 +47,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@justeat/f-cookie-banner": "file:.yalc/@justeat/f-cookie-banner",
     "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {

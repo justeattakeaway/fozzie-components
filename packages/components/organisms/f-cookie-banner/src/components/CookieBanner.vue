@@ -163,7 +163,8 @@ export default {
             shouldHideBanner: true,
             isIosBrowser: false,
             bodyObserver: undefined,
-            isBodyHeightLessThanWindowHeight: false
+            isBodyHeightLessThanWindowHeight: false,
+            bodyHeight: 0
         };
     },
 
@@ -190,11 +191,19 @@ export default {
     watch: {
         isHidden (newVal) {
             this.shouldHideBanner = !!newVal;
+        },
+
+        bodyHeight (newVal, oldVal) {
+            if (newVal !== oldVal) {
+                this.updateIsBodyHeightLessThanWindowHeight();
+            }
         }
     },
 
     destroyed () {
-        this.bodyObserver.disconnect();
+        if (typeof ResizeObserver === 'function') {
+            this.bodyObserver.disconnect();
+        }
     },
 
     mounted () {
@@ -207,22 +216,37 @@ export default {
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
 
-        if (this.shouldAbsolutePositionReopenLink) {
-            this.bodyObserver = new ResizeObserver(this.updateIsBodyHeightLessThanWindowHeight);
-            const bodyElement = document.documentElement || document.body;
-            this.bodyObserver.observe(bodyElement);
+        if (typeof window === 'object' && this.shouldAbsolutePositionReopenLink && !this.legacyBanner) {
+            this.createResizeObserver();
         }
     },
 
     methods: {
         /**
-         * Triggered by <body> ResizeObserver calculates if the body height less than the window
+         * Creates <body> ResizeObserver to watch for body content height changes, triggers watch.bodyHeight method
+         */
+        createResizeObserver () {
+            if (typeof ResizeObserver !== 'function') return;
+
+            const resizeCallback = entry => {
+                window.requestAnimationFrame(() => {
+                    const [{ contentRect: { height } }] = entry;
+                    this.bodyHeight = height;
+                });
+            };
+            this.bodyObserver = new ResizeObserver(resizeCallback);
+            const bodyElement = document.documentElement || document.body;
+            this.bodyObserver.observe(bodyElement);
+        },
+
+        /**
+         * Triggered vy watch.bodyHeight, calculates if body height is less than window height to absolutley position the reopen link
          */
         updateIsBodyHeightLessThanWindowHeight () {
             if (typeof window === 'object' && this.shouldHideBanner) {
                 const reopenElementHeight = this.$refs?.reopenCookieBannerLink?.$el?.clientHeight || 0;
                 this.isBodyHeightLessThanWindowHeight =
-                (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
+                        (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
             }
         },
 
