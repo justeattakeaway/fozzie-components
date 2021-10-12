@@ -4,6 +4,8 @@ export const CHECKOUT_METHOD_DINEIN = 'dinein';
 
 export const VALID_CHECKOUT_METHODS = [CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN];
 
+export const TENANTS_WITH_GUEST_CHECKOUT_ENABLED = ['uk'];
+
 export const TENANT_MAP = {
     'en-GB': 'uk',
     'en-AU': 'au',
