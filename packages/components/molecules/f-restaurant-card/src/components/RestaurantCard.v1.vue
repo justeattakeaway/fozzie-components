@@ -2,83 +2,81 @@
     <!-- NOTE: This is all placeholder markup, attributes and comments.
     This is not indicative of the actual HTML tags and attributes we
     will use (which will be much more accessible and semantic) -->
-    <article
+    <a
+        :href="url"
         :class="[
             $style['c-restaurantCard'],
             { [$style['c-restaurantCard--mobile']]: isMobileMode },
             { [$style['c-restaurantCard--mobile-img']]: isMobileMode && imgUrl }]"
-        data-test-id="restaurantCard-component">
-        <a
-            :href="url"
-            @click="$emit('restaurant-card-clicked')">
+        data-test-id="restaurantCard-component"
+        @click="$emit('restaurant-card-clicked')">
 
-            <div
-                v-if="imgUrl"
-                :class="$style['c-restaurantCard-img']"
-                :style="`background-image: url(${imgUrl});`" />
-            <div :class="$style['c-restaurantCard-content']">
-                <div :class="$style['c-restaurantCard-content-inner']">
-                    <!-- Logo image -->
-                    <img
-                        src="https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/154079.gif"
-                        alt=""
-                        width="50"
-                        height="50"
-                        loading="lazy"
-                        :class="$style['c-restaurantCard-logo']">
+        <!-- background image -->
+        <div
+            v-if="imgUrl"
+            :class="$style['c-restaurantCard-img']"
+            :style="`background-image: url(${imgUrl});`" />
 
-                    <!-- background image -->
+        <!-- card content -->
+        <div :class="$style['c-restaurantCard-content']">
+            <!-- Logo image -->
+            <img
+                src="https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/154079.gif"
+                alt=""
+                width="50"
+                height="50"
+                loading="lazy"
+                :class="$style['c-restaurantCard-logo']">
 
 
-                    <!-- Restaurant Name -->
-                    <h3
-                        data-test-id="restaurant_name"
-                        data-search-name>
-                        Fake Restaurant
-                    </h3>
 
-                    <!-- Cuisines -->
-                    <!-- START ERROR BOUNDARY -->
-                    <slot name="cuisines" />
-                    <!-- END ERROR BOUNDARY -->
+            <!-- Restaurant Name -->
+            <h3
+                data-test-id="restaurant_name"
+                data-search-name>
+                Fake Restaurant
+            </h3>
+
+            <!-- Cuisines -->
+            <!-- START ERROR BOUNDARY -->
+            <slot name="cuisines" />
+            <!-- END ERROR BOUNDARY -->
 
 
-                    <!-- New label -->
-                    <!-- START ERROR BOUNDARY -->
-                    <slot name="new-label" />
-                    <!-- END ERROR BOUNDARY -->
+            <!-- New label -->
+            <!-- START ERROR BOUNDARY -->
+            <slot name="new-label" />
+            <!-- END ERROR BOUNDARY -->
 
-                    <!-- Ratings -->
-                    <!-- START ERROR BOUNDARY -->
-                    <slot name="ratings" />
-                    <!-- END ERROR BOUNDARY -->
+            <!-- Ratings -->
+            <!-- START ERROR BOUNDARY -->
+            <slot name="ratings" />
+            <!-- END ERROR BOUNDARY -->
 
-                    <!-- Offline Icon -->
-                    <div>Offline Icon</div>
+            <!-- Offline Icon -->
+            <div>Offline Icon</div>
 
-                    <!-- Meta Items List -->
-                    <slot name="meta-items" />
+            <!-- Meta Items List -->
+            <slot name="meta-items" />
 
-                    <!-- Local Legend label -->
-                    <slot name="local-legend" />
+            <!-- Local Legend label -->
+            <slot name="local-legend" />
 
-                    <!-- Badges -->
-                    <div>
-                        <!-- misc badges -->
-                        <!-- START ERROR BOUNDARY -->
-                        <slot name="badges" />
-                        <!-- END ERROR BOUNDARY -->
+            <!-- Badges -->
+            <div>
+                <!-- misc badges -->
+                <!-- START ERROR BOUNDARY -->
+                <slot name="badges" />
+                <!-- END ERROR BOUNDARY -->
 
-                        <!-- promoted badge -->
-                        <span>Promoted</span>
-                    </div>
-
-                    <!-- Optional items i.e. dish search results -->
-                    <slot name="optional-items" />
-                </div>
+                <!-- promoted badge -->
+                <span>Promoted</span>
             </div>
-        </a>
-    </article>
+
+            <!-- Optional items i.e. dish search results -->
+            <slot name="optional-items" />
+        </div>
+    </a>
 </template>
 
 <script>
@@ -132,6 +130,7 @@ export default {
 
 <style lang="scss" module>
 @mixin restaurantCard-mobile {
+  display: block;
   border: 2px dashed purple;
   padding: 1rem;
   position: relative;
@@ -140,9 +139,9 @@ export default {
   .c-restaurantCard-img {
     background-size: cover;
     border-radius: 12px;
-    left: 1rem;
-    right: 1rem;
-    top: 1rem;
+    left: 0;
+    right: 0;
+    top: 0;
     bottom: 4rem;
     z-index: -1;
     max-height: 200px;
@@ -151,12 +150,7 @@ export default {
 
   .c-restaurantCard-content {
     padding: 1rem;
-    padding-bottom: 0;
     z-index: 1;
-  }
-
-  .c-restaurantCard-content-inner {
-    padding: 1rem;
     background: #FFF;
     box-shadow: 0px 6px 8px rgba(54, 59, 73, 0.02), 0px 1px 20px rgba(54, 59, 73, 0.08), 0px 3px 6px -1px rgba(54, 59, 73, 0.08);
     border-radius: 12px;
@@ -184,11 +178,7 @@ export default {
   }
 
   &--mobile-img {
-    padding-top: 4rem;
-
-    .c-restaurantCard-content {
-        padding-top: 4.5rem;
-    }
+    padding-top: 8.5rem;
   }
 }
 </style>
