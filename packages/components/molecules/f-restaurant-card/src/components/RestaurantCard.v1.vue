@@ -6,8 +6,8 @@
         :href="url"
         :class="[
             $style['c-restaurantCard'],
-            { [$style['c-restaurantCard--mobile']]: isMobileMode },
-            { [$style['c-restaurantCard--mobile-img']]: isMobileMode && imgUrl }]"
+            { [$style['c-restaurantCard--mobile']]: mobile },
+            { [$style['c-restaurantCard--mobile-img']]: mobile && imgUrl }]"
         data-test-id="restaurantCard-component"
         @click="$emit('restaurant-card-clicked')">
 
@@ -110,19 +110,14 @@ export default {
             type: Boolean,
             default: false
         },
-        displayMode: {
-            type: String,
-            default: 'mobile'
+        mobile: {
+            type: Boolean,
+            default: false
         },
         // feature flags
         flags: {
             type: Object,
             default: () => ({})
-        }
-    },
-    computed: {
-        isMobileMode () {
-            return this.displayMode === 'mobile';
         }
     }
 };
