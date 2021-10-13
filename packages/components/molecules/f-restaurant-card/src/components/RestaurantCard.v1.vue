@@ -6,8 +6,8 @@
         :href="url"
         :class="[
             $style['c-restaurantCard'],
-            { [$style['c-restaurantCard--mobile']]: mobile },
-            { [$style['c-restaurantCard--img']]: imgUrl }]"
+            $style[displayModeModifier],
+            { [$style['c-restaurantCard--img']]: !!imgUrl }]"
         data-test-id="restaurantCard-component"
         @click="$emit('restaurant-card-clicked')">
 
@@ -110,23 +110,36 @@ export default {
             type: Boolean,
             default: false
         },
-        mobile: {
+        tileMode: {
             type: Boolean,
-            default: false
+            default: true
         },
         // feature flags
         flags: {
             type: Object,
             default: () => ({})
         }
+    },
+    computed: {
+        displayModeModifier () {
+            return this.tileMode ? 'c-restaurantCard--tile' : 'c-restaurantCard--list-item';
+        }
     }
 };
 </script>
 
 <style lang="scss" module>
+// variants
+// =====
+// tile (img and no img)
+// list item (img and no img) - turns into tile at a break point
+// default to list-item - pass in tile boolean
+
+$card-bgColor                             : $color-container-default;
+$card-borderColor                         : $color-border-default;
+$card-borderRadius                        : $radius-rounded-c;
 
 @mixin card-frame {
-    padding: 1rem;
     z-index: 1;
     background: #fff;
     box-shadow: 0 6px 8px rgba(54, 59, 73, 0.02), 0 1px 20px rgba(54, 59, 73, 0.08), 0 3px 6px -1px rgba(54, 59, 73, 0.08);
@@ -135,23 +148,15 @@ export default {
     position: relative;
 }
 
-@mixin restaurantCard-mobile {
+@mixin restaurantCard-tile {
   display: block;
-  border: 2px dashed purple;
-  padding: 1rem;
+ //   border: 2px dashed purple;
+//   padding: 1rem;
   position: relative;
   cursor: pointer;
 
-  // undo desktop settings
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  z-index: 0;
-  min-height: initial;
-
   .c-restaurantCard-img {
     background-size: cover;
-    border-radius: 12px;
     left: 0;
     right: 0;
     top: 0;
@@ -159,22 +164,11 @@ export default {
     z-index: -1;
     max-height: 200px;
     position: absolute;
-
-    // undo desktop settings
-    border: 0;
   }
 
   .c-restaurantCard-content {
     padding: 1rem;
-    z-index: 1;
-    background: #fff;
-    box-shadow: 0 6px 8px rgba(54, 59, 73, 0.02), 0 1px 20px rgba(54, 59, 73, 0.08), 0 3px 6px -1px rgba(54, 59, 73, 0.08);
-    border-radius: 12px;
-    min-height: 100px;
-    position: relative;
-
-    // undo desktop styling
-    border: 0;
+    @include card-frame;
   }
 
   .c-restaurantCard-logo {
@@ -187,47 +181,116 @@ export default {
   }
 }
 
-// this will break the mobile styles until the two are combined
 .c-restaurantCard {
-  text-decoration: none;
-  @include card-frame;
-  padding: 0.5rem;
-  display: flex;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: flex;
 
-  &-img {
-    display: block;
-    background-size: cover;
-    border-radius: 12px;
-    // border: 2px dashed green;
-    flex-basis: 150px;
-  }
-
-  &-content {
-    // border: 2px dashed red;
-    flex: 1;
-    padding: 0.5rem 2.5rem;
-  }
-
-  &-logo {
-    position: absolute;
-    top: 50%;
-    transform: translate(-130%, -50%);
-    border: 0.5px solid #eaeaea;
-    border-radius: 2px;
-  }
-
-  @media only screen and (max-width: 600px) {
-    @include restaurantCard-mobile;
-  }
-
-  &--mobile {
-    @include restaurantCard-mobile;
-  }
-
-  &--img {
-    @media only screen and (max-width: 600px) {
-      padding-top: 8.5rem;
+    &-img {
+        border-radius: $card-borderRadius;
     }
-  }
+
+    &-content {
+        // border: 2px dashed red;
+        flex: 1;
+        padding: 0.5rem 2.5rem;
+        // padding-left: 5rem;
+    }
+
+    // more padding if no img, default
+    &-content {
+        .c-restaurantCard--list-item & {
+            padding-left: 5rem;
+        }
+    }
+
+    // less padding if img, override
+    &-content {
+        .c-restaurantCard--img & {
+            padding-left: 2.5rem;
+        }
+    }
+
+    &-logo {
+        position: absolute;
+        top: 50%;
+        transform: translate(-130%, -50%);
+        border: 0.5px solid #eaeaea;
+        border-radius: 2px;
+    }
+
+    &--list-item {
+        @media only screen and (min-width: 600px) {
+            @include card-frame;
+        }
+
+        &.c-restaurantCard--img {
+            padding-top: .5rem;
+            // if we have an image and break to tile mode
+            @media only screen and (max-width: 600px) {
+                padding-top: 8.5rem;
+            }
+        }
+    }
+
+    &-img {
+        .c-restaurantCard--list-item & {
+            display: block;
+            background-size: cover;
+            flex-basis: 150px;
+        }
+    }
+
+    &--tile {
+        &.c-restaurantCard--img {
+            padding-top: 8.5rem;
+        }
+    }
 }
+
+.c-restaurantCard--tile {
+    @include restaurantCard-tile;
+}
+
+// .c-restaurantCard--tile .c-restaurantCard--img & {
+//     background: red;
+// }
+
+.c-restaurantCard--list-item {
+    // background: lightblue;
+
+    // break down to tile
+    @media only screen and (max-width: 600px) {
+        @include restaurantCard-tile;
+    }
+}
+
+// when list item and img classes present
+  // less padding
+
+// .parentClass { border 10px}
+
+// .img {
+//     .parentClass & {
+//           magic stuff here
+//    }
+// }
+// .parentClass .img {o over rides }
+// Sonny Prince13:30
+// .cloudinaryBroke { border 10px}
+
+// .content {
+//     .cloudinaryBroke & {
+//           remove padding
+//    }
+// }
+
+// .card {
+//   &-thing, &-other {
+//        generic stuff
+//   }
+//    &-other {
+//        specific stuff
+//   }
+// }
 </style>
