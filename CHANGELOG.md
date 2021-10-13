@@ -70,9 +70,15 @@ v4.6.0
 ------------------------------
 *October 8, 2021*
 
+<<<<<<< HEAD
  ### Changed
  - Always run visual tests against master.
  - Only run visual tests against changed packages.
+=======
+### Changed
+- Always run visual tests against master
+- Only run visual tests against changed packages
+>>>>>>> 46b7f675... f-button@3.0.3 - add grid and utility classes to button story
 
 
 v4.5.0
