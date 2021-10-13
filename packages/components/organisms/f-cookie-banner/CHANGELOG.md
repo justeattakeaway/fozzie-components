@@ -3,12 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.2.2
+
+v3.4.0
 ------------------------------
-*October 12, 2021*
+*October 13, 2021*
 
 ### Changed
-- Use requestAnimationFrame and watcher to ensure ResizeObserver does not throw `ResizeObserver loop limit exceeded` error.
+- ResizeObserver to use requestAnimationFrame and watcher to ensure ResizeObserver does not throw `ResizeObserver loop limit exceeded` error.
+
+
+v3.3.0
+------------------------------
+*October 13, 2021*
+
+### Added
+- `domain` prop to allow the consumer to specify which hosts can receive this component's cookie.
 
 
 v3.2.1

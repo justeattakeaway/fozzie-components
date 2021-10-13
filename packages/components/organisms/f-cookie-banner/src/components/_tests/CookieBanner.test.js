@@ -315,7 +315,9 @@ describe('CookieBanner', () => {
         describe('setCookieBannerCookie', () => {
             it('should set the cookie consent banner cookie', () => {
                 // Arrange
-                const propsData = {};
+                const propsData = {
+                    domain: 'example.com'
+                };
 
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -332,7 +334,8 @@ describe('CookieBanner', () => {
                 const payloadValue = 'foo';
                 const payloadObj = {
                     path: '/',
-                    expires: 90
+                    expires: 90,
+                    domain: propsData.domain
                 };
 
                 // Act
@@ -346,7 +349,9 @@ describe('CookieBanner', () => {
         describe('setLegacyCookieBannerCookie', () => {
             it('should set the legacy cookie banner cookie', () => {
                 // Arrange
-                const propsData = {};
+                const propsData = {
+                    domain: 'example.com'
+                };
 
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -358,7 +363,8 @@ describe('CookieBanner', () => {
                 const payloadValue = '130315';
                 const payloadObj = {
                     path: '/',
-                    expires: 90
+                    expires: 90,
+                    domain: propsData.domain
                 };
 
                 // Act

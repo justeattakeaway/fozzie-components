@@ -147,6 +147,11 @@ export default {
         nameSuffix: {
             type: String,
             default: ''
+        },
+
+        domain: {
+            type: String,
+            default: null
         }
     },
 
@@ -370,7 +375,8 @@ export default {
         setCookieBannerCookie (cookieValue) {
             CookieHelper.set(this.consentCookieName, cookieValue, {
                 path: '/',
-                expires: this.cookieExpiry
+                expires: this.cookieExpiry,
+                domain: this.domain
             });
         },
 
@@ -380,7 +386,8 @@ export default {
         setLegacyCookieBannerCookie () {
             CookieHelper.set(LEGACY_CONSENT_COOKIE_NAME, '130315', {
                 path: '/',
-                expires: this.cookieExpiry
+                expires: this.cookieExpiry,
+                domain: this.domain
             });
         },
 
