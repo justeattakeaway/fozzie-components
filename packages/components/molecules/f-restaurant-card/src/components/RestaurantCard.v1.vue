@@ -150,8 +150,6 @@ $card-borderRadius                        : $radius-rounded-c;
 
 @mixin restaurantCard-tile {
   display: block;
- //   border: 2px dashed purple;
-//   padding: 1rem;
   position: relative;
   cursor: pointer;
 
@@ -186,31 +184,6 @@ $card-borderRadius                        : $radius-rounded-c;
     padding: 0.5rem;
     display: flex;
 
-    &-img {
-        border-radius: $card-borderRadius;
-    }
-
-    &-content {
-        // border: 2px dashed red;
-        flex: 1;
-        padding: 0.5rem 2.5rem;
-        // padding-left: 5rem;
-    }
-
-    // more padding if no img, default
-    &-content {
-        .c-restaurantCard--list-item & {
-            padding-left: 5rem;
-        }
-    }
-
-    // less padding if img, override
-    &-content {
-        .c-restaurantCard--img & {
-            padding-left: 2.5rem;
-        }
-    }
-
     &-logo {
         position: absolute;
         top: 50%;
@@ -219,21 +192,8 @@ $card-borderRadius                        : $radius-rounded-c;
         border-radius: 2px;
     }
 
-    &--list-item {
-        @media only screen and (min-width: 600px) {
-            @include card-frame;
-        }
-
-        &.c-restaurantCard--img {
-            padding-top: .5rem;
-            // if we have an image and break to tile mode
-            @media only screen and (max-width: 600px) {
-                padding-top: 8.5rem;
-            }
-        }
-    }
-
     &-img {
+        border-radius: $card-borderRadius;
         .c-restaurantCard--list-item & {
             display: block;
             background-size: cover;
@@ -241,56 +201,45 @@ $card-borderRadius                        : $radius-rounded-c;
         }
     }
 
+    &-content {
+        padding: 0.5rem 2.5rem;
+
+        // more padding if no img
+        .c-restaurantCard--list-item & {
+            flex: 1;
+            padding-left: 5rem;
+        }
+
+        // less padding if img
+        .c-restaurantCard--img & {
+            padding-left: 2.5rem;
+        }
+    }
+
+    &--list-item {
+        @media only screen and (min-width: 600px) {
+            @include card-frame;
+        }
+
+        @media only screen and (max-width: 600px) {
+            @include restaurantCard-tile;
+        }
+
+        &.c-restaurantCard--img {
+            padding-top: .5rem;
+
+            @media only screen and (max-width: 600px) {
+                padding-top: 8.5rem;
+            }
+        }
+    }
+
     &--tile {
+        @include restaurantCard-tile;
+
         &.c-restaurantCard--img {
             padding-top: 8.5rem;
         }
     }
 }
-
-.c-restaurantCard--tile {
-    @include restaurantCard-tile;
-}
-
-// .c-restaurantCard--tile .c-restaurantCard--img & {
-//     background: red;
-// }
-
-.c-restaurantCard--list-item {
-    // background: lightblue;
-
-    // break down to tile
-    @media only screen and (max-width: 600px) {
-        @include restaurantCard-tile;
-    }
-}
-
-// when list item and img classes present
-  // less padding
-
-// .parentClass { border 10px}
-
-// .img {
-//     .parentClass & {
-//           magic stuff here
-//    }
-// }
-// .parentClass .img {o over rides }
-// Sonny Prince13:30
-// .cloudinaryBroke { border 10px}
-
-// .content {
-//     .cloudinaryBroke & {
-//           remove padding
-//    }
-// }
-
-// .card {
-//   &-thing, &-other {
-//        generic stuff
-//   }
-//    &-other {
-//        specific stuff
-//   }
-// }
 </style>

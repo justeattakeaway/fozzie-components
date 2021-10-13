@@ -32,7 +32,7 @@ RestaurantCardComponent.args = {
         disabled: false,
         logoUrl: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/00000.gif',
         imgUrl: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,q_auto,h_161,w_436,d_uk:cuisines:caribbean-5.jpg/v1/uk/restaurants/123215.jpg',
-        mobile: true
+        tileMode: true
     },
 
     flags: {
