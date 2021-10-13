@@ -54,7 +54,7 @@
             <!-- END ERROR BOUNDARY -->
 
             <!-- Offline Icon -->
-            <div>Offline Icon</div>
+            <!-- <div>Offline Icon</div> -->
 
             <!-- Meta Items List -->
             <slot name="meta-items" />
@@ -70,7 +70,7 @@
                 <!-- END ERROR BOUNDARY -->
 
                 <!-- promoted badge -->
-                <span>Promoted</span>
+                <!-- <span>Promoted</span> -->
             </div>
 
             <!-- Optional items i.e. dish search results -->
@@ -128,8 +128,8 @@ export default {
 @mixin card-frame {
     padding: 1rem;
     z-index: 1;
-    background: #FFF;
-    box-shadow: 0px 6px 8px rgba(54, 59, 73, 0.02), 0px 1px 20px rgba(54, 59, 73, 0.08), 0px 3px 6px -1px rgba(54, 59, 73, 0.08);
+    background: #fff;
+    box-shadow: 0 6px 8px rgba(54, 59, 73, 0.02), 0 1px 20px rgba(54, 59, 73, 0.08), 0 3px 6px -1px rgba(54, 59, 73, 0.08);
     border-radius: 12px;
     min-height: 100px;
     position: relative;
@@ -167,8 +167,8 @@ export default {
   .c-restaurantCard-content {
     padding: 1rem;
     z-index: 1;
-    background: #FFF;
-    box-shadow: 0px 6px 8px rgba(54, 59, 73, 0.02), 0px 1px 20px rgba(54, 59, 73, 0.08), 0px 3px 6px -1px rgba(54, 59, 73, 0.08);
+    background: #fff;
+    box-shadow: 0 6px 8px rgba(54, 59, 73, 0.02), 0 1px 20px rgba(54, 59, 73, 0.08), 0 3px 6px -1px rgba(54, 59, 73, 0.08);
     border-radius: 12px;
     min-height: 100px;
     position: relative;
@@ -182,14 +182,14 @@ export default {
     left: 50%;
     top: -25px;
     transform: translateX(-50%);
-    border: 0.5px solid #EAEAEA;
+    border: 0.5px solid #eaeaea;
     border-radius: 2px;
   }
 }
 
 // this will break the mobile styles until the two are combined
 .c-restaurantCard {
-  display: block;
+  text-decoration: none;
   @include card-frame;
   padding: 0.5rem;
   display: flex;
@@ -205,14 +205,14 @@ export default {
   &-content {
     // border: 2px dashed red;
     flex: 1;
-    padding: .5rem 2.5rem;
+    padding: 0.5rem 2.5rem;
   }
 
   &-logo {
     position: absolute;
     top: 50%;
     transform: translate(-130%, -50%);
-    border: 0.5px solid #EAEAEA;
+    border: 0.5px solid #eaeaea;
     border-radius: 2px;
   }
 
