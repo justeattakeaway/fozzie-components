@@ -153,6 +153,11 @@ $card-borderRadius                        : $radius-rounded-c;
   position: relative;
   cursor: pointer;
 
+  &.c-restaurantCard--img {
+      padding: 1rem;
+      padding-top: 8.5rem;
+  }
+
   .c-restaurantCard-img {
     background-size: cover;
     left: 0;
@@ -170,12 +175,9 @@ $card-borderRadius                        : $radius-rounded-c;
   }
 
   .c-restaurantCard-logo {
-    position: absolute;
     left: 50%;
     top: -25px;
     transform: translateX(-50%);
-    border: 0.5px solid #eaeaea;
-    border-radius: 2px;
   }
 }
 
@@ -185,15 +187,19 @@ $card-borderRadius                        : $radius-rounded-c;
     display: flex;
 
     &-logo {
-        position: absolute;
-        top: 50%;
-        transform: translate(-130%, -50%);
         border: 0.5px solid #eaeaea;
         border-radius: 2px;
+        position: absolute;
+
+        .c-restaurantCard--list-item & {
+            top: 50%;
+            transform: translate(-130%, -50%);
+        }
     }
 
     &-img {
         border-radius: $card-borderRadius;
+
         .c-restaurantCard--list-item & {
             display: block;
             background-size: cover;
@@ -224,22 +230,10 @@ $card-borderRadius                        : $radius-rounded-c;
         @media only screen and (max-width: 600px) {
             @include restaurantCard-tile;
         }
-
-        &.c-restaurantCard--img {
-            padding-top: .5rem;
-
-            @media only screen and (max-width: 600px) {
-                padding-top: 8.5rem;
-            }
-        }
     }
 
     &--tile {
         @include restaurantCard-tile;
-
-        &.c-restaurantCard--img {
-            padding-top: 8.5rem;
-        }
     }
 }
 </style>
