@@ -775,7 +775,7 @@ describe('CheckoutModule', () => {
                 payload.data = {
                     basketId,
                     customerNotes: {
-                        noteForRestaurant: userNote
+                        NoteForRestaurant: userNote
                     },
                     referralState: 'ReferredByWeb'
                 };
