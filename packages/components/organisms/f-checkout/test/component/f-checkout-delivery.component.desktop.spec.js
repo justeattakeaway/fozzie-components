@@ -15,7 +15,6 @@ describe('f-checkout "delivery" component tests', () => {
         });
 
         it('should enable a user to submit a postcode with correct characters', () => {
-
             // Act
             checkout.goToPayment();
 
@@ -28,7 +27,7 @@ describe('f-checkout "delivery" component tests', () => {
         beforeEach(() => {
             checkout = new Checkout();
             checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', false)
+                .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
                 .withQuery('&knob-Locale', 'en-AU');
 
