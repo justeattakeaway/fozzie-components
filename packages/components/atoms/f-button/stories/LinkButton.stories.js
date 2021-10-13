@@ -18,10 +18,9 @@ export const LinkButtonComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template: `
     <div>
-        <div
-            style="display: flex; flex-flow: row nowrap; align-items: center; justify-content: space-around; margin-bottom: 16px;">
+        <div class="g g--alignCenter--v g--alignSpaceAround g--stack--wide">
             <f-button
-                style="margin-right: 16px;"
+                class="u-spacingRight u-spacingBottom--large"
                 v-for="(button, index) in buttonList"
                 :key="index"
                 buttonType="link"

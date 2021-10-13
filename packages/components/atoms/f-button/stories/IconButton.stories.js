@@ -49,8 +49,9 @@ export const IconButtonComponent = () => ({
     },
 
     template: `
-    <div class="wrapper--horizontal">
+    <div class="g g--alignCenter--v g--stack--wide">
         <f-button
+            class="u-spacingRight u-spacingBottom--large"
             :buttonType="buttonType"
             :buttonSize="buttonSize"
             :actionType="actionType"
@@ -61,6 +62,7 @@ export const IconButtonComponent = () => ({
         </f-button>
 
         <f-button
+            class="u-spacingRight u-spacingBottom--large"
             :buttonType="buttonType"
             :buttonSize="buttonSize"
             :actionType="actionType"
@@ -71,6 +73,7 @@ export const IconButtonComponent = () => ({
         </f-button>
 
         <f-button
+            class="u-spacingRight u-spacingBottom--large"
             :buttonType="buttonType"
             :buttonSize="buttonSize"
             :actionType="actionType"

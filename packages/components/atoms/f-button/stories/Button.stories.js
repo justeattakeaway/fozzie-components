@@ -19,10 +19,10 @@ export const ButtonComponent = (args, { argTypes }) => ({
     template: `
     <div>
         <div
-            style="display: flex; flex-flow: row nowrap; align-items: center; justify-content: space-around; margin-bottom: 16px;"
+            class="u-spacingBottom--large g g--alignCenter--v g--alignSpaceAround g--stack--wide"
             v-for="(list, index) in buttonLists">
             <f-button
-                style="margin-right: 16px;"
+                class="u-spacingRight u-spacingBottom--large"
                 v-for="(button, index) in list"
                 :key="index"
                 :buttonType="button.type"
