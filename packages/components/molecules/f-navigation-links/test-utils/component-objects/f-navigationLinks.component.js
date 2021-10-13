@@ -1,13 +1,15 @@
+/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const { COMPONENT } = require('./f-navigationLinks-selectors');
 
 module.exports = class NavigationLinks extends Page {
-    get component () {
-        return $(COMPONENT);
+    constructor () {
+        super('molecule', 'navigation-links-component');
     }
 
-    open () {
-        super.openComponent('molecule', 'navigationLinks-component');
+    get component () {
+        // eslint-disable-next-line no-undef
+        return $(COMPONENT);
     }
 
     waitForComponent () {

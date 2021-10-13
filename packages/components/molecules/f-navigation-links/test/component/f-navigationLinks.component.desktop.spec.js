@@ -1,13 +1,12 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-const navigationLinks = require('../../test-utils/component-objects/f-navigationLinks.component');
+const NavigationLinks = require('../../test-utils/component-objects/f-navigationLinks.component');
+
+let navigationLinks;
 
 describe('f-navigationLinks component tests', () => {
     beforeEach(() => {
+        navigationLinks = new NavigationLinks();
 
-        const pageUrl = buildUrl(navigationLinks.componentType, navigationLinks.componentName, navigationLinks.path);
-
-        navigationLinks.open(pageUrl)
-        navigationLinks.waitForComponent();
+        navigationLinks.load();
     });
 
     it('should display the f-navigationLinks component', () => {
