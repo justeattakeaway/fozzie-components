@@ -7,7 +7,7 @@
         :class="[
             $style['c-restaurantCard'],
             { [$style['c-restaurantCard--mobile']]: mobile },
-            { [$style['c-restaurantCard--mobile-img']]: mobile && imgUrl }]"
+            { [$style['c-restaurantCard--img']]: imgUrl }]"
         data-test-id="restaurantCard-component"
         @click="$emit('restaurant-card-clicked')">
 
@@ -124,12 +124,30 @@ export default {
 </script>
 
 <style lang="scss" module>
+
+@mixin card-frame {
+    padding: 1rem;
+    z-index: 1;
+    background: #FFF;
+    box-shadow: 0px 6px 8px rgba(54, 59, 73, 0.02), 0px 1px 20px rgba(54, 59, 73, 0.08), 0px 3px 6px -1px rgba(54, 59, 73, 0.08);
+    border-radius: 12px;
+    min-height: 100px;
+    position: relative;
+}
+
 @mixin restaurantCard-mobile {
   display: block;
   border: 2px dashed purple;
   padding: 1rem;
   position: relative;
   cursor: pointer;
+
+  // undo desktop settings
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  z-index: 0;
+  min-height: initial;
 
   .c-restaurantCard-img {
     background-size: cover;
@@ -141,6 +159,9 @@ export default {
     z-index: -1;
     max-height: 200px;
     position: absolute;
+
+    // undo desktop settings
+    border: 0;
   }
 
   .c-restaurantCard-content {
@@ -151,6 +172,9 @@ export default {
     border-radius: 12px;
     min-height: 100px;
     position: relative;
+
+    // undo desktop styling
+    border: 0;
   }
 
   .c-restaurantCard-logo {
@@ -163,7 +187,35 @@ export default {
   }
 }
 
+// this will break the mobile styles until the two are combined
 .c-restaurantCard {
+  display: block;
+  @include card-frame;
+  padding: 0.5rem;
+  display: flex;
+
+  &-img {
+    display: block;
+    background-size: cover;
+    border-radius: 12px;
+    // border: 2px dashed green;
+    flex-basis: 150px;
+  }
+
+  &-content {
+    // border: 2px dashed red;
+    flex: 1;
+    padding: .5rem 2.5rem;
+  }
+
+  &-logo {
+    position: absolute;
+    top: 50%;
+    transform: translate(-130%, -50%);
+    border: 0.5px solid #EAEAEA;
+    border-radius: 2px;
+  }
+
   @media only screen and (max-width: 600px) {
     @include restaurantCard-mobile;
   }
@@ -172,8 +224,10 @@ export default {
     @include restaurantCard-mobile;
   }
 
-  &--mobile-img {
-    padding-top: 8.5rem;
+  &--img {
+    @media only screen and (max-width: 600px) {
+      padding-top: 8.5rem;
+    }
   }
 }
 </style>
