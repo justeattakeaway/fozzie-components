@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.5.0
 *October 12, 2021*
-
+------------------------------
 ### Removed
 - Redirect to login if the user is logged out and guest checkout is disabled
 
