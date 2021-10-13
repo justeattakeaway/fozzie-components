@@ -3,18 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v2.4.0
-*October 12, 2021*
-
-### Added
-- Redirect to login if the user is logged out and guest checkout is disabled
-
-
 v2.3.0
+------------------------------
 *October 11, 2021*
 
 ### Removed
 - Removed babel private methods.
+
+*October 7, 2021*
 
 ### Changed
 - Increased maxBundleSize to 120Kb.
