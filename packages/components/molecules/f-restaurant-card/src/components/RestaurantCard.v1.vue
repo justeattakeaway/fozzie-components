@@ -213,13 +213,11 @@ $logo-borderColor                         : $color-border-default;
     &-content {
         padding: spacing(x0.5) spacing(x5);
 
-        // more padding if no img
         .c-restaurantCard--list-item & {
             flex: 1;
             padding-left: spacing(x10);
         }
 
-        // less padding if img
         .c-restaurantCard--img & {
             padding-left: spacing(x5);
         }
