@@ -63,7 +63,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
     "@justeat/f-alert": "3.0.0",
-    "@justeat/f-button": "3.0.0",
+    "@justeat/f-button": "3.0.2",
     "@justeat/f-card": "3.0.0",
     "@justeat/f-error-message": "1.0.0",
     "@justeat/f-form-field": "4.0.0",
