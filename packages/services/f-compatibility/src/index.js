@@ -1,7 +1,7 @@
 
 
 /**
-* @overview Add description of service here
+* @overview Service to check browser compatibilities and warn users with incompatible browsers
 *
 * @module f-compatibility
 */
