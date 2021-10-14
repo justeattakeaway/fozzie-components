@@ -23,7 +23,7 @@ module.exports = class BasketServiceApi {
         };
 
         const data = {
-            restaurantSeoName: basketInfo.restaurantSEO,
+            restaurantSeoName: basketInfo.restaurantSeo,
             menuGroupId: basketInfo.menuId,
             serviceType: basketInfo.serviceType,
             orderDetails: {

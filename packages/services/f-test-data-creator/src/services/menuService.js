@@ -9,10 +9,10 @@ module.exports = class MenuService {
         this.items = configuration.itemIds;
     }
 
-    async getMenuItemsAsync (restaurantSEO, serviceType) {
-        console.log(`Attempting to get menu items for restaurant: ${restaurantSEO}`);
+    async getMenuItemsAsync (restaurantSeo, serviceType) {
+        console.log(`Attempting to get menu items for restaurant: ${restaurantSeo}`);
 
-        const { data } = await this.menuServiceApi.getRestaurantManifestAsync(restaurantSEO);
+        const { data } = await this.menuServiceApi.getRestaurantManifestAsync(restaurantSeo);
 
         const result = data.Menus.filter(menu => this.menus[serviceType].includes(menu.MenuGroupId));
 
@@ -26,9 +26,9 @@ module.exports = class MenuService {
             throw new Error(`No products available for ${serviceType}`);
         }
 
-        const product = products[0].ItemIds.filter(id => this.items[serviceType].includes(id)).toString();
+        const product = products[0].ItemIds.find(id => this.items[serviceType].includes(id)).toString();
 
-        console.log(`Successfully returned menu items for service type: ${serviceType} and restaurant ${restaurantSEO}`);
+        console.log(`Successfully returned menu items for service type: ${serviceType} and restaurant ${restaurantSeo}`);
 
         const menuResult = {
             productId: product,
