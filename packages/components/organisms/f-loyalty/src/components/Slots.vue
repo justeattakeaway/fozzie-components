@@ -6,8 +6,10 @@
             <no-cards-error-state engagement-label="no_cards" />
         </div>
         <template v-if="hasRedeemableStampcards">
-            <h2 :class="$style['c-loyalty-stampCardsSlotTitle']">
-                {{ $t('stamps.readyToClaimTitle') }}
+            <h2
+                data-test-id="section-readyToClaim-title"
+                :class="$style['c-loyalty-stampCardsSlotTitle']">
+                {{ $t('tabs.stamps.readyToClaimTitle') }}
             </h2>
             <div
                 :class="$style['c-loyalty-stampCardsSlotCardsContainer']"
@@ -20,8 +22,10 @@
             </div>
         </template>
         <template v-if="hasInProgressStampcards">
-            <h2 :class="$style['c-loyalty-stampCardsSlotTitle']">
-                {{ $t('stamps.inProgressTitle') }}
+            <h2
+                data-test-id="section-inProgress-title"
+                :class="$style['c-loyalty-stampCardsSlotTitle']">
+                {{ $t('tabs.stamps.inProgressTitle') }}
             </h2>
             <div
                 :class="$style['c-loyalty-stampCardsSlotCardsContainer']"
@@ -34,19 +38,23 @@
             </div>
         </template>
         <template v-if="hasParticipatingRestaurantsCards">
-            <h2 :class="$style['c-loyalty-stampCardsSlotTitle']">
-                {{ $t('stamps.participatingRestaurantsTitle') }}
+            <h2
+                data-test-id="section-participatingRestaurants-title"
+                :class="$style['c-loyalty-stampCardsSlotTitle']">
+                {{ $t('tabs.stamps.participatingRestaurantsTitle') }}
             </h2>
             <i18n
                 v-if="location"
-                path="stamps.participatingRestaurantsSubtitle"
+                path="tabs.stamps.participatingRestaurantsSubtitle"
                 tag="p"
                 :class="$style['c-loyalty-stampCardsSlotSubtitle']">
                 <template #location>
                     <strong>{{ location }}</strong>
                 </template>
             </i18n>
-            <div :class="$style['c-loyalty-stampCardsSlotCardsContainer']">
+            <div
+                data-test-id="section-participatingRestaurants"
+                :class="$style['c-loyalty-stampCardsSlotCardsContainer']">
                 <stamp-card-promotion-card
                     v-for="(card, index) in participatingRestaurantsCards"
                     :key="`promotion-${index}_${card.id}`"
