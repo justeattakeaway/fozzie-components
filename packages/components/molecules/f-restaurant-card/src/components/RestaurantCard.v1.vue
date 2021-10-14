@@ -129,15 +129,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-// variants
-// =====
-// tile (img and no img)
-// list item (img and no img) - turns into tile at a break point
-// default to list-item - pass in tile boolean
-
 $card-bgColor                             : $color-container-default;
 $card-borderColor                         : $color-border-default;
 $card-borderRadius                        : $radius-rounded-c;
+$img-borderRadius-sm                      : $radius-rounded-a;
 
 @mixin card-frame {
     z-index: 1;
@@ -204,6 +199,10 @@ $card-borderRadius                        : $radius-rounded-c;
             display: block;
             background-size: cover;
             flex-basis: 150px;
+
+            @media only screen and (max-width: 600px) {
+                border-radius: $img-borderRadius-sm;
+            }
         }
     }
 
