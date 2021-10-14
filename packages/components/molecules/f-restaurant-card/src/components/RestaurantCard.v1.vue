@@ -156,6 +156,10 @@ $logo-borderColor                         : $color-border-default;
       padding-top: spacing(x10) * 2;
   }
 
+  &:not(.c-restaurantCard--img) {
+      padding-top: spacing() * 3.5;
+  }
+
   .c-restaurantCard-img {
     height: 228px;
     left: 0;
