@@ -4,9 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v2.5.0
-*October 12, 2021*
+Latest (to be added to next release)
 ------------------------------
+*October 13, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v2.5.0
+------------------------------
+*October 12, 2021*
+
 ### Removed
 - Redirect to login if the user is logged out and guest checkout is disabled
 
