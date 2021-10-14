@@ -130,17 +130,23 @@ export default {
 
 <style lang="scss" module>
 $card-bgColor                             : $color-container-default;
-$card-borderColor                         : $color-border-default;
 $card-borderRadius                        : $radius-rounded-c;
-$img-borderRadius-sm                      : $radius-rounded-a;
+$img-border-radius                        : $radius-rounded-c;
+$img-width                                : 156px;
+$logo-borderRadius                        : $radius-rounded-b;
+$logo-borderColor                         : $color-border-default;
 
 @mixin card-frame {
     z-index: 1;
-    background: #fff;
+    background: $card-bgColor;
     box-shadow: 0 6px 8px rgba(54, 59, 73, 0.02), 0 1px 20px rgba(54, 59, 73, 0.08), 0 3px 6px -1px rgba(54, 59, 73, 0.08);
-    border-radius: 12px;
-    min-height: 100px;
+    border-radius: $card-borderRadius;
     position: relative;
+    min-height: 114px;
+
+    @include media('>mid') {
+        min-height: 96px;
+    }
 }
 
 @mixin restaurantCard-tile {
@@ -150,17 +156,17 @@ $img-borderRadius-sm                      : $radius-rounded-a;
 
   &.c-restaurantCard--img {
       padding: 1rem;
-      padding-top: 8.5rem;
+      padding-top: 10rem;
   }
 
   .c-restaurantCard-img {
+    height: 228px;
     background-size: cover;
     left: 0;
     right: 0;
     top: 0;
     bottom: 4rem;
     z-index: -1;
-    max-height: 200px;
     position: absolute;
   }
 
@@ -178,12 +184,12 @@ $img-borderRadius-sm                      : $radius-rounded-a;
 
 .c-restaurantCard {
     text-decoration: none;
-    padding: 0.5rem;
+    padding: 0.25rem;
     display: flex;
 
     &-logo {
-        border: 0.5px solid #eaeaea;
-        border-radius: 2px;
+        border: 0.5px solid $logo-borderColor ;
+        border-radius: $logo-borderRadius;
         position: absolute;
 
         .c-restaurantCard--list-item & {
@@ -193,16 +199,12 @@ $img-borderRadius-sm                      : $radius-rounded-a;
     }
 
     &-img {
-        border-radius: $card-borderRadius;
+        border-radius: $img-border-radius;
 
         .c-restaurantCard--list-item & {
             display: block;
             background-size: cover;
-            flex-basis: 150px;
-
-            @media only screen and (max-width: 600px) {
-                border-radius: $img-borderRadius-sm;
-            }
+            flex-basis: $img-width;
         }
     }
 
@@ -222,11 +224,11 @@ $img-borderRadius-sm                      : $radius-rounded-a;
     }
 
     &--list-item {
-        @media only screen and (min-width: 600px) {
+        @include media('>mid') {
             @include card-frame;
         }
 
-        @media only screen and (max-width: 600px) {
+        @include media('<=mid') {
             @include restaurantCard-tile;
         }
     }
