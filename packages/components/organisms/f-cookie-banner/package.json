@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "main": "dist/f-cookie-banner.umd.min.js",
   "maxBundleSize": "30kB",
   "files": [
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@justeat/f-button": "3.0.2",
-    "@justeat/f-mega-modal": "3.0.0",
+    "@justeat/f-mega-modal": "3.0.1",
     "@justeat/f-vue-icons": "2.3.0",
     "@justeat/f-wdio-utils": "0.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",

@@ -4,12 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v2.5.1
 ------------------------------
-*October 13, 2021*
+*October 14, 2021*
 
 ### Changed
-- Updated version of `f-button`.
+- Updated version of `f-button`, `f-alert`, `f-mega-modal`.
 
 
 v2.5.0
