@@ -9,7 +9,7 @@ v2.5.1
 *October 14, 2021*
 
 ### Changed
-- Updated version of `f-button`.
+- Updated version of `f-button`, `f-alert`, `f-mega-modal`.
 
 
 v2.5.0
