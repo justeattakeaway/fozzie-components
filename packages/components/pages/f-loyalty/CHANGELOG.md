@@ -37,6 +37,15 @@ v1.0.0
 - Unit tests for the loading state component
 
 
+v1.1.0
+------------------------------
+*October 14, 2021*
+
+### Added
+- Slots component
+- Unit tests for the component
+
+
 v0.9.0
 ------------------------------
 *October 07, 2021*
