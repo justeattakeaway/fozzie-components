@@ -98,7 +98,6 @@ export default {
             type: String,
             default: null
         },
-        // TODO - could use lazy loading
         imgUrl: {
             type: String,
             default: null
@@ -205,7 +204,6 @@ $logo-borderColor                         : $color-border-default;
 
         .c-restaurantCard--list-item & {
             display: block;
-            background-size: cover;
             flex-basis: $img-width;
         }
     }
