@@ -184,7 +184,7 @@ $logo-borderColor                         : $color-border-default;
     display: flex;
 
     &-logo {
-        border: 0.5px solid $logo-borderColor ;
+        border: 0.5px solid $logo-borderColor;
         border-radius: $logo-borderRadius;
         position: absolute;
 
