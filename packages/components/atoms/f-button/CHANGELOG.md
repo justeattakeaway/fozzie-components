@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.2
+------------------------------
+*October 13, 2021*
+
+### Changed
+- Margin between few full width buttons increased from 8px to 16px.
+
+
 v3.0.1
 ------------------------------
 *October 5, 2021*
