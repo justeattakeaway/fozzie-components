@@ -3,6 +3,39 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.5.1
+------------------------------
+*October 14, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-alert`, `f-mega-modal`.
+
+
+v2.5.0
+------------------------------
+*October 12, 2021*
+
+### Removed
+- Redirect to login if the user is logged out and guest checkout is disabled
+
+
+v2.4.1
+------------------------------
+*October 13, 2021*
+
+### Changed
+- Place order note key to the correct case `NoteForRestaurant`
+
+
+v2.4.0
+------------------------------
+*October 12, 2021*
+
+### Added
+- Redirect to login if the user is logged out and guest checkout is disabled
+
+
 v2.3.0
 ------------------------------
 *October 11, 2021*
