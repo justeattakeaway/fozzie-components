@@ -1,7 +1,4 @@
 <template>
-    <!-- NOTE: This is all placeholder markup, attributes and comments.
-    This is not indicative of the actual HTML tags and attributes we
-    will use (which will be much more accessible and semantic) -->
     <a
         :href="url"
         :class="[
@@ -15,14 +12,16 @@
         <div
             v-if="imgUrl"
             :class="$style['c-restaurantCard-img']"
-            :style="`background-image: url(${imgUrl});`" />
+            :style="`background-image: url(${imgUrl});`"
+            role="img"
+            aria-label="TODO - Determine appropriate label" />
 
         <!-- card content -->
         <div :class="$style['c-restaurantCard-content']">
             <!-- Logo image -->
             <img
                 :src="logoUrl"
-                alt=""
+                alt="TODO - Determine appropriate alt"
                 width="50"
                 height="50"
                 loading="lazy"
@@ -72,7 +71,6 @@
                 <!-- promoted badge -->
                 <!-- <span>Promoted</span> -->
             </div>
-
             <!-- Optional items i.e. dish search results -->
             <slot name="optional-items" />
         </div>
@@ -83,9 +81,7 @@
 
 export default {
     name: 'RestaurantCardV1',
-    // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
-        // restaurant & display data
         id: {
             type: String,
             default: null
@@ -102,6 +98,7 @@ export default {
             type: String,
             default: null
         },
+        // TODO - could use lazy loading
         imgUrl: {
             type: String,
             default: null
@@ -139,7 +136,7 @@ $logo-borderColor                         : $color-border-default;
 @mixin card-frame {
     z-index: 1;
     background: $card-bgColor;
-    box-shadow: 0 6px 8px rgba(54, 59, 73, 0.02), 0 1px 20px rgba(54, 59, 73, 0.08), 0 3px 6px -1px rgba(54, 59, 73, 0.08);
+    box-shadow: 0 6px 8px rgba($color-black, 0.02), 0 1px 20px rgba($color-black, 0.08), 0 3px 6px -1px rgba($color-black, 0.08);
     border-radius: $card-borderRadius;
     position: relative;
     min-height: 114px;
@@ -155,8 +152,8 @@ $logo-borderColor                         : $color-border-default;
   cursor: pointer;
 
   &.c-restaurantCard--img {
-      padding: 1rem;
-      padding-top: 10rem;
+      padding: spacing(x2);
+      padding-top: spacing(x10) * 2;
   }
 
   .c-restaurantCard-img {
@@ -164,13 +161,13 @@ $logo-borderColor                         : $color-border-default;
     left: 0;
     right: 0;
     top: 0;
-    bottom: 4rem;
+    bottom: spacing(x8);
     z-index: -1;
     position: absolute;
   }
 
   .c-restaurantCard-content {
-    padding: 1rem;
+    padding: spacing(x2);
     @include card-frame;
   }
 
@@ -183,7 +180,7 @@ $logo-borderColor                         : $color-border-default;
 
 .c-restaurantCard {
     text-decoration: none;
-    padding: 0.25rem;
+    padding: spacing(x0.5);
     display: flex;
 
     &-logo {
@@ -210,17 +207,17 @@ $logo-borderColor                         : $color-border-default;
     }
 
     &-content {
-        padding: 0.5rem 2.5rem;
+        padding: spacing(x0.5) spacing(x5);
 
         // more padding if no img
         .c-restaurantCard--list-item & {
             flex: 1;
-            padding-left: 5rem;
+            padding-left: spacing(x10);
         }
 
         // less padding if img
         .c-restaurantCard--img & {
-            padding-left: 2.5rem;
+            padding-left: spacing(x5);
         }
     }
 
