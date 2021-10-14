@@ -71,7 +71,9 @@ Static files are generated for each locale and added to `dist/static` folder. Th
 
 #### HTML Tag Implementation
 
-Files can be accessed directly via CDN using [unkpg.com](https://unpkg.com/browse/@justeat/f-cookie-banner/dist/static/). By omitting the version/tag unpkg will serve the latest version automatically.
+Files can be accessed directly via CDN using [unkpg.com](https://unpkg.com/browse/@justeat/f-cookie-banner/dist/static/).
+
+***By omitting the version/tag unpkg will serve the latest version automatically, you may wish to fix the version served in your application***
 
 Using the CDN the cookie banner can be added to any web page using basic tags. The page must contain a placeholder element with the id attribute `cookie-banner` for example `<div id="cookie-banner"></div>`
 
@@ -131,6 +133,26 @@ Finally, use the generated bundle in your HTML page
 </html>
 ```
 
+#### Non Vue Custom Props
+
+The Non Vue version is compiled using the Vue CLI [pre-render plugin](https://github.com/SolarLiner/vue-cli-plugin-prerender-spa) this means that prop values are essentially hardcoded at compilation. You can configure your own custom version by simply adding the required props to the base template file used by the pre-renderer.
+
+Props should be added to the [App.vue](https://github.com/justeat/fozzie-components/blob/master/packages/components/organisms/f-cookie-banner/f-cookie-banner-static/src/App.vue) Remember the `locale` prop will be replaced by the `build:static-files` task.
+
+In the code example below we add the `nameSuffix` prop:
+
+```html
+<template>
+    <cookie-banner
+        locale='da-DK'
+        should-absolute-position-reopen-link='false'
+        nameSuffix='myName'
+    />
+</template>
+```
+
+Next run `yarn build` followed by `yarn build:static-files`. The generated files will be added to the root `dist/static` folder.
+
 ## Configuration
 
 ### Props
@@ -146,11 +168,15 @@ The props that can be defined are as follows:
 | `shouldShowLegacyBanner` | `Boolean` | `false` | Use the legacy "passive" banner markup (UK only). |
 | `cookieExpiry` | `Number` | `90` | Expiry time (days) of cookies written to the browser. |
 | `shouldUseGreyBackground` | `Boolean` | `true` | Use grey background for the reopen link. |
+| `shouldAbsolutePositionReopenLink` | `Boolean` | `true` | Adds a ResizeObserver and absolutely positions the re-open link to the bottom when the content is smaller than the window |
 | `nameSuffix` | `String` | `''` | Add a suffix to the cookie name. This allows the cookie banner to create a cookie with a different name to be able to handle multiple sub-domains. |
+| `domain` | `String` | `null` | Specifies which hosts can receive a cookie. If unspecified, the attribute defaults to the same host that set the cookie, excluding subdomains. If it is specified, then subdomains are always included. Therefore, passing the prop is less restrictive than omitting it. For example, if you specify `just-eat.co.uk`, the cookie will be used in any subdomain of `just-eat.co.uk` |
 
-**Important: please, be mindful of the amount of cookies your app will be generating when using the `nameSuffix` prop above. If you have questions, please, contact the code owners.**
+#### ***Important***
 
-NOTE: the Non Vue version uses default props that cannot currently be changed. A seperate version is generated for each locale.
+- Please, be mindful of the amount of cookies your app will be generating when using the `nameSuffix` prop above. If you have questions, please, contact the code owners.
+
+- The Non Vue version uses default prop values with the exception of `shouldAbsolutePositionReopenLink` which is set to false to avoid any conflicts with consuming applications. A seperate version is generated for each locale. It is possible to generate a custom build and use your own prop values, see on Vue Custom Props above.
 
 ### CSS Classes
 
