@@ -62,7 +62,7 @@
                     </button-component>
 
                     <button-component
-                        button-type="ghost"
+                        button-type="outline"
                         data-test-id="accept-necessary-cookies-button"
                         is-full-width
                         @click="acceptOnlyNecessaryCookiesActions">
@@ -461,7 +461,7 @@ export default {
 
     .c-cookieBanner-title {
         @include font-size(heading-m);
-        margin: spacing() 0;
+        margin: 0 0 spacing();
         padding: 0;
         color: $color-content-default;
         &:hover,
