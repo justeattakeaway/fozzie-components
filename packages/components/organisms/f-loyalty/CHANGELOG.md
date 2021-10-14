@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.0.0
+------------------------------
+*October 14, 2021*
+
+### Added
+- Loading state component.
+- Unit tests for the loading state component
+
 
 v0.9.0
 ------------------------------
@@ -27,15 +35,6 @@ v0.7.0
 
 ### Changed
 - Updated version of `f-breadcrumbs` and `f-tabs` to include icing phase 2 changes.
-
-
-v1.0.0
-------------------------------
-*October 05, 2021*
-
-### Added
-- Loading state component.
-- Unit tests for the loading state component
 
 
 v0.6.0
