@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
-    "@justeat/f-button": "3.0.0",
+    "@justeat/f-button": "3.0.2",
     "@justeat/f-popover": "2.0.0",
     "@justeat/f-vue-icons": "2.4.0",
     "@justeat/f-wdio-utils": "0.3.0",

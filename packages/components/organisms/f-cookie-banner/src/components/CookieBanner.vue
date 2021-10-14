@@ -62,7 +62,7 @@
                     </button-component>
 
                     <button-component
-                        button-type="ghost"
+                        button-type="outline"
                         data-test-id="accept-necessary-cookies-button"
                         is-full-width
                         @click="acceptOnlyNecessaryCookiesActions">
@@ -147,6 +147,11 @@ export default {
         nameSuffix: {
             type: String,
             default: ''
+        },
+
+        domain: {
+            type: String,
+            default: null
         }
     },
 
@@ -346,7 +351,8 @@ export default {
         setCookieBannerCookie (cookieValue) {
             CookieHelper.set(this.consentCookieName, cookieValue, {
                 path: '/',
-                expires: this.cookieExpiry
+                expires: this.cookieExpiry,
+                domain: this.domain
             });
         },
 
@@ -356,7 +362,8 @@ export default {
         setLegacyCookieBannerCookie () {
             CookieHelper.set(LEGACY_CONSENT_COOKIE_NAME, '130315', {
                 path: '/',
-                expires: this.cookieExpiry
+                expires: this.cookieExpiry,
+                domain: this.domain
             });
         },
 
@@ -454,7 +461,7 @@ export default {
 
     .c-cookieBanner-title {
         @include font-size(heading-m);
-        margin: spacing() 0;
+        margin: 0 0 spacing();
         padding: 0;
         color: $color-content-default;
         &:hover,
