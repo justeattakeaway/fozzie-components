@@ -185,7 +185,6 @@ import {
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS,
     TENANT_MAP,
-    TENANTS_WITH_GUEST_CHECKOUT_ENABLED,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
     VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
@@ -511,10 +510,6 @@ export default {
 
         shouldShowAddressAdministrativeArea () {
             return this.tenant === 'au';
-        },
-
-        isGuestCheckoutEnabled () {
-            return TENANTS_WITH_GUEST_CHECKOUT_ENABLED.includes(this.tenant);
         }
     },
 
@@ -541,18 +536,9 @@ export default {
     async mounted () {
         this.setAuthToken(this.authToken);
 
-        if (this.isLoggedIn || this.isGuestCheckoutEnabled) {
-            await this.initialise();
-            this.checkoutAnalyticsService.trackInitialLoad();
-            this.$emit(EventNames.CheckoutMounted);
-        } else {
-            this.logInvoker({
-                message: 'Redirected to Login',
-                logMethod: this.$logger.logInfo
-            });
-
-            window.location.assign(this.loginUrl);
-        }
+        await this.initialise();
+        this.checkoutAnalyticsService.trackInitialLoad();
+        this.$emit(EventNames.CheckoutMounted);
     },
 
     methods: {
@@ -730,7 +716,7 @@ export default {
                 const data = {
                     basketId: this.basket.id,
                     customerNotes: {
-                        noteForRestaurant: this.userNote
+                        NoteForRestaurant: this.userNote
                     },
                     referralState: this.getReferralState()
                 };
