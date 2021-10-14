@@ -730,7 +730,7 @@ export default {
                 const data = {
                     basketId: this.basket.id,
                     customerNotes: {
-                        noteForRestaurant: this.userNote
+                        NoteForRestaurant: this.userNote
                     },
                     referralState: this.getReferralState()
                 };
