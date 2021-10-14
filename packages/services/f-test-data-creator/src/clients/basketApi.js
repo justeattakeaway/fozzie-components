@@ -9,8 +9,7 @@ module.exports = class BasketServiceApi {
     }
 
     async createBasketForUserAsync (basketInfo, timeout = 5000) {
-        const timeElapsed = Date.now();
-        const today = new Date(timeElapsed);
+        const today = new Date().toISOString();
 
         const config = {
             headers: {
@@ -32,7 +31,7 @@ module.exports = class BasketServiceApi {
                 }
             },
             products: [{
-                date: today.toISOString(),
+                date: today,
                 productId: basketInfo.productId,
                 quantity: 20,
                 modifierGroups: [],
