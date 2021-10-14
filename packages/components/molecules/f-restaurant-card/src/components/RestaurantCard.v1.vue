@@ -21,7 +21,7 @@
         <div :class="$style['c-restaurantCard-content']">
             <!-- Logo image -->
             <img
-                src="https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/154079.gif"
+                :src="logoUrl"
                 alt=""
                 width="50"
                 height="50"
@@ -161,7 +161,6 @@ $logo-borderColor                         : $color-border-default;
 
   .c-restaurantCard-img {
     height: 228px;
-    background-size: cover;
     left: 0;
     right: 0;
     top: 0;
@@ -200,6 +199,8 @@ $logo-borderColor                         : $color-border-default;
 
     &-img {
         border-radius: $img-border-radius;
+        background-size: cover;
+        background-position: center;
 
         .c-restaurantCard--list-item & {
             display: block;
