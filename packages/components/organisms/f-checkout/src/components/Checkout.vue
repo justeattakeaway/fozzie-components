@@ -639,21 +639,21 @@ export default {
             }
         },
 
-        handleEventLogging (event, error = null, additionalData = null) {
-            if (LogEvents[event].eventMessage) {
-                const data = LogEvents[event].hasEventData && this.eventData;
+        handleEventLogging (event, error, additionalData) {
+            if (EventNames[event]) {
+                const data = LogEvents[event]?.hasEventData && this.eventData;
 
-                if (!LogEvents[event].hasEventData && !error) {
-                    this.$emit(LogEvents[event].eventMessage);
+                if (!data && !error) {
+                    this.$emit(EventNames[event]);
                 } else {
-                    this.$emit(LogEvents[event].eventMessage, { ...data, ...error && error });
+                    this.$emit(EventNames[event], { ...data, ...error && { error } });
                 }
             }
 
-            if (LogEvents[event].logMessage) {
+            if (LogEvents[event]) {
                 this.logInvoker({
                     message: LogEvents[event].logMessage,
-                    data: additionalData || this.eventData,
+                    data: { ...this.eventData, ...additionalData },
                     logMethod: this.$logger[LogEvents[event].logMethod],
                     ...error && { error }
                 });
@@ -669,7 +669,7 @@ export default {
             if (this.errors) {
                 this.checkoutAnalyticsService.trackFormErrors();
 
-                this.handleEventLogging('CheckoutUpdateFailure');
+                this.handleEventLogging('CheckoutNonFulfillableError');
             }
         },
 
@@ -700,7 +700,7 @@ export default {
                 const statusCode = e?.response?.data?.statusCode || e?.response?.status;
 
                 if (statusCode === 403) {
-                    throw new UpdateCheckoutAccessForbiddenError(e, this.$logger);
+                    throw new UpdateCheckoutAccessForbiddenError(e);
                 }
 
                 throw new UpdateCheckoutError(e);
@@ -794,7 +794,7 @@ export default {
                 this.handleEventLogging('CheckoutGetSuccess');
             } catch (error) {
                 if (error?.response?.status === 403) {
-                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error?.response?.status));
                 }
@@ -857,7 +857,7 @@ export default {
 
                 this.handleEventLogging('CheckoutAddressGetSuccess');
             } catch (error) {
-                this.handleEventLogging('CheckoutAddressGetFailure');
+                this.handleEventLogging('CheckoutAddressGetFailure', error);
             }
         },
 
@@ -882,7 +882,7 @@ export default {
          *
          */
         async lookupGeoLocation () {
-            if (this.serviceType === CHECKOUT_METHOD_DELIVERY) {
+            if (this.isCheckoutMethodDelivery) {
                 try {
                     const locationData = {
                         addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
@@ -896,7 +896,7 @@ export default {
                         });
                     }
                 } catch (error) {
-                    this.handleEventLogging('CheckoutGeoLocationGetFailure');
+                    this.handleEventLogging('CheckoutGeoLocationGetFailure', error);
                 }
             }
         },
@@ -911,7 +911,7 @@ export default {
 
             const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
-            this.handleEventLogging(error.eventMessage, error);
+            this.handleEventLogging((error.eventMessage || 'CheckoutFailure'), error);
 
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
@@ -980,7 +980,6 @@ export default {
             });
 
             const expandedData = {
-                ...this.eventData,
                 enteredPostcode: this.address?.postcode,
                 location: this.$cookies.get('je-location'),
                 locationUk: this.$cookies.get('je-location-uk'),

@@ -32,12 +32,11 @@ class UpdateCheckoutError extends Error {
 }
 
 class UpdateCheckoutAccessForbiddenError extends UpdateCheckoutError {
-    constructor (error, logger) {
+    constructor (error) {
         super(error);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.eventMessage = 'CheckoutUpdateForbidden';
         this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.accessForbidden;
-        this.logMethod = logger.logWarn;
     }
 }
 
@@ -66,12 +65,11 @@ class GetCheckoutError extends Error {
 }
 
 class GetCheckoutAccessForbiddenError extends GetCheckoutError {
-    constructor (message, logger) {
+    constructor (message) {
         super(message, 403);
         this.messageKey = 'errorMessages.accessForbiddenError.description';
         this.eventMessage = 'CheckoutGetForbidden';
         this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.accessForbidden;
-        this.logMethod = logger.logWarn;
     }
 }
 

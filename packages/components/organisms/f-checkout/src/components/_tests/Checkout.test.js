@@ -37,6 +37,7 @@ const {
     UpdateCheckoutAccessForbiddenError,
     GetCheckoutError,
     GetCheckoutAccessForbiddenError,
+    AvailableFulfilmentGetError,
     GetBasketError
 } = exceptions;
 
@@ -1578,6 +1579,8 @@ describe('Checkout', () => {
             let wrapper;
 
             beforeEach(() => {
+                jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+
                 wrapper = mount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState,
@@ -1589,10 +1592,13 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
             });
 
             it('should exist', () => {
@@ -1805,7 +1811,7 @@ describe('Checkout', () => {
                     });
 
                     describe('AND the error is of type `CreateGuestUserError`', () => {
-                        it('should call `handleErrorState` with the guest user creation error info', async () => {
+                        it('should call `handleEventLoggingSpy` with the guest user creation error info', async () => {
                             // Arrange
                             const error = new CreateGuestUserError('CreateGuestUserError exception!');
 
@@ -1841,7 +1847,7 @@ describe('Checkout', () => {
                     describe('AND the error is of type `PlaceOrderError`', () => {
                         it('should call `handleErrorState` with the place order error info', async () => {
                             // Arrange
-                            const error = new PlaceOrderError('PlaceOrderError exception!', 'Error code', $logger);
+                            const error = new PlaceOrderError('PlaceOrderError exception!', 'Error code');
 
                             jest.spyOn(wrapper.vm, 'submitOrder').mockImplementation(() => {
                                 throw error;
@@ -1945,8 +1951,11 @@ describe('Checkout', () => {
 
         describe('`handleNonFulfillableCheckout` ::', () => {
             let wrapper;
+            let handleEventLoggingSpy;
 
             beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+
                 wrapper = mount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState,
@@ -1956,30 +1965,27 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
             });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
 
             it('should exist', () => {
                 expect(wrapper.vm.handleNonFulfillableCheckout).toBeDefined();
             });
 
             describe('when there are errors', () => {
-                it('should make a call to `logInvoker` with a `message` and `eventData`', () => {
-                    // Arrange
-                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
-
+                it('should call to `handleEventLogging` with `CheckoutNonFulfillableError`', () => {
                     // Act
                     wrapper.vm.handleNonFulfillableCheckout();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith({
-                        message: 'Consumer Checkout Not Fulfillable',
-                        data: wrapper.vm.eventData,
-                        logMethod: $logger.logWarn
-                    });
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutNonFulfillableError');
                 });
 
                 it('should make a call to `trackFormErrors`', () => {
@@ -1989,23 +1995,17 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.checkoutAnalyticsService.trackFormErrors).toHaveBeenCalled();
                 });
-
-                it('should emit `CheckoutUpdateFailure` event', async () => {
-                    // Arrange & Act
-                    await wrapper.vm.handleNonFulfillableCheckout();
-
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutUpdateFailure).length).toBe(1);
-                });
             });
         });
 
         describe('handleUpdateCheckout ::', () => {
             let wrapper;
             let updateCheckoutSpy;
+            let handleEventLoggingSpy;
 
             beforeEach(() => {
                 updateCheckoutSpy = jest.spyOn(VueCheckout.methods, 'updateCheckout');
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
             });
 
             afterEach(() => {
@@ -2033,7 +2033,7 @@ describe('Checkout', () => {
             });
 
             describe('when `updateCheckout` request succeeds', () => {
-                it('should emit `CheckoutUpdateSuccess` event', async () => {
+                it('should call `handleEventLogging` with `CheckoutUpdateSuccess`', async () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore(),
@@ -2050,7 +2050,7 @@ describe('Checkout', () => {
                     await wrapper.vm.handleUpdateCheckout();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutUpdateSuccess).length).toBe(1);
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutUpdateSuccess');
                 });
 
                 describe('when `updateCheckout` returns `ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE`', () => {
@@ -2427,6 +2427,8 @@ describe('Checkout', () => {
         });
 
         describe('setupGuestUser ::', () => {
+            let handleEventLoggingSpy;
+
             it('should call `createGuestUser`', async () => {
                 // Arrange
                 const customer = {
@@ -2469,6 +2471,10 @@ describe('Checkout', () => {
                 expect(createGuestUserSpy).toHaveBeenCalledWith(expected);
             });
 
+            beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+            });
+
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -2507,7 +2513,7 @@ describe('Checkout', () => {
             });
 
             describe('when `createGuestUser` request succeeds', () => {
-                it('should emit `CheckoutSetupGuestSuccess` event', async () => {
+                it('should call `handleEventLogging` with `CheckoutSetupGuestSuccess`', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -2526,13 +2532,18 @@ describe('Checkout', () => {
                     await wrapper.vm.setupGuestUser();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestFailure)).toBeUndefined();
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutSetupGuestSuccess');
                 });
             });
         });
 
         describe('loadCheckout ::', () => {
+            let handleEventLoggingSpy;
+
+            beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging');
+            });
+
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -2552,6 +2563,10 @@ describe('Checkout', () => {
                     jest.fn(async () => Promise.reject(error));
 
                     handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
                 });
 
                 describe('AND the error code is `403', () => {
@@ -2644,26 +2659,47 @@ describe('Checkout', () => {
                     await wrapper.vm.loadCheckout();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutGetSuccess');
                 });
             });
         });
 
         describe('loadAvailableFulfilment ::', () => {
+            let handleEventLoggingSpy;
+
+            beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+            });
+
             afterEach(() => {
                 jest.clearAllMocks();
             });
 
             describe('when `getAvailableFulfilment` request fails', () => {
                 let wrapper;
+                let handleErrorStateSpy;
+                let error;
+                let availableFulfilmentError;
 
                 beforeEach(() => {
-                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+                    // Arrange
+                    error = {
+                        message: 'jazz sometimes happens',
+                        response: {
+                            status: 400
+                        }
+                    };
+
+                    availableFulfilmentError = new AvailableFulfilmentGetError(error.message, error.response.status);
 
                     wrapper = mount(VueCheckout, {
-                        // eslint-disable-next-line prefer-promise-reject-errors
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAvailableFulfilment: jest.fn(async () => Promise.reject({ response: { status: 500 } })) }),
+                        store: createStore(
+                            defaultCheckoutState,
+                            {
+                                ...defaultCheckoutActions,
+                                getAvailableFulfilment: jest.fn(async () => Promise.reject(error))
+                            }
+                        ),
                         i18n,
                         localVue,
                         propsData,
@@ -2672,28 +2708,25 @@ describe('Checkout', () => {
                             $cookies
                         }
                     });
+
+                    handleErrorStateSpy = jest.spyOn(wrapper.vm, 'handleErrorState').mockImplementation();
+                    jest.spyOn(wrapper.vm, 'initialise').mockImplementation();
                 });
 
-                it('should emit failure event', async () => {
-                    // Act
-                    await wrapper.vm.loadAvailableFulfilment();
-
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
+                afterEach(() => {
+                    jest.clearAllMocks();
                 });
 
-                it('should call `logError`', async () => {
-                    // Act
+                it('should call `handleErrorState` with `AvailableFulfilmentGetError`', async () => {
+                    // Act & Assert
                     await wrapper.vm.loadAvailableFulfilment();
 
-                    // Assert
-                    expect($logger.logError).toHaveBeenCalled();
+                    expect(handleErrorStateSpy).toHaveBeenCalledWith(availableFulfilmentError);
                 });
             });
 
             describe('when `getAvailableFulfilment` request succeeds', () => {
-                it('should emit success event', async () => {
+                it('should call `handleEventLogging` with success event', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -2703,7 +2736,7 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
+                            // $logger,
                             $cookies
                         }
                     });
@@ -2712,13 +2745,18 @@ describe('Checkout', () => {
                     await wrapper.vm.loadAvailableFulfilment();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutAvailableFulfilmentGetSuccess');
                 });
             });
         });
 
         describe('lookupGeoLocation ::', () => {
+            let handleEventLoggingSpy;
+
+            beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+            });
+
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -2752,20 +2790,11 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
 
                     await flushPromises();
-                });
-
-                it('should not call `logWarn`', async () => {
-                    // Act
-                    await wrapper.vm.lookupGeoLocation();
-
-                    // Assert
-                    expect($logger.logWarn).not.toHaveBeenCalledWith();
                 });
 
                 it('should call `getGeoLocation`', async () => {
@@ -2798,42 +2827,28 @@ describe('Checkout', () => {
             });
 
             describe('when `getGeoLocation` request fails', () => {
-                // Arrange
-                let wrapper;
-                let localStore;
-                const errorMsg = 'jazz sometimes happens';
+                it('should call `handleEventLogging` with failure event', async () => {
+                    // // Arrange
+                    const error = 'jazz sometimes happens';
 
-                beforeEach(() => {
-                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
-
-                    localStore = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getGeoLocation: jest.fn(async () => Promise.reject(new Error(errorMsg))) });
-                    wrapper = mount(VueCheckout, {
-                        store: localStore,
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(defaultCheckoutState, {
+                            ...defaultCheckoutActions,
+                            getGeoLocation: jest.fn(async () => Promise.reject(error))
+                        }),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
-                });
 
-                it('should call `logInvoker` with a warning', async () => {
-                    // Arrange
-                    const error = new Error(errorMsg);
-                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
-
-                    // Act
+                    // // Act
                     await wrapper.vm.lookupGeoLocation();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith({
-                        message: 'Geo Location Lookup Failed',
-                        data: wrapper.vm.eventData,
-                        logMethod: $logger.logWarn,
-                        error
-                    });
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutGeoLocationGetFailure', error);
                 });
             });
 
@@ -2861,14 +2876,6 @@ describe('Checkout', () => {
                     await flushPromises();
                 });
 
-                it('should not call `logWarn`', async () => {
-                    // Act
-                    await wrapper.vm.lookupGeoLocation();
-
-                    // Assert
-                    expect($logger.logWarn).not.toHaveBeenCalledWith();
-                });
-
                 it('should not call `getGeoLocation`', async () => {
                     // Act
                     await wrapper.vm.lookupGeoLocation();
@@ -2880,6 +2887,12 @@ describe('Checkout', () => {
         });
 
         describe('loadBasket ::', () => {
+            let handleEventLoggingSpy;
+
+            beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+            });
+
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -2905,6 +2918,10 @@ describe('Checkout', () => {
                             $cookies
                         }
                     });
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
                 });
 
                 it('should call `handleErrorState` with a new `GetBasketError`', async () => {
@@ -2953,17 +2970,14 @@ describe('Checkout', () => {
             });
 
             describe('when `getBasket` request succeeds', () => {
-                it('should emit success event', async () => {
+                it('should call `handleEventLogging` with success event', async () => {
                     // Arrange
-                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
-
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2972,51 +2986,47 @@ describe('Checkout', () => {
                     await wrapper.vm.loadBasket();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure)).toBeUndefined();
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutBasketGetSuccess');
                 });
             });
         });
 
         describe('loadAddress ::', () => {
+            let handleEventLoggingSpy;
+
+            beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+            });
+
             afterEach(() => {
                 jest.clearAllMocks();
             });
 
             describe('when `getAddress` request fails', () => {
-                it('should emit failure event and log a warning', async () => {
+                it('should call `handleEventLogging` with failure event', async () => {
                     // Arrange
                     const error = new Error('Doh exception man!');
-                    const store = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject(error)) });
+
                     const wrapper = mount(VueCheckout, {
-                        store,
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject(error)) }),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
-                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
 
                     // Act
                     await wrapper.vm.loadAddress();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
-                    expect(logInvokerSpy).toHaveBeenCalledWith({
-                        message: 'Get checkout address failure',
-                        data: wrapper.vm.eventData,
-                        logMethod: $logger.logWarn,
-                        error
-                    });
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutAddressGetFailure', error);
                 });
             });
 
             describe('when `getAddress` request succeeds', () => {
-                it('should emit success event', async () => {
+                it('should call `handleEventLogging` with success event', async () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
@@ -3024,7 +3034,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -3033,8 +3042,7 @@ describe('Checkout', () => {
                     await wrapper.vm.loadAddress();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure)).toBeUndefined();
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutAddressGetSuccess');
                 });
             });
         });
@@ -3042,14 +3050,12 @@ describe('Checkout', () => {
         describe('handleErrorState ::', () => {
             let wrapper;
             let error;
-            let eventToEmit;
-            let logInvokerSpy;
             let scrollToElementSpy;
+            let handleEventLoggingSpy;
 
             beforeEach(() => {
                 // Arrange
                 error = new Error('An error occurred');
-                eventToEmit = EventNames.CheckoutFailure;
 
                 wrapper = mount(VueCheckout, {
                     store: createStore({
@@ -3064,50 +3070,12 @@ describe('Checkout', () => {
                     }
                 });
 
-                logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
+                handleEventLoggingSpy = jest.spyOn(wrapper.vm, 'handleEventLogging').mockImplementation();
                 scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
             });
 
             afterEach(() => {
                 jest.clearAllMocks();
-            });
-
-            it('should emit passed event with the event data and error', () => {
-                // Act
-                wrapper.vm.handleErrorState(error);
-
-                // Assert
-                expect(wrapper.emitted(eventToEmit).length).toBe(1);
-                expect(wrapper.emitted(eventToEmit)[0][0]).toEqual({ ...wrapper.vm.eventData, error });
-            });
-
-            it('should call `logInvoker` to log the error, passing the `eventData`, `error` and `logError` as a method by default', () => {
-                // Act
-                wrapper.vm.handleErrorState(error);
-
-                // Assert
-                expect(logInvokerSpy).toHaveBeenCalledWith({
-                    message: 'Consumer Checkout Failure',
-                    data: wrapper.vm.eventData,
-                    logMethod: $logger.logError,
-                    error
-                });
-            });
-
-            it('should call `logInvoker` to log the warning, passing the `eventData`, `error` and the logging method specified by the error', () => {
-                // Arrange
-                error = new UpdateCheckoutAccessForbiddenError('An error', $logger);
-
-                // Act
-                wrapper.vm.handleErrorState(error);
-
-                // Assert
-                expect(logInvokerSpy).toHaveBeenCalledWith({
-                    message: 'Checkout Update Failure: Access Forbidden',
-                    data: wrapper.vm.eventData,
-                    logMethod: $logger.logWarn,
-                    error
-                });
             });
 
             it('should call `trackFormInteraction` with the error information including `errorCode` when it exists', () => {
@@ -3140,6 +3108,27 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(scrollToElementSpy).toHaveBeenCalledWith(wrapper.vm.$refs.errorMessage.$el);
+            });
+
+            describe('If error has `eventMessage`', () => {
+                it('should call `handleEventLogging` with the `eventMessage` and the error', () => {
+                    // Act
+                    const errorWithEventMessage = { eventMessage: 'Error Message' };
+                    wrapper.vm.handleErrorState(errorWithEventMessage);
+
+                    // Assert
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('Error Message', errorWithEventMessage);
+                });
+            });
+
+            describe('If error does not have an `eventMessage`', () => {
+                it('should call `handleEventLogging` with the `CheckoutFailure` and the error', () => {
+                    // Act
+                    wrapper.vm.handleErrorState(error);
+
+                    // Assert
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutFailure', error);
+                });
             });
         });
 
@@ -3324,11 +3313,13 @@ describe('Checkout', () => {
             let isFormValidSpy;
             let updateMessageSpy;
             let setSubmittingStateSpy;
+            let submitCheckoutSpy;
 
             beforeEach(() => {
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
                 updateMessageSpy = jest.spyOn(VueCheckout.methods, 'updateMessage');
                 setSubmittingStateSpy = jest.spyOn(VueCheckout.methods, 'setSubmittingState');
+                submitCheckoutSpy = jest.spyOn(VueCheckout.methods, 'submitCheckout').mockImplementation();
             });
 
             it('should exist', () => {
@@ -3471,7 +3462,6 @@ describe('Checkout', () => {
                                 $cookies
                             }
                         });
-                        const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
 
                         // Act
                         await wrapper.vm.onFormSubmit();
@@ -3532,7 +3522,6 @@ describe('Checkout', () => {
                                 $cookies
                             }
                         });
-                        const submitCheckoutSpy = jest.spyOn(wrapper.vm, 'submitCheckout');
 
                         // Act
                         await wrapper.vm.onFormSubmit();
@@ -3546,11 +3535,12 @@ describe('Checkout', () => {
 
         describe('`onInvalidCheckoutForm` ::', () => {
             let isFormValidSpy;
-            let mockValidationState;
+            let validationState;
             let getFormValidationStateSpy;
+            let handleEventLoggingSpy;
 
             beforeEach(() => {
-                mockValidationState = {
+                validationState = {
                     validFields: [
                         'customer.mobileNumber',
                         'address.line1',
@@ -3560,9 +3550,16 @@ describe('Checkout', () => {
                     invalidFields: []
                 };
 
+                $cookies.get.mockReturnValue('ar511ar');
+
                 getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
-                getFormValidationStateSpy.mockReturnValue(mockValidationState);
+                getFormValidationStateSpy.mockReturnValue(validationState);
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
             });
 
             it('should exist', () => {
@@ -3583,35 +3580,6 @@ describe('Checkout', () => {
             });
 
             describe('when invoked', () => {
-                it('should emit `CheckoutValidationError` with a validation payload', async () => {
-                    // Arrange
-                    isFormValidSpy.mockReturnValue(false);
-
-                    const wrapper = mount(VueCheckout, {
-                        store: createStore(),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $v,
-                            $logger,
-                            $cookies
-                        }
-                    });
-
-                    const checkoutValidationErrorSpy = jest.spyOn(wrapper.vm, '$emit');
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(checkoutValidationErrorSpy).toHaveBeenCalledWith(
-                        EventNames.CheckoutValidationError,
-                        mockValidationState
-                    );
-                });
-
                 it('should make a call to `trackFormInteraction` with `inline_error` & `invalidFields`', async () => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(false);
@@ -3634,7 +3602,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.checkoutAnalyticsService.trackFormInteraction).toHaveBeenCalledWith({
                         action: 'inline_error',
-                        error: mockValidationState.invalidFields.toString()
+                        error: validationState.invalidFields.toString()
                     });
                 });
 
@@ -3664,31 +3632,23 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should make a call to `$logger.logWarn` with the correct payload', async () => {
+                it('should make a call `handleEventLogging` with `CheckoutValidationError`, validationState and addressDetails', async () => {
                     // Arrange
-                    isFormValidSpy.mockReturnValue(false);
-
-                    const store = createStore();
-
                     const wrapper = mount(VueCheckout, {
-                        store,
+                        store: createStore(),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
                             $v,
-                            $logger,
                             $cookies
                         }
                     });
 
-                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
-
                     // Act
-                    await wrapper.vm.onFormSubmit();
+                    await wrapper.vm.onInvalidCheckoutForm();
 
                     const expandedData = {
-                        ...wrapper.vm.eventData,
                         enteredPostcode: 'BS1 1AA',
                         location: 'ar511ar',
                         locationUk: 'ar511ar',
@@ -3697,14 +3657,7 @@ describe('Checkout', () => {
                     };
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith({
-                        message: 'Checkout Validation Error',
-                        data: {
-                            ...expandedData,
-                            validationState: mockValidationState
-                        },
-                        logMethod: $logger.logWarn
-                    });
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutValidationError', validationState, { ...expandedData, validationState });
                 });
             });
         });
@@ -3829,9 +3782,11 @@ describe('Checkout', () => {
         describe('submitOrder ::', () => {
             const basketId = 'myBasketId-v1';
 
+            let handleEventLoggingSpy;
             let wrapper;
 
             beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
                 wrapper = shallowMount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState,
@@ -3889,47 +3844,26 @@ describe('Checkout', () => {
             });
 
             describe('when `placeOrder` is successful', () => {
-                it('should `$emit` a place order success with `eventData` passed', async () => {
-                    // Arrange
-                    const $emitSpy = jest.spyOn(wrapper.vm, '$emit');
-
+                it('should `handleEventLogging` to have been called with `CheckoutPlaceOrderSuccess`', async () => {
                     // Act
                     await wrapper.vm.submitOrder();
 
                     // Assert
-                    expect($emitSpy).toHaveBeenCalledWith(EventNames.CheckoutPlaceOrderSuccess, wrapper.vm.eventData);
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutPlaceOrderSuccess');
                 });
 
-                it('should `$emit` a checkout success with `eventData` passed', async () => {
-                    // Arrange
-                    const $emitSpy = jest.spyOn(wrapper.vm, '$emit');
-
+                it('should `handleEventLogging` to have been called with `CheckoutSuccess`', async () => {
                     // Act
                     await wrapper.vm.submitOrder();
 
                     // Assert
-                    expect($emitSpy).toHaveBeenCalledWith(EventNames.CheckoutSuccess, wrapper.vm.eventData);
-                });
-
-                it('should `logInvoker` with a `message` & `eventData` passed', async () => {
-                    // Arrange
-                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
-
-                    // Act
-                    await wrapper.vm.submitOrder();
-
-                    // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith({
-                        message: 'Consumer Checkout Successful',
-                        data: wrapper.vm.eventData,
-                        logMethod: $logger.logInfo
-                    });
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutSuccess');
                 });
             });
 
             describe('when `placeOrder` is unsuccessful', () => {
                 describe('AND `errorCode` is not `DuplicateOrder`', () => {
-                    it('should throw a `PlaceOrderError` error with `logMethod` as `logError`', async () => {
+                    it('should throw a `PlaceOrderError` error', async () => {
                         // Arrange
                         const errorMessage = 'An error - Something happened on the server';
                         const errorCode = 500;
@@ -3967,13 +3901,12 @@ describe('Checkout', () => {
                             expect(e).toBeInstanceOf(PlaceOrderError);
                             expect(e.message).toEqual(errorMessage);
                             expect(e.errorCode).toEqual(errorCode);
-                            expect(e.logMethod).toEqual($logger.logError);
                         }
                     });
                 });
 
                 describe('AND `errorCode` is `DuplicateOrder`', () => {
-                    it('should throw a `PlaceOrderError` error with `logMethod` as `logWarn`', async () => {
+                    it('should throw a `PlaceOrderError` error', async () => {
                         // Arrange
                         const errorMessage = 'An error - Your order is a duplicate';
                         const errorCode = 'DuplicateOrder';
@@ -4011,13 +3944,12 @@ describe('Checkout', () => {
                             expect(e).toBeInstanceOf(PlaceOrderError);
                             expect(e.message).toEqual(errorMessage);
                             expect(e.errorCode).toEqual(errorCode);
-                            expect(e.logMethod).toEqual($logger.logWarn);
                         }
                     });
                 });
 
                 describe('AND there is no response object (e.g. timeout)', () => {
-                    it('should throw a `PlaceOrderError` error with `logMethod` as `logError` and no `errorCode`', async () => {
+                    it('should throw a `PlaceOrderError` error with no `errorCode`', async () => {
                         // Arrange
                         const errorMessage = 'Timeout exceeded 10s';
                         const error = {
@@ -4049,7 +3981,6 @@ describe('Checkout', () => {
                             expect(e).toBeInstanceOf(PlaceOrderError);
                             expect(e.message).toEqual(errorMessage);
                             expect(e.errorCode).toBe(undefined);
-                            expect(e.logMethod).toEqual($logger.logError);
                         }
                     });
                 });
