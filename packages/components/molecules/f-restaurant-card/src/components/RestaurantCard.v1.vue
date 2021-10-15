@@ -127,6 +127,7 @@ export default {
 <style lang="scss" module>
 $card-bgColor                             : $color-container-default;
 $card-borderRadius                        : $radius-rounded-c;
+$tile-imgSpacing                          : spacing(x10) * 2;
 $img-border-radius                        : $radius-rounded-c;
 $img-width                                : 156px;
 $logo-borderRadius                        : $radius-rounded-b;
@@ -145,11 +146,7 @@ $logo-borderColor                         : $color-border-default;
     position: relative;
     cursor: pointer;
     padding: spacing(x2);
-    padding-top: spacing(x10) * 2;
-
-    &:not(.c-restaurantCard--with-img) {
-        padding-top: spacing() * 3.5;
-    }
+    padding-top: spacing() * 3.5;
 
     .c-restaurantCard-img {
         height: 228px;
@@ -174,7 +171,6 @@ $logo-borderColor                         : $color-border-default;
 
 .c-restaurantCard {
     text-decoration: none;
-    padding: spacing(x0.5);
     display: flex;
 }
 
@@ -214,6 +210,8 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard--list-item {
+    padding: spacing(x0.5);
+
     @include media('>mid') {
         @include card-frame;
     }
@@ -225,5 +223,15 @@ $logo-borderColor                         : $color-border-default;
 
 .c-restaurantCard--tile {
     @include restaurantCard-tile;
+}
+
+.c-restaurantCard--list-item.c-restaurantCard--with-img {
+    @include media('<=mid') {
+        padding-top: $tile-imgSpacing
+    }
+}
+
+.c-restaurantCard--tile.c-restaurantCard--with-img {
+    padding-top: $tile-imgSpacing
 }
 </style>
