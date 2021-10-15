@@ -13,15 +13,14 @@
             v-if="imgUrl"
             :class="$style['c-restaurantCard-img']"
             :style="`background-image: url(${imgUrl});`"
-            role="img"
-            aria-label="TODO - Determine appropriate label" />
+            role="img" />
 
         <!-- card content -->
         <div :class="$style['c-restaurantCard-content']">
             <!-- Logo image -->
             <img
                 :src="logoUrl"
-                alt="TODO - Determine appropriate alt"
+                alt=""
                 width="50"
                 height="50"
                 loading="lazy"
