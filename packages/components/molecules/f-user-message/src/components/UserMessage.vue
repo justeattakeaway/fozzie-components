@@ -65,8 +65,8 @@ export default {
 
 <style lang="scss" module>
 .c-userMessage {
-    color: $color-content-light;
-    background-color: $color-support-brand-01;
+    color: $color-content-default;
+    background-color: $color-support-warning-02;
     max-width: 100%;
 }
 
@@ -86,7 +86,7 @@ export default {
     }
 
     svg {
-        fill: $color-content-light;
+        fill: $color-content-default;
         min-width: 28px;
         max-width: 28px;
         width: 28px;
