@@ -25,7 +25,8 @@
                 width="50"
                 height="50"
                 loading="lazy"
-                :class="$style['c-restaurantCard-logo']">
+                :class="$style['c-restaurantCard-logo']"
+                data-test-id="restaurant_logo">
 
 
 
@@ -146,89 +147,89 @@ $logo-borderColor                         : $color-border-default;
 }
 
 @mixin restaurantCard-tile {
-  display: block;
-  position: relative;
-  cursor: pointer;
-  padding: spacing(x2);
-  padding-top: spacing(x10) * 2;
-
-  &:not(.c-restaurantCard--with-img) {
-      padding-top: spacing() * 3.5;
-  }
-
-  .c-restaurantCard-img {
-    height: 228px;
-    width: 100%;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    position: absolute;
-  }
-
-  .c-restaurantCard-content {
+    display: block;
+    position: relative;
+    cursor: pointer;
     padding: spacing(x2);
-    @include card-frame;
-  }
+    padding-top: spacing(x10) * 2;
 
-  .c-restaurantCard-logo {
-    left: 50%;
-    top: -25px;
-    transform: translateX(-50%);
-  }
+    &:not(.c-restaurantCard--with-img) {
+        padding-top: spacing() * 3.5;
+    }
+
+    .c-restaurantCard-img {
+        height: 228px;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        position: absolute;
+    }
+
+    .c-restaurantCard-content {
+        padding: spacing(x2);
+        @include card-frame;
+    }
+
+    .c-restaurantCard-logo {
+        left: 50%;
+        top: -25px;
+        transform: translateX(-50%);
+    }
 }
 
 .c-restaurantCard {
     text-decoration: none;
     padding: spacing(x0.5);
     display: flex;
+}
 
-    &-logo {
-        border: 0.5px solid $logo-borderColor;
-        border-radius: $logo-borderRadius;
-        position: absolute;
+.c-restaurantCard-logo {
+    border: 1px solid $logo-borderColor;
+    border-radius: $logo-borderRadius;
+    position: absolute;
 
-        .c-restaurantCard--list-item & {
-            top: 50%;
-            transform: translate(-130%, -50%);
-        }
+    .c-restaurantCard--list-item & {
+        top: 50%;
+        transform: translate(-130%, -50%);
+    }
+}
+
+.c-restaurantCard-img {
+    border-radius: $img-border-radius;
+    background-size: cover;
+    background-position: center;
+
+    .c-restaurantCard--list-item & {
+        display: block;
+        flex-basis: $img-width;
+    }
+}
+
+.c-restaurantCard-content {
+    padding: spacing(x0.5) spacing(x5);
+
+    .c-restaurantCard--list-item & {
+        flex: 1;
+        padding-left: spacing(x10);
     }
 
-    &-img {
-        border-radius: $img-border-radius;
-        background-size: cover;
-        background-position: center;
+    .c-restaurantCard--with-img & {
+        padding-left: spacing(x5);
+    }
+}
 
-        .c-restaurantCard--list-item & {
-            display: block;
-            flex-basis: $img-width;
-        }
+.c-restaurantCard--list-item {
+    @include media('>mid') {
+        @include card-frame;
     }
 
-    &-content {
-        padding: spacing(x0.5) spacing(x5);
-
-        .c-restaurantCard--list-item & {
-            flex: 1;
-            padding-left: spacing(x10);
-        }
-
-        .c-restaurantCard--with-img & {
-            padding-left: spacing(x5);
-        }
-    }
-
-    &--list-item {
-        @include media('>mid') {
-            @include card-frame;
-        }
-
-        @include media('<=mid') {
-            @include restaurantCard-tile;
-        }
-    }
-
-    &--tile {
+    @include media('<=mid') {
         @include restaurantCard-tile;
     }
+}
+
+.c-restaurantCard--tile {
+    @include restaurantCard-tile;
 }
 </style>
