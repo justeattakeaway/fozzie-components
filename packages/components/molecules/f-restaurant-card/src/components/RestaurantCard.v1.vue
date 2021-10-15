@@ -4,7 +4,7 @@
         :class="[
             $style['c-restaurantCard'],
             $style[displayModeModifier],
-            { [$style['c-restaurantCard--img']]: !!imgUrl }]"
+            { [$style['c-restaurantCard--with-img']]: !!imgUrl }]"
         data-test-id="restaurantCard-component"
         @click="$emit('restaurant-card-clicked')">
 
@@ -150,12 +150,12 @@ $logo-borderColor                         : $color-border-default;
   position: relative;
   cursor: pointer;
 
-  &.c-restaurantCard--img {
+  &.c-restaurantCard--with-img {
       padding: spacing(x2);
       padding-top: spacing(x10) * 2;
   }
 
-  &:not(.c-restaurantCard--img) {
+  &:not(.c-restaurantCard--with-img) {
       padding-top: spacing() * 3.5;
   }
 
@@ -216,7 +216,7 @@ $logo-borderColor                         : $color-border-default;
             padding-left: spacing(x10);
         }
 
-        .c-restaurantCard--img & {
+        .c-restaurantCard--with-img & {
             padding-left: spacing(x5);
         }
     }
