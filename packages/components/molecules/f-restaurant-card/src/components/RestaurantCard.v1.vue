@@ -158,10 +158,9 @@ $logo-borderColor                         : $color-border-default;
 
   .c-restaurantCard-img {
     height: 228px;
+    width: 100%;
     left: 0;
-    right: 0;
     top: 0;
-    bottom: spacing(x8);
     z-index: -1;
     position: absolute;
   }
