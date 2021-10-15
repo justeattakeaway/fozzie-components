@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationLinks should display the list elements correctly for each \`link\` supplied 1`] = `
+<ul>
+  <li>
+    <v-link-stub data-test-id="link1" href="/account/info">
+      Your account
+    </v-link-stub>
+  </li>
+  <li>
+    <v-link-stub data-test-id="link2" href="/order-history">
+      Your orders
+    </v-link-stub>
+  </li>
+  <li>
+    <v-link-stub data-test-id="link3" href="/account/paymentoptions">
+      Your saved cards
+    </v-link-stub>
+  </li>
+  <li>
+    <v-link-stub data-test-id="link4" href="/member/addressbook">
+      Your address book
+    </v-link-stub>
+  </li>
+  <li>
+    <v-link-stub data-test-id="link5" href="/account/credit">
+      Redeem a voucher
+    </v-link-stub>
+  </li>
+  <li>
+    <v-link-stub data-test-id="link6" href="/giftcards/redeem">
+      Redeem a gift card
+    </v-link-stub>
+  </li>
+  <li><span data-test-id="link7" tabindex="0" class="">
+                Contact preferences
+            </span></li>
+</ul>
+`;
