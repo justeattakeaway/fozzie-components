@@ -149,11 +149,8 @@ $logo-borderColor                         : $color-border-default;
   display: block;
   position: relative;
   cursor: pointer;
-
-  &.c-restaurantCard--with-img {
-      padding: spacing(x2);
-      padding-top: spacing(x10) * 2;
-  }
+  padding: spacing(x2);
+  padding-top: spacing(x10) * 2;
 
   &:not(.c-restaurantCard--with-img) {
       padding-top: spacing() * 3.5;
