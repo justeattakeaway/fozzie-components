@@ -138,11 +138,6 @@ $logo-borderColor                         : $color-border-default;
     box-shadow: 0 6px 8px rgba($color-black, 0.02), 0 1px 20px rgba($color-black, 0.08), 0 3px 6px -1px rgba($color-black, 0.08);
     border-radius: $card-borderRadius;
     position: relative;
-    min-height: 114px;
-
-    @include media('>mid') {
-        min-height: 96px;
-    }
 }
 
 @mixin restaurantCard-tile {
