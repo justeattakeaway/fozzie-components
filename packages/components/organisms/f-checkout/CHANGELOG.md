@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.6.0
 ------------------------------
-*October 18, 2021*
+*October 19, 2021*
 
 ### Added
 - `handleEventLogging` method to handle events and logging.
