@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.2.0
+------------------------------
+*October 18, 2021*
+
+### Changed
+- Button border style definition moved to button types.
+- Each button size vertical padding reduced by 1px to make button height 56px/48px/40px/32px instead of 58px/50px/42px/34px.
+
+
 v3.1.0
 ------------------------------
 *October 22, 2021*
