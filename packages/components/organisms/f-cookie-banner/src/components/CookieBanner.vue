@@ -245,7 +245,7 @@ export default {
         },
 
         /**
-         * Triggered vy watch.bodyHeight, calculates if body height is less than window height to absolutley position the reopen link
+         * Triggered by watch.bodyHeight, calculates if body height is less than window height to absolutely position the reopen link
          */
         updateIsBodyHeightLessThanWindowHeight () {
             if (typeof window === 'object' && this.shouldHideBanner) {
