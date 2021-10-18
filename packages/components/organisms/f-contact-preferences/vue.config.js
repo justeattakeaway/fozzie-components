@@ -5,6 +5,11 @@ const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
 // vue.config.js
 module.exports = {
+    configureWebpack: {
+        externals: [
+            'axios'
+        ]
+    },
     chainWebpack: config => {
         config.module
             .rule('scss-importer')

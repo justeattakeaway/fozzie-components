@@ -37,11 +37,11 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0",
-    "axios": "0.21.1"
+    "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
+    "axios": ">=0.21.1"
   },
   "devDependencies": {
     "@justeat/f-button": "3.0.2",
