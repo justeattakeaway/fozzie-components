@@ -9,7 +9,7 @@ v4.6.2
  *October 18, 2021*
 
 ### Added
-- `f-compatibility` to Circle CI cache
+- `f-navigation-links` to Circle CI cache
 
 
 v4.6.1
