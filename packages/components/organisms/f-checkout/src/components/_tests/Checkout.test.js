@@ -1575,6 +1575,123 @@ describe('Checkout', () => {
             });
         });
 
+        describe('handleEventLogging ::', () => {
+            let wrapper;
+            let logInvokerSpy;
+
+            const eventData = {
+                isLoggedIn: false,
+                serviceType: 'delivery'
+            };
+
+            const error = {
+                message: 'Error Message'
+            };
+
+            beforeEach(() => {
+                // Arrange
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
+            });
+
+            describe('when `EventNames` contains event', () => {
+                const eventWithoutEventData = 'CheckoutGetSuccess';
+                const eventWithEventData = 'CheckoutFailure';
+
+                it('should emit event', () => {
+                    // Act
+                    wrapper.vm.handleEventLogging(eventWithoutEventData);
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames[eventWithoutEventData]).length).toBe(1);
+                });
+
+                describe('AND event `hasEventData`', () => {
+                    it('should emit event with eventData', () => {
+                        // Act
+                        wrapper.vm.handleEventLogging(eventWithEventData);
+
+                        const event = wrapper.emitted(EventNames[eventWithEventData]);
+
+                        // Assert
+                        expect(wrapper.emitted(EventNames[eventWithEventData]).length).toBe(1);
+                        expect(event[0][0]).toEqual(eventData);
+                    });
+
+                    describe('AND event `hasEventData`', () => {
+                        it('AND event `hasEventData` and an error, should emit event with eventData and error', () => {
+                            // Act
+                            wrapper.vm.handleEventLogging(eventWithEventData, error);
+
+                            const event = wrapper.emitted(EventNames[eventWithEventData]);
+
+                            // Assert
+                            expect(wrapper.emitted(EventNames[eventWithEventData]).length).toBe(1);
+                            expect(event[0][0]).toEqual({ error, ...eventData });
+                        });
+                    });
+                });
+            });
+
+            describe('when `LogEvents` contains event', () => {
+                const event = 'CheckoutSuccess';
+                const eventLog = {
+                    message: 'Consumer Checkout Successful',
+                    data: eventData,
+                    logMethod: $logger.logInfo
+                };
+
+                it('should log event', () => {
+                    // Act
+                    wrapper.vm.handleEventLogging(event);
+
+                    // Assert
+                    expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
+                });
+
+                describe('AND event has error', () => {
+                    beforeEach(() => {
+                        // Arrange
+                        eventLog.error = error;
+                    });
+
+                    it('should log event with error', () => {
+                        // Act
+                        wrapper.vm.handleEventLogging(event, error);
+
+                        // Assert
+                        expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
+                    });
+
+                    describe('AND event has additionalData', () => {
+                        const additionalData = { postcode: 'EC1A 1BB' };
+
+                        beforeEach(() => {
+                            // Arrange
+                            eventLog.data = { ...eventData, ...additionalData };
+                        });
+
+                        it('should log event with error', () => {
+                            // Act
+                            wrapper.vm.handleEventLogging(event, error, additionalData);
+
+                            // Assert
+                            expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
+                        });
+                    });
+                });
+            });
+        });
+
         describe('`submitCheckout` ::', () => {
             let wrapper;
 
@@ -4158,122 +4275,6 @@ describe('Checkout', () => {
             });
         });
 
-        describe.only('handleEventLogging ::', () => {
-            let wrapper;
-            let logInvokerSpy;
-
-            const eventData = {
-                isLoggedIn: false,
-                serviceType: 'delivery'
-            };
-
-            const error = {
-                message: 'Error Message'
-            };
-
-            beforeEach(() => {
-                // Arrange
-                wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
-                });
-
-                logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
-            });
-
-            describe('when `EventNames` contains event', () => {
-                const eventWithoutEventData = 'CheckoutGetSuccess';
-                const eventWithEventData = 'CheckoutFailure';
-
-                it('should emit event', () => {
-                    // Act
-                    wrapper.vm.handleEventLogging(eventWithoutEventData);
-
-                    // Assert
-                    expect(wrapper.emitted(EventNames[eventWithoutEventData]).length).toBe(1);
-                });
-
-                describe('AND event `hasEventData`', () => {
-                    it('should emit event with eventData', () => {
-                        // Act
-                        wrapper.vm.handleEventLogging(eventWithEventData);
-
-                        const event = wrapper.emitted(EventNames[eventWithEventData]);
-
-                        // Assert
-                        expect(wrapper.emitted(EventNames[eventWithEventData]).length).toBe(1);
-                        expect(event[0][0]).toEqual(eventData);
-                    });
-
-                    describe('AND event `hasEventData`', () => {
-                        it('AND event `hasEventData` and an error, should emit event with eventData and error', () => {
-                            // Act
-                            wrapper.vm.handleEventLogging(eventWithEventData, error);
-
-                            const event = wrapper.emitted(EventNames[eventWithEventData]);
-
-                            // Assert
-                            expect(wrapper.emitted(EventNames[eventWithEventData]).length).toBe(1);
-                            expect(event[0][0]).toEqual({ error, ...eventData });
-                        });
-                    });
-                });
-            });
-
-            describe('when `LogEvents` contains event', () => {
-                const event = 'CheckoutSuccess';
-                const eventLog = {
-                    message: 'Consumer Checkout Successful',
-                    data: eventData,
-                    logMethod: $logger.logInfo
-                };
-
-                it('should log event', () => {
-                    // Act
-                    wrapper.vm.handleEventLogging(event);
-
-                    // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
-                });
-
-                describe('AND event has error', () => {
-                    beforeEach(() => {
-                        // Arrange
-                        eventLog.error = error;
-                    });
-
-                    it('should log event with error', () => {
-                        // Act
-                        wrapper.vm.handleEventLogging(event, error);
-
-                        // Assert
-                        expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
-                    });
-
-                    describe('AND event has additionalData', () => {
-                        const additionalData = { postcode: 'EC1A 1BB' };
-
-                        beforeEach(() => {
-                            // Arrange
-                            eventLog.data = { ...eventData, ...additionalData };
-                        });
-
-                        it('should log event with error', () => {
-                            // Act
-                            wrapper.vm.handleEventLogging(event, error, additionalData);
-
-                            // Assert
-                            expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
-                        });
-                    });
-                });
-            });
-        });
         describe('handleDialogCreation ::', () => {
             const event = {
                 code: 'DuplicateOrder',
