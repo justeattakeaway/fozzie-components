@@ -12,6 +12,9 @@ v3.2.0
 - Button border style definition moved to button types.
 - Each button size vertical padding reduced by 1px to make button height 56px/48px/40px/32px instead of 58px/50px/42px/34px.
 
+### Removed
+- Outline css styles as focus styles applied with `box-shadow`.
+
 
 v3.1.0
 ------------------------------
