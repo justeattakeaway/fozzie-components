@@ -37,3 +37,5 @@ exports[`NavigationLinks should display the list elements correctly for each \`l
         </span></li>
 </ul>
 `;
+
+exports[`NavigationLinks should not fail if no \`links\` prop supplied 1`] = `[Function]`;

@@ -52,19 +52,14 @@ describe('NavigationLinks', () => {
     it('should be defined', () => {
         const wrapper = shallowMount(NavigationLinks, { propsData });
 
-        expect(wrapper.props().links).toEqual(propsData.links);
         expect(wrapper.exists()).toBe(true);
+        expect(wrapper.props().links).toEqual(propsData.links);
     });
 
-    it('should warn if props not supplied', () => {
-        const consoleMock = jest.spyOn(console, 'error').mockImplementationOnce(() => {});
-
+    it('should not fail if no `links` prop supplied', () => {
         const wrapper = shallowMount(NavigationLinks);
 
-        expect(wrapper.props().links).toEqual([]);
-        // expect(consoleMock).toBeCalledWith('[Vue warn]: Missing required prop: "links"');
-
-        consoleMock.mockRestore();
+        expect(wrapper.html).toMatchSnapshot();
     });
 
     it('should display the list elements correctly for each `link` supplied', () => {
