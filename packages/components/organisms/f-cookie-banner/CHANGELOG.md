@@ -3,6 +3,32 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.3.3
+------------------------------
+*October 15, 2021*
+
+- Bump `f-mega-modal` version to fix a bad previous publish.
+
+
+v3.3.2
+------------------------------
+*October 14, 2021*
+
+### Changed
+- Bump `f-mega-modal` version to clean f-button styles.
+
+
+v3.3.1
+------------------------------
+*October 13, 2021*
+
+### Changed
+- "Accept all required cookies" ghost button to outline button.
+- Removed top margin from the banner title.
+- Bump f-button version to add more space between full width buttons.
+
+
 v3.3.0
 ------------------------------
 *October 13, 2021*
