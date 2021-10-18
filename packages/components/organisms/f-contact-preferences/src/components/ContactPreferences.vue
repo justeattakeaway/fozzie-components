@@ -141,7 +141,8 @@ export default {
             // this.$emit('preferences-get-success');
             this.preferences = mapToPreferencesViewModel(data).preferences;
         } catch (error) {
-            console.error(error);
+            // TODO: WCB-2244
+            console.error(error); // eslint-disable-line no-console
         }
     },
 
