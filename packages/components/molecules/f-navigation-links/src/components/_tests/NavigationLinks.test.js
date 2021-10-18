@@ -53,7 +53,6 @@ describe('NavigationLinks', () => {
         const wrapper = shallowMount(NavigationLinks, { propsData });
 
         expect(wrapper.exists()).toBe(true);
-        expect(wrapper.props().links).toEqual(propsData.links);
     });
 
     it('should not fail if no `links` prop supplied', () => {

@@ -4,19 +4,19 @@
         :class="$style['c-navigationLinks']"
         data-test-id="navigationLinks">
         <li
-            v-for="({ Id, url, name, selected }, i) in links"
-            :key="`${i}_link`"
+            v-for="({ id, url, name, selected }, i) in links"
+            :key="i"
             :class="$style['c-navigationLink-item']">
             <span
                 v-if="selected"
-                :data-test-id="Id"
+                :data-test-id="id"
                 tabindex="0"
                 :class="[$style['c-navigationLink-link'], $style['c-navigationLink--active']]">
                 {{ name }}
             </span>
             <v-link
                 v-else
-                :data-test-id="Id"
+                :data-test-id="id"
                 :has-text-decoration="false"
                 :href="url"
                 :class="$style['c-navigationLink-link']">
@@ -58,7 +58,7 @@ export default {
 
         .c-navigationLink-link {
             display: block;
-            padding: 10px 0 10px 22px;
+            padding: spacing() 0 spacing() spacing(x2);
             border-left: 2px solid $color-grey-30;
             color: $color-grey;
 
