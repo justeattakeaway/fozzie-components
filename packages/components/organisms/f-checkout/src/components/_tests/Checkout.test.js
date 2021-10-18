@@ -1811,7 +1811,7 @@ describe('Checkout', () => {
                     });
 
                     describe('AND the error is of type `CreateGuestUserError`', () => {
-                        it('should call `handleEventLoggingSpy` with the guest user creation error info', async () => {
+                        it('should call `handleErrorState` with the guest user creation error info', async () => {
                             // Arrange
                             const error = new CreateGuestUserError('CreateGuestUserError exception!');
 
@@ -1980,7 +1980,7 @@ describe('Checkout', () => {
             });
 
             describe('when there are errors', () => {
-                it('should call to `handleEventLogging` with `CheckoutNonFulfillableError`', () => {
+                it('should call `handleEventLogging` with `CheckoutNonFulfillableError`', () => {
                     // Act
                     wrapper.vm.handleNonFulfillableCheckout();
 
@@ -2429,6 +2429,14 @@ describe('Checkout', () => {
         describe('setupGuestUser ::', () => {
             let handleEventLoggingSpy;
 
+            beforeEach(() => {
+                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
             it('should call `createGuestUser`', async () => {
                 // Arrange
                 const customer = {
@@ -2469,14 +2477,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(createGuestUserSpy).toHaveBeenCalledWith(expected);
-            });
-
-            beforeEach(() => {
-                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
-            });
-
-            afterEach(() => {
-                jest.clearAllMocks();
             });
 
             describe('when `createGuestUser` request fails', () => {
@@ -2538,16 +2538,6 @@ describe('Checkout', () => {
         });
 
         describe('loadCheckout ::', () => {
-            let handleEventLoggingSpy;
-
-            beforeEach(() => {
-                handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging');
-            });
-
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
             describe('when `getCheckout` request fails', () => {
                 let wrapper;
                 let handleErrorStateSpy;
@@ -2640,7 +2630,17 @@ describe('Checkout', () => {
             });
 
             describe('when `getCheckout` request succeeds', () => {
-                it('should emit success event', async () => {
+                let handleEventLoggingSpy;
+
+                beforeEach(() => {
+                    handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging');
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should call `handleEventLogging` with `CheckoutGetSuccess`', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -2650,7 +2650,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2718,9 +2717,10 @@ describe('Checkout', () => {
                 });
 
                 it('should call `handleErrorState` with `AvailableFulfilmentGetError`', async () => {
-                    // Act & Assert
+                    // Act
                     await wrapper.vm.loadAvailableFulfilment();
 
+                    // Assert
                     expect(handleErrorStateSpy).toHaveBeenCalledWith(availableFulfilmentError);
                 });
             });
@@ -2736,7 +2736,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            // $logger,
                             $cookies
                         }
                     });
@@ -2827,8 +2826,8 @@ describe('Checkout', () => {
             });
 
             describe('when `getGeoLocation` request fails', () => {
-                it('should call `handleEventLogging` with failure event', async () => {
-                    // // Arrange
+                it('should call `handleEventLogging` with failure event and error and error', async () => {
+                    // Arrange
                     const error = 'jazz sometimes happens';
 
                     const wrapper = mount(VueCheckout, {
@@ -2844,7 +2843,7 @@ describe('Checkout', () => {
                         }
                     });
 
-                    // // Act
+                    // Act
                     await wrapper.vm.lookupGeoLocation();
 
                     // Assert
@@ -3003,7 +3002,7 @@ describe('Checkout', () => {
             });
 
             describe('when `getAddress` request fails', () => {
-                it('should call `handleEventLogging` with failure event', async () => {
+                it('should call `handleEventLogging` with failure event and error', async () => {
                     // Arrange
                     const error = new Error('Doh exception man!');
 

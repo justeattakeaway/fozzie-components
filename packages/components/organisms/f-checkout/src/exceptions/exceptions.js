@@ -1,5 +1,4 @@
 /* eslint-disable max-classes-per-file */
-// import EventNames from '../event-names';
 import checkoutIssues from '../checkout-issues';
 import { CHECKOUT_ERROR_FORM_TYPE } from '../constants';
 
