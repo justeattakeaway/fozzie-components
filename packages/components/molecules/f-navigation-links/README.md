@@ -88,14 +88,6 @@ The props that can be defined are as follows (if any):
 ]
  ```
 
-### Events
-
-The events that can be subscribed to are as follows (if any):
-
-| Event | Description |
-| ----- | ----------- |
-None
-
 ## Development
 
 Start by cloning the repository and installing the required dependencies:

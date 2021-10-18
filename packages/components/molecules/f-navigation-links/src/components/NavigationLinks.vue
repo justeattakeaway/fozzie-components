@@ -6,12 +6,12 @@
         <li
             v-for="({ id, url, name, selected }, i) in links"
             :key="i"
-            :class="$style['c-navigationLink-item']">
+            :class="$style['c-navigationLinks-item']">
             <span
                 v-if="selected"
                 :data-test-id="id"
                 tabindex="0"
-                :class="[$style['c-navigationLink-link'], $style['c-navigationLink--active']]">
+                :class="[$style['c-navigationLinks-link'], $style['c-navigationLinks--active']]">
                 {{ name }}
             </span>
             <v-link
@@ -19,7 +19,7 @@
                 :data-test-id="id"
                 :has-text-decoration="false"
                 :href="url"
-                :class="$style['c-navigationLink-link']">
+                :class="$style['c-navigationLinks-link']">
                 {{ name }}
             </v-link>
         </li>
@@ -55,24 +55,25 @@ export default {
     li {
         display: inline-block;
         width: 100%;
+    }
 
-        .c-navigationLink-link {
-            display: block;
-            padding: spacing() 0 spacing() spacing(x2);
-            border-left: 2px solid $color-grey-30;
-            color: $color-grey;
+    .c-navigationLinks-link {
+        display: block;
+        padding: spacing() 0 spacing() spacing(x2);
+        border-left: 2px solid $color-grey-30;
+        color: $color-grey;
 
-            &:focus,
-            &:hover {
-                border-left: 2px solid $color-orange;
-                text-decoration: none;
-            }
-        }
-
-        .c-navigationLink--active {
+        &:focus,
+        &:hover {
             border-left: 2px solid $color-orange;
-            font-weight: $font-weight-bold;
+            text-decoration: none;
         }
     }
+
+    .c-navigationLinks--active {
+        border-left: 2px solid $color-orange;
+        font-weight: $font-weight-bold;
+    }
 }
+
 </style>
