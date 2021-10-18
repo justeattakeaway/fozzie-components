@@ -1,28 +1,29 @@
 <template>
-    <div
+    <ul
+        v-if="links.length"
         :class="$style['c-navigationLinks']"
         data-test-id="navigationLinks">
-        <ul>
-            <li
-                v-for="({ Id, url, name, selected }, i) in links"
-                :key="`${i}_link`">
-                <span
-                    v-if="selected"
-                    :data-test-id="Id"
-                    tabindex="0"
-                    :class="[$style['c-hightlighted-link']]">
-                    {{ name }}
-                </span>
-                <v-link
-                    v-else
-                    :data-test-id="Id"
-                    :has-text-decoration="false"
-                    :href="url">
-                    {{ name }}
-                </v-link>
-            </li>
-        </ul>
-    </div>
+        <li
+            v-for="({ Id, url, name, selected }, i) in links"
+            :key="`${i}_link`"
+            :class="$style['c-navigationLink-item']">
+            <span
+                v-if="selected"
+                :data-test-id="Id"
+                tabindex="0"
+                :class="[$style['c-navigationLink-link'], $style['c-navigationLink--active']]">
+                {{ name }}
+            </span>
+            <v-link
+                v-else
+                :data-test-id="Id"
+                :has-text-decoration="false"
+                :href="url"
+                :class="$style['c-navigationLink-link']">
+                {{ name }}
+            </v-link>
+        </li>
+    </ul>
 </template>
 
 <script>
@@ -39,6 +40,7 @@ export default {
     props: {
         links: {
             type: Array,
+            required: true,
             default: () => []
         }
     }
@@ -47,23 +49,17 @@ export default {
 
 <style lang="scss" module>
 .c-navigationLinks {
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 
     li {
         display: inline-block;
         width: 100%;
 
-        a,
-        .c-hightlighted-link {
+        .c-navigationLink-link {
             display: block;
             padding: 10px 0 10px 22px;
-        }
-
-        a {
             border-left: 2px solid $color-grey-30;
             color: $color-grey;
 
@@ -73,19 +69,10 @@ export default {
                 text-decoration: none;
             }
         }
-    }
 
-    .c-hightlighted-link {
-        border-left: 2px solid $color-orange;
-        font-weight: $font-weight-bold;
-
-        a {
-            border-left: none;
-
-            &:focus,
-            &:hover {
-                border-left: none;
-            }
+        .c-navigationLink--active {
+            border-left: 2px solid $color-orange;
+            font-weight: $font-weight-bold;
         }
     }
 }

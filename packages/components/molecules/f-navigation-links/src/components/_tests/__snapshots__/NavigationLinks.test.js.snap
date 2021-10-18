@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavigationLinks should display the list elements correctly for each \`link\` supplied 1`] = `
-<ul>
+<ul data-test-id="navigationLinks">
   <li>
     <v-link-stub data-test-id="link1" href="/account/info">
       Your account
@@ -33,7 +33,7 @@ exports[`NavigationLinks should display the list elements correctly for each \`l
     </v-link-stub>
   </li>
   <li><span data-test-id="link7" tabindex="0" class="">
-                Contact preferences
-            </span></li>
+            Contact preferences
+        </span></li>
 </ul>
 `;
