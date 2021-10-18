@@ -99,7 +99,7 @@ export default {
         const localeConfig = tenantConfigs[locale];
 
         return {
-            copy: { ...localeConfig },
+            copy: localeConfig,
             preferences: []
         };
     },
