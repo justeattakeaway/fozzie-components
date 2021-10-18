@@ -11,7 +11,7 @@
                 v-if="selected"
                 :data-test-id="id"
                 tabindex="0"
-                :class="[$style['c-navigationLinks-link'], $style['c-navigationLinks--active']]">
+                :class="[$style['c-navigationLinks-link'], $style['c-navigationLinks-link--active']]">
                 {{ name }}
             </span>
             <v-link
@@ -51,29 +51,26 @@ export default {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
 
-    li {
-        display: inline-block;
-        width: 100%;
-    }
+.c-navigationLinks-item {
+    display: inline-block;
+    width: 100%;
+}
+.c-navigationLinks-link {
+    display: block;
+    padding: spacing() 0 spacing() spacing(x2);
+    border-left: 2px solid $color-grey-30;
+    color: $color-grey;
 
-    .c-navigationLinks-link {
-        display: block;
-        padding: spacing() 0 spacing() spacing(x2);
-        border-left: 2px solid $color-grey-30;
-        color: $color-grey;
-
-        &:focus,
-        &:hover {
-            border-left: 2px solid $color-orange;
-            text-decoration: none;
-        }
-    }
-
-    .c-navigationLinks--active {
+    &:focus, &:hover {
         border-left: 2px solid $color-orange;
-        font-weight: $font-weight-bold;
+        text-decoration: none;
     }
+}
+.c-navigationLinks-link--active {
+    border-left: 2px solid $color-orange;
+    font-weight: $font-weight-bold;
 }
 
 </style>

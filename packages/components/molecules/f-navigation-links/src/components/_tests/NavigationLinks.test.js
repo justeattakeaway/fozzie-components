@@ -4,43 +4,43 @@ import NavigationLinks from '../NavigationLinks.vue';
 const propsData = {
     links: [
         {
-            Id: 'link1',
+            id: 'link1',
             url: '/account/info',
             name: 'Your account',
             selected: false
         },
         {
-            Id: 'link2',
+            id: 'link2',
             url: '/order-history',
             name: 'Your orders',
             selected: false
         },
         {
-            Id: 'link3',
+            id: 'link3',
             url: '/account/paymentoptions',
             name: 'Your saved cards',
             selected: false
         },
         {
-            Id: 'link4',
+            id: 'link4',
             url: '/member/addressbook',
             name: 'Your address book',
             selected: false
         },
         {
-            Id: 'link5',
+            id: 'link5',
             url: '/account/credit',
             name: 'Redeem a voucher',
             selected: false
         },
         {
-            Id: 'link6',
+            id: 'link6',
             url: '/giftcards/redeem',
             name: 'Redeem a gift card',
             selected: false
         },
         {
-            Id: 'link7',
+            id: 'link7',
             url: '/account/preferences',
             name: 'Contact preferences',
             selected: true
