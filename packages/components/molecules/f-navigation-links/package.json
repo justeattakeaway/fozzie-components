@@ -1,13 +1,14 @@
 {
-  "name": "@justeat/f-mega-modal",
-  "description": "Fozzie Mega Modal – A Vue.js modal component",
-  "version": "3.0.2",
-  "main": "dist/f-mega-modal.common.js",
-  "maxBundleSize": "6kB",
+  "name": "@justeat/f-navigation-links",
+  "description": "Fozzie Navigation Links - A component to display a collection of supplied links",
+  "version": "0.1.0",
+  "main": "dist/f-navigation-links.umd.min.js",
+  "maxBundleSize": "15kB",
   "files": [
-    "dist"
+    "dist",
+    "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-mega-modal",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-navigation-links",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -27,7 +28,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-mega-modal ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-navigation-links ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
@@ -38,20 +39,19 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
+  "dependencies": {
+    "@justeat/f-services": "1.7.0"
+  },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "body-scroll-lock": "3.x"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@justeat/f-button": "3.0.2",
-    "@justeat/f-vue-icons": "2.4.0",
-    "@justeat/f-wdio-utils": "0.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@justeat/f-wdio-utils": "0.3.0",
     "@vue/test-utils": "1.0.3",
-    "body-scroll-lock": "3.0.3",
     "node-sass-magic-importer": "5.3.2"
   }
 }

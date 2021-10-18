@@ -9,6 +9,8 @@ module.exports = class BasketServiceApi {
     }
 
     async createBasketForUserAsync (basketInfo, timeout = 5000) {
+        const today = new Date().toISOString();
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -20,20 +22,22 @@ module.exports = class BasketServiceApi {
         };
 
         const data = {
-            Deals: [],
-            MenuGroupId: basketInfo.menuId,
-            OrderDetails: {
-                Location: {
-                    GeoLocation: {
-                        Latitude: 0,
-                        Longitude: 0
-                    },
-                    ZipCode: this.postcode
+            restaurantSeoName: basketInfo.restaurantSeo,
+            menuGroupId: basketInfo.menuId,
+            serviceType: basketInfo.serviceType,
+            orderDetails: {
+                location: {
+                    zipCode: this.postcode
                 }
             },
-            Products: [],
-            RestaurantSeoName: basketInfo.restaurantSEO,
-            ServiceType: basketInfo.serviceType
+            products: [{
+                date: today,
+                productId: basketInfo.productId,
+                quantity: 20,
+                modifierGroups: [],
+                dealGroups: []
+            }],
+            deals: []
         };
 
         return axios.post(`${this.basketUrl}`, data, config)
