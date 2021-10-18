@@ -6,7 +6,7 @@ module.exports = class MenuServiceApi {
         this.tenant = configuration.tenant;
     }
 
-    async getRestaurantManifestAsync (restaurantSEO, timeout = 5000) {
+    async getRestaurantManifestAsync (restaurantSeo, timeout = 5000) {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
@@ -14,7 +14,7 @@ module.exports = class MenuServiceApi {
             timeout
         };
 
-        return axios.get(`${this.getMenuUrl}/v2/${restaurantSEO}_${this.tenant}_manifest.json`, config)
+        return axios.get(`${this.getMenuUrl}/v2/${restaurantSeo}_${this.tenant}_manifest.json`, config)
         .catch(error => {
             throw new Error(error.message);
         });

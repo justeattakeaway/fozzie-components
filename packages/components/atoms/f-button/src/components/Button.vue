@@ -790,7 +790,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     // Vertically space out multiple fullWidth buttons
     // same as .o-btn--fullWidth + .o-btn--fullWidth
     & + & {
-        margin-top: spacing();
+        margin-top: spacing(x2);
     }
 }
 
