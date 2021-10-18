@@ -580,7 +580,7 @@ describe('CookieBanner', () => {
                 expect(spyMethod).toBeCalled();
             });
 
-            it('should not call updateIsBodyHeightLessThanWindowHeight when data.bodyHeigth newVal === oldVal', async () => {
+            it('should not call updateIsBodyHeightLessThanWindowHeight when data.bodyHeight newVal === oldVal', async () => {
                 // Arrange
                 const spyMethod = jest.spyOn(CookieBanner.methods, 'updateIsBodyHeightLessThanWindowHeight');
 
