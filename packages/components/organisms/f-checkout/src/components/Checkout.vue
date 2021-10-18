@@ -653,7 +653,7 @@ export default {
                 }
             }
 
-            if (LogEvents[event]) {
+            if (LogEvents[event]?.logMessage) {
                 this.logInvoker({
                     message: LogEvents[event].logMessage,
                     data: { ...this.eventData, ...additionalData },
