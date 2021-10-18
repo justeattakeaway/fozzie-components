@@ -4,17 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v3.0.3
+v3.1.0
 ------------------------------
 *October 18, 2021*
 
 ### Changed
+- Add spacing to buttons following a paragraph tag. This matches the current behaviour in Fozzie.
 - Removed the background from the link button in disabled state.
+- `f-vue-icons` package version bump.
 - Button story now shows all the types and sizes of the button component (primary, secondary, outline and ghost).
 - Changed knobs to controls for switching button props.
 - Separate story for Link Button to be able to run tests properly.
 - Updated the tests in line with the changes.
-- `f-vue-icons` package version bump.
 
 
 v3.0.2

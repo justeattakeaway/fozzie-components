@@ -320,6 +320,10 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     &:visited {
         text-decoration: none;
     }
+
+    p + & {
+        margin-top: spacing(x2);
+    }
 }
     .o-button-content {
         display: flex;
