@@ -93,16 +93,18 @@ $form-label-weight              : $font-weight-bold;
     pointer-events: none;
 }
 
-.c-formField-label-details {
+.c-formField-label-details,
+.c-formField-label-description {
     font-weight: $font-weight-regular;
     color: $form-input-secondaryTextColour;
+}
+
+.c-formField-label-details {
     position: absolute;
     right: 0;
 }
 
-
 .c-formField-label-description {
     display: block;
-    font-weight: normal;
 }
 </style>
