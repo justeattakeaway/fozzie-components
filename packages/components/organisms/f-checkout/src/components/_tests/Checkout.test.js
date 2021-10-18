@@ -3829,7 +3829,7 @@ describe('Checkout', () => {
                     data: {
                         basketId,
                         customerNotes: {
-                            noteForRestaurant: defaultCheckoutState.userNote
+                            NoteForRestaurant: defaultCheckoutState.userNote
                         },
                         referralState: 'MockReferralState'
                     },

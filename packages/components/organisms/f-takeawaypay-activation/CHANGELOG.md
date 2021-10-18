@@ -3,6 +3,33 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.5.1
+------------------------------
+*October 13, 2021*
+
+### Changed
+- Updated version of `f-button` which have styles for more space between action buttons. Removed custom styles added in v2.5.0.
+
+
+v2.5.0
+------------------------------
+*October 13, 2021*
+
+### Changed
+- Added more space between action buttons
+
+
+v2.4.0
+------------------------------
+*October 11, 2021*
+
+### Changed
+- Component tests
+- Accessibility tests
+- Visual regression tests
+
+
 v2.3.0
 ------------------------------
 *October 08, 2021*
@@ -17,6 +44,7 @@ v2.2.1
 
 Re-publish to clean up the old styles from the compiled package.
 
+
 v2.2.0
 ------------------------------
 *October 06, 2021*
@@ -24,12 +52,14 @@ v2.2.0
 ### Changed
 - Reverted Takeaway Pay => Just Eat Pay renaming
 
+
 v2.1.0
 ------------------------------
 *October 05, 2021*
 
 ### Added
 - Visual regression tests
+
 
 v2.0.0
 ------------------------------
