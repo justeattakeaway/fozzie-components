@@ -639,6 +639,9 @@ export default {
             }
         },
 
+        /**
+         * Emits and/or logs event with eventData, error and any additional data
+         */
         handleEventLogging (event, error, additionalData) {
             if (EventNames[event]) {
                 const data = LogEvents[event]?.hasEventData && this.eventData;
