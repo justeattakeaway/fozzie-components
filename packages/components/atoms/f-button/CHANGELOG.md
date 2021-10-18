@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.1.0
+------------------------------
+*October 18, 2021*
+
+### Added
+- Add spacing to buttons following a paragraph tag. This matches the current behaviour in Fozzie.
+
+
 v3.0.2
 ------------------------------
 *October 13, 2021*
