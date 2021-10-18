@@ -646,7 +646,7 @@ export default {
                 if (!data && !error) {
                     this.$emit(EventNames[event]);
                 } else {
-                    this.$emit(EventNames[event], { ...data, ...error && { error } });
+                    this.$emit(EventNames[event], { ...data, ...(error && { error }) });
                 }
             }
 
