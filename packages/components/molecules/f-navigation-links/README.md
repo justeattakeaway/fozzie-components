@@ -67,9 +67,9 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
-| links | array | [] | An array of links objects (_see example below_) |
+| Prop  | Type  | Default | Required | Description |
+| ----- | ----- | ------- | ----- | ----------- |
+| links | array | [] | true | An array of links objects (_see example below_) |
 
 ```js
 [
