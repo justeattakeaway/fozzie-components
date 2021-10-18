@@ -1,18 +1,81 @@
 <template>
-    <div
-        :class="$style['c-contactPreferences']"
-        data-test-id="contactPreferences">
-        {{ copy.text }}
-    </div>
+    <card-component
+        :card-heading="copy.heading"
+        is-page-content-wrapper
+        has-outline>
+        <h2 :class="$style['c-contactPreferences-subtitle']">
+            {{ copy.orderUpdates.subtitle }}
+        </h2>
+
+        <form @submit.prevent="onFormSubmit">
+            <fieldset :class="$style['c-contactPreferences-fieldset']">
+                <label>
+                    <input
+                        type="checkbox"
+                        checked
+                        disabled>
+                    <span :class="$style['c-contactPreferences-labelText--disabled']">
+                        {{ copy.orderUpdates.textMessage }}<br>
+                        ({{ copy.orderUpdates.textMessageDescription }})
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="checkbox"
+                        checked
+                        disabled>
+                    <span :class="$style['c-contactPreferences-labelText--disabled']">
+                        {{ copy.orderUpdates.email }}<br>
+                        ({{ copy.orderUpdates.emailDescription }})
+                    </span>
+                </label>
+            </fieldset>
+
+            <h2 :class="$style['c-contactPreferences-subtitle']">
+                {{ copy.newsAndOffers.subtitle }}
+            </h2>
+
+            <fieldset :class="$style['c-contactPreferences-fieldset']">
+                <label>
+                    <input type="checkbox">
+                    <span>
+                        {{ copy.newsAndOffers.textMessage }}
+                    </span>
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    <span>
+                        {{ copy.newsAndOffers.email }}
+                    </span>
+                </label>
+            </fieldset>
+
+            <f-button
+                button-type="primary"
+                is-full-width>
+                {{ copy.saveChangesButton }}
+            </f-button>
+        </form>
+    </card-component>
 </template>
 
 <script>
+import FButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
+import CardComponent from '@justeat/f-card';
+import '@justeat/f-card/dist/f-card.css';
+
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'ContactPreferences',
-    components: {},
+    components: {
+        CardComponent,
+        FButton
+    },
     props: {
         locale: {
             type: String,
@@ -26,21 +89,27 @@ export default {
         return {
             copy: { ...localeConfig }
         };
+    },
+    methods: {
+        onFormSubmit () {}
     }
 };
 </script>
 
 <style lang="scss" module>
-
-.c-contactPreferences {
+.c-contactPreferences-fieldset {
     display: flex;
-    justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
-    margin: auto;
-    border: 1px solid $color-red;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
+    flex-flow: column;
+    border: none;
+    padding: 0;
+    margin: spacing(x2) 0;
 }
 
+.c-contactPreferences-labelText--disabled {
+    color: $color-content-disabled;
+}
+
+.c-contactPreferences-subtitle {
+    @include font-size(heading-s);
+}
 </style>

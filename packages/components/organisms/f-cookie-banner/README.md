@@ -170,6 +170,7 @@ The props that can be defined are as follows:
 | `shouldUseGreyBackground` | `Boolean` | `true` | Use grey background for the reopen link. |
 | `shouldAbsolutePositionReopenLink` | `Boolean` | `true` | Adds a ResizeObserver and absolutely positions the re-open link to the bottom when the content is smaller than the window |
 | `nameSuffix` | `String` | `''` | Add a suffix to the cookie name. This allows the cookie banner to create a cookie with a different name to be able to handle multiple sub-domains. |
+| `domain` | `String` | `null` | Specifies which hosts can receive a cookie. If unspecified, the attribute defaults to the same host that set the cookie, excluding subdomains. If it is specified, then subdomains are always included. Therefore, passing the prop is less restrictive than omitting it. For example, if you specify `just-eat.co.uk`, the cookie will be used in any subdomain of `just-eat.co.uk` |
 
 #### ***Important***
 
