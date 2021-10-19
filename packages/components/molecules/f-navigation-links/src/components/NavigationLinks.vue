@@ -57,6 +57,7 @@ export default {
     display: inline-block;
     width: 100%;
 }
+
 .c-navigationLinks-link {
     display: block;
     padding: spacing() 0 spacing() spacing(x2);
@@ -68,6 +69,7 @@ export default {
         text-decoration: none;
     }
 }
+
 .c-navigationLinks-link--active {
     border-left: 2px solid $color-orange;
     font-weight: $font-weight-bold;
