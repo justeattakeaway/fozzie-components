@@ -17,7 +17,7 @@ export const ContactPreferencesComponent = () => ({
     props: {
     },
     template: `<contact-preferences
-        get-preferences-url="/consumer/preferences" />`
+        smart-gateway-base-url="https://localhost:8080" />`
 });
 
 ContactPreferencesComponent.storyName = 'f-contact-preferences';
