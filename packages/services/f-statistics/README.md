@@ -15,23 +15,23 @@ A service for publishing statistics from the client side
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-statistics/badge.svg)](https://coveralls.io/github/justeat/f-statistics)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-statistics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-statistics?targetFile=package.json)
 
-> This package is MVP not designed for production use at this stage.
+> This package is an MVP (not yet stable), if you want to use it contact the team first.
 
-The purpose of this service is to abstract away the responsibility for pushing statistics. It is not responsible for collecting stats of any kind.
+- `f-statistics` is responsible for transporting statistics provided to it; for example response time statistics from `f-http`.
 
-It is abstracted so that a myriad of statistic generators can rely on this interface; and should we wish to redirect where statistics go or apply properties to all statistics, this package can isolate those changes in an easily upgradeable format.
-
-It is likely that the current method of transporting statistics is temporary.
+- It is likely the transportation method may change.
 
 ## Benefits (Now)
-- Easy to provide statistics and not need to worry about how they are transported
-- Ability to switch underlying providers in future if we wish - Just Log for now.
+- Hide away how statistics are transported from every day development.
+- Ability to be flexible with where our statistics are transported.
+- Ability for properties to be provided during initialisation, which are included in every publication.
 
 ## Benefits (Soon)
-- Batching options
-- Sampling options
+- Batching options - to decrease network usage
+- Sampling options - to increase scalability
 
-<hr></br>
+
+<hr>
 
 ## Usage
 
@@ -62,8 +62,13 @@ const statisticsConfiguration = {
     featureName: 'your website name'
 };
 
+// Optional (provide properties to publish with every statistic)
+const baseProperties = {
+  my-experiment-bucket: 'Bucket 1'
+};
+
 // Initialise a new instance of the statistics client
-const statisticsClient = new StatisticsModule(justLog, statsConfiguration);
+const statisticsClient = new StatisticsModule(justLog, statsConfiguration, baseProperties);
 
 // Publish a statistic
 statisticsClient.publish({
