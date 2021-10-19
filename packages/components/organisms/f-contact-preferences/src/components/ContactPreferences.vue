@@ -98,7 +98,7 @@ export default {
         };
     },
 
-    async mounted () {
+    mounted () {
         try {
             const data = {
                 preferencesVersionViewed: 0,
