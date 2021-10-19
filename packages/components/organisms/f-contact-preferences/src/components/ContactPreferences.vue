@@ -55,7 +55,6 @@
 </template>
 
 <script>
-// import axios from 'axios';
 import { globalisationServices } from '@justeat/f-services';
 
 import FButton from '@justeat/f-button';
@@ -106,16 +105,6 @@ export default {
 
     async mounted () {
         try {
-            // const { data } = await axios.get(this.getPreferencesUrl, {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         ...(this.authToken && {
-            //             Authorization: `Bearer ${this.authToken}`
-            //         })
-            //     },
-            //     timeout: this.preferencesTimeout
-            // });
-
             const data = {
                 preferencesVersionViewed: 0,
                 preferences: [
@@ -138,7 +127,6 @@ export default {
                 ]
             };
 
-            // this.$emit('preferences-get-success');
             this.preferences = mapToPreferencesViewModel(data).preferences;
         } catch (error) {
             // TODO: Handle error when loading preferences fails
