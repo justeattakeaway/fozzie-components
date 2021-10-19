@@ -64,7 +64,7 @@ const statisticsConfiguration = {
 
 // Optional (provide properties to publish with every statistic)
 const baseProperties = {
-  my-experiment-bucket: 'Bucket 1'
+  my_experiment_bucket: 'Bucket 1'
 };
 
 // Initialise a new instance of the statistics client
