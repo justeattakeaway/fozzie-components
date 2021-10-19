@@ -2359,10 +2359,10 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@6.0.0-beta.5":
-  version "6.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.5.tgz#a2a357f96cd3e8a9076a9d0e4d58f687a4184398"
-  integrity sha512-YUBCnFGRDXb9DILjo8Ui8YdAZQ95ml25mGcYJQ1lNzlK29xcfnaJzQwSv1U5sfbKfhHZeyHGHRpN3071tREhFA==
+"@justeat/fozzie@6.0.0-beta.9":
+  version "6.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.9.tgz#21b72acc64fd5b3c5f7683c110d6109c07b56111"
+  integrity sha512-2nRdmuhZ1dMTXiN+SQExgk/qVHi9yg395lOjSG5pk9lYmi0R6QCnM1XxmIjsD2onQztpPnLAU6gAohxoz1INwA==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
