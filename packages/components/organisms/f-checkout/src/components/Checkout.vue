@@ -646,10 +646,10 @@ export default {
             if (EventNames[event]) {
                 const data = LogEvents[event]?.hasEventData && this.eventData;
 
-                if (!data && !error) {
-                    this.$emit(EventNames[event]);
-                } else {
+                if (data || error) {
                     this.$emit(EventNames[event], { ...data, ...(error && { error }) });
+                } else {
+                    this.$emit(EventNames[event]);
                 }
             }
 
