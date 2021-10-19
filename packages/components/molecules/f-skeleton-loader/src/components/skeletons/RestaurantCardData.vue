@@ -27,6 +27,7 @@ export default {
     width: 96%;
     margin: auto;
     padding: spacing();
+    border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
 }
 
 .c-restaurantData-textWrapper {
