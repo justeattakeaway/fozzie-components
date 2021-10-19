@@ -12,7 +12,9 @@ describe('f-statistics', () => {
             // Arrange
             const expectedPayload = {
                 je_feature: 'f-statistics',
-                je_logType: 'client-stats'
+                je_logType: 'client-stats',
+                je_environment: 'test',
+                je_feature_for: 'Generic Front End'
             };
 
             // Act
@@ -27,6 +29,8 @@ describe('f-statistics', () => {
             const expectedPayload = {
                 je_feature: 'f-statistics',
                 je_logType: 'client-stats',
+                je_environment: 'test',
+                je_feature_for: 'Generic Front End',
                 a_test_property: 'this is a test'
             };
 
@@ -42,6 +46,8 @@ describe('f-statistics', () => {
             const expectedPayload = {
                 je_feature: 'f-statistics',
                 je_logType: 'client-stats',
+                je_environment: 'test',
+                je_feature_for: 'Generic Front End',
                 a_test_property: 'this is a test'
             };
 

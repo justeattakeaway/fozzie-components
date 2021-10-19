@@ -8,25 +8,25 @@ export default class StatisticsClient {
     };
 
     constructor (justLogInstance, options = {}, basePayload = {}) {
-        this.basePayload = {
-            ...basePayload,
-            ...this.basePayload
-        };
-
         this.configuration = {
             ...defaultOptions,
             ...options
         };
 
+        this.basePayload = {
+            ...basePayload,
+            ...this.basePayload,
+            je_feature_for: this.configuration?.featureName || 'Unspecified',
+            je_environment: this.configuration?.environment || 'Unspecified'
+        };
+
         this.justLogInstance = justLogInstance;
     }
 
-    publish (message, payload) {
+    publish (message, statisticPayload) {
         this.justLogInstance.info(message, {
-            je_feature_for: this.configuration?.featureName || 'Unspecified',
-            je_environment: this.configuration?.environment || 'Unspecified',
             ...this.basePayload,
-            ...payload
+            ...statisticPayload
         });
     }
 }
