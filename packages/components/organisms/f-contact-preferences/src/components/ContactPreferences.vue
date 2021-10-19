@@ -78,18 +78,13 @@ export default {
             type: String,
             default: ''
         },
-        getPreferencesUrl: {
-            type: String,
-            required: true
-        },
         locale: {
             type: String,
             default: ''
         },
-        preferencesTimeout: {
-            type: Number,
-            required: false,
-            default: 60000
+        smartGatewayBaseUrl: {
+            type: String,
+            required: true
         }
     },
 
