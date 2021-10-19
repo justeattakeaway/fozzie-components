@@ -1,16 +1,19 @@
-const mapToPreferencesViewModel = data => ({
-    preferences: data.preferences.map(p => ({
+const mapToPreferencesViewModel = ({ preferences, preferencesVersionViewed }) => ({
+    preferences: preferences.map(({ email, key, sms }) => ({
         email: {
-            enabled: p.key === 'newsletter',
-            value: p.email
+            enabled: key === 'newsletter',
+            value: email
         },
-        key: p.key,
+
+        key,
+
         sms: {
-            enabled: p.key === 'newsletter',
-            value: p.sms
+            enabled: key === 'newsletter',
+            value: sms
         }
     })),
-    preferencesVersionViewed: data.preferencesVersionViewed
+
+    preferencesVersionViewed
 });
 
 const mapToPreferencesUpdateModel = () => ({});
