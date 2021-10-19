@@ -2,7 +2,17 @@
 import defaultOptions from './defaultOptions';
 
 export default class StatisticsClient {
-    constructor (justLogInstance, options = {}) {
+    basePayload = {
+        je_feature: 'f-statistics',
+        je_logType: 'client-stats'
+    };
+
+    constructor (justLogInstance, options = {}, basePayload = {}) {
+        this.basePayload = {
+            ...basePayload,
+            ...this.basePayload
+        };
+
         this.configuration = {
             ...defaultOptions,
             ...options
@@ -13,10 +23,9 @@ export default class StatisticsClient {
 
     publish (message, payload) {
         this.justLogInstance.info(message, {
-            je_feature: 'f-statistics',
             je_feature_for: this.configuration?.featureName || 'Unspecified',
-            je_logType: 'client-stats',
             je_environment: this.configuration?.environment || 'Unspecified',
+            ...this.basePayload,
             ...payload
         });
     }
