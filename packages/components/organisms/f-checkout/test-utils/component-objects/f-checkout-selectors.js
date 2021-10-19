@@ -1,4 +1,5 @@
 exports.CHECKOUT_COMPONENT = '[data-test-id="checkout-component"]';
+exports.CHECKOUT_COMPONENT_SUBMITTABLE = '[data-test-isSubmittable="true"]';
 exports.ORDER_TIME_DROPDOWN = '[data-test-id="formfield-order-time-dropdown-select"]';
 exports.ORDER_TIME_DROPDOWN_OPTIONS = '[data-test-id="formfield-order-time-dropdown-select"] option';
 exports.USER_NOTE_INPUT = '[data-test-id="formfield-textarea"]';

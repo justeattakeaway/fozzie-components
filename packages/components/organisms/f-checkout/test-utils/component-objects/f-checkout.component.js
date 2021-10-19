@@ -1,6 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     CHECKOUT_COMPONENT,
+    CHECKOUT_COMPONENT_SUBMITTABLE,
     ORDER_TIME_DROPDOWN,
     ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
@@ -28,6 +29,8 @@ module.exports = class Checkout extends Page {
     }
 
     get component () { return $(CHECKOUT_COMPONENT); }
+
+    get componentSubmittable () { return $(CHECKOUT_COMPONENT_SUBMITTABLE); }
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
 
@@ -142,6 +145,10 @@ module.exports = class Checkout extends Page {
 
     waitForComponent (component = this.component) {
         super.waitForComponent(component);
+    }
+
+    waitForFormSubmittable () {
+        this.componentSubmittable.waitForExist();
     }
 
     waitForErrorPageComponent () {

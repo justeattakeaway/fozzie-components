@@ -23,7 +23,8 @@
         <div
             v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
-            data-test-id="checkout-component">
+            data-test-id="checkout-component"
+            :data-test-isSubmittable="isSubmittable">
             <card
                 has-full-width-footer
                 has-outline
@@ -511,6 +512,11 @@ export default {
 
         shouldShowAddressAdministrativeArea () {
             return this.tenant === 'au';
+        },
+
+        // Checks fields have been populated for testing purposes
+        isSubmittable () {
+            return !this.$v.$invalid ? 'true' : 'false';
         }
     },
 
