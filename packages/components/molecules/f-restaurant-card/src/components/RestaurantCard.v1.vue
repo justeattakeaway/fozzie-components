@@ -8,71 +8,23 @@
         data-test-id="restaurantCard-component"
         @click="$emit('restaurant-card-clicked')">
 
-        <!-- background image -->
-        <div
-            v-if="imgUrl"
-            :class="$style['c-restaurantCard-img']"
-            :style="`background-image: url(${imgUrl});`"
-            role="img" />
+        <div :class="[$style['c-restaurantCard-content']]">
+            <div :class="[$style['c-restaurantCard-innerContent']]">
+                <!-- background image -->
+                <div
+                    v-if="!!imgUrl"
+                    :class="[$style['c-restaurantCard-img']]"
+                    :style="`background-image: url(${imgUrl});`"
+                    role="img" />
 
-        <!-- card content -->
-        <div :class="$style['c-restaurantCard-content']">
-            <!-- Logo image -->
-            <img
-                :src="logoUrl"
-                alt=""
-                width="50"
-                height="50"
-                loading="lazy"
-                :class="$style['c-restaurantCard-logo']"
-                data-test-id="restaurant_logo">
-
-
-
-            <!-- Restaurant Name -->
-            <h3
-                data-test-id="restaurant_name"
-                data-search-name>
-                Fake Restaurant
-            </h3>
-
-            <!-- Cuisines -->
-            <!-- START ERROR BOUNDARY -->
-            <slot name="cuisines" />
-            <!-- END ERROR BOUNDARY -->
-
-
-            <!-- New label -->
-            <!-- START ERROR BOUNDARY -->
-            <slot name="new-label" />
-            <!-- END ERROR BOUNDARY -->
-
-            <!-- Ratings -->
-            <!-- START ERROR BOUNDARY -->
-            <slot name="ratings" />
-            <!-- END ERROR BOUNDARY -->
-
-            <!-- Offline Icon -->
-            <!-- <div>Offline Icon</div> -->
-
-            <!-- Meta Items List -->
-            <slot name="meta-items" />
-
-            <!-- Local Legend label -->
-            <slot name="local-legend" />
-
-            <!-- Badges -->
-            <div>
-                <!-- misc badges -->
-                <!-- START ERROR BOUNDARY -->
-                <slot name="badges" />
-                <!-- END ERROR BOUNDARY -->
-
-                <!-- promoted badge -->
-                <!-- <span>Promoted</span> -->
+                <!-- primary content -->
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Consectetur laborum molestias harum aliquam tempore voluptate quibusdam fugiat ullam, soluta, sunt ratione maiores odit adipisci, consequatur alias aperiam dolores ipsum aspernatur.
             </div>
-            <!-- Optional items i.e. dish search results -->
-            <slot name="optional-items" />
+            <!-- optional items -->
+            <p :class="[$style['c-restaurantCard-optionalItem']]">DISH RESULT</p>
+            <p :class="[$style['c-restaurantCard-optionalItem']]">DISH RESULT</p>
+            <p :class="[$style['c-restaurantCard-optionalItem']]">DISH RESULT</p>
         </div>
     </a>
 </template>
@@ -106,7 +58,7 @@ export default {
             type: Boolean,
             default: false
         },
-        isTile: {
+        isListItem: {
             type: Boolean,
             default: true
         },
@@ -118,7 +70,7 @@ export default {
     },
     computed: {
         displayModeModifier () {
-            return this.isTile ? 'c-restaurantCard--tile' : 'c-restaurantCard--listItem';
+            return this.isListItem ? 'c-restaurantCard--listItem' : null;
         }
     }
 };
@@ -128,114 +80,71 @@ export default {
 $card-bgColor                             : $color-container-default;
 $card-borderRadius                        : $radius-rounded-c;
 $tile-imgSpacing                          : spacing(x10) * 2;
-$img-border-radius                        : $radius-rounded-c;
+$img-borderRadius                         : $radius-rounded-c;
 $img-width                                : 156px;
 $logo-borderRadius                        : $radius-rounded-b;
 $logo-borderColor                         : $color-border-default;
 
-@mixin card-frame {
-    z-index: 1;
-    background: $card-bgColor;
+.c-restaurantCard {
+  display: block;
+  text-decoration: none;
+//   padding: 10px;
+//   background: lightgreen;
+  position: relative;
+  z-index: 2;
+  margin: 0 10px;
+
+  &.c-restaurantCard--hasImg {
+      padding-top: 90px;
+  }
+
+  &.c-restaurantCard--listItem {
+      @media only screen and (min-width: 600px){
+        padding: 0;
+      }
+  }
+}
+
+.c-restaurantCard-content {
+    background: white;
+    border-radius: $card-borderRadius;
     box-shadow: 0 6px 8px rgba($color-black, 0.02),
                 0 1px 20px rgba($color-black, 0.08),
                 0 3px 6px -1px rgba($color-black, 0.08);
-    border-radius: $card-borderRadius;
-    position: relative;
 }
 
-@mixin restaurantCard-tile {
-    display: block;
-    position: relative;
-    cursor: pointer;
-    padding: spacing(x2);
-    padding-top: spacing() * 3.5;
+.c-restaurantCard-innerContent {
+  position: relative;
 
-    .c-restaurantCard-img {
-        height: 228px;
-        width: 100%;
-        left: 0;
-        top: 0;
-        z-index: -1;
-        position: absolute;
-    }
-
-    .c-restaurantCard-content {
-        padding: spacing(x2);
-        @include card-frame;
-    }
-
-    .c-restaurantCard-logo {
-        left: 50%;
-        top: -25px;
-        transform: translateX(-50%);
-    }
-}
-
-.c-restaurantCard {
-    text-decoration: none;
-    display: flex;
-}
-
-.c-restaurantCard-logo {
-    border: 1px solid $logo-borderColor;
-    border-radius: $logo-borderRadius;
-    position: absolute;
-
-    .c-restaurantCard--listItem & {
-        top: 50%;
-        transform: translate(-130%, -50%);
+    .c-restaurantCard--listItem.c-restaurantCard--hasImg & {
+        @media only screen and (min-width: 600px){
+            min-height: 100px;
+            padding-left: 30%;
+        }
     }
 }
 
 .c-restaurantCard-img {
-    border-radius: $img-border-radius;
-    background-size: cover;
-    background-position: center;
+  height: 100px;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: -10px;
+  width: calc(100% + 20px);
+  transform: translateY(calc(-100% + 10px));
+  background-size: cover;
+  background-position: center;
+  border-radius: $img-borderRadius;
 
     .c-restaurantCard--listItem & {
-        display: block;
-        flex-basis: $img-width;
-    }
-}
-
-.c-restaurantCard-content {
-    padding: spacing(x0.5) spacing(x5);
-
-    .c-restaurantCard--listItem & {
-        flex: 1;
-        padding-left: spacing(x10);
-    }
-
-    .c-restaurantCard--hasImg & {
-        padding-left: spacing(x5);
-    }
-}
-
-.c-restaurantCard--listItem {
-    padding: spacing(x0.5);
-
-    @include media('>mid') {
-        @include card-frame;
-    }
-
-    @include media('<=mid') {
-        @include restaurantCard-tile;
-    }
-}
-
-.c-restaurantCard--tile {
-    @include restaurantCard-tile;
-}
-
-.c-restaurantCard--hasImg {
-    &.c-restaurantCard--listItem {
-        @include media('<=mid') {
-            padding-top: $tile-imgSpacing;
+        @media only screen and (min-width: 600px){
+          transform: none;
+          z-index: 1;
+          width: 30%;
+          height: 100%;
+          left: 0;
         }
     }
-
-    &.c-restaurantCard--tile {
-        padding-top: $tile-imgSpacing;
-    }
 }
+
 </style>
