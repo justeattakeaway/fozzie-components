@@ -51,6 +51,7 @@ export default {
 
     p {
         margin: 0;
+        @include font-size(body-s);
     }
 }
 
