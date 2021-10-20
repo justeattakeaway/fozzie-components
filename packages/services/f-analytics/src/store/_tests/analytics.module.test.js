@@ -26,7 +26,8 @@ describe('Analytics Module ::', () => {
 
     it('should create default state when initialised.', () => {
         // Assert
-        expect(analyticsModule.state()).toEqual(defaultState);
+        const actualState = analyticsModule.state();
+        expect(actualState).toEqual(defaultState);
     });
 
     describe('actions ::', () => {
@@ -86,8 +87,6 @@ describe('Analytics Module ::', () => {
                     name: 'test-name',
                     appType: 'test-appType',
                     applicationId: 9,
-                    userAgent: 'test-userAgent',
-                    branding: 'test-branding',
                     country: 'zu',
                     language: 'ze',
                     currency: 'zud'

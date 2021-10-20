@@ -5,6 +5,7 @@ const { getAccessibilityTestResults } = require('../../../../../../test/utils/ax
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
+let checkoutInfo;
 
 describe('Accessibility tests', () => {
     it('a11y - should test f-checkout component (delivery) WCAG compliance', () => {
@@ -52,7 +53,7 @@ describe('Accessibility tests', () => {
         checkout.withQuery('&knob-Service Type', 'Invalid URL')
             .withQuery('&knob-Is User Logged In', false);
 
-        checkout.load('error');
+        checkout.loadError();
         const axeResults = getAccessibilityTestResults('f-checkout-error-page');
 
         // Assert
@@ -111,27 +112,31 @@ describe('Accessibility tests', () => {
     });
 
     forEach([
-        ['collection', 'restaurant-not-taking-orders'],
-        ['collection', 'additional-items-required'],
-        ['collection', 'time-unavailable']
+        ['restaurant-not-taking-orders'],
+        ['additional-items-required'],
+        ['time-unavailable']
     ])
-    .it('a11y - Guest - "%s" - should have a correct tab order in patch checkout error - "%s"', (serviceType, patchError) => {
+    .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', serviceType)
-            .withQuery('&knob-Is User Logged In', false)
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
         checkout.load();
 
         // Act
-        checkout.setFieldValue('firstName', 'Jerry');
-        checkout.setFieldValue('lastName', 'Jazzman');
-        const addressInfo = {
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111'
         };
-        checkout.populateGuestCollectionCheckoutForm(addressInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -142,30 +147,34 @@ describe('Accessibility tests', () => {
     });
 
     forEach([
-        ['delivery', 'restaurant-not-taking-orders'],
-        ['delivery', 'additional-items-required'],
-        ['delivery', 'time-unavailable']
+        ['restaurant-not-taking-orders'],
+        ['additional-items-required'],
+        ['time-unavailable']
     ])
-    .it('a11y - Guest - "%s" - should have a correct tab order in patch checkout error - "%s"', (serviceType, patchError) => {
+    .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', serviceType)
-            .withQuery('&knob-Is User Logged In', false)
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
         checkout.load();
 
         // Act
-        checkout.setFieldValue('firstName', 'Jerry');
-        checkout.setFieldValue('lastName', 'Jazzman');
-        const addressInfo = {
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111',
             line1: '1 Bristol Road',
             locality: 'Bristol',
             postcode: 'BS1 1AA'
         };
-        checkout.populateGuestCheckoutForm(addressInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -176,28 +185,32 @@ describe('Accessibility tests', () => {
     });
 
     forEach([
-        ['dinein', 'restaurant-not-taking-orders'],
-        ['dinein', 'additional-items-required'],
-        ['dinein', 'time-unavailable']
+        ['restaurant-not-taking-orders'],
+        ['additional-items-required'],
+        ['time-unavailable']
     ])
-    .it('a11y - Guest - "%s" - should have a correct tab order in patch checkout error - "%s"', (serviceType, patchError) => {
+    .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', serviceType)
-            .withQuery('&knob-Is User Logged In', false)
+        checkoutInfo = {
+            serviceType: 'dinein',
+            isAuthenticated: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
         checkout.load();
 
         // Act
-        checkout.setFieldValue('firstName', 'Jerry');
-        checkout.setFieldValue('lastName', 'Jazzman');
-        const addressInfo = {
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111',
             tableIdentifier: '1'
         };
-        checkout.populateGuestDineInCheckoutForm(addressInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -210,20 +223,24 @@ describe('Accessibility tests', () => {
     it('a11y - Guest - Collection - should have a correct tab order in duplicate order error', () => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', false)
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
         checkout.load();
 
         // Act
-        checkout.setFieldValue('firstName', 'Jerry');
-        checkout.setFieldValue('lastName', 'Jazzman');
-        const addressInfo = {
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111'
         };
-        checkout.populateGuestCollectionCheckoutForm(addressInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -236,23 +253,27 @@ describe('Accessibility tests', () => {
     it('a11y - Guest - Delivery - should have a correct tab order in duplicate order error', () => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', false)
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
         checkout.load();
 
         // Act
-        checkout.setFieldValue('firstName', 'Jerry');
-        checkout.setFieldValue('lastName', 'Jazzman');
-        const addressInfo = {
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111',
             line1: '1 Bristol Road',
             locality: 'Bristol',
             postcode: 'BS1 1AA'
         };
-        checkout.populateGuestCheckoutForm(addressInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -265,21 +286,25 @@ describe('Accessibility tests', () => {
     it('a11y - Guest - Dine In - should have a correct tab order in duplicate order error', () => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'dinein')
-            .withQuery('&knob-Is User Logged In', false)
+        checkoutInfo = {
+            serviceType: 'dinein',
+            isAuthenticated: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
         checkout.load();
 
         // Act
-        checkout.setFieldValue('firstName', 'Jerry');
-        checkout.setFieldValue('lastName', 'Jazzman');
-        const addressInfo = {
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111',
             tableIdentifier: '1'
         };
-        checkout.populateGuestDineInCheckoutForm(addressInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];

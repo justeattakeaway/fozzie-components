@@ -66,52 +66,57 @@ commands:
           key: build-cache-molecules-{{ .Branch }}-{{ .Revision }}
           paths:
             - packages/tools/f-vue-icons/dist
-            - packages/components/molecules/f-user-message/dist
-            - packages/components/molecules/f-mega-modal/dist
-            - packages/components/molecules/f-skeleton-loader/dist
+            - packages/components/molecules/f-alert/dist
             - packages/components/molecules/f-breadcrumbs/dist
             - packages/components/molecules/f-media-element/dist
-            - packages/components/molecules/f-alert/dist
+            - packages/components/molecules/f-mega-modal/dist
+            - packages/components/molecules/f-restaurant-card/dist
             - packages/components/molecules/f-searchbox/dist
+            - packages/components/molecules/f-skeleton-loader/dist
             - packages/components/molecules/f-tabs/dist
+            - packages/components/molecules/f-user-message/dist
+            - packages/components/molecules/f-navigation-links/dist
+
       - save_cache:
           name: Cache for atoms
           key: build-cache-atoms-{{ .Branch }}-{{ .Revision }}
           paths:
-            - packages/components/atoms/f-popover/dist
-            - packages/components/atoms/f-link/dist
+            - packages/components/atoms/f-button/dist
+            - packages/components/atoms/f-card/dist
             - packages/components/atoms/f-error-message/dist
             - packages/components/atoms/f-form-field/dist
-            - packages/components/atoms/f-card/dist
-            - packages/components/atoms/f-button/dist
+            - packages/components/atoms/f-link/dist
+            - packages/components/atoms/f-popover/dist
 
       - save_cache:
           name: Cache for organisms
           key: build-cache-organisms-{{ .Branch }}-{{ .Revision }}
           paths:
-            - packages/components/organisms/f-takeawaypay-activation/dist
+            - packages/components/organisms/f-checkout/dist
+            - packages/components/organisms/f-contact-preferences/dist
+            - packages/components/organisms/f-content-cards/dist
             - packages/components/organisms/f-cookie-banner/dist
             - packages/components/organisms/f-footer/dist
-            - packages/components/organisms/f-checkout/dist
+            - packages/components/organisms/f-header/dist
+            - packages/components/organisms/f-loyalty/dist
             - packages/components/organisms/f-offers/dist
             - packages/components/organisms/f-registration/dist
-            - packages/components/organisms/f-loyalty/dist
-            - packages/components/organisms/f-header/dist
-            - packages/components/organisms/f-content-cards/dist
             - packages/components/organisms/f-status-banner/dist
+            - packages/components/organisms/f-takeawaypay-activation/dist
 
       - save_cache:
           name: Cache for services
           key: build-cache-services-{{ .Branch }}-{{ .Revision }}
           paths:
-            - packages/services/f-statistics/dist
-            - packages/services/f-feature-management/dist
-            - packages/services/f-http/dist
-            - packages/services/f-globalisation/dist
+            - packages/services/f-analytics/dist
             - packages/services/f-consumer-oidc/dist
             - packages/services/f-development-context/dist
-            - packages/services/f-analytics/dist
+            - packages/services/f-feature-management/dist
+            - packages/services/f-globalisation/dist
+            - packages/services/f-http/dist
             - packages/services/f-services/dist
+            - packages/services/f-statistics/dist
+            - packages/services/f-compatibility/dist
 
   restore_cache_dist_directories:
     description: Restores all the dist dircetories
@@ -181,7 +186,7 @@ commands:
     description: Locally lints all packages in the monorepo
     steps:
       - run_command:
-          command_description: Run liniting for packages
+          command_description: Run linting for packages
           command_name: "lint"
 
   unit_integration_tests:
@@ -221,9 +226,22 @@ commands:
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
     steps:
-      - run_command:
-          command_description: Run Percy visual regression tests for packages
-          command_name: "test:visual"
+      - run:
+          name: Run Percy visual regression tests for packages
+          command: |
+            VISUAL_TESTS=`node ./visual-regression-preflight.js`
+
+            if [ "${VISUAL_TESTS}" == "true" ];
+            then
+              if [ "${RUN_ALL}" == "true" ];
+              then
+                yarn test:visual
+              else
+                yarn test:visual --since master...HEAD
+              fi
+            else
+              echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
+            fi
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
@@ -367,6 +385,9 @@ jobs:
           name: Run PR Checks
           command: yarn danger ci
       - build_packages
+      - run:
+          name: Run Bundlewatch checks
+          command: yarn bundlewatch
       - lint_packages
       - slack_notify_fail
       - slack_notify_success
@@ -382,9 +403,6 @@ jobs:
       - restore_node_modules_cache
       - install_node_dependencies
       - restore_cache_dist_directories
-      - run:
-          name: Run Bundlewatch checks
-          command: yarn bundlewatch
       - unit_integration_tests
       - slack_notify_fail
       - slack_notify_success

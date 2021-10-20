@@ -3,12 +3,17 @@ import forEach from 'mocha-each';
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
+let checkoutInfo;
 
 describe('f-checkout component tests - @browserstack', () => {
     beforeEach(() => {
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', true);
 
         checkout.load();
@@ -16,18 +21,13 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it.skip('should submit the checkout form', () => {
         // Arrange
-        const addressInfo = {
-            mobileNumber: '07777777779',
-            line1: 'Test House',
-            line2: 'High Street',
-            locality: 'Test Locality',
-            postcode: 'AR51 1AA',
-            note: 'Doorbell is broken'
+        const customerInfo = {
+            note: 'Doorbell is broken',
+            orderTime: 'Wednesday 00:30'
         };
 
         // Act
-        checkout.populateCheckoutForm(addressInfo);
-        checkout.selectOrderTime('Wednesday 00:30');
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -44,7 +44,7 @@ describe('f-checkout component tests - @browserstack', () => {
     ])
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
             // Arrange
-            checkout.clearCheckoutForm(field);
+            checkout.clearCheckoutField(field);
             const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
             // Act
@@ -56,18 +56,12 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it.skip('should enable a user to submit without adding a note', () => {
         // Arrange
-        const addressInfo = {
-            mobileNumber: '07777777779',
-            line1: 'Test House',
-            line2: 'High Street',
-            locality: 'Test Locality',
-            postcode: 'AR51 1AA',
-            note: ''
+        const customerInfo = {
+            orderTime: 'Wednesday 00:30'
         };
 
         // Act
-        checkout.populateCheckoutForm(addressInfo);
-        checkout.selectOrderTime('Wednesday 00:30');
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert

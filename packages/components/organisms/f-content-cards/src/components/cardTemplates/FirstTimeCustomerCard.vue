@@ -58,7 +58,7 @@ $banner-bgColour-legacy : #cd381f;
     background: $banner-bgColour;
     padding: 0 spacing();
     margin: spacing(x2) 0 spacing() 0;
-    border-radius: $border-radius;
+    border-radius: $radius-rounded-c;
 }
 
 .c-restaurantCard-banner-content {

@@ -4,6 +4,35 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (to be added to next release)
+------------------------------
+*October 13, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v1.3.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-searchbox` and `f-mega-modal` to be inline with icing phase 2.
+
+
+v1.2.0
+------------------------------
+*September 21, 2021*
+
+### Added
+- Added logging in prep for adding page to coreweb
+
+### Changed
+- Updated tenant files
+- Update to modal voucher code pop up to add f-button
+- Update image urls
+
+
 v1.1.0
 ------------------------------
 *September 16, 2021*

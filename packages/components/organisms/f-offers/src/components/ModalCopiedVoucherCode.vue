@@ -5,31 +5,30 @@
         is-narrow
         :data-test-id="testIds.modal"
         @close="close">
-        <h3>{{ $t('offersInbox.voucherCodeModal.title') }}</h3>
-        <p v-html="$t('offersInbox.voucherCodeModal.body')" />
-        <a
+        <h3>{{ $t('authenticated.voucherCodeModal.title') }}</h3>
+        <p v-html="$t('authenticated.voucherCodeModal.body')" />
+        <f-button
             v-if="hasLink"
             :href="url"
-            :data-test-id="testIds.confirm"
-            class="o-btn o-btn--primary o-btn--block o-btn--rounded">
-            {{ $t('offersInbox.voucherCodeModal.confirmButton') }}
-        </a>
-        <button
-            type="button"
-            class="o-btn o-btn--tertiary o-btn--block"
+            :data-test-id="testIds.confirm">
+            {{ $t('authenticated.voucherCodeModal.confirmButton') }}
+        </f-button>
+        <f-button
             :data-test-id="testIds.dismiss"
             @click="close">
-            {{ $t('offersInbox.voucherCodeModal.dismissButton') }}
-        </button>
+            {{ $t('authenticated.voucherCodeModal.dismissButton') }}
+        </f-button>
     </mega-modal>
 </template>
 
 <script>
 import MegaModal from '@justeat/f-mega-modal';
+import FButton from '@justeat/f-button';
 
 export default {
     components: {
-        MegaModal
+        MegaModal,
+        FButton
     },
 
     props: {

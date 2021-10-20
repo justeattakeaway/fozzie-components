@@ -9,7 +9,7 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'invalid-url');
 
         // Act
-        checkout.load('error');
+        checkout.loadError();
     });
 
     it('should display the error page component', () => {

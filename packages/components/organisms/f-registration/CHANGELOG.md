@@ -4,6 +4,43 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.3
+------------------------------
+*October 18, 2021*
+
+### Changed
+- Updated version of `f-form-field`.
+
+
+v2.0.2
+------------------------------
+*October 15, 2021*
+
+Republish to fix a bad previous publish.
+
+
+v2.0.1
+------------------------------
+*October 14, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v2.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-card`, `f-link` and `f-form-field` to include icing phase 2 changes.
+
+### Removed
+- `is-rounded` prop from `f-card` component call as the card is now rounded by default.
+
+### Added
+- `is-distinct` prop for f-link component call to make links blue.
+
+
 v1.1.0
 ------------------------------
 *September 16, 2021*

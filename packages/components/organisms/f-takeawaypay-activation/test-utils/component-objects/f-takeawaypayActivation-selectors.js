@@ -1,1 +1,10 @@
-export const COMPONENT = '[data-test-id="takeawaypay-activation-component"]';
+exports.TAKEAWAYPAYACTIVATION_COMPONENT = '[data-test-id="takeawaypay-activation-component"]';
+exports.LOGGEDIN_COMPONENT = '[data-test-id="activation-logged-in-component"]';
+exports.ERROR_COMPONENT = '[data-test-id="activation-failed-component"]';
+exports.ACTIVATION_SUCCESS_COMPONENT = '[data-test-id="activation-successful-component"]';
+exports.ACTIVATE_TAKEAWAYPAY_BUTTON = '[data-test-id="takeawaypay-activation-activate-button"]';
+exports.UNAUTHENTICATED_LOGIN_BUTTON = '[data-test-id="takeawaypay-activation-not-loggedin-login-link"]';
+exports.UNAUTHENTICATED_REGISTER_BUTTON = '[data-test-id="takeawaypay-activation-not-loggedin-registration-link"]';
+exports.AUTHENTICATED_LOGIN_BUTTON = '[data-test-id="takeawaypay-activation-loggedin-login-link"]';
+exports.AUTHENTICATED_REGISTER_BUTTON = '[data-test-id="takeawaypay-activation-loggedin-registration-link"]';
+exports.START_ORDERING_BUTTON = '[data-test-id="takeawaypay-activation-home-link"]';

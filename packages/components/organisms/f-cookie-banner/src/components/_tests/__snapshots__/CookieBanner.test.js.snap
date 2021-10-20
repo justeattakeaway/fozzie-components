@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CookieBanner methods cookieName \`nameSuffix\` is not provided should return the default consent cookie name 1`] = `"je-cookieConsent"`;
+
+exports[`CookieBanner methods cookieName \`nameSuffix\` is provided should return the default consent cookie name with the suffix 1`] = `"je-cookieConsent-suffixed"`;
