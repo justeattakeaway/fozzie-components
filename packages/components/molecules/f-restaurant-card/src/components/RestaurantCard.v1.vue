@@ -4,7 +4,7 @@
         :class="[
             $style['c-restaurantCard'],
             $style[displayModeModifier],
-            { [$style['c-restaurantCard--with-img']]: !!imgUrl }]"
+            { [$style['c-restaurantCard--hasImg']]: !!imgUrl }]"
         data-test-id="restaurantCard-component"
         @click="$emit('restaurant-card-clicked')">
 
