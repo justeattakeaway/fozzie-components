@@ -12,7 +12,7 @@ v0.3.0
 
 ### Updated
 - Component HTML to use new classes, attributes and fewer elements
-- Storybook args updated to usenew component props contract
+- Storybook args updated to use new component props contract
 
 v0.2.0
 ------------------------------
