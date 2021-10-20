@@ -96,7 +96,7 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            createGuestUrl: mockedRequests.createGuest.url,
+            createGuestUser: mockedRequests.createGuest.url,
             getAddressUrl: mockedRequests.getAddress.url,
             loginUrl: '/login',
             paymentPageUrlPrefix,
@@ -177,7 +177,7 @@ export const CheckoutComponent = () => ({
             return this.placeOrderError ? `/place-order-${this.placeOrderError}.json` : mockedRequests.placeOrder.url;
         },
 
-        checkoutAvailableFulfilmentUrl () {
+        getAvailableFulfilmentUrl () {
             if (this.getCheckoutError === noTimeAvailable) {
                 return mockedRequests.checkoutAvailableFulfilmentNoTimeAvailable.url;
             }
@@ -202,8 +202,8 @@ export const CheckoutComponent = () => ({
     template: '<vue-checkout ' +
         ':getCheckoutUrl="getCheckoutUrl" ' +
         ':updateCheckoutUrl="updateCheckoutUrl" ' +
-        ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
-        ':create-guest-url="createGuestUrl" ' +
+        ':get-available-fulfilment-url="getAvailableFulfilmentUrl" ' +
+        ':create-guest-user-url="createGuestUser" ' +
         ':get-basket-url="getBasketUrl" ' +
         ':authToken="authToken" ' +
         ':otacToAuthExchanger="otacToAuthExchanger"' +
@@ -216,7 +216,7 @@ export const CheckoutComponent = () => ({
         ':getGeoLocationUrl="getGeoLocationUrl" ' +
         ':getCustomerUrl="getCustomerUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${getAvailableFulfilmentUrl},${authToken},${createGuestUser},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

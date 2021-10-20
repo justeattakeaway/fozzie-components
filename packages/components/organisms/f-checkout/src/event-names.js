@@ -1,48 +1,48 @@
 const CheckoutSuccess = 'checkout-payment-success';
 const CheckoutFailure = 'checkout-payment-failure';
-const CheckoutGetSuccess = 'checkout-get-success';
-const CheckoutGetFailure = 'checkout-get-failure';
-const CheckoutAvailableFulfilmentGetSuccess = 'checkout-available-fulfilment-get-success';
-const CheckoutAvailableFulfilmentGetFailure = 'checkout-available-fulfilment-get-failure';
+const GetCheckoutSuccess = 'checkout-get-success';
+const GetCheckoutFailure = 'checkout-get-failure';
+const GetAvailableFulfilmentSuccess = 'checkout-available-fulfilment-get-success';
+const GetAvailableFulfilmentFailure = 'checkout-available-fulfilment-get-failure';
 const CheckoutVisitLoginPage = 'checkout-visit-login-page';
-const CheckoutBasketGetSuccess = 'checkout-basket-get-success';
-const CheckoutBasketGetFailure = 'checkout-basket-get-failure';
-const CheckoutSetupGuestSuccess = 'checkout-setup-guest-success';
-const CheckoutSetupGuestFailure = 'checkout-setup-guest-failure';
+const GetBasketSuccess = 'checkout-basket-get-success';
+const GetBasketFailure = 'checkout-basket-get-failure';
+const CreateGuestUserSuccess = 'checkout-setup-guest-success';
+const CreateGuestUserFailure = 'checkout-setup-guest-failure';
 const CheckoutValidationError = 'checkout-validation-error';
-const CheckoutAddressGetSuccess = 'checkout-address-get-success';
-const CheckoutAddressGetFailure = 'checkout-address-get-failure';
+const GetAddressSuccess = 'checkout-address-get-success';
+const GetAddressFailure = 'checkout-address-get-failure';
 const CheckoutPlaceOrderSuccess = 'checkout-place-order-success';
 const CheckoutPlaceOrderFailure = 'checkout-place-order-failure';
 const CheckoutUpdateSuccess = 'checkout-update-success';
 const CheckoutUpdateFailure = 'checkout-update-failure';
 const CheckoutNonFulfillableError = 'checkout-update-failure';
-const CheckoutCustomerGetSuccess = 'checkout-customer-get-success';
-const CheckoutCustomerGetFailure = 'checkout-customer-get-failure';
+const GetCustomerSuccess = 'checkout-customer-get-success';
+const GetCustomerFailure = 'checkout-customer-get-failure';
 const CheckoutMounted = 'checkout-mounted';
 const CheckoutVerifyAge = 'checkout-verify-age';
 
 export default {
     CheckoutSuccess,
     CheckoutFailure,
-    CheckoutGetSuccess,
-    CheckoutGetFailure,
-    CheckoutAvailableFulfilmentGetSuccess,
-    CheckoutAvailableFulfilmentGetFailure,
+    GetCheckoutSuccess,
+    GetCheckoutFailure,
+    GetAvailableFulfilmentSuccess,
+    GetAvailableFulfilmentFailure,
     CheckoutVisitLoginPage,
-    CheckoutBasketGetSuccess,
-    CheckoutBasketGetFailure,
-    CheckoutSetupGuestSuccess,
-    CheckoutSetupGuestFailure,
+    GetBasketSuccess,
+    GetBasketFailure,
+    CreateGuestUserSuccess,
+    CreateGuestUserFailure,
     CheckoutValidationError,
-    CheckoutAddressGetSuccess,
-    CheckoutAddressGetFailure,
+    GetAddressSuccess,
+    GetAddressFailure,
     CheckoutPlaceOrderSuccess,
     CheckoutPlaceOrderFailure,
     CheckoutUpdateSuccess,
     CheckoutUpdateFailure,
-    CheckoutCustomerGetSuccess,
-    CheckoutCustomerGetFailure,
+    GetCustomerSuccess,
+    GetCustomerFailure,
     CheckoutMounted,
     CheckoutVerifyAge,
     CheckoutNonFulfillableError

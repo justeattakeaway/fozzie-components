@@ -9,11 +9,11 @@ export default {
         logMethod: 'logError',
         hasEventData: true
     },
-    CheckoutAddressGetFailure: {
+    GetAddressFailure: {
         logMessage: 'Get Checkout Address Failure',
         logMethod: 'logWarn'
     },
-    CheckoutCustomerGetFailure: {
+    GetCustomerFailure: {
         logMessage: 'Get Checkout Customer Failure',
         logMethod: 'logWarn'
     },
@@ -25,7 +25,7 @@ export default {
         logMessage: 'Checkout Validation Error',
         logMethod: 'logWarn'
     },
-    CheckoutSetupGuestFailure: {
+    CreateGuestUserFailure: {
         logMessage: 'Checkout Setup Guest Failure',
         logMethod: 'logError',
         hasEventData: true
@@ -69,11 +69,11 @@ export default {
         logMessage: 'Get Checkout Failure: Access Forbidden',
         logMethod: 'logWarn'
     },
-    CheckoutAvailableFulfilmentGetFailure: {
+    GetAvailableFulfilmentFailure: {
         logMessage: 'Get Checkout Available Fulfilment Times Failure',
         logMethod: 'logError'
     },
-    CheckoutBasketGetFailure: {
+    GetBasketFailure: {
         logMessage: 'Get Basket Failure',
         logMethod: 'logError'
     }

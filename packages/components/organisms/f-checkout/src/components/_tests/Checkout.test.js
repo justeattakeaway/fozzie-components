@@ -3137,7 +3137,7 @@ describe('Checkout', () => {
                     await wrapper.vm.loadAddress();
 
                     // Assert
-                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutAddressGetFailure', error);
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('GetAddressFailure', error);
                 });
             });
 
@@ -3158,7 +3158,7 @@ describe('Checkout', () => {
                     await wrapper.vm.loadAddress();
 
                     // Assert
-                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutAddressGetSuccess');
+                    expect(handleEventLoggingSpy).toHaveBeenCalledWith('GetAddressSuccess');
                 });
             });
         });

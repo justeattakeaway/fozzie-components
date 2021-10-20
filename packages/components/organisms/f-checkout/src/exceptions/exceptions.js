@@ -14,7 +14,7 @@ class CreateGuestUserError extends Error {
     constructor (message) {
         super(message);
         this.messageKey = 'errorMessages.guestUserCreationFailure';
-        this.eventMessage = 'CheckoutSetupGuestFailure';
+        this.eventMessage = 'CreateGuestUserFailure';
         this.shouldShowInDialog = false;
     }
 }
@@ -72,11 +72,11 @@ class GetCheckoutAccessForbiddenError extends GetCheckoutError {
     }
 }
 
-class AvailableFulfilmentGetError extends Error {
+class GetAvailableFulfilmentError extends Error {
     constructor (message, errorCode) {
         super(message);
         this.messageKey = 'errorMessages.pageLoad.description';
-        this.eventMessage = 'CheckoutAvailableFulfilmentGetFailure';
+        this.eventMessage = 'GetAvailableFulfilmentFailure';
         this.errorCode = errorCode;
         this.shouldShowInDialog = false;
         this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.default;
@@ -87,7 +87,7 @@ class GetBasketError extends Error {
     constructor (message, errorCode) {
         super(message);
         this.messageKey = 'errorMessages.pageLoad.description';
-        this.eventMessage = 'CheckoutBasketGetFailure';
+        this.eventMessage = 'GetBasketFailure';
         this.errorCode = errorCode;
         this.shouldShowInDialog = false;
         this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.default;
@@ -101,6 +101,6 @@ export default {
     UpdateCheckoutAccessForbiddenError,
     GetCheckoutError,
     GetCheckoutAccessForbiddenError,
-    AvailableFulfilmentGetError,
+    GetAvailableFulfilmentError,
     GetBasketError
 };

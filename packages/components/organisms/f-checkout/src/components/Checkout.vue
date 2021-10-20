@@ -125,8 +125,7 @@
                         is-full-width
                         action-type="submit"
                         data-test-id="confirm-payment-submit-button"
-                        :is-loading="isFormSubmitting"
-                    >
+                        :is-loading="isFormSubmitting">
                         {{ $t('buttonText') }}
                     </f-button>
                 </form>
@@ -192,6 +191,7 @@ import {
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
+import apiMixin from '../mixins/api.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
 import tenantConfigs from '../tenants';
@@ -206,7 +206,7 @@ const {
     PlaceOrderError,
     GetCheckoutError,
     GetCheckoutAccessForbiddenError,
-    AvailableFulfilmentGetError,
+    GetAvailableFulfilmentError,
     GetBasketError
 } = exceptions;
 
@@ -233,7 +233,8 @@ export default {
         validationMixin,
         VueGlobalisationMixin,
         checkoutValidationsMixin,
-        loggerMixin
+        loggerMixin,
+        apiMixin
     ],
 
     props: {
@@ -242,12 +243,12 @@ export default {
             required: true
         },
 
-        checkoutAvailableFulfilmentUrl: {
+        getAvailableFulfilmentUrl: {
             type: String,
             required: true
         },
 
-        createGuestUrl: {
+        createGuestUserUrl: {
             type: String,
             required: true
         },
@@ -544,13 +545,7 @@ export default {
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'createGuestUser',
-            'getAvailableFulfilment',
-            'getAddress',
-            'getCustomer',
             'getCustomerName',
-            'getBasket',
-            'getCheckout',
             'getGeoLocation',
             'placeOrder',
             'setAuthToken',
@@ -762,22 +757,7 @@ export default {
          */
         async setupGuestUser () {
             try {
-                const createGuestData = {
-                    emailAddress: this.customer.email,
-                    firstName: this.customer.firstName,
-                    lastName: this.customer.lastName,
-                    registrationSource: 'Guest'
-                };
-
-                await this.createGuestUser({
-                    url: this.createGuestUrl,
-                    tenant: this.tenant,
-                    data: createGuestData,
-                    timeout: this.checkoutTimeout,
-                    otacToAuthExchanger: this.otacToAuthExchanger
-                });
-
-                this.handleEventLogging('CheckoutSetupGuestSuccess');
+                await this.handleApiCall('createGuestUser');
             } catch (e) {
                 throw new CreateGuestUserError(e.message);
             }
@@ -789,12 +769,7 @@ export default {
          */
         async loadCheckout () {
             try {
-                await this.getCheckout({
-                    url: this.getCheckoutUrl,
-                    timeout: this.checkoutTimeout
-                });
-
-                this.handleEventLogging('CheckoutGetSuccess');
+                await this.handleApiCall('getCheckout');
             } catch (error) {
                 if (error?.response?.status === 403) {
                     this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message));
@@ -810,14 +785,7 @@ export default {
          */
         async loadBasket () {
             try {
-                await this.getBasket({
-                    url: this.getBasketUrl,
-                    tenant: this.tenant,
-                    language: this.$i18n.locale,
-                    timeout: this.checkoutTimeout
-                });
-
-                this.handleEventLogging('CheckoutBasketGetSuccess');
+                await this.handleApiCall('getBasket');
             } catch (error) {
                 this.handleErrorState(new GetBasketError(error.message, error?.response?.status));
             }
@@ -829,18 +797,13 @@ export default {
          */
         async loadAvailableFulfilment () {
             try {
-                await this.getAvailableFulfilment({
-                    url: this.checkoutAvailableFulfilmentUrl,
-                    timeout: this.checkoutTimeout
-                });
+                await this.handleApiCall('getAvailableFulfilment');
 
                 if (!this.availableFulfilment.times.length) {
                     this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable;
                 }
-
-                this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
             } catch (error) {
-                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
+                this.handleErrorState(new GetAvailableFulfilmentError(error.message, error.response.status));
             }
         },
 
@@ -850,17 +813,9 @@ export default {
          */
         async loadAddress () {
             try {
-                await this.getAddress({
-                    url: this.getAddressUrl,
-                    tenant: this.tenant,
-                    language: this.$i18n.locale,
-                    timeout: this.checkoutTimeout,
-                    currentPostcode: this.$cookies.get('je-location')
-                });
-
-                this.handleEventLogging('CheckoutAddressGetSuccess');
+                await this.handleApiCall('getAddress');
             } catch (error) {
-                this.handleEventLogging('CheckoutAddressGetFailure', error);
+                this.handleEventLogging('GetAddressFailure', error);
             }
         },
 
@@ -870,13 +825,9 @@ export default {
          */
         async loadCustomer () {
             try {
-                await this.getCustomer({
-                    url: this.getCustomerUrl,
-                    timeout: this.checkoutTimeout
-                });
-                this.handleEventLogging('CheckoutCustomerGetSuccess');
+                await this.handleApiCall('getCustomer');
             } catch (error) {
-                this.handleEventLogging('CheckoutCustomerGetFailure');
+                this.handleEventLogging('GetCustomerFailure');
             }
         },
 
