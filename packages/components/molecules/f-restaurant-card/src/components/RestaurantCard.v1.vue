@@ -136,7 +136,9 @@ $logo-borderColor                         : $color-border-default;
 @mixin card-frame {
     z-index: 1;
     background: $card-bgColor;
-    box-shadow: 0 6px 8px rgba($color-black, 0.02), 0 1px 20px rgba($color-black, 0.08), 0 3px 6px -1px rgba($color-black, 0.08);
+    box-shadow: 0 6px 8px rgba($color-black, 0.02),
+                0 1px 20px rgba($color-black, 0.08),
+                0 3px 6px -1px rgba($color-black, 0.08);
     border-radius: $card-borderRadius;
     position: relative;
 }
