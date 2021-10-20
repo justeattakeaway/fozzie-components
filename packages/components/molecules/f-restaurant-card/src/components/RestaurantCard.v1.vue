@@ -34,18 +34,30 @@
 
             <!-- Cuisines -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="cuisines" />
+            <component
+                :is="errorBoundary"
+                tier="2">
+                <slot name="cuisines" />
+            </component>
             <!-- END ERROR BOUNDARY -->
 
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="new-label" />
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="new-label" />
+            </component>
             <!-- END ERROR BOUNDARY -->
 
             <!-- Ratings -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="ratings" />
+            <component
+                :is="errorBoundary"
+                tier="2">
+                <slot name="ratings" />
+            </component>
             <!-- END ERROR BOUNDARY -->
 
             <!-- Offline Icon -->
@@ -105,6 +117,10 @@ export default {
         flags: {
             type: Object,
             default: () => ({})
+        },
+        errorBoundary: {
+            type: [Object, String],
+            default: 'div'
         }
     }
 };

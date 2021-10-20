@@ -2,7 +2,8 @@
     <component
         :is="componentVersion"
         v-bind="data"
-        :flags="flags">
+        :flags="flags"
+        :error-boundary="wrapper">
         <template
             v-for="(_, slotName) in $slots"
             v-slot:[slotName]>
@@ -31,6 +32,11 @@ export default {
         version: {
             type: String,
             default: 'v1'
+        },
+        // item wrapper
+        wrapper: {
+            type: [Object, String],
+            default: 'div'
         }
     },
     computed: {
