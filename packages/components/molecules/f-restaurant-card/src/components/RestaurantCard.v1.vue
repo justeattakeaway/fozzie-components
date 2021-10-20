@@ -112,7 +112,7 @@ $logo-borderColor                         : $color-border-default;
   padding-top: 20px;
 
   &.c-restaurantCard--hasImg {
-      padding-top: 90px;
+      padding-top: 140px;
   }
 
   &.c-restaurantCard--listItem {
@@ -148,7 +148,7 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard-img {
-  height: 100px;
+  height: 150px;
   position: absolute;
   z-index: -1;
   top: 0;
