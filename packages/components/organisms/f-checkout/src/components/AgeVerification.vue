@@ -179,7 +179,6 @@ export default {
 
             if (this.isValidAge) {
                 this.updateDateOfBirth(this.userDateOfBirth);
-                this.$emit(EventNames.CheckoutVerifyAge);
             } else {
                 this.$nextTick(() => {
                     this.$refs.AgeVerificationError.$el.focus();

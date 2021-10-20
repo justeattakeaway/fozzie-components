@@ -1,4 +1,5 @@
 // Checkout module
+export const CLEAR_DOB_ERROR = 'CLEAR_DOB_ERROR';
 export const UPDATE_ADDRESS = 'UPDATE_LOCAL_STORAGE_ADDRESS';
 export const UPDATE_AUTH = 'UPDATE_AUTH';
 export const UPDATE_AUTH_GUEST = 'UPDATE_AUTH_GUEST';

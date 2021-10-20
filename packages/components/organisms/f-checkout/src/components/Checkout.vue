@@ -17,8 +17,7 @@
         </div>
 
         <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
+            v-else-if="shouldShowAgeVerificationForm" />
 
         <div
             v-else-if="shouldShowCheckoutForm"
@@ -699,16 +698,6 @@ export default {
         },
 
         /**
-         * Call update checkout with only the user's DOB for age verification
-         * This is to avoid creating too many side effects with the original mapper for update checkout
-         */
-        async verifyCustomerAge () {
-            const data = this.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
-
-            await this.handleUpdateCheckout(data);
-        },
-
-        /**
          * Place the order, emit the expected events, and throw a new PlaceOrderError if the process fails.
          */
         async submitOrder () {
@@ -1109,10 +1098,11 @@ export default {
 
         getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
             const { ageVerificationOnly } = options;
-            return ageVerificationOnly ?
-                mapUpdateCheckoutRequestForAgeVerification({
+            return ageVerificationOnly
+                ? mapUpdateCheckoutRequestForAgeVerification({
                     customer: this.customer
-                }) : mapUpdateCheckoutRequest({
+                })
+                : mapUpdateCheckoutRequest({
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
