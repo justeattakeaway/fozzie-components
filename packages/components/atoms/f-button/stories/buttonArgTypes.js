@@ -25,4 +25,4 @@ export default {
         description: 'Should be presented for the button to become a link <a> element',
         defaultValue: ''
     }
-}
+};
