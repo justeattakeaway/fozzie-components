@@ -110,6 +110,8 @@ $logo-borderColor                         : $color-border-default;
   z-index: 2;
   margin: 0 10px;
   padding-top: 20px;
+  padding-left: spacing();
+  padding-right: spacing();
 
   &.c-restaurantCard--hasImg {
       padding-top: 140px;
@@ -118,16 +120,25 @@ $logo-borderColor                         : $color-border-default;
   &.c-restaurantCard--listItem {
       @media only screen and (min-width: 600px){
         padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
       }
   }
 }
 
 .c-restaurantCard-content {
     background: white;
+    padding: spacing();
     border-radius: $card-borderRadius;
     box-shadow: 0 6px 8px rgba($color-black, 0.02),
                 0 1px 20px rgba($color-black, 0.08),
                 0 3px 6px -1px rgba($color-black, 0.08);
+
+    .c-restaurantCard--listItem & {
+        @media only screen and (min-width: 600px){
+            padding: spacing() / 2;
+        }
+    }
 }
 
 .c-restaurantCard-innerContent {
@@ -148,13 +159,13 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard-img {
-  height: 150px;
+  height: 200px;
   position: absolute;
   z-index: -1;
   top: 0;
-  left: -10px;
-  width: calc(100% + 20px);
-  transform: translateY(calc(-100% + 10px));
+  left: -20px;
+  width: calc(100% + 40px);
+  transform: translateY(calc(-80% + 10px));
   background-size: cover;
   background-position: center;
   border-radius: $img-borderRadius;
@@ -185,9 +196,7 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard-data {
-    .c-restaurantCard--hasImg & {
-        padding-top: 40px;
-    }
+    padding-top: 40px;
 
     .c-restaurantCard--listItem & {
         @media only screen and (min-width: 600px) {
