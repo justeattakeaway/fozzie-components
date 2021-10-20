@@ -201,4 +201,11 @@ $logo-borderColor                         : $color-border-default;
         }
     }
 }
+
+.c-restaurantCard-optionalItem {
+    border: 2px dashed green;
+    background-color: lightgreen;
+    padding: 1rem;
+    border-radius: 6px;
+}
 </style>
