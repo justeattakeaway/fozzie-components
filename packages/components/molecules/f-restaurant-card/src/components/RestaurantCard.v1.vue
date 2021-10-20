@@ -36,7 +36,7 @@
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
-                tier="2">
+                tier="3">
                 <slot name="cuisines" />
             </component>
             <!-- END ERROR BOUNDARY -->
@@ -55,7 +55,7 @@
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
-                tier="2">
+                tier="3">
                 <slot name="ratings" />
             </component>
             <!-- END ERROR BOUNDARY -->
