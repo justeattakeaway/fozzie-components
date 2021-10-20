@@ -227,13 +227,15 @@ $logo-borderColor                         : $color-border-default;
     @include restaurantCard-tile;
 }
 
-.c-restaurantCard--list-item.c-restaurantCard--with-img {
-    @include media('<=mid') {
+.c-restaurantCard--hasImg {
+    &.c-restaurantCard--listItem {
+        @include media('<=mid') {
+            padding-top: $tile-imgSpacing;
+        }
+    }
+
+    &.c-restaurantCard--tile {
         padding-top: $tile-imgSpacing;
     }
-}
-
-.c-restaurantCard--tile.c-restaurantCard--with-img {
-    padding-top: $tile-imgSpacing;
 }
 </style>
