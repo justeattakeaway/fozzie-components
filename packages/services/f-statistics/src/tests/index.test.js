@@ -2,19 +2,19 @@
 import StatisticsClient from '../index';
 
 describe('f-statistics', () => {
+    const basePayload = {
+        je_feature: 'f-statistics',
+        je_logType: 'client-stats',
+        je_environment: 'test',
+        je_feature_for: 'Generic Front End'
+    };
+
     it('should be defined', () => {
         // Arrange, Act & Assert
         expect(StatisticsClient).toBeDefined();
     });
 
     describe('constructor ::', () => {
-        const basePayload = {
-            je_feature: 'f-statistics',
-            je_logType: 'client-stats',
-            je_environment: 'test',
-            je_feature_for: 'Generic Front End'
-        };
-
         it('should expose base payload when none is provided', () => {
             // Arrange
             const expectedPayload = {
@@ -86,10 +86,7 @@ describe('f-statistics', () => {
             const statisticsClient = new StatisticsClient(justLogMock, null, null);
 
             const expectedPayload = {
-                je_environment: 'test',
-                je_feature: 'f-statistics',
-                je_feature_for: 'Generic Front End',
-                je_logType: 'client-stats',
+                ...basePayload,
                 testValue: 'A test value'
             };
 
@@ -105,10 +102,7 @@ describe('f-statistics', () => {
             const statisticsClient = new StatisticsClient(justLogMock, null, { a_base_payload_property: 'This is a test' });
 
             const expectedPayload = {
-                je_environment: 'test',
-                je_feature: 'f-statistics',
-                je_feature_for: 'Generic Front End',
-                je_logType: 'client-stats',
+                ...basePayload,
                 a_base_payload_property: 'This is a test'
             };
 
