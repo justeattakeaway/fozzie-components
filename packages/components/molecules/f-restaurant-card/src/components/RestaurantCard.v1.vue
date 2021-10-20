@@ -8,42 +8,84 @@
         data-test-id="restaurantCard-component"
         @click="$emit('restaurant-card-clicked')">
 
-        <div :class="[$style['c-restaurantCard-content']]">
-            <div :class="[$style['c-restaurantCard-innerContent']]">
-                <!-- background image -->
-                <div
-                    v-if="!!imgUrl"
-                    :class="[$style['c-restaurantCard-img']]"
-                    :style="`background-image: url(${imgUrl});`"
-                    role="img" />
+        <!-- background image -->
+        <!-- TODO: agree with design what should happen when the image is missing.
+        Simply not rendering the image container means we won't render the logo and any badges etc.
+        We could keep logos and badges outside of the img container and change padding when the image is missing. -->
+        <div
+            :class="[$style['c-restaurantCard-img']]"
+            :style="`background-image: url(${imgUrl});`"
+            role="img">
 
-                <!-- Logo image -->
-                <img
-                    :src="logoUrl"
-                    alt=""
-                    width="50"
-                    height="50"
-                    loading="lazy"
-                    :class="$style['c-restaurantCard-logo']"
-                    data-test-id="restaurant_logo">
-
-                <div :class="$style['c-restaurantCard-data']">
-                    <!-- primary content -->
-                    <h3>Name</h3>
-                    <span>thing 1</span>
-                    <span>thing 2</span>
-
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Quam assumenda odio fuga dolores, veritatis laboriosam nostrum
-                    nihil incidunt adipisci non eaque, vero ratione qui quod itaque?
-                    Molestias, nihil ullam. Dolores!
-                </div>
-            </div>
-            <!-- optional items -->
-            <p :class="[$style['c-restaurantCard-optionalItem']]">DISH RESULT</p>
-            <p :class="[$style['c-restaurantCard-optionalItem']]">DISH RESULT</p>
-            <p :class="[$style['c-restaurantCard-optionalItem']]">DISH RESULT</p>
+            <!-- Logo image -->
+            <img
+                :src="logoUrl"
+                alt=""
+                width="50"
+                height="50"
+                loading="lazy"
+                :class="$style['c-restaurantCard-logo']"
+                data-test-id="restaurant_logo">
         </div>
+
+        <!-- primary content -->
+        <div :class="$style['c-restaurantCard-content']">
+            <!-- Restaurant Name -->
+            <h3
+                data-test-id="restaurant_name"
+                data-search-name>
+                Fake Restaurant
+            </h3>
+
+            <!-- stress test the content size -->
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Eius mollitia distinctio magni enim neque, labore repellat
+                quaerat quam magnam, sint vel, officiis nam voluptas hic.
+                Assumenda illum repudiandae libero impedit?</p>
+
+            <!-- Cuisines -->
+            <!-- START ERROR BOUNDARY -->
+            <slot name="cuisines" />
+            <!-- END ERROR BOUNDARY -->
+
+
+            <!-- New label -->
+            <!-- START ERROR BOUNDARY -->
+            <slot name="new-label" />
+            <!-- END ERROR BOUNDARY -->
+
+            <!-- Ratings -->
+            <!-- START ERROR BOUNDARY -->
+            <slot name="ratings" />
+            <!-- END ERROR BOUNDARY -->
+
+            <!-- Offline Icon -->
+            <!-- <div>Offline Icon</div> -->
+
+            <!-- Meta Items List -->
+            <slot name="meta-items" />
+
+            <!-- Local Legend label -->
+            <slot name="local-legend" />
+
+            <!-- Badges -->
+            <div>
+                <!-- misc badges -->
+                <!-- START ERROR BOUNDARY -->
+                <slot name="badges" />
+                <!-- END ERROR BOUNDARY -->
+
+                <!-- promoted badge -->
+                <!-- <span>Promoted</span> -->
+            </div>
+            <!-- Optional items i.e. dish search results -->
+            <slot name="optional-items" />
+        </div>
+
+        <!-- optional items -->
+        <p :class="[$style['c-restaurantCard-dish']]">DISH RESULT</p>
+        <p :class="[$style['c-restaurantCard-dish']]">DISH RESULT</p>
+        <p :class="[$style['c-restaurantCard-dish']]">DISH RESULT</p>
     </a>
 </template>
 
@@ -97,124 +139,72 @@ export default {
 <style lang="scss" module>
 $card-bgColor                             : $color-container-default;
 $card-borderRadius                        : $radius-rounded-c;
-$tile-imgSpacing                          : spacing(x10) * 2;
 $img-borderRadius                         : $radius-rounded-c;
-$img-width                                : 156px;
 $logo-borderRadius                        : $radius-rounded-b;
 $logo-borderColor                         : $color-border-default;
+
 
 .c-restaurantCard {
   display: block;
   text-decoration: none;
-  position: relative;
-  z-index: 2;
-  margin: 0 10px;
-  padding-top: 20px;
-  padding-left: spacing();
-  padding-right: spacing();
-
-  &.c-restaurantCard--hasImg {
-      padding-top: 140px;
-  }
+  display: grid;
+  grid-template-columns: 1fr;
 
   &.c-restaurantCard--listItem {
-      @media only screen and (min-width: 600px){
-        padding-top: 0;
-        padding-left: 0;
-        padding-right: 0;
+      @include media('>mid') {
+        grid-template-columns: minmax(150px, 20%) 1fr;
+      }
+  }
+}
+
+.c-restaurantCard-img {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 200px; // TODO: agree with design
+  border-radius: $card-borderRadius;
+  position: relative;
+
+  .c-restaurantCard--listItem & {
+      @include media('>mid') {
+        min-height: 125px; // TODO: agree with design
+        height: 100%;
+        grid-column: 1/2;
       }
   }
 }
 
 .c-restaurantCard-content {
-    background: white;
-    padding: spacing();
-    border-radius: $card-borderRadius;
-    box-shadow: 0 6px 8px rgba($color-black, 0.02),
-                0 1px 20px rgba($color-black, 0.08),
-                0 3px 6px -1px rgba($color-black, 0.08);
+  padding: spacing() 0 spacing() 0;
 
-    .c-restaurantCard--listItem & {
-        @media only screen and (min-width: 600px){
-            padding: spacing() / 2;
-        }
-    }
-}
-
-.c-restaurantCard-innerContent {
-    position: relative;
-
-    .c-restaurantCard--listItem & {
-        @media only screen and (min-width: 600px){
-            padding-left: 40px;
-        }
-    }
-
-    .c-restaurantCard--listItem.c-restaurantCard--hasImg & {
-        @media only screen and (min-width: 600px){
-            min-height: 100px;
-            padding-left: 30%;
-        }
-    }
-}
-
-.c-restaurantCard-img {
-  height: 200px;
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: -20px;
-  width: calc(100% + 40px);
-  transform: translateY(calc(-80% + 10px));
-  background-size: cover;
-  background-position: center;
-  border-radius: $img-borderRadius;
-
-    .c-restaurantCard--listItem & {
-        @media only screen and (min-width: 600px){
-          transform: none;
-          z-index: 1;
-          width: 30%;
-          height: 100%;
-          left: 0;
-        }
-    }
+  .c-restaurantCard--listItem & {
+      @include media('>mid') {
+        grid-column: 2/3;
+        padding-left: spacing(x1.5);
+      }
+  }
 }
 
 .c-restaurantCard-logo {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-
-    .c-restaurantCard--listItem & {
-        @media only screen and (min-width: 600px) {
-            left: initial;
-            top: 50%;
-        }
-    }
+  border: 1px solid $logo-borderColor;
+  border-radius: $logo-borderRadius;
+  top: spacing(x2);
+  left: spacing(x2);
+  position: absolute;
 }
 
-.c-restaurantCard-data {
-    padding-top: 40px;
+// placeholder styles - will be extracted to subcomponent
+.c-restaurantCard-dish {
+  margin: 5px 0 5px 0;
+  background: lightgreen;
+  padding: 1rem;
+  border: 2px dashed green;
+  border-radius: $card-borderRadius / 2;
 
-    .c-restaurantCard--listItem & {
-        @media only screen and (min-width: 600px) {
-            padding-left: 40px;
-        }
-    }
-    .c-restaurantCard--listItem.c-restaurantCard--hasImg & {
-        @media only screen and (min-width: 600px) {
-            padding-top: 0;
-            padding-left: 40px;
-        }
-    }
-}
-
-.c-restaurantCard-optionalItem {
-    border: 2px dashed green;
-    background-color: lightgreen;
-    padding: 1rem;
-    border-radius: 6px;
+  .c-restaurantCard--listItem & {
+      @include media('>mid') {
+        grid-column: 1/3;
+      }
+  }
 }
 </style>
