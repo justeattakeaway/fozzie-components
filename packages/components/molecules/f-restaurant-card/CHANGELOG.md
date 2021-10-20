@@ -9,6 +9,7 @@ v0.3.0
 
 ### Added
 - Basic component styling
+
 ### Updated
 - Component HTML to use new classes, attributes and fewer elements
 - Storybook args updated to usenew component props contract
