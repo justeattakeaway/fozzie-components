@@ -11,10 +11,13 @@ export default {
 };
 
 export const ContactPreferencesComponent = () => ({
-    components: { ContactPreferences },
+    components: {
+        ContactPreferences
+    },
     props: {
     },
-    template: '<contact-preferences />'
+    template: `<contact-preferences
+        smart-gateway-base-url="https://localhost:8080" />`
 });
 
 ContactPreferencesComponent.storyName = 'f-contact-preferences';
