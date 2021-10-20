@@ -10,8 +10,7 @@
         </component>
 
         <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
+            v-else-if="shouldShowAgeVerificationForm" />
 
         <div
             v-if="shouldShowCheckoutForm"
@@ -85,7 +84,7 @@ import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
 import CheckoutAnalyticsService from '../services/analytics';
 
@@ -556,16 +555,6 @@ export default {
         },
 
         /**
-         * Call update checkout with only the user's DOB for age verification
-         * This is to avoid creating too many side effects with the original mapper for update checkout
-         */
-        async verifyCustomerAge () {
-            const data = this.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
-
-            await this.handleUpdateCheckout(data);
-        },
-
-        /**
          * Place the order, emit the expected events, and throw a new PlaceOrderError if the process fails.
          */
         async submitOrder () {
@@ -849,23 +838,69 @@ export default {
             this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
-        getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
-            const { ageVerificationOnly } = options;
-            return ageVerificationOnly ?
-                mapUpdateCheckoutRequestForAgeVerification({
-                    customer: this.customer
-                }) : mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
-                    time: this.time,
-                    userNote: this.userNote,
-                    geolocation: this.geolocation,
-                    asap: this.hasAsapSelected,
-                    tableIdentifier: this.dineIn.tableIdentifier
-                });
+        getMappedDataForUpdateCheckout () {
+            return mapUpdateCheckoutRequest({
+                address: this.address,
+                customer: this.customer,
+                isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
+                time: this.time,
+                userNote: this.userNote,
+                geolocation: this.geolocation,
+                asap: this.hasAsapSelected,
+                tableIdentifier: this.dineIn.tableIdentifier
+            });
         }
+    },
+
+    validations () {
+        const validationProperties = {
+            customer: {
+                mobileNumber: {
+                    isValidPhoneNumber: this.isValidPhoneNumber
+                }
+            },
+            tableIdentifier: {
+                required: requiredIf(() => this.isCheckoutMethodDineIn),
+                maxLength: maxLength(12)
+            }
+        };
+
+        if (!this.isLoggedIn) {
+            validationProperties.customer = {
+                ...validationProperties.customer,
+                firstName: {
+                    required
+                },
+                lastName: {
+                    required
+                },
+                email: {
+                    required,
+                    email
+                }
+            };
+        }
+
+        if (this.isCheckoutMethodDelivery) {
+            validationProperties.address = {
+                line1: {
+                    required
+                },
+                locality: {
+                    required
+                },
+                administrativeArea: {
+                    required: requiredIf(() => this.shouldShowAddressAdministrativeArea)
+                },
+                postcode: {
+                    required,
+                    isValidPostcode: this.isValidPostcode
+                }
+            };
+        }
+
+        return validationProperties;
     }
 };
 </script>
