@@ -4,6 +4,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.5.0
+------------------------------
+*October 19, 2021*
+
+### Changed
+- Specified cookie banner text font size to be 14px as default paragraph font size now is 16px.
+- Cookie policy link to use f-link.
+- Increased max bundle size from 30 to 40kB.
+
+
+v3.4.0
+------------------------------
+*October 18, 2021*
+
+### Changed
+- ResizeObserver to use requestAnimationFrame and watcher to ensure ResizeObserver does not throw `ResizeObserver loop limit exceeded` error.
+
+
 v3.3.3
 ------------------------------
 *October 15, 2021*

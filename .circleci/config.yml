@@ -75,6 +75,7 @@ commands:
             - packages/components/molecules/f-skeleton-loader/dist
             - packages/components/molecules/f-tabs/dist
             - packages/components/molecules/f-user-message/dist
+            - packages/components/molecules/f-navigation-links/dist
 
       - save_cache:
           name: Cache for atoms
@@ -115,6 +116,7 @@ commands:
             - packages/services/f-http/dist
             - packages/services/f-services/dist
             - packages/services/f-statistics/dist
+            - packages/services/f-compatibility/dist
 
   restore_cache_dist_directories:
     description: Restores all the dist dircetories
