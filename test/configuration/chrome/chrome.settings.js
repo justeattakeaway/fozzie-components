@@ -5,6 +5,8 @@ const video = require('wdio-video-reporter');
 
 const settings = () => ({
     baseUrl: 'http://localhost:8080',
+    browserName: 'chrome',
+    acceptInsecureCerts: true,
     a11y: {
         capabilities: [
             {
