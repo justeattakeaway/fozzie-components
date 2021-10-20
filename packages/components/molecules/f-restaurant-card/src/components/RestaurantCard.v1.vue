@@ -106,7 +106,7 @@ export default {
             type: Boolean,
             default: false
         },
-        tileMode: {
+        isTile: {
             type: Boolean,
             default: true
         },
@@ -118,7 +118,7 @@ export default {
     },
     computed: {
         displayModeModifier () {
-            return this.tileMode ? 'c-restaurantCard--tile' : 'c-restaurantCard--list-item';
+            return this.isTile ? 'c-restaurantCard--tile' : 'c-restaurantCard--listItem';
         }
     }
 };
@@ -181,7 +181,7 @@ $logo-borderColor                         : $color-border-default;
     border-radius: $logo-borderRadius;
     position: absolute;
 
-    .c-restaurantCard--list-item & {
+    .c-restaurantCard--listItem & {
         top: 50%;
         transform: translate(-130%, -50%);
     }
@@ -192,7 +192,7 @@ $logo-borderColor                         : $color-border-default;
     background-size: cover;
     background-position: center;
 
-    .c-restaurantCard--list-item & {
+    .c-restaurantCard--listItem & {
         display: block;
         flex-basis: $img-width;
     }
@@ -201,17 +201,17 @@ $logo-borderColor                         : $color-border-default;
 .c-restaurantCard-content {
     padding: spacing(x0.5) spacing(x5);
 
-    .c-restaurantCard--list-item & {
+    .c-restaurantCard--listItem & {
         flex: 1;
         padding-left: spacing(x10);
     }
 
-    .c-restaurantCard--with-img & {
+    .c-restaurantCard--hasImg & {
         padding-left: spacing(x5);
     }
 }
 
-.c-restaurantCard--list-item {
+.c-restaurantCard--listItem {
     padding: spacing(x0.5);
 
     @include media('>mid') {
