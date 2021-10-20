@@ -17,9 +17,27 @@
                     :style="`background-image: url(${imgUrl});`"
                     role="img" />
 
-                <!-- primary content -->
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Consectetur laborum molestias harum aliquam tempore voluptate quibusdam fugiat ullam, soluta, sunt ratione maiores odit adipisci, consequatur alias aperiam dolores ipsum aspernatur.
+                <!-- Logo image -->
+                <img
+                    :src="logoUrl"
+                    alt=""
+                    width="50"
+                    height="50"
+                    loading="lazy"
+                    :class="$style['c-restaurantCard-logo']"
+                    data-test-id="restaurant_logo">
+
+                <div :class="$style['c-restaurantCard-data']">
+                    <!-- primary content -->
+                    <h3>Name</h3>
+                    <span>thing 1</span>
+                    <span>thing 2</span>
+
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Quam assumenda odio fuga dolores, veritatis laboriosam nostrum
+                    nihil incidunt adipisci non eaque, vero ratione qui quod itaque?
+                    Molestias, nihil ullam. Dolores!
+                </div>
             </div>
             <!-- optional items -->
             <p :class="[$style['c-restaurantCard-optionalItem']]">DISH RESULT</p>
@@ -88,11 +106,10 @@ $logo-borderColor                         : $color-border-default;
 .c-restaurantCard {
   display: block;
   text-decoration: none;
-//   padding: 10px;
-//   background: lightgreen;
   position: relative;
   z-index: 2;
   margin: 0 10px;
+  padding-top: 20px;
 
   &.c-restaurantCard--hasImg {
       padding-top: 90px;
@@ -100,7 +117,7 @@ $logo-borderColor                         : $color-border-default;
 
   &.c-restaurantCard--listItem {
       @media only screen and (min-width: 600px){
-        padding: 0;
+        padding-top: 0;
       }
   }
 }
@@ -114,7 +131,13 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard-innerContent {
-  position: relative;
+    position: relative;
+
+    .c-restaurantCard--listItem & {
+        @media only screen and (min-width: 600px){
+            padding-left: 40px;
+        }
+    }
 
     .c-restaurantCard--listItem.c-restaurantCard--hasImg & {
         @media only screen and (min-width: 600px){
@@ -147,4 +170,35 @@ $logo-borderColor                         : $color-border-default;
     }
 }
 
+.c-restaurantCard-logo {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    .c-restaurantCard--listItem & {
+        @media only screen and (min-width: 600px) {
+            left: initial;
+            top: 50%;
+        }
+    }
+}
+
+.c-restaurantCard-data {
+    .c-restaurantCard--hasImg & {
+        padding-top: 40px;
+    }
+
+    .c-restaurantCard--listItem & {
+        @media only screen and (min-width: 600px) {
+            padding-left: 40px;
+        }
+    }
+    .c-restaurantCard--listItem.c-restaurantCard--hasImg & {
+        @media only screen and (min-width: 600px) {
+            padding-top: 0;
+            padding-left: 40px;
+        }
+    }
+}
 </style>
