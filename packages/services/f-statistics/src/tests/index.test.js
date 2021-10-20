@@ -8,13 +8,17 @@ describe('f-statistics', () => {
     });
 
     describe('constructor ::', () => {
+        const basePayload = {
+            je_feature: 'f-statistics',
+            je_logType: 'client-stats',
+            je_environment: 'test',
+            je_feature_for: 'Generic Front End'
+        };
+
         it('should expose base payload when none is provided', () => {
             // Arrange
             const expectedPayload = {
-                je_feature: 'f-statistics',
-                je_logType: 'client-stats',
-                je_environment: 'test',
-                je_feature_for: 'Generic Front End'
+                ...basePayload
             };
 
             // Act
@@ -27,10 +31,7 @@ describe('f-statistics', () => {
         it('should merge base payload when additional properties are provided', () => {
             // Arrange
             const expectedPayload = {
-                je_feature: 'f-statistics',
-                je_logType: 'client-stats',
-                je_environment: 'test',
-                je_feature_for: 'Generic Front End',
+                ...basePayload,
                 a_test_property: 'this is a test'
             };
 
@@ -44,10 +45,7 @@ describe('f-statistics', () => {
         it('should use default payload as merge priority over provided payload', () => {
             // Arrange
             const expectedPayload = {
-                je_feature: 'f-statistics',
-                je_logType: 'client-stats',
-                je_environment: 'test',
-                je_feature_for: 'Generic Front End',
+                ...basePayload,
                 a_test_property: 'this is a test'
             };
 
