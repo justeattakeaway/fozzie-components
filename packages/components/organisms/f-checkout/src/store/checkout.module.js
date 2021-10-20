@@ -1,12 +1,9 @@
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE } from '../constants';
-import basketApi from '../services/basketApi';
-import checkoutApi from '../services/checkoutApi';
-import addressGeocodingApi from '../services/addressGeocodingApi';
-import orderPlacementApi from '../services/orderPlacementApi';
-import accountApi from '../services/accountApi';
+import checkoutApi from '../services/apis/checkoutApi';
+import addressGeocodingApi from '../services/apis/addressGeocodingApi';
+import orderPlacementApi from '../services/apis/orderPlacementApi';
 
 import {
     UPDATE_ADDRESS,
@@ -141,9 +138,8 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
-            // TODO: deal with exceptions.
-            const { data } = await checkoutApi.getCheckout(url, state, timeout);
+        getCheckout: async ({ commit, state, dispatch }, { response }) => {
+            const { data } = response;
 
             resolveCustomerDetails(data, state);
 
@@ -188,10 +184,8 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        createGuestUser: async ({ commit }, {
-            url, tenant, data, timeout, otacToAuthExchanger
-        }) => {
-            const response = await accountApi.createGuestUser(url, data, timeout, tenant);
+        createGuestUser: async ({ commit }, { response, getApiConfig }) => {
+            const { otacToAuthExchanger } = getApiConfig(['otacToAuthExchanger']);
             const otac = response?.data?.token;
             const authToken = await otacToAuthExchanger(otac);
             commit(UPDATE_AUTH_GUEST, authToken);
@@ -203,8 +197,8 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
-            const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
+        getAvailableFulfilment: async ({ commit }, { response }) => {
+            const { data } = response;
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
         },
@@ -215,14 +209,8 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getBasket: async ({ commit, dispatch, state }, {
-            url,
-            tenant,
-            language,
-            timeout
-        }) => {
-            // TODO: deal with exceptions.
-            const { data } = await basketApi.getBasket(url, tenant, language, timeout);
+        getBasket: async ({ commit, dispatch, state }, { response }) => {
+            const { data } = response;
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurant: {
@@ -254,25 +242,11 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getAddress: async ({ commit, state, dispatch }, {
-            url,
-            tenant,
-            language,
-            timeout,
-            currentPostcode
+            response,
+            getApiConfig
         }) => {
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Language': language,
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    })
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = response;
+            const { tenant, currentPostcode } = getApiConfig('tenant', 'currentPostcode');
 
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
 
@@ -286,26 +260,8 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCustomer: async ({ commit, state, dispatch }, {
-            url,
-            timeout
-        }) => {
-            if (!state.customer || state.customer.mobileNumber) {
-                return;
-            }
-
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    })
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+        getCustomer: async ({ commit, state, dispatch }, { response }) => {
+            const { data } = response;
 
             commit(UPDATE_PHONE_NUMBER, data.PhoneNumber);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });

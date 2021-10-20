@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { version as applicationVersion } from '../../package.json';
+import { version as applicationVersion } from '../../../package.json';
 
 export default {
     async placeOrder (url, data, timeout, state) {

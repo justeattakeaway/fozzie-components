@@ -1,12 +1,12 @@
 import { mapActions } from 'vuex';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
-import apiController from '../services/apiController';
+import apis from '../services/apis';
 
 export default {
     data () {
         return {
             registrationSource: 'Guest'
-        }
+        };
     },
 
     computed: {
@@ -22,12 +22,16 @@ export default {
             return this.customer.email;
         },
 
-        language() {
+        language () {
             return this.$i18n.locale;
         },
 
+        timeout () {
+            return this.checkoutTimeout;
+        },
+
         currentPostcode () {
-            return this.$cookies.get('je-location')
+            return this.$cookies.get('je-location');
         }
     },
 
@@ -38,48 +42,37 @@ export default {
             'getCheckout',
             'getAvailableFulfilment',
             'getAddress',
-            'getCustomer',
+            'getCustomer'
         ]),
 
-        createConfig (endpoint) {
-            const config  = apiController[endpoint].config;
-            let additionalConfig = {};
+        getApiConfig (config) {
+            const additionalConfig = {};
 
-            config?.forEach(item => {
-                additionalConfig[item] = this[item]
-            });
+            if (config) {
+                config.forEach(item => {
+                    additionalConfig[item] = this[item];
+                });
+            }
 
-            const baseConfig = {
-                url: this[`${endpoint}Url`],
-                timeout: this.checkoutTimeout
-            };
-
-            return additionalConfig ? {...baseConfig, ...additionalConfig} : baseConfig;
+            return additionalConfig;
         },
 
-        createRequestData (endpoint) {
-            const data  = apiController[endpoint].data;
-            let requestData = {};
+        getRequestData (data) {
+            const requestData = {};
 
             if (data) {
                 data.forEach(item => {
-                    requestData[item] = this[item]
+                    requestData[item] = this[item];
                 });
             }
 
             return requestData;
         },
 
-        async handleApiCall (endpoint) {
-            const config = this.createConfig(endpoint);
-            const data = this.createRequestData(endpoint);
-            console.log(endpoint, config, data);
+        async handleApiCall (endpoint, api) {
+            const response = await apis[api][endpoint](this[`${endpoint}Url`], this.getApiConfig, this.getRequestData);
 
-            await this[endpoint]({
-                ...config,
-                ...(data && {data})
-            });
-
+            this[endpoint]({ response, getApiConfig: this.getApiConfig });
             this.handleEventLogging(`${endpoint}Success`);
         }
     }

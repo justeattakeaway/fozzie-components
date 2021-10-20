@@ -757,7 +757,7 @@ export default {
          */
         async setupGuestUser () {
             try {
-                await this.handleApiCall('createGuestUser');
+                await this.handleApiCall('createGuestUser', 'accountApi');
             } catch (e) {
                 throw new CreateGuestUserError(e.message);
             }
@@ -769,7 +769,7 @@ export default {
          */
         async loadCheckout () {
             try {
-                await this.handleApiCall('getCheckout');
+                await this.handleApiCall('getCheckout', 'checkoutApi');
             } catch (error) {
                 if (error?.response?.status === 403) {
                     this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message));
@@ -785,7 +785,7 @@ export default {
          */
         async loadBasket () {
             try {
-                await this.handleApiCall('getBasket');
+                await this.handleApiCall('getBasket', 'basketApi');
             } catch (error) {
                 this.handleErrorState(new GetBasketError(error.message, error?.response?.status));
             }
@@ -797,7 +797,7 @@ export default {
          */
         async loadAvailableFulfilment () {
             try {
-                await this.handleApiCall('getAvailableFulfilment');
+                await this.handleApiCall('getAvailableFulfilment', 'checkoutApi');
 
                 if (!this.availableFulfilment.times.length) {
                     this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable;
@@ -813,7 +813,7 @@ export default {
          */
         async loadAddress () {
             try {
-                await this.handleApiCall('getAddress');
+                await this.handleApiCall('getAddress', 'publicApi');
             } catch (error) {
                 this.handleEventLogging('GetAddressFailure', error);
             }
@@ -825,7 +825,9 @@ export default {
          */
         async loadCustomer () {
             try {
-                await this.handleApiCall('getCustomer');
+                if (this.customer || !this.customer.mobileNumber) {
+                    await this.handleApiCall('getCustomer', 'publicApi');
+                }
             } catch (error) {
                 this.handleEventLogging('GetCustomerFailure');
             }

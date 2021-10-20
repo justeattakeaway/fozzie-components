@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 export default {
-    async getBasket (url, tenant, language, timeout) {
+    async getBasket (url, getApiConfig) {
+        const { timeout, tenant, language } = getApiConfig(['timeout', 'tenant', 'language']);
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',

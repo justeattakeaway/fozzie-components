@@ -1,13 +1,15 @@
 import axios from 'axios';
-import { VUEX_CHECKOUT_EXPERIMENTATION_MODULE } from '../constants';
+import { VUEX_CHECKOUT_EXPERIMENTATION_MODULE } from '../../constants';
 
 export default {
-    async getCheckout (url, state, timeout) {
-        const authHeader = state.authToken && `Bearer ${state.authToken}`;
+    async getCheckout (url, getApiConfig) {
+        const { timeout, authToken } = getApiConfig(['timeout', 'authToken']);
+
+        const authHeader = authToken && `Bearer ${authToken}`;
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                ...(state.authToken && {
+                ...(authToken && {
                     Authorization: authHeader
                 })
             },
@@ -35,7 +37,9 @@ export default {
         return axios.patch(request.url, request.data, config);
     },
 
-    async getAvailableFulfilment (url, timeout) {
+    async getAvailableFulfilment (url, getApiConfig) {
+        const { timeout } = getApiConfig(['timeout']);
+
         const config = {
             headers: {
                 'Content-Type': 'application/json'
