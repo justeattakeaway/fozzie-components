@@ -10,11 +10,61 @@ export default {
     decorators: [withA11y]
 };
 
-export const NavigationLinksComponent = () => ({
+export const NavigationLinksComponent = (args, { argTypes }) => ({
     components: { NavigationLinks },
-    props: {
-    },
-    template: '<navigation-links />'
+    props: Object.keys(argTypes),
+    template: '<navigation-links v-bind="$props" />'
 });
 
 NavigationLinksComponent.storyName = 'f-navigation-links';
+
+/**
+ * Arguments without specified controls
+ * @type {{id: string}}
+ */
+NavigationLinksComponent.args = {
+    links: [
+        {
+            id: 'link1',
+            url: '/account/info',
+            name: 'Your account',
+            selected: false
+        },
+        {
+            id: 'link2',
+            url: '/order-history',
+            name: 'Your orders',
+            selected: false
+        },
+        {
+            id: 'link3',
+            url: '/account/paymentoptions',
+            name: 'Your saved cards',
+            selected: false
+        },
+        {
+            id: 'link4',
+            url: '/member/addressbook',
+            name: 'Your address book',
+            selected: false
+        },
+        {
+            id: 'link5',
+            url: '/account/credit',
+            name: 'Redeem a voucher',
+            selected: false
+        },
+        {
+            id: 'link6',
+            url: '/giftcards/redeem',
+            name: 'Redeem a gift card',
+            selected: false
+        },
+        {
+            id: 'link7',
+            url: '/account/preferences',
+            name: 'Contact preferences',
+            selected: true
+        }
+    ]
+};
