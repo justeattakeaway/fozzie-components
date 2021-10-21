@@ -179,7 +179,7 @@ export default {
             }
 
             if (!VALID_BUTTON_ICON_POSITION.includes(this.hasIcon)) {
-                throw new TypeError(`hasIcon is set to "${this.hasIcon}", but it can only be one of the following buttonSizes: "${VALID_BUTTON_ICON_POSITION.join('", "')}"`);
+                throw new TypeError(`hasIcon is set to "${this.hasIcon}", but it can only be one of the following button icon positions: "${VALID_BUTTON_ICON_POSITION.join('", "')}"`);
             }
         }
     }
