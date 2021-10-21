@@ -69,8 +69,17 @@ export default {
             return requestData;
         },
 
-        async handleApiCall (endpoint, api) {
-            const response = await apis[api][endpoint](this[`${endpoint}Url`], this.getApiConfig, this.getRequestData);
+        getApiName (endpoint) {
+            const apiList = Object.keys(apis);
+            return apiList.filter(api => endpoint in apis[api])[0];
+        },
+
+        async handleApiCall (endpoint) {
+            const api = this.getApiName(endpoint);
+            const url = this[`${endpoint}Url`];
+            const apiCall = apis[api][endpoint];
+
+            const response = await apiCall(url, this.getApiConfig, this.getRequestData);
 
             this[endpoint]({ response, getApiConfig: this.getApiConfig });
             this.handleEventLogging(`${endpoint}Success`);
