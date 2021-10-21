@@ -146,7 +146,6 @@ $logo-borderColor                         : $color-border-default;
 
 
 .c-restaurantCard {
-  display: block;
   text-decoration: none;
   display: grid;
   grid-template-columns: 1fr;
