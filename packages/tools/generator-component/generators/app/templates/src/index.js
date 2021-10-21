@@ -36,15 +36,16 @@ if (GlobalVue) {
 export default <%= name.component %>;
 
 <% } else { %>
-
 /**
 * @overview Add description of service here
 *
 * @module f-<%= name.default %>
 */
 
-export {
-};
-
+export default class ServiceConstructor {
+    constructor() {
+        throw new Error('Not implemented yet!');
+    }
+}
 
 <% } %>
