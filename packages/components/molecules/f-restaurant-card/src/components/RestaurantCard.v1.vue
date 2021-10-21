@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin.vue';
+import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 
 export default {
     name: 'RestaurantCardV1',

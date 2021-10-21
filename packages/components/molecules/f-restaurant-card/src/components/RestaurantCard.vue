@@ -14,7 +14,7 @@
 
 <script>
 import restaurantCardVersions from './restaurantCardVersions';
-import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin.vue';
+import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 
 export default {
     name: 'RestaurantCard',

@@ -1,4 +1,3 @@
-<script>
 export default {
     props: {
         errorBoundary: {
@@ -7,4 +6,3 @@ export default {
         }
     }
 };
-</script>
