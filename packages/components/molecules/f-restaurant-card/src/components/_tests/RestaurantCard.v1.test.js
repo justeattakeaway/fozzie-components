@@ -4,20 +4,7 @@ import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 
 describe('RestaurantCard.v1', () => {
     describe('Error Boundary', () => {
-        it('Error Boundary Successfully Mounts', () => {
-            // arrange
-            const propsData = {
-                errorBoundary
-            };
-
-            // act
-            const wrapper = mount(RestaurantCardV1, { propsData });
-
-            // assert
-            expect(wrapper.find('[error-boundary]').exists()).toBe(true);
-        });
-
-        it('Successfully Wraps Cuisine Slot in Error Boundary', () => {
+        it('Successfully Wraps Slot in Error Boundary', () => {
             // arrange
             const propsData = {
                 errorBoundary
@@ -34,7 +21,7 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[error-boundary]>[cuisines-slot]').exists()).toBe(true);
         });
 
-        it('Successfully Passes Tier to Cuisine Error Boundary', () => {
+        it('Successfully Passes Tier to Error Boundary', () => {
             // arrange
             const propsData = {
                 errorBoundary
@@ -49,6 +36,21 @@ describe('RestaurantCard.v1', () => {
 
             // assert
             expect(wrapper.find('[error-boundary][tier="3"]>[cuisines-slot]').exists()).toBe(true);
+        });
+
+        it('Does not render error boundary when slots are empty', () => {
+            // arrange
+            const propsData = {
+                errorBoundary
+            };
+
+            const slots = {};
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData, slots });
+
+            // assert
+            expect(wrapper.find('[error-boundary]').exists()).toBe(false);
         });
 
         it('Can catch slot errors inside of the error boundary', done => {

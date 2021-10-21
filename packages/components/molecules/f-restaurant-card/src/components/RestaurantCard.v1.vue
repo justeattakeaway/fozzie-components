@@ -36,6 +36,7 @@
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
+                v-if="hasSlot('cuisines')"
                 tier="3">
                 <slot name="cuisines" />
             </component>
@@ -46,6 +47,7 @@
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
+                v-if="hasSlot('new-label')"
                 tier="3">
                 <slot name="new-label" />
             </component>
@@ -55,6 +57,7 @@
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
+                v-if="hasSlot('ratings')"
                 tier="3">
                 <slot name="ratings" />
             </component>
@@ -67,6 +70,7 @@
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
+                v-if="hasSlot('meta-items')"
                 tier="3">
                 <slot name="meta-items" />
             </component>
@@ -76,6 +80,7 @@
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
+                v-if="hasSlot('local-legend')"
                 tier="3">
                 <slot name="local-legend" />
             </component>
@@ -87,6 +92,7 @@
                 <!-- START ERROR BOUNDARY -->
                 <component
                     :is="errorBoundary"
+                    v-if="hasSlot('badges')"
                     tier="3">
                     <slot name="badges" />
                 </component>
@@ -100,6 +106,7 @@
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
+                v-if="hasSlot('optional-items')"
                 tier="3">
                 <slot name="optional-items" />
             </component>
@@ -142,6 +149,11 @@ export default {
         flags: {
             type: Object,
             default: () => ({})
+        }
+    },
+    computed: {
+        hasSlot () {
+            return name => !!this.$slots[name];
         }
     }
 };
