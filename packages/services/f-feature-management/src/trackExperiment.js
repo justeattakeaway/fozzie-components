@@ -19,7 +19,12 @@ function trackExperiment (experiment, onTrack) {
     }
 
     logger.logInfo(`Tracking experiment - key: ${key}, variant: ${variant}`);
-    onTrack(key, variant);
+
+    try {
+        onTrack(key, variant);
+    } catch (error) {
+        logger.logError('An exception occurred while trying to send an experiment event', error);
+    }
 }
 
 export default trackExperiment;
