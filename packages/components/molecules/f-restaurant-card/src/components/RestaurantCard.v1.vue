@@ -19,6 +19,7 @@
 
             <!-- Logo image -->
             <img
+                v-if="!!logoUrl"
                 :src="logoUrl"
                 alt=""
                 width="50"
