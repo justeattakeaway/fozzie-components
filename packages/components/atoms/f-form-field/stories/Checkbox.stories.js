@@ -2,7 +2,7 @@ import {
     withKnobs, select, text, boolean
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import FormField from '../src/components/FormField.vue';
+import FormSelectionControl from '../src/components/FormSelectionControl.vue';
 import {
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES
@@ -14,7 +14,7 @@ export default {
 };
 
 export const CheckboxComponent = () => ({
-    components: { FormField },
+    components: { FormSelectionControl },
     props: {
         locale: {
             default: select('Locale', ['en-GB', 'en-AU'])
@@ -51,11 +51,8 @@ export const CheckboxComponent = () => ({
         notes: 'some documentation here'
     },
     template:
-        `<form-field
-            :locale="locale"
+        `<form-selection-control
             :label-text="labelText"
-            input-type="checkbox"
-            :shouldShowLabelText="shouldShowLabelText"
             :field-size="fieldSize"
             :has-error="hasError"
             :is-grouped="isGrouped"

@@ -63,6 +63,7 @@
                     $style['c-formField-field'],
                     $style[`c-formField-field--${fieldSize}`], {
                         [$style['c-formField-field--noFocus']]: isSelectionControl,
+                        [$style['c-formField-field--checkbox']]: isCheckbox,
                         [$style['c-formField--invalid']]: hasError,
                         [$style['c-formField-padding--iconLeading']]: hasLeadingIcon,
                         [$style['c-formField-padding--iconTrailing']]: hasTrailingIcon
@@ -279,6 +280,10 @@ export default {
             return this.inputType === 'radio' || this.inputType === 'checkbox';
         },
 
+        isCheckbox () {
+            return this.inputType === 'checkbox';
+        },
+
         isFieldGrouped () {
             return this.isGrouped && !this.hasError;
         },
@@ -396,14 +401,6 @@ $form-input-iconSize                           : 18px;
         background-clip: padding-box;
         padding: spacing(x2);
         resize: none;
-    }
-
-    .c-formField-field--noFocus {
-        &:focus,
-        &:active,
-        &:focus-within {
-            box-shadow: none;
-        }
     }
 
     .c-formField--grouped {
