@@ -4,12 +4,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v4.6.2
- ------------------------------
- *October 18, 2021*
+v4.7.1
+------------------------------
+ *October 20, 2021*
+
+ ### Added
+ - Document for recording agreed Do's and Don'ts on our codebase
+
+
+v4.7.0
+------------------------------
+*October 19, 2021*
+
+### Changed
+- `fozzie` package version bump.
+
+
+v4.6.3
+------------------------------
+*October 18, 2021*
 
 ### Added
-- `f-navigation-links` to Circle CI cache
+- `f-compatibility` to Circle CI cache.
+
+
+v4.6.2
+------------------------------
+*October 18, 2021*
+
+### Added
+- `f-navigation-links` to Circle CI cache.
 
 
 v4.6.1
@@ -17,16 +41,16 @@ v4.6.1
  *October 12, 2021*
 
 ### Added
-- `f-contact-preferences` to Circle CI cache
+- `f-contact-preferences` to Circle CI cache.
 
 
 v4.6.0
- ------------------------------
- *October 8, 2021*
+------------------------------
+*October 8, 2021*
 
  ### Changed
- - Always run visual tests against master
- - Only run visual tests against changed packages
+ - Always run visual tests against master.
+ - Only run visual tests against changed packages.
 
 
 v4.5.0
@@ -34,7 +58,7 @@ v4.5.0
 *October 8, 2021*
 
 ### Updated
-- webdriverIO to v91
+- webdriverIO to v91.
 
 
 v4.4.0
@@ -42,7 +66,7 @@ v4.4.0
 *October 7, 2021*
 
 ### Added
-- Conditional logic to visual regression tests (via new `visual-regression-preflight.js` script)
+- Conditional logic to visual regression tests (via new `visual-regression-preflight.js` script).
 - Custom Github Action for triggering Circle CI pipeline when `wip` tag is removed.
 
 

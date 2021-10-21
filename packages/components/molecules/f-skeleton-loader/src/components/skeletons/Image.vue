@@ -12,6 +12,7 @@ export default {
 
 .c-image {
     height: $skeleton-loader-image-height;
+    border-radius: $radius-rounded-c;
 }
 
 </style>
