@@ -176,7 +176,7 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard-content {
-  padding: spacing() 0 spacing() 0;
+  padding: spacing() 0;
 
   .c-restaurantCard--listItem & {
       @include media('>mid') {
