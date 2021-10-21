@@ -21,8 +21,8 @@ export default class StatisticsClient {
 
     publish (message, statisticPayload) {
         this.justLogInstance.info(message, {
-            ...this.basePayload,
-            ...statisticPayload
+            ...statisticPayload,
+            ...this.basePayload
         });
     }
 }
