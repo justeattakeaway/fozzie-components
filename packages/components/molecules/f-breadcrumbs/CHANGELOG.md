@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.1.0
+------------------------------
+*October 21, 2021*
+
+### Changed
+- If no URL is given, render `<span>` instead of `<a>` or `<router-link>`.
+
+### Added
+- Unit test coverage
+
+
 v2.0.0
 ------------------------------
 *October 5, 2021*
