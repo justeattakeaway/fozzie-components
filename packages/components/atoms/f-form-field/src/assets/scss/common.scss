@@ -3,7 +3,113 @@
 // Instead, the theme is handled via a data-attribute on the component (via the `@mixin theme()` below)
 $theme: 'jet' !default;
 
-@import  '~@justeat/fozzie/src/scss/fozzie';
+@import '~@justeat/fozzie/src/scss/fozzie';
 
-$form-input-bg                            : $color-container-default;
-$form-input-bg--hover                     : darken($form-input-bg, $color-hover-01);
+$form-input-bg                          : $color-container-default;
+$form-input-bg--hover                   : darken($form-input-bg, $color-hover-01);
+
+$form-input-bg--disabled                : $color-disabled-01;
+$form-input-textColour--disabled        : $color-content-disabled;
+$form-input-borderColour--disabled      : $color-disabled-01;
+
+$form-input-fontSize                    : 'body-l';
+$form-input-textColour                  : $color-content-default;
+$form-input-secondaryTextColour         : $color-content-subdued;
+
+$form-input-borderWidth                 : 1px;
+$form-input-borderColour                : $color-border-default;
+$form-input-borderRadius                : $radius-rounded-c;
+$form-input-borderColour--invalid       : $color-support-error;
+
+$form-input-focus--boxShadow            : 0 0 0 2px $color-focus;
+
+$form-input-padding--side              : spacing(x2);
+
+$form-input-height                      : spacing(x6);
+$form-input-padding                     : 11px $form-input-padding--side 13px;
+
+$form-input-height--small               : spacing(x5);
+$form-input-padding--small              : 7px $form-input-padding--side 9px;
+
+$form-input-height--large               : spacing(x7);
+$form-input-padding--large              : 15px $form-input-padding--side 17px;
+
+$form-input-iconPadding                 : spacing(x7);
+$form-input-icon-horizontalIndent       : 19px;
+
+@mixin form-field-size($height, $padding) {
+    @include rem(height, $height);
+    padding: $padding;
+}
+
+@mixin indent-icon($position, $indent: $form-input-icon-horizontalIndent) {
+    svg {
+        @if $position == 'leading' {
+            left: $indent;
+        } @else if $position == 'trailing' {
+            right: $indent;
+        } @else {
+            bottom: $indent;
+        }
+    }
+}
+
+@mixin disabled-field() {
+    cursor: not-allowed;
+
+    &,
+    &:hover {
+        background-color: $form-input-bg--disabled;
+        color: $form-input-textColour--disabled;
+        border-color: $form-input-borderColour--disabled;
+    }
+}
+
+.c-formField-field--small {
+    @include form-field-size($form-input-height--small, $form-input-padding--small); //convert height to rem
+}
+
+.c-formField-field--medium {
+    @include form-field-size($form-input-height, $form-input-padding); //convert height to rem
+}
+
+.c-formField-field--large {
+    @include form-field-size($form-input-height--large, $form-input-padding--large); //convert height to rem
+}
+
+.c-formField-field,
+%c-formField-field {
+    width: 100%;
+    font-family: $font-family-base;
+    @include font-size($form-input-fontSize);
+    font-weight: $font-weight-regular;
+    color: $form-input-textColour;
+
+    background-color: $form-input-bg;
+    border: $form-input-borderWidth solid $form-input-borderColour;
+    border-radius: $form-input-borderRadius;
+    background-clip: padding-box;
+
+    &:hover {
+        background-color: $form-input-bg--hover;
+    }
+
+    &:focus,
+    &:active,
+    &:focus-within {
+        box-shadow: $form-input-focus--boxShadow;
+        outline: none;
+    }
+
+    &[disabled] {
+        @include disabled-field();
+    }
+}
+
+.c-formField--invalid {
+    border-color: $form-input-borderColour--invalid !important;
+}
+
+.c-formField-padding--iconLeading {
+    padding-left: $form-input-iconPadding;
+}

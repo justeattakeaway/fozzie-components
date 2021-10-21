@@ -1,17 +1,23 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
-import checkoutDelivery from '../../demo/checkout-delivery.json';
-import basketDelivery from '../../demo/get-basket-delivery.json';
-import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
-import customerAddresses from '../../demo/get-address.json';
-import geoLocationDetails from '../../demo/get-geo-location.json';
-import customer from '../../demo/get-customer.json';
+import checkoutDelivery from '../../../stories/demo/uk/checkout-delivery.json';
+import basketDelivery from '../../../stories/demo/get-basket-delivery.json';
+import basketDeliveryAgeRestricted from '../../../stories/demo/get-basket-delivery-age-restriction.json';
+import checkoutAvailableFulfilment from '../../../stories/demo/checkout-available-fulfilment.json';
+import customerAddresses from '../../../stories/demo/get-address.json';
+import geoLocationDetails from '../../../stories/demo/get-geo-location.json';
+import customer from '../../../stories/demo/get-customer.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
+import basketApi from '../../services/basketApi';
+import checkoutApi from '../../services/checkoutApi';
+import addressGeocodingApi from '../../services/addressGeocodingApi';
+import orderPlacementApi from '../../services/orderPlacementApi';
+import accountApi from '../../services/accountApi';
 import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
-import { version as applicationVerion } from '../../../package.json';
+// import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
 
 import {
@@ -30,7 +36,8 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_MESSAGE,
     UPDATE_ADDRESS,
-    UPDATE_PHONE_NUMBER
+    UPDATE_PHONE_NUMBER,
+    UPDATE_DATE_OF_BIRTH
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -48,6 +55,7 @@ const {
     updateCheckout,
     updateAddressDetails,
     updateCustomerDetails,
+    updateDateOfBirth,
     updateFulfilmentTime,
     updateMessage,
     updateUserNote,
@@ -79,6 +87,7 @@ const locationData = {
 };
 
 const basketId = 'newbasketid0001-v1';
+const dateOfBirth = new Date(1987, 7, 4);
 
 const time = {
     from: 'fromTime',
@@ -116,7 +125,8 @@ const defaultState = {
         firstName: '',
         lastName: '',
         email: '',
-        mobileNumber: ''
+        mobileNumber: '',
+        dateOfBirth: null
     },
     orderId: '',
     time: {
@@ -144,6 +154,10 @@ const defaultState = {
     userNote: '',
     geolocation: null,
     hasAsapSelected: false
+};
+
+const analyticsService = {
+    trackLowValueOrderExperiment: jest.fn()
 };
 
 let state = CheckoutModule.state();
@@ -299,6 +313,19 @@ describe('CheckoutModule', () => {
         });
 
         describe(`${UPDATE_GEO_LOCATION} ::`, () => {
+            it('should NOT update state if value from endpoint is not an array', () => {
+                // Arrange - coordinates array not returned from API
+                const coordinates = undefined;
+                state.geolocation = null;
+
+                // Act
+                mutations[UPDATE_GEO_LOCATION](state, coordinates);
+
+                // Assert
+                expect(state.geolocation).toBe(null);
+            });
+
+
             it('should update state with received values', () => {
                 // Arrange (Long / Lat)
                 const geometryData = [-0.10358, 51.51469];
@@ -341,6 +368,16 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(state.customer.mobileNumber).toEqual(phoneNumber);
+            });
+        });
+
+        describe(`${UPDATE_DATE_OF_BIRTH} ::`, () => {
+            it('should update state with received values', () => {
+                // Act
+                mutations[UPDATE_DATE_OF_BIRTH](state, dateOfBirth);
+
+                // Assert
+                expect(state.customer.dateOfBirth).toEqual(dateOfBirth);
             });
         });
 
@@ -401,7 +438,7 @@ describe('CheckoutModule', () => {
                 // Use a new copy per test so any mutations do not affect subsequent tests
                 checkoutDeliveryCopy = Object.assign(checkoutDelivery);
 
-                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDeliveryCopy }));
+                checkoutApi.getCheckout = jest.fn(() => Promise.resolve({ data: checkoutDeliveryCopy }));
             });
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
@@ -409,7 +446,7 @@ describe('CheckoutModule', () => {
                 await getCheckout(context, payload);
 
                 // Assert
-                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
             });
 
@@ -442,7 +479,7 @@ describe('CheckoutModule', () => {
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer).toBe(null);
-                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
                     expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
                 });
             });
@@ -576,22 +613,13 @@ describe('CheckoutModule', () => {
         describe('getBasket ::', () => {
             it(`should get the basket details from the backend and call ${UPDATE_BASKET_DETAILS} mutation.`, async () => {
                 // Arrange
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept-Tenant': payload.tenant,
-                        'Accept-Language': payload.language
-                    },
-                    timeout: payload.timeout
-                };
-
-                axios.get = jest.fn(() => Promise.resolve({ data: basketDelivery }));
+                basketApi.getBasket = jest.fn(() => Promise.resolve({ data: basketDelivery }));
 
                 // Act
                 await getBasket(context, payload);
 
                 // Assert
-                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                expect(basketApi.getBasket).toHaveBeenCalledWith(payload.url, payload.tenant, payload.language, payload.timeout);
                 expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
                     serviceType: basketDelivery.ServiceType.toLowerCase(),
                     restaurant: {
@@ -601,7 +629,32 @@ describe('CheckoutModule', () => {
                     basket: {
                         id: basketDelivery.BasketId,
                         total: basketDelivery.BasketSummary.BasketTotals.Total
-                    }
+                    },
+                    ageRestricted: false
+                });
+            });
+            describe('When there are age restricted items', () => {
+                it(`should get the basket details from the backend, set ageRestricted to 'true' and call ${UPDATE_BASKET_DETAILS} mutation.`, async () => {
+                    // Arrange
+                    basketApi.getBasket = jest.fn(() => Promise.resolve({ data: basketDeliveryAgeRestricted }));
+
+                    // Act
+                    await getBasket(context, payload);
+
+                    // Assert
+                    expect(basketApi.getBasket).toHaveBeenCalledWith(payload.url, payload.tenant, payload.language, payload.timeout);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
+                        serviceType: basketDeliveryAgeRestricted.ServiceType.toLowerCase(),
+                        restaurant: {
+                            id: basketDeliveryAgeRestricted.RestaurantId,
+                            seoName: basketDeliveryAgeRestricted.RestaurantSeoName
+                        },
+                        basket: {
+                            id: basketDeliveryAgeRestricted.BasketId,
+                            total: basketDeliveryAgeRestricted.BasketSummary.BasketTotals.Total
+                        },
+                        ageRestricted: true
+                    });
                 });
             });
         });
@@ -722,22 +775,12 @@ describe('CheckoutModule', () => {
                 payload.data = {
                     basketId,
                     customerNotes: {
-                        noteForRestaurant: userNote
+                        NoteForRestaurant: userNote
                     },
                     referralState: 'ReferredByWeb'
                 };
 
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json;v=2',
-                        'x-je-application-id': 7,
-                        'x-je-application-version': applicationVerion,
-                        Authorization: `Bearer ${authToken}`
-                    },
-                    timeout: payload.timeout
-                };
-
-                axios.post = jest.fn(() => Promise.resolve({
+                orderPlacementApi.placeOrder = jest.fn(() => Promise.resolve({
                     status: 200,
                     data: {
                         issues
@@ -748,7 +791,7 @@ describe('CheckoutModule', () => {
                 await placeOrder(context, payload);
 
                 // Assert
-                expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+                expect(orderPlacementApi.placeOrder).toHaveBeenCalledWith(payload.url, payload.data, payload.timeout, state);
             });
 
             describe('when the api call is unsuccessful', () => {
@@ -756,7 +799,7 @@ describe('CheckoutModule', () => {
                     it('should commit `UPDATE_ERRORS` with a known error when a place order issue is found', async () => {
                         // Arrange
                         // eslint-disable-next-line prefer-promise-reject-errors
-                        axios.post = jest.fn(() => Promise.reject({
+                        orderPlacementApi.placeOrder = jest.fn(() => Promise.reject({
                             status: 400,
                             response: {
                                 data: {
@@ -777,7 +820,7 @@ describe('CheckoutModule', () => {
                     it('should commit `UPDATE_ERRORS` with an empty array when a place order issue is not found', async () => {
                         // Arrange
                         // eslint-disable-next-line prefer-promise-reject-errors
-                        axios.post = jest.fn(() => Promise.reject({
+                        orderPlacementApi.placeOrder = jest.fn(() => Promise.reject({
                             status: 400,
                             response: {
                                 data: {
@@ -798,7 +841,7 @@ describe('CheckoutModule', () => {
                     it('should dispatch `updateMessage` with checkoutIssue', async () => {
                         // Arrange
                         // eslint-disable-next-line prefer-promise-reject-errors
-                        axios.post = jest.fn(() => Promise.reject({
+                        orderPlacementApi.placeOrder = jest.fn(() => Promise.reject({
                             status: 400,
                             response: {
                                 data: {
@@ -822,7 +865,7 @@ describe('CheckoutModule', () => {
                     // Arrange
                     const errorMessage = 'An error';
 
-                    axios.post = jest.fn(() => Promise.reject(new Error(errorMessage)));
+                    orderPlacementApi.placeOrder = jest.fn(() => Promise.reject(new Error(errorMessage)));
 
                     // Act
                     const result = await expect(placeOrder(context, payload));
@@ -834,12 +877,10 @@ describe('CheckoutModule', () => {
         });
 
         describe('updateCheckout ::', () => {
-            let config;
-
             const issue = {
                 code: 'RESTAURANT_NOT_TAKING_ORDERS',
                 shouldShowInDialog: true,
-                shouldRedirectToMenu: false
+                shouldRedirectToMenu: true
             };
 
             beforeEach(() => {
@@ -847,15 +888,9 @@ describe('CheckoutModule', () => {
                     mobileNumber
                 };
 
-                config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${authToken}`
-                    },
-                    timeout: payload.timeout
-                };
+                payload.analyticsService = analyticsService;
 
-                axios.patch = jest.fn(() => Promise.resolve({
+                checkoutApi.updateCheckout = jest.fn(() => Promise.resolve({
                     status: 200,
                     data: {
                         isFulfillable: false,
@@ -865,11 +900,20 @@ describe('CheckoutModule', () => {
             });
 
             it('should post the checkout details to the backend.', async () => {
+                // Arrange
+                const request = {
+                    url: payload.url,
+                    state,
+                    rootGetters,
+                    data: payload.data,
+                    timeout: payload.timeout
+                };
+
                 // Act
                 await updateCheckout(context, payload);
 
                 // Assert
-                expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
+                expect(checkoutApi.updateCheckout).toHaveBeenCalledWith(request);
             });
 
             it('should convert an unsupported error into a default error.', async () => {
@@ -882,7 +926,7 @@ describe('CheckoutModule', () => {
 
             describe('when a known issue occurs', () => {
                 beforeEach(() => {
-                    axios.patch = jest.fn(() => Promise.resolve({
+                    checkoutApi.updateCheckout = jest.fn(() => Promise.resolve({
                         status: 200,
                         data: {
                             isFulfillable: false,
@@ -910,8 +954,6 @@ describe('CheckoutModule', () => {
         });
 
         describe('createGuestUser ::', () => {
-            let config;
-
             beforeEach(() => {
                 payload.url = 'http://localhost/account/createguest';
                 payload.data = {
@@ -922,15 +964,7 @@ describe('CheckoutModule', () => {
 
                 payload.otacToAuthExchanger = () => authToken;
 
-                config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept-Tenant': payload.tenant
-                    },
-                    timeout: payload.timeout
-                };
-
-                axios.post = jest.fn(() => Promise.resolve({
+                accountApi.createGuestUser = jest.fn(() => Promise.resolve({
                     status: 200,
                     data: {
                         token: 'otacToken',
@@ -944,7 +978,7 @@ describe('CheckoutModule', () => {
                 await createGuestUser(context, payload);
 
                 // Assert
-                expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+                expect(accountApi.createGuestUser).toHaveBeenCalledWith(payload.url, payload.data, payload.timeout, payload.tenant);
             });
 
             it(`should call ${UPDATE_AUTH_GUEST} mutation.`, async () => {
@@ -957,17 +991,8 @@ describe('CheckoutModule', () => {
         });
 
         describe('getAvailableFulfilment ::', () => {
-            let config;
-
             beforeEach(() => {
-                config = {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    timeout: payload.timeout
-                };
-
-                axios.get = jest.fn(() => Promise.resolve({ data: checkoutAvailableFulfilment }));
+                checkoutApi.getAvailableFulfilment = jest.fn(() => Promise.resolve({ data: checkoutAvailableFulfilment }));
             });
 
             it(`should get the checkout available fulfilment details from the backend and call ${UPDATE_AVAILABLE_FULFILMENT_TIMES} mutation.`, async () => {
@@ -975,7 +1000,7 @@ describe('CheckoutModule', () => {
                 await getAvailableFulfilment(context, payload);
 
                 // Assert
-                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                expect(checkoutApi.getAvailableFulfilment).toHaveBeenCalledWith(payload.url, payload.timeout);
                 expect(commit).toHaveBeenCalledWith(UPDATE_AVAILABLE_FULFILMENT_TIMES, checkoutAvailableFulfilment);
             });
         });
@@ -991,21 +1016,10 @@ describe('CheckoutModule', () => {
         });
 
         describe('getGeoLocation ::', () => {
-            // Arrange
-            let config;
-
             beforeEach(() => {
                 payload.postData = locationData;
 
-                config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${authToken}`
-                    },
-                    timeout: payload.timeout
-                };
-
-                axios.post = jest.fn(() => Promise.resolve({
+                addressGeocodingApi.getGeoLocation = jest.fn(() => Promise.resolve({
                     status: 200,
                     data: geoLocationDetails
                 }));
@@ -1021,7 +1035,7 @@ describe('CheckoutModule', () => {
                     await getGeoLocation(context, payload);
 
                     // Assert
-                    expect(axios.post).toHaveBeenCalledWith(payload.url, locationData, config);
+                    expect(addressGeocodingApi.getGeoLocation).toHaveBeenCalledWith(payload.url, locationData, payload.timeout, state);
                     expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
                 });
             });
@@ -1036,7 +1050,7 @@ describe('CheckoutModule', () => {
                     await getGeoLocation(context, payload);
 
                     // Assert
-                    expect(axios.post).not.toHaveBeenCalled();
+                    expect(addressGeocodingApi.getGeoLocation).not.toHaveBeenCalled();
                     expect(commit).not.toHaveBeenCalled();
                 });
             });
@@ -1083,7 +1097,7 @@ describe('CheckoutModule', () => {
                     await getGeoLocation({ ...context, state: newState }, payload);
 
                     // Assert
-                    expect(axios.post).not.toHaveBeenCalled();
+                    expect(addressGeocodingApi.getGeoLocation).not.toHaveBeenCalled();
                     expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, [storedAddress.Field2, storedAddress.Field1]);
                 });
 
@@ -1098,6 +1112,27 @@ describe('CheckoutModule', () => {
                             postcode: 'NW2 3PE'
                         }
                     };
+
+                    // Act
+                    await getGeoLocation({ ...context, state: newState }, payload);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+
+                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if local storage has no stored coordinates`, async () => {
+                    // Arrange
+                    const newState = {
+                        ...state,
+                        address: {
+                            line1: 'Flat 101',
+                            line2: 'Made Up House',
+                            locality: 'London',
+                            postcode: 'NW2 3PE'
+                        }
+                    };
+
+                    window.localStorage.setItem('je-full-address-details', JSON.stringify({ ...storedAddress, Field1: null, Field2: null }));
 
                     // Act
                     await getGeoLocation({ ...context, state: newState }, payload);
@@ -1129,6 +1164,7 @@ describe('CheckoutModule', () => {
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateUserNote, UPDATE_USER_NOTE, userNote],
+            [updateDateOfBirth, UPDATE_DATE_OF_BIRTH, dateOfBirth],
             [updateMessage, UPDATE_MESSAGE, message]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act

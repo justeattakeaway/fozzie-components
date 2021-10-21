@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivationNotLoggedIn should be rendered correctly 1`] = `
+<div data-test-id="activation-not-logged-in-component" locale="en-GB">
+  <bag-run-bg-icon-stub></bag-run-bg-icon-stub>
+  <h1>
+    Let's get you started with Just Eat Pay.
+  </h1>
+  <p>
+    Do you already have a Just Eat account?
+  </p>
+  <div>
+    <f-button-stub buttontype="primary" buttonsize="large" isfullwidth="true" actiontype="button" href="/login" data-test-id="takeawaypay-activation-not-loggedin-login-link">
+      I have an account
+    </f-button-stub>
+    <f-button-stub buttontype="outline" buttonsize="large" isfullwidth="true" actiontype="button" href="/registration" data-test-id="takeawaypay-activation-not-loggedin-registration-link">
+      Create a new account
+    </f-button-stub>
+  </div>
+</div>
+`;

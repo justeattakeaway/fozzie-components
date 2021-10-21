@@ -26,6 +26,7 @@ export const VUEX_CHECKOUT_EXPERIMENTATION_MODULE = 'fCheckoutExperimentationMod
 
 export const ERROR_CODE_FULFILMENT_TIME_INVALID = 'FULFILMENT_TIME_INVALID';
 export const ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE = 'FULFILMENT_TIME_UNAVAILABLE';
+export const ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS = 'RESTAURANT_NOT_TAKING_ORDERS';
 
 export const ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE = 'basketNotOrderable';
 export const ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE = 'invalidModelState';
@@ -33,10 +34,13 @@ export const ANALYTICS_ERROR_CODE_SET_ORDER_TIME = 'setOrderTime';
 export const ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME = 'invalidOrderTime';
 
 export const DEFAULT_CHECKOUT_ISSUE = 'DEFAULT_CHECKOUT_ISSUE';
+export const DOB_REQUIRED_ISSUE = 'DATE_OF_BIRTH_REQUIRED';
+export const AGE_VERIFICATION_ISSUE = 'AGE_VERIFICATION_FAILED';
 
-export const CHEKOUT_ERROR_FORM_TYPE = {
+export const CHECKOUT_ERROR_FORM_TYPE = {
     default: 'pageLoad',
-    accessForbidden: 'accessForbiddenError'
+    accessForbidden: 'accessForbiddenError',
+    noTimeAvailable: 'noTimeAvailable'
 };
 
-export const HEADER_LOW_VALUE_ORDER_EXPERIMENT = 'x-je-exp-low_value_order_threshold_web';
+export const HEADER_LOW_VALUE_ORDER_EXPERIMENT = 'x-je-exp-low_value_order_phase_2_web';

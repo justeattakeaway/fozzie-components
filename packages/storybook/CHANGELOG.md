@@ -3,6 +3,76 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.45.0
+------------------------------
+*October 4, 2021*
+
+### Changed
+- Change the f-analytics mock to match version 0.17.0 of the component
+
+
+v0.44.0
+------------------------------
+*September 12, 2021*
+
+### Added
+- Add $gtm (aka f-analytics) into Context so Mono Repo components can do this.$gtm.pushEvent({ ... }});
+
+
+v0.43.0
+------------------------------
+*August 25, 2021*
+
+### Changed
+- Switched to a new font JetSansDigital
+
+
+v0.42.1
+------------------------------
+*August 24, 2021*
+
+### Changed
+- Css for code snippets in the mdx docs
+
+
+v0.42.0
+------------------------------
+*August 20, 2021*
+
+### Added
+- Visual regression setup and overview guide.
+- Testing section to contributions page.
+
+
+v0.41.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Add the f-http mockFactory to process within Storybook to support story API mocks
+
+
+v0.40.0
+------------------------------
+*August 05, 2021*
+
+### Added
+- MDX file for media element
+
+### Changed
+- Upgraded the version of storybook to 6.3
+- Modified the config for themes to make it work as much as possible
+
+
+v0.39.0
+------------------------------
+*August 04, 2021*
+
+### Added
+- Upgrade to f-http@v0.6.1
+
+
 v0.38.0
 ------------------------------
 *July 14, 2021*

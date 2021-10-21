@@ -4,6 +4,120 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.1
+------------------------------
+*October 18, 2021*
+
+### Changed
+- Colour of `c-formField-label-description` from `$colour-content-default` to `$color-content-subdued`.
+
+
+v4.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- New border radius in line with Icing Phase 2.
+
+
+v3.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v3.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
+v2.2.0
+------------------------------
+*September 2, 2021*
+
+### Changed
+- Stories to reflect our designs more accurately.
+- Small renamings to match the above. 
+
+
+v2.1.0
+------------------------------
+*August 17, 2021*
+
+### Added
+- Support for `disabled` and `selected` attributes for dropdown options.
+
+
+v2.0.0
+------------------------------
+*August 5, 2021*
+
+### Remove
+- **Breaking Change**: `labelStyle` prop.
+- **Breaking Change**: `Inline` and `InlineNarrow` styles.
+
+### Added
+- `shouldShowLabelText` prop.
+- Documentation.
+
+### Changed
+- **Breaking Change**: Replaced `description` slot and `hasInputDescription` prop with `labelDescription` prop.
+
+
+v1.21.0
+------------------------------
+*August 3, 2021*
+
+### Added
+- `AffixedFormField` component.
+- Tests to cover changes.
+
+
+v1.20.0
+------------------------------
+*July 26, 2021*
+
+### Added
+- `labelDetails` and `assistiveText`.
+- Styling to placeholder.
+
+
+v1.19.0
+------------------------------
+*July 22, 2021*
+
+### Added
+- Leading and Trailing icon slots.
+- Tests to cover changes.
+
+
+v1.18.0
+------------------------------
+*July 22, 2021*
+
+### Changed
+- Made text area data test id dynamic based on name attribute
+
+
+v1.17.0
+------------------------------
+*July 19, 2021*
+
+### Changed
+- Updates to match PIE designs.
+- Disabled label style.
+
+### Added
+- `fieldSize` prop.
+
+
 v1.16.1
 ------------------------------
 *June 30, 2021*

@@ -61,6 +61,11 @@ const messages = {
             description: 'This basket was created with a different account so we can’t proceed, sorry. Please add your items again.',
             buttonText: 'Go back to order'
         },
+        noTimeAvailable: {
+            heading: 'Something went wrong',
+            description: 'We’re sorry, but there are no times for {serviceType} available. Please choose another restaurant to order from.',
+            buttonText: 'Search for a different restaurant'
+        },
 
         guestUserCreationFailure: 'Guest checkout isn’t available, sorry. Try again soon or sign up',
 
@@ -74,7 +79,7 @@ const messages = {
             RESTAURANT_NOT_TAKING_ORDERS: {
                 title: 'Restaurant not taking orders',
                 message: 'We’re sorry, but the restaurant is not currently taking orders. Please choose another restaurant to order from.',
-                buttonText: 'Ok'
+                buttonText: 'Back to search'
             },
 
             SERVICE_TYPE_UNAVAILABLE: {
@@ -111,6 +116,12 @@ const messages = {
                 title: 'Table number/name is required',
                 message: 'It appears you didn’t tell us how to find you in the restaurant. Please enter your table number and try again.',
                 buttonText: 'Ok'
+            },
+
+            GEOLOCATION_REQUIRED: {
+                title: 'Something went wrong',
+                message: 'We’re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
+                buttonText: 'Back to order'
             },
 
             DEFAULT_CHECKOUT_ISSUE: {
@@ -190,7 +201,20 @@ const messages = {
     privacyPolicyLinkUrl: 'https://www.just-eat.co.uk/privacypolicy',
 
     cookiePolicyLinkText: 'Cookie Policy',
-    cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy'
+    cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy',
+
+    ageVerification: {
+        heading: 'Please confirm your date of birth',
+        description: 'You’re ordering something alcoholic so we need to double-check you’re 18 or over.',
+        ageSelection: {
+            day: 'Day',
+            month: 'Month',
+            year: 'Year'
+        },
+        askForIdDescription: 'You might be asked for photographic ID when your order is delivered. The driver won’t hand over your order if the name on your order doesn’t match the name on your ID or to anyone who appears to be intoxicated.',
+        errorMessage: 'You must be over 18 to order alcohol.',
+        buttonText: 'Continue'
+    }
 };
 
 const dateTimeFormats = {

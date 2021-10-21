@@ -1,16 +1,18 @@
 <link rel="shortcut icon" href="/storybook.ico" type="image/x-icon">
 
-<link rel="preload" href="https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2" as="font"
+<link rel="preload" href="https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff2" as="font"
     type="font/woff2" crossorigin>
 
 <script>
     (function () {
-        var fontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff") format("woff")';
+        var boldFontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Bold-optimised.woff") format("woff")';
+        var extraboldFontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-ExtraBold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-ExtraBold-optimised.woff") format("woff")';
 
         if ('fonts' in document) {
-            var bold = new FontFace('JustEatBasis', fontUrls, { weight: '600' });
+            var bold = new FontFace('JETSansDigital', boldFontUrls, { weight: '700' });
+            var extrabold = new FontFace('JETSansDigital', extraboldFontUrls, { weight: '800' });
 
-            Promise.all([bold.load()])
+            Promise.all([bold.load(), extrabold.load()])
                 .then(function (fonts) {
                     fonts.forEach(function (font) {
                         document.fonts.add(font);
@@ -26,7 +28,8 @@
             // Awkwardly dump the second stage @font-face blocks in the head
             var style = document.createElement('style');
             // Note: Edge supports WOFF2
-            style.innerHTML = '@font-face { font-family: JustEatBasis; font-weight: 600; src: ' + fontUrls + '; }';
+            style.innerHTML = '@font-face { font-family: JETSansDigital; font-weight: 700; src: ' + boldFontUrls + '; }';
+            style.innerHTML = '@font-face { font-family: JETSansDigital; font-weight: 800; src: ' + extraboldFontUrls + '; }';
             document.head.appendChild(style);
             document.documentElement.classList.add('webfonts-loaded');
         }
@@ -47,9 +50,9 @@
 
 <style>
     @font-face {
-        font-family: JustEatBasis;
-        src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2') format('woff2'),
-            url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff') format('woff');
+        font-family: JETSansDigital;
+        src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff2') format('woff2'),
+            url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff') format('woff');
         font-weight: 400;
         font-display: swap;
     }
@@ -58,26 +61,33 @@
         font-feature-settings: "tnum"; /* Enable tabular numbers */
     }
 
+    #storybook-preview-wrapper {
+        background-color: #ffffff;
+    }
     /*
      * Sidebar override styles
      */
     div.sidebar-subheading {
         color: #fff;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 800;
         letter-spacing: normal;
         margin-bottom: 16px;
         text-transform: none;
     }
 
+    button.sidebar-item,
     a.sidebar-item {
         padding-top: 8px;
         padding-bottom: 8px;
+        font-size: 14px;
+        margin-bottom: 4px;
+        color: #ffffff;
     }
 
     a.sidebar-item:hover,
     a.sidebar-item:focus {
-        color: #fff;
+        color: #ffffff;
     }
 
     span.sidebar-expander {
@@ -96,9 +106,9 @@
 
     /* Theme dropdown overlay in storybook */
     div.css-16n0kwd {
-        border-bottom-color: #fff;
+        border-bottom-color: #ffffff;
     }
     div.css-wmj67n {
-        background: #fff;
+        background: #ffffff;
     }
 </style>

@@ -1,12 +1,13 @@
 <template>
-    <div>
+    <div data-test-id="activation-successful-component">
         <bag-celebrate-bg-icon :class="$style['c-takeawaypayActivation-icon']" />
 
         <h1 :class="$style['c-takeawaypayActivation-title']">
             {{ $t('messages.titleActivationSuccessful') }}
         </h1>
 
-        <p>
+        <p
+            :class="$style['c-takeawaypayActivation-description']">
             {{ $t('messages.descriptionActivationSuccessful') }}
         </p>
 

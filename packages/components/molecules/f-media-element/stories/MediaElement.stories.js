@@ -37,7 +37,7 @@ MediaElementComponent.args = {
         }
     },
     altText: 'Test alt text',
-    imageUrl: 'https://via.placeholder.com/250',
+    imageUrl: 'https://via.placeholder.com/250'
 };
 
 MediaElementComponent.argTypes = {

@@ -12,6 +12,10 @@ const {
 
 
 module.exports = class StatusBanner extends Page {
+    constructor() {
+        super('organism', 'status-banner-component');
+    }
+
     get component () { return $(COMPONENT); }
 
     get image () { return $(BANNER_IMAGE); }
@@ -24,6 +28,10 @@ module.exports = class StatusBanner extends Page {
     get button () { return $(BUTTON); }
 
     get errorMessage () { return $(ERROR_MESSAGE); }
+
+    load () {
+        super.load(this.component);
+    }
 
     open (url) {
         super.open(url);

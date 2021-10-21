@@ -3,6 +3,235 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.7.1
+------------------------------
+ *October 20, 2021*
+
+ ### Added
+ - Document for recording agreed Do's and Don'ts on our codebase
+
+
+v4.7.0
+------------------------------
+*October 19, 2021*
+
+### Changed
+- `fozzie` package version bump.
+
+
+v4.6.3
+------------------------------
+*October 18, 2021*
+
+### Added
+- `f-compatibility` to Circle CI cache.
+
+
+v4.6.2
+------------------------------
+*October 18, 2021*
+
+### Added
+- `f-navigation-links` to Circle CI cache.
+
+
+v4.6.1
+ ------------------------------
+ *October 12, 2021*
+
+### Added
+- `f-contact-preferences` to Circle CI cache.
+
+
+v4.6.0
+------------------------------
+*October 8, 2021*
+
+ ### Changed
+ - Always run visual tests against master.
+ - Only run visual tests against changed packages.
+
+
+v4.5.0
+------------------------------
+*October 8, 2021*
+
+### Updated
+- webdriverIO to v91.
+
+
+v4.4.0
+------------------------------
+*October 7, 2021*
+
+### Added
+- Conditional logic to visual regression tests (via new `visual-regression-preflight.js` script).
+- Custom Github Action for triggering Circle CI pipeline when `wip` tag is removed.
+
+
+v4.3.2
+------------------------------
+*October 6, 2021*
+
+### Updated
+- Only apply `wip` label to newly opened/reopened PRs.
+
+
+v4.3.1
+------------------------------
+*October 6, 2021*
+
+### Changed
+- `labeler` workflow config path
+
+
+v4.3.0
+------------------------------
+*October 6, 2021*
+
+### Added
+- Labeler action
+  - Automatically applies `wip` label to new PRs
+  - Applies category labels based on whether the PR affects `atoms`, `molecules`, `services`, etc.
+
+
+v4.2.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- `fozzie` package version bump to 6.0.0-beta.5 to include new colour theme and radius vars.
+
+
+v4.1.0
+------------------------------
+*October 4, 2021*
+
+### Updated
+- Circle CI cached components to include new f-restaurant-card component
+
+
+v4.0.0
+------------------------------
+*September 15, 2021*
+
+### Updated
+- fozzie version to make normalize styles optional. This will remove normalize styles from the components by default.
+- JETSansDigital font instead of JustEatBasis for the components and storybook.
+
+
+v4.0.0-beta.0
+------------------------------
+*August 25, 2021*
+
+### Updated
+- fozzie version to include new font.
+
+### Changed
+- Storybook font to become new JETSansDigital instead of JustEatBasis.
+
+
+v3.54.0
+------------------------------
+*September 2, 2021*
+
+### Changed
+- Adding logging for local testing so it's easier to troubleshoot component tests.
+
+
+v3.53.2
+------------------------------
+*September 2, 2021*
+
+### Fixed
+- Typography documentation updated with correct syntax.
+
+
+v3.53.1
+------------------------------
+*August 23, 2021*
+
+### Changed
+- Removing all restore cache except master on build phase
+
+### Added
+- Added back in slack notifications on build steps
+
+
+v3.53.0
+------------------------------
+*August 23, 2021*
+
+### Changed
+- Changed the circle CI config to implement caching for our builds and splitting the build process into test and build
+
+
+v3.52.2
+------------------------------
+*August 12, 2021*
+
+### Fixed
+- Issue with deps not getting build when building Storybook.
+
+
+v3.52.1
+------------------------------
+*August 11, 2021*
+
+### Updated
+- Various packages to latest version of `f-wdio-utils - v0.3.0`
+
+
+v3.52.0
+------------------------------
+*August 5, 2021*
+
+### Changed
+- Upgraded webpack resolution to support storybook upgrade.
+
+
+v3.51.0
+------------------------------
+*August 4, 2021*
+
+### Changed
+- Storybook documentation update and updating some minor package versions.
+
+
+v3.50.0
+------------------------------
+*July 22, 2021*
+
+### Added
+- Names for unnamed Circle CI steps.
+
+
+v3.49.0
+------------------------------
+*July 20, 2021*
+
+### Changed
+- Fozzie version to v5.0.0-beta.10 which has the latest pie design token variables.
+
+
+v3.48.0
+------------------------------
+*July 19, 2021*
+
+### Added
+- Test level overview documentation to Storybook.
+
+
+v3.47.0
+------------------------------
+*July 19, 2021*
+
+### Changed
+- Bump dependency of `f-button` across a number of packages (no version bumps as no changes to the actual package were needed).
+- Some other minor package version bumps.
+
+
 v3.46.0
 ------------------------------
 *July 16, 2021*

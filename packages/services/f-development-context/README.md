@@ -9,6 +9,7 @@
 - **$cookies** - The standard way to interact with cookies through `this.$cookies`
 - **i18n** - The standard way to localise your components using `<i18n>`, `this.i18n` and `$t('message')`
 - **VueX** - The standard way to store state information in components
+- **$gtm** - The standard way to provide GTM access via `this.$gtm` (note: the variable name `gtm` is configurable)
 
 ### $logger Interface
 - logError(message, store, additionalProperties)
@@ -23,3 +24,10 @@
 
 ### VueX Interface
 - Refer to third party documentation: https://vuex.vuejs.org/guide/
+
+### $gtm Interface
+- pushPlatformData(...)
+- pushPageData(...)
+- pushUserData(...)
+- pushEvent(...)
+- Refer to documentation: https://github.com/justeat/fozzie-components/blob/master/packages/services/f-analytics/README.md

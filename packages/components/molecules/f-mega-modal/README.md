@@ -111,7 +111,6 @@ The props that can be defined are as follows:
 | `is-full-height` | `Boolean` | `false` | Sets the modal content to full height of the screen.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
 | `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable. |
 | `is-close-fixed` | `Boolean` | `false` | Sets the modal close button position to `fixed`. |
-| `is-close-rounded` | `Boolean` | `false` | Sets the modal close button to display in a rounded style. |
 | `is-positioned-bottom` | `Boolean` | `false` | Sets the modal position to the bottom of the viewport for all screen widths. |
 | `has-overlay` | `Boolean` | `true` | Controls whether or not to display an overlay behind the modal. |
 | `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |

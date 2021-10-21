@@ -5,9 +5,16 @@ const {
 } = require('./f-user-message-selectors');
 
 module.exports = class UserMessage extends Page {
+    constructor() {
+        super('molecule', 'user-message-component');
+    }
 
     get component () { return $(USER_MESSAGE_COMPONENT) }
     get content () { return this.component.$(USER_MESSAGE_CONTENT) }
+
+    load () {
+        super.load(this.component);
+    }
 
     waitForComponent () {
         super.waitForComponent(this.component);

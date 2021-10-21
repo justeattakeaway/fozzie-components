@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-breadcrumbs",
   "description": "Fozzie Bread Crumbs – Provides clickable paths back to previous pages",
-  "version": "0.3.0",
+  "version": "2.0.0",
   "main": "dist/f-breadcrumbs.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -57,7 +57,7 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.2.0",
+    "@justeat/f-wdio-utils": "0.3.0",
     "node-sass-magic-importer": "5.3.2"
   }
 }

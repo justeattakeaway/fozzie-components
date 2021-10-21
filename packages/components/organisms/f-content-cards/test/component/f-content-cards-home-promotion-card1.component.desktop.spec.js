@@ -1,4 +1,3 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const HomePromotionCard1 = require('../../test-utils/component-objects/f-content-cards-home-promotion-card1.component');
 const HomePromotionCard2 = require('../../test-utils/component-objects/f-content-cards-home-promotion-card2.component');
 
@@ -7,12 +6,9 @@ let card2;
 
 describe('home promotion card 1 component tests - @browserstack', () => {
     beforeEach(() => {
-        card = new HomePromotionCard1('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
-        card2 = new HomePromotionCard2('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
-        const pageUrl = buildUrl(card.componentType, card.componentName, card.path);
-
-        card.open(pageUrl);
-        card.waitForComponent();
+        card = new HomePromotionCard1();
+        card2 = new HomePromotionCard2();
+        card.load();
     });
 
     it('should display the card', () => {
@@ -29,6 +25,9 @@ describe('home promotion card 1 component tests - @browserstack', () => {
     });
 
     it('should display the elements of the inner card', () => {
+        // Why does this pass when the second card was not loaded?
+        // Because loading card is enough to make these tests pass?
+        // Or something more nefarious??!
         // Assert
         expect(card2.isComponentDisplayed()).toBe(true);
         expect(card2.isCallToActionDisplayed()).toBe(true);

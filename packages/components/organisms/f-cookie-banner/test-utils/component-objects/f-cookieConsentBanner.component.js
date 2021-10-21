@@ -1,7 +1,11 @@
-
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 module.exports = class CookieBanner extends Page {
+    constructor() {
+        super('organism', 'cookie-banner-component');
+    }
+
     get component () { return $('[data-test-id="cookieConsentBanner"]'); }
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
@@ -13,6 +17,14 @@ module.exports = class CookieBanner extends Page {
     get cookieAcceptNecessaryButton () { return this.component.$('[data-test-id="accept-necessary-cookies-button"]'); }
 
     get componentContent () { return $('[data-test-id="cookieBannerContent"]'); }
+
+    load () {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
+        browser.deleteAllCookies();
+        browser.refresh();
+        this.waitForComponent();
+    }
 
     open (url) {
         super.open(url);

@@ -13,7 +13,7 @@
 
             <p :class="$style['c-checkoutHeader-loginLink']">
                 <a
-                    class="o-link--bold o-link--noDecoration"
+                    class="o-link--bold"
                     :href="loginUrl"
                     data-test-id="switch-user-link"
                     @click="onVisitLoginPage">
@@ -130,7 +130,6 @@ export default {
     margin-top: spacing(x0.5);
     margin-bottom: 0;
     @include font-size('body-s');
-    font-weight: $font-weight-bold;
     color: $color-content-subdued;
 }
 

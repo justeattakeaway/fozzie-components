@@ -69,17 +69,32 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| `locale` | `String` | `''` | Sets locale for I18n. |
-| `labelText` | `String` | `''` | The text that will be displayed in the form field label. |
-| `inputType` | `String` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox`, `dropdown`, `number`, `tel`, `textarea`  |
-| `labelStyle` | `String` | `'default'` | Defines where the label will be rendered in relation to the form field. <br>Options: <br>`default` - Displays the label above the form field, <br>`inline` Displays the label inside the form field,<br>`inlineNarrow` Displays the label above the form field when in web/tablet. Displays the label inside the form field when in mobile.<br>|
-| `value` | `String` or `Number` | `''` | The value of the form field. |
+| `assistiveText` | `String` | `''` | Text to assist the user that will display underneath the input field. |
+| `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. Each option can contain the following properties:<br /> `text` (required) - The text to be displayed.<br />`value` (required) - The underlying value for the option.<br />`disabled` (optional) - Can be used to prevent an option from being selected.<br />`selected` (optional) - This will be ignored by `v-model` (see Vue docs on Form Input Bindings), but it may be used together with `disabled` to create a placeholder. |
+| `fieldSize` | `String` | `medium` | The size of the form field. <br>Options: `small`, `medium`, `large` |
 | `hasError` | `Boolean` | `false` | When `true` border colour changes to red. |
-| `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. |
+| `inputType` | `String` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox`, `dropdown`, `number`, `tel`, `textarea`  |
 | `isGrouped` | `Boolean` | `false` | When `true` will remove margin between all grouped form fields. |
-| `minNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `min` property when `inputType` is `number` |
+| `labelDescription` | `String` | `''` | Extra text that will display underneath the label text. |
+| `labelDetails` | `String` | `''` | Details for the label that will display on the right of label text. |
+| `labelText` | `String` | `''` | The text that will be displayed in the form field label. |
+| `locale` | `String` | `''` | Sets locale for I18n. |
 | `maxNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `max` property when `inputType` is `number` |
-| `hasInputDescription` | `Boolean` | `false` | When `true` will add the ability to insert extra html element under form label to the component via slot. |
+| `minNumber` | `Number` or `undefined` | `undefined` | Sets the value of the `min` property when `inputType` is `number` |
+| `prefix` | `String` | `''` | Prefix will display on the left of the input field. |
+| `shouldShowLabelText` | `Boolean` | `true` | Hides the label if set to `false` |
+| `suffix` | `String` | `''` | Suffix will display on the right of the input field. |
+| `value` | `String` or `Number` | `''` | The value of the form field. |
+
+
+### Slots
+
+Available slots that can be used.
+
+| Slot Name  | Type  | Description |
+| ----- | ----- | ----------- |
+| `icon-leading` | Icon | Will display an icon inside the input field on the left hand side. |
+| `icon-trailing` | Icon | Will display an icon inside the input field on the right hand side. |
 
 ### Events
 

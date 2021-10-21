@@ -7,11 +7,16 @@ describe('FormDropdown', () => {
         { text: 'text 1', value: 'value 1' },
         { text: 'text 2', value: 'value 2' },
         { text: 'text 3', value: 'value 3' },
-        { text: 'text 4', value: 'value 4' }
+        { disabled: true, text: 'text 4', value: 'value 4' }
     ];
 
+    const attributes = {
+        disabled: null
+    };
+
+    const propsData = { attributes, dropdownOptions };
+
     it('should be defined', () => {
-        const propsData = {};
         const wrapper = shallowMount(FormDropdown, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
@@ -20,7 +25,6 @@ describe('FormDropdown', () => {
         describe('dropdownOptions ::', () => {
             it('should populate `<option>` tags', () => {
                 // Arrange & Act
-                const propsData = { dropdownOptions };
                 const wrapper = shallowMount(FormDropdown, { propsData });
                 const option = wrapper.find('[data-test-id="formfield-dropdown-option-0"]');
 
@@ -29,21 +33,42 @@ describe('FormDropdown', () => {
                 expect(option.element.value).toEqual('value 0');
             });
 
-            it('should display an empty `<select>`', () => {
+            it('should display an empty `<select>` if no options available', () => {
                 // Arrange & Act
-                const propsData = {};
-                const wrapper = shallowMount(FormDropdown, { propsData });
+                const wrapper = shallowMount(FormDropdown, {
+                    propsData: {
+                        ...propsData,
+                        dropdownOptions: null
+                    }
+                });
                 const option = wrapper.find('[data-test-id="formfield-dropdown-option-0"]');
 
                 // Assert
                 expect(option.exists()).toBe(false);
+            });
+
+            it('should apply `disabled` attribute if passed in', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormDropdown, { propsData });
+                const option = wrapper.find('[data-test-id="formfield-dropdown-option-4"]');
+
+                // Assert
+                expect(option.attributes().disabled).toBe('disabled');
+            });
+
+            it('should not apply disabled attribute if not passed in', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormDropdown, { propsData });
+                const option = wrapper.find('[data-test-id="formfield-dropdown-option-1"]');
+
+                // Assert
+                expect(option.attributes().disabled).toBeUndefined();
             });
         });
 
         describe('value ::', () => {
             it('should default to first dropdown option when omitted', () => {
                 // Arrange & Act
-                const propsData = { dropdownOptions };
                 const wrapper = shallowMount(FormDropdown, { propsData });
 
                 // Assert
@@ -52,8 +77,12 @@ describe('FormDropdown', () => {
 
             it('should update selected value when changed', async () => {
                 // Arrange
-                const propsData = { dropdownOptions, value: 'value 1' };
-                const wrapper = shallowMount(FormDropdown, { propsData });
+                const wrapper = shallowMount(FormDropdown, {
+                    propsData: {
+                        ...propsData,
+                        value: 'value 1'
+                    }
+                });
 
                 // Act
                 await wrapper.setProps({ value: 'value 3' });
@@ -66,8 +95,6 @@ describe('FormDropdown', () => {
 
     describe('methods ::', () => {
         describe('updateOption ::', () => {
-            const propsData = { dropdownOptions };
-
             it('should emit `update` when an option is selected', async () => {
                 // Arrange
                 const wrapper = shallowMount(FormDropdown, { propsData });

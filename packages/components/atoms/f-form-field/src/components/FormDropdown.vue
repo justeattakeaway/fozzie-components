@@ -1,13 +1,16 @@
 <template>
     <div
-        :class="$style['c-formDropdown']"
         :data-test-id="testId.container">
-        <caret-icon
-            :class="$style['c-formDropdown-icon']"
-            :data-test-id="testId.icon" />
         <select
             :id="$attrs.id"
-            :class="$style['c-formDropdown-select']"
+            :class="[
+                $style['c-formDropdown-select'],
+                $style['c-formField-field'],
+                $style[`c-formField-field--${fieldSize}`], {
+                    [$style['c-formField--invalid']]: hasError,
+                    [$style['c-formField-padding--iconLeading']]: hasIcon
+                }]"
+            :disabled="attributes.disabled"
             :data-test-id="testId.select"
             v-bind="attributes"
             :value="value"
@@ -15,9 +18,15 @@
             <option
                 v-for="(option, index) in dropdownOptions"
                 :key="index"
+                :disabled="option.disabled"
+                :selected="option.selected"
                 :data-test-id="`${testId.option}-${index}`"
                 :value="option.value">{{ option.text }}</option>
         </select>
+
+        <caret-icon
+            :class="$style['c-formDropdown-icon']"
+            :data-test-id="testId.icon" />
     </div>
 </template>
 
@@ -25,7 +34,7 @@
 import { CaretIcon } from '@justeat/f-vue-icons';
 
 export default {
-    name: 'FormField',
+    name: 'FormDropdown',
 
     components: {
         CaretIcon
@@ -45,6 +54,18 @@ export default {
         dropdownOptions: {
             type: Array,
             default: () => null
+        },
+        fieldSize: {
+            type: String,
+            default: 'medium'
+        },
+        hasError: {
+            type: Boolean,
+            default: false
+        },
+        hasIcon: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -70,34 +91,51 @@ export default {
 </script>
 
 <style lang="scss" module>
+$form-dropdown-iconIndent                     : 21px;
+$form-dropdown-iconIndent--small              : 17px;
+$form-dropdown-iconIndent--large              : 25px;
+
 .c-formDropdown-icon {
     width: spacing(x1.5);
     position: absolute;
     right: spacing(x3);
-    bottom: 20px;
     transform: rotate(180deg);
     pointer-events: none;
 
     path {
         fill: $color-content-subdued;
     }
+
+    .c-formField-field--small ~ & {
+        bottom: $form-dropdown-iconIndent--small;
+    }
+
+    .c-formField-field--medium ~ & {
+        bottom: $form-dropdown-iconIndent;
+    }
+
+    .c-formField-field--large ~ & {
+        bottom: $form-dropdown-iconIndent--large;
+    }
+}
+
+.c-formDropdown-iconIndent--small {
+    bottom: $form-dropdown-iconIndent--small;
+}
+
+.c-formDropdown-iconIndent--medium {
+    bottom: $form-dropdown-iconIndent;
+}
+
+.c-formDropdown-iconIndent--large {
+    bottom: $form-dropdown-iconIndent--large;
 }
 
 .c-formDropdown-select {
-    padding: 0 spacing(x2);
-    height: 100%;
-    width: 100%;
-    font: inherit;
-    color: inherit;
-    background: transparent;
-    outline: none;
+    padding-right: $form-input-iconPadding;
 
     /* Remove default styling */
-    border: none;
+    outline: none;
     appearance: none;
-
-    &:hover {
-        background-color: $form-input-bg--hover;
-    }
 }
 </style>

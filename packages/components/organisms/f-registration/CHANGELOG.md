@@ -4,6 +4,130 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.3
+------------------------------
+*October 18, 2021*
+
+### Changed
+- Updated version of `f-form-field`.
+
+
+v2.0.2
+------------------------------
+*October 15, 2021*
+
+Republish to fix a bad previous publish.
+
+
+v2.0.1
+------------------------------
+*October 14, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v2.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-card`, `f-link` and `f-form-field` to include icing phase 2 changes.
+
+### Removed
+- `is-rounded` prop from `f-card` component call as the card is now rounded by default.
+
+### Added
+- `is-distinct` prop for f-link component call to make links blue.
+
+
+v1.1.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-form-field`, `f-error-message`, `f-link` and `f-card` to remove normalize styles from the build.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.2
+------------------------------
+*September 8, 2021*
+
+### Changed
+- Updated font weights after design review.
+- Restored decoration (underline) for link to login page.
+
+
+v1.0.0-beta.1
+------------------------------
+*September 7, 2021*
+
+### Changed
+- Republish to remove JustEatBasis from css output file.
+
+
+v1.0.0-beta.0
+------------------------------
+*September 1, 2021*
+
+### Updated
+- New font JETSansDigital
+- `f-button` to v2.0.0-beta.0 which use the new font
+- `f-form-field` to v3.0.0-beta.0 which use the new font
+
+
+v0.63.0
+------------------------------
+*August 31, 2021*
+
+### Updated
+- Updated generic error message and handling on registration failure.
+
+
+v0.62.0
+------------------------------
+*August 19, 2021*
+
+### Updated
+- Versions of `f-card`, `f-error-message`,`f-form-field`, `f-vue-icons` to the latest
+
+
+v0.61.0
+------------------------------
+*August 19, 2021*
+
+### Fixed
+- Removing the `je-oidc` cookie when registering to avoid logged in users from being kept logged in to the previous account.
+
+
+v0.60.0
+------------------------------
+*August 05, 2021*
+
+### Changed
+- Update the story file API mocking to work with f-http
+
+
+v0.59.0
+------------------------------
+*August 04, 2021*
+
+### Changed
+- Updated Integration Tests to work with new f-http version
+- Use $http from context instead of creating a new HTTP Client
+- Updated version of `f-button`.
+
+
 v0.58.0
 ------------------------------
 *June 25, 2021*

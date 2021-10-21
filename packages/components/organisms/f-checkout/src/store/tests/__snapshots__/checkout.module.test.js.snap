@@ -3,6 +3,7 @@
 exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with delivery response. 1`] = `
 Object {
   "address": Object {
+    "administrativeArea": undefined,
     "line1": "1 Bristol Road",
     "line2": "Flat 1",
     "locality": "Bristol",
@@ -18,13 +19,17 @@ Object {
     "total": 0,
   },
   "customer": Object {
+    "dateOfBirth": null,
     "email": "",
     "firstName": "Joe",
     "lastName": "Bloggs",
     "mobileNumber": "+447111111111",
   },
   "errors": Array [],
-  "geolocation": null,
+  "geolocation": Object {
+    "latitude": 51.5165,
+    "longitude": 0.1033,
+  },
   "hasAsapSelected": false,
   "id": "12345",
   "isFulfillable": true,

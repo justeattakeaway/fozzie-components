@@ -1,4 +1,3 @@
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import {
     MUTATION_SET_AUTH_TOKEN,
@@ -9,31 +8,16 @@ import {
 } from './types';
 
 /**
- * Setup the config for axios
- * @param authHeader
- * @param timeout
- * @returns {{headers: {Authorization, "Content-Type": string}, timeout}}
- */
-const createAxiosConfig = (authHeader, timeout) => ({
-    headers: {
-        'Content-Type': 'application/json',
-        Authorization: authHeader
-    },
-    timeout
-});
-
-/**
  * @function resolveCustomerDetails
- * @param  {object} data  - Api response object.
  * @param  {string} authToken - auth token.
  */
-const resolveCustomerDetails = (data, authToken) => {
+const resolveCustomerDetails = authToken => {
     const tokenData = jwtDecode(authToken);
     return {
-        phoneNumber: data?.customer?.phoneNumber ? data?.customer?.phoneNumber :
-            (tokenData?.phone_number || tokenData?.mobile_number),
-        firstName: data?.customer?.firstName ? data?.customer?.firstName : tokenData?.given_name,
-        lastName: data?.customer?.lastName ? data?.customer?.lastName : tokenData?.family_name
+        phoneNumber: (tokenData?.phone_number || tokenData?.mobile_number),
+        firstName: tokenData?.given_name,
+        lastName: tokenData?.family_name,
+        globalUserId: tokenData?.global_user_id
     };
 };
 
@@ -49,7 +33,9 @@ export default {
             lastName: null
         },
 
-        brazeApiKey: null
+        brazeApiKey: null,
+
+        globalUserId: null
     }),
 
     actions: {
@@ -61,15 +47,8 @@ export default {
          * @param timeout
          * @returns {Promise<void>}
          */
-        [ACTION_HANDLE_CUSTOMER_DATA]: async ({ commit, state }, { url, timeout }) => {
-            const authHeader = `Bearer ${state.authToken}`;
-
-            const config = createAxiosConfig(authHeader, timeout);
-
-            const { data } = await axios.get(url, config);
-
-            const customer = resolveCustomerDetails(data);
-
+        [ACTION_HANDLE_CUSTOMER_DATA]: async ({ commit, state }) => {
+            const customer = resolveCustomerDetails(state.authToken);
             commit(MUTATION_SET_CUSTOMER_DATA, customer);
         },
 
@@ -86,14 +65,14 @@ export default {
          * @returns {Promise<void>}
          */
         [ACTION_INITIALISE_OFFERS]: async ({ commit, dispatch, getters }, {
-            url, timeout, brazeApiKey, authToken
+            brazeApiKey, authToken
         }) => {
             commit(MUTATION_SET_AUTH_TOKEN, authToken);
 
             commit(MUTATION_SET_BRAZE_KEY, brazeApiKey);
 
             if (getters.isAuthenticated) {
-                await dispatch(ACTION_HANDLE_CUSTOMER_DATA, { url, timeout });
+                await dispatch(ACTION_HANDLE_CUSTOMER_DATA);
             }
         }
     },
@@ -103,12 +82,15 @@ export default {
             state.authToken = value;
         },
 
-        [MUTATION_SET_CUSTOMER_DATA]: (state, { friendlyName, firstName, lastName }) => {
+        [MUTATION_SET_CUSTOMER_DATA]: (state, {
+            friendlyName, firstName, lastName, globalUserId
+        }) => {
             state.customer = {
                 friendlyName,
                 firstName,
                 lastName
             };
+            state.globalUserId = globalUserId;
         },
 
         [MUTATION_SET_BRAZE_KEY]: (state, value) => {

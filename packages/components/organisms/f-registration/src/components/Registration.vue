@@ -3,7 +3,6 @@
         <card-component
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
-            is-rounded
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="registration-component"
@@ -19,8 +18,8 @@
                 @click="visitLoginPage">
                 <v-link
                     is-bold
-                    :href="loginUrl"
-                    :has-text-decoration="false">
+                    is-distinct
+                    :href="loginUrl">
                     {{ copy.navLinks.login.text }}
                 </v-link>
             </p>
@@ -131,6 +130,7 @@
                     button-type="primary"
                     button-size="large"
                     is-full-width
+                    action-type="submit"
                     :disabled="shouldDisableCreateAccountButton">
                     {{ copy.labels.createAccountBtn }}
                 </f-button>
@@ -142,6 +142,7 @@
                 {{ copy.navLinks.termsAndConditions.prefix }}
                 <v-link
                     is-bold
+                    is-distinct
                     data-test-id="ts-and-cs-link"
                     :href="copy.navLinks.termsAndConditions.url"
                     target="_blank">
@@ -150,6 +151,7 @@
                 {{ copy.navLinks.privacyPolicy.prefix }}
                 <v-link
                     is-bold
+                    is-distinct
                     data-test-id="privacy-policy-link"
                     :href="copy.navLinks.privacyPolicy.url"
                     target="_blank">
@@ -158,6 +160,7 @@
                 {{ copy.navLinks.cookiesPolicy.prefix }}
                 <v-link
                     is-bold
+                    is-distinct
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
                     target="_blank">
@@ -469,7 +472,10 @@ export default {
                     registrationSource: 'Native',
                     marketingPreferences: []
                 };
-                await RegistrationServiceApi.createAccount(this.createAccountUrl, registrationData, this.tenant);
+
+                this.$cookies.remove('je-oidc');
+
+                await RegistrationServiceApi.createAccount(this.$http, this.createAccountUrl, registrationData, this.tenant);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
                 if (error.response && error.response.status) {
@@ -493,7 +499,7 @@ export default {
                     }
                 }
 
-                this.genericErrorMessage = error.message || this.copy.genericErrorMessage;
+                this.genericErrorMessage = this.copy.genericErrorMessage;
                 this.$emit(EventNames.CreateAccountFailure, this.genericErrorMessage);
             } finally {
                 this.shouldDisableCreateAccountButton = false;

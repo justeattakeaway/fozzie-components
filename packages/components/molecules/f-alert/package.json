@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "0.7.0",
+  "version": "3.0.2",
   "main": "dist/f-alert.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -50,9 +50,9 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.2.0",
+    "@justeat/f-wdio-utils": "0.3.0",
     "node-sass-magic-importer": "5.3.2",
-    "@justeat/f-button": "1.9.0",
+    "@justeat/f-button": "3.0.2",
     "@justeat/f-vue-icons": "1.13.0"
   }
 }

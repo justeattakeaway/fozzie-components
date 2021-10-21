@@ -1,9 +1,17 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class Tabs extends Page {
+    constructor() {
+        super('molecule', 'vue-tabs-component');
+    }
+
     get component () { return $('[data-test-id="tabs-component"]'); }
 
     get tabButtons () { return $$('[data-test-id*="tab-button"]'); }
+
+    load () {
+        super.load(this.component);
+    }
 
     open (url) {
         super.open(url);

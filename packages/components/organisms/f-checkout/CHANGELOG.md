@@ -4,6 +4,461 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.6.1
+------------------------------
+*October 19, 2021*
+
+### Changed
+- Updated version of `f-form-field`.
+
+
+v2.6.0
+------------------------------
+*October 19, 2021*
+
+### Added
+- `handleEventLogging` method to handle events and logging.
+
+
+v2.5.2
+------------------------------
+*October 15, 2021*
+
+### Changed
+- Updated version of `f-alert`, `f-mega-modal` to fix previous bad release.
+
+
+v2.5.1
+------------------------------
+*October 14, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-alert`, `f-mega-modal`.
+
+
+v2.5.0
+------------------------------
+*October 12, 2021*
+
+### Removed
+- Redirect to login if the user is logged out and guest checkout is disabled
+
+
+v2.4.1
+------------------------------
+*October 13, 2021*
+
+### Changed
+- Place order note key to the correct case `NoteForRestaurant`
+
+
+v2.4.0
+------------------------------
+*October 12, 2021*
+
+### Added
+- Redirect to login if the user is logged out and guest checkout is disabled
+
+
+v2.3.0
+------------------------------
+*October 11, 2021*
+
+### Removed
+- Removed babel private methods.
+
+*October 7, 2021*
+
+### Changed
+- Increased maxBundleSize to 120Kb.
+
+
+v2.2.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Refactored component object.
+
+
+v2.1.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Increased maxBundleSize to 105Kb.
+
+v2.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-mega-modal`, `f-alert`, `f-card` and `f-form-field` to include icing phase 2 changes.
+- T&C, Privacy Policy and Cookie Policy links to use f-link component.
+
+### Removed
+- `o-link--noDecoration` class from the switch account link to add underline.
+- `is-rounded` prop from `f-card` component call as the card is now rounded by default.
+
+
+v1.6.0
+------------------------------
+*September 30, 2021*
+
+### Added
+- Analytics service file to handle analytics events.
+- `f-analytics` plugin to handle GTM events.
+
+
+v1.5.0
+------------------------------
+*September 30, 2021*
+
+### Changed
+- Only call Geolocation endpoint when the service type is delivery
+
+
+v1.4.0
+------------------------------
+*September 29, 2021*
+
+### Changed
+- `GEOLOCATION_REQUIRED` error handling.
+
+
+v1.3.0
+------------------------------
+*September 27, 2021*
+
+### Added
+- New function to map update checkout request
+
+### Changed
+- Map update checkout data before calling `handleUpdateCheckout`
+
+
+v1.2.0
+------------------------------
+*September 21, 2021*
+
+### Changed
+- Correct copy for collection time for AUZ
+
+
+v1.1.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-button`, `f-mega-modal`, `f-alert`, `f-card`, `f-error-message` and `f-form-field`.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.2
+------------------------------
+*September 8, 2021*
+
+### Changed
+- Updated font weights after design review.
+
+
+v1.0.0-beta.1
+------------------------------
+*September 6, 2021*
+
+### Changed
+- Updated versions of `f-alert` and `f-mega-modal` (JETSans Update).
+
+
+v1.0.0-beta.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- New font JETSansDigital
+- `f-button` to v2.0.0-beta.0 which use the new font
+- `f-form-field` to v3.0.0-beta.0 which use the new font
+
+
+v0.181.0
+------------------------------
+*September 14, 2021*
+
+### Changed
+- `trackDuplicateOrderWarnDialog` to `trackDialogEvent` to handle different dialog events.
+
+### Added
+- Analytics tracking for all `ErrorDialog` events.
+
+*September 14, 2021*
+
+### Changed
+- Updated `f-checkout.component.js` with simplified tests that accept the tab loop from the tests as a parameter and removed hard coded functions
+- Updated `axe-accessibility.spec.js` tests to support refactored test structure
+
+
+v0.180.3
+------------------------------
+*September 13, 2021*
+
+### Changed
+
+- Gelocation lookup failure back to warning from error
+
+
+v0.180.2
+------------------------------
+*September 8, 2021*
+
+### Added
+- Get checkout demo files for AU/NZ
+
+### Changed
+- Moved demo files inside the stories directory
+
+
+v0.180.1
+------------------------------
+*September 7, 2021*
+
+### Changed
+- Address labels for AU/NZ
+
+
+v0.180.0
+------------------------------
+*September 6, 2021*
+
+### Added
+- `administrativeArea` input for AU
+
+
+v0.179.0
+------------------------------
+*September 3, 2021*
+
+### Changed
+- `AgeVerification` page to show correct days per month.
+
+
+v0.178.0
+------------------------------
+*September 3, 2021*
+
+### Changed
+- Redirect to search or home if restaurant is not taking orders.
+- Redirect to menu if service is not available.
+
+
+v0.177.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- Gelocation warning to error for more details in Sentry
+
+
+v0.176.0
+------------------------------
+*August 25, 2021*
+
+### Changed
+- Map checkout update request now trims whitespace from postcode
+
+
+v0.175.0
+------------------------------
+*August 25, 2021*
+
+### Removed
+- Age verification div wrapper from `AgeVerification.vue` component.
+
+### Changed
+- `AgeVerificationError` ref location from wrapper to `errorMessage` component.
+- `handleAgeVerifcation` method to look for correct component when error appears.
+
+### Fixed
+- Typo in `AgeVerification.vue` component.
+
+
+v0.174.0
+------------------------------
+*August 25, 2021*
+
+### Added
+- Add copy for AU/NZ locales
+- Guest dine in visual test.
+
+
+v0.173.4
+------------------------------
+*August 25, 2021*
+
+### Changed
+- Increased timeout to 60s.
+
+
+v0.173.3
+------------------------------
+*August 24, 2021*
+
+### Added
+- Logging items on invalid checkout.
+
+
+v0.173.2
+------------------------------
+*August 23, 2021*
+
+### Changed
+- Build in parallel to false
+
+
+v0.173.1
+------------------------------
+*August 18, 2021*
+
+### Fixed
+- Exports in test selector file.
+
+
+v0.173.0
+------------------------------
+*August 16, 2021*
+
+### Added
+- New file responsible for the mock response data.
+
+### Changed
+- `checkoutMocks.js` & `checkout.stories.js` refactored substantially.
+
+
+v0.172.0
+------------------------------
+*August 102, 2021*
+
+### Added
+- Error Message to Age Verification page.
+
+
+v0.171.0
+------------------------------
+*August 12, 2021*
+
+### Changed
+- Low value order experiment header to phase 2
+
+
+v0.170.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Check on basket API call to see if age verification prompt needs to be shown
+
+
+v0.169.0
+------------------------------
+*August 10, 2021*
+
+### Added
+- Age Verification Page.
+- Tests to cover changes.
+
+### Removed
+- Some eventData values which were added for testing specific case
+
+### Changed
+- `f-form-field` version.
+
+
+*August 9, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v0.168.0
+------------------------------
+*August 5, 2021*
+
+### Added
+- Modal specific tab looping tests to `axe-accessibility.spec.js` that support `dinein`, `collection` and `delivery` variants of checkout.
+Latest (to be added to next release)
+
+
+v0.167.0
+------------------------------
+*August 5, 2021*
+
+### Added
+- `max-length` property to guest email field.
+- `max-length` to component tests.
+
+
+v0.166.0
+------------------------------
+*August 4, 2021*
+
+### Changed
+- reduce character limit on address fields to 100
+
+
+v0.165.0
+------------------------------
+*July 26, 2021*
+
+### Added
+- `errorCode` property for failed UpdateCheckout is passed to the log
+
+
+v0.164.0
+------------------------------
+*July 22, 2021*
+
+### Added
+- Added `x-je-feature` to header config in `services/orderPlacementApi`
+
+
+v0.163.0
+------------------------------
+*July 17, 2021*
+
+### Added
+- Extracted APIs from Checkout Store so they are accessible to Contract Tests
+
+### Changed
+- Updated version of `f-button`.
+
+
+v0.162.0
+------------------------------
+*July 19, 2021*
+
+### Fixed
+- Ensure coordinates are always retrieved from local storage or fetched from API.
+
+
+v0.161.0
+------------------------------
+*July 15, 2021*
+
+### Added
+- Error page if `getCheckout` request returns empty times list.
+
+### Fixed
+- A typo in `CHEKOUT_ERROR_FORM_TYPE` > `CHECKOUT_ERROR_FORM_TYPE`
+
+
 v0.160.0
 ------------------------------
 *July 15, 2021*

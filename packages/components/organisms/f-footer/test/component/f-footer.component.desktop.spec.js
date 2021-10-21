@@ -1,21 +1,17 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-
 const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
 
 describe('Desktop - f-footer component tests - @browserstack', () => {
     beforeEach(() => {
-        footer = new Footer('organism', 'footer-component');
+        footer = new Footer();
         footer.withQuery('&knob-Locale', 'en-GB');
         footer.withQuery('&knob-Show country selector', 'true');
         footer.withQuery('&knob-Show courier links', 'false');
-        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
-        footer.open(pageUrl);
-        footer.waitForComponent();
+        footer.load();
     });
 
     forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
@@ -60,11 +56,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.areCourierLinksDisplayed()).toBe(false);
@@ -75,15 +69,13 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['en-AU', 'en-IE', 'en-NZ'])
         .it('should show courier links for country code "%s" when option is selected - @percy', tenant => {
             // Arrange
-            footer = new Footer('organism', 'footer-component');
+            footer = new Footer();
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'true');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.areCourierLinksDisplayed()).toBe(true);
@@ -93,15 +85,13 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['en-GB', 'es-ES', 'it-IT', 'nb-NO'])
         .it('should never show courier links for country code "%s", even when option is selected - @percy', tenant => {
             // Arrange
-            footer = new Footer('organism', 'footer-component');
+            footer = new Footer();
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'true');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.areCourierLinksDisplayed()).toBe(false);
@@ -111,15 +101,13 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
         .it('should always show country selector for country code "%s" when selected - @percy', tenant => {
             // Arrange
-            footer = new Footer('organism', 'footer-component');
+            footer = new Footer();
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'true');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isCountrySelectorDisplayed()).toBe(true);
@@ -129,16 +117,14 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['en-AU', 'en-GB', 'en-NZ', 'en-IE', 'da-DK', 'es-ES', 'it-IT'])
         .it('should display the corresponding icon for the "%s" country code - @percy', tenant => {
             // Arrange
-            footer = new Footer('organism', 'footer-component');
+            footer = new Footer();
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'true');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
             const countryIcon = tenant.split('-');
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isCurrentCountryIconDisplayed(countryIcon[1].toLowerCase())).toBe(true);
@@ -186,15 +172,13 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
         .it('should display social icons block for country code "%s" - @percy', tenant => {
             // Arrange
-            footer = new Footer('organism', 'footer-component');
+            footer = new Footer();
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isSocialIconBlockDisplayed()).toBe(true);
@@ -204,15 +188,13 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
         .it('should display app downloads block for country code "%s" - @percy', tenant => {
             // Arrange
-            footer = new Footer('organism', 'footer-component');
+            footer = new Footer();
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isDownloadIconBlockDisplayed()).toBe(true);
@@ -222,15 +204,13 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
         .it('should display payment options block for country code "%s" - @percy', tenant => {
             // Arrange
-            footer = new Footer('organism', 'footer-component');
+            footer = new Footer();
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isPaymentIconsBlockDisplayed()).toBe(true);
@@ -240,15 +220,13 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
         .it('should display the feedback block for country code "%s" - @percy', tenant => {
             // Arrange
-            footer = new Footer('organism', 'footer-component');
+            footer = new Footer();
             footer.withQuery('&knob-Locale', tenant);
             footer.withQuery('&knob-Show country selector', 'false');
             footer.withQuery('&knob-Show courier links', 'false');
-            const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
             // Act
-            footer.open(pageUrl);
-            footer.waitForComponent();
+            footer.load();
 
             // Assert
             expect(footer.isFeedbackBlockDisplayed()).toBe(true);

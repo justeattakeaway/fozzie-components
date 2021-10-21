@@ -1,8 +1,12 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_EXPERIMENTATION_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
-import { version as applicationVerion } from '../../package.json';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE } from '../constants';
+import basketApi from '../services/basketApi';
+import checkoutApi from '../services/checkoutApi';
+import addressGeocodingApi from '../services/addressGeocodingApi';
+import orderPlacementApi from '../services/orderPlacementApi';
+import accountApi from '../services/accountApi';
 
 import {
     UPDATE_ADDRESS,
@@ -11,6 +15,7 @@ import {
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_DATE_OF_BIRTH,
     UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
@@ -64,6 +69,12 @@ const resolveCustomerDetails = (data, state) => {
             data.customer.firstName = tokenData.given_name;
             data.customer.lastName = tokenData.family_name;
         }
+
+        if (!data.customer.dateOfBirth) {
+            tokenData = tokenData || jwtDecode(state.authToken);
+
+            data.customer.dateOfBirth = tokenData.birthdate;
+        }
     }
 };
 
@@ -92,7 +103,8 @@ export default {
             firstName: '',
             lastName: '',
             email: '',
-            mobileNumber: ''
+            mobileNumber: '',
+            dateOfBirth: null
         },
         orderId: '',
         time: {
@@ -130,20 +142,8 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
             // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    })
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
 
@@ -159,35 +159,27 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        // eslint-disable-next-line no-unused-vars
         updateCheckout: async ({
             commit, state, dispatch, rootGetters
         }, { url, data, timeout }) => {
-            // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-            const experimentationHeaders = rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    }),
-                    ...experimentationHeaders
-                },
+            const request = {
+                url,
+                state,
+                rootGetters,
+                data,
                 timeout
             };
-
-            const { data: responseData, headers } = await axios.patch(url, data, config);
+            const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
             const { issues, isFulfillable } = responseData;
-
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/trackLowValueOrderExperiment`, headers, { root: true });
             dispatch('updateMessage', detailedIssues[0]);
+
+            return headers;
         },
 
         /**
@@ -199,17 +191,8 @@ export default {
         createGuestUser: async ({ commit }, {
             url, tenant, data, timeout, otacToAuthExchanger
         }) => {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant
-                },
-                timeout
-            };
-
-            const response = await axios.post(url, data, config);
-            // eslint-disable-next-line no-unused-vars
-            const otac = response.data.token;
+            const response = await accountApi.createGuestUser(url, data, timeout, tenant);
+            const otac = response?.data?.token;
             const authToken = await otacToAuthExchanger(otac);
             commit(UPDATE_AUTH_GUEST, authToken);
         },
@@ -221,15 +204,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
-            // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
         },
@@ -247,16 +222,7 @@ export default {
             timeout
         }) => {
             // TODO: deal with exceptions.
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant,
-                    'Accept-Language': language
-                },
-                timeout
-            };
-
-            const { data } = await axios.get(url, config);
+            const { data } = await basketApi.getBasket(url, tenant, language, timeout);
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurant: {
@@ -266,8 +232,16 @@ export default {
                 basket: {
                     id: data.BasketId,
                     total: data.BasketSummary.BasketTotals.Total
-                }
+                },
+                ageRestricted: data.BasketSummary.Prompts.Restrictions.some(restriction => restriction.Type === 'Alcohol')
             };
+
+            // This logic is temporary while a new endpoint is built for fulfilment status.
+            // We can't call GET checkout as a guest so we're now having to use the basket response for age restrictions until then
+            if (basketDetails.ageRestricted && (tenant === 'au' || tenant === 'nz')) {
+                commit(UPDATE_IS_FULFILLABLE, false);
+                commit(UPDATE_ERRORS, [{ code: DOB_REQUIRED_ISSUE }]);
+            }
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
@@ -347,19 +321,7 @@ export default {
             url, data, timeout
         }) => {
             try {
-                const authHeader = state.authToken && `Bearer ${state.authToken}`;
-
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json;v=2',
-                        'x-je-application-id': 7, // Responsive Web
-                        'x-je-application-version': applicationVerion,
-                        Authorization: authHeader
-                    },
-                    timeout
-                };
-
-                const response = await axios.post(url, data, config);
+                const response = await orderPlacementApi.placeOrder(url, data, timeout, state);
 
                 const { orderId } = response.data;
 
@@ -394,7 +356,7 @@ export default {
                 const storedAddress = addressService.getAddressFromLocalStorage(false);
 
                 if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
-                    addressCoords = [storedAddress.Field2, storedAddress.Field1];
+                    addressCoords = storedAddress.Field1 && storedAddress.Field2 ? [storedAddress.Field2, storedAddress.Field1] : null;
                     commit(UPDATE_GEO_LOCATION, addressCoords);
                 } else {
                     const addressDetails = state.address;
@@ -409,19 +371,9 @@ export default {
             }
 
             if (!addressCoords && state.authToken) {
-                const authHeader = state.authToken && `Bearer ${state.authToken}`;
+                const { data } = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
 
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: authHeader
-                    },
-                    timeout
-                };
-
-                const { data } = await axios.post(url, postData, config);
-
-                commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
+                commit(UPDATE_GEO_LOCATION, data?.geometry.coordinates);
             }
         },
 
@@ -483,6 +435,10 @@ export default {
 
         updateAddress: ({ commit }, address) => {
             commit(UPDATE_ADDRESS, address);
+        },
+
+        updateDateOfBirth: ({ commit }, dateOfBirth) => {
+            commit(UPDATE_DATE_OF_BIRTH, dateOfBirth);
         }
     },
 
@@ -523,7 +479,10 @@ export default {
 
                 state.address.locality = address.locality;
                 state.address.postcode = address.postalCode;
+                state.address.administrativeArea = address.administrativeArea;
             }
+
+            state.geolocation = fulfilment?.location?.geolocation || null;
 
             if (fulfilment.table) {
                 state.tableIdentifier = fulfilment.table.identifier;
@@ -604,11 +563,14 @@ export default {
             state.orderId = orderId;
         },
 
-        [UPDATE_GEO_LOCATION]: (state, [lng, lat]) => {
-            state.geolocation = {
-                latitude: lat,
-                longitude: lng
-            };
+        [UPDATE_GEO_LOCATION]: (state, coords) => {
+            if (Array.isArray(coords)) {
+                const [lng, lat] = coords;
+                state.geolocation = {
+                    latitude: lat,
+                    longitude: lng
+                };
+            }
         },
 
         [UPDATE_MESSAGE]: (state, message) => {
@@ -622,11 +584,16 @@ export default {
             /* eslint-enable prefer-destructuring */
 
             state.address.locality = address.locality;
+            state.address.administrativeArea = address.administrativeArea;
             state.address.postcode = address.postalCode;
         },
 
         [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
             state.customer.mobileNumber = phoneNumber;
+        },
+
+        [UPDATE_DATE_OF_BIRTH]: (state, dateOfBirth) => {
+            state.customer.dateOfBirth = dateOfBirth;
         }
     }
 };

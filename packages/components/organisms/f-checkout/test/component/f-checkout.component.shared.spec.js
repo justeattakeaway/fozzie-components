@@ -1,37 +1,33 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
+let checkoutInfo;
 
 describe('f-checkout component tests - @browserstack', () => {
     beforeEach(() => {
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', true);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it.skip('should submit the checkout form', () => {
         // Arrange
-        const addressInfo = {
-            mobileNumber: '07777777779',
-            line1: 'Test House',
-            line2: 'High Street',
-            locality: 'Test Locality',
-            postcode: 'AR51 1AA',
-            note: 'Doorbell is broken'
+        const customerInfo = {
+            note: 'Doorbell is broken',
+            orderTime: 'Wednesday 00:30'
         };
 
         // Act
-        checkout.populateCheckoutForm(addressInfo);
-        checkout.selectOrderTime('Wednesday 00:30');
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -39,8 +35,8 @@ describe('f-checkout component tests - @browserstack', () => {
     });
 
     forEach([
-        [255, 'addressLine1'],
-        [255, 'addressLine2'],
+        [100, 'addressLine1'],
+        [100, 'addressLine2'],
         [50, 'addressLocality'],
         [50, 'addressPostcode'],
         [16, 'mobileNumber'],
@@ -48,7 +44,7 @@ describe('f-checkout component tests - @browserstack', () => {
     ])
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
             // Arrange
-            checkout.clearCheckoutForm(field);
+            checkout.clearCheckoutField(field);
             const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
             // Act
@@ -60,18 +56,12 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it.skip('should enable a user to submit without adding a note', () => {
         // Arrange
-        const addressInfo = {
-            mobileNumber: '07777777779',
-            line1: 'Test House',
-            line2: 'High Street',
-            locality: 'Test Locality',
-            postcode: 'AR51 1AA',
-            note: ''
+        const customerInfo = {
+            orderTime: 'Wednesday 00:30'
         };
 
         // Act
-        checkout.populateCheckoutForm(addressInfo);
-        checkout.selectOrderTime('Wednesday 00:30');
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -81,11 +71,9 @@ describe('f-checkout component tests - @browserstack', () => {
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
         checkout.withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
         checkout.clickRetryButton();
         browser.pause(2000);
@@ -98,11 +86,9 @@ describe('f-checkout component tests - @browserstack', () => {
         beforeEach(() => {
             // Arrange
             checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-            const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
             // Act
-            checkout.open(pageUrl);
-            checkout.waitForComponent();
+            checkout.load();
             checkout.goToPayment();
         });
 

@@ -6,12 +6,12 @@ const checkoutIssues = {
 
     RESTAURANT_NOT_TAKING_ORDERS: {
         shouldShowInDialog: true,
-        shouldRedirectToMenu: false
+        shouldRedirectToMenu: true
     },
 
     SERVICE_TYPE_UNAVAILABLE: {
         shouldShowInDialog: true,
-        shouldRedirectToMenu: false
+        shouldRedirectToMenu: true
     },
 
     ADDITIONAL_ITEMS_REQUIRED: {
@@ -40,6 +40,16 @@ const checkoutIssues = {
     },
 
     GENERIC_CHECKOUT_ISSUE: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: false
+    },
+
+    DATE_OF_BIRTH_REQUIRED: {
+        shouldShowInDialog: false,
+        shouldRedirectToMenu: false
+    },
+
+    GEOLOCATION_REQUIRED: {
         shouldShowInDialog: true,
         shouldRedirectToMenu: false
     },

@@ -120,6 +120,36 @@ describe('Button', () => {
                 })
                     .toThrowError('iconButton is set to have buttonType="invalid_value"');
             });
+
+            it.each([
+                'leading',
+                'trailing',
+                false
+            ])('should not throw an error when "hasIcon" is set to %s', hasIcon => {
+                // Arrange
+                const propsData = {
+                    hasIcon,
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                }).not.toThrowError();
+            });
+
+            it('should throw an error when "hasIcon" is set to an invalid type', () => {
+                // Arrange
+                const propsData = {
+                    hasIcon: 'invalid_value',
+                    isIcon: false
+                };
+
+                // Act & Assert
+                expect(() => {
+                    shallowMount(FButton, { propsData });
+                }).toThrowError('hasIcon is set to "invalid_value"');
+            });
         });
     });
 
@@ -409,6 +439,83 @@ describe('Button', () => {
                     // Assert
                     expect(wrapper.vm.getAriaLive).toEqual('off');
                 });
+            });
+        });
+
+        describe('hasTrailingIcon :: ', () => {
+            describe.each([
+                ['trailing', true],
+                ['leading', false],
+                [false, false]
+            ])('when `hasIcon` prop is %s :: ', (hasIcon, expected) => {
+                // Arrange
+                const propsData = {
+                    hasIcon
+                };
+
+                // Act
+                const wrapper = shallowMount(FButton, { propsData });
+                const element = wrapper.find('[data-test-id="button-trailing-icon"]');
+
+                it(`should ${hasIcon !== 'trailing' ? 'not' : ''} render the icon`, () => {
+                    // Assert
+                    expect(element.exists()).toBe(expected);
+                });
+            });
+        });
+
+        describe('hasLeadingIcon :: ', () => {
+            describe.each([
+                ['trailing', false],
+                ['leading', true],
+                [false, false]
+            ])('when `hasIcon` prop is %s :: ', (hasIcon, expected) => {
+                // Arrange
+                const propsData = {
+                    hasIcon
+                };
+
+                // Act
+                const wrapper = shallowMount(FButton, { propsData });
+                const element = wrapper.find('[data-test-id="button-leading-icon"]');
+
+                it(`should ${hasIcon !== 'leading' ? 'not' : ''} render the icon`, () => {
+                    // Assert
+                    expect(element.exists()).toBe(expected);
+                });
+            });
+        });
+
+        describe('hasNestedContent :: ', () => {
+            it.each([
+                [false, false, false, false],
+                [true, true, false, false],
+                [true, true, true, false],
+                [true, true, true, true],
+                [true, false, true, false],
+                [true, false, false, true],
+                [true, true, false, true],
+                [true, false, true, true]
+            ])('should return %s when `isLoading` is %s and `hasLeadingIcon` is %s and `hasTrailingIcon` is %s ', (
+                expected,
+                isLoading,
+                hasLeadingIcon,
+                hasTrailingIcon
+            ) => {
+                // Arrange
+                const propsData = {
+                    isLoading
+                };
+                const computed = {
+                    hasLeadingIcon: () => hasLeadingIcon,
+                    hasTrailingIcon: () => hasTrailingIcon
+                };
+
+                // Act
+                const wrapper = shallowMount(FButton, { propsData, computed });
+
+                // Assert
+                expect(wrapper.vm.hasNestedContent).toBe(expected);
             });
         });
     });

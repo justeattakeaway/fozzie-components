@@ -22,7 +22,7 @@ const mapUpdateCheckoutRequest = ({
             firstName: customer.firstName || null,
             lastName: customer.lastName || null,
             phoneNumber: customer.mobileNumber || null,
-            dateOfBirth: null
+            dateOfBirth: customer.dateOfBirth || null
         }
     },
     {
@@ -42,8 +42,9 @@ const mapUpdateCheckoutRequest = ({
                             address.line1,
                             ...(address.line2 ? [address.line2] : [])
                         ],
+                        administrativeArea: address.administrativeArea,
                         locality: address.locality || null,
-                        postalCode: address.postcode || null
+                        postalCode: address.postcode?.trim() || null
                     }
                 } : {}),
                 geolocation
@@ -64,6 +65,26 @@ const mapUpdateCheckoutRequest = ({
                 note: userNote
             }
         ]
+    }
+]);
+
+const mapUpdateCheckoutRequestForAgeVerification = ({ customer }) => ([
+    {
+        op: 'add',
+        path: '/customer',
+        value: {
+            dateOfBirth: customer.dateOfBirth
+        }
+    },
+    {
+        op: 'add',
+        path: '/fulfilment',
+        value: null
+    },
+    {
+        op: 'add',
+        path: '/notes',
+        value: null
     }
 ]);
 
@@ -125,5 +146,6 @@ export {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapUpdateCheckoutRequest
+    mapUpdateCheckoutRequest,
+    mapUpdateCheckoutRequestForAgeVerification
 };

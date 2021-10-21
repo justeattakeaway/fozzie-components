@@ -3,6 +3,92 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v7.0.1
+------------------------------
+*October 15, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v7.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- `$color-support-brand` pie value to `$color-support-brand-01` in line with icing phase 2.
+- New colour scheme and border-radius from `pie-design-tokens` in line with icing phase 2.
+- Updated version of `f-button` and `f-popover`.
+
+
+v6.0.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-button` and `f-popover`.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v5.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v5.0.0-beta.1
+------------------------------
+*September 1, 2021*
+
+### Changed
+- `f-button` to v2.0.0-beta.0 which use the new font.
+
+
+v5.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital.
+
+
+v4.20.0
+------------------------------
+*August 26, 2021*
+
+### Changed
+- Updated version of f-button.
+
+### Fixed
+- Ensure main navigation and country selector links are hidden from screen readers when visually hidden.
+
+
+v4.20.0
+------------------------------
+*September 2, 2021*
+
+### Changed
+- Updated version of f-button.
+
+### Fixed
+- Ensure main navigation and country selector links are hidden from screen readers when visually hidden.
+
+
+v4.19.1
+------------------------------
+*July 22, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+### Fixed
+- 'Contact Preferences' URL for en-IE tenant.
+
+
 v4.19.0
 ------------------------------
 *June 17, 2021*

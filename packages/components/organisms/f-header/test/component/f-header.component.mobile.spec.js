@@ -1,7 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-
 const Header = require('../../test-utils/component-objects/f-header.component');
 
 let header;
@@ -9,15 +7,13 @@ let header;
 describe('Mobile - f-header component tests - @browserstack', () => {
     beforeEach(() => {
         // Arrange
-        header = new Header('organism', 'header-component');
+        header = new Header();
         header.withQuery('&knob-Show offers link', 'true');
         header.withQuery('&knob-Show delivery enquiry', 'true');
-        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
         // Act
-        header.open(pageUrl);
+        header.load();
         header.openMobileNavigationBar();
-        header.waitForComponent();
 
         if (process.env.JE_ENV !== 'browserstack') {
             browser.setWindowSize(500, 1000);
@@ -47,9 +43,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             beforeEach(() => {
                 // Act
                 header.withQuery('&knob-Locale', tenant);
-                const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
-                header.open(pageUrl);
-                header.waitForComponent();
+                header.load();
             });
 
             forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
@@ -69,12 +63,10 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             beforeEach(() => {
                 // Arrange
                 header.withQuery('&knob-Locale', tenant);
-                const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
                 // Act
-                header.open(pageUrl);
+                header.load();
                 header.openMobileNavigationBar();
-                header.waitForComponent();
             });
 
             forEach(['offersLink', 'userAccount', 'help', 'countrySelector'])
@@ -94,11 +86,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             beforeEach(() => {
                 // Arrange
                 header.withQuery('&knob-Locale', tenant);
-                const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
                 // Act
-                header.open(pageUrl);
-                header.waitForComponent();
+                header.load();
             });
 
             forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
@@ -118,12 +108,10 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             beforeEach(() => {
                 // Arrange
                 header.withQuery('&knob-Locale', tenant);
-                const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
                 // Act
-                header.open(pageUrl);
+                header.load();
                 header.openMobileNavigationBar();
-                header.waitForComponent();
             });
 
             forEach(['userAccount', 'help', 'countrySelector'])

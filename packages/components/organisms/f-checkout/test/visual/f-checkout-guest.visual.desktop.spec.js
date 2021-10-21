@@ -1,21 +1,23 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout = new Checkout();
+let checkoutInfo;
 
 describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', true);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: false,
+            isASAP: true
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -25,7 +27,6 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        checkout.clearBlurField('mobileNumber');
         checkout.goToPayment();
 
         // Assert
@@ -34,13 +35,12 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const mobileNumberInfo = {
+        const customerInfo = {
             mobileNumber: '123'
         };
 
         // Act
-        checkout.clearBlurField('mobileNumber');
-        checkout.populateCollectionCheckoutForm(mobileNumberInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -49,16 +49,29 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
-        checkout.setFieldValue('firstName', 'Jerry');
-        checkout.setFieldValue('lastName', 'Jazzman');
-        checkout.setFieldValue('emailAddress', 'jerry.jazzman@ronniescotts.co.uk');
-        checkout.setFieldValue('mobileNumber', '07234567890');
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: false,
+            isASAP: true,
+            orderError: 'duplicate'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
+        checkout.load();
+
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890'
+        }
 
         // Act
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -66,9 +79,13 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     });
 
     it('should display invalid email address', () => {
+        // Arrange
+        const customerInfo = {
+            emailAddress: '@jazz.man@tunetown.com'
+        }
+
         // Act
-        checkout.clearBlurField('emailAddress');
-        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo)
         browser.keys('Tab');
 
         // Assert
@@ -79,16 +96,18 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', false);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: false,
+            isASAP: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the pre-order warning.', () => {
@@ -100,16 +119,18 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
 describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', true);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: false,
+            isASAP: true
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the delivery f-checkout component guest base state.', () => {
@@ -119,8 +140,6 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the delivery f-checkout guest mandatory error messages', () => {
         // Act
-        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutForm(field));
-        ['mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
@@ -129,13 +148,12 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const mobileNumberInfo = {
+        const customerInfo = {
             mobileNumber: '123'
         };
 
         // Act
-        checkout.clearBlurField('mobileNumber');
-        checkout.populateCheckoutForm(mobileNumberInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -144,22 +162,32 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout.withQuery('&knob-Place Order Errors', 'duplicate');
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
-        checkout.setFieldValue('firstName', 'Jerry');
-        checkout.setFieldValue('lastName', 'Jazzman');
-        const addressInfo = {
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: false,
+            isASAP: true,
+            orderError: 'duplicate'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
+        checkout.load();
+
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '07234567890',
             line1: '47 Frith  Street',
             locality: 'London',
             postcode: 'W1D 4HT'
         };
-        checkout.populateGuestCheckoutForm(addressInfo);
 
         // Act
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -167,9 +195,13 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     });
 
     it('should display invalid email address', () => {
+        // Arrange
+        const customerInfo = {
+            emailAddress: '@jazz.man@tunetown.com'
+        };
+
         // Act
-        checkout.clearBlurField('emailAddress');
-        checkout.setFieldValue('emailAddress', '@jazz.man@tunetown.com');
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         browser.keys('Tab');
 
         // Assert
@@ -180,20 +212,99 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', false);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: false,
+            isASAP: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the pre-order warning.', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Guest - Pre-Order Warning', 'desktop');
+    });
+});
+
+describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
+    beforeEach(() => {
+        // Arrange
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'dinein',
+            isAuthenticated: false,
+            isASAP: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        // Act
+        checkout.load();
+    });
+
+    it('should display the component base state.', () => {
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine in - Guest - Base State', 'desktop');
+    });
+
+    it('should display the mandatory error messages', () => {
+        // Act
+        checkout.clearCheckoutField('tableIdentifier');
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine In - Guest - Manadatory Errors', 'desktop');
+    });
+
+    it('should display the illegal mobile number error message', () => {
+        // Arrange
+        const customerInfo = {
+            mobileNumber: '123'
+        };
+
+        // Act
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine In - Guest - Illegal Mobile Number Error State', 'desktop');
+    });
+
+    it('should display the "Duplicate Order Warning" modal', () => {
+        // Arrange
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'dinein',
+            isAuthenticated: false,
+            isASAP: false,
+            orderErrors: 'duplicate'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderErrors);
+
+        const customerInfo = {
+            firstName: 'Jerry',
+            lastName: 'Jazzman',
+            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
+            mobileNumber: '07234567890',
+            tableIdentifier: '10'
+        };
+
+        // Act
+        checkout.load();
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.goToPayment();
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Dine in - Guest - "Duplicate Order Warning" Modal', 'desktop');
     });
 });

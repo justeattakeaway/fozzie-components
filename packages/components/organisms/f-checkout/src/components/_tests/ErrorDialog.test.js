@@ -12,6 +12,8 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+jest.mock('../../services/analytics');
+
 describe('ErrorDialog', () => {
     const restaurant = {
         seoName: 'checkout-kofte-farringdon',
@@ -29,7 +31,8 @@ describe('ErrorDialog', () => {
     };
 
     const duplicateOrderMessage = {
-        code: 'DuplicateOrder'
+        code: 'DuplicateOrder',
+        isDuplicateOrderError: true
     };
 
     afterEach(() => {
@@ -392,12 +395,9 @@ describe('ErrorDialog', () => {
             });
         });
 
-        it('should make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` refers to a duplicate order ', () => {
-            // Arrange
-            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
-
+        it('should make a emit to `created` event with a error message', () => {
             // Act
-            shallowMount(ErrorDialog, {
+            const wrapper = shallowMount(ErrorDialog, {
                 store: createStore({
                     ...defaultCheckoutState,
                     message: duplicateOrderMessage
@@ -408,26 +408,8 @@ describe('ErrorDialog', () => {
             });
 
             // Assert
-            expect(trackDuplicateOrderWarnDialogSpy).toHaveBeenCalled();
-        });
-
-        it('should not make a call to `trackDuplicateOrderWarnDialog` when `ErrorCode` does not refer to a duplicate order ', () => {
-            // Arrange
-            const trackDuplicateOrderWarnDialogSpy = jest.spyOn(ErrorDialog.methods, 'trackDuplicateOrderWarnDialog');
-
-            // Act
-            shallowMount(ErrorDialog, {
-                store: createStore({
-                    ...defaultCheckoutState,
-                    message: defaultMessage
-                }),
-                i18n,
-                localVue,
-                propsData
-            });
-
-            // Assert
-            expect(trackDuplicateOrderWarnDialogSpy).not.toHaveBeenCalled();
+            expect(wrapper.emitted('created').length).toBe(1);
+            expect(wrapper.emitted('created')[0][0]).toEqual(duplicateOrderMessage);
         });
     });
 });

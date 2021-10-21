@@ -64,9 +64,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+$userMessage-textColour : $color-content-default;
+
 .c-userMessage {
-    color: $color-content-light;
-    background-color: $color-support-brand;
+    color: $userMessage-textColour;
+    background-color: $color-support-warning-02;
     max-width: 100%;
 }
 
@@ -86,7 +88,7 @@ export default {
     }
 
     svg {
-        fill: $color-content-light;
+        fill: $userMessage-textColour;
         min-width: 28px;
         max-width: 28px;
         width: 28px;
@@ -98,8 +100,6 @@ export default {
 
 .c-userMessage-text {
     margin: 0 0 0 spacing(x2);
-    font-family: $font-family-base;
-    font-weight: $font-weight-regular;
     @include font-size(body-s);
 
     @include media('>=mid') {

@@ -17,6 +17,10 @@ const {
 } = require('./f-registration.selectors');
 
 module.exports = class Registration extends Page {
+    constructor() {
+        super('organism', 'registration-component');
+    }
+
     get component () { return $(REGISTRATION_COMPONENT); }
 
     get createAccountButton () { return $(CREATE_ACCOUNT_BUTTON); }
@@ -63,6 +67,10 @@ module.exports = class Registration extends Page {
             get errorMessage () { return $(PASSWORD_ERROR_MESSAGE).innerText; }
         }
     };
+
+    load () {
+        super.load(this.component);
+    }
 
     open (url) {
         super.open(url);

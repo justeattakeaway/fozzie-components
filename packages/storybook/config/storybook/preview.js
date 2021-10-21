@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import Vue from 'vue';
 import setupContext from '../../context';
-import jetPieThemeDark from './jetPieThemeDark';
+import jetPieThemeDocs from './jetPieThemeDocs';
 import './scss-loader.scss';
 
 setupContext();
@@ -10,7 +10,7 @@ Vue.config.devtools = true;
 
 export const parameters = {
     docs: {
-        theme: jetPieThemeDark
+        theme: jetPieThemeDocs
     },
     options: {
         storySort: {
@@ -30,6 +30,10 @@ export const parameters = {
                         [
                             'Overview',
                             'Checklist'
+                        ],
+                        'Testing',
+                        [
+                            'Test Level Overview'
                         ]
                     ],
                     'Capabilities',

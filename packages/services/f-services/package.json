@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "1.11.0",
+  "version": "1.13.0",
   "main": "dist/f-services.umd.js",
   "maxBundleSize": "15kB",
   "module": "dist/f-services.es.js",
@@ -42,7 +42,7 @@
     "window-or-global": "1.0.1"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "7.13.10",
+    "@babel/plugin-transform-runtime": "7.14.5",
     "axios-mock-adapter": "1.19.0",
     "jest": "26.6.3",
     "vite": "2.1.2"

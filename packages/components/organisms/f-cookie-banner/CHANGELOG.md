@@ -4,6 +4,219 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.5.0
+------------------------------
+*October 19, 2021*
+
+### Changed
+- Specified cookie banner text font size to be 14px as default paragraph font size now is 16px.
+- Cookie policy link to use f-link.
+- Increased max bundle size from 30 to 40kB.
+
+
+v3.4.0
+------------------------------
+*October 18, 2021*
+
+### Changed
+- ResizeObserver to use requestAnimationFrame and watcher to ensure ResizeObserver does not throw `ResizeObserver loop limit exceeded` error.
+
+
+v3.3.3
+------------------------------
+*October 15, 2021*
+
+- Bump `f-mega-modal` version to fix a bad previous publish.
+
+
+v3.3.2
+------------------------------
+*October 14, 2021*
+
+### Changed
+- Bump `f-mega-modal` version to clean f-button styles.
+
+
+v3.3.1
+------------------------------
+*October 13, 2021*
+
+### Changed
+- "Accept all required cookies" ghost button to outline button.
+- Removed top margin from the banner title.
+- Bump f-button version to add more space between full width buttons.
+
+
+v3.3.0
+------------------------------
+*October 13, 2021*
+
+### Added
+- `domain` prop to allow the consumer to specify which hosts can receive this component's cookie.
+
+
+v3.2.1
+------------------------------
+*October 08, 2021*
+
+### Changed
+- Non Vue version default `shouldAbsolutePositionReopenLink` prop to false in base template. Add object property check when accessing re-open link height.
+
+
+v3.2.0
+------------------------------
+*October 06, 2021*
+
+### Added
+- New prop `nameSuffix` so teams or 3rd parties using this component can save the user's consent under a different cookie name. This allows the cookie banner to work on multiple sub-domains easily.
+
+
+v3.1.0
+------------------------------
+*October 05, 2021*
+
+### Fixed
+- Reopen link positioning bug by adding and using a ResizeObserver. This ensures body content changes ouside of f-cookie-banner and recalculates if the link should be absolutely positioned.
+
+### Added
+- New prop `shouldAbsolutePositionReopenLink` so teams or 3rd parties using this component can disable the re-open link absolute positioning
+
+
+v3.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button` and `f-mega-modal` to include icing phase 2 changes.
+
+
+v2.2.1
+------------------------------
+*September 27, 2021*
+
+### Added
+- Add tab loop when reopen banner link is clicked
+
+
+v2.2.0
+------------------------------
+*September 21, 2021*
+
+### Added
+- Banner now has tab loop to keep keyboard navigation users within the banner
+
+
+v2.1.0
+------------------------------
+*September 17, 2021*
+
+### Fixed
+- Moved `isBodyHeightLessThanWindowHeight` to methods as computed properties are `undefined` during data creation.
+
+### Added
+- Dispatch "window" event `f-cookie-banner-accepted` after cookie consent is accepted
+
+
+v2.0.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-button` and `f-mega-modal`.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.2
+------------------------------
+*September 9, 2021*
+
+### Removed
+- `font-weight` override of the banner title
+
+
+v1.0.0-beta.1
+------------------------------
+*September 6, 2021*
+
+### Changed
+- Updated version of `f-mega-modal` (JETSans Update)
+
+
+v1.0.0-beta.0
+------------------------------
+*September 9, 2021*
+
+### Changed
+- Updated version of `f-button` (JETSans Update)
+
+
+v0.25.0
+------------------------------
+*September 9, 2021*
+
+### Changed
+- Updated version of `f-button` (JETSans Update)
+
+### Added
+- Tests to cover version changes in v0.24.0.
+
+### Changed
+- `dk-DK` to `da-DK`.
+
+
+v0.24.0
+------------------------------
+*August 27, 2021*
+
+### Fixed
+- Moved `isBodyHeightLessThanWindowHeight` to computed so it can re-calculate cookie position.
+
+### Changed
+- Updated version of `f-button`.
+
+
+v0.23.0
+------------------------------
+*August 19, 2021*
+
+### Added
+- `dk-DK` to the list of locales in the banner's static version.
+
+
+v0.22.0
+------------------------------
+*August 18, 2021*
+
+### Changed
+- Expiry date set to 90 days
+- Check for "window" object when checking height to avoid SSR error
+
+
+v0.21.0
+------------------------------
+*July 30, 2021*
+
+### Changed
+- Reopen link should appear at the bottom of the window, even when the main content is less than 100% height
+
+
+Latest (to be added to next version)
+------------------------------
+*July 15, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
 v0.20.0
 ------------------------------
 *July 12, 2021*

@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-footer",
-  "version": "4.28.0",
+  "version": "6.0.1",
   "main": "dist/f-footer.umd.min.js",
   "maxBundleSize": "80kB",
   "files": [
@@ -57,7 +57,7 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.2.0",
+    "@justeat/f-wdio-utils": "0.3.0",
     "node-sass-magic-importer": "5.3.2"
   }
 }

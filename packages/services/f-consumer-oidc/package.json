@@ -1,8 +1,9 @@
 {
   "name": "@justeat/f-consumer-oidc",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "description": "Authentication helper to communicate with open apis",
-  "main": "dist/f-consumer-oidc.js",
+  "main": "dist/f-consumer-oidc.umd.js",
+  "module": "dist/f-consumer-oidc.es.js",
   "maxBundleSize": "5kB",
   "files": [
     "dist"
@@ -27,19 +28,17 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn build",
-    "build": "webpack",
+    "build": "vite build",
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/core": "7.9.0",
-    "@babel/preset-env": "7.9.0",
+    "@babel/core": "7.14.8",
+    "@babel/preset-env": "7.14.9",
     "babel-loader": "8.1.0",
     "jest": "25.4.0",
     "jest-teamcity": "1.7.0",
     "js-cookie": "2.2.1",
-    "uglifyjs-webpack-plugin": "2.2.0",
-    "webpack": "4.42.1",
-    "webpack-cli": "3.3.11"
+    "vite": "2.4.4"
   },
   "peerDependencies": {
     "js-cookie": ">=2.2.1"

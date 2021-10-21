@@ -122,7 +122,7 @@ export default {
             links: [
                 {
                     url: '/takeaway/brands/mcdonalds',
-                    text: 'McDs',
+                    text: 'McDonald\'s',
                     gtm: 'click_brands_mcdonalds'
                 },
                 {
@@ -157,7 +157,7 @@ export default {
                 },
                 {
                     url: '/takeaway/brands/pret-a-manger',
-                    text: 'Pret',
+                    text: 'Pret A Manger',
                     gtm: 'click_brands_pret_a_manger'
                 },
                 {
@@ -167,7 +167,7 @@ export default {
                 },
                 {
                     url: '/takeaway/brands/papajohns',
-                    text: 'Papa Johns',
+                    text: 'Papa John\'s',
                     gtm: 'click_brands_papajohns'
                 },
                 {
@@ -241,6 +241,13 @@ export default {
                     target: '_blank',
                     rel: 'noopener',
                     gtm: 'click_about_modern_slavery_statement'
+                },
+                {
+                    url: '/CmsAssets/media/Files/Common/legal/gender-pay-gap/gender-pay-gap-2019-2021',
+                    text: 'Gender Pay Gap 2019-2021',
+                    target: '_blank',
+                    rel: 'noopener',
+                    gtm: 'click_about_gender-pay-gap-2019-2021'
                 },
                 {
                     url: 'https://secure.ethicspoint.eu/domain/media/en/gui/106834/index.html',

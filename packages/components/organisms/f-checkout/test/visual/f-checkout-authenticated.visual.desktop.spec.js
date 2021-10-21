@@ -1,21 +1,22 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
+let checkoutInfo
 
 describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: true,
+            isASAP: true
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
-
-        // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -34,17 +35,20 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Something went wrong" error.', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Patch Checkout Errors', 'SERVER')
-            .withQuery('&knob-Is ASAP available', true);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: true,
+            isASAP: true,
+            patchError: 'SERVER'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Patch Checkout Errors', checkoutInfo.patchError);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
         browser.pause(500);
 
@@ -54,16 +58,20 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true)
-            .withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: true,
+            isASAP: true,
+            patchError: 'restaurant-not-taking-orders'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Patch Checkout Errors', checkoutInfo.patchError);
 
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -72,13 +80,13 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const mobileNumberInfo = {
+        const customerInfo = {
             mobileNumber: '123'
         };
 
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateCollectionCheckoutForm(mobileNumberInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -87,17 +95,20 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true)
-            .withQuery('&knob-Place Order Errors', 'duplicate');
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: true,
+            isASAP: true,
+            orderError: 'duplicate'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -108,16 +119,18 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'collection')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', false);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'collection',
+            isAuthenticated: true,
+            isASAP: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the pre-order warning.', () => {
@@ -129,16 +142,18 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Deskt
 describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true,
+            isASAP: true
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -148,7 +163,7 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutForm(field));
+        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutField(field));
         ['mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
@@ -158,13 +173,13 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the illegal postcode error message', () => {
         // Arrange
-        const addressInfo = {
+        const customerInfo = {
             postcode: 'TEST1A'
         };
 
         // Act
         checkout.clearBlurField('addressPostcode');
-        checkout.populateCheckoutForm(addressInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -173,13 +188,13 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const mobileNumberInfo = {
+        const customerInfo = {
             mobileNumber: '123'
         };
 
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateCheckoutForm(mobileNumberInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -188,17 +203,20 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true)
-            .withQuery('&knob-Place Order Errors', 'duplicate');
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true,
+            isASAP: true,
+            orderErrors: 'duplicate'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderErrors);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
@@ -209,16 +227,18 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', false);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true,
+            isASAP: false
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the pre-order warning.', () => {
@@ -230,16 +250,18 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop
 describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'dinein')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true);
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'dinein',
+            isAuthenticated: true,
+            isASAP: true
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
     });
 
     it('should display the component base state.', () => {
@@ -249,7 +271,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        checkout.clearCheckoutForm('tableIdentifier');
+        checkout.clearCheckoutField('tableIdentifier');
         checkout.clearBlurField('mobileNumber');
         checkout.goToPayment();
 
@@ -259,13 +281,13 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const mobileNumberInfo = {
+        const customerInfo = {
             mobileNumber: '123'
         };
 
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateDineInCheckoutForm(mobileNumberInfo);
+        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
         checkout.goToPayment();
 
         // Assert
@@ -274,20 +296,48 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
-        checkout.withQuery('&knob-Service Type', 'dinein')
-            .withQuery('&knob-Is User Logged In', true)
-            .withQuery('&knob-Is ASAP available', true)
-            .withQuery('&knob-Place Order Errors', 'duplicate');
-
-        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'dinein',
+            isAuthenticated: true,
+            isASAP: true,
+            orderErrors: 'duplicate'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderErrors);
 
         // Act
-        checkout.open(pageUrl);
-        checkout.waitForComponent();
+        checkout.load();
         checkout.goToPayment();
 
         // Assert
         browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
+    });
+});
+
+describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Visual Tests', () => {
+    beforeEach(() => {
+        // Arrange
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true,
+            isASAP: false,
+            locale: 'en-AU'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Locale', checkoutInfo.locale);
+            
+        // Act
+        checkout.load();
+    });
+
+    it('should display the state input.', () => {
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible State field', 'desktop');
     });
 });

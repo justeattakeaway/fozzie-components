@@ -4,6 +4,42 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v6.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- `$color-content-brand-strong` pie value to `$color-content-default` in line with icing phase 2.
+- New colour scheme from `pie-design-tokens` in line with icing phase 2.
+
+
+v5.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v5.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
+v4.8.0
+------------------------------
+*July 22, 2021*
+
+### Changed
+- Bumped version of f-braze-adapter to respect `is_visible` and `deduplication_key` KVPs
+- Marked Terms and Conditions card as Deprecated - as we're handling this in the For You component separately
+
+
 v4.7.0
 ------------------------------
 *June 10, 2021*

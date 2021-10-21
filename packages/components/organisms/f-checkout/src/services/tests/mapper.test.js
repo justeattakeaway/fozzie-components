@@ -2,7 +2,8 @@ import {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapUpdateCheckoutRequest
+    mapUpdateCheckoutRequest,
+    mapUpdateCheckoutRequestForAgeVerification
 } from '../mapper';
 
 const defaultParams = {
@@ -28,7 +29,8 @@ describe('checkout mapper', () => {
         const customer = {
             firstName: 'Test',
             lastName: 'Tester',
-            mobileNumber: '07890123456'
+            mobileNumber: '07890123456',
+            dateOfBirth: new Date(2020, 7, 5)
         };
 
         // Act
@@ -43,7 +45,7 @@ describe('checkout mapper', () => {
         expect(customerRequest.firstName).toBe(customer.firstName);
         expect(customerRequest.lastName).toBe(customer.lastName);
         expect(customerRequest.phoneNumber).toBe(customer.mobileNumber);
-        expect(customerRequest.dateOfBirth).toBe(null);
+        expect(customerRequest.dateOfBirth).toBe(customer.dateOfBirth);
     });
 
     it('should map address correctly', () => {
@@ -84,6 +86,27 @@ describe('checkout mapper', () => {
         expect(locationRequest.address.locality).toBe(address.locality);
         expect(locationRequest.address.lines).toStrictEqual([
             address.line1
+        ]);
+    });
+
+    it('should map the address correctly and remove any unnecessary whitespace from postcode', () => {
+        // Act
+        const requestBody = mapUpdateCheckoutRequest({
+            ...defaultParams,
+            address: {
+                ...address,
+                postcode: ' BS1 1AA '
+            }
+        });
+
+        const locationRequest = requestBody[1].value.location;
+
+        // Assert
+        expect(locationRequest.address.postalCode).toBe(address.postcode);
+        expect(locationRequest.address.locality).toBe(address.locality);
+        expect(locationRequest.address.lines).toStrictEqual([
+            address.line1,
+            address.line2
         ]);
     });
 
@@ -187,6 +210,22 @@ describe('checkout mapper', () => {
             // Assert
             expect(tableRequest.identifier).toBe('10');
         });
+    });
+});
+
+describe('mapUpdateCheckoutRequestForAgeVerification ::', () => {
+    it('should map the customer date of birth correctly', () => {
+        const customer = { dateOfBirth: new Date(1990, 6, 5) };
+        const requestBody = mapUpdateCheckoutRequestForAgeVerification({
+            customer
+        });
+
+        const customerRequest = requestBody[0].value;
+        const locationRequest = requestBody[1].value;
+
+        // Assert
+        expect(customerRequest.dateOfBirth).toBe(customer.dateOfBirth);
+        expect(locationRequest).toBeNull();
     });
 });
 

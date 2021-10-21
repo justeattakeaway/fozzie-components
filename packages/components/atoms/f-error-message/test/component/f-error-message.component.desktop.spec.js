@@ -1,13 +1,10 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const ErrorMessage = require('../../test-utils/component-objects/f-error-message.component');
 
-const errorMessage = new ErrorMessage('atom', 'error-message-component');
+const errorMessage = new ErrorMessage();
 
 describe('f-error-message component tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(errorMessage.componentType, errorMessage.componentName, errorMessage.path);
-        errorMessage.open(pageUrl);
-        errorMessage.waitForComponent();
+        errorMessage.load();
     });
 
     it('should display the f-error-message component', () => {

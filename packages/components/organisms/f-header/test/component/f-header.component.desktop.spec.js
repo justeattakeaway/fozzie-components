@@ -1,7 +1,5 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-
 const Header = require('../../test-utils/component-objects/f-header.component');
 
 let header;
@@ -9,14 +7,12 @@ let header;
 describe('Desktop - f-header component tests - @browserstack', () => {
     beforeEach(() => {
         // Arrange
-        header = new Header('organism', 'header-component');
+        header = new Header();
         header.withQuery('&knob-Show offers link', 'true');
         header.withQuery('&knob-Show delivery enquiry', 'true');
-        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
         // Act
-        header.open(pageUrl);
-        header.waitForComponent();
+        header.load();
         browser.maximizeWindow();
     });
 
@@ -32,11 +28,8 @@ describe('Desktop - f-header component tests - @browserstack', () => {
             // Arrange
             header.withQuery('&knob-Locale', tenant);
 
-            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
-
             // Act
-            header.open(pageUrl);
-            header.waitForComponent();
+            header.load();
             ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
                 // Assert
                 expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -50,11 +43,9 @@ describe('Desktop - f-header component tests - @browserstack', () => {
             header.withQuery('&knob-Locale', tenant);
             header.withQuery('&knob-Show offers link', 'true');
             header.withQuery('&knob-Show delivery enquiry', 'true');
-            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
             // Act
-            header.open(pageUrl);
-            header.waitForComponent();
+            header.load();
             ['userAccount', 'help', 'countrySelector'].forEach(link => {
                 // Assert
                 expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -69,12 +60,10 @@ describe('Desktop - f-header component tests - @browserstack', () => {
             header.withQuery('&knob-Locale', tenant);
             header.withQuery('&knob-Show offers link', 'true');
             header.withQuery('&knob-Show delivery enquiry', 'true');
-            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
             ['userAccount', 'help', 'countrySelector'].forEach(link => {
                 // Act
-                header.open(pageUrl);
-                header.waitForComponent();
+                header.load();
 
                 // Assert
                 expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -130,12 +119,10 @@ describe('Desktop - f-header component tests - @browserstack', () => {
             it('should display correct selector icon - @percy', () => {
                 // Arrange
                 header.withQuery('&knob-Locale', tenant);
-                const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
                 const countryIcon = tenant.split('-');
 
                 // Act
-                header.open(pageUrl);
-                header.waitForComponent();
+                header.load();
 
                 // Assert
                 expect(header.isCurrentCountryIconDisplayed(countryIcon[1].toLowerCase())).toBe(true);

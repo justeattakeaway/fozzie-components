@@ -1,15 +1,11 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const HomePromotionCard2 = require('../../test-utils/component-objects/f-content-cards-home-promotion-card2.component');
 
 let card;
 
 describe('home promotion card 2 component tests - @browserstack', () => {
     beforeEach(() => {
-        card = new HomePromotionCard2('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
-        const pageUrl = buildUrl(card.componentType, card.componentName, card.path);
-
-        card.open(pageUrl);
-        card.waitForComponent();
+        card = new HomePromotionCard2();
+        card.load();
     });
 
     it('should display the card', () => {

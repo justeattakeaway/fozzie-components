@@ -7,6 +7,10 @@ const {
 } = require('./f-header.selectors');
 
 module.exports = class Header extends Page {
+    constructor() {
+        super('organism', 'header-component');
+    }
+
     get component () { return $(HEADER_COMPONENT); }
 
     get logo () { return $(HEADER_LOGO); }
@@ -40,6 +44,10 @@ module.exports = class Header extends Page {
 
     set expectedCountry (country) {
         this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
+    }
+
+    load () {
+        super.load(this.component);
     }
 
     open (url) {

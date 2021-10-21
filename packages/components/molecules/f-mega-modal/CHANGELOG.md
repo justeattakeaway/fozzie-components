@@ -4,6 +4,73 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.2
+------------------------------
+*October 15, 2021*
+
+Republish to fix a bad previous publish.
+
+
+v3.0.1
+------------------------------
+*October 14, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v3.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button`.
+- New border radius from `pie-design-tokens` in line with icing phase 2.
+- Close button type from `ghostTertiary` to `iverse`.
+
+
+v2.0.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- Updated version of `f-button` (JETSans Update)
+
+
+v0.12.1
+------------------------------
+*September 1, 2021*
+
+### Changed
+- Fixed bug where scrolling is not re-enabled if the modal is destroyed while open for whatever reason.
+
+
+v0.12.0
+------------------------------
+*August 18, 2021*
+
+### Changed
+- Aligned to PIE designs
+- Updated version of `f-button`.
+
 v0.11.0
 ------------------------------
 *July 14, 2021*

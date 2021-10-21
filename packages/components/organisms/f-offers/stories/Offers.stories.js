@@ -31,6 +31,25 @@ export default {
 
 Vue.use(Vuex);
 
+/**
+ * Resets all locally stored braze data so that the stubbed data is always fresh on page load
+ */
+function resetBrazeData () {
+    document.cookie
+        .split('; ')
+        .filter(row => row.startsWith('ab.'))
+        .map(row => row.split('=')[0])
+        .forEach(cookieName => {
+            document.cookie = `${cookieName}=;max-age=0`;
+        });
+
+    Object.keys(localStorage)
+        .filter(row => row.startsWith('ab.'))
+        .forEach(storageItem => {
+            localStorage.removeItem(storageItem);
+        });
+}
+
 export const VOffersComponent = (args, { argTypes }) => ({
     components: { VOffers },
 
@@ -60,7 +79,7 @@ export const VOffersComponent = (args, { argTypes }) => ({
             if (this.server !== undefined) {
                 this.server.shutdown();
             }
-
+            resetBrazeData();
             // now create the server with the seed based on currently selected display state
             this.server = makeSever(seed);
         },
@@ -84,7 +103,8 @@ export const VOffersComponent = (args, { argTypes }) => ({
 VOffersComponent.storyName = 'f-offers';
 
 VOffersComponent.args = {
-    brazeApiKey: '__TEST_API_KEY__'
+    authToken: '__TEST_TOKEN__',
+    brazeApiKey: '__TEST_BRAZE_SDK_KEY__'
 };
 
 VOffersComponent.argTypes = {

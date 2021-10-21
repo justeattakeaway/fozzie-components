@@ -4,6 +4,90 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.2
+------------------------------
+*October 13, 2021*
+
+### Changed
+- Margin between few full width buttons increased from 8px to 16px.
+
+
+v3.0.1
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Icon button loading state fix.
+
+
+v3.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- New colour scheme and border radius in line with Icing Phase 2.
+
+### Removed
+- Font-family declaration from the button styles as we have one font for the whole site and there is no need in declaring it on button level.
+
+### Added
+- `inverse` and `ghostInverse` props for icon buttons
+
+
+v2.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v2.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
+v1.11.0
+------------------------------
+*August 24, 2021*
+
+### Added
+- `hasNestedContent` computed property that checks whether button content should be nested inside span tags.
+- Secondary default slot to be used when content is not nested.
+- Unit tests for `hasNestedContent` computed property.
+
+### Changed
+- Wrap nested content only when necessary.
+- Use Vue object syntax to add optional classes.
+
+
+v1.10.1
+------------------------------
+*July 23, 2021*
+
+### Removed
+- Extra wrapper around button text to fix `isIcon` button vertical alignment.
+
+
+v1.10.0
+------------------------------
+*July 20, 2021*
+
+### Added
+- `trailing-icon` and `leading-icon` named slots for ability to add an icon before or after button text
+- `hasIcon` prop for spacing and icon colours css classes to be added
+- validation for `hasIcon` prop to be able to add only `leading`/`trailing`/false
+
+### Changed
+- Button paddings to be aligned with the PIE designs
+- XSmall button font size to be aligned with the PIE designs
+
+
 v1.9.0
 ------------------------------
 *July 7, 2021*

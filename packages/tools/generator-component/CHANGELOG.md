@@ -3,12 +3,36 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.3.0
+------------------------------
+*October 20, 2021*
+
+### Changed
+- Template package.json so it outputs the correct settings for services.
+- index.js (within src directory) which gives us the `isService` setting available within the config.
+
+### Added
+- Vite to the template folder for use with services.
+
+### Removed
+- f-services from service specific generation.
+
+
+v2.2.3
+------------------------------
+*October 18, 2021*
+
+### Added
+- A reminder to add new component to circleci config.
+
+
 v2.2.2
 ------------------------------
 *May 25, 2021*
 
 ### Changed
-- CSS variable to use pie design tokens instead of fozzie-colour-palette var
+- CSS variable to use pie design tokens instead of fozzie-colour-palette var.
+
 
 v2.2.1
 ------------------------------
@@ -22,6 +46,7 @@ v2.2.1
 
 ### Removed
 - DA and NO tenants.
+
 
 v2.2.0
 ------------------------------

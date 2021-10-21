@@ -4,6 +4,8 @@
         data-test-id="offers">
         <offers-header />
         <div :class="$style['c-offers-wrapper']">
+            <offers-results v-if="isAuthenticated" />
+            <unauthenticated v-else />
             <no-offers-found />
         </div>
     </div>
@@ -11,22 +13,25 @@
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import tenantConfigs from '../tenants';
 import NoOffersFound from './NoOffersFound.vue';
+import Unauthenticated from './Unauthenticated.vue';
 import '@justeat/f-searchbox/dist/f-searchbox.css';
+import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import OffersHeader from './Header.vue';
+import OffersResults from './Results.vue';
 import { ACTION_INITIALISE_OFFERS, VUEX_MODULE_NAMESPACE_OFFERS } from '../store/types';
 import offers from '../store/offers.module';
-
-const TIMEOUT = 3000;
 
 export default {
     name: 'VOffers',
 
     components: {
         NoOffersFound,
-        OffersHeader
+        OffersHeader,
+        OffersResults,
+        Unauthenticated
     },
 
     mixins: [
@@ -34,10 +39,6 @@ export default {
     ],
 
     props: {
-        getOffersUrl: {
-            type: String,
-            default: undefined
-        },
         authToken: {
             type: String,
             default: undefined
@@ -54,12 +55,21 @@ export default {
         };
     },
 
+    computed: {
+        ...mapGetters(VUEX_MODULE_NAMESPACE_OFFERS, [
+            'isAuthenticated'
+        ])
+    },
+
     /**
      * Set up the offers vuex module
     */
     beforeCreate () {
         if (!this.$store.hasModule(VUEX_MODULE_NAMESPACE_OFFERS)) {
             this.$store.registerModule(VUEX_MODULE_NAMESPACE_OFFERS, offers);
+            this.$logger.logInfo('f-offers (main) - Vuex module registered for f-offers', this.$store, {
+                tags: 'offers'
+            });
         }
     },
 
@@ -68,10 +78,14 @@ export default {
      */
     async mounted () {
         await this.init({
-            url: this.getOffersUrl,
-            timeout: TIMEOUT,
             brazeApiKey: this.brazeApiKey,
             authToken: this.authToken
+        });
+        this.$logger.logInfo('f-offers (main) - Offers page mounted', this.$store, {
+            tags: 'offers',
+            data: {
+                brazeApiKey: this.brazeApiKey
+            }
         });
     },
 

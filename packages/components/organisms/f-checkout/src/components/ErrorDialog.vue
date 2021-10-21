@@ -42,10 +42,7 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapActions, mapState } from 'vuex';
-import {
-    VUEX_CHECKOUT_MODULE,
-    VUEX_CHECKOUT_ANALYTICS_MODULE
-} from '../constants';
+import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: {
@@ -93,18 +90,15 @@ export default {
             modalContext.open();
         }
 
-        if (this.isDuplicateOrderError) {
-            this.trackDuplicateOrderWarnDialog();
-        }
+        this.$emit('created', {
+            code: this.message?.code,
+            isDuplicateOrderError: this.isDuplicateOrderError
+        });
     },
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateMessage'
-        ]),
-
-        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackDuplicateOrderWarnDialog'
         ]),
 
         getModalContext () {

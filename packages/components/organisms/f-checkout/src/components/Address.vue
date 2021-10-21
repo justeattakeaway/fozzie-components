@@ -9,10 +9,11 @@
                 :value="address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
-                maxlength="255"
+                maxlength="100"
                 :label-text="$t('labels.line1')"
-                label-style="inline"
+                :placeholder="$t('labels.line1')"
                 is-grouped
+                :should-show-label-text="false"
                 :has-error="isAddressLine1Empty"
                 aria-describedby="line1-error"
                 :aria-invalid="isAddressLine1Empty"
@@ -33,10 +34,11 @@
                 :value="address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
-                maxlength="255"
+                :should-show-label-text="false"
+                maxlength="100"
                 :label-text="$t('labels.line2')"
+                :placeholder="$t('labels.line2')"
                 is-grouped
-                label-style="inline"
                 @input="updateAddressDetails({ ['line2']: $event })" />
         </fieldset>
 
@@ -56,6 +58,27 @@
                     data-js-error-message
                     data-test-id="error-address-locality-empty">
                     {{ $t('validationMessages.locality.requiredError') }}
+                </error-message>
+            </template>
+        </form-field>
+
+        <form-field
+            v-if="shouldShowAdministrativeArea"
+            :value="address.administrativeArea"
+            name="address-administrative-area"
+            maxlength="50"
+            :label-text="$t('labels.administrativeArea')"
+            :has-error="isAddressAdministrativeAreaEmpty"
+            aria-describedby="administrative-area-error"
+            :aria-invalid="isAddressAdministrativeAreaEmpty"
+            @input="updateAddressDetails({ ['administrativeArea']: $event })">
+            <template #error>
+                <error-message
+                    v-if="isAddressAdministrativeAreaEmpty"
+                    id="administrative-area-error"
+                    data-js-error-message
+                    data-test-id="error-address-administrative-area-empty">
+                    {{ $t('validationMessages.administrativeArea.requiredError') }}
                 </error-message>
             </template>
         </form-field>
@@ -110,6 +133,13 @@ export default {
     */
     inject: ['$v'],
 
+    props: {
+        shouldShowAdministrativeArea: {
+            type: Boolean,
+            default: false
+        }
+    },
+
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'address'
@@ -133,12 +163,17 @@ export default {
             return this.isFieldEmpty(VALIDATIONS.address, 'postcode');
         },
 
+        isAddressAdministrativeAreaEmpty () {
+            return this.isFieldEmpty(VALIDATIONS.address, 'administrativeArea');
+        },
+
         /*
         * Checks that postcode is a valid postcode and that the field is not empty.
         */
         isAddressPostcodeValid () {
             return (!this.$v[VALIDATIONS.address].postcode.$dirty || this.$v[VALIDATIONS.address].postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
         }
+
     },
 
     methods: {
