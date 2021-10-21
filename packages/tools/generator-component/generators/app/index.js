@@ -36,6 +36,7 @@ Yeoman Generator version: {white v${pkg.version}}
         // setup some base config which will be changed based on certain answers
         this.config = {
             isComponent: (this.answers.componentType === 'uiComponent'),
+            isService: (this.answers.componentType === 'service'),
             needsComponentTests: (this.answers.componentType === 'service' ? false : this.answers.needsComponentTests),
             needsComponentTranslations: (this.answers.componentType === 'service' ? false : this.answers.needsComponentTranslations),
             needsBundlewatch: (this.answers.needsBundlewatch),
@@ -59,7 +60,9 @@ Yeoman Generator version: {white v${pkg.version}}
             ...(this.config.needsComponentTests ? [] : ['**/*/test/specs/component']),
             ...(this.config.needsComponentTranslations ? [] : ['**/*/src/tenants']),
             ...(this.config.needsTestingApiMocks ? [] : ['**/*/src/services']),
-            ...(this.config.isComponent ? [] : [
+            ...(this.config.isComponent ? [
+                '**/*/vite.config.js'
+            ] : [
                 '**/*/vue.config.js',
                 '**/*/src/assets',
                 '**/*/src/components',
@@ -71,7 +74,7 @@ Yeoman Generator version: {white v${pkg.version}}
     }
 
     async writing () {
-        // Registers a tranform stream which modifies the template files as they are written to the destination directory
+        // Registers a transform stream which modifies the template files as they are written to the destination directory
         this.registerTransformStream(rename(path => {
             path.basename = path.basename
                 // Modify any files containing the keyword `Skeleton` to be replaced with the name of the component
