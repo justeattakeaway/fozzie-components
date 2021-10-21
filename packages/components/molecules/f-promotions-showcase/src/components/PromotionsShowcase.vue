@@ -1,14 +1,15 @@
 <template>
     <div
-        v-if="items"
+        v-if="items && items.length"
         :class="$style['c-promotionsShowcase']"
         data-test-id="promotionsShowcase">
-        <template
-            v-for="(item, index) in items">
+        <div
+            :class="$style['c-promotionsShowcase--inner']">
             <component
-                :is="isString(item.link) ? 'a' : 'div'"
+                :is="isLink(item.link) ? 'a' : 'div'"
+                v-for="(item, index) in items"
                 :key="`promotionItem-${index}`"
-                :href="isString(item.link) && item.link"
+                v-bind="linkAttrs(item)"
                 :class="{
                     [$style['c-promotionsShowcase--item']]: true,
                     [$style['c-promotionsShowcase--itemInteractive']]: isFunction(item.link)
@@ -34,7 +35,7 @@
                     </p>
                 </div>
             </component>
-        </template>
+        </div>
     </div>
 </template>
 
@@ -46,19 +47,23 @@ function isString (item) {
         || item instanceof String;
 }
 
+function isFunction (item) {
+    return item instanceof Function;
+}
+
 export default {
     name: 'PromotionsShowcase',
+
     components: {},
+
     props: {
         items: {
             type: Array,
             default: () => []
         }
     },
+
     methods: {
-        isVueComponent (component) {
-            return component?.render instanceof Function;
-        },
         getLines (lines) {
             return lines.map(line => (isString(line)
                 ? {
@@ -67,9 +72,25 @@ export default {
                 }
                 : line));
         },
-        isString,
-        isFunction (link) {
-            return link instanceof Function;
+
+        isFunction,
+
+        isLink (item) {
+            return isString(item) || isString(item?.href);
+        },
+
+        isVueComponent (component) {
+            return component?.render instanceof Function;
+        },
+
+        linkAttrs (item) {
+            if (isFunction(item?.link)) {
+                return false;
+            }
+
+            return isString(item?.link)
+                ? { href: item?.link }
+                : { ...item?.link };
         }
     }
 };
@@ -80,38 +101,43 @@ export default {
 $promotionsItems-borderRadius                        : $radius-rounded-c;
 
 .c-promotionsShowcase {
+    background-color: $color-orange-10;
+    padding: spacing(x2);
+}
+
+.c-promotionsShowcase--inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: $color-orange-10;
+    background-color: $color-white;
+
+    box-shadow: 0 4px 6px       rgba(27, 35, 36, 0.02),
+                0 2px 12px -2px rgba(27, 35, 36, 0.08),
+                0 3px 6px       rgba(27, 35, 36, 0.06);
+
+    border-radius: $promotionsItems-borderRadius;
+
+    @include media ('>=wide') {
+        flex-direction: row;
+    }
 }
 
 .c-promotionsShowcase--item {
     display: flex;
     flex-direction: row;
-    margin: 0 spacing(x2) 0;
     padding: spacing(x2);
-    background-color: $color-white;
     text-decoration: none;
 
-    box-shadow: 0 4px 6px rgba(27, 35, 36, 0.02),
-        0 2px 12px -2px rgba(27, 35, 36, 0.08),
-        0 3px 6px rgba(27, 35, 36, 0.06);
-
-    &:first-child {
-        margin-top: spacing(x2);
-        border-top-left-radius: $promotionsItems-borderRadius;
-        border-top-right-radius: $promotionsItems-borderRadius;
-    }
-
-    &:last-child {
-        margin-bottom: spacing(x2);
-        border-bottom-left-radius: $promotionsItems-borderRadius;
-        border-bottom-right-radius: $promotionsItems-borderRadius;
+    @include media ('>=wide') {
+        flex-grow: 1;
     }
 
     &:not(*:first-child) {
-        border-top: 1px solid $color-grey-40;
+        border-top: 1px solid $color-border-default;
+
+        @include media ('>=wide') {
+            border-top: none;
+        }
     }
 }
 
@@ -136,20 +162,13 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
 }
 
 .c-promotionsShowcase--itemElement--styleLink {
-    color: $color-content-link-distinct;
+    color: $color-content-link;
     font-weight: $font-weight-bold;
 
-    &:hover {
-        color: lighten($color-content-link-distinct, $color-hover-02);
+    .c-promotionsShowcase--item:hover & {
         text-decoration: underline;
     }
-
-    &:active,
-    &:focus {
-        color: lighten($color-content-link-distinct, $color-active-02);
-    }
 }
-
 
 
 .c-promotionsShowcase--itemElement--styleEmphasized {

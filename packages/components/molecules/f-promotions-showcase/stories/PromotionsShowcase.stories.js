@@ -36,7 +36,11 @@ const offersItem = {
             style: STYLE_EMPHASIZED
         }
     ],
-    link: '#i-m-a-link'
+    link: {
+        href: '/#i-m-a-link',
+        target: '_blank',
+        rel: 'noopener'
+    }
 };
 
 const mapping = {
