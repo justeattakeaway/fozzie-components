@@ -196,7 +196,7 @@ $logo-borderColor                         : $color-border-default;
 
 // placeholder styles - will be extracted to subcomponent
 .c-restaurantCard-dish {
-  margin: 5px 0 5px 0;
+  margin: 5px 0;
   background: lightgreen;
   padding: 1rem;
   border: 2px dashed green;
