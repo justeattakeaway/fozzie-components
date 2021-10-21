@@ -19,6 +19,7 @@ class FeatureManager {
      */
     constructor (settings) {
         this._keyPrefix = settings.keyPrefix;
+        this._onTrack = settings.onTrack;
     }
 
     /**
@@ -38,8 +39,6 @@ class FeatureManager {
      * @returns Value of feature
      */
     getValue (key) {
-        logValueRequest(this.getValue, key, null);
-
         try {
             const feature = getFeature(this.createFullKey(key));
 
@@ -49,11 +48,16 @@ class FeatureManager {
 
             const context = getContext();
 
+            if (!context) {
+                logger.logError('Unable to provide feature values as no context was required. Check your settings for the plugin');
+                return null;
+            }
+
             const variant = evaluateLogic(feature, context);
 
             if (variant) {
                 if (variant.experimentKey && variant.experimentVariant) {
-                    trackExperiment(variant);
+                    trackExperiment(variant, this._onTrack);
                 }
 
                 return variant.value;
@@ -74,11 +78,10 @@ class FeatureManager {
      * @returns Boolean or null
      */
     getBooleanValue (key) {
-        logValueRequest(this.getBooleanValue, key, true);
-
         const value = this.getValue(key);
 
         if (value === true || value === false) {
+            logValueRequest(this.getBooleanValue, key, value);
             return value;
         }
 
@@ -91,11 +94,10 @@ class FeatureManager {
      * @returns Number or null
      */
     getIntegerValue (key) {
-        logValueRequest(this.getIntegerValue, key, 0);
-
         const value = this.getValue(key);
 
         if (typeof value === 'number') {
+            logValueRequest(this.getIntegerValue, key, value);
             return value;
         }
 
@@ -108,10 +110,10 @@ class FeatureManager {
      * @returns String or null
      */
     getStringValue (key) {
-        logValueRequest(this.getStringValue, key, '');
         const value = this.getValue(key);
 
         if (typeof value === 'string') {
+            logValueRequest(this.getStringValue, key, value);
             return value;
         }
 

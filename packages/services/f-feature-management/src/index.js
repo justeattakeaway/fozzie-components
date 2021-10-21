@@ -5,6 +5,6 @@ import createFeatureManagementInstance from './createFeatureManagementInstance';
  * @param {object} settings - json and contextGetter must be set
  * @returns Feature Management object to allow querying of features.
  */
-export default function (settings) {
-    return createFeatureManagementInstance(settings);
+export default function (settings, axiosClient) {
+    return createFeatureManagementInstance(settings, axiosClient);
 }
