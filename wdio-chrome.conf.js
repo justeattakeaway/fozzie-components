@@ -12,6 +12,7 @@ exports.config = merge(sharedConf.config, {
     // ============
     capabilities: [{
         maxInstances: 1,
+        acceptInsecureCerts: true,
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [].concat(configuration.availableServices.chromedriver.headless ? [

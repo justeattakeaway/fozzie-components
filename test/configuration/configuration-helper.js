@@ -1,19 +1,37 @@
 const { CIRCLECI, JE_ENV } = process.env;
 const fileName = CIRCLECI ? 'circleci' : 'local';
 const video = require('wdio-video-reporter');
+const { browserstackSettings, chromeSettings } = require('./shared.config');
 
 exports.getTestConfiguration = () => require(`./${fileName}.config.js`);
 
 exports.getUrlForEnvironment = () => {
-    switch (JE_ENV) {
-        case 'browserstack':
-            return 'http://bs-local.com:3000';
-        case 'local':
-            return 'http://localhost:8080';
-        default:
-            throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
-    }
+    const url = JE_ENV === 'local' ? 'http://localhost:8080' : 'http://bs-local.com:3000';
+
+    return url;
 };
+
+exports.getConfigurationSettings = () => {
+    const settings = JE_ENV === 'local' ? browserstackSettings : chromeSettings;
+
+    return settings;
+};
+
+// exports.getSettingsForEnvironment = () => {
+//     switch (JE_ENV) {
+//         case 'browserstack':
+//             return browserstackSettings();
+//         case 'local':
+//             const chromedriver = {
+//                 args: [],
+//                 headless: false,
+//                 path: '/'
+//             };
+//             return chromedriver;
+//         default:
+//             throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
+//     }
+// };
 
 // const chromeSettings = require('./chrome/chrome.settings').default();
 // const browserstackSettings = require('./browserstack/browserstack.settings').default();
@@ -39,21 +57,25 @@ exports.getUrlForEnvironment = () => {
 // };
 
 exports.setBrowserStackBuildName = () => {
-    let browserstackName = `Local - ${new Date().toLocaleTimeString()}`;
-
     /**
-     * Check if we're running on a TeamCity agent,
+     * Check if we're running on a Circle CI agent,
      * so we can set the Browserstack build name.
      */
-
-    if (CIRCLECI) {
-        const buildNumber = process.env.CIRCLE_BUILD_NUM;
-
-        browserstackName = `CircleCI - ${buildNumber}`;
-    }
+    const browserstackName = CIRCLECI ? `CircleCI - ${process.env.CIRCLE_BUILD_NUM}` : `Local - ${new Date().toLocaleTimeString()}`;
 
     return browserstackName;
 };
+
+// exports.getSettingsForEnvironment = () => {
+//     switch (JE_ENV) {
+//         case 'browserstack':
+//             return browserstackSettings();
+//         case 'local':
+//             return chromeSettings();
+//         default:
+//             throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
+//     }
+// };
 
 exports.setTestServices = configuration => [
     ...[JE_ENV !== 'browserstack' ? ['chromedriver', {

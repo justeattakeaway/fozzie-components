@@ -11,8 +11,10 @@ exports.config = merge(sharedConf.config, {
     // ====================
     // Browserstack
     // ====================
-    user: configuration.availableServices.browserstack.user,
-    key: configuration.availableServices.browserstack.key,
+    user: 'lizzieturney1',
+    key: 'YYXo6De8jD3uZhQeqrYp',
+    // user: configuration.availableServices.browserstack.user,
+    // key: configuration.availableServices.browserstack.key,
     services: [['browserstack', {
         browserstackLocal: true
     }]],

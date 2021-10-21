@@ -1,8 +1,10 @@
 const { getUrlForEnvironment } = require('./configuration-helper');
-const { browserstack1, percy, testType } = require('./shared.config');
+const {
+    chrome, testType, browserstack, percy
+} = require('./shared.config');
 
 const configuration = {
-    logLevel: 'silent',
+    logLevel: 'info',
     baseUrl: getUrlForEnvironment(),
     mochaOpts: {
         timeout: 60000,
@@ -15,7 +17,8 @@ const configuration = {
             headless: false,
             path: '/'
         },
-        browserstack1,
+        browserstack,
+        chrome,
         percy
     },
     testType,
@@ -24,7 +27,7 @@ const configuration = {
             outputDir: '../../../../test/results/allure-results'
         }
     },
-    // 'allure', 'video', 'teamcity'
+    // 'allure', 'video', 'junit'
     testReporters: ['allure']
 };
 
