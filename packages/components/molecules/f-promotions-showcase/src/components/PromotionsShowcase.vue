@@ -14,23 +14,31 @@
                     [$style['c-promotionsShowcase--item']]: true,
                     [$style['c-promotionsShowcase--itemInteractive']]: isFunction(item.link)
                 }"
-                @click="isFunction(item.link) && item.link($event)">
+                data-test-id="promotionsShowcase--item"
+                @click="dispatchClick(item, $event)">
                 <div
                     v-if="isVueComponent(item.illustration)"
-                    :class="$style['c-promotionsShowcase--itemElement']">
+                    :class="$style['c-promotionsShowcase--itemElement']"
+                    data-test-id="promotionsShowcase--itemElement">
                     <div
                         :class="$style['c-promotionsShowcase--itemIllustrationContainer']">
                         <component
                             :is="item.illustration"
-                            :class="$style['c-promotionsShowcase--itemIllustration']" />
+                            :class="$style['c-promotionsShowcase--itemIllustration']"
+                            data-test-id="promotionsShowcase--itemIllustration" />
                     </div>
                 </div>
-                <div :class="$style['c-promotionsShowcase--itemElement']">
-                    <h4>{{ item.title }}</h4>
+                <div
+                    :class="$style['c-promotionsShowcase--itemElement']"
+                    data-test-id="promotionsShowcase--itemElement">
+                    <h4 data-test-id="promotionsShowcase--itemTitle">
+                        {{ item.title }}
+                    </h4>
                     <p
                         v-for="(line, lineIndex) in getLines(item.lines)"
                         :key="`promotionItem-${index}-subLine-${lineIndex}`"
-                        :class="$style[`c-promotionsShowcase--itemElement--${line.style}`]">
+                        :class="$style[`c-promotionsShowcase--itemElement--${line.style}`]"
+                        data-test-id="promotionsShowcase--itemText">
                         {{ line.text }}
                     </p>
                 </div>
@@ -48,7 +56,7 @@ function isString (item) {
 }
 
 function isFunction (item) {
-    return item instanceof Function;
+    return typeof item === 'function';
 }
 
 export default {
@@ -64,6 +72,10 @@ export default {
     },
 
     methods: {
+        dispatchClick (item, event) {
+            return isFunction(item.link) && item.link(event);
+        },
+
         getLines (lines) {
             return lines.map(line => (isString(line)
                 ? {
@@ -80,7 +92,9 @@ export default {
         },
 
         isVueComponent (component) {
-            return component?.render instanceof Function;
+            return component?.render instanceof Function
+                || isString(component?.template)
+                || (component instanceof Function && component.name === 'VueComponent');
         },
 
         linkAttrs (item) {
