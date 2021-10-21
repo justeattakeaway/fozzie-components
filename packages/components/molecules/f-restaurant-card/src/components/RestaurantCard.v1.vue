@@ -64,16 +64,32 @@
             <div>Offline Icon</div>
 
             <!-- Meta Items List -->
-            <slot name="meta-items" />
+            <!-- START ERROR BOUNDARY -->
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="meta-items" />
+            </component>
+            <!-- END ERROR BOUNDARY -->
 
             <!-- Local Legend label -->
-            <slot name="local-legend" />
+            <!-- START ERROR BOUNDARY -->
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="local-legend" />
+            </component>
+            <!-- END ERROR BOUNDARY -->
 
             <!-- Badges -->
             <div>
                 <!-- misc badges -->
                 <!-- START ERROR BOUNDARY -->
-                <slot name="badges" />
+                <component
+                    :is="errorBoundary"
+                    tier="3">
+                    <slot name="badges" />
+                </component>
                 <!-- END ERROR BOUNDARY -->
 
                 <!-- promoted badge -->
@@ -81,15 +97,24 @@
             </div>
 
             <!-- Optional items i.e. dish search results -->
-            <slot name="optional-items" />
+            <!-- START ERROR BOUNDARY -->
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="optional-items" />
+            </component>
+            <!-- END ERROR BOUNDARY -->
+
         </a>
     </section>
 </template>
 
 <script>
+import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin.vue';
 
 export default {
     name: 'RestaurantCardV1',
+    mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
         // restaurant & display data
@@ -117,10 +142,6 @@ export default {
         flags: {
             type: Object,
             default: () => ({})
-        },
-        errorBoundary: {
-            type: [Object, String],
-            default: 'div'
         }
     }
 };
