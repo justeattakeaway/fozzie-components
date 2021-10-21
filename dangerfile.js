@@ -11,6 +11,8 @@ if (!isTrivial) {
         'packages/components/atoms/',
         'packages/components/molecules/',
         'packages/components/organisms/',
+        'packages/components/templates/',
+        'packages/components/pages/',
         'packages/services/',
         'packages/tools/',
         'packages/storybook'
