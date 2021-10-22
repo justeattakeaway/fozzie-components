@@ -134,8 +134,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-$card-bgColor                             : $color-container-default;
-$card-borderRadius                        : $radius-rounded-c;
 $img-borderRadius                         : $radius-rounded-c;
 $logo-borderRadius                        : $radius-rounded-b;
 $logo-borderColor                         : $color-border-default;
@@ -158,7 +156,7 @@ $logo-borderColor                         : $color-border-default;
   background-position: center;
   width: 100%;
   height: 200px; // TODO: agree with design
-  border-radius: $card-borderRadius;
+  border-radius: $img-borderRadius;
   position: relative;
 
   .c-restaurantCard--listItem & {
@@ -195,7 +193,7 @@ $logo-borderColor                         : $color-border-default;
   background: lightgreen;
   padding: 1rem;
   border: 2px dashed green;
-  border-radius: $card-borderRadius / 2;
+  border-radius: 8px;
 
   .c-restaurantCard--listItem & {
       @include media('>mid') {

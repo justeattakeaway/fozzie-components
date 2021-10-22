@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
-*October 14, 2021*
+*October 22, 2021*
 
 ### Added
 - Basic component styling
