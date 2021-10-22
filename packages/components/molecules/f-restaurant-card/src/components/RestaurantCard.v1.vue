@@ -2,9 +2,10 @@
     <a
         :href="url"
         :class="[
-            $style['c-restaurantCard'],
-            $style[displayModeModifier],
-            { [$style['c-restaurantCard--hasImg']]: !!imgUrl }]"
+            $style['c-restaurantCard'], {
+                [$style['c-restaurantCard--listItem']]: isListItem,
+                [$style['c-restaurantCard--hasImg']]: !!imgUrl
+            }]"
         data-test-id="restaurantCard-component"
         @click="$emit('restaurant-card-clicked')">
 
