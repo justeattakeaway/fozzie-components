@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.1.0
 ------------------------------
-*October 20, 2021*
+*October 22, 2021*
 
 ### Changed
 - Add spacing to buttons following a paragraph tag. This matches the current behaviour in Fozzie.
