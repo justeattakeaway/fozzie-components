@@ -4,6 +4,8 @@
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
+import restaurantLogo from './assets/images/mcdonalds-logo.gif';
+import restaurantImage from './assets/images/mcdonalds.webp';
 
 export default {
     title: 'Components/Molecules',
@@ -30,8 +32,8 @@ RestaurantCardComponent.args = {
         id: '00000',
         name: 'Fake Restaurant',
         disabled: false,
-        logoUrl: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/121036.gif',
-        imgUrl: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,q_auto,h_161,w_436,d_uk:cuisines:burgers-1.jpg/v1/uk/restaurants/124751.jpg',
+        logoUrl: restaurantLogo,
+        imgUrl: restaurantImage,
         isListItem: false,
         url: 'some-restaurant/12345'
     },
