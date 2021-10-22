@@ -61,7 +61,6 @@
             <!-- END ERROR BOUNDARY -->
 
             <!-- Offline Icon -->
-            <!-- <div>Offline Icon</div> -->
 
             <!-- Meta Items List -->
             <slot name="meta-items" />
@@ -75,9 +74,6 @@
                 <!-- START ERROR BOUNDARY -->
                 <slot name="badges" />
                 <!-- END ERROR BOUNDARY -->
-
-                <!-- promoted badge -->
-                <!-- <span>Promoted</span> -->
             </div>
             <!-- Optional items i.e. dish search results -->
             <slot name="optional-items" />
