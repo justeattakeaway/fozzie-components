@@ -175,6 +175,7 @@ $logo-borderColor                         : $color-border-default;
 
   &.c-restaurantCard--listItem {
       @include media('>mid') {
+        grid-gap: spacing() spacing(x2);
         grid-template-columns: minmax(150px, 20%) 1fr;
       }
   }
