@@ -70,6 +70,7 @@ commands:
             - packages/components/molecules/f-breadcrumbs/dist
             - packages/components/molecules/f-media-element/dist
             - packages/components/molecules/f-mega-modal/dist
+            - packages/components/molecules/f-promotions-showcase/dist
             - packages/components/molecules/f-restaurant-card/dist
             - packages/components/molecules/f-searchbox/dist
             - packages/components/molecules/f-skeleton-loader/dist
@@ -100,9 +101,20 @@ commands:
             - packages/components/organisms/f-header/dist
             - packages/components/organisms/f-loyalty/dist
             - packages/components/organisms/f-offers/dist
-            - packages/components/organisms/f-registration/dist
             - packages/components/organisms/f-status-banner/dist
             - packages/components/organisms/f-takeawaypay-activation/dist
+
+      # TODO: Uncomment this once we have a template component
+      #- save_cache:
+      #    name: Cache for templates
+      #    key: build-cache-templates-{{ .Branch }}-{{ .Revision }}
+      #    paths:
+
+      - save_cache:
+          name: Cache for pages
+          key: build-cache-pages-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/pages/f-registration/dist
 
       - save_cache:
           name: Cache for services
@@ -133,6 +145,15 @@ commands:
           name: Restore organisms Cache
           keys:
             - build-cache-organisms-master-
+      # TODO: Should uncomment this once we have a template component
+      #- restore_cache:
+      #    name: Restore pages Cache
+      #    keys:
+      #      - build-cache-templates-master-
+      - restore_cache:
+          name: Restore pages Cache
+          keys:
+            - build-cache-pages-master-
       - restore_cache:
           name: Restore services Cache
           keys:

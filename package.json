@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "4.7.1",
+  "version": "5.0.1",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build\"",
@@ -122,6 +122,8 @@
     "packages/components/atoms/*",
     "packages/components/molecules/*",
     "packages/components/organisms/*",
+    "packages/components/templates/*",
+    "packages/components/pages/*",
     "packages/services/*",
     "packages/tools/*"
   ],

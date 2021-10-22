@@ -118,7 +118,7 @@ export default {
         /**
          * Renders `Link` component if a `href` attribute is applied to the component
          * Renders `RouterLink` component if a `to` attribute is applied to the component, avoids page reload compared to Link with `href`
-         * Renders `Action` component if no `href` attrivute is applied to the component
+         * Renders `Action` component if no `href` attribute is applied to the component
          */
         componentType () {
             if (this.$attrs.href) {
@@ -179,7 +179,7 @@ export default {
             }
 
             if (!VALID_BUTTON_ICON_POSITION.includes(this.hasIcon)) {
-                throw new TypeError(`hasIcon is set to "${this.hasIcon}", but it can only be one of the following buttonSizes: "${VALID_BUTTON_ICON_POSITION.join('", "')}"`);
+                throw new TypeError(`hasIcon is set to "${this.hasIcon}", but it can only be one of the following button icon positions: "${VALID_BUTTON_ICON_POSITION.join('", "')}"`);
             }
         }
     }
@@ -319,6 +319,10 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     &:focus,
     &:visited {
         text-decoration: none;
+    }
+
+    p + & {
+        margin-top: spacing(x2);
     }
 }
     .o-button-content {
@@ -612,7 +616,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 .o-btn--link {
     border: 0;
     background-color: transparent;
-    padding: 0;
+    padding: 0 !important; // !important is added to be sure that this style is not overridden by size modifier paddings
     color: $color-content-link;
     font-weight: $font-weight-bold;
 
@@ -814,6 +818,10 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         .o-btn-icon svg use,
         .o-btn-icon svg path {
             fill: $btn-disabled-textColor;
+        }
+
+        &.o-btn--link {
+            background-color: transparent;
         }
     }
 }

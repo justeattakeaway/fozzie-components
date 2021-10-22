@@ -4,6 +4,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.0.1
+ ------------------------------
+ *October 20, 2021*
+
+### Added
+- `f-promotions-showcase` to Circle CI cache
+
+
+v5.0.0
+------------------------------
+ *October 21, 2021*
+
+ ### Added
+ - Component folders for `templates` and `pages`.
+ - Templates are for layout components that are intended to handle page level layout decisions (for example, a sideNav layout such as on our account pages). Templates don't contain any logic around the actual set of pages, they just handle the overall layout structure and styling.
+ - Pages are for our largest organisms, whereby they are a collection of components that make up the main body of a page. For example, `f-registration` and `f-checkout` are both examples of `page` components.
+
+ ### Changed
+ - Config for CircleCI, Lerna, yarn workspaces and danger.js updated to include new folder paths.
+ - Moved `f-registration` into `pages` directory. Will look to move other organisms one-by-one by liaising with each team working on these components.
+
+
 v4.7.1
 ------------------------------
  *October 20, 2021*
@@ -37,8 +59,8 @@ v4.6.2
 
 
 v4.6.1
- ------------------------------
- *October 12, 2021*
+------------------------------
+*October 12, 2021*
 
 ### Added
 - `f-contact-preferences` to Circle CI cache.

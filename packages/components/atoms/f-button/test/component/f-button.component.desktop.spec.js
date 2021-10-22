@@ -1,4 +1,5 @@
 const Button = require('../../test-utils/component-objects/f-button.component');
+const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
 
 let button;
 
@@ -6,8 +7,6 @@ describe('f-button component tests', () => {
     it('should display the f-button action component', () => {
         // Arrange
         button = new Button();
-        button.withQuery('knob-Button Type', 'primary');
-        button.withQuery('knob-Button Size', 'medium');
 
         // Act
         button.load();
@@ -18,13 +17,10 @@ describe('f-button component tests', () => {
 
     it('should display the f-button link component', () => {
         // Arrange
-        button = new Button();
-        button.withQuery('knob-Button Type', 'link')
-            .withQuery('knob-href', 'link')
-            .withQuery('knob-Button Size', 'medium');
+        button = new LinkButton();
 
         // Act
-        button.load('link');
+        button.load();
 
         // Assert
         expect(button.isLinkComponentDisplayed()).toBe(true);
