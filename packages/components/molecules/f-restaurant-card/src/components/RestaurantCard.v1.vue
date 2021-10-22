@@ -125,11 +125,6 @@ export default {
             type: Object,
             default: () => ({})
         }
-    },
-    computed: {
-        displayModeModifier () {
-            return this.isListItem ? 'c-restaurantCard--listItem' : null;
-        }
     }
 };
 </script>
