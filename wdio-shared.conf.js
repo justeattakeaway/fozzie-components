@@ -1,12 +1,10 @@
 require('@babel/register');
-const percySnapshot = require('@percy/webdriverio');
-const {
-    getTestConfiguration, setTestServices, setTestReporters, getConfigurationSettings
-} = require('./test/configuration/configuration-helper');
+const { getTestConfiguration, setTestReporters, setPercyDimensions } = require('./test/configuration/configuration-helper');
 
 const configuration = getTestConfiguration();
 
 exports.config = {
+    baseUrl: configuration.baseUrl,
     // ==================
     // Specify Test Files
     // ==================
@@ -25,9 +23,6 @@ exports.config = {
         ui: 'bdd',
         timeout: configuration.mochaOpts.timeout
     },
-    capabilities: [].concat(getConfigurationSettings(configuration.availableServices.chromedriver.headless)),
-    // Set a base URL for all tests
-    baseUrl: configuration.baseUrl,
     // ===================
     // Test Configurations
     // ===================
@@ -35,21 +30,14 @@ exports.config = {
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: configuration.logLevel,
-    //
     // Default timeout for all waitFor* commands.
     waitforTimeout: configuration.mochaOpts.waitforTimeout,
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 90000,
+    connectionRetryTimeout: configuration.connectionRetryTimeout,
     //
     // Default request retries count
-    connectionRetryCount: 3,
-    // Test runner services
-    // Services take over a specific job you don't want to take care of. They enhance
-    // your test setup with almost no effort. Unlike plugins, they don't add new
-    // commands. Instead, they hook themselves up into the test process.
-    services: setTestServices(configuration),
-
+    connectionRetryCount: configuration.connectionRetryTimeout,
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks.html
@@ -65,28 +53,29 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     before: () => {
-        if (configuration.testType.services.includes('percy')) {
-            browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
-                let viewportWidths;
+        setPercyDimensions();
+        // if (configuration.testType.services.includes('percy')) {
+        //     browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
+        //         let viewportWidths;
 
-                switch (featureType.toLowerCase()) {
-                    case 'desktop':
-                        viewportWidths = configuration.availableServices.percy.viewportWidths.desktop;
-                        break;
-                    case 'mobile':
-                        viewportWidths = configuration.availableServices.percy.viewportWidths.mobile;
-                        break;
-                    default:
-                        throw new Error(`${featureType} is not a valid feature type. Please use 'desktop' or 'mobile'.`);
-                }
+        //         switch (featureType.toLowerCase()) {
+        //             case 'desktop':
+        //                 viewportWidths = configuration.availableServices.percy.viewportWidths.desktop;
+        //                 break;
+        //             case 'mobile':
+        //                 viewportWidths = configuration.availableServices.percy.viewportWidths.mobile;
+        //                 break;
+        //             default:
+        //                 throw new Error(`${featureType} is not a valid feature type. Please use 'desktop' or 'mobile'.`);
+        //         }
 
-                browser.call(async () => {
-                    await percySnapshot(`${screenshotName} - ${featureType}`, {
-                        widths: viewportWidths
-                    });
-                });
-            });
-        }
+        //         browser.call(async () => {
+        //             await percySnapshot(`${screenshotName} - ${featureType}`, {
+        //                 widths: viewportWidths
+        //             });
+        //         });
+        //     });
+        // }
     },
     /**
     * Function to be executed after a test (in Mocha/Jasmine)

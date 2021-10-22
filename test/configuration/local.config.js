@@ -1,24 +1,18 @@
-const { getUrlForEnvironment } = require('./configuration-helper');
-const {
-    testType, browserstack, chrome, percy
-} = require('./shared.config');
+const { percy, testType } = require('./shared.config');
 
 const configuration = {
     logLevel: 'info',
-    baseUrl: getUrlForEnvironment(),
+    baseUrl: 'http://localhost:8080',
+    bail: 0,
+    headless: true,
     mochaOpts: {
         timeout: 60000,
         // Default timeout for all waitFor* commands.
         waitforTimeout: 10000
     },
+    connectionRetryTimeout: 90000,
+    connectionRetryCount: 3,
     availableServices: {
-        chromedriver: {
-            args: [],
-            headless: false,
-            path: '/'
-        },
-        // browserstack,
-        // chrome,
         percy
     },
     testType,
