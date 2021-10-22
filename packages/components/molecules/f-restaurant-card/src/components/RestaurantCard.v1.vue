@@ -113,9 +113,7 @@
         </div>
 
         <!-- optional items -->
-        <p :class="[$style['c-restaurantCard-dish']]">DISH RESULT</p>
-        <p :class="[$style['c-restaurantCard-dish']]">DISH RESULT</p>
-        <p :class="[$style['c-restaurantCard-dish']]">DISH RESULT</p>
+        <span :class="[$style['c-restaurantCard-dish']]">DISH RESULT</span>
     </a>
 </template>
 
@@ -172,6 +170,7 @@ $logo-borderColor                         : $color-border-default;
 .c-restaurantCard {
   text-decoration: none;
   display: grid;
+  grid-gap: spacing(x2);
   grid-template-columns: 1fr;
 
   &.c-restaurantCard--listItem {
@@ -199,12 +198,10 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard-content {
-  padding: spacing() 0;
-
-  .c-restaurantCard--listItem & {
-      @include media('>mid') {
+    .c-restaurantCard--listItem & {
+        @include media('>mid') {
+        padding: spacing() 0;
         grid-column: 2/3;
-        padding-left: spacing(x1.5);
       }
   }
 }
@@ -219,7 +216,6 @@ $logo-borderColor                         : $color-border-default;
 
 // placeholder styles - will be extracted to subcomponent
 .c-restaurantCard-dish {
-  margin: 5px 0;
   background: lightgreen;
   padding: 1rem;
   border: 2px dashed green;
