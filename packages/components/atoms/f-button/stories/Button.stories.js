@@ -17,10 +17,10 @@ export const ButtonComponent = (args, { argTypes }) => ({
     template: `
     <div>
         <div
-            class="u-spacingBottom--large g g--alignCenter--v g--alignSpaceAround g--stack--wide"
+            class="u-spacingBottom--large storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide"
             v-for="(list, index) in buttonLists">
             <f-button
-                class="u-spacingRight u-spacingBottom--large"
+                class="u-spacingBottom--large"
                 v-for="(button, index) in list"
                 :key="index"
                 :buttonType="button.type"

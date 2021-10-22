@@ -16,7 +16,7 @@ export const LinkButtonComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template: `
     <div>
-        <div class="g g--alignCenter--v g--alignSpaceAround g--stack--wide">
+        <div class="storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide">
             <f-button
                 class="u-spacingRight u-spacingBottom--large"
                 v-for="(button, index) in buttonList"

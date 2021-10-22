@@ -616,7 +616,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 .o-btn--link {
     border: 0;
     background-color: transparent;
-    padding: 0 !important;
+    padding: 0 !important; // !important is added to be sure that this style is not overridden by size modifier paddings
     color: $color-content-link;
     font-weight: $font-weight-bold;
 

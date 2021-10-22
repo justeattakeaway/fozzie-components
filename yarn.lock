@@ -2147,6 +2147,13 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-breadcrumbs@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-2.0.0.tgz#805f357170869a9401e8f1bf3dcd6868ed86f20d"
+  integrity sha512-1qP3mMmON9xpyuiK89yXZ+FzTZ9L/6TmKvAvJjWCwyzGz56MnwFfb4bBI/1N4K16jSsXc4dIQvFJSfuMURIztQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"

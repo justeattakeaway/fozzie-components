@@ -49,7 +49,7 @@ export const IconButtonComponent = () => ({
     },
 
     template: `
-    <div class="g g--alignCenter--v g--stack--wide">
+    <div class="storybook-grid storybook-grid-columns--3 storybook-grid-stack--lessThanWide">
         <f-button
             class="u-spacingRight u-spacingBottom--large"
             :buttonType="buttonType"
