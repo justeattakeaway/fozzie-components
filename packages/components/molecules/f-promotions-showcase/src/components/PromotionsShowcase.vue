@@ -6,7 +6,7 @@
         <div
             :class="$style['c-promotionsShowcase--inner']">
             <component
-                :is="isLink(item.link) ? 'a' : 'div'"
+                :is="itemTag(item)"
                 v-for="(item, index) in items"
                 :key="`promotionItem-${index}`"
                 v-bind="linkAttrs(item)"
@@ -87,14 +87,20 @@ export default {
 
         isFunction,
 
-        isLink (item) {
-            return isString(item) || isString(item?.href);
-        },
-
         isVueComponent (component) {
             return component?.render instanceof Function
                 || isString(component?.template)
                 || (component instanceof Function && component.name === 'VueComponent');
+        },
+
+        itemTag (item) {
+            if (isString(item.link) || isString(item.link?.href)) {
+                return 'a';
+            }
+
+            return isFunction(item.link)
+                ? 'button'
+                : 'div';
         },
 
         linkAttrs (item) {
@@ -141,6 +147,12 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     flex-direction: row;
     padding: spacing(x2);
     text-decoration: none;
+
+    // Override button styles
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    text-align: inherit;
 
     @include media ('>=wide') {
         flex-grow: 1;

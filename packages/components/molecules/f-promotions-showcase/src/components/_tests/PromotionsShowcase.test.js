@@ -101,18 +101,30 @@ describe('PromotionsShowcase', () => {
         });
     });
 
-    it('should not render as a link when given neither a text or object link for an item', () => {
+    describe('when given neither a text, object or callback link for an item', () => {
         const propsData = {
             items: [{
                 title: 'Foo',
                 lines: ['Bar']
             }]
         };
-        const wrapper = shallowMount(PromotionsShowcase, { propsData });
-        const item = wrapper.find('[data-test-id="promotionsShowcase--item"]');
-        expect(item.exists()).toBe(true);
-        expect(item.element.tagName).not.toBe('A');
-        expect(item.attributes('href')).toBeUndefined();
+        let wrapper;
+        let item;
+
+        beforeEach(() => {
+            wrapper = shallowMount(PromotionsShowcase, { propsData });
+            item = wrapper.find('[data-test-id="promotionsShowcase--item"]');
+            expect(item.exists()).toBe(true);
+        });
+
+        it('should not render as a link', () => {
+            expect(item.element.tagName).not.toBe('A');
+            expect(item.attributes('href')).toBeUndefined();
+        });
+
+        it('should not render as a button ', () => {
+            expect(item.element.tagName).not.toBe('BUTTON');
+        });
     });
 
     describe('when provided with a function as the link for an item', () => {
@@ -120,7 +132,7 @@ describe('PromotionsShowcase', () => {
         let item;
 
         beforeEach(() => {
-            callback = jest.fn(() => console.log('a'));
+            callback = jest.fn();
             const propsData = {
                 items: [{
                     title: 'Foo',
@@ -132,6 +144,15 @@ describe('PromotionsShowcase', () => {
 
             item = wrapper.find('[data-test-id="promotionsShowcase--item"]');
             expect(item.exists()).toBe(true);
+        });
+
+        it('should render a button', () => {
+            expect(item.exists()).toBe(true);
+            expect(item.element.tagName).toBe('BUTTON');
+        });
+
+        it('should not call the callback before item is clicked', () => {
+            expect(callback).not.toHaveBeenCalled();
         });
 
         it('should not call the callback before item is clicked', () => {
