@@ -199,11 +199,11 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard-content {
-    .c-restaurantCard--listItem & {
-        @include media('>mid') {
-        padding: spacing() 0;
-        grid-column: 2/3;
-      }
+  .c-restaurantCard--listItem & {
+    @include media('>mid') {
+      padding: spacing() 0;
+      grid-column: 2/3;
+    }
   }
 }
 
