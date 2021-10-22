@@ -1,6 +1,8 @@
 require('@babel/register');
 const percySnapshot = require('@percy/webdriverio');
-const { getTestConfiguration, setTestServices, setTestReporters } = require('./test/configuration/configuration-helper');
+const {
+    getTestConfiguration, setTestServices, setTestReporters, getConfigurationSettings
+} = require('./test/configuration/configuration-helper');
 
 const configuration = getTestConfiguration();
 
@@ -23,6 +25,7 @@ exports.config = {
         ui: 'bdd',
         timeout: configuration.mochaOpts.timeout
     },
+    capabilities: [].concat(getConfigurationSettings(configuration.availableServices.chromedriver.headless)),
     // Set a base URL for all tests
     baseUrl: configuration.baseUrl,
     // ===================

@@ -4,11 +4,16 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookieBanner-
 
 let cookieBanner;
 
-describe('Legacy - f-cookieBanner component tests @browserstack', () => {
+describe('Legacy - f-cookieBanner component tests', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', 'en-AU');
         cookieBanner.load();
+    });
+
+    it('should display the f-cookieBanner component', () => {
+        // Assert
+        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
     });
 
     it('should set "je-cookie_banner" cookie when dismissed.', () => {

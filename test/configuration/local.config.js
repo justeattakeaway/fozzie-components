@@ -1,6 +1,6 @@
 const { getUrlForEnvironment } = require('./configuration-helper');
 const {
-    chrome, testType, browserstack, percy
+    testType, browserstack, chrome, percy
 } = require('./shared.config');
 
 const configuration = {
@@ -17,8 +17,8 @@ const configuration = {
             headless: false,
             path: '/'
         },
-        browserstack,
-        chrome,
+        // browserstack,
+        // chrome,
         percy
     },
     testType,

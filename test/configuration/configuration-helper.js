@@ -1,7 +1,7 @@
 const { CIRCLECI, JE_ENV } = process.env;
 const fileName = CIRCLECI ? 'circleci' : 'local';
+const { chrome, browserstack } = require('./shared.config');
 const video = require('wdio-video-reporter');
-const { browserstackSettings, chromeSettings } = require('./shared.config');
 
 exports.getTestConfiguration = () => require(`./${fileName}.config.js`);
 
@@ -11,11 +11,11 @@ exports.getUrlForEnvironment = () => {
     return url;
 };
 
-exports.getConfigurationSettings = () => {
-    const settings = JE_ENV === 'local' ? browserstackSettings : chromeSettings;
+// exports.getConfigurationSettings = () => {
+//     const settings = JE_ENV === 'local' ? browserstackSettings : chromeSettings;
 
-    return settings;
-};
+//     return settings;
+// };
 
 // exports.getSettingsForEnvironment = () => {
 //     switch (JE_ENV) {
@@ -40,48 +40,29 @@ exports.getConfigurationSettings = () => {
 
 // const isLocal = JE_ENV === 'local';
 
-// exports.getConfigurationSettings = () => {
+exports.getConfigurationSettings = headless => {
+    const runnerSettings = JE_ENV === 'local' ? chrome(headless) : browserstack;
+    const { capabilities } = runnerSettings;
 
-//     let runnerSettings = isLocal ? chromeSettings : browserstackSettings;
-//     let testCapabilities = runnerSettings[TEST_TYPE.toLowerCase()].capabilities;
-
-//     return {
-//         capabilities: testCapabilities,
-//         bail: environmentSettings.bail,
-//         logLevel: environmentSettings.logLevel,
-//         maxInstances: environmentSettings.maxInstances,
-//         baseUrl: runnerSettings.baseUrl,
-//         reporters: runnerSettings.reporters,
-//         services: runnerSettings.services,
-//     }
-// };
+    return {
+        capabilities
+    };
+};
 
 exports.setBrowserStackBuildName = () => {
     /**
      * Check if we're running on a Circle CI agent,
      * so we can set the Browserstack build name.
      */
-    const browserstackName = CIRCLECI ? `CircleCI - ${process.env.CIRCLE_BUILD_NUM}` : `Local - ${new Date().toLocaleTimeString()}`;
+    const browserstackName = CIRCLECI ? `CircleCI - ${process.env.CIRCLE_BUILD_NUM}` : `Local - ${new Date().toLocaleTimeString()}`; 
 
     return browserstackName;
 };
 
-// exports.getSettingsForEnvironment = () => {
-//     switch (JE_ENV) {
-//         case 'browserstack':
-//             return browserstackSettings();
-//         case 'local':
-//             return chromeSettings();
-//         default:
-//             throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
-//     }
-// };
-
 exports.setTestServices = configuration => [
     ...[JE_ENV !== 'browserstack' ? ['chromedriver', {
         args: [].concat(configuration.availableServices.chromedriver.args)
-    }] : []],
-    ...[JE_ENV === 'browserstack' ? ['browserstack', { browserstackLocal: true }] : []]
+    }] : ['browserstack', { browserstackLocal: true }]]
 ].filter(service => service.length !== 0);
 
 exports.setTestReporters = configuration => [
@@ -89,7 +70,6 @@ exports.setTestReporters = configuration => [
         saveAllVideos: false, // If true, also saves videos for successful test cases
         videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
         outputDir: configuration.availableReporters.allure.outputDir // Use same outputDir, so videos are shown in allure
-        // outputDir: `${global.baseDir}/test/results/allure/failure-videos`
     }] : []],
     ...[configuration.testReporters.includes('allure') ? ['allure', {
         outputDir: configuration.availableReporters.allure.outputDir,

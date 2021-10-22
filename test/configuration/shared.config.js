@@ -1,10 +1,9 @@
 // To set browserstack capabilities, please visit: https://www.browserstack.com/automate/capabilities
-const { setBrowserStackBuildName } = require('./configuration-helper');
-
 const TEST_TYPE = process.env.TEST_TYPE.toLowerCase();
 
-const { SPEC_FILE, VS_DEBUGGER } = process.env;
+const { SPEC_FILE, VS_DEBUGGER, CIRCLECI } = process.env;
 
+const browserstackName = CIRCLECI ? `CircleCI - ${process.env.CIRCLE_BUILD_NUM}` : `Local - ${new Date().toLocaleTimeString()}`; 
 const isMobile = () => SPEC_FILE.endsWith('mobile.spec.js');
 const isDesktop = () => SPEC_FILE.endsWith('desktop.spec.js');
 const isShared = () => SPEC_FILE.endsWith('shared.spec.js');
@@ -43,49 +42,20 @@ exports.testType = {
     } : {})
 };
 
-exports.browserstack = {
-    capabilities: {
-        'bstack:options': {
-            ...(isMobile || isShared ? {
-                os: 'android',
-                osVersion: '14',
-                browserName: 'chrome',
-                deviceName: process.env.BROWSERSTACK_DEVICE || 'Google Pixel 4',
-                browserVersion: '',
-                buildName: '',
-                networkLogs: true,
-                projectName: 'Fozzie-Components'
-            } : {}),
-            ...(isMobile || isShared ? {
-                os: 'ios',
-                osVersion: '14',
-                browserName: 'safari',
-                deviceName: 'iPhone 12',
-                browserVersion: '',
-                buildName: '',
-                networkLogs: true,
-                projectName: 'Fozzie-Components'
-            } : {}),
-            ...(isDesktop || isShared ? {
-                os: 'OS X',
-                osVersion: 'Big sur',
-                browserName: 'safari',
-                browserVersion: '14',
-                buildName: '',
-                networkLogs: true,
-                projectName: 'Fozzie-Components'
-            } : {})
-        }
-    }
-};
-
 exports.chrome = {
     capabilities: [
         ...(isMobile || isShared ? [{
+            maxInstances: 1,
+            acceptInsecureCerts: true,
+            browserName: 'chrome',
             'goog:chromeOptions': {
                 mobileEmulation: { deviceName: 'Pixel 2' }
             }
-        }] : {})
+        }] : [{
+            maxInstances: 1,
+            acceptInsecureCerts: true,
+            browserName: 'chrome'
+        }])
     ]
 };
 
