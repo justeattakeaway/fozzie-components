@@ -70,6 +70,7 @@ commands:
             - packages/components/molecules/f-breadcrumbs/dist
             - packages/components/molecules/f-media-element/dist
             - packages/components/molecules/f-mega-modal/dist
+            - packages/components/molecules/f-promotions-showcase/dist
             - packages/components/molecules/f-restaurant-card/dist
             - packages/components/molecules/f-searchbox/dist
             - packages/components/molecules/f-skeleton-loader/dist
