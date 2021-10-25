@@ -55,6 +55,16 @@
     }
 
     ```
+## Configuration
+
+### Props
+
+The props that can be defined are as follows:
+
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
+| `links` | `Array - object` | - | Defines a list of links to be rendered by f-breadcrumbs |
+| `hasBackgroundEnabled` | `Boolean` | false | Defines if the breadcrumb can have a background or not |
 
 ## Development
 It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
