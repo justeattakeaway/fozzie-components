@@ -50,5 +50,6 @@ export const parameters = {
                 ],
                 'Components']
         }
-    }
+    },
+    controls: { expanded: true }
 };

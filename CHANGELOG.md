@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.0.1
+ ------------------------------
+ *October 20, 2021*
+
+### Added
+- `f-promotions-showcase` to Circle CI cache
+
+
 v5.0.0
 ------------------------------
  *October 21, 2021*
@@ -51,8 +59,8 @@ v4.6.2
 
 
 v4.6.1
- ------------------------------
- *October 12, 2021*
+------------------------------
+*October 12, 2021*
 
 ### Added
 - `f-contact-preferences` to Circle CI cache.
