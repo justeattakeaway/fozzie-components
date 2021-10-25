@@ -55,10 +55,10 @@ const settings = () => ({
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
-            outputDir: '../../../../test/results/allure-results'
+            outputDir: `${global.baseDir}/test/results/allure`
         }],
         ['allure', {
-            outputDir: '../../../../test/results/allure-results',
+            outputDir: `${global.baseDir}/test/results/allure`,
             disableWebdriverStepsReporting: true,
             disableWebdriverScreenshotsReporting: false,
             disableMochaHooks: false
