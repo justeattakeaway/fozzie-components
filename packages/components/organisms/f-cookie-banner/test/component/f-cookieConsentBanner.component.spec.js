@@ -4,7 +4,7 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookieConsent
 
 let cookieBanner;
 
-describe('New - f-cookieBanner component tests - @browserstack', () => {
+describe('New - f-cookieBanner component tests', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', 'en-IE');

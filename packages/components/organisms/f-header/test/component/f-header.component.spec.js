@@ -4,7 +4,7 @@ const Header = require('../../test-utils/component-objects/f-header.component');
 
 let header;
 
-describe('Desktop - f-header component tests - @browserstack', () => {
+describe('Desktop - f-header component tests', () => {
     beforeEach(() => {
         // Arrange
         header = new Header();

@@ -4,7 +4,7 @@ const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
 
-describe('Desktop - f-footer component tests - @browserstack', () => {
+describe('Desktop - f-footer component tests', () => {
     beforeEach(() => {
         footer = new Footer();
         footer.withQuery('&knob-Locale', 'en-GB');

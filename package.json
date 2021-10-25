@@ -23,8 +23,7 @@
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "allure:open": "allure generate test/results/allure-results --clean && yarn allure:clean && allure open",
-    "allure:clean": "rimraf test/results/allure-results",
+    "allure:clean": "rimraf test/results/allure",
     "prepare": "husky install"
   },
   "resolutions": {
@@ -127,6 +126,5 @@
     "packages/tools/*"
   ],
   "dependencies": {
-    "deepmerge": "^4.2.2"
   }
 }
