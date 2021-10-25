@@ -1,6 +1,7 @@
 <template>
     <span>
-        <a
+        <component
+            :is="linkType"
             :class="[
                 $style['o-link'], {
                     [$style['o-link--bold']]: isBold,
@@ -11,9 +12,9 @@
                 }]"
             data-test-id="link-component"
             :aria-describedby="descriptionId"
-            v-bind="$attrs">
+            v-bind="linkAttributes">
             <slot />
-        </a>
+        </component>
         <span
             v-if="ariaDescription"
             :id="descriptionId"
@@ -33,7 +34,17 @@ export default {
     name: 'VLink',
 
     props: {
+        href: {
+            type: String,
+            required: true
+        },
+
         isExternalSite: {
+            type: Boolean,
+            default: false
+        },
+
+        isRouterLink: {
             type: Boolean,
             default: false
         },
@@ -97,6 +108,21 @@ export default {
 
         descriptionId () {
             return this.ariaDescription ? this.uid : null;
+        },
+
+        linkAttributes () {
+            return {
+                ...this.$attrs,
+                ...(this.isRouterLink ? {
+                    to: this.href
+                } : {
+                    href: this.href
+                })
+            };
+        },
+
+        linkType () {
+            return this.isRouterLink ? 'router-link' : 'a';
         }
     }
 };
