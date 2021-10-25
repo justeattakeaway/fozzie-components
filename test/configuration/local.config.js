@@ -6,9 +6,9 @@ const configuration = {
     bail: 0,
     headless: false,
     mochaOpts: {
-        timeout: parseInt(process.env.WDIO_TIMEOUT, 10) || 60000,
+        timeout: 60000,
         // Default timeout for all waitFor* commands.
-        waitforTimeout: parseInt(process.env.WDIO_WAITFOR_TIMEOUT, 10) || 10000
+        waitforTimeout: 10000
     },
     connectionRetryTimeout: 90000,
     connectionRetryCount: 3,
