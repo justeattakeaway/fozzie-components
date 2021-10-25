@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.2.0
+------------------------------
+*October 25, 2021*
+
+### Changed
+- Button border style definition moved to button types. Introduced `background-color()` mixin to apply the same colour for the background and for the border colour.
+- Each button size vertical padding reduced by 1px to make button height 56px/48px/40px/32px instead of 58px/50px/42px/34px.
+
+### Removed
+- Outline css styles as focus styles applied with `box-shadow`.
+
+
 v3.1.0
 ------------------------------
 *October 22, 2021*
