@@ -14,10 +14,7 @@ const configuration = {
     connectionRetryCount: 3,
     availableServices: {
         chromedriver: {
-            args: ['--whitelisted-ips=127.0.0.1', '--disable-dev-shm-usage'],
-            // Not running in headless due to current bug.
-            headless: true,
-            path: '/'
+            args: ['--whitelisted-ips=127.0.0.1', '--disable-dev-shm-usage']
         }
     },
     percy: {
