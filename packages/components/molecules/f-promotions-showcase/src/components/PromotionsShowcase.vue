@@ -121,7 +121,7 @@ export default {
 $promotionsItems-borderRadius                        : $radius-rounded-c;
 
 .c-promotionsShowcase {
-    background-color: $color-orange-10;
+    background-color: $color-support-brand-02;
     padding: spacing(x2);
 }
 
@@ -129,7 +129,7 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: $color-white;
+    background-color: $color-container-default;
 
     box-shadow: 0 4px 6px       rgba(27, 35, 36, 0.02),
                 0 2px 12px -2px rgba(27, 35, 36, 0.08),
