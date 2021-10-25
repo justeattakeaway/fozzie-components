@@ -36,7 +36,8 @@ coverage/
 
 # Test result folders
 **/allure-report
-**/test/results/allure-results/*
+**/test/results/allure/*
+!**/test/results/allure/README.md
 **/test/results/axe-violations/*
 !**/test/results/axe-violations/README.md
 test/results/ci
