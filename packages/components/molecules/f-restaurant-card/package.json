@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-restaurant-card",
   "description": "Fozzie Restaurant Card -  Responsible for displaying restaurant data and linking to a restaurant",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "dist/f-restaurant-card.umd.min.js",
   "files": [
     "dist",
