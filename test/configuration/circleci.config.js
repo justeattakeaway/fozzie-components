@@ -1,4 +1,4 @@
-const { percy, testType } = require('./shared.config');
+const { testType } = require('./shared.config');
 
 const configuration = {
     loglevel: process.env.WDIO_LOG_LEVEL || 'info',
@@ -18,8 +18,11 @@ const configuration = {
             // Not running in headless due to current bug.
             headless: true,
             path: '/'
-        },
-        percy
+        }
+    },
+    percy: {
+        desktopHugeWidth: 1280,
+        mobileNarrowWidth: 414
     },
     testType,
     availableReporters: {},

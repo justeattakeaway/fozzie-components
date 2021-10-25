@@ -1,5 +1,6 @@
 require('@babel/register');
-const { getTestConfiguration, setTestReporters, setPercyDimensions } = require('./test/configuration/configuration-helper');
+const percySnapshot = require('@percy/webdriverio');
+const { getTestConfiguration, setTestReporters } = require('./test/configuration/configuration-helper');
 
 const configuration = getTestConfiguration();
 
@@ -53,29 +54,25 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     before: () => {
-        setPercyDimensions();
-        // if (configuration.testType.services.includes('percy')) {
-        //     browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
-        //         let viewportWidths;
+        console.log('Using the following WDIO Config:', JSON.stringify(configuration));
+        if (configuration.testType.services.includes('percy')) {
+            browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
+                const viewportWidths = {
+                    desktop: configuration.percy.desktopHugeWidth,
+                    mobile: configuration.percy.mobileNarrowWidth,
+                    default: 'Please use "desktop" or "mobile" as a feature type'
+                };
 
-        //         switch (featureType.toLowerCase()) {
-        //             case 'desktop':
-        //                 viewportWidths = configuration.availableServices.percy.viewportWidths.desktop;
-        //                 break;
-        //             case 'mobile':
-        //                 viewportWidths = configuration.availableServices.percy.viewportWidths.mobile;
-        //                 break;
-        //             default:
-        //                 throw new Error(`${featureType} is not a valid feature type. Please use 'desktop' or 'mobile'.`);
-        //         }
+                const viewportWidth = () => viewportWidths[featureType.toLowerCase()] || viewportWidths.default;
 
-        //         browser.call(async () => {
-        //             await percySnapshot(`${screenshotName} - ${featureType}`, {
-        //                 widths: viewportWidths
-        //             });
-        //         });
-        //     });
-        // }
+
+                browser.call(async () => {
+                    await percySnapshot(`${screenshotName} - ${featureType}`, {
+                        widths: viewportWidth
+                    });
+                });
+            });
+        }
     },
     /**
     * Function to be executed after a test (in Mocha/Jasmine)

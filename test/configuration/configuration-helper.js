@@ -1,5 +1,4 @@
 const { CIRCLECI } = process.env;
-const percySnapshot = require('@percy/webdriverio');
 const video = require('wdio-video-reporter');
 
 const fileName = CIRCLECI ? 'circleci' : 'local';
@@ -23,29 +22,3 @@ exports.setTestReporters = configuration => [
         outputFileFormat: options => `${options.cid}-${options.capabilities.browserName}-results.xml`
     }] : []]
 ].filter(reporter => reporter.length !== 0);
-
-exports.setPercyDimensions = configuration => {
-    if (configuration.testType.services.includes('percy')) {
-        browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
-            let viewportWidths;
-
-            switch (featureType.toLowerCase()) {
-                case 'desktop':
-                    viewportWidths = [1280];
-                    break;
-                case 'mobile':
-                    viewportWidths = [414];
-                    break;
-                default:
-                    throw new Error(`${featureType} is not a valid feature type. Please use 'desktop' or 'mobile'.`);
-            }
-
-            browser.call(async () => {
-                await percySnapshot(`${screenshotName} - ${featureType}`, {
-                    widths: viewportWidths
-                });
-            });
-        });
-    }
-};
-

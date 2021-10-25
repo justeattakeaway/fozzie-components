@@ -1,10 +1,10 @@
-const { percy, testType } = require('./shared.config');
+const { testType } = require('./shared.config');
 
 const configuration = {
     logLevel: 'info',
     baseUrl: 'http://localhost:8080',
     bail: 0,
-    headless: true,
+    headless: false,
     mochaOpts: {
         timeout: 60000,
         // Default timeout for all waitFor* commands.
@@ -12,8 +12,9 @@ const configuration = {
     },
     connectionRetryTimeout: 90000,
     connectionRetryCount: 3,
-    availableServices: {
-        percy
+    percy: {
+        desktopHugeWidth: 1280,
+        mobileNarrowWidth: 414
     },
     testType,
     availableReporters: {

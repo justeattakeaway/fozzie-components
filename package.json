@@ -52,7 +52,6 @@
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.3",
     "@wdio/allure-reporter": "7.6.0",
-    "@wdio/browserstack-service": "7.6.0",
     "@wdio/cli": "7.6.0",
     "@wdio/junit-reporter": "7.6.0",
     "@wdio/local-runner": "7.6.0",
@@ -126,7 +125,6 @@
     "packages/tools/*"
   ],
   "dependencies": {
-    "browserstack-local": "1.4.8",
     "deepmerge": "^4.2.2"
   }
 }
