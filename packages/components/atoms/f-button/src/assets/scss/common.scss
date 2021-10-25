@@ -5,3 +5,8 @@ $theme: 'jet' !default;
 
 @import  '~@justeat/fozzie/src/scss/fozzie';
 
+// mixin to apply the same colour for the border and for background of the button
+@mixin background-color($color) {
+    background-color: $color;
+    border-color: $color;
+}
