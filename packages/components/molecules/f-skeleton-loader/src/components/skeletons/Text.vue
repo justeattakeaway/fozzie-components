@@ -14,6 +14,7 @@ export default {
     flex: 1 0 auto;
     height: $skeleton-loader-text-height;
     margin-bottom: spacing();
+    border-radius: $radius-rounded-a;
 }
 
 </style>

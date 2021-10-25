@@ -13,7 +13,7 @@
                         :title="$t('tabs.stamps.title')"
                         :selected="!showHowItWorks"
                     >
-                        loyalty
+                        <unauthenticated data-test-id="StampCards-StampCardsTab-UnauthContent" />
                     </tab>
                     <tab
                         name="how-it-works"
@@ -43,6 +43,7 @@ import loyalty from '../store/loyalty.module';
 import { ACTION_INITIALISE_LOYALTY, VUEX_MODULE_NAMESPACE_LOYALTY } from '../store/types';
 import LoyaltyHeader from './Header.vue';
 import HowItWorks from './HowItWorks.vue';
+import Unauthenticated from './Unauthenticated.vue';
 
 
 export default {
@@ -50,6 +51,7 @@ export default {
 
     components: {
         LoyaltyHeader,
+        Unauthenticated,
         HowItWorks,
         Tabs,
         Tab

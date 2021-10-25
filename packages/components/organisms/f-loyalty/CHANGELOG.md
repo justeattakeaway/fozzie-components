@@ -3,6 +3,48 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.0.0
+------------------------------
+*October 14, 2021*
+
+### Added
+- Loading state component.
+- Unit tests for the loading state component
+
+
+v0.9.0
+------------------------------
+*October 07, 2021*
+
+### Added
+- Terms component
+- Unit tests for the component
+
+
+v0.8.0
+------------------------------
+*October 07, 2021*
+
+### Added
+- No card's error state
+
+
+v0.7.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-breadcrumbs` and `f-tabs` to include icing phase 2 changes.
+
+
+v0.6.0
+------------------------------
+*September 22, 2021*
+
+### Added
+- Unauthenticated state for when user is not logged in.
+- Unit tests for the page
+
 
 v0.5.0
 ------------------------------

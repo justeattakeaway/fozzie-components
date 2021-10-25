@@ -1,0 +1,24 @@
+# Component organisation
+atoms:
+- 'packages/components/atoms/**/*'
+
+molecules:
+- 'packages/components/molecules/**/*'
+
+organisms:
+- 'packages/components/organisms/**/*'
+
+templates:
+- 'packages/components/templates/**/*'
+
+pages:
+- 'packages/components/pages/**/*'
+
+services:
+- 'packages/services/**/*'
+
+storybook:
+- 'packages/storybook/**/*'
+
+tools:
+- 'packages/tools/**/*'

@@ -156,6 +156,10 @@ const defaultState = {
     hasAsapSelected: false
 };
 
+const analyticsService = {
+    trackLowValueOrderExperiment: jest.fn()
+};
+
 let state = CheckoutModule.state();
 
 describe('CheckoutModule', () => {
@@ -312,6 +316,7 @@ describe('CheckoutModule', () => {
             it('should NOT update state if value from endpoint is not an array', () => {
                 // Arrange - coordinates array not returned from API
                 const coordinates = undefined;
+                state.geolocation = null;
 
                 // Act
                 mutations[UPDATE_GEO_LOCATION](state, coordinates);
@@ -770,7 +775,7 @@ describe('CheckoutModule', () => {
                 payload.data = {
                     basketId,
                     customerNotes: {
-                        noteForRestaurant: userNote
+                        NoteForRestaurant: userNote
                     },
                     referralState: 'ReferredByWeb'
                 };
@@ -882,6 +887,8 @@ describe('CheckoutModule', () => {
                 payload.data = {
                     mobileNumber
                 };
+
+                payload.analyticsService = analyticsService;
 
                 checkoutApi.updateCheckout = jest.fn(() => Promise.resolve({
                     status: 200,

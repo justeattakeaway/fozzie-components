@@ -18,13 +18,23 @@ const messages = {
             title: 'How it works'
         }
     },
+    stamps: {
+        errorNoCards: {
+            title: 'When you order from a participating restaurant, your stamps will be shown here.',
+            subTitle: 'Expecting to see your stamps? Try refreshing this screen by going back to the home screen then coming back here.'
+        }
+    },
+    unauthenticated: {
+        loginTitle: 'Log in to get started',
+        loginButtonText: 'Log in'
+    },
     howItWorks: {
         title: 'Save on your favourite flavours',
         text: 'Get rewarded for your loyalty. Start collecting stamps from your favourite restaurants and unlock a tasty little discount on the way…',
         exampleSection: {
             title: 'For example',
             orders: 'Your Orders',
-            percentage: '10% from each order',
+            percentage: '15% from each order',
             total: 'Total discount for 6th order',
             accessibilityText: 'If you place 5 orders totalling $230, you would earn a discount worth $34.50 for your sixth order.'
         },

@@ -4,6 +4,108 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.5.0
+------------------------------
+*October 19, 2021*
+
+### Changed
+- Specified cookie banner text font size to be 14px as default paragraph font size now is 16px.
+- Cookie policy link to use f-link.
+- Increased max bundle size from 30 to 40kB.
+
+
+v3.4.0
+------------------------------
+*October 18, 2021*
+
+### Changed
+- ResizeObserver to use requestAnimationFrame and watcher to ensure ResizeObserver does not throw `ResizeObserver loop limit exceeded` error.
+
+
+v3.3.3
+------------------------------
+*October 15, 2021*
+
+- Bump `f-mega-modal` version to fix a bad previous publish.
+
+
+v3.3.2
+------------------------------
+*October 14, 2021*
+
+### Changed
+- Bump `f-mega-modal` version to clean f-button styles.
+
+
+v3.3.1
+------------------------------
+*October 13, 2021*
+
+### Changed
+- "Accept all required cookies" ghost button to outline button.
+- Removed top margin from the banner title.
+- Bump f-button version to add more space between full width buttons.
+
+
+v3.3.0
+------------------------------
+*October 13, 2021*
+
+### Added
+- `domain` prop to allow the consumer to specify which hosts can receive this component's cookie.
+
+
+v3.2.1
+------------------------------
+*October 08, 2021*
+
+### Changed
+- Non Vue version default `shouldAbsolutePositionReopenLink` prop to false in base template. Add object property check when accessing re-open link height.
+
+
+v3.2.0
+------------------------------
+*October 06, 2021*
+
+### Added
+- New prop `nameSuffix` so teams or 3rd parties using this component can save the user's consent under a different cookie name. This allows the cookie banner to work on multiple sub-domains easily.
+
+
+v3.1.0
+------------------------------
+*October 05, 2021*
+
+### Fixed
+- Reopen link positioning bug by adding and using a ResizeObserver. This ensures body content changes ouside of f-cookie-banner and recalculates if the link should be absolutely positioned.
+
+### Added
+- New prop `shouldAbsolutePositionReopenLink` so teams or 3rd parties using this component can disable the re-open link absolute positioning
+
+
+v3.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button` and `f-mega-modal` to include icing phase 2 changes.
+
+
+v2.2.1
+------------------------------
+*September 27, 2021*
+
+### Added
+- Add tab loop when reopen banner link is clicked
+
+
+v2.2.0
+------------------------------
+*September 21, 2021*
+
+### Added
+- Banner now has tab loop to keep keyboard navigation users within the banner
+
+
 v2.1.0
 ------------------------------
 *September 17, 2021*

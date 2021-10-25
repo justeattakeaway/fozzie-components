@@ -4,6 +4,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.0.1
+------------------------------
+*October 15, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+
+v7.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- `$color-support-brand` pie value to `$color-support-brand-01` in line with icing phase 2.
+- New colour scheme and border-radius from `pie-design-tokens` in line with icing phase 2.
+- Updated version of `f-button` and `f-popover`.
+
+
 v6.0.0
 ------------------------------
 *September 16, 2021*

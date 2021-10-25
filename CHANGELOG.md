@@ -4,6 +4,136 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.0.1
+ ------------------------------
+ *October 20, 2021*
+
+### Added
+- `f-promotions-showcase` to Circle CI cache
+
+
+v5.0.0
+------------------------------
+ *October 21, 2021*
+
+ ### Added
+ - Component folders for `templates` and `pages`.
+ - Templates are for layout components that are intended to handle page level layout decisions (for example, a sideNav layout such as on our account pages). Templates don't contain any logic around the actual set of pages, they just handle the overall layout structure and styling.
+ - Pages are for our largest organisms, whereby they are a collection of components that make up the main body of a page. For example, `f-registration` and `f-checkout` are both examples of `page` components.
+
+ ### Changed
+ - Config for CircleCI, Lerna, yarn workspaces and danger.js updated to include new folder paths.
+ - Moved `f-registration` into `pages` directory. Will look to move other organisms one-by-one by liaising with each team working on these components.
+
+
+v4.7.1
+------------------------------
+ *October 20, 2021*
+
+ ### Added
+ - Document for recording agreed Do's and Don'ts on our codebase
+
+
+v4.7.0
+------------------------------
+*October 19, 2021*
+
+### Changed
+- `fozzie` package version bump.
+
+
+v4.6.3
+------------------------------
+*October 18, 2021*
+
+### Added
+- `f-compatibility` to Circle CI cache.
+
+
+v4.6.2
+------------------------------
+*October 18, 2021*
+
+### Added
+- `f-navigation-links` to Circle CI cache.
+
+
+v4.6.1
+------------------------------
+*October 12, 2021*
+
+### Added
+- `f-contact-preferences` to Circle CI cache.
+
+
+v4.6.0
+------------------------------
+*October 8, 2021*
+
+ ### Changed
+ - Always run visual tests against master.
+ - Only run visual tests against changed packages.
+
+
+v4.5.0
+------------------------------
+*October 8, 2021*
+
+### Updated
+- webdriverIO to v91.
+
+
+v4.4.0
+------------------------------
+*October 7, 2021*
+
+### Added
+- Conditional logic to visual regression tests (via new `visual-regression-preflight.js` script).
+- Custom Github Action for triggering Circle CI pipeline when `wip` tag is removed.
+
+
+v4.3.2
+------------------------------
+*October 6, 2021*
+
+### Updated
+- Only apply `wip` label to newly opened/reopened PRs.
+
+
+v4.3.1
+------------------------------
+*October 6, 2021*
+
+### Changed
+- `labeler` workflow config path
+
+
+v4.3.0
+------------------------------
+*October 6, 2021*
+
+### Added
+- Labeler action
+  - Automatically applies `wip` label to new PRs
+  - Applies category labels based on whether the PR affects `atoms`, `molecules`, `services`, etc.
+
+
+v4.2.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- `fozzie` package version bump to 6.0.0-beta.5 to include new colour theme and radius vars.
+
+
+v4.1.0
+------------------------------
+*October 4, 2021*
+
+### Updated
+- Circle CI cached components to include new f-restaurant-card component
+
+
 v4.0.0
 ------------------------------
 *September 15, 2021*

@@ -14,7 +14,7 @@
                     :key="`${index}_separator`"
                     :class="$style['c-breadcrumbs-item']">
                     <router-link
-                        v-if="routerLink"
+                        v-if="routerLink && url"
                         :to="url"
                         :class="[
                             $style['c-breadcrumbs-link'],
@@ -23,7 +23,7 @@
                         {{ name }}
                     </router-link>
                     <a
-                        v-else
+                        v-else-if="url"
                         :href="url"
                         :class="[
                             $style['c-breadcrumbs-link'],
@@ -31,6 +31,14 @@
                         ]">
                         {{ name }}
                     </a>
+                    <span
+                        v-else
+                        :class="[
+                            $style['c-breadcrumbs-text'],
+                            linkActiveClass(index)
+                        ]">
+                        {{ name }}
+                    </span>
                 </li>
             </template>
         </ul>
@@ -64,7 +72,7 @@ export default {
 
 $breadcrumbs-text-colour: $color-content-light;
 $breadcrumbs-background-colour: rgba($color-black, 0.6);
-$breadcrumbs-border-radius: 16px;
+$breadcrumbs-border-radius: $radius-rounded-c;
 $breadcrumbs-not-active-font-weight: $font-weight-bold;
 $breadcrumbs-active-font-weight: $font-weight-regular;
 
@@ -94,6 +102,10 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
             display: block;
         }
     }
+}
+.c-breadcrumbs-text {
+    color: $breadcrumbs-text-colour;
+    font-weight: $breadcrumbs-not-active-font-weight;
 }
 .c-breadcrumbs-link {
     color: $breadcrumbs-text-colour;
