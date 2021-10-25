@@ -1,5 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import Vue from 'vue';
+import StoryRouter from 'storybook-vue-router';
+
 import setupContext from '../../context';
 import jetPieThemeDocs from './jetPieThemeDocs';
 import './scss-loader.scss';
@@ -7,6 +9,10 @@ import './scss-loader.scss';
 setupContext();
 
 Vue.config.devtools = true;
+
+export const decorators = [StoryRouter({}, {
+    mode: 'history'
+})];
 
 export const parameters = {
     docs: {
