@@ -6,9 +6,9 @@ const configuration = {
     bail: 0,
     headless: true,
     mochaOpts: {
-        timeout: 60000,
+        timeout: parseInt(process.env.WDIO_TIMEOUT, 10) || 60000,
         // Default timeout for all waitFor* commands.
-        waitforTimeout: 10000
+        waitforTimeout: parseInt(process.env.WDIO_WAITFOR_TIMEOUT, 10) || 10000
     },
     connectionRetryTimeout: 90000,
     connectionRetryCount: 3,
@@ -18,8 +18,10 @@ const configuration = {
         }
     },
     percy: {
-        desktopHugeWidth: 1280,
-        mobileNarrowWidth: 414
+        viewports: {
+            mobile: [414],
+            desktop: [1280]
+        }
     },
     testType,
     availableReporters: {

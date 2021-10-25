@@ -58,8 +58,8 @@ exports.config = {
         if (configuration.testType.services.includes('percy')) {
             browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
                 const viewportWidths = {
-                    desktop: configuration.percy.desktopHugeWidth,
-                    mobile: configuration.percy.mobileNarrowWidth,
+                    desktop: configuration.percy.viewports.mobile,
+                    mobile: configuration.percy.viewports.desktop,
                     default: 'Please use "desktop" or "mobile" as a feature type'
                 };
 
@@ -68,7 +68,7 @@ exports.config = {
 
                 browser.call(async () => {
                     await percySnapshot(`${screenshotName} - ${featureType}`, {
-                        widths: viewportWidth
+                        widths: viewportWidth[0]
                     });
                 });
             });
