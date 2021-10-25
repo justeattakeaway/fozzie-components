@@ -2147,6 +2147,18 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-breadcrumbs@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-2.0.0.tgz#805f357170869a9401e8f1bf3dcd6868ed86f20d"
+  integrity sha512-1qP3mMmON9xpyuiK89yXZ+FzTZ9L/6TmKvAvJjWCwyzGz56MnwFfb4bBI/1N4K16jSsXc4dIQvFJSfuMURIztQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
+"@justeat/f-button@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
+  integrity sha512-qzZr6ZN01GTs6yFGOvIpwDcdXQKcH1SCF3CN7s9YTNiemWaQAoLo9sfv08fNuawBsxLwX4ZMLzjMY9dioC4vpg==
+
 "@justeat/f-content-cards@6.0.0-beta.2":
   version "6.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
@@ -2351,10 +2363,10 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@6.0.0-beta.5":
-  version "6.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.5.tgz#a2a357f96cd3e8a9076a9d0e4d58f687a4184398"
-  integrity sha512-YUBCnFGRDXb9DILjo8Ui8YdAZQ95ml25mGcYJQ1lNzlK29xcfnaJzQwSv1U5sfbKfhHZeyHGHRpN3071tREhFA==
+"@justeat/fozzie@6.0.0-beta.9":
+  version "6.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.9.tgz#21b72acc64fd5b3c5f7683c110d6109c07b56111"
+  integrity sha512-2nRdmuhZ1dMTXiN+SQExgk/qVHi9yg395lOjSG5pk9lYmi0R6QCnM1XxmIjsD2onQztpPnLAU6gAohxoz1INwA==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"

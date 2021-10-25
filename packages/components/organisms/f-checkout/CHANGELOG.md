@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.6.1
+------------------------------
+*October 19, 2021*
+
+### Changed
+- Updated version of `f-form-field`.
+
+
+v2.6.0
+------------------------------
+*October 19, 2021*
+
+### Added
+- `handleEventLogging` method to handle events and logging.
+
+
 v2.5.2
 ------------------------------
 *October 15, 2021*

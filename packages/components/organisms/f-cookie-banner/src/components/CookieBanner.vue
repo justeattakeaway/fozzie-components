@@ -39,13 +39,13 @@
 
                         <p :class="$style['c-cookieBanner-text']">
                             {{ copy.textLine3 }}
-                            <a
+                            <v-link
                                 data-test-id="cookie-policy-link"
+                                is-distinct
                                 :href="copy.cookiePolicyLinkUrl"
-                                :class="$style['c-cookieBanner-link']"
                                 target="_blank">
                                 {{ copy.cookiePolicyLinkText }}
-                            </a>
+                            </v-link>
                             {{ copy.textLine4 }}
                         </p>
                     </div>
@@ -100,6 +100,8 @@ import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import MegaModal from '@justeat/f-mega-modal';
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
+import VLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
 import LegacyBanner from './LegacyBanner.vue';
 import ReopenBannerLink from './ReopenBannerLink.vue';
 import tenantConfigs from '../tenants';
@@ -110,7 +112,8 @@ export default {
         ButtonComponent,
         LegacyBanner,
         MegaModal,
-        ReopenBannerLink
+        ReopenBannerLink,
+        VLink
     },
 
     props: {
@@ -168,7 +171,8 @@ export default {
             shouldHideBanner: true,
             isIosBrowser: false,
             bodyObserver: undefined,
-            isBodyHeightLessThanWindowHeight: false
+            isBodyHeightLessThanWindowHeight: false,
+            bodyHeight: 0
         };
     },
 
@@ -195,11 +199,19 @@ export default {
     watch: {
         isHidden (newVal) {
             this.shouldHideBanner = !!newVal;
+        },
+
+        bodyHeight (newVal, oldVal) {
+            if (newVal !== oldVal) {
+                this.updateIsBodyHeightLessThanWindowHeight();
+            }
         }
     },
 
     destroyed () {
-        this.bodyObserver.disconnect();
+        if (typeof ResizeObserver === 'function') {
+            this.bodyObserver.disconnect();
+        }
     },
 
     mounted () {
@@ -212,22 +224,37 @@ export default {
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
 
-        if (this.shouldAbsolutePositionReopenLink) {
-            this.bodyObserver = new ResizeObserver(this.updateIsBodyHeightLessThanWindowHeight);
-            const bodyElement = document.documentElement || document.body;
-            this.bodyObserver.observe(bodyElement);
+        if (typeof window === 'object' && this.shouldAbsolutePositionReopenLink && !this.legacyBanner) {
+            this.createResizeObserver();
         }
     },
 
     methods: {
         /**
-         * Triggered by <body> ResizeObserver calculates if the body height less than the window
+         * Creates <body> ResizeObserver to watch for body content height changes, triggers watch.bodyHeight method
+         */
+        createResizeObserver () {
+            if (typeof ResizeObserver !== 'function') return;
+
+            const resizeCallback = entry => {
+                window.requestAnimationFrame(() => {
+                    const [{ contentRect: { height } }] = entry;
+                    this.bodyHeight = height;
+                });
+            };
+            this.bodyObserver = new ResizeObserver(resizeCallback);
+            const bodyElement = document.documentElement || document.body;
+            this.bodyObserver.observe(bodyElement);
+        },
+
+        /**
+         * Triggered by watch.bodyHeight, calculates if body height is less than window height to absolutely position the reopen link
          */
         updateIsBodyHeightLessThanWindowHeight () {
             if (typeof window === 'object' && this.shouldHideBanner) {
                 const reopenElementHeight = this.$refs?.reopenCookieBannerLink?.$el?.clientHeight || 0;
                 this.isBodyHeightLessThanWindowHeight =
-                (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
+                        (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
             }
         },
 
@@ -453,6 +480,7 @@ export default {
     .c-cookieBanner-text {
         margin: 0;
         padding: 0;
+        @include font-size(body-s);
     }
 
     .c-cookieBanner-content {
