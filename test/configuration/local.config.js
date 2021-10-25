@@ -23,7 +23,7 @@ const configuration = {
         }
     },
     // 'allure', 'video', 'junit'
-    testReporters: ['allure']
+    testReporters: []
 };
 
 module.exports = configuration;

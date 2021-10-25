@@ -22,7 +22,11 @@ const configuration = {
         mobileNarrowWidth: 414
     },
     testType,
-    availableReporters: {},
+    availableReporters: {
+        allure: {
+            outputDir: '../../../../test/results/allure-results'
+        }
+    },
     // 'allure', 'video', 'junit'
     testReporters: ['video', 'junit']
 };

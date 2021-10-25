@@ -92,7 +92,7 @@ exports.config = {
     after: () => {
         console.log(
             '-----------------------------------------------------', '\n',
-            'To see the ALLURE REPORT, please head to the route of directory and type', '\n',
+            'For more error logs, add "allure" to "testReporters" in "test/configuration/local.config.js".', '\n', '\n', 'To then see the ALLURE REPORT, please head to the route of directory and type', '\n',
             'yarn allure:open', '\n',
             '-----------------------------------------------------'
         );
