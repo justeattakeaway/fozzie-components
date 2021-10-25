@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.2.0
 ------------------------------
-*October 22, 2021*
+*October 25, 2021*
 
 ### Changed
 - Button border style definition moved to button types. Introduced `background-color()` mixin to apply the same colour for the background and for the border colour.
