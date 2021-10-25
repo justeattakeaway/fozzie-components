@@ -9,7 +9,7 @@ v3.2.0
 *October 22, 2021*
 
 ### Changed
-- Button border style definition moved to button types. Introdused `background-color()` mixin to apply the same colour for the background and for the border colour.
+- Button border style definition moved to button types. Introduced `background-color()` mixin to apply the same colour for the background and for the border colour.
 - Each button size vertical padding reduced by 1px to make button height 56px/48px/40px/32px instead of 58px/50px/42px/34px.
 
 ### Removed
