@@ -191,7 +191,7 @@ export default {
 $btn-default-borderRadius              : $radius-rounded-e;
 $btn-default-font-size                 : 'heading-s';
 $btn-default-weight                    : $font-weight-bold;
-$btn-default-padding                   : 10px spacing(x3);
+$btn-default-padding                   : 9px spacing(x3);
 $btn-default-outline-color             : $color-focus;
 $btn-default-loading-opacity           : 0.35;
 $btn-default-iconHeight                : 18px;
@@ -246,18 +246,18 @@ $btn-link-loading-colorOpaque          : rgba($btn-link-loading-color, $btn-defa
 $btn-disabled-bgColor                  : $color-disabled-01;
 $btn-disabled-textColor                : $color-content-disabled;
 
-$btn-sizeLarge-padding                 : 14px spacing(x3);
+$btn-sizeLarge-padding                 : 13px spacing(x3);
 $btn-sizeLarge-loading-color           : $color-content-interactive-light;
 $btn-sizeLarge-loading-colorOpaque     : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
 
 $btn-sizeSmall-font-size               : 'body-l';
-$btn-sizeSmall-padding                 : spacing() spacing(x2);
+$btn-sizeSmall-padding                 : 7px spacing(x2);
 $btn-sizeSmall-iconHeight              : 15px;
 $btn-sizeSmall-iconSpacing             : 2.5px;
 $btn-sizeSmall-iconSideSpacing         : $btn-sizeSmall-iconSpacing + spacing();
 
 $btn-sizeXSmall-font-size              : 'body-s';
-$btn-sizeXSmall-padding                : 6px spacing();
+$btn-sizeXSmall-padding                : 5px spacing();
 $btn-sizeXSmall-iconHeight             : 12px;
 $btn-sizeXSmall-iconSpacing            : 2px;
 $btn-sizeXSmall-iconSideSpacing        : $btn-sizeXSmall-iconSpacing + spacing();
@@ -294,23 +294,11 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     user-select: none;
     color: $btn-secondary-textColor;
     text-decoration: none;
-
-    // Hide focus styles if they're not needed, for example, when an element receives focus via the mouse.
-    &:focus:not(:focus-visible) {
-        outline: 0;
-    }
+    outline: 0;
 
     // Show focus styles on keyboard focus.
     &:focus-visible {
-        outline: 0;
         box-shadow: 0 0 0 2px $btn-default-outline-color;
-    }
-
-    &:hover,
-    &:active {
-        &:not(.o-btn--link) {
-            outline: 0; // no need as already has a focus/active state
-        }
     }
 
     &,
@@ -367,7 +355,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
 .o-btn--primary,
 .o-btn--icon.o-btn--primary {
-    background-color: $btn-primary-bgColor;
+    @include background-color($btn-primary-bgColor);
 
     &,
     &:link,
@@ -382,12 +370,12 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     &:hover {
-        background-color: $btn-primary-bgColor--hover;
+        @include background-color($btn-primary-bgColor--hover);
     }
 
     &:active,
     &.o-btn--loading {
-        background-color: $btn-primary-bgColor--active;
+        @include background-color($btn-primary-bgColor--active);
     }
 
     @include spinnerColor($btn-primary-loading-color, $btn-primary-loading-colorOpaque);
@@ -399,14 +387,14 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
     &.o-btn--sizeSmall,
     &.o-btn--sizeXSmall {
-        background-color: $color-interactive-primary;
+        @include background-color($color-interactive-primary);
 
         &:hover {
-            background-color: lighten($color-interactive-primary, $color-hover-02);
+            @include background-color(lighten($color-interactive-primary, $color-hover-02));
         }
         &:active,
         &.o-btn--loading {
-            background-color: lighten($color-interactive-primary, $color-active-02);
+            @include background-color(lighten($color-interactive-primary, $color-active-02));
         }
     }
 }
@@ -414,14 +402,14 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 .o-btn--icon.o-btn--primary {
     &.o-btn--sizeSmall,
     &.o-btn--sizeXSmall {
-        background-color: $btn-primary-bgColor;
+        @include background-color($btn-primary-bgColor);
 
         &:hover {
-            background-color: $btn-primary-bgColor--hover;
+            @include background-color($btn-primary-bgColor--hover);
         }
         &:active,
         &.o-btn--loading {
-            background-color: $btn-primary-bgColor--active;
+            @include background-color($btn-primary-bgColor--active);
         }
     }
 }
@@ -433,7 +421,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
  */
 
 .o-btn--secondary {
-    background-color: $btn-secondary-bgColor;
+    @include background-color($btn-secondary-bgColor);
     color: $btn-secondary-textColor;
 
     &:hover,
@@ -443,12 +431,12 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     &:hover {
-        background-color: $btn-secondary-bgColor--hover;
+        @include background-color($btn-secondary-bgColor--hover);
     }
 
     &:active,
     &.o-btn--loading {
-        background-color: $btn-secondary-bgColor--active;
+        @include background-color($btn-secondary-bgColor--active);
     }
 
     @include spinnerColor($btn-secondary-loading-color, $btn-secondary-loading-colorOpaque);
@@ -500,7 +488,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
  */
 
 .o-btn--ghost {
-    background-color: $btn-ghost-bgColor;
+    @include background-color($btn-ghost-bgColor);
     color: $btn-ghost-textColor;
 
     &:hover,
@@ -510,12 +498,12 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     &:hover {
-        background-color: $btn-ghost-bgColor--hover;
+        @include background-color($btn-ghost-bgColor--hover);
     }
 
     &:active,
     &.o-btn--loading {
-        background-color: $btn-ghost-bgColor--active;
+        @include background-color($btn-ghost-bgColor--active);
     }
 
     @include spinnerColor($btn-ghost-loading-color, $btn-ghost-loading-colorOpaque);
@@ -534,7 +522,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
  */
 
 .o-btn--ghostTertiary {
-    background-color: $btn-ghostTertiary-bgColor;
+    @include background-color($btn-ghostTertiary-bgColor);
     color: $btn-ghostTertiary-textColor;
 
     &:hover,
@@ -544,12 +532,12 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     &:hover {
-        background-color: $btn-ghostTertiary-bgColor--hover;
+        @include background-color($btn-ghostTertiary-bgColor--hover);
     }
 
     &:active,
     &.o-btn--loading {
-        background-color: $btn-ghostTertiary-bgColor--active;
+        @include background-color($btn-ghostTertiary-bgColor--active);
     }
 
     @include spinnerColor($btn-ghostTertiary-loading-color, $btn-ghostTertiary-loading-colorOpaque);
@@ -568,15 +556,15 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
  */
 
 .o-btn--inverse {
-    background-color: $color-interactive-inverse; // for icon button to have a white background when it is located on top of images/dark surfaces
+    @include background-color($color-interactive-inverse); // for icon button to have a white background when it is located on top of images/dark surfaces
 
     &:hover {
-        background-color: $btn-ghost-bgColor--hover;
+        @include background-color($btn-ghost-bgColor--hover);
     }
 
     &:active,
     &.o-btn--loading {
-        background-color: $btn-ghost-bgColor--active;
+        @include background-color($btn-ghost-bgColor--active);
     }
 
     @include spinnerColor($btn-inverse-loading-color, $btn-inverse-loading-colorOpaque);
@@ -590,15 +578,15 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
  */
 
 .o-btn--ghostInverse {
-    background-color: $btn-ghost-bgColor;
+    @include background-color($btn-ghost-bgColor);
 
     &:hover {
-        background-color: lighten($color-black, $color-hover-02);
+        @include background-color(lighten($color-black, $color-hover-02));
     }
 
     &:active,
     &.o-btn--loading {
-        background-color: lighten($color-black, $color-active-02);
+        @include background-color(lighten($color-black, $color-active-02));
     }
 
     @include spinnerColor($btn-ghostInverse-loading-color, $btn-ghostInverse-loading-colorOpaque);
@@ -811,7 +799,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
         &,
         &:hover {
-            background-color: $btn-disabled-bgColor;
+            @include background-color($btn-disabled-bgColor);
             color: $btn-disabled-textColor;
         }
 
