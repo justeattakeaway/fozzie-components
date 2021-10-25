@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.4.0
+------------------------------
+*October 25, 2021*
+
+### Added
+- Injectable error boundary to wrap around slots and subcomponents
+
 v0.3.0
 ------------------------------
 *October 22, 2021*
