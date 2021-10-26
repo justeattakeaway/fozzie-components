@@ -25,24 +25,22 @@ describe('Legacy - f-cookieBanner component tests', () => {
         expect(bannerCookie.value).toBe('130315');
         expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(false);
     });
-});
 
-describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
     forEach([
         ['en-AU', 'au/info/privacy-policy#cookies_policy'],
         ['en-NZ', 'nz/info/privacy-policy#cookies_policy']
     ])
-        .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
-            // Arrange
-            cookieBanner = new CookieBanner();
-            cookieBanner.withQuery('&knob-Locale', tenant);
+    .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
+        // Arrange
+        cookieBanner = new CookieBanner();
+        cookieBanner.withQuery('&knob-Locale', tenant);
 
-            cookieBanner.load();
+        cookieBanner.load();
 
-            // Act
-            cookieBanner.clickCookiePolicyLink();
+        // Act
+        cookieBanner.clickCookiePolicyLink();
 
-            // Assert
-            expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
-        });
+        // Assert
+        expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
+    });
 });
