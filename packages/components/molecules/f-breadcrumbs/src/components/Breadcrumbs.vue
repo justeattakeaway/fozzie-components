@@ -80,7 +80,8 @@ export default {
 
 <style lang="scss" module>
 
-$breadcrumbs-text-colour: $color-grey-70;
+$breadcrumbs-text-colour-noBackground: $color-content-default;
+$breadcrumbs-text-colour-hasBackground: $color-content-light;
 $breadcrumbs-background-colour: rgba($color-black, 0.6);
 $breadcrumbs-border-radius: $radius-rounded-e;
 $breadcrumbs-not-active-font-weight: $font-weight-bold;
@@ -125,11 +126,11 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
 
 .c-breadcrumbs-text,
 .c-breadcrumbs-link {
-    color: $breadcrumbs-text-colour;
+    color: $breadcrumbs-text-colour-noBackground;
     font-weight: $breadcrumbs-not-active-font-weight;
 
     .c-breadcrumbs-list--hasBackground & {
-        color: $color-white;
+        color: $breadcrumbs-text-colour-hasBackground;
     }
 }
 
@@ -140,20 +141,20 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
     &:hover,
     &:focus {
         text-decoration: underline;
-        color: $breadcrumbs-text-colour;
+        color: $breadcrumbs-text-colour-noBackground;
 
         .c-breadcrumbs-list--hasBackground & {
-            color: $color-white;
+            color: $breadcrumbs-text-colour-hasBackground;
         }
     }
 }
 
 .c-breadcrumbs-separator {
-    color: $breadcrumbs-text-colour;
+    color: $breadcrumbs-text-colour-noBackground;
     transform: scale(0.6, 1.2);
 
     .c-breadcrumbs-list--hasBackground & {
-        color: $color-white;
+        color: $breadcrumbs-text-colour-hasBackground;
     }
 
     @include media('<narrowMid') {
