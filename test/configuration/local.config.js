@@ -21,7 +21,7 @@ const configuration = {
     testType,
     availableReporters: {
         allure: {
-            outputDir: '../../../../test/results/allure-results'
+            outputDir: '../../../../test/results/allure-results/'
         }
     },
     // 'allure', 'video', 'junit'

@@ -13,7 +13,7 @@ exports.setTestReporters = configuration => [
     }] : []],
     ...[configuration.testReporters.includes('allure') ? ['allure', {
         outputDir: configuration.availableReporters.allure.outputDir,
-        disableWebdriverStepsReporting: false,
+        disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
         disableMochaHooks: true
     }] : []],

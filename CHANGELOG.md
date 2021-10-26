@@ -7,10 +7,21 @@ v5.0.2
  ------------------------------
  *October 25, 2021*
 
+<<<<<<< HEAD
 ### Changed
 - wdio configuration for component, visual and a11y tests
 - allure script in `wdio-shared.conf.js` and `package.json`
 - updated generator to reflect above changes
+=======
+### Removed
+- unused browserstack and allure scripts
+- browserstack configuration files
+- reference to JE_ENV environment variable
+- percy and browserstack tags
+
+### Changed
+- filenames for component tests
+>>>>>>> master
 
 
 v5.0.1

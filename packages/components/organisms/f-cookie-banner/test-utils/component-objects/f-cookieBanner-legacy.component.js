@@ -15,10 +15,10 @@ module.exports = class CookieBanner extends Page {
     get closeButton () { return this.component.$('[data-test-id="cookieBanner-close-button"]'); }
 
     load () {
+        this.open('/');
         const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        browser.deleteCookies();
         this.open(pageUrl);
-        browser.deleteAllCookies();
-        browser.refresh();
         this.waitForComponent();
     }
 

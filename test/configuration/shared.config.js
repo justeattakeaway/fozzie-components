@@ -7,8 +7,7 @@ exports.testType = {
         name: 'component',
         services: ['chromedriver'],
         specs: VS_DEBUGGER ? [SPEC_FILE] : [
-            'test/component/*.component.desktop.spec.js',
-            'test/component/*.component.shared.spec.js'
+            'test/component/*.component.spec.js'
         ]
     } : []),
     ...(TEST_TYPE === 'a11y' ? {
