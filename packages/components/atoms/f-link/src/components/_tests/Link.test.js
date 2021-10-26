@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, RouterLinkStub } from '@vue/test-utils';
 import VLink from '../Link.vue';
 
 const $style = {
@@ -8,10 +8,16 @@ const $style = {
     'o-link--noBreak': 'o-link--noBreak'
 };
 
+const mocks = {
+    $style
+};
+
 describe('Link', () => {
     it('should be defined', () => {
         // Arrange
-        const propsData = { };
+        const propsData = {
+            href: '/'
+        };
 
         // Act
         const wrapper = shallowMount(VLink, {
@@ -27,15 +33,14 @@ describe('Link', () => {
             it('should apply `o-link--bold` class to link if true', () => {
                 // Arrange
                 const propsData = {
+                    href: '/',
                     isBold: true
                 };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
-                    mocks: {
-                        $style
-                    }
+                    mocks
                 });
 
                 const link = wrapper.find('[data-test-id="link-component"]');
@@ -49,15 +54,14 @@ describe('Link', () => {
             it('should apply `o-link--noDecoration` class to link if false', () => {
                 // Arrange
                 const propsData = {
-                    hasTextDecoration: false
+                    hasTextDecoration: false,
+                    href: '/'
                 };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
-                    mocks: {
-                        $style
-                    }
+                    mocks
                 });
 
                 const link = wrapper.find('[data-test-id="link-component"]');
@@ -71,15 +75,14 @@ describe('Link', () => {
             it('should apply `o-link--full` class to link if true', () => {
                 // Arrange
                 const propsData = {
+                    href: '/',
                     isFullWidth: true
                 };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
-                    mocks: {
-                        $style
-                    }
+                    mocks
                 });
 
                 const link = wrapper.find('[data-test-id="link-component"]');
@@ -93,21 +96,65 @@ describe('Link', () => {
             it('should apply `o-link--noBreak` class to link if true', () => {
                 // Arrange
                 const propsData = {
+                    href: '/',
                     noLineBreak: true
                 };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
                     propsData,
-                    mocks: {
-                        $style
-                    }
+                    mocks
                 });
 
                 const link = wrapper.find('[data-test-id="link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--noBreak');
+            });
+        });
+
+        describe('isRouterLink ::', () => {
+            it('should render a router link when true', () => {
+                // Arrange
+                const propsData = {
+                    href: '/',
+                    isRouterLink: true
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    mocks,
+                    stubs: {
+                        RouterLink: RouterLinkStub
+                    }
+                });
+
+                const routerLink = wrapper.findComponent(RouterLinkStub);
+
+                // Assert
+                expect(routerLink.exists()).toBe(true);
+            });
+
+            it('should render an anchor tag when false', () => {
+                // Arrange
+                const propsData = {
+                    href: '/',
+                    isRouterLink: false
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    mocks
+                });
+
+                const link = wrapper.find('[data-test-id="link-component"]');
+                const routerLink = wrapper.findComponent(RouterLinkStub);
+
+                // Assert
+                expect(link.element.tagName).toBe('A');
+                expect(routerLink.exists()).toBe(false);
             });
         });
     });
@@ -125,6 +172,7 @@ describe('Link', () => {
                 ])('should return `%s` when `isExternalSite` is %s', (expected, isExternalSite) => {
                     // Arrange
                     const propsData = {
+                        href: '/',
                         isExternalSite,
                         target: '_blank'
                     };
@@ -146,6 +194,7 @@ describe('Link', () => {
                 ])('should return `%s` when `isExternalSite` is %s', (expected, isExternalSite) => {
                     // Arrange
                     const propsData = {
+                        href: '/',
                         isExternalSite
                     };
 
