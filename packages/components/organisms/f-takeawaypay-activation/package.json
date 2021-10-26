@@ -34,12 +34,9 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
-    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
-    "report:test-component:chome": "cross-env-shell JE_ENV=ci TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn:allure:open",
-    "allure:open": "yarn allure:clean && allure open",
-    "allure:clean": "rimraf ../../../../test/results/allure"
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

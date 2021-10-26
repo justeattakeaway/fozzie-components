@@ -5,7 +5,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 let checkoutInfo;
 
-describe('f-checkout component tests - @browserstack', () => {
+describe('f-checkout component tests', () => {
     beforeEach(() => {
         checkout = new Checkout();
         checkoutInfo = {
