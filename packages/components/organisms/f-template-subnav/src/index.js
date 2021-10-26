@@ -1,8 +1,8 @@
 
 /**
- * @overview Fozzie Template Sub Nav Component JS Wrapper
+ * @overview Fozzie Template SubNav Component JS Wrapper
  *
- * @module f-template-sub-nav
+ * @module f-template-subnav
  */
 
 

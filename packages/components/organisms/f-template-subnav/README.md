@@ -1,6 +1,6 @@
 <div align="center">
 
-# f-template-sub-nav
+# f-template-subnav
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
@@ -12,10 +12,10 @@ On wider views, this will be laid out with the breadcrumb running along the top,
 
 ---
 
-[![npm version](https://badge.fury.io/js/%40justeat%2Ff-template-sub-nav.svg)](https://badge.fury.io/js/%40justeat%2Ff-template-sub-nav)
+[![npm version](https://badge.fury.io/js/%40justeat%2Ff-template-subnav.svg)](https://badge.fury.io/js/%40justeat%2Ff-template-subnav)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-template-sub-nav/badge.svg)](https://coveralls.io/github/justeat/f-template-sub-nav)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-template-sub-nav/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-template-sub-nav?targetFile=package.json)
+[![Coverage Status](https://coveralls.io/repos/github/justeat/f-template-subnav/badge.svg)](https://coveralls.io/github/justeat/f-template-subnav)
+[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-template-subnav/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-template-subnav?targetFile=package.json)
 
 ---
 
@@ -26,11 +26,11 @@ On wider views, this will be laid out with the breadcrumb running along the top,
 Install the module using npm or Yarn:
 
 ```sh
-yarn add @justeat/f-template-sub-nav
+yarn add @justeat/f-template-subnav
 ```
 
 ```sh
-npm install @justeat/f-template-sub-nav
+npm install @justeat/f-template-subnav
 ```
 
 
@@ -40,8 +40,8 @@ npm install @justeat/f-template-sub-nav
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import TemplateSubNav from '@justeat/f-template-sub-nav';
-import '@justeat/f-template-sub-nav/dist/f-template-sub-nav.css';
+import TemplateSubNav from '@justeat/f-template-subnav';
+import '@justeat/f-template-subnav/dist/f-template-subnav.css';
 
 export default {
     components: {
@@ -50,15 +50,15 @@ export default {
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `template-sub-nav` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `template-subnav` bundle from the main `bundle.client.js`:
 
 ```js
-import '@justeat/f-template-sub-nav/dist/f-template-sub-nav.css';
+import '@justeat/f-template-subnav/dist/f-template-subnav.css';
 
 export default {
     components: {
         // …
-        TemplateSubNav: () => import(/* webpackChunkName: "template-sub-nav" */ '@justeat/f-template-sub-nav')
+        TemplateSubNav: () => import(/* webpackChunkName: "template-subnav" */ '@justeat/f-template-subnav')
     }
 }
 ```
@@ -84,38 +84,21 @@ $ cd fozzie-components
 $ yarn
 ```
 
-Change directory to the `f-template-sub-nav` package:
+Change directory to the `f-template-subnav` package:
 
 ```sh
-$ cd packages/components/organisms/f-template-sub-nav
+$ cd packages/components/organisms/f-template-subnav
 ```
 
 ## Testing
 
 To test all components, run from root directory.
-To test only `f-template-sub-nav`, run from the `./fozzie-components/packages/components/organisms/f-template-sub-nav` directory.
+To test only `f-template-subnav`, run from the `./fozzie-components/packages/components/organisms/f-template-subnav` directory.
 
 ### Unit and Integration tests
 
 ```sh
 yarn test
-```
-
-### Component and Accessibility Tests
-
-```bash
-# Note: Ensure Storybook is running when running the following commands
-cd ./fozzie-components
-
-yarn storybook:build
-yarn storybook:serve-static
-```
-
-yarn test-component:chrome
-```
-### Accessibility tests
-```bash
-yarn test-a11y:chrome
 ```
 ## Documentation to be completed once module is in stable state.
 

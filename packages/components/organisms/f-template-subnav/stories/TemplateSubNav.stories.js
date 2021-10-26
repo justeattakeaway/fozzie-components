@@ -9,7 +9,7 @@ export default {
 export const TemplateSubNavComponent = () => ({
     components: { TemplateSubNav },
     props: {},
-    template: '<template-sub-nav v-bind="$props" />'
+    template: '<template-subnav v-bind="$props" />'
 });
 
-TemplateSubNavComponent.storyName = 'f-template-sub-nav';
+TemplateSubNavComponent.storyName = 'f-template-subnav';

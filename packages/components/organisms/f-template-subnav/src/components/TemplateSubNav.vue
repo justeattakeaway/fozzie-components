@@ -14,7 +14,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-templateSubNav {
     display: flex;
     justify-content: center;
