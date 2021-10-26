@@ -2,7 +2,7 @@ const Searchbox = require('../../test-utils/component-objects/f-searchbox.compon
 
 const searchbox = new Searchbox();
 
-describe('f-searchbox component tests - @percy', () => {
+describe('f-searchbox component tests', () => {
     beforeEach(() => {
         searchbox.load();
     });
