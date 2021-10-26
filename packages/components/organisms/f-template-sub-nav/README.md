@@ -4,7 +4,9 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-SPA with breadcrumb, lefthand navigation and centre slot
+This component provides the styling for template that includes a breadcrumb, sub navigation navigation and a slot for the main body of the page.
+
+On wider views, this will be laid out with the breadcrumb running along the top, the subnav on the left and the main body content positioned to the right of the subnav. A good example of where this might be used is on the account info pages.
 
 </div>
 
