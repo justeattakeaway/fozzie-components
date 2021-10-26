@@ -23,25 +23,22 @@ const getChangedPackageStories = () => {
 };
 
 const getStoryFiles = () => {
-
-    // Executed if Storybook is running in VS Code via the launch.json command. 
+    // Executed if Storybook is running in VS Code via the launch.json command.
     if (process.env.VS_DEBUGGER) {
         return [process.env.CURRENT_STORY_FILE];
     }
 
     // Executed if the storybook:serve-changed script is executed by CircleCI.
-    else if (process.env.CHANGED_ONLY) {
+    if (process.env.CHANGED_ONLY) {
         return getChangedPackageStories();
     }
 
     // Executed if the storybook:serve script is executed.
-    else {
-        return [
-            '../../../**/*.stories.@(js|mdx)',
-            '../../../../stories/**/*.stories.@(js|mdx)'
-        ];
-    }
-}
+    return [
+        '../../../**/*.stories.@(js|mdx)',
+        '../../../../stories/**/*.stories.@(js|mdx)'
+    ];
+};
 
 module.exports = {
     getStoryFiles
