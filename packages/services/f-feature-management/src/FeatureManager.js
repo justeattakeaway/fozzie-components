@@ -1,6 +1,6 @@
 import evaluateLogic from './evaluateLogic';
 import evaluateDefault from './evaluateDefaultValue';
-import { getFeature, init, loadFromCdn as _loadFromCdn  } from './configStore';
+import { getFeature, init, loadFromCdn as _loadFromCdn } from './configStore';
 import { getContext } from './contextGetter';
 import trackExperiment from './trackExperiment';
 import { logger } from './logger';
