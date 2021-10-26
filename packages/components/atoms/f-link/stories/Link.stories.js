@@ -15,6 +15,10 @@ export const VLinkComponent = () => ({
         };
     },
     props: {
+        isRouterLink: {
+            default: boolean('Is a router link?', false)
+        },
+
         isExternalSite: {
             default: boolean('Opens an external site', false)
         },
@@ -51,7 +55,8 @@ export const VLinkComponent = () => ({
 
     template: `<v-link
                     :data-test-id="dataTestId"
-                    href="https://www.just-eat.co.uk/"
+                    href="/"
+                    :is-router-link="isRouterLink"
                     :is-bold="isBold"
                     :has-text-decoration="hasTextDecoration"
                     :is-full-width="isFullWidth"
