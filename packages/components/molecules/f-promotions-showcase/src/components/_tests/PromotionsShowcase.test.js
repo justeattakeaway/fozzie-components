@@ -24,7 +24,7 @@ describe('PromotionsShowcase', () => {
             })
         };
         const wrapper = shallowMount(PromotionsShowcase, { propsData });
-        expect(wrapper.findAll('[data-test-id="promotionsShowcase--item"]').length).toBe(items);
+        expect(wrapper.findAll('[data-test-id="promotionsShowcase-item"]').length).toBe(items);
     });
 
     it('should render an item with an illustration component if provided', () => {
@@ -45,7 +45,7 @@ describe('PromotionsShowcase', () => {
         const wrapper = shallowMount(PromotionsShowcase, { localVue, propsData });
         const foundIllustration = wrapper.findComponent(illustration);
         expect(foundIllustration.exists()).toBe(true);
-        expect(foundIllustration.attributes('data-test-id')).toBe('promotionsShowcase--itemIllustration');
+        expect(foundIllustration.attributes('data-test-id')).toBe('promotionsShowcase-itemIllustration');
     });
 
     it('should render a link when given a text link for an item', () => {
@@ -58,7 +58,7 @@ describe('PromotionsShowcase', () => {
             }]
         };
         const wrapper = shallowMount(PromotionsShowcase, { propsData });
-        const item = wrapper.find('[data-test-id="promotionsShowcase--item"]');
+        const item = wrapper.find('[data-test-id="promotionsShowcase-item"]');
         expect(item.exists()).toBe(true);
         expect(item.element.tagName).toBe('A');
         expect(item.attributes('href')).toBe(linkText);
@@ -84,7 +84,7 @@ describe('PromotionsShowcase', () => {
 
         beforeEach(() => {
             wrapper = shallowMount(PromotionsShowcase, { propsData });
-            item = wrapper.find('[data-test-id="promotionsShowcase--item"]');
+            item = wrapper.find('[data-test-id="promotionsShowcase-item"]');
         });
 
         it('should render a link', () => {
@@ -113,7 +113,7 @@ describe('PromotionsShowcase', () => {
 
         beforeEach(() => {
             wrapper = shallowMount(PromotionsShowcase, { propsData });
-            item = wrapper.find('[data-test-id="promotionsShowcase--item"]');
+            item = wrapper.find('[data-test-id="promotionsShowcase-item"]');
             expect(item.exists()).toBe(true);
         });
 
@@ -142,7 +142,7 @@ describe('PromotionsShowcase', () => {
             };
             const wrapper = shallowMount(PromotionsShowcase, { propsData });
 
-            item = wrapper.find('[data-test-id="promotionsShowcase--item"]');
+            item = wrapper.find('[data-test-id="promotionsShowcase-item"]');
             expect(item.exists()).toBe(true);
         });
 

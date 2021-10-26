@@ -4,41 +4,41 @@
         :class="$style['c-promotionsShowcase']"
         data-test-id="promotionsShowcase">
         <div
-            :class="$style['c-promotionsShowcase--inner']">
+            :class="$style['c-promotionsShowcase-inner']">
             <component
                 :is="itemTag(item)"
                 v-for="(item, index) in items"
                 :key="`promotionItem-${index}`"
                 v-bind="linkAttrs(item)"
                 :class="{
-                    [$style['c-promotionsShowcase--item']]: true,
-                    [$style['c-promotionsShowcase--itemInteractive']]: isFunction(item.link)
+                    [$style['c-promotionsShowcase-item']]: true,
+                    [$style['c-promotionsShowcase-item--interactive']]: isFunction(item.link)
                 }"
-                data-test-id="promotionsShowcase--item"
+                data-test-id="promotionsShowcase-item"
                 @click="dispatchClick(item, $event)">
                 <div
                     v-if="isVueComponent(item.illustration)"
-                    :class="$style['c-promotionsShowcase--itemElement']"
-                    data-test-id="promotionsShowcase--itemElement">
+                    :class="$style['c-promotionsShowcase-itemElement']"
+                    data-test-id="promotionsShowcase-itemElement">
                     <div
-                        :class="$style['c-promotionsShowcase--itemIllustrationContainer']">
+                        :class="$style['c-promotionsShowcase-itemIllustrationContainer']">
                         <component
                             :is="item.illustration"
-                            :class="$style['c-promotionsShowcase--itemIllustration']"
-                            data-test-id="promotionsShowcase--itemIllustration" />
+                            :class="$style['c-promotionsShowcase-itemIllustration']"
+                            data-test-id="promotionsShowcase-itemIllustration" />
                     </div>
                 </div>
                 <div
-                    :class="$style['c-promotionsShowcase--itemElement']"
-                    data-test-id="promotionsShowcase--itemElement">
-                    <h4 data-test-id="promotionsShowcase--itemTitle">
+                    :class="$style['c-promotionsShowcase-itemElement']"
+                    data-test-id="promotionsShowcase-itemElement">
+                    <h4 data-test-id="promotionsShowcase-itemTitle">
                         {{ item.title }}
                     </h4>
                     <p
                         v-for="(line, lineIndex) in getLines(item.lines)"
                         :key="`promotionItem-${index}-subLine-${lineIndex}`"
-                        :class="$style[`c-promotionsShowcase--itemElement--${line.style}`]"
-                        data-test-id="promotionsShowcase--itemText">
+                        :class="$style[`c-promotionsShowcase-itemElement--${line.style}`]"
+                        data-test-id="promotionsShowcase-itemText">
                         {{ line.text }}
                     </p>
                 </div>
@@ -55,13 +55,7 @@ function isString (item) {
         || item instanceof String;
 }
 
-function isFunction (item) {
-    return typeof item === 'function';
-}
-
 export default {
-    name: 'PromotionsShowcase',
-
     components: {},
 
     props: {
@@ -73,7 +67,7 @@ export default {
 
     methods: {
         dispatchClick (item, event) {
-            return isFunction(item.link) && item.link(event);
+            return this.isFunction(item.link) && item.link(event);
         },
 
         getLines (lines) {
@@ -85,7 +79,9 @@ export default {
                 : line));
         },
 
-        isFunction,
+        isFunction (item) {
+            return typeof item === 'function';
+        },
 
         isVueComponent (component) {
             return component?.render instanceof Function
@@ -98,13 +94,13 @@ export default {
                 return 'a';
             }
 
-            return isFunction(item.link)
+            return this.isFunction(item.link)
                 ? 'button'
                 : 'div';
         },
 
         linkAttrs (item) {
-            if (isFunction(item?.link)) {
+            if (this.isFunction(item?.link)) {
                 return false;
             }
 
@@ -125,7 +121,7 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     padding: spacing(x2);
 }
 
-.c-promotionsShowcase--inner {
+.c-promotionsShowcase-inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,7 +138,7 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     }
 }
 
-.c-promotionsShowcase--item {
+.c-promotionsShowcase-item {
     display: flex;
     flex-direction: row;
     padding: spacing(x2);
@@ -158,7 +154,7 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
         flex-grow: 1;
     }
 
-    &:not(*:first-child) {
+    & + & {
         border-top: 1px solid $color-border-default;
 
         @include media ('>=wide') {
@@ -167,15 +163,15 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     }
 }
 
-.c-promotionsShowcase--itemElement {
+.c-promotionsShowcase-itemElement {
     &:not(*:first-child) {
         margin-left: spacing(x2);
     }
 }
 
-.c-promotionsShowcase--itemElement--styleText,
-.c-promotionsShowcase--itemElement--styleLink,
-.c-promotionsShowcase--itemElement--styleEmphasized {
+.c-promotionsShowcase-itemElement--styleText,
+.c-promotionsShowcase-itemElement--styleLink,
+.c-promotionsShowcase-itemElement--styleEmphasized {
     &:nth-of-type(1) {
         margin-top: spacing(x0.5);
     }
@@ -183,42 +179,38 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     margin-top: spacing();
 }
 
-.c-promotionsShowcase--itemInteractive {
+.c-promotionsShowcase-item--interactive {
     cursor: pointer;
 }
 
-.c-promotionsShowcase--itemElement--styleLink {
+.c-promotionsShowcase-itemElement--styleLink {
     color: $color-content-link;
     font-weight: $font-weight-bold;
 
-    .c-promotionsShowcase--item:hover & {
+    .c-promotionsShowcase-item:hover & {
         text-decoration: underline;
     }
 }
 
-
-.c-promotionsShowcase--itemElement--styleEmphasized {
+.c-promotionsShowcase-itemElement--styleEmphasized {
     text-decoration: underline;
     font-weight: $font-weight-bold;
 }
 
-.c-promotionsShowcase--itemIllustrationContainer {
+.c-promotionsShowcase-itemIllustrationContainer {
     position: relative;
     height: 0;
     width: 30px;
     padding: 0 0 100%;
 }
 
-.c-promotionsShowcase--itemIllustration {
+.c-promotionsShowcase-itemIllustration {
     position: absolute;
     height: 100%;
     width: 100%;
     left: 0;
     top: 0;
-
-    &#{&} { // to increase specificity level to override svg:not(:root) rule
-        overflow: visible;
-    }
+    overflow: visible !important;
 }
 
 </style>

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.0
 ------------------------------
-*October 22, 2021*
+*October 26, 2021*
 
 ### Added
 - Functional version of PromotionsShowcase component
@@ -14,7 +14,7 @@ v0.2.0
 - Prop accepted by component for configuration
 - Story using controls to select example configs
 - README.md updated
-- Reduced maximum bundewatch size
+- Reduced maximum bundlewatch size
 
 
 v0.1.0
