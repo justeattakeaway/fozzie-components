@@ -71,7 +71,9 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| `isExternalSite` | `String` | `false` | Sets aria description to 'Opens and external site' or 'Opens and external site in a new window/screen/tab' depending on target of link.|
+| `href` | `String` | This is a required prop | The URL or path of the link. For a `router-link` this will be mapped to the `to` attribute. |
+| `isExternalSite` | `Boolean` | `false` | Sets aria description to 'Opens and external site' or 'Opens and external site in a new window/screen/tab' depending on target of link.|
+| `isRouterLink` | `Boolean` | `false` | Determines whether to configure the link as a Vue Router router-link. |
 | `isBold` | `Boolean` | `false` | Sets link text to bold. |
 | `hasTextDecoration` | `Boolean` | `true` | Adds underline to link text. |
 | `isFullWidth` | `Boolean` | `false` | Link set as full width. |
@@ -126,5 +128,3 @@ cd ./fozzie-components/packages/components/atoms/f-link
 yarn test-component:chrome
 ```
 ## Documentation to be completed once module is in stable state.
-
-
