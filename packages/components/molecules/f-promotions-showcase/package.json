@@ -1,11 +1,11 @@
 {
   "name": "@justeat/f-promotions-showcase",
   "description": "Fozzie Promotions Showcase - A place for promotional messages to be displayed",
-  "version": "0.1.0",
-  "main": "dist/f-promotions-showcase.umd.min.js", 
-  "maxBundleSize": "20kB",
+  "version": "0.2.0",
+  "main": "dist/f-promotions-showcase.umd.min.js",
+  "maxBundleSize": "4kB",
   "files": [
-    "dist" 
+    "dist"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-promotions-showcase",
   "contributors": [
