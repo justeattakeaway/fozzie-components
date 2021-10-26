@@ -1,5 +1,9 @@
 import axios from 'axios';
+import retryWrapper from './axiosRetryWrapper';
+
 import { VUEX_CHECKOUT_EXPERIMENTATION_MODULE } from '../constants';
+
+retryWrapper(axios);
 
 export default {
     async getCheckout (url, state, timeout) {
