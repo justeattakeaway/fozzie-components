@@ -29,8 +29,6 @@ function executeSUT (settings = cdnSettings, onUpdated) {
 describe('When calling loadFromCdn', () => {
     beforeEach(async () => {
         jest.useFakeTimers();
-
-        await executeSUT();
     });
 
     afterEach(() => {
@@ -38,11 +36,14 @@ describe('When calling loadFromCdn', () => {
     });
 
     it('should make an initial call to fetch', async () => {
+        await executeSUT();
         expect(mockAxios.get).toHaveBeenCalledTimes(1);
         expect(mockAxios.get).toHaveBeenCalledWith(`https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
     });
 
     it('should start polling', async () => {
+        await executeSUT();
+
         expect(setInterval).toHaveBeenCalledTimes(1);
         expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 30000);
 
@@ -55,22 +56,29 @@ describe('When calling loadFromCdn', () => {
     });
 
     it('should not poll if poll setting false', async () => {
-    // Arrange
-        const newSettings = { ...cdnSettings, poll: false };
+        // Arrange
+        const newSettings = {
+            ...cdnSettings,
+            poll: false
+        };
 
         // Act
         await executeSUT(newSettings);
-        expect(mockAxios.get).toHaveBeenCalledTimes(2);
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
         jest.advanceTimersByTime(100000);
 
         // Assert
-        expect(mockAxios.get).toHaveBeenCalledTimes(2);
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
     });
 
     it('should honour different host', async () => {
         // Arrange
-        const newSettings = { ...cdnSettings, host: 'https://test.com', pollInterval: 60000 };
+        const newSettings = {
+            ...cdnSettings,
+            host: 'https://test.com',
+            pollInterval: 60000
+        };
 
         // Act
         await executeSUT(newSettings);
@@ -81,23 +89,28 @@ describe('When calling loadFromCdn', () => {
 
     it('should honour different pollInterval', async () => {
         // Arrange
-        const newSettings = { ...cdnSettings, host: 'https://test.com', pollInterval: 60000 };
+        const newSettings = {
+            ...cdnSettings,
+            host: 'https://test.com',
+            pollInterval: 60000
+        };
 
         // Act
         await executeSUT(newSettings);
 
         // Assert
-        expect(mockAxios.get).toHaveBeenCalledTimes(2);
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
         jest.advanceTimersByTime(35000);
-        expect(mockAxios.get).toHaveBeenCalledTimes(2);
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
         jest.advanceTimersByTime(30000);
-        expect(mockAxios.get).toHaveBeenCalledTimes(3);
-        expect(mockAxios.get).toHaveBeenNthCalledWith(3, `https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
+        expect(mockAxios.get).toHaveBeenCalledTimes(2);
+        expect(mockAxios.get).toHaveBeenNthCalledWith(2, `https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
     });
 
     it('should initialise features correctly', async () => {
+        await executeSUT();
         expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
         expect(getFeature('key2')).toBeFalsy();
@@ -119,7 +132,7 @@ describe('When calling loadFromCdn', () => {
     });
 
     it('should call callback when config timestamp changes', async () => {
-    // Arrange
+        // Arrange
         const callbackMock = jest.fn();
 
         mockResponse.createdAt = '2021-10-01 09:00';
@@ -132,7 +145,7 @@ describe('When calling loadFromCdn', () => {
     });
 
     it('should not call callback when config timestamp is not changed', async () => {
-    // Arrange
+        // Arrange
         const callbackMock = jest.fn();
 
         // Act

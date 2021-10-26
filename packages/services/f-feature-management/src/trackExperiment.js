@@ -1,4 +1,3 @@
-import isFunction from 'is-function';
 import { logger } from './logger';
 
 /**
@@ -13,7 +12,7 @@ function trackExperiment (experiment, onTrack) {
     const key = experiment.experimentKey;
     const variant = experiment.experimentVariant;
 
-    if (!isFunction(onTrack)) {
+    if (typeof (onTrack) !== 'function') {
         logger.logWarn(`Experiment will not be tracked as no \`onTrack\` callback was provided (key: ${key}, variant: ${variant})`);
         return;
     }

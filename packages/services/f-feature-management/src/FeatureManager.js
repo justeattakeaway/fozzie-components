@@ -1,6 +1,6 @@
 import evaluateLogic from './evaluateLogic';
 import evaluateDefault from './evaluateDefaultValue';
-import { getFeature, init } from './configStore';
+import { getFeature, init, loadFromCdn as _loadFromCdn  } from './configStore';
 import { getContext } from './contextGetter';
 import trackExperiment from './trackExperiment';
 import { logger } from './logger';
@@ -17,9 +17,13 @@ class FeatureManager {
      *
      * @param {object} settings
      */
-    constructor (settings) {
+    constructor (settings, httpClient) {
         this._keyPrefix = settings.keyPrefix;
         this._onTrack = settings.onTrack;
+        this._onUpdated = settings.onUpdated;
+        this._cdn = settings.cdn;
+
+        this._httpClient = httpClient;
     }
 
     /**
@@ -118,6 +122,13 @@ class FeatureManager {
         }
 
         return null;
+    }
+
+    loadFromCdn () {
+        if (this._cdn) {
+            return _loadFromCdn(this._cdn, this._onUpdated, this._httpClient);
+        }
+        throw new Error('Must provide CDN settings for CDN load to work correctly');
     }
 
     /* eslint-disable class-methods-use-this */

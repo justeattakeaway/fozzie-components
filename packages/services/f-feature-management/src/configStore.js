@@ -15,6 +15,8 @@ function init (configAsJson, onUpdated) {
     if (configAsJson) {
         const newConfig = typeof (configAsJson) === 'string' ? JSON.parse(configAsJson) : configAsJson;
 
+        logger.logInfo(`Received feature config created at ${configCreatedAt}`);
+
         if (configCreatedAt && (configCreatedAt >= newConfig.createdAt)) {
             return {};
         }
@@ -25,7 +27,7 @@ function init (configAsJson, onUpdated) {
             return {};
         }
 
-        logger.logInfo(`Loading feature config created at ${configCreatedAt}`);
+        logger.logInfo(`Loading new feature config created at ${configCreatedAt}`);
 
         featureLookup = {};
 
@@ -47,16 +49,16 @@ function init (configAsJson, onUpdated) {
  * Loads config from CDN and starts polling if requested.
  * @param {object} cdnSettings Contains scope, environment, key and optionally host override and pollInterval (defaults to 30s).
  * @param {function} onUpdated Optional callback function called when new config is loaded.
- * @param {object} axiosClient Optional axios client to use for making CDN request.
+ * @param {object} httpClient Optional http client to use for making CDN request.
  * @returns The raw JSON config (for caching purposes)
  */
-async function loadFromCdn (cdnSettings, onUpdated, axiosClient = axios) {
+async function loadFromCdn (cdnSettings, onUpdated, httpClient = axios) {
     const suffix = cdnSettings.key ? `-${cdnSettings.key}` : '';
     const host = cdnSettings.host || 'https://features.api.justeattakeaway.com';
     const url = `${host}/config/v1/${cdnSettings.scope}/${cdnSettings.environment}${suffix}`;
 
     async function fetchAndUpdate () {
-        const response = await axiosClient.get(url);
+        const response = await httpClient.get(url);
         init(response.data, onUpdated);
         return response.data;
     }

@@ -47,7 +47,7 @@ const settings = { //see table below for details
   }
 };
 
-const featureManagement = await createFeatureManagementInstance(settings, optionalAxiosClient);
+const featureManagement = await createFeatureManagementInstance(settings, optionalhttpClient);
 
 // e.g.
 const myFeatureValue = featureManagement.getValue('my-feature-value');
@@ -71,7 +71,7 @@ const myFeatureValue = featureManagement.getValue('my-feature-value');
 
 ### Optional Axios Client:
 
-If a client is provided that conforms to axios request/response interfaces, that will be used in place of an internal client.
+If an http client is provided, it will be used in place of an internal (axios) client.
 
 ## Integration with vue
 
