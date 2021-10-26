@@ -83,7 +83,7 @@ describe('BreadCrumbs', () => {
         ['empty', ''],
         ['undefined', undefined],
         ['null', null]
-    ])('should render a span when url is %s', (_, url) => {
+    ])('should render a text node when url is %s', (_, url) => {
         // Arrange
         const propsData = {
             links: [{
@@ -95,13 +95,15 @@ describe('BreadCrumbs', () => {
 
         // Act
         const wrapper = shallowMount(BreadCrumbs, { propsData });
-        const breadcrumbSpans = wrapper.findAll('li > span');
+        const breadcrumbElements = wrapper.findAll('li');
+        const breadcrumbLinks = wrapper.findAll('li > a');
 
         // Assert
-        expect(breadcrumbSpans).toHaveLength(1);
+        expect(breadcrumbElements).toHaveLength(1); // There are no separators
+        expect(breadcrumbLinks).toHaveLength(0);
     });
 
-    it('should render a span if router link url is missing', () => {
+    it('should render a text node if router link url is missing', () => {
         // Arrange
         const propsData = {
             links: [{
@@ -113,10 +115,12 @@ describe('BreadCrumbs', () => {
 
         // Act
         const wrapper = shallowMount(BreadCrumbs, { propsData });
-        const breadcrumbSpans = wrapper.findAll('li > span');
+        const breadcrumbElements = wrapper.findAll('li');
+        const breadcrumbLinks = wrapper.findAll('li > a');
 
         // Assert
-        expect(breadcrumbSpans).toHaveLength(1);
+        expect(breadcrumbElements).toHaveLength(1); // There are no separators
+        expect(breadcrumbLinks).toHaveLength(0);
     });
 
     it('should render a mix of links and spans when not all links have urls', () => {
@@ -140,10 +144,10 @@ describe('BreadCrumbs', () => {
         const wrapper = shallowMount(BreadCrumbs, { propsData });
 
         const breadcrumbLinks = wrapper.findAll('li > a');
-        const breadcrumbSpans = wrapper.findAll('li > span');
+        const breadcrumbElements = wrapper.findAll('li');
 
         // Assert
         expect(breadcrumbLinks).toHaveLength(1);
-        expect(breadcrumbSpans).toHaveLength(1);
+        expect(breadcrumbElements).toHaveLength(3); // Includes separator
     });
 });

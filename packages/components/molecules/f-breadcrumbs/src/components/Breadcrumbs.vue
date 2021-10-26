@@ -12,33 +12,24 @@
                 </li>
                 <li
                     :key="`${index}_separator`"
-                    :class="$style['c-breadcrumbs-item']">
+                    :class="[
+                        $style['c-breadcrumbs-item'],
+                        $style['c-breadcrumbs-text'],
+                        linkActiveClass(index)
+                    ]">
                     <router-link
                         v-if="routerLink && url"
-                        :to="url"
-                        :class="[
-                            $style['c-breadcrumbs-link'],
-                            linkActiveClass(index)
-                        ]">
+                        :to="url">
                         {{ name }}
                     </router-link>
                     <a
                         v-else-if="url"
-                        :href="url"
-                        :class="[
-                            $style['c-breadcrumbs-link'],
-                            linkActiveClass(index)
-                        ]">
+                        :href="url">
                         {{ name }}
                     </a>
-                    <span
-                        v-else
-                        :class="[
-                            $style['c-breadcrumbs-text'],
-                            linkActiveClass(index)
-                        ]">
+                    <template v-else>
                         {{ name }}
-                    </span>
+                    </template>
                 </li>
             </template>
         </ul>
@@ -57,19 +48,21 @@ export default {
     },
     methods: {
         /**
-       * Function to add active class to the last link
-       * @param index
-       * @returns {*|string}
-       */
+        * Function to add active class to the last link
+        * @param index
+        * @returns {*|string}
+        */
         linkActiveClass (index) {
-            return index === this.links.length - 1 ? this.$style['c-breadcrumbs-link--active'] : '';
+            const lastIndex = this.links.length - 1;
+            return index !== lastIndex ?
+                this.$style['c-breadcrumbs-link'] :
+                this.$style['c-breadcrumbs-link--active'];
         }
     }
 };
 </script>
 
 <style lang="scss" module>
-
 $breadcrumbs-text-colour: $color-content-light;
 $breadcrumbs-background-colour: rgba($color-black, 0.6);
 $breadcrumbs-border-radius: $radius-rounded-c;
@@ -103,18 +96,25 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
         }
     }
 }
-.c-breadcrumbs-text {
-    color: $breadcrumbs-text-colour;
-    font-weight: $breadcrumbs-not-active-font-weight;
-}
+.c-breadcrumbs-text,
 .c-breadcrumbs-link {
-    color: $breadcrumbs-text-colour;
-    font-weight: $breadcrumbs-not-active-font-weight;
-    cursor: pointer;
-    text-decoration: none;
-    &:hover {
-        text-decoration: underline;
+    &, & > a {
         color: $breadcrumbs-text-colour;
+        font-weight: $breadcrumbs-not-active-font-weight;
+    }
+
+    a {
+        cursor: pointer;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+            color: $breadcrumbs-text-colour;
+        }
+    }
+}
+.c-breadcrumbs-link--active {
+    &, & > a {
+        font-weight: $breadcrumbs-active-font-weight;
     }
 }
 .c-breadcrumbs-separator {
@@ -126,8 +126,4 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
         margin-top: 2px;
     }
 }
-.c-breadcrumbs-link--active {
-    font-weight: $breadcrumbs-active-font-weight;
-}
-
 </style>
