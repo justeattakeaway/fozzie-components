@@ -133,7 +133,7 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
 
     border-radius: $promotionsItems-borderRadius;
 
-    @include media ('>=wide') {
+    @include media('>=wide') {
         flex-direction: row;
     }
 }
@@ -150,21 +150,21 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     font-family: inherit;
     text-align: inherit;
 
-    @include media ('>=wide') {
+    @include media('>=wide') {
         flex-grow: 1;
     }
 
     & + & {
         border-top: 1px solid $color-border-default;
 
-        @include media ('>=wide') {
+        @include media('>=wide') {
             border-top: none;
         }
     }
 }
 
 .c-promotionsShowcase-itemElement {
-    &:not(*:first-child) {
+    & + & {
         margin-left: spacing(x2);
     }
 }
