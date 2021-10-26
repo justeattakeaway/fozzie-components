@@ -64,7 +64,7 @@ The props that can be defined are as follows:
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `links` | `Array - object` | - | Defines a list of links to be rendered by f-breadcrumbs |
-| `hasBackgroundEnabled` | `Boolean` | false | Defines if the breadcrumbs component will have a background or not |
+| `hasBackground` | `Boolean` | false | Defines if the breadcrumbs component will have a background or not |
 
 ## Examples
 

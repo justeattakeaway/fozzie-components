@@ -4,7 +4,7 @@
         :class="$style['c-breadcrumbs']">
         <ul
             :class="[$style['c-breadcrumbs-list'], {
-                [$style['c-breadcrumbs-list--hasBackground']]: hasBackgroundEnabled
+                [$style['c-breadcrumbs-list--hasBackground']]: hasBackground
             }]">
             <template v-for="({ name, url, routerLink }, index) in links">
                 <li
@@ -58,7 +58,7 @@ export default {
             default: () => []
         },
 
-        hasBackgroundEnabled: {
+        hasBackground: {
             type: Boolean,
             default: false
         }

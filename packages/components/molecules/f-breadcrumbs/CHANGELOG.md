@@ -8,7 +8,7 @@ v3.0.0
 *October 25, 2021*
 
 ### Added
-- `hasBackgroundEnabled` prop which adds a layer of style to the default version.
+- `hasBackground` prop which adds a layer of style to the default version.
 - Unit test coverage.
 
 

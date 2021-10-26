@@ -150,7 +150,7 @@ describe('BreadCrumbs', () => {
             });
         });
 
-        describe('`hasBackgroundEnabled`', () => {
+        describe('`hasBackground`', () => {
             let $style;
             let propsData;
 
@@ -160,7 +160,7 @@ describe('BreadCrumbs', () => {
                 };
 
                 propsData = {
-                    hasBackgroundEnabled: true,
+                    hasBackground: true,
                     links: [
                         {
                             name: 'Link 1',
@@ -196,7 +196,7 @@ describe('BreadCrumbs', () => {
             describe('when falsey', () => {
                 it('should not add `c-breadcrumbs-list--hasBackground` to the breadcrumb wrapper ul element', () => {
                     // Arrange
-                    propsData.hasBackgroundEnabled = false;
+                    propsData.hasBackground = false;
 
                     // Act
                     const wrapper = shallowMount(BreadCrumbs, {
