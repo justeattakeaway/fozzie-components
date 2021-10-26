@@ -6,7 +6,7 @@
 
 import { UNSUPPORTED_BROWSERS, BROWSER_DATA } from './constants';
 
-const Bowser = require('bowser/bundled');
+const bowser = require('bowser/bundled');
 
 /* eslint-disable func-names */
 
@@ -58,7 +58,7 @@ const unsupportedBrowserAction = function (unsupportedBrowser) {
  *  @function compatibility
  */
 const compatibility = function () {
-    const browser = Bowser.getParser(window.navigator.userAgent);
+    const browser = bowser.getParser(window.navigator.userAgent);
     const unsupportedBrowsers = Object.keys(UNSUPPORTED_BROWSERS);
     for (let i = 0; i < unsupportedBrowsers.length; i++) {
         const browserToTest = {};
