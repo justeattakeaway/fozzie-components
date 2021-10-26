@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v5.0.3
  ------------------------------
- *October 25, 2021*
+ *October 26, 2021*
 
 ### Changed
 - wdio configuration for component, visual and a11y tests
