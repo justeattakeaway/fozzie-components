@@ -12,6 +12,9 @@ v3.1.0
 - Replace `<span>` with `<template>`.
 - Simplify and shuffle around styles accordingly.
 
+### Added
+- Storybook control for `hasBackground`.
+
 
 v3.0.0
 ------------------------------
