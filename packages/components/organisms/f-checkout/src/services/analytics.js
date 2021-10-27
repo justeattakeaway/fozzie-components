@@ -26,7 +26,7 @@ export default class CheckoutAnalyticService {
         });
 
         if (action === 'submit') {
-            this.trackSelectedTimes(this.checkout.hasAsapSelected);
+            this.trackSelectedTimes();
         }
     }
 
@@ -118,13 +118,13 @@ export default class CheckoutAnalyticService {
     }
 
     /**
-     * Pushes details that an error dialog has been loaded
+     * Pushes timeSelected event to identify if the customer has selected asap
      */
-    trackSelectedTimes (isAsapSelected) {
+    trackSelectedTimes () {
         this.$gtm.pushEvent({
             event: 'timeSelected',
             eventCategory: 'engagement',
-            isAsapSelected
+            isAsapSelected: this.checkout.hasAsapSelected
         });
     }
 }

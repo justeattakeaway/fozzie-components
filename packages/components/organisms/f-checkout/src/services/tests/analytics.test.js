@@ -167,7 +167,7 @@ describe('Analytic Service ::', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `trackSelectedTime` with checkout `hasAsapSelected`', () => {
+            it('should call `trackSelectedTime`', () => {
                 // Arrange
                 payload.action = 'submit';
 
@@ -175,7 +175,7 @@ describe('Analytic Service ::', () => {
                 analyticsService.trackFormInteraction(payload);
 
                 // Assert
-                expect(analyticsService.trackSelectedTimes).toHaveBeenCalledWith(defaultCheckoutState.hasAsapSelected);
+                expect(analyticsService.trackSelectedTimes).toHaveBeenCalled();
             });
         });
     });
@@ -234,16 +234,14 @@ describe('Analytic Service ::', () => {
     describe('trackSelectedTimes ::', () => {
         it('should call `pushEvent` with `isAsapSelected`', () => {
             // Arrange
-            const isAsapSelected = false;
-
             const expectedEvent = {
                 event: 'timeSelected',
                 eventCategory: 'engagement',
-                isAsapSelected
+                isAsapSelected: defaultCheckoutState.hasAsapSelected
             };
 
             // Act
-            analyticsService.trackSelectedTimes(isAsapSelected);
+            analyticsService.trackSelectedTimes();
 
             // Assert
             expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
