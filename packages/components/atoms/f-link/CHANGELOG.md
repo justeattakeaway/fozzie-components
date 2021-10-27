@@ -9,10 +9,7 @@ v2.2.0
 *October 27, 2021*
 
 ### Removed
-- `href` prop in favour of deferring to `$attrs`.
-
-### Changed
-- Make storybook props dynamic to avoid `to` and `href` from interfering with each other.
+- `isRouterLink` and `href` props, in favour of deferring to `$attrs`.
 
 
 v2.1.0
