@@ -33,14 +33,8 @@
             <h3
                 data-test-id="restaurant_name"
                 data-search-name>
-                Fake Restaurant
+                {{ name }}
             </h3>
-
-            <!-- stress test the content size -->
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Eius mollitia distinctio magni enim neque, labore repellat
-                quaerat quam magnam, sint vel, officiis nam voluptas hic.
-                Assumenda illum repudiandae libero impedit?</p>
 
             <!-- Cuisines -->
             <!-- START ERROR BOUNDARY -->
@@ -113,7 +107,9 @@
         </div>
 
         <!-- optional items -->
-        <span :class="[$style['c-restaurantCard-dish']]">DISH RESULT</span>
+        <span
+            v-if="!disabled"
+            :class="[$style['c-restaurantCard-dish']]">DISH RESULT</span>
     </a>
 </template>
 
