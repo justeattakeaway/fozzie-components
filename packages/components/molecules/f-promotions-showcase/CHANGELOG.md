@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.2.0
+------------------------------
+*October 26, 2021*
+
+### Added
+- Functional version of PromotionsShowcase component
+- Constants for text styling
+- Prop accepted by component for configuration
+- Story using controls to select example configs
+- README.md updated
+- Reduced maximum bundlewatch size
+
+
 v0.1.0
 ------------------------------
 *October 19, 2021*
