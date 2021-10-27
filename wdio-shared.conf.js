@@ -57,17 +57,15 @@ exports.config = {
         console.log('Using the following WDIO Config:', JSON.stringify(configuration));
         if (configuration.testType.services.includes('percy')) {
             browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
-                const viewportWidths = {
-                    desktop: configuration.percy.viewports.mobile,
-                    mobile: configuration.percy.viewports.desktop
-                };
+                const formattedFeatureType = featureType.toLowerCase();
 
-                const viewportWidth = () => viewportWidths[featureType.toLowerCase()] || viewportWidths.default;
-
+                if (formattedFeatureType !== 'mobile' && formattedFeatureType !== 'desktop') {
+                    throw new Error(`Feature type ${formattedFeatureType} is not supported. Please use 'mobile' or 'desktop'`);
+                }
 
                 browser.call(async () => {
                     await percySnapshot(`${screenshotName} - ${featureType}`, {
-                        widths: viewportWidth[0]
+                        widths: configuration.percy.viewports[formattedFeatureType][0]
                     });
                 });
             });
