@@ -59,8 +59,7 @@ exports.config = {
             browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
                 const viewportWidths = {
                     desktop: configuration.percy.viewports.mobile,
-                    mobile: configuration.percy.viewports.desktop,
-                    default: 'Please use "desktop" or "mobile" as a feature type'
+                    mobile: configuration.percy.viewports.desktop
                 };
 
                 const viewportWidth = () => viewportWidths[featureType.toLowerCase()] || viewportWidths.default;
