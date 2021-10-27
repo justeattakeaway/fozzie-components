@@ -15,8 +15,8 @@ module.exports = class CookieBanner extends Page {
     get closeButton () { return this.component.$('[data-test-id="cookieBanner-close-button"]'); }
 
     load () {
-        this.open('/');
         const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        this.open(pageUrl);
         browser.deleteCookies();
         this.open(pageUrl);
         this.waitForComponent();
@@ -43,4 +43,4 @@ module.exports = class CookieBanner extends Page {
 
         return this;
     }
-}
+};
