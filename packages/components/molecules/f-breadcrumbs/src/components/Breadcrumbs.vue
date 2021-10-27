@@ -2,7 +2,10 @@
     <div
         data-test-id="breadcrumbs-component"
         :class="$style['c-breadcrumbs']">
-        <ul :class="$style['c-breadcrumbs-list']">
+        <ul
+            :class="[$style['c-breadcrumbs-list'], {
+                [$style['c-breadcrumbs-list--hasBackground']]: hasBackground
+            }]">
             <template v-for="({ name, url, routerLink }, index) in links">
                 <li
                     v-if="index !== 0"
@@ -53,6 +56,11 @@ export default {
         links: {
             type: Array,
             default: () => []
+        },
+
+        hasBackground: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {
@@ -62,7 +70,9 @@ export default {
        * @returns {*|string}
        */
         linkActiveClass (index) {
-            return index === this.links.length - 1 ? this.$style['c-breadcrumbs-link--active'] : '';
+            return index === this.links.length - 1
+                ? this.$style['c-breadcrumbs-link--active']
+                : '';
         }
     }
 };
@@ -70,62 +80,90 @@ export default {
 
 <style lang="scss" module>
 
-$breadcrumbs-text-colour: $color-content-light;
+$breadcrumbs-text-colour-noBackground: $color-content-default;
+$breadcrumbs-text-colour-hasBackground: $color-content-light;
 $breadcrumbs-background-colour: rgba($color-black, 0.6);
-$breadcrumbs-border-radius: $radius-rounded-c;
+$breadcrumbs-border-radius: $radius-rounded-e;
 $breadcrumbs-not-active-font-weight: $font-weight-bold;
 $breadcrumbs-active-font-weight: $font-weight-regular;
 
 .c-breadcrumbs {
     display: flex;
 }
+
 .c-breadcrumbs-list {
     list-style: none;
-    background-color: $breadcrumbs-background-colour;
-    border-radius: $breadcrumbs-border-radius;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
 }
+
+.c-breadcrumbs-list--hasBackground {
+    background-color: $breadcrumbs-background-colour;
+    border-radius: $breadcrumbs-border-radius;
+    padding: 0 spacing();
+}
+
 .c-breadcrumbs-item {
-    padding: spacing(x0.5) spacing(x2);
+    padding: spacing(x0.5) spacing();
+
     @include media('<narrowMid') {
         padding: spacing(x0.5) spacing(x2) spacing(x0.5) spacing();
     }
 }
+
 .c-breadcrumbs-item,
 .c-breadcrumbs-separator {
     @include media('<narrowMid') {
         display: none;
+
         &:nth-last-child(-n+4):not(:nth-last-child(-n+2)) {
             display: block;
         }
     }
 }
-.c-breadcrumbs-text {
-    color: $breadcrumbs-text-colour;
-    font-weight: $breadcrumbs-not-active-font-weight;
-}
+
+.c-breadcrumbs-text,
 .c-breadcrumbs-link {
-    color: $breadcrumbs-text-colour;
+    color: $breadcrumbs-text-colour-noBackground;
     font-weight: $breadcrumbs-not-active-font-weight;
-    cursor: pointer;
-    text-decoration: none;
-    &:hover {
-        text-decoration: underline;
-        color: $breadcrumbs-text-colour;
+
+    .c-breadcrumbs-list--hasBackground & {
+        color: $breadcrumbs-text-colour-hasBackground;
     }
 }
+
+.c-breadcrumbs-link {
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+        color: $breadcrumbs-text-colour-noBackground;
+
+        .c-breadcrumbs-list--hasBackground & {
+            color: $breadcrumbs-text-colour-hasBackground;
+        }
+    }
+}
+
 .c-breadcrumbs-separator {
-    color: $breadcrumbs-text-colour;
+    color: $breadcrumbs-text-colour-noBackground;
     transform: scale(0.6, 1.2);
+
+    .c-breadcrumbs-list--hasBackground & {
+        color: $breadcrumbs-text-colour-hasBackground;
+    }
+
     @include media('<narrowMid') {
         margin-left: spacing(x1.5);
         transform: scale(0.6, 1.2) rotate(180deg);
         margin-top: 2px;
     }
 }
+
 .c-breadcrumbs-link--active {
     font-weight: $breadcrumbs-active-font-weight;
 }

@@ -18,10 +18,9 @@
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
     "storybook:deploy": "lerna run storybook:deploy",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
-    "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component lerna run test-component:chrome --concurrency 1 --stream",
-    "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component lerna run test-component:browserstack --concurrency 1 --stream",
-    "test:visual": "cross-env-shell JE_ENV=local TEST_TYPE=visual lerna run test:visual --concurrency 1 --stream",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component lerna run test-component:chrome --concurrency 1 --stream",
+    "test:visual": "cross-env-shell TEST_TYPE=visual lerna run test:visual --concurrency 1 --stream",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
     "allure:clean": "rimraf test/results/allure",
@@ -52,7 +51,6 @@
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.3",
     "@wdio/allure-reporter": "7.6.0",
-    "@wdio/browserstack-service": "7.6.0",
     "@wdio/cli": "7.6.0",
     "@wdio/junit-reporter": "7.6.0",
     "@wdio/local-runner": "7.6.0",
@@ -128,6 +126,5 @@
     "packages/tools/*"
   ],
   "dependencies": {
-    "browserstack-local": "1.4.8"
   }
 }

@@ -4,7 +4,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 let checkout;
 
-describe('f-checkout "guest" component tests - @browserstack', () => {
+describe('f-checkout "guest" component tests', () => {
     beforeEach(() => {
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
