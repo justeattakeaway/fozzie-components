@@ -5,7 +5,7 @@
             v-if="shouldShowSpinner"
             :class=" $style['c-spinner']" />
 
-        <span :class="[{ [$style['c-spinner-component--hidden']]: shouldShowSpinner }]">
+        <span :class="{ ['is-hidden']: shouldShowSpinner }">
             <slot />
         </span>
     </div>
@@ -42,9 +42,5 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
-}
-
-.c-spinner-component--hidden {
-    visibility: hidden;
 }
 </style>
