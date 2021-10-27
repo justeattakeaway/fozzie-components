@@ -1,19 +1,19 @@
 
 /**
- * @overview Fozzie Promotions Showcase Component JS Wrapper
+ * @overview Fozzie Template SubNav Component JS Wrapper
  *
- * @module f-promotions-showcase
+ * @module f-template-subnav
  */
 
 
 // Import vue component
-import PromotionsShowcase from '@/components/PromotionsShowcase.vue';
+import TemplateSubNav from '@/components/TemplateSubNav.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('PromotionsShowcase', PromotionsShowcase);
+    Vue.component('TemplateSubNav', TemplateSubNav);
 }
 
 // Create module definition for Vue.use()
@@ -33,10 +33,6 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default PromotionsShowcase;
+export default TemplateSubNav;
 
-export {
-    STYLE_EMPHASIZED,
-    STYLE_LINK,
-    STYLE_TEXT
-} from './constants';
+

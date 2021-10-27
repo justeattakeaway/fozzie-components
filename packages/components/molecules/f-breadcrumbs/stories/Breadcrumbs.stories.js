@@ -23,6 +23,8 @@ BreadcrumbsComponent.storyName = 'f-breadcrumbs';
  * @type {{routerLinks: boolean}}
  */
 BreadcrumbsComponent.args = {
+    hasBackground: true,
+
     links: [
         {
             name: 'Home',
