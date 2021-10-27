@@ -103,6 +103,7 @@ commands:
             - packages/components/organisms/f-offers/dist
             - packages/components/organisms/f-status-banner/dist
             - packages/components/organisms/f-takeawaypay-activation/dist
+            - packages/components/organisms/f-template-subnav/dist
 
       # TODO: Uncomment this once we have a template component
       #- save_cache:
