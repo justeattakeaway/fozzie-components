@@ -3,13 +3,6 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v5.0.2
- ------------------------------
- *October 28, 2021*
-
-### Added
-- `f-spinner` to Circle CI cache.
-
 
 v5.1.0
  ------------------------------
@@ -19,12 +12,26 @@ v5.1.0
 - `fozzie` package version bump.
 
 
-v5.0.2
+v5.0.3
  ------------------------------
  *October 28, 2021*
 
 ### Added
 - `f-spinner` to Circle CI cache.
+
+
+v5.0.2
+ ------------------------------
+ *October 25, 2021*
+
+### Removed
+- unused browserstack and allure scripts
+- browserstack configuration files
+- reference to JE_ENV environment variable
+- percy and browserstack tags
+
+### Changed
+- filenames for component tests
 
 
 v5.0.1

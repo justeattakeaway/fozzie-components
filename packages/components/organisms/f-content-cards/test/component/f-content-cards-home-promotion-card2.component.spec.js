@@ -2,7 +2,7 @@ const HomePromotionCard2 = require('../../test-utils/component-objects/f-content
 
 let card;
 
-describe('home promotion card 2 component tests - @browserstack', () => {
+describe('home promotion card 2 component tests', () => {
     beforeEach(() => {
         card = new HomePromotionCard2();
         card.load();

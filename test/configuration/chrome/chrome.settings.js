@@ -3,6 +3,9 @@
 const { ALLURE_REPORTER, SPEC_FILE, VS_DEBUGGER } = process.env;
 const video = require('wdio-video-reporter');
 
+const isMobile = () => SPEC_FILE.endsWith('mobile.spec.js');
+const isDesktop = () => SPEC_FILE.endsWith('desktop.spec.js');
+
 const settings = () => ({
     baseUrl: 'http://localhost:8080',
     a11y: {
@@ -18,25 +21,13 @@ const settings = () => ({
     },
     component: {
         capabilities: [
-            ...(isDesktop || isShared ? [{
+            {
                 browserName: 'chrome',
                 acceptInsecureCerts: true,
                 specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                    'test/component/*.component.desktop.spec.js',
-                    'test/component/*.component.shared.spec.js'
+                    'test/component/*.component.spec.js'
                 ]
-            }] : []),
-            ...(isMobile || isShared ? [{
-                browserName: 'chrome',
-                acceptInsecureCerts: true,
-                'goog:chromeOptions': {
-                    mobileEmulation: { deviceName: 'Pixel 2' }
-                },
-                specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                    'test/component/*.component.mobile.spec.js',
-                    'test/component/*.component.shared.spec.js'
-                ]
-            }] : [])
+            }
         ]
     },
     visual: {
@@ -75,9 +66,5 @@ const settings = () => ({
     ] : [],
     services: ['chromedriver']
 });
-
-const isMobile = () => SPEC_FILE.endsWith('mobile.spec.js');
-const isDesktop = () => SPEC_FILE.endsWith('desktop.spec.js');
-const isShared = () => SPEC_FILE.endsWith('shared.spec.js');
 
 exports.default = settings;

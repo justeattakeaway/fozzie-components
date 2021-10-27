@@ -13,137 +13,204 @@ describe('BreadCrumbs', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('should render a link when a url is supplied', () => {
-        // Arrange
-        const propsData = {
-            links: [{
-                name: 'Link 1',
-                url: '/link/1',
-                routerLink: false
-            }]
-        };
+    describe('props::', () => {
+        describe('`links`', () => {
+            it('should render a link when a url is supplied', () => {
+                // Arrange
+                const propsData = {
+                    links: [{
+                        name: 'Link 1',
+                        url: '/link/1',
+                        routerLink: false
+                    }]
+                };
 
-        // Act
-        const wrapper = shallowMount(BreadCrumbs, { propsData });
-        const breadcrumbLinks = wrapper.findAll('li > a');
+                // Act
+                const wrapper = shallowMount(BreadCrumbs, { propsData });
+                const breadcrumbLinks = wrapper.findAll('li > a');
 
-        // Assert
-        expect(breadcrumbLinks).toHaveLength(1);
-    });
+                // Assert
+                expect(breadcrumbLinks).toHaveLength(1);
+            });
 
-    it('should render a router link if routerLink is true', () => {
-        // Arrange
-        const propsData = {
-            links: [{
-                name: 'Router Link 1',
-                url: '/routerlink/1',
-                routerLink: true
-            }]
-        };
+            it('should render a router link if routerLink is true', () => {
+                // Arrange
+                const propsData = {
+                    links: [{
+                        name: 'Router Link 1',
+                        url: '/routerlink/1',
+                        routerLink: true
+                    }]
+                };
 
-        // Act
-        const wrapper = shallowMount(BreadCrumbs, {
-            propsData,
-            stubs: {
-                RouterLink: RouterLinkStub
-            }
+                // Act
+                const wrapper = shallowMount(BreadCrumbs, {
+                    propsData,
+                    stubs: {
+                        RouterLink: RouterLinkStub
+                    }
+                });
+                const breadcrumbRouterLinks = wrapper.findAllComponents(RouterLinkStub);
+
+                // Assert
+                expect(breadcrumbRouterLinks).toHaveLength(1);
+            });
+
+            it('should render a link for each url supplied', () => {
+                // Arrange
+                const propsData = {
+                    links: [
+                        {
+                            name: 'Link 1',
+                            url: '/link/1',
+                            routerLink: false
+                        },
+                        {
+                            name: 'Link 2',
+                            url: '/link/2',
+                            routerLink: false
+                        }
+                    ]
+                };
+
+                // Act
+                const wrapper = shallowMount(BreadCrumbs, { propsData });
+                const breadcrumbLinks = wrapper.findAll('li > a');
+
+                // Assert
+                expect(breadcrumbLinks).toHaveLength(2);
+            });
+
+            it.each([
+                ['empty', ''],
+                ['undefined', undefined],
+                ['null', null]
+            ])('should render a span when url is %s', (_, url) => {
+                // Arrange
+                const propsData = {
+                    links: [{
+                        name: 'Text 1',
+                        url,
+                        routerLink: false
+                    }]
+                };
+
+                // Act
+                const wrapper = shallowMount(BreadCrumbs, { propsData });
+                const breadcrumbSpans = wrapper.findAll('li > span');
+
+                // Assert
+                expect(breadcrumbSpans).toHaveLength(1);
+            });
+
+            it('should render a span if router link url is missing', () => {
+                // Arrange
+                const propsData = {
+                    links: [{
+                        name: 'Router Link 1',
+                        url: '',
+                        routerLink: true
+                    }]
+                };
+
+                // Act
+                const wrapper = shallowMount(BreadCrumbs, { propsData });
+                const breadcrumbSpans = wrapper.findAll('li > span');
+
+                // Assert
+                expect(breadcrumbSpans).toHaveLength(1);
+            });
+
+            it('should render a mix of links and spans when not all links have urls', () => {
+                // Arrange
+                const propsData = {
+                    links: [
+                        {
+                            name: 'Link 1',
+                            url: '/link/1',
+                            routerLink: false
+                        },
+                        {
+                            name: 'Link 2',
+                            url: '',
+                            routerLink: false
+                        }
+                    ]
+                };
+
+                // Act
+                const wrapper = shallowMount(BreadCrumbs, { propsData });
+
+                const breadcrumbLinks = wrapper.findAll('li > a');
+                const breadcrumbSpans = wrapper.findAll('li > span');
+
+                // Assert
+                expect(breadcrumbLinks).toHaveLength(1);
+                expect(breadcrumbSpans).toHaveLength(1);
+            });
         });
-        const breadcrumbRouterLinks = wrapper.findAllComponents(RouterLinkStub);
 
-        // Assert
-        expect(breadcrumbRouterLinks).toHaveLength(1);
-    });
+        describe('`hasBackground`', () => {
+            let $style;
+            let propsData;
 
-    it('should render a link for each url supplied', () => {
-        // Arrange
-        const propsData = {
-            links: [
-                {
-                    name: 'Link 1',
-                    url: '/link/1',
-                    routerLink: false
-                },
-                {
-                    name: 'Link 2',
-                    url: '/link/2',
-                    routerLink: false
-                }
-            ]
-        };
+            beforeEach(() => {
+                $style = {
+                    'c-breadcrumbs-list--hasBackground': 'c-breadcrumbs-list--hasBackground'
+                };
 
-        // Act
-        const wrapper = shallowMount(BreadCrumbs, { propsData });
-        const breadcrumbLinks = wrapper.findAll('li > a');
+                propsData = {
+                    hasBackground: true,
+                    links: [
+                        {
+                            name: 'Link 1',
+                            url: '/link/1',
+                            routerLink: false
+                        },
+                        {
+                            name: 'Link 2',
+                            url: '/link/2',
+                            routerLink: false
+                        }
+                    ]
+                };
+            });
 
-        // Assert
-        expect(breadcrumbLinks).toHaveLength(2);
-    });
+            describe('when truthy', () => {
+                it('should add `c-breadcrumbs-list--hasBackground` to the breadcrumb wrapper ul element', () => {
+                    // Act
+                    const wrapper = shallowMount(BreadCrumbs, {
+                        propsData,
+                        mocks: {
+                            $style
+                        }
+                    });
 
-    it.each([
-        ['empty', ''],
-        ['undefined', undefined],
-        ['null', null]
-    ])('should render a span when url is %s', (_, url) => {
-        // Arrange
-        const propsData = {
-            links: [{
-                name: 'Text 1',
-                url,
-                routerLink: false
-            }]
-        };
+                    const breadCrumb = wrapper.find("[data-test-id='breadcrumbs-component'] > ul");
 
-        // Act
-        const wrapper = shallowMount(BreadCrumbs, { propsData });
-        const breadcrumbSpans = wrapper.findAll('li > span');
+                    // Assert
+                    expect(breadCrumb.attributes('class')).toContain('c-breadcrumbs-list--hasBackground');
+                });
+            });
 
-        // Assert
-        expect(breadcrumbSpans).toHaveLength(1);
-    });
+            describe('when falsey', () => {
+                it('should not add `c-breadcrumbs-list--hasBackground` to the breadcrumb wrapper ul element', () => {
+                    // Arrange
+                    propsData.hasBackground = false;
 
-    it('should render a span if router link url is missing', () => {
-        // Arrange
-        const propsData = {
-            links: [{
-                name: 'Router Link 1',
-                url: '',
-                routerLink: true
-            }]
-        };
+                    // Act
+                    const wrapper = shallowMount(BreadCrumbs, {
+                        propsData,
+                        mocks: {
+                            $style
+                        }
+                    });
+                    const breadCrumb = wrapper.find("[data-test-id='breadcrumbs-component'] > ul");
 
-        // Act
-        const wrapper = shallowMount(BreadCrumbs, { propsData });
-        const breadcrumbSpans = wrapper.findAll('li > span');
-
-        // Assert
-        expect(breadcrumbSpans).toHaveLength(1);
-    });
-
-    it('should render a mix of links and spans when not all links have urls', () => {
-        // Arrange
-        const propsData = {
-            links: [
-                {
-                    name: 'Link 1',
-                    url: '/link/1',
-                    routerLink: false
-                },
-                {
-                    name: 'Link 2',
-                    url: '',
-                    routerLink: false
-                }
-            ]
-        };
-
-        // Act
-        const wrapper = shallowMount(BreadCrumbs, { propsData });
-
-        const breadcrumbLinks = wrapper.findAll('li > a');
-        const breadcrumbSpans = wrapper.findAll('li > span');
-
-        // Assert
-        expect(breadcrumbLinks).toHaveLength(1);
-        expect(breadcrumbSpans).toHaveLength(1);
+                    // Assert
+                    expect(breadCrumb.attributes('class')).not.toContain('c-breadcrumbs-list--hasBackground');
+                });
+            });
+        });
     });
 });
