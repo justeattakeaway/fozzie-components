@@ -19,16 +19,18 @@
                     :class="[
                         $style['c-breadcrumbs-item'],
                         $style['c-breadcrumbs-text'],
-                        linkActiveClass(index)
+                        breadcrumbActiveClass(index)
                     ]">
                     <router-link
                         v-if="routerLink && url"
-                        :to="url">
+                        :to="url"
+                        :class="$style['c-breadcrumbs-link']">
                         {{ name }}
                     </router-link>
                     <a
                         v-else-if="url"
-                        :href="url">
+                        :href="url"
+                        :class="$style['c-breadcrumbs-link']">
                         {{ name }}
                     </a>
                     <template v-else>
@@ -57,15 +59,14 @@ export default {
     },
     methods: {
         /**
-        * Function to add active class to the last link
+        * Function to add active class to the last breadcrumb
         * @param index
         * @returns {*|string}
         */
-        linkActiveClass (index) {
-            const lastIndex = this.links.length - 1;
-            return index !== lastIndex ?
-                this.$style['c-breadcrumbs-link'] :
-                this.$style['c-breadcrumbs-link--active'];
+        breadcrumbActiveClass (index) {
+            return index === this.links.length - 1 ?
+                this.$style['c-breadcrumbs-text--active'] :
+                '';
         }
     }
 };
@@ -116,8 +117,8 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
         }
     }
 }
-.c-breadcrumbs-text,
-.c-breadcrumbs-link {
+
+.c-breadcrumbs-text {
     &, & > a {
         color: $breadcrumbs-text-colour-noBackground;
         font-weight: $breadcrumbs-not-active-font-weight;
@@ -126,25 +127,33 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
             color: $breadcrumbs-text-colour-hasBackground;
         }
     }
+}
 
-    a {
-        cursor: pointer;
-        text-decoration: none;
-        &:hover,
-        &:focus {
-            text-decoration: underline;
-            color: $breadcrumbs-text-colour-noBackground;
-
-            .c-breadcrumbs-list--hasBackground & {
-                color: $breadcrumbs-text-colour-hasBackground;
-            }
-        }
+.c-breadcrumbs-text--active {
+    &, & > a {
+        font-weight: $breadcrumbs-active-font-weight;
     }
 }
 
-.c-breadcrumbs-link--active {
-    &, & > a {
-        font-weight: $breadcrumbs-active-font-weight;
+.c-breadcrumbs-link {
+    color: $breadcrumbs-text-colour-noBackground;
+    font-weight: $breadcrumbs-not-active-font-weight;
+
+    .c-breadcrumbs-list--hasBackground & {
+        color: $breadcrumbs-text-colour-hasBackground;
+    }
+
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+        color: $breadcrumbs-text-colour-noBackground;
+
+        .c-breadcrumbs-list--hasBackground & {
+            color: $breadcrumbs-text-colour-hasBackground;
+        }
     }
 }
 
