@@ -10,7 +10,8 @@
                 <li
                     v-if="index !== 0"
                     :key="`${index}_link`"
-                    :class="$style['c-breadcrumbs-separator']">
+                    :class="$style['c-breadcrumbs-separator']"
+                    aria-hidden="true">
                     >
                 </li>
                 <li

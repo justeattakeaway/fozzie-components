@@ -15,6 +15,9 @@ v3.1.0
 ### Added
 - Storybook control for `hasBackground`.
 
+### Removed
+- Breadcrumb separators from accessibility tree. They were being announced by NVDA as "greater".
+
 
 v3.0.0
 ------------------------------
