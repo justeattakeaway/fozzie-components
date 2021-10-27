@@ -10,20 +10,16 @@
         @click="$emit('restaurant-card-clicked')">
 
         <!-- background image -->
-        <div
+        <restaurant-image
+            v-if="!!imgUrl"
             :class="[$style['c-restaurantCard-img']]"
-            :style="`background-image: url(${imgUrl});`"
-            role="img" />
+            :img-url="imgUrl" />
+
         <!-- Logo image -->
-        <img
+        <restaurant-logo
             v-if="!!logoUrl"
-            :src="logoUrl"
-            alt=""
-            width="50"
-            height="50"
-            loading="lazy"
             :class="$style['c-restaurantCard-logo']"
-            data-test-id="restaurant_logo">
+            :logo-url="logoUrl" />
 
         <!-- primary content -->
         <div :class="$style['c-restaurantCard-content']">
@@ -113,9 +109,15 @@
 
 <script>
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
+import RestaurantImage from './RestaurantImage.vue';
+import RestaurantLogo from './RestaurantLogo.vue';
 
 export default {
     name: 'RestaurantCardV1',
+    components: {
+        RestaurantImage,
+        RestaurantLogo
+    },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
@@ -157,10 +159,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-$img-borderRadius                         : $radius-rounded-c;
-$logo-borderRadius                        : $radius-rounded-b;
-$logo-borderColor                         : $color-border-default;
-
 .c-restaurantCard {
   text-decoration: none;
   display: grid;
@@ -177,19 +175,21 @@ $logo-borderColor                         : $color-border-default;
 }
 
 .c-restaurantCard-img {
-  background-size: cover;
-  background-position: center;
   width: 100%;
   height: 200px; // TODO: agree with design
-  border-radius: $img-borderRadius;
 
   .c-restaurantCard--listItem & {
       @include media('>mid') {
         min-height: 125px; // TODO: agree with design
         height: 100%;
-        grid-column: 1/2;
       }
   }
+}
+
+.c-restaurantCard-logo {
+  top: spacing(x2);
+  left: spacing(x2);
+  position: absolute;
 }
 
 .c-restaurantCard-content {
@@ -199,14 +199,6 @@ $logo-borderColor                         : $color-border-default;
       grid-column: 2/3;
     }
   }
-}
-
-.c-restaurantCard-logo {
-  border: 1px solid $logo-borderColor;
-  border-radius: $logo-borderRadius;
-  top: spacing(x2);
-  left: spacing(x2);
-  position: absolute;
 }
 
 // placeholder styles - will be extracted to subcomponent
