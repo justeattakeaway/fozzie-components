@@ -157,6 +157,27 @@ describe('Analytic Service ::', () => {
                 expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
             });
         });
+
+        describe('when `action === "submit"`', () => {
+            beforeEach(() => {
+                analyticsService.trackSelectedTimes = jest.fn();
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `trackSelectedTime` with checkout `hasAsapSelected`', () => {
+                // Arrange
+                payload.action = 'submit';
+
+                // Act
+                analyticsService.trackFormInteraction(payload);
+
+                // Assert
+                expect(analyticsService.trackSelectedTimes).toHaveBeenCalledWith(defaultCheckoutState.hasAsapSelected);
+            });
+        });
     });
 
     describe('trackFormErrors ::', () => {
@@ -204,6 +225,25 @@ describe('Analytic Service ::', () => {
 
             // Act
             analyticsService.trackDialogEvent({ code, isDuplicateOrderError });
+
+            // Assert
+            expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
+        });
+    });
+
+    describe('trackSelectedTimes ::', () => {
+        it('should call `pushEvent` with `isAsapSelected`', () => {
+            // Arrange
+            const isAsapSelected = false;
+
+            const expectedEvent = {
+                event: 'timeSelected',
+                eventCategory: 'engagement',
+                isAsapSelected
+            };
+
+            // Act
+            analyticsService.trackSelectedTimes(isAsapSelected);
 
             // Assert
             expect($gtm.pushEvent).toHaveBeenCalledWith(expectedEvent);
