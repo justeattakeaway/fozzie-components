@@ -13,19 +13,17 @@
         <div
             :class="[$style['c-restaurantCard-img']]"
             :style="`background-image: url(${imgUrl});`"
-            role="img">
-
-            <!-- Logo image -->
-            <img
-                v-if="!!logoUrl"
-                :src="logoUrl"
-                alt=""
-                width="50"
-                height="50"
-                loading="lazy"
-                :class="$style['c-restaurantCard-logo']"
-                data-test-id="restaurant_logo">
-        </div>
+            role="img" />
+        <!-- Logo image -->
+        <img
+            v-if="!!logoUrl"
+            :src="logoUrl"
+            alt=""
+            width="50"
+            height="50"
+            loading="lazy"
+            :class="$style['c-restaurantCard-logo']"
+            data-test-id="restaurant_logo">
 
         <!-- primary content -->
         <div :class="$style['c-restaurantCard-content']">
@@ -168,6 +166,7 @@ $logo-borderColor                         : $color-border-default;
   display: grid;
   grid-gap: spacing(x2);
   grid-template-columns: 1fr;
+  position: relative;
 
   &.c-restaurantCard--listItem {
       @include media('>mid') {
@@ -183,7 +182,6 @@ $logo-borderColor                         : $color-border-default;
   width: 100%;
   height: 200px; // TODO: agree with design
   border-radius: $img-borderRadius;
-  position: relative;
 
   .c-restaurantCard--listItem & {
       @include media('>mid') {
