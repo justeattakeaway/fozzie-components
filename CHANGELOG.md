@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.1.0
+ ------------------------------
+ *October 28, 2021*
+
+### Added
+- `fozzie` package version bump.
+
+
+v5.0.2
+ ------------------------------
+ *October 28, 2021*
+
+### Added
+- `f-spinner` to Circle CI cache.
+
+
 v5.0.1
  ------------------------------
  *October 20, 2021*
