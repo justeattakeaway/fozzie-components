@@ -13,7 +13,10 @@
                         :title="$t('tabs.stamps.title')"
                         :selected="!showHowItWorks"
                     >
-                        <unauthenticated data-test-id="StampCards-StampCardsTab-UnauthContent" />
+                        <loyalty-cards v-if="isAuthenticated" />
+                        <unauthenticated
+                            v-else
+                            data-test-id="StampCards-StampCardsTab-UnauthContent" />
                     </tab>
                     <tab
                         name="how-it-works"
@@ -43,6 +46,7 @@ import loyalty from '../store/loyalty.module';
 import { ACTION_INITIALISE_LOYALTY, VUEX_MODULE_NAMESPACE_LOYALTY } from '../store/types';
 import LoyaltyHeader from './Header.vue';
 import HowItWorks from './HowItWorks.vue';
+import LoyaltyCards from './LoyaltyCards.vue';
 import Unauthenticated from './Unauthenticated.vue';
 
 
@@ -51,6 +55,7 @@ export default {
 
     components: {
         LoyaltyHeader,
+        LoyaltyCards,
         Unauthenticated,
         HowItWorks,
         Tabs,
@@ -70,6 +75,10 @@ export default {
             type: String,
             required: true
         },
+        isAppsUserAgent: {
+            type: Boolean,
+            default: false
+        },
         hash: {
             type: String,
             default: ''
@@ -86,7 +95,6 @@ export default {
     computed: {
         ...mapGetters(VUEX_MODULE_NAMESPACE_LOYALTY, [
             'isAuthenticated',
-            'isAppsUserAgent'
         ]),
 
         /**
