@@ -35,4 +35,8 @@ if (GlobalVue) {
 // To allow use as module (npm/webpack/etc.) export component
 export default PromotionsShowcase;
 
-
+export {
+    STYLE_EMPHASIZED,
+    STYLE_LINK,
+    STYLE_TEXT
+} from './constants';

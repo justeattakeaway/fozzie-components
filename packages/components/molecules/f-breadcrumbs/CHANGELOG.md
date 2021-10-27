@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.0.0
+------------------------------
+*October 25, 2021*
+
+### Added
+- `hasBackground` prop which adds a layer of style to the default version.
+- Unit test coverage.
+
 
 v2.2.0
 ------------------------------
