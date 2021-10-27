@@ -101,9 +101,9 @@
         </div>
 
         <!-- optional items -->
-        <span
+        <restaurant-dish
             v-if="!disabled"
-            :class="[$style['c-restaurantCard-dish']]">DISH RESULT</span>
+            :class="[$style['c-restaurantCard-dish']]" />
     </a>
 </template>
 
@@ -111,12 +111,14 @@
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './RestaurantImage.vue';
 import RestaurantLogo from './RestaurantLogo.vue';
+import RestaurantDish from './RestaurantDish.vue';
 
 export default {
     name: 'RestaurantCardV1',
     components: {
         RestaurantImage,
-        RestaurantLogo
+        RestaurantLogo,
+        RestaurantDish
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -201,13 +203,7 @@ export default {
   }
 }
 
-// placeholder styles - will be extracted to subcomponent
 .c-restaurantCard-dish {
-  background: lightgreen;
-  padding: 1rem;
-  border: 2px dashed green;
-  border-radius: 8px;
-
   .c-restaurantCard--listItem & {
       @include media('>mid') {
         grid-column: 1/3;
