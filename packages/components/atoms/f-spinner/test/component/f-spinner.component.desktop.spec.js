@@ -1,12 +1,13 @@
-const Spinner = require('../../test-utils/component-objects/f-spinner.component');
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const Spinner = require('../../test-utils/component-objects/f-spinner.component');
+
+const spinner = new Spinner();
 
 describe('f-spinner component tests', () => {
     beforeEach(() => {
-
         const pageUrl = buildUrl(spinner.componentType, spinner.componentName, spinner.path);
 
-        spinner.open(pageUrl)
+        spinner.open(pageUrl);
         spinner.waitForComponent();
     });
 
