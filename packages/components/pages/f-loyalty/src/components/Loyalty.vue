@@ -94,7 +94,7 @@ export default {
 
     computed: {
         ...mapGetters(VUEX_MODULE_NAMESPACE_LOYALTY, [
-            'isAuthenticated',
+            'isAuthenticated'
         ]),
 
         /**

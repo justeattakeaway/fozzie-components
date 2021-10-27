@@ -61,6 +61,6 @@ export default {
     },
 
     getters: {
-        isAuthenticated: state => !!state.authToken,
+        isAuthenticated: state => !!state.authToken
     }
 };
