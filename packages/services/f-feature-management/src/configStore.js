@@ -15,8 +15,6 @@ function init (configAsJson, onUpdated) {
     if (configAsJson) {
         const newConfig = typeof (configAsJson) === 'string' ? JSON.parse(configAsJson) : configAsJson;
 
-        logger.logInfo(`Received feature config created at ${configCreatedAt}`);
-
         if (configCreatedAt && (configCreatedAt >= newConfig.createdAt)) {
             return {};
         }
@@ -27,7 +25,7 @@ function init (configAsJson, onUpdated) {
             return {};
         }
 
-        logger.logInfo(`Loading new feature config created at ${configCreatedAt}`);
+        logger.logInfo(`Loading new feature config - created at: ${configCreatedAt}`);
 
         featureLookup = {};
 
@@ -52,7 +50,7 @@ function init (configAsJson, onUpdated) {
  * @param {object} httpClient Optional http client to use for making CDN request.
  * @returns The raw JSON config (for caching purposes)
  */
-async function loadFromCdn (cdnSettings, onUpdated, httpClient = axios) {
+async function loadFromCdn (cdnSettings, onUpdated, httpClient = axios.create()) {
     const suffix = cdnSettings.key ? `-${cdnSettings.key}` : '';
     const host = cdnSettings.host || 'https://features.api.justeattakeaway.com';
     const url = `${host}/config/v1/${cdnSettings.scope}/${cdnSettings.environment}${suffix}`;
