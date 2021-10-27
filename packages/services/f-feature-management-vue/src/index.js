@@ -5,6 +5,6 @@ import createFeatureManagementForVue from './createFeatureManagementForVue';
  * @param {object} settings - json and contextGetter must be set
  * @returns Feature Management object to allow querying of features.
  */
-export default function (settings, axiosClient) {
-    return createFeatureManagementForVue(settings, axiosClient);
+export default function (settings) {
+    return createFeatureManagementForVue(settings);
 }

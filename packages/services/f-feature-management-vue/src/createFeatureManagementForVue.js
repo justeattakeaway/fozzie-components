@@ -18,10 +18,9 @@ function setReactiveProperty (featureManagement) {
  * Gets a FeatureManagement object, swaps it for a Vue3 proxy (if Vue3 in use),
  * adds a `reactive` property then updates the `reactive` property every time new config is loaded.
  * @param {object} settings.  See f-feature-management module docs.
- * @param {object} axiosClient An optional injected axios client. If not provided, an internal instance will be created.
  * @returns FeatureManagement object ready for use in Vue2/3 as required
  */
-function createFeatureManagementForVue (settings, axiosClient) {
+async function createFeatureManagementForVue (settings) {
     const originalOnUpdated = settings.onUpdated;
 
     let featureManagement;
@@ -36,7 +35,7 @@ function createFeatureManagementForVue (settings, axiosClient) {
         }
     };
 
-    featureManagement = createFeatureManagement(overriddenSettings, axiosClient);
+    featureManagement = await createFeatureManagement(overriddenSettings);
 
     // if Vue2 is being used reactive will be null/undefined
     if (reactive) {
