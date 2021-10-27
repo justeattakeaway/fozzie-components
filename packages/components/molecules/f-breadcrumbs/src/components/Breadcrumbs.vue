@@ -10,38 +10,32 @@
                 <li
                     v-if="index !== 0"
                     :key="`${index}_link`"
-                    :class="$style['c-breadcrumbs-separator']">
+                    :class="$style['c-breadcrumbs-separator']"
+                    aria-hidden="true">
                     >
                 </li>
                 <li
                     :key="`${index}_separator`"
-                    :class="$style['c-breadcrumbs-item']">
+                    :class="[
+                        $style['c-breadcrumbs-item'],
+                        $style['c-breadcrumbs-text'],
+                        breadcrumbActiveClass(index)
+                    ]">
                     <router-link
                         v-if="routerLink && url"
                         :to="url"
-                        :class="[
-                            $style['c-breadcrumbs-link'],
-                            linkActiveClass(index)
-                        ]">
+                        :class="$style['c-breadcrumbs-link']">
                         {{ name }}
                     </router-link>
                     <a
                         v-else-if="url"
                         :href="url"
-                        :class="[
-                            $style['c-breadcrumbs-link'],
-                            linkActiveClass(index)
-                        ]">
+                        :class="$style['c-breadcrumbs-link']">
                         {{ name }}
                     </a>
-                    <span
-                        v-else
-                        :class="[
-                            $style['c-breadcrumbs-text'],
-                            linkActiveClass(index)
-                        ]">
+                    <template v-else>
                         {{ name }}
-                    </span>
+                    </template>
                 </li>
             </template>
         </ul>
@@ -65,14 +59,14 @@ export default {
     },
     methods: {
         /**
-       * Function to add active class to the last link
-       * @param index
-       * @returns {*|string}
-       */
-        linkActiveClass (index) {
-            return index === this.links.length - 1
-                ? this.$style['c-breadcrumbs-link--active']
-                : '';
+        * Function to add active class to the last breadcrumb
+        * @param index
+        * @returns {*|string}
+        */
+        breadcrumbActiveClass (index) {
+            return index === this.links.length - 1 ?
+                this.$style['c-breadcrumbs-text--active'] :
+                '';
         }
     }
 };
@@ -124,7 +118,23 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
     }
 }
 
-.c-breadcrumbs-text,
+.c-breadcrumbs-text {
+    &, & > a {
+        color: $breadcrumbs-text-colour-noBackground;
+        font-weight: $breadcrumbs-not-active-font-weight;
+
+        .c-breadcrumbs-list--hasBackground & {
+            color: $breadcrumbs-text-colour-hasBackground;
+        }
+    }
+}
+
+.c-breadcrumbs-text--active {
+    &, & > a {
+        font-weight: $breadcrumbs-active-font-weight;
+    }
+}
+
 .c-breadcrumbs-link {
     color: $breadcrumbs-text-colour-noBackground;
     font-weight: $breadcrumbs-not-active-font-weight;
@@ -132,9 +142,7 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
     .c-breadcrumbs-list--hasBackground & {
         color: $breadcrumbs-text-colour-hasBackground;
     }
-}
 
-.c-breadcrumbs-link {
     cursor: pointer;
     text-decoration: none;
 
@@ -163,9 +171,4 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
         margin-top: 2px;
     }
 }
-
-.c-breadcrumbs-link--active {
-    font-weight: $breadcrumbs-active-font-weight;
-}
-
 </style>
