@@ -1,14 +1,13 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+/* eslint-disable class-methods-use-this */
 const Spinner = require('../../test-utils/component-objects/f-spinner.component');
 
-const spinner = new Spinner();
+let spinner;
 
 describe('f-spinner component tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(spinner.componentType, spinner.componentName, spinner.path);
+        spinner = new Spinner();
 
-        spinner.open(pageUrl);
-        spinner.waitForComponent();
+        spinner.load();
     });
 
     it('should display the f-spinner component', () => {
