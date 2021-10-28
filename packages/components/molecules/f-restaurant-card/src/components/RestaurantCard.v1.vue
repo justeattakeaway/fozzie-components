@@ -36,7 +36,10 @@
             <component
                 :is="errorBoundary"
                 tier="3">
-                <slot name="cuisines" />
+                <restaurant-cuisines
+                    v-if="cuisines && cuisines.length > 0"
+                    data-test-id="restaurant-cuisines"
+                    :cuisines="cuisines" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -109,6 +112,7 @@
 </template>
 
 <script>
+import RestaurantCuisines from './RestaurantCuisines.vue';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './RestaurantImage.vue';
 import RestaurantLogo from './RestaurantLogo.vue';
@@ -119,7 +123,8 @@ export default {
     components: {
         RestaurantImage,
         RestaurantLogo,
-        RestaurantDish
+        RestaurantDish,
+        RestaurantCuisines
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -151,6 +156,10 @@ export default {
         isListItem: {
             type: Boolean,
             default: true
+        },
+        cuisines: {
+            type: Array,
+            default: null
         },
         // feature flags
         flags: {

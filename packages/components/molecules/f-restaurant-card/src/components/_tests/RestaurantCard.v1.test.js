@@ -4,7 +4,7 @@ import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 
 describe('RestaurantCard.v1', () => {
     describe('Error Boundary', () => {
-        const slotList = ['cuisines', 'new-label', 'ratings', 'meta-items', 'local-legend', 'badges', 'optional-items'];
+        const slotList = ['new-label', 'ratings', 'meta-items', 'local-legend', 'badges', 'optional-items'];
 
         it.each(slotList)('Successfully wraps %p slot in error boundary', slot => {
             // arrange
@@ -30,14 +30,14 @@ describe('RestaurantCard.v1', () => {
             };
 
             const slots = {
-                cuisines: '<div cuisines-slot></div>'
+                badges: '<div badges-slot></div>'
             };
 
             // act
             const wrapper = mount(RestaurantCardV1, { propsData, slots });
 
             // assert
-            expect(wrapper.find('[error-boundary][tier="3"]>[cuisines-slot]').exists()).toBe(true);
+            expect(wrapper.find('[error-boundary][tier="3"]>[badges-slot]').exists()).toBe(true);
         });
     });
 });
