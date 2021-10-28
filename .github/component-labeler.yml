@@ -8,6 +8,12 @@ molecules:
 organisms:
 - 'packages/components/organisms/**/*'
 
+templates:
+- 'packages/components/templates/**/*'
+
+pages:
+- 'packages/components/pages/**/*'
+
 services:
 - 'packages/services/**/*'
 

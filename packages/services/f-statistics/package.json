@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-statistics",
   "description": "Javascript client for transporting statistics",
-  "version": "0.3.0",
-  "maxBundleSize": "100kB",
+  "version": "0.4.0",
+  "maxBundleSize": "10kB",
   "main": "dist/f-statistics.umd.js",
   "module": "dist/f-statistics.es.js",
   "source": "src/index.js",

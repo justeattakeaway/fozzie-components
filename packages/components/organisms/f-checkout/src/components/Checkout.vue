@@ -193,6 +193,7 @@ import {
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
+import LogEvents from '../log-events';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
@@ -639,6 +640,31 @@ export default {
         },
 
         /**
+         * Emits and/or logs event with eventData, error and any additional data
+         */
+        handleEventLogging (event, error, additionalData) {
+            if (EventNames[event]) {
+                const data = LogEvents[event]?.hasEventData && this.eventData;
+
+                if (data || error) {
+                    this.$emit(EventNames[event], { ...data, ...(error && { error }) });
+                } else {
+                    this.$emit(EventNames[event]);
+                }
+            }
+
+            if (LogEvents[event]?.logMessage) {
+                this.logInvoker({
+                    message: LogEvents[event].logMessage,
+                    data: { ...this.eventData, ...additionalData },
+                    logMethod: this.$logger[LogEvents[event].logMethod],
+                    ...error && { error }
+                });
+            }
+        },
+
+
+        /**
          * Display and track issues when updating checkout even though the request was successful.
          * (e.g. request is correct, but the restaurant is now offline).
          */
@@ -646,13 +672,7 @@ export default {
             if (this.errors) {
                 this.checkoutAnalyticsService.trackFormErrors();
 
-                this.logInvoker({
-                    message: 'Consumer Checkout Not Fulfillable',
-                    data: this.eventData,
-                    logMethod: this.$logger.logWarn
-                });
-
-                this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
+                this.handleEventLogging('CheckoutNonFulfillableError');
             }
         },
 
@@ -678,13 +698,12 @@ export default {
 
                 await this.reloadAvailableFulfilmentTimesIfOutdated();
 
-
-                this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
+                this.handleEventLogging('CheckoutUpdateSuccess');
             } catch (e) {
                 const statusCode = e?.response?.data?.statusCode || e?.response?.status;
 
                 if (statusCode === 403) {
-                    throw new UpdateCheckoutAccessForbiddenError(e, this.$logger);
+                    throw new UpdateCheckoutAccessForbiddenError(e);
                 }
 
                 throw new UpdateCheckoutError(e);
@@ -727,18 +746,12 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                this.$emit(EventNames.CheckoutPlaceOrderSuccess, this.eventData);
-                this.$emit(EventNames.CheckoutSuccess, this.eventData);
-
-                this.logInvoker({
-                    message: 'Consumer Checkout Successful',
-                    data: this.eventData,
-                    logMethod: this.$logger.logInfo
-                });
+                this.handleEventLogging('CheckoutPlaceOrderSuccess');
+                this.handleEventLogging('CheckoutSuccess');
             } catch (e) {
                 const errorCode = e?.response?.data?.errorCode;
 
-                throw new PlaceOrderError(e.message, errorCode, this.$logger);
+                throw new PlaceOrderError(e.message, errorCode);
             }
         },
 
@@ -764,7 +777,7 @@ export default {
                     otacToAuthExchanger: this.otacToAuthExchanger
                 });
 
-                this.$emit(EventNames.CheckoutSetupGuestSuccess);
+                this.handleEventLogging('CheckoutSetupGuestSuccess');
             } catch (e) {
                 throw new CreateGuestUserError(e.message);
             }
@@ -781,10 +794,10 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                this.$emit(EventNames.CheckoutGetSuccess);
+                this.handleEventLogging('CheckoutGetSuccess');
             } catch (error) {
                 if (error?.response?.status === 403) {
-                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message, this.$logger));
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message));
                 } else {
                     this.handleErrorState(new GetCheckoutError(error.message, error?.response?.status));
                 }
@@ -804,7 +817,7 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                this.$emit(EventNames.CheckoutBasketGetSuccess);
+                this.handleEventLogging('CheckoutBasketGetSuccess');
             } catch (error) {
                 this.handleErrorState(new GetBasketError(error.message, error?.response?.status));
             }
@@ -825,7 +838,7 @@ export default {
                     this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable;
                 }
 
-                this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
+                this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
             } catch (error) {
                 this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
             }
@@ -845,16 +858,9 @@ export default {
                     currentPostcode: this.$cookies.get('je-location')
                 });
 
-                this.$emit(EventNames.CheckoutAddressGetSuccess);
+                this.handleEventLogging('CheckoutAddressGetSuccess');
             } catch (error) {
-                this.$emit(EventNames.CheckoutAddressGetFailure, error);
-
-                this.logInvoker({
-                    message: 'Get checkout address failure',
-                    data: this.eventData,
-                    logMethod: this.$logger.logWarn,
-                    error
-                });
+                this.handleEventLogging('CheckoutAddressGetFailure', error);
             }
         },
 
@@ -868,17 +874,9 @@ export default {
                     url: this.getCustomerUrl,
                     timeout: this.checkoutTimeout
                 });
-
-                this.$emit(EventNames.CheckoutCustomerGetSuccess);
+                this.handleEventLogging('CheckoutCustomerGetSuccess');
             } catch (error) {
-                this.$emit(EventNames.CheckoutCustomerGetFailure, error);
-
-                this.logInvoker({
-                    message: 'Get checkout customer failure',
-                    data: this.eventData,
-                    logMethod: this.$logger.logWarn,
-                    error
-                });
+                this.handleEventLogging('CheckoutCustomerGetFailure');
             }
         },
 
@@ -887,7 +885,7 @@ export default {
          *
          */
         async lookupGeoLocation () {
-            if (this.serviceType === CHECKOUT_METHOD_DELIVERY) {
+            if (this.isCheckoutMethodDelivery) {
                 try {
                     const locationData = {
                         addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
@@ -901,12 +899,7 @@ export default {
                         });
                     }
                 } catch (error) {
-                    this.logInvoker({
-                        message: 'Geo Location Lookup Failed',
-                        data: this.eventData,
-                        logMethod: this.$logger.logWarn,
-                        error
-                    });
+                    this.handleEventLogging('CheckoutGeoLocationGetFailure', error);
                 }
             }
         },
@@ -918,19 +911,10 @@ export default {
          */
         handleErrorState (error) {
             const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
-            const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
-            const logMessage = error.logMessage || 'Consumer Checkout Failure';
-            const logMethod = error.logMethod || this.$logger.logError;
+
             const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
-            this.$emit(eventToEmit, { ...this.eventData, error });
-
-            this.logInvoker({
-                message: logMessage,
-                data: this.eventData,
-                logMethod,
-                error
-            });
+            this.handleEventLogging((error.eventMessage || 'CheckoutFailure'), error);
 
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
@@ -988,7 +972,6 @@ export default {
 
             this.scrollToFirstInlineError();
 
-            this.$emit(EventNames.CheckoutValidationError, validationState);
             this.checkoutAnalyticsService.trackFormInteraction({
                 action: 'inline_error',
                 error: invalidFields
@@ -1000,7 +983,6 @@ export default {
             });
 
             const expandedData = {
-                ...this.eventData,
                 enteredPostcode: this.address?.postcode,
                 location: this.$cookies.get('je-location'),
                 locationUk: this.$cookies.get('je-location-uk'),
@@ -1008,11 +990,7 @@ export default {
                 isPostcodeChanged: this.changedFields.includes('addressPostcode')
             };
 
-            this.logInvoker({
-                message: 'Checkout Validation Error',
-                data: { ...expandedData, validationState },
-                logMethod: this.$logger.logWarn
-            });
+            this.handleEventLogging('CheckoutValidationError', validationState, { ...expandedData, validationState });
         },
 
         /**

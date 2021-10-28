@@ -1,17 +1,17 @@
 export default {
     heading: 'Contact Preferences',
     locale: 'en-GB',
-    newsAndOffers: {
+    newsletter: {
         email: 'Email',
-        subtitle: 'Get news and offers by',
-        textMessage: 'Text message'
+        sms: 'Text message',
+        subtitle: 'Get news and offers by'
     },
     orderUpdates: {
         email: 'Email',
         emailDescription: 'Order receipts are emailed to you',
-        subtitle: 'Get order updates by',
-        textMessage: 'Text message',
-        textMessageDescription: 'For important updates only'
+        sms: 'Text message',
+        smsDescription: 'For important updates only',
+        subtitle: 'Get order updates by'
     },
     saveChangesButton: 'Save changes'
 };

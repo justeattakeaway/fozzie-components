@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-button",
   "description": "Fozzie Button – The generic button component",
-  "version": "3.0.2",
+  "version": "3.2.0",
   "main": "dist/f-button.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -33,9 +33,9 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_BUTTON} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_BUTTON} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
   "scriptsInfo": {
     "test-component:chrome": "Runs the functional test suite against Chrome.",
@@ -52,7 +52,7 @@
     "vue-router": ">=3.4.8"
   },
   "devDependencies": {
-    "@justeat/f-vue-icons": "2.5.0",
+    "@justeat/f-vue-icons": "2.8.0",
     "@justeat/f-wdio-utils": "0.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",

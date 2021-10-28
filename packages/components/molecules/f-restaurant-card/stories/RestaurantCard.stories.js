@@ -4,6 +4,8 @@
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
+import restaurantLogo from './assets/images/mcdonalds-logo.gif';
+import restaurantImage from './assets/images/mcdonalds.webp';
 
 export default {
     title: 'Components/Molecules',
@@ -28,9 +30,12 @@ export const RestaurantCardComponent = (args, { argTypes }) => ({
 RestaurantCardComponent.args = {
     data: {
         id: '00000',
-        name: 'Fake Restaurant',
-        isTemporarilyOffline: false,
-        logo: 'https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/00000.gif'
+        name: "McDonald's® - Clapham Junction",
+        disabled: false,
+        logoUrl: restaurantLogo,
+        imgUrl: restaurantImage,
+        isListItem: false,
+        url: 'some-restaurant/12345'
     },
 
     flags: {
