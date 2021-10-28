@@ -25,6 +25,7 @@
         <div :class="$style['c-restaurantCard-content']">
             <!-- Restaurant Name -->
             <h3
+                :class="$style['c-restaurantCard-name']"
                 data-test-id="restaurant_name"
                 data-search-name>
                 {{ name }}
@@ -174,6 +175,12 @@ export default {
         grid-template-columns: minmax(150px, 20%) 1fr;
       }
   }
+}
+
+.c-restaurantCard:hover {
+    .c-restaurantCard-name {
+        text-decoration: underline;
+    }
 }
 
 .c-restaurantCard-img {

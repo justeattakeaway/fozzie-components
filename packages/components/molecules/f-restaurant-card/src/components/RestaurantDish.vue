@@ -1,8 +1,14 @@
 <template>
     <div :class="[$style['c-restaurantCard-dish']]">
-        <span :class="[$style['c-restaurantCard-dishTitle']]">Based on your search</span>
-        <span :class="[$style['c-restaurantCard-dishName']]">Half Chicken Roast Chicken</span>
-        <span :class="[$style['c-restaurantCard-dishPrice']]">£5.99</span>
+        <span :class="[$style['c-restaurantCard-dishTitle']]">
+            Based on your search
+        </span>
+        <span :class="[$style['c-restaurantCard-dishName']]">
+            Sausage And Egg Mcmuffin®
+        </span>
+        <span :class="[$style['c-restaurantCard-dishPrice']]">
+            £2.79
+        </span>
     </div>
 </template>
 
