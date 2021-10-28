@@ -4,16 +4,6 @@ on: pull_request_target
 # https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request_target
 
 jobs:
-  wip:
-    if: "${{ github.event.action != 'synchronize' }}" # Only apply the label for newly opened/reopened PRs
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/labeler@v3
-      with:
-        configuration-path: '.github/wip-labeler.yml'
-        repo-token: '${{ secrets.GITHUB_TOKEN }}'
-
   categorise:
     runs-on: ubuntu-latest
     steps:
