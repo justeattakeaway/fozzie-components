@@ -42,7 +42,7 @@ export default {
             {
                 name: 'Home',
                 url: '/',
-                routerLink: true
+                routerLink: false
             },
             {
                 name: 'For You',
