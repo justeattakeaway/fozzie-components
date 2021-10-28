@@ -1,5 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-imageTile-selectors')
+const { COMPONENT } = require('./f-imageTile-selectors');
 
 module.exports = class ImageTile extends Page {
     constructor () {
