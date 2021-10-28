@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$dish-fontSize:      $font-body-s-paragraph * 1px;
+$dish-fontSize: $font-body-s-paragraph * 1px;
 
 .c-restaurantCard-dish {
   background-color: $color-green-10;
