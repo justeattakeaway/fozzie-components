@@ -3,7 +3,7 @@
         <div :class="$style['c-loyaltyHeader-container']">
             <bread-crumbs
                 :links="links"
-                :router-links="true" />
+                has-background />
             <media-element
                 :class="$style['c-loyaltyHeader-media']"
                 :text-size="getFontSizeBasedOnScreenSize"
@@ -41,15 +41,18 @@ export default {
         links:  [
             {
                 name: 'Home',
-                url: '/'
+                url: '/',
+                routerLink: true
             },
             {
                 name: 'For You',
-                url: '/offers'
+                url: '/offers',
+                routerLink: true
             },
             {
                 name: 'StampCards',
-                url: '/offers/stamp-cards'
+                url: '/offers/stamp-cards',
+                routerLink: true
             }
         ],
         fontSize: 'lg',
