@@ -17,7 +17,7 @@
 
         <!-- Logo image -->
         <restaurant-logo
-            v-if="!!logoUrl"
+            v-if="logoUrl"
             :class="$style['c-restaurantCard-logo']"
             :logo-url="logoUrl" />
 
@@ -175,10 +175,6 @@ export default {
         grid-template-columns: minmax(150px, 20%) 1fr;
       }
   }
-}
-
-.c-restaurantCard {
-...
 
   &:hover {
       .c-restaurantCard-name {

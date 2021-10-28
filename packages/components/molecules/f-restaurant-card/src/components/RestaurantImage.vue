@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$img-borderRadius                         : $radius-rounded-c;
+$img-borderRadius : $radius-rounded-c;
 
 .c-restaurantCard-img {
   background-size: cover;
