@@ -14,8 +14,6 @@
 <script>
 
 export default {
-    name: 'FSpinner',
-
     data () {
         return {
             shouldShowSpinner: true
@@ -23,6 +21,11 @@ export default {
     },
 
     mounted () {
+        /**
+         * events are handled in the mounted as components can't handle `this.$emit` from a slot.
+         * https://github.com/vuejs/vue/issues/4332
+         *
+         * */
         this.$on('stop-spinner', () => {
             this.shouldShowSpinner = false;
         });
