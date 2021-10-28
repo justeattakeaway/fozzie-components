@@ -67,12 +67,69 @@ export default {
 
 ### Props
 
-There may be props that allow you to customise its functionality.
+This component requires data that it needs to pass on to embedded components. This can be done using the following props:
 
-The props that can be defined are as follows (if any):
+| Prop  | Type  | Default | Required | Description |
+| ----- | ----- | ------- | ----- | ----------- |
+| breadcrumbs-links | array | [ ] | No (*but expected*) | An array of links objects (_see example #1 below_) |
+| navigation-links | array | [ ] | No (*but expected*) | An array of links objects (_see example #2 below_) |
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
+Example #1
+```js
+[
+  {
+    id: 'accountNavLinkInfo'  // Test Data Id
+    url: '/account/info',     // Url
+    name: 'Your account',     // Text Label
+    selected: false
+  },
+  {
+    id: 'accountNavLinkOrderHistory',
+    url: '/order-history',
+    name: 'Your orders',
+    selected: true            // True indicates the currently selected item
+  }
+]
+```
+Example #2
+```js
+[
+  {
+    // Start of breadcrumb
+    name: 'Link 1',
+    url: '/link/1',
+    routerLink: false
+  },
+  {
+    name: 'Link 2',
+    url: '/link/2',
+    routerLink: true
+  },
+  {
+    // End of (Current Active Page) breadcrumb
+    name: 'Link 2'
+  }
+];
+```
+### Slots
+
+This component has a space (main body) for a dynamic component to be added at runtime via a slot, see an example below:
+
+```js
+  <template-sub-nav
+      :breadcrumb-links="breadcrumbLinks"
+      :navigation-links="navigationLinks">
+```
+The Slot component is then added here:
+```
+      <contact-preferences
+          :auth-token="authToken"
+          :locale="locale"
+          :smart-gateway-base-url="settings.smartGatewayBaseUrl" />
+```
+```js
+  </template-sub-nav>
+```
 
 ## Development
 
@@ -100,6 +157,8 @@ To test only `f-template-subnav`, run from the `./fozzie-components/packages/com
 ```sh
 yarn test
 ```
-## Documentation to be completed once module is in stable state.
+### Component and Accessibility Tests
+
+As this component holds no, or very little, logic it only needs visual testing which will be the responsibility of the consuming component.
 
 
