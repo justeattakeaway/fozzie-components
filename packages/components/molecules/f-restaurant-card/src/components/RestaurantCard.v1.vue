@@ -112,11 +112,11 @@
 </template>
 
 <script>
-import RestaurantCuisines from './RestaurantCuisines.vue';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
-import RestaurantImage from './RestaurantImage.vue';
-import RestaurantLogo from './RestaurantLogo.vue';
-import RestaurantDish from './RestaurantDish.vue';
+import RestaurantImage from './subcomponents/RestaurantImage.vue';
+import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
+import RestaurantDish from './subcomponents/RestaurantDish.vue';
+import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 
 export default {
     name: 'RestaurantCardV1',

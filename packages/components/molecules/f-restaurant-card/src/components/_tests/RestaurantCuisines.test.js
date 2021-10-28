@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import RestaurantCuisines from '../RestaurantCuisines.vue';
+import RestaurantCuisines from '../subcomponents/RestaurantCuisines.vue';
 import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 
 describe('RestaurantCuisines', () => {
