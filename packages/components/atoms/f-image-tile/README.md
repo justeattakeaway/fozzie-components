@@ -4,6 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
+An interactive tile component containing an image, text and link.
 
 
 </div>
