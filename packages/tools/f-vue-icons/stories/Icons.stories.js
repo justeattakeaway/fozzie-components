@@ -16,11 +16,15 @@ export default {
 
 export const Icons = () => ({
     components: icons,
-    template: `<div class="s-icons">
-        <template v-for="(component, componentName) in icons">
-            <div class="s-icons-cell"><span>{{ componentName }}</span></div>
-            <div class="s-icons-cell"><component :is="component" class="s-icons-icon" /></div>
+    template: `
+    <div>
+    <div
+        class="s-icons u-spacingBottom--large storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide" 
+        v-for="(component, componentName) in icons">
+        <template>
+            <div class="s-icons-cell u-spacingBottom--large"><component :is="component" class="s-icons-icon" /></div>
         </template>
+    </div>
     </div>`,
     data: () => ({
         icons
