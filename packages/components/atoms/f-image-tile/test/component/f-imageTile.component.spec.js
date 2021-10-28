@@ -1,7 +1,7 @@
 const ImageTile = require('../../test-utils/component-objects/f-imageTile.component');
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
-const imageTile = new RestaurantCard();
+const imageTile = new ImageTile();
 
 describe('f-imageTile component tests', () => {
     beforeEach(() => {
