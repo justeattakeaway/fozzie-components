@@ -10,7 +10,7 @@ export default {
 
     mounted () {
         setTimeout(() => {
-            this.$parent.$emit('stopSpinner');
+            this.$parent.$emit('stop-spinner');
         }, 2000);
     }
 };

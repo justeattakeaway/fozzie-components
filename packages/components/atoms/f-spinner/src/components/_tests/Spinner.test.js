@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import VSpinner from '../Spinner.vue';
+import FSpinner from '../Spinner.vue';
 
 const $on = jest.fn();
 
@@ -8,7 +8,7 @@ describe('Spinner', () => {
 
     it('should be defined', () => {
         // Arrange & Act
-        const wrapper = shallowMount(VSpinner, { propsData });
+        const wrapper = shallowMount(FSpinner, { propsData });
 
         // Assert
         expect(wrapper.exists()).toBe(true);
@@ -20,7 +20,7 @@ describe('Spinner', () => {
 
         beforeEach(() => {
             // Arrange & Act
-            wrapper = shallowMount(VSpinner, {
+            wrapper = shallowMount(FSpinner, {
                 propsData,
                 mocks: {
                     $on
@@ -28,14 +28,14 @@ describe('Spinner', () => {
             });
         });
 
-        it('should create an event listener for `stopSpinner` events', () => {
+        it('should create an event listener for `stop-spinner` events', () => {
             // Assert
-            expect(wrapper.vm.$on).toHaveBeenCalledWith('stopSpinner', mockFunction);
+            expect(wrapper.vm.$on).toHaveBeenCalledWith('stop-spinner', mockFunction);
         });
 
-        it('should create an event listener for `startSpinner` events', () => {
+        it('should create an event listener for `start-spinner` events', () => {
             // Assert
-            expect(wrapper.vm.$on).toHaveBeenCalledWith('startSpinner', mockFunction);
+            expect(wrapper.vm.$on).toHaveBeenCalledWith('start-spinner', mockFunction);
         });
     });
 });

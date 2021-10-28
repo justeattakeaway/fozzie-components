@@ -14,7 +14,7 @@
 <script>
 
 export default {
-    name: 'VSpinner',
+    name: 'FSpinner',
 
     data () {
         return {
@@ -23,11 +23,11 @@ export default {
     },
 
     mounted () {
-        this.$on('stopSpinner', () => {
+        this.$on('stop-spinner', () => {
             this.shouldShowSpinner = false;
         });
 
-        this.$on('startSpinner', () => {
+        this.$on('start-spinner', () => {
             this.shouldShowSpinner = true;
         });
     }
