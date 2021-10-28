@@ -71,8 +71,8 @@ This component requires data that it needs to pass on to embedded components. Th
 
 | Prop  | Type  | Default | Required | Description |
 | ----- | ----- | ------- | ----- | ----------- |
-| breadcrumbs-links | array | [ ] | true | An array of links objects (_see example #1 below_) |
-| navigation-links | array | [ ] | true | An array of links objects (_see example #2 below_) |
+| breadcrumbs-links | array | [ ] | No (*but expected*) | An array of links objects (_see example #1 below_) |
+| navigation-links | array | [ ] | No (*but expected*) | An array of links objects (_see example #2 below_) |
 
 Example #1
 ```js

@@ -24,6 +24,10 @@ export default class CheckoutAnalyticService {
                 changes: this.analytics.changedFields.toString() || null
             }
         });
+
+        if (action === 'submit') {
+            this.trackSelectedTimes();
+        }
     }
 
     /**
@@ -110,6 +114,17 @@ export default class CheckoutAnalyticService {
             eventCategory: 'engagement',
             eventAction,
             eventLabel: 'view_dialog'
+        });
+    }
+
+    /**
+     * Pushes timeSelected event to identify if the customer has selected asap
+     */
+    trackSelectedTimes () {
+        this.$gtm.pushEvent({
+            event: 'timeSelected',
+            eventCategory: 'engagement',
+            isAsapSelected: this.checkout.hasAsapSelected
         });
     }
 }

@@ -90,7 +90,7 @@ export default {
 
 .c-navigation,
 .c-breadcrumb-container {
-    @include media('<=mid') {
+    @include media('<mid') {
         display: none;
     }
 }
