@@ -5,8 +5,7 @@ const imageTile = new ImageTile();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        imageTile.open();
-        imageTile.waitForComponent();
+        imageTile.load();
     });
     it('a11y - should test f-imageTile component WCAG compliance', () => {
         // Act
