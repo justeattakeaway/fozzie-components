@@ -4,6 +4,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.1.0
+------------------------------
+*October 27, 2021*
+
+### Changed
+- Replace `<span>` with `<template>`.
+- Simplify and shuffle around styles accordingly.
+
+### Added
+- Storybook control for `hasBackground`.
+
+### Removed
+- Breadcrumb separators from accessibility tree. They were being announced by NVDA as "greater".
+
+
+v3.0.0
+------------------------------
+*October 25, 2021*
+
+### Added
+- `hasBackground` prop which adds a layer of style to the default version.
+- Unit test coverage.
+
+
 v2.1.0
 ------------------------------
 *October 21, 2021*

@@ -12,7 +12,7 @@
                 }]"
             data-test-id="link-component"
             :aria-describedby="descriptionId"
-            v-bind="linkAttributes">
+            v-bind="$attrs">
             <slot />
         </component>
         <span
@@ -34,11 +34,6 @@ export default {
     name: 'VLink',
 
     props: {
-        href: {
-            type: String,
-            required: true
-        },
-
         isExternalSite: {
             type: Boolean,
             default: false
@@ -110,19 +105,14 @@ export default {
             return this.ariaDescription ? this.uid : null;
         },
 
-        linkAttributes () {
-            return {
-                ...this.$attrs,
-                ...(this.isRouterLink ? {
-                    to: this.href
-                } : {
-                    href: this.href
-                })
-            };
-        },
-
         linkType () {
-            return this.isRouterLink ? 'router-link' : 'a';
+            if (this.$attrs.href) {
+                return 'a';
+            }
+            if (this.$attrs.to) {
+                return 'router-link';
+            }
+            return 'a';
         }
     }
 };
