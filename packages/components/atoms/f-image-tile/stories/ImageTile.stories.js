@@ -14,7 +14,7 @@ export const ImageTileComponent = () => ({
     components: { ImageTile },
     props: {
     },
-    template: `<image-tile />`
+    template: '<image-tile />'
 });
 
 ImageTileComponent.storyName = 'f-image-tile';
