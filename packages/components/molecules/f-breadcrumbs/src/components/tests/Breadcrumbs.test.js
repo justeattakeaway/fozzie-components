@@ -56,6 +56,7 @@ describe('BreadCrumbs', () => {
                 expect(breadcrumbRouterLinks).toHaveLength(1);
             });
 
+
             it('should render a link for each url supplied', () => {
                 // Arrange
                 const propsData = {
@@ -85,7 +86,7 @@ describe('BreadCrumbs', () => {
                 ['empty', ''],
                 ['undefined', undefined],
                 ['null', null]
-            ])('should render a span when url is %s', (_, url) => {
+            ])('should render a text node when url is %s', (_, url) => {
                 // Arrange
                 const propsData = {
                     links: [{
@@ -97,13 +98,15 @@ describe('BreadCrumbs', () => {
 
                 // Act
                 const wrapper = shallowMount(BreadCrumbs, { propsData });
-                const breadcrumbSpans = wrapper.findAll('li > span');
+                const breadcrumbElements = wrapper.findAll('li');
+                const breadcrumbLinks = wrapper.findAll('li > a');
 
                 // Assert
-                expect(breadcrumbSpans).toHaveLength(1);
+                expect(breadcrumbElements).toHaveLength(1); // There are no separators
+                expect(breadcrumbLinks).toHaveLength(0);
             });
 
-            it('should render a span if router link url is missing', () => {
+            it('should render a text node if router link url is missing', () => {
                 // Arrange
                 const propsData = {
                     links: [{
@@ -115,10 +118,12 @@ describe('BreadCrumbs', () => {
 
                 // Act
                 const wrapper = shallowMount(BreadCrumbs, { propsData });
-                const breadcrumbSpans = wrapper.findAll('li > span');
+                const breadcrumbElements = wrapper.findAll('li');
+                const breadcrumbLinks = wrapper.findAll('li > a');
 
                 // Assert
-                expect(breadcrumbSpans).toHaveLength(1);
+                expect(breadcrumbElements).toHaveLength(1); // There are no separators
+                expect(breadcrumbLinks).toHaveLength(0);
             });
 
             it('should render a mix of links and spans when not all links have urls', () => {
@@ -142,74 +147,74 @@ describe('BreadCrumbs', () => {
                 const wrapper = shallowMount(BreadCrumbs, { propsData });
 
                 const breadcrumbLinks = wrapper.findAll('li > a');
-                const breadcrumbSpans = wrapper.findAll('li > span');
+                const breadcrumbElements = wrapper.findAll('li');
 
                 // Assert
                 expect(breadcrumbLinks).toHaveLength(1);
-                expect(breadcrumbSpans).toHaveLength(1);
+                expect(breadcrumbElements).toHaveLength(3); // Includes separator
+            });
+        });
+    });
+
+    describe('`hasBackground`', () => {
+        let $style;
+        let propsData;
+
+        beforeEach(() => {
+            $style = {
+                'c-breadcrumbs-list--hasBackground': 'c-breadcrumbs-list--hasBackground'
+            };
+
+            propsData = {
+                hasBackground: true,
+                links: [
+                    {
+                        name: 'Link 1',
+                        url: '/link/1',
+                        routerLink: false
+                    },
+                    {
+                        name: 'Link 2',
+                        url: '/link/2',
+                        routerLink: false
+                    }
+                ]
+            };
+        });
+
+        describe('when truthy', () => {
+            it('should add `c-breadcrumbs-list--hasBackground` to the breadcrumb wrapper ul element', () => {
+                // Act
+                const wrapper = shallowMount(BreadCrumbs, {
+                    propsData,
+                    mocks: {
+                        $style
+                    }
+                });
+
+                const breadCrumb = wrapper.find("[data-test-id='breadcrumbs-component'] > ul");
+
+                // Assert
+                expect(breadCrumb.attributes('class')).toContain('c-breadcrumbs-list--hasBackground');
             });
         });
 
-        describe('`hasBackground`', () => {
-            let $style;
-            let propsData;
+        describe('when falsey', () => {
+            it('should not add `c-breadcrumbs-list--hasBackground` to the breadcrumb wrapper ul element', () => {
+                // Arrange
+                propsData.hasBackground = false;
 
-            beforeEach(() => {
-                $style = {
-                    'c-breadcrumbs-list--hasBackground': 'c-breadcrumbs-list--hasBackground'
-                };
-
-                propsData = {
-                    hasBackground: true,
-                    links: [
-                        {
-                            name: 'Link 1',
-                            url: '/link/1',
-                            routerLink: false
-                        },
-                        {
-                            name: 'Link 2',
-                            url: '/link/2',
-                            routerLink: false
-                        }
-                    ]
-                };
-            });
-
-            describe('when truthy', () => {
-                it('should add `c-breadcrumbs-list--hasBackground` to the breadcrumb wrapper ul element', () => {
-                    // Act
-                    const wrapper = shallowMount(BreadCrumbs, {
-                        propsData,
-                        mocks: {
-                            $style
-                        }
-                    });
-
-                    const breadCrumb = wrapper.find("[data-test-id='breadcrumbs-component'] > ul");
-
-                    // Assert
-                    expect(breadCrumb.attributes('class')).toContain('c-breadcrumbs-list--hasBackground');
+                // Act
+                const wrapper = shallowMount(BreadCrumbs, {
+                    propsData,
+                    mocks: {
+                        $style
+                    }
                 });
-            });
+                const breadCrumb = wrapper.find("[data-test-id='breadcrumbs-component'] > ul");
 
-            describe('when falsey', () => {
-                it('should not add `c-breadcrumbs-list--hasBackground` to the breadcrumb wrapper ul element', () => {
-                    // Arrange
-                    propsData.hasBackground = false;
-
-                    // Act
-                    const wrapper = shallowMount(BreadCrumbs, {
-                        propsData,
-                        mocks: {
-                            $style
-                        }
-                    });
-                    const breadCrumb = wrapper.find("[data-test-id='breadcrumbs-component'] > ul");
-
-                    // Assert
-                    expect(breadCrumb.attributes('class')).not.toContain('c-breadcrumbs-list--hasBackground');
-                });
+                // Assert
+                expect(breadCrumb.attributes('class')).not.toContain('c-breadcrumbs-list--hasBackground');
             });
         });
     });

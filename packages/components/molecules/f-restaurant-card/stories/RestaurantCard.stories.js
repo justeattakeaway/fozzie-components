@@ -30,7 +30,7 @@ export const RestaurantCardComponent = (args, { argTypes }) => ({
 RestaurantCardComponent.args = {
     data: {
         id: '00000',
-        name: 'Fake Restaurant',
+        name: "McDonald's® - Clapham Junction",
         disabled: false,
         logoUrl: restaurantLogo,
         imgUrl: restaurantImage,

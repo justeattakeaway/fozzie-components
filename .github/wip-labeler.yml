@@ -1,6 +1,0 @@
-# Add 'wip' label to all new PRs
-wip:
-- '*'
-- 'packages/**/*'
-- 'stories/**/*'
-- 'test/**/*'

@@ -1,4 +1,4 @@
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VLink from '../src/components/Link.vue';
 
@@ -15,6 +15,14 @@ export const VLinkComponent = () => ({
         };
     },
     props: {
+        href: {
+            default: text('Anchor link path', '/')
+        },
+
+        to: {
+            default: text('Router link path (href must be empty for this to be applied)', '')
+        },
+
         isRouterLink: {
             default: boolean('Is a router link?', false)
         },
@@ -55,7 +63,9 @@ export const VLinkComponent = () => ({
 
     template: `<v-link
                     :data-test-id="dataTestId"
-                    href="/"
+                    v-bind="{
+                        ...(href ? { href } : to ? { to } : {})
+                    }"
                     :is-router-link="isRouterLink"
                     :is-bold="isBold"
                     :has-text-decoration="hasTextDecoration"
