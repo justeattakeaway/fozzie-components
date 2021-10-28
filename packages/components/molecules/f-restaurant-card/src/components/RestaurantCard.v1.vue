@@ -177,10 +177,14 @@ export default {
   }
 }
 
-.c-restaurantCard:hover {
-    .c-restaurantCard-name {
-        text-decoration: underline;
-    }
+.c-restaurantCard {
+...
+
+  &:hover {
+      .c-restaurantCard-name {
+          text-decoration: underline;
+      }
+  }
 }
 
 .c-restaurantCard-img {
