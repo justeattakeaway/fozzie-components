@@ -49,7 +49,7 @@ const buildBanner = function (title, message) {
 const unsupportedBrowserAction = function (unsupportedBrowser) {
     const browserData = BROWSER_DATA[unsupportedBrowser];
     if (browserData.displayBanner) {
-        const tenant = document.getElementsByTagName('html')[0].lang;
+        const tenant = document.getElementsByTagName('html')[0].lang || 'en-GB';
         buildBanner(browserData.tenants[tenant].title, browserData.tenants[tenant].message);
     }
 };
