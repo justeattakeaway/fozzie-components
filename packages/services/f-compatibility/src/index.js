@@ -11,7 +11,7 @@ const bowser = require('bowser/bundled');
 /* eslint-disable func-names */
 
 /**
- *  @function attachEvents
+ *  Action for the close button set up in buildBanner
  */
 const attachEvents = function () {
     const closeButton = document.getElementById('closeButton');
@@ -23,7 +23,7 @@ const attachEvents = function () {
 };
 
 /**
- *  @function buildBanner
+ *  Build banner to show users a modal message with text for the given browser
  */
 const buildBanner = function (title, message) {
     const heading = document.createElement('h2');
@@ -44,7 +44,7 @@ const buildBanner = function (title, message) {
 };
 
 /**
- *  @function unsupportedBrowserAction
+ *  Cycle through incompatible browsers to execute action(s)
  */
 const unsupportedBrowserAction = function (unsupportedBrowser) {
     const browserData = BROWSER_DATA[unsupportedBrowser];
@@ -55,7 +55,7 @@ const unsupportedBrowserAction = function (unsupportedBrowser) {
 };
 
 /**
- *  @function compatibility
+ *  Export main logic via the compatibility function
  */
 const compatibility = function () {
     const browser = bowser.getParser(window.navigator.userAgent);
@@ -71,6 +71,6 @@ const compatibility = function () {
 };
 
 /**
- * @returns {compatibility} function for checking browser compatibility
+ * Return compatibility function for checking browser compatibility
  */
 export default compatibility;
