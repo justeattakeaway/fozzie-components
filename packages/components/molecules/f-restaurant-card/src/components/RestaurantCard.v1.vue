@@ -11,7 +11,7 @@
 
         <!-- background image -->
         <restaurant-image
-            v-if="!!imgUrl"
+            v-if="imgUrl"
             :class="[$style['c-restaurantCard-img']]"
             :img-url="imgUrl" />
 
