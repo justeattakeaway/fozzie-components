@@ -31,7 +31,7 @@ export default {
 
 .c-restaurantCard-dishTitle,
 .c-restaurantCard-dishPrice {
-    color: #04822c;
+    color: $color-green-60;
     font-size: 14px;
 }
 
