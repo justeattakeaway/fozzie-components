@@ -10,37 +10,26 @@
         @click="$emit('restaurant-card-clicked')">
 
         <!-- background image -->
-        <div
+        <restaurant-image
+            v-if="imgUrl"
             :class="[$style['c-restaurantCard-img']]"
-            :style="`background-image: url(${imgUrl});`"
-            role="img">
+            :img-url="imgUrl" />
 
-            <!-- Logo image -->
-            <img
-                v-if="!!logoUrl"
-                :src="logoUrl"
-                alt=""
-                width="50"
-                height="50"
-                loading="lazy"
-                :class="$style['c-restaurantCard-logo']"
-                data-test-id="restaurant_logo">
-        </div>
+        <!-- Logo image -->
+        <restaurant-logo
+            v-if="logoUrl"
+            :class="$style['c-restaurantCard-logo']"
+            :logo-url="logoUrl" />
 
         <!-- primary content -->
         <div :class="$style['c-restaurantCard-content']">
             <!-- Restaurant Name -->
             <h3
+                :class="$style['c-restaurantCard-name']"
                 data-test-id="restaurant_name"
                 data-search-name>
-                Fake Restaurant
+                {{ name }}
             </h3>
-
-            <!-- stress test the content size -->
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Eius mollitia distinctio magni enim neque, labore repellat
-                quaerat quam magnam, sint vel, officiis nam voluptas hic.
-                Assumenda illum repudiandae libero impedit?</p>
 
             <!-- Cuisines -->
             <!-- START ERROR BOUNDARY -->
@@ -113,15 +102,25 @@
         </div>
 
         <!-- optional items -->
-        <span :class="[$style['c-restaurantCard-dish']]">DISH RESULT</span>
+        <restaurant-dish
+            v-if="!disabled"
+            :class="[$style['c-restaurantCard-dish']]" />
     </a>
 </template>
 
 <script>
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
+import RestaurantImage from './RestaurantImage.vue';
+import RestaurantLogo from './RestaurantLogo.vue';
+import RestaurantDish from './RestaurantDish.vue';
 
 export default {
     name: 'RestaurantCardV1',
+    components: {
+        RestaurantImage,
+        RestaurantLogo,
+        RestaurantDish
+    },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
@@ -163,15 +162,12 @@ export default {
 </script>
 
 <style lang="scss" module>
-$img-borderRadius                         : $radius-rounded-c;
-$logo-borderRadius                        : $radius-rounded-b;
-$logo-borderColor                         : $color-border-default;
-
 .c-restaurantCard {
   text-decoration: none;
   display: grid;
   grid-gap: spacing(x2);
   grid-template-columns: 1fr;
+  position: relative;
 
   &.c-restaurantCard--listItem {
       @include media('>mid') {
@@ -179,23 +175,30 @@ $logo-borderColor                         : $color-border-default;
         grid-template-columns: minmax(150px, 20%) 1fr;
       }
   }
+
+  &:hover {
+      .c-restaurantCard-name {
+          text-decoration: underline;
+      }
+  }
 }
 
 .c-restaurantCard-img {
-  background-size: cover;
-  background-position: center;
   width: 100%;
   height: 200px; // TODO: agree with design
-  border-radius: $img-borderRadius;
-  position: relative;
 
   .c-restaurantCard--listItem & {
       @include media('>mid') {
         min-height: 125px; // TODO: agree with design
         height: 100%;
-        grid-column: 1/2;
       }
   }
+}
+
+.c-restaurantCard-logo {
+  top: spacing(x2);
+  left: spacing(x2);
+  position: absolute;
 }
 
 .c-restaurantCard-content {
@@ -207,21 +210,7 @@ $logo-borderColor                         : $color-border-default;
   }
 }
 
-.c-restaurantCard-logo {
-  border: 1px solid $logo-borderColor;
-  border-radius: $logo-borderRadius;
-  top: spacing(x2);
-  left: spacing(x2);
-  position: absolute;
-}
-
-// placeholder styles - will be extracted to subcomponent
 .c-restaurantCard-dish {
-  background: lightgreen;
-  padding: 1rem;
-  border: 2px dashed green;
-  border-radius: 8px;
-
   .c-restaurantCard--listItem & {
       @include media('>mid') {
         grid-column: 1/3;
