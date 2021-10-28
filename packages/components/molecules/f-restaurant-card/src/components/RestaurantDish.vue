@@ -19,6 +19,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+$dish-fontSize:      $font-body-s-paragraph * 1px;
+
 .c-restaurantCard-dish {
   background-color: $color-green-10;
   padding: spacing(x2);
@@ -32,7 +34,7 @@ export default {
 .c-restaurantCard-dishTitle,
 .c-restaurantCard-dishPrice {
     color: $color-green-60;
-    font-size: 14px;
+    font-size: $dish-fontSize;
 }
 
 .c-restaurantCard-dishName {
