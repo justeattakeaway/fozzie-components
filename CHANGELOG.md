@@ -3,30 +3,40 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v5.0.3
+
+v5.0.4
 ------------------------------
 *October 28, 2021*
 
 ### Updated
 - Circle CI cached components to include new f-image-tile component
 
-v5.0.2
- ------------------------------
- *October 25, 2021*
+v5.0.3
+------------------------------
+*October 28, 2021*
 
 ### Removed
-- unused browserstack and allure scripts
-- browserstack configuration files
-- reference to JE_ENV environment variable
-- percy and browserstack tags
+- Label watcher GitHub Action and related scripts.
+- `wip` labeller.
+
+
+v5.0.2
+------------------------------
+*October 25, 2021*
+
+### Removed
+- Unused Browserstack and Allure scripts
+- Browserstack configuration files
+- Reference to JE_ENV environment variable
+- Percy and Browserstack tags
 
 ### Changed
-- filenames for component tests
+- Filenames for component tests
 
 
 v5.0.1
- ------------------------------
- *October 20, 2021*
+------------------------------
+*October 20, 2021*
 
 ### Added
 - `f-promotions-showcase` to Circle CI cache
@@ -34,24 +44,24 @@ v5.0.1
 
 v5.0.0
 ------------------------------
- *October 21, 2021*
+*October 21, 2021*
 
- ### Added
- - Component folders for `templates` and `pages`.
- - Templates are for layout components that are intended to handle page level layout decisions (for example, a sideNav layout such as on our account pages). Templates don't contain any logic around the actual set of pages, they just handle the overall layout structure and styling.
- - Pages are for our largest organisms, whereby they are a collection of components that make up the main body of a page. For example, `f-registration` and `f-checkout` are both examples of `page` components.
+### Added
+- Component folders for `templates` and `pages`.
+- Templates are for layout components that are intended to handle page level layout decisions (for example, a sideNav layout such as on our account pages). Templates don't contain any logic around the actual set of pages, they just handle the overall layout structure and styling.
+- Pages are for our largest organisms, whereby they are a collection of components that make up the main body of a page. For example, `f-registration` and `f-checkout` are both examples of `page` components.
 
- ### Changed
- - Config for CircleCI, Lerna, yarn workspaces and danger.js updated to include new folder paths.
- - Moved `f-registration` into `pages` directory. Will look to move other organisms one-by-one by liaising with each team working on these components.
+### Changed
+- Config for CircleCI, Lerna, yarn workspaces and danger.js updated to include new folder paths.
+- Moved `f-registration` into `pages` directory. Will look to move other organisms one-by-one by liaising with each team working on these components.
 
 
 v4.7.1
 ------------------------------
- *October 20, 2021*
+*October 20, 2021*
 
- ### Added
- - Document for recording agreed Do's and Don'ts on our codebase
+### Added
+- Document for recording agreed Do's and Don'ts on our codebase
 
 
 v4.7.0
