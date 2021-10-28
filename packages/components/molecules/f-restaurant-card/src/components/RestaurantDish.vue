@@ -30,8 +30,7 @@ export default {
 }
 
 .c-restaurantCard-dishTitle,
-.c-restaurantCard-dishPrice
-{
+.c-restaurantCard-dishPrice {
     color: #04822c;
     font-size: 14px;
 }
