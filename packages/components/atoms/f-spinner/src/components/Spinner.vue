@@ -14,8 +14,6 @@
 <script>
 
 export default {
-    name: 'FSpinner',
-
     data () {
         return {
             shouldShowSpinner: true

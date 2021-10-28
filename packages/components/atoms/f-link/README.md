@@ -71,9 +71,8 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| `href` | `String` | This is a required prop | The URL or path of the link. For a `router-link` this will be mapped to the `to` attribute. |
+| `href` / `to` | `String` | `n/a` (this is an expected attribute rather than a required prop) | The URL or path of the link. Pass in `href` for `<a>`, or `to` for `<router-link>`. |
 | `isExternalSite` | `Boolean` | `false` | Sets aria description to 'Opens and external site' or 'Opens and external site in a new window/screen/tab' depending on target of link.|
-| `isRouterLink` | `Boolean` | `false` | Determines whether to configure the link as a Vue Router router-link. |
 | `isBold` | `Boolean` | `false` | Sets link text to bold. |
 | `hasTextDecoration` | `Boolean` | `true` | Adds underline to link text. |
 | `isFullWidth` | `Boolean` | `false` | Link set as full width. |
