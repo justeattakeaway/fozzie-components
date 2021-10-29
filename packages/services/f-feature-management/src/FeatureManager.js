@@ -53,7 +53,7 @@ class FeatureManager {
             const context = getContext();
 
             if (!context) {
-                logger.logError('Unable to provide feature values as no context was required. Check your settings for the plugin');
+                logger.logError('Unable to provide feature values as no context was provided. Check your settings for the plugin');
                 return null;
             }
 

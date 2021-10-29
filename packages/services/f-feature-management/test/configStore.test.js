@@ -35,7 +35,7 @@ describe('When calling loadFromCdn', () => {
         mockAxios.reset();
     });
 
-    it('should make an initial call to fetch', async () => {
+    it('should make an initial call to httpClient', async () => {
         await executeSUT();
         expect(mockAxios.get).toHaveBeenCalledTimes(1);
         expect(mockAxios.get).toHaveBeenCalledWith(`https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
