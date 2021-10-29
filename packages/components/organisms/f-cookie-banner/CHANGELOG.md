@@ -17,6 +17,8 @@ v3.5.0
 
 ### Changed
 - Specified cookie banner text font size to be 14px as default paragraph font size now is 16px.
+- Cookie policy link to use f-link.
+- Increased max bundle size from 30 to 40kB.
 
 
 v3.4.0
