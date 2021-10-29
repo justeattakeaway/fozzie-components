@@ -2,7 +2,7 @@ const Page = require('@justeat/f-wdio-utils/src/page.object');
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 
 module.exports = class CookieBanner extends Page {
-    constructor() {
+    constructor () {
         super('organism', 'cookie-banner-component');
     }
 
