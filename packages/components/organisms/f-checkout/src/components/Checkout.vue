@@ -6,6 +6,10 @@
             :redirect-url="redirectUrl"
             :service-type="serviceType" />
 
+        <age-verification
+            v-else-if="shouldShowAgeVerificationForm"
+            @checkout-verify-age="verifyCustomerAge" />
+
         <component
             :is="messageType.name"
             v-else-if="message"
@@ -15,12 +19,8 @@
             <span>{{ messageType.content }}</span>
         </component>
 
-        <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
-
         <div
-            v-else
+            v-if="shouldShowCheckoutForm"
             data-theme="jet"
             data-test-id="checkout-component">
             <card
@@ -411,6 +411,10 @@ export default {
         * This can happen for newly created guest */
         shouldLoadCustomer () {
             return this.isLoggedIn && !this.customer.mobileNumber;
+        },
+
+        shouldShowCheckoutForm () {
+            return !this.errorFormType && !this.shouldShowAgeVerificationForm;
         },
 
         shouldShowAgeVerificationForm () {
