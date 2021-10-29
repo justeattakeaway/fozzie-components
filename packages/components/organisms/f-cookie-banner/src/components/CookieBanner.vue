@@ -209,7 +209,7 @@ export default {
     },
 
     destroyed () {
-        if (typeof ResizeObserver === 'function') {
+        if (typeof window === 'object' && typeof this.bodyObserver.disconnect === 'function') {
             this.bodyObserver.disconnect();
         }
     },
