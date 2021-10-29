@@ -1,7 +1,7 @@
 const { testType } = require('./shared.config');
 
 const configuration = {
-    logLevel: 'error',
+    logLevel: 'silent',
     baseUrl: 'http://localhost:8080',
     bail: 0,
     headless: false,

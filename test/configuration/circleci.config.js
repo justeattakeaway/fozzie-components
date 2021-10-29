@@ -1,7 +1,7 @@
 const { testType } = require('./shared.config');
 
 const configuration = {
-    loglevel: process.env.WDIO_LOG_LEVEL || 'error',
+    loglevel: 'silent',
     baseUrl: 'http://localhost:8080',
     bail: 0,
     headless: true,
