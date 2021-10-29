@@ -209,8 +209,9 @@ export default {
     },
 
     destroyed () {
-        if (typeof window === 'object' && typeof this.bodyObserver.disconnect === 'function') {
-            this.bodyObserver.disconnect();
+        if (typeof window === 'object') {
+            // eslint-disable-next-line no-unused-expressions
+            this.bodyObserver?.disconnect();
         }
     },
 
