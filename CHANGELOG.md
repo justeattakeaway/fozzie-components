@@ -20,6 +20,13 @@ v5.0.4
 - `f-spinner` to Circle CI cache.
 
 
+v5.0.4
+------------------------------
+*October 28, 2021*
+
+### Updated
+- Circle CI cached components to include new f-image-tile component
+
 v5.0.3
 ------------------------------
 *October 28, 2021*
