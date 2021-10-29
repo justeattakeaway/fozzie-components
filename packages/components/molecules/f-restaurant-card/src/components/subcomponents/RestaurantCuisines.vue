@@ -16,7 +16,7 @@ export default {
     props: {
         cuisines: {
             type: Array,
-            default: null
+            required: true
         }
     }
 };
