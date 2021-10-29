@@ -39,6 +39,25 @@ describe('RestaurantCard.v1', () => {
             // assert
             expect(wrapper.find('[error-boundary][tier="3"]>[badges-slot]').exists()).toBe(true);
         });
+
+        it('Successfully wraps RestaurantCuisines component in error boundary', () => {
+            // arrange
+            const propsData = {
+                errorBoundary,
+                cuisines: ['Mexican', 'Burgers', 'Chinese']
+            };
+
+            const component = `<restaurant-cuisines
+                v-if="cuisines && cuisines.length > 0"
+                data-test-id="restaurant-cuisines"
+                :cuisines="cuisines" />`;
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData, component });
+
+            // assert
+            expect(wrapper.find('[error-boundary]>[data-test-id="restaurant-cuisines"]').exists()).toBe(true);
+        });
     });
 
     describe('Restaurant cuisines', () => {
