@@ -1,8 +1,18 @@
 <template>
     <div>
+        <error-page
+            v-if="errorFormType"
+            :error-form-type="errorFormType"
+            :redirect-url="redirectUrl"
+            :service-type="serviceType" />
+
+        <age-verification
+            v-else-if="shouldShowAgeVerificationForm"
+            @checkout-verify-age="verifyCustomerAge" />
+
         <component
             :is="messageType.name"
-            v-if="message && !errorFormType"
+            v-else-if="message"
             ref="errorMessage"
             v-bind="messageType.props"
             @created="handleDialogCreation">
@@ -10,18 +20,7 @@
         </component>
 
         <div
-            v-if="shouldShowSpinner"
-            :class="$style['c-spinner-wrapper']"
-            data-test-id="checkout-loading-spinner">
-            <div :class="$style['c-spinner']" />
-        </div>
-
-        <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
-
-        <div
-            v-else-if="shouldShowCheckoutForm"
+            v-if="shouldShowCheckoutForm"
             data-theme="jet"
             data-test-id="checkout-component">
             <card
@@ -138,12 +137,6 @@
                 </template>
             </card>
         </div>
-
-        <error-page
-            v-else-if="errorFormType"
-            :error-form-type="errorFormType"
-            :redirect-url="redirectUrl"
-            :service-type="serviceType" />
     </div>
 </template>
 
@@ -278,12 +271,6 @@ export default {
             default: 60000
         },
 
-        spinnerTimeout: {
-            type: Number,
-            required: false,
-            default: 500
-        },
-
         authToken: {
             type: String,
             default: ''
@@ -330,8 +317,6 @@ export default {
     data () {
         return {
             tenantConfigs,
-            shouldShowSpinner: false,
-            isLoading: false,
             errorFormType: null,
             isFormSubmitting: false,
             availableFulfilmentTimesKey: 0,
@@ -429,7 +414,7 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.isLoading && !this.errorFormType && !this.shouldShowAgeVerificationForm;
+            return !this.errorFormType && !this.shouldShowAgeVerificationForm;
         },
 
         shouldShowAgeVerificationForm () {
@@ -540,6 +525,7 @@ export default {
         await this.initialise();
         this.checkoutAnalyticsService.trackInitialLoad();
         this.$emit(EventNames.CheckoutMounted);
+        this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
     },
 
     methods: {
@@ -574,17 +560,12 @@ export default {
          */
         async initialise () {
             this.setExperimentValues(this.experiments);
-            this.isLoading = true;
-
-            this.startSpinnerCountdown();
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
                 : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
-
-            this.resetLoadingState();
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
@@ -1028,19 +1009,6 @@ export default {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
         },
 
-        resetLoadingState () {
-            this.isLoading = false;
-            this.shouldShowSpinner = false;
-        },
-
-        startSpinnerCountdown () {
-            setTimeout(() => {
-                if (this.isLoading) {
-                    this.shouldShowSpinner = true;
-                }
-            }, this.spinnerTimeout);
-        },
-
         formFieldBlur (field) {
             const fieldValidation = this.$v.customer[field];
             if (fieldValidation) {
@@ -1157,19 +1125,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-@include loadingIndicator('large');
-
-.c-spinner-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    .c-spinner {
-        margin: 0 auto;
-    }
-}
-
 .c-checkout {
     @include media('<=narrow') {
         border: none;

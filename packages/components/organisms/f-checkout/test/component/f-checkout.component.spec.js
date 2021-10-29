@@ -74,9 +74,10 @@ describe('f-checkout component tests', () => {
 
         // Act
         checkout.load();
+        checkout.waitForComponent();
+
         checkout.goToPayment();
         checkout.clickRetryButton();
-        browser.pause(2000);
 
         // Assert
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
@@ -89,12 +90,12 @@ describe('f-checkout component tests', () => {
 
             // Act
             checkout.load();
+            checkout.waitForComponent();
             checkout.goToPayment();
         });
 
         it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
             // Act
-            checkout.waitForComponent();
             checkout.clickRetryButton();
 
             // Assert
@@ -104,7 +105,6 @@ describe('f-checkout component tests', () => {
 
         it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
             // Act
-            checkout.waitForComponent();
             checkout.clickDupOrderGoToHistoryButton();
 
             // Assert
