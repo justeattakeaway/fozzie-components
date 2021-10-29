@@ -74,24 +74,7 @@ This component requires data that it needs to pass on to embedded components. Th
 | breadcrumbs-links | array | [ ] | No (*but expected*) | An array of links objects (_see example #1 below_) |
 | navigation-links | array | [ ] | No (*but expected*) | An array of links objects (_see example #2 below_) |
 
-Example #1
-```js
-[
-  {
-    id: 'accountNavLinkInfo'  // Test Data Id
-    url: '/account/info',     // Url
-    name: 'Your account',     // Text Label
-    selected: false
-  },
-  {
-    id: 'accountNavLinkOrderHistory',
-    url: '/order-history',
-    name: 'Your orders',
-    selected: true            // True indicates the currently selected item
-  }
-]
-```
-Example #2
+Example #1 (*breadcrumbs-links*)
 ```js
 [
   {
@@ -110,6 +93,23 @@ Example #2
     name: 'Link 2'
   }
 ];
+```
+Example #2 (*navigation-links*)
+```js
+[
+  {
+    id: 'accountNavLinkInfo'  // Test Data Id
+    url: '/account/info',     // Url
+    name: 'Your account',     // Text Label
+    selected: false
+  },
+  {
+    id: 'accountNavLinkOrderHistory',
+    url: '/order-history',
+    name: 'Your orders',
+    selected: true            // True indicates the currently selected item
+  }
+]
 ```
 ### Slots
 
@@ -159,6 +159,6 @@ yarn test
 ```
 ### Component and Accessibility Tests
 
-As this component holds no, or very little, logic it only needs visual testing which will be the responsibility of the consuming component.
+As this component contains no, or very little, logic it only needs visual testing which will be the responsibility of the consuming component.
 
 
