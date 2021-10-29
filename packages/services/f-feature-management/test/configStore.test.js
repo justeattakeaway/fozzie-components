@@ -62,13 +62,11 @@ describe('When calling loadFromCdn', () => {
     });
 
     it('should not poll if poll setting false', async () => {
-        // Arrange
         const newSettings = {
             ...cdnSettings,
             poll: false
         };
 
-        // Act
         await executeSUT(newSettings);
         expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
@@ -107,39 +105,31 @@ describe('When calling loadFromCdn', () => {
     });
 
     it('should update features when config changes', async () => {
-        // Arrange
         mockResponse.features[0].key = 'key2';
         mockResponse.createdAt = '2021-09-11 15:00';
 
         await executeSUT();
 
-        // Assert
         expect(getFeature('key1')).toBeFalsy();
         expect(getFeature('key2')).toBeTruthy();
         expect(getFeature('key2').testVal).toBe('val1');
     });
 
     it('should call callback when config timestamp changes', async () => {
-        // Arrange
         const callbackMock = jest.fn();
 
         mockResponse.createdAt = '2021-10-01 09:00';
 
-        // Act
         await executeSUT(cdnSettings, callbackMock);
 
-        // Assert
         expect(callbackMock).toHaveBeenCalled();
     });
 
     it('should not call callback when config timestamp is not changed', async () => {
-        // Arrange
         const callbackMock = jest.fn();
 
-        // Act
         await executeSUT(cdnSettings, callbackMock);
 
-        // Assert
         expect(callbackMock).not.toHaveBeenCalled();
     });
 });
