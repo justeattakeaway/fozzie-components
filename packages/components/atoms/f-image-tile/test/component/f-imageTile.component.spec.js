@@ -1,5 +1,4 @@
 const ImageTile = require('../../test-utils/component-objects/f-imageTile.component');
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 
 const imageTile = new ImageTile();
 
