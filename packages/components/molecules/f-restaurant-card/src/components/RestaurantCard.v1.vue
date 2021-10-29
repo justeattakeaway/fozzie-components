@@ -37,7 +37,7 @@
                 :is="errorBoundary"
                 tier="3">
                 <restaurant-cuisines
-                    v-if="cuisines && cuisines.length > 0"
+                    v-if="cuisines.length > 0"
                     data-test-id="restaurant-cuisines"
                     :cuisines="cuisines" />
             </component>
@@ -159,7 +159,7 @@ export default {
         },
         cuisines: {
             type: Array,
-            default: null
+            default: () => []
         },
         // feature flags
         flags: {
