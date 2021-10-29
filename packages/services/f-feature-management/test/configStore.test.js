@@ -8,6 +8,12 @@ const cdnSettings = {
     poll: true
 };
 
+const modifiedPollingCdnSettings = {
+    ...cdnSettings,
+    host: 'https://test.com',
+    pollInterval: 60000
+};
+
 const mockResponse = {
     createdAt: '2021-09-10 15:00',
     features: [
@@ -73,32 +79,14 @@ describe('When calling loadFromCdn', () => {
     });
 
     it('should honour different host', async () => {
-        // Arrange
-        const newSettings = {
-            ...cdnSettings,
-            host: 'https://test.com',
-            pollInterval: 60000
-        };
+        await executeSUT(modifiedPollingCdnSettings);
 
-        // Act
-        await executeSUT(newSettings);
-
-        // Assert
         expect(mockAxios.get).toHaveBeenCalledWith(`https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
     });
 
     it('should honour different pollInterval', async () => {
-        // Arrange
-        const newSettings = {
-            ...cdnSettings,
-            host: 'https://test.com',
-            pollInterval: 60000
-        };
+        await executeSUT(modifiedPollingCdnSettings);
 
-        // Act
-        await executeSUT(newSettings);
-
-        // Assert
         expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
         jest.advanceTimersByTime(35000);

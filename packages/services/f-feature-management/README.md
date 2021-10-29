@@ -75,4 +75,4 @@ If an http client is provided, it will be used in place of an internal (axios) c
 
 ## Integration with vue
 
-See [f-feature-management-vue](../f-feature-management-vue).
+See [f-feature-management-vue](https://github.com/justeat/fozzie-components/tree/master/packages/services/f-feature-management-vue).
