@@ -63,21 +63,17 @@ export default {
 
 ## Configuration
 
-### Props
-
-There may be props that allow you to customise its functionality.
-
-The props that can be defined are as follows (if any):
-
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
-
 ### Events
 
-The events that can be subscribed to are as follows (if any):
+The spinner handles the following events:
 
 | Event | Description |
 | ----- | ----------- |
+| 'stop-spinner' | Hides the spinner and displays the slot component |
+| 'start-spinner' | Hides the slot component and runs displays the spinner |
+
+To use these events, use `this.$parent.$emit('start-spinner')` or `this.$parent.$emit('stop-spinner')`.
+`f-spinner` cannot handle `this.$emit` as is not possible to access `this.$emit` from a slot.
 
 ## Development
 
