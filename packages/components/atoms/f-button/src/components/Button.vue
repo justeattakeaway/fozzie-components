@@ -198,7 +198,7 @@ $btn-default-iconHeight                : 18px;
 $btn-default-iconSpacing               : 3px;
 $btn-default-iconSideSpacing           : $btn-default-iconSpacing + spacing();
 
-$btn-primary-bgColor                   : $color-interactive-brand;
+$btn-primary-bgColor                   : purple;
 $btn-primary-bgColor--hover            : darken($color-interactive-brand, $color-hover-01);
 $btn-primary-bgColor--active           : darken($color-interactive-brand, $color-active-01);
 $btn-primary-textColor                 : $color-content-interactive-light;
