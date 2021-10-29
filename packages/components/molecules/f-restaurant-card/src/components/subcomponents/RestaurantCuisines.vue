@@ -26,7 +26,7 @@ export default {
 .c-restaurantCard-cuisines {
     display: flex;
     flex-wrap: wrap;
-    margin: 4px 0;
+    margin: spacing(x0.5) 0;
     padding: 0;
     list-style: none;
     list-style-image: none;
