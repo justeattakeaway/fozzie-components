@@ -1,5 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-<%= name.class %>-selectors')
+const { COMPONENT } = require('./f-<%= name.class %>-selectors');
 
 module.exports = class <%= name.filename %> extends Page {
     // eslint-disable-next-line class-methods-use-this
