@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-compatibility",
   "description": "Fozzie Compatibility - Service to check browser compatibilities and warn users with incompatible browsers",
-  "version": "0.1.0",
-  "maxBundleSize": "100kB",
+  "version": "0.2.0",
+  "maxBundleSize": "10kB",
   "main": "dist/f-compatibility.umd.js",
   "module": "dist/f-compatibility.es.js",
   "source": "src/index.js",
@@ -42,6 +42,7 @@
     "core-js": "3.6.5",
     "eslint": "7.32.0",
     "jest-extended": "0.11.5",
-    "vite": "2.4.4"
+    "vite": "2.4.4",
+    "bowser": "2.11.0"
   }
 }

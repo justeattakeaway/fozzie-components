@@ -15,9 +15,7 @@ const mocks = {
 describe('Link', () => {
     it('should be defined', () => {
         // Arrange
-        const propsData = {
-            href: '/'
-        };
+        const propsData = {};
 
         // Act
         const wrapper = shallowMount(VLink, {
@@ -28,14 +26,73 @@ describe('Link', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
+    it('should render a router link when given the `to` attribute', () => {
+        // Arrange
+        const propsData = {
+            to: '/'
+        };
+
+        // Act
+        const wrapper = shallowMount(VLink, {
+            propsData,
+            mocks,
+            stubs: {
+                RouterLink: RouterLinkStub
+            }
+        });
+
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+
+        // Assert
+        expect(routerLink.exists()).toBe(true);
+    });
+
+    it('should render an anchor tag when given the `href` attribute', () => {
+        // Arrange
+        const propsData = {
+            href: '/'
+        };
+
+        // Act
+        const wrapper = shallowMount(VLink, {
+            propsData,
+            mocks
+        });
+
+        const link = wrapper.find('[data-test-id="link-component"]');
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+
+        // Assert
+        expect(link.element.tagName).toBe('A');
+        expect(routerLink.exists()).toBe(false);
+    });
+
+    it('should render an anchor tag when given both the `href` and `to` attributes', () => {
+        // Arrange
+        const propsData = {
+            href: '/',
+            to: '/'
+        };
+
+        // Act
+        const wrapper = shallowMount(VLink, {
+            propsData,
+            mocks
+        });
+
+        const link = wrapper.find('[data-test-id="link-component"]');
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+
+        // Assert
+        expect(link.element.tagName).toBe('A');
+        expect(routerLink.exists()).toBe(false);
+    });
+
     describe('props :: ', () => {
         describe('isBold :: ', () => {
             it('should apply `o-link--bold` class to link if true', () => {
                 // Arrange
-                const propsData = {
-                    href: '/',
-                    isBold: true
-                };
+                const propsData = { isBold: true };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
@@ -53,10 +110,7 @@ describe('Link', () => {
         describe('hasTextDecoration :: ', () => {
             it('should apply `o-link--noDecoration` class to link if false', () => {
                 // Arrange
-                const propsData = {
-                    hasTextDecoration: false,
-                    href: '/'
-                };
+                const propsData = { hasTextDecoration: false };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
@@ -74,10 +128,7 @@ describe('Link', () => {
         describe('isFullWidth :: ', () => {
             it('should apply `o-link--full` class to link if true', () => {
                 // Arrange
-                const propsData = {
-                    href: '/',
-                    isFullWidth: true
-                };
+                const propsData = { isFullWidth: true };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
@@ -95,10 +146,7 @@ describe('Link', () => {
         describe('noLineBreak :: ', () => {
             it('should apply `o-link--noBreak` class to link if true', () => {
                 // Arrange
-                const propsData = {
-                    href: '/',
-                    noLineBreak: true
-                };
+                const propsData = { noLineBreak: true };
 
                 // Act
                 const wrapper = shallowMount(VLink, {
@@ -110,51 +158,6 @@ describe('Link', () => {
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--noBreak');
-            });
-        });
-
-        describe('isRouterLink ::', () => {
-            it('should render a router link when true', () => {
-                // Arrange
-                const propsData = {
-                    href: '/',
-                    isRouterLink: true
-                };
-
-                // Act
-                const wrapper = shallowMount(VLink, {
-                    propsData,
-                    mocks,
-                    stubs: {
-                        RouterLink: RouterLinkStub
-                    }
-                });
-
-                const routerLink = wrapper.findComponent(RouterLinkStub);
-
-                // Assert
-                expect(routerLink.exists()).toBe(true);
-            });
-
-            it('should render an anchor tag when false', () => {
-                // Arrange
-                const propsData = {
-                    href: '/',
-                    isRouterLink: false
-                };
-
-                // Act
-                const wrapper = shallowMount(VLink, {
-                    propsData,
-                    mocks
-                });
-
-                const link = wrapper.find('[data-test-id="link-component"]');
-                const routerLink = wrapper.findComponent(RouterLinkStub);
-
-                // Assert
-                expect(link.element.tagName).toBe('A');
-                expect(routerLink.exists()).toBe(false);
             });
         });
     });
@@ -172,7 +175,6 @@ describe('Link', () => {
                 ])('should return `%s` when `isExternalSite` is %s', (expected, isExternalSite) => {
                     // Arrange
                     const propsData = {
-                        href: '/',
                         isExternalSite,
                         target: '_blank'
                     };
@@ -193,10 +195,7 @@ describe('Link', () => {
                     [externalLinkMessage, true]
                 ])('should return `%s` when `isExternalSite` is %s', (expected, isExternalSite) => {
                     // Arrange
-                    const propsData = {
-                        href: '/',
-                        isExternalSite
-                    };
+                    const propsData = { isExternalSite };
 
                     // Act
                     const wrapper = shallowMount(VLink, {

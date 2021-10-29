@@ -12,6 +12,14 @@ v2.8.0
 - Spinner and loading state.
 
 
+v2.7.0
+------------------------------
+*October 27, 2021*
+
+### Added
+- `trackSelectedTimes` analytics event.
+
+
 v2.6.1
 ------------------------------
 *October 19, 2021*
