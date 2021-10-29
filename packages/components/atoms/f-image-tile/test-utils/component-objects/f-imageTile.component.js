@@ -1,16 +1,12 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-restaurantCard-selectors');
+const { COMPONENT } = require('./f-imageTile-selectors');
 
-module.exports = class RestaurantCard extends Page {
+module.exports = class ImageTile extends Page {
     constructor () {
-        super('molecule', 'restaurant-card-component');
+        super('atom', 'image-tile-component');
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    get component () {
-        // eslint-disable-next-line no-undef
-        return $(COMPONENT);
-    }
+    get component () { return $(COMPONENT); }
 
     load () {
         super.load(this.component);
@@ -27,4 +23,4 @@ module.exports = class RestaurantCard extends Page {
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
-};
+}

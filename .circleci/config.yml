@@ -88,6 +88,7 @@ commands:
             - packages/components/atoms/f-form-field/dist
             - packages/components/atoms/f-link/dist
             - packages/components/atoms/f-popover/dist
+            - packages/components/atoms/f-image-tile/dist
             - packages/components/atoms/f-spinner/dist
 
       - save_cache:
