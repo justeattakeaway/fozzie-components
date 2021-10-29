@@ -2325,19 +2325,19 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@6.0.0-beta.13":
-  version "6.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0-beta.13.tgz#971cbb09d77db3eecd19dd7c9a66ac0c9af4e80c"
-  integrity sha512-JsU6IWWfwRKONizkcUjzeFBq8Y2Za595zeSsCBp2I06wOqof11YV8b3twdk/nS+iWpxX9uhizyT1Dha8zQP/jw==
+"@justeat/fozzie@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0.tgz#95dbb84020852c5bf0917d9dbc2f7a49145efd8b"
+  integrity sha512-7ejpGh16qubDh8K3eOObUilm6RTPf+UIuyB2xfkpPpkKdV9OK2J1IFcW68nUK89mwTvvq+1t0AMN0xHOco5Brg==
   dependencies:
     "@justeat/f-utils" "2.0.0"
-    "@justeat/pie-design-tokens" "1.1.0"
+    "@justeat/pie-design-tokens" "1.2.0"
     include-media "1.4.10"
 
-"@justeat/pie-design-tokens@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.1.0.tgz#d93ad0411cd0457522d8bd466de521382682e05d"
-  integrity sha512-YtiJ7Uq+JZgYAJAFYr0e0an+p8RRk9MimAtqNnk2MFI5au7eNMFt3lTugwfoRgk4jKQfNg2RwTZe0tuuzzc8nw==
+"@justeat/pie-design-tokens@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.2.0.tgz#379b9f25b481405c501afc1960b459fd06459b40"
+  integrity sha512-uMVpHVWM3RORK8DzdXWi2Rey9jPCq4sWt64JL9pqN+f+l4ck61b/rpRRf060WvWCcU0Cy/zihbSrJy1hNG1SQg==
   dependencies:
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"
