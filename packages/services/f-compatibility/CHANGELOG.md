@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.2.0
+------------------------------
+*October 25, 2021*
+
+### Added
+- Using Bowser to check for incompatible browsers
+- Data for unsupported browsers (currently only IE11)
+- Content for English, Spanish and Italian tenants
+- Display banner for unsupported browsers (currently only IE11)
+
+
 v0.1.0
 ------------------------------
 *October 18, 2021*
