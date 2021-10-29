@@ -8,7 +8,7 @@ v3.5.1
 *October 29, 2021*
 
 ### Fixed
-- ResizeObserver disconnect not called when legacy mode or shouldAbsolutePositionReopenLink = false.
+- Ensure ResizeObserver disconnect is only called when bodyObserver exists
 
 
 v3.5.0
