@@ -932,6 +932,9 @@ export default {
             this.setSubmittingState(true);
 
             if (this.isFormValid()) {
+                if (!this.isLoggedIn) {
+                    this.$cookies.set('je-gtm-event', 'engagement|form_checkout_guest|success', { maxAge: 60 });
+                }
                 await this.submitCheckout();
             } else {
                 this.onInvalidCheckoutForm();

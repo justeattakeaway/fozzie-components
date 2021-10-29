@@ -3288,7 +3288,7 @@ describe('Checkout', () => {
             });
 
             describe('when invoked', () => {
-                it('should make a call to `updateMessage`', async () => {
+                it('should make a call to `updateMessage` and drop expected cookie', async () => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(true);
                     const wrapper = mount(VueCheckout, {
@@ -3303,11 +3303,14 @@ describe('Checkout', () => {
                         }
                     });
 
+                    $cookies.set = jest.fn();
+
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
                     expect(updateMessageSpy).toHaveBeenCalled();
+                    expect($cookies.set).toHaveBeenCalledWith('je-gtm-event', 'engagement|form_checkout_guest|success', { maxAge: 60 });
                 });
 
                 it('should call `setSubmittingState` first with `true` and then with `false`', async () => {
