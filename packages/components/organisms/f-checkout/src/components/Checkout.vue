@@ -1,8 +1,14 @@
 <template>
     <div>
+        <error-page
+            v-if="errorFormType"
+            :error-form-type="errorFormType"
+            :redirect-url="redirectUrl"
+            :service-type="serviceType" />
+
         <component
             :is="messageType.name"
-            v-if="message && !errorFormType"
+            v-else-if="message"
             ref="errorMessage"
             v-bind="messageType.props"
             @created="handleDialogCreation">
@@ -14,7 +20,7 @@
             @checkout-verify-age="verifyCustomerAge" />
 
         <div
-            v-else-if="shouldShowCheckoutForm"
+            v-else
             data-theme="jet"
             data-test-id="checkout-component">
             <card
@@ -131,12 +137,6 @@
                 </template>
             </card>
         </div>
-
-        <error-page
-            v-else-if="errorFormType"
-            :error-form-type="errorFormType"
-            :redirect-url="redirectUrl"
-            :service-type="serviceType" />
     </div>
 </template>
 
@@ -411,10 +411,6 @@ export default {
         * This can happen for newly created guest */
         shouldLoadCustomer () {
             return this.isLoggedIn && !this.customer.mobileNumber;
-        },
-
-        shouldShowCheckoutForm () {
-            return !this.errorFormType && !this.shouldShowAgeVerificationForm;
         },
 
         shouldShowAgeVerificationForm () {
