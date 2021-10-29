@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.2.0
+------------------------------
+*October 28, 2021*
+
+### Changed
+- Fixed multiple logic and linting issues with the Yeoman generator templates
 
 v5.1.0
 ------------------------------
