@@ -1,5 +1,6 @@
 const messages = {
     errorMessages: {
+        errorHeading: 'Error',
         pageLoad: {
             description: 'Sorry, there was a problem fetching your contact preferences. Please try again later.'
         }

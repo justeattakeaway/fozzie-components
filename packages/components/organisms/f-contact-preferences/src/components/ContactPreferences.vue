@@ -60,7 +60,9 @@
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center">
-                <h1>Error!</h1>
+                <h1>
+                    {{ $t('errorMessages.errorHeading') }}
+                </h1>
 
                 <p>
                     {{ $t(error.messageKey) }}
