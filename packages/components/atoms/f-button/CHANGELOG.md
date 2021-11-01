@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (to be added to next release)
+------------------------------
+*November 01, 2021*
+
+### Added
+- Component, visual and accessibility tests for icon-buttons
+- Updated `IconButton.stories` to show all types and sizes of icons - similar to `Button.stories`
+
 
 v3.2.0
 ------------------------------
