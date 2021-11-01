@@ -83,7 +83,7 @@ import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 
 import tenantConfigs from '../tenants';
-// import { GetPreferencesError } from '../exceptions';
+import { GetPreferencesError } from '../exceptions';
 import { mapToPreferencesViewModel } from '../services/mapping';
 
 export default {
@@ -141,11 +141,8 @@ export default {
             };
 
             this.preferences = mapToPreferencesViewModel(data).preferences;
-
-            // Uncomment for error state
-            // throw new GetPreferencesError('', 500);
         } catch (error) {
-            this.handleErrorState(error);
+            this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
         }
     },
 
