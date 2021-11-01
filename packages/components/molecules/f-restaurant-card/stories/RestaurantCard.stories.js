@@ -16,11 +16,6 @@ export const RestaurantCardComponent = (args, { argTypes }) => ({
     components: { RestaurantCard },
     props: Object.keys(argTypes),
     template:  `<restaurant-card v-bind="$props">
-                    <template v-slot:cuisines>
-                        <span>pizza</span>
-                        -
-                        <span>burgers</span>
-                    </template>
                     <template v-slot:new-label>
                         <p>Is New</p>
                     </template>
@@ -35,7 +30,8 @@ RestaurantCardComponent.args = {
         logoUrl: restaurantLogo,
         imgUrl: restaurantImage,
         isListItem: false,
-        url: 'some-restaurant/12345'
+        url: 'some-restaurant/12345',
+        cuisines: ['Mexican', 'Burgers', 'Chinese']
     },
 
     flags: {
