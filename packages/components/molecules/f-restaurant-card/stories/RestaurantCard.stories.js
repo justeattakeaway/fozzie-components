@@ -31,7 +31,10 @@ RestaurantCardComponent.args = {
         imgUrl: restaurantImage,
         isListItem: false,
         url: 'some-restaurant/12345',
-        cuisines: ['Mexican', 'Burgers', 'Chinese']
+        cuisines: ['Mexican', 'Burgers', 'Chinese'],
+        isPromoted: true,
+        hasStampcardsOffer: true,
+        badges: ['BTA Winner', 'Michelin Star', 'Tried & Tasted', 'New Ownership', 'Delivered by Menulog', 'A very very very super long unrealistic but necessary to test badge that hopefully never happens']
     },
 
     flags: {

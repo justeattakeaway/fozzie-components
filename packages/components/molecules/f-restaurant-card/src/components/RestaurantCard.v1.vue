@@ -13,13 +13,19 @@
         <restaurant-image
             v-if="imgUrl"
             :class="[$style['c-restaurantCard-img']]"
-            :img-url="imgUrl" />
+            :img-url="imgUrl">
+            <!-- Logo image -->
+            <restaurant-logo
+                v-if="logoUrl"
+                :class="$style['c-restaurantCard-logo']"
+                :logo-url="logoUrl" />
 
-        <!-- Logo image -->
-        <restaurant-logo
-            v-if="logoUrl"
-            :class="$style['c-restaurantCard-logo']"
-            :logo-url="logoUrl" />
+            <restaurant-badges
+                v-if="imageBadges.length"
+                :class="$style['c-restaurantCard-imageBadges']"
+                :test-id-position="'main-image'"
+                :badges="imageBadges" />
+        </restaurant-image>
 
         <!-- primary content -->
         <div :class="$style['c-restaurantCard-content']">
@@ -89,7 +95,11 @@
                 <component
                     :is="errorBoundary"
                     tier="3">
-                    <slot name="badges" />
+                    <restaurant-badges
+                        v-if="contentBadges.length"
+                        :class="$style['c-restaurantCard-badges']"
+                        :test-id-position="'inner-content'"
+                        :badges="contentBadges" />
                 </component>
                 <!-- END ERROR BOUNDARY -->
             </div>
@@ -117,6 +127,7 @@ import RestaurantImage from './subcomponents/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
 import RestaurantDish from './subcomponents/RestaurantDish.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
+import RestaurantBadges from './subcomponents/RestaurantBadges.vue';
 
 export default {
     name: 'RestaurantCardV1',
@@ -124,7 +135,8 @@ export default {
         RestaurantImage,
         RestaurantLogo,
         RestaurantDish,
-        RestaurantCuisines
+        RestaurantCuisines,
+        RestaurantBadges
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -161,10 +173,40 @@ export default {
             type: Array,
             default: () => []
         },
+        isPromoted: {
+            type: Boolean,
+            default: false
+        },
+        hasStampcardsOffer: {
+            type: Boolean,
+            default: false
+        },
         // feature flags
         flags: {
             type: Object,
             default: () => ({})
+        },
+        badges: {
+            type: Array,
+            default: () => []
+        }
+    },
+    computed: {
+        imageBadges () {
+            const badges = [];
+
+            if (this.isPromoted) {
+                badges.push({ text: 'Promoted', colorScheme: 'dark' });
+            }
+
+            if (this.hasStampcardsOffer) {
+                badges.push({ text: 'StampCards', colorScheme: 'warm' });
+            }
+
+            return badges;
+        },
+        contentBadges () {
+            return this.badges.map(badgeText => ({ text: badgeText }));
         }
     }
 };
@@ -181,7 +223,7 @@ export default {
   &.c-restaurantCard--listItem {
       @include media('>mid') {
         grid-gap: spacing() spacing(x2);
-        grid-template-columns: minmax(150px, 20%) 1fr;
+        grid-template-columns: minmax(180px, 20%) 1fr;
       }
   }
 
@@ -225,5 +267,14 @@ export default {
         grid-column: 1/3;
       }
   }
+}
+
+.c-restaurantCard-imageBadges {
+    bottom: spacing();
+    left: spacing(x2);
+    position: absolute;
+    @include media('>mid') {
+        bottom: spacing(x1.5);
+    }
 }
 </style>
