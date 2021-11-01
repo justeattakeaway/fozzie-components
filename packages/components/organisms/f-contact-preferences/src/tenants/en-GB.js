@@ -1,4 +1,9 @@
-export default {
+const messages = {
+    errorMessages: {
+        pageLoad: {
+            description: 'Sorry, there was a problem fetching your contact preferences. Please try again later.'
+        }
+    },
     heading: 'Contact Preferences',
     locale: 'en-GB',
     newsletter: {
@@ -14,4 +19,8 @@ export default {
         subtitle: 'Get order updates by'
     },
     saveChangesButton: 'Save changes'
+};
+
+export default {
+    messages
 };
