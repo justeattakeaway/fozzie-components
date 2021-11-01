@@ -1,88 +1,90 @@
-import {
-    withKnobs,
-    boolean,
-    select,
-    text
-} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
     CrossIcon,
     PlusIcon,
     MoreVerticalIcon
 } from '@justeat/f-vue-icons';
+import SharedButtonArgTypes from './sharedButtonArgTypes';
 import FButton from '../src/components/Button.vue';
-import { VALID_BUTTON_TYPES, VALID_BUTTON_SIZES } from '../src/constants';
 
 export default {
     title: 'Components/Atoms/f-button',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const IconButtonComponent = () => ({
+export const IconButtonComponent = (args, { argTypes }) => ({
     components: {
         FButton,
         CrossIcon,
         PlusIcon,
         MoreVerticalIcon
     },
-
-    props: {
-        buttonType: {
-            default: select('Button Type', VALID_BUTTON_TYPES.iconButton, 'primary')
-        },
-
-        buttonSize: {
-            default: select('Button Size', VALID_BUTTON_SIZES, 'medium')
-        },
-
-        isLoading: {
-            default: boolean('isLoading', false)
-        },
-
-        actionType: {
-            default: select('Action Type', ['button', 'submit', 'reset'], 'button')
-        },
-
-        href: {
-            default: text('href', '')
-        }
-    },
-
+    props: Object.keys(argTypes),
     template: `
-    <div class="storybook-grid storybook-grid-columns--3 storybook-grid-stack--lessThanWide">
-        <f-button
-            class="u-spacingRight u-spacingBottom--large"
-            :buttonType="buttonType"
-            :buttonSize="buttonSize"
-            :actionType="actionType"
-            :href="href"
-            :isIcon="true"
-            :isLoading="isLoading">
-            <CrossIcon />
-        </f-button>
-
-        <f-button
-            class="u-spacingRight u-spacingBottom--large"
-            :buttonType="buttonType"
-            :buttonSize="buttonSize"
-            :actionType="actionType"
-            :href="href"
-            :isIcon="true"
-            :isLoading="isLoading">
-            <PlusIcon />
-        </f-button>
-
-        <f-button
-            class="u-spacingRight u-spacingBottom--large"
-            :buttonType="buttonType"
-            :buttonSize="buttonSize"
-            :actionType="actionType"
-            :href="href"
-            :isIcon="true"
-            :isLoading="isLoading">
-            <MoreVerticalIcon />
-        </f-button>
+    <div>
+        <div class="u-spacingBottom--large storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide"
+        v-for="(list, index) in iconButtonLists">
+            <f-button
+                class="u-spacingBottom--large"
+                v-for="(icon, index) in list"
+                :key="index"
+                :buttonType="icon.type"
+                :buttonSize="icon.size"
+                :actionType="actionType"
+                :href="href"
+                :isIcon="true"
+                :isLoading="isLoading">
+                <CrossIcon />
+            </f-button>
+        </div>
     </div>`
 });
+IconButtonComponent.argTypes = {
+    isLoading: SharedButtonArgTypes.isLoading,
+    href: SharedButtonArgTypes.href,
+    actionType: SharedButtonArgTypes.actionType
+};
+
+IconButtonComponent.args = {
+    iconButtonLists: [
+        [
+            { type: 'primary', size: 'large', text: 'Large Primary Icon Button' },
+            { type: 'primary', size: 'medium', text: 'Medium Primary Icon Button' },
+            { type: 'primary', size: 'small', text: 'Small Primary Icon Button' },
+            { type: 'primary', size: 'xsmall', text: 'Xsmall Primary Icon Button' }
+        ],
+        [
+            { type: 'secondary', size: 'large', text: 'Large Secondary Icon Button' },
+            { type: 'secondary', size: 'medium', text: 'Medium Secondary Icon Button' },
+            { type: 'secondary', size: 'small', text: 'Small Secondary Icon Button' },
+            { type: 'secondary', size: 'xsmall', text: 'Xsmall Secondary Icon Button' }
+        ],
+        [
+            { type: 'ghost', size: 'large', text: 'Large Ghost Icon Button' },
+            { type: 'ghost', size: 'medium', text: 'Medium Ghost Icon Button' },
+            { type: 'ghost', size: 'small', text: 'Small Ghost Icon Button' },
+            { type: 'ghost', size: 'xsmall', text: 'Xsmall Ghost Icon Button' }
+        ],
+        [
+            { type: 'ghostTertiary', size: 'large', text: 'Large Ghost Tertiary Icon Button' },
+            { type: 'ghostTertiary', size: 'medium', text: 'Medium GhostTertiary Icon Button' },
+            { type: 'ghostTertiary', size: 'small', text: 'Small GhostTertiary Icon Button' },
+            { type: 'ghostTertiary', size: 'xsmall', text: 'Xsmall Ghost Tertiary Icon Button' }
+        ],
+        [
+            { type: 'inverse', size: 'large', text: 'Large Inverse Icon Button' },
+            { type: 'inverse', size: 'medium', text: 'Medium Inverse Icon Button' },
+            { type: 'inverse', size: 'small', text: 'Small Inverse Icon Button' },
+            { type: 'inverse', size: 'xsmall', text: 'Xsmall Inverse Icon Button' }
+        ],
+        [
+            { type: 'ghostInverse', size: 'large', text: 'Large Ghost Inverse Icon Button' },
+            { type: 'ghostInverse', size: 'medium', text: 'Medium Ghost Inverse Icon Button' },
+            { type: 'ghostInverse', size: 'small', text: 'Small Ghost Inverse Icon Button' },
+            { type: 'ghostInverse', size: 'xsmall', text: 'Xsmall Ghost Inverse Icon Button' }
+        ]
+    ]
+};
 
 IconButtonComponent.storyName = 'Icon Button';
+
