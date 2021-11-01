@@ -5,7 +5,8 @@
   "main": "dist/f-template-subnav.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
-    "dist"
+    "dist",
+    "test-utils"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-template-subnav",
   "contributors": [
