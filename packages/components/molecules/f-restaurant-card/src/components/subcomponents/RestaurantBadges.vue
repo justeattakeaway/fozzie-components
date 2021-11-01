@@ -1,14 +1,14 @@
 <template>
-    <ul
+    <div
         :class="[$style['c-restaurantBadges']]"
         :data-test-id="`restaurant-${testIdPosition}-badges`">
-        <li
+        <p
             v-for="(badge, index) in badges"
             :key="index"
             :class="[$style['c-restaurantBadges-badge']]">
             <restaurant-badge v-bind="badge" />
-        </li>
-    </ul>
+        </p>
+    </div>
 </template>
 
 <script>
