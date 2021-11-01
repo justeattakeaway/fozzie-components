@@ -2,10 +2,10 @@ const messages = {
     locale: 'en-AU',
 
     messages: {
-        titleActivationAvailable: 'Welcome back, {consumerGivenName}. Let\'s activate Menulog Pay on your account.',
-        titleActivationNotLoggedIn: 'Let\'s get you started with Menulog Pay.',
+        titleActivationAvailable: 'Welcome back, {consumerGivenName}. Let’s activate Menulog Pay on your account.',
+        titleActivationNotLoggedIn: 'Let’s get you started with Menulog Pay.',
         titleActivationSuccessful: 'All systems go.',
-        titleActivationFailed: ' We can\'t activate Menulog Pay on your account right now, sorry.',
+        titleActivationFailed: ' We can’t activate Menulog Pay on your account right now, sorry.',
         descriptionActivationAvailable1: 'Menulog Pay will be activated for',
         descriptionActivationAvailable2: 'Not you? Choose a different account or sign up.',
         descriptionActivationNotLoggedIn: 'Do you already have a Menulog account?',
