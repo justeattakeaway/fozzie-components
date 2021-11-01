@@ -47,13 +47,8 @@ describe('RestaurantCard.v1', () => {
                 cuisines: ['Mexican', 'Burgers', 'Chinese']
             };
 
-            const component = `<restaurant-cuisines
-                v-if="cuisines && cuisines.length > 0"
-                data-test-id="restaurant-cuisines"
-                :cuisines="cuisines" />`;
-
             // act
-            const wrapper = mount(RestaurantCardV1, { propsData, component });
+            const wrapper = mount(RestaurantCardV1, { propsData });
 
             // assert
             expect(wrapper.find('[error-boundary]>[data-test-id="restaurant-cuisines"]').exists()).toBe(true);
