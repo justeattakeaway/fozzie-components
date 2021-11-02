@@ -104,7 +104,7 @@ IconButtonComponent.args = {
         ],
         [
             { type: 'ghostTertiary', size: 'large', text: 'Large Ghost Tertiary Icon Button' },
-            { type: 'ghostTertiary', size: 'medium', text: 'Medium GhostTertiary Icon Button' },
+            { type: 'ghostTertiary', size: 'medium', text: 'Medium Ghost Tertiary Icon Button' },
             { type: 'ghostTertiary', size: 'small', text: 'Small GhostTertiary Icon Button' },
             { type: 'ghostTertiary', size: 'xsmall', text: 'Xsmall Ghost Tertiary Icon Button' }
         ],
