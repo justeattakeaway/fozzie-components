@@ -31,8 +31,6 @@ yarn add @justeat/f-navigation-links
 npm install @justeat/f-navigation-links
 ```
 
-
-
 ### Vue Applications
 
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
@@ -69,15 +67,26 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
+| Prop  | Type  | Default | Required | Description |
+| ----- | ----- | ------- | ----- | ----------- |
+| links | array | [] | true | An array of links objects (_see example below_) |
 
-### Events
-
-The events that can be subscribed to are as follows (if any):
-
-| Event | Description |
-| ----- | ----------- |
+```js
+[
+  {
+      id: 'accountNavLinkInfo'  // Test Data Id
+      url: '/account/info',     // Url
+      name: 'Your account',     // Text Label
+      selected: false           // Indicates if the currently selected item
+  },
+  {
+      id: 'accountNavLinkOrderHistory',
+      url: '/order-history',
+      name: 'Your orders',
+      selected: true
+  }
+]
+ ```
 
 ## Development
 
@@ -122,6 +131,5 @@ yarn test-component:chrome
 ```bash
 yarn test-a11y:chrome
 ```
-## Documentation to be completed once module is in stable state.
 
 

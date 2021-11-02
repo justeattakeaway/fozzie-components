@@ -4,6 +4,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.46.0
+------------------------------
+*October 25, 2021*
+
+### Added
+- `storybook-vue-router` setup to work with `f-link`.
+
+
+v0.45.1
+------------------------------
+*October 22, 2021*
+
+### Changed
+- Enabled expanded version of controls tab to show descriptions and default values of properties.
+- Some css grid classes to be used in stories layout.
+
+
 v0.45.0
 ------------------------------
 *October 4, 2021*

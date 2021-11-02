@@ -113,6 +113,37 @@ describe('CookieBanner', () => {
                     expect(wrapper.vm.bodyObserver.observe).toHaveBeenCalledWith(mockBodyHTMLHtmlElement);
                 });
 
+                it('should not create ResizeObserver when legacy shouldShowLegacyBanner = true', () => {
+                    // Arrange
+                    const propsData = { shouldShowLegacyBanner: true };
+
+                    // Act
+                    const wrapper = shallowMount(CookieBanner, {
+                        localVue,
+                        i18n,
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.bodyObserver).toBeUndefined();
+                });
+
+
+                it('should not create ResizeObserver when legacy shouldAbsolutePositionReopenLink = false', () => {
+                    // Arrange
+                    const propsData = { shouldShowLegacyBanner: true };
+
+                    // Act
+                    const wrapper = shallowMount(CookieBanner, {
+                        localVue,
+                        i18n,
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.bodyObserver).toBeUndefined();
+                });
+
                 it('should update data.bodyHeight with the contentRect.height when observe is triggered', async () => {
                     // Arrange
                     const propsData = {};

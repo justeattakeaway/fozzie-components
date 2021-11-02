@@ -4,6 +4,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.2.0
+------------------------------
+*October 27, 2021*
+
+### Removed
+- `isRouterLink` and `href` props, in favour of deferring to `$attrs`.
+
+
+v2.1.0
+------------------------------
+*October 25, 2021*
+
+### Added
+- Support for `router-link`.
+- `isRouterLink` prop.
+
+### Changed
+- `href` from implicit attribute to (required) prop.
+
+
 v2.0.0
 ------------------------------
 *October 5, 2021*

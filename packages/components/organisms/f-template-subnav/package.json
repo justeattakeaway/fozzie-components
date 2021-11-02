@@ -1,0 +1,56 @@
+{
+  "name": "@justeat/f-template-subnav",
+  "description": "Fozzie Template Sub Nav - SPA template with breadcrumb, lefthand navigation and centre slot",
+  "version": "0.2.0",
+  "main": "dist/f-template-subnav.umd.min.js",
+  "maxBundleSize": "20kB",
+  "files": [
+    "dist",
+    "test-utils"
+  ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-template-subnav",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "vue-cli-service build --target lib --name f-template-subnav ./src/index.js",
+    "lint": "vue-cli-service lint",
+    "lint:fix": "yarn lint --fix",
+    "lint:style": "vue-cli-service lint:style",
+    "test": "vue-cli-service test:unit"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+  },
+  "devDependencies": {
+    "@justeat/f-breadcrumbs": "3.1.0",
+    "@justeat/f-navigation-links": "0.2.0",
+    "@justeat/f-wdio-utils": "0.3.0",
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
+    "@vue/cli-plugin-babel": "4.4.6",
+    "@vue/cli-plugin-eslint": "3.9.2",
+    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/test-utils": "1.0.3",
+    "node-sass-magic-importer": "5.3.2"
+  }
+}

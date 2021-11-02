@@ -4,9 +4,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v0.4.0
 ------------------------------
-*October 13, 2021*
+*November 1, 2021*
+
+### Added
+- Initial error handling.
+- Initial error card.
+- Implementation of i18n.
+- Expose `test-utils` folder.
+
+
+v0.3.0
+------------------------------
+*October 18, 2021*
+
+### Added
+- Initial mapping and hard-coded mock
 
 ### Changed
 - Updated version of `f-button`.

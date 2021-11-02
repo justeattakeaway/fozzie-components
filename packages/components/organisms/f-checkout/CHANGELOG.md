@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.0
+------------------------------
+*October 29, 2021*
+
+### Removed
+- Spinner and loading state.
+
+
+v2.7.0
+------------------------------
+*October 27, 2021*
+
+### Added
+- `trackSelectedTimes` analytics event.
+
+
 v2.6.1
 ------------------------------
 *October 19, 2021*

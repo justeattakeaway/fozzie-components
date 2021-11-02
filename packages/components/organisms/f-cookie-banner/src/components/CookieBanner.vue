@@ -39,13 +39,13 @@
 
                         <p :class="$style['c-cookieBanner-text']">
                             {{ copy.textLine3 }}
-                            <a
+                            <v-link
                                 data-test-id="cookie-policy-link"
+                                is-distinct
                                 :href="copy.cookiePolicyLinkUrl"
-                                :class="$style['c-cookieBanner-link']"
                                 target="_blank">
                                 {{ copy.cookiePolicyLinkText }}
-                            </a>
+                            </v-link>
                             {{ copy.textLine4 }}
                         </p>
                     </div>
@@ -100,6 +100,8 @@ import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import MegaModal from '@justeat/f-mega-modal';
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
+import VLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
 import LegacyBanner from './LegacyBanner.vue';
 import ReopenBannerLink from './ReopenBannerLink.vue';
 import tenantConfigs from '../tenants';
@@ -110,7 +112,8 @@ export default {
         ButtonComponent,
         LegacyBanner,
         MegaModal,
-        ReopenBannerLink
+        ReopenBannerLink,
+        VLink
     },
 
     props: {
@@ -206,8 +209,9 @@ export default {
     },
 
     destroyed () {
-        if (typeof ResizeObserver === 'function') {
-            this.bodyObserver.disconnect();
+        if (typeof window === 'object') {
+            // eslint-disable-next-line no-unused-expressions
+            this.bodyObserver?.disconnect();
         }
     },
 
@@ -477,6 +481,7 @@ export default {
     .c-cookieBanner-text {
         margin: 0;
         padding: 0;
+        @include font-size(body-s);
     }
 
     .c-cookieBanner-content {

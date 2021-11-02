@@ -6,7 +6,11 @@ module.exports = class RestaurantCard extends Page {
         super('molecule', 'restaurant-card-component');
     }
 
-    get component () { return $(COMPONENT); }
+    // eslint-disable-next-line class-methods-use-this
+    get component () {
+        // eslint-disable-next-line no-undef
+        return $(COMPONENT);
+    }
 
     load () {
         super.load(this.component);

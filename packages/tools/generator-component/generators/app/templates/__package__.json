@@ -2,7 +2,8 @@
   "name": "@justeat/f-<%= name.default %>",
   "description": "Fozzie <%= name.readme %> - <%= description %>",
   "version": "0.1.0",
-  "main": "dist/f-<%= name.default %>.umd.min.js", <% if(config.needsBundlewatch) { %>
+  "main": "dist/f-<%= name.default %>.umd.min.js"<% if(config.isService) { %>,
+  "module": "dist/f-<%= name.default %>.es.js"<% } %><% if(config.needsBundlewatch) { %>,
   "maxBundleSize": "<%= bundlewatchMaxSize %>kB",<% } %>
   "files": [
     "dist"<% if(config.needsComponentTests) { %>,
@@ -28,35 +29,38 @@
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "prepublishOnly": "yarn lint && yarn test && yarn build"<% if(config.isComponent) { %>,
+    "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js"<% } %><% if(config.isService) { %>,
+    "build": "vite build"<% } %><% if(config.isComponent) { %>,
+    "lint": "vue-cli-service lint"<% } else { %>,
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\""<% } %>,
     "lint:fix": "yarn lint --fix"<% if(config.isComponent) { %>,
-    "lint:style": "vue-cli-service lint:style"<% } %>,
+    "lint:style": "vue-cli-service lint:style"<% } else { %>,
+    "test:coverage": "jest test:unit --coverage"<% } %>,
     "test": "vue-cli-service test:unit"<% if(config.needsComponentTests) { %>,
-    "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"<% if(storybook.componentCategory === 'Organisms') { %>,
-    "report:test-component:chome": "cross-env-shell JE_ENV=ci TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn:allure:open",
-    "allure:open": "yarn allure:clean && allure open",
-    "allure:clean": "rimraf ../../../../test/results/allure" <% } %> <% } %>
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"<% } %> 
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
-  ],
+  ],<% if(config.isComponent) { %>
   "dependencies": {
     "@justeat/f-services": "1.7.0"<% if(config.needsTestingApiMocks) { %>,
     "axios": "0.21.1"<% } %>
-  },
+  },<% } %>
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
+<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "0.3.0",
+    "node-sass-magic-importer": "5.3.2",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@justeat/f-wdio-utils": "0.3.0",
-    "@vue/test-utils": "1.0.3"<% if(config.isComponent) { %>,
-    "node-sass-magic-importer": "5.3.2"<% } %>
+    "@vue/test-utils": "1.0.3"<% } else { %>    "vite": "2.6.9",
+    "core-js": "3.6.5",
+    "eslint": "7.32.0",
+    "jest-extended": "0.11.5"<% } %>
   }
 }

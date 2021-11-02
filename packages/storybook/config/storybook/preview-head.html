@@ -58,9 +58,26 @@
     .c-matrix-gradeB { background-color: #fff9df; }
     .c-matrix-gradeC { background-color: #ffe9ea; }
 
-    .wrapper--horizontal {
-        display: flex;
-        width: 300px;
-        justify-content: space-between
+    .storybook-grid {
+        display: grid;
+        grid-gap: 16px;
+        place-items: center;
+        justify-content: space-around;
+        align-content: start;
     }
+
+    .storybook-grid-columns--4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .storybook-grid-columns--3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 1024px) {
+        .storybook-grid-stack--lessThanWide {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
 </style>

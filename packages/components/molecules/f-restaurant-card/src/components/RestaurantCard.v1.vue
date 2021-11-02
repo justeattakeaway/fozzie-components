@@ -1,86 +1,134 @@
 <template>
-    <!-- NOTE: This is all placeholder markup, attributes and comments.
-    This is not indicative of the actual HTML tags and attributes we
-    will use (which will be much more accessible and semantic) -->
-    <section
-        :class="$style['c-restaurantCard']"
-        data-test-id="restaurantCard-component">
-        <a
-            :href="url"
-            @click="$emit('restaurant-card-clicked')">
+    <a
+        :href="url"
+        :class="[
+            $style['c-restaurantCard'], {
+                [$style['c-restaurantCard--listItem']]: isListItem,
+                [$style['c-restaurantCard--hasImg']]: !!imgUrl
+            }]"
+        data-test-id="restaurantCard-component"
+        @click="$emit('restaurant-card-clicked')">
 
-            <!-- background image -->
-            <img
-                src=""
-                alt=""
-                loading="lazy"
-                data-test-id="restaurant-cuisine-image">
+        <!-- background image -->
+        <restaurant-image
+            v-if="imgUrl"
+            :class="[$style['c-restaurantCard-img']]"
+            :img-url="imgUrl" />
 
-            <!-- Logo image -->
-            <img
-                src=""
-                alt=""
-                width="50"
-                height="50"
-                loading="lazy"
-                data-test-id="restaurant_logo">
+        <!-- Logo image -->
+        <restaurant-logo
+            v-if="logoUrl"
+            :class="$style['c-restaurantCard-logo']"
+            :logo-url="logoUrl" />
 
+        <!-- primary content -->
+        <div :class="$style['c-restaurantCard-content']">
             <!-- Restaurant Name -->
             <h3
+                :class="$style['c-restaurantCard-name']"
                 data-test-id="restaurant_name"
                 data-search-name>
-                Fake Restaurant
+                {{ name }}
             </h3>
 
             <!-- Cuisines -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="cuisines" />
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <restaurant-cuisines
+                    v-if="cuisines.length > 0"
+                    data-test-id="restaurant-cuisines"
+                    :cuisines="cuisines" />
+            </component>
             <!-- END ERROR BOUNDARY -->
 
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="new-label" />
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="new-label" />
+            </component>
             <!-- END ERROR BOUNDARY -->
 
             <!-- Ratings -->
             <!-- START ERROR BOUNDARY -->
-            <slot name="ratings" />
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="ratings" />
+            </component>
             <!-- END ERROR BOUNDARY -->
 
             <!-- Offline Icon -->
-            <div>Offline Icon</div>
 
             <!-- Meta Items List -->
-            <slot name="meta-items" />
+            <!-- START ERROR BOUNDARY -->
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="meta-items" />
+            </component>
+            <!-- END ERROR BOUNDARY -->
 
             <!-- Local Legend label -->
-            <slot name="local-legend" />
+            <!-- START ERROR BOUNDARY -->
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="local-legend" />
+            </component>
+            <!-- END ERROR BOUNDARY -->
 
             <!-- Badges -->
             <div>
                 <!-- misc badges -->
                 <!-- START ERROR BOUNDARY -->
-                <slot name="badges" />
+                <component
+                    :is="errorBoundary"
+                    tier="3">
+                    <slot name="badges" />
+                </component>
                 <!-- END ERROR BOUNDARY -->
-
-                <!-- promoted badge -->
-                <span>Promoted</span>
             </div>
-
             <!-- Optional items i.e. dish search results -->
-            <slot name="optional-items" />
-        </a>
-    </section>
+            <!-- START ERROR BOUNDARY -->
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <slot name="optional-items" />
+            </component>
+            <!-- END ERROR BOUNDARY -->
+
+        </div>
+
+        <!-- optional items -->
+        <restaurant-dish
+            v-if="!disabled"
+            :class="[$style['c-restaurantCard-dish']]" />
+    </a>
 </template>
 
 <script>
+import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
+import RestaurantImage from './subcomponents/RestaurantImage.vue';
+import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
+import RestaurantDish from './subcomponents/RestaurantDish.vue';
+import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 
 export default {
     name: 'RestaurantCardV1',
+    components: {
+        RestaurantImage,
+        RestaurantLogo,
+        RestaurantDish,
+        RestaurantCuisines
+    },
+    mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
-        // restaurant & display data
         id: {
             type: String,
             default: null
@@ -93,13 +141,25 @@ export default {
             type: String,
             default: null
         },
-        logo: {
+        logoUrl: {
+            type: String,
+            default: null
+        },
+        imgUrl: {
             type: String,
             default: null
         },
         disabled: {
             type: Boolean,
             default: false
+        },
+        isListItem: {
+            type: Boolean,
+            default: true
+        },
+        cuisines: {
+            type: Array,
+            default: () => []
         },
         // feature flags
         flags: {
@@ -111,14 +171,59 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-restaurantCard {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    border: 1px solid purple;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
+  text-decoration: none;
+  display: grid;
+  grid-gap: spacing(x2);
+  grid-template-columns: 1fr;
+  position: relative;
+
+  &.c-restaurantCard--listItem {
+      @include media('>mid') {
+        grid-gap: spacing() spacing(x2);
+        grid-template-columns: minmax(150px, 20%) 1fr;
+      }
+  }
+
+  &:hover {
+      .c-restaurantCard-name {
+          text-decoration: underline;
+      }
+  }
 }
 
+.c-restaurantCard-img {
+  width: 100%;
+  height: 200px; // TODO: agree with design
+
+  .c-restaurantCard--listItem & {
+      @include media('>mid') {
+        min-height: 125px; // TODO: agree with design
+        height: 100%;
+      }
+  }
+}
+
+.c-restaurantCard-logo {
+  top: spacing(x2);
+  left: spacing(x2);
+  position: absolute;
+}
+
+.c-restaurantCard-content {
+  .c-restaurantCard--listItem & {
+    @include media('>mid') {
+      padding: spacing() 0;
+      grid-column: 2/3;
+    }
+  }
+}
+
+.c-restaurantCard-dish {
+  .c-restaurantCard--listItem & {
+      @include media('>mid') {
+        grid-column: 1/3;
+      }
+  }
+}
 </style>
