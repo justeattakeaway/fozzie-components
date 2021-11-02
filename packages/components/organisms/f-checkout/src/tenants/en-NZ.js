@@ -4,43 +4,69 @@ const messages = {
     labels: {
         mobileNumber: 'Mobile Number',
         addressGroup: 'Address',
-        line1: 'Building number and street name',
-        line2: 'Level or unit number (Optional)',
-        locality: 'Town or city',
-        postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
         collectionOrderMethod: 'Pick-up time',
-        dineinOrderMethod: 'Dine in time',
-        tableIdentifier: 'Table number or name'
+        dineinOrderMethod: 'Dine in time'
     },
 
-    validationMessages: {
+    formFields: {
         mobileNumber: {
-            requiredError: 'Please enter your phone number',
-            invalidCharError: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
-        },
-        addressLine1: {
-            requiredError: 'Please enter the first line of your address'
-        },
-        locality: {
-            requiredError: 'Please enter your town or city'
-        },
-        postcode: {
-            requiredError: 'Please enter your full postcode',
-            invalidCharError: 'This doesn’t look like a NZ postcode, can you enter it again please?'
-        },
-        firstName: {
-            requiredError: 'Please enter your first name'
-        },
-        lastName: {
-            requiredError: 'Please enter your last name'
-        },
-        email: {
-            requiredError: 'Please enter a valid email address'
+            label: 'Mobile Number',
+            validationMessages: {
+                required: 'Please enter your phone number',
+                invalid: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
+            }
         },
         tableIdentifier: {
-            requiredError: 'Please include your table name/number',
-            maxLengthError: 'The table number/name exceeds the maximum length (12)'
+            label: 'Table number or name',
+            validationMessages: {
+                required: 'Please include your table name/number',
+                invalid: 'The table number/name exceeds the maximum length (12)'
+            }
+        },
+        guest: {
+            firstName: {
+                label: 'First name',
+                validationMessages: {
+                    required: 'Please enter your first name'
+                }
+            },
+            lastName: {
+                label: 'Last name',
+                validationMessages: {
+                    required: 'Please enter your last name'
+                }
+            },
+            email: {
+                label: 'Email',
+                validationMessages: {
+                    required: 'Please enter a valid email address'
+                }
+            }
+        },
+        address: {
+            line1: {
+                label: 'Building number and street name',
+                validationMessages: {
+                    required: 'Please enter the first line of your address'
+                }
+            },
+            line2: {
+                label: 'Level or unit number (Optional)'
+            },
+            locality: {
+                label: 'Town or city',
+                validationMessages: {
+                    required: 'Please enter your town or city'
+                }
+            },
+            postcode: {
+                label: 'Postcode',
+                validationMessages: {
+                    required: 'Please enter your full postcode',
+                    invalid: 'This doesn’t look like a postcode, can you enter it again please?'
+                }
+            }
         }
     },
 
@@ -165,12 +191,6 @@ const messages = {
             placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
         }
 
-    },
-
-    guest: {
-        firstName: 'First name',
-        lastName: 'Last name',
-        email: 'Email'
     },
 
     checkoutHeader: {

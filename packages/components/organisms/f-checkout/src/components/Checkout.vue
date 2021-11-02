@@ -51,7 +51,7 @@
                         name="mobile-number"
                         maxlength="16"
                         input-type="tel"
-                        :label-text="$t('labels.mobileNumber')"
+                        :label-text="$t('formFields.mobileNumber.label')"
                         :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
                         aria-describedby="mobile-number-error"
                         :aria-invalid="isMobileNumberInvalid"
@@ -64,14 +64,14 @@
                                 id="mobile-number-error"
                                 data-js-error-message
                                 data-test-id="error-mobile-number-empty">
-                                {{ $t('validationMessages.mobileNumber.requiredError') }}
+                                {{ $t('formFields.mobileNumber.validationMessages.required') }}
                             </error-message>
                             <error-message
                                 v-if="isMobileNumberInvalid"
                                 id="mobile-number-error"
                                 data-js-error-message
                                 data-test-id="error-mobile-number-invalid">
-                                {{ $t('validationMessages.mobileNumber.invalidCharError') }}
+                                {{ $t('formFields.mobileNumber.validationMessages.invalid') }}
                             </error-message>
                         </template>
                     </form-field>
@@ -81,7 +81,7 @@
                         :value="tableIdentifier"
                         input-type="text"
                         name="table-identifier"
-                        :label-text="$t('labels.tableIdentifier')"
+                        :label-text="$t('formFields.tableIdentifier.label')"
                         :has-error="isTableIdentifierEmpty"
                         maxlength="12"
                         @input="updateTableIdentifier($event)">
@@ -90,7 +90,7 @@
                                 v-if="isTableIdentifierEmpty"
                                 data-js-error-message
                                 data-test-id="error-table-identifier-empty">
-                                {{ $t('validationMessages.tableIdentifier.requiredError') }}
+                                {{ $t('formFields.tableIdentifier.validationMessages.required') }}
                             </error-message>
                         </template>
                     </form-field>

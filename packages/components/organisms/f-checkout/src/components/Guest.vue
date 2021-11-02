@@ -8,7 +8,7 @@
             :aria-invalid="isFirstNameEmpty"
             name="guest-first-name"
             maxlength="100"
-            :label-text="$t('guest.firstName')"
+            :label-text="$t('formFields.guest.firstName.label')"
             :has-error="isFirstNameEmpty"
             @input="updateCustomerDetails({ 'firstName': $event })">
             <template #error>
@@ -17,7 +17,7 @@
                     id="first-name-error"
                     data-js-error-message
                     data-test-id="error-first-name-empty">
-                    {{ $t('validationMessages.firstName.requiredError') }}
+                    {{ $t('formFields.guest.firstName.validationMessages.required') }}
                 </error-message>
             </template>
         </form-field>
@@ -26,7 +26,7 @@
             :value="customer.lastName"
             name="guest-last-name"
             maxlength="100"
-            :label-text="$t('guest.lastName')"
+            :label-text="$t('formFields.guest.lastName.label')"
             aria-describedby="last-name-error"
             :aria-invalid="isLastNameEmpty"
             :has-error="isLastNameEmpty"
@@ -37,7 +37,7 @@
                     id="last-name-error"
                     data-js-error-message
                     data-test-id="error-last-name-empty">
-                    {{ $t('validationMessages.lastName.requiredError') }}
+                    {{ $t('formFields.guest.lastName.validationMessages.required') }}
                 </error-message>
             </template>
         </form-field>
@@ -47,7 +47,7 @@
             name="guest-email"
             input-type="email"
             maxlength="50"
-            :label-text="$t('guest.email')"
+            :label-text="$t('formFields.guest.email.label')"
             :has-error="!isEmailValid"
             aria-describedby="email-error"
             :aria-invalid="!isEmailValid"
@@ -59,7 +59,7 @@
                     id="email-error"
                     data-js-error-message
                     data-test-id="error-email-invalid">
-                    {{ $t('validationMessages.email.requiredError') }}
+                    {{ $t('formFields.guest.email.validationMessages.required') }}
                 </error-message>
             </template>
         </form-field>
