@@ -143,7 +143,7 @@ describe('f-button Desktop visual tests', () => {
         });
     });
 
-    describe('primary, secondary, inverse, ghostInverse, ghostTertiary, and ghost icon buttons in all 4 sizes', () => {
+    describe('all valid iconButton types in all sizes', () => {
         it('should be displayed', () => {
             // Arrange
             button = new IconButton();
