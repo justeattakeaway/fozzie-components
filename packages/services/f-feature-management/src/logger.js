@@ -1,20 +1,20 @@
 /**
- * Default logger implementation.  The interface matches that used by various Fozzie components.
+ * Default logger implementation.  The interface is a subset of that used in f-logger
  */
 const logger = {
-    logError (logMessage, store, logPayload = {}) {
+    logError (logMessage) {
         if (console && console.error) {
-            console.error(logMessage, logPayload);
+            console.error(logMessage);
         }
     },
-    logWarn (logMessage, store, logPayload = {}) {
+    logWarn (logMessage) {
         if (console && console.warn) {
-            console.warn(logMessage, logPayload);
+            console.warn(logMessage);
         }
     },
-    logInfo (logMessage, store, logPayload = {}) {
+    logInfo (logMessage) {
         if (console && console.info) {
-            console.info(logMessage, logPayload);
+            console.info(logMessage);
         }
     }
 };
