@@ -2185,6 +2185,15 @@
     lodash.debounce "4.0.8"
     mitt "3.0.0"
 
+"@justeat/f-searchbox@6.3.0":
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.3.0.tgz#927a567ad0f34ac19a83a8cad90003c0db68040e"
+  integrity sha512-ac59+8MBa4i5iXDoqbU5rOUSqkvahU6yLlBGBVL0ttaUyPdDe69Hw52A9BdTFKuYkgG0esI6GQajfAToK9t90A==
+  dependencies:
+    caniuse-lite "1.0.30001251"
+    lodash.debounce "4.0.8"
+    mitt "3.0.0"
+
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"

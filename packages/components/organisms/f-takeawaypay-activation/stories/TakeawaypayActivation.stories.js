@@ -2,6 +2,7 @@ import {
      withKnobs, text, select, boolean
  } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
+import { locales } from '@justeat/storybook/constants/globalisation';
 import TakeawaypayActivation from '../src/components/TakeawaypayActivation.vue';
 import ApiMock from '../src/demo/apiMock';
 
@@ -72,6 +73,9 @@ const activateOptions = {
 export const TakeawaypayActivationComponent = () => ({
     components: { TakeawaypayActivation },
     props: {
+        locale: {
+            default: select('Locale', [locales.gb, locales.au], locales.gb)
+        },
         authentication: {
             default: select('Authentication', authenticationOptions)
         },
@@ -115,8 +119,9 @@ export const TakeawaypayActivationComponent = () => ({
             ':activate-url="activationUrl" ' +
             ':authToken="authToken" ' +
             ':employee-id="employeeId" ' +
+            ':locale="locale" ' +
             // eslint-disable-next-line no-template-curly-in-string
-            ':key="`${authToken},${getActivationStatusUrl},${activationUrl}`" />'
+            ':key="`${authToken},${getActivationStatusUrl},${activationUrl},${locale}`" />'
 });
 
 TakeawaypayActivationComponent.storyName = 'f-takeawaypay-activation';
