@@ -45,7 +45,12 @@ export const ButtonComponent = (args, { argTypes }) => ({
 });
 
 ButtonComponent.argTypes = {
-    ...SharedButtonArgTypes
+    ...SharedButtonArgTypes,
+    actionType: {
+        control: { type: 'select', options: ['button', 'submit', 'reset'] },
+        description: 'Choose the action type of the button',
+        defaultValue: 'button'
+    }
 };
 
 ButtonComponent.args = {

@@ -1,15 +1,23 @@
 import { withA11y } from '@storybook/addon-a11y';
 import {
-    CrossIcon,
-    PlusIcon,
-    MoreVerticalIcon
+    CrossIcon, PlusIcon, MoreVerticalIcon
 } from '@justeat/f-vue-icons';
 import SharedButtonArgTypes from './sharedButtonArgTypes';
 import FButton from '../src/components/Button.vue';
 
 export default {
     title: 'Components/Atoms/f-button',
-    decorators: [withA11y]
+    decorators: [withA11y],
+    parameters: {
+        backgrounds: {
+            values: [
+                { name: 'Grey', value: '#f5f5f5' },
+                { name: 'Dark', value: '#333' },
+                { name: 'Blue', value: '#bfe6ff' }
+            ],
+            default: 'Blue'
+        }
+    }
 };
 
 export const IconButtonComponent = (args, { argTypes }) => ({
@@ -35,6 +43,41 @@ export const IconButtonComponent = (args, { argTypes }) => ({
                 :isIcon="true"
                 :isLoading="isLoading">
                 <CrossIcon />
+                <span class="is-visuallyHidden">
+                    {{ icon.text }}
+                </span>
+            </f-button>
+
+            <f-button
+                class="u-spacingBottom--large"
+                v-for="(icon, index) in list"
+                :key="index"
+                :buttonType="icon.type"
+                :buttonSize="icon.size"
+                :actionType="actionType"
+                :href="href"
+                :isIcon="true"
+                :isLoading="isLoading">
+                <PlusIcon />
+                <span class="is-visuallyHidden">
+                    {{ icon.text }}
+                </span>
+            </f-button>
+
+            <f-button
+                class="u-spacingBottom--large"
+                v-for="(icon, index) in list"
+                :key="index"
+                :buttonType="icon.type"
+                :buttonSize="icon.size"
+                :actionType="actionType"
+                :href="href"
+                :isIcon="true"
+                :isLoading="isLoading">
+                <MoreVerticalIcon />
+                <span class="is-visuallyHidden">
+                    {{ icon.text }}
+                </span>
             </f-button>
         </div>
     </div>`
@@ -42,7 +85,11 @@ export const IconButtonComponent = (args, { argTypes }) => ({
 IconButtonComponent.argTypes = {
     isLoading: SharedButtonArgTypes.isLoading,
     href: SharedButtonArgTypes.href,
-    actionType: SharedButtonArgTypes.actionType
+    actionType: {
+        control: { type: 'select', options: ['button', 'submit', 'reset'] },
+        description: 'Choose the action type of the button',
+        defaultValue: 'button'
+    }
 };
 
 IconButtonComponent.args = {

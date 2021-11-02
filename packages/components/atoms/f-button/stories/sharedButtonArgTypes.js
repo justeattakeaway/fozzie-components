@@ -24,10 +24,5 @@ export default {
         control: { type: 'text' },
         description: 'Should be presented for the button to become a link <a> element',
         defaultValue: ''
-    },
-    actionType: {
-        control: { type: 'select', options: ['button', 'submit', 'reset'] },
-        description: 'Choose the action type of the button',
-        defaultValue: 'button'
     }
 };
