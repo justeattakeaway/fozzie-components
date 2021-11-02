@@ -80,6 +80,9 @@
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import lightFormat from 'date-fns/lightFormat';
+import {
+    da, enAU, enNZ, enGB, es, it, nb
+} from 'date-fns/locale';
 
 import CardCase from './CardCase.vue';
 
@@ -223,9 +226,7 @@ export default {
     },
 
     mounted () {
-        this.getDateFnsLocale(this.copy.locale).then(locale => {
-            this.dateFnsLocale = locale;
-        });
+        this.dateFnsLocale = this.getDateFnsLocale(this.copy.locale);
     },
 
     inject: [
@@ -237,33 +238,33 @@ export default {
          * Takes the locale and lazyloads the correct date locale from the date-fns library
          * @param locale
          * @returns {
-         *  Promise<module:date-fns/locale/da> |
-         *  Promise<module:date-fns/locale/en-AU> |
-         *  Promise<module:date-fns/locale/en-GB> |
-         *  Promise<module:date-fns/locale/en-NZ> |
-         *  Promise<module:date-fns/locale/es> |
-         *  Promise<module:date-fns/locale/it> |
-         *  Promise<module:date-fns/locale/nb>
+         *  da |
+         *  enAU |
+         *  enGB |
+         *  enNZ |
+         *  es |
+         *  it |
+         *  nb
          * }
          */
         getDateFnsLocale (locale) {
             switch (locale) {
                 case 'da-DK':
-                    return import(/* webpackChunkName: "date-fns-locale-da" */ 'date-fns/locale/da');
+                    return da;
                 case 'en-AU':
-                    return import(/* webpackChunkName: "date-fns-locale-en-AU" */ 'date-fns/locale/en-AU');
+                    return enAU;
                 case 'en-GB':
                 case 'en-IE':
                 default:
-                    return import(/* webpackChunkName: "date-fns-locale-en-GB" */ 'date-fns/locale/en-GB');
+                    return enGB;
                 case 'en-NZ':
-                    return import(/* webpackChunkName: "date-fns-locale-en-NZ" */ 'date-fns/locale/en-NZ');
+                    return enNZ;
                 case 'es-ES':
-                    return import(/* webpackChunkName: "date-fns-locale-es" */ 'date-fns/locale/es');
+                    return es;
                 case 'it-IT':
-                    return import(/* webpackChunkName: "date-fns-locale-it" */ 'date-fns/locale/it');
+                    return it;
                 case 'nb-NO':
-                    return import(/* webpackChunkName: "date-fns-locale-nb" */ 'date-fns/locale/nb');
+                    return nb;
             }
         }
     }
