@@ -1,4 +1,4 @@
-# Feature Management 
+# Feature Management
 
 This service allows querying of feature flags as configured using the Feature Management service.
 
@@ -14,7 +14,7 @@ The expected scenario where you might have the configuration to hand might be wh
 
 ### Polling
 
-Where the page is likely to be long-lived (e.g. in an SPA) you are going to want to poll periodically for config. Note that the CDN will be serving files with `Cache-Control` headers, hence the "polling" may just read the file from the browser cache.  `ETag`s are also used.  The point here being that a frequent polling interval is not destined to result in continued network calls from the client.  Talk to the Experimentation Platform team about cache policy. 
+Where the page is likely to be long-lived (e.g. in an SPA) you are going to want to poll periodically for config. Note that the CDN will be serving files with `Cache-Control` headers, hence the "polling" may just read the file from the browser cache.  `ETag`s are also used.  The point here being that a frequent polling interval is not destined to result in continued network calls from the client.  Talk to the Experimentation Platform team about cache policy.
 
 ### Example
 
@@ -29,20 +29,25 @@ const contextGetter = () => ({
 })
 
 const settings = { //see table below for details
-  initialConfigAsJson: '{ ... }', 
+  initialConfigAsJson: '{ ... }',
   keyPrefix: 'je-coreweb',
   cdn: {
-    scope: 'je-coreweb', 
+    scope: 'je-coreweb',
     environment: 'production',
     key: '<key for scope/env>',
     poll: true,
     pollInterval: 30000
   },  
   contextGetter,
-  onUpdated: () => { } 
+  onUpdated: () => { 
+    /* ... React to a config file update ... */ 
+  },
+  onTrack: (experimentName, experimentVariant) => { 
+    /* ... Track a triggered experiment ... */ 
+  }
 };
 
-const featureManagement = await createFeatureManagementInstance(settings);
+const featureManagement = await createFeatureManagementInstance(settings, optionalhttpClient);
 
 // e.g.
 const myFeatureValue = featureManagement.getValue('my-feature-value');
@@ -55,6 +60,7 @@ const myFeatureValue = featureManagement.getValue('my-feature-value');
 |`initialConfigAsJson`|string|No|Can be passed in if available prior to initialisation. Usually would originate on the Feature Management CDN.|
 |`contextGetter`|function|Yes|Parameterless function that returns object containing `country` and `anonUserId`.|
 |`onUpdated`|function|No|Parameterless function invoked when config is loaded / changed.|
+|`onTrack`|function|No|Function used to pass back the key and variant for a triggered experiment, so that it may be tracked using analytics tools.|
 |`keyPrefix`|string|No|String to prepend to feature keys, along with `::`.  If omitted, full key including prefix must be passed.  E.g. `<prefix>::<key>` rather than just `<key>`.|
 |`cdn`|object|No|If config is to be loaded from the CDN by this lib this property must be set. See the Feature Management portal for details.|
 |`cdn.scope`|string|Yes (if `cdn` set)|The Feature Management "scope". E.g. `je-coreweb`.|
@@ -63,5 +69,10 @@ const myFeatureValue = featureManagement.getValue('my-feature-value');
 |`cdn.poll`|Boolean|No (defaults to false)|Should we poll for config updates after the initial load.|
 |`cdn.pollInterval`|integer|No (defaults to 30000)|Poll interval in ms.|
 
+### Optional Axios Client:
+
+If an http client is provided, it will be used in place of an internal (axios) client.
+
 ## Integration with vue
-The intention is to make a wrapping library that integrates with Vue and makes these configuration values reactive.
+
+See [f-feature-management-vue](https://github.com/justeat/fozzie-components/tree/master/packages/services/f-feature-management-vue).
