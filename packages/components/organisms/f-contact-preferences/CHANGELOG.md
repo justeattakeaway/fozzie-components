@@ -9,9 +9,10 @@ v0.4.0
 *November 1, 2021*
 
 ### Added
-- Initial error handling
-- Initial error card
-- Implementation of i18n
+- Initial error handling.
+- Initial error card.
+- Implementation of i18n.
+- Expose `test-utils` folder.
 
 
 v0.3.0
