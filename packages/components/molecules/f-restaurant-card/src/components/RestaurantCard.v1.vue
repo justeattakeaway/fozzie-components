@@ -55,7 +55,14 @@
             <component
                 :is="errorBoundary"
                 tier="3">
-                <slot name="new-label" />
+                <!-- TODO - we want to translate this within the component using i18n.
+                For now we'll just need to pass down a translated string from the consuming site -->
+                <restaurant-badge
+                    v-if="newBadgeText"
+                    :is-large="true"
+                    :text="newBadgeText"
+                    :background-colour="'#e5faef'"
+                    :text-colour="'#017A39'" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -128,6 +135,7 @@ import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
 import RestaurantDish from './subcomponents/RestaurantDish.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 import RestaurantBadges from './subcomponents/RestaurantBadges.vue';
+import RestaurantBadge from './subcomponents/RestaurantBadge.vue';
 
 export default {
     name: 'RestaurantCardV1',
@@ -136,7 +144,8 @@ export default {
         RestaurantLogo,
         RestaurantDish,
         RestaurantCuisines,
-        RestaurantBadges
+        RestaurantBadges,
+        RestaurantBadge
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -186,27 +195,17 @@ export default {
             type: Object,
             default: () => ({})
         },
-        badges: {
+        imageBadges: {
             type: Array,
             default: () => []
-        }
-    },
-    computed: {
-        imageBadges () {
-            const badges = [];
-
-            if (this.isPromoted) {
-                badges.push({ text: 'Promoted', colorScheme: 'dark' });
-            }
-
-            if (this.hasStampcardsOffer) {
-                badges.push({ text: 'StampCards', colorScheme: 'warm' });
-            }
-
-            return badges;
         },
-        contentBadges () {
-            return this.badges.map(badgeText => ({ text: badgeText }));
+        contentBadges: {
+            type: Array,
+            default: () => []
+        },
+        newBadgeText: {
+            type: String,
+            default: null
         }
     }
 };

@@ -29,12 +29,14 @@ RestaurantCardComponent.args = {
         disabled: false,
         logoUrl: restaurantLogo,
         imgUrl: restaurantImage,
-        isListItem: false,
+        isListItem: true,
         url: 'some-restaurant/12345',
         cuisines: ['Mexican', 'Burgers', 'Chinese'],
         isPromoted: true,
         hasStampcardsOffer: true,
-        badges: ['BTA Winner', 'Michelin Star', 'Tried & Tasted', 'New Ownership', 'Delivered by Menulog', 'A very very very super long unrealistic but necessary to test badge that hopefully never happens']
+        imageBadges: [{ text: 'Promoted', textColour: '#fff', backgroundColour: '#2b3639' }, { text: 'StampCards', textColour: '#242e30', backgroundColour: '#ffead4' }],
+        contentBadges: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test badge that hopefully never happens' }],
+        newBadgeText: 'NEW'
     },
 
     flags: {

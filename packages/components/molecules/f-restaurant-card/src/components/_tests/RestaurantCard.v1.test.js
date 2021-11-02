@@ -4,7 +4,7 @@ import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 
 describe('RestaurantCard.v1', () => {
     describe('Error Boundary', () => {
-        const slotList = ['new-label', 'ratings', 'meta-items', 'local-legend', 'optional-items'];
+        const slotList = ['ratings', 'meta-items', 'local-legend', 'optional-items'];
 
         it.each(slotList)('Successfully wraps %p slot in error boundary', slot => {
             // arrange
@@ -54,11 +54,26 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[error-boundary]>[data-test-id="restaurant-cuisines"]').exists()).toBe(true);
         });
 
+        it('Successfully wraps "new" RestaurantBadge component in error boundary', () => {
+            // arrange
+            const newBadgeText = 'NEW';
+            const propsData = {
+                errorBoundary,
+                newBadgeText: 'NEW'
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find(`[error-boundary]>[data-test-id="restaurant-badge"][title="${newBadgeText}"`).exists()).toBe(true);
+        });
+
         it('Successfully wraps inner-content RestaurantBadge component in error boundary', () => {
             // arrange
             const propsData = {
                 errorBoundary,
-                badges: ['BTA Winner', 'Michelin Star', 'Tried & Tasted', 'New Ownership', 'Delivered by Menulog', 'A very very very super long unrealistic but necessary to test badge that hopefully never happens']
+                contentBadges: ['BTA Winner', 'Michelin Star', 'Tried & Tasted', 'New Ownership', 'Delivered by Menulog', 'A very very very super long unrealistic but necessary to test badge that hopefully never happens']
             };
 
             // act

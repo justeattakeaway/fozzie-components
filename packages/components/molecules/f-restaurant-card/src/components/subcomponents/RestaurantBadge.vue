@@ -1,6 +1,10 @@
 <template>
     <span
-        :class="[$style['c-restaurantBadge'], $style[colorSchemeClass]]"
+        :class="[
+            [$style['c-restaurantBadge']], {
+                [$style['.c-restaurantBadge--isLarge']]: isLarge
+            }]"
+        :style="`color:${textColour}; background-color:${backgroundColour};`"
         :title="text"
         data-test-id="restaurant-badge">
         {{ text }}
@@ -15,15 +19,17 @@ export default {
             type: String,
             required: true
         },
-        colorScheme: {
+        textColour: {
             type: String,
-            default: null,
-            validator: value => ['dark', 'warm'].indexOf(value) !== -1
-        }
-    },
-    computed: {
-        colorSchemeClass () {
-            return this.colorScheme ? `c-restaurantBadge--${this.colorScheme}` : null;
+            default: '#242e30'
+        },
+        backgroundColour: {
+            type: String,
+            default: '#f5f3f1'
+        },
+        isLarge: {
+            type: Boolean,
+            default: false
         }
     }
 };
@@ -35,8 +41,6 @@ export default {
     padding: 0 spacing() / 2;
     border-radius: $radius-rounded-a;
     font-size: $font-paragraph-03 * 1px;
-    color: $color-grey-70;
-    background-color: $color-container-subtle;
 
      @include media('<mid') {
          max-width: 30ch;
@@ -46,13 +50,7 @@ export default {
      }
 }
 
-.c-restaurantBadge--dark {
-    color: $color-content-light;
-    background-color: $color-container-dark;
-}
-
-.c-restaurantBadge--warm {
-    color: $color-grey-70;
-    background-color: $color-orange-10;
+.c-restaurantBadge--isLarge {
+    padding: spacing() / 4 spacing();
 }
 </style>
