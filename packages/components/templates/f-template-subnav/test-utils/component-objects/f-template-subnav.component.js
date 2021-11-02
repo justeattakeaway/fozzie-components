@@ -3,7 +3,7 @@ const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class TemplateSubNav extends Page {
     constructor () {
-        super('organisms', 'template-subnav-component');
+        super('templates', 'template-subnav-component');
     }
 
     get component () {

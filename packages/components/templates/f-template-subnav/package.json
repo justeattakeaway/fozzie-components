@@ -1,14 +1,14 @@
 {
   "name": "@justeat/f-template-subnav",
   "description": "Fozzie Template Sub Nav - SPA template with breadcrumb, lefthand navigation and centre slot",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/f-template-subnav.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-template-subnav",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/templates/f-template-subnav",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
