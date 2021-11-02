@@ -1114,7 +1114,7 @@ export default {
                 },
                 postcode: {
                     required,
-                    isValidPostcode: this.isValidPostcode
+                    postcode: this.isValidPostcode
                 }
             };
         }

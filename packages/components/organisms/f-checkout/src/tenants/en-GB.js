@@ -4,14 +4,57 @@ const messages = {
     labels: {
         mobileNumber: 'Mobile Number',
         addressGroup: 'Address',
-        line1: 'Address line 1',
+        // line1: 'Address line 1',
         line2: 'Address line 2 (optional)',
-        locality: 'City',
-        postcode: 'Postcode',
+        // locality: 'City',
+        // postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
         collectionOrderMethod: 'Collection time',
         dineinOrderMethod: 'Dine in time',
         tableIdentifier: 'Table number or name'
+    },
+
+    formFields: {
+        firstName: {
+            label: 'First name',
+            validationMessages: {
+                requiredError: 'Please enter your first name'
+            }
+        },
+        lastName: {
+            label: 'Last name',
+            validationMessages: {
+                requiredError: 'Please enter your last name'
+            }
+        },
+        line1: {
+            label: 'Address line 1',
+            validationMessages: {
+                requiredError: 'Please enter the first line of your address'
+            }
+        },
+        line2: {
+            label: 'Address line 2 (optional)'
+        },
+        locality: {
+            label: 'City',
+            validationMessages: {
+                requiredError: 'Please enter your town or city'
+            }
+        },
+        postcode: {
+            label: 'Postcode',
+            validationMessages: {
+                requiredError: 'Please enter your full UK postcode',
+                invalidError: 'This doesn’t look like a UK postcode, can you enter it again please?'
+            }
+        }
+    },
+
+    guest: {
+        // firstName: 'First name',
+        // lastName: 'Last name',
+        email: 'Email'
     },
 
     validationMessages: {
@@ -19,22 +62,22 @@ const messages = {
             requiredError: 'Please enter your phone number',
             invalidCharError: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
         },
-        addressLine1: {
-            requiredError: 'Please enter the first line of your address'
-        },
-        locality: {
-            requiredError: 'Please enter your town or city'
-        },
-        postcode: {
-            requiredError: 'Please enter your full UK postcode',
-            invalidCharError: 'This doesn’t look like a UK postcode, can you enter it again please?'
-        },
-        firstName: {
-            requiredError: 'Please enter your first name'
-        },
-        lastName: {
-            requiredError: 'Please enter your last name'
-        },
+        // addressLine1: {
+        //     requiredError: 'Please enter the first line of your address'
+        // },
+        // locality: {
+        //     requiredError: 'Please enter your town or city'
+        // },
+        // postcode: {
+        //     requiredError: 'Please enter your full UK postcode',
+        //     invalidCharError: 'This doesn’t look like a UK postcode, can you enter it again please?'
+        // },
+        // firstName: {
+        //     requiredError: 'Please enter your first name'
+        // },
+        // lastName: {
+        //     requiredError: 'Please enter your last name'
+        // },
         email: {
             requiredError: 'Please enter a valid email address'
         },
@@ -165,12 +208,6 @@ const messages = {
             placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
         }
 
-    },
-
-    guest: {
-        firstName: 'First name',
-        lastName: 'Last name',
-        email: 'Email'
     },
 
     checkoutHeader: {
