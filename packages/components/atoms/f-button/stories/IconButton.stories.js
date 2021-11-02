@@ -7,7 +7,17 @@ import FButton from '../src/components/Button.vue';
 
 export default {
     title: 'Components/Atoms/f-button',
-    decorators: [withA11y]
+    decorators: [withA11y],
+    parameters: {
+        backgrounds: {
+            values: [
+                { name: 'White', value: '#fff' },
+                { name: 'Dark', value: '#333' },
+                { name: 'Blue', value: '#bfe6ff' }
+            ],
+            default: 'White'
+        }
+    }
 };
 
 export const IconButtonComponent = (args, { argTypes }) => ({
