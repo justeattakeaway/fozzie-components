@@ -1,151 +1,169 @@
-import { getFeature, init, loadFromCdn } from '../src/configStore';
-import fetchMock from 'jest-fetch-mock';
-
-fetchMock.enableMocks();
+import mockAxios from 'jest-mock-axios';
+import { getFeature, loadFromCdn } from '../src/configStore';
 
 const cdnSettings = {
-  scope: 'test-scope',
-  environment: 'test-env',
-  key: 'test-key',
-  poll: true
+    scope: 'test-scope',
+    environment: 'test-env',
+    key: 'test-key',
+    poll: true
 };
 
-const fetchResponse = {
-  createdAt: '2021-09-10 15:00',
-  features: [
-    {
-      key: 'key1',
-      testVal: 'val1'
-    }
-  ]
+const modifiedPollingCdnSettings = {
+    ...cdnSettings,
+    host: 'https://test.com',
+    pollInterval: 60000
 };
 
-//this is used to resolve any promises / awaits called from within a mocked timer
-const flushPromises = () => new Promise(res => process.nextTick(res))
+const mockResponse = {
+    createdAt: '2021-09-10 15:00',
+    features: [
+        {
+            key: 'key1',
+            testVal: 'val1'
+        }
+    ]
+};
 
-describe('When calling loadFromCdn', () => {  
+function executeSUT (settings = cdnSettings, onUpdated) {
+    const loadFromCdnPromise = loadFromCdn(settings, onUpdated, mockAxios);
 
-  beforeEach(async () => {
-    fetch.resetMocks();
-    jest.useFakeTimers();
+    mockAxios.mockResponse({ data: mockResponse });
 
-    fetch.mockResponse(JSON.stringify(fetchResponse));
+    return loadFromCdnPromise;
+}
 
-    await loadFromCdn(cdnSettings);    
-  });
+describe('When calling loadFromCdn', () => {
+    beforeEach(async () => {
+        jest.useFakeTimers();
+    });
 
-  it('should make an initial call to fetch', async () => {
-    
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
-  });
+    afterEach(() => {
+        mockAxios.reset();
+    });
 
-  it('should start polling', async () => {
-    expect(setInterval).toHaveBeenCalledTimes(1);
-    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 30000);
+    it('should make an initial call to httpClient', async () => {
+        // Arrange & Act
+        await executeSUT();
 
-    jest.advanceTimersByTime(29000);
-    expect(fetch).toHaveBeenCalledTimes(1);    
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
+        expect(mockAxios.get).toHaveBeenCalledWith(`https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
+    });
 
-    jest.advanceTimersByTime(5000);
-    expect(fetch).toHaveBeenCalledTimes(2);
-    expect(fetch).toHaveBeenNthCalledWith(2, `https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
-  });
+    it('should start polling', async () => {
+        // Arrange & Act
+        await executeSUT();
 
-  it('should not poll if poll setting false', async () => {
-    //Arrange
-    const newSettings = { ...cdnSettings, poll: false };
+        // Assert
+        expect(setInterval).toHaveBeenCalledTimes(1);
+        expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 30000);
 
-    //Act
-    await loadFromCdn(newSettings);
-    await flushPromises();
-    expect(fetch).toHaveBeenCalledTimes(2);
+        // Act
+        jest.advanceTimersByTime(29000);
 
-    jest.advanceTimersByTime(100000);
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
-    //Assert
-    expect(fetch).toHaveBeenCalledTimes(2);
-  });
+        // Act
+        jest.advanceTimersByTime(5000);
 
-  it('should honour different host', async () => {
-    
-    //Arrange
-    const newSettings = { ...cdnSettings, host: 'https://test.com', pollInterval: 60000 };
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(2);
+        expect(mockAxios.get).toHaveBeenNthCalledWith(2, `https://features.api.justeattakeaway.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
+    });
 
-    //Act
-    await loadFromCdn(newSettings);
+    it('should not poll if poll setting false', async () => {
+        // Arrange & Act
+        const newSettings = {
+            ...cdnSettings,
+            poll: false
+        };
+        await executeSUT(newSettings);
 
-    //Assert
-    expect(fetch).toHaveBeenCalledWith(`https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
-  });
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
-  it('should honour different pollInterval', async () => {
+        // Act
+        jest.advanceTimersByTime(100000);
 
-    //Arrange
-    const newSettings = { ...cdnSettings, host: 'https://test.com', pollInterval: 60000 };
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
+    });
 
-    //Act
-    await loadFromCdn(newSettings);
+    it('should honour different host', async () => {
+        // Arrange & Act
+        await executeSUT(modifiedPollingCdnSettings);
 
-    //Assert
-    expect(fetch).toHaveBeenCalledTimes(2);    
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledWith(`https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
+    });
 
-    jest.advanceTimersByTime(35000);
-    expect(fetch).toHaveBeenCalledTimes(2);    
+    it('should honour different pollInterval', async () => {
+        // Arrange & Act
+        await executeSUT(modifiedPollingCdnSettings);
 
-    jest.advanceTimersByTime(30000);
-    expect(fetch).toHaveBeenCalledTimes(3);
-    expect(fetch).toHaveBeenNthCalledWith(3, `https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
-  });
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
-  it('should initialise features correctly', async () => {
-    expect(getFeature('key2')).toBeFalsy();
-    expect(getFeature('key1')).toBeTruthy();
-    expect(getFeature('key1').testVal).toBe('val1');
-  });
+        // Act
+        jest.advanceTimersByTime(35000);
 
-  it('should update features when config changes', async () => {
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
-    //Arrange
-    fetchResponse.features[0].key = 'key2';
-    fetchResponse.createdAt = '2021-09-11 15:00';
+        // Act
+        jest.advanceTimersByTime(30000);
 
-    fetch.mockResponse(JSON.stringify(fetchResponse));
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(2);
+        expect(mockAxios.get).toHaveBeenNthCalledWith(2, `https://test.com/config/v1/${cdnSettings.scope}/${cdnSettings.environment}-${cdnSettings.key}`);
+    });
 
-    //Act
-    jest.advanceTimersToNextTimer();
+    it('should initialise features correctly', async () => {
+        // Arrange & Act
+        await executeSUT();
 
-    await flushPromises();
+        // Assert
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
+        expect(getFeature('key2')).toBeFalsy();
+        expect(getFeature('key1')).toBeTruthy();
+        expect(getFeature('key1').testVal).toBe('val1');
+    });
 
-    //Assert
-    expect(getFeature('key1')).toBeFalsy();
-    expect(getFeature('key2')).toBeTruthy();    
-    expect(getFeature('key2').testVal).toBe('val1');
-  });
+    it('should update features when config changes', async () => {
+        // Arrange
+        mockResponse.features[0].key = 'key2';
+        mockResponse.createdAt = '2021-09-11 15:00';
 
-  it('should call callback when config timestamp changes', async () => {
-    // Arrange
-    const callbackMock = jest.fn();
+        // Act
+        await executeSUT();
 
-    fetchResponse.createdAt = '2021-10-01 09:00';
-    fetch.mockResponse(JSON.stringify(fetchResponse));
-    
-    // Act
-    await loadFromCdn(cdnSettings, callbackMock);
+        // Assert
+        expect(getFeature('key1')).toBeFalsy();
+        expect(getFeature('key2')).toBeTruthy();
+        expect(getFeature('key2').testVal).toBe('val1');
+    });
 
-    // Assert
-    expect(callbackMock).toHaveBeenCalled();
-  });
+    it('should call callback when config timestamp changes', async () => {
+        // Arrange
+        const callbackMock = jest.fn();
+        mockResponse.createdAt = '2021-10-01 09:00';
 
-  it('should not call callback when config timestamp is not changed', async () => {
-    // Arrange
-    const callbackMock = jest.fn();
+        // Act
+        await executeSUT(cdnSettings, callbackMock);
 
-    // Act
-    await loadFromCdn(cdnSettings, callbackMock);
+        // Assert
+        expect(callbackMock).toHaveBeenCalled();
+    });
 
-    // Assert
-    expect(callbackMock).not.toHaveBeenCalled();
-  });
+    it('should not call callback when config timestamp is not changed', async () => {
+        // Arrange
+        const callbackMock = jest.fn();
 
+        // Act
+        await executeSUT(cdnSettings, callbackMock);
+
+        // Assert
+        expect(callbackMock).not.toHaveBeenCalled();
+    });
 });

@@ -1,4 +1,4 @@
-import { init as initFeatures, loadFromCdn } from './configStore';
+import { init as initFeatures } from './configStore';
 import { setContextGetter } from './contextGetter';
 import { setLogger } from './logger';
 import FeatureManager from './FeatureManager';
@@ -8,10 +8,11 @@ let instance = null;
 /**
  * Returns singleton FeatureManagement object + initialises components on first use.
  * Async function that awaits an initial config fetch, if polling requested.
- * @param {object} settings
+ * @param {object} settings Settings, as defined in the readme
+ * @param {object} httpClient An optional injected http client. If not provided, an internal instance will be created.
  * @returns Singleton FeatureManagement object
  */
-export default async function (settings) {
+export default function (settings, httpClient) {
     if (instance) return instance;
 
     if (settings.logger) {
@@ -24,11 +25,7 @@ export default async function (settings) {
 
     setContextGetter(settings.contextGetter);
 
-    instance = new FeatureManager(settings);
-
-    if (settings.cdn) {
-        await loadFromCdn(settings.cdn, settings.onUpdated);
-    }
+    instance = new FeatureManager(settings, httpClient);
 
     return instance;
 }
