@@ -1,7 +1,6 @@
 require('@babel/register');
 const percySnapshot = require('@percy/webdriverio');
 const { getTestConfiguration, setTestReporters } = require('./test/configuration/configuration-helper');
-
 const configuration = getTestConfiguration();
 
 exports.config = {

@@ -29,8 +29,8 @@ const configuration = {
             outputDir: '../../../../test/results/allure-results'
         }
     },
-    // 'allure', 'video', 'junit'
-    testReporters: ['video', 'junit']
+    // 'allure', 'video'
+    testReporters: ['allure', 'video']
 };
 
 module.exports = configuration;
