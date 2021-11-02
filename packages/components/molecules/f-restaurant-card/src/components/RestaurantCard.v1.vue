@@ -130,12 +130,12 @@
 
 <script>
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
-import RestaurantImage from './subcomponents/RestaurantImage.vue';
+import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
 import RestaurantDish from './subcomponents/RestaurantDish.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
-import RestaurantBadges from './subcomponents/RestaurantBadges.vue';
-import RestaurantBadge from './subcomponents/RestaurantBadge.vue';
+import RestaurantBadges from './subcomponents/RestaurantBadges/RestaurantBadges.vue';
+import RestaurantBadge from './subcomponents/RestaurantBadges/RestaurantBadge.vue';
 
 export default {
     name: 'RestaurantCardV1',
@@ -181,14 +181,6 @@ export default {
         cuisines: {
             type: Array,
             default: () => []
-        },
-        isPromoted: {
-            type: Boolean,
-            default: false
-        },
-        hasStampcardsOffer: {
-            type: Boolean,
-            default: false
         },
         // feature flags
         flags: {
