@@ -5,7 +5,17 @@ import FButton from '../src/components/Button.vue';
 
 export default {
     title: 'Components/Atoms/f-button',
-    decorators: [withA11y]
+    decorators: [withA11y],
+    parameters: {
+        // background spans across all stories in f-button
+        backgrounds: {
+            values: [
+                { name: 'Grey', value: '#f5f5f5' },
+                { name: 'Dark', value: '#333' }
+            ],
+            default: 'Grey'
+        }
+    }
 };
 
 export const ButtonComponent = (args, { argTypes }) => ({
