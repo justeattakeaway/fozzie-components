@@ -7,6 +7,7 @@ describe('f-navigationLinks component tests', () => {
         navigationLinks = new NavigationLinks();
 
         navigationLinks.load();
+        navigationLinks.waitForComponent();
     });
 
     it('should display the f-navigationLinks component', () => {
