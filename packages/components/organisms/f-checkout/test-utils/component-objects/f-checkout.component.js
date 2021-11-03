@@ -1,4 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { default: $ } = require('webdriverio/build/commands/browser/$');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
@@ -65,6 +66,8 @@ module.exports = class Checkout extends Page {
 
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
+    get ageVerificationComponent () { return $(AGE_VERIFICATION_COMPONENT )}
+
     fields = {
         firstName: {
             get input () { return $(FIELDS.firstName.input); },
@@ -127,8 +130,12 @@ module.exports = class Checkout extends Page {
         super.load(this.component);
     }
 
-    loadError() {
+    loadError () {
         super.load(this.errorPageComponent);
+    }
+
+    loadAgeVerification () {
+        super.load(this.ageVerificationComponent);
     }
 
     open (url) {
@@ -145,7 +152,11 @@ module.exports = class Checkout extends Page {
     }
 
     waitForErrorPageComponent () {
-        super.waitForComponent(this.errorPageComponent);
+        this.waitForComponent(this.errorPageComponent);
+    }
+
+    waitForAgeVerificationComponent () {
+        this.waitForComponent(this.ageVerificationComponent);
     }
 
     isCheckoutPageDisplayed () {

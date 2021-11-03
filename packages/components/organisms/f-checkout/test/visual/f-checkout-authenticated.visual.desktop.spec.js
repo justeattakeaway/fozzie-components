@@ -1,7 +1,7 @@
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
-let checkoutInfo
+let checkoutInfo;
 
 describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
@@ -331,7 +331,7 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
             .withQuery('&knob-Locale', checkoutInfo.locale);
-            
+
         // Act
         checkout.load();
     });
@@ -339,5 +339,31 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
     it('should display the state input.', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible State field', 'desktop');
+    });
+});
+
+describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', () => {
+    beforeEach(() => {
+        // Arrange
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true,
+            isASAP: false,
+            locale: 'en-AU',
+            restrictions: 'age-restriction'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+            .withQuery('&knob-Locale', checkoutInfo.locale)
+            .withQuery('&knob-Restrictions', checkoutInfo.restrictions);
+        // Act
+        checkout.load();
+    });
+
+    it('should display the age verification page', () => {
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible Age Verification', 'desktop');
     });
 });
