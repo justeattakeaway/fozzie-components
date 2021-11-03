@@ -1,5 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils';
-import DeliveryTimeMeta from '../DeliveryTimeMeta.vue';
+import sut from '../DeliveryTimeMeta.vue';
 
 describe('DeliveryTimeMeta', () => {
     it('should be defined', () => {
@@ -9,7 +9,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = shallowMount(DeliveryTimeMeta, { propsData });
+        const wrapper = shallowMount(sut, { propsData });
 
         // assert
         expect(wrapper.exists()).toBe(true);
@@ -21,7 +21,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = mount(DeliveryTimeMeta, { propsData });
+        const wrapper = mount(sut, { propsData });
 
         const visibleText = wrapper.find('[data-test-id="icon-text-visible-text"]').text();
 
@@ -36,7 +36,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = mount(DeliveryTimeMeta, { propsData });
+        const wrapper = mount(sut, { propsData });
 
         const visibleText = wrapper.find('[data-test-id="icon-text-visible-text"]').text();
 
@@ -51,7 +51,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = mount(DeliveryTimeMeta, { propsData });
+        const wrapper = mount(sut, { propsData });
 
         const visibleText = wrapper.find('[data-test-id="icon-text-visible-text"]').text();
 
@@ -68,7 +68,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = mount(DeliveryTimeMeta, { propsData });
+        const wrapper = mount(sut, { propsData });
 
         const numberOfIconTextElements = wrapper.findAll('[data-test-id="icon-text-visible-text"]').length;
 

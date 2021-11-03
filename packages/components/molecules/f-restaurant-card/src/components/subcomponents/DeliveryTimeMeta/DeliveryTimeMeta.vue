@@ -12,7 +12,7 @@
         </icon-text>
 
         <icon-text
-            v-if="!eta && distance"
+            v-else-if="distance"
             :text="distance"
             :accessible-text="distanceForScreenReaders"
             :is-bold="true"
@@ -22,7 +22,7 @@
         </icon-text>
 
         <icon-text
-            v-if="!eta && !distance && address"
+            v-else-if="address"
             :text="address"
             :accessible-text="addressForScreenReaders"
             :is-list-item="isListItem">
