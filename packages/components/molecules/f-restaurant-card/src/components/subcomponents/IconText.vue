@@ -5,6 +5,7 @@
                 [$style['c-restaurantCard-iconText']]: true,
                 [$style['c-restaurantCard-iconText--bold']]: isBold
             }"
+            aria-hidden="true"
             :data-test-id="dataTestId">
             <span
                 v-if="hasSlotData"
@@ -42,7 +43,7 @@ export default {
         },
         color: {
             type: String,
-            default: '#242e30'
+            default: null
         },
         isBold: {
             type: Boolean,
