@@ -12,6 +12,13 @@
 </template>
 
 <script>
+import { theme as PieTokensTheme } from '@justeat/pie-design-tokens/dist/tokens.json';
+
+const {
+    'content-default': textColour,
+    'container-subtle': backgroundColor
+} = PieTokensTheme.jet.color.alias.default;
+
 export default {
     name: 'RestaurantBadge',
     props: {
@@ -21,11 +28,11 @@ export default {
         },
         textColour: {
             type: String,
-            default: '#242e30'
+            default: textColour
         },
         backgroundColour: {
             type: String,
-            default: '#f5f3f1'
+            default: backgroundColor
         },
         isLarge: {
             type: Boolean,
