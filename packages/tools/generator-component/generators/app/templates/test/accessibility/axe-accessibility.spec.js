@@ -8,6 +8,7 @@ describe('Accessibility tests', () => {
     beforeEach(() => {
         <%= name.class %>.load();
     });
+
     it('a11y - should test f-<%= name.class %> component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-<%= name.class %>');
