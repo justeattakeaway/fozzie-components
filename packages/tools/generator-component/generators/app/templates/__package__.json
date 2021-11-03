@@ -7,7 +7,7 @@
   "maxBundleSize": "<%= bundlewatchMaxSize %>kB"<% } %>,
   "files": [
     "dist"<% if(config.needsComponentTests) { %>,
-    "test-utils"<% } %> <% if(config.needsTestingApiMocks) { %>,
+    "test-utils"<% } %><% if(config.needsTestingApiMocks) { %>,
     "src/services"<% } %>
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/<%= componentFolder %>f-<%= name.default %>",

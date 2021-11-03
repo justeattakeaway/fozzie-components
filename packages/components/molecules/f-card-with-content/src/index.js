@@ -1,18 +1,18 @@
-<% if (config.isComponent) { %>
+
 /**
- * @overview Fozzie <%= name.readme %> Component JS Wrapper
+ * @overview Fozzie Card With Content Component JS Wrapper
  *
- * @module f-<%= name.default%>
+ * @module f-card-with-content
  */
 
 // Import vue component
-import <%= name.component %> from '@/components/<%= name.filename %>.vue';
+import CardWithContent from '@/components/CardWithContent.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('<%= name.component %>', <%= name.component %>);
+    Vue.component('CardWithContent', CardWithContent);
 }
 
 // Create module definition for Vue.use()
@@ -32,16 +32,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default <%= name.component %>;<% } else { %>
-/**
-* @overview Add description of service here
-*
-* @module f-<%= name.default %>
-*/
-
-export default class ServiceConstructor {
-    constructor() {
-        throw new Error('Not implemented yet!');
-    }
-}
-<% } %>
+export default CardWithContent;
