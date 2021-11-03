@@ -1,14 +1,13 @@
 /* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-contactPreferences-selectors');
 
 module.exports = class ContactPreferences extends Page {
-    get component () {
-        return $(COMPONENT);
+    constructor () {
+        super('organism', 'contact-preferences-component');
     }
 
-    open () {
-        super.openComponent('organism', 'contactPreferences-component');
+    get component () {
+        return $('[data-test-id="contactPreferences"]');
     }
 
     waitForComponent () {

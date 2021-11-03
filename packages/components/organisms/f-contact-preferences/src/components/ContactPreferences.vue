@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div
+        data-test-id="contactPreferences">
         <card-component
             v-if="!showErrorPage"
             :card-heading="$t('heading')"
