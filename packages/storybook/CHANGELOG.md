@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.47.0
+------------------------------
+*November 03, 2021*
+
+### Added
+- New `log` context item so we can phase out the `logger` one.
+
 
 v0.46.0
 ------------------------------
