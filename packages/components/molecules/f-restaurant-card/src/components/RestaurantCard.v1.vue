@@ -62,7 +62,7 @@
                     :is-large="true"
                     :text="newBadgeText"
                     :background-colour="'#e5faef'"
-                    :text-colour="'#017A39'" />
+                    :text-colour="'#017a39'" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
