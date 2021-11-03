@@ -19,7 +19,8 @@
             </span>
             <span
                 :class="$style['c-restaurantCard-iconText-content']"
-                :style="`color:${color};`">
+                :style="`color:${color};`"
+                data-test-id="icon-text-visible-text">
                 {{ text }}
             </span>
         </p>

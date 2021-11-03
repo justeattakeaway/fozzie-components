@@ -180,7 +180,7 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-delivery-time-meta"]').exists()).toBe(false);
         });
 
-        it.each(['eta', 'distance', 'address'])('should not be shown if there is %p data', dataKey => {
+        it.each(['eta', 'distance', 'address'])('should be shown if there is %p data', dataKey => {
             // arrange
             const propsData = {
                 deliveryTimeData: {
