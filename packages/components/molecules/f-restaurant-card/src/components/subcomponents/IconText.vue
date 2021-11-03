@@ -11,10 +11,11 @@
                 v-if="hasSlotData"
                 :class="{
                     [$style['c-restaurantCard-iconText-icon']]: true,
-                    [$style['c-restaurantCard-iconText-icon--hideInTileView']]: !isListItem && hideIconInTileView,
-                    [$style['c-restaurantCard-iconText-icon--hideOnMidBellow']]: hideIconInTileView
+                    [$style['c-restaurantCard-iconText-icon--hideInTileView']]: booleanValue.hideInTileView,
+                    [$style['c-restaurantCard-iconText-icon--hideOnMidBellow']]: booleanValue.hideOnMidBellow
                 }"
-                :style="`fill:${color};`">
+                :style="`fill:${color};`"
+                data-test-id="icon-text-icon">
                 <slot />
             </span>
             <span
@@ -24,7 +25,9 @@
                 {{ text }}
             </span>
         </p>
-        <span class="is-visuallyHidden">
+        <span
+            class="is-visuallyHidden"
+            data-test-id="icon-text-accessible-text">
             {{ accessibleText || text }}
         </span>
     </div>
@@ -56,7 +59,7 @@ export default {
         },
         isListItem: {
             type: Boolean,
-            required: true
+            default: false
         },
         dataTestId: {
             type: String,
@@ -66,6 +69,12 @@ export default {
     computed: {
         hasSlotData () {
             return !!this.$slots.default;
+        },
+        booleanValue () {
+            return {
+                hideInTileView: (!this.isListItem && this.hideIconInTileView),
+                hideOnMidBellow: this.hideIconInTileView
+            };
         }
     }
 };
