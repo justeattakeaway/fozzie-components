@@ -1,9 +1,9 @@
 <template>
     <span
-        :class="[
-            [$style['c-restaurantBadge']], {
-                [$style['.c-restaurantBadge--isLarge']]: isLarge
-            }]"
+        :class="{
+            [$style['c-restaurantBadge']]: true,
+            [$style['c-restaurantBadge--isLarge']]: isLarge
+        }"
         :style="`color:${textColour}; background-color:${backgroundColour};`"
         :title="text"
         data-test-id="restaurant-badge">
