@@ -1,7 +1,7 @@
 const { testType } = require('./shared.config');
 
 const configuration = {
-    loglevel: 'silent',
+    logLevel: 'silent',
     baseUrl: 'http://localhost:8080',
     bail: 0,
     headless: true,
@@ -26,7 +26,7 @@ const configuration = {
     testType,
     availableReporters: {
         allure: {
-            outputDir: '../../../../test/results/allure-results'
+            outputDir: `${global.baseDir}/test/results/allure-results`
         }
     },
     // 'allure', 'video'

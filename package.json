@@ -23,7 +23,7 @@
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
     "allure:generate": "allure generate test/results/allure-results --clean && yarn allure:clean",
-    "allure:open": "allure:generate && allure open",
+    "allure:open": "yarn allure:generate && yarn allure open",
     "allure:clean": "rimraf test/results/allure-results",
     "prepare": "husky install"
   },

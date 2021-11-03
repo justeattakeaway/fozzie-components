@@ -1,7 +1,9 @@
 require('@babel/register');
+global.baseDir = __dirname;
 const percySnapshot = require('@percy/webdriverio');
 const { getTestConfiguration, setTestReporters } = require('./test/configuration/configuration-helper');
 const configuration = getTestConfiguration();
+const { CIRCLECI } = process.env;
 
 exports.config = {
     baseUrl: configuration.baseUrl,
@@ -86,11 +88,14 @@ exports.config = {
      */
     // eslint-disable-next-line consistent-return
     after: () => {
-        console.log(
-            '-----------------------------------------------------', '\n',
-            'For more error logs, add "allure" to "testReporters" in "test/configuration/local.config.js".', '\n', '\n', 'To then see the ALLURE REPORT, please head to the route of the directory and run', '\n',
-            'yarn allure:open', '\n',
-            '-----------------------------------------------------'
-        );
+
+        if(!CIRCLECI) {
+            console.log(
+                '-----------------------------------------------------', '\n',
+                'For more error logs, add "allure" to "testReporters" in "test/configuration/local.config.js".', '\n', '\n', 'To then see the ALLURE REPORT, please head to the route of the directory and run', '\n',
+                'yarn allure:open', '\n',
+                '-----------------------------------------------------'
+            );
+        }
     }
 };
