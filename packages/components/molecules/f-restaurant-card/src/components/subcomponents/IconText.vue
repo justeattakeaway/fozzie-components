@@ -102,10 +102,6 @@ export default {
     margin-right: spacing(x0.5);
 }
 
-.c-restaurantCard-iconText-icon--hideInTileView {
-    display: none;
-}
-
 .c-restaurantCard-iconText-icon--hideOnMidBellow {
     @include media('<mid') {
         display: none;
