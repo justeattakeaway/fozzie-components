@@ -13,7 +13,7 @@ export default {
             values: [
                 { name: 'White', value: '#fff' },
                 { name: 'Dark', value: '#333' },
-                { name: 'Blue', value: '#bfe6ff' }
+                { name: 'Grey', value: '#efedea' }
             ],
             default: 'White'
         }
