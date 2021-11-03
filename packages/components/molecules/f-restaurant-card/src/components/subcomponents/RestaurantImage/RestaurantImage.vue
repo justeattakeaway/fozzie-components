@@ -2,7 +2,9 @@
     <div
         :class="[$style['c-restaurantCard-img']]"
         :style="`background-image: url(${imgUrl});`"
-        role="img" />
+        role="img">
+        <slot />
+    </div>
 </template>
 
 <script>
@@ -24,5 +26,6 @@ $img-borderRadius : $radius-rounded-c;
   background-size: cover;
   background-position: center;
   border-radius: $img-borderRadius;
+  position: relative;
 }
 </style>
