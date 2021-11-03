@@ -1,24 +1,22 @@
 <template>
     <div :class="$style['c-formField-fieldWrapper']">
-        <div :class="$style['c-formField-checkboxWrapper']">
-            <input
-                :id="`${uniqueId}`"
-                :aria-labelledby="`label-${uniqueId}`"
-                :value="value"
-                v-bind="$attrs"
-                name="hey"
-                type="checkbox"
-                :data-test-id="testId.input"
-                :class="[
-                    $style['c-formField-field'],
-                    $style['c-formField-field--noFocus'],
-                    $style[`c-formField-field--${fieldSize}`], {
-                        [$style['c-formField-field--checkbox']]: isCheckbox,
-                        [$style['c-formField--invalid']]: hasError
-                    }]"
-                v-on="listeners"
-            >
-        </div>
+        <input
+            :id="`${uniqueId}`"
+            :aria-labelledby="`label-${uniqueId}`"
+            :value="value"
+            v-bind="$attrs"
+            name="hey"
+            type="checkbox"
+            :data-test-id="testId.input"
+            :class="[
+                $style['c-formField-field'],
+                $style['c-formField-field--noFocus'],
+                $style[`c-formField-field--${fieldSize}`], {
+                    [$style['c-formField-field--checkbox']]: isCheckbox,
+                    [$style['c-formField--invalid']]: hasError
+                }]"
+            v-on="listeners"
+        >
 
         <form-label
             :label-for="uniqueId"
@@ -127,14 +125,14 @@ export default {
         z-index: -1;
     }
 
-	.c-formField-fieldWrapper label {
+	.c-formField-field--checkbox + label {
 		cursor: pointer;
 	}
 
-	.c-formField-fieldWrapper label:before {
+	.c-formField-field--checkbox + label:before {
 		content: '';
 		border: 1px solid $color-grey-45;
-		border-radius: 3px;
+		border-radius: 2px;
 		display: inline-block;
 		width: 22px;
 		height: 22px;
@@ -160,9 +158,11 @@ export default {
 	.c-formField-field--checkbox:focus + label:before {
 	// .c-formField-field--checkbox:not(:disabled) + span:hover:before {
 		/* Visible in the full-color space */
-		box-shadow: 0px 0px 0px 2px $color-focus;
-		border: 1px solid $color-white;
-
+		box-shadow:
+			0px 0px 0px 1px $color-white,
+			0px 0px 0px 3px $color-focus;
+		border: 1px solid $color-interactive-brand;
+		border-radius: 2px;
 		/* Visible in Windows high-contrast themes
 			box-shadow will be hidden in these modes and
 			transparency will not be hidden in high-contrast
@@ -174,7 +174,23 @@ export default {
 	}
 
 	.c-formField-field--checkbox:focus:not(:checked) + label:before {
+		box-shadow:
+			0px 0px 0px 1px $color-white,
+			0px 0px 0px 3px $color-focus;
 		border: 1px solid $color-grey-45;
+
+		// width: 20px;
+		// height: 20px;
+		// vertical-align: -2px;
+
+		/* Visible in Windows high-contrast themes
+			box-shadow will be hidden in these modes and
+			transparency will not be hidden in high-contrast
+			thus box-shadow will not show but the outline will
+			providing accessibility */
+		outline-color: transparent; /*switch to transparent*/
+		outline-width: 2px;
+		outline-style: dotted;
 	}
 
 	.c-formField-field--checkbox:not(:disabled):not(:checked) + label:hover:before {
