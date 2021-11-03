@@ -11,7 +11,7 @@
             :class="[
                 $style['c-formField-field'],
                 $style['c-formField-field--noFocus'],
-                $style[`c-formField-field--${fieldSize}`], {
+                {
                     [$style['c-formField-field--checkbox']]: isCheckbox,
                     [$style['c-formField--invalid']]: hasError
                 }]"
@@ -48,10 +48,6 @@ export default {
         value: {
             type: String,
             default: ''
-        },
-        fieldSize: {
-            type: String,
-            default: 'medium'
         },
         hasError: {
             type: Boolean,
@@ -102,8 +98,11 @@ export default {
 
 <style lang="scss" module>
 @mixin tick-svg($color) {
-	$encodedColor: encodeColor($color);
+	$encodedColor: '%23' + str-slice(#{$color}, 2);
 	background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg fill='none' viewBox='0 0 15 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m4.5 9.4722-2.9861-2.9861c-0.15636-0.1569-0.36876-0.2451-0.59027-0.2451-0.22152 0-0.43392 0.0882-0.59028 0.2451-0.15691 0.15637-0.2451 0.36877-0.2451 0.59028 0 0.22152 0.088195 0.43392 0.2451 0.59028l3.5771 3.5771c0.15636 0.1569 0.36876 0.2451 0.59028 0.2451 0.22151 0 0.43391-0.0882 0.59028-0.2451l8.9229-8.9243c0.1569-0.15637 0.2451-0.36877 0.2451-0.59028 0-0.22152-0.0882-0.43392-0.2451-0.59028-0.1564-0.15691-0.3688-0.2451-0.5903-0.2451s-0.4339 0.088195-0.5903 0.2451l-8.3333 8.3333z' clip-rule='evenodd' fill='#{$encodedColor}' fill-rule='evenodd'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 14px;
 }
 
 .c-formField {
@@ -148,23 +147,15 @@ export default {
 		vertical-align: -5px;
 	}
 
-	/* Checked checkbox style (in this case the background is green #e7ffba, change this to change the color) */
 	.c-formField-field--checkbox:checked + label:before {
-		/* NOTE: Replace the url with a path to an SVG of a checkmark to get a checkmark icon */
-		@include tick-svg(#fff);
-		background-repeat: no-repeat;
-		background-position: center;
-		/* The size of the checkmark icon, you may/may not need this */
-		background-size: 14px;
+		@include tick-svg($color-white);
+
 		border-radius: 2px;
 		border: 1px solid $color-interactive-brand;
 		background-color: $color-interactive-brand;
 	}
 
-	/* Adding a dotted border around the active tabbed-into checkbox */
 	.c-formField-field--checkbox:focus + label:before {
-	// .c-formField-field--checkbox:not(:disabled) + span:hover:before {
-		/* Visible in the full-color space */
 		box-shadow:
 			0px 0px 0px 1px $color-white,
 			0px 0px 0px 3px $color-focus;
@@ -186,10 +177,6 @@ export default {
 			0px 0px 0px 3px $color-focus;
 		border: 1px solid $color-grey-45;
 
-		// width: 20px;
-		// height: 20px;
-		// vertical-align: -2px;
-
 		/* Visible in Windows high-contrast themes
 			box-shadow will be hidden in these modes and
 			transparency will not be hidden in high-contrast
@@ -209,10 +196,7 @@ export default {
 		background-color: darken($color-white, $color-hover-01);
 	}
 
-	// /* Disabled checkbox styles */
-	// .c-formField-field--checkbox:disabled + label {
-	// 	cursor: default;
-	// 	color: black;
-	// 	opacity: 0.5;
-	// }
+	.c-formField-field--checkbox:disabled:checked + label:before {
+		@include tick-svg($color-grey-45);
+	}
 </style>

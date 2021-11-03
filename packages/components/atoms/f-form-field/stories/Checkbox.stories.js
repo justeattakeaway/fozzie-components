@@ -3,10 +3,6 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormSelectionControl from '../src/components/FormSelectionControl.vue';
-import {
-    DEFAULT_FIELD_SIZE,
-    VALID_FIELD_SIZES
-} from '../src/constants';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -21,9 +17,6 @@ export const CheckboxComponent = () => ({
         },
         labelText: {
             default: text('Label Text', 'Checkbox Label')
-        },
-        fieldSize: {
-            default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
         },
         isDisabled: {
             default: select('isDisabled', [null, 'disabled'])
@@ -53,7 +46,6 @@ export const CheckboxComponent = () => ({
     template:
         `<form-selection-control
             :label-text="labelText"
-            :field-size="fieldSize"
             :has-error="hasError"
             :is-grouped="isGrouped"
             :disabled="isDisabled"
