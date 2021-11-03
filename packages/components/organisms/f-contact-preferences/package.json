@@ -1,11 +1,12 @@
 {
   "name": "@justeat/f-contact-preferences",
   "description": "Fozzie Contact Preferences - Fozzie user contact preferences form component",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "main": "dist/f-contact-preferences.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
-    "dist"
+    "dist",
+    "test-utils"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-contact-preferences",
   "contributors": [

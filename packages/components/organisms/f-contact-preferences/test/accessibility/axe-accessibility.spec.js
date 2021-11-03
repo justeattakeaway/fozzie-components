@@ -2,13 +2,16 @@ import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-he
 
 const ContactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
 
-const contactPreferences = new ContactPreferences();
+let contactPreferences;
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        contactPreferences.open();
+        contactPreferences = new ContactPreferences();
+
+        contactPreferences.load();
         contactPreferences.waitForComponent();
     });
+
     it('a11y - should test f-contactPreferences component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-contactPreferences');
