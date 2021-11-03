@@ -3,15 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-v5.1.1
- ------------------------------
+v5.2.0
+------------------------------
  *October 29, 2021*
 
 ### Changed
 - wdio configuration for component, visual and a11y tests
 - allure script in `wdio-shared.conf.js` and `package.json`
 - small update of generator to reflect above changes
+
+v5.1.1
+------------------------------
+*November 2, 2021*
+
+### Updated
+- Updated Circle CI for new location of f-template-subnav
+
 
 v5.1.0
 ------------------------------

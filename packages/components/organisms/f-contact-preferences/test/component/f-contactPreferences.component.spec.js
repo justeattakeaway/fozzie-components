@@ -1,11 +1,12 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-const contactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
+const ContactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
+
+let contactPreferences;
 
 describe('f-contactPreferences component tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(contactPreferences.componentType, contactPreferences.componentName, contactPreferences.path);
+        contactPreferences = new ContactPreferences();
 
-        contactPreferences.open(pageUrl);
+        contactPreferences.load();
         contactPreferences.waitForComponent();
     });
 

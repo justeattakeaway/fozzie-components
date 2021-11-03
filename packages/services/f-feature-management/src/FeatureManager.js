@@ -1,6 +1,6 @@
 import evaluateLogic from './evaluateLogic';
 import evaluateDefault from './evaluateDefaultValue';
-import { getFeature, init } from './configStore';
+import { getFeature, init, loadFromCdn as _loadFromCdn } from './configStore';
 import { getContext } from './contextGetter';
 import trackExperiment from './trackExperiment';
 import { logger } from './logger';
@@ -17,8 +17,13 @@ class FeatureManager {
      *
      * @param {object} settings
      */
-    constructor (settings) {
+    constructor (settings, httpClient) {
         this._keyPrefix = settings.keyPrefix;
+        this._onTrack = settings.onTrack;
+        this._onUpdated = settings.onUpdated;
+        this._cdn = settings.cdn;
+
+        this._httpClient = httpClient;
     }
 
     /**
@@ -38,8 +43,6 @@ class FeatureManager {
      * @returns Value of feature
      */
     getValue (key) {
-        logValueRequest(this.getValue, key, null);
-
         try {
             const feature = getFeature(this.createFullKey(key));
 
@@ -49,11 +52,16 @@ class FeatureManager {
 
             const context = getContext();
 
+            if (!context) {
+                logger.logError('Unable to provide feature values as no context was provided. Check your settings for the plugin');
+                return null;
+            }
+
             const variant = evaluateLogic(feature, context);
 
             if (variant) {
                 if (variant.experimentKey && variant.experimentVariant) {
-                    trackExperiment(variant);
+                    trackExperiment(variant, this._onTrack);
                 }
 
                 return variant.value;
@@ -74,11 +82,10 @@ class FeatureManager {
      * @returns Boolean or null
      */
     getBooleanValue (key) {
-        logValueRequest(this.getBooleanValue, key, true);
-
         const value = this.getValue(key);
 
         if (value === true || value === false) {
+            logValueRequest(this.getBooleanValue, key, value);
             return value;
         }
 
@@ -91,11 +98,10 @@ class FeatureManager {
      * @returns Number or null
      */
     getIntegerValue (key) {
-        logValueRequest(this.getIntegerValue, key, 0);
-
         const value = this.getValue(key);
 
         if (typeof value === 'number') {
+            logValueRequest(this.getIntegerValue, key, value);
             return value;
         }
 
@@ -108,14 +114,21 @@ class FeatureManager {
      * @returns String or null
      */
     getStringValue (key) {
-        logValueRequest(this.getStringValue, key, '');
         const value = this.getValue(key);
 
         if (typeof value === 'string') {
+            logValueRequest(this.getStringValue, key, value);
             return value;
         }
 
         return null;
+    }
+
+    loadFromCdn () {
+        if (this._cdn) {
+            return _loadFromCdn(this._cdn, this._onUpdated, this._httpClient);
+        }
+        throw new Error('Must provide CDN settings for CDN load to work correctly');
     }
 
     /* eslint-disable class-methods-use-this */
