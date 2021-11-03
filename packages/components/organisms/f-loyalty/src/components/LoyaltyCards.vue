@@ -57,11 +57,6 @@ export default {
             'globalUserId',
             'brazeApiKey'
         ])
-    },
-
-    mounted () {
-        console.log('hello');
-        console.log(this.globalUserId);
     }
 };
 </script>

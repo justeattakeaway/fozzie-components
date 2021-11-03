@@ -43,8 +43,8 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0",
     "@justeat/f-globalisation": "1.0.0",
+    "@justeat/f-services": "1.7.0",
     "jwt-decode": "3.1.2"
   },
   "peerDependencies": {
@@ -54,20 +54,21 @@
   },
   "devDependencies": {
     "@braze/web-sdk": "3.3.0",
+    "@justeat/f-breadcrumbs": "3.1.0",
+    "@justeat/f-button": "3.2.0",
+    "@justeat/f-content-cards": "file:.yalc/@justeat/f-content-cards",
+    "@justeat/f-media-element": "2.0.0",
+    "@justeat/f-tabs": "2.0.0",
+    "@justeat/f-trak": "0.7.1",
+    "@justeat/f-wdio-utils": "0.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@justeat/f-wdio-utils": "0.4.0",
     "@vue/test-utils": "1.0.3",
-    "node-sass-magic-importer": "5.3.2",
-    "@justeat/f-trak": "0.7.1",
-    "@justeat/f-content-cards": "6.0.0-beta.2",
-    "@justeat/f-media-element": "2.0.0",
-    "@justeat/f-tabs": "2.0.0",
-    "miragejs": "0.1.42",
     "faker": "5.5.3",
-    "@justeat/f-breadcrumbs": "3.1.0",
-    "@justeat/f-button": "3.2.0"
+    "miragejs": "0.1.42",
+    "node-sass-magic-importer": "5.3.2"
   }
 }
