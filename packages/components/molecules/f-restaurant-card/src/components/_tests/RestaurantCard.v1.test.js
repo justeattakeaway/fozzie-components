@@ -179,5 +179,20 @@ describe('RestaurantCard.v1', () => {
             // assert
             expect(wrapper.find('[data-test-id="restaurant-delivery-time-meta"]').exists()).toBe(false);
         });
+
+        it.each(['eta', 'distance', 'address'])('should not be shown if there is %p data', dataKey => {
+            // arrange
+            const propsData = {
+                deliveryTimeData: {
+                    [dataKey]: 'Test'
+                }
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-delivery-time-meta"]').exists()).toBe(true);
+        });
     });
 });
