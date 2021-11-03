@@ -8,7 +8,7 @@ v0.8.0
 *November 03, 2021*
 
 ### Added
-- DeliveryTimeMeta and IconText compoentns, which we use for ETA, distance, and address data
+- DeliveryTimeMeta and IconText components, which we use for ETA, distance, and address data
 
 ### Fixed
 - Styles of cuisines component
