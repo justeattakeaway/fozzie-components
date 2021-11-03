@@ -61,8 +61,8 @@
                     v-if="newBadgeText"
                     :is-large="true"
                     :text="newBadgeText"
-                    :background-colour="'#e5faef'"
-                    :text-colour="'#017A39'" />
+                    :background-colour="subcomponentColourSchemes.badges.new.background"
+                    :text-colour="subcomponentColourSchemes.badges.new.text" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -129,6 +129,7 @@
 </template>
 
 <script>
+import { theme as PieTokensTheme } from '@justeat/pie-design-tokens/dist/tokens.json';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
@@ -136,6 +137,20 @@ import RestaurantDish from './subcomponents/RestaurantDish.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 import RestaurantBadges from './subcomponents/RestaurantBadges/RestaurantBadges.vue';
 import RestaurantBadge from './subcomponents/RestaurantBadges/RestaurantBadge.vue';
+
+const {
+    'support-positive': newBadgeTextColour,
+    'support-positive-02': newBadgeBackgroundColour
+} = PieTokensTheme.jet.color.alias.default;
+
+const subcomponentColourSchemes = {
+    badges: {
+        new: {
+            text: newBadgeTextColour,
+            background: newBadgeBackgroundColour
+        }
+    }
+};
 
 export default {
     name: 'RestaurantCardV1',
@@ -199,6 +214,11 @@ export default {
             type: String,
             default: null
         }
+    },
+    data () {
+        return {
+            subcomponentColourSchemes
+        };
     }
 };
 </script>

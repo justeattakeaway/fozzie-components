@@ -9,6 +9,7 @@ describe('Accessibility tests', () => {
         navigationLinks = new NavigationLinks();
 
         navigationLinks.load();
+        navigationLinks.waitForComponent();
     });
 
     it('a11y - should test f-navigationLinks component WCAG compliance', () => {
