@@ -47,4 +47,42 @@ describe('IconText.vue', () => {
         // assert
         expect(accessibleText).toBe('foo');
     });
+
+    it('when icon is present and hideInTileView is true and in tile mode, hides Icon', () => {
+        // arrange
+        const propsData = {
+            text: 'foo',
+            isListItem: false,
+            hideIconInTileView: true
+        };
+
+        const slots = { default: '<div></div>' };
+
+        // act
+        const wrapper = shallowMount(sut, { propsData, slots });
+
+        const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
+
+        // assert
+        expect(iconExists).toBe(false);
+    });
+
+    it('when icon is present and hideInTileView is false and in tile mode, shows icon', () => {
+        // arrange
+        const propsData = {
+            text: 'foo',
+            isListItem: true,
+            hideIconInTileView: true
+        };
+
+        const slots = { default: '<div></div>' };
+
+        // act
+        const wrapper = shallowMount(sut, { propsData, slots });
+
+        const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
+
+        // assert
+        expect(iconExists).toBe(true);
+    });
 });

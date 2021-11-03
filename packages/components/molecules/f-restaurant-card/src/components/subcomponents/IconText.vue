@@ -8,11 +8,10 @@
             aria-hidden="true"
             :data-test-id="dataTestId">
             <span
-                v-if="hasSlotData"
+                v-if="showIcon"
                 :class="{
                     [$style['c-restaurantCard-iconText-icon']]: true,
-                    [$style['c-restaurantCard-iconText-icon--hideInTileView']]: booleanValue.hideInTileView,
-                    [$style['c-restaurantCard-iconText-icon--hideOnMidBellow']]: booleanValue.hideOnMidBellow
+                    [$style['c-restaurantCard-iconText-icon--hideOnMidBellow']]: hideIconInTileView
                 }"
                 :style="`fill:${color};`"
                 data-test-id="icon-text-icon">
@@ -70,11 +69,11 @@ export default {
         hasSlotData () {
             return !!this.$slots.default;
         },
-        booleanValue () {
-            return {
-                hideInTileView: (!this.isListItem && this.hideIconInTileView),
-                hideOnMidBellow: this.hideIconInTileView
-            };
+        shouldHideIcon () {
+            return this.hideIconInTileView && !this.isListItem;
+        },
+        showIcon () {
+            return this.hasSlotData && !this.shouldHideIcon;
         }
     }
 };
