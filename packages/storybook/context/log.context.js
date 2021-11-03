@@ -14,7 +14,7 @@ export default () => {
         logPayload.message = message || 'No message provided';
         logPayload.Level = level || 'error';
         logPayload.mode = mode || '';
-        logPayload.tags = tagsArr;
+        logPayload.tags = tagsArr.join(' ');
     };
 
     const log = {
