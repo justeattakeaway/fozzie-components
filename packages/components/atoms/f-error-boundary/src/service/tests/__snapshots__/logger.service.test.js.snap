@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loggerService buildVueError when tier is passed should return expected object 1`] = `
+Object {
+  "Exception": "Error adding to basket",
+  "ExceptionMessage": "timeout of 5000ms exceeded.",
+  "ExceptionStackTrace": "at XMLHttpRequest.ontimeout (bundle.js:12:345)",
+  "Tier": "1",
+  "vue.componentName": "vm not found",
+  "vue.lifecycleHook": "mounted hook",
+  "vue.propsData": undefined,
+}
+`;
+
+exports[`loggerService buildVueError when vm contains component name should return expected object 1`] = `
+Object {
+  "Exception": "Error adding to basket",
+  "ExceptionMessage": "timeout of 5000ms exceeded.",
+  "ExceptionStackTrace": "at XMLHttpRequest.ontimeout (bundle.js:12:345)",
+  "vue.componentName": "component <Basket Component>",
+  "vue.lifecycleHook": "mounted hook",
+  "vue.propsData": undefined,
+}
+`;
+
+exports[`loggerService buildVueError when vm has props data should return expected object 1`] = `
+Object {
+  "Exception": "Error adding to basket",
+  "ExceptionMessage": "timeout of 5000ms exceeded.",
+  "ExceptionStackTrace": "at XMLHttpRequest.ontimeout (bundle.js:12:345)",
+  "vue.componentName": "anonymous component",
+  "vue.lifecycleHook": "mounted hook",
+  "vue.propsData": Object {
+    "name": "basket",
+  },
+}
+`;
+
+exports[`loggerService buildVueError when vm is for root component should return expected object 1`] = `
+Object {
+  "Exception": "Error adding to basket",
+  "ExceptionMessage": "timeout of 5000ms exceeded.",
+  "ExceptionStackTrace": "at XMLHttpRequest.ontimeout (bundle.js:12:345)",
+  "vue.componentName": "root instance",
+  "vue.lifecycleHook": "mounted hook",
+  "vue.propsData": undefined,
+}
+`;
+
+exports[`loggerService buildVueError when vm is undefined should return expected object 1`] = `
+Object {
+  "Exception": "Error adding to basket",
+  "ExceptionMessage": "timeout of 5000ms exceeded.",
+  "ExceptionStackTrace": "at XMLHttpRequest.ontimeout (bundle.js:12:345)",
+  "vue.componentName": "vm not found",
+  "vue.lifecycleHook": "mounted hook",
+  "vue.propsData": undefined,
+}
+`;
+
+exports[`loggerService buildVueError when vm options contains component tag should return expected object 1`] = `
+Object {
+  "Exception": "Error adding to basket",
+  "ExceptionMessage": "timeout of 5000ms exceeded.",
+  "ExceptionStackTrace": "at XMLHttpRequest.ontimeout (bundle.js:12:345)",
+  "vue.componentName": "component <Basket Component>",
+  "vue.lifecycleHook": "mounted hook",
+  "vue.propsData": undefined,
+}
+`;
+
+exports[`loggerService buildVueError when vm options contains name and file name should return expected object 1`] = `
+Object {
+  "Exception": "Error adding to basket",
+  "ExceptionMessage": "timeout of 5000ms exceeded.",
+  "ExceptionStackTrace": "at XMLHttpRequest.ontimeout (bundle.js:12:345)",
+  "vue.componentName": "component <Basket Component> at BasketComponent.vue",
+  "vue.lifecycleHook": "mounted hook",
+  "vue.propsData": undefined,
+}
+`;
+
+exports[`loggerService buildVueError when vm options contains name should return expected object 1`] = `
+Object {
+  "Exception": "Error adding to basket",
+  "ExceptionMessage": "timeout of 5000ms exceeded.",
+  "ExceptionStackTrace": "at XMLHttpRequest.ontimeout (bundle.js:12:345)",
+  "vue.componentName": "component <Basket Component>",
+  "vue.lifecycleHook": "mounted hook",
+  "vue.propsData": undefined,
+}
+`;
