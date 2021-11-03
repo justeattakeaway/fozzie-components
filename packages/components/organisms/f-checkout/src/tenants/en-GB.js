@@ -26,14 +26,13 @@ const messages = {
             lastName: {
                 label: 'Last name',
                 validationMessages: {
-                    required: 'Please enter your last name',
-                    invalid: 'Please enter a valid email address'
+                    required: 'Please enter your last name'
                 }
             },
             email: {
                 label: 'Email',
                 validationMessages: {
-                    required: 'Please enter a valid email address'
+                    invalid: 'Please enter a valid email address'
                 }
             }
         },
