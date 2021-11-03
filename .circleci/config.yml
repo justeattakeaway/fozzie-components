@@ -88,6 +88,8 @@ commands:
             - packages/components/atoms/f-form-field/dist
             - packages/components/atoms/f-link/dist
             - packages/components/atoms/f-popover/dist
+            - packages/components/atoms/f-image-tile/dist
+            - packages/components/atoms/f-spinner/dist
 
       - save_cache:
           name: Cache for organisms
@@ -103,13 +105,12 @@ commands:
             - packages/components/organisms/f-offers/dist
             - packages/components/organisms/f-status-banner/dist
             - packages/components/organisms/f-takeawaypay-activation/dist
-            - packages/components/organisms/f-template-subnav/dist
 
-      # TODO: Uncomment this once we have a template component
-      #- save_cache:
-      #    name: Cache for templates
-      #    key: build-cache-templates-{{ .Branch }}-{{ .Revision }}
-      #    paths:
+      - save_cache:
+          name: Cache for templates
+          key: build-cache-templates-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/templates/f-template-subnav/dist
 
       - save_cache:
           name: Cache for pages
@@ -146,11 +147,10 @@ commands:
           name: Restore organisms Cache
           keys:
             - build-cache-organisms-master-
-      # TODO: Should uncomment this once we have a template component
-      #- restore_cache:
-      #    name: Restore pages Cache
-      #    keys:
-      #      - build-cache-templates-master-
+      - restore_cache:
+          name: Restore pages Cache
+          keys:
+            - build-cache-templates-master-
       - restore_cache:
           name: Restore pages Cache
           keys:

@@ -4,6 +4,37 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.1.1
+------------------------------
+*November 2, 2021*
+
+### Updated
+- Updated Circle CI for new location of f-template-subnav
+
+
+v5.1.0
+------------------------------
+*October 28, 2021*
+
+### Changed
+- fozzie package update to the latest (6.0.0) to include latest pie-design-tokens.
+
+
+v5.0.4
+------------------------------
+*October 28, 2021*
+
+### Added
+- `f-spinner` to Circle CI cache.
+
+
+v5.0.4
+------------------------------
+*October 28, 2021*
+
+### Updated
+- Circle CI cached components to include new f-image-tile component
+
 v5.0.3
 ------------------------------
 *October 28, 2021*

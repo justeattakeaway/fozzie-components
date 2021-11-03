@@ -2,10 +2,10 @@ const messages = {
     locale: 'en-GB',
 
     messages: {
-        titleActivationAvailable: 'Welcome back, {consumerGivenName}. Let\'s activate Just Eat Pay on your account.',
-        titleActivationNotLoggedIn: 'Let\'s get you started with Just Eat Pay.',
+        titleActivationAvailable: 'Welcome back, {consumerGivenName}. Let’s activate Just Eat Pay on your account.',
+        titleActivationNotLoggedIn: 'Let’s get you started with Just Eat Pay.',
         titleActivationSuccessful: 'All systems go.',
-        titleActivationFailed: ' We can\'t activate Just Eat Pay on your account right now, sorry.',
+        titleActivationFailed: ' We can’t activate Just Eat Pay on your account right now, sorry.',
         descriptionActivationAvailable1: 'Just Eat Pay will be activated for',
         descriptionActivationAvailable2: 'Not you? Choose a different account or sign up.',
         descriptionActivationNotLoggedIn: 'Do you already have a Just Eat account?',

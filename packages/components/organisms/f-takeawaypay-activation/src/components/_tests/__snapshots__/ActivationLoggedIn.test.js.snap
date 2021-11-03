@@ -4,7 +4,7 @@ exports[`ActivationLoggedIn should be rendered correctly 1`] = `
 <div data-test-id="activation-logged-in-component">
   <bag-run-bg-icon-stub></bag-run-bg-icon-stub>
   <h1>
-    Welcome back, Joe. Let's activate Just Eat Pay on your account.
+    Welcome back, Joe. Let’s activate Just Eat Pay on your account.
   </h1>
   <p>
     Just Eat Pay will be activated for <span>test@mail.com</span></p>
@@ -74,7 +74,7 @@ exports[`ActivationLoggedIn should be rendered correctly while activation is in 
     </g>
   </svg>
   <h1>
-    Welcome back, Joe. Let's activate Just Eat Pay on your account.
+    Welcome back, Joe. Let’s activate Just Eat Pay on your account.
   </h1>
   <p>
     Just Eat Pay will be activated for <span>test@mail.com</span></p>

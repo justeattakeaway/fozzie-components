@@ -13,7 +13,9 @@
 import tenantConfigs from '../tenants';
 <%
 }
-if (config.needsTestingApiMocks) { %>import <%= name.filename%>ServiceApi from '../services/<%= name.filename%>ServiceApi';
+if (config.needsTestingApiMocks) { %>
+// eslint-disable-next-line no-unused-vars
+import <%= name.filename%>ServiceApi from '../services/<%= name.filename%>ServiceApi';
 <%
 } %>
 export default {
@@ -44,7 +46,7 @@ export default {
     min-height: 80vh;
     width: 80vw;
     margin: auto;
-    border: 1px solid $color-red;
+    border: 1px solid red;
     font-family: $font-family-base;
     @include font-size(heading-m);
 }

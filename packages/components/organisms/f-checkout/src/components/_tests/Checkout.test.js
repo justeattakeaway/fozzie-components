@@ -133,7 +133,6 @@ describe('Checkout', () => {
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
     const getCustomerUrl = 'http://localhost/getcustomer';
-    const spinnerTimeout = 100;
     const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
 
@@ -150,7 +149,6 @@ describe('Checkout', () => {
         getGeoLocationUrl,
         getCustomerUrl,
         applicationName,
-        spinnerTimeout,
         otacToAuthExchanger
     };
 
@@ -342,7 +340,7 @@ describe('Checkout', () => {
             });
 
 
-            it('should render the error page when its value is not null and spinner set to `false`', () => {
+            it('should render the error page when its value is not null', () => {
                 // Arrange & Act
                 const wrapper = mount(VueCheckout, {
                     i18n,
@@ -355,7 +353,6 @@ describe('Checkout', () => {
                     },
                     data () {
                         return {
-                            isLoading: false,
                             errorFormType: CHECKOUT_ERROR_FORM_TYPE.default
                         };
                     }
@@ -363,37 +360,10 @@ describe('Checkout', () => {
 
                 const checkoutForm = wrapper.find('[data-test-id="checkout-component"]');
                 const errorPage = wrapper.find('[data-test-id="checkout-error-page-component"]');
-                const spinner = wrapper.find('[data-test-id="checkout-loading-spinner"]');
 
                 // Assert
                 expect(checkoutForm.exists()).toBe(false);
-                expect(spinner.exists()).toBe(false);
                 expect(errorPage.exists()).toBe(true);
-            });
-        });
-
-        describe('shouldShowSpinner ::', () => {
-            it('should render the loading spinner and not the checkout form when shouldShowSpinner is set to `true`', () => {
-                // Arrange & Act
-                const wrapper = mount(VueCheckout, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            errorFormType: null,
-                            shouldShowSpinner: true
-                        };
-                    }
-                });
-
-                const checkoutForm = wrapper.find('[data-test-id="checkout-component"]');
-                const spinner = wrapper.find('[data-test-id="checkout-loading-spinner"]');
-
-                // Assert
-                expect(checkoutForm.exists()).toBe(false);
-                expect(spinner.exists()).toBe(true);
             });
         });
     });
@@ -1305,40 +1275,6 @@ describe('Checkout', () => {
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
 
-            it('should call `startSpinnerCountdown`', async () => {
-                // Arrange
-                const startSpinnerCountdownSpy = jest.spyOn(VueCheckout.methods, 'startSpinnerCountdown');
-
-                // Act
-                shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                await flushPromises();
-
-                // Assert
-                expect(startSpinnerCountdownSpy).toHaveBeenCalled();
-            });
-
-            it('should call `resetLoadingState`', async () => {
-                // Arrange
-                const resetLoadingStateSpy = jest.spyOn(VueCheckout.methods, 'resetLoadingState');
-
-                // Act
-                shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                await flushPromises();
-
-                // Assert
-                expect(resetLoadingStateSpy).toHaveBeenCalled();
-            });
-
             describe('if shouldLoadAddress returns `false`', () => {
                 it('should not call `loadAddress`', async () => {
                     // Arrange & Act
@@ -1459,12 +1395,7 @@ describe('Checkout', () => {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData,
-                    data () {
-                        return {
-                            isLoading: true
-                        };
-                    }
+                    propsData
                 });
 
                 // Act
@@ -1472,106 +1403,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(addressServiceSpy).toHaveBeenCalled();
-            });
-        });
-
-        describe('startSpinnerCountdown ::', () => {
-            beforeEach(() => {
-                jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
-                jest.useFakeTimers();
-            });
-
-            afterEach(() => {
-                jest.clearAllMocks();
-                jest.clearAllTimers();
-            });
-
-            describe('when `isLoading` is `true`', () => {
-                it('should not set `shouldShowSpinner` to `true` before `spinnerTimeout`', () => {
-                    // Arrange & Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(),
-                        i18n,
-                        localVue,
-                        propsData,
-                        data () {
-                            return {
-                                isLoading: true
-                            };
-                        }
-                    });
-
-                    wrapper.vm.startSpinnerCountdown();
-                    jest.advanceTimersByTime(spinnerTimeout - 1);
-
-                    // Assert
-                    expect(wrapper.vm.shouldShowSpinner).toBe(false);
-                });
-
-                it('should set `shouldShowSpinner` to `true` after `spinnerTimeout`', () => {
-                    // Arrange & Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(),
-                        i18n,
-                        localVue,
-                        propsData,
-                        data () {
-                            return {
-                                isLoading: true
-                            };
-                        }
-                    });
-
-                    wrapper.vm.startSpinnerCountdown();
-                    jest.advanceTimersByTime(spinnerTimeout + 1);
-
-                    // Assert
-                    expect(wrapper.vm.shouldShowSpinner).toBe(true);
-                });
-            });
-
-            describe('when `isLoading` is `false`', () => {
-                it('should not set `shouldShowSpinner` to `true` after one second', () => {
-                    // Arrange & Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(),
-                        i18n,
-                        localVue,
-                        propsData,
-                        data () {
-                            return {
-                                isLoading: false
-                            };
-                        }
-                    });
-
-                    wrapper.vm.startSpinnerCountdown();
-                    jest.advanceTimersByTime(1000);
-
-                    // Assert
-                    expect(wrapper.vm.shouldShowSpinner).toBe(false);
-                });
-
-                it('should not set `shouldShowSpinner` to `true` before one second', () => {
-                    // Arrange & Act
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(),
-                        i18n,
-                        localVue,
-                        propsData,
-                        data () {
-                            return {
-                                isLoading: false
-                            };
-                        }
-                    });
-
-                    wrapper.vm.startSpinnerCountdown();
-                    jest.advanceTimersByTime(999);
-
-                    // Assert
-                    expect(wrapper.vm.shouldShowSpinner).toBe(false);
-                });
             });
         });
 
@@ -3832,10 +3663,7 @@ describe('Checkout', () => {
                 const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
 
                 const wrapper = mount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        message: alertCode
-                    }),
+                    store: createStore(),
                     i18n,
                     localVue,
                     propsData

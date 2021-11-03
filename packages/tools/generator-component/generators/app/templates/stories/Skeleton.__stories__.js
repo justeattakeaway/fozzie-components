@@ -14,7 +14,7 @@ export const <%= name.component %>Component = () => ({
     components: { <%= name.component %> },
     props: {
     },
-    template: `<<%= name.template %> />`
+    template: '<<%= name.template %> />'
 });
 
 <%= name.component %>Component.storyName = 'f-<%= name.default %>';
