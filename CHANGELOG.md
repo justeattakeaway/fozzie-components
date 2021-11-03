@@ -3,14 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v5.2.0
+v5.1.3
 ------------------------------
- *October 29, 2021*
+ *November 3, 2021*
 
 ### Changed
 - wdio configuration for component, visual and a11y tests
 - allure script in `wdio-shared.conf.js` and `package.json`
 - small update of generator to reflect above changes
+
+v5.1.2
+------------------------------
+*November 3, 2021*
+
+### Added
+- `f-card-with-content` generated component.
+
 
 v5.1.1
 ------------------------------

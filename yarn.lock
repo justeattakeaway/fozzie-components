@@ -2201,6 +2201,13 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.0.tgz#2e635096c2a6a8fd7da308479a2126748716dcbf"
   integrity sha512-ZbAgBrqn3a2furQ5F0FLffbsMZar9aIDsRG/2uWnsv6uY0KIHgJi08kH2XK5NzDzckHih2uMN37JiYpQMw6rNQ==
 
+"@justeat/f-navigation-links@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-0.2.0.tgz#9ebf6ed9a7028627d9e8fa6baeeeb05dfce6c6db"
+  integrity sha512-8KzWDGapNOwRjwKF45uhpOi4dArkrtkgGOLslEWM2ApQjt9QYfW00tUVnOJPjS29MqgAQGi7A80ZEky1KcfC7Q==
+  dependencies:
+    "@justeat/f-link" "2.0.0"
+
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.0.0.tgz#fa6ea41ca3ccde26d5ed65511a96f1a728a9fc88"
