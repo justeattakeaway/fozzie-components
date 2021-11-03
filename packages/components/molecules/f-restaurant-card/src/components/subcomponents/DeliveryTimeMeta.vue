@@ -1,0 +1,81 @@
+<template>
+    <div>
+        <icon-text
+            v-if="eta"
+            :text="eta"
+            :accessible-text="etaForScreenReaders"
+            :is-bold="true"
+            :color="$options.PieTokens.theme.jet.color.global.green"
+            :hide-icon-in-tile-view="true"
+            :is-list-item="isListItem">
+            <clock-icon />
+        </icon-text>
+
+        <icon-text
+            v-if="true || !eta && distance"
+            :text="distance"
+            :accessible-text="distanceForScreenReaders"
+            :is-bold="true"
+            :hide-icon-in-tile-view="true"
+            :is-list-item="isListItem">
+            <map-pin-icon />
+        </icon-text>
+
+        <icon-text
+            v-if="true || !eta && !distance && address"
+            :text="address"
+            :accessible-text="addressForScreenReaders"
+            :is-list-item="isListItem">
+            <map-pin-icon />
+        </icon-text>
+    </div>
+</template>
+
+<script>
+import { MapPinIcon, ClockIcon } from '@justeat/f-vue-icons';
+import PIE_TOKENS from '@justeat/pie-design-tokens/dist/tokens.json';
+import IconText from './IconText.vue';
+
+export default {
+    PieTokens: PIE_TOKENS,
+    name: 'DeliveryTimeMeta',
+    components: {
+        IconText,
+        MapPinIcon,
+        ClockIcon
+    },
+    props: {
+        address: {
+            type: String,
+            default: null
+        },
+        addressForScreenReaders: {
+            type: String,
+            default: null
+        },
+        distance: {
+            type: String,
+            default: null
+        },
+        distanceForScreenReaders: {
+            type: String,
+            default: null
+        },
+        eta: {
+            type: String,
+            default: null
+        },
+        etaForScreenReaders: {
+            type: String,
+            default: null
+        },
+        isListItem: {
+            type: Boolean,
+            default: false
+        }
+    }
+};
+</script>
+
+<style lang="scss" module>
+</style>

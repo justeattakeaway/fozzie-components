@@ -83,6 +83,16 @@
                 :is="errorBoundary"
                 tier="3">
                 <slot name="meta-items" />
+
+                <delivery-time-meta
+                    v-if="deliveryTimeData.eta || deliveryTimeData.distance || deliveryTimeData.address"
+                    data-test-id="restaurant-delivery-time-meta"
+                    :address="deliveryTimeData.address"
+                    :distance="deliveryTimeData.distance"
+                    :distance-for-screen-readers="deliveryTimeData.distanceForScreenReaders"
+                    :eta="deliveryTimeData.eta"
+                    :eta-for-screen-readers="deliveryTimeData.etaForScreenReaders"
+                    :is-list-item="isListItem" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -137,6 +147,7 @@ import RestaurantDish from './subcomponents/RestaurantDish.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 import RestaurantBadges from './subcomponents/RestaurantBadges/RestaurantBadges.vue';
 import RestaurantBadge from './subcomponents/RestaurantBadges/RestaurantBadge.vue';
+import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta.vue';
 
 const {
     'support-positive': newBadgeTextColour,
@@ -160,7 +171,8 @@ export default {
         RestaurantDish,
         RestaurantCuisines,
         RestaurantBadges,
-        RestaurantBadge
+        RestaurantBadge,
+        DeliveryTimeMeta
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -213,6 +225,10 @@ export default {
         newBadgeText: {
             type: String,
             default: null
+        },
+        deliveryTimeData: {
+            type: Object,
+            default: () => ({})
         }
     },
     data () {

@@ -46,7 +46,14 @@ RestaurantCardComponent.args = {
         cuisines: ['Mexican', 'Burgers', 'Chinese'],
         imageBadges: [{ text: 'Promoted', textColour: badgeColourSchemes.promoted.text, backgroundColour: badgeColourSchemes.promoted.background }, { text: 'StampCards', textColour: badgeColourSchemes.stampcards.text, backgroundColour: badgeColourSchemes.stampcards.background }],
         contentBadges: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test badge that hopefully never happens' }],
-        newBadgeText: 'NEW'
+        newBadgeText: 'NEW',
+        deliveryTimeData: {
+            address: '29 - 32 The Oval, London',
+            distance: '1.35 miles',
+            distanceForScreenReaders: '1.35 miles from your location',
+            eta: '20-25 min',
+            etaForScreenReaders: 'delivery estimate 20 to 25 minutes'
+        }
     },
 
     flags: {
