@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (to be added to next release)
 ------------------------------
-*November 01, 2021*
+*November 3, 2021*
 
 ### Added
 - Component, visual and accessibility tests for icon-buttons
