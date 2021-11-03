@@ -34,7 +34,7 @@
 <script>
 import { MapPinIcon, ClockIcon } from '@justeat/f-vue-icons';
 import PIE_TOKENS from '@justeat/pie-design-tokens/dist/tokens.json';
-import IconText from './IconText.vue';
+import IconText from '../IconText.vue';
 
 export default {
     PieTokens: PIE_TOKENS,

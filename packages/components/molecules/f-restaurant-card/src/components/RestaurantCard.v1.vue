@@ -147,7 +147,7 @@ import RestaurantDish from './subcomponents/RestaurantDish.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 import RestaurantBadges from './subcomponents/RestaurantBadges/RestaurantBadges.vue';
 import RestaurantBadge from './subcomponents/RestaurantBadges/RestaurantBadge.vue';
-import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta.vue';
+import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 
 const {
     'support-positive': newBadgeTextColour,

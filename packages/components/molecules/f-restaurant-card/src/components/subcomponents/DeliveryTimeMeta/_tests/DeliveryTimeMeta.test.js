@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import DeliveryTimeMeta from '../subcomponents/DeliveryTimeMeta.vue';
+import DeliveryTimeMeta from '../DeliveryTimeMeta.vue';
 
 describe('DeliveryTimeMeta', () => {
     it('should be defined', () => {
