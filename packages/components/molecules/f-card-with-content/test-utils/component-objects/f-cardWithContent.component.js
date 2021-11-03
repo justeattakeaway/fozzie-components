@@ -12,14 +12,6 @@ module.exports = class CardWithContent extends Page {
         return $(COMPONENT);
     }
 
-    load () {
-        super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
-    }
-
     waitForComponent () {
         super.waitForComponent(this.component);
     }

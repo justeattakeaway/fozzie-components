@@ -8,6 +8,7 @@ describe('Accessibility tests', () => {
     beforeEach(() => {
         cardWithContent.load();
     });
+
     it('a11y - should test f-cardWithContent component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-cardWithContent');

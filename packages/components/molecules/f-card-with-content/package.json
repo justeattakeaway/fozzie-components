@@ -6,7 +6,7 @@
   "maxBundleSize": "15kB",
   "files": [
     "dist",
-    "test-utils" 
+    "test-utils"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-card-with-content",
   "contributors": [
@@ -39,9 +39,6 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {
-    "@justeat/f-services": "1.7.0"
-  },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
