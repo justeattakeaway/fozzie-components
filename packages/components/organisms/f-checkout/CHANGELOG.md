@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.0.0
 ------------------------------
+*November 3, 2021*
+
+### Added
+- Visual tests for age verification
+  
+
+v3.0.0
+------------------------------
 *October 29, 2021*
 
 ### Removed
