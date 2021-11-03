@@ -127,4 +127,16 @@ export default class CheckoutAnalyticService {
             isAsapSelected: this.checkout.hasAsapSelected
         });
     }
+
+    /**
+     * Push guest checkout submission
+     */
+    trackGuestCheckoutSubmission () {
+        this.$gtm.pushEvent({
+            event: 'trackEvent',
+            eventCategory: 'engagement',
+            eventAction: 'form_checkout_guest',
+            eventLabel: 'success'
+        });
+    }
 }

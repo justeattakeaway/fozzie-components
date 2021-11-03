@@ -478,7 +478,9 @@ export default {
 
                 if (this.isFulfillable) {
                     await this.submitOrder();
-
+                    if (!this.isLoggedIn) {
+                        this.checkoutAnalyticsService.trackGuestCheckoutSubmission();
+                    }
                     this.redirectToPayment();
                 } else {
                     this.handleNonFulfillableCheckout();
