@@ -455,8 +455,6 @@ jobs:
           when: always
       - store_artifacts:
           path: allure-report
-      - store_test_results:
-          path: test/results/ci
       - slack_notify_fail
       - slack_notify_success
 
