@@ -30,12 +30,11 @@ export const IconButtonComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template: `
     <div>
-        <div class="u-spacingBottom--large storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide"
+        <div class="u-spacingBottom--large u-spacingTop storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide"
         v-for="(list, index) in iconButtonLists">
+            <div v-for="(icon, index) in list" :key="index">
             <f-button
                 class="u-spacingBottom--large"
-                v-for="(icon, index) in list"
-                :key="index"
                 :buttonType="icon.type"
                 :buttonSize="icon.size"
                 :actionType="actionType"
@@ -43,15 +42,13 @@ export const IconButtonComponent = (args, { argTypes }) => ({
                 :isIcon="true"
                 :isLoading="isLoading">
                 <CrossIcon />
-                <span class="is-visuallyHidden">
-                    {{ icon.text }}
-                </span>
             </f-button>
+            <div class="u-spacingBottom--large u-spacingTop" v-if="showIconButtonName">
+                {{ icon.text }}
+            </div>
 
             <f-button
                 class="u-spacingBottom--large"
-                v-for="(icon, index) in list"
-                :key="index"
                 :buttonType="icon.type"
                 :buttonSize="icon.size"
                 :actionType="actionType"
@@ -63,11 +60,12 @@ export const IconButtonComponent = (args, { argTypes }) => ({
                     {{ icon.text }}
                 </span>
             </f-button>
+            <div class="u-spacingBottom--large u-spacingTop" v-if="showIconButtonName">
+                {{ icon.text }}
+            </div>
 
             <f-button
                 class="u-spacingBottom--large"
-                v-for="(icon, index) in list"
-                :key="index"
                 :buttonType="icon.type"
                 :buttonSize="icon.size"
                 :actionType="actionType"
@@ -79,6 +77,10 @@ export const IconButtonComponent = (args, { argTypes }) => ({
                     {{ icon.text }}
                 </span>
             </f-button>
+            <div class="u-spacingBottom--large u-spacingTop" v-if="showIconButtonName">
+                {{ icon.text }}
+            </div>
+            </div>
         </div>
     </div>`
 });
@@ -89,6 +91,11 @@ IconButtonComponent.argTypes = {
         control: { type: 'select', options: ['button', 'submit', 'reset'] },
         description: 'Choose the action type of the button',
         defaultValue: 'button'
+    },
+    showIconButtonName: {
+        control: { type: 'select', options: [true, false] },
+        description: 'Show the name of the button icon',
+        defaultValue: false
     }
 };
 
