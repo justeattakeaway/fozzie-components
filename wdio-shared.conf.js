@@ -66,7 +66,7 @@ exports.config = {
 
                 browser.call(async () => {
                     await percySnapshot(`${screenshotName} - ${featureType}`, {
-                        widths: configuration.percy.viewports[formattedFeatureType][0]
+                        widths: configuration.percy.viewports[formattedFeatureType]
                     });
                 });
             });
@@ -88,8 +88,7 @@ exports.config = {
      */
     // eslint-disable-next-line consistent-return
     after: () => {
-
-        if(!CIRCLECI) {
+        if (!CIRCLECI) {
             console.log(
                 '-----------------------------------------------------', '\n',
                 'For more error logs, add "allure" to "testReporters" in "test/configuration/local.config.js".', '\n', '\n', 'To then see the ALLURE REPORT, please head to the route of the directory and run', '\n',
