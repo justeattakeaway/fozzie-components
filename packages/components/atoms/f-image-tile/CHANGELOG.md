@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*October 26, 2021*
+*October 28, 2021*
 
 ### Added
-- Component outline using component generator
+- Created initial component using yeoman generator
+- Added to circle ci cache
