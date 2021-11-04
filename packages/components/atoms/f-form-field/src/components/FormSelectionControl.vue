@@ -90,6 +90,8 @@ export default {
 <style lang="scss" module>
 /**
 	Changing the color of an inline SVG. The color needs to be encoded, so '#' turns into '%23'.
+	Had a lot of problems trying to save the SVG in the `assets` folder, since it wouldn't load, and including it
+	in `f-vue-icons` wouldn't help, since we need to use this in the `<style>` section, and not as a Vue component.
 */
 @mixin tick-svg($color) {
 	$encodedColor: '%23' + str-slice(#{$color}, 2);
@@ -143,9 +145,7 @@ export default {
 	}
 
 	.c-formField-field--checkbox:focus + label:before {
-		box-shadow:
-			0px 0px 0px 1px $color-white,
-			0px 0px 0px 3px $color-focus;
+		box-shadow: 0 0 0 1px $color-white, 0 0 0 3px $color-focus;
 
 		border: 1px solid $color-interactive-brand;
 
@@ -157,15 +157,11 @@ export default {
 			transparency will not be hidden in high-contrast
 			thus box-shadow will not show but the outline will
 			providing accessibility */
-		outline-color: transparent;
-		outline-width: 2px;
-		outline-style: dotted;
+		outline: transparent dotted 2px;
 	}
 
 	.c-formField-field--checkbox:focus:not(:checked) + label:before {
-		box-shadow:
-			0px 0px 0px 1px $color-white,
-			0px 0px 0px 3px $color-focus;
+		box-shadow: 0 0 0 1px $color-white, 0 0 0 3px $color-focus;
 
 		border: 1px solid $color-grey-45;
 	}

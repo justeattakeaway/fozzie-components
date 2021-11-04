@@ -70,7 +70,7 @@ $form-input-icon-horizontalIndent : 19px;
 }
 
 .c-formField {
-    &+& {
+    & + & {
         margin-top: spacing(x2);
     }
 }
