@@ -11,7 +11,7 @@
                 v-if="showIcon"
                 :class="{
                     [$style['c-restaurantCard-iconText-icon']]: true,
-                    [$style['c-restaurantCard-iconText-icon--hideOnMidBellow']]: hideIconInTileView
+                    [$style['c-restaurantCard-iconText-icon--hideOnMidBelow']]: hideIconInTileView
                 }"
                 :style="`fill:${color};`"
                 data-test-id="icon-text-icon">
@@ -103,7 +103,7 @@ export default {
     margin-right: spacing(x0.5);
 }
 
-.c-restaurantCard-iconText-icon--hideOnMidBellow {
+.c-restaurantCard-iconText-icon--hideOnMidBelow {
     @include media('<mid') {
         display: none;
     }
