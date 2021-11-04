@@ -7,7 +7,6 @@ module.exports = {
         'plugin:vuejs-accessibility/recommended'
     ],
     rules: {
-		'no-tabs': 'off',
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'vue/html-quotes': 'off',

@@ -39,7 +39,6 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-icons": "file:.yalc/@justeat/f-icons",
     "@justeat/f-services": "1.0.0",
     "@justeat/f-vue-icons": "2.5.0"
   },
