@@ -31,6 +31,7 @@
         <checkout-form-field
             field-name="postcode"
             field-type="address"
+            max-length="50"
             should-validate-on-blur />
     </div>
 </template>
