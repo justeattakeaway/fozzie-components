@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, config } from '@vue/test-utils';
 import sut from '../IconText.vue';
 
 describe('IconText.vue', () => {
@@ -48,41 +48,47 @@ describe('IconText.vue', () => {
         expect(accessibleText).toBe('foo');
     });
 
-    it('when icon is present and hideInTileView is true and in tile mode, hides Icon', () => {
-        // arrange
-        const propsData = {
-            text: 'foo',
-            isListItem: false,
-            hideIconInTileView: true
-        };
+    describe('Icon Visibility', () => {
+        it('should hide icon when "hideIconInTileView" is true and in Tile view', () => {
+            // arrange
+            const propsData = {
+                text: 'foo',
+                isListItem: false,
+                hideIconInTileView: true
+            };
 
-        const slots = { default: '<div></div>' };
+            const slots = { default: '<div></div>' };
 
-        // act
-        const wrapper = shallowMount(sut, { propsData, slots });
+            // act
+            const wrapper = shallowMount(sut, { propsData, slots });
 
-        const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
+            const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
 
-        // assert
-        expect(iconExists).toBe(false);
-    });
+            // assert
+            expect(iconExists).toBe(false);
+        });
 
-    it('when icon is present and hideInTileView is false and in tile mode, shows icon', () => {
-        // arrange
-        const propsData = {
-            text: 'foo',
-            isListItem: true,
-            hideIconInTileView: true
-        };
+        it('should show icon when "hideIconInTileView" is true and in List view', () => {
+            // arrange
+            const propsData = {
+                text: 'foo',
+                hideIconInTileView: true
+            };
 
-        const slots = { default: '<div></div>' };
+            const slots = { default: '<div></div>' };
 
-        // act
-        const wrapper = shallowMount(sut, { propsData, slots });
+            config.provide = { isListItem: true };
 
-        const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
+            // act
+            const wrapper = shallowMount(sut, { propsData, slots });
 
-        // assert
-        expect(iconExists).toBe(true);
+            const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
+
+            // assert
+            expect(iconExists).toBe(true);
+
+            // cleanup
+            config.provide = {};
+        });
     });
 });

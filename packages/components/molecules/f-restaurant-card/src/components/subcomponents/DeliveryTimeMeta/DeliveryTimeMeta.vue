@@ -7,7 +7,6 @@
             :is-bold="true"
             :color="$options.PieTokens.theme.jet.color.global.green"
             :hide-icon-in-tile-view="true"
-            :is-list-item="isListItem"
             :data-test-id="'eta-icon-text'">
             <clock-icon />
         </icon-text>
@@ -18,7 +17,6 @@
             :accessible-text="distanceForScreenReaders"
             :is-bold="true"
             :hide-icon-in-tile-view="true"
-            :is-list-item="isListItem"
             :data-test-id="'distance-icon-text'">
             <map-pin-icon />
         </icon-text>
@@ -27,7 +25,6 @@
             v-else-if="address"
             :text="address"
             :accessible-text="addressForScreenReaders"
-            :is-list-item="isListItem"
             :data-test-id="'address-icon-text'">
             <map-pin-icon />
         </icon-text>
@@ -71,10 +68,6 @@ export default {
         etaForScreenReaders: {
             type: String,
             default: null
-        },
-        isListItem: {
-            type: Boolean,
-            default: false
         }
     }
 };

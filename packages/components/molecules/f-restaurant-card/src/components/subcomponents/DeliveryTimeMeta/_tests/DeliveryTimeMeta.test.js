@@ -1,4 +1,4 @@
-import { shallowMount, mount } from '@vue/test-utils';
+import { shallowMount, mount, config } from '@vue/test-utils';
 import sut from '../DeliveryTimeMeta.vue';
 
 
@@ -78,11 +78,10 @@ describe('DeliveryTimeMeta', () => {
     });
 
     describe('Tile view', () => {
-        it('should hide eta icon but show text in tile view', () => {
+        it('should hide eta icon but show text', () => {
             // arrange
             const propsData = {
-                eta: 'foo',
-                isListItem: false
+                eta: 'foo'
             };
 
             // act
@@ -96,11 +95,10 @@ describe('DeliveryTimeMeta', () => {
             expect(etaTextExists).toBe(true);
         });
 
-        it('should hide distance icon but show text in tile view', () => {
+        it('should hide distance icon but show text', () => {
             // arrange
             const propsData = {
-                distance: 'foo',
-                isListItem: false
+                distance: 'foo'
             };
 
             // act
@@ -114,11 +112,10 @@ describe('DeliveryTimeMeta', () => {
             expect(distanceTextExists).toBe(true);
         });
 
-        it('should show address icon and text in tile view', () => {
+        it('should show address icon and text', () => {
             // arrange
             const propsData = {
-                address: 'foo',
-                isListItem: false
+                address: 'foo'
             };
 
             // act
@@ -134,11 +131,18 @@ describe('DeliveryTimeMeta', () => {
     });
 
     describe('List view', () => {
-        it('should show eta icon and show text in list view', () => {
+        beforeAll(() => {
+            config.provide = { isListItem: true };
+        });
+
+        afterAll(() => {
+            config.provide = {};
+        });
+
+        it('should show eta icon and show text', () => {
             // arrange
             const propsData = {
-                eta: 'foo',
-                isListItem: true
+                eta: 'foo'
             };
 
             // act
@@ -152,11 +156,10 @@ describe('DeliveryTimeMeta', () => {
             expect(etaTextExists).toBe(true);
         });
 
-        it('should show distance icon and text in list view', () => {
+        it('should show distance icon and text', () => {
             // arrange
             const propsData = {
-                distance: 'foo',
-                isListItem: true
+                distance: 'foo'
             };
 
             // act
@@ -170,11 +173,10 @@ describe('DeliveryTimeMeta', () => {
             expect(distanceTextExists).toBe(true);
         });
 
-        it('should show address icon and text in list view', () => {
+        it('should show address icon and text', () => {
             // arrange
             const propsData = {
-                address: 'foo',
-                isListItem: true
+                address: 'foo'
             };
 
             // act

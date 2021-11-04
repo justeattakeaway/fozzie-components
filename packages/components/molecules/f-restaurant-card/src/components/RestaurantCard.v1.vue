@@ -87,8 +87,7 @@
                 <delivery-time-meta
                     v-if="displayDeliveryTimeMeta"
                     v-bind="deliveryTimeData"
-                    data-test-id="restaurant-delivery-time-meta"
-                    :is-list-item="isListItem" />
+                    data-test-id="restaurant-delivery-time-meta" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -238,6 +237,11 @@ export default {
                 this.deliveryTimeData.distance ||
                 this.deliveryTimeData.address;
         }
+    },
+    provide () {
+        return {
+            isListItem: this.isListItem
+        };
     }
 };
 </script>

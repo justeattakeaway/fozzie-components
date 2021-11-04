@@ -35,6 +35,11 @@
 <script>
 export default {
     name: 'IconText',
+    inject: {
+        isListItem: {
+            default: false
+        }
+    },
     props: {
         text: {
             type: String,
@@ -53,10 +58,6 @@ export default {
             default: false
         },
         hideIconInTileView: {
-            type: Boolean,
-            default: false
-        },
-        isListItem: {
             type: Boolean,
             default: false
         },
