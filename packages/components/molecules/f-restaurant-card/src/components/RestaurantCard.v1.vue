@@ -86,12 +86,8 @@
 
                 <delivery-time-meta
                     v-if="deliveryTimeData.eta || deliveryTimeData.distance || deliveryTimeData.address"
+                    v-bind="deliveryTimeData"
                     data-test-id="restaurant-delivery-time-meta"
-                    :address="deliveryTimeData.address"
-                    :distance="deliveryTimeData.distance"
-                    :distance-for-screen-readers="deliveryTimeData.distanceForScreenReaders"
-                    :eta="deliveryTimeData.eta"
-                    :eta-for-screen-readers="deliveryTimeData.etaForScreenReaders"
                     :is-list-item="isListItem" />
             </component>
             <!-- END ERROR BOUNDARY -->
