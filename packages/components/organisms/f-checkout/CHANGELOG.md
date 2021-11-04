@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.1.0
 ------------------------------
-*November 8, 2021*
+*November 5, 2021*
 
 ### Added
 `CheckoutFormField` component.
