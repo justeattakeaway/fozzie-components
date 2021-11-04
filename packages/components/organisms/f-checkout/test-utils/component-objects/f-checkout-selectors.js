@@ -20,15 +20,15 @@ exports.ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
 
 exports.FIELDS = {
     firstName: {
-        input: '[data-test-id="formfield-guest-first-name-input"]',
+        input: '[data-test-id="formfield-first-name-input"]',
         error: '[data-test-id="error-first-name-empty"]'
     },
     lastName: {
-        input: '[data-test-id="formfield-guest-last-name-input"]',
+        input: '[data-test-id="formfield-last-name-input"]',
         error: '[data-test-id="error-last-name-empty"]'
     },
     emailAddress: {
-        input: '[data-test-id="formfield-guest-email-input"]',
+        input: '[data-test-id="formfield-email-input"]',
         error: '[data-test-id="error-email-invalid"]'
     },
     mobileNumber: {

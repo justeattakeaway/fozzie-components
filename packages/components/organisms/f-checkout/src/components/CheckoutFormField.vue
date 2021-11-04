@@ -1,29 +1,28 @@
 <template>
     <form-field
         :value="customer[fieldName]"
-        :name="`guest-${kebabCase}`"
-        :maxlength="maxLength"
-        :label-text="translations.label"
-        :aria-describedby="`${kebabCase}-error`"
-        :aria-invalid="isEmpty || !isValid"
+        :name="translations.name"
         :input-type="inputType"
-        :has-error="isEmpty || !isValid"
-        @blur="formFieldBlur"
+        :label-text="translations.label"
+        :has-error="hasError"
+        :maxlength="maxLength"
+        :aria-invalid="hasError"
+        :aria-describedby="hasValidationMessages && translations.errorName"
+        @blur="shouldValidateOnBlur && formFieldBlur()"
         @input="updateCustomerDetails({ [fieldName]: $event })">
-        <template
-            #error>
+        <template #error>
             <error-message
-                v-if="isEmpty && hasErrorType('required')"
-                :id="`${kebabCase}-error`"
+                v-if="hasErrorType('required') && isEmpty"
+                :id="translations.errorName"
                 data-js-error-message
-                :data-test-id="`error-${kebabCase}-empty`">
+                :data-test-id="translations.emptyError">
                 {{ translations.validationMessages.required }}
             </error-message>
             <error-message
-                v-if="!isValid"
-                :id="`${kebabCase}-error`"
+                v-else-if="!isValid"
+                :id="translations.errorName"
                 data-js-error-message
-                :data-test-id="`error-${kebabCase}-invalid`">
+                :data-test-id="translations.invalidError">
                 {{ translations.validationMessages.invalid }}
             </error-message>
         </template>
@@ -76,20 +75,34 @@ export default {
         ]),
 
         translations () {
-            return this.$t(`formFields.customer.${this.fieldName}`);
+            return {
+                ...this.$t(`formFields.customer.${this.fieldName}`),
+                name: `${this.kebabCase}`,
+                errorName: `${this.kebabCase}-error`,
+                emptyError: `error-${this.kebabCase}-empty`,
+                invalidError: `error-${this.kebabCase}-invalid`
+            };
         },
 
         isEmpty () {
-            return this.isFieldEmpty(VALIDATIONS.guest, this.fieldName);
+            return this.isFieldEmpty(VALIDATIONS.customer, this.fieldName);
         },
 
         isValid () {
             if (this.hasErrorType('invalid')) {
-                const validations = this.$v[VALIDATIONS.guest][this.fieldName];
+                const validations = this.$v[VALIDATIONS.customer][this.fieldName];
 
                 return (!validations.$dirty || validations[this.fieldName]) && !this.isEmpty;
             }
             return true;
+        },
+
+        hasError () {
+            return this.hasValidationMessages && (this.isEmpty || !this.isValid);
+        },
+
+        hasValidationMessages () {
+            return !!this.translations.validationMessages;
         },
 
         kebabCase () {
@@ -102,18 +115,16 @@ export default {
             'updateCustomerDetails'
         ]),
 
-        formFieldBlur (field) {
-            if (this.shouldValidateOnBlur) {
-                const fieldValidation = this.$v[VALIDATIONS.guest][field];
+        formFieldBlur () {
+            const fieldValidation = this.$v[VALIDATIONS.customer][this.fieldName];
 
-                if (fieldValidation) {
-                    fieldValidation.$touch();
-                }
+            if (fieldValidation) {
+                fieldValidation.$touch();
             }
         },
 
         hasErrorType (errorType) {
-            return !!this.translations.validationMessages?.[errorType];
+            return this.hasValidationMessages && !!this.translations.validationMessages[errorType];
         }
     }
 };
