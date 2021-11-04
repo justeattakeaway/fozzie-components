@@ -8,15 +8,17 @@
             v-if="showIcon"
             :class="{
                 [$style['c-restaurantCard-iconText-icon']]: true,
+                [$style[`c-restaurantCard-iconText-icon--${color}`]]: true,
                 [$style['c-restaurantCard-iconText-icon--hideOnMidBelow']]: hideIconInTileView
             }"
-            :style="`fill:${color};`"
             data-test-id="icon-text-icon">
             <slot />
         </span>
         <span
-            :class="$style['c-restaurantCard-iconText-content']"
-            :style="`color:${color};`"
+            :class="{
+                [$style['c-restaurantCard-iconText-content']]: true,
+                [$style[`c-restaurantCard-iconText-content--${color}`]]: true
+            }"
             data-test-id="icon-text-visible-text">
             {{ text }}
         </span>
@@ -80,6 +82,10 @@ export default {
     line-height: spacing(x2);
 }
 
+.c-restaurantCard-iconText-content--green {
+    color: $color-green;
+}
+
 .c-restaurantCard-iconText-icon {
     width: spacing(x2);
     height: spacing(x2);
@@ -90,5 +96,9 @@ export default {
     @include media('<mid') {
         display: none;
     }
+}
+
+.c-restaurantCard-iconText-icon--green {
+    fill: $color-green;
 }
 </style>
