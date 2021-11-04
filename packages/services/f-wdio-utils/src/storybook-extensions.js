@@ -17,6 +17,12 @@ const buildUrl = (componentType, componentName, path) => {
         case 'organism':
             url += 'organisms--';
             break;
+        case 'template':
+            url += 'templates--';
+            break;
+        case 'page':
+            url += 'pages--';
+            break;
         default:
             throw new Error(`${componentType} is not a valid component type. Please use 'atom', 'atom-folder', 'molecule', 'molecule-folder' or 'organism'`);
     }
