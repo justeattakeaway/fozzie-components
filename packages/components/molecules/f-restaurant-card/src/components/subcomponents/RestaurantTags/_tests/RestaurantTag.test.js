@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import RestaurantBadge from '../RestaurantBadge.vue';
+import RestaurantTag from '../RestaurantTag.vue';
 
-describe('RestaurantBadge component', () => {
+describe('RestaurantTag component', () => {
     it('should be defined', () => {
         // arrange
         const propsData = {
@@ -11,7 +11,7 @@ describe('RestaurantBadge component', () => {
         };
 
         // act
-        const wrapper = shallowMount(RestaurantBadge, { propsData });
+        const wrapper = shallowMount(RestaurantTag, { propsData });
 
         // assert
         expect(wrapper.exists()).toBe(true);
@@ -27,7 +27,7 @@ describe('RestaurantBadge component', () => {
         };
 
         // act
-        const wrapper = shallowMount(RestaurantBadge, { propsData });
+        const wrapper = shallowMount(RestaurantTag, { propsData });
 
         // assert
         expect(wrapper.attributes('title')).toMatch(expectedTitle);
@@ -41,7 +41,7 @@ describe('RestaurantBadge component', () => {
         };
 
         // act
-        const wrapper = shallowMount(RestaurantBadge, { propsData });
+        const wrapper = shallowMount(RestaurantTag, { propsData });
 
         // assert
         expect(wrapper.attributes('style')).toMatch('color: rgb(36, 46, 48); background-color: rgb(245, 243, 241);');
@@ -57,7 +57,7 @@ describe('RestaurantBadge component', () => {
         };
 
         // act
-        const wrapper = shallowMount(RestaurantBadge, { propsData });
+        const wrapper = shallowMount(RestaurantTag, { propsData });
 
         // assert
         expect(wrapper.attributes('style')).toMatch('color: rgb(255, 255, 255); background-color: rgb(43, 54, 57);');

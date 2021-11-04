@@ -1,12 +1,12 @@
 <template>
     <span
         :class="{
-            [$style['c-restaurantBadge']]: true,
-            [$style['c-restaurantBadge--isLarge']]: isLarge
+            [$style['c-restaurantTag']]: true,
+            [$style['c-restaurantTag--isLarge']]: isLarge
         }"
         :style="`color:${textColour}; background-color:${backgroundColour};`"
         :title="text"
-        data-test-id="restaurant-badge">
+        data-test-id="restaurant-tag">
         {{ text }}
     </span>
 </template>
@@ -20,7 +20,7 @@ const {
 } = PieTokensTheme.jet.color.alias.default;
 
 export default {
-    name: 'RestaurantBadge',
+    name: 'RestaurantTag',
     props: {
         text: {
             type: String,
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-restaurantBadge {
+.c-restaurantTag {
     display: inline-block;
     padding: 0 spacing() / 2;
     border-radius: $radius-rounded-a;
@@ -57,7 +57,7 @@ export default {
      }
 }
 
-.c-restaurantBadge--isLarge {
+.c-restaurantTag--isLarge {
     padding: spacing() / 4 spacing();
 }
 </style>
