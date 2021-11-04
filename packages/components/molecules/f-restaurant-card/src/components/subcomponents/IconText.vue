@@ -5,7 +5,6 @@
                 [$style['c-restaurantCard-iconText']]: true,
                 [$style['c-restaurantCard-iconText--bold']]: isBold
             }"
-            aria-hidden="true"
             :data-test-id="dataTestId">
             <span
                 v-if="showIcon"
@@ -24,11 +23,6 @@
                 {{ text }}
             </span>
         </p>
-        <span
-            class="is-visuallyHidden"
-            data-test-id="icon-text-accessible-text">
-            {{ accessibleText || text }}
-        </span>
     </div>
 </template>
 
@@ -44,10 +38,6 @@ export default {
         text: {
             type: String,
             required: true
-        },
-        accessibleText: {
-            type: String,
-            default: null
         },
         color: {
             type: String,

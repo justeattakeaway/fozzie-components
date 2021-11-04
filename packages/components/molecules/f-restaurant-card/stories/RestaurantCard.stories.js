@@ -50,9 +50,7 @@ RestaurantCardComponent.args = {
         deliveryTimeData: {
             address: 'Fleet Place House, 2 Fleet Pl, London EC4M 7RF, The United Kingdom of Great Britain and Northern Ireland',
             distance: '1.35 miles',
-            distanceForScreenReaders: '1.35 miles from your location',
-            eta: '20-25 min',
-            etaForScreenReaders: 'delivery estimate 20 to 25 minutes'
+            eta: '20-25 min'
         }
     },
 
