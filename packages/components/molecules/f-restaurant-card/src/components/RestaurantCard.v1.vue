@@ -85,7 +85,7 @@
                 <slot name="meta-items" />
 
                 <delivery-time-meta
-                    v-if="deliveryTimeData.eta || deliveryTimeData.distance || deliveryTimeData.address"
+                    v-if="displayDeliveryTimeMeta"
                     v-bind="deliveryTimeData"
                     data-test-id="restaurant-delivery-time-meta"
                     :is-list-item="isListItem" />
@@ -231,6 +231,13 @@ export default {
         return {
             subcomponentColourSchemes
         };
+    },
+    computed: {
+        displayDeliveryTimeMeta () {
+            return this.deliveryTimeData.eta ||
+                this.deliveryTimeData.distance ||
+                this.deliveryTimeData.address;
+        }
     }
 };
 </script>
