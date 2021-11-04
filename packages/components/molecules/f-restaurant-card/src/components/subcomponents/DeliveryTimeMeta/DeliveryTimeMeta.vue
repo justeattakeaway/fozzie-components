@@ -4,7 +4,7 @@
             v-if="eta"
             :text="eta"
             :is-bold="true"
-            :color="$options.PieTokens.theme.jet.color.global.green"
+            :color="'green'"
             :hide-icon-in-tile-view="true"
             data-test-id="delivery-meta-eta">
             <clock-icon data-test-id="delivery-meta-eta-icon" />
@@ -30,11 +30,9 @@
 
 <script>
 import { MapPinIcon, ClockIcon } from '@justeat/f-vue-icons';
-import PIE_TOKENS from '@justeat/pie-design-tokens/dist/tokens.json';
 import IconText from '../IconText.vue';
 
 export default {
-    PieTokens: PIE_TOKENS,
     name: 'DeliveryTimeMeta',
     components: {
         IconText,

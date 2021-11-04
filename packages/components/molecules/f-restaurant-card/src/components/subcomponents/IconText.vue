@@ -1,28 +1,28 @@
 <template>
-    <div>
-        <p
+    <p
+        :class="{
+            [$style['c-restaurantCard-iconText']]: true,
+            [$style['c-restaurantCard-iconText--bold']]: isBold
+        }">
+        <span
+            v-if="showIcon"
             :class="{
-                [$style['c-restaurantCard-iconText']]: true,
-                [$style['c-restaurantCard-iconText--bold']]: isBold
-            }">
-            <span
-                v-if="showIcon"
-                :class="{
-                    [$style['c-restaurantCard-iconText-icon']]: true,
-                    [$style['c-restaurantCard-iconText-icon--hideOnMidBelow']]: hideIconInTileView
-                }"
-                :style="`fill:${color};`"
-                data-test-id="icon-text-icon">
-                <slot />
-            </span>
-            <span
-                :class="$style['c-restaurantCard-iconText-content']"
-                :style="`color:${color};`"
-                data-test-id="icon-text-visible-text">
-                {{ text }}
-            </span>
-        </p>
-    </div>
+                [$style['c-restaurantCard-iconText-icon']]: true,
+                [$style[`c-restaurantCard-iconText-icon--${color}`]]: true,
+                [$style['c-restaurantCard-iconText-icon--hideOnMidBelow']]: hideIconInTileView
+            }"
+            data-test-id="icon-text-icon">
+            <slot />
+        </span>
+        <span
+            :class="{
+                [$style['c-restaurantCard-iconText-content']]: true,
+                [$style[`c-restaurantCard-iconText-content--${color}`]]: true
+            }"
+            data-test-id="icon-text-visible-text">
+            {{ text }}
+        </span>
+    </p>
 </template>
 
 <script>
@@ -82,6 +82,10 @@ export default {
     line-height: spacing(x2);
 }
 
+.c-restaurantCard-iconText-content--green {
+    color: $color-green;
+}
+
 .c-restaurantCard-iconText-icon {
     width: spacing(x2);
     height: spacing(x2);
@@ -92,5 +96,9 @@ export default {
     @include media('<mid') {
         display: none;
     }
+}
+
+.c-restaurantCard-iconText-icon--green {
+    fill: $color-green;
 }
 </style>
