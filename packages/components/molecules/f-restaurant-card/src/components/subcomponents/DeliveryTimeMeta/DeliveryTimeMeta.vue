@@ -6,7 +6,7 @@
             :is-bold="true"
             :color="$options.PieTokens.theme.jet.color.global.green"
             :hide-icon-in-tile-view="true"
-            :data-test-id="'eta-icon-text'">
+            data-test-id="eta-icon-text">
             <clock-icon />
         </icon-text>
 
@@ -15,14 +15,14 @@
             :text="distance"
             :is-bold="true"
             :hide-icon-in-tile-view="true"
-            :data-test-id="'distance-icon-text'">
+            data-test-id="distance-icon-text">
             <map-pin-icon />
         </icon-text>
 
         <icon-text
             v-else-if="address"
             :text="address"
-            :data-test-id="'address-icon-text'">
+            data-test-id="address-icon-text">
             <map-pin-icon />
         </icon-text>
     </div>

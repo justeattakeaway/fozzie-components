@@ -87,8 +87,8 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-            const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"] [data-test-id="icon-text-icon"]').exists();
+            const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
 
             // assert
             expect(etaIconExists).toBe(false);
@@ -104,8 +104,8 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-            const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"] [data-test-id="icon-text-icon"]').exists();
+            const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
 
             // assert
             expect(distanceIconExists).toBe(false);
@@ -121,8 +121,8 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-            const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"] [data-test-id="icon-text-icon"]').exists();
+            const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
 
             // assert
             expect(addressIconExists).toBe(true);
@@ -148,8 +148,8 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-            const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"] [data-test-id="icon-text-icon"]').exists();
+            const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
 
             // assert
             expect(etaIconExists).toBe(true);
@@ -165,8 +165,8 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-            const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"] [data-test-id="icon-text-icon"]').exists();
+            const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
 
             // assert
             expect(distanceIconExists).toBe(true);
@@ -182,8 +182,8 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-            const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"] [data-test-id="icon-text-icon"]').exists();
+            const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
 
             // assert
             expect(addressIconExists).toBe(true);

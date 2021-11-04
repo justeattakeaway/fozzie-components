@@ -4,8 +4,7 @@
             :class="{
                 [$style['c-restaurantCard-iconText']]: true,
                 [$style['c-restaurantCard-iconText--bold']]: isBold
-            }"
-            :data-test-id="dataTestId">
+            }">
             <span
                 v-if="showIcon"
                 :class="{
@@ -50,10 +49,6 @@ export default {
         hideIconInTileView: {
             type: Boolean,
             default: false
-        },
-        dataTestId: {
-            type: String,
-            default: null
         }
     },
     computed: {
