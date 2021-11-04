@@ -462,88 +462,79 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-cookieBanner-card {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        background-color: $color-container-default;
-        z-index: 99999992;
-    }
+.c-cookieBanner-card {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $color-container-default;
+    z-index: 99999992;
+}
 
-    .c-cookieBanner-cta {
-        min-width: 352px;
-    }
+.c-cookieBanner-text {
+    margin: 0;
+    padding: 0;
+    @include font-size(body-s);
+}
 
-    .c-cookieBanner-text {
-        margin: 0;
-        padding: 0;
-        @include font-size(body-s);
-    }
+.c-cookieBanner-content {
+    text-align: left;
+}
 
-    .c-cookieBanner-content {
-        text-align: left;
-    }
+.c-cookieBanner-title {
+    @include font-size(heading-m);
+    margin: 0 0 spacing();
+    padding: 0;
+    color: $color-content-default;
 
-    .c-cookieBanner-title {
-        @include font-size(heading-m);
-        margin: 0 0 spacing();
-        padding: 0;
-        color: $color-content-default;
-        &:hover,
-        &:focus {
-            a {
-                text-decoration: none;
-            }
+    &:hover,
+    &:focus {
+        a {
+            text-decoration: none;
         }
+    }
+}
+
+.c-cookieBanner-content {
+    margin: 0 auto;
+    padding: spacing(x4);
+}
+
+.reopen-link-wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+@include media ('<mid') {
+    .c-cookieBanner-card {
+        flex-direction: column;
+        padding: spacing(x2) 0;
+    }
+
+    .c-cookieBanner-ios {
+        padding-bottom: 80px;
     }
 
     .c-cookieBanner-content,
     .c-cookieBanner-cta {
-        margin: 0 auto;
+        padding: spacing(x2) spacing(x3) spacing(x0.5);
+    }
+}
+
+@include media ('>=mid') {
+    .c-cookieBanner-cta {
         padding: spacing(x4);
+        min-width: 352px;
     }
+}
 
-    .reopen-link-wrapper {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
+@include media('<=narrowMid') {
+    .c-cookieBanner-title {
+        @include font-size(heading-s);
     }
-
-    @include media ('<mid') {
-        .c-cookieBanner-card {
-            flex-direction: column;
-            padding: spacing(x2) 0;
-        }
-
-        .c-cookieBanner-ios {
-            padding-bottom: 80px;
-        }
-
-        .c-cookieBanner-content,
-        .c-cookieBanner-cta {
-            padding: spacing(x0.5) spacing(x3);
-        }
-
-        .c-cookieBanner-cta {
-            min-width: initial;
-            display: flex;
-            flex-direction: row-reverse;
-            margin: 0;
-        }
-    }
-
-    @include media('<=narrow') {
-        .c-cookieBanner-title {
-            @include font-size(heading-s);
-        }
-
-        .c-cookieBanner-cta {
-            display: block;
-            margin: 0;
-        }
-    }
+}
 </style>

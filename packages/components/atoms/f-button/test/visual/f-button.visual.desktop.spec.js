@@ -1,5 +1,6 @@
 const Button = require('../../test-utils/component-objects/f-button.component');
 const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
+const IconButton = require('../../test-utils/component-objects/f-button--icon.component');
 
 let button;
 
@@ -138,6 +139,33 @@ describe('f-button Desktop visual tests', () => {
 
                 // Assert
                 browser.percyScreenshot('f-button - Link - With Trailing Icon', 'desktop');
+            });
+        });
+    });
+
+    describe('all valid iconButton types in all sizes', () => {
+        it('should be displayed', () => {
+            // Arrange
+            button = new IconButton();
+
+            // Act
+            button.load();
+
+            // Assert
+            browser.percyScreenshot('f-button - Icon', 'desktop');
+        });
+
+        describe('in isLoading state', () => {
+            it('should be displayed', () => {
+                // Arrange
+                button = new IconButton();
+                button.withQuery('args', 'isLoading');
+
+                // Act
+                button.load();
+
+                // Assert
+                browser.percyScreenshot('f-button - Icon - Loading', 'desktop');
             });
         });
     });
