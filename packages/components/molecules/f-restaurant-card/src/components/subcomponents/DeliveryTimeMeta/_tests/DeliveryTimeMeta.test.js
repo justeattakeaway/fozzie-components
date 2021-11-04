@@ -75,4 +75,58 @@ describe('DeliveryTimeMeta', () => {
         // assert
         expect(numberOfIconTextElements).toBe(1);
     });
+
+    it('should hide eta icon but show text in tile view', () => {
+        // arrange
+        const propsData = {
+            eta: 'foo',
+            isListItem: false
+        };
+
+        // act
+        const wrapper = mount(sut, { propsData });
+
+        const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+        const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+
+        // assert
+        expect(etaIconExists).toBe(false);
+        expect(etaTextExists).toBe(true);
+    });
+
+    it('should hide distance icon but show text in tile view', () => {
+        // arrange
+        const propsData = {
+            distance: 'foo',
+            isListItem: false
+        };
+
+        // act
+        const wrapper = mount(sut, { propsData });
+
+        const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+        const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+
+        // assert
+        expect(distanceIconExists).toBe(false);
+        expect(distanceTextExists).toBe(true);
+    });
+
+    it('should show address icon and text in tile view', () => {
+        // arrange
+        const propsData = {
+            address: 'foo',
+            isListItem: false
+        };
+
+        // act
+        const wrapper = mount(sut, { propsData });
+
+        const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+        const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+
+        // assert
+        expect(addressIconExists).toBe(true);
+        expect(addressTextExists).toBe(true);
+    });
 });
