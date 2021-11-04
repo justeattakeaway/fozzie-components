@@ -364,18 +364,19 @@ describe('CheckoutFormField', () => {
 
         describe('kebabCase ::', () => {
             it.each([
-                ['firstName', 'first-name'],
-                ['lastName', 'last-name'],
-                ['email', 'email']
-            ])('should convert `fieldName` value to kebab case', (fieldName, expected) => {
+                ['firstName', 'first-name', 'customer'],
+                ['lastName', 'last-name', 'customer'],
+                ['email', 'email', 'customer'],
+                ['line1', 'line-1', 'address']
+            ])('should convert `fieldName` value to kebab case', (fieldName, expected, fieldType) => {
                 // Arrange & Act
                 const wrapper = shallowMount(CheckoutFormField, {
                     i18n,
                     store: createStore(),
                     localVue,
                     propsData: {
-                        ...propsData,
-                        fieldName
+                        fieldName,
+                        fieldType
                     },
                     provide: () => ({
                         $v

@@ -123,7 +123,7 @@ export default {
         },
 
         kebabCase () {
-            return this.fieldName.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+            return this.fieldName.replace(/([a-z0-9]|(?=[A-Z]))([A-Z1-9])/g, '$1-$2').toLowerCase();
         },
 
         groupedProps () {
