@@ -92,7 +92,6 @@ export default {
 }
 
 .c-restaurantCard-iconText-content {
-    display: block;
     flex: 1;
     line-height: spacing(x2);
 }
