@@ -1,31 +1,30 @@
 <template>
     <form-field
         :value="value"
-        :name="`${fieldType}-${kebabCase}`"
-        :maxlength="maxLength"
-        :label-text="translations.label"
-        :aria-describedby="`${kebabCase}-error`"
-        :aria-invalid="hasValidationErrors && (isEmpty || !isValid)"
+        :name="translations.name"
         :input-type="inputType"
-        :has-error="hasValidationErrors && (isEmpty || !isValid)"
+        :label-text="translations.label"
+        :has-error="hasError"
+        :maxlength="maxLength"
         v-bind="isGrouped && groupedProps"
-        @blur="formFieldBlur"
-        @input="updateUserDetails({ fieldType, [fieldName]: $event })">
-        <template
-            #error>
+        :aria-invalid="hasError"
+        :aria-describedby="hasValidationMessages && translations.errorName"
+        @blur="shouldValidateOnBlur && formFieldBlur()"
+        @input="updateUserDetails({ fieldType, fieldName, value: $event })">
+        <template #error>
             <error-message
-                v-if="hasValidationErrors && isEmpty"
-                :id="`${kebabCase}-error`"
+                v-if="hasErrorType('required') && isEmpty"
+                :id="translations.errorName"
                 data-js-error-message
                 :class="[{ [$style['c-checkoutFormField-error--grouped']]: isGrouped }]"
-                :data-test-id="`error-${kebabCase}-empty`">
+                :data-test-id="translations.emptyError">
                 {{ translations.validationMessages.required }}
             </error-message>
             <error-message
-                v-else-if="hasValidationErrors && !isValid"
-                :id="`${kebabCase}-error`"
+                v-else-if="!isValid"
+                :id="translations.errorName"
                 data-js-error-message
-                :data-test-id="`error-${kebabCase}-invalid`">
+                :data-test-id="translations.invalidError">
                 {{ translations.validationMessages.invalid }}
             </error-message>
         </template>
@@ -89,20 +88,21 @@ export default {
         ]),
 
         value () {
-            const type = this.fieldType === 'guest' ? 'customer' : this.fieldType;
-            return this[type][this.fieldName];
+            return this[this.fieldType][this.fieldName];
         },
 
         translations () {
-            return this.$t(`formFields.${this.fieldType}.${this.fieldName}`);
+            return {
+                ...this.$t(`formFields.${this.fieldType}.${this.fieldName}`),
+                name: `${this.kebabCase}`,
+                errorName: `${this.kebabCase}-error`,
+                emptyError: `error-${this.kebabCase}-empty`,
+                invalidError: `error-${this.kebabCase}-invalid`
+            };
         },
 
         isEmpty () {
             return this.isFieldEmpty(VALIDATIONS[this.fieldType], this.fieldName);
-        },
-
-        hasValidationErrors () {
-            return !!this.translations.validationMessages;
         },
 
         isValid () {
@@ -112,6 +112,14 @@ export default {
                 return (!validations.$dirty || validations[this.fieldName]) && !this.isEmpty;
             }
             return true;
+        },
+
+        hasError () {
+            return this.hasValidationMessages && (this.isEmpty || !this.isValid);
+        },
+
+        hasValidationMessages () {
+            return !!this.translations.validationMessages;
         },
 
         kebabCase () {
@@ -125,6 +133,10 @@ export default {
                 shouldShowLabelText: false,
                 class: this.$style['c-checkoutFormField-grouped']
             };
+        },
+
+        fieldDetails () {
+            return { fieldName: this.fieldName, fieldType: this.fieldType };
         }
     },
 
@@ -134,17 +146,15 @@ export default {
         ]),
 
         formFieldBlur () {
-            if (this.shouldValidateOnBlur) {
-                const fieldValidation = this.$v[VALIDATIONS[this.fieldType]][this.fieldName];
+            const fieldValidation = this.$v[VALIDATIONS[this.fieldType]][this.fieldName];
 
-                if (fieldValidation) {
-                    fieldValidation.$touch();
-                }
+            if (fieldValidation) {
+                fieldValidation.$touch();
             }
         },
 
         hasErrorType (errorType) {
-            return !!this.translations.validationMessages?.[errorType];
+            return this.hasValidationMessages && !!this.translations.validationMessages[errorType];
         }
     }
 };

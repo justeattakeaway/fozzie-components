@@ -17,7 +17,7 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_DATE_OF_BIRTH,
     UPDATE_ERRORS,
-    UPDATE_FULFILMENT_ADDRESS,
+    UPDATE_ADDRESS_DETAILS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
     UPDATE_HAS_ASAP_SELECTED,
@@ -276,7 +276,7 @@ export default {
 
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
 
-            commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            commit(UPDATE_ADDRESS_DETAILS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
@@ -383,19 +383,18 @@ export default {
 
 
         updateUserDetails ({ commit, dispatch }, payload) {
-            const { fieldType } = payload;
-            // eslint-disable-next-line prefer-destructuring
-            const field = Object.keys(payload)[1];
-            const value = payload[field];
-            const detailsType = fieldType === 'guest' ? 'customer' : fieldType;
-            const data = { [field]: value };
+            const { fieldType, fieldName, value } = payload;
+            const data = { [fieldName]: value };
+
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, fieldName, { root: true });
+            commit(`UPDATE_${fieldType.toUpperCase()}_DETAILS`, data);
+        },
+
+        updateCustomerDetails ({ commit, dispatch }, payload) {
+            const [field] = Object.keys(payload);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-            if (detailsType === 'customer') {
-                commit(UPDATE_CUSTOMER_DETAILS, data);
-            } else {
-                commit(UPDATE_FULFILMENT_ADDRESS, data);
-            }
+            commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
         updateTableIdentifier ({ commit }, payload) {
@@ -536,7 +535,7 @@ export default {
             state.tableIdentifier = tableIdentifier;
         },
 
-        [UPDATE_FULFILMENT_ADDRESS]: (state, address) => {
+        [UPDATE_ADDRESS_DETAILS]: (state, address) => {
             state.address = {
                 ...state.address,
                 ...address

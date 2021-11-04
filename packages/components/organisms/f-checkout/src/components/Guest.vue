@@ -4,15 +4,15 @@
         :class="$style['c-guest']">
         <checkout-form-field
             field-name="firstName"
-            field-type="guest" />
+            field-type="customer" />
 
         <checkout-form-field
             field-name="lastName"
-            field-type="guest" />
+            field-type="customer" />
 
         <checkout-form-field
             field-name="email"
-            field-type="guest"
+            field-type="customer"
             input-type="email"
             max-length="50"
             should-validate-on-blur />

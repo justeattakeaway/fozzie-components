@@ -12,7 +12,7 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 const $v = {
-    [VALIDATIONS.guest]: {
+    [VALIDATIONS.customer]: {
         firstName: {
             $dirty: false
         },
@@ -25,13 +25,32 @@ const $v = {
             $touch: jest.fn()
         }
     }
+    // [VALIDATIONS.address]: {
+    //     line1: {
+    //         $dirty: false
+    //     },
+    //     line2: {
+    //         $dirty: false
+    //     },
+    //     email: {
+    //         $dirty: false,
+    //         email: false,
+    //         $touch: jest.fn()
+    //     },
+    //     locality: {
+    //         $dirty: false
+    //     },
+    //     postcode: {
+    //         $dirty: false,
+    //         postcode: false
+    //     }
+    // }
 };
-
-const $t = jest.fn();
 
 describe('CheckoutFormField', () => {
     const propsData = {
-        fieldName: 'firstName'
+        fieldName: 'firstName',
+        fieldType: 'customer'
     };
 
     it('should be defined', () => {
@@ -51,6 +70,24 @@ describe('CheckoutFormField', () => {
     });
 
     describe('computed ::', () => {
+        describe('translations ::', () => {
+            it('should return translations from with id names', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(CheckoutFormField, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+
+                // Assert
+                expect(wrapper.vm.translations).toMatchSnapshot();
+            });
+        });
+
         describe('isEmpty ::', () => {
             let isFieldEmptySpy;
 
@@ -67,13 +104,14 @@ describe('CheckoutFormField', () => {
                 ['firstName'],
                 ['lastName'],
                 ['email']
-            ])('should call `isFieldEmpty` with %s and %s', fieldName => {
-                // Act
-                shallowMount(CheckoutFormField, {
+            ])('should call `isFieldEmpty` with validation type and fieldName AND should be false by default', fieldName => {
+                // Arrange
+                const wrapper = shallowMount(CheckoutFormField, {
                     i18n,
                     store: createStore(),
                     localVue,
                     propsData: {
+                        ...propsData,
                         fieldName
                     },
                     provide: () => ({
@@ -81,22 +119,27 @@ describe('CheckoutFormField', () => {
                     })
                 });
 
+                // Act
+                const { isEmpty } = wrapper.vm;
+
                 // Assert
-                expect(isFieldEmptySpy).toHaveBeenCalledWith(VALIDATIONS.guest, fieldName);
+                expect(isEmpty).toBeFalsy();
+                expect(isFieldEmptySpy).toHaveBeenCalledWith(VALIDATIONS.customer, fieldName);
             });
         });
 
         describe('isValid ::', () => {
             afterEach(() => {
-                jest.restoreAllMocks();
+                jest.clearAllMocks();
             });
 
-            describe('when `hasErrorType` returns `false`', () => {
-                let wrapper;
+            describe('when `hasErrorType` returns false', () => {
+                it('should return true', () => {
+                    // Arrange
+                    jest.spyOn(CheckoutFormField.methods, 'hasErrorType').mockReturnValue(false);
 
-                beforeEach(() => {
-                    // Arrange & Act
-                    wrapper = shallowMount(CheckoutFormField, {
+                    // Act
+                    const wrapper = shallowMount(CheckoutFormField, {
                         i18n,
                         store: createStore(),
                         localVue,
@@ -106,31 +149,17 @@ describe('CheckoutFormField', () => {
                         })
                     });
 
-                    jest.spyOn(wrapper.vm, 'hasErrorType').mockReturnValue(false);
-                });
-
-                afterEach(() => {
-                    jest.restoreAllMocks();
-                });
-
-                it('should return true', () => {
                     // Assert
                     expect(wrapper.vm.isValid).toEqual(true);
                 });
             });
 
-            describe('when `hasErrorType` is `true`', () => {
-                describe('AND `isEmpty` is `true`', () => {
-                    beforeEach(() => {
+            describe('when `hasErrorType` is true', () => {
+                describe('AND `isEmpty` is true', () => {
+                    it('should return false', () => {
                         // Arrange
                         jest.spyOn(CheckoutFormField.methods, 'hasErrorType').mockImplementation(() => true);
-                    });
 
-                    afterEach(() => {
-                        jest.restoreAllMocks();
-                    });
-
-                    it('should return `false`', () => {
                         // Act
                         const wrapper = shallowMount(CheckoutFormField, {
                             i18n,
@@ -152,18 +181,18 @@ describe('CheckoutFormField', () => {
                     });
                 });
 
-                describe('AND `isEmpty` is `false`', () => {
+                describe('AND `isEmpty` is false', () => {
                     describe.each([
                         [true, true, true],
                         [false, true, true],
                         [false, false, true],
                         [true, false, false]
-                    ])('AND `$dirty` is `%s`, field validation is `%s`', ($dirty, isValid, expected) => {
+                    ])('AND `$dirty` is %s, field validation is %s', ($dirty, isValid, expected) => {
                         let wrapper;
 
                         beforeEach(() => {
                             // Arrange & Act
-                            $v[VALIDATIONS.guest].email = {
+                            $v[VALIDATIONS.customer].email = {
                                 $touch: jest.fn(),
                                 $dirty,
                                 email: isValid
@@ -174,6 +203,7 @@ describe('CheckoutFormField', () => {
                                 store: createStore(),
                                 localVue,
                                 propsData: {
+                                    ...propsData,
                                     fieldName: 'email'
                                 },
                                 provide: () => ({
@@ -190,15 +220,129 @@ describe('CheckoutFormField', () => {
                         });
 
                         afterEach(() => {
-                            jest.restoreAllMocks();
+                            jest.clearAllMocks();
                         });
 
-                        it('should return `%s`', () => {
+                        it('should return %s', () => {
                             // Assert
                             expect(wrapper.vm.isValid).toEqual(expected);
                         });
                     });
                 });
+            });
+        });
+
+        describe('hasError ::', () => {
+            afterEach(() => {
+                jest.restoreAllMocks();
+            });
+
+            describe('when `hasValidationMessages` is true', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    jest.spyOn(CheckoutFormField.computed, 'hasValidationMessages').mockReturnValue(true);
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it.each([
+                    [true, true, true],
+                    [true, true, false],
+                    [false, false, true],
+                    [true, false, false]
+                ])('should return %s when `isEmpty` is %s and `isValid` is %s', (expected, isEmpty, isValid) => {
+                    // Arrange & Act
+                    jest.spyOn(CheckoutFormField.computed, 'isEmpty').mockReturnValue(isEmpty);
+                    jest.spyOn(CheckoutFormField.computed, 'isValid').mockReturnValue(isValid);
+
+                    wrapper = shallowMount(CheckoutFormField, {
+                        i18n,
+                        store: createStore(),
+                        localVue,
+                        propsData,
+                        provide: () => ({
+                            $v
+                        })
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasError).toEqual(expected);
+                });
+            });
+
+            describe('when `hasValidationMessages` is false', () => {
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should return false', () => {
+                    // Arrange & Act
+                    jest.spyOn(CheckoutFormField.computed, 'hasValidationMessages').mockReturnValue(false);
+
+                    const wrapper = shallowMount(CheckoutFormField, {
+                        i18n,
+                        store: createStore(),
+                        localVue,
+                        propsData,
+                        provide: () => ({
+                            $v
+                        })
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasError).toEqual(false);
+                });
+            });
+        });
+
+        describe('hasValidationMessages ::', () => {
+            const translations = {};
+            const validationMessages = {
+                invalid: 'Invalid message'
+            };
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should return false if `translations` do not have `validationMessages', () => {
+                // Arrange & Act
+                jest.spyOn(CheckoutFormField.computed, 'translations').mockReturnValue(translations);
+
+                const wrapper = shallowMount(CheckoutFormField, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+
+                // Assert
+                expect(wrapper.vm.hasValidationMessages).toEqual(false);
+            });
+
+            it('should return false if `translations` do not have `validationMessages', () => {
+                // Arrange & Act
+                translations.validationMessages = validationMessages;
+                jest.spyOn(CheckoutFormField.computed, 'translations').mockReturnValue(translations);
+
+                const wrapper = shallowMount(CheckoutFormField, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+
+                // Assert
+                expect(wrapper.vm.hasValidationMessages).toEqual(true);
             });
         });
 
@@ -214,6 +358,7 @@ describe('CheckoutFormField', () => {
                     store: createStore(),
                     localVue,
                     propsData: {
+                        ...propsData,
                         fieldName
                     },
                     provide: () => ({
@@ -233,41 +378,30 @@ describe('CheckoutFormField', () => {
         });
 
         describe('formFieldBlur ::', () => {
-            describe('when `shouldValidateOnBlur` is `true` AND field has validations', () => {
-                let touchSpy;
+            it('should call `touch` for validation', () => {
+                // Arrange
+                const fieldName = 'email';
+                const touchSpy = jest.spyOn($v[VALIDATIONS.customer].email, '$touch');
 
-                beforeEach(() => {
-                    touchSpy = jest.spyOn($v[VALIDATIONS.guest].email, '$touch');
+                const wrapper = shallowMount(CheckoutFormField, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData: {
+                        ...propsData,
+                        fieldName,
+                        shouldValidateOnBlur: true
+                    },
+                    provide: () => ({
+                        $v
+                    })
                 });
 
-                afterEach(() => {
-                    jest.clearAllMocks();
-                });
+                // Act
+                wrapper.vm.formFieldBlur(fieldName);
 
-                it('should call `touch` for validation', () => {
-                    // Arrange
-                    const fieldName = 'email';
-
-                    const wrapper = shallowMount(CheckoutFormField, {
-                        i18n,
-                        store: createStore(),
-                        localVue,
-                        propsData: {
-                            ...propsData,
-                            fieldName,
-                            shouldValidateOnBlur: true
-                        },
-                        provide: () => ({
-                            $v
-                        })
-                    });
-
-                    // Act
-                    wrapper.vm.formFieldBlur(fieldName);
-
-                    // Assert
-                    expect(touchSpy).toHaveBeenCalled();
-                });
+                // Assert
+                expect(touchSpy).toHaveBeenCalled();
             });
         });
 
@@ -275,61 +409,117 @@ describe('CheckoutFormField', () => {
             const invalidErrorType = 'invalid';
             const requiredErrorType = 'required';
 
-            const fieldWithRequiredError = 'firstName';
-            const fieldWithInvalidError = 'lastName';
+            const fieldHasRequiredMessage = 'firstName';
+            const fieldHasInvalidMessage = 'lastName';
 
             const translations = {
-                formFields: {
-                    guest: {
-                        [fieldWithRequiredError]: {
-                            label: 'First Name',
-                            validationMessages: {
-                                required: 'Has required error'
-                            }
-                        },
-                        [fieldWithInvalidError]: {
-                            label: 'Last Name',
-                            validationMessages: {
-                                invalid: 'Has invalid error'
-                            }
-                        }
-                    }
+                [fieldHasRequiredMessage]: {
+                    label: 'First Name',
+                    validationMessages: {
+                        required: 'Has required error'
+                    },
+                    type: 'has required message but does not have invalid message'
+                },
+                [fieldHasInvalidMessage]: {
+                    label: 'Last Name',
+                    validationMessages: {
+                        invalid: 'Has invalid error'
+                    },
+                    type: 'has invalid message but does not have required message'
                 }
             };
-
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            it.each([
-                [true, fieldWithRequiredError, requiredErrorType],
-                [false, fieldWithRequiredError, invalidErrorType],
-                [false, fieldWithInvalidError, requiredErrorType],
-                [true, fieldWithInvalidError, invalidErrorType]
-            ])('should return `%s` when `hasErrorType` `fieldName` is %s and `errorType` is %s', (expected, fieldName, errorType) => {
-                // Arrange
-                $t.mockReturnValue(translations.formFields.guest[fieldName]);
-
-                const wrapper = shallowMount(CheckoutFormField, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData: {
-                        fieldName
-                    },
-                    provide: () => ({
-                        $v
-                    }),
-                    mocks: {
-                        $t
-                    }
+            describe('when `hasValidationMessages` is true ', () => {
+                beforeEach(() => {
+                    jest.spyOn(CheckoutFormField.computed, 'hasValidationMessages').mockReturnValue(true);
                 });
 
-                // Act
-                const received = wrapper.vm.hasErrorType(errorType);
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
 
-                // Assert
-                expect(received).toEqual(expected);
+                describe('when field has `required` message but does not have `invalid` message', () => {
+                    beforeEach(() => {
+                        jest.spyOn(CheckoutFormField.computed, 'translations').mockReturnValue(translations[fieldHasRequiredMessage]);
+                    });
+
+                    it.each([
+                        [true, requiredErrorType],
+                        [false, invalidErrorType]
+                    ])('should return %s when `errorType` is %s', (expected, errorType) => {
+                        // Arrange & Act
+                        const wrapper = shallowMount(CheckoutFormField, {
+                            i18n,
+                            store: createStore(),
+                            localVue,
+                            propsData: {
+                                ...propsData,
+                                fieldName: fieldHasRequiredMessage
+                            },
+                            provide: () => ({
+                                $v
+                            })
+                        });
+
+                        // Assert
+                        expect(wrapper.vm.hasErrorType(errorType)).toEqual(expected);
+                    });
+                });
+
+                describe('when field has `invalid` message but does not have `required` message', () => {
+                    beforeEach(() => {
+                        jest.spyOn(CheckoutFormField.computed, 'translations').mockReturnValue(translations[fieldHasInvalidMessage]);
+                    });
+
+                    it.each([
+                        [false, requiredErrorType],
+                        [true, invalidErrorType]
+                    ])('should return %s when `errorType` is %s', (expected, errorType) => {
+                        // Arrange & Act
+                        const wrapper = shallowMount(CheckoutFormField, {
+                            i18n,
+                            store: createStore(),
+                            localVue,
+                            propsData: {
+                                ...propsData,
+                                fieldName: fieldHasInvalidMessage
+                            },
+                            provide: () => ({
+                                $v
+                            })
+                        });
+
+                        // Assert
+                        expect(wrapper.vm.hasErrorType(errorType)).toEqual(expected);
+                    });
+                });
+            });
+
+            describe('when `hasValidationMessages` is false ', () => {
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should return false', () => {
+                    // Arrange
+                    jest.spyOn(CheckoutFormField.computed, 'hasValidationMessages').mockReturnValue(false);
+
+                    // Act
+                    const wrapper = shallowMount(CheckoutFormField, {
+                        i18n,
+                        store: createStore(),
+                        localVue,
+                        propsData: {
+                            ...propsData,
+                            fieldName: fieldHasInvalidMessage
+                        },
+                        provide: () => ({
+                            $v
+                        })
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.hasErrorType()).toEqual(false);
+                });
             });
         });
     });

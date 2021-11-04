@@ -36,7 +36,14 @@
 import CheckoutFormField from './CheckoutFormField.vue';
 
 export default {
-    components: { CheckoutFormField }
+    components: { CheckoutFormField },
+
+    props: {
+        shouldShowAdministrativeArea: {
+            type: Boolean,
+            default: false
+        }
+    }
 };
 </script>
 
