@@ -10,13 +10,6 @@ const messages = {
     },
 
     formFields: {
-        mobileNumber: {
-            label: 'Mobile Number',
-            validationMessages: {
-                required: 'Please enter your phone number',
-                invalid: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
-            }
-        },
         tableIdentifier: {
             label: 'Table number or name',
             validationMessages: {
@@ -24,7 +17,14 @@ const messages = {
                 invalid: 'The table number/name exceeds the maximum length (12)'
             }
         },
-        guest: {
+        customer: {
+            mobileNumber: {
+                label: 'Mobile Number',
+                validationMessages: {
+                    required: 'Please enter your phone number',
+                    invalid: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
+                }
+            },
             firstName: {
                 label: 'First name',
                 validationMessages: {

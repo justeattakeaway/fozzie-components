@@ -76,7 +76,7 @@ export default {
         ]),
 
         translations () {
-            return this.$t(`formFields.guest.${this.fieldName}`);
+            return this.$t(`formFields.customer.${this.fieldName}`);
         },
 
         isEmpty () {
