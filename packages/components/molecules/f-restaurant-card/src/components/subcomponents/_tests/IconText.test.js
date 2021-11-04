@@ -49,46 +49,52 @@ describe('IconText.vue', () => {
     });
 
     describe('Icon Visibility', () => {
-        it('should hide icon when "hideIconInTileView" is true and in Tile view', () => {
-            // arrange
-            const propsData = {
-                text: 'foo',
-                isListItem: false,
-                hideIconInTileView: true
-            };
+        describe('Tile view', () => {
+            it('should hide icon when "hideIconInTileView" is true', () => {
+                // arrange
+                const propsData = {
+                    text: 'foo',
+                    hideIconInTileView: true
+                };
 
-            const slots = { default: '<div></div>' };
+                const slots = { default: '<div></div>' };
 
-            // act
-            const wrapper = shallowMount(sut, { propsData, slots });
+                // act
+                const wrapper = shallowMount(sut, { propsData, slots });
 
-            const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
+                const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
 
-            // assert
-            expect(iconExists).toBe(false);
+                // assert
+                expect(iconExists).toBe(false);
+            });
         });
 
-        it('should show icon when "hideIconInTileView" is true and in List view', () => {
-            // arrange
-            const propsData = {
-                text: 'foo',
-                hideIconInTileView: true
-            };
+        describe('List view', () => {
+            beforeAll(() => {
+                config.provide = { isListItem: true };
+            });
 
-            const slots = { default: '<div></div>' };
+            afterAll(() => {
+                config.provide = {};
+            });
 
-            config.provide = { isListItem: true };
+            it('should show icon when "hideIconInTileView" is true', () => {
+                // arrange
+                const propsData = {
+                    text: 'foo',
+                    hideIconInTileView: true
+                };
 
-            // act
-            const wrapper = shallowMount(sut, { propsData, slots });
+                const slots = { default: '<div></div>' };
 
-            const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
+                // act
+                const wrapper = shallowMount(sut, { propsData, slots });
 
-            // assert
-            expect(iconExists).toBe(true);
+                const iconExists = wrapper.find('[data-test-id="icon-text-icon"]').exists();
 
-            // cleanup
-            config.provide = {};
+                // assert
+                expect(iconExists).toBe(true);
+            });
         });
     });
 });
