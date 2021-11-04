@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CheckoutFormField computed :: groupedProps :: should return props for grouped form fields 1`] = `
+Object {
+  "class": undefined,
+  "isGrouped": true,
+  "placeholder": undefined,
+  "shouldShowLabelText": false,
+}
+`;
+
 exports[`CheckoutFormField computed :: translations :: should return translations from with id names 1`] = `
 Object {
   "emptyError": "error-first-name-empty",

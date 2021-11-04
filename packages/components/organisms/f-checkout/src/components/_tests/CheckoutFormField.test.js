@@ -24,27 +24,22 @@ const $v = {
             email: false,
             $touch: jest.fn()
         }
+    },
+    [VALIDATIONS.address]: {
+        line1: {
+            $dirty: false
+        },
+        line2: {
+            $dirty: false
+        },
+        locality: {
+            $dirty: false
+        },
+        postcode: {
+            $dirty: false,
+            postcode: false
+        }
     }
-    // [VALIDATIONS.address]: {
-    //     line1: {
-    //         $dirty: false
-    //     },
-    //     line2: {
-    //         $dirty: false
-    //     },
-    //     email: {
-    //         $dirty: false,
-    //         email: false,
-    //         $touch: jest.fn()
-    //     },
-    //     locality: {
-    //         $dirty: false
-    //     },
-    //     postcode: {
-    //         $dirty: false,
-    //         postcode: false
-    //     }
-    // }
 };
 
 describe('CheckoutFormField', () => {
@@ -101,17 +96,20 @@ describe('CheckoutFormField', () => {
             });
 
             it.each([
-                ['firstName'],
-                ['lastName'],
-                ['email']
-            ])('should call `isFieldEmpty` with validation type and fieldName AND should be false by default', fieldName => {
+                ['firstName', 'customer'],
+                ['lastName', 'customer'],
+                ['email', 'customer'],
+                ['line1', 'address'],
+                ['line2', 'address'],
+                ['locality', 'address']
+            ])('should call `isFieldEmpty` with validation type and fieldName AND should be false by default', (fieldName, fieldType) => {
                 // Arrange
                 const wrapper = shallowMount(CheckoutFormField, {
                     i18n,
                     store: createStore(),
                     localVue,
                     propsData: {
-                        ...propsData,
+                        fieldType,
                         fieldName
                     },
                     provide: () => ({
@@ -124,7 +122,7 @@ describe('CheckoutFormField', () => {
 
                 // Assert
                 expect(isEmpty).toBeFalsy();
-                expect(isFieldEmptySpy).toHaveBeenCalledWith(VALIDATIONS.customer, fieldName);
+                expect(isFieldEmptySpy).toHaveBeenCalledWith(VALIDATIONS[fieldType], fieldName);
             });
         });
 
@@ -346,6 +344,24 @@ describe('CheckoutFormField', () => {
             });
         });
 
+        describe('groupedProps ::', () => {
+            it('should return props for grouped form fields', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(CheckoutFormField, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+
+                // Assert
+                expect(wrapper.vm.groupedProps).toMatchSnapshot();
+            });
+        });
+
         describe('kebabCase ::', () => {
             it.each([
                 ['firstName', 'first-name'],
@@ -380,25 +396,25 @@ describe('CheckoutFormField', () => {
         describe('formFieldBlur ::', () => {
             it('should call `touch` for validation', () => {
                 // Arrange
-                const fieldName = 'email';
-                const touchSpy = jest.spyOn($v[VALIDATIONS.customer].email, '$touch');
+                const formField = {
+                    fieldName: 'email',
+                    fieldType: 'customer'
+                };
+
+                const touchSpy = jest.spyOn($v[VALIDATIONS[formField.fieldType]].email, '$touch');
 
                 const wrapper = shallowMount(CheckoutFormField, {
                     i18n,
                     store: createStore(),
                     localVue,
-                    propsData: {
-                        ...propsData,
-                        fieldName,
-                        shouldValidateOnBlur: true
-                    },
+                    propsData: formField,
                     provide: () => ({
                         $v
                     })
                 });
 
                 // Act
-                wrapper.vm.formFieldBlur(fieldName);
+                wrapper.vm.formFieldBlur(formField.fieldName);
 
                 // Assert
                 expect(touchSpy).toHaveBeenCalled();

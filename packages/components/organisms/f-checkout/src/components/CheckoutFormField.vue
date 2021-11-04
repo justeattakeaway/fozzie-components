@@ -133,10 +133,6 @@ export default {
                 shouldShowLabelText: false,
                 class: this.$style['c-checkoutFormField-grouped']
             };
-        },
-
-        fieldDetails () {
-            return { fieldName: this.fieldName, fieldType: this.fieldType };
         }
     },
 
