@@ -130,8 +130,7 @@ export default {
             return {
                 placeholder: this.translations.label,
                 isGrouped: true,
-                shouldShowLabelText: false,
-                class: this.$style['c-checkoutFormField-grouped']
+                shouldShowLabelText: false
             };
         }
     },
@@ -157,13 +156,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-checkoutFormField--grouped {
-    &:focus-within,
-    &:active {
-        z-index: zIndex(high);
-        position: relative;
-    }
-}
 .c-checkoutFormField-error--grouped {
     margin-bottom: spacing(x2);
 }

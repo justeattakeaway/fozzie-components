@@ -4,16 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v3.3.0
+v3.2.0
 ------------------------------
 *November 8, 2021*
 ### Changed
 - Address Component to use `CheckoutFormField` component.
 
 
-v3.2.0
+v3.1.0
 ------------------------------
-*November 8, 2021*
+*November 5, 2021*
 
 ### Added
 `CheckoutFormField` component.
@@ -22,9 +22,9 @@ v3.2.0
 - Guest Component to use `CheckoutFormField` component.
 
 
-v3.1.0
+v3.0.1
 ------------------------------
-*October 29, 2021*
+*November 5, 2021*
 
 ### Changed
 - Group form fields translations together.

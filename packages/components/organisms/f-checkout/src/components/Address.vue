@@ -8,11 +8,13 @@
             <checkout-form-field
                 field-name="line1"
                 field-type="address"
+                :class="$style['c-address-formField']"
                 is-grouped />
 
             <checkout-form-field
                 field-name="line2"
                 field-type="address"
+                :class="$style['c-address-formField']"
                 is-grouped />
         </fieldset>
 
@@ -64,5 +66,13 @@ $address-weight-bold     : $font-weight-bold;
     padding: 0;
     border: none;
     @include font-size($address-fontSize);
+
+    .c-address-formField {
+        &:focus-within,
+        &:active {
+            z-index: zIndex(high);
+            position: relative;
+        }
+    }
 }
 </style>
