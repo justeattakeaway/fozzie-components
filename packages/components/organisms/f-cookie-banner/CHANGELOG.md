@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.6.0
+------------------------------
+*November 03, 2021*
+
+### Fixed
+- Mobile button layout.
+- Button spacing and sizing.
+
+
 v3.5.1
 ------------------------------
 *October 29, 2021*

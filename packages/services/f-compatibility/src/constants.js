@@ -29,11 +29,11 @@ export const BROWSER_DATA = {
                 message: 'Hemos terminado el soporte de Internet Explorer para que tengas una experiencia más segura. Para realizar tu orden, por favor utiliza otro navegador como Chrome, Firefox o Safari.'
             },
             'en-AU': {
-                title: 'Just Eat can no longer be used with Internet Explorer',
+                title: 'Menulog can no longer be used with Internet Explorer',
                 message: 'We\'ve stopped supporting Internet Explorer so we can give you the most secure experience. Get your order in on another browser, like Chrome, Firefox or Safari.'
             },
             'en-NZ': {
-                title: 'Just Eat can no longer be used with Internet Explorer',
+                title: 'Menulog can no longer be used with Internet Explorer',
                 message: 'We\'ve stopped supporting Internet Explorer so we can give you the most secure experience. Get your order in on another browser, like Chrome, Firefox or Safari.'
             }
         }
