@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.1
+------------------------------
+*November 3, 2021*
+
+### Added
+- Visual tests for age verification
+  
+
 v3.0.0
 ------------------------------
 *October 29, 2021*
