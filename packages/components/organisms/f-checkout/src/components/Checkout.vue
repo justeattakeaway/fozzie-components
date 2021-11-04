@@ -51,7 +51,7 @@
                         name="mobile-number"
                         maxlength="16"
                         input-type="tel"
-                        :label-text="$t('formFields.mobileNumber.label')"
+                        :label-text="$t('formFields.customer.mobileNumber.label')"
                         :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
                         aria-describedby="mobile-number-error"
                         :aria-invalid="isMobileNumberInvalid"
@@ -64,14 +64,14 @@
                                 id="mobile-number-error"
                                 data-js-error-message
                                 data-test-id="error-mobile-number-empty">
-                                {{ $t('formFields.mobileNumber.validationMessages.required') }}
+                                {{ $t('formFields.customer.mobileNumber.validationMessages.required') }}
                             </error-message>
                             <error-message
                                 v-if="isMobileNumberInvalid"
                                 id="mobile-number-error"
                                 data-js-error-message
                                 data-test-id="error-mobile-number-invalid">
-                                {{ $t('formFields.mobileNumber.validationMessages.invalid') }}
+                                {{ $t('formFields.customer.mobileNumber.validationMessages.invalid') }}
                             </error-message>
                         </template>
                     </form-field>
