@@ -1,26 +1,28 @@
 <template>
     <form-field
-        :value="customer[fieldName]"
-        :name="`guest-${kebabCase}`"
+        :value="value"
+        :name="`${fieldType}-${kebabCase}`"
         :maxlength="maxLength"
         :label-text="translations.label"
         :aria-describedby="`${kebabCase}-error`"
-        :aria-invalid="isEmpty || !isValid"
+        :aria-invalid="hasValidationErrors && (isEmpty || !isValid)"
         :input-type="inputType"
-        :has-error="isEmpty || !isValid"
+        :has-error="hasValidationErrors && (isEmpty || !isValid)"
+        v-bind="isGrouped && groupedProps"
         @blur="formFieldBlur"
-        @input="updateCustomerDetails({ [fieldName]: $event })">
+        @input="updateUserDetails({ fieldType, [fieldName]: $event })">
         <template
             #error>
             <error-message
-                v-if="isEmpty && hasErrorType('required')"
+                v-if="hasValidationErrors && isEmpty"
                 :id="`${kebabCase}-error`"
                 data-js-error-message
+                :class="[{ [$style['c-checkoutFormField-error--grouped']]: isGrouped }]"
                 :data-test-id="`error-${kebabCase}-empty`">
                 {{ translations.validationMessages.required }}
             </error-message>
             <error-message
-                v-if="!isValid"
+                v-else-if="hasValidationErrors && !isValid"
                 :id="`${kebabCase}-error`"
                 data-js-error-message
                 :data-test-id="`error-${kebabCase}-invalid`">
@@ -48,6 +50,11 @@ export default {
             required: true
         },
 
+        fieldType: {
+            type: String,
+            required: true
+        },
+
         inputType: {
             type: String,
             default: 'text'
@@ -61,6 +68,11 @@ export default {
         shouldValidateOnBlur: {
             type: Boolean,
             default: false
+        },
+
+        isGrouped: {
+            type: Boolean,
+            defalut: false
         }
     },
 
@@ -72,20 +84,30 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'customer'
+            'customer',
+            'address'
         ]),
 
+        value () {
+            const type = this.fieldType === 'guest' ? 'customer' : this.fieldType;
+            return this[type][this.fieldName];
+        },
+
         translations () {
-            return this.$t(`formFields.guest.${this.fieldName}`);
+            return this.$t(`formFields.${this.fieldType}.${this.fieldName}`);
         },
 
         isEmpty () {
-            return this.isFieldEmpty(VALIDATIONS.guest, this.fieldName);
+            return this.isFieldEmpty(VALIDATIONS[this.fieldType], this.fieldName);
+        },
+
+        hasValidationErrors () {
+            return !!this.translations.validationMessages;
         },
 
         isValid () {
             if (this.hasErrorType('invalid')) {
-                const validations = this.$v[VALIDATIONS.guest][this.fieldName];
+                const validations = this.$v[VALIDATIONS[this.fieldType]][this.fieldName];
 
                 return (!validations.$dirty || validations[this.fieldName]) && !this.isEmpty;
             }
@@ -94,17 +116,26 @@ export default {
 
         kebabCase () {
             return this.fieldName.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+        },
+
+        groupedProps () {
+            return {
+                placeholder: this.translations.label,
+                isGrouped: true,
+                shouldShowLabelText: false,
+                class: this.$style['c-checkoutFormField-grouped']
+            };
         }
     },
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateCustomerDetails'
+            'updateUserDetails'
         ]),
 
-        formFieldBlur (field) {
+        formFieldBlur () {
             if (this.shouldValidateOnBlur) {
-                const fieldValidation = this.$v[VALIDATIONS.guest][field];
+                const fieldValidation = this.$v[VALIDATIONS[this.fieldType]][this.fieldName];
 
                 if (fieldValidation) {
                     fieldValidation.$touch();
@@ -119,3 +150,15 @@ export default {
 };
 </script>
 
+<style lang="scss" module>
+.c-checkoutFormField--grouped {
+    &:focus-within,
+    &:active {
+        z-index: zIndex(high);
+        position: relative;
+    }
+}
+.c-checkoutFormField-error--grouped {
+    margin-bottom: spacing(x2);
+}
+</style>

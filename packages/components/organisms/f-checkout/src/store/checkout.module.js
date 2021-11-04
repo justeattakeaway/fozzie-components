@@ -381,18 +381,21 @@ export default {
             commit(UPDATE_AUTH, authToken);
         },
 
-        updateAddressDetails ({ commit, dispatch }, payload) {
-            const [field] = Object.keys(payload);
+
+        updateUserDetails ({ commit, dispatch }, payload) {
+            const { fieldType } = payload;
+            // eslint-disable-next-line prefer-destructuring
+            const field = Object.keys(payload)[1];
+            const value = payload[field];
+            const detailsType = fieldType === 'guest' ? 'customer' : fieldType;
+            const data = { [field]: value };
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-            commit(UPDATE_FULFILMENT_ADDRESS, payload);
-        },
-
-        updateCustomerDetails ({ commit, dispatch }, payload) {
-            const [field] = Object.keys(payload);
-
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-            commit(UPDATE_CUSTOMER_DETAILS, payload);
+            if (detailsType === 'customer') {
+                commit(UPDATE_CUSTOMER_DETAILS, data);
+            } else {
+                commit(UPDATE_FULFILMENT_ADDRESS, data);
+            }
         },
 
         updateTableIdentifier ({ commit }, payload) {
