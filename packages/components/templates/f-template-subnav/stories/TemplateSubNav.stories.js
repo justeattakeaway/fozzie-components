@@ -2,7 +2,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import TemplateSubNav from '../src/components/TemplateSubNav.vue';
 
 export default {
-    title: 'Components/Organisms',
+    title: 'Components/Templates',
     decorators: [withA11y]
 };
 

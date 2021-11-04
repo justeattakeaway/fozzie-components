@@ -68,15 +68,16 @@ commands:
             - packages/tools/f-vue-icons/dist
             - packages/components/molecules/f-alert/dist
             - packages/components/molecules/f-breadcrumbs/dist
+            - packages/components/molecules/f-card-with-content/dist
             - packages/components/molecules/f-media-element/dist
             - packages/components/molecules/f-mega-modal/dist
+            - packages/components/molecules/f-navigation-links/dist
             - packages/components/molecules/f-promotions-showcase/dist
             - packages/components/molecules/f-restaurant-card/dist
             - packages/components/molecules/f-searchbox/dist
             - packages/components/molecules/f-skeleton-loader/dist
             - packages/components/molecules/f-tabs/dist
             - packages/components/molecules/f-user-message/dist
-            - packages/components/molecules/f-navigation-links/dist
 
       - save_cache:
           name: Cache for atoms
@@ -90,6 +91,7 @@ commands:
             - packages/components/atoms/f-popover/dist
             - packages/components/atoms/f-image-tile/dist
             - packages/components/atoms/f-spinner/dist
+            - packages/components/atoms/f-error-boundary/dist
 
       - save_cache:
           name: Cache for organisms
@@ -105,13 +107,12 @@ commands:
             - packages/components/organisms/f-offers/dist
             - packages/components/organisms/f-status-banner/dist
             - packages/components/organisms/f-takeawaypay-activation/dist
-            - packages/components/organisms/f-template-subnav/dist
 
-      # TODO: Uncomment this once we have a template component
-      #- save_cache:
-      #    name: Cache for templates
-      #    key: build-cache-templates-{{ .Branch }}-{{ .Revision }}
-      #    paths:
+      - save_cache:
+          name: Cache for templates
+          key: build-cache-templates-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/templates/f-template-subnav/dist
 
       - save_cache:
           name: Cache for pages
@@ -148,11 +149,10 @@ commands:
           name: Restore organisms Cache
           keys:
             - build-cache-organisms-master-
-      # TODO: Should uncomment this once we have a template component
-      #- restore_cache:
-      #    name: Restore pages Cache
-      #    keys:
-      #      - build-cache-templates-master-
+      - restore_cache:
+          name: Restore pages Cache
+          keys:
+            - build-cache-templates-master-
       - restore_cache:
           name: Restore pages Cache
           keys:
