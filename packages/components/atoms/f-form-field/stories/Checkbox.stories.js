@@ -21,9 +21,6 @@ export const CheckboxComponent = () => ({
         isDisabled: {
             default: select('isDisabled', [null, 'disabled'])
         },
-        shouldShowLabelText: {
-            default: boolean('shouldShowLabelText', false)
-        },
         hasError: {
             default: boolean('hasError', false)
         },
@@ -48,7 +45,7 @@ export const CheckboxComponent = () => ({
             :label-text="labelText"
             :has-error="hasError"
             :is-grouped="isGrouped"
-			:shouldShowLabelText="shouldShowLabelText"
+			:shouldShowLabelText="false"
 			inputType="checkbox"
             :disabled="isDisabled"
             :labelDetails="labelDetails"
