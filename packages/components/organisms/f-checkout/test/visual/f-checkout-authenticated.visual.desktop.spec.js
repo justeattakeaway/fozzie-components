@@ -343,22 +343,6 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
 });
 
 describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', () => {
-    // beforeEach(() => {
-    //     // Arrange
-    //     checkout = new Checkout();
-    //     checkoutInfo = {
-    //         serviceType: 'delivery',
-    //         isAuthenticated: true,
-    //         locale: 'en-AU',
-    //         restrictions: 'age-restriction'
-    //     };
-    //     checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-    //         .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-    //         .withQuery('&knob-Locale', checkoutInfo.locale)
-    //         .withQuery('&knob-Restrictions', checkoutInfo.restrictions);
-    //     // Act
-    //     checkout.loadAgeVerification();
-    // });
 
     beforeEach(() => {
         // Arrange
