@@ -1,6 +1,7 @@
 import { shallowMount, mount } from '@vue/test-utils';
 import sut from '../DeliveryTimeMeta.vue';
 
+
 describe('DeliveryTimeMeta', () => {
     it('should be defined', () => {
         // arrange
@@ -76,57 +77,115 @@ describe('DeliveryTimeMeta', () => {
         expect(numberOfIconTextElements).toBe(1);
     });
 
-    it('should hide eta icon but show text in tile view', () => {
-        // arrange
-        const propsData = {
-            eta: 'foo',
-            isListItem: false
-        };
+    describe('Tile view', () => {
+        it('should hide eta icon but show text in tile view', () => {
+            // arrange
+            const propsData = {
+                eta: 'foo',
+                isListItem: false
+            };
 
-        // act
-        const wrapper = mount(sut, { propsData });
+            // act
+            const wrapper = mount(sut, { propsData });
 
-        const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-        const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+            const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
 
-        // assert
-        expect(etaIconExists).toBe(false);
-        expect(etaTextExists).toBe(true);
+            // assert
+            expect(etaIconExists).toBe(false);
+            expect(etaTextExists).toBe(true);
+        });
+
+        it('should hide distance icon but show text in tile view', () => {
+            // arrange
+            const propsData = {
+                distance: 'foo',
+                isListItem: false
+            };
+
+            // act
+            const wrapper = mount(sut, { propsData });
+
+            const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+            const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+
+            // assert
+            expect(distanceIconExists).toBe(false);
+            expect(distanceTextExists).toBe(true);
+        });
+
+        it('should show address icon and text in tile view', () => {
+            // arrange
+            const propsData = {
+                address: 'foo',
+                isListItem: false
+            };
+
+            // act
+            const wrapper = mount(sut, { propsData });
+
+            const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+            const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+
+            // assert
+            expect(addressIconExists).toBe(true);
+            expect(addressTextExists).toBe(true);
+        });
     });
 
-    it('should hide distance icon but show text in tile view', () => {
-        // arrange
-        const propsData = {
-            distance: 'foo',
-            isListItem: false
-        };
+    describe('List view', () => {
+        it('should show eta icon and show text in list view', () => {
+            // arrange
+            const propsData = {
+                eta: 'foo',
+                isListItem: true
+            };
 
-        // act
-        const wrapper = mount(sut, { propsData });
+            // act
+            const wrapper = mount(sut, { propsData });
 
-        const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-        const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+            const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
 
-        // assert
-        expect(distanceIconExists).toBe(false);
-        expect(distanceTextExists).toBe(true);
-    });
+            // assert
+            expect(etaIconExists).toBe(true);
+            expect(etaTextExists).toBe(true);
+        });
 
-    it('should show address icon and text in tile view', () => {
-        // arrange
-        const propsData = {
-            address: 'foo',
-            isListItem: false
-        };
+        it('should show distance icon and text in list view', () => {
+            // arrange
+            const propsData = {
+                distance: 'foo',
+                isListItem: true
+            };
 
-        // act
-        const wrapper = mount(sut, { propsData });
+            // act
+            const wrapper = mount(sut, { propsData });
 
-        const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-icon"]').exists();
-        const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+            const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+            const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
 
-        // assert
-        expect(addressIconExists).toBe(true);
-        expect(addressTextExists).toBe(true);
+            // assert
+            expect(distanceIconExists).toBe(true);
+            expect(distanceTextExists).toBe(true);
+        });
+
+        it('should show address icon and text in list view', () => {
+            // arrange
+            const propsData = {
+                address: 'foo',
+                isListItem: true
+            };
+
+            // act
+            const wrapper = mount(sut, { propsData });
+
+            const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-icon"]').exists();
+            const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"]>[data-test-id="icon-text-visible-text"]').exists();
+
+            // assert
+            expect(addressIconExists).toBe(true);
+            expect(addressTextExists).toBe(true);
+        });
     });
 });
