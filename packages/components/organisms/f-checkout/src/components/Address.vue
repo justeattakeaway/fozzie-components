@@ -20,7 +20,8 @@
 
         <checkout-form-field
             field-name="locality"
-            field-type="address" />
+            field-type="address"
+            max-length="50" />
 
         <checkout-form-field
             v-if="shouldShowAdministrativeArea"
