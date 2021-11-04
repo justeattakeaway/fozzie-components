@@ -91,6 +91,7 @@ commands:
             - packages/components/atoms/f-popover/dist
             - packages/components/atoms/f-image-tile/dist
             - packages/components/atoms/f-spinner/dist
+            - packages/components/atoms/f-error-boundary/dist
 
       - save_cache:
           name: Cache for organisms
