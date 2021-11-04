@@ -17,7 +17,7 @@ v3.2.0
 
 v3.1.0
 ------------------------------
-*October 29, 2021*
+*October 5, 2021*
 
 ### Changed
 - Group form fields translations together.
