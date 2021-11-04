@@ -18,31 +18,38 @@ describe('DeliveryTimeMeta', () => {
     it('should show eta text when data is present', () => {
         // arrange
         const propsData = {
-            eta: 'foo'
+            eta: 'foo',
+            distance: 'bar',
+            address: 'baz'
         };
 
         // act
         const wrapper = mount(sut, { propsData });
 
-        const visibleText = wrapper.find('[data-test-id="icon-text-visible-text"]').text();
+        const visibleText = wrapper.text();
+        const etaExists = wrapper.find('[data-test-id="delivery-meta-eta"]').exists();
 
         // assert
         expect(visibleText).toBe('foo');
+        expect(etaExists).toBe(true);
     });
 
     it('should fallback to distance when eta data is missing', () => {
         // arrange
         const propsData = {
-            distance: 'bar'
+            distance: 'bar',
+            address: 'baz'
         };
 
         // act
         const wrapper = mount(sut, { propsData });
 
-        const visibleText = wrapper.find('[data-test-id="icon-text-visible-text"]').text();
+        const visibleText = wrapper.text();
+        const distanceExists = wrapper.find('[data-test-id="delivery-meta-distance"]').exists();
 
         // assert
         expect(visibleText).toBe('bar');
+        expect(distanceExists).toBe(true);
     });
 
     it('should fallback to address when eta and distance data is missing', () => {
@@ -54,27 +61,12 @@ describe('DeliveryTimeMeta', () => {
         // act
         const wrapper = mount(sut, { propsData });
 
-        const visibleText = wrapper.find('[data-test-id="icon-text-visible-text"]').text();
+        const visibleText = wrapper.text();
+        const addressExists = wrapper.find('[data-test-id="delivery-meta-address"]').exists();
 
         // assert
         expect(visibleText).toBe('baz');
-    });
-
-    it('should only show 1 Icon Text', () => {
-        // arrange
-        const propsData = {
-            eta: 'foo',
-            distance: 'bar',
-            address: 'baz'
-        };
-
-        // act
-        const wrapper = mount(sut, { propsData });
-
-        const numberOfIconTextElements = wrapper.findAll('[data-test-id="icon-text-visible-text"]').length;
-
-        // assert
-        expect(numberOfIconTextElements).toBe(1);
+        expect(addressExists).toBe(true);
     });
 
     describe('Tile view', () => {
@@ -87,12 +79,12 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"] [data-test-id="icon-text-icon"]').exists();
-            const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
+            const etaText = wrapper.text();
+            const etaIconExists = wrapper.find('[data-test-id="delivery-meta-eta-icon"]').exists();
 
             // assert
+            expect(etaText).toBeTruthy();
             expect(etaIconExists).toBe(false);
-            expect(etaTextExists).toBe(true);
         });
 
         it('should hide distance icon but show text', () => {
@@ -104,12 +96,12 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"] [data-test-id="icon-text-icon"]').exists();
-            const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
+            const distanceText = wrapper.text();
+            const distanceIconExists = wrapper.find('[data-test-id="delivery-meta-distance-icon"]').exists();
 
             // assert
+            expect(distanceText).toBeTruthy();
             expect(distanceIconExists).toBe(false);
-            expect(distanceTextExists).toBe(true);
         });
 
         it('should show address icon and text', () => {
@@ -121,12 +113,12 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"] [data-test-id="icon-text-icon"]').exists();
-            const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
+            const addressText = wrapper.text();
+            const addressIconExists = wrapper.find('[data-test-id="delivery-meta-address-icon"]').exists();
 
             // assert
+            expect(addressText).toBeTruthy();
             expect(addressIconExists).toBe(true);
-            expect(addressTextExists).toBe(true);
         });
     });
 
@@ -148,12 +140,12 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const etaIconExists = wrapper.findAll('[data-test-id="eta-icon-text"] [data-test-id="icon-text-icon"]').exists();
-            const etaTextExists = wrapper.findAll('[data-test-id="eta-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
+            const etaText = wrapper.text();
+            const etaIconExists = wrapper.find('[data-test-id="delivery-meta-eta-icon"]').exists();
 
             // assert
+            expect(etaText).toBeTruthy();
             expect(etaIconExists).toBe(true);
-            expect(etaTextExists).toBe(true);
         });
 
         it('should show distance icon and text', () => {
@@ -165,12 +157,12 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const distanceIconExists = wrapper.findAll('[data-test-id="distance-icon-text"] [data-test-id="icon-text-icon"]').exists();
-            const distanceTextExists = wrapper.findAll('[data-test-id="distance-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
+            const distanceText = wrapper.text();
+            const distanceIconExists = wrapper.find('[data-test-id="delivery-meta-distance-icon"]').exists();
 
             // assert
+            expect(distanceText).toBeTruthy();
             expect(distanceIconExists).toBe(true);
-            expect(distanceTextExists).toBe(true);
         });
 
         it('should show address icon and text', () => {
@@ -182,12 +174,12 @@ describe('DeliveryTimeMeta', () => {
             // act
             const wrapper = mount(sut, { propsData });
 
-            const addressIconExists = wrapper.findAll('[data-test-id="address-icon-text"] [data-test-id="icon-text-icon"]').exists();
-            const addressTextExists = wrapper.findAll('[data-test-id="address-icon-text"] [data-test-id="icon-text-visible-text"]').exists();
+            const addressText = wrapper.text();
+            const addressIconExists = wrapper.find('[data-test-id="delivery-meta-address-icon"]').exists();
 
             // assert
+            expect(addressText).toBeTruthy();
             expect(addressIconExists).toBe(true);
-            expect(addressTextExists).toBe(true);
         });
     });
 });
