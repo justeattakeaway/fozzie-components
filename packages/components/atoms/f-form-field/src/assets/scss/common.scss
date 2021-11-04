@@ -69,6 +69,16 @@ $form-input-icon-horizontalIndent : 19px;
     }
 }
 
+.c-formField {
+    &+& {
+        margin-top: spacing(x2);
+    }
+}
+
+.c-formField-fieldWrapper {
+    position: relative;
+}
+
 .c-formField-field--small {
     @include form-field-size($form-input-height--small, $form-input-padding--small); //convert height to rem
 }

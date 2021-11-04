@@ -35,6 +35,13 @@
                 :has-icon="hasLeadingIcon"
                 v-on="listeners" />
 
+            <form-selection-control
+                v-else-if="isSelectionControl"
+                :id="uniqueId"
+                :attributes="$attrs"
+                v-bind="$props"
+                v-on="listeners" />
+
             <textarea
                 v-else-if="isTextarea"
                 :id="`${uniqueId}`"
@@ -62,8 +69,6 @@
                 :class="[
                     $style['c-formField-field'],
                     $style[`c-formField-field--${fieldSize}`], {
-                        [$style['c-formField-field--noFocus']]: isSelectionControl,
-                        [$style['c-formField-field--checkbox']]: isCheckbox,
                         [$style['c-formField--invalid']]: hasError,
                         [$style['c-formField-padding--iconLeading']]: hasLeadingIcon,
                         [$style['c-formField-padding--iconTrailing']]: hasTrailingIcon
@@ -113,6 +118,7 @@ import { globalisationServices } from '@justeat/f-services';
 import FormFieldAffixed from './FormFieldAffixed.vue';
 import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
+import FormSelectionControl from './FormSelectionControl.vue';
 import debounce from '../services/debounce';
 import tenantConfigs from '../tenants';
 
@@ -132,7 +138,8 @@ export default {
     components: {
         FormFieldAffixed,
         FormDropdown,
-        FormLabel
+        FormLabel,
+        FormSelectionControl
     },
 
     inheritAttrs: false,
@@ -280,10 +287,6 @@ export default {
             return this.inputType === 'radio' || this.inputType === 'checkbox';
         },
 
-        isCheckbox () {
-            return this.inputType === 'checkbox';
-        },
-
         isFieldGrouped () {
             return this.isGrouped && !this.hasError;
         },
@@ -382,16 +385,6 @@ $form-input-icon-verticalIndent                : 15px;
 $form-input-icon-verticalIndent--small         : 11px;
 $form-input-icon-verticalIndent--large         : 19px;
 $form-input-iconSize                           : 18px;
-
-.c-formField {
-    & + & {
-        margin-top: spacing(x2);
-    }
-}
-
-    .c-formField-fieldWrapper {
-        position: relative;
-    }
 
     ::placeholder {
         color: $form-input-secondaryTextColour;

@@ -2,7 +2,7 @@ import {
     withKnobs, select, text, boolean
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import FormSelectionControl from '../src/components/FormSelectionControl.vue';
+import FormField from '../src/components/FormField.vue';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -10,7 +10,7 @@ export default {
 };
 
 export const CheckboxComponent = () => ({
-    components: { FormSelectionControl },
+    components: { FormField },
     props: {
         locale: {
             default: select('Locale', ['en-GB', 'en-AU'])
@@ -22,7 +22,7 @@ export const CheckboxComponent = () => ({
             default: select('isDisabled', [null, 'disabled'])
         },
         shouldShowLabelText: {
-            default: boolean('shouldShowLabelText', true)
+            default: boolean('shouldShowLabelText', false)
         },
         hasError: {
             default: boolean('hasError', false)
@@ -44,10 +44,12 @@ export const CheckboxComponent = () => ({
         notes: 'some documentation here'
     },
     template:
-        `<form-selection-control
+        `<form-field
             :label-text="labelText"
             :has-error="hasError"
             :is-grouped="isGrouped"
+			:shouldShowLabelText="shouldShowLabelText"
+			inputType="checkbox"
             :disabled="isDisabled"
             :labelDetails="labelDetails"
             :labelDescription="labelDescription"

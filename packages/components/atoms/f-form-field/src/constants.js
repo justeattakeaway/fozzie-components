@@ -1,4 +1,6 @@
-export const VALID_INPUT_TYPES = ['text', 'email', 'password', 'radio', 'checkbox', 'number', 'tel'];
+export const VALID_SELECTION_CONTROL_TYPES = ['radio', 'checkbox'];
+export const DEFAULT_SELECTION_CONTROL_TYPE = 'checkbox';
+export const VALID_INPUT_TYPES = ['text', 'email', 'password', 'number', 'tel'].concat(VALID_SELECTION_CONTROL_TYPES);
 export const CUSTOM_INPUT_TYPES = ['dropdown', 'textarea'];
 
 export const VALID_TEXT_INPUT_TYPES = ['text', 'email', 'password', 'number', 'tel'];
