@@ -4,10 +4,10 @@
   "version": "0.1.0",
   "main": "dist/f-<%= name.default %>.umd.min.js"<% if(config.isService) { %>,
   "module": "dist/f-<%= name.default %>.es.js"<% } %><% if(config.needsBundlewatch) { %>,
-  "maxBundleSize": "<%= bundlewatchMaxSize %>kB",<% } %>
+  "maxBundleSize": "<%= bundlewatchMaxSize %>kB"<% } %>,
   "files": [
     "dist"<% if(config.needsComponentTests) { %>,
-    "test-utils"<% } %> <% if(config.needsTestingApiMocks) { %>,
+    "test-utils"<% } %><% if(config.needsTestingApiMocks) { %>,
     "src/services"<% } %>
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/<%= componentFolder %>f-<%= name.default %>",
@@ -39,7 +39,7 @@
     "test:coverage": "jest test:unit --coverage"<% } %>,
     "test": "vue-cli-service test:unit"<% if(config.needsComponentTests) { %>,
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"<% } %> 
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"<% } %>
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

@@ -4,6 +4,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.1.3
+------------------------------
+*November 3, 2021*
+
+### Added
+- `f-error-boundary` generated component.
+
+
+v5.1.2
+------------------------------
+*November 3, 2021*
+
+### Added
+- `f-card-with-content` generated component.
+
+
+v5.1.1
+------------------------------
+*November 2, 2021*
+
+### Updated
+- Updated Circle CI for new location of f-template-subnav
+
+
 v5.1.0
 ------------------------------
 *October 28, 2021*

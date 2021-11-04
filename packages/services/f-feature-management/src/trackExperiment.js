@@ -1,26 +1,29 @@
+import { logger } from './logger';
+
 /**
  * Track experiment participation.
- * @param {object} variant with tracking information
+ * @param {object} experiment with tracking information
  */
-function trackExperiment (variant) {
-    if (!variant.experimentKey || !variant.experimentVariant) {
+function trackExperiment (experiment, onTrack) {
+    if (!experiment.experimentKey || !experiment.experimentVariant) {
         return;
     }
 
-    // TODO: SSR equivalent
+    const key = experiment.experimentKey;
+    const variant = experiment.experimentVariant;
 
-    window.dataLayer = window.dataLayer || [];
+    if (typeof (onTrack) !== 'function') {
+        logger.logWarn(`Experiment will not be tracked as no \`onTrack\` callback was provided (key: ${key}, variant: ${variant})`);
+        return;
+    }
 
-    window.dataLayer.push({
-        event: 'trackExperimentV3',
-        experiment: {
-            key: variant.experimentKey,
-            platform: 'feature_management',
-            version: 1,
-            variant: variant.experimentVariant,
-            deviceTimestamp: new Date().toISOString()
-        }
-    });
+    logger.logInfo(`Tracking experiment - key: ${key}, variant: ${variant}`);
+
+    try {
+        onTrack(key, variant);
+    } catch (error) {
+        logger.logError('An exception occurred while trying to send an experiment event', error);
+    }
 }
 
 export default trackExperiment;

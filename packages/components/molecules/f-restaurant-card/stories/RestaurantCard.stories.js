@@ -3,9 +3,21 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
+import PieTokens from '@justeat/pie-design-tokens/dist/tokens.json';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
 import restaurantLogo from './assets/images/mcdonalds-logo.gif';
 import restaurantImage from './assets/images/mcdonalds.webp';
+
+const badgeColourSchemes = {
+    promoted: {
+        text: PieTokens.theme.jet.color.alias.default['content-light'],
+        background: PieTokens.theme.jet.color.alias.default['container-dark']
+    },
+    stampcards: {
+        text: PieTokens.theme.jet.color.alias.default['content-default'],
+        background: PieTokens.theme.jet.color.alias.default['support-brand-02']
+    }
+};
 
 export default {
     title: 'Components/Molecules',
@@ -29,9 +41,12 @@ RestaurantCardComponent.args = {
         disabled: false,
         logoUrl: restaurantLogo,
         imgUrl: restaurantImage,
-        isListItem: false,
+        isListItem: true,
         url: 'some-restaurant/12345',
-        cuisines: ['Mexican', 'Burgers', 'Chinese']
+        cuisines: ['Mexican', 'Burgers', 'Chinese'],
+        imageBadges: [{ text: 'Promoted', textColour: badgeColourSchemes.promoted.text, backgroundColour: badgeColourSchemes.promoted.background }, { text: 'StampCards', textColour: badgeColourSchemes.stampcards.text, backgroundColour: badgeColourSchemes.stampcards.background }],
+        contentBadges: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test badge that hopefully never happens' }],
+        newBadgeText: 'NEW'
     },
 
     flags: {

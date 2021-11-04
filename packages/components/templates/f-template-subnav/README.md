@@ -144,13 +144,13 @@ $ yarn
 Change directory to the `f-template-subnav` package:
 
 ```sh
-$ cd packages/components/organisms/f-template-subnav
+$ cd packages/components/templates/f-template-subnav
 ```
 
 ## Testing
 
 To test all components, run from root directory.
-To test only `f-template-subnav`, run from the `./fozzie-components/packages/components/organisms/f-template-subnav` directory.
+To test only `f-template-subnav`, run from the `./fozzie-components/packages/components/templates/f-template-subnav` directory.
 
 ### Unit and Integration tests
 
