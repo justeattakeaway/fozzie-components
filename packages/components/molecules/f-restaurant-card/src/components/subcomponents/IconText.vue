@@ -1,28 +1,26 @@
 <template>
-    <div>
-        <p
+    <p
+        :class="{
+            [$style['c-restaurantCard-iconText']]: true,
+            [$style['c-restaurantCard-iconText--bold']]: isBold
+        }">
+        <span
+            v-if="showIcon"
             :class="{
-                [$style['c-restaurantCard-iconText']]: true,
-                [$style['c-restaurantCard-iconText--bold']]: isBold
-            }">
-            <span
-                v-if="showIcon"
-                :class="{
-                    [$style['c-restaurantCard-iconText-icon']]: true,
-                    [$style['c-restaurantCard-iconText-icon--hideOnMidBelow']]: hideIconInTileView
-                }"
-                :style="`fill:${color};`"
-                data-test-id="icon-text-icon">
-                <slot />
-            </span>
-            <span
-                :class="$style['c-restaurantCard-iconText-content']"
-                :style="`color:${color};`"
-                data-test-id="icon-text-visible-text">
-                {{ text }}
-            </span>
-        </p>
-    </div>
+                [$style['c-restaurantCard-iconText-icon']]: true,
+                [$style['c-restaurantCard-iconText-icon--hideOnMidBelow']]: hideIconInTileView
+            }"
+            :style="`fill:${color};`"
+            data-test-id="icon-text-icon">
+            <slot />
+        </span>
+        <span
+            :class="$style['c-restaurantCard-iconText-content']"
+            :style="`color:${color};`"
+            data-test-id="icon-text-visible-text">
+            {{ text }}
+        </span>
+    </p>
 </template>
 
 <script>
