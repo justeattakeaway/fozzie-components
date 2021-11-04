@@ -82,9 +82,9 @@ export default {
 <style lang="scss" module>
 .c-restaurantCard-iconText {
     @include font-size();
-    margin-top: spacing();
+    margin: spacing() 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .c-restaurantCard-iconText--bold {
@@ -94,6 +94,7 @@ export default {
 .c-restaurantCard-iconText-content {
     display: block;
     flex: 1;
+    line-height: spacing(x2);
 }
 
 .c-restaurantCard-iconText-icon {

@@ -48,7 +48,7 @@ RestaurantCardComponent.args = {
         contentBadges: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test badge that hopefully never happens' }],
         newBadgeText: 'NEW',
         deliveryTimeData: {
-            address: '29 - 32 The Oval, London',
+            address: 'Fleet Place House, 2 Fleet Pl, London EC4M 7RF, The United Kingdom of Great Britain and Northern Ireland',
             distance: '1.35 miles',
             distanceForScreenReaders: '1.35 miles from your location',
             eta: '20-25 min',
