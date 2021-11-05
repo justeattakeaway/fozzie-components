@@ -167,4 +167,32 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-inner-content-badges"]').exists()).toBe(false);
         });
     });
+
+    describe('Delivery Time Meta', () => {
+        it('should not be shown if there is no eta, distance or address data', () => {
+            // arrange
+            const propsData = {};
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-delivery-time-meta"]').exists()).toBe(false);
+        });
+
+        it.each(['eta', 'distance', 'address'])('should be shown if there is %p data', dataKey => {
+            // arrange
+            const propsData = {
+                deliveryTimeData: {
+                    [dataKey]: 'Test'
+                }
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-delivery-time-meta"]').exists()).toBe(true);
+        });
+    });
 });
