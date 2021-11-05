@@ -8,7 +8,7 @@ exports.config = merge(sharedConf.config, {
     // =====================
     // Server Configurations
     // =====================
-    path: '/',
+    path: configuration.availableServices.chromedriver.path,
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
@@ -23,7 +23,7 @@ exports.config = merge(sharedConf.config, {
             acceptInsecureCerts: true,
             browserName: 'chrome',
             'goog:chromeOptions': {
-                args: [].concat(configuration.headless ? [
+                args: [].concat(configuration.availableServices.chromedriver.headless ? [
                     '--no-sandbox',
                     '--disable-infobars',
                     '--headless',

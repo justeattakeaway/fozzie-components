@@ -66,10 +66,18 @@ exports.config = {
 
                 browser.call(async () => {
                     await percySnapshot(`${screenshotName} - ${featureType}`, {
-                        widths: configuration.percy.viewports[formattedFeatureType]
+                        widths: configuration.availableServices.percy.viewports[formattedFeatureType]
                     });
                 });
             });
+        }
+    },
+    /**
+    * Function to be executed before a test (in Mocha/Jasmine)
+    */
+    beforeTest: test => {
+        if (test.file.includes('mobile')) {
+            browser.setWindowSize(414, 731);
         }
     },
     /**

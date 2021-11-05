@@ -4,7 +4,6 @@ const configuration = {
     logLevel: 'error',
     baseUrl: 'http://localhost:8080',
     bail: 0,
-    headless: false,
     mochaOpts: {
         timeout: 60000,
         // Default timeout for all waitFor* commands.
@@ -12,10 +11,17 @@ const configuration = {
     },
     connectionRetryTimeout: 90000,
     connectionRetryCount: 3,
-    percy: {
-        viewports: {
-            mobile: [414],
-            desktop: [1280]
+    availableServices: {
+        percy: {
+            viewports: {
+                mobile: [414],
+                desktop: [1280]
+            }
+        },
+        chromedriver: {
+            headless: false,
+            path: '/',
+            args: []
         }
     },
     testType,
