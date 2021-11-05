@@ -1,14 +1,14 @@
 {
-  "name": "@justeat/f-template-subnav",
-  "description": "Fozzie Template Sub Nav - SPA template with breadcrumb, lefthand navigation and centre slot",
-  "version": "0.2.3",
-  "main": "dist/f-template-subnav.umd.min.js",
+  "name": "@justeat/f-contact-preferences",
+  "description": "Fozzie Contact Preferences - Fozzie user contact preferences form component",
+  "version": "0.5.0",
+  "main": "dist/f-contact-preferences.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/templates/f-template-subnav",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-contact-preferences",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -21,14 +21,14 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=10.0.0"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-template-subnav ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-contact-preferences ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
@@ -38,18 +38,19 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@justeat/f-breadcrumbs": "3.1.0",
-    "@justeat/f-navigation-links": "0.2.1",
-    "@justeat/f-wdio-utils": "0.4.0",
+    "@justeat/f-button": "3.0.2",
+    "@justeat/f-card": "3.0.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@justeat/f-wdio-utils": "0.4.0",
     "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2"
   }
