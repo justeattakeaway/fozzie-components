@@ -89,6 +89,11 @@
                 :is="errorBoundary"
                 tier="3">
                 <slot name="meta-items" />
+
+                <delivery-time-meta
+                    v-if="displayDeliveryTimeMeta"
+                    v-bind="deliveryTimeData"
+                    data-test-id="restaurant-delivery-time-meta" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -144,6 +149,7 @@ import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 import RestaurantTags from './subcomponents/RestaurantTags/RestaurantTags.vue';
 import RestaurantTag from './subcomponents/RestaurantTags/RestaurantTag.vue';
 import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.vue';
+import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 
 const {
     'support-positive': newTagTextColour,
@@ -168,7 +174,8 @@ export default {
         RestaurantCuisines,
         RestaurantTags,
         RestaurantTag,
-        RestaurantRating
+        RestaurantRating,
+        DeliveryTimeMeta
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -221,6 +228,10 @@ export default {
         rating: {
             type: Object,
             default: () => ({})
+        },
+        deliveryTimeData: {
+            type: Object,
+            default: () => ({})
         }
     },
     data () {
@@ -234,7 +245,17 @@ export default {
         },
         hasImageTags () {
             return this.tags?.imageTags?.length;
+        },
+        displayDeliveryTimeMeta () {
+            return this.deliveryTimeData.eta ||
+                this.deliveryTimeData.distance ||
+                this.deliveryTimeData.address;
         }
+    },
+    provide () {
+        return {
+            isListItem: this.isListItem
+        };
     }
 };
 </script>

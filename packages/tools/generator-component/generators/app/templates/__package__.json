@@ -7,7 +7,7 @@
   "maxBundleSize": "<%= bundlewatchMaxSize %>kB"<% } %>,
   "files": [
     "dist"<% if(config.needsComponentTests) { %>,
-    "test-utils"<% } %> <% if(config.needsTestingApiMocks) { %>,
+    "test-utils"<% } %><% if(config.needsTestingApiMocks) { %>,
     "src/services"<% } %>
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/<%= componentFolder %>f-<%= name.default %>",
@@ -52,7 +52,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "0.3.0",
+<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "0.4.0",
     "node-sass-magic-importer": "5.3.2",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
