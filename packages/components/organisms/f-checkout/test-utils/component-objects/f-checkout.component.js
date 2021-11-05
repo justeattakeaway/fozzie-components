@@ -22,11 +22,9 @@ const {
     ERROR_PAGE_IMAGE,
     AGE_VERIFICATION_COMPONENT,
     AGE_VERIFICATION_DAY_DROPDOWN,
-    AGE_VERIFICATION_DAY_DROPDOWN_OPTIONS,
     AGE_VERIFICATION_MONTH_DROPDOWN,
-    AGE_VERIFICATION_MONTH_DROPDOWN_OPTIONS,
     AGE_VERIFICATION_YEAR_DROPDOWN,
-    AGE_VERIFICATION_YEAR_DROPDOWN_OPTIONS
+    AGE_VERIFICATION_SUBMIT_BUTTON
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -76,15 +74,11 @@ module.exports = class Checkout extends Page {
     
     get ageVerificationDayDropdown () { return $(AGE_VERIFICATION_DAY_DROPDOWN); }
 
-    get ageVerificationDayDropdownOptions () { return $$(AGE_VERIFICATION_DAY_DROPDOWN_OPTIONS); }
-
     get ageVerificationMonthDropdown () { return $(AGE_VERIFICATION_MONTH_DROPDOWN); }
-
-    get ageVerificationMonthDropdownOptions () { return $$(AGE_VERIFICATION_MONTH_DROPDOWN_OPTIONS); }
 
     get ageVerificationYearDropdown () { return $(AGE_VERIFICATION_YEAR_DROPDOWN); }
 
-    get ageVerificationYearDropdownOptions () { return $$(AGE_VERIFICATION_YEAR_DROPDOWN_OPTIONS); }
+    get ageVerificationSubmitButton () { return $(AGE_VERIFICATION_SUBMIT_BUTTON); }
 
     fields = {
         firstName: {
@@ -390,5 +384,9 @@ module.exports = class Checkout extends Page {
     goToPayment () {
         this.goToPaymentButton.scrollIntoView();
         this.goToPaymentButton.click();
+    }
+
+    submitAgeVerification () {
+        this.ageVerificationSubmitButton.click();
     }
 };
