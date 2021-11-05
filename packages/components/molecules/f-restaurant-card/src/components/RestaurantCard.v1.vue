@@ -76,7 +76,7 @@
             <component
                 :is="errorBoundary"
                 tier="3">
-                <restaurant-rating />
+                <restaurant-rating v-bind="rating" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -216,6 +216,10 @@ export default {
         newTagText: {
             type: String,
             default: null
+        },
+        rating: {
+            type: Object,
+            default: () => ({})
         }
     },
     data () {
