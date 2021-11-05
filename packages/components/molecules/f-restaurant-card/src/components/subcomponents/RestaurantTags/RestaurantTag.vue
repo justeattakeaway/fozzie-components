@@ -2,7 +2,8 @@
     <span
         :class="{
             [$style['c-restaurantTag']]: true,
-            [$style['c-restaurantTag--isLarge']]: isLarge
+            [$style['c-restaurantTag--isLarge']]: isLarge,
+            [$style['c-restaurantTag--isUppercase']]: isUppercase
         }"
         :style="`color:${textColour}; background-color:${backgroundColour};`"
         :title="text"
@@ -37,6 +38,10 @@ export default {
         isLarge: {
             type: Boolean,
             default: false
+        },
+        isUppercase: {
+            type: Boolean,
+            default: false
         }
     }
 };
@@ -59,5 +64,9 @@ export default {
 
 .c-restaurantTag--isLarge {
     padding: spacing() / 4 spacing();
+}
+
+.c-restaurantTag--isUppercase {
+    text-transform: uppercase;
 }
 </style>

@@ -48,7 +48,7 @@ RestaurantCardComponent.args = {
             imageTags: [{ text: 'Promoted', textColour: tagColourSchemes.promoted.text, backgroundColour: tagColourSchemes.promoted.background }, { text: 'StampCards', textColour: tagColourSchemes.stampcards.text, backgroundColour: tagColourSchemes.stampcards.background }],
             contentTags: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test tag that hopefully never happens' }]
         },
-        newTagText: 'NEW',
+        newTagText: 'new',
         rating: {
             isOwnRating: false,
             mean: 5.00,

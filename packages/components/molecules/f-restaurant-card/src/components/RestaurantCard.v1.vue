@@ -60,6 +60,7 @@
                 <restaurant-tag
                     v-if="newTagText"
                     :is-large="true"
+                    :is-uppercase="true"
                     :text="newTagText"
                     :background-colour="subcomponentColourSchemes.tags.new.background"
                     :text-colour="subcomponentColourSchemes.tags.new.text" />
