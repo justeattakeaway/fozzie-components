@@ -1,13 +1,13 @@
 /* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-module.exports = class TemplateSubNav extends Page {
+module.exports = class ContactPreferences extends Page {
     constructor () {
-        super('template', 'template-subnav-component');
+        super('page', 'contact-preferences-component');
     }
 
     get component () {
-        return $('[data-test-id="templateSubNav"]');
+        return $('[data-test-id="contactPreferences"]');
     }
 
     waitForComponent () {
