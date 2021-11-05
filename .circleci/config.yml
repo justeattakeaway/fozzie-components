@@ -91,21 +91,17 @@ commands:
             - packages/components/atoms/f-popover/dist
             - packages/components/atoms/f-image-tile/dist
             - packages/components/atoms/f-spinner/dist
+            - packages/components/atoms/f-error-boundary/dist
 
       - save_cache:
           name: Cache for organisms
           key: build-cache-organisms-{{ .Branch }}-{{ .Revision }}
           paths:
-            - packages/components/organisms/f-checkout/dist
-            - packages/components/organisms/f-contact-preferences/dist
             - packages/components/organisms/f-content-cards/dist
             - packages/components/organisms/f-cookie-banner/dist
             - packages/components/organisms/f-footer/dist
             - packages/components/organisms/f-header/dist
-            - packages/components/organisms/f-loyalty/dist
-            - packages/components/organisms/f-offers/dist
             - packages/components/organisms/f-status-banner/dist
-            - packages/components/organisms/f-takeawaypay-activation/dist
 
       - save_cache:
           name: Cache for templates
@@ -117,7 +113,12 @@ commands:
           name: Cache for pages
           key: build-cache-pages-{{ .Branch }}-{{ .Revision }}
           paths:
+            - packages/components/pages/f-checkout/dist
+            - packages/components/pages/f-contact-preferences/dist
+            - packages/components/pages/f-loyalty/dist
+            - packages/components/pages/f-offers/dist
             - packages/components/pages/f-registration/dist
+            - packages/components/pages/f-takeawaypay-activation/dist
 
       - save_cache:
           name: Cache for services
