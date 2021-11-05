@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.1.0
+------------------------------
+*November 05, 2021*
+
+### Changed
+- When loading tenant locales; they are now merged with existing messages, rather than replacing them
+
+
 v1.0.0
 ------------------------------
 *December 17, 2020*
