@@ -14,6 +14,7 @@
         <form>
             <form-field
                 id="day-selection"
+                name="dob-day"
                 input-type="dropdown"
                 :label-text="$t(`ageVerification.ageSelection.day`)"
                 :dropdown-options="days"
@@ -22,6 +23,7 @@
 
             <form-field
                 id="month-selection"
+                name="dob-month"
                 input-type="dropdown"
                 :label-text="$t(`ageVerification.ageSelection.month`)"
                 :dropdown-options="months"
@@ -30,6 +32,7 @@
 
             <form-field
                 id="year-selection"
+                name="dob-year"
                 input-type="dropdown"
                 :label-text="$t(`ageVerification.ageSelection.year`)"
                 :dropdown-options="years"

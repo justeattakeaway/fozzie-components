@@ -20,7 +20,13 @@ const {
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
     ERROR_PAGE_IMAGE,
-    AGE_VERIFICATION_COMPONENT
+    AGE_VERIFICATION_COMPONENT,
+    AGE_VERIFICATION_DAY_DROPDOWN,
+    AGE_VERIFICATION_DAY_DROPDOWN_OPTIONS,
+    AGE_VERIFICATION_MONTH_DROPDOWN,
+    AGE_VERIFICATION_MONTH_DROPDOWN_OPTIONS,
+    AGE_VERIFICATION_YEAR_DROPDOWN,
+    AGE_VERIFICATION_YEAR_DROPDOWN_OPTIONS
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -67,6 +73,18 @@ module.exports = class Checkout extends Page {
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
     get ageVerificationComponent () { return $(AGE_VERIFICATION_COMPONENT )}
+    
+    get ageVerificationDayDropdown () { return $(AGE_VERIFICATION_DAY_DROPDOWN); }
+
+    get ageVerificationDayDropdownOptions () { return $$(AGE_VERIFICATION_DAY_DROPDOWN_OPTIONS); }
+
+    get ageVerificationMonthDropdown () { return $(AGE_VERIFICATION_MONTH_DROPDOWN); }
+
+    get ageVerificationMonthDropdownOptions () { return $$(AGE_VERIFICATION_MONTH_DROPDOWN_OPTIONS); }
+
+    get ageVerificationYearDropdown () { return $(AGE_VERIFICATION_YEAR_DROPDOWN); }
+
+    get ageVerificationYearDropdownOptions () { return $$(AGE_VERIFICATION_YEAR_DROPDOWN_OPTIONS); }
 
     fields = {
         firstName: {
@@ -179,6 +197,10 @@ module.exports = class Checkout extends Page {
         return this.orderTimeDropdown.isDisplayed();
     }
 
+    isAgeVerificationDisplayed () {
+        return this.ageVerificationComponent.isDisplayed();
+    }
+
     userNoteMaxCharacterCount () {
         return this.userNoteInput.getAttribute('maxlength');
     }
@@ -240,16 +262,15 @@ module.exports = class Checkout extends Page {
     */
     populateCheckoutForm (checkoutInfo, customerInfo) {
         if (!checkoutInfo.isAuthenticated) {
-            this.populateSharedGuestFields(customerInfo)
+            this.populateSharedGuestFields(customerInfo);
         }
 
         switch (checkoutInfo.serviceType) {
-            case 'delivery':
-                this.populateDeliveryFields(customerInfo)
-            break;
             case 'dinein':
-                this.populateDineInFields(customerInfo)
-            break;
+                this.populateDineInFields(customerInfo);
+                break;
+            default:
+                this.populateDeliveryFields(customerInfo);
         }
 
         if (customerInfo.mobileNumber) {
@@ -257,7 +278,7 @@ module.exports = class Checkout extends Page {
         }
 
         if (customerInfo.orderTime) {
-            this.selectOrderTime(customerInfo.orderTime)
+            this.selectOrderTime(customerInfo.orderTime);
         }
 
         if (customerInfo.userNote) {
@@ -280,6 +301,12 @@ module.exports = class Checkout extends Page {
 
     populateDineInFields (customerInfo) {
         this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
+    }
+
+    populateAgeVerificationForm (dob) {
+        this.ageVerificationDayDropdown.selectByVisibleText(dob.day);
+        this.ageVerificationMonthDropdown.selectByVisibleText(dob.month);
+        this.ageVerificationYearDropdown.selectByVisibleText(dob.year);
     }
 
     /**
@@ -319,7 +346,7 @@ module.exports = class Checkout extends Page {
      *
      * @param {String} fields Grabs the fields of the above object and runs a forEach loop to get the keys
      */
-     clearCheckoutField (fieldName) {
+    clearCheckoutField (fieldName) {
         this.clearField(fieldName);
     }
 
@@ -352,7 +379,7 @@ module.exports = class Checkout extends Page {
     *
     * @returns {String} The value of the field
     */
-     getFieldValue (fieldName) {
+    getFieldValue (fieldName) {
         return this.fields[fieldName].input.getValue();
     }
 
