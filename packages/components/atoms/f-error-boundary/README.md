@@ -93,18 +93,31 @@ export default {
 }
 </script>
 ```
-#### Use a mixin in order to provide custom behaviour across the app
+#### Wrap the error boundary component in order to provide custom behaviour across the app
 
-The error boundary component provides a `hasError` boolean slot prop that you can use to control element visibility as well as display fallback content.
+If you'd like to apply some custom behaviour when errors are captured you can wrap the error boundary component and use that throughout your application.
 
-#### **`componentError.mixin.js`**
-```js
-import loggerService from '../services/logger.service';
+```html
+<template>
+    <error-boundary
+        v-show="showComponent"
+        v-bind="$attrs"
+        @on-error="handleComponentError">
+        <slot />
+    </error-boundary>
+</template>
+
+<script>
+import ErrorBoundary from '@justeat/f-error-boundary';
+import loggerService from '../../services/logger.service';
 
 export default {
+    components: {
+        ErrorBoundary
+    },
+
     data: () => ({
-      shouldHideComponent: false,
-      waitForBatch: null
+        showComponent: true
     }),
 
     methods: {
@@ -114,7 +127,7 @@ export default {
             info,
             loggerPayload
         }) {
-            this.shouldHideComponent = true;
+            this.showComponent = false;
 
             // Do something custom with the error values
             const error = loggerService.buildVueError(err, vm, info);
@@ -132,27 +145,9 @@ export default {
         }
     }
 };
-
-```
-
-```html
-<template>
-  <error-boundary @on-error="handleComponentError">
-    <fallback-component v-show="shouldHideComponent">
-    <component-that-throws v-show="!shouldHideComponent" />
-  </error-boundary>
-</template>
-
-<script>
-import componentErrorMixin from './componentError.mixin';
-
-export default {
-  mixins: [
-    componentErrorMixin
-  ]
-}
 </script>
 ```
+
 ## Configuration
 
 `f-error-boundary` offers a few ways to handle component visibility following an error being thrown as well as logging related options.
