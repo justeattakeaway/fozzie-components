@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.8.0
+------------------------------
+*November 03, 2021*
+
+### Added
+- DeliveryTimeMeta and IconText components, which we use for ETA, distance, and address data
+
+### Fixed
+- Styles of cuisines component
+
 v0.7.0
 ------------------------------
 *November 02, 2021*
