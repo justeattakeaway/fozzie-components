@@ -4,49 +4,49 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 
 describe('f-checkout "delivery" component tests', () => {
-    // describe('uk tenant', () => {
-    //     beforeEach(() => {
-    //         checkout = new Checkout();
-    //         checkout.withQuery('&knob-Service Type', 'delivery')
-    //             .withQuery('&knob-Is User Logged In', true)
-    //             .withQuery('&knob-Is ASAP available', true);
+    describe('uk tenant', () => {
+        beforeEach(() => {
+            checkout = new Checkout();
+            checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true);
 
-    //         checkout.load();
-    //     });
+            checkout.load();
+        });
 
-    //     it('should enable a user to submit a postcode with correct characters', () => {
-    //         // Act
-    //         checkout.goToPayment();
+        it('should enable a user to submit a postcode with correct characters', () => {
+            // Act
+            checkout.goToPayment();
 
-    //         // Assert
-    //         expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
-    //     });
-    // });
+            // Assert
+            expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
+        });
+    });
 
     describe('au tenant', () => {
-        // describe('and age verification is not required', () => {
-        //     beforeEach(() => {
-        //         checkout = new Checkout();
-        //         checkout.withQuery('&knob-Service Type', 'delivery')
-        //             .withQuery('&knob-Is User Logged In', false)
-        //             .withQuery('&knob-Is ASAP available', true)
-        //             .withQuery('&knob-Locale', 'en-AU');
+        describe('and age verification is not required', () => {
+            beforeEach(() => {
+                checkout = new Checkout();
+                checkout.withQuery('&knob-Service Type', 'delivery')
+                    .withQuery('&knob-Is User Logged In', false)
+                    .withQuery('&knob-Is ASAP available', true)
+                    .withQuery('&knob-Locale', 'en-AU');
 
-        //         checkout.load();
-        //     });
+                checkout.load();
+            });
 
-        //     it('should prevent more than 50 characters in state field', () => {
-        //         // Arrange
-        //         const field = 'addressAdministrativeArea';
-        //         const userEntry = 'A'.repeat(50 + 1); // Enter more than allowed
+            it('should prevent more than 50 characters in state field', () => {
+                // Arrange
+                const field = 'addressAdministrativeArea';
+                const userEntry = 'A'.repeat(50 + 1); // Enter more than allowed
 
-        //         // Act
-        //         checkout.setFieldValue(field, userEntry);
+                // Act
+                checkout.setFieldValue(field, userEntry);
 
-        //         // Assert
-        //         expect(checkout.getFieldValue(field).length).toEqual(50);
-        //     });
-        // });
+                // Assert
+                expect(checkout.getFieldValue(field).length).toEqual(50);
+            });
+        });
 
         describe('and age verification is required', () => {
             beforeEach(() => {
@@ -68,14 +68,21 @@ describe('f-checkout "delivery" component tests', () => {
                 checkout.loadAgeVerification();
             });
 
-            it('should display a field error if the customer is younger than 18', () => {
-                // const dob = {
-                //     day: 5,
-                //     month: 7,
-                //     year: 2017
-                // };
-
+            it('should display the age verification page', () => {
                 checkout.isAgeVerificationDisplayed();
+            });
+
+            it('should display a field error if the age is younger than 18', () => {
+                const todaysDate = new Date();
+                const dob = {
+                    day: todaysDate.getDay(),
+                    month: todaysDate.toLocaleString('default', { month: 'long' }),
+                    year: todaysDate.getFullYear() - 17 // The user is 17 years old
+                };
+
+                // checkout.waitForAgeVerificationComponent();
+                // checkout.populateAgeVerificationForm(dob);
+                // checkout.submitAgeVerification();
             });
         });
     });
