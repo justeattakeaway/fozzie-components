@@ -1,6 +1,7 @@
 import { Factory } from 'miragejs';
 import faker from 'faker';
-import stampCard1 from '../traits/stampCard1';
+import stampCardInProgress from '../traits/stampCardInProgress';
+import stampCardReadyToClaim from '../traits/stampCardReadyToClaim';
 
 function timeRange10HoursAroundNow () {
     const now = Math.floor(Date.now() / 1000);
@@ -23,7 +24,8 @@ export default Factory.extend({
     db: false,
     ca: nowMinus5Hours, // created at
     ea: nowPlus5Hours, // expires at
-    stampCard: stampCard1,
+    stampCardInProgress,
+    stampCardReadyToClaim,
     tp: 'short_news',
     ar: 1,
     u: null,

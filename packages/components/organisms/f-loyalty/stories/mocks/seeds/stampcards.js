@@ -4,5 +4,6 @@
  * @param server
  */
 export default server => {
-    server.createList('card', 4, 'stampCard');
+    server.createList('card', 4, 'stampCardInProgress');
+    server.createList('card', 4, 'stampCardReadyToClaim');
 };

@@ -40,7 +40,7 @@ describe('LoyaltyCards.vue', () => {
     describe('No Cards ::', () => {
         it('should display the no-cards-error-state when there are no cards', () => {
             // Act
-            const noCardsComponent = wrapper.find()
+            const noCardsComponent = wrapper.find();
         });
     });
 
