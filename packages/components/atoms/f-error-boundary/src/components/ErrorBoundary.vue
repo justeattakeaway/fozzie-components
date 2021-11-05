@@ -35,20 +35,26 @@ export default {
     },
 
     errorCaptured (error, vm, info) {
-        this.hasError = true;
-        this.error = error;
-        this.vm = vm;
-        this.info = info;
+        return this.interceptError(error, vm, info);
+    },
 
-        this.$emit('on-error', {
-            error,
-            vm,
-            info,
-            tier: this.tier,
-            loggerPayload: this.loggerPayload
-        });
+    methods: {
+        interceptError (error, vm, info) {
+            this.hasError = true;
+            this.error = error;
+            this.vm = vm;
+            this.info = info;
 
-        return !this.stopPropagation;
+            this.$emit('on-error', {
+                error,
+                vm,
+                info,
+                tier: this.tier,
+                loggerPayload: this.loggerPayload
+            });
+
+            return !this.stopPropagation;
+        }
     },
 
     render () {
