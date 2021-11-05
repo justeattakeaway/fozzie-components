@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.1.0
+------------------------------
+*November 4, 2021*
+
+### Changed
+- Updated references to point to being a `Page` rather than an `Organism`.
+
+
 v2.0.3
 ------------------------------
 *October 18, 2021*

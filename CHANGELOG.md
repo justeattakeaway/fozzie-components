@@ -12,6 +12,30 @@ v5.1.3
 - allure script in `wdio-shared.conf.js` and `package.json`
 - small update of generator to reflect above changes
 
+v5.2.0
+------------------------------
+*November 5, 2021*
+
+### Changed
+- Moved a number of `Organisms` over to the `Pages` directory.
+
+
+v5.1.4
+------------------------------
+*November 5, 2021*
+
+### Changed
+- Updates to `f-wdio-utils` package version across our components.
+
+
+v5.1.3
+------------------------------
+*November 3, 2021*
+
+### Added
+- `f-error-boundary` generated component.
+
+
 v5.1.2
 ------------------------------
 *November 3, 2021*
