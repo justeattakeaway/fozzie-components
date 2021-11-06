@@ -86,6 +86,7 @@ import '@justeat/f-card/dist/f-card.css';
 import tenantConfigs from '../tenants';
 import { GetPreferencesError } from '../exceptions';
 import { mapToPreferencesViewModel } from '../services/mapping';
+import ContactPreferencesApi from '../services/providers/contactPreferencesApi';
 
 export default {
     name: 'ContactPreferences',
@@ -113,13 +114,14 @@ export default {
             error: {},
             preferences: [],
             showErrorPage: false,
-            tenantConfigs
+            tenantConfigs,
+            contactPreferencesApi: new ContactPreferencesApi({ httpClient: this.$http, cookies: this.$cookies, baseUrl: this.smartGatewayBaseUrl })
         };
     },
 
-    mounted () {
+    async mounted () {
         try {
-            const data = {
+            let data = {
                 preferencesVersionViewed: 0,
                 preferences: [
                     {
@@ -141,8 +143,15 @@ export default {
                 ]
             };
 
+            if (this.authToken) {
+                data = await this.contactPreferencesApi.getPreferences('consumer/preferences', this.authToken);
+            } else {
+                this.$el.ownerDocument.defaultView.console.log('DEBUG-NO-TOKEN'); // eslint-disable-line
+            }
+
             this.preferences = mapToPreferencesViewModel(data).preferences;
         } catch (error) {
+            this.$el.ownerDocument.defaultView.console.log('DEBUG-ERROR', error); // eslint-disable-line
             this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
         }
     },
