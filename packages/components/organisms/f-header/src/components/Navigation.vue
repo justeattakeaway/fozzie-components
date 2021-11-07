@@ -182,7 +182,7 @@
                         <user-navigation-panel
                             :is-open="navIsOpen"
                             :is-below-mid="isBelowMid"
-                            :country-selector-is-closed-on-mobile-view="countrySelectorIsClosedOnMobileView"
+                            :is-country-selector-closed-on-mobile-view="countrySelectorIsClosedOnMobileView"
                             :copy="copy"
                             :return-logout-url="returnLogoutUrl"
                             @activateNav="openUserMenu"
@@ -553,6 +553,10 @@ export default {
             }
         },
 
+        /**
+         * When mobile menu or country selector is opened build a NodeList of focusable elements, assigns the first and last focuable elements before
+         * binding tab events via the keydown method
+         */
         tabLoop () {
             if (!this.isBelowMid || !this.navIsOpen) return;
 

@@ -62,14 +62,14 @@ export default {
             type: String,
             default: ''
         },
-        countrySelectorIsClosedOnMobileView: {
+        isCountrySelectorClosedOnMobileView: {
             type: Boolean,
             default: true
         }
     },
     computed: {
         tabIndex () {
-            if (this.isBelowMid && this.isOpen && !this.countrySelectorIsClosedOnMobileView) return -1;
+            if (this.isBelowMid && this.isOpen && !this.isCountrySelectorClosedOnMobileView) return -1;
             if (!this.isOpen) return -1;
             return 0;
         }
