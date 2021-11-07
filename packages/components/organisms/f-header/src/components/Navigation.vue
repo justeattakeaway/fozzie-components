@@ -182,7 +182,7 @@
                         <user-navigation-panel
                             :is-open="navIsOpen"
                             :is-below-mid="isBelowMid"
-                            :is-country-selector-closed-on-mobile-view="countrySelectorIsClosedOnMobileView"
+                            :is-country-selector-closed-on-mobile-view="isCountrySelectorClosedOnMobileView"
                             :copy="copy"
                             :return-logout-url="returnLogoutUrl"
                             @activateNav="openUserMenu"
@@ -240,7 +240,7 @@
 
                 <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
-                    :aria-hidden="!countrySelectorIsClosedOnMobileView"
+                    :aria-hidden="!isCountrySelectorClosedOnMobileView"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
                     data-test-id="logout">
                     <a
@@ -282,7 +282,7 @@
                             $style['c-nav-list-text'],
                             $style['c-nav-list-btn']
                         ]"
-                        :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
+                        :aria-expanded="isCountrySelectorOpenOnDesktopView ? 'true' : 'false'"
                         :aria-haspopup="!isBelowMid"
                         :aria-label="copy.countrySelector.changeCurrentCountry"
                         @click="onCountrySelectorToggle">
@@ -477,17 +477,17 @@ export default {
                 this.showLoginInfo;
         },
 
-        countrySelectorIsClosedOnMobileView () {
+        isCountrySelectorClosedOnMobileView () {
             return this.isBelowMid && !this.countrySelectorIsOpen;
         },
 
-        countrySelectorIsOpenOnDesktopView () {
+        isCountrySelectorOpenOnDesktopView () {
             return !this.isBelowMid && this.countrySelectorIsOpen;
         },
 
         tabIndex () {
             if (!this.isBelowMid) return 0;
-            if (this.isBelowMid && this.countrySelectorIsClosedOnMobileView) return 0;
+            if (this.isBelowMid && this.isCountrySelectorClosedOnMobileView) return 0;
             return -1;
         }
     },
