@@ -13,13 +13,19 @@
         <restaurant-image
             v-if="imgUrl"
             :class="[$style['c-restaurantCard-img']]"
-            :img-url="imgUrl" />
+            :img-url="imgUrl">
+            <!-- Logo image -->
+            <restaurant-logo
+                v-if="logoUrl"
+                :class="$style['c-restaurantCard-logo']"
+                :logo-url="logoUrl" />
 
-        <!-- Logo image -->
-        <restaurant-logo
-            v-if="logoUrl"
-            :class="$style['c-restaurantCard-logo']"
-            :logo-url="logoUrl" />
+            <restaurant-badges
+                v-if="imageBadges.length"
+                :class="$style['c-restaurantCard-imageBadges']"
+                :test-id-position="'main-image'"
+                :badges="imageBadges" />
+        </restaurant-image>
 
         <!-- primary content -->
         <div :class="$style['c-restaurantCard-content']">
@@ -36,7 +42,10 @@
             <component
                 :is="errorBoundary"
                 tier="3">
-                <slot name="cuisines" />
+                <restaurant-cuisines
+                    v-if="cuisines.length > 0"
+                    data-test-id="restaurant-cuisines"
+                    :cuisines="cuisines" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -46,7 +55,14 @@
             <component
                 :is="errorBoundary"
                 tier="3">
-                <slot name="new-label" />
+                <!-- TODO - we want to translate this within the component using i18n.
+                For now we'll just need to pass down a translated string from the consuming site -->
+                <restaurant-badge
+                    v-if="newBadgeText"
+                    :is-large="true"
+                    :text="newBadgeText"
+                    :background-colour="subcomponentColourSchemes.badges.new.background"
+                    :text-colour="subcomponentColourSchemes.badges.new.text" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -67,6 +83,11 @@
                 :is="errorBoundary"
                 tier="3">
                 <slot name="meta-items" />
+
+                <delivery-time-meta
+                    v-if="displayDeliveryTimeMeta"
+                    v-bind="deliveryTimeData"
+                    data-test-id="restaurant-delivery-time-meta" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -86,7 +107,11 @@
                 <component
                     :is="errorBoundary"
                     tier="3">
-                    <slot name="badges" />
+                    <restaurant-badges
+                        v-if="contentBadges.length"
+                        :class="$style['c-restaurantCard-badges']"
+                        :test-id-position="'inner-content'"
+                        :badges="contentBadges" />
                 </component>
                 <!-- END ERROR BOUNDARY -->
             </div>
@@ -109,17 +134,40 @@
 </template>
 
 <script>
+import { theme as PieTokensTheme } from '@justeat/pie-design-tokens/dist/tokens.json';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
-import RestaurantImage from './RestaurantImage.vue';
-import RestaurantLogo from './RestaurantLogo.vue';
-import RestaurantDish from './RestaurantDish.vue';
+import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
+import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
+import RestaurantDish from './subcomponents/RestaurantDish.vue';
+import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
+import RestaurantBadges from './subcomponents/RestaurantBadges/RestaurantBadges.vue';
+import RestaurantBadge from './subcomponents/RestaurantBadges/RestaurantBadge.vue';
+import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
+
+const {
+    'support-positive': newBadgeTextColour,
+    'support-positive-02': newBadgeBackgroundColour
+} = PieTokensTheme.jet.color.alias.default;
+
+const subcomponentColourSchemes = {
+    badges: {
+        new: {
+            text: newBadgeTextColour,
+            background: newBadgeBackgroundColour
+        }
+    }
+};
 
 export default {
     name: 'RestaurantCardV1',
     components: {
         RestaurantImage,
         RestaurantLogo,
-        RestaurantDish
+        RestaurantDish,
+        RestaurantCuisines,
+        RestaurantBadges,
+        RestaurantBadge,
+        DeliveryTimeMeta
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -152,11 +200,48 @@ export default {
             type: Boolean,
             default: true
         },
+        cuisines: {
+            type: Array,
+            default: () => []
+        },
         // feature flags
         flags: {
             type: Object,
             default: () => ({})
+        },
+        imageBadges: {
+            type: Array,
+            default: () => []
+        },
+        contentBadges: {
+            type: Array,
+            default: () => []
+        },
+        newBadgeText: {
+            type: String,
+            default: null
+        },
+        deliveryTimeData: {
+            type: Object,
+            default: () => ({})
         }
+    },
+    data () {
+        return {
+            subcomponentColourSchemes
+        };
+    },
+    computed: {
+        displayDeliveryTimeMeta () {
+            return this.deliveryTimeData.eta ||
+                this.deliveryTimeData.distance ||
+                this.deliveryTimeData.address;
+        }
+    },
+    provide () {
+        return {
+            isListItem: this.isListItem
+        };
     }
 };
 </script>
@@ -172,7 +257,7 @@ export default {
   &.c-restaurantCard--listItem {
       @include media('>mid') {
         grid-gap: spacing() spacing(x2);
-        grid-template-columns: minmax(150px, 20%) 1fr;
+        grid-template-columns: minmax(180px, 20%) 1fr;
       }
   }
 
@@ -216,5 +301,14 @@ export default {
         grid-column: 1/3;
       }
   }
+}
+
+.c-restaurantCard-imageBadges {
+    bottom: spacing();
+    left: spacing(x2);
+    position: absolute;
+    @include media('>mid') {
+        bottom: spacing(x1.5);
+    }
 }
 </style>
