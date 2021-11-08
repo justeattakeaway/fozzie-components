@@ -121,9 +121,9 @@ export default {
          * linkClass added manually to nested component as inheritAttrs: false does not affect class bindings.
          */
         bindAttrs () {
-            const { 'link-class': linkClass, ...atributes } = this.$attrs;
+            const { 'link-class': linkClass, ...attributes } = this.$attrs;
             this.linkClass = linkClass;
-            return atributes;
+            return attributes;
         }
     }
 };
