@@ -78,7 +78,7 @@ The props that can be defined are as follows (if any):
 | `isFullWidth` | `Boolean` | `false` | Link set as full width. |
 | `noLineBreak` | `Boolean` | `false` | Removes white space. |
 | `isDistinct` | `Boolean` | `false` | Changes default link colour (dark grey) to blue. |
-| `link-class` | `String` | `n/a` (this is an expected attribute rather than a required prop) |  Allows parent component to add a CSS class to the `<a>` or `<router-link>`  |
+| `link-class` | `String` | `n/a` (this is an optional attribute rather than a required prop) |  Allows parent component to add a CSS class to the `<a>` or `<router-link>`  |
 
 ## Development
 
