@@ -8,7 +8,7 @@ v2.3.0
 *November 8, 2021*
 
 ### Added
-- Support for custom link CSS class via `$attrs.linkClass`.
+- Support for custom link CSS class via `link-class` attribute. Also ensures other `$attrs` are bound to the component not the wrapper.
 
 
 v2.2.0
