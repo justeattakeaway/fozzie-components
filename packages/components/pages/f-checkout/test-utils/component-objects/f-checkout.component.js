@@ -280,12 +280,6 @@ module.exports = class Checkout extends Page {
         this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
     }
 
-    populateAgeVerificationForm (dob) {
-        this.ageVerificationDayDropdown.selectByVisibleText(dob.day);
-        this.ageVerificationMonthDropdown.selectByVisibleText(dob.month);
-        this.ageVerificationYearDropdown.selectByVisibleText(dob.year);
-    }
-
     /**
     * @description
     * Due to the anomalies between webdriver io and Chrome the current `clearField()`
