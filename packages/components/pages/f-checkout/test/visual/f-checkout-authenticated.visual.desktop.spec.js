@@ -343,7 +343,6 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
 });
 
 describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', () => {
-
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();

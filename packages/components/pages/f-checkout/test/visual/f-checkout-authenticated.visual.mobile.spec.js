@@ -100,7 +100,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        
+
         const customerInfo = {
             mobileNumber: '123'
         };
@@ -379,5 +379,31 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', 'mobile');
+    });
+});
+
+describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', () => {
+    beforeEach(() => {
+        // Arrange
+        checkout = new Checkout();
+        checkoutInfo = {
+            serviceType: 'delivery',
+            isAuthenticated: true,
+            isASAP: true,
+            locale: 'en-AU',
+            restrictions: 'age-restriction'
+        };
+        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
+                    .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+                    .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+                    .withQuery('&knob-Locale', checkoutInfo.locale)
+                    .withQuery('&knob-Restrictions', checkoutInfo.restrictions);
+
+        checkout.loadAgeVerification();
+    });
+
+    it.only('should display the age verification page', () => {
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible Age Verification', 'mobile');
     });
 });
