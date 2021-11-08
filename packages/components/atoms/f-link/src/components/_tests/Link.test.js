@@ -271,6 +271,19 @@ describe('Link', () => {
                 // Assert
                 expect(wrapper.find('[data-test-id="link-component"]').attributes('test-attribute')).toEqual(expected);
             });
+
+            it('should set data.linkClass to empty string when link-class attribute is not passed', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.linkClass).toEqual('');
+            });
         });
     });
 });
