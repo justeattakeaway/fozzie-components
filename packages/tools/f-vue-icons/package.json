@@ -2,7 +2,7 @@
   "name": "@justeat/f-vue-icons",
   "version": "3.0.0",
   "main": "dist/f-vue-icons.cjs.js",
-  "maxBundleSize": "100kB",
+  "maxBundleSize": "150kB",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
   "module": "dist/f-vue-icons.es.js",
