@@ -28,7 +28,8 @@ describe('Link', () => {
 
     it('should render a router link when given the `to` attribute', () => {
         // Arrange
-        const propsData = {
+        const propsData = {};
+        const attrs = {
             to: '/'
         };
 
@@ -36,6 +37,7 @@ describe('Link', () => {
         const wrapper = shallowMount(VLink, {
             propsData,
             mocks,
+            attrs,
             stubs: {
                 RouterLink: RouterLinkStub
             }
@@ -49,13 +51,15 @@ describe('Link', () => {
 
     it('should render an anchor tag when given the `href` attribute', () => {
         // Arrange
-        const propsData = {
+        const propsData = {};
+        const attrs = {
             href: '/'
         };
 
         // Act
         const wrapper = shallowMount(VLink, {
             propsData,
+            attrs,
             mocks
         });
 
@@ -69,7 +73,8 @@ describe('Link', () => {
 
     it('should render an anchor tag when given both the `href` and `to` attributes', () => {
         // Arrange
-        const propsData = {
+        const propsData = {};
+        const attrs = {
             href: '/',
             to: '/'
         };
@@ -77,6 +82,7 @@ describe('Link', () => {
         // Act
         const wrapper = shallowMount(VLink, {
             propsData,
+            attrs,
             mocks
         });
 
@@ -211,7 +217,7 @@ describe('Link', () => {
 
     describe('methods :: ', () => {
         describe('bindAttrs :: ', () => {
-            it.only('should set data.linkClass when link-class attribute is passed', () => {
+            it('should set data.linkClass when link-class attribute is passed', () => {
                 // Arrange
                 const expected = 'my-link-class';
                 const propsData = {};
@@ -224,9 +230,6 @@ describe('Link', () => {
                     propsData,
                     attrs
                 });
-
-                const test = wrapper.find('[data-test-id="link-component"]');
-                console.log(test);
 
                 // Assert
                 expect(wrapper.vm.linkClass).toEqual(expected);
