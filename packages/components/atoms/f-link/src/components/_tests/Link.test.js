@@ -208,4 +208,66 @@ describe('Link', () => {
             });
         });
     });
+
+    describe('methods :: ', () => {
+        describe('bindAttrs :: ', () => {
+            it.only('should set data.linkClass when link-class attribute is passed', () => {
+                // Arrange
+                const expected = 'my-link-class';
+                const propsData = {};
+                const attrs = {
+                    'link-class': expected
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    attrs
+                });
+
+                const test = wrapper.find('[data-test-id="link-component"]');
+                console.log(test);
+
+                // Assert
+                expect(wrapper.vm.linkClass).toEqual(expected);
+            });
+
+            it('should not set link-class attribute on wrapper', () => {
+                // Arrange
+                const expected = 'my-link-class';
+                const propsData = {};
+                const attrs = {
+                    'link-class': expected
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    attrs
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="link-component"]').attributes('link-class')).toBeUndefined();
+            });
+
+            it('should set any other custom attributes on the wrapper not link-class', () => {
+                // Arrange
+                const expected = 'XXX';
+                const propsData = {};
+                const attrs = {
+                    'link-class': 'my-link-class',
+                    'test-attribute': expected
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    attrs
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="link-component"]').attributes('test-attribute')).toEqual(expected);
+            });
+        });
+    });
 });
