@@ -10,8 +10,8 @@
                 :class="$style['c-address-formField']"
                 name="address-line-1"
                 maxlength="100"
-                :label-text="$t('labels.line1')"
-                :placeholder="$t('labels.line1')"
+                :label-text="$t('formFields.address.line1.label')"
+                :placeholder="$t('formFields.address.line1.label')"
                 is-grouped
                 :should-show-label-text="false"
                 :has-error="isAddressLine1Empty"
@@ -25,7 +25,7 @@
                         data-js-error-message
                         :class="$style['c-address-error']"
                         data-test-id="error-address-line1-empty">
-                        {{ $t('validationMessages.addressLine1.requiredError') }}
+                        {{ $t('formFields.address.line1.validationMessages.required') }}
                     </error-message>
                 </template>
             </form-field>
@@ -36,8 +36,8 @@
                 name="address-line-2"
                 :should-show-label-text="false"
                 maxlength="100"
-                :label-text="$t('labels.line2')"
-                :placeholder="$t('labels.line2')"
+                :label-text="$t('formFields.address.line2.label')"
+                :placeholder="$t('formFields.address.line2.label')"
                 is-grouped
                 @input="updateAddressDetails({ ['line2']: $event })" />
         </fieldset>
@@ -46,7 +46,7 @@
             :value="address.locality"
             name="address-locality"
             maxlength="50"
-            :label-text="$t('labels.locality')"
+            :label-text="$t('formFields.address.locality.label')"
             :has-error="isAddressLocalityEmpty"
             aria-describedby="locality-error"
             :aria-invalid="isAddressLocalityEmpty"
@@ -57,7 +57,7 @@
                     id="locality-error"
                     data-js-error-message
                     data-test-id="error-address-locality-empty">
-                    {{ $t('validationMessages.locality.requiredError') }}
+                    {{ $t('formFields.address.locality.validationMessages.required') }}
                 </error-message>
             </template>
         </form-field>
@@ -67,7 +67,7 @@
             :value="address.administrativeArea"
             name="address-administrative-area"
             maxlength="50"
-            :label-text="$t('labels.administrativeArea')"
+            :label-text="$t('formFields.address.administrativeArea.label')"
             :has-error="isAddressAdministrativeAreaEmpty"
             aria-describedby="administrative-area-error"
             :aria-invalid="isAddressAdministrativeAreaEmpty"
@@ -78,7 +78,7 @@
                     id="administrative-area-error"
                     data-js-error-message
                     data-test-id="error-address-administrative-area-empty">
-                    {{ $t('validationMessages.administrativeArea.requiredError') }}
+                    {{ $t('formFields.address.administrativeArea.validationMessages.required') }}
                 </error-message>
             </template>
         </form-field>
@@ -87,7 +87,7 @@
             :value="address.postcode"
             name="address-postcode"
             maxlength="50"
-            :label-text="$t('labels.postcode')"
+            :label-text="$t('formFields.address.postcode.label')"
             :has-error="!isAddressPostcodeValid"
             aria-describedby="postcode-error"
             :aria-invalid="!isAddressPostcodeValid"
@@ -99,14 +99,14 @@
                     id="postcode-error"
                     data-js-error-message
                     data-test-id="error-address-postcode-empty">
-                    {{ $t('validationMessages.postcode.requiredError') }}
+                    {{ $t('formFields.address.postcode.validationMessages.required') }}
                 </error-message>
                 <error-message
                     v-else-if="!isAddressPostcodeValid"
                     id="postcode-error"
                     data-js-error-message
                     data-test-id="error-address-postcode-type-error">
-                    {{ $t('validationMessages.postcode.invalidCharError') }}
+                    {{ $t('formFields.address.postcode.validationMessages.invalid') }}
                 </error-message>
             </template>
         </form-field>
