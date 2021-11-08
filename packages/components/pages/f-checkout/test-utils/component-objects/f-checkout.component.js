@@ -21,12 +21,7 @@ const {
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
     ERROR_PAGE_IMAGE,
-    AGE_VERIFICATION_COMPONENT,
-    AGE_VERIFICATION_DAY_DROPDOWN,
-    AGE_VERIFICATION_MONTH_DROPDOWN,
-    AGE_VERIFICATION_YEAR_DROPDOWN,
-    AGE_VERIFICATION_SUBMIT_BUTTON,
-    AGE_VERIFICATION_ERROR
+    AGE_VERIFICATION_COMPONENT
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -74,16 +69,6 @@ module.exports = class Checkout extends Page {
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
     get ageVerificationComponent () { return $(AGE_VERIFICATION_COMPONENT); }
-
-    get ageVerificationDayDropdown () { return $(AGE_VERIFICATION_DAY_DROPDOWN); }
-
-    get ageVerificationMonthDropdown () { return $(AGE_VERIFICATION_MONTH_DROPDOWN); }
-
-    get ageVerificationYearDropdown () { return $(AGE_VERIFICATION_YEAR_DROPDOWN); }
-
-    get ageVerificationError () { return $(AGE_VERIFICATION_ERROR); }
-
-    get ageVerificationSubmitButton () { return $(AGE_VERIFICATION_SUBMIT_BUTTON); }
     /* eslint-enable class-methods-use-this */
 
     fields = {
@@ -173,10 +158,6 @@ module.exports = class Checkout extends Page {
         super.waitForComponent(this.errorPageComponent);
     }
 
-    waitForAgeVerificationComponent () {
-        super.waitForComponent(this.ageVerificationComponent);
-    }
-
     isCheckoutPageDisplayed () {
         return this.component.isDisplayed();
     }
@@ -196,14 +177,6 @@ module.exports = class Checkout extends Page {
     isOrderTimeDropdownDisplayed () {
         return this.orderTimeDropdown.isDisplayed();
     }
-
-    // isAgeVerificationDisplayed () {
-    //     return this.ageVerificationComponent.isDisplayed();
-    // }
-
-    // isAgeVerificationErrorDisplayed () {
-    //     return this.ageVerificationError.isDisplayed();
-    // }
 
     userNoteMaxCharacterCount () {
         return this.userNoteInput.getAttribute('maxlength');
@@ -395,8 +368,4 @@ module.exports = class Checkout extends Page {
         this.goToPaymentButton.scrollIntoView();
         this.goToPaymentButton.click();
     }
-
-    // submitAgeVerification () {
-    //     this.ageVerificationSubmitButton.click();
-    // }
 };

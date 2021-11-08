@@ -22,11 +22,6 @@ exports.ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
 
 // Age verification
 exports.AGE_VERIFICATION_COMPONENT = '[data-test-id="checkout-age-verification-component"]';
-exports.AGE_VERIFICATION_DAY_DROPDOWN = '[data-test-id="formfield-dob-day-dropdown-select"]';
-exports.AGE_VERIFICATION_MONTH_DROPDOWN = '[data-test-id="formfield-dob-month-dropdown-select"]';
-exports.AGE_VERIFICATION_YEAR_DROPDOWN = '[data-test-id="formfield-dob-year-dropdown-select"]';
-exports.AGE_VERIFICATION_ERROR = '[data-test-id="age-verification-error-message"]';
-exports.AGE_VERIFICATION_SUBMIT_BUTTON = '[data-test-id="age-verification-redirect-button"]';
 exports.FIELDS = {
     firstName: {
         input: '[data-test-id="formfield-guest-first-name-input"]',

@@ -9,7 +9,7 @@ v3.2.0
 *November 8, 2021*
 
 ### Added
-- Visual and component tests to age verification form
+- Visual tests for age verification form
   
 
 v3.1.0
