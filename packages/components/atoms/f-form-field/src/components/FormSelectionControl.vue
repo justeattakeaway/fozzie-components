@@ -137,6 +137,10 @@ export default {
         vertical-align: -5px;
     }
 
+    .c-formField-field--checkbox.c-formField--invalid + label:before {
+        border-color: $form-input-borderColour--invalid;
+    }
+
     .c-formField-field--checkbox:checked + label:before {
         @include tick-svg($color-white);
 
