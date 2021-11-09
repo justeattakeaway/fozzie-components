@@ -307,7 +307,7 @@ module.exports = class Checkout extends Page {
         this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
     }
 
-    populateAgeVerificationForm (dob) {
+    populateAgeVerificationForm ({ day, month, year }) {
         this.ageVerificationDayDropdown.selectByVisibleText(dob.day);
         this.ageVerificationMonthDropdown.selectByVisibleText(dob.month);
         this.ageVerificationYearDropdown.selectByVisibleText(dob.year);
