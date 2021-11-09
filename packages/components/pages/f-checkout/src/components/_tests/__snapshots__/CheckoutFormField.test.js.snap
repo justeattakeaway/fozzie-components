@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckoutFormField computed :: translations :: should return translations from with id names 1`] = `
+Object {
+  "emptyError": "error-first-name-empty",
+  "errorName": "first-name-error",
+  "invalidError": "error-first-name-invalid",
+  "label": "First name",
+  "name": "first-name",
+  "validationMessages": Object {
+    "required": "Please enter your first name",
+  },
+}
+`;

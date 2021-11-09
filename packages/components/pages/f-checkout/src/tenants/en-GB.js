@@ -2,45 +2,73 @@ const messages = {
     locale: 'en-GB',
 
     labels: {
-        mobileNumber: 'Mobile Number',
         addressGroup: 'Address',
-        line1: 'Address line 1',
-        line2: 'Address line 2 (optional)',
-        locality: 'City',
-        postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
         collectionOrderMethod: 'Collection time',
-        dineinOrderMethod: 'Dine in time',
-        tableIdentifier: 'Table number or name'
+        dineinOrderMethod: 'Dine in time'
     },
 
-    validationMessages: {
-        mobileNumber: {
-            requiredError: 'Please enter your phone number',
-            invalidCharError: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
+    formFields: {
+        order: {
+            tableIdentifier: {
+                label: 'Table number or name',
+                validationMessages: {
+                    required: 'Please include your table name/number',
+                    invalid: 'The table number/name exceeds the maximum length (12)'
+                }
+            }
         },
-        addressLine1: {
-            requiredError: 'Please enter the first line of your address'
+        customer: {
+            mobileNumber: {
+                label: 'Mobile Number',
+                validationMessages: {
+                    required: 'Please enter your phone number',
+                    invalid: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
+                }
+            },
+            firstName: {
+                label: 'First name',
+                validationMessages: {
+                    required: 'Please enter your first name'
+                }
+            },
+            lastName: {
+                label: 'Last name',
+                validationMessages: {
+                    required: 'Please enter your last name'
+                }
+            },
+            email: {
+                label: 'Email',
+                validationMessages: {
+                    required: 'Please enter your email',
+                    invalid: 'Please enter a valid email address'
+                }
+            }
         },
-        locality: {
-            requiredError: 'Please enter your town or city'
-        },
-        postcode: {
-            requiredError: 'Please enter your full UK postcode',
-            invalidCharError: 'This doesn’t look like a UK postcode, can you enter it again please?'
-        },
-        firstName: {
-            requiredError: 'Please enter your first name'
-        },
-        lastName: {
-            requiredError: 'Please enter your last name'
-        },
-        email: {
-            requiredError: 'Please enter a valid email address'
-        },
-        tableIdentifier: {
-            requiredError: 'Please include your table name/number',
-            maxLengthError: 'The table number/name exceeds the maximum length (12)'
+        address: {
+            line1: {
+                label: 'Address line 1',
+                validationMessages: {
+                    required: 'Please enter the first line of your address'
+                }
+            },
+            line2: {
+                label: 'Address line 2 (optional)'
+            },
+            locality: {
+                label: 'City',
+                validationMessages: {
+                    required: 'Please enter your town or city'
+                }
+            },
+            postcode: {
+                label: 'Postcode',
+                validationMessages: {
+                    required: 'Please enter your full UK postcode',
+                    invalid: 'This doesn’t look like a UK postcode, can you enter it again please?'
+                }
+            }
         }
     },
 
@@ -165,12 +193,6 @@ const messages = {
             placeholder: 'e.g. please bring the starters and mains at the same time. \n\nDo not include details about any allergies here.'
         }
 
-    },
-
-    guest: {
-        firstName: 'First name',
-        lastName: 'Last name',
-        email: 'Email'
     },
 
     checkoutHeader: {
