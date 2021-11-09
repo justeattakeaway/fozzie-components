@@ -21,15 +21,15 @@ exports.AGE_VERIFICATION_COMPONENT = '[data-test-id="checkout-age-verification-c
 
 exports.FIELDS = {
     firstName: {
-        input: '[data-test-id="formfield-guest-first-name-input"]',
-        error: '[data-test-id="error-first-name-empty"]'
+        input: '[data-test-id="formfield-first-name-input"]',
+        error: '[data-test-id="error-first-name-required"]'
     },
     lastName: {
-        input: '[data-test-id="formfield-guest-last-name-input"]',
-        error: '[data-test-id="error-last-name-empty"]'
+        input: '[data-test-id="formfield-last-name-input"]',
+        error: '[data-test-id="error-last-name-required"]'
     },
     emailAddress: {
-        input: '[data-test-id="formfield-guest-email-input"]',
+        input: '[data-test-id="formfield-email-input"]',
         error: '[data-test-id="error-email-invalid"]'
     },
     mobileNumber: {
