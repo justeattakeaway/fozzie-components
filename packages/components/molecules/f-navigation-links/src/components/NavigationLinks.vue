@@ -10,7 +10,7 @@
             <v-link
                 :data-test-id="id"
                 :has-text-decoration="false"
-                :link-class="$style['c-navigationLinks-link']"
+                link-class="c-navigationLinks-link"
                 v-bind="{
                     ...(href ? { href } : to ? { to } : {})
                 }">
@@ -48,25 +48,29 @@ export default {
 }
 
 .c-navigationLinks-item {
-    display: inline-block;
-    width: 100%;
-}
-
-.c-navigationLinks-link {
     display: block;
+}
+</style>
+
+<style lang="scss">
+/**
+* .c-navigationLinks-link is intentionally not scoped as the consuming router application (Nuxt.js / Vue Router) will add active classes directly to
+* the router-link within <f-link>.
+*/
+.c-navigationLinks-link {
+    display: inline-block;
     padding: spacing() 0 spacing() spacing(x2);
     border-left: 2px solid $color-grey-30;
     color: $color-grey;
 
-    &:focus, &:hover {
+    &:focus,
+    &:hover,
+    &.nuxt-link-exact-active {
         border-left: 2px solid $color-orange;
         text-decoration: none;
     }
+    &.nuxt-link-exact-active {
+        font-weight: $font-weight-bold;
+    }
 }
-
-.c-navigationLinks-link--active {
-    border-left: 2px solid $color-orange;
-    font-weight: $font-weight-bold;
-}
-
 </style>

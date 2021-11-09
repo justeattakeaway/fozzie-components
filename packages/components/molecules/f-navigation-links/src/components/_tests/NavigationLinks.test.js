@@ -123,22 +123,4 @@ describe('NavigationLinks', () => {
         expect(link.attributes('href')).toEqual(expected);
         expect(link.attributes('to')).toBeUndefined();
     });
-
-    it.skip('should pass link-class attribute to `<v-link>`', () => {
-        const expected = 'XXX';
-        const wrapper = shallowMount(NavigationLinks, {
-            propsData: {
-                links: [
-                    {
-                        id: 'link1',
-                        href:  '/account/info',
-                        name: 'Your account'
-                    }]
-            }
-        });
-
-        const link = wrapper.find('[data-test-id="link1"]');
-
-        expect(link.attributes('link-class')).toEqual(expected);
-    });
 });
