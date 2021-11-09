@@ -1035,6 +1035,7 @@ export default {
         const validationProperties = {
             customer: {
                 mobileNumber: {
+                    required,
                     mobileNumber: this.isValidPhoneNumber
                 }
             },
