@@ -4,6 +4,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 
 
+v3.0.0
+------------------------------
+*November 8, 2021*
+
+### Changed
+- Old `BagSadBgIcon` has been renamed to `BagSorryBgIcon`.
+  - If you were using the old `BagSadBgIcon`, please make sure you're using the updated name.
+
+### Added
+- `BagSadBgIcon` (old name, new icon).
+- `BagBinocularsBgIcon`
+- `BagCryBgIcon`
+- `BagHeart1BgIcon`
+- `BagHeart2BgIcon`
+- `BagHelpBgIcon`
+- `BagListenBgIcon`
+- `BagMagicBgIcon`
+- `BagMoneyBgIcon`
+- `BagSurfBgIcon`
+- `BagXmasDecorateBgIcon`
+- `BagXmasSantaBgIcon`
+- `BagXmasSleighBgIcon`
+
+
 v2.8.0
 ------------------------------
 *September 20, 2021*

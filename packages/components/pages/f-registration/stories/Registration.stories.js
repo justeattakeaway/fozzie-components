@@ -6,7 +6,7 @@ import Registration from '../src/components/Registration.vue';
 import RegistrationMock from '../src/mocks/registrationMock';
 
 export default {
-    title: 'Components/Organisms',
+    title: 'Components/Pages',
     decorators: [withKnobs, withA11y]
 };
 

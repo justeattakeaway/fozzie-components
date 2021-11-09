@@ -1,0 +1,1161 @@
+<template>
+    <div>
+        <error-page
+            v-if="errorFormType"
+            :error-form-type="errorFormType"
+            :redirect-url="redirectUrl"
+            :service-type="serviceType" />
+
+        <age-verification
+            v-else-if="shouldShowAgeVerificationForm"
+            @checkout-verify-age="verifyCustomerAge" />
+
+        <component
+            :is="messageType.name"
+            v-else-if="message"
+            ref="errorMessage"
+            v-bind="messageType.props"
+            @created="handleDialogCreation">
+            <span>{{ messageType.content }}</span>
+        </component>
+
+        <div
+            v-if="shouldShowCheckoutForm"
+            data-theme="jet"
+            data-test-id="checkout-component">
+            <card
+                has-full-width-footer
+                has-outline
+                is-page-content-wrapper
+                card-heading-position="center"
+                :data-test-id="`checkout-card-component-${serviceType}`"
+                :class="$style['c-checkout']">
+                <checkout-header :login-url="loginUrl" />
+
+                <form
+                    method="post"
+                    :class="$style['c-checkout-form']"
+                    @submit.prevent="onFormSubmit">
+                    <section
+                        v-if="invalidFieldsSummary"
+                        class="is-visuallyHidden"
+                        role="alert"
+                        data-test-id="error-summary-container">
+                        {{ invalidFieldsSummary }}
+                    </section>
+
+                    <guest-block v-if="!isLoggedIn" />
+
+                    <form-field
+                        :value="customer.mobileNumber"
+                        name="mobile-number"
+                        maxlength="16"
+                        input-type="tel"
+                        :label-text="$t('formFields.customer.mobileNumber.label')"
+                        :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
+                        aria-describedby="mobile-number-error"
+                        :aria-invalid="isMobileNumberInvalid"
+                        :aria-label="formattedMobileNumberForScreenReader"
+                        @blur="formFieldBlur('mobileNumber')"
+                        @input="updateCustomerDetails({ mobileNumber: $event })">
+                        <template #error>
+                            <error-message
+                                v-if="isMobileNumberEmpty"
+                                id="mobile-number-error"
+                                data-js-error-message
+                                data-test-id="error-mobile-number-empty">
+                                {{ $t('formFields.customer.mobileNumber.validationMessages.required') }}
+                            </error-message>
+                            <error-message
+                                v-if="isMobileNumberInvalid"
+                                id="mobile-number-error"
+                                data-js-error-message
+                                data-test-id="error-mobile-number-invalid">
+                                {{ $t('formFields.customer.mobileNumber.validationMessages.invalid') }}
+                            </error-message>
+                        </template>
+                    </form-field>
+
+                    <form-field
+                        v-if="isCheckoutMethodDineIn"
+                        :value="tableIdentifier"
+                        input-type="text"
+                        name="table-identifier"
+                        :label-text="$t('formFields.order.tableIdentifier.label')"
+                        :has-error="isTableIdentifierEmpty"
+                        maxlength="12"
+                        @input="updateTableIdentifier($event)">
+                        <template #error>
+                            <error-message
+                                v-if="isTableIdentifierEmpty"
+                                data-js-error-message
+                                data-test-id="error-table-identifier-empty">
+                                {{ $t('formFields.order.tableIdentifier.validationMessages.required') }}
+                            </error-message>
+                        </template>
+                    </form-field>
+
+                    <address-block
+                        v-if="isCheckoutMethodDelivery"
+                        data-test-id="address-block"
+                        :should-show-administrative-area="shouldShowAddressAdministrativeArea" />
+
+                    <form-selector :key="availableFulfilmentTimesKey" />
+
+                    <form-field
+                        :label-text="$t(`userNote.${serviceType}.title`)"
+                        input-type="textarea"
+                        :placeholder="$t(`userNote.${serviceType}.placeholder`)"
+                        :value="userNote"
+                        cols="30"
+                        rows="7"
+                        maxlength="200"
+                        name="note"
+                        :label-description="$t(`userNote.${serviceType}.text`)"
+                        @input="updateUserNote($event)" />
+
+                    <f-button
+                        :class="[
+                            $style['c-checkout-submitButton'], {
+                                [$style['c-checkout-submitButton--noBottomSpace']]: !isLoggedIn
+                            }]"
+                        button-type="primary"
+                        button-size="large"
+                        is-full-width
+                        action-type="submit"
+                        data-test-id="confirm-payment-submit-button"
+                        :is-loading="isFormSubmitting"
+                    >
+                        {{ $t('buttonText') }}
+                    </f-button>
+                </form>
+
+                <template
+                    v-if="!isLoggedIn"
+                    #cardFooter>
+                    <checkout-terms-and-conditions />
+                </template>
+            </card>
+        </div>
+    </div>
+</template>
+
+<script>
+import { validationMixin } from 'vuelidate';
+import {
+    required, email, maxLength, requiredIf
+} from 'vuelidate/lib/validators';
+import { mapActions, mapState } from 'vuex';
+import Alert from '@justeat/f-alert';
+import '@justeat/f-alert/dist/f-alert.css';
+import FButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
+import Card from '@justeat/f-card';
+import '@justeat/f-card/dist/f-card.css';
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
+import FormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
+import { validations } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import VueScrollTo from 'vue-scrollto';
+import AddressBlock from './Address.vue';
+import AgeVerification from './AgeVerification.vue';
+import CheckoutHeader from './Header.vue';
+import CheckoutTermsAndConditions from './TermsAndConditions.vue';
+import FormSelector from './Selector.vue';
+import GuestBlock from './Guest.vue';
+import ErrorDialog from './ErrorDialog.vue';
+import ErrorPage from './Error.vue';
+import exceptions from '../exceptions/exceptions';
+import {
+    AGE_VERIFICATION_ISSUE,
+    ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
+    CHECKOUT_ERROR_FORM_TYPE,
+    CHECKOUT_METHOD_DELIVERY,
+    CHECKOUT_METHOD_DINEIN,
+    DOB_REQUIRED_ISSUE,
+    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
+    ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS,
+    TENANT_MAP,
+    VALIDATIONS,
+    VUEX_CHECKOUT_ANALYTICS_MODULE,
+    VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
+    VUEX_CHECKOUT_MODULE
+} from '../constants';
+import checkoutValidationsMixin from '../mixins/validations.mixin';
+import loggerMixin from '../mixins/logger.mixin';
+import EventNames from '../event-names';
+import LogEvents from '../log-events';
+import tenantConfigs from '../tenants';
+import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
+import addressService from '../services/addressService';
+import CheckoutAnalyticsService from '../services/analytics';
+
+const {
+    CreateGuestUserError,
+    UpdateCheckoutError,
+    UpdateCheckoutAccessForbiddenError,
+    PlaceOrderError,
+    GetCheckoutError,
+    GetCheckoutAccessForbiddenError,
+    AvailableFulfilmentGetError,
+    GetBasketError
+} = exceptions;
+
+export default {
+    name: 'VueCheckout',
+
+    components: {
+        AddressBlock,
+        AgeVerification,
+        Alert,
+        FButton,
+        Card,
+        CheckoutHeader,
+        CheckoutTermsAndConditions,
+        ErrorPage,
+        ErrorMessage,
+        FormField,
+        FormSelector,
+        GuestBlock,
+        ErrorDialog
+    },
+
+    mixins: [
+        validationMixin,
+        VueGlobalisationMixin,
+        checkoutValidationsMixin,
+        loggerMixin
+    ],
+
+    props: {
+        getCheckoutUrl: {
+            type: String,
+            required: true
+        },
+
+        checkoutAvailableFulfilmentUrl: {
+            type: String,
+            required: true
+        },
+
+        createGuestUrl: {
+            type: String,
+            required: true
+        },
+
+        getBasketUrl: {
+            type: String,
+            required: true
+        },
+
+        placeOrderUrl: {
+            type: String,
+            required: true
+        },
+
+        paymentPageUrlPrefix: {
+            type: String,
+            required: true
+        },
+
+        updateCheckoutUrl: {
+            type: String,
+            required: true
+        },
+
+        checkoutTimeout: {
+            type: Number,
+            required: false,
+            default: 60000
+        },
+
+        authToken: {
+            type: String,
+            default: ''
+        },
+
+        otacToAuthExchanger: {
+            type: Function,
+            default: () => {
+                throw new Error('otacToAuthExchanger is not implemented');
+            }
+        },
+
+        loginUrl: {
+            type: String,
+            required: true
+        },
+
+        getAddressUrl: {
+            type: String,
+            required: true
+        },
+
+        applicationName: {
+            type: String,
+            required: true
+        },
+
+        getGeoLocationUrl: {
+            type: String,
+            required: true
+        },
+
+        experiments: {
+            type: Object,
+            default: () => ({})
+        },
+
+        getCustomerUrl: {
+            type: String,
+            required: true
+        }
+    },
+
+    data () {
+        return {
+            tenantConfigs,
+            errorFormType: null,
+            isFormSubmitting: false,
+            availableFulfilmentTimesKey: 0,
+            checkoutAnalyticsService: new CheckoutAnalyticsService(this)
+        };
+    },
+
+    /*
+    * Provide/Inject allows nested `Address` component to inherit `Checkout`
+    * validator scope, `$v`.
+    */
+    provide () {
+        const $v = {};
+
+        Object.defineProperty($v, VALIDATIONS.address, {
+            enumerable: true,
+            get: () => this.$v.address
+        });
+
+        Object.defineProperty($v, VALIDATIONS.guest, {
+            enumerable: true,
+            get: () => this.$v.customer
+        });
+
+        return { $v };
+    },
+
+    computed: {
+        ...mapState(VUEX_CHECKOUT_MODULE, [
+            'address',
+            'availableFulfilment',
+            'basket',
+            'customer',
+            'errors',
+            'geolocation',
+            'isGuestCreated',
+            'hasAsapSelected',
+            'id',
+            'isFulfillable',
+            'isLoggedIn',
+            'messages',
+            'message',
+            'notices',
+            'orderId',
+            'restaurant',
+            'serviceType',
+            'tableIdentifier',
+            'time',
+            'userNote'
+        ]),
+
+        ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+            'changedFields'
+        ]),
+
+        wasMobileNumberFocused () {
+            return this.$v.customer.mobileNumber.$dirty;
+        },
+
+        isMobileNumberEmpty () {
+            return this.wasMobileNumberFocused && !this.customer.mobileNumber;
+        },
+
+        isMobileNumberInvalid () {
+            return this.wasMobileNumberFocused && !this.isMobileNumberEmpty && !this.$v.customer.mobileNumber.isValidPhoneNumber;
+        },
+
+        isTableIdentifierEmpty () {
+            return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
+        },
+
+        isCheckoutMethodDelivery () {
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY;
+        },
+
+        isCheckoutMethodDineIn () {
+            return this.serviceType === CHECKOUT_METHOD_DINEIN;
+        },
+
+        tenant () {
+            return TENANT_MAP[this.$i18n.locale];
+        },
+
+        shouldLoadAddress () {
+            return this.isLoggedIn &&
+                this.isCheckoutMethodDelivery &&
+                (!this.address || !this.address.line1);
+        },
+
+        /* If phone number is missing both from chckout api and from
+        * `state.AuthToken`, then retrieve the phone number from customer api
+        * This can happen for newly created guest */
+        shouldLoadCustomer () {
+            return this.isLoggedIn && !this.customer.mobileNumber;
+        },
+
+        shouldShowCheckoutForm () {
+            return !this.errorFormType && !this.shouldShowAgeVerificationForm;
+        },
+
+        shouldShowAgeVerificationForm () {
+            return this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
+        },
+
+        eventData () {
+            return {
+                isLoggedIn: this.isLoggedIn,
+                serviceType: this.serviceType
+            };
+        },
+
+        messageType () {
+            return this.message && this.message.shouldShowInDialog
+                ? this.dialogMessage
+                : this.alertMessage;
+        },
+
+        dialogMessage () {
+            return {
+                name: 'error-dialog',
+                props: {
+                    'redirect-url': this.redirectUrl
+                }
+            };
+        },
+
+        alertMessage () {
+            return {
+                name: 'alert',
+                props: {
+                    type: 'danger',
+                    class: this.$style['c-checkout-alert'],
+                    heading: this.$t('errorMessages.errorHeading')
+                },
+                content: this.message
+            };
+        },
+
+        invalidFieldsSummary () {
+            const invalidFieldCount = this.$v.$dirty
+                && validations.getFormValidationState(this.$v).invalidFields.length;
+
+            if (!invalidFieldCount) return null;
+
+            return invalidFieldCount === 1 ?
+                this.$t('errorMessages.singleFieldError') :
+                this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
+        },
+
+        formattedMobileNumberForScreenReader () {
+            return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
+        },
+
+        /**
+         * If there is no fulfilment times available (errorFormType === noTimeAvailable)
+         * redirect to search if the location cookie exists otherwise redirect to home.
+         *
+         * For all other error form types
+         * redirect to menu if the `restaurant.seoName` exists otherwise redirect to home.
+         *
+         * */
+        redirectUrl () {
+            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable || this.message?.code === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
+                const postcodeCookie = this.$cookies.get('je-location');
+
+                return postcodeCookie ? `area/${postcodeCookie}` : '/';
+            }
+
+            const prefix = this.isCheckoutMethodDineIn ? 'dine-in' : 'restaurants';
+
+            if (!this.restaurant.seoName) {
+                return '/';
+            }
+
+            return `${prefix}-${this.restaurant.seoName}/menu`;
+        },
+
+        shouldShowAddressAdministrativeArea () {
+            return this.tenant === 'au';
+        }
+    },
+
+    watch: {
+        /**
+         *
+         * Only reload checkout if the token changes as below:
+         * Truthy > Falsey
+         * Falsey > Truthy
+         *
+         * Do not reload checkout if the token changes from one token to another token
+         * as it will always be valid.
+         *
+         * */
+        async authToken (newTokenVal, oldTokenVal) {
+            this.setAuthToken(this.authToken);
+
+            if ((!newTokenVal && oldTokenVal) || (!oldTokenVal && newTokenVal)) {
+                await this.initialise();
+            }
+        }
+    },
+
+    async mounted () {
+        this.setAuthToken(this.authToken);
+
+        await this.initialise();
+        this.checkoutAnalyticsService.trackInitialLoad();
+        this.$emit(EventNames.CheckoutMounted);
+        this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
+    },
+
+    methods: {
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
+            'createGuestUser',
+            'getAvailableFulfilment',
+            'getAddress',
+            'getCustomer',
+            'getCustomerName',
+            'getBasket',
+            'getCheckout',
+            'getGeoLocation',
+            'placeOrder',
+            'setAuthToken',
+            'updateCheckout',
+            'updateCustomerDetails',
+            'updateTableIdentifier',
+            'updateMessage',
+            'updateUserNote',
+            'updateAddress',
+            'getUserNote',
+            'saveUserNote'
+        ]),
+
+        ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
+            'setExperimentValues'
+        ]),
+
+        /**
+         * Loads the necessary data to render a meaningful checkout component.
+         *
+         */
+        async initialise () {
+            this.setExperimentValues(this.experiments);
+
+            const promises = this.isLoggedIn
+                ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
+
+            await Promise.all(promises);
+
+            if (this.shouldLoadAddress) {
+                await this.loadAddress();
+            }
+
+            // This call can be removed when newly created guest JWT token has phone number claim populated
+            if (this.shouldLoadCustomer) {
+                await this.loadCustomer();
+            }
+
+            this.getUserNote();
+        },
+
+        /**
+         * Update address lines if localStorage is populated.
+         *
+         * */
+        loadAddressFromLocalStorage () {
+            const address = addressService.getAddressFromLocalStorage();
+
+            if (address) {
+                this.updateAddress(address);
+            }
+        },
+
+        /**
+         * Process all the information to submit the checkout and place an order
+         * while emitting events to communicate its success or failure.
+         *
+         */
+        async submitCheckout () {
+            try {
+                this.saveUserNote();
+
+                if (!this.isLoggedIn && !this.isGuestCreated) {
+                    await this.setupGuestUser();
+                }
+
+                await this.lookupGeoLocation();
+
+                await this.handleUpdateCheckout(this.getMappedDataForUpdateCheckout());
+
+                if (this.isFulfillable) {
+                    await this.submitOrder();
+
+                    this.redirectToPayment();
+                } else {
+                    this.handleNonFulfillableCheckout();
+                }
+            } catch (error) {
+                this.handleErrorState(error);
+            }
+        },
+
+        /**
+         * Emits and/or logs event with eventData, error and any additional data
+         */
+        handleEventLogging (event, error, additionalData) {
+            if (EventNames[event]) {
+                const data = LogEvents[event]?.hasEventData && this.eventData;
+
+                if (data || error) {
+                    this.$emit(EventNames[event], { ...data, ...(error && { error }) });
+                } else {
+                    this.$emit(EventNames[event]);
+                }
+            }
+
+            if (LogEvents[event]?.logMessage) {
+                this.logInvoker({
+                    message: LogEvents[event].logMessage,
+                    data: { ...this.eventData, ...additionalData },
+                    logMethod: this.$logger[LogEvents[event].logMethod],
+                    ...error && { error }
+                });
+            }
+        },
+
+
+        /**
+         * Display and track issues when updating checkout even though the request was successful.
+         * (e.g. request is correct, but the restaurant is now offline).
+         */
+        handleNonFulfillableCheckout () {
+            if (this.errors) {
+                this.checkoutAnalyticsService.trackFormErrors();
+
+                this.handleEventLogging('CheckoutNonFulfillableError');
+            }
+        },
+
+        /**
+         * Handles call of `updateCheckout` and catches and throws any returned errors.
+         * 1. Maps checkout data.
+         * 2. Call `updateCheckout`.
+         * 3. If `updateCheckout` call succeeds but issues are returned, it will be handled by
+         *    its parent method
+         * 4. If `updateCheckout` call fails, throw an UpdateCheckoutError.
+         */
+        async handleUpdateCheckout (requestData) {
+            try {
+                await this.updateCheckout({
+                    url: this.updateCheckoutUrl,
+                    data: requestData,
+                    timeout: this.checkoutTimeout
+                }).then(headers => {
+                    if (headers) {
+                        this.checkoutAnalyticsService.trackLowValueOrderExperiment(headers);
+                    }
+                });
+
+                await this.reloadAvailableFulfilmentTimesIfOutdated();
+
+                this.handleEventLogging('CheckoutUpdateSuccess');
+            } catch (e) {
+                const statusCode = e?.response?.data?.statusCode || e?.response?.status;
+
+                if (statusCode === 403) {
+                    throw new UpdateCheckoutAccessForbiddenError(e);
+                }
+
+                throw new UpdateCheckoutError(e);
+            }
+        },
+
+        /**
+         * Redirect to the payment page.
+         */
+        redirectToPayment () {
+            window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
+        },
+
+        /**
+         * Call update checkout with only the user's DOB for age verification
+         * This is to avoid creating too many side effects with the original mapper for update checkout
+         */
+        async verifyCustomerAge () {
+            const data = this.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
+
+            await this.handleUpdateCheckout(data);
+        },
+
+        /**
+         * Place the order, emit the expected events, and throw a new PlaceOrderError if the process fails.
+         */
+        async submitOrder () {
+            try {
+                const data = {
+                    basketId: this.basket.id,
+                    customerNotes: {
+                        NoteForRestaurant: this.userNote
+                    },
+                    referralState: this.getReferralState()
+                };
+
+                await this.placeOrder({
+                    url: this.placeOrderUrl,
+                    data,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.handleEventLogging('CheckoutPlaceOrderSuccess');
+                this.handleEventLogging('CheckoutSuccess');
+            } catch (e) {
+                const errorCode = e?.response?.data?.errorCode;
+
+                throw new PlaceOrderError(e.message, errorCode);
+            }
+        },
+
+        /**
+         * Setup a new guest user account. This method will be called when isLoggedIn is false.
+         * Events emitted to communicate success or failure.
+         * Throw a CreateGuestUserError if it fails.
+         */
+        async setupGuestUser () {
+            try {
+                const createGuestData = {
+                    emailAddress: this.customer.email,
+                    firstName: this.customer.firstName,
+                    lastName: this.customer.lastName,
+                    registrationSource: 'Guest'
+                };
+
+                await this.createGuestUser({
+                    url: this.createGuestUrl,
+                    tenant: this.tenant,
+                    data: createGuestData,
+                    timeout: this.checkoutTimeout,
+                    otacToAuthExchanger: this.otacToAuthExchanger
+                });
+
+                this.handleEventLogging('CheckoutSetupGuestSuccess');
+            } catch (e) {
+                throw new CreateGuestUserError(e.message);
+            }
+        },
+
+        /**
+         * Load the checkout details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadCheckout () {
+            try {
+                await this.getCheckout({
+                    url: this.getCheckoutUrl,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.handleEventLogging('CheckoutGetSuccess');
+            } catch (error) {
+                if (error?.response?.status === 403) {
+                    this.handleErrorState(new GetCheckoutAccessForbiddenError(error.message));
+                } else {
+                    this.handleErrorState(new GetCheckoutError(error.message, error?.response?.status));
+                }
+            }
+        },
+
+        /**
+         * Load the basket details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadBasket () {
+            try {
+                await this.getBasket({
+                    url: this.getBasketUrl,
+                    tenant: this.tenant,
+                    language: this.$i18n.locale,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.handleEventLogging('CheckoutBasketGetSuccess');
+            } catch (error) {
+                this.handleErrorState(new GetBasketError(error.message, error?.response?.status));
+            }
+        },
+
+        /**
+         * Load the available fulfilment details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadAvailableFulfilment () {
+            try {
+                await this.getAvailableFulfilment({
+                    url: this.checkoutAvailableFulfilmentUrl,
+                    timeout: this.checkoutTimeout
+                });
+
+                if (!this.availableFulfilment.times.length) {
+                    this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable;
+                }
+
+                this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
+            } catch (error) {
+                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
+            }
+        },
+
+        /**
+         * Load the customer address while emitting events to communicate its success or failure.
+         *
+         */
+        async loadAddress () {
+            try {
+                await this.getAddress({
+                    url: this.getAddressUrl,
+                    tenant: this.tenant,
+                    language: this.$i18n.locale,
+                    timeout: this.checkoutTimeout,
+                    currentPostcode: this.$cookies.get('je-location')
+                });
+
+                this.handleEventLogging('CheckoutAddressGetSuccess');
+            } catch (error) {
+                this.handleEventLogging('CheckoutAddressGetFailure', error);
+            }
+        },
+
+        /**
+         * Load the customer while emitting events to communicate its success or failure.
+         *
+         */
+        async loadCustomer () {
+            try {
+                await this.getCustomer({
+                    url: this.getCustomerUrl,
+                    timeout: this.checkoutTimeout
+                });
+                this.handleEventLogging('CheckoutCustomerGetSuccess');
+            } catch (error) {
+                this.handleEventLogging('CheckoutCustomerGetFailure');
+            }
+        },
+
+        /**
+         * Look up the geo details for the customers address, skip on failure.
+         *
+         */
+        async lookupGeoLocation () {
+            if (this.isCheckoutMethodDelivery) {
+                try {
+                    const locationData = {
+                        addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
+                    };
+
+                    if (locationData.addressLines.length) {
+                        await this.getGeoLocation({
+                            url: this.getGeoLocationUrl,
+                            postData: locationData,
+                            timeout: this.checkoutTimeout
+                        });
+                    }
+                } catch (error) {
+                    this.handleEventLogging('CheckoutGeoLocationGetFailure', error);
+                }
+            }
+        },
+
+        /**
+         * Emit, log and track the error based on the parameters
+         * encapsulated within the 'error' class.
+         * Set the `message` for the user to see.
+         */
+        handleErrorState (error) {
+            const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
+
+            const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
+
+            this.handleEventLogging((error.eventMessage || 'CheckoutFailure'), error);
+
+            this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
+
+            if (!error.shouldShowInDialog && !error.errorFormType) {
+                this.updateMessage(message);
+
+                this.$nextTick(() => {
+                    this.scrollToElement(this.$refs.errorMessage.$el);
+                });
+            }
+
+            this.errorFormType = error.errorFormType;
+        },
+
+        /**
+         * Scroll to a ref element in the screen.
+        */
+        scrollToElement (element, options = { offset: -20 }) {
+            const scrollingDurationInMilliseconds = 650;
+
+            if (element) {
+                VueScrollTo.scrollTo(element, scrollingDurationInMilliseconds, options);
+            }
+        },
+
+        /**
+         * Check form is valid - no inline messages
+         * 1. If form is valid try to call `submitCheckout`.
+         * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
+         */
+        async onFormSubmit () {
+            this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
+            this.updateMessage();
+            this.setSubmittingState(true);
+
+            if (this.isFormValid()) {
+                await this.submitCheckout();
+            } else {
+                this.onInvalidCheckoutForm();
+            }
+
+            this.setSubmittingState(false);
+        },
+
+        /**
+         * Fired when `isFormValid` returns falsey via `onFormSubmit()` call.
+         * 1. Emit `CheckoutValidationError` for consuming application.
+         * 2. Process tracking with action type and error fields
+         * 3. Log warn.
+         *
+         * */
+        onInvalidCheckoutForm () {
+            const validationState = validations.getFormValidationState(this.$v);
+            const invalidFields = mapAnalyticsNames(validationState.invalidFields);
+
+            this.scrollToFirstInlineError();
+
+            this.checkoutAnalyticsService.trackFormInteraction({
+                action: 'inline_error',
+                error: invalidFields
+            });
+
+            this.checkoutAnalyticsService.trackFormInteraction({
+                action: 'error',
+                error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
+            });
+
+            const expandedData = {
+                enteredPostcode: this.address?.postcode,
+                location: this.$cookies.get('je-location'),
+                locationUk: this.$cookies.get('je-location-uk'),
+                changedFields: this.changedFields,
+                isPostcodeChanged: this.changedFields.includes('addressPostcode')
+            };
+
+            this.handleEventLogging('CheckoutValidationError', validationState, { ...expandedData, validationState });
+        },
+
+        /**
+         * Scroll to the first inline error, no matter which one it is.
+         */
+        scrollToFirstInlineError () {
+            this.$nextTick(() => {
+                const firstInlineError = document.querySelector('[data-js-error-message]');
+
+                this.scrollToElement(firstInlineError, { offset: -100 });
+            });
+        },
+
+        /**
+         * Check to see if any `Vuelidate` validation errors
+         */
+        isFormValid () {
+            this.$v.$touch();
+            return !this.$v.$invalid;
+        },
+
+        /**
+         * Use phone validation in `f-services` to check if customer number is
+         * valid in current locale
+         */
+        isValidPhoneNumber () {
+            return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
+        },
+
+        /**
+         * Use postcode validation in `f-services` to check if customer postcode is
+         * valid in current locale
+         */
+        isValidPostcode () {
+            return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
+        },
+
+        formFieldBlur (field) {
+            const fieldValidation = this.$v.customer[field];
+            if (fieldValidation) {
+                fieldValidation.$touch();
+            }
+        },
+
+        /**
+         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
+         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
+         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
+         */
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
+        },
+
+        getReferralState () {
+            const cookieName = `je-rw-menu-referral-state-${this.restaurant.id}`;
+            const referralCookie = this.$cookies.get(cookieName);
+
+            return referralCookie && referralCookie.menuReferralState
+                ? 'ReferredByWeb'
+                : 'None';
+        },
+
+        /**
+         * Calls `loadAvailableFulfilment` times if we have no available fulfilment times available.
+         * Updates the key for the `FromDropdown` component to force the component re-render.
+         *
+         * When we receive the new `availableFulfilment` times, the dropdown doesn't automatically set the selected time
+         * to the first available fulfilment time. It leaves the selected value blank.
+         * Forcing the component to re-render ensures that the correct time is selected and displayed.
+         */
+        async reloadAvailableFulfilmentTimesIfOutdated () {
+            if (this.message?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+                await this.loadAvailableFulfilment();
+                this.availableFulfilmentTimesKey++;
+            }
+        },
+
+        handleDialogCreation (event) {
+            this.checkoutAnalyticsService.trackDialogEvent(event);
+        },
+
+        getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
+            const { ageVerificationOnly } = options;
+            return ageVerificationOnly ?
+                mapUpdateCheckoutRequestForAgeVerification({
+                    customer: this.customer
+                }) : mapUpdateCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
+                    time: this.time,
+                    userNote: this.userNote,
+                    geolocation: this.geolocation,
+                    asap: this.hasAsapSelected,
+                    tableIdentifier: this.tableIdentifier
+                });
+        }
+    },
+
+    validations () {
+        const validationProperties = {
+            customer: {
+                mobileNumber: {
+                    isValidPhoneNumber: this.isValidPhoneNumber
+                }
+            },
+            tableIdentifier: {
+                required: requiredIf(() => this.isCheckoutMethodDineIn),
+                maxLength: maxLength(12)
+            }
+        };
+
+        if (!this.isLoggedIn) {
+            validationProperties.customer = {
+                ...validationProperties.customer,
+                firstName: {
+                    required
+                },
+                lastName: {
+                    required
+                },
+                email: {
+                    required,
+                    email
+                }
+            };
+        }
+
+        if (this.isCheckoutMethodDelivery) {
+            validationProperties.address = {
+                line1: {
+                    required
+                },
+                locality: {
+                    required
+                },
+                administrativeArea: {
+                    required: requiredIf(() => this.shouldShowAddressAdministrativeArea)
+                },
+                postcode: {
+                    required,
+                    isValidPostcode: this.isValidPostcode
+                }
+            };
+        }
+
+        return validationProperties;
+    }
+};
+</script>
+
+<style lang="scss" module>
+.c-checkout {
+    @include media('<=narrow') {
+        border: none;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.c-checkout-form {
+    margin-top: spacing(x2);
+}
+
+.c-checkout-alert {
+    width: $checkout-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include media('<=#{$checkout-width}') {
+        width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
+    }
+}
+/* If these stay the same then just rename the class to something more generic */
+.c-checkout-submitButton {
+    margin: spacing(x4) 0;
+
+    @include media('>=#{$checkout-width}') {
+        margin: spacing(x4) 0 0;
+    }
+}
+
+.c-checkout-submitButton--noBottomSpace {
+    margin-bottom: 0;
+}
+</style>
