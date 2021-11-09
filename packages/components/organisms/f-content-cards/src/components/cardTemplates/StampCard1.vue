@@ -288,7 +288,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-stampCard1 {
     text-decoration: initial;
-    width: 392px;
+    max-width: 392px;
     display: flex;
     flex-direction: column;
     padding: spacing(x2);
@@ -305,12 +305,13 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     }
 
     @include media($stampCard-responsive-tabletViewBreakpoint) {
-        width: 344px;
+        max-width: 344px;
     }
 
     @include media($stampCard-responsive-mobileViewBreakpoint) {
         width: auto;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.12);
+        max-width: none;
     }
 }
 
