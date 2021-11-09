@@ -275,8 +275,6 @@ module.exports = class Checkout extends Page {
             case 'dinein':
                 this.populateDineInFields(customerInfo);
                 break;
-            default:
-                this.populateDeliveryFields(customerInfo);
         }
 
         if (customerInfo.mobileNumber) {
