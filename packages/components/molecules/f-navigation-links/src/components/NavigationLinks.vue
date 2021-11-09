@@ -4,22 +4,16 @@
         :class="$style['c-navigationLinks']"
         data-test-id="navigationLinks">
         <li
-            v-for="({ id, url, name, selected }, i) in links"
+            v-for="({ id, href, to, name }, i) in links"
             :key="i"
             :class="$style['c-navigationLinks-item']">
-            <span
-                v-if="selected"
-                :data-test-id="id"
-                tabindex="0"
-                :class="[$style['c-navigationLinks-link'], $style['c-navigationLinks-link--active']]">
-                {{ name }}
-            </span>
             <v-link
-                v-else
                 :data-test-id="id"
                 :has-text-decoration="false"
-                :href="url"
-                :class="$style['c-navigationLinks-link']">
+                :link-class="$style['c-navigationLinks-link']"
+                v-bind="{
+                    ...(href ? { href } : to ? { to } : {})
+                }">
                 {{ name }}
             </v-link>
         </li>

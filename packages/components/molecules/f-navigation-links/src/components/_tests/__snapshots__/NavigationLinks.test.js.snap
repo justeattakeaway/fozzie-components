@@ -3,38 +3,45 @@
 exports[`NavigationLinks should display the list elements correctly for each \`link\` supplied 1`] = `
 <ul data-test-id="navigationLinks">
   <li>
-    <v-link-stub data-test-id="link1" href="/account/info">
+    <v-link-stub data-test-id="link1" to="/account/info">
       Your account
     </v-link-stub>
   </li>
   <li>
-    <v-link-stub data-test-id="link2" href="/order-history">
+    <v-link-stub data-test-id="link2" to="/order-history">
       Your orders
     </v-link-stub>
   </li>
   <li>
-    <v-link-stub data-test-id="link3" href="/account/paymentoptions">
+    <v-link-stub data-test-id="link3" to="/account/paymentoptions">
       Your saved cards
     </v-link-stub>
   </li>
   <li>
-    <v-link-stub data-test-id="link4" href="/member/addressbook">
+    <v-link-stub data-test-id="link4" to="/member/addressbook">
       Your address book
     </v-link-stub>
   </li>
   <li>
-    <v-link-stub data-test-id="link5" href="/account/credit">
+    <v-link-stub data-test-id="link5" to="/account/credit">
       Redeem a voucher
     </v-link-stub>
   </li>
   <li>
-    <v-link-stub data-test-id="link6" href="/giftcards/redeem">
+    <v-link-stub data-test-id="link6" to="/giftcards/redeem">
       Redeem a gift card
     </v-link-stub>
   </li>
-  <li><span data-test-id="link7" tabindex="0" class="">
-            Contact preferences
-        </span></li>
+  <li>
+    <v-link-stub data-test-id="link7" to="/account/preferences">
+      Contact preferences
+    </v-link-stub>
+  </li>
+  <li>
+    <v-link-stub data-test-id="link8" href="/anchor-link">
+      Anchor link
+    </v-link-stub>
+  </li>
 </ul>
 `;
 
