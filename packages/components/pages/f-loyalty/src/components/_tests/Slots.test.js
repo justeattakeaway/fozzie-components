@@ -182,6 +182,7 @@ describe('Slots.vue', () => {
             // Assert
             expect(noCardsErrorState.exists()).toBe(true);
         });
+
         it('should should NOT display if hasInProgressStampcards or hasRedeemableStampcards is true', () => {
             // Arrange
             const wrapper = createWrapper(MOCK_CARDS);
