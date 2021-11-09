@@ -13,8 +13,7 @@ const messages = {
             tableIdentifier: {
                 label: 'Table number or name',
                 validationMessages: {
-                    required: 'Please include your table name/number',
-                    invalid: 'The table number/name exceeds the maximum length (12)'
+                    required: 'Please include your table name/number'
                 }
             }
         },

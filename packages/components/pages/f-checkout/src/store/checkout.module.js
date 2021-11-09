@@ -17,7 +17,7 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_DATE_OF_BIRTH,
     UPDATE_ERRORS,
-    UPDATE_FULFILMENT_ADDRESS,
+    UPDATE_ADDRESS_DETAILS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
     UPDATE_HAS_ASAP_SELECTED,
@@ -26,7 +26,7 @@ import {
     UPDATE_ORDER_PLACED,
     UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
-    UPDATE_TABLE_IDENTIFIER,
+    UPDATE_ORDER_DETAILS,
     UPDATE_USER_NOTE
 } from './mutation-types';
 
@@ -276,7 +276,7 @@ export default {
 
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
 
-            commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            commit(UPDATE_ADDRESS_DETAILS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
@@ -381,22 +381,12 @@ export default {
             commit(UPDATE_AUTH, authToken);
         },
 
-        updateAddressDetails ({ commit, dispatch }, payload) {
-            const [field] = Object.keys(payload);
+        updateUserDetails ({ commit, dispatch }, payload) {
+            const { fieldType, fieldName, value } = payload;
+            const data = { [fieldName]: value };
 
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-            commit(UPDATE_FULFILMENT_ADDRESS, payload);
-        },
-
-        updateCustomerDetails ({ commit, dispatch }, payload) {
-            const [field] = Object.keys(payload);
-
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-            commit(UPDATE_CUSTOMER_DETAILS, payload);
-        },
-
-        updateTableIdentifier ({ commit }, payload) {
-            commit(UPDATE_TABLE_IDENTIFIER, payload);
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, fieldName, { root: true });
+            commit(`UPDATE_${fieldType.toUpperCase()}_DETAILS`, data);
         },
 
         updateFulfilmentTime ({ commit }, payload) {
@@ -529,11 +519,13 @@ export default {
             };
         },
 
-        [UPDATE_TABLE_IDENTIFIER]: (state, tableIdentifier) => {
+        [UPDATE_ORDER_DETAILS]: (state, payload) => {
+            const { tableIdentifier } = payload;
+
             state.tableIdentifier = tableIdentifier;
         },
 
-        [UPDATE_FULFILMENT_ADDRESS]: (state, address) => {
+        [UPDATE_ADDRESS_DETAILS]: (state, address) => {
             state.address = {
                 ...state.address,
                 ...address

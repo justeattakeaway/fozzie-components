@@ -27,7 +27,8 @@ import {
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_ERRORS,
-    UPDATE_FULFILMENT_ADDRESS,
+    UPDATE_ADDRESS_DETAILS,
+    UPDATE_ORDER_DETAILS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
@@ -53,8 +54,7 @@ const {
     placeOrder,
     setAuthToken,
     updateCheckout,
-    updateAddressDetails,
-    updateCustomerDetails,
+    updateUserDetails,
     updateDateOfBirth,
     updateFulfilmentTime,
     updateMessage,
@@ -64,10 +64,6 @@ const {
 } = actions;
 
 const mobileNumber = '+447111111111';
-
-const customerDetails = {
-    mobileNumber
-};
 
 const authToken = mockAuthToken;
 
@@ -382,7 +378,7 @@ describe('CheckoutModule', () => {
         });
 
         it.each([
-            [UPDATE_FULFILMENT_ADDRESS, 'address', address],
+            [UPDATE_ADDRESS_DETAILS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
@@ -660,7 +656,7 @@ describe('CheckoutModule', () => {
         });
 
         describe('getAddress ::', () => {
-            it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {
+            it(`should get the address details from the backend and call ${UPDATE_ADDRESS_DETAILS} mutation.`, async () => {
                 // Arrange
                 const config = {
                     headers: {
@@ -686,7 +682,7 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses.Addresses, payload.tenant, payload.currentPostcode);
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, expectedFormattedAddress);
+                expect(commit).toHaveBeenCalledWith(UPDATE_ADDRESS_DETAILS, expectedFormattedAddress);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
@@ -1160,9 +1156,40 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe('updateUserDetails ::', () => {
+            const userDetails = {
+                fieldType: 'customer',
+                fieldName: 'firstName',
+                value: 'John'
+            };
+
+            it.each([
+                [UPDATE_CUSTOMER_DETAILS, 'customer'],
+                [UPDATE_ADDRESS_DETAILS, 'address'],
+                [UPDATE_ORDER_DETAILS, 'order']
+            ])('should commit %s with expected payload when `fieldType` is %s', (mutation, fieldType) => {
+                // Arrange
+                userDetails.fieldType = fieldType;
+                const expectedData = { [userDetails.fieldName]: userDetails.value };
+
+                // Act
+                updateUserDetails(context, userDetails);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(mutation, expectedData);
+            });
+
+            it(`should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedFields' payload 'fieldName'`, () => {
+                // Act
+                updateUserDetails(context, userDetails);
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, userDetails.fieldName, { root: true });
+            });
+        });
+
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
-            [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateUserNote, UPDATE_USER_NOTE, userNote],
             [updateDateOfBirth, UPDATE_DATE_OF_BIRTH, dateOfBirth],
             [updateMessage, UPDATE_MESSAGE, message]
@@ -1172,19 +1199,6 @@ describe('CheckoutModule', () => {
 
             // Assert
             expect(commit).toHaveBeenCalledWith(mutation, value);
-        });
-
-        it.each([
-            [updateAddressDetails, address],
-            [updateCustomerDetails, customerDetails]
-        ])(`%s should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedFields' action with first key of passed value`, (action, value) => {
-            // Act
-            action(context, value);
-
-            const [field] = Object.keys(value);
-
-            // Assert
-            expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
         });
 
         describe('getUserNote ::', () => {

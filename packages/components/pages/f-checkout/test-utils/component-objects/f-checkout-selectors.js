@@ -33,29 +33,29 @@ exports.FIELDS = {
     },
     mobileNumber: {
         input: '[data-test-id="formfield-mobile-number-input"]',
-        emptyError: '[data-test-id="error-mobile-number-empty"]',
+        emptyError: '[data-test-id="error-mobile-number-required"]',
         invalidError: '[data-test-id="error-mobile-number-invalid"]'
     },
     addressLine1: {
-        input: '[data-test-id="formfield-address-line-1-input"]',
-        error: '[data-test-id="error-address-line1-empty"]'
+        input: '[data-test-id="formfield-line-1-input"]',
+        error: '[data-test-id="error-line1-required"]'
     },
     addressLine2: {
-        input: '[data-test-id="formfield-address-line-2-input"]',
+        input: '[data-test-id="formfield-line-2-input"]',
         error: ''
     },
     addressLocality: {
-        input: '[data-test-id="formfield-address-locality-input"]',
-        error: '[data-test-id="error-address-locality-empty"]'
+        input: '[data-test-id="formfield-locality-input"]',
+        error: '[data-test-id="error-locality-required"]'
     },
     addressAdministrativeArea: {
-        input: '[data-test-id="formfield-address-administrative-area-input"]',
-        error: '[data-test-id="error-address-administrative-area-empty"]'
+        input: '[data-test-id="formfield-administrative-area-input"]',
+        error: '[data-test-id="error-administrative-area-required"]'
     },
     addressPostcode: {
-        input: '[data-test-id="formfield-address-postcode-input"]',
-        error: '[data-test-id="error-address-postcode-empty"]',
-        typeError: '[data-test-id="error-address-postcode-type-error"]'
+        input: '[data-test-id="formfield-postcode-input"]',
+        error: '[data-test-id="error-postcode-required"]',
+        typeError: '[data-test-id="error-postcode-invalid"]'
     },
     userNote: {
         input: '[data-test-id="formfield-note-textarea"]',

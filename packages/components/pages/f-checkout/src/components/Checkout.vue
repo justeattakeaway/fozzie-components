@@ -48,26 +48,14 @@
 
                     <checkout-form-field
                         field-name="mobileNumber"
+                        field-type="customer"
                         max-length="16" />
 
-                    <form-field
+                    <checkout-form-field
                         v-if="isCheckoutMethodDineIn"
-                        :value="tableIdentifier"
-                        input-type="text"
-                        name="table-identifier"
-                        :label-text="$t('formFields.order.tableIdentifier.label')"
-                        :has-error="isTableIdentifierEmpty"
-                        maxlength="12"
-                        @input="updateTableIdentifier($event)">
-                        <template #error>
-                            <error-message
-                                v-if="isTableIdentifierEmpty"
-                                data-js-error-message
-                                data-test-id="error-table-identifier-empty">
-                                {{ $t('formFields.order.tableIdentifier.validationMessages.required') }}
-                            </error-message>
-                        </template>
-                    </form-field>
+                        field-name="tableIdentifier"
+                        field-type="order"
+                        max-length="12" />
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
@@ -117,7 +105,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import {
-    required, email, maxLength, requiredIf
+    required, email, requiredIf
 } from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
@@ -317,6 +305,11 @@ export default {
             get: () => this.$v.customer
         });
 
+        Object.defineProperty($v, VALIDATIONS.order, {
+            enumerable: true,
+            get: () => this.$v.order
+        });
+
         return { $v };
     },
 
@@ -347,10 +340,6 @@ export default {
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields'
         ]),
-
-        isTableIdentifierEmpty () {
-            return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
-        },
 
         isCheckoutMethodDelivery () {
             return this.serviceType === CHECKOUT_METHOD_DELIVERY;
@@ -501,7 +490,6 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
-            'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
             'updateAddress',
@@ -1038,10 +1026,6 @@ export default {
                     required,
                     mobileNumber: this.isValidPhoneNumber
                 }
-            },
-            tableIdentifier: {
-                required: requiredIf(() => this.isCheckoutMethodDineIn),
-                maxLength: maxLength(12)
             }
         };
 
@@ -1074,7 +1058,15 @@ export default {
                 },
                 postcode: {
                     required,
-                    isValidPostcode: this.isValidPostcode
+                    postcode: this.isValidPostcode
+                }
+            };
+        }
+
+        if (this.isCheckoutMethodDineIn) {
+            validationProperties.order = {
+                tableIdentifier: {
+                    required
                 }
             };
         }
