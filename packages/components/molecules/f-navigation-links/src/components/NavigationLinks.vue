@@ -55,7 +55,7 @@ export default {
 <style lang="scss">
 /**
 * .c-navigationLinks-link is intentionally not scoped as the consuming router application (Nuxt.js / Vue Router) will add active classes directly to
-* the router-link within <f-link>.
+* the router-link within <f-link>. CoreWeb Nuxt custom active link classes are: `is-link-active` and `is-link-exactActive`.
 */
 .c-navigationLinks-link {
     display: inline-block;
@@ -65,11 +65,11 @@ export default {
 
     &:focus,
     &:hover,
-    &.nuxt-link-exact-active {
+    &.is-link-exactActive {
         border-left: 2px solid $color-orange;
         text-decoration: none;
     }
-    &.nuxt-link-exact-active {
+    &.is-link-exactActive {
         font-weight: $font-weight-bold;
     }
 }
