@@ -1,8 +1,6 @@
 <template>
     <div>
-        <div
-            v-if="!hasInProgressStampcards && !hasRedeemableStampcards"
-        >
+        <div v-if="!hasInProgressStampcards && !hasRedeemableStampcards">
             <no-cards-error-state engagement-label="no_cards" />
         </div>
         <template v-if="hasRedeemableStampcards">

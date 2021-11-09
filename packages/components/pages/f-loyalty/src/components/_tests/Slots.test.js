@@ -32,7 +32,11 @@ const MOCK_STAMP_CARD_ID = '__TEST_STAMP_CARD_ID__';
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 
-const wrapperOptions = {
+const createWrapper = cards => mount(Slots, {
+    localVue,
+    propsData: {
+        cards
+    },
     stubs: {
         StampCard: { template: `<div data-test-id="${MOCK_STAMP_CARD_ID}">TEST_STAMP_CARD</div>` },
         StampCardPromotionCard: { template: `<div data-test-id="${MOCK_PROMOTION_CARD_ID}">TEST_PROMOTION_CARD</div>` }
@@ -40,51 +44,36 @@ const wrapperOptions = {
     mocks: {
         $t: key => i18nMocker(key, MOCK_LOCALE)
     }
-};
-
-let wrapper;
-let zeroCardsWrapper;
+});
 
 describe('Slots.vue', () => {
-    beforeEach(() => {
-        // Arrange
-        zeroCardsWrapper = mount(Slots, {
-            localVue,
-            propsData: {
-                cards: []
-            },
-            ...wrapperOptions
-        });
-    });
-
     describe('Redeemable Stamp Cards', () => {
-        beforeEach(() => {
-            // Arrange
-            wrapper = mount(Slots, {
-                localVue,
-                propsData: {
-                    cards: MOCK_CARDS
-                },
-                ...wrapperOptions
-            });
-        });
-
         it('should display the readyToClaimTitle when hasRedeemableStampcards is true', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_CARDS);
+
             // Act
             const title = wrapper.find('[data-test-id="section-readyToClaim-title"]');
+
             // Assert
             expect(title.text()).toEqual(tenantConfigs[MOCK_LOCALE].messages.tabs.stamps.readyToClaimTitle);
         });
 
         it('should NOT display the readyToClaimTitle when hasRedeemableStampcards is false', () => {
+            // Arrange
+            const wrapper = createWrapper([]);
+
             // Act
-            const title = zeroCardsWrapper.find('[data-test-id="section-readyToClaim-title"]');
+            const title = wrapper.find('[data-test-id="section-readyToClaim-title"]');
 
             // Assert
             expect(title.exists()).toBe(false);
         });
 
         it('should show all redeemable cards in the cards array', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_CARDS);
+
             // Act
             const stampCards = wrapper.findAllComponents(StampCard);
 
@@ -93,26 +82,21 @@ describe('Slots.vue', () => {
         });
 
         it('should NOT show any cards if there is NO redeemable cards', () => {
+            // Arrange
+            const wrapper = createWrapper([]);
+
             // Act
-            const stampCards = zeroCardsWrapper.findAllComponents(StampCard);
+            const stampCards = wrapper.findAllComponents(StampCard);
 
             // Assert
             expect(stampCards.length).toEqual(0);
         });
     });
     describe('In Progress Stamp Cards', () => {
-        beforeEach(() => {
-            // Arrange
-            wrapper = mount(Slots, {
-                localVue,
-                propsData: {
-                    cards: MOCK_CARDS_IN_PROGRESS
-                },
-                ...wrapperOptions
-            });
-        });
-
         it('should display the inProgressTitle when hasInProgressStampcards is true', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_CARDS_IN_PROGRESS);
+
             // Act
             const title = wrapper.find('[data-test-id="section-inProgress-title"]');
 
@@ -121,14 +105,20 @@ describe('Slots.vue', () => {
         });
 
         it('should NOT display the inProgressTitle when hasInProgressStampcards is false', () => {
+            // Arrange
+            const wrapper = createWrapper([]);
+
             // Act
-            const title = zeroCardsWrapper.find('[data-test-id="section-inProgress-title"]');
+            const title = wrapper.find('[data-test-id="section-inProgress-title"]');
 
             // Assert
             expect(title.exists()).toBe(false);
         });
 
         it('should show all in progress stamp cards in the cards array', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_CARDS_IN_PROGRESS);
+
             // Act
             const stampCards = wrapper.findAllComponents(StampCard);
 
@@ -137,26 +127,21 @@ describe('Slots.vue', () => {
         });
 
         it('should NOT show any cards if there is NO in progress stamp cards', () => {
+            // Arrange
+            const wrapper = createWrapper([]);
+
             // Act
-            const stampCards = zeroCardsWrapper.findAllComponents(StampCard);
+            const stampCards = wrapper.findAllComponents(StampCard);
 
             // Assert
             expect(stampCards.length).toEqual(0);
         });
     });
     describe('Participating Restaurants', () => {
-        beforeEach(() => {
-            // Arrange
-            wrapper = mount(Slots, {
-                localVue,
-                propsData: {
-                    cards: MOCK_CARDS_PARTICIPATING_RESTAURANTS
-                },
-                ...wrapperOptions
-            });
-        });
-
         it('should display the participatingRestaurantsTitle when hasParticipatingRestaurantsCards is true', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_CARDS_PARTICIPATING_RESTAURANTS);
+
             // Act
             const title = wrapper.find('[data-test-id="section-participatingRestaurants-title"]');
 
@@ -165,6 +150,9 @@ describe('Slots.vue', () => {
         });
 
         it('should show all participatingRestaurantsCards stamp cards in the cards array', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_CARDS_PARTICIPATING_RESTAURANTS);
+
             // Act
             const stampCards = wrapper.findAllComponents(StampCardPromotionCard);
 
@@ -173,33 +161,31 @@ describe('Slots.vue', () => {
         });
 
         it('should NOT show any cards if there is NO participatingRestaurantsCards stamp cards', () => {
+            // Arrange
+            const wrapper = createWrapper([]);
+
             // Act
-            const stampCards = zeroCardsWrapper.findAllComponents(StampCardPromotionCard);
+            const stampCards = wrapper.findAllComponents(StampCardPromotionCard);
 
             // Assert
             expect(stampCards.length).toEqual(0);
         });
     });
     describe('No Cards', () => {
-        beforeEach(() => {
-            // Arrange
-            wrapper = mount(Slots, {
-                localVue,
-                propsData: {
-                    cards: MOCK_CARDS
-                },
-                ...wrapperOptions
-            });
-        });
-
         it('should display if hasInProgressStampcards is false and hasRedeemableStampcards is false', () => {
+            // Arrange
+            const wrapper = createWrapper([]);
+
             // Act
-            const noCardsErrorState = zeroCardsWrapper.findAllComponents(NoCardsErrorState);
+            const noCardsErrorState = wrapper.findAllComponents(NoCardsErrorState);
 
             // Assert
             expect(noCardsErrorState.exists()).toBe(true);
         });
         it('should should NOT display if hasInProgressStampcards or hasRedeemableStampcards is true', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_CARDS);
+
             // Act
             const noCardsErrorState = wrapper.findAllComponents(NoCardsErrorState);
 
