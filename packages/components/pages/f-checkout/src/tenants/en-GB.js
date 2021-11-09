@@ -41,7 +41,8 @@ const messages = {
             email: {
                 label: 'Email',
                 validationMessages: {
-                    required: 'Please enter a valid email address'
+                    required: 'Please enter your email',
+                    invalid: 'Please enter a valid email address'
                 }
             }
         },
