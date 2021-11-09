@@ -60,10 +60,10 @@ describe('f-checkout "delivery" component tests', () => {
                     restrictions: 'age-restriction'
                 };
                 checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-                            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-                            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-                            .withQuery('&knob-Locale', checkoutInfo.locale)
-                            .withQuery('&knob-Restrictions', checkoutInfo.restrictions);
+                .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
+                .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
+                .withQuery('&knob-Locale', checkoutInfo.locale)
+                .withQuery('&knob-Restrictions', checkoutInfo.restrictions);
 
                 checkout.loadAgeVerification();
             });
