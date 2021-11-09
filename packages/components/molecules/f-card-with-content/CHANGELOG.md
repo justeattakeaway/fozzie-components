@@ -6,16 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.0
 ------------------------------
-*November 9, 2021*
+*November 10, 2021*
 
 ### Added
 - Heading
 - Description
 - Primary and secondary buttons
-  - `href`s are passed in via prop like `primary-button-href`.
-  - Emit events like `primary-button-click`.
-- Named slot for icon.
-- Storybook story.
+  - These emit events like `primary-button-click`
+- Named slot for icon
+- Storybook story
 
 
 v0.1.0

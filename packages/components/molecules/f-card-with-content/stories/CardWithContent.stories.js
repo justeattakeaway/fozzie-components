@@ -26,9 +26,7 @@ export const CardWithContentComponent = (args, { argTypes }) => ({
                     :card-heading="cardHeading"
                     :card-description="cardDescription"
                     :primaryButtonText="primaryButtonText"
-                    :primaryButtonHref="primaryButtonHref"
-                    :secondaryButtonText="secondaryButtonText"
-                    :secondaryButtonHref="secondaryButtonHref">
+                    :secondaryButtonText="secondaryButtonText">
                     <template #icon>
                         <component :is="icon" />
                     </template>
@@ -41,9 +39,7 @@ CardWithContentComponent.args = {
     cardDescription: 'Looks like a problem on our end, sorry. Try again soon.',
     icon: '',
     primaryButtonText: 'Go back',
-    primaryButtonHref: '/',
-    secondaryButtonText: '',
-    secondaryButtonHref: ''
+    secondaryButtonText: ''
 };
 CardWithContentComponent.argTypes = {
     icon: {
@@ -55,7 +51,5 @@ CardWithContentComponent.argTypes = {
     cardHeading: { control: { type: 'text' } },
     cardDescription: { control: { type: 'text' } },
     primaryButtonText: { control: { type: 'text' } },
-    primaryButtonHref: { control: { type: 'text' } },
-    secondaryButtonText: { control: { type: 'text' } },
-    secondaryButtonHref: { control: { type: 'text' } }
+    secondaryButtonText: { control: { type: 'text' } }
 };
