@@ -46,7 +46,6 @@ v3.1.0
 - Moved component so that it's now in `Pages` rather than `Organisms`.
 
 
-
 v3.0.0
 ------------------------------
 *October 29, 2021*
