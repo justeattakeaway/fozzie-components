@@ -308,9 +308,9 @@ module.exports = class Checkout extends Page {
     }
 
     populateAgeVerificationForm ({ day, month, year }) {
-        this.ageVerificationDayDropdown.selectByVisibleText(dob.day);
-        this.ageVerificationMonthDropdown.selectByVisibleText(dob.month);
-        this.ageVerificationYearDropdown.selectByVisibleText(dob.year);
+        this.ageVerificationDayDropdown.selectByVisibleText(day);
+        this.ageVerificationMonthDropdown.selectByVisibleText(month);
+        this.ageVerificationYearDropdown.selectByVisibleText(year);
     }
 
     /**
