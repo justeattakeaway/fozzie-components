@@ -17,6 +17,7 @@ exports.ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-component"]';
 exports.ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';
 exports.ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description"]';
 exports.ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
+exports.AGE_VERIFICATION_COMPONENT = '[data-test-id="checkout-age-verification-component"]';
 
 exports.FIELDS = {
     firstName: {
