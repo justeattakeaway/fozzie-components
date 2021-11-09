@@ -46,35 +46,9 @@
 
                     <guest-block v-if="!isLoggedIn" />
 
-                    <form-field
-                        :value="customer.mobileNumber"
-                        name="mobile-number"
-                        maxlength="16"
-                        input-type="tel"
-                        :label-text="$t('formFields.customer.mobileNumber.label')"
-                        :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
-                        aria-describedby="mobile-number-error"
-                        :aria-invalid="isMobileNumberInvalid"
-                        :aria-label="formattedMobileNumberForScreenReader"
-                        @blur="formFieldBlur('mobileNumber')"
-                        @input="updateCustomerDetails({ mobileNumber: $event })">
-                        <template #error>
-                            <error-message
-                                v-if="isMobileNumberEmpty"
-                                id="mobile-number-error"
-                                data-js-error-message
-                                data-test-id="error-mobile-number-empty">
-                                {{ $t('formFields.customer.mobileNumber.validationMessages.required') }}
-                            </error-message>
-                            <error-message
-                                v-if="isMobileNumberInvalid"
-                                id="mobile-number-error"
-                                data-js-error-message
-                                data-test-id="error-mobile-number-invalid">
-                                {{ $t('formFields.customer.mobileNumber.validationMessages.invalid') }}
-                            </error-message>
-                        </template>
-                    </form-field>
+                    <checkout-form-field
+                        field-name="mobileNumber"
+                        max-length="16" />
 
                     <form-field
                         v-if="isCheckoutMethodDineIn"
@@ -161,6 +135,7 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
 import AddressBlock from './Address.vue';
 import AgeVerification from './AgeVerification.vue';
+import CheckoutFormField from './CheckoutFormField.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
@@ -212,6 +187,7 @@ export default {
         Alert,
         FButton,
         Card,
+        CheckoutFormField,
         CheckoutHeader,
         CheckoutTermsAndConditions,
         ErrorPage,
@@ -372,18 +348,6 @@ export default {
             'changedFields'
         ]),
 
-        wasMobileNumberFocused () {
-            return this.$v.customer.mobileNumber.$dirty;
-        },
-
-        isMobileNumberEmpty () {
-            return this.wasMobileNumberFocused && !this.customer.mobileNumber;
-        },
-
-        isMobileNumberInvalid () {
-            return this.wasMobileNumberFocused && !this.isMobileNumberEmpty && !this.$v.customer.mobileNumber.isValidPhoneNumber;
-        },
-
         isTableIdentifierEmpty () {
             return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
         },
@@ -466,10 +430,6 @@ export default {
                 this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
         },
 
-        formattedMobileNumberForScreenReader () {
-            return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
-        },
-
         /**
          * If there is no fulfilment times available (errorFormType === noTimeAvailable)
          * redirect to search if the location cookie exists otherwise redirect to home.
@@ -541,7 +501,6 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
-            'updateCustomerDetails',
             'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
@@ -1076,7 +1035,7 @@ export default {
         const validationProperties = {
             customer: {
                 mobileNumber: {
-                    isValidPhoneNumber: this.isValidPhoneNumber
+                    mobileNumber: this.isValidPhoneNumber
                 }
             },
             tableIdentifier: {

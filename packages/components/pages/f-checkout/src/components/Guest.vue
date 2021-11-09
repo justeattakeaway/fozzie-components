@@ -10,7 +10,6 @@
 
         <checkout-form-field
             field-name="email"
-            input-type="email"
             max-length="50" />
     </div>
 </template>

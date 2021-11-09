@@ -12,6 +12,10 @@ localVue.use(Vuex);
 
 const $v = {
     [VALIDATIONS.customer]: {
+        mobileNumber: {
+            $dirty: false,
+            mobileNumber: false
+        },
         firstName: {
             $dirty: false
         },
@@ -327,6 +331,26 @@ describe('CheckoutFormField', () => {
 
                 // Assert
                 expect(wrapper.vm.kebabCase).toEqual(expected);
+            });
+        });
+
+        describe('formattedMobileNumberForScreenReader ::', () => {
+            it('should return the mobile number with spaces after every character', () => {
+                const expectedMobileNumber = '+ 4 4 7 1 1 1 1 1 1 1 1 1';
+
+                // Act
+                const wrapper = shallowMount(CheckoutFormField, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+
+                // Assert
+                expect(wrapper.vm.formattedMobileNumberForScreenReader).toEqual(expectedMobileNumber);
             });
         });
     });

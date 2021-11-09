@@ -8,7 +8,7 @@ v3.2.0
 *November 9, 2021*
 
 ### Added
-`CheckoutFormField` component.
+- `CheckoutFormField` component.
 
 ### Changed
 - Guest Component to use `CheckoutFormField` component.

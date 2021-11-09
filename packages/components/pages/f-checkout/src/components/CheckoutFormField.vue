@@ -4,10 +4,11 @@
         :name="translations.name"
         :input-type="inputType"
         :label-text="translations.label"
-        :has-error="hasError"
         :maxlength="maxLength"
+        :has-error="hasError"
         :aria-invalid="hasError"
-        :aria-describedby="hasValidationMessages && translations.errorName"
+        :aria-describedby="hasError && translations.errorName"
+        :aria-label="isPhoneNumber && formattedMobileNumberForScreenReader"
         @blur="hasInvalidErrorMessage && formFieldBlur()"
         @input="updateCustomerDetails({ [fieldName]: $event })">
         <template
@@ -38,11 +39,6 @@ export default {
         fieldName: {
             type: String,
             required: true
-        },
-
-        inputType: {
-            type: String,
-            default: 'text'
         },
 
         maxLength: {
@@ -83,6 +79,20 @@ export default {
             return null;
         },
 
+        inputType () {
+            const inputTypes = {
+                mobileNumber: 'tel',
+                email: 'email',
+                default: 'text'
+            };
+
+            return inputTypes[this.fieldName] || inputTypes.default;
+        },
+
+        isPhoneNumber () {
+            return this.inputType === 'tel';
+        },
+
         hasValidationMessages () {
             return !!this.translations.validationMessages;
         },
@@ -109,6 +119,10 @@ export default {
 
         kebabCase () {
             return this.fieldName.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+        },
+
+        formattedMobileNumberForScreenReader () {
+            return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         }
     },
 
