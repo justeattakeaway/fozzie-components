@@ -1,7 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import makeSever from '@justeat/f-loyalty/stories/mocks/server';
+import makeSever from './stories/mocks/server';
 import VLoyalty from '../src/components/Loyalty.vue';
 import loyaltyModule from '../src/store/loyalty.module';
 

@@ -30,7 +30,7 @@ export default Factory.extend({
     ar: 1,
     u: null,
     uw: null,
-    tt: () => faker.lorem.sentence(), // title ?
-    ds: faker.lorem.sentence(), // description ?
+    tt: () => faker.company.companyName(), // title ?
+    ds: () => faker.company.catchPhrase(), // description ?
     dm: faker.internet.domainName() // url call to action ?
 });
