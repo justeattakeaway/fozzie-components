@@ -26,7 +26,7 @@ import {
     UPDATE_ORDER_PLACED,
     UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
-    UPDATE_ORDER_DETAILS,
+    UPDATE_DINEIN_DETAILS,
     UPDATE_USER_NOTE
 } from './mutation-types';
 
@@ -90,7 +90,9 @@ export default {
     state: () => ({
         id: '',
         serviceType: '',
-        tableIdentifier: '',
+        dineIn: {
+            tableIdentifier: ''
+        },
         restaurant: {
             id: '',
             seoName: ''
@@ -475,7 +477,7 @@ export default {
             state.geolocation = fulfilment?.location?.geolocation || null;
 
             if (fulfilment.table) {
-                state.tableIdentifier = fulfilment.table.identifier;
+                state.dineIn.tableIdentifier = fulfilment.table.identifier;
             }
 
             state.isFulfillable = isFulfillable;
@@ -519,10 +521,8 @@ export default {
             };
         },
 
-        [UPDATE_ORDER_DETAILS]: (state, payload) => {
-            const { tableIdentifier } = payload;
-
-            state.tableIdentifier = tableIdentifier;
+        [UPDATE_DINEIN_DETAILS]: (state, payload) => {
+            state.dineIn = payload;
         },
 
         [UPDATE_ADDRESS_DETAILS]: (state, address) => {

@@ -90,10 +90,12 @@ const $v = {
             isValidPostcode: false
         }
     },
-    tableIdentifier: {
-        $dirty: false,
-        required: true,
-        maxLength: true
+    dineIn: {
+        tableIdentifier: {
+            $dirty: false,
+            required: true,
+            maxLength: true
+        }
     },
     $touch: jest.fn()
 };

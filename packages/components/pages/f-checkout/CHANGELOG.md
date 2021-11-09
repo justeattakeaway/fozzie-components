@@ -11,6 +11,9 @@ v3.4.0
 - Address Component to use `CheckoutFormField` component.
 - `tableIdentifier` field to use `CheckoutFormField` component.
 
+### Removed
+- Checkout validation mixin.
+
 
 v3.3.0
 ------------------------------

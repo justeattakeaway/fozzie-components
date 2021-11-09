@@ -54,7 +54,7 @@
                     <checkout-form-field
                         v-if="isCheckoutMethodDineIn"
                         field-name="tableIdentifier"
-                        field-type="order"
+                        field-type="dineIn"
                         max-length="12" />
 
                     <address-block
@@ -146,7 +146,6 @@ import {
     VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
-import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
@@ -189,7 +188,6 @@ export default {
     mixins: [
         validationMixin,
         VueGlobalisationMixin,
-        checkoutValidationsMixin,
         loggerMixin
     ],
 
@@ -305,9 +303,9 @@ export default {
             get: () => this.$v.customer
         });
 
-        Object.defineProperty($v, VALIDATIONS.order, {
+        Object.defineProperty($v, VALIDATIONS.dineIn, {
             enumerable: true,
-            get: () => this.$v.order
+            get: () => this.$v.dineIn
         });
 
         return { $v };
@@ -332,7 +330,7 @@ export default {
             'orderId',
             'restaurant',
             'serviceType',
-            'tableIdentifier',
+            'dineIn',
             'time',
             'userNote'
         ]),
@@ -1014,7 +1012,7 @@ export default {
                     userNote: this.userNote,
                     geolocation: this.geolocation,
                     asap: this.hasAsapSelected,
-                    tableIdentifier: this.tableIdentifier
+                    tableIdentifier: this.dineIn.tableIdentifier
                 });
         }
     },
@@ -1064,7 +1062,7 @@ export default {
         }
 
         if (this.isCheckoutMethodDineIn) {
-            validationProperties.order = {
+            validationProperties.dineIn = {
                 tableIdentifier: {
                     required
                 }

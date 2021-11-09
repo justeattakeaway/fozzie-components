@@ -29,6 +29,9 @@ const defaultCheckoutState = {
         id: '',
         total: 0
     },
+    dineIn: {
+        tableIndentifier: ''
+    },
     customer: {
         firstName: 'John',
         lastName: 'Smith',

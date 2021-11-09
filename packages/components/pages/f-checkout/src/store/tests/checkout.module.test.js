@@ -28,7 +28,7 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_ERRORS,
     UPDATE_ADDRESS_DETAILS,
-    UPDATE_ORDER_DETAILS,
+    UPDATE_DINEIN_DETAILS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
@@ -108,7 +108,9 @@ const message = {
 const defaultState = {
     id: '',
     serviceType: '',
-    tableIdentifier: '',
+    dineIn: {
+        tableIdentifier: ''
+    },
     restaurant: {
         id: '',
         seoName: ''
@@ -1166,7 +1168,7 @@ describe('CheckoutModule', () => {
             it.each([
                 [UPDATE_CUSTOMER_DETAILS, 'customer'],
                 [UPDATE_ADDRESS_DETAILS, 'address'],
-                [UPDATE_ORDER_DETAILS, 'order']
+                [UPDATE_DINEIN_DETAILS, 'dineIn']
             ])('should commit %s with expected payload when `fieldType` is %s', (mutation, fieldType) => {
                 // Arrange
                 userDetails.fieldType = fieldType;

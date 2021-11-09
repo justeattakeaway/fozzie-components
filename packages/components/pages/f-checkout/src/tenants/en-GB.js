@@ -9,7 +9,7 @@ const messages = {
     },
 
     formFields: {
-        order: {
+        dineIn: {
             tableIdentifier: {
                 label: 'Table number or name',
                 validationMessages: {

@@ -69,14 +69,10 @@ export default {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'address',
             'customer',
-            'tableIdentifier'
+            'dineIn'
         ]),
 
         value () {
-            if (this.fieldType === 'order') {
-                return this[this.fieldName];
-            }
-
             return this[this.fieldType][this.fieldName];
         },
 

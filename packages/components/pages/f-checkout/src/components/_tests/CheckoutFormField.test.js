@@ -51,7 +51,7 @@ const $v = {
             isValidPostcode: false
         }
     },
-    [VALIDATIONS.order]: {
+    [VALIDATIONS.dineIn]: {
         tableIdentifier: {
             $dirty: false
         }
@@ -348,7 +348,7 @@ describe('CheckoutFormField', () => {
                 ['email', 'customer', 'email'],
                 ['line1', 'address', 'line-1'],
                 ['city', 'address', 'city'],
-                ['tableIdentifier', 'order', 'table-identifier']
+                ['tableIdentifier', 'dineIn', 'table-identifier']
             ])('should convert `fieldName` value to kebab case', (fieldName, fieldType, expected) => {
                 // Arrange & Act
                 const wrapper = shallowMount(CheckoutFormField, {
