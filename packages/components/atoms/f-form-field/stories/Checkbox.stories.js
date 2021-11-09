@@ -42,15 +42,15 @@ export const CheckboxComponent = () => ({
     },
     template:
         `<form-field
-            :label-text="labelText"
-            :has-error="hasError"
-            :is-grouped="isGrouped"
+			:label-text="labelText"
+			:has-error="hasError"
+			:is-grouped="isGrouped"
 			:shouldShowLabelText="false"
 			inputType="checkbox"
-            :disabled="isDisabled"
-            :labelDetails="labelDetails"
-            :labelDescription="labelDescription"
-            :assistiveText="assistiveText"/>`
+			:disabled="isDisabled"
+			:labelDetails="labelDetails"
+			:labelDescription="labelDescription"
+			:assistiveText="assistiveText"/>`
 });
 
 CheckboxComponent.storyName = 'Checkbox';
