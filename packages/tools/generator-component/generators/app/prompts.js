@@ -38,8 +38,16 @@ const prompts = [
                 value: 'molecule'
             },
             {
-                name: 'An Organism – A combination of atoms and molecules that make up a larger component e.g. header, checkout',
+                name: 'An Organism – A combination of atoms and molecules that make up a larger component e.g. header, footer',
                 value: 'organism'
+            },
+            {
+                name: 'A Template – a layout component that is intended to handle page level layout decisions e.g. a sideNav layout which positions a set of links next to a block of body content',
+                value: 'template'
+            },
+            {
+                name: 'A Page – A combination of components that makes up a page view e.g. checkout, registration',
+                value: 'page'
             }
         ],
         when: function shouldShowThisQuestion (answers) {
@@ -59,7 +67,7 @@ const prompts = [
         message: 'Does your component require Bundlewatch checks?',
         name: 'needsBundlewatch',
         type: 'confirm',
-        default: true,
+        default: true
     },
     {
         message: "What size limit do you want in place for your bundles (in kB)? e.g. '15'",

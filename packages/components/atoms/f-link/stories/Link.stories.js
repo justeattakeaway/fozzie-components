@@ -23,10 +23,6 @@ export const VLinkComponent = () => ({
             default: text('Router link path (href must be empty for this to be applied)', '')
         },
 
-        isRouterLink: {
-            default: boolean('Is a router link?', false)
-        },
-
         isExternalSite: {
             default: boolean('Opens an external site', false)
         },
@@ -62,11 +58,11 @@ export const VLinkComponent = () => ({
     },
 
     template: `<v-link
+                    link-class="myLinkClass"
                     :data-test-id="dataTestId"
                     v-bind="{
                         ...(href ? { href } : to ? { to } : {})
                     }"
-                    :is-router-link="isRouterLink"
                     :is-bold="isBold"
                     :has-text-decoration="hasTextDecoration"
                     :is-full-width="isFullWidth"

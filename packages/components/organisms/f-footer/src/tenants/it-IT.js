@@ -200,9 +200,9 @@ export default {
                     gtm: 'click_chi_siamo_diventa_un_rider'
                 },
                 {
-                    url: '/informazioni/lavora-con-noi',
-                    text: 'Lavora con noi',
-                    gtm: 'click_chi_siamo_lavora_con_noi'
+                    url: 'https://careers.justeattakeaway.com/global/en',
+                    text: 'Careers',
+                    gtm: 'click_chi_siamo_careers'
                 },
                 {
                     url: '/informazioni/media-and-press',
