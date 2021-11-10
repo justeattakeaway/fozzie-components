@@ -86,12 +86,16 @@ export default {
 }
 
 .c-cardWithContent-heading {
-    @include font-size(heading-s);
     margin-bottom: 0;
+    @include font-size('heading-l', true, 'narrow');
+
+    @include media('>=wide') {
+        @include font-size('heading-l', true, 'default');
+    }
 }
 
 .c-cardWithContent-description {
-    @include font-size(body-l);
+    @include font-size('body-l');
     margin-top: spacing();
 }
 
