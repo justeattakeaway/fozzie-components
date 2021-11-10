@@ -37,6 +37,7 @@
                     :is-checkout-method-delivery="isCheckoutMethodDelivery"
                     :is-checkout-method-dine-in="isCheckoutMethodDineIn"
                     :scroll-to-element="scrollToElement"
+                    :available-fulfilment-times-key="availableFulfilmentTimesKey"
                     v-on="formEvents" />
 
                 <template
