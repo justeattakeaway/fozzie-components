@@ -189,6 +189,11 @@ export default {
                     gtm: 'click_about_corporate_partners'
                 },
                 {
+                    url: 'https://careers.justeattakeaway.com/global/en/australia',
+                    text: 'Careers',
+                    gtm: 'click_about_careers'
+                },
+                {
                     url: '/help',
                     text: 'Contact Us',
                     gtm: 'click_about_contact_us'
