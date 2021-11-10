@@ -48,26 +48,14 @@
 
                     <checkout-form-field
                         field-name="mobileNumber"
+                        field-type="customer"
                         max-length="16" />
 
-                    <form-field
+                    <checkout-form-field
                         v-if="isCheckoutMethodDineIn"
-                        :value="tableIdentifier"
-                        input-type="text"
-                        name="table-identifier"
-                        :label-text="$t('formFields.order.tableIdentifier.label')"
-                        :has-error="isTableIdentifierEmpty"
-                        maxlength="12"
-                        @input="updateTableIdentifier($event)">
-                        <template #error>
-                            <error-message
-                                v-if="isTableIdentifierEmpty"
-                                data-js-error-message
-                                data-test-id="error-table-identifier-empty">
-                                {{ $t('formFields.order.tableIdentifier.validationMessages.required') }}
-                            </error-message>
-                        </template>
-                    </form-field>
+                        field-name="tableIdentifier"
+                        field-type="dineIn"
+                        max-length="12" />
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
@@ -117,7 +105,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import {
-    required, email, maxLength, requiredIf
+    required, email, requiredIf
 } from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
@@ -158,7 +146,6 @@ import {
     VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
-import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
@@ -201,7 +188,6 @@ export default {
     mixins: [
         validationMixin,
         VueGlobalisationMixin,
-        checkoutValidationsMixin,
         loggerMixin
     ],
 
@@ -317,6 +303,11 @@ export default {
             get: () => this.$v.customer
         });
 
+        Object.defineProperty($v, VALIDATIONS.dineIn, {
+            enumerable: true,
+            get: () => this.$v.dineIn
+        });
+
         return { $v };
     },
 
@@ -339,7 +330,7 @@ export default {
             'orderId',
             'restaurant',
             'serviceType',
-            'tableIdentifier',
+            'dineIn',
             'time',
             'userNote'
         ]),
@@ -347,10 +338,6 @@ export default {
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields'
         ]),
-
-        isTableIdentifierEmpty () {
-            return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
-        },
 
         isCheckoutMethodDelivery () {
             return this.serviceType === CHECKOUT_METHOD_DELIVERY;
@@ -501,7 +488,6 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
-            'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
             'updateAddress',
@@ -1026,7 +1012,7 @@ export default {
                     userNote: this.userNote,
                     geolocation: this.geolocation,
                     asap: this.hasAsapSelected,
-                    tableIdentifier: this.tableIdentifier
+                    tableIdentifier: this.dineIn.tableIdentifier
                 });
         }
     },
@@ -1038,10 +1024,6 @@ export default {
                     required,
                     mobileNumber: this.isValidPhoneNumber
                 }
-            },
-            tableIdentifier: {
-                required: requiredIf(() => this.isCheckoutMethodDineIn),
-                maxLength: maxLength(12)
             }
         };
 
@@ -1074,7 +1056,15 @@ export default {
                 },
                 postcode: {
                     required,
-                    isValidPostcode: this.isValidPostcode
+                    postcode: this.isValidPostcode
+                }
+            };
+        }
+
+        if (this.isCheckoutMethodDineIn) {
+            validationProperties.dineIn = {
+                tableIdentifier: {
+                    required
                 }
             };
         }

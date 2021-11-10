@@ -90,10 +90,12 @@ const $v = {
             isValidPostcode: false
         }
     },
-    tableIdentifier: {
-        $dirty: false,
-        required: true,
-        maxLength: true
+    dineIn: {
+        tableIdentifier: {
+            $dirty: false,
+            required: true,
+            maxLength: true
+        }
     },
     $touch: jest.fn()
 };
@@ -524,37 +526,6 @@ describe('Checkout', () => {
                 // Assert
                 expect(errorSummaryContainer.exists()).toBe(true);
                 expect(errorSummaryContainer.classes('is-visuallyHidden')).toBe(true);
-            });
-        });
-
-        describe('isTableIdentifierEmpty ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `false` if tableIdentifier field has not been touched', () => {
-                // Act
-                wrapper.vm.$v.tableIdentifier.$dirty = false;
-
-                // Assert
-                expect(wrapper.vm.isTableIdentifierEmpty).toBeFalsy();
-            });
-
-            it('should return `true` if tableIdentifier field has been touched but tableIdentifier is empty', () => {
-                // Act
-                wrapper.vm.$v.tableIdentifier.$dirty = true;
-                wrapper.vm.$v.tableIdentifier.required = false;
-
-                // Assert
-                expect(wrapper.vm.isTableIdentifierEmpty).toBeTruthy();
             });
         });
 
@@ -3521,28 +3492,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultCheckoutState.address.postcode, i18n.locale);
-            });
-        });
-
-        describe('updateTableIdentifier ::', () => {
-            it('should be called with new input value on user input', async () => {
-                // Arrange
-                const updateTableIdentifierSpy = jest.spyOn(VueCheckout.methods, 'updateTableIdentifier');
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                const tableNumber = '10';
-
-                // Act
-                await wrapper.find('[data-test-id="formfield-table-identifier-input"]').setValue(tableNumber);
-                await wrapper.vm.$nextTick();
-
-                // Assert
-                expect(updateTableIdentifierSpy).toHaveBeenCalledWith(tableNumber);
             });
         });
 
