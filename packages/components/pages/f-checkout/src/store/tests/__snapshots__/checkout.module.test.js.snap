@@ -25,6 +25,9 @@ Object {
     "lastName": "Bloggs",
     "mobileNumber": "+447111111111",
   },
+  "dineIn": Object {
+    "tableIdentifier": "",
+  },
   "errors": Array [],
   "geolocation": Object {
     "latitude": 51.5165,
@@ -64,7 +67,6 @@ Object {
     "seoName": "",
   },
   "serviceType": "delivery",
-  "tableIdentifier": "",
   "time": Object {
     "from": "",
     "to": "",
