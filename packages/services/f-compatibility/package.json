@@ -7,7 +7,7 @@
   "module": "dist/f-compatibility.es.js",
   "source": "src/index.js",
   "files": [
-    "dist" 
+    "dist"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-compatibility",
   "contributors": [
@@ -22,7 +22,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"

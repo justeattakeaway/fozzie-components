@@ -37,7 +37,7 @@
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "license": "Apache-2.0",
   "repository": {
