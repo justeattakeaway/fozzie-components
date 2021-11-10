@@ -172,11 +172,12 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
 .c-promotionsShowcase-itemElement--styleText,
 .c-promotionsShowcase-itemElement--styleLink,
 .c-promotionsShowcase-itemElement--styleEmphasized {
+    @include font-size(body-s);
+    margin-top: spacing();
+
     &:nth-of-type(1) {
         margin-top: spacing(x0.5);
     }
-
-    margin-top: spacing();
 }
 
 .c-promotionsShowcase-item--interactive {
