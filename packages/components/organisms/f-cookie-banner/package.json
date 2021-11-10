@@ -21,7 +21,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
@@ -54,7 +54,7 @@
     "@justeat/f-link": "2.0.0",
     "@justeat/f-mega-modal": "3.0.2",
     "@justeat/f-vue-icons": "2.3.0",
-    "@justeat/f-wdio-utils": "0.3.0",
+    "@justeat/f-wdio-utils": "0.4.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

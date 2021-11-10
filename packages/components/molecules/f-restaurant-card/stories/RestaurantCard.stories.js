@@ -46,7 +46,12 @@ RestaurantCardComponent.args = {
         cuisines: ['Mexican', 'Burgers', 'Chinese'],
         imageBadges: [{ text: 'Promoted', textColour: badgeColourSchemes.promoted.text, backgroundColour: badgeColourSchemes.promoted.background }, { text: 'StampCards', textColour: badgeColourSchemes.stampcards.text, backgroundColour: badgeColourSchemes.stampcards.background }],
         contentBadges: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test badge that hopefully never happens' }],
-        newBadgeText: 'NEW'
+        newBadgeText: 'NEW',
+        deliveryTimeData: {
+            address: 'Fleet Place House, 2 Fleet Pl, London EC4M 7RF, The United Kingdom of Great Britain and Northern Ireland',
+            distance: '1.35 miles',
+            eta: '20-25 min'
+        }
     },
 
     flags: {
