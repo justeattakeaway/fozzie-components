@@ -198,40 +198,6 @@ describe('FormField', () => {
             });
         });
 
-        describe('shouldShowLabelText ::', () => {
-            it('should display `FormLabel` when set to `true`', () => {
-                // Arrange
-                const propsData = {
-                    labelText: 'LabelText',
-                    shouldShowLabelText: true
-                };
-
-                // Act
-                const wrapper = shallowMount(FormField, { propsData });
-
-                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
-
-                // Assert
-                expect(formLabel.exists()).toBe(true);
-            });
-
-            it('should not display `FormLabel` when set to `false`', () => {
-                // Arrange
-                const propsData = {
-                    labelText: 'LabelText',
-                    shouldShowLabelText: false
-                };
-
-                // Act
-                const wrapper = shallowMount(FormField, { propsData });
-
-                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
-
-                // Assert
-                expect(formLabel.exists()).toBe(false);
-            });
-        });
-
         describe('LabelDetails ::', () => {
             it('should display `LabelDetails` when description is provided', () => {
                 // Arrange
@@ -506,6 +472,111 @@ describe('FormField', () => {
                     // Assert
                     expect(affixedFormField.exists()).toBe(false);
                 });
+            });
+        });
+
+        describe('shouldShowLabel ::', () => {
+            it('should return `true` when `shouldShowLabelText` and not `isSelectionControl`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: true
+                };
+
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    computed: {
+                        isSelectionControl () {
+                            return false;
+                        }
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowLabel;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` when `shouldShowLabelText` is `false`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: false
+                };
+
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    computed: {
+                        isSelectionControl () {
+                            return false;
+                        }
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowLabel;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` when `isSelectionControl` is `true`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: true
+                };
+
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    computed: {
+                        isSelectionControl () {
+                            return true;
+                        }
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowLabel;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should display `FormLabel` when `true`', () => {
+                // Arrange
+                const wrapper = shallowMount(FormField, {
+                    computed: {
+                        shouldShowLabel () {
+                            return true;
+                        }
+                    }
+                });
+
+                // Act
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
+
+                // Assert
+                expect(formLabel.exists()).toBe(true);
+            });
+
+            it('should not display `FormLabel` when `false`', () => {
+                // Arrange
+                const wrapper = shallowMount(FormField, {
+                    computed: {
+                        shouldShowLabel () {
+                            return false;
+                        }
+                    }
+                });
+
+                // Act
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
+
+                // Assert
+                expect(formLabel.exists()).toBe(false);
             });
         });
     });

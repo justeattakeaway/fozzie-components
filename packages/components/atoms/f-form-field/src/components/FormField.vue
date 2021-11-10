@@ -11,7 +11,7 @@
         <div
             :class="$style['c-formField-fieldWrapper']">
             <form-label
-                v-if="shouldShowLabelText"
+                v-if="shouldShowLabel"
                 :label-for="uniqueId"
                 :is-disabled="isDisabled"
                 v-bind="$props"
@@ -317,6 +317,10 @@ export default {
 
         isAffixedType () {
             return VALID_TEXT_INPUT_TYPES.includes(this.inputType);
+        },
+
+        shouldShowLabel () {
+            return this.shouldShowLabelText && !this.isSelectionControl;
         }
     },
 
