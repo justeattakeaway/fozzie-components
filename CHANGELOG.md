@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.3.0
+------------------------------
+*November 9, 2021*
+
+### Added
+- `templates` and `pages` component directories added to lerna config.
+
+### Changed
+- Updated engine from Node v10 > v12 on all packages (as we only test in Node 12+).
+
+
 v5.2.0
 ------------------------------
 *November 5, 2021*
