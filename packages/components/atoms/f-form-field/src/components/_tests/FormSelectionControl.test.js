@@ -12,6 +12,7 @@ describe('FormSelectionControl', () => {
         };
 
         propsData = {
+            inputType: 'checkbox',
             value: 'testValue'
         };
     });
@@ -21,9 +22,9 @@ describe('FormSelectionControl', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    describe('props ::', () => {
+    describe('template ::', () => {
         describe('value ::', () => {
-            it('should be used to set the input’s value', () => {
+            it('should be set using the `value` prop', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(FormSelectionControl, { propsData, attrs });
 
@@ -33,8 +34,88 @@ describe('FormSelectionControl', () => {
         });
     });
 
+    describe('props ::', () => {
+        describe('inputType ::', () => {
+            it.each([
+                [false, 'text'],
+                [true, 'checkbox'],
+                [true, 'radio']
+            ])('should return %s when value is %s', (expected, inputType) => {
+                // Arrange
+                const { validator } = FormSelectionControl.props.inputType;
+
+                // Act & Assert
+                expect(validator(inputType)).toBe(expected);
+            });
+        });
+    });
+
+    describe('computed ::', () => {
+        describe('isCheckbox ::', () => {
+            it('should return `true` when `inputType` is `checkbox`', async () => {
+                // Arrange
+                const wrapper = shallowMount(FormSelectionControl, { propsData, attrs });
+
+                // Act
+                const result = await wrapper.vm.isCheckbox;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` when `inputType` is not `checkbox`', async () => {
+                // Arrange
+                propsData.inputType = 'radio';
+
+                const wrapper = shallowMount(FormSelectionControl, { propsData, attrs });
+
+                // Act
+                const result = await wrapper.vm.isCheckbox;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+        });
+
+        describe('testId ::', () => {
+            describe('`attributes.name` is provided ::', () => {
+                it('should return an object using the `attribute.name`', async () => {
+                    // Arrange
+                    propsData.attributes = {
+                        name: 'testCheckbox'
+                    };
+
+                    const wrapper = shallowMount(FormSelectionControl, { propsData, attrs });
+
+                    // Act
+                    const result = await wrapper.vm.testId;
+
+                    // Assert
+                    expect(result).toMatchSnapshot();
+                });
+            });
+
+            describe('`attributes.name` is not provided ::', () => {
+                it('should return a generic object without using the `attribute.name`', async () => {
+                    // Arrange
+                    propsData.attributes = {
+                        name: null
+                    };
+
+                    const wrapper = shallowMount(FormSelectionControl, { propsData, attrs });
+
+                    // Act
+                    const result = await wrapper.vm.testId;
+
+                    // Assert
+                    expect(result).toMatchSnapshot();
+                });
+            });
+        });
+    });
+
     describe('methods ::', () => {
-        describe('updateInput ::', () => {
+        describe('updateSelectionControl ::', () => {
             it('should emit `update` when changed', async () => {
                 // Arrange
                 const wrapper = shallowMount(FormSelectionControl, { propsData, attrs });
@@ -46,7 +127,7 @@ describe('FormSelectionControl', () => {
                 };
 
                 // Act
-                await wrapper.vm.updateInput(event);
+                await wrapper.vm.updateSelectionControl(event);
 
                 // Assert
                 expect(wrapper.emitted('update').length).toBe(1);

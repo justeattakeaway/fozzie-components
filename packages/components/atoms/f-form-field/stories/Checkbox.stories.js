@@ -18,6 +18,9 @@ export const CheckboxComponent = () => ({
         labelText: {
             default: text('Label Text', 'Checkbox Label')
         },
+        value: {
+            default: text('Value', 'checkboxLabel')
+        },
         isDisabled: {
             default: select('isDisabled', [null, 'disabled'])
         },
@@ -26,12 +29,6 @@ export const CheckboxComponent = () => ({
         },
         isGrouped: {
             default: boolean('isGrouped', false)
-        },
-        labelDescription: {
-            default: text('Label Description', '')
-        },
-        labelDetails: {
-            default: text('Label Details', '')
         },
         assistiveText: {
             default: text('Assistive Text', '')
@@ -43,13 +40,12 @@ export const CheckboxComponent = () => ({
     template:
         `<form-field
             :label-text="labelText"
+            :value="value"
             :has-error="hasError"
             :is-grouped="isGrouped"
             :shouldShowLabelText="false"
             inputType="checkbox"
             :disabled="isDisabled"
-            :labelDetails="labelDetails"
-            :labelDescription="labelDescription"
             :assistiveText="assistiveText"/>`
 });
 

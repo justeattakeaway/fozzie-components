@@ -15,10 +15,11 @@
                     [$style['c-formField-field--checkbox']]: isCheckbox,
                     [$style['c-formField--invalid']]: hasError
                 }]"
-            @change="updateInput"
+            @change="updateSelectionControl"
         >
 
         <form-label
+            :id="`label-${$attrs.id}`"
             :label-for="$attrs.id"
         >
             {{ labelText }}
@@ -69,7 +70,7 @@ export default {
             const formFieldName = (this.attributes && this.attributes.name ? this.attributes.name : null);
 
             return {
-                container: formFieldName ? `formfield-${formFieldName}}` : 'formfield-container',
+                container: formFieldName ? `formfield-${formFieldName}` : 'formfield-container',
                 input: formFieldName ? `formfield-${formFieldName}-${this.inputType}` : 'formfield-input'
             };
         },
@@ -80,8 +81,8 @@ export default {
     },
 
     methods: {
-        updateInput (event) {
-            this.$emit('update', event.target.value);
+        updateSelectionControl (event) {
+            this.$emit('update', event.target.checked);
         }
     }
 };
