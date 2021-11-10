@@ -8,9 +8,9 @@ v5.3.1
  *November 10, 2021*
 
 ### Changed
-- wdio configuration for component, visual and a11y tests
-- allure script in `wdio-shared.conf.js` and `package.json`
-- small update of generator to reflect above changes
+- wdio configuration for component, visual and a11y tests.
+- allure script in `wdio-shared.conf.js` and `package.json`.
+- small update of generator to reflect above changes.
 
 
 v5.3.0
