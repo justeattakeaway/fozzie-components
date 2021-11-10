@@ -19,7 +19,8 @@ const {
     ERROR_PAGE_COMPONENT,
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
-    ERROR_PAGE_IMAGE
+    ERROR_PAGE_IMAGE,
+    AGE_VERIFICATION_COMPONENT
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -64,6 +65,8 @@ module.exports = class Checkout extends Page {
     get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
 
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
+
+    get ageVerificationComponent () { return $(AGE_VERIFICATION_COMPONENT )}
 
     fields = {
         firstName: {
@@ -131,6 +134,10 @@ module.exports = class Checkout extends Page {
         super.load(this.errorPageComponent);
     }
 
+    loadAgeVerification () {
+        super.load(this.ageVerificationComponent);
+    }
+
     open (url) {
         super.open(url);
     }
@@ -146,6 +153,10 @@ module.exports = class Checkout extends Page {
 
     waitForErrorPageComponent () {
         super.waitForComponent(this.errorPageComponent);
+    }
+
+    waitForAgeVerificationComponent () {
+        super.waitForComponent(this.ageVerificationComponent);
     }
 
     isCheckoutPageDisplayed () {

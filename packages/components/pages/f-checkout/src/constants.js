@@ -17,7 +17,7 @@ export const TENANT_MAP = {
 
 export const VALIDATIONS = {
     address: 'addressValidations',
-    guest: 'guestValidations'
+    customer: 'customerValidations'
 };
 
 export const VUEX_CHECKOUT_MODULE = 'fCheckoutModule';
