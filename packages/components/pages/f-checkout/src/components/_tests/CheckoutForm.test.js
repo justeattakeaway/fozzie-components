@@ -71,7 +71,8 @@ describe('CheckoutForm', () => {
         tenant: 'uk',
         isCheckoutMethodDelivery: true,
         isCheckoutMethodDineIn: false,
-        scrollToElement: jest.fn()
+        scrollToElement: jest.fn(),
+        availableFulfilmentTimesKey: 0
     };
 
     afterEach(() => {

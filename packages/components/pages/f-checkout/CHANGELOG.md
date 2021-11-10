@@ -3,9 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.4.0
+
+v3.6.0
 ------------------------------
-*November 9, 2021*
+*November 10, 2021*
+
+### Changed
+- `CheckoutForm` component.
+- moved all form logic out of `Checkout.vue`.
+
+
+v3.5.0
+------------------------------
+*November 10, 2021*
 
 ### Changed
 - Address Component to use `CheckoutFormField` component.
@@ -13,6 +23,14 @@ v3.4.0
 
 ### Removed
 - Checkout validation mixin.
+
+
+v3.4.0
+------------------------------
+*November 9, 2021*
+
+### Added
+- Component tests for age verification
 
 
 v3.3.0

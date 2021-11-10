@@ -17,7 +17,13 @@ exports.ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-component"]';
 exports.ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';
 exports.ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description"]';
 exports.ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
+
 exports.AGE_VERIFICATION_COMPONENT = '[data-test-id="checkout-age-verification-component"]';
+exports.AGE_VERIFICATION_DAY_DROPDOWN = '[data-test-id="formfield-dob-day-dropdown-select"]';
+exports.AGE_VERIFICATION_MONTH_DROPDOWN = '[data-test-id="formfield-dob-month-dropdown-select"]';
+exports.AGE_VERIFICATION_YEAR_DROPDOWN = '[data-test-id="formfield-dob-year-dropdown-select"]';
+exports.AGE_VERIFICATION_ERROR = '[data-test-id="age-verification-error-message"]';
+exports.AGE_VERIFICATION_SUBMIT_BUTTON = '[data-test-id="age-verification-redirect-button"]';
 
 exports.FIELDS = {
     firstName: {
