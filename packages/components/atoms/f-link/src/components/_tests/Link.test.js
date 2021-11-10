@@ -28,7 +28,8 @@ describe('Link', () => {
 
     it('should render a router link when given the `to` attribute', () => {
         // Arrange
-        const propsData = {
+        const propsData = {};
+        const attrs = {
             to: '/'
         };
 
@@ -36,6 +37,7 @@ describe('Link', () => {
         const wrapper = shallowMount(VLink, {
             propsData,
             mocks,
+            attrs,
             stubs: {
                 RouterLink: RouterLinkStub
             }
@@ -49,13 +51,15 @@ describe('Link', () => {
 
     it('should render an anchor tag when given the `href` attribute', () => {
         // Arrange
-        const propsData = {
+        const propsData = {};
+        const attrs = {
             href: '/'
         };
 
         // Act
         const wrapper = shallowMount(VLink, {
             propsData,
+            attrs,
             mocks
         });
 
@@ -69,7 +73,8 @@ describe('Link', () => {
 
     it('should render an anchor tag when given both the `href` and `to` attributes', () => {
         // Arrange
-        const propsData = {
+        const propsData = {};
+        const attrs = {
             href: '/',
             to: '/'
         };
@@ -77,6 +82,7 @@ describe('Link', () => {
         // Act
         const wrapper = shallowMount(VLink, {
             propsData,
+            attrs,
             mocks
         });
 
@@ -205,6 +211,78 @@ describe('Link', () => {
                     // Assert
                     expect(wrapper.vm.ariaDescription).toEqual(expected);
                 });
+            });
+        });
+    });
+
+    describe('methods :: ', () => {
+        describe('bindAttrs :: ', () => {
+            it('should set data.linkClass when link-class attribute is passed', () => {
+                // Arrange
+                const expected = 'my-link-class';
+                const propsData = {};
+                const attrs = {
+                    'link-class': expected
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    attrs
+                });
+
+                // Assert
+                expect(wrapper.vm.linkClass).toEqual(expected);
+            });
+
+            it('should not set link-class attribute on wrapper', () => {
+                // Arrange
+                const expected = 'my-link-class';
+                const propsData = {};
+                const attrs = {
+                    'link-class': expected
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    attrs
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="link-component"]').attributes('link-class')).toBeUndefined();
+            });
+
+            it('should set any other custom attributes on the wrapper not link-class', () => {
+                // Arrange
+                const expected = 'XXX';
+                const propsData = {};
+                const attrs = {
+                    'link-class': 'my-link-class',
+                    'test-attribute': expected
+                };
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData,
+                    attrs
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="link-component"]').attributes('test-attribute')).toEqual(expected);
+            });
+
+            it('should set data.linkClass to empty string when link-class attribute is not passed', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(VLink, {
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.linkClass).toEqual('');
             });
         });
     });
