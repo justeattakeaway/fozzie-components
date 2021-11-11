@@ -4,8 +4,7 @@ import FormDropdown from '../FormDropdown.vue';
 import {
     DEFAULT_INPUT_TYPE,
     VALID_ICON_INPUT_TYPES,
-    VALID_TEXT_INPUT_TYPES,
-    VALID_INPUT_TYPES
+    VALID_TEXT_INPUT_TYPES
 } from '../../constants';
 
 const $style = {
@@ -68,7 +67,7 @@ describe('FormField', () => {
                 expect(formInput.attributes('type')).toBe(DEFAULT_INPUT_TYPE);
             });
 
-            it.each(VALID_INPUT_TYPES)('should set the type of form input element as expected if inputType=%p is specified', definedType => {
+            it.each(VALID_TEXT_INPUT_TYPES)('should set the type of form input element as expected if inputType=%p is specified', definedType => {
                 // Arrange
                 const propsData = {
                     inputType: definedType
@@ -199,40 +198,6 @@ describe('FormField', () => {
             });
         });
 
-        describe('shouldShowLabelText ::', () => {
-            it('should display `FormLabel` when set to `true`', () => {
-                // Arrange
-                const propsData = {
-                    labelText: 'LabelText',
-                    shouldShowLabelText: true
-                };
-
-                // Act
-                const wrapper = shallowMount(FormField, { propsData });
-
-                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
-
-                // Assert
-                expect(formLabel.exists()).toBe(true);
-            });
-
-            it('should not display `FormLabel` when set to `false`', () => {
-                // Arrange
-                const propsData = {
-                    labelText: 'LabelText',
-                    shouldShowLabelText: false
-                };
-
-                // Act
-                const wrapper = shallowMount(FormField, { propsData });
-
-                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
-
-                // Assert
-                expect(formLabel.exists()).toBe(false);
-            });
-        });
-
         describe('LabelDetails ::', () => {
             it('should display `LabelDetails` when description is provided', () => {
                 // Arrange
@@ -300,20 +265,21 @@ describe('FormField', () => {
 
     describe('computed :: ', () => {
         describe('isSelectionControl :: ', () => {
-            it('should capitalise to first letter of `buttonSize` prop :: ', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(FormField, {
-                    propsData: {
-                        inputType: 'checkbox'
-                    },
-                    mocks: {
-                        $style
-                    }
-                });
-                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
+            it.each([
+                [true, 'checkbox'],
+                [true, 'radio'],
+                [false, 'text']
+            ])('should return %s if input type is %s', (expected, inputType) => {
+                // Arrange
+                const propsData = {
+                    inputType
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
 
                 // Assert
-                expect(formInput.attributes('class')).toContain('c-formField-field--noFocus');
+                expect(wrapper.vm.isSelectionControl).toEqual(expected);
             });
         });
 
@@ -508,6 +474,111 @@ describe('FormField', () => {
                 });
             });
         });
+
+        describe('shouldShowLabel ::', () => {
+            it('should return `true` when `shouldShowLabelText` and not `isSelectionControl`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: true
+                };
+
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    computed: {
+                        isSelectionControl () {
+                            return false;
+                        }
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowLabel;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` when `shouldShowLabelText` is `false`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: false
+                };
+
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    computed: {
+                        isSelectionControl () {
+                            return false;
+                        }
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowLabel;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` when `isSelectionControl` is `true`', () => {
+                // Arrange
+                const propsData = {
+                    labelText: 'LabelText',
+                    shouldShowLabelText: true
+                };
+
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    computed: {
+                        isSelectionControl () {
+                            return true;
+                        }
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowLabel;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should display `FormLabel` when `true`', () => {
+                // Arrange
+                const wrapper = shallowMount(FormField, {
+                    computed: {
+                        shouldShowLabel () {
+                            return true;
+                        }
+                    }
+                });
+
+                // Act
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
+
+                // Assert
+                expect(formLabel.exists()).toBe(true);
+            });
+
+            it('should not display `FormLabel` when `false`', () => {
+                // Arrange
+                const wrapper = shallowMount(FormField, {
+                    computed: {
+                        shouldShowLabel () {
+                            return false;
+                        }
+                    }
+                });
+
+                // Act
+                const formLabel = wrapper.find('[data-test-id="formfield-label"]');
+
+                // Assert
+                expect(formLabel.exists()).toBe(false);
+            });
+        });
     });
 
     describe('attrs ::', () => {
@@ -592,7 +663,7 @@ describe('FormField', () => {
 
     describe('events ::', () => {
         describe('@input ::', () => {
-            it.each(VALID_INPUT_TYPES)('should only trigger one event emission for inputType `%s`', inputType => {
+            it.each(VALID_TEXT_INPUT_TYPES)('should only trigger one event emission for inputType `%s`', inputType => {
                 // Arrange
                 const propsData = { inputType };
                 const wrapper = shallowMount(FormField, { propsData });

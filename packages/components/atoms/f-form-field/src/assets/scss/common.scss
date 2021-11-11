@@ -23,7 +23,7 @@ $form-input-borderColour--invalid       : $color-support-error;
 
 $form-input-focus--boxShadow            : 0 0 0 2px $color-focus;
 
-$form-input-padding--side              : spacing(x2);
+$form-input-padding--side               : spacing(x2);
 
 $form-input-height                      : spacing(x6);
 $form-input-padding                     : 11px $form-input-padding--side 13px;
@@ -63,6 +63,16 @@ $form-input-icon-horizontalIndent       : 19px;
         color: $form-input-textColour--disabled;
         border-color: $form-input-borderColour--disabled;
     }
+}
+
+.c-formField {
+    & + & {
+        margin-top: spacing(x2);
+    }
+}
+
+.c-formField-fieldWrapper {
+    position: relative;
 }
 
 .c-formField-field--small {
