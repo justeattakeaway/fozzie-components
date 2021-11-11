@@ -136,7 +136,7 @@ describe('ContactPreferencesApi Provider', () => {
             const expectedBody = bodyMock;
             const expectedHeaders = {
                 Authorization: `Bearer ${authTokenMock}`,
-                'x-je-conversation': `${conversationId}`
+                'x-je-conversation': conversationId
             };
 
             // Act
