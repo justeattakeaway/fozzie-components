@@ -17,8 +17,8 @@ const {
 } = require('./f-registration.selectors');
 
 module.exports = class Registration extends Page {
-    constructor() {
-        super('organism', 'registration-component');
+    constructor () {
+        super('page', 'registration-component');
     }
 
     get component () { return $(REGISTRATION_COMPONENT); }

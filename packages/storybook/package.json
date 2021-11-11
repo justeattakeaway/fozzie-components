@@ -1,6 +1,6 @@
 {
   "name": "@justeat/storybook",
-  "version": "0.46.0",
+  "version": "0.47.0",
   "scripts": {
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
@@ -37,7 +37,7 @@
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "license": "Apache-2.0",
   "repository": {

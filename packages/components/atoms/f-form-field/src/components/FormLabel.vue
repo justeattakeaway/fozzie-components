@@ -59,7 +59,7 @@ export default {
     },
     computed: {
         hasLabelText () {
-            return this.$slots.default && !!this.$slots.default[0].text.length;
+            return this.$slots.default && !!this.$slots.default[0].text?.length;
         },
 
         testId () {

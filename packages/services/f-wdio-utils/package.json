@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-wdio-utils",
   "description": "Fozzie Wdio Utils - webdriverIO page object",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "files": [
     "src/"
   ],
@@ -18,7 +18,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"

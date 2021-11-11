@@ -38,8 +38,8 @@ export default {
 
 .c-restaurantCard-cuisines-item {
     position: relative;
-    padding-right: spacing(x1.25);
-    margin-right: spacing(x0.6);
+    padding-right: spacing();
+    margin-right: spacing(x0.5);
     white-space: nowrap;
     font-size: $font-body-s-paragraph * 1px;
 
