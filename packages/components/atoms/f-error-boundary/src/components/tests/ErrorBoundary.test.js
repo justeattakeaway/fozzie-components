@@ -14,7 +14,7 @@ const createComponent = ({
     scopedSlots
 });
 
-describe('ModalDeliveryFeesInfo', () => {
+describe('ErrorBoundary', () => {
     const error = 'test error';
     const vm = 'test vm';
     const info = 'test info';
