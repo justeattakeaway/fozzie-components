@@ -8,7 +8,7 @@ v0.3.0
 *November 9, 2021*
 
 ### Added
-- Support for `<router-link>`
+- Support for `<router-link>` via `<f-link>` using to attribute
 
 ### Changed
 - Selected link remains a link

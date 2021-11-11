@@ -1,10 +1,10 @@
 <template>
     <ul
-        v-if="links.length"
+        v-if="filterLinks.length"
         :class="$style['c-navigationLinks']"
         data-test-id="navigationLinks">
         <li
-            v-for="({ id, href, to, name }, i) in links"
+            v-for="({ id, href, to, name }, i) in filterLinks"
             :key="i"
             :class="$style['c-navigationLinks-item']">
             <v-link
@@ -35,6 +35,12 @@ export default {
         links: {
             type: Array,
             default: () => []
+        }
+    },
+
+    computed: {
+        filterLinks () {
+            return this.links.filter(x => x.href || x.to);
         }
     }
 };
