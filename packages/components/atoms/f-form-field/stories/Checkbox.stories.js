@@ -43,7 +43,7 @@ export const CheckboxComponent = () => ({
             :value="value"
             :has-error="hasError"
             :is-grouped="isGrouped"
-            inputType="checkbox"
+            input-type="checkbox"
             :disabled="isDisabled"
             :assistiveText="assistiveText"/>`
 });
