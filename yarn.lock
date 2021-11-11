@@ -2384,6 +2384,14 @@
   dependencies:
     qwery "^4.0.0"
 
+"@justeat/f-form-field@4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.0.1.tgz#c6a868d39a3d3361af9e29b44f0d8bc21e30da8d"
+  integrity sha512-DSF1NJFKBb/tZDCCUyTGXcnKWC5FvPa9TIcCy0n57OLfQOJ9A53VfxVpRoW8VjlRZu/bl6nYx4kukZq+iHmx5Q==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "2.5.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
