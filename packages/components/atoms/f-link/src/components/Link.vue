@@ -3,6 +3,7 @@
         <component
             :is="linkType"
             :class="[
+                linkClass,
                 $style['o-link'], {
                     [$style['o-link--bold']]: isBold,
                     [$style['o-link--noDecoration']]: !hasTextDecoration,
@@ -12,7 +13,8 @@
                 }]"
             data-test-id="link-component"
             :aria-describedby="descriptionId"
-            v-bind="$attrs">
+            v-bind="bindAttrs()"
+        >
             <slot />
         </component>
         <span
@@ -33,13 +35,10 @@ let uid = 0;
 export default {
     name: 'VLink',
 
+    inheritAttrs: false,
+
     props: {
         isExternalSite: {
-            type: Boolean,
-            default: false
-        },
-
-        isRouterLink: {
             type: Boolean,
             default: false
         },
@@ -73,12 +72,12 @@ export default {
     data () {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-
         uid += 1;
 
         return {
             copy: { ...localeConfig },
-            uid: `link-${uid}-description`
+            uid: `link-${uid}-description`,
+            linkClass: ''
         };
     },
 
@@ -113,6 +112,18 @@ export default {
                 return 'router-link';
             }
             return 'a';
+        }
+    },
+
+    methods: {
+        /**
+         * Set data.linkClass attribute and bind all other $attrs to the component.
+         * linkClass added manually to nested component as inheritAttrs: false does not affect class bindings.
+         */
+        bindAttrs () {
+            const { 'link-class': linkClass = '', ...otherAttributes } = this.$attrs;
+            this.linkClass = linkClass;
+            return otherAttributes;
         }
     }
 };
