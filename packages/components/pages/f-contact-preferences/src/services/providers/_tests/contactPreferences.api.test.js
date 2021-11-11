@@ -65,14 +65,17 @@ describe('ContactPreferencesApi Provider', () => {
     describe('When creating a new instance', () => {
         it('should not throw error when instance is created with valid parameters', () => {
             // Act
-            const instance = () => new ContactPreferencesApi({
+            const createInstance = () => new ContactPreferencesApi({
                 httpClient: httpMock,
                 cookies: cookiesMock,
                 baseUrl: baseUrlMock
             });
 
             // Assert
-            expect(instance).not.toThrowError();
+            let instance;
+            expect(() => {
+                instance = createInstance();
+            }).not.toThrowError();
             expect(instance).toBeDefined();
         });
     });
