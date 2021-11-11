@@ -1,6 +1,5 @@
-const { CIRCLECI } = process.env;
 const video = require('wdio-video-reporter');
-const fileName = CIRCLECI ? 'circleci' : 'local';
+const fileName = process.env.CIRCLECI ? 'circleci' : 'local';
 
 exports.getTestConfiguration = () => require(`./${fileName}.config.js`);
 

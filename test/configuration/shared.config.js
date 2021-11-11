@@ -9,12 +9,13 @@ exports.testType = {
         specs: VS_DEBUGGER ? [SPEC_FILE] : [
             'test/component/*.component.spec.js'
         ]
-    } : []),
+    } : {}),
     ...(TEST_TYPE === 'a11y' ? {
         name: 'accessibility',
         services: ['chromedriver', 'percy'],
         specs: VS_DEBUGGER ? [SPEC_FILE] : [
-            'test/accessibility/axe-accessibility.spec.js']
+            'test/accessibility/axe-accessibility.spec.js'
+        ]
     } : {}),
     ...(TEST_TYPE === 'visual' ? {
         name: 'visual',
