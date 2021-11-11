@@ -79,7 +79,7 @@ describe('FormSelectionControl', () => {
 
         describe('testId ::', () => {
             describe('`attributes.name` is provided ::', () => {
-                it('should return an object using the `attribute.name`', async () => {
+                it('should return an object using the attribute name', async () => {
                     // Arrange
                     propsData.attributes = {
                         name: 'testCheckbox'
