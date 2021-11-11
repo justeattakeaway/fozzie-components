@@ -2196,6 +2196,13 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
+"@justeat/f-link@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-2.2.0.tgz#91a52ccf925bb971a1360adb9b19d531d8a2bb49"
+  integrity sha512-iq9XyTpfbMjWxoRRZjZxJCiVRTsZjWp1PD+9T5GzDnTGDROR9AvkCWi4VhZ7PPCXxG9pzhEXbB7mp2iiNEai8Q==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/f-mega-modal@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.0.tgz#2e635096c2a6a8fd7da308479a2126748716dcbf"

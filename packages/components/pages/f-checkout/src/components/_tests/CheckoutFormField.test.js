@@ -27,12 +27,41 @@ const $v = {
             email: false,
             $touch: jest.fn()
         }
+    },
+    [VALIDATIONS.address]: {
+        locality: {
+            $dirty: false,
+            required: true
+        },
+        line1: {
+            $dirty: false,
+            required: false
+        },
+        city: {
+            $dirty: false,
+            required: false
+        },
+        administrativeArea: {
+            $dirty: false,
+            required: true
+        },
+        postcode: {
+            $dirty: false,
+            required: true,
+            isValidPostcode: false
+        }
+    },
+    [VALIDATIONS.dineIn]: {
+        tableIdentifier: {
+            $dirty: false
+        }
     }
 };
 
 describe('CheckoutFormField', () => {
     const propsData = {
-        fieldName: 'firstName'
+        fieldName: 'firstName',
+        fieldType: 'customer'
     };
 
     it('should be defined', () => {
@@ -149,6 +178,7 @@ describe('CheckoutFormField', () => {
                         store: createStore(),
                         localVue,
                         propsData: {
+                            ...propsData,
                             fieldName: 'email'
                         },
                         provide: () => ({
@@ -177,6 +207,7 @@ describe('CheckoutFormField', () => {
                         store: createStore(),
                         localVue,
                         propsData: {
+                            ...propsData,
                             fieldName: 'email'
                         },
                         provide: () => ({
@@ -312,17 +343,21 @@ describe('CheckoutFormField', () => {
 
         describe('kebabCase ::', () => {
             it.each([
-                ['firstName', 'first-name'],
-                ['lastName', 'last-name'],
-                ['email', 'email']
-            ])('should convert `fieldName` value to kebab case', (fieldName, expected) => {
+                ['firstName', 'customer', 'first-name'],
+                ['lastName', 'customer', 'last-name'],
+                ['email', 'customer', 'email'],
+                ['line1', 'address', 'line-1'],
+                ['city', 'address', 'city'],
+                ['tableIdentifier', 'dineIn', 'table-identifier']
+            ])('should convert `fieldName` value to kebab case', (fieldName, fieldType, expected) => {
                 // Arrange & Act
                 const wrapper = shallowMount(CheckoutFormField, {
                     i18n,
                     store: createStore(),
                     localVue,
                     propsData: {
-                        fieldName
+                        fieldName,
+                        fieldType
                     },
                     provide: () => ({
                         $v
@@ -343,7 +378,10 @@ describe('CheckoutFormField', () => {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData,
+                    propsData: {
+                        fieldName: 'mobileNumber',
+                        fieldType: 'customer'
+                    },
                     provide: () => ({
                         $v
                     })
@@ -351,6 +389,24 @@ describe('CheckoutFormField', () => {
 
                 // Assert
                 expect(wrapper.vm.formattedMobileNumberForScreenReader).toEqual(expectedMobileNumber);
+            });
+        });
+
+        describe('groupedProps ::', () => {
+            it('should return props for grouped form fields', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(CheckoutFormField, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+
+                // Assert
+                expect(wrapper.vm.groupedProps).toMatchSnapshot();
             });
         });
     });
@@ -372,8 +428,7 @@ describe('CheckoutFormField', () => {
                     localVue,
                     propsData: {
                         ...propsData,
-                        fieldName,
-                        shouldValidateOnBlur: true
+                        fieldName
                     },
                     provide: () => ({
                         $v
