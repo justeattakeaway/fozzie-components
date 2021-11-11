@@ -48,7 +48,7 @@ export default {
         },
         attributes: {
             type: Object,
-            default: () => {}
+            default: () => ({})
         },
         inputType: {
             type: String,
