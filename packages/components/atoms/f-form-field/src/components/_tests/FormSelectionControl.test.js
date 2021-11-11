@@ -96,7 +96,7 @@ describe('FormSelectionControl', () => {
             });
 
             describe('`attributes.name` is not provided ::', () => {
-                it('should return a generic object without using the `attribute.name`', async () => {
+                it('should return a generic object without using the attribute name', async () => {
                     // Arrange
                     propsData.attributes = {
                         name: null
