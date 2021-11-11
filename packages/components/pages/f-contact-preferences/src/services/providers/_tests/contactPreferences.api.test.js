@@ -102,7 +102,7 @@ describe('ContactPreferencesApi Provider', () => {
             const expectedUri = `${baseUrlMock}/consumer/preferences`;
             const expectedHeaders = {
                 Authorization: `Bearer ${authTokenMock}`,
-                'x-je-conversation': `${conversationId}`
+                'x-je-conversation': conversationId
             };
 
             // Act
