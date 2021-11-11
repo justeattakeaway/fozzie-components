@@ -1,4 +1,4 @@
-import evaluateRestriction from '../src/lib/evaluateRestriction';
+import evaluateRestriction from '../../src/lib/evaluateRestriction';
 
 function expectTrue (restriction, context) {
     expect(evaluateRestriction(restriction, context)).toBe(true);
