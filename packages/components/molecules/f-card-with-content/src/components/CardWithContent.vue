@@ -23,23 +23,27 @@
         </p>
 
         <f-button
-            v-if="primaryButtonText"
+            v-if="primaryButton && primaryButton.text"
             button-size="large"
             button-type="primary"
             is-full-width
+            :href="primaryButton.href"
+            :to="primaryButton.to"
             :class="$style['c-cardWithContent-button']"
             @click.native="$emit('primary-button-click')">
-            {{ primaryButtonText }}
+            {{ primaryButton.text }}
         </f-button>
 
         <f-button
-            v-if="secondaryButtonText"
+            v-if="secondaryButton && secondaryButton.text"
             button-size="large"
             button-type="secondary"
             is-full-width
+            :href="secondaryButton.href"
+            :to="secondaryButton.to"
             :class="$style['c-cardWithContent-button']"
             @click.native="$emit('secondary-button-click')">
-            {{ secondaryButtonText }}
+            {{ secondaryButton.text }}
         </f-button>
     </card-component>
 </template>
@@ -65,13 +69,13 @@ export default {
             type: String,
             default: ''
         },
-        primaryButtonText: {
-            type: String,
-            default: ''
+        primaryButton: {
+            type: Object,
+            default: () => null
         },
-        secondaryButtonText: {
-            type: String,
-            default: ''
+        secondaryButton: {
+            type: Object,
+            default: () => null
         }
     }
 };

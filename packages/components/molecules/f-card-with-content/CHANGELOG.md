@@ -6,13 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.0
 ------------------------------
-*November 10, 2021*
+*November 11, 2021*
 
 ### Added
 - Heading
 - Description
 - Primary and secondary buttons
   - These emit events like `primary-button-click`
+  - Expect objects containing the properties:
+    - `text`
+    - (Optionally) `href`/`to` for rendering the button as an anchor or router-link.
 - Named slot for icon
 - Storybook story
 

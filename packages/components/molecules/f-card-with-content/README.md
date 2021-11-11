@@ -73,12 +73,12 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop                  | Type     | Default | Description                                                   |
-| --------------------- | -------- | ------- | ------------------------------------------------------------- |
-| `cardHeading`         | `String` | `''`    | If given, will render an `h1` tag within the card.            |
-| `cardDescription`     | `String` | `''`    | If given, will render a `p` tag below the heading.            |
-| `primaryButtonText`   | `String` | `''`    | If given, will render a primary button below the description. |
-| `secondaryButtonText` | `String` | `''`    | If given, will render a secondary button below the primary.   |
+| Prop                  | Type     | Default | Description                                        |
+| --------------------- | -------- | ------- | -------------------------------------------------- |
+| `cardHeading`         | `String` | `''`    | If given, will render an `h1` tag within the card. |
+| `cardDescription`     | `String` | `''`    | If given, will render a `p` tag below the heading. |
+| `primaryButton`       | `Object` | `null`  | If given, and contains the property `text`, will render a primary button below the description. Also supports `href`/`to` for using the button as an anchor or router-link. |
+| `secondaryButton`     | `Object` | `null`  | If given, and contains the property `text`, will render a secondary button below the primary. Also supports `href`/`to` for using the button as an anchor or router-link.   |
 
 ### Events
 
