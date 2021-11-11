@@ -23,16 +23,16 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build"<% if(config.isComponent) { %>,
-    "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js"<% } %><% if(config.isService) { %>,
-    "build": "vite build"<% } %><% if(config.isComponent) { %>,
+    "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
     "lint": "vue-cli-service lint"<% } else { %>,
+    "build": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\""<% } %>,
     "lint:fix": "yarn lint --fix"<% if(config.isComponent) { %>,
     "lint:style": "vue-cli-service lint:style"<% } else { %>,
@@ -45,8 +45,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],<% if(config.isComponent) { %>
   "dependencies": {
-    "@justeat/f-services": "1.7.0"<% if(config.needsTestingApiMocks) { %>,
-    "axios": "0.21.1"<% } %>
+    "@justeat/f-services": "1.7.0"
   },<% } %>
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
@@ -54,13 +53,15 @@
   "devDependencies": {
 <% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "0.4.0",
     "node-sass-magic-importer": "5.3.2",
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.4.6",
+    "@samhammer/vue-cli-plugin-stylelint": "2.1.0",
+    "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@vue/test-utils": "1.0.3"<% } else { %>    "vite": "2.6.9",
-    "core-js": "3.6.5",
+    "@vue/cli-plugin-unit-jest": "4.5.15",
+    "@vue/test-utils": "1.2.2"<% } else { %>    "vite": "2.6.13",
+    "core-js": "3.19.1",
     "eslint": "7.32.0",
-    "jest-extended": "0.11.5"<% } %>
+    "jest-extended": "0.11.5"<% } %><% if(config.needsTestingApiMocks) { %>,
+    "axios": "0.24.0"<%
+    } %>
   }
 }

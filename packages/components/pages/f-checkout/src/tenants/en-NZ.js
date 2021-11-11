@@ -9,12 +9,11 @@ const messages = {
     },
 
     formFields: {
-        order: {
+        dineIn: {
             tableIdentifier: {
                 label: 'Table number or name',
                 validationMessages: {
-                    required: 'Please include your table name/number',
-                    invalid: 'The table number/name exceeds the maximum length (12)'
+                    required: 'Please include your table name/number'
                 }
             }
         },
@@ -41,7 +40,8 @@ const messages = {
             email: {
                 label: 'Email',
                 validationMessages: {
-                    required: 'Please enter a valid email address'
+                    required: 'Please enter a valid email address',
+                    invalid: 'Please enter a valid email address'
                 }
             }
         },

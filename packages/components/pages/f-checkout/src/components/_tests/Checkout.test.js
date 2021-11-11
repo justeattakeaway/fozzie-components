@@ -90,10 +90,12 @@ const $v = {
             isValidPostcode: false
         }
     },
-    tableIdentifier: {
-        $dirty: false,
-        required: true,
-        maxLength: true
+    dineIn: {
+        tableIdentifier: {
+            $dirty: false,
+            required: true,
+            maxLength: true
+        }
     },
     $touch: jest.fn()
 };
@@ -369,113 +371,6 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        describe('formattedMobileNumberForScreenReader ::', () => {
-            it('should return the mobile number with spaces after every character', () => {
-                const expectedMobileNumber = '+ 4 4 7 1 1 1 1 1 1 1 1 1';
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.formattedMobileNumberForScreenReader).toEqual(expectedMobileNumber);
-            });
-        });
-
-        describe('isMobileNumberEmpty ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `false` if mobileNumber field has not been touched', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = false;
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberEmpty).toBeFalsy();
-            });
-
-            it('should return `true` if mobileNumber field has been touched but the field is empty', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberEmpty).toBeTruthy();
-            });
-
-            it('should return `false` if mobileNumber field has been touched and the field is not empty', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '123';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberEmpty).toBeFalsy();
-            });
-        });
-
-        describe('isMobileNumberInvalid ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `false` if mobileNumber field has not been touched', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = false;
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBeFalsy();
-            });
-
-            it('should return `false` if mobileNumber field has been touched and the field is empty', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBeFalsy();
-            });
-
-            it('should return `true` if mobileNumber field has been touched, the field is not empty, but the phone number is invalid', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '123';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBeTruthy();
-            });
-
-            it('should return `false` if mobileNumber field has been touched, and the phone number is valid', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '0711111111';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBeTruthy();
-            });
-        });
-
         describe('invalidFieldsSummary ::', () => {
             let wrapper;
 
@@ -631,37 +526,6 @@ describe('Checkout', () => {
                 // Assert
                 expect(errorSummaryContainer.exists()).toBe(true);
                 expect(errorSummaryContainer.classes('is-visuallyHidden')).toBe(true);
-            });
-        });
-
-        describe('isTableIdentifierEmpty ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `false` if tableIdentifier field has not been touched', () => {
-                // Act
-                wrapper.vm.$v.tableIdentifier.$dirty = false;
-
-                // Assert
-                expect(wrapper.vm.isTableIdentifierEmpty).toBeFalsy();
-            });
-
-            it('should return `true` if tableIdentifier field has been touched but tableIdentifier is empty', () => {
-                // Act
-                wrapper.vm.$v.tableIdentifier.$dirty = true;
-                wrapper.vm.$v.tableIdentifier.required = false;
-
-                // Assert
-                expect(wrapper.vm.isTableIdentifierEmpty).toBeTruthy();
             });
         });
 
@@ -2330,35 +2194,9 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(getMappedDataForUpdateCheckoutSpy).toHaveBeenCalled();
-                expect(mappedRequest[0].value).toEqual({
-                    dateOfBirth: 'Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)',
-                    firstName: 'John',
-                    lastName: 'Smith',
-                    phoneNumber: '0711111111'
-                });
+                expect(mappedRequest[0].value).toMatchSnapshot();
 
-                expect(mappedRequest[1].value).toEqual({
-                    location: {
-                        address: {
-                            administrativeArea: undefined,
-                            lines: [
-                                '1 Bristol Road',
-                                'Flat 1'
-                            ],
-                            locality: 'Bristol',
-                            postalCode: 'BS1 1AA'
-                        },
-                        geolocation: null
-                    },
-                    table: {},
-                    time: {
-                        asap: undefined,
-                        scheduled: {
-                            from: '',
-                            to: ''
-                        }
-                    }
-                });
+                expect(mappedRequest[1].value).toMatchSnapshot();
             });
 
             it('should map the request for age verification only successfully', async () => {
@@ -3654,50 +3492,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultCheckoutState.address.postcode, i18n.locale);
-            });
-        });
-
-        describe('updateCustomerDetails ::', () => {
-            it('should be called with new input value on user input', async () => {
-                // Arrange
-                const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                const newNumber = '+447111111112';
-
-                // Act
-                await wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(newNumber);
-                await wrapper.vm.$nextTick();
-
-                // Assert
-                expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ mobileNumber: newNumber });
-            });
-        });
-
-        describe('updateTableIdentifier ::', () => {
-            it('should be called with new input value on user input', async () => {
-                // Arrange
-                const updateTableIdentifierSpy = jest.spyOn(VueCheckout.methods, 'updateTableIdentifier');
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                const tableNumber = '10';
-
-                // Act
-                await wrapper.find('[data-test-id="formfield-table-identifier-input"]').setValue(tableNumber);
-                await wrapper.vm.$nextTick();
-
-                // Assert
-                expect(updateTableIdentifierSpy).toHaveBeenCalledWith(tableNumber);
             });
         });
 

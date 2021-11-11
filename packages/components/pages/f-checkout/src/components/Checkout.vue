@@ -46,54 +46,16 @@
 
                     <guest-block v-if="!isLoggedIn" />
 
-                    <form-field
-                        :value="customer.mobileNumber"
-                        name="mobile-number"
-                        maxlength="16"
-                        input-type="tel"
-                        :label-text="$t('formFields.customer.mobileNumber.label')"
-                        :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
-                        aria-describedby="mobile-number-error"
-                        :aria-invalid="isMobileNumberInvalid"
-                        :aria-label="formattedMobileNumberForScreenReader"
-                        @blur="formFieldBlur('mobileNumber')"
-                        @input="updateCustomerDetails({ mobileNumber: $event })">
-                        <template #error>
-                            <error-message
-                                v-if="isMobileNumberEmpty"
-                                id="mobile-number-error"
-                                data-js-error-message
-                                data-test-id="error-mobile-number-empty">
-                                {{ $t('formFields.customer.mobileNumber.validationMessages.required') }}
-                            </error-message>
-                            <error-message
-                                v-if="isMobileNumberInvalid"
-                                id="mobile-number-error"
-                                data-js-error-message
-                                data-test-id="error-mobile-number-invalid">
-                                {{ $t('formFields.customer.mobileNumber.validationMessages.invalid') }}
-                            </error-message>
-                        </template>
-                    </form-field>
+                    <checkout-form-field
+                        field-name="mobileNumber"
+                        field-type="customer"
+                        max-length="16" />
 
-                    <form-field
+                    <checkout-form-field
                         v-if="isCheckoutMethodDineIn"
-                        :value="tableIdentifier"
-                        input-type="text"
-                        name="table-identifier"
-                        :label-text="$t('formFields.order.tableIdentifier.label')"
-                        :has-error="isTableIdentifierEmpty"
-                        maxlength="12"
-                        @input="updateTableIdentifier($event)">
-                        <template #error>
-                            <error-message
-                                v-if="isTableIdentifierEmpty"
-                                data-js-error-message
-                                data-test-id="error-table-identifier-empty">
-                                {{ $t('formFields.order.tableIdentifier.validationMessages.required') }}
-                            </error-message>
-                        </template>
-                    </form-field>
+                        field-name="tableIdentifier"
+                        field-type="dineIn"
+                        max-length="12" />
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
@@ -143,7 +105,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import {
-    required, email, maxLength, requiredIf
+    required, email, requiredIf
 } from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
@@ -161,6 +123,7 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
 import AddressBlock from './Address.vue';
 import AgeVerification from './AgeVerification.vue';
+import CheckoutFormField from './CheckoutFormField.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
@@ -183,7 +146,6 @@ import {
     VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
-import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
@@ -212,6 +174,7 @@ export default {
         Alert,
         FButton,
         Card,
+        CheckoutFormField,
         CheckoutHeader,
         CheckoutTermsAndConditions,
         ErrorPage,
@@ -225,7 +188,6 @@ export default {
     mixins: [
         validationMixin,
         VueGlobalisationMixin,
-        checkoutValidationsMixin,
         loggerMixin
     ],
 
@@ -336,9 +298,14 @@ export default {
             get: () => this.$v.address
         });
 
-        Object.defineProperty($v, VALIDATIONS.guest, {
+        Object.defineProperty($v, VALIDATIONS.customer, {
             enumerable: true,
             get: () => this.$v.customer
+        });
+
+        Object.defineProperty($v, VALIDATIONS.dineIn, {
+            enumerable: true,
+            get: () => this.$v.dineIn
         });
 
         return { $v };
@@ -363,7 +330,7 @@ export default {
             'orderId',
             'restaurant',
             'serviceType',
-            'tableIdentifier',
+            'dineIn',
             'time',
             'userNote'
         ]),
@@ -371,22 +338,6 @@ export default {
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields'
         ]),
-
-        wasMobileNumberFocused () {
-            return this.$v.customer.mobileNumber.$dirty;
-        },
-
-        isMobileNumberEmpty () {
-            return this.wasMobileNumberFocused && !this.customer.mobileNumber;
-        },
-
-        isMobileNumberInvalid () {
-            return this.wasMobileNumberFocused && !this.isMobileNumberEmpty && !this.$v.customer.mobileNumber.isValidPhoneNumber;
-        },
-
-        isTableIdentifierEmpty () {
-            return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
-        },
 
         isCheckoutMethodDelivery () {
             return this.serviceType === CHECKOUT_METHOD_DELIVERY;
@@ -466,10 +417,6 @@ export default {
                 this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
         },
 
-        formattedMobileNumberForScreenReader () {
-            return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
-        },
-
         /**
          * If there is no fulfilment times available (errorFormType === noTimeAvailable)
          * redirect to search if the location cookie exists otherwise redirect to home.
@@ -541,8 +488,6 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
-            'updateCustomerDetails',
-            'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
             'updateAddress',
@@ -1067,7 +1012,7 @@ export default {
                     userNote: this.userNote,
                     geolocation: this.geolocation,
                     asap: this.hasAsapSelected,
-                    tableIdentifier: this.tableIdentifier
+                    tableIdentifier: this.dineIn.tableIdentifier
                 });
         }
     },
@@ -1076,12 +1021,9 @@ export default {
         const validationProperties = {
             customer: {
                 mobileNumber: {
-                    isValidPhoneNumber: this.isValidPhoneNumber
+                    required,
+                    mobileNumber: this.isValidPhoneNumber
                 }
-            },
-            tableIdentifier: {
-                required: requiredIf(() => this.isCheckoutMethodDineIn),
-                maxLength: maxLength(12)
             }
         };
 
@@ -1114,7 +1056,15 @@ export default {
                 },
                 postcode: {
                     required,
-                    isValidPostcode: this.isValidPostcode
+                    postcode: this.isValidPostcode
+                }
+            };
+        }
+
+        if (this.isCheckoutMethodDineIn) {
+            validationProperties.dineIn = {
+                tableIdentifier: {
+                    required
                 }
             };
         }

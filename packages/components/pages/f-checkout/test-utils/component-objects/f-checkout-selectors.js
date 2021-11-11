@@ -19,44 +19,51 @@ exports.ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description
 exports.ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
 exports.AGE_VERIFICATION_COMPONENT = '[data-test-id="checkout-age-verification-component"]';
 
+exports.AGE_VERIFICATION_COMPONENT = '[data-test-id="checkout-age-verification-component"]';
+exports.AGE_VERIFICATION_DAY_DROPDOWN = '[data-test-id="formfield-dob-day-dropdown-select"]';
+exports.AGE_VERIFICATION_MONTH_DROPDOWN = '[data-test-id="formfield-dob-month-dropdown-select"]';
+exports.AGE_VERIFICATION_YEAR_DROPDOWN = '[data-test-id="formfield-dob-year-dropdown-select"]';
+exports.AGE_VERIFICATION_ERROR = '[data-test-id="age-verification-error-message"]';
+exports.AGE_VERIFICATION_SUBMIT_BUTTON = '[data-test-id="age-verification-redirect-button"]';
+
 exports.FIELDS = {
     firstName: {
-        input: '[data-test-id="formfield-guest-first-name-input"]',
-        error: '[data-test-id="error-first-name-empty"]'
+        input: '[data-test-id="formfield-first-name-input"]',
+        error: '[data-test-id="error-first-name-required"]'
     },
     lastName: {
-        input: '[data-test-id="formfield-guest-last-name-input"]',
-        error: '[data-test-id="error-last-name-empty"]'
+        input: '[data-test-id="formfield-last-name-input"]',
+        error: '[data-test-id="error-last-name-required"]'
     },
     emailAddress: {
-        input: '[data-test-id="formfield-guest-email-input"]',
+        input: '[data-test-id="formfield-email-input"]',
         error: '[data-test-id="error-email-invalid"]'
     },
     mobileNumber: {
         input: '[data-test-id="formfield-mobile-number-input"]',
-        emptyError: '[data-test-id="error-mobile-number-empty"]',
+        emptyError: '[data-test-id="error-mobile-number-required"]',
         invalidError: '[data-test-id="error-mobile-number-invalid"]'
     },
     addressLine1: {
-        input: '[data-test-id="formfield-address-line-1-input"]',
-        error: '[data-test-id="error-address-line1-empty"]'
+        input: '[data-test-id="formfield-line-1-input"]',
+        error: '[data-test-id="error-line1-required"]'
     },
     addressLine2: {
-        input: '[data-test-id="formfield-address-line-2-input"]',
+        input: '[data-test-id="formfield-line-2-input"]',
         error: ''
     },
     addressLocality: {
-        input: '[data-test-id="formfield-address-locality-input"]',
-        error: '[data-test-id="error-address-locality-empty"]'
+        input: '[data-test-id="formfield-locality-input"]',
+        error: '[data-test-id="error-locality-required"]'
     },
     addressAdministrativeArea: {
-        input: '[data-test-id="formfield-address-administrative-area-input"]',
-        error: '[data-test-id="error-address-administrative-area-empty"]'
+        input: '[data-test-id="formfield-administrative-area-input"]',
+        error: '[data-test-id="error-administrative-area-required"]'
     },
     addressPostcode: {
-        input: '[data-test-id="formfield-address-postcode-input"]',
-        error: '[data-test-id="error-address-postcode-empty"]',
-        typeError: '[data-test-id="error-address-postcode-type-error"]'
+        input: '[data-test-id="formfield-postcode-input"]',
+        error: '[data-test-id="error-postcode-required"]',
+        typeError: '[data-test-id="error-postcode-invalid"]'
     },
     userNote: {
         input: '[data-test-id="formfield-note-textarea"]',
