@@ -1,6 +1,6 @@
-import createFeatureManagementInstance from '../src/index';
-import { setContextGetter } from '../src/contextGetter';
-import trackExperiment from '../src/trackExperiment';
+import createFeatureManagementInstance from '../../src/lib/index';
+import { setContextGetter } from '../../src/lib/contextGetter';
+import trackExperiment from '../../src/lib/trackExperiment';
 
 const expectations = require('./data/e2e-expectations.json');
 const config = require('./data/e2e-fmconfig-mixed.json');
@@ -11,7 +11,7 @@ const logger = {
     logInfo () {}
 };
 
-jest.mock('../src/trackExperiment');
+jest.mock('../src/lib/trackExperiment');
 
 describe('End-to-End Tests', () => {
     describe.each(expectations.expectations)('Expectation %# - ', ({
@@ -49,7 +49,6 @@ describe('End-to-End Tests', () => {
             expect(featureValue).toBe(expectedValue);
 
             if (expectedKey && expectedVariant) {
-
                 expect(trackExperiment).toHaveBeenCalled();
                 const trackingEventSent = trackExperiment.mock.calls[0][0];
 
