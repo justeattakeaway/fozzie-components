@@ -2,26 +2,29 @@
     <div
         data-test-id="contactPreferences">
         <card-component
-            v-if="!showErrorPage"
+            v-if="!showErrorPage && preferences.length"
             :card-heading="$t('heading')"
             is-page-content-wrapper
             has-outline>
             <form @submit.prevent="onFormSubmit">
                 <div
-                    v-for="{ email, key, sms } in preferences"
+                    v-for="{ key, emailEnabled, emailValue, smsEnabled, smsValue } in filteredPreferences"
                     :key="key">
-                    <h2 :class="$style['c-contactPreferences-subtitle']">
+                    <h2
+                        :class="$style['c-contactPreferences-subtitle']">
                         {{ $t(`${key}.subtitle`) }}
                     </h2>
-                    <fieldset :class="$style['c-contactPreferences-fieldset']">
+                    <fieldset
+                        :class="$style['c-contactPreferences-fieldset']">
                         <label>
                             <input
                                 type="checkbox"
-                                :disabled="!email.enabled"
-                                :checked="email.value">
+                                :disabled="!emailEnabled"
+                                :checked="emailValue"
+                                @change="updatePreferenceValue(key, Object.keys({ emailValue })[0], $event.target.checked)">
                             <span
                                 :class="{
-                                    [$style['c-contactPreferences-labelText--disabled']]: !email.enabled
+                                    [$style['c-contactPreferences-labelText--disabled']]: !emailEnabled
                                 }">
                                 {{ $t(`${key}.email`) }}
                                 <template v-if="$te(`${key}.emailDescription`)">
@@ -29,15 +32,15 @@
                                 </template>
                             </span>
                         </label>
-
                         <label>
                             <input
                                 type="checkbox"
-                                :disabled="!sms.enabled"
-                                :checked="sms.value">
+                                :disabled="!smsEnabled"
+                                :checked="smsValue"
+                                @change="updatePreferenceValue(key, Object.keys({ smsValue })[0], $event.target.checked)">
                             <span
                                 :class="{
-                                    [$style['c-contactPreferences-labelText--disabled']]: !sms.enabled
+                                    [$style['c-contactPreferences-labelText--disabled']]: !smsEnabled
                                 }">
                                 {{ $t(`${key}.sms`) }}
                                 <template v-if="$te(`${key}.smsDescription`)">
@@ -50,7 +53,9 @@
 
                 <f-button
                     button-type="primary"
-                    is-full-width>
+                    is-full-width
+                    action-type="submit"
+                    :is-loading="isFormSubmitting">
                     {{ $t('saveChangesButton') }}
                 </f-button>
             </form>
@@ -64,9 +69,8 @@
                 <h1>
                     {{ $t('errorMessages.errorHeading') }}
                 </h1>
-
                 <p>
-                    {{ $t(error.messageKey) }}
+                    {{ $t(error.messageKey) || 'TODO : no data message - simulate bad auth key' }}
                 </p>
             </card-component>
         </div>
@@ -74,19 +78,23 @@
 </template>
 
 <script>
-// Services
-import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import { mapActions, mapState, mapMutations } from 'vuex';
 
-// Components
+// Fozzie
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 
+// Internal
 import tenantConfigs from '../tenants';
 import { GetPreferencesError } from '../exceptions';
-import { mapToPreferencesViewModel } from '../services/mapping';
-import ContactPreferencesApi from '../services/providers/contactPreferencesApi';
+import ContactPreferencesApi from '../services/providers/contactPreferences.api';
+import {
+    UPDATE_PREFERENCE,
+    STOP_LOADING_SPINNER_EVENT
+} from '../constants';
 
 export default {
     name: 'ContactPreferences',
@@ -112,57 +120,83 @@ export default {
     data () {
         return {
             error: {},
-            preferences: [],
             showErrorPage: false,
             tenantConfigs,
-            contactPreferencesApi: new ContactPreferencesApi({ httpClient: this.$http, cookies: this.$cookies, baseUrl: this.smartGatewayBaseUrl })
+            contactPreferencesApi: new ContactPreferencesApi({
+                httpClient: this.$http,
+                cookies: this.$cookies,
+                baseUrl: this.smartGatewayBaseUrl
+            }),
+            isFormSubmitting: false
         };
     },
 
-    async mounted () {
-        try {
-            let data = {
-                preferencesVersionViewed: 0,
-                preferences: [
-                    {
-                        displayName: 'orderUpdates',
-                        email: true,
-                        key: 'orderUpdates',
-                        push: false,
-                        sms: true,
-                        sort: 0
-                    },
-                    {
-                        displayName: 'newsletter',
-                        email: false,
-                        key: 'newsletter',
-                        push: false,
-                        sms: false,
-                        sort: 0
-                    }
-                ]
-            };
+    computed: {
+        ...mapState('fContactPreferencesModule', [
+            'preferences'
+        ]),
 
-            if (this.authToken) {
-                data = await this.contactPreferencesApi.getPreferences('consumer/preferences', this.authToken);
-            } else {
-                this.$el.ownerDocument.defaultView.console.log('DEBUG-NO-TOKEN'); // eslint-disable-line
-            }
+        filteredPreferences () {
+            const filtered = this.preferences.filter(x => x.visible).sort((a, b) => a.sort - b.sort);
 
-            this.preferences = mapToPreferencesViewModel(data).preferences;
-        } catch (error) {
-            this.$el.ownerDocument.defaultView.console.log('DEBUG-ERROR', error); // eslint-disable-line
-            this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
+            return filtered;
         }
     },
 
+    async mounted () {
+        await this.initialise();
+    },
+
     methods: {
+        ...mapActions('fContactPreferencesModule', [
+            'loadPreferences',
+            'savePreferences'
+        ]),
+
+        ...mapMutations('fContactPreferencesModule', [
+            UPDATE_PREFERENCE
+        ]),
+
         handleErrorState (error) {
             this.showErrorPage = true;
             this.error = error;
         },
 
-        onFormSubmit () {}
+        updatePreferenceValue (key, field, value) {
+            this[UPDATE_PREFERENCE]({ key, field, value });
+        },
+
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
+        },
+
+        async initialise () {
+            try {
+                await this.loadPreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
+
+                this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
+            } catch (error) {
+                // DEBUG
+                console.log('DEBUG-ERROR-loadPreferences', error); // eslint-disable-line
+
+                this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
+            }
+        },
+
+        async onFormSubmit () {
+            this.setSubmittingState(true);
+
+            try {
+                await this.savePreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
+            } catch (error) {
+                // DEBUG
+                console.log('DEBUG-ERROR-savePreferences', error); // eslint-disable-line
+
+                this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
+            } finally {
+                this.setSubmittingState(false);
+            }
+        }
     }
 };
 </script>
