@@ -54,50 +54,6 @@ jest.mock('../../services/analytics', () => jest.fn().mockImplementation(() => (
     trackLowValueOrderExperiment: jest.fn()
 })));
 
-const $v = {
-    customer: {
-        mobileNumber: {
-            $dirty: false,
-            isValidPhoneNumber: false
-        },
-        firstName: {
-            $dirty: false
-        },
-        lastName: {
-            $dirty: false
-        },
-        email: {
-            $dirty: false,
-            email: false
-        }
-    },
-    address: {
-        locality: {
-            $dirty: false,
-            required: true
-        },
-        line1: {
-            $dirty: false,
-            required: false
-        },
-        administrativeArea: {
-            $dirty: false,
-            required: true
-        },
-        postcode: {
-            $dirty: false,
-            required: true,
-            isValidPostcode: false
-        }
-    },
-    tableIdentifier: {
-        $dirty: false,
-        required: true,
-        maxLength: true
-    },
-    $touch: jest.fn()
-};
-
 const $style = {
     'c-checkout-alert': 'c-checkout-alert'
 };
@@ -180,23 +136,6 @@ describe('Checkout', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('should have one form with method "post"', () => {
-        // Arrange
-        const wrapper = shallowMount(VueCheckout, {
-            i18n,
-            store: createStore(),
-            localVue,
-            propsData
-        });
-
-        // Act
-        const forms = wrapper.findAll('form');
-
-        // Assert
-        expect(forms.length).toBe(1);
-        expect(forms.wrappers[0].attributes('method')).toBe('post');
-    });
-
     describe('created :: ', () => {
         afterEach(() => {
             jest.clearAllMocks();
@@ -222,100 +161,6 @@ describe('Checkout', () => {
     });
 
     describe('data ::', () => {
-        describe('serviceType ::', () => {
-            const tableIdentifierSelector = '[data-test-id="formfield-table-identifier-input"]';
-
-            it('should display the address block if set to `delivery`', async () => {
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const addressBlock = wrapper.find('[data-test-id="address-block"]');
-
-                // Assert
-                expect(addressBlock.exists()).toBe(true);
-            });
-
-            it('should not display the address block if set to `collection`', async () => {
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const addressBlock = wrapper.find('[data-test-id="address-block"]');
-
-                // Assert
-                expect(addressBlock.exists()).toBe(false);
-            });
-
-            it('should not display the address block if set to `dinein`', async () => {
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const addressBlock = wrapper.find('[data-test-id="address-block"]');
-
-                // Assert
-                expect(addressBlock.exists()).toBe(false);
-            });
-
-            it('should display the table identifier input if set to `dinein`', async () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
-
-                // Assert
-                expect(tableIdentifierInput.exists()).toBe(true);
-            });
-
-            it('should not display the table identifier input if set to `collection`', async () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
-
-                // Assert
-                expect(tableIdentifierInput.exists()).toBe(false);
-            });
-
-            it('should not display the table identifier input if set to `delivery`', async () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const tableIdentifierInput = wrapper.find(tableIdentifierSelector);
-
-                // Assert
-                expect(tableIdentifierInput.exists()).toBe(false);
-            });
-        });
-
         describe('errorFormType ::', () => {
             it('should render the checkout form when its value is null', () => {
                 // Arrange & Act
@@ -369,302 +214,6 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        describe('formattedMobileNumberForScreenReader ::', () => {
-            it('should return the mobile number with spaces after every character', () => {
-                const expectedMobileNumber = '+ 4 4 7 1 1 1 1 1 1 1 1 1';
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.formattedMobileNumberForScreenReader).toEqual(expectedMobileNumber);
-            });
-        });
-
-        describe('isMobileNumberEmpty ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `false` if mobileNumber field has not been touched', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = false;
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberEmpty).toBeFalsy();
-            });
-
-            it('should return `true` if mobileNumber field has been touched but the field is empty', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberEmpty).toBeTruthy();
-            });
-
-            it('should return `false` if mobileNumber field has been touched and the field is not empty', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '123';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberEmpty).toBeFalsy();
-            });
-        });
-
-        describe('isMobileNumberInvalid ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `false` if mobileNumber field has not been touched', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = false;
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBeFalsy();
-            });
-
-            it('should return `false` if mobileNumber field has been touched and the field is empty', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBeFalsy();
-            });
-
-            it('should return `true` if mobileNumber field has been touched, the field is not empty, but the phone number is invalid', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '123';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBeTruthy();
-            });
-
-            it('should return `false` if mobileNumber field has been touched, and the phone number is valid', () => {
-                // Act
-                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
-                wrapper.vm.customer.mobileNumber = '0711111111';
-
-                // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBeTruthy();
-            });
-        });
-
-        describe('invalidFieldsSummary ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `null` if no fields have been touched', () => {
-                // Arrange & Act
-                $v.$dirty = false;
-
-                // Assert
-                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
-            });
-
-            it('should return `null` if all fields have been touched and are valid', () => {
-                // Arrange
-                const mockValidationState = {
-                    invalidFields: []
-                };
-
-                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
-                $v.dirty = true;
-
-                // Act
-                wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $v,
-                        $logger,
-                        $cookies
-                    }
-                });
-
-                // Assert
-                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
-            });
-
-            it('should return the error summary with the number of invalid fields when there are more than one', () => {
-                // Arrange
-                const mockValidationState = {
-                    invalidFields: [
-                        'customer.mobileNumber',
-                        'address.line1',
-                        'address.locality',
-                        'address.postcode'
-                    ]
-                };
-
-                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
-                $v.$dirty = true;
-
-                // Act
-                wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $v,
-                        $logger,
-                        $cookies
-                    }
-                });
-
-                // Assert
-                expect(wrapper.vm.invalidFieldsSummary).toMatchSnapshot();
-            });
-
-            it('should return the error summary with the number of invalid fields when there is only one', () => {
-                // Arrange
-                const mockValidationState = {
-                    invalidFields: [
-                        'customer.mobileNumber'
-                    ]
-                };
-
-                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
-                $v.$dirty = true;
-
-                // Act
-                wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $v,
-                        $logger,
-                        $cookies
-                    }
-                });
-
-                // Assert
-                expect(wrapper.vm.invalidFieldsSummary).toMatchSnapshot();
-            });
-
-            it('should not render the error summary when there are no errors', () => {
-                // Arrange & Act
-                wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $v,
-                        $logger,
-                        $cookies
-                    },
-                    computed: {
-                        invalidFieldsSummary () {
-                            return null;
-                        }
-                    }
-                });
-
-                const errorSummaryContainer = wrapper.find('[data-test-id="error-summary-container"]');
-
-                // Assert
-                expect(errorSummaryContainer.exists()).toBe(false);
-            });
-
-            it('should render the hidden error summary when there are errors', () => {
-                // Arrange & Act
-                wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $v,
-                        $logger,
-                        $cookies
-                    },
-                    computed: {
-                        invalidFieldsSummary () {
-                            return 'There are 7 errors in the form';
-                        }
-                    }
-                });
-
-                const errorSummaryContainer = wrapper.find('[data-test-id="error-summary-container"]');
-
-                // Assert
-                expect(errorSummaryContainer.exists()).toBe(true);
-                expect(errorSummaryContainer.classes('is-visuallyHidden')).toBe(true);
-            });
-        });
-
-        describe('isTableIdentifierEmpty ::', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-            });
-
-            it('should return `false` if tableIdentifier field has not been touched', () => {
-                // Act
-                wrapper.vm.$v.tableIdentifier.$dirty = false;
-
-                // Assert
-                expect(wrapper.vm.isTableIdentifierEmpty).toBeFalsy();
-            });
-
-            it('should return `true` if tableIdentifier field has been touched but tableIdentifier is empty', () => {
-                // Act
-                wrapper.vm.$v.tableIdentifier.$dirty = true;
-                wrapper.vm.$v.tableIdentifier.required = false;
-
-                // Assert
-                expect(wrapper.vm.isTableIdentifierEmpty).toBeTruthy();
-            });
-        });
-
         describe('isCheckoutMethodDelivery ::', () => {
             it('should return `true` if `serviceType` is set to Delivery', () => {
                 // Arrange and Act
@@ -2330,35 +1879,9 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(getMappedDataForUpdateCheckoutSpy).toHaveBeenCalled();
-                expect(mappedRequest[0].value).toEqual({
-                    dateOfBirth: 'Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)',
-                    firstName: 'John',
-                    lastName: 'Smith',
-                    phoneNumber: '0711111111'
-                });
+                expect(mappedRequest[0].value).toMatchSnapshot();
 
-                expect(mappedRequest[1].value).toEqual({
-                    location: {
-                        address: {
-                            administrativeArea: undefined,
-                            lines: [
-                                '1 Bristol Road',
-                                'Flat 1'
-                            ],
-                            locality: 'Bristol',
-                            postalCode: 'BS1 1AA'
-                        },
-                        geolocation: null
-                    },
-                    table: {},
-                    time: {
-                        asap: undefined,
-                        scheduled: {
-                            from: '',
-                            to: ''
-                        }
-                    }
-                });
+                expect(mappedRequest[1].value).toMatchSnapshot();
             });
 
             it('should map the request for age verification only successfully', async () => {
@@ -3160,113 +2683,11 @@ describe('Checkout', () => {
             });
         });
 
-        describe('scrollToFirstInlineError ::', () => {
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            it('should call `scrollToElement` with the first inline error and -100 offset', async () => {
-                // Arrange
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        message: alertCode
-                    }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
-                });
-
-                const scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
-
-                const firstErrorElement = document.querySelector('[data-js-error-message]');
-
-                // Act
-                wrapper.vm.scrollToFirstInlineError(firstErrorElement);
-
-                await wrapper.vm.$nextTick();
-
-                // Assert
-                expect(scrollToElementSpy).toHaveBeenCalledWith(firstErrorElement, { offset: -100 });
-            });
-        });
-
-        describe('isFormValid ::', () => {
-            let touchSpy;
-
-            beforeEach(() => {
-                touchSpy = jest.spyOn($v, '$touch');
-            });
-
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            it('should call `.touch()` ', () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-
-                wrapper.vm.isFormValid();
-
-                // Assert
-                expect(touchSpy).toBeCalled();
-            });
-
-            it('should return `true` if `$v` is valid', () => {
-                // Arrange
-                $v.$invalid = false;
-
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-
-                // Assert
-                expect(wrapper.vm.isFormValid()).toBeTruthy();
-            });
-
-            it('should return `false` if `$v` is invalid', () => {
-                // Arrange
-                $v.$invalid = true;
-
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
-
-                // Assert
-                expect(wrapper.vm.isFormValid()).toBeFalsy();
-            });
-        });
-
         describe('`onFormSubmit` ::', () => {
-            let isFormValidSpy;
             let updateMessageSpy;
-            let setSubmittingStateSpy;
-            let submitCheckoutSpy;
 
             beforeEach(() => {
-                isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
                 updateMessageSpy = jest.spyOn(VueCheckout.methods, 'updateMessage');
-                setSubmittingStateSpy = jest.spyOn(VueCheckout.methods, 'setSubmittingState');
-                submitCheckoutSpy = jest.spyOn(VueCheckout.methods, 'submitCheckout').mockImplementation();
             });
 
             it('should exist', () => {
@@ -3277,7 +2698,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $v,
                         $logger,
                         $cookies
                     }
@@ -3290,14 +2710,12 @@ describe('Checkout', () => {
             describe('when invoked', () => {
                 it('should make a call to `updateMessage`', async () => {
                     // Arrange
-                    isFormValidSpy.mockReturnValue(true);
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $v,
                             $logger,
                             $cookies
                         }
@@ -3310,40 +2728,14 @@ describe('Checkout', () => {
                     expect(updateMessageSpy).toHaveBeenCalled();
                 });
 
-                it('should call `setSubmittingState` first with `true` and then with `false`', async () => {
-                    // Arrange
-                    const wrapper = mount(VueCheckout, {
-                        store: createStore(),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $v,
-                            $logger,
-                            $cookies
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(setSubmittingStateSpy).toHaveBeenCalledTimes(2);
-                    expect(setSubmittingStateSpy).toHaveBeenNthCalledWith(1, true);
-                    expect(setSubmittingStateSpy).toHaveBeenLastCalledWith(false);
-                });
-
                 it('should make a call to `trackFormInteraction` so we can track the action type `submit`', async () => {
                     // Arrange
-                    isFormValidSpy.mockReturnValue(true);
-
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $v,
                             $logger,
                             $cookies
                         }
@@ -3357,133 +2749,11 @@ describe('Checkout', () => {
                         action: 'submit'
                     });
                 });
-
-                describe('AND the call to `isFormValid` is falsey', () => {
-                    it('should call `onInvalidCheckoutForm` so we can emit, track and log error information', async () => {
-                        // Arrange
-                        isFormValidSpy.mockReturnValue(false);
-                        const mockValidationState = {
-                            validFields: [
-                                'customer.mobileNumber',
-                                'address.line1',
-                                'address.locality',
-                                'address.postcode'
-                            ],
-                            invalidFields: []
-                        };
-
-                        jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
-
-                        const wrapper = mount(VueCheckout, {
-                            store: createStore(),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $v,
-                                $logger,
-                                $cookies
-                            }
-                        });
-
-                        const onInvalidCheckoutFormSpy = jest.spyOn(wrapper.vm, 'onInvalidCheckoutForm');
-
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect(onInvalidCheckoutFormSpy).toHaveBeenCalled();
-                    });
-
-                    it('should not call `submitCheckout`', async () => {
-                        // Arrange
-                        isFormValidSpy.mockReturnValue(false);
-                        const wrapper = mount(VueCheckout, {
-                            store: createStore(),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $v,
-                                $logger,
-                                $cookies
-                            }
-                        });
-
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect(submitCheckoutSpy).not.toHaveBeenCalled();
-                    });
-                });
-
-                describe('AND the call to `isFormValid` is truthy', () => {
-                    it('should not call `onInvalidCheckoutForm`', async () => {
-                        // Arrange
-                        isFormValidSpy.mockReturnValue(true);
-                        const mockValidationState = {
-                            validFields: [
-                                'customer.mobileNumber',
-                                'address.line1',
-                                'address.locality',
-                                'address.postcode'
-                            ],
-                            invalidFields: []
-                        };
-
-                        jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
-
-                        const wrapper = mount(VueCheckout, {
-                            store: createStore(),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $v,
-                                $logger,
-                                $cookies
-                            }
-                        });
-
-                        const onInvalidCheckoutFormSpy = jest.spyOn(wrapper.vm, 'onInvalidCheckoutForm');
-
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect(onInvalidCheckoutFormSpy).not.toHaveBeenCalled();
-                    });
-
-                    it('should call `submitCheckout`', async () => {
-                        // Arrange
-                        isFormValidSpy.mockReturnValue(true);
-                        const wrapper = mount(VueCheckout, {
-                            store: createStore(),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $v,
-                                $logger,
-                                $cookies
-                            }
-                        });
-
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect(submitCheckoutSpy).toHaveBeenCalled();
-                    });
-                });
             });
         });
 
         describe('`onInvalidCheckoutForm` ::', () => {
-            let isFormValidSpy;
             let validationState;
-            let getFormValidationStateSpy;
             let handleEventLoggingSpy;
 
             beforeEach(() => {
@@ -3499,9 +2769,7 @@ describe('Checkout', () => {
 
                 $cookies.get.mockReturnValue('ar511ar');
 
-                getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
-                getFormValidationStateSpy.mockReturnValue(validationState);
-                isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
+                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(validationState);
                 handleEventLoggingSpy = jest.spyOn(VueCheckout.methods, 'handleEventLogging').mockImplementation();
             });
 
@@ -3517,7 +2785,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $v,
                         $logger
                     }
                 });
@@ -3529,22 +2796,19 @@ describe('Checkout', () => {
             describe('when invoked', () => {
                 it('should make a call to `trackFormInteraction` with `inline_error` & `invalidFields`', async () => {
                     // Arrange
-                    isFormValidSpy.mockReturnValue(false);
-
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $v,
                             $logger,
                             $cookies
                         }
                     });
 
                     // Act
-                    await wrapper.vm.onFormSubmit();
+                    await wrapper.vm.onInvalidCheckoutForm(validationState);
 
                     // Assert
                     expect(wrapper.vm.checkoutAnalyticsService.trackFormInteraction).toHaveBeenCalledWith({
@@ -3555,22 +2819,19 @@ describe('Checkout', () => {
 
                 it(`should make a call to 'trackFormInteraction' with 'error' & '${ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE}`, async () => {
                     // Arrange
-                    isFormValidSpy.mockReturnValue(false);
-
                     const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
                         localVue,
                         propsData,
                         mocks: {
-                            $v,
                             $logger,
                             $cookies
                         }
                     });
 
                     // Act
-                    await wrapper.vm.onFormSubmit();
+                    await wrapper.vm.onInvalidCheckoutForm(validationState);
 
                     // Assert
                     expect(wrapper.vm.checkoutAnalyticsService.trackFormInteraction).toHaveBeenCalledWith({
@@ -3587,13 +2848,12 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $v,
                             $cookies
                         }
                     });
 
                     // Act
-                    await wrapper.vm.onInvalidCheckoutForm();
+                    await wrapper.vm.onInvalidCheckoutForm(validationState);
 
                     const expandedData = {
                         enteredPostcode: 'BS1 1AA',
@@ -3606,98 +2866,6 @@ describe('Checkout', () => {
                     // Assert
                     expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutValidationError', validationState, { ...expandedData, validationState });
                 });
-            });
-        });
-
-        describe('isValidPhoneNumber ::', () => {
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            it('should call `isValidPhoneNumber` from `f-services`', () => {
-                // Arrange
-                const isValidPhoneNumberSpy = jest.spyOn(validations, 'isValidPhoneNumber');
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                wrapper.vm.isValidPhoneNumber();
-
-                // Assert
-                expect(isValidPhoneNumberSpy).toHaveBeenCalledWith(defaultCheckoutState.customer.mobileNumber, i18n.locale);
-            });
-        });
-
-        describe('isValidPostcode ::', () => {
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            it('should call `isValidPostcode` from `f-services`', () => {
-                // Arrange
-                const isValidPostcodeSpy = jest.spyOn(validations, 'isValidPostcode');
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                wrapper.vm.isValidPostcode();
-
-                // Assert
-                expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultCheckoutState.address.postcode, i18n.locale);
-            });
-        });
-
-        describe('updateCustomerDetails ::', () => {
-            it('should be called with new input value on user input', async () => {
-                // Arrange
-                const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                const newNumber = '+447111111112';
-
-                // Act
-                await wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(newNumber);
-                await wrapper.vm.$nextTick();
-
-                // Assert
-                expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ mobileNumber: newNumber });
-            });
-        });
-
-        describe('updateTableIdentifier ::', () => {
-            it('should be called with new input value on user input', async () => {
-                // Arrange
-                const updateTableIdentifierSpy = jest.spyOn(VueCheckout.methods, 'updateTableIdentifier');
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DINEIN }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                const tableNumber = '10';
-
-                // Act
-                await wrapper.find('[data-test-id="formfield-table-identifier-input"]').setValue(tableNumber);
-                await wrapper.vm.$nextTick();
-
-                // Assert
-                expect(updateTableIdentifierSpy).toHaveBeenCalledWith(tableNumber);
             });
         });
 

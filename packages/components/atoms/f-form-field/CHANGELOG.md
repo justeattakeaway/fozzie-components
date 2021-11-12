@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.2.0
+------------------------------
+*November 11, 2021*
+
+### Added
+- Styled radio component.
+
+
+v4.1.0
+------------------------------
+*November 10, 2021*
+
+### Added
+- Styled checkbox component.
+
+
 v4.0.1
 ------------------------------
 *October 18, 2021*
