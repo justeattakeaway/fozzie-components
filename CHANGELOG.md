@@ -13,6 +13,14 @@ v5.3.1
 - small update of generator to reflect above changes.
 
 
+v5.3.1
+------------------------------
+*November 12, 2021*
+
+### Changed
+- Updated documentation for visual regression test setup.
+
+
 v5.3.0
 ------------------------------
 *November 9, 2021*
