@@ -72,7 +72,7 @@ export default {
     &:focus,
     &:hover,
     &.is-link-exactActive {
-        border-left: 2px solid $color-orange;
+        border-left: 2px solid $color-interactive-brand;
         text-decoration: none;
     }
     &.is-link-exactActive {
