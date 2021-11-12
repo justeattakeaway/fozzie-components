@@ -51,32 +51,6 @@ describe('FormSelectionControl', () => {
     });
 
     describe('computed ::', () => {
-        describe('isCheckbox ::', () => {
-            it('should return `true` when `inputType` is `checkbox`', async () => {
-                // Arrange
-                const wrapper = shallowMount(FormSelectionControl, { propsData, attrs });
-
-                // Act
-                const result = await wrapper.vm.isCheckbox;
-
-                // Assert
-                expect(result).toBe(true);
-            });
-
-            it('should return `false` when `inputType` is not `checkbox`', async () => {
-                // Arrange
-                propsData.inputType = 'radio';
-
-                const wrapper = shallowMount(FormSelectionControl, { propsData, attrs });
-
-                // Act
-                const result = await wrapper.vm.isCheckbox;
-
-                // Assert
-                expect(result).toBe(false);
-            });
-        });
-
         describe('testId ::', () => {
             describe('`attributes.name` is provided ::', () => {
                 it('should return an object using the attribute name', async () => {
