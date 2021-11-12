@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.2.1
+------------------------------
+*November 12, 2021*
+
+### Changed
+- `uniqueId` to include `id` attribute (if present).
+  - Otherwise the labels would all have the same `for` attribute and be attached to the first radio button.
+
+
 v4.2.0
 ------------------------------
 *November 11, 2021*
@@ -60,7 +69,7 @@ v2.2.0
 
 ### Changed
 - Stories to reflect our designs more accurately.
-- Small renamings to match the above. 
+- Small renamings to match the above.
 
 
 v2.1.0
