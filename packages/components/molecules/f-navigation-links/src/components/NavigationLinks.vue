@@ -67,7 +67,7 @@ export default {
     display: inline-block;
     padding: spacing() 0 spacing() spacing(x2);
     border-left: 2px solid $color-border-default;
-    color: $color-grey;
+    color: $color-content-link;
 
     &:focus,
     &:hover,
