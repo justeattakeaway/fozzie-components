@@ -29,6 +29,9 @@ const defaultCheckoutState = {
         id: '',
         total: 0
     },
+    dineIn: {
+        tableIndentifier: ''
+    },
     customer: {
         firstName: 'John',
         lastName: 'Smith',
@@ -77,9 +80,7 @@ const defaultCheckoutActions = {
     getAvailableFulfilment: jest.fn(),
     setAuthToken: jest.fn(),
     createGuestUser: jest.fn(),
-    updateAddressDetails: jest.fn(),
-    updateCustomerDetails: jest.fn(),
-    updateTableIdentifier: jest.fn(),
+    updateUserDetails: jest.fn(),
     updateFulfilmentTime: jest.fn(),
     getGeoLocation: jest.fn(),
     getBasket: jest.fn(),

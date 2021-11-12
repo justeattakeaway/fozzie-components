@@ -1,15 +1,15 @@
 import { shallowMount, mount } from '@vue/test-utils';
-
 import asyncUserDetails from './__mocks__/api.account.details.json';
 import {
     defaultData,
     defaultPropsData,
     mockGet,
-    setDesktopViewport,
-    setMobileViewport
+    desktopWidth,
+    mobileWidth
 } from './helpers/navigation';
 
 import Navigation from '../Navigation.vue';
+
 
 const $style = {
     'is-open': 'is-open',
@@ -19,6 +19,13 @@ const $style = {
 
 let wrapper;
 
+
+let mockWidth = desktopWidth;
+
+function setMobileViewport () { mockWidth = mobileWidth; }
+function setDesktopViewport () { mockWidth = desktopWidth; }
+
+
 jest.mock('@justeat/f-services', () => ({
     axiosServices: {
         createClient: () => ({
@@ -27,13 +34,11 @@ jest.mock('@justeat/f-services', () => ({
     },
     windowServices: {
         addEvent: jest.fn(),
-        getWindowWidth: jest.fn()
+        getWindowWidth: jest.fn(() => mockWidth)
     }
 }));
 
 describe('Navigation', () => {
-    beforeEach(setDesktopViewport);
-
     it('should be defined', () => {
         // Arrange & Act
         wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
@@ -42,6 +47,32 @@ describe('Navigation', () => {
         // Assert
         expect(wrapper.exists()).toBe(true);
     });
+
+    describe('computed:: ', () => {
+        describe('isBelowMid:: ', () => {
+            it('should set isBelowMid computed property to false for desktop', () => {
+                // Arrange & Act
+                setDesktopViewport();
+
+                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+                wrapper.setData(defaultData);
+
+                // Assert
+                expect(wrapper.vm.isBelowMid).toBeFalsy();
+            });
+
+            it('should set isBelowMid computed property to true for mobile', () => {
+                // Arrange & Act
+                setMobileViewport();
+                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+                wrapper.setData(defaultData);
+
+                // Assert
+                expect(wrapper.vm.isBelowMid).toBeTruthy();
+            });
+        });
+    });
+
 
     it('should show the delivery enquiry link in the navigation if `showDeliveryEnquiry: true` and the content is there', async () => {
         // Arrange
@@ -422,6 +453,50 @@ describe('Navigation', () => {
 
             // Assert
             expect(wrapper.find('[data-test-id="help-link"]').exists()).toBe(true);
+        });
+
+        describe('on mobile', () => {
+            beforeEach(setMobileViewport);
+
+            it('should have tabindex attribute of 0 when country selector panel is closed on mobile', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showHelpLink: true
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    navIsOpen: true,
+                    countrySelectorIsOpen: false
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="help-link"]').attributes('tabindex')).toBe('0');
+            });
+
+            it('should have tabindex attribute of -1 when country selector panel is open on mobile', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showHelpLink: true
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    navIsOpen: true,
+                    countrySelectorIsOpen: true
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="help-link"]').attributes('tabindex')).toBe('-1');
+            });
         });
     });
 
@@ -822,6 +897,46 @@ describe('Navigation', () => {
 
             // Assert
             expect(wrapper.find('[data-test-id="countrySelector-popover"]').attributes('aria-hidden')).toBeTruthy();
+        });
+
+        describe('on mobile', () => {
+            beforeEach(setMobileViewport);
+
+            it('should set the tabindex attribute of the toggle to -1 when countrySelectorIsOpen is true', async () => {
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showCountrySelector: true
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    countrySelectorIsOpen: true
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="action-button-component"]').attributes('tabindex')).toBe('-1');
+            });
+
+            it('should set the tabindex attribute of the toggle to 0 when countrySelectorIsOpen is false', async () => {
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showCountrySelector: true
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    countrySelectorIsOpen: false
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="action-button-component"]').attributes('tabindex')).toBe('0');
+            });
         });
     });
 });

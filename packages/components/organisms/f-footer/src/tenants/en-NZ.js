@@ -83,6 +83,11 @@ export default {
                     gtm: 'click_about_contact_us'
                 },
                 {
+                    url: 'https://careers.justeattakeaway.com/global/en/new-zealand',
+                    text: 'Careers',
+                    gtm: 'click_about_careers'
+                },
+                {
                     url: '/help',
                     text: 'Help Centre',
                     gtm: 'click_about_help'

@@ -3,10 +3,6 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
-import {
-    DEFAULT_FIELD_SIZE,
-    VALID_FIELD_SIZES
-} from '../src/constants';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -22,26 +18,17 @@ export const RadioComponent = () => ({
         labelText: {
             default: text('Label Text', 'Radio Label')
         },
-        fieldSize: {
-            default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
+        value: {
+            default: text('Value', 'radioLabel')
         },
         isDisabled: {
             default: select('isDisabled', [null, 'disabled'])
-        },
-        shouldShowLabelText: {
-            default: boolean('shouldShowLabelText', true)
         },
         hasError: {
             default: boolean('hasError', false)
         },
         isGrouped: {
             default: boolean('isGrouped', false)
-        },
-        labelDescription: {
-            default: text('Label Description', '')
-        },
-        labelDetails: {
-            default: text('Label Details', '')
         },
         assistiveText: {
             default: text('Assistive Text', '')
@@ -52,16 +39,12 @@ export const RadioComponent = () => ({
     },
     template:
         `<form-field
-            :locale="locale"
             :label-text="labelText"
-            input-type="radio"
-            :shouldShowLabelText="shouldShowLabelText"
-            :field-size="fieldSize"
+            :value="value"
             :has-error="hasError"
             :is-grouped="isGrouped"
+            input-type="radio"
             :disabled="isDisabled"
-            :labelDetails="labelDetails"
-            :labelDescription="labelDescription"
             :assistiveText="assistiveText"/>`
 });
 
