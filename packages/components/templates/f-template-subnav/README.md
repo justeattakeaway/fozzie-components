@@ -99,15 +99,13 @@ Example #2 (*navigation-links*)
 [
   {
     id: 'accountNavLinkInfo'  // Test Data Id
-    url: '/account/info',     // Url
+    to: '/account/info',      // `href` for `<a>`, or `to` for `<router-link>`
     name: 'Your account',     // Text Label
-    selected: false
   },
   {
     id: 'accountNavLinkOrderHistory',
-    url: '/order-history',
-    name: 'Your orders',
-    selected: true            // True indicates the currently selected item
+    href: '/order-history',    // `href` for `<a>`, or `to` for `<router-link>`
+    name: 'Your orders'
   }
 ]
 ```
