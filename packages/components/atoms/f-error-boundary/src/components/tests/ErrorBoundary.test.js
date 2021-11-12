@@ -71,7 +71,7 @@ describe('ErrorBoundary', () => {
         });
 
         describe('when `hideOnError` is true and `hasError` is true', () => {
-            it('should return slot props when values are set', async () => {
+            it('should not return slot props when values are set', async () => {
                 // Arrange
                 const hasError = true;
                 const computed = {
