@@ -33,16 +33,23 @@ describe('ErrorBoundary', () => {
             </div>`
         };
 
-        describe('when `hideOnError` is false and `hasError` is false', () => {
-            it('should return slot props when values are set', async () => {
+        describe.each([
+            [false, false],
+            [false, true],
+            [true, false],
+            [true, true]
+        ])('when `hideOnError` is %s and `hasError` is %s', (
+            hideOnError,
+            hasError
+        ) => {
+            it('should return expected slot props', async () => {
                 // Arrange
-                const hasError = false;
                 const computed = {
                     loggerPayload: () => loggerPayload
                 };
                 const propsData = {
                     tier,
-                    hideOnError: false
+                    hideOnError
                 };
                 const data = {
                     hasError,
@@ -61,49 +68,7 @@ describe('ErrorBoundary', () => {
                 await wrapper.setData(data);
 
                 // Assert
-                expect(wrapper.html()).toContain(`hasError: ${hasError}`);
-                expect(wrapper.html()).toContain(`error: ${error}`);
-                expect(wrapper.html()).toContain(`vm: ${vm}`);
-                expect(wrapper.html()).toContain(`info: ${info}`);
-                expect(wrapper.html()).toContain(`tier: ${tier}`);
-                expect(wrapper.html()).toContain(`loggerPayload: ${loggerPayload}`);
-            });
-        });
-
-        describe('when `hideOnError` is true and `hasError` is true', () => {
-            it('should not return slot props when values are set', async () => {
-                // Arrange
-                const hasError = true;
-                const computed = {
-                    loggerPayload: () => loggerPayload
-                };
-                const propsData = {
-                    tier,
-                    hideOnError: true
-                };
-                const data = {
-                    hasError,
-                    error,
-                    vm,
-                    info
-                };
-
-                // Act
-                const wrapper = createComponent({
-                    scopedSlots,
-                    computed,
-                    propsData
-                });
-
-                await wrapper.setData(data);
-
-                // Assert
-                expect(wrapper.html()).not.toContain(`hasError: ${hasError}`);
-                expect(wrapper.html()).not.toContain(`error: ${error}`);
-                expect(wrapper.html()).not.toContain(`vm: ${vm}`);
-                expect(wrapper.html()).not.toContain(`info: ${info}`);
-                expect(wrapper.html()).not.toContain(`tier: ${tier}`);
-                expect(wrapper.html()).not.toContain(`loggerPayload: ${loggerPayload}`);
+                expect(wrapper.html()).toMatchSnapshot();
             });
         });
     });
