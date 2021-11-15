@@ -4,7 +4,11 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-A page content card which can contain an image, heading, text, and (primary and secondary) buttons
+A page content card which can contain an image, heading, text, and (primary and secondary) buttons.
+The purpose of this component is to offer a reusable card with a common layout.
+This may also potentially prevent the need for a consuming component to directly reference `f-card`, `f-button`, and define the layout itself.
+
+The icon can be any image but it is recommended to use an icon from `f-vue-icons`, e.g., one of the bag icons.
 
 </div>
 
@@ -69,15 +73,31 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
+| Prop                  | Type     | Default | Description                                        |
+| --------------------- | -------- | ------- | -------------------------------------------------- |
+| `cardHeading`         | `String` | `''`    | If given, will render an `h1` tag within the card. |
+| `cardDescription`     | `String` | `''`    | If given, will render a `p` tag below the heading. |
+| `primaryButton`       | `Object` | `null`  | If given, and contains the property `text`, will render a primary button below the description. Also supports `href`/`to` for using the button as an anchor or router-link. |
+| `secondaryButton`     | `Object` | `null`  | If given, and contains the property `text`, will render a secondary button below the primary. Also supports `href`/`to` for using the button as an anchor or router-link.   |
 
 ### Events
 
 The events that can be subscribed to are as follows (if any):
 
-| Event | Description |
-| ----- | ----------- |
+| Event                    | Description                                   |
+| ------------------------ | --------------------------------------------- |
+| `primary-button-click`   | Emitted when the primary button is clicked.   |
+| `secondary-button-click` | Emitted when the secondary button is clicked. |
+
+
+### Slots
+
+The available slots are:
+
+| Slot name | Description                                    |
+| --------- | ---------------------------------------------- |
+| `icon`    | For displaying an icon at the top of the card. |
+
 
 ## Development
 
@@ -123,5 +143,3 @@ yarn test-component:chrome
 yarn test-a11y:chrome
 ```
 ## Documentation to be completed once module is in stable state.
-
-
