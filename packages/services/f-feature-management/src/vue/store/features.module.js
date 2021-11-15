@@ -6,8 +6,6 @@ export default {
     }),
 
     actions: {
-        getConfigJson: ({ state }) => state.configJson,
-
         update: ({ commit }, configJson) => {
             commit(SET_FM_CONFIG_JSON, configJson);
         }
