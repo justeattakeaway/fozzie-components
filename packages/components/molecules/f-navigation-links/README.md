@@ -75,13 +75,13 @@ The props that can be defined are as follows (if any):
 [
   {
       id: 'accountNavLinkInfo'  // Test Data Id
-      url: '/account/info',     // Url
+      to: '/account/info',      // `to` attribute will cause <f-link> to render a route-link component
       name: 'Your account',     // Text Label
       selected: false           // Indicates if the currently selected item
   },
   {
       id: 'accountNavLinkOrderHistory',
-      url: '/order-history',
+      href: '/order-history',   // `href` attribute will cause <f-link> to render an anchor link
       name: 'Your orders',
       selected: true
   }

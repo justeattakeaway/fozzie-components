@@ -1,18 +1,7 @@
 import asyncUserDetails from '../__mocks__/api.account.details.json';
 
 const desktopWidth = 1200;
-const desktopHeight = 1024;
 const mobileWidth = 375;
-const mobileHeight = 667;
-
-const resizeWindow = (x, y) => {
-    window.innerWidth = x;
-    window.innerHeight = y;
-    window.dispatchEvent(new Event('resize'));
-};
-
-const setDesktopViewport = () => resizeWindow(desktopWidth, desktopHeight);
-const setMobileViewport = () => resizeWindow(mobileWidth, mobileHeight);
 
 const defaultPropsData = {
     copy: {
@@ -94,6 +83,6 @@ export {
     defaultData,
     defaultPropsData,
     mockGet,
-    setDesktopViewport,
-    setMobileViewport
+    mobileWidth,
+    desktopWidth
 };

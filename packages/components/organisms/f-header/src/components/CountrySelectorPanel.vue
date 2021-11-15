@@ -1,9 +1,11 @@
 <template>
     <div
+        ref="countrySelectorPanel"
         :class="[
             $style['c-nav-container'],
             { [$style['is-visible']]: isOpen }
-        ]">
+        ]"
+        @focusout="watchTabFocus">
         <div :class="$style['c-countrySelector']">
             <header :class="$style['c-countrySelector-header']">
                 <f-button
@@ -11,7 +13,7 @@
                     is-icon
                     :class="$style['c-countrySelector-header-button']"
                     :aria-label="copy.countrySelector.goBackToMainMenu"
-                    @click="$emit('goBackButtonClick')">
+                    @click="$emit('closeCountrySelector')">
                     <arrow-icon :class="$style['c-countrySelector-goBackIcon']" />
                 </f-button>
 
@@ -38,9 +40,7 @@
                         }`'
                         :tabindex="isOpen ? 0 : -1"
                         :href="country.siteUrl"
-                        :class="$style['c-countrySelector-link']"
-                        @blur="$emit('blurOnLink')"
-                        @focus="$emit('focusOnLink')">
+                        :class="$style['c-countrySelector-link']">
                         <flag-icon
                             :country-code="country.flagKey"
                             :class="$style['c-nav-list-icon--flag']" />
@@ -75,12 +75,33 @@ export default {
         isOpen: {
             type: Boolean,
             default: false
+        },
+        isBelowMid: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         return {
             countries
         };
+    },
+    methods: {
+        /**
+         * Watch tab focus changes on non mobile version to trigger close event if the user tabs away from country selector panel
+         *
+         * @param {Object} e Event object.
+         */
+        watchTabFocus (e) {
+            const {
+                countrySelectorPanel
+            } = this.$refs;
+
+            const isFocusInPanel = countrySelectorPanel.contains(e.relatedTarget);
+            if (!isFocusInPanel && !this.isBelowMid) {
+                this.$emit('closeCountrySelector');
+            }
+        }
     }
 };
 </script>
