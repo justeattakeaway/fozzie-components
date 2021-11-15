@@ -25,7 +25,10 @@ const {
     AGE_VERIFICATION_MONTH_DROPDOWN,
     AGE_VERIFICATION_YEAR_DROPDOWN,
     AGE_VERIFICATION_SUBMIT_BUTTON,
-    AGE_VERIFICATION_ERROR
+    AGE_VERIFICATION_ERROR,
+    COURIER_ACCORDION_HEADER,
+    KITCHEN_ACCORDION_HEADER,
+    ORDER_ACCORDION_HEADER
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -83,6 +86,12 @@ module.exports = class Checkout extends Page {
     get ageVerificationError () { return $(AGE_VERIFICATION_ERROR); }
 
     get ageVerificationSubmitButton () { return $(AGE_VERIFICATION_SUBMIT_BUTTON); }
+
+    get courierAccordionHeader () { return $(COURIER_ACCORDION_HEADER); }
+
+    get kitchenAccordionHeader () { return $(KITCHEN_ACCORDION_HEADER); }
+
+    get orderAccordionHeader () { return $(ORDER_ACCORDION_HEADER); }
     /* eslint-enable class-methods-use-this */
 
     fields = {
@@ -120,8 +129,16 @@ module.exports = class Checkout extends Page {
             get error () { return $(FIELDS.addressPostcode.error); },
             get typeError () { return $(FIELDS.addressPostcode.typeError); }
         },
-        userNote: {
-            get input () { return $(FIELDS.userNote.input); },
+        courierNote: {
+            get input () { return $(FIELDS.courierNote.input); },
+            get error () { return ''; }
+        },
+        kitchenNote: {
+            get input () { return $(FIELDS.kitchenNote.input); },
+            get error () { return ''; }
+        },
+        orderNote: {
+            get input () { return $(FIELDS.orderNote.input); },
             get error () { return ''; }
         },
         tableIdentifier: {
@@ -261,7 +278,6 @@ module.exports = class Checkout extends Page {
     * @param {String} customerInfo.postcode Postcode of the user's address - delivery service type.
     * @param {String} customerInfo.orderTime Time of user's requested delivery/collection/dine-in time.
     * @param {String} customerInfo.tableIdentifier Table number of user.
-    * @param {String} customerInfo.note The user's extra note.
     */
     populateCheckoutForm (checkoutInfo, customerInfo) {
         if (!checkoutInfo.isAuthenticated) {
@@ -283,10 +299,6 @@ module.exports = class Checkout extends Page {
 
         if (customerInfo.orderTime) {
             this.selectOrderTime(customerInfo.orderTime);
-        }
-
-        if (customerInfo.userNote) {
-            this.fields.userNote.input.setValue(customerInfo.userNote);
         }
     }
 
@@ -398,5 +410,18 @@ module.exports = class Checkout extends Page {
 
     submitAgeVerification () {
         this.ageVerificationSubmitButton.click();
+    }
+
+    /**
+    * @description
+    * Clicks accordion header of delivery notes and sets the value of the text area
+    *
+    * @param {String} header The accordion header to be opened
+    * @param {String} noteType The note type to be populated
+    * @param {String} note The value of the note
+    */
+    expandAndPopulateNote (header, noteType, note) {
+        this[header].click();
+        this.fields[noteType].input.setValue(note);
     }
 };

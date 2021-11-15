@@ -53,6 +53,8 @@ Object {
       "type": "information",
     },
   ],
+  "notes": Object {},
+  "notesConfiguration": Object {},
   "notices": Array [
     Object {
       "notice": Object {
@@ -71,6 +73,5 @@ Object {
     "from": "",
     "to": "",
   },
-  "userNote": "",
 }
 `;

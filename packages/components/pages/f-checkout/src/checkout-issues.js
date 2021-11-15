@@ -39,6 +39,21 @@ const checkoutIssues = {
         shouldRedirectToMenu: false
     },
 
+    KITCHEN_NOTE_NOT_ACCEPTED: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: false
+    },
+
+    ORDER_NOTE_NOT_ACCEPTED: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: false
+    },
+
+    COURIER_NOTE_NOT_ACCEPTED: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: false
+    },
+
     GENERIC_CHECKOUT_ISSUE: {
         shouldShowInDialog: true,
         shouldRedirectToMenu: false

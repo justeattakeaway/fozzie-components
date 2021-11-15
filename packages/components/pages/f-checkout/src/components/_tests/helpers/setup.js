@@ -60,7 +60,8 @@ const defaultCheckoutState = {
     authToken: '',
     isLoggedIn: false,
     errors: [],
-    userNote: 'No ketchup, please.',
+    notesConfiguration: {},
+    notes: { courier: 'Please do not knock', kitchen: 'No ketchup please' },
     geolocation: null
 };
 
@@ -89,8 +90,7 @@ const defaultCheckoutActions = {
     placeOrder: jest.fn(),
     getCustomerName: jest.fn(),
     updateHasAsapSelected: jest.fn(),
-    getUserNote: jest.fn(),
-    saveUserNote: jest.fn(),
+    getNotesConfiguration: jest.fn(),
     updateDateOfBirth: jest.fn()
 };
 

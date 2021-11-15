@@ -62,6 +62,7 @@ import AgeVerification from './AgeVerification.vue';
 import CheckoutFormField from './CheckoutFormField.vue';
 import CheckoutForm from './CheckoutForm.vue';
 import CheckoutHeader from './Header.vue';
+import CheckoutNotes from './Notes.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
@@ -109,6 +110,7 @@ export default {
         CheckoutFormField,
         CheckoutForm,
         CheckoutHeader,
+        CheckoutNotes,
         CheckoutTermsAndConditions,
         ErrorPage,
         ErrorDialog
@@ -201,6 +203,11 @@ export default {
         getCustomerUrl: {
             type: String,
             required: true
+        },
+
+        getNoteConfigUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -235,7 +242,7 @@ export default {
             'serviceType',
             'dineIn',
             'time',
-            'userNote'
+            'notes'
         ]),
 
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -385,10 +392,9 @@ export default {
             'setAuthToken',
             'updateCheckout',
             'updateMessage',
-            'updateUserNote',
+            'updateUserNotes',
             'updateAddress',
-            'getUserNote',
-            'saveUserNote'
+            'getNotesConfiguration'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
@@ -403,8 +409,8 @@ export default {
             this.setExperimentValues(this.experiments);
 
             const promises = this.isLoggedIn
-                ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
+                ? [this.loadBasket(), this.loadCheckout(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()]
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
 
@@ -416,8 +422,6 @@ export default {
             if (this.shouldLoadCustomer) {
                 await this.loadCustomer();
             }
-
-            this.getUserNote();
         },
 
         /**
@@ -439,8 +443,6 @@ export default {
          */
         async submitCheckout () {
             try {
-                this.saveUserNote();
-
                 if (!this.isLoggedIn && !this.isGuestCreated) {
                     await this.setupGuestUser();
                 }
@@ -557,7 +559,7 @@ export default {
                 const data = {
                     basketId: this.basket.id,
                     customerNotes: {
-                        NoteForRestaurant: this.userNote
+                        ...this.notes
                     },
                     referralState: this.getReferralState()
                 };
@@ -837,11 +839,26 @@ export default {
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                     isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
                     time: this.time,
-                    userNote: this.userNote,
+                    userNote: this.notes,
                     geolocation: this.geolocation,
                     asap: this.hasAsapSelected,
                     tableIdentifier: this.dineIn.tableIdentifier
                 });
+        },
+
+        async loadNotesConfiguration () {
+            try {
+                await this.getNotesConfiguration({
+                    url: this.getNoteConfigUrl,
+                    timeout: this.checkoutTimeout
+                });
+            } catch (error) {
+                this.logInvoker({
+                    message: 'Notes configuration failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logWarn
+                });
+            }
         }
     }
 };

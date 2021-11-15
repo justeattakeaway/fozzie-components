@@ -89,6 +89,7 @@ describe('Checkout', () => {
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
     const getCustomerUrl = 'http://localhost/getcustomer';
+    const getNoteConfigUrl = 'http://localhost/getNoteConfig';
     const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
 
@@ -105,6 +106,7 @@ describe('Checkout', () => {
         getGeoLocationUrl,
         getCustomerUrl,
         applicationName,
+        getNoteConfigUrl,
         otacToAuthExchanger
     };
 
@@ -2941,7 +2943,7 @@ describe('Checkout', () => {
                     data: {
                         basketId,
                         customerNotes: {
-                            NoteForRestaurant: defaultCheckoutState.userNote
+                            ...defaultCheckoutState.notes
                         },
                         referralState: 'MockReferralState'
                     },

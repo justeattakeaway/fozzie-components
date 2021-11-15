@@ -21,6 +21,12 @@ describe('f-checkout "delivery" component tests', () => {
             // Assert
             expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
         });
+
+        it('should open the combined notes accordion and populate it', () => {
+            checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is an order note');
+
+            checkout.goToPayment();
+        });
     });
 
     describe('au tenant', () => {
@@ -85,5 +91,25 @@ describe('f-checkout "delivery" component tests', () => {
                 expect(checkout.isAgeVerificationErrorDisplayed()).toBe(true);
             });
         });
+    });
+});
+
+describe('f-checkout "delivery" - split notes - component tests', () => {
+    beforeEach(() => {
+        checkout = new Checkout();
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Note types', 'get-notes-config-split');
+
+        checkout.load();
+        checkout.waitForComponent();
+    });
+
+    it('should open both delivery and kitchen notes accordions and populate them', () => {
+        // Assert
+        checkout.expandAndPopulateNote('courierAccordionHeader', 'courierNote', 'This is a delivery note');
+        checkout.expandAndPopulateNote('kitchenAccordionHeader', 'kitchenNote', 'This is a kitchen note');
+        checkout.goToPayment();
     });
 });

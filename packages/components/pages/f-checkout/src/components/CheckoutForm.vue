@@ -31,17 +31,7 @@
 
         <form-selector :key="availableFulfilmentTimesKey" />
 
-        <form-field
-            :label-text="$t(`userNote.${serviceType}.title`)"
-            input-type="textarea"
-            :placeholder="$t(`userNote.${serviceType}.placeholder`)"
-            :value="userNote"
-            cols="30"
-            rows="7"
-            maxlength="200"
-            name="note"
-            :label-description="$t(`userNote.${serviceType}.text`)"
-            @input="updateUserNote($event)" />
+        <checkout-notes />
 
         <f-button
             :class="[
@@ -65,12 +55,12 @@ import { validationMixin } from 'vuelidate';
 import {
     required, email, requiredIf
 } from 'vuelidate/lib/validators';
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-import FormField from '@justeat/f-form-field';
-import '@justeat/f-form-field/dist/f-form-field.css';
 import { validations } from '@justeat/f-services';
+import CheckoutNotes from './Notes.vue';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import EventNames from '../event-names';
 import AddressBlock from './Address.vue';
 import CheckoutFormField from './CheckoutFormField.vue';
@@ -83,7 +73,7 @@ export default {
         AddressBlock,
         FButton,
         CheckoutFormField,
-        FormField,
+        CheckoutNotes,
         FormSelector,
         GuestBlock
     },
@@ -158,7 +148,7 @@ export default {
             'serviceType',
             'dineIn',
             'time',
-            'userNote'
+            'notes'
         ]),
 
         invalidFieldsSummary () {
@@ -178,9 +168,6 @@ export default {
     },
 
     methods: {
-        ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateUserNote'
-        ]),
 
         /**
          * Scroll to the first inline error, no matter which one it is.

@@ -1,6 +1,8 @@
 import checkoutDeliveryUk from './uk/checkout-delivery.json';
 import checkoutDeliveryAu from './au/checkout-delivery.json';
 import checkoutDeliveryNz from './nz/checkout-delivery.json';
+import checkoutWithDeliveryAndKitchenNoteTypes from './uk/checkout-delivery-split-notes-courier-kitchen.json';
+import checkoutWithDeliveryNoteType from './uk/checkout-delivery-split-notes-courier.json';
 import checkoutDeliveryUserSelectedAsap from './checkout-delivery-user-selected-asap.json';
 import checkoutDeliveryUserSelectedLater from './checkout-delivery-user-selected-later.json';
 import checkoutDeliveryUserSelectedUnavailableTime from './checkout-delivery-user-selected-unavailable-time.json';
@@ -35,6 +37,8 @@ import checkout500GetError from './checkout-500-get-error.json';
 import getGeoLocation from './get-geo-location.json';
 import getCustomer from './get-customer.json';
 import getBasketDeliveryAgeRestricted from './get-basket-delivery-age-restriction.json';
+import splitNotesConfig from './get-notes-config-split.json';
+import nonSplitNotesConfig from './get-notes-config.json';
 
 const httpStatusCodes = {
     noResponse: 0,
@@ -56,6 +60,18 @@ const requestDefinitions = {
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: checkoutDeliveryUk
+    },
+    checkoutDeliverySplitNotesKitchenAndCourier: {
+        url: './uk/checkout-delivery-split-notes-courier-kitchen.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: checkoutWithDeliveryAndKitchenNoteTypes
+    },
+    checkoutDeliverySplitNotesCourier: {
+        url: './uk/checkout-delivery-split-notes-courier.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: checkoutWithDeliveryNoteType
     },
     checkoutDeliveryAu: {
         url: '/au/checkout-delivery.json',
@@ -292,6 +308,18 @@ const requestDefinitions = {
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: getBasketDeliveryAgeRestricted
+    },
+    getSplitNotesConfig: {
+        url: '/get-notes-config-split.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: splitNotesConfig
+    },
+    getNonSplitNotesConfig: {
+        url: '/get-notes-config.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: nonSplitNotesConfig
     }
 };
 
