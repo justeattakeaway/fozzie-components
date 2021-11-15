@@ -39,14 +39,12 @@ const mockLogger = {
     logInfo: jest.fn()
 };
 
-function createSUT () {
-    return new FeaturesService(mockStore, {
-        httpClient: mockHttpClient,
-        cookies: mockCookies,
-        analytics: mockAnalytics,
-        logger: mockLogger
-    });
-}
+const createSUT = () => new FeaturesService(mockStore, {
+    httpClient: mockHttpClient,
+    cookies: mockCookies,
+    analytics: mockAnalytics,
+    logger: mockLogger
+});
 
 describe('Feature Service tests', () => {
     it('initialises correctly', () => {

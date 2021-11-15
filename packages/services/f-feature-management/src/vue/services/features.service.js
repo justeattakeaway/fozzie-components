@@ -57,9 +57,9 @@ function createSettings (store, serviceStore, cookies, analytics, logger) {
 function createLoggerWrapper (store, logger) {
     const tags = ['feature-management'];
     return {
-        logInfo: message => logger && logger.logInfo(message, store, { tags }),
-        logWarn: message => logger && logger.logWarn(message, store, { tags }),
-        logError: message => logger && logger.logError(message, store, { tags })
+        logInfo: message => logger?.logInfo(message, store, { tags }),
+        logWarn: message => logger?.logWarn(message, store, { tags }),
+        logError: message => logger?.logError(message, store, { tags })
     };
 }
 
