@@ -23,14 +23,13 @@ export default {
 
             const { preferences, preferenceVersionViewed } = mapToPreferencesViewModel(data);
 
-            commit(UPDATE_PREFERENCE_VERSION, preferenceVersionViewed);
-
             const filteredPreferences = filterSortPreferences(preferences);
 
             if (!filteredPreferences.length) {
                 throw new Error('No Preference Data (filtered)');
             }
 
+            commit(UPDATE_PREFERENCE_VERSION, preferenceVersionViewed);
             commit(UPDATE_PREFERENCES, filteredPreferences);
         },
 

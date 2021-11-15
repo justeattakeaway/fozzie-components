@@ -73,7 +73,7 @@
                     {{ $t('errorMessages.errorHeading') }}
                 </h1>
                 <p>
-                    {{ $t(error.messageKey) || 'TODO : no data message - simulate bad auth key' }}
+                    {{ $t(error.messageKey) }}
                 </p>
             </card-component>
         </div>

@@ -50,16 +50,18 @@ describe('ContactPreferences Store', () => {
                 expect(getPreferencesMock).toHaveBeenCalledWith(token);
             });
 
-            it(`should call the ${UPDATE_PREFERENCES} mutation with the correctly filtered/sorted data`, async () => {
+            it(`should call ${UPDATE_PREFERENCE_VERSION} & ${UPDATE_PREFERENCES} mutations with the correctly data`, async () => {
                 // Arrange
                 const commitSpy = jest.fn();
-                const expected = contactPreferencesViewModel.preferences.filter(e => !!e.visible);
+                const expectedVersion = contactPreferencesViewModel.preferenceVersionViewed;
+                const expectedPreferences = contactPreferencesViewModel.preferences.filter(e => !!e.visible);
 
                 // Act
                 await contactPreferencesModule.actions.loadPreferences({ commit: commitSpy }, { api: httpClientMock, authToken: token });
 
                 // Assert
-                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_PREFERENCES, expected);
+                expect(commitSpy).toHaveBeenCalledWith(UPDATE_PREFERENCE_VERSION, expectedVersion);
+                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_PREFERENCES, expectedPreferences);
             });
         });
 
