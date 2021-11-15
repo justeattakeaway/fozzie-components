@@ -67,9 +67,15 @@ function createLoggerWrapper (store, logger) {
  * Vue-friendly service for configuring and providing a Feature Management plugin with its own VueX store
  */
 export default class FeaturesService {
-    constructor (store, {
-        httpClient, cookies, analytics, logger
-    }) {
+    constructor (
+        store,
+        {
+            httpClient,
+            cookies,
+            analytics,
+            logger
+        }
+    ) {
         this.store = store;
 
         store.registerModule(namespace, featuresModule, { preserveState: !!this.serviceStore });
