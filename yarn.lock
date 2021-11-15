@@ -2204,17 +2204,15 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-link@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-2.2.0.tgz#91a52ccf925bb971a1360adb9b19d531d8a2bb49"
-  integrity sha512-iq9XyTpfbMjWxoRRZjZxJCiVRTsZjWp1PD+9T5GzDnTGDROR9AvkCWi4VhZ7PPCXxG9pzhEXbB7mp2iiNEai8Q==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-mega-modal@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.0.tgz#2e635096c2a6a8fd7da308479a2126748716dcbf"
   integrity sha512-ZbAgBrqn3a2furQ5F0FLffbsMZar9aIDsRG/2uWnsv6uY0KIHgJi08kH2XK5NzDzckHih2uMN37JiYpQMw6rNQ==
+
+"@justeat/f-navigation-links@0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-0.2.1.tgz#badc3af5e498da0a8e9fb835fe612d5f24edc2b2"
+  integrity sha512-v3LM7ZUTwr0aIRKY+xUHQQm3nw5+U9V5cCUI2rxOwFu7E2VyHRgMebICdviPDTzI5NemSUC1mPPle18YQ6ET6A==
 
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"

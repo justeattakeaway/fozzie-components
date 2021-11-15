@@ -85,7 +85,7 @@ import '@justeat/f-card/dist/f-card.css';
 
 import tenantConfigs from '../tenants';
 import { GetPreferencesError } from '../exceptions';
-import { mapToPreferencesViewModel } from '../services/mapping';
+import { mapToPreferencesViewModel } from '../services/mapping/contactPreferences.mapper';
 
 export default {
     name: 'ContactPreferences',
