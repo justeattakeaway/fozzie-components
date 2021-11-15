@@ -3,28 +3,22 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import ContactPreferences from '../ContactPreferences.vue';
 import tenantConfigs from '../../tenants';
-// import {
-//     STOP_LOADING_SPINNER_EVENT
-// } from '../../constants';
-// import {
-//     baseUrl,
-//     token,
-//     conversationId,
-//     contactPreferencesUpdateBody
-// } from '../../../../test-utils/setup';
+import {
+    UPDATE_PREFERENCE
+} from '../../constants';
+import {
+    contactPreferencesViewModel
+} from '../../../test-utils/setup';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
 let wrapper;
-const spinnerEventSpy = jest.fn();
-const cookiesSpy = jest.fn();
-const httpSpy = jest.fn();
-const storeActions = {
-    loadPreferences: jest.fn(),
-    savePreferences: jest.fn()
-};
+let cookiesSpy;
+let httpSpy;
+let sutMocks;
+let sutProps;
 const baseUrlMock = 'https://smartGatewayBaseUrl.com';
 const authTokenMock = 'some-auth-token';
 
@@ -35,25 +29,20 @@ const i18n = {
     }
 };
 
-const storeState = {
-    preferences: [],
-    preferenceVersionViewed: 0
+const storeMutations = {
+    [UPDATE_PREFERENCE]: jest.fn()
 };
 
-const sutMocks = {
-    $parent: {
-        $emit: spinnerEventSpy
-    },
-    $http: httpSpy,
-    $cookies: cookiesSpy
+const storeActions = {
+    loadPreferences: jest.fn(),
+    savePreferences: jest.fn()
 };
 
-const sutProps = {
-    authToken: authTokenMock,
-    smartGatewayBaseUrl: baseUrlMock
-};
+const storeState = contactPreferencesViewModel;
 
-const CreateSystemUnderTest = ({
+
+const mountContactPreferences = ({
+    mutations = storeMutations,
     actions = storeActions,
     state = storeState,
     mocks = sutMocks,
@@ -68,6 +57,7 @@ const CreateSystemUnderTest = ({
                 fContactPreferencesModule: {
                     state,
                     actions,
+                    mutations,
                     namespaced: true
                 }
             }
@@ -77,13 +67,31 @@ const CreateSystemUnderTest = ({
 
     return sut;
 };
-describe('ContactPreferences', () => {
+
+describe('ContactPreferences Component', () => {
     beforeEach(() => {
-        // Act
-        wrapper = CreateSystemUnderTest();
+        // Arrange & Act
+        cookiesSpy = jest.fn();
+        httpSpy = jest.fn();
+        sutMocks = {
+            $parent: {
+                $emit: jest.fn()
+            },
+            $http: httpSpy,
+            $cookies: cookiesSpy
+        };
+        sutProps = {
+            authToken: authTokenMock,
+            smartGatewayBaseUrl: baseUrlMock
+        };
+        wrapper = mountContactPreferences();
     });
 
-    describe('when mounting the component', () => {
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    describe('when mounting the component and calling `initialise`', () => {
         it('should call the Actions with the correct parameters', () => {
             // Assert
             expect(storeActions.loadPreferences).toHaveBeenCalledWith(expect.any(Object), {
@@ -94,72 +102,98 @@ describe('ContactPreferences', () => {
                 },
                 authToken: authTokenMock
             });
-            // expect(spinnerEventSpy).toHaveBeenCalledWith(STOP_LOADING_SPINNER_EVENT);
         });
 
-        it('should filter out hidden preference and sort correctly', () => {
+        it('should set showErrorPage flag to true if an error occurs', () => {
             // Arrange
-            const newState = {
-                preferenceVersionViewed: 0,
-                preferences: [{
-                    // This element should be first
-                    key: 'orderstatus',
-                    sort: 1,
-                    visible: true
-                }, {
-                    // This element should be hidden
-                    key: 'reviewmeal',
-                    sort: 2,
-                    visible: false
-                }, {
-                    // This element should be last
-                    key: 'news',
-                    sort: 3,
-                    visible: true
-                }]
+            const errorActions = {
+                loadPreferences: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('some-error');
+                })
             };
-            const expected = [{
-                key: 'orderstatus',
-                sort: 1,
-                visible: true
-            }, {
-                key: 'news',
-                sort: 3,
-                visible: true
-            }];
-            wrapper = CreateSystemUnderTest({ state: newState });
-
-            // Act
-            const actual = wrapper.vm.filteredPreferences;
+            wrapper = mountContactPreferences({ actions: errorActions });
 
             // Assert
-            expect(actual).toEqual(expected);
+            expect(wrapper.vm.showErrorPage).toEqual(true);
         });
 
-        it('should show the error page if an error occurs', () => {
+        it('should not show the error card if no errors', () => {
             // Arrange
-            const newState = {
-                preferenceVersionViewed: 0,
-                preferences: [] // Error - No preferences
-            };
-            wrapper = CreateSystemUnderTest({ state: newState });
+            const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
+
+            // Assert
+            expect(element.exists()).toEqual(false);
+        });
+
+        it('should show the error card if showErrorFlag is true', async () => {
+            // Arrange
+            await wrapper.setData({ showErrorPage: true });
+
+            // Act
+            const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
+
+            // Assert
+            expect(element.exists()).toEqual(true);
         });
     });
 
     describe('when clicking a preference checkbox', () => {
-        it('should call the Mutation correctly with true if previously unchecked', () => {
-            // Convert to it.Each
-        });
+        it.each([
+            [true, false],
+            [false, true]
+        ])('should call the Mutation correctly with %s if previously %s', async (setValue, previousValue) => {
+            // Arrange
+            contactPreferencesViewModel.preferences.find(e => e.key === 'news').emailValue = previousValue;
+            wrapper = mountContactPreferences({ state: contactPreferencesViewModel });
+            const element = wrapper.find('[data-test-id="contactPreferences-news-checkbox"]');
 
-        it('should call the Mutation correctly with false if previously checked', () => {
+            // Act
+            await element.setChecked(setValue);
+
+            // Assert
+            expect(storeMutations[UPDATE_PREFERENCE]).toHaveBeenCalledWith(
+                wrapper.vm.$store.state.fContactPreferencesModule,
+                {
+                    key: 'news',
+                    field: 'emailValue',
+                    value: setValue
+                }
+            );
         });
     });
 
     describe('when clicking the save preferences button', () => {
         it('should call the Actions with the correct parameters', () => {
+            // Act
+            wrapper.vm.onFormSubmit();
+
+            // Assert
+            expect(storeActions.savePreferences).toHaveBeenCalledWith(expect.any(Object), {
+                api: {
+                    baseUrl: baseUrlMock,
+                    cookies: cookiesSpy,
+                    httpClient: httpSpy
+                },
+                authToken: authTokenMock
+            });
         });
 
-        it('should show the error page if and error occurs', () => {
+        it('should set showErrorPage flag to true if an error occurs', async () => {
+            // Arrange
+            const errorActions = {
+                loadPreferences: jest.fn(),
+                savePreferences: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('some-error');
+                })
+            };
+            await wrapper.setData({ showErrorPage: false });
+            wrapper = mountContactPreferences({ actions: errorActions });
+
+            // Act
+            wrapper.vm.onFormSubmit();
+
+            // Assert
+            expect(wrapper.vm.showErrorPage).toEqual(true);
         });
     });
 });

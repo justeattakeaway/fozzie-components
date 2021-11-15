@@ -1,31 +1,34 @@
 export const contactPreferencesGetResponse = {
-    Preferences: [{
-        DisplayName: 'Order status',
-        Sort: 1,
-        Key: 'orderstatus',
-        Push: false,
-        Email: true,
-        Sms: true
-    }, {
-        DisplayName: 'Review meal',
-        Sort: 2,
-        Key: 'reviewmeal',
-        Push: false,
-        Email: false,
-        Sms: false
-    }, {
-        DisplayName: 'News & offers',
-        Sort: 3,
-        Key: 'news',
-        Push: false,
-        Email: false,
-        Sms: false
+    data: {
+        Preferences: [{
+            DisplayName: 'Order status',
+            Sort: 1,
+            Key: 'orderstatus',
+            Push: false,
+            Email: true,
+            Sms: true
+        }, {
+            DisplayName: 'Review meal',
+            Sort: 2,
+            Key: 'reviewmeal',
+            Push: false,
+            Email: false,
+            Sms: false
+        }, {
+            DisplayName: 'News & offers',
+            Sort: 3,
+            Key: 'news',
+            Push: false,
+            Email: false,
+            Sms: false
+        }
+        ],
+        PreferenceVersionViewed: 0
     }
-    ],
-    PreferenceVersionViewed: 0
 };
 
 export const contactPreferencesViewModel = {
+    preferenceVersionViewed: 0,
     preferences: [{
         displayName: 'Order status',
         emailEnabled: false,
@@ -59,9 +62,32 @@ export const contactPreferencesViewModel = {
         smsValue: false,
         sort: 3,
         visible: true
-    }],
-    preferenceVersionViewed: 0
+    }]
 };
+
+export const filteredContactPreferencesModel = [{
+    displayName: 'Order status',
+    emailEnabled: false,
+    emailValue: true,
+    key: 'orderstatus',
+    pushEnabled: false,
+    pushValue: false,
+    smsEnabled: false,
+    smsValue: true,
+    sort: 1,
+    visible: true
+}, {
+    displayName: 'News & offers',
+    emailEnabled: true,
+    emailValue: false,
+    key: 'news',
+    pushEnabled: true,
+    pushValue: false,
+    smsEnabled: true,
+    smsValue: false,
+    sort: 3,
+    visible: true
+}];
 
 export const contactPreferencesUpdateModel = {
     Preferences: [{

@@ -1,12 +1,14 @@
 import {
     mapToPreferencesViewModel,
-    mapToPreferencesUpdateModel
+    mapToPreferencesUpdateModel,
+    filterSortPreferences
 } from '../contactPreferences.mapper';
 
 import {
     contactPreferencesGetResponse,
     contactPreferencesViewModel,
-    contactPreferencesUpdateModel
+    contactPreferencesUpdateModel,
+    filteredContactPreferencesModel
 } from '../../../../test-utils/setup';
 
 describe('ContactPreferencesMapper', () => {
@@ -20,24 +22,39 @@ describe('ContactPreferencesMapper', () => {
     describe('When calling `mapToPreferencesViewModel`', () => {
         it('should return the expected view model', () => {
             // Arrange
-            const expectedViewModel = contactPreferencesViewModel;
+            const expected = contactPreferencesViewModel;
 
             // Act
-            const actualViewModel = mapToPreferencesViewModel(contactPreferencesGetResponse);
+            const actual = mapToPreferencesViewModel(contactPreferencesGetResponse.data);
 
             // Assert
-            expect(actualViewModel).toEqual(expectedViewModel);
+            expect(actual).toEqual(expected);
         });
+    });
 
+    describe('When calling `mapToPreferencesUpdateModel`', () => {
         it('should return the expected update model', () => {
             // Arrange
-            const expectedUpdateModel = contactPreferencesUpdateModel;
+            const expected = contactPreferencesUpdateModel;
 
             // Act
-            const actualUpdateModel = mapToPreferencesUpdateModel(contactPreferencesViewModel);
+            const actual = mapToPreferencesUpdateModel(contactPreferencesViewModel);
 
             // Assert
-            expect(actualUpdateModel).toEqual(expectedUpdateModel);
+            expect(actual).toEqual(expected);
+        });
+    });
+
+    describe('When calling `filterSortPreferences`', () => {
+        it('should return the expected filtered/sorted model', () => {
+            // Arrange
+            const expected = filteredContactPreferencesModel;
+
+            // Act
+            const actual = filterSortPreferences(contactPreferencesViewModel.preferences);
+
+            // Assert
+            expect(actual).toEqual(expected);
         });
     });
 });

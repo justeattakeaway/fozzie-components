@@ -1,6 +1,11 @@
-import { mapToPreferencesViewModel, mapToPreferencesUpdateModel } from '../services/mapping/contactPreferences.mapper';
+import {
+    mapToPreferencesViewModel,
+    mapToPreferencesUpdateModel,
+    filterSortPreferences
+} from '../services/mapping/contactPreferences.mapper';
 import {
     UPDATE_PREFERENCES,
+    UPDATE_PREFERENCE_VERSION,
     UPDATE_PREFERENCE
 } from '../constants';
 
@@ -18,7 +23,15 @@ export default {
 
             const { preferences, preferenceVersionViewed } = mapToPreferencesViewModel(data);
 
-            commit(UPDATE_PREFERENCES, { preferences, preferenceVersionViewed });
+            commit(UPDATE_PREFERENCE_VERSION, preferenceVersionViewed);
+
+            const filteredPreferences = filterSortPreferences(preferences);
+
+            if (!filteredPreferences.length) {
+                throw new Error('No Preference Data (filtered)');
+            }
+
+            commit(UPDATE_PREFERENCES, filteredPreferences);
         },
 
         async savePreferences ({ state }, { api, authToken }) {
@@ -29,8 +42,11 @@ export default {
     },
 
     mutations: {
-        [UPDATE_PREFERENCES] (state, { preferences, preferenceVersionViewed }) {
+        [UPDATE_PREFERENCES] (state, preferences) {
             state.preferences = preferences;
+        },
+
+        [UPDATE_PREFERENCE_VERSION] (state, preferenceVersionViewed) {
             state.preferenceVersionViewed = preferenceVersionViewed;
         },
 

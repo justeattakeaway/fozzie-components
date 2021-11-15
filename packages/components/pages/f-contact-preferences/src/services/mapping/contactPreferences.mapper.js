@@ -48,4 +48,9 @@ export const mapToPreferencesUpdateModel = ({ preferences, preferenceVersionView
     return model;
 };
 
+export const filterSortPreferences = preferences => {
+    const model = preferences?.filter(x => x.visible)?.sort((a, b) => a.sort - b.sort);
+
+    return model || [];
+};
 

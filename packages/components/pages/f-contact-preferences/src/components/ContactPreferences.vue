@@ -2,13 +2,13 @@
     <div
         data-test-id="contactPreferences">
         <card-component
-            v-if="!showErrorPage && preferences.length"
+            v-if="!showErrorPage"
             :card-heading="$t('heading')"
             is-page-content-wrapper
             has-outline>
             <form @submit.prevent="onFormSubmit">
                 <div
-                    v-for="{ key, emailEnabled, emailValue, smsEnabled, smsValue } in filteredPreferences"
+                    v-for="{ key, emailEnabled, emailValue, smsEnabled, smsValue } in preferences"
                     :key="key">
                     <h2
                         :class="$style['c-contactPreferences-subtitle']">
@@ -19,6 +19,7 @@
                         <label>
                             <input
                                 type="checkbox"
+                                :data-test-id="`contactPreferences-${key}-checkbox`"
                                 :disabled="!emailEnabled"
                                 :checked="emailValue"
                                 @change="updatePreferenceValue(key, Object.keys({ emailValue })[0], $event.target.checked)">
@@ -35,6 +36,7 @@
                         <label>
                             <input
                                 type="checkbox"
+                                :data-test-id="`contactPreferences-${key}-checkbox`"
                                 :disabled="!smsEnabled"
                                 :checked="smsValue"
                                 @change="updatePreferenceValue(key, Object.keys({ smsValue })[0], $event.target.checked)">
@@ -63,6 +65,7 @@
 
         <div v-else>
             <card-component
+                data-test-id="contactPreferences-error-card"
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center">
@@ -134,13 +137,7 @@ export default {
     computed: {
         ...mapState('fContactPreferencesModule', [
             'preferences'
-        ]),
-
-        filteredPreferences () {
-            const filtered = this.preferences.filter(x => x.visible).sort((a, b) => a.sort - b.sort);
-
-            return filtered;
-        }
+        ])
     },
 
     async mounted () {
@@ -173,13 +170,10 @@ export default {
         async initialise () {
             try {
                 await this.loadPreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
-
-                this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
             } catch (error) {
-                // DEBUG
-                console.log('DEBUG-ERROR-loadPreferences', error); // eslint-disable-line
-
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
+            } finally {
+                this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
             }
         },
 
@@ -189,9 +183,6 @@ export default {
             try {
                 await this.savePreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
             } catch (error) {
-                // DEBUG
-                console.log('DEBUG-ERROR-savePreferences', error); // eslint-disable-line
-
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
                 this.setSubmittingState(false);
