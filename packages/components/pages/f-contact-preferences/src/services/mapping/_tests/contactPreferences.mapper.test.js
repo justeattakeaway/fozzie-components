@@ -12,13 +12,6 @@ import {
 } from '../../../../test-utils/setup';
 
 describe('ContactPreferencesMapper', () => {
-    beforeEach(() => {
-    });
-
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
     describe('When calling `mapToPreferencesViewModel`', () => {
         it('should return the expected view model', () => {
             // Arrange
