@@ -6,18 +6,21 @@
         :class="$style['c-cardWithContent']">
         <div
             v-if="$slots.icon"
+            data-test-id="cardWithContent-icon"
             :class="$style['c-cardWithContent-icon']">
             <slot name="icon" />
         </div>
 
         <h1
             v-if="cardHeading"
+            data-test-id="cardWithContent-heading"
             :class="$style['c-cardWithContent-heading']">
             {{ cardHeading }}
         </h1>
 
         <p
             v-if="cardDescription"
+            data-test-id="cardWithContent-description"
             :class="$style['c-cardWithContent-description']">
             {{ cardDescription }}
         </p>
@@ -27,6 +30,7 @@
             button-size="large"
             button-type="primary"
             is-full-width
+            data-test-id="cardWithContent-primaryButton"
             :href="primaryButton.href"
             :to="primaryButton.to"
             :class="$style['c-cardWithContent-button']"
@@ -39,6 +43,7 @@
             button-size="large"
             button-type="secondary"
             is-full-width
+            data-test-id="cardWithContent-secondaryButton"
             :href="secondaryButton.href"
             :to="secondaryButton.to"
             :class="$style['c-cardWithContent-button']"
