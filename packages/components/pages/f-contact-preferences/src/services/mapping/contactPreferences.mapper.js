@@ -3,6 +3,11 @@ import {
     NON_VISIBLE_PREFERENCE_KEYS
 } from '../../constants';
 
+/**
+ * Maps the raw api response to the view model (hides and disables according to requirements).
+ * @param {object} Preferences - The preferences contained in the passing object parameter (i.e. response.data.Preferences).
+ * @param {object} PreferenceVersionViewed - The version value contained in the passing object parameter (i.e. response.data.PreferenceVersionViewed).
+ */
 export const mapToPreferencesViewModel = ({ Preferences, PreferenceVersionViewed }) => {
     const model = {
         preferences: Preferences.map(({
@@ -25,6 +30,11 @@ export const mapToPreferencesViewModel = ({ Preferences, PreferenceVersionViewed
     return model;
 };
 
+/**
+ * Maps the view model to the Body payload for the api update request.
+ * @param {object} preferences - The preferences contained in the passing object parameter (i.e. state.preferences).
+ * @param {object} preferenceVersionViewed - The version value contained in the passing object parameter (i.e. state.preferenceVersionViewed).
+ */
 export const mapToPreferencesUpdateModel = ({ preferences, preferenceVersionViewed }) => {
     const model = {
         Preferences: preferences.map(({
