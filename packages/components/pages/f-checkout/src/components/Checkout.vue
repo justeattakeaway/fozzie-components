@@ -13,6 +13,10 @@
             v-else-if="shouldShowAgeVerificationForm"
             @checkout-verify-age="verifyCustomerAge" />
 
+        <age-verification
+            v-else-if="shouldShowAgeVerificationForm"
+            @checkout-verify-age="verifyCustomerAge" />
+
         <div
             v-if="shouldShowCheckoutForm"
             data-theme="jet"
