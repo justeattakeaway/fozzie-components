@@ -1,5 +1,5 @@
 import mockAxios from 'jest-mock-axios';
-import { getFeature, loadFromCdn } from '../src/configStore';
+import { getFeature, loadFromCdn } from '../../src/lib/configStore';
 
 const cdnSettings = {
     scope: 'test-scope',

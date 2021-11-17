@@ -1,11 +1,7 @@
-import createFeatureManagementInstance from './createFeatureManagementInstance';
+import createFeatureManagementInstance from './lib/createFeatureManagementInstance';
+import FeaturesService from './vue/services/features.service';
 
-/**
- * Returns an instance of Feature Management.
- * @param {object} settings - json and contextGetter must be set
- * @param {object} httpClient An optional injected http client. If not provided, an internal instance will be created.
- * @returns Feature Management object to allow querying of features.
- */
-export default function (settings, httpClient) {
-    return createFeatureManagementInstance(settings, httpClient);
-}
+export {
+    createFeatureManagementInstance,
+    FeaturesService
+};
