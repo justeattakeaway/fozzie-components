@@ -7,12 +7,12 @@ const messages = {
     },
     heading: 'Contact Preferences',
     locale: 'en-GB',
-    newsletter: {
+    news: {
         email: 'Email',
         sms: 'Text message',
         subtitle: 'Get news and offers by'
     },
-    orderUpdates: {
+    orderstatus: {
         email: 'Email',
         emailDescription: 'Order receipts are emailed to you',
         sms: 'Text message',
