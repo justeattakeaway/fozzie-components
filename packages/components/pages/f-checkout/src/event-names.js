@@ -24,6 +24,7 @@ const CheckoutVerifyAge = 'checkout-verify-age';
 const FormSubmitting = 'form-submitting';
 const FormValid = 'form-valid';
 const FormInvalid = 'form-invalid';
+const StopLoadingSpinner = 'stop-spinner';
 
 export default {
     CheckoutSuccess,
@@ -51,5 +52,6 @@ export default {
     CheckoutNonFulfillableError,
     FormSubmitting,
     FormValid,
-    FormInvalid
+    FormInvalid,
+    StopLoadingSpinner
 };
