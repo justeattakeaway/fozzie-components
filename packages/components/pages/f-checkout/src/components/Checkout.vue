@@ -9,13 +9,6 @@
             <span>{{ messageType.content }}</span>
         </component>
 
-        <div
-            v-if="shouldShowSpinner"
-            :class="$style['c-spinner-wrapper']"
-            data-test-id="checkout-loading-spinner">
-            <div :class="$style['c-spinner']" />
-        </div>
-
         <age-verification
             v-else-if="shouldShowAgeVerificationForm"
             @checkout-verify-age="verifyCustomerAge" />
@@ -168,12 +161,6 @@ export default {
             default: 60000
         },
 
-        spinnerTimeout: {
-            type: Number,
-            required: false,
-            default: 500
-        },
-
         authToken: {
             type: String,
             default: ''
@@ -220,8 +207,7 @@ export default {
     data () {
         return {
             tenantConfigs,
-            shouldShowSpinner: false,
-            isLoading: false,
+            isLoading: true,
             errorFormType: null,
             isFormSubmitting: false,
             availableFulfilmentTimesKey: 0,
@@ -415,9 +401,6 @@ export default {
          */
         async initialise () {
             this.setExperimentValues(this.experiments);
-            this.isLoading = true;
-
-            this.startSpinnerCountdown();
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
@@ -819,15 +802,7 @@ export default {
 
         resetLoadingState () {
             this.isLoading = false;
-            this.shouldShowSpinner = false;
-        },
-
-        startSpinnerCountdown () {
-            setTimeout(() => {
-                if (this.isLoading) {
-                    this.shouldShowSpinner = true;
-                }
-            }, this.spinnerTimeout);
+            this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
         },
 
         /**
@@ -889,19 +864,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-@include loadingIndicator('large');
-
-.c-spinner-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    .c-spinner {
-        margin: 0 auto;
-    }
-}
-
 .c-checkout {
     @include media('<=narrow') {
         border: none;
