@@ -14,7 +14,7 @@
             @checkout-verify-age="verifyCustomerAge" />
 
         <div
-            v-else-if="shouldShowCheckoutForm"
+            v-if="shouldShowCheckoutForm"
             data-theme="jet"
             data-test-id="checkout-component">
             <card
