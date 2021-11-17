@@ -1,4 +1,4 @@
-import calculateFractions from '../src/calculateFractions';
+import calculateFractions from '../../src/lib/calculateFractions';
 
 //TODO: we have a whole load of known good values - we will include these in due course
 describe('When calculating fractions for use in IdHashLogicEvaluator', () => {
