@@ -49,5 +49,16 @@ describe('ContactPreferencesMapper', () => {
             // Assert
             expect(actual).toEqual(expected);
         });
+
+        it('should return the empty array when no preferences', () => {
+            // Arrange
+            const expected = [];
+
+            // Act
+            const actual = filterSortPreferences(undefined);
+
+            // Assert
+            expect(actual).toEqual(expected);
+        });
     });
 });

@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.5.2
 ------------------------------
-*November 15, 2021*
+*November 17, 2021*
 
 ### Added
-- Added mapper.
+- Added contact preferences mapper & unit tests.
 
 
 v0.5.1
