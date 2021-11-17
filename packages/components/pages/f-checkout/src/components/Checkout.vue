@@ -405,6 +405,8 @@ export default {
         async initialise () {
             this.setExperimentValues(this.experiments);
 
+            this.isLoading = true;
+
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
                 : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
