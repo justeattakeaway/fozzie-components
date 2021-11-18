@@ -119,6 +119,7 @@ commands:
             - packages/components/pages/f-offers/dist
             - packages/components/pages/f-registration/dist
             - packages/components/pages/f-takeawaypay-activation/dist
+            - packages/components/pages/f-account-info/dist
 
       - save_cache:
           name: Cache for services
