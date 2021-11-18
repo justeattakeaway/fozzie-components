@@ -4,10 +4,9 @@ import { VueI18n } from '@justeat/f-globalisation';
 import ContactPreferences from '../ContactPreferences.vue';
 import tenantConfigs from '../../tenants';
 import {
-    UPDATE_PREFERENCE
-} from '../../constants';
-import {
-    contactPreferencesViewModel
+    contactPreferencesViewModel,
+    baseUrl,
+    token
 } from '../../../test-utils/setup';
 
 const localVue = createLocalVue();
@@ -19,8 +18,7 @@ let cookiesSpy;
 let httpSpy;
 let sutMocks;
 let sutProps;
-const baseUrlMock = 'https://smartGatewayBaseUrl.com';
-const authTokenMock = 'some-auth-token';
+let dataDefaults;
 
 const i18n = {
     locale: 'en-GB',
@@ -29,48 +27,44 @@ const i18n = {
     }
 };
 
-const storeMutations = {
-    [UPDATE_PREFERENCE]: jest.fn()
-};
-
 const storeActions = {
     loadPreferences: jest.fn(),
-    savePreferences: jest.fn()
+    savePreferences: jest.fn(),
+    editPreference: jest.fn()
 };
 
 const storeState = contactPreferencesViewModel;
 
-
 const mountContactPreferences = ({
-    mutations = storeMutations,
     actions = storeActions,
     state = storeState,
     mocks = sutMocks,
-    propsData = sutProps
-} = {}) => {
-    const sut = shallowMount(ContactPreferences, {
-        i18n,
-        localVue,
-        propsData,
-        store: new Vuex.Store({
-            modules: {
-                fContactPreferencesModule: {
-                    state,
-                    actions,
-                    mutations,
-                    namespaced: true
-                }
+    propsData = sutProps,
+    data = dataDefaults
+} = {}) => shallowMount(ContactPreferences, {
+    i18n,
+    localVue,
+    propsData,
+    data,
+    store: new Vuex.Store({
+        modules: {
+            fContactPreferencesModule: {
+                state,
+                actions,
+                namespaced: true
             }
-        }),
-        mocks
-    });
-
-    return sut;
-};
+        }
+    }),
+    mocks
+});
 
 describe('ContactPreferences Component', () => {
     beforeEach(() => {
         // Arrange & Act
+        dataDefaults = () => ({
+            isFormDirty: false,
+            showErrorPage: false
+        });
         cookiesSpy = jest.fn();
         httpSpy = jest.fn();
         sutMocks = {
@@ -81,8 +75,8 @@ describe('ContactPreferences Component', () => {
             $cookies: cookiesSpy
         };
         sutProps = {
-            authToken: authTokenMock,
-            smartGatewayBaseUrl: baseUrlMock
+            authToken: token,
+            smartGatewayBaseUrl: baseUrl
         };
         wrapper = mountContactPreferences();
     });
@@ -92,15 +86,15 @@ describe('ContactPreferences Component', () => {
     });
 
     describe('when mounting the component and calling `initialise`', () => {
-        it('should call the Actions with the correct parameters', () => {
+        it('should call the load action with the correct parameters', () => {
             // Assert
             expect(storeActions.loadPreferences).toHaveBeenCalledWith(expect.any(Object), {
                 api: {
-                    baseUrl: baseUrlMock,
+                    baseUrl,
                     cookies: cookiesSpy,
                     httpClient: httpSpy
                 },
-                authToken: authTokenMock
+                authToken: token
             });
         });
 
@@ -135,6 +129,18 @@ describe('ContactPreferences Component', () => {
             // Assert
             expect(element.exists()).toEqual(true);
         });
+
+        it('should set the `isFormDirty` flag to false', async () => {
+            // Arrange
+            await wrapper.setData({ isFormDirty: true });
+            const expected = false;
+
+            // Act - re-mount the page
+            wrapper = mountContactPreferences();
+
+            // Assert
+            expect(wrapper.vm.isFormDirty).toEqual(expected);
+        });
     });
 
     describe('when clicking a preference checkbox', () => {
@@ -143,16 +149,16 @@ describe('ContactPreferences Component', () => {
             [false, true]
         ])('should call the Mutation correctly with %s if previously %s', async (setValue, previousValue) => {
             // Arrange
-            contactPreferencesViewModel.preferences.find(e => e.key === 'news').emailValue = previousValue;
-            wrapper = mountContactPreferences({ state: contactPreferencesViewModel });
-            const element = wrapper.find('[data-test-id="contactPreferences-news-checkbox"]');
+            storeState.preferences.find(e => e.key === 'news').emailValue = previousValue;
+            wrapper = mountContactPreferences();
+            const input = wrapper.find('[data-test-id="contactPreferences-news-checkbox"]');
 
             // Act
-            await element.setChecked(setValue);
+            await input.setChecked(setValue);
 
             // Assert
-            expect(storeMutations[UPDATE_PREFERENCE]).toHaveBeenCalledWith(
-                wrapper.vm.$store.state.fContactPreferencesModule,
+            expect(storeActions.editPreference).toHaveBeenCalledWith(
+                expect.any(Object),
                 {
                     key: 'news',
                     field: 'emailValue',
@@ -160,22 +166,48 @@ describe('ContactPreferences Component', () => {
                 }
             );
         });
+
+        it('should set the `isFormDirty` flag to true', async () => {
+            // Arrange
+            const input = wrapper.find('[data-test-id="contactPreferences-news-checkbox"]');
+            await wrapper.setData({ isFormDirty: false });
+
+            // Act
+            await input.setChecked(!input.element.checked);
+
+            // Assert
+            expect(wrapper.vm.isFormDirty).toEqual(true);
+        });
     });
 
     describe('when clicking the save preferences button', () => {
-        it('should call the Actions with the correct parameters', () => {
+        it('should call the save action with the correct parameters', async () => {
+            // Arrange - Allow the data to be submitted
+            await wrapper.setData({ isFormDirty: true });
+
             // Act
             wrapper.vm.onFormSubmit();
 
             // Assert
             expect(storeActions.savePreferences).toHaveBeenCalledWith(expect.any(Object), {
                 api: {
-                    baseUrl: baseUrlMock,
+                    baseUrl,
                     cookies: cookiesSpy,
                     httpClient: httpSpy
                 },
-                authToken: authTokenMock
+                authToken: token
             });
+        });
+
+        it('should not call the save action if no changes', async () => {
+            // Arrange - Indicate no form changes
+            await wrapper.setData({ isFormDirty: false });
+
+            // Act
+            wrapper.vm.onFormSubmit();
+
+            // Assert
+            expect(storeActions.savePreferences).not.toHaveBeenCalled();
         });
 
         it('should set showErrorPage flag to true if an error occurs', async () => {
@@ -186,8 +218,8 @@ describe('ContactPreferences Component', () => {
                     throw new Error('some-error');
                 })
             };
-            await wrapper.setData({ showErrorPage: false });
             wrapper = mountContactPreferences({ actions: errorActions });
+            await wrapper.setData({ isFormDirty: true }); // Allow the data to be submitted
 
             // Act
             wrapper.vm.onFormSubmit();

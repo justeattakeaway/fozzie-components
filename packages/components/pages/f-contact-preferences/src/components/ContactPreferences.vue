@@ -15,14 +15,15 @@
                         {{ $t(`${key}.subtitle`) }}
                     </h2>
                     <fieldset
-                        :class="$style['c-contactPreferences-fieldset']">
+                        :class="$style['c-contactPreferences-fieldset']"
+                        @change="modelChanged">
                         <label>
                             <input
                                 type="checkbox"
                                 :data-test-id="`contactPreferences-${key}-checkbox`"
                                 :disabled="!emailEnabled"
                                 :checked="emailValue"
-                                @change="updatePreferenceValue(key, Object.keys({ emailValue })[0], $event.target.checked)">
+                                @change="editPreferenceValue(key, Object.keys({ emailValue })[0], $event.target.checked)">
                             <span
                                 :class="{
                                     [$style['c-contactPreferences-labelText--disabled']]: !emailEnabled
@@ -39,7 +40,7 @@
                                 :data-test-id="`contactPreferences-${key}-checkbox`"
                                 :disabled="!smsEnabled"
                                 :checked="smsValue"
-                                @change="updatePreferenceValue(key, Object.keys({ smsValue })[0], $event.target.checked)">
+                                @change="editPreferenceValue(key, Object.keys({ smsValue })[0], $event.target.checked)">
                             <span
                                 :class="{
                                     [$style['c-contactPreferences-labelText--disabled']]: !smsEnabled
@@ -81,7 +82,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 // Fozzie
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
@@ -95,7 +96,6 @@ import tenantConfigs from '../tenants';
 import { GetPreferencesError } from '../exceptions';
 import ContactPreferencesApi from '../services/providers/contactPreferences.api';
 import {
-    UPDATE_PREFERENCE,
     STOP_LOADING_SPINNER_EVENT
 } from '../constants';
 
@@ -122,6 +122,7 @@ export default {
 
     data () {
         return {
+            isFormDirty: false,
             error: {},
             showErrorPage: false,
             tenantConfigs,
@@ -147,11 +148,8 @@ export default {
     methods: {
         ...mapActions('fContactPreferencesModule', [
             'loadPreferences',
-            'savePreferences'
-        ]),
-
-        ...mapMutations('fContactPreferencesModule', [
-            UPDATE_PREFERENCE
+            'savePreferences',
+            'editPreference'
         ]),
 
         handleErrorState (error) {
@@ -159,8 +157,12 @@ export default {
             this.error = error;
         },
 
-        updatePreferenceValue (key, field, value) {
-            this[UPDATE_PREFERENCE]({ key, field, value });
+        editPreferenceValue (key, field, value) {
+            this.editPreference({ key, field, value });
+        },
+
+        modelChanged () {
+            this.isFormDirty = true;
         },
 
         setSubmittingState (isFormSubmitting) {
@@ -170,6 +172,7 @@ export default {
         async initialise () {
             try {
                 await this.loadPreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
+                this.isFormDirty = false;
             } catch (error) {
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
@@ -178,10 +181,15 @@ export default {
         },
 
         async onFormSubmit () {
+            if (!this.isFormDirty) {
+                return;
+            }
+
             this.setSubmittingState(true);
 
             try {
                 await this.savePreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
+                this.isFormDirty = false;
             } catch (error) {
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {

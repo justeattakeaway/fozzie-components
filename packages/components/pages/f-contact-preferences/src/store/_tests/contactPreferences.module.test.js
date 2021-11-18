@@ -1,7 +1,6 @@
 import contactPreferencesModule from '../contactPreferences.module';
 import {
     UPDATE_PREFERENCE,
-    UPDATE_PREFERENCE_VERSION,
     UPDATE_PREFERENCES
 } from '../../constants';
 import {
@@ -50,7 +49,7 @@ describe('ContactPreferences Store', () => {
                 expect(getPreferencesMock).toHaveBeenCalledWith(token);
             });
 
-            it(`should call ${UPDATE_PREFERENCE_VERSION} & ${UPDATE_PREFERENCES} mutations with the correctly data`, async () => {
+            it(`should call ${UPDATE_PREFERENCES} mutation with the correct data`, async () => {
                 // Arrange
                 const commitSpy = jest.fn();
                 const expectedVersion = contactPreferencesViewModel.preferenceVersionViewed;
@@ -60,8 +59,7 @@ describe('ContactPreferences Store', () => {
                 await contactPreferencesModule.actions.loadPreferences({ commit: commitSpy }, { api: httpClientMock, authToken: token });
 
                 // Assert
-                expect(commitSpy).toHaveBeenCalledWith(UPDATE_PREFERENCE_VERSION, expectedVersion);
-                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_PREFERENCES, expectedPreferences);
+                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_PREFERENCES, { preferences: expectedPreferences, preferenceVersionViewed: expectedVersion });
             });
         });
 
@@ -74,50 +72,77 @@ describe('ContactPreferences Store', () => {
                 expect(postPreferencesMock).toHaveBeenCalledWith(token, contactPreferencesUpdateModel);
             });
         });
+
+        describe('editPreference ::', () => {
+            it(`should call ${UPDATE_PREFERENCE} mutation with the correct data`, () => {
+                // Arrange
+                const commitSpy = jest.fn();
+                const expectedIndex = contactPreferencesViewModel.preferences.findIndex(e => e.key === 'news');
+                const expectedValue = !contactPreferencesViewModel.preferences[expectedIndex].emailValue;
+
+                // Act
+                contactPreferencesModule.actions.editPreference({ state: contactPreferencesViewModel, commit: commitSpy }, { key: 'news', field: 'emailValue', value: expectedValue });
+
+                // Assert
+                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_PREFERENCE, { index: expectedIndex, field: 'emailValue', value: expectedValue });
+            });
+
+            it(`should not call ${UPDATE_PREFERENCE} mutation if the key not found`, () => {
+                // Arrange
+                const commitSpy = jest.fn();
+
+                // Act
+                contactPreferencesModule.actions.editPreference({ state: contactPreferencesViewModel, commit: commitSpy }, { key: 'X-X-X', field: 'emailValue', value: true });
+
+                // Assert
+                expect(commitSpy).not.toHaveBeenCalled();
+            });
+
+            it(`should not call ${UPDATE_PREFERENCE} mutation if the field not found`, () => {
+                // Arrange
+                const commitSpy = jest.fn();
+
+                // Act
+                contactPreferencesModule.actions.editPreference({ state: contactPreferencesViewModel, commit: commitSpy }, { key: 'news', field: 'X-X-X', value: true });
+
+                // Assert
+                expect(commitSpy).not.toHaveBeenCalled();
+            });
+        });
     });
 
     describe('mutations ::', () => {
         describe(`${UPDATE_PREFERENCES} ::`, () => {
-            it('should update preferences state with mapped/filtered/sorted preferences data', () => {
+            it('should update preference state with mapped/filtered/sorted preference data', () => {
                 // Arrange
-                const expected = { ...contactPreferencesViewModel }.preferences;
-                const currentValue = expected.find(e => e.key === 'news').emailValue;
-                expected.find(e => e.key === 'news').emailValue = !currentValue;
+                const expectedPreferenceVersionViewed = 1;
+                const expectedPreferences = { ...contactPreferencesViewModel }.preferences;
+                const currentValue = expectedPreferences.find(e => e.key === 'news').emailValue;
+                expectedPreferences.find(e => e.key === 'news').emailValue = !currentValue;
 
                 // Act
-                contactPreferencesModule.mutations[UPDATE_PREFERENCES](contactPreferencesViewModel, expected);
-                const actual = contactPreferencesViewModel.preferences;
+                contactPreferencesModule.mutations[UPDATE_PREFERENCES](contactPreferencesViewModel, { preferences: expectedPreferences, preferenceVersionViewed: expectedPreferenceVersionViewed });
+                const actualPreferences = contactPreferencesViewModel.preferences;
+                const actualPreferenceVersionViewed = contactPreferencesViewModel.preferenceVersionViewed;
 
                 // Assert
-                expect(actual).toEqual(expected);
-            });
-        });
-
-        describe(`${UPDATE_PREFERENCE_VERSION} ::`, () => {
-            it('should update preference version state with the preference version data', () => {
-                // Arrange
-                const expected = 1;
-
-                // Act
-                contactPreferencesModule.mutations[UPDATE_PREFERENCE_VERSION](contactPreferencesViewModel, expected);
-                const actual = contactPreferencesViewModel.preferenceVersionViewed;
-
-                // Assert
-                expect(actual).toEqual(expected);
+                expect(actualPreferences).toEqual(expectedPreferences);
+                expect(actualPreferenceVersionViewed).toEqual(expectedPreferenceVersionViewed);
             });
         });
 
         describe(`${UPDATE_PREFERENCE} ::`, () => {
             it('should update state with new preference value', () => {
                 // Arrange
-                const expected = !contactPreferencesViewModel.preferences.find(e => e.key === 'news').emailValue;
+                const index = contactPreferencesViewModel.preferences.findIndex(e => e.key === 'news');
+                const expectedValue = !contactPreferencesViewModel.preferences[index].emailValue;
 
                 // Act
-                contactPreferencesModule.mutations[UPDATE_PREFERENCE](contactPreferencesViewModel, { key: 'news', field: 'emailValue', value: expected });
+                contactPreferencesModule.mutations[UPDATE_PREFERENCE](contactPreferencesViewModel, { index, field: 'emailValue', value: expectedValue });
                 const actual = contactPreferencesViewModel.preferences.find(e => e.key === 'news').emailValue;
 
                 // Assert
-                expect(actual).toEqual(expected);
+                expect(actual).toEqual(expectedValue);
             });
         });
     });

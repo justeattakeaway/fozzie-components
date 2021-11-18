@@ -12,13 +12,6 @@ import {
 } from '../../../../test-utils/setup';
 
 describe('ContactPreferencesMapper', () => {
-    beforeEach(() => {
-    });
-
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
     describe('When calling `mapToPreferencesViewModel`', () => {
         it('should return the expected view model', () => {
             // Arrange
@@ -52,6 +45,17 @@ describe('ContactPreferencesMapper', () => {
 
             // Act
             const actual = filterSortPreferences(contactPreferencesViewModel.preferences);
+
+            // Assert
+            expect(actual).toEqual(expected);
+        });
+
+        it('should return the empty array when no preferences', () => {
+            // Arrange
+            const expected = [];
+
+            // Act
+            const actual = filterSortPreferences(undefined);
 
             // Assert
             expect(actual).toEqual(expected);
