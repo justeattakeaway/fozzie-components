@@ -15,8 +15,7 @@
                         {{ $t(`${key}.subtitle`) }}
                     </h2>
                     <fieldset
-                        :class="$style['c-contactPreferences-fieldset']"
-                        @change="modelChanged">
+                        :class="$style['c-contactPreferences-fieldset']">
                         <label>
                             <input
                                 type="checkbox"
@@ -159,9 +158,6 @@ export default {
 
         editPreferenceValue (key, field, value) {
             this.editPreference({ key, field, value });
-        },
-
-        modelChanged () {
             this.isFormDirty = true;
         },
 
