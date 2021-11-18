@@ -57,9 +57,9 @@ function createSettings (store, serviceStore, cookies, analytics, logger) {
 function createLoggerWrapper (store, logger) {
     const tags = ['feature-management'];
     return {
-        logInfo: message => logger?.logInfo(message, store, { tags }),
-        logWarn: message => logger?.logWarn(message, store, { tags }),
-        logError: message => logger?.logError(message, store, { tags })
+        logInfo: (message, metadata) => logger?.logInfo(message, store, { tags, ...metadata }),
+        logWarn: (message, metadata) => logger?.logWarn(message, store, { tags, ...metadata }),
+        logError: (message, metadata) => logger?.logError(message, store, { tags, ...metadata })
     };
 }
 
@@ -77,11 +77,11 @@ export default class FeaturesService {
         }
     ) {
         this.store = store;
+        this.logger = createLoggerWrapper(store, logger);
 
         store.registerModule(namespace, featuresModule, { preserveState: !!this.serviceStore });
 
-        const loggerWrapper = createLoggerWrapper(store, logger);
-        const settings = createSettings(this.store, this.serviceStore, cookies, analytics, loggerWrapper);
+        const settings = createSettings(this.store, this.serviceStore, cookies, analytics, this.logger);
         this.featureManagement = createFeatureManagementInstance(settings, httpClient);
     }
 
@@ -89,8 +89,12 @@ export default class FeaturesService {
      * Loads the latest features configuration from the CDN
      */
     async update () {
-        const newConfigJson = await this.featureManagement.loadFromCdn();
-        this.store.dispatch(storeAction, newConfigJson);
+        try {
+            const newConfigJson = await this.featureManagement.loadFromCdn();
+            this.store.dispatch(storeAction, newConfigJson);
+        } catch (error) {
+            this.logger.logError('Failed to update features config file', { error });
+        }
     }
 
     /**
