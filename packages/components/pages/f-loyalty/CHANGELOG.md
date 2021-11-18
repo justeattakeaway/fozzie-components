@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.3.0
 ------------------------------
-*November 08, 2021*
+*November 18, 2021*
 
 ### Added
 - slots component to serve cards provided by content cards
