@@ -43,4 +43,4 @@ module.exports = class CookieBanner extends Page {
 
         return this;
     }
-}
+};
