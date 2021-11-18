@@ -1,23 +1,50 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
+import { VueI18n } from '@justeat/f-globalisation/src';
+import tenantConfigs from '@justeat/f-offers/src/tenants';
 import LoyaltyCards from '../LoyaltyCards.vue';
+import { VUEX_MODULE_NAMESPACE_LOYALTY } from '../../store/types';
 
 const localVue = createLocalVue();
+localVue.use(VueI18n);
 localVue.use(Vuex);
 
-const store = new Vuex.Store({
-    state: () => {
+const i18n = {
+    locale: 'en-GB',
+    messages: {
+        'en-GB': tenantConfigs['en-GB'].messages
+    }
+};
 
+const store = new Vuex.Store({
+    modules: {
+        [VUEX_MODULE_NAMESPACE_LOYALTY]: {
+            namespaced: true,
+            state: () => ({
+                globalUserId: '__TEST_USER_ID'
+            })
+        }
     }
 });
 
 const MCOK_STATE_NO_CARDS = 'no-cards';
 
 const MockContentCards = state => ({
-    render () {
-        return this.$scopedSlots[state]({
-            cards: this.cards
-        });
+    render (h) {
+        return this.$scopedSlots[state]
+            ? h(
+                'div',
+                {
+                    class: `c-contentCards-${state}`,
+                    attrs: {
+                        'data-test-id': this.testId
+                    }
+                },
+                this.$scopedSlots[state]({
+                    cards: this.cards
+                })
+            )
+            : h('');
     }
 });
 
@@ -25,9 +52,10 @@ describe('LoyaltyCards.vue', () => {
     let wrapper;
     beforeEach(() => {
         // Arrange
-        wrapper = mount(LoyaltyCards, {
+        wrapper = shallowMount(LoyaltyCards, {
             localVue,
             store,
+            i18n,
             stubs: {
                 'content-cards': MockContentCards(MCOK_STATE_NO_CARDS),
                 'cards-slot': { template: '<div>cards-slot</div>' },
@@ -40,7 +68,8 @@ describe('LoyaltyCards.vue', () => {
     describe('No Cards ::', () => {
         it('should display the no-cards-error-state when there are no cards', () => {
             // Act
-            const noCardsComponent = wrapper.find();
+            const noCardsComponent = wrapper.find('no-cards-error-state');
+            console.log(wrapper.html());
         });
     });
 
