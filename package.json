@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "5.3.1",
+  "version": "5.3.2",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build\"",
@@ -22,7 +22,9 @@
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "allure:clean": "rimraf test/results/allure",
+    "allure:generate": "allure generate ./test/results/allure-results --clean && yarn allure:clean",
+    "allure:open": "yarn allure:generate && yarn allure open",
+    "allure:clean": "rimraf test/results/allure-results",
     "prepare": "husky install"
   },
   "resolutions": {
@@ -49,7 +51,6 @@
     "@vue/test-utils": "1.0.3",
     "@wdio/allure-reporter": "7.6.0",
     "@wdio/cli": "7.6.0",
-    "@wdio/junit-reporter": "7.6.0",
     "@wdio/local-runner": "7.6.0",
     "@wdio/mocha-framework": "7.6.0",
     "@wdio/spec-reporter": "7.6.0",
@@ -122,5 +123,7 @@
     "packages/services/*",
     "packages/tools/*"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "deepmerge": "4.2.2"
+  }
 }
