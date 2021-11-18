@@ -14,8 +14,7 @@
             @checkout-verify-age="verifyCustomerAge" />
 
         <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
+            v-else-if="shouldShowAgeVerificationForm" />
 
         <div
             v-if="shouldShowCheckoutForm"
@@ -840,10 +839,11 @@ export default {
 
         getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
             const { ageVerificationOnly } = options;
-            return ageVerificationOnly ?
-                mapUpdateCheckoutRequestForAgeVerification({
+            return ageVerificationOnly
+                ? mapUpdateCheckoutRequestForAgeVerification({
                     customer: this.customer
-                }) : mapUpdateCheckoutRequest({
+                })
+                : mapUpdateCheckoutRequest({
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
