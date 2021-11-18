@@ -18,7 +18,7 @@ describe('ContactPreferences Store', () => {
     beforeEach(() => {
         // Arrange
         getPreferencesMock = jest.fn(() => contactPreferencesGetResponse);
-        postPreferencesMock = jest.fn(() => {});
+        postPreferencesMock = jest.fn();
         httpClientMock = {
             getPreferences: getPreferencesMock,
             postPreferences: postPreferencesMock
@@ -53,7 +53,7 @@ describe('ContactPreferences Store', () => {
                 // Arrange
                 const commitSpy = jest.fn();
                 const expectedVersion = contactPreferencesViewModel.preferenceVersionViewed;
-                const expectedPreferences = contactPreferencesViewModel.preferences.filter(e => !!e.visible);
+                const expectedPreferences = contactPreferencesViewModel.preferences.filter(e => e.visible);
 
                 // Act
                 await contactPreferencesModule.actions.loadPreferences({ commit: commitSpy }, { api: httpClientMock, authToken: token });

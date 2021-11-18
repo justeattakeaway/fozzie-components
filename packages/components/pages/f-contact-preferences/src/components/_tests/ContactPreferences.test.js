@@ -78,7 +78,6 @@ describe('ContactPreferences Component', () => {
             authToken: token,
             smartGatewayBaseUrl: baseUrl
         };
-        wrapper = mountContactPreferences();
     });
 
     afterEach(() => {
@@ -87,6 +86,9 @@ describe('ContactPreferences Component', () => {
 
     describe('when mounting the component and calling `initialise`', () => {
         it('should call the load action with the correct parameters', () => {
+            // Arrange & Act
+            wrapper = mountContactPreferences();
+
             // Assert
             expect(storeActions.loadPreferences).toHaveBeenCalledWith(expect.any(Object), {
                 api: {
@@ -99,7 +101,7 @@ describe('ContactPreferences Component', () => {
         });
 
         it('should set showErrorPage flag to true if an error occurs', () => {
-            // Arrange
+            // Arrange & Act
             const errorActions = {
                 loadPreferences: jest.fn().mockImplementationOnce(() => {
                     throw new Error('some-error');
@@ -112,18 +114,18 @@ describe('ContactPreferences Component', () => {
         });
 
         it('should not show the error card if no errors', () => {
-            // Arrange
+            // Arrange & Act
+            wrapper = mountContactPreferences();
             const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
 
             // Assert
             expect(element.exists()).toEqual(false);
         });
 
-        it('should show the error card if showErrorFlag is true', async () => {
-            // Arrange
+        it('should show the error card if showErrorPage is true', async () => {
+            // Arrange & Act
+            wrapper = mountContactPreferences();
             await wrapper.setData({ showErrorPage: true });
-
-            // Act
             const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
 
             // Assert
@@ -132,14 +134,14 @@ describe('ContactPreferences Component', () => {
 
         it('should set the `isFormDirty` flag to false', async () => {
             // Arrange
+            wrapper = mountContactPreferences();
             await wrapper.setData({ isFormDirty: true });
-            const expected = false;
 
-            // Act - re-mount the page
+            // Act - re-mount the page to prove assertion
             wrapper = mountContactPreferences();
 
             // Assert
-            expect(wrapper.vm.isFormDirty).toEqual(expected);
+            expect(wrapper.vm.isFormDirty).toEqual(false);
         });
     });
 
@@ -168,9 +170,9 @@ describe('ContactPreferences Component', () => {
         });
 
         it('should set the `isFormDirty` flag to true', async () => {
-            // Arrange
+            // Act
+            wrapper = mountContactPreferences();
             const input = wrapper.find('[data-test-id="contactPreferences-news-checkbox"]');
-            await wrapper.setData({ isFormDirty: false });
 
             // Act
             await input.setChecked(!input.element.checked);
@@ -182,7 +184,8 @@ describe('ContactPreferences Component', () => {
 
     describe('when clicking the save preferences button', () => {
         it('should call the save action with the correct parameters', async () => {
-            // Arrange - Allow the data to be submitted
+            // Arrange
+            wrapper = mountContactPreferences();
             await wrapper.setData({ isFormDirty: true });
 
             // Act
@@ -200,7 +203,8 @@ describe('ContactPreferences Component', () => {
         });
 
         it('should not call the save action if no changes', async () => {
-            // Arrange - Indicate no form changes
+            // Arrange
+            wrapper = mountContactPreferences();
             await wrapper.setData({ isFormDirty: false });
 
             // Act
