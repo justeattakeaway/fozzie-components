@@ -17,8 +17,7 @@
                 disabled
                 :placeholder="$t('fields.emailAddressPlaceholder')"
                 class="u-spacingBottom--large"
-                :value="fields.emailAddress"
-                name="note" />
+                :value="fields.emailAddress" />
 
             <f-link
                 is-distinct
@@ -31,14 +30,12 @@
             <form-field
                 :label-text="$t('fields.firstNameLabel')"
                 :placeholder="$t('fields.firstNamePlaceholder')"
-                :value="fields.firstName"
-                name="note" />
+                :value="fields.firstName" />
 
             <form-field
                 :label-text="$t('fields.lastNameLabel')"
                 :placeholder="$t('fields.lastNamePlaceholder')"
-                :value="fields.lastName"
-                name="note" />
+                :value="fields.lastName" />
 
             <h2
                 class="u-spacingBottom--large">
