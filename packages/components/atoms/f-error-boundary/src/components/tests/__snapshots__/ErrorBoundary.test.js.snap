@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorBoundary render when \`hideOnError\` is false and \`hasError\` is false should return expected slot props 1`] = `
+<div>
+  <p>hasError: false</p>
+  <p>error: test error</p>
+  <p>vm: test vm</p>
+  <p>info: test info</p>
+  <p>tier: test tier</p>
+  <p>loggerPayload: test payload</p>
+</div>
+`;
+
+exports[`ErrorBoundary render when \`hideOnError\` is false and \`hasError\` is true should return expected slot props 1`] = `
+<div>
+  <p>hasError: true</p>
+  <p>error: test error</p>
+  <p>vm: test vm</p>
+  <p>info: test info</p>
+  <p>tier: test tier</p>
+  <p>loggerPayload: test payload</p>
+</div>
+`;
+
+exports[`ErrorBoundary render when \`hideOnError\` is true and \`hasError\` is false should return expected slot props 1`] = `
+<div>
+  <p>hasError: false</p>
+  <p>error: test error</p>
+  <p>vm: test vm</p>
+  <p>info: test info</p>
+  <p>tier: test tier</p>
+  <p>loggerPayload: test payload</p>
+</div>
+`;
+
+exports[`ErrorBoundary render when \`hideOnError\` is true and \`hasError\` is true should return expected slot props 1`] = `""`;

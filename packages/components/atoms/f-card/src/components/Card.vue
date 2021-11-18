@@ -98,7 +98,7 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
             margin: spacing(x5) auto;
         }
 
-        .c-card-innerSpacing {
+        & > .c-card-innerSpacing {
             padding: spacing(x3) 6% 0;
 
             @include media('>=narrow') {

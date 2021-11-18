@@ -171,6 +171,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
+                            isLoading: false,
                             errorFormType: null
                         };
                     }
@@ -198,6 +199,7 @@ describe('Checkout', () => {
                     },
                     data () {
                         return {
+                            isLoading: false,
                             errorFormType: CHECKOUT_ERROR_FORM_TYPE.default
                         };
                     }
@@ -824,6 +826,23 @@ describe('Checkout', () => {
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
 
+            it('should call `resetLoadingState`', async () => {
+                // Arrange
+                const resetLoadingStateSpy = jest.spyOn(VueCheckout.methods, 'resetLoadingState');
+
+                // Act
+                shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                await flushPromises();
+
+                // Assert
+                expect(resetLoadingStateSpy).toHaveBeenCalled();
+            });
+
             describe('if shouldLoadAddress returns `false`', () => {
                 it('should not call `loadAddress`', async () => {
                     // Arrange & Act
@@ -944,7 +963,12 @@ describe('Checkout', () => {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    data () {
+                        return {
+                            isLoading: true
+                        };
+                    }
                 });
 
                 // Act

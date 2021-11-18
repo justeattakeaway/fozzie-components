@@ -164,7 +164,7 @@ export default {
                     gtm: 'click_sobre_nosotros_quienes_somos'
                 },
                 {
-                    url: 'https://careers.just-eat.com/',
+                    url: 'https://careers.justeattakeaway.com/global/en',
                     text: 'Trabaja con nosotros',
                     gtm: 'click_sobre_nosotros_trabaja_con_nosotros'
                 },

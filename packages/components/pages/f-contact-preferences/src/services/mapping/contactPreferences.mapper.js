@@ -80,3 +80,4 @@ export const filterSortPreferences = preferences => {
 
     return model || [];
 };
+

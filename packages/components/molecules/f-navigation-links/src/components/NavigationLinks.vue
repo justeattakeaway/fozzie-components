@@ -1,25 +1,19 @@
 <template>
     <ul
-        v-if="links.length"
+        v-if="filterLinks.length"
         :class="$style['c-navigationLinks']"
         data-test-id="navigationLinks">
         <li
-            v-for="({ id, url, name, selected }, i) in links"
+            v-for="({ id, href, to, name }, i) in filterLinks"
             :key="i"
             :class="$style['c-navigationLinks-item']">
-            <span
-                v-if="selected"
-                :data-test-id="id"
-                tabindex="0"
-                :class="[$style['c-navigationLinks-link'], $style['c-navigationLinks-link--active']]">
-                {{ name }}
-            </span>
             <v-link
-                v-else
                 :data-test-id="id"
                 :has-text-decoration="false"
-                :href="url"
-                :class="$style['c-navigationLinks-link']">
+                link-class="c-navigationLinks-link"
+                v-bind="{
+                    ...(href ? { href } : to ? { to } : {})
+                }">
                 {{ name }}
             </v-link>
         </li>
@@ -42,6 +36,12 @@ export default {
             type: Array,
             default: () => []
         }
+    },
+
+    computed: {
+        filterLinks () {
+            return this.links.filter(x => x.href || x.to);
+        }
     }
 };
 </script>
@@ -54,25 +54,29 @@ export default {
 }
 
 .c-navigationLinks-item {
-    display: inline-block;
-    width: 100%;
-}
-
-.c-navigationLinks-link {
     display: block;
-    padding: spacing() 0 spacing() spacing(x2);
-    border-left: 2px solid $color-grey-30;
-    color: $color-grey;
+}
+</style>
 
-    &:focus, &:hover {
-        border-left: 2px solid $color-orange;
+<style lang="scss">
+/**
+* .c-navigationLinks-link is intentionally not scoped as the consuming router application (Nuxt.js / Vue Router) will add active classes directly to
+* the router-link within <f-link>. CoreWeb Nuxt custom active link classes are: `is-link-active` and `is-link-exactActive`.
+*/
+.c-navigationLinks-link {
+    display: inline-block;
+    padding: spacing() 0 spacing() spacing(x2);
+    border-left: 2px solid $color-border-default;
+    color: $color-content-link;
+
+    &:focus,
+    &:hover,
+    &.is-link-exactActive {
+        border-left: 2px solid $color-interactive-brand;
         text-decoration: none;
     }
+    &.is-link-exactActive {
+        font-weight: $font-weight-bold;
+    }
 }
-
-.c-navigationLinks-link--active {
-    border-left: 2px solid $color-orange;
-    font-weight: $font-weight-bold;
-}
-
 </style>

@@ -21,10 +21,10 @@ const CheckoutCustomerGetSuccess = 'checkout-customer-get-success';
 const CheckoutCustomerGetFailure = 'checkout-customer-get-failure';
 const CheckoutMounted = 'checkout-mounted';
 const CheckoutVerifyAge = 'checkout-verify-age';
-const StopLoadingSpinner = 'stop-spinner';
 const FormSubmitting = 'form-submitting';
 const FormValid = 'form-valid';
 const FormInvalid = 'form-invalid';
+const StopLoadingSpinner = 'stop-spinner';
 
 export default {
     CheckoutSuccess,
@@ -50,8 +50,8 @@ export default {
     CheckoutMounted,
     CheckoutVerifyAge,
     CheckoutNonFulfillableError,
-    StopLoadingSpinner,
     FormSubmitting,
     FormValid,
-    FormInvalid
+    FormInvalid,
+    StopLoadingSpinner
 };
