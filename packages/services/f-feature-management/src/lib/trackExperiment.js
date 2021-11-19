@@ -22,7 +22,7 @@ function trackExperiment (experiment, onTrack) {
     try {
         onTrack(key, variant);
     } catch (error) {
-        logger.logError('An exception occurred while trying to send an experiment event', error);
+        logger.logError('An exception occurred while trying to send an experiment event', { error });
     }
 }
 

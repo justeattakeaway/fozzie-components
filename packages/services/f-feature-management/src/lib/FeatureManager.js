@@ -71,7 +71,7 @@ class FeatureManager {
 
             return defaultValue;
         } catch (error) {
-            logger.logError(error.message, null, { error });
+            logger.logError(error.message, { error });
             return null;
         }
     }
