@@ -151,20 +151,42 @@ export default {
             'editPreference'
         ]),
 
+        /**
+        * Informs the template that we are in an Error State.
+        * @param {object} Error - The error that has recently occurred
+        */
         handleErrorState (error) {
             this.showErrorPage = true;
             this.error = error;
         },
 
+        /**
+        * A generic method that updates the State (e.g. 'preference[key][field] = value')
+        * @param {string} key - The key of the preference that needs changing
+        * @param {string} field - The field of the preference that needs changing
+        * @param {string} value - The new value the preference field
+        */
         editPreferenceValue (key, field, value) {
             this.editPreference({ key, field, value });
             this.isFormDirty = true;
         },
 
+        /**
+        * Sets the flag to inform the Template of whether the form is currently submitting or not
+        * @param {boolean} isFormSubmitting - True = Form is being submitted / False = Form is not being submitted
+        */
         setSubmittingState (isFormSubmitting) {
             this.isFormSubmitting = isFormSubmitting;
         },
 
+        /**
+        * Gets the form data (from the api) and assigns it to State
+        * then lowers the isFormDirty flag as the form data is currently clean
+        * then stops the on-screen spinner from showing
+        *
+        * If an error occurs then this is logged and the Template is
+        * informed that it is in a state of error.
+        */
         async initialise () {
             try {
                 await this.loadPreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
@@ -176,6 +198,16 @@ export default {
             }
         },
 
+        /**
+        * If there are any form changes
+        * then informs the Template that we are submitting the form
+        * then Saves the State (via the api)
+        * then lowers the isFormDirty flag as the form data is now currently clean again
+        * then informs the Template that we are now not submitting the form
+        *
+        * If an error occurs then this is logged and the Template is
+        * informed that it is in a state of error.
+        */
         async onFormSubmit () {
             if (!this.isFormDirty) {
                 return;
