@@ -1,10 +1,14 @@
 const AccountInfo = require('../../test-utils/component-objects/f-accountInfo.component');
 
-const accountInfo = new AccountInfo();
+let accountInfo;
 
 describe('f-accountInfo component tests', () => {
     beforeEach(() => {
+        accountInfo = new AccountInfo();
+
         accountInfo.load();
+
+        accountInfo.waitForComponent();
     });
 
     it('should display the f-accountInfo component', () => {
