@@ -53,8 +53,7 @@
             is-full-width
             action-type="submit"
             data-test-id="confirm-payment-submit-button"
-            :is-loading="isFormSubmitting"
-        >
+            :is-loading="isFormSubmitting">
             {{ $t('buttonText') }}
         </f-button>
     </form>
@@ -116,13 +115,12 @@ export default {
         availableFulfilmentTimesKey: {
             type: Number,
             required: true
-        }
-    },
+        },
 
-    data () {
-        return {
-            isFormSubmitting: false
-        };
+        isFormSubmitting: {
+            type: Boolean,
+            required: true
+        }
     },
 
     /*
@@ -209,7 +207,6 @@ export default {
          */
         onFormSubmit () {
             this.$emit(EventNames.FormSubmitting);
-            this.setSubmittingState(true);
 
             if (this.isFormValid()) {
                 this.$emit(EventNames.FormValid);
@@ -219,8 +216,6 @@ export default {
 
                 this.$emit(EventNames.FormInvalid, validationState);
             }
-
-            this.setSubmittingState(false);
         },
 
         /**
@@ -237,15 +232,6 @@ export default {
          */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
-        },
-
-        /**
-         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
-         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
-         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
-         */
-        setSubmittingState (isFormSubmitting) {
-            this.isFormSubmitting = isFormSubmitting;
         }
     },
 
