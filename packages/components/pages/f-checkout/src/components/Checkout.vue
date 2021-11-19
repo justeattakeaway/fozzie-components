@@ -13,10 +13,6 @@
             v-else-if="shouldShowAgeVerificationForm"
             @checkout-verify-age="verifyCustomerAge" />
 
-        <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
-
         <div
             v-if="shouldShowCheckoutForm"
             data-theme="jet"
@@ -36,6 +32,7 @@
                     :is-checkout-method-dine-in="isCheckoutMethodDineIn"
                     :scroll-to-element="scrollToElement"
                     :available-fulfilment-times-key="availableFulfilmentTimesKey"
+                    :is-form-submitting="isFormSubmitting"
                     v-on="formEvents" />
 
                 <template
@@ -214,7 +211,8 @@ export default {
             isLoading: true,
             errorFormType: null,
             availableFulfilmentTimesKey: 0,
-            checkoutAnalyticsService: new CheckoutAnalyticsService(this)
+            checkoutAnalyticsService: new CheckoutAnalyticsService(this),
+            isFormSubmitting: false
         };
     },
 
@@ -465,7 +463,18 @@ export default {
                 }
             } catch (error) {
                 this.handleErrorState(error);
+            } finally {
+                this.setSubmittingState(false);
             }
+        },
+
+        /**
+         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
+         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
+         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
+         */
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
         },
 
         /**
@@ -770,6 +779,7 @@ export default {
         },
 
         onFormSubmit () {
+            this.setSubmittingState(true);
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
             this.updateMessage();
         },
@@ -803,6 +813,7 @@ export default {
             };
 
             this.handleEventLogging('CheckoutValidationError', validationState, { ...expandedData, validationState });
+            this.setSubmittingState(false);
         },
 
         resetLoadingState () {
@@ -870,5 +881,15 @@ export default {
 
 .c-checkout-submitButton--noBottomSpace {
     margin-bottom: 0;
+}
+
+.c-checkout-alert {
+    width: $checkout-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include media('<=#{$checkout-width}') {
+        width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
+    }
 }
 </style>
