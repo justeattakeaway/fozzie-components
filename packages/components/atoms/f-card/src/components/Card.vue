@@ -6,7 +6,12 @@
                 [$style['c-card--outline']]: hasOutline,
                 [$style['c-card--pageContentWrapper']]: isPageContentWrapper
             }]">
-        <div :class="[$style['c-card-innerSpacing']]">
+        <div
+            data-test-id="card-inner"
+            :class="[
+                [$style['c-card-innerSpacing']], {
+                    [$style['c-card-innerSpacing--large']]: hasInnerSpacingLarge
+                }]">
             <component
                 :is="cardHeadingTag"
                 v-if="cardHeading"
@@ -58,6 +63,10 @@ export default {
         hasFullWidthFooter: {
             type: Boolean,
             default: false
+        },
+        hasInnerSpacingLarge: {
+            type: Boolean,
+            default: false
         }
     }
 };
@@ -69,6 +78,7 @@ $card-bgColor                             : $color-container-default;
 $card-borderColor                         : $color-border-default;
 $card-borderRadius                        : $radius-rounded-c;
 $card-padding                             : spacing(x2);
+$card-padding-large                       : spacing(x4);
 $card--pageContentWrapper-width           : 472px; // so that it falls on our 8px spacing grid
 
 .c-card {
@@ -78,6 +88,10 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
 }
     .c-card-innerSpacing {
         padding: $card-padding;
+
+        &.c-card-innerSpacing--large {
+            padding: $card-padding-large;
+        }
     }
 
     .c-card--outline {
