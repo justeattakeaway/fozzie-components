@@ -91,7 +91,7 @@ export default class FeaturesService {
     async update () {
         try {
             const newConfigJson = await this.featureManagement.loadFromCdn();
-            this.store.dispatch(storeAction, newConfigJson);
+            await this.store.dispatch(storeAction, newConfigJson);
         } catch (error) {
             this.logger.logError('Failed to update features config file', { error });
         }
