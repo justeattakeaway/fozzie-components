@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.1.1
 ------------------------------
-*November18, 2021*
+*November 19, 2021*
 
 ### Changed
 - Replaced ES exports with node exports to allow external applications to access the components.
