@@ -103,9 +103,16 @@
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
 import Card from '@justeat/f-card';
+import '@justeat/f-card/dist/f-card.css';
+
 import FormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
+
 import FLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
+
 import FButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 
 import tenantConfigs from '../tenants';
 
@@ -153,11 +160,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '@justeat/f-card/dist/f-card.css';
-@import '@justeat/f-form-field/dist/f-form-field.css';
-@import '@justeat/f-link/dist/f-link.css';
-@import '@justeat/f-button/dist/f-button.css';
-
 .c-accountInfo-customerCareLink {
     display: block;
     margin-bottom: spacing(x4);
