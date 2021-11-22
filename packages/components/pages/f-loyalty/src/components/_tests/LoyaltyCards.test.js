@@ -1,4 +1,4 @@
-import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation/src';
 import tenantConfigs from '@justeat/f-offers/src/tenants';
@@ -27,8 +27,13 @@ const store = new Vuex.Store({
     }
 });
 
-const MCOK_STATE_NO_CARDS = 'no-cards';
+const MOCK_STATE = {
+    NO_CARDS: 'no-cards',
+    DEFAULT: 'default',
+    LOADING: 'loading'
+};
 
+// Mocks content cards component as we only need to test slots here
 const MockContentCards = state => ({
     render (h) {
         return this.$scopedSlots[state]
@@ -48,36 +53,56 @@ const MockContentCards = state => ({
     }
 });
 
+// Creates a wrapper for test to avoid duplication
+const createWrapper = KEY => shallowMount(LoyaltyCards, {
+    localVue,
+    store,
+    i18n,
+    stubs: {
+        'content-cards': MockContentCards(KEY)
+    }
+});
+
 describe('LoyaltyCards.vue', () => {
-    let wrapper;
-    beforeEach(() => {
-        // Arrange
-        wrapper = shallowMount(LoyaltyCards, {
-            localVue,
-            store,
-            i18n,
-            stubs: {
-                'content-cards': MockContentCards(MCOK_STATE_NO_CARDS),
-                'cards-slot': { template: '<div>cards-slot</div>' },
-                'no-cards-error-state': { template: '<div>no-cards-error-state</div>' },
-                terms: { template: '<div>terms</div>' },
-                'loyalty-cards-loading-state': { template: '<div>loyalty-cards-loading-state</div>' }
-            }
-        });
-    });
     describe('No Cards ::', () => {
-        it('should display the no-cards-error-state when there are no cards', () => {
+        it('should display the no-cards-error-state when no cards slot is active', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_STATE.NO_CARDS);
+            const label = 'no-cards-error-state-stub';
+
             // Act
-            const noCardsComponent = wrapper.find('no-cards-error-state');
-            console.log(wrapper.html());
+            const noCardsComponent = wrapper.find(label);
+
+            // Assert
+            expect(noCardsComponent.exists()).toEqual(true);
         });
     });
 
     describe('Cards Received ::', () => {
+        it('should display the cards-slot when cards slot is active', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_STATE.DEFAULT);
+            const label = 'cards-slot-stub';
 
+            // Act
+            const cardsComponent = wrapper.find(label);
+
+            // Assert
+            expect(cardsComponent.exists()).toEqual(true);
+        });
     });
 
     describe('Loading Cards', () => {
+        it('should display the loyalty-cards-loading-state when the loading slot is active', () => {
+            // Arrange
+            const wrapper = createWrapper(MOCK_STATE.LOADING);
+            const label = 'loyalty-cards-loading-state-stub';
 
+            // Act
+            const loadingComponent = wrapper.find(label);
+
+            // Assert
+            expect(loadingComponent.exists()).toEqual(true);
+        });
     });
 });

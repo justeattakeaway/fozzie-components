@@ -5,6 +5,7 @@
             :user-id="globalUserId"
             :api-key="brazeApiKey"
             :locale="$i18n.locale"
+            :tags="tags"
             :push-to-data-layer="pushToDataLayer">
             <template #default="{ cards }">
                 <cards-slot :cards="cards" />
@@ -48,7 +49,8 @@ export default {
 
     data () {
         return {
-            pushToDataLayer: () => {}
+            pushToDataLayer: () => {},
+            tags: 'loyalty'
         };
     },
 
