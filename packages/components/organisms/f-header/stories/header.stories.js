@@ -42,11 +42,14 @@ export const HeaderComponent = () => ({
         headerBackgroundTheme: {
             default: select('Header theme', ['white', 'highlight', 'transparent'])
         },
-        userInfoProp: {
-            default: object('User info', userInfo)
-        },
         showLoginInfo: {
-            default: boolean('Show login/user info link', true)
+            default: boolean('Show login link / user info', true)
+        },
+        isLoggedIn: {
+            default: boolean('Is logged in?', true)
+        },
+        userInfoProp: {
+            default: object('User info (if logged in)', userInfo)
         },
         showHelpLink: {
             default: boolean('Show help link', true)
@@ -63,7 +66,7 @@ export const HeaderComponent = () => ({
     },
     template: `
         <vue-header
-            :user-info-prop="userInfoProp"
+            :user-info-prop="isLoggedIn && userInfoProp"
             :show-offers-link="showOffersLink"
             :show-help-link="showHelpLink"
             :locale="locale"
