@@ -124,7 +124,7 @@
 #   node:
 #     docker:
 #       # specify the version you desire here
-#       - image: circleci/node:14.17.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+#       - image: circleci/node:14.18.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 # jobs:
 #   set_up:
