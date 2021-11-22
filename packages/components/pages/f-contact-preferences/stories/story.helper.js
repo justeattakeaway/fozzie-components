@@ -65,8 +65,6 @@ export const setupApiState = ({
         const [, definition] = e;
 
         if (apiState === definition.state) {
-            console.log('Setting Api State : ', definition); // eslint-disable-line
-
             process.mockFactory.setupMockResponse(
                 definition.method,
                 definition.url,
