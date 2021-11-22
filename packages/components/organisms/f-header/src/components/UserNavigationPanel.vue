@@ -23,8 +23,7 @@
         </li>
 
         <li
-            v-if="!isBelowMid"
-            data-test-id="logout">
+            v-if="!isBelowMid">
             <a
                 :tabindex="isOpen ? 0 : -1"
                 :href="returnLogoutUrl"
@@ -34,6 +33,7 @@
                     "action": "header",
                     "label": "${copy.accountLogout.gtm}"
                 }`'
+                data-test-id="logout-link"
                 :class="$style['list-link']"
                 @blur="$emit('deactivateNav')"
                 @focus="$emit('activateNav')">

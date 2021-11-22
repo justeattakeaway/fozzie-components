@@ -87,7 +87,7 @@ describe('Navigation', () => {
         await wrapper.setData(defaultData); // need to await this for the state to fully update the DOM
 
         // Assert
-        expect(wrapper.find('[data-test-id="delivery-enquiry"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="delivery-enquiry-link"]').exists()).toBe(true);
     });
 
     it('should NOT show the delivery enquiry link in the navigation if `showDeliveryEnquiry: false` and the content is there', async () => {
@@ -103,7 +103,7 @@ describe('Navigation', () => {
         await wrapper.setData(defaultData);
 
         // Assert
-        expect(wrapper.find('[data-test-id="delivery-enquiry"]').exists()).toBe(false);
+        expect(wrapper.find('[data-test-id="delivery-enquiry-link"]').exists()).toBe(false);
     });
 
     it('should show "logout" if the user is logged in and has nav link data', async () => {
@@ -119,7 +119,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="logout"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="logout-link"]').exists()).toBe(true);
     });
 
     it('should show "navLinks" if the user is logged in and has nav link data', async () => {
@@ -172,7 +172,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="logout"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="logout-link"]').exists()).toBe(true);
     });
 
     it('should show "login" if the user DOES NOT have nav link data and is NOT logged in"', async () => {
@@ -198,7 +198,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="login"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="login-link"]').exists()).toBe(true);
     });
 
     it('should show the navbar if there are navigation links', () => {
@@ -724,7 +724,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-test-id="login"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="login-link"]').exists()).toBe(false);
         });
 
         it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {

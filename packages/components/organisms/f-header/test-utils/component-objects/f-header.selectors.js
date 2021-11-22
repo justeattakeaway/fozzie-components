@@ -13,7 +13,7 @@ export const NAVIGATION = {
         link: '[data-test-id="help-link"]'
     },
     delivery: {
-        link: '[data-test-id="delivery-link"]'
+        link: '[data-test-id="delivery-enquiry-link"]'
     },
     userAccount: {
         link: '[data-test-id="user-info-link"]'

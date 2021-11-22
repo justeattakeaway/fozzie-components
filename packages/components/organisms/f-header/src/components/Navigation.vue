@@ -81,62 +81,47 @@
             <ul
                 :class="$style['c-nav-list']"
                 data-test-id="nav-list">
-                <li
+                <nav-link
                     v-if="showOffersLink"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
-                    <a
-                        :tabindex="tabIndex"
-                        data-test-id="offers-link"
-                        data-trak='{
-                            "trakEvent": "click",
-                            "category": "header",
-                            "action": "click - navigation",
-                            "label": "offers"
-                        }'
-                        :href="copy.offers.url"
-                        :class="[
-                            $style['c-nav-list-link'],
-                            { [$style['c-nav-list-link--alt']]: isAltColour },
-                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
-                        ]">
+                    :text="copy.offers.text"
+                    :tabindex="tabIndex"
+                    :href="copy.offers.url"
+                    :data-trak="analyticsObjects.navigation.offers.clickLink"
+                    :is-alt-colour="isAltColour"
+                    :background-theme="headerBackgroundTheme"
+                    data-test-id="offers-link">
+                    <template #icon>
                         <gift-icon
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--offers'],
                                 { [$style['c-nav-icon--alt']]: isAltColour }
                             ]" />
-                        {{ copy.offers.text }}
-                    </a>
-                </li>
-                <li
+                    </template>
+                </nav-link>
+
+                <nav-link
                     v-if="showDeliveryEnquiry"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
-                    data-test-id="delivery-enquiry">
-                    <a
-                        :tabindex="tabIndex"
-                        data-test-id="delivery-link"
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "header",
-                            "label": "${copy.deliveryEnquiry.gtm}"
-                        }`'
-                        :href="copy.deliveryEnquiry.url"
-                        target="_blank"
-                        :class="[
-                            $style['c-nav-list-link'],
-                            { [$style['c-nav-list-link--alt']]: isAltColour },
-                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
-                        ]">
+                    :text="copy.deliveryEnquiry.text"
+                    :tabindex="tabIndex"
+                    :href="copy.deliveryEnquiry.url"
+                    :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                        label: copy.deliveryEnquiry.gtm
+                    })"
+                    :is-alt-colour="isAltColour"
+                    :background-theme="headerBackgroundTheme"
+                    target="_blank"
+                    data-test-id="delivery-enquiry-link">
+                    <template #icon>
                         <moped-icon
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--delivery'],
                                 { [$style['c-nav-icon--alt']]: isAltColour }
                             ]" />
-                        {{ copy.deliveryEnquiry.text }}
-                    </a>
-                </li>
+                    </template>
+                </nav-link>
+
                 <li
                     :class="[
                         $style['c-nav-list-item--horizontallyAlignedAboveMid'],
@@ -190,78 +175,45 @@
                     </v-popover>
                 </li>
 
-                <li
+                <nav-link
                     v-if="!userInfo && showLoginInfo"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
-                    data-test-id="login">
-                    <a
-                        :tabindex="tabIndex"
-                        :href="returnLoginUrl"
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "header",
-                            "label": "${copy.accountLogin.gtm}"
-                        }`'
-                        rel="nofollow"
-                        :class="[
-                            $style['c-nav-list-link'],
-                            { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
-                            { [$style['c-nav-list-link--alt']]: isAltColour },
-                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
-                        ]"
-                        data-test-id="login-link">
-                        {{ copy.accountLogin.text }}
-                    </a>
-                </li>
+                    :text="copy.accountLogin.text"
+                    :tabindex="tabIndex"
+                    :href="returnLoginUrl"
+                    :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                        label: copy.accountLogin.gtm
+                    })"
+                    :is-alt-colour="isAltColour"
+                    :background-theme="headerBackgroundTheme"
+                    :left-padding-below-mid="!!userInfo"
+                    rel="nofollow"
+                    data-test-id="login-link" />
 
-                <li
+                <nav-link
                     v-if="showHelpLink"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
-                    <a
-                        :tabindex="tabIndex"
-                        :href="copy.help.url"
-                        :data-trak='`{
-                                "trakEvent": "click",
-                                "category": "engagement",
-                                "action": "header",
-                                "label": "${copy.help.gtm}"
-                            }`'
-                        :class="[
-                            $style['c-nav-list-link'],
-                            { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
-                            { [$style['c-nav-list-link--alt']]: isAltColour },
-                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
-                        ]"
-                        data-test-id="help-link">
-                        {{ copy.help.text }}
-                    </a>
-                </li>
+                    :text="copy.help.text"
+                    :tabindex="tabIndex"
+                    :href="copy.help.url"
+                    :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                        label: copy.help.gtm
+                    })"
+                    :is-alt-colour="isAltColour"
+                    :left-padding-below-mid="!!userInfo"
+                    :background-theme="headerBackgroundTheme"
+                    data-test-id="help-link" />
 
-                <li
+                <nav-link
                     v-if="userInfo && isBelowMid && showLoginInfo"
-                    :aria-hidden="!isCountrySelectorClosedOnMobileView"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
-                    data-test-id="logout">
-                    <a
-                        :tabindex="tabIndex"
-                        :href="returnLogoutUrl"
-                        :data-trak='`{
-                                "trakEvent": "click",
-                                "category": "engagement",
-                                "action": "header",
-                                "label": "${copy.accountLogout.gtm}"
-                            }`'
-                        :class="[
-                            $style['c-nav-list-link'],
-                            { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
-                            { [$style['c-nav-list-link--alt']]: isAltColour },
-                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
-                        ]"
-                    >
-                        {{ copy.accountLogout.text }}
-                    </a>
-                </li>
+                    :text="copy.accountLogout.text"
+                    :tabindex="tabIndex"
+                    :href="copy.accountLogout.url"
+                    :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                        label: copy.accountLogout.gtm
+                    })"
+                    :is-alt-colour="isAltColour"
+                    :left-padding-below-mid="!!userInfo"
+                    :background-theme="headerBackgroundTheme"
+                    data-test-id="logout-link" />
 
                 <li
                     v-if="showCountrySelector"
@@ -321,30 +273,25 @@
 </template>
 
 <script>
-import {
-    MopedIcon,
-    GiftIcon,
-    ProfileIcon
-} from '@justeat/f-vue-icons';
-import {
-    axiosServices,
-    windowServices
-} from '@justeat/f-services';
+// Fozzie imports
+import { MopedIcon, GiftIcon, ProfileIcon } from '@justeat/f-vue-icons';
+import { axiosServices, windowServices } from '@justeat/f-services';
 import VPopover from '@justeat/f-popover';
-import FlagIcon from './FlagIcon.vue';
-import CountrySelectorPanel from './CountrySelectorPanel.vue';
-import UserNavigationPanel from './UserNavigationPanel.vue';
 import '@justeat/f-popover/dist/f-popover.css';
+
+// Internal
 import { countries } from '../tenants';
+import analyticsObjects from '../services/analytics/objects';
 
 export default {
     components: {
-        CountrySelectorPanel,
-        FlagIcon,
+        CountrySelectorPanel: () => import('./CountrySelectorPanel.vue'),
+        FlagIcon: () => import('./FlagIcon.vue'),
         GiftIcon,
         MopedIcon,
+        NavLink: () => import('./NavLink.vue'),
         ProfileIcon,
-        UserNavigationPanel,
+        UserNavigationPanel: () => import('./UserNavigationPanel.vue'),
         VPopover
     },
 
@@ -424,6 +371,10 @@ export default {
     },
 
     computed: {
+        analyticsObjects () {
+            return analyticsObjects;
+        },
+
         isBelowMid () {
             return this.currentScreenWidth <= this.midBreakpoint;
         },
@@ -708,350 +659,13 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
 
-/**
- * Global Page Navigation
- * =================================
- * Styles relating to the global site navigation
- *
- */
-
-$nav-text-size                     : 'body-l';
-$nav-text-size--narrow             : 'body-s';
-$nav-text-color                    : $color-content-link;
-
-$nav-text-color--narrow            : $color-content-subdued;
-$nav-text-color--transparent       : $color-content-link-inverse;
-$nav-text-weight                   : $font-weight-bold;
-$nav-text-subFont                  : $font-family-base;
-$nav-icon-color                    : $color-interactive-primary;
-$nav-icon-color--transparent       : $color-interactive-inverse;
-$nav-icon-color--mobileWhiteBg     : $color-content-interactive-tertiary;
-$nav-transition-duration           : 250ms;
-$nav-icon-size                     : 24px;
-
-$nav-featureLinkIcon-width         : 28px;
-$nav-featureLinkIcon-height        : 28px;
-
-$nav-toggleIcon-left               : spacing(x2);
-$nav-toggleIcon-width              : 21px;
-$nav-toggleIcon-height             : 2px;
-$nav-toggleIcon-borderRadius       : 1px;
-$nav-toggleIcon-color              : $nav-icon-color;
-$nav-toggleIcon-color--transparent : $nav-icon-color--transparent;
-$nav-toggleIcon-bg                 : transparent;
-$nav-toggleIcon-space              : 5px;
-
-$nav-popover-width                 : 300px;
-
-    .c-nav-container {
-        display: none;
-        @include media('>mid') {
-            display: block;
-        }
-        &.is-visible {
-            display: block;
-        }
-    }
-
-    // TODO: MAKE THIS NOT USE FLOATS
-    // global modifier for list items horizontally aligned
-    .c-nav-list-item--horizontallyAlignedAboveMid {
-        @include media('>mid') {
-            float: left;
-        }
-    }
-
-    // Modifier to position a nav-list-item at the bottom of the mobile navigation
-    // As an example, this is used on the logout link on the global site
-    // Logout is in the popover list, but at the bottom of the
-    .c-nav-list-item--forceLast {
-        @include media('<=mid') {
-            position: absolute;
-            top: 100%;
-            width: 100%;
-        }
-    }
-
-        .c-nav-list-link,
-        .c-nav-list-text {
-            display: flex;
-            align-items: center;
-            padding: spacing(x1.5) spacing(x2);
-            margin: 0;
-            font-family: $nav-text-subFont;
-            color: $nav-text-color--narrow;
-            @include font-size($nav-text-size--narrow);
-            font-weight: 300;
-            text-decoration: none;
-            border-bottom: 1px solid $color-border-default;
-
-            @include media('>mid') {
-                @include font-size($nav-text-size);
-                font-weight: $nav-text-weight;
-                color: $nav-text-color;
-                border-bottom: none;
-                height: $header-height;
-            }
-        }
-
-        .c-nav-list-link--alt {
-            @include media('>mid') {
-                color: $nav-text-color--transparent;
-            }
-        }
-
-        .c-nav-list-link--transparent,
-        .c-nav-list-link--alt {
-            @include media('>mid') {
-                &:hover,
-                &:focus {
-                    color: $nav-text-color--transparent;
-                }
-            }
-        }
-
-        .c-nav-list-text {
-            @include media('<=mid') {
-                display: block;
-            }
-        }
-
-        .c-nav-list-text-sub {
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 300px;
-
-            &.u-showBelowMid {
-                @include media('>mid') {
-                    display: none !important;
-                }
-            }
-        }
-
-        .c-nav-list-link--leftPaddingBelowMid {
-            @include media('<=mid') {
-                padding-left: spacing(x6);
-            }
-        }
-
-        .c-nav-list-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 0;
-            background: transparent;
-        }
-
-    .has-sublist {
-        // ensures the dropdown/popover is relative to the hover element, on wider views
-        @include media('>mid') {
-            position: relative;
-            cursor: pointer;
-        }
-    }
-
-    .c-nav-featureLink {
+.c-nav-container {
+    display: none;
+    @include media('>mid') {
         display: block;
-        width: $nav-featureLinkIcon-width;
-        height: $nav-featureLinkIcon-height;
-
-        @include media('<=mid') {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: spacing(x2) + $nav-featureLinkIcon-width + spacing(x2); // includes padding on both sides
-            height: spacing(x2) + $nav-featureLinkIcon-height + spacing(x2);
-            padding: spacing(x2);
-        }
     }
-
-    .c-nav-featureLink--hideAboveMid {
-        @include media('>mid') {
-            display: none;
-        }
-    }
-
-    // Icons, such as the profile icon
-    .c-nav-icon {
-        float: left;
-        margin-right: spacing();
-        width: $nav-icon-size;
-        height: $nav-icon-size;
-
-        @include media('>mid') {
-            & path {
-                fill: $nav-icon-color;
-            }
-        }
-    }
-
-    .c-nav-icon--delivery,
-    .c-nav-icon--offers,
-    .c-nav-icon--profile {
-        @include media('<=mid') {
-            & path {
-                fill: $nav-icon-color--mobileWhiteBg;
-            }
-        }
-    }
-
-    .c-nav-icon--alt {
-        & path {
-            fill: $nav-icon-color--transparent;
-        }
-    }
-
-// Navigation Toggle
-// Only shown at narrow widths (Hamburger Menu icon)
-.c-nav-toggle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: $nav-trigger-width;
-    height: $nav-trigger-height;
-    cursor: pointer;
-    background-color: $nav-toggleIcon-bg;
-    border: none;
-
-    // hide on wider views
-    @include media('>mid') {
-        display: none;
-    }
-}
-
-    // The Toggle Icon (hamburger icon)
-    .c-nav-toggle-icon {
+    &.is-visible {
         display: block;
-        top: 50%;
-        left: $nav-toggleIcon-left;
-        width: $nav-toggleIcon-width;
-        text-indent: -150px;
-        white-space: nowrap;
-        transition: background-color $nav-transition-duration ease-in;
-
-        // Apply these styles to the base icon element and its created pseudo elements
-        &,
-        &:before,
-        &:after {
-            position: absolute;
-            height: $nav-toggleIcon-height;
-            background-color: $nav-toggleIcon-color;
-            border-radius: $nav-toggleIcon-borderRadius;
-
-            .c-header--transparent & {
-                background-color: $nav-toggleIcon-color--transparent;
-            }
-
-            .c-nav-toggle--altColour & {
-                background-color: $color-container-default;
-            }
-        }
-
-        &:before,
-        &:after {
-            content: '';
-            width: 100%;
-            left: 0;
-            transition: all $nav-transition-duration ease-in-out;
-        }
-        &:before {
-            top: -($nav-toggleIcon-space + $nav-toggleIcon-height);
-        }
-        &:after {
-            top: ($nav-toggleIcon-space + $nav-toggleIcon-height);
-        }
-    }
-
-    // Icon active state
-    // Shown when the checkbox is checked or the `is-open` class is present.
-    .c-nav-trigger:checked ~ .c-nav-toggle,
-    .c-nav-toggle.is-open {
-        & > .c-nav-toggle-icon {
-            background-color: $nav-toggleIcon-bg;
-
-            &:before,
-            &:after {
-                top: 0;
-            }
-            &:before {
-                transform: rotate(45deg);
-            }
-            &:after {
-                transform: rotate(-45deg);
-            }
-        }
-    }
-
-.c-nav-popover {
-    @include media('>mid') {
-        min-width: 300px;
-        position: absolute;
-        top: 100%;
-        right: 99999px; // offscreen, so can’t ever be hovered over by default
-        opacity: 0;
-        z-index: -1;
-        transition: opacity $nav-popover-transition-duration ease-in-out $nav-popover-transition-delay,
-                    z-index 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration),
-                    right 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration);
-
-        // display the popover when our parent item is hovered(recieved class .open)
-        .has-sublist.is-open & {
-            opacity: 1;
-            z-index: zIndex(high);
-            right: 0;
-
-            transition: opacity $nav-popover-transition-duration ease-in-out,
-                        z-index 0s linear;
-        }
-
-        // tooltip arrow
-        &:before {
-            right: 10%;
-        }
-    }
-}
-
-.c-nav-popover.c-nav-popover--countrySelector {
-    @include media('>mid') {
-        // tooltip arrow
-        &:before {
-            right: 4%;
-        }
-    }
-}
-
-.c-nav-list-iconWrapper {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-
-    @include media('<=mid') {
-        margin-right: spacing();
-    }
-
-    @include media('>mid') {
-        background-color: $color-container-default;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-.c-nav-list-icon--flagCurrent {
-    margin-right: 0;
-}
-
-.c-nav-list-title {
-    width: 0;
-    overflow: hidden;
-    @include font-size(heading-s, true, narrow);
-
-    @include media('<=mid') {
-        width: auto;
     }
 }
 </style>
