@@ -45,7 +45,7 @@ const initialiseBraze = require('@justeat/f-braze-adapter');
 
 The package comes with one method for initialising Braze, or retrieving the already initialised module.
 
-This method returns an instance of the BrazeDispatcher class, which can also be used for logging interactions with braze elements returned from the API.
+This method returns an instance of the BrazeAdapter class, which can also be used for logging interactions with braze elements returned from the API.
 
 All other functionality, such as handling content cards or intercepting in-app messages can be done with callbacks passed through config.
 
@@ -76,7 +76,7 @@ const brazePromise = initialise(config);
 // have card data as returned by braze attached to a "data-content-card" attribute, and that all
 // elements accessible via that css selector are visible
 
-brazePromise.then(brazeDispatcher => {
+brazePromise.then(brazeAdapter => {
   const brazeCards = document.querySelectorAll('.brazeCard');
 
   let brazeCardsData = [];
@@ -85,12 +85,19 @@ brazePromise.then(brazeDispatcher => {
     brazeCardsData.push(brazeCard.dataset.contentCard);
 
     brazeCard.addEventListener('click', clickEvent => {
-      brazeDispatcher.logCardClick(brazeCard.dataset.contentCard);
+      brazeAdapter.logCardClick(brazeCard.dataset.contentCard);
     });
   });
 
-  brazeDispatcher.logCardImpressions(brazeCardsData);
+  brazeAdapter.logCardImpressions(brazeCardsData);
 });
+```
+#### Unsubscribing
+
+When the BrazeAdapter is no longer required, calling the unsubscribe method on the Adapter will remove it from the internal registry of consumers
+
+```js
+brazeAdapter.unsubscribe();
 ```
 
 ### Config Object
