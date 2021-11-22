@@ -52,46 +52,6 @@ const apiStateDefinitions = {
     }
 };
 
-export const dataStates = {
-    default: null,
-    newsEmailChecked: 'news-email-checked'
-};
-
-export const dataStateOptions = {
-    title: 'Set Data State',
-    states: {
-        Default: dataStates.default,
-        'With News.Email checked': dataStates.newsEmailChecked
-    }
-};
-
-const dataStateDefinitions = {
-    default: {
-        state: dataStates.default,
-        states: [{
-            key: 'news',
-            field: 'emailValue',
-            value: false
-        }, {
-            key: 'news',
-            field: 'smsValue',
-            value: false
-        }]
-    },
-    newsEmailChecked: {
-        state: dataStates.newsEmailChecked,
-        states: [{
-            key: 'news',
-            field: 'emailValue',
-            value: true
-        }, {
-            key: 'news',
-            field: 'smsValue',
-            value: false
-        }]
-    }
-};
-
 /**
 * Prepares the api mocks to reflect what value the 'Set Api State' Storybook Knob equals.
 * @param {apiStates} apiState - The value of the 'Set Api State' Storybook Knob (defaults to 'none')
@@ -121,23 +81,16 @@ export const setupApiState = ({
 };
 
 /**
-* Prepares the pre-loaded data (from the api mock) to reflect what value the 'Set Data State' Storybook Knob equals.
+* Prepares the pre-loaded data (from the api mock) to reflect what values the 'Opted In' Storybook Knobs equals.
 * @param {object} store - The current registered store in the story file
-* @param {dataStates} dataState - The selected value of the 'Set Data State' Storybook Knob (defaults to 'default', i.e data unchanged from api mock)
+* @param {boolean} emailState - The selected value of the 'News - Email - Opted In' Storybook Knob (defaults to 'false', i.e data unchanged from api mock)
+* @param {boolean} smsState - The selected value of the 'News - Sms - Opted In' Storybook Knob (defaults to 'false', i.e data unchanged from api mock)
 */
-export const setupDataState = ({
+export const setupNewsDataState = ({
     store = {},
-    dataState = dataStates.default
-}) => {
-    Object.entries(dataStateDefinitions).forEach(e => {
-        const [, definition] = e;
-
-        if (definition.state === dataState) {
-            console.log('Setting Data State : ', definition.states); // eslint-disable-line
-
-            definition.states.forEach(x => {
-                store.dispatch('fContactPreferencesModule/editPreference', { key: x.key, field: x.field, value: x.value });
-            });
-        }
-    });
+    emailState = false,
+    smsState = false
+} = {}) => {
+    store.dispatch('fContactPreferencesModule/editPreference', { key: 'news', field: 'emailValue', value: emailState });
+    store.dispatch('fContactPreferencesModule/editPreference', { key: 'news', field: 'smsValue', value: smsState });
 };

@@ -1,18 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
-import { select, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import ContactPreferences from '../src/components/ContactPreferences.vue';
 import fContactPreferencesModule from '../src/store/contactPreferences.module';
 import {
-    setupApiState,
-    setupDataState,
     authToken,
+    setupApiState,
+    setupNewsDataState,
     apiStates,
-    dataStates,
-    apiStateOptions,
-    dataStateOptions
+    apiStateOptions
 } from './story.helper';
 
 Vue.use(Vuex);
@@ -36,8 +34,12 @@ export const ContactPreferencesComponent = () => ({
             default: select(apiStateOptions.title, apiStateOptions.states, apiStates.none)
         },
 
-        dataState: {
-            default: select(dataStateOptions.title, dataStateOptions.states, dataStates.default)
+        isNewsEmailOptedIn: {
+            default: boolean('News - Email - Opted In', false)
+        },
+
+        isNewsSmsOptedIn: {
+            default: boolean('News - Sms - Opted In', false)
         }
     },
 
@@ -54,9 +56,10 @@ export const ContactPreferencesComponent = () => ({
             setupApiState({
                 apiState: this.apiState
             });
-            setupDataState({
+            setupNewsDataState({
                 store: this.$store,
-                dataState: this.dataState
+                emailState: this.isNewsEmailOptedIn,
+                smsState: this.isNewsSmsOptedIn
             });
         }
     },
