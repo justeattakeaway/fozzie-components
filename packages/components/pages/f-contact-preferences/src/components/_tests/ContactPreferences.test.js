@@ -116,7 +116,7 @@ describe('ContactPreferences Component', () => {
         it('should not show the error card if no errors', () => {
             // Arrange & Act
             wrapper = mountContactPreferences();
-            const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
+            const element = wrapper.find('[data-test-id="contact-preferences-error-card"]');
 
             // Assert
             expect(element.exists()).toEqual(false);
@@ -126,7 +126,7 @@ describe('ContactPreferences Component', () => {
             // Arrange & Act
             wrapper = mountContactPreferences();
             await wrapper.setData({ showErrorPage: true });
-            const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
+            const element = wrapper.find('[data-test-id="contact-preferences-error-card"]');
 
             // Assert
             expect(element.exists()).toEqual(true);
@@ -155,7 +155,7 @@ describe('ContactPreferences Component', () => {
             // Arrange
             storeState.preferences.find(e => e.key === preferencesKey)[`${preferenceName}Value`] = previousValue;
             wrapper = mountContactPreferences();
-            const input = wrapper.find(`[data-test-id="contactPreferences-${preferencesKey}-${preferenceName}-checkbox"]`);
+            const input = wrapper.find(`[data-test-id="contact-preferences-${preferencesKey}-${preferenceName}-checkbox"]`);
 
             // Act
             await input.setChecked(setValue);
@@ -174,7 +174,7 @@ describe('ContactPreferences Component', () => {
         it('should set the `isFormDirty` flag to true', async () => {
             // Act
             wrapper = mountContactPreferences();
-            const input = wrapper.find('[data-test-id="contactPreferences-news-email-checkbox"]');
+            const input = wrapper.find('[data-test-id="contact-preferences-news-email-checkbox"]');
 
             // Act
             await input.setChecked(!input.element.checked);

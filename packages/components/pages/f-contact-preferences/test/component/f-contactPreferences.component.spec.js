@@ -1,33 +1,43 @@
+import forEach from 'mocha-each';
+
 const ContactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
 
 let contactPreferences;
 
-describe('f-contactPreferences component tests', () => {
+describe('f-contact-preferences component tests', () => {
     beforeEach(() => {
+        // Arrange
         contactPreferences = new ContactPreferences();
-
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
     });
 
-    it('should display the f-contactPreferences component', () => {
+    forEach([
+        ['en-GB']
+    ]).it('should display the  %s f-contact-preferences component', locale => {
+        // Act
+        contactPreferences.withQuery('&knob-Locale', locale);
+        contactPreferences.load();
+        contactPreferences.waitForComponent();
+
         // Assert
         expect(contactPreferences.isComponentDisplayed()).toBe(true);
     });
 
-    it.Each('should allow me to check the News Preference % checkbox', () => {
-        it.each([
-            ['email'],
-            ['sms']
-        ])('should allow me to check the News Preference %s checkbox', async (checkbox) => {
-            // Arrange
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Error page if Submit fails', locale => {
+        // Arrange
+        contactPreferences
+        .withQuery('&knob-Locale', locale)
+        .withQuery('&knob-Set Api State', 'api-post-failed');
+        contactPreferences.load();
+        contactPreferences.waitForComponent();
 
-            // Act
-            contactPreferences.checkThePreferenceCheckbox('news', 'email');
-            contactPreferences.saveChanges();
+        // Act
+        contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
+        contactPreferences.clickSubmitButton();
+        contactPreferences.waitForComponent();
 
-            // Assert
-            // Waiting for route here, so we can grab redirect url and show form submits.
-        });
+        // Assert
+        expect(contactPreferences.isErrorPageDisplayed()).toBe(true);
     });
 });
