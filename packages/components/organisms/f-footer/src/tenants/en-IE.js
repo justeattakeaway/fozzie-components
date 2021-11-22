@@ -165,6 +165,11 @@ export default {
                     gtm: 'click_deliverwithjusteatfooter'
                 },
                 {
+                    url: 'https://careers.justeattakeaway.com/global/en',
+                    text: 'Careers',
+                    gtm: 'click_careers'
+                },
+                {
                     url: '/info/privacy-policy',
                     text: 'Privacy Policy',
                     gtm: 'click_about_privacy_policy'

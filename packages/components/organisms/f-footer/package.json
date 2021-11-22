@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-footer",
-  "version": "6.0.1",
+  "version": "6.0.3",
   "main": "dist/f-footer.umd.min.js",
   "maxBundleSize": "80kB",
   "files": [
@@ -20,7 +20,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
@@ -34,7 +34,7 @@
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_FOOTER} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

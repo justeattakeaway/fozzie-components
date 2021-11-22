@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-contact-preferences",
   "description": "Fozzie Contact Preferences - Fozzie user contact preferences form component",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "main": "dist/f-contact-preferences.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -21,7 +21,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
@@ -41,7 +41,8 @@
     "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
+    "vuex": "3.5.1"
   },
   "devDependencies": {
     "@justeat/f-button": "3.0.2",

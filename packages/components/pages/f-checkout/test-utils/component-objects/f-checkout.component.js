@@ -19,7 +19,13 @@ const {
     ERROR_PAGE_COMPONENT,
     ERROR_PAGE_HEADING,
     ERROR_PAGE_DESCRIPTION,
-    ERROR_PAGE_IMAGE
+    ERROR_PAGE_IMAGE,
+    AGE_VERIFICATION_COMPONENT,
+    AGE_VERIFICATION_DAY_DROPDOWN,
+    AGE_VERIFICATION_MONTH_DROPDOWN,
+    AGE_VERIFICATION_YEAR_DROPDOWN,
+    AGE_VERIFICATION_SUBMIT_BUTTON,
+    AGE_VERIFICATION_ERROR
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -27,6 +33,7 @@ module.exports = class Checkout extends Page {
         super('page', 'checkout-component');
     }
 
+    /* eslint-disable class-methods-use-this */
     get component () { return $(CHECKOUT_COMPONENT); }
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
@@ -64,6 +71,19 @@ module.exports = class Checkout extends Page {
     get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
 
     get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
+
+    get ageVerificationComponent () { return $(AGE_VERIFICATION_COMPONENT); }
+
+    get ageVerificationDayDropdown () { return $(AGE_VERIFICATION_DAY_DROPDOWN); }
+
+    get ageVerificationMonthDropdown () { return $(AGE_VERIFICATION_MONTH_DROPDOWN); }
+
+    get ageVerificationYearDropdown () { return $(AGE_VERIFICATION_YEAR_DROPDOWN); }
+
+    get ageVerificationError () { return $(AGE_VERIFICATION_ERROR); }
+
+    get ageVerificationSubmitButton () { return $(AGE_VERIFICATION_SUBMIT_BUTTON); }
+    /* eslint-enable class-methods-use-this */
 
     fields = {
         firstName: {
@@ -131,6 +151,10 @@ module.exports = class Checkout extends Page {
         super.load(this.errorPageComponent);
     }
 
+    loadAgeVerification () {
+        super.load(this.ageVerificationComponent);
+    }
+
     open (url) {
         super.open(url);
     }
@@ -146,6 +170,10 @@ module.exports = class Checkout extends Page {
 
     waitForErrorPageComponent () {
         super.waitForComponent(this.errorPageComponent);
+    }
+
+    waitForAgeVerificationComponent () {
+        super.waitForComponent(this.ageVerificationComponent);
     }
 
     isCheckoutPageDisplayed () {
@@ -166,6 +194,14 @@ module.exports = class Checkout extends Page {
 
     isOrderTimeDropdownDisplayed () {
         return this.orderTimeDropdown.isDisplayed();
+    }
+
+    isAgeVerificationDisplayed () {
+        return this.ageVerificationComponent.isDisplayed();
+    }
+
+    isAgeVerificationErrorDisplayed () {
+        return this.ageVerificationError.isDisplayed();
     }
 
     userNoteMaxCharacterCount () {
@@ -271,6 +307,12 @@ module.exports = class Checkout extends Page {
         this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
     }
 
+    populateAgeVerificationForm ({ day, month, year }) {
+        this.ageVerificationDayDropdown.selectByVisibleText(day);
+        this.ageVerificationMonthDropdown.selectByVisibleText(month);
+        this.ageVerificationYearDropdown.selectByVisibleText(year);
+    }
+
     /**
     * @description
     * Due to the anomalies between webdriver io and Chrome the current `clearField()`
@@ -352,5 +394,9 @@ module.exports = class Checkout extends Page {
     goToPayment () {
         this.goToPaymentButton.scrollIntoView();
         this.goToPaymentButton.click();
+    }
+
+    submitAgeVerification () {
+        this.ageVerificationSubmitButton.click();
     }
 };

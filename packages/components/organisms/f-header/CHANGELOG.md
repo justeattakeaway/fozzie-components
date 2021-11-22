@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.1.1
+------------------------------
+*November 19, 2021*
+
+### Changed
+- Replaced ES exports with node exports to allow external applications to access the components.
+
+v7.1.0
+------------------------------
+*November 1, 2021*
+
+### Changed
+- Mobile menu tab functionality to ensure hidden content is not focussed when tabbing and focus loops.
+
 
 v7.0.1
 ------------------------------

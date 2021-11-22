@@ -1,23 +1,17 @@
 <template>
     <div>
-        <error-page
-            v-if="errorFormType"
-            :error-form-type="errorFormType"
-            :redirect-url="redirectUrl"
-            :service-type="serviceType" />
-
-        <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
-
         <component
             :is="messageType.name"
-            v-else-if="message"
+            v-if="message && !errorFormType"
             ref="errorMessage"
             v-bind="messageType.props"
             @created="handleDialogCreation">
             <span>{{ messageType.content }}</span>
         </component>
+
+        <age-verification
+            v-else-if="shouldShowAgeVerificationForm"
+            @checkout-verify-age="verifyCustomerAge" />
 
         <div
             v-if="shouldShowCheckoutForm"
@@ -32,103 +26,14 @@
                 :class="$style['c-checkout']">
                 <checkout-header :login-url="loginUrl" />
 
-                <form
-                    method="post"
-                    :class="$style['c-checkout-form']"
-                    @submit.prevent="onFormSubmit">
-                    <section
-                        v-if="invalidFieldsSummary"
-                        class="is-visuallyHidden"
-                        role="alert"
-                        data-test-id="error-summary-container">
-                        {{ invalidFieldsSummary }}
-                    </section>
-
-                    <guest-block v-if="!isLoggedIn" />
-
-                    <form-field
-                        :value="customer.mobileNumber"
-                        name="mobile-number"
-                        maxlength="16"
-                        input-type="tel"
-                        :label-text="$t('labels.mobileNumber')"
-                        :has-error="isMobileNumberEmpty || isMobileNumberInvalid"
-                        aria-describedby="mobile-number-error"
-                        :aria-invalid="isMobileNumberInvalid"
-                        :aria-label="formattedMobileNumberForScreenReader"
-                        @blur="formFieldBlur('mobileNumber')"
-                        @input="updateCustomerDetails({ mobileNumber: $event })">
-                        <template #error>
-                            <error-message
-                                v-if="isMobileNumberEmpty"
-                                id="mobile-number-error"
-                                data-js-error-message
-                                data-test-id="error-mobile-number-empty">
-                                {{ $t('validationMessages.mobileNumber.requiredError') }}
-                            </error-message>
-                            <error-message
-                                v-if="isMobileNumberInvalid"
-                                id="mobile-number-error"
-                                data-js-error-message
-                                data-test-id="error-mobile-number-invalid">
-                                {{ $t('validationMessages.mobileNumber.invalidCharError') }}
-                            </error-message>
-                        </template>
-                    </form-field>
-
-                    <form-field
-                        v-if="isCheckoutMethodDineIn"
-                        :value="tableIdentifier"
-                        input-type="text"
-                        name="table-identifier"
-                        :label-text="$t('labels.tableIdentifier')"
-                        :has-error="isTableIdentifierEmpty"
-                        maxlength="12"
-                        @input="updateTableIdentifier($event)">
-                        <template #error>
-                            <error-message
-                                v-if="isTableIdentifierEmpty"
-                                data-js-error-message
-                                data-test-id="error-table-identifier-empty">
-                                {{ $t('validationMessages.tableIdentifier.requiredError') }}
-                            </error-message>
-                        </template>
-                    </form-field>
-
-                    <address-block
-                        v-if="isCheckoutMethodDelivery"
-                        data-test-id="address-block"
-                        :should-show-administrative-area="shouldShowAddressAdministrativeArea" />
-
-                    <form-selector :key="availableFulfilmentTimesKey" />
-
-                    <form-field
-                        :label-text="$t(`userNote.${serviceType}.title`)"
-                        input-type="textarea"
-                        :placeholder="$t(`userNote.${serviceType}.placeholder`)"
-                        :value="userNote"
-                        cols="30"
-                        rows="7"
-                        maxlength="200"
-                        name="note"
-                        :label-description="$t(`userNote.${serviceType}.text`)"
-                        @input="updateUserNote($event)" />
-
-                    <f-button
-                        :class="[
-                            $style['c-checkout-submitButton'], {
-                                [$style['c-checkout-submitButton--noBottomSpace']]: !isLoggedIn
-                            }]"
-                        button-type="primary"
-                        button-size="large"
-                        is-full-width
-                        action-type="submit"
-                        data-test-id="confirm-payment-submit-button"
-                        :is-loading="isFormSubmitting"
-                    >
-                        {{ $t('buttonText') }}
-                    </f-button>
-                </form>
+                <checkout-form
+                    :tenant="tenant"
+                    :is-checkout-method-delivery="isCheckoutMethodDelivery"
+                    :is-checkout-method-dine-in="isCheckoutMethodDineIn"
+                    :scroll-to-element="scrollToElement"
+                    :available-fulfilment-times-key="availableFulfilmentTimesKey"
+                    :is-form-submitting="isFormSubmitting"
+                    v-on="formEvents" />
 
                 <template
                     v-if="!isLoggedIn"
@@ -137,34 +42,28 @@
                 </template>
             </card>
         </div>
+
+        <error-page
+            v-else-if="errorFormType"
+            :error-form-type="errorFormType"
+            :redirect-url="redirectUrl"
+            :service-type="serviceType" />
     </div>
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate';
-import {
-    required, email, maxLength, requiredIf
-} from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
-import FButton from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
-import ErrorMessage from '@justeat/f-error-message';
-import '@justeat/f-error-message/dist/f-error-message.css';
-import FormField from '@justeat/f-form-field';
-import '@justeat/f-form-field/dist/f-form-field.css';
-import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
-import AddressBlock from './Address.vue';
 import AgeVerification from './AgeVerification.vue';
+import CheckoutFormField from './CheckoutFormField.vue';
+import CheckoutForm from './CheckoutForm.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
-import FormSelector from './Selector.vue';
-import GuestBlock from './Guest.vue';
 import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 import exceptions from '../exceptions/exceptions';
@@ -178,12 +77,10 @@ import {
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS,
     TENANT_MAP,
-    VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
     VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
-import checkoutValidationsMixin from '../mixins/validations.mixin';
 import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
@@ -207,25 +104,19 @@ export default {
     name: 'VueCheckout',
 
     components: {
-        AddressBlock,
         AgeVerification,
         Alert,
-        FButton,
         Card,
+        CheckoutFormField,
+        CheckoutForm,
         CheckoutHeader,
         CheckoutTermsAndConditions,
         ErrorPage,
-        ErrorMessage,
-        FormField,
-        FormSelector,
-        GuestBlock,
         ErrorDialog
     },
 
     mixins: [
-        validationMixin,
         VueGlobalisationMixin,
-        checkoutValidationsMixin,
         loggerMixin
     ],
 
@@ -317,31 +208,12 @@ export default {
     data () {
         return {
             tenantConfigs,
+            isLoading: true,
             errorFormType: null,
-            isFormSubmitting: false,
             availableFulfilmentTimesKey: 0,
-            checkoutAnalyticsService: new CheckoutAnalyticsService(this)
+            checkoutAnalyticsService: new CheckoutAnalyticsService(this),
+            isFormSubmitting: false
         };
-    },
-
-    /*
-    * Provide/Inject allows nested `Address` component to inherit `Checkout`
-    * validator scope, `$v`.
-    */
-    provide () {
-        const $v = {};
-
-        Object.defineProperty($v, VALIDATIONS.address, {
-            enumerable: true,
-            get: () => this.$v.address
-        });
-
-        Object.defineProperty($v, VALIDATIONS.guest, {
-            enumerable: true,
-            get: () => this.$v.customer
-        });
-
-        return { $v };
     },
 
     computed: {
@@ -363,7 +235,7 @@ export default {
             'orderId',
             'restaurant',
             'serviceType',
-            'tableIdentifier',
+            'dineIn',
             'time',
             'userNote'
         ]),
@@ -371,22 +243,6 @@ export default {
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields'
         ]),
-
-        wasMobileNumberFocused () {
-            return this.$v.customer.mobileNumber.$dirty;
-        },
-
-        isMobileNumberEmpty () {
-            return this.wasMobileNumberFocused && !this.customer.mobileNumber;
-        },
-
-        isMobileNumberInvalid () {
-            return this.wasMobileNumberFocused && !this.isMobileNumberEmpty && !this.$v.customer.mobileNumber.isValidPhoneNumber;
-        },
-
-        isTableIdentifierEmpty () {
-            return this.$v.tableIdentifier.$dirty && !this.$v.tableIdentifier.required;
-        },
 
         isCheckoutMethodDelivery () {
             return this.serviceType === CHECKOUT_METHOD_DELIVERY;
@@ -414,7 +270,7 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.errorFormType && !this.shouldShowAgeVerificationForm;
+            return !this.isLoading && !this.errorFormType && !this.shouldShowAgeVerificationForm;
         },
 
         shouldShowAgeVerificationForm () {
@@ -455,21 +311,6 @@ export default {
             };
         },
 
-        invalidFieldsSummary () {
-            const invalidFieldCount = this.$v.$dirty
-                && validations.getFormValidationState(this.$v).invalidFields.length;
-
-            if (!invalidFieldCount) return null;
-
-            return invalidFieldCount === 1 ?
-                this.$t('errorMessages.singleFieldError') :
-                this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
-        },
-
-        formattedMobileNumberForScreenReader () {
-            return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
-        },
-
         /**
          * If there is no fulfilment times available (errorFormType === noTimeAvailable)
          * redirect to search if the location cookie exists otherwise redirect to home.
@@ -494,8 +335,12 @@ export default {
             return `${prefix}-${this.restaurant.seoName}/menu`;
         },
 
-        shouldShowAddressAdministrativeArea () {
-            return this.tenant === 'au';
+        formEvents () {
+            return {
+                [EventNames.FormSubmitting]: this.onFormSubmit,
+                [EventNames.FormValid]: this.submitCheckout,
+                [EventNames.FormInvalid]: this.onInvalidCheckoutForm
+            };
         }
     },
 
@@ -525,7 +370,6 @@ export default {
         await this.initialise();
         this.checkoutAnalyticsService.trackInitialLoad();
         this.$emit(EventNames.CheckoutMounted);
-        this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
     },
 
     methods: {
@@ -541,8 +385,6 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
-            'updateCustomerDetails',
-            'updateTableIdentifier',
             'updateMessage',
             'updateUserNote',
             'updateAddress',
@@ -561,11 +403,15 @@ export default {
         async initialise () {
             this.setExperimentValues(this.experiments);
 
+            this.isLoading = true;
+
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
                 : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+
+            this.resetLoadingState();
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
@@ -617,7 +463,18 @@ export default {
                 }
             } catch (error) {
                 this.handleErrorState(error);
+            } finally {
+                this.setSubmittingState(false);
             }
+        },
+
+        /**
+         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
+         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
+         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
+         */
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
         },
 
         /**
@@ -921,37 +778,21 @@ export default {
             }
         },
 
-        /**
-         * Check form is valid - no inline messages
-         * 1. If form is valid try to call `submitCheckout`.
-         * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
-         */
-        async onFormSubmit () {
+        onFormSubmit () {
+            this.setSubmittingState(true);
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
             this.updateMessage();
-            this.setSubmittingState(true);
-
-            if (this.isFormValid()) {
-                await this.submitCheckout();
-            } else {
-                this.onInvalidCheckoutForm();
-            }
-
-            this.setSubmittingState(false);
         },
 
         /**
-         * Fired when `isFormValid` returns falsey via `onFormSubmit()` call.
+         * Fired when `isFormValid` returns falsey via ``CheckoutForm`.
          * 1. Emit `CheckoutValidationError` for consuming application.
          * 2. Process tracking with action type and error fields
          * 3. Log warn.
          *
          * */
-        onInvalidCheckoutForm () {
-            const validationState = validations.getFormValidationState(this.$v);
+        onInvalidCheckoutForm (validationState) {
             const invalidFields = mapAnalyticsNames(validationState.invalidFields);
-
-            this.scrollToFirstInlineError();
 
             this.checkoutAnalyticsService.trackFormInteraction({
                 action: 'inline_error',
@@ -972,57 +813,12 @@ export default {
             };
 
             this.handleEventLogging('CheckoutValidationError', validationState, { ...expandedData, validationState });
+            this.setSubmittingState(false);
         },
 
-        /**
-         * Scroll to the first inline error, no matter which one it is.
-         */
-        scrollToFirstInlineError () {
-            this.$nextTick(() => {
-                const firstInlineError = document.querySelector('[data-js-error-message]');
-
-                this.scrollToElement(firstInlineError, { offset: -100 });
-            });
-        },
-
-        /**
-         * Check to see if any `Vuelidate` validation errors
-         */
-        isFormValid () {
-            this.$v.$touch();
-            return !this.$v.$invalid;
-        },
-
-        /**
-         * Use phone validation in `f-services` to check if customer number is
-         * valid in current locale
-         */
-        isValidPhoneNumber () {
-            return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
-        },
-
-        /**
-         * Use postcode validation in `f-services` to check if customer postcode is
-         * valid in current locale
-         */
-        isValidPostcode () {
-            return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
-        },
-
-        formFieldBlur (field) {
-            const fieldValidation = this.$v.customer[field];
-            if (fieldValidation) {
-                fieldValidation.$touch();
-            }
-        },
-
-        /**
-         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
-         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
-         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
-         */
-        setSubmittingState (isFormSubmitting) {
-            this.isFormSubmitting = isFormSubmitting;
+        resetLoadingState () {
+            this.isLoading = false;
+            this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
         },
 
         getReferralState () {
@@ -1067,59 +863,9 @@ export default {
                     userNote: this.userNote,
                     geolocation: this.geolocation,
                     asap: this.hasAsapSelected,
-                    tableIdentifier: this.tableIdentifier
+                    tableIdentifier: this.dineIn.tableIdentifier
                 });
         }
-    },
-
-    validations () {
-        const validationProperties = {
-            customer: {
-                mobileNumber: {
-                    isValidPhoneNumber: this.isValidPhoneNumber
-                }
-            },
-            tableIdentifier: {
-                required: requiredIf(() => this.isCheckoutMethodDineIn),
-                maxLength: maxLength(12)
-            }
-        };
-
-        if (!this.isLoggedIn) {
-            validationProperties.customer = {
-                ...validationProperties.customer,
-                firstName: {
-                    required
-                },
-                lastName: {
-                    required
-                },
-                email: {
-                    required,
-                    email
-                }
-            };
-        }
-
-        if (this.isCheckoutMethodDelivery) {
-            validationProperties.address = {
-                line1: {
-                    required
-                },
-                locality: {
-                    required
-                },
-                administrativeArea: {
-                    required: requiredIf(() => this.shouldShowAddressAdministrativeArea)
-                },
-                postcode: {
-                    required,
-                    isValidPostcode: this.isValidPostcode
-                }
-            };
-        }
-
-        return validationProperties;
     }
 };
 </script>
@@ -1133,8 +879,8 @@ export default {
     }
 }
 
-.c-checkout-form {
-    margin-top: spacing(x2);
+.c-checkout-submitButton--noBottomSpace {
+    margin-bottom: 0;
 }
 
 .c-checkout-alert {
@@ -1145,17 +891,5 @@ export default {
     @include media('<=#{$checkout-width}') {
         width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
     }
-}
-/* If these stay the same then just rename the class to something more generic */
-.c-checkout-submitButton {
-    margin: spacing(x4) 0;
-
-    @include media('>=#{$checkout-width}') {
-        margin: spacing(x4) 0 0;
-    }
-}
-
-.c-checkout-submitButton--noBottomSpace {
-    margin-bottom: 0;
 }
 </style>

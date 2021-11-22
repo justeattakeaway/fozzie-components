@@ -95,19 +95,20 @@ Example #1 (*breadcrumbs-links*)
 ];
 ```
 Example #2 (*navigation-links*)
+
+Links can be rendered as either `<a>` or `<router-link>`. The `to` attribute will cause `<f-link>` to render a `<router-link>`. The `href` attribute will cause `<f-link>` to render an `<a>` link.
+
 ```js
 [
   {
-    id: 'accountNavLinkInfo'  // Test Data Id
-    url: '/account/info',     // Url
-    name: 'Your account',     // Text Label
-    selected: false
+      id: 'accountNavLinkInfo'  // Test Data Id
+      to|href: '/account/info', // `to` or `href`
+      name: 'Account info',
   },
   {
-    id: 'accountNavLinkOrderHistory',
-    url: '/order-history',
-    name: 'Your orders',
-    selected: true            // True indicates the currently selected item
+      id: 'accountNavLinkOrderHistory',
+      to: '/order-history',
+      name: 'Your orders'
   }
 ]
 ```

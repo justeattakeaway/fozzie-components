@@ -119,6 +119,7 @@ commands:
             - packages/components/pages/f-offers/dist
             - packages/components/pages/f-registration/dist
             - packages/components/pages/f-takeawaypay-activation/dist
+            - packages/components/pages/f-account-info/dist
 
       - save_cache:
           name: Cache for services
@@ -451,12 +452,12 @@ jobs:
       - component_tests
       - accessibility_tests
       - visual_regression_tests
+      - run:
+          name: Allure - Generate Test Results
+          command: yarn allure:generate
+          when: always
       - store_artifacts:
-          path: test/results/axe-violations
-      - store_artifacts:
-          path: test/results/allure/failure-videos
-      - store_test_results:
-          path: test/results/ci
+          path: allure-report
       - slack_notify_fail
       - slack_notify_success
 

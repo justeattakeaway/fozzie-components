@@ -5,45 +5,45 @@ const propsData = {
     links: [
         {
             id: 'link1',
-            url: '/account/info',
-            name: 'Your account',
-            selected: false
+            to: '/account/info',
+            name: 'Your account'
         },
         {
             id: 'link2',
-            url: '/order-history',
-            name: 'Your orders',
-            selected: false
+            to: '/order-history',
+            name: 'Your orders'
         },
         {
             id: 'link3',
-            url: '/account/paymentoptions',
-            name: 'Your saved cards',
-            selected: false
+            to: '/account/paymentoptions',
+            name: 'Your saved cards'
+
         },
         {
             id: 'link4',
-            url: '/member/addressbook',
-            name: 'Your address book',
-            selected: false
+            to: '/member/addressbook',
+            name: 'Your address book'
         },
         {
             id: 'link5',
-            url: '/account/credit',
-            name: 'Redeem a voucher',
-            selected: false
+            to: '/account/credit',
+            name: 'Redeem a voucher'
+
         },
         {
             id: 'link6',
-            url: '/giftcards/redeem',
-            name: 'Redeem a gift card',
-            selected: false
+            to: '/giftcards/redeem',
+            name: 'Redeem a gift card'
         },
         {
             id: 'link7',
-            url: '/account/preferences',
-            name: 'Contact preferences',
-            selected: true
+            to: '/account/preferences',
+            name: 'Contact preferences'
+        },
+        {
+            id: 'link8',
+            href: '/anchor-link',
+            name: 'Anchor link'
         }
     ]
 };
@@ -67,4 +67,115 @@ describe('NavigationLinks', () => {
         const links = wrapper.find('[data-test-id="navigationLinks"]');
         expect(links).toMatchSnapshot();
     });
+
+    it('should pass to attribute to `<v-link>` when present', () => {
+        const expected = '/account/info';
+        const wrapper = shallowMount(NavigationLinks, {
+            propsData: {
+                links: [
+                    {
+                        id: 'link1',
+                        to: expected,
+                        name: 'Your account'
+                    }]
+            }
+        });
+
+        const link = wrapper.find('[data-test-id="link1"]');
+
+        expect(link.attributes('to')).toEqual(expected);
+    });
+
+    it('should pass href attribute to `<v-link>` when present', () => {
+        const expected = '/account/info';
+        const wrapper = shallowMount(NavigationLinks, {
+            propsData: {
+                links: [
+                    {
+                        id: 'link1',
+                        href: expected,
+                        name: 'Your account'
+                    }]
+            }
+        });
+
+        const link = wrapper.find('[data-test-id="link1"]');
+
+        expect(link.attributes('href')).toEqual(expected);
+    });
+
+    it('should pass href attribute to `<v-link>` when both `to` and `href` present in links data', () => {
+        const expected = '/account/info';
+        const wrapper = shallowMount(NavigationLinks, {
+            propsData: {
+                links: [
+                    {
+                        id: 'link1',
+                        href: expected,
+                        to: '/not-used',
+                        name: 'Your account'
+                    }]
+            }
+        });
+
+        const link = wrapper.find('[data-test-id="link1"]');
+
+        expect(link.attributes('href')).toEqual(expected);
+        expect(link.attributes('to')).toBeUndefined();
+    });
+
+    it('should skip link item if both `to` and `href` missing in props.links object', () => {
+        const wrapper = shallowMount(NavigationLinks, {
+            propsData: {
+                links: [
+                    {
+                        id: 'link1',
+                        name: 'Your account'
+                    },
+                    {
+                        id: 'link2',
+                        to: '/account/info',
+                        name: 'Your account'
+                    }]
+            }
+        });
+
+        const links = wrapper.find('[data-test-id="navigationLinks"]');
+        const link = wrapper.find('[data-test-id="link1"]');
+
+        expect(links.findAll('li').length).toEqual(1);
+        expect(link.exists()).toBeFalsy();
+    });
+
+    describe('computed ::', () => {
+        describe('filterLinks ::', () => {
+            it('should filter props.links if link does not have `to` or `href` property', () => {
+                const wrapper = shallowMount(NavigationLinks, {
+                    propsData: {
+                        links: [
+                            {
+                                id: 'link1',
+                                name: 'Link 1'
+                            },
+                            {
+                                id: 'link2',
+                                to: '/account/info',
+                                name: 'Your account'
+                            },
+                            {
+                                id: 'link3',
+                                name: 'Link 3',
+                                href: '/link-3'
+                            }]
+                    }
+                });
+
+                const result = wrapper.vm.filterLinks;
+                expect(result.length).toEqual(2);
+                expect(result.find(x => x.id === 'link1')).toBeUndefined();
+            });
+        });
+    });
 });
+
+

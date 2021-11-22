@@ -3,6 +3,34 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.3.2
+------------------------------
+ *November 12, 2021*
+
+### Changed
+- wdio configuration for component, visual and a11y tests.
+- allure script in `wdio-shared.conf.js` and `package.json`.
+- small update of generator to reflect above changes.
+
+
+v5.3.1
+------------------------------
+*November 12, 2021*
+
+### Changed
+- Updated documentation for visual regression test setup.
+
+
+v5.3.0
+------------------------------
+*November 9, 2021*
+
+### Added
+- `templates` and `pages` component directories added to lerna config.
+
+### Changed
+- Updated engine from Node v10 > v12 on all packages (as we only test in Node 12+).
+
 
 v5.2.0
 ------------------------------
@@ -50,7 +78,6 @@ v5.1.0
 
 ### Changed
 - fozzie package update to the latest (6.0.0) to include latest pie-design-tokens.
-
 
 v5.0.4
 ------------------------------
