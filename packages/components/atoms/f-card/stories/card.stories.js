@@ -25,6 +25,7 @@ export const CardComponent = (args, { argTypes }) => ({
             :card-heading-tag="cardHeadingTag"
             :has-outline="hasOutline"
             :is-page-content-wrapper="isPageContentWrapper"
+            :has-inner-spacing-large="hasInnerSpacingLarge"
             :has-full-width-footer="hasFullWidthFooter">
             <p>Some Card Content</p>
             <template v-slot:cardFooter>
@@ -39,7 +40,8 @@ CardComponent.args = {
     cardHeadingTag: 'h1',
     hasOutline: false,
     isPageContentWrapper: false,
-    hasFullWidthFooter: false
+    hasFullWidthFooter: false,
+    hasInnerSpacingLarge: false
 };
 
 CardComponent.argTypes = {
