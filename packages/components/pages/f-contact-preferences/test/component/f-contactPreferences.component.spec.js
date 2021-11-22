@@ -14,4 +14,20 @@ describe('f-contactPreferences component tests', () => {
         // Assert
         expect(contactPreferences.isComponentDisplayed()).toBe(true);
     });
+
+    it.Each('should allow me to check the News Preference % checkbox', () => {
+        it.each([
+            ['email'],
+            ['sms']
+        ])('should allow me to check the News Preference %s checkbox', async (checkbox) => {
+            // Arrange
+
+            // Act
+            contactPreferences.checkThePreferenceCheckbox('news', 'email');
+            contactPreferences.saveChanges();
+
+            // Assert
+            // Waiting for route here, so we can grab redirect url and show form submits.
+        });
+    });
 });

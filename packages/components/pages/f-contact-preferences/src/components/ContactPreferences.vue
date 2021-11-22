@@ -19,7 +19,7 @@
                         <label>
                             <input
                                 type="checkbox"
-                                :data-test-id="`contactPreferences-${key}-checkbox`"
+                                :data-test-id="`contactPreferences-${key}-email-checkbox`"
                                 :disabled="!emailEnabled"
                                 :checked="emailValue"
                                 @change="editPreferenceValue(key, Object.keys({ emailValue })[0], $event.target.checked)">
@@ -36,7 +36,7 @@
                         <label>
                             <input
                                 type="checkbox"
-                                :data-test-id="`contactPreferences-${key}-checkbox`"
+                                :data-test-id="`contactPreferences-${key}-sms-checkbox`"
                                 :disabled="!smsEnabled"
                                 :checked="smsValue"
                                 @change="editPreferenceValue(key, Object.keys({ smsValue })[0], $event.target.checked)">
