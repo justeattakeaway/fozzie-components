@@ -90,7 +90,13 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
         padding: $card-padding;
 
         &.c-card-innerSpacing--large {
-            padding: $card-padding-large;
+            padding: $card-padding-large $card-padding;
+        }
+
+        @include media('>=mid') {
+            &.c-card-innerSpacing--large {
+                padding: $card-padding-large;
+            }
         }
     }
 
