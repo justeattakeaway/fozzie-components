@@ -1223,7 +1223,7 @@ describe('CheckoutModule', () => {
             [updateUserNote, UPDATE_USER_NOTE, userNote],
             [updateMessage, UPDATE_MESSAGE, message]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
-        // Act
+            // Act
             action(context, value);
 
             // Assert
@@ -1243,7 +1243,7 @@ describe('CheckoutModule', () => {
 
                 describe('when the user note exists in session storage', () => {
                     it('should call dispatch with updateUserNote action and the user note', () => {
-                    // Arrange
+                        // Arrange
                         jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(userNote);
 
                         // Act
@@ -1256,7 +1256,7 @@ describe('CheckoutModule', () => {
 
                 describe('when the user note does NOT exist in session storage', () => {
                     it('should not call dispatch', () => {
-                    // Arrange
+                        // Arrange
                         jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(undefined);
 
                         // Act
@@ -1279,7 +1279,7 @@ describe('CheckoutModule', () => {
                 });
 
                 it('should not call dispatch', () => {
-                // Act
+                    // Act
                     getUserNote(context);
 
                     // Assert
@@ -1300,7 +1300,7 @@ describe('CheckoutModule', () => {
 
 
             it('should save userNote to sessionStorage', () => {
-            // Arrange
+                // Arrange
                 const spy = jest.spyOn(window.sessionStorage, 'setItem');
                 const testBasketId = '11111';
                 const key = `userNote-${testBasketId}`;
