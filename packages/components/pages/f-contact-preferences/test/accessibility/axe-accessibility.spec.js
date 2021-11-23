@@ -1,5 +1,5 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 import forEach from 'mocha-each';
+import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
 const ContactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
 
@@ -7,18 +7,19 @@ let contactPreferences;
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
+        // Arrange
         contactPreferences = new ContactPreferences();
     });
 
     forEach([
         ['en-GB']
-    ]).it('a11y - should test f-contact-preferences component WCAG compliance', locale => {
+    ]).it('a11y - should test that the %s f-contact-preferences component is WCAG compliant', locale => {
         // Arrange
         contactPreferences.withQuery('&knob-Locale', locale);
-
-        // Act
         contactPreferences.load();
         contactPreferences.waitForComponent();
+
+        // Act
         const axeResults = getAccessibilityTestResults('f-contactPreferences');
 
         // Assert
@@ -27,14 +28,16 @@ describe('Accessibility tests', () => {
 
     forEach([
         ['en-GB']
-    ]).it('should test f-contact-preferences (error page) WCAG compliance', locale => {
+    ]).it('should test that the %s f-contact-preferences (error page) is WCAG compliant', locale => {
         // Arrange
         contactPreferences
         .withQuery('&knob-Locale', locale)
         .withQuery('&knob-Set Api State', 'api-post-failed');
+        contactPreferences.load();
 
         // Act
-        contactPreferences.load();
+        contactPreferences.clickNewsEmailCheckbox();
+        contactPreferences.clickSubmitButton();
         const axeResults = getAccessibilityTestResults('f-contactPreferences');
 
         // Assert
