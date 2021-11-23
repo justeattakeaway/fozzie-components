@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest – to be added to the next release
 ------------------------------
+*November 23, 2021*
+
+### Added
+- Added Accessibility Tests.
+
+
 *November 22, 2021*
 
 ### Added
