@@ -20,6 +20,8 @@ module.exports = class ContactPreferences extends Page {
 
     get newsEmailPreference () { return $(CHECKBOXES.news.email); }
 
+    get newsSmsPreference () { return $(CHECKBOXES.news.sms); }
+
     waitForComponent () {
         super.waitForComponent(this.component);
     }
@@ -38,5 +40,9 @@ module.exports = class ContactPreferences extends Page {
 
     clickNewsEmailCheckbox () {
         return this.newsEmailPreference.click();
+    }
+
+    clickNewsSmsCheckbox () {
+        return this.newsSmsPreference.click();
     }
 };

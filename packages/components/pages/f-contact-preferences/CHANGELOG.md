@@ -9,7 +9,7 @@ Latest – to be added to the next release
 *November 22, 2021*
 
 ### Added
-- Added Visual Tests.
+- Added Chrome & Visual Tests.
 
 
 v0.6.0
