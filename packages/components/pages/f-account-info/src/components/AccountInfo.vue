@@ -71,7 +71,8 @@
                 button-type="primary"
                 button-size="large"
                 is-full-width
-                action-type="submit">
+                action-type="submit"
+                :is-loading="isFormSubmitting">
                 {{ $t('buttons.saveChanges') }}
             </f-button>
         </form>
@@ -137,23 +138,56 @@ export default {
 
     data () {
         return {
-            fields: {
-                emailAddress: null,
-                firstName: null,
-                lastName: null,
-                line1: null,
-                line2: null,
-                line3: null,
-                city: null,
-                postcode: null
-            },
-            tenantConfigs
+            fields: {},
+            tenantConfigs,
+            isFormSubmitting: false
         };
     },
 
+    async mounted () {
+        await this.initialise();
+    },
+
     methods: {
+        async initialise () {
+            try {
+                // TODO - Dummy data to be replaced with https://justeattakeaway.atlassian.net/browse/WCB-2404
+                this.fields = {
+                    emailAddress: 'mr.jazz@town.com',
+                    firstName: 'Max',
+                    lastName: 'Legend',
+                    line1: '1 Wardour Street',
+                    line2: undefined,
+                    line3: null,
+                    city: 'Strange Town',
+                    postcode: 'JZ1 1AA'
+                };
+            } catch (error) {
+                // TODO - https://justeattakeaway.atlassian.net/browse/WCB-2386
+            } finally {
+                // TODO - Stop auth spinner - https://justeattakeaway.atlassian.net/browse/WCB-2372
+            }
+        },
+
         onFormSubmit () {
-            this.$log.info('Submitted Form', 'account-info');
+            this.setSubmittingState(true);
+
+            try {
+                // TODO - https://justeattakeaway.atlassian.net/browse/WCB-2404
+                this.$log.info('Submitted Form', 'account-info');
+            } catch (error) {
+                // TODO - https://justeattakeaway.atlassian.net/browse/WCB-2386
+            } finally {
+                this.setSubmittingState(false);
+            }
+        },
+
+        /**
+        * Sets the flag to inform the Template of whether the form is currently submitting or not
+        * @param {boolean} isFormSubmitting - True = Form is being submitted / False = Form is not being submitted
+        */
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
         }
     }
 };
