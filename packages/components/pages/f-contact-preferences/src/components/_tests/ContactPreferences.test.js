@@ -63,7 +63,7 @@ describe('ContactPreferences Component', () => {
         // Arrange & Act
         dataDefaults = () => ({
             isFormDirty: false,
-            showErrorPage: false
+            shouldShowErrorPage: false
         });
         cookiesSpy = jest.fn();
         httpSpy = jest.fn();
@@ -100,7 +100,7 @@ describe('ContactPreferences Component', () => {
             });
         });
 
-        it('should set showErrorPage flag to true if an error occurs', () => {
+        it('should set shouldShowErrorPage flag to true if an error occurs', () => {
             // Arrange & Act
             const errorActions = {
                 loadPreferences: jest.fn().mockImplementationOnce(() => {
@@ -110,7 +110,7 @@ describe('ContactPreferences Component', () => {
             wrapper = mountContactPreferences({ actions: errorActions });
 
             // Assert
-            expect(wrapper.vm.showErrorPage).toEqual(true);
+            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
         });
 
         it('should not show the error card if no errors', () => {
@@ -122,10 +122,10 @@ describe('ContactPreferences Component', () => {
             expect(element.exists()).toEqual(false);
         });
 
-        it('should show the error card if showErrorPage is true', async () => {
+        it('should show the error card if shouldShowErrorPage is true', async () => {
             // Arrange & Act
             wrapper = mountContactPreferences();
-            await wrapper.setData({ showErrorPage: true });
+            await wrapper.setData({ shouldShowErrorPage: true });
             const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
 
             // Assert
@@ -214,7 +214,7 @@ describe('ContactPreferences Component', () => {
             expect(storeActions.savePreferences).not.toHaveBeenCalled();
         });
 
-        it('should set showErrorPage flag to true if an error occurs', async () => {
+        it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
             // Arrange
             const errorActions = {
                 loadPreferences: jest.fn(),
@@ -229,7 +229,7 @@ describe('ContactPreferences Component', () => {
             wrapper.vm.onFormSubmit();
 
             // Assert
-            expect(wrapper.vm.showErrorPage).toEqual(true);
+            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
         });
     });
 });
