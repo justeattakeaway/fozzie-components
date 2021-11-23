@@ -1,7 +1,9 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE } from '../constants';
+import {
+    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE
+} from '../constants';
 import basketApi from '../services/basketApi';
 import checkoutApi from '../services/checkoutApi';
 import addressGeocodingApi from '../services/addressGeocodingApi';
@@ -9,6 +11,7 @@ import orderPlacementApi from '../services/orderPlacementApi';
 import accountApi from '../services/accountApi';
 
 import {
+    CLEAR_DOB_ERROR,
     UPDATE_ADDRESS,
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
@@ -431,6 +434,7 @@ export default {
 
         updateDateOfBirth: ({ commit }, dateOfBirth) => {
             commit(UPDATE_DATE_OF_BIRTH, dateOfBirth);
+            commit(CLEAR_DOB_ERROR, {});
         }
     },
 
@@ -545,6 +549,10 @@ export default {
 
         [UPDATE_ERRORS]: (state, issues) => {
             state.errors = issues;
+        },
+
+        [CLEAR_DOB_ERROR]: state => {
+            state.errors = state.errors.filter(error => error.code !== DOB_REQUIRED_ISSUE && error.code !== AGE_VERIFICATION_ISSUE);
         },
 
         [UPDATE_USER_NOTE]: (state, userNote) => {
