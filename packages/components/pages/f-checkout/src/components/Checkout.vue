@@ -1,5 +1,11 @@
 <template>
     <div>
+        <error-page
+            v-if="errorFormType"
+            :error-form-type="errorFormType"
+            :redirect-url="redirectUrl"
+            :service-type="serviceType" />
+
         <component
             :is="messageType.name"
             v-if="message && !errorFormType"
@@ -10,8 +16,7 @@
         </component>
 
         <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
+            v-if="shouldShowAgeVerificationForm" />
 
         <div
             v-if="shouldShowCheckoutForm"
@@ -42,12 +47,6 @@
                 </template>
             </card>
         </div>
-
-        <error-page
-            v-else-if="errorFormType"
-            :error-form-type="errorFormType"
-            :redirect-url="redirectUrl"
-            :service-type="serviceType" />
     </div>
 </template>
 
@@ -85,7 +84,7 @@ import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
 import CheckoutAnalyticsService from '../services/analytics';
 
@@ -274,7 +273,7 @@ export default {
         },
 
         shouldShowAgeVerificationForm () {
-            return this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
+            return !this.errorFormType && this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
@@ -553,16 +552,6 @@ export default {
          */
         redirectToPayment () {
             window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
-        },
-
-        /**
-         * Call update checkout with only the user's DOB for age verification
-         * This is to avoid creating too many side effects with the original mapper for update checkout
-         */
-        async verifyCustomerAge () {
-            const data = this.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
-
-            await this.handleUpdateCheckout(data);
         },
 
         /**
@@ -849,22 +838,18 @@ export default {
             this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
-        getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
-            const { ageVerificationOnly } = options;
-            return ageVerificationOnly ?
-                mapUpdateCheckoutRequestForAgeVerification({
-                    customer: this.customer
-                }) : mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
-                    time: this.time,
-                    userNote: this.userNote,
-                    geolocation: this.geolocation,
-                    asap: this.hasAsapSelected,
-                    tableIdentifier: this.dineIn.tableIdentifier
-                });
+        getMappedDataForUpdateCheckout () {
+            return mapUpdateCheckoutRequest({
+                address: this.address,
+                customer: this.customer,
+                isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
+                time: this.time,
+                userNote: this.userNote,
+                geolocation: this.geolocation,
+                asap: this.hasAsapSelected,
+                tableIdentifier: this.dineIn.tableIdentifier
+            });
         }
     }
 };
