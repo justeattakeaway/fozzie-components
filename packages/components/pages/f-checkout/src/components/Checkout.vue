@@ -410,7 +410,8 @@ export default {
             'updateCheckoutErrorMessage',
             'updateAddress',
             'getNotesConfiguration',
-            'setCheckoutFeatures'
+            'setCheckoutFeatures',
+            'trackGuestCheckoutSubmission'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
@@ -473,7 +474,6 @@ export default {
                 await this.lookupGeoLocation();
 
                 await this.handleUpdateCheckout(this.getMappedDataForUpdateCheckout());
-
                 if (this.isFulfillable) {
                     await this.submitOrder();
 
@@ -619,6 +619,10 @@ export default {
 
                 this.handleEventLogging('CheckoutPlaceOrderSuccess');
                 this.handleEventLogging('CheckoutSuccess');
+
+                if (this.isGuestCreated) {
+                    this.checkoutAnalyticsService.trackGuestCheckoutSubmission();
+                }
             } catch (e) {
                 const errorCode = e?.response?.data?.errorCode;
 

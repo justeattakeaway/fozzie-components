@@ -59,6 +59,7 @@ const defaultCheckoutState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
+    isGuestCreated: false,
     errors: [],
     notesConfiguration: { isSplitNotesEnabled: false },
     notes: { order: { note: 'This is an order note' } },
