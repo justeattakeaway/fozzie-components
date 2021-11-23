@@ -1,5 +1,11 @@
 <template>
     <div>
+        <error-page
+            v-if="errorFormType"
+            :error-form-type="errorFormType"
+            :redirect-url="redirectUrl"
+            :service-type="serviceType" />
+
         <component
             :is="messageType.name"
             v-if="message && !errorFormType"
@@ -10,7 +16,7 @@
         </component>
 
         <age-verification
-            v-else-if="shouldShowAgeVerificationForm" />
+            v-if="shouldShowAgeVerificationForm" />
 
         <div
             v-if="shouldShowCheckoutForm"
@@ -41,12 +47,6 @@
                 </template>
             </card>
         </div>
-
-        <error-page
-            v-else-if="errorFormType"
-            :error-form-type="errorFormType"
-            :redirect-url="redirectUrl"
-            :service-type="serviceType" />
     </div>
 </template>
 
@@ -273,7 +273,7 @@ export default {
         },
 
         shouldShowAgeVerificationForm () {
-            return this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
+            return !this.errorFormType && this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
