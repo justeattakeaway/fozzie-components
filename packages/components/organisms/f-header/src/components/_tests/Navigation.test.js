@@ -833,10 +833,7 @@ describe('Navigation', () => {
                 });
 
                 // Act
-                await wrapper.setData({
-                    // ...defaultData,
-                    countrySelectorIsOpen: true
-                });
+                await wrapper.setData({ countrySelectorIsOpen: true });
 
                 // Assert
                 expect(wrapper.vm.tabIndex).toBe(-1);
@@ -848,9 +845,7 @@ describe('Navigation', () => {
                 });
 
                 // Act
-                await wrapper.setData({
-                    countrySelectorIsOpen: false
-                });
+                await wrapper.setData({ countrySelectorIsOpen: false });
 
                 // Assert
                 expect(wrapper.vm.tabIndex).toBe(0);
