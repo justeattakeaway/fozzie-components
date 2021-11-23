@@ -134,6 +134,7 @@ commands:
             - packages/services/f-services/dist
             - packages/services/f-statistics/dist
             - packages/services/f-compatibility/dist
+            - packages/services/f-braze-adapter/dist
 
   restore_cache_dist_directories:
     description: Restores all the dist dircetories
