@@ -25,7 +25,7 @@ export const apiStateOptions = {
     }
 };
 
-const apiStateDefinitions = {
+const apiStateDefinitions1 = {
     getContactPreferencesDefault: {
         url: '/consumer/preferences',
         method: httpVerbs.get,
@@ -42,6 +42,14 @@ const apiStateDefinitions = {
         responseData: getConsumerPreferences,
         state: apiStates.none
     },
+    getContactPreferencesUnknownApiFailure: {
+        url: '/consumer/preferences',
+        method: httpVerbs.get,
+        responseStatus: httpStatusCodes.ok,
+        requestData: null,
+        responseData: getConsumerPreferences,
+        state: apiStates.apiPostFailed
+    },
     postContactPreferencesUnknownApiFailure: {
         url: '/consumer/preferences',
         method: httpVerbs.post,
@@ -49,6 +57,41 @@ const apiStateDefinitions = {
         requestData: null,
         responseData: getConsumerPreferences,
         state: apiStates.apiPostFailed
+    }
+};
+
+const apiStateDefinitions = {
+    none: { // Good GET and good POST
+        state: apiStates.none,
+        states: [{
+            url: '/consumer/preferences',
+            method: httpVerbs.get,
+            responseStatus: httpStatusCodes.ok,
+            requestData: null,
+            responseData: getConsumerPreferences
+        }, {
+            url: '/consumer/preferences',
+            method: httpVerbs.post,
+            responseStatus: httpStatusCodes.ok,
+            requestData: null,
+            responseData: getConsumerPreferences
+        }]
+    },
+    apiPostFailed: { // Good GET but bad POST
+        state: apiStates.apiPostFailed,
+        states: [{
+            url: '/consumer/preferences',
+            method: httpVerbs.get,
+            responseStatus: httpStatusCodes.ok,
+            requestData: null,
+            responseData: getConsumerPreferences
+        }, {
+            url: '/consumer/preferences',
+            method: httpVerbs.post,
+            responseStatus: httpStatusCodes.internalServerError,
+            requestData: null,
+            responseData: getConsumerPreferences
+        }]
     }
 };
 
@@ -64,14 +107,16 @@ export const setupApiState = ({
     Object.entries(apiStateDefinitions).forEach(e => {
         const [, definition] = e;
 
-        if (apiState === definition.state) {
-            process.mockFactory.setupMockResponse(
-                definition.method,
-                definition.url,
-                definition.requestData,
-                definition.responseStatus,
-                definition.responseData
-            );
+        if (definition.state === apiState) {
+            definition.states.forEach(x => {
+                process.mockFactory.setupMockResponse(
+                    x.method,
+                    x.url,
+                    x.requestData,
+                    x.responseStatus,
+                    x.responseData
+                );
+            });
         }
     });
 
