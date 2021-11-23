@@ -126,7 +126,7 @@ describe('ContactPreferences Component', () => {
             // Arrange & Act
             wrapper = mountContactPreferences();
             await wrapper.setData({ shouldShowErrorPage: true });
-            const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
+            const element = wrapper.find('[data-test-id="contact-preferences-error-card"]');
 
             // Assert
             expect(element.exists()).toEqual(true);
