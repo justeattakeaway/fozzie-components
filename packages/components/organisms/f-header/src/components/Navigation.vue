@@ -215,58 +215,15 @@
                     :background-theme="headerBackgroundTheme"
                     data-test-id="logout-link" />
 
-                <li
+                <country-selector
                     v-if="showCountrySelector"
+                    :is-below-mid="isBelowMid"
+                    :copy="copy.countrySelector"
+                    :tabindex="tabIndex"
                     data-test-id="country-selector"
-                    :class="[
-                        $style['c-nav-list-item--horizontallyAlignedAboveMid'],
-                        $style['has-sublist'], {
-                            [$style['is-open']]: countrySelectorIsOpen
-                        }]"
-                    v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
-                    @keyup.esc="closeCountrySelector">
-                    <button
-                        ref="countrySelectorToggle"
-                        type="button"
-                        data-test-id="action-button-component"
-                        :tabindex="tabIndex"
-                        :class="[
-                            $style['c-nav-list-text'],
-                            $style['c-nav-list-btn']
-                        ]"
-                        :aria-expanded="isCountrySelectorOpenOnDesktopView ? 'true' : 'false'"
-                        :aria-haspopup="!isBelowMid"
-                        :aria-label="copy.countrySelector.changeCurrentCountry"
-                        @click="onCountrySelectorToggle">
-                        <span :class="$style['c-nav-list-iconWrapper']">
-                            <flag-icon
-                                data-test-id="current-flag-icon"
-                                :country-code="copy.countrySelector.currentCountryKey"
-                                :class="[
-                                    $style['c-nav-list-icon--flag'],
-                                    $style['c-nav-list-icon--flagCurrent']
-                                ]" />
-                        </span>
-                        <span :class="$style['c-nav-list-title']">
-                            {{ copy.countrySelector.selectYourCountryText }}
-                        </span>
-                    </button>
-
-                    <v-popover
-                        data-test-id="countrySelector-popover"
-                        :aria-hidden="!countrySelectorIsOpen"
-                        :class="[
-                            $style['c-nav-popover'],
-                            $style['c-nav-popover--countrySelector']
-                        ]">
-                        <country-selector-panel
-                            :copy="copy"
-                            :is-open="countrySelectorIsOpen"
-                            :is-below-mid="isBelowMid"
-                            @closeCountrySelector="closeCountrySelector"
-                        />
-                    </v-popover>
-                </li>
+                    @close-country-selector="closeCountrySelector"
+                    @open-country-selector="openCountrySelector"
+                    @toggle-country-selector="onCountrySelectorToggle" />
             </ul>
         </div>
     </nav>
@@ -280,18 +237,20 @@ import VPopover from '@justeat/f-popover';
 import '@justeat/f-popover/dist/f-popover.css';
 
 // Internal
+import CountrySelector from './CountrySelector.vue';
+import NavLink from './NavLink.vue';
+import UserNavigationPanel from './UserNavigationPanel.vue';
 import { countries } from '../tenants';
 import analyticsObjects from '../services/analytics/objects';
 
 export default {
     components: {
-        CountrySelectorPanel: () => import('./CountrySelectorPanel.vue'),
-        FlagIcon: () => import('./FlagIcon.vue'),
+        CountrySelector,
         GiftIcon,
         MopedIcon,
-        NavLink: () => import('./NavLink.vue'),
+        NavLink,
         ProfileIcon,
-        UserNavigationPanel: () => import('./UserNavigationPanel.vue'),
+        UserNavigationPanel,
         VPopover
     },
 
@@ -432,13 +391,8 @@ export default {
             return this.isBelowMid && !this.countrySelectorIsOpen;
         },
 
-        isCountrySelectorOpenOnDesktopView () {
-            return !this.isBelowMid && this.countrySelectorIsOpen;
-        },
-
         tabIndex () {
-            if (!this.isBelowMid) return 0;
-            if (this.isBelowMid && this.isCountrySelectorClosedOnMobileView) return 0;
+            if (!this.isBelowMid || this.isCountrySelectorClosedOnMobileView) return 0;
             return -1;
         }
     },
@@ -556,10 +510,6 @@ export default {
         closeCountrySelector () {
             this.countrySelectorIsOpen = false;
             this.tabLoop();
-            const {
-                countrySelectorToggle
-            } = this.$refs;
-            countrySelectorToggle.focus();
         },
 
         openCountrySelector () {
