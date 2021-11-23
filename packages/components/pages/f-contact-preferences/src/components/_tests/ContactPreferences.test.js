@@ -116,7 +116,7 @@ describe('ContactPreferences Component', () => {
         it('should not show the error card if no errors', () => {
             // Arrange & Act
             wrapper = mountContactPreferences();
-            const element = wrapper.find('[data-test-id="contactPreferences-error-card"]');
+            const element = wrapper.find('[data-test-id="contact-preferences-error-card"]');
 
             // Assert
             expect(element.exists()).toEqual(false);
@@ -145,15 +145,17 @@ describe('ContactPreferences Component', () => {
         });
     });
 
-    describe('when clicking a preference checkbox', () => {
+    describe('when clicking a preferences checkbox', () => {
         it.each([
-            [true, false],
-            [false, true]
-        ])('should call the Mutation correctly with %s if previously %s', async (setValue, previousValue) => {
+            ['news', 'email', true, false],
+            ['news', 'email', false, true],
+            ['news', 'sms', true, false],
+            ['news', 'sms', false, true]
+        ])('should call the Mutation correctly for the %s preferences %s checkbox with %s if previously %s', async (preferencesKey, preferenceName, setValue, previousValue) => {
             // Arrange
-            storeState.preferences.find(e => e.key === 'news').emailValue = previousValue;
+            storeState.preferences.find(e => e.key === preferencesKey)[`${preferenceName}Value`] = previousValue;
             wrapper = mountContactPreferences();
-            const input = wrapper.find('[data-test-id="contactPreferences-news-checkbox"]');
+            const input = wrapper.find(`[data-test-id="contact-preferences-${preferencesKey}-${preferenceName}-checkbox"]`);
 
             // Act
             await input.setChecked(setValue);
@@ -162,8 +164,8 @@ describe('ContactPreferences Component', () => {
             expect(storeActions.editPreference).toHaveBeenCalledWith(
                 expect.any(Object),
                 {
-                    key: 'news',
-                    field: 'emailValue',
+                    key: preferencesKey,
+                    field: `${preferenceName}Value`,
                     value: setValue
                 }
             );
@@ -172,7 +174,7 @@ describe('ContactPreferences Component', () => {
         it('should set the `isFormDirty` flag to true', async () => {
             // Act
             wrapper = mountContactPreferences();
-            const input = wrapper.find('[data-test-id="contactPreferences-news-checkbox"]');
+            const input = wrapper.find('[data-test-id="contact-preferences-news-email-checkbox"]');
 
             // Act
             await input.setChecked(!input.element.checked);

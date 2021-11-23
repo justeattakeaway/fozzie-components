@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id="contactPreferences">
+        data-test-id="contact-preferences">
         <card-component
             v-if="!shouldShowErrorPage"
             :card-heading="$t('heading')"
@@ -54,6 +54,7 @@
                 </div>
 
                 <f-button
+                    data-test-id="contact-preferences-submit-button"
                     button-type="primary"
                     is-full-width
                     action-type="submit"
@@ -65,7 +66,7 @@
 
         <div v-else>
             <card-component
-                data-test-id="contactPreferences-error-card"
+                data-test-id="contact-preferences-error-card"
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center">

@@ -11,6 +11,9 @@ v0.7.0
 ### Changed
 - Rename boolean fields to match naming conventions
 
+### Added
+- Added Chrome & Visual Tests.
+
 
 v0.6.0
 ------------------------------
