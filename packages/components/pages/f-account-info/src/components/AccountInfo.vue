@@ -138,7 +138,16 @@ export default {
 
     data () {
         return {
-            fields: {},
+            fields: {
+                emailAddress: null,
+                firstName: null,
+                lastName: null,
+                line1: null,
+                line2: null,
+                line3: null,
+                city: null,
+                postcode: null
+            },
             tenantConfigs,
             isFormSubmitting: false
         };
