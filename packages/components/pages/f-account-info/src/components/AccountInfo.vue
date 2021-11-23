@@ -160,7 +160,7 @@ export default {
     methods: {
         async initialise () {
             try {
-                // TODO - Dummy data to be replaced with https://justeattakeaway.atlassian.net/browse/WCB-2404
+                // TODO - Dummy data to be replaced with WCB-2404
                 this.fields = {
                     emailAddress: 'mr.jazz@town.com',
                     firstName: 'Max',
@@ -172,9 +172,9 @@ export default {
                     postcode: 'JZ1 1AA'
                 };
             } catch (error) {
-                // TODO - https://justeattakeaway.atlassian.net/browse/WCB-2386
+                // TODO - WCB-2386
             } finally {
-                // TODO - Stop auth spinner - https://justeattakeaway.atlassian.net/browse/WCB-2372
+                // TODO - Stop auth spinner - WCB-2372
             }
         },
 
@@ -182,10 +182,10 @@ export default {
             this.setSubmittingState(true);
 
             try {
-                // TODO - https://justeattakeaway.atlassian.net/browse/WCB-2404
+                // TODO - WCB-2404
                 this.$log.info('Submitted Form', 'account-info');
             } catch (error) {
-                // TODO - https://justeattakeaway.atlassian.net/browse/WCB-2386
+                // TODO - WCB-2386
             } finally {
                 this.setSubmittingState(false);
             }
