@@ -851,56 +851,6 @@ export default {
                 tableIdentifier: this.dineIn.tableIdentifier
             });
         }
-    },
-
-    validations () {
-        const validationProperties = {
-            customer: {
-                mobileNumber: {
-                    isValidPhoneNumber: this.isValidPhoneNumber
-                }
-            },
-            tableIdentifier: {
-                required: requiredIf(() => this.isCheckoutMethodDineIn),
-                maxLength: maxLength(12)
-            }
-        };
-
-        if (!this.isLoggedIn) {
-            validationProperties.customer = {
-                ...validationProperties.customer,
-                firstName: {
-                    required
-                },
-                lastName: {
-                    required
-                },
-                email: {
-                    required,
-                    email
-                }
-            };
-        }
-
-        if (this.isCheckoutMethodDelivery) {
-            validationProperties.address = {
-                line1: {
-                    required
-                },
-                locality: {
-                    required
-                },
-                administrativeArea: {
-                    required: requiredIf(() => this.shouldShowAddressAdministrativeArea)
-                },
-                postcode: {
-                    required,
-                    isValidPostcode: this.isValidPostcode
-                }
-            };
-        }
-
-        return validationProperties;
     }
 };
 </script>

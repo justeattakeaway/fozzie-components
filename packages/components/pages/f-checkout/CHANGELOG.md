@@ -3,12 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v2.7.0
+v3.9.0
 ------------------------------
-*October 20, 2021*
+*November 23, 2021*
 
 ### Changed
 - Prevent the age verification from triggering a full validation of user details.
+
 
 v3.8.0
 ------------------------------

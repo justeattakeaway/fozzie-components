@@ -38,7 +38,8 @@ import {
     UPDATE_ADDRESS,
     UPDATE_PHONE_NUMBER,
     UPDATE_DATE_OF_BIRTH,
-    CLEAR_DOB_ERROR
+    CLEAR_DOB_ERROR,
+    UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -415,6 +416,7 @@ describe('CheckoutModule', () => {
         let payload;
         let rootGetters;
         let context;
+
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
@@ -1182,50 +1184,111 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith('CLEAR_DOB_ERROR', {});
             });
         });
-        const userDetails = {
-            fieldType: 'customer',
-            fieldName: 'firstName',
-            value: 'John'
-        };
+
+        describe('updateUserDetails :: ', () => {
+            const userDetails = {
+                fieldType: 'customer',
+                fieldName: 'firstName',
+                value: 'John'
+            };
+
+            it.each([
+                [UPDATE_CUSTOMER_DETAILS, 'customer'],
+                [UPDATE_ADDRESS_DETAILS, 'address'],
+                [UPDATE_DINEIN_DETAILS, 'dineIn']
+            ])('should commit %s with expected payload when `fieldType` is %s', (mutation, fieldType) => {
+                // Arrange
+                userDetails.fieldType = fieldType;
+                const expectedData = { [userDetails.fieldName]: userDetails.value };
+
+                // Act
+                updateUserDetails(context, userDetails);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(mutation, expectedData);
+            });
+
+            it(`should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedFields' payload 'fieldName'`, () => {
+                // Act
+                updateUserDetails(context, userDetails);
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, userDetails.fieldName, { root: true });
+            });
+        });
+
 
         it.each([
-            [UPDATE_CUSTOMER_DETAILS, 'customer'],
-            [UPDATE_ADDRESS_DETAILS, 'address'],
-            [UPDATE_DINEIN_DETAILS, 'dineIn']
-        ])('should commit %s with expected payload when `fieldType` is %s', (mutation, fieldType) => {
-            // Arrange
-            userDetails.fieldType = fieldType;
-            const expectedData = { [userDetails.fieldName]: userDetails.value };
-
-            // Act
-            updateUserDetails(context, userDetails);
-
-            // Assert
-            expect(commit).toHaveBeenCalledWith(mutation, expectedData);
-        });
-
-        it(`should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedFields' payload 'fieldName'`, () => {
-            // Act
-            updateUserDetails(context, userDetails);
-
-            // Assert
-            expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, userDetails.fieldName, { root: true });
-        });
-    });
-    it.each([
-        [setAuthToken, UPDATE_AUTH, authToken],
-        [updateUserNote, UPDATE_USER_NOTE, userNote],
-        [updateMessage, UPDATE_MESSAGE, message]
-    ])('%s should call %s mutation with passed value', (action, mutation, value) => {
+            [setAuthToken, UPDATE_AUTH, authToken],
+            [updateUserNote, UPDATE_USER_NOTE, userNote],
+            [updateMessage, UPDATE_MESSAGE, message]
+        ])('%s should call %s mutation with passed value', (action, mutation, value) => {
         // Act
-        action(context, value);
+            action(context, value);
 
-        // Assert
-        expect(commit).toHaveBeenCalledWith(mutation, value);
-    });
+            // Assert
+            expect(commit).toHaveBeenCalledWith(mutation, value);
+        });
 
-    describe('getUserNote ::', () => {
-        describe('if sessionStorage exists', () => {
+        describe('getUserNote ::', () => {
+            describe('if sessionStorage exists', () => {
+                beforeEach(() => {
+                    Object.defineProperty(window, 'sessionStorage', { value: storageMock });
+                });
+
+                afterEach(() => {
+                    window.sessionStorage.clear();
+                    jest.resetAllMocks();
+                });
+
+                describe('when the user note exists in session storage', () => {
+                    it('should call dispatch with updateUserNote action and the user note', () => {
+                    // Arrange
+                        jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(userNote);
+
+                        // Act
+                        getUserNote(context);
+
+                        // Assert
+                        expect(dispatch).toHaveBeenCalledWith('updateUserNote', userNote);
+                    });
+                });
+
+                describe('when the user note does NOT exist in session storage', () => {
+                    it('should not call dispatch', () => {
+                    // Arrange
+                        jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(undefined);
+
+                        // Act
+                        getUserNote(context);
+
+                        // Assert
+                        expect(dispatch).not.toHaveBeenCalled();
+                    });
+                });
+            });
+
+            describe('if sessionStorage does NOT exist', () => {
+                beforeAll(() => {
+                    Object.defineProperty(window, 'sessionStorage', { value: null });
+                });
+
+                afterAll(() => {
+                    window.sessionStorage.clear();
+                    jest.resetAllMocks();
+                });
+
+                it('should not call dispatch', () => {
+                // Act
+                    getUserNote(context);
+
+                    // Assert
+                    expect(dispatch).not.toHaveBeenCalled();
+                });
+            });
+        });
+
+        describe('saveUserNote ::', () => {
             beforeEach(() => {
                 Object.defineProperty(window, 'sessionStorage', { value: storageMock });
             });
@@ -1235,75 +1298,19 @@ describe('CheckoutModule', () => {
                 jest.resetAllMocks();
             });
 
-            describe('when the user note exists in session storage', () => {
-                it('should call dispatch with updateUserNote action and the user note', () => {
-                    // Arrange
-                    jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(userNote);
 
-                    // Act
-                    getUserNote(context);
+            it('should save userNote to sessionStorage', () => {
+            // Arrange
+                const spy = jest.spyOn(window.sessionStorage, 'setItem');
+                const testBasketId = '11111';
+                const key = `userNote-${testBasketId}`;
 
-                    // Assert
-                    expect(dispatch).toHaveBeenCalledWith('updateUserNote', userNote);
-                });
-            });
-
-            describe('when the user note does NOT exist in session storage', () => {
-                it('should not call dispatch', () => {
-                    // Arrange
-                    jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(undefined);
-
-                    // Act
-                    getUserNote(context);
-
-                    // Assert
-                    expect(dispatch).not.toHaveBeenCalled();
-                });
-            });
-        });
-
-        describe('if sessionStorage does NOT exist', () => {
-            beforeAll(() => {
-                Object.defineProperty(window, 'sessionStorage', { value: null });
-            });
-
-            afterAll(() => {
-                window.sessionStorage.clear();
-                jest.resetAllMocks();
-            });
-
-            it('should not call dispatch', () => {
                 // Act
-                getUserNote(context);
+                saveUserNote(context);
 
                 // Assert
-                expect(dispatch).not.toHaveBeenCalled();
+                expect(spy).toHaveBeenCalledWith(key, state.userNote);
             });
-        });
-    });
-
-    describe('saveUserNote ::', () => {
-        beforeEach(() => {
-            Object.defineProperty(window, 'sessionStorage', { value: storageMock });
-        });
-
-        afterEach(() => {
-            window.sessionStorage.clear();
-            jest.resetAllMocks();
-        });
-
-
-        it('should save userNote to sessionStorage', () => {
-            // Arrange
-            const spy = jest.spyOn(window.sessionStorage, 'setItem');
-            const testBasketId = '11111';
-            const key = `userNote-${testBasketId}`;
-
-            // Act
-            saveUserNote(context);
-
-            // Assert
-            expect(spy).toHaveBeenCalledWith(key, state.userNote);
         });
     });
 });
