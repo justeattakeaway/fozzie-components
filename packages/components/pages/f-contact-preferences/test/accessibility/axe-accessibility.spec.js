@@ -38,7 +38,7 @@ describe('Accessibility tests', () => {
         // Act
         contactPreferences.clickNewsEmailCheckbox();
         contactPreferences.clickSubmitButton();
-        const axeResults = getAccessibilityTestResults('f-contactPreferences');
+        const axeResults = getAccessibilityTestResults('f-contactPreferences - error page');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
