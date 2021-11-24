@@ -14,7 +14,7 @@
             disabled
             :placeholder="$t('fields.emailAddressPlaceholder')"
             class="u-spacingBottom--large"
-            :value="fields.emailAddress" />
+            :value="values.emailAddress" />
 
         <f-link
             is-distinct
@@ -144,7 +144,6 @@ export default {
     data () {
         return {
             fields: {
-                emailAddress: null,
                 firstName: null,
                 lastName: null,
                 line1: null,
@@ -152,6 +151,9 @@ export default {
                 line3: null,
                 locality: null,
                 postcode: null
+            },
+            values: {
+                emailAddress: null
             },
             tenantConfigs,
             isFormSubmitting: false
@@ -166,14 +168,17 @@ export default {
         initialise () {
             try {
                 // TODO - Dummy data to be replaced with next ticket
+                this.values = {
+                    emailAddress: 'mr.jazz@town.com'
+                };
+
                 this.fields = {
-                    emailAddress: 'mr.jazz@town.com',
                     firstName: 'Max',
                     lastName: 'Legend',
                     line1: '1 Wardour Street',
                     line2: undefined,
                     line3: null,
-                    city: 'Strange Town',
+                    locality: 'Strange Town',
                     postcode: 'JZ1 1AA'
                 };
             } catch (error) {
