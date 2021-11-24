@@ -4,38 +4,17 @@ import { required, maxLength } from 'vuelidate/lib/validators';
 
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
-const formValidationState = $v => {
-    const fields = $v.$params;
-    const invalidFields = [];
-    const validFields = [];
-
-    Object.keys(fields).forEach(key => {
-        if ($v[key].$invalid) {
-            invalidFields.push(key);
-        } else {
-            validFields.push(key);
-        }
-    });
-
-    return {
-        validFields,
-        invalidFields
-    };
-};
-
 export default {
     validations: {
-        fields: {
-            firstName: {
-                required,
-                maxLength: maxLength(50),
-                meetsCharacterValidationRules
-            },
-            lastName: {
-                required,
-                maxLength: maxLength(50),
-                meetsCharacterValidationRules
-            }
+        firstName: {
+            required,
+            maxLength: maxLength(50),
+            meetsCharacterValidationRules
+        },
+        lastName: {
+            required,
+            maxLength: maxLength(50),
+            meetsCharacterValidationRules
         }
     },
 
@@ -47,15 +26,15 @@ export default {
 
             function countErrors () {
                 return [
-                    v.fields.firstName.$anyError,
-                    v.fields.lastName.$anyError
+                    v.firstName.$anyError,
+                    v.lastName.$anyError
                 ]
                 .filter(x => x)
                 .length;
             }
 
-            v.fields.firstName.$touch();
-            v.fields.lastName.$touch();
+            v.firstName.$touch();
+            v.lastName.$touch();
 
             if (v.$invalid) {
                 this.genericErrorMessage = `There are ${countErrors()} errors in the form.`;
@@ -63,12 +42,34 @@ export default {
             }
 
             this.genericErrorMessage = '';
+
             return false;
         },
+
+        outputValidationDiagnostics () {
+            const fields = this.$v.$params;
+            const invalidFields = [];
+            const validFields = [];
+
+            Object.keys(fields).forEach(key => {
+                if (this.$v[key].$invalid) {
+                    invalidFields.push(key);
+                } else {
+                    validFields.push(key);
+                }
+            });
+
+            return {
+                validFields,
+                invalidFields
+            };
+        },
+
         logValidationFailure () {
-            const validationState = formValidationState(this.$v);
+            const validationDiagnostics = this.outputValidationDiagnostics();
+
             this.$log.warn('Validation Failed', 'account-info', {
-                ...validationState
+                ...validationDiagnostics
             });
         }
     }

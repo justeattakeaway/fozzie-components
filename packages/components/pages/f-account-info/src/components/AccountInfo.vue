@@ -17,7 +17,7 @@
                 disabled
                 :placeholder="$t('fields.emailAddressPlaceholder')"
                 class="u-spacingBottom--large"
-                :value="fields.emailAddress" />
+                :value="emailAddress" />
 
             <f-link
                 is-distinct
@@ -28,12 +28,14 @@
             </f-link>
 
             <form-field
-                v-model="fields.firstName"
+                v-model="firstName"
+                maxlength="50"
                 :label-text="$t('fields.firstNameLabel')"
                 :placeholder="$t('fields.firstNamePlaceholder')" />
 
             <form-field
-                v-model="fields.lastName"
+                v-model="lastName"
+                maxlength="50"
                 :label-text="$t('fields.lastNameLabel')"
                 :placeholder="$t('fields.lastNamePlaceholder')" />
 
@@ -43,25 +45,25 @@
             </h2>
 
             <form-field
-                v-model="fields.line1"
+                v-model="line1"
                 :label-text="$t('fields.addressLabel')"
                 :placeholder="$t('fields.line1Placeholder')" />
 
             <form-field
-                v-model="fields.line2"
+                v-model="line2"
                 :placeholder="$t('fields.line2Placeholder')" />
 
             <form-field
-                v-model="fields.line3"
+                v-model="line3"
                 :placeholder="$t('fields.line3Placeholder')" />
 
             <form-field
-                v-model="fields.city"
+                v-model="city"
                 :label-text="$t('fields.cityLabel')"
                 :placeholder="$t('fields.cityPlaceholder')" />
 
             <form-field
-                v-model="fields.postcode"
+                v-model="postcode"
                 :label-text="$t('fields.postcodeLabel')"
                 :placeholder="$t('fields.postcodePlaceholder')" />
 
@@ -141,16 +143,14 @@ export default {
 
     data () {
         return {
-            fields: {
-                emailAddress: null,
-                firstName: null,
-                lastName: null,
-                line1: null,
-                line2: null,
-                line3: null,
-                city: null,
-                postcode: null
-            },
+            emailAddress: null,
+            firstName: null,
+            lastName: null,
+            line1: null,
+            line2: null,
+            line3: null,
+            city: null,
+            postcode: null,
             tenantConfigs,
             isFormSubmitting: false
         };
@@ -163,18 +163,15 @@ export default {
     methods: {
         initialise () {
             try {
-                this.$log.info('What???', 'account-info');
                 // TODO - Dummy data to be replaced with next ticket
-                this.fields = {
-                    emailAddress: 'mr.jazz@town.com',
-                    firstName: 'Max',
-                    lastName: 'Legend',
-                    line1: '1 Wardour Street',
-                    line2: undefined,
-                    line3: null,
-                    city: 'Strange Town',
-                    postcode: 'JZ1 1AA'
-                };
+                this.emailAddress = 'mr.jazz@town.com';
+                this.firstName = 'Max';
+                this.lastName = 'Legend';
+                this.line1 = '1 Fake Street';
+                this.line2 = undefined;
+                this.line3 = null;
+                this.city = 'Strange Town';
+                this.postcode = 'JZ1 1AA';
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
