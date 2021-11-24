@@ -1,6 +1,8 @@
 import SET_FM_CONFIG_JSON from './mutation.types';
 
 export default {
+    namespaced: true,
+
     state: () => ({
         configJson: {}
     }),

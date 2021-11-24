@@ -1907,18 +1907,6 @@ describe('Checkout', () => {
 
                 expect(mappedRequest[1].value).toMatchSnapshot();
             });
-
-            it('should map the request for age verification only successfully', async () => {
-                // Act
-                const mappedRequest = await wrapper.vm.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
-
-                // Assert
-                expect(getMappedDataForUpdateCheckoutSpy).toHaveBeenCalled();
-                expect(mappedRequest[0].value).toEqual({
-                    dateOfBirth: 'Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)'
-                });
-                expect(mappedRequest[1].value).toBeNull();
-            });
         });
 
         describe('setupGuestUser ::', () => {

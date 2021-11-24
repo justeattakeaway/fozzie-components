@@ -1308,6 +1308,11 @@
   resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-3.3.0.tgz#d5c6cf322ad2b8d7e7556834690cf7757f2b9434"
   integrity sha512-mjor7k9g6wGF+q67k9r0NSjW7FGgYuRrsLTZzbEhK3u2uwqry4ngeuYmxZosJFqH19T+j7ZSvjkYb99+NYURLA==
 
+"@braze/web-sdk@^3.3.0":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-3.4.1.tgz#1fa9863b248dc2be9fa2b48758f805b3b3c167c5"
+  integrity sha512-Cey/oO3n4U/stM8DLNRjWqD1a/Owzbua6jfAgwvwdwHxjglzK+SIzNmh42JwfuP0Txivn7D2DZLhcXqjQHhE2w==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -2147,6 +2152,18 @@
   dependencies:
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
+
+"@justeat/f-braze-adapter@3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.5.0.tgz#008b89ab02f72d53b1ef8c464546da8d8df2e852"
+  integrity sha512-YsULFKoxllze/TzRO8G0sXcERcePjtjGq+lMsRnGU9faUxO9KpEFBCjs82bdZZMIYTPUSDpiHKd2Dxhqga3Gdw==
+  dependencies:
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
 
 "@justeat/f-button@3.0.2":
   version "3.0.2"
@@ -7026,7 +7043,7 @@ axios@0.21.1:
   dependencies:
     follow-redirects "^1.10.0"
 
-axios@0.21.4, axios@^0.21.1:
+axios@0.21.4, axios@^0.21.1, axios@^0.21.2:
   version "0.21.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
@@ -8901,13 +8918,13 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromedriver@91.0.0:
-  version "91.0.0"
-  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-91.0.0.tgz#b8c07d715c1bde2ed5817757e923bd65565c8f94"
-  integrity sha512-0eQGLDWvfVd1apkqQpt4452bCATrsj50whhVzMqPiazNSfCXXwfYWRonYxx3DVFCG3+RwSCLvsk8/vpuojCyJA==
+chromedriver@96.0.0:
+  version "96.0.0"
+  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-96.0.0.tgz#c8473498e4c94950fa168187b112019cce9e5c6c"
+  integrity sha512-4g6Hn5RHGsbaBmOrJbDlz/hdVPOc22eRsbvoAAMqkZxR2NJCcddHzCw2FAQeW8lX/C7xWVz3nyDsKX3fE9lIIw==
   dependencies:
     "@testim/chrome-version" "^1.0.7"
-    axios "^0.21.1"
+    axios "^0.21.2"
     del "^6.0.0"
     extract-zip "^2.0.1"
     https-proxy-agent "^5.0.0"
@@ -21066,7 +21083,7 @@ postcss@^6.0.1, postcss@^6.0.14, postcss@^6.0.21, postcss@^6.0.23:
     source-map "^0.6.1"
     supports-color "^5.4.0"
 
-postcss@^8.1.10, postcss@^8.2.1, postcss@^8.3.6, postcss@^8.3.8:
+postcss@^8.1.10, postcss@^8.2.1, postcss@^8.3.5, postcss@^8.3.6, postcss@^8.3.8:
   version "8.3.11"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.11.tgz#c3beca7ea811cd5e1c4a3ec6d2e7599ef1f8f858"
   integrity sha512-hCmlUAIlUiav8Xdqw3Io4LcpA1DOt7h3LSTAC4G6JGHFFaWzI6qvFt9oilvl8BmkbBRX1IhM90ZAmpk68zccQA==
@@ -25782,6 +25799,18 @@ vite@2.1.2:
     rollup "^2.38.5"
   optionalDependencies:
     fsevents "~2.3.1"
+
+vite@2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.4.2.tgz#07d00615775c808530bc9f65641062b349b67929"
+  integrity sha512-2MifxD2I9fjyDmmEzbULOo3kOUoqX90A58cT6mECxoVQlMYFuijZsPQBuA14mqSwvV3ydUsqnq+BRWXyO9Qa+w==
+  dependencies:
+    esbuild "^0.12.8"
+    postcss "^8.3.5"
+    resolve "^1.20.0"
+    rollup "^2.38.5"
+  optionalDependencies:
+    fsevents "~2.3.2"
 
 vite@2.4.4:
   version "2.4.4"

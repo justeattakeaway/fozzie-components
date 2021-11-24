@@ -79,7 +79,6 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
 import getDaysInMonth from '../services/daysInMonth';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
-import EventNames from '../event-names';
 
 export default {
     components: {
@@ -182,7 +181,6 @@ export default {
 
             if (this.isValidAge) {
                 this.updateDateOfBirth(this.userDateOfBirth);
-                this.$emit(EventNames.CheckoutVerifyAge);
             } else {
                 this.$nextTick(() => {
                     this.$refs.AgeVerificationError.$el.focus();

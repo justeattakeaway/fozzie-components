@@ -4,7 +4,8 @@
         :class="[
             $style['c-card'], {
                 [$style['c-card--outline']]: hasOutline,
-                [$style['c-card--pageContentWrapper']]: isPageContentWrapper
+                [$style['c-card--pageContentWrapper']]: isPageContentWrapper,
+                [$style[`c-card--cardSizeCustom--${cardSizeCustom}`]]: cardSizeCustom !== ''
             }]">
         <div
             data-test-id="card-inner"
@@ -67,6 +68,11 @@ export default {
         hasInnerSpacingLarge: {
             type: Boolean,
             default: false
+        },
+        cardSizeCustom: {
+            type: String,
+            default: '',
+            validator: value => ['', 'medium', 'large'].indexOf(value) !== -1
         }
     }
 };
@@ -141,5 +147,14 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
 
     .c-card-heading--rightAligned {
         text-align: right;
+    }
+
+    // The two card sizes used on the accounts page. e.g Previous orders & contact preferences cards.
+    .c-card--cardSizeCustom--large {
+        max-width: 808px;
+    }
+
+    .c-card--cardSizeCustom--medium {
+        max-width: 600px;
     }
 </style>

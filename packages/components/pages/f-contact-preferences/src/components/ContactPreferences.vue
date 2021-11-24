@@ -1,14 +1,14 @@
 <template>
     <div
-        data-test-id="contactPreferences">
+        data-test-id="contact-preferences">
         <card-component
-            v-if="!showErrorPage"
+            v-if="!shouldShowErrorPage"
             :card-heading="$t('heading')"
             is-page-content-wrapper
             has-outline>
             <form @submit.prevent="onFormSubmit">
                 <div
-                    v-for="{ key, emailEnabled, emailValue, smsEnabled, smsValue } in preferences"
+                    v-for="{ key, isEmailEnabled, emailValue, isSmsEnabled, smsValue } in preferences"
                     :key="key">
                     <h2
                         :class="$style['c-contactPreferences-subtitle']">
@@ -19,13 +19,13 @@
                         <label>
                             <input
                                 type="checkbox"
-                                :data-test-id="`contactPreferences-${key}-checkbox`"
-                                :disabled="!emailEnabled"
+                                :data-test-id="`contact-preferences-${key}-email-checkbox`"
+                                :disabled="!isEmailEnabled"
                                 :checked="emailValue"
                                 @change="editPreferenceValue(key, Object.keys({ emailValue })[0], $event.target.checked)">
                             <span
                                 :class="{
-                                    [$style['c-contactPreferences-labelText--disabled']]: !emailEnabled
+                                    [$style['c-contactPreferences-labelText--disabled']]: !isEmailEnabled
                                 }">
                                 {{ $t(`${key}.email`) }}
                                 <template v-if="$te(`${key}.emailDescription`)">
@@ -36,13 +36,13 @@
                         <label>
                             <input
                                 type="checkbox"
-                                :data-test-id="`contactPreferences-${key}-checkbox`"
-                                :disabled="!smsEnabled"
+                                :data-test-id="`contact-preferences-${key}-sms-checkbox`"
+                                :disabled="!isSmsEnabled"
                                 :checked="smsValue"
                                 @change="editPreferenceValue(key, Object.keys({ smsValue })[0], $event.target.checked)">
                             <span
                                 :class="{
-                                    [$style['c-contactPreferences-labelText--disabled']]: !smsEnabled
+                                    [$style['c-contactPreferences-labelText--disabled']]: !isSmsEnabled
                                 }">
                                 {{ $t(`${key}.sms`) }}
                                 <template v-if="$te(`${key}.smsDescription`)">
@@ -54,6 +54,7 @@
                 </div>
 
                 <f-button
+                    data-test-id="contact-preferences-submit-button"
                     button-type="primary"
                     is-full-width
                     action-type="submit"
@@ -65,7 +66,7 @@
 
         <div v-else>
             <card-component
-                data-test-id="contactPreferences-error-card"
+                data-test-id="contact-preferences-error-card"
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center">
@@ -123,7 +124,7 @@ export default {
         return {
             isFormDirty: false,
             error: {},
-            showErrorPage: false,
+            shouldShowErrorPage: false,
             tenantConfigs,
             contactPreferencesApi: new ContactPreferencesApi({
                 httpClient: this.$http,
@@ -156,7 +157,7 @@ export default {
         * @param {object} Error - The error that has recently occurred
         */
         handleErrorState (error) {
-            this.showErrorPage = true;
+            this.shouldShowErrorPage = true;
             this.error = error;
         },
 

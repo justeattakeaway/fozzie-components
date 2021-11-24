@@ -7,7 +7,9 @@ const $style = {
     'c-card--pageContentWrapper': 'c-card--pageContentWrapper',
     'c-card-heading--centerAligned': 'c-card-heading--centerAligned',
     'c-card-heading--rightAligned': 'c-card-heading--rightAligned',
-    'c-card-innerSpacing--large': 'c-card-innerSpacing--large'
+    'c-card-innerSpacing--large': 'c-card-innerSpacing--large',
+    'c-card--cardSizeCustom--large': 'c-card--cardSizeCustom--large',
+    'c-card--cardSizeCustom--medium': 'c-card--cardSizeCustom--medium'
 };
 
 describe('Card', () => {
@@ -221,6 +223,35 @@ describe('Card', () => {
                     // Assert
                     expect(wrapper.find('[data-test-id="card-inner"]').attributes('class')).not.toContain('c-card-innerSpacing--large');
                 });
+            });
+        });
+
+        describe('`cardSizeCustom`', () => {
+            it('should default to an empty string if it is not set', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(Card, { propsData: {} });
+
+                // Assert
+                expect(wrapper.vm.cardSizeCustom).toBe('');
+            });
+
+            it.each([
+                ['c-card--cardSizeCustom--large', 'large'],
+                ['c-card--cardSizeCustom--medium', 'medium']
+            ])('should add %s class to the card container if the `cardSizeCustom` prop is set to %s', (cssClass, propValue) => {
+                // Arrange & Act
+                const wrapper = shallowMount(Card, {
+                    propsData: {
+                        cardSizeCustom: propValue
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
+                const card = wrapper.find('[data-test-id="card-component"]');
+
+                // Assert
+                expect(card.attributes('class')).toContain(cssClass);
             });
         });
     });
