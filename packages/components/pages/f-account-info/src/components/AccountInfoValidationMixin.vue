@@ -10,12 +10,12 @@ export default {
                 firstName: {
                     required,
                     maxLength: maxLength(50),
-                    isValidNameField: this.IsValidNameField
+                    isValidName: this.IsValidName
                 },
                 lastName: {
                     required,
                     maxLength: maxLength(50),
-                    isValidNameField: this.IsValidNameField
+                    isValidName: this.IsValidName
                 },
                 line1: {
                     required
