@@ -25,9 +25,9 @@ export const mapToPreferencesViewModel = ({ Preferences, PreferenceVersionViewed
             visible: !NON_VISIBLE_PREFERENCE_KEYS.includes(Key),
             pushEnabled: !NON_EDITABLE_PREFERENCE_KEYS.includes(Key),
             pushValue: Push,
-            emailEnabled: !NON_EDITABLE_PREFERENCE_KEYS.includes(Key),
+            isEmailEnabled: !NON_EDITABLE_PREFERENCE_KEYS.includes(Key),
             emailValue: Email,
-            smsEnabled: !NON_EDITABLE_PREFERENCE_KEYS.includes(Key),
+            isSmsEnabled: !NON_EDITABLE_PREFERENCE_KEYS.includes(Key),
             smsValue: Sms
         })),
         preferenceVersionViewed: PreferenceVersionViewed
