@@ -3,8 +3,6 @@ import { validationMixin } from 'vuelidate';
 import { required, maxLength } from 'vuelidate/lib/validators';
 import { validations } from '@justeat/f-services';
 
-const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
-
 export default {
     validations () {
         const validationRules = {
@@ -12,12 +10,12 @@ export default {
                 firstName: {
                     required,
                     maxLength: maxLength(50),
-                    meetsCharacterValidationRules
+                    isValidNameField: this.IsValidNameField
                 },
                 lastName: {
                     required,
                     maxLength: maxLength(50),
-                    meetsCharacterValidationRules
+                    isValidNameField: this.IsValidNameField
                 },
                 line1: {
                     required
@@ -53,6 +51,10 @@ export default {
 
         isValidPostcode () {
             return validations.isValidPostcode(this.fields.postcode, this.$i18n.locale);
+        },
+
+        IsValidName (value) {
+            return /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
         }
     }
 };
