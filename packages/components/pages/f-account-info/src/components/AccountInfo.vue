@@ -160,7 +160,7 @@ export default {
     methods: {
         async initialise () {
             try {
-                // TODO - Dummy data to be replaced with WCB-2404
+                // TODO - Dummy data to be replaced with next ticket
                 this.fields = {
                     emailAddress: 'mr.jazz@town.com',
                     firstName: 'Max',
@@ -172,9 +172,9 @@ export default {
                     postcode: 'JZ1 1AA'
                 };
             } catch (error) {
-                // TODO - WCB-2386
+                // TODO - to be added with next ticket
             } finally {
-                // TODO - Stop auth spinner - WCB-2372
+                // TODO - Stop auth spinner to be added with next ticket
             }
         },
 
@@ -182,10 +182,10 @@ export default {
             this.setSubmittingState(true);
 
             try {
-                // TODO - WCB-2404
+                // TODO - to be added with next ticket
                 this.$log.info('Submitted Form', 'account-info');
             } catch (error) {
-                // TODO - WCB-2386
+                // TODO - to be added with next ticket
             } finally {
                 this.setSubmittingState(false);
             }
