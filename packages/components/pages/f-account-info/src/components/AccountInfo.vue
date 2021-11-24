@@ -71,7 +71,8 @@
                 button-type="primary"
                 button-size="large"
                 is-full-width
-                action-type="submit">
+                action-type="submit"
+                :is-loading="isFormSubmitting">
                 {{ $t('buttons.saveChanges') }}
             </f-button>
         </form>
@@ -147,13 +148,55 @@ export default {
                 city: null,
                 postcode: null
             },
-            tenantConfigs
+            tenantConfigs,
+            isFormSubmitting: false
         };
     },
 
+    async mounted () {
+        await this.initialise();
+    },
+
     methods: {
+        async initialise () {
+            try {
+                // TODO - Dummy data to be replaced with next ticket
+                this.fields = {
+                    emailAddress: 'mr.jazz@town.com',
+                    firstName: 'Max',
+                    lastName: 'Legend',
+                    line1: '1 Wardour Street',
+                    line2: undefined,
+                    line3: null,
+                    city: 'Strange Town',
+                    postcode: 'JZ1 1AA'
+                };
+            } catch (error) {
+                // TODO - to be added with next ticket
+            } finally {
+                // TODO - Stop auth spinner to be added with next ticket
+            }
+        },
+
         onFormSubmit () {
-            this.$log.info('Submitted Form', 'account-info');
+            this.setSubmittingState(true);
+
+            try {
+                // TODO - to be added with next ticket
+                this.$log.info('Submitted Form', 'account-info');
+            } catch (error) {
+                // TODO - to be added with next ticket
+            } finally {
+                this.setSubmittingState(false);
+            }
+        },
+
+        /**
+        * Sets the flag to inform the Template of whether the form is currently submitting or not
+        * @param {boolean} isFormSubmitting - True = Form is being submitted / False = Form is not being submitted
+        */
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
         }
     }
 };

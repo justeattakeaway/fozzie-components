@@ -31,34 +31,34 @@ export const contactPreferencesViewModel = {
     preferenceVersionViewed: 0,
     preferences: [{
         displayName: 'Order status',
-        emailEnabled: false,
+        isEmailEnabled: false,
         emailValue: true,
         key: 'orderstatus',
         pushEnabled: false,
         pushValue: false,
-        smsEnabled: false,
+        isSmsEnabled: false,
         smsValue: true,
         sort: 1,
         visible: true
     }, {
         displayName: 'Review meal',
-        emailEnabled: true,
+        isEmailEnabled: true,
         emailValue: false,
         key: 'reviewmeal',
         pushEnabled: true,
         pushValue: false,
-        smsEnabled: true,
+        isSmsEnabled: true,
         smsValue: false,
         sort: 2,
         visible: false
     }, {
         displayName: 'News & offers',
-        emailEnabled: true,
+        isEmailEnabled: true,
         emailValue: false,
         key: 'news',
         pushEnabled: true,
         pushValue: false,
-        smsEnabled: true,
+        isSmsEnabled: true,
         smsValue: false,
         sort: 3,
         visible: true
@@ -67,23 +67,23 @@ export const contactPreferencesViewModel = {
 
 export const filteredContactPreferencesModel = [{
     displayName: 'Order status',
-    emailEnabled: false,
+    isEmailEnabled: false,
     emailValue: true,
     key: 'orderstatus',
     pushEnabled: false,
     pushValue: false,
-    smsEnabled: false,
+    isSmsEnabled: false,
     smsValue: true,
     sort: 1,
     visible: true
 }, {
     displayName: 'News & offers',
-    emailEnabled: true,
+    isEmailEnabled: true,
     emailValue: false,
     key: 'news',
     pushEnabled: true,
     pushValue: false,
-    smsEnabled: true,
+    isSmsEnabled: true,
     smsValue: false,
     sort: 3,
     visible: true
