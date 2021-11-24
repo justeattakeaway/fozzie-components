@@ -1,5 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
+import FButton from '@justeat/f-button';
 import FAlert from '../Alert.vue';
+
+jest.mock(FButton);
 
 const defaultPropsData = { heading: 'Alert title', type: 'info' };
 
