@@ -22,7 +22,7 @@
             <f-link
                 is-distinct
                 :class="$style['c-accountInfo-customerCareLink']"
-                href="/help"
+                href="/help/article/203097431/how-do-i-manage-my-account"
                 target="_blank">
                 {{ $t('contactCustomerCareTeam') }}
             </f-link>
@@ -81,6 +81,7 @@
             :class="[$style['c-accountInfo-changePasswordButton']]"
             data-test-id="account-info-submit-button"
             button-type="secondary"
+            href="/change-password?returnurl=/account/info"
             button-size="large"
             is-full-width
             action-type="submit">
@@ -93,7 +94,7 @@
 
         <f-link
             is-distinct
-            href="/help"
+            href="/account/deactivate"
             target="_blank">
             {{ $t('deleteAccountLink') }}
         </f-link>
