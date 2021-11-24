@@ -1,6 +1,7 @@
 <template>
     <card
         data-test-id="checkout-error-page-component"
+        :class="$style['c-checkout-error']"
         :card-heading="$t(`errorMessages.${errorFormType}.heading`)"
         :card-description=" $t(`errorMessages.${errorFormType}.description`, { serviceType: serviceType })"
         :primary-button="primaryButton"
@@ -84,4 +85,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+.c-checkout-error {
+    @include media('<=narrow') {
+        border: none;
+        padding-top: spacing(x2);
+        padding-bottom: spacing(x2);
+    }
+}
 </style>
