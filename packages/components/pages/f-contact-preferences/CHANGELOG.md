@@ -12,6 +12,7 @@ v0.7.0
 - Rename boolean fields to match naming conventions
 
 ### Added
+- Added Accessibility Tests.
 - Added Chrome & Visual Tests.
 
 
