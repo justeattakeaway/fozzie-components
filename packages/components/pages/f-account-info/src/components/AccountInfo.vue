@@ -198,7 +198,7 @@ export default {
 
             try {
                 // TODO - to be added with next ticket
-                this.$log.info('Submitted Form', 'account-info');
+                this.$log.info('Submitted Form', ['account-info', 'account-pages']);
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {

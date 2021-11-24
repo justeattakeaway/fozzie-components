@@ -44,7 +44,7 @@ export default {
         logValidationFailure () {
             const validationDiagnostics = validations.getFormValidationState(this.$v);
 
-            this.$log.warn('Validation Failed', 'account-info', {
+            this.$log.warn('Validation Failed', ['account-info', 'account-pages'], {
                 ...validationDiagnostics
             });
         },
