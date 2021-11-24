@@ -28,14 +28,14 @@
             </f-link>
 
             <form-field
+                v-model="fields.firstName"
                 :label-text="$t('fields.firstNameLabel')"
-                :placeholder="$t('fields.firstNamePlaceholder')"
-                :value="fields.firstName" />
+                :placeholder="$t('fields.firstNamePlaceholder')" />
 
             <form-field
+                v-model="fields.lastName"
                 :label-text="$t('fields.lastNameLabel')"
-                :placeholder="$t('fields.lastNamePlaceholder')"
-                :value="fields.lastName" />
+                :placeholder="$t('fields.lastNamePlaceholder')" />
 
             <h2
                 class="u-spacingBottom--large">
@@ -43,27 +43,27 @@
             </h2>
 
             <form-field
+                v-model="fields.line1"
                 :label-text="$t('fields.addressLabel')"
-                :placeholder="$t('fields.line1Placeholder')"
-                :value="fields.line1" />
+                :placeholder="$t('fields.line1Placeholder')" />
 
             <form-field
-                :placeholder="$t('fields.line2Placeholder')"
-                :value="fields.line2" />
+                v-model="fields.line2"
+                :placeholder="$t('fields.line2Placeholder')" />
 
             <form-field
-                :placeholder="$t('fields.line3Placeholder')"
-                :value="fields.line3" />
+                v-model="fields.line3"
+                :placeholder="$t('fields.line3Placeholder')" />
 
             <form-field
+                v-model="fields.city"
                 :label-text="$t('fields.cityLabel')"
-                :placeholder="$t('fields.cityPlaceholder')"
-                :value="fields.city" />
+                :placeholder="$t('fields.cityPlaceholder')" />
 
             <form-field
+                v-model="fields.postcode"
                 :label-text="$t('fields.postcodeLabel')"
-                :placeholder="$t('fields.postcodePlaceholder')"
-                :value="fields.postcode" />
+                :placeholder="$t('fields.postcodePlaceholder')" />
 
             <f-button
                 :class="[$style['c-accountInfo-submitButton']]"
@@ -116,6 +116,7 @@ import '@justeat/f-link/dist/f-link.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
+import AccountInfoValidationsMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
 
 export default {
@@ -127,7 +128,8 @@ export default {
     },
 
     mixins: [
-        VueGlobalisationMixin
+        VueGlobalisationMixin,
+        AccountInfoValidationsMixin
     ],
 
     props: {
@@ -154,13 +156,14 @@ export default {
         };
     },
 
-    async mounted () {
-        await this.initialise();
+    mounted () {
+        this.initialise();
     },
 
     methods: {
-        async initialise () {
+        initialise () {
             try {
+                this.$log.info('What???', 'account-info');
                 // TODO - Dummy data to be replaced with next ticket
                 this.fields = {
                     emailAddress: 'mr.jazz@town.com',
@@ -180,6 +183,11 @@ export default {
         },
 
         onFormSubmit () {
+            if (this.isFormInvalid()) {
+                this.logValidationFailure();
+                return;
+            }
+
             this.setSubmittingState(true);
 
             try {
