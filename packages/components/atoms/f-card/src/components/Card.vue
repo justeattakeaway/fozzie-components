@@ -4,9 +4,15 @@
         :class="[
             $style['c-card'], {
                 [$style['c-card--outline']]: hasOutline,
-                [$style['c-card--pageContentWrapper']]: isPageContentWrapper
+                [$style['c-card--pageContentWrapper']]: isPageContentWrapper,
+                [$style[`c-card--cardSizeCustom--${cardSizeCustom}`]]: cardSizeCustom !== ''
             }]">
-        <div :class="[$style['c-card-innerSpacing']]">
+        <div
+            data-test-id="card-inner"
+            :class="[
+                [$style['c-card-innerSpacing']], {
+                    [$style['c-card-innerSpacing--large']]: hasInnerSpacingLarge
+                }]">
             <component
                 :is="cardHeadingTag"
                 v-if="cardHeading"
@@ -58,6 +64,15 @@ export default {
         hasFullWidthFooter: {
             type: Boolean,
             default: false
+        },
+        hasInnerSpacingLarge: {
+            type: Boolean,
+            default: false
+        },
+        cardSizeCustom: {
+            type: String,
+            default: '',
+            validator: value => ['', 'medium', 'large'].indexOf(value) !== -1
         }
     }
 };
@@ -69,6 +84,7 @@ $card-bgColor                             : $color-container-default;
 $card-borderColor                         : $color-border-default;
 $card-borderRadius                        : $radius-rounded-c;
 $card-padding                             : spacing(x2);
+$card-padding-large                       : spacing(x4);
 $card--pageContentWrapper-width           : 472px; // so that it falls on our 8px spacing grid
 
 .c-card {
@@ -78,6 +94,16 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
 }
     .c-card-innerSpacing {
         padding: $card-padding;
+
+        &.c-card-innerSpacing--large {
+            padding: $card-padding-large $card-padding;
+        }
+
+        @include media('>=mid') {
+            &.c-card-innerSpacing--large {
+                padding: $card-padding-large;
+            }
+        }
     }
 
     .c-card--outline {
@@ -98,7 +124,7 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
             margin: spacing(x5) auto;
         }
 
-        .c-card-innerSpacing {
+        & > .c-card-innerSpacing {
             padding: spacing(x3) 6% 0;
 
             @include media('>=narrow') {
@@ -121,5 +147,14 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
 
     .c-card-heading--rightAligned {
         text-align: right;
+    }
+
+    // The two card sizes used on the accounts page. e.g Previous orders & contact preferences cards.
+    .c-card--cardSizeCustom--large {
+        max-width: 808px;
+    }
+
+    .c-card--cardSizeCustom--medium {
+        max-width: 600px;
     }
 </style>

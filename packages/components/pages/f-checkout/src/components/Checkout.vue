@@ -6,18 +6,17 @@
             :redirect-url="redirectUrl"
             :service-type="serviceType" />
 
-        <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
-
         <component
             :is="messageType.name"
-            v-else-if="message"
+            v-if="message && !errorFormType"
             ref="errorMessage"
             v-bind="messageType.props"
             @created="handleDialogCreation">
             <span>{{ messageType.content }}</span>
         </component>
+
+        <age-verification
+            v-if="shouldShowAgeVerificationForm" />
 
         <div
             v-if="shouldShowCheckoutForm"
@@ -38,6 +37,7 @@
                     :is-checkout-method-dine-in="isCheckoutMethodDineIn"
                     :scroll-to-element="scrollToElement"
                     :available-fulfilment-times-key="availableFulfilmentTimesKey"
+                    :is-form-submitting="isFormSubmitting"
                     v-on="formEvents" />
 
                 <template
@@ -85,7 +85,7 @@ import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
 import CheckoutAnalyticsService from '../services/analytics';
 
@@ -214,10 +214,11 @@ export default {
     data () {
         return {
             tenantConfigs,
+            isLoading: true,
             errorFormType: null,
-            isFormSubmitting: false,
             availableFulfilmentTimesKey: 0,
-            checkoutAnalyticsService: new CheckoutAnalyticsService(this)
+            checkoutAnalyticsService: new CheckoutAnalyticsService(this),
+            isFormSubmitting: false
         };
     },
 
@@ -275,11 +276,11 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.errorFormType && !this.shouldShowAgeVerificationForm;
+            return !this.isLoading && !this.errorFormType && !this.shouldShowAgeVerificationForm;
         },
 
         shouldShowAgeVerificationForm () {
-            return this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
+            return !this.errorFormType && this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
@@ -375,7 +376,6 @@ export default {
         await this.initialise();
         this.checkoutAnalyticsService.trackInitialLoad();
         this.$emit(EventNames.CheckoutMounted);
-        this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
     },
 
     methods: {
@@ -408,11 +408,15 @@ export default {
         async initialise () {
             this.setExperimentValues(this.experiments);
 
+            this.isLoading = true;
+
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()]
                 : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+
+            this.resetLoadingState();
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
@@ -460,7 +464,18 @@ export default {
                 }
             } catch (error) {
                 this.handleErrorState(error);
+            } finally {
+                this.setSubmittingState(false);
             }
+        },
+
+        /**
+         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
+         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
+         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
+         */
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
         },
 
         /**
@@ -539,16 +554,6 @@ export default {
          */
         redirectToPayment () {
             window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
-        },
-
-        /**
-         * Call update checkout with only the user's DOB for age verification
-         * This is to avoid creating too many side effects with the original mapper for update checkout
-         */
-        async verifyCustomerAge () {
-            const data = this.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
-
-            await this.handleUpdateCheckout(data);
         },
 
         /**
@@ -765,6 +770,7 @@ export default {
         },
 
         onFormSubmit () {
+            this.setSubmittingState(true);
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
             this.updateMessage();
         },
@@ -798,6 +804,12 @@ export default {
             };
 
             this.handleEventLogging('CheckoutValidationError', validationState, { ...expandedData, validationState });
+            this.setSubmittingState(false);
+        },
+
+        resetLoadingState () {
+            this.isLoading = false;
+            this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
         },
 
         getReferralState () {
@@ -828,22 +840,18 @@ export default {
             this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
-        getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
-            const { ageVerificationOnly } = options;
-            return ageVerificationOnly ?
-                mapUpdateCheckoutRequestForAgeVerification({
-                    customer: this.customer
-                }) : mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
-                    time: this.time,
-                    userNote: this.notes,
-                    geolocation: this.geolocation,
-                    asap: this.hasAsapSelected,
-                    tableIdentifier: this.dineIn.tableIdentifier
-                });
+        getMappedDataForUpdateCheckout () {
+            return mapUpdateCheckoutRequest({
+                address: this.address,
+                customer: this.customer,
+                isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
+                time: this.time,
+                userNote: this.userNote,
+                geolocation: this.geolocation,
+                asap: this.hasAsapSelected,
+                tableIdentifier: this.dineIn.tableIdentifier
+            });
         },
 
         async loadNotesConfiguration () {
@@ -875,5 +883,15 @@ export default {
 
 .c-checkout-submitButton--noBottomSpace {
     margin-bottom: 0;
+}
+
+.c-checkout-alert {
+    width: $checkout-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include media('<=#{$checkout-width}') {
+        width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
+    }
 }
 </style>

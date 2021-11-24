@@ -72,7 +72,8 @@ describe('CheckoutForm', () => {
         isCheckoutMethodDelivery: true,
         isCheckoutMethodDineIn: false,
         scrollToElement: jest.fn(),
-        availableFulfilmentTimesKey: 0
+        availableFulfilmentTimesKey: 0,
+        isFormSubmitting: false
     };
 
     afterEach(() => {
@@ -372,13 +373,11 @@ describe('CheckoutForm', () => {
         });
 
         describe('onFormSubmit ::', () => {
-            let setSubmittingStateSpy;
             let isFormValidSpy;
             let scrollToFirstInlineErrorSpy;
             let wrapper;
 
             beforeEach(() => {
-                setSubmittingStateSpy = jest.spyOn(CheckoutForm.methods, 'setSubmittingState');
                 isFormValidSpy = jest.spyOn(CheckoutForm.methods, 'isFormValid');
                 scrollToFirstInlineErrorSpy = jest.spyOn(CheckoutForm.methods, 'scrollToFirstInlineError');
 
@@ -402,14 +401,6 @@ describe('CheckoutForm', () => {
 
                 // Assert
                 expect(wrapper.emitted(EventNames.FormSubmitting).length).toBe(1);
-            });
-
-            it('should call `setSubmittingState` with true', () => {
-                // Act
-                wrapper.vm.onFormSubmit();
-
-                // Assert
-                expect(setSubmittingStateSpy).toHaveBeenCalledWith(true);
             });
 
             describe('when `isFormValid` is true', () => {

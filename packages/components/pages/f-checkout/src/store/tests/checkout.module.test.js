@@ -28,7 +28,6 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_ERRORS,
     UPDATE_ADDRESS_DETAILS,
-    UPDATE_DINEIN_DETAILS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
@@ -38,7 +37,9 @@ import {
     UPDATE_MESSAGE,
     UPDATE_ADDRESS,
     UPDATE_PHONE_NUMBER,
-    UPDATE_DATE_OF_BIRTH
+    UPDATE_DATE_OF_BIRTH,
+    CLEAR_DOB_ERROR,
+    UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -393,6 +394,20 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${CLEAR_DOB_ERROR} :: `, () => {
+            it('should remove the `DOB_REQUIRED_ISSUE` and the `AGE_VERIFICATION_ISSUE` errors', () => {
+                // Arrange
+                state.errors.push({ code: 'DOB_REQUIRED_ISSUE' });
+                state.errors.push({ code: 'AGE_VERIFICATION_ISSUE' });
+
+                // Act
+                mutations[CLEAR_DOB_ERROR](state, {});
+
+                // Assert
+                expect(state.errors).toEqual(defaultState.errors);
+            });
+        });
+
         it.each([
             [UPDATE_ADDRESS_DETAILS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
@@ -414,6 +429,7 @@ describe('CheckoutModule', () => {
         let payload;
         let rootGetters;
         let context;
+
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
@@ -1171,7 +1187,18 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('updateUserDetails ::', () => {
+        describe('updateDateOfBirth :: ', () => {
+            it('should call `UPDATE_DATE_OF_BIRTH` and `CLEAR_DOB_ERROR`.', () => {
+                // Act
+                updateDateOfBirth(context, dateOfBirth);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith('UPDATE_DATE_OF_BIRTH', dateOfBirth);
+                expect(commit).toHaveBeenCalledWith('CLEAR_DOB_ERROR', {});
+            });
+        });
+
+        describe('updateUserDetails :: ', () => {
             const userDetails = {
                 fieldType: 'customer',
                 fieldName: 'firstName',
@@ -1202,6 +1229,7 @@ describe('CheckoutModule', () => {
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, userDetails.fieldName, { root: true });
             });
         });
+
 
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],

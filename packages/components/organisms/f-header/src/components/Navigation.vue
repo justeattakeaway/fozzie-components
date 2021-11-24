@@ -1,6 +1,8 @@
 <template>
     <nav
         v-if="hasNavigationLinks"
+        ref="nav"
+        aria-hidden="false"
         :class="[
             $style['c-nav'],
             $style['c-nav--global']
@@ -83,6 +85,7 @@
                     v-if="showOffersLink"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <a
+                        :tabindex="tabIndex"
                         data-test-id="offers-link"
                         data-trak='{
                             "trakEvent": "click",
@@ -110,6 +113,7 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
                     data-test-id="delivery-enquiry">
                     <a
+                        :tabindex="tabIndex"
                         data-test-id="delivery-link"
                         :data-trak='`{
                             "trakEvent": "click",
@@ -178,6 +182,7 @@
                         <user-navigation-panel
                             :is-open="navIsOpen"
                             :is-below-mid="isBelowMid"
+                            :is-country-selector-closed-on-mobile-view="isCountrySelectorClosedOnMobileView"
                             :copy="copy"
                             :return-logout-url="returnLogoutUrl"
                             @activateNav="openUserMenu"
@@ -190,6 +195,7 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
                     data-test-id="login">
                     <a
+                        :tabindex="tabIndex"
                         :href="returnLoginUrl"
                         :data-trak='`{
                             "trakEvent": "click",
@@ -213,6 +219,7 @@
                     v-if="showHelpLink"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <a
+                        :tabindex="tabIndex"
                         :href="copy.help.url"
                         :data-trak='`{
                                 "trakEvent": "click",
@@ -226,18 +233,18 @@
                             { [$style['c-nav-list-link--alt']]: isAltColour },
                             { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]"
-                        data-test-id="help-link"
-                        v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMenu } : null">
+                        data-test-id="help-link">
                         {{ copy.help.text }}
                     </a>
                 </li>
 
                 <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
+                    :aria-hidden="!isCountrySelectorClosedOnMobileView"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
                     data-test-id="logout">
                     <a
-                        :tabindex="navIsOpen ? 0 : -1"
+                        :tabindex="tabIndex"
                         :href="returnLogoutUrl"
                         :data-trak='`{
                                 "trakEvent": "click",
@@ -251,7 +258,7 @@
                             { [$style['c-nav-list-link--alt']]: isAltColour },
                             { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]"
-                        v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMenu } : null">
+                    >
                         {{ copy.accountLogout.text }}
                     </a>
                 </li>
@@ -267,18 +274,18 @@
                     v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
                     @keyup.esc="closeCountrySelector">
                     <button
+                        ref="countrySelectorToggle"
                         type="button"
                         data-test-id="action-button-component"
-                        :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
+                        :tabindex="tabIndex"
                         :class="[
                             $style['c-nav-list-text'],
                             $style['c-nav-list-btn']
                         ]"
-                        :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
+                        :aria-expanded="isCountrySelectorOpenOnDesktopView ? 'true' : 'false'"
                         :aria-haspopup="!isBelowMid"
                         :aria-label="copy.countrySelector.changeCurrentCountry"
-                        @click="onCountrySelectorToggle"
-                        v-on="countrySelectorIsClosedOnMobileView ? { blur: closeUserMenu, focus: openUserMenu } : null">
+                        @click="onCountrySelectorToggle">
                         <span :class="$style['c-nav-list-iconWrapper']">
                             <flag-icon
                                 data-test-id="current-flag-icon"
@@ -303,9 +310,9 @@
                         <country-selector-panel
                             :copy="copy"
                             :is-open="countrySelectorIsOpen"
-                            @goBackButtonClick="closeCountrySelector"
-                            @blurOnLink="closeCountrySelector"
-                            @focusOnLink="openCountrySelector" />
+                            :is-below-mid="isBelowMid"
+                            @closeCountrySelector="closeCountrySelector"
+                        />
                     </v-popover>
                 </li>
             </ul>
@@ -470,12 +477,18 @@ export default {
                 this.showLoginInfo;
         },
 
-        countrySelectorIsClosedOnMobileView () {
+        isCountrySelectorClosedOnMobileView () {
             return this.isBelowMid && !this.countrySelectorIsOpen;
         },
 
-        countrySelectorIsOpenOnDesktopView () {
+        isCountrySelectorOpenOnDesktopView () {
             return !this.isBelowMid && this.countrySelectorIsOpen;
+        },
+
+        tabIndex () {
+            if (!this.isBelowMid) return 0;
+            if (this.isBelowMid && this.isCountrySelectorClosedOnMobileView) return 0;
+            return -1;
         }
     },
 
@@ -505,28 +518,97 @@ export default {
             if (this.showCountrySelector) {
                 this.closeCountrySelector();
             }
+
             // This is added to remove the ability to scroll the page content when the mobile navigation is open
             this.handleMobileNavState();
+            this.tabLoop();
+        },
+
+        /**
+         * Handles user key presses to help improve acccessibilty for keyboard users.
+         *
+         * @param {Object} e Event object.
+         */
+        keyActions (e) {
+            if (e.key === 'Escape') {
+                this.onNavToggle();
+            }
+
+            if (e.key === 'Tab' && this.firstFocusableEl) {
+                const { activeElement } = document;
+                const isFirstElement = activeElement === this.firstFocusableEl;
+                const isLastElement = activeElement === this.lastFocusableEl;
+
+                if (e.shiftKey && isFirstElement) {
+                    // If focused on first item and user presses back-tab, go to the last focusable item
+                    this.lastFocusableEl.focus();
+
+                    e.preventDefault();
+                } else if (!e.shiftKey && isLastElement) {
+                    // If focused on the last item and user presses tab, go to the first focusable item
+                    this.firstFocusableEl.focus();
+
+                    e.preventDefault();
+                }
+            }
+        },
+
+        /**
+         * When mobile menu or country selector is opened build a NodeList of focusable elements, assigns the first and last focuable elements before
+         * binding tab events via the keydown method
+         */
+        tabLoop () {
+            if (!this.isBelowMid || !this.navIsOpen) return;
+
+            // use `nextTick` to give Vue enough time to update the DOM
+            this.$nextTick(() => {
+                const focusableElsSelector = [
+                    '[aria-hidden="false"] > a[href]:not([tabindex^="-"]):not([inert])',
+                    '[aria-hidden="false"] > button:not([disabled]):not([inert])',
+                    '[tabindex]:not([tabindex^="-"]):not([inert])'
+                ].join();
+
+                const {
+                    nav
+                } = this.$refs;
+
+                // Filter any "hidden" elements
+                const nodeList = nav.querySelectorAll(focusableElsSelector) || [];
+                const focusableEls = Array.from(nodeList).filter(el => el.offsetHeight > 0);
+                const {
+                    0: firstFocusableEl,
+                    [focusableEls.length - 1]: lastFocusableEl
+                } = focusableEls;
+
+                this.firstFocusableEl = firstFocusableEl;
+                this.lastFocusableEl = lastFocusableEl;
+
+                nav.addEventListener('keydown', this.keyActions);
+            });
         },
 
         closeUserMenu () {
             this.userMenuIsOpen = false;
-
             this.handleMobileNavState();
         },
 
         openUserMenu () {
             this.userMenuIsOpen = true;
-
             this.handleMobileNavState();
         },
 
         onCountrySelectorToggle () {
             this.countrySelectorIsOpen = !this.countrySelectorIsOpen;
+            this.tabLoop();
         },
 
         closeCountrySelector () {
             this.countrySelectorIsOpen = false;
+            this.tabLoop();
+            const {
+                countrySelectorToggle
+            } = this.$refs;
+            countrySelectorToggle.focus();
         },
 
         openCountrySelector () {
