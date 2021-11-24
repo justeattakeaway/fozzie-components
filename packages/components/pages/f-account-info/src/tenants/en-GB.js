@@ -14,8 +14,8 @@ const messages = {
         line1Placeholder: 'Address Line 1...',
         line2Placeholder: 'Address Line 2...',
         line3Placeholder: 'Address Line 3...',
-        cityLabel: 'City*',
-        cityPlaceholder: 'City...',
+        localityLabel: 'City*',
+        localityPlaceholder: 'City...',
         postcodeLabel: 'Postcode*',
         postcodePlaceholder: 'Postcode...'
     },

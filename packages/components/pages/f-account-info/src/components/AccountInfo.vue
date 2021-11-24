@@ -9,24 +9,24 @@
             {{ $t('yourDetails') }}
         </h2>
 
+        <form-field
+            :label-text="$t('fields.emailAddressLabel')"
+            disabled
+            :placeholder="$t('fields.emailAddressPlaceholder')"
+            class="u-spacingBottom--large"
+            :value="fields.emailAddress" />
+
+        <f-link
+            is-distinct
+            :class="$style['c-accountInfo-customerCareLink']"
+            href="/help/article/203097431/how-do-i-manage-my-account"
+            target="_blank">
+            {{ $t('contactCustomerCareTeam') }}
+        </f-link>
+
         <form
             method="post"
             @submit.prevent="onFormSubmit">
-            <form-field
-                :label-text="$t('fields.emailAddressLabel')"
-                disabled
-                :placeholder="$t('fields.emailAddressPlaceholder')"
-                class="u-spacingBottom--large"
-                :value="fields.emailAddress" />
-
-            <f-link
-                is-distinct
-                :class="$style['c-accountInfo-customerCareLink']"
-                href="/help/article/203097431/how-do-i-manage-my-account"
-                target="_blank">
-                {{ $t('contactCustomerCareTeam') }}
-            </f-link>
-
             <form-field
                 v-model="fields.firstName"
                 maxlength="50"
@@ -58,9 +58,9 @@
                 :placeholder="$t('fields.line3Placeholder')" />
 
             <form-field
-                v-model="fields.city"
-                :label-text="$t('fields.cityLabel')"
-                :placeholder="$t('fields.cityPlaceholder')" />
+                v-model="fields.locality"
+                :label-text="$t('fields.localityLabel')"
+                :placeholder="$t('fields.localityPlaceholder')" />
 
             <form-field
                 v-model="fields.postcode"
@@ -150,7 +150,7 @@ export default {
                 line1: null,
                 line2: null,
                 line3: null,
-                city: null,
+                locality: null,
                 postcode: null
             },
             tenantConfigs,
