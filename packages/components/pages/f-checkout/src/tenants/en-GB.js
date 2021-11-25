@@ -162,6 +162,12 @@ const messages = {
                 message: 'It’s the same as the one you made a moment ago and we want to check it’s not a mistake. Wait 15 mins or change an item in your order',
                 buttonText: 'Close',
                 buttonTextPrimary: 'View my orders'
+            },
+
+            BasketChanged: {
+                title: 'We’ve taken an item off your order',
+                message: 'The restaurant might have run out or updated its menu while you were ordering, sorry. You can go back to check your order and choose another item.',
+                buttonText: 'Back to order'
             }
         }
     },
