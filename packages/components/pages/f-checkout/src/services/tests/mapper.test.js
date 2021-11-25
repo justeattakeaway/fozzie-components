@@ -2,8 +2,7 @@ import {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapUpdateCheckoutRequest,
-    mapUpdateCheckoutRequestForAgeVerification
+    mapUpdateCheckoutRequest
 } from '../mapper';
 
 const defaultParams = {
@@ -210,22 +209,6 @@ describe('checkout mapper', () => {
             // Assert
             expect(tableRequest.identifier).toBe('10');
         });
-    });
-});
-
-describe('mapUpdateCheckoutRequestForAgeVerification ::', () => {
-    it('should map the customer date of birth correctly', () => {
-        const customer = { dateOfBirth: new Date(1990, 6, 5) };
-        const requestBody = mapUpdateCheckoutRequestForAgeVerification({
-            customer
-        });
-
-        const customerRequest = requestBody[0].value;
-        const locationRequest = requestBody[1].value;
-
-        // Assert
-        expect(customerRequest.dateOfBirth).toBe(customer.dateOfBirth);
-        expect(locationRequest).toBeNull();
     });
 });
 

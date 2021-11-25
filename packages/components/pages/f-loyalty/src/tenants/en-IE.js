@@ -12,7 +12,11 @@ const messages = {
     },
     tabs: {
         stamps: {
-            title: 'Your StampCards'
+            title: 'Your StampCards',
+            readyToClaimTitle: 'Ready To Claim',
+            inProgressTitle: 'In Progress',
+            participatingRestaurantsTitle: 'Participating Restaurants',
+            participatingRestaurantsSubtitle: 'What’s cooking in {location}'
         },
         howItWorks: {
             title: 'How it works'

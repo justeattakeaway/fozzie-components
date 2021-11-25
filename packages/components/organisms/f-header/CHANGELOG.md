@@ -15,6 +15,14 @@ v7.2.0
 - Extract some f-trak object creation into a service
 
 
+v7.1.1
+------------------------------
+*November 19, 2021*
+
+### Changed
+- Replaced ES exports with node exports to allow external applications to access the components.
+
+
 v7.1.0
 ------------------------------
 *November 1, 2021*

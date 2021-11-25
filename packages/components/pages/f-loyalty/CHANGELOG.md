@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.3.0
+------------------------------
+*November 18, 2021*
+
+### Added
+- slots component to serve cards provided by content cards
+
+
 v1.2.0
 ------------------------------
 *November 4, 2021*
@@ -35,6 +43,15 @@ v1.0.0
 ### Added
 - Loading state component.
 - Unit tests for the loading state component
+
+
+v1.1.0
+------------------------------
+*October 14, 2021*
+
+### Added
+- Slots component
+- Unit tests for the component
 
 
 v0.9.0
