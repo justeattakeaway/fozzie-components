@@ -48,6 +48,10 @@ export const ContactPreferencesComponent = () => ({
             return '';
         },
 
+        isAuthFinished () {
+            return true;
+        },
+
         authToken () {
             return authToken;
         },
@@ -72,6 +76,7 @@ export const ContactPreferencesComponent = () => ({
 
     template: '<contact-preferences ' +
     ':authToken="authToken" ' +
+    ':isAuthFinished="isAuthFinished" ' +
     ':locale="locale" ' +
     ':smart-gateway-base-url="smartGatewayBaseUrl" ' +
     ':prepareStory="prepareStory" ' +
