@@ -11,6 +11,14 @@ v3.11.0
 - `Error component` uses `BagSadBgIcon` from `f-vue-icons@3.0.0` and `f-card-with-content`.
 
 
+v3.10.0
+------------------------------
+*November 25, 2021*
+
+### Added
+- Error Dialog if Basket has changed.
+
+
 v3.9.0
 ------------------------------
 *November 23, 2021*
