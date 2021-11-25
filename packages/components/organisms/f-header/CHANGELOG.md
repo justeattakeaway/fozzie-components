@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v7.2.0
+------------------------------
+*November 25, 2021*
+
+### Changed
+- Extracted NavLink component
+- Extracted CountrySelector component
+- Pull out styles into `navigation.scss`
+- Extract some f-trak object creation into a service
+
+
 v7.1.0
 ------------------------------
 *November 1, 2021*
