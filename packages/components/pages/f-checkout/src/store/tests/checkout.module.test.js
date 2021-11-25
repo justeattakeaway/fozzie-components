@@ -2,6 +2,8 @@ import axios from 'axios';
 import CheckoutModule from '../checkout.module';
 import checkoutDelivery from '../../../stories/demo/uk/checkout-delivery.json';
 import basketDelivery from '../../../stories/demo/get-basket-delivery.json';
+import basketInvalidProducts from '../../../stories/demo/get-basket-invalid-products.json';
+import basketOfflineProducts from '../../../stories/demo/get-basket-offline-products.json';
 import basketDeliveryAgeRestricted from '../../../stories/demo/get-basket-delivery-age-restriction.json';
 import checkoutAvailableFulfilment from '../../../stories/demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../../stories/demo/get-address.json';
@@ -647,6 +649,7 @@ describe('CheckoutModule', () => {
                     ageRestricted: false
                 });
             });
+
             describe('When there are age restricted items', () => {
                 it(`should get the basket details from the backend, set ageRestricted to 'true' and call ${UPDATE_BASKET_DETAILS} mutation.`, async () => {
                     // Arrange
@@ -669,6 +672,44 @@ describe('CheckoutModule', () => {
                         },
                         ageRestricted: true
                     });
+                });
+            });
+
+            describe('When basket returns `Prompts`', () => {
+                it(`should call ${UPDATE_MESSAGE} mutation with 'BasketChanged' 'CheckoutIssue' when products are Invalid`, async () => {
+                    // Arrange
+                    basketApi.getBasket = jest.fn(() => Promise.resolve({ data: basketInvalidProducts }));
+
+                    // Act
+                    await getBasket(context, payload);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(
+                        UPDATE_MESSAGE,
+                        {
+                            code: 'BasketChanged',
+                            shouldShowInDialog: true,
+                            shouldRedirectToMenu: true
+                        }
+                    );
+                });
+
+                it(`should call ${UPDATE_MESSAGE} mutation with 'BasketChanged' 'CheckoutIssue' when products are Offline`, async () => {
+                    // Arrange
+                    basketApi.getBasket = jest.fn(() => Promise.resolve({ data: basketOfflineProducts }));
+
+                    // Act
+                    await getBasket(context, payload);
+
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(
+                        UPDATE_MESSAGE,
+                        {
+                            code: 'BasketChanged',
+                            shouldShowInDialog: true,
+                            shouldRedirectToMenu: true
+                        }
+                    );
                 });
             });
         });

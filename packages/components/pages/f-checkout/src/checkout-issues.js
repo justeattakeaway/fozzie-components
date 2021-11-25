@@ -58,6 +58,11 @@ const checkoutIssues = {
     DuplicateOrder: {
         shouldShowInDialog: true,
         shouldRedirectToMenu: false
+    },
+
+    BasketChanged: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: true
     }
 };
 

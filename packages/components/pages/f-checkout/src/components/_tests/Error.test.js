@@ -1,5 +1,5 @@
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Error from '../Error.vue';
 import {
@@ -22,7 +22,7 @@ describe('Error', () => {
     beforeEach(() => {
         // Arrange & Act
 
-        wrapper = shallowMount(Error, {
+        wrapper = mount(Error, {
             i18n,
             localVue,
             store: createStore({
@@ -55,7 +55,7 @@ describe('Error', () => {
 
     it('should show the heading', () => {
         // Act
-        const heading = wrapper.find('[data-test-id="checkout-error-page-heading"]');
+        const heading = wrapper.find('[data-test-id="cardWithContent-heading"]');
 
         // Assert
         expect(heading.text()).toMatchSnapshot();
@@ -63,7 +63,7 @@ describe('Error', () => {
 
     it('should show the description', () => {
         // Act
-        const description = wrapper.find('[data-test-id="checkout-error-page-description"]');
+        const description = wrapper.find('[data-test-id="cardWithContent-description"]');
 
         // Assert
         expect(description.text()).toMatchSnapshot();
