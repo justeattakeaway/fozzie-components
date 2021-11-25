@@ -3,6 +3,7 @@
         <accordion
             :id="noteTypeCourierOrOrder"
             :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
+            <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}</span>
             <form-field
                 input-type="textarea"
                 :placeholder="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.placeholder`)"
@@ -12,14 +13,13 @@
                 maxlength="200"
                 :name="`${noteTypeCourierOrOrder}-note`"
                 has-input-description
-                @input="updateUserNotes({ note: $event, type: noteTypeCourierOrOrder })">
-                {{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}
-            </form-field>
+                @input="updateUserNotes({ note: $event, type: noteTypeCourierOrOrder })" />
         </accordion>
         <accordion
             v-if="shouldShowKitchenNotes"
             id="kitchen"
             :title="$t(`userNote.kitchen.${serviceType}.title`)">
+            <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.kitchen.${serviceType}.text`) }}</span>
             <form-field
                 input-type="textarea"
                 :placeholder="$t(`userNote.kitchen.${serviceType}.placeholder`)"
@@ -29,9 +29,7 @@
                 maxlength="200"
                 name="kitchen-note"
                 has-input-description
-                @input="updateUserNotes({ note: $event, type: 'kitchen' })">
-                {{ $t(`userNote.kitchen.${serviceType}.text`) }}
-            </form-field>
+                @input="updateUserNotes({ note: $event, type: 'kitchen' })" />
         </accordion>
     </div>
 </template>
@@ -92,3 +90,10 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" module>
+    .c-checkout-accordion-help {
+        display: block;
+        padding: spacing() 0;
+    }
+</style>
