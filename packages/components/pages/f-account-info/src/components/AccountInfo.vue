@@ -116,6 +116,9 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
 import tenantConfigs from '../tenants';
+import {
+    STOP_LOADING_SPINNER_EVENT
+} from '../constants';
 
 export default {
     components: {
@@ -174,7 +177,7 @@ export default {
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
-                // TODO - Stop auth spinner to be added with next ticket
+                this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
             }
         },
 
