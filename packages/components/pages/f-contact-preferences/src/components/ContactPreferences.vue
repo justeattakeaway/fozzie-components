@@ -95,6 +95,7 @@ import '@justeat/f-card/dist/f-card.css';
 import tenantConfigs from '../tenants';
 import { GetPreferencesError } from '../exceptions';
 import ContactPreferencesApi from '../services/providers/contactPreferences.api';
+import fContactPreferencesModule from '../store/contactPreferences.module';
 import {
     STOP_LOADING_SPINNER_EVENT
 } from '../constants';
@@ -112,7 +113,11 @@ export default {
     props: {
         authToken: {
             type: String,
-            default: ''
+            required: true
+        },
+        isAuthFinished: {
+            type: Boolean,
+            required: true
         },
         smartGatewayBaseUrl: {
             type: String,
@@ -141,8 +146,24 @@ export default {
         ])
     },
 
+    watch: {
+        async isAuthFinished () {
+            if (this.isAuthFinished) {
+                await this.initialise();
+            }
+        }
+    },
+
+    created () {
+        if (!this.$store.hasModule('fContactPreferencesModule')) {
+            this.$store.registerModule('fContactPreferencesModule', fContactPreferencesModule);
+        }
+    },
+
     async mounted () {
-        await this.initialise();
+        if (this.isAuthFinished) {
+            await this.initialise();
+        }
     },
 
     methods: {

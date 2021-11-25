@@ -69,15 +69,12 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
+| Prop  | Type  |  Required | Description |
+| ----- | ----- |  ------- | ----------- |
+| authToken | string | true | the users authorisation token |
+| isAuthFinished | boolean | true | a flag indicating if the authorisation process has completed |
+| smartGatewayBaseUrl | string | true | the smartgateway host |
 
-### Events
-
-The events that can be subscribed to are as follows (if any):
-
-| Event | Description |
-| ----- | ----------- |
 
 ## Development
 
@@ -122,6 +119,3 @@ yarn test-component:chrome
 ```bash
 yarn test-a11y:chrome
 ```
-## Documentation to be completed once module is in stable state.
-
-

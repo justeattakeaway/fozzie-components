@@ -76,6 +76,7 @@ describe('ContactPreferences Component', () => {
         };
         sutProps = {
             authToken: token,
+            isAuthFinished: true,
             smartGatewayBaseUrl: baseUrl
         };
     });
