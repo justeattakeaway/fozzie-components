@@ -44,14 +44,6 @@ export const ContactPreferencesComponent = () => ({
     },
 
     computed: {
-        smartGatewayBaseUrl () {
-            return '';
-        },
-
-        isAuthFinished () {
-            return true;
-        },
-
         authToken () {
             return authToken;
         },
@@ -76,12 +68,12 @@ export const ContactPreferencesComponent = () => ({
 
     template: '<contact-preferences ' +
     ':authToken="authToken" ' +
-    ':isAuthFinished="isAuthFinished" ' +
+    ':isAuthFinished="true" ' +
     ':locale="locale" ' +
-    ':smart-gateway-base-url="smartGatewayBaseUrl" ' +
+    'smart-gateway-base-url="" ' +
     ':prepareStory="prepareStory" ' +
     // eslint-disable-next-line no-template-curly-in-string
-    ' :key="`${authToken},${locale},${smartGatewayBaseUrl}`" />'
+    ' :key="`${authToken},${locale}`" />'
 
 });
 
