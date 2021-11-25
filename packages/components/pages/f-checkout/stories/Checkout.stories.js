@@ -174,9 +174,7 @@ export const CheckoutComponent = () => ({
             }
 
             if (this.getBasketError) {
-                if (this.getCheckoutError !== noTimeAvailable) {
-                    return `/get-basket-${this.getBasketError}.json`;
-                }
+                return `/get-basket-${this.getBasketError}.json`;
             }
 
             return this.restriction ? `/get-basket-delivery-${this.restriction}.json` : `/get-basket-${this.serviceType}.json`;
