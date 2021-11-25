@@ -15,9 +15,7 @@ const GetSetConversationId = cookies => {
 
 export default class AccountInfoApi {
     #httpClient;
-
     #cookies;
-
     #baseUrl;
 
     constructor ({ httpClient, cookies, baseUrl } = {}) {
