@@ -113,7 +113,7 @@ export default {
     props: {
         authToken: {
             type: String,
-            required: true
+            default: null
         },
         isAuthFinished: {
             type: Boolean,
