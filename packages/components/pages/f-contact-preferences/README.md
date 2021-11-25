@@ -71,7 +71,7 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  |  Required | Description |
 | ----- | ----- |  ------- | ----------- |
-| authToken | string | true | the users authorisation token |
+| authToken | string | false | the users authorisation token |
 | isAuthFinished | boolean | true | a flag indicating if the authorisation process has completed |
 | smartGatewayBaseUrl | string | true | the smartgateway host |
 
