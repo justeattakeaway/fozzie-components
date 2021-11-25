@@ -86,7 +86,7 @@ export default {
             const cardPropValue = this.cardSizeCustom;
 
             if (cardPropValue) {
-                return this.cardSizeCustom.replace(/^./, this.cardSizeCustom[0].toUpperCase());
+                return cardPropValue.replace(/^./, cardPropValue[0].toUpperCase());
             }
 
             return false;
