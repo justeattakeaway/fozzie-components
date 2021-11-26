@@ -144,6 +144,29 @@ describe('ContactPreferences Component', () => {
             // Assert
             expect(wrapper.vm.isFormDirty).toEqual(false);
         });
+
+        it('should not call initialise method if the authorisation has not completed', () => {
+            // Arrange
+            sutProps = { ...sutProps, isAuthFinished: false };
+
+            // Act
+            wrapper = mountContactPreferences();
+
+            // Assert
+            expect(storeActions.loadPreferences).not.toHaveBeenCalled();
+        });
+
+        it('should only call initialise method once the authorisation has completed', async () => {
+            // Arrange
+            sutProps = { ...sutProps, isAuthFinished: false };
+
+            // Act
+            wrapper = mountContactPreferences();
+            await wrapper.setProps({ isAuthFinished: true });
+
+            // Assert
+            expect(storeActions.loadPreferences).toHaveBeenCalled();
+        });
     });
 
     describe('when clicking a preferences checkbox', () => {
