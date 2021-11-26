@@ -436,11 +436,9 @@ export default {
         async submitCheckout () {
             try {
                 this.saveUserNote();
-
                 if (!this.isLoggedIn && !this.isGuestCreated) {
                     await this.setupGuestUser();
                 }
-
                 await this.lookupGeoLocation();
 
                 await this.handleUpdateCheckout(this.getMappedDataForUpdateCheckout());
