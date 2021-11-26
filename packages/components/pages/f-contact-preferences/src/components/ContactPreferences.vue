@@ -4,7 +4,8 @@
         <card-component
             v-if="!shouldShowErrorPage"
             :card-heading="$t('heading')"
-            is-page-content-wrapper
+            has-inner-spacing-large
+            :card-size-custom="'medium'"
             has-outline>
             <form @submit.prevent="onFormSubmit">
                 <div
