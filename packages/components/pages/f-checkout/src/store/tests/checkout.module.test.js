@@ -383,7 +383,6 @@ describe('CheckoutModule', () => {
                 // Arrange
                 const noteData = { type: 'kitchen', note: 'This is the new note value' };
 
-                console.log('STATEY WAITEY', state);
                 // Act
                 mutations[UPDATE_USER_NOTES](state, noteData);
 

@@ -551,7 +551,6 @@ export default {
         },
 
         [UPDATE_USER_NOTES]: (state, userNote) => {
-            console.log('STATEY BEFOREY', state.notes);
             state.notes = {
                 ...state.notes,
                 [userNote.type]: { note: userNote.note }
