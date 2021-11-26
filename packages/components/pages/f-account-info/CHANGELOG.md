@@ -9,8 +9,7 @@ v0.5.0
 *November 25, 2021*
 
 ### Added
-- Send and event to stop the f-spinner invoked by the parent component
-
+- Send stop f-spinner event for the parent component
 
 
 v0.3.0

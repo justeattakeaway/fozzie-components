@@ -128,14 +128,20 @@ export default {
         FButton
     },
 
-    mixins: [
-        VueGlobalisationMixin
-    ],
+    mixins: [VueGlobalisationMixin],
 
     props: {
-        locale: {
+        authToken: {
             type: String,
-            default: ''
+            default: null
+        },
+        isAuthFinished: {
+            type: Boolean,
+            required: true
+        },
+        smartGatewayBaseUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -156,12 +162,22 @@ export default {
         };
     },
 
-    async mounted () {
-        await this.initialise();
+    watch: {
+        isAuthFinished () {
+            if (this.isAuthFinished) {
+                this.initialise();
+            }
+        }
+    },
+
+    mounted () {
+        if (this.isAuthFinished) {
+            this.initialise();
+        }
     },
 
     methods: {
-        async initialise () {
+        initialise () {
             try {
                 // TODO - Dummy data to be replaced with next ticket
                 this.fields = {
@@ -177,7 +193,9 @@ export default {
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
-                this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
+                this.$nextTick(() => {
+                    this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
+                });
             }
         },
 
@@ -186,7 +204,6 @@ export default {
 
             try {
                 // TODO - to be added with next ticket
-                this.$log.info('Submitted Form', 'account-info');
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
