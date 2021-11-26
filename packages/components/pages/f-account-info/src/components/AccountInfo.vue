@@ -131,16 +131,7 @@
             {{ $t('buttons.changePassword') }}
         </f-button>
 
-        <hr>
-
-        <p>{{ $t('deleteAccountMessage') }}</p>
-
-        <f-link
-            is-distinct
-            href="/account/deactivate"
-            target="_blank">
-            {{ $t('deleteAccountLink') }}
-        </f-link>
+        <delete-account />
     </f-card>
 </template>
 
@@ -156,13 +147,13 @@ import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 
-import FLink from '@justeat/f-link';
-import '@justeat/f-link/dist/f-link.css';
-
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
+import '@justeat/f-link/dist/f-link.css';
+
 import EmailAddressField from './EmailAddressField.vue';
+import DeleteAccount from './DeleteAccount.vue';
 
 import AccountInfoValidationsMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
@@ -171,10 +162,10 @@ export default {
     components: {
         FCard,
         FormField,
-        FLink,
         FButton,
         FErrorMessage,
-        EmailAddressField
+        EmailAddressField,
+        DeleteAccount
     },
 
     mixins: [
