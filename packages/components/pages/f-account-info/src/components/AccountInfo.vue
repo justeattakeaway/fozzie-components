@@ -9,20 +9,7 @@
             {{ $t('yourDetails') }}
         </h2>
 
-        <form-field
-            :label-text="$t('fields.emailAddressLabel')"
-            disabled
-            :placeholder="$t('fields.emailAddressPlaceholder')"
-            class="u-spacingBottom--large"
-            :value="values.emailAddress" />
-
-        <f-link
-            is-distinct
-            :class="$style['c-accountInfo-customerCareLink']"
-            href="/help/article/203097431/how-do-i-manage-my-account"
-            target="_blank">
-            {{ $t('contactCustomerCareTeam') }}
-        </f-link>
+        <email-address-field :email-address="values.emailAddress" />
 
         <form
             method="post"
@@ -36,14 +23,10 @@
                 <template
                     v-if="$v.fields.firstName.$invalid"
                     #error>
-                    <f-error-message
-                        v-show="!$v.fields.firstName.required && $v.fields.firstName.$dirty"
-                        :class="$style['c-accountInfo-genericError']">
+                    <f-error-message v-show="!$v.fields.firstName.required && $v.fields.firstName.$dirty">
                         {{ $t('validation.firstNameRequired') }}
                     </f-error-message>
-                    <f-error-message
-                        v-show="!$v.fields.firstName.isValidName"
-                        :class="$style['c-accountInfo-genericError']">
+                    <f-error-message v-show="!$v.fields.firstName.isValidName">
                         {{ $t('validation.firstNameInvalid') }}
                     </f-error-message>
                 </template>
@@ -58,14 +41,10 @@
                 <template
                     v-if="$v.fields.lastName.$invalid"
                     #error>
-                    <f-error-message
-                        v-show="!$v.fields.lastName.required && $v.fields.lastName.$dirty"
-                        :class="$style['c-accountInfo-genericError']">
+                    <f-error-message v-show="!$v.fields.lastName.required && $v.fields.lastName.$dirty">
                         {{ $t('validation.lastNameRequired') }}
                     </f-error-message>
-                    <f-error-message
-                        v-show="!$v.fields.lastName.isValidName"
-                        :class="$style['c-accountInfo-genericError']">
+                    <f-error-message v-show="!$v.fields.lastName.isValidName">
                         {{ $t('validation.lastNameInvalid') }}
                     </f-error-message>
                 </template>
@@ -84,9 +63,7 @@
                 <template
                     v-if="$v.fields.line1.$invalid"
                     #error>
-                    <f-error-message
-                        v-show="!$v.fields.line1.required && $v.fields.line1.$dirty"
-                        :class="$style['c-accountInfo-genericError']">
+                    <f-error-message v-show="!$v.fields.line1.required && $v.fields.line1.$dirty">
                         {{ $t('validation.line1Required') }}
                     </f-error-message>
                 </template>
@@ -108,9 +85,7 @@
                 <template
                     v-if="$v.fields.locality.$invalid"
                     #error>
-                    <f-error-message
-                        v-show="!$v.fields.locality.required && $v.fields.locality.$dirty"
-                        :class="$style['c-accountInfo-genericError']">
+                    <f-error-message v-show="!$v.fields.locality.required && $v.fields.locality.$dirty">
                         {{ $t('validation.localityRequired') }}
                     </f-error-message>
                 </template>
@@ -124,14 +99,10 @@
                 <template
                     v-if="$v.fields.postcode.$invalid"
                     #error>
-                    <f-error-message
-                        v-show="!$v.fields.postcode.required && $v.fields.postcode.$dirty"
-                        :class="$style['c-accountInfo-genericError']">
+                    <f-error-message v-show="!$v.fields.postcode.required && $v.fields.postcode.$dirty">
                         {{ $t('validation.postcodeRequired') }}
                     </f-error-message>
-                    <f-error-message
-                        v-show="!$v.fields.postcode.postcodeValid && $v.fields.postcode.required"
-                        :class="$style['c-accountInfo-genericError']">
+                    <f-error-message v-show="!$v.fields.postcode.postcodeValid && $v.fields.postcode.required">
                         {{ $t('validation.postcodeInvalid') }}
                     </f-error-message>
                 </template>
@@ -191,6 +162,8 @@ import '@justeat/f-link/dist/f-link.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
+import EmailAddressField from './EmailAddressField.vue';
+
 import AccountInfoValidationsMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
 
@@ -200,7 +173,8 @@ export default {
         FormField,
         FLink,
         FButton,
-        FErrorMessage
+        FErrorMessage,
+        EmailAddressField
     },
 
     mixins: [
@@ -292,20 +266,11 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-accountInfo-customerCareLink {
-    display: block;
-    margin-bottom: spacing(x4);
-}
-
 .c-accountInfo-submitButton {
     margin-top: spacing(x4);
 }
 
 .c-accountInfo-changePasswordButton {
     margin-top: spacing(x2);
-}
-
-.c-accountInfo-genericError {
-    position: relative;
 }
 </style>

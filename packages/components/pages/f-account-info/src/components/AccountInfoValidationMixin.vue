@@ -63,7 +63,7 @@ export default {
             if (fieldValidation) {
                 fieldValidation.$touch();
             }
-        },
+        }
     }
 };
 </script>
