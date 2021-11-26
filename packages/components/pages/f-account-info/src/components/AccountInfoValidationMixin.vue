@@ -10,12 +10,12 @@ export default {
                 firstName: {
                     required,
                     maxLength: maxLength(50),
-                    isValidName: this.IsValidName
+                    isValidName: this.isValidName
                 },
                 lastName: {
                     required,
                     maxLength: maxLength(50),
-                    isValidName: this.IsValidName
+                    isValidName: this.isValidName
                 },
                 line1: {
                     required
@@ -25,7 +25,7 @@ export default {
                 },
                 postcode: {
                     required,
-                    postcode: this.isValidPostcode
+                    postcodeValid: this.isValidPostcode
                 }
             }
         };
@@ -53,9 +53,17 @@ export default {
             return validations.isValidPostcode(this.fields.postcode, this.$i18n.locale);
         },
 
-        IsValidName (value) {
+        isValidName (value) {
             return /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
-        }
+        },
+
+        onBlur (field) {
+            const fieldValidation = this.$v.fields[field];
+
+            if (fieldValidation) {
+                fieldValidation.$touch();
+            }
+        },
     }
 };
 </script>

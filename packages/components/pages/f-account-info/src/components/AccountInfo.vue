@@ -1,5 +1,5 @@
 <template>
-    <card
+    <f-card
         :card-heading="$t('accountDetails')"
         data-test-id="account-info"
         has-outline
@@ -31,13 +31,45 @@
                 v-model="fields.firstName"
                 maxlength="50"
                 :label-text="$t('fields.firstNameLabel')"
-                :placeholder="$t('fields.firstNamePlaceholder')" />
+                :placeholder="$t('fields.firstNamePlaceholder')"
+                @blur="onBlur('firstName')">
+                <template
+                    v-if="$v.fields.firstName.$invalid"
+                    #error>
+                    <f-error-message
+                        v-show="!$v.fields.firstName.required && $v.fields.firstName.$dirty"
+                        :class="$style['c-accountInfo-genericError']">
+                        {{ $t('validation.firstNameRequired') }}
+                    </f-error-message>
+                    <f-error-message
+                        v-show="!$v.fields.firstName.isValidName"
+                        :class="$style['c-accountInfo-genericError']">
+                        {{ $t('validation.firstNameInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
                 v-model="fields.lastName"
                 maxlength="50"
                 :label-text="$t('fields.lastNameLabel')"
-                :placeholder="$t('fields.lastNamePlaceholder')" />
+                :placeholder="$t('fields.lastNamePlaceholder')"
+                @blur="onBlur('lastName')">
+                <template
+                    v-if="$v.fields.lastName.$invalid"
+                    #error>
+                    <f-error-message
+                        v-show="!$v.fields.lastName.required && $v.fields.lastName.$dirty"
+                        :class="$style['c-accountInfo-genericError']">
+                        {{ $t('validation.lastNameRequired') }}
+                    </f-error-message>
+                    <f-error-message
+                        v-show="!$v.fields.lastName.isValidName"
+                        :class="$style['c-accountInfo-genericError']">
+                        {{ $t('validation.lastNameInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <h2
                 class="u-spacingBottom--large">
@@ -47,7 +79,18 @@
             <form-field
                 v-model="fields.line1"
                 :label-text="$t('fields.addressLabel')"
-                :placeholder="$t('fields.line1Placeholder')" />
+                :placeholder="$t('fields.line1Placeholder')"
+                @blur="onBlur('line1')">
+                <template
+                    v-if="$v.fields.line1.$invalid"
+                    #error>
+                    <f-error-message
+                        v-show="!$v.fields.line1.required && $v.fields.line1.$dirty"
+                        :class="$style['c-accountInfo-genericError']">
+                        {{ $t('validation.line1Required') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
                 v-model="fields.line2"
@@ -60,12 +103,39 @@
             <form-field
                 v-model="fields.locality"
                 :label-text="$t('fields.localityLabel')"
-                :placeholder="$t('fields.localityPlaceholder')" />
+                :placeholder="$t('fields.localityPlaceholder')"
+                @blur="onBlur('locality')">
+                <template
+                    v-if="$v.fields.locality.$invalid"
+                    #error>
+                    <f-error-message
+                        v-show="!$v.fields.locality.required && $v.fields.locality.$dirty"
+                        :class="$style['c-accountInfo-genericError']">
+                        {{ $t('validation.localityRequired') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
                 v-model="fields.postcode"
                 :label-text="$t('fields.postcodeLabel')"
-                :placeholder="$t('fields.postcodePlaceholder')" />
+                :placeholder="$t('fields.postcodePlaceholder')"
+                @blur="onBlur('postcode')">
+                <template
+                    v-if="$v.fields.postcode.$invalid"
+                    #error>
+                    <f-error-message
+                        v-show="!$v.fields.postcode.required && $v.fields.postcode.$dirty"
+                        :class="$style['c-accountInfo-genericError']">
+                        {{ $t('validation.postcodeRequired') }}
+                    </f-error-message>
+                    <f-error-message
+                        v-show="!$v.fields.postcode.postcodeValid && $v.fields.postcode.required"
+                        :class="$style['c-accountInfo-genericError']">
+                        {{ $t('validation.postcodeInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <f-button
                 :class="[$style['c-accountInfo-submitButton']]"
@@ -100,13 +170,16 @@
             target="_blank">
             {{ $t('deleteAccountLink') }}
         </f-link>
-    </card>
+    </f-card>
 </template>
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
-import Card from '@justeat/f-card';
+import FErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
+
+import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 
 import FormField from '@justeat/f-form-field';
@@ -123,10 +196,11 @@ import tenantConfigs from '../tenants';
 
 export default {
     components: {
-        Card,
+        FCard,
         FormField,
         FLink,
-        FButton
+        FButton,
+        FErrorMessage
     },
 
     mixins: [
@@ -229,5 +303,9 @@ export default {
 
 .c-accountInfo-changePasswordButton {
     margin-top: spacing(x2);
+}
+
+.c-accountInfo-genericError {
+    position: relative;
 }
 </style>

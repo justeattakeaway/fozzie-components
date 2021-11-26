@@ -12,8 +12,8 @@ const messages = {
         lastNamePlaceholder: 'Your last name...',
         addressLabel: 'Address*',
         line1Placeholder: 'Address Line 1...',
-        line2Placeholder: 'Address Line 2...',
-        line3Placeholder: 'Address Line 3...',
+        line2Placeholder: 'Address Line 2... (Optional)',
+        line3Placeholder: 'Address Line 3... (Optional)',
         localityLabel: 'City*',
         localityPlaceholder: 'City...',
         postcodeLabel: 'Postcode*',
@@ -22,6 +22,16 @@ const messages = {
     buttons: {
         saveChanges: 'Save changes',
         changePassword: 'Change password'
+    },
+    validation: {
+        firstNameRequired: 'Please enter your first name',
+        firstNameInvalid: 'Please use only letters in your first name',
+        lastNameRequired: 'Please enter your last name',
+        lastNameInvalid: 'Please use only letters in your last name',
+        line1Required: 'Please enter line 1 of your address',
+        localityRequired: 'Please enter your city',
+        postcodeRequired: 'Please enter your postcode',
+        postcodeInvalid: 'Please enter a valid postcode'
     },
     deleteAccountMessage: 'Do you want to delete your Just Eat account?',
     deleteAccountLink: 'Delete my account'
