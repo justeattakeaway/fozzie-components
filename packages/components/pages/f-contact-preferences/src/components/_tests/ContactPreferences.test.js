@@ -184,9 +184,14 @@ describe('ContactPreferences Component', () => {
 
             // Act
             wrapper = mountContactPreferences();
-            await wrapper.setProps({ isAuthFinished: true });
 
             // Assert
+            expect(storeActions.loadPreferences).not.toHaveBeenCalled();
+
+            // Act 2
+            await wrapper.setProps({ isAuthFinished: true });
+
+            // Assert 2
             expect(storeActions.loadPreferences).toHaveBeenCalled();
         });
     });
