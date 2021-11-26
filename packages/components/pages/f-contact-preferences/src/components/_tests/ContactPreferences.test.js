@@ -19,6 +19,7 @@ let httpSpy;
 let sutMocks;
 let sutProps;
 let dataDefaults;
+let registerStoreModuleSpy;
 
 const i18n = {
     locale: 'en-GB',
@@ -35,32 +36,43 @@ const storeActions = {
 
 const storeState = contactPreferencesViewModel;
 
+const createStore = ({ state, actions }) => new Vuex.Store({
+    modules: {
+        fContactPreferencesModule: {
+            state,
+            actions,
+            namespaced: true
+        }
+    }
+});
+
 const mountContactPreferences = ({
     actions = storeActions,
     state = storeState,
     mocks = sutMocks,
     propsData = sutProps,
-    data = dataDefaults
-} = {}) => shallowMount(ContactPreferences, {
-    i18n,
-    localVue,
-    propsData,
-    data,
-    store: new Vuex.Store({
-        modules: {
-            fContactPreferencesModule: {
-                state,
-                actions,
-                namespaced: true
-            }
-        }
-    }),
-    mocks
-});
+    data = dataDefaults,
+    storeOverride = null
+} = {}) => {
+    const store = storeOverride || createStore({ state, actions });
+    store.registerModule = registerStoreModuleSpy;
+
+    const mock = shallowMount(ContactPreferences, {
+        i18n,
+        localVue,
+        propsData,
+        data,
+        store,
+        mocks
+    });
+
+    return mock;
+};
 
 describe('ContactPreferences Component', () => {
     beforeEach(() => {
         // Arrange & Act
+        registerStoreModuleSpy = jest.fn();
         dataDefaults = () => ({
             isFormDirty: false,
             shouldShowErrorPage: false
@@ -83,6 +95,16 @@ describe('ContactPreferences Component', () => {
 
     afterEach(() => {
         jest.clearAllMocks();
+    });
+
+    describe('when creating the component', () => {
+        it('should register the Store Module', () => {
+            // Arrange & Act
+            wrapper = mountContactPreferences({ storeOverride: new Vuex.Store() });
+
+            // Assert
+            expect(registerStoreModuleSpy).toHaveBeenCalled();
+        });
     });
 
     describe('when mounting the component and calling `initialise`', () => {
