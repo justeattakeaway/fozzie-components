@@ -9,10 +9,10 @@ v4.0.0
 *November 26, 2021*
 
 ### Added
-- **Breaking Change**: Added `f-button` dependency to peer dependencies. Now `f-button` should be included as a dependency of the consuming app.
+- **Breaking Change**: Added `f-button` dependency to peer dependencies. Now `f-button` should be included as a dependency of the consuming componet or application.
 
 ### Removed
-- **Breaking Change**: Removed `f-button` styles import from the component. Make sure to import `f-button` styles in you application.
+- **Breaking Change**: Removed `f-button` styles import from the component. Make sure to import `f-button` styles in your application.
 
 
 v3.0.2
