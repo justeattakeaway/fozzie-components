@@ -5,7 +5,7 @@
             $style['c-card'], {
                 [$style['c-card--outline']]: hasOutline,
                 [$style['c-card--pageContentWrapper']]: isPageContentWrapper,
-                [$style[`c-card--cardSizeCustom--${cardSizeCustom}`]]: cardSizeCustom !== ''
+                [$style[`c-card--size${capitaliseCardSizeProp}`]]: cardSizeCustom !== ''
             }]">
         <div
             data-test-id="card-inner"
@@ -73,6 +73,23 @@ export default {
             type: String,
             default: '',
             validator: value => ['', 'medium', 'large'].indexOf(value) !== -1
+        }
+    },
+
+    computed: {
+        /**
+         * Capitialises the prop values so we can name our class e.g `c-card--sizeLarge`.
+         *
+         * @returns {string|boolean}
+         */
+        capitaliseCardSizeProp () {
+            const cardPropValue = this.cardSizeCustom;
+
+            if (cardPropValue) {
+                return cardPropValue.replace(/^./, cardPropValue[0].toUpperCase());
+            }
+
+            return false;
         }
     }
 };
@@ -150,11 +167,11 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
     }
 
     // The two card sizes used on the accounts page. e.g Previous orders & contact preferences cards.
-    .c-card--cardSizeCustom--large {
+    .c-card--sizeLarge {
         max-width: 808px;
     }
 
-    .c-card--cardSizeCustom--medium {
+    .c-card--sizeMedium {
         max-width: 600px;
     }
 </style>
