@@ -10,6 +10,10 @@ v0.5.0
 
 ### Added
 - Send stop f-spinner event for the parent component
+- Expose new isAuthFinished `required` property
+
+### Changed
+- Initialise Page based on isAuthFinished
 
 
 v0.3.0
