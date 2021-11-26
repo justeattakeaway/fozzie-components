@@ -65,7 +65,6 @@
 import { CrossIcon } from '@justeat/f-vue-icons';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FButton from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
 
 export default {
     components: {
