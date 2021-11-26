@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0
+------------------------------
+*November 26, 2021*
+
+### Added
+- **Breaking Change**: Added `f-button` dependency to peer dependencies. Now `f-button` should be included as a dependency of the consuming app.
+
+### Removed
+- **Breaking Change**: Removed `f-button` styles import from the component. Make sure to import `f-button` styles in you application.
+
+
 v3.0.2
 ------------------------------
 *October 15, 2021*

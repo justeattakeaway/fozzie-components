@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert icon should show the danger icon for type %s 1`] = `"DANGERICON-STUB"`;
+
+exports[`Alert icon should show the info icon for type %s 1`] = `"INFOICON-STUB"`;
+
+exports[`Alert icon should show the success icon for type %s 1`] = `"SUCCESSICON-STUB"`;
+
+exports[`Alert icon should show the warning icon for type %s 1`] = `"WARNINGICON-STUB"`;

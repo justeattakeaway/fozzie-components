@@ -57,7 +57,6 @@ import {
 
 import FButton from '@justeat/f-button';
 import tenantConfigs from '../tenants';
-// import '@justeat/f-button/dist/f-button.css';
 
 export default {
     name: 'FAlert',
