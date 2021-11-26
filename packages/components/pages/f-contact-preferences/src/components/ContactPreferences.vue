@@ -216,7 +216,9 @@ export default {
             } catch (error) {
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
-                this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
+                this.$nextTick(() => {
+                    this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
+                });
             }
         },
 
