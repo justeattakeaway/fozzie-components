@@ -55,9 +55,9 @@
                 </div>
 
                 <f-button
+                    :class="$style['c-contact-preferences-btn']"
                     data-test-id="contact-preferences-submit-button"
                     button-type="primary"
-                    is-full-width
                     action-type="submit"
                     :is-loading="isFormSubmitting">
                     {{ $t('saveChangesButton') }}
@@ -245,5 +245,13 @@ export default {
 
 .c-contactPreferences-subtitle {
     @include font-size(heading-s);
+}
+
+.c-contact-preferences-btn {
+    width: 100%;
+
+    @include media('>narrow') {
+        width: inherit;
+    }
 }
 </style>
