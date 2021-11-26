@@ -3,17 +3,27 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v5.5.0
+------------------------------
+*November 26, 2021*
+
+### Added
+- `peer-deps-externals-webpack-plugin` to automatically add a library's peerDependencies to the bundle's externals.
+
+
 v5.4.0
 ------------------------------
- *November 22, 2021*
+*November 22, 2021*
 
 ### Changed
 - `chromedriver` dependency to `96.0.0`
 - `.circleci/*.yaml` files to use new Docker image with Chrome v96
 
+
 v5.3.2
 ------------------------------
- *November 12, 2021*
+*November 12, 2021*
 
 ### Changed
 - wdio configuration for component, visual and a11y tests.
