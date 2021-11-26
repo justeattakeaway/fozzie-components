@@ -12,6 +12,7 @@ v0.4.0
 
 ### Changed
 - Used correct URL's for links
+- Extracted sections unrelated to main form
 
 
 v0.3.0

@@ -176,7 +176,7 @@ export default {
     props: {
         locale: {
             type: String,
-            default: ''
+            default: 'en-GB'
         }
     },
 
