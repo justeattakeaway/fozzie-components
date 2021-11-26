@@ -57,7 +57,12 @@ module.exports = {
         }],
         'import/no-extraneous-dependencies': 'off',
         'import/no-unresolved': 'off',
-
+        'lines-between-class-members': [
+            'error',
+            'always',
+            { 'exceptAfterSingleLine': true },
+        ],
+        
         // Setting these to warn temporarily otherwise it breaks the dev experience
         // and makes it hard to actually fix them.
         // Once the existing issues are fixed we can remove the rules so they default back to error.

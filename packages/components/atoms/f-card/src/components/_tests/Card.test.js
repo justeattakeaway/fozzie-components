@@ -8,8 +8,8 @@ const $style = {
     'c-card-heading--centerAligned': 'c-card-heading--centerAligned',
     'c-card-heading--rightAligned': 'c-card-heading--rightAligned',
     'c-card-innerSpacing--large': 'c-card-innerSpacing--large',
-    'c-card--cardSizeCustom--large': 'c-card--cardSizeCustom--large',
-    'c-card--cardSizeCustom--medium': 'c-card--cardSizeCustom--medium'
+    'c-card--sizeLarge': 'c-card--sizeLarge',
+    'c-card--sizeMedium': 'c-card--sizeMedium'
 };
 
 describe('Card', () => {
@@ -236,8 +236,8 @@ describe('Card', () => {
             });
 
             it.each([
-                ['c-card--cardSizeCustom--large', 'large'],
-                ['c-card--cardSizeCustom--medium', 'medium']
+                ['c-card--sizeLarge', 'large'],
+                ['c-card--sizeMedium', 'medium']
             ])('should add %s class to the card container if the `cardSizeCustom` prop is set to %s', (cssClass, propValue) => {
                 // Arrange & Act
                 const wrapper = shallowMount(Card, {
@@ -273,6 +273,34 @@ describe('Card', () => {
 
         it(`should ${wrapper.vm.hasFullWidthFooter ? '' : 'not '}display a bottom positioned full width element`, () => {
             expect(testedElement.exists()).toBe(expected);
+        });
+    });
+
+    describe('`computed`', () => {
+        describe('`capitaliseCardSizeProp`', () => {
+            it('should capitialise the prop value passed when it exists', () => {
+                // Arrange & Act
+                const propsData = {
+                    cardHeading: 'Test card title',
+                    cardSizeCustom: 'medium'
+                };
+                const wrapper = shallowMount(Card, { propsData });
+
+                // Assert
+                expect(wrapper.vm.capitaliseCardSizeProp).toBe('Medium');
+            });
+
+            it('should return falsey when `cardSizeCustom` is empty', () => {
+                // Arrange & Act
+                const propsData = {
+                    cardHeading: 'Test card title',
+                    cardSizeCustom: ''
+                };
+                const wrapper = shallowMount(Card, { propsData });
+
+                // Assert
+                expect(wrapper.vm.capitaliseCardSizeProp).toBe(false);
+            });
         });
     });
 });
