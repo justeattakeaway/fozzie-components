@@ -29,6 +29,12 @@ yarn add @justeat/f-mega-modal
 npm install @justeat/f-mega-modal
 ```
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-button | `yarn add @justeat/f-button` | `import '@justeat/f-button/dist/f-button.css';` |
+
 ### Vue Applications
 
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
