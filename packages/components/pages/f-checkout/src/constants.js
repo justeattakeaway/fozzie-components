@@ -21,6 +21,12 @@ export const VALIDATIONS = {
     dineIn: 'dineInValidations'
 };
 
+export const ERROR_TYPES = {
+    dialog: 'errorDialog',
+    alert: 'alert',
+    errorPage: 'errorPage'
+};
+
 export const VUEX_CHECKOUT_MODULE = 'fCheckoutModule';
 export const VUEX_CHECKOUT_ANALYTICS_MODULE = 'fCheckoutAnalyticsModule';
 export const VUEX_CHECKOUT_EXPERIMENTATION_MODULE = 'fCheckoutExperimentationModule';

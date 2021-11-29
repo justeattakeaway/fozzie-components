@@ -36,17 +36,7 @@ export default {
     ],
 
     props: {
-        errorFormType: {
-            type: String,
-            required: true
-        },
-
         redirectUrl: {
-            type: String,
-            default: ''
-        },
-
-        serviceType: {
             type: String,
             default: ''
         }
@@ -54,8 +44,15 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'restaurant'
+            'restaurant',
+            'checkoutErrorMessage',
+            'serviceType'
         ]),
+
+        errorFormType () {
+            return this.checkoutErrorMessage.errorFormType;
+        },
+
 
         primaryButton () {
             return {

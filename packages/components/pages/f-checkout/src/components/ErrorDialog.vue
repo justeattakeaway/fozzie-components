@@ -65,13 +65,13 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'message',
+            'checkoutErrorMessage',
             'restaurant',
             'serviceType'
         ]),
 
         errorCode () {
-            return this.message && this.message.code;
+            return this.checkoutErrorMessage?.code;
         },
 
         serviceTypeText () {
@@ -91,14 +91,14 @@ export default {
         }
 
         this.$emit('created', {
-            code: this.message?.code,
+            code: this.checkoutErrorMessage?.code,
             isDuplicateOrderError: this.isDuplicateOrderError
         });
     },
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateMessage'
+            'updateCheckoutErrorMessage'
         ]),
 
         getModalContext () {
@@ -111,11 +111,11 @@ export default {
         closeErrorDialog () {
             const modalContext = this.getModalContext();
 
-            if (this.message && this.message.shouldRedirectToMenu) {
+            if (this.checkoutErrorMessage && this.checkoutErrorMessage.shouldRedirectToMenu) {
                 window.location.assign(this.redirectUrl);
             }
 
-            this.updateMessage();
+            this.updateCheckoutErrorMessage();
 
             if (modalContext) {
                 modalContext.close();
@@ -125,7 +125,7 @@ export default {
         showOrderHistory () {
             window.location.assign('order-history');
 
-            this.updateMessage();
+            this.updateCheckoutErrorMessage();
         }
     }
 };
