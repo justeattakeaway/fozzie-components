@@ -67,20 +67,6 @@ describe('f-checkout component tests', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it('should prevent a user from entering more than 250 characters in the notes field', () => {
-        // Arrange
-        const field = 'orderNote';
-        const maxlength = 200;
-
-        const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
-
-        // Act
-        checkout.expandAndPopulateNote('orderAccordionHeader', field, userEntry);
-
-        // Assert
-        expect(checkout.getFieldValue(field).length).toEqual(maxlength);
-    });
-
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
         checkout.withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
