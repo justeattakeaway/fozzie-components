@@ -147,7 +147,6 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
-            // TODO: deal with exceptions.
             const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
@@ -226,8 +225,10 @@ export default {
             language,
             timeout
         }) => {
-            // TODO: deal with exceptions.
             const { data } = await basketApi.getBasket(url, tenant, language, timeout);
+            const prompts = data.BasketSummary.Prompts;
+            const hasBasketChanged = prompts && (!!prompts.InvalidProducts?.length || !!prompts.OfflineProducts?.length);
+
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurant: {
@@ -246,6 +247,10 @@ export default {
             if (basketDetails.ageRestricted && (tenant === 'au' || tenant === 'nz')) {
                 commit(UPDATE_IS_FULFILLABLE, false);
                 commit(UPDATE_ERRORS, [{ code: DOB_REQUIRED_ISSUE }]);
+            }
+
+            if (hasBasketChanged) {
+                commit(UPDATE_MESSAGE, getIssueByCode('BasketChanged'));
             }
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);

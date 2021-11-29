@@ -2153,6 +2153,13 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-alert@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-3.0.2.tgz#a4028e76146d3875f1c8452791e559cf915a5472"
+  integrity sha512-ppwaCHbr/vhqhWk9gAymVuW3GFNFeR3jG4jeHL3TjVI12FQfPhMjvhPnwbWd72FzBVsnFPbQAeg1+iBjBOgKRg==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-braze-adapter@3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.5.0.tgz#008b89ab02f72d53b1ef8c464546da8d8df2e852"
@@ -2232,6 +2239,11 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.0.tgz#2e635096c2a6a8fd7da308479a2126748716dcbf"
   integrity sha512-ZbAgBrqn3a2furQ5F0FLffbsMZar9aIDsRG/2uWnsv6uY0KIHgJi08kH2XK5NzDzckHih2uMN37JiYpQMw6rNQ==
+
+"@justeat/f-mega-modal@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
+  integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
 
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"
@@ -20126,6 +20138,11 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+peer-deps-externals-webpack-plugin@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/peer-deps-externals-webpack-plugin/-/peer-deps-externals-webpack-plugin-1.0.4.tgz#191e8f116c70401364dbd8e6c44ab3f8844101dc"
+  integrity sha512-MIZk2xvwUqd74rSIkbM4R/qTn182Hvb1gEOYIHwAqlqeRuSqn6QOGsd8NJLJRzwlMBnyjvMCs8JZH62+mQjb9g==
 
 pend@~1.2.0:
   version "1.2.0"
