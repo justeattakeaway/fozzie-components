@@ -117,7 +117,7 @@ import '@justeat/f-button/dist/f-button.css';
 
 import tenantConfigs from '../tenants';
 import {
-    STOP_LOADING_SPINNER_EVENT
+    EVENT_SPINNER_STOP_LOADING
 } from '../constants';
 
 export default {
@@ -195,7 +195,7 @@ export default {
                 // TODO - to be added with next ticket
             } finally {
                 this.$nextTick(() => {
-                    this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
+                    this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
                 });
             }
         },

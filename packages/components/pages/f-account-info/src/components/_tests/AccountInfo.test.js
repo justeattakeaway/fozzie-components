@@ -31,19 +31,6 @@ describe('AccountInfo', () => {
     });
 
     describe('when mounting the component', () => {
-        it('should be defined', () => {
-            // Arrange
-            // Act
-            const wrapper = shallowMount(AccountInfo, {
-                i18n,
-                localVue,
-                propsData: sutProps
-            });
-
-            // Assert
-            expect(wrapper.exists()).toBe(true);
-        });
-
         it('should not call initialise method if the authorisation has not completed', () => {
             // Arrange
             const initialiseSpy = jest.fn();
