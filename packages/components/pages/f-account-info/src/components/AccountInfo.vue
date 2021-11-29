@@ -57,6 +57,7 @@
 
             <form-field
                 v-model="fields.line1"
+                maxlength="50"
                 :label-text="$t('fields.addressLabel')"
                 :placeholder="$t('fields.line1Placeholder')"
                 @blur="onBlur('line1')">
@@ -71,14 +72,17 @@
 
             <form-field
                 v-model="fields.line2"
+                maxlength="50"
                 :placeholder="$t('fields.line2Placeholder')" />
 
             <form-field
                 v-model="fields.line3"
+                maxlength="50"
                 :placeholder="$t('fields.line3Placeholder')" />
 
             <form-field
                 v-model="fields.locality"
+                maxlength="50"
                 :label-text="$t('fields.localityLabel')"
                 :placeholder="$t('fields.localityPlaceholder')"
                 @blur="onBlur('locality')">
@@ -93,6 +97,7 @@
 
             <form-field
                 v-model="fields.postcode"
+                maxlength="50"
                 :label-text="$t('fields.postcodeLabel')"
                 :placeholder="$t('fields.postcodePlaceholder')"
                 @blur="onBlur('postcode')">
@@ -172,13 +177,6 @@ export default {
         VueGlobalisationMixin,
         AccountInfoValidationsMixin
     ],
-
-    props: {
-        locale: {
-            type: String,
-            default: 'en-GB'
-        }
-    },
 
     data () {
         return {
