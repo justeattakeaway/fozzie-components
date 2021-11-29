@@ -97,7 +97,7 @@ import { GetPreferencesError } from '../exceptions';
 import ContactPreferencesApi from '../services/providers/contactPreferences.api';
 import fContactPreferencesModule from '../store/contactPreferences.module';
 import {
-    STOP_LOADING_SPINNER_EVENT
+    EVENT_SPINNER_STOP_LOADING
 } from '../constants';
 
 export default {
@@ -218,7 +218,7 @@ export default {
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
                 this.$nextTick(() => {
-                    this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
+                    this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
                 });
             }
         },

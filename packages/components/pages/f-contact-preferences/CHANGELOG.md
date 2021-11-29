@@ -4,9 +4,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.8.0
+v0.9.0
 ------------------------------
-*November 25, 2021*
+*November 29, 2021*
 
 ### Added
 - Expose new isAuthFinished `required` property
@@ -14,6 +14,17 @@ v0.8.0
 ### Changed
 - Registered the Store Module on Create()
 - Initialise Page based on isAuthFinished
+
+
+v0.8.0
+------------------------------
+*November 26, 2021*
+
+### Changed
+- `f-card` wrapping component adds two props to control padding & size.
+
+### Added
+- New version of f-card (pulls in the two new props).
 
 
 v0.7.0
