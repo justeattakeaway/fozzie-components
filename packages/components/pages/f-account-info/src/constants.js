@@ -1,3 +1,4 @@
+export const EVENT_SPINNER_STOP_LOADING = 'stop-spinner';
 
 export const CONSUMER_DETAILS_URL = 'consumer';
 
