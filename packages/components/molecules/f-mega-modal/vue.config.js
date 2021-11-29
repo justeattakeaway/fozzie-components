@@ -1,5 +1,7 @@
 const path = require('path');
 
+const PeerDepsExternalsPlugin = require('peer-deps-externals-webpack-plugin');
+
 const rootDir = path.join(__dirname, '..', '..');
 const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
@@ -16,12 +18,13 @@ module.exports = {
                 // eslint-disable-next-line quotes
                 additionalData: `@import "../assets/scss/common.scss";`
             });
-
-        config.externals({
-            'body-scroll-lock': 'body-scroll-lock'
-        });
     },
     pluginOptions: {
         lintStyleOnBuild: true
+    },
+    configureWebpack: {
+        plugins: [
+            new PeerDepsExternalsPlugin()
+        ]
     }
 };
