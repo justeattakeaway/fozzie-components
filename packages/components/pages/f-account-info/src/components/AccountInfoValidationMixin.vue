@@ -53,6 +53,12 @@ export default {
             return validations.isValidPostcode(this.fields.postcode, this.$i18n.locale);
         },
 
+        /**
+         * Tests that the provided string only contains valid characters (multi-language letters and apostrophe)
+         *
+         * @param {string} value The string to test.
+         * @return {boolean} False is the string contains invalid characters, otherwise true
+         */
         isValidName (value) {
             return /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
         },
