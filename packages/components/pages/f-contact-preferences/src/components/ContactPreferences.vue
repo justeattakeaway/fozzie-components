@@ -147,6 +147,7 @@ export default {
     },
 
     watch: {
+        immediate: true,
         async isAuthFinished () {
             if (this.isAuthFinished) {
                 await this.initialise();
