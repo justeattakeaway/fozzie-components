@@ -163,6 +163,7 @@ export default {
     },
 
     watch: {
+        immediate: true,
         isAuthFinished () {
             if (this.isAuthFinished) {
                 this.initialise();
