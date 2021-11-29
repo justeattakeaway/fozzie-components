@@ -116,6 +116,9 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
 import tenantConfigs from '../tenants';
+import {
+    EVENT_SPINNER_STOP_LOADING
+} from '../constants';
 
 export default {
     components: {
@@ -125,14 +128,20 @@ export default {
         FButton
     },
 
-    mixins: [
-        VueGlobalisationMixin
-    ],
+    mixins: [VueGlobalisationMixin],
 
     props: {
-        locale: {
+        authToken: {
             type: String,
-            default: ''
+            default: null
+        },
+        isAuthFinished: {
+            type: Boolean,
+            required: true
+        },
+        smartGatewayBaseUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -153,12 +162,23 @@ export default {
         };
     },
 
-    async mounted () {
-        await this.initialise();
+    watch: {
+        immediate: true,
+        isAuthFinished () {
+            if (this.isAuthFinished) {
+                this.initialise();
+            }
+        }
+    },
+
+    mounted () {
+        if (this.isAuthFinished) {
+            this.initialise();
+        }
     },
 
     methods: {
-        async initialise () {
+        initialise () {
             try {
                 // TODO - Dummy data to be replaced with next ticket
                 this.fields = {
@@ -174,7 +194,9 @@ export default {
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
-                // TODO - Stop auth spinner to be added with next ticket
+                this.$nextTick(() => {
+                    this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
+                });
             }
         },
 
@@ -183,7 +205,6 @@ export default {
 
             try {
                 // TODO - to be added with next ticket
-                this.$log.info('Submitted Form', 'account-info');
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
