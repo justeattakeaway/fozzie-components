@@ -148,10 +148,12 @@ export default {
     },
 
     watch: {
-        immediate: true,
-        async isAuthFinished () {
-            if (this.isAuthFinished) {
-                await this.initialise();
+        isAuthFinished: {
+            immediate: true,
+            async handler (value) {
+                if (value) {
+                    await this.initialise();
+                }
             }
         }
     },

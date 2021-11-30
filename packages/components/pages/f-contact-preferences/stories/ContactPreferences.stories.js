@@ -73,7 +73,7 @@ export const ContactPreferencesComponent = () => ({
     'smart-gateway-base-url="" ' +
     ':prepareStory="prepareStory" ' +
     // eslint-disable-next-line no-template-curly-in-string
-    ' :key="`${authToken},${locale}`" />'
+    ':key="`${authToken},${locale}`" />'
 
 });
 

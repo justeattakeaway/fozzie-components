@@ -20,6 +20,7 @@ let sutMocks;
 let sutProps;
 let dataDefaults;
 let registerStoreModuleSpy;
+let initialiseSpy;
 
 const i18n = {
     locale: 'en-GB',
@@ -52,10 +53,15 @@ const mountContactPreferences = ({
     mocks = sutMocks,
     propsData = sutProps,
     data = dataDefaults,
-    storeOverride = null
+    storeOverride = null,
+    initialiseOverride = null
 } = {}) => {
     const store = storeOverride || createStore({ state, actions });
     store.registerModule = registerStoreModuleSpy;
+
+    if (initialiseOverride) {
+        ContactPreferences.methods.initialise = initialiseOverride;
+    }
 
     const mock = shallowMount(ContactPreferences, {
         i18n,
@@ -94,6 +100,7 @@ describe('ContactPreferences Component', () => {
     });
 
     afterEach(() => {
+        initialiseSpy = null;
         jest.clearAllMocks();
     });
 
@@ -169,30 +176,32 @@ describe('ContactPreferences Component', () => {
 
         it('should not call initialise method if the authorisation has not completed', () => {
             // Arrange
+            initialiseSpy = jest.fn();
             sutProps = { ...sutProps, isAuthFinished: false };
 
             // Act
-            wrapper = mountContactPreferences();
+            wrapper = mountContactPreferences({ initialiseOverride: initialiseSpy });
 
             // Assert
-            expect(storeActions.loadPreferences).not.toHaveBeenCalled();
+            expect(initialiseSpy).not.toHaveBeenCalled();
         });
 
         it('should only call initialise method once the authorisation has completed', async () => {
             // Arrange
+            initialiseSpy = jest.fn();
             sutProps = { ...sutProps, isAuthFinished: false };
 
             // Act
-            wrapper = mountContactPreferences();
+            wrapper = mountContactPreferences({ initialiseOverride: initialiseSpy });
 
             // Assert
-            expect(storeActions.loadPreferences).not.toHaveBeenCalled();
+            expect(initialiseSpy).not.toHaveBeenCalled();
 
             // Act 2
             await wrapper.setProps({ isAuthFinished: true });
 
             // Assert 2
-            expect(storeActions.loadPreferences).toHaveBeenCalled();
+            expect(initialiseSpy).toHaveBeenCalled();
         });
     });
 
