@@ -20,7 +20,7 @@ const tagColourSchemes = {
 };
 
 export default {
-    title: 'Components/Molecules',
+    title: 'Components/Molecules/f-restaurant-card',
     decorators: [withA11y]
 };
 
@@ -55,8 +55,7 @@ RestaurantCardComponent.args = {
             count: 1400,
             accessibleMessage: 'rated 5 stars out of 6',
             notRatedMessage: 'No ratings yet',
-            isOwnRatingMessage: 'You',
-            notRated: false
+            isOwnRatingMessage: 'You'
         },
         deliveryTimeData: {
             address: 'Fleet Place House, 2 Fleet Pl, London EC4M 7RF, The United Kingdom of Great Britain and Northern Ireland',
