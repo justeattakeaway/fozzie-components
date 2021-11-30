@@ -181,17 +181,6 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-// Modifier to position a nav-list-item at the bottom of the mobile navigation
-// As an example, this is used on the logout link on the global site
-// Logout is in the popover list, but at the bottom of the
-.c-nav-list-item--forceLast {
-    @include media('<=mid') {
-        position: absolute;
-        top: 100%;
-        width: 100%;
-    }
-}
-
 .c-nav-list-link,
 .c-nav-list-text {
     display: flex;
