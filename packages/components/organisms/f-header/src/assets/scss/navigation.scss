@@ -173,14 +173,6 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-// TODO: MAKE THIS NOT USE FLOATS
-// global modifier for list items horizontally aligned
-.c-nav-list-item--horizontallyAlignedAboveMid {
-    @include media('>mid') {
-        float: left;
-    }
-}
-
 .c-nav-list-link,
 .c-nav-list-text {
     display: flex;
@@ -225,171 +217,11 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-text-sub {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 300px;
-
-    &.u-showBelowMid {
-        @include media('>mid') {
-            display: none !important;
-        }
-    }
-}
-
-.c-nav-list-link--leftPaddingBelowMid {
-    @include media('<=mid') {
-        padding-left: spacing(x6);
-    }
-}
-
-.c-nav-list-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    background: transparent;
-}
-
 .has-sublist {
     // ensures the dropdown/popover is relative to the hover element, on wider views
     @include media('>mid') {
         position: relative;
         cursor: pointer;
-    }
-}
-
-.c-nav-featureLink {
-    display: block;
-    width: $nav-featureLinkIcon-width;
-    height: $nav-featureLinkIcon-height;
-
-    @include media('<=mid') {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: spacing(x2) + $nav-featureLinkIcon-width + spacing(x2); // includes padding on both sides
-        height: spacing(x2) + $nav-featureLinkIcon-height + spacing(x2);
-        padding: spacing(x2);
-    }
-}
-
-.c-nav-featureLink--hideAboveMid {
-    @include media('>mid') {
-        display: none;
-    }
-}
-
-// Icons, such as the profile icon
-.c-nav-icon {
-    float: left;
-    margin-right: spacing();
-    width: $nav-icon-size;
-    height: $nav-icon-size;
-
-    @include media('>mid') {
-        & path {
-            fill: $nav-icon-color;
-        }
-    }
-}
-
-.c-nav-icon--delivery,
-.c-nav-icon--offers,
-.c-nav-icon--profile {
-    @include media('<=mid') {
-        & path {
-            fill: $nav-icon-color--mobileWhiteBg;
-        }
-    }
-}
-
-.c-nav-icon--alt {
-    & path {
-        fill: $nav-icon-color--transparent;
-    }
-}
-
-// Navigation Toggle
-// Only shown at narrow widths (Hamburger Menu icon)
-.c-nav-toggle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: $nav-trigger-width;
-    height: $nav-trigger-height;
-    cursor: pointer;
-    background-color: $nav-toggleIcon-bg;
-    border: none;
-
-    // hide on wider views
-    @include media('>mid') {
-        display: none;
-    }
-}
-
-// The Toggle Icon (hamburger icon)
-.c-nav-toggle-icon {
-    display: block;
-    top: 50%;
-    left: $nav-toggleIcon-left;
-    width: $nav-toggleIcon-width;
-    text-indent: -150px;
-    white-space: nowrap;
-    transition: background-color $nav-transition-duration ease-in;
-
-    // Apply these styles to the base icon element and its created pseudo elements
-    &,
-    &:before,
-    &:after {
-        position: absolute;
-        height: $nav-toggleIcon-height;
-        background-color: $nav-toggleIcon-color;
-        border-radius: $nav-toggleIcon-borderRadius;
-
-        .c-header--transparent & {
-            background-color: $nav-toggleIcon-color--transparent;
-        }
-
-        .c-nav-toggle--altColour & {
-            background-color: $color-container-default;
-        }
-    }
-
-    &:before,
-    &:after {
-        content: '';
-        width: 100%;
-        left: 0;
-        transition: all $nav-transition-duration ease-in-out;
-    }
-    &:before {
-        top: -($nav-toggleIcon-space + $nav-toggleIcon-height);
-    }
-    &:after {
-        top: ($nav-toggleIcon-space + $nav-toggleIcon-height);
-    }
-}
-
-// Icon active state
-// Shown when the checkbox is checked or the `is-open` class is present.
-.c-nav-trigger:checked ~ .c-nav-toggle,
-.c-nav-toggle.is-open {
-    & > .c-nav-toggle-icon {
-        background-color: $nav-toggleIcon-bg;
-
-        &:before,
-        &:after {
-            top: 0;
-        }
-        &:before {
-            transform: rotate(45deg);
-        }
-        &:after {
-            transform: rotate(-45deg);
-        }
     }
 }
 
@@ -428,38 +260,5 @@ $nav-toggleIcon-space              : 5px;
         &:before {
             right: 4%;
         }
-    }
-}
-
-.c-nav-list-iconWrapper {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-
-    @include media('<=mid') {
-        margin-right: spacing();
-    }
-
-    @include media('>mid') {
-        background-color: $color-container-default;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-.c-nav-list-icon--flagCurrent {
-    margin-right: 0;
-}
-
-.c-nav-list-title {
-    width: 0;
-    overflow: hidden;
-    @include font-size(heading-s, true, narrow);
-
-    @include media('<=mid') {
-        width: auto;
     }
 }

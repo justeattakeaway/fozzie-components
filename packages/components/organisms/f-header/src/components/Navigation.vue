@@ -81,46 +81,52 @@
             <ul
                 :class="$style['c-nav-list']"
                 data-test-id="nav-list">
-                <nav-link
-                    v-if="showOffersLink"
-                    :text="copy.offers.text"
-                    :tabindex="tabIndex"
-                    :href="copy.offers.url"
-                    :data-trak="analyticsObjects.navigation.offers.clickLink"
-                    :is-alt-colour="isAltColour"
-                    :background-theme="headerBackgroundTheme"
-                    data-test-id="offers-link">
-                    <template #icon>
-                        <gift-icon
-                            :class="[
-                                $style['c-nav-icon'],
-                                $style['c-nav-icon--offers'],
-                                { [$style['c-nav-icon--alt']]: isAltColour }
-                            ]" />
-                    </template>
-                </nav-link>
+                <li
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        v-if="showOffersLink"
+                        :text="copy.offers.text"
+                        :tabindex="tabIndex"
+                        :href="copy.offers.url"
+                        :data-trak="analyticsObjects.navigation.offers.clickLink"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme"
+                        data-test-id="offers-link">
+                        <template #icon>
+                            <gift-icon
+                                :class="[
+                                    $style['c-nav-icon'],
+                                    $style['c-nav-icon--offers'],
+                                    { [$style['c-nav-icon--alt']]: isAltColour }
+                                ]" />
+                        </template>
+                    </nav-link>
+                </li>
 
-                <nav-link
-                    v-if="showDeliveryEnquiry"
-                    :text="copy.deliveryEnquiry.text"
-                    :tabindex="tabIndex"
-                    :href="copy.deliveryEnquiry.url"
-                    :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                        label: copy.deliveryEnquiry.gtm
-                    })"
-                    :is-alt-colour="isAltColour"
-                    :background-theme="headerBackgroundTheme"
-                    target="_blank"
-                    data-test-id="delivery-enquiry-link">
-                    <template #icon>
-                        <moped-icon
-                            :class="[
-                                $style['c-nav-icon'],
-                                $style['c-nav-icon--delivery'],
-                                { [$style['c-nav-icon--alt']]: isAltColour }
-                            ]" />
-                    </template>
-                </nav-link>
+                <li
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        v-if="showDeliveryEnquiry"
+                        :text="copy.deliveryEnquiry.text"
+                        :tabindex="tabIndex"
+                        :href="copy.deliveryEnquiry.url"
+                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                            label: copy.deliveryEnquiry.gtm
+                        })"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme"
+                        target="_blank"
+                        data-test-id="delivery-enquiry-link">
+                        <template #icon>
+                            <moped-icon
+                                :class="[
+                                    $style['c-nav-icon'],
+                                    $style['c-nav-icon--delivery'],
+                                    { [$style['c-nav-icon--alt']]: isAltColour }
+                                ]" />
+                        </template>
+                    </nav-link>
+                </li>
 
                 <li
                     :class="[
@@ -175,55 +181,67 @@
                     </v-popover>
                 </li>
 
-                <nav-link
-                    v-if="!userInfo && showLoginInfo"
-                    :text="copy.accountLogin.text"
-                    :tabindex="tabIndex"
-                    :href="returnLoginUrl"
-                    :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                        label: copy.accountLogin.gtm
-                    })"
-                    :is-alt-colour="isAltColour"
-                    :background-theme="headerBackgroundTheme"
-                    :left-padding-below-mid="!!userInfo"
-                    rel="nofollow"
-                    data-test-id="login-link" />
+                <li
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        v-if="!userInfo && showLoginInfo"
+                        :text="copy.accountLogin.text"
+                        :tabindex="tabIndex"
+                        :href="returnLoginUrl"
+                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                            label: copy.accountLogin.gtm
+                        })"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme"
+                        :left-padding-below-mid="!!userInfo"
+                        rel="nofollow"
+                        data-test-id="login-link" />
+                </li>
 
-                <nav-link
-                    v-if="showHelpLink"
-                    :text="copy.help.text"
-                    :tabindex="tabIndex"
-                    :href="copy.help.url"
-                    :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                        label: copy.help.gtm
-                    })"
-                    :is-alt-colour="isAltColour"
-                    :left-padding-below-mid="!!userInfo"
-                    :background-theme="headerBackgroundTheme"
-                    data-test-id="help-link" />
+                <li
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        v-if="showHelpLink"
+                        :text="copy.help.text"
+                        :tabindex="tabIndex"
+                        :href="copy.help.url"
+                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                            label: copy.help.gtm
+                        })"
+                        :is-alt-colour="isAltColour"
+                        :left-padding-below-mid="!!userInfo"
+                        :background-theme="headerBackgroundTheme"
+                        data-test-id="help-link" />
+                </li>
 
-                <nav-link
-                    v-if="userInfo && isBelowMid && showLoginInfo"
-                    :text="copy.accountLogout.text"
-                    :tabindex="tabIndex"
-                    :href="copy.accountLogout.url"
-                    :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                        label: copy.accountLogout.gtm
-                    })"
-                    :is-alt-colour="isAltColour"
-                    :left-padding-below-mid="!!userInfo"
-                    :background-theme="headerBackgroundTheme"
-                    data-test-id="logout-link" />
+                <li
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        v-if="userInfo && isBelowMid && showLoginInfo"
+                        :text="copy.accountLogout.text"
+                        :tabindex="tabIndex"
+                        :href="copy.accountLogout.url"
+                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                            label: copy.accountLogout.gtm
+                        })"
+                        :is-alt-colour="isAltColour"
+                        :left-padding-below-mid="!!userInfo"
+                        :background-theme="headerBackgroundTheme"
+                        data-test-id="logout-link" />
+                </li>
 
-                <country-selector
-                    v-if="showCountrySelector"
-                    :is-below-mid="isBelowMid"
-                    :copy="copy.countrySelector"
-                    :tabindex="tabIndex"
-                    data-test-id="country-selector"
-                    @close-country-selector="closeCountrySelector"
-                    @open-country-selector="openCountrySelector"
-                    @toggle-country-selector="onCountrySelectorToggle" />
+                <li
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <country-selector
+                        v-if="showCountrySelector"
+                        :is-below-mid="isBelowMid"
+                        :copy="copy.countrySelector"
+                        :tabindex="tabIndex"
+                        data-test-id="country-selector"
+                        @close-country-selector="closeCountrySelector"
+                        @open-country-selector="openCountrySelector"
+                        @toggle-country-selector="onCountrySelectorToggle" />
+                </li>
             </ul>
         </div>
     </nav>
@@ -618,4 +636,165 @@ export default {
         display: block;
     }
 }
+
+// TODO: MAKE THIS NOT USE FLOATS
+// global modifier for list items horizontally aligned
+.c-nav-list-item--horizontallyAlignedAboveMid {
+    @include media('>mid') {
+        float: left;
+    }
+}
+
+.c-nav-list-text-sub {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+
+    &.u-showBelowMid {
+        @include media('>mid') {
+            display: none !important;
+        }
+    }
+}
+
+.c-nav-list-link--leftPaddingBelowMid {
+    @include media('<=mid') {
+        padding-left: spacing(x6);
+    }
+}
+
+.c-nav-featureLink {
+    display: block;
+    width: $nav-featureLinkIcon-width;
+    height: $nav-featureLinkIcon-height;
+
+    @include media('<=mid') {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: spacing(x2) + $nav-featureLinkIcon-width + spacing(x2); // includes padding on both sides
+        height: spacing(x2) + $nav-featureLinkIcon-height + spacing(x2);
+        padding: spacing(x2);
+    }
+}
+
+.c-nav-featureLink--hideAboveMid {
+    @include media('>mid') {
+        display: none;
+    }
+}
+
+// Icons, such as the profile icon
+.c-nav-icon {
+    float: left;
+    margin-right: spacing();
+    width: $nav-icon-size;
+    height: $nav-icon-size;
+
+    @include media('>mid') {
+        & path {
+            fill: $nav-icon-color;
+        }
+    }
+}
+
+.c-nav-icon--delivery,
+.c-nav-icon--offers,
+.c-nav-icon--profile {
+    @include media('<=mid') {
+        & path {
+            fill: $nav-icon-color--mobileWhiteBg;
+        }
+    }
+}
+
+.c-nav-icon--alt {
+    & path {
+        fill: $nav-icon-color--transparent;
+    }
+}
+
+// Navigation Toggle
+// Only shown at narrow widths (Hamburger Menu icon)
+.c-nav-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $nav-trigger-width;
+    height: $nav-trigger-height;
+    cursor: pointer;
+    background-color: $nav-toggleIcon-bg;
+    border: none;
+
+    // hide on wider views
+    @include media('>mid') {
+        display: none;
+    }
+}
+
+// The Toggle Icon (hamburger icon)
+.c-nav-toggle-icon {
+    display: block;
+    top: 50%;
+    left: $nav-toggleIcon-left;
+    width: $nav-toggleIcon-width;
+    text-indent: -150px;
+    white-space: nowrap;
+    transition: background-color $nav-transition-duration ease-in;
+
+    // Apply these styles to the base icon element and its created pseudo elements
+    &,
+    &:before,
+    &:after {
+        position: absolute;
+        height: $nav-toggleIcon-height;
+        background-color: $nav-toggleIcon-color;
+        border-radius: $nav-toggleIcon-borderRadius;
+
+        .c-header--transparent & {
+            background-color: $nav-toggleIcon-color--transparent;
+        }
+
+        .c-nav-toggle--altColour & {
+            background-color: $color-container-default;
+        }
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        width: 100%;
+        left: 0;
+        transition: all $nav-transition-duration ease-in-out;
+    }
+    &:before {
+        top: -($nav-toggleIcon-space + $nav-toggleIcon-height);
+    }
+    &:after {
+        top: ($nav-toggleIcon-space + $nav-toggleIcon-height);
+    }
+}
+
+// Icon active state
+// Shown when the checkbox is checked or the `is-open` class is present.
+.c-nav-trigger:checked ~ .c-nav-toggle,
+.c-nav-toggle.is-open {
+    & > .c-nav-toggle-icon {
+        background-color: $nav-toggleIcon-bg;
+
+        &:before,
+        &:after {
+            top: 0;
+        }
+        &:before {
+            transform: rotate(45deg);
+        }
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+}
+
 </style>

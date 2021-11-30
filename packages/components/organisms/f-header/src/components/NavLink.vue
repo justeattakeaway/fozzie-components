@@ -1,21 +1,18 @@
 <template>
-    <li
-        :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
-        <a
-            v-bind="$attrs"
-            :data-trak="JSON.stringify(dataTrak)"
-            :href="href"
-            :class="[
-                $style['c-nav-list-link'],
-                { [$style['c-nav-list-link--leftPaddingBelowMid']]: leftPaddingBelowMid },
-                { [$style['c-nav-list-link--alt']]: isAltColour },
-                { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
-            ]">
-            <slot name="icon" />
+    <a
+        v-bind="$attrs"
+        :data-trak="JSON.stringify(dataTrak)"
+        :href="href"
+        :class="[
+            $style['c-nav-list-link'],
+            { [$style['c-nav-list-link--leftPaddingBelowMid']]: leftPaddingBelowMid },
+            { [$style['c-nav-list-link--alt']]: isAltColour },
+            { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
+        ]">
+        <slot name="icon" />
 
-            {{ text }}
-        </a>
-    </li>
+        {{ text }}
+    </a>
 </template>
 
 <script>

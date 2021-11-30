@@ -1,7 +1,6 @@
 <template>
-    <li
+    <div
         :class="[
-            $style['c-nav-list-item--horizontallyAlignedAboveMid'],
             $style['has-sublist'], {
                 [$style['is-open']]: isCountrySelectorOpen
             }
@@ -49,7 +48,7 @@
                 @closeCountrySelector="closeCountrySelector"
             />
         </v-popover>
-    </li>
+    </div>
 </template>
 
 <script>
@@ -112,4 +111,45 @@ export default {
 
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
+
+.c-nav-list-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+}
+
+.c-nav-list-iconWrapper {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
+
+    @include media('<=mid') {
+        margin-right: spacing();
+    }
+
+    @include media('>mid') {
+        background-color: $color-container-default;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.c-nav-list-icon--flagCurrent {
+    margin-right: 0;
+}
+
+.c-nav-list-title {
+    width: 0;
+    overflow: hidden;
+    @include font-size(heading-s, true, narrow);
+
+    @include media('<=mid') {
+        width: auto;
+    }
+}
 </style>

@@ -6,12 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.2.0
 ------------------------------
-*November 25, 2021*
+*December 1, 2021*
 
 ### Changed
 - Extracted NavLink component
 - Extracted CountrySelector component
-- Pull out styles into `navigation.scss`
+- Pull some styles out of `Navigation.vue` into `navigation.scss` and extracted components.
 - Extract some f-trak object creation into a service
 
 
