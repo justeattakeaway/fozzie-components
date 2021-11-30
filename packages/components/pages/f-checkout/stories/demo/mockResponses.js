@@ -20,6 +20,8 @@ import createGuest from './create-guest.json';
 import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
 import getBasketDinein from './get-basket-dinein.json';
+import getBasketInvalidProducts from './get-basket-invalid-products.json';
+import getBasketOfflineProducts from './get-basket-offline-products.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
 import updateCheckoutServiceTypeUnavailable from './update-checkout-service-type-unavailable.json';
@@ -187,6 +189,18 @@ const requestDefinitions = {
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: getBasketDinein
+    },
+    getBasketInvalidProducts: {
+        url: '/get-basket-invalid-products.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: getBasketInvalidProducts
+    },
+    getBasketOfflineProducts: {
+        url: '/get-basket-offline-products.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: getBasketOfflineProducts
     },
     getBasketTimeout: {
         url: '/get-basket-timeout.json',
