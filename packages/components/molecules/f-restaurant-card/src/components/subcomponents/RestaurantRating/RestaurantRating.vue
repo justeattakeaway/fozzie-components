@@ -90,15 +90,15 @@ export default {
         },
         notRatedMessage: {
             type: String,
-            required: true // this is temporary whilst i18n is being fixed - ticket exists to fix
+            default: '' // this is temporary whilst i18n is being fixed - ticket exists to fix
         },
         accessibleMessage: {
             type: String,
-            required: true // this is temporary whilst i18n is being fixed - ticket exists to fix
+            default: '' // this is temporary whilst i18n is being fixed - ticket exists to fix
         },
         isOwnRatingMessage: {
             type: String,
-            required: true // this is temporary whilst i18n is being fixed - ticket exists to fix
+            default: '' // this is temporary whilst i18n is being fixed - ticket exists to fix
         }
     },
     data () {

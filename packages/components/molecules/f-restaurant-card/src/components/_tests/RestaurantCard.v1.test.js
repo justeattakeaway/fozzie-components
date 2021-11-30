@@ -172,6 +172,10 @@ describe('RestaurantCard.v1', () => {
         });
     });
 
+    describe('Restaurant Ratings', () => {
+        it.todo('renders subcomponent');
+    });
+
     describe('Delivery Time Meta', () => {
         it('should not be shown if there is no eta, distance or address data', () => {
             // arrange
