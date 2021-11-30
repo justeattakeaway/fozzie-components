@@ -602,28 +602,3 @@ export default {
         }
     }
 };
-
-// Broken
-
-// Page
-// Access Forbidden Get Checkout
-// All get checkout errs
-// Server Timeout
-
-// Alert
-// Patch forbidden
-// Place Server timeout
-
-
-// Working
-
-// Page
-// No time
-
-// Dialog
-// All patch dialogs
-// Duplicate
-
-// Alert
-// patch server timeout
-// Patch err

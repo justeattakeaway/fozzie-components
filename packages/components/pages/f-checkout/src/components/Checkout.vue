@@ -288,14 +288,10 @@ export default {
                 heading: this.$t('errorMessages.errorHeading')
             };
 
-            const defaultProps = {
-                'redirect-url': this.redirectUrl
-            };
-
             const isAlert = this.checkoutErrorMessage.errorType === ERROR_TYPES.alert;
 
             return {
-                props: isAlert ? alertProps : defaultProps,
+                props: isAlert ? alertProps : { 'redirect-url': this.redirectUrl },
                 ...isAlert && { content: this.checkoutErrorMessage?.code }
             };
         },
