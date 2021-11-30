@@ -110,4 +110,6 @@ export default {
 };
 </script>
 
-<style lang="scss" module src='../assets/scss/navigation.scss' />
+<style lang="scss" module>
+@import '../assets/scss/navigation.scss';
+</style>
