@@ -2,7 +2,7 @@
     <p :class="[$style['c-restaurantCard-rating']]">
         <!-- Icons -->
         <star-empty-icon
-            v-if="notRated"
+            v-if="noRatingsAvailable"
             aria-hidden="true"
             :class="[$style['c-restaurantCard-ratingStar']]" />
 
@@ -11,44 +11,54 @@
             aria-hidden="true"
             :class="[$style['c-restaurantCard-ratingStar']]" />
 
+        <!-- No ratings message -->
         <span
-            v-if="notRated"
+            v-if="noRatingsAvailable"
             :class="[$style['c-restaurantCard-ratingNotRatedMsg']]">
             {{ notRatedMessage }}
         </span>
 
         <template v-else>
-            <!-- Screenreader message -->
+            <!-- Screenreader message (hidden) -->
             <span class="is-visuallyHidden">
                 {{ accessibleMessage }}
             </span>
+
             <!-- Mean value -->
             <data
                 :class="[$style['c-restaurantCard-ratingMean']]"
                 :value="mean"
                 aria-hidden="true">
-                {{ mean }}
+                {{ meanFormatted }}
             </data>
 
-            <span :class="[$style['c-restaurantCard-ratingDivider']]">/</span>
+            <span
+                aria-hidden="true"
+                :class="[$style['c-restaurantCard-ratingDivider']]">&#47;</span>
+
+            <!-- Max value -->
             <data
                 :class="[$style['c-restaurantCard-ratingOutOf']]"
                 :value="ratingsMax"
                 aria-hidden="true">
                 {{ ratingsMax }}
             </data>
+
+            <!-- Number of ratings/Own rating message -->
             <span aria-hidden="true">
-                (
+                &#40;
                 <data
                     v-if="!isOwnRating"
                     :class="[$style['c-restaurantCard-ratingCount']]"
                     :value="count">
                     {{ count }}
                 </data>
-                <span v-else>
+                <span
+                    v-else
+                    :class="[$style['c-restaurantCard-ratingCount']]">
                     {{ isOwnRatingMessage }}
                 </span>
-                )
+                &#41;
             </span>
         </template>
     </p>
@@ -67,10 +77,6 @@ export default {
     },
     props: {
         isOwnRating: {
-            type: Boolean,
-            default: false
-        },
-        notRated: {
             type: Boolean,
             default: false
         },
@@ -99,6 +105,14 @@ export default {
         return {
             ratingsMax: RATINGS_MAX
         };
+    },
+    computed: {
+        noRatingsAvailable () {
+            return !this.count || !this.mean;
+        },
+        meanFormatted () {
+            return Number.parseFloat(this.mean).toFixed(2);
+        }
     }
 };
 </script>
@@ -131,6 +145,14 @@ export default {
 .c-restaurantCard-ratingOutOf,
 .c-restaurantCard-ratingCount {
     color: $color-content-subdued;
+}
+
+.c-restaurantCard-ratingCount {
+    margin: 0 -(spacing(x0.5));
+}
+
+.c-restaurantCard-ratingStar path {
+    fill: $color-orange-30;
 }
 </style>
 
