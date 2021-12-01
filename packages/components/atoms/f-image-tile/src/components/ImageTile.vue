@@ -1,8 +1,44 @@
 <template>
     <div
         :class="$style['c-imageTile']"
-        data-test-id="imageTile">
-        I am a ImageTile Component (GB)
+        data-test-id="image-tile">
+        <a
+            :class="[
+                $style['c-imageTile-link'], {
+                    [$style['c-imageTile-link--toggle']]: !isLink
+                }]"
+            :href="isLink ? href : '#'"
+            :aria-hidden="isLink ? false : true"
+            :tabindex="isLink ? false : -1"
+        >
+            <span class="is-visuallyHidden">
+                Chicken
+            </span>
+        </a>
+        <input
+            id="imageTileToggle"
+            type="checkbox"
+            class="is-visuallyHidden"
+            :class="$style['c-imageTile-checkbox']"
+            value="Chicken"
+            @change="toggleFilter"
+        >
+        <label
+            :class="[
+                $style['c-imageTile-label'], {
+                    [$style['c-imageTile-label--selected']]: isFilterSelected
+                }]"
+            for="imageTileToggle"
+        >
+            <img
+                :class="$style['c-imageTile-image']"
+                src="https://via.placeholder.com/150"
+                alt=""
+            >
+            <span :aria-hidden="isLink ? true : false">
+                Chicken
+            </span>
+        </label>
     </div>
 </template>
 
@@ -12,6 +48,32 @@ export default {
     name: 'ImageTile',
     components: {},
     props: {
+        href: {
+            type: String,
+            default: 'https://www.google.com'
+        },
+        tileId: {
+            type: String,
+            default: 'Chicken12'
+        },
+        isSelected: {
+            type: Boolean,
+            default: false
+        },
+        isLink: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data () {
+        return {
+            isFilterSelected: false
+        };
+    },
+    methods: {
+        toggleFilter () {
+            this.isFilterSelected = !this.isFilterSelected;
+        }
     }
 };
 </script>
@@ -19,13 +81,37 @@ export default {
 <style lang="scss" module>
 
 .c-imageTile {
-    display: flex;
-    justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
-    margin: auto;
-    font-family: $font-family-base;
     @include font-size(heading-m);
+
+    font-family: $font-family-base;
+    position: relative;
+}
+
+.c-imageTile-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.c-imageTile-link--toggle {
+  display: block;
+  position: static;
+  pointer-events: none;
+}
+
+.c-imageTile-label {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.c-imageTile-label--selected {
+  border: 1px solid green;
+}
+
+.c-imageTile-image {
+    display: block;
 }
 
 </style>
