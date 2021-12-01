@@ -32,6 +32,17 @@ describe('FormSelectionControl', () => {
                 expect(wrapper.find('input').element.value).toBe(propsData.value);
             });
         });
+
+        describe('form-label ::', () => {
+            it('should pass labelDescription from $attrs as prop to <form-label>', () => {
+                // Arrange & Act
+                const expected = 'My label desc';
+                const wrapper = shallowMount(FormSelectionControl, { propsData, attrs: { ...attrs, labelDescription: expected } });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="selection-control-form-label"]').attributes('labeldescription')).toBe(expected);
+            });
+        });
     });
 
     describe('props ::', () => {
