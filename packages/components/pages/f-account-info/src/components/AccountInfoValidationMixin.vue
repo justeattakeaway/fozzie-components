@@ -1,6 +1,6 @@
 <script>
 import { validationMixin } from 'vuelidate';
-import { required, maxLength } from 'vuelidate/lib/validators';
+import { required } from 'vuelidate/lib/validators';
 import { validations } from '@justeat/f-services';
 
 export default {
@@ -9,13 +9,15 @@ export default {
             fields: {
                 firstName: {
                     required,
-                    maxLength: maxLength(50),
                     isValidName: this.isValidName
                 },
                 lastName: {
                     required,
-                    maxLength: maxLength(50),
                     isValidName: this.isValidName
+                },
+                phoneNumber: {
+                    required,
+                    phoneNumberValid: this.isValidPhoneNumber
                 },
                 line1: {
                     required
@@ -47,6 +49,10 @@ export default {
             this.$log.warn('Validation Failed', ['account-info', 'account-pages'], {
                 ...validationDiagnostics
             });
+        },
+
+        isValidPhoneNumber () {
+            return validations.isValidPhoneNumber(this.fields.phoneNumber, this.$i18n.locale);
         },
 
         isValidPostcode () {

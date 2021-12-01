@@ -50,6 +50,24 @@
                 </template>
             </form-field>
 
+            <form-field
+                v-model="fields.phoneNumber"
+                maxlength="16"
+                :label-text="$t('fields.phoneNumberLabel')"
+                :placeholder="$t('fields.phoneNumberPlaceholder')"
+                @blur="onBlur('phoneNumber')">
+                <template
+                    v-if="$v.fields.phoneNumber.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
+                        {{ $t('validation.phoneNumberRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.fields.phoneNumber.phoneNumberInvalid && $v.fields.phoneNumber.required">
+                        {{ $t('validation.phoneNumberInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
+
             <h2
                 class="u-spacingBottom--large">
                 {{ $t('deliveryAddress') }}
