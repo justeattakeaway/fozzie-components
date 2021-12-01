@@ -62,7 +62,7 @@
                     <f-error-message v-show="!$v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
                         {{ $t('validation.phoneNumberRequired') }}
                     </f-error-message>
-                    <f-error-message v-show="!$v.fields.phoneNumber.phoneNumberInvalid && $v.fields.phoneNumber.required">
+                    <f-error-message v-show="!$v.fields.phoneNumber.phoneNumberInvalid && $v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
                         {{ $t('validation.phoneNumberInvalid') }}
                     </f-error-message>
                 </template>
