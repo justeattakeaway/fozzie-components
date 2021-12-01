@@ -31,26 +31,6 @@ v0.4.0
 - Initialise Page based on isAuthFinished
 
 
-v0.5.0
-------------------------------
-*November 29, 2021*
-
-### Added
-- Api provider for getting consumer details data.
-
-
-v0.4.0
-------------------------------
-*November 25, 2021*
-
-### Added
-- Send stop f-spinner event for the parent component
-- Expose new isAuthFinished `required` property
-
-### Changed
-- Initialise Page based on isAuthFinished
-
-
 v0.3.0
 ------------------------------
 *November 23, 2021*
