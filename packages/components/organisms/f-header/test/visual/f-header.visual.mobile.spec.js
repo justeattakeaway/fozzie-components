@@ -1,16 +1,19 @@
 import forEach from 'mocha-each';
 
+import { userInfo } from '../../test-utils/helpers/objects';
+
 const Header = require('../../test-utils/component-objects/f-header.component');
 
 let header;
 
 describe('Shared - f-header component tests', () => {
-    forEach([['en-GB', true], ['en-GB', false],
-    ['en-AU', true], ['en-AU', false],
-    ['en-NZ', true], ['en-NZ', false],
-    ['en-IE', true], ['en-IE', false],
-    ['it-IT', true], ['it-IT', false],
-    ['es-ES', true], ['es-ES', false]
+    forEach([
+        ['en-GB', true], ['en-GB', false],
+        ['en-AU', true], ['en-AU', false],
+        ['en-NZ', true], ['en-NZ', false],
+        ['en-IE', true], ['en-IE', false],
+        ['it-IT', true], ['it-IT', false],
+        ['es-ES', true], ['es-ES', false]
     ])
         .it('should display component', (tenant, isLoggedIn) => {
             // Arrange
@@ -20,8 +23,10 @@ describe('Shared - f-header component tests', () => {
             header.withQuery('&knob-Show offers link', 'true');
             header.withQuery('&knob-Show delivery enquiry', 'true');
 
-            if (!isLoggedIn) {
-                header.withQuery('&knob-User info', isLoggedIn);
+            header.withQuery('&knob-Is logged in?', isLoggedIn);
+
+            if (isLoggedIn) {
+                header.withQuery('&knob-User info (if logged in)', JSON.stringify(userInfo));
             }
 
             // Act
