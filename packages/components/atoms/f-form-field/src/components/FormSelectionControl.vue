@@ -20,7 +20,7 @@
 
         <form-label
             :id="`label-${$attrs.id}`"
-            data-test-id="andy"
+            data-test-id="selection-control-form-label"
             :label-for="$attrs.id"
             :label-description="$attrs.labelDescription"
         >

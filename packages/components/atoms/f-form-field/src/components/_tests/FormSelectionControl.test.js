@@ -40,7 +40,7 @@ describe('FormSelectionControl', () => {
                 const wrapper = shallowMount(FormSelectionControl, { propsData, attrs: { ...attrs, labelDescription: expected } });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="andy"]').attributes('labeldescription')).toBe(expected);
+                expect(wrapper.find('[data-test-id="selection-control-form-label"]').attributes('labeldescription')).toBe(expected);
             });
         });
     });
