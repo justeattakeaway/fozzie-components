@@ -14,7 +14,7 @@ export const AccountInfoComponent = () => ({
     components: { AccountInfo },
     props: {
     },
-    template: '<account-info />'
+    template: '<account-info is-auth-finished smart-gateway-base-url="/" />'
 });
 
 AccountInfoComponent.storyName = 'f-account-info';
