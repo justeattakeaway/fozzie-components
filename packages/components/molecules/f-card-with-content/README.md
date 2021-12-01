@@ -35,6 +35,12 @@ yarn add @justeat/f-card-with-content
 npm install @justeat/f-card-with-content
 ```
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-button | `yarn add @justeat/f-button` | `import '@justeat/f-button/dist/f-button.css';` |
+| f-card | `yarn add @justeat/f-card` | `import '@justeat/f-card/dist/f-card.css';` |
 
 
 ### Vue Applications
