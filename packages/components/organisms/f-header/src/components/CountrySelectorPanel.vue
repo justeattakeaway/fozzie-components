@@ -12,12 +12,12 @@
                     button-type="ghost"
                     is-icon
                     :class="$style['c-countrySelector-header-button']"
-                    :aria-label="copy.countrySelector.goBackToMainMenu"
+                    :aria-label="copy.goBackToMainMenu"
                     @click="$emit('closeCountrySelector')">
                     <arrow-icon :class="$style['c-countrySelector-goBackIcon']" />
                 </f-button>
 
-                <h3>{{ copy.countrySelector.selectYourCountryText }}</h3>
+                <h3>{{ copy.selectYourCountryText }}</h3>
             </header>
 
             <ul

@@ -28,7 +28,10 @@ const defaultPropsData = {
             }
         },
         openMenuText: 'Open menu',
-        deliveryEnquiry: {},
+        deliveryEnquiry: {
+            text: 'Deliver with Just Eat',
+            url: '/info/delivering-with-just-eat'
+        },
         help: {
             text: 'Help',
             url: '/help',
