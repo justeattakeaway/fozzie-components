@@ -4,31 +4,26 @@ const checkoutIssues = {
     MINIMUM_ORDER_VALUE_NOT_MET: {
         errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
-
     },
 
     RESTAURANT_NOT_TAKING_ORDERS: {
         errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
-
     },
 
     SERVICE_TYPE_UNAVAILABLE: {
         errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
-
     },
 
     ADDITIONAL_ITEMS_REQUIRED: {
         errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
-
     },
 
     ITEMS_UNORDERABLE: {
         errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
-
     },
 
     FULFILMENT_TIME_UNAVAILABLE: {
@@ -70,7 +65,6 @@ const checkoutIssues = {
     BasketChanged: {
         errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
-
     }
 };
 

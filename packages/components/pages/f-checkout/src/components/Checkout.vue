@@ -726,7 +726,7 @@ export default {
          * Set the `message` for the user to see.
          */
         handleErrorState (error) {
-            const message = error.errorType === ERROR_TYPES.dialog
+            const code = error.errorType === ERROR_TYPES.dialog
                 ? error.errorCode
                 : this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
 
@@ -737,7 +737,7 @@ export default {
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
             this.updateCheckoutErrorMessage({
-                code: message,
+                code,
                 errorType: error.errorType,
                 ...error.errorFormType && { errorFormType: error.errorFormType }
             });
