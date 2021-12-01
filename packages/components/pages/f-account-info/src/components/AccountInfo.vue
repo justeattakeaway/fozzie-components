@@ -62,7 +62,7 @@
                     <f-error-message v-show="!$v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
                         {{ $t('validation.phoneNumberRequired') }}
                     </f-error-message>
-                    <f-error-message v-show="!$v.fields.phoneNumber.phoneNumberInvalid && $v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
+                    <f-error-message v-show="!$v.fields.phoneNumber.isValidPhoneNumber && $v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
                         {{ $t('validation.phoneNumberInvalid') }}
                     </f-error-message>
                 </template>
@@ -125,7 +125,7 @@
                     <f-error-message v-show="!$v.fields.postcode.required && $v.fields.postcode.$dirty">
                         {{ $t('validation.postcodeRequired') }}
                     </f-error-message>
-                    <f-error-message v-show="!$v.fields.postcode.postcodeValid && $v.fields.postcode.required">
+                    <f-error-message v-show="!$v.fields.postcode.isValidPostcode && $v.fields.postcode.required">
                         {{ $t('validation.postcodeInvalid') }}
                     </f-error-message>
                 </template>
