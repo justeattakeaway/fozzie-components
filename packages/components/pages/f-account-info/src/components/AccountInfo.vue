@@ -219,6 +219,7 @@ export default {
             fields: {
                 firstName: null,
                 lastName: null,
+                phoneNumber: null,
                 line1: null,
                 line2: null,
                 line3: null,
@@ -259,6 +260,7 @@ export default {
                 this.fields = {
                     firstName: 'Max',
                     lastName: 'Legend',
+                    phoneNumber: 1234567890,
                     line1: '1 Wardour Street',
                     line2: undefined,
                     line3: null,
