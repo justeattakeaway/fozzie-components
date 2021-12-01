@@ -4,17 +4,7 @@ import {
 import { withA11y } from '@storybook/addon-a11y';
 import VueHeader from '../src/components/Header.vue';
 
-const userInfo = {
-    friendlyName: 'John',
-    isAuthenticated: true,
-    email: 'je@test.com',
-    userData: {
-        signupDate: '2018-05-21T22:54:49.4630000Z',
-        email: 'test',
-        'a-UserId': 'test',
-        consumerStatus: 'test'
-    }
-};
+import { userInfo } from '../test-utils/helpers/objects';
 
 export default {
     title: 'Components/Organisms',
@@ -43,7 +33,7 @@ export const HeaderComponent = () => ({
             default: select('Header theme', ['white', 'highlight', 'transparent'])
         },
         showLoginInfo: {
-            default: boolean('Show login link / user info', true)
+            default: boolean('Show login/user info link', true)
         },
         isLoggedIn: {
             default: boolean('Is logged in?', true)

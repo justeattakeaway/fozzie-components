@@ -193,7 +193,7 @@
                         })"
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
-                        :left-padding-below-mid="!!userInfo"
+                        :left-padding-below-mid="Boolean(userInfo)"
                         rel="nofollow"
                         data-test-id="login-link" />
                 </li>
@@ -209,7 +209,7 @@
                             label: copy.help.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :left-padding-below-mid="!!userInfo"
+                        :left-padding-below-mid="Boolean(userInfo)"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="help-link" />
                 </li>
@@ -225,7 +225,7 @@
                             label: copy.accountLogout.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :left-padding-below-mid="!!userInfo"
+                        :left-padding-below-mid="Boolean(userInfo)"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="logout-link" />
                 </li>
@@ -656,12 +656,6 @@ export default {
         @include media('>mid') {
             display: none !important;
         }
-    }
-}
-
-.c-nav-list-link--leftPaddingBelowMid {
-    @include media('<=mid') {
-        padding-left: spacing(x6);
     }
 }
 
