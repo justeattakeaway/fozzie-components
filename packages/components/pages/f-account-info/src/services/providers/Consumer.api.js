@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 import {
     CONSUMER_DETAILS_URL,
+    CONSUMER_ADDRESSES_URL,
     CONVERSATION_ID_NAME
 } from '../../constants';
 
@@ -13,7 +14,7 @@ const GetSetConversationId = cookies => {
     return conversationId;
 };
 
-export default class AccountInfoApi {
+export default class ConsumerApi {
     #httpClient;
     #cookies;
     #baseUrl;
@@ -31,6 +32,17 @@ export default class AccountInfoApi {
         };
 
         const response = await this.#httpClient.get(`${this.#baseUrl}/${CONSUMER_DETAILS_URL}`, headers);
+
+        return response;
+    }
+
+    async getConsumerAddresses (authToken, conversationId = GetSetConversationId(this.#cookies)) {
+        const headers = {
+            [CONVERSATION_ID_NAME]: conversationId,
+            Authorization: authToken ? `Bearer ${authToken}` : ''
+        };
+
+        const response = await this.#httpClient.get(`${this.#baseUrl}/${CONSUMER_ADDRESSES_URL}`, headers);
 
         return response;
     }
