@@ -8,7 +8,7 @@ v0.7.0
 *December 01, 2021*
 
 ### Added
-- Method to API provider for getting consumer address data.
+- Method to API provider for getting consumer address data
 
 
 v0.5.0
