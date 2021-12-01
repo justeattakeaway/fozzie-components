@@ -1,12 +1,12 @@
 <template>
     <div role="main">
         <div
-            v-if="!isAppsUserAgent"
+            v-if="!isAppsUserAgent && !isInIframe"
             :class="$style['c-loyalty']"
             data-test-id="loyalty">
             <loyalty-header />
             <div
-                :class="$style['c-stampcards-tabs']">
+                :class="$style['c-loyalty-tabs']">
                 <tabs :animate="shouldAnimate">
                     <tab
                         name="stamp-cards"
@@ -29,7 +29,7 @@
         </div>
         <div
             v-else
-            :class="$style['c-stampcards-appsHowItWorksContainer']"
+            :class="$style['c-loyalty-appsHowItWorksContainer']"
             data-test-id="StampCards-HowItWorks-Content">
             <how-it-works />
         </div>
@@ -82,6 +82,10 @@ export default {
         hash: {
             type: String,
             default: ''
+        },
+        isInIframe: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -144,7 +148,7 @@ export default {
     background-color: $color-background-default;
 }
 
-.c-stampcards-tabs {
+.c-loyalty-tabs {
     //margin-top: -42px;
     width: 100%;
     max-width: #{$layout-max-width}px;
@@ -157,6 +161,16 @@ export default {
 
     @include media('<narrow') {
         padding: 0 #{$layout-margin--narrow}px;
+    }
+}
+
+.c-loyalty-appsHowItWorksContainer {
+    padding-left: spacing(x4);
+    padding-right: spacing(x4);
+
+    @include media('<=wide') {
+        padding-left: spacing(x2);
+        padding-right: spacing(x2);
     }
 }
 
