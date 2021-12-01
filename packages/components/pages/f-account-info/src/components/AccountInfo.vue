@@ -160,7 +160,7 @@ import '@justeat/f-link/dist/f-link.css';
 import EmailAddressField from './EmailAddressField.vue';
 import DeleteAccount from './DeleteAccount.vue';
 
-import AccountInfoValidationsMixin from './AccountInfoValidationMixin.vue';
+import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
 import {
     EVENT_SPINNER_STOP_LOADING
@@ -178,7 +178,7 @@ export default {
 
     mixins: [
         VueGlobalisationMixin,
-        AccountInfoValidationsMixin
+        AccountInfoValidationMixin
     ],
 
     props: {
