@@ -24,7 +24,6 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import FLink from '@justeat/f-link';
 import '@justeat/f-link/dist/f-link.css';
 
-
 export default {
     components: {
         FormField,

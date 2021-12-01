@@ -173,8 +173,6 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
-import '@justeat/f-link/dist/f-link.css';
-
 import EmailAddressField from './EmailAddressField.vue';
 import DeleteAccount from './DeleteAccount.vue';
 
