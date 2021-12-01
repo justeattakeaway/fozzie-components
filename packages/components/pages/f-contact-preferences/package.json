@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-contact-preferences",
   "description": "Fozzie Contact Preferences - Fozzie user contact preferences form component",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "main": "dist/f-contact-preferences.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -42,7 +42,8 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.7.0",
-    "@justeat/f-globalisation": "1.0.0"
+    "@justeat/f-globalisation": "1.0.0",
+    "@justeat/f-form-field": "4.3.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",

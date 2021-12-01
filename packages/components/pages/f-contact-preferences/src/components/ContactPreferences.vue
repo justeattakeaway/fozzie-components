@@ -17,40 +17,25 @@
                     </h2>
                     <fieldset
                         :class="$style['c-contactPreferences-fieldset']">
-                        <label>
-                            <input
-                                type="checkbox"
-                                :data-test-id="`contact-preferences-${key}-email-checkbox`"
-                                :disabled="!isEmailEnabled"
-                                :checked="emailValue"
-                                @change="editPreferenceValue(key, Object.keys({ emailValue })[0], $event.target.checked)">
-                            <span
-                                :class="{
-                                    [$style['c-contactPreferences-labelText--disabled']]: !isEmailEnabled
-                                }">
-                                {{ $t(`${key}.email`) }}
-                                <template v-if="$te(`${key}.emailDescription`)">
-                                    <br>({{ $t(`${key}.emailDescription`) }})
-                                </template>
-                            </span>
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                :data-test-id="`contact-preferences-${key}-sms-checkbox`"
-                                :disabled="!isSmsEnabled"
-                                :checked="smsValue"
-                                @change="editPreferenceValue(key, Object.keys({ smsValue })[0], $event.target.checked)">
-                            <span
-                                :class="{
-                                    [$style['c-contactPreferences-labelText--disabled']]: !isSmsEnabled
-                                }">
-                                {{ $t(`${key}.sms`) }}
-                                <template v-if="$te(`${key}.smsDescription`)">
-                                    <br>({{ $t(`${key}.smsDescription`) }})
-                                </template>
-                            </span>
-                        </label>
+                        <f-form-field
+                            input-type="checkbox"
+                            :label-text=" $t(`${key}.email`)"
+                            :label-description="getEmailDescription(key)"
+                            :disabled="!isEmailEnabled"
+                            :data-test-id="`contact-preferences-${key}-email-checkbox`"
+                            :checked="emailValue"
+                            @input="(checked) => editPreferenceValue(key, Object.keys({ emailValue })[0], checked)"
+                        />
+
+                        <f-form-field
+                            input-type="checkbox"
+                            :label-text=" $t(`${key}.sms`)"
+                            :label-description="getSmsDescription(key)"
+                            :disabled="!isSmsEnabled"
+                            :data-test-id="`contact-preferences-${key}-sms-checkbox`"
+                            :checked="smsValue"
+                            @input="(checked) => editPreferenceValue(key, Object.keys({ smsValue })[0], checked)"
+                        />
                     </fieldset>
                 </div>
 
@@ -89,6 +74,8 @@ import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
+import FFormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 
@@ -106,7 +93,8 @@ export default {
 
     components: {
         CardComponent,
-        FButton
+        FButton,
+        FFormField
     },
 
     mixins: [VueGlobalisationMixin],
@@ -176,6 +164,28 @@ export default {
             'savePreferences',
             'editPreference'
         ]),
+
+
+
+        /**
+        * Returns translation string if it exists
+        * @param {string} key - The key of the preference that needs changing
+        */
+        getEmailDescription (key) {
+            if (!this.$te(`${key}.emailDescription`)) return undefined;
+
+            return this.$t(`${key}.emailDescription`);
+        },
+
+        /**
+        * Returns translation string if it exists
+        * @param {string} key - The key of the preference that needs changing
+        */
+        getSmsDescription (key) {
+            if (!this.$te(`${key}.smsDescription`)) return undefined;
+
+            return `(${this.$t(`${key}.smsDescription`)})`;
+        },
 
         /**
         * Informs the template that we are in an Error State.
