@@ -3,12 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v7.2.0
+------------------------------
+*December 1, 2021*
+
+### Changed
+- Extracted NavLink component
+- Extracted CountrySelector component
+- Pull some styles out of `Navigation.vue` into `navigation.scss` and extracted components.
+- Extract some f-trak object creation into a service
+
+
 v7.1.1
 ------------------------------
 *November 19, 2021*
 
 ### Changed
 - Replaced ES exports with node exports to allow external applications to access the components.
+
 
 v7.1.0
 ------------------------------

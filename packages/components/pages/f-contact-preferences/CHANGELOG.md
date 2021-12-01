@@ -6,10 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.10.0
 ------------------------------
-*December 01, 2021*
+*December 02, 2021*
 
 ### Changed
 - Generic checkboxes to use `f-form-field`
+
+
+v0.9.1
+------------------------------
+*December 1, 2021*
+
+### Changed
+- Updating classname to match naming scheme
 
 
 v0.9.0

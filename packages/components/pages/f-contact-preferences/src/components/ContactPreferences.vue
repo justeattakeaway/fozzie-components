@@ -40,7 +40,7 @@
                 </div>
 
                 <f-button
-                    :class="$style['c-contact-preferences-btn']"
+                    :class="$style['c-contactPreferences-btn']"
                     data-test-id="contact-preferences-submit-button"
                     button-type="primary"
                     action-type="submit"
@@ -283,7 +283,7 @@ export default {
     @include font-size(heading-s);
 }
 
-.c-contact-preferences-btn {
+.c-contactPreferences-btn {
     width: 100%;
 
     @include media('>narrow') {
