@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.3.0
+------------------------------
+*November 25, 2021*
+
+### Added
+- Computed `capitaliseCardSizeProp` so we can capitialise the prop values passed in for our class names.
+- Tests to cover the computed `capitaliseCardSizeProp` method.
+
+### Changed
+- Tests to reflect renaming classes.
+
+
 v3.2.0
 ------------------------------
 *November 23, 2021*

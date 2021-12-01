@@ -55,9 +55,7 @@
 
 <script>
 import CardComponent from '@justeat/f-card';
-import '@justeat/f-card/dist/f-card.css';
 import FButton from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
 
 export default {
     name: 'CardWithContent',
