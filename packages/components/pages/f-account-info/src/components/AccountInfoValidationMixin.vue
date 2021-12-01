@@ -17,7 +17,7 @@ export default {
                 },
                 phoneNumber: {
                     required,
-                    phoneNumberValid: this.isValidPhoneNumber
+                    isValidPhoneNumber: this.isValidPhoneNumber
                 },
                 line1: {
                     required

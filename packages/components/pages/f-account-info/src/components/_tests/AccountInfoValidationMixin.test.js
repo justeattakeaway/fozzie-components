@@ -1,5 +1,14 @@
 import { shallowMount } from '@vue/test-utils';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import AccountInfoValidationMixin from '../AccountInfoValidationMixin.vue';
+import tenantConfigs from '../../tenants';
+
+import {
+    localVue,
+    i18n
+} from '../../../test-utils/setup';
+
+let baseComponent;
 
 describe('AccountInfoValidationMixin', () => {
     describe('methods', () => {
@@ -92,6 +101,63 @@ describe('AccountInfoValidationMixin', () => {
 
                 // Assert
                 expect(result).toBe(expectedResult);
+            });
+        });
+
+        describe('isFormInvalid', () => {
+            beforeEach(() => {
+                baseComponent = {
+                    render () {},
+                    data () {
+                        return {
+                            fields: {},
+                            tenantConfigs
+                        };
+                    },
+                    mixins: [AccountInfoValidationMixin, VueGlobalisationMixin]
+                };
+            });
+
+            it('should return false when all fields have valid inputs', async () => {
+                // Arrange
+                baseComponent.data = () => ({
+                    fields: {
+                        firstName: 'Roger',
+                        lastName: 'Black',
+                        phoneNumber: '1234567890',
+                        line1: 'Line 1',
+                        locality: 'My City',
+                        postcode: 'AR511AA'
+                    },
+                    tenantConfigs
+                });
+
+                // Act
+                const wrapper = shallowMount(baseComponent, {
+                    i18n,
+                    localVue,
+                    propsData: { locale: 'en-GB' }
+                });
+
+                const result = wrapper.vm.isFormInvalid();
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return true when fields are not provided values', async () => {
+                // Arrange
+                // Act
+                const wrapper = shallowMount(baseComponent, {
+                    i18n,
+                    localVue,
+                    propsData: { locale: 'en-GB' }
+                });
+
+                const result = wrapper.vm.isFormInvalid();
+
+                // Assert
+                expect(result).toBe(true);
             });
         });
     });
