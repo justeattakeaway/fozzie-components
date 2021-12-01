@@ -4,23 +4,28 @@
         <star-empty-icon
             v-if="noRatingsAvailable"
             aria-hidden="true"
+            data-test-id="ratings-star-empty"
             :class="[$style['c-restaurantCard-ratingStar']]" />
 
         <star-filled-icon
             v-else
             aria-hidden="true"
+            data-test-id="ratings-star-filled"
             :class="[$style['c-restaurantCard-ratingStar']]" />
 
         <!-- No ratings message -->
         <span
             v-if="noRatingsAvailable"
+            data-test-id="no-ratings-message"
             :class="[$style['c-restaurantCard-ratingNotRatedMsg']]">
             {{ notRatedMessage }}
         </span>
 
         <template v-else>
             <!-- Screenreader message (hidden) -->
-            <span class="is-visuallyHidden">
+            <span
+                data-test-id="ratings-summary-message"
+                class="is-visuallyHidden">
                 {{ accessibleMessage }}
             </span>
 
@@ -28,6 +33,7 @@
             <data
                 :class="[$style['c-restaurantCard-ratingMean']]"
                 :value="mean"
+                data-test-id="ratings-mean-value"
                 aria-hidden="true">
                 {{ meanFormatted }}
             </data>
@@ -49,12 +55,14 @@
                 &#40;
                 <data
                     v-if="!isOwnRating"
+                    data-test-id="rating-count"
                     :class="[$style['c-restaurantCard-ratingCount']]"
                     :value="count">
                     {{ count }}
                 </data>
                 <span
                     v-else
+                    data-test-id="rating-own-rating-message"
                     :class="[$style['c-restaurantCard-ratingCount']]">
                     {{ isOwnRatingMessage }}
                 </span>
