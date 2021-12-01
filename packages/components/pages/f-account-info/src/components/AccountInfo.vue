@@ -162,6 +162,9 @@ import DeleteAccount from './DeleteAccount.vue';
 
 import AccountInfoValidationsMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
+import {
+    EVENT_SPINNER_STOP_LOADING
+} from '../constants';
 
 export default {
     components: {
@@ -177,6 +180,21 @@ export default {
         VueGlobalisationMixin,
         AccountInfoValidationsMixin
     ],
+
+    props: {
+        authToken: {
+            type: String,
+            default: null
+        },
+        isAuthFinished: {
+            type: Boolean,
+            required: true
+        },
+        smartGatewayBaseUrl: {
+            type: String,
+            required: true
+        }
+    },
 
     data () {
         return {
@@ -197,8 +215,19 @@ export default {
         };
     },
 
+    watch: {
+        immediate: true,
+        isAuthFinished () {
+            if (this.isAuthFinished) {
+                this.initialise();
+            }
+        }
+    },
+
     mounted () {
-        this.initialise();
+        if (this.isAuthFinished) {
+            this.initialise();
+        }
     },
 
     methods: {
@@ -221,7 +250,9 @@ export default {
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
-                // TODO - Stop auth spinner to be added with next ticket
+                this.$nextTick(() => {
+                    this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
+                });
             }
         },
 

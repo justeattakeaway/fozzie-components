@@ -11,9 +11,6 @@
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-alert.svg)](https://badge.fury.io/js/%40justeat%2Ff-alert)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-alert/badge.svg)](https://coveralls.io/github/justeat/f-alert)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-alert/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-alert?targetFile=package.json)
-
 
 ## Usage
 
@@ -28,6 +25,12 @@ yarn add @justeat/f-alert
 ```sh
 npm install @justeat/f-alert
 ```
+
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-button | `yarn add @justeat/f-button` | `import '@justeat/f-button/dist/f-button.css';` |
 
 ### Vue Applications
 

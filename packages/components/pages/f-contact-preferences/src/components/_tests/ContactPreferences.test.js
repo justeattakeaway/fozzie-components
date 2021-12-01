@@ -19,6 +19,8 @@ let httpSpy;
 let sutMocks;
 let sutProps;
 let dataDefaults;
+let registerStoreModuleSpy;
+let initialiseSpy;
 
 const i18n = {
     locale: 'en-GB',
@@ -35,32 +37,48 @@ const storeActions = {
 
 const storeState = contactPreferencesViewModel;
 
+const createStore = ({ state, actions }) => new Vuex.Store({
+    modules: {
+        fContactPreferencesModule: {
+            state,
+            actions,
+            namespaced: true
+        }
+    }
+});
+
 const mountContactPreferences = ({
     actions = storeActions,
     state = storeState,
     mocks = sutMocks,
     propsData = sutProps,
-    data = dataDefaults
-} = {}) => shallowMount(ContactPreferences, {
-    i18n,
-    localVue,
-    propsData,
-    data,
-    store: new Vuex.Store({
-        modules: {
-            fContactPreferencesModule: {
-                state,
-                actions,
-                namespaced: true
-            }
-        }
-    }),
-    mocks
-});
+    data = dataDefaults,
+    storeOverride = null,
+    initialiseOverride = null
+} = {}) => {
+    const store = storeOverride || createStore({ state, actions });
+    store.registerModule = registerStoreModuleSpy;
+
+    if (initialiseOverride) {
+        ContactPreferences.methods.initialise = initialiseOverride;
+    }
+
+    const mock = shallowMount(ContactPreferences, {
+        i18n,
+        localVue,
+        propsData,
+        data,
+        store,
+        mocks
+    });
+
+    return mock;
+};
 
 describe('ContactPreferences Component', () => {
     beforeEach(() => {
         // Arrange & Act
+        registerStoreModuleSpy = jest.fn();
         dataDefaults = () => ({
             isFormDirty: false,
             shouldShowErrorPage: false
@@ -76,12 +94,24 @@ describe('ContactPreferences Component', () => {
         };
         sutProps = {
             authToken: token,
+            isAuthFinished: true,
             smartGatewayBaseUrl: baseUrl
         };
     });
 
     afterEach(() => {
+        initialiseSpy = null;
         jest.clearAllMocks();
+    });
+
+    describe('when creating the component', () => {
+        it('should register the Store Module', () => {
+            // Arrange & Act
+            wrapper = mountContactPreferences({ storeOverride: new Vuex.Store() });
+
+            // Assert
+            expect(registerStoreModuleSpy).toHaveBeenCalled();
+        });
     });
 
     describe('when mounting the component and calling `initialise`', () => {
@@ -142,6 +172,36 @@ describe('ContactPreferences Component', () => {
 
             // Assert
             expect(wrapper.vm.isFormDirty).toEqual(false);
+        });
+
+        it('should not call initialise method if the authorisation has not completed', () => {
+            // Arrange
+            initialiseSpy = jest.fn();
+            sutProps = { ...sutProps, isAuthFinished: false };
+
+            // Act
+            wrapper = mountContactPreferences({ initialiseOverride: initialiseSpy });
+
+            // Assert
+            expect(initialiseSpy).not.toHaveBeenCalled();
+        });
+
+        it('should only call initialise method once the authorisation has completed', async () => {
+            // Arrange
+            initialiseSpy = jest.fn();
+            sutProps = { ...sutProps, isAuthFinished: false };
+
+            // Act
+            wrapper = mountContactPreferences({ initialiseOverride: initialiseSpy });
+
+            // Assert
+            expect(initialiseSpy).not.toHaveBeenCalled();
+
+            // Act 2
+            await wrapper.setProps({ isAuthFinished: true });
+
+            // Assert 2
+            expect(initialiseSpy).toHaveBeenCalled();
         });
     });
 

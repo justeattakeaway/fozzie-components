@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.9.0
+------------------------------
+*November 29, 2021*
+
+### Added
+- Expose new isAuthFinished `required` property
+
+### Changed
+- Registered the Store Module on Create()
+- Initialise Page based on isAuthFinished
+
+
 v0.8.0
 ------------------------------
 *November 26, 2021*
@@ -20,6 +33,7 @@ v0.7.0
 
 ### Changed
 - Rename boolean fields to match naming conventions
+
 
 ### Added
 - Added Accessibility Tests.
