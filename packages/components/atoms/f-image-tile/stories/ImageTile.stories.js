@@ -33,6 +33,10 @@ export const ImageTileComponent = () => ({
 
         isLink: {
             default: boolean('Component acts as a link, rather than default toggle', false)
+        },
+
+        displayText: {
+            default: text('Component display text', 'Chicken')
         }
     },
     template: `<image-tile
@@ -41,6 +45,7 @@ export const ImageTileComponent = () => ({
                     :tileId='tileId'
                     :isSelected='isSelected'
                     :isLink='isLink'
+                    :displayText='displayText'
                 >
                 </image-tile>`
 });

@@ -12,7 +12,7 @@
             :tabindex="isLink ? false : -1"
         >
             <span class="is-visuallyHidden">
-                Chicken
+                {{ displayText }}
             </span>
         </a>
         <input
@@ -20,7 +20,6 @@
             type="checkbox"
             class="is-visuallyHidden"
             :class="$style['c-imageTile-checkbox']"
-            value="Chicken"
             @change="toggleFilter"
         >
         <label
@@ -36,7 +35,7 @@
                 alt=""
             >
             <span :aria-hidden="isLink ? true : false">
-                Chicken
+                {{ displayText }}
             </span>
         </label>
     </div>
@@ -63,6 +62,10 @@ export default {
         isLink: {
             type: Boolean,
             default: false
+        },
+        displayText: {
+            type: String,
+            default: 'Chicken'
         }
     },
     data () {
@@ -70,9 +73,37 @@ export default {
             isFilterSelected: false
         };
     },
+    watch: {
+        isSelected () {
+            this.isFilterSelected = this.isSelected;
+        }
+    },
+    mounted () {
+        this.isFilterSelected = this.isSelected;
+    },
     methods: {
+        /**
+         * Toggles the isFilterSelected data property
+         * when the checkbox is toggled.
+         *
+         */
         toggleFilter () {
             this.isFilterSelected = !this.isFilterSelected;
+
+            this.$nextTick(() => {
+                this.$emit('toggle', this.filterEmitObject(this.tileId));
+            });
+        },
+        /**
+         * Creates the object that is $emitted
+         * when the checkbox is toggled
+         *
+         * @param {tileId} string
+         */
+        filterEmitObject (tileId) {
+            return {
+                tileId
+            };
         }
     }
 };
