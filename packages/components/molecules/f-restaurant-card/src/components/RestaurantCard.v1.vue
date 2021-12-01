@@ -77,7 +77,9 @@
             <component
                 :is="errorBoundary"
                 tier="3">
-                <restaurant-rating v-bind="rating" />
+                <restaurant-rating
+                    data-test-id="restaurant-rating"
+                    v-bind="rating" />
             </component>
             <!-- END ERROR BOUNDARY -->
 

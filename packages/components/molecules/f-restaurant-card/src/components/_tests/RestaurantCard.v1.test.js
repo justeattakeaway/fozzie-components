@@ -172,8 +172,41 @@ describe('RestaurantCard.v1', () => {
         });
     });
 
-    describe('Restaurant Ratings', () => {
-        it.todo('renders subcomponent');
+    describe('Restaurant Rating', () => {
+        it('renders rating component', () => {
+            // arrange
+            const propsData = {
+                rating: {
+                    isOwnRating: false,
+                    mean: 5.45,
+                    count: 1400,
+                    accessibleMessage: 'rated 5 stars out of 6',
+                    notRatedMessage: 'No ratings yet',
+                    isOwnRatingMessage: 'You'
+                }
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, {
+                propsData
+            });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(true);
+        });
+
+        it('renders rating component when state missing', () => {
+            // arrange
+            const propsData = {};
+
+            // act
+            const wrapper = mount(RestaurantCardV1, {
+                propsData
+            });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(true);
+        });
     });
 
     describe('Delivery Time Meta', () => {
