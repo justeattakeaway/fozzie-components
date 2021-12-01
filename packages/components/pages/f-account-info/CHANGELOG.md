@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.4.0
+v0.6.0
 ------------------------------
-*November 25, 2021*
+*December 01, 2021*
 
 ### Added
 - Validation rules for fields
