@@ -23,6 +23,8 @@
 
         <template v-else>
             <!-- Screenreader message (hidden) -->
+            <!-- NOTE: The accessibility requires for both this and the restaurant card as a whole
+                 are still being discovered. Therefore this is subject to change -->
             <span
                 data-test-id="ratings-summary-message"
                 class="is-visuallyHidden">
