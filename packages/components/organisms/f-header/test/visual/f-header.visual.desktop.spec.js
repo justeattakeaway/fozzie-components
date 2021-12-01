@@ -23,8 +23,9 @@ describe('Shared - f-header component tests', () => {
             header.withQuery('&knob-Show offers link', 'true');
             header.withQuery('&knob-Show delivery enquiry', 'true');
 
-            if (!isLoggedIn) {
-                header.withQuery('&knob-Is logged in?', isLoggedIn);
+            header.withQuery('&knob-Is logged in?', isLoggedIn);
+
+            if (isLoggedIn) {
                 header.withQuery('&knob-User info (if logged in)', JSON.stringify(userInfo));
             }
 
