@@ -8,7 +8,7 @@ const messages = {
     textLine3: 'Para más detalles sobre las cookies y tecnologías que usamos, visite nuestro ',
     textLine4: '. El uso de este banner provocará que se instale una cookie en su dispositivo para recordar sus preferencias.',
     cookiePolicyLinkText: 'aviso sobre cookies',
-    cookiePolicyLinkUrl: 'https://www.just-eat.es/cookies-policy',
+    cookiePolicyLinkUrl: 'https://www.just-eat.es/politica-de-cookies',
     reopenCookieBannerLinkText:  'Administrar mis preferencias de cookies'
 };
 
