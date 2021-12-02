@@ -2213,10 +2213,10 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
 
-"@justeat/f-form-field@4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.3.0.tgz#57399b79f3755599f34bb62e54f3ff6cd48e0277"
-  integrity sha512-g2pCHAtiBpVW7ITQNz0KdPkWA4gJ2QRg0QE/FVuXYf5PPH5GMrq2Uw9vYoB4EJd9MOcHhgmll65eel7rn+VYvg==
+"@justeat/f-form-field@4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.4.0.tgz#841b8d22cd778f4c86d4ca0225f830b6149b8be5"
+  integrity sha512-R1a3g+QAE5WzjZRYpmAakMG0wj/mK2qg53IICa9uf53GYoJjMNB38273NUK38tXnBz/Rh8op89Vl060FzC7OKw==
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"

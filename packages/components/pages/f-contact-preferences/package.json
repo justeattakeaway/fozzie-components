@@ -43,7 +43,7 @@
   "dependencies": {
     "@justeat/f-services": "1.7.0",
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-form-field": "4.3.0"
+    "@justeat/f-form-field": "4.4.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",

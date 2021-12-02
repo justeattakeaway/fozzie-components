@@ -18,6 +18,7 @@
                     <fieldset
                         :class="$style['c-contactPreferences-fieldset']">
                         <f-form-field
+                            :class="$style['c-contactPreferences-form-field']"
                             input-type="checkbox"
                             :label-text=" $t(`${key}.email`)"
                             :label-description="getEmailDescription(key)"
@@ -28,6 +29,7 @@
                         />
 
                         <f-form-field
+                            :class="$style['c-contactPreferences-form-field']"
                             input-type="checkbox"
                             :label-text=" $t(`${key}.sms`)"
                             :label-description="getSmsDescription(key)"
@@ -267,6 +269,15 @@ export default {
 </script>
 
 <style lang="scss" module>
+
+.c-contactPreferences-form-field {
+    margin-top: 0 !important;
+    & label,
+    & label span {
+        margin-bottom: 0 !important;
+    }
+}
+
 .c-contactPreferences-fieldset {
     display: flex;
     flex-flow: column;
