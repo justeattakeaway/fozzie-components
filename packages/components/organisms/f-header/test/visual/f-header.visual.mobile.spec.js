@@ -17,13 +17,14 @@ describe('Shared - f-header component tests', () => {
     ])
         .it('should display component', (tenant, isLoggedIn) => {
             // Arrange
-            header = new Header();
-            header.withQuery('&knob-Locale', tenant);
-            // Both props below should only show for UK
-            header.withQuery('&knob-Show offers link', 'true');
-            header.withQuery('&knob-Show delivery enquiry', 'true');
+            header = new Header()
+                .withQuery('&knob-Locale', tenant)
 
-            header.withQuery('&knob-Is logged in?', isLoggedIn);
+                // Both props below should only show for UK
+                .withQuery('&knob-Show offers link', 'true')
+                .withQuery('&knob-Show delivery enquiry', 'true')
+
+                .withQuery('&knob-Is logged in?', isLoggedIn);
 
             if (isLoggedIn) {
                 header.withQuery('&knob-User info (if logged in)', JSON.stringify(userInfo));
@@ -40,9 +41,9 @@ describe('Shared - f-header component tests', () => {
     forEach(['white', 'highlight', 'transparent'])
         .it('should display the "%s" header theme', theme => {
             // Arrange
-            header = new Header();
-            header.withQuery('&knob-Locale', 'en-GB');
-            header.withQuery('&knob-Header theme', theme);
+            header = new Header()
+                .withQuery('&knob-Locale', 'en-GB')
+                .withQuery('&knob-Header theme', theme);
 
             // Act
             header.load();
@@ -52,8 +53,9 @@ describe('Shared - f-header component tests', () => {
         });
 
     it('should display all avalible countries', () => {
-        header = new Header();
-        header.withQuery('&knob-Locale', 'en-GB');
+        // Arrange
+        header = new Header()
+            .withQuery('&knob-Locale', 'en-GB');
 
         // Act
         header.load();
@@ -66,9 +68,10 @@ describe('Shared - f-header component tests', () => {
 
     forEach(['Show login/user info link', 'Show help link', 'Show country selector'])
         .it('should not display "%s" ', knobName => {
-            header = new Header();
-            header.withQuery('&knob-Locale', 'en-GB');
-            header.withQuery(`&knob-${knobName}`, 'false');
+            // Arrange
+            header = new Header()
+                .withQuery('&knob-Locale', 'en-GB')
+                .withQuery(`&knob-${knobName}`, 'false');
 
             // Act
             header.load();
@@ -77,4 +80,20 @@ describe('Shared - f-header component tests', () => {
             // Assert
             browser.percyScreenshot(`f-header - ${knobName} - False`, 'mobile');
         });
+
+    it('should display any custom links', () => {
+        // Arrange
+        header = new Header()
+            .withQuery('&knob-Locale', 'en-GB')
+            .withQuery('&knob-Show offers link', false)
+            .withQuery('&knob-Show delivery enquiry', false)
+            .withQuery('&knob-Show custom nav links?', true);
+
+        // Act
+        header.load();
+        header.openMobileNavigationBar();
+
+        // Assert
+        browser.percyScreenshot('f-header - with custom nav links', 'mobile');
+    });
 });
