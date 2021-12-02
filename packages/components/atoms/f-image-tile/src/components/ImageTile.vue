@@ -10,6 +10,7 @@
             :href="isLink ? href : '#'"
             :aria-hidden="isLink ? false : true"
             :tabindex="isLink ? false : -1"
+            data-test-id="image-tile-link"
         >
             <span class="is-visuallyHidden">
                 {{ displayText }}
