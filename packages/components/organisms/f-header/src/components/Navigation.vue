@@ -82,6 +82,19 @@
                 :class="$style['c-nav-list']"
                 data-test-id="nav-list">
                 <li
+                    v-for="(customNavLink, index) in customNavLinks"
+                    :key="`custom-nav-link-${index}`"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        :tabindex="tabIndex"
+                        :text="customNavLink.text"
+                        :href="customNavLink.url"
+                        :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme" />
+                </li>
+
+                <li
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         v-if="showOffersLink"
@@ -331,6 +344,11 @@ export default {
         showCountrySelector: {
             type: Boolean,
             default: false
+        },
+
+        customNavLinks: {
+            type: Array,
+            default: () => []
         }
     },
 
@@ -402,7 +420,8 @@ export default {
             return this.showOffersLink ||
                 this.showHelpLink ||
                 this.showDeliveryEnquiry ||
-                this.showLoginInfo;
+                this.showLoginInfo ||
+                this.customNavLinks.length > 0;
         },
 
         isCountrySelectorClosedOnMobileView () {

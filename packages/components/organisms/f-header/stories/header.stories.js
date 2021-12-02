@@ -4,7 +4,7 @@ import {
 import { withA11y } from '@storybook/addon-a11y';
 import VueHeader from '../src/components/Header.vue';
 
-import { userInfo } from '../test-utils/helpers/objects';
+import { customNavLinks, userInfo } from '../test-utils/helpers/objects';
 
 export default {
     title: 'Components/Organisms',
@@ -49,6 +49,12 @@ export const HeaderComponent = () => ({
         },
         showSkipLink: {
             default: boolean('Show skip link', true)
+        },
+        showCustomNavLinks: {
+            default: boolean('Show custom nav links?', false)
+        },
+        customNavLinks: {
+            default: object('Custom nav links', customNavLinks)
         }
     },
     parameters: {
@@ -65,6 +71,7 @@ export const HeaderComponent = () => ({
             :show-delivery-enquiry="showDeliveryEnquiry"
             :show-login-info="showLoginInfo"
             :show-country-selector="showCountrySelector"
+            :custom-nav-links="showCustomNavLinks ? customNavLinks : []"
             :key="locale"
             :show-skip-link="showSkipLink" />`
 });
