@@ -174,7 +174,7 @@ export default {
         getEmailDescription (key) {
             if (!this.$te(`${key}.emailDescription`)) return undefined;
 
-            return this.$t(`${key}.emailDescription`);
+            return `(${this.$t(`${key}.emailDescription`)})`;
         },
 
         /**
@@ -273,10 +273,6 @@ export default {
     border: none;
     padding: 0;
     margin: spacing(x2) 0;
-}
-
-.c-contactPreferences-labelText--disabled {
-    color: $color-content-disabled;
 }
 
 .c-contactPreferences-subtitle {
