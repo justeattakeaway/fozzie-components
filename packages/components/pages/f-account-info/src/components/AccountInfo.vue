@@ -233,10 +233,12 @@ export default {
     },
 
     watch: {
-        immediate: true,
-        isAuthFinished () {
-            if (this.isAuthFinished) {
-                this.initialise();
+        isAuthFinished: {
+            immediate: true,
+            handler (value) {
+                if (value) {
+                    this.initialise();
+                }
             }
         }
     },
