@@ -13,7 +13,7 @@ v0.9.0
 
 ### Changed
 - Updated storybook for restaurant card
-- Renamed RestaurantBadge and RestaurantBages to RestaurantTag and RestaurantTags to align with language across the buisiness
+- Renamed RestaurantBadge and RestaurantBadges to RestaurantTag and RestaurantTags to align with language across the buisiness
 
 v0.8.0
 ------------------------------

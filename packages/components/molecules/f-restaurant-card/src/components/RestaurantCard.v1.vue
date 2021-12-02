@@ -243,10 +243,10 @@ export default {
     },
     computed: {
         hasContentTags () {
-            return this.tags?.contentTags?.length;
+            return !!this.tags?.contentTags?.length;
         },
         hasImageTags () {
-            return this.tags?.imageTags?.length;
+            return !!this.tags?.imageTags?.length;
         },
         displayDeliveryTimeMeta () {
             return this.deliveryTimeData.eta ||
