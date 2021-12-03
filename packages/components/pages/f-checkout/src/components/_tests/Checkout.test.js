@@ -3271,7 +3271,7 @@ describe('Checkout', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         checkoutErrorMessage: {
-                            code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
+                            messageKey: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
                             errorType: ERROR_TYPES.dialog
                         }
                     }),
@@ -3308,7 +3308,7 @@ describe('Checkout', () => {
 
         describe('handleDialogCreation ::', () => {
             const event = {
-                code: DUPLICATE_ORDER,
+                messageKey: DUPLICATE_ORDER,
                 isDuplicateOrderError: true
             };
 

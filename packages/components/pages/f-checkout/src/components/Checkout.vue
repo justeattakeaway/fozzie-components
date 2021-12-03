@@ -659,7 +659,6 @@ export default {
                 }
             } catch (error) {
                 this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
-                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
             }
         },
 
@@ -821,7 +820,7 @@ export default {
          * Forcing the component to re-render ensures that the correct time is selected and displayed.
          */
         async reloadAvailableFulfilmentTimesIfOutdated () {
-            if (this.checkoutErrorMessage?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+            if (this.checkoutErrorMessage?.messageKey === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
                 await this.loadAvailableFulfilment();
                 this.availableFulfilmentTimesKey++;
             }

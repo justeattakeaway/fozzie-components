@@ -45,8 +45,7 @@ const getIssueByCode = code => {
     if (issue) {
         return {
             ...issue,
-            messageKey: code,
-            errorType: ERROR_TYPES.dialog
+            messageKey: code
         };
     }
 
