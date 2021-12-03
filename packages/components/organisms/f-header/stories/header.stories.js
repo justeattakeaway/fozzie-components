@@ -42,17 +42,16 @@ HeaderComponent.args = {
     userInfoProp: userInfo,
     customNavLinks: [],
     showCountrySelector: true,
+    showHelpLink: true,
+    showSkipLink: true,
     showOffersLink: false,
     showDeliveryEnquiry: false,
-    showHelpLink: true,
-    logoLinkDisabled: false,
-    showSkipLink: true
+    logoLinkDisabled: false
 };
 
 HeaderComponent.argTypes = {
     locale: {
         control: { type: 'select' },
-        defaultValue: 'en-GB',
         description: 'Select a tenant',
         options: ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']
     },
@@ -64,13 +63,12 @@ HeaderComponent.argTypes = {
     },
 
     showLoginInfo: {
-        control: { type: 'boolean' },
         description: 'For unauthenticated users, shows the "Login" link. For authenticated users, shows their name and contains links to the account pages.'
     },
 
     userInfoProp: {
-        description: 'Configure the user details; set to false to simulate a logged out user',
-        control: { type: 'object' }
+        control: { type: 'object' },
+        description: 'Configure the user details; set to `false` (in RAW mode) to simulate a logged out user'
     },
 
     // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
@@ -95,32 +93,26 @@ HeaderComponent.argTypes = {
     },
 
     showCountrySelector: {
-        control: { type: 'boolean' },
         description: 'Shows the country selector which contains links to our sites in other countries.'
     },
 
+    showHelpLink: {
+        description: 'Shows the link to the "Help" page'
+    },
+
+    showSkipLink: {
+        description: 'Includes the "Skip to main content" link'
+    },
+
     showOffersLink: {
-        control: { type: 'boolean' },
         description: 'Shows the link to the "For You" page'
     },
 
     showDeliveryEnquiry: {
-        control: { type: 'boolean' },
         description: 'Shows the "Deliver with Just Eat" link'
     },
 
-    showHelpLink: {
-        control: { type: 'boolean' },
-        description: 'Shows the link to the "Help" page'
-    },
-
     logoLinkDisabled: {
-        control: { type: 'boolean' },
         description: 'Prevents the header logo from also being a link'
-    },
-
-    showSkipLink: {
-        control: { type: 'boolean' },
-        description: 'Includes the "Skip to main content" link'
     }
 };
