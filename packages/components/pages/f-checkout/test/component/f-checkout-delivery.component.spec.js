@@ -6,7 +6,7 @@ let checkout;
 describe('f-checkout "delivery" component tests', () => {
     describe('uk tenant', () => {
         beforeEach(() => {
-            checkout = new Checkout();
+            checkout = new Checkout(Checkout.mode.guestUser);
             checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true);
@@ -26,7 +26,7 @@ describe('f-checkout "delivery" component tests', () => {
     describe('au tenant', () => {
         describe('and age verification is not required', () => {
             beforeEach(() => {
-                checkout = new Checkout();
+                checkout = new Checkout(Checkout.mode.guestUser);
                 checkout.withQuery('&knob-Service Type', 'delivery')
                     .withQuery('&knob-Is User Logged In', false)
                     .withQuery('&knob-Is ASAP available', true)
@@ -51,7 +51,7 @@ describe('f-checkout "delivery" component tests', () => {
         describe('and age verification is required', () => {
             beforeEach(() => {
                 // Arrange
-                checkout = new Checkout();
+                checkout = new Checkout(Checkout.mode.guestUser);
                 const checkoutInfo = {
                     serviceType: 'delivery',
                     isAuthenticated: true,

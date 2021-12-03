@@ -6,7 +6,7 @@ let checkout;
 
 describe('f-checkout "guest" component tests', () => {
     beforeEach(() => {
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Is ASAP available', true);

@@ -20,6 +20,9 @@ const buildUrl = (componentType, componentName, path) => {
         case 'template':
             url += 'templates--';
             break;
+        case 'page-f-checkout': // TODO DJB YUKKY
+            url += 'pages-';
+            break;
         case 'page':
             url += 'pages--';
             break;

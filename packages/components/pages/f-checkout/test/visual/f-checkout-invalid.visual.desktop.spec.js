@@ -5,7 +5,7 @@ let checkout;
 describe('f-checkout - Invalid - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkout.withQuery('&knob-Service Type', 'invalid-url');
 
         // Act

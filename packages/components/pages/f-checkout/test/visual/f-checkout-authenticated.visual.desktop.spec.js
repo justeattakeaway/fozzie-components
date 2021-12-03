@@ -6,7 +6,7 @@ let checkoutInfo;
 describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -35,7 +35,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Something went wrong" error.', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -58,7 +58,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -95,7 +95,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -119,7 +119,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -142,7 +142,7 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Deskt
 describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -203,7 +203,7 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -227,7 +227,7 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -250,7 +250,7 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop
 describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'dinein',
             isAuthenticated: true,
@@ -296,7 +296,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'dinein',
             isAuthenticated: true,
@@ -320,7 +320,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -346,7 +346,7 @@ describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Vi
 
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,

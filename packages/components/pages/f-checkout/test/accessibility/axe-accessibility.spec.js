@@ -10,7 +10,7 @@ let checkoutInfo;
 describe('Accessibility tests', () => {
     it('a11y - should test f-checkout component (delivery) WCAG compliance', () => {
         // Act
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.fullUser);
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', true);
 
@@ -23,7 +23,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-checkout component (collection) WCAG compliance', () => {
         // Act
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.fullUser);
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true);
 
@@ -36,7 +36,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-checkout component (guest) WCAG compliance', () => {
         // Act
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.fullUser);
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', false);
 
@@ -49,7 +49,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-checkout component (error) WCAG compliance', () => {
         // Act
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkout.withQuery('&knob-Service Type', 'Invalid URL')
             .withQuery('&knob-Is User Logged In', false);
 
@@ -72,8 +72,9 @@ describe('Accessibility tests', () => {
         ['dinein', 'time-unavailable']
     ])
     .it('a11y - Authenticated - "%s" - should have a correct tab order in patch checkout error - "%s"', (serviceType, patchError) => {
+
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.fullUser);
         checkout.withQuery('&knob-Service Type', serviceType)
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Patch Checkout Errors', patchError);
@@ -95,7 +96,7 @@ describe('Accessibility tests', () => {
     ])
     .it('a11y - Authenticated - "%s" - should have a correct tab order in duplicate order error', serviceType => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.fullUser);
         checkout.withQuery('&knob-Service Type', serviceType)
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Place Order Errors', 'duplicate');
@@ -118,7 +119,7 @@ describe('Accessibility tests', () => {
     ])
     .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: false
@@ -153,7 +154,7 @@ describe('Accessibility tests', () => {
     ])
     .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: false
@@ -191,7 +192,7 @@ describe('Accessibility tests', () => {
     ])
     .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'dinein',
             isAuthenticated: false
@@ -222,7 +223,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - Guest - Collection - should have a correct tab order in duplicate order error', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: false
@@ -252,7 +253,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - Guest - Delivery - should have a correct tab order in duplicate order error', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: false
@@ -285,7 +286,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - Guest - Dine In - should have a correct tab order in duplicate order error', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'dinein',
             isAuthenticated: false

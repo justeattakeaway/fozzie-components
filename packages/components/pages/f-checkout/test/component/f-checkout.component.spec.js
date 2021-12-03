@@ -7,7 +7,7 @@ let checkoutInfo;
 
 describe('f-checkout component tests', () => {
     beforeEach(() => {
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true
@@ -69,40 +69,44 @@ describe('f-checkout component tests', () => {
     });
 
     it('should close the checkout error when "Retry" is clicked', () => {
+        const checkoutLoggedIn = new Checkout(Checkout.mode.fullUser);
+
         // Arrange
-        checkout.withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
+        checkoutLoggedIn.withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
 
         // Act
-        checkout.load();
-        checkout.goToPayment();
-        checkout.clickRetryButton();
+        checkoutLoggedIn.load();
+        checkoutLoggedIn.goToPayment();
+        checkoutLoggedIn.clickRetryButton();
         browser.pause(2000);
 
         // Assert
-        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+        expect(checkoutLoggedIn.isCheckoutErrorMessageDisplayed()).toBe(false);
     });
 
     describe('when the "Duplicate Order Warning" modal is displayed', () => {
+        const checkoutFullUser = new Checkout(Checkout.mode.fullUser);
+
         beforeEach(() => {
             // Arrange
-            checkout.withQuery('&knob-Place Order Errors', 'duplicate');
+            checkoutFullUser.withQuery('&knob-Place Order Errors', 'duplicate');
 
             // Act
-            checkout.load();
-            checkout.goToPayment();
+            checkoutFullUser.load();
+            checkoutFullUser.goToPayment();
         });
 
         it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
             // Act
-            checkout.waitForComponent();
-            checkout.clickRetryButton();
+            checkoutFullUser.waitForComponent();
+            checkoutFullUser.clickRetryButton();
 
             // Assert
-            expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
-            expect(checkout.isCheckoutPageDisplayed()).toBe(true);
+            expect(checkoutFullUser.isCheckoutErrorMessageDisplayed()).toBe(false);
+            expect(checkoutFullUser.isCheckoutPageDisplayed()).toBe(true);
         });
 
-        it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
+        it.only('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
             // Act
             checkout.waitForComponent();
             checkout.clickDupOrderGoToHistoryButton();

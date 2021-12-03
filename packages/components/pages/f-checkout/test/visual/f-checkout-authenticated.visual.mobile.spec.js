@@ -6,7 +6,7 @@ let checkoutInfo;
 describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -36,7 +36,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Something went wrong" error.', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -58,7 +58,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -79,7 +79,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Additional Items Required" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -100,7 +100,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        
+
         const customerInfo = {
             mobileNumber: '123'
         };
@@ -116,7 +116,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -140,7 +140,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'collection',
             isAuthenticated: true,
@@ -163,7 +163,7 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Mobil
 describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -224,7 +224,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -246,7 +246,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -268,7 +268,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the "Additional Items Required" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -292,7 +292,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -315,7 +315,7 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Mobile 
 describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'dinein',
             isAuthenticated: true,
@@ -361,7 +361,7 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'dinein',
             isAuthenticated: true,

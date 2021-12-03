@@ -7,7 +7,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display the "Get Checkout" error page', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,
@@ -28,7 +28,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display the "Get Checkout 403" error page', () => {
         // Arrange
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkoutInfo = {
             serviceType: 'delivery',
             isAuthenticated: true,

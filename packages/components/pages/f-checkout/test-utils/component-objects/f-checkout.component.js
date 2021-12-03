@@ -1,4 +1,4 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('../../../../../services/f-wdio-utils/src/page.object');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
@@ -29,8 +29,30 @@ const {
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
-    constructor () {
-        super('page', 'checkout-component');
+    /**
+     * @description Checkout loads in either Guest mode or Full User mode.
+     * @constant
+     * @type {{guestUser: string, fullUser: string}}
+     */
+    static mode = {
+        guestUser: 'guestUser',
+        fullUser: 'fullUser'
+    }
+
+    constructor (mode) {
+        switch (mode) {
+            case Checkout.mode.guestUser:
+                super('page-f-checkout', 'checkout--guest-checkout-component');
+                break;
+            case Checkout.mode.fullUser:
+                super('page-f-checkout', 'checkout--logged-in-checkout');
+                break;
+            default:
+                throw new Error(`Invalid value for mode.  Received ${mode}, but valid values are ${JSON.stringify(mode)}`);
+        }
+
+        // TODO DJB Delete commented out
+        // super('page', 'checkout--guest-checkout-component');
     }
 
     /* eslint-disable class-methods-use-this */
@@ -133,6 +155,7 @@ module.exports = class Checkout extends Page {
             get error () { return $(FIELDS.addressAdministrativeArea.error); }
         }
     }
+
     /**
      * @description
      * Sets the data for the checkout component.
@@ -142,7 +165,6 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isAuthenticated The checkout authentication
      * @param {String} checkout.isValid The checkout validation
      */
-
     load () {
         super.load(this.component);
     }

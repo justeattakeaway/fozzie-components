@@ -4,7 +4,7 @@ let checkout;
 
 describe('f-checkout "dinein" component tests', () => {
     beforeEach(() => {
-        checkout = new Checkout();
+        checkout = new Checkout(Checkout.mode.guestUser);
         checkout.withQuery('&knob-Service Type', 'dinein')
             .withQuery('&knob-Is User Logged In', false);
 
