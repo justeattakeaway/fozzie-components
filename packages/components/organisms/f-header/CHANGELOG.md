@@ -6,11 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.3.0
 ------------------------------
-*December 1, 2021*
+*December 6, 2021*
 
 ### Added
 - Support for custom links in the nav via `customNavLinks` prop.
-- Relevant knobs to component story.
+- Visual tests (currently skipped because of [storybook issue](https://github.com/storybookjs/storybook/issues/14420)).
+
+### Changed
+- Story now uses controls instead of knobs.
 
 
 v7.2.0
