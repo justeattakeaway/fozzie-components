@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { CHECKOUT_ERROR_FORM_TYPE, ERROR_TYPES } from '../constants';
+import { CHECKOUT_ERROR_FORM_TYPE, DUPLICATE_ORDER, ERROR_TYPES } from '../constants';
 
 const formatUpdateCheckoutErrorCode = error => {
     const errorList = error?.response?.data?.errors ?? [];
@@ -23,8 +23,8 @@ class UpdateCheckoutError extends Error {
         super(error.message);
         this.messageKey = 'errorMessages.genericServerError';
         this.eventMessage = 'CheckoutUpdateFailure';
-        this.errorCode = formatUpdateCheckoutErrorCode(error);
         this.errorType = ERROR_TYPES.alert;
+        this.errorCode = formatUpdateCheckoutErrorCode(error);
         this.traceId = error.response && error.response.data ? error.response.data.traceId : null;
     }
 }
@@ -32,9 +32,8 @@ class UpdateCheckoutError extends Error {
 class UpdateCheckoutAccessForbiddenError extends UpdateCheckoutError {
     constructor (error) {
         super(error);
-        this.messageKey = 'errorMessages.accessForbiddenError.description';
+        this.messageKey = CHECKOUT_ERROR_FORM_TYPE.accessForbidden;
         this.eventMessage = 'CheckoutUpdateForbidden';
-        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.accessForbidden;
         this.errorType = ERROR_TYPES.errorPage;
     }
 }
@@ -43,56 +42,60 @@ class PlaceOrderError extends Error {
     constructor (message, errorCode) {
         super(message);
         this.messageKey = 'errorMessages.genericServerError';
-        this.eventMessage = errorCode === 'DuplicateOrder'
+        this.eventMessage = errorCode === DUPLICATE_ORDER
             ? 'CheckoutPlaceOrderDuplicateOrder'
             : 'CheckoutPlaceOrderFailure';
-        this.errorCode = errorCode;
-        this.errorType = errorCode === 'DuplicateOrder'
+        this.errorType = errorCode === DUPLICATE_ORDER
             ? ERROR_TYPES.dialog
             : ERROR_TYPES.alert;
+        this.errorCode = errorCode;
     }
 }
 
 class GetCheckoutError extends Error {
     constructor (message, errorCode) {
         super(message);
-        this.messageKey = 'errorMessages.pageLoad.description';
+        this.messageKey = CHECKOUT_ERROR_FORM_TYPE.default;
         this.eventMessage = 'CheckoutGetFailure';
-        this.errorCode = errorCode;
         this.errorType = ERROR_TYPES.errorPage;
-        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.default;
+        this.errorCode = errorCode;
     }
 }
 
 class GetCheckoutAccessForbiddenError extends GetCheckoutError {
     constructor (message) {
         super(message, 403);
-        this.messageKey = 'errorMessages.accessForbiddenError.description';
+        this.messageKey = CHECKOUT_ERROR_FORM_TYPE.accessForbidden;
         this.eventMessage = 'CheckoutGetForbidden';
-        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.accessForbidden;
         this.errorType = ERROR_TYPES.errorPage;
     }
 }
 
+class AvailableFulfilmentEmptyError extends Error {
+    constructor (message) {
+        super(message);
+        this.messageKey = CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable;
+        this.eventMessage = 'CheckoutAvailableFulfilmentEmpty';
+        this.errorType = ERROR_TYPES.errorPage;
+    }
+}
 class AvailableFulfilmentGetError extends Error {
     constructor (message, errorCode) {
         super(message);
-        this.messageKey = 'errorMessages.pageLoad.description';
+        this.messageKey = CHECKOUT_ERROR_FORM_TYPE.default;
         this.eventMessage = 'CheckoutAvailableFulfilmentGetFailure';
-        this.errorCode = errorCode;
         this.errorType = ERROR_TYPES.errorPage;
-        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.default;
+        this.errorCode = errorCode;
     }
 }
 
 class GetBasketError extends Error {
     constructor (message, errorCode) {
         super(message);
-        this.messageKey = 'errorMessages.pageLoad.description';
+        this.messageKey = CHECKOUT_ERROR_FORM_TYPE.default;
         this.eventMessage = 'CheckoutBasketGetFailure';
-        this.errorCode = errorCode;
         this.errorType = ERROR_TYPES.errorPage;
-        this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.default;
+        this.errorCode = errorCode;
     }
 }
 
@@ -104,5 +107,6 @@ export default {
     GetCheckoutError,
     GetCheckoutAccessForbiddenError,
     AvailableFulfilmentGetError,
+    AvailableFulfilmentEmptyError,
     GetBasketError
 };

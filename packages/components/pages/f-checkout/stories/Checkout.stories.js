@@ -36,6 +36,7 @@ const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from
 const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
 const invalidProductsError = 'Basket contains invalid products';
 const offlineProductsError = 'Basket contains offline products';
+const createGuestError = 'Create Guest Error';
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
@@ -52,6 +53,7 @@ const geolocationRequired = 'Geolocation required';
 const geolocationRequiredIssue = 'geolocation-required';
 const invalidProductsErrorCode = 'invalid-products';
 const offlineProductsErrorCode = 'offline-products';
+const createGuestErrorCode = 'error';
 const serverTimeout = 'Server timeout';
 const serverTimeoutIssue = 'timeout';
 const duplicateIssue = 'duplicate';
@@ -71,6 +73,11 @@ const patchCheckoutErrorOptions = {
 const restrictionOptions = {
     None: null,
     [ageRestriction]: ageRestrictionIssue
+};
+
+const createGuestErrorOptions = {
+    None: null,
+    [createGuestError]: createGuestErrorCode
 };
 
 const getCheckoutErrorOptions = {
@@ -106,7 +113,6 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            createGuestUrl: mockedRequests.createGuest.url,
             getAddressUrl: mockedRequests.getAddress.url,
             loginUrl: '/login',
             paymentPageUrlPrefix,
@@ -139,6 +145,10 @@ export const CheckoutComponent = () => ({
             default: select('Get Checkout Errors', getCheckoutErrorOptions, null)
         },
 
+        createGuestError: {
+            default: select('Create Guest Errors', createGuestErrorOptions, null)
+        },
+
         getBasketError: {
             default: select('Get Basket Errors', getBasketErrorOptions, null)
         },
@@ -157,6 +167,10 @@ export const CheckoutComponent = () => ({
     },
 
     computed: {
+        createGuestUrl () {
+            return this.createGuestError ? mockedRequests.createGuestError.url : mockedRequests.createGuest.url;
+        },
+
         getCheckoutUrl () {
             if (this.fulfilmentTimeSelection) {
                 return `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;

@@ -5,7 +5,7 @@ import ErrorDialog from '../ErrorDialog.vue';
 import {
     i18n, defaultCheckoutState, createStore
 } from './helpers/setup';
-import { ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE, ERROR_TYPES } from '../../constants';
+import { DUPLICATE_ORDER, ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE, ERROR_TYPES } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -15,7 +15,7 @@ localVue.use(Vuex);
 jest.mock('../../services/analytics');
 
 const checkoutDialogMessage = {
-    code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
+    messageKey: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     errorType: ERROR_TYPES.dialog
 };
 
@@ -35,8 +35,6 @@ describe('ErrorDialog', () => {
         code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
     };
 
-    const duplicateOrderCode = 'DuplicateOrder';
-
     afterEach(() => {
         jest.clearAllMocks();
     });
@@ -55,8 +53,8 @@ describe('ErrorDialog', () => {
     });
 
     describe('computed ::', () => {
-        describe('errorCode ::', () => {
-            it('should return `code` of `message` when `message` is provided', () => {
+        describe('messageKey ::', () => {
+            it('should return `messageKey` of `checkoutErrorMessage` when `checkoutErrorMessage` is provided', () => {
                 // Arrange && Act
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
@@ -69,7 +67,7 @@ describe('ErrorDialog', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.errorCode).toEqual(checkoutDialogMessage.code);
+                expect(wrapper.vm.messageKey).toEqual(checkoutDialogMessage.messageKey);
             });
 
             it('should return `null` if  no `message` is provided', () => {
@@ -82,7 +80,7 @@ describe('ErrorDialog', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.errorCode).toBeUndefined();
+                expect(wrapper.vm.messageKey).toBeUndefined();
             });
         });
 
@@ -94,7 +92,7 @@ describe('ErrorDialog', () => {
                         ...defaultCheckoutState,
                         checkoutErrorMessage: {
                             ...checkoutDialogMessage,
-                            code: duplicateOrderCode
+                            messageKey: DUPLICATE_ORDER
                         }
                     }),
                     i18n,
@@ -333,7 +331,7 @@ describe('ErrorDialog', () => {
                         ...defaultCheckoutState,
                         checkoutErrorMessage: {
                             ...checkoutDialogMessage,
-                            code: duplicateOrderCode
+                            code: DUPLICATE_ORDER
                         }
                     }),
                     i18n,
@@ -413,7 +411,7 @@ describe('ErrorDialog', () => {
                     ...defaultCheckoutState,
                     checkoutErrorMessage: {
                         ...checkoutDialogMessage,
-                        code: duplicateOrderCode
+                        messageKey: DUPLICATE_ORDER
                     }
                 }),
                 i18n,
@@ -424,7 +422,7 @@ describe('ErrorDialog', () => {
             // Assert
             expect(wrapper.emitted('created').length).toBe(1);
             expect(wrapper.emitted('created')[0][0]).toEqual({
-                code: duplicateOrderCode,
+                code: DUPLICATE_ORDER,
                 isDuplicateOrderError: true
             });
         });

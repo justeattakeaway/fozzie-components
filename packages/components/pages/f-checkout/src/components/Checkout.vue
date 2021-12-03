@@ -91,6 +91,7 @@ const {
     GetCheckoutError,
     GetCheckoutAccessForbiddenError,
     AvailableFulfilmentGetError,
+    AvailableFulfilmentEmptyError,
     GetBasketError
 } = exceptions;
 
@@ -262,12 +263,16 @@ export default {
             return this.isLoggedIn && !this.customer.mobileNumber;
         },
 
+        shouldShowCheckoutErrorPage () {
+            return this.checkoutErrorMessage?.errorType === ERROR_TYPES.errorPage;
+        },
+
         shouldShowCheckoutForm () {
-            return !this.isLoading && !this.checkoutErrorMessage?.errorFormType && !this.shouldShowAgeVerificationForm;
+            return !this.isLoading && !this.shouldShowCheckoutErrorPage && !this.shouldShowAgeVerificationForm;
         },
 
         shouldShowAgeVerificationForm () {
-            return !this.checkoutErrorMessage?.errorFormType && this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
+            return !this.shouldShowCheckoutErrorPage && this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
@@ -288,16 +293,16 @@ export default {
                 heading: this.$t('errorMessages.errorHeading')
             };
 
-            const isAlert = this.checkoutErrorMessage.errorType === ERROR_TYPES.alert;
+            const isAlert = this.checkoutErrorMessage?.errorType === ERROR_TYPES.alert;
 
             return {
                 props: isAlert ? alertProps : { 'redirect-url': this.redirectUrl },
-                ...isAlert && { content: this.checkoutErrorMessage?.code }
+                ...isAlert && { content: this.checkoutErrorMessage?.messageKey }
             };
         },
 
         /**
-         * If there is no fulfilment times available (errorFormType === noTimeAvailable)
+         * If there is no fulfilment times available (messageKey === noTimeAvailable)
          * redirect to search if the location cookie exists otherwise redirect to home.
          *
          * For all other error form types
@@ -305,7 +310,7 @@ export default {
          *
          * */
         redirectUrl () {
-            if (this.checkoutErrorMessage?.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable || this.checkoutErrorMessage?.code === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
+            if (this.checkoutErrorMessage?.messageKey === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable || this.checkoutErrorMessage?.code === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
                 const postcodeCookie = this.$cookies.get('je-location');
 
                 return postcodeCookie ? `area/${postcodeCookie}` : '/';
@@ -648,14 +653,12 @@ export default {
                 });
 
                 if (!this.availableFulfilment.times.length) {
-                    this.updateCheckoutErrorMessage({
-                        errorType: ERROR_TYPES.errorPage,
-                        errorFormType: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable
-                    });
+                    this.handleErrorState(new AvailableFulfilmentEmptyError('AvailableFulfilmentTimesEmpty'));
+                } else {
+                    this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
                 }
-
-                this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
             } catch (error) {
+                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
                 this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
             }
         },
@@ -726,9 +729,7 @@ export default {
          * Set the `message` for the user to see.
          */
         handleErrorState (error) {
-            const code = error.errorType === ERROR_TYPES.dialog
-                ? error.errorCode
-                : this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
+            const messageKey = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
 
             const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
@@ -737,9 +738,8 @@ export default {
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
             this.updateCheckoutErrorMessage({
-                code,
-                errorType: error.errorType,
-                ...error.errorFormType && { errorFormType: error.errorFormType }
+                messageKey,
+                errorType: error.errorType
             });
 
             if (error.errorType === ERROR_TYPES.alert) {

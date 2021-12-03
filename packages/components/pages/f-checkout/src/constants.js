@@ -27,6 +27,8 @@ export const ERROR_TYPES = {
     errorPage: 'errorPage'
 };
 
+export const DUPLICATE_ORDER = 'DuplicateOrder';
+
 export const VUEX_CHECKOUT_MODULE = 'fCheckoutModule';
 export const VUEX_CHECKOUT_ANALYTICS_MODULE = 'fCheckoutAnalyticsModule';
 export const VUEX_CHECKOUT_EXPERIMENTATION_MODULE = 'fCheckoutExperimentationModule';

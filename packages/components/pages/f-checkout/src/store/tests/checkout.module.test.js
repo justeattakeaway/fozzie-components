@@ -19,7 +19,9 @@ import accountApi from '../../services/accountApi';
 import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, ERROR_TYPES } from '../../constants';
+import {
+    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, ERROR_TYPES, DUPLICATE_ORDER
+} from '../../constants';
 
 import {
     UPDATE_AUTH,
@@ -96,14 +98,13 @@ const isFulfillable = false;
 
 const issues = [
     {
-        code: 'RESTAURANT_UNAVAILABLE',
-        errorType: ERROR_TYPES.dialog
+        code: 'RESTAURANT_UNAVAILABLE'
     }
 ];
 
 const userNote = 'Beware of the dachshund';
 const checkoutErrorMessage = {
-    code: 'DuplicateOrder',
+    messageKey: DUPLICATE_ORDER,
     shouldRedirectToMenu: false,
     errorType: ERROR_TYPES.dialog
 };
@@ -385,8 +386,8 @@ describe('CheckoutModule', () => {
         describe(`${CLEAR_DOB_ERROR} :: `, () => {
             it('should remove the `DOB_REQUIRED_ISSUE` and the `AGE_VERIFICATION_ISSUE` errors', () => {
                 // Arrange
-                state.errors.push({ code: 'DOB_REQUIRED_ISSUE' });
-                state.errors.push({ code: 'AGE_VERIFICATION_ISSUE' });
+                state.errors.push({ messageKey: 'DOB_REQUIRED_ISSUE' });
+                state.errors.push({ messageKey: 'AGE_VERIFICATION_ISSUE' });
 
                 // Act
                 mutations[CLEAR_DOB_ERROR](state, {});
@@ -687,7 +688,7 @@ describe('CheckoutModule', () => {
                     expect(commit).toHaveBeenCalledWith(
                         UPDATE_CHECKOUT_ERROR_MESSAGE,
                         {
-                            code: 'BasketChanged',
+                            messageKey: 'BasketChanged',
                             shouldRedirectToMenu: true,
                             errorType: ERROR_TYPES.dialog
                         }
@@ -705,7 +706,7 @@ describe('CheckoutModule', () => {
                     expect(commit).toHaveBeenCalledWith(
                         UPDATE_CHECKOUT_ERROR_MESSAGE,
                         {
-                            code: 'BasketChanged',
+                            messageKey: 'BasketChanged',
                             shouldRedirectToMenu: true,
                             errorType: ERROR_TYPES.dialog
                         }
@@ -858,7 +859,7 @@ describe('CheckoutModule', () => {
                             status: 400,
                             response: {
                                 data: {
-                                    errorCode: 'DuplicateOrder'
+                                    errorCode: DUPLICATE_ORDER
                                 }
                             }
                         }));
@@ -900,7 +901,7 @@ describe('CheckoutModule', () => {
                             status: 400,
                             response: {
                                 data: {
-                                    errorCode: 'DuplicateOrder'
+                                    errorCode: DUPLICATE_ORDER
                                 }
                             }
                         }));
@@ -933,7 +934,7 @@ describe('CheckoutModule', () => {
 
         describe('updateCheckout ::', () => {
             const issue = {
-                code: 'RESTAURANT_NOT_TAKING_ORDERS',
+                messageKey: 'RESTAURANT_NOT_TAKING_ORDERS',
                 shouldRedirectToMenu: true,
                 errorType: ERROR_TYPES.dialog
             };
@@ -952,6 +953,10 @@ describe('CheckoutModule', () => {
                         issues
                     }
                 }));
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
             });
 
             it('should post the checkout details to the backend.', async () => {
@@ -976,7 +981,7 @@ describe('CheckoutModule', () => {
                 await updateCheckout(context, payload);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog }]);
+                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog }]);
             });
 
             describe('when a known issue occurs', () => {
@@ -985,7 +990,9 @@ describe('CheckoutModule', () => {
                         status: 200,
                         data: {
                             isFulfillable: false,
-                            issues: [{ code: issue.code }]
+                            issues: [
+                                { code: 'RESTAURANT_NOT_TAKING_ORDERS' }
+                            ]
                         }
                     }));
                 });

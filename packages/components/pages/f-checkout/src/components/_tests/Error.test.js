@@ -31,7 +31,7 @@ describe('Error', () => {
                     id: '301389'
                 },
                 checkoutErrorMessage: {
-                    errorFormType: 'pageLoad',
+                    messageKey: 'pageLoad',
                     errorType: ERROR_TYPES.errorPage
                 }
             }),
@@ -48,7 +48,6 @@ describe('Error', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
-
 
     it('should be defined', () => {
         // Assert
@@ -102,7 +101,7 @@ describe('Error', () => {
                     // Assert
                     expect(window.location.assign).toHaveBeenCalledWith(wrapper.vm.redirectUrl);
                 });
-                describe('AND errorFormType is accessForbiddenError', () => {
+                describe('AND messageKey is accessForbiddenError', () => {
                     beforeEach(() => {
                         wrapper = mount(Error, {
                             i18n,
@@ -114,7 +113,7 @@ describe('Error', () => {
                                 },
                                 checkoutErrorMessage: {
                                     ...defaultCheckoutState.checkoutErrorMessage,
-                                    errorFormType: CHECKOUT_ERROR_FORM_TYPE.accessForbidden
+                                    messageKey: CHECKOUT_ERROR_FORM_TYPE.accessForbidden
                                 }
                             }),
                             propsData: {

@@ -43,7 +43,11 @@ const getIssueByCode = code => {
     const issue = checkoutIssues[code];
 
     if (issue) {
-        return { ...issue, code };
+        return {
+            ...issue,
+            messageKey: code,
+            errorType: ERROR_TYPES.dialog
+        };
     }
 
     return null;
@@ -173,10 +177,11 @@ export default {
                 data,
                 timeout
             };
+
             const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
             const { issues, isFulfillable } = responseData;
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
-                    || { code: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
+                    || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
@@ -246,7 +251,7 @@ export default {
             // We can't call GET checkout as a guest so we're now having to use the basket response for age restrictions until then
             if (basketDetails.ageRestricted && (tenant === 'au' || tenant === 'nz')) {
                 commit(UPDATE_IS_FULFILLABLE, false);
-                commit(UPDATE_ERRORS, [{ code: DOB_REQUIRED_ISSUE }]);
+                commit(UPDATE_ERRORS, [{ messageKey: DOB_REQUIRED_ISSUE }]);
             }
 
             if (hasBasketChanged) {

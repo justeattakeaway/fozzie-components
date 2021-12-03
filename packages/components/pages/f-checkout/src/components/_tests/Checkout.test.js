@@ -15,7 +15,8 @@ import {
     TENANT_MAP,
     CHECKOUT_ERROR_FORM_TYPE,
     HEADER_LOW_VALUE_ORDER_EXPERIMENT,
-    ERROR_TYPES
+    ERROR_TYPES,
+    DUPLICATE_ORDER
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
@@ -529,7 +530,7 @@ describe('Checkout', () => {
                         ...defaultCheckoutState,
                         checkoutErrorMessage: {
                             errorType: ERROR_TYPES.alert,
-                            code: errorCode
+                            messageKey: errorCode
                         }
                     }),
                     i18n,
@@ -550,7 +551,7 @@ describe('Checkout', () => {
             describe('when service type is delivery or collection', () => {
                 let wrapper;
 
-                describe('AND `checkoutErrorMessages.errorFormType` is not `noTimeAvailable`', () => {
+                describe('AND `checkoutErrorMessages.messageKey` is not `noTimeAvailable`', () => {
                     it('should return the URL with a "restaurants" prefix to redirect back to the restaurant menu', () => {
                         // Arrange && Act
                         wrapper = shallowMount(VueCheckout, {
@@ -589,7 +590,7 @@ describe('Checkout', () => {
                     });
                 });
 
-                describe('AND `checkoutErrorMessages.errorFormType` is `noTimeAvailable`', () => {
+                describe('AND `checkoutErrorMessages.messageKey` is `noTimeAvailable`', () => {
                     const postCodeCookieValue = 'ar511ar';
 
                     afterEach(() => {
@@ -608,7 +609,7 @@ describe('Checkout', () => {
                                 ...defaultCheckoutState,
                                 restaurant,
                                 checkoutErrorMessage: {
-                                    errorFormType: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable,
+                                    messageKey: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable,
                                     errorType: ERROR_TYPES.errorPage
                                 }
                             }),
@@ -649,7 +650,7 @@ describe('Checkout', () => {
         describe('shouldShowAgeVerificationForm ::', () => {
             let wrapper;
 
-            describe('when the `checkoutErrorMessages` contain `errorFormType`', () => {
+            describe('when the `checkoutErrorMessages` contain `messageKey`', () => {
                 beforeEach(() => {
                     // Arrange && Act
                     wrapper = shallowMount(VueCheckout, {
@@ -657,7 +658,7 @@ describe('Checkout', () => {
                             ...defaultCheckoutState,
                             checkoutErrorMessage: {
                                 errorType: ERROR_TYPES.errorPage,
-                                errorFormType: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable
+                                messageKey: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable
                             }
                         }),
                         i18n,
@@ -2219,7 +2220,7 @@ describe('Checkout', () => {
                         // Arrange
                         const error = {
                             errorType: ERROR_TYPES.errorPage,
-                            errorFormType: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable
+                            messageKey: CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable
                         };
 
                         const wrapper = mount(VueCheckout, {
@@ -3054,7 +3055,7 @@ describe('Checkout', () => {
                     it('should throw a `PlaceOrderError` error', async () => {
                         // Arrange
                         const errorMessage = 'An error - Your order is a duplicate';
-                        const errorCode = 'DuplicateOrder';
+                        const errorCode = DUPLICATE_ORDER;
                         const error = {
                             message: errorMessage,
                             response: {
@@ -3307,7 +3308,7 @@ describe('Checkout', () => {
 
         describe('handleDialogCreation ::', () => {
             const event = {
-                code: 'DuplicateOrder',
+                code: DUPLICATE_ORDER,
                 isDuplicateOrderError: true
             };
 

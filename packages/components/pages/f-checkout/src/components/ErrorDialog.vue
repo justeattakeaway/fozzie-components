@@ -3,12 +3,12 @@
         ref="errorModal"
         data-test-id="checkout-issue-modal"
         has-overlay
-        :title="$t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText })"
+        :title="$t(`errorMessages.checkoutIssues.${messageKey}.title`, { serviceType: serviceTypeText })"
         :is-open="isOpen"
         @close="closeErrorDialog"
     >
         <p data-test-id="checkout-issue-modal-message">
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`, { serviceType: serviceTypeText }) }}
+            {{ $t(`errorMessages.checkoutIssues.${messageKey}.message`, { serviceType: serviceTypeText }) }}
         </p>
 
         <f-button
@@ -19,7 +19,7 @@
             data-test-id="redirect-to-menu-button"
             @click.native="closeErrorDialog"
         >
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonText`) }}
+            {{ $t(`errorMessages.checkoutIssues.${messageKey}.buttonText`) }}
         </f-button>
 
         <f-button
@@ -31,7 +31,7 @@
             data-gtm="engagement|dialog_duplicate_order_warning|click_view_orders"
             @click.native="showOrderHistory"
         >
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonTextPrimary`) }}
+            {{ $t(`errorMessages.checkoutIssues.${messageKey}.buttonTextPrimary`) }}
         </f-button>
     </mega-modal>
 </template>
@@ -42,7 +42,7 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapActions, mapState } from 'vuex';
-import { VUEX_CHECKOUT_MODULE } from '../constants';
+import { DUPLICATE_ORDER, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: {
@@ -70,8 +70,8 @@ export default {
             'serviceType'
         ]),
 
-        errorCode () {
-            return this.checkoutErrorMessage?.code;
+        messageKey () {
+            return this.checkoutErrorMessage?.messageKey;
         },
 
         serviceTypeText () {
@@ -79,7 +79,7 @@ export default {
         },
 
         isDuplicateOrderError () {
-            return this.errorCode === 'DuplicateOrder';
+            return this.messageKey === DUPLICATE_ORDER;
         }
     },
 
@@ -91,7 +91,7 @@ export default {
         }
 
         this.$emit('created', {
-            code: this.checkoutErrorMessage?.code,
+            code: this.checkoutErrorMessage?.messageKey,
             isDuplicateOrderError: this.isDuplicateOrderError
         });
     },
