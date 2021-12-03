@@ -13,11 +13,11 @@
             method="post"
             @submit.prevent="onFormSubmit">
             <form-field
-                :label-text="$t('fields.emailAddressLabel')"
+                :label-text="$t('consumer.emailAddressLabel')"
                 disabled
-                :placeholder="$t('fields.emailAddressPlaceholder')"
+                :placeholder="$t('consumer.emailAddressPlaceholder')"
                 class="u-spacingBottom--large"
-                :value="fields.emailAddress" />
+                :value="consumer.emailAddress" />
 
             <f-link
                 is-distinct
@@ -28,14 +28,15 @@
             </f-link>
 
             <form-field
-                :label-text="$t('fields.firstNameLabel')"
-                :placeholder="$t('fields.firstNamePlaceholder')"
-                :value="fields.firstName" />
+                :label-text="$t('consumer.firstNameLabel')"
+                :placeholder="$t('consumer.firstNamePlaceholder')"
+                :value="consumer.firstName"
+                @change="editConsumerDetailsValue('firstName', $event.target.value)" />
 
             <form-field
-                :label-text="$t('fields.lastNameLabel')"
-                :placeholder="$t('fields.lastNamePlaceholder')"
-                :value="fields.lastName" />
+                :label-text="$t('consumer.lastNameLabel')"
+                :placeholder="$t('consumer.lastNamePlaceholder')"
+                :value="consumer.lastName" />
 
             <h2
                 class="u-spacingBottom--large">
@@ -43,27 +44,27 @@
             </h2>
 
             <form-field
-                :label-text="$t('fields.addressLabel')"
-                :placeholder="$t('fields.line1Placeholder')"
-                :value="fields.line1" />
+                :label-text="$t('consumer.addressLabel')"
+                :placeholder="$t('consumer.line1Placeholder')"
+                :value="consumer.line1" />
 
             <form-field
-                :placeholder="$t('fields.line2Placeholder')"
-                :value="fields.line2" />
+                :placeholder="$t('consumer.line2Placeholder')"
+                :value="consumer.line2" />
 
             <form-field
-                :placeholder="$t('fields.line3Placeholder')"
-                :value="fields.line3" />
+                :placeholder="$t('consumer.line3Placeholder')"
+                :value="consumer.line3" />
 
             <form-field
-                :label-text="$t('fields.cityLabel')"
-                :placeholder="$t('fields.cityPlaceholder')"
-                :value="fields.city" />
+                :label-text="$t('consumer.cityLabel')"
+                :placeholder="$t('consumer.cityPlaceholder')"
+                :value="consumer.city" />
 
             <form-field
-                :label-text="$t('fields.postcodeLabel')"
-                :placeholder="$t('fields.postcodePlaceholder')"
-                :value="fields.postcode" />
+                :label-text="$t('consumer.postcodeLabel')"
+                :placeholder="$t('consumer.postcodePlaceholder')"
+                :value="consumer.postcode" />
 
             <f-button
                 :class="[$style['c-accountInfo-submitButton']]"
@@ -101,6 +102,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
 import Card from '@justeat/f-card';
@@ -115,6 +117,8 @@ import '@justeat/f-link/dist/f-link.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
+import AccountInfoApi from '../services/providers/AccountInfo.api';
+import fAccountInfoModule from '../store/accountInfo.module';
 import tenantConfigs from '../tenants';
 import {
     EVENT_SPINNER_STOP_LOADING
@@ -147,50 +151,53 @@ export default {
 
     data () {
         return {
-            fields: {
-                emailAddress: null,
-                firstName: null,
-                lastName: null,
-                line1: null,
-                line2: null,
-                line3: null,
-                city: null,
-                postcode: null
-            },
             tenantConfigs,
+            accountInfoApi: new AccountInfoApi({
+                httpClient: this.$http,
+                cookies: this.$cookies,
+                baseUrl: this.smartGatewayBaseUrl
+            }),
             isFormSubmitting: false
         };
     },
 
+    computed: {
+        ...mapState('fAccountInfoModule', [
+            'consumer'
+        ])
+    },
+
     watch: {
         immediate: true,
-        isAuthFinished () {
+        async isAuthFinished () {
             if (this.isAuthFinished) {
-                this.initialise();
+                await this.initialise();
             }
         }
     },
 
-    mounted () {
+    created () {
+        if (!this.$store.hasModule('fAccountInfoModule')) {
+            this.$store.registerModule('fAccountInfoModule', fAccountInfoModule);
+        }
+    },
+
+    async mounted () {
         if (this.isAuthFinished) {
-            this.initialise();
+            await this.initialise();
         }
     },
 
     methods: {
-        initialise () {
+        ...mapActions('fAccountInfoModule', [
+            'loadConsumerDetails',
+            'saveConsumerDetails',
+            'editConsumerDetails'
+        ]),
+
+        async initialise () {
             try {
-                // TODO - Dummy data to be replaced with next ticket
-                this.fields = {
-                    emailAddress: 'mr.jazz@town.com',
-                    firstName: 'Max',
-                    lastName: 'Legend',
-                    line1: '1 Wardour Street',
-                    line2: undefined,
-                    line3: null,
-                    city: 'Strange Town',
-                    postcode: 'JZ1 1AA'
-                };
+                await this.loadConsumerDetails({ api: this.accountInfoApi, authToken: this.authToken });
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
@@ -210,6 +217,15 @@ export default {
             } finally {
                 this.setSubmittingState(false);
             }
+        },
+
+        /**
+        * A generic method that updates the State (e.g. 'consumer[field] = value')
+        * @param {string} field - The field of the preference that needs changing
+        * @param {string} value - The new value the preference field
+        */
+        editConsumerDetailsValue (field, value) {
+            this.editConsumerDetails({ field, value });
         },
 
         /**

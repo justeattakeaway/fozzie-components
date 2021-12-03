@@ -1,3 +1,6 @@
+export const UPDATE_CONSUMER_DETAILS = 'updateConsumerDetails';
+export const UPDATE_CONSUMER_DETAIL = 'updateConsumerDetail';
+
 export const EVENT_SPINNER_STOP_LOADING = 'stop-spinner';
 
 export const CONSUMER_DETAILS_URL = 'consumer';
