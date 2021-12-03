@@ -42,9 +42,9 @@ describe('ImageTile', () => {
         });
     });
 
-    describe('watch:: ', () => {
+    xdescribe('watch:: ', () => {
         describe('isSelected:: ', () => {
-            xit('should update `isFilterSelected` when changed', async () => {
+            it('should update `isFilterSelected` when changed', async () => {
                 // Arrange
                 const wrapper = shallowMount(ImageTile, { isFilterSelected: false, isSelected: false });
 

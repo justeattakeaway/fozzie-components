@@ -17,7 +17,7 @@
             </span>
         </a>
         <input
-            id="imageTileToggle"
+            :id="`imageTileToggle-${tileId}`"
             type="checkbox"
             class="is-visuallyHidden"
             :class="$style['c-imageTile-checkbox']"
@@ -28,11 +28,11 @@
                 $style['c-imageTile-label'], {
                     [$style['c-imageTile-label--selected']]: isFilterSelected
                 }]"
-            for="imageTileToggle"
+            :for="`imageTileToggle-${tileId}`"
         >
             <img
                 :class="$style['c-imageTile-image']"
-                src="https://via.placeholder.com/150"
+                :src="imgSrc"
                 alt=""
             >
             <span :aria-hidden="isLink ? true : false">
@@ -54,7 +54,7 @@ export default {
         },
         tileId: {
             type: String,
-            default: 'Chicken12'
+            default: 'Chicken'
         },
         isSelected: {
             type: Boolean,
@@ -67,6 +67,10 @@ export default {
         displayText: {
             type: String,
             default: 'Chicken'
+        },
+        imgSrc: {
+            type: String,
+            default: 'https://via.placeholder.com/150'
         }
     },
     data () {
@@ -75,8 +79,10 @@ export default {
         };
     },
     watch: {
-        isSelected () {
-            this.isFilterSelected = this.isSelected;
+        isSelected (newValue) {
+            if (newValue !== this.isFilterSelected) {
+                this.isFilterSelected = newValue;
+            }
         }
     },
     mounted () {
