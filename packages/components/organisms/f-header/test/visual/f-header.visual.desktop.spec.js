@@ -105,4 +105,23 @@ describe('Shared - f-header component tests', () => {
         // Assert
         browser.percyScreenshot('f-header - with custom nav links', 'desktop');
     });
+
+    it('should be able to show only custom links', () => {
+        // Arrange
+        header = new Header()
+            .withQuery('&knob-Locale', 'en-GB')
+            .withQuery('&knob-Show help link', false)
+            .withQuery('&knob-Show offers link', false)
+            .withQuery('&knob-Show country selector', false)
+            .withQuery('&knob-Show delivery enquiry', false)
+            .withQuery('&knob-Show login/user info link', false)
+
+            .withQuery('&knob-Show custom nav links?', true);
+
+        // Act
+        header.load();
+
+        // Assert
+        browser.percyScreenshot('f-header - custom nav links only', 'desktop');
+    });
 });
