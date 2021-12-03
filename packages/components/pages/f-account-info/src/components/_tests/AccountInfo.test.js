@@ -1,3 +1,4 @@
+import Vuex from 'vuex';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import AccountInfo from '../AccountInfo.vue';
@@ -10,6 +11,17 @@ import {
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
+localVue.use(Vuex);
+
+const createStore = ({ state = {}, actions = {} } = {}) => new Vuex.Store({
+    modules: {
+        fContactPreferencesModule: {
+            state,
+            actions,
+            namespaced: true
+        }
+    }
+});
 
 const i18n = {
     locale: 'en-GB',
@@ -40,7 +52,8 @@ describe('AccountInfo', () => {
             shallowMount(AccountInfo, {
                 i18n,
                 localVue,
-                propsData: { ...sutProps, isAuthFinished: false }
+                propsData: { ...sutProps, isAuthFinished: false },
+                store: createStore()
             });
 
             // Assert
@@ -56,7 +69,8 @@ describe('AccountInfo', () => {
             const wrapper = shallowMount(AccountInfo, {
                 i18n,
                 localVue,
-                propsData: { ...sutProps, isAuthFinished: false }
+                propsData: { ...sutProps, isAuthFinished: false },
+                store: createStore()
             });
 
             // Assert
