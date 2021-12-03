@@ -24,6 +24,7 @@
                             :label-description="getEmailDescription(key)"
                             :disabled="!isEmailEnabled"
                             :data-test-id="`contact-preferences-${key}-email-checkbox`"
+                            :name="`contact-preferences-${key}-email`"
                             :checked="emailValue"
                             @input="(checked) => editPreferenceValue(key, Object.keys({ emailValue })[0], checked)"
                         />
@@ -35,6 +36,7 @@
                             :label-description="getSmsDescription(key)"
                             :disabled="!isSmsEnabled"
                             :data-test-id="`contact-preferences-${key}-sms-checkbox`"
+                            :name="`contact-preferences-${key}-sms`"
                             :checked="smsValue"
                             @input="(checked) => editPreferenceValue(key, Object.keys({ smsValue })[0], checked)"
                         />
