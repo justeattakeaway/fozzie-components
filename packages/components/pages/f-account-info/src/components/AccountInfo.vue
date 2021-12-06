@@ -1,5 +1,5 @@
 <template>
-    <card
+    <f-card
         :card-heading="$t('accountDetails')"
         data-test-id="account-info"
         has-outline
@@ -9,33 +9,64 @@
             {{ $t('yourDetails') }}
         </h2>
 
+        <email-address-field :email-address="values.emailAddress" />
+
         <form
             method="post"
             @submit.prevent="onFormSubmit">
             <form-field
-                :label-text="$t('fields.emailAddressLabel')"
-                disabled
-                :placeholder="$t('fields.emailAddressPlaceholder')"
-                class="u-spacingBottom--large"
-                :value="fields.emailAddress" />
-
-            <f-link
-                is-distinct
-                :class="$style['c-accountInfo-customerCareLink']"
-                href="/help"
-                target="_blank">
-                {{ $t('contactCustomerCareTeam') }}
-            </f-link>
-
-            <form-field
+                v-model="fields.firstName"
+                maxlength="50"
                 :label-text="$t('fields.firstNameLabel')"
                 :placeholder="$t('fields.firstNamePlaceholder')"
-                :value="fields.firstName" />
+                @blur="onBlur('firstName')">
+                <template
+                    v-if="$v.fields.firstName.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.fields.firstName.required && $v.fields.firstName.$dirty">
+                        {{ $t('validation.firstNameRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.fields.firstName.isValidName">
+                        {{ $t('validation.firstNameInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
+                v-model="fields.lastName"
+                maxlength="50"
                 :label-text="$t('fields.lastNameLabel')"
                 :placeholder="$t('fields.lastNamePlaceholder')"
-                :value="fields.lastName" />
+                @blur="onBlur('lastName')">
+                <template
+                    v-if="$v.fields.lastName.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.fields.lastName.required && $v.fields.lastName.$dirty">
+                        {{ $t('validation.lastNameRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.fields.lastName.isValidName">
+                        {{ $t('validation.lastNameInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
+
+            <form-field
+                v-model="fields.phoneNumber"
+                maxlength="16"
+                :label-text="$t('fields.phoneNumberLabel')"
+                :placeholder="$t('fields.phoneNumberPlaceholder')"
+                @blur="onBlur('phoneNumber')">
+                <template
+                    v-if="$v.fields.phoneNumber.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
+                        {{ $t('validation.phoneNumberRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.fields.phoneNumber.isValidPhoneNumber && $v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
+                        {{ $t('validation.phoneNumberInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <h2
                 class="u-spacingBottom--large">
@@ -43,27 +74,62 @@
             </h2>
 
             <form-field
+                v-model="fields.line1"
+                maxlength="50"
                 :label-text="$t('fields.addressLabel')"
                 :placeholder="$t('fields.line1Placeholder')"
-                :value="fields.line1" />
+                @blur="onBlur('line1')">
+                <template
+                    v-if="$v.fields.line1.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.fields.line1.required && $v.fields.line1.$dirty">
+                        {{ $t('validation.line1Required') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
-                :placeholder="$t('fields.line2Placeholder')"
-                :value="fields.line2" />
+                v-model="fields.line2"
+                maxlength="50"
+                :placeholder="$t('fields.line2Placeholder')" />
 
             <form-field
-                :placeholder="$t('fields.line3Placeholder')"
-                :value="fields.line3" />
+                v-model="fields.line3"
+                maxlength="50"
+                :placeholder="$t('fields.line3Placeholder')" />
 
             <form-field
-                :label-text="$t('fields.cityLabel')"
-                :placeholder="$t('fields.cityPlaceholder')"
-                :value="fields.city" />
+                v-model="fields.locality"
+                maxlength="50"
+                :label-text="$t('fields.localityLabel')"
+                :placeholder="$t('fields.localityPlaceholder')"
+                @blur="onBlur('locality')">
+                <template
+                    v-if="$v.fields.locality.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.fields.locality.required && $v.fields.locality.$dirty">
+                        {{ $t('validation.localityRequired') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
+                v-model="fields.postcode"
+                maxlength="50"
                 :label-text="$t('fields.postcodeLabel')"
                 :placeholder="$t('fields.postcodePlaceholder')"
-                :value="fields.postcode" />
+                @blur="onBlur('postcode')">
+                <template
+                    v-if="$v.fields.postcode.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.fields.postcode.required && $v.fields.postcode.$dirty">
+                        {{ $t('validation.postcodeRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.fields.postcode.isValidPostcode && $v.fields.postcode.required">
+                        {{ $t('validation.postcodeInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <f-button
                 :class="[$style['c-accountInfo-submitButton']]"
@@ -81,40 +147,36 @@
             :class="[$style['c-accountInfo-changePasswordButton']]"
             data-test-id="account-info-submit-button"
             button-type="secondary"
+            href="/change-password?returnurl=/account/info"
             button-size="large"
             is-full-width
             action-type="submit">
             {{ $t('buttons.changePassword') }}
         </f-button>
 
-        <hr>
-
-        <p>{{ $t('deleteAccountMessage') }}</p>
-
-        <f-link
-            is-distinct
-            href="/help"
-            target="_blank">
-            {{ $t('deleteAccountLink') }}
-        </f-link>
-    </card>
+        <delete-account />
+    </f-card>
 </template>
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
-import Card from '@justeat/f-card';
+import FErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
+
+import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 
-import FLink from '@justeat/f-link';
-import '@justeat/f-link/dist/f-link.css';
-
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
+import EmailAddressField from './EmailAddressField.vue';
+import DeleteAccount from './DeleteAccount.vue';
+
+import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
 import {
     EVENT_SPINNER_STOP_LOADING
@@ -122,13 +184,18 @@ import {
 
 export default {
     components: {
-        Card,
+        FCard,
         FormField,
-        FLink,
-        FButton
+        FButton,
+        FErrorMessage,
+        EmailAddressField,
+        DeleteAccount
     },
 
-    mixins: [VueGlobalisationMixin],
+    mixins: [
+        VueGlobalisationMixin,
+        AccountInfoValidationMixin
+    ],
 
     props: {
         authToken: {
@@ -148,14 +215,17 @@ export default {
     data () {
         return {
             fields: {
-                emailAddress: null,
                 firstName: null,
                 lastName: null,
+                phoneNumber: null,
                 line1: null,
                 line2: null,
                 line3: null,
-                city: null,
+                locality: null,
                 postcode: null
+            },
+            values: {
+                emailAddress: null
             },
             tenantConfigs,
             isFormSubmitting: false
@@ -163,10 +233,12 @@ export default {
     },
 
     watch: {
-        immediate: true,
-        isAuthFinished () {
-            if (this.isAuthFinished) {
-                this.initialise();
+        isAuthFinished: {
+            immediate: true,
+            handler (value) {
+                if (value) {
+                    this.initialise();
+                }
             }
         }
     },
@@ -181,14 +253,18 @@ export default {
         initialise () {
             try {
                 // TODO - Dummy data to be replaced with next ticket
+                this.values = {
+                    emailAddress: 'mr.jazz@town.com'
+                };
+
                 this.fields = {
-                    emailAddress: 'mr.jazz@town.com',
                     firstName: 'Max',
                     lastName: 'Legend',
+                    phoneNumber: 1234567890,
                     line1: '1 Wardour Street',
                     line2: undefined,
                     line3: null,
-                    city: 'Strange Town',
+                    locality: 'Strange Town',
                     postcode: 'JZ1 1AA'
                 };
             } catch (error) {
@@ -201,10 +277,16 @@ export default {
         },
 
         onFormSubmit () {
+            if (this.isFormInvalid()) {
+                this.logValidationFailure();
+                return;
+            }
+
             this.setSubmittingState(true);
 
             try {
                 // TODO - to be added with next ticket
+                this.$log.info('Submitted Form', ['account-info', 'account-pages']);
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
@@ -224,11 +306,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-accountInfo-customerCareLink {
-    display: block;
-    margin-bottom: spacing(x4);
-}
-
 .c-accountInfo-submitButton {
     margin-top: spacing(x4);
 }
