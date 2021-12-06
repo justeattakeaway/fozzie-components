@@ -9,6 +9,7 @@ v2.5.0
 
 ### Added
 - Prompt option for visual regression
+- Spec templates for visual regression
 - `getHyphenatedName` function for transforming the name of a component when answered in `camelCase`
 
 ### Changed
