@@ -69,11 +69,6 @@
 
             <!-- Ratings -->
             <!-- START ERROR BOUNDARY -->
-            <!-- <component
-                :is="errorBoundary"
-                tier="3">
-                <slot name="ratings" />
-            </component> -->
             <component
                 :is="errorBoundary"
                 tier="3">
