@@ -176,7 +176,7 @@ export default {
         * @param {string} key - The key of the preference that needs changing
         */
         getEmailDescription (key) {
-            if (!this.$te(`${key}.emailDescription`)) return undefined;
+            if (!this.$te(`${key}.emailDescription`)) return '';
 
             return `(${this.$t(`${key}.emailDescription`)})`;
         },
