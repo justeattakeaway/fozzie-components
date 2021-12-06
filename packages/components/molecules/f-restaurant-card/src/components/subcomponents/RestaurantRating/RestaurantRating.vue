@@ -87,7 +87,7 @@ export default {
     },
     props: {
         /**
-         * Indications whether or not a user themselves has provided a rating for the item in question
+         * Indicates whether or not a user themselves has provided a rating for the item in question
          */
         isOwnRating: {
             type: Boolean,
