@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-RestaurantTags {
+.c-restaurantTags {
     margin: 0;
     padding: 0;
 }
