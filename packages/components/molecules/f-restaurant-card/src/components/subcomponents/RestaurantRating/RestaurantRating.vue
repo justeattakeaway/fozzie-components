@@ -86,29 +86,50 @@ export default {
         StarFilledIcon
     },
     props: {
+        /**
+         * Indications whether or not a user themselves has provided a rating for the item in question
+         */
         isOwnRating: {
             type: Boolean,
             default: false
         },
+        /**
+         * The mean value of the rating
+         */
         mean: {
             type: Number,
             default: 0
         },
+        /**
+         * How many ratings have been given for the item in question
+         */
         count: {
             type: Number,
             default: 0
         },
+        /**
+         * Message to display when no ratings available
+         * this is temporary whilst i18n is being fixed - ticket exists to fix
+         */
         notRatedMessage: {
             type: String,
-            default: '' // this is temporary whilst i18n is being fixed - ticket exists to fix
+            default: ''
         },
+        /**
+         * A visually hidden message to provide for screen readers that summarises the rating
+         * this is temporary whilst i18n is being fixed - ticket exists to fix
+         */
         accessibleMessage: {
             type: String,
-            default: '' // this is temporary whilst i18n is being fixed - ticket exists to fix
+            default: ''
         },
+        /**
+         * Message to display when `isOwnRating` is true
+         * this is temporary whilst i18n is being fixed - ticket exists to fix
+         */
         isOwnRatingMessage: {
             type: String,
-            default: '' // this is temporary whilst i18n is being fixed - ticket exists to fix
+            default: ''
         }
     },
     data () {
