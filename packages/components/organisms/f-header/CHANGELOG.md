@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.3.0
+------------------------------
+*December 6, 2021*
+
+### Added
+- Support for custom links in the nav via `customNavLinks` prop.
+- Visual tests (currently skipped because of [storybook issue](https://github.com/storybookjs/storybook/issues/14420)).
+
+### Changed
+- Story now uses controls instead of knobs.
+
+
 v7.2.0
 ------------------------------
 *December 1, 2021*
