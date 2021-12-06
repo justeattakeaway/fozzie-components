@@ -5,19 +5,19 @@
             v-if="noRatingsAvailable"
             aria-hidden="true"
             data-test-id="ratings-star-empty"
-            :class="[$style['c-restaurantCard-ratingStar']]" />
+            :class="[$style['c-restaurantCard-rating-star']]" />
 
         <star-filled-icon
             v-else
             aria-hidden="true"
             data-test-id="ratings-star-filled"
-            :class="[$style['c-restaurantCard-ratingStar']]" />
+            :class="[$style['c-restaurantCard-rating-star']]" />
 
         <!-- No ratings message -->
         <span
             v-if="noRatingsAvailable"
             data-test-id="no-ratings-message"
-            :class="[$style['c-restaurantCard-ratingNotRatedMsg']]">
+            :class="[$style['c-restaurantCard-rating-notRatedMsg']]">
             {{ notRatedMessage }}
         </span>
 
@@ -33,7 +33,7 @@
 
             <!-- Mean value -->
             <data
-                :class="[$style['c-restaurantCard-ratingMean']]"
+                :class="[$style['c-restaurantCard-rating-mean']]"
                 :value="mean"
                 data-test-id="ratings-mean-value"
                 aria-hidden="true">
@@ -42,11 +42,11 @@
 
             <span
                 aria-hidden="true"
-                :class="[$style['c-restaurantCard-ratingDivider']]">&#47;</span>
+                :class="[$style['c-restaurantCard-rating-divider']]">&#47;</span>
 
             <!-- Max value -->
             <data
-                :class="[$style['c-restaurantCard-ratingOutOf']]"
+                :class="[$style['c-restaurantCard-rating-outOf']]"
                 :value="ratingsMax"
                 aria-hidden="true">
                 {{ ratingsMax }}
@@ -58,14 +58,14 @@
                 <data
                     v-if="!isOwnRating"
                     data-test-id="rating-count"
-                    :class="[$style['c-restaurantCard-ratingCount']]"
+                    :class="[$style['c-restaurantCard-rating-count']]"
                     :value="count">
                     {{ count }}
                 </data>
                 <span
                     v-else
                     data-test-id="rating-own-rating-message"
-                    :class="[$style['c-restaurantCard-ratingCount']]">
+                    :class="[$style['c-restaurantCard-rating-count']]">
                     {{ isOwnRatingMessage }}
                 </span>
                 &#41;
@@ -157,33 +157,33 @@ export default {
     margin: 0;
 }
 
-.c-restaurantCard-ratingStar {
+.c-restaurantCard-rating-star {
     width: spacing(x2);
     height: spacing(x2);
     margin-right: spacing(x0.5);
+
+    & path {
+        fill: $color-orange-30;
+    }
 }
 
-.c-restaurantCard-ratingMean {
+.c-restaurantCard-rating-mean {
     font-weight: $font-weight-bold;
 }
 
-.c-restaurantCard-ratingOutOf {
+.c-restaurantCard-rating-outOf {
     margin-right: spacing(x0.5);
 }
 
-.c-restaurantCard-ratingNotRatedMsg,
-.c-restaurantCard-ratingDivider,
-.c-restaurantCard-ratingOutOf,
-.c-restaurantCard-ratingCount {
+.c-restaurantCard-rating-notRatedMsg,
+.c-restaurantCard-rating-divider,
+.c-restaurantCard-rating-outOf,
+.c-restaurantCard-rating-count {
     color: $color-content-subdued;
 }
 
-.c-restaurantCard-ratingCount {
+.c-restaurantCard-rating-count {
     margin: 0 -(spacing(x0.5));
-}
-
-.c-restaurantCard-ratingStar path {
-    fill: $color-orange-30;
 }
 </style>
 
