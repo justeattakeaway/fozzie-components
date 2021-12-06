@@ -1,6 +1,6 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
-const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.class %>.component');
+const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.default %>.component');
 
 const <%= name.class %> = new <%= name.filename %>();
 
@@ -11,7 +11,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-<%= name.class %> component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-<%= name.class %>');
+        const axeResults = getAccessibilityTestResults('f-<%= name.default %>');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

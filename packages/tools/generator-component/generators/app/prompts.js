@@ -88,6 +88,15 @@ const prompts = [
         }
     },
     {
+        message: 'Does your component require Visual Regression Tests?',
+        name: 'needsVisualTests',
+        type: 'confirm',
+        default: false,
+        when: function shouldShowThisQuestion (answers) {
+            return answers.componentType === 'uiComponent';
+        }
+    },
+    {
         message: 'Does your component require API mocks?',
         name: 'needsTestingApiMocks',
         type: 'confirm',

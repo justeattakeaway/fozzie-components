@@ -1,4 +1,4 @@
-const utils = require('./utils.js');
+const utils = require('./utils');
 
 /**
  *
@@ -6,15 +6,16 @@ const utils = require('./utils.js');
  * @returns Object – transformed group of names to be used in the generator template files
  */
 function transformName (name) {
-    const normalisedName = name.toLowerCase();
+    // prevents component folders from being generated in `camelCase`
+    const normalisedName = utils.getHyphenatedName(name).toLowerCase();
 
     return {
         class: utils.getComponentClassName(normalisedName), // (c-)header or (c-)userMessage,
         component: utils.getComponentName(normalisedName), // e.g VButton or UserMessage,
-        default: name, // e.g. header or user-message
+        default: normalisedName, // e.g. header or user-message
         filename: utils.getComponentFilename(normalisedName), // Header(.vue) or UserMessage(.vue)
         readme: utils.getReadmeName(normalisedName), // Header or User Message
-        template: utils.getComponentTemplateName(normalisedName) // v-header or user-message,
+        template: utils.getComponentTemplateName(normalisedName) // v-header or user-message
     };
 }
 
