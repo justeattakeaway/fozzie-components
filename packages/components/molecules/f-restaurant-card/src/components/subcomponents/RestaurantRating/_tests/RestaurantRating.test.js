@@ -22,9 +22,9 @@ describe('RestaurantRating component', () => {
 
         // act
         const wrapper = mount(RestaurantRating, { propsData });
+        const screenReaderMessageElement = wrapper.find('[data-test-id="ratings-summary-message"]');
 
         // assert
-        const screenReaderMessageElement = wrapper.find('[data-test-id="ratings-summary-message"]');
         expect(screenReaderMessageElement.exists()).toBe(true);
         expect(screenReaderMessageElement.text()).toStrictEqual(screenReaderMessage);
     });
@@ -45,9 +45,9 @@ describe('RestaurantRating component', () => {
 
         // act
         const wrapper = mount(RestaurantRating, { propsData });
+        const screenReaderMessageElement = wrapper.find('[data-test-id="ratings-summary-message"]');
 
         // assert
-        const screenReaderMessageElement = wrapper.find('[data-test-id="ratings-summary-message"]');
         expect(screenReaderMessageElement.exists()).toBe(false);
     });
 
@@ -67,9 +67,9 @@ describe('RestaurantRating component', () => {
 
         // act
         const wrapper = mount(RestaurantRating, { propsData });
+        const ratingsMeanElement = wrapper.find('[data-test-id="ratings-mean-value"]');
 
         // assert
-        const ratingsMeanElement = wrapper.find('[data-test-id="ratings-mean-value"]');
         expect(ratingsMeanElement.exists()).toBe(true);
         expect(ratingsMeanElement.text()).toStrictEqual(expectedRenderedValue);
     });
@@ -90,7 +90,6 @@ describe('RestaurantRating component', () => {
             // act
             const wrapper = mount(RestaurantRating, { propsData });
 
-            // assert
             const ratingsMeanElement = wrapper.find('[data-test-id="ratings-mean-value"]');
             const filledStarElement = wrapper.find('[data-test-id="ratings-star-filled"]');
             const emptyStarElement = wrapper.find('[data-test-id="ratings-star-empty"]');
@@ -98,6 +97,7 @@ describe('RestaurantRating component', () => {
             const noRatingsMessage = wrapper.find('[data-test-id="no-ratings-message"]');
             const countMessage = wrapper.find('[data-test-id="rating-count"]');
 
+            // assert
             expect(emptyStarElement.exists()).toBe(false);
             expect(noRatingsMessage.exists()).toBe(false);
             expect(countMessage.exists()).toBe(false);
@@ -128,7 +128,6 @@ describe('RestaurantRating component', () => {
             // act
             const wrapper = mount(RestaurantRating, { propsData });
 
-            // assert
             const ratingsMeanElement = wrapper.find('[data-test-id="ratings-mean-value"]');
             const filledStarElement = wrapper.find('[data-test-id="ratings-star-filled"]');
             const ownRatingMessageElement = wrapper.find('[data-test-id="rating-own-rating-message"]');
@@ -137,6 +136,7 @@ describe('RestaurantRating component', () => {
             const countMessage = wrapper.find('[data-test-id="rating-count"]');
             const screenReaderMessageElement = wrapper.find('[data-test-id="ratings-summary-message"]');
 
+            // assert
             expect(filledStarElement.exists()).toBe(false);
             expect(ratingsMeanElement.exists()).toBe(false);
             expect(countMessage.exists()).toBe(false);
@@ -164,7 +164,6 @@ describe('RestaurantRating component', () => {
             // act
             const wrapper = mount(RestaurantRating, { propsData });
 
-            // assert
             const ratingsMeanElement = wrapper.find('[data-test-id="ratings-mean-value"]');
             const filledStarElement = wrapper.find('[data-test-id="ratings-star-filled"]');
             const emptyStarElement = wrapper.find('[data-test-id="ratings-star-empty"]');
@@ -172,6 +171,7 @@ describe('RestaurantRating component', () => {
             const noRatingsMessage = wrapper.find('[data-test-id="no-ratings-message"]');
             const countMessage = wrapper.find('[data-test-id="rating-count"]');
 
+            // assert
             expect(emptyStarElement.exists()).toBe(false);
             expect(noRatingsMessage.exists()).toBe(false);
             expect(ownRatingMessageElement.exists()).toBe(false);
@@ -201,7 +201,6 @@ describe('RestaurantRating component', () => {
             // act
             const wrapper = mount(RestaurantRating, { propsData });
 
-            // assert
             const ratingsMeanElement = wrapper.find('[data-test-id="ratings-mean-value"]');
             const filledStarElement = wrapper.find('[data-test-id="ratings-star-filled"]');
             const ownRatingMessageElement = wrapper.find('[data-test-id="rating-own-rating-message"]');
@@ -209,6 +208,7 @@ describe('RestaurantRating component', () => {
             const noRatingsMessage = wrapper.find('[data-test-id="no-ratings-message"]');
             const countMessage = wrapper.find('[data-test-id="rating-count"]');
 
+            // assert
             expect(filledStarElement.exists()).toBe(false);
             expect(ratingsMeanElement.exists()).toBe(false);
             expect(countMessage.exists()).toBe(false);
