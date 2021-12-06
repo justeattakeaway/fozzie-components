@@ -24,6 +24,7 @@
 
             <navigation
                 :copy="copy"
+                :custom-nav-links="customNavLinks"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :show-offers-link="showOffersLinkWithContent"
                 :show-help-link="showHelpLink"
@@ -60,6 +61,11 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+
+        customNavLinks: {
+            type: Array,
+            default: () => []
         },
 
         errorLog: {
