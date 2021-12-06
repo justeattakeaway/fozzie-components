@@ -9,7 +9,7 @@ import {
     createStore,
     defaultCheckoutState
 } from './helpers/setup';
-import { CHECKOUT_ERROR_FORM_TYPE } from '../../constants';
+import { CHECKOUT_ERROR_FORM_TYPE, ERROR_TYPES } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -29,12 +29,14 @@ describe('Error', () => {
                 ...defaultCheckoutState,
                 restaurant: {
                     id: '301389'
+                },
+                checkoutErrorMessage: {
+                    messageKey: 'pageLoad',
+                    errorType: ERROR_TYPES.errorPage
                 }
             }),
             propsData: {
-                errorFormType: CHECKOUT_ERROR_FORM_TYPE.default,
-                redirectUrl: 'menu-jason-1',
-                serviceType: 'delivery'
+                redirectUrl: 'menu-jason-1'
             },
             mocks: {
                 $cookies,
@@ -46,7 +48,6 @@ describe('Error', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
-
 
     it('should be defined', () => {
         // Assert
@@ -100,9 +101,29 @@ describe('Error', () => {
                     // Assert
                     expect(window.location.assign).toHaveBeenCalledWith(wrapper.vm.redirectUrl);
                 });
-                describe('AND errorFormType is accessForbiddenError', () => {
-                    beforeEach(async () => {
-                        await wrapper.setProps({ errorFormType: CHECKOUT_ERROR_FORM_TYPE.accessForbidden });
+                describe('AND messageKey is accessForbiddenError', () => {
+                    beforeEach(() => {
+                        wrapper = mount(Error, {
+                            i18n,
+                            localVue,
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                restaurant: {
+                                    id: '301389'
+                                },
+                                checkoutErrorMessage: {
+                                    ...defaultCheckoutState.checkoutErrorMessage,
+                                    messageKey: CHECKOUT_ERROR_FORM_TYPE.accessForbidden
+                                }
+                            }),
+                            propsData: {
+                                redirectUrl: 'menu-jason-1'
+                            },
+                            mocks: {
+                                $cookies,
+                                $logger
+                            }
+                        });
                     });
                     describe('AND a menu basket cookie does not exist', () => {
                         it('should not delete the cookie', () => {
