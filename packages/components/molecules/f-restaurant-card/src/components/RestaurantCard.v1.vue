@@ -57,7 +57,7 @@
                 <div
                     v-if="isPremier"
                     :class="[$style['c-restaurantCard-localLegend']]">
-                    <legend-icon />
+                    <legend-icon data-test-id="local-legend-icon" />
                 </div>
             </component>
             <!-- END ERROR BOUNDARY -->

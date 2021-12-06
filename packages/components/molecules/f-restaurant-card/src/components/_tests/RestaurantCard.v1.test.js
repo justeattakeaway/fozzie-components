@@ -268,4 +268,56 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-offer"]').exists()).toBe(false);
         });
     });
+
+    describe('Local Legend', () => {
+        it('should load an svg', () => {
+            // arrange
+            const propsData = {
+                isPremier: true
+
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+            expect(wrapper.find('svg[data-test-id="local-legend-icon"]').exists()).toBe(true);
+        });
+
+        it('should show Local Legends when restaurant is Premier', () => {
+            // arrange
+            const propsData = {
+                isPremier: true
+
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="local-legend-icon"]').exists()).toBe(true);
+        });
+
+        it('should not show Local Legends when restaurant is not Premier', () => {
+            // arrange
+            const propsData = {
+                isPremier: false
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="local-legend-icon"]').exists()).toBe(false);
+        });
+
+        it('should not show Local Legends when premier data is missing', () => {
+            // arrange
+            const propsData = {};
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="local-legend-icon"]').exists()).toBe(false);
+        });
+    });
 });
