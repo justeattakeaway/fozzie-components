@@ -310,7 +310,8 @@ export default {
          *
          * */
         redirectUrl () {
-            if (this.checkoutErrorMessage?.messageKey === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable || this.checkoutErrorMessage?.code === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
+            if (this.checkoutErrorMessage?.messageKey === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable
+                || this.checkoutErrorMessage?.messageKey === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
                 const postcodeCookie = this.$cookies.get('je-location');
 
                 return postcodeCookie ? `area/${postcodeCookie}` : '/';

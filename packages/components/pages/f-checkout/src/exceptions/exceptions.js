@@ -41,13 +41,17 @@ class UpdateCheckoutAccessForbiddenError extends UpdateCheckoutError {
 class PlaceOrderError extends Error {
     constructor (message, errorCode) {
         super(message);
-        this.messageKey = 'errorMessages.genericServerError';
-        this.eventMessage = errorCode === DUPLICATE_ORDER
-            ? 'CheckoutPlaceOrderDuplicateOrder'
-            : 'CheckoutPlaceOrderFailure';
-        this.errorType = errorCode === DUPLICATE_ORDER
-            ? ERROR_TYPES.dialog
-            : ERROR_TYPES.alert;
+
+        if (errorCode === DUPLICATE_ORDER) {
+            this.messageKey = DUPLICATE_ORDER;
+            this.eventMessage = 'CheckoutPlaceOrderDuplicateOrder';
+            this.errorType = ERROR_TYPES.dialog;
+        } else {
+            this.messageKey = 'errorMessages.genericServerError';
+            this.eventMessage = 'CheckoutPlaceOrderFailure';
+            this.errorType = ERROR_TYPES.alert;
+        }
+
         this.errorCode = errorCode;
     }
 }

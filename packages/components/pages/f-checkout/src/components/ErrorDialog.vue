@@ -5,34 +5,33 @@
         has-overlay
         :title="$t(`errorMessages.checkoutIssues.${messageKey}.title`, { serviceType: serviceTypeText })"
         :is-open="isOpen"
-        @close="closeErrorDialog"
-    >
+        @close="closeErrorDialog">
         <p data-test-id="checkout-issue-modal-message">
             {{ $t(`errorMessages.checkoutIssues.${messageKey}.message`, { serviceType: serviceTypeText }) }}
         </p>
 
-        <f-button
-            :class="$style['c-checkout-errorDialogButton']"
-            :data-gtm="isDuplicateOrderError ? 'engagement|dialog_duplicate_order_warning|click_acknowledge' : undefined"
-            button-size="large"
-            :button-type="isDuplicateOrderError ? 'secondary' : 'primary'"
-            data-test-id="redirect-to-menu-button"
-            @click.native="closeErrorDialog"
-        >
-            {{ $t(`errorMessages.checkoutIssues.${messageKey}.buttonText`) }}
-        </f-button>
+        <div>
+            <f-button
+                :class="$style['c-checkout-errorDialogButton']"
+                :data-gtm="isDuplicateOrderError ? 'engagement|dialog_duplicate_order_warning|click_acknowledge' : undefined"
+                button-size="large"
+                :button-type="isDuplicateOrderError ? 'secondary' : 'primary'"
+                data-test-id="redirect-to-menu-button"
+                @click.native="closeErrorDialog">
+                {{ $t(`errorMessages.checkoutIssues.${messageKey}.buttonText`) }}
+            </f-button>
 
-        <f-button
-            v-if="isDuplicateOrderError"
-            :class="$style['c-checkout-errorDialogButton']"
-            button-size="large"
-            button-type="primary"
-            data-test-id="redirect-to-orderhistory-button"
-            data-gtm="engagement|dialog_duplicate_order_warning|click_view_orders"
-            @click.native="showOrderHistory"
-        >
-            {{ $t(`errorMessages.checkoutIssues.${messageKey}.buttonTextPrimary`) }}
-        </f-button>
+            <f-button
+                v-if="isDuplicateOrderError"
+                :class="$style['c-checkout-errorDialogButton']"
+                button-size="large"
+                button-type="primary"
+                data-test-id="redirect-to-orderhistory-button"
+                data-gtm="engagement|dialog_duplicate_order_warning|click_view_orders"
+                @click.native="showOrderHistory">
+                {{ $t(`errorMessages.checkoutIssues.${messageKey}.buttonTextPrimary`) }}
+            </f-button>
+        </div>
     </mega-modal>
 </template>
 

@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.12.0
 ------------------------------
-*December 1, 2021*
+*December 6, 2021*
 
 ### Changed
 - All dialog/alert/errorPage errors to be stored under `checkoutErrorMessage`.
