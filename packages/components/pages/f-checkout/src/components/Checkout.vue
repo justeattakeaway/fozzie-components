@@ -272,7 +272,7 @@ export default {
         },
 
         shouldShowAgeVerificationForm () {
-            return !this.shouldShowCheckoutErrorPage && this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
+            return !this.shouldShowCheckoutErrorPage && this.errors.some(error => error.messageKey === DOB_REQUIRED_ISSUE || error.messageKey === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {

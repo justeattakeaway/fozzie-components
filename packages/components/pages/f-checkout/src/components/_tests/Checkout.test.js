@@ -684,7 +684,7 @@ describe('Checkout', () => {
                             ...defaultCheckoutState,
                             errors: [
                                 {
-                                    code: DOB_REQUIRED_ISSUE,
+                                    messageKey: DOB_REQUIRED_ISSUE,
                                     shouldShowInDialog: false
                                 }
                             ]
