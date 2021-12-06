@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
 import {
-    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE
+    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE, ERROR_TYPES
 } from '../constants';
 import basketApi from '../services/basketApi';
 import checkoutApi from '../services/checkoutApi';
@@ -25,7 +25,7 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_MESSAGE,
+    UPDATE_CHECKOUT_ERROR_MESSAGE,
     UPDATE_ORDER_PLACED,
     UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
@@ -43,7 +43,10 @@ const getIssueByCode = code => {
     const issue = checkoutIssues[code];
 
     if (issue) {
-        return { ...issue, code };
+        return {
+            ...issue,
+            messageKey: code
+        };
     }
 
     return null;
@@ -104,6 +107,7 @@ export default {
             id: '',
             total: 0
         },
+        checkoutErrorMessage: null,
         customer: {
             firstName: '',
             lastName: '',
@@ -126,7 +130,6 @@ export default {
         isFulfillable: true,
         errors: [],
         notices: [],
-        message: null,
         messages: [],
         availableFulfilment: {
             times: [],
@@ -173,15 +176,16 @@ export default {
                 data,
                 timeout
             };
+
             const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
             const { issues, isFulfillable } = responseData;
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
-                    || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
+                    || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            dispatch('updateMessage', detailedIssues[0]);
+            dispatch('updateCheckoutErrorMessage', detailedIssues[0]);
 
             return headers;
         },
@@ -246,11 +250,11 @@ export default {
             // We can't call GET checkout as a guest so we're now having to use the basket response for age restrictions until then
             if (basketDetails.ageRestricted && (tenant === 'au' || tenant === 'nz')) {
                 commit(UPDATE_IS_FULFILLABLE, false);
-                commit(UPDATE_ERRORS, [{ code: DOB_REQUIRED_ISSUE }]);
+                commit(UPDATE_ERRORS, [{ messageKey: DOB_REQUIRED_ISSUE }]);
             }
 
             if (hasBasketChanged) {
-                commit(UPDATE_MESSAGE, getIssueByCode('BasketChanged'));
+                commit(UPDATE_CHECKOUT_ERROR_MESSAGE, getIssueByCode('BasketChanged'));
             }
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
@@ -344,7 +348,7 @@ export default {
                     const checkoutIssue = getIssueByCode(errorCode);
 
                     commit(UPDATE_ERRORS, (checkoutIssue ? [checkoutIssue] : []));
-                    dispatch('updateMessage', checkoutIssue);
+                    dispatch('updateCheckoutErrorMessage', checkoutIssue);
                 }
 
                 throw error; // Handled by the calling function.
@@ -429,8 +433,8 @@ export default {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
         },
 
-        updateMessage:  ({ commit }, message = null) => {
-            commit(UPDATE_MESSAGE, message);
+        updateCheckoutErrorMessage:  ({ commit }, message = null) => {
+            commit(UPDATE_CHECKOUT_ERROR_MESSAGE, message);
         },
 
         updateAddress: ({ commit }, address) => {
@@ -557,7 +561,7 @@ export default {
         },
 
         [CLEAR_DOB_ERROR]: state => {
-            state.errors = state.errors.filter(error => error.code !== DOB_REQUIRED_ISSUE && error.code !== AGE_VERIFICATION_ISSUE);
+            state.errors = state.errors.filter(error => error.messageKey !== DOB_REQUIRED_ISSUE && error.messageKey !== AGE_VERIFICATION_ISSUE);
         },
 
         [UPDATE_USER_NOTE]: (state, userNote) => {
@@ -578,8 +582,8 @@ export default {
             }
         },
 
-        [UPDATE_MESSAGE]: (state, message) => {
-            state.message = message;
+        [UPDATE_CHECKOUT_ERROR_MESSAGE]: (state, message) => {
+            state.checkoutErrorMessage = message;
         },
 
         [UPDATE_ADDRESS]: (state, address) => {

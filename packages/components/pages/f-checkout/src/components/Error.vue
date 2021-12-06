@@ -2,8 +2,8 @@
     <card
         data-test-id="checkout-error-page-component"
         :class="$style['c-checkout-error']"
-        :card-heading="$t(`errorMessages.${errorFormType}.heading`)"
-        :card-description=" $t(`errorMessages.${errorFormType}.description`, { serviceType: serviceType })"
+        :card-heading="$t(`errorMessages.${messageKey}.heading`)"
+        :card-description=" $t(`errorMessages.${messageKey}.description`, { serviceType: serviceType })"
         :primary-button="primaryButton"
         @primary-button-click="redirectFromErrorPage">
         <template
@@ -36,17 +36,7 @@ export default {
     ],
 
     props: {
-        errorFormType: {
-            type: String,
-            required: true
-        },
-
         redirectUrl: {
-            type: String,
-            default: ''
-        },
-
-        serviceType: {
             type: String,
             default: ''
         }
@@ -54,12 +44,18 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'restaurant'
+            'restaurant',
+            'checkoutErrorMessage',
+            'serviceType'
         ]),
+
+        messageKey () {
+            return this.checkoutErrorMessage.messageKey;
+        },
 
         primaryButton () {
             return {
-                text: this.$t(`errorMessages.${this.errorFormType}.buttonText`)
+                text: this.$t(`errorMessages.${this.messageKey}.buttonText`)
             };
         }
     },
@@ -74,7 +70,7 @@ export default {
 
     methods: {
         redirectFromErrorPage () {
-            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.accessForbidden) {
+            if (this.messageKey === CHECKOUT_ERROR_FORM_TYPE.accessForbidden) {
                 const cookieName = `je-mw-basket-${this.restaurant.id}`;
                 const basketCookie = this.$cookies.get(cookieName);
                 if (basketCookie) {

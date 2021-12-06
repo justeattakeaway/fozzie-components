@@ -259,10 +259,10 @@ describe('getAnalyticsErrorCodeByApiErrorCode :: ', () => {
         ['ITEMS_UNORDERABLE', 'basketNotOrderable'],
         ['LAST_NAME_REQUIRED', 'invalidModelState'],
         ['FULFILMENT_TIME_REQUIRED', 'setOrderTime']
-    ])('should correctly map %s to %s', (code, expected) => {
+    ])('should correctly map %s to %s', (messageKey, expected) => {
         // Arrange
         const error = {
-            code
+            messageKey
         };
 
         // Act & Assert
