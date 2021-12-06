@@ -348,7 +348,8 @@ export default {
 
         customNavLinks: {
             type: Array,
-            default: () => []
+            default: () => [],
+            validator: links => links.every(link => link.text && link.url)
         }
     },
 
