@@ -4,7 +4,7 @@ import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 
 describe('RestaurantCard.v1', () => {
     describe('Error Boundary', () => {
-        const slotList = ['meta-items', 'local-legend', 'optional-items'];
+        const slotList = ['meta-items', 'optional-items'];
 
         it.each(slotList)('Successfully wraps %p slot in error boundary', slot => {
             // arrange

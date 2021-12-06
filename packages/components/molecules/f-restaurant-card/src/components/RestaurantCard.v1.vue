@@ -37,13 +37,6 @@
                 {{ name }}
             </h3>
 
-            <!-- Local Legend -->
-            <div
-                v-if="isPremier"
-                :class="[$style['c-restaurantCard-localLegend']]">
-                <legend-icon />
-            </div>
-
             <!-- Cuisines -->
             <!-- START ERROR BOUNDARY -->
             <component
@@ -56,6 +49,18 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
+            <!-- Local Legend label -->
+            <!-- START ERROR BOUNDARY -->
+            <component
+                :is="errorBoundary"
+                tier="3">
+                <div
+                    v-if="isPremier"
+                    :class="[$style['c-restaurantCard-localLegend']]">
+                    <legend-icon />
+                </div>
+            </component>
+            <!-- END ERROR BOUNDARY -->
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
@@ -97,15 +102,6 @@
                     v-if="displayDeliveryTimeMeta"
                     v-bind="deliveryTimeData"
                     data-test-id="restaurant-delivery-time-meta" />
-            </component>
-            <!-- END ERROR BOUNDARY -->
-
-            <!-- Local Legend label -->
-            <!-- START ERROR BOUNDARY -->
-            <component
-                :is="errorBoundary"
-                tier="3">
-                <slot name="local-legend" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
