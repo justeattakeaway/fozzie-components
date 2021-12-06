@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="[$style['c-RestaurantTags']]"
+        :class="[$style['c-restaurantTags']]"
         :data-test-id="`restaurant-${testIdPosition}-tags`">
         <p
             v-for="(tag, index) in tags"
