@@ -13,13 +13,6 @@
 </template>
 
 <script>
-import { theme as PieTokensTheme } from '@justeat/pie-design-tokens/dist/tokens.json';
-
-const {
-    'content-default': textColour,
-    'container-subtle': backgroundColor
-} = PieTokensTheme.jet.color.alias.default;
-
 export default {
     name: 'RestaurantTag',
     props: {
@@ -29,11 +22,11 @@ export default {
         },
         textColour: {
             type: String,
-            default: textColour
+            default: null
         },
         backgroundColour: {
             type: String,
-            default: backgroundColor
+            default: null
         },
         isLarge: {
             type: Boolean,
@@ -53,6 +46,8 @@ export default {
     padding: 0 spacing() / 2;
     border-radius: $radius-rounded-a;
     font-size: $font-paragraph-03 * 1px;
+    color: $color-content-default;
+    background-color: $color-container-subtle;
 
      @include media('<mid') {
          max-width: 30ch;
