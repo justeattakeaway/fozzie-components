@@ -37,6 +37,13 @@
                 {{ name }}
             </h3>
 
+            <!-- Local Legend -->
+            <div
+                v-if="isPremier"
+                :class="[$style['c-restaurantCard-localLegend']]">
+                <legend-icon />
+            </div>
+
             <!-- Cuisines -->
             <!-- START ERROR BOUNDARY -->
             <component
@@ -144,7 +151,7 @@
 </template>
 
 <script>
-import { OfferIcon } from '@justeat/f-vue-icons';
+import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
@@ -168,7 +175,8 @@ export default {
         RestaurantRating,
         DeliveryTimeMeta,
         IconText,
-        OfferIcon
+        OfferIcon,
+        LegendIcon
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -229,6 +237,10 @@ export default {
         offer: {
             type: String,
             default: null
+        },
+        isPremier: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -319,5 +331,10 @@ export default {
     @include media('>mid') {
         bottom: spacing(x1.5);
     }
+}
+
+.c-restaurantCard-localLegend {
+    width: 45px;
+    height: 21px;
 }
 </style>
