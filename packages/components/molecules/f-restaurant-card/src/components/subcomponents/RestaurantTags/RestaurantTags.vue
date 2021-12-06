@@ -5,7 +5,7 @@
         <p
             v-for="(tag, index) in tags"
             :key="index"
-            :class="[$style['c-RestaurantTags-tag']]">
+            :class="[$style['c-restaurantTags-tag']]">
             <restaurant-tag v-bind="tag" />
         </p>
     </div>
