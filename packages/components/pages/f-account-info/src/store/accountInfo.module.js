@@ -1,7 +1,6 @@
 import {
     mapToConsumerDetails,
-    mapToConsumerAddress,
-    mapToConsumerDetailsUpdateModel
+    mapToConsumerAddress
 } from '../services/mapping/consumer.mapper';
 import {
     UPDATE_CONSUMER_DETAILS,
@@ -17,8 +16,9 @@ export default {
 
     actions: {
         async loadConsumerDetails ({ commit }, { api, authToken }) {
-            const getDetailsTask = api.getConsumerDetails(authToken);
-            const getAddressTask = null; //  api.getConsumerAddress(authToken);
+            const conversationId = api.setConversationId();
+            const getDetailsTask = api.getConsumerDetails(authToken, conversationId);
+            const getAddressTask = api.getConsumerAddresses(authToken, conversationId);
 
             const responses = await Promise.all([getDetailsTask, getAddressTask]);
 
@@ -26,15 +26,6 @@ export default {
             const address = mapToConsumerAddress(responses[1]?.data);
 
             commit(UPDATE_CONSUMER_DETAILS, { details, address });
-        },
-
-        async saveConsumerDetails ({ state }, { api, authToken }) {
-            const { details, address } = mapToConsumerDetailsUpdateModel(state); // eslint-disable-line
-
-            const detailsTask = api.postConsumerDetails(authToken, details);
-            const addressTask = null; // api.postConsumerAddress(authToken, address);
-
-            await Promise.all([detailsTask, addressTask]);
         },
 
         async editConsumerDetails ({ commit, state }, { field, value }) {

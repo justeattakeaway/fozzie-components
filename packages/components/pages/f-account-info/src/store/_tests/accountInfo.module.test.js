@@ -5,25 +5,29 @@ import {
 } from '../../constants';
 import {
     token,
+    conversationId,
     consumerDetailsGetResponse,
-    // consumerAddressGetResponse,
+    consumerAddressesGetResponse,
     consumerViewModel,
     consumerDetailsMappedModel,
     consumerAddressMappedModel
 } from '../../../test-utils/setup';
 
 describe('AccountInfo Store', () => {
-    let httpClientMock;
+    let apiClientMock;
+    let setConversationIdMock;
     let getConsumerDetailsMock;
-    let getConsumerAddressMock;
+    let getConsumerAddressesMock;
 
     beforeEach(() => {
         // Arrange
+        setConversationIdMock = jest.fn(() => conversationId);
         getConsumerDetailsMock = jest.fn(() => consumerDetailsGetResponse);
-        getConsumerAddressMock = jest.fn(() => undefined); // consumerAddressGetResponse);
-        httpClientMock = {
+        getConsumerAddressesMock = jest.fn(() => consumerAddressesGetResponse);
+        apiClientMock = {
+            setConversationId: setConversationIdMock,
             getConsumerDetails: getConsumerDetailsMock,
-            getConsumerAddress: getConsumerAddressMock
+            getConsumerAddresses: getConsumerAddressesMock
         };
     });
 
@@ -42,45 +46,51 @@ describe('AccountInfo Store', () => {
 
     describe('actions ::', () => {
         describe('loadConsumerDetails ::', () => {
-            it('should call the getConsumerDetails method with the correct parameters', async () => {
+            it('should call the getConsumerDetails/getConsumerAddresses method with the correct parameters', async () => {
                 // Act
-                await accountInfoModule.actions.loadConsumerDetails({ commit: jest.fn() }, { api: httpClientMock, authToken: token });
+                await accountInfoModule.actions.loadConsumerDetails({ commit: jest.fn() }, { api: apiClientMock, authToken: token });
 
                 // Assert
-                expect(getConsumerDetailsMock).toHaveBeenCalledWith(token);
+                expect(getConsumerDetailsMock).toHaveBeenCalledWith(token, conversationId);
+                expect(getConsumerAddressesMock).toHaveBeenCalledWith(token, conversationId);
             });
 
             it(`should call ${UPDATE_CONSUMER_DETAILS} mutation with the correct data`, async () => {
-                const tempExpectedAddress =
-                {
+                // Arrange
+                const commitSpy = jest.fn();
+                const expectedDetails = consumerDetailsMappedModel;
+                const expectedAddress = consumerAddressMappedModel;
+
+                // Act
+                await accountInfoModule.actions.loadConsumerDetails({ commit: commitSpy }, { api: apiClientMock, authToken: token });
+
+                // Assert
+                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_CONSUMER_DETAILS, { details: expectedDetails, address: expectedAddress });
+            });
+
+            it('should not fail if `getConsumerAddresses` returns empty response', async () => {
+                // Arrange
+                const apiMock = {
+                    setConversationId: setConversationIdMock,
+                    getConsumerDetails: getConsumerDetailsMock,
+                    getConsumerAddresses: jest.fn(() => undefined) // No response
+                };
+                const commitSpy = jest.fn();
+                const expectedAddress = {
                     line1: undefined,
                     line2: undefined,
                     line3: undefined,
                     city: undefined,
                     postcode: undefined
                 };
-                // Arrange
-                const commitSpy = jest.fn();
-                const expectedDetails = consumerDetailsMappedModel;
-                const expectedAddress = tempExpectedAddress; // consumerAddressMappedModel;
 
                 // Act
-                await accountInfoModule.actions.loadConsumerDetails({ commit: commitSpy }, { api: httpClientMock, authToken: token });
+                await accountInfoModule.actions.loadConsumerDetails({ commit: commitSpy }, { api: apiMock, authToken: token });
 
                 // Assert
-                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_CONSUMER_DETAILS, { details: expectedDetails, address: expectedAddress });
+                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_CONSUMER_DETAILS, { details: expect.anything(), address: expectedAddress });
             });
         });
-
-        // describe('saveConsumerDetails ::', () => {
-        //     it('should call the postConsumerDetails method with the correct parameters', async () => {
-        //         // Act
-        //         await accountInfoModule.actions.saveConsumerDetails({ state: consumerViewModel }, { api: httpClientMock, authToken: token });
-
-        //         // Assert
-        //         expect(postConsumerDetailsMock).toHaveBeenCalledWith(token, consumerViewModel);
-        //     });
-        // });
 
         describe('editPreference ::', () => {
             it(`should call ${UPDATE_CONSUMER_DETAIL} mutation with the correct data`, () => {

@@ -6,14 +6,6 @@ import {
     CONVERSATION_ID_NAME
 } from '../../constants';
 
-const GetSetConversationId = cookies => {
-    const conversationId = uuid();
-
-    cookies.set(CONVERSATION_ID_NAME, conversationId);
-
-    return conversationId;
-};
-
 export default class ConsumerApi {
     #httpClient;
     #cookies;
@@ -25,7 +17,7 @@ export default class ConsumerApi {
         this.#baseUrl = baseUrl;
     }
 
-    async getConsumerDetails (authToken, conversationId = GetSetConversationId(this.#cookies)) {
+    async getConsumerDetails (authToken, conversationId = this.setConversationId()) {
         const headers = {
             [CONVERSATION_ID_NAME]: conversationId,
             Authorization: authToken ? `Bearer ${authToken}` : ''
@@ -36,7 +28,7 @@ export default class ConsumerApi {
         return response;
     }
 
-    async getConsumerAddresses (authToken, conversationId = GetSetConversationId(this.#cookies)) {
+    async getConsumerAddresses (authToken, conversationId = this.setConversationId()) {
         const headers = {
             [CONVERSATION_ID_NAME]: conversationId,
             Authorization: authToken ? `Bearer ${authToken}` : ''
@@ -46,4 +38,12 @@ export default class ConsumerApi {
 
         return response;
     }
+
+    setConversationId = conversationId => {
+        const cid = conversationId || uuid();
+
+        this.#cookies.set(CONVERSATION_ID_NAME, cid);
+
+        return cid;
+    };
 }
