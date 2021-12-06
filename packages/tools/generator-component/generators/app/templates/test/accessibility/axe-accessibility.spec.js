@@ -9,7 +9,7 @@ describe('Accessibility tests', () => {
         <%= name.class %>.load();
     });
 
-    it('a11y - should test f-<%= name.class %> component WCAG compliance', () => {
+    it('a11y - should test f-<%= name.default %> component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-<%= name.default %>');
 

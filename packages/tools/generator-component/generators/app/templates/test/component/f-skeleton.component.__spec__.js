@@ -2,7 +2,7 @@ const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= n
 
 const <%= name.class %> = new <%= name.filename %>();
 
-describe('f-<%= name.class %> component tests', () => {
+describe('f-<%= name.default %> component tests', () => {
     beforeEach(() => {
         <%= name.class %>.load();
     });
