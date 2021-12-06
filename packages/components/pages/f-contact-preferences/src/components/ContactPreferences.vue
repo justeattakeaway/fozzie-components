@@ -55,7 +55,7 @@
                 </div>
 
                 <f-button
-                    :class="$style['c-contact-preferences-btn']"
+                    :class="$style['c-contactPreferences-btn']"
                     data-test-id="contact-preferences-submit-button"
                     button-type="primary"
                     action-type="submit"
@@ -96,8 +96,9 @@ import '@justeat/f-card/dist/f-card.css';
 import tenantConfigs from '../tenants';
 import { GetPreferencesError } from '../exceptions';
 import ContactPreferencesApi from '../services/providers/contactPreferences.api';
+import fContactPreferencesModule from '../store/contactPreferences.module';
 import {
-    STOP_LOADING_SPINNER_EVENT
+    EVENT_SPINNER_STOP_LOADING
 } from '../constants';
 
 export default {
@@ -113,7 +114,11 @@ export default {
     props: {
         authToken: {
             type: String,
-            default: ''
+            default: null
+        },
+        isAuthFinished: {
+            type: Boolean,
+            required: true
         },
         smartGatewayBaseUrl: {
             type: String,
@@ -142,8 +147,27 @@ export default {
         ])
     },
 
+    watch: {
+        isAuthFinished: {
+            immediate: true,
+            async handler (value) {
+                if (value) {
+                    await this.initialise();
+                }
+            }
+        }
+    },
+
+    created () {
+        if (!this.$store.hasModule('fContactPreferencesModule')) {
+            this.$store.registerModule('fContactPreferencesModule', fContactPreferencesModule);
+        }
+    },
+
     async mounted () {
-        await this.initialise();
+        if (this.isAuthFinished) {
+            await this.initialise();
+        }
     },
 
     methods: {
@@ -196,7 +220,9 @@ export default {
             } catch (error) {
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
-                this.$parent.$emit(STOP_LOADING_SPINNER_EVENT);
+                this.$nextTick(() => {
+                    this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
+                });
             }
         },
 
@@ -247,7 +273,7 @@ export default {
     @include font-size(heading-s);
 }
 
-.c-contact-preferences-btn {
+.c-contactPreferences-btn {
     width: 100%;
 
     @include media('>narrow') {

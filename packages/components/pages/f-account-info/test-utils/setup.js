@@ -1,3 +1,19 @@
+import Vuex from 'vuex';
+import { createLocalVue } from '@vue/test-utils';
+import { VueI18n } from '@justeat/f-globalisation';
+import tenantConfigs from '../src/tenants';
+
+export const localVue = createLocalVue();
+localVue.use(VueI18n);
+localVue.use(Vuex);
+
+export const i18n = {
+    locale: 'en-GB',
+    messages: {
+        'en-GB': tenantConfigs['en-GB'].messages
+    }
+};
+
 export const baseUrl = 'https://smartGatewayBaseUrl.com';
 
 export const token = 'some-auth-token';

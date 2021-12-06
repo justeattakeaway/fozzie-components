@@ -1,17 +1,12 @@
 import Vuex from 'vuex';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import { VueI18n } from '@justeat/f-globalisation';
+import { shallowMount } from '@vue/test-utils';
 import AccountInfo from '../AccountInfo.vue';
-import tenantConfigs from '../../tenants';
 import {
+    localVue,
+    i18n,
     baseUrl,
     token
 } from '../../../test-utils/setup';
-
-const localVue = createLocalVue();
-
-localVue.use(VueI18n);
-localVue.use(Vuex);
 
 const createStore = ({ state = {}, actions = {} } = {}) => new Vuex.Store({
     modules: {
@@ -22,13 +17,6 @@ const createStore = ({ state = {}, actions = {} } = {}) => new Vuex.Store({
         }
     }
 });
-
-const i18n = {
-    locale: 'en-GB',
-    messages: {
-        'en-GB': tenantConfigs['en-GB'].messages
-    }
-};
 
 let sutProps;
 
