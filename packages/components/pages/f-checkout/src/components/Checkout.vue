@@ -739,10 +739,10 @@ export default {
 
             this.updateCheckoutErrorMessage({
                 messageKey,
-                errorType: error.errorType
+                errorType: error.errorType || ERROR_TYPES.alert
             });
 
-            if (error.errorType === ERROR_TYPES.alert) {
+            if (this.checkoutErrorMessage?.errorType === ERROR_TYPES.alert) {
                 this.$nextTick(() => {
                     this.scrollToElement(this.$refs.errorMessage.$el);
                 });
