@@ -32,20 +32,4 @@ describe('RestaurantTag component', () => {
         // assert
         expect(wrapper.attributes('title')).toMatch(expectedTitle);
     });
-
-    it('styles the text and background colours based on props given', () => {
-        // arrange
-        const expectedTitle = 'BTA Winner';
-        const propsData = {
-            text: expectedTitle,
-            textColour: '#fff',
-            backgroundColour: '#2b3639'
-        };
-
-        // act
-        const wrapper = shallowMount(RestaurantTag, { propsData });
-
-        // assert
-        expect(wrapper.attributes('style')).toMatch('color: rgb(255, 255, 255); background-color: rgb(43, 54, 57);');
-    });
 });

@@ -15,6 +15,7 @@ v0.9.0
 - Updated storybook for restaurant card
 - Renamed RestaurantBadge and RestaurantBadges to RestaurantTag and RestaurantTags to align with language across the business
 - Remove pie token import from tag component and use css class for default colours
+- Hardcode colour scheme options for restaurant tags
 
 v0.8.0
 ------------------------------

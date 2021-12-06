@@ -62,8 +62,7 @@
                     :is-large="true"
                     :is-uppercase="true"
                     :text="newTagText"
-                    :background-colour="subcomponentColourSchemes.tags.new.background"
-                    :text-colour="subcomponentColourSchemes.tags.new.text" />
+                    color-scheme="positive" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -137,7 +136,6 @@
 </template>
 
 <script>
-import { theme as PieTokensTheme } from '@justeat/pie-design-tokens/dist/tokens.json';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
@@ -147,20 +145,6 @@ import RestaurantTags from './subcomponents/RestaurantTags/RestaurantTags.vue';
 import RestaurantTag from './subcomponents/RestaurantTags/RestaurantTag.vue';
 import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.vue';
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
-
-const {
-    'support-positive': newTagTextColour,
-    'support-positive-02': newTagBackgroundColour
-} = PieTokensTheme.jet.color.alias.default;
-
-const subcomponentColourSchemes = {
-    tags: {
-        new: {
-            text: newTagTextColour,
-            background: newTagBackgroundColour
-        }
-    }
-};
 
 export default {
     name: 'RestaurantCardV1',
@@ -230,11 +214,6 @@ export default {
             type: Object,
             default: () => ({})
         }
-    },
-    data () {
-        return {
-            subcomponentColourSchemes
-        };
     },
     computed: {
         hasContentTags () {

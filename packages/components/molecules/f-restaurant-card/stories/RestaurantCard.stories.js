@@ -3,21 +3,9 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import PieTokens from '@justeat/pie-design-tokens/dist/tokens.json';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
 import restaurantLogo from './assets/images/mcdonalds-logo.gif';
 import restaurantImage from './assets/images/mcdonalds.webp';
-
-const tagColourSchemes = {
-    promoted: {
-        text: PieTokens.theme.jet.color.alias.default['content-light'],
-        background: PieTokens.theme.jet.color.alias.default['container-dark']
-    },
-    stampcards: {
-        text: PieTokens.theme.jet.color.alias.default['content-default'],
-        background: PieTokens.theme.jet.color.alias.default['support-brand-02']
-    }
-};
 
 export default {
     title: 'Components/Molecules/f-restaurant-card',
@@ -45,7 +33,7 @@ RestaurantCardComponent.args = {
         url: 'some-restaurant/12345',
         cuisines: ['Mexican', 'Burgers', 'Chinese'],
         tags: {
-            imageTags: [{ text: 'Promoted', textColour: tagColourSchemes.promoted.text, backgroundColour: tagColourSchemes.promoted.background }, { text: 'StampCards', textColour: tagColourSchemes.stampcards.text, backgroundColour: tagColourSchemes.stampcards.background }],
+            imageTags: [{ text: 'Promoted', colorScheme: 'dark' }, { text: 'StampCards', colorScheme: 'warm' }],
             contentTags: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test tag that hopefully never happens' }]
         },
         newTagText: 'new',

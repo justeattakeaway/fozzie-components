@@ -2,10 +2,10 @@
     <span
         :class="{
             [$style['c-restaurantTag']]: true,
+            [$style[`c-restaurantTag--${colorScheme}`]]: !!colorScheme,
             [$style['c-restaurantTag--isLarge']]: isLarge,
             [$style['c-restaurantTag--isUppercase']]: isUppercase
         }"
-        :style="`color:${textColour}; background-color:${backgroundColour};`"
         :title="text"
         data-test-id="restaurant-tag">
         {{ text }}
@@ -13,6 +13,12 @@
 </template>
 
 <script>
+const colourSchemes = {
+    warm: 'warm',
+    dark: 'dark',
+    positive: 'positive'
+};
+
 export default {
     name: 'RestaurantTag',
     props: {
@@ -20,13 +26,10 @@ export default {
             type: String,
             required: true
         },
-        textColour: {
+        colorScheme: {
             type: String,
-            default: null
-        },
-        backgroundColour: {
-            type: String,
-            default: null
+            default: null,
+            validator: value => !!colourSchemes[value]
         },
         isLarge: {
             type: Boolean,
@@ -63,5 +66,20 @@ export default {
 
 .c-restaurantTag--isUppercase {
     text-transform: uppercase;
+}
+
+.c-restaurantTag--dark {
+    color: $color-content-light;
+    background-color: $color-dark-container-dark;
+}
+
+.c-restaurantTag--warm {
+    color: $color-content-default;
+    background-color: $color-support-brand-02;
+}
+
+.c-restaurantTag--positive {
+    color: $color-support-positive;
+    background-color: $color-support-positive-02;
 }
 </style>
