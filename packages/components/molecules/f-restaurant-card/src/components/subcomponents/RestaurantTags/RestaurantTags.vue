@@ -1,11 +1,11 @@
 <template>
     <div
-        :class="[$style['c-RestaurantTags']]"
+        :class="[$style['c-restaurantTags']]"
         :data-test-id="`restaurant-${testIdPosition}-tags`">
         <p
             v-for="(tag, index) in tags"
             :key="index"
-            :class="[$style['c-RestaurantTags-tag']]">
+            :class="[$style['c-restaurantTags-tag']]">
             <restaurant-tag v-bind="tag" />
         </p>
     </div>
@@ -34,12 +34,12 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-RestaurantTags {
+.c-restaurantTags {
     margin: 0;
     padding: 0;
 }
 
-.c-RestaurantTags-tag {
+.c-restaurantTags-tag {
     list-style-type: none;
     padding: 0;
     margin: 0;
