@@ -186,7 +186,7 @@ export default {
         * @param {string} key - The key of the preference that needs changing
         */
         getSmsDescription (key) {
-            if (!this.$te(`${key}.smsDescription`)) return undefined;
+            if (!this.$te(`${key}.smsDescription`)) return '';
 
             return `(${this.$t(`${key}.smsDescription`)})`;
         },
