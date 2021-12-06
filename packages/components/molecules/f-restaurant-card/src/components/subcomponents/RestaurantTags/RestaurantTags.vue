@@ -39,7 +39,7 @@ export default {
     padding: 0;
 }
 
-.c-RestaurantTags-tag {
+.c-restaurantTags-tag {
     list-style-type: none;
     padding: 0;
     margin: 0;
