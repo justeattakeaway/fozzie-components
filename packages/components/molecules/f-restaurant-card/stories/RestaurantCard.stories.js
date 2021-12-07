@@ -3,24 +3,12 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import PieTokens from '@justeat/pie-design-tokens/dist/tokens.json';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
 import restaurantLogo from './assets/images/mcdonalds-logo.gif';
 import restaurantImage from './assets/images/mcdonalds.webp';
 
-const badgeColourSchemes = {
-    promoted: {
-        text: PieTokens.theme.jet.color.alias.default['content-light'],
-        background: PieTokens.theme.jet.color.alias.default['container-dark']
-    },
-    stampcards: {
-        text: PieTokens.theme.jet.color.alias.default['content-default'],
-        background: PieTokens.theme.jet.color.alias.default['support-brand-02']
-    }
-};
-
 export default {
-    title: 'Components/Molecules',
+    title: 'Components/Molecules/f-restaurant-card',
     decorators: [withA11y]
 };
 
@@ -44,9 +32,19 @@ RestaurantCardComponent.args = {
         isListItem: true,
         url: 'some-restaurant/12345',
         cuisines: ['Mexican', 'Burgers', 'Chinese'],
-        imageBadges: [{ text: 'Promoted', textColour: badgeColourSchemes.promoted.text, backgroundColour: badgeColourSchemes.promoted.background }, { text: 'StampCards', textColour: badgeColourSchemes.stampcards.text, backgroundColour: badgeColourSchemes.stampcards.background }],
-        contentBadges: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test badge that hopefully never happens' }],
-        newBadgeText: 'NEW',
+        tags: {
+            imageTags: [{ text: 'Promoted', colorScheme: 'dark' }, { text: 'StampCards', colorScheme: 'warm' }],
+            contentTags: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test tag that hopefully never happens' }]
+        },
+        newTagText: 'new',
+        rating: {
+            isOwnRating: false,
+            mean: 5.00,
+            count: 1400,
+            accessibleMessage: 'rated 5 stars out of 6',
+            notRatedMessage: 'No ratings yet',
+            isOwnRatingMessage: 'You'
+        },
         deliveryTimeData: {
             address: 'Fleet Place House, 2 Fleet Pl, London EC4M 7RF, The United Kingdom of Great Britain and Northern Ireland',
             distance: '1.35 miles',
@@ -66,7 +64,7 @@ RestaurantCardComponent.args = {
 
     flags: {
         fancyNewTitle: false,
-        experimentalBadges: true
+        experimentalTags: true
     },
 
     version: 'v1'
