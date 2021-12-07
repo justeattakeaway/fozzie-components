@@ -90,6 +90,32 @@ describe('AccountInfo Store', () => {
                 // Assert
                 expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_CONSUMER_DETAILS, { details: expect.anything(), address: expectedAddress });
             });
+
+            it('should not fail if `getConsumerAddresses` returns empty array', async () => {
+                // Arrange
+                const getAddressResponse = {
+                    data: []
+                };
+                const apiMock = {
+                    setConversationId: setConversationIdMock,
+                    getConsumerDetails: getConsumerDetailsMock,
+                    getConsumerAddresses: jest.fn(() => getAddressResponse) // Empty array
+                };
+                const commitSpy = jest.fn();
+                const expectedAddress = {
+                    line1: undefined,
+                    line2: undefined,
+                    line3: undefined,
+                    city: undefined,
+                    postcode: undefined
+                };
+
+                // Act
+                await accountInfoModule.actions.loadConsumerDetails({ commit: commitSpy }, { api: apiMock, authToken: token });
+
+                // Assert
+                expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_CONSUMER_DETAILS, { details: expect.anything(), address: expectedAddress });
+            });
         });
 
         describe('editPreference ::', () => {

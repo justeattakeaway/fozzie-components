@@ -28,7 +28,7 @@ export default {
             commit(UPDATE_CONSUMER_DETAILS, { details, address });
         },
 
-        async editConsumerDetails ({ commit, state }, { field, value }) {
+        editConsumerDetails ({ commit, state }, { field, value }) {
             const present = field in state.consumer;
             if (present) {
                 commit(UPDATE_CONSUMER_DETAIL, { field, value });
