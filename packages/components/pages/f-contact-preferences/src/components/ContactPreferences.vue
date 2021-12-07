@@ -270,16 +270,14 @@ export default {
 };
 </script>
 
-<style lang="scss" module>
-
-.c-contactPreferences-formField {
-    margin-top: 0 !important;
-    & label,
-    & label span {
-        margin-bottom: 0 !important;
-    }
+<style lang="scss">
+.c-formField-label,
+.c-formField-label-description  {
+    margin-bottom: 0;
 }
+</style>
 
+<style lang="scss" module>
 .c-contactPreferences-fieldset {
     display: flex;
     flex-flow: column;
@@ -300,3 +298,4 @@ export default {
     }
 }
 </style>
+
