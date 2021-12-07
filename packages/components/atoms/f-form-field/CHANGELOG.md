@@ -12,7 +12,7 @@ v4.5.0
 
 ### Added
 - Styles from `u-spacing` to label description class
-- Unscoped class to label and label desscription for parent styling
+- Unscoped class to label and label description for parent styling
 
 
 v4.4.0
