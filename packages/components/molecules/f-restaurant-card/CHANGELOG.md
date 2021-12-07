@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.10.0
+------------------------------
+*December 07, 2021*
+
+### Added
+- Restaurant offers
+- associated unit tests to check render logic
+
+### Changed
+- updated storybook with offer example
+
 v0.9.0
 ------------------------------
 *December 01, 2021*
