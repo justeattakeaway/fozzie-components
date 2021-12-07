@@ -35,12 +35,12 @@
     "build": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\""<% } %>,
     "lint:fix": "yarn lint --fix"<% if(config.isComponent) { %>,
-    "lint:style": "vue-cli-service lint:style",
-    "test:coverage": "jest test:unit --coverage",
-    "test": "vue-cli-service test:unit"<% if(config.needsComponentTests) { %>,
+    "lint:style": "vue-cli-service lint:style"<% } else { %>,
+    "test:coverage": "jest test:unit --coverage"<% } %>,
+    "test": "vue-cli-service test:unit"<% if(config.isComponent) { %><% if(config.needsComponentTests) { %>,
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"<% } %>,
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"<% if(config.needsVisualTests) { %>,
-    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_<%= name.class.toUpperCase() %>} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"<% } %><% } %>
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_<%= name.default.toUpperCase().replace('-', '_') %>} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"<% } %><% } %>
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

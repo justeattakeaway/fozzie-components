@@ -5,11 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.5.0
 ------------------------------
-*December 6, 2021*
+*December 7, 2021*
 
 ### Added
 - Prompt option for visual regression
-- Spec templates for visual regression
+- Spec templates for visual regression (mobile and desktop)
 
 ### Changed
 - component names in `test-utils` and `test`
