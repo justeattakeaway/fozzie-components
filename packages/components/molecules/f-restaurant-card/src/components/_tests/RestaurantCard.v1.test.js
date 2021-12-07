@@ -236,4 +236,36 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-delivery-time-meta"]').exists()).toBe(true);
         });
     });
+
+    describe('Offer', () => {
+        it('displays an offer if one is provided', () => {
+            // arrange
+            const propsData = {
+                offer: 'foo bar baz'
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-offer"]').exists()).toBe(true);
+        });
+
+        it.each([
+            null,
+            undefined,
+            ''
+        ])('does not display an offer if none exists', offer => {
+            // arrange
+            const propsData = {
+                offer
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-offer"]').exists()).toBe(false);
+        });
+    });
 });

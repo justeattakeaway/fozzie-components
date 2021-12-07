@@ -126,6 +126,14 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
+            <!-- Offers -->
+            <icon-text
+                v-if="hasOffer"
+                data-test-id="restaurant-offer"
+                :text="offer"
+                is-bold>
+                <offer-icon />
+            </icon-text>
         </div>
 
         <!-- optional items -->
@@ -137,6 +145,7 @@
 </template>
 
 <script>
+import { OfferIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
@@ -146,6 +155,7 @@ import RestaurantTags from './subcomponents/RestaurantTags/RestaurantTags.vue';
 import RestaurantTag from './subcomponents/RestaurantTags/RestaurantTag.vue';
 import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.vue';
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
+import IconText from './subcomponents/IconText.vue';
 
 export default {
     name: 'RestaurantCardV1',
@@ -157,7 +167,9 @@ export default {
         RestaurantTags,
         RestaurantTag,
         RestaurantRating,
-        DeliveryTimeMeta
+        DeliveryTimeMeta,
+        IconText,
+        OfferIcon
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -218,6 +230,10 @@ export default {
         dishes: {
             type: Array,
             default: () => ([])
+        },
+        offer: {
+            type: String,
+            default: null
         }
     },
     computed: {
@@ -226,6 +242,9 @@ export default {
         },
         hasImageTags () {
             return !!this.tags?.imageTags?.length;
+        },
+        hasOffer () {
+            return !!this.offer?.length;
         },
         displayDeliveryTimeMeta () {
             return this.deliveryTimeData.eta ||

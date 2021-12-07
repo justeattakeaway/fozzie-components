@@ -59,7 +59,8 @@ RestaurantCardComponent.args = {
                 name: 'Fries (Large)',
                 price: '£1.75'
             }
-        ]
+        ],
+        offer: '30% off when you spend £20 - some really really long offer that hopefully never happens but we need to protect against just in case'
     },
 
     flags: {
