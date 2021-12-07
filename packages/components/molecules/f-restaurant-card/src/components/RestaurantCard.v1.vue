@@ -127,9 +127,10 @@
         </div>
 
         <!-- optional items -->
-        <restaurant-dish
-            v-if="!disabled"
-            :class="[$style['c-restaurantCard-dish']]" />
+        <restaurant-dishes
+            v-if="!disabled && hasDishes"
+            :dishes="dishes"
+            :class="[$style['c-restaurantCard-dishes']]" />
     </a>
 </template>
 
@@ -138,7 +139,7 @@ import { theme as PieTokensTheme } from '@justeat/pie-design-tokens/dist/tokens.
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
-import RestaurantDish from './subcomponents/RestaurantDish.vue';
+import RestaurantDishes from './subcomponents/RestaurantDishes/RestaurantDishes.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 import RestaurantBadges from './subcomponents/RestaurantBadges/RestaurantBadges.vue';
 import RestaurantBadge from './subcomponents/RestaurantBadges/RestaurantBadge.vue';
@@ -163,7 +164,7 @@ export default {
     components: {
         RestaurantImage,
         RestaurantLogo,
-        RestaurantDish,
+        RestaurantDishes,
         RestaurantCuisines,
         RestaurantBadges,
         RestaurantBadge,
@@ -224,6 +225,10 @@ export default {
         deliveryTimeData: {
             type: Object,
             default: () => ({})
+        },
+        dishes: {
+            type: Array,
+            default: () => ([])
         }
     },
     data () {
@@ -236,6 +241,9 @@ export default {
             return this.deliveryTimeData.eta ||
                 this.deliveryTimeData.distance ||
                 this.deliveryTimeData.address;
+        },
+        hasDishes () {
+            return this.dishes?.length || false;
         }
     },
     provide () {
@@ -295,7 +303,7 @@ export default {
   }
 }
 
-.c-restaurantCard-dish {
+.c-restaurantCard-dishes {
   .c-restaurantCard--listItem & {
       @include media('>mid') {
         grid-column: 1/3;

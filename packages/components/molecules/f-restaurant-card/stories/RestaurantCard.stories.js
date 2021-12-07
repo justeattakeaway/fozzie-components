@@ -51,7 +51,17 @@ RestaurantCardComponent.args = {
             address: 'Fleet Place House, 2 Fleet Pl, London EC4M 7RF, The United Kingdom of Great Britain and Northern Ireland',
             distance: '1.35 miles',
             eta: '20-25 min'
-        }
+        },
+        dishes: [
+            {
+                name: 'Sausage And Egg Mcmuffin®',
+                price: '£2.79'
+            },
+            {
+                name: 'Fries (Large)',
+                price: '£1.75'
+            }
+        ]
     },
 
     flags: {
