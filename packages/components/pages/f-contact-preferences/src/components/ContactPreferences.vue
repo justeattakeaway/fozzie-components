@@ -273,7 +273,7 @@ export default {
 
 <style lang="scss">
 .c-formField-label,
-.c-formField-label-description  {
+.c-formField-label-description {
     margin-bottom: 0;
 }
 </style>
