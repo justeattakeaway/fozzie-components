@@ -131,7 +131,7 @@
                 v-if="hasOffer"
                 data-test-id="restaurant-offer"
                 :text="offer"
-                :is-bold="true">
+                is-bold>
                 <offer-icon />
             </icon-text>
         </div>
@@ -239,7 +239,7 @@ export default {
             return !!this.tags?.imageTags?.length;
         },
         hasOffer () {
-            return !!this.offer?.length || false;
+            return !!this.offer?.length;
         },
         displayDeliveryTimeMeta () {
             return this.deliveryTimeData.eta ||
