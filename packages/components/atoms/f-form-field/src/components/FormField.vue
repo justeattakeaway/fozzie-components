@@ -2,7 +2,6 @@
     <div
         :data-theme-formfield="theme"
         :class="[
-            'c-formField',
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
                 [$style['c-formField--grouped']]: isFieldGrouped
