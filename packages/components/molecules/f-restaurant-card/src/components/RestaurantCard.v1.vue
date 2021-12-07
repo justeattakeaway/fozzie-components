@@ -50,11 +50,10 @@
             <!-- END ERROR BOUNDARY -->
 
             <!-- Local Legend Logo -->
-            <div
+            <legend-icon
                 v-if="isPremier"
-                :class="[$style['c-restaurantCard-premier']]">
-                <legend-icon data-test-id="premier-icon" />
-            </div>
+                :class="[$style['c-restaurantCard-premier']]"
+                data-test-id="premier-icon" />
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
@@ -324,7 +323,6 @@ export default {
 }
 
 .c-restaurantCard-premier {
-    width: 45px;
     height: 21px;
 }
 </style>
