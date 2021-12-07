@@ -49,18 +49,12 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
-            <!-- Local Legend label -->
-            <!-- START ERROR BOUNDARY -->
-            <component
-                :is="errorBoundary"
-                tier="3">
-                <div
-                    v-if="isPremier"
-                    :class="[$style['c-restaurantCard-localLegend']]">
-                    <legend-icon data-test-id="local-legend-icon" />
-                </div>
-            </component>
-            <!-- END ERROR BOUNDARY -->
+            <!-- Local Legend Logo -->
+            <div
+                v-if="isPremier"
+                :class="[$style['c-restaurantCard-localLegend']]">
+                <legend-icon data-test-id="local-legend-icon" />
+            </div>
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
