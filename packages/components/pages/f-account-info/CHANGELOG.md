@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.8.0
+------------------------------
+*December 07, 2021*
+
+### Added
+- `isFormDirty` checks to avoid submitting the form when the data hasn't changed.
+- Tests to cover method `editConsumerDetails`.
+
 
 v0.7.0
 ------------------------------

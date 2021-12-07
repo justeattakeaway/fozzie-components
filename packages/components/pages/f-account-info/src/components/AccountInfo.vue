@@ -19,7 +19,8 @@
                 maxlength="50"
                 :label-text="$t('fields.firstNameLabel')"
                 :placeholder="$t('fields.firstNamePlaceholder')"
-                @blur="onBlur('firstName')">
+                @blur="onBlur('firstName')"
+                @change="editConsumerDetails('firstName', fields.firstName)">
                 <template
                     v-if="$v.fields.firstName.$invalid"
                     #error>
@@ -37,7 +38,8 @@
                 maxlength="50"
                 :label-text="$t('fields.lastNameLabel')"
                 :placeholder="$t('fields.lastNamePlaceholder')"
-                @blur="onBlur('lastName')">
+                @blur="onBlur('lastName')"
+                @change="editConsumerDetails('lastName', fields.lastName)">
                 <template
                     v-if="$v.fields.lastName.$invalid"
                     #error>
@@ -55,7 +57,8 @@
                 maxlength="16"
                 :label-text="$t('fields.phoneNumberLabel')"
                 :placeholder="$t('fields.phoneNumberPlaceholder')"
-                @blur="onBlur('phoneNumber')">
+                @blur="onBlur('phoneNumber')"
+                @change="editConsumerDetails('phoneNumber', fields.phoneNumber)">
                 <template
                     v-if="$v.fields.phoneNumber.$invalid"
                     #error>
@@ -78,7 +81,8 @@
                 maxlength="50"
                 :label-text="$t('fields.addressLabel')"
                 :placeholder="$t('fields.line1Placeholder')"
-                @blur="onBlur('line1')">
+                @blur="onBlur('line1')"
+                @change="editConsumerDetails('line1', fields.line1)">
                 <template
                     v-if="$v.fields.line1.$invalid"
                     #error>
@@ -91,19 +95,22 @@
             <form-field
                 v-model="fields.line2"
                 maxlength="50"
-                :placeholder="$t('fields.line2Placeholder')" />
+                :placeholder="$t('fields.line2Placeholder')"
+                @change="editConsumerDetails('line2', fields.line2)" />
 
             <form-field
                 v-model="fields.line3"
                 maxlength="50"
-                :placeholder="$t('fields.line3Placeholder')" />
+                :placeholder="$t('fields.line3Placeholder')"
+                @change="editConsumerDetails('line3', fields.line3)"/>
 
             <form-field
                 v-model="fields.locality"
                 maxlength="50"
                 :label-text="$t('fields.localityLabel')"
                 :placeholder="$t('fields.localityPlaceholder')"
-                @blur="onBlur('locality')">
+                @blur="onBlur('locality')"
+                @change="editConsumerDetails('locality', fields.locality)">
                 <template
                     v-if="$v.fields.locality.$invalid"
                     #error>
@@ -118,7 +125,8 @@
                 maxlength="50"
                 :label-text="$t('fields.postcodeLabel')"
                 :placeholder="$t('fields.postcodePlaceholder')"
-                @blur="onBlur('postcode')">
+                @blur="onBlur('postcode')"
+                @change="editConsumerDetails('postcode', fields.postcode)">
                 <template
                     v-if="$v.fields.postcode.$invalid"
                     #error>
@@ -228,7 +236,8 @@ export default {
                 emailAddress: null
             },
             tenantConfigs,
-            isFormSubmitting: false
+            isFormSubmitting: false,
+            isFormDirty: false
         };
     },
 
@@ -267,6 +276,8 @@ export default {
                     locality: 'Strange Town',
                     postcode: 'JZ1 1AA'
                 };
+
+                this.isFormDirty = false;
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
@@ -282,9 +293,14 @@ export default {
                 return;
             }
 
+            if (!this.isFormDirty) {
+                return;
+            }
+
             this.setSubmittingState(true);
 
             try {
+                this.isFormDirty = false;
                 // TODO - to be added with next ticket
                 this.$log.info('Submitted Form', ['account-info', 'account-pages']);
             } catch (error) {
@@ -300,6 +316,18 @@ export default {
         */
         setSubmittingState (isFormSubmitting) {
             this.isFormSubmitting = isFormSubmitting;
+        },
+
+        /**
+         * Send through the field & value that has been edited.
+         *
+         * @TODO store in vuex store once that is wired up.
+         *
+         * @param field
+         * @param value
+         */
+        editConsumerDetails (field, value) {
+            this.isFormDirty = true;
         }
     }
 };

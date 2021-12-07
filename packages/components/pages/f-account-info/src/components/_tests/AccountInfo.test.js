@@ -58,4 +58,25 @@ describe('AccountInfo', () => {
             expect(initialiseSpy).toHaveBeenCalled();
         });
     });
+
+    describe('`methods`', () => {
+        describe('`editConsumerDetails`', () => {
+            describe('when invoked', () => {
+                it('should set `isFormDirty` to true to indicate the form data has changed', () => {
+                    // Arrange
+                    const wrapper = shallowMount(AccountInfo, {
+                        i18n,
+                        localVue,
+                        propsData: { ...sutProps, isAuthFinished: false }
+                    });
+
+                    // Act
+                    wrapper.vm.editConsumerDetails();
+
+                    // Assert
+                    expect(wrapper.vm.isFormDirty).toBe(true);
+                });
+            });
+        });
+    });
 });
