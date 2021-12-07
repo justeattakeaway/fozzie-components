@@ -52,8 +52,8 @@
             <!-- Local Legend Logo -->
             <div
                 v-if="isPremier"
-                :class="[$style['c-restaurantCard-localLegend']]">
-                <legend-icon data-test-id="local-legend-icon" />
+                :class="[$style['c-restaurantCard-premier']]">
+                <legend-icon data-test-id="premier-icon" />
             </div>
 
             <!-- New label -->
@@ -323,7 +323,7 @@ export default {
     }
 }
 
-.c-restaurantCard-localLegend {
+.c-restaurantCard-premier {
     width: 45px;
     height: 21px;
 }

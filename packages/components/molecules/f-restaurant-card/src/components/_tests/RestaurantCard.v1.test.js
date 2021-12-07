@@ -269,8 +269,8 @@ describe('RestaurantCard.v1', () => {
         });
     });
 
-    describe('Local Legend', () => {
-        it('should show Local Legends when restaurant is Premier', () => {
+    describe('Premier Restaurant', () => {
+        it('should show Premier Tag when restaurant is Premier', () => {
             // arrange
             const propsData = {
                 isPremier: true
@@ -281,10 +281,10 @@ describe('RestaurantCard.v1', () => {
             const wrapper = mount(RestaurantCardV1, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="local-legend-icon"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(true);
         });
 
-        it('should not show Local Legends when restaurant is not Premier', () => {
+        it('should not show Premier Tag when restaurant is not Premier', () => {
             // arrange
             const propsData = {
                 isPremier: false
@@ -294,10 +294,10 @@ describe('RestaurantCard.v1', () => {
             const wrapper = mount(RestaurantCardV1, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="local-legend-icon"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
         });
 
-        it('should not show Local Legends when premier data is missing', () => {
+        it('should not show Premier Tag when premier data is missing', () => {
             // arrange
             const propsData = {};
 
@@ -305,7 +305,7 @@ describe('RestaurantCard.v1', () => {
             const wrapper = mount(RestaurantCardV1, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="local-legend-icon"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
         });
     });
 });
