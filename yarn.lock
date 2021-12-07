@@ -2235,10 +2235,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@4.3.2":
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.3.2.tgz#e593bcfb5fa8cd6be4c1855fc43154d8b7fc448a"
-  integrity sha512-pIp87s9/feIZf3rX8857eN4f2xhKAb2eaKhK8XYxP5U79Pm4J3fDGxGr/R6/fa0bXn1JPdzSC1IC1sAO+jStFw==
+"@justeat/f-icons@4.3.3":
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.3.3.tgz#b2e84a5155e524c43f40d2e4fee5c7c215eacf2b"
+  integrity sha512-FR8i19DmPSi4tKS4BkpAbKIsDVOPfG3pWP4303f13Fqg5F4aga15MNkFEl9B85LFKjAYi5CpgvaNI8Bqr70KvQ==
 
 "@justeat/f-link@2.0.0":
   version "2.0.0"
