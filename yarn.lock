@@ -2189,6 +2189,13 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
+"@justeat/f-card@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.3.0.tgz#5155637b630e17f2fc7ef851619729f3a2983d99"
+  integrity sha512-NXgoJG0ZlE+Z5rJwXEfU5lWsyGnnvZgm8z0XrB6RVVWTH2yUFQuDhiBphZiLdrMo3eMrS1KoH1M0/bngIQgryA==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
 "@justeat/f-content-cards@6.0.0-beta.2":
   version "6.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
@@ -2228,10 +2235,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.2.0.tgz#d2680bd1f393d928a4ee1da04461526b43620f95"
-  integrity sha512-jd0GiETemcHz4CIBH3iW3/4rX/ET8W5QqYfFKod8pIbiimczy52xQFuBG2Lg8LFzMkby3oGOglAcx6jPXbG6Kg==
+"@justeat/f-icons@4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.3.2.tgz#e593bcfb5fa8cd6be4c1855fc43154d8b7fc448a"
+  integrity sha512-pIp87s9/feIZf3rX8857eN4f2xhKAb2eaKhK8XYxP5U79Pm4J3fDGxGr/R6/fa0bXn1JPdzSC1IC1sAO+jStFw==
 
 "@justeat/f-link@2.0.0":
   version "2.0.0"
