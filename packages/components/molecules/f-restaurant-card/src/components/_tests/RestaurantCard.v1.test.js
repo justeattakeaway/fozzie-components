@@ -251,10 +251,14 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-offer"]').exists()).toBe(true);
         });
 
-        it('does not display an offer if none exists', () => {
+        it.each([
+            null,
+            undefined,
+            ''
+        ])('does not display an offer if none exists', offer => {
             // arrange
             const propsData = {
-                offer: null
+                offer
             };
 
             // act
