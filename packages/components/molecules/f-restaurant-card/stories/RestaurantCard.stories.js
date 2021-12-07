@@ -49,7 +49,8 @@ RestaurantCardComponent.args = {
             address: 'Fleet Place House, 2 Fleet Pl, London EC4M 7RF, The United Kingdom of Great Britain and Northern Ireland',
             distance: '1.35 miles',
             eta: '20-25 min'
-        }
+        },
+        offer: '30% off when you spend £20 - some really really long offer that hopefully never happens but we need to protect against just in case'
     },
 
     flags: {
