@@ -307,5 +307,18 @@ describe('RestaurantCard.v1', () => {
             // assert
             expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
         });
+
+        it.each([null, undefined])('should not show Premier Tag when premier data is %p', value => {
+            // arrange
+            const propsData = {
+                isPremier: value
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+        });
     });
 });
