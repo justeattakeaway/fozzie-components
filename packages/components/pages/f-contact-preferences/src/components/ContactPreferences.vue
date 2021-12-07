@@ -1,6 +1,7 @@
 <template>
     <div
-        data-test-id="contact-preferences">
+        data-test-id="contact-preferences"
+        :class="$style['c-contactPreferences']">
         <card-component
             v-if="!shouldShowErrorPage"
             :card-heading="$t('heading')"
@@ -278,6 +279,7 @@ export default {
 </style>
 
 <style lang="scss" module>
+
 .c-contactPreferences-fieldset {
     display: flex;
     flex-flow: column;
@@ -288,6 +290,16 @@ export default {
 
 .c-contactPreferences-subtitle {
     @include font-size(heading-s);
+}
+
+.c-contactPreferences {
+    .c-contactPreferences-formField {
+        margin-top: 0;
+    }
+    .c-contactPreferences-formField+.c-contactPreferences-formField {
+        margin-top: 0;
+        margin-bottom: spacing(x2);
+    }
 }
 
 .c-contactPreferences-btn {
