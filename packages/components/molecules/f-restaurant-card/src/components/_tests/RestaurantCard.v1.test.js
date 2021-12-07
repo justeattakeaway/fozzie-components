@@ -270,18 +270,6 @@ describe('RestaurantCard.v1', () => {
     });
 
     describe('Local Legend', () => {
-        it('should load an svg', () => {
-            // arrange
-            const propsData = {
-                isPremier: true
-
-            };
-
-            // act
-            const wrapper = mount(RestaurantCardV1, { propsData });
-            expect(wrapper.find('svg[data-test-id="local-legend-icon"]').exists()).toBe(true);
-        });
-
         it('should show Local Legends when restaurant is Premier', () => {
             // arrange
             const propsData = {
