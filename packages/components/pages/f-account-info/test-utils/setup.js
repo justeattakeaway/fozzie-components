@@ -74,11 +74,18 @@ export const consumerAddressMappedModel = {
     line1: consumerAddressGetResponse.Line1,
     line2: consumerAddressGetResponse.Line2,
     line3: consumerAddressGetResponse.Line3,
-    city: consumerAddressGetResponse.City,
+    locality: consumerAddressGetResponse.City,
     postcode: consumerAddressGetResponse.ZipCode
 };
 
 export const consumerViewModel = {
     ...consumerDetailsMappedModel,
     ...consumerAddressMappedModel
+};
+
+export const consumerStateModel = {
+    consumer: {
+        ...consumerDetailsMappedModel,
+        ...consumerAddressMappedModel
+    }
 };

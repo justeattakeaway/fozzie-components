@@ -43,7 +43,8 @@
     "@justeat/f-globalisation": "1.0.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
+    "vuex": "3.5.1"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.4.0",
