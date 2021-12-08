@@ -16,6 +16,7 @@ let sutMocks;
 let sutProps;
 let dataDefaults;
 let registerStoreModuleSpy;
+let hasModuleSpy;
 let initialiseSpy;
 
 const storeActions = {
@@ -46,6 +47,7 @@ const mountAccountInfo = ({
 } = {}) => {
     const store = storeOverride || createStore({ state, actions });
     store.registerModule = registerStoreModuleSpy;
+    store.hasModule = hasModuleSpy;
 
     if (initialiseOverride) {
         AccountInfo.methods.initialise = initialiseOverride;
@@ -67,6 +69,7 @@ describe('AccountInfo', () => {
     beforeEach(() => {
         // Arrange
         registerStoreModuleSpy = jest.fn();
+        hasModuleSpy = jest.fn().mockReturnValue(false);
         dataDefaults = () => ({
             isFormDirty: false,
             shouldShowErrorPage: false
@@ -92,14 +95,35 @@ describe('AccountInfo', () => {
         jest.clearAllMocks();
     });
 
+    describe('when creating the component', () => {
+        it('should register the Store Module', () => {
+            // Arrange
+            mountAccountInfo();
+
+            // Assert
+            expect(registerStoreModuleSpy).toHaveBeenCalled();
+        });
+    });
+
     describe('when mounting the component', () => {
+        it('should call the load action with the correct parameters', () => {
+            // Arrange & Act
+            wrapper = mountAccountInfo();
+
+            // Assert
+            expect(storeActions.loadConsumerDetails).toHaveBeenCalledWith(expect.any(Object), {
+                api: wrapper.vm.$data.consumerApi,
+                authToken: token
+            });
+        });
+
         it('should not call initialise() method if the authorisation has not completed', () => {
             // Arrange
             initialiseSpy = jest.fn();
             sutProps = { ...sutProps, isAuthFinished: false };
 
             // Act
-            wrapper = mountAccountInfo({ initialiseOverride: initialiseSpy });
+            mountAccountInfo({ initialiseOverride: initialiseSpy });
 
             // Assert
             expect(initialiseSpy).not.toHaveBeenCalled();
