@@ -327,15 +327,16 @@ export default {
          * @param field
          * @param value
          */
-        // eslint-disable no-unused-vars
+        /* eslint-disable no-unused-vars */
         editConsumerDetails ($event) {
             // Values to be passed to vuex store in a later ticket.
             const eventTarget = $event.target;
             const field = eventTarget.dataset.jsFieldkey;
-            const value = eventTarget.value;
+            const { value } = eventTarget;
 
             this.isFormDirty = true;
         }
+        /* eslint-enable no-unused-vars */
     }
 };
 </script>
