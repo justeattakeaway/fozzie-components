@@ -50,7 +50,8 @@ RestaurantCardComponent.args = {
             distance: '1.35 miles',
             eta: '20-25 min'
         },
-        offer: '30% off when you spend £20 - some really really long offer that hopefully never happens but we need to protect against just in case'
+        offer: '30% off when you spend £20 - some really really long offer that hopefully never happens but we need to protect against just in case',
+        isPremier: true
     },
 
     flags: {
