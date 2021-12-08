@@ -57,6 +57,18 @@ describe('AccountInfo', () => {
             // Assert 2
             expect(initialiseSpy).toHaveBeenCalled();
         });
+
+        it('should set `isFormDirty` to `false` so the form can not be resubmitted when mounted', () => {
+            // Arrange & Act
+            const wrapper = shallowMount(AccountInfo, {
+                i18n,
+                localVue,
+                propsData: { ...sutProps, isAuthFinished: true }
+            });
+
+            // Assert
+            expect(wrapper.vm.isFormDirty).toBe(false);
+        });
     });
 
     describe('`methods`', () => {
@@ -70,8 +82,15 @@ describe('AccountInfo', () => {
                         propsData: { ...sutProps, isAuthFinished: false }
                     });
 
+                    const event = {
+                        target: {
+                            dataset: { jsFieldkey: 'SagittariusA-Star' },
+                            value: 'supernova'
+                        }
+                    };
+
                     // Act
-                    wrapper.vm.editConsumerDetails();
+                    wrapper.vm.editConsumerDetails(event);
 
                     // Assert
                     expect(wrapper.vm.isFormDirty).toBe(true);
