@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.5.0
+------------------------------
+*November 7, 2021*
+
+### Changed
+- `waitForComponent` - Expose the timeout option on the underlying `waitForExist` method.
+
+
 v0.4.0
 ------------------------------
 *November 4, 2021*
