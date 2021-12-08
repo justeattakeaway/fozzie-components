@@ -10,8 +10,8 @@ module.exports = class <%= name.filename %> extends Page {
         return $(COMPONENT);
     }
     
-    waitForComponent (timeoutMs) {
-        super.waitForComponent(this.component, timeoutMs);
+    waitForComponent () {
+        super.waitForComponent(this.component);
     }
 
     isComponentDisplayed () {
