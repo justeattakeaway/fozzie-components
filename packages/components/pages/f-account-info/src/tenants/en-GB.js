@@ -3,7 +3,7 @@ const messages = {
     yourDetails: 'Your details',
     contactCustomerCareTeam: "If you'd like to change your email address, get in touch with our customer care team.",
     deliveryAddress: 'Delivery Address',
-    fields: {
+    consumer: {
         emailAddressLabel: 'Email address',
         emailAddressPlaceholder: 'Your email address...',
         firstNameLabel: 'First name*',
