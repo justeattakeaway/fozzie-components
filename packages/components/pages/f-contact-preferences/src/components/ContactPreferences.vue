@@ -273,7 +273,7 @@ export default {
 
 <style lang="scss">
 .c-formField-label,
-.c-formField-label-description {
+.c-formField-label-description  {
     margin-bottom: 0;
 }
 </style>
@@ -296,7 +296,7 @@ export default {
     .c-contactPreferences-formField {
         margin-top: 0;
     }
-    & + .c-contactPreferences-formField {
+    .c-contactPreferences-formField + .c-contactPreferences-formField {
         margin-top: 0;
         margin-bottom: spacing(x2);
     }
