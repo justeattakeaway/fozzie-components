@@ -36,7 +36,7 @@ export default {
          * String representation of how much the dish costs, including currency. E.g. £2.79
          */
         price: {
-            type: Number,
+            type: String,
             default: null
         },
         /**

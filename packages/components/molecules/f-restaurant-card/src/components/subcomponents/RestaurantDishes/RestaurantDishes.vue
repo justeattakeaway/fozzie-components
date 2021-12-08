@@ -5,8 +5,9 @@
             [$style['c-restaurantCard-dishes--isListItem']]: isListItem
         }">
         <li
-            v-for="dish in dishes"
-            :key="dish"
+            v-for="dish in renderableDishes"
+            :key="`restaurant-dish-${dish.name}`"
+            data-test-id="restaurant-dish-list-item"
             :class="[$style['c-restaurantCard-dishes-item']]">
             <restaurant-dish v-bind="dish" />
         </li>
@@ -36,13 +37,21 @@ export default {
             type: Boolean,
             default: false
         }
+    },
+    computed: {
+        // remove null/falsey dishes from renderable collection
+        renderableDishes () {
+            return this.dishes?.filter(d => !!d) || [];
+        }
     }
 };
 </script>
 
 <style lang="scss" module>
+$scrollOffset: 16px;
+
  .c-restaurantCard-dishes {
-    margin: 0;
+    margin: 0 -#{$scrollOffset} 0 -#{$scrollOffset};
     padding: 0;
     display: flex;
     flex-direction: row;
@@ -55,6 +64,7 @@ export default {
  .c-restaurantCard-dishes--isListItem {
      @include media('>mid') {
          display: block;
+         margin: 0;
      }
  }
 
@@ -68,7 +78,7 @@ export default {
     flex: 0 0 85%;
     margin-bottom: 0;
     margin-right: spacing();
-    scroll-snap-align: start;
+    scroll-snap-align: center;
 
     &:only-child {
         flex: 0 0 100%;
@@ -79,6 +89,16 @@ export default {
         margin-right: 0;
     }
 
+    &:first-of-type {
+        margin-left: $scrollOffset;
+        scroll-margin-left: $scrollOffset;
+        scroll-snap-align: start;
+    }
+
+    &:last-of-type {
+        margin-right: $scrollOffset;
+    }
+
     .c-restaurantCard-dishes--isListItem & {
         @include media('>mid') {
             margin-right: 0;
@@ -86,6 +106,14 @@ export default {
 
             &:last-of-type {
                 margin-bottom: 0;
+            }
+
+            &:first-of-type {
+                margin-left: 0;
+            }
+
+            &:last-of-type {
+                margin-right: 0;
             }
         }
     }
