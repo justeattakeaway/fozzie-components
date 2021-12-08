@@ -1,7 +1,7 @@
 <template>
     <div
         :class="$style['c-<%= name.class %>']"
-        data-test-id="<%= name.class %>"><% if (config.needsComponentTranslations) { %>
+        data-test-id="<%= name.default %>-component"><% if (config.needsComponentTranslations) { %>
         {{ copy.text }}<%
         } else { %>
         I am a <%= name.component %> Component (GB)<% } %>
