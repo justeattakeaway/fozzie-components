@@ -44,6 +44,7 @@ $dish-fontSize: $font-body-s-paragraph * 1px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
 }
 
 .c-restaurantCard-dish-name,

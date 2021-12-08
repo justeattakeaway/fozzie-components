@@ -52,7 +52,23 @@ RestaurantCardComponent.args = {
         },
         dishes: [
             {
-                name: 'Sausage And Egg Mcmuffin®',
+                name: 'Sausage And Egg Mcmuffin its a really long dish name I hope never happens®',
+                price: '£2.79'
+            },
+            {
+                name: 'Fries (Large)',
+                price: '£1.75'
+            },
+            {
+                name: 'Fish and chips (XL)',
+                price: '£19.95'
+            },
+            {
+                name: 'Fries (Large)',
+                price: '£1.75'
+            },
+            {
+                name: 'Sausage And Egg Mcmuffin its a really long dish name I hope never happens®',
                 price: '£2.79'
             },
             {

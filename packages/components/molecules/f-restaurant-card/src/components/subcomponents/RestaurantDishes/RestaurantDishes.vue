@@ -31,10 +31,30 @@ export default {
 
 <style lang="scss" module>
  .c-restaurantCard-dishes {
-     margin: 0;
-     padding: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
  }
+
  .c-restaurantCard-dishes-item {
      list-style-type: none;
+     flex: 0 0 90%;
+     margin-right: spacing();
+     scroll-snap-align: start;
+
+    &:only-child {
+        flex-shrink: 0;
+        flex: 0 0 100%;
+    }
+
+    &:only-child,
+    &:last-of-type {
+        margin-right: 0;
+    }
  }
 </style>
