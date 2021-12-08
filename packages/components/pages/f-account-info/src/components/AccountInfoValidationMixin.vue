@@ -6,7 +6,7 @@ import { validations } from '@justeat/f-services';
 export default {
     validations () {
         const validationRules = {
-            fields: {
+            consumer: {
                 firstName: {
                     required,
                     isValidName: this.isValidName
@@ -52,11 +52,11 @@ export default {
         },
 
         isValidPhoneNumber () {
-            return validations.isValidPhoneNumber(this.fields.phoneNumber, this.$i18n.locale);
+            return validations.isValidPhoneNumber(this.consumer.phoneNumber, this.$i18n.locale);
         },
 
         isValidPostcode () {
-            return validations.isValidPostcode(this.fields.postcode, this.$i18n.locale);
+            return validations.isValidPostcode(this.consumer.postcode, this.$i18n.locale);
         },
 
         /**
@@ -70,7 +70,7 @@ export default {
         },
 
         onBlur (field) {
-            const fieldValidation = this.$v.fields[field];
+            const fieldValidation = this.$v.consumer[field];
 
             if (fieldValidation) {
                 fieldValidation.$touch();
