@@ -1,3 +1,4 @@
+import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
 import AccountInfo from '../AccountInfo.vue';
 import {
@@ -6,6 +7,16 @@ import {
     baseUrl,
     token
 } from '../../../test-utils/setup';
+
+const createStore = ({ state = {}, actions = {} } = {}) => new Vuex.Store({
+    modules: {
+        fContactPreferencesModule: {
+            state,
+            actions,
+            namespaced: true
+        }
+    }
+});
 
 let sutProps;
 
@@ -29,7 +40,8 @@ describe('AccountInfo', () => {
             shallowMount(AccountInfo, {
                 i18n,
                 localVue,
-                propsData: { ...sutProps, isAuthFinished: false }
+                propsData: { ...sutProps, isAuthFinished: false },
+                store: createStore()
             });
 
             // Assert
@@ -45,7 +57,8 @@ describe('AccountInfo', () => {
             const wrapper = shallowMount(AccountInfo, {
                 i18n,
                 localVue,
-                propsData: { ...sutProps, isAuthFinished: false }
+                propsData: { ...sutProps, isAuthFinished: false },
+                store: createStore()
             });
 
             // Assert
