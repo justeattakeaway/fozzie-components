@@ -49,6 +49,11 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
+            <!-- Local Legend Logo -->
+            <legend-icon
+                v-if="isPremier"
+                :class="[$style['c-restaurantCard-premier']]"
+                data-test-id="premier-icon" />
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
@@ -90,15 +95,6 @@
                     v-if="displayDeliveryTimeMeta"
                     v-bind="deliveryTimeData"
                     data-test-id="restaurant-delivery-time-meta" />
-            </component>
-            <!-- END ERROR BOUNDARY -->
-
-            <!-- Local Legend label -->
-            <!-- START ERROR BOUNDARY -->
-            <component
-                :is="errorBoundary"
-                tier="3">
-                <slot name="local-legend" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -144,7 +140,7 @@
 </template>
 
 <script>
-import { OfferIcon } from '@justeat/f-vue-icons';
+import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
@@ -168,7 +164,8 @@ export default {
         RestaurantRating,
         DeliveryTimeMeta,
         IconText,
-        OfferIcon
+        OfferIcon,
+        LegendIcon
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -229,6 +226,10 @@ export default {
         offer: {
             type: String,
             default: null
+        },
+        isPremier: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -319,5 +320,9 @@ export default {
     @include media('>mid') {
         bottom: spacing(x1.5);
     }
+}
+
+.c-restaurantCard-premier {
+    height: 21px;
 }
 </style>
