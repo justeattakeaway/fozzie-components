@@ -295,7 +295,7 @@ export default {
 .c-contactPreferences {
     .c-contactPreferences-formField {
         margin-top: 0;
-        & + & {
+        .c-contactPreferences-formField + & {
             margin-bottom: spacing(x2);
         }
     }
