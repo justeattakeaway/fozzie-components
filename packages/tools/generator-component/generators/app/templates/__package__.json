@@ -37,9 +37,10 @@
     "lint:fix": "yarn lint --fix"<% if(config.isComponent) { %>,
     "lint:style": "vue-cli-service lint:style"<% } else { %>,
     "test:coverage": "jest test:unit --coverage"<% } %>,
-    "test": "vue-cli-service test:unit"<% if(config.needsComponentTests) { %>,
-    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"<% } %>
+    "test": "vue-cli-service test:unit"<% if(config.isComponent) { %><% if(config.needsComponentTests) { %>,
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"<% } %>,
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"<% if(config.needsVisualTests) { %>,
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_<%= name.default.toUpperCase().replace('-', '_') %>} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"<% } %><% } %>
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -51,7 +52,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "0.4.0",
+<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "0.5.0",
     "node-sass-magic-importer": "5.3.2",
     "@samhammer/vue-cli-plugin-stylelint": "2.1.0",
     "@vue/cli-plugin-babel": "4.5.15",
