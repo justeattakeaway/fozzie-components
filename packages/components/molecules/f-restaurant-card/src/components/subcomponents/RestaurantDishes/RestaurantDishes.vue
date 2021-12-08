@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$scrollOffset: 16px;
+$scrollOffset: spacing(x2);
 
  .c-restaurantCard-dishes {
     margin: 0 -#{$scrollOffset} 0 -#{$scrollOffset};
@@ -97,6 +97,7 @@ $scrollOffset: 16px;
 
     &:last-of-type {
         margin-right: $scrollOffset;
+        scroll-snap-align: start;
     }
 
     .c-restaurantCard-dishes--isListItem & {
