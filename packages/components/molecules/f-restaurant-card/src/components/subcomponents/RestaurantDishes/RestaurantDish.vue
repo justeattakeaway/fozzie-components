@@ -1,15 +1,20 @@
 <template>
     <div :class="[$style['c-restaurantCard-dish']]">
         <p :class="[$style['c-restaurantCard-dish-description']]">
-            <span :class="[$style['c-restaurantCard-dish-name']]">
+            <span
+                data-test-id="restaurant-dish-name"
+                :class="[$style['c-restaurantCard-dish-name']]">
                 {{ name }}
             </span>
-            <span :class="[$style['c-restaurantCard-dish-calories']]">
+            <span
+                data-test-id="restaurant-dish-calories"
+                :class="[$style['c-restaurantCard-dish-calories']]">
                 {{ calories }}
             </span>
         </p>
         <p
             v-if="price !== null"
+            data-test-id="restaurant-dish-price"
             :class="[$style['c-restaurantCard-dish-price']]">
             {{ price }}
         </p>
