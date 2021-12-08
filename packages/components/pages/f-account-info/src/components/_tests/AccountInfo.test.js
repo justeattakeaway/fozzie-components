@@ -10,7 +10,7 @@ import {
 
 const createStore = ({ state = {}, actions = {} } = {}) => new Vuex.Store({
     modules: {
-        fContactPreferencesModule: {
+        fAccountInfoModule: {
             state,
             actions,
             namespaced: true
@@ -22,7 +22,7 @@ let sutProps;
 
 describe('AccountInfo', () => {
     beforeEach(() => {
-        // Arrange & Act
+        // Arrange
         sutProps = {
             authToken: token,
             isAuthFinished: true,

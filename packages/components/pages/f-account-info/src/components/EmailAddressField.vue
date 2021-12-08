@@ -1,9 +1,9 @@
 <template>
     <div>
         <form-field
-            :label-text="$t('fields.emailAddressLabel')"
+            :label-text="$t('consumer.emailAddressLabel')"
             disabled
-            :placeholder="$t('fields.emailAddressPlaceholder')"
+            :placeholder="$t('consumer.emailAddressPlaceholder')"
             class="u-spacingBottom--large"
             :value="emailAddress" />
 

@@ -9,60 +9,60 @@
             {{ $t('yourDetails') }}
         </h2>
 
-        <email-address-field :email-address="values.emailAddress" />
+        <email-address-field :email-address="consumer.emailAddress" />
 
         <form
             method="post"
             @submit.prevent="onFormSubmit">
             <form-field
-                v-model="fields.firstName"
+                v-model="consumer.firstName"
                 maxlength="50"
-                :label-text="$t('fields.firstNameLabel')"
-                :placeholder="$t('fields.firstNamePlaceholder')"
+                :label-text="$t('consumer.firstNameLabel')"
+                :placeholder="$t('consumer.firstNamePlaceholder')"
                 @blur="onBlur('firstName')">
                 <template
-                    v-if="$v.fields.firstName.$invalid"
+                    v-if="$v.consumer.firstName.$invalid"
                     #error>
-                    <f-error-message v-show="!$v.fields.firstName.required && $v.fields.firstName.$dirty">
+                    <f-error-message v-show="!$v.consumer.firstName.required && $v.consumer.firstName.$dirty">
                         {{ $t('validation.firstNameRequired') }}
                     </f-error-message>
-                    <f-error-message v-show="!$v.fields.firstName.isValidName">
+                    <f-error-message v-show="!$v.consumer.firstName.isValidName">
                         {{ $t('validation.firstNameInvalid') }}
                     </f-error-message>
                 </template>
             </form-field>
 
             <form-field
-                v-model="fields.lastName"
+                v-model="consumer.lastName"
                 maxlength="50"
-                :label-text="$t('fields.lastNameLabel')"
-                :placeholder="$t('fields.lastNamePlaceholder')"
+                :label-text="$t('consumer.lastNameLabel')"
+                :placeholder="$t('consumer.lastNamePlaceholder')"
                 @blur="onBlur('lastName')">
                 <template
-                    v-if="$v.fields.lastName.$invalid"
+                    v-if="$v.consumer.lastName.$invalid"
                     #error>
-                    <f-error-message v-show="!$v.fields.lastName.required && $v.fields.lastName.$dirty">
+                    <f-error-message v-show="!$v.consumer.lastName.required && $v.consumer.lastName.$dirty">
                         {{ $t('validation.lastNameRequired') }}
                     </f-error-message>
-                    <f-error-message v-show="!$v.fields.lastName.isValidName">
+                    <f-error-message v-show="!$v.consumer.lastName.isValidName">
                         {{ $t('validation.lastNameInvalid') }}
                     </f-error-message>
                 </template>
             </form-field>
 
             <form-field
-                v-model="fields.phoneNumber"
+                v-model="consumer.phoneNumber"
                 maxlength="16"
-                :label-text="$t('fields.phoneNumberLabel')"
-                :placeholder="$t('fields.phoneNumberPlaceholder')"
+                :label-text="$t('consumer.phoneNumberLabel')"
+                :placeholder="$t('consumer.phoneNumberPlaceholder')"
                 @blur="onBlur('phoneNumber')">
                 <template
-                    v-if="$v.fields.phoneNumber.$invalid"
+                    v-if="$v.consumer.phoneNumber.$invalid"
                     #error>
-                    <f-error-message v-show="!$v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
+                    <f-error-message v-show="!$v.consumer.phoneNumber.required && $v.consumer.phoneNumber.$dirty">
                         {{ $t('validation.phoneNumberRequired') }}
                     </f-error-message>
-                    <f-error-message v-show="!$v.fields.phoneNumber.isValidPhoneNumber && $v.fields.phoneNumber.required && $v.fields.phoneNumber.$dirty">
+                    <f-error-message v-show="!$v.consumer.phoneNumber.isValidPhoneNumber && $v.consumer.phoneNumber.required && $v.consumer.phoneNumber.$dirty">
                         {{ $t('validation.phoneNumberInvalid') }}
                     </f-error-message>
                 </template>
@@ -74,58 +74,58 @@
             </h2>
 
             <form-field
-                v-model="fields.line1"
+                v-model="consumer.line1"
                 maxlength="50"
-                :label-text="$t('fields.addressLabel')"
-                :placeholder="$t('fields.line1Placeholder')"
+                :label-text="$t('consumer.addressLabel')"
+                :placeholder="$t('consumer.line1Placeholder')"
                 @blur="onBlur('line1')">
                 <template
-                    v-if="$v.fields.line1.$invalid"
+                    v-if="$v.consumer.line1.$invalid"
                     #error>
-                    <f-error-message v-show="!$v.fields.line1.required && $v.fields.line1.$dirty">
+                    <f-error-message v-show="!$v.consumer.line1.required && $v.consumer.line1.$dirty">
                         {{ $t('validation.line1Required') }}
                     </f-error-message>
                 </template>
             </form-field>
 
             <form-field
-                v-model="fields.line2"
+                v-model="consumer.line2"
                 maxlength="50"
-                :placeholder="$t('fields.line2Placeholder')" />
+                :placeholder="$t('consumer.line2Placeholder')" />
 
             <form-field
-                v-model="fields.line3"
+                v-model="consumer.line3"
                 maxlength="50"
-                :placeholder="$t('fields.line3Placeholder')" />
+                :placeholder="$t('consumer.line3Placeholder')" />
 
             <form-field
-                v-model="fields.locality"
+                v-model="consumer.locality"
                 maxlength="50"
-                :label-text="$t('fields.localityLabel')"
-                :placeholder="$t('fields.localityPlaceholder')"
+                :label-text="$t('consumer.localityLabel')"
+                :placeholder="$t('consumer.localityPlaceholder')"
                 @blur="onBlur('locality')">
                 <template
-                    v-if="$v.fields.locality.$invalid"
+                    v-if="$v.consumer.locality.$invalid"
                     #error>
-                    <f-error-message v-show="!$v.fields.locality.required && $v.fields.locality.$dirty">
+                    <f-error-message v-show="!$v.consumer.locality.required && $v.consumer.locality.$dirty">
                         {{ $t('validation.localityRequired') }}
                     </f-error-message>
                 </template>
             </form-field>
 
             <form-field
-                v-model="fields.postcode"
+                v-model="consumer.postcode"
                 maxlength="50"
-                :label-text="$t('fields.postcodeLabel')"
-                :placeholder="$t('fields.postcodePlaceholder')"
+                :label-text="$t('consumer.postcodeLabel')"
+                :placeholder="$t('consumer.postcodePlaceholder')"
                 @blur="onBlur('postcode')">
                 <template
-                    v-if="$v.fields.postcode.$invalid"
+                    v-if="$v.consumer.postcode.$invalid"
                     #error>
-                    <f-error-message v-show="!$v.fields.postcode.required && $v.fields.postcode.$dirty">
+                    <f-error-message v-show="!$v.consumer.postcode.required && $v.consumer.postcode.$dirty">
                         {{ $t('validation.postcodeRequired') }}
                     </f-error-message>
-                    <f-error-message v-show="!$v.fields.postcode.isValidPostcode && $v.fields.postcode.required">
+                    <f-error-message v-show="!$v.consumer.postcode.isValidPostcode && $v.consumer.postcode.required">
                         {{ $t('validation.postcodeInvalid') }}
                     </f-error-message>
                 </template>
@@ -214,7 +214,7 @@ export default {
 
     data () {
         return {
-            fields: {
+            consumer: {
                 firstName: null,
                 lastName: null,
                 phoneNumber: null,
@@ -253,14 +253,11 @@ export default {
         initialise () {
             try {
                 // TODO - Dummy data to be replaced with next ticket
-                this.values = {
-                    emailAddress: 'mr.jazz@town.com'
-                };
-
-                this.fields = {
+                this.consumer = {
                     firstName: 'Max',
                     lastName: 'Legend',
                     phoneNumber: 1234567890,
+                    emailAddress: 'mr.jazz@town.com',
                     line1: '1 Wardour Street',
                     line2: undefined,
                     line3: null,
