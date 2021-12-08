@@ -1,5 +1,9 @@
 <template>
-    <ul :class="[$style['c-restaurantCard-dishes']]">
+    <ul
+        :class="{
+            [$style['c-restaurantCard-dishes']]: true,
+            [$style['c-restaurantCard-dishes--isListItem']]: isListItem
+        }">
         <li
             v-for="dish in dishes"
             :key="dish"
@@ -24,6 +28,13 @@ export default {
         dishes: {
             type: Array,
             default: () => []
+        },
+        /**
+         * Used to manage list item specific styling
+         */
+        isListItem: {
+            type: Boolean,
+            default: false
         }
     }
 };
@@ -41,20 +52,42 @@ export default {
     -webkit-overflow-scrolling: touch;
  }
 
+ .c-restaurantCard-dishes--isListItem {
+     @include media('>mid') {
+         display: block;
+     }
+ }
+
  .c-restaurantCard-dishes-item {
-     list-style-type: none;
-     flex: 0 0 90%;
-     margin-right: spacing();
-     scroll-snap-align: start;
+    list-style-type: none;
+    &:before {
+        // needed to override & remove legacy fozzie <li> styling
+        content: none;
+    }
+
+    flex: 0 0 85%;
+    margin-bottom: 0;
+    margin-right: spacing();
+    scroll-snap-align: start;
 
     &:only-child {
-        flex-shrink: 0;
         flex: 0 0 100%;
     }
 
     &:only-child,
     &:last-of-type {
         margin-right: 0;
+    }
+
+    .c-restaurantCard-dishes--isListItem & {
+        @include media('>mid') {
+            margin-right: 0;
+            margin-bottom: spacing();
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
     }
  }
 </style>

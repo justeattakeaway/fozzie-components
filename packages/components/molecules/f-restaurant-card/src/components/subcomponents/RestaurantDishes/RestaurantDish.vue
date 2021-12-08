@@ -47,6 +47,10 @@ $dish-fontSize: $font-body-s-paragraph * 1px;
   height: 100%;
 }
 
+.c-restaurantCard-dish-name {
+    margin-right: spacing();
+}
+
 .c-restaurantCard-dish-name,
 .c-restaurantCard-dish-price {
     font-size: $dish-fontSize;
