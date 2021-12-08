@@ -160,24 +160,19 @@
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-
 import FErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
-
 import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
-
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-
 import EmailAddressField from './EmailAddressField.vue';
 import DeleteAccount from './DeleteAccount.vue';
-
 import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
+import ConsumerApi from '../services/providers/Consumer.api';
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
@@ -218,15 +213,18 @@ export default {
                 firstName: null,
                 lastName: null,
                 phoneNumber: null,
+                emailAddress: null,
                 line1: null,
                 line2: null,
                 line3: null,
                 locality: null,
                 postcode: null
             },
-            values: {
-                emailAddress: null
-            },
+            consumerApi: new ConsumerApi({
+                httpClient: this.$http,
+                cookies: this.$cookies,
+                baseUrl: this.smartGatewayBaseUrl
+            }),
             tenantConfigs,
             isFormSubmitting: false
         };
