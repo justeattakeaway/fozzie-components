@@ -13,15 +13,14 @@
 
         <form
             method="post"
-            @submit.prevent="onFormSubmit"
-            @change="editConsumerDetails($event)">
+            @submit.prevent="onFormSubmit">
             <form-field
                 v-model="fields.firstName"
                 maxlength="50"
-                data-js-fieldKey="firstName"
                 :label-text="$t('fields.firstNameLabel')"
                 :placeholder="$t('fields.firstNamePlaceholder')"
-                @blur="onBlur('firstName')">
+                @blur="onBlur('firstName')"
+                @change="editConsumerDetails('firstName', fields.firstName)">
                 <template
                     v-if="$v.fields.firstName.$invalid"
                     #error>
@@ -37,10 +36,10 @@
             <form-field
                 v-model="fields.lastName"
                 maxlength="50"
-                data-js-fieldKey="lastName"
                 :label-text="$t('fields.lastNameLabel')"
                 :placeholder="$t('fields.lastNamePlaceholder')"
-                @blur="onBlur('lastName')">
+                @blur="onBlur('lastName')"
+                @change="editConsumerDetails('lastName', fields.lastName)">
                 <template
                     v-if="$v.fields.lastName.$invalid"
                     #error>
@@ -56,10 +55,10 @@
             <form-field
                 v-model="fields.phoneNumber"
                 maxlength="16"
-                data-js-fieldKey="phoneNumber"
                 :label-text="$t('fields.phoneNumberLabel')"
                 :placeholder="$t('fields.phoneNumberPlaceholder')"
-                @blur="onBlur('phoneNumber')">
+                @blur="onBlur('phoneNumber')"
+                @change="editConsumerDetails('phoneNumber', fields.phoneNumber)">
                 <template
                     v-if="$v.fields.phoneNumber.$invalid"
                     #error>
@@ -80,10 +79,10 @@
             <form-field
                 v-model="fields.line1"
                 maxlength="50"
-                data-js-fieldKey="line1"
                 :label-text="$t('fields.addressLabel')"
                 :placeholder="$t('fields.line1Placeholder')"
-                @blur="onBlur('line1')">
+                @blur="onBlur('line1')"
+                @change="editConsumerDetails('line1', fields.line1)">
                 <template
                     v-if="$v.fields.line1.$invalid"
                     #error>
@@ -96,22 +95,22 @@
             <form-field
                 v-model="fields.line2"
                 maxlength="50"
-                data-js-fieldKey="line2"
-                :placeholder="$t('fields.line2Placeholder')" />
+                :placeholder="$t('fields.line2Placeholder')"
+                @change="editConsumerDetails('line2', fields.line2)" />
 
             <form-field
                 v-model="fields.line3"
                 maxlength="50"
-                data-js-fieldKey="line3"
-                :placeholder="$t('fields.line3Placeholder')" />
+                :placeholder="$t('fields.line3Placeholder')"
+                @change="editConsumerDetails('line3', fields.line3)" />
 
             <form-field
                 v-model="fields.locality"
                 maxlength="50"
-                data-js-fieldKey="locality"
                 :label-text="$t('fields.localityLabel')"
                 :placeholder="$t('fields.localityPlaceholder')"
-                @blur="onBlur('locality')">
+                @blur="onBlur('locality')"
+                @change="editConsumerDetails('locality', fields.locality)">
                 <template
                     v-if="$v.fields.locality.$invalid"
                     #error>
@@ -124,10 +123,10 @@
             <form-field
                 v-model="fields.postcode"
                 maxlength="50"
-                data-js-fieldKey="postcode"
                 :label-text="$t('fields.postcodeLabel')"
                 :placeholder="$t('fields.postcodePlaceholder')"
-                @blur="onBlur('postcode')">
+                @blur="onBlur('postcode')"
+                @change="editConsumerDetails('postcode', fields.postcode)">
                 <template
                     v-if="$v.fields.postcode.$invalid"
                     #error>
@@ -238,7 +237,7 @@ export default {
             },
             tenantConfigs,
             isFormSubmitting: false,
-            isFormDirty: false
+            hasFormUpdate: false
         };
     },
 
@@ -278,7 +277,7 @@ export default {
                     postcode: 'JZ1 1AA'
                 };
 
-                this.isFormDirty = false;
+                this.hasFormUpdate = false;
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
@@ -294,14 +293,14 @@ export default {
                 return;
             }
 
-            if (!this.isFormDirty) {
+            if (!this.hasFormUpdate) {
                 return;
             }
 
             this.setSubmittingState(true);
 
             try {
-                this.isFormDirty = false;
+                this.hasFormUpdate = false;
                 // TODO - to be added with next ticket
                 this.$log.info('Submitted Form', ['account-info', 'account-pages']);
             } catch (error) {
@@ -327,16 +326,10 @@ export default {
          * @param field
          * @param value
          */
-        /* eslint-disable no-unused-vars */
-        editConsumerDetails ($event) {
-            // Values to be passed to vuex store in a later ticket.
-            const eventTarget = $event.target;
-            const field = eventTarget.dataset.jsFieldkey;
-            const { value } = eventTarget;
-
-            this.isFormDirty = true;
+        // eslint-disable-next-line no-unused-vars
+        editConsumerDetails (field, value) {
+            this.hasFormUpdate = true;
         }
-        /* eslint-enable no-unused-vars */
     }
 };
 </script>

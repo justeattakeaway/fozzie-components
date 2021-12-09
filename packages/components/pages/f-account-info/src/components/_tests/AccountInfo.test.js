@@ -58,7 +58,7 @@ describe('AccountInfo', () => {
             expect(initialiseSpy).toHaveBeenCalled();
         });
 
-        it('should set `isFormDirty` to `false` so the form can not be resubmitted when mounted', () => {
+        it('should set `hasFormUpdate` to `false` so the form can not be resubmitted when mounted', () => {
             // Arrange & Act
             const wrapper = shallowMount(AccountInfo, {
                 i18n,
@@ -67,14 +67,14 @@ describe('AccountInfo', () => {
             });
 
             // Assert
-            expect(wrapper.vm.isFormDirty).toBe(false);
+            expect(wrapper.vm.hasFormUpdate).toBe(false);
         });
     });
 
     describe('`methods`', () => {
         describe('`editConsumerDetails`', () => {
             describe('when invoked', () => {
-                it('should set `isFormDirty` to true to indicate the form data has changed', () => {
+                it('should set `hasFormUpdate` to true to indicate the form data has changed', () => {
                     // Arrange
                     const wrapper = shallowMount(AccountInfo, {
                         i18n,
@@ -93,7 +93,7 @@ describe('AccountInfo', () => {
                     wrapper.vm.editConsumerDetails(event);
 
                     // Assert
-                    expect(wrapper.vm.isFormDirty).toBe(true);
+                    expect(wrapper.vm.hasFormUpdate).toBe(true);
                 });
             });
         });

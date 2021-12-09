@@ -8,7 +8,7 @@ v0.8.0
 *December 07, 2021*
 
 ### Added
-- `isFormDirty` checks to avoid submitting the form when the data hasn't changed.
+- `hasFormUpdate` checks to avoid submitting the form when the data hasn't changed.
 - Tests to cover method `editConsumerDetails`.
 
 
