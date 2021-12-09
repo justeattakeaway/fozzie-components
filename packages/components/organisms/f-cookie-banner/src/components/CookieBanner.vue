@@ -529,6 +529,7 @@ export default {
     .c-cookieBanner-cta {
         padding: spacing(x4);
         min-width: 352px;
+        margin: 0 auto;
     }
 }
 
