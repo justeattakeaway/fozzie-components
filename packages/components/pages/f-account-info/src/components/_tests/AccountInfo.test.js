@@ -49,9 +49,7 @@ const mountAccountInfo = ({
     store.registerModule = registerStoreModuleSpy;
     store.hasModule = hasModuleSpy;
 
-    if (initialiseOverride) {
-        AccountInfo.methods.initialise = initialiseOverride;
-    }
+    AccountInfo.methods.initialise = initialiseOverride || AccountInfo.methods.initialise;
 
     const mock = shallowMount(AccountInfo, {
         i18n,
