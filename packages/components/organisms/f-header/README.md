@@ -59,6 +59,13 @@ export default {
 }
 ```
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-button | `yarn add @justeat/f-button` | `import '@justeat/f-button/dist/f-button.css';` |
+| f-popover | `yarn add @justeat/f-popover` | `import '@justeat/f-popover/dist/f-popover.css';` |
+
 
 ## Configuration
 

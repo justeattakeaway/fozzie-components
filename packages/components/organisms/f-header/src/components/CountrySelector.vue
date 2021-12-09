@@ -53,8 +53,6 @@
 
 <script>
 import VPopover from '@justeat/f-popover';
-import '@justeat/f-popover/dist/f-popover.css';
-
 import CountrySelectorPanel from './CountrySelectorPanel.vue';
 import FlagIcon from './FlagIcon.vue';
 
