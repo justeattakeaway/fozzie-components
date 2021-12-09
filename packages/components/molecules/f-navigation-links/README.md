@@ -59,6 +59,12 @@ export default {
 }
 ```
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-link | `yarn add @justeat/f-link` | `import '@justeat/f-link/dist/f-link.css';` |
+
 ## Configuration
 
 ### Props
