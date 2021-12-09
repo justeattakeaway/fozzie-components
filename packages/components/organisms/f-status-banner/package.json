@@ -45,7 +45,8 @@
     "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
+    "@justeat/f-searchbox": "6.0.0"
   },
   "devDependencies": {
     "@justeat/f-searchbox": "6.0.0",

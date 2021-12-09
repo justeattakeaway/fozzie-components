@@ -61,6 +61,12 @@ export default {
 }
 ```
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-searchbox | `yarn add @justeat/f-searchbox` | `import '@justeat/f-searchbox/dist/f-searchbox.css';` |
+
 ## Configuration
 
 ### Props
