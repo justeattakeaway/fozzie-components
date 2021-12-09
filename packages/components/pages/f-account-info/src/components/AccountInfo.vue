@@ -102,7 +102,7 @@
                 v-model="consumer.line3"
                 maxlength="50"
                 :placeholder="$t('consumer.line3Placeholder')"
-                @change="editConsumerDetails('line3', consumer.line3)"/>
+                @change="editConsumerDetails('line3', consumer.line3)" />
 
             <form-field
                 v-model="consumer.locality"
