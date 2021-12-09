@@ -1,7 +1,19 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
-import { select, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import ContactPreferences from '../src/components/ContactPreferences.vue';
+import fContactPreferencesModule from '../src/store/contactPreferences.module';
+import {
+    authToken,
+    setupApiState,
+    setupNewsDataState,
+    apiStates,
+    apiStateOptions
+} from './story.helper';
+
+Vue.use(Vuex);
 
 export default {
     title: 'Components/Pages',
@@ -12,14 +24,57 @@ export const ContactPreferencesComponent = () => ({
     components: {
         ContactPreferences
     },
+
     props: {
         locale: {
             default: select('Locale', [locales.gb], locales.gb)
+        },
+
+        apiState: {
+            default: select(apiStateOptions.title, apiStateOptions.states, apiStates.none)
+        },
+
+        isNewsEmailOptedIn: {
+            default: boolean('News - Email - Opted In', false)
+        },
+
+        isNewsSmsOptedIn: {
+            default: boolean('News - Sms - Opted In', false)
         }
     },
-    template: `<contact-preferences
-        :locale="locale"
-        smart-gateway-base-url="https://localhost:8080" />`
+
+    computed: {
+        authToken () {
+            return authToken;
+        },
+
+        prepareStory () {
+            setupApiState({
+                apiState: this.apiState
+            });
+            setupNewsDataState({
+                store: this.$store,
+                emailState: this.isNewsEmailOptedIn,
+                smsState: this.isNewsSmsOptedIn
+            });
+        }
+    },
+
+    store: new Vuex.Store({
+        modules: {
+            fContactPreferencesModule
+        }
+    }),
+
+    template: '<contact-preferences ' +
+    ':authToken="authToken" ' +
+    ':isAuthFinished="true" ' +
+    ':locale="locale" ' +
+    'smart-gateway-base-url="" ' +
+    ':prepareStory="prepareStory" ' +
+    // eslint-disable-next-line no-template-curly-in-string
+    ':key="`${authToken},${locale}`" />'
+
 });
 
 ContactPreferencesComponent.storyName = 'f-contact-preferences';

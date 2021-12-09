@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
   "description": "Fozzie Form Field – Fozzie Form Field Component",
-  "version": "4.2.0",
+  "version": "4.5.0",
   "main": "dist/f-form-field.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -32,7 +32,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [

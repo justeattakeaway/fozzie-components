@@ -8,7 +8,6 @@ import {
     createStore,
     defaultCheckoutState
 } from './helpers/setup';
-import EventNames from '../../event-names';
 
 jest.mock('../../services/daysInMonth');
 
@@ -306,11 +305,6 @@ describe('AgeVerification', () => {
                 it('should call `updateDateOfBirth` with `selectedDate`', () => {
                     // Assert
                     expect(updateDateOfBirthSpy).toHaveBeenCalledWith(date);
-                });
-
-                it('should emit `CheckoutVerifyAge`', () => {
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutVerifyAge).length).toBe(1);
                 });
             });
 

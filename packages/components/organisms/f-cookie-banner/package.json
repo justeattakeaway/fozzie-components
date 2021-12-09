@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "main": "dist/f-cookie-banner.umd.min.js",
   "maxBundleSize": "40kB",
   "files": [
@@ -37,7 +37,7 @@
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_COOKIE_BANNER} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

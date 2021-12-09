@@ -3,6 +3,62 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.12.0
+------------------------------
+*December 6, 2021*
+
+### Changed
+- All dialog/alert/errorPage errors to be stored under `checkoutErrorMessage`.
+
+
+v3.11.0
+------------------------------
+*November 25, 2021*
+
+### Changed
+- `Error component` uses `BagSadBgIcon` from `f-vue-icons@3.0.0` and `f-card-with-content`.
+
+
+v3.10.0
+------------------------------
+*November 25, 2021*
+
+### Added
+- Error Dialog if Basket has changed.
+
+
+v3.9.0
+------------------------------
+*November 23, 2021*
+
+### Changed
+- Prevent the age verification from triggering a full validation of user details.
+
+
+v3.8.0
+------------------------------
+*November 19, 2021*
+
+### Added
+- Styling back to alert.
+- Button spinner.
+
+
+v3.7.0
+------------------------------
+*November 17, 2021*
+
+### Removed
+- Spinner from checkout form.
+
+
+v3.6.2
+------------------------------
+*November 17, 2021*
+
+### Fixed
+- Spinner and loading state added back in.
+
 
 v3.6.0
 ------------------------------

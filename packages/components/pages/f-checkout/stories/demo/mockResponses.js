@@ -17,9 +17,12 @@ import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import checkoutAvailableFulfilmentNoTimeAvailable from './checkout-available-fulfilment-no-time-available.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
 import createGuest from './create-guest.json';
+import createGuestError from './create-guest-error.json';
 import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
 import getBasketDinein from './get-basket-dinein.json';
+import getBasketInvalidProducts from './get-basket-invalid-products.json';
+import getBasketOfflineProducts from './get-basket-offline-products.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
 import updateCheckoutServiceTypeUnavailable from './update-checkout-service-type-unavailable.json';
@@ -170,6 +173,12 @@ const requestDefinitions = {
         responseStatus: httpStatusCodes.ok,
         payload: createGuest
     },
+    createGuestError: {
+        url: '/create-guest-error.json',
+        method: httpMethods.post,
+        responseStatus: httpStatusCodes.badRequest,
+        payload: createGuestError
+    },
     getBasketDelivery: {
         url: '/get-basket-delivery.json',
         method: httpMethods.get,
@@ -187,6 +196,18 @@ const requestDefinitions = {
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: getBasketDinein
+    },
+    getBasketInvalidProducts: {
+        url: '/get-basket-invalid-products.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: getBasketInvalidProducts
+    },
+    getBasketOfflineProducts: {
+        url: '/get-basket-offline-products.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: getBasketOfflineProducts
     },
     getBasketTimeout: {
         url: '/get-basket-timeout.json',

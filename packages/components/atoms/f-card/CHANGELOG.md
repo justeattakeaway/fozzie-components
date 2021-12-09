@@ -3,6 +3,49 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.4.0
+------------------------------
+*December 6, 2021*
+
+### Changed
+- Nested selector.
+
+
+v3.3.0
+------------------------------
+*November 25, 2021*
+
+### Added
+- Computed `capitaliseCardSizeProp` so we can capitialise the prop values passed in for our class names.
+- Tests to cover the computed `capitaliseCardSizeProp` method.
+
+### Changed
+- Tests to reflect renaming classes.
+
+
+v3.2.0
+------------------------------
+*November 23, 2021*
+
+### Added
+- `cardSizeCustom` prop to allow two custom sizes for the accounts page, medium & large.
+
+
+v3.1.0
+------------------------------
+*November 19, 2021*
+
+### Added
+- `hasInnerSpacingLarge` prop to allow large spacing around the edges of the card.
+
+
+v3.0.1
+------------------------------
+*November 15, 2021*
+
+### Changed
+ - Page content wrapper padding now only applies to immediate children
+
 
 v3.0.0
 ------------------------------

@@ -4,6 +4,82 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.10.0
+------------------------------
+*December 02, 2021*
+
+### Changed
+- Generic checkboxes to use `f-form-field`
+
+
+v0.9.1
+------------------------------
+*December 1, 2021*
+
+### Changed
+- Updating classname to match naming scheme
+
+
+v0.9.0
+------------------------------
+*November 29, 2021*
+
+### Added
+- Expose new isAuthFinished `required` property
+
+### Changed
+- Registered the Store Module on Create()
+- Initialise Page based on isAuthFinished
+
+
+v0.8.0
+------------------------------
+*November 26, 2021*
+
+### Changed
+- `f-card` wrapping component adds two props to control padding & size.
+
+### Added
+- New version of f-card (pulls in the two new props).
+
+
+v0.7.0
+------------------------------
+*November 23, 2021*
+
+### Changed
+- Rename boolean fields to match naming conventions
+
+
+### Added
+- Added Accessibility Tests.
+- Added Chrome & Visual Tests.
+
+
+v0.6.0
+------------------------------
+*November 22, 2021*
+
+### Added
+- Added storybook story.
+
+
+v0.5.3
+------------------------------
+*November 18, 2021*
+
+### Added
+- Added vuex store, wired store to template & added unit tests.
+
+
+v0.5.2
+------------------------------
+*November 17, 2021*
+
+### Added
+- Added contact preferences mapper & unit tests.
+
+
 v0.5.1
 ------------------------------
 *November 11, 2021*

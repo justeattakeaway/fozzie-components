@@ -110,7 +110,7 @@ describe('f-button Desktop visual tests', () => {
                 button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Action - Disabled', 'desktop');
+                browser.percyScreenshot('f-button - Link - Disabled', 'desktop');
             });
         });
 

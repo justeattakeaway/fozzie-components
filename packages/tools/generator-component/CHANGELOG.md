@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.5.0
+------------------------------
+*December 7, 2021*
+
+### Added
+- Prompt option for visual regression
+- Spec templates for visual regression (mobile and desktop)
+
+### Changed
+- component names in `test-utils` and `test`
+
+### Removed
+- Unused functions from within the component object - `open()` and `load()`
+
 
 v2.4.0
 ------------------------------

@@ -8,8 +8,8 @@ import {
     mobileWidth
 } from './helpers/navigation';
 
+import CountrySelector from '../CountrySelector.vue';
 import Navigation from '../Navigation.vue';
-
 
 const $style = {
     'is-open': 'is-open',
@@ -19,12 +19,10 @@ const $style = {
 
 let wrapper;
 
-
 let mockWidth = desktopWidth;
 
 function setMobileViewport () { mockWidth = mobileWidth; }
 function setDesktopViewport () { mockWidth = desktopWidth; }
-
 
 jest.mock('@justeat/f-services', () => ({
     axiosServices: {
@@ -87,7 +85,7 @@ describe('Navigation', () => {
         await wrapper.setData(defaultData); // need to await this for the state to fully update the DOM
 
         // Assert
-        expect(wrapper.find('[data-test-id="delivery-enquiry"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="delivery-enquiry-link"]').exists()).toBe(true);
     });
 
     it('should NOT show the delivery enquiry link in the navigation if `showDeliveryEnquiry: false` and the content is there', async () => {
@@ -103,7 +101,7 @@ describe('Navigation', () => {
         await wrapper.setData(defaultData);
 
         // Assert
-        expect(wrapper.find('[data-test-id="delivery-enquiry"]').exists()).toBe(false);
+        expect(wrapper.find('[data-test-id="delivery-enquiry-link"]').exists()).toBe(false);
     });
 
     it('should show "logout" if the user is logged in and has nav link data', async () => {
@@ -119,7 +117,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="logout"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="logout-link"]').exists()).toBe(true);
     });
 
     it('should show "navLinks" if the user is logged in and has nav link data', async () => {
@@ -172,7 +170,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="logout"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="logout-link"]').exists()).toBe(true);
     });
 
     it('should show "login" if the user DOES NOT have nav link data and is NOT logged in"', async () => {
@@ -198,7 +196,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="login"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="login-link"]').exists()).toBe(true);
     });
 
     it('should show the navbar if there are navigation links', () => {
@@ -724,7 +722,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-test-id="login"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="login-link"]').exists()).toBe(false);
         });
 
         it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {
@@ -779,6 +777,28 @@ describe('Navigation', () => {
             expect(wrapper.vm.hasNavigationLinks).toBe(true);
         });
 
+        it('should return true if customNavLinks are provided', () => {
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showLoginInfo: false,
+                    customNavLinks: [
+                        {
+                            text: 'Test',
+                            url: '/test',
+                            gtm: {
+                                label: 'test-label'
+                            }
+                        }
+                    ]
+                }
+            });
+
+            // Assert
+            expect(wrapper.vm.hasNavigationLinks).toBe(true);
+        });
+
         it('should return false if there are no underlying links to show', () => {
             // Arrange & Act
             wrapper = shallowMount(Navigation, {
@@ -787,7 +807,8 @@ describe('Navigation', () => {
                     showLoginInfo: false,
                     showOffersLink: false,
                     showHelpLink: false,
-                    showDeliveryEnquiry: false
+                    showDeliveryEnquiry: false,
+                    customNavLinks: []
                 }
             });
 
@@ -807,7 +828,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-test-id="country-selector"]').exists()).toBe(true);
+            expect(wrapper.findComponent(CountrySelector).exists()).toBe(true);
         });
 
         it('should not be shown when "showCountrySelector" is false', () => {
@@ -820,122 +841,34 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-test-id="country-selector"]').exists()).toBe(false);
-        });
-
-        it('should be open if `countrySelectorIsOpen: true`', async () => {
-            // Arrange
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showCountrySelector: true
-                },
-                mocks: {
-                    $style
-                }
-            });
-
-            // Act
-            await wrapper.vm.openCountrySelector();
-
-            // Assert
-            expect(wrapper.find('[data-test-id="country-selector"]').classes()).toContain('is-open');
-        });
-
-        it('should not be open when `countrySelectorIsOpen: false`', async () => {
-            // Arrange
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showCountrySelector: true
-                },
-                mocks: {
-                    $style
-                }
-            });
-
-            // Act
-            await wrapper.vm.closeCountrySelector();
-
-            // Assert
-            expect(wrapper.find('[data-test-id="country-selector"]').classes()).not.toContain('is-open');
-        });
-
-        it('should set aria-hidden attribute to false when open ("countrySelectorIsOpen" is true)', async () => {
-            // Arrange
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showCountrySelector: true
-                }
-            });
-
-            // Act
-            await wrapper.setData({
-                ...defaultData,
-                countrySelectorIsOpen: true
-            });
-
-            // Assert
-            expect(wrapper.find('[data-test-id="countrySelector-popover"]').attributes('aria-hidden')).toBeFalsy();
-        });
-
-        it('should set aria-hidden attribute to true when hidden ("countrySelectorIsOpen" is false)', async () => {
-            // Arrange
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showCountrySelector: true
-                }
-            });
-
-            // Act
-            await wrapper.setData({
-                ...defaultData,
-                countrySelectorIsOpen: false
-            });
-
-            // Assert
-            expect(wrapper.find('[data-test-id="countrySelector-popover"]').attributes('aria-hidden')).toBeTruthy();
+            expect(wrapper.findComponent(CountrySelector).exists()).toBe(false);
         });
 
         describe('on mobile', () => {
             beforeEach(setMobileViewport);
 
-            it('should set the tabindex attribute of the toggle to -1 when countrySelectorIsOpen is true', async () => {
+            it('should set tabIndex to -1 when countrySelectorIsOpen is true', async () => {
                 wrapper = shallowMount(Navigation, {
-                    propsData: {
-                        ...defaultPropsData,
-                        showCountrySelector: true
-                    }
+                    propsData: defaultPropsData
                 });
 
                 // Act
-                await wrapper.setData({
-                    ...defaultData,
-                    countrySelectorIsOpen: true
-                });
+                await wrapper.setData({ countrySelectorIsOpen: true });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="action-button-component"]').attributes('tabindex')).toBe('-1');
+                expect(wrapper.vm.tabIndex).toBe(-1);
             });
 
-            it('should set the tabindex attribute of the toggle to 0 when countrySelectorIsOpen is false', async () => {
+            it('should set tabIndex to 0 when countrySelectorIsOpen is false', async () => {
                 wrapper = shallowMount(Navigation, {
-                    propsData: {
-                        ...defaultPropsData,
-                        showCountrySelector: true
-                    }
+                    propsData: defaultPropsData
                 });
 
                 // Act
-                await wrapper.setData({
-                    ...defaultData,
-                    countrySelectorIsOpen: false
-                });
+                await wrapper.setData({ countrySelectorIsOpen: false });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="action-button-component"]').attributes('tabindex')).toBe('0');
+                expect(wrapper.vm.tabIndex).toBe(0);
             });
         });
     });

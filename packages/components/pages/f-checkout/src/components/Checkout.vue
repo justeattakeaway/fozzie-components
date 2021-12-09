@@ -1,23 +1,16 @@
 <template>
     <div>
-        <error-page
-            v-if="errorFormType"
-            :error-form-type="errorFormType"
-            :redirect-url="redirectUrl"
-            :service-type="serviceType" />
+        <component
+            :is="errorType"
+            v-if="checkoutErrorMessage"
+            ref="errorMessage"
+            v-bind="errorProps.props"
+            @created="handleDialogCreation">
+            <span>{{ errorProps.content }}</span>
+        </component>
 
         <age-verification
-            v-else-if="shouldShowAgeVerificationForm"
-            @checkout-verify-age="verifyCustomerAge" />
-
-        <component
-            :is="messageType.name"
-            v-else-if="message"
-            ref="errorMessage"
-            v-bind="messageType.props"
-            @created="handleDialogCreation">
-            <span>{{ messageType.content }}</span>
-        </component>
+            v-if="shouldShowAgeVerificationForm" />
 
         <div
             v-if="shouldShowCheckoutForm"
@@ -38,6 +31,7 @@
                     :is-checkout-method-dine-in="isCheckoutMethodDineIn"
                     :scroll-to-element="scrollToElement"
                     :available-fulfilment-times-key="availableFulfilmentTimesKey"
+                    :is-form-submitting="isFormSubmitting"
                     v-on="formEvents" />
 
                 <template
@@ -75,6 +69,7 @@ import {
     DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS,
+    ERROR_TYPES,
     TENANT_MAP,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
     VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
@@ -84,7 +79,7 @@ import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest, mapUpdateCheckoutRequestForAgeVerification, mapAnalyticsNames } from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 import addressService from '../services/addressService';
 import CheckoutAnalyticsService from '../services/analytics';
 
@@ -96,6 +91,7 @@ const {
     GetCheckoutError,
     GetCheckoutAccessForbiddenError,
     AvailableFulfilmentGetError,
+    AvailableFulfilmentEmptyError,
     GetBasketError
 } = exceptions;
 
@@ -207,10 +203,10 @@ export default {
     data () {
         return {
             tenantConfigs,
-            errorFormType: null,
-            isFormSubmitting: false,
+            isLoading: true,
             availableFulfilmentTimesKey: 0,
-            checkoutAnalyticsService: new CheckoutAnalyticsService(this)
+            checkoutAnalyticsService: new CheckoutAnalyticsService(this),
+            isFormSubmitting: false
         };
     },
 
@@ -219,6 +215,7 @@ export default {
             'address',
             'availableFulfilment',
             'basket',
+            'checkoutErrorMessage',
             'customer',
             'errors',
             'geolocation',
@@ -228,7 +225,6 @@ export default {
             'isFulfillable',
             'isLoggedIn',
             'messages',
-            'message',
             'notices',
             'orderId',
             'restaurant',
@@ -267,12 +263,16 @@ export default {
             return this.isLoggedIn && !this.customer.mobileNumber;
         },
 
+        shouldShowCheckoutErrorPage () {
+            return this.checkoutErrorMessage?.errorType === ERROR_TYPES.errorPage;
+        },
+
         shouldShowCheckoutForm () {
-            return !this.errorFormType && !this.shouldShowAgeVerificationForm;
+            return !this.isLoading && !this.shouldShowCheckoutErrorPage && !this.shouldShowAgeVerificationForm;
         },
 
         shouldShowAgeVerificationForm () {
-            return this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
+            return !this.shouldShowCheckoutErrorPage && this.errors.some(error => error.messageKey === DOB_REQUIRED_ISSUE || error.messageKey === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
@@ -282,35 +282,27 @@ export default {
             };
         },
 
-        messageType () {
-            return this.message && this.message.shouldShowInDialog
-                ? this.dialogMessage
-                : this.alertMessage;
+        errorType () {
+            return this.checkoutErrorMessage.errorType || null;
         },
 
-        dialogMessage () {
-            return {
-                name: 'error-dialog',
-                props: {
-                    'redirect-url': this.redirectUrl
-                }
+        errorProps () {
+            const alertProps = {
+                type: 'danger',
+                class: this.$style['c-checkout-alert'],
+                heading: this.$t('errorMessages.errorHeading')
             };
-        },
 
-        alertMessage () {
+            const isAlert = this.checkoutErrorMessage?.errorType === ERROR_TYPES.alert;
+
             return {
-                name: 'alert',
-                props: {
-                    type: 'danger',
-                    class: this.$style['c-checkout-alert'],
-                    heading: this.$t('errorMessages.errorHeading')
-                },
-                content: this.message
+                props: isAlert ? alertProps : { 'redirect-url': this.redirectUrl },
+                ...isAlert && { content: this.checkoutErrorMessage?.messageKey }
             };
         },
 
         /**
-         * If there is no fulfilment times available (errorFormType === noTimeAvailable)
+         * If there is no fulfilment times available (messageKey === noTimeAvailable)
          * redirect to search if the location cookie exists otherwise redirect to home.
          *
          * For all other error form types
@@ -318,7 +310,8 @@ export default {
          *
          * */
         redirectUrl () {
-            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable || this.message?.code === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
+            if (this.checkoutErrorMessage?.messageKey === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable
+                || this.checkoutErrorMessage?.messageKey === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
                 const postcodeCookie = this.$cookies.get('je-location');
 
                 return postcodeCookie ? `area/${postcodeCookie}` : '/';
@@ -368,7 +361,6 @@ export default {
         await this.initialise();
         this.checkoutAnalyticsService.trackInitialLoad();
         this.$emit(EventNames.CheckoutMounted);
-        this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
     },
 
     methods: {
@@ -384,7 +376,7 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
-            'updateMessage',
+            'updateCheckoutErrorMessage',
             'updateUserNote',
             'updateAddress',
             'getUserNote',
@@ -402,11 +394,15 @@ export default {
         async initialise () {
             this.setExperimentValues(this.experiments);
 
+            this.isLoading = true;
+
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
                 : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+
+            this.resetLoadingState();
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
@@ -458,7 +454,18 @@ export default {
                 }
             } catch (error) {
                 this.handleErrorState(error);
+            } finally {
+                this.setSubmittingState(false);
             }
+        },
+
+        /**
+         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
+         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
+         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
+         */
+        setSubmittingState (isFormSubmitting) {
+            this.isFormSubmitting = isFormSubmitting;
         },
 
         /**
@@ -537,16 +544,6 @@ export default {
          */
         redirectToPayment () {
             window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
-        },
-
-        /**
-         * Call update checkout with only the user's DOB for age verification
-         * This is to avoid creating too many side effects with the original mapper for update checkout
-         */
-        async verifyCustomerAge () {
-            const data = this.getMappedDataForUpdateCheckout({ ageVerificationOnly: true });
-
-            await this.handleUpdateCheckout(data);
         },
 
         /**
@@ -657,10 +654,10 @@ export default {
                 });
 
                 if (!this.availableFulfilment.times.length) {
-                    this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable;
+                    this.handleErrorState(new AvailableFulfilmentEmptyError('AvailableFulfilmentTimesEmpty'));
+                } else {
+                    this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
                 }
-
-                this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
             } catch (error) {
                 this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
             }
@@ -732,7 +729,7 @@ export default {
          * Set the `message` for the user to see.
          */
         handleErrorState (error) {
-            const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
+            const messageKey = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
 
             const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
@@ -740,15 +737,16 @@ export default {
 
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
-            if (!error.shouldShowInDialog && !error.errorFormType) {
-                this.updateMessage(message);
+            this.updateCheckoutErrorMessage({
+                messageKey,
+                errorType: error.errorType || ERROR_TYPES.alert
+            });
 
+            if (this.checkoutErrorMessage?.errorType === ERROR_TYPES.alert) {
                 this.$nextTick(() => {
                     this.scrollToElement(this.$refs.errorMessage.$el);
                 });
             }
-
-            this.errorFormType = error.errorFormType;
         },
 
         /**
@@ -763,8 +761,9 @@ export default {
         },
 
         onFormSubmit () {
+            this.setSubmittingState(true);
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
-            this.updateMessage();
+            this.updateCheckoutErrorMessage();
         },
 
         /**
@@ -796,6 +795,12 @@ export default {
             };
 
             this.handleEventLogging('CheckoutValidationError', validationState, { ...expandedData, validationState });
+            this.setSubmittingState(false);
+        },
+
+        resetLoadingState () {
+            this.isLoading = false;
+            this.$parent.$emit(EventNames.StopLoadingSpinner); // We need to use `$this.$parent.$emit` here because checkout will be mounted as a slot in `f-spinner`.
         },
 
         getReferralState () {
@@ -816,7 +821,7 @@ export default {
          * Forcing the component to re-render ensures that the correct time is selected and displayed.
          */
         async reloadAvailableFulfilmentTimesIfOutdated () {
-            if (this.message?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+            if (this.checkoutErrorMessage?.messageKey === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
                 await this.loadAvailableFulfilment();
                 this.availableFulfilmentTimesKey++;
             }
@@ -826,22 +831,18 @@ export default {
             this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
-        getMappedDataForUpdateCheckout (options = { ageVerificationOnly: false }) {
-            const { ageVerificationOnly } = options;
-            return ageVerificationOnly ?
-                mapUpdateCheckoutRequestForAgeVerification({
-                    customer: this.customer
-                }) : mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
-                    time: this.time,
-                    userNote: this.userNote,
-                    geolocation: this.geolocation,
-                    asap: this.hasAsapSelected,
-                    tableIdentifier: this.dineIn.tableIdentifier
-                });
+        getMappedDataForUpdateCheckout () {
+            return mapUpdateCheckoutRequest({
+                address: this.address,
+                customer: this.customer,
+                isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
+                time: this.time,
+                userNote: this.userNote,
+                geolocation: this.geolocation,
+                asap: this.hasAsapSelected,
+                tableIdentifier: this.dineIn.tableIdentifier
+            });
         }
     }
 };
@@ -858,5 +859,15 @@ export default {
 
 .c-checkout-submitButton--noBottomSpace {
     margin-bottom: 0;
+}
+
+.c-checkout-alert {
+    width: $checkout-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include media('<=#{$checkout-width}') {
+        width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
+    }
 }
 </style>

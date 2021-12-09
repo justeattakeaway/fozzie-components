@@ -1,10 +1,6 @@
 import MockDate from 'mockdate';
 import isCardCurrentlyActive from '../isCardCurrentlyActive';
 
-const brand = '__BRAND__';
-
-const brands = [brand];
-
 const card = {
     displayTimes: {}
 };
@@ -21,22 +17,6 @@ describe('services › utils › transformCardData', () => {
     it('should return true if card does not contain brand', () => {
         // Arrange & Act
         const result = isCardCurrentlyActive(card);
-
-        // Assert
-        expect(result).toBeTrue();
-    });
-
-    it('should return false if card brand is not in users brand list', () => {
-        // Arrange & Act
-        const result = isCardCurrentlyActive({ ...card, brand }, []);
-
-        // Assert
-        expect(result).toBeFalse();
-    });
-
-    it('should return true if card brand is in users brand list', () => {
-        // Arrange & Act
-        const result = isCardCurrentlyActive({ ...card, brand }, brands);
 
         // Assert
         expect(result).toBeTrue();
@@ -64,7 +44,7 @@ describe('services › utils › transformCardData', () => {
 
     it('should return true if card does not contain display times', () => {
         // Arrange & Act
-        const result = isCardCurrentlyActive({ brand }, brands);
+        const result = isCardCurrentlyActive({ id: 'test' });
 
         // Assert
         expect(result).toBeTrue();

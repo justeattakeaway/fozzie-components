@@ -34,6 +34,9 @@ const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
 const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
+const invalidProductsError = 'Basket contains invalid products';
+const offlineProductsError = 'Basket contains offline products';
+const createGuestError = 'Create Guest Error';
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
@@ -48,6 +51,9 @@ const timeNotAvailable = 'Selected time no longer available';
 const timeNotAvailableIssue = 'time-unavailable';
 const geolocationRequired = 'Geolocation required';
 const geolocationRequiredIssue = 'geolocation-required';
+const invalidProductsErrorCode = 'invalid-products';
+const offlineProductsErrorCode = 'offline-products';
+const createGuestErrorCode = 'error';
 const serverTimeout = 'Server timeout';
 const serverTimeoutIssue = 'timeout';
 const duplicateIssue = 'duplicate';
@@ -69,12 +75,23 @@ const restrictionOptions = {
     [ageRestriction]: ageRestrictionIssue
 };
 
+const createGuestErrorOptions = {
+    None: null,
+    [createGuestError]: createGuestErrorCode
+};
+
 const getCheckoutErrorOptions = {
     None: null,
     [accessForbiddenError]: accessForbiddenErrorCode,
     [getCheckoutError]: getCheckoutErrorCode,
     [noTimeAvailableError]: noTimeAvailable,
     [serverTimeout]: serverTimeoutIssue
+};
+
+const getBasketErrorOptions = {
+    None: null,
+    [invalidProductsError]: invalidProductsErrorCode,
+    [offlineProductsError]: offlineProductsErrorCode
 };
 
 const placeOrderErrorOptions = {
@@ -96,7 +113,6 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            createGuestUrl: mockedRequests.createGuest.url,
             getAddressUrl: mockedRequests.getAddress.url,
             loginUrl: '/login',
             paymentPageUrlPrefix,
@@ -129,6 +145,14 @@ export const CheckoutComponent = () => ({
             default: select('Get Checkout Errors', getCheckoutErrorOptions, null)
         },
 
+        createGuestError: {
+            default: select('Create Guest Errors', createGuestErrorOptions, null)
+        },
+
+        getBasketError: {
+            default: select('Get Basket Errors', getBasketErrorOptions, null)
+        },
+
         placeOrderError: {
             default: select('Place Order Errors', placeOrderErrorOptions)
         },
@@ -143,6 +167,10 @@ export const CheckoutComponent = () => ({
     },
 
     computed: {
+        createGuestUrl () {
+            return this.createGuestError ? mockedRequests.createGuestError.url : mockedRequests.createGuest.url;
+        },
+
         getCheckoutUrl () {
             if (this.fulfilmentTimeSelection) {
                 return `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
@@ -158,6 +186,11 @@ export const CheckoutComponent = () => ({
                     return `/checkout-${this.getCheckoutError}-get-error.json`;
                 }
             }
+
+            if (this.getBasketError) {
+                return `/get-basket-${this.getBasketError}.json`;
+            }
+
             return this.restriction ? `/get-basket-delivery-${this.restriction}.json` : `/get-basket-${this.serviceType}.json`;
         },
 

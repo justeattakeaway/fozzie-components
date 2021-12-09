@@ -1,5 +1,5 @@
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Error from '../Error.vue';
 import {
@@ -9,7 +9,7 @@ import {
     createStore,
     defaultCheckoutState
 } from './helpers/setup';
-import { CHECKOUT_ERROR_FORM_TYPE } from '../../constants';
+import { CHECKOUT_ERROR_FORM_TYPE, ERROR_TYPES } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -22,19 +22,21 @@ describe('Error', () => {
     beforeEach(() => {
         // Arrange & Act
 
-        wrapper = shallowMount(Error, {
+        wrapper = mount(Error, {
             i18n,
             localVue,
             store: createStore({
                 ...defaultCheckoutState,
                 restaurant: {
                     id: '301389'
+                },
+                checkoutErrorMessage: {
+                    messageKey: 'pageLoad',
+                    errorType: ERROR_TYPES.errorPage
                 }
             }),
             propsData: {
-                errorFormType: CHECKOUT_ERROR_FORM_TYPE.default,
-                redirectUrl: 'menu-jason-1',
-                serviceType: 'delivery'
+                redirectUrl: 'menu-jason-1'
             },
             mocks: {
                 $cookies,
@@ -47,7 +49,6 @@ describe('Error', () => {
         jest.clearAllMocks();
     });
 
-
     it('should be defined', () => {
         // Assert
         expect(wrapper.exists()).toBe(true);
@@ -55,7 +56,7 @@ describe('Error', () => {
 
     it('should show the heading', () => {
         // Act
-        const heading = wrapper.find('[data-test-id="checkout-error-page-heading"]');
+        const heading = wrapper.find('[data-test-id="cardWithContent-heading"]');
 
         // Assert
         expect(heading.text()).toMatchSnapshot();
@@ -63,7 +64,7 @@ describe('Error', () => {
 
     it('should show the description', () => {
         // Act
-        const description = wrapper.find('[data-test-id="checkout-error-page-description"]');
+        const description = wrapper.find('[data-test-id="cardWithContent-description"]');
 
         // Assert
         expect(description.text()).toMatchSnapshot();
@@ -100,9 +101,29 @@ describe('Error', () => {
                     // Assert
                     expect(window.location.assign).toHaveBeenCalledWith(wrapper.vm.redirectUrl);
                 });
-                describe('AND errorFormType is accessForbiddenError', () => {
-                    beforeEach(async () => {
-                        await wrapper.setProps({ errorFormType: CHECKOUT_ERROR_FORM_TYPE.accessForbidden });
+                describe('AND messageKey is accessForbiddenError', () => {
+                    beforeEach(() => {
+                        wrapper = mount(Error, {
+                            i18n,
+                            localVue,
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                restaurant: {
+                                    id: '301389'
+                                },
+                                checkoutErrorMessage: {
+                                    ...defaultCheckoutState.checkoutErrorMessage,
+                                    messageKey: CHECKOUT_ERROR_FORM_TYPE.accessForbidden
+                                }
+                            }),
+                            propsData: {
+                                redirectUrl: 'menu-jason-1'
+                            },
+                            mocks: {
+                                $cookies,
+                                $logger
+                            }
+                        });
                     });
                     describe('AND a menu basket cookie does not exist', () => {
                         it('should not delete the cookie', () => {
