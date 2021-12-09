@@ -97,11 +97,8 @@
 import CookieHelper from 'js-cookie';
 import { globalisationServices } from '@justeat/f-services';
 import ButtonComponent from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
 import MegaModal from '@justeat/f-mega-modal';
-import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import VLink from '@justeat/f-link';
-import '@justeat/f-link/dist/f-link.css';
 import LegacyBanner from './LegacyBanner.vue';
 import ReopenBannerLink from './ReopenBannerLink.vue';
 import tenantConfigs from '../tenants';

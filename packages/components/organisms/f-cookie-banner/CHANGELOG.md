@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0
+------------------------------
+*December 9, 2021*
+
+### Added
+- **Breaking Change**: Added `f-link` dependency to peer dependencies. Now `f-link` should be included as a dependency of the consuming component or application.
+- **Breaking Change**: Added `f-button` dependency to peer dependencies. Now `f-button` should be included as a dependency of the consuming component or application.
+- **Breaking Change**: Added `f-mega-modal` dependency to peer dependencies. Now `f-mega-modal` should be included as a dependency of the consuming component or application.
+
+### Removed
+- **Breaking Change**: Removed `f-link` styles import from the component. Make sure to import `f-link` styles in your application.
+- **Breaking Change**: Removed `f-button` styles import from the component. Make sure to import `f-button` styles in your application.
+- **Breaking Change**: Removed `f-mega-modal` styles import from the component. Make sure to import `f-mega-modal` styles in your application.
+
 
 v3.6.1
 ------------------------------
