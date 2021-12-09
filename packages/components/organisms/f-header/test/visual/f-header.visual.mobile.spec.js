@@ -163,4 +163,24 @@ describe('Shared - f-header component tests', () => {
         // Assert
         browser.percyScreenshot('f-header - custom nav links only', 'mobile');
     });
+
+    forEach([
+        'highlight'
+    ]).it('should display correctly with tallBelowMid prop', theme => {
+        // Arrange
+        const controls = [
+            'locale:en-GB',
+            `headerBackgroundTheme:${theme}`,
+            'tallBelowMid:true'
+        ].join(';');
+
+        header = new Header();
+        header.path += `&args=${controls}`;
+
+        // Act
+        header.load();
+
+        // Assert
+        browser.percyScreenshot(`f-header - tallBelowMid - ${theme}`, 'mobile');
+    });
 });

@@ -31,7 +31,8 @@ export const HeaderComponent = (args, { argTypes }) => ({
             :show-country-selector="showCountrySelector"
             :custom-nav-links="customNavLinks"
             :key="locale"
-            :show-skip-link="showSkipLink" />`
+            :show-skip-link="showSkipLink"
+            :tall-below-mid="tallBelowMid" />`
 });
 
 HeaderComponent.storyName = 'f-header';
@@ -46,7 +47,8 @@ HeaderComponent.args = {
     showSkipLink: true,
     showOffersLink: false,
     showDeliveryEnquiry: false,
-    logoLinkDisabled: false
+    logoLinkDisabled: false,
+    tallBelowMid: false
 };
 
 HeaderComponent.argTypes = {
@@ -114,5 +116,9 @@ HeaderComponent.argTypes = {
 
     logoLinkDisabled: {
         description: 'Prevents the header logo from also being a link'
+    },
+
+    tallBelowMid: {
+        description: 'Makes the header taller for narrower viewports'
     }
 };
