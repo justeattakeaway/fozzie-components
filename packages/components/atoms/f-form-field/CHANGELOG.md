@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.5.0
+------------------------------
+*December 06, 2021*
+
+### Removed
+- `u-spacing` class from label description
+
+### Added
+- Styles from `u-spacing` to label description class
+- Unscoped class to label and label description for parent styling
+
+
 v4.4.0
 ------------------------------
 *December 02, 2021*

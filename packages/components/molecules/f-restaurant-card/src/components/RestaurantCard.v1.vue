@@ -20,11 +20,11 @@
                 :class="$style['c-restaurantCard-logo']"
                 :logo-url="logoUrl" />
 
-            <restaurant-badges
-                v-if="imageBadges.length"
-                :class="$style['c-restaurantCard-imageBadges']"
+            <restaurant-tags
+                v-if="hasImageTags"
+                :class="$style['c-restaurantCard-imageTags']"
                 :test-id-position="'main-image'"
-                :badges="imageBadges" />
+                :tags="tags.imageTags" />
         </restaurant-image>
 
         <!-- primary content -->
@@ -49,6 +49,11 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
+            <!-- Local Legend Logo -->
+            <legend-icon
+                v-if="isPremier"
+                :class="[$style['c-restaurantCard-premier']]"
+                data-test-id="premier-icon" />
 
             <!-- New label -->
             <!-- START ERROR BOUNDARY -->
@@ -57,12 +62,12 @@
                 tier="3">
                 <!-- TODO - we want to translate this within the component using i18n.
                 For now we'll just need to pass down a translated string from the consuming site -->
-                <restaurant-badge
-                    v-if="newBadgeText"
+                <restaurant-tag
+                    v-if="newTagText"
                     :is-large="true"
-                    :text="newBadgeText"
-                    :background-colour="subcomponentColourSchemes.badges.new.background"
-                    :text-colour="subcomponentColourSchemes.badges.new.text" />
+                    :is-uppercase="true"
+                    :text="newTagText"
+                    color-scheme="positive" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -71,7 +76,9 @@
             <component
                 :is="errorBoundary"
                 tier="3">
-                <slot name="ratings" />
+                <restaurant-rating
+                    data-test-id="restaurant-rating"
+                    v-bind="rating" />
             </component>
             <!-- END ERROR BOUNDARY -->
 
@@ -91,27 +98,18 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
-            <!-- Local Legend label -->
-            <!-- START ERROR BOUNDARY -->
-            <component
-                :is="errorBoundary"
-                tier="3">
-                <slot name="local-legend" />
-            </component>
-            <!-- END ERROR BOUNDARY -->
-
-            <!-- Badges -->
+            <!-- Tags -->
             <div>
-                <!-- misc badges -->
+                <!-- misc tags -->
                 <!-- START ERROR BOUNDARY -->
                 <component
                     :is="errorBoundary"
                     tier="3">
-                    <restaurant-badges
-                        v-if="contentBadges.length"
-                        :class="$style['c-restaurantCard-badges']"
+                    <restaurant-tags
+                        v-if="hasContentTags"
+                        :class="$style['c-restaurantCard-tags']"
                         :test-id-position="'inner-content'"
-                        :badges="contentBadges" />
+                        :tags="tags.contentTags" />
                 </component>
                 <!-- END ERROR BOUNDARY -->
             </div>
@@ -124,6 +122,14 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
+            <!-- Offers -->
+            <icon-text
+                v-if="hasOffer"
+                data-test-id="restaurant-offer"
+                :text="offer"
+                is-bold>
+                <offer-icon />
+            </icon-text>
         </div>
 
         <!-- optional items -->
@@ -134,29 +140,17 @@
 </template>
 
 <script>
-import { theme as PieTokensTheme } from '@justeat/pie-design-tokens/dist/tokens.json';
+import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
 import RestaurantDish from './subcomponents/RestaurantDish.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
-import RestaurantBadges from './subcomponents/RestaurantBadges/RestaurantBadges.vue';
-import RestaurantBadge from './subcomponents/RestaurantBadges/RestaurantBadge.vue';
+import RestaurantTags from './subcomponents/RestaurantTags/RestaurantTags.vue';
+import RestaurantTag from './subcomponents/RestaurantTags/RestaurantTag.vue';
+import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.vue';
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
-
-const {
-    'support-positive': newBadgeTextColour,
-    'support-positive-02': newBadgeBackgroundColour
-} = PieTokensTheme.jet.color.alias.default;
-
-const subcomponentColourSchemes = {
-    badges: {
-        new: {
-            text: newBadgeTextColour,
-            background: newBadgeBackgroundColour
-        }
-    }
-};
+import IconText from './subcomponents/IconText.vue';
 
 export default {
     name: 'RestaurantCardV1',
@@ -165,9 +159,13 @@ export default {
         RestaurantLogo,
         RestaurantDish,
         RestaurantCuisines,
-        RestaurantBadges,
-        RestaurantBadge,
-        DeliveryTimeMeta
+        RestaurantTags,
+        RestaurantTag,
+        RestaurantRating,
+        DeliveryTimeMeta,
+        IconText,
+        OfferIcon,
+        LegendIcon
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -209,29 +207,41 @@ export default {
             type: Object,
             default: () => ({})
         },
-        imageBadges: {
-            type: Array,
-            default: () => []
+        tags: {
+            type: Object,
+            default: () => ({})
         },
-        contentBadges: {
-            type: Array,
-            default: () => []
-        },
-        newBadgeText: {
+        newTagText: {
             type: String,
             default: null
+        },
+        rating: {
+            type: Object,
+            default: () => ({})
         },
         deliveryTimeData: {
             type: Object,
             default: () => ({})
+        },
+        offer: {
+            type: String,
+            default: null
+        },
+        isPremier: {
+            type: Boolean,
+            default: false
         }
     },
-    data () {
-        return {
-            subcomponentColourSchemes
-        };
-    },
     computed: {
+        hasContentTags () {
+            return !!this.tags?.contentTags?.length;
+        },
+        hasImageTags () {
+            return !!this.tags?.imageTags?.length;
+        },
+        hasOffer () {
+            return !!this.offer?.length;
+        },
         displayDeliveryTimeMeta () {
             return this.deliveryTimeData.eta ||
                 this.deliveryTimeData.distance ||
@@ -303,12 +313,16 @@ export default {
   }
 }
 
-.c-restaurantCard-imageBadges {
+.c-restaurantCard-imageTags {
     bottom: spacing();
     left: spacing(x2);
     position: absolute;
     @include media('>mid') {
         bottom: spacing(x1.5);
     }
+}
+
+.c-restaurantCard-premier {
+    height: 21px;
 }
 </style>

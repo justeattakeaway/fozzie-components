@@ -3,6 +3,38 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.11.0
+------------------------------
+*December 07, 2021*
+
+### Added
+- Local Legend Logo
+
+v0.10.0
+------------------------------
+*December 07, 2021*
+
+### Added
+- Restaurant offers
+- associated unit tests to check render logic
+
+### Changed
+- updated storybook with offer example
+
+v0.9.0
+------------------------------
+*December 01, 2021*
+
+### Added
+- RestaurantRating component, used to display restaurant rating values
+- Storybook entries for restaurant card subcomponents
+
+### Changed
+- Updated storybook for restaurant card
+- Renamed RestaurantBadge and RestaurantBadges to RestaurantTag and RestaurantTags to align with language across the business
+- Remove pie token import from tag component and use css class for default colours
+- Hardcode colour scheme options for restaurant tags
+
 v0.8.0
 ------------------------------
 *November 03, 2021*

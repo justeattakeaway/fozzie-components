@@ -12,6 +12,14 @@ v0.8.0
 - Tests to cover method `editConsumerDetails`.
 
 
+v0.8.0
+------------------------------
+*December 06, 2021*
+
+### Added
+- Vuex store - get, map & store consumer details/address data
+
+
 v0.7.0
 ------------------------------
 *December 02, 2021*

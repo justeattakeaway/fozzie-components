@@ -3,7 +3,7 @@ const { COMPONENT } = require('./f-restaurantCard-selectors');
 
 module.exports = class RestaurantCard extends Page {
     constructor () {
-        super('molecule', 'restaurant-card-component');
+        super('molecule-folder', 'f-restaurant-card--restaurant-card-component');
     }
 
     // eslint-disable-next-line class-methods-use-this
