@@ -95,15 +95,8 @@ describe('AccountInfo', () => {
                         propsData: { ...sutProps, isAuthFinished: false }
                     });
 
-                    const event = {
-                        target: {
-                            dataset: { jsFieldkey: 'SagittariusA-Star' },
-                            value: 'supernova'
-                        }
-                    };
-
                     // Act
-                    wrapper.vm.editConsumerDetails(event);
+                    wrapper.vm.editConsumerDetails();
 
                     // Assert
                     expect(wrapper.vm.hasFormUpdate).toBe(true);
