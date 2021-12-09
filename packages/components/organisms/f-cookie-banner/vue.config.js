@@ -1,5 +1,7 @@
 const path = require('path');
 
+const PeerDepsExternalsPlugin = require('peer-deps-externals-webpack-plugin');
+
 const rootDir = path.join(__dirname, '..', '..');
 const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
@@ -23,5 +25,10 @@ module.exports = {
     },
     pluginOptions: {
         lintStyleOnBuild: true
+    },
+    configureWebpack: {
+        plugins: [
+            new PeerDepsExternalsPlugin()
+        ]
     }
 };

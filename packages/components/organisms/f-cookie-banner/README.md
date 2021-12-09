@@ -153,6 +153,14 @@ In the code example below we add the `nameSuffix` prop:
 
 Next run `yarn build` followed by `yarn build:static-files`. The generated files will be added to the root `dist/static` folder.
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-link | `yarn add @justeat/f-link` | `import '@justeat/f-link/dist/f-link.css';` |
+| f-button | `yarn add @justeat/f-button` | `import '@justeat/f-button/dist/f-button.css';` |
+| f-mega-modal | `yarn add @justeat/f-mega-modal` | `import '@justeat/f-mega-modal/dist/f-mega-modal.css';` |
+
 ## Configuration
 
 ### Props
