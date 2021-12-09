@@ -47,10 +47,10 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "js-cookie": "2.2.1",
-    "@justeat/f-button": "3.x.x",
-    "@justeat/f-link": "2.x.x",
-    "@justeat/f-mega-modal": "3.x.x"
+    "js-cookie": ">=2.2.1",
+    "@justeat/f-button": "3.x",
+    "@justeat/f-link": "2.x",
+    "@justeat/f-mega-modal": "3.x"
   },
   "devDependencies": {
     "@justeat/f-button": "3.0.2",
