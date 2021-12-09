@@ -211,14 +211,14 @@ describe('ContactPreferences Component', () => {
             ['news', 'email', false, true],
             ['news', 'sms', true, false],
             ['news', 'sms', false, true]
-        ])('should call the Mutation correctly for the %s preferences %s checkbox with %s if previously %s', async (preferencesKey, preferenceName, setValue, previousValue) => {
+        ])('should call the Mutation correctly for the %s preferences %s checkbox with %s if previously %s', (preferencesKey, preferenceName, setValue, previousValue) => {
             // Arrange
             storeState.preferences.find(e => e.key === preferencesKey)[`${preferenceName}Value`] = previousValue;
             wrapper = mountContactPreferences();
             const input = wrapper.find(`[data-test-id="contact-preferences-${preferencesKey}-${preferenceName}-checkbox"]`);
 
             // Act
-            await input.setChecked(setValue);
+            input.vm.$emit('input', setValue);
 
             // Assert
             expect(storeActions.editPreference).toHaveBeenCalledWith(
@@ -231,13 +231,13 @@ describe('ContactPreferences Component', () => {
             );
         });
 
-        it('should set the `isFormDirty` flag to true', async () => {
+        it('should set the `isFormDirty` flag to true', () => {
             // Act
             wrapper = mountContactPreferences();
             const input = wrapper.find('[data-test-id="contact-preferences-news-email-checkbox"]');
 
             // Act
-            await input.setChecked(!input.element.checked);
+            input.vm.$emit('input', true);
 
             // Assert
             expect(wrapper.vm.isFormDirty).toEqual(true);
