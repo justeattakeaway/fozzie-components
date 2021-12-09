@@ -462,6 +462,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+[data-cookie-consent-overlay] {
+    position: absolute;
+    color: $color-content-default;
+}
+
 .c-cookieBanner-card {
     position: absolute;
     bottom: 0;
@@ -489,6 +494,7 @@ export default {
     margin: 0 0 spacing();
     padding: 0;
     color: $color-content-default;
+    text-align: left;
 
     &:hover,
     &:focus {
