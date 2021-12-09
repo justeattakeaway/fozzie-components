@@ -248,7 +248,10 @@ html:global(.is-navInView) {
 
     .c-header--highlightBg {
         background-color: $color-support-brand-01;
-        min-height: 88px;
+
+        @include media('>mid') {
+            min-height: 88px;
+        }
     }
 
     .c-header-container {

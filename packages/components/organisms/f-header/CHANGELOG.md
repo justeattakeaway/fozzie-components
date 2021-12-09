@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.4.0
+------------------------------
+*December 9, 2021*
+
+### Changed
+- Fix some display issues for highlight theme
+  - Make icons visible in mobile nav.
+  - Reduce header height for mobile viewports.
+
+### Added
+- Supporting visual regression tests.
+
+
 v7.3.0
 ------------------------------
 *December 6, 2021*
