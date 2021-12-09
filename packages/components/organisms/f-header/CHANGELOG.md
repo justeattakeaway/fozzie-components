@@ -9,9 +9,7 @@ v7.4.0
 *December 9, 2021*
 
 ### Changed
-- Fix some display issues for highlight theme
-  - Make icons visible in mobile nav.
-  - Reduce header height for mobile viewports.
+- Make icons visible in mobile nav for highlight theme.
 
 ### Added
 - Supporting visual regression tests.
