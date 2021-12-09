@@ -159,6 +159,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
@@ -173,6 +174,7 @@ import DeleteAccount from './DeleteAccount.vue';
 import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
 import ConsumerApi from '../services/providers/Consumer.api';
+import fAccountInfoModule from '../store/accountInfo.module';
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
@@ -209,17 +211,6 @@ export default {
 
     data () {
         return {
-            consumer: {
-                firstName: null,
-                lastName: null,
-                phoneNumber: null,
-                emailAddress: null,
-                line1: null,
-                line2: null,
-                line3: null,
-                locality: null,
-                postcode: null
-            },
             consumerApi: new ConsumerApi({
                 httpClient: this.$http,
                 cookies: this.$cookies,
@@ -230,38 +221,44 @@ export default {
         };
     },
 
+    computed: {
+        ...mapState('fAccountInfoModule', [
+            'consumer'
+        ])
+    },
+
     watch: {
         isAuthFinished: {
             immediate: true,
-            handler (value) {
+            async handler (value) {
                 if (value) {
-                    this.initialise();
+                    await this.initialise();
                 }
             }
         }
     },
 
-    mounted () {
+    created () {
+        if (!this.$store.hasModule('fAccountInfoModule')) {
+            this.$store.registerModule('fAccountInfoModule', fAccountInfoModule);
+        }
+    },
+
+    async mounted () {
         if (this.isAuthFinished) {
-            this.initialise();
+            await this.initialise();
         }
     },
 
     methods: {
-        initialise () {
+        ...mapActions('fAccountInfoModule', [
+            'loadConsumerDetails',
+            'editConsumerDetails'
+        ]),
+
+        async initialise () {
             try {
-                // TODO - Dummy data to be replaced with next ticket
-                this.consumer = {
-                    firstName: 'Max',
-                    lastName: 'Legend',
-                    phoneNumber: 1234567890,
-                    emailAddress: 'mr.jazz@town.com',
-                    line1: '1 Wardour Street',
-                    line2: undefined,
-                    line3: null,
-                    locality: 'Strange Town',
-                    postcode: 'JZ1 1AA'
-                };
+                await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
