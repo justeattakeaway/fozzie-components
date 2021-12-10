@@ -19,7 +19,8 @@
                 maxlength="50"
                 :label-text="$t('consumer.firstNameLabel')"
                 :placeholder="$t('consumer.firstNamePlaceholder')"
-                @blur="onBlur('firstName')">
+                @blur="onBlur('firstName')"
+                @change="editConsumerDetails('firstName', consumer.firstName)">
                 <template
                     v-if="$v.consumer.firstName.$invalid"
                     #error>
@@ -37,7 +38,8 @@
                 maxlength="50"
                 :label-text="$t('consumer.lastNameLabel')"
                 :placeholder="$t('consumer.lastNamePlaceholder')"
-                @blur="onBlur('lastName')">
+                @blur="onBlur('lastName')"
+                @change="editConsumerDetails('lastName', consumer.lastName)">
                 <template
                     v-if="$v.consumer.lastName.$invalid"
                     #error>
@@ -55,7 +57,8 @@
                 maxlength="16"
                 :label-text="$t('consumer.phoneNumberLabel')"
                 :placeholder="$t('consumer.phoneNumberPlaceholder')"
-                @blur="onBlur('phoneNumber')">
+                @blur="onBlur('phoneNumber')"
+                @change="editConsumerDetails('phoneNumber', consumer.phoneNumber)">
                 <template
                     v-if="$v.consumer.phoneNumber.$invalid"
                     #error>
@@ -78,7 +81,8 @@
                 maxlength="50"
                 :label-text="$t('consumer.addressLabel')"
                 :placeholder="$t('consumer.line1Placeholder')"
-                @blur="onBlur('line1')">
+                @blur="onBlur('line1')"
+                @change="editConsumerDetails('line1', consumer.line1)">
                 <template
                     v-if="$v.consumer.line1.$invalid"
                     #error>
@@ -91,19 +95,22 @@
             <form-field
                 v-model="consumer.line2"
                 maxlength="50"
-                :placeholder="$t('consumer.line2Placeholder')" />
+                :placeholder="$t('consumer.line2Placeholder')"
+                @change="editConsumerDetails('line2', consumer.line2)" />
 
             <form-field
                 v-model="consumer.line3"
                 maxlength="50"
-                :placeholder="$t('consumer.line3Placeholder')" />
+                :placeholder="$t('consumer.line3Placeholder')"
+                @change="editConsumerDetails('line3', consumer.line3)" />
 
             <form-field
                 v-model="consumer.locality"
                 maxlength="50"
                 :label-text="$t('consumer.localityLabel')"
                 :placeholder="$t('consumer.localityPlaceholder')"
-                @blur="onBlur('locality')">
+                @blur="onBlur('locality')"
+                @change="editConsumerDetails('locality', consumer.locality)">
                 <template
                     v-if="$v.consumer.locality.$invalid"
                     #error>
@@ -118,7 +125,8 @@
                 maxlength="50"
                 :label-text="$t('consumer.postcodeLabel')"
                 :placeholder="$t('consumer.postcodePlaceholder')"
-                @blur="onBlur('postcode')">
+                @blur="onBlur('postcode')"
+                @change="editConsumerDetails('postcode', consumer.postcode)">
                 <template
                     v-if="$v.consumer.postcode.$invalid"
                     #error>
@@ -159,6 +167,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
@@ -173,6 +182,7 @@ import DeleteAccount from './DeleteAccount.vue';
 import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
 import ConsumerApi from '../services/providers/Consumer.api';
+import fAccountInfoModule from '../store/accountInfo.module';
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
@@ -209,59 +219,56 @@ export default {
 
     data () {
         return {
-            consumer: {
-                firstName: null,
-                lastName: null,
-                phoneNumber: null,
-                emailAddress: null,
-                line1: null,
-                line2: null,
-                line3: null,
-                locality: null,
-                postcode: null
-            },
             consumerApi: new ConsumerApi({
                 httpClient: this.$http,
                 cookies: this.$cookies,
                 baseUrl: this.smartGatewayBaseUrl
             }),
             tenantConfigs,
-            isFormSubmitting: false
+            isFormSubmitting: false,
+            hasFormUpdate: false
         };
+    },
+
+    computed: {
+        ...mapState('fAccountInfoModule', [
+            'consumer'
+        ])
     },
 
     watch: {
         isAuthFinished: {
             immediate: true,
-            handler (value) {
+            async handler (value) {
                 if (value) {
-                    this.initialise();
+                    await this.initialise();
                 }
             }
         }
     },
 
-    mounted () {
+    created () {
+        if (!this.$store.hasModule('fAccountInfoModule')) {
+            this.$store.registerModule('fAccountInfoModule', fAccountInfoModule);
+        }
+    },
+
+    async mounted () {
         if (this.isAuthFinished) {
-            this.initialise();
+            await this.initialise();
         }
     },
 
     methods: {
-        initialise () {
+        ...mapActions('fAccountInfoModule', [
+            'loadConsumerDetails',
+            'editConsumerDetails'
+        ]),
+
+        async initialise () {
             try {
-                // TODO - Dummy data to be replaced with next ticket
-                this.consumer = {
-                    firstName: 'Max',
-                    lastName: 'Legend',
-                    phoneNumber: 1234567890,
-                    emailAddress: 'mr.jazz@town.com',
-                    line1: '1 Wardour Street',
-                    line2: undefined,
-                    line3: null,
-                    locality: 'Strange Town',
-                    postcode: 'JZ1 1AA'
-                };
+                await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
+                this.hasFormUpdate = false;
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
@@ -277,9 +284,14 @@ export default {
                 return;
             }
 
+            if (!this.hasFormUpdate) {
+                return;
+            }
+
             this.setSubmittingState(true);
 
             try {
+                this.hasFormUpdate = false;
                 // TODO - to be added with next ticket
                 this.$log.info('Submitted Form', ['account-info', 'account-pages']);
             } catch (error) {
@@ -295,6 +307,19 @@ export default {
         */
         setSubmittingState (isFormSubmitting) {
             this.isFormSubmitting = isFormSubmitting;
+        },
+
+        /**
+         * Send through the field & value that has been edited.
+         *
+         * @TODO store in vuex store once that is wired up.
+         *
+         * @param field
+         * @param value
+         */
+        // eslint-disable-next-line no-unused-vars
+        editConsumerDetails (field, value) {
+            this.hasFormUpdate = true;
         }
     }
 };
