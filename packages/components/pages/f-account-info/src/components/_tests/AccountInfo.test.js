@@ -147,11 +147,7 @@ describe('AccountInfo', () => {
 
         it('should set `hasFormUpdate` to `false` so the form can not be resubmitted when mounted', () => {
             // Arrange & Act
-            const wrapper = shallowMount(AccountInfo, {
-                i18n,
-                localVue,
-                propsData: { ...sutProps, isAuthFinished: true }
-            });
+            wrapper = mountAccountInfo();
 
             // Assert
             expect(wrapper.vm.hasFormUpdate).toBe(false);
@@ -163,11 +159,7 @@ describe('AccountInfo', () => {
             describe('when invoked', () => {
                 it('should set `hasFormUpdate` to true to indicate the form data has changed', () => {
                     // Arrange
-                    const wrapper = shallowMount(AccountInfo, {
-                        i18n,
-                        localVue,
-                        propsData: { ...sutProps, isAuthFinished: false }
-                    });
+                    wrapper = mountAccountInfo();
 
                     // Act
                     wrapper.vm.editConsumerDetails();
