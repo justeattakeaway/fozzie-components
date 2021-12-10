@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="isSplitNotesEnabled">
         <accordion
             :id="noteTypeCourierOrOrder"
             :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
@@ -32,6 +32,18 @@
                 @input="updateUserNotes({ note: $event, type: 'kitchen' })" />
         </accordion>
     </div>
+    <form-field
+        v-else-if="!isSplitNotesEnabled"
+        :label-text="$t(`userNote.order.delivery.title`)"
+        input-type="textarea"
+        :placeholder="$t(`userNote.order.${serviceType}.placeholder`)"
+        :value="noteValue"
+        cols="30"
+        rows="7"
+        maxlength="200"
+        :name="'order-note'"
+        has-input-description
+        @input="updateUserNotes({ note: $event, type: 'order' })" />
 </template>
 
 <script>
@@ -56,6 +68,13 @@ export default {
         loggerMixin
     ],
 
+    props: {
+        isSplitNotesEnabled: {
+            type: Boolean,
+            default: false
+        }
+    },
+
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'notesConfiguration',
@@ -64,11 +83,11 @@ export default {
         ]),
 
         shouldShowKitchenNotes () {
-            return this.notesConfiguration[this.capitalisedServiceType]?.KitchenNoteAccepted;
+            return this.notesConfiguration[this.capitalisedServiceType]?.kitchenNoteAccepted;
         },
 
         noteTypeCourierOrOrder () {
-            return this.notesConfiguration[this.capitalisedServiceType]?.CourierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER;
+            return this.notesConfiguration[this.capitalisedServiceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER;
         },
 
         capitalisedServiceType () {
@@ -76,13 +95,14 @@ export default {
         },
 
         noteValue () {
-            return this.noteTypeCourierOrOrder === CHECKOUT_NOTE_TYPE_COURIER ? this.notes.courier?.value : this.notes.order?.value;
+            return this.noteTypeCourierOrOrder === CHECKOUT_NOTE_TYPE_COURIER ? this.notes.courier?.note : this.notes.order?.note;
         },
 
         kitchenNoteValue () {
-            return this.notes.kitchen?.value || '';
+            return this.notes.kitchen?.note || '';
         }
     },
+
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateUserNotes'

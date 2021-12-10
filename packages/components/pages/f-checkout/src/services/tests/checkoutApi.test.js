@@ -18,7 +18,8 @@ describe('CheckoutApi', () => {
             timeout: 10000
         };
         state = {
-            authToken
+            authToken,
+            notesConfiguration: {}
         };
     });
 
@@ -68,6 +69,7 @@ describe('CheckoutApi', () => {
         });
 
         it('should patch the checkout details to the backend', async () => {
+            state.notesConfiguration.isSplitNotesEnabled = true;
             // Arrange
             const request = {
                 url: payload.url,

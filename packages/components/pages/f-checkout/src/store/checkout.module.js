@@ -218,8 +218,7 @@ export default {
          */
         getNotesConfiguration: async ({ commit }, { url, timeout }) => {
             const { data } = await checkoutApi.getNoteConfiguration(url, timeout);
-
-            commit(UPDATE_NOTES_CONFIGURATION, data);
+            commit(UPDATE_NOTES_CONFIGURATION, { ...data?.customerNotes?.serviceTypes, isSplitNotesEnabled: true });
         },
 
 
@@ -600,7 +599,7 @@ export default {
         },
 
         [UPDATE_NOTES_CONFIGURATION]: (state, notesConfig) => {
-            state.notesConfiguration = notesConfig?.CustomerNotes?.ServiceTypes || {};
+            state.notesConfiguration = notesConfig;
         }
     }
 };

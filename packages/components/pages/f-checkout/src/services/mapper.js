@@ -14,7 +14,7 @@ const mapUpdateCheckoutRequest = ({
     geolocation,
     asap,
     tableIdentifier
-}) => ([
+}) => [
     {
         op: 'add',
         path: '/customer',
@@ -61,7 +61,7 @@ const mapUpdateCheckoutRequest = ({
         path: '/notes',
         value: notes
     }
-]);
+];
 
 /**
  * Maps checkout names to required GA names.

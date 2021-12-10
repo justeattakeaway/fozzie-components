@@ -181,7 +181,6 @@ export const CheckoutComponent = () => ({
                 url = `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
             }
 
-            console.log(url);
             return url;
         },
 

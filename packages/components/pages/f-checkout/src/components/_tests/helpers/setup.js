@@ -60,8 +60,8 @@ const defaultCheckoutState = {
     authToken: '',
     isLoggedIn: false,
     errors: [],
-    notesConfiguration: {},
-    notes: { courier: 'Please do not knock', kitchen: 'No ketchup please' },
+    notesConfiguration: { isSplitNotesEnabled: false },
+    notes: { order: { note: 'This is an order note' } },
     geolocation: null
 };
 

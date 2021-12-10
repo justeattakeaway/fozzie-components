@@ -38,6 +38,7 @@
                     :scroll-to-element="scrollToElement"
                     :available-fulfilment-times-key="availableFulfilmentTimesKey"
                     :is-form-submitting="isFormSubmitting"
+                    :is-split-notes-enabled="checkoutFeatures.isSplitNotesEnabled"
                     v-on="formEvents" />
 
                 <template
@@ -208,6 +209,11 @@ export default {
         getNoteConfigUrl: {
             type: String,
             required: true
+        },
+
+        checkoutFeatures: {
+            type: Object,
+            default: () => ({})
         }
     },
 
@@ -243,7 +249,8 @@ export default {
             'serviceType',
             'dineIn',
             'time',
-            'notes'
+            'notes',
+            'notesConfiguration'
         ]),
 
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -347,6 +354,15 @@ export default {
                 [EventNames.FormValid]: this.submitCheckout,
                 [EventNames.FormInvalid]: this.onInvalidCheckoutForm
             };
+        },
+
+        placeOrderNotes () {
+            return this.notesConfiguration.isSplitNotesEnabled ?
+                {
+                    order: this.notes?.order?.note || null,
+                    kitchen: this.notes?.kitchen?.note || null,
+                    courier: this.notes?.courier?.note || null
+                } : { NoteForRestaurant: this.notes.order?.note };
         }
     },
 
@@ -411,10 +427,12 @@ export default {
             this.isLoading = true;
 
             const promises = this.isLoggedIn
-                ? [this.loadBasket(), this.loadCheckout(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadNotesConfiguration(), this.loadAvailableFulfilment()];
+                ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+
+            await this.loadNotesConfiguration();
 
             this.resetLoadingState();
 
@@ -563,12 +581,9 @@ export default {
             try {
                 const data = {
                     basketId: this.basket.id,
-                    customerNotes: {
-                        ...this.notes
-                    },
+                    customerNotes: this.placeOrderNotes,
                     referralState: this.getReferralState()
                 };
-
                 await this.placeOrder({
                     url: this.placeOrderUrl,
                     data,
@@ -841,13 +856,14 @@ export default {
         },
 
         getMappedDataForUpdateCheckout () {
+            const notes = this.getNotes();
             return mapUpdateCheckoutRequest({
                 address: this.address,
                 customer: this.customer,
                 isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                 isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
                 time: this.time,
-                userNote: this.userNote,
+                notes,
                 geolocation: this.geolocation,
                 asap: this.hasAsapSelected,
                 tableIdentifier: this.dineIn.tableIdentifier
@@ -855,18 +871,24 @@ export default {
         },
 
         async loadNotesConfiguration () {
-            try {
-                await this.getNotesConfiguration({
-                    url: this.getNoteConfigUrl,
-                    timeout: this.checkoutTimeout
-                });
-            } catch (error) {
-                this.logInvoker({
-                    message: 'Notes configuration failure',
-                    data: this.eventData,
-                    logMethod: this.$logger.logWarn
-                });
+            if (this.checkoutFeatures.isSplitNotesEnabled) {
+                try {
+                    await this.getNotesConfiguration({
+                        url: `${this.getNoteConfigUrl}/${this.restaurant.id}/checkout-note-types`,
+                        timeout: this.checkoutTimeout
+                    });
+                } catch (error) {
+                    this.logInvoker({
+                        message: 'Notes configuration failure',
+                        data: this.eventData,
+                        logMethod: this.$logger.logWarn
+                    });
+                }
             }
+        },
+
+        getNotes () {
+            return this.checkoutFeatures.isSplitNotesEnabled ? this.notes : [{ type: 'delivery', value: this.notes.order?.note }];
         }
     }
 };

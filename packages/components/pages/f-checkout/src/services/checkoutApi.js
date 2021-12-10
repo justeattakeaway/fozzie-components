@@ -24,7 +24,9 @@ export default {
         const experimentationHeaders = request.rootGetters[`${VUEX_CHECKOUT_EXPERIMENTATION_MODULE}/getExperimentsHeaders`];
         const config = {
             headers: {
-                'Content-Type': 'application/json-patch+json;v=2',
+                ...(request.state.notesConfiguration?.isSplitNotesEnabled && {
+                    'Content-Type': 'application/json-patch+json;v=2'
+                }),
                 ...(request.state.authToken && {
                     Authorization: authHeader
                 }),
