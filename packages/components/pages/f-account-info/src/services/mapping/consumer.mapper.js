@@ -31,7 +31,7 @@ export const mapToConsumerAddress = addresses => {
         line1: address?.Line1,
         line2: address?.Line2,
         line3: address?.Line3,
-        city: address?.City,
+        locality: address?.City,
         postcode: address?.ZipCode
     };
 

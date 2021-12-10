@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-navigation-links",
   "description": "Fozzie Navigation Links - A component to display a collection of supplied links",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "main": "dist/f-navigation-links.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -41,7 +41,8 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
+    "@justeat/f-link": "2.x.x"
   },
   "devDependencies": {
     "@justeat/f-link": "2.3.0",
