@@ -5,7 +5,8 @@
             $style['c-header'],
             headerBackgroundClass,
             transparentBackgroundClasses,
-            { [$style['c-header--navInView']]: mobileNavIsOpen }
+            { [$style['c-header--navInView']]: mobileNavIsOpen },
+            { [$style['c-header--tallBelowMid']]: tallBelowMid }
         ]"
         data-test-id='header-component'>
         <skip-to-main
@@ -131,6 +132,11 @@ export default {
         showCountrySelector: {
             type: Boolean,
             default: false
+        },
+
+        tallBelowMid: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -248,7 +254,16 @@ html:global(.is-navInView) {
 
     .c-header--highlightBg {
         background-color: $color-support-brand-01;
-        min-height: 88px;
+
+        @include media('>mid') {
+            min-height: 88px;
+        }
+    }
+
+    .c-header--tallBelowMid {
+        @include media('<=mid') {
+            min-height: 88px;
+        }
     }
 
     .c-header-container {
