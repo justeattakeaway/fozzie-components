@@ -21,7 +21,7 @@
                 :label-text="$t('consumer.firstNameLabel')"
                 :placeholder="$t('consumer.firstNamePlaceholder')"
                 @blur="onBlur('firstName')"
-                @input="editConsumer('firstName', $event)">
+                @input="onEditConsumer('firstName', $event)">
                 <template
                     v-if="$v.consumer.firstName.$invalid"
                     #error>
@@ -41,7 +41,7 @@
                 :label-text="$t('consumer.lastNameLabel')"
                 :placeholder="$t('consumer.lastNamePlaceholder')"
                 @blur="onBlur('lastName')"
-                @input="editConsumer('lastName', $event)">
+                @input="onEditConsumer('lastName', $event)">
                 <template
                     v-if="$v.consumer.lastName.$invalid"
                     #error>
@@ -60,7 +60,7 @@
                 :label-text="$t('consumer.phoneNumberLabel')"
                 :placeholder="$t('consumer.phoneNumberPlaceholder')"
                 @blur="onBlur('phoneNumber')"
-                @input="editConsumer('phoneNumber', $event)">
+                @input="onEditConsumer('phoneNumber', $event)">
                 <template
                     v-if="$v.consumer.phoneNumber.$invalid"
                     #error>
@@ -84,7 +84,7 @@
                 :label-text="$t('consumer.addressLabel')"
                 :placeholder="$t('consumer.line1Placeholder')"
                 @blur="onBlur('line1')"
-                @input="editConsumer('line1', $event)">
+                @input="onEditConsumer('line1', $event)">
                 <template
                     v-if="$v.consumer.line1.$invalid"
                     #error>
@@ -98,13 +98,13 @@
                 v-model="consumer.line2"
                 maxlength="50"
                 :placeholder="$t('consumer.line2Placeholder')"
-                @input="editConsumer('line2', $event)" />
+                @input="onEditConsumer('line2', $event)" />
 
             <form-field
                 v-model="consumer.line3"
                 maxlength="50"
                 :placeholder="$t('consumer.line3Placeholder')"
-                @input="editConsumer('line3', $event)" />
+                @input="onEditConsumer('line3', $event)" />
 
             <form-field
                 v-model="consumer.locality"
@@ -112,7 +112,7 @@
                 :label-text="$t('consumer.localityLabel')"
                 :placeholder="$t('consumer.localityPlaceholder')"
                 @blur="onBlur('locality')"
-                @input="editConsumer('locality', $event)">
+                @input="onEditConsumer('locality', $event)">
                 <template
                     v-if="$v.consumer.locality.$invalid"
                     #error>
@@ -128,7 +128,7 @@
                 :label-text="$t('consumer.postcodeLabel')"
                 :placeholder="$t('consumer.postcodePlaceholder')"
                 @blur="onBlur('postcode')"
-                @input="editConsumer('postcode', $event)">
+                @input="onEditConsumer('postcode', $event)">
                 <template
                     v-if="$v.consumer.postcode.$invalid"
                     #error>
@@ -322,9 +322,9 @@ export default {
         /**
         * A generic method that updates the State (e.g. 'consumer.<field> = value')
         * @param {string} field - The field of the consumer that needs changing
-        * @param {string} value - The new value the consumer field
+        * @param {string} value - The new value of the consumer field
         */
-        editConsumer (field, value) {
+        onEditConsumer (field, value) {
             this.editConsumerDetails({ field, value });
             this.hasFormUpdate = true;
         }

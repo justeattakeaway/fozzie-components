@@ -154,39 +154,43 @@ describe('AccountInfo', () => {
         });
     });
 
-    describe('when editing the form', () => {
-        it.each([
-            ['firstName', 'Harry'],
-            ['lastName', 'Potter']
-        ])('should call the Mutation correctly when changing the consumer textbox `%s` to the value `%s`', (field, newValue) => {
-            // Arrange
-            wrapper = mountAccountInfo();
-            const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
+    describe('`methods`', () => {
+        describe('`onEditConsumer`', () => {
+            describe('when editing the form', () => {
+                it.each([
+                    ['firstName', 'Harry'],
+                    ['lastName', 'Potter']
+                ])('should call the Mutation correctly when changing the consumer textbox `%s` to the value `%s`', (field, newValue) => {
+                    // Arrange
+                    wrapper = mountAccountInfo();
+                    const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
 
-            // Act
-            element.vm.$emit('input', newValue);
+                    // Act
+                    element.vm.$emit('input', newValue);
 
-            // Assert
-            expect(storeActions.editConsumerDetails).toHaveBeenCalledWith(
-                expect.any(Object),
-                {
-                    field,
-                    value: newValue
-                }
-            );
-        });
+                    // Assert
+                    expect(storeActions.editConsumerDetails).toHaveBeenCalledWith(
+                        expect.any(Object),
+                        {
+                            field,
+                            value: newValue
+                        }
+                    );
+                });
 
-        it('should set `hasFormUpdate` to true to indicate the form data has changed', async () => {
-            // Arrange
-            wrapper = mountAccountInfo();
-            await wrapper.setData({ hasFormUpdate: false });
-            const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
+                it('should set `hasFormUpdate` to true to indicate the form data has changed', async () => {
+                    // Arrange
+                    wrapper = mountAccountInfo();
+                    await wrapper.setData({ hasFormUpdate: false });
+                    const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
 
-            // Act
-            element.vm.$emit('input', 'harry');
+                    // Act
+                    element.vm.$emit('input', 'harry');
 
-            // Assert
-            expect(wrapper.vm.hasFormUpdate).toEqual(true);
+                    // Assert
+                    expect(wrapper.vm.hasFormUpdate).toEqual(true);
+                });
+            });
         });
     });
 });
