@@ -16,11 +16,12 @@
             @submit.prevent="onFormSubmit">
             <form-field
                 v-model="consumer.firstName"
+                data-test-id="account-info-consumer-firstName"
                 maxlength="50"
                 :label-text="$t('consumer.firstNameLabel')"
                 :placeholder="$t('consumer.firstNamePlaceholder')"
                 @blur="onBlur('firstName')"
-                @change="editConsumerDetails('firstName', consumer.firstName)">
+                @input="editConsumer('firstName', $event)">
                 <template
                     v-if="$v.consumer.firstName.$invalid"
                     #error>
@@ -35,11 +36,12 @@
 
             <form-field
                 v-model="consumer.lastName"
+                data-test-id="account-info-consumer-lastName"
                 maxlength="50"
                 :label-text="$t('consumer.lastNameLabel')"
                 :placeholder="$t('consumer.lastNamePlaceholder')"
                 @blur="onBlur('lastName')"
-                @change="editConsumerDetails('lastName', consumer.lastName)">
+                @input="editConsumer('lastName', $event)">
                 <template
                     v-if="$v.consumer.lastName.$invalid"
                     #error>
@@ -58,7 +60,7 @@
                 :label-text="$t('consumer.phoneNumberLabel')"
                 :placeholder="$t('consumer.phoneNumberPlaceholder')"
                 @blur="onBlur('phoneNumber')"
-                @change="editConsumerDetails('phoneNumber', consumer.phoneNumber)">
+                @input="editConsumer('phoneNumber', $event)">
                 <template
                     v-if="$v.consumer.phoneNumber.$invalid"
                     #error>
@@ -82,7 +84,7 @@
                 :label-text="$t('consumer.addressLabel')"
                 :placeholder="$t('consumer.line1Placeholder')"
                 @blur="onBlur('line1')"
-                @change="editConsumerDetails('line1', consumer.line1)">
+                @input="editConsumer('line1', $event)">
                 <template
                     v-if="$v.consumer.line1.$invalid"
                     #error>
@@ -96,13 +98,13 @@
                 v-model="consumer.line2"
                 maxlength="50"
                 :placeholder="$t('consumer.line2Placeholder')"
-                @change="editConsumerDetails('line2', consumer.line2)" />
+                @input="editConsumer('line2', $event)" />
 
             <form-field
                 v-model="consumer.line3"
                 maxlength="50"
                 :placeholder="$t('consumer.line3Placeholder')"
-                @change="editConsumerDetails('line3', consumer.line3)" />
+                @input="editConsumer('line3', $event)" />
 
             <form-field
                 v-model="consumer.locality"
@@ -110,7 +112,7 @@
                 :label-text="$t('consumer.localityLabel')"
                 :placeholder="$t('consumer.localityPlaceholder')"
                 @blur="onBlur('locality')"
-                @change="editConsumerDetails('locality', consumer.locality)">
+                @input="editConsumer('locality', $event)">
                 <template
                     v-if="$v.consumer.locality.$invalid"
                     #error>
@@ -126,7 +128,7 @@
                 :label-text="$t('consumer.postcodeLabel')"
                 :placeholder="$t('consumer.postcodePlaceholder')"
                 @blur="onBlur('postcode')"
-                @change="editConsumerDetails('postcode', consumer.postcode)">
+                @input="editConsumer('postcode', $event)">
                 <template
                     v-if="$v.consumer.postcode.$invalid"
                     #error>
@@ -265,6 +267,14 @@ export default {
             'editConsumerDetails'
         ]),
 
+        /**
+        * Gets the form data (from the api) and assigns it to State
+        * then lowers the isFormDirty flag as the form data is currently clean
+        * then stops the on-screen spinner from showing
+        *
+        * If an error occurs then this is logged and the Template is
+        * informed that it is in a state of error.
+        */
         async initialise () {
             try {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
@@ -291,9 +301,9 @@ export default {
             this.setSubmittingState(true);
 
             try {
-                this.hasFormUpdate = false;
                 // TODO - to be added with next ticket
                 this.$log.info('Submitted Form', ['account-info', 'account-pages']);
+                this.hasFormUpdate = false;
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
@@ -310,15 +320,12 @@ export default {
         },
 
         /**
-         * Send through the field & value that has been edited.
-         *
-         * @TODO store in vuex store once that is wired up.
-         *
-         * @param field
-         * @param value
-         */
-        // eslint-disable-next-line no-unused-vars
-        editConsumerDetails (field, value) {
+        * A generic method that updates the State (e.g. 'consumer.<field> = value')
+        * @param {string} field - The field of the consumer that needs changing
+        * @param {string} value - The new value the consumer field
+        */
+        editConsumer (field, value) {
+            this.editConsumerDetails({ field, value });
             this.hasFormUpdate = true;
         }
     }
