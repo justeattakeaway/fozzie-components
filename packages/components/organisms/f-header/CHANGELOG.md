@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v8.0.0
+------------------------------
+*December 9, 2021*
+
+### Changed
+- Make icons visible in mobile nav for highlight theme.
+
+### Added
+- (BREAKING) `tallBelowMid` prop to support taller header for mobile viewports (currently used in highlight theme).
+- Supporting visual regression tests.
+
+
 v7.3.0
 ------------------------------
 *December 6, 2021*
