@@ -5,7 +5,7 @@ import ErrorDialog from '../ErrorDialog.vue';
 import {
     i18n, defaultCheckoutState, createStore
 } from './helpers/setup';
-import { ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE } from '../../constants';
+import { DUPLICATE_ORDER, ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE, ERROR_TYPES } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -13,6 +13,11 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 jest.mock('../../services/analytics');
+
+const checkoutDialogMessage = {
+    messageKey: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
+    errorType: ERROR_TYPES.dialog
+};
 
 describe('ErrorDialog', () => {
     const restaurant = {
@@ -28,11 +33,6 @@ describe('ErrorDialog', () => {
         shouldRedirectToMenu: true,
         shouldShowInDialog: true,
         code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-    };
-
-    const duplicateOrderMessage = {
-        code: 'DuplicateOrder',
-        isDuplicateOrderError: true
     };
 
     afterEach(() => {
@@ -53,13 +53,13 @@ describe('ErrorDialog', () => {
     });
 
     describe('computed ::', () => {
-        describe('errorCode ::', () => {
-            it('should return `code` of `message` when `message` is provided', () => {
+        describe('messageKey ::', () => {
+            it('should return `messageKey` of `checkoutErrorMessage` when `checkoutErrorMessage` is provided', () => {
                 // Arrange && Act
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        message: defaultMessage
+                        checkoutErrorMessage: checkoutDialogMessage
                     }),
                     i18n,
                     localVue,
@@ -67,7 +67,7 @@ describe('ErrorDialog', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.errorCode).toEqual(defaultMessage.code);
+                expect(wrapper.vm.messageKey).toEqual(checkoutDialogMessage.messageKey);
             });
 
             it('should return `null` if  no `message` is provided', () => {
@@ -80,7 +80,7 @@ describe('ErrorDialog', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.errorCode).toEqual(null);
+                expect(wrapper.vm.messageKey).toBeUndefined();
             });
         });
 
@@ -90,7 +90,10 @@ describe('ErrorDialog', () => {
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        message: duplicateOrderMessage
+                        checkoutErrorMessage: {
+                            ...checkoutDialogMessage,
+                            messageKey: DUPLICATE_ORDER
+                        }
                     }),
                     i18n,
                     localVue,
@@ -109,7 +112,7 @@ describe('ErrorDialog', () => {
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        message: defaultMessage
+                        checkoutErrorMessage: checkoutDialogMessage
                     }),
                     i18n,
                     localVue,
@@ -127,14 +130,14 @@ describe('ErrorDialog', () => {
 
     describe('methods ::', () => {
         describe('closeErrorDialog ::', () => {
-            let updateMessageSpy;
+            let updateCheckoutErrorMessageSpy;
             let windowLocationSpy;
 
             beforeEach(() => {
-                updateMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateMessage');
+                updateCheckoutErrorMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateCheckoutErrorMessage');
                 windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
             });
-            it('should call `updateMessage`', () => {
+            it('should call `updateCheckoutErrorMessage`', () => {
                 // Arrange
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore(),
@@ -147,7 +150,7 @@ describe('ErrorDialog', () => {
                 wrapper.vm.closeErrorDialog();
 
                 // Assert
-                expect(updateMessageSpy).toHaveBeenCalled();
+                expect(updateCheckoutErrorMessageSpy).toHaveBeenCalled();
             });
 
             it('should redirect to the restaurant menu if `shouldRedirectToMenu` is true', () => {
@@ -156,7 +159,10 @@ describe('ErrorDialog', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         restaurant,
-                        message: defaultMessage
+                        checkoutErrorMessage: {
+                            checkoutDialogMessage,
+                            shouldRedirectToMenu: true
+                        }
                     }),
                     i18n,
                     localVue,
@@ -178,7 +184,7 @@ describe('ErrorDialog', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         restaurant,
-                        message: defaultMessage
+                        checkoutErrorMessage: checkoutDialogMessage
                     }),
                     i18n,
                     localVue,
@@ -294,15 +300,15 @@ describe('ErrorDialog', () => {
         });
 
         describe('showOrderHistory ::', () => {
-            let updateMessageSpy;
+            let updateCheckoutErrorMessageSpy;
             let windowLocationSpy;
 
             beforeEach(() => {
-                updateMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateMessage');
+                updateCheckoutErrorMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateCheckoutErrorMessage');
                 windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
             });
 
-            it('should call `updateMessage`', () => {
+            it('should call `updateCheckoutErrorMessage`', () => {
                 // Arrange
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore(),
@@ -315,7 +321,7 @@ describe('ErrorDialog', () => {
                 wrapper.vm.closeErrorDialog();
 
                 // Assert
-                expect(updateMessageSpy).toHaveBeenCalled();
+                expect(updateCheckoutErrorMessageSpy).toHaveBeenCalled();
             });
 
             it('should redirect to the order history', () => {
@@ -323,7 +329,10 @@ describe('ErrorDialog', () => {
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        message: duplicateOrderMessage
+                        checkoutErrorMessage: {
+                            ...checkoutDialogMessage,
+                            code: DUPLICATE_ORDER
+                        }
                     }),
                     i18n,
                     localVue,
@@ -400,7 +409,10 @@ describe('ErrorDialog', () => {
             const wrapper = shallowMount(ErrorDialog, {
                 store: createStore({
                     ...defaultCheckoutState,
-                    message: duplicateOrderMessage
+                    checkoutErrorMessage: {
+                        ...checkoutDialogMessage,
+                        messageKey: DUPLICATE_ORDER
+                    }
                 }),
                 i18n,
                 localVue,
@@ -409,7 +421,10 @@ describe('ErrorDialog', () => {
 
             // Assert
             expect(wrapper.emitted('created').length).toBe(1);
-            expect(wrapper.emitted('created')[0][0]).toEqual(duplicateOrderMessage);
+            expect(wrapper.emitted('created')[0][0]).toEqual({
+                code: DUPLICATE_ORDER,
+                isDuplicateOrderError: true
+            });
         });
     });
 });

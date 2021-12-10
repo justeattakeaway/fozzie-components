@@ -19,6 +19,7 @@ import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import checkoutAvailableFulfilmentNoTimeAvailable from './checkout-available-fulfilment-no-time-available.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
 import createGuest from './create-guest.json';
+import createGuestError from './create-guest-error.json';
 import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
 import getBasketDinein from './get-basket-dinein.json';
@@ -187,6 +188,12 @@ const requestDefinitions = {
         method: httpMethods.post,
         responseStatus: httpStatusCodes.ok,
         payload: createGuest
+    },
+    createGuestError: {
+        url: '/create-guest-error.json',
+        method: httpMethods.post,
+        responseStatus: httpStatusCodes.badRequest,
+        payload: createGuestError
     },
     getBasketDelivery: {
         url: '/get-basket-delivery.json',

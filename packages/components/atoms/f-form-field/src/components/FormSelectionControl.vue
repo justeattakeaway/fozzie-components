@@ -123,8 +123,10 @@ export default {
     }
 
     .c-formField-field--checkbox:disabled + label,
-    .c-formField-field--radio:disabled + label {
+    .c-formField-field--radio:disabled + label,
+    .c-formField-field--checkbox:disabled + label span {
         cursor: default;
+        color: $color-content-disabled;
     }
 
     .c-formField-field--checkbox + label:before,

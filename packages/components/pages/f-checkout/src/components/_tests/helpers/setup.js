@@ -32,6 +32,7 @@ const defaultCheckoutState = {
     dineIn: {
         tableIndentifier: ''
     },
+    checkoutErrorMessage: null,
     customer: {
         firstName: 'John',
         lastName: 'Smith',
@@ -55,7 +56,6 @@ const defaultCheckoutState = {
     },
     isFulfillable: true,
     notices: [],
-    message: null,
     messages: [],
     authToken: '',
     isLoggedIn: false,
@@ -77,7 +77,7 @@ const defaultExperimentationState = {
 const defaultCheckoutActions = {
     getCheckout: jest.fn(),
     updateCheckout: jest.fn(),
-    updateMessage: jest.fn(),
+    updateCheckoutErrorMessage: jest.fn(),
     getAvailableFulfilment: jest.fn(),
     setAuthToken: jest.fn(),
     createGuestUser: jest.fn(),

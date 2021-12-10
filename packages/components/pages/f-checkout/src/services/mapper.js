@@ -109,7 +109,7 @@ const getAnalyticsErrorCodeByApiErrorCode = error => {
     let analyticsErrorCode;
 
     Object.keys(updateCheckoutErrors).forEach(key => {
-        if (updateCheckoutErrors[key].includes(error.code)) {
+        if (updateCheckoutErrors[key].includes(error.messageKey)) {
             analyticsErrorCode = key;
         }
     });

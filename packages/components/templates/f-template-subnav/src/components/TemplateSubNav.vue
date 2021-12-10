@@ -1,24 +1,25 @@
 <template>
     <div
-        data-test-id="templateSubNav">
+        data-test-id="templateSubNav"
+        class="c-subNavTemplate">
         <div
-            :class="$style['c-breadcrumb-container']">
+            :class="$style['c-subNavTemplate-breadcrumb']">
             <bread-crumbs
                 :links="breadcrumbLinks" />
         </div>
 
         <div
-            :class="$style['c-main-container']">
+            :class="$style['c-subNavTemplate-container']">
             <div
-                :class="$style['c-navigation']">
+                :class="$style['c-subNavTemplate-subNav']">
                 <navigation-links
                     :links="navigationLinks" />
             </div>
 
-            <div
-                :class="$style['c-account-page']">
+            <main
+                :class="$style['c-subNavTemplate-main']">
                 <slot />
-            </div>
+            </main>
         </div>
     </div>
 </template>
@@ -52,12 +53,12 @@ export default {
 
 <style lang="scss" module>
 
-.c-breadcrumb-container {
+.c-subNavTemplate-breadcrumb {
     padding-top: 10px;
     padding-bottom: 1px;
 }
 
-.c-main-container {
+.c-subNavTemplate-container {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -65,8 +66,8 @@ export default {
     padding-bottom: spacing(x5);
 }
 
-.c-breadcrumb-container,
-.c-main-container {
+.c-subNavTemplate-breadcrumb,
+.c-subNavTemplate-container {
     margin: auto;
     max-width: #{$layout-max-width}px;
     padding-left: #{$layout-margin}px;
@@ -83,19 +84,19 @@ export default {
     }
 }
 
-.c-navigation {
+.c-subNavTemplate-subNav {
     flex-basis: 15rem;
     flex-grow: 1;
 }
 
-.c-navigation,
-.c-breadcrumb-container {
+.c-subNavTemplate-breadcrumb,
+.c-subNavTemplate-subNav {
     @include media('<mid') {
         display: none;
     }
 }
 
-.c-account-page {
+.c-subNavTemplate-main {
     flex-basis: 0;
     flex-grow: 999;
 }

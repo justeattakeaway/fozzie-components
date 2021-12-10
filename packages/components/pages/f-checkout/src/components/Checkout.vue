@@ -1,18 +1,12 @@
 <template>
     <div>
-        <error-page
-            v-if="errorFormType"
-            :error-form-type="errorFormType"
-            :redirect-url="redirectUrl"
-            :service-type="serviceType" />
-
         <component
-            :is="messageType.name"
-            v-if="message && !errorFormType"
+            :is="errorType"
+            v-if="checkoutErrorMessage"
             ref="errorMessage"
-            v-bind="messageType.props"
+            v-bind="errorProps.props"
             @created="handleDialogCreation">
-            <span>{{ messageType.content }}</span>
+            <span>{{ errorProps.content }}</span>
         </component>
 
         <age-verification
@@ -77,6 +71,7 @@ import {
     DOB_REQUIRED_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS,
+    ERROR_TYPES,
     TENANT_MAP,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
     VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
@@ -98,6 +93,7 @@ const {
     GetCheckoutError,
     GetCheckoutAccessForbiddenError,
     AvailableFulfilmentGetError,
+    AvailableFulfilmentEmptyError,
     GetBasketError
 } = exceptions;
 
@@ -221,7 +217,6 @@ export default {
         return {
             tenantConfigs,
             isLoading: true,
-            errorFormType: null,
             availableFulfilmentTimesKey: 0,
             checkoutAnalyticsService: new CheckoutAnalyticsService(this),
             isFormSubmitting: false
@@ -233,6 +228,7 @@ export default {
             'address',
             'availableFulfilment',
             'basket',
+            'checkoutErrorMessage',
             'customer',
             'errors',
             'geolocation',
@@ -242,7 +238,6 @@ export default {
             'isFulfillable',
             'isLoggedIn',
             'messages',
-            'message',
             'notices',
             'orderId',
             'restaurant',
@@ -282,12 +277,16 @@ export default {
             return this.isLoggedIn && !this.customer.mobileNumber;
         },
 
+        shouldShowCheckoutErrorPage () {
+            return this.checkoutErrorMessage?.errorType === ERROR_TYPES.errorPage;
+        },
+
         shouldShowCheckoutForm () {
-            return !this.isLoading && !this.errorFormType && !this.shouldShowAgeVerificationForm;
+            return !this.isLoading && !this.shouldShowCheckoutErrorPage && !this.shouldShowAgeVerificationForm;
         },
 
         shouldShowAgeVerificationForm () {
-            return !this.errorFormType && this.errors.some(error => error.code === DOB_REQUIRED_ISSUE || error.code === AGE_VERIFICATION_ISSUE);
+            return !this.shouldShowCheckoutErrorPage && this.errors.some(error => error.messageKey === DOB_REQUIRED_ISSUE || error.messageKey === AGE_VERIFICATION_ISSUE);
         },
 
         eventData () {
@@ -297,35 +296,27 @@ export default {
             };
         },
 
-        messageType () {
-            return this.message && this.message.shouldShowInDialog
-                ? this.dialogMessage
-                : this.alertMessage;
+        errorType () {
+            return this.checkoutErrorMessage.errorType || null;
         },
 
-        dialogMessage () {
-            return {
-                name: 'error-dialog',
-                props: {
-                    'redirect-url': this.redirectUrl
-                }
+        errorProps () {
+            const alertProps = {
+                type: 'danger',
+                class: this.$style['c-checkout-alert'],
+                heading: this.$t('errorMessages.errorHeading')
             };
-        },
 
-        alertMessage () {
+            const isAlert = this.checkoutErrorMessage?.errorType === ERROR_TYPES.alert;
+
             return {
-                name: 'alert',
-                props: {
-                    type: 'danger',
-                    class: this.$style['c-checkout-alert'],
-                    heading: this.$t('errorMessages.errorHeading')
-                },
-                content: this.message
+                props: isAlert ? alertProps : { 'redirect-url': this.redirectUrl },
+                ...isAlert && { content: this.checkoutErrorMessage?.messageKey }
             };
         },
 
         /**
-         * If there is no fulfilment times available (errorFormType === noTimeAvailable)
+         * If there is no fulfilment times available (messageKey === noTimeAvailable)
          * redirect to search if the location cookie exists otherwise redirect to home.
          *
          * For all other error form types
@@ -333,7 +324,8 @@ export default {
          *
          * */
         redirectUrl () {
-            if (this.errorFormType === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable || this.message?.code === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
+            if (this.checkoutErrorMessage?.messageKey === CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable
+                || this.checkoutErrorMessage?.messageKey === ERROR_CODE_RESTAURANT_NOT_TAKING_ORDERS) {
                 const postcodeCookie = this.$cookies.get('je-location');
 
                 return postcodeCookie ? `area/${postcodeCookie}` : '/';
@@ -407,8 +399,8 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
-            'updateMessage',
             'updateUserNotes',
+            'updateCheckoutErrorMessage',
             'updateAddress',
             'getNotesConfiguration'
         ]),
@@ -679,10 +671,10 @@ export default {
                 });
 
                 if (!this.availableFulfilment.times.length) {
-                    this.errorFormType = CHECKOUT_ERROR_FORM_TYPE.noTimeAvailable;
+                    this.handleErrorState(new AvailableFulfilmentEmptyError('AvailableFulfilmentTimesEmpty'));
+                } else {
+                    this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
                 }
-
-                this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
             } catch (error) {
                 this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
             }
@@ -754,7 +746,7 @@ export default {
          * Set the `message` for the user to see.
          */
         handleErrorState (error) {
-            const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
+            const messageKey = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
 
             const errorName = error.errorCode ? `${error.errorCode}-` : ''; // This appends the hyphen so it doesn't appear in the logs when the error name does not exist
 
@@ -762,15 +754,16 @@ export default {
 
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'error', error: `error_${errorName}${error.message}` });
 
-            if (!error.shouldShowInDialog && !error.errorFormType) {
-                this.updateMessage(message);
+            this.updateCheckoutErrorMessage({
+                messageKey,
+                errorType: error.errorType || ERROR_TYPES.alert
+            });
 
+            if (this.checkoutErrorMessage?.errorType === ERROR_TYPES.alert) {
                 this.$nextTick(() => {
                     this.scrollToElement(this.$refs.errorMessage.$el);
                 });
             }
-
-            this.errorFormType = error.errorFormType;
         },
 
         /**
@@ -787,7 +780,7 @@ export default {
         onFormSubmit () {
             this.setSubmittingState(true);
             this.checkoutAnalyticsService.trackFormInteraction({ action: 'submit' });
-            this.updateMessage();
+            this.updateCheckoutErrorMessage();
         },
 
         /**
@@ -845,7 +838,7 @@ export default {
          * Forcing the component to re-render ensures that the correct time is selected and displayed.
          */
         async reloadAvailableFulfilmentTimesIfOutdated () {
-            if (this.message?.code === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
+            if (this.checkoutErrorMessage?.messageKey === ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE) {
                 await this.loadAvailableFulfilment();
                 this.availableFulfilmentTimesKey++;
             }

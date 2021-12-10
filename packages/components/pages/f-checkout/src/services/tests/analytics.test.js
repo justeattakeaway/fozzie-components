@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import AnalyticsService from '../analytics';
 import { createStore, defaultAnalyticsState, defaultCheckoutState } from '../../components/_tests/helpers/setup';
 import * as mapper from '../mapper';
-import { HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
+import { DUPLICATE_ORDER, HEADER_LOW_VALUE_ORDER_EXPERIMENT } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -211,7 +211,7 @@ describe('Analytic Service ::', () => {
 
     describe('trackDialogEvent ::', () => {
         it.each([
-            ['dialog_duplicate_order_warning', 'DuplicateOrder', true],
+            ['dialog_duplicate_order_warning', DUPLICATE_ORDER, true],
             ['dialog_restaurant_not_taking_orders_error', 'RESTAURANT_NOT_TAKING_ORDERS', false],
             ['dialog_additional_items_required_error', 'ADDITIONAL_ITEMS_REQUIRED', false]
         ])('should call `pushEvent` with %s `eventAction` when error is %s', (eventAction, code, isDuplicateOrderError) => {

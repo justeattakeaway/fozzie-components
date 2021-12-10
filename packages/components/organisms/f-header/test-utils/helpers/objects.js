@@ -10,6 +10,20 @@ export const userInfo = {
     }
 };
 
+export const customNavLinks = [
+    {
+        text: 'Custom Link 1',
+        url: '/custom/1',
+        gtm: {
+            label: 'custom-1'
+        }
+    },
+    {
+        text: 'Custom Link 2',
+        url: '/custom/2'
+    }
+];
+
 export default {
     userInfo
 };

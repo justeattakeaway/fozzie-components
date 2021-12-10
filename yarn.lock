@@ -2189,6 +2189,13 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
+"@justeat/f-card@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.3.0.tgz#5155637b630e17f2fc7ef851619729f3a2983d99"
+  integrity sha512-NXgoJG0ZlE+Z5rJwXEfU5lWsyGnnvZgm8z0XrB6RVVWTH2yUFQuDhiBphZiLdrMo3eMrS1KoH1M0/bngIQgryA==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
 "@justeat/f-content-cards@6.0.0-beta.2":
   version "6.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
@@ -2228,10 +2235,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.2.0.tgz#d2680bd1f393d928a4ee1da04461526b43620f95"
-  integrity sha512-jd0GiETemcHz4CIBH3iW3/4rX/ET8W5QqYfFKod8pIbiimczy52xQFuBG2Lg8LFzMkby3oGOglAcx6jPXbG6Kg==
+"@justeat/f-icons@4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.4.0.tgz#a4bf50814d2f8a2fd91e25a2abef7bdb16ad74e7"
+  integrity sha512-2jrzrulKUN2VH6ULIgAqZR3RYtAZutM0BUD4K54saOquj3N1apnrnM1vrgYl6+V8kBvU6x5/FW8/eQSnW3Qr1Q==
 
 "@justeat/f-link@2.0.0":
   version "2.0.0"
@@ -2249,6 +2256,11 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
+
+"@justeat/f-navigation-links@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-0.3.0.tgz#73475aec7110f8be32b58e2d5250f62ba92295a8"
+  integrity sha512-qcImxIiXRY57/54Piu/i9zZ6k7mRsnxHHcdnuPJvGAxbWDPNJIcWgJL07tMEedLVeZ+OM3Pg9KEkC983Hrc8vg==
 
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"
@@ -2419,6 +2431,13 @@
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.1.0.tgz#e8a62dd2d03c2cf14ce1fa7d50540c2171b8fc38"
   integrity sha512-m2WfTJWR5Yako3hKEZ7SL3zDvZQA7VQ9hbUBnk02lxMYSKSqeHmLPICaLGtPXCIDBEuESFk2kscHSQc3GBxxmg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
+"@justeat/f-wdio-utils@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.4.0.tgz#6916a392777c88bc84e0d5a258e7e94c64ff7800"
+  integrity sha512-CQ69zuqvPGIAmDAF+EZM9dnBoIizBIMrl4L2tpvk27oRPKycQGgFIjfq1v/wTgVNwVXVJNCEG6zEKNjccSl+Ew==
   dependencies:
     "@justeat/f-services" "1.7.0"
 
