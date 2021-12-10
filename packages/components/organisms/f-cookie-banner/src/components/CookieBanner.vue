@@ -485,10 +485,6 @@ export default {
     @include font-size(body-s);
 }
 
-.c-cookieBanner-content {
-    text-align: left;
-}
-
 .c-cookieBanner-title {
     @include font-size(heading-m);
     margin: 0 0 spacing();
@@ -507,6 +503,7 @@ export default {
 .c-cookieBanner-content {
     margin: 0 auto;
     padding: spacing(x4);
+    text-align: left;
 }
 
 .reopen-link-wrapper {
