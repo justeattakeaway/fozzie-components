@@ -6,10 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.7.0
 ------------------------------
-*December 09, 2021*
+*December 10, 2021*
 
 ### Fixed
-- Style issues.
+- Style inheritance issues fixed:
+- text color
+- heading alignment
+- container position (to force z-index)
 
 
 v3.6.1
