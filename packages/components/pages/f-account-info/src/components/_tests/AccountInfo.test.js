@@ -144,5 +144,30 @@ describe('AccountInfo', () => {
             // Assert 2
             expect(initialiseSpy).toHaveBeenCalled();
         });
+
+        it('should set `hasFormUpdate` to `false` so the form can not be resubmitted when mounted', () => {
+            // Arrange & Act
+            wrapper = mountAccountInfo();
+
+            // Assert
+            expect(wrapper.vm.hasFormUpdate).toBe(false);
+        });
+    });
+
+    describe('`methods`', () => {
+        describe('`editConsumerDetails`', () => {
+            describe('when invoked', () => {
+                it('should set `hasFormUpdate` to true to indicate the form data has changed', () => {
+                    // Arrange
+                    wrapper = mountAccountInfo();
+
+                    // Act
+                    wrapper.vm.editConsumerDetails();
+
+                    // Assert
+                    expect(wrapper.vm.hasFormUpdate).toBe(true);
+                });
+            });
+        });
     });
 });
