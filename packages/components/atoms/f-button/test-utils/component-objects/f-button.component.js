@@ -5,30 +5,17 @@ module.exports = class Button extends Page {
         super('atom-folder', 'f-button--button-component');
     }
 
-    get actionComponent () { return $('[data-test-id="action-button-component"]'); }
-
-    open (url) {
-        super.open(url);
-    }
+    get component () { return $('[data-test-id="action-button-component"]'); }
 
     load () {
-        super.load(this.actionComponent);
+        super.load(this.component);
     }
 
-    /**
-     * @description
-     * Sets the data for the button component.
-     *
-     * @param {Object} button
-     * @param {String} button.type
-     * @param {String} button.size
-     */
-
     waitForActionComponent () {
-        super.waitForComponent(this.actionComponent);
+        super.waitForComponent(this.component);
     }
 
     isActionComponentDisplayed () {
-        return this.actionComponent.isDisplayed();
+        return this.component.isDisplayed();
     }
 };

@@ -1,6 +1,7 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
 const ImageTile = require('../../test-utils/component-objects/f-imageTile.component');
+
 const imageTile = new ImageTile();
 
 describe('Accessibility tests', () => {

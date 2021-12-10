@@ -7,7 +7,7 @@ describe('f-imageTile component tests', () => {
         imageTile.load();
     });
 
-    it('should display the f-restaurantCard component', () => {
+    it('should display the f-restaurant-card component', () => {
         // Assert
         expect(imageTile.isComponentDisplayed()).toBe(true);
     });
