@@ -137,6 +137,11 @@ export default {
         tallBelowMid: {
             type: Boolean,
             default: false
+        },
+
+        useJetLogo: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -153,6 +158,9 @@ export default {
 
     computed: {
         theme () {
+            if (this.useJetLogo) {
+                return 'jet';
+            }
             return globalisationServices.getTheme(this.locale);
         },
 
