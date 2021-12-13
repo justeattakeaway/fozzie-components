@@ -3,7 +3,7 @@ const { COMPONENT } = require('./f-form-selectors');
 
 module.exports = class Form extends Page {
     constructor () {
-        super('organism', 'v-form-component');
+        super('organism', 'form-component');
     }
 
     get component () {
