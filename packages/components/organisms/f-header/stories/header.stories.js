@@ -36,7 +36,7 @@ export const HeaderComponent = (args, { argTypes }) => ({
             :key="locale"
             :show-skip-link="showSkipLink"
             :tall-below-mid="tallBelowMid"
-            :use-jet-logo="useJetLogo" />`
+            :should-use-jet-logo="shouldUseJetLogo" />`
 });
 
 HeaderComponent.storyName = 'f-header';
@@ -53,7 +53,7 @@ HeaderComponent.args = {
     showDeliveryEnquiry: false,
     logoLinkDisabled: false,
     tallBelowMid: false,
-    useJetLogo: false
+    shouldUseJetLogo: false
 };
 
 HeaderComponent.argTypes = {
@@ -78,7 +78,7 @@ HeaderComponent.argTypes = {
         description: 'Configure the user details; set to `false` (in RAW mode) to simulate a logged out user'
     },
 
-    useJetLogo: {
+    shouldUseJetLogo: {
         control: { type: 'boolean' },
         description: 'If set to true the header shows the Jet logo'
     },

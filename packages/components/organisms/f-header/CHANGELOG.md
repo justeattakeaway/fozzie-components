@@ -9,7 +9,7 @@ v9.1.0
 *December 14, 2021*
 
 ### Added
-- Jet logo support via `useJetLogo` prop.
+- Jet logo support via `shouldUseJetLogo` prop.
 
 ### Updated
 - f-vue-icons to the latest (3.3.0).

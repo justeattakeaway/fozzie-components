@@ -139,7 +139,7 @@ export default {
             default: false
         },
 
-        useJetLogo: {
+        shouldUseJetLogo: {
             type: Boolean,
             default: false
         }
@@ -158,7 +158,7 @@ export default {
 
     computed: {
         theme () {
-            if (this.useJetLogo) {
+            if (this.shouldUseJetLogo) {
                 return 'jet';
             }
             return globalisationServices.getTheme(this.locale);
