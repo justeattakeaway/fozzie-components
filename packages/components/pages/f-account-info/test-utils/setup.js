@@ -48,18 +48,20 @@ const consumerAddressGetResponse = {
 };
 
 export const consumerAddressesGetResponse = {
-    data: [{
-        ...consumerAddressGetResponse
-    },
-    {
-        AddressId: 1050450175,
-        City: 'Bristol',
-        ZipCode: 'BS1 9DJ',
-        AddressName: 'Office',
-        IsDefault: false,
-        Line1: 'Takeaway',
-        Line2: 'Broad Quay House'
-    }]
+    data: {
+        Addresses: [{
+            ...consumerAddressGetResponse
+        },
+        {
+            AddressId: 1050450175,
+            City: 'Bristol',
+            ZipCode: 'BS1 9DJ',
+            AddressName: 'Office',
+            IsDefault: false,
+            Line1: 'Takeaway',
+            Line2: 'Broad Quay House'
+        }]
+    }
 };
 
 export const consumerDetailsMappedModel = {
