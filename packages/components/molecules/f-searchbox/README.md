@@ -56,6 +56,16 @@
     }
 
     ```
+
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency        | Command to install                  | Styles to include                                      |
+| ----------------- | ----------------------------------- | ------------------------------------------------------ |
+| f-button          | `yarn add @justeat/f-button`        | `import '@justeat/f-button/dist/f-button.css';`        |
+| f-error-message   | `yarn add @justeat/f-error-message` | `import '@justeat/f-button/dist/f-error-message.css';` |
+| f-mega-modal      | `yarn add @justeat/f-mega-modal`    | `import '@justeat/f-button/dist/f-mega-modal.css';`    |
+
+
 ## Development
 It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
