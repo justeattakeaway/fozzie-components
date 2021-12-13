@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const CookieBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
+const CookieBanner = require('../../test-utils/component-objects/f-cookie-consent-banner.component');
 
 let cookieBanner;
 
