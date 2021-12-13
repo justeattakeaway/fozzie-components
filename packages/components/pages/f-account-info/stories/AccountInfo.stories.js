@@ -1,32 +1,49 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
+import { select, withKnobs } from '@storybook/addon-knobs';
+import { locales } from '@justeat/storybook/constants/globalisation';
 import AccountInfo from '../src/components/AccountInfo.vue';
 import fAccountInfoModule from '../src/store/accountInfo.module';
+import {
+    authToken,
+    setupApiState,
+    apiStates,
+    apiGetPostDetailsStateOptions,
+    apiGetPostAddressesStateOptions
+} from './story.helper';
 
 Vue.use(Vuex);
 
 export default {
     title: 'Components/Pages',
-    decorators: [withA11y]
+    decorators: [withKnobs, withA11y]
 };
 
 export const AccountInfoComponent = () => ({
     components: { AccountInfo },
     props: {
         locale: {
-            default: 'en-GB'
+            default: select('Locale', [locales.gb], locales.gb)
         },
-        authToken: {
-            type: String,
-            default: 'sometoken'
+        apiGetDetailsState: {
+            default: select(apiGetPostDetailsStateOptions.title, apiGetPostDetailsStateOptions.states, apiStates.none)
         },
-        isAuthFinished: {
-            default: true
+        apiGetAddressesState: {
+            default: select(apiGetPostAddressesStateOptions.title, apiGetPostAddressesStateOptions.states, apiStates.none)
+        }
+    },
+
+    computed: {
+        authToken () {
+            return authToken;
         },
-        smartGatewayBaseUrl: {
-            type: String,
-            default: ''
+
+        prepareStory () {
+            setupApiState({
+                apiGetDetailsState: this.apiGetDetailsState,
+                apiGetAddressesState: this.apiGetAddressesState
+            });
         }
     },
 
@@ -38,11 +55,12 @@ export const AccountInfoComponent = () => ({
 
     template: '<account-info ' +
     ':authToken="authToken" ' +
+    ':isAuthFinished="true" ' +
     ':locale="locale" ' +
-    ':isAuthFinished="isAuthFinished" ' +
-    ':smart-gateway-base-url="smartGatewayBaseUrl" ' +
+    'smart-gateway-base-url="" ' +
+    ':prepareStory="prepareStory" ' +
     // eslint-disable-next-line no-template-curly-in-string
-    ':key="`${authToken},${locale},${smartGatewayBaseUrl}`" />'
+    ':key="`${authToken},${locale}`" />'
 });
 
 AccountInfoComponent.storyName = 'f-account-info';
