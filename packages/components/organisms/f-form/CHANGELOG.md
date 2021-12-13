@@ -15,4 +15,12 @@ v0.1.0
 *December 13, 2021*
 
 ### Added
+- Add basic form components.
+
+
+v0.1.0
+------------------------------
+*December 13, 2021*
+
+### Added
 - Generated new component.
