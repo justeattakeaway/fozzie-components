@@ -9,9 +9,9 @@ describe('Accessibility tests', () => {
         cardWithContent.load();
     });
 
-    it('a11y - should test f-cardWithContent component WCAG compliance', () => {
+    it('a11y - should test f-card-with-content component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-cardWithContent');
+        const axeResults = getAccessibilityTestResults('f-card-with-content');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

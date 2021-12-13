@@ -1,14 +1,14 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
-const PromotionsShowcase = require('../../test-utils/component-objects/f-promotionsShowcase.component');
+const PromotionsShowcase = require('../../test-utils/component-objects/f-promotions-showcase.component');
+
 const promotionsShowcase = new PromotionsShowcase();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        promotionsShowcase.open();
-        promotionsShowcase.waitForComponent();
+        promotionsShowcase.load();
     });
-    it('a11y - should test f-promotionsShowcase component WCAG compliance', () => {
+    it('a11y - should test f-promotions-showcase component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-promotionsShowcase');
 

@@ -1,13 +1,13 @@
-const SkeletonLoader = require('../../test-utils/component-objects/f-skeletonLoader.component');
+const SkeletonLoader = require('../../test-utils/component-objects/f-skeleton-loader.component');
 
 const skeletonLoader = new SkeletonLoader();
 
-describe('f-skeletonLoader component tests', () => {
+describe('f-skeleton-loader component tests', () => {
     beforeEach(() => {
         skeletonLoader.load();
     });
 
-    it('should display the f-skeletonLoader component', () => {
+    it('should display the f-skeleton-loader component', () => {
         // Assert
         expect(skeletonLoader.isComponentDisplayed()).toBe(true);
     });
