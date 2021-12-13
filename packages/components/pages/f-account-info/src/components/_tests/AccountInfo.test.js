@@ -155,17 +155,40 @@ describe('AccountInfo', () => {
     });
 
     describe('`methods`', () => {
-        describe('`editConsumerDetails`', () => {
-            describe('when invoked', () => {
-                it('should set `hasFormUpdate` to true to indicate the form data has changed', () => {
+        describe('`onEditConsumer`', () => {
+            describe('when editing the form', () => {
+                it.each([
+                    ['firstName', 'Harry'],
+                    ['lastName', 'Potter']
+                ])('should call the Mutation correctly when changing the consumer textbox `%s` to the value `%s`', (field, newValue) => {
                     // Arrange
                     wrapper = mountAccountInfo();
+                    const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
 
                     // Act
-                    wrapper.vm.editConsumerDetails();
+                    element.vm.$emit('input', newValue);
 
                     // Assert
-                    expect(wrapper.vm.hasFormUpdate).toBe(true);
+                    expect(storeActions.editConsumerDetails).toHaveBeenCalledWith(
+                        expect.any(Object),
+                        {
+                            field,
+                            value: newValue
+                        }
+                    );
+                });
+
+                it('should set `hasFormUpdate` to true to indicate the form data has changed', async () => {
+                    // Arrange
+                    wrapper = mountAccountInfo();
+                    await wrapper.setData({ hasFormUpdate: false });
+                    const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
+
+                    // Act
+                    element.vm.$emit('input', 'harry');
+
+                    // Assert
+                    expect(wrapper.vm.hasFormUpdate).toEqual(true);
                 });
             });
         });
