@@ -175,6 +175,8 @@ import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
 import ConsumerApi from '../services/providers/Consumer.api';
 import fAccountInfoModule from '../store/accountInfo.module';
+import AccountInfoAnalyticsService from '../services/analytics';
+
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
@@ -216,6 +218,7 @@ export default {
                 cookies: this.$cookies,
                 baseUrl: this.smartGatewayBaseUrl
             }),
+            accountInfoAnalyticsService: new AccountInfoAnalyticsService(this),
             tenantConfigs,
             isFormSubmitting: false
         };
@@ -273,6 +276,8 @@ export default {
                 this.logValidationFailure();
                 return;
             }
+
+            this.accountInfoAnalyticsService.trackFormSubmission();
 
             this.setSubmittingState(true);
 
