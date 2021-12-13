@@ -18,4 +18,8 @@ module.exports = class LinkButton extends Page {
     isLinkComponentDisplayed () {
         return this.component.isDisplayed();
     }
+
+    isLinkComponentClickable () {
+        return this.component.isClickable();
+    }
 };

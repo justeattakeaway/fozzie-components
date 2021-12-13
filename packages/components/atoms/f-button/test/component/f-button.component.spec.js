@@ -16,6 +16,17 @@ describe('f-button component tests', () => {
         expect(button.isActionComponentDisplayed()).toBe(true);
     });
 
+    it('should check that the f-button action component is clickable', () => {
+        // Arrange
+        button = new Button();
+
+        // Act
+        button.load();
+
+        // Assert
+        expect(button.isActionComponentClickable()).toBe(true);
+    });
+
     it('should display the f-button link component', () => {
         // Arrange
         button = new LinkButton();
@@ -27,6 +38,17 @@ describe('f-button component tests', () => {
         expect(button.isLinkComponentDisplayed()).toBe(true);
     });
 
+    it('should check that the f-button link component is clickable', () => {
+        // Arrange
+        button = new LinkButton();
+
+        // Act
+        button.load();
+
+        // Assert
+        expect(button.isLinkComponentClickable()).toBe(true);
+    });
+
     it('should display the f-button icon component', () => {
         // Arrange
         button = new IconButton();
@@ -35,6 +57,17 @@ describe('f-button component tests', () => {
         button.load();
 
         // Assert
-        expect(button.isActionComponentDisplayed()).toBe(true);
+        expect(button.isIconComponentDisplayed()).toBe(true);
+    });
+
+    it('should check that the f-button icon component is clickable', () => {
+        // Arrange
+        button = new IconButton();
+
+        // Act
+        button.load();
+
+        // Assert
+        expect(button.isIconComponentClickable()).toBe(true);
     });
 });

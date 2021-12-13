@@ -18,4 +18,8 @@ module.exports = class Button extends Page {
     isActionComponentDisplayed () {
         return this.component.isDisplayed();
     }
+
+    isActionComponentClickable () {
+        return this.component.isClickable();
+    }
 };
