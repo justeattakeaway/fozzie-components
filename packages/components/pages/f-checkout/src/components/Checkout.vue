@@ -871,11 +871,7 @@ export default {
                         timeout: this.checkoutTimeout
                     });
                 } catch (error) {
-                    this.logInvoker({
-                        message: 'Notes configuration failure',
-                        data: this.eventData,
-                        logMethod: this.$logger.logWarn
-                    });
+                    this.handleEventLogging('NotesConfigurationFailure');
                 }
             }
         },

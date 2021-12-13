@@ -8,9 +8,7 @@
                 input-type="textarea"
                 :placeholder="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.placeholder`)"
                 :value="noteValue"
-                cols="30"
-                rows="7"
-                maxlength="200"
+                v-bind="inputStyles"
                 :name="`${noteTypeCourierOrOrder}-note`"
                 has-input-description
                 @input="updateUserNotes({ note: $event, type: noteTypeCourierOrOrder })" />
@@ -24,9 +22,7 @@
                 input-type="textarea"
                 :placeholder="$t(`userNote.kitchen.${serviceType}.placeholder`)"
                 :value="kitchenNoteValue"
-                cols="30"
-                rows="7"
-                maxlength="200"
+                v-bind="inputStyles"
                 name="kitchen-note"
                 has-input-description
                 @input="updateUserNotes({ note: $event, type: 'kitchen' })" />
@@ -38,9 +34,7 @@
         input-type="textarea"
         :placeholder="$t(`userNote.order.${serviceType}.placeholder`)"
         :value="noteValue"
-        cols="30"
-        rows="7"
-        maxlength="200"
+        v-bind="inputStyles"
         :name="'order-note'"
         has-input-description
         @input="updateUserNotes({ note: $event, type: 'order' })" />
@@ -100,6 +94,14 @@ export default {
 
         kitchenNoteValue () {
             return this.notes.kitchen?.note || '';
+        },
+
+        inputStyles () {
+            return {
+                cols: 30,
+                rows: 7,
+                maxlength: 200
+            };
         }
     },
 

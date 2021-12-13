@@ -42,17 +42,17 @@ const checkoutIssues = {
     },
 
     KITCHEN_NOTE_NOT_ACCEPTED: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
     },
 
     ORDER_NOTE_NOT_ACCEPTED: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
     },
 
     COURIER_NOTE_NOT_ACCEPTED: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
     },
 
