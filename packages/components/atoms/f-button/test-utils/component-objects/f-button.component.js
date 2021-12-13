@@ -11,15 +11,15 @@ module.exports = class Button extends Page {
         super.load(this.component);
     }
 
-    waitForActionComponent () {
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    isActionComponentDisplayed () {
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isActionComponentClickable () {
+    isComponentClickable () {
         return this.component.isClickable();
     }
 };

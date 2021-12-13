@@ -11,15 +11,15 @@ module.exports = class IconButton extends Page {
         super.load(this.component);
     }
 
-    waitForIconComponent () {
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    isIconComponentDisplayed () {
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isIconComponentClickable () {
+    isComponentClickable () {
         return this.component.isClickable();
     }
 };

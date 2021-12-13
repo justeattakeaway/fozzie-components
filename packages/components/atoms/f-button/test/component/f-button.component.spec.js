@@ -13,7 +13,7 @@ describe('f-button component tests', () => {
         button.load();
 
         // Assert
-        expect(button.isActionComponentDisplayed()).toBe(true);
+        expect(button.isComponentDisplayed()).toBe(true);
     });
 
     it('should check that the f-button action component is clickable', () => {
@@ -24,7 +24,7 @@ describe('f-button component tests', () => {
         button.load();
 
         // Assert
-        expect(button.isActionComponentClickable()).toBe(true);
+        expect(button.isComponentClickable()).toBe(true);
     });
 
     it('should display the f-button link component', () => {
@@ -35,7 +35,7 @@ describe('f-button component tests', () => {
         button.load();
 
         // Assert
-        expect(button.isLinkComponentDisplayed()).toBe(true);
+        expect(button.isComponentDisplayed()).toBe(true);
     });
 
     it('should check that the f-button link component is clickable', () => {
@@ -46,7 +46,7 @@ describe('f-button component tests', () => {
         button.load();
 
         // Assert
-        expect(button.isLinkComponentClickable()).toBe(true);
+        expect(button.isComponentClickable()).toBe(true);
     });
 
     it('should display the f-button icon component', () => {
@@ -57,7 +57,7 @@ describe('f-button component tests', () => {
         button.load();
 
         // Assert
-        expect(button.isIconComponentDisplayed()).toBe(true);
+        expect(button.isComponentDisplayed()).toBe(true);
     });
 
     it('should check that the f-button icon component is clickable', () => {
@@ -68,6 +68,6 @@ describe('f-button component tests', () => {
         button.load();
 
         // Assert
-        expect(button.isIconComponentClickable()).toBe(true);
+        expect(button.isComponentClickable()).toBe(true);
     });
 });

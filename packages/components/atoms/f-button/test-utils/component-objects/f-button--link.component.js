@@ -11,15 +11,15 @@ module.exports = class LinkButton extends Page {
         super.load(this.component);
     }
 
-    waitForLinkComponent () {
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    isLinkComponentDisplayed () {
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isLinkComponentClickable () {
+    isComponentClickable () {
         return this.component.isClickable();
     }
 };
