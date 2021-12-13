@@ -106,7 +106,7 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
         checkout.waitForComponent();
     });
 
-    it('should open both delivery and kitchen notes accordions and populate them', () => {
+    it('should open the order notes accordion and populate it', () => {
         // Assert
         checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is an order note');
         checkout.goToPayment();
