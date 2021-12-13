@@ -100,6 +100,7 @@ commands:
             - packages/components/organisms/f-content-cards/dist
             - packages/components/organisms/f-cookie-banner/dist
             - packages/components/organisms/f-footer/dist
+            - packages/components/organisms/f-form/dist
             - packages/components/organisms/f-header/dist
             - packages/components/organisms/f-status-banner/dist
 
