@@ -60,9 +60,10 @@ const duplicateIssue = 'duplicate';
 
 const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
 const noteTypesCombined = 'Combined note';
+const noteTypesCombinedValue = 'get-notes-config';
 
 const noteTypeOptions = {
-    [noteTypesCombined]: 'get-notes-config',
+    [noteTypesCombined]: noteTypesCombinedValue,
     [noteTypesDeliveryAndKitchen]: 'get-notes-config-split'
 };
 
@@ -237,6 +238,12 @@ export const CheckoutComponent = () => ({
 
         getNoteConfigUrl () {
             return this.noteType ? `/${this.noteType}.json` : '/get-notes-config.json';
+        },
+
+        checkoutFeatures () {
+            return {
+                isSplitNotesEnabled: this.noteType !== noteTypesCombinedValue
+            };
         }
     },
 
@@ -271,8 +278,9 @@ export const CheckoutComponent = () => ({
         ':getGeoLocationUrl="getGeoLocationUrl" ' +
         ':getCustomerUrl="getCustomerUrl" ' +
         ':getNoteConfigUrl="getNoteConfigUrl" ' +
+        ':checkoutFeatures="checkoutFeatures"' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl},${checkoutFeatures}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
