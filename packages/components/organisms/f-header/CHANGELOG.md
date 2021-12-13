@@ -11,6 +11,12 @@ v9.1.0
 ### Added
 - Jet logo support via `useJetLogo` prop.
 
+### Updated
+- f-vue-icons to the latest (3.3.0).
+
+### Removed
+- Arrow button size override from mobile country selector as with the latest version of f-vue-icons arrow doesn't have a transparent spacing around it.
+
 
 v9.0.0
 ------------------------------
