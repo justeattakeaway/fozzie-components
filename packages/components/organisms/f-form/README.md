@@ -69,8 +69,34 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
+> **Example `formData`**
+```
+formData: {
+    formFields: {
+        firstName: {
+            name: 'firstName',
+            value: '',
+            translations: {
+                label: 'First Name'
+            }
+        },
+        lastName: {
+            name: 'lastName',
+            value: '',
+            translations: {
+                label: 'Last Name'
+            }
+        }
+        ...
+    },
+    buttonText: 'Continue'
+}
+```
+
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
+| `formData` | Object | - | Object containing button text and form field data. Should be structured as above. |
+| `isFormSubmitting` | Boolean | - | Allows the parent component to set a loading spinner on the submit button while any asynchronous calls are carried out by the parent |
 
 ### Events
 
@@ -78,6 +104,8 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+| `updated` | When any form field is updated will send `{ fieldName, value }` |
+| `form-submitting` | When the submit button is pressed |
 
 ## Development
 
