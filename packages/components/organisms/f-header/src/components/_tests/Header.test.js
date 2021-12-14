@@ -79,6 +79,21 @@ describe('Header', () => {
         // Assert
         expect(wrapper.attributes('data-theme')).toBe('jet');
     });
+
+    it('should render jet themed component if shouldUseJetLogo prop is true even when there is no locale', () => {
+        // Arrange
+        const propsData = {
+            locale: '',
+            headerBackgroundTheme: 'transparent',
+            shouldUseJetLogo: true
+        };
+
+        // Act
+        const wrapper = shallowMount(Header, { propsData });
+
+        // Assert
+        expect(wrapper.attributes('data-theme')).toBe('jet');
+    });
 });
 
 describe('showDeliveryEnquiryWithContext', () => {
