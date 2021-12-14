@@ -84,7 +84,7 @@
                 :label-text="$t('consumer.addressLabel')"
                 :placeholder="$t('consumer.line1Placeholder')"
                 @blur="onBlur('line1')"
-                @input="onEditConsumer('line1', $event)">
+                @input="onEditConsumer('line1', $event, true)">
                 <template
                     v-if="$v.consumer.line1.$invalid"
                     #error>
@@ -98,13 +98,13 @@
                 :value="consumer.line2"
                 maxlength="50"
                 :placeholder="$t('consumer.line2Placeholder')"
-                @input="onEditConsumer('line2', $event)" />
+                @input="onEditConsumer('line2', $event, true)" />
 
             <form-field
                 :value="consumer.line3"
                 maxlength="50"
                 :placeholder="$t('consumer.line3Placeholder')"
-                @input="onEditConsumer('line3', $event)" />
+                @input="onEditConsumer('line3', $event, true)" />
 
             <form-field
                 :value="consumer.locality"
@@ -112,7 +112,7 @@
                 :label-text="$t('consumer.localityLabel')"
                 :placeholder="$t('consumer.localityPlaceholder')"
                 @blur="onBlur('locality')"
-                @input="onEditConsumer('locality', $event)">
+                @input="onEditConsumer('locality', $event, true)">
                 <template
                     v-if="$v.consumer.locality.$invalid"
                     #error>
@@ -128,7 +128,7 @@
                 :label-text="$t('consumer.postcodeLabel')"
                 :placeholder="$t('consumer.postcodePlaceholder')"
                 @blur="onBlur('postcode')"
-                @input="onEditConsumer('postcode', $event)">
+                @input="onEditConsumer('postcode', $event, true)">
                 <template
                     v-if="$v.consumer.postcode.$invalid"
                     #error>
@@ -231,7 +231,8 @@ export default {
             accountInfoAnalyticsService: new AccountInfoAnalyticsService(this),
             tenantConfigs,
             isFormSubmitting: false,
-            hasFormUpdate: false
+            hasFormUpdate: false,
+            hasAddressBeenUpdated: false
         };
     },
 
@@ -297,7 +298,7 @@ export default {
                 return;
             }
 
-            this.accountInfoAnalyticsService.trackFormSubmission();
+            this.accountInfoAnalyticsService.trackFormSubmission(this.hasAddressBeenUpdated);
 
             if (!this.hasFormUpdate) {
                 return;
@@ -313,6 +314,7 @@ export default {
                 // TODO - to be added with next ticket
             } finally {
                 this.setSubmittingState(false);
+                this.hasAddressBeenUpdated = false;
             }
         },
 
@@ -328,10 +330,15 @@ export default {
         * A generic method that updates the State (e.g. 'consumer.<field> = value')
         * @param {string} field - The field of the consumer that needs changing
         * @param {string} value - The new value of the consumer field
+        * @param {Boolean} isAddressField - The field is part of the address.
         */
-        onEditConsumer (field, value) {
+        onEditConsumer (field, value, isAddressField = false) {
             this.editConsumerDetails({ field, value });
             this.hasFormUpdate = true;
+
+            if (isAddressField) {
+                this.hasAddressBeenUpdated = true;
+            }
         }
     }
 };
