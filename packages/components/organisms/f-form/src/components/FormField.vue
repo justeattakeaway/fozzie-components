@@ -1,0 +1,142 @@
+<template>
+    <form-field
+        v-bind="fieldProps"
+        @input="updateField({ fieldName: fieldData.name, value: $event })"
+        @blur="hasInvalidErrorMessage && formFieldBlur()">
+        <template
+            v-if="hasError"
+            #error>
+            <error-message
+                :id="translations.errorName"
+                data-js-error-message
+                :data-test-id="translations[`${errorType}Error`]">
+                {{ translations.validationMessages[errorType] }}
+            </error-message>
+        </template>
+    </form-field>
+</template>
+
+<script>
+import FormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
+
+export default {
+    components: {
+        ErrorMessage,
+        FormField
+    },
+
+    props: {
+        fieldData: {
+            type: Object,
+            required: true
+        }
+    },
+
+    inject: ['$v'],
+
+    computed: {
+        kebabCase () {
+            return this.fieldData.name.replace(/([a-z0-9]|(?=[A-Z]))([A-Z1-9])/g, '$1-$2').toLowerCase();
+        },
+
+        translations () {
+            return {
+                ...this.fieldData.translations,
+                name: `${this.kebabCase}`,
+                errorName: `${this.kebabCase}-error`,
+                emptyError: `error-${this.kebabCase}-empty`,
+                invalidError: `error-${this.kebabCase}-invalid`
+            };
+        },
+
+        fieldProps () {
+            let props = {
+                name: this.translations.name,
+                value: this.fieldData.value,
+                'label-text': this.translations.label,
+                'input-type': this.inputType,
+                'max-length': this.fieldData.mexLength || null
+            };
+
+            if (this.hasError) {
+                props = {
+                    ...props,
+                    'has-error': true,
+                    'aria-invalid': true,
+                    'aria-describedby': this.translations.validationMessages[this.errorType],
+                    'aria-label': this.ariaLabel
+                };
+            }
+
+            return props;
+        },
+
+        inputType () {
+            const inputTypes = {
+                mobileNumber: 'tel',
+                email: 'email',
+                default: 'text'
+            };
+
+            return inputTypes[this.fieldData.name] || inputTypes.default;
+        },
+
+        hasValidationMessages () {
+            return !!this.translations?.validationMessages;
+        },
+
+        hasInvalidErrorMessage () {
+            return !!this.translations?.validationMessages?.invalid;
+        },
+
+        hasError () {
+            return !!this.hasValidationMessages && (this.hasRequiredError || this.hasInvalidError);
+        },
+
+        isEmpty () {
+            return this.validations?.$dirty;
+        },
+
+        validations () {
+            return this.$v.formFields[this.fieldData.name];
+        },
+
+        hasRequiredError () {
+            return this.isEmpty && !this.validations.required;
+        },
+
+        hasInvalidError () {
+            return !!this.hasInvalidErrorMessage && this.isEmpty && !this.validations[this.fieldData.name];
+        },
+
+        errorType () {
+            if (this.hasError) {
+                return this.hasRequiredError ? 'required' : 'invalid';
+            }
+            return null;
+        },
+
+        ariaLabel () {
+            return this.fieldData.name === 'mobileNumber' ? [...this.fieldData.value].join(' ') : null;
+        }
+    },
+
+    methods: {
+        updateField ({ fieldName, value }) {
+            return this.$emit('updated', { fieldName, value });
+        },
+
+        formFieldBlur () {
+            if (this.validations) {
+                this.validations.$touch();
+            }
+        }
+    }
+};
+</script>
+
+<style lang="scss" module>
+</style>
