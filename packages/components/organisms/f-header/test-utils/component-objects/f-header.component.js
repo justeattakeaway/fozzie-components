@@ -1,19 +1,16 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     HEADER_COMPONENT,
-    HEADER_LOGO,
     MOBILE_NAVIGATION_BAR,
     NAVIGATION
 } = require('./f-header.selectors');
 
 module.exports = class Header extends Page {
-    constructor() {
+    constructor () {
         super('organism', 'header-component');
     }
 
     get component () { return $(HEADER_COMPONENT); }
-
-    get logo () { return $(HEADER_LOGO); }
 
     get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR); }
 
@@ -50,20 +47,12 @@ module.exports = class Header extends Page {
         super.load(this.component);
     }
 
-    open (url) {
-        super.open(url);
-    }
-
     waitForComponent () {
         super.waitForComponent(this.component);
     }
 
     isComponentDisplayed () {
         return this.component.isDisplayed();
-    }
-
-    isLogoDisplayed () {
-        return this.logo.isDisplayed();
     }
 
     isNavigationLinkDisplayed (linkName) {
@@ -79,24 +68,8 @@ module.exports = class Header extends Page {
         return this.countryLink.isDisplayed();
     }
 
-    isMobileNavigationBarDisplayed () {
-        return this.mobileNavigationBar.isDisplayed();
-    }
-
-    isOffersIconLinkDisplayed () {
-        return this.navigation.offersIcon.isDisplayed();
-    }
-
-    clickOffersLink () {
-        return this.navigation.offersLink.link.click();
-    }
-
-    clickHelpLink () {
-        return this.navigation.help.link.click();
-    }
-
-    moveToCountrySelector () {
-        this.navigation.countrySelector.link.moveTo();
+    isNavigationItemClickable (item) {
+        return this.navigation[item].link.isClickable();
     }
 
     openCountrySelector () {
@@ -107,8 +80,8 @@ module.exports = class Header extends Page {
         return this.countryLink.click();
     }
 
-    moveToUserAccount () {
-        this.navigation.userAccount.link.moveTo();
+    moveToNavigationLink (item) {
+        this.navigation[item].link.moveTo();
     }
 
     openMobileNavigationBar () {

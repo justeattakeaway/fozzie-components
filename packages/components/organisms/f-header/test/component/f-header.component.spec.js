@@ -7,13 +7,23 @@ let header;
 describe('Desktop - f-header component tests', () => {
     beforeEach(() => {
         // Arrange
+        const controls = [
+            'showOffersLink:true',
+            'showDeliveryEnquiry:true'
+        ].join(';');
+
         header = new Header();
-        header.withQuery('&knob-Show offers link', 'true');
-        header.withQuery('&knob-Show delivery enquiry', 'true');
+        header.path += `&args=${controls}`;
 
         // Act
         header.load();
         browser.maximizeWindow();
+    });
+
+    forEach(['help', 'userAccount', 'countrySelector', 'offersLink', 'delivery'])
+    .it('should test that each navigation link is clickable', link => {
+        // Assert
+        expect(header.isNavigationItemClickable(link)).toBe(true);
     });
 
     forEach([
@@ -44,7 +54,7 @@ describe('Desktop - f-header component tests', () => {
     ])
         .it('should display link for country code "%s" and redirect to correct URL ("%s")', (expectedLocale, expectedUrl) => {
             // Act
-            header.moveToCountrySelector();
+            header.moveToNavigationLink('countrySelector');
             header.expectedCountry = expectedLocale;
 
             // Assert

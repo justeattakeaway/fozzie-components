@@ -1,8 +1,8 @@
-const StatusBanner = require('../../test-utils/component-objects/f-statusBanner.component');
+const StatusBanner = require('../../test-utils/component-objects/f-status-banner.component');
 
 let statusBanner;
 
-describe('f-statusBanner component tests', () => {
+describe('f-status-banner component tests', () => {
     beforeEach(() => {
         statusBanner = new StatusBanner();
 

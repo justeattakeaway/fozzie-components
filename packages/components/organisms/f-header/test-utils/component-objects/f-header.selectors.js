@@ -1,5 +1,4 @@
 exports.HEADER_COMPONENT = '[data-test-id="header-component"]';
-exports.HEADER_LOGO = '[data-test-id="header-logo"]';
 exports.MOBILE_NAVIGATION_BAR = '[data-test-id="nav-toggle"]';
 
 exports.NAVIGATION = {

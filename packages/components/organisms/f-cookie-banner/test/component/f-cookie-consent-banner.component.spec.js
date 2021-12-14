@@ -4,7 +4,7 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-consen
 
 let cookieBanner;
 
-describe('New - f-cookieBanner component tests', () => {
+describe('New - f-cookie-banner component tests', () => {
     forEach(['full', 'necessary'])
     .it('should set "je-cookie_banner" and "je-cookieConsent" to expected cookie values for "%s"', expectedCookieValue => {
         // Arrange
@@ -25,7 +25,7 @@ describe('New - f-cookieBanner component tests', () => {
     });
 
     forEach(['es-ES', 'en-IE', 'it-IT', 'en-GB'])
-    .it('should display the f-cookieBanner component for "%s"', tenant => {
+    .it('should display the f-cookie-banner component for "%s"', tenant => {
         // Arrange
         cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', tenant);
