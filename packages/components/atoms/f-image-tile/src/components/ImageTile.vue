@@ -21,6 +21,7 @@
             type="checkbox"
             class="is-visuallyHidden"
             :class="$style['c-imageTile-checkbox']"
+            data-test-id="image-tile-input"
             @change="toggleFilter"
         >
         <label
@@ -29,10 +30,12 @@
                     [$style['c-imageTile-label--selected']]: isFilterSelected
                 }]"
             :for="`imageTileToggle-${tileId}`"
+            data-test-id="image-tile-label"
         >
             <img
                 :class="$style['c-imageTile-image']"
                 :src="imgSrc"
+                data-test-id="image-tile-image"
                 alt=""
             >
             <span :aria-hidden="isLink ? true : false">

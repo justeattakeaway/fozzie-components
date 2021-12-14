@@ -40,16 +40,93 @@ describe('ImageTile', () => {
                 expect(link.attributes('href')).toEqual('#');
             });
         });
+
+        describe('tileId :: ', () => {
+            it('should apply `tileId` to the input id', () => {
+                // Arrange
+                const propsData = { tileId: 'chicken' };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const input = wrapper.find('[data-test-id="image-tile-input"]');
+
+                // Assert
+                expect(input.attributes('id')).toContain(propsData.tileId);
+            });
+
+            it('should apply `tileId` to the label for', () => {
+                // Arrange
+                const propsData = { tileId: 'chicken' };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const label = wrapper.find('[data-test-id="image-tile-label"]');
+
+                // Assert
+                expect(label.attributes('for')).toContain(propsData.tileId);
+            });
+
+            describe('imgSrc :: ', () => {
+                it('should apply `tileId` to the label for', () => {
+                    // Arrange
+                    const propsData = { imgSrc: 'https://via.placeholder.com/150' };
+
+                    // Act
+                    const wrapper = shallowMount(ImageTile, {
+                        propsData
+                    });
+
+                    const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+                    // Assert
+                    expect(image.attributes('src')).toContain(propsData.imgSrc);
+                });
+            });
+
+            describe('isSelected :: ', () => {
+                it('should make `isFilterSelected` true when set to true', () => {
+                    // Arrange
+                    const propsData = { isSelected: true };
+
+                    // Act
+                    const wrapper = shallowMount(ImageTile, {
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.isFilterSelected).toBe(true);
+                });
+
+                it('should make `isFilterSelected` false when set to false', () => {
+                    // Arrange
+                    const propsData = { isSelected: false };
+
+                    // Act
+                    const wrapper = shallowMount(ImageTile, {
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.isFilterSelected).toBe(false);
+                });
+            });
+        });
     });
 
-    xdescribe('watch:: ', () => {
+    describe('watch:: ', () => {
         describe('isSelected:: ', () => {
             it('should update `isFilterSelected` when changed', async () => {
                 // Arrange
                 const wrapper = shallowMount(ImageTile, { isFilterSelected: false, isSelected: false });
 
                 // Act
-                await wrapper.setData({ isSelected: true });
+                await wrapper.vm.$options.watch.isSelected.call(wrapper.vm, true);
 
                 // Assert
                 expect(wrapper.vm.isFilterSelected).toBe(true);
