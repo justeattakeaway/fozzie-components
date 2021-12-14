@@ -5,12 +5,10 @@
             :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
             <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}</span>
             <form-field
-                input-type="textarea"
                 :placeholder="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.placeholder`)"
                 :value="noteValue"
                 v-bind="inputStyles"
                 :name="`${noteTypeCourierOrOrder}-note`"
-                has-input-description
                 @input="updateUserNotes({ note: $event, type: noteTypeCourierOrOrder })" />
         </accordion>
         <accordion
@@ -19,24 +17,20 @@
             :title="$t(`userNote.kitchen.${serviceType}.title`)">
             <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.kitchen.${serviceType}.text`) }}</span>
             <form-field
-                input-type="textarea"
                 :placeholder="$t(`userNote.kitchen.${serviceType}.placeholder`)"
                 :value="kitchenNoteValue"
                 v-bind="inputStyles"
                 name="kitchen-note"
-                has-input-description
                 @input="updateUserNotes({ note: $event, type: 'kitchen' })" />
         </accordion>
     </div>
     <form-field
         v-else-if="!isSplitNotesEnabled"
         :label-text="$t(`userNote.order.delivery.title`)"
-        input-type="textarea"
         :placeholder="$t(`userNote.order.${serviceType}.placeholder`)"
         :value="noteValue"
         v-bind="inputStyles"
         :name="'order-note'"
-        has-input-description
         @input="updateUserNotes({ note: $event, type: 'order' })" />
 </template>
 
@@ -77,15 +71,11 @@ export default {
         ]),
 
         shouldShowKitchenNotes () {
-            return this.notesConfiguration[this.capitalisedServiceType]?.kitchenNoteAccepted;
+            return this.notesConfiguration[this.serviceType]?.kitchenNoteAccepted;
         },
 
         noteTypeCourierOrOrder () {
-            return this.notesConfiguration[this.capitalisedServiceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER;
-        },
-
-        capitalisedServiceType () {
-            return this.serviceType.charAt(0).toUpperCase() + this.serviceType.slice(1);
+            return this.notesConfiguration[this.serviceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER;
         },
 
         noteValue () {
@@ -98,9 +88,11 @@ export default {
 
         inputStyles () {
             return {
+                inputType: 'textarea',
                 cols: 30,
                 rows: 7,
-                maxlength: 200
+                maxlength: 200,
+                hasInputDescription: true
             };
         }
     },

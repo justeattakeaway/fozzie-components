@@ -58,11 +58,13 @@ const serverTimeout = 'Server timeout';
 const serverTimeoutIssue = 'timeout';
 const duplicateIssue = 'duplicate';
 
+const legacyNotes = 'Legacy notes';
 const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
 const noteTypesCombined = 'Combined note';
 const noteTypesCombinedValue = 'get-notes-config';
 
 const noteTypeOptions = {
+    [legacyNotes]: null,
     [noteTypesCombined]: noteTypesCombinedValue,
     [noteTypesDeliveryAndKitchen]: 'get-notes-config-split'
 };
@@ -175,7 +177,7 @@ export const CheckoutComponent = () => ({
         },
 
         noteType: {
-            default: select('Note types', noteTypeOptions)
+            default: select('Note types', noteTypeOptions, null)
         }
     },
 
@@ -237,12 +239,12 @@ export const CheckoutComponent = () => ({
         },
 
         getNoteConfigUrl () {
-            return this.noteType ? `/${this.noteType}.json` : '/get-notes-config.json';
+            return this.noteType ? `/${this.noteType}` : '';
         },
 
         checkoutFeatures () {
             return {
-                isSplitNotesEnabled: this.noteType !== noteTypesCombinedValue
+                isSplitNotesEnabled: this.noteType !== null
             };
         }
     },

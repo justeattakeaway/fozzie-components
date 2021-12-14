@@ -106,9 +106,10 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
         checkout.waitForComponent();
     });
 
-    it('should open the order notes accordion and populate it', () => {
+    it('should open the courier and kitchen notes accordions and populate them', () => {
         // Assert
-        checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is an order note');
+        checkout.expandAndPopulateNote('courierAccordionHeader', 'courierNote', 'This is a courier note');
+        checkout.expandAndPopulateNote('kitchenAccordionHeader', 'kitchenNote', 'This is a kitchen note');
         checkout.goToPayment();
     });
 });

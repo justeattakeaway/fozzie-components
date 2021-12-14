@@ -349,12 +349,12 @@ export default {
         },
 
         placeOrderNotes () {
-            return this.notesConfiguration.isSplitNotesEnabled ?
-                {
-                    order: this.notes?.order?.note || null,
-                    kitchen: this.notes?.kitchen?.note || null,
-                    courier: this.notes?.courier?.note || null
-                } : { NoteForRestaurant: this.notes.order?.note };
+            const { courier, kitchen, order } = this.notes;
+            return {
+                NoteForRestaurant: order?.note || null,
+                ...(kitchen?.note && { NoteForKitchen: kitchen.note }),
+                ...(courier?.note && { NoteForDriver: courier.note })
+            };
         }
     },
 
@@ -864,6 +864,7 @@ export default {
         },
 
         async loadNotesConfiguration () {
+            console.log('NOTE CONFIG URL', `${this.getNoteConfigUrl}/${this.restaurant.id}/checkout-note-types`);
             if (this.checkoutFeatures.isSplitNotesEnabled) {
                 try {
                     await this.getNotesConfiguration({

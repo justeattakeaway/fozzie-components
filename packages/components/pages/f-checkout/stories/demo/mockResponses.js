@@ -65,13 +65,13 @@ const requestDefinitions = {
         payload: checkoutDeliveryUk
     },
     checkoutDeliverySplitNotesKitchenAndCourier: {
-        url: './uk/checkout-delivery-split-notes-courier-kitchen.json',
+        url: '/uk/checkout-delivery-split-notes-courier-kitchen.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: checkoutWithDeliveryAndKitchenNoteTypes
     },
     checkoutDeliverySplitNotesCourier: {
-        url: './uk/checkout-delivery-split-notes-courier.json',
+        url: '/uk/checkout-delivery-split-notes-courier.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: checkoutWithDeliveryNoteType
@@ -331,13 +331,13 @@ const requestDefinitions = {
         payload: getBasketDeliveryAgeRestricted
     },
     getSplitNotesConfig: {
-        url: '/get-notes-config-split.json',
+        url: '/get-notes-config-split/99999/checkout-note-types',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: splitNotesConfig
     },
     getNonSplitNotesConfig: {
-        url: '/get-notes-config.json',
+        url: '/get-notes-config/99999/checkout-note-types',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: nonSplitNotesConfig
