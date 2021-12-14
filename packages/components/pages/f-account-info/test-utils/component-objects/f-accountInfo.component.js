@@ -1,5 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-account-info-selectors');
+const { COMPONENT } = require('./f-accountInfo-selectors');
 
 module.exports = class AccountInfo extends Page {
     constructor () {

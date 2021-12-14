@@ -1,4 +1,4 @@
-const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
+const AccountInfo = require('../../test-utils/component-objects/f-accountInfo.component');
 
 let accountInfo;
 
