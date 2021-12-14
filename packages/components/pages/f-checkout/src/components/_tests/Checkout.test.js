@@ -3173,9 +3173,9 @@ describe('Checkout', () => {
                     data: {
                         basketId,
                         customerNotes: {
-                            courier: 'This is a courier note',
-                            kitchen: 'This is a kitchen note',
-                            order: null
+                            NoteForDriver: 'This is a courier note',
+                            NoteForKitchen: 'This is a kitchen note',
+                            NoteForRestaurant: null
                         },
                         referralState: 'MockReferralState'
                     },
