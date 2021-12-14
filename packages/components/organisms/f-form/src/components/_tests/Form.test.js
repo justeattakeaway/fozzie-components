@@ -1,33 +1,11 @@
 import { shallowMount } from '@vue/test-utils';
+import { validations } from '@justeat/f-services';
 import { PROP_VALIDATION_MESSAGES } from '../../constants';
+import {
+    formData,
+    $v
+} from './helpers';
 import VForm from '../Form.vue';
-
-const formData = {
-    formFields: [
-        {
-            name: 'firstName',
-            value: 'John',
-            translations: {
-                label: 'First Name'
-            }
-        },
-        {
-            name: 'lastName',
-            value: 'Johnson',
-            translations: {
-                label: 'Last Name'
-            }
-        },
-        {
-            name: 'email',
-            value: 'John.Johnson@gmail.com',
-            translations: {
-                label: 'Email Address'
-            }
-        }
-    ],
-    buttonText: 'Continue'
-};
 
 describe('Form', () => {
     let propsData;
@@ -124,6 +102,18 @@ describe('Form', () => {
             })
                 .toThrowError(PROP_VALIDATION_MESSAGES.requiredLabelProperty);
         });
+    });
+
+    it('should have one form with method "post"', () => {
+        // Arrange
+        const wrapper = shallowMount(VForm, { propsData });
+
+        // Act
+        const forms = wrapper.findAll('form');
+
+        // Assert
+        expect(forms.length).toBe(1);
+        expect(forms.wrappers[0].attributes('method')).toBe('post');
     });
 
     describe('computed :: ', () => {

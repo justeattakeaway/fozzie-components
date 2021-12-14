@@ -10,16 +10,16 @@ const fieldData = {
 };
 
 const formData = {
-    formFields: {
-        firstName: fieldData,
-        lastName: {
+    formFields: [
+        fieldData,
+        {
             name: 'lastName',
             value: '',
             translations: {
                 label: 'Last Name'
             }
         },
-        email: {
+        {
             name: 'email',
             value: '',
             translations: {
@@ -30,7 +30,7 @@ const formData = {
                 }
             }
         },
-        mobileNumber: {
+        {
             name: 'mobileNumber',
             value: '',
             translations: {
@@ -41,7 +41,7 @@ const formData = {
                 }
             }
         },
-        postcode: {
+        {
             name: 'postcode',
             value: '',
             translations: {
@@ -52,7 +52,7 @@ const formData = {
                 }
             }
         }
-    },
+    ],
     buttonText: 'Continue'
 };
 

@@ -112,7 +112,10 @@ formData: {
             name: 'firstName',
             value: '',
             translations: {
-                label: 'First Name'
+                label: 'First Name',
+                validationMessages: {
+                    required: 'Enter First Name'
+                }
             }
         },
         lastName: {
@@ -120,6 +123,17 @@ formData: {
             value: '',
             translations: {
                 label: 'Last Name'
+            }
+        },
+        mobileNumber: {
+            name: 'mobileNumber',
+            value: '',
+            translations: {
+                label: 'Mobile Number',
+                validationMessages: {
+                    required: 'Enter Mobile Number',
+                    invalid: 'Enter valid Mobile Number'
+                }
             }
         }
         ...
@@ -131,6 +145,7 @@ formData: {
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `formData` | Object | **Required Prop** | Object containing button text and form field data. Should be structured as above. |
+| `locale` | String | `en-gb` | Sets the translation file to use. |
 | `isFormSubmitting` | Boolean | false | Allows the parent component to set a loading spinner on the submit button while any asynchronous calls are carried out by the parent |
 
 ### Events
@@ -141,6 +156,8 @@ The events that can be subscribed to are as follows (if any):
 | ----- | ----------- |
 | `updated` | When any form field is updated will send `{ fieldName, value }` |
 | `form-submitting` | When the submit button is pressed |
+| `form-valid` | When the submit button is pressed and form has no validation errors. |
+| `form-invalid` | When the submit button is pressed and form has validation errors. |
 
 ## Development
 

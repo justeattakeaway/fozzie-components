@@ -10,6 +10,8 @@
             v-bind="fieldProps(field)"
             @input="updateField({ fieldName: field.name, value: $event })" />
 
+        <slot />
+
         <f-button
             button-type="primary"
             button-size="large"
@@ -28,6 +30,7 @@
 import FButton from '@justeat/f-button';
 import FormField from '@justeat/f-form-field';
 import { globalisationServices } from '@justeat/f-services';
+import VueScrollTo from 'vue-scrollto';
 import tenantConfigs from '../tenants';
 import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';
 
@@ -41,6 +44,11 @@ export default {
         formData: {
             type: Object,
             required: true
+        },
+
+        locale: {
+            type: String,
+            default: 'en-GB'
         },
 
         isFormSubmitting: {
@@ -98,6 +106,29 @@ export default {
                 value: field.value || '',
                 'label-text': field.translations?.label
             };
+        },
+
+        translations (field) {
+            return this.formData.formFields[field].translations;
+        },
+
+        hasValidationMessages (field) {
+            return !!this.translations(field)?.validationMessages;
+        },
+
+
+        hasInvalidErrorMessage (field) {
+            return !!this.translations(field)?.validationMessages?.invalid;
+        },
+
+        scrollToFirstInlineError () {
+            this.$nextTick(() => {
+                const scrollingDurationInMilliseconds = 650;
+                const firstInlineError = document.querySelector('[data-js-error-message]');
+                if (firstInlineError) {
+                    VueScrollTo.scrollTo(firstInlineError, scrollingDurationInMilliseconds, { offset: -100 });
+                }
+            });
         },
 
         formDataValidator () {
