@@ -1,6 +1,6 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
-const AccountInfo = require('../../test-utils/component-objects/f-accountInfo.component');
+const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
 const accountInfo = new AccountInfo();
 
@@ -9,9 +9,9 @@ describe('Accessibility tests', () => {
         accountInfo.load();
     });
 
-    it('a11y - should test f-accountInfo component WCAG compliance', () => {
+    it('a11y - should test f-account-info component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-accountInfo');
+        const axeResults = getAccessibilityTestResults('f-account-info');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

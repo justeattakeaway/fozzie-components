@@ -1,8 +1,8 @@
-const AccountInfo = require('../../test-utils/component-objects/f-accountInfo.component');
+const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
 let accountInfo;
 
-describe('f-accountInfo component tests', () => {
+describe('f-account-info component tests', () => {
     beforeEach(() => {
         accountInfo = new AccountInfo();
 
@@ -11,7 +11,7 @@ describe('f-accountInfo component tests', () => {
         accountInfo.waitForComponent();
     });
 
-    it('should display the f-accountInfo component', () => {
+    it('should display the f-account-info component', () => {
         // Assert
         expect(accountInfo.isComponentDisplayed()).toBe(true);
     });
