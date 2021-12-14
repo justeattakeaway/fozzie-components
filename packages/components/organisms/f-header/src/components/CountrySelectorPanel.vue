@@ -58,7 +58,6 @@
 import FButton from '@justeat/f-button';
 import { ArrowIcon } from '@justeat/f-vue-icons';
 import FlagIcon from './FlagIcon.vue';
-import '@justeat/f-button/dist/f-button.css';
 import { countries } from '../tenants';
 
 export default {

@@ -1,3 +1,6 @@
+import '@justeat/f-popover/dist/f-popover.css';
+import '@justeat/f-button/dist/f-button.css'; // these styles are imported to fix visual regression tests
+
 import { withA11y } from '@storybook/addon-a11y';
 import VueHeader from '../src/components/Header.vue';
 

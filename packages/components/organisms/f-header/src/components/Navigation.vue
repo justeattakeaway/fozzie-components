@@ -265,7 +265,6 @@
 import { MopedIcon, GiftIcon, ProfileIcon } from '@justeat/f-vue-icons';
 import { axiosServices, windowServices } from '@justeat/f-services';
 import VPopover from '@justeat/f-popover';
-import '@justeat/f-popover/dist/f-popover.css';
 
 // Internal
 import CountrySelector from './CountrySelector.vue';
