@@ -104,6 +104,30 @@ formData: {
 }
 ```
 
+> **Example `formData`**
+```
+formData: {
+    formFields: {
+        firstName: {
+            name: 'firstName',
+            value: '',
+            translations: {
+                label: 'First Name'
+            }
+        },
+        lastName: {
+            name: 'lastName',
+            value: '',
+            translations: {
+                label: 'Last Name'
+            }
+        }
+        ...
+    },
+    buttonText: 'Continue'
+}
+```
+
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `formData` | Object | **Required Prop** | Object containing button text and form field data. Should be structured as above. |
