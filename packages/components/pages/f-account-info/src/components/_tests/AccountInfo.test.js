@@ -157,7 +157,6 @@ describe('AccountInfo', () => {
             // Arrange & Act
             const errorActions = {
                 loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
-                    console.log('loadConsumerDetails()');
                     throw new Error('some-error');
                 })
             };

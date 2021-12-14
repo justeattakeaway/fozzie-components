@@ -304,7 +304,6 @@ export default {
         * informed that it is in a state of error.
         */
         async initialise () {
-            console.log('**** initialise');
             try {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details fetched successfully', ['account-pages', 'account-info']);
