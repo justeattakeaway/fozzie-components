@@ -152,6 +152,39 @@ describe('AccountInfo', () => {
             // Assert
             expect(wrapper.vm.hasFormUpdate).toBe(false);
         });
+
+        it.skip('should set shouldShowErrorPage flag to true if an error occurs', () => {
+            // Arrange & Act
+            const errorActions = {
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
+                    console.log('loadConsumerDetails()');
+                    throw new Error('some-error');
+                })
+            };
+            wrapper = mountAccountInfo({ actions: errorActions });
+
+            // Assert
+            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+        });
+
+        it('should not show the error card if no errors', () => {
+            // Arrange & Act
+            wrapper = mountAccountInfo();
+            const element = wrapper.find('[data-test-id="account-info-error-card"]');
+
+            // Assert
+            expect(element.exists()).toEqual(false);
+        });
+
+        it('should show the error card if shouldShowErrorPage is true', async () => {
+            // Arrange & Act
+            wrapper = mountAccountInfo();
+            await wrapper.setData({ shouldShowErrorPage: true });
+            const element = wrapper.find('[data-test-id="account-info-error-card"]');
+
+            // Assert
+            expect(element.exists()).toEqual(true);
+        });
     });
 
     describe('`methods`', () => {

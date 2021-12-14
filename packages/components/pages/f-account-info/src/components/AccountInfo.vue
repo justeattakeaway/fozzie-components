@@ -304,10 +304,13 @@ export default {
         * informed that it is in a state of error.
         */
         async initialise () {
+            console.log('**** initialise');
             try {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
+                this.$log.info('Consumer details fetched successfully', ['account-pages', 'account-info']);
                 this.hasFormUpdate = false;
             } catch (error) {
+                this.$log.error('Error fetching consumer details', error, ['account-pages', 'account-info']);
                 this.handleErrorState(new AccountInfoExceptions.GetAccountInfoError(error.message, error?.response?.status));
             } finally {
                 this.$nextTick(() => {
@@ -330,9 +333,10 @@ export default {
 
             try {
                 // TODO - to be added with next ticket
-                this.$log.info('Submitted Form', ['account-info', 'account-pages']);
+                this.$log.info('Consumer details saved successfully', ['account-pages', 'account-info']);
                 this.hasFormUpdate = false;
             } catch (error) {
+                this.$log.error('Error saving consumer details', error, ['account-pages', 'account-info']);
                 this.handleErrorState(new AccountInfoExceptions.SaveAccountInfoError(error.message, error?.response?.status));
             } finally {
                 this.setSubmittingState(false);
