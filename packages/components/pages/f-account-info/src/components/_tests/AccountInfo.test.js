@@ -54,7 +54,10 @@ const mountAccountInfo = ({
     store.registerModule = registerStoreModuleSpy;
     store.hasModule = hasModuleSpy;
 
-    AccountInfo.methods.initialise = initialiseOverride || AccountInfo.methods.initialise;
+    // TODO: this does not reset initialise?
+    if (initialiseOverride) {
+        AccountInfo.methods.initialise = initialiseOverride;
+    }
 
     const mock = shallowMount(AccountInfo, {
         i18n,
@@ -121,6 +124,63 @@ describe('AccountInfo', () => {
             });
         });
 
+        it('should log an info log', async () => {
+            // Arrange & Act
+            wrapper = mountAccountInfo();
+            await wrapper.vm.$nextTick();
+
+            // Assert
+            expect(logMocks.info).toHaveBeenCalledTimes(1);
+        });
+
+        it('should set shouldShowErrorPage flag to true if an error occurs', () => {
+            // Arrange & Act
+            const errorActions = {
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('some-error');
+                })
+            };
+            wrapper = mountAccountInfo({ actions: errorActions });
+
+            // Assert
+            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+        });
+
+        it('should not show the error card if no errors', () => {
+            // Arrange & Act
+            wrapper = mountAccountInfo();
+            const element = wrapper.find('[data-test-id="account-info-error-card"]');
+
+            // Assert
+            expect(element.exists()).toEqual(false);
+        });
+
+        it('should show the error card if shouldShowErrorPage is true', async () => {
+            // Arrange & Act
+            wrapper = mountAccountInfo();
+            await wrapper.setData({ shouldShowErrorPage: true });
+            const element = wrapper.find('[data-test-id="account-info-error-card"]');
+
+            // Assert
+            expect(element.exists()).toEqual(true);
+        });
+
+        it('should log an error if loading preferences throws an error', async () => {
+            // Arrange
+            const errorActions = {
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('some-error');
+                })
+            };
+
+            // Act
+            wrapper = mountAccountInfo({ actions: errorActions });
+            await wrapper.vm.$nextTick();
+
+            // Assert
+            expect(logMocks.error).toHaveBeenCalledTimes(1);
+        });
+
         it('should not call initialise() method if the authorisation has not completed', () => {
             // Arrange
             initialiseSpy = jest.fn();
@@ -157,38 +217,6 @@ describe('AccountInfo', () => {
 
             // Assert
             expect(wrapper.vm.hasFormUpdate).toBe(false);
-        });
-
-        it.skip('should set shouldShowErrorPage flag to true if an error occurs', () => {
-            // Arrange & Act
-            const errorActions = {
-                loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
-                    throw new Error('some-error');
-                })
-            };
-            wrapper = mountAccountInfo({ actions: errorActions });
-
-            // Assert
-            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
-        });
-
-        it('should not show the error card if no errors', () => {
-            // Arrange & Act
-            wrapper = mountAccountInfo();
-            const element = wrapper.find('[data-test-id="account-info-error-card"]');
-
-            // Assert
-            expect(element.exists()).toEqual(false);
-        });
-
-        it('should show the error card if shouldShowErrorPage is true', async () => {
-            // Arrange & Act
-            wrapper = mountAccountInfo();
-            await wrapper.setData({ shouldShowErrorPage: true });
-            const element = wrapper.find('[data-test-id="account-info-error-card"]');
-
-            // Assert
-            expect(element.exists()).toEqual(true);
         });
     });
 
@@ -228,6 +256,27 @@ describe('AccountInfo', () => {
                     // Assert
                     expect(wrapper.vm.hasFormUpdate).toEqual(true);
                 });
+            });
+        });
+
+        describe('onFormSubmit ::', () => {
+            it.skip('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+
+            });
+
+            it('should log an info log', async () => {
+                // Arrange
+                wrapper = mountAccountInfo();
+                await wrapper.setData({ hasFormUpdate: true });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(logMocks.info).toHaveBeenCalledTimes(1);
+            });
+
+            it.skip('should not call the save action if no changes', async () => {
             });
         });
     });
