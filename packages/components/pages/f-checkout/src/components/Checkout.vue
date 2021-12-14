@@ -353,7 +353,7 @@ export default {
             return {
                 NoteForRestaurant: order?.note || null,
                 ...(kitchen?.note && { NoteForKitchen: kitchen.note }),
-                ...(courier?.note && { NoteForDriver: courier.note })
+                ...(courier?.note && { NoteForDelivery: courier.note })
             };
         }
     },
@@ -864,7 +864,6 @@ export default {
         },
 
         async loadNotesConfiguration () {
-            console.log('NOTE CONFIG URL', `${this.getNoteConfigUrl}/${this.restaurant.id}/checkout-note-types`);
             if (this.checkoutFeatures.isSplitNotesEnabled) {
                 try {
                     await this.getNotesConfiguration({

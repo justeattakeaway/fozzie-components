@@ -3173,7 +3173,7 @@ describe('Checkout', () => {
                     data: {
                         basketId,
                         customerNotes: {
-                            NoteForDriver: 'This is a courier note',
+                            NoteForDelivery: 'This is a courier note',
                             NoteForKitchen: 'This is a kitchen note',
                             NoteForRestaurant: null
                         },
