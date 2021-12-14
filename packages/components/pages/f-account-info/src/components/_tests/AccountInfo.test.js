@@ -19,6 +19,11 @@ let registerStoreModuleSpy;
 let hasModuleSpy;
 let initialiseSpy;
 
+const logMocks = {
+    info: jest.fn(),
+    error: jest.fn()
+};
+
 const storeActions = {
     loadConsumerDetails: jest.fn(),
     editConsumerDetails: jest.fn()
@@ -79,7 +84,8 @@ describe('AccountInfo', () => {
                 $emit: jest.fn()
             },
             $http: httpSpy,
-            $cookies: cookiesSpy
+            $cookies: cookiesSpy,
+            $log: logMocks
         };
         sutProps = {
             authToken: token,
