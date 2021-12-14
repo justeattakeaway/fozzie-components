@@ -4,12 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v4.0.0-beta.37
 ------------------------------
-*October 13, 2021*
+*December 9, 2021*
 
-### Changed
-- Updated version of `f-button`.
+### Added
+- **Breaking Change**: Added `f-button`, `f-error-message` & `f-mega-modal` dependency to peer dependencies. Now `f-button`, `f-error-message` & `f-mega-modal` should be included as dependencies of the consuming component or application.
+
+### Removed
+- **Breaking Change**: Removed `f-button`, `f-error-message` & `f-mega-modal` styles import from the component. Make sure to import `f-button`, `f-error-message` & `f-mega-modal` styles in your application.
 
 
 v4.0.0-beta.36
