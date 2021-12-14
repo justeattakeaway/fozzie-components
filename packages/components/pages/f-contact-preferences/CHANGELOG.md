@@ -4,9 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.11.0
+------------------------------
+*December 14, 2021*
+
+### Added
+- `info` and `error` logs to preferences fetch and save requests
+- Unit tests
+
+### Removed
+- Unused variable from story helper
+
+
 v0.10.0
 ------------------------------
-*December 02, 2021*
+*December 2, 2021*
 
 ### Changed
 - Generic checkboxes to use `f-form-field`

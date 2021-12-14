@@ -19,7 +19,6 @@ let httpSpy;
 let sutMocks;
 let sutProps;
 let dataDefaults;
-let registerStoreModuleSpy;
 let initialiseSpy;
 
 const i18n = {
@@ -33,6 +32,11 @@ const storeActions = {
     loadPreferences: jest.fn(),
     savePreferences: jest.fn(),
     editPreference: jest.fn()
+};
+
+const logMocks = {
+    info: jest.fn(),
+    error: jest.fn()
 };
 
 const storeState = contactPreferencesViewModel;
@@ -53,11 +57,9 @@ const mountContactPreferences = ({
     mocks = sutMocks,
     propsData = sutProps,
     data = dataDefaults,
-    storeOverride = null,
     initialiseOverride = null
 } = {}) => {
-    const store = storeOverride || createStore({ state, actions });
-    store.registerModule = registerStoreModuleSpy;
+    const store = createStore({ state, actions });
 
     if (initialiseOverride) {
         ContactPreferences.methods.initialise = initialiseOverride;
@@ -78,7 +80,6 @@ const mountContactPreferences = ({
 describe('ContactPreferences Component', () => {
     beforeEach(() => {
         // Arrange & Act
-        registerStoreModuleSpy = jest.fn();
         dataDefaults = () => ({
             isFormDirty: false,
             shouldShowErrorPage: false
@@ -90,7 +91,8 @@ describe('ContactPreferences Component', () => {
                 $emit: jest.fn()
             },
             $http: httpSpy,
-            $cookies: cookiesSpy
+            $cookies: cookiesSpy,
+            $log: logMocks
         };
         sutProps = {
             authToken: token,
@@ -107,10 +109,10 @@ describe('ContactPreferences Component', () => {
     describe('when creating the component', () => {
         it('should register the Store Module', () => {
             // Arrange & Act
-            wrapper = mountContactPreferences({ storeOverride: new Vuex.Store() });
+            wrapper = mountContactPreferences();
 
             // Assert
-            expect(registerStoreModuleSpy).toHaveBeenCalled();
+            expect(wrapper.vm.$store.state.fContactPreferencesModule).toBeDefined();
         });
     });
 
@@ -172,6 +174,32 @@ describe('ContactPreferences Component', () => {
 
             // Assert
             expect(wrapper.vm.isFormDirty).toEqual(false);
+        });
+
+        it('should log an info log', async () => {
+            // Arrange & Act
+            wrapper = mountContactPreferences();
+            await wrapper.vm.$nextTick();
+
+            // Assert
+            expect(logMocks.info).toHaveBeenCalledTimes(1);
+        });
+
+        it('should log an error if loading preferences throws an error', async () => {
+            // Arrange
+            const errorActions = {
+                savePreferences: jest.fn(),
+                loadPreferences: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('some-error');
+                })
+            };
+
+            // Act
+            wrapper = mountContactPreferences({ actions: errorActions });
+            await wrapper.vm.$nextTick();
+
+            // Assert
+            expect(logMocks.error).toHaveBeenCalledTimes(1);
         });
 
         it('should not call initialise method if the authorisation has not completed', () => {
@@ -264,13 +292,25 @@ describe('ContactPreferences Component', () => {
             });
         });
 
+        it('should log an info log', async () => {
+            // Arrange
+            wrapper = mountContactPreferences();
+            await wrapper.setData({ isFormDirty: true });
+
+            // Act
+            await wrapper.vm.onFormSubmit();
+
+            // Assert
+            expect(logMocks.info).toHaveBeenCalledTimes(1);
+        });
+
         it('should not call the save action if no changes', async () => {
             // Arrange
             wrapper = mountContactPreferences();
             await wrapper.setData({ isFormDirty: false });
 
             // Act
-            wrapper.vm.onFormSubmit();
+            await wrapper.vm.onFormSubmit();
 
             // Assert
             expect(storeActions.savePreferences).not.toHaveBeenCalled();
@@ -288,10 +328,28 @@ describe('ContactPreferences Component', () => {
             await wrapper.setData({ isFormDirty: true }); // Allow the data to be submitted
 
             // Act
-            wrapper.vm.onFormSubmit();
+            await wrapper.vm.onFormSubmit();
 
             // Assert
             expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+        });
+
+        it('should log an error message if saving preferences throws an error', async () => {
+            // Arrange
+            const errorActions = {
+                loadPreferences: jest.fn(),
+                savePreferences: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('some-error');
+                })
+            };
+            wrapper = mountContactPreferences({ actions: errorActions });
+            await wrapper.setData({ isFormDirty: true });
+
+            // Act
+            await wrapper.vm.onFormSubmit();
+
+            // Arrange
+            expect(logMocks.error).toHaveBeenCalledTimes(1);
         });
     });
 });
