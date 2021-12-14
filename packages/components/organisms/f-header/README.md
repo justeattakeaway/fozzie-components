@@ -92,7 +92,7 @@ The props that can be defined are as follows:
 | userInfoUrl               | `String`      | `/api/account/details` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
 | showCountrySelector       | `Boolean`     | `false` | Defines whether the country selector should be shown in the navigation. |
 | showSkipLink              | `Boolean`     | `true`  | Set to false if you need to remove skip-to-main-content link from the header. |
-
+| shouldUseJetLogo                | `Boolean`     | `false`  | Set to true if you want to show Jet logo in the header. |
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 
 ### CSS styles
