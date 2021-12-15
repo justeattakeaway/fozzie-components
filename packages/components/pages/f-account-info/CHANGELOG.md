@@ -11,6 +11,14 @@ v0.12.0
 - Storybook Story with mocked data for details and addresses
 
 
+v0.11.0
+------------------------------
+*December 10, 2021*
+
+### Changed
+- Wired up the Vuex Store `editConsumerDetails` action to the Template
+
+
 v0.10.0
 ------------------------------
 *December 10, 2021*

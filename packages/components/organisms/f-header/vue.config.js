@@ -1,5 +1,7 @@
 const path = require('path');
 
+const PeerDepsExternalsPlugin = require('peer-deps-externals-webpack-plugin');
+
 const rootDir = path.join(__dirname, '..', '..');
 const sassOptions = require('../../../../config/sassOptions')(rootDir);
 const responseLoggedIn = require('./src/components/_tests/__mocks__/api.account.details.json');
@@ -36,5 +38,10 @@ module.exports = {
     },
     pluginOptions: {
         lintStyleOnBuild: true
+    },
+    configureWebpack: {
+        plugins: [
+            new PeerDepsExternalsPlugin()
+        ]
     }
 };
