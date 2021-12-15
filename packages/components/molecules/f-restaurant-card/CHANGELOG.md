@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.12.0
+------------------------------
+*December 15, 2021*
+
+### Added
+- Scrollable and stackable restaurant dish list component
+- Dish list component unit tests
+- Dish component unit tests
+- Dish and Dish list storybook files
+### Changed
+- Updated restaurant dish styling
+- Added dish state to restaurant card storybook
+
 v0.11.0
 ------------------------------
 *December 07, 2021*
