@@ -151,7 +151,7 @@ export default {
         }
     },
 
-    created () {
+    beforeCreate () {
         if (!this.$store.hasModule('fContactPreferencesModule')) {
             this.$store.registerModule('fContactPreferencesModule', fContactPreferencesModule);
         }

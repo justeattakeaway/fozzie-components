@@ -56,9 +56,10 @@ const mountContactPreferences = async ({
     state = storeState,
     mocks = sutMocks,
     propsData = sutProps,
-    data = dataDefaults
+    data = dataDefaults,
+    storeOverride = null
 } = {}) => {
-    const store = createStore({ state, actions });
+    const store = storeOverride || createStore({ state, actions });
 
     initialiseSpy = jest.spyOn(ContactPreferences.methods, 'initialise');
 
@@ -106,7 +107,7 @@ describe('ContactPreferences Component', () => {
     describe('when creating the component', () => {
         it('should register the Store Module', async () => {
             // Arrange & Act
-            wrapper = await mountContactPreferences();
+            wrapper = await mountContactPreferences({ storeOverride: new Vuex.Store() });
 
             // Assert
             expect(wrapper.vm.$store.state.fContactPreferencesModule).toBeDefined();

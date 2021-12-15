@@ -12,9 +12,12 @@ v0.11.0
 - `info` and `error` logs to preferences fetch and save requests
 - Unit tests
 
+### Changed
+- Move store module registration from `created` to `beforeCreate`.
+
 ### Removed
-- Unused variable from story helper
 - Mounted hook which was duplicating the `initialise()` call
+- Unused variable from story helper
 
 
 v0.10.0
