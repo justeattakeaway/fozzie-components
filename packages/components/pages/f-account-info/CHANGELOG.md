@@ -8,7 +8,7 @@ v0.13.0
 *December 14, 2021*
 
 ### Added
-- Error handling and error card
+- Error handling and error card using `f-card-with-content`
 - `info` and `error` logs to preferences fetch and save requests
 
 
