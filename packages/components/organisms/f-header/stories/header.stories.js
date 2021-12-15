@@ -35,7 +35,8 @@ export const HeaderComponent = (args, { argTypes }) => ({
             :custom-nav-links="customNavLinks"
             :key="locale"
             :show-skip-link="showSkipLink"
-            :tall-below-mid="tallBelowMid" />`
+            :tall-below-mid="tallBelowMid"
+            :should-use-jet-logo="shouldUseJetLogo" />`
 });
 
 HeaderComponent.storyName = 'f-header';
@@ -51,7 +52,8 @@ HeaderComponent.args = {
     showOffersLink: false,
     showDeliveryEnquiry: false,
     logoLinkDisabled: false,
-    tallBelowMid: false
+    tallBelowMid: false,
+    shouldUseJetLogo: false
 };
 
 HeaderComponent.argTypes = {
@@ -74,6 +76,11 @@ HeaderComponent.argTypes = {
     userInfoProp: {
         control: { type: 'object' },
         description: 'Configure the user details; set to `false` (in RAW mode) to simulate a logged out user'
+    },
+
+    shouldUseJetLogo: {
+        control: { type: 'boolean' },
+        description: 'If set to true the header shows the Jet logo'
     },
 
     // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
