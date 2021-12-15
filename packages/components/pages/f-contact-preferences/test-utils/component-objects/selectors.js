@@ -4,7 +4,7 @@ exports.ERROR_PAGE = '[data-test-id="contact-preferences-error-card"]';
 
 exports.CHECKBOXES = {
     news: {
-        email: '[data-test-id="contact-preferences-news-email-checkbox"]',
-        sms: '[data-test-id="contact-preferences-news-sms-checkbox"]'
+        email: '[data-test-id="formfield-contact-preferences-news-email"]',
+        sms: '[data-test-id="formfield-contact-preferences-news-sms"]'
     }
 };

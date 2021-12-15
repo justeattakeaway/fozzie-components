@@ -110,7 +110,7 @@ describe('AccountInfoValidationMixin', () => {
                     render () {},
                     data () {
                         return {
-                            fields: {},
+                            consumer: {},
                             tenantConfigs
                         };
                     },
@@ -121,7 +121,7 @@ describe('AccountInfoValidationMixin', () => {
             it('should return false when all fields have valid inputs', async () => {
                 // Arrange
                 baseComponent.data = () => ({
-                    fields: {
+                    consumer: {
                         firstName: 'Roger',
                         lastName: 'Black',
                         phoneNumber: '1234567890',

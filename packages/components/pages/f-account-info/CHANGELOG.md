@@ -3,6 +3,30 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.11.0
+------------------------------
+*December 10, 2021*
+
+### Changed
+- Wired up the Vuex Store `editConsumerDetails` action to the Template
+
+
+v0.10.0
+------------------------------
+*December 10, 2021*
+
+### Added
+- `hasFormUpdate` checks to avoid submitting the form when the data hasn't changed.
+- Tests to cover method `editConsumerDetails`.
+
+
+v0.9.0
+------------------------------
+*December 08, 2021*
+
+### Changed
+- Wired up the new Vuex Store that exposes the State `consumer` to the Template plus wired up the load action
+
 
 v0.8.0
 ------------------------------
