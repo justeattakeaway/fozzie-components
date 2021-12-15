@@ -226,7 +226,7 @@ const messages = {
             collection: {
                 title: 'Leave a note',
                 text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
-                placeholder: 'Do not include details about any allergies here.'
+                placeholder: 'Do not include details about any allergies here. \n\nWe\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
             },
             dinein: {
                 title: 'Leave a note',
