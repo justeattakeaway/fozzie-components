@@ -70,7 +70,6 @@ $scrollOffset: spacing(x2);
     margin-right: -#{$scrollOffset};
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
 }
 
 .c-restaurantCard-dishes--isVerticallyStacked {
@@ -100,8 +99,10 @@ $scrollOffset: spacing(x2);
     }
 
     &:last-of-type {
-        margin-right: $scrollOffset;
-        scroll-snap-align: start;
+        margin-right: 0;
+        padding-right: $scrollOffset;
+        scroll-margin-right: $scrollOffset;
+        scroll-snap-align: center;
     }
 
     flex: 0 0 85%;
