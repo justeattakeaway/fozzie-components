@@ -1,4 +1,4 @@
-const Button = require('../../test-utils/component-objects/f-button.component');
+const ActionButton = require('../../test-utils/component-objects/f-button--action.component');
 const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
 const IconButton = require('../../test-utils/component-objects/f-button--icon.component');
 
@@ -7,7 +7,7 @@ let button;
 describe('f-button component tests', () => {
     it('should display the f-button action component', () => {
         // Arrange
-        button = new Button();
+        button = new ActionButton();
 
         // Act
         button.load();
@@ -18,7 +18,7 @@ describe('f-button component tests', () => {
 
     it('should check that the f-button action component is clickable', () => {
         // Arrange
-        button = new Button();
+        button = new ActionButton();
 
         // Act
         button.load();
