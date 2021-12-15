@@ -65,16 +65,6 @@ RestaurantCardComponent.args = {
                 name: 'Fish and chips (XL)',
                 price: '£19.95',
                 calories: '1234kcal'
-            },
-            {
-                name: 'Chicken nuggets',
-                price: '£1.75',
-                calories: '1234kcal'
-            },
-            {
-                name: 'Lamb Korma',
-                price: '£8.99',
-                calories: '2234kcal'
             }
         ],
         offer: '30% off when you spend £20 - some really really long offer that hopefully never happens but we need to protect against just in case'
