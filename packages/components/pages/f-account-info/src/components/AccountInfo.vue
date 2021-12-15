@@ -168,19 +168,15 @@
 
             <delete-account />
         </f-card>
-        <f-card
+        <f-card-with-content
             v-else
             data-test-id="account-info-error-card"
-            has-outline
-            is-page-content-wrapper
-            card-heading-position="center">
-            <h1>
-                {{ $t('errorMessages.errorHeading') }}
-            </h1>
-            <p>
-                {{ $t(error.messageKey) }}
-            </p>
-        </f-card>
+            :card-heading="$t('errorMessages.errorHeading')"
+            :card-description="$t(error.messageKey)">
+            <template #icon>
+                <bag-sad-bg-icon />
+            </template>
+        </f-card-with-content>
     </div>
 </template>
 
@@ -191,10 +187,15 @@ import FErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+import FCardWithContent from '@justeat/f-card-with-content';
+import '@justeat/f-card-with-content/dist/f-card-with-content.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
+import {
+    BagSadBgIcon
+} from '@justeat/f-vue-icons';
 import EmailAddressField from './EmailAddressField.vue';
 import DeleteAccount from './DeleteAccount.vue';
 import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
@@ -209,11 +210,13 @@ import { AccountInfoError } from '../exceptions';
 export default {
     components: {
         FCard,
+        FCardWithContent,
         FormField,
         FButton,
         FErrorMessage,
         EmailAddressField,
-        DeleteAccount
+        DeleteAccount,
+        BagSadBgIcon
     },
 
     mixins: [
