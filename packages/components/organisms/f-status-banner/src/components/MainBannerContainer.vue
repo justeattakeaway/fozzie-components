@@ -18,7 +18,6 @@
 
 <script>
 import SearchBox from '@justeat/f-searchbox';
-import '@justeat/f-searchbox/dist/f-searchbox.css';
 import PageBanner from './PageBanner.vue';
 
 export default {
