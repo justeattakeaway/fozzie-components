@@ -111,26 +111,6 @@ $scrollOffset: spacing(x2);
     &:only-child {
         flex: 0 0 100%;
         margin-right: 0;
-    }scroll-snap-align: center;
-
-    &:first-of-type {
-        margin-left: $scrollOffset;
-        scroll-margin-left: $scrollOffset;
-        scroll-snap-align: start;
-    }
-
-    &:last-of-type {
-        margin-right: $scrollOffset;
-        scroll-snap-align: start;
-    }
-
-    flex: 0 0 85%;
-    margin-bottom: 0;
-    margin-right: spacing();
-
-    &:only-child {
-        flex: 0 0 100%;
-        margin-right: 0;
     }
 }
 
