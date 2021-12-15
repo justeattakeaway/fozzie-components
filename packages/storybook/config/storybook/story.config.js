@@ -22,6 +22,24 @@ const getChangedPackageStories = () => {
     return storyPaths;
 };
 
+const getPackagesWithVisualRegression = () => {
+    let packageJsonMatches;
+    try {
+        packageJsonMatches = execSync('grep --include=\package.json --exclude-dir={node_modules,.yalc} -rnw "../../packages/components" -e "test:visual"');
+    } catch (error) {
+        console.info('No components found that have visual regression tests.');
+        process.exit(0);
+    }
+
+    const visualRegressionPackagePaths = packageJsonMatches.toString().match(/^(.)*(?=package.json)/gm);
+
+    const storyPaths = [];
+
+    visualRegressionPackagePaths.forEach(path => storyPaths.push(`../../${path}stories/*.stories.@(js|mdx)`));
+
+    return storyPaths;
+};
+
 const getStoryFiles = () => {
     // Executed if Storybook is running in VS Code via the launch.json command.
     if (process.env.VS_DEBUGGER) {
@@ -31,6 +49,10 @@ const getStoryFiles = () => {
     // Executed if the storybook:serve-changed script is executed by CircleCI.
     if (process.env.CHANGED_ONLY) {
         return getChangedPackageStories();
+    }
+
+    if (process.env.VISUAL_REGRESSION) {
+        return getPackagesWithVisualRegression();
     }
 
     // Executed if the storybook:serve script is executed.

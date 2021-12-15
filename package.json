@@ -14,6 +14,7 @@
     "storybook:build-changed": "cross-env-shell CHANGED_ONLY=true lerna run storybook:build --include-dependencies --stream",
     "storybook:serve": "lerna run storybook:serve --stream",
     "storybook:serve-changed": "cross-env-shell CHANGED_ONLY=true lerna run storybook:serve --stream",
+    "storybook:serve-visualregression": "cross-env-shell VISUAL_REGRESSION=true lerna run storybook:serve --stream",
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
     "storybook:deploy": "lerna run storybook:deploy",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
