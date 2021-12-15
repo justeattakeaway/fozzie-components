@@ -21,12 +21,6 @@ describe('f-checkout "delivery" component tests', () => {
             // Assert
             expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
         });
-
-        it('should open the combined notes accordion and populate it', () => {
-            checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is an order note');
-
-            checkout.goToPayment();
-        });
     });
 
     describe('au tenant', () => {
@@ -106,7 +100,31 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
         checkout.waitForComponent();
     });
 
+    it('should open the order notes accordion and populate it', () => {
+        checkout = new Checkout();
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Note types', 'get-notes-config');
+
+        checkout.load();
+        checkout.waitForComponent();
+
+        // Assert
+        checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is a order note');
+        checkout.goToPayment();
+    });
+
     it('should open the courier and kitchen notes accordions and populate them', () => {
+        checkout = new Checkout();
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true)
+                .withQuery('&knob-Is ASAP available', true)
+                .withQuery('&knob-Note types', 'get-notes-config-split');
+
+        checkout.load();
+        checkout.waitForComponent();
+
         // Assert
         checkout.expandAndPopulateNote('courierAccordionHeader', 'courierNote', 'This is a courier note');
         checkout.expandAndPopulateNote('kitchenAccordionHeader', 'kitchenNote', 'This is a kitchen note');
