@@ -19,6 +19,8 @@ let registerStoreModuleSpy;
 let hasModuleSpy;
 let initialiseSpy;
 
+const defaultInitialiseMethod = AccountInfo.methods.initialise;
+
 const logMocks = {
     info: jest.fn(),
     error: jest.fn()
@@ -48,16 +50,13 @@ const mountAccountInfo = ({
     propsData = sutProps,
     data = dataDefaults,
     storeOverride = null,
-    initialiseOverride = null
+    initialiseOverride = defaultInitialiseMethod
 } = {}) => {
     const store = storeOverride || createStore({ state, actions });
     store.registerModule = registerStoreModuleSpy;
     store.hasModule = hasModuleSpy;
 
-    // TODO: this does not reset initialise?
-    if (initialiseOverride) {
-        AccountInfo.methods.initialise = initialiseOverride;
-    }
+    AccountInfo.methods.initialise = initialiseOverride;
 
     const mock = shallowMount(AccountInfo, {
         i18n,
@@ -124,6 +123,44 @@ describe('AccountInfo', () => {
             });
         });
 
+        it('should not call initialise() method if the authorisation has not completed', () => {
+            // Arrange
+            initialiseSpy = jest.fn();
+            sutProps = { ...sutProps, isAuthFinished: false };
+
+            // Act
+            mountAccountInfo({ initialiseOverride: initialiseSpy });
+
+            // Assert
+            expect(initialiseSpy).not.toHaveBeenCalled();
+        });
+
+        it('should only call initialise() method once the authorisation has completed', async () => {
+            // Arrange
+            initialiseSpy = jest.fn();
+            sutProps = { ...sutProps, isAuthFinished: false };
+
+            // Act
+            wrapper = mountAccountInfo({ initialiseOverride: initialiseSpy });
+
+            // Assert
+            expect(initialiseSpy).not.toHaveBeenCalled();
+
+            // Act 2
+            await wrapper.setProps({ isAuthFinished: true });
+
+            // Assert 2
+            expect(initialiseSpy).toHaveBeenCalled();
+        });
+
+        it('should set `hasFormUpdate` to `false` so the form can not be resubmitted when mounted', () => {
+            // Arrange & Act
+            wrapper = mountAccountInfo();
+
+            // Assert
+            expect(wrapper.vm.hasFormUpdate).toBe(false);
+        });
+
         it('should log an info log', async () => {
             // Arrange & Act
             wrapper = mountAccountInfo();
@@ -180,44 +217,6 @@ describe('AccountInfo', () => {
             // Assert
             expect(logMocks.error).toHaveBeenCalledTimes(1);
         });
-
-        it('should not call initialise() method if the authorisation has not completed', () => {
-            // Arrange
-            initialiseSpy = jest.fn();
-            sutProps = { ...sutProps, isAuthFinished: false };
-
-            // Act
-            mountAccountInfo({ initialiseOverride: initialiseSpy });
-
-            // Assert
-            expect(initialiseSpy).not.toHaveBeenCalled();
-        });
-
-        it('should only call initialise() method once the authorisation has completed', async () => {
-            // Arrange
-            initialiseSpy = jest.fn();
-            sutProps = { ...sutProps, isAuthFinished: false };
-
-            // Act
-            wrapper = mountAccountInfo({ initialiseOverride: initialiseSpy });
-
-            // Assert
-            expect(initialiseSpy).not.toHaveBeenCalled();
-
-            // Act 2
-            await wrapper.setProps({ isAuthFinished: true });
-
-            // Assert 2
-            expect(initialiseSpy).toHaveBeenCalled();
-        });
-
-        it('should set `hasFormUpdate` to `false` so the form can not be resubmitted when mounted', () => {
-            // Arrange & Act
-            wrapper = mountAccountInfo();
-
-            // Assert
-            expect(wrapper.vm.hasFormUpdate).toBe(false);
-        });
     });
 
     describe('`methods`', () => {
@@ -266,10 +265,11 @@ describe('AccountInfo', () => {
 
             it('should log an info log', async () => {
                 // Arrange
-                wrapper = mountAccountInfo();
-                await wrapper.setData({ hasFormUpdate: true });
+                initialiseSpy = jest.fn();
 
                 // Act
+                wrapper = mountAccountInfo({ initialiseOverride: initialiseSpy });
+                await wrapper.setData({ hasFormUpdate: true });
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
