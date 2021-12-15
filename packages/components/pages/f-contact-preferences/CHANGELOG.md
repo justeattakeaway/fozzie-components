@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.11.0
 ------------------------------
-*December 14, 2021*
+*December 16, 2021*
 
 ### Added
 - `info` and `error` logs to preferences fetch and save requests
@@ -14,6 +14,7 @@ v0.11.0
 
 ### Removed
 - Unused variable from story helper
+- Mounted hook which was duplicating the `initialise()` call
 
 
 v0.10.0

@@ -157,12 +157,6 @@ export default {
         }
     },
 
-    async mounted () {
-        if (this.isAuthFinished) {
-            await this.initialise();
-        }
-    },
-
     methods: {
         ...mapActions('fContactPreferencesModule', [
             'loadPreferences',
