@@ -120,15 +120,13 @@ $scrollOffset: spacing(x2);
         margin-bottom: spacing();
 
         &:last-of-type {
+            padding-right: 0;
+            margin-right: 0;
             margin-bottom: 0;
         }
 
         &:first-of-type {
             margin-left: 0;
-        }
-
-        &:last-of-type {
-            margin-right: 0;
         }
     }
 }

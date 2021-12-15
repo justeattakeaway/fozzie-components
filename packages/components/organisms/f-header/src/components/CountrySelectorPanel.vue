@@ -58,7 +58,6 @@
 import FButton from '@justeat/f-button';
 import { ArrowIcon } from '@justeat/f-vue-icons';
 import FlagIcon from './FlagIcon.vue';
-import '@justeat/f-button/dist/f-button.css';
 import { countries } from '../tenants';
 
 export default {
@@ -147,8 +146,6 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 
         svg.c-countrySelector-goBackIcon {
             transform: rotate(180deg);
-            width: 28px;
-            height: 28px;
         }
     }
 }

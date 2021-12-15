@@ -4,7 +4,7 @@ import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 
 describe('RestaurantCard.v1', () => {
     describe('Error Boundary', () => {
-        const slotList = ['meta-items', 'local-legend', 'optional-items'];
+        const slotList = ['meta-items', 'optional-items'];
 
         it.each(slotList)('Successfully wraps %p slot in error boundary', slot => {
             // arrange
@@ -266,6 +266,59 @@ describe('RestaurantCard.v1', () => {
 
             // assert
             expect(wrapper.find('[data-test-id="restaurant-offer"]').exists()).toBe(false);
+        });
+    });
+
+    describe('Premier Restaurant', () => {
+        it('should show Premier Tag when restaurant is Premier', () => {
+            // arrange
+            const propsData = {
+                isPremier: true
+
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(true);
+        });
+
+        it('should not show Premier Tag when restaurant is not Premier', () => {
+            // arrange
+            const propsData = {
+                isPremier: false
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+        });
+
+        it('should not show Premier Tag when premier data is missing', () => {
+            // arrange
+            const propsData = {};
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+        });
+
+        it.each([null, undefined])('should not show Premier Tag when premier data is %p', value => {
+            // arrange
+            const propsData = {
+                isPremier: value
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
         });
     });
 });
