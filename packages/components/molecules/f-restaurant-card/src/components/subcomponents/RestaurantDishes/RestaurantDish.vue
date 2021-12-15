@@ -7,13 +7,14 @@
                 {{ name }}
             </span>
             <span
+                v-if="calories"
                 data-test-id="restaurant-dish-calories"
                 :class="[$style['c-restaurantCard-dish-calories']]">
                 {{ calories }}
             </span>
         </p>
         <p
-            v-if="price !== null"
+            v-if="price"
             data-test-id="restaurant-dish-price"
             :class="[$style['c-restaurantCard-dish-price']]">
             {{ price }}

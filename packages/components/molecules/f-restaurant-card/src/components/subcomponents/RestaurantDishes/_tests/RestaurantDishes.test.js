@@ -90,45 +90,4 @@ describe('RestaurantDishes.vue', () => {
         // assert
         expect(dishes.length).toBe(expectedDishCount);
     });
-
-    // it('appends the css class `c-restaurantCard-dishes--isListItem` when prop `isListItem` is true', () => {
-    //     // arrange
-    //     const propsData = {
-    //         isListItem: true,
-    //         dishes: [
-    //             {
-    //                 name: 'foo',
-    //                 price: 'foo-price',
-    //                 calories: 'foo-calories'
-    //             }
-    //         ]
-    //     };
-
-    //     // act
-    //     const wrapper = mount(sut);
-    //     console.log(wrapper.html());
-
-    //     // assert
-    //     expect(wrapper.find('c-restaurantCard-dishes--isListItem').exists()).toBe(true);
-    // });
-
-    it('does not appened the css class `c-restaurantCard-dishes--isListItem` when prop `isListItem` is false', () => {
-        // arrange
-        const propsData = {
-            isListItem: false,
-            dishes: [
-                {
-                    name: 'foo',
-                    price: 'foo-price',
-                    calories: 'foo-calories'
-                }
-            ]
-        };
-
-        // act
-        const wrapper = mount(sut);
-
-        // assert
-        expect(wrapper.find('c-restaurantCard-dishes--isListItem').exists()).toBe(false);
-    });
 });

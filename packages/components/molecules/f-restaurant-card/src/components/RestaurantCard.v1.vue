@@ -140,7 +140,7 @@
         <restaurant-dishes
             v-if="!disabled && hasDishes"
             :dishes="dishes"
-            :is-list-item="isListItem"
+            :is-vertically-stacked="isListItem"
             :class="[$style['c-restaurantCard-dishes']]" />
     </a>
 </template>

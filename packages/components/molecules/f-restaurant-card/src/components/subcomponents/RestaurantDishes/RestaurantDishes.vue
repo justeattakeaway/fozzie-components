@@ -2,7 +2,7 @@
     <ul
         :class="{
             [$style['c-restaurantCard-dishes']]: true,
-            [$style['c-restaurantCard-dishes--isListItem']]: isListItem,
+            [$style['c-restaurantCard-dishes--isVerticallyStacked']]: isVerticallyStacked,
             [$style['c-restaurantCard-dishes--isScrollable']]: hasMultipleDishes
         }">
         <li
@@ -32,9 +32,9 @@ export default {
             default: () => []
         },
         /**
-         * Used to manage list item specific styling
+         * Stacks dishes vertically, however will fallback to horizontal scrolling at smaller screen sizes
          */
-        isListItem: {
+        isVerticallyStacked: {
             type: Boolean,
             default: false
         }
@@ -73,7 +73,7 @@ $scrollOffset: spacing(x2);
     -webkit-overflow-scrolling: touch;
 }
 
-.c-restaurantCard-dishes--isListItem {
+.c-restaurantCard-dishes--isVerticallyStacked {
     @include media('>mid') {
         display: block;
         margin-left: 0;
@@ -134,7 +134,7 @@ $scrollOffset: spacing(x2);
     }
 }
 
-.c-restaurantCard-dishes--isListItem > .c-restaurantCard-dishes-item {
+.c-restaurantCard-dishes--isVerticallyStacked > .c-restaurantCard-dishes-item {
     @include media('>mid') {
         margin-right: 0;
         margin-bottom: spacing();
