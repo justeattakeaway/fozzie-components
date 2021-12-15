@@ -56,7 +56,6 @@ export default {
 <style lang="scss" module>
 $scrollOffset: spacing(x2);
 
-// TODO: only add carousel styling when > 1 dish item (add mod class for scrollable)
  .c-restaurantCard-dishes {
     padding: 0;
     margin: 0;
