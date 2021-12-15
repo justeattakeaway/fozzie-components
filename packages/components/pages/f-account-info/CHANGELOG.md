@@ -3,12 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.11.0
+v0.12.0
 ------------------------------
-*December 14, 2021*
+*December 15, 2021*
 
 ### Added
 - Storybook Story with mocked data for details and addresses
+
+
+v0.11.0
+------------------------------
+*December 10, 2021*
+
+### Changed
+- Wired up the Vuex Store `editConsumerDetails` action to the Template
+
+
+v0.10.0
+------------------------------
+*December 10, 2021*
+
+### Added
+- `hasFormUpdate` checks to avoid submitting the form when the data hasn't changed.
+- Tests to cover method `editConsumerDetails`.
 
 
 v0.9.0

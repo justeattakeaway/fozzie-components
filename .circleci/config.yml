@@ -486,7 +486,11 @@ workflows:
 
   build_and_test:
     jobs:
+      - approval:
+          type: approval
       - build:
+          requires:
+            - approval
           context: web-core
           filters:
             branches:
@@ -510,7 +514,11 @@ workflows:
 
   deploy-storybook:
     jobs:
+      - approval:
+          type: approval
       - deploy-storybook:
+          requires:
+            - approval
           context: web-core
           filters:
             branches:
