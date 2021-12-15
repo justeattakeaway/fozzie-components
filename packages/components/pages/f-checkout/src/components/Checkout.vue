@@ -353,8 +353,10 @@ export default {
             return {
                 NoteForRestaurant: order?.note || null,
                 ...(kitchen?.note && { NoteForKitchen: kitchen.note }),
-                ...(courier?.note && { NoteForDelivery: courier.note }),
-                ...(courier?.note && { NoteForDriver: courier.note })
+                ...(courier?.note && {
+                    NoteForDelivery: courier.note,
+                    NoteForDriver: courier.note
+                })
             };
         }
     },
