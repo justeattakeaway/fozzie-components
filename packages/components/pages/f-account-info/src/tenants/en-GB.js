@@ -41,10 +41,7 @@ const messages = {
     deleteAccountLink: 'Delete my account',
     errorMessages: {
         errorHeading: 'Something went wrong',
-        pageLoad: {
-            description: 'Sorry, there was a problem fetching your account details. Please try again later.'
-        },
-        saveDetails: {
+        generic: {
             description: 'Looks like a problem on our end, sorry. Try again soon.'
         }
     }

@@ -204,7 +204,7 @@ import fAccountInfoModule from '../store/accountInfo.module';
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
-import * as AccountInfoExceptions from '../exceptions';
+import { AccountInfoError } from '../exceptions';
 
 export default {
     components: {
@@ -310,7 +310,7 @@ export default {
                 this.hasFormUpdate = false;
             } catch (error) {
                 this.$log.error('Error fetching consumer details', error, ['account-pages', 'account-info']);
-                this.handleErrorState(new AccountInfoExceptions.GetAccountInfoError(error.message, error?.response?.status));
+                this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));
             } finally {
                 this.$nextTick(() => {
                     this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
@@ -336,7 +336,7 @@ export default {
                 this.hasFormUpdate = false;
             } catch (error) {
                 this.$log.error('Error saving consumer details', error, ['account-pages', 'account-info']);
-                this.handleErrorState(new AccountInfoExceptions.SaveAccountInfoError(error.message, error?.response?.status));
+                this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));
             } finally {
                 this.setSubmittingState(false);
             }

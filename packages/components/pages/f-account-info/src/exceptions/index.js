@@ -1,14 +1,11 @@
-import SaveAccountInfoError from './save-account-info';
-
-export class GetAccountInfoError extends Error {
+export class AccountInfoError extends Error {
     constructor (message, errorCode) {
         super(message);
-        this.messageKey = 'errorMessages.pageLoad.description';
+        this.messageKey = 'errorMessages.generic.description';
         this.errorCode = errorCode;
     }
 }
 
 export default {
-    GetAccountInfoError,
-    SaveAccountInfoError
+    AccountInfoError
 };
