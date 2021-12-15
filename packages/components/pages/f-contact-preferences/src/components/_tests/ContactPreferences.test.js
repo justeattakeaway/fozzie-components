@@ -180,6 +180,10 @@ describe('ContactPreferences Component', () => {
 
             // Assert
             expect(logMocks.info).toHaveBeenCalledTimes(1);
+            expect(logMocks.info).toHaveBeenCalledWith(
+                expect.any(String),
+                expect.arrayContaining(['account-pages', 'contact-preferences'])
+            );
         });
 
         it('should log an error if loading preferences throws an error', async () => {
@@ -196,6 +200,11 @@ describe('ContactPreferences Component', () => {
 
             // Assert
             expect(logMocks.error).toHaveBeenCalledTimes(1);
+            expect(logMocks.error).toHaveBeenCalledWith(
+                expect.any(String),
+                expect.any(Error),
+                expect.arrayContaining(['account-pages', 'contact-preferences'])
+            );
         });
 
         it('should not call initialise method if the authorisation has not completed', async () => {
@@ -297,6 +306,10 @@ describe('ContactPreferences Component', () => {
 
             // Assert
             expect(logMocks.info).toHaveBeenCalledTimes(1);
+            expect(logMocks.info).toHaveBeenCalledWith(
+                expect.any(String),
+                expect.arrayContaining(['account-pages', 'contact-preferences'])
+            );
         });
 
         it('should not call the save action if no changes', async () => {
@@ -345,6 +358,11 @@ describe('ContactPreferences Component', () => {
 
             // Arrange
             expect(logMocks.error).toHaveBeenCalledTimes(1);
+            expect(logMocks.error).toHaveBeenCalledWith(
+                expect.any(String),
+                expect.any(Error),
+                expect.arrayContaining(['account-pages', 'contact-preferences'])
+            );
         });
     });
 });
