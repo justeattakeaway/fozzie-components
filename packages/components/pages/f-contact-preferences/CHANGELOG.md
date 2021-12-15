@@ -8,9 +8,9 @@ v0.11.0
 *December 15, 2021*
 
 ### Changed
-- Simplifed the Storybook file
+- Simplified the Storybook file
 - Updated f-button to v3.2.0
-- Updated f-card to v3.4.0"
+- Updated f-card to v3.4.0
 
 
 v0.10.0
