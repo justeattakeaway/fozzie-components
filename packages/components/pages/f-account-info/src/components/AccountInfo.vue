@@ -262,7 +262,7 @@ export default {
 
     watch: {
         isAuthFinished: {
-            immediate: true,
+            immediate: true, // this prevents the need to call initialise() on mounted
             async handler (value) {
                 if (value) {
                     await this.initialise();
@@ -274,12 +274,6 @@ export default {
     beforeCreate () {
         if (!this.$store.hasModule('fAccountInfoModule')) {
             this.$store.registerModule('fAccountInfoModule', fAccountInfoModule);
-        }
-    },
-
-    async mounted () {
-        if (this.isAuthFinished) {
-            await this.initialise();
         }
     },
 
@@ -300,7 +294,7 @@ export default {
 
         /**
         * Gets the form data (from the api) and assigns it to State
-        * then lowers the isFormDirty flag as the form data is currently clean
+        * then lowers the hasFormUpdate flag as the form data is currently clean
         * then stops the on-screen spinner from showing
         *
         * If an error occurs then this is logged and the Template is
