@@ -291,6 +291,9 @@ describe('mapNotesFromApi ::', () => {
             }
         ];
 
-        expect(mapNotesFromApi(notesFromApi)).toEqual({ kitchen: 'No ketchup on burger please', courier: 'Phone when outside' });
+        expect(mapNotesFromApi(notesFromApi)).toEqual({
+            kitchen: { note: 'No ketchup on burger please' },
+            courier: { note: 'Phone when outside' }
+        });
     });
 });

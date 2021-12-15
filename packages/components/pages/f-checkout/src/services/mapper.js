@@ -117,7 +117,7 @@ const getAnalyticsErrorCodeByApiErrorCode = error => {
     return analyticsErrorCode;
 };
 
-const mapNotesFromApi = notes => notes.reduce((obj, item) => Object.assign(obj, { [item.type]: item.note }), {});
+const mapNotesFromApi = notes => notes.reduce((obj, item) => Object.assign(obj, { [item.type]: { note:  item.note } }), {});
 
 export {
     getAnalyticsErrorCodeByApiErrorCode,
