@@ -142,7 +142,7 @@ export default {
 
     watch: {
         isAuthFinished: {
-            immediate: true,
+            immediate: true, // this prevents the need to call initialise() on mounted
             async handler (value) {
                 if (value) {
                     await this.initialise();
