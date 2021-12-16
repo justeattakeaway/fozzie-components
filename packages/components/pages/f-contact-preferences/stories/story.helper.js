@@ -25,41 +25,6 @@ export const apiStateOptions = {
     }
 };
 
-const apiStateDefinitions1 = {
-    getContactPreferencesDefault: {
-        url: '/consumer/preferences',
-        method: httpVerbs.get,
-        responseStatus: httpStatusCodes.ok,
-        requestData: null,
-        responseData: getConsumerPreferences,
-        state: apiStates.none
-    },
-    postContactPreferencesNewsEmail: {
-        url: '/consumer/preferences',
-        method: httpVerbs.post,
-        responseStatus: httpStatusCodes.ok,
-        requestData: null,
-        responseData: getConsumerPreferences,
-        state: apiStates.none
-    },
-    getContactPreferencesUnknownApiFailure: {
-        url: '/consumer/preferences',
-        method: httpVerbs.get,
-        responseStatus: httpStatusCodes.ok,
-        requestData: null,
-        responseData: getConsumerPreferences,
-        state: apiStates.apiPostFailed
-    },
-    postContactPreferencesUnknownApiFailure: {
-        url: '/consumer/preferences',
-        method: httpVerbs.post,
-        responseStatus: httpStatusCodes.internalServerError,
-        requestData: null,
-        responseData: getConsumerPreferences,
-        state: apiStates.apiPostFailed
-    }
-};
-
 const apiStateDefinitions = {
     none: { // Good GET and good POST
         state: apiStates.none,
