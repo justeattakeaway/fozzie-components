@@ -859,7 +859,6 @@ export default {
         },
 
         async getMappedDataForUpdateCheckout () {
-            console.log('formattedNotes', this.formattedNotes);
             return mapUpdateCheckoutRequest({
                 address: this.address,
                 customer: this.customer,
