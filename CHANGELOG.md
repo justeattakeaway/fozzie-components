@@ -7,8 +7,8 @@ v5.7.0
 ------------------------------
 *December 16, 2021*
 
-### Changed
-- Storybook config change
+### Removed
+- CircleCI Approval process for builds.
 
 
 v5.6.0
