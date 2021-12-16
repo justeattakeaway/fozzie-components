@@ -20,7 +20,7 @@ describe('f-button Desktop visual tests', () => {
         describe('in isLoading state', () => {
             it('should be displayed', () => {
                 // Arrange
-                button = new Button();
+                button = new ActionButton();
                 button.withQuery('args', 'isLoading');
 
                 // Act
@@ -34,7 +34,7 @@ describe('f-button Desktop visual tests', () => {
         describe('in disabled state', () => {
             it('should be displayed', () => {
                 // Arrange
-                button = new Button();
+                button = new ActionButton();
                 button.withQuery('args', 'disabled');
 
                 // Act
@@ -48,7 +48,7 @@ describe('f-button Desktop visual tests', () => {
         describe('in state with leading icon', () => {
             it('should be displayed', () => {
                 // Arrange
-                button = new Button();
+                button = new ActionButton();
                 button.withQuery('args', 'hasIcon:leading');
 
                 // Act
@@ -62,7 +62,7 @@ describe('f-button Desktop visual tests', () => {
         describe('in state with trailing icon', () => {
             it('should be displayed', () => {
                 // Arrange
-                button = new Button();
+                button = new ActionButton();
                 button.withQuery('args', 'hasIcon:trailing');
 
                 // Act
