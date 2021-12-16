@@ -373,7 +373,7 @@ describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Vi
         checkout.loadAgeVerification();
     });
 
-    it.only('should display the age verification page', () => {
+    it('should display the age verification page', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible Age Verification', 'desktop');
     });

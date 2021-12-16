@@ -19,11 +19,11 @@ describe('f-checkout component tests', () => {
         checkout.load();
     });
 
-    it.skip('should submit the checkout form', () => {
+    it('should submit the checkout form', () => {
         // Arrange
         const customerInfo = {
             note: 'Doorbell is broken',
-            orderTime: 'Wednesday 00:30'
+            orderTime: 'Wednesday 01:45'
         };
 
         // Act
@@ -53,10 +53,10 @@ describe('f-checkout component tests', () => {
             expect(checkout.getFieldValue(field).length).toEqual(maxlength);
         });
 
-    it.skip('should enable a user to submit without adding a note', () => {
+    it('should enable a user to submit without adding a note', () => {
         // Arrange
         const customerInfo = {
-            orderTime: 'Wednesday 00:30'
+            orderTime: 'Wednesday 01:45'
         };
 
         // Act

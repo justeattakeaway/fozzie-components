@@ -2,14 +2,12 @@ const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
-    ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
     FIELDS,
     KNOB_CHECKOUT_DROPDOWN,
     KNOB_BUTTON,
     SWITCH_USER_LINK,
-    GUEST_CHECKOUT_HEADER,
     GUEST_CHECKOUT_LOGIN_BUTTON,
     PRE_ORDER_WARNING,
     CHECKOUT_ERROR_MESSAGE,
@@ -17,9 +15,6 @@ const {
     CLOSE_MODAL,
     DUP_ORDER_GO_TO_HISTORY_BUTTON,
     ERROR_PAGE_COMPONENT,
-    ERROR_PAGE_HEADING,
-    ERROR_PAGE_DESCRIPTION,
-    ERROR_PAGE_IMAGE,
     AGE_VERIFICATION_COMPONENT,
     AGE_VERIFICATION_DAY_DROPDOWN,
     AGE_VERIFICATION_MONTH_DROPDOWN,
@@ -41,8 +36,6 @@ module.exports = class Checkout extends Page {
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
 
-    get orderTimeDropdownOptions () { return $$(ORDER_TIME_DROPDOWN_OPTIONS); }
-
     get knobCheckoutDropdown () { return $(KNOB_CHECKOUT_DROPDOWN); }
 
     get goToPaymentButton () { return $(GO_TO_PAYMENT_BUTTON); }
@@ -52,8 +45,6 @@ module.exports = class Checkout extends Page {
     get userNoteInput () { return $(USER_NOTE_INPUT); }
 
     get switchUserLink () { return $(SWITCH_USER_LINK); }
-
-    get guestCheckoutHeader () { return $(GUEST_CHECKOUT_HEADER); }
 
     get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON); }
 
@@ -68,12 +59,6 @@ module.exports = class Checkout extends Page {
     get errorMessageDupOrderGoToHistory () { return $(DUP_ORDER_GO_TO_HISTORY_BUTTON); }
 
     get errorPageComponent () { return $(ERROR_PAGE_COMPONENT); }
-
-    get errorPageDescription () { return $(ERROR_PAGE_DESCRIPTION); }
-
-    get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
-
-    get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
     get ageVerificationComponent () { return $(AGE_VERIFICATION_COMPONENT); }
 
@@ -170,15 +155,6 @@ module.exports = class Checkout extends Page {
 
     loadAgeVerification () {
         super.load(this.ageVerificationComponent);
-    }
-
-    open (url) {
-        super.open(url);
-    }
-
-    withQuery (name, value) {
-        super.withQuery(name, value);
-        return this;
     }
 
     waitForComponent (component = this.component) {

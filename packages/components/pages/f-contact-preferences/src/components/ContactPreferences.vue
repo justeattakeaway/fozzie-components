@@ -142,7 +142,7 @@ export default {
 
     watch: {
         isAuthFinished: {
-            immediate: true,
+            immediate: true, // this prevents the need to call initialise() on mounted
             async handler (value) {
                 if (value) {
                     await this.initialise();
@@ -151,15 +151,9 @@ export default {
         }
     },
 
-    created () {
+    beforeCreate () {
         if (!this.$store.hasModule('fContactPreferencesModule')) {
             this.$store.registerModule('fContactPreferencesModule', fContactPreferencesModule);
-        }
-    },
-
-    async mounted () {
-        if (this.isAuthFinished) {
-            await this.initialise();
         }
     },
 
@@ -169,8 +163,6 @@ export default {
             'savePreferences',
             'editPreference'
         ]),
-
-
 
         /**
         * Returns translation string if it exists
@@ -231,8 +223,10 @@ export default {
         async initialise () {
             try {
                 await this.loadPreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
+                this.$log.info('Account preferences fetched successfully', ['account-pages', 'contact-preferences']);
                 this.isFormDirty = false;
             } catch (error) {
+                this.$log.error('Error fetching account preferences', error, ['account-pages', 'contact-preferences']);
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
                 this.$nextTick(() => {
@@ -260,8 +254,10 @@ export default {
 
             try {
                 await this.savePreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
+                this.$log.info('Account preferences saved successfully', ['account-pages', 'contact-preferences']);
                 this.isFormDirty = false;
             } catch (error) {
+                this.$log.error('Error saving account preferences', error, ['account-pages', 'contact-preferences']);
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
                 this.setSubmittingState(false);
@@ -309,4 +305,3 @@ export default {
     }
 }
 </style>
-
