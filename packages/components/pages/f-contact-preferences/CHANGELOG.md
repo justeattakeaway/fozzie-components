@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.11.0
+v0.12.0
 ------------------------------
-*December 15, 2021*
+*December 16, 2021*
 
 ### Changed
 - Simplified the Storybook file
