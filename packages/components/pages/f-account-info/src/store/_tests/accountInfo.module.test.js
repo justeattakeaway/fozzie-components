@@ -91,10 +91,10 @@ describe('AccountInfo Store', () => {
                 expect(commitSpy).toHaveBeenLastCalledWith(UPDATE_CONSUMER_DETAILS, { details: expect.anything(), address: expectedAddress });
             });
 
-            it('should not fail if `getConsumerAddresses` returns empty array', async () => {
+            it('should not fail if `getConsumerAddresses` returns empty array of Addresses', async () => {
                 // Arrange
                 const getAddressResponse = {
-                    data: []
+                    data: { Addresses: [] }
                 };
                 const apiMock = {
                     setConversationId: setConversationIdMock,

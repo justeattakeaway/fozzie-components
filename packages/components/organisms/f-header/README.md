@@ -13,7 +13,7 @@ Global Header Component for Vue.js.
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-header.svg)](https://badge.fury.io/js/%40justeat%2Ff-header)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-header/badge.svg)](https://coveralls.io/github/justeat/f-header)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-header/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-header?targetFile=package.json)
+[![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/4bc223d1/f-header)
 
 
 ## Usage
@@ -59,6 +59,13 @@ export default {
 }
 ```
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-button | `yarn add @justeat/f-button` | `import '@justeat/f-button/dist/f-button.css';` |
+| f-popover | `yarn add @justeat/f-popover` | `import '@justeat/f-popover/dist/f-popover.css';` |
+
 
 ## Configuration
 
@@ -85,7 +92,7 @@ The props that can be defined are as follows:
 | userInfoUrl               | `String`      | `/api/account/details` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
 | showCountrySelector       | `Boolean`     | `false` | Defines whether the country selector should be shown in the navigation. |
 | showSkipLink              | `Boolean`     | `true`  | Set to false if you need to remove skip-to-main-content link from the header. |
-
+| shouldUseJetLogo                | `Boolean`     | `false`  | Set to true if you want to show Jet logo in the header. |
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 
 ### CSS styles
