@@ -535,11 +535,7 @@ workflows:
 
   deploy-storybook:
     jobs:
-      - approval:
-          type: approval
       - deploy-storybook:
-          requires:
-            - approval
           context: web-core
           filters:
             branches:
