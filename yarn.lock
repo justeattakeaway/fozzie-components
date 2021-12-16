@@ -2201,13 +2201,6 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-card@3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.3.0.tgz#5155637b630e17f2fc7ef851619729f3a2983d99"
-  integrity sha512-NXgoJG0ZlE+Z5rJwXEfU5lWsyGnnvZgm8z0XrB6RVVWTH2yUFQuDhiBphZiLdrMo3eMrS1KoH1M0/bngIQgryA==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-content-cards@6.0.0-beta.2":
   version "6.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
