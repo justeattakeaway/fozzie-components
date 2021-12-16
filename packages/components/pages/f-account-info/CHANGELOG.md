@@ -14,7 +14,7 @@ v0.13.0
 
 v0.12.0
 ------------------------------
-December 15, 2021
+*December 15, 2021*
 
 ### Added
 - Storybook Story with mocked data for details and addresses
