@@ -204,11 +204,11 @@ commands:
         type: string
     description: Locally builds all packages in the monorepo
     steps:
-      - restore_cache_dist_directories
+#      - restore_cache_dist_directories
       - run_command:
           command_description: Build packages
           command_name: ci:build:<< parameters.component_type >>
-      - save_cache_dist_directories
+#      - save_cache_dist_directories
 
   lint_packages:
     parameters:

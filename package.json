@@ -4,8 +4,12 @@
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build\"",
+    "ci:build:atoms": "cross-env-shell \"lerna run $LERNA_ARGS ci:build:atoms\"",
+    "ci:build:molecules": "cross-env-shell \"lerna run $LERNA_ARGS ci:build:molecules\"",
     "bundlewatch": "cross-env-shell \"bundlewatch --config bundlewatch.config.js\"",
     "lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --stream\"",
+    "ci:lint:atoms": "cross-env-shell \"lerna run $LERNA_ARGS ci:lint:atoms --stream\"",
+    "ci:lint:molecules": "cross-env-shell \"lerna run $LERNA_ARGS ci:lint:molecules --stream\"",
     "lint:fix": "lerna run lint -- --fix",
     "lint:style": "lerna run lint:style --stream",
     "prepublishOnly": "lerna run prepublishOnly --stream",
