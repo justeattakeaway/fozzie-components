@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.12.0
+------------------------------
+*December 16, 2021*
+
+### Changed
+- Simplified the Storybook file
+- Updated f-button to v3.2.0
+- Updated f-card to v3.4.0
+
 
 v0.11.0
 ------------------------------
