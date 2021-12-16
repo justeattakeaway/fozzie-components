@@ -382,6 +382,20 @@ jobs:
 
   working_directory: ~/repo
 
+  danger:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps:
+      - checkout
+      - run: # Install danger
+          name: Install danger
+          command: yarn add danger --dev -W
+      - run: # Run PR Checks
+          name: Run PR Checks
+          command: yarn danger ci
+
   build:
     executor: node
     environment:
@@ -406,9 +420,6 @@ jobs:
           key: yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
           paths:
             - node_modules
-      - run: # Run PR Checks
-          name: Run PR Checks
-          command: yarn danger ci
       - build_packages
       - run:
           name: Run Bundlewatch checks
@@ -483,6 +494,14 @@ jobs:
 
 workflows:
   version: 2
+
+  danger_checks:
+    jobs:
+      - danger:
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
 
   build_and_test:
     jobs:
