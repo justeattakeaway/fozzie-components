@@ -58,111 +58,6 @@ commands:
           name: Install node dependencies
           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
 
-  save_cache_dist_directories:
-    description: Saves cache for dist directories
-    steps:
-      - save_cache:
-          name: Cache for molecules
-          key: build-cache-molecules-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - packages/tools/f-vue-icons/dist
-            - packages/components/molecules/f-alert/dist
-            - packages/components/molecules/f-breadcrumbs/dist
-            - packages/components/molecules/f-card-with-content/dist
-            - packages/components/molecules/f-media-element/dist
-            - packages/components/molecules/f-mega-modal/dist
-            - packages/components/molecules/f-navigation-links/dist
-            - packages/components/molecules/f-promotions-showcase/dist
-            - packages/components/molecules/f-restaurant-card/dist
-            - packages/components/molecules/f-searchbox/dist
-            - packages/components/molecules/f-skeleton-loader/dist
-            - packages/components/molecules/f-tabs/dist
-            - packages/components/molecules/f-user-message/dist
-
-      - save_cache:
-          name: Cache for atoms
-          key: build-cache-atoms-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - packages/components/atoms/f-button/dist
-            - packages/components/atoms/f-card/dist
-            - packages/components/atoms/f-error-message/dist
-            - packages/components/atoms/f-form-field/dist
-            - packages/components/atoms/f-link/dist
-            - packages/components/atoms/f-popover/dist
-            - packages/components/atoms/f-image-tile/dist
-            - packages/components/atoms/f-spinner/dist
-            - packages/components/atoms/f-error-boundary/dist
-
-      - save_cache:
-          name: Cache for organisms
-          key: build-cache-organisms-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - packages/components/organisms/f-content-cards/dist
-            - packages/components/organisms/f-cookie-banner/dist
-            - packages/components/organisms/f-footer/dist
-            - packages/components/organisms/f-header/dist
-            - packages/components/organisms/f-status-banner/dist
-
-      - save_cache:
-          name: Cache for templates
-          key: build-cache-templates-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - packages/components/templates/f-template-subnav/dist
-
-      - save_cache:
-          name: Cache for pages
-          key: build-cache-pages-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - packages/components/pages/f-checkout/dist
-            - packages/components/pages/f-contact-preferences/dist
-            - packages/components/pages/f-loyalty/dist
-            - packages/components/pages/f-offers/dist
-            - packages/components/pages/f-registration/dist
-            - packages/components/pages/f-takeawaypay-activation/dist
-            - packages/components/pages/f-account-info/dist
-
-      - save_cache:
-          name: Cache for services
-          key: build-cache-services-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - packages/services/f-analytics/dist
-            - packages/services/f-consumer-oidc/dist
-            - packages/services/f-development-context/dist
-            - packages/services/f-feature-management/dist
-            - packages/services/f-globalisation/dist
-            - packages/services/f-http/dist
-            - packages/services/f-services/dist
-            - packages/services/f-statistics/dist
-            - packages/services/f-compatibility/dist
-
-  restore_cache_dist_directories:
-    description: Restores all the dist dircetories
-    steps:
-      - restore_cache:
-          name: Restore molecules Cache
-          keys:
-            - build-cache-molecules-master-
-      - restore_cache:
-          name: Restore atoms Cache
-          keys:
-            - build-cache-atoms-master-
-      - restore_cache:
-          name: Restore organisms Cache
-          keys:
-            - build-cache-organisms-master-
-      - restore_cache:
-          name: Restore pages Cache
-          keys:
-            - build-cache-templates-master-
-      - restore_cache:
-          name: Restore pages Cache
-          keys:
-            - build-cache-pages-master-
-      - restore_cache:
-          name: Restore services Cache
-          keys:
-            - build-cache-services-master-
-
   run_command:
     parameters:
       command_description:
@@ -181,15 +76,6 @@ commands:
               yarn << parameters.command_name >> --since master...HEAD
             fi
 
-  cache_checksum:
-    description: Yarn node_modules cache checksum
-    steps:
-      - run:
-          name: Create cache checksum file
-          command: |
-            mkdir -p ~/.tmp/checksumfiles
-            find . -type f -name 'yarn.lock' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/yarn.lock
-
   restore_node_modules_cache:
     description: Restore node_modules folder
     steps:
@@ -202,14 +88,15 @@ commands:
     parameters:
       component_type:
         type: string
+      component_type_folder:
+        type: string
     description: Locally builds all packages in the monorepo
     steps:
-      - restore_cache_dist_directories
       - run_command:
           command_description: Build packages
           command_name: ci:build:<< parameters.component_type >>
       - persist_to_workspace:
-          root: packages/components/<< parameters.component_type >>
+          root: << parameters.component_type_folder >>
           paths:
             - '*'
 #      - save_cache_dist_directories
@@ -399,7 +286,6 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps:
       - checkout
-      - cache_checksum
       - restore_cache:
             name: Restore Yarn Package Cache
             keys:
@@ -417,12 +303,15 @@ jobs:
     parameters:
       component_type:
         type: string
+      component_type_folder:
+        type: string
     steps:
       - attach_workspace:
           at: .
       - detect_root_change
       - build_packages:
           component_type: << parameters.component_type >>
+          component_type_folder: << parameters.component_type_folder >>
       - lint_packages:
           component_type: << parameters.component_type >>
 #
@@ -436,69 +325,69 @@ jobs:
 #      - slack_notify_fail
 #      - slack_notify_success
 
-  unit_tests:
-    executor: node
-    environment:
-      LERNA_ARGS: --concurrency 1
-    steps:
-      - checkout
-      - detect_root_change
-      - cache_checksum
-      - restore_node_modules_cache
-      - install_node_dependencies
-      - restore_cache_dist_directories
-      - unit_integration_tests
-      - slack_notify_fail
-      - slack_notify_success
+  # unit_tests:
+  #   executor: node
+  #   environment:
+  #     LERNA_ARGS: --concurrency 1
+  #   steps:
+  #     - checkout
+  #     - detect_root_change
+  #     - cache_checksum
+  #     - restore_node_modules_cache
+  #     - install_node_dependencies
+  #     - restore_cache_dist_directories
+  #     - unit_integration_tests
+  #     - slack_notify_fail
+  #     - slack_notify_success
 
-  browser_tests:
-    executor: node
-    steps:
-      - checkout
-      - detect_root_change
-      - cache_checksum
-      - restore_node_modules_cache
-      - install_node_dependencies
-      - restore_cache_dist_directories
-      - run: # Install Component Test Dependencies
-          name: Install Component Test Dependencies
-          command: yarn global add @vue/cli @vue/cli-service-global
-      - build_storybook
-      - run: # Serve Storybook
-          name: Serve Storybook
-          command: yarn storybook:serve-static
-          background: true
-      - component_tests
-      - accessibility_tests
-      - visual_regression_tests
-      - run:
-          name: Allure - Generate Test Results
-          command: yarn allure:generate
-          when: always
-      - store_artifacts:
-          path: allure-report
-      - slack_notify_fail
-      - slack_notify_success
+  # browser_tests:
+  #   executor: node
+  #   steps:
+  #     - checkout
+  #     - detect_root_change
+  #     - cache_checksum
+  #     - restore_node_modules_cache
+  #     - install_node_dependencies
+  #     - restore_cache_dist_directories
+  #     - run: # Install Component Test Dependencies
+  #         name: Install Component Test Dependencies
+  #         command: yarn global add @vue/cli @vue/cli-service-global
+  #     - build_storybook
+  #     - run: # Serve Storybook
+  #         name: Serve Storybook
+  #         command: yarn storybook:serve-static
+  #         background: true
+  #     - component_tests
+  #     - accessibility_tests
+  #     - visual_regression_tests
+  #     - run:
+  #         name: Allure - Generate Test Results
+  #         command: yarn allure:generate
+  #         when: always
+  #     - store_artifacts:
+  #         path: allure-report
+  #     - slack_notify_fail
+  #     - slack_notify_success
 
-  deploy-storybook:
-    executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-      RUN_ALL: true
-    steps:
-      - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
-      - build_packages
-      - run:
-          name: Deploy
-          command: yarn storybook:deploy
-      - slack_notify_fail
-      - slack_notify_success
+  # deploy-storybook:
+  #   executor: node
+  #   environment:
+  #     # required to prevent ENOMEM errors
+  #     LERNA_ARGS: --concurrency 1
+  #     RUN_ALL: true
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         name: Restore Yarn Package Cache
+  #         keys:
+  #           - yarn-packages-{{ checksum "yarn.lock" }}
+  #     - install_node_dependencies
+  #     - build_packages
+  #     - run:
+  #         name: Deploy
+  #         command: yarn storybook:deploy
+  #     - slack_notify_fail
+  #     - slack_notify_success
 
 workflows:
   version: 2
@@ -511,15 +400,25 @@ workflows:
             branches:
               ignore: [ 'gh-pages' ]
       - build:
-          matrix:
-            parameters:
-              component_type: [ 'atoms']
-          requires:
-            - install
+          name: build-atoms
           context: web-core
           filters:
             branches:
               ignore: ['gh-pages']
+          component_type: 'atoms'
+          component_type_folder: 'packages/components/atoms'
+          requires:
+            - install
+      - build:
+          name: build-molecules
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          component_type: 'molecules'
+          component_type_folder: 'packages/components/molecules'
+          requires:
+            - build-atoms
 
 #      - unit_tests: , 'organisms', 'pages', 'templates', 'services', 'storybook', 'tools'
 #          requires:
