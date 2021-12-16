@@ -49,8 +49,6 @@ const mountAccountInfo = async ({
 
 } = {}) => {
     const store = storeOverride || createStore({ state, actions });
-    // store.hasModule = hasModuleSpy;
-
     initialiseSpy = jest.spyOn(AccountInfo.methods, 'initialise');
 
     const mock = shallowMount(AccountInfo, {
@@ -155,7 +153,6 @@ describe('AccountInfo', () => {
         it('should log an info log', async () => {
             // Arrange & Act
             wrapper = await mountAccountInfo();
-            // await wrapper.vm.$nextTick();
 
             // Assert
             expect(logMocks.info).toHaveBeenCalledTimes(1);
@@ -258,10 +255,6 @@ describe('AccountInfo', () => {
         });
 
         describe('onFormSubmit ::', () => {
-            it.skip('should set shouldShowErrorPage flag to true if an error occurs', async () => {
-
-            });
-
             it('should log an info log', async () => {
                 // Act
                 wrapper = await mountAccountInfo();
@@ -277,6 +270,12 @@ describe('AccountInfo', () => {
                 );
             });
 
+            // to be added in a future pr
+            it.skip('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+
+            });
+
+            // to be added in a future pr
             it.skip('should not call the save action if no changes', async () => {
             });
         });
