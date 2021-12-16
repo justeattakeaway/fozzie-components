@@ -29,7 +29,10 @@ describe('Accordion', () => {
         describe('toggle ::', () => {
             let wrapper;
 
-            it('should change `isExpanded` to true when it is initally set to false', () => {
+            it.each([
+                [true, false],
+                [false, true]
+            ])('should change `isExpanded` to %s when it is initially set to %s', (expected, initial) => {
                 // Arrange
                 wrapper = shallowMount(Accordion, {
                     i18n,
@@ -38,7 +41,7 @@ describe('Accordion', () => {
                     propsData,
                     data () {
                         return {
-                            isExpanded: false
+                            isExpanded: initial
                         };
                     }
                 });
@@ -47,28 +50,7 @@ describe('Accordion', () => {
                 wrapper.vm.toggle();
 
                 // Assert
-                expect(wrapper.vm.$data.isExpanded).toBe(true);
-            });
-
-            it('should change `isExpanded` to false when it is initally set to true', () => {
-                // Arrange
-                wrapper = shallowMount(Accordion, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            isExpanded: true
-                        };
-                    }
-                });
-
-                // Act
-                wrapper.vm.toggle();
-
-                // Assert
-                expect(wrapper.vm.$data.isExpanded).toBe(false);
+                expect(wrapper.vm.$data.isExpanded).toBe(expected);
             });
         });
 
