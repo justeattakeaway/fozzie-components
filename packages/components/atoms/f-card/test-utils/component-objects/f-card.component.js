@@ -1,18 +1,14 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class Card extends Page {
-    constructor() {
+    constructor () {
         super('atom', 'card-component');
-    }
-
-    load () {
-        super.load(this.component);
     }
 
     get component () { return $('[data-test-id="card-component"]'); }
 
-    open (url) {
-        super.open(url);
+    load () {
+        super.load(this.component);
     }
 
     waitForComponent () {

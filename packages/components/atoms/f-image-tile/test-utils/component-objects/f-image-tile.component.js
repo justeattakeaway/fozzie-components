@@ -1,11 +1,11 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-module.exports = class Link extends Page {
+module.exports = class ImageTile extends Page {
     constructor () {
-        super('atom', 'v-link-component');
+        super('atom', 'image-tile-component');
     }
 
-    get component () { return $('[data-test-id="link-component"]'); }
+    get component () { return $('[data-test-id="imageTile"]'); }
 
     load () {
         super.load(this.component);
