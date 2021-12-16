@@ -5,7 +5,7 @@ module.exports = class ImageTile extends Page {
         super('atom', 'image-tile-component');
     }
 
-    get component () { return $('[data-test-id="image-tile-component"]'); }
+    get component () { return $('[data-test-id="imageTile"]'); }
 
     load () {
         super.load(this.component);
