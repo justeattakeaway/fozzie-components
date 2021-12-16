@@ -1,53 +1,57 @@
-// Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-// import {
-//     withKnobs, select, boolean
-// } from '@storybook/addon-knobs';
-import { boolean, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import ImageTile from '../src/components/ImageTile.vue';
 
 export default {
-    title: 'Components/Atoms',
+    title: 'Components/Atoms/f-image-tile',
     decorators: [withA11y]
 };
 
-export const ImageTileComponent = () => ({
+export const ImageTileComponent = (args, { argTypes }) => ({
     components: { ImageTile },
-    data () {
-        return {
-            dataTestId: 'image-tile'
-        };
-    },
-    props: {
-        href: {
-            default: text('Anchor link path', '/Chicken')
-        },
-
-        tileId: {
-            default: text('Image tile filter id', 'Chicken12334')
-        },
-
-        isSelected: {
-            default: boolean('Marks the filter as selected', false)
-        },
-
-        isLink: {
-            default: boolean('Component acts as a link, rather than default toggle', false)
-        },
-
-        displayText: {
-            default: text('Component display text', 'Chicken')
-        }
-    },
+    props: Object.keys(argTypes),
     template: `<image-tile
                     :data-test-id="dataTestId"
                     :href='href'
-                    :tileId='tileId'
-                    :isSelected='isSelected'
-                    :isLink='isLink'
-                    :displayText='displayText'
+                    :tile-id='tileId'
+                    :is-selected='isSelected'
+                    :is-link='isLink'
+                    :display-text='displayText'
                 >
                 </image-tile>`
 });
+
+ImageTileComponent.argTypes = {
+    href: {
+        control: { type: 'text' },
+        description: 'Anchor link path',
+        default: '/Chicken',
+        defaultValue: '/Chicken'
+    },
+    tileId: {
+        control: { type: 'text' },
+        description: 'Image tile filter id',
+        defaultValue: 'Chicken'
+    },
+    displayText: {
+        control: { type: 'text' },
+        description: 'Component display text',
+        defaultValue: 'Chicken'
+    },
+    imgSrc: {
+        control: { type: 'text' },
+        description: 'Cuisine image link',
+        defaultValue: 'https://via.placeholder.com/150'
+    },
+    isSelected: {
+        control: { type: 'boolean' },
+        description: 'Marks the filter as selected',
+        defaultValue: false
+    },
+    isLink: {
+        control: { type: 'boolean' },
+        description: 'Component acts as a link, rather than default toggle',
+        defaultValue: false
+    }
+};
 
 ImageTileComponent.storyName = 'f-image-tile';
