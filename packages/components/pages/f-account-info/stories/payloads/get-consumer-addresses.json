@@ -1,0 +1,20 @@
+{ "Addresses": [
+  {
+    "AddressId": 1050450174,
+    "City": "Inverness",
+    "ZipCode": "AB1 4DJ",
+    "AddressName": "School",
+    "IsDefault": true,
+    "Line1": "Hogwarts",
+    "Line2": "Some huge castle in Scotland"
+  },
+  {
+    "AddressId": 1050450175,
+    "City": "Bristol",
+    "ZipCode": "BS1 9DJ",
+    "AddressName": "Office",
+    "IsDefault": false,
+    "Line1": "Takeaway",
+    "Line2": "Broad Quay House"
+  }]
+}

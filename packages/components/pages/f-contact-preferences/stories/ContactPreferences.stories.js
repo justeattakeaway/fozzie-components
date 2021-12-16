@@ -6,9 +6,7 @@ import { locales } from '@justeat/storybook/constants/globalisation';
 import ContactPreferences from '../src/components/ContactPreferences.vue';
 import fContactPreferencesModule from '../src/store/contactPreferences.module';
 import {
-    authToken,
     setupApiState,
-    setupNewsDataState,
     apiStates,
     apiStateOptions
 } from './story.helper';
@@ -43,20 +41,26 @@ export const ContactPreferencesComponent = () => ({
         }
     },
 
-    computed: {
-        authToken () {
-            return authToken;
+    watch: {
+        apiState: {
+            immediate: true,
+            async handler (value) {
+                setupApiState({
+                    apiState: value
+                });
+            }
         },
 
-        prepareStory () {
-            setupApiState({
-                apiState: this.apiState
-            });
-            setupNewsDataState({
-                store: this.$store,
-                emailState: this.isNewsEmailOptedIn,
-                smsState: this.isNewsSmsOptedIn
-            });
+        isNewsEmailOptedIn: {
+            async handler (value) {
+                this.$store.dispatch('fContactPreferencesModule/editPreference', { key: 'news', field: 'emailValue', value });
+            }
+        },
+
+        isNewsSmsOptedIn: {
+            async handler (value) {
+                this.$store.dispatch('fContactPreferencesModule/editPreference', { key: 'news', field: 'smsValue', value });
+            }
         }
     },
 
@@ -67,13 +71,12 @@ export const ContactPreferencesComponent = () => ({
     }),
 
     template: '<contact-preferences ' +
-    ':authToken="authToken" ' +
+    'authToken="some-auth-token" ' +
     ':isAuthFinished="true" ' +
     ':locale="locale" ' +
     'smart-gateway-base-url="" ' +
-    ':prepareStory="prepareStory" ' +
     // eslint-disable-next-line no-template-curly-in-string
-    ':key="`${authToken},${locale}`" />'
+    ':key="`${locale}`" />'
 
 });
 
