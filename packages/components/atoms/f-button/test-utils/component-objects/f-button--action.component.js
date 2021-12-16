@@ -1,19 +1,14 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-imageTile-selectors');
 
-module.exports = class ImageTile extends Page {
+module.exports = class ActionButton extends Page {
     constructor () {
-        super('atom', 'image-tile-component');
+        super('atom-folder', 'f-button--button-component');
     }
 
-    get component () { return $(COMPONENT); }
+    get component () { return $('[data-test-id="action-button-component"]'); }
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     waitForComponent () {
@@ -23,4 +18,8 @@ module.exports = class ImageTile extends Page {
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
-}
+
+    isComponentClickable () {
+        return this.component.isClickable();
+    }
+};

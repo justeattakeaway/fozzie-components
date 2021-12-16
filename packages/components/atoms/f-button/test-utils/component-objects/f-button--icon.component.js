@@ -5,30 +5,21 @@ module.exports = class IconButton extends Page {
         super('atom-folder', 'f-button--icon-button-component');
     }
 
-    get actionComponent () { return $('[data-test-id="action-button-component"]'); }
-
-    open (url) {
-        super.open(url);
-    }
+    get component () { return $('[data-test-id="action-button-component"]'); }
 
     load () {
-        super.load(this.actionComponent);
+        super.load(this.component);
     }
 
-    /**
-     * @description
-     * Sets the data for the button component.
-     *
-     * @param {Object} button
-     * @param {String} button.type
-     * @param {String} button.size
-     */
-
-    waitForActionComponent () {
-        super.waitForComponent(this.actionComponent);
+    waitForComponent () {
+        super.waitForComponent(this.component);
     }
 
-    isActionComponentDisplayed () {
-        return this.actionComponent.isDisplayed();
+    isComponentDisplayed () {
+        return this.component.isDisplayed();
+    }
+
+    isComponentClickable () {
+        return this.component.isClickable();
     }
 };
