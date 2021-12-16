@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.13.0
 ------------------------------
-*December 10, 2021*
+*December 16, 2021*
 
 ### Added
 - Ability to have split notes enabled or disabled
