@@ -13,9 +13,25 @@ v0.11.0
 - Updated f-card to v3.4.0
 
 
+v0.11.0
+------------------------------
+*December 16, 2021*
+
+### Added
+- `info` and `error` logs to preferences fetch and save requests
+- Unit tests
+
+### Changed
+- Move store module registration from `created` to `beforeCreate`.
+
+### Removed
+- Mounted hook which was duplicating the `initialise()` call
+- Unused variable from story helper
+
+
 v0.10.0
 ------------------------------
-*December 02, 2021*
+*December 2, 2021*
 
 ### Changed
 - Generic checkboxes to use `f-form-field`
