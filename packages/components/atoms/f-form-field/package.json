@@ -28,7 +28,9 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-form-field ./src/index.js",
+    "ci:build:atoms": "vue-cli-service build --target lib --name f-form-field ./src/index.js",
     "lint": "vue-cli-service lint",
+    "ci:lint:atoms": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
