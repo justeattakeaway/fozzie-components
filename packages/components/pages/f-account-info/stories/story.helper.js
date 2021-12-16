@@ -1,8 +1,6 @@
 import getConsumerDetails from './payloads/get-consumer-details.json';
 import getConsumerAddresses from './payloads/get-consumer-addresses.json';
 
-export const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
-
 const httpStatusCodes = {
     ok: 200,
     internalServerError: 500
@@ -34,7 +32,7 @@ export const apiGetPostAddressesStateOptions = {
     }
 };
 
-const apiGetAddressesStateDefinitions = {
+const apiAddressesStateDefinitions = {
     none: { // Good GET and good POST
         state: apiStates.none,
         states: [{
@@ -69,7 +67,7 @@ const apiGetAddressesStateDefinitions = {
     }
 };
 
-const apiGetDetailsStateDefinitions = {
+const apiDetailsStateDefinitions = {
     none: { // Good GET and good POST
         state: apiStates.none,
         states: [{
@@ -105,20 +103,21 @@ const apiGetDetailsStateDefinitions = {
 };
 
 /**
-* Prepares the api mocks to reflect what value the 'Set Api State' Storybook Knobs equals.
-* @param {apiStates} apiState - The value of the 'Set Api State' Storybook Knob (defaults to 'none')
+* Prepares the GET/POST mocks for the api calls to reflect what value the Storybook Knobs equals.
+* @param {apiStates} apiDetailsState - The current set value of the 'Details' Storybook Knob (defaults to 'none')
+* @param {apiStates} apiAddressState - The current set value of the 'Address' Storybook Knob (defaults to 'none')
 */
 export const setupApiState = ({
-    apiGetDetailsState = apiStates.none,
-    apiGetAddresseState = apiStates.none
+    apiDetailsState = apiStates.none,
+    apiAddressState = apiStates.none
 }) => {
     process.mockFactory.reset();
 
     // Get Details
-    Object.entries(apiGetDetailsStateDefinitions).forEach(e => {
+    Object.entries(apiDetailsStateDefinitions).forEach(e => {
         const [, definition] = e;
 
-        if (definition.state === apiGetDetailsState) {
+        if (definition.state === apiDetailsState) {
             definition.states.forEach(x => {
                 process.mockFactory.setupMockResponse(
                     x.method,
@@ -132,10 +131,10 @@ export const setupApiState = ({
     });
 
     // Get Addresses
-    Object.entries(apiGetAddressesStateDefinitions).forEach(e => {
+    Object.entries(apiAddressesStateDefinitions).forEach(e => {
         const [, definition] = e;
 
-        if (definition.state === apiGetAddresseState) {
+        if (definition.state === apiAddressState) {
             definition.states.forEach(x => {
                 process.mockFactory.setupMockResponse(
                     x.method,

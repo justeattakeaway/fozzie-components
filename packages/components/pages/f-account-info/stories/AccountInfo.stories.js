@@ -6,7 +6,6 @@ import { locales } from '@justeat/storybook/constants/globalisation';
 import AccountInfo from '../src/components/AccountInfo.vue';
 import fAccountInfoModule from '../src/store/accountInfo.module';
 import {
-    authToken,
     setupApiState,
     apiStates,
     apiGetPostDetailsStateOptions,
@@ -26,24 +25,35 @@ export const AccountInfoComponent = () => ({
         locale: {
             default: select('Locale', [locales.gb], locales.gb)
         },
-        apiGetDetailsState: {
+
+        apiDetailsState: {
             default: select(apiGetPostDetailsStateOptions.title, apiGetPostDetailsStateOptions.states, apiStates.none)
         },
-        apiGetAddressesState: {
+
+        apiAddressesState: {
             default: select(apiGetPostAddressesStateOptions.title, apiGetPostAddressesStateOptions.states, apiStates.none)
         }
     },
 
-    computed: {
-        authToken () {
-            return authToken;
+    watch: {
+        apiDetailsState: {
+            immediate: true,
+            async handler (value) {
+                setupApiState({
+                    apiDetailsState: value,
+                    apiAddressState: this.apiAddressesState
+                });
+            }
         },
 
-        prepareStory () {
-            setupApiState({
-                apiGetDetailsState: this.apiGetDetailsState,
-                apiGetAddressesState: this.apiGetAddressesState
-            });
+        apiAddressesState: {
+            immediate: true,
+            async handler (value) {
+                setupApiState({
+                    apiDetailsState: this.apiDetailsState,
+                    apiAddressState: value
+                });
+            }
         }
     },
 
@@ -54,13 +64,12 @@ export const AccountInfoComponent = () => ({
     }),
 
     template: '<account-info ' +
-    ':authToken="authToken" ' +
+    'authToken="some-auth-token" ' +
     ':isAuthFinished="true" ' +
     ':locale="locale" ' +
     'smart-gateway-base-url="" ' +
-    ':prepareStory="prepareStory" ' +
     // eslint-disable-next-line no-template-curly-in-string
-    ':key="`${authToken},${locale}`" />'
+    ':key="`${locale}`" />'
 });
 
 AccountInfoComponent.storyName = 'f-account-info';

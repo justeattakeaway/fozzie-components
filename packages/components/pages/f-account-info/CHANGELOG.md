@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.13.0
 ------------------------------
-*December 14, 2021*
+*December 16, 2021*
 
 ### Added
 - Error handling and error card using `f-card-with-content`
@@ -14,7 +14,7 @@ v0.13.0
 
 v0.12.0
 ------------------------------
-*December 10, 2021*
+December 15, 2021
 
 ### Added
 - Storybook Story with mocked data for details and addresses
