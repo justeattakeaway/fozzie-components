@@ -32,7 +32,6 @@
                     :scroll-to-element="scrollToElement"
                     :available-fulfilment-times-key="availableFulfilmentTimesKey"
                     :is-form-submitting="isFormSubmitting"
-                    :is-split-notes-enabled="checkoutFeatures.isSplitNotesEnabled"
                     v-on="formEvents" />
 
                 <template
@@ -46,7 +45,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import Card from '@justeat/f-card';
@@ -231,6 +230,7 @@ export default {
             'checkoutErrorMessage',
             'customer',
             'errors',
+            'features',
             'geolocation',
             'isGuestCreated',
             'hasAsapSelected',
@@ -250,6 +250,10 @@ export default {
 
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields'
+        ]),
+
+        ...mapGetters(VUEX_CHECKOUT_MODULE, [
+            'formattedNotes'
         ]),
 
         isCheckoutMethodDelivery () {
@@ -399,13 +403,15 @@ export default {
             'getBasket',
             'getCheckout',
             'getGeoLocation',
+            'getUserNotes',
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
             'updateUserNotes',
             'updateCheckoutErrorMessage',
             'updateAddress',
-            'getNotesConfiguration'
+            'getNotesConfiguration',
+            'setCheckoutFeatures'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
@@ -418,6 +424,7 @@ export default {
          */
         async initialise () {
             this.setExperimentValues(this.experiments);
+            this.setCheckoutFeatures(this.checkoutFeatures);
 
             this.isLoading = true;
 
@@ -851,15 +858,15 @@ export default {
             this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
-        getMappedDataForUpdateCheckout () {
-            const notes = this.getNotes();
+        async getMappedDataForUpdateCheckout () {
+            console.log('formattedNotes', this.formattedNotes);
             return mapUpdateCheckoutRequest({
                 address: this.address,
                 customer: this.customer,
                 isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                 isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
                 time: this.time,
-                notes,
+                notes: this.formattedNotes,
                 geolocation: this.geolocation,
                 asap: this.hasAsapSelected,
                 tableIdentifier: this.dineIn.tableIdentifier
@@ -867,7 +874,7 @@ export default {
         },
 
         async loadNotesConfiguration () {
-            if (this.checkoutFeatures.isSplitNotesEnabled) {
+            if (this.features.isSplitNotesEnabled) {
                 try {
                     await this.getNotesConfiguration({
                         url: `${this.getNoteConfigUrl}/${this.restaurant.id}/checkout-note-types`,
@@ -877,10 +884,6 @@ export default {
                     this.handleEventLogging('NotesConfigurationFailure');
                 }
             }
-        },
-
-        getNotes () {
-            return this.checkoutFeatures.isSplitNotesEnabled ? this.notes : [{ type: 'delivery', value: this.notes.order?.note }];
         }
     }
 };

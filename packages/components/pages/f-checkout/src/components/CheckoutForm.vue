@@ -31,7 +31,7 @@
 
         <form-selector :key="availableFulfilmentTimesKey" />
 
-        <checkout-notes :is-split-notes-enabled="isSplitNotesEnabled" />
+        <checkout-notes />
 
         <f-button
             :class="[
@@ -110,11 +110,6 @@ export default {
         isFormSubmitting: {
             type: Boolean,
             required: true
-        },
-
-        isSplitNotesEnabled: {
-            type: Boolean,
-            default: false
         }
     },
 

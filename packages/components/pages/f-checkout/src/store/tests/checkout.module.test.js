@@ -153,7 +153,8 @@ const defaultState = {
     notes: {},
     notesConfiguration: {},
     geolocation: null,
-    hasAsapSelected: false
+    hasAsapSelected: false,
+    features: {}
 };
 
 const analyticsService = {

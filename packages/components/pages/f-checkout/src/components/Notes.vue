@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isSplitNotesEnabled">
+    <div v-if="features.isSplitNotesEnabled">
         <accordion
             :id="noteTypeCourierOrOrder"
             :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
@@ -25,7 +25,7 @@
         </accordion>
     </div>
     <form-field
-        v-else-if="!isSplitNotesEnabled"
+        v-else
         :label-text="$t(`userNote.order.delivery.title`)"
         :placeholder="$t(`userNote.order.${serviceType}.placeholder`)"
         :value="noteValue"
@@ -37,8 +37,9 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import FormField from '@justeat/f-form-field';
-import Accordion from './Accordion.vue';
 import '@justeat/f-form-field/dist/f-form-field.css';
+
+import Accordion from './Accordion.vue';
 import {
     CHECKOUT_NOTE_TYPE_ORDER,
     CHECKOUT_NOTE_TYPE_COURIER,
@@ -56,15 +57,21 @@ export default {
         loggerMixin
     ],
 
-    props: {
-        isSplitNotesEnabled: {
-            type: Boolean,
-            default: false
-        }
+    data () {
+        return {
+            inputStyles: {
+                inputType: 'textarea',
+                cols: 30,
+                rows: 7,
+                maxlength: 200,
+                hasInputDescription: true
+            }
+        };
     },
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
+            'features',
             'notesConfiguration',
             'serviceType',
             'notes'
@@ -84,16 +91,6 @@ export default {
 
         kitchenNoteValue () {
             return this.notes.kitchen?.note || '';
-        },
-
-        inputStyles () {
-            return {
-                inputType: 'textarea',
-                cols: 30,
-                rows: 7,
-                maxlength: 200,
-                hasInputDescription: true
-            };
         }
     },
 

@@ -31,6 +31,7 @@ import {
     UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
     UPDATE_DINEIN_DETAILS,
+    UPDATE_CHECKOUT_FEATURES,
     UPDATE_USER_NOTES
 } from './mutation-types';
 
@@ -136,7 +137,8 @@ export default {
         isLoggedIn: false,
         isGuestCreated: false,
         geolocation: null,
-        hasAsapSelected: false
+        hasAsapSelected: false,
+        features: {}
     }),
 
     actions: {
@@ -212,6 +214,16 @@ export default {
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
+        },
+
+        /**
+         * Set features passed in from CoreWeb configuration
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Features provided by Coreweb configuration file.
+         */
+        setCheckoutFeatures: ({ commit }, features) => {
+            commit(UPDATE_CHECKOUT_FEATURES, features);
         },
 
         /**
@@ -602,8 +614,16 @@ export default {
             state.customer.dateOfBirth = dateOfBirth;
         },
 
+        [UPDATE_CHECKOUT_FEATURES]: (state, features) => {
+            state.features = features;
+        },
+
         [UPDATE_NOTES_CONFIGURATION]: (state, notesConfig) => {
             state.notesConfiguration = notesConfig;
         }
+    },
+
+    getters: {
+        formattedNotes: state => (state.features.isSplitNotesEnabled ? state.notes : [{ type: 'delivery', value: state.notes.order?.note }])
     }
 };

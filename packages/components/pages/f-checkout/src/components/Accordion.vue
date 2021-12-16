@@ -59,9 +59,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-    $icon-size: 16px;
+    $icon-size: $font-size-base-px;
     .c-checkout-accordion-header {
-        font-size: 1rem;
+        @include font-size('body-s');
         display: flex;
         justify-content: space-between;
         background: transparent;
