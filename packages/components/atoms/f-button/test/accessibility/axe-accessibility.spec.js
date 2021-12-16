@@ -1,6 +1,6 @@
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
-const Button = require('../../test-utils/component-objects/f-button.component');
+const ActionButton = require('../../test-utils/component-objects/f-button--action.component');
 const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
 const IconButton = require('../../test-utils/component-objects/f-button--icon.component');
 
@@ -9,7 +9,7 @@ let button;
 describe('Accessibility tests', () => {
     it('a11y - should test f-button action component WCAG compliance', () => {
         // Arrange
-        button = new Button();
+        button = new ActionButton();
 
         // Act
         button.load();

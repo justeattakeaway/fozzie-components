@@ -1,4 +1,4 @@
-const Button = require('../../test-utils/component-objects/f-button.component');
+const ActionButton = require('../../test-utils/component-objects/f-button--action.component');
 const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
 const IconButton = require('../../test-utils/component-objects/f-button--icon.component');
 
@@ -8,7 +8,7 @@ describe('f-button Desktop visual tests', () => {
     describe('primary, secondary, outline and ghost buttons in all 4 sizes', () => {
         it('should be displayed', () => {
             // Arrange
-            button = new Button();
+            button = new ActionButton();
 
             // Act
             button.load();
