@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const ContactPreferences = require('../../test-utils/component-objects/f-contact-preferences.component');
+const ContactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
 
 let contactPreferences;
 
