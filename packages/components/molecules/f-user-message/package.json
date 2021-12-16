@@ -28,7 +28,9 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-user-message ./src/index.js",
+    "ci:build:molecules": "vue-cli-service build --target lib --name f-user-message ./src/index.js",
     "lint": "vue-cli-service lint --no-fix",
+    "ci:lint:molecules": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",

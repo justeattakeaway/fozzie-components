@@ -199,20 +199,26 @@ commands:
             - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
 
   build_packages:
+    parameters:
+      component_type:
+        type: string
     description: Locally builds all packages in the monorepo
     steps:
       - restore_cache_dist_directories
       - run_command:
           command_description: Build packages
-          command_name: "build"
+          command_name: ci:build:<< parameters.component_type >>
       - save_cache_dist_directories
 
   lint_packages:
+    parameters:
+      component_type:
+        type: string
     description: Locally lints all packages in the monorepo
     steps:
       - run_command:
           command_description: Run linting for packages
-          command_name: "lint"
+          command_name: ci:lint:<< parameters.component_type >>
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
@@ -382,40 +388,53 @@ jobs:
 
   working_directory: ~/repo
 
-  build:
+  install:
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps:
       - checkout
-      - detect_root_change
       - cache_checksum
       - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - restore_node_modules_cache
+            name: Restore Yarn Package Cache
+            keys:
+              - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - persist_to_workspace:
+          root: .
           paths:
-            - ~/.cache/yarn
-      - save_cache:
-          key: yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
+            - '*'
+  build:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    parameters:
+      component_type:
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - detect_root_change
+      - build_packages:
+          component_type: << parameters.component_type >>
+      - persist_to_workspace:
+          root: .
           paths:
-            - node_modules
-      - run: # Run PR Checks
-          name: Run PR Checks
-          command: yarn danger ci
-      - build_packages
-      - run:
-          name: Run Bundlewatch checks
-          command: yarn bundlewatch
-      - lint_packages
-      - slack_notify_fail
-      - slack_notify_success
+            - '*'
+      - lint_packages:
+          component_type: << parameters.component_type >>
+#
+#      - run: # Run PR Checks
+#          name: Run PR Checks
+#          command: yarn danger ci
+
+#      - run:
+#          name: Run Bundlewatch checks
+#          command: yarn bundlewatch
+#      - slack_notify_fail
+#      - slack_notify_success
 
   unit_tests:
     executor: node
@@ -486,32 +505,42 @@ workflows:
 
   build_and_test:
     jobs:
+      - install:
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
       - build:
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-
-      - unit_tests:
+          matrix:
+            parameters:
+              component_type: [ 'atoms', 'molecules']
           requires:
-            - build
+            - install
           context: web-core
           filters:
             branches:
               ignore: ['gh-pages']
 
-      - browser_tests:
-          requires:
-            - build
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
+#      - unit_tests: , 'organisms', 'pages', 'templates', 'services', 'storybook', 'tools'
+#          requires:
+#            - build
+#          context: web-core
+#          filters:
+#            branches:
+#              ignore: ['gh-pages']
+#
+#      - browser_tests:
+#          requires:
+#            - build
+#          context: web-core
+#          filters:
+#            branches:
+#              ignore: ['gh-pages']
 
-  deploy-storybook:
-    jobs:
-      - deploy-storybook:
-          context: web-core
-          filters:
-            branches:
-              only: master
+#  deploy-storybook:
+#    jobs:
+#      - deploy-storybook:
+#          context: web-core
+#          filters:
+#            branches:
+#              only: master
