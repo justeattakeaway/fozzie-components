@@ -322,7 +322,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true)
-            .withQuery('$knob-Note%20types', 'get-notes-config-split');
+            .withQuery('$knob-Note types', 'get-notes-config-split');
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', 'desktop');
     });
