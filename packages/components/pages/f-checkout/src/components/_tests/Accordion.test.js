@@ -57,7 +57,10 @@ describe('Accordion', () => {
         describe('template ::', () => {
             let wrapper;
 
-            it('should toggle the accordion visibility when heading is clicked', () => {
+            it.each([
+                [true, false],
+                [false, true]
+            ])('should toggle the accordion visibility from %s to %s when heading is clicked', (expected, initial) => {
                 // Arrange
                 const toggleSpy = jest.spyOn(Accordion.methods, 'toggle');
                 wrapper = shallowMount(Accordion, {
@@ -67,7 +70,7 @@ describe('Accordion', () => {
                     propsData,
                     data () {
                         return {
-                            isExpanded: false
+                            isExpanded: initial
                         };
                     }
                 });
@@ -78,7 +81,7 @@ describe('Accordion', () => {
 
                 // Assert
                 expect(toggleSpy).toHaveBeenCalled();
-                expect(wrapper.vm.$data.isExpanded).toBe(true);
+                expect(wrapper.vm.$data.isExpanded).toBe(expected);
             });
         });
     });
