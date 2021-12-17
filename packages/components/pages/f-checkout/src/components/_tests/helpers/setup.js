@@ -99,6 +99,9 @@ const defaultCheckoutActions = {
 const defaultCheckoutGetters = {
     formattedNotes () {
         return { order: { note: 'This is an order note' } };
+    },
+    noteValue () {
+        return 'This is a note';
     }
 };
 

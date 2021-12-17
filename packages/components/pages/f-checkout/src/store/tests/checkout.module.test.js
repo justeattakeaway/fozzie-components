@@ -20,7 +20,11 @@ import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
 import {
-    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, ERROR_TYPES, DUPLICATE_ORDER
+    VUEX_CHECKOUT_ANALYTICS_MODULE,
+    DEFAULT_CHECKOUT_ISSUE,
+    ERROR_TYPES, DUPLICATE_ORDER,
+    CHECKOUT_NOTE_TYPE_COURIER,
+    CHECKOUT_NOTE_TYPE_ORDER
 } from '../../constants';
 
 import {
@@ -45,7 +49,7 @@ import {
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
 
-const { actions, mutations } = CheckoutModule;
+const { actions, getters, mutations } = CheckoutModule;
 
 const {
     createGuestUser,
@@ -1288,6 +1292,199 @@ describe('CheckoutModule', () => {
 
             // Assert
             expect(commit).toHaveBeenCalledWith(mutation, value);
+        });
+    });
+
+    describe('getters ::', () => {
+        describe('formattedNotes ::', () => {
+            describe('when split notes is enabled', () => {
+                // Arrange
+                const splitNotesEnabledState = {
+                    ...state,
+                    features: {
+                        isSplitNotesEnabled: true
+                    },
+                    notes: { courier: { note: 'Please do not knock' }, kitchen: { note: 'No ketchup please' } }
+                };
+
+                it('should return the formattedNotes as they are stored in state', () => {
+                    // Act
+                    const result = getters.formattedNotes(splitNotesEnabledState);
+
+                    // Assert
+                    expect(result).toEqual(splitNotesEnabledState.notes);
+                });
+            });
+
+            describe('when split notes is disabled', () => {
+                // Arrange
+                const splitNotesDisabledState = {
+                    ...state,
+                    features: {
+                        isSplitNotesEnabled: false
+                    },
+                    notes: { order: { note: 'Please do not knock' } }
+                };
+
+                it('should return the formattedNotes as they are stored in state', () => {
+                    const expectedResult = [{ type: 'delivery', value: splitNotesDisabledState.notes.order.note }];
+
+                    // Act
+                    const result = getters.formattedNotes(splitNotesDisabledState);
+
+                    // Assert
+                    expect(result).toEqual(expectedResult);
+                });
+            });
+        });
+
+        describe('shouldShowKitchenNotes ::', () => {
+            describe('when kitchen note accepted is returned `true` from the API', () => {
+                // Arrange
+                const kitchenNotesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            kitchenNoteAccepted: true
+                        }
+                    }
+                };
+
+                it('should return true', () => {
+                    // Act
+                    const result = getters.shouldShowKitchenNotes(kitchenNotesState);
+
+                    // Assert
+                    expect(result).toEqual(true);
+                });
+            });
+
+            describe('when kitchen note accepted is returned `false` from the API', () => {
+                // Arrange
+                const kitchenNotesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            kitchenNoteAccepted: false
+                        }
+                    }
+                };
+
+                it('should return false', () => {
+                    // Act
+                    const result = getters.shouldShowKitchenNotes(kitchenNotesState);
+
+                    // Assert
+                    expect(result).toEqual(false);
+                });
+            });
+        });
+
+        describe('noteTypeCourierOrOrder ::', () => {
+            describe('when courier note accepted is returned `true` from the API', () => {
+                // Arrange
+                const courierNotesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            courierNoteAccepted: true
+                        }
+                    }
+                };
+
+                it(`should return ${CHECKOUT_NOTE_TYPE_COURIER}`, () => {
+                    // Act
+                    const result = getters.noteTypeCourierOrOrder(courierNotesState);
+
+                    // Assert
+                    expect(result).toEqual(CHECKOUT_NOTE_TYPE_COURIER);
+                });
+            });
+
+            describe('when courier note accepted is returned `false` from the API', () => {
+                // Arrange
+                const courierNotesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            courierNoteAccepted: false
+                        }
+                    }
+                };
+
+                it(`should return ${CHECKOUT_NOTE_TYPE_ORDER}`, () => {
+                    // Act
+                    const result = getters.noteTypeCourierOrOrder(courierNotesState);
+
+                    // Assert
+                    expect(result).toEqual(CHECKOUT_NOTE_TYPE_ORDER);
+                });
+            });
+        });
+
+        describe('noteValue ::', () => {
+            describe('when courierNote is accepted', () => {
+                // Arrange
+                const notesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            courierNoteAccepted: true
+                        }
+                    },
+                    notes: { courier: { note: 'This is a courier note' }, order: { note: 'This is an order note' } }
+                };
+
+                it(`should return ${notesState.notes.courier.note}`, () => {
+                    // Act
+                    const result = getters.noteValue(notesState);
+
+                    // Assert
+                    expect(result).toEqual(notesState.notes.courier.note);
+                });
+            });
+
+            describe('when courierNote is not accepted', () => {
+                // Arrange
+                const notesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            courierNoteAccepted: false
+                        }
+                    },
+                    notes: { courier: { note: 'This is a courier note' }, order: { note: 'This is an order note' } }
+                };
+
+                it(`should return ${notesState.notes.order.note}`, () => {
+                    // Act
+                    const result = getters.noteValue(notesState);
+
+                    // Assert
+                    expect(result).toEqual(notesState.notes.order.note);
+                });
+            });
+        });
+
+        describe('kitchenNoteValue ::', () => {
+            it('should return the value of the kitchen note', () => {
+                // Arrange
+                const notesState = {
+                    ...state,
+                    notes: { kitchen: { note: 'This is a kitchen note' } }
+                };
+                    // Act
+                const result = getters.kitchenNoteValue(notesState);
+
+                // Assert
+                expect(result).toEqual(notesState.notes.kitchen.note);
+            });
         });
     });
 });

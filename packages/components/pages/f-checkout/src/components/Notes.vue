@@ -35,14 +35,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 
 import Accordion from './Accordion.vue';
 import {
-    CHECKOUT_NOTE_TYPE_ORDER,
-    CHECKOUT_NOTE_TYPE_COURIER,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import loggerMixin from '../mixins/logger.mixin';
@@ -77,21 +75,12 @@ export default {
             'notes'
         ]),
 
-        shouldShowKitchenNotes () {
-            return this.notesConfiguration[this.serviceType]?.kitchenNoteAccepted;
-        },
-
-        noteTypeCourierOrOrder () {
-            return this.notesConfiguration[this.serviceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER;
-        },
-
-        noteValue () {
-            return this.noteTypeCourierOrOrder === CHECKOUT_NOTE_TYPE_COURIER ? this.notes.courier?.note : this.notes.order?.note;
-        },
-
-        kitchenNoteValue () {
-            return this.notes.kitchen?.note || '';
-        }
+        ...mapGetters(VUEX_CHECKOUT_MODULE, [
+            'kitchenNoteValue',
+            'noteTypeCourierOrOrder',
+            'noteValue',
+            'shouldShowKitchenNotes'
+        ])
     },
 
     methods: {

@@ -2,7 +2,8 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
 import {
-    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE, ERROR_TYPES
+    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE, ERROR_TYPES,
+    CHECKOUT_NOTE_TYPE_COURIER, CHECKOUT_NOTE_TYPE_ORDER
 } from '../constants';
 import basketApi from '../services/basketApi';
 import checkoutApi from '../services/checkoutApi';
@@ -34,6 +35,7 @@ import {
     UPDATE_CHECKOUT_FEATURES,
     UPDATE_USER_NOTES
 } from './mutation-types';
+
 
 import checkoutIssues from '../checkout-issues';
 
@@ -624,6 +626,10 @@ export default {
     },
 
     getters: {
-        formattedNotes: state => (state.features.isSplitNotesEnabled ? state.notes : [{ type: 'delivery', value: state.notes.order?.note }])
+        formattedNotes: state => (state.features.isSplitNotesEnabled ? state.notes : [{ type: 'delivery', value: state.notes.order?.note }]),
+        shouldShowKitchenNotes: state => state.notesConfiguration[state.serviceType]?.kitchenNoteAccepted,
+        noteTypeCourierOrOrder: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER),
+        noteValue: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? state.notes.courier?.note : state.notes.order?.note),
+        kitchenNoteValue: state => state.notes.kitchen?.note || ''
     }
 };

@@ -10,6 +10,7 @@ v3.13.0
 ### Added
 - Ability to have split notes enabled or disabled
 
+
 v3.12.0
 ------------------------------
 *December 6, 2021*
