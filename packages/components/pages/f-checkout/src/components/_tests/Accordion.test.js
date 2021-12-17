@@ -60,7 +60,7 @@ describe('Accordion', () => {
             it.each([
                 [true, false],
                 [false, true]
-            ])('should toggle the accordion visibility from %s to %s when heading is clicked', (expected, initial) => {
+            ])('should toggle the accordion visibility from %s to %s when heading is clicked', (initial, expected) => {
                 // Arrange
                 const toggleSpy = jest.spyOn(Accordion.methods, 'toggle');
                 wrapper = shallowMount(Accordion, {

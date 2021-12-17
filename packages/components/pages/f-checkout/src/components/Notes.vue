@@ -69,10 +69,7 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'features',
-            'notesConfiguration',
-            'serviceType',
-            'notes'
+            'features'
         ]),
 
         ...mapGetters(VUEX_CHECKOUT_MODULE, [
