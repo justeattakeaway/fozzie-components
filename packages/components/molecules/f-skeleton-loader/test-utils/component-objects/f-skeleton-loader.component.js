@@ -1,13 +1,14 @@
-/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-module.exports = class NavigationLinks extends Page {
+module.exports = class SkeletonLoader extends Page {
     constructor () {
-        super('molecule', 'navigation-links-component');
+        super('molecule', 'skeleton-loader-component');
     }
 
-    get component () {
-        return $('[data-test-id="navigationLinks"]');
+    get component () { return $('[data-test-id="skeletonLoader"]'); }
+
+    load () {
+        super.load(this.component);
     }
 
     waitForComponent () {

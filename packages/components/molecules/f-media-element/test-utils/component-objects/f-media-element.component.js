@@ -1,11 +1,11 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-module.exports = class Breadcrumbs extends Page {
+module.exports = class MediaElement extends Page {
     constructor () {
-        super('molecule', 'breadcrumbs-component');
+        super('molecule', 'media-element-component');
     }
 
-    get component () { return $('[data-test-id="breadcrumbs-component"]'); }
+    get component () { return $('[data-test-id="mediaElement-component"]'); }
 
     load () {
         super.load(this.component);

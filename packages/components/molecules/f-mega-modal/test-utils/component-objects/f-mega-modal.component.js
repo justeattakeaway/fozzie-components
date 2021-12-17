@@ -1,7 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class MegaModal extends Page {
-    constructor() {
+    constructor () {
         super('molecule', 'mega-modal-component');
     }
 
@@ -11,10 +11,6 @@ module.exports = class MegaModal extends Page {
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     waitForComponent () {
@@ -32,5 +28,4 @@ module.exports = class MegaModal extends Page {
     isContentDisplayed () {
         return this.megaModalTitle.isDisplayed();
     }
-
 };

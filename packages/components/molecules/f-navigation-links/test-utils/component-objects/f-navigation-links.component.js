@@ -1,18 +1,14 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-module.exports = class MediaElement extends Page {
-    constructor(){
-        super('molecule', 'media-element-component');
+module.exports = class NavigationLinks extends Page {
+    constructor () {
+        super('molecule', 'navigation-links-component');
     }
 
-    get component () { return $('[data-test-id="mediaElement-component"]'); }
+    get component () { return $('[data-test-id="navigationLinks"]'); }
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     waitForComponent () {
