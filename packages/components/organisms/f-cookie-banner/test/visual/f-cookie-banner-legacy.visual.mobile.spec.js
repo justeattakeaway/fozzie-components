@@ -2,7 +2,7 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-banner
 
 const cookieBanner = new CookieBanner();
 
-describe('Legacy - f-cookieBanner Mobile Visual Tests', () => {
+describe('Legacy - f-cookie-banner Mobile Visual Tests', () => {
     it('should display the f-cookie-banner component', () => {
         // Arrange
         cookieBanner.withQuery('&knob-Locale', 'en-AU');
@@ -10,6 +10,6 @@ describe('Legacy - f-cookieBanner Mobile Visual Tests', () => {
         cookieBanner.load();
 
         // Assert
-        browser.percyScreenshot('f-cookiebanner - Legacy', 'mobile');
+        browser.percyScreenshot('f-cookie-banner - Legacy', 'mobile');
     });
 });

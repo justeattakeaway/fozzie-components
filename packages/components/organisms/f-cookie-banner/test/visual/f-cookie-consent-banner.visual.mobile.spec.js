@@ -23,6 +23,6 @@ describe('New - f-cookie-banner Mobile Visual Tests', () => {
         cookieBanner.load();
 
         // Assert
-        browser.percyScreenshot(`f-cookie-banner - CookieConsent - ${tenant}`, 'mobile');
+        browser.percyScreenshot(`f-cookie-banner - cookie-consent - ${tenant}`, 'mobile');
     });
 });

@@ -23,6 +23,6 @@ describe('New - f-cookie-banner Desktop Visual Tests', () => {
         cookieBanner.load();
 
         // Assert
-        browser.percyScreenshot(`f-cookie-banner - CookieConsent - ${tenant}`, 'desktop');
+        browser.percyScreenshot(`f-cookie-banner - cookie-consent - ${tenant}`, 'desktop');
     });
 });
