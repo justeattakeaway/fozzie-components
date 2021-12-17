@@ -58,7 +58,12 @@
 
                 <form-field
                     :value="consumer.phoneNumber"
+                    <<<<<<<
+                    h-e-a-d
                     data-test-id="account-info-consumer-phoneNumber"
+                    =======
+                >
+                    >>>>>> 3e8ca452... f-account-info@0.13.0 - Add error handling and card (#1557)
                     maxlength="16"
                     :label-text="$t('consumer.phoneNumberLabel')"
                     :placeholder="$t('consumer.phoneNumberPlaceholder')"
@@ -83,12 +88,21 @@
 
                 <form-field
                     :value="consumer.line1"
+                    <<<<<<<
+                    h-e-a-d
                     data-test-id="account-info-consumer-line1"
+                    =======
+                >
+                    >>>>>> 3e8ca452... f-account-info@0.13.0 - Add error handling and card (#1557)
                     maxlength="50"
                     :label-text="$t('consumer.addressLabel')"
                     :placeholder="$t('consumer.line1Placeholder')"
                     @blur="onBlur('line1')"
+                    <<<<<<< HEAD
                     @input="onEditConsumer('line1', $event, true)">
+                    =======
+                    @input="onEditConsumer('line1', $event)">
+                    >>>>>>> 3e8ca452... f-account-info@0.13.0 - Add error handling and card (#1557)
                     <template
                         v-if="$v.consumer.line1.$invalid"
                         #error>
