@@ -1,15 +1,14 @@
-/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-spinner-selectors');
 
 module.exports = class Spinner extends Page {
     constructor () {
-        super('atom', 'spinner-component');
+        super('atom', 'v-spinner-component');
     }
 
-    get component () {
-        // eslint-disable-next-line no-undef
-        return $(COMPONENT);
+    get component () { return $('[data-test-id="spinner-component"]'); }
+
+    load () {
+        super.load(this.component);
     }
 
     waitForComponent () {

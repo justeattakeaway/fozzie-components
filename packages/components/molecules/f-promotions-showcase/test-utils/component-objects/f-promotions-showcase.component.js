@@ -1,8 +1,11 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-promotions-showcase-selectors');
 
 module.exports = class PromotionsShowcase extends Page {
-    get component () { return $(COMPONENT); }
+    constructor () {
+        super('molecule', 'promotions-showcase-component');
+    }
+
+    get component () { return $('[data-test-id="promotionsShowcase"]'); }
 
     load () {
         super.load(this.component);

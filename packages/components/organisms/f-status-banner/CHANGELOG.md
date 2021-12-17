@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.0.0
+------------------------------
+*December 9, 2021*
+
+### Added
+- **Breaking Change**: Added `f-searchbox` dependency to peer dependencies. Now `f-searchbox` should be included as a dependency of the consuming component or application.
+
+### Removed
+- **Breaking Change**: Removed `f-searchbox` styles import from the component. Make sure to import `f-searchbox` styles in your application.
+
 
 v4.0.0
 ------------------------------

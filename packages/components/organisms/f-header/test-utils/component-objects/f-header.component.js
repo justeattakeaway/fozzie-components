@@ -5,6 +5,7 @@ const {
     NAVIGATION
 } = require('./f-header.selectors');
 
+
 module.exports = class Header extends Page {
     constructor () {
         super('organism', 'header-component');

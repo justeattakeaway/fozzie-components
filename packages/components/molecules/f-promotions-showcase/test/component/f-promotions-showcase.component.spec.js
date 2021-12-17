@@ -2,7 +2,7 @@ const PromotionsShowcase = require('../../test-utils/component-objects/f-promoti
 
 const promotionsShowcase = new PromotionsShowcase();
 
-describe('f-promotionsShowcase component tests', () => {
+describe('f-promotions-showcase component tests', () => {
     beforeEach(() => {
         promotionsShowcase.load();
     });

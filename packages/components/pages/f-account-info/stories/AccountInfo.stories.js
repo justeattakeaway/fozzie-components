@@ -1,32 +1,59 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
+import { select, withKnobs } from '@storybook/addon-knobs';
+import { locales } from '@justeat/storybook/constants/globalisation';
 import AccountInfo from '../src/components/AccountInfo.vue';
 import fAccountInfoModule from '../src/store/accountInfo.module';
+import {
+    setupApiState,
+    apiStates,
+    apiGetPostDetailsStateOptions,
+    apiGetPostAddressesStateOptions
+} from './story.helper';
 
 Vue.use(Vuex);
 
 export default {
     title: 'Components/Pages',
-    decorators: [withA11y]
+    decorators: [withKnobs, withA11y]
 };
 
 export const AccountInfoComponent = () => ({
     components: { AccountInfo },
     props: {
         locale: {
-            default: 'en-GB'
+            default: select('Locale', [locales.gb], locales.gb)
         },
-        authToken: {
-            type: String,
-            default: 'sometoken'
+
+        apiDetailsState: {
+            default: select(apiGetPostDetailsStateOptions.title, apiGetPostDetailsStateOptions.states, apiStates.none)
         },
-        isAuthFinished: {
-            default: true
+
+        apiAddressesState: {
+            default: select(apiGetPostAddressesStateOptions.title, apiGetPostAddressesStateOptions.states, apiStates.none)
+        }
+    },
+
+    watch: {
+        apiDetailsState: {
+            immediate: true,
+            async handler (value) {
+                setupApiState({
+                    apiDetailsState: value,
+                    apiAddressState: this.apiAddressesState
+                });
+            }
         },
-        smartGatewayBaseUrl: {
-            type: String,
-            default: ''
+
+        apiAddressesState: {
+            immediate: true,
+            async handler (value) {
+                setupApiState({
+                    apiDetailsState: this.apiDetailsState,
+                    apiAddressState: value
+                });
+            }
         }
     },
 
@@ -37,12 +64,12 @@ export const AccountInfoComponent = () => ({
     }),
 
     template: '<account-info ' +
-    ':authToken="authToken" ' +
+    'authToken="some-auth-token" ' +
+    ':isAuthFinished="true" ' +
     ':locale="locale" ' +
-    ':isAuthFinished="isAuthFinished" ' +
-    ':smart-gateway-base-url="smartGatewayBaseUrl" ' +
+    'smart-gateway-base-url="" ' +
     // eslint-disable-next-line no-template-curly-in-string
-    ':key="`${authToken},${locale},${smartGatewayBaseUrl}`" />'
+    ':key="`${locale}`" />'
 });
 
 AccountInfoComponent.storyName = 'f-account-info';

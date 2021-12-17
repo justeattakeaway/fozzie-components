@@ -10,7 +10,7 @@ describe('Accessibility tests', () => {
     });
     it('a11y - should test f-promotions-showcase component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-promotionsShowcase');
+        const axeResults = getAccessibilityTestResults('f-promotions-showcase');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

@@ -23,7 +23,7 @@ export default {
             const responses = await Promise.all([getDetailsTask, getAddressTask]);
 
             const details = mapToConsumerDetails(responses[0]?.data);
-            const address = mapToConsumerAddress(responses[1]?.data);
+            const address = mapToConsumerAddress(responses[1]?.data?.Addresses);
 
             commit(UPDATE_CONSUMER_DETAILS, { details, address });
         },
