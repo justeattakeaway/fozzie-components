@@ -1,6 +1,10 @@
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
 import AccountInfo from '../AccountInfo.vue';
+// eslint-disable-next-line no-unused-vars
+import AccountInfoAnalyticsService from '../../services/analytics';
+import AccountInfoValidationMixin from '../AccountInfoValidationMixin.vue';
+
 import {
     localVue,
     i18n,
@@ -18,6 +22,8 @@ let dataDefaults;
 let registerStoreModuleSpy;
 let hasModuleSpy;
 let initialiseSpy;
+
+jest.mock('../../services/analytics.js');
 
 const storeActions = {
     loadConsumerDetails: jest.fn(),
@@ -57,7 +63,8 @@ const mountAccountInfo = ({
         propsData,
         data,
         store,
-        mocks
+        mocks,
+        mixins: [AccountInfoValidationMixin]
     });
 
     return mock;
@@ -155,6 +162,40 @@ describe('AccountInfo', () => {
     });
 
     describe('`methods`', () => {
+        describe('`onFormSubmit`', () => {
+            describe('form is valid', () => {
+                it('address has not changed', () => {
+                    // Arrange
+                    wrapper = mountAccountInfo();
+
+                    jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
+
+                    // Act
+                    wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(false);
+                });
+
+                it('address has changed', () => {
+                    // Arrange
+                    wrapper = mountAccountInfo({
+                        data: () => ({
+                            hasAddressBeenUpdated: true
+                        })
+                    });
+
+                    jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
+
+                    // Act
+                    wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(true);
+                });
+            });
+        });
+
         describe('`onEditConsumer`', () => {
             describe('when editing the form', () => {
                 it.each([
