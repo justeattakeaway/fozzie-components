@@ -10,7 +10,6 @@ export const ImageTileComponent = (args, { argTypes }) => ({
     components: { ImageTile },
     props: Object.keys(argTypes),
     template: `<image-tile
-                    :data-test-id="dataTestId"
                     :href='href'
                     :tile-id='tileId'
                     :is-selected='isSelected'

@@ -1,7 +1,7 @@
 <template>
     <div
         :class="$style['c-imageTile']"
-        data-test-id="image-tile">
+        data-test-id="image-tile-component">
         <a
             :class="[
                 $style['c-imageTile-link'], {
