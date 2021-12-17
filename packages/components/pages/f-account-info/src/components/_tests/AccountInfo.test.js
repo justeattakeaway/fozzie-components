@@ -1,6 +1,10 @@
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
 import AccountInfo from '../AccountInfo.vue';
+// eslint-disable-next-line no-unused-vars
+import AccountInfoAnalyticsService from '../../services/analytics';
+import AccountInfoValidationMixin from '../AccountInfoValidationMixin.vue';
+
 import {
     localVue,
     i18n,
@@ -16,6 +20,8 @@ let sutMocks;
 let sutProps;
 let dataDefaults;
 let initialiseSpy;
+
+jest.mock('../../services/analytics.js');
 
 const logMocks = {
     info: jest.fn(),
@@ -46,7 +52,6 @@ const mountAccountInfo = async ({
     propsData = sutProps,
     data = dataDefaults,
     storeOverride = null
-
 } = {}) => {
     const store = storeOverride || createStore({ state, actions });
     initialiseSpy = jest.spyOn(AccountInfo.methods, 'initialise');
@@ -57,8 +62,10 @@ const mountAccountInfo = async ({
         propsData,
         data,
         store,
-        mocks
+        mocks,
+        mixins: [AccountInfoValidationMixin]
     });
+
     await mock.vm.$nextTick();
 
     return mock;
@@ -216,6 +223,38 @@ describe('AccountInfo', () => {
     });
 
     describe('`methods`', () => {
+        describe('`onFormSubmit`', () => {
+            describe('form is valid', () => {
+                it('address has not changed', async () => {
+                    // Arrange
+                    wrapper = await mountAccountInfo();
+                    await wrapper.setData({ hasAddressBeenUpdated: false, hasFormUpdate: true });
+
+                    jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
+
+                    // Act
+                    wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(false);
+                });
+
+                it('address has changed', async () => {
+                    // Arrange
+                    wrapper = await mountAccountInfo();
+                    await wrapper.setData({ hasAddressBeenUpdated: true, hasFormUpdate: true });
+
+                    jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
+
+                    // Act
+                    wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(true);
+                });
+            });
+        });
+
         describe('`onEditConsumer`', () => {
             describe('when editing the form', () => {
                 it.each([
@@ -239,7 +278,7 @@ describe('AccountInfo', () => {
                     );
                 });
 
-                it('should set `hasFormUpdate` to true to indicate the form data has changed', async () => {
+                it('should set `hasFormUpdate` to `true` to indicate the form data has changed', async () => {
                     // Arrange
                     wrapper = await mountAccountInfo();
                     await wrapper.setData({ hasFormUpdate: false });
@@ -250,6 +289,46 @@ describe('AccountInfo', () => {
 
                     // Assert
                     expect(wrapper.vm.hasFormUpdate).toEqual(true);
+                });
+
+                describe('form field is part of the address', () => {
+                    it.each([
+                        ['line1'],
+                        ['line2'],
+                        ['line3'],
+                        ['postcode'],
+                        ['locality']
+                    ])('should set `hasAddressBeenUpdated` to `true` when `field` is %s', async field => {
+                        // Arrange
+                        wrapper = await mountAccountInfo();
+
+                        const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
+
+                        // Act
+                        element.vm.$emit('input', 'Nice Road');
+
+                        // Assert
+                        expect(wrapper.vm.hasAddressBeenUpdated).toEqual(true);
+                    });
+                });
+
+                describe('form field is not part of the address', () => {
+                    it.each([
+                        ['firstName'],
+                        ['lastName'],
+                        ['phoneNumber']
+                    ])('should not set `hasAddressBeenUpdated` to `true` when `field` is %s', async field => {
+                        // Arrange
+                        wrapper = await mountAccountInfo();
+
+                        const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
+
+                        // Act
+                        element.vm.$emit('input', 'Harry Potter');
+
+                        // Assert
+                        expect(wrapper.vm.hasAddressBeenUpdated).toEqual(false);
+                    });
                 });
             });
         });
