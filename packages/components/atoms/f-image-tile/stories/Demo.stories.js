@@ -38,11 +38,6 @@ DemoImageTileComponent.argTypes = {
         control: { type: 'text' },
         description: 'Cuisine id',
         defaultValue: 'Chicken'
-    },
-    isLink: {
-        control: { type: 'boolean' },
-        description: 'Component acts as a link, rather than default toggle',
-        defaultValue: false
     }
 };
 
