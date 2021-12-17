@@ -65,6 +65,7 @@ const mountAccountInfo = async ({
         mocks,
         mixins: [AccountInfoValidationMixin]
     });
+
     await mock.vm.$nextTick();
 
     await mock.vm.$nextTick();
@@ -331,32 +332,6 @@ describe('AccountInfo', () => {
                         expect(wrapper.vm.hasAddressBeenUpdated).toEqual(false);
                     });
                 });
-            });
-        });
-
-        describe('onFormSubmit ::', () => {
-            it('should log an info log', async () => {
-                // Act
-                wrapper = await mountAccountInfo();
-                await wrapper.setData({ hasFormUpdate: true });
-                logMocks.info.mockClear(); // initialise has already logged info once
-                await wrapper.vm.onFormSubmit();
-
-                // Assert
-                expect(logMocks.info).toHaveBeenCalledTimes(1);
-                expect(logMocks.info).toHaveBeenCalledWith(
-                    expect.any(String),
-                    expect.arrayContaining(['account-pages', 'account-info'])
-                );
-            });
-
-            // to be added in a future pr
-            it.skip('should set shouldShowErrorPage flag to true if an error occurs', async () => {
-
-            });
-
-            // to be added in a future pr
-            it.skip('should not call the save action if no changes', async () => {
             });
         });
 
