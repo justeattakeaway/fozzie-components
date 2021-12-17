@@ -1,5 +1,5 @@
 <template>
-    <card
+    <f-card
         :card-heading="$t('accountDetails')"
         data-test-id="account-info"
         has-outline
@@ -9,33 +9,69 @@
             {{ $t('yourDetails') }}
         </h2>
 
+        <email-address-field :email-address="consumer.emailAddress" />
+
         <form
             method="post"
             @submit.prevent="onFormSubmit">
             <form-field
-                :label-text="$t('fields.emailAddressLabel')"
-                disabled
-                :placeholder="$t('fields.emailAddressPlaceholder')"
-                class="u-spacingBottom--large"
-                :value="fields.emailAddress" />
-
-            <f-link
-                is-distinct
-                :class="$style['c-accountInfo-customerCareLink']"
-                href="/help"
-                target="_blank">
-                {{ $t('contactCustomerCareTeam') }}
-            </f-link>
+                :value="consumer.firstName"
+                data-test-id="account-info-consumer-firstName"
+                maxlength="50"
+                :label-text="$t('consumer.firstNameLabel')"
+                :placeholder="$t('consumer.firstNamePlaceholder')"
+                @blur="onBlur('firstName')"
+                @input="onEditConsumer('firstName', $event)">
+                <template
+                    v-if="$v.consumer.firstName.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.consumer.firstName.required && $v.consumer.firstName.$dirty">
+                        {{ $t('validation.firstNameRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.consumer.firstName.isValidName">
+                        {{ $t('validation.firstNameInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
-                :label-text="$t('fields.firstNameLabel')"
-                :placeholder="$t('fields.firstNamePlaceholder')"
-                :value="fields.firstName" />
+                :value="consumer.lastName"
+                data-test-id="account-info-consumer-lastName"
+                maxlength="50"
+                :label-text="$t('consumer.lastNameLabel')"
+                :placeholder="$t('consumer.lastNamePlaceholder')"
+                @blur="onBlur('lastName')"
+                @input="onEditConsumer('lastName', $event)">
+                <template
+                    v-if="$v.consumer.lastName.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.consumer.lastName.required && $v.consumer.lastName.$dirty">
+                        {{ $t('validation.lastNameRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.consumer.lastName.isValidName">
+                        {{ $t('validation.lastNameInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
-                :label-text="$t('fields.lastNameLabel')"
-                :placeholder="$t('fields.lastNamePlaceholder')"
-                :value="fields.lastName" />
+                :value="consumer.phoneNumber"
+                maxlength="16"
+                :label-text="$t('consumer.phoneNumberLabel')"
+                :placeholder="$t('consumer.phoneNumberPlaceholder')"
+                @blur="onBlur('phoneNumber')"
+                @input="onEditConsumer('phoneNumber', $event)">
+                <template
+                    v-if="$v.consumer.phoneNumber.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.consumer.phoneNumber.required && $v.consumer.phoneNumber.$dirty">
+                        {{ $t('validation.phoneNumberRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.consumer.phoneNumber.isValidPhoneNumber && $v.consumer.phoneNumber.required && $v.consumer.phoneNumber.$dirty">
+                        {{ $t('validation.phoneNumberInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <h2
                 class="u-spacingBottom--large">
@@ -43,27 +79,67 @@
             </h2>
 
             <form-field
-                :label-text="$t('fields.addressLabel')"
-                :placeholder="$t('fields.line1Placeholder')"
-                :value="fields.line1" />
+                :value="consumer.line1"
+                maxlength="50"
+                :label-text="$t('consumer.addressLabel')"
+                :placeholder="$t('consumer.line1Placeholder')"
+                @blur="onBlur('line1')"
+                @input="onEditConsumer('line1', $event)">
+                <template
+                    v-if="$v.consumer.line1.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.consumer.line1.required && $v.consumer.line1.$dirty">
+                        {{ $t('validation.line1Required') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
-                :placeholder="$t('fields.line2Placeholder')"
-                :value="fields.line2" />
+                :value="consumer.line2"
+                maxlength="50"
+                :placeholder="$t('consumer.line2Placeholder')"
+                @input="onEditConsumer('line2', $event)" />
 
             <form-field
-                :placeholder="$t('fields.line3Placeholder')"
-                :value="fields.line3" />
+                :value="consumer.line3"
+                maxlength="50"
+                :placeholder="$t('consumer.line3Placeholder')"
+                @input="onEditConsumer('line3', $event)" />
 
             <form-field
-                :label-text="$t('fields.cityLabel')"
-                :placeholder="$t('fields.cityPlaceholder')"
-                :value="fields.city" />
+                :value="consumer.locality"
+                maxlength="50"
+                :label-text="$t('consumer.localityLabel')"
+                :placeholder="$t('consumer.localityPlaceholder')"
+                @blur="onBlur('locality')"
+                @input="onEditConsumer('locality', $event)">
+                <template
+                    v-if="$v.consumer.locality.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.consumer.locality.required && $v.consumer.locality.$dirty">
+                        {{ $t('validation.localityRequired') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <form-field
-                :label-text="$t('fields.postcodeLabel')"
-                :placeholder="$t('fields.postcodePlaceholder')"
-                :value="fields.postcode" />
+                :value="consumer.postcode"
+                maxlength="50"
+                :label-text="$t('consumer.postcodeLabel')"
+                :placeholder="$t('consumer.postcodePlaceholder')"
+                @blur="onBlur('postcode')"
+                @input="onEditConsumer('postcode', $event)">
+                <template
+                    v-if="$v.consumer.postcode.$invalid"
+                    #error>
+                    <f-error-message v-show="!$v.consumer.postcode.required && $v.consumer.postcode.$dirty">
+                        {{ $t('validation.postcodeRequired') }}
+                    </f-error-message>
+                    <f-error-message v-show="!$v.consumer.postcode.isValidPostcode && $v.consumer.postcode.required">
+                        {{ $t('validation.postcodeInvalid') }}
+                    </f-error-message>
+                </template>
+            </form-field>
 
             <f-button
                 :class="[$style['c-accountInfo-submitButton']]"
@@ -81,54 +157,52 @@
             :class="[$style['c-accountInfo-changePasswordButton']]"
             data-test-id="account-info-submit-button"
             button-type="secondary"
+            href="/change-password?returnurl=/account/info"
             button-size="large"
             is-full-width
             action-type="submit">
             {{ $t('buttons.changePassword') }}
         </f-button>
 
-        <hr>
-
-        <p>{{ $t('deleteAccountMessage') }}</p>
-
-        <f-link
-            is-distinct
-            href="/help"
-            target="_blank">
-            {{ $t('deleteAccountLink') }}
-        </f-link>
-    </card>
+        <delete-account />
+    </f-card>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-
-import Card from '@justeat/f-card';
+import FErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
+import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
-
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-
-import FLink from '@justeat/f-link';
-import '@justeat/f-link/dist/f-link.css';
-
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-
+import EmailAddressField from './EmailAddressField.vue';
+import DeleteAccount from './DeleteAccount.vue';
+import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
+import ConsumerApi from '../services/providers/Consumer.api';
+import fAccountInfoModule from '../store/accountInfo.module';
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
 
 export default {
     components: {
-        Card,
+        FCard,
         FormField,
-        FLink,
-        FButton
+        FButton,
+        FErrorMessage,
+        EmailAddressField,
+        DeleteAccount
     },
 
-    mixins: [VueGlobalisationMixin],
+    mixins: [
+        VueGlobalisationMixin,
+        AccountInfoValidationMixin
+    ],
 
     props: {
         authToken: {
@@ -147,50 +221,64 @@ export default {
 
     data () {
         return {
-            fields: {
-                emailAddress: null,
-                firstName: null,
-                lastName: null,
-                line1: null,
-                line2: null,
-                line3: null,
-                city: null,
-                postcode: null
-            },
+            consumerApi: new ConsumerApi({
+                httpClient: this.$http,
+                cookies: this.$cookies,
+                baseUrl: this.smartGatewayBaseUrl
+            }),
             tenantConfigs,
-            isFormSubmitting: false
+            isFormSubmitting: false,
+            hasFormUpdate: false
         };
     },
 
+    computed: {
+        ...mapState('fAccountInfoModule', [
+            'consumer'
+        ])
+    },
+
     watch: {
-        immediate: true,
-        isAuthFinished () {
-            if (this.isAuthFinished) {
-                this.initialise();
+        isAuthFinished: {
+            immediate: true,
+            async handler (value) {
+                if (value) {
+                    await this.initialise();
+                }
             }
         }
     },
 
-    mounted () {
+    beforeCreate () {
+        if (!this.$store.hasModule('fAccountInfoModule')) {
+            this.$store.registerModule('fAccountInfoModule', fAccountInfoModule);
+        }
+    },
+
+    async mounted () {
         if (this.isAuthFinished) {
-            this.initialise();
+            await this.initialise();
         }
     },
 
     methods: {
-        initialise () {
+        ...mapActions('fAccountInfoModule', [
+            'loadConsumerDetails',
+            'editConsumerDetails'
+        ]),
+
+        /**
+        * Gets the form data (from the api) and assigns it to State
+        * then lowers the isFormDirty flag as the form data is currently clean
+        * then stops the on-screen spinner from showing
+        *
+        * If an error occurs then this is logged and the Template is
+        * informed that it is in a state of error.
+        */
+        async initialise () {
             try {
-                // TODO - Dummy data to be replaced with next ticket
-                this.fields = {
-                    emailAddress: 'mr.jazz@town.com',
-                    firstName: 'Max',
-                    lastName: 'Legend',
-                    line1: '1 Wardour Street',
-                    line2: undefined,
-                    line3: null,
-                    city: 'Strange Town',
-                    postcode: 'JZ1 1AA'
-                };
+                await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
+                this.hasFormUpdate = false;
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
@@ -201,10 +289,21 @@ export default {
         },
 
         onFormSubmit () {
+            if (this.isFormInvalid()) {
+                this.logValidationFailure();
+                return;
+            }
+
+            if (!this.hasFormUpdate) {
+                return;
+            }
+
             this.setSubmittingState(true);
 
             try {
                 // TODO - to be added with next ticket
+                this.$log.info('Submitted Form', ['account-info', 'account-pages']);
+                this.hasFormUpdate = false;
             } catch (error) {
                 // TODO - to be added with next ticket
             } finally {
@@ -218,17 +317,22 @@ export default {
         */
         setSubmittingState (isFormSubmitting) {
             this.isFormSubmitting = isFormSubmitting;
+        },
+
+        /**
+        * A generic method that updates the State (e.g. 'consumer.<field> = value')
+        * @param {string} field - The field of the consumer that needs changing
+        * @param {string} value - The new value of the consumer field
+        */
+        onEditConsumer (field, value) {
+            this.editConsumerDetails({ field, value });
+            this.hasFormUpdate = true;
         }
     }
 };
 </script>
 
 <style lang="scss" module>
-.c-accountInfo-customerCareLink {
-    display: block;
-    margin-bottom: spacing(x4);
-}
-
 .c-accountInfo-submitButton {
     margin-top: spacing(x4);
 }

@@ -18,6 +18,9 @@ export const CheckboxComponent = () => ({
         labelText: {
             default: text('Label Text', 'Checkbox Label')
         },
+        labelDescription: {
+            default: text('Label Description', '')
+        },
         value: {
             default: text('Value', 'checkboxLabel')
         },
@@ -40,6 +43,7 @@ export const CheckboxComponent = () => ({
     template:
         `<form-field
             :label-text="labelText"
+            :label-description="labelDescription"
             :value="value"
             :has-error="hasError"
             :is-grouped="isGrouped"

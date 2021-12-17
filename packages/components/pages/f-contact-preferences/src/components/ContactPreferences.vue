@@ -1,6 +1,7 @@
 <template>
     <div
-        data-test-id="contact-preferences">
+        data-test-id="contact-preferences"
+        :class="$style['c-contactPreferences']">
         <card-component
             v-if="!shouldShowErrorPage"
             :card-heading="$t('heading')"
@@ -17,40 +18,29 @@
                     </h2>
                     <fieldset
                         :class="$style['c-contactPreferences-fieldset']">
-                        <label>
-                            <input
-                                type="checkbox"
-                                :data-test-id="`contact-preferences-${key}-email-checkbox`"
-                                :disabled="!isEmailEnabled"
-                                :checked="emailValue"
-                                @change="editPreferenceValue(key, Object.keys({ emailValue })[0], $event.target.checked)">
-                            <span
-                                :class="{
-                                    [$style['c-contactPreferences-labelText--disabled']]: !isEmailEnabled
-                                }">
-                                {{ $t(`${key}.email`) }}
-                                <template v-if="$te(`${key}.emailDescription`)">
-                                    <br>({{ $t(`${key}.emailDescription`) }})
-                                </template>
-                            </span>
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                :data-test-id="`contact-preferences-${key}-sms-checkbox`"
-                                :disabled="!isSmsEnabled"
-                                :checked="smsValue"
-                                @change="editPreferenceValue(key, Object.keys({ smsValue })[0], $event.target.checked)">
-                            <span
-                                :class="{
-                                    [$style['c-contactPreferences-labelText--disabled']]: !isSmsEnabled
-                                }">
-                                {{ $t(`${key}.sms`) }}
-                                <template v-if="$te(`${key}.smsDescription`)">
-                                    <br>({{ $t(`${key}.smsDescription`) }})
-                                </template>
-                            </span>
-                        </label>
+                        <f-form-field
+                            :class="$style['c-contactPreferences-formField']"
+                            input-type="checkbox"
+                            :label-text=" $t(`${key}.email`)"
+                            :label-description="getEmailDescription(key)"
+                            :disabled="!isEmailEnabled"
+                            :data-test-id="`contact-preferences-${key}-email-checkbox`"
+                            :name="`contact-preferences-${key}-email`"
+                            :checked="emailValue"
+                            @input="(checked) => editPreferenceValue(key, Object.keys({ emailValue })[0], checked)"
+                        />
+
+                        <f-form-field
+                            :class="$style['c-contactPreferences-formField']"
+                            input-type="checkbox"
+                            :label-text=" $t(`${key}.sms`)"
+                            :label-description="getSmsDescription(key)"
+                            :disabled="!isSmsEnabled"
+                            :data-test-id="`contact-preferences-${key}-sms-checkbox`"
+                            :name="`contact-preferences-${key}-sms`"
+                            :checked="smsValue"
+                            @input="(checked) => editPreferenceValue(key, Object.keys({ smsValue })[0], checked)"
+                        />
                     </fieldset>
                 </div>
 
@@ -89,6 +79,8 @@ import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
+import FFormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 
@@ -106,7 +98,8 @@ export default {
 
     components: {
         CardComponent,
-        FButton
+        FButton,
+        FFormField
     },
 
     mixins: [VueGlobalisationMixin],
@@ -149,7 +142,7 @@ export default {
 
     watch: {
         isAuthFinished: {
-            immediate: true,
+            immediate: true, // this prevents the need to call initialise() on mounted
             async handler (value) {
                 if (value) {
                     await this.initialise();
@@ -158,15 +151,9 @@ export default {
         }
     },
 
-    created () {
+    beforeCreate () {
         if (!this.$store.hasModule('fContactPreferencesModule')) {
             this.$store.registerModule('fContactPreferencesModule', fContactPreferencesModule);
-        }
-    },
-
-    async mounted () {
-        if (this.isAuthFinished) {
-            await this.initialise();
         }
     },
 
@@ -176,6 +163,26 @@ export default {
             'savePreferences',
             'editPreference'
         ]),
+
+        /**
+        * Returns translation string if it exists
+        * @param {string} key - The key of the preference that needs changing
+        */
+        getEmailDescription (key) {
+            if (!this.$te(`${key}.emailDescription`)) return '';
+
+            return `(${this.$t(`${key}.emailDescription`)})`;
+        },
+
+        /**
+        * Returns translation string if it exists
+        * @param {string} key - The key of the preference that needs changing
+        */
+        getSmsDescription (key) {
+            if (!this.$te(`${key}.smsDescription`)) return '';
+
+            return `(${this.$t(`${key}.smsDescription`)})`;
+        },
 
         /**
         * Informs the template that we are in an Error State.
@@ -216,8 +223,10 @@ export default {
         async initialise () {
             try {
                 await this.loadPreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
+                this.$log.info('Account preferences fetched successfully', ['account-pages', 'contact-preferences']);
                 this.isFormDirty = false;
             } catch (error) {
+                this.$log.error('Error fetching account preferences', error, ['account-pages', 'contact-preferences']);
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
                 this.$nextTick(() => {
@@ -245,8 +254,10 @@ export default {
 
             try {
                 await this.savePreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
+                this.$log.info('Account preferences saved successfully', ['account-pages', 'contact-preferences']);
                 this.isFormDirty = false;
             } catch (error) {
+                this.$log.error('Error saving account preferences', error, ['account-pages', 'contact-preferences']);
                 this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
             } finally {
                 this.setSubmittingState(false);
@@ -256,7 +267,15 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.c-formField-label,
+.c-formField-label-description {
+    margin-bottom: 0;
+}
+</style>
+
 <style lang="scss" module>
+
 .c-contactPreferences-fieldset {
     display: flex;
     flex-flow: column;
@@ -265,12 +284,17 @@ export default {
     margin: spacing(x2) 0;
 }
 
-.c-contactPreferences-labelText--disabled {
-    color: $color-content-disabled;
-}
-
 .c-contactPreferences-subtitle {
     @include font-size(heading-s);
+}
+
+.c-contactPreferences {
+    .c-contactPreferences-formField {
+        margin-top: 0;
+        .c-contactPreferences-formField + & {
+            margin-bottom: spacing(x2);
+        }
+    }
 }
 
 .c-contactPreferences-btn {

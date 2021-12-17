@@ -20,7 +20,9 @@
 
         <form-label
             :id="`label-${$attrs.id}`"
+            data-test-id="selection-control-form-label"
             :label-for="$attrs.id"
+            :label-description="$attrs.labelDescription"
         >
             {{ labelText }}
         </form-label>
@@ -121,8 +123,10 @@ export default {
     }
 
     .c-formField-field--checkbox:disabled + label,
-    .c-formField-field--radio:disabled + label {
+    .c-formField-field--radio:disabled + label,
+    .c-formField-field--checkbox:disabled + label span {
         cursor: default;
+        color: $color-content-disabled;
     }
 
     .c-formField-field--checkbox + label:before,

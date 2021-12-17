@@ -11,7 +11,6 @@ import {
 import CountrySelector from '../CountrySelector.vue';
 import Navigation from '../Navigation.vue';
 
-
 const $style = {
     'is-open': 'is-open',
     'c-nav-toggle--altColour': 'c-nav-toggle--altColour',
@@ -20,12 +19,10 @@ const $style = {
 
 let wrapper;
 
-
 let mockWidth = desktopWidth;
 
 function setMobileViewport () { mockWidth = mobileWidth; }
 function setDesktopViewport () { mockWidth = desktopWidth; }
-
 
 jest.mock('@justeat/f-services', () => ({
     axiosServices: {
@@ -780,6 +777,28 @@ describe('Navigation', () => {
             expect(wrapper.vm.hasNavigationLinks).toBe(true);
         });
 
+        it('should return true if customNavLinks are provided', () => {
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showLoginInfo: false,
+                    customNavLinks: [
+                        {
+                            text: 'Test',
+                            url: '/test',
+                            gtm: {
+                                label: 'test-label'
+                            }
+                        }
+                    ]
+                }
+            });
+
+            // Assert
+            expect(wrapper.vm.hasNavigationLinks).toBe(true);
+        });
+
         it('should return false if there are no underlying links to show', () => {
             // Arrange & Act
             wrapper = shallowMount(Navigation, {
@@ -788,7 +807,8 @@ describe('Navigation', () => {
                     showLoginInfo: false,
                     showOffersLink: false,
                     showHelpLink: false,
-                    showDeliveryEnquiry: false
+                    showDeliveryEnquiry: false,
+                    customNavLinks: []
                 }
             });
 

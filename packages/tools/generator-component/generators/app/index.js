@@ -38,6 +38,7 @@ Yeoman Generator version: {white v${pkg.version}}
             isComponent: (this.answers.componentType === 'uiComponent'),
             isService: (this.answers.componentType === 'service'),
             needsComponentTests: (this.answers.componentType === 'service' ? false : this.answers.needsComponentTests),
+            needsVisualTests: (this.answers.componentType === 'service' ? false : this.answers.needsVisualTests),
             needsComponentTranslations: (this.answers.componentType === 'service' ? false : this.answers.needsComponentTranslations),
             needsBundlewatch: (this.answers.needsBundlewatch),
             needsTestingApiMocks: (this.answers.componentType === 'service' ? false : this.answers.needsTestingApiMocks)
@@ -57,7 +58,8 @@ Yeoman Generator version: {white v${pkg.version}}
         }
 
         this.ignorePatterns = [
-            ...(this.config.needsComponentTests ? [] : ['**/*/test/specs/component']),
+            ...(this.config.needsComponentTests ? [] : ['**/*/test/component']),
+            ...(this.config.needsVisualTests ? [] : ['**/*/test/visual']),
             ...(this.config.needsComponentTranslations ? [] : ['**/*/src/tenants']),
             ...(this.config.needsTestingApiMocks ? [] : ['**/*/src/services']),
             ...(this.config.isComponent ? [
@@ -80,7 +82,7 @@ Yeoman Generator version: {white v${pkg.version}}
                 // Modify any files containing the keyword `Skeleton` to be replaced with the name of the component
                 .replace(/(Skeleton)/g, this.nameTransformations.filename)
                 // Modify any files containing the keyword `f-skeleton` to be replaced with the name of the component
-                .replace(/(f-skeleton)/g, `f-${this.nameTransformations.class}`)
+                .replace(/(f-skeleton)/g, `f-${this.nameTransformations.default}`)
                 // Certain template files have been prefixed with "__" to stop them being indexed by our tooling (such as Jest and Storybook files)
                 // So we need to remove these prefixes before writing the files to our dest directory
                 .replace(/__/g, '');

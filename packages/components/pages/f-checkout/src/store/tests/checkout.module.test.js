@@ -19,8 +19,9 @@ import accountApi from '../../services/accountApi';
 import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
-// import { version as applicationVerion } from '../../../package.json';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
+import {
+    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, ERROR_TYPES, DUPLICATE_ORDER
+} from '../../constants';
 
 import {
     UPDATE_AUTH,
@@ -36,7 +37,7 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE,
     UPDATE_GEO_LOCATION,
-    UPDATE_MESSAGE,
+    UPDATE_CHECKOUT_ERROR_MESSAGE,
     UPDATE_ADDRESS,
     UPDATE_PHONE_NUMBER,
     UPDATE_DATE_OF_BIRTH,
@@ -52,6 +53,7 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
+    updateCheckoutErrorMessage,
     getCustomer,
     getGeoLocation,
     placeOrder,
@@ -60,7 +62,6 @@ const {
     updateUserDetails,
     updateDateOfBirth,
     updateFulfilmentTime,
-    updateMessage,
     updateUserNote,
     getUserNote,
     saveUserNote
@@ -102,10 +103,10 @@ const issues = [
 ];
 
 const userNote = 'Beware of the dachshund';
-const message = {
-    code: 'DuplicateOrder',
+const checkoutErrorMessage = {
+    messageKey: DUPLICATE_ORDER,
     shouldRedirectToMenu: false,
-    shouldShowInDialog: true
+    errorType: ERROR_TYPES.dialog
 };
 
 const defaultState = {
@@ -122,6 +123,7 @@ const defaultState = {
         id: '',
         total: 0
     },
+    checkoutErrorMessage: null,
     customer: {
         firstName: '',
         lastName: '',
@@ -143,7 +145,6 @@ const defaultState = {
     isFulfillable: true,
     errors: [],
     notices: [],
-    message: null,
     messages: [],
     availableFulfilment: {
         times: [],
@@ -385,8 +386,8 @@ describe('CheckoutModule', () => {
         describe(`${CLEAR_DOB_ERROR} :: `, () => {
             it('should remove the `DOB_REQUIRED_ISSUE` and the `AGE_VERIFICATION_ISSUE` errors', () => {
                 // Arrange
-                state.errors.push({ code: 'DOB_REQUIRED_ISSUE' });
-                state.errors.push({ code: 'AGE_VERIFICATION_ISSUE' });
+                state.errors.push({ messageKey: 'DOB_REQUIRED_ISSUE' });
+                state.errors.push({ messageKey: 'AGE_VERIFICATION_ISSUE' });
 
                 // Act
                 mutations[CLEAR_DOB_ERROR](state, {});
@@ -402,7 +403,7 @@ describe('CheckoutModule', () => {
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
             [UPDATE_USER_NOTE, 'userNote', userNote],
-            [UPDATE_MESSAGE, 'message', message]
+            [UPDATE_CHECKOUT_ERROR_MESSAGE, 'checkoutErrorMessage', checkoutErrorMessage]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {
             // Arrange & Act
             mutations[mutationName](state, propertyValue);
@@ -676,7 +677,7 @@ describe('CheckoutModule', () => {
             });
 
             describe('When basket returns `Prompts`', () => {
-                it(`should call ${UPDATE_MESSAGE} mutation with 'BasketChanged' 'CheckoutIssue' when products are Invalid`, async () => {
+                it(`should call ${UPDATE_CHECKOUT_ERROR_MESSAGE} mutation with 'BasketChanged' 'CheckoutIssue' when products are Invalid`, async () => {
                     // Arrange
                     basketApi.getBasket = jest.fn(() => Promise.resolve({ data: basketInvalidProducts }));
 
@@ -685,16 +686,16 @@ describe('CheckoutModule', () => {
 
                     // Assert
                     expect(commit).toHaveBeenCalledWith(
-                        UPDATE_MESSAGE,
+                        UPDATE_CHECKOUT_ERROR_MESSAGE,
                         {
-                            code: 'BasketChanged',
-                            shouldShowInDialog: true,
-                            shouldRedirectToMenu: true
+                            messageKey: 'BasketChanged',
+                            shouldRedirectToMenu: true,
+                            errorType: ERROR_TYPES.dialog
                         }
                     );
                 });
 
-                it(`should call ${UPDATE_MESSAGE} mutation with 'BasketChanged' 'CheckoutIssue' when products are Offline`, async () => {
+                it(`should call ${UPDATE_CHECKOUT_ERROR_MESSAGE} mutation with 'BasketChanged' 'CheckoutIssue' when products are Offline`, async () => {
                     // Arrange
                     basketApi.getBasket = jest.fn(() => Promise.resolve({ data: basketOfflineProducts }));
 
@@ -703,11 +704,11 @@ describe('CheckoutModule', () => {
 
                     // Assert
                     expect(commit).toHaveBeenCalledWith(
-                        UPDATE_MESSAGE,
+                        UPDATE_CHECKOUT_ERROR_MESSAGE,
                         {
-                            code: 'BasketChanged',
-                            shouldShowInDialog: true,
-                            shouldRedirectToMenu: true
+                            messageKey: 'BasketChanged',
+                            shouldRedirectToMenu: true,
+                            errorType: ERROR_TYPES.dialog
                         }
                     );
                 });
@@ -858,7 +859,7 @@ describe('CheckoutModule', () => {
                             status: 400,
                             response: {
                                 data: {
-                                    errorCode: 'DuplicateOrder'
+                                    errorCode: DUPLICATE_ORDER
                                 }
                             }
                         }));
@@ -868,7 +869,7 @@ describe('CheckoutModule', () => {
                             await placeOrder(context, payload);
                         } catch {
                             // Assert
-                            expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [message]);
+                            expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [checkoutErrorMessage]);
                         }
                     });
 
@@ -893,14 +894,14 @@ describe('CheckoutModule', () => {
                         }
                     });
 
-                    it('should dispatch `updateMessage` with checkoutIssue', async () => {
+                    it('should dispatch `updateCheckoutErrorMessage` with checkoutIssue', async () => {
                         // Arrange
                         // eslint-disable-next-line prefer-promise-reject-errors
                         orderPlacementApi.placeOrder = jest.fn(() => Promise.reject({
                             status: 400,
                             response: {
                                 data: {
-                                    errorCode: 'DuplicateOrder'
+                                    errorCode: DUPLICATE_ORDER
                                 }
                             }
                         }));
@@ -910,7 +911,7 @@ describe('CheckoutModule', () => {
                             await placeOrder(context, payload);
                         } catch {
                             // Assert
-                            expect(dispatch).toHaveBeenCalledWith('updateMessage', message);
+                            expect(dispatch).toHaveBeenCalledWith('updateCheckoutErrorMessage', checkoutErrorMessage);
                         }
                         expect.hasAssertions();
                     });
@@ -933,9 +934,9 @@ describe('CheckoutModule', () => {
 
         describe('updateCheckout ::', () => {
             const issue = {
-                code: 'RESTAURANT_NOT_TAKING_ORDERS',
-                shouldShowInDialog: true,
-                shouldRedirectToMenu: true
+                messageKey: 'RESTAURANT_NOT_TAKING_ORDERS',
+                shouldRedirectToMenu: true,
+                errorType: ERROR_TYPES.dialog
             };
 
             beforeEach(() => {
@@ -952,6 +953,10 @@ describe('CheckoutModule', () => {
                         issues
                     }
                 }));
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
             });
 
             it('should post the checkout details to the backend.', async () => {
@@ -976,7 +981,7 @@ describe('CheckoutModule', () => {
                 await updateCheckout(context, payload);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true }]);
+                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog }]);
             });
 
             describe('when a known issue occurs', () => {
@@ -985,7 +990,9 @@ describe('CheckoutModule', () => {
                         status: 200,
                         data: {
                             isFulfillable: false,
-                            issues: [{ code: issue.code }]
+                            issues: [
+                                { code: 'RESTAURANT_NOT_TAKING_ORDERS' }
+                            ]
                         }
                     }));
                 });
@@ -998,12 +1005,12 @@ describe('CheckoutModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [issue]);
                 });
 
-                it('should call `updateMessage` with first issue.', async () => {
+                it('should call `updateCheckoutErrorMessage` with first issue.', async () => {
                     // Act
                     await updateCheckout(context, payload);
 
                     // Assert
-                    expect(dispatch).toHaveBeenCalledWith('updateMessage', issue);
+                    expect(dispatch).toHaveBeenCalledWith('updateCheckoutErrorMessage', issue);
                 });
             });
         });
@@ -1262,7 +1269,7 @@ describe('CheckoutModule', () => {
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateUserNote, UPDATE_USER_NOTE, userNote],
-            [updateMessage, UPDATE_MESSAGE, message]
+            [updateCheckoutErrorMessage, UPDATE_CHECKOUT_ERROR_MESSAGE, checkoutErrorMessage]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
             action(context, value);

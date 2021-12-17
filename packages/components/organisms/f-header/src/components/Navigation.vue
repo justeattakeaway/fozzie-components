@@ -13,7 +13,7 @@
                 'is-hidden--noJS',
                 $style['c-nav-trigger'],
                 $style['c-nav-toggle'],
-                { [$style['c-nav-toggle--altColour']]: isAltColour },
+                { [$style['c-nav-toggle--altColour']]: isAltColour || (headerBackgroundTheme === 'highlight' && navIsOpen) },
                 { [$style['is-open']]: navIsOpen }
             ]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
@@ -81,6 +81,19 @@
             <ul
                 :class="$style['c-nav-list']"
                 data-test-id="nav-list">
+                <li
+                    v-for="(customNavLink, index) in customNavLinks"
+                    :key="`custom-nav-link-${index}`"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        :tabindex="tabIndex"
+                        :text="customNavLink.text"
+                        :href="customNavLink.url"
+                        :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme" />
+                </li>
+
                 <li
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
@@ -252,7 +265,6 @@
 import { MopedIcon, GiftIcon, ProfileIcon } from '@justeat/f-vue-icons';
 import { axiosServices, windowServices } from '@justeat/f-services';
 import VPopover from '@justeat/f-popover';
-import '@justeat/f-popover/dist/f-popover.css';
 
 // Internal
 import CountrySelector from './CountrySelector.vue';
@@ -331,6 +343,12 @@ export default {
         showCountrySelector: {
             type: Boolean,
             default: false
+        },
+
+        customNavLinks: {
+            type: Array,
+            default: () => [],
+            validator: links => links.every(link => link.text && link.url)
         }
     },
 
@@ -386,7 +404,7 @@ export default {
 
         isAltColour () {
             const isMobileNavOpen = this.navIsOpen && this.isBelowMid;
-            return (this.headerBackgroundTheme === 'transparent' && !isMobileNavOpen) || this.headerBackgroundTheme === 'highlight';
+            return ['transparent', 'highlight'].includes(this.headerBackgroundTheme) && !isMobileNavOpen;
         },
 
         /**
@@ -402,7 +420,8 @@ export default {
             return this.showOffersLink ||
                 this.showHelpLink ||
                 this.showDeliveryEnquiry ||
-                this.showLoginInfo;
+                this.showLoginInfo ||
+                this.customNavLinks.length > 0;
         },
 
         isCountrySelectorClosedOnMobileView () {

@@ -3,36 +3,35 @@
         ref="errorModal"
         data-test-id="checkout-issue-modal"
         has-overlay
-        :title="$t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText })"
+        :title="$t(`errorMessages.checkoutIssues.${messageKey}.title`, { serviceType: serviceTypeText })"
         :is-open="isOpen"
-        @close="closeErrorDialog"
-    >
+        @close="closeErrorDialog">
         <p data-test-id="checkout-issue-modal-message">
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`, { serviceType: serviceTypeText }) }}
+            {{ $t(`errorMessages.checkoutIssues.${messageKey}.message`, { serviceType: serviceTypeText }) }}
         </p>
 
-        <f-button
-            :class="$style['c-checkout-errorDialogButton']"
-            :data-gtm="isDuplicateOrderError ? 'engagement|dialog_duplicate_order_warning|click_acknowledge' : undefined"
-            button-size="large"
-            :button-type="isDuplicateOrderError ? 'secondary' : 'primary'"
-            data-test-id="redirect-to-menu-button"
-            @click.native="closeErrorDialog"
-        >
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonText`) }}
-        </f-button>
+        <div>
+            <f-button
+                :class="$style['c-checkout-errorDialogButton']"
+                :data-gtm="isDuplicateOrderError ? 'engagement|dialog_duplicate_order_warning|click_acknowledge' : undefined"
+                button-size="large"
+                :button-type="isDuplicateOrderError ? 'secondary' : 'primary'"
+                data-test-id="redirect-to-menu-button"
+                @click.native="closeErrorDialog">
+                {{ $t(`errorMessages.checkoutIssues.${messageKey}.buttonText`) }}
+            </f-button>
 
-        <f-button
-            v-if="isDuplicateOrderError"
-            :class="$style['c-checkout-errorDialogButton']"
-            button-size="large"
-            button-type="primary"
-            data-test-id="redirect-to-orderhistory-button"
-            data-gtm="engagement|dialog_duplicate_order_warning|click_view_orders"
-            @click.native="showOrderHistory"
-        >
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonTextPrimary`) }}
-        </f-button>
+            <f-button
+                v-if="isDuplicateOrderError"
+                :class="$style['c-checkout-errorDialogButton']"
+                button-size="large"
+                button-type="primary"
+                data-test-id="redirect-to-orderhistory-button"
+                data-gtm="engagement|dialog_duplicate_order_warning|click_view_orders"
+                @click.native="showOrderHistory">
+                {{ $t(`errorMessages.checkoutIssues.${messageKey}.buttonTextPrimary`) }}
+            </f-button>
+        </div>
     </mega-modal>
 </template>
 
@@ -42,7 +41,7 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapActions, mapState } from 'vuex';
-import { VUEX_CHECKOUT_MODULE } from '../constants';
+import { DUPLICATE_ORDER, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: {
@@ -65,13 +64,13 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'message',
+            'checkoutErrorMessage',
             'restaurant',
             'serviceType'
         ]),
 
-        errorCode () {
-            return this.message && this.message.code;
+        messageKey () {
+            return this.checkoutErrorMessage?.messageKey;
         },
 
         serviceTypeText () {
@@ -79,7 +78,7 @@ export default {
         },
 
         isDuplicateOrderError () {
-            return this.errorCode === 'DuplicateOrder';
+            return this.messageKey === DUPLICATE_ORDER;
         }
     },
 
@@ -91,14 +90,14 @@ export default {
         }
 
         this.$emit('created', {
-            code: this.message?.code,
+            code: this.checkoutErrorMessage?.messageKey,
             isDuplicateOrderError: this.isDuplicateOrderError
         });
     },
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateMessage'
+            'updateCheckoutErrorMessage'
         ]),
 
         getModalContext () {
@@ -111,11 +110,11 @@ export default {
         closeErrorDialog () {
             const modalContext = this.getModalContext();
 
-            if (this.message && this.message.shouldRedirectToMenu) {
+            if (this.checkoutErrorMessage && this.checkoutErrorMessage.shouldRedirectToMenu) {
                 window.location.assign(this.redirectUrl);
             }
 
-            this.updateMessage();
+            this.updateCheckoutErrorMessage();
 
             if (modalContext) {
                 modalContext.close();
@@ -125,7 +124,7 @@ export default {
         showOrderHistory () {
             window.location.assign('order-history');
 
-            this.updateMessage();
+            this.updateCheckoutErrorMessage();
         }
     }
 };

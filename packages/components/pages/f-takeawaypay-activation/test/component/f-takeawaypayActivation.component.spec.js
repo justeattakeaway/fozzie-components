@@ -6,14 +6,14 @@ const {
 
 let takeawayPayComponent;
 
-describe('f-takeawaypayActivation component tests - unauthenticated', () => {
+describe('f-takeawaypay-activation component tests - unauthenticated', () => {
     beforeEach(() => {
         // Arrange
         takeawayPayComponent = new TakeawaypayActivation();
         takeawayPayComponent.load();
     });
 
-    it('should display the f-takeawaypayActivation component when the user is not authenticated', () => {
+    it('should display the f-takeawaypay-activation component when the user is not authenticated', () => {
         // Assert
         expect(takeawayPayComponent.isComponentDisplayed()).toBe(true);
     });

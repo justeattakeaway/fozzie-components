@@ -22,7 +22,6 @@
 
 <script>
 import VLink from '@justeat/f-link';
-import '@justeat/f-link/dist/f-link.css';
 
 export default {
     name: 'NavigationLinks',
