@@ -4,7 +4,7 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-consen
 
 let cookieBanner;
 
-describe('New - f-cookie-banner Desktop Visual Tests', () => {
+describe('New - f-cookie-banner Mobile Visual Tests', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', 'en-IE');
@@ -23,6 +23,6 @@ describe('New - f-cookie-banner Desktop Visual Tests', () => {
         cookieBanner.load();
 
         // Assert
-        browser.percyScreenshot(`f-cookie-banner - cookie-consent - ${tenant}`, 'desktop');
+        browser.percyScreenshot(`f-cookie-banner - cookie-consent - ${tenant}`, 'mobile');
     });
 });
