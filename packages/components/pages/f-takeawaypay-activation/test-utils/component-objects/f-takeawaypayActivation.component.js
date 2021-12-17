@@ -38,23 +38,13 @@ module.exports = class TakeawaypayActivation extends Page {
     get startOrderingButton () { return $(START_ORDERING_BUTTON); }
 
     load (type = 'default') {
-        switch (type) {
-            case 'error':
-                super.load(this.errorComponent);
-                break;
-            case 'loggedIn':
-                super.load(this.loggedInComponent);
-                break;
-            case 'default':
-            default:
-                super.load(this.component);
-                break;
-        }
-    }
+        const componentType = {
+            error: this.errorComponent,
+            loggedIn: this.loggedInComponent,
+            default: this.component
+        };
 
-    withQuery (name, value) {
-        super.withQuery(name, value);
-        return this;
+        super.load(componentType[type]);
     }
 
     waitForComponent () {

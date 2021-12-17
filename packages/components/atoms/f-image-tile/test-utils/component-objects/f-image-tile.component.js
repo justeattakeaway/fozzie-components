@@ -1,12 +1,11 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-accountInfo-selectors');
 
-module.exports = class AccountInfo extends Page {
+module.exports = class ImageTile extends Page {
     constructor () {
-        super('page', 'account-info-component');
+        super('atom', 'image-tile-component');
     }
 
-    get component () { return $(COMPONENT); }
+    get component () { return $('[data-test-id="imageTile"]'); }
 
     load () {
         super.load(this.component);

@@ -4,6 +4,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v9.1.0
+------------------------------
+*December 14, 2021*
+
+### Added
+- Jet logo support via `shouldUseJetLogo` prop.
+
+### Updated
+- f-vue-icons to the latest (3.3.0).
+
+### Removed
+- Arrow button size override from mobile country selector as with the latest version of f-vue-icons arrow doesn't have a transparent spacing around it.
+
+
+v9.0.0
+------------------------------
+*December 13, 2021*
+
+### Added
+- **Breaking Change**: Added `f-button` and `f-popover` dependencies to peer dependencies. Now `f-button` and `f-popover` should be included as a dependency of the consuming component or application.
+
+### Removed
+- **Breaking Change**: Removed `f-button` and `f-popover` styles import from the component. Make sure to import `f-button` and `f-popover` styles in your application.
+
+
 v8.0.0
 ------------------------------
 *December 9, 2021*

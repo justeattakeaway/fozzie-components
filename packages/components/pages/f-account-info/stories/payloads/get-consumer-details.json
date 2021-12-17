@@ -1,0 +1,14 @@
+{
+  "ConsumerId": 1050450174,
+  "Id": "8It2lEaJjG82nJtxO00Iab0CoF0=",
+  "CreatedDate": "2019-04-16T17:25:00.000Z",
+  "EmailAddress": "harry.potter@hogwarts.com",
+  "FirstName": "Harry",
+  "LastName": "Potter",
+  "PhoneNumber": "+441234567890",
+  "DateOfBirth": "1914-04-16T17:25:00.000Z",
+  "TermsAndConditionsId": 0,
+  "WantsNewsletter": true,
+  "AccountType": "Default",
+  "ConsumerStatus": "ReturnConsumer"
+}
