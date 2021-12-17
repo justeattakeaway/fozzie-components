@@ -1,10 +1,10 @@
 import forEach from 'mocha-each';
 
-const CookieBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
+const CookieBanner = require('../../test-utils/component-objects/f-cookie-consent-banner.component');
 
 let cookieBanner;
 
-describe('New - f-cookieBanner Desktop Visual Tests', () => {
+describe('New - f-cookie-banner Mobile Visual Tests', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', 'en-IE');
@@ -14,7 +14,7 @@ describe('New - f-cookieBanner Desktop Visual Tests', () => {
 
     // 'dk' and 'no' disabled for now
     forEach(['es-ES', 'en-IE', 'it-IT'])
-    .it('should display the f-cookieBanner component for "%s"', tenant => {
+    .it('should display the f-cookie-banner component for "%s"', tenant => {
         // Arrange
         cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', tenant);
@@ -23,6 +23,6 @@ describe('New - f-cookieBanner Desktop Visual Tests', () => {
         cookieBanner.load();
 
         // Assert
-        browser.percyScreenshot(`f-cookiebanner - CookieConsent - ${tenant}`, 'desktop');
+        browser.percyScreenshot(`f-cookie-banner - cookie-consent - ${tenant}`, 'mobile');
     });
 });

@@ -4,25 +4,17 @@ const {
     COMPONENT,
     ADDRESS_BOX,
     BUTTON,
-    ERROR_MESSAGE,
-    BANNER_IMAGE,
-    BANNER_HEADING,
-    BANNER_SUBHEADING
-} = require('./f-statusBanner.selectors');
+    ERROR_MESSAGE
+} = require('./f-status-banner.selectors');
 
 
 module.exports = class StatusBanner extends Page {
-    constructor() {
+    constructor () {
         super('organism', 'status-banner-component');
     }
 
     get component () { return $(COMPONENT); }
 
-    get image () { return $(BANNER_IMAGE); }
-
-    get heading () { return $(BANNER_HEADING); }
-
-    get subheading () { return $(BANNER_SUBHEADING); }
     get addressBox () { return $(ADDRESS_BOX); }
 
     get button () { return $(BUTTON); }
@@ -33,36 +25,12 @@ module.exports = class StatusBanner extends Page {
         super.load(this.component);
     }
 
-    open (url) {
-        super.open(url);
-    }
-
     waitForComponent () {
         super.waitForComponent(this.component);
     }
 
     isStatusBannerComponentDisplayed () {
         return this.component.isDisplayed();
-    }
-
-    isImageDisplayed () {
-        return this.image.isDisplayedInViewport();
-    }
-
-    isHeadingDisplayed () {
-        return this.heading.isDisplayedInViewport();
-    }
-
-    isSubheadingDisplayed () {
-        return this.subheading.isDisplayedInViewport();
-    }
-
-    isAddressBoxDisplayed () {
-        return this.addressBox.isDisplayed();
-    }
-
-    isSearchButtonDisplayed () {
-        return this.button.isDisplayed();
     }
 
     /**
@@ -85,9 +53,5 @@ module.exports = class StatusBanner extends Page {
 
     getErrorMessage () {
         return this.errorMessage.getText();
-    }
-
-    isErrorMessageDisplayed () {
-        return this.errorMessage.isDisplayed();
     }
 };
