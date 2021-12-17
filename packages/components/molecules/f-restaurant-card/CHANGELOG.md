@@ -7,7 +7,7 @@ v0.11.1
 ------------------------------
 *December 17, 2021*
 ### Added
-- @justeat/f-vue-icons added as dev dependency
+- @justeat/f-vue-icons added as a dependency
 
 v0.11.0
 ------------------------------
