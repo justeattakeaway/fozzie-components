@@ -38,7 +38,13 @@ const messages = {
         postcodeInvalid: 'Please enter a valid postcode'
     },
     deleteAccountMessage: 'Do you want to delete your Just Eat account?',
-    deleteAccountLink: 'Delete my account'
+    deleteAccountLink: 'Delete my account',
+    errorMessages: {
+        errorHeading: 'Something went wrong',
+        generic: {
+            description: 'Looks like a problem on our end, sorry. Try again soon.'
+        }
+    }
 };
 
 export default {
