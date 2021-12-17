@@ -228,7 +228,7 @@ describe('AccountInfo', () => {
                 it('address has not changed', async () => {
                     // Arrange
                     wrapper = await mountAccountInfo();
-                    await wrapper.setData({ hasAddressBeenUpdated: false });
+                    await wrapper.setData({ hasAddressBeenUpdated: false, hasFormUpdate: true });
 
                     jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
 
@@ -242,7 +242,7 @@ describe('AccountInfo', () => {
                 it('address has changed', async () => {
                     // Arrange
                     wrapper = await mountAccountInfo();
-                    await wrapper.setData({ hasAddressBeenUpdated: true });
+                    await wrapper.setData({ hasAddressBeenUpdated: true, hasFormUpdate: true });
 
                     jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
 

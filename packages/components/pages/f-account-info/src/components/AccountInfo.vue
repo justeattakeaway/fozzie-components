@@ -249,7 +249,7 @@ export default {
                 cookies: this.$cookies,
                 baseUrl: this.smartGatewayBaseUrl
             }),
-            accountInfoAnalyticsService: new AccountInfoAnalyticsService(this),
+            accountInfoAnalyticsService: new AccountInfoAnalyticsService(this.$gtm),
             tenantConfigs,
             isFormSubmitting: false,
             hasFormUpdate: false,
@@ -326,8 +326,6 @@ export default {
                 return;
             }
 
-            this.accountInfoAnalyticsService.trackFormSubmission(this.hasAddressBeenUpdated);
-
             if (!this.hasFormUpdate) {
                 return;
             }
@@ -338,6 +336,7 @@ export default {
                 // TODO - to be added with next ticket
                 this.$log.info('Consumer details saved successfully', ['account-pages', 'account-info']);
                 this.hasFormUpdate = false;
+                this.accountInfoAnalyticsService.trackFormSubmission(this.hasAddressBeenUpdated);
             } catch (error) {
                 this.$log.error('Error saving consumer details', error, ['account-pages', 'account-info']);
                 this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));

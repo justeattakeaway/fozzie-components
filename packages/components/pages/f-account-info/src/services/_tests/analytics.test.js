@@ -1,4 +1,4 @@
-import AccountInfoAnalyticsService from '../../analytics';
+import AccountInfoAnalyticsService from '../analytics';
 
 let gtmMock;
 let analytics;
@@ -11,7 +11,7 @@ describe('Analytics', () => {
             pushEvent: pushEventSpy
         };
 
-        analytics = new AccountInfoAnalyticsService({ $gtm: gtmMock });
+        analytics = new AccountInfoAnalyticsService(gtmMock);
     });
 
     afterEach(() => {
