@@ -3,12 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.13.0
+
+v0.14.0
 ------------------------------
 *December 17, 2021*
 
 ### Added
 - Analytics requirements when form is submitted.
+
+
+v0.13.0
+------------------------------
+*December 16, 2021*
+
+### Added
+- Error handling and error card using `f-card-with-content`
+- `info` and `error` logs to preferences fetch and save requests
 
 
 v0.12.0

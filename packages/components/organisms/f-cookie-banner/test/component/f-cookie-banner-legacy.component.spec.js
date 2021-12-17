@@ -1,17 +1,17 @@
 import forEach from 'mocha-each';
 
-const CookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
+const CookieBanner = require('../../test-utils/component-objects/f-cookie-banner-legacy.component');
 
 let cookieBanner;
 
-describe('Legacy - f-cookieBanner component tests', () => {
+describe('Legacy - f-cookie-banner component tests', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner();
         cookieBanner.withQuery('&knob-Locale', 'en-AU');
         cookieBanner.load();
     });
 
-    it('should display the f-cookieBanner component', () => {
+    it('should display the f-cookie-banner component', () => {
         // Assert
         expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
     });

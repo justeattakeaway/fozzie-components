@@ -1,10 +1,10 @@
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
-const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
+const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookie-banner-legacy.component');
 
 const legacyCookieBanner = new LegacyCookieBanner();
 
-const CookieConsentBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
+const CookieConsentBanner = require('../../test-utils/component-objects/f-cookie-consent-banner.component');
 
 const cookieConsentBanner = new CookieConsentBanner();
 
