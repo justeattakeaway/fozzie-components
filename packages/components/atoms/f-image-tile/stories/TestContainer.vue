@@ -7,8 +7,7 @@
             :img-src="cuisineImage"
             :display-text="cuisineId"
             :is-selected="selected"
-            @toggle="toggleCuisine"
-        />
+            @toggle="toggleCuisine" />
     </div>
 </template>
 

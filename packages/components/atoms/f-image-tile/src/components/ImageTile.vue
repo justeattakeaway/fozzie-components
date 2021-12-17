@@ -10,8 +10,7 @@
             :href="isLink ? href : '#'"
             :aria-hidden="isLink ? false : true"
             :tabindex="isLink ? false : -1"
-            data-test-id="image-tile-link"
-        >
+            data-test-id="image-tile-link">
             <span class="is-visuallyHidden">
                 {{ displayText }}
             </span>
@@ -22,22 +21,19 @@
             class="is-visuallyHidden"
             :class="$style['c-imageTile-checkbox']"
             data-test-id="image-tile-input"
-            @change="toggleFilter"
-        >
+            @change="toggleFilter">
         <label
             :class="[
                 $style['c-imageTile-label'], {
                     [$style['c-imageTile-label--selected']]: isFilterSelected
                 }]"
             :for="`imageTileToggle-${tileId}`"
-            data-test-id="image-tile-label"
-        >
+            data-test-id="image-tile-label">
             <img
                 :class="$style['c-imageTile-image']"
                 :src="imgSrc"
                 data-test-id="image-tile-image"
-                alt=""
-            >
+                alt="">
             <span :aria-hidden="isLink ? true : false">
                 {{ displayText }}
             </span>
