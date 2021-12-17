@@ -52,21 +52,6 @@ describe('Shared - f-header component tests', () => {
         browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
     });
 
-    it('should display all available countries', () => {
-        // Arrange
-        const controls = 'locale:en-GB';
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
-        // Act
-        header.load();
-        header.moveToCountrySelector();
-
-        // Assert
-        browser.percyScreenshot('f-header - Country list', 'desktop');
-    });
-
     forEach([
         'showLoginInfo',
         'showHelpLink',
@@ -92,7 +77,7 @@ describe('Shared - f-header component tests', () => {
         'userAccount',
         'countrySelector'
     ])
-    .it('should display the %s dropdown on hover', link => {
+    .it('should display the %s dropdown lists on hover', link => {
         // Arrange
         const controls = 'locale:en-GB';
 
