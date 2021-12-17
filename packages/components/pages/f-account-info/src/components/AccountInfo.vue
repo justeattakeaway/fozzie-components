@@ -58,6 +58,7 @@
 
                 <form-field
                     :value="consumer.phoneNumber"
+                    data-test-id="account-info-consumer-phoneNumber"
                     maxlength="16"
                     :label-text="$t('consumer.phoneNumberLabel')"
                     :placeholder="$t('consumer.phoneNumberPlaceholder')"
@@ -82,11 +83,12 @@
 
                 <form-field
                     :value="consumer.line1"
+                    data-test-id="account-info-consumer-line1"
                     maxlength="50"
                     :label-text="$t('consumer.addressLabel')"
                     :placeholder="$t('consumer.line1Placeholder')"
                     @blur="onBlur('line1')"
-                    @input="onEditConsumer('line1', $event)">
+                    @input="onEditConsumer('line1', $event, true)">
                     <template
                         v-if="$v.consumer.line1.$invalid"
                         #error>
@@ -98,23 +100,26 @@
 
                 <form-field
                     :value="consumer.line2"
+                    data-test-id="account-info-consumer-line2"
                     maxlength="50"
                     :placeholder="$t('consumer.line2Placeholder')"
-                    @input="onEditConsumer('line2', $event)" />
+                    @input="onEditConsumer('line2', $event, true)" />
 
                 <form-field
                     :value="consumer.line3"
+                    data-test-id="account-info-consumer-line3"
                     maxlength="50"
                     :placeholder="$t('consumer.line3Placeholder')"
-                    @input="onEditConsumer('line3', $event)" />
+                    @input="onEditConsumer('line3', $event, true)" />
 
                 <form-field
                     :value="consumer.locality"
+                    data-test-id="account-info-consumer-locality"
                     maxlength="50"
                     :label-text="$t('consumer.localityLabel')"
                     :placeholder="$t('consumer.localityPlaceholder')"
                     @blur="onBlur('locality')"
-                    @input="onEditConsumer('locality', $event)">
+                    @input="onEditConsumer('locality', $event, true)">
                     <template
                         v-if="$v.consumer.locality.$invalid"
                         #error>
@@ -126,11 +131,12 @@
 
                 <form-field
                     :value="consumer.postcode"
+                    data-test-id="account-info-consumer-postcode"
                     maxlength="50"
                     :label-text="$t('consumer.postcodeLabel')"
                     :placeholder="$t('consumer.postcodePlaceholder')"
                     @blur="onBlur('postcode')"
-                    @input="onEditConsumer('postcode', $event)">
+                    @input="onEditConsumer('postcode', $event, true)">
                     <template
                         v-if="$v.consumer.postcode.$invalid"
                         #error>
@@ -202,6 +208,8 @@ import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
 import tenantConfigs from '../tenants';
 import ConsumerApi from '../services/providers/Consumer.api';
 import fAccountInfoModule from '../store/accountInfo.module';
+import AccountInfoAnalyticsService from '../services/analytics';
+
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
@@ -246,9 +254,11 @@ export default {
                 cookies: this.$cookies,
                 baseUrl: this.smartGatewayBaseUrl
             }),
+            accountInfoAnalyticsService: new AccountInfoAnalyticsService(this.$gtm),
             tenantConfigs,
             isFormSubmitting: false,
             hasFormUpdate: false,
+            hasAddressBeenUpdated: false,
             shouldShowErrorPage: false,
             error: {}
         };
@@ -331,6 +341,8 @@ export default {
                 // TODO - to be added with next ticket
                 this.$log.info('Consumer details saved successfully', ['account-pages', 'account-info']);
                 this.hasFormUpdate = false;
+                this.accountInfoAnalyticsService.trackFormSubmission(this.hasAddressBeenUpdated);
+                this.hasAddressBeenUpdated = false;
             } catch (error) {
                 this.$log.error('Error saving consumer details', error, ['account-pages', 'account-info']);
                 this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));
@@ -351,10 +363,15 @@ export default {
         * A generic method that updates the State (e.g. 'consumer.<field> = value')
         * @param {string} field - The field of the consumer that needs changing
         * @param {string} value - The new value of the consumer field
+        * @param {Boolean} isAddressField - The field is part of the address.
         */
-        onEditConsumer (field, value) {
+        onEditConsumer (field, value, isAddressField = false) {
             this.editConsumerDetails({ field, value });
             this.hasFormUpdate = true;
+
+            if (isAddressField) {
+                this.hasAddressBeenUpdated = true;
+            }
         }
     }
 };
