@@ -1,11 +1,11 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-module.exports = class Link extends Page {
+module.exports = class MediaElement extends Page {
     constructor () {
-        super('atom', 'v-link-component');
+        super('molecule', 'media-element-component');
     }
 
-    get component () { return $('[data-test-id="link-component"]'); }
+    get component () { return $('[data-test-id="mediaElement-component"]'); }
 
     load () {
         super.load(this.component);

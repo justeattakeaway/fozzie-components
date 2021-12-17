@@ -1,18 +1,14 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-module.exports = class MediaElement extends Page {
-    constructor(){
-        super('molecule', 'media-element-component');
+module.exports = class ActionButton extends Page {
+    constructor () {
+        super('atom-folder', 'f-button--button-component');
     }
 
-    get component () { return $('[data-test-id="mediaElement-component"]'); }
+    get component () { return $('[data-test-id="action-button-component"]'); }
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     waitForComponent () {
@@ -21,5 +17,9 @@ module.exports = class MediaElement extends Page {
 
     isComponentDisplayed () {
         return this.component.isDisplayed();
+    }
+
+    isComponentClickable () {
+        return this.component.isClickable();
     }
 };

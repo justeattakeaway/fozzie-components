@@ -1,19 +1,14 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-skeletonLoader-selectors');
 
-module.exports = class SkeletonLoader extends Page {
-    constructor() {
-        super('molecule', 'skeleton-loader-component');
+module.exports = class RestaurantCard extends Page {
+    constructor () {
+        super('molecule-folder', 'f-restaurant-card--restaurant-card-component');
     }
 
-    get component () { return $(COMPONENT); }
+    get component () { return $('[data-test-id="restaurantCard-component"]'); }
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     waitForComponent () {
