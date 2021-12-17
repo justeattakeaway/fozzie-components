@@ -439,6 +439,7 @@ workflows:
           component_type_folder: 'packages/components/molecules'
           requires:
             - build-atoms
+            - build-tools
 
 #      - unit_tests: , 'organisms', 'pages', 'templates', 'services', 'storybook', 'tools'
 #          requires:
