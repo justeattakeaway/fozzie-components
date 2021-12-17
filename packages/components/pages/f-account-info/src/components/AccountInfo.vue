@@ -58,6 +58,7 @@
 
                 <form-field
                     :value="consumer.phoneNumber"
+                    data-test-id="account-info-consumer-phoneNumber"
                     maxlength="16"
                     :label-text="$t('consumer.phoneNumberLabel')"
                     :placeholder="$t('consumer.phoneNumberPlaceholder')"
@@ -99,18 +100,21 @@
 
                 <form-field
                     :value="consumer.line2"
+                    data-test-id="account-info-consumer-line2"
                     maxlength="50"
                     :placeholder="$t('consumer.line2Placeholder')"
                     @input="onEditConsumer('line2', $event, true)" />
 
                 <form-field
                     :value="consumer.line3"
+                    data-test-id="account-info-consumer-line3"
                     maxlength="50"
                     :placeholder="$t('consumer.line3Placeholder')"
                     @input="onEditConsumer('line3', $event, true)" />
 
                 <form-field
                     :value="consumer.locality"
+                    data-test-id="account-info-consumer-locality"
                     maxlength="50"
                     :label-text="$t('consumer.localityLabel')"
                     :placeholder="$t('consumer.localityPlaceholder')"
@@ -127,6 +131,7 @@
 
                 <form-field
                     :value="consumer.postcode"
+                    data-test-id="account-info-consumer-postcode"
                     maxlength="50"
                     :label-text="$t('consumer.postcodeLabel')"
                     :placeholder="$t('consumer.postcodePlaceholder')"
@@ -337,12 +342,12 @@ export default {
                 this.$log.info('Consumer details saved successfully', ['account-pages', 'account-info']);
                 this.hasFormUpdate = false;
                 this.accountInfoAnalyticsService.trackFormSubmission(this.hasAddressBeenUpdated);
+                this.hasAddressBeenUpdated = false;
             } catch (error) {
                 this.$log.error('Error saving consumer details', error, ['account-pages', 'account-info']);
                 this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));
             } finally {
                 this.setSubmittingState(false);
-                this.hasAddressBeenUpdated = false;
             }
         },
 

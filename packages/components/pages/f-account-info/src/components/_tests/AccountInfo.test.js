@@ -292,11 +292,17 @@ describe('AccountInfo', () => {
                 });
 
                 describe('form field is part of the address', () => {
-                    it('should set `hasAddressBeenUpdated` to `true`', async () => {
+                    it.each([
+                        ['line1'],
+                        ['line2'],
+                        ['line3'],
+                        ['postcode'],
+                        ['locality']
+                    ])('should set `hasAddressBeenUpdated` to `true` when `field` is %s', async field => {
                         // Arrange
                         wrapper = await mountAccountInfo();
 
-                        const element = wrapper.find('[data-test-id="account-info-consumer-line1"]');
+                        const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
 
                         // Act
                         element.vm.$emit('input', 'Nice Road');
@@ -307,11 +313,15 @@ describe('AccountInfo', () => {
                 });
 
                 describe('form field is not part of the address', () => {
-                    it('should not set `hasAddressBeenUpdated` to `true`', async () => {
+                    it.each([
+                        ['firstName'],
+                        ['lastName'],
+                        ['phoneNumber']
+                    ])('should not set `hasAddressBeenUpdated` to `true` when `field` is %s', async field => {
                         // Arrange
                         wrapper = await mountAccountInfo();
 
-                        const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
+                        const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
 
                         // Act
                         element.vm.$emit('input', 'Harry Potter');
