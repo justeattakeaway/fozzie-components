@@ -52,7 +52,6 @@ const mountAccountInfo = async ({
     propsData = sutProps,
     data = dataDefaults,
     storeOverride = null
-
 } = {}) => {
     const store = storeOverride || createStore({ state, actions });
     initialiseSpy = jest.spyOn(AccountInfo.methods, 'initialise');
@@ -66,6 +65,7 @@ const mountAccountInfo = async ({
         mocks,
         mixins: [AccountInfoValidationMixin]
     });
+
     await mock.vm.$nextTick();
 
     return mock;
@@ -225,9 +225,10 @@ describe('AccountInfo', () => {
     describe('`methods`', () => {
         describe('`onFormSubmit`', () => {
             describe('form is valid', () => {
-                it('address has not changed', () => {
+                it('address has not changed', async () => {
                     // Arrange
-                    wrapper = mountAccountInfo();
+                    wrapper = await mountAccountInfo();
+                    await wrapper.setData({ hasAddressBeenUpdated: false });
 
                     jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
 
@@ -238,13 +239,10 @@ describe('AccountInfo', () => {
                     expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(false);
                 });
 
-                it('address has changed', () => {
+                it('address has changed', async () => {
                     // Arrange
-                    wrapper = mountAccountInfo({
-                        data: () => ({
-                            hasAddressBeenUpdated: true
-                        })
-                    });
+                    wrapper = await mountAccountInfo();
+                    await wrapper.setData({ hasAddressBeenUpdated: true });
 
                     jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
 
@@ -296,8 +294,8 @@ describe('AccountInfo', () => {
                 describe('form field is part of the address', () => {
                     it('should set `hasAddressBeenUpdated` to `true`', async () => {
                         // Arrange
-                        wrapper = mountAccountInfo();
-                        // await wrapper.setData({ hasAddressBeenUpdated: false });
+                        wrapper = await mountAccountInfo();
+                        await wrapper.setData({ hasAddressBeenUpdated: false });
 
                         const element = wrapper.find('[data-test-id="account-info-consumer-line1"]');
 
@@ -312,8 +310,8 @@ describe('AccountInfo', () => {
                 describe('form field is not part of the address', () => {
                     it('should not set `hasAddressBeenUpdated` to `true`', async () => {
                         // Arrange
-                        wrapper = mountAccountInfo();
-                        // await wrapper.setData({ hasAddressBeenUpdated: false });
+                        wrapper = await mountAccountInfo();
+                        await wrapper.setData({ hasAddressBeenUpdated: false });
 
                         const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
 
