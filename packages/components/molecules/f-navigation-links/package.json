@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@justeat/f-link": "2.3.0",
-    "@justeat/f-wdio-utils": "0.4.0",
+    "@justeat/f-wdio-utils": "0.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

@@ -63,10 +63,11 @@ export const PromotionsShowcaseComponent = (args, { argTypes }) => ({
 
 PromotionsShowcaseComponent.argTypes = {
     items: {
-        options: Object.keys(mapping),
         control: {
-            type: 'select'
-        }
+            type: 'select',
+            options: Object.keys(mapping)
+        },
+        defaultValue: 'Both'
     }
 };
 

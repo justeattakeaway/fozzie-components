@@ -1,7 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class Alert extends Page {
-    constructor() {
+    constructor () {
         super('molecule', 'alert-component');
     }
 
@@ -11,10 +11,6 @@ module.exports = class Alert extends Page {
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     isComponentDisplayed () {
