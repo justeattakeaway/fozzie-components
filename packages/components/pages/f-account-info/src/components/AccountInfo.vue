@@ -15,7 +15,7 @@
             method="post"
             @submit.prevent="onFormSubmit">
             <form-field
-                :value="consumer.firstName"
+                v-model="consumer.firstName"
                 data-test-id="account-info-consumer-firstName"
                 maxlength="50"
                 :label-text="$t('consumer.firstNameLabel')"
@@ -35,7 +35,7 @@
             </form-field>
 
             <form-field
-                :value="consumer.lastName"
+                v-model="consumer.lastName"
                 data-test-id="account-info-consumer-lastName"
                 maxlength="50"
                 :label-text="$t('consumer.lastNameLabel')"
@@ -55,7 +55,7 @@
             </form-field>
 
             <form-field
-                :value="consumer.phoneNumber"
+                v-model="consumer.phoneNumber"
                 maxlength="16"
                 :label-text="$t('consumer.phoneNumberLabel')"
                 :placeholder="$t('consumer.phoneNumberPlaceholder')"
@@ -79,7 +79,8 @@
             </h2>
 
             <form-field
-                :value="consumer.line1"
+                v-model="consumer.line1"
+                data-test-id="account-info-consumer-line1"
                 maxlength="50"
                 :label-text="$t('consumer.addressLabel')"
                 :placeholder="$t('consumer.line1Placeholder')"
@@ -95,19 +96,19 @@
             </form-field>
 
             <form-field
-                :value="consumer.line2"
+                v-model="consumer.line2"
                 maxlength="50"
                 :placeholder="$t('consumer.line2Placeholder')"
                 @input="onEditConsumer('line2', $event, true)" />
 
             <form-field
-                :value="consumer.line3"
+                v-model="consumer.line3"
                 maxlength="50"
                 :placeholder="$t('consumer.line3Placeholder')"
                 @input="onEditConsumer('line3', $event, true)" />
 
             <form-field
-                :value="consumer.locality"
+                v-model="consumer.locality"
                 maxlength="50"
                 :label-text="$t('consumer.localityLabel')"
                 :placeholder="$t('consumer.localityPlaceholder')"
@@ -123,7 +124,7 @@
             </form-field>
 
             <form-field
-                :value="consumer.postcode"
+                v-model="consumer.postcode"
                 maxlength="50"
                 :label-text="$t('consumer.postcodeLabel')"
                 :placeholder="$t('consumer.postcodePlaceholder')"

@@ -191,18 +191,35 @@ describe('AccountInfo', () => {
                     expect(wrapper.vm.hasFormUpdate).toEqual(true);
                 });
 
-                describe('form field part of the address', () => {
-                    it('should set `hasAddressBeenUpdated` to `true` to indicate the form data has changed', async () => {
+                describe('form field is part of the address', () => {
+                    it('should set `hasAddressBeenUpdated` to `true`', async () => {
                         // Arrange
                         wrapper = mountAccountInfo();
                         await wrapper.setData({ hasAddressBeenUpdated: false });
-                        const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
+
+                        const element = wrapper.find('[data-test-id="account-info-consumer-line1"]');
 
                         // Act
                         element.vm.$emit('input', 'Nice Road');
 
                         // Assert
                         expect(wrapper.vm.hasAddressBeenUpdated).toEqual(true);
+                    });
+                });
+
+                describe('form field is not part of the address', () => {
+                    it('should not set `hasAddressBeenUpdated` to `true`', async () => {
+                        // Arrange
+                        wrapper = mountAccountInfo();
+                        await wrapper.setData({ hasAddressBeenUpdated: false });
+
+                        const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
+
+                        // Act
+                        element.vm.$emit('input', 'Nice Road');
+
+                        // Assert
+                        expect(wrapper.vm.hasAddressBeenUpdated).toEqual(false);
                     });
                 });
             });
