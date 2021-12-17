@@ -30,7 +30,8 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vite build",
-    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
+    "ci:build:services": "vite build",
+    "ci:lint:services": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "jest"
   },

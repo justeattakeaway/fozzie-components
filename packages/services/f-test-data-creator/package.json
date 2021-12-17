@@ -26,7 +26,7 @@
     "fozzie"
   ],
   "scripts": {
-    "lint": "vue-cli-service lint",
+    "ci:lint:services": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style"
   },

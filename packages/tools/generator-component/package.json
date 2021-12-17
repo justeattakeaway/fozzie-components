@@ -26,6 +26,7 @@
   ],
   "scripts": {
     "lint": "vue-cli-service lint",
+    "ci:lint:tools": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit --passWithNoTests"
   },

@@ -410,6 +410,26 @@ workflows:
           requires:
             - install
       - build:
+          name: build-tools
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          component_type: 'tools'
+          component_type_folder: 'packages/tools'
+          requires:
+            - install
+      - build:
+          name: build-services
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          component_type: 'services'
+          component_type_folder: 'packages/services'
+          requires:
+            - install
+      - build:
           name: build-molecules
           context: web-core
           filters:

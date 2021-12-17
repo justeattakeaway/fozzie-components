@@ -29,7 +29,8 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "vite build",
-    "lint": "vue-cli-service lint --no-fix",
+    "ci:build:services": "vite build",
+    "ci:lint:services": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "jest"
   },
