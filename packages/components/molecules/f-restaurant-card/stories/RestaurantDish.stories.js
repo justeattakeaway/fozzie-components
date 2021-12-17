@@ -18,8 +18,9 @@ export const RestaurantDishComponent = (args, { argTypes }) => ({
 
 RestaurantDishComponent.args = {
     name: 'Sausage And Egg Mcmuffin its a really long dish name I hope never happens®',
-    price: '£2.79',
-    calories: '1234kcal'
+    price: '£1.75',
+    calories: '1250kcal',
+    portion: '2 servings'
 };
 
 RestaurantDishComponent.storyName = 'restaurant-dish';

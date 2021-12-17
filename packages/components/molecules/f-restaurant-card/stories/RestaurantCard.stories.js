@@ -54,17 +54,19 @@ RestaurantCardComponent.args = {
             {
                 name: 'Sausage And Egg Mcmuffin its a really long dish name I hope never happens®',
                 price: '£2.79',
-                calories: '1234kcal'
+                calories: '345kcal'
             },
             {
                 name: 'Fries (Large)',
                 price: '£1.75',
-                calories: '1234kcal'
+                calories: '1250kcal',
+                portion: '2 servings'
             },
             {
                 name: 'Fish and chips (XL)',
                 price: '£19.95',
-                calories: '1234kcal'
+                calories: '599kcal',
+                portion: '1 serving'
             }
         ],
         offer: '30% off when you spend £20 - some really really long offer that hopefully never happens but we need to protect against just in case',

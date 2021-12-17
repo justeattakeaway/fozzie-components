@@ -8,9 +8,18 @@
             </span>
             <span
                 v-if="calories"
-                data-test-id="restaurant-dish-calories"
-                :class="[$style['c-restaurantCard-dish-calories']]">
-                {{ calories }}
+                :class="[$style['c-restaurantCard-dish-nutritionalInfo']]">
+                <span
+                    data-test-id="restaurant-dish-calories"
+                    :class="[$style['c-restaurantCard-dish-nutritionalInfo-item']]">
+                    {{ calories }}
+                </span>
+                <span
+                    v-if="portion"
+                    data-test-id="restaurant-dish-portion"
+                    :class="[$style['c-restaurantCard-dish-nutritionalInfo-item']]">
+                    {{ portion }}
+                </span>
             </span>
         </p>
         <p
@@ -44,6 +53,13 @@ export default {
          * String representation of the calorie count of the dish. Includes unit. E.g. 1000kcal
          */
         calories: {
+            type: String,
+            default: null
+        },
+        /**
+         * String representation of the portion size of the dish. I.e. '2 Servings'
+         */
+        portion: {
             type: String,
             default: null
         }
@@ -82,8 +98,30 @@ export default {
     font-weight: $font-weight-bold;
 }
 
-.c-restaurantCard-dish-calories {
+.c-restaurantCard-dish-nutritionalInfo {
     margin-top: spacing(x0.5);
     color: $color-content-subdued;
+}
+
+.c-restaurantCard-dish-nutritionalInfo-item {
+    padding-right: spacing(x0.5) / 2 * 3;
+    margin-right: spacing(x0.5);
+    position: relative;
+
+    &:after {
+        content: '\2022';
+        color: $color-content-subdued;
+        position: absolute;
+        right: 0;
+    }
+
+    &:last-of-type {
+        padding-right: 0;
+        margin-right: 0;
+
+        &:after {
+            display: none;
+        }
+    }
 }
 </style>
