@@ -3,7 +3,7 @@ import ImageTile from '../src/components/ImageTile.vue';
 import TestContainer from './TestContainer.vue';
 
 export default {
-    title: 'Components/Atoms/f-image-tile',
+    title: 'Components/Atoms',
     decorators: [withA11y]
 };
 

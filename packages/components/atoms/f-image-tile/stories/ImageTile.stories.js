@@ -2,7 +2,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import ImageTile from '../src/components/ImageTile.vue';
 
 export default {
-    title: 'Components/Atoms/f-image-tile',
+    title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
