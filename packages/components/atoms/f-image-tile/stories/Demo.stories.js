@@ -41,4 +41,4 @@ DemoImageTileComponent.argTypes = {
     }
 };
 
-DemoImageTileComponent.storyName = 'f-image-tile container demo';
+DemoImageTileComponent.storyName = 'f-image-tile in container demo';

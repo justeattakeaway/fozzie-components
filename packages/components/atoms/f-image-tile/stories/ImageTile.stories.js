@@ -24,7 +24,6 @@ ImageTileComponent.argTypes = {
     href: {
         control: { type: 'text' },
         description: 'Anchor link path',
-        default: '/Chicken',
         defaultValue: '/Chicken'
     },
     tileId: {
