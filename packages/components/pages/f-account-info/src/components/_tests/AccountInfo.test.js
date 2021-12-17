@@ -295,7 +295,6 @@ describe('AccountInfo', () => {
                     it('should set `hasAddressBeenUpdated` to `true`', async () => {
                         // Arrange
                         wrapper = await mountAccountInfo();
-                        await wrapper.setData({ hasAddressBeenUpdated: false });
 
                         const element = wrapper.find('[data-test-id="account-info-consumer-line1"]');
 
@@ -311,12 +310,11 @@ describe('AccountInfo', () => {
                     it('should not set `hasAddressBeenUpdated` to `true`', async () => {
                         // Arrange
                         wrapper = await mountAccountInfo();
-                        await wrapper.setData({ hasAddressBeenUpdated: false });
 
                         const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
 
                         // Act
-                        element.vm.$emit('input', 'Nice Road');
+                        element.vm.$emit('input', 'Harry Potter');
 
                         // Assert
                         expect(wrapper.vm.hasAddressBeenUpdated).toEqual(false);
