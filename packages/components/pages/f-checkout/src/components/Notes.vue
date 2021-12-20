@@ -69,7 +69,8 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'features'
+            'features',
+            'serviceType'
         ]),
 
         ...mapGetters(VUEX_CHECKOUT_MODULE, [
