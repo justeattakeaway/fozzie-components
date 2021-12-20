@@ -1,6 +1,6 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
-const NavigationLinks = require('../../test-utils/component-objects/f-navigationLinks.component');
+const NavigationLinks = require('../../test-utils/component-objects/f-navigation-links.component');
 
 let navigationLinks;
 
@@ -9,12 +9,11 @@ describe('Accessibility tests', () => {
         navigationLinks = new NavigationLinks();
 
         navigationLinks.load();
-        navigationLinks.waitForComponent();
     });
 
-    it('a11y - should test f-navigationLinks component WCAG compliance', () => {
+    it('a11y - should test f-navigation-links component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-navigationLinks');
+        const axeResults = getAccessibilityTestResults('f-navigation-links');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

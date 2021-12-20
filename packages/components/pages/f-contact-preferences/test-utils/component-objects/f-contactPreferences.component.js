@@ -22,6 +22,10 @@ module.exports = class ContactPreferences extends Page {
 
     get newsSmsPreference () { return $(CHECKBOXES.news.sms); }
 
+    load () {
+        super.load(this.component);
+    }
+
     waitForComponent () {
         super.waitForComponent(this.component);
     }

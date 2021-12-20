@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.12.0
 ------------------------------
-*December 15, 2021*
+*December 20, 2021*
 
 ### Added
 - Scrollable and stackable restaurant dish list component
@@ -15,6 +15,12 @@ v0.12.0
 ### Changed
 - Updated restaurant dish styling
 - Added dish state to restaurant card storybook
+
+v0.11.1
+------------------------------
+*December 17, 2021*
+### Added
+- @justeat/f-vue-icons added as a dependency
 
 v0.11.0
 ------------------------------

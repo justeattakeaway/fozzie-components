@@ -1,17 +1,14 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-link-selectors')
 
 module.exports = class Link extends Page {
-
-    get component () { return $(COMPONENT); }
-
-    load () {
-        this.open();
-        this.waitForComponent();
+    constructor () {
+        super('atom', 'v-link-component');
     }
 
-    open () {
-        super.openComponent('atom', 'v-link-component');
+    get component () { return $('[data-test-id="link-component"]'); }
+
+    load () {
+        super.load(this.component);
     }
 
     waitForComponent () {
@@ -21,4 +18,4 @@ module.exports = class Link extends Page {
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
-}
+};

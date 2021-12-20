@@ -7,7 +7,7 @@ describe('f-alert component tests', () => {
         alert.load();
     });
 
-    it('should display Alert', () => {
+    it('should display the f-alert component', () => {
         // Assert
         expect(alert.isComponentDisplayed()).toBe(true);
     });

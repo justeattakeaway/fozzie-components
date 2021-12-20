@@ -2,14 +2,12 @@ const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
-    ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
     FIELDS,
     KNOB_CHECKOUT_DROPDOWN,
     KNOB_BUTTON,
     SWITCH_USER_LINK,
-    GUEST_CHECKOUT_HEADER,
     GUEST_CHECKOUT_LOGIN_BUTTON,
     PRE_ORDER_WARNING,
     CHECKOUT_ERROR_MESSAGE,
@@ -17,15 +15,15 @@ const {
     CLOSE_MODAL,
     DUP_ORDER_GO_TO_HISTORY_BUTTON,
     ERROR_PAGE_COMPONENT,
-    ERROR_PAGE_HEADING,
-    ERROR_PAGE_DESCRIPTION,
-    ERROR_PAGE_IMAGE,
     AGE_VERIFICATION_COMPONENT,
     AGE_VERIFICATION_DAY_DROPDOWN,
     AGE_VERIFICATION_MONTH_DROPDOWN,
     AGE_VERIFICATION_YEAR_DROPDOWN,
     AGE_VERIFICATION_SUBMIT_BUTTON,
-    AGE_VERIFICATION_ERROR
+    AGE_VERIFICATION_ERROR,
+    COURIER_ACCORDION_HEADER,
+    KITCHEN_ACCORDION_HEADER,
+    ORDER_ACCORDION_HEADER
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -38,8 +36,6 @@ module.exports = class Checkout extends Page {
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
 
-    get orderTimeDropdownOptions () { return $$(ORDER_TIME_DROPDOWN_OPTIONS); }
-
     get knobCheckoutDropdown () { return $(KNOB_CHECKOUT_DROPDOWN); }
 
     get goToPaymentButton () { return $(GO_TO_PAYMENT_BUTTON); }
@@ -49,8 +45,6 @@ module.exports = class Checkout extends Page {
     get userNoteInput () { return $(USER_NOTE_INPUT); }
 
     get switchUserLink () { return $(SWITCH_USER_LINK); }
-
-    get guestCheckoutHeader () { return $(GUEST_CHECKOUT_HEADER); }
 
     get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON); }
 
@@ -66,12 +60,6 @@ module.exports = class Checkout extends Page {
 
     get errorPageComponent () { return $(ERROR_PAGE_COMPONENT); }
 
-    get errorPageDescription () { return $(ERROR_PAGE_DESCRIPTION); }
-
-    get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
-
-    get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
-
     get ageVerificationComponent () { return $(AGE_VERIFICATION_COMPONENT); }
 
     get ageVerificationDayDropdown () { return $(AGE_VERIFICATION_DAY_DROPDOWN); }
@@ -83,6 +71,12 @@ module.exports = class Checkout extends Page {
     get ageVerificationError () { return $(AGE_VERIFICATION_ERROR); }
 
     get ageVerificationSubmitButton () { return $(AGE_VERIFICATION_SUBMIT_BUTTON); }
+
+    get courierAccordionHeader () { return $(COURIER_ACCORDION_HEADER); }
+
+    get kitchenAccordionHeader () { return $(KITCHEN_ACCORDION_HEADER); }
+
+    get orderAccordionHeader () { return $(ORDER_ACCORDION_HEADER); }
     /* eslint-enable class-methods-use-this */
 
     fields = {
@@ -120,8 +114,16 @@ module.exports = class Checkout extends Page {
             get error () { return $(FIELDS.addressPostcode.error); },
             get typeError () { return $(FIELDS.addressPostcode.typeError); }
         },
-        userNote: {
-            get input () { return $(FIELDS.userNote.input); },
+        courierNote: {
+            get input () { return $(FIELDS.courierNote.input); },
+            get error () { return ''; }
+        },
+        kitchenNote: {
+            get input () { return $(FIELDS.kitchenNote.input); },
+            get error () { return ''; }
+        },
+        orderNote: {
+            get input () { return $(FIELDS.orderNote.input); },
             get error () { return ''; }
         },
         tableIdentifier: {
@@ -153,15 +155,6 @@ module.exports = class Checkout extends Page {
 
     loadAgeVerification () {
         super.load(this.ageVerificationComponent);
-    }
-
-    open (url) {
-        super.open(url);
-    }
-
-    withQuery (name, value) {
-        super.withQuery(name, value);
-        return this;
     }
 
     waitForComponent (component = this.component) {
@@ -261,7 +254,6 @@ module.exports = class Checkout extends Page {
     * @param {String} customerInfo.postcode Postcode of the user's address - delivery service type.
     * @param {String} customerInfo.orderTime Time of user's requested delivery/collection/dine-in time.
     * @param {String} customerInfo.tableIdentifier Table number of user.
-    * @param {String} customerInfo.note The user's extra note.
     */
     populateCheckoutForm (checkoutInfo, customerInfo) {
         if (!checkoutInfo.isAuthenticated) {
@@ -283,10 +275,6 @@ module.exports = class Checkout extends Page {
 
         if (customerInfo.orderTime) {
             this.selectOrderTime(customerInfo.orderTime);
-        }
-
-        if (customerInfo.userNote) {
-            this.fields.userNote.input.setValue(customerInfo.userNote);
         }
     }
 
@@ -398,5 +386,18 @@ module.exports = class Checkout extends Page {
 
     submitAgeVerification () {
         this.ageVerificationSubmitButton.click();
+    }
+
+    /**
+    * @description
+    * Clicks accordion header of delivery notes and sets the value of the text area
+    *
+    * @param {String} header The accordion header to be opened
+    * @param {String} noteType The note type to be populated
+    * @param {String} note The value of the note
+    */
+    expandAndPopulateNote (header, noteType, note) {
+        this[header].click();
+        this.fields[noteType].input.setValue(note);
     }
 };

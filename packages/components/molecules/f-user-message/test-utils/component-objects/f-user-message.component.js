@@ -1,16 +1,12 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const {
-    USER_MESSAGE_COMPONENT,
-    USER_MESSAGE_CONTENT
-} = require('./f-user-message-selectors');
 
 module.exports = class UserMessage extends Page {
-    constructor() {
+    constructor () {
         super('molecule', 'user-message-component');
     }
 
-    get component () { return $(USER_MESSAGE_COMPONENT) }
-    get content () { return this.component.$(USER_MESSAGE_CONTENT) }
+    get component () { return $('[data-test-id="user-message-component"]'); }
+    get content () { return this.component.$('[data-test-id="user-message-content"]'); }
 
     load () {
         super.load(this.component);
@@ -18,10 +14,6 @@ module.exports = class UserMessage extends Page {
 
     waitForComponent () {
         super.waitForComponent(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     isComponentDisplayed () {
@@ -33,4 +25,4 @@ module.exports = class UserMessage extends Page {
 
         return this.content.isDisplayed() && messageContent.length > 0;
     }
-}
+};

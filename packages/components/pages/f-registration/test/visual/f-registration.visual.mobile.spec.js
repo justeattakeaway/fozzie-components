@@ -1,5 +1,3 @@
-import forEach from 'mocha-each';
-
 const Registration = require('../../test-utils/component-objects/f-registration.component');
 
 let registration;
@@ -31,7 +29,7 @@ describe('f-registration - Mobile visual tests', () => {
         browser.percyScreenshot('f-registration - "Email is already registered error"', 'mobile');
     });
 
-    it('should display error when "%s" field is empty', field => {
+    it('should display error when form is empty', () => {
         // Arrange
         const userInfo = {
             firstName: '',
@@ -63,7 +61,7 @@ describe('f-registration - Mobile visual tests', () => {
         browser.percyScreenshot('f-registration - "Invalid input error"', 'mobile');
     });
 
-    it('should display error when "%s" input is too long', field => {
+    it('should display error when form input is too long', () => {
         // Arrange
         const userInfo = {
             firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
