@@ -29,10 +29,10 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vite build",
-    "ci:build:atoms": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "test": "jest",
+    "ci:test:atoms": "yarn test",
     "test:coverage": "jest test:unit --coverage"
   },
   "browserslist": [

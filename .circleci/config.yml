@@ -296,6 +296,7 @@ jobs:
           at: .
       - detect_root_change
       - build_packages
+      - build_storybook
       - persist_to_workspace:
           root: .
           paths:
@@ -397,9 +398,8 @@ workflows:
       - unit_tests:
           matrix:
             parameters:
-              component_type: ['tools', 'services']
+              component_type: ['tools', 'services', 'atoms', 'molecules']
               # component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
-          name: unit-tests
           context: web-core
           filters:
             branches:

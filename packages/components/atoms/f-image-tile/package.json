@@ -28,12 +28,11 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-image-tile ./src/index.js",
-    "ci:build:atoms": "vue-cli-service build --target lib --name f-image-tile ./src/index.js",
     "lint": "vue-cli-service lint",
-    "ci:lint:atoms": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
+    "ci:test:atoms": "yarn test",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
   },
