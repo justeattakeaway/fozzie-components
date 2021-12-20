@@ -34,6 +34,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
+    "ci:test:pages": "yarn test",
     "test:coverage": "yarn test --coverage",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_REGISTRATION} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",

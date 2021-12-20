@@ -35,6 +35,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
+    "ci:test:pages": "yarn test",
     "test:watch": "vue-cli-service test:unit --watch",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",

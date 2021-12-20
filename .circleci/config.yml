@@ -398,8 +398,7 @@ workflows:
       - unit_tests:
           matrix:
             parameters:
-              component_type: ['tools', 'services', 'atoms', 'molecules']
-              # component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
           context: web-core
           filters:
             branches:
