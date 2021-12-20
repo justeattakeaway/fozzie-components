@@ -97,7 +97,7 @@ export default {
             this.isFilterSelected = !this.isFilterSelected;
 
             this.$nextTick(() => {
-                this.$emit('toggle', this.filterEmitObject(this.tileId));
+                this.$emit('toggle', this.createEmitObject(this.tileId));
             });
         },
         /**
@@ -106,7 +106,7 @@ export default {
          *
          * @param {tileId} string
          */
-        filterEmitObject (tileId) {
+        createEmitObject (tileId) {
             return {
                 tileId
             };

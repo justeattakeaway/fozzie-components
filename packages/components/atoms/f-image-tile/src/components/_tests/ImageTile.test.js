@@ -136,15 +136,15 @@ describe('ImageTile', () => {
             });
         });
 
-        describe('filterEmitObject :: ', () => {
+        describe('createEmitObject :: ', () => {
             it('should return an object using the tileId', () => {
                 // Arrange
                 const wrapper = shallowMount(ImageTile, { tileId: 'chicken' });
-                const spy = jest.spyOn(wrapper.vm, 'filterEmitObject');
+                const spy = jest.spyOn(wrapper.vm, 'createEmitObject');
                 const emitObject = { tileId: wrapper.vm.tileId };
 
                 // Act
-                wrapper.vm.filterEmitObject(wrapper.vm.tileId);
+                wrapper.vm.createEmitObject(wrapper.vm.tileId);
 
                 // Assert
                 expect(spy).toReturnWith(emitObject);
