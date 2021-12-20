@@ -90,6 +90,9 @@ $scrollOffset: spacing(x2);
 
 .c-restaurantCard-dishes--isScrollable > .c-restaurantCard-dishes-item {
     scroll-snap-align: center;
+    flex: 0 0 85%;
+    margin-bottom: 0;
+    margin-right: spacing();
 
     &:first-of-type {
         margin-left: $scrollOffset;
@@ -103,10 +106,6 @@ $scrollOffset: spacing(x2);
         scroll-margin-right: $scrollOffset;
         scroll-snap-align: center;
     }
-
-    flex: 0 0 85%;
-    margin-bottom: 0;
-    margin-right: spacing();
 
     &:only-child {
         flex: 0 0 100%;
