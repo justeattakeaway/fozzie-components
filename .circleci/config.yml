@@ -343,9 +343,9 @@ jobs:
       component_type:
         type: string
     steps:
-      - detect_root_change
       - attach_workspace:
           at: .
+      - detect_root_change
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
