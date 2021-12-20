@@ -65,7 +65,7 @@ export default {
         },
         displayText: {
             type: String,
-            default: 'Chicken'
+            default: null
         },
         imgSrc: {
             type: String,
