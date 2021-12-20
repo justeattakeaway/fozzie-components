@@ -8,7 +8,7 @@
                     [$style['c-imageTile-link--toggle']]: !isLink
                 }]"
             :href="isLink ? href : '#'"
-            :aria-hidden="isLink ? false : true"
+            :aria-hidden="!isLink"
             :tabindex="isLink ? false : -1"
             data-test-id="image-tile-link">
             <span class="is-visuallyHidden">
@@ -34,7 +34,7 @@
                 :src="imgSrc"
                 data-test-id="image-tile-image"
                 alt="">
-            <span :aria-hidden="isLink ? true : false">
+            <span :aria-hidden="isLink">
                 {{ displayText }}
             </span>
         </label>
@@ -133,9 +133,9 @@ export default {
 }
 
 .c-imageTile-link--toggle {
-  display: block;
-  position: static;
-  pointer-events: none;
+    display: block;
+    position: static;
+    pointer-events: none;
 }
 
 .c-imageTile-label {
