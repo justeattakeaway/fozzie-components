@@ -24,11 +24,6 @@ $header--transparent-gradient-color : $color-black;
 $header--transparent-gradient       : 115px;
 $header--transparent-opacity        : 0.7;
 
-@mixin theme($type) {
-    [data-theme-header="#{$type}"] & {
-        @content;
-    }
-}
 
 // removes scroll
 .is-navInView {

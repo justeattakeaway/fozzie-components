@@ -11,6 +11,10 @@ v9.2.0
 ### Removed
 - 'ml' theme override for Logo.
 - width css definition from logo icon to make sure that icons for different tenants (je and ml) are rendered correctly with same height.
+- nb-No and da-DK from copy, storybook story and tests.
+
+### Changed
+- some 'je' prop values to 'jet' in tests
 
 
 v9.1.0

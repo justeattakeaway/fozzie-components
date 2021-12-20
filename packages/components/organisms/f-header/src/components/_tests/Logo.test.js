@@ -4,7 +4,7 @@ import Logo from '../Logo.vue';
 describe('Logo', () => {
     it('should be defined', () => {
         const propsData = {
-            theme: 'je',
+            theme: 'jet',
             headerBackgroundTheme: 'transparent',
             companyName: 'Just Eat',
             isLogoDisabled: false
@@ -33,7 +33,7 @@ describe('Logo', () => {
     it('should render je logo if je theme passed', () => {
         // Arrange
         const propsData = {
-            theme: 'je',
+            theme: 'jet',
             headerBackgroundTheme: 'transparent',
             companyName: 'Just Eat',
             isLogoDisabled: false
@@ -70,7 +70,7 @@ describe('Logo', () => {
         };
         // Arrange
         const propsData = {
-            theme: 'je',
+            theme: 'jet',
             companyName: 'Just Eat',
             isLogoDisabled: false
         };
@@ -96,7 +96,7 @@ describe('Logo', () => {
         };
         // Arrange
         const propsData = {
-            theme: 'je',
+            theme: 'jet',
             companyName: 'Just Eat',
             isLogoDisabled: true
         };
@@ -127,7 +127,7 @@ describe('Logo', () => {
         ])('should have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
             // Arrange
             const propsData = {
-                theme: 'je',
+                theme: 'jet',
                 headerBackgroundTheme: theme,
                 companyName: 'Just Eat',
                 isLogoDisabled: false
@@ -152,7 +152,7 @@ describe('Logo', () => {
         ])('should not have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
             // Arrange
             const propsData = {
-                theme: 'je',
+                theme: 'jet',
                 headerBackgroundTheme: theme,
                 companyName: 'Just Eat',
                 isLogoDisabled: false
