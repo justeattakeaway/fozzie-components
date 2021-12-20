@@ -12,7 +12,15 @@ exports.RETRY_BUTTON = '[data-test-id="redirect-to-menu-button"]';
 exports.CLOSE_MODAL = '[data-test-id="close-modal"]';
 exports.DUP_ORDER_GO_TO_HISTORY_BUTTON = '[data-test-id="redirect-to-orderhistory-button"]';
 exports.ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-component"]';
+exports.ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';
+exports.ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description"]';
+exports.ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
 
+exports.COURIER_ACCORDION_HEADER = '[data-test-id="courier-accordion-header"]';
+exports.KITCHEN_ACCORDION_HEADER = '[data-test-id="kitchen-accordion-header"]';
+exports.ORDER_ACCORDION_HEADER = '[data-test-id="order-accordion-header"]';
+
+exports.AGE_VERIFICATION_COMPONENT = '[data-test-id="checkout-age-verification-component"]';
 exports.AGE_VERIFICATION_COMPONENT = '[data-test-id="checkout-age-verification-component"]';
 exports.AGE_VERIFICATION_DAY_DROPDOWN = '[data-test-id="formfield-dob-day-dropdown-select"]';
 exports.AGE_VERIFICATION_MONTH_DROPDOWN = '[data-test-id="formfield-dob-month-dropdown-select"]';
@@ -65,5 +73,14 @@ exports.FIELDS = {
     },
     tableIdentifier: {
         input: '[data-test-id="formfield-table-identifier-input"]'
+    },
+    courierNote: {
+        input: '[data-test-id="formfield-courier-note-textarea"]'
+    },
+    kitchenNote: {
+        input: '[data-test-id="formfield-kitchen-note-textarea"]'
+    },
+    orderNote: {
+        input: '[data-test-id="formfield-order-note-textarea"]'
     }
 };

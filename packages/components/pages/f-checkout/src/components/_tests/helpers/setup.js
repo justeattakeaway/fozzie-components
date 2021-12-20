@@ -60,8 +60,10 @@ const defaultCheckoutState = {
     authToken: '',
     isLoggedIn: false,
     errors: [],
-    userNote: 'No ketchup, please.',
-    geolocation: null
+    notesConfiguration: { isSplitNotesEnabled: false },
+    notes: { order: { note: 'This is an order note' } },
+    geolocation: null,
+    features: {}
 };
 
 const defaultAnalyticsState = {
@@ -89,9 +91,18 @@ const defaultCheckoutActions = {
     placeOrder: jest.fn(),
     getCustomerName: jest.fn(),
     updateHasAsapSelected: jest.fn(),
-    getUserNote: jest.fn(),
-    saveUserNote: jest.fn(),
+    getNotesConfiguration: jest.fn(),
+    setCheckoutFeatures: jest.fn(),
     updateDateOfBirth: jest.fn()
+};
+
+const defaultCheckoutGetters = {
+    formattedNotes () {
+        return { order: { note: 'This is an order note' } };
+    },
+    noteValue () {
+        return 'This is a note';
+    }
 };
 
 const defaultAnalyticsActions = {
@@ -116,6 +127,7 @@ const i18n = {
 const createStore = (
     checkoutState = defaultCheckoutState,
     checkoutActions = defaultCheckoutActions,
+    checkoutGetters = defaultCheckoutGetters,
     analyticsState = defaultAnalyticsState,
     analyticsActions = defaultAnalyticsActions,
     experimentationState = defaultExperimentationState,
@@ -125,7 +137,8 @@ const createStore = (
         [VUEX_CHECKOUT_MODULE]: {
             namespaced: true,
             state: checkoutState,
-            actions: checkoutActions
+            actions: checkoutActions,
+            getters: checkoutGetters
         },
         [VUEX_CHECKOUT_ANALYTICS_MODULE]: {
             namespaced: true,
@@ -161,6 +174,7 @@ export {
     fulfilmentTimes,
     defaultCheckoutState,
     defaultCheckoutActions,
+    defaultCheckoutGetters,
     defaultAnalyticsState,
     defaultExperimentationState,
     i18n,

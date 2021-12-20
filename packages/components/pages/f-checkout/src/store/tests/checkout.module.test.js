@@ -20,7 +20,12 @@ import {
     mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
 import {
-    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, ERROR_TYPES, DUPLICATE_ORDER
+    VUEX_CHECKOUT_ANALYTICS_MODULE,
+    DEFAULT_CHECKOUT_ISSUE,
+    ERROR_TYPES,
+    DUPLICATE_ORDER,
+    CHECKOUT_NOTE_TYPE_COURIER,
+    CHECKOUT_NOTE_TYPE_ORDER
 } from '../../constants';
 
 import {
@@ -35,7 +40,7 @@ import {
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
     UPDATE_STATE,
-    UPDATE_USER_NOTE,
+    UPDATE_USER_NOTES,
     UPDATE_GEO_LOCATION,
     UPDATE_CHECKOUT_ERROR_MESSAGE,
     UPDATE_ADDRESS,
@@ -45,7 +50,7 @@ import {
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
 
-const { actions, mutations } = CheckoutModule;
+const { actions, getters, mutations } = CheckoutModule;
 
 const {
     createGuestUser,
@@ -61,10 +66,7 @@ const {
     updateCheckout,
     updateUserDetails,
     updateDateOfBirth,
-    updateFulfilmentTime,
-    updateUserNote,
-    getUserNote,
-    saveUserNote
+    updateFulfilmentTime
 } = actions;
 
 const mobileNumber = '+447111111111';
@@ -102,7 +104,7 @@ const issues = [
     }
 ];
 
-const userNote = 'Beware of the dachshund';
+const notes = { courier: { note: 'Please do not knock' }, kitchen: { note: 'No ketchup please' } };
 const checkoutErrorMessage = {
     messageKey: DUPLICATE_ORDER,
     shouldRedirectToMenu: false,
@@ -153,9 +155,11 @@ const defaultState = {
     authToken: '',
     isLoggedIn: false,
     isGuestCreated: false,
-    userNote: '',
+    notes: {},
+    notesConfiguration: {},
     geolocation: null,
-    hasAsapSelected: false
+    hasAsapSelected: false,
+    features: {}
 };
 
 const analyticsService = {
@@ -383,6 +387,21 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_USER_NOTES} ::`, () => {
+            it('should update the state with the new note values', () => {
+                // Arrange
+                const noteData = { type: 'kitchen', note: 'This is the new note value' };
+
+                // Act
+                mutations[UPDATE_USER_NOTES](state, noteData);
+
+                // Assert
+                expect(state.notes).toEqual({
+                    [noteData.type]: { note: noteData.note }
+                });
+            });
+        });
+
         describe(`${CLEAR_DOB_ERROR} :: `, () => {
             it('should remove the `DOB_REQUIRED_ISSUE` and the `AGE_VERIFICATION_ISSUE` errors', () => {
                 // Arrange
@@ -402,7 +421,6 @@ describe('CheckoutModule', () => {
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
-            [UPDATE_USER_NOTE, 'userNote', userNote],
             [UPDATE_CHECKOUT_ERROR_MESSAGE, 'checkoutErrorMessage', checkoutErrorMessage]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {
             // Arrange & Act
@@ -831,7 +849,7 @@ describe('CheckoutModule', () => {
                 payload.data = {
                     basketId,
                     customerNotes: {
-                        NoteForRestaurant: userNote
+                        ...notes
                     },
                     referralState: 'ReferredByWeb'
                 };
@@ -1268,7 +1286,6 @@ describe('CheckoutModule', () => {
 
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
-            [updateUserNote, UPDATE_USER_NOTE, userNote],
             [updateCheckoutErrorMessage, UPDATE_CHECKOUT_ERROR_MESSAGE, checkoutErrorMessage]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
@@ -1277,87 +1294,197 @@ describe('CheckoutModule', () => {
             // Assert
             expect(commit).toHaveBeenCalledWith(mutation, value);
         });
+    });
 
-        describe('getUserNote ::', () => {
-            describe('if sessionStorage exists', () => {
-                beforeEach(() => {
-                    Object.defineProperty(window, 'sessionStorage', { value: storageMock });
-                });
+    describe('getters ::', () => {
+        describe('formattedNotes ::', () => {
+            describe('when split notes is enabled', () => {
+                // Arrange
+                const splitNotesEnabledState = {
+                    ...state,
+                    features: {
+                        isSplitNotesEnabled: true
+                    },
+                    notes: { courier: { note: 'Please do not knock' }, kitchen: { note: 'No ketchup please' } }
+                };
 
-                afterEach(() => {
-                    window.sessionStorage.clear();
-                    jest.resetAllMocks();
-                });
+                it('should return the formattedNotes as they are stored in state', () => {
+                    // Act
+                    const result = getters.formattedNotes(splitNotesEnabledState);
 
-                describe('when the user note exists in session storage', () => {
-                    it('should call dispatch with updateUserNote action and the user note', () => {
-                        // Arrange
-                        jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(userNote);
-
-                        // Act
-                        getUserNote(context);
-
-                        // Assert
-                        expect(dispatch).toHaveBeenCalledWith('updateUserNote', userNote);
-                    });
-                });
-
-                describe('when the user note does NOT exist in session storage', () => {
-                    it('should not call dispatch', () => {
-                        // Arrange
-                        jest.spyOn(window.sessionStorage, 'getItem').mockReturnValue(undefined);
-
-                        // Act
-                        getUserNote(context);
-
-                        // Assert
-                        expect(dispatch).not.toHaveBeenCalled();
-                    });
+                    // Assert
+                    expect(result).toEqual(splitNotesEnabledState.notes);
                 });
             });
 
-            describe('if sessionStorage does NOT exist', () => {
-                beforeAll(() => {
-                    Object.defineProperty(window, 'sessionStorage', { value: null });
-                });
+            describe('when split notes is disabled', () => {
+                // Arrange
+                const splitNotesDisabledState = {
+                    ...state,
+                    features: {
+                        isSplitNotesEnabled: false
+                    },
+                    notes: { order: { note: 'Please do not knock' } }
+                };
 
-                afterAll(() => {
-                    window.sessionStorage.clear();
-                    jest.resetAllMocks();
-                });
+                it('should return the formattedNotes as they are stored in state', () => {
+                    const expectedResult = [{ type: 'delivery', value: splitNotesDisabledState.notes.order.note }];
 
-                it('should not call dispatch', () => {
                     // Act
-                    getUserNote(context);
+                    const result = getters.formattedNotes(splitNotesDisabledState);
 
                     // Assert
-                    expect(dispatch).not.toHaveBeenCalled();
+                    expect(result).toEqual(expectedResult);
                 });
             });
         });
 
-        describe('saveUserNote ::', () => {
-            beforeEach(() => {
-                Object.defineProperty(window, 'sessionStorage', { value: storageMock });
-            });
-
-            afterEach(() => {
-                window.sessionStorage.clear();
-                jest.resetAllMocks();
-            });
-
-
-            it('should save userNote to sessionStorage', () => {
+        describe('shouldShowKitchenNotes ::', () => {
+            describe('when kitchen note accepted is returned `true` from the API', () => {
                 // Arrange
-                const spy = jest.spyOn(window.sessionStorage, 'setItem');
-                const testBasketId = '11111';
-                const key = `userNote-${testBasketId}`;
+                const kitchenNotesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            kitchenNoteAccepted: true
+                        }
+                    }
+                };
 
-                // Act
-                saveUserNote(context);
+                it('should return true', () => {
+                    // Act
+                    const result = getters.shouldShowKitchenNotes(kitchenNotesState);
+
+                    // Assert
+                    expect(result).toEqual(true);
+                });
+            });
+
+            describe('when kitchen note accepted is returned `false` from the API', () => {
+                // Arrange
+                const kitchenNotesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            kitchenNoteAccepted: false
+                        }
+                    }
+                };
+
+                it('should return false', () => {
+                    // Act
+                    const result = getters.shouldShowKitchenNotes(kitchenNotesState);
+
+                    // Assert
+                    expect(result).toEqual(false);
+                });
+            });
+        });
+
+        describe('noteTypeCourierOrOrder ::', () => {
+            describe('when courier note accepted is returned `true` from the API', () => {
+                // Arrange
+                const courierNotesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            courierNoteAccepted: true
+                        }
+                    }
+                };
+
+                it(`should return ${CHECKOUT_NOTE_TYPE_COURIER}`, () => {
+                    // Act
+                    const result = getters.noteTypeCourierOrOrder(courierNotesState);
+
+                    // Assert
+                    expect(result).toEqual(CHECKOUT_NOTE_TYPE_COURIER);
+                });
+            });
+
+            describe('when courier note accepted is returned `false` from the API', () => {
+                // Arrange
+                const courierNotesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            courierNoteAccepted: false
+                        }
+                    }
+                };
+
+                it(`should return ${CHECKOUT_NOTE_TYPE_ORDER}`, () => {
+                    // Act
+                    const result = getters.noteTypeCourierOrOrder(courierNotesState);
+
+                    // Assert
+                    expect(result).toEqual(CHECKOUT_NOTE_TYPE_ORDER);
+                });
+            });
+        });
+
+        describe('noteValue ::', () => {
+            describe('when courierNote is accepted', () => {
+                // Arrange
+                const notesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            courierNoteAccepted: true
+                        }
+                    },
+                    notes: { courier: { note: 'This is a courier note' }, order: { note: 'This is an order note' } }
+                };
+
+                it(`should return ${notesState.notes.courier.note}`, () => {
+                    // Act
+                    const result = getters.noteValue(notesState);
+
+                    // Assert
+                    expect(result).toEqual(notesState.notes.courier.note);
+                });
+            });
+
+            describe('when courierNote is not accepted', () => {
+                // Arrange
+                const notesState = {
+                    ...state,
+                    serviceType: 'delivery',
+                    notesConfiguration: {
+                        delivery: {
+                            courierNoteAccepted: false
+                        }
+                    },
+                    notes: { courier: { note: 'This is a courier note' }, order: { note: 'This is an order note' } }
+                };
+
+                it(`should return ${notesState.notes.order.note}`, () => {
+                    // Act
+                    const result = getters.noteValue(notesState);
+
+                    // Assert
+                    expect(result).toEqual(notesState.notes.order.note);
+                });
+            });
+        });
+
+        describe('kitchenNoteValue ::', () => {
+            it('should return the value of the kitchen note', () => {
+                // Arrange
+                const notesState = {
+                    ...state,
+                    notes: { kitchen: { note: 'This is a kitchen note' } }
+                };
+                    // Act
+                const result = getters.kitchenNoteValue(notesState);
 
                 // Assert
-                expect(spy).toHaveBeenCalledWith(key, state.userNote);
+                expect(result).toEqual(notesState.notes.kitchen.note);
             });
         });
     });
