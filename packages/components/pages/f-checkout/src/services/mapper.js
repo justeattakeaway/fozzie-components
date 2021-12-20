@@ -10,11 +10,11 @@ const mapUpdateCheckoutRequest = ({
     isCheckoutMethodDelivery,
     isCheckoutMethodDineIn, // Should probably just pass the service type here instead
     time,
-    userNote,
+    notes,
     geolocation,
     asap,
     tableIdentifier
-}) => ([
+}) => [
     {
         op: 'add',
         path: '/customer',
@@ -59,14 +59,9 @@ const mapUpdateCheckoutRequest = ({
     {
         op: 'add',
         path: '/notes',
-        value: [
-            {
-                type: 'delivery',
-                note: userNote
-            }
-        ]
+        value: notes
     }
-]);
+];
 
 /**
  * Maps checkout names to required GA names.
@@ -122,9 +117,12 @@ const getAnalyticsErrorCodeByApiErrorCode = error => {
     return analyticsErrorCode;
 };
 
+const mapNotesFromApi = notes => notes.reduce((obj, item) => Object.assign(obj, { [item.type]: { note:  item.note } }), {});
+
 export {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
+    mapNotesFromApi,
     mapUpdateCheckoutRequest
 };

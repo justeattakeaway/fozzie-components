@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.13.0
+------------------------------
+*December 16, 2021*
+
+### Added
+- Ability to have split notes enabled or disabled
+
+
 v3.12.0
 ------------------------------
 *December 6, 2021*

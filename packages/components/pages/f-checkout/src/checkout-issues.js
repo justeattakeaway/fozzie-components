@@ -41,6 +41,21 @@ const checkoutIssues = {
         shouldRedirectToMenu: false
     },
 
+    KITCHEN_NOTE_NOT_ACCEPTED: {
+        errorType: ERROR_TYPES.dialog,
+        shouldRedirectToMenu: false
+    },
+
+    ORDER_NOTE_NOT_ACCEPTED: {
+        errorType: ERROR_TYPES.dialog,
+        shouldRedirectToMenu: false
+    },
+
+    COURIER_NOTE_NOT_ACCEPTED: {
+        errorType: ERROR_TYPES.dialog,
+        shouldRedirectToMenu: false
+    },
+
     GENERIC_CHECKOUT_ISSUE: {
         errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false

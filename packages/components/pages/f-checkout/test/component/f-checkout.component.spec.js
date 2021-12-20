@@ -39,8 +39,7 @@ describe('f-checkout component tests', () => {
         [100, 'addressLine2'],
         [50, 'addressLocality'],
         [50, 'addressPostcode'],
-        [16, 'mobileNumber'],
-        [200, 'userNote']
+        [16, 'mobileNumber']
     ])
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
             // Arrange
