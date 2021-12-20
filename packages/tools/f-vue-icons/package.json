@@ -39,6 +39,7 @@
     "ci:lint:tools": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit --passWithNoTests",
+    "ci:test:tools": "vue-cli-service test:unit --passWithNoTests",
     "example": "poi --serve --config example/poi.config.js",
     "build:example": "poi --prod --config example/poi.config.js",
     "prebuild:example": "yarn build:icons"

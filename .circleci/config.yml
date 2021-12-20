@@ -85,38 +85,29 @@ commands:
             - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
 
   build_packages:
-    parameters:
-      component_type:
-        type: string
-      component_type_folder:
-        type: string
     description: Locally builds all packages in the monorepo
     steps:
       - run_command:
           command_description: Build packages
-          command_name: ci:build:<< parameters.component_type >>
-      - persist_to_workspace:
-          root: << parameters.component_type_folder >>
-          paths:
-            - '*'
+          command_name: build
 #      - save_cache_dist_directories
 
   lint_packages:
-    parameters:
-      component_type:
-        type: string
     description: Locally lints all packages in the monorepo
     steps:
       - run_command:
           command_description: Run linting for packages
-          command_name: ci:lint:<< parameters.component_type >>
+          command_name: lint
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
+    parameters:
+      component_type:
+        type: string
     steps:
       - run_command:
           command_description: Run unit / integration tests for packages
-          command_name: "test"
+          command_name: "ci:test:<< parameters.component_type >>"
 
   build_storybook:
     description: Build Storybook for UI tests
@@ -300,20 +291,16 @@ jobs:
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
-    parameters:
-      component_type:
-        type: string
-      component_type_folder:
-        type: string
     steps:
       - attach_workspace:
           at: .
       - detect_root_change
-      - build_packages:
-          component_type: << parameters.component_type >>
-          component_type_folder: << parameters.component_type_folder >>
-      - lint_packages:
-          component_type: << parameters.component_type >>
+      - build_packages
+      - persist_to_workspace:
+          root: .
+          paths:
+            - '*'
+      - lint_packages
 #
 #      - run: # Run PR Checks
 #          name: Run PR Checks
@@ -325,20 +312,20 @@ jobs:
 #      - slack_notify_fail
 #      - slack_notify_success
 
-  # unit_tests:
-  #   executor: node
-  #   environment:
-  #     LERNA_ARGS: --concurrency 1
-  #   steps:
-  #     - checkout
-  #     - detect_root_change
-  #     - cache_checksum
-  #     - restore_node_modules_cache
-  #     - install_node_dependencies
-  #     - restore_cache_dist_directories
-  #     - unit_integration_tests
-  #     - slack_notify_fail
-  #     - slack_notify_success
+  unit_tests:
+    executor: node
+    parameters:
+      component_type:
+        type: string
+    environment:
+      LERNA_ARGS: --concurrency 1
+    steps:
+      - attach_workspace:
+          at: .
+      - unit_integration_tests:
+          component_type: << parameters.component_type >>
+      # - slack_notify_fail
+      # - slack_notify_success
 
   # browser_tests:
   #   executor: node
@@ -400,46 +387,25 @@ workflows:
             branches:
               ignore: [ 'gh-pages' ]
       - build:
-          name: build-tools
+          name: build
           context: web-core
           filters:
             branches:
               ignore: ['gh-pages']
-          component_type: 'tools'
-          component_type_folder: 'packages/tools'
           requires:
             - install
-      - build:
-          name: build-services
+      - unit_tests:
+          matrix:
+            parameters:
+              component_type: ['tools', 'services']
+              # component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+          name: unit-tests
           context: web-core
           filters:
             branches:
               ignore: ['gh-pages']
-          component_type: 'services'
-          component_type_folder: 'packages/services'
           requires:
-            - install
-      - build:
-          name: build-atoms
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          component_type: 'atoms'
-          component_type_folder: 'packages/components/atoms'
-          requires:
-            - build-services
-            - build-tools
-      - build:
-          name: build-molecules
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          component_type: 'molecules'
-          component_type_folder: 'packages/components/molecules'
-          requires:
-            - build-atoms
+            - build
 
 #      - unit_tests: , 'organisms', 'pages', 'templates', 'services', 'storybook', 'tools'
 #          requires:

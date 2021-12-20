@@ -30,7 +30,8 @@
     "prepublishOnly": "yarn build",
     "build": "vite build",
     "ci:build:services": "vite build",
-    "test": "jest"
+    "test": "jest",
+    "ci:test:services": "yarn test"
   },
   "devDependencies": {
     "@babel/core": "7.14.8",

@@ -35,6 +35,7 @@
     "ci:lint:services": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "test": "jest",
+    "ci:test:services": "yarn test",
     "test:coverage": "jest test:unit --coverage"
   },
   "dependencies": {

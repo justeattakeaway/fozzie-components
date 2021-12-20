@@ -25,6 +25,8 @@
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
     "storybook:deploy": "lerna run storybook:deploy",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
+    "ci:test:tools": "cross-env-shell \"lerna run $LERNA_ARGS ci:test:tools --stream\"",
+    "ci:test:services": "cross-env-shell \"lerna run $LERNA_ARGS ci:test:services --stream\"",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component lerna run test-component:chrome --concurrency 1 --stream",
     "test:visual": "cross-env-shell TEST_TYPE=visual lerna run test:visual --concurrency 1 --stream",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",

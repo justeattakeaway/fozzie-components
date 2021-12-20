@@ -33,6 +33,7 @@
     "lint:services": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
+    "ci:test:services": "yarn test",
     "test:coverage": "vue-cli-service test:unit --coverage"
   },
   "browserslist": [

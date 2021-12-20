@@ -28,7 +28,8 @@
     "lint": "vue-cli-service lint",
     "ci:lint:tools": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit --passWithNoTests"
+    "test": "vue-cli-service test:unit --passWithNoTests",
+    "ci:test:tools": "vue-cli-service test:unit --passWithNoTests"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
