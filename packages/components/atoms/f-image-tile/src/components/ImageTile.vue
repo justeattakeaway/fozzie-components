@@ -25,7 +25,7 @@
         <label
             :class="[
                 $style['c-imageTile-label'], {
-                    [$style['c-imageTile-label--selected']]: isFilterSelected
+                    [$style['c-imageTile-label--selected']]: isToggleSelected
                 }]"
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label">
@@ -74,27 +74,27 @@ export default {
     },
     data () {
         return {
-            isFilterSelected: false
+            isToggleSelected: false
         };
     },
     watch: {
         isSelected (newValue) {
-            if (newValue !== this.isFilterSelected) {
-                this.isFilterSelected = newValue;
+            if (newValue !== this.isToggleSelected) {
+                this.isToggleSelected = newValue;
             }
         }
     },
     mounted () {
-        this.isFilterSelected = this.isSelected;
+        this.isToggleSelected = this.isSelected;
     },
     methods: {
         /**
-         * Toggles the isFilterSelected data property
-         * when the checkbox is toggled.
+         * Updates the isToggleSelected data property
+         * when the checkbox is interacted with.
          *
          */
         toggleFilter () {
-            this.isFilterSelected = !this.isFilterSelected;
+            this.isToggleSelected = !this.isToggleSelected;
 
             this.$nextTick(() => {
                 this.$emit('toggle', this.createEmitObject(this.tileId));

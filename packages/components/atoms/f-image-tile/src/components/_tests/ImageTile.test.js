@@ -87,7 +87,7 @@ describe('ImageTile', () => {
                 it.each([
                     [true, isSelectedTrue],
                     [false, isSelectedFalse]
-                ])('should update `isFilterSelected` %s when set to %s', (expectedValue, isSelected) => {
+                ])('should update `isToggleSelected` %s when set to %s', (expectedValue, isSelected) => {
                     // Arrange
                     const propsData = { isSelected };
 
@@ -97,7 +97,7 @@ describe('ImageTile', () => {
                     });
 
                     // Assert
-                    expect(wrapper.vm.isFilterSelected).toBe(expectedValue);
+                    expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
                 });
             });
         });
@@ -105,24 +105,24 @@ describe('ImageTile', () => {
 
     describe('watch:: ', () => {
         describe('isSelected:: ', () => {
-            it('should update `isFilterSelected` when changed', async () => {
+            it('should update `isToggleSelected` when changed', async () => {
                 // Arrange
-                const wrapper = shallowMount(ImageTile, { isFilterSelected: false, isSelected: false });
+                const wrapper = shallowMount(ImageTile, { isToggleSelected: false, isSelected: false });
 
                 // Act
                 await wrapper.vm.$options.watch.isSelected.call(wrapper.vm, true);
 
                 // Assert
-                expect(wrapper.vm.isFilterSelected).toBe(true);
+                expect(wrapper.vm.isToggleSelected).toBe(true);
             });
         });
     });
 
     describe('methods :: ', () => {
         describe('toggleFilter :: ', () => {
-            it('should update `isFilterSelected` value and $emit toggle event when called', async () => {
+            it('should update `isToggleSelected` value and $emit toggle event when called', async () => {
                 // Arrange
-                const wrapper = shallowMount(ImageTile, { isFilterSelected: false, tileId: 'chicken' });
+                const wrapper = shallowMount(ImageTile, { isToggleSelected: false, tileId: 'chicken' });
                 const spy = jest.spyOn(wrapper.vm, '$emit');
                 const emitObject = { tileId: wrapper.vm.tileId };
 
@@ -131,7 +131,7 @@ describe('ImageTile', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(wrapper.vm.isFilterSelected).toBe(true);
+                expect(wrapper.vm.isToggleSelected).toBe(true);
                 expect(spy).toHaveBeenCalledWith('toggle', emitObject);
             });
         });
