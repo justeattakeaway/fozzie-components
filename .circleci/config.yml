@@ -283,13 +283,12 @@ jobs:
       - restore_cache:
             name: Restore Yarn Package Cache
             keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+              - yarn-dependencies-master-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - persist_to_workspace:
           root: .
           paths:
             - 'node_modules'
-            - '~/.cache/yarn'
   build:
     executor: node
     environment:
@@ -305,6 +304,10 @@ jobs:
       - detect_root_change
       - build_packages:
           component_type: << parameters.component_type >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - 'node_modules'
       - lint_packages:
           component_type: << parameters.component_type >>
 #
