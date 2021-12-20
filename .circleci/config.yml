@@ -124,20 +124,29 @@ commands:
 
   component_tests:
     description: Run Component Tests
+    parameters:
+      component_type:
+        type: string
     steps:
       - run_command:
           command_description: Run component tests for packages
-          command_name: "test-component:chrome"
+          command_name: "ci:test-component:chrome:<< parameters.component_type >>"
 
   accessibility_tests:
     description: Run Accessibility Tests
+    parameters:
+      component_type:
+        type: string
     steps:
       - run_command:
           command_description: Run accessibility tests for packages
-          command_name: "test-a11y:chrome"
+          command_name: "test-a11y:chrome:<< parameters.component_type >>"
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
+    parameters:
+      component_type:
+        type: string
     steps:
       - run:
           name: Run Percy visual regression tests for packages
@@ -148,9 +157,9 @@ commands:
             then
               if [ "${RUN_ALL}" == "true" ];
               then
-                yarn test:visual
+                yarn test:visual:<< parameters.component_type >>
               else
-                yarn test:visual --since master...HEAD
+                yarn test:visual:<< parameters.component_type >> --since master...HEAD
               fi
             else
               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
@@ -313,7 +322,7 @@ jobs:
 #      - slack_notify_fail
 #      - slack_notify_success
 
-  unit_tests:
+  unit-tests:
     executor: node
     parameters:
       component_type:
@@ -328,34 +337,36 @@ jobs:
       # - slack_notify_fail
       # - slack_notify_success
 
-  # browser_tests:
-  #   executor: node
-  #   steps:
-  #     - checkout
-  #     - detect_root_change
-  #     - cache_checksum
-  #     - restore_node_modules_cache
-  #     - install_node_dependencies
-  #     - restore_cache_dist_directories
-  #     - run: # Install Component Test Dependencies
-  #         name: Install Component Test Dependencies
-  #         command: yarn global add @vue/cli @vue/cli-service-global
-  #     - build_storybook
-  #     - run: # Serve Storybook
-  #         name: Serve Storybook
-  #         command: yarn storybook:serve-static
-  #         background: true
-  #     - component_tests
-  #     - accessibility_tests
-  #     - visual_regression_tests
-  #     - run:
-  #         name: Allure - Generate Test Results
-  #         command: yarn allure:generate
-  #         when: always
-  #     - store_artifacts:
-  #         path: allure-report
-  #     - slack_notify_fail
-  #     - slack_notify_success
+  browser-tests:
+    executor: node
+    parameters:
+      component_type:
+        type: string
+    steps:
+      - detect_root_change
+      - attach_workspace:
+          at: .
+      - run: # Install Component Test Dependencies
+          name: Install Component Test Dependencies
+          command: yarn global add @vue/cli @vue/cli-service-global
+      - run: # Serve Storybook
+          name: Serve Storybook
+          command: yarn storybook:serve-static
+          background: true
+      - component_tests:
+          component_type: << parameters.component_type >>
+      - accessibility_tests:
+          component_type: << parameters.component_type >>
+      - visual_regression_tests:
+          component_type: << parameters.component_type >>
+      # - run:
+      #     name: Allure - Generate Test Results
+      #     command: yarn allure:generate
+      #     when: always
+      # # - store_artifacts:
+      # #     path: allure-report-{{}}
+      # # - slack_notify_fail
+      # # - slack_notify_success
 
   # deploy-storybook:
   #   executor: node
@@ -395,7 +406,7 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - install
-      - unit_tests:
+      - unit-tests:
           matrix:
             parameters:
               component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
@@ -405,22 +416,33 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - build
-
-#      - unit_tests: , 'organisms', 'pages', 'templates', 'services', 'storybook', 'tools'
-#          requires:
-#            - build
-#          context: web-core
-#          filters:
-#            branches:
-#              ignore: ['gh-pages']
-#
-#      - browser_tests:
-#          requires:
-#            - build
-#          context: web-core
-#          filters:
-#            branches:
-#              ignore: ['gh-pages']
+      - browser-tests:
+          name: 'atoms'
+          component_type: 'atoms'
+          requires:
+            - unit-tests-atoms
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+      - browser-tests:
+          name: 'molecules'
+          component_type: 'molecules'
+          requires:
+            - unit-tests-molecules
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+      - browser-tests:
+          name: 'organisms'
+          component_type: 'organisms'
+          requires:
+            - unit-tests-organisms
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
 
 #  deploy-storybook:
 #    jobs:

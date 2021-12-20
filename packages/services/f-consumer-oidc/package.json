@@ -29,7 +29,6 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "vite build",
-    "ci:build:services": "vite build",
     "test": "jest",
     "ci:test:services": "yarn test"
   },

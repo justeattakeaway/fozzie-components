@@ -35,7 +35,9 @@
     "test": "vue-cli-service test:unit",
     "ci:test:molecules": "yarn test",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "test-a11y:chrome:molecules": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "test-component:chrome:molecules": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"
   },
   "scriptsInfo": {
     "test-component:chrome": "Runs the functional test suite against Chrome.",

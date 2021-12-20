@@ -32,11 +32,9 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "yarn build:icons && yarn build:dist",
-    "ci:build:tools": "yarn build:icons && yarn build:dist",
     "build:dist": "bili --format umd,es,cjs,umd-min --js buble --name f-vue-icons",
     "build:icons": "node build && babel src/components -d icons",
     "lint": "vue-cli-service lint --no-fix",
-    "ci:lint:tools": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit --passWithNoTests",
     "ci:test:tools": "vue-cli-service test:unit --passWithNoTests",
