@@ -417,7 +417,7 @@ workflows:
           requires:
             - build
       - browser-tests:
-          name: 'atoms'
+          name: 'browser-tests-atoms'
           component_type: 'atoms'
           requires:
             - unit-tests-atoms
@@ -426,7 +426,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
       - browser-tests:
-          name: 'molecules'
+          name: 'browser-tests-molecules'
           component_type: 'molecules'
           requires:
             - unit-tests-molecules
@@ -435,7 +435,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
       - browser-tests:
-          name: 'organisms'
+          name: 'browser-tests-organisms'
           component_type: 'organisms'
           requires:
             - unit-tests-organisms
