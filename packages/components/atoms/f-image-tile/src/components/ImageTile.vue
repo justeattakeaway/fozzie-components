@@ -53,7 +53,7 @@ export default {
         },
         tileId: {
             type: String,
-            default: 'Chicken'
+            default: null
         },
         isSelected: {
             type: Boolean,
