@@ -35,9 +35,6 @@
 export default {
     name: 'RestaurantDish',
     props: {
-        /**
-         * Name of the dish
-         */
         name: {
             type: String,
             default: ''
