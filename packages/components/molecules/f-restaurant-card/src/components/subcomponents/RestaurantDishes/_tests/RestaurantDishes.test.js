@@ -19,17 +19,20 @@ describe('RestaurantDishes.vue', () => {
                 {
                     name: 'foo',
                     price: 'foo-price',
-                    calories: 'foo-calories'
+                    calories: 'foo-calories',
+                    portion: 'foo-portion'
                 },
                 {
                     name: 'bar',
                     price: 'bar-price',
-                    calories: 'bar-calories'
+                    calories: 'bar-calories',
+                    portion: 'bar-portion'
                 },
                 {
                     name: 'baz',
                     price: 'baz-price',
-                    calories: 'baz-calories'
+                    calories: 'baz-calories',
+                    portion: 'baz-portion'
                 }
             ]
         };
@@ -51,13 +54,15 @@ describe('RestaurantDishes.vue', () => {
                 {
                     name: 'foo',
                     price: 'foo-price',
-                    calories: 'foo-calories'
+                    calories: 'foo-calories',
+                    portion: 'foo-portion'
                 },
                 null,
                 {
                     name: 'baz',
                     price: 'baz-price',
-                    calories: 'baz-calories'
+                    calories: 'baz-calories',
+                    portion: 'baz-portion'
                 }
             ]
         };

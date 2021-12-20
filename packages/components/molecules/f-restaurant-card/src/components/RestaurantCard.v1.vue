@@ -135,6 +135,7 @@
         <!-- optional items -->
         <restaurant-dishes
             v-if="!disabled && hasDishes"
+            data-test-id="restaurant-dishes"
             :dishes="dishes"
             :is-vertically-stacked="isListItem"
             :class="[$style['c-restaurantCard-dishes']]" />
@@ -254,7 +255,7 @@ export default {
                 this.deliveryTimeData.address;
         },
         hasDishes () {
-            return this.dishes?.length || false;
+            return !!this.dishes?.length;
         }
     },
     provide () {
