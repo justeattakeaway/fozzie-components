@@ -88,11 +88,17 @@ commands:
     parameters:
       component_type:
         type: string
+      component_type_folder:
+        type: string
     description: Locally builds all packages in the monorepo
     steps:
       - run_command:
           command_description: Build packages
           command_name: ci:build:<< parameters.component_type >>
+      - persist_to_workspace:
+          root: << parameters.component_type_folder >>
+          paths:
+            - '*'
 #      - save_cache_dist_directories
 
   lint_packages:
@@ -283,7 +289,7 @@ jobs:
       - restore_cache:
             name: Restore Yarn Package Cache
             keys:
-              - yarn-packages-master-{{ checksum "yarn.lock" }}
+              - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - persist_to_workspace:
           root: .
@@ -297,16 +303,15 @@ jobs:
     parameters:
       component_type:
         type: string
+      component_type_folder:
+        type: string
     steps:
       - attach_workspace:
           at: .
       - detect_root_change
       - build_packages:
           component_type: << parameters.component_type >>
-      - persist_to_workspace:
-          root: .
-          paths:
-            - '*'
+          component_type_folder: << parameters.component_type_folder >>
       - lint_packages:
           component_type: << parameters.component_type >>
 #
@@ -401,6 +406,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           component_type: 'tools'
+          component_type_folder: 'packages/tools'
           requires:
             - install
       - build:
@@ -410,6 +416,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           component_type: 'services'
+          component_type_folder: 'packages/services'
           requires:
             - install
       - build:
@@ -419,6 +426,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           component_type: 'atoms'
+          component_type_folder: 'packages/components/atoms'
           requires:
             - build-services
             - build-tools
@@ -429,6 +437,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           component_type: 'molecules'
+          component_type_folder: 'packages/components/molecules'
           requires:
             - build-atoms
 
