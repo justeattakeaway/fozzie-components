@@ -10,9 +10,15 @@ describe('ImageTile', () => {
 
     describe('props :: ', () => {
         describe('isLink :: ', () => {
-            it('should apply `href` to anchor when true', () => {
+            const isLinkTrue = true;
+            const isLinkFalse = false;
+
+            it.each([
+                ['https://www.google.com', isLinkTrue],
+                ['#', isLinkFalse]
+            ])('should update `href` to %s when set to %s', (expectedValue, isLink) => {
                 // Arrange
-                const propsData = { isLink: true, href: 'https://www.google.com' };
+                const propsData = { isLink, href: 'https://www.google.com' };
 
                 // Act
                 const wrapper = shallowMount(ImageTile, {
@@ -22,22 +28,7 @@ describe('ImageTile', () => {
                 const link = wrapper.find('[data-test-id="image-tile-link"]');
 
                 // Assert
-                expect(link.attributes('href')).toEqual(propsData.href);
-            });
-
-            it('should not apply `href` to anchor when false', () => {
-                // Arrange
-                const propsData = { isLink: false, href: 'https://www.google.com' };
-
-                // Act
-                const wrapper = shallowMount(ImageTile, {
-                    propsData
-                });
-
-                const link = wrapper.find('[data-test-id="image-tile-link"]');
-
-                // Assert
-                expect(link.attributes('href')).toEqual('#');
+                expect(link.attributes('href')).toBe(expectedValue);
             });
         });
 
@@ -90,9 +81,15 @@ describe('ImageTile', () => {
             });
 
             describe('isSelected :: ', () => {
-                it('should make `isFilterSelected` true when set to true', () => {
+                const isSelectedTrue = true;
+                const isSelectedFalse = false;
+
+                it.each([
+                    [true, isSelectedTrue],
+                    [false, isSelectedFalse]
+                ])('should update `isFilterSelected` %s when set to %s', (expectedValue, isSelected) => {
                     // Arrange
-                    const propsData = { isSelected: true };
+                    const propsData = { isSelected };
 
                     // Act
                     const wrapper = shallowMount(ImageTile, {
@@ -100,20 +97,7 @@ describe('ImageTile', () => {
                     });
 
                     // Assert
-                    expect(wrapper.vm.isFilterSelected).toBe(true);
-                });
-
-                it('should make `isFilterSelected` false when set to false', () => {
-                    // Arrange
-                    const propsData = { isSelected: false };
-
-                    // Act
-                    const wrapper = shallowMount(ImageTile, {
-                        propsData
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.isFilterSelected).toBe(false);
+                    expect(wrapper.vm.isFilterSelected).toBe(expectedValue);
                 });
             });
         });
