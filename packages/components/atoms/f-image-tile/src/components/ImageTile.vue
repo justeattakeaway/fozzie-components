@@ -49,7 +49,7 @@ export default {
     props: {
         href: {
             type: String,
-            default: 'https://www.google.com'
+            default: null
         },
         tileId: {
             type: String,
