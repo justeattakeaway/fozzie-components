@@ -61,6 +61,57 @@ describe('RestaurantDish.vue', () => {
         expect(wrapper.find('[data-test-id="restaurant-dish-calories"]').exists()).toBe(false);
     });
 
+    it('displays portion if portion and calories values are passed as props', () => {
+        // arrange
+        const propsData = {
+            calories: '12345kcal',
+            portion: '2 servings'
+        };
+
+        // act
+        const wrapper = mount(sut, { propsData });
+
+        // assert
+        expect(wrapper.find('[data-test-id="restaurant-dish-portion"]').exists()).toBe(true);
+    });
+
+    it('does not display portion if value is passed as prop but calories are missing', () => {
+        // arrange
+        const propsData = {
+            portion: '2 servings'
+        };
+
+        // act
+        const wrapper = mount(sut, { propsData });
+
+        // assert
+        expect(wrapper.find('[data-test-id="restaurant-dish-portion"]').exists()).toBe(false);
+    });
+
+    it('does not display portion if value is null', () => {
+        // arrange
+        const propsData = {
+            portion: null
+        };
+
+        // act
+        const wrapper = mount(sut, { propsData });
+
+        // assert
+        expect(wrapper.find('[data-test-id="restaurant-dish-portion"]').exists()).toBe(false);
+    });
+
+    it('does not display portion if value is not passed as prop', () => {
+        // arrange
+        const propsData = {};
+
+        // act
+        const wrapper = mount(sut, { propsData });
+
+        // assert
+        expect(wrapper.find('[data-test-id="restaurant-dish-portion"]').exists()).toBe(false);
+    });
+
     it('displays price if value is passed as prop', () => {
         // arrange
         const propsData = {
