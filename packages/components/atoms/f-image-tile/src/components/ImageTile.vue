@@ -69,7 +69,7 @@ export default {
         },
         imgSrc: {
             type: String,
-            default: 'https://via.placeholder.com/150'
+            default: null
         }
     },
     data () {
