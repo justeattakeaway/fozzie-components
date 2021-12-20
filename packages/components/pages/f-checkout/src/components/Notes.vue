@@ -31,6 +31,7 @@
         :value="noteValue"
         v-bind="inputStyles"
         :name="'order-note'"
+        :label-description="$t(`userNote.order.${serviceType}.text`)"
         @input="updateUserNotes({ note: $event, type: 'order' })" />
 </template>
 
