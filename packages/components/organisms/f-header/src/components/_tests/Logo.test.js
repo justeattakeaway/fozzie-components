@@ -60,23 +60,6 @@ describe('Logo', () => {
         expect(logo.exists()).toBe(true);
     });
 
-    it('should render Jet logo if jet theme passed', () => {
-        // Arrange
-        const propsData = {
-            theme: 'jet',
-            headerBackgroundTheme: 'transparent',
-            companyName: 'Just Eat Takeaway.com',
-            isLogoDisabled: false
-        };
-
-        // Act
-        const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-theme-logo="c-icon--jet"]');
-
-        // Assert
-        expect(logo).toBeDefined();
-    });
-
     it('should render an anchor tag around the logo if isLogoDisabled is false', () => {
         const $style = {
             disabled: 'disabled'

@@ -131,13 +131,4 @@ export default {
                 fill: $header-logo-color--alt;
             }
     }
-
-    .c-icon--jet {
-        width: auto;
-        height: 24px;
-
-        @include media('>mid') {
-            height: 36px;
-        }
-    }
 </style>
