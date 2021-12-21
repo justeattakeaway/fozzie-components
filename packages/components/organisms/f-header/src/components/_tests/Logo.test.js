@@ -4,8 +4,7 @@ import Logo from '../Logo.vue';
 describe('Logo', () => {
     it('should be defined', () => {
         const propsData = {
-            theme: 'jet',
-            headerBackgroundTheme: 'transparent',
+            theme: 'je',
             companyName: 'Just Eat',
             isLogoDisabled: false
         };
@@ -17,51 +16,48 @@ describe('Logo', () => {
         // Arrange
         const propsData = {
             theme: 'ml',
-            headerBackgroundTheme: 'transparent',
             companyName: 'MenuLog',
             isLogoDisabled: false
         };
 
         // Act
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-theme-logo="c-icon--ml"]');
+        const logo = wrapper.find('[data-theme-logo="ml-logo"]');
 
         // Assert
-        expect(logo).toBeDefined();
+        expect(logo.exists()).toBe(true);
     });
 
     it('should render je logo if je theme passed', () => {
         // Arrange
         const propsData = {
-            theme: 'jet',
-            headerBackgroundTheme: 'transparent',
+            theme: 'je',
             companyName: 'Just Eat',
             isLogoDisabled: false
         };
 
         // Act
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-theme-logo="c-icon--je"]');
+        const logo = wrapper.find('[data-theme-logo="je-logo"]');
 
         // Assert
-        expect(logo).toBeDefined();
+        expect(logo.exists()).toBe(true);
     });
 
     it('should render Jet logo if jet theme passed', () => {
         // Arrange
         const propsData = {
             theme: 'jet',
-            headerBackgroundTheme: 'transparent',
             companyName: 'Just Eat Takeaway.com',
             isLogoDisabled: false
         };
 
         // Act
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-theme-logo="c-icon--jet"]');
+        const logo = wrapper.find('[data-theme-logo="jet-logo"]');
 
         // Assert
-        expect(logo).toBeDefined();
+        expect(logo.exists()).toBe(true);
     });
 
     it('should render an anchor tag around the logo if isLogoDisabled is false', () => {
@@ -70,7 +66,7 @@ describe('Logo', () => {
         };
         // Arrange
         const propsData = {
-            theme: 'jet',
+            theme: 'je',
             companyName: 'Just Eat',
             isLogoDisabled: false
         };
@@ -96,7 +92,7 @@ describe('Logo', () => {
         };
         // Arrange
         const propsData = {
-            theme: 'jet',
+            theme: 'je',
             companyName: 'Just Eat',
             isLogoDisabled: true
         };
@@ -127,7 +123,7 @@ describe('Logo', () => {
         ])('should have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
             // Arrange
             const propsData = {
-                theme: 'jet',
+                theme: 'je',
                 headerBackgroundTheme: theme,
                 companyName: 'Just Eat',
                 isLogoDisabled: false
@@ -152,7 +148,7 @@ describe('Logo', () => {
         ])('should not have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
             // Arrange
             const propsData = {
-                theme: 'jet',
+                theme: 'je',
                 headerBackgroundTheme: theme,
                 companyName: 'Just Eat',
                 isLogoDisabled: false

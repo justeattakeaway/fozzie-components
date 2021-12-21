@@ -14,7 +14,7 @@ v9.2.0
 - nb-No and da-DK from copy, storybook story and tests.
 
 ### Changed
-- some 'je' prop values to 'jet' in tests
+- Fixed Logo tests.
 
 
 v9.1.0

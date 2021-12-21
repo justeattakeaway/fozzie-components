@@ -7,10 +7,9 @@
             :is="iconComponent"
             :class="[
                 $style['c-logo-img'],
-                iconClassName,
                 { [$style['c-logo-img--alt']]: isAltLogo }
             ]"
-            :data-theme-logo="iconClassName"
+            :data-theme-logo="iconComponent"
             data-test-id="header-logo" />
     </component>
 </template>
@@ -57,9 +56,6 @@ export default {
     computed: {
         iconComponent () {
             return `${this.theme}-logo`;
-        },
-        iconClassName () {
-            return this.$style[`c-icon--${this.theme}`];
         },
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
@@ -134,14 +130,5 @@ export default {
             & path {
                 fill: $header-logo-color--alt;
             }
-    }
-
-    .c-icon--jet {
-        width: auto;
-        height: 24px;
-
-        @include media('>mid') {
-            height: 36px;
-        }
     }
 </style>
