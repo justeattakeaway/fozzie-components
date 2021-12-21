@@ -40,7 +40,6 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
