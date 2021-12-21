@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "5.7.1",
+  "version": "5.8.1",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build\"",
@@ -37,7 +37,7 @@
     "@babel/preset-env": "7.14.9",
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "3.4.1",
-    "@justeat/fozzie": "6.0.0",
+    "@justeat/fozzie": "6.2.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.0-beta.52",
     "@percy/webdriverio": "2.0.0",

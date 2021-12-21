@@ -3,12 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v5.7.1
+v5.8.1
 ------------------------------
 *December 21, 2021*
 
 ### Added
 - `f-form` to Circle CI cache.
+
+
+v5.8.0
+------------------------------
+*December 20, 2021*
+
+### Updated
+- fozzie package to the latest (v6.2.0).
 
 
 v5.7.0
