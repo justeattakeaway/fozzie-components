@@ -66,14 +66,14 @@ export default {
 
 <style lang="scss" module>
 .c-restaurantCard-dish {
-  background-color: $color-orange-10;
-  padding: spacing(x1.5);
-  border-radius: $radius-rounded-b;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
+    background-color: $color-orange-10;
+    padding: spacing(x1.5);
+    border-radius: $radius-rounded-b;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .c-restaurantCard-dish-description {
