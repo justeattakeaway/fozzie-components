@@ -7,10 +7,9 @@
             :is="iconComponent"
             :class="[
                 $style['c-logo-img'],
-                iconClassName,
                 { [$style['c-logo-img--alt']]: isAltLogo }
             ]"
-            :data-theme-logo="iconClassName"
+            :data-theme-logo="iconComponent"
             data-test-id="header-logo" />
     </component>
 </template>
@@ -58,9 +57,6 @@ export default {
         iconComponent () {
             return `${this.theme}-logo`;
         },
-        iconClassName () {
-            return this.$style[`c-icon--${this.theme}`];
-        },
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
         },
@@ -102,48 +98,22 @@ export default {
         height: $header-height--narrow;
         padding-top: 12px;
 
-        @include theme(ml) {
-            padding-top: 8px;
-        }
-
         @include media('>mid') {
             justify-content: left;
             height: $header-height;
             padding-top: 20px;
-
-            @include theme(ml) {
-                padding-top: 16px;
-            }
         }
     }
 
     .c-logo-img {
-        // default logo image height and width (as should be an inline SVG)
-        width: 98px;
+        // default logo image height (as should be an inline SVG)
+        width: auto;
         height: 24px;
         margin-left: -10.5px; //half of hamburger menu width
 
         @include media('>mid') {
-            width: 163px;
             height: 40px;
             margin-left: 0;
-        }
-
-        // Menulog logo, as it has multiple fill values built in. We just hide the outline on transparent mode.
-        @include theme(ml) {
-            width: 120px;
-            height: 32px;
-
-            @include media('>mid') {
-                width: 149px;
-                height: 41px;
-            }
-
-            path:first-child {
-                .c-header--transparent & {
-                    display: none;
-                }
-            }
         }
     }
 
@@ -160,14 +130,5 @@ export default {
             & path {
                 fill: $header-logo-color--alt;
             }
-    }
-
-    .c-icon--jet {
-        width: auto;
-        height: 24px;
-
-        @include media('>mid') {
-            height: 36px;
-        }
     }
 </style>
