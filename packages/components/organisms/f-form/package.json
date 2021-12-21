@@ -3,7 +3,7 @@
   "description": "Fozzie Form - fozzie form",
   "version": "0.1.0",
   "main": "dist/f-form.umd.min.js",
-  "maxBundleSize": "5kB",
+  "maxBundleSize": "50kB",
   "files": [
     "dist",
     "test-utils"
