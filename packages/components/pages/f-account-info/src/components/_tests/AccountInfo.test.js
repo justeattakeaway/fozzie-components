@@ -1,6 +1,10 @@
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
 import AccountInfo from '../AccountInfo.vue';
+// eslint-disable-next-line no-unused-vars
+import AccountInfoAnalyticsService from '../../services/analytics';
+import AccountInfoValidationMixin from '../AccountInfoValidationMixin.vue';
+
 import {
     localVue,
     i18n,
@@ -15,9 +19,14 @@ let httpSpy;
 let sutMocks;
 let sutProps;
 let dataDefaults;
-let registerStoreModuleSpy;
-let hasModuleSpy;
 let initialiseSpy;
+
+jest.mock('../../services/analytics.js');
+
+const logMocks = {
+    info: jest.fn(),
+    error: jest.fn()
+};
 
 const storeActions = {
     loadConsumerDetails: jest.fn(),
@@ -36,20 +45,16 @@ const createStore = ({ state, actions }) => new Vuex.Store({
     }
 });
 
-const mountAccountInfo = ({
+const mountAccountInfo = async ({
     actions = storeActions,
     state = storeState,
     mocks = sutMocks,
     propsData = sutProps,
     data = dataDefaults,
-    storeOverride = null,
-    initialiseOverride = null
+    storeOverride = null
 } = {}) => {
     const store = storeOverride || createStore({ state, actions });
-    store.registerModule = registerStoreModuleSpy;
-    store.hasModule = hasModuleSpy;
-
-    AccountInfo.methods.initialise = initialiseOverride || AccountInfo.methods.initialise;
+    initialiseSpy = jest.spyOn(AccountInfo.methods, 'initialise');
 
     const mock = shallowMount(AccountInfo, {
         i18n,
@@ -57,8 +62,11 @@ const mountAccountInfo = ({
         propsData,
         data,
         store,
-        mocks
+        mocks,
+        mixins: [AccountInfoValidationMixin]
     });
+
+    await mock.vm.$nextTick();
 
     return mock;
 };
@@ -66,10 +74,8 @@ const mountAccountInfo = ({
 describe('AccountInfo', () => {
     beforeEach(() => {
         // Arrange
-        registerStoreModuleSpy = jest.fn();
-        hasModuleSpy = jest.fn().mockReturnValue(false);
         dataDefaults = () => ({
-            isFormDirty: false,
+            hasFormUpdate: false,
             shouldShowErrorPage: false
         });
         cookiesSpy = jest.fn();
@@ -79,7 +85,8 @@ describe('AccountInfo', () => {
                 $emit: jest.fn()
             },
             $http: httpSpy,
-            $cookies: cookiesSpy
+            $cookies: cookiesSpy,
+            $log: logMocks
         };
         sutProps = {
             authToken: token,
@@ -89,24 +96,23 @@ describe('AccountInfo', () => {
     });
 
     afterEach(() => {
-        initialiseSpy = null;
         jest.clearAllMocks();
     });
 
     describe('when creating the component', () => {
-        it('should register the Store Module', () => {
+        it('should register the Store Module', async () => {
             // Arrange
-            mountAccountInfo();
+            wrapper = await mountAccountInfo({ storeOverride: new Vuex.Store() });
 
             // Assert
-            expect(registerStoreModuleSpy).toHaveBeenCalled();
+            expect(wrapper.vm.$store.state.fAccountInfoModule).toBeDefined();
         });
     });
 
     describe('when mounting the component', () => {
-        it('should call the load action with the correct parameters', () => {
+        it('should call the load action with the correct parameters', async () => {
             // Arrange & Act
-            wrapper = mountAccountInfo();
+            wrapper = await mountAccountInfo();
 
             // Assert
             expect(storeActions.loadConsumerDetails).toHaveBeenCalledWith(expect.any(Object), {
@@ -115,13 +121,12 @@ describe('AccountInfo', () => {
             });
         });
 
-        it('should not call initialise() method if the authorisation has not completed', () => {
+        it('should not call initialise() method if the authorisation has not completed', async () => {
             // Arrange
-            initialiseSpy = jest.fn();
             sutProps = { ...sutProps, isAuthFinished: false };
 
             // Act
-            mountAccountInfo({ initialiseOverride: initialiseSpy });
+            wrapper = await mountAccountInfo();
 
             // Assert
             expect(initialiseSpy).not.toHaveBeenCalled();
@@ -129,11 +134,10 @@ describe('AccountInfo', () => {
 
         it('should only call initialise() method once the authorisation has completed', async () => {
             // Arrange
-            initialiseSpy = jest.fn();
             sutProps = { ...sutProps, isAuthFinished: false };
 
             // Act
-            wrapper = mountAccountInfo({ initialiseOverride: initialiseSpy });
+            wrapper = await mountAccountInfo();
 
             // Assert
             expect(initialiseSpy).not.toHaveBeenCalled();
@@ -145,24 +149,120 @@ describe('AccountInfo', () => {
             expect(initialiseSpy).toHaveBeenCalled();
         });
 
-        it('should set `hasFormUpdate` to `false` so the form can not be resubmitted when mounted', () => {
+        it('should set `hasFormUpdate` to `false` so the form can not be resubmitted when mounted', async () => {
             // Arrange & Act
-            wrapper = mountAccountInfo();
+            wrapper = await mountAccountInfo();
 
             // Assert
             expect(wrapper.vm.hasFormUpdate).toBe(false);
         });
+
+        it('should log an info log', async () => {
+            // Arrange & Act
+            wrapper = await mountAccountInfo();
+
+            // Assert
+            expect(logMocks.info).toHaveBeenCalledTimes(1);
+            expect(logMocks.info).toHaveBeenCalledWith(
+                expect.any(String),
+                expect.arrayContaining(['account-pages', 'account-info'])
+            );
+        });
+
+        it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+            // Arrange & Act
+            const errorActions = {
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('some-error');
+                })
+            };
+            wrapper = await mountAccountInfo({ actions: errorActions });
+
+            // Assert
+            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+        });
+
+        it('should not show the error card if no errors', async () => {
+            // Arrange & Act
+            wrapper = await mountAccountInfo();
+            const element = wrapper.find('[data-test-id="account-info-error-card"]');
+
+            // Assert
+            expect(element.exists()).toEqual(false);
+        });
+
+        it('should show the error card if shouldShowErrorPage is true', async () => {
+            // Arrange & Act
+            wrapper = await mountAccountInfo();
+            await wrapper.setData({ shouldShowErrorPage: true });
+            const element = wrapper.find('[data-test-id="account-info-error-card"]');
+
+            // Assert
+            expect(element.exists()).toEqual(true);
+        });
+
+        it('should log an error if loading preferences throws an error', async () => {
+            // Arrange
+            const errorActions = {
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('some-error');
+                })
+            };
+
+            // Act
+            wrapper = await mountAccountInfo({ actions: errorActions });
+
+            // Assert
+            expect(logMocks.error).toHaveBeenCalledTimes(1);
+            expect(logMocks.error).toHaveBeenCalledWith(
+                expect.any(String),
+                expect.any(Error),
+                expect.arrayContaining(['account-pages', 'account-info'])
+            );
+        });
     });
 
     describe('`methods`', () => {
+        describe('`onFormSubmit`', () => {
+            describe('form is valid', () => {
+                it('address has not changed', async () => {
+                    // Arrange
+                    wrapper = await mountAccountInfo();
+                    await wrapper.setData({ hasAddressBeenUpdated: false, hasFormUpdate: true });
+
+                    jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
+
+                    // Act
+                    wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(false);
+                });
+
+                it('address has changed', async () => {
+                    // Arrange
+                    wrapper = await mountAccountInfo();
+                    await wrapper.setData({ hasAddressBeenUpdated: true, hasFormUpdate: true });
+
+                    jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
+
+                    // Act
+                    wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(true);
+                });
+            });
+        });
+
         describe('`onEditConsumer`', () => {
             describe('when editing the form', () => {
                 it.each([
                     ['firstName', 'Harry'],
                     ['lastName', 'Potter']
-                ])('should call the Mutation correctly when changing the consumer textbox `%s` to the value `%s`', (field, newValue) => {
+                ])('should call the Mutation correctly when changing the consumer textbox `%s` to the value `%s`', async (field, newValue) => {
                     // Arrange
-                    wrapper = mountAccountInfo();
+                    wrapper = await mountAccountInfo();
                     const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
 
                     // Act
@@ -178,9 +278,9 @@ describe('AccountInfo', () => {
                     );
                 });
 
-                it('should set `hasFormUpdate` to true to indicate the form data has changed', async () => {
+                it('should set `hasFormUpdate` to `true` to indicate the form data has changed', async () => {
                     // Arrange
-                    wrapper = mountAccountInfo();
+                    wrapper = await mountAccountInfo();
                     await wrapper.setData({ hasFormUpdate: false });
                     const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
 
@@ -190,6 +290,72 @@ describe('AccountInfo', () => {
                     // Assert
                     expect(wrapper.vm.hasFormUpdate).toEqual(true);
                 });
+
+                describe('form field is part of the address', () => {
+                    it.each([
+                        ['line1'],
+                        ['line2'],
+                        ['line3'],
+                        ['postcode'],
+                        ['locality']
+                    ])('should set `hasAddressBeenUpdated` to `true` when `field` is %s', async field => {
+                        // Arrange
+                        wrapper = await mountAccountInfo();
+
+                        const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
+
+                        // Act
+                        element.vm.$emit('input', 'Nice Road');
+
+                        // Assert
+                        expect(wrapper.vm.hasAddressBeenUpdated).toEqual(true);
+                    });
+                });
+
+                describe('form field is not part of the address', () => {
+                    it.each([
+                        ['firstName'],
+                        ['lastName'],
+                        ['phoneNumber']
+                    ])('should not set `hasAddressBeenUpdated` to `true` when `field` is %s', async field => {
+                        // Arrange
+                        wrapper = await mountAccountInfo();
+
+                        const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
+
+                        // Act
+                        element.vm.$emit('input', 'Harry Potter');
+
+                        // Assert
+                        expect(wrapper.vm.hasAddressBeenUpdated).toEqual(false);
+                    });
+                });
+            });
+        });
+
+        describe('onFormSubmit ::', () => {
+            it('should log an info log', async () => {
+                // Act
+                wrapper = await mountAccountInfo();
+                await wrapper.setData({ hasFormUpdate: true });
+                logMocks.info.mockClear(); // initialise has already logged info once
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(logMocks.info).toHaveBeenCalledTimes(1);
+                expect(logMocks.info).toHaveBeenCalledWith(
+                    expect.any(String),
+                    expect.arrayContaining(['account-pages', 'account-info'])
+                );
+            });
+
+            // to be added in a future pr
+            it.skip('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+
+            });
+
+            // to be added in a future pr
+            it.skip('should not call the save action if no changes', async () => {
             });
         });
     });

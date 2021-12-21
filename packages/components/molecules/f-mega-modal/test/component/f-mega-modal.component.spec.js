@@ -7,7 +7,7 @@ describe('f-mega-modal component tests', () => {
         megaModal.load();
     });
 
-    it('should display Alert', () => {
+    it('should display f-mega-modal component', () => {
         // Assert
         expect(megaModal.isComponentDisplayed()).toBe(true);
     });

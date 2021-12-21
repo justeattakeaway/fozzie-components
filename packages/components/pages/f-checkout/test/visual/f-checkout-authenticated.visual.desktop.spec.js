@@ -315,6 +315,17 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
     });
+
+    it('should display the two notes fields if there is two noteTypes.', () => {
+        // Arrange
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'collection')
+            .withQuery('&knob-Is User Logged In', true)
+            .withQuery('&knob-Is ASAP available', true)
+            .withQuery('$knob-Note types', 'get-notes-config-split');
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', 'desktop');
+    });
 });
 
 describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Visual Tests', () => {
@@ -343,7 +354,6 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
 });
 
 describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', () => {
-
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -363,7 +373,7 @@ describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Vi
         checkout.loadAgeVerification();
     });
 
-    it.only('should display the age verification page', () => {
+    it('should display the age verification page', () => {
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible Age Verification', 'desktop');
     });

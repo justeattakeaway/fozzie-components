@@ -1,7 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class SearchBox extends Page {
-    constructor(){
+    constructor () {
         super('molecule', 'searchbox-component');
     }
 
@@ -9,10 +9,6 @@ module.exports = class SearchBox extends Page {
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     waitForComponent () {

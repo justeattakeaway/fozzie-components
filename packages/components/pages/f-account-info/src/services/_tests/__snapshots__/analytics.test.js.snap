@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Analytics trackFormSubmission :: address has been updated should push submit and address changed events 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "action": "save_accountinfo_changes",
+        "category": "account",
+        "event": "trackEvent",
+        "label": "submit",
+      },
+    ],
+    Array [
+      Object {
+        "action": "account info",
+        "category": "my acccount",
+        "event": "trackEvent",
+        "label": "address change intent",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Analytics trackFormSubmission :: address has not been updated should push submit event only  1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "action": "save_accountinfo_changes",
+        "category": "account",
+        "event": "trackEvent",
+        "label": "submit",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;

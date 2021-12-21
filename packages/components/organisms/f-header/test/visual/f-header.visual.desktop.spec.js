@@ -52,21 +52,6 @@ describe('Shared - f-header component tests', () => {
         browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
     });
 
-    it('should display all available countries', () => {
-        // Arrange
-        const controls = 'locale:en-GB';
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
-        // Act
-        header.load();
-        header.moveToCountrySelector();
-
-        // Assert
-        browser.percyScreenshot('f-header - Country list', 'desktop');
-    });
-
     forEach([
         'showLoginInfo',
         'showHelpLink',
@@ -88,7 +73,11 @@ describe('Shared - f-header component tests', () => {
         browser.percyScreenshot(`f-header - ${knobName} - False`, 'desktop');
     });
 
-    it('should display all user account options', () => {
+    forEach([
+        'userAccount',
+        'countrySelector'
+    ])
+    .it('should display the %s dropdown lists on hover', link => {
         // Arrange
         const controls = 'locale:en-GB';
 
@@ -97,10 +86,10 @@ describe('Shared - f-header component tests', () => {
 
         // Act
         header.load();
-        header.moveToUserAccount();
+        header.moveToNavigationLink(link);
 
         // Assert
-        browser.percyScreenshot('f-header - User Account dropdown', 'desktop');
+        browser.percyScreenshot('f-header - %s dropdown', 'desktop');
     });
 
     // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
