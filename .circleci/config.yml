@@ -17,7 +17,6 @@ jobs:
       - checkout # checkout code
       - jq/install
       - node/install:
-          install-yarn: true
           node-version: '14.18.2'
       - run:
           name: install lerna
