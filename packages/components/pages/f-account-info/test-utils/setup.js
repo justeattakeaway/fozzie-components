@@ -48,18 +48,20 @@ const consumerAddressGetResponse = {
 };
 
 export const consumerAddressesGetResponse = {
-    data: [{
-        ...consumerAddressGetResponse
-    },
-    {
-        AddressId: 1050450175,
-        City: 'Bristol',
-        ZipCode: 'BS1 9DJ',
-        AddressName: 'Office',
-        IsDefault: false,
-        Line1: 'Takeaway',
-        Line2: 'Broad Quay House'
-    }]
+    data: {
+        Addresses: [{
+            ...consumerAddressGetResponse
+        },
+        {
+            AddressId: 1050450175,
+            City: 'Bristol',
+            ZipCode: 'BS1 9DJ',
+            AddressName: 'Office',
+            IsDefault: false,
+            Line1: 'Takeaway',
+            Line2: 'Broad Quay House'
+        }]
+    }
 };
 
 export const consumerDetailsMappedModel = {
@@ -74,11 +76,18 @@ export const consumerAddressMappedModel = {
     line1: consumerAddressGetResponse.Line1,
     line2: consumerAddressGetResponse.Line2,
     line3: consumerAddressGetResponse.Line3,
-    city: consumerAddressGetResponse.City,
+    locality: consumerAddressGetResponse.City,
     postcode: consumerAddressGetResponse.ZipCode
 };
 
 export const consumerViewModel = {
     ...consumerDetailsMappedModel,
     ...consumerAddressMappedModel
+};
+
+export const consumerStateModel = {
+    consumer: {
+        ...consumerDetailsMappedModel,
+        ...consumerAddressMappedModel
+    }
 };

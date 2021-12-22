@@ -81,6 +81,7 @@ describe('Checkout', () => {
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
     const getCustomerUrl = 'http://localhost/getcustomer';
+    const getNoteConfigUrl = 'http://localhost/getNoteConfig';
     const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
 
@@ -97,6 +98,7 @@ describe('Checkout', () => {
         getGeoLocationUrl,
         getCustomerUrl,
         applicationName,
+        getNoteConfigUrl,
         otacToAuthExchanger
     };
 
@@ -2925,7 +2927,7 @@ describe('Checkout', () => {
             });
         });
 
-        describe('submitOrder ::', () => {
+        describe('submitOrder (split notes disabled)::', () => {
             const basketId = 'myBasketId-v1';
 
             let handleEventLoggingSpy;
@@ -2975,7 +2977,7 @@ describe('Checkout', () => {
                     data: {
                         basketId,
                         customerNotes: {
-                            NoteForRestaurant: defaultCheckoutState.userNote
+                            NoteForRestaurant: defaultCheckoutState.notes.order.note
                         },
                         referralState: 'MockReferralState'
                     },
@@ -3130,6 +3132,62 @@ describe('Checkout', () => {
                         }
                     });
                 });
+            });
+        });
+
+        describe('submitOrder (split notes enabled)::', () => {
+            const basketId = 'myBasketId-v1';
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        notes: { courier: { note: 'This is a courier note' }, kitchen: { note: 'This is a kitchen note' } },
+                        notesConfiguration: { isSplitNotesEnabled: true },
+                        basket: {
+                            id: basketId
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger,
+                        $cookies
+                    }
+                });
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `placeOrder`', async () => {
+                // Arrange
+                const placeOrderSpy = jest.spyOn(wrapper.vm, 'placeOrder');
+                jest.spyOn(wrapper.vm, 'getReferralState').mockImplementation(() => 'MockReferralState');
+
+                const expected = {
+                    url: placeOrderUrl,
+                    data: {
+                        basketId,
+                        customerNotes: {
+                            NoteForDelivery: 'This is a courier note',
+                            NoteForDriver: 'This is a courier note',
+                            NoteForKitchen: 'This is a kitchen note',
+                            NoteForRestaurant: null
+                        },
+                        referralState: 'MockReferralState'
+                    },
+                    timeout: 60000
+                };
+
+                // Act
+                await wrapper.vm.submitOrder();
+
+                // Assert
+                expect(placeOrderSpy).toHaveBeenCalledWith(expected);
             });
         });
 

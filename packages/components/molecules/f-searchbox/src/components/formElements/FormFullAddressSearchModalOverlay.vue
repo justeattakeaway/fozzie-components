@@ -52,9 +52,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import FullAddressOverlaySearch from '@justeat/f-mega-modal';
-import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import CancelButton from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
 import FullAddressSearchSuggestions from './FormFullAddressSearchSuggestions.vue';
 import LoadingIndicator from '../FormStates/FormLoadingIndicator.vue';
 import { ON_FULL_ADDRESS_MODAL_CLOSED } from '../../event-types';

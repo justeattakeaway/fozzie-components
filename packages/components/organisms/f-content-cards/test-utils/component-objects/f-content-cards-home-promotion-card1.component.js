@@ -9,7 +9,7 @@ const {
 } = require('./f-content-cards-home-promotion.selectors');
 
 module.exports = class HomePromotionCard1 extends Page {
-    constructor() {
+    constructor () {
         super('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
     }
 
@@ -25,10 +25,6 @@ module.exports = class HomePromotionCard1 extends Page {
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     waitForComponent () {
@@ -53,5 +49,9 @@ module.exports = class HomePromotionCard1 extends Page {
 
     isSubtitleDisplayed () {
         return this.subtitle.isDisplayed();
+    }
+
+    isComponentClickable () {
+        return this.component.isClickable();
     }
 };

@@ -80,5 +80,9 @@ export default {
     CheckoutBasketGetFailure: {
         logMessage: 'Get Basket Failure',
         logMethod: 'logError'
+    },
+    NotesConfigurationFailure: {
+        logMessage: 'Notes configuration failure',
+        logMethod: 'logWarn'
     }
 };

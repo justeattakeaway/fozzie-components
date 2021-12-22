@@ -18,6 +18,17 @@ v4.0.0
 - **Breaking Change**: Removed `f-mega-modal` styles import from the component. Make sure to import `f-mega-modal` styles in your application.
 
 
+v3.7.0
+------------------------------
+*December 10, 2021*
+
+### Fixed
+- Style inheritance issues fixed:
+- text color
+- heading alignment
+- container position (to force z-index)
+
+
 v3.6.1
 ------------------------------
 *December 01, 2021*

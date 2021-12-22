@@ -2,6 +2,8 @@
 // import {
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
+import '@justeat/f-searchbox/dist/f-searchbox.css'; // these styles are imported to fix visual regression tests
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';

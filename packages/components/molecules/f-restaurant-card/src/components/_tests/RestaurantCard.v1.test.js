@@ -321,4 +321,32 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
         });
     });
+
+    describe('Restaurant dishes', () => {
+        it('renders restaurant dishes component when some dishes exist', () => {
+            // arrange
+            const propsData = {
+                dishes: [{ foo: 'bar' }]
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-dishes"]').exists()).toBe(true);
+        });
+
+        it.each([
+            { dishes: null },
+            { dishes: undefined },
+            { dishes: [] },
+            {}
+        ])('does not render restaurant dishes component if no dishes exist', propsData => {
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-dishes"]').exists()).toBe(false);
+        });
+    });
 });

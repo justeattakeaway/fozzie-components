@@ -53,6 +53,30 @@ describe('Shared - f-header component tests', () => {
         browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'mobile');
     });
 
+    forEach([
+        'white',
+        'highlight',
+        'transparent'
+    ]).it('should display the mobile nav correctly for theme %s', theme => {
+        // Arrange
+        const controls = [
+            'locale:en-GB',
+            'showOffersLink:true',
+            'showDeliveryEnquiry:true',
+            `headerBackgroundTheme:${theme}`
+        ].join(';');
+
+        header = new Header();
+        header.path += `&args=${controls}`;
+
+        // Act
+        header.load();
+        header.openMobileNavigationBar();
+
+        // Assert
+        browser.percyScreenshot(`f-header - Mobile nav theme colours - ${theme}`, 'mobile');
+    });
+
     it('should display all available countries', () => {
         // Arrange
         const controls = 'locale:en-GB';
@@ -138,5 +162,25 @@ describe('Shared - f-header component tests', () => {
 
         // Assert
         browser.percyScreenshot('f-header - custom nav links only', 'mobile');
+    });
+
+    forEach([
+        'highlight'
+    ]).it('should display correctly with tallBelowMid prop', theme => {
+        // Arrange
+        const controls = [
+            'locale:en-GB',
+            `headerBackgroundTheme:${theme}`,
+            'tallBelowMid:true'
+        ].join(';');
+
+        header = new Header();
+        header.path += `&args=${controls}`;
+
+        // Act
+        header.load();
+
+        // Assert
+        browser.percyScreenshot(`f-header - tallBelowMid - ${theme}`, 'mobile');
     });
 });

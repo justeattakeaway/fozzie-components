@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import Card from '@justeat/f-card';
@@ -56,6 +56,7 @@ import AgeVerification from './AgeVerification.vue';
 import CheckoutFormField from './CheckoutFormField.vue';
 import CheckoutForm from './CheckoutForm.vue';
 import CheckoutHeader from './Header.vue';
+import CheckoutNotes from './Notes.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
@@ -105,6 +106,7 @@ export default {
         CheckoutFormField,
         CheckoutForm,
         CheckoutHeader,
+        CheckoutNotes,
         CheckoutTermsAndConditions,
         ErrorPage,
         ErrorDialog
@@ -197,6 +199,16 @@ export default {
         getCustomerUrl: {
             type: String,
             required: true
+        },
+
+        getNoteConfigUrl: {
+            type: String,
+            required: true
+        },
+
+        checkoutFeatures: {
+            type: Object,
+            default: () => ({})
         }
     },
 
@@ -218,6 +230,7 @@ export default {
             'checkoutErrorMessage',
             'customer',
             'errors',
+            'features',
             'geolocation',
             'isGuestCreated',
             'hasAsapSelected',
@@ -231,11 +244,16 @@ export default {
             'serviceType',
             'dineIn',
             'time',
-            'userNote'
+            'notes',
+            'notesConfiguration'
         ]),
 
         ...mapState(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'changedFields'
+        ]),
+
+        ...mapGetters(VUEX_CHECKOUT_MODULE, [
+            'formattedNotes'
         ]),
 
         isCheckoutMethodDelivery () {
@@ -332,6 +350,18 @@ export default {
                 [EventNames.FormValid]: this.submitCheckout,
                 [EventNames.FormInvalid]: this.onInvalidCheckoutForm
             };
+        },
+
+        placeOrderNotes () {
+            const { courier, kitchen, order } = this.notes;
+            return {
+                NoteForRestaurant: order?.note || null,
+                ...(kitchen?.note && { NoteForKitchen: kitchen.note }),
+                ...(courier?.note && {
+                    NoteForDelivery: courier.note,
+                    NoteForDriver: courier.note
+                })
+            };
         }
     },
 
@@ -373,14 +403,15 @@ export default {
             'getBasket',
             'getCheckout',
             'getGeoLocation',
+            'getUserNotes',
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
+            'updateUserNotes',
             'updateCheckoutErrorMessage',
-            'updateUserNote',
             'updateAddress',
-            'getUserNote',
-            'saveUserNote'
+            'getNotesConfiguration',
+            'setCheckoutFeatures'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_EXPERIMENTATION_MODULE, [
@@ -393,6 +424,7 @@ export default {
          */
         async initialise () {
             this.setExperimentValues(this.experiments);
+            this.setCheckoutFeatures(this.checkoutFeatures);
 
             this.isLoading = true;
 
@@ -401,6 +433,8 @@ export default {
                 : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+
+            await this.loadNotesConfiguration();
 
             this.resetLoadingState();
 
@@ -412,8 +446,6 @@ export default {
             if (this.shouldLoadCustomer) {
                 await this.loadCustomer();
             }
-
-            this.getUserNote();
         },
 
         /**
@@ -435,8 +467,6 @@ export default {
          */
         async submitCheckout () {
             try {
-                this.saveUserNote();
-
                 if (!this.isLoggedIn && !this.isGuestCreated) {
                     await this.setupGuestUser();
                 }
@@ -553,12 +583,9 @@ export default {
             try {
                 const data = {
                     basketId: this.basket.id,
-                    customerNotes: {
-                        NoteForRestaurant: this.userNote
-                    },
+                    customerNotes: this.placeOrderNotes,
                     referralState: this.getReferralState()
                 };
-
                 await this.placeOrder({
                     url: this.placeOrderUrl,
                     data,
@@ -831,18 +858,31 @@ export default {
             this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
-        getMappedDataForUpdateCheckout () {
+        async getMappedDataForUpdateCheckout () {
             return mapUpdateCheckoutRequest({
                 address: this.address,
                 customer: this.customer,
                 isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                 isCheckoutMethodDineIn: this.isCheckoutMethodDineIn,
                 time: this.time,
-                userNote: this.userNote,
+                notes: this.formattedNotes,
                 geolocation: this.geolocation,
                 asap: this.hasAsapSelected,
                 tableIdentifier: this.dineIn.tableIdentifier
             });
+        },
+
+        async loadNotesConfiguration () {
+            if (this.features.isSplitNotesEnabled) {
+                try {
+                    await this.getNotesConfiguration({
+                        url: `${this.getNoteConfigUrl}/${this.restaurant.id}/checkout-note-types`,
+                        timeout: this.checkoutTimeout
+                    });
+                } catch (error) {
+                    this.handleEventLogging('NotesConfigurationFailure');
+                }
+            }
         }
     }
 };

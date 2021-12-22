@@ -5,30 +5,21 @@ module.exports = class LinkButton extends Page {
         super('atom-folder', 'f-button--link-button-component');
     }
 
-    get linkComponent () { return $('[data-test-id="link-button-component"]'); }
-
-    open (url) {
-        super.open(url);
-    }
+    get component () { return $('[data-test-id="link-button-component"]'); }
 
     load () {
-        super.load(this.linkComponent);
+        super.load(this.component);
     }
 
-    /**
-     * @description
-     * Sets the data for the button component.
-     *
-     * @param {Object} button
-     * @param {String} button.type
-     * @param {String} button.size
-     */
-
-    waitForLinkComponent () {
-        super.waitForComponent(this.linkComponent);
+    waitForComponent () {
+        super.waitForComponent(this.component);
     }
 
-    isLinkComponentDisplayed () {
-        return this.linkComponent.isDisplayed();
+    isComponentDisplayed () {
+        return this.component.isDisplayed();
+    }
+
+    isComponentClickable () {
+        return this.component.isClickable();
     }
 };

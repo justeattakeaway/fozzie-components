@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-image-tile",
   "description": "Fozzie Image Tile - An interactive tile component containing an image, text and link.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist/f-image-tile.umd.min.js",
   "files": [
     "dist",
@@ -45,7 +45,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@justeat/f-wdio-utils": "0.4.0",
+    "@justeat/f-wdio-utils": "0.5.0",
     "node-sass-magic-importer": "5.3.2",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",

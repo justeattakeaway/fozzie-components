@@ -1,15 +1,15 @@
-const StatusBanner = require('../../test-utils/component-objects/f-statusBanner.component');
+const StatusBanner = require('../../test-utils/component-objects/f-status-banner.component');
 
 let statusBanner;
 
-describe('f-statusBanner component tests', () => {
+describe('f-status-banner component tests', () => {
     beforeEach(() => {
         statusBanner = new StatusBanner();
 
         statusBanner.load();
     });
 
-    it('should display the f-statusBanner component', () => {
+    it('should display the f-status-banner component', () => {
         // Assert
         browser.percyScreenshot('f-status-banner - Base state', 'desktop');
     });

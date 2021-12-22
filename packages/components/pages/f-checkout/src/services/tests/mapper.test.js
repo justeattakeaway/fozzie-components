@@ -2,7 +2,8 @@ import {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapUpdateCheckoutRequest
+    mapUpdateCheckoutRequest,
+    mapNotesFromApi
 } from '../mapper';
 
 const defaultParams = {
@@ -10,7 +11,7 @@ const defaultParams = {
     customer: {},
     isCheckoutMethodDelivery: true,
     time: {},
-    userNote: '',
+    notes: [],
     geolocation: null,
     asap: false
 };
@@ -156,19 +157,26 @@ describe('checkout mapper', () => {
 
     it('should map user note correctly', () => {
         // Arrange
-        const userNote = 'Beware of the dachshund';
+        const notes = {
+            courier: {
+                note: 'Beware of the pug'
+            },
+            kitchen: {
+                note: 'No ham in my hamburger'
+            }
+        };
 
         // Act
         const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
-            userNote
+            notes
         });
 
         const notesRequest = requestBody[2].value;
 
         // Assert
-        expect(notesRequest.length).toBe(1);
-        expect(notesRequest[0].note).toBe(userNote);
+        expect(notesRequest.courier.note).toBe('Beware of the pug');
+        expect(notesRequest.kitchen.note).toBe('No ham in my hamburger');
     });
 
     it('should map geo location correctly', () => {
@@ -267,5 +275,25 @@ describe('getAnalyticsErrorCodeByApiErrorCode :: ', () => {
 
         // Act & Assert
         expect(getAnalyticsErrorCodeByApiErrorCode(error)).toEqual(expected);
+    });
+});
+
+describe('mapNotesFromApi ::', () => {
+    it('should map the notes returned from the API into an object', () => {
+        const notesFromApi = [
+            {
+                type: 'kitchen',
+                note: 'No ketchup on burger please'
+            },
+            {
+                type: 'courier',
+                note: 'Phone when outside'
+            }
+        ];
+
+        expect(mapNotesFromApi(notesFromApi)).toEqual({
+            kitchen: { note: 'No ketchup on burger please' },
+            courier: { note: 'Phone when outside' }
+        });
     });
 });

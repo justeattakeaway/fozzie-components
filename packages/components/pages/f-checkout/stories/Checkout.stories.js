@@ -58,6 +58,17 @@ const serverTimeout = 'Server timeout';
 const serverTimeoutIssue = 'timeout';
 const duplicateIssue = 'duplicate';
 
+const legacyNotes = 'Legacy notes';
+const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
+const noteTypesCombined = 'Combined note';
+const noteTypesCombinedValue = 'get-notes-config';
+
+const noteTypeOptions = {
+    [legacyNotes]: null,
+    [noteTypesCombined]: noteTypesCombinedValue,
+    [noteTypesDeliveryAndKitchen]: 'get-notes-config-split'
+};
+
 const patchCheckoutErrorOptions = {
     None: null,
     [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
@@ -163,6 +174,10 @@ export const CheckoutComponent = () => ({
 
         restriction: {
             default: select('Restrictions', restrictionOptions)
+        },
+
+        noteType: {
+            default: select('Note types', noteTypeOptions, null)
         }
     },
 
@@ -172,12 +187,18 @@ export const CheckoutComponent = () => ({
         },
 
         getCheckoutUrl () {
+            let url;
             if (this.fulfilmentTimeSelection) {
-                return `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
+                url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
             }
 
-            return this.getCheckoutError && this.getCheckoutError !== noTimeAvailable ?
-                `/checkout-${this.getCheckoutError}-get-error.json` : `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
+            if (this.getCheckoutError && this.getCheckoutError !== noTimeAvailable) {
+                url = `/checkout-${this.getCheckoutError}-get-error.json`;
+            } else {
+                url = `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
+            }
+
+            return url;
         },
 
         getBasketUrl () {
@@ -215,6 +236,16 @@ export const CheckoutComponent = () => ({
                 return mockedRequests.checkoutAvailableFulfilmentNoTimeAvailable.url;
             }
             return this.isAsapAvailable ? mockedRequests.checkoutAvailableFulfilment.url : mockedRequests.checkoutAvailableFulfilmentPreorder.url;
+        },
+
+        getNoteConfigUrl () {
+            return this.noteType ? `/${this.noteType}` : '';
+        },
+
+        checkoutFeatures () {
+            return {
+                isSplitNotesEnabled: this.noteType !== null
+            };
         }
     },
 
@@ -248,8 +279,10 @@ export const CheckoutComponent = () => ({
         'applicationName="Storybook" ' +
         ':getGeoLocationUrl="getGeoLocationUrl" ' +
         ':getCustomerUrl="getCustomerUrl" ' +
+        ':getNoteConfigUrl="getNoteConfigUrl" ' +
+        ':checkoutFeatures="checkoutFeatures"' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl},${checkoutFeatures}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

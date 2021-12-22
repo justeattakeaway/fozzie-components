@@ -459,6 +459,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+[data-cookie-consent-overlay] {
+    position: absolute;
+    color: $color-content-default;
+}
+
 .c-cookieBanner-card {
     position: absolute;
     bottom: 0;
@@ -477,15 +482,12 @@ export default {
     @include font-size(body-s);
 }
 
-.c-cookieBanner-content {
-    text-align: left;
-}
-
 .c-cookieBanner-title {
     @include font-size(heading-m);
     margin: 0 0 spacing();
     padding: 0;
     color: $color-content-default;
+    text-align: left;
 
     &:hover,
     &:focus {
@@ -498,6 +500,7 @@ export default {
 .c-cookieBanner-content {
     margin: 0 auto;
     padding: spacing(x4);
+    text-align: left;
 }
 
 .reopen-link-wrapper {
@@ -526,6 +529,7 @@ export default {
     .c-cookieBanner-cta {
         padding: spacing(x4);
         min-width: 352px;
+        margin: 0 auto;
     }
 }
 
