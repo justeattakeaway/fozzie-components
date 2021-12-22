@@ -4,6 +4,8 @@
 #jq=../node_modules/node-jq/bin/jq
 
 cat<<YAML
+version: 2.1
+
 commands:
   install_node_dependencies:
     description: Installs the node dependencies
@@ -93,15 +95,23 @@ workflows:
 
   build_and_test:
     jobs:
-      - install
+      - install:
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
 YAML
 for package in "${changed_packages[@]}"
 do
+  res=${package/@/}
       cat<<YAML
       - build:
-          name: build-$package
-          parameters:
-            scope: $package
+          name: build-${res/\//-}
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          scope: '$package'
 YAML
   # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
    devDependencies=(`cat ../node_modules/$package/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
@@ -119,8 +129,9 @@ if (( ${#buildFirst[@]} )); then
 YAML
     fi
     for required in "${buildFirst[@]}"; do
+      res=${required/@/}
             cat<<YAML
-            - build-$required
+            - build-${res/\//-}
 YAML
       done
 done
