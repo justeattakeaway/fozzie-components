@@ -4,6 +4,7 @@ import {
 import { withA11y } from '@storybook/addon-a11y';
 import CookieBanner from '../src/components/CookieBanner.vue';
 import '@justeat/f-button/dist/f-button.css'; // these styles are imported to fix visual regression tests
+import '@justeat/f-link/dist/f-link.css'; // these styles are imported to fix visual regression tests
 
 export default {
     title: 'Components/Organisms',
