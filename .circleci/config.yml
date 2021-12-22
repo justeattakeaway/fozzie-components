@@ -31,19 +31,6 @@ commands:
               fi
             }
 
-            echo 'Checking changes'
-            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
-            echo 'Changes detected:'
-            echo $changes
-
-            if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
-              echo 'export RUN_ALL=true' >> $BASH_ENV
-              source $BASH_ENV
-            else
-            echo 'export RUN_ALL=false' >> $BASH_ENV
-              echo 'Root files not changed'
-            fi
-
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
@@ -66,7 +53,7 @@ commands:
             then
               yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --since master...HEAD
+              yarn << parameters.command_name >> --since HEAD
             fi
 
 
