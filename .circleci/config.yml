@@ -6,6 +6,7 @@ setup: true
 # the continuation orb is required in order to use dynamic configuration
 orbs:
   continuation: circleci/continuation@0.1.2
+  jq: circleci/jq@2.2.0
 
 # our defined job, and its steps
 jobs:
@@ -13,9 +14,7 @@ jobs:
     executor: continuation/default
     steps:
       - checkout # checkout code
-      - run:
-          name: Install node dependencies
-          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - jq/install
       - run: # run a command
           name: Generate config
           command: |

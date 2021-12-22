@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # jq is the json parser
-jq=../node_modules/node-jq/bin/jq
+#jq=../node_modules/node-jq/bin/jq
 
 cat<<YAML
 commands:
@@ -87,18 +87,18 @@ workflows:
 
   build_and_test:
     jobs:
+      - install
 YAML
 for package in "${changed_packages[@]}"
 do
       cat<<YAML
-      - install
       - build:
           name: build-$package
           parameters:
             scope: $package
 YAML
   # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
-   devDependencies=(`cat ../node_modules/$package/package.json | $jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
+   devDependencies=(`cat ../node_modules/$package/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
 
     buildFirst=($(
         for item in "${devDependencies[@]}"; do
