@@ -509,14 +509,14 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - install
-      # - bundlewatch:
-      #     name: bundlewatch
-      #     context: web-core
-      #     filters:
-      #       branches:
-      #         ignore: ['gh-pages']
-      #     requires:
-      #       - build
+      - bundlewatch:
+          name: bundlewatch
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build
       - unit-tests:
           matrix:
             parameters:
