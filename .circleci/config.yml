@@ -279,14 +279,14 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps:
       - checkout
-      - run: # Run PR Checks
-         name: Run PR Checks
-         command: yarn danger ci
       - restore_cache:
             name: Restore Yarn Package Cache
             keys:
               - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
+      - run: # Run PR Checks
+         name: Run PR Checks
+         command: yarn danger ci
       - persist_to_workspace:
           root: .
           paths:
