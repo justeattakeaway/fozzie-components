@@ -43,6 +43,12 @@ commands:
           command_description: Build packages
           command_name: build --scope << parameters.scope >>
 
+executors:
+  node:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:14.18.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+
 jobs:
 
   install:
