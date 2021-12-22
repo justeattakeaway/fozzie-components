@@ -1,0 +1,546 @@
+# version: 2.1 # use CircleCI 2.1
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+
+orbs:
+  slack: circleci/slack@4.1.3
+
+commands:
+  set_deploy_key:
+    description: Sets the ssh key for project access
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "0e:50:82:ad:81:17:a5:31:04:13:fd:6e:c7:72:c9:18"
+
+  detect_root_change:
+    description: Detects root file changes
+    steps:
+      - run:
+          name: Detect root file changes (if so, treat all packages as updated)
+          command: |
+            set -e
+            trap 'catch $? $LINENO' ERR
+
+            catch() {
+              if [ "$1" != "0" ]; then
+                # error handling goes here
+                echo "Error $1 occurred on $2"
+              fi
+            }
+
+            echo 'Checking changes'
+            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+            echo 'Changes detected:'
+            echo $changes
+
+            if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
+              echo 'export RUN_ALL=true' >> $BASH_ENV
+              source $BASH_ENV
+            else
+            echo 'export RUN_ALL=false' >> $BASH_ENV
+              echo 'Root files not changed'
+            fi
+
+  # echo_root:
+  #   description: Detects root package.json changes
+  #   steps:
+  #     - run: |
+  #         echo $RUN_ALL
+
+
+  install_node_dependencies:
+    description: Installs the node dependencies
+    steps:
+      - run:
+          name: Install node dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+
+  save_cache_dist_directories:
+    description: Saves cache for dist directories
+    steps:
+      - save_cache:
+          name: Cache for molecules
+          key: build-cache-molecules-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/tools/f-vue-icons/dist
+            - packages/components/molecules/f-alert/dist
+            - packages/components/molecules/f-breadcrumbs/dist
+            - packages/components/molecules/f-card-with-content/dist
+            - packages/components/molecules/f-media-element/dist
+            - packages/components/molecules/f-mega-modal/dist
+            - packages/components/molecules/f-navigation-links/dist
+            - packages/components/molecules/f-promotions-showcase/dist
+            - packages/components/molecules/f-restaurant-card/dist
+            - packages/components/molecules/f-searchbox/dist
+            - packages/components/molecules/f-skeleton-loader/dist
+            - packages/components/molecules/f-tabs/dist
+            - packages/components/molecules/f-user-message/dist
+
+      - save_cache:
+          name: Cache for atoms
+          key: build-cache-atoms-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/atoms/f-button/dist
+            - packages/components/atoms/f-card/dist
+            - packages/components/atoms/f-error-message/dist
+            - packages/components/atoms/f-form-field/dist
+            - packages/components/atoms/f-link/dist
+            - packages/components/atoms/f-popover/dist
+            - packages/components/atoms/f-image-tile/dist
+            - packages/components/atoms/f-spinner/dist
+            - packages/components/atoms/f-error-boundary/dist
+
+      - save_cache:
+          name: Cache for organisms
+          key: build-cache-organisms-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/organisms/f-content-cards/dist
+            - packages/components/organisms/f-cookie-banner/dist
+            - packages/components/organisms/f-footer/dist
+            - packages/components/organisms/f-header/dist
+            - packages/components/organisms/f-status-banner/dist
+
+      - save_cache:
+          name: Cache for templates
+          key: build-cache-templates-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/templates/f-template-subnav/dist
+
+      - save_cache:
+          name: Cache for pages
+          key: build-cache-pages-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/pages/f-checkout/dist
+            - packages/components/pages/f-contact-preferences/dist
+            - packages/components/pages/f-loyalty/dist
+            - packages/components/pages/f-offers/dist
+            - packages/components/pages/f-registration/dist
+            - packages/components/pages/f-takeawaypay-activation/dist
+            - packages/components/pages/f-account-info/dist
+
+      - save_cache:
+          name: Cache for services
+          key: build-cache-services-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/services/f-analytics/dist
+            - packages/services/f-consumer-oidc/dist
+            - packages/services/f-development-context/dist
+            - packages/services/f-feature-management/dist
+            - packages/services/f-globalisation/dist
+            - packages/services/f-http/dist
+            - packages/services/f-services/dist
+            - packages/services/f-statistics/dist
+            - packages/services/f-compatibility/dist
+
+  restore_cache_dist_directories:
+    description: Restores all the dist dircetories
+    steps:
+      - restore_cache:
+          name: Restore molecules Cache
+          keys:
+            - build-cache-molecules-master-
+      - restore_cache:
+          name: Restore atoms Cache
+          keys:
+            - build-cache-atoms-master-
+      - restore_cache:
+          name: Restore organisms Cache
+          keys:
+            - build-cache-organisms-master-
+      - restore_cache:
+          name: Restore pages Cache
+          keys:
+            - build-cache-templates-master-
+      - restore_cache:
+          name: Restore pages Cache
+          keys:
+            - build-cache-pages-master-
+      - restore_cache:
+          name: Restore services Cache
+          keys:
+            - build-cache-services-master-
+
+  run_command:
+    parameters:
+      command_description:
+        type: string
+      command_name:
+        type: string
+    description: Runs commands based on passed parameters
+    steps:
+      - run:
+          name: << parameters.command_description >>
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn << parameters.command_name >>
+            else
+              yarn << parameters.command_name >> --since master...HEAD
+            fi
+
+  cache_checksum:
+    description: Yarn node_modules cache checksum
+    steps:
+      - run:
+          name: Create cache checksum file
+          command: |
+            mkdir -p ~/.tmp/checksumfiles
+            find . -type f -name 'yarn.lock' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/yarn.lock
+
+  restore_node_modules_cache:
+    description: Restore node_modules folder
+    steps:
+      - restore_cache:
+          name: Restore node_modules
+          keys:
+            - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
+
+  build_packages:
+    parameters:
+      component_type:
+        type: string
+    description: Locally builds all packages in the monorepo
+    steps:
+      - restore_cache_dist_directories
+      - run_command:
+          command_description: Build packages
+          command_name: ci:build:<< parameters.component_type >>
+#      - save_cache_dist_directories
+
+  lint_packages:
+    parameters:
+      component_type:
+        type: string
+    description: Locally lints all packages in the monorepo
+    steps:
+      - run_command:
+          command_description: Run linting for packages
+          command_name: ci:lint:<< parameters.component_type >>
+
+  unit_integration_tests:
+    description: Run Unit / Integration Tests
+    steps:
+      - run_command:
+          command_description: Run unit / integration tests for packages
+          command_name: "test"
+
+  build_storybook:
+    description: Build Storybook for UI tests
+    steps:
+      - run:
+          name: Build storybook for updated packages for UI tests
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn storybook:build
+            else
+              yarn storybook:build-changed
+            fi
+
+  component_tests:
+    description: Run Component Tests
+    steps:
+      - run_command:
+          command_description: Run component tests for packages
+          command_name: "test-component:chrome"
+
+  accessibility_tests:
+    description: Run Accessibility Tests
+    steps:
+      - run_command:
+          command_description: Run accessibility tests for packages
+          command_name: "test-a11y:chrome"
+
+  visual_regression_tests:
+    description: Run Percy Visual Regression Tests
+    steps:
+      - run:
+          name: Run Percy visual regression tests for packages
+          command: |
+            VISUAL_TESTS=`node ./visual-regression-preflight.js`
+
+            if [ "${VISUAL_TESTS}" == "true" ];
+            then
+              if [ "${RUN_ALL}" == "true" ];
+              then
+                yarn test:visual
+              else
+                yarn test:visual --since master...HEAD
+              fi
+            else
+              echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
+            fi
+
+  slack_notify_fail:
+    description: Sends a slack notifaction on job failure
+    steps:
+      - slack/notify:
+          branch_pattern: master
+          event: fail
+          custom: |
+            {
+              "attachments": [
+                {
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
+                      },
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Author*: ${CIRCLE_USERNAME}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Commit*: ${CIRCLE_SHA1}"
+                        }
+                      ],
+                      "accessory": {
+                        "type": "image",
+                        "image_url": "https://user-images.githubusercontent.com/26894168/101182589-31708380-3646-11eb-80d5-b174d47bf7fb.png",
+                        "alt_text": "Fozzie Logo"
+                      }
+                    },
+                    {
+                      "type": "actions",
+                      "elements": [
+                        {
+                          "type": "button",
+                          "text": {
+                            "type": "plain_text",
+                            "text": "View Job"
+                          },
+                          "url": "${CIRCLE_BUILD_URL}"
+                        }
+                      ]
+                    }
+                  ],
+                  "color": "danger"
+                }
+              ]
+            }
+
+  slack_notify_success:
+    description: Sends a slack notifaction on job success
+    steps:
+      - slack/notify:
+          branch_pattern: master
+          event: pass
+          custom: |
+            {
+              "attachments": [
+                {
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
+                      },
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Author*: ${CIRCLE_USERNAME}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Commit*: ${CIRCLE_SHA1}"
+                        }
+                      ],
+                      "accessory": {
+                        "type": "image",
+                        "image_url": "https://user-images.githubusercontent.com/26894168/101182641-4220f980-3646-11eb-8782-29a6a2213815.png",
+                        "alt_text": "Fozzie Logo"
+                      }
+                    },
+                    {
+                      "type": "actions",
+                      "elements": [
+                        {
+                          "type": "button",
+                          "text": {
+                            "type": "plain_text",
+                            "text": "View Job"
+                          },
+                          "url": "${CIRCLE_BUILD_URL}"
+                        }
+                      ]
+                    }
+                  ],
+                  "color": "good"
+                }
+              ]
+            }
+
+executors:
+  node:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:14.18.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+
+jobs:
+
+  working_directory: ~/repo
+
+  install:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps:
+      - checkout
+      - cache_checksum
+      - restore_cache:
+            name: Restore Yarn Package Cache
+            keys:
+              - yarn-packages-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
+      - persist_to_workspace:
+          root: .
+          paths:
+            - '*'
+  build:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    parameters:
+      component_type:
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - detect_root_change
+      - build_packages:
+          component_type: << parameters.component_type >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - '*'
+      - lint_packages:
+          component_type: << parameters.component_type >>
+#
+#      - run: # Run PR Checks
+#          name: Run PR Checks
+#          command: yarn danger ci
+
+#      - run:
+#          name: Run Bundlewatch checks
+#          command: yarn bundlewatch
+#      - slack_notify_fail
+#      - slack_notify_success
+
+  unit_tests:
+    executor: node
+    environment:
+      LERNA_ARGS: --concurrency 1
+    steps:
+      - checkout
+      - detect_root_change
+      - cache_checksum
+      - restore_node_modules_cache
+      - install_node_dependencies
+      - restore_cache_dist_directories
+      - unit_integration_tests
+      - slack_notify_fail
+      - slack_notify_success
+
+  browser_tests:
+    executor: node
+    steps:
+      - checkout
+      - detect_root_change
+      - cache_checksum
+      - restore_node_modules_cache
+      - install_node_dependencies
+      - restore_cache_dist_directories
+      - run: # Install Component Test Dependencies
+          name: Install Component Test Dependencies
+          command: yarn global add @vue/cli @vue/cli-service-global
+      - build_storybook
+      - run: # Serve Storybook
+          name: Serve Storybook
+          command: yarn storybook:serve-static
+          background: true
+      - component_tests
+      - accessibility_tests
+      - visual_regression_tests
+      - run:
+          name: Allure - Generate Test Results
+          command: yarn allure:generate
+          when: always
+      - store_artifacts:
+          path: allure-report
+      - slack_notify_fail
+      - slack_notify_success
+
+  deploy-storybook:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+      RUN_ALL: true
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
+      - build_packages
+      - run:
+          name: Deploy
+          command: yarn storybook:deploy
+      - slack_notify_fail
+      - slack_notify_success
+
+workflows:
+  version: 2
+
+  build_and_test:
+    jobs:
+      - install:
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+      - build:
+          matrix:
+            parameters:
+              component_type: [ 'atoms', 'molecules']
+          requires:
+            - install
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+
+#      - unit_tests: , 'organisms', 'pages', 'templates', 'services', 'storybook', 'tools'
+#          requires:
+#            - build
+#          context: web-core
+#          filters:
+#            branches:
+#              ignore: ['gh-pages']
+#
+#      - browser_tests:
+#          requires:
+#            - build
+#          context: web-core
+#          filters:
+#            branches:
+#              ignore: ['gh-pages']
+
+#  deploy-storybook:
+#    jobs:
+#      - deploy-storybook:
+#          context: web-core
+#          filters:
+#            branches:
+#              only: master
