@@ -69,21 +69,119 @@ commands:
               yarn << parameters.command_name >> --since master...HEAD
             fi
 
+
+  save_cache_dist_directories:  
+    description: Saves cache for dist directories
+    steps:
+      - save_cache:
+          name: Cache for molecules
+          key: build-cache-molecules-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/tools/f-vue-icons/dist
+            - packages/components/molecules/f-alert/dist
+            - packages/components/molecules/f-breadcrumbs/dist
+            - packages/components/molecules/f-card-with-content/dist
+            - packages/components/molecules/f-media-element/dist
+            - packages/components/molecules/f-mega-modal/dist
+            - packages/components/molecules/f-navigation-links/dist
+            - packages/components/molecules/f-promotions-showcase/dist
+            - packages/components/molecules/f-restaurant-card/dist
+            - packages/components/molecules/f-searchbox/dist
+            - packages/components/molecules/f-skeleton-loader/dist
+            - packages/components/molecules/f-tabs/dist
+            - packages/components/molecules/f-user-message/dist
+
+      - save_cache:
+          name: Cache for atoms
+          key: build-cache-atoms-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/atoms/f-button/dist
+            - packages/components/atoms/f-card/dist
+            - packages/components/atoms/f-error-message/dist
+            - packages/components/atoms/f-form-field/dist
+            - packages/components/atoms/f-link/dist
+            - packages/components/atoms/f-popover/dist
+            - packages/components/atoms/f-image-tile/dist
+            - packages/components/atoms/f-spinner/dist
+            - packages/components/atoms/f-error-boundary/dist
+            - packages/components/atoms/f-filter-pill/dist
+
+      - save_cache:
+          name: Cache for organisms
+          key: build-cache-organisms-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/organisms/f-content-cards/dist
+            - packages/components/organisms/f-cookie-banner/dist
+            - packages/components/organisms/f-footer/dist
+            - packages/components/organisms/f-header/dist
+            - packages/components/organisms/f-status-banner/dist
+
+      - save_cache:
+          name: Cache for templates
+          key: build-cache-templates-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/templates/f-template-subnav/dist
+
+      - save_cache:
+          name: Cache for pages
+          key: build-cache-pages-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/components/pages/f-checkout/dist
+            - packages/components/pages/f-contact-preferences/dist
+            - packages/components/pages/f-loyalty/dist
+            - packages/components/pages/f-offers/dist
+            - packages/components/pages/f-registration/dist
+            - packages/components/pages/f-takeawaypay-activation/dist
+            - packages/components/pages/f-account-info/dist
+
+      - save_cache:
+          name: Cache for services
+          key: build-cache-services-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - packages/services/f-analytics/dist
+            - packages/services/f-consumer-oidc/dist
+            - packages/services/f-development-context/dist
+            - packages/services/f-feature-management/dist
+            - packages/services/f-globalisation/dist
+            - packages/services/f-http/dist
+            - packages/services/f-services/dist
+            - packages/services/f-statistics/dist
+            - packages/services/f-compatibility/dist
+
+  restore_cache_dist_directories:
+    description: Restores all the dist dircetories
+    steps:
+      - restore_cache:
+          name: Restore molecules Cache
+          keys:
+            - build-cache-molecules-master-
+      - restore_cache:
+          name: Restore atoms Cache
+          keys:
+            - build-cache-atoms-master-
+      - restore_cache:
+          name: Restore organisms Cache
+          keys:
+            - build-cache-organisms-master-
+      - restore_cache:
+          name: Restore pages Cache
+          keys:
+            - build-cache-templates-master-
+      - restore_cache:
+          name: Restore pages Cache
+          keys:
+            - build-cache-pages-master-
+      - restore_cache:
+          name: Restore services Cache
+          keys:
+            - build-cache-services-master-
+
   build_packages:
     description: Locally builds all packages in the monorepo
     steps:
       - run_command:
           command_description: Build packages
-          command_name: build
-
-  restore_node_modules_cache:
-    description: Restore node_modules folder
-    steps:
-      - restore_cache:
-          name: Restore node_modules
-          keys:
-            - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
-
+          command_name: build 
 
   lint_packages:
     description: Locally lints all packages in the monorepo
@@ -291,17 +389,21 @@ jobs:
           root: .
           paths:
             - '*'
+      - slack_notify_fail
+      - slack_notify_success
 
   build:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency 2
     steps:
       - attach_workspace:
           at: .
       - detect_root_change
+      - restore_cache_dist_directories
       - build_packages
+      - save_cache_dist_directories
       - build_storybook
       - persist_to_workspace:
           root: .
@@ -311,19 +413,19 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
-  # bundlewatch:
-  #   executor: node
-  #   environment:
-  #     # required to prevent ENOMEM errors
-  #     LERNA_ARGS: --concurrency 1
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run:
-  #        name: Run Bundlewatch checks
-  #        command: yarn bundlewatch
-  #     - slack_notify_fail
-  #     - slack_notify_success
+  bundlewatch:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+         name: Run Bundlewatch checks
+         command: yarn bundlewatch
+      - slack_notify_fail
+      - slack_notify_success
 
   unit-tests:
     executor: node
@@ -337,8 +439,6 @@ jobs:
           at: .
       - unit_integration_tests:
           component_type: << parameters.component_type >>
-      - slack_notify_fail
-      - slack_notify_success
 
   browser-tests:
     executor: node
