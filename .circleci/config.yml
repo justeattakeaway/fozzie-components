@@ -7,6 +7,7 @@ setup: true
 orbs:
   continuation: circleci/continuation@0.1.2
   jq: circleci/jq@2.2.0
+  node: circleci/node@5.0.0
 
 # our defined job, and its steps
 jobs:
@@ -15,6 +16,13 @@ jobs:
     steps:
       - checkout # checkout code
       - jq/install
+      - node/install:
+          install-yarn: true
+          node-version: '14.18.2'
+      - run:
+          name: install packages
+          command: |
+            yarn install
       - run: # run a command
           name: Generate config
           command: |
