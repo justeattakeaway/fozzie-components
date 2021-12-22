@@ -33,7 +33,7 @@ commands:
     steps:
       - run:
           name: << parameters.command_description >>
-          command: lerna run $LERNA_ARGS << parameters.command_name >> --since master...HEAD
+          command: yarn << parameters.command_name >> --since master...HEAD
 
   build_packages:
     parameters:
@@ -43,7 +43,7 @@ commands:
     steps:
       - run_command:
           command_description: Build packages
-          command_name: build --scope << parameters.scope >>
+          command_name: build
 
 executors:
   node:
@@ -73,12 +73,12 @@ jobs:
 
   build:
     executor: node
+    parameters:
+          scope:
+            type: string
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-    parameters:
-      scope:
-        type: string
+      LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
     steps:
       - attach_workspace:
           at: .
