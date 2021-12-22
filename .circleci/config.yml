@@ -44,13 +44,6 @@ commands:
               echo 'Root files not changed'
             fi
 
-  # echo_root:
-  #   description: Detects root package.json changes
-  #   steps:
-  #     - run: |
-  #         echo $RUN_ALL
-
-
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
@@ -76,6 +69,13 @@ commands:
               yarn << parameters.command_name >> --since master...HEAD
             fi
 
+  build_packages:
+    description: Locally builds all packages in the monorepo
+    steps:
+      - run_command:
+          command_description: Build packages
+          command_name: build
+
   restore_node_modules_cache:
     description: Restore node_modules folder
     steps:
@@ -84,13 +84,6 @@ commands:
           keys:
             - yarn-dependencies-{{ .Branch }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}
 
-  build_packages:
-    description: Locally builds all packages in the monorepo
-    steps:
-      - run_command:
-          command_description: Build packages
-          command_name: build
-#      - save_cache_dist_directories
 
   lint_packages:
     description: Locally lints all packages in the monorepo
@@ -286,6 +279,9 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps:
       - checkout
+      - run: # Run PR Checks
+         name: Run PR Checks
+         command: yarn danger ci
       - restore_cache:
             name: Restore Yarn Package Cache
             keys:
@@ -295,6 +291,7 @@ jobs:
           root: .
           paths:
             - '*'
+
   build:
     executor: node
     environment:
@@ -311,16 +308,22 @@ jobs:
           paths:
             - '*'
       - lint_packages
-#
-#      - run: # Run PR Checks
-#          name: Run PR Checks
-#          command: yarn danger ci
+      - slack_notify_fail
+      - slack_notify_success
 
-#      - run:
-#          name: Run Bundlewatch checks
-#          command: yarn bundlewatch
-#      - slack_notify_fail
-#      - slack_notify_success
+  # bundlewatch:
+  #   executor: node
+  #   environment:
+  #     # required to prevent ENOMEM errors
+  #     LERNA_ARGS: --concurrency 1
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - run:
+  #        name: Run Bundlewatch checks
+  #        command: yarn bundlewatch
+  #     - slack_notify_fail
+  #     - slack_notify_success
 
   unit-tests:
     executor: node
@@ -328,14 +331,14 @@ jobs:
       component_type:
         type: string
     environment:
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency 2
     steps:
       - attach_workspace:
           at: .
       - unit_integration_tests:
           component_type: << parameters.component_type >>
-      # - slack_notify_fail
-      # - slack_notify_success
+      - slack_notify_fail
+      - slack_notify_success
 
   browser-tests:
     executor: node
@@ -359,34 +362,34 @@ jobs:
           component_type: << parameters.component_type >>
       - visual_regression_tests:
           component_type: << parameters.component_type >>
-      # - run:
-      #     name: Allure - Generate Test Results
-      #     command: yarn allure:generate
-      #     when: always
-      # # - store_artifacts:
-      # #     path: allure-report-{{}}
-      # # - slack_notify_fail
-      # # - slack_notify_success
+      - run:
+          name: Allure - Generate Test Results
+          command: yarn allure:generate
+          when: always
+      - store_artifacts:
+          path: allure-report
+      - slack_notify_fail
+      - slack_notify_success
 
-  # deploy-storybook:
-  #   executor: node
-  #   environment:
-  #     # required to prevent ENOMEM errors
-  #     LERNA_ARGS: --concurrency 1
-  #     RUN_ALL: true
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         name: Restore Yarn Package Cache
-  #         keys:
-  #           - yarn-packages-{{ checksum "yarn.lock" }}
-  #     - install_node_dependencies
-  #     - build_packages
-  #     - run:
-  #         name: Deploy
-  #         command: yarn storybook:deploy
-  #     - slack_notify_fail
-  #     - slack_notify_success
+  deploy-storybook:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+      RUN_ALL: true
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
+      - build_packages
+      - run:
+          name: Deploy
+          command: yarn storybook:deploy
+      - slack_notify_fail
+      - slack_notify_success
 
 workflows:
   version: 2
@@ -406,6 +409,14 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - install
+      # - bundlewatch:
+      #     name: bundlewatch
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore: ['gh-pages']
+      #     requires:
+      #       - build
       - unit-tests:
           matrix:
             parameters:
@@ -417,37 +428,20 @@ workflows:
           requires:
             - build
       - browser-tests:
-          name: 'browser-tests-atoms'
-          component_type: 'atoms'
-          requires:
-            - unit-tests-atoms
+          matrix:
+            parameters:
+              component_type: ['atoms', 'molecules', 'organisms', 'pages']
           context: web-core
           filters:
             branches:
               ignore: ['gh-pages']
-      - browser-tests:
-          name: 'browser-tests-molecules'
-          component_type: 'molecules'
           requires:
-            - unit-tests-molecules
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-      - browser-tests:
-          name: 'browser-tests-organisms'
-          component_type: 'organisms'
-          requires:
-            - unit-tests-organisms
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
+            - unit-tests-<< matrix.component_type >>
 
-#  deploy-storybook:
-#    jobs:
-#      - deploy-storybook:
-#          context: web-core
-#          filters:
-#            branches:
-#              only: master
+  deploy-storybook:
+    jobs:
+      - deploy-storybook:
+          context: web-core
+          filters:
+            branches:
+              only: master
