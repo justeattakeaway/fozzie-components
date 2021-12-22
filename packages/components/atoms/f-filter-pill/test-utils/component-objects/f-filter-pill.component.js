@@ -1,14 +1,14 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { COMPONENT } = require('./f-filter-pill-selectors');
 
-module.exports = class ImageTile extends Page {
+module.exports = class FilterPill extends Page {
     constructor () {
-        super('atom', 'image-tile-component');
+        super('atom', 'filter-pill-component');
     }
 
-    get component () { return $('[data-test-id="image-tile-component"]'); }
-
-    load () {
-        super.load(this.component);
+    get component () {
+        // eslint-disable-next-line no-undef
+        return $(COMPONENT);
     }
 
     waitForComponent () {

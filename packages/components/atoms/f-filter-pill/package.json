@@ -1,13 +1,13 @@
 {
-  "name": "@justeat/f-image-tile",
-  "description": "Fozzie Image Tile - An interactive tile component containing an image, text and link.",
-  "version": "0.2.0",
-  "main": "dist/f-image-tile.umd.min.js",
+  "name": "@justeat/f-filter-pill",
+  "description": "Fozzie Filter Pill - An interactive component for filter toggles.",
+  "version": "0.1.0",
+  "main": "dist/f-filter-pill.umd.min.js",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-image-tile",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-filter-pill",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -27,22 +27,18 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-image-tile ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-filter-pill ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "ci:test:atoms": "yarn test",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome:atoms": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test-component:chrome:atoms": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
@@ -50,10 +46,10 @@
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.5.0",
     "node-sass-magic-importer": "5.3.2",
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.4.6",
+    "@samhammer/vue-cli-plugin-stylelint": "2.1.0",
+    "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@vue/test-utils": "1.0.3"
+    "@vue/cli-plugin-unit-jest": "4.5.15",
+    "@vue/test-utils": "1.2.2"
   }
 }

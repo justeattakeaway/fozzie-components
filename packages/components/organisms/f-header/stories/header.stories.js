@@ -60,7 +60,7 @@ HeaderComponent.argTypes = {
     locale: {
         control: { type: 'select' },
         description: 'Select a tenant',
-        options: ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']
+        options: ['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT']
     },
 
     headerBackgroundTheme: {
