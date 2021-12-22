@@ -22,6 +22,10 @@ jobs:
           name: install lerna
           command: |
             npm install && npm install --g lerna
+      - run:
+          name: install lerna
+          command: |
+            ls -al
       - run: # run a command
           name: Generate config
           command: |
