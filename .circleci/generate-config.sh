@@ -114,7 +114,7 @@ do
           scope: '$package'
 YAML
   # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
-   devDependencies=(`cat ../node_modules/$package/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
+   devDependencies=(`cat node_modules/$package/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
 
     buildFirst=($(
         for item in "${devDependencies[@]}"; do
