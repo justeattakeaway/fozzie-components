@@ -140,7 +140,7 @@ commands:
     steps:
       - run_command:
           command_description: Run accessibility tests for packages
-          command_name: "test-a11y:chrome:<< parameters.component_type >>"
+          command_name: "ci:test-a11y:chrome:<< parameters.component_type >>"
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
@@ -157,9 +157,9 @@ commands:
             then
               if [ "${RUN_ALL}" == "true" ];
               then
-                yarn test:visual:<< parameters.component_type >>
+                yarn ci:test:visual:<< parameters.component_type >>
               else
-                yarn test:visual:<< parameters.component_type >> --since master...HEAD
+                yarn ci:test:visual:<< parameters.component_type >> --since master...HEAD
               fi
             else
               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
