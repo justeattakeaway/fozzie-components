@@ -49,6 +49,7 @@ describe('New - f-cookie-banner component tests', () => {
             cookieBanner.withQuery('&knob-Locale', tenant);
 
             cookieBanner.load();
+            cookieBanner.waitForComponent();
 
             // Act
             cookieBanner.clickCookiePolicyLink();
