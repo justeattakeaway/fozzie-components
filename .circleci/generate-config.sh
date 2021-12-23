@@ -146,11 +146,31 @@ YAML
 for package in $(echo "${changed_packages}" | jq -c '.[]')
 do
 
-  name=$(echo "${package}" | jq -r '.name')
-  location=$(echo "${package}" | jq -r '.location')
+      name=$(echo "${package}" | jq -r '.name')
+      location=$(echo "${package}" | jq -r '.location')
 
-  res=${name/@/}
+      res=${name/@/}
       cat<<YAML
+
+      - lint:
+          name: lint-${res/\//-}
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          scope: '$name'
+          requires:
+            - build-${res/\//-}
+
+      - unit:
+          name: unit-${res/\//-}
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          scope: '$name'
+          requires:
+            - build-${res/\//-}
 
       - build:
           name: build-${res/\//-}
@@ -178,28 +198,8 @@ YAML
       res=${required/@/}
             cat<<YAML
             - build-${res/\//-}
-
-      - lint:
-          name: lint-${res/\//-}
-          context: web-core
-          filters:
-            branches:
-              ignore: [ 'gh-pages' ]
-          scope: '$name'
-          requires:
-            - build-${res/\//-}
-
-      - unit:
-          name: unit-${res/\//-}
-          context: web-core
-          filters:
-            branches:
-              ignore: [ 'gh-pages' ]
-          scope: '$name'
-          requires:
-            - build-${res/\//-}
 YAML
-      done
+    done
 done
 
 #echo $changed_packages
