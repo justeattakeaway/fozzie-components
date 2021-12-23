@@ -72,12 +72,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-            name: Restore Yarn Package Cache
+            name: Restore node_modules Cache
             keys:
               - yarn-deps-{{ checksum "yarn.lock" }}
               - yarn-deps-
       - install_node_dependencies
       - save_cache:
+          name: Save node_modules Cache
           key: yarn-deps-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
