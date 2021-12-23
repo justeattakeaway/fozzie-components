@@ -71,12 +71,16 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps:
       - checkout
-      - cache_checksum
       - restore_cache:
             name: Restore Yarn Package Cache
             keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+              - yarn-deps-{{ checksum "yarn.lock" }}
+              - yarn-deps-
       - install_node_dependencies
+      - save_cache:
+          key: yarn-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
       - persist_to_workspace:
           root: .
           paths:
