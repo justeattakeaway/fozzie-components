@@ -36,14 +36,25 @@ commands:
           command: yarn << parameters.command_name >> --since master...HEAD
 
   build_packages:
-    parameters:
-      scope:
-        type: string
     description: Locally builds all packages in the monorepo
     steps:
       - run_command:
           command_description: Build packages
           command_name: build
+
+  lint_packages:
+      description: Locally lints all packages in the monorepo
+      steps:
+        - run_command:
+            command_description: Run linting for packages
+            command_name: lint
+
+  unit_integration_tests:
+    description: Run Unit / Integration Tests
+    steps:
+      - run_command:
+          command_description: Run unit / integration tests for packages
+          command_name: "test"
 
 executors:
   node:
@@ -82,8 +93,38 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - build_packages:
-          scope: << parameters.scope >>
+      - build_packages
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules/<< parameters.scope >>
+
+  lint:
+    executor: node
+    parameters:
+      scope:
+        type: string
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
+    steps:
+      - attach_workspace:
+          at: .
+      - lint_packages
+
+  unit:
+    executor: node
+    parameters:
+      scope:
+        type: string
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
+    steps:
+      - attach_workspace:
+          at: .
+      - unit_integration_tests
+
 YAML
 
 # get all the changed packages since master
@@ -110,6 +151,7 @@ do
 
   res=${name/@/}
       cat<<YAML
+
       - build:
           name: build-${res/\//-}
           context: web-core
@@ -135,6 +177,24 @@ YAML
     for required in "${buildFirst[@]}"; do
       res=${required/@/}
             cat<<YAML
+            - build-${res/\//-}
+
+      - lint:
+          name: lint-${res/\//-}
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          requires:
+            - build-${res/\//-}
+
+      - unit:
+          name: unit-${res/\//-}
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          requires:
             - build-${res/\//-}
 YAML
       done
