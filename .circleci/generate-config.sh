@@ -185,6 +185,7 @@ YAML
           filters:
             branches:
               ignore: [ 'gh-pages' ]
+          scope: '$name'
           requires:
             - build-${res/\//-}
 
@@ -194,6 +195,7 @@ YAML
           filters:
             branches:
               ignore: [ 'gh-pages' ]
+          scope: '$name'
           requires:
             - build-${res/\//-}
 YAML
