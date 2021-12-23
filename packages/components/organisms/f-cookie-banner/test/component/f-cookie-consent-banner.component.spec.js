@@ -43,7 +43,7 @@ describe('New - f-cookie-banner component tests', () => {
         ['en-IE', 'ie/info/cookies-policy'],
         ['it-IT', 'it/informazioni/politica-dei-cookie']
     ])
-        .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
+        .it('should go to the correct cookie policy page for "%s"', (tenant, expectedCookiePolicyUrl) => {
             // Arrange
             cookieBanner = new CookieBanner();
             cookieBanner.withQuery('&knob-Locale', tenant);
