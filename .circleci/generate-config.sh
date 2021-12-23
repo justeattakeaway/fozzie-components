@@ -87,7 +87,8 @@ jobs:
 YAML
 
 # get all the changed packages since master
-changed_packages=($(lerna ls --since master...HEAD));
+changed_packages=$(lerna ls --json --since master...HEAD);
+changed_package_names=($(lerna ls --since master...HEAD));
 
 cat<<YAML
 workflows:
@@ -101,9 +102,13 @@ workflows:
             branches:
               ignore: [ 'gh-pages' ]
 YAML
-for package in "${changed_packages[@]}"
+for package in $(echo "${changed_packages}" | jq -c '.[]')
 do
-  res=${package/@/}
+
+  name=$(echo "${package}" | jq -r '.name')
+  location=$(echo "${package}" | jq -r '.location')
+
+  res=${name/@/}
       cat<<YAML
       - build:
           name: build-${res/\//-}
@@ -111,23 +116,22 @@ do
           filters:
             branches:
               ignore: [ 'gh-pages' ]
-          scope: '$package'
+          scope: '$name'
 YAML
   # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
-   devDependencies=(`cat node_modules/$package/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
+   devDependencies=(`cat $location/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
 
     buildFirst=($(
         for item in "${devDependencies[@]}"; do
-            [[ ${changed_packages[*]} =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] \
+            [[ ${changed_package_names[*]} =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] \
                     && echo "$item"
         done
     ))
 
-if (( ${#buildFirst[@]} )); then
           cat<<YAML
           requires:
+            - install
 YAML
-    fi
     for required in "${buildFirst[@]}"; do
       res=${required/@/}
             cat<<YAML
