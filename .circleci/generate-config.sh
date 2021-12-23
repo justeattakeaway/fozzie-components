@@ -29,32 +29,52 @@ commands:
         type: string
       command_name:
         type: string
+      run_all:
+        type: boolean
     description: Runs commands based on passed parameters
     steps:
+      - when:
+          condition: << parameters.run_all >>
+          steps:
+            - run:
+                name: << parameters.command_description >>
+                command: yarn << parameters.command_name >>
       - run:
           name: << parameters.command_description >>
           command: yarn << parameters.command_name >> --since master...HEAD
 
   build_packages:
+    parameters:
+      run_all:
+        type: boolean
     description: Locally builds all packages in the monorepo
     steps:
       - run_command:
           command_description: Build packages
           command_name: build
+          run_all: << parameters.run_all >>
 
   lint_packages:
+      parameters:
+        run_all:
+          type: boolean
       description: Locally lints all packages in the monorepo
       steps:
         - run_command:
             command_description: Run linting for packages
             command_name: lint
+            run_all: << parameters.run_all >>
 
   unit_integration_tests:
+    parameters:
+      run_all:
+        type: boolean
     description: Run Unit / Integration Tests
     steps:
       - run_command:
           command_description: Run unit / integration tests for packages
-          command_name: "test"
+          command_name: test
+          run_all: << parameters.run_all >>
 
 executors:
   node:
@@ -96,13 +116,16 @@ jobs:
         type: string
       scope:
         type: string
+      run_all:
+        type: boolean
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
     steps:
       - attach_workspace:
           at: .
-      - build_packages
+      - build_packages:
+          run_all: << parameters.run_all >>
       - save_cache:
           name: Save << parameters.scope >>'s dist folder
           key: << parameters.scope >>-{{ checksum "<< parameters.path >>/package.json" }}
@@ -119,26 +142,32 @@ jobs:
     parameters:
       scope:
         type: string
+      run_all:
+        type: boolean
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
     steps:
       - attach_workspace:
           at: .
-      - lint_packages
+      - lint_packages:
+          run_all: << parameters.run_all >>
 
   unit:
     executor: node
     parameters:
       scope:
         type: string
+      run_all:
+        type: boolean
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
     steps:
       - attach_workspace:
           at: .
-      - unit_integration_tests
+      - unit_integration_tests:
+          run_all: << parameters.run_all >>
 
 YAML
 
@@ -148,11 +177,13 @@ if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
   # get all the changed packages since master
   changed_packages=$(lerna ls --json);
   changed_package_names=($(lerna ls));
+  run_all=true
 else
 echo 'export RUN_ALL=false' >> $BASH_ENV
   # get all the changed packages since master
   changed_packages=$(lerna ls --json --since master...HEAD);
   changed_package_names=($(lerna ls --since master...HEAD));
+  run_all=false
 fi
 
 
@@ -186,6 +217,7 @@ do
             branches:
               ignore: [ 'gh-pages' ]
           scope: '$name'
+          run_all: $run_all
           requires:
             - build-${res/\//-}
 
@@ -196,6 +228,7 @@ do
             branches:
               ignore: [ 'gh-pages' ]
           scope: '$name'
+          run_all: $run_all
           requires:
             - build-${res/\//-}
 
@@ -206,6 +239,7 @@ do
             branches:
               ignore: [ 'gh-pages' ]
           scope: '$name'
+          run_all: $run_all
           path: '$path_for_ci'
 YAML
   # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
