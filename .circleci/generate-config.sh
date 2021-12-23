@@ -151,6 +151,7 @@ do
 
       name=$(echo "${package}" | jq -r '.name')
       location=$(echo "${package}" | jq -r '.location')
+      path_for_ci=$(echo "${location}" | sed 's/^.*packages/packages/')
 
       res=${name/@/}
       cat<<YAML
@@ -182,7 +183,7 @@ do
             branches:
               ignore: [ 'gh-pages' ]
           scope: '$name'
-          path: '$location'
+          path: '$path_for_ci'
 YAML
   # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
    devDependencies=(`cat $location/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
