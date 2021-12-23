@@ -85,8 +85,10 @@ jobs:
   build:
     executor: node
     parameters:
-          scope:
-            type: string
+      path:
+        type: string
+      scope:
+        type: string
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
@@ -98,6 +100,7 @@ jobs:
           root: .
           paths:
             - node_modules/<< parameters.scope >>
+            - << parameters.path >>
 
   lint:
     executor: node
@@ -179,6 +182,7 @@ do
             branches:
               ignore: [ 'gh-pages' ]
           scope: '$name'
+          path: '$location'
 YAML
   # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
    devDependencies=(`cat $location/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
