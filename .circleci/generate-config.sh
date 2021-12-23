@@ -100,7 +100,7 @@ jobs:
           root: .
           paths:
             - node_modules/<< parameters.scope >>
-            - << parameters.path >>
+            - << parameters.path >>/dist
 
   lint:
     executor: node
