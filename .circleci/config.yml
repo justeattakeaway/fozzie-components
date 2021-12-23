@@ -484,7 +484,7 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
-      - build_packages
+      - restore_cache_dist_directories
       - run:
           name: Deploy
           command: yarn storybook:deploy
