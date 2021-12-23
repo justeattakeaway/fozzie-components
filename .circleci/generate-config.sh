@@ -72,15 +72,17 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-            name: Restore node_modules Cache
-            keys:
-              - yarn-deps-{{ checksum "yarn.lock" }}
-              - yarn-deps-
-      - install_node_dependencies
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
       - save_cache:
-          name: Save node_modules Cache
-          key: yarn-deps-{{ checksum "yarn.lock" }}
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
+            - ~/.cache/yarn
             - node_modules
       - persist_to_workspace:
           root: .
@@ -101,6 +103,11 @@ jobs:
       - attach_workspace:
           at: .
       - build_packages
+      - save_cache:
+          name: Save << parameters.scope >>'s dist folder
+          key: << parameters.scope >>-{{ checksum "<< parameters.path >>/package.json" }}
+          paths:
+            - << parameters.path >>/dist
       - persist_to_workspace:
           root: .
           paths:
@@ -135,9 +142,20 @@ jobs:
 
 YAML
 
-# get all the changed packages since master
-changed_packages=$(lerna ls --json --since master...HEAD);
-changed_package_names=($(lerna ls --since master...HEAD));
+changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+
+if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
+  # get all the changed packages since master
+  changed_packages=$(lerna ls --json);
+  changed_package_names=($(lerna ls));
+else
+echo 'export RUN_ALL=false' >> $BASH_ENV
+  # get all the changed packages since master
+  changed_packages=$(lerna ls --json --since master...HEAD);
+  changed_package_names=($(lerna ls --since master...HEAD));
+fi
+
+
 
 cat<<YAML
 workflows:
