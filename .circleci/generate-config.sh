@@ -97,6 +97,28 @@ commands:
           command_name: 'danger ci'
           run_all: true
 
+  component_tests:
+    parameters:
+      run_all:
+        type: boolean
+    description: Run Component Tests
+    steps:
+      - run_command:
+          command_description: Run component tests for packages
+          command_name: "test-component:chrome"
+          run_all: << parameters.run_all >>
+
+  accessibility_tests:
+    parameters:
+      run_all:
+        type: boolean
+    description: Run Accessibility Tests
+    steps:
+      - run_command:
+          command_description: Run accessibility tests for packages
+          command_name: "test-a11y:chrome"
+          run_all: << parameters.run_all >>
+
 executors:
   node:
     docker:
@@ -116,6 +138,9 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Installing required global packages
+          command: yarn global add @vue/cli @vue/cli-service-global
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
@@ -210,6 +235,25 @@ jobs:
       - unit_integration_tests:
           run_all: << parameters.run_all >>
 
+  browser_tests:
+    executor: node
+    parameters:
+      scope:
+        type: string
+      run_all:
+        type: boolean
+    environment:
+      LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
+    steps:
+      - run: # Serve Storybook
+          name: Serve Storybook
+          command: yarn storybook:serve-static
+          background: true
+      - component_tests:
+          run_all: << parameters.run_all >>
+      - accessibility_tests:
+          run_all: << parameters.run_all >>
+
 YAML
 
 changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
@@ -268,6 +312,18 @@ do
 
       res=${name/@/}
       cat<<YAML
+
+      - browser_tests:
+          name: browser-${res/\//-}
+          context: web-core
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          scope: '$name'
+          run_all: $run_all
+          requires:
+            - build-justeat-storybook
+            - build-${res/\//-}
 
       - lint:
           name: lint-${res/\//-}
