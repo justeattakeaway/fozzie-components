@@ -245,6 +245,8 @@ jobs:
     environment:
       LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
     steps:
+      - attach_workspace:
+          at: .
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
