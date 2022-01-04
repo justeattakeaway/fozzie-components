@@ -34,7 +34,8 @@ commands:
     description: Runs commands based on passed parameters
     steps:
       - when:
-          condition: << parameters.run_all >>
+          condition:
+            equal: [ true, << parameters.run_all >> ]
           steps:
             - run:
                 name: << parameters.command_description >>
@@ -179,7 +180,7 @@ if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
   changed_package_names=($(lerna ls));
   run_all=true
 else
-echo 'export RUN_ALL=false' >> $BASH_ENV
+  echo 'export RUN_ALL=false' >> $BASH_ENV
   # get all the changed packages since master
   changed_packages=$(lerna ls --json --since master...HEAD);
   changed_package_names=($(lerna ls --since master...HEAD));
