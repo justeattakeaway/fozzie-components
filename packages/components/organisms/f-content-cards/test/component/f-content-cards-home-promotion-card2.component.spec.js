@@ -20,4 +20,9 @@ describe('home promotion card 2 component tests', () => {
         expect(card.isTitleDisplayed()).toBe(true);
         expect(card.isBackgroundImageDisplayed()).toBe(true);
     });
+
+    it('should check that the card is clickable', () => {
+        // Assert
+        expect(card.isComponentClickable()).toBe(true);
+    });
 });
