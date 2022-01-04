@@ -35,6 +35,10 @@ describe('AgeVerification', () => {
     });
 
     describe('computed ::', () => {
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
         describe('days ::', () => {
             const selectedDate = {
                 day: 1,
@@ -86,16 +90,20 @@ describe('AgeVerification', () => {
         });
 
         describe('years ::', () => {
-            beforeEach(() => {
+            afterEach(() => {
+                jest.restoreAllMocks();
+            });
+
+            it('should return an array of 90 year objects', () => {
                 // Arrange
+                jest.spyOn(Date.prototype, 'getFullYear').mockReturnValue(2021);
+
                 wrapper = shallowMount(AgeVerification, {
                     i18n,
                     localVue,
                     store: createStore()
                 });
-            });
 
-            it('should return an array of 90 year objects', () => {
                 // Assert
                 expect(wrapper.vm.years.length).toEqual(90);
                 expect(wrapper.vm.years).toMatchSnapshot();
