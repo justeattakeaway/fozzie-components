@@ -15,29 +15,29 @@ export const VFormComponent = () => ({
     data () {
         return {
             formData: {
-                formFields: {
-                    firstName: {
+                formFields: [
+                    {
                         name: 'firstName',
                         value: '',
                         translations: {
                             label: 'First Name'
                         }
                     },
-                    lastName: {
+                    {
                         name: 'lastName',
                         value: '',
                         translations: {
                             label: 'Last Name'
                         }
                     },
-                    email: {
+                    {
                         name: 'email',
                         value: '',
                         translations: {
                             label: 'Email Address'
                         }
                     }
-                },
+                ],
                 buttonText: 'Continue'
             }
         };

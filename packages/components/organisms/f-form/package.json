@@ -40,7 +40,9 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0"
+    "@justeat/f-services": "1.7.0",
+    "@justeat/f-button": "3.0.2",
+    "@justeat/f-form-field": "4.0.1"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
@@ -48,8 +50,6 @@
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.5.0",
     "node-sass-magic-importer": "5.3.2",
-    "@justeat/f-button": "3.0.2",
-    "@justeat/f-form-field": "4.0.1",
     "@samhammer/vue-cli-plugin-stylelint": "2.1.0",
     "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-eslint": "3.9.2",
