@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
-*December 13, 2021*
+*January 12, 2021*
 
 ### Added
 - Add field validations.
@@ -15,12 +15,6 @@ v0.3.0
 v0.2.0
 ------------------------------
 *January 05, 2022*
-
-### Added
-- Add basic form components.
-
-
-*December 13, 2021*
 
 ### Added
 - Add basic form components.
