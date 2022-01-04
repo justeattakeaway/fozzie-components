@@ -243,11 +243,21 @@ do
           run_all: $run_all
           path: '$path_for_ci'
 YAML
-  # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
-   devDependencies=(`cat $location/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
+    # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
+    devDependencies=(`cat $location/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
 
-    buildFirst=($(
+     # find all the dependencies that this package relies on that are just eat so we can build in the correct order
+    dependencies=(`cat $location/package.json | jq -c -r ".dependencies | keys[]" | grep '@justeat'`)
+
+    buildFirstDevDependencies=($(
         for item in "${devDependencies[@]}"; do
+            [[ ${changed_package_names[*]} =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] \
+                    && echo "$item"
+        done
+    ))
+
+    buildFirstDependencies=($(
+        for item in "${dependencies[@]}"; do
             [[ ${changed_package_names[*]} =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] \
                     && echo "$item"
         done
@@ -257,12 +267,18 @@ YAML
           requires:
             - install
 YAML
-    for required in "${buildFirst[@]}"; do
+    for required in "${buildFirstDevDependencies[@]}"; do
       res=${required/@/}
             cat<<YAML
             - build-${res/\//-}
 YAML
     done
+    for required in "${buildFirstDependencies[@]}"; do
+      res=${required/@/}
+            cat<<YAML
+            - build-${res/\//-}
+YAML
+      done
 done
 
 #echo $changed_packages
