@@ -29,8 +29,8 @@ v5.8.2
 ------------------------------
 *January 04, 2022*
 
-### Removed
-- CircleCI Approval process for builds.
+### Added
+- `f-form` to Circle CI cache.
 
 
 v5.8.1
