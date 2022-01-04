@@ -40,9 +40,13 @@ commands:
             - run:
                 name: << parameters.command_description >>
                 command: yarn << parameters.command_name >>
-      - run:
-          name: << parameters.command_description >>
-          command: yarn << parameters.command_name >> --since master...HEAD
+      - when:
+          condition:
+            equal: [ false, << parameters.run_all >> ]
+          steps:
+            - run:
+                name: << parameters.command_description >>
+                command: yarn << parameters.command_name >> --since master...HEAD
 
   build_packages:
     parameters:
@@ -77,6 +81,22 @@ commands:
           command_name: test
           run_all: << parameters.run_all >>
 
+  bundle_watch:
+    description: Run Bundlewatch tests
+    steps:
+      - run_command:
+          command_description: Run Bundlewatch tests for packages
+          command_name: bundlewatch
+          run_all: true
+
+  danger_ci:
+    description: Run danger ci script
+    steps:
+      - run_command:
+          command_description: Run danger ci script
+          command_name: 'danger ci'
+          run_all: true
+
 executors:
   node:
     docker:
@@ -109,6 +129,22 @@ jobs:
           root: .
           paths:
             - '*'
+
+  ci_checks:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps:
+      - danger_ci
+
+  bundle_size_check:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps:
+      - bundle_watch
 
   build:
     executor: node
@@ -200,7 +236,23 @@ workflows:
           filters:
             branches:
               ignore: [ 'gh-pages' ]
+      - ci_checks:
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+      - bundle_size_check:
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          requires:
 YAML
+for package in $(echo "${changed_packages}" | jq -c '.[]'); do
+      name=$(echo "${package}" | jq -r '.name')
+      res=${name/@/}
+            cat<<YAML
+            - build-${res/\//-}
+YAML
+done
 for package in $(echo "${changed_packages}" | jq -c '.[]')
 do
 
