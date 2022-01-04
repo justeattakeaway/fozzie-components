@@ -244,6 +244,8 @@ workflows:
           filters:
             branches:
               ignore: [ 'gh-pages' ]
+          requires:
+            - install
       - bundle_size_check:
           filters:
             branches:
