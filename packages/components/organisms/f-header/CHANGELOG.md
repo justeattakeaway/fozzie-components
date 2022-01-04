@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v9.2.0
+------------------------------
+*December 20, 2021*
+
+### Removed
+- 'ml' theme override for Logo.
+- width css definition from logo icon to make sure that icons for different tenants (je and ml) are rendered correctly with same height.
+- nb-No and da-DK from copy, storybook story and tests.
+
+### Changed
+- Fixed Logo tests.
+
+
 v9.1.0
 ------------------------------
 *December 14, 2021*

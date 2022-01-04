@@ -92,6 +92,7 @@ commands:
             - packages/components/atoms/f-image-tile/dist
             - packages/components/atoms/f-spinner/dist
             - packages/components/atoms/f-error-boundary/dist
+            - packages/components/atoms/f-filter-pill/dist
 
       - save_cache:
           name: Cache for organisms

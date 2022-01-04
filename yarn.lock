@@ -2439,10 +2439,10 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.0.0.tgz#95dbb84020852c5bf0917d9dbc2f7a49145efd8b"
-  integrity sha512-7ejpGh16qubDh8K3eOObUilm6RTPf+UIuyB2xfkpPpkKdV9OK2J1IFcW68nUK89mwTvvq+1t0AMN0xHOco5Brg==
+"@justeat/fozzie@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.2.0.tgz#57eec0c2b1d5e37a506e102dd49ed5fb6874250b"
+  integrity sha512-g5ehUOK9hT3U2QXqEqI3r50OwtderBTIl1PLBG77GSsKEtyVYDLFg9s80YnPgGMv7NQZZi9eL2uwh7QIa+2GPg==
   dependencies:
     "@justeat/f-utils" "2.0.0"
     "@justeat/pie-design-tokens" "1.2.0"

@@ -64,19 +64,6 @@ describe('Header', () => {
         expect(wrapper.attributes('data-theme')).toBe('ml');
     });
 
-    it('should render je themed component if NO local passed', () => {
-        // Arrange
-        const propsData = {
-            locale: 'nb-NO',
-            headerBackgroundTheme: 'transparent'
-        };
-
-        // Act
-        const wrapper = shallowMount(Header, { propsData });
-
-        // Assert
-        expect(wrapper.attributes('data-theme')).toBe('je');
-    });
 
     it('should render jet themed component if shouldUseJetLogo prop is true even when there is no locale', () => {
         // Arrange
