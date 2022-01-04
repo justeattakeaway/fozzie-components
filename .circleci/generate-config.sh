@@ -136,6 +136,8 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps:
+      - attach_workspace:
+          at: .
       - danger_ci
 
   bundle_size_check:
@@ -144,6 +146,8 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps:
+      - attach_workspace:
+          at: .
       - bundle_watch
 
   build:
