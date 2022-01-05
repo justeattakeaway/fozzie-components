@@ -2,6 +2,7 @@
     <form
         method="post"
         :class="$style['c-form']"
+        data-test-id="form-component"
         @submit.prevent="onFormSubmit">
         <form-field
             v-for="(field, index) in formData.formFields"
