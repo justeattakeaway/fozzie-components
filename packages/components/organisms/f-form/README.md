@@ -45,12 +45,12 @@ The package also has dependencies that need to be installed by consuming compone
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import VForm from '@justeat/f-form';
+import FForm from '@justeat/f-form';
 import '@justeat/f-form/dist/f-form.css';
 
 export default {
     components: {
-        VForm
+        FForm
     }
 }
 ```
@@ -107,8 +107,8 @@ formData: {
 > **Example `formData`**
 ```
 formData: {
-    formFields: {
-        firstName: {
+    formFields: [
+        {
             name: 'firstName',
             value: '',
             translations: {
@@ -118,7 +118,7 @@ formData: {
                 }
             }
         },
-        lastName: {
+        {
             name: 'lastName',
             value: '',
             translations: {
@@ -137,7 +137,7 @@ formData: {
             }
         }
         ...
-    },
+    ],
     buttonText: 'Continue'
 }
 ```
