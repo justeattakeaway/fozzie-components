@@ -62,8 +62,8 @@ export default {
         formFields () {
             const formFields = {};
 
-            Object.keys(this.formData.formFields).forEach(field => {
-                formFields[field] = this.formData.formFields[field].value;
+            this.formData.formFields.forEach(field => {
+                formFields[field.name] = field.value;
             });
 
             return formFields;

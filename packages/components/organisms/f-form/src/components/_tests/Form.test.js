@@ -2,29 +2,29 @@ import { shallowMount } from '@vue/test-utils';
 import FForm from '../Form.vue';
 
 const formData = {
-    formFields: {
-        firstName: {
+    formFields: [
+        {
             name: 'firstName',
-            value: '',
+            value: 'John',
             translations: {
                 label: 'First Name'
             }
         },
-        lastName: {
+        {
             name: 'lastName',
-            value: '',
+            value: 'Johnson',
             translations: {
                 label: 'Last Name'
             }
         },
-        email: {
+        {
             name: 'email',
-            value: '',
+            value: 'John.Johnson@gmail.com',
             translations: {
                 label: 'Email Address'
             }
         }
-    },
+    ],
     buttonText: 'Continue'
 };
 
@@ -50,12 +50,9 @@ describe('Form', () => {
                 const wrapper = shallowMount(FForm, { propsData });
 
                 const result = wrapper.vm.formFields;
-                const passedData = propsData.formData.formFields;
 
                 // Assert
-                expect(result.firstName).toEqual(passedData.firstName.value);
-                expect(result.lastName).toEqual(passedData.lastName.value);
-                expect(result.email).toEqual(passedData.email.value);
+                expect(result).toMatchSnapshot();
             });
         });
     });

@@ -4,7 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-fozzie form
+Generic form component for basic forms. Can be used to collect data from text inputs.
 
 </div>
 
@@ -38,12 +38,12 @@ npm install @justeat/f-form
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import VForm from '@justeat/f-form';
+import FForm from '@justeat/f-form';
 import '@justeat/f-form/dist/f-form.css';
 
 export default {
     components: {
-        VForm
+        FForm
     }
 }
 ```
@@ -65,22 +65,26 @@ export default {
 
 ### Props
 
-There may be props that allow you to customise its functionality.
-
-The props that can be defined are as follows (if any):
+To add fields to the form and text to the form button a `formData` Object prop should be passed in. The `formData` Object should contain.
+ * **formFields** - ` Array of objects. Object should include
+    * **name** - The field name that data should be stored under
+    * **value** - The value of the field
+    * **translations** - an object contating
+        * **label** - the field label
+ *  **buttonText** - The text displayed on the button.
 
 > **Example `formData`**
 ```
 formData: {
-    formFields: {
-        firstName: {
+    formFields: [
+        {
             name: 'firstName',
             value: '',
             translations: {
                 label: 'First Name'
             }
         },
-        lastName: {
+        {
             name: 'lastName',
             value: '',
             translations: {
@@ -88,15 +92,15 @@ formData: {
             }
         }
         ...
-    },
+    ],
     buttonText: 'Continue'
 }
 ```
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| `formData` | Object | - | Object containing button text and form field data. Should be structured as above. |
-| `isFormSubmitting` | Boolean | - | Allows the parent component to set a loading spinner on the submit button while any asynchronous calls are carried out by the parent |
+| `formData` | Object | **Required Prop** | Object containing button text and form field data. Should be structured as above. |
+| `isFormSubmitting` | Boolean | false | Allows the parent component to set a loading spinner on the submit button while any asynchronous calls are carried out by the parent |
 
 ### Events
 
