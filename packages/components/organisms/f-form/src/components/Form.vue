@@ -5,10 +5,10 @@
         data-test-id="form-component"
         @submit.prevent="onFormSubmit">
         <form-field
-            v-for="(field, index) in formData.formFields"
-            :key="`field-${index}`"
+            v-for="field in formData.formFields"
+            :key="`${field.name}-field`"
             v-bind="fieldProps(field)"
-            @updated="updateField({ fieldName: field.name, value: $event })" />
+            @input="updateField({ fieldName: field.name, value: $event })" />
 
         <f-button
             button-type="primary"
