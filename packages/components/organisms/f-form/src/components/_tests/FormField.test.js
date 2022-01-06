@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import { fieldData, $v } from './helpers';
+import { firstNameData, $v } from './helpers';
 import FormField from '../FormField.vue';
 
 describe('FormField', () => {
     const propsData = {
-        fieldData
+        fieldData: firstNameData
     };
 
     it('should be defined', () => {
@@ -106,7 +106,7 @@ describe('FormField', () => {
                 const wrapper = shallowMount(FormField, {
                     propsData: {
                         fieldData: {
-                            ...fieldData,
+                            ...firstNameData,
                             name
                         }
                     },

@@ -1,4 +1,4 @@
-const fieldData = {
+const firstNameData = {
     name: 'firstName',
     value: '',
     translations: {
@@ -9,9 +9,33 @@ const fieldData = {
     }
 };
 
+const phoneNumberData = {
+    name: 'mobileNumber',
+    value: '',
+    translations: {
+        label: 'Mobile Number',
+        validationMessages: {
+            required: 'Enter Mobile Number',
+            invalid: 'Enter valid Mobile Number'
+        }
+    }
+};
+
+const postcodeData = {
+    name: 'postcode',
+    value: '',
+    translations: {
+        label: 'Postcode',
+        validationMessages: {
+            required: 'Enter Postcode',
+            invalid: 'Enter valid Postcode'
+        }
+    }
+};
+
 const formData = {
     formFields: [
-        fieldData,
+        firstNameData,
         {
             name: 'lastName',
             value: '',
@@ -30,28 +54,8 @@ const formData = {
                 }
             }
         },
-        {
-            name: 'mobileNumber',
-            value: '',
-            translations: {
-                label: 'Mobile Number',
-                validationMessages: {
-                    required: 'Enter Mobile Number',
-                    invalid: 'Enter valid Mobile Number'
-                }
-            }
-        },
-        {
-            name: 'postcode',
-            value: '',
-            translations: {
-                label: 'Postcode',
-                validationMessages: {
-                    required: 'Enter Postcode',
-                    invalid: 'Enter valid Postcode'
-                }
-            }
-        }
+        phoneNumberData,
+        postcodeData
     ],
     buttonText: 'Continue'
 };
@@ -82,7 +86,9 @@ const $v = {
 };
 
 export {
-    fieldData,
     formData,
+    firstNameData,
+    phoneNumberData,
+    postcodeData,
     $v
 };

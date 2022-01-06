@@ -7,8 +7,8 @@
         <form-field
             v-for="field in formData.formFields"
             :key="`${field.name}-field`"
-            v-bind="fieldProps(field)"
-            @input="updateField({ fieldName: field.name, value: $event })" />
+            :field-data="field"
+            @updated="updateField" />
 
         <slot />
 
@@ -29,7 +29,7 @@
 <script>
 import FButton from '@justeat/f-button';
 import FormField from '@justeat/f-form-field';
-import { globalisationServices } from '@justeat/f-services';
+import { validations, globalisationServices } from '@justeat/f-services';
 import VueScrollTo from 'vue-scrollto';
 import tenantConfigs from '../tenants';
 import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';
@@ -92,24 +92,45 @@ export default {
     },
 
     methods: {
+        isFormValid () {
+            this.$v.$touch();
+
+            return !this.$v.$invalid;
+        },
+
         updateField ({ fieldName, value }) {
             return this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
         },
 
         onFormSubmit () {
             this.$emit(FORM_EVENTS.submitting);
+
+            if (this.isFormValid()) {
+                this.$emit('form-valid', this.formFields);
+            } else {
+                const validationState = validations.getFormValidationState(this.$v);
+                this.scrollToFirstInlineError();
+
+                this.$emit('form-invalid', validationState);
+            }
         },
 
-        fieldProps (field) {
-            return {
-                name: field.name,
-                value: field.value || '',
-                'label-text': field.translations?.label
-            };
+        isValidPhoneNumber () {
+            const phoneNumberValue = this.formData.formFields.find(field => field.name === 'mobileNumber');
+
+            return phoneNumberValue && validations.isValidPhoneNumber(phoneNumberValue.value, this.locale);
+        },
+
+        isValidPostcode () {
+            const postcodeValue = this.formData.formFields.find(field => field.name === 'postcode');
+
+            return postcodeValue && validations.isValidPostcode(postcodeValue.value, this.locale);
         },
 
         translations (field) {
-            return this.formData.formFields[field].translations;
+            const formField = this.formData.formFields.find(fieldData => fieldData.name === field);
+
+            return formField?.translations;
         },
 
         hasValidationMessages (field) {

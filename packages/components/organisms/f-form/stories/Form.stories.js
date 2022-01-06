@@ -30,6 +30,17 @@ export const VFormComponent = () => ({
                         }
                     },
                     {
+                        name: 'mobileNumber',
+                        value: '',
+                        translations: {
+                            label: 'Mobile Number',
+                            validationMessages: {
+                                required: 'Enter Mobile Number',
+                                invalid: 'Enter valid Mobile Number'
+                            }
+                        }
+                    },
+                    {
                         name: 'email',
                         value: '',
                         translations: {
@@ -48,7 +59,8 @@ export const VFormComponent = () => ({
 
     methods: {
         updateField ({ fieldName, value }) {
-            this.formData.formFields[fieldName].value = value;
+            const formField = this.formData.formFields.find(field => field.name === fieldName);
+            formField.value = value;
         }
     },
 
