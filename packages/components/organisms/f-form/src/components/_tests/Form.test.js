@@ -62,14 +62,14 @@ describe('Form', () => {
             it('should emit `updated` event with fieldName and field value', () => {
                 // Arrange
                 const wrapper = shallowMount(FForm, { propsData });
+                const emitSpy = jest.spyOn(wrapper.vm, '$emit');
                 const payload = { fieldName: 'firstName', value: 'Joe' };
 
                 // Act
                 wrapper.vm.updateField(payload);
 
                 // Assert
-                expect(wrapper.emitted('updated').length).toBe(1);
-                expect(wrapper.emitted('updated')[0][0]).toEqual(payload);
+                expect(emitSpy).toHaveBeenCalledWith('updated', payload);
             });
         });
 
