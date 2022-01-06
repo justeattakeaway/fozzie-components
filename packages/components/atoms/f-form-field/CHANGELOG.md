@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.5.1
+------------------------------
+*January 6, 2022*
+
+### Changed
+- `uniqueId` to include `id` attribute (if present).
+  - Otherwise the labels would all have the same `for` attribute and be attached to the first radio button.
+
+
 v4.5.0
 ------------------------------
 *December 06, 2021*
@@ -29,15 +38,6 @@ v4.3.0
 
 ### Changed
 - Ensure `labelDescription` prop is passed to checkbox label.
-
-
-v4.2.1
-------------------------------
-*November 12, 2021*
-
-### Changed
-- `uniqueId` to include `id` attribute (if present).
-  - Otherwise the labels would all have the same `for` attribute and be attached to the first radio button.
 
 
 v4.2.0
