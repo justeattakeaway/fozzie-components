@@ -4,7 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-Generic form component for basic forms. Can be used to collect data from text inputs.
+Generic form component for creating basic forms. Can be used to collect data from text inputs.
 
 </div>
 
@@ -38,12 +38,12 @@ npm install @justeat/f-form
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import FForm from '@justeat/f-form';
+import VForm from '@justeat/f-form';
 import '@justeat/f-form/dist/f-form.css';
 
 export default {
     components: {
-        FForm
+        VForm
     }
 }
 ```
@@ -65,13 +65,13 @@ export default {
 
 ### Props
 
-To add fields to the form and text to the form button a `formData` Object prop should be passed in. The `formData` Object should contain.
+To add fields to the form, and text to the form button, a `formData` Object prop should be passed in. The `formData` Object should contain:
  * **formFields** - ` Array of objects. Object should include
     * **name** - The field name that data should be stored under
-    * **value** - The value of the field
+    * **value** - The default value of the field
     * **translations** - an object containing:
-        * **label** - the field label
- *  **buttonText** - The text displayed on the button.
+        * **label** - the field's displayed text label
+ *  **buttonText** - The text displayed on the form's action button
 
 > **Example `formData`**
 ```
