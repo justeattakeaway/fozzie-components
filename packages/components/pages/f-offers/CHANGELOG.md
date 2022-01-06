@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.6.0
+------------------------------
+*January 6, 2022*
+
+### Changed
+- Fixed UK-specific copy-pasted strings in IE, AU and NZ.
+
+
 v1.5.0
 ------------------------------
 *November 4, 2021*
