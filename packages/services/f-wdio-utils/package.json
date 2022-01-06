@@ -25,6 +25,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint",
+    "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix"
   },
   "browserslist": [
