@@ -69,7 +69,7 @@ To add fields to the form and text to the form button a `formData` Object prop s
  * **formFields** - ` Array of objects. Object should include
     * **name** - The field name that data should be stored under
     * **value** - The value of the field
-    * **translations** - an object contating
+    * **translations** - an object containing:
         * **label** - the field label
  *  **buttonText** - The text displayed on the button.
 
