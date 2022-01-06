@@ -37,9 +37,9 @@
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_BUTTON} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test-component:chrome:atoms": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test:visual:atoms": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_BUTTON} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome:atoms": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
+    "ci:test-component:chrome:atoms": "yarn test-component:chrome",
+    "ci:test:visual:atoms": "yarn test:visual",
+    "ci:test-a11y:chrome:atoms": "yarn test-a11y:chrome"
     
 
   },

@@ -33,11 +33,11 @@
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
-    "ci:test:atoms": "yarn test",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome:atoms": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test-component:chrome:atoms": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"
+    "ci:test:atoms": "yarn test",
+    "ci:test-component:chrome:atoms": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:atoms": "yarn test-a11y:chrome"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

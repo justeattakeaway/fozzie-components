@@ -29,7 +29,7 @@
     "ci:test-a11y:chrome:atoms": "cross-env-shell TEST_TYPE=a11y lerna run $LERNA_ARGS ci:test-a11y:chrome:atoms --concurrency 1 --stream",
     "ci:test-component:chrome:molecules": "cross-env-shell TEST_TYPE=component lerna run $LERNA_ARGS ci:test-component:chrome:molecules --concurrency 1 --stream",
     "ci:test:visual:molecules": "cross-env-shell TEST_TYPE=visual lerna run $LERNA_ARGS ci:test:visual:molecules --concurrency 1 --stream",
-    "ci:test-a11y:chrome:molecules": "cross-env-shell TEST_TYPE=a11y lerna run $LERNA_ARGSci:test-a11y:chrome:molecules --concurrency 1 --stream",
+    "ci:test-a11y:chrome:molecules": "cross-env-shell TEST_TYPE=a11y lerna run $LERNA_ARGS ci:test-a11y:chrome:molecules --concurrency 1 --stream",
     "ci:test-component:chrome:organisms": "cross-env-shell TEST_TYPE=component lerna run $LERNA_ARGS ci:test-component:chrome:organisms --concurrency 1 --stream",
     "ci:test:visual:organisms": "cross-env-shell TEST_TYPE=visual lerna run $LERNA_ARGS ci:test:visual:organisms --concurrency 1 --stream",
     "ci:test-a11y:chrome:organisms": "cross-env-shell TEST_TYPE=a11y lerna run $LERNA_ARGS ci:test-a11y:chrome:organisms --concurrency 1 --stream",
