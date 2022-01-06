@@ -22,7 +22,7 @@ const messages = {
     unauthenticated: {
         header: {
             title: 'Great local takeaways',
-            subtitle: 'Order for delivery or collection from the UK’s best selection of independent restaurants.'
+            subtitle: 'Order for delivery or collection from New Zealand’s best selection of independent restaurants.'
         },
         title: 'Log in to see your offers',
         subtitle: 'Tasty deals might be waiting',
