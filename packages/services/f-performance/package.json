@@ -27,8 +27,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "lint": "vue-cli-service lint --no-fix",
-    "lint:fix": "yarn lint --fix",
-    "ci:lint:services": "yarn lint"
+    "lint:fix": "yarn lint --fix"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
