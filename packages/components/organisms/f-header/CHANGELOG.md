@@ -4,6 +4,95 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v9.2.0
+------------------------------
+*December 20, 2021*
+
+### Removed
+- 'ml' theme override for Logo.
+- width css definition from logo icon to make sure that icons for different tenants (je and ml) are rendered correctly with same height.
+- nb-No and da-DK from copy, storybook story and tests.
+
+### Changed
+- Fixed Logo tests.
+
+
+v9.1.0
+------------------------------
+*December 14, 2021*
+
+### Added
+- Jet logo support via `shouldUseJetLogo` prop.
+
+### Updated
+- f-vue-icons to the latest (3.3.0).
+
+### Removed
+- Arrow button size override from mobile country selector as with the latest version of f-vue-icons arrow doesn't have a transparent spacing around it.
+
+
+v9.0.0
+------------------------------
+*December 13, 2021*
+
+### Added
+- **Breaking Change**: Added `f-button` and `f-popover` dependencies to peer dependencies. Now `f-button` and `f-popover` should be included as a dependency of the consuming component or application.
+
+### Removed
+- **Breaking Change**: Removed `f-button` and `f-popover` styles import from the component. Make sure to import `f-button` and `f-popover` styles in your application.
+
+
+v8.0.0
+------------------------------
+*December 9, 2021*
+
+### Changed
+- Make icons visible in mobile nav for highlight theme.
+
+### Added
+- (BREAKING) `tallBelowMid` prop to support taller header for mobile viewports (currently used in highlight theme).
+- Supporting visual regression tests.
+
+
+v7.3.0
+------------------------------
+*December 6, 2021*
+
+### Added
+- Support for custom links in the nav via `customNavLinks` prop.
+- Visual tests (currently skipped because of [storybook issue](https://github.com/storybookjs/storybook/issues/14420)).
+
+### Changed
+- Story now uses controls instead of knobs.
+
+
+v7.2.0
+------------------------------
+*December 1, 2021*
+
+### Changed
+- Extracted NavLink component
+- Extracted CountrySelector component
+- Pull some styles out of `Navigation.vue` into `navigation.scss` and extracted components.
+- Extract some f-trak object creation into a service
+
+
+v7.1.1
+------------------------------
+*November 19, 2021*
+
+### Changed
+- Replaced ES exports with node exports to allow external applications to access the components.
+
+
+v7.1.0
+------------------------------
+*November 1, 2021*
+
+### Changed
+- Mobile menu tab functionality to ensure hidden content is not focussed when tabbing and focus loops.
+
+
 v7.0.1
 ------------------------------
 *October 15, 2021*

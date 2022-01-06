@@ -1,20 +1,51 @@
 @import './common.scss';
 
-$nav-text-color--hover           : darken($color-content-link, $color-hover-01);
-$nav-text-color--transparent     : $color-content-link-light;
+/**
+* Global Page Navigation
+* =================================
+* Styles relating to the global site navigation
+*
+*/
 
-$nav-transition-duration         : 250ms;
+$nav-text-size                     : 'body-l';
+$nav-text-size--narrow             : 'body-s';
+$nav-text-weight                   : $font-weight-bold;
+$nav-text-color                    : $color-content-link;
+$nav-text-color--hover             : darken($color-content-link, $color-hover-01);
+$nav-text-color--narrow            : $color-content-subdued;
+$nav-text-color--transparent       : $color-content-link-inverse;
+$nav-text-subFont                  : $font-family-base;
 
-$nav-trigger-width               : 56px;
-$nav-trigger-height              : 48px;
-$nav-trigger-focus-color         : $color-content-interactive-secondary;
-$nav-trigger-focus-bg            : $color-interactive-secondary;
+$nav-transition-duration           : 250ms;
 
-$nav-popover-transition-delay    : 200ms;
-$nav-popover-transition-duration : 200ms;
+$nav-trigger-width                 : 56px;
+$nav-trigger-height                : 48px;
+$nav-trigger-focus-color           : $color-content-interactive-secondary;
+$nav-trigger-focus-bg              : $color-interactive-secondary;
 
-$countrySelector-flag-width      : 16px;
-$countrySelector-flag-height     : 16px;
+$nav-popover-width                 : 300px;
+$nav-popover-transition-delay      : 200ms;
+$nav-popover-transition-duration   : 200ms;
+
+$countrySelector-flag-width        : 16px;
+$countrySelector-flag-height       : 16px;
+
+$nav-featureLinkIcon-width         : 28px;
+$nav-featureLinkIcon-height        : 28px;
+
+$nav-icon-color                    : $color-interactive-primary;
+$nav-icon-color--transparent       : $color-interactive-inverse;
+$nav-icon-color--mobileWhiteBg     : $color-content-interactive-secondary;
+$nav-icon-size                     : 24px;
+
+$nav-toggleIcon-left               : spacing(x2);
+$nav-toggleIcon-width              : 21px;
+$nav-toggleIcon-height             : 2px;
+$nav-toggleIcon-borderRadius       : 1px;
+$nav-toggleIcon-color              : $nav-icon-color;
+$nav-toggleIcon-color--transparent : $nav-icon-color--transparent;
+$nav-toggleIcon-bg                 : transparent;
+$nav-toggleIcon-space              : 5px;
 
 @mixin nav-container-visible () {
     overflow-y: auto;
@@ -138,6 +169,102 @@ $countrySelector-flag-height     : 16px;
 
         .c-header--transparent & {
             background-color: transparent;
+        }
+    }
+}
+
+.c-nav-list-link,
+.c-nav-list-text {
+    display: flex;
+    align-items: center;
+    padding: spacing(x1.5) spacing(x2);
+    margin: 0;
+    font-family: $nav-text-subFont;
+    color: $nav-text-color--narrow;
+    @include font-size($nav-text-size--narrow);
+    font-weight: 300;
+    text-decoration: none;
+    border-bottom: 1px solid $color-border-default;
+
+    @include media('>mid') {
+        @include font-size($nav-text-size);
+        font-weight: $nav-text-weight;
+        color: $nav-text-color;
+        border-bottom: none;
+        height: $header-height;
+    }
+}
+
+.c-nav-list-link--alt {
+    @include media('>mid') {
+        color: $nav-text-color--transparent;
+    }
+}
+
+.c-nav-list-link--transparent,
+.c-nav-list-link--alt {
+    @include media('>mid') {
+        &:hover,
+        &:focus {
+            color: $nav-text-color--transparent;
+        }
+    }
+}
+
+.c-nav-list-text {
+    @include media('<=mid') {
+        display: block;
+    }
+}
+
+.c-nav-list-link--leftPaddingBelowMid {
+    @include media('<=mid') {
+        padding-left: spacing(x6);
+    }
+}
+
+.has-sublist {
+    // ensures the dropdown/popover is relative to the hover element, on wider views
+    @include media('>mid') {
+        position: relative;
+        cursor: pointer;
+    }
+}
+
+.c-nav-popover {
+    @include media('>mid') {
+        min-width: 300px;
+        position: absolute;
+        top: 100%;
+        right: 99999px; // offscreen, so can’t ever be hovered over by default
+        opacity: 0;
+        z-index: -1;
+        transition: opacity $nav-popover-transition-duration ease-in-out $nav-popover-transition-delay,
+                    z-index 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration),
+                    right 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration);
+
+        // display the popover when our parent item is hovered(recieved class .open)
+        .has-sublist.is-open & {
+            opacity: 1;
+            z-index: zIndex(high);
+            right: 0;
+
+            transition: opacity $nav-popover-transition-duration ease-in-out,
+                        z-index 0s linear;
+        }
+
+        // tooltip arrow
+        &:before {
+            right: 10%;
+        }
+    }
+}
+
+.c-nav-popover.c-nav-popover--countrySelector {
+    @include media('>mid') {
+        // tooltip arrow
+        &:before {
+            right: 4%;
         }
     }
 }

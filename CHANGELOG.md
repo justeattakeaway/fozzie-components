@@ -3,6 +3,80 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.8.2
+------------------------------
+*January 04, 2022*
+
+### Added
+- `f-form` to Circle CI cache.
+
+
+v5.8.1
+------------------------------
+*December 21, 2021*
+
+### Updated
+- Circle CI cached components to include new f-filter-pill component
+
+
+v5.8.0
+------------------------------
+*December 20, 2021*
+
+### Updated
+- fozzie package to the latest (v6.2.0).
+
+
+v5.7.0
+------------------------------
+*December 16, 2021*
+
+### Removed
+- CircleCI Approval process for builds.
+
+
+v5.6.0
+------------------------------
+*November 26, 2021*
+
+### Changed
+- Updated the circle ci config to include an approval process
+
+
+v5.5.0
+------------------------------
+*November 26, 2021*
+
+### Added
+- `peer-deps-externals-webpack-plugin` to automatically add a library's peerDependencies to the bundle's externals.
+
+
+v5.4.0
+------------------------------
+*November 22, 2021*
+
+### Changed
+- `chromedriver` dependency to `96.0.0`
+- `.circleci/*.yaml` files to use new Docker image with Chrome v96
+
+
+v5.3.2
+------------------------------
+*November 12, 2021*
+
+### Changed
+- wdio configuration for component, visual and a11y tests.
+- allure script in `wdio-shared.conf.js` and `package.json`.
+- small update of generator to reflect above changes.
+
+
+v5.3.1
+------------------------------
+*November 12, 2021*
+
+### Changed
+- Updated documentation for visual regression test setup.
+
 
 v5.3.0
 ------------------------------
@@ -61,7 +135,6 @@ v5.1.0
 
 ### Changed
 - fozzie package update to the latest (6.0.0) to include latest pie-design-tokens.
-
 
 v5.0.4
 ------------------------------

@@ -1,6 +1,8 @@
 const { buildUrl } = require('./storybook-extensions');
 
 class Page {
+    #defaultWaitTimeout = 500;
+
     constructor (componentType, componentName) {
         this.title = 'Component URLS';
         this.componentType = componentType;
@@ -19,8 +21,8 @@ class Page {
         return this;
     }
 
-    waitForComponent (component) {
-        component.waitForExist();
+    waitForComponent (component, timeoutMs = this.#defaultWaitTimeout) {
+        component.waitForExist({ timeout: timeoutMs });
     }
 
     withQuery (name, value) {

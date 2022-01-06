@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "main": "dist/f-alert.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -33,7 +33,7 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -42,17 +42,18 @@
     "@justeat/f-services": "1.0.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1"
+    "@justeat/browserslist-config-fozzie": ">=1.1.1",
+    "@justeat/f-button": "3.x"
   },
   "devDependencies": {
+    "node-sass-magic-importer": "5.3.2",
+    "@justeat/f-button": "3.2.0",
+    "@justeat/f-wdio-utils": "0.5.0",
+    "@justeat/f-vue-icons": "1.13.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.4.0",
-    "node-sass-magic-importer": "5.3.2",
-    "@justeat/f-button": "3.0.2",
-    "@justeat/f-vue-icons": "1.13.0"
+    "@vue/test-utils": "1.0.3"
   }
 }

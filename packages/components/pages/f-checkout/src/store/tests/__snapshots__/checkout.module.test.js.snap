@@ -18,6 +18,7 @@ Object {
     "id": "",
     "total": 0,
   },
+  "checkoutErrorMessage": null,
   "customer": Object {
     "dateOfBirth": null,
     "email": "",
@@ -29,6 +30,7 @@ Object {
     "tableIdentifier": "",
   },
   "errors": Array [],
+  "features": Object {},
   "geolocation": Object {
     "latitude": 51.5165,
     "longitude": 0.1033,
@@ -38,7 +40,6 @@ Object {
   "isFulfillable": true,
   "isGuestCreated": false,
   "isLoggedIn": false,
-  "message": null,
   "messages": Array [
     Object {
       "message": Object {
@@ -53,6 +54,8 @@ Object {
       "type": "information",
     },
   ],
+  "notes": Object {},
+  "notesConfiguration": Object {},
   "notices": Array [
     Object {
       "notice": Object {
@@ -71,6 +74,5 @@ Object {
     "from": "",
     "to": "",
   },
-  "userNote": "",
 }
 `;

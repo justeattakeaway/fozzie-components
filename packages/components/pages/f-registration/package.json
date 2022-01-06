@@ -37,7 +37,7 @@
     "test:coverage": "yarn test --coverage",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_REGISTRATION} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -57,7 +57,7 @@
     "@justeat/f-http": "0.8.0",
     "@justeat/f-link": "2.0.0",
     "@justeat/f-vue-icons": "2.7.0",
-    "@justeat/f-wdio-utils": "0.4.0",
+    "@justeat/f-wdio-utils": "0.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.5.8",
     "@vue/cli-plugin-eslint": "3.9.2",

@@ -31,17 +31,7 @@
 
         <form-selector :key="availableFulfilmentTimesKey" />
 
-        <form-field
-            :label-text="$t(`userNote.${serviceType}.title`)"
-            input-type="textarea"
-            :placeholder="$t(`userNote.${serviceType}.placeholder`)"
-            :value="userNote"
-            cols="30"
-            rows="7"
-            maxlength="200"
-            name="note"
-            :label-description="$t(`userNote.${serviceType}.text`)"
-            @input="updateUserNote($event)" />
+        <checkout-notes />
 
         <f-button
             :class="[
@@ -53,8 +43,7 @@
             is-full-width
             action-type="submit"
             data-test-id="confirm-payment-submit-button"
-            :is-loading="isFormSubmitting"
-        >
+            :is-loading="isFormSubmitting">
             {{ $t('buttonText') }}
         </f-button>
     </form>
@@ -65,12 +54,12 @@ import { validationMixin } from 'vuelidate';
 import {
     required, email, requiredIf
 } from 'vuelidate/lib/validators';
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-import FormField from '@justeat/f-form-field';
-import '@justeat/f-form-field/dist/f-form-field.css';
 import { validations } from '@justeat/f-services';
+import CheckoutNotes from './Notes.vue';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import EventNames from '../event-names';
 import AddressBlock from './Address.vue';
 import CheckoutFormField from './CheckoutFormField.vue';
@@ -83,7 +72,7 @@ export default {
         AddressBlock,
         FButton,
         CheckoutFormField,
-        FormField,
+        CheckoutNotes,
         FormSelector,
         GuestBlock
     },
@@ -116,13 +105,12 @@ export default {
         availableFulfilmentTimesKey: {
             type: Number,
             required: true
-        }
-    },
+        },
 
-    data () {
-        return {
-            isFormSubmitting: false
-        };
+        isFormSubmitting: {
+            type: Boolean,
+            required: true
+        }
     },
 
     /*
@@ -158,7 +146,7 @@ export default {
             'serviceType',
             'dineIn',
             'time',
-            'userNote'
+            'notes'
         ]),
 
         invalidFieldsSummary () {
@@ -178,9 +166,6 @@ export default {
     },
 
     methods: {
-        ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateUserNote'
-        ]),
 
         /**
          * Scroll to the first inline error, no matter which one it is.
@@ -209,7 +194,6 @@ export default {
          */
         onFormSubmit () {
             this.$emit(EventNames.FormSubmitting);
-            this.setSubmittingState(true);
 
             if (this.isFormValid()) {
                 this.$emit(EventNames.FormValid);
@@ -219,8 +203,6 @@ export default {
 
                 this.$emit(EventNames.FormInvalid, validationState);
             }
-
-            this.setSubmittingState(false);
         },
 
         /**
@@ -237,15 +219,6 @@ export default {
          */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
-        },
-
-        /**
-         * Sets the submitting state of the Checkout form. When true a spinner is displayed on the submit button
-         * This is done to allow us to test the setting of this value and ensure it is called with the correct value in the correct order.
-         * @param  {boolean} isFormSubmitting  - whether the form should be in a submitting state or not.
-         */
-        setSubmittingState (isFormSubmitting) {
-            this.isFormSubmitting = isFormSubmitting;
         }
     },
 

@@ -1,63 +1,85 @@
+import { ERROR_TYPES } from './constants';
+
 const checkoutIssues = {
     MINIMUM_ORDER_VALUE_NOT_MET: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
     },
 
     RESTAURANT_NOT_TAKING_ORDERS: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
     },
 
     SERVICE_TYPE_UNAVAILABLE: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
     },
 
     ADDITIONAL_ITEMS_REQUIRED: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
     },
 
     ITEMS_UNORDERABLE: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: true
     },
 
     FULFILMENT_TIME_UNAVAILABLE: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
     },
 
     LOCATION_UNDELIVERABLE: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
     },
 
     TABLE_IDENTIFIER_REQUIRED: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
+        shouldRedirectToMenu: false
+    },
+
+    KITCHEN_NOTE_NOT_ACCEPTED: {
+        errorType: ERROR_TYPES.dialog,
+        shouldRedirectToMenu: false
+    },
+
+    ORDER_NOTE_NOT_ACCEPTED: {
+        errorType: ERROR_TYPES.dialog,
+        shouldRedirectToMenu: false
+    },
+
+    COURIER_NOTE_NOT_ACCEPTED: {
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
     },
 
     GENERIC_CHECKOUT_ISSUE: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
     },
 
     DATE_OF_BIRTH_REQUIRED: {
-        shouldShowInDialog: false,
+        errorType: ERROR_TYPES.alert,
         shouldRedirectToMenu: false
     },
 
     GEOLOCATION_REQUIRED: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
     },
 
     // Different casing since this issue is provided by a different API with different naming conventions
     DuplicateOrder: {
-        shouldShowInDialog: true,
+        errorType: ERROR_TYPES.dialog,
         shouldRedirectToMenu: false
+    },
+
+    BasketChanged: {
+        errorType: ERROR_TYPES.dialog,
+        shouldRedirectToMenu: true
     }
 };
 

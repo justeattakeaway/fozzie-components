@@ -1,66 +1,26 @@
-import {
-    withKnobs, boolean, select, object
-} from '@storybook/addon-knobs';
+import '@justeat/f-popover/dist/f-popover.css';
+import '@justeat/f-button/dist/f-button.css'; // these styles are imported to fix visual regression tests
+
 import { withA11y } from '@storybook/addon-a11y';
 import VueHeader from '../src/components/Header.vue';
 
-const userInfo = {
-    friendlyName: 'John',
-    isAuthenticated: true,
-    email: 'je@test.com',
-    userData: {
-        signupDate: '2018-05-21T22:54:49.4630000Z',
-        email: 'test',
-        'a-UserId': 'test',
-        consumerStatus: 'test'
-    }
-};
+import { userInfo } from '../test-utils/helpers/objects';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs, withA11y],
+    decorators: [withA11y],
     parameters: {
         layout: 'fullscreen'
     }
 };
 
-export const HeaderComponent = () => ({
-    components: { VueHeader },
-    props: {
-        locale: {
-            default: select('Locale', ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
-        },
-        logoLinkDisabled: {
-            default: boolean('Disable logo link', false)
-        },
-        showOffersLink: {
-            default: boolean('Show offers link', false)
-        },
-        showDeliveryEnquiry: {
-            default: boolean('Show delivery enquiry', false)
-        },
-        headerBackgroundTheme: {
-            default: select('Header theme', ['white', 'highlight', 'transparent'])
-        },
-        userInfoProp: {
-            default: object('User info', userInfo)
-        },
-        showLoginInfo: {
-            default: boolean('Show login/user info link', true)
-        },
-        showHelpLink: {
-            default: boolean('Show help link', true)
-        },
-        showCountrySelector: {
-            default: boolean('Show country selector', true)
-        },
-        showSkipLink: {
-            default: boolean('Show skip link', true)
-        }
+export const HeaderComponent = (args, { argTypes }) => ({
+    components: {
+        VueHeader
     },
-    parameters: {
-        notes: 'some documentation here'
-    },
+
+    props: Object.keys(argTypes),
+
     template: `
         <vue-header
             :user-info-prop="userInfoProp"
@@ -72,8 +32,103 @@ export const HeaderComponent = () => ({
             :show-delivery-enquiry="showDeliveryEnquiry"
             :show-login-info="showLoginInfo"
             :show-country-selector="showCountrySelector"
+            :custom-nav-links="customNavLinks"
             :key="locale"
-            :show-skip-link="showSkipLink" />`
+            :show-skip-link="showSkipLink"
+            :tall-below-mid="tallBelowMid"
+            :should-use-jet-logo="shouldUseJetLogo" />`
 });
 
 HeaderComponent.storyName = 'f-header';
+HeaderComponent.args = {
+    locale: 'en-GB',
+    headerBackgroundTheme: 'white',
+    showLoginInfo: true,
+    userInfoProp: userInfo,
+    customNavLinks: [],
+    showCountrySelector: true,
+    showHelpLink: true,
+    showSkipLink: true,
+    showOffersLink: false,
+    showDeliveryEnquiry: false,
+    logoLinkDisabled: false,
+    tallBelowMid: false,
+    shouldUseJetLogo: false
+};
+
+HeaderComponent.argTypes = {
+    locale: {
+        control: { type: 'select' },
+        description: 'Select a tenant',
+        options: ['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT']
+    },
+
+    headerBackgroundTheme: {
+        control: { type: 'select' },
+        description: 'Choose a theme for the header',
+        options: ['white', 'highlight', 'transparent']
+    },
+
+    showLoginInfo: {
+        description: 'For unauthenticated users, shows the "Login" link. For authenticated users, shows their name and contains links to the account pages.'
+    },
+
+    userInfoProp: {
+        control: { type: 'object' },
+        description: 'Configure the user details; set to `false` (in RAW mode) to simulate a logged out user'
+    },
+
+    shouldUseJetLogo: {
+        control: { type: 'boolean' },
+        description: 'If set to true the header shows the Jet logo'
+    },
+
+    // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
+    // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
+    // https://github.com/storybookjs/storybook/issues/14420
+    customNavLinks: {
+        description: 'Array of objects representing custom navigation links. Each object should contain the properties `text` and `url`, and (optionally) a `gtm` object containing tracking properties.'
+    //     options: ['Empty', 'CustomLink', 'CustomLinkWithGtm'],
+    //     mapping: {
+    //         Empty: [],
+    //         CustomLink: [{ text: 'Custom Link', url: '/custom' }],
+    //         CustomLinkWithGtm: [{ text: 'Custom Link (with GTM)', url: '/custom', gtm: { label: 'custom-link' } }]
+    //     },
+    //     control: {
+    //         type: 'select',
+    //         labels: {
+    //             Empty: 'No custom links',
+    //             CustomLink: 'Custom link',
+    //             CustomLinkWithGtm: 'Custom link (with GTM label)'
+    //         }
+    //     }
+    },
+
+    showCountrySelector: {
+        description: 'Shows the country selector which contains links to our sites in other countries.'
+    },
+
+    showHelpLink: {
+        description: 'Shows the link to the "Help" page'
+    },
+
+    showSkipLink: {
+        description: 'Includes the "Skip to main content" link'
+    },
+
+    showOffersLink: {
+        description: 'Shows the link to the "For You" page'
+    },
+
+    showDeliveryEnquiry: {
+        description: 'Shows the "Deliver with Just Eat" link'
+    },
+
+    logoLinkDisabled: {
+        description: 'Prevents the header logo from also being a link'
+    },
+
+    tallBelowMid: {
+        description: 'Makes the header taller for narrower viewports'
+    }
+};

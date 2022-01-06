@@ -5,7 +5,8 @@
             $style['c-header'],
             headerBackgroundClass,
             transparentBackgroundClasses,
-            { [$style['c-header--navInView']]: mobileNavIsOpen }
+            { [$style['c-header--navInView']]: mobileNavIsOpen },
+            { [$style['c-header--tallBelowMid']]: tallBelowMid }
         ]"
         data-test-id='header-component'>
         <skip-to-main
@@ -24,6 +25,7 @@
 
             <navigation
                 :copy="copy"
+                :custom-nav-links="customNavLinks"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :show-offers-link="showOffersLinkWithContent"
                 :show-help-link="showHelpLink"
@@ -60,6 +62,11 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+
+        customNavLinks: {
+            type: Array,
+            default: () => []
         },
 
         errorLog: {
@@ -125,6 +132,16 @@ export default {
         showCountrySelector: {
             type: Boolean,
             default: false
+        },
+
+        tallBelowMid: {
+            type: Boolean,
+            default: false
+        },
+
+        shouldUseJetLogo: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -141,6 +158,9 @@ export default {
 
     computed: {
         theme () {
+            if (this.shouldUseJetLogo) {
+                return 'jet';
+            }
             return globalisationServices.getTheme(this.locale);
         },
 
@@ -242,7 +262,16 @@ html:global(.is-navInView) {
 
     .c-header--highlightBg {
         background-color: $color-support-brand-01;
-        min-height: 88px;
+
+        @include media('>mid') {
+            min-height: 88px;
+        }
+    }
+
+    .c-header--tallBelowMid {
+        @include media('<=mid') {
+            min-height: 88px;
+        }
     }
 
     .c-header-container {

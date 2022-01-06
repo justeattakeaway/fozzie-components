@@ -34,6 +34,9 @@ const checkoutServerError = 'Checkout Error (Response from server is an error)';
 const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
 const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
+const invalidProductsError = 'Basket contains invalid products';
+const offlineProductsError = 'Basket contains offline products';
+const createGuestError = 'Create Guest Error';
 const SERVER = 'SERVER';
 const accessForbiddenErrorCode = '403';
 const getCheckoutErrorCode = '500';
@@ -48,9 +51,23 @@ const timeNotAvailable = 'Selected time no longer available';
 const timeNotAvailableIssue = 'time-unavailable';
 const geolocationRequired = 'Geolocation required';
 const geolocationRequiredIssue = 'geolocation-required';
+const invalidProductsErrorCode = 'invalid-products';
+const offlineProductsErrorCode = 'offline-products';
+const createGuestErrorCode = 'error';
 const serverTimeout = 'Server timeout';
 const serverTimeoutIssue = 'timeout';
 const duplicateIssue = 'duplicate';
+
+const legacyNotes = 'Legacy notes';
+const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
+const noteTypesCombined = 'Combined note';
+const noteTypesCombinedValue = 'get-notes-config';
+
+const noteTypeOptions = {
+    [legacyNotes]: null,
+    [noteTypesCombined]: noteTypesCombinedValue,
+    [noteTypesDeliveryAndKitchen]: 'get-notes-config-split'
+};
 
 const patchCheckoutErrorOptions = {
     None: null,
@@ -69,12 +86,23 @@ const restrictionOptions = {
     [ageRestriction]: ageRestrictionIssue
 };
 
+const createGuestErrorOptions = {
+    None: null,
+    [createGuestError]: createGuestErrorCode
+};
+
 const getCheckoutErrorOptions = {
     None: null,
     [accessForbiddenError]: accessForbiddenErrorCode,
     [getCheckoutError]: getCheckoutErrorCode,
     [noTimeAvailableError]: noTimeAvailable,
     [serverTimeout]: serverTimeoutIssue
+};
+
+const getBasketErrorOptions = {
+    None: null,
+    [invalidProductsError]: invalidProductsErrorCode,
+    [offlineProductsError]: offlineProductsErrorCode
 };
 
 const placeOrderErrorOptions = {
@@ -96,7 +124,6 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            createGuestUrl: mockedRequests.createGuest.url,
             getAddressUrl: mockedRequests.getAddress.url,
             loginUrl: '/login',
             paymentPageUrlPrefix,
@@ -129,6 +156,14 @@ export const CheckoutComponent = () => ({
             default: select('Get Checkout Errors', getCheckoutErrorOptions, null)
         },
 
+        createGuestError: {
+            default: select('Create Guest Errors', createGuestErrorOptions, null)
+        },
+
+        getBasketError: {
+            default: select('Get Basket Errors', getBasketErrorOptions, null)
+        },
+
         placeOrderError: {
             default: select('Place Order Errors', placeOrderErrorOptions)
         },
@@ -139,17 +174,31 @@ export const CheckoutComponent = () => ({
 
         restriction: {
             default: select('Restrictions', restrictionOptions)
+        },
+
+        noteType: {
+            default: select('Note types', noteTypeOptions, null)
         }
     },
 
     computed: {
+        createGuestUrl () {
+            return this.createGuestError ? mockedRequests.createGuestError.url : mockedRequests.createGuest.url;
+        },
+
         getCheckoutUrl () {
+            let url;
             if (this.fulfilmentTimeSelection) {
-                return `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
+                url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
             }
 
-            return this.getCheckoutError && this.getCheckoutError !== noTimeAvailable ?
-                `/checkout-${this.getCheckoutError}-get-error.json` : `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
+            if (this.getCheckoutError && this.getCheckoutError !== noTimeAvailable) {
+                url = `/checkout-${this.getCheckoutError}-get-error.json`;
+            } else {
+                url = `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
+            }
+
+            return url;
         },
 
         getBasketUrl () {
@@ -158,6 +207,11 @@ export const CheckoutComponent = () => ({
                     return `/checkout-${this.getCheckoutError}-get-error.json`;
                 }
             }
+
+            if (this.getBasketError) {
+                return `/get-basket-${this.getBasketError}.json`;
+            }
+
             return this.restriction ? `/get-basket-delivery-${this.restriction}.json` : `/get-basket-${this.serviceType}.json`;
         },
 
@@ -182,6 +236,16 @@ export const CheckoutComponent = () => ({
                 return mockedRequests.checkoutAvailableFulfilmentNoTimeAvailable.url;
             }
             return this.isAsapAvailable ? mockedRequests.checkoutAvailableFulfilment.url : mockedRequests.checkoutAvailableFulfilmentPreorder.url;
+        },
+
+        getNoteConfigUrl () {
+            return this.noteType ? `/${this.noteType}` : '';
+        },
+
+        checkoutFeatures () {
+            return {
+                isSplitNotesEnabled: this.noteType !== null
+            };
         }
     },
 
@@ -215,8 +279,10 @@ export const CheckoutComponent = () => ({
         'applicationName="Storybook" ' +
         ':getGeoLocationUrl="getGeoLocationUrl" ' +
         ':getCustomerUrl="getCustomerUrl" ' +
+        ':getNoteConfigUrl="getNoteConfigUrl" ' +
+        ':checkoutFeatures="checkoutFeatures"' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl},${checkoutFeatures}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

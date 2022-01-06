@@ -31,45 +31,38 @@ TemplateSubNavComponent.args = {
     navigationLinks: [
         {
             id: 'link1',
-            url: '/account/info',
-            name: 'Your account',
-            selected: false
+            to: '/account/info',
+            name: 'Your account'
         },
         {
             id: 'link2',
-            url: '/order-history',
-            name: 'Your orders',
-            selected: false
+            to: '/order-history',
+            name: 'Your orders'
         },
         {
             id: 'link3',
-            url: '/account/paymentoptions',
-            name: 'Your saved cards',
-            selected: false
+            to: '/account/paymentoptions',
+            name: 'Your saved cards'
         },
         {
             id: 'link4',
-            url: '/member/addressbook',
-            name: 'Your address book',
-            selected: false
+            to: '/member/addressbook',
+            name: 'Your address book'
         },
         {
             id: 'link5',
-            url: '/account/credit',
-            name: 'Redeem a voucher',
-            selected: false
+            to: '/account/credit',
+            name: 'Redeem a voucher'
         },
         {
             id: 'link6',
-            url: '/giftcards/redeem',
-            name: 'Redeem a gift card',
-            selected: false
+            to: '/giftcards/redeem',
+            name: 'Redeem a gift card'
         },
         {
             id: 'link7',
-            url: '/account/preferences',
-            name: 'Contact preferences',
-            selected: true
+            to: '/account/preferences',
+            name: 'Contact preferences'
         }
     ],
     breadcrumbLinks: [

@@ -1,19 +1,14 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-popover-selectors');
 
 module.exports = class Popover extends Page {
-    constructor() {
+    constructor () {
         super('atom', 'popover-component');
     }
 
-    get component () { return $(COMPONENT); }
+    get component () { return $('[data-test-id="popover"]'); }
 
     load () {
         super.load(this.component);
-    }
-
-    open (url) {
-        super.open(url);
     }
 
     waitForComponent () {
@@ -23,4 +18,4 @@ module.exports = class Popover extends Page {
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
-}
+};

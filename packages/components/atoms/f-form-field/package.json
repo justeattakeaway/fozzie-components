@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
-  "description": "Fozzie Form Field – Fozzie Form Field Component",
-  "version": "4.2.1",
+  "description": "Fozzie Form Field - Fozzie Form Field Component",
+  "version": "4.5.0",
   "main": "dist/f-form-field.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -32,7 +32,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
@@ -51,7 +51,7 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.4.0",
+    "@justeat/f-wdio-utils": "0.5.0",
     "node-sass-magic-importer": "5.3.2"
   }
 }

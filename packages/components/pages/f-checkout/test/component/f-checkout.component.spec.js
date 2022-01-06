@@ -19,11 +19,11 @@ describe('f-checkout component tests', () => {
         checkout.load();
     });
 
-    it.skip('should submit the checkout form', () => {
+    it('should submit the checkout form', () => {
         // Arrange
         const customerInfo = {
             note: 'Doorbell is broken',
-            orderTime: 'Wednesday 00:30'
+            orderTime: 'Wednesday 01:45'
         };
 
         // Act
@@ -39,8 +39,7 @@ describe('f-checkout component tests', () => {
         [100, 'addressLine2'],
         [50, 'addressLocality'],
         [50, 'addressPostcode'],
-        [16, 'mobileNumber'],
-        [200, 'userNote']
+        [16, 'mobileNumber']
     ])
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
             // Arrange
@@ -54,10 +53,10 @@ describe('f-checkout component tests', () => {
             expect(checkout.getFieldValue(field).length).toEqual(maxlength);
         });
 
-    it.skip('should enable a user to submit without adding a note', () => {
+    it('should enable a user to submit without adding a note', () => {
         // Arrange
         const customerInfo = {
-            orderTime: 'Wednesday 00:30'
+            orderTime: 'Wednesday 01:45'
         };
 
         // Act
@@ -74,10 +73,9 @@ describe('f-checkout component tests', () => {
 
         // Act
         checkout.load();
-        checkout.waitForComponent();
-
         checkout.goToPayment();
         checkout.clickRetryButton();
+        browser.pause(2000);
 
         // Assert
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
@@ -90,12 +88,12 @@ describe('f-checkout component tests', () => {
 
             // Act
             checkout.load();
-            checkout.waitForComponent();
             checkout.goToPayment();
         });
 
         it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
             // Act
+            checkout.waitForComponent();
             checkout.clickRetryButton();
 
             // Assert
@@ -105,6 +103,7 @@ describe('f-checkout component tests', () => {
 
         it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
             // Act
+            checkout.waitForComponent();
             checkout.clickDupOrderGoToHistoryButton();
 
             // Assert

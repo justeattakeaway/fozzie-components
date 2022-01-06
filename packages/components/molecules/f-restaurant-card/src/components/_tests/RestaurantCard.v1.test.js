@@ -4,7 +4,7 @@ import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 
 describe('RestaurantCard.v1', () => {
     describe('Error Boundary', () => {
-        const slotList = ['ratings', 'meta-items', 'local-legend', 'optional-items'];
+        const slotList = ['meta-items', 'optional-items'];
 
         it.each(slotList)('Successfully wraps %p slot in error boundary', slot => {
             // arrange
@@ -33,7 +33,7 @@ describe('RestaurantCard.v1', () => {
             };
 
             const slots = {
-                ratings: '<div ratings-slot></div>'
+                'meta-items': '<div meta-items-slot></div>'
             };
 
             // act
@@ -43,7 +43,7 @@ describe('RestaurantCard.v1', () => {
             });
 
             // assert
-            expect(wrapper.find('[error-boundary][tier="3"]>[ratings-slot]').exists()).toBe(true);
+            expect(wrapper.find('[error-boundary][tier="3"]>[meta-items-slot]').exists()).toBe(true);
         });
 
         it('Successfully wraps RestaurantCuisines component in error boundary', () => {
@@ -62,12 +62,12 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[error-boundary]>[data-test-id="restaurant-cuisines"]').exists()).toBe(true);
         });
 
-        it('Successfully wraps "new" RestaurantBadge component in error boundary', () => {
+        it('Successfully wraps "new" RestaurantTag component in error boundary', () => {
             // arrange
-            const newBadgeText = 'NEW';
+            const newTagText = 'NEW';
             const propsData = {
                 errorBoundary,
-                newBadgeText: 'NEW'
+                newTagText: 'NEW'
             };
 
             // act
@@ -76,14 +76,16 @@ describe('RestaurantCard.v1', () => {
             });
 
             // assert
-            expect(wrapper.find(`[error-boundary]>[data-test-id="restaurant-badge"][title="${newBadgeText}"`).exists()).toBe(true);
+            expect(wrapper.find(`[error-boundary]>[data-test-id="restaurant-tag"][title="${newTagText}"`).exists()).toBe(true);
         });
 
-        it('Successfully wraps inner-content RestaurantBadges component in error boundary', () => {
+        it('Successfully wraps inner-content RestaurantTags component in error boundary', () => {
             // arrange
             const propsData = {
                 errorBoundary,
-                contentBadges: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test badge that hopefully never happens' }]
+                tags: {
+                    contentTags: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test tag that hopefully never happens' }]
+                }
             };
 
             // act
@@ -92,7 +94,7 @@ describe('RestaurantCard.v1', () => {
             });
 
             // assert
-            expect(wrapper.find('[error-boundary]>[data-test-id="restaurant-inner-content-badges"]').exists()).toBe(true);
+            expect(wrapper.find('[error-boundary]>[data-test-id="restaurant-inner-content-tags"]').exists()).toBe(true);
         });
     });
 
@@ -128,11 +130,13 @@ describe('RestaurantCard.v1', () => {
         });
     });
 
-    describe('Restaurant badges - inner content', () => {
-        it('should render if badges are provided', () => {
+    describe('Restaurant tags - inner content', () => {
+        it('should render if tags are provided', () => {
             // arrange
             const propsData = {
-                contentBadges: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test badge that hopefully never happens' }]
+                tags: {
+                    contentTags: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test tag that hopefully never happens' }]
+                }
             };
 
             // act
@@ -141,21 +145,21 @@ describe('RestaurantCard.v1', () => {
             });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-inner-content-badges"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-inner-content-tags"]').exists()).toBe(true);
         });
 
-        it('should not render if no badges are provided', () => {
+        it('should not render if no tags are provided', () => {
             // act
             const wrapper = mount(RestaurantCardV1);
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-inner-content-badges"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="restaurant-inner-content-tags"]').exists()).toBe(false);
         });
 
-        it('should not render if an empty badge list is provided', () => {
+        it('should not render if an empty tag list is provided', () => {
             // arrange
             const propsData = {
-                contentBadges: []
+                contentTags: []
             };
 
             // act
@@ -164,7 +168,44 @@ describe('RestaurantCard.v1', () => {
             });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-inner-content-badges"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="restaurant-inner-content-tags"]').exists()).toBe(false);
+        });
+    });
+
+    describe('Restaurant Rating', () => {
+        it('renders rating component', () => {
+            // arrange
+            const propsData = {
+                rating: {
+                    isOwnRating: false,
+                    mean: 5.45,
+                    count: 1400,
+                    accessibleMessage: 'rated 5 stars out of 6',
+                    notRatedMessage: 'No ratings yet',
+                    isOwnRatingMessage: 'You'
+                }
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, {
+                propsData
+            });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(true);
+        });
+
+        it('renders rating component when state missing', () => {
+            // arrange
+            const propsData = {};
+
+            // act
+            const wrapper = mount(RestaurantCardV1, {
+                propsData
+            });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(true);
         });
     });
 
@@ -193,6 +234,119 @@ describe('RestaurantCard.v1', () => {
 
             // assert
             expect(wrapper.find('[data-test-id="restaurant-delivery-time-meta"]').exists()).toBe(true);
+        });
+    });
+
+    describe('Offer', () => {
+        it('displays an offer if one is provided', () => {
+            // arrange
+            const propsData = {
+                offer: 'foo bar baz'
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-offer"]').exists()).toBe(true);
+        });
+
+        it.each([
+            null,
+            undefined,
+            ''
+        ])('does not display an offer if none exists', offer => {
+            // arrange
+            const propsData = {
+                offer
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-offer"]').exists()).toBe(false);
+        });
+    });
+
+    describe('Premier Restaurant', () => {
+        it('should show Premier Tag when restaurant is Premier', () => {
+            // arrange
+            const propsData = {
+                isPremier: true
+
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(true);
+        });
+
+        it('should not show Premier Tag when restaurant is not Premier', () => {
+            // arrange
+            const propsData = {
+                isPremier: false
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+        });
+
+        it('should not show Premier Tag when premier data is missing', () => {
+            // arrange
+            const propsData = {};
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+        });
+
+        it.each([null, undefined])('should not show Premier Tag when premier data is %p', value => {
+            // arrange
+            const propsData = {
+                isPremier: value
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+        });
+    });
+
+    describe('Restaurant dishes', () => {
+        it('renders restaurant dishes component when some dishes exist', () => {
+            // arrange
+            const propsData = {
+                dishes: [{ foo: 'bar' }]
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-dishes"]').exists()).toBe(true);
+        });
+
+        it.each([
+            { dishes: null },
+            { dishes: undefined },
+            { dishes: [] },
+            {}
+        ])('does not render restaurant dishes component if no dishes exist', propsData => {
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-dishes"]').exists()).toBe(false);
         });
     });
 });

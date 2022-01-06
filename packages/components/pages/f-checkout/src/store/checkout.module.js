@@ -1,7 +1,10 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE } from '../constants';
+import {
+    VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE, ERROR_TYPES,
+    CHECKOUT_NOTE_TYPE_COURIER, CHECKOUT_NOTE_TYPE_ORDER
+} from '../constants';
 import basketApi from '../services/basketApi';
 import checkoutApi from '../services/checkoutApi';
 import addressGeocodingApi from '../services/addressGeocodingApi';
@@ -9,6 +12,7 @@ import orderPlacementApi from '../services/orderPlacementApi';
 import accountApi from '../services/accountApi';
 
 import {
+    CLEAR_DOB_ERROR,
     UPDATE_ADDRESS,
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
@@ -22,13 +26,16 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_MESSAGE,
+    UPDATE_NOTES_CONFIGURATION,
+    UPDATE_CHECKOUT_ERROR_MESSAGE,
     UPDATE_ORDER_PLACED,
     UPDATE_PHONE_NUMBER,
     UPDATE_STATE,
     UPDATE_DINEIN_DETAILS,
-    UPDATE_USER_NOTE
+    UPDATE_CHECKOUT_FEATURES,
+    UPDATE_USER_NOTES
 } from './mutation-types';
+
 
 import checkoutIssues from '../checkout-issues';
 
@@ -40,7 +47,10 @@ const getIssueByCode = code => {
     const issue = checkoutIssues[code];
 
     if (issue) {
-        return { ...issue, code };
+        return {
+            ...issue,
+            messageKey: code
+        };
     }
 
     return null;
@@ -78,11 +88,6 @@ const resolveCustomerDetails = (data, state) => {
     }
 };
 
-/**
- * @param {object} state - The current `checkout` state.
- * @returns {String} - session storage key where we save user note.
- */
-const getUserNoteSessionStorageKey = state => `userNote-${state.basket.id}`;
 
 export default {
     namespaced: true,
@@ -101,6 +106,7 @@ export default {
             id: '',
             total: 0
         },
+        checkoutErrorMessage: null,
         customer: {
             firstName: '',
             lastName: '',
@@ -119,12 +125,12 @@ export default {
             locality: '',
             postcode: ''
         },
-        userNote: '',
+        notes: {},
         isFulfillable: true,
         errors: [],
         notices: [],
-        message: null,
         messages: [],
+        notesConfiguration: {},
         availableFulfilment: {
             times: [],
             isAsapAvailable: false
@@ -133,7 +139,8 @@ export default {
         isLoggedIn: false,
         isGuestCreated: false,
         geolocation: null,
-        hasAsapSelected: false
+        hasAsapSelected: false,
+        features: {}
     }),
 
     actions: {
@@ -144,7 +151,6 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
-            // TODO: deal with exceptions.
             const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
@@ -171,15 +177,16 @@ export default {
                 data,
                 timeout
             };
+
             const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
             const { issues, isFulfillable } = responseData;
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
-                    || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
+                    || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
 
-            dispatch('updateMessage', detailedIssues[0]);
+            dispatch('updateCheckoutErrorMessage', detailedIssues[0]);
 
             return headers;
         },
@@ -212,6 +219,28 @@ export default {
         },
 
         /**
+         * Set features passed in from CoreWeb configuration
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Features provided by Coreweb configuration file.
+         */
+        setCheckoutFeatures: ({ commit }, features) => {
+            commit(UPDATE_CHECKOUT_FEATURES, features);
+        },
+
+        /**
+         * Get the note configuration details from the backend and update the state.
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getNotesConfiguration: async ({ commit }, { url, timeout }) => {
+            const { data } = await checkoutApi.getNoteConfiguration(url, timeout);
+            commit(UPDATE_NOTES_CONFIGURATION, { ...data?.customerNotes?.serviceTypes, isSplitNotesEnabled: true });
+        },
+
+
+        /**
          * Get the basket details from the backend and update the state.
          *
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
@@ -223,8 +252,10 @@ export default {
             language,
             timeout
         }) => {
-            // TODO: deal with exceptions.
             const { data } = await basketApi.getBasket(url, tenant, language, timeout);
+            const prompts = data.BasketSummary.Prompts;
+            const hasBasketChanged = prompts && (!!prompts.InvalidProducts?.length || !!prompts.OfflineProducts?.length);
+
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurant: {
@@ -242,7 +273,11 @@ export default {
             // We can't call GET checkout as a guest so we're now having to use the basket response for age restrictions until then
             if (basketDetails.ageRestricted && (tenant === 'au' || tenant === 'nz')) {
                 commit(UPDATE_IS_FULFILLABLE, false);
-                commit(UPDATE_ERRORS, [{ code: DOB_REQUIRED_ISSUE }]);
+                commit(UPDATE_ERRORS, [{ messageKey: DOB_REQUIRED_ISSUE }]);
+            }
+
+            if (hasBasketChanged) {
+                commit(UPDATE_CHECKOUT_ERROR_MESSAGE, getIssueByCode('BasketChanged'));
             }
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
@@ -336,7 +371,7 @@ export default {
                     const checkoutIssue = getIssueByCode(errorCode);
 
                     commit(UPDATE_ERRORS, (checkoutIssue ? [checkoutIssue] : []));
-                    dispatch('updateMessage', checkoutIssue);
+                    dispatch('updateCheckoutErrorMessage', checkoutIssue);
                 }
 
                 throw error; // Handled by the calling function.
@@ -395,34 +430,17 @@ export default {
             commit(UPDATE_FULFILMENT_TIME, payload);
         },
 
-        updateUserNote ({ commit, dispatch }, payload) {
-            commit(UPDATE_USER_NOTE, payload);
+        updateUserNotes ({ commit, dispatch }, payload) {
+            commit(UPDATE_USER_NOTES, payload);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
-        },
-
-        getUserNote: ({ dispatch, state }) => {
-            if (window.sessionStorage) {
-                const key = getUserNoteSessionStorageKey(state);
-                const note = window.sessionStorage.getItem(key);
-                if (note) {
-                    dispatch('updateUserNote', note);
-                }
-            }
-        },
-
-        saveUserNote ({ state }) {
-            if (window.sessionStorage) {
-                const key = getUserNoteSessionStorageKey(state);
-                window.sessionStorage.setItem(key, state.userNote);
-            }
         },
 
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
         },
 
-        updateMessage:  ({ commit }, message = null) => {
-            commit(UPDATE_MESSAGE, message);
+        updateCheckoutErrorMessage:  ({ commit }, message = null) => {
+            commit(UPDATE_CHECKOUT_ERROR_MESSAGE, message);
         },
 
         updateAddress: ({ commit }, address) => {
@@ -431,6 +449,7 @@ export default {
 
         updateDateOfBirth: ({ commit }, dateOfBirth) => {
             commit(UPDATE_DATE_OF_BIRTH, dateOfBirth);
+            commit(CLEAR_DOB_ERROR, {});
         }
     },
 
@@ -442,7 +461,8 @@ export default {
             fulfilment,
             isFulfillable,
             notices,
-            messages
+            messages,
+            notes
         }) => {
             state.id = id;
             state.serviceType = serviceType;
@@ -483,6 +503,7 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
+            state.notes = notes || {};
         },
 
         [UPDATE_AUTH]: (state, authToken) => {
@@ -547,8 +568,15 @@ export default {
             state.errors = issues;
         },
 
-        [UPDATE_USER_NOTE]: (state, userNote) => {
-            state.userNote = userNote;
+        [CLEAR_DOB_ERROR]: state => {
+            state.errors = state.errors.filter(error => error.messageKey !== DOB_REQUIRED_ISSUE && error.messageKey !== AGE_VERIFICATION_ISSUE);
+        },
+
+        [UPDATE_USER_NOTES]: (state, userNote) => {
+            state.notes = {
+                ...state.notes,
+                [userNote.type]: { note: userNote.note }
+            };
         },
 
         [UPDATE_ORDER_PLACED]: (state, orderId) => {
@@ -565,8 +593,8 @@ export default {
             }
         },
 
-        [UPDATE_MESSAGE]: (state, message) => {
-            state.message = message;
+        [UPDATE_CHECKOUT_ERROR_MESSAGE]: (state, message) => {
+            state.checkoutErrorMessage = message;
         },
 
         [UPDATE_ADDRESS]: (state, address) => {
@@ -586,6 +614,22 @@ export default {
 
         [UPDATE_DATE_OF_BIRTH]: (state, dateOfBirth) => {
             state.customer.dateOfBirth = dateOfBirth;
+        },
+
+        [UPDATE_CHECKOUT_FEATURES]: (state, features) => {
+            state.features = features;
+        },
+
+        [UPDATE_NOTES_CONFIGURATION]: (state, notesConfig) => {
+            state.notesConfiguration = notesConfig;
         }
+    },
+
+    getters: {
+        formattedNotes: state => (state.features.isSplitNotesEnabled ? state.notes : [{ type: 'delivery', value: state.notes.order?.note }]),
+        shouldShowKitchenNotes: state => state.notesConfiguration[state.serviceType]?.kitchenNoteAccepted,
+        noteTypeCourierOrOrder: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER),
+        noteValue: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? state.notes.courier?.note : state.notes.order?.note),
+        kitchenNoteValue: state => state.notes.kitchen?.note || ''
     }
 };

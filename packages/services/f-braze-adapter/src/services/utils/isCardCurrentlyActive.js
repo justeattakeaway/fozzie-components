@@ -7,7 +7,7 @@ import {
  * @param displayTimes
  * @return {boolean|boolean}
  */
-function isCardActiveBasedOnTime (displayTimes) {
+export function isCardActiveBasedOnTime (displayTimes) {
     const now = new Date();
     const currentDay = format(now, 'E');
     const times = displayTimes[currentDay] || displayTimes.Any || [];
@@ -28,16 +28,13 @@ function isCardActiveBasedOnTime (displayTimes) {
  * Can be used in isolation or as part of Array.filter
  * @param card {object}
  * @param card.displayTimes {object} - Display times
- * @param card.brand {string} - Identifier string for relevant brand
- * @param card.isVisible {string} - Identifier string for relevant brand
- * @param brands {string[]} - String of current brands
+ * @param card.isVisible {string} - Visibility indicator
  * @returns {boolean} - is card active
  */
-const isCardCurrentlyActive = (card = {}, brands = []) => {
-    const { displayTimes, brand, isVisible } = card;
+const isCardCurrentlyActive = (card = {}) => {
+    const { displayTimes, isVisible } = card;
 
     return (isVisible !== false)
-        && (!brand || brands.includes(brand))
         && (!displayTimes || isCardActiveBasedOnTime(displayTimes));
 };
 

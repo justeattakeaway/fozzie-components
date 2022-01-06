@@ -73,8 +73,16 @@ export default {
         logMessage: 'Get Checkout Available Fulfilment Times Failure',
         logMethod: 'logError'
     },
+    CheckoutAvailableFulfilmentEmpty: {
+        logMessage: 'Available Fulfilment Times Empty',
+        logMethod: 'logError'
+    },
     CheckoutBasketGetFailure: {
         logMessage: 'Get Basket Failure',
         logMethod: 'logError'
+    },
+    NotesConfigurationFailure: {
+        logMessage: 'Notes configuration failure',
+        logMethod: 'logWarn'
     }
 };

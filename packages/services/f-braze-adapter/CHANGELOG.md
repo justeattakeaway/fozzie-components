@@ -4,6 +4,58 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0
+------------------------------
+*November 09, 2021*
+
+### Changed
+- Updating version to non beta ready for stamp cards
+
+
+v4.0.0-beta.6
+------------------------------
+*September 24, 2021*
+
+### Changed
+- Updated changeUser method to be the correct implementation based on new brazeSDK
+
+
+v4.0.0-beta.5
+------------------------------
+*September 07, 2021*
+
+### Added
+- Finer detailed log events for greater error and event visibility
+
+
+v4.0.0-beta.4
+------------------------------
+*September 02, 2021*
+
+### Changed
+- Changed sdk url to correct version
+
+
+v4.0.0-beta.3
+------------------------------
+*July 20, 2021*
+
+### Changed
+- Changed how braze adapter is initialised, it is no longer async
+- Increased Braze sdk to the latest version
+- Modified tests to account for changes
+- Made Braze SDK a peer dependency
+
+
+v4.0.0-beta.2
+------------------------------
+*July 19, 2021*
+
+### Changed
+- Recognises and respects the `is_visible` and `deduplication_key` key-value pairs in the
+  content-card data
+
+
 v3.5.0
 ------------------------------
 *July 19, 2021*
@@ -11,6 +63,32 @@ v3.5.0
 ### Changed
 - Recognises and respects the `is_visible` and `deduplication_key` key-value pairs in the
   content-card data
+
+
+v4.0.0-beta.1
+------------------------------
+*May 19, 2021*
+
+### Added
+- BrazeConsumer to store the adapters' consumer config
+- BrazeConsumerRegistry to store a list of consumers and apply callbacks for all consumers in list
+- BrazeAdapter the entry point to braze adapter via initialize method
+- DispatcherEventStream simple pub/sub event system for sending data from dispatcher to registry
+- filterByBrandName function to filter by brand name
+- filterByCurrentlyActive moved from the contentCard service filter function to separate function
+- filterByEnabledCardTypes moved from the contentCard service filter function to separate function
+- removeDuplicateContentCards moved from the contentCard service filter function to separate function
+- sortByCardOrder moved from the contentCard service filter function to separate function
+- pipe function that takes other functions and curries them
+
+### Removed
+- contentCard service has now been separated into its functions, they are now curried via the pipe function within
+the BrazeConsumer when cards are set on the consumer during the callback.
+
+### Changed
+- It now pushes cards and messages out on the DispatcherEventStream via publish method.
+- Modified the BrazeDispatcher to no longer be a singleton.
+- updated tests to account for changes to the dispatcher
 
 
 v3.4.0

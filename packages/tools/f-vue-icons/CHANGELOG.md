@@ -4,6 +4,38 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 
 
+v3.3.0
+------------------------------
+*December 7, 2021*
+
+### Added
+- Jet logos.
+
+
+v3.2.1
+------------------------------
+*December 7, 2021*
+
+### Added
+- `Legend` (old name, new icon).
+
+
+v3.2.0
+------------------------------
+*December 6, 2021*
+
+### Added
+- `Offer` (old name, new icon).
+
+
+v3.1.0
+------------------------------
+*November 30, 2021*
+
+### Added
+- `Legend` (old name, new icon).
+
+
 v3.0.0
 ------------------------------
 *November 8, 2021*

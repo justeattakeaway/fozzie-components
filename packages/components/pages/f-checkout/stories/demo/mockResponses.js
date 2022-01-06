@@ -1,6 +1,8 @@
 import checkoutDeliveryUk from './uk/checkout-delivery.json';
 import checkoutDeliveryAu from './au/checkout-delivery.json';
 import checkoutDeliveryNz from './nz/checkout-delivery.json';
+import checkoutWithDeliveryAndKitchenNoteTypes from './uk/checkout-delivery-split-notes-courier-kitchen.json';
+import checkoutWithDeliveryNoteType from './uk/checkout-delivery-split-notes-courier.json';
 import checkoutDeliveryUserSelectedAsap from './checkout-delivery-user-selected-asap.json';
 import checkoutDeliveryUserSelectedLater from './checkout-delivery-user-selected-later.json';
 import checkoutDeliveryUserSelectedUnavailableTime from './checkout-delivery-user-selected-unavailable-time.json';
@@ -17,9 +19,12 @@ import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import checkoutAvailableFulfilmentNoTimeAvailable from './checkout-available-fulfilment-no-time-available.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
 import createGuest from './create-guest.json';
+import createGuestError from './create-guest-error.json';
 import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
 import getBasketDinein from './get-basket-dinein.json';
+import getBasketInvalidProducts from './get-basket-invalid-products.json';
+import getBasketOfflineProducts from './get-basket-offline-products.json';
 import updateCheckout from './update-checkout.json';
 import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
 import updateCheckoutServiceTypeUnavailable from './update-checkout-service-type-unavailable.json';
@@ -35,6 +40,8 @@ import checkout500GetError from './checkout-500-get-error.json';
 import getGeoLocation from './get-geo-location.json';
 import getCustomer from './get-customer.json';
 import getBasketDeliveryAgeRestricted from './get-basket-delivery-age-restriction.json';
+import splitNotesConfig from './get-notes-config-split.json';
+import nonSplitNotesConfig from './get-notes-config.json';
 
 const httpStatusCodes = {
     noResponse: 0,
@@ -56,6 +63,18 @@ const requestDefinitions = {
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: checkoutDeliveryUk
+    },
+    checkoutDeliverySplitNotesKitchenAndCourier: {
+        url: '/uk/checkout-delivery-split-notes-courier-kitchen.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: checkoutWithDeliveryAndKitchenNoteTypes
+    },
+    checkoutDeliverySplitNotesCourier: {
+        url: '/uk/checkout-delivery-split-notes-courier.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: checkoutWithDeliveryNoteType
     },
     checkoutDeliveryAu: {
         url: '/au/checkout-delivery.json',
@@ -170,6 +189,12 @@ const requestDefinitions = {
         responseStatus: httpStatusCodes.ok,
         payload: createGuest
     },
+    createGuestError: {
+        url: '/create-guest-error.json',
+        method: httpMethods.post,
+        responseStatus: httpStatusCodes.badRequest,
+        payload: createGuestError
+    },
     getBasketDelivery: {
         url: '/get-basket-delivery.json',
         method: httpMethods.get,
@@ -187,6 +212,18 @@ const requestDefinitions = {
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: getBasketDinein
+    },
+    getBasketInvalidProducts: {
+        url: '/get-basket-invalid-products.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: getBasketInvalidProducts
+    },
+    getBasketOfflineProducts: {
+        url: '/get-basket-offline-products.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: getBasketOfflineProducts
     },
     getBasketTimeout: {
         url: '/get-basket-timeout.json',
@@ -292,6 +329,18 @@ const requestDefinitions = {
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: getBasketDeliveryAgeRestricted
+    },
+    getSplitNotesConfig: {
+        url: '/get-notes-config-split/99999/checkout-note-types',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: splitNotesConfig
+    },
+    getNonSplitNotesConfig: {
+        url: '/get-notes-config/99999/checkout-note-types',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: nonSplitNotesConfig
     }
 };
 
