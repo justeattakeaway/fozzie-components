@@ -1,3 +1,17 @@
+import { createLocalVue } from '@vue/test-utils';
+import { VueI18n } from '@justeat/f-globalisation';
+import tenantConfigs from '../../tenants';
+
+export const localVue = createLocalVue();
+localVue.use(VueI18n);
+
+export const i18n = {
+    locale: 'en-GB',
+    messages: {
+        'en-GB': tenantConfigs['en-GB'].messages
+    }
+};
+
 const firstNameData = {
     name: 'firstName',
     value: '',

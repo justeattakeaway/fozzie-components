@@ -51,7 +51,10 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
     "@justeat/f-button": "3.x",
     "@justeat/f-form-field": "4.x",
-    "@justeat/f-error-message": "1.x"
+    "@justeat/f-error-message": "1.x",
+    "@justeat/f-globalisation": "1.0.0",
+    "vue-scrollto": "2.20.0",
+    "vuelidate": "0.7.6"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.5.0",

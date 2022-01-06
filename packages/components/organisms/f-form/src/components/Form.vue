@@ -27,10 +27,16 @@
 
 
 <script>
+import { validationMixin } from 'vuelidate';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import {
+    required, email
+} from 'vuelidate/lib/validators';
 import FButton from '@justeat/f-button';
-import FormField from '@justeat/f-form-field';
-import { validations, globalisationServices } from '@justeat/f-services';
+import '@justeat/f-button/dist/f-button.css';
+import { validations } from '@justeat/f-services';
 import VueScrollTo from 'vue-scrollto';
+import FormField from './FormField.vue';
 import tenantConfigs from '../tenants';
 import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';
 
@@ -39,6 +45,11 @@ export default {
         FButton,
         FormField
     },
+
+    mixins: [
+        validationMixin,
+        VueGlobalisationMixin
+    ],
 
     props: {
         formData: {
@@ -58,11 +69,8 @@ export default {
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
     },
 
@@ -75,6 +83,15 @@ export default {
             });
 
             return formFields;
+        },
+
+        invalidFieldsSummary () {
+            const invalidFieldCount = this.$v.formFields.$dirty
+                && validations.getFormValidationState(this.$v.formFields).invalidFields.length;
+
+            if (!invalidFieldCount) return null;
+
+            return this.$tc('invalidFields', invalidFieldCount);
         },
 
         buttonText () {
@@ -172,6 +189,33 @@ export default {
                 }
             });
         }
+    },
+
+    validations () {
+        const validationProperties = { formFields: {} };
+
+        const invalidValidations = {
+            email,
+            mobileNumber: this.isValidPhoneNumber,
+            postcode: this.isValidPostcode
+        };
+
+        Object.keys(this.formFields).forEach(field => {
+            if (this.hasValidationMessages(field)) {
+                validationProperties.formFields[field] = {
+                    required
+                };
+
+                if (this.hasInvalidErrorMessage(field)) {
+                    validationProperties.formFields[field] = {
+                        ...validationProperties.formFields[field],
+                        [field]: invalidValidations[field]
+                    };
+                }
+            }
+        });
+
+        return validationProperties;
     }
 };
 </script>

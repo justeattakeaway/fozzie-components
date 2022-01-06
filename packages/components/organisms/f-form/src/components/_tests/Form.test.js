@@ -2,7 +2,13 @@ import { shallowMount } from '@vue/test-utils';
 import { validations } from '@justeat/f-services';
 import { PROP_VALIDATION_MESSAGES } from '../../constants';
 import {
-    formData, $v, phoneNumberData, postcodeData, firstNameData
+    localVue,
+    i18n,
+    formData,
+    $v,
+    phoneNumberData,
+    postcodeData,
+    firstNameData
 } from './helpers';
 import VForm from '../Form.vue';
 
@@ -10,12 +16,16 @@ describe('Form', () => {
     let propsData;
 
     beforeEach(() => {
-        propsData = { formData };
+        propsData = { formData, locale: 'en-GB' };
     });
 
     it('should be defined', () => {
         // Arrange & Act
-        const wrapper = shallowMount(VForm, { propsData });
+        const wrapper = shallowMount(VForm, {
+            i18n,
+            localVue,
+            propsData
+        });
 
         // Assert
         expect(wrapper.exists()).toBe(true);
@@ -35,7 +45,11 @@ describe('Form', () => {
         it('should throw an error when `formFields` property is missing from `formData`', () => {
             // Act & Assert
             expect(() => {
-                shallowMount(VForm, { propsData: { formData: {} } });
+                shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData: { ...propsData, formData: {} }
+                });
             })
                 .toThrowError(PROP_VALIDATION_MESSAGES.requiredFormFields);
         });
@@ -43,7 +57,11 @@ describe('Form', () => {
         it('should throw an error when `formFields` property is not an `Array`', () => {
             // Act & Assert
             expect(() => {
-                shallowMount(VForm, { propsData: { formData: { formFields: {} } } });
+                shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData: { ...propsData, formData: { formFields: {} } }
+                });
             })
                 .toThrowError(PROP_VALIDATION_MESSAGES.invalidFormFields);
         });
@@ -52,7 +70,10 @@ describe('Form', () => {
             // Act & Assert
             expect(() => {
                 shallowMount(VForm, {
+                    i18n,
+                    localVue,
                     propsData: {
+                        ...propsData,
                         formData: {
                             formFields: [{
                                 value: '',
@@ -71,7 +92,10 @@ describe('Form', () => {
             // Act & Assert
             expect(() => {
                 shallowMount(VForm, {
+                    i18n,
+                    localVue,
                     propsData: {
+                        ...propsData,
                         formData: {
                             formFields: [{
                                 name: 'fieldName',
@@ -88,7 +112,10 @@ describe('Form', () => {
             // Act & Assert
             expect(() => {
                 shallowMount(VForm, {
+                    i18n,
+                    localVue,
                     propsData: {
+                        ...propsData,
                         formData: {
                             formFields: [{
                                 name: 'fieldName',
@@ -105,13 +132,16 @@ describe('Form', () => {
 
     it('should have one form with method "post"', () => {
         // Arrange
-        const wrapper = shallowMount(VForm, { propsData });
+        const wrapper = shallowMount(VForm, {
+            i18n,
+            localVue,
+            propsData
+        });
 
         // Act
         const forms = wrapper.findAll('form');
 
         // Assert
-        expect(forms.length).toBe(1);
         expect(forms.wrappers[0].attributes('method')).toBe('post');
     });
 
@@ -119,11 +149,57 @@ describe('Form', () => {
         describe('formFields :: ', () => {
             it('should return an object of `formData` keys and field values', () => {
                 // Arrange & Act
-                const wrapper = shallowMount(VForm, { propsData });
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
                 const result = wrapper.vm.formFields;
 
                 // Assert
                 expect(result).toMatchSnapshot();
+            });
+        });
+
+        describe('invalidFieldsSummary ::', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+            });
+
+            it('should return `null` if no fields have been touched', () => {
+                // Arrange & Act
+                $v.$dirty = false;
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+            });
+
+            it('should return `null` if all fields have been touched and are valid', () => {
+                // Arrange
+                const mockValidationState = {
+                    invalidFields: []
+                };
+
+                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
+                $v.dirty = true;
+
+                // Act
+                wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+
+                // Assert
+                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
             });
         });
     });
@@ -132,15 +208,57 @@ describe('Form', () => {
         describe('updateField :: ', () => {
             it('should emit `updated` event with fieldName and field value', () => {
                 // Arrange
-                const wrapper = shallowMount(VForm, { propsData });
-                const emitSpy = jest.spyOn(wrapper.vm, '$emit');
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
                 const payload = { fieldName: 'firstName', value: 'Joe' };
 
                 // Act
                 wrapper.vm.updateField(payload);
 
                 // Assert
-                expect(emitSpy).toHaveBeenCalledWith('updated', payload);
+                expect(wrapper.emitted('updated').length).toBe(1);
+                expect(wrapper.emitted('updated')[0][0]).toEqual(payload);
+            });
+        });
+
+        describe('isFormValid ::', () => {
+            it('should call `.touch()` ', () => {
+                // Act
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+
+                wrapper.vm.isFormValid();
+
+                // Assert
+                expect($v.$touch).toBeCalled();
+            });
+
+            it.each([
+                [true, false],
+                [false, true]
+            ])('should return %s if `$v.invalid` is $s', (expected, $invalid) => {
+                // Arrange & Act
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v: {
+                            ...$v,
+                            $invalid
+                        }
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.isFormValid()).toBe(expected);
             });
         });
 
@@ -156,8 +274,12 @@ describe('Form', () => {
 
                 // Arrange
                 wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
                     propsData,
-                    mocks: { $v }
+                    mocks: {
+                        $v
+                    }
                 });
 
                 emitSpy = jest.spyOn(wrapper.vm, '$emit');
@@ -181,6 +303,8 @@ describe('Form', () => {
                     isFormValidSpy.mockReturnValue(true);
 
                     wrapper = shallowMount(VForm, {
+                        i18n,
+                        localVue,
                         propsData
                     });
                 });
@@ -199,12 +323,14 @@ describe('Form', () => {
                 });
             });
 
-            xdescribe('when `isFormValid` is false', () => {
+            describe('when `isFormValid` is false', () => {
                 beforeEach(() => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(false);
 
                     wrapper = shallowMount(VForm, {
+                        i18n,
+                        localVue,
                         propsData
                     });
                 });
@@ -234,7 +360,11 @@ describe('Form', () => {
                 // Arrange
                 const isValidPhoneNumberSpy = jest.spyOn(validations, 'isValidPhoneNumber');
 
-                const wrapper = shallowMount(VForm, { propsData });
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
 
                 // Act
                 wrapper.vm.isValidPhoneNumber();
@@ -252,7 +382,11 @@ describe('Form', () => {
             it('should call `isValidPostcode` from `f-services`', () => {
                 // Arrange
                 const isValidPostcodeSpy = jest.spyOn(validations, 'isValidPostcode');
-                const wrapper = shallowMount(VForm, { propsData });
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
 
                 // Act
                 wrapper.vm.isValidPostcode();
@@ -265,7 +399,11 @@ describe('Form', () => {
         describe('translations ::', () => {
             it('should return translations for passed field', () => {
                 // Arrange
-                const wrapper = shallowMount(VForm, { propsData });
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
 
                 // Act
                 const result = wrapper.vm.translations('firstName');
@@ -278,7 +416,11 @@ describe('Form', () => {
         describe('hasValidationMessages ::', () => {
             it('should return true if passed field has `validationMessages`', () => {
                 // Arrange & Act
-                const wrapper = shallowMount(VForm, { propsData });
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
 
                 // Assert
                 expect(wrapper.vm.hasValidationMessages('firstName')).toBeTruthy();
@@ -286,7 +428,11 @@ describe('Form', () => {
 
             it('should return false if passed field does not have `validationMessages`', () => {
                 // Arrange & Act
-                const wrapper = shallowMount(VForm, { propsData });
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
 
                 // Assert
                 expect(wrapper.vm.hasValidationMessages('lastName')).toBeFalsy();
@@ -294,20 +440,35 @@ describe('Form', () => {
         });
 
         describe('hasInvalidErrorMessage ::', () => {
-            it('should return true if passed field has `invalidValidationMessages`', () => {
+            it.each([
+                [true, 'Invalid ErrorMessage'],
+                [false, null]
+            ])('should return %s if passed field has invalid is %s', (expected, invalidMessage) => {
                 // Arrange & Act
-                const wrapper = shallowMount(VForm, { propsData });
+                const wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData: {
+                        ...propsData,
+                        formData: {
+                            formFields: [
+                                {
+                                    ...phoneNumberData,
+                                    translations: {
+                                        ...phoneNumberData.translations,
+                                        validationMessages: {
+                                            ...phoneNumberData.translations.validationMessages,
+                                            invalid: invalidMessage
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                });
 
                 // Assert
-                expect(wrapper.vm.hasInvalidErrorMessage('email')).toBeTruthy();
-            });
-
-            it('should return false if passed field does not have `invalidValidationMessages`', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(VForm, { propsData });
-
-                // Assert
-                expect(wrapper.vm.hasInvalidErrorMessage('lastName')).toBeFalsy();
+                expect(wrapper.vm.hasInvalidErrorMessage('mobileNumber')).toBe(expected);
             });
         });
     });

@@ -61,13 +61,19 @@ export default {
                 'max-length': this.fieldData.mexLength || null
             };
 
+            if (this.ariaLabel) {
+                props = {
+                    ...props,
+                    'aria-label': this.ariaLabel
+                };
+            }
+
             if (this.hasError) {
                 props = {
                     ...props,
                     'has-error': true,
                     'aria-invalid': true,
-                    'aria-describedby': this.translations.validationMessages[this.errorType],
-                    'aria-label': this.ariaLabel
+                    'aria-describedby': this.translations.validationMessages[this.errorType]
                 };
             }
 
@@ -120,7 +126,10 @@ export default {
         },
 
         ariaLabel () {
-            return this.fieldData.name === 'mobileNumber' ? [...this.fieldData.value].join(' ') : null;
+            if (this.fieldData.name === 'mobileNumber' && this.fieldData.value) {
+                return [...this.fieldData.value].join(' ') || null;
+            }
+            return null;
         }
     },
 

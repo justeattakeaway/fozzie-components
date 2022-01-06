@@ -14,7 +14,6 @@ exports[`FormField computed :: fieldProps :: when field has error :: should retu
 Object {
   "aria-describedby": undefined,
   "aria-invalid": true,
-  "aria-label": null,
   "has-error": true,
   "input-type": "text",
   "label-text": "First Name",

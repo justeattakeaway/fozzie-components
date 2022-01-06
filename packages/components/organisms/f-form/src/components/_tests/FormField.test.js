@@ -392,16 +392,18 @@ describe('FormField', () => {
         });
 
         describe('ariaLabel ::', () => {
-            it('should return the mobile number with spaces after every character', () => {
-                const expectedMobileNumber = '+ 4 4 7 1 1 1 1 1 1 1 1 1';
-
+            it.each([
+                ['+ 4 4 7 1 1 1 1 1 1 1 1 1', '+447111111111'],
+                [null, ''],
+                [null, null]
+            ])('should return %s if mobile vaule is %s', (expected, value) => {
                 // Act
                 const wrapper = shallowMount(FormField, {
                     propsData: {
                         ...propsData,
                         fieldData: {
                             ...propsData.fieldData,
-                            value: '+447111111111',
+                            value,
                             name: 'mobileNumber'
                         }
                     },
@@ -411,7 +413,7 @@ describe('FormField', () => {
                 });
 
                 // Assert
-                expect(wrapper.vm.ariaLabel).toEqual(expectedMobileNumber);
+                expect(wrapper.vm.ariaLabel).toEqual(expected);
             });
         });
     });
@@ -424,7 +426,12 @@ describe('FormField', () => {
         describe('updateField ::', () => {
             it('should emit `updated` event with fieldName and field value', () => {
                 // Arrange
-                const wrapper = shallowMount(FormField, { propsData, provide: { $v } });
+                const wrapper = shallowMount(FormField, {
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
                 const payload = { fieldName: 'firstName', value: 'Joe' };
 
                 // Act
@@ -439,8 +446,6 @@ describe('FormField', () => {
         describe('formFieldBlur ::', () => {
             it('should call `touch` for validation', () => {
                 // Arrange
-                const touchSpy = jest.spyOn($v.formFields.firstName, '$touch');
-
                 const wrapper = shallowMount(FormField, {
                     propsData,
                     provide: () => ({
@@ -452,7 +457,7 @@ describe('FormField', () => {
                 wrapper.vm.formFieldBlur();
 
                 // Assert
-                expect(touchSpy).toHaveBeenCalled();
+                expect($v.formFields.firstName.$touch).toHaveBeenCalled();
             });
         });
     });

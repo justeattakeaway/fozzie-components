@@ -145,7 +145,7 @@ formData: {
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `formData` | Object | **Required Prop** | Object containing button text and form field data. Should be structured as above. |
-| `locale` | String | `en-gb` | Sets the translation file to use. |
+| `locale` | String | `en-GB` | Sets the translation file to use. |
 | `isFormSubmitting` | Boolean | false | Allows the parent component to set a loading spinner on the submit button while any asynchronous calls are carried out by the parent |
 
 ### Events
