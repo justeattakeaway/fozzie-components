@@ -391,7 +391,7 @@ jobs:
       - restore_cache_dist_directories
       - run:
           name: Deploy
-          command: yarn storybook:deploy
+          command: yarn storybook:build
       - slack_notify_fail
       - slack_notify_success
 
