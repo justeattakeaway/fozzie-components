@@ -289,29 +289,30 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps:
       - checkout
-      - install_node_dependencies
-      - run: # Run PR Checks
-         name: Run PR Checks
-         command: yarn danger ci
-      - persist_to_workspace:
-          root: .
-          paths:
-            - '*'
-      - slack_notify_fail
-      - slack_notify_success
-
-  build:
-    executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 2
-    steps:
-      - attach_workspace:
-          at: .
-      - detect_root_change
       - restore_cache_dist_directories
       - store_artifacts:
           path: node_modules/@justeat/f-popover
+      # - install_node_dependencies
+      # - run: # Run PR Checks
+      #    name: Run PR Checks
+      #    command: yarn danger ci
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - '*'
+      # - slack_notify_fail
+      # - slack_notify_success
+
+  # build:
+  #   executor: node
+  #   environment:
+  #     # required to prevent ENOMEM errors
+  #     LERNA_ARGS: --concurrency 2
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - detect_root_change
+  #     - restore_cache_dist_directories
       # - build_packages
       # - save_cache_dist_directories
       # - build_storybook
