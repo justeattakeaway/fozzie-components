@@ -29,7 +29,9 @@
                 }]"
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label">
-            <span :class="$style['c-imageTile-imageContainer']">
+            <span
+                :class="$style['c-imageTile-imageContainer']"
+                :style="cssVars">
                 <img
                     v-if="imgSrc"
                     :class="$style['c-imageTile-image']"
@@ -78,16 +80,27 @@ export default {
         altText: {
             type: String,
             default: ''
+        },
+        bgFallbackImage: {
+            type: String,
+            default: 'https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png'
         }
     },
     data () {
         return {
-            isToggleSelected: false
+            isToggleSelected: false,
+            thisIsATest: ''
         };
     },
     computed: {
         addPresentationRole () {
             return this.altText === '';
+        },
+        cssVars () {
+            return {
+                // eslint-disable-next-line prefer-template
+                '--bg-image': 'url(' + JSON.stringify(this.bgFallbackImage) + ')'
+            };
         }
     },
     watch: {
@@ -166,7 +179,8 @@ export default {
   border-radius: $radius-rounded-b;
   background-color: rgba(255,128,0,0.7);
   padding-top: (61 / 102) * 100%;
-  background-image: url(https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png);
+  // background-image: url(https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png);
+  background-image: var(--bg-image);
 }
 
 .c-imageTile-image {
