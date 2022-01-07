@@ -485,5 +485,38 @@ describe('Button', () => {
                 });
             });
         });
+
+        describe('hasNestedContent :: ', () => {
+            it.each([
+                [false, false, false, false],
+                [true, true, false, false],
+                [true, true, true, false],
+                [true, true, true, true],
+                [true, false, true, false],
+                [true, false, false, true],
+                [true, true, false, true],
+                [true, false, true, true]
+            ])('should return %s when `isLoading` is %s and `hasLeadingIcon` is %s and `hasTrailingIcon` is %s ', (
+                expected,
+                isLoading,
+                hasLeadingIcon,
+                hasTrailingIcon
+            ) => {
+                // Arrange
+                const propsData = {
+                    isLoading
+                };
+                const computed = {
+                    hasLeadingIcon: () => hasLeadingIcon,
+                    hasTrailingIcon: () => hasTrailingIcon
+                };
+
+                // Act
+                const wrapper = shallowMount(FButton, { propsData, computed });
+
+                // Assert
+                expect(wrapper.vm.hasNestedContent).toBe(expected);
+            });
+        });
     });
 });

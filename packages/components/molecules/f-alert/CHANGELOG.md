@@ -4,12 +4,65 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v4.0.0
 ------------------------------
-*July 26, 2021*
+*November 26, 2021*
+
+### Added
+- **Breaking Change**: Added `f-button` dependency to peer dependencies. Now `f-button` should be included as a dependency of the consuming componet or application.
+
+### Removed
+- **Breaking Change**: Removed `f-button` styles import from the component. Make sure to import `f-button` styles in your application.
+
+
+v3.0.2
+------------------------------
+*October 15, 2021*
+
+Republish to fix a bad previous publish.
+
+
+v3.0.1
+------------------------------
+*October 14, 2021*
 
 ### Changed
 - Updated version of `f-button`.
+
+
+v3.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-button`.
+- New colour scheme and border radius from `pie-design-tokens` in line with icing phase 2.
+
+
+v2.0.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-button`.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v1.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v1.0.0-beta.0
+------------------------------
+*September 1, 2021*
+
+### Changed
+- Updated version of `f-button` (JETSans Update)
 
 
 v0.7.0

@@ -1,6 +1,4 @@
-import {
-    withKnobs, text, boolean, select
-} from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VLink from '../src/components/Link.vue';
 
@@ -14,9 +12,17 @@ export const VLinkComponent = () => ({
     data () {
         return {
             dataTestId: 'link-component'
-        }
+        };
     },
     props: {
+        href: {
+            default: text('Anchor link path', '/')
+        },
+
+        to: {
+            default: text('Router link path (href must be empty for this to be applied)', '')
+        },
+
         isExternalSite: {
             default: boolean('Opens an external site', false)
         },
@@ -39,24 +45,31 @@ export const VLinkComponent = () => ({
 
         noLineBreak: {
             default: boolean('noLineBreak', false)
+        },
+        isDistinct: {
+            default: boolean('isDistinct', false)
         }
     },
 
     computed: {
-        target() {
+        target () {
             return this.opensInNewLocation ? '_blank' : null;
         }
     },
 
     template: `<v-link
+                    link-class="myLinkClass"
                     :data-test-id="dataTestId"
-                    href="https://www.just-eat.co.uk/"
+                    v-bind="{
+                        ...(href ? { href } : to ? { to } : {})
+                    }"
                     :is-bold="isBold"
                     :has-text-decoration="hasTextDecoration"
                     :is-full-width="isFullWidth"
                     :no-line-break="noLineBreak"
                     :is-external-site="isExternalSite"
-                    :target="target">
+                    :target="target"
+                    :isDistinct="isDistinct">
                     <span>This is a Link</span>
                 </v-link>`
 });

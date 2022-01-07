@@ -1,20 +1,17 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
-const StatusBanner = require('../../test-utils/component-objects/f-statusBanner.component');
+const StatusBanner = require('../../test-utils/component-objects/f-status-banner.component');
 
 let statusBanner;
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        statusBanner = new StatusBanner('organism', 'status-banner-component');
-        const pageUrl = buildUrl(statusBanner.componentType, statusBanner.componentName, statusBanner.path);
-        statusBanner.open(pageUrl);
-        statusBanner.waitForComponent();
+        statusBanner = new StatusBanner();
+        statusBanner.load();
     });
-    it('a11y - should test f-statusBanner component WCAG compliance', () => {
+    it('a11y - should test f-status-banner component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-statusBanner');
+        const axeResults = getAccessibilityTestResults('f-status-banner');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

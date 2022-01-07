@@ -1,4 +1,4 @@
-const utils = require('./utils.js');
+const utils = require('./utils');
 
 /**
  *
@@ -14,7 +14,7 @@ function transformName (name) {
         default: name, // e.g. header or user-message
         filename: utils.getComponentFilename(normalisedName), // Header(.vue) or UserMessage(.vue)
         readme: utils.getReadmeName(normalisedName), // Header or User Message
-        template: utils.getComponentTemplateName(normalisedName) // v-header or user-message,
+        template: utils.getComponentTemplateName(normalisedName) // v-header or user-message
     };
 }
 

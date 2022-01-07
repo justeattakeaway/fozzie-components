@@ -1,19 +1,17 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
-const MediaElement = require('../../test-utils/component-objects/f-mediaElement.component');
+const MediaElement = require('../../test-utils/component-objects/f-media-element.component');
 
-const mediaElement = new MediaElement('molecule', 'media-element-component');
+const mediaElement = new MediaElement();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        const pageUrl = buildUrl(mediaElement.componentType, mediaElement.componentName, mediaElement.path);
-        mediaElement.open(pageUrl);
-        mediaElement.waitForComponent();
+        mediaElement.load();
     });
-    it('a11y - should test f-mediaElement component WCAG compliance', () => {
+
+    it('a11y - should test f-media-element component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-mediaElement');
+        const axeResults = getAccessibilityTestResults('f-media-element');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

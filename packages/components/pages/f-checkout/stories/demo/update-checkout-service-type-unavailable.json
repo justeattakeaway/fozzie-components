@@ -1,0 +1,8 @@
+{
+  "isFulfillable": false,
+  "issues": [
+    {
+      "code": "SERVICE_TYPE_UNAVAILABLE"
+    }
+  ]
+}

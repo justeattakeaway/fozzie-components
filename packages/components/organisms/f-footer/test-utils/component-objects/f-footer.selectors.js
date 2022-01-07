@@ -1,13 +1,7 @@
 export const FOOTER_COMPONENT = '[data-test-id="footer-component"]';
-export const FOOTER_ICONS = '[data-test-id="footerIcon"]';
 export const DOWNLOAD_ICONS = '[data-test-id="icon-list-apps"] a';
 export const SOCIAL_ICONS = '[data-test-id="icon-list-social"] a';
-export const PAYMENT_ICONS = '[data-test-id="icon-list-payments"]';
-export const FEEDBACK_BLOCK = '[data-test-id="feedback-block"]';
 export const FEEDBACK_BUTTON = '[data-test-id="feedback-button"]';
-export const COURIER_LINKS = '[data-test-id="courierLinks-wrapper"]';
 export const COUNTRY_SELECTOR_BUTTON = '[data-test-id="countrySelector-button"]';
-export const CURRENT_COUNTRY_ICON = '[data-test-id="current-flag-icon"]';
-export const CURRENT_COUNTRY_TEXT = '[data-test-id="countrySelector-button"] span';
 export const COUNTRY_LIST = '[data-test-id="countrySelector-list"] li';
 export const FOOTER_LINK_LIST = '[data-test-id="footer-link-list"]';

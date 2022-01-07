@@ -21,7 +21,6 @@
 
 <script>
 import SearchButton from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
 import { EyeglassIcon } from '@justeat/f-vue-icons';
 
 export default {
@@ -54,7 +53,7 @@ export default {
     border: none;
     border-radius: 0 $border-radius $border-radius 0;
     box-sizing: border-box;
-    color: $color-content-interactive-brand;
+    color: $color-content-interactive-light;
     cursor: pointer;
     font-family: $font-family-base;
     @include font-size(heading-s);

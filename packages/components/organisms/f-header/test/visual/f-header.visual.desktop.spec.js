@@ -1,96 +1,143 @@
 import forEach from 'mocha-each';
 
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-
 const Header = require('../../test-utils/component-objects/f-header.component');
 
 let header;
 
 describe('Shared - f-header component tests', () => {
-    forEach([['en-GB', true], ['en-GB', false],
-    ['en-AU', true], ['en-AU', false],
-    ['en-NZ', true], ['en-NZ', false],
-    ['en-IE', true], ['en-IE', false],
-    ['it-IT', true], ['it-IT', false],
-    ['es-ES', true], ['es-ES', false]
-    ])
-        .it('should display component', (tenant, isLoggedIn) => {
-            // Arrange
-            header = new Header('organism', 'header-component');
-            header.withQuery('&knob-Locale', tenant);
-            // Both props below should only show for UK
-            header.withQuery('&knob-Show offers link', 'true');
-            header.withQuery('&knob-Show delivery enquiry', 'true');
+    forEach([
+        ['en-GB', true], ['en-GB', false],
+        ['en-AU', true], ['en-AU', false],
+        ['en-NZ', true], ['en-NZ', false],
+        ['en-IE', true], ['en-IE', false],
+        ['it-IT', true], ['it-IT', false],
+        ['es-ES', true], ['es-ES', false]
+    ]).it('should display component', (tenant, isLoggedIn) => {
+        // Arrange
+        const controls = [
+            `locale:${tenant}`,
+            'showOffersLink:true', // Should show for AU, IE, NZ and UK only
+            'showDeliveryEnquiry:true', // Should show for AU, IE, NZ and UK only
+            ...(isLoggedIn ? [] : ['userInfoProp:!undefined'])
+        ].join(';');
 
-            if (!isLoggedIn) {
-                header.withQuery('&knob-User info', isLoggedIn);
-            }
-            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
-
-            // Act
-            header.open(pageUrl);
-            header.waitForComponent();
-
-            // Assert
-            browser.percyScreenshot(`f-header - Base state - isLoggedIn: ${isLoggedIn} - ${tenant}`, 'desktop');
-        });
-
-    forEach(['white', 'highlight', 'transparent'])
-        .it('should display the "%s" header theme', theme => {
-            // Arrange
-            header = new Header('organism', 'header-component');
-            header.withQuery('&knob-Locale', 'en-GB');
-            header.withQuery('&knob-Header theme', theme);
-            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
-
-            // Act
-            header.open(pageUrl);
-            header.waitForComponent();
-
-            // Assert
-            browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
-        });
-
-    it('should display all avalible countries', () => {
-        header = new Header('organism', 'header-component');
-        header.withQuery('&knob-Locale', 'en-GB');
-        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+        header = new Header();
+        header.path += `&args=${controls}`;
 
         // Act
-        header.open(pageUrl);
-        header.waitForComponent();
-        header.moveToCountrySelector();
+        header.load();
 
         // Assert
-        browser.percyScreenshot('f-header - Country list', 'desktop');
+        browser.percyScreenshot(`f-header - Base state - isLoggedIn: ${isLoggedIn} - ${tenant}`, 'desktop');
     });
 
-    forEach(['Show login/user info link', 'Show help link', 'Show country selector'])
-        .it('should not display "%s" ', knobName => {
-            header = new Header('organism', 'header-component');
-            header.withQuery('&knob-Locale', 'en-GB');
-            header.withQuery(`&knob-${knobName}`, 'false');
-            const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+    forEach([
+        'white',
+        'highlight',
+        'transparent'
+    ]).it('should display the "%s" header theme', theme => {
+        // Arrange
+        const controls = [
+            'locale:en-GB',
+            `headerBackgroundTheme:${theme}`
+        ].join(';');
 
-            // Act
-            header.open(pageUrl);
-            header.waitForComponent();
-
-            // Assert
-            browser.percyScreenshot(`f-header - ${knobName} - False`, 'desktop');
-        });
-
-    it('should display all user account options', () => {
-        header = new Header('organism', 'header-component');
-        header.withQuery('&knob-Locale', 'en-GB');
-        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+        header = new Header();
+        header.path += `&args=${controls}`;
 
         // Act
-        header.open(pageUrl);
-        header.waitForComponent();
-        header.moveToUserAccount();
+        header.load();
 
         // Assert
-        browser.percyScreenshot('f-header - User Account dropdown', 'desktop');
+        browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
+    });
+
+    forEach([
+        'showLoginInfo',
+        'showHelpLink',
+        'showCountrySelector'
+    ]).it('should not display "%s" ', knobName => {
+        // Arrange
+        const controls = [
+            'locale:en-GB',
+            `${knobName}:false`
+        ].join(';');
+
+        header = new Header();
+        header.path += `&args=${controls}`;
+
+        // Act
+        header.load();
+
+        // Assert
+        browser.percyScreenshot(`f-header - ${knobName} - False`, 'desktop');
+    });
+
+    forEach([
+        'userAccount',
+        'countrySelector'
+    ])
+    .it('should display the %s dropdown lists on hover', link => {
+        // Arrange
+        const controls = 'locale:en-GB';
+
+        header = new Header();
+        header.path += `&args=${controls}`;
+
+        // Act
+        header.load();
+        header.moveToNavigationLink(link);
+
+        // Assert
+        browser.percyScreenshot('f-header - %s dropdown', 'desktop');
+    });
+
+    // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
+    // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
+    // https://github.com/storybookjs/storybook/issues/14420
+    it.skip('should display any custom links', () => {
+        // Arrange
+        const controls = [
+            'locale:en-GB',
+            'showOffersLink:false',
+            'showDeliveryEnquiry:false'
+            // Set custom links here
+        ].join(';');
+
+        header = new Header();
+        header.path += `&args=${controls}`;
+
+        // Act
+        header.load();
+        header.openMobileNavigationBar();
+
+        // Assert
+        browser.percyScreenshot('f-header - with custom nav links', 'desktop');
+    });
+
+    // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
+    // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
+    // https://github.com/storybookjs/storybook/issues/14420
+    it.skip('should be able to show only custom links', () => {
+        // Arrange
+        const controls = [
+            'locale:en-GB',
+            'showHelpLink:false',
+            'showLoginInfo:false',
+            'showOffersLink:false',
+            'showCountrySelector:false',
+            'showDeliveryEnquiry:false'
+            // Set custom links here
+        ].join(';');
+
+        header = new Header();
+        header.path += `&args=${controls}`;
+
+        // Act
+        header.load();
+        header.openMobileNavigationBar();
+
+        // Assert
+        browser.percyScreenshot('f-header - custom nav links only', 'desktop');
     });
 });

@@ -3,6 +3,89 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 
+
+v3.3.0
+------------------------------
+*December 7, 2021*
+
+### Added
+- Jet logos.
+
+
+v3.2.1
+------------------------------
+*December 7, 2021*
+
+### Added
+- `Legend` (old name, new icon).
+
+
+v3.2.0
+------------------------------
+*December 6, 2021*
+
+### Added
+- `Offer` (old name, new icon).
+
+
+v3.1.0
+------------------------------
+*November 30, 2021*
+
+### Added
+- `Legend` (old name, new icon).
+
+
+v3.0.0
+------------------------------
+*November 8, 2021*
+
+### Changed
+- Old `BagSadBgIcon` has been renamed to `BagSorryBgIcon`.
+  - If you were using the old `BagSadBgIcon`, please make sure you're using the updated name.
+
+### Added
+- `BagSadBgIcon` (old name, new icon).
+- `BagBinocularsBgIcon`
+- `BagCryBgIcon`
+- `BagHeart1BgIcon`
+- `BagHeart2BgIcon`
+- `BagHelpBgIcon`
+- `BagListenBgIcon`
+- `BagMagicBgIcon`
+- `BagMoneyBgIcon`
+- `BagSurfBgIcon`
+- `BagXmasDecorateBgIcon`
+- `BagXmasSantaBgIcon`
+- `BagXmasSleighBgIcon`
+
+
+v2.8.0
+------------------------------
+*September 20, 2021*
+
+### Changed
+- Updated arrow icon.
+
+
+v2.7.0
+------------------------------
+*August 17, 2021*
+
+### Added
+- Collection icon
+
+
+v2.6.0
+------------------------------
+*August 13, 2021*
+
+### Added
+- BagRun icon
+- BagSad icon
+- PaymentVisa icon
+
+
 v2.5.0
 ------------------------------
 *March 26, 2021*

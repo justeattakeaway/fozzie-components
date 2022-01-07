@@ -3,6 +3,61 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.0.0
+------------------------------
+*December 9, 2021*
+
+### Added
+- **Breaking Change**: Added `f-searchbox` dependency to peer dependencies. Now `f-searchbox` should be included as a dependency of the consuming component or application.
+
+### Removed
+- **Breaking Change**: Removed `f-searchbox` styles import from the component. Make sure to import `f-searchbox` styles in your application.
+
+
+v4.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- Updated version of `f-searchbox` to update style to icing phase 2.
+
+
+v3.0.0
+------------------------------
+*September 16, 2021*
+
+### Changed
+- Updated version of `f-searchbox`.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v2.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+
+v2.0.0-beta.0
+------------------------------
+*September 7, 2021*
+
+### Changed
+- Use beta version of `f-searchbox` (JETSans update).
+
+
+v1.3.0
+------------------------------
+*September 14, 2021*
+
+### Removed
+- `MainBannerContainer.test.js` due to GA events being deleted.
+- `Services` directory due to GA events being deleted.
+- Mounted hook GA calls.
+
+
 v1.2.0
 ------------------------------
 *June 23, 2021*

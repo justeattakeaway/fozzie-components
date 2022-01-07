@@ -70,7 +70,7 @@ The props that can be defined are as follows (if any):
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `assistiveText` | `String` | `''` | Text to assist the user that will display underneath the input field. |
-| `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. |
+| `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. Each option can contain the following properties:<br /> `text` (required) - The text to be displayed.<br />`value` (required) - The underlying value for the option.<br />`disabled` (optional) - Can be used to prevent an option from being selected.<br />`selected` (optional) - This will be ignored by `v-model` (see Vue docs on Form Input Bindings), but it may be used together with `disabled` to create a placeholder. |
 | `fieldSize` | `String` | `medium` | The size of the form field. <br>Options: `small`, `medium`, `large` |
 | `hasError` | `Boolean` | `false` | When `true` border colour changes to red. |
 | `inputType` | `String` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox`, `dropdown`, `number`, `tel`, `textarea`  |

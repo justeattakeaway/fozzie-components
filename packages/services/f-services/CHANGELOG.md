@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.13.0
+------------------------------
+*August 26, 2021*
+
+### Changed
+- Postcode validations for GB to be in line with ConsumerWeb
+
+
+v1.12.0
+------------------------------
+*August 18, 2021*
+
+### Added
+- Postcode validations for AUS/NZ
+
+
 v1.11.0
 ------------------------------
 *May 5, 2021*

@@ -1,0 +1,19 @@
+const UserMessage = require('../../test-utils/component-objects/f-user-message.component');
+
+const userMessage = new UserMessage();
+
+describe('f-user-message component tests', () => {
+    beforeEach(() => {
+        userMessage.load();
+    });
+
+    it('should display the user message component', () => {
+        // Assert
+        expect(userMessage.isComponentDisplayed()).toBe(true);
+    });
+
+    it('should display the user message content', () => {
+        // Assert
+        expect(userMessage.isContentDisplayed()).toBe(true);
+    });
+});

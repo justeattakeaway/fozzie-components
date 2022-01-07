@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.4.0
+------------------------------
+*October 19, 2021*
+
+### Added
+- Ability to pass in custom properties during initialization which stick around
+- Above properties are now published with every statistic
+
+
+v0.3.0
+------------------------------
+*September 01, 2021*
+
+### Changed
+- Generate and output source maps
+
 v0.2.0
 ------------------------------
 *August 09, 2021*

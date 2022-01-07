@@ -28,6 +28,7 @@ $restaurant-logo-width: 48px;
     width: 96%;
     padding-bottom: spacing(x2);
     position: relative;
+    border-radius: $radius-rounded-c $radius-rounded-c 0 0;
 }
 
 .c-restaurantCardHeader-logo {

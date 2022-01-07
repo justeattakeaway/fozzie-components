@@ -3,6 +3,362 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.8.2
+------------------------------
+*January 04, 2022*
+
+### Added
+- `f-form` to Circle CI cache.
+
+
+v5.8.1
+------------------------------
+*December 21, 2021*
+
+### Updated
+- Circle CI cached components to include new f-filter-pill component
+
+
+v5.8.0
+------------------------------
+*December 20, 2021*
+
+### Updated
+- fozzie package to the latest (v6.2.0).
+
+
+v5.7.0
+------------------------------
+*December 16, 2021*
+
+### Removed
+- CircleCI Approval process for builds.
+
+
+v5.6.0
+------------------------------
+*November 26, 2021*
+
+### Changed
+- Updated the circle ci config to include an approval process
+
+
+v5.5.0
+------------------------------
+*November 26, 2021*
+
+### Added
+- `peer-deps-externals-webpack-plugin` to automatically add a library's peerDependencies to the bundle's externals.
+
+
+v5.4.0
+------------------------------
+*November 22, 2021*
+
+### Changed
+- `chromedriver` dependency to `96.0.0`
+- `.circleci/*.yaml` files to use new Docker image with Chrome v96
+
+
+v5.3.2
+------------------------------
+*November 12, 2021*
+
+### Changed
+- wdio configuration for component, visual and a11y tests.
+- allure script in `wdio-shared.conf.js` and `package.json`.
+- small update of generator to reflect above changes.
+
+
+v5.3.1
+------------------------------
+*November 12, 2021*
+
+### Changed
+- Updated documentation for visual regression test setup.
+
+
+v5.3.0
+------------------------------
+*November 9, 2021*
+
+### Added
+- `templates` and `pages` component directories added to lerna config.
+
+### Changed
+- Updated engine from Node v10 > v12 on all packages (as we only test in Node 12+).
+
+
+v5.2.0
+------------------------------
+*November 5, 2021*
+
+### Changed
+- Moved a number of `Organisms` over to the `Pages` directory.
+
+
+v5.1.4
+------------------------------
+*November 5, 2021*
+
+### Changed
+- Updates to `f-wdio-utils` package version across our components.
+
+
+v5.1.3
+------------------------------
+*November 3, 2021*
+
+### Added
+- `f-error-boundary` generated component.
+
+
+v5.1.2
+------------------------------
+*November 3, 2021*
+
+### Added
+- `f-card-with-content` generated component.
+
+
+v5.1.1
+------------------------------
+*November 2, 2021*
+
+### Updated
+- Updated Circle CI for new location of f-template-subnav
+
+
+v5.1.0
+------------------------------
+*October 28, 2021*
+
+### Changed
+- fozzie package update to the latest (6.0.0) to include latest pie-design-tokens.
+
+v5.0.4
+------------------------------
+*October 28, 2021*
+
+### Added
+- `f-spinner` to Circle CI cache.
+
+
+v5.0.4
+------------------------------
+*October 28, 2021*
+
+### Updated
+- Circle CI cached components to include new f-image-tile component
+
+v5.0.3
+------------------------------
+*October 28, 2021*
+
+### Removed
+- Label watcher GitHub Action and related scripts.
+- `wip` labeller.
+
+
+v5.0.2
+------------------------------
+*October 25, 2021*
+
+### Removed
+- Unused Browserstack and Allure scripts
+- Browserstack configuration files
+- Reference to JE_ENV environment variable
+- Percy and Browserstack tags
+
+### Changed
+- Filenames for component tests
+
+
+v5.0.1
+------------------------------
+*October 20, 2021*
+
+### Added
+- `f-promotions-showcase` to Circle CI cache
+
+
+v5.0.0
+------------------------------
+*October 21, 2021*
+
+### Added
+- Component folders for `templates` and `pages`.
+- Templates are for layout components that are intended to handle page level layout decisions (for example, a sideNav layout such as on our account pages). Templates don't contain any logic around the actual set of pages, they just handle the overall layout structure and styling.
+- Pages are for our largest organisms, whereby they are a collection of components that make up the main body of a page. For example, `f-registration` and `f-checkout` are both examples of `page` components.
+
+### Changed
+- Config for CircleCI, Lerna, yarn workspaces and danger.js updated to include new folder paths.
+- Moved `f-registration` into `pages` directory. Will look to move other organisms one-by-one by liaising with each team working on these components.
+
+
+v4.7.1
+------------------------------
+*October 20, 2021*
+
+### Added
+- Document for recording agreed Do's and Don'ts on our codebase
+
+
+v4.7.0
+------------------------------
+*October 19, 2021*
+
+### Changed
+- `fozzie` package version bump.
+
+
+v4.6.3
+------------------------------
+*October 18, 2021*
+
+### Added
+- `f-compatibility` to Circle CI cache.
+
+
+v4.6.2
+------------------------------
+*October 18, 2021*
+
+### Added
+- `f-navigation-links` to Circle CI cache.
+
+
+v4.6.1
+------------------------------
+*October 12, 2021*
+
+### Added
+- `f-contact-preferences` to Circle CI cache.
+
+
+v4.6.0
+------------------------------
+*October 8, 2021*
+
+ ### Changed
+ - Always run visual tests against master.
+ - Only run visual tests against changed packages.
+
+
+v4.5.0
+------------------------------
+*October 8, 2021*
+
+### Updated
+- webdriverIO to v91.
+
+
+v4.4.0
+------------------------------
+*October 7, 2021*
+
+### Added
+- Conditional logic to visual regression tests (via new `visual-regression-preflight.js` script).
+- Custom Github Action for triggering Circle CI pipeline when `wip` tag is removed.
+
+
+v4.3.2
+------------------------------
+*October 6, 2021*
+
+### Updated
+- Only apply `wip` label to newly opened/reopened PRs.
+
+
+v4.3.1
+------------------------------
+*October 6, 2021*
+
+### Changed
+- `labeler` workflow config path
+
+
+v4.3.0
+------------------------------
+*October 6, 2021*
+
+### Added
+- Labeler action
+  - Automatically applies `wip` label to new PRs
+  - Applies category labels based on whether the PR affects `atoms`, `molecules`, `services`, etc.
+
+
+v4.2.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- `fozzie` package version bump to 6.0.0-beta.5 to include new colour theme and radius vars.
+
+
+v4.1.0
+------------------------------
+*October 4, 2021*
+
+### Updated
+- Circle CI cached components to include new f-restaurant-card component
+
+
+v4.0.0
+------------------------------
+*September 15, 2021*
+
+### Updated
+- fozzie version to make normalize styles optional. This will remove normalize styles from the components by default.
+- JETSansDigital font instead of JustEatBasis for the components and storybook.
+
+
+v4.0.0-beta.0
+------------------------------
+*August 25, 2021*
+
+### Updated
+- fozzie version to include new font.
+
+### Changed
+- Storybook font to become new JETSansDigital instead of JustEatBasis.
+
+
+v3.54.0
+------------------------------
+*September 2, 2021*
+
+### Changed
+- Adding logging for local testing so it's easier to troubleshoot component tests.
+
+
+v3.53.2
+------------------------------
+*September 2, 2021*
+
+### Fixed
+- Typography documentation updated with correct syntax.
+
+
+v3.53.1
+------------------------------
+*August 23, 2021*
+
+### Changed
+- Removing all restore cache except master on build phase
+
+### Added
+- Added back in slack notifications on build steps
+
+
+v3.53.0
+------------------------------
+*August 23, 2021*
+
+### Changed
+- Changed the circle CI config to implement caching for our builds and splitting the build process into test and build
+
+
 v3.52.2
 ------------------------------
 *August 12, 2021*

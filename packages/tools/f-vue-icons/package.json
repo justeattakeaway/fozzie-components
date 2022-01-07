@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "2.5.0",
+  "version": "3.3.0",
   "main": "dist/f-vue-icons.cjs.js",
-  "maxBundleSize": "100kB",
+  "maxBundleSize": "150kB",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
   "module": "dist/f-vue-icons.es.js",
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
@@ -37,6 +37,7 @@
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit --passWithNoTests",
+    "ci:test:tools": "yarn test",
     "example": "poi --serve --config example/poi.config.js",
     "build:example": "poi --prod --config example/poi.config.js",
     "prebuild:example": "yarn build:icons"
@@ -48,7 +49,7 @@
     "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
-    "@justeat/f-icons": "3.5.1",
+    "@justeat/f-icons": "4.4.0",
     "@vue/cli-plugin-babel": "4.5.8",
     "@vue/cli-plugin-eslint": "4.5.8",
     "@vue/cli-plugin-unit-jest": "4.5.8",

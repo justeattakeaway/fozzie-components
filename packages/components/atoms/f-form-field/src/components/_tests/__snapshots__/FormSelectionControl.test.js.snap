@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormSelectionControl computed :: testId :: \`attributes.name\` is not provided :: should return a generic object without using the attribute name 1`] = `
+Object {
+  "container": "formfield-container",
+  "input": "formfield-input",
+}
+`;
+
+exports[`FormSelectionControl computed :: testId :: \`attributes.name\` is provided :: should return an object using the attribute name 1`] = `
+Object {
+  "container": "formfield-testCheckbox",
+  "input": "formfield-testCheckbox-checkbox",
+}
+`;

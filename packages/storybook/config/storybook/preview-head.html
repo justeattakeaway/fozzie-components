@@ -1,11 +1,11 @@
-<link rel="preload" href="https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2" as="font"
+<link rel="preload" href="https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff2" as="font"
     type="font/woff2" crossorigin>
 
 <style>
     @font-face {
-        font-family: JustEatBasis;
-        src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2') format('woff2'),
-            url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff') format('woff');
+        font-family: JETSansDigital;
+        src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff2') format('woff2'),
+            url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff') format('woff');
         font-weight: 400;
         font-display: swap;
     }
@@ -32,12 +32,9 @@
         color: #0f4fa9;
     }
 
-    .os-content {
-        background-color: #333;
-    }
-
-    .os-viewport .os-content pre code {
-        color: #fff;
+    /* background for code snippets */
+    .os-content-glue {
+        background-color: #f7f9fc;
     }
 
     .sbdocs.sbdocs-p code,
@@ -61,9 +58,26 @@
     .c-matrix-gradeB { background-color: #fff9df; }
     .c-matrix-gradeC { background-color: #ffe9ea; }
 
-    .wrapper--horizontal {
-        display: flex;
-        width: 300px;
-        justify-content: space-between
+    .storybook-grid {
+        display: grid;
+        grid-gap: 16px;
+        place-items: center;
+        justify-content: space-around;
+        align-content: start;
     }
+
+    .storybook-grid-columns--4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .storybook-grid-columns--3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 1024px) {
+        .storybook-grid-stack--lessThanWide {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
 </style>

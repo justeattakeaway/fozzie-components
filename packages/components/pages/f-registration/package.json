@@ -1,0 +1,73 @@
+{
+  "name": "@justeat/f-registration",
+  "description": "Fozzie Registration Form Component",
+  "version": "2.1.0",
+  "main": "dist/f-registration.umd.min.js",
+  "maxBundleSize": "70kB",
+  "files": [
+    "dist",
+    "test-utils",
+    "src/services"
+  ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-registration",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "vue-cli-service build --target lib --name f-registration ./src/index.js",
+    "lint": "vue-cli-service lint",
+    "lint:fix": "yarn lint --fix",
+    "lint:style": "vue-cli-service lint:style",
+    "test": "vue-cli-service test:unit",
+    "test:coverage": "yarn test --coverage",
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_REGISTRATION} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:pages": "yarn test",
+    "ci:test-component:chrome:pages": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome",
+    "ci:test:visual:pages": "yarn test:visual"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "dependencies": {
+    "@justeat/f-services": "1.4.0",
+    "vuelidate": "0.7.6"
+  },
+  "peerDependencies": {
+    "@justeat/browserslist-config-fozzie": ">=1.1.1"
+  },
+  "devDependencies": {
+    "@justeat/f-button": "3.0.2",
+    "@justeat/f-card": "3.0.0",
+    "@justeat/f-error-message": "1.0.0",
+    "@justeat/f-form-field": "4.0.1",
+    "@justeat/f-http": "0.8.0",
+    "@justeat/f-link": "2.0.0",
+    "@justeat/f-vue-icons": "2.7.0",
+    "@justeat/f-wdio-utils": "0.5.0",
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
+    "@vue/cli-plugin-babel": "4.5.8",
+    "@vue/cli-plugin-eslint": "3.9.2",
+    "@vue/cli-plugin-unit-jest": "4.5.8",
+    "@vue/test-utils": "1.1.1",
+    "flush-promises": "1.0.2",
+    "node-sass-magic-importer": "5.3.2"
+  }
+}

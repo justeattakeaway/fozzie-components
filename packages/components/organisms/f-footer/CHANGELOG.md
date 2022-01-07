@@ -4,6 +4,64 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v6.0.3
+------------------------------
+*November 11, 2021*
+
+### Changed
+- Update careers link for ES.
+
+
+v6.0.2
+------------------------------
+*November 9, 2021*
+
+### Changed
+- Update careers links for IT/IE.
+
+
+v6.0.1
+------------------------------
+*October 18, 2021*
+
+### Changed
+- Specified feedback block text font size to be 14px as default paragraph font size now is 16px.
+
+
+v6.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- New colour scheme from `pie-design-tokens` in line with icing phase 2.
+
+
+v5.0.1
+------------------------------
+*September 30, 2021*
+
+### Added
+- Add link to "Gender Pay Gap 2019-2021" report for UK
+
+
+v5.0.0
+------------------------------
+*September 15, 2021*
+
+- Return beta to master. Component has JETSansDigital font.
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
+
+v5.0.0-beta.0
+------------------------------
+*August 26, 2021*
+
+### Updated
+- New font JETSansDigital
+
+
 v4.30.0
 ------------------------------
 *August 9, 2021*

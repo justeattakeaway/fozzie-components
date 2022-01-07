@@ -1,0 +1,50 @@
+{
+  "name": "@justeat/f-error-boundary",
+  "description": "Fozzie Error Boundary - A reusable component for catching JavaScript errors and displaying fallback UIs",
+  "version": "0.2.0",
+  "main": "dist/f-error-boundary.umd.min.js",
+  "module": "dist/f-error-boundary.es.js",
+  "maxBundleSize": "5kB",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-error-boundary",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "vite build",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
+    "lint:fix": "yarn lint --fix",
+    "test": "jest",
+    "ci:test:atoms": "yarn test",
+    "test:coverage": "jest test:unit --coverage"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "peerDependencies": {
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+  },
+  "devDependencies": {
+    "core-js": "3.19.1",
+    "eslint": "7.32.0",
+    "vite": "2.6.13",
+    "vite-plugin-vue2": "1.9.0"
+  }
+}

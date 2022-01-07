@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-http",
   "description": "Javascript HTTP client for interacting with restful services",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "main": "dist/f-http.umd.js",
   "module": "dist/f-http.es.js",
   "source": "src/index.js",
@@ -21,7 +21,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
@@ -33,6 +33,7 @@
     "lint:fix": "yarn lint --fix",
     "storybook:build": "vite build",
     "test": "jest",
+    "ci:test:services": "yarn test",
     "test:coverage": "jest test:unit --coverage"
   },
   "browserslist": [

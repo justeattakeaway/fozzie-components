@@ -3,11 +3,16 @@
         data-test-id="card-component"
         :class="[
             $style['c-card'], {
-                [$style['c-card--rounded']]: isRounded,
                 [$style['c-card--outline']]: hasOutline,
-                [$style['c-card--pageContentWrapper']]: isPageContentWrapper
+                [$style['c-card--pageContentWrapper']]: isPageContentWrapper,
+                [$style[`c-card--size${capitaliseCardSizeProp}`]]: cardSizeCustom !== ''
             }]">
-        <div :class="[$style['c-card-innerSpacing']]">
+        <div
+            data-test-id="card-inner"
+            :class="[
+                [$style['c-card-innerSpacing']], {
+                    [$style['c-card-innerSpacing--large']]: hasInnerSpacingLarge
+                }]">
             <component
                 :is="cardHeadingTag"
                 v-if="cardHeading"
@@ -56,13 +61,35 @@ export default {
             type: Boolean,
             default: false
         },
-        isRounded: {
-            type: Boolean,
-            default: false
-        },
         hasFullWidthFooter: {
             type: Boolean,
             default: false
+        },
+        hasInnerSpacingLarge: {
+            type: Boolean,
+            default: false
+        },
+        cardSizeCustom: {
+            type: String,
+            default: '',
+            validator: value => ['', 'medium', 'large'].indexOf(value) !== -1
+        }
+    },
+
+    computed: {
+        /**
+         * Capitialises the prop values so we can name our class e.g `c-card--sizeLarge`.
+         *
+         * @returns {string|boolean}
+         */
+        capitaliseCardSizeProp () {
+            const cardPropValue = this.cardSizeCustom;
+
+            if (cardPropValue) {
+                return cardPropValue.replace(/^./, cardPropValue[0].toUpperCase());
+            }
+
+            return false;
         }
     }
 };
@@ -71,26 +98,31 @@ export default {
 <style lang="scss" module>
 
 $card-bgColor                             : $color-container-default;
-$card-borderColor                         : $color-border-strong;
-$card-borderRadius                        : $border-radius;
+$card-borderColor                         : $color-border-default;
+$card-borderRadius                        : $radius-rounded-c;
 $card-padding                             : spacing(x2);
-
+$card-padding-large                       : spacing(x4);
 $card--pageContentWrapper-width           : 472px; // so that it falls on our 8px spacing grid
 
 .c-card {
     background-color: $card-bgColor;
     display: block;
+    border-radius: $card-borderRadius;
 }
     .c-card-innerSpacing {
         padding: $card-padding;
-    }
 
-    .c-card--rounded {
-        border-radius: $card-borderRadius;
+        &.c-card-innerSpacing--large {
+            padding: $card-padding-large $card-padding;
+
+            @include media('>=mid') {
+                padding: $card-padding-large;
+            }
+        }
     }
 
     .c-card--outline {
-        border: solid 1px $card-borderColor;
+        border: 1px solid $card-borderColor;
     }
 
     // .c-card--pageContentWrapper Modifier
@@ -107,7 +139,7 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
             margin: spacing(x5) auto;
         }
 
-        .c-card-innerSpacing {
+        & > .c-card-innerSpacing {
             padding: spacing(x3) 6% 0;
 
             @include media('>=narrow') {
@@ -130,5 +162,14 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
 
     .c-card-heading--rightAligned {
         text-align: right;
+    }
+
+    // The two card sizes used on the accounts page. e.g Previous orders & contact preferences cards.
+    .c-card--sizeLarge {
+        max-width: 808px;
+    }
+
+    .c-card--sizeMedium {
+        max-width: 600px;
     }
 </style>

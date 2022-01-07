@@ -1,48 +1,68 @@
-export default {
-    name: 'Analytics',
+import {
+    UPDATE_PLATFORM_DATA,
+    UPDATE_EVENTS,
+    CLEAR_EVENTS
+} from './mutation-types';
 
+export default {
     namespaced: true,
 
     state: () => ({
         platformData: {
-            environment: '',
-            name: '',
-            appType: '',
+            environment: 'localhost',
+            name: undefined,
+            appType: undefined,
             applicationId: undefined,
-            userAgent: '',
-            branding: '',
-            country: '',
-            language: '',
+            country: undefined,
+            language: undefined,
             jeUserPercentage: undefined,
-            currency: '',
-            version: '',
-            instancePosition: ''
+            currency: undefined,
+            version: undefined,
+            instancePosition: undefined,
+            isPilot: undefined
         },
         userData: {
-            'a-UserId': '',
+            'a-UserId': undefined,
             authType: undefined,
             email: undefined,
             globalUserId: undefined,
             signinType: undefined,
             signupDate: undefined
-        }
+        },
+        pageData: {
+            name: undefined,
+            httpStatusCode: 200,
+            conversationId: undefined,
+            orientation: undefined
+        },
+        events: []
     }),
 
     actions: {
         updatePlatformData: ({ commit }, platformData) => {
-            commit('pushPlatformData', platformData);
+            commit(UPDATE_PLATFORM_DATA, platformData);
         },
-        updateUserData: ({ commit }, userData) => {
-            commit('pushUserData', userData);
+
+        updateEvents: ({ commit }, event) => {
+            commit(UPDATE_EVENTS, event);
+        },
+
+        clearEvents: ({ commit }) => {
+            commit(CLEAR_EVENTS);
         }
     },
 
     mutations: {
-        pushPlatformData: (state, platformData) => {
-            state.platformData = platformData;
+        [UPDATE_PLATFORM_DATA]: (state, platformData) => {
+            state.platformData = { ...state.platformData, ...platformData };
         },
-        pushUserData: (state, userData) => {
-            state.userData = userData;
+
+        [UPDATE_EVENTS]: (state, event) => {
+            state.events = [...state.events, event];
+        },
+
+        [CLEAR_EVENTS]: state => {
+            state.events = [];
         }
     }
 };

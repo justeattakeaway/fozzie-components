@@ -39,19 +39,21 @@
 
                         <p :class="$style['c-cookieBanner-text']">
                             {{ copy.textLine3 }}
-                            <a
+                            <v-link
                                 data-test-id="cookie-policy-link"
+                                is-distinct
                                 :href="copy.cookiePolicyLinkUrl"
-                                :class="$style['c-cookieBanner-link']"
                                 target="_blank">
                                 {{ copy.cookiePolicyLinkText }}
-                            </a>
+                            </v-link>
                             {{ copy.textLine4 }}
                         </p>
                     </div>
                 </div>
 
-                <div :class="$style['c-cookieBanner-cta']">
+                <div
+                    ref="buttonContainer"
+                    :class="$style['c-cookieBanner-cta']">
                     <button-component
                         data-test-id="accept-all-cookies-button"
                         is-full-width
@@ -60,7 +62,7 @@
                     </button-component>
 
                     <button-component
-                        button-type="ghost"
+                        button-type="outline"
                         data-test-id="accept-necessary-cookies-button"
                         is-full-width
                         @click="acceptOnlyNecessaryCookiesActions">
@@ -83,36 +85,35 @@
     <div v-else>
         <reopen-banner-link
             v-if="!legacyBanner"
+            ref="reopenCookieBannerLink"
             :message="copy.reopenCookieBannerLinkText"
             :use-grey-background="shouldUseGreyBackground"
-            :class="{ [$style['reopen-link-wrapper']]: reopenLinkToBottom }"
+            :class="{ [$style['reopen-link-wrapper']]: isBodyHeightLessThanWindowHeight }"
             @reopenBanner="reopenBanner" />
     </div>
 </template>
 
 <script>
 import CookieHelper from 'js-cookie';
-
 import { globalisationServices } from '@justeat/f-services';
-
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-
 import MegaModal from '@justeat/f-mega-modal';
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
-
+import VLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
 import LegacyBanner from './LegacyBanner.vue';
-
 import ReopenBannerLink from './ReopenBannerLink.vue';
-
 import tenantConfigs from '../tenants';
+import { LEGACY_CONSENT_COOKIE_NAME, CONSENT_COOKIE_NAME } from '../constants';
 
 export default {
     components: {
         ButtonComponent,
         LegacyBanner,
         MegaModal,
-        ReopenBannerLink
+        ReopenBannerLink,
+        VLink
     },
 
     props: {
@@ -133,12 +134,27 @@ export default {
 
         cookieExpiry: {
             type: Number,
-            default: 7776000
+            default: 90
         },
 
         shouldUseGreyBackground: {
             type: Boolean,
             default: true
+        },
+
+        shouldAbsolutePositionReopenLink: {
+            type: Boolean,
+            default: true
+        },
+
+        nameSuffix: {
+            type: String,
+            default: ''
+        },
+
+        domain: {
+            type: String,
+            default: null
         }
     },
 
@@ -147,19 +163,16 @@ export default {
         const localeConfig = tenantConfigs[locale];
         const theme = globalisationServices.getTheme(locale);
         const copy = localeConfig.messages;
-        const consentCookieName = 'je-cookieConsent';
-        const legacyConsentCookieName = 'je-banner_cookie';
-        const reopenLinkToBottom = this.isBodyHeightLessThanWindowHeight();
 
         return {
             config: { ...localeConfig },
             theme,
             copy,
             shouldHideBanner: true,
-            consentCookieName,
-            legacyConsentCookieName,
             isIosBrowser: false,
-            reopenLinkToBottom
+            bodyObserver: undefined,
+            isBodyHeightLessThanWindowHeight: false,
+            bodyHeight: 0
         };
     },
 
@@ -170,24 +183,82 @@ export default {
          */
         legacyBanner () {
             return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
+        },
+
+        /**
+         * Return the cookie consent name with the suffix if provided.
+         * @returns {String}
+         */
+        consentCookieName () {
+            return this.nameSuffix
+                ? `${CONSENT_COOKIE_NAME}-${this.nameSuffix}`
+                : CONSENT_COOKIE_NAME;
         }
     },
 
     watch: {
         isHidden (newVal) {
             this.shouldHideBanner = !!newVal;
+        },
+
+        bodyHeight (newVal, oldVal) {
+            if (newVal !== oldVal) {
+                this.updateIsBodyHeightLessThanWindowHeight();
+            }
+        }
+    },
+
+    destroyed () {
+        if (typeof window === 'object') {
+            // eslint-disable-next-line no-unused-expressions
+            this.bodyObserver?.disconnect();
         }
     },
 
     mounted () {
         this.checkCookieBannerCookie();
         if (!this.shouldHideBanner) {
-            this.focusOnTitle();
+            this.$nextTick(() => {
+                this.addKeyboardHandler();
+                this.focusOnTitle();
+            });
         }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
+
+        if (typeof window === 'object' && this.shouldAbsolutePositionReopenLink && !this.legacyBanner) {
+            this.createResizeObserver();
+        }
     },
 
     methods: {
+        /**
+         * Creates <body> ResizeObserver to watch for body content height changes, triggers watch.bodyHeight method
+         */
+        createResizeObserver () {
+            if (typeof ResizeObserver !== 'function') return;
+
+            const resizeCallback = entry => {
+                window.requestAnimationFrame(() => {
+                    const [{ contentRect: { height } }] = entry;
+                    this.bodyHeight = height;
+                });
+            };
+            this.bodyObserver = new ResizeObserver(resizeCallback);
+            const bodyElement = document.documentElement || document.body;
+            this.bodyObserver.observe(bodyElement);
+        },
+
+        /**
+         * Triggered by watch.bodyHeight, calculates if body height is less than window height to absolutely position the reopen link
+         */
+        updateIsBodyHeightLessThanWindowHeight () {
+            if (typeof window === 'object' && this.shouldHideBanner) {
+                const reopenElementHeight = this.$refs?.reopenCookieBannerLink?.$el?.clientHeight || 0;
+                this.isBodyHeightLessThanWindowHeight =
+                        (window.innerHeight - reopenElementHeight) - document.body.offsetHeight > 0;
+            }
+        },
+
         /**
          * Actions for "Accept all cookies" button
          */
@@ -197,7 +268,9 @@ export default {
                 this.setLegacyCookieBannerCookie();
                 this.dataLayerPush('full');
                 this.resendEvents();
+                this.dispatchCustomEvent();
                 this.hideAllBanners();
+                this.updateIsBodyHeightLessThanWindowHeight();
             });
         },
 
@@ -211,7 +284,9 @@ export default {
                 this.dataLayerPush('necessary');
                 this.resendEvents();
                 this.removeUnnecessaryCookies();
+                this.dispatchCustomEvent();
                 this.hideAllBanners();
+                this.updateIsBodyHeightLessThanWindowHeight();
             });
         },
 
@@ -221,6 +296,30 @@ export default {
         focusOnTitle () {
             if (!this.legacyBanner && this.$refs.cookieBannerHeading) {
                 this.$refs.cookieBannerHeading.focus();
+            }
+        },
+
+        /**
+         * Add keyboard handler
+         */
+        addKeyboardHandler () {
+            if (this.$refs.cookieBanner && this.$refs.cookieBanner.$refs.megaModal) {
+                this.$refs.cookieBanner.$refs.megaModal.addEventListener('keydown', this.setTabLoop);
+            }
+        },
+
+        /**
+         * Set the tab loop for accessibility
+         */
+        setTabLoop (e) {
+            if (e.key === 'Tab') {
+                if (e.shiftKey && e.target === this.$refs.cookieBannerHeading) {
+                    this.$refs.buttonContainer.lastChild.focus();
+                    e.preventDefault();
+                } else if (!e.shiftKey && e.target === this.$refs.buttonContainer.lastChild) {
+                    this.$refs.cookieBannerHeading.focus();
+                    e.preventDefault();
+                }
             }
         },
 
@@ -248,6 +347,10 @@ export default {
          */
         reopenBanner () {
             this.shouldHideBanner = false;
+            this.$nextTick(() => {
+                this.addKeyboardHandler();
+                this.focusOnTitle();
+            });
         },
 
         /**
@@ -255,7 +358,7 @@ export default {
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.shouldHideBanner = CookieHelper.get(this.legacyConsentCookieName) === '130315';
+                this.shouldHideBanner = CookieHelper.get(LEGACY_CONSENT_COOKIE_NAME) === '130315';
                 this.setLegacyCookieBannerCookie();
             } else {
                 const cookieConsent = CookieHelper.get(this.consentCookieName);
@@ -276,7 +379,8 @@ export default {
         setCookieBannerCookie (cookieValue) {
             CookieHelper.set(this.consentCookieName, cookieValue, {
                 path: '/',
-                expires: this.cookieExpiry
+                expires: this.cookieExpiry,
+                domain: this.domain
             });
         },
 
@@ -284,9 +388,10 @@ export default {
          * Set the legacy cookie banner cookie
          */
         setLegacyCookieBannerCookie () {
-            CookieHelper.set(this.legacyConsentCookieName, '130315', {
+            CookieHelper.set(LEGACY_CONSENT_COOKIE_NAME, '130315', {
                 path: '/',
-                expires: this.cookieExpiry
+                expires: this.cookieExpiry,
+                domain: this.domain
             });
         },
 
@@ -340,98 +445,100 @@ export default {
         },
 
         /**
-         * Check to see if we need to absolute position reopen link
-         */
-        isBodyHeightLessThanWindowHeight () {
-            return window.innerHeight - document.body.offsetHeight > 0;
+         * Dispatch custom window event
+         * */
+        dispatchCustomEvent () {
+            if (typeof window === 'object') {
+                window.dispatchEvent(new CustomEvent('f-cookie-banner-accepted', {
+                    detail: {
+                        consentCookieName: this.consentCookieName,
+                        cookieExclusionList: this.config.cookieExclusionList
+                    }
+                }));
+            }
         }
     }
 };
 </script>
 
 <style lang="scss" module>
-    .c-cookieBanner-card {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        background-color: $color-container-default;
-        z-index: 99999992;
-    }
+[data-cookie-consent-overlay] {
+    position: absolute;
+    color: $color-content-default;
+}
 
-    .c-cookieBanner-cta {
-        min-width: 352px;
-    }
+.c-cookieBanner-card {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $color-container-default;
+    z-index: 99999992;
+}
 
-    .c-cookieBanner-text {
-        margin: 0;
-        padding: 0;
-    }
+.c-cookieBanner-text {
+    margin: 0;
+    padding: 0;
+    @include font-size(body-s);
+}
 
-    .c-cookieBanner-content {
-        text-align: left;
-    }
+.c-cookieBanner-title {
+    @include font-size(heading-m);
+    margin: 0 0 spacing();
+    padding: 0;
+    color: $color-content-default;
+    text-align: left;
 
-    .c-cookieBanner-title {
-        @include font-size(heading-m);
-        font-weight: $font-weight-bold;
-        margin: spacing() 0;
-        padding: 0;
-        color: $color-content-default;
-        &:hover,
-        &:focus {
-            a {
-                text-decoration: none;
-            }
+    &:hover,
+    &:focus {
+        a {
+            text-decoration: none;
         }
+    }
+}
+
+.c-cookieBanner-content {
+    margin: 0 auto;
+    padding: spacing(x4);
+    text-align: left;
+}
+
+.reopen-link-wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+@include media ('<mid') {
+    .c-cookieBanner-card {
+        flex-direction: column;
+        padding: spacing(x2) 0;
+    }
+
+    .c-cookieBanner-ios {
+        padding-bottom: 80px;
     }
 
     .c-cookieBanner-content,
     .c-cookieBanner-cta {
-        margin: 0 auto;
+        padding: spacing(x2) spacing(x3) spacing(x0.5);
+    }
+}
+
+@include media ('>=mid') {
+    .c-cookieBanner-cta {
         padding: spacing(x4);
+        min-width: 352px;
+        margin: 0 auto;
     }
+}
 
-    .reopen-link-wrapper {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
+@include media('<=narrowMid') {
+    .c-cookieBanner-title {
+        @include font-size(heading-s);
     }
-
-    @include media ('<mid') {
-        .c-cookieBanner-card {
-            flex-direction: column;
-            padding: spacing(x2) 0;
-        }
-
-        .c-cookieBanner-ios {
-            padding-bottom: 80px;
-        }
-
-        .c-cookieBanner-content,
-        .c-cookieBanner-cta {
-            padding: spacing(x0.5) spacing(x3);
-        }
-
-        .c-cookieBanner-cta {
-            min-width: initial;
-            display: flex;
-            flex-direction: row-reverse;
-            margin: 0;
-        }
-    }
-
-    @include media('<=narrow') {
-        .c-cookieBanner-title {
-            @include font-size(heading-s);
-        }
-
-        .c-cookieBanner-cta {
-            display: block;
-            margin: 0;
-        }
-    }
+}
 </style>

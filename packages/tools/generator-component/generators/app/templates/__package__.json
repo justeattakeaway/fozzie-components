@@ -2,11 +2,12 @@
   "name": "@justeat/f-<%= name.default %>",
   "description": "Fozzie <%= name.readme %> - <%= description %>",
   "version": "0.1.0",
-  "main": "dist/f-<%= name.default %>.umd.min.js", <% if(config.needsBundlewatch) { %>
-  "maxBundleSize": "<%= bundlewatchMaxSize %>kB",<% } %>
+  "main": "dist/f-<%= name.default %>.umd.min.js"<% if(config.isService) { %>,
+  "module": "dist/f-<%= name.default %>.es.js"<% } %><% if(config.needsBundlewatch) { %>,
+  "maxBundleSize": "<%= bundlewatchMaxSize %>kB"<% } %>,
   "files": [
     "dist"<% if(config.needsComponentTests) { %>,
-    "test-utils"<% } %> <% if(config.needsTestingApiMocks) { %>,
+    "test-utils"<% } %><% if(config.needsTestingApiMocks) { %>,
     "src/services"<% } %>
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/<%= componentFolder %>f-<%= name.default %>",
@@ -22,41 +23,46 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "prepublishOnly": "yarn lint && yarn test && yarn build"<% if(config.isComponent) { %>,
     "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint"<% } else { %>,
+    "build": "vite build",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\""<% } %>,
     "lint:fix": "yarn lint --fix"<% if(config.isComponent) { %>,
-    "lint:style": "vue-cli-service lint:style"<% } %>,
-    "test": "vue-cli-service test:unit"<% if(config.needsComponentTests) { %>,
-    "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"<% if(storybook.componentCategory === 'Organisms') { %>,
-    "report:test-component:chome": "cross-env-shell JE_ENV=ci TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn:allure:open",
-    "allure:open": "yarn allure:clean && allure open",
-    "allure:clean": "rimraf ../../../../test/results/allure" <% } %> <% } %>
+    "lint:style": "vue-cli-service lint:style"<% } else { %>,
+    "test:coverage": "jest test:unit --coverage"<% } %>,
+    "test": "vue-cli-service test:unit"<% if(config.isComponent) { %><% if(config.needsComponentTests) { %>,
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"<% } %>,
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"<% if(config.needsVisualTests) { %>,
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_<%= name.default.toUpperCase().replace('-', '_') %>} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"<% } %><% } %>
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
-  ],
+  ],<% if(config.isComponent) { %>
   "dependencies": {
-    "@justeat/f-services": "1.7.0"<% if(config.needsTestingApiMocks) { %>,
-    "axios": "0.21.1"<% } %>
-  },
+    "@justeat/f-services": "1.7.0"
+  },<% } %>
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.4.6",
+<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "0.5.0",
+    "node-sass-magic-importer": "5.3.2",
+    "@samhammer/vue-cli-plugin-stylelint": "2.1.0",
+    "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@justeat/f-wdio-utils": "0.3.0",
-    "@vue/test-utils": "1.0.3"<% if(config.isComponent) { %>,
-    "node-sass-magic-importer": "5.3.2"<% } %>
+    "@vue/cli-plugin-unit-jest": "4.5.15",
+    "@vue/test-utils": "1.2.2"<% } else { %>    "vite": "2.6.13",
+    "core-js": "3.19.1",
+    "eslint": "7.32.0",
+    "jest-extended": "0.11.5"<% } %><% if(config.needsTestingApiMocks) { %>,
+    "axios": "0.24.0"<%
+    } %>
   }
 }

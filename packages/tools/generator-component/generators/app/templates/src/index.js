@@ -5,7 +5,6 @@
  * @module f-<%= name.default%>
  */
 
-
 // Import vue component
 import <%= name.component %> from '@/components/<%= name.filename %>.vue';
 
@@ -33,18 +32,16 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default <%= name.component %>;
-
-<% } else { %>
-
+export default <%= name.component %>;<% } else { %>
 /**
 * @overview Add description of service here
 *
 * @module f-<%= name.default %>
 */
 
-export {
-};
-
-
+export default class ServiceConstructor {
+    constructor() {
+        throw new Error('Not implemented yet!');
+    }
+}
 <% } %>

@@ -1,37 +1,43 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
-const Button = require('../../test-utils/component-objects/f-button.component');
+const ActionButton = require('../../test-utils/component-objects/f-button--action.component');
+const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
+const IconButton = require('../../test-utils/component-objects/f-button--icon.component');
 
 let button;
 
 describe('Accessibility tests', () => {
     it('a11y - should test f-button action component WCAG compliance', () => {
-        // Act
-        button = new Button('atom-folder', 'f-button--button-component');
-        button.withQuery('knob-Button Type', 'primary');
-        button.withQuery('knob-Button Size', 'medium');
-        const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-        button.open(pageUrl);
+        // Arrange
+        button = new ActionButton();
 
-        button.waitForActionComponent();
+        // Act
+        button.load();
         const axeResults = getAccessibilityTestResults('f-button - action');
 
+        // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 
     it('a11y - should test f-button link component WCAG compliance', () => {
+        // Arrange
+        button = new LinkButton();
+
         // Act
-        button = new Button('atom-folder', 'f-button--button-component');
-        button.withQuery('knob-Button Type', 'link')
-            .withQuery('knob-href', 'link')
-            .withQuery('knob-Button Size', 'medium');
-
-        const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-        button.open(pageUrl);
-
-        button.waitForLinkComponent();
+        button.load();
         const axeResults = getAccessibilityTestResults('f-button - link');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
+    });
+
+    it('a11y - should test f-button icon component WCAG compliance', () => {
+        // Arrange
+        button = new IconButton();
+
+        // Act
+        button.load();
+        const axeResults = getAccessibilityTestResults('f-button - icon');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

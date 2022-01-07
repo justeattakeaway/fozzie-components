@@ -1,22 +1,19 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
 const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
 
-const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookieBanner-legacy.component');
+const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookie-banner-legacy.component');
 
-const legacyCookieBanner = new LegacyCookieBanner('organism', 'cookie-banner-component');
+const legacyCookieBanner = new LegacyCookieBanner();
 
-const CookieConsentBanner = require('../../test-utils/component-objects/f-cookieConsentBanner.component');
+const CookieConsentBanner = require('../../test-utils/component-objects/f-cookie-consent-banner.component');
 
-const cookieConsentBanner = new CookieConsentBanner('organism', 'cookie-banner-component');
+const cookieConsentBanner = new CookieConsentBanner();
 
 describe('Legacy Accessibility tests', () => {
     it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {
         // Arrange
         const formattedLocale = 'en-AU';
         legacyCookieBanner.withQuery('&knob-Locale', formattedLocale);
-        const pageUrl = buildUrl(legacyCookieBanner.componentType, legacyCookieBanner.componentName, legacyCookieBanner.path);
-        legacyCookieBanner.open(pageUrl);
-        legacyCookieBanner.waitForComponent();
+        legacyCookieBanner.load();
 
         // Act
         const axeResults = getAccessibilityTestResults('f-cookie-banner');
@@ -29,9 +26,7 @@ describe('Legacy Accessibility tests', () => {
         // Arrange
         const formattedLocale = 'en-GB';
         cookieConsentBanner.withQuery('&knob-Locale', formattedLocale);
-        const pageUrl = buildUrl(cookieConsentBanner.componentType, cookieConsentBanner.componentName, cookieConsentBanner.path);
-        cookieConsentBanner.open(pageUrl);
-        cookieConsentBanner.waitForComponent();
+        cookieConsentBanner.load();
 
         // Act
         const axeResults = getAccessibilityTestResults('f-cookie-banner');

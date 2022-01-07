@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-statistics",
   "description": "Javascript client for transporting statistics",
-  "version": "0.2.0",
-  "maxBundleSize": "100kB",
+  "version": "0.4.0",
+  "maxBundleSize": "10kB",
   "main": "dist/f-statistics.umd.js",
   "module": "dist/f-statistics.es.js",
   "source": "src/index.js",
@@ -22,7 +22,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
@@ -33,6 +33,7 @@
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "test": "jest",
+    "ci:test:services": "yarn test",
     "test:coverage": "jest test:unit --coverage"
   },
   "browserslist": [

@@ -1,485 +1,171 @@
-const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions');
-const Button = require('../../test-utils/component-objects/f-button.component');
+const ActionButton = require('../../test-utils/component-objects/f-button--action.component');
+const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
+const IconButton = require('../../test-utils/component-objects/f-button--icon.component');
 
 let button;
 
 describe('f-button Desktop visual tests', () => {
-    describe('primary button', () => {
-        it('should display medium size', () => {
+    describe('primary, secondary, outline and ghost buttons in all 4 sizes', () => {
+        it('should be displayed', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'primary');
-            button.withQuery('knob-Button Size', 'medium');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
+            button = new ActionButton();
 
             // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
+            button.load();
 
             // Assert
-            browser.percyScreenshot('f-button - Primary - Medium', 'desktop');
+            browser.percyScreenshot('f-button - Action', 'desktop');
         });
 
-        it('should display large size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'primary');
-            button.withQuery('knob-Button Size', 'large');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Primary - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'primary');
-            button.withQuery('knob-Button Size', 'small');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Primary - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'primary');
-            button.withQuery('knob-Button Size', 'xsmall');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Primary - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
+        describe('in isLoading state', () => {
+            it('should be displayed', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'primary');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
+                button = new ActionButton();
+                button.withQuery('args', 'isLoading');
 
                 // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
+                button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Primary - Medium - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Action - Loading', 'desktop');
             });
+        });
 
-            it('should display large size in a loading state', () => {
+        describe('in disabled state', () => {
+            it('should be displayed', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'primary');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
+                button = new ActionButton();
+                button.withQuery('args', 'disabled');
 
                 // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
+                button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Primary - Large - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Action - Disabled', 'desktop');
+            });
+        });
+
+        describe('in state with leading icon', () => {
+            it('should be displayed', () => {
+                // Arrange
+                button = new ActionButton();
+                button.withQuery('args', 'hasIcon:leading');
+
+                // Act
+                button.load();
+
+                // Assert
+                browser.percyScreenshot('f-button - Action - With Leading Icon', 'desktop');
+            });
+        });
+
+        describe('in state with trailing icon', () => {
+            it('should be displayed', () => {
+                // Arrange
+                button = new ActionButton();
+                button.withQuery('args', 'hasIcon:trailing');
+
+                // Act
+                button.load();
+
+                // Assert
+                browser.percyScreenshot('f-button - Action - With Trailing Icon', 'desktop');
             });
         });
     });
 
-    describe('secondary button', () => {
-        it('should display medium size', () => {
+    describe('link button', () => {
+        it('should be displayed in all 4 sizes', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'secondary');
-            button.withQuery('knob-Button Size', 'medium');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
+            button = new LinkButton();
 
             // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
+            button.load();
 
             // Assert
-            browser.percyScreenshot('f-button - Secondary - Medium', 'desktop');
+            browser.percyScreenshot('f-button - Link', 'desktop');
         });
 
-        it('should display large size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'secondary');
-            button.withQuery('knob-Button Size', 'large');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Secondary - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'secondary');
-            button.withQuery('knob-Button Size', 'small');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Secondary - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'secondary');
-            button.withQuery('knob-Button Size', 'xsmall');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Secondary - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
+        describe('in isLoading state', () => {
+            it('should be displayed in all 4 sizes', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'secondary');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
+                button = new LinkButton();
+                button.withQuery('args', 'isLoading');
 
                 // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
+                button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Secondary - Medium - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Link - Loading', 'desktop');
             });
+        });
 
-            it('should display large size in a loading state', () => {
+        describe('in disabled state', () => {
+            it('should be displayed', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'secondary');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
+                button = new LinkButton();
+                button.withQuery('args', 'disabled');
 
                 // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
+                button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Secondary - Large - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Link - Disabled', 'desktop');
+            });
+        });
+
+        describe('in state with leading icon', () => {
+            it('should be displayed', () => {
+                // Arrange
+                button = new LinkButton();
+                button.withQuery('args', 'hasIcon:leading');
+
+                // Act
+                button.load();
+
+                // Assert
+                browser.percyScreenshot('f-button - Link - With Leading Icon', 'desktop');
+            });
+        });
+
+        describe('in state with trailing icon', () => {
+            it('should be displayed', () => {
+                // Arrange
+                button = new LinkButton();
+                button.withQuery('args', 'hasIcon:trailing');
+
+                // Act
+                button.load();
+
+                // Assert
+                browser.percyScreenshot('f-button - Link - With Trailing Icon', 'desktop');
             });
         });
     });
 
-    describe('outline button', () => {
-        it('should display medium size', () => {
+    describe('all valid iconButton types in all sizes', () => {
+        it('should be displayed', () => {
             // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'outline');
-            button.withQuery('knob-Button Size', 'medium');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
+            button = new IconButton();
 
             // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
+            button.load();
 
             // Assert
-            browser.percyScreenshot('f-button - Outline - Medium', 'desktop');
+            browser.percyScreenshot('f-button - Icon', 'desktop');
         });
 
-        it('should display large size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'outline');
-            button.withQuery('knob-Button Size', 'large');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Outline - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'outline');
-            button.withQuery('knob-Button Size', 'small');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Outline - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'outline');
-            button.withQuery('knob-Button Size', 'xsmall');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Outline - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
+        describe('in isLoading state', () => {
+            it('should be displayed', () => {
                 // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'outline');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
+                button = new IconButton();
+                button.withQuery('args', 'isLoading');
 
                 // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
+                button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Outline - Medium - Loading', 'desktop');
-            });
-
-            it('should display large size in a loading state', () => {
-                // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'outline');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-                // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
-
-                // Assert
-                browser.percyScreenshot('f-button - Outline - Large - Loading', 'desktop');
-            });
-        });
-    });
-
-    describe('ghost', () => {
-        it('should display medium size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'ghost');
-            button.withQuery('knob-Button Size', 'medium');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Ghost - Medium', 'desktop');
-        });
-
-        it('should display large size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'ghost');
-            button.withQuery('knob-Button Size', 'large');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Ghost - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'ghost');
-            button.withQuery('knob-Button Size', 'small');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Ghost - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'ghost');
-            button.withQuery('knob-Button Size', 'xsmall');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Ghost - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
-                // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'ghost');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-                // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
-
-                // Assert
-                browser.percyScreenshot('f-button - Ghost - Medium - Loading', 'desktop');
-            });
-
-            it('should display large size in a loading state', () => {
-                // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'ghost');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-                // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
-
-                // Assert
-                browser.percyScreenshot('f-button - Ghost - Large - Loading', 'desktop');
-            });
-        });
-    });
-
-    describe('link', () => {
-        it('should display medium size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'link');
-            button.withQuery('knob-Button Size', 'medium');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Link - Medium', 'desktop');
-        });
-
-        it('should display large size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'link');
-            button.withQuery('knob-Button Size', 'large');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Link - Large', 'desktop');
-        });
-
-        it('should display small size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'link');
-            button.withQuery('knob-Button Size', 'small');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Link - Small', 'desktop');
-        });
-
-        it('should display xsmall size', () => {
-            // Arrange
-            button = new Button('atom-folder', 'f-button--button-component');
-            button.withQuery('knob-Button Type', 'link');
-            button.withQuery('knob-Button Size', 'xsmall');
-            const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-            // Act
-            button.open(pageUrl);
-            button.waitForActionComponent();
-
-            // Assert
-            browser.percyScreenshot('f-button - Link - XSmall', 'desktop');
-        });
-
-        describe('isLoading', () => {
-            it('should display medium size in a loading state', () => {
-                // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'link');
-                button.withQuery('knob-Button Size', 'medium');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-                // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
-
-                // Assert
-                browser.percyScreenshot('f-button - Link - Medium - Loading', 'desktop');
-            });
-
-            it('should display large size in a loading state', () => {
-                // Arrange
-                button = new Button('atom-folder', 'f-button--button-component');
-                button.withQuery('knob-Button Type', 'link');
-                button.withQuery('knob-Button Size', 'large');
-                button.withQuery('knob-isLoading', 'true');
-                const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
-
-                // Act
-                button.open(pageUrl);
-                button.waitForActionComponent();
-
-                // Assert
-                browser.percyScreenshot('f-button - Link - Large - Loading', 'desktop');
+                browser.percyScreenshot('f-button - Icon - Loading', 'desktop');
             });
         });
     });

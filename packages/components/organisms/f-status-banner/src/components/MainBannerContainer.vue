@@ -18,12 +18,6 @@
 
 <script>
 import SearchBox from '@justeat/f-searchbox';
-import '@justeat/f-searchbox/dist/f-searchbox.css';
-import {
-    loadAnalyticsAccount,
-    dataLayerPushPageData,
-    trackMenuWebPageExperiment
-} from '../services/analytics.service';
 import PageBanner from './PageBanner.vue';
 
 export default {
@@ -55,12 +49,6 @@ export default {
 
             return `${this.baseHeroUrl}${localeToLowercase}/`;
         }
-    },
-
-    mounted () {
-        loadAnalyticsAccount();
-        trackMenuWebPageExperiment();
-        dataLayerPushPageData(this.locale);
     }
 };
 </script>

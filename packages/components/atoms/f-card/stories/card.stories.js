@@ -23,9 +23,10 @@ export const CardComponent = (args, { argTypes }) => ({
             :card-heading="cardHeading"
             :card-heading-position="cardHeadingPosition"
             :card-heading-tag="cardHeadingTag"
-            :is-rounded="isRounded"
+            :card-size-custom="cardSizeCustom"
             :has-outline="hasOutline"
             :is-page-content-wrapper="isPageContentWrapper"
+            :has-inner-spacing-large="hasInnerSpacingLarge"
             :has-full-width-footer="hasFullWidthFooter">
             <p>Some Card Content</p>
             <template v-slot:cardFooter>
@@ -38,10 +39,11 @@ CardComponent.args = {
     cardHeading: 'My Card Heading',
     cardHeadingPosition: 'left',
     cardHeadingTag: 'h1',
-    isRounded: false,
     hasOutline: false,
     isPageContentWrapper: false,
-    hasFullWidthFooter: false
+    hasFullWidthFooter: false,
+    hasInnerSpacingLarge: false,
+    cardSizeCustom: 'medium'
 };
 
 CardComponent.argTypes = {
@@ -50,6 +52,9 @@ CardComponent.argTypes = {
     },
     cardHeadingTag: {
         control: { type: 'select', options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }
+    },
+    cardSizeCustom: {
+        control: { type: 'select', options: ['medium', 'large'] }
     }
 };
 

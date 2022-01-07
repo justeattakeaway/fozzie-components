@@ -29,6 +29,12 @@ yarn add @justeat/f-mega-modal
 npm install @justeat/f-mega-modal
 ```
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency | Command to install | Styles to include |
+| ----- | ----- | ----- |
+| f-button | `yarn add @justeat/f-button` | `import '@justeat/f-button/dist/f-button.css';` |
+
 ### Vue Applications
 
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
@@ -111,7 +117,6 @@ The props that can be defined are as follows:
 | `is-full-height` | `Boolean` | `false` | Sets the modal content to full height of the screen.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
 | `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable. |
 | `is-close-fixed` | `Boolean` | `false` | Sets the modal close button position to `fixed`. |
-| `is-close-rounded` | `Boolean` | `false` | Sets the modal close button to display in a rounded style. |
 | `is-positioned-bottom` | `Boolean` | `false` | Sets the modal position to the bottom of the viewport for all screen widths. |
 | `has-overlay` | `Boolean` | `true` | Controls whether or not to display an overlay behind the modal. |
 | `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |

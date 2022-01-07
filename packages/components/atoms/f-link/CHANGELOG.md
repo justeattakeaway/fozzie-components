@@ -3,6 +3,52 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.3.0
+------------------------------
+*November 8, 2021*
+
+### Added
+- Support for custom link CSS class via `link-class` attribute. Also ensures other `$attrs` are bound to the component not the wrapper.
+
+
+v2.2.0
+------------------------------
+*October 27, 2021*
+
+### Removed
+- `isRouterLink` and `href` props, in favour of deferring to `$attrs`.
+
+
+v2.1.0
+------------------------------
+*October 25, 2021*
+
+### Added
+- Support for `router-link`.
+- `isRouterLink` prop.
+
+### Changed
+- `href` from implicit attribute to (required) prop.
+
+
+v2.0.0
+------------------------------
+*October 5, 2021*
+
+### Changed
+- New colour scheme in line with Icing Phase 2.
+
+### Added
+- `o-link--distinct` prop to change default link colour (dark grey) to blue.
+
+
+v1.0.0
+------------------------------
+*September 16, 2021*
+
+### Removed
+- Normalise styles from the build. Note that now if consuming application doesn't have normalised (reset) styles, there may be some slight style differences after this update. If the consuming application uses fozzie, there shouldn't be any style differences as normalised styles should be added as part of the fozzie import.
+
 
 v0.4.0
 ------------------------------

@@ -3,6 +3,80 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.48.0
+------------------------------
+*December 16, 2021*
+
+### Changed
+- Storybook webpack config to fix CircleCI master builds.
+
+
+v0.47.0
+------------------------------
+*November 03, 2021*
+
+### Added
+- New `log` context item so we can phase out the `logger` one.
+
+
+v0.46.0
+------------------------------
+*October 25, 2021*
+
+### Added
+- `storybook-vue-router` setup to work with `f-link`.
+
+
+v0.45.1
+------------------------------
+*October 22, 2021*
+
+### Changed
+- Enabled expanded version of controls tab to show descriptions and default values of properties.
+- Some css grid classes to be used in stories layout.
+
+
+v0.45.0
+------------------------------
+*October 4, 2021*
+
+### Changed
+- Change the f-analytics mock to match version 0.17.0 of the component
+
+
+v0.44.0
+------------------------------
+*September 12, 2021*
+
+### Added
+- Add $gtm (aka f-analytics) into Context so Mono Repo components can do this.$gtm.pushEvent({ ... }});
+
+
+v0.43.0
+------------------------------
+*August 25, 2021*
+
+### Changed
+- Switched to a new font JetSansDigital
+
+
+v0.42.1
+------------------------------
+*August 24, 2021*
+
+### Changed
+- Css for code snippets in the mdx docs
+
+
+v0.42.0
+------------------------------
+*August 20, 2021*
+
+### Added
+- Visual regression setup and overview guide.
+- Testing section to contributions page.
+
+
 v0.41.0
 ------------------------------
 *August 10, 2021*

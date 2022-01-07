@@ -44,57 +44,73 @@ commands:
               echo 'Root files not changed'
             fi
 
-  # echo_root:
-  #   description: Detects root package.json changes
-  #   steps:
-  #     - run: |
-  #         echo $RUN_ALL
-
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
       - run:
           name: Install node dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+
+  run_command:
+    parameters:
+      command_description:
+        type: string
+      command_name:
+        type: string
+    description: Runs commands based on passed parameters
+    steps:
+      - run:
+          name: << parameters.command_description >>
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn << parameters.command_name >>
+            else
+              yarn << parameters.command_name >> --since master...HEAD
+            fi
+
+
+  save_cache_dist_directories:  
+    description: Saves cache for @justeat namespaced packages (includes /dist)
+    steps:
+      - save_cache:
+          name: Cache for @justeat namespaced packages (includes /dist)
+          key: node-modules-@justeat-cache-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - node_modules/@justeat
+
+
+  restore_cache_dist_directories:
+    description: Restores all @justeat namespaced packages in node_modules (includes /dist)
+    steps:
+      - restore_cache:
+          name: Restores all @justeat namespaced packages in node_modules (includes /dist)
+          keys:
+            - node-modules-@justeat-cache-master-
 
   build_packages:
     description: Locally builds all packages in the monorepo
     steps:
-      - run:
-          name: Build updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn build
-            else
-              yarn build --since origin/master --include-dependencies
-            fi
+      - run_command:
+          command_description: Build packages
+          command_name: build 
 
   lint_packages:
     description: Locally lints all packages in the monorepo
     steps:
-      - run:
-          name: Lint updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn lint
-            else
-              yarn lint --since origin/master
-            fi
+      - run_command:
+          command_description: Run linting for packages
+          command_name: lint
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
+    parameters:
+      component_type:
+        type: string
     steps:
-      - run:
-          name: Run unit / integration tests for updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn test
-            else
-              yarn test --since origin/master
-            fi
+      - run_command:
+          command_description: Run unit / integration tests for packages
+          command_name: "ci:test:<< parameters.component_type >>"
 
   build_storybook:
     description: Build Storybook for UI tests
@@ -111,41 +127,45 @@ commands:
 
   component_tests:
     description: Run Component Tests
+    parameters:
+      component_type:
+        type: string
     steps:
-      - run:
-          name: Run component tests for updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn test-component:chrome
-            else
-              yarn test-component:chrome --since origin/master
-            fi
+      - run_command:
+          command_description: Run component tests for packages
+          command_name: "ci:test-component:chrome:<< parameters.component_type >>"
 
   accessibility_tests:
     description: Run Accessibility Tests
+    parameters:
+      component_type:
+        type: string
     steps:
-      - run:
-          name: Run accessibility tests for updated packages
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn test-a11y:chrome
-            else
-              yarn test-a11y:chrome --since origin/master
-            fi
+      - run_command:
+          command_description: Run accessibility tests for packages
+          command_name: "ci:test-a11y:chrome:<< parameters.component_type >>"
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
+    parameters:
+      component_type:
+        type: string
     steps:
       - run:
-          name: Run Percy visual regression tests for updated packages
+          name: Run Percy visual regression tests for packages
           command: |
-            if [ "${RUN_ALL}" == "true" ];
+            VISUAL_TESTS=`node ./visual-regression-preflight.js`
+
+            if [ "${VISUAL_TESTS}" == "true" ];
             then
-              yarn test:visual
+              if [ "${RUN_ALL}" == "true" ];
+              then
+                yarn ci:test:visual:<< parameters.component_type >>
+              else
+                yarn ci:test:visual:<< parameters.component_type >> --since master...HEAD
+              fi
             else
-              yarn test:visual --since origin/master
+              echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
             fi
 
   slack_notify_fail:
@@ -256,57 +276,106 @@ executors:
   node:
     docker:
       # specify the version you desire here
-      - image: circleci/node:14.17.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/node:14.18.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
 
   working_directory: ~/repo
 
-  build:
+  install:
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
-      - detect_root_change
-      # - echo_root
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+    steps:
+      - checkout
       - install_node_dependencies
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
       - run: # Run PR Checks
-          name: Run PR Checks
-          command: yarn danger ci
+         name: Run PR Checks
+         command: yarn danger ci
+      - persist_to_workspace:
+          root: .
+          paths:
+            - '*'
+      - slack_notify_fail
+      - slack_notify_success
+
+  build:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 2
+    steps:
+      - attach_workspace:
+          at: .
+      - detect_root_change
+      - restore_cache_dist_directories
       - build_packages
+      - save_cache_dist_directories
+      - build_storybook
+      - persist_to_workspace:
+          root: .
+          paths:
+            - '*'
       - lint_packages
-      - unit_integration_tests
+      - slack_notify_fail
+      - slack_notify_success
+
+  bundlewatch:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+         name: Run Bundlewatch checks
+         command: yarn bundlewatch
+      - slack_notify_fail
+      - slack_notify_success
+
+  unit-tests:
+    executor: node
+    parameters:
+      component_type:
+        type: string
+    environment:
+      LERNA_ARGS: --concurrency 2
+    steps:
+      - attach_workspace:
+          at: .
+      - unit_integration_tests:
+          component_type: << parameters.component_type >>
+
+  browser-tests:
+    executor: node
+    parameters:
+      component_type:
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - detect_root_change
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
-      - build_storybook
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
           background: true
-      - component_tests
-      - accessibility_tests
-      - visual_regression_tests
-      - store_artifacts:
-          path: test/results/axe-violations
-      - store_artifacts:
-          path: test/results/allure/failure-videos
-      - store_test_results:
-          path: test/results/ci
+      - component_tests:
+          component_type: << parameters.component_type >>
+      - accessibility_tests:
+          component_type: << parameters.component_type >>
+      - visual_regression_tests:
+          component_type: << parameters.component_type >>
       - run:
-          name: Run Bundlewatch checks
-          command: yarn bundlewatch
+          name: Allure - Generate Test Results
+          command: yarn allure:generate
+          when: always
+      - store_artifacts:
+          path: allure-report
       - slack_notify_fail
       - slack_notify_success
 
@@ -318,12 +387,8 @@ jobs:
       RUN_ALL: true
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
-      - build_packages
+      - restore_cache_dist_directories
       - run:
           name: Deploy
           command: yarn storybook:deploy
@@ -333,13 +398,49 @@ jobs:
 workflows:
   version: 2
 
-  build:
+  build_and_test:
     jobs:
-      - build:
+      - install:
           context: web-core
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore: [ 'gh-pages' ]
+      - build:
+          name: build
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - install
+      - bundlewatch:
+          name: bundlewatch
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build
+      - unit-tests:
+          matrix:
+            parameters:
+              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build
+      - browser-tests:
+          matrix:
+            parameters:
+              component_type: ['atoms', 'molecules', 'organisms', 'pages']
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - unit-tests-<< matrix.component_type >>
 
   deploy-storybook:
     jobs:

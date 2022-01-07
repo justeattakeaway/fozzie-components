@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header computed :: isLoggedIn :: when set to false should render the guest header 1`] = `
+<div data-test-id="guest-checkoutHeader">
+  <h1 data-test-id="user-title">
+    How do you want to continue?
+  </h1>
+  <f-button-stub buttontype="primary" buttonsize="large" isfullwidth="true" actiontype="button" data-test-id="guest-login-button" href="http://localhost/login">
+    Log in or sign up
+  </f-button-stub>
+  <div><span>or</span></div>
+  <h2>
+    Checkout as a guest
+  </h2>
+  <p data-test-id="service-type-confirmation">
+    Please confirm your delivery details
+  </p>
+</div>
+`;
+
+exports[`Header computed :: isLoggedIn :: when set to true should render the authenticated user header 1`] = `
+<div data-test-id="user-checkoutHeader">
+  <h1 data-test-id="user-title">
+    John, confirm your details
+  </h1>
+  <p><a href="http://localhost/login" data-test-id="switch-user-link" class="o-link--bold">
+      Not John? Click here
+    </a></p>
+</div>
+`;

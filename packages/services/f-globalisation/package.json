@@ -20,7 +20,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
@@ -28,9 +28,10 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-globalisation ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit --json"
+    "test": "vue-cli-service test:unit --json",
+    "ci:test:services": "yarn test"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

@@ -1,0 +1,159 @@
+<Meta title="Documentation/Standards/Testing/Visual Regression"/>
+
+# Visual Regression
+
+As mentioned in our [testing standards guide](https://vue.pie.design/?path=/story/documentation-standards-testing-overview--page),
+we use Percy in combination with WebdriverIO to run our visual regression tests.
+These tests allow us to check to ensure our components look the way they are supposed to in supported browsers/viewports.
+
+This guide will help you get these tests created and running after you've created your new component.
+You'll need access to Percy to create a new project to house all the tests relating to the new component.
+If you don't have access to this, please reach out to the testers in the Web Core team for support.
+
+## The Setup
+
+#### 1 - Creating the files and folders
+In your new component's `test` folder, create a new folder called, 'visual'.
+Inside there, create a spec file named `f-your-component-name-here.visual.<mobile/desktop>.spec.js`.
+
+Add `'./test/visual/'` to the list of `modulePathIgnorePatterns` in the component's `jest.config.js`.
+
+#### 2 - Writing tests
+Once you have created your spec file, you can start writing your tests for visual checks.
+Import your component object and create a basic test.
+
+```javascript
+const YourComponentNameHere = require('../../test-utils/component-objects/f-yourComponentNameHere.component');
+
+let yourComponentNameHere = new YourComponentNameHere();
+
+describe('f-your-component-name-here - Mobile Visual Tests', () => {
+    beforeEach(() => {
+        // Arrange
+        yourComponentNameHere = new YourComponentNameHere();
+
+        // Act
+        yourComponentNameHere.load();
+    });
+
+    it('should display default component state', () => {
+        // Assert
+        browser.percyScreenshot('f-your-component-name-here - Base State', 'mobile');
+    });
+});
+```
+
+**Note:** Test assertions must be given unique names as these tests define the names of the screenshots found in Percy.
+We follow the naming convention that allows the state of the component to be easily identifiable by incorporating the Vue prop values.
+
+For example, `f-checkout - Delivery - Guest - Invalid Postcode Error State`
+
+You can refer to other components within the fozzie-components repo for reference as to the types of tests we write,
+and how you can use component object methods to reach different states.
+
+```javascript
+it('should display the mandatory error messages.', ()  => {
+
+	// Act
+	checkout.clearBlurField('mobileNumber');
+	checkout.goToPayment();
+
+	// Assert
+	browser.percyScreenshot('f-checkout - Collection - Authenticated - Mandatory Errors State', 'desktop');
+});
+```
+
+#### 3 - Creating a Percy Project
+The next step is to create a new Percy project to house all your new tests.
+
+Go to [Percy](https://percy.io/recent-project) and log in.
+Click the `Create new project` button, and from this page, enter the name of your new component, e.g. `f-your-component-name-here`.
+
+To link to a repository, enter `justeat/fozzie-components`.
+
+![Creating a new percy project](./percy-new-project.png)
+
+Once this is done, you should be able to see the `PERCY_TOKEN` and add it to your clipboard.
+
+![Where to get your Percy token](./percy-project.png)
+
+
+#### 4 - Adding your environment variables to CircleCI
+Next, go to CircleCI and find the project settings of the `fozzie-components` repo.
+Go to the [environment variables tab](https://app.circleci.com/settings/project/github/justeat/fozzie-components/environment-variables).
+From here you can click 'Add Environment Variable'.
+
+Add your environment variable name in the following format:
+
+Name: `PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE`
+
+Value: `<paste your PERCY_TOKEN here>`
+
+![Adding your Percy token to CircleCI](./percy-circleci-env-var.png)
+
+
+#### 5 - Testing your tests
+After creating your new project, you must define the script that will run your tests.
+To do this, you can add the below line to the 'package.json' file in the root of your new component.
+
+```json
+"test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+```
+
+To run your tests locally, you can go to the Percy project settings, paste the Percy token into your component's 'package.json' file,
+replacing where it says `${PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE}`.
+
+Once saved, you can run the tests locally with `yarn test:visual` from your component's root directory.
+
+Make sure you have storybook running locally with `yarn storybook:serve`,
+and have updated the version of the `chromedriver` npm package in the root `fozzie-components/package.json`
+to match your local Chrome browser version (probably the newest version).
+
+**Please note: Do not commit or push your changes with the Percy token in the `package.json`. If testing locally, revert your changes to `${PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE}` before committing.**
+
+An alternative method is to add the Percy token as a local environment variable before running the visual test script.
+This removes the risk of checking it into Git, and also prevents the need to modify the script inside `package.json`.
+
+```
+set PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE=<paste your token here>
+```
+
+
+## Approving New Visual Changes
+
+Whenever changes are made to a component, CircleCI will run the Percy checks to look for visual changes when you create a new pull request. If it's the first time a test is run and there isn't a baseline image to compare, it will take these new screenshots as the new baseline image that future changes will be compared against.
+
+When visual changes are detected, Percy will flag this and you will be able to log in to Percy and view these visual changes. We recommend that these visual changes are checked by 2 members of the team to make sure the visual changes are correct before approving.
+
+![View of visual changes](./percy-visual-changes.png)
+
+
+## The Do's and Don'ts
+
+
+### Do's:
+
+* Treat components on a case-by-case basis. Smaller components with lots of variation, like `f-button`, **should** have visual tests to check their many different sizes and colours, for example. Alternatively, components with only one or two variations, such as `f-popover`, would not require these checks, since they are likely already being tested in a parent component. If you are unsure whether a smaller component is already being tested by a parent, you can refer to the Percy `Projects` tab on the dashboard. This gives an overview of the components we have covered.
+
+
+* Create a visual regression test for each state of your component. `f-registration`, for example, would include a test for displaying the component's base state on the initial page load and another for displaying the "mandatory field errors" when the form is left unpopulated, and so on. Creating tests for each state ensures more visual coverage.
+
+
+* Give screenshots unique, descriptive names. For example, a Percy screenshot for an unauthenticated user in `f-checkout` would look like this: `f-checkout - Collection - Guest - Base State', desktop`.
+
+
+* Configure visual tests to only run once system tests in your CI build have passed. By structuring visual tests to be dependent on system tests and placing them towards the bottom of a sequential CI build, we can avoid taking unnecessary screenshots and using our Percy credits.
+
+
+* In situations where we are over the screenshot limit, disable the browsers Firefox and Edge.
+
+
+* If your team uses storybook, for smaller atom components, we recommend containing all variations inside one story. Please see `f-vue-icons` as an example. This allows us to check all variations under one test and helps reduce the number of screenshots required.
+
+
+### Don'ts:
+
+* Add unnecessary duplication. If a variation of the component is already being tested in a parent component, then there is no need to add additional visual tests.
+
+
+* Use `assert` or `expect` in your test. The screenshots act as the assertions.

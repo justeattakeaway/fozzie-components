@@ -57,7 +57,6 @@
 import { mapState, mapActions } from 'vuex';
 import debounce from 'lodash.debounce';
 import ErrorMessage from '@justeat/f-error-message';
-import '@justeat/f-error-message/dist/f-error-message.css';
 import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
@@ -328,8 +327,6 @@ export default {
 
             if (this.isValid === true) {
                 this.setErrors([]);
-                this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
-                onCustomSubmit(this.onSubmit, this.addressValue, e);
                 this.verifyHasPostcodeChanged();
 
                 if (this.service.isAutocompleteEnabled) {
@@ -339,6 +336,7 @@ export default {
 
                     // if the address is still missing fields, return here
                     if (!info) {
+                        this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                         return false;
                     }
 
@@ -356,7 +354,10 @@ export default {
                     processLocationCookie(this.shouldSetCookies, this.addressValue);
                 }
 
+                onCustomSubmit(this.onSubmit, this.addressValue, e);
+
                 this.$emit(SUBMIT_VALID_ADDRESS);
+                this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
             } else {
                 e.preventDefault();
                 this.setErrors(this.isValid);

@@ -1,0 +1,25 @@
+{
+    "Preferences": [{
+        "DisplayName": "Order status",
+        "Sort": 1,
+        "Key": "orderstatus",
+        "Push": false,
+        "Email": true,
+        "Sms": true
+    }, {
+        "DisplayName": "Review meal",
+        "Sort": 2,
+        "Key": "reviewmeal",
+        "Push": false,
+        "Email": false,
+        "Sms": false
+    }, {
+        "DisplayName": "News & offers",
+        "Sort": 3,
+        "Key": "news",
+        "Push": false,
+        "Email": false,
+        "Sms": false
+    }],
+    "PreferenceVersionViewed": 0
+}

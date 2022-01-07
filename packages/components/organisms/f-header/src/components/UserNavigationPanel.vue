@@ -7,7 +7,7 @@
             :key="index"
             data-test-id="nav-links">
             <a
-                :tabindex="isOpen ? 0 : -1"
+                :tabindex="tabIndex"
                 :href="link.url"
                 :data-trak='`{
                     "trakEvent": "click",
@@ -23,8 +23,7 @@
         </li>
 
         <li
-            v-if="!isBelowMid"
-            data-test-id="logout">
+            v-if="!isBelowMid">
             <a
                 :tabindex="isOpen ? 0 : -1"
                 :href="returnLogoutUrl"
@@ -34,6 +33,7 @@
                     "action": "header",
                     "label": "${copy.accountLogout.gtm}"
                 }`'
+                data-test-id="logout-link"
                 :class="$style['list-link']"
                 @blur="$emit('deactivateNav')"
                 @focus="$emit('activateNav')">
@@ -61,6 +61,17 @@ export default {
         returnLogoutUrl: {
             type: String,
             default: ''
+        },
+        isCountrySelectorClosedOnMobileView: {
+            type: Boolean,
+            default: true
+        }
+    },
+    computed: {
+        tabIndex () {
+            if (this.isBelowMid && this.isOpen && !this.isCountrySelectorClosedOnMobileView) return -1;
+            if (!this.isOpen) return -1;
+            return 0;
         }
     }
 };

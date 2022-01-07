@@ -1,18 +1,22 @@
 <template>
     <span>
-        <a
+        <component
+            :is="linkType"
             :class="[
+                linkClass,
                 $style['o-link'], {
                     [$style['o-link--bold']]: isBold,
                     [$style['o-link--noDecoration']]: !hasTextDecoration,
                     [$style['o-link--full']]: isFullWidth,
-                    [$style['o-link--noBreak']]: noLineBreak
+                    [$style['o-link--noBreak']]: noLineBreak,
+                    [$style['o-link--distinct']]: isDistinct
                 }]"
             data-test-id="link-component"
             :aria-describedby="descriptionId"
-            v-bind="$attrs">
+            v-bind="bindAttrs()"
+        >
             <slot />
-        </a>
+        </component>
         <span
             v-if="ariaDescription"
             :id="descriptionId"
@@ -30,6 +34,8 @@ let uid = 0;
 
 export default {
     name: 'VLink',
+
+    inheritAttrs: false,
 
     props: {
         isExternalSite: {
@@ -55,18 +61,23 @@ export default {
         noLineBreak: {
             type: Boolean,
             default: false
+        },
+
+        isDistinct: {
+            type: Boolean,
+            default: false
         }
     },
 
     data () {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-
         uid += 1;
 
         return {
             copy: { ...localeConfig },
-            uid: `link-${uid}-description`
+            uid: `link-${uid}-description`,
+            linkClass: ''
         };
     },
 
@@ -91,6 +102,28 @@ export default {
 
         descriptionId () {
             return this.ariaDescription ? this.uid : null;
+        },
+
+        linkType () {
+            if (this.$attrs.href) {
+                return 'a';
+            }
+            if (this.$attrs.to) {
+                return 'router-link';
+            }
+            return 'a';
+        }
+    },
+
+    methods: {
+        /**
+         * Set data.linkClass attribute and bind all other $attrs to the component.
+         * linkClass added manually to nested component as inheritAttrs: false does not affect class bindings.
+         */
+        bindAttrs () {
+            const { 'link-class': linkClass = '', ...otherAttributes } = this.$attrs;
+            this.linkClass = linkClass;
+            return otherAttributes;
         }
     }
 };
@@ -134,5 +167,18 @@ export default {
 
 .o-link--noBreak {
     white-space: nowrap;
+}
+
+.o-link--distinct {
+    color: $color-content-link-distinct;
+
+    &:hover,
+    &:focus {
+        color: darken($color-content-link-distinct, $color-hover-01);
+    }
+
+    &:active {
+        color: darken($color-content-link-distinct, $color-active-01);
+    }
 }
 </style>

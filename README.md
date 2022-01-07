@@ -72,6 +72,11 @@ OR
 ```bash
 # Run Component tests for individual f-* package
 # Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components
+yarn storybook:build
+yarn storybook:serve-static
+
+# And in another window
 cd ./fozzie-components/packages/f-*user-message*
 yarn test-component:chrome
 ```

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivationSuccessful should be rendered correctly 1`] = `
+<div data-test-id="activation-successful-component" locale="en-GB">
+  <bag-celebrate-bg-icon-stub></bag-celebrate-bg-icon-stub>
+  <h1>
+    All systems go.
+  </h1>
+  <p>
+    Just Eat Pay is now activated on your account.
+  </p>
+  <div>
+    <f-button-stub buttontype="primary" buttonsize="large" isfullwidth="true" actiontype="button" href="/home" data-test-id="takeawaypay-activation-home-link">
+      Start ordering
+    </f-button-stub>
+  </div>
+</div>
+`;

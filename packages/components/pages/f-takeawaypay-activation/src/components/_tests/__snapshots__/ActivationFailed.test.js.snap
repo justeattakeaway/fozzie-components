@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivationFailed should be rendered correctly 1`] = `
+<div data-test-id="activation-failed-component" locale="en-GB">
+  <bag-sad-bg-icon-stub></bag-sad-bg-icon-stub>
+  <h1>
+    We can’t activate Just Eat Pay on your account right now, sorry.
+  </h1>
+  <p>
+    Try again or get in touch with your Just Eat Pay administrator for help.
+  </p>
+</div>
+`;

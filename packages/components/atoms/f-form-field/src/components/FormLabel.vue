@@ -4,6 +4,7 @@
         :id="`label-${labelFor}`"
         :for="labelFor"
         :class="[
+            'c-formField-label',
             $style['o-form-label'],
             $style['c-formField-label'], {
                 [$style['c-formField-label--disabled']]: isDisabled
@@ -22,8 +23,7 @@
             v-if="labelDescription"
             :data-test-id="testId.description"
             :class="[
-                'u-spacingTop',
-                'u-spacingBottom--large',
+                'c-formField-label-description',
                 $style['c-formField-label-description']
             ]">
             {{ labelDescription }}
@@ -59,7 +59,7 @@ export default {
     },
     computed: {
         hasLabelText () {
-            return this.$slots.default && !!this.$slots.default[0].text.length;
+            return this.$slots.default && !!this.$slots.default[0].text?.length;
         },
 
         testId () {
@@ -93,16 +93,20 @@ $form-label-weight              : $font-weight-bold;
     pointer-events: none;
 }
 
-.c-formField-label-details {
+.c-formField-label-details,
+.c-formField-label-description {
     font-weight: $font-weight-regular;
     color: $form-input-secondaryTextColour;
+}
+
+.c-formField-label-details {
     position: absolute;
     right: 0;
 }
 
-
 .c-formField-label-description {
     display: block;
-    font-weight: normal;
+    margin-top: spacing();
+    margin-bottom: spacing(x2);
 }
 </style>

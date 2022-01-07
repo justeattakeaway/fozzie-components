@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-error-message",
   "description": "Fozzie Error Message – Generic inline error message",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "main": "dist/f-error-message.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -20,7 +20,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "keywords": [
     "fozzie"
@@ -32,8 +32,11 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "ci:test:atoms": "yarn test",
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "ci:test-component:chrome:atoms": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:atoms": "yarn test-a11y:chrome"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -50,7 +53,7 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.3.0",
+    "@justeat/f-wdio-utils": "0.5.0",
     "node-sass-magic-importer": "5.3.2"
   }
 }
