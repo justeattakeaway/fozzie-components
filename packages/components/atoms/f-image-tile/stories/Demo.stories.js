@@ -32,7 +32,7 @@ DemoImageTileComponent.argTypes = {
     cuisineImage: {
         control: { type: 'text' },
         description: 'Cuisine image link',
-        defaultValue: 'https://via.placeholder.com/150'
+        defaultValue: ''
     },
     cuisineId: {
         control: { type: 'text' },

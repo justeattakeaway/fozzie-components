@@ -26,7 +26,7 @@ export default {
         },
         cuisineImage: {
             type: String,
-            default: 'https://via.placeholder.com/150'
+            default: ''
         }
     },
     data () {
@@ -46,6 +46,5 @@ export default {
     .c-testContainer {
         width: 200px;
         margin: auto;
-        background-color: pink;
     }
 </style>

@@ -29,11 +29,15 @@
                 }]"
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label">
-            <img
-                :class="$style['c-imageTile-image']"
-                :src="imgSrc"
-                data-test-id="image-tile-image"
-                alt="">
+            <span :class="$style['c-imageTile-imageContainer']">
+                <img
+                    v-if="imgSrc"
+                    :class="$style['c-imageTile-image']"
+                    :src="imgSrc"
+                    data-test-id="image-tile-image"
+                    :alt="altText"
+                    :role="addPresentationRole ? 'presentation' : false">
+            </span>
             <span :aria-hidden="isLink">
                 {{ displayText }}
             </span>
@@ -69,13 +73,22 @@ export default {
         },
         imgSrc: {
             type: String,
-            default: null
+            default: ''
+        },
+        altText: {
+            type: String,
+            default: ''
         }
     },
     data () {
         return {
             isToggleSelected: false
         };
+    },
+    computed: {
+        addPresentationRole () {
+            return this.altText === '';
+        }
     },
     watch: {
         isSelected (newValue) {
@@ -147,8 +160,25 @@ export default {
   border: 1px solid green;
 }
 
+.c-imageTile-imageContainer {
+  display: block;
+  position: relative;
+  border-radius: $radius-rounded-b;
+  background-color: rgba(255,128,0,0.7);
+  padding-top: (61 / 102) * 100%;
+  background-image: url(https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png);
+}
+
 .c-imageTile-image {
-    display: block;
+    border-radius: $radius-rounded-b;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 </style>
+
