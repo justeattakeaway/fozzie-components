@@ -29,7 +29,7 @@ import FButton from '@justeat/f-button';
 import FormField from '@justeat/f-form-field';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
-import { PROP_VALIDATION_MESSAGES } from '../constants';
+import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';
 
 export default {
     components: {
@@ -70,7 +70,7 @@ export default {
         },
 
         buttonText () {
-            return this.formData.buttonText || 'Submit';
+            return this.formData.buttonText || DEFAULT_BUTTON_TEXT;
         }
     },
 
@@ -85,11 +85,11 @@ export default {
 
     methods: {
         updateField ({ fieldName, value }) {
-            return this.$emit('updated', { fieldName, value });
+            return this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
         },
 
         onFormSubmit () {
-            this.$emit('form-submitting');
+            this.$emit(FORM_EVENTS.submitting);
         },
 
         fieldProps (field) {
