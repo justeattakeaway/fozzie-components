@@ -579,6 +579,43 @@ describe('FormField', () => {
                 expect(formLabel.exists()).toBe(false);
             });
         });
+
+        describe('uniqueId ::', () => {
+            it('should contain name when given', () => {
+                // Arrange & Act
+                const name = 'test-name';
+                const wrapper = mount(FormField, {
+                    attrs: { name }
+                });
+
+                // Assert
+                expect(wrapper.vm.uniqueId).toContain(name);
+            });
+
+            it('should contain id when given', () => {
+                // Arrange & Act
+                const id = 'test-id';
+                const wrapper = mount(FormField, {
+                    attrs: { id }
+                });
+
+                // Assert
+                expect(wrapper.vm.uniqueId).toContain(id);
+            });
+
+            it('should contain both name and id when given', () => {
+                // Arrange & Act
+                const id = 'test-id';
+                const name = 'test-name';
+                const wrapper = mount(FormField, {
+                    attrs: { id, name }
+                });
+
+                // Assert
+                expect(wrapper.vm.uniqueId).toContain(id);
+                expect(wrapper.vm.uniqueId).toContain(name);
+            });
+        });
     });
 
     describe('attrs ::', () => {
