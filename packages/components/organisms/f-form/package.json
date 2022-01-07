@@ -34,7 +34,11 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:organisms": "yarn test",
+    "ci:test-component:chrome:organisms": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:organisms": "yarn test-a11y:chrome",
+    "ci:test:visual:organisms": "yarn test:visual"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
