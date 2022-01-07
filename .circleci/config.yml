@@ -537,4 +537,4 @@ workflows:
           context: web-core
           filters:
             branches:
-              only: storybook-deploy-fix-2
+              only: master
