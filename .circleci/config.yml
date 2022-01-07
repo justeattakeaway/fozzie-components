@@ -408,14 +408,14 @@ workflows:
           filters:
             branches:
               ignore: [ 'gh-pages' ]
-      - build:
-          name: build
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - install
+      # - build:
+      #     name: build
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore: ['gh-pages']
+      #     requires:
+      #       - install
       # - bundlewatch:
       #     name: bundlewatch
       #     context: web-core
