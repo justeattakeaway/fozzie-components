@@ -18,7 +18,7 @@
             action-type="submit"
             data-test-id="submit-button"
             :is-loading="isFormSubmitting">
-            {{ formData.buttonText }}
+            {{ buttonText }}
         </f-button>
     </form>
 </template>
@@ -29,6 +29,7 @@ import FButton from '@justeat/f-button';
 import FormField from '@justeat/f-form-field';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
+import { PROP_VALIDATION_MESSAGES } from '../constants';
 
 export default {
     components: {
@@ -66,6 +67,19 @@ export default {
             });
 
             return formFields;
+        },
+
+        buttonText () {
+            return this.formData.buttonText || 'Submit';
+        }
+    },
+
+    watch: {
+        $props: {
+            immediate: true,
+            handler () {
+                this.formDataValidator();
+            }
         }
     },
 
@@ -81,11 +95,30 @@ export default {
         fieldProps (field) {
             return {
                 name: field.name,
-                value: field.value,
-                'label-text': field.translations?.label,
-                'input-type': field.inputType,
-                'max-length': field.maxLength || null
+                value: field.value || '',
+                'label-text': field.translations?.label
             };
+        },
+
+        formDataValidator () {
+            if (!this.formData.formFields) {
+                throw new TypeError(PROP_VALIDATION_MESSAGES.requiredFormFields);
+            }
+            if (!Array.isArray(this.formData.formFields)) {
+                throw new TypeError(PROP_VALIDATION_MESSAGES.invalidFormFields);
+            }
+
+            this.formData.formFields.forEach(field => {
+                if (!field.name) {
+                    throw new TypeError(PROP_VALIDATION_MESSAGES.requiredNameProperty);
+                }
+                if (!field.translations) {
+                    throw new TypeError(PROP_VALIDATION_MESSAGES.requiredTranslationsProperty);
+                }
+                if (!field.translations.label) {
+                    throw new TypeError(PROP_VALIDATION_MESSAGES.requiredLabelProperty);
+                }
+            });
         }
     }
 };

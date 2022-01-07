@@ -44,8 +44,8 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "@justeat/f-button": "3.x.x",
-    "@justeat/f-form-field": "4.x.x"
+    "@justeat/f-button": "3.x",
+    "@justeat/f-form-field": "4.x"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.5.0",
