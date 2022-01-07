@@ -32,6 +32,13 @@ npm install @justeat/f-form
 ```
 
 
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency     | Command to install                   | Styles to include                                       |
+| -----          | -----                                | -----                                                   |
+| f-button       | `yarn add @justeat/f-button`         | `import '@justeat/f-button/dist/f-button.css';`         |
+| f-form-field   | `yarn add @justeat/f-form-field`     | `import '@justeat/f-form-field/dist/f-form-field.css';` |
+
 
 ### Vue Applications
 
