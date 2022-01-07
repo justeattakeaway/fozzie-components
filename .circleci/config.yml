@@ -75,7 +75,7 @@ commands:
     steps:
       - save_cache:
           name: Cache for @justeat namespaced packages (includes /dist)
-          key: node-modules-@justeat-cache-{{ .Branch }}-{{ .Revision }}
+          key: node-modules-@justeat-cache-{{ .Branch }}
           paths:
             - node_modules/@justeat
 
@@ -86,7 +86,7 @@ commands:
       - restore_cache:
           name: Restores all @justeat namespaced packages in node_modules (includes /dist)
           keys:
-            - node-modules-@justeat-cache-master-
+            - node-modules-@justeat-cache-master
 
   build_packages:
     description: Locally builds all packages in the monorepo
