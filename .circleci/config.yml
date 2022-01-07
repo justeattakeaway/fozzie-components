@@ -311,7 +311,7 @@ jobs:
       - detect_root_change
       - restore_cache_dist_directories
       - store_artifacts:
-          path: node_modules/@justeat
+          path: node_modules/@justeat/f-popover
       # - build_packages
       # - save_cache_dist_directories
       # - build_storybook
