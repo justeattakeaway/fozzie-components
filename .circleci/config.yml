@@ -310,16 +310,18 @@ jobs:
           at: .
       - detect_root_change
       - restore_cache_dist_directories
-      - build_packages
-      - save_cache_dist_directories
-      - build_storybook
-      - persist_to_workspace:
-          root: .
-          paths:
-            - '*'
-      - lint_packages
-      - slack_notify_fail
-      - slack_notify_success
+      - store_artifacts:
+          path: node_modules/@justeat
+      # - build_packages
+      # - save_cache_dist_directories
+      # - build_storybook
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - '*'
+      # - lint_packages
+      # - slack_notify_fail
+      # - slack_notify_success
 
   bundlewatch:
     executor: node
@@ -413,34 +415,34 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - install
-      - bundlewatch:
-          name: bundlewatch
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - build
-      - unit-tests:
-          matrix:
-            parameters:
-              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - build
-      - browser-tests:
-          matrix:
-            parameters:
-              component_type: ['atoms', 'molecules', 'organisms', 'pages']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - unit-tests-<< matrix.component_type >>
+      # - bundlewatch:
+      #     name: bundlewatch
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore: ['gh-pages']
+      #     requires:
+      #       - build
+      # - unit-tests:
+      #     matrix:
+      #       parameters:
+      #         component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore: ['gh-pages']
+      #     requires:
+      #       - build
+      # - browser-tests:
+      #     matrix:
+      #       parameters:
+      #         component_type: ['atoms', 'molecules', 'organisms', 'pages']
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore: ['gh-pages']
+      #     requires:
+      #       - unit-tests-<< matrix.component_type >>
 
   deploy-storybook:
     jobs:
