@@ -448,4 +448,4 @@ workflows:
           context: web-core
           filters:
             branches:
-              only: master
+              only: storybook-deploy-fix-2
