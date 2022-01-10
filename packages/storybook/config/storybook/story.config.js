@@ -28,6 +28,14 @@ const getStoryFiles = () => {
         return [process.env.CURRENT_STORY_FILE];
     }
 
+    console.log(process.env.CI_SCOPE);
+
+    if (process.env.CI_STORY_PATH) {
+        return [
+            process.env.CI_STORY_PATH
+        ];
+    }
+
     // Executed if the storybook:serve-changed script is executed by CircleCI.
     if (process.env.CHANGED_ONLY) {
         return getChangedPackageStories();

@@ -187,6 +187,7 @@ jobs:
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
+      CI_STORY_PATH: << parameters.story_path >>
     steps:
       - attach_workspace:
           at: .
