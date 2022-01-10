@@ -331,7 +331,7 @@ do
               ignore: [ 'gh-pages' ]
           scope: '$name'
           run_all: $run_all
-          story_path: $story_path
+          story_path: '$story_path'
           requires:
             - build-${res/\//-}
 
