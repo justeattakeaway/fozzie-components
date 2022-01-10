@@ -187,7 +187,6 @@ jobs:
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
-      CI_STORY_PATH: << parameters.story_path >>
     steps:
       - attach_workspace:
           at: .
@@ -239,16 +238,23 @@ jobs:
   browser_tests:
     executor: node
     parameters:
+      story_path:
+        type: string
       scope:
         type: string
       run_all:
         type: boolean
     environment:
       LERNA_ARGS: --concurrency 1 --scope << parameters.scope >>
+      CI_STORY_PATH: << parameters.story_path >>
     steps:
       - attach_workspace:
           at: .
-      - run: # Serve Storybook
+      - run:
+          name: Build Storybook
+          command: yarn storybook:build
+          background: true
+      - run:
           name: Serve Storybook
           command: yarn storybook:serve-static
           background: true
@@ -312,6 +318,7 @@ do
       name=$(echo "${package}" | jq -r '.name')
       location=$(echo "${package}" | jq -r '.location')
       path_for_ci=$(echo "${location}" | sed 's/^.*packages/packages/')
+      story_path="${path_for_ci}/stories/**/*.stories.@(js|mdx)"
 
       res=${name/@/}
       cat<<YAML
@@ -324,8 +331,8 @@ do
               ignore: [ 'gh-pages' ]
           scope: '$name'
           run_all: $run_all
+          story_path: $story_path
           requires:
-            - build-justeat-storybook
             - build-${res/\//-}
 
       - lint:

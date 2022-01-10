@@ -28,7 +28,7 @@ const getStoryFiles = () => {
         return [process.env.CURRENT_STORY_FILE];
     }
 
-    console.log(process.env.CI_SCOPE);
+    console.log(process.env.CI_STORY_PATH);
 
     if (process.env.CI_STORY_PATH) {
         return [
