@@ -139,14 +139,16 @@ commands:
           key: build-cache-services-{{ .Branch }}-{{ .Revision }}
           paths:
             - packages/services/f-analytics/dist
+            - packages/services/f-braze-adapter/dist
+            - packages/services/f-compatibility/dist
             - packages/services/f-consumer-oidc/dist
             - packages/services/f-development-context/dist
             - packages/services/f-feature-management/dist
             - packages/services/f-globalisation/dist
             - packages/services/f-http/dist
             - packages/services/f-services/dist
+            - packages/services/f-performance/dist
             - packages/services/f-statistics/dist
-            - packages/services/f-compatibility/dist
 
   restore_cache_dist_directories:
     description: Restores all the dist dircetories
