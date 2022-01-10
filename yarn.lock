@@ -2172,18 +2172,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-braze-adapter@3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.5.0.tgz#008b89ab02f72d53b1ef8c464546da8d8df2e852"
-  integrity sha512-YsULFKoxllze/TzRO8G0sXcERcePjtjGq+lMsRnGU9faUxO9KpEFBCjs82bdZZMIYTPUSDpiHKd2Dxhqga3Gdw==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-    date-fns "2.16.1"
-    lodash.findindex "4.6.0"
-    lodash.orderby "4.6.0"
-    lodash.startswith "4.2.1"
-    lodash.uniq "4.5.0"
-
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2221,6 +2209,14 @@
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.0.1.tgz#c6a868d39a3d3361af9e29b44f0d8bc21e30da8d"
   integrity sha512-DSF1NJFKBb/tZDCCUyTGXcnKWC5FvPa9TIcCy0n57OLfQOJ9A53VfxVpRoW8VjlRZu/bl6nYx4kukZq+iHmx5Q==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "2.5.0"
+
+"@justeat/f-form-field@4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.5.0.tgz#931d5d643090c2fce46ecf8302b3333013fb3d7d"
+  integrity sha512-EJLkg0vzxS+BE16mZ2Q2r7bB3jvZd8EFW8jB5GmACSqtsCe0iLLFSfY2cPlDx3oZ1nZMoRse/T2foCrjH5c7dg==
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
@@ -6613,11 +6609,6 @@ app-root-dir@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/app-root-dir/-/app-root-dir-1.0.2.tgz#38187ec2dea7577fff033ffcb12172692ff6e118"
   integrity sha1-OBh+wt6nV3//Az/8sSFyaS/24Rg=
-
-appboy-web-sdk@2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/appboy-web-sdk/-/appboy-web-sdk-2.5.2.tgz#e01ad9fbd744bc48da5bc91a3b3e71493f1a52bd"
-  integrity sha512-Gh5yAgEH/N7Wc3A0Pm8wZNb7uTygdHCB2BiJlI/0HZbJ1iWiA5SjGplTjovPZtrJK22AGcqRp9XVtea3EBYC9w==
 
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
