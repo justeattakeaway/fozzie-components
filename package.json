@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "5.8.3",
+  "version": "5.8.4",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -15,7 +15,7 @@
     "storybook:serve": "lerna run storybook:serve --stream",
     "storybook:serve-changed": "cross-env-shell CHANGED_ONLY=true lerna run storybook:serve --stream",
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
-    "storybook:deploy": "lerna run storybook:deploy",
+    "storybook:deploy": "lerna run storybook:deploy --stream",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
     "ci:test:tools": "cross-env-shell \"lerna run $LERNA_ARGS ci:test:tools --stream\"",
     "ci:test:services": "cross-env-shell \"lerna run $LERNA_ARGS ci:test:services --stream\"",
