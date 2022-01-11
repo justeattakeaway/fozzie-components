@@ -14,7 +14,7 @@ export const i18n = {
 
 const firstNameData = {
     name: 'firstName',
-    value: '',
+    value: 'John',
     translations: {
         label: 'First Name',
         validationMessages: {
@@ -25,7 +25,7 @@ const firstNameData = {
 
 const phoneNumberData = {
     name: 'mobileNumber',
-    value: '',
+    value: '07111111111',
     translations: {
         label: 'Mobile Number',
         validationMessages: {
@@ -37,7 +37,7 @@ const phoneNumberData = {
 
 const postcodeData = {
     name: 'postcode',
-    value: '',
+    value: 'EC1A1BB',
     translations: {
         label: 'Postcode',
         validationMessages: {
@@ -52,14 +52,14 @@ const formData = {
         firstNameData,
         {
             name: 'lastName',
-            value: '',
+            value: 'Johnson',
             translations: {
                 label: 'Last Name'
             }
         },
         {
             name: 'email',
-            value: '',
+            value: 'John.Johnson@gmail.com',
             translations: {
                 label: 'Email Address',
                 validationMessages: {

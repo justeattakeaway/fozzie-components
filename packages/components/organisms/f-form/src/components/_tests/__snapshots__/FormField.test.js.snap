@@ -6,7 +6,7 @@ Object {
   "label-text": "First Name",
   "max-length": null,
   "name": "first-name",
-  "value": "",
+  "value": "John",
 }
 `;
 
@@ -19,7 +19,7 @@ Object {
   "label-text": "First Name",
   "max-length": null,
   "name": "first-name",
-  "value": "",
+  "value": "John",
 }
 `;
 
