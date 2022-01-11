@@ -8,7 +8,6 @@ Latest – to be added to the next release
 ------------------------------
 ### Added
 - component tests into `f-account-info.component.spec`
-- elements and functions into `f-account-info.component.js`
 - test ids into `DeleteAccount.vue` and `EmailAddressField.vue`
 - `vuelidate` and `f-services` package into `package.json` 
 
