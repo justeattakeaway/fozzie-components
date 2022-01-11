@@ -1,5 +1,12 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const { COMPONENT } = require('./f-accountInfo-selectors');
+const {
+    COMPONENT,
+    CHANGE_EMAIL_ADDRESS_LINK,
+    SAVE_CHANGES,
+    CHANGE_PASSWORD,
+    DELETE_ACCOUNT,
+    FIELDS
+} = require('./f-accountInfo-selectors');
 
 module.exports = class AccountInfo extends Page {
     constructor () {
@@ -7,9 +14,57 @@ module.exports = class AccountInfo extends Page {
     }
 
     get component () { return $(COMPONENT); }
+    get changeEmailAddressLink () { return $(CHANGE_EMAIL_ADDRESS_LINK); }
+    get saveChangesButton () { return $(SAVE_CHANGES); }
+    get changePasswordButton () { return $(CHANGE_PASSWORD); }
+    get deleteAccountLink () { return $(DELETE_ACCOUNT); }
+
+    fields = {
+        firstName: {
+            get input () { return $(FIELDS.firstName.input); },
+            get emptyError () { return $(FIELDS.firstName.emptyError); },
+            get invalidError () { return $(FIELDS.firstName.invalidError); }
+        },
+        lastName: {
+            get input () { return $(FIELDS.lastName.input); },
+            get emptyError () { return $(FIELDS.lastName.emptyError); },
+            get invalidError () { return $(FIELDS.lastName.invalidError); }
+        },
+        emailAddress: {
+            get input () { return $(FIELDS.emailAddress.input); }
+        },
+        phoneNumber: {
+            get input () { return $(FIELDS.phoneNumber.input); },
+            get emptyError () { return $(FIELDS.phoneNumber.emptyError); },
+            get invalidError () { return $(FIELDS.phoneNumber.invalidError); }
+        },
+        addressLine1: {
+            get input () { return $(FIELDS.addressLine1.input); },
+            get emptyError () { return $(FIELDS.addressLine1.emptyError); }
+        },
+        addressLine2: {
+            get input () { return $(FIELDS.addressLine2.input); }
+        },
+        addressLine3: {
+            get input () { return $(FIELDS.addressLine3.input); }
+        },
+        city: {
+            get input () { return $(FIELDS.city.input); },
+            get emptyError () { return $(FIELDS.city.emptyError); }
+        },
+        postcode: {
+            get input () { return $(FIELDS.postcode.input); },
+            get emptyError () { return $(FIELDS.postcode.emptyError); },
+            get invalidError () { return $(FIELDS.postcode.invalidError); }
+        }
+    }
 
     load () {
         super.load(this.component);
+    }
+
+    click (field) {
+        this.fields[field].input.click();
     }
 
     waitForComponent () {
@@ -18,5 +73,58 @@ module.exports = class AccountInfo extends Page {
 
     isComponentDisplayed () {
         return this.component.isDisplayed();
+    }
+
+    /**
+    * @description
+    * Select all the text in the field and then performs a backspace to clear the field
+    *
+    * @param {String} fieldName The name of the field input it is clearing
+    */
+    clearBlurField (fieldName) {
+        // Determines the OS
+        const CONTROL = process.platform === 'darwin' ? 'Command' : '\uE009';
+        const el = this.fields[fieldName].input;
+        el.click();
+        el.keys([CONTROL, 'a']);
+        el.keys(['Backspace']);
+    }
+
+    /**
+    * @description
+    * Inputs customer details into the account-info component.
+    *
+    * @param {Object} customerInput customer input details
+    */
+    populateAccountForm (field, customerInput) {
+        this.fields[field].input.setValue(customerInput[field].input);
+    }
+
+    isEmptyErrorMessageDisplayed (fieldName) {
+        return this.fields[fieldName].emptyError.isDisplayed();
+    }
+
+    isInvalidErrorMessageDisplayed (fieldName) {
+        return this.fields[fieldName].invalidError.isDisplayed();
+    }
+
+    emailAddressLinkCanBeClicked () {
+        return this.changeEmailAddressLink.isClickable();
+    }
+
+    saveChangesButtonCanBeClicked () {
+        return this.saveChangesButton.isClickable();
+    }
+
+    changePasswordButtonCanBeClicked () {
+        return this.changePasswordButton.isClickable();
+    }
+
+    deleteAccountLinkCanBeClicked () {
+        return this.deleteAccountLink.isClickable();
+    }
+
+    isDisabled (field) {
+        return this.fields[field].input.isEnabled();
     }
 };

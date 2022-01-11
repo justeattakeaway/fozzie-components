@@ -5,6 +5,7 @@
         <p>{{ $t('deleteAccountMessage') }}</p>
 
         <f-link
+            id="delete-account"
             is-distinct
             href="/account/deactivate"
             target="_blank">

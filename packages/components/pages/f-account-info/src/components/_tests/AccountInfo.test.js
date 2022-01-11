@@ -263,7 +263,7 @@ describe('AccountInfo', () => {
                 ])('should call the Mutation correctly when changing the consumer textbox `%s` to the value `%s`', async (field, newValue) => {
                     // Arrange
                     wrapper = await mountAccountInfo();
-                    const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
+                    const element = wrapper.find(`[name="account-info-consumer-${field}"]`);
 
                     // Act
                     element.vm.$emit('input', newValue);
@@ -282,7 +282,7 @@ describe('AccountInfo', () => {
                     // Arrange
                     wrapper = await mountAccountInfo();
                     await wrapper.setData({ hasFormUpdate: false });
-                    const element = wrapper.find('[data-test-id="account-info-consumer-firstName"]');
+                    const element = wrapper.find('[name="account-info-consumer-firstName"]');
 
                     // Act
                     element.vm.$emit('input', 'harry');
@@ -302,7 +302,7 @@ describe('AccountInfo', () => {
                         // Arrange
                         wrapper = await mountAccountInfo();
 
-                        const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
+                        const element = wrapper.find(`[name="account-info-consumer-${field}"]`);
 
                         // Act
                         element.vm.$emit('input', 'Nice Road');
@@ -321,7 +321,7 @@ describe('AccountInfo', () => {
                         // Arrange
                         wrapper = await mountAccountInfo();
 
-                        const element = wrapper.find(`[data-test-id="account-info-consumer-${field}"]`);
+                        const element = wrapper.find(`[name="account-info-consumer-${field}"]`);
 
                         // Act
                         element.vm.$emit('input', 'Harry Potter');
