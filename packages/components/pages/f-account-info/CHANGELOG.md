@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Latest – to be added to the next release
 ------------------------------
 ### Added
-- component tests into `f-account-info.component.spec`
-- test ids into `DeleteAccount.vue` and `EmailAddressField.vue`
-- `vuelidate` and `f-services` package into `package.json` 
+- component tests in `f-account-info.component.spec`
+- test ids in `DeleteAccount.vue` and `EmailAddressField.vue`
+- `vuelidate` and `f-services` package in `package.json` 
 
 ### Changed
 - component test ids in `AccountInfo.vue`
