@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v5.8.5
+------------------------------
+*January 10, 2022*
+
+### Fixed
+- Small `yarn.lock` update and whitespace fix
+
+
 v5.8.4
 ------------------------------
 *January 07, 2022*

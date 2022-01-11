@@ -12,9 +12,37 @@ export default {
 
 export const VFormComponent = () => ({
     components: { VForm },
-    props: {
+    data () {
+        return {
+            formData: {
+                formFields: [
+                    {
+                        name: 'firstName',
+                        value: '',
+                        translations: {
+                            label: 'First Name'
+                        }
+                    },
+                    {
+                        name: 'lastName',
+                        value: '',
+                        translations: {
+                            label: 'Last Name'
+                        }
+                    },
+                    {
+                        name: 'email',
+                        value: '',
+                        translations: {
+                            label: 'Email Address'
+                        }
+                    }
+                ],
+                buttonText: 'Continue'
+            }
+        };
     },
-    template: '<v-form />'
+    template: '<v-form :form-data="formData"/>'
 });
 
 VFormComponent.storyName = 'f-form';

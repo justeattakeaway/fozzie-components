@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form computed ::  formFields ::  should return an object of \`formData\` keys and field values 1`] = `
+Object {
+  "email": "John.Johnson@gmail.com",
+  "firstName": "John",
+  "lastName": "Johnson",
+}
+`;
