@@ -230,7 +230,7 @@ export default {
                     gtm: 'click_chi_siamo_termini_e_condizioni'
                 },
                 {
-                    url: 'https://secure.ethicspoint.eu/domain/media/it/gui/106834/index.html',
+                    url: 'https://app.convercent.com/it-IT/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296',
                     text: 'Linea diretta per l’Etica',
                     target: '_blank',
                     rel: 'noopener',
