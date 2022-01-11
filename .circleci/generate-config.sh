@@ -318,7 +318,7 @@ do
       name=$(echo "${package}" | jq -r '.name')
       location=$(echo "${package}" | jq -r '.location')
       path_for_ci=$(echo "${location}" | sed 's/^.*packages/packages/')
-      story_path="${path_for_ci}/stories/**/*.stories.@(js|mdx)"
+      story_path="../../../../${path_for_ci}/stories/**/*.stories.@(js|mdx)"
 
       res=${name/@/}
       cat<<YAML
