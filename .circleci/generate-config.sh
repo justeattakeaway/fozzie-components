@@ -4,6 +4,8 @@
 #jq=../node_modules/node-jq/bin/jq
 
 changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+cache_directories=("atoms" "molecules" "organisms" "pages" "templates" "services")
+all_packages=$(lerna ls --json);
 
 if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
   # get all the changed packages since master
@@ -145,6 +147,20 @@ commands:
           command_name: "test-a11y:chrome"
           run_all: << parameters.run_all >>
 
+  restore_build_cache:
+    steps:
+YAML
+  for dir_name in "${cache_directories[@]}"; do
+      cat<<YAML
+      - restore_cache:
+          name: Restore cache for $dir_name
+          keys:
+            - package-cache-${CIRCLE_BRANCH}-${dir_name}-{{ checksum "yarn.lock" }}
+            - package-cache-master-${dir_name}-
+YAML
+done
+cat<<YAML
+
 executors:
   node:
     docker:
@@ -176,6 +192,7 @@ jobs:
           paths:
             - ~/.cache/yarn
             - node_modules
+      - restore_build_cache
       - persist_to_workspace:
           root: .
           paths:
@@ -199,19 +216,6 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-YAML
-for package in $(echo "${changed_packages}" | jq -c '.[]'); do
-      name=$(echo "${package}" | jq -r '.name')
-      res=${name/@/}
-      cat<<YAML
-      - restore_cache:
-          name: Restore cache for $name
-          keys:
-            - package-cache-${CIRCLE_BRANCH}-${res/\//-}
-            - package-cache-master-${res/\//-}
-YAML
-done
-      cat<<YAML
       - bundle_watch
 
   build:
@@ -303,7 +307,27 @@ done
       - accessibility_tests:
           run_all: << parameters.run_all >>
 
+  save_build_cache:
+    executor: node
+    steps:
 YAML
+for dir_name in "${cache_directories[@]}"; do
+      cat<<YAML
+      - save_cache:
+          name: Save cache for $dir_name
+          key: package-cache-${CIRCLE_BRANCH}-${dir_name}-{{ checksum "yarn.lock" }}
+          paths:
+YAML
+
+          for package in $(echo "${all_packages}" | jq -c '.[] | select(.location | contains("'"${dir_name}"'"))'); do
+            location=$(echo "${package}" | jq -r '.location')
+            path_for_ci=$(echo "${location}" | sed 's/^.*packages/packages/')
+            cat<<YAML
+            - $path_for_ci/dist
+YAML
+          done
+
+done
 
 cat<<YAML
 workflows:
@@ -322,7 +346,19 @@ workflows:
               ignore: [ 'gh-pages' ]
           requires:
             - install
+      - save_build_cache:
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          requires:
 YAML
+for package in "${packages_being_built[@]}"
+do
+             res=${package/@/}
+             cat<<YAML
+            - build-${res/\//-}
+YAML
+done
 for package in $(echo "${changed_packages}" | jq -c '.[]')
 do
 
