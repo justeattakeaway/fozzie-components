@@ -3,6 +3,32 @@
 # jq is the json parser
 #jq=../node_modules/node-jq/bin/jq
 
+changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+
+if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
+  # get all the changed packages since master
+  changed_packages=$(lerna ls --json);
+  changed_package_names=($(lerna ls));
+  run_all=true
+else
+  echo 'export RUN_ALL=false' >> $BASH_ENV
+  # get all the changed packages since master
+  changed_packages=$(lerna ls --json --since master...HEAD);
+  changed_package_names=($(lerna ls --since master...HEAD));
+  run_all=false
+fi
+
+packages_being_built=()
+
+for package in $(echo "${changed_packages}" | jq -c '.[]')
+do
+  location=$(echo "${package}" | jq -r '.location')
+  name=$(echo "${package}" | jq -r '.name')
+  if [ "$(cat $location/package.json | jq -c -r '.scripts | has("build")')" == "true" ]; then
+    packages_being_built+=("${name}")
+  fi
+done
+
 cat<<YAML
 version: 2.1
 
@@ -173,12 +199,27 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+YAML
+for package in $(echo "${changed_packages}" | jq -c '.[]'); do
+      name=$(echo "${package}" | jq -r '.name')
+      res=${name/@/}
+      cat<<YAML
+      - restore_cache:
+          name: Restore cache for $name
+          keys:
+            - package-cache-${CIRCLE_BRANCH}-${res/\//-}
+            - package-cache-master-${res/\//-}
+YAML
+done
+      cat<<YAML
       - bundle_watch
 
   build:
     executor: node
     parameters:
       path:
+        type: string
+      cache_key:
         type: string
       scope:
         type: string
@@ -194,7 +235,7 @@ jobs:
           run_all: << parameters.run_all >>
       - save_cache:
           name: Save << parameters.scope >>'s dist folder
-          key: << parameters.scope >>-{{ checksum "<< parameters.path >>/package.json" }}
+          key: << parameters.cache_key >>-{{CIRCLE_BRANCH}}-{{ checksum "<< parameters.path >>/package.json" }}
           paths:
             - << parameters.path >>/dist
       - persist_to_workspace:
@@ -264,23 +305,6 @@ jobs:
 
 YAML
 
-changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
-
-if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
-  # get all the changed packages since master
-  changed_packages=$(lerna ls --json);
-  changed_package_names=($(lerna ls));
-  run_all=true
-else
-  echo 'export RUN_ALL=false' >> $BASH_ENV
-  # get all the changed packages since master
-  changed_packages=$(lerna ls --json --since master...HEAD);
-  changed_package_names=($(lerna ls --since master...HEAD));
-  run_all=false
-fi
-
-
-
 cat<<YAML
 workflows:
   version: 2
@@ -298,28 +322,20 @@ workflows:
               ignore: [ 'gh-pages' ]
           requires:
             - install
-      - bundle_size_check:
-          filters:
-            branches:
-              ignore: [ 'gh-pages' ]
-          requires:
 YAML
-for package in $(echo "${changed_packages}" | jq -c '.[]'); do
-      name=$(echo "${package}" | jq -r '.name')
-      res=${name/@/}
-            cat<<YAML
-            - build-${res/\//-}
-YAML
-done
 for package in $(echo "${changed_packages}" | jq -c '.[]')
 do
 
-      name=$(echo "${package}" | jq -r '.name')
-      location=$(echo "${package}" | jq -r '.location')
-      path_for_ci=$(echo "${location}" | sed 's/^.*packages/packages/')
-      story_path="../../../../${path_for_ci}/stories/**/*.stories.@(js|mdx)"
+  name=$(echo "${package}" | jq -r '.name')
+  location=$(echo "${package}" | jq -r '.location')
+  path_for_ci=$(echo "${location}" | sed 's/^.*packages/packages/')
+  story_path="../../../../${path_for_ci}/stories/**/*.stories.@(js|mdx)"
 
-      res=${name/@/}
+  res=${name/@/}
+
+  if [ "$(cat $location/package.json | jq -c -r '.scripts | has("build")')" == "true" ]; then
+
+    if [ "$(cat $location/package.json | jq -c -r '.scripts | has("test-component:chrome")')" == "true" ]; then
       cat<<YAML
 
       - browser_tests:
@@ -333,6 +349,11 @@ do
           story_path: '$story_path'
           requires:
             - build-${res/\//-}
+YAML
+    fi
+
+     if [ "$(cat $location/package.json | jq -c -r '.scripts | has("lint")')" == "true" ]; then
+      cat<<YAML
 
       - lint:
           name: lint-${res/\//-}
@@ -344,6 +365,11 @@ do
           run_all: $run_all
           requires:
             - build-${res/\//-}
+YAML
+    fi
+
+    if [ "$(cat $location/package.json | jq -c -r '.scripts | has("test")')" == "true" ]; then
+      cat<<YAML
 
       - unit:
           name: unit-${res/\//-}
@@ -355,6 +381,17 @@ do
           run_all: $run_all
           requires:
             - build-${res/\//-}
+YAML
+    fi
+
+      cat<<YAML
+
+      - bundle_size_check:
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          requires:
+            - build-${res/\//-}
 
       - build:
           name: build-${res/\//-}
@@ -363,9 +400,12 @@ do
             branches:
               ignore: [ 'gh-pages' ]
           scope: '$name'
+          cache_key: '${res/\//-}'
           run_all: $run_all
           path: '$path_for_ci'
+
 YAML
+
     # find all the devDependencies that this package relies on that are just eat so we can build in the correct order
     devDependencies=(`cat $location/package.json | jq -c -r ".devDependencies | keys[]" | grep '@justeat'`)
 
@@ -374,14 +414,14 @@ YAML
 
     buildFirstDevDependencies=($(
         for item in "${devDependencies[@]}"; do
-            [[ ${changed_package_names[*]} =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] \
+            [[ ${packages_being_built[*]} =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] \
                     && echo "$item"
         done
     ))
 
     buildFirstDependencies=($(
         for item in "${dependencies[@]}"; do
-            [[ ${changed_package_names[*]} =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] \
+            [[ ${packages_being_built[*]} =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] \
                     && echo "$item"
         done
     ))
@@ -391,6 +431,7 @@ YAML
             - install
 YAML
     for required in "${buildFirstDevDependencies[@]}"; do
+
       res=${required/@/}
             cat<<YAML
             - build-${res/\//-}
@@ -401,7 +442,8 @@ YAML
             cat<<YAML
             - build-${res/\//-}
 YAML
-      done
+    done
+  fi
 done
 
 #echo $changed_packages
