@@ -185,7 +185,7 @@ export default {
                     gtm: 'click_about_cookie_policy'
                 },
                 {
-                    url: 'https://app.convercent.com/en-US/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296',
+                    url: 'https://app.convercent.com/en-IE/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296',
                     text: 'Ethics Hotline',
                     target: '_blank',
                     rel: 'noopener',

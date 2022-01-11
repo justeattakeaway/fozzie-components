@@ -204,7 +204,7 @@ export default {
                     gtm: 'click_sobre_nosotros_terminos_y_condiciones'
                 },
                 {
-                    url: 'https://app.convercent.com/en-US/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296',
+                    url: 'https://app.convercent.com/es-ES/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296',
                     text: 'Linea directa de ética',
                     target: '_blank',
                     rel: 'noopener',
