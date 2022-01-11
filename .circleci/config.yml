@@ -183,7 +183,7 @@ commands:
     steps:
       - run_command:
           command_description: Build packages
-          command_name: build 
+          command_name: build
 
   lint_packages:
     description: Locally lints all packages in the monorepo
