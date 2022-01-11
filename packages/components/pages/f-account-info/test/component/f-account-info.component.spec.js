@@ -18,7 +18,7 @@ describe('f-account-info component tests', () => {
         expect(accountInfo.isComponentDisplayed()).toBe(true);
     });
 
-    it('should detect that the email formfield is disabled and uneditable', () => {
+    it('should show that the email formfield is disabled', () => {
         // Assert
         expect(accountInfo.isDisabled('emailAddress')).toBe(true);
     });
@@ -31,19 +31,19 @@ describe('f-account-info component tests', () => {
         expect(accountInfo.changePasswordButtonCanBeClicked()).toBe(true);
     });
 
-    // to be migrated over to visual regression
+    // to be skipped once migrated into visual regression
 
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
     .it('should display an error message immediately when %s input has been deleted', field => {
         // Act
         accountInfo.clearBlurField(field);
-        accountInfo.component.click();
+        accountInfo.clickOutOfInputField();
 
         // Assert
         expect(accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
     });
 
-    it('should display the illegal first name error message immediately on change', () => {
+    it('should display the illegal first name error message immediately on click', () => {
         // Arrange
         const customerInput = {
             firstName: {
@@ -54,13 +54,13 @@ describe('f-account-info component tests', () => {
         // Act
         accountInfo.clearBlurField('firstName');
         accountInfo.populateAccountForm('firstName', customerInput);
-        accountInfo.component.click();
+        accountInfo.clickOutOfInputField();
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('firstName')).toBe(true);
     });
 
-    it('should display the illegal phone number error message immediately on change', () => {
+    it('should display the illegal phone number error message immediately on click', () => {
         // Arrange
         const customerInput = {
             phoneNumber: {
@@ -71,13 +71,13 @@ describe('f-account-info component tests', () => {
         // Act
         accountInfo.clearBlurField('phoneNumber');
         accountInfo.populateAccountForm('phoneNumber', customerInput);
-        accountInfo.component.click();
+        accountInfo.clickOutOfInputField();
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
     });
 
-    it('should display invalid postcode error message immediately on change', () => {
+    it('should display invalid postcode error message immediately on click', () => {
         // Arrange
         const customerInput = {
             postcode: {
@@ -88,7 +88,7 @@ describe('f-account-info component tests', () => {
         // Act
         accountInfo.clearBlurField('postcode');
         accountInfo.populateAccountForm('postcode', customerInput);
-        accountInfo.component.click();
+        accountInfo.clickOutOfInputField();
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('postcode')).toBe(true);

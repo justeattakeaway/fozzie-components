@@ -100,6 +100,10 @@ module.exports = class AccountInfo extends Page {
         this.fields[field].input.setValue(customerInput[field].input);
     }
 
+    clickOutOfInputField () {
+        this.component.click();
+    }
+
     isEmptyErrorMessageDisplayed (fieldName) {
         return this.fields[fieldName].emptyError.isDisplayed();
     }
