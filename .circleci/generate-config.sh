@@ -253,7 +253,6 @@ jobs:
       - run:
           name: Build Storybook
           command: yarn storybook:build
-          background: true
       - run:
           name: Serve Storybook
           command: yarn storybook:serve-static
