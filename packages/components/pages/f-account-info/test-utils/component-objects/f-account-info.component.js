@@ -14,10 +14,26 @@ module.exports = class AccountInfo extends Page {
     }
 
     get component () { return $(COMPONENT); }
-    get changeEmailAddressLink () { return $(CHANGE_EMAIL_ADDRESS_LINK); }
-    get saveChangesButton () { return $(SAVE_CHANGES_BUTTON); }
-    get changePasswordButton () { return $(CHANGE_PASSWORD_BUTTON); }
-    get deleteAccountLink () { return $(DELETE_ACCOUNT_LINK); }
+
+    LinksAndButtons = {
+        changeEmailAddressLink: {
+            get cta () { return $(CHANGE_EMAIL_ADDRESS_LINK); }
+        },
+        saveChangesButton: {
+            get cta () { return $(SAVE_CHANGES_BUTTON); }
+        },
+        changePasswordButton: {
+            get cta () { return $(CHANGE_PASSWORD_BUTTON); }
+        },
+        deleteAccountLink: {
+            get cta () { return $(DELETE_ACCOUNT_LINK); }
+        }
+    }
+
+    // get changeEmailAddressLink () { return $(CHANGE_EMAIL_ADDRESS_LINK); }
+    // get saveChangesButton () { return $(SAVE_CHANGES_BUTTON); }
+    // get changePasswordButton () { return $(CHANGE_PASSWORD_BUTTON); }
+    // get deleteAccountLink () { return $(DELETE_ACCOUNT_LINK); }
 
     fields = {
         firstName: {
@@ -112,23 +128,11 @@ module.exports = class AccountInfo extends Page {
         return this.fields[fieldName].invalidError.isDisplayed();
     }
 
-    emailAddressLinkCanBeClicked () {
-        return this.changeEmailAddressLink.isClickable();
-    }
-
-    saveChangesButtonCanBeClicked () {
-        return this.saveChangesButton.isClickable();
-    }
-
-    changePasswordButtonCanBeClicked () {
-        return this.changePasswordButton.isClickable();
-    }
-
-    deleteAccountLinkCanBeClicked () {
-        return this.deleteAccountLink.isClickable();
+    canBeClicked (callToActionName) {
+        return this.LinksAndButtons[callToActionName].cta.isClickable();
     }
 
     isDisabled (field) {
-        return this.fields[field].input.isEnabled();
+        return !this.fields[field].input.isEnabled();
     }
 };

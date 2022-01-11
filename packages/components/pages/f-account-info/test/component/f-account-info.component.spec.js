@@ -23,12 +23,10 @@ describe('f-account-info component tests', () => {
         expect(accountInfo.isDisabled('emailAddress')).toBe(true);
     });
 
-    it('should check if all call to actions are clickable', () => {
+    forEach(['changeEmailAddressLink', 'saveChangesButton', 'changePasswordButton', 'deleteAccountLink'])
+    .it('should check if all call to actions are clickable', cta => {
         // Assert
-        expect(accountInfo.deleteAccountLinkCanBeClicked()).toBe(true);
-        expect(accountInfo.emailAddressLinkCanBeClicked()).toBe(true);
-        expect(accountInfo.saveChangesButtonCanBeClicked()).toBe(true);
-        expect(accountInfo.changePasswordButtonCanBeClicked()).toBe(true);
+        expect(accountInfo.canBeClicked(cta)).toBe(true);
     });
 
     // to be skipped once migrated into visual regression
@@ -58,6 +56,23 @@ describe('f-account-info component tests', () => {
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('firstName')).toBe(true);
+    });
+
+    it('should display the illegal last name error message immediately on click', () => {
+        // Arrange
+        const customerInput = {
+            lastName: {
+                input: '123'
+            }
+        };
+
+        // Act
+        accountInfo.clearBlurField('lastName');
+        accountInfo.populateAccountForm('lastName', customerInput);
+        accountInfo.clickOutOfInputField();
+
+        // Assert
+        expect(accountInfo.isInvalidErrorMessageDisplayed('lastName')).toBe(true);
     });
 
     it('should display the illegal phone number error message immediately on click', () => {

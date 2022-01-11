@@ -17,7 +17,7 @@ exports.FIELDS = {
         invalidError: '[data-test-id="consumer-lastName-invalid-error"]'
     },
     emailAddress: {
-        input: '[data-test-id="formfield-account-info-consumer-emailAddress"]'
+        input: '[data-test-id="formfield-account-info-consumer-emailAddress-input"]'
     },
     phoneNumber: {
         input: '[data-test-id="formfield-account-info-consumer-phoneNumber-input"]',
