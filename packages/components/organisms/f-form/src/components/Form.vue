@@ -33,7 +33,6 @@ import {
     required, email
 } from 'vuelidate/lib/validators';
 import FButton from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
 import { validations } from '@justeat/f-services';
 import VueScrollTo from 'vue-scrollto';
 import FormField from './FormField.vue';

@@ -6,6 +6,7 @@
 
 Generic form component for creating basic forms. Can be used to collect data from text inputs.
 
+
 </div>
 
 ---
@@ -19,6 +20,19 @@ Generic form component for creating basic forms. Can be used to collect data fro
 
 ## Usage
 
+The form component is only available for creating basic forms. It can be used to collect data from text inputs.
+
+Fields can have two types of error checks:
+  * **required** if the field is required to submit the form
+  * **invalid** if the field needs to be checked against field type. Existing available validation checks can be added for:
+
+| Type check | Available Tenants |
+| --- | --- |
+| `email` | all |
+| `mobilePhone` | `en-GB`, `es-ES`, `en-AU`, `en-NZ` |
+| `postcode` | `en-GB`, `es-ES`, `en-AU`, `en-NZ` |
+
+To add validation messages, `validationMessages` should be provided via translations for the individual form field. ([to see how click here](#Props))
 ### Installation
 
 Install the module using npm or Yarn:
@@ -78,31 +92,12 @@ To add fields to the form, and text to the form button, a `formData` Object prop
     * **value** - The value of the field. When not set, this defaults to ''.
     * **translations** - an object containing:
         * **label** - the field's displayed text label
- *  **buttonText** - The text displayed on the form's action button
-
-> **Example `formData`**
-```
-formData: {
-    formFields: [
-        {
-            name: 'firstName',
-            value: '',
-            translations: {
-                label: 'First Name'
-            }
-        },
-        {
-            name: 'lastName',
-            value: '',
-            translations: {
-                label: 'Last Name'
-            }
-        }
-        ...
-    ],
-    buttonText: 'Continue'
-}
-```
+        * **validationMessages** - an object that can contain two types of validation messages:
+            * **required** - the validation message that will be displayed if a field is required
+            * **invalid** - the validation message that will be displayed if a field needs to match standard character requirements.
+              > **Currently available invalid field checks**
+                mobileNumber, email, postcode
+ *  **buttonText** - The text displayed on the form's action button, this defaults to 'Submit'.
 
 > **Example `formData`**
 ```

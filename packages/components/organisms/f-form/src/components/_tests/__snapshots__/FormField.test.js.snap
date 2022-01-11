@@ -23,7 +23,7 @@ Object {
 }
 `;
 
-exports[`FormField computed :: translations :: should return translations from with id names 1`] = `
+exports[`FormField computed :: translations :: should return translations for form field 1`] = `
 Object {
   "emptyError": "error-first-name-empty",
   "errorName": "first-name-error",

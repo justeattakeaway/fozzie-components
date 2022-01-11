@@ -49,7 +49,7 @@ describe('FormField', () => {
         });
 
         describe('translations ::', () => {
-            it('should return translations from with id names', () => {
+            it('should return translations for form field', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(FormField, {
                     propsData,
@@ -145,7 +145,7 @@ describe('FormField', () => {
                 expect(wrapper.vm.hasValidationMessages).toEqual(false);
             });
 
-            it('should return false if `translations` do not have `validationMessages', () => {
+            it('should return true if `translations` have `validationMessages', () => {
                 // Arrange & Act
                 translations.validationMessages = validationMessages;
                 jest.spyOn(FormField.computed, 'translations').mockReturnValue(translations);
