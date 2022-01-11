@@ -9,7 +9,7 @@
             :value="emailAddress" />
 
         <f-link
-            id="change-email-address-link"
+            name="account-info-change-email-link"
             is-distinct
             :class="$style['c-accountInfo-customerCareLink']"
             href="/help/article/203097431/how-do-i-manage-my-account"

@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const AccountInfo = require('../../test-utils/component-objects/f-accountInfo.component');
+const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
 let accountInfo;
 

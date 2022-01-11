@@ -2,11 +2,11 @@ const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     COMPONENT,
     CHANGE_EMAIL_ADDRESS_LINK,
-    SAVE_CHANGES,
-    CHANGE_PASSWORD,
-    DELETE_ACCOUNT,
+    SAVE_CHANGES_BUTTON,
+    CHANGE_PASSWORD_BUTTON,
+    DELETE_ACCOUNT_LINK,
     FIELDS
-} = require('./f-accountInfo-selectors');
+} = require('./f-account-info-selectors');
 
 module.exports = class AccountInfo extends Page {
     constructor () {
@@ -15,9 +15,9 @@ module.exports = class AccountInfo extends Page {
 
     get component () { return $(COMPONENT); }
     get changeEmailAddressLink () { return $(CHANGE_EMAIL_ADDRESS_LINK); }
-    get saveChangesButton () { return $(SAVE_CHANGES); }
-    get changePasswordButton () { return $(CHANGE_PASSWORD); }
-    get deleteAccountLink () { return $(DELETE_ACCOUNT); }
+    get saveChangesButton () { return $(SAVE_CHANGES_BUTTON); }
+    get changePasswordButton () { return $(CHANGE_PASSWORD_BUTTON); }
+    get deleteAccountLink () { return $(DELETE_ACCOUNT_LINK); }
 
     fields = {
         firstName: {
