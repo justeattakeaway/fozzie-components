@@ -10,6 +10,7 @@ import {
     postcodeData,
     firstNameData
 } from './helpers';
+import { PROP_VALIDATION_MESSAGES } from '../../constants';
 import VForm from '../Form.vue';
 
 describe('Form', () => {
@@ -29,6 +30,21 @@ describe('Form', () => {
 
         // Assert
         expect(wrapper.exists()).toBe(true);
+    });
+
+    it('should have one form with method "post"', () => {
+        // Arrange
+        const wrapper = shallowMount(VForm, {
+            i18n,
+            localVue,
+            propsData
+        });
+
+        // Act
+        const forms = wrapper.findAll('form');
+
+        // Assert
+        expect(forms.wrappers[0].attributes('method')).toBe('post');
     });
 
     describe('when `formData` prop is incorrect', () => {
@@ -130,21 +146,6 @@ describe('Form', () => {
         });
     });
 
-    it('should have one form with method "post"', () => {
-        // Arrange
-        const wrapper = shallowMount(VForm, {
-            i18n,
-            localVue,
-            propsData
-        });
-
-        // Act
-        const forms = wrapper.findAll('form');
-
-        // Assert
-        expect(forms.wrappers[0].attributes('method')).toBe('post');
-    });
-
     describe('computed :: ', () => {
         describe('formFields :: ', () => {
             it('should return an object of `formData` keys and field values', () => {
@@ -213,14 +214,14 @@ describe('Form', () => {
                     localVue,
                     propsData
                 });
+                const emitSpy = jest.spyOn(wrapper.vm, '$emit');
                 const payload = { fieldName: 'firstName', value: 'Joe' };
 
                 // Act
                 wrapper.vm.updateField(payload);
 
                 // Assert
-                expect(wrapper.emitted('updated').length).toBe(1);
-                expect(wrapper.emitted('updated')[0][0]).toEqual(payload);
+                expect(emitSpy).toHaveBeenCalledWith('updated', payload);
             });
         });
 

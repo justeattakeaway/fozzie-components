@@ -6,7 +6,6 @@
 
 Generic form component for creating basic forms. Can be used to collect data from text inputs.
 
-
 </div>
 
 ---

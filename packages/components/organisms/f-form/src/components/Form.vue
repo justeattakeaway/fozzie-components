@@ -77,9 +77,11 @@ export default {
         formFields () {
             const formFields = {};
 
-            this.formData.formFields.forEach(field => {
-                formFields[field.name] = field.value;
-            });
+            if (this.formData.formFields?.length) {
+                this.formData.formFields.forEach(field => {
+                    formFields[field.name] = field.value;
+                });
+            }
 
             return formFields;
         },

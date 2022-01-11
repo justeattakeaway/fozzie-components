@@ -2,11 +2,11 @@
 
 exports[`Form computed ::  formFields ::  should return an object of \`formData\` keys and field values 1`] = `
 Object {
-  "email": "",
-  "firstName": "",
-  "lastName": "",
-  "mobileNumber": "",
-  "postcode": "",
+  "email": "John.Johnson@gmail.com",
+  "firstName": "John",
+  "lastName": "Johnson",
+  "mobileNumber": "07111111111",
+  "postcode": "EC1A1BB",
 }
 `;
 
@@ -18,10 +18,10 @@ Object {
 
 exports[`Form methods ::  onFormSubmit :: when \`isFormValid\` is true should emit \`FormValid\` event with valid fields 1`] = `
 Object {
-  "email": "",
-  "firstName": "",
-  "lastName": "",
-  "mobileNumber": "",
-  "postcode": "",
+  "email": "John.Johnson@gmail.com",
+  "firstName": "John",
+  "lastName": "Johnson",
+  "mobileNumber": "07111111111",
+  "postcode": "EC1A1BB",
 }
 `;
