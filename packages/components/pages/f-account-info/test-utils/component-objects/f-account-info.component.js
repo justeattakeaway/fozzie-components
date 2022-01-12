@@ -30,11 +30,6 @@ module.exports = class AccountInfo extends Page {
         }
     }
 
-    // get changeEmailAddressLink () { return $(CHANGE_EMAIL_ADDRESS_LINK); }
-    // get saveChangesButton () { return $(SAVE_CHANGES_BUTTON); }
-    // get changePasswordButton () { return $(CHANGE_PASSWORD_BUTTON); }
-    // get deleteAccountLink () { return $(DELETE_ACCOUNT_LINK); }
-
     fields = {
         firstName: {
             get input () { return $(FIELDS.firstName.input); },
