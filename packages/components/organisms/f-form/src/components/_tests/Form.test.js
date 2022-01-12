@@ -1,16 +1,18 @@
 import { shallowMount } from '@vue/test-utils';
 import { validations } from '@justeat/f-services';
-import { PROP_VALIDATION_MESSAGES } from '../../constants';
 import {
     localVue,
     i18n,
-    formData,
-    $v,
-    phoneNumberData,
-    postcodeData,
-    firstNameData
+    $v
 } from './helpers';
-import { PROP_VALIDATION_MESSAGES } from '../../constants';
+import {
+    formData,
+    firstNameData,
+    phoneNumberData,
+    postcodeData
+} from '../../../stories/helpers';
+
+import { FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../../constants';
 import VForm from '../Form.vue';
 
 describe('Form', () => {
@@ -41,10 +43,10 @@ describe('Form', () => {
         });
 
         // Act
-        const forms = wrapper.findAll('form');
+        const form = wrapper.find('form');
 
         // Assert
-        expect(forms.wrappers[0].attributes('method')).toBe('post');
+        expect(form.attributes('method')).toBe('post');
     });
 
     describe('when `formData` prop is incorrect', () => {
@@ -155,6 +157,7 @@ describe('Form', () => {
                     localVue,
                     propsData
                 });
+
                 const result = wrapper.vm.formFields;
 
                 // Assert
@@ -165,18 +168,24 @@ describe('Form', () => {
         describe('invalidFieldsSummary ::', () => {
             let wrapper;
 
-            beforeEach(() => {
-                wrapper = shallowMount(VForm, {
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: { $v }
-                });
+            afterEach(() => {
+                jest.clearAllMocks();
+                jest.restoreAllMocks();
             });
 
             it('should return `null` if no fields have been touched', () => {
                 // Arrange & Act
-                $v.$dirty = false;
+                wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v: {
+                            ...$v,
+                            dirty: false
+                        }
+                    }
+                });
 
                 // Assert
                 expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
@@ -189,15 +198,19 @@ describe('Form', () => {
                 };
 
                 jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
-                $v.dirty = true;
 
                 // Act
                 wrapper = shallowMount(VForm, {
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $v: {
+                            ...$v,
+                            dirty: true
+                        }
+                    }
                 });
-
 
                 // Assert
                 expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
@@ -206,6 +219,10 @@ describe('Form', () => {
     });
 
     describe('methods :: ', () => {
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
         describe('updateField :: ', () => {
             it('should emit `updated` event with fieldName and field value', () => {
                 // Arrange
@@ -214,6 +231,7 @@ describe('Form', () => {
                     localVue,
                     propsData
                 });
+
                 const emitSpy = jest.spyOn(wrapper.vm, '$emit');
                 const payload = { fieldName: 'firstName', value: 'Joe' };
 
@@ -221,11 +239,15 @@ describe('Form', () => {
                 wrapper.vm.updateField(payload);
 
                 // Assert
-                expect(emitSpy).toHaveBeenCalledWith('updated', payload);
+                expect(emitSpy).toHaveBeenCalledWith(FORM_EVENTS.fieldUpdated, payload);
             });
         });
 
         describe('isFormValid ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
             it('should call `.touch()` ', () => {
                 // Act
                 const wrapper = shallowMount(VForm, {
@@ -264,50 +286,46 @@ describe('Form', () => {
         });
 
         describe('onFormSubmit ::', () => {
-            let isFormValidSpy;
-            let scrollToFirstInlineErrorSpy;
             let wrapper;
             let emitSpy;
-
-            beforeEach(() => {
-                isFormValidSpy = jest.spyOn(VForm.methods, 'isFormValid');
-                scrollToFirstInlineErrorSpy = jest.spyOn(VForm.methods, 'scrollToFirstInlineError');
-
-                // Arrange
-                wrapper = shallowMount(VForm, {
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $v
-                    }
-                });
-
-                emitSpy = jest.spyOn(wrapper.vm, '$emit');
-            });
 
             afterEach(() => {
                 jest.clearAllMocks();
             });
 
             it('should emit with `FormSubmitting` event', () => {
+                // Arrange
+                wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                emitSpy = jest.spyOn(wrapper.vm, '$emit');
+
                 // Act
                 wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(emitSpy).toHaveBeenCalledWith('form-submitting');
+                expect(emitSpy).toHaveBeenCalledWith(FORM_EVENTS.submitting);
             });
 
-            describe('when `isFormValid` is true', () => {
+            describe('when `$v.$invalid` is false', () => {
                 beforeEach(() => {
                     // Arrange
-                    isFormValidSpy.mockReturnValue(true);
-
                     wrapper = shallowMount(VForm, {
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $v: {
+                                ...$v,
+                                $invalid: false
+                            }
+                        }
                     });
+
+                    emitSpy = jest.spyOn(wrapper.vm, '$emit');
                 });
 
                 afterEach(() => {
@@ -315,39 +333,67 @@ describe('Form', () => {
                 });
 
                 it('should emit `FormValid` event with valid fields', () => {
+                    // Arrange
+                    const expected = {
+                        email: 'John.Johnson@gmail.com',
+                        firstName: 'John',
+                        lastName: 'Johnson',
+                        mobileNumber: '07111111111',
+                        postcode: 'EC1A1BB'
+                    };
+
                     // Act
                     wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(wrapper.emitted('form-valid').length).toBe(1);
-                    expect(wrapper.emitted('form-valid')[0][0]).toMatchSnapshot();
+                    expect(emitSpy).toHaveBeenCalledWith(FORM_EVENTS.valid, expected);
                 });
             });
 
-            describe('when `isFormValid` is false', () => {
+            describe('when `$v.$invalid` is false', () => {
+                const validationState = {
+                    validFields: [
+                        'formFields.firstName',
+                        'formFields.email',
+                        'formFields.mobileNumber',
+                        'formFields.postcode'
+                    ],
+                    invalidFields: []
+                };
+
+                let scrollToFirstInlineErrorSpy;
+
                 beforeEach(() => {
                     // Arrange
-                    isFormValidSpy.mockReturnValue(false);
+                    jest.spyOn(validations, 'getFormValidationState').mockReturnValue(validationState);
+                    scrollToFirstInlineErrorSpy = jest.spyOn(VForm.methods, 'scrollToFirstInlineError');
 
                     wrapper = shallowMount(VForm, {
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $v: {
+                                ...$v,
+                                $invalid: true
+                            }
+                        }
                     });
+
+                    emitSpy = jest.spyOn(wrapper.vm, '$emit');
                 });
 
                 afterEach(() => {
                     jest.clearAllMocks();
                 });
 
-                it('should call `scrollToFirstInlineError` and emit `FormInvalid` event', () => {
+                it('should call `scrollToFirstInlineError` and emit `FormInvalid` with validation state', () => {
                     // Act
                     wrapper.vm.onFormSubmit();
 
                     // Assert
                     expect(scrollToFirstInlineErrorSpy).toHaveBeenCalled();
-                    expect(wrapper.emitted('form-invalid').length).toBe(1);
-                    expect(wrapper.emitted('form-invalid')[0][0]).toMatchSnapshot();
+                    expect(emitSpy).toHaveBeenCalledWith(FORM_EVENTS.invalid, validationState);
                 });
             });
         });
@@ -415,34 +461,39 @@ describe('Form', () => {
         });
 
         describe('hasValidationMessages ::', () => {
-            it('should return true if passed field has `validationMessages`', () => {
+            it.each([
+                [true, { validationMessages: { required: 'Enter phone Number' } }],
+                [false, null]
+            ])('should return %s if passed field `validationMessages` are %s', (expected, validationMessages) => {
                 // Arrange & Act
                 const wrapper = shallowMount(VForm, {
                     i18n,
                     localVue,
-                    propsData
+                    propsData: {
+                        ...propsData,
+                        formData: {
+                            formFields: [
+                                {
+                                    name: 'firstName',
+                                    value: '',
+                                    translations: {
+                                        label: 'First Name',
+                                        ...validationMessages
+                                    }
+                                }
+                            ]
+                        }
+                    }
                 });
 
                 // Assert
-                expect(wrapper.vm.hasValidationMessages('firstName')).toBeTruthy();
-            });
-
-            it('should return false if passed field does not have `validationMessages`', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(VForm, {
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.hasValidationMessages('lastName')).toBeFalsy();
+                expect(wrapper.vm.hasValidationMessages('firstName')).toBe(expected);
             });
         });
 
         describe('hasInvalidErrorMessage ::', () => {
             it.each([
-                [true, 'Invalid ErrorMessage'],
+                [true, 'Invalid Error Message'],
                 [false, null]
             ])('should return %s if passed field has invalid is %s', (expected, invalidMessage) => {
                 // Arrange & Act

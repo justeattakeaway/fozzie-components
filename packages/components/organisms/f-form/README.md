@@ -6,6 +6,7 @@
 
 Generic form component for creating basic forms. Can be used to collect data from text inputs.
 
+
 </div>
 
 ---
@@ -85,10 +86,10 @@ export default {
 
 ### Props
 
-To add fields to the form, and text to the form button, a `formData` Object prop should be passed in. The `formData` Object should contain:
- * **formFields** - ` Array of objects. Object should include
+To add fields to the form and text to the form button a `formData` Object prop should be passed in. The `formData` Object should contain.
+ * **formFields** - Array of objects. Object should include
     * **name** - The field name that data should be stored under
-    * **value** - The value of the field. When not set, this defaults to ''.
+    * **value** - TThe value of the field. When not set, this defaults to ''.
     * **translations** - an object containing:
         * **label** - the field's displayed text label
         * **validationMessages** - an object that can contain two types of validation messages:

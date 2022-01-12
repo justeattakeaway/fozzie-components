@@ -18,9 +18,8 @@
 
 <script>
 import FormField from '@justeat/f-form-field';
-import '@justeat/f-form-field/dist/f-form-field.css';
 import ErrorMessage from '@justeat/f-error-message';
-import '@justeat/f-error-message/dist/f-error-message.css';
+import { FORM_EVENTS } from '../constants';
 
 export default {
     components: {
@@ -135,7 +134,7 @@ export default {
 
     methods: {
         updateField ({ fieldName, value }) {
-            return this.$emit('updated', { fieldName, value });
+            this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
         },
 
         formFieldBlur () {

@@ -9,19 +9,3 @@ Object {
   "postcode": "EC1A1BB",
 }
 `;
-
-exports[`Form methods ::  onFormSubmit :: when \`isFormValid\` is false should call \`scrollToFirstInlineError\` and emit \`FormInvalid\` event 1`] = `
-Object {
-  "invalidFields": Array [],
-}
-`;
-
-exports[`Form methods ::  onFormSubmit :: when \`isFormValid\` is true should emit \`FormValid\` event with valid fields 1`] = `
-Object {
-  "email": "John.Johnson@gmail.com",
-  "firstName": "John",
-  "lastName": "Johnson",
-  "mobileNumber": "07111111111",
-  "postcode": "EC1A1BB",
-}
-`;

@@ -4,6 +4,14 @@
         :class="$style['c-form']"
         data-test-id="form-component"
         @submit.prevent="onFormSubmit">
+        <section
+            v-if="invalidFieldsSummary"
+            class="is-visuallyHidden"
+            role="alert"
+            data-test-id="error-summary-container">
+            {{ invalidFieldsSummary }}
+        </section>
+
         <form-field
             v-for="field in formData.formFields"
             :key="`${field.name}-field`"
@@ -35,8 +43,8 @@ import {
 import FButton from '@justeat/f-button';
 import { validations } from '@justeat/f-services';
 import VueScrollTo from 'vue-scrollto';
-import FormField from './FormField.vue';
 import tenantConfigs from '../tenants';
+import FormField from './FormField.vue';
 import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';
 
 export default {
@@ -71,6 +79,21 @@ export default {
         return {
             tenantConfigs
         };
+    },
+
+    /*
+    * Provide/Inject allows nested `Address` component to inherit `Checkout`
+    * validator scope, `$v`.
+    */
+    provide () {
+        const $v = {};
+
+        Object.defineProperty($v, 'formFields', {
+            enumerable: true,
+            get: () => this.$v.formFields
+        });
+
+        return { $v };
     },
 
     computed: {
@@ -117,19 +140,19 @@ export default {
         },
 
         updateField ({ fieldName, value }) {
-            return this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
+            this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
         },
 
         onFormSubmit () {
             this.$emit(FORM_EVENTS.submitting);
 
             if (this.isFormValid()) {
-                this.$emit('form-valid', this.formFields);
+                this.$emit(FORM_EVENTS.valid, this.formFields);
             } else {
                 const validationState = validations.getFormValidationState(this.$v);
                 this.scrollToFirstInlineError();
 
-                this.$emit('form-invalid', validationState);
+                this.$emit(FORM_EVENTS.invalid, validationState);
             }
         },
 
@@ -164,6 +187,7 @@ export default {
             this.$nextTick(() => {
                 const scrollingDurationInMilliseconds = 650;
                 const firstInlineError = document.querySelector('[data-js-error-message]');
+
                 if (firstInlineError) {
                     VueScrollTo.scrollTo(firstInlineError, scrollingDurationInMilliseconds, { offset: -100 });
                 }

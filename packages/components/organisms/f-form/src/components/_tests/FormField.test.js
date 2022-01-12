@@ -1,6 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import { firstNameData, $v } from './helpers';
+import { $v } from './helpers';
+import { firstNameData } from '../../../stories/helpers';
 import FormField from '../FormField.vue';
+import { FORM_EVENTS } from '../../constants';
 
 describe('FormField', () => {
     const propsData = {
@@ -121,21 +123,18 @@ describe('FormField', () => {
         });
 
         describe('hasValidationMessages ::', () => {
-            const translations = {};
-            const validationMessages = {
-                invalid: 'Invalid message'
-            };
-
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            it('should return false if `translations` do not have `validationMessages', () => {
+            it('should return false if field does not have `validationMessages', () => {
                 // Arrange & Act
-                jest.spyOn(FormField.computed, 'translations').mockReturnValue(translations);
-
                 const wrapper = shallowMount(FormField, {
-                    propsData,
+                    propsData: {
+                        ...propsData,
+                        fieldData: {
+                            ...firstNameData,
+                            translations: {
+                                label: 'First Name'
+                            }
+                        }
+                    },
                     provide: () => ({
                         $v
                     })
@@ -145,13 +144,21 @@ describe('FormField', () => {
                 expect(wrapper.vm.hasValidationMessages).toEqual(false);
             });
 
-            it('should return true if `translations` have `validationMessages', () => {
+            it('should return true if field has `validationMessages', () => {
                 // Arrange & Act
-                translations.validationMessages = validationMessages;
-                jest.spyOn(FormField.computed, 'translations').mockReturnValue(translations);
-
                 const wrapper = shallowMount(FormField, {
-                    propsData,
+                    propsData: {
+                        ...propsData,
+                        fieldData: {
+                            ...firstNameData,
+                            translations: {
+                                label: 'First Name',
+                                validationMessages: {
+                                    required: 'Enter First Name'
+                                }
+                            }
+                        }
+                    },
                     provide: () => ({
                         $v
                     })
@@ -163,21 +170,17 @@ describe('FormField', () => {
         });
 
         describe('hasInvalidErrorMessage ::', () => {
-            const translations = {};
-            const validationMessages = {
-                invalid: 'Invalid message'
-            };
-
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            it('should return false if `translations` do not have an `invalid` `validationMessages', () => {
-                // Arrange & Act
-                jest.spyOn(FormField.computed, 'translations').mockReturnValue(translations);
-
+            it('should return false if field do not have an `invalid` `validationMessages', () => {
                 const wrapper = shallowMount(FormField, {
-                    propsData,
+                    propsData: {
+                        ...propsData,
+                        fieldData: {
+                            ...firstNameData,
+                            translations: {
+                                label: 'FirstName'
+                            }
+                        }
+                    },
                     provide: () => ({
                         $v
                     })
@@ -187,13 +190,20 @@ describe('FormField', () => {
                 expect(wrapper.vm.hasInvalidErrorMessage).toEqual(false);
             });
 
-            it('should return false if `translations` returns an `invalid` `validationMessages', () => {
-                // Arrange & Act
-                translations.validationMessages = validationMessages;
-                jest.spyOn(FormField.computed, 'translations').mockReturnValue(translations);
-
+            it('should return false if field has an `invalid` `validationMessages', () => {
                 const wrapper = shallowMount(FormField, {
-                    propsData,
+                    propsData: {
+                        ...propsData,
+                        fieldData: {
+                            ...firstNameData,
+                            translations: {
+                                label: 'FirstName',
+                                validationMessages: {
+                                    invalid: 'Enter First Name'
+                                }
+                            }
+                        }
+                    },
                     provide: () => ({
                         $v
                     })
@@ -432,14 +442,15 @@ describe('FormField', () => {
                         $v
                     })
                 });
+
+                const emitSpy = jest.spyOn(wrapper.vm, '$emit');
                 const payload = { fieldName: 'firstName', value: 'Joe' };
 
                 // Act
                 wrapper.vm.updateField(payload);
 
                 // Assert
-                expect(wrapper.emitted('updated').length).toBe(1);
-                expect(wrapper.emitted('updated')[0][0]).toEqual(payload);
+                expect(emitSpy).toHaveBeenCalledWith(FORM_EVENTS.fieldUpdated, payload);
             });
         });
 

@@ -2,76 +2,14 @@ import { createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import tenantConfigs from '../../tenants';
 
-export const localVue = createLocalVue();
+const localVue = createLocalVue();
 localVue.use(VueI18n);
 
-export const i18n = {
+const i18n = {
     locale: 'en-GB',
     messages: {
         'en-GB': tenantConfigs['en-GB'].messages
     }
-};
-
-const firstNameData = {
-    name: 'firstName',
-    value: '',
-    translations: {
-        label: 'First Name',
-        validationMessages: {
-            required: 'Enter First Name'
-        }
-    }
-};
-
-const phoneNumberData = {
-    name: 'mobileNumber',
-    value: '',
-    translations: {
-        label: 'Mobile Number',
-        validationMessages: {
-            required: 'Enter Mobile Number',
-            invalid: 'Enter valid Mobile Number'
-        }
-    }
-};
-
-const postcodeData = {
-    name: 'postcode',
-    value: '',
-    translations: {
-        label: 'Postcode',
-        validationMessages: {
-            required: 'Enter Postcode',
-            invalid: 'Enter valid Postcode'
-        }
-    }
-};
-
-const formData = {
-    formFields: [
-        firstNameData,
-        {
-            name: 'lastName',
-            value: '',
-            translations: {
-                label: 'Last Name'
-            }
-        },
-        {
-            name: 'email',
-            value: '',
-            translations: {
-                label: 'Email Address',
-                validationMessages: {
-                    required: 'Enter Email Address',
-                    invalid: 'Enter valid Email Address'
-                }
-            }
-        },
-        phoneNumberData,
-        postcodeData
-    ],
-    buttonText: 'Continue'
 };
 
 const $v = {
@@ -100,9 +38,7 @@ const $v = {
 };
 
 export {
-    formData,
-    firstNameData,
-    phoneNumberData,
-    postcodeData,
-    $v
+    $v,
+    localVue,
+    i18n
 };
