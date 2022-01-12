@@ -473,7 +473,9 @@ export default {
 
                 await this.lookupGeoLocation();
 
-                await this.handleUpdateCheckout(this.getMappedDataForUpdateCheckout());
+                const updateData = this.getMappedDataForUpdateCheckout();
+                console.log(updateData) //eslint-disable-line
+                await this.handleUpdateCheckout(updateData);
 
                 if (this.isFulfillable) {
                     await this.submitOrder();
@@ -858,7 +860,7 @@ export default {
             this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
-        async getMappedDataForUpdateCheckout () {
+        getMappedDataForUpdateCheckout () {
             return mapUpdateCheckoutRequest({
                 address: this.address,
                 customer: this.customer,
