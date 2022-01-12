@@ -305,6 +305,8 @@ jobs:
   save_build_cache:
     executor: node
     steps:
+      - attach_workspace:
+          at: .
 YAML
 for dir_name in "${cache_directories[@]}"; do
       cat<<YAML
