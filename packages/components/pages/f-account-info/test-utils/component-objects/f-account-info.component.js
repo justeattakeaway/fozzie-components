@@ -74,10 +74,6 @@ module.exports = class AccountInfo extends Page {
         super.load(this.component);
     }
 
-    click (field) {
-        this.fields[field].input.click();
-    }
-
     waitForComponent () {
         super.waitForComponent(this.component);
     }
