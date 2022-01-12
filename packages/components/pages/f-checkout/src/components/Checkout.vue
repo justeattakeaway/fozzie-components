@@ -472,10 +472,7 @@ export default {
                 }
 
                 await this.lookupGeoLocation();
-
-                const updateData = this.getMappedDataForUpdateCheckout();
-                console.log(updateData) //eslint-disable-line
-                await this.handleUpdateCheckout(updateData);
+                await this.handleUpdateCheckout(this.getMappedDataForUpdateCheckout());
 
                 if (this.isFulfillable) {
                     await this.submitOrder();
