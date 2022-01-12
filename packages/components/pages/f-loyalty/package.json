@@ -60,6 +60,7 @@
     "@justeat/f-breadcrumbs": "3.1.0",
     "@justeat/f-tabs": "2.0.0",
     "@justeat/f-button": "3.2.0",
-    "@justeat/f-card": "3.4.0"
+    "@justeat/f-card": "3.4.0",
+    "@justeat/f-content-cards": "6.0.0"
   }
 }

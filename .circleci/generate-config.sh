@@ -419,6 +419,14 @@ YAML
 
       cat<<YAML
 
+      - bundle_size_check:
+          name: bundle-size-${res/\//-}
+          filters:
+            branches:
+              ignore: [ 'gh-pages' ]
+          requires:
+            - build-${res/\//-}
+
       - build:
           name: build-${res/\//-}
           context: web-core
