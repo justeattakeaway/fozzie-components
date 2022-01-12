@@ -4,7 +4,7 @@
 #jq=../node_modules/node-jq/bin/jq
 
 changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
-cache_directories=("atoms" "molecules" "organisms" "pages" "templates" "services")
+cache_directories=("atoms" "molecules" "organisms" "pages" "templates" "services" "tools")
 all_packages=$(lerna ls --json);
 
 if [[ $changes ]] || [ $CIRCLE_BRANCH == "master" ]; then
