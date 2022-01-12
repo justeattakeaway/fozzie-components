@@ -68,8 +68,6 @@ const mountAccountInfo = async ({
 
     await mock.vm.$nextTick();
 
-    await mock.vm.$nextTick();
-
     return mock;
 };
 
