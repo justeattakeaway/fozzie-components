@@ -234,9 +234,10 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getNotesConfiguration: async ({ commit }, { url, timeout }) => {
+        getNotesConfiguration: async ({ commit, state }, { url, timeout }) => {
             const { data } = await checkoutApi.getNoteConfiguration(url, timeout);
-            commit(UPDATE_NOTES_CONFIGURATION, { ...data?.customerNotes?.serviceTypes, isSplitNotesEnabled: true });
+            const isSplitNotesEnabled = !data?.customerNotes?.serviceTypes[state.serviceType].orderNoteAccepted;
+            commit(UPDATE_NOTES_CONFIGURATION, { ...data?.customerNotes?.serviceTypes, isSplitNotesEnabled });
         },
 
 
