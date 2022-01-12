@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest – to be added to the next release
+------------------------------
+### Added
+- component tests in `f-account-info.component.spec`
+- test ids in `DeleteAccount.vue` and `EmailAddressField.vue`
+- `vuelidate` and `f-services` package in `package.json` 
+
+### Changed
+- component test ids in `AccountInfo.vue`
+- test filenames from `accountInfo` to `account-info`
+
+
 v0.14.0
 ------------------------------
 *December 17, 2021*
