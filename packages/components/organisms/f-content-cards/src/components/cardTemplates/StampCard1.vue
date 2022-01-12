@@ -80,6 +80,13 @@
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import lightFormat from 'date-fns/lightFormat';
+import {
+    da, enAU, enNZ, enGB, es, it, nb
+} from 'date-fns/locale';
+import EmptyStamp15 from './images/stamp-empty-15.svg';
+import FullStamp15 from './images/stamp-full-15.svg';
+import EmptyStamp10 from './images/stamp-empty-10.svg';
+import FullStamp10 from './images/stamp-full-10.svg';
 
 import CardCase from './CardCase.vue';
 
@@ -94,10 +101,10 @@ export default {
     name: 'StampCard1',
 
     components: {
-        EmptyStamp15: () => import('./images/stamp-empty-15.svg'),
-        FullStamp15: () => import('./images/stamp-full-15.svg'),
-        EmptyStamp10: () => import('./images/stamp-empty-10.svg'),
-        FullStamp10: () => import('./images/stamp-full-10.svg'),
+        EmptyStamp15,
+        FullStamp15,
+        EmptyStamp10,
+        FullStamp10,
         CardCase
     },
 
@@ -223,9 +230,7 @@ export default {
     },
 
     mounted () {
-        this.getDateFnsLocale(this.copy.locale).then(locale => {
-            this.dateFnsLocale = locale;
-        });
+        this.dateFnsLocale = this.getDateFnsLocale(this.copy.locale);
     },
 
     inject: [
@@ -237,33 +242,33 @@ export default {
          * Takes the locale and lazyloads the correct date locale from the date-fns library
          * @param locale
          * @returns {
-         *  Promise<module:date-fns/locale/da> |
-         *  Promise<module:date-fns/locale/en-AU> |
-         *  Promise<module:date-fns/locale/en-GB> |
-         *  Promise<module:date-fns/locale/en-NZ> |
-         *  Promise<module:date-fns/locale/es> |
-         *  Promise<module:date-fns/locale/it> |
-         *  Promise<module:date-fns/locale/nb>
+         *  da |
+         *  enAU |
+         *  enGB |
+         *  enNZ |
+         *  es |
+         *  it |
+         *  nb
          * }
          */
         getDateFnsLocale (locale) {
             switch (locale) {
                 case 'da-DK':
-                    return import(/* webpackChunkName: "date-fns-locale-da" */ 'date-fns/locale/da');
+                    return da;
                 case 'en-AU':
-                    return import(/* webpackChunkName: "date-fns-locale-en-AU" */ 'date-fns/locale/en-AU');
+                    return enAU;
                 case 'en-GB':
                 case 'en-IE':
                 default:
-                    return import(/* webpackChunkName: "date-fns-locale-en-GB" */ 'date-fns/locale/en-GB');
+                    return enGB;
                 case 'en-NZ':
-                    return import(/* webpackChunkName: "date-fns-locale-en-NZ" */ 'date-fns/locale/en-NZ');
+                    return enNZ;
                 case 'es-ES':
-                    return import(/* webpackChunkName: "date-fns-locale-es" */ 'date-fns/locale/es');
+                    return es;
                 case 'it-IT':
-                    return import(/* webpackChunkName: "date-fns-locale-it" */ 'date-fns/locale/it');
+                    return it;
                 case 'nb-NO':
-                    return import(/* webpackChunkName: "date-fns-locale-nb" */ 'date-fns/locale/nb');
+                    return nb;
             }
         }
     }
@@ -283,7 +288,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-stampCard1 {
     text-decoration: initial;
-    width: 392px;
+    max-width: 392px;
     display: flex;
     flex-direction: column;
     padding: spacing(x2);
@@ -300,12 +305,13 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     }
 
     @include media($stampCard-responsive-tabletViewBreakpoint) {
-        width: 344px;
+        max-width: 344px;
     }
 
     @include media($stampCard-responsive-mobileViewBreakpoint) {
         width: auto;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.12);
+        max-width: none;
     }
 }
 
