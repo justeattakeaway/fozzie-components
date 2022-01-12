@@ -45,6 +45,7 @@
     "@justeat/f-card-with-content": "1.0.0",
     "@justeat/f-form-field": "4.5.0",
     "@justeat/f-globalisation": "1.0.0",
+    "@justeat/f-user-message": "3.1.0",
     "@justeat/f-vue-icons": "3.3.0"
   },
   "peerDependencies": {

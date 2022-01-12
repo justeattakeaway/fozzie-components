@@ -237,11 +237,6 @@ jobs:
           at: .
       - build_packages:
           run_all: << parameters.run_all >>
-      - save_cache:
-          name: Save << parameters.scope >>'s dist folder
-          key: << parameters.cache_key >>-{{CIRCLE_BRANCH}}-{{ checksum "<< parameters.path >>/package.json" }}
-          paths:
-            - << parameters.path >>/dist
       - persist_to_workspace:
           root: .
           paths:
@@ -421,13 +416,6 @@ YAML
     fi
 
       cat<<YAML
-
-      - bundle_size_check:
-          filters:
-            branches:
-              ignore: [ 'gh-pages' ]
-          requires:
-            - build-${res/\//-}
 
       - build:
           name: build-${res/\//-}
