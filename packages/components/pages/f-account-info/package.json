@@ -46,7 +46,8 @@
     "@justeat/f-form-field": "4.5.0",
     "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-error-message": "1.0.0",
-    "@justeat/f-vue-icons": "3.3.0"
+    "@justeat/f-vue-icons": "3.3.0",
+    "@justeat/f-link": "2.3.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
