@@ -6,6 +6,7 @@ const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
 // vue.config.js
 module.exports = {
+    configureWebpack: { externals: ['@braze/web-sdk'] },
     chainWebpack: config => {
         config.module
             .rule('scss-importer')
