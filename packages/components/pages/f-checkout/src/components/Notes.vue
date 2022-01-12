@@ -1,5 +1,5 @@
 <template>
-    <div v-if="features.isSplitNotesEnabled">
+    <div v-if="notesConfiguration.isSplitNotesEnabled">
         <accordion
             :id="noteTypeCourierOrOrder"
             :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
@@ -71,6 +71,7 @@ export default {
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'features',
+            'notesConfiguration',
             'serviceType'
         ]),
 

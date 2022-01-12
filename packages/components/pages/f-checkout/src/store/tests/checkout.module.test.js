@@ -1302,7 +1302,7 @@ describe('CheckoutModule', () => {
                 // Arrange
                 const splitNotesEnabledState = {
                     ...state,
-                    features: {
+                    notesConfiguration: {
                         isSplitNotesEnabled: true
                     },
                     notes: { courier: { note: 'Please do not knock' }, kitchen: { note: 'No ketchup please' } }
@@ -1321,7 +1321,7 @@ describe('CheckoutModule', () => {
                 // Arrange
                 const splitNotesDisabledState = {
                     ...state,
-                    features: {
+                    notesConfiguration: {
                         isSplitNotesEnabled: false
                     },
                     notes: { order: { note: 'Please do not knock' } }
