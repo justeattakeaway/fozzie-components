@@ -3,11 +3,13 @@
         <form-field
             :label-text="$t('consumer.emailAddressLabel')"
             disabled
+            name="account-info-consumer-emailAddress"
             :placeholder="$t('consumer.emailAddressPlaceholder')"
             class="u-spacingBottom--large"
             :value="emailAddress" />
 
         <f-link
+            name="account-info-change-emailAddress-link"
             is-distinct
             :class="$style['c-accountInfo-customerCareLink']"
             href="/help/article/203097431/how-do-i-manage-my-account"
