@@ -2198,13 +2198,6 @@
     "@justeat/f-services" "1.0.1"
     core-js "3.6.5"
 
-"@justeat/f-content-cards@file:packages/components/pages/f-loyalty/.yalc/@justeat/f-content-cards":
-  version "6.0.0"
-  dependencies:
-    "@babel/plugin-proposal-class-properties" "7.12.13"
-    "@justeat/f-services" "1.0.1"
-    core-js "3.6.5"
-
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2216,14 +2209,6 @@
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.0.1.tgz#c6a868d39a3d3361af9e29b44f0d8bc21e30da8d"
   integrity sha512-DSF1NJFKBb/tZDCCUyTGXcnKWC5FvPa9TIcCy0n57OLfQOJ9A53VfxVpRoW8VjlRZu/bl6nYx4kukZq+iHmx5Q==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "2.5.0"
-
-"@justeat/f-form-field@4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.5.0.tgz#931d5d643090c2fce46ecf8302b3333013fb3d7d"
-  integrity sha512-EJLkg0vzxS+BE16mZ2Q2r7bB3jvZd8EFW8jB5GmACSqtsCe0iLLFSfY2cPlDx3oZ1nZMoRse/T2foCrjH5c7dg==
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
