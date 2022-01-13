@@ -184,10 +184,8 @@ $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 
     .c-loyalty-stampCardsSlot-stampCard {
         overflow: auto;
+        width:100%;
         background-color: $color-white;
-        //@include media($stampCard-responsive-mobileViewBreakpoint) {
-        //    flex: 1 1 90%;
-        //}
     }
 }
 
