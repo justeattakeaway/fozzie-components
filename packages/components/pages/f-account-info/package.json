@@ -35,6 +35,7 @@
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_ACCOUNT_INFO} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "ci:test:pages": "yarn test",
     "ci:test-component:chrome:pages": "yarn test-component:chrome",
     "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome"
