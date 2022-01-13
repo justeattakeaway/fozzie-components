@@ -9,7 +9,7 @@ exports[`Header computed :: isLoggedIn :: when set to false should render the gu
     Log in or sign up
   </f-button-stub>
   <div><span>or</span></div>
-  <h2>
+  <h2 data-test-id="guest-title">
     Checkout as a guest
   </h2>
   <p data-test-id="service-type-confirmation">
