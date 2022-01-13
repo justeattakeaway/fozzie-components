@@ -4,10 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.13.3
+------------------------------
+*January 13, 2022*
+
+### Added
+- Test id for guest header.
+- Focus for first input in fieldset.
+
+
 v3.13.2
 ------------------------------
 *January 12, 2022*
-
 ### Fixed
 - Logic for deciding whether notes should be formatted for split notes
 
