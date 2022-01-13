@@ -4,11 +4,21 @@
         :class="$style['c-form']"
         data-test-id="form-component"
         @submit.prevent="onFormSubmit">
+        <section
+            v-if="invalidFieldsSummary"
+            class="is-visuallyHidden"
+            role="alert"
+            data-test-id="error-summary-container">
+            {{ invalidFieldsSummary }}
+        </section>
+
         <form-field
             v-for="field in formData.formFields"
             :key="`${field.name}-field`"
-            v-bind="fieldProps(field)"
-            @input="updateField({ fieldName: field.name, value: $event })" />
+            :field-data="field"
+            @updated="updateField" />
+
+        <slot />
 
         <f-button
             button-type="primary"
@@ -25,9 +35,15 @@
 
 
 <script>
+import { validationMixin } from 'vuelidate';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import {
+    required, email
+} from 'vuelidate/lib/validators';
+import { validations } from '@justeat/f-services';
+import VueScrollTo from 'vue-scrollto';
 import FButton from '@justeat/f-button';
-import FormField from '@justeat/f-form-field';
-import { globalisationServices } from '@justeat/f-services';
+import FormField from './FormField.vue';
 import tenantConfigs from '../tenants';
 import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';
 
@@ -37,10 +53,20 @@ export default {
         FormField
     },
 
+    mixins: [
+        validationMixin,
+        VueGlobalisationMixin
+    ],
+
     props: {
         formData: {
             type: Object,
             required: true
+        },
+
+        locale: {
+            type: String,
+            default: 'en-GB'
         },
 
         isFormSubmitting: {
@@ -50,23 +76,42 @@ export default {
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
+    },
+
+    /*
+    * Provide/Inject allows nested `Address` component to inherit `Checkout`
+    * validator scope, `$v`.
+    */
+    provide () {
+        const $v = {};
+        Object.defineProperty($v, 'formFields', {
+            enumerable: true,
+            get: () => this.$v.formFields
+        });
+        return { $v };
     },
 
     computed: {
         formFields () {
             const formFields = {};
 
-            this.formData.formFields.forEach(field => {
-                formFields[field.name] = field.value;
-            });
+            if (this.formData.formFields?.length) {
+                this.formData.formFields.forEach(field => {
+                    formFields[field.name] = field.value;
+                });
+            }
 
             return formFields;
+        },
+
+        invalidFieldsSummary () {
+            const invalidFieldCount = this.$v.formFields.$dirty
+                && validations.getFormValidationState(this.$v.formFields).invalidFields.length;
+            if (!invalidFieldCount) return null;
+            return this.$tc('invalidFields', invalidFieldCount);
         },
 
         buttonText () {
@@ -84,20 +129,62 @@ export default {
     },
 
     methods: {
+        isFormValid () {
+            this.$v.$touch();
+            return !this.$v.$invalid;
+        },
+
         updateField ({ fieldName, value }) {
-            return this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
+            this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
         },
 
         onFormSubmit () {
             this.$emit(FORM_EVENTS.submitting);
+
+            if (this.isFormValid()) {
+                this.$emit(FORM_EVENTS.valid, this.formFields);
+            } else {
+                const validationState = validations.getFormValidationState(this.$v);
+                this.scrollToFirstInlineError();
+                this.$emit(FORM_EVENTS.invalid, validationState);
+            }
         },
 
-        fieldProps (field) {
-            return {
-                name: field.name,
-                value: field.value || '',
-                'label-text': field.translations?.label
-            };
+        isValidPhoneNumber () {
+            const phoneNumberValue = this.formData.formFields.find(field => field.name === 'mobileNumber');
+
+            return phoneNumberValue && validations.isValidPhoneNumber(phoneNumberValue.value, this.locale);
+        },
+
+        isValidPostcode () {
+            const postcodeValue = this.formData.formFields.find(field => field.name === 'postcode');
+
+            return postcodeValue && validations.isValidPostcode(postcodeValue.value, this.locale);
+        },
+
+        translations (field) {
+            const formField = this.formData.formFields.find(fieldData => fieldData.name === field);
+
+            return formField?.translations;
+        },
+
+        hasValidationMessages (field) {
+            return !!this.translations(field)?.validationMessages;
+        },
+
+        hasInvalidErrorMessage (field) {
+            return !!this.translations(field)?.validationMessages?.invalid;
+        },
+
+        scrollToFirstInlineError () {
+            this.$nextTick(() => {
+                const scrollingDurationInMilliseconds = 650;
+                const firstInlineError = document.querySelector('[data-js-error-message]');
+
+                if (firstInlineError) {
+                    VueScrollTo.scrollTo(firstInlineError, scrollingDurationInMilliseconds, { offset: -100 });
+                }
+            });
         },
 
         formDataValidator () {
@@ -120,6 +207,31 @@ export default {
                 }
             });
         }
+    },
+
+    validations () {
+        const validationProperties = { formFields: {} };
+        const invalidValidations = {
+            email,
+            mobileNumber: this.isValidPhoneNumber,
+            postcode: this.isValidPostcode
+        };
+
+        Object.keys(this.formFields).forEach(field => {
+            if (this.hasValidationMessages(field)) {
+                validationProperties.formFields[field] = {
+                    required
+                };
+                if (this.hasInvalidErrorMessage(field)) {
+                    validationProperties.formFields[field] = {
+                        ...validationProperties.formFields[field],
+                        [field]: invalidValidations[field]
+                    };
+                }
+            }
+        });
+
+        return validationProperties;
     }
 };
 </script>
