@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-spinner",
   "description": "Fozzie Spinner - loading indicator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/f-spinner.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -32,6 +32,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
+    "test:watch": "vue-cli-service test:unit --watch",
     "ci:test:atoms": "yarn test",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
