@@ -858,7 +858,7 @@ export default {
             this.checkoutAnalyticsService.trackDialogEvent(event);
         },
 
-        async getMappedDataForUpdateCheckout () {
+        getMappedDataForUpdateCheckout () {
             return mapUpdateCheckoutRequest({
                 address: this.address,
                 customer: this.customer,
