@@ -2,9 +2,10 @@ import forEach from 'mocha-each';
 
 const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
+const PLATFORM = 'desktop';
 let accountInfo;
 
-describe('f-account-info component tests', () => {
+describe('f-account-info - Desktop Visual Tests', () => {
     beforeEach(() => {
         accountInfo = new AccountInfo();
 
@@ -13,32 +14,24 @@ describe('f-account-info component tests', () => {
         accountInfo.waitForComponent();
     });
 
-    it('should display the f-account-info component', () => {
-        // Assert
-        expect(accountInfo.isComponentDisplayed()).toBe(true);
-    });
+    it('should display the default component state', () => {
+        // Act
+        accountInfo.load();
+        accountInfo.waitForComponent();
 
-    it('should show that the email formfield is disabled', () => {
         // Assert
-        expect(accountInfo.isDisabled('emailAddress')).toBe(true);
+        browser.percyScreenshot('f-account-info - Base State', PLATFORM);
     });
-
-    forEach(['changeEmailAddressLink', 'saveChangesButton', 'changePasswordButton', 'deleteAccountLink'])
-    .it('should check if all call to actions are clickable', cta => {
-        // Assert
-        expect(accountInfo.canBeClicked(cta)).toBe(true);
-    });
-
 
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
-        .it('should display an error message immediately when %s input has been deleted', field => {
-            // Act
-            accountInfo.clearBlurField(field);
-            accountInfo.clickOutOfInputField();
+    .it('should display an error message immediately when %s input has been deleted', field => {
+        // Act
+        accountInfo.clearBlurField(field);
+        accountInfo.clickOutOfInputField();
 
-            // Assert
-            expect(accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
-        });
+        // Assert
+        browser.percyScreenshot(`f-account-info - ${field} Input Error Message`, PLATFORM);
+    });
 
     it('should display the illegal first name error message immediately on click', () => {
         // Arrange
@@ -54,7 +47,7 @@ describe('f-account-info component tests', () => {
         accountInfo.clickOutOfInputField();
 
         // Assert
-        expect(accountInfo.isInvalidErrorMessageDisplayed('firstName')).toBe(true);
+        browser.percyScreenshot('f-account-info - illegal first name error message', PLATFORM);
     });
 
     it('should display the illegal last name error message immediately on click', () => {
@@ -71,7 +64,7 @@ describe('f-account-info component tests', () => {
         accountInfo.clickOutOfInputField();
 
         // Assert
-        expect(accountInfo.isInvalidErrorMessageDisplayed('lastName')).toBe(true);
+        browser.percyScreenshot('f-account-info - illegal last name error message', PLATFORM);
     });
 
     it('should display the illegal phone number error message immediately on click', () => {
@@ -88,7 +81,7 @@ describe('f-account-info component tests', () => {
         accountInfo.clickOutOfInputField();
 
         // Assert
-        expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
+        browser.percyScreenshot('f-account-info - illegal phone number error message', PLATFORM);
     });
 
     it('should display invalid postcode error message immediately on click', () => {
@@ -105,6 +98,6 @@ describe('f-account-info component tests', () => {
         accountInfo.clickOutOfInputField();
 
         // Assert
-        expect(accountInfo.isInvalidErrorMessageDisplayed('postcode')).toBe(true);
+        browser.percyScreenshot('f-account-info - illegal postcode error message', PLATFORM);
     });
 });
