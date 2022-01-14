@@ -44,7 +44,7 @@ function getDefaultAddress (addresses) {
     return !addresses ? null : addresses.find(a => a && a.IsDefault);
 }
 
-const formatPostcode = postcode => postcode.replace(/ /g, '').replace(/-/g, '');
+const formatPostcode = postcode => postcode.replace(/\s/g, '').replace(/-/g, '');
 
 function getAddressClosestToPostcode (postcode, addresses) {
     if (!postcode) {
