@@ -44,14 +44,16 @@ function getDefaultAddress (addresses) {
     return !addresses ? null : addresses.find(a => a && a.IsDefault);
 }
 
+const formatPostcode = postcode => postcode.replace(/ /g, '').replace(/-/g, '');
+
 function getAddressClosestToPostcode (postcode, addresses) {
     if (!postcode) {
         return getDefaultAddress(addresses);
     }
 
-    let formattedPostcode = postcode.replace(/ /g, '').replace(/-/g, '');
+    let formattedPostcode = formatPostcode(postcode);
 
-    let address = addresses.find(a => a.ZipCode === formattedPostcode);
+    let address = addresses.find(a => formatPostcode(a.ZipCode) === formattedPostcode);
 
     if (isFullPostCode(formattedPostcode)) {
         formattedPostcode = formattedPostcode.slice(0, formattedPostcode.length - 3);
