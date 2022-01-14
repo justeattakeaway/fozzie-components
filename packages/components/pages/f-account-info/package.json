@@ -6,7 +6,9 @@
   "maxBundleSize": "100kB",
   "files": [
     "dist",
-    "test-utils"
+    "test-utils",
+    "src/services",
+    "src/constants.js"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-account-info",
   "contributors": [
