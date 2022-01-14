@@ -1,7 +1,7 @@
 <template>
     <div role="main">
         <div
-            v-if="!isAppsUserAgent && !isInIframe"
+            v-if="showLoyaltyNavigationElements"
             :class="$style['c-loyalty']"
             data-test-id="loyalty">
             <loyalty-header />
@@ -13,7 +13,9 @@
                         :title="$t('tabs.stamps.title')"
                         :selected="!showHowItWorks"
                     >
-                        <loyalty-cards v-if="isAuthenticated" />
+                        <loyalty-cards
+                            v-if="isAuthenticated"
+                            data-test-id="StampCards-StampCardsTab-AuthedContent" />
                         <unauthenticated
                             v-else
                             data-test-id="StampCards-StampCardsTab-UnauthContent" />
@@ -75,17 +77,13 @@ export default {
             type: String,
             required: true
         },
-        isAppsUserAgent: {
+        showLoyaltyNavigationElements: {
             type: Boolean,
-            default: false
+            default: true
         },
         hash: {
             type: String,
             default: ''
-        },
-        isInIframe: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -149,7 +147,6 @@ export default {
 }
 
 .c-loyalty-tabs {
-    //margin-top: -42px;
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: -42px auto 0;
