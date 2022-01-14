@@ -426,12 +426,8 @@ export default {
                 this.customNavLinks.length > 0;
         },
 
-        isCountrySelectorClosedOnMobileView () {
-            return this.isBelowMid && !this.countrySelectorIsOpen;
-        },
-
         tabIndex () {
-            if (!this.isBelowMid || this.isCountrySelectorClosedOnMobileView) return 0;
+            if (!this.isBelowMid || !this.countrySelectorIsOpen) return 0;
             return -1;
         }
     },
