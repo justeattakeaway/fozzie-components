@@ -1,11 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form computed ::  formFields ::  should return an object of \`formData\` keys and field values 1`] = `
+exports[`FormField computed :: fieldProps :: should return field props 1`] = `
 Object {
-  "email": "John.Johnson@gmail.com",
-  "firstName": "John",
-  "lastName": "Johnson",
-  "mobileNumber": "07111111111",
-  "postcode": "EC1A1BB",
+  "input-type": "text",
+  "label-text": "First Name",
+  "max-length": null,
+  "name": "first-name",
+  "value": "John",
+}
+`;
+
+exports[`FormField computed :: fieldProps :: when field has error :: should return field props with error props 1`] = `
+Object {
+  "aria-describedby": undefined,
+  "aria-invalid": true,
+  "aria-label": null,
+  "has-error": true,
+  "input-type": "text",
+  "label-text": "First Name",
+  "max-length": null,
+  "name": "first-name",
+  "value": "John",
+}
+`;
+
+exports[`FormField computed :: translations :: should return translations for form field 1`] = `
+Object {
+  "emptyError": "error-first-name-empty",
+  "errorName": "first-name-error",
+  "invalidError": "error-first-name-invalid",
+  "label": "First Name",
+  "name": "first-name",
+  "validationMessages": Object {
+    "required": "Enter First Name",
+  },
 }
 `;

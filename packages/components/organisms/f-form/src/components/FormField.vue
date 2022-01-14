@@ -20,6 +20,7 @@
 import FormField from '@justeat/f-form-field';
 import ErrorMessage from '@justeat/f-error-message';
 import { FORM_EVENTS } from '../constants';
+import fieldValidationsMixin from '../mixin/fieldValidation.mixin';
 
 export default {
     components: {
@@ -27,14 +28,14 @@ export default {
         FormField
     },
 
+    mixins: [fieldValidationsMixin],
+
     props: {
         fieldData: {
             type: Object,
             required: true
         }
     },
-
-    inject: ['$v'],
 
     computed: {
         kebabCase () {
@@ -52,31 +53,21 @@ export default {
         },
 
         fieldProps () {
-            let props = {
+            return {
                 name: this.translations.name,
                 value: this.fieldData.value,
                 'label-text': this.translations.label,
                 'input-type': this.inputType,
-                'max-length': this.fieldData.mexLength || null
-            };
-
-            if (this.ariaLabel) {
-                props = {
-                    ...props,
+                'max-length': this.fieldData.maxLength || null,
+                ...(this.hasError ? {
                     'aria-label': this.ariaLabel
-                };
-            }
-
-            if (this.hasError) {
-                props = {
-                    ...props,
+                } : {}),
+                ...(this.hasError ? {
                     'has-error': true,
                     'aria-invalid': true,
                     'aria-describedby': this.translations.validationMessages[this.errorType]
-                };
-            }
-
-            return props;
+                } : {})
+            };
         },
 
         inputType () {
@@ -98,31 +89,7 @@ export default {
         },
 
         hasError () {
-            return !!this.hasValidationMessages && (this.hasRequiredError || this.hasInvalidError);
-        },
-
-        isEmpty () {
-            return this.validations?.$dirty;
-        },
-
-        validations () {
-            return this.$v.formFields[this.fieldData.name];
-        },
-
-        hasRequiredError () {
-            return this.isEmpty && !this.validations.required;
-        },
-
-        hasInvalidError () {
-            return !!this.hasInvalidErrorMessage && this.isEmpty && !this.validations[this.fieldData.name];
-        },
-
-        errorType () {
-            if (this.hasError) {
-                return this.hasRequiredError ? 'required' : 'invalid';
-            }
-
-            return null;
+            return !!this.hasValidationMessages && this.error;
         },
 
         ariaLabel () {
@@ -133,15 +100,16 @@ export default {
             return null;
         }
     },
+
+    mounted () {
+        if (this.hasValidationMessages) {
+            this.createField(this.fieldData.name);
+        }
+    },
+
     methods: {
         updateField ({ fieldName, value }) {
             this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
-        },
-
-        formFieldBlur () {
-            if (this.validations) {
-                this.validations.$touch();
-            }
         }
     }
 };
