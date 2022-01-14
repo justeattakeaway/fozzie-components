@@ -19,7 +19,7 @@
         <div
             role="status"
             aria-live="polite"
-            :class="$style['c-takeawaypayActivation-hiddenElement']">
+            class="is-visuallyHidden">
             {{ activationInProgressMessage }}
         </div>
         <div :class="$style['c-takeawaypayActivation-actions']">
