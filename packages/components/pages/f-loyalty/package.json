@@ -3,7 +3,7 @@
   "description": "Fozzie Loyalty - provides a way for customers to collect loyalty stamps for restaurants",
   "version": "1.4.0",
   "main": "dist/f-loyalty.umd.min.js",
-  "maxBundleSize": "70kB",
+  "maxBundleSize": "100kB",
   "files": [
     "dist",
     "test-utils"
