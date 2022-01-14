@@ -158,7 +158,8 @@
                         :aria-haspopup="isBelowMid ? false : true"
                         :class="$style['c-nav-list-text']"
                         href="/"
-                        @click.prevent="onNavToggle">
+                        @click.prevent="toggleUserMenu"
+                        @keydown.space.prevent="toggleUserMenu">
                         <profile-icon
                             :class="[
                                 $style['c-nav-icon'],
@@ -184,9 +185,10 @@
 
                     <v-popover :class="$style['c-nav-popover']">
                         <user-navigation-panel
-                            :is-open="navIsOpen"
+                            :is-user-menu-open="userMenuIsOpen"
+                            :is-nav-open="navIsOpen"
                             :is-below-mid="isBelowMid"
-                            :is-country-selector-closed-on-mobile-view="isCountrySelectorClosedOnMobileView"
+                            :is-country-selector-open="countrySelectorIsOpen"
                             :copy="copy"
                             :return-logout-url="returnLogoutUrl"
                             @activateNav="openUserMenu"
@@ -529,14 +531,20 @@ export default {
             });
         },
 
+        toggleUserMenu () {
+            if (this.userMenuIsOpen) {
+                this.closeUserMenu();
+            } else {
+                this.openUserMenu();
+            }
+        },
+
         closeUserMenu () {
             this.userMenuIsOpen = false;
-            this.handleMobileNavState();
         },
 
         openUserMenu () {
             this.userMenuIsOpen = true;
-            this.handleMobileNavState();
         },
 
         onCountrySelectorToggle () {

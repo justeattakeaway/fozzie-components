@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v9.2.0
 ------------------------------
+*January 17, 2021*
+
+### Fixed
+- User menu was not visibly toggling with keyboard navigation
+
+
+v9.2.0
+------------------------------
 *December 20, 2021*
 
 ### Removed
