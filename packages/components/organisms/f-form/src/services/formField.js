@@ -1,80 +1,69 @@
-const kebabCase = fieldName => fieldName.replace(/([a-z0-9]|(?=[A-Z]))([A-Z1-9])/g, '$1-$2').toLowerCase();
-
-const inputType = fieldName => {
-    const inputTypes = {
-        mobileNumber: 'tel',
-        email: 'email',
-        default: 'text'
-    };
-
-    return inputTypes[fieldName] || inputTypes.default;
-};
-
-const ariaLabel = value => [...value].join(' ');
-
-const labels = fieldData => {
-    const fieldKebabCase = kebabCase(fieldData.name);
-
-    return {
-        ...fieldData.translations,
-        name: `${fieldKebabCase}`,
-        errorName: `${fieldKebabCase}-error`,
-        emptyError: `error-${fieldKebabCase}-empty`,
-        invalidError: `error-${fieldKebabCase}-invalid`
-    };
-};
-
-const fieldProps = fieldData => {
-    const fieldLabels = labels(fieldData);
-
-    return {
-        name: fieldLabels.name,
-        value: fieldData.value,
-        'label-text': fieldLabels.label,
-        'input-type': inputType(fieldData.name),
-        'max-length': fieldData.maxLength || null,
-        ...(inputType(fieldData.name) === 'mobileNumber' ? {
-            'aria-label': ariaLabel
-        } : {})
-    };
-};
-
-const errorProps = (messages, errorType) => ({
-    'has-error': true,
-    'aria-invalid': true,
-    'aria-describedby': messages[errorType]
-});
-
-const errorMessageProps = (fieldData, errorType) => {
-    const fieldLabels = labels(fieldData);
-    console.log(fieldLabels, errorType);
-
-    const a = {
-        props: {
-            id: fieldLabels.errorName,
-            'data-test-id': fieldLabels[`${errorType}Error`]
-        },
-        text: fieldLabels.validationMessages[errorType]
-    };
-    console.log(a);
-    return a;
-};
-
-const createFormField = fieldData => ({
-    labels: labels(fieldData),
-    fieldProps: fieldProps(fieldData)
-});
-
-const createFormFieldError = (fieldData, errorType) => ({
-    labels: labels(fieldData),
-    fieldProps: {
-        ...fieldProps(fieldData, errorType),
-        ...errorProps(fieldData, errorType)
+export default class FormField {
+    constructor ({
+        name,
+        translations,
+        maxLength
+    }) {
+        this.name = name;
+        this.translations = translations;
+        this.validationMessages = this.translations.validationMessages || null;
+        this.maxLength = maxLength || null;
+        this.props = this.createProps();
+        this.ariaLabel = this.createAriaLabel;
+        this.errorProps = this.createErrorProps;
+        this.errorMessage = this.createErrorMessage;
     }
-});
 
-export {
-    createFormField,
-    createFormFieldError,
-    errorMessageProps
-};
+    createProps () {
+        return {
+            name: this.kebabCase(),
+            'label-text': this.translations.label,
+            'input-type': this.inputType(),
+            'max-length': this.maxLength || null
+        };
+    }
+
+    kebabCase () {
+        return this.name.replace(/([a-z0-9]|(?=[A-Z]))([A-Z1-9])/g, '$1-$2').toLowerCase();
+    }
+
+    createErrorProps (error) {
+        const errorProps = {
+            ...(error ? {
+                'has-error': true,
+                'aria-invalid': true,
+                'aria-describedby': this.validationMessages[this.error]
+            } : {})
+        };
+
+        return {
+            ...this.props,
+            ...errorProps
+        };
+    }
+
+    createErrorMessage (error) {
+        return {
+            props: {
+                id: `${this.kebabCase}-error`,
+                'data-test-id': `error-${this.kebabCase}-${error}`
+            },
+            text: this.validationMessages[error]
+        };
+    }
+
+    inputType () {
+        const inputTypes = {
+            mobileNumber: 'tel',
+            email: 'email',
+            default: 'text'
+        };
+
+        return inputTypes[this.name] || inputTypes.default;
+    }
+
+    createAriaLabel (value) {
+        return this.name === 'mobileNumber' && value ? [...value].join(' ') : null;
+    }
+}
+

@@ -13,10 +13,23 @@
         </section>
 
         <form-field
-            v-for="field in formData.formFields"
+            v-for="field in formFieldData"
             :key="`${field.name}-field`"
-            :field-data="field"
-            @updated="updateField" />
+            v-bind="fieldProps(field)"
+            :value="field.value"
+            :aria-label="field.ariaLabel(field.value)"
+            @input="updateField({ name: field.name, value: $event })"
+            @blur="field.validationMessages.invalid && formFieldBlur(field.name)">
+            <template
+                v-if="field.validationMessages && fieldStatus(field.name)"
+                #error>
+                <error-message
+                    v-bind="fieldErrorMessage(field).props"
+                    data-js-error-message>
+                    {{ fieldErrorMessage(field).text }}
+                </error-message>
+            </template>
+        </form-field>
 
         <slot />
 
@@ -38,14 +51,17 @@
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
 import FButton from '@justeat/f-button';
+import FormField from '@justeat/f-form-field';
+import ErrorMessage from '@justeat/f-error-message';
 import FormValidationMixin from '../mixin/formValidation.mixin';
-import FormField from './FormField.vue';
 import tenantConfigs from '../tenants';
 import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';
+import FormFieldClass from '../services/formField';
 
 export default {
     components: {
         FButton,
+        ErrorMessage,
         FormField
     },
 
@@ -90,6 +106,23 @@ export default {
             return formFields;
         },
 
+        formFieldData () {
+            const formFields = [];
+
+            if (this.formData.formFields?.length) {
+                this.formData.formFields.forEach(field => {
+                    const fieldData = new FormFieldClass(field);
+
+                    formFields.push({
+                        value: field.value,
+                        ...fieldData
+                    });
+                });
+            }
+
+            return formFields;
+        },
+
         buttonText () {
             return this.formData.buttonText || DEFAULT_BUTTON_TEXT;
         }
@@ -109,10 +142,8 @@ export default {
     },
 
     methods: {
-        updateField ({ fieldName, value }) {
-            this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
-
-            this.createValidations(this.formData.formFields);
+        updateField ({ name, value }) {
+            this.$emit(FORM_EVENTS.fieldUpdated, { name, value });
         },
 
         onFormSubmit () {
@@ -135,6 +166,18 @@ export default {
                     VueScrollTo.scrollTo(firstInlineError, scrollingDurationInMilliseconds, { offset: -100 });
                 }
             });
+        },
+
+        fieldProps (field) {
+            const error = field.validationMessages && this.fieldStatus(field.name);
+
+            return error
+                ? field.errorProps(error)
+                : field.props;
+        },
+
+        fieldErrorMessage (field) {
+            return field.errorMessage(this.fieldStatus(field.name));
         },
 
         formDataValidator () {

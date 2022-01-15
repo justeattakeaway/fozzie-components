@@ -17,8 +17,8 @@ export const VFormComponent = () => ({
     },
 
     methods: {
-        updateField ({ fieldName, value }) {
-            const formField = this.formData.formFields.find(field => field.name === fieldName);
+        updateField ({ name, value }) {
+            const formField = this.formData.formFields.find(field => field.name === name);
             formField.value = value;
         }
     },

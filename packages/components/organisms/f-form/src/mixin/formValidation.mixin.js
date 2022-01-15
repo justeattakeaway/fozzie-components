@@ -7,21 +7,6 @@ import { validations } from '@justeat/f-services';
 export default {
     mixins: [validationMixin],
 
-    /*
-    * Provide/Inject allows nested `Address` component to inherit `Checkout`
-    * validator scope, `$v`.
-    */
-    provide () {
-        const $v = {};
-
-        Object.defineProperty($v, 'formFields', {
-            enumerable: true,
-            get: () => this.$v.formFields
-        });
-
-        return { $v };
-    },
-
     data () {
         return {
             fields: {}
@@ -60,7 +45,7 @@ export default {
                     formFields[field.name] = {
                         required,
                         ...(validationMessages.invalid ? {
-                            isInvalid: invalidValidations[field.name]
+                            isValid: invalidValidations[field.name]
                         } : {})
                     };
                 }
@@ -94,15 +79,24 @@ export default {
         },
 
         formFieldBlur (fieldName) {
-            const fieldValidations = this.$v.formFields[fieldName];
-
-            if (fieldValidations) {
-                fieldValidations.$touch();
+            if (this.fieldValidations(fieldName)) {
+                this.fieldValidations(fieldName).$touch();
             }
         },
 
         fieldValidations (fieldName) {
             return this.$v.formFields[fieldName];
+        },
+
+        fieldStatus (fieldName) {
+            const isDirty = this.fieldValidations(fieldName).$dirty;
+            const hasRequiredError = isDirty && !this.fieldValidations(fieldName).required;
+            const hasInvalidError = isDirty && this.fieldValidations(fieldName).isValid === false;
+
+            if (hasRequiredError || hasInvalidError) {
+                return hasRequiredError ? 'required' : 'invalid';
+            }
+            return false;
         }
     }
 };
