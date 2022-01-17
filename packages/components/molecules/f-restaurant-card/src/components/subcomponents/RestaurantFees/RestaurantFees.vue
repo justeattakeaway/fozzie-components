@@ -52,14 +52,14 @@ export default {
     padding-right: spacing();
     margin-right: spacing(x0.5);
     white-space: nowrap;
-    font-size: $font-body-s-paragraph * 1px;
+    @include font-size($font-body-s-paragraph);
 
     &:before {
         display: none;
     }
 
     &:after {
-        content: '\2022';
+        content: '\2022'; // round bullet character
         color: $color-content-subdued;
         position: absolute;
         right: 0;
