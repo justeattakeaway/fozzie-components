@@ -266,7 +266,13 @@ export default {
         },
 
         uniqueId () {
-            return `formField-${(this.$attrs.name ? this.$attrs.name : this._uid)}`;
+            const idArray = ['formField'];
+
+            if (this.$attrs.name) idArray.push(this.$attrs.name);
+            if (this.$attrs.id) idArray.push(this.$attrs.id);
+
+            idArray.push(this._uid);
+            return idArray.join('-');
         },
 
         testId () {

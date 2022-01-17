@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-offers",
   "description": "Fozzie Offers - displays offers to the customers",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "main": "dist/f-offers.umd.min.js",
   "maxBundleSize": "140kB",
   "files": [
@@ -34,7 +34,10 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:pages": "yarn test",
+    "ci:test-component:chrome:pages": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

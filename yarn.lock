@@ -2172,18 +2172,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-braze-adapter@3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.5.0.tgz#008b89ab02f72d53b1ef8c464546da8d8df2e852"
-  integrity sha512-YsULFKoxllze/TzRO8G0sXcERcePjtjGq+lMsRnGU9faUxO9KpEFBCjs82bdZZMIYTPUSDpiHKd2Dxhqga3Gdw==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-    date-fns "2.16.1"
-    lodash.findindex "4.6.0"
-    lodash.orderby "4.6.0"
-    lodash.startswith "4.2.1"
-    lodash.uniq "4.5.0"
-
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2225,6 +2213,14 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
 
+"@justeat/f-form-field@4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.5.0.tgz#931d5d643090c2fce46ecf8302b3333013fb3d7d"
+  integrity sha512-EJLkg0vzxS+BE16mZ2Q2r7bB3jvZd8EFW8jB5GmACSqtsCe0iLLFSfY2cPlDx3oZ1nZMoRse/T2foCrjH5c7dg==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "2.5.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2240,10 +2236,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.4.0.tgz#a4bf50814d2f8a2fd91e25a2abef7bdb16ad74e7"
-  integrity sha512-2jrzrulKUN2VH6ULIgAqZR3RYtAZutM0BUD4K54saOquj3N1apnrnM1vrgYl6+V8kBvU6x5/FW8/eQSnW3Qr1Q==
+"@justeat/f-icons@4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.5.0.tgz#f0450300270a10996679c6f6d4525ee07594a736"
+  integrity sha512-LSdfZlllois1KHhsSS0QmtQKkXM1c0PNXcb8EmKMmU169BF+CQPqqqvuKb9Twt1IGYY7m3alsr292kv/5SvaGQ==
 
 "@justeat/f-link@2.0.0":
   version "2.0.0"
@@ -6606,11 +6602,6 @@ app-root-dir@^1.0.2:
   resolved "https://registry.yarnpkg.com/app-root-dir/-/app-root-dir-1.0.2.tgz#38187ec2dea7577fff033ffcb12172692ff6e118"
   integrity sha1-OBh+wt6nV3//Az/8sSFyaS/24Rg=
 
-appboy-web-sdk@2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/appboy-web-sdk/-/appboy-web-sdk-2.5.2.tgz#e01ad9fbd744bc48da5bc91a3b3e71493f1a52bd"
-  integrity sha512-Gh5yAgEH/N7Wc3A0Pm8wZNb7uTygdHCB2BiJlI/0HZbJ1iWiA5SjGplTjovPZtrJK22AGcqRp9XVtea3EBYC9w==
-
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
@@ -10367,10 +10358,10 @@ date-fns@2.16.1:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
   integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
 
-date-fns@2.17.0:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.17.0.tgz#afa55daea539239db0a64e236ce716ef3d681ba1"
-  integrity sha512-ZEhqxUtEZeGgg9eHNSOAJ8O9xqSgiJdrL0lzSSfMF54x6KXWJiOH/xntSJ9YomJPrYH/p08t6gWjGWq1SDJlSA==
+date-fns@^2.17.0:
+  version "2.25.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.25.0.tgz#8c5c8f1d958be3809a9a03f4b742eba894fc5680"
+  integrity sha512-ovYRFnTrbGPD4nqaEqescPEv1mNwvt+UTqI3Ay9SzNtey9NZnYu6E2qCcBBgJ6/2VF1zGGygpyTDITqpQQ5e+w==
 
 dateformat@^3.0.0, dateformat@^3.0.3:
   version "3.0.3"

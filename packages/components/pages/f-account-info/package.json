@@ -1,12 +1,14 @@
 {
   "name": "@justeat/f-account-info",
   "description": "Fozzie Account Info - The account information page",
-  "version": "0.14.0",
+  "version": "0.14.2",
   "main": "dist/f-account-info.umd.min.js",
   "maxBundleSize": "100kB",
   "files": [
     "dist",
-    "test-utils"
+    "test-utils",
+    "src/services",
+    "src/constants.js"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-account-info",
   "contributors": [
@@ -34,7 +36,11 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_ACCOUNT_INFO} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:pages": "yarn test",
+    "ci:test-component:chrome:pages": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -45,7 +51,9 @@
     "@justeat/f-card-with-content": "1.0.0",
     "@justeat/f-form-field": "4.5.0",
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-vue-icons": "3.3.0"
+    "@justeat/f-vue-icons": "3.3.0",
+    "@justeat/f-services": "1.13.0",
+    "vuelidate": "0.7.6"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",

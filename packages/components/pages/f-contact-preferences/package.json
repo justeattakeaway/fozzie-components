@@ -1,12 +1,14 @@
 {
   "name": "@justeat/f-contact-preferences",
   "description": "Fozzie Contact Preferences - Fozzie user contact preferences form component",
-  "version": "0.12.0",
+  "version": "0.12.2",
   "main": "dist/f-contact-preferences.umd.min.js",
   "maxBundleSize": "50kB",
   "files": [
     "dist",
-    "test-utils"
+    "test-utils",
+    "src/services",
+    "src/constants.js"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-contact-preferences",
   "contributors": [
@@ -35,7 +37,11 @@
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_CONTACT_PREFERENCES} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:pages": "yarn test",
+    "ci:test-component:chrome:pages": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome",
+    "ci:test:visual:pages": "yarn test:visual"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

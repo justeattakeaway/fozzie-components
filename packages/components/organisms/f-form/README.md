@@ -4,7 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-fozzie form
+Generic form component for creating basic forms. Can be used to collect data from text inputs.
 
 </div>
 
@@ -31,6 +31,13 @@ yarn add @justeat/f-form
 npm install @justeat/f-form
 ```
 
+
+The package also has dependencies that need to be installed by consuming components/applications:
+
+| Dependency     | Command to install                   | Styles to include                                       |
+| -----          | -----                                | -----                                                   |
+| f-button       | `yarn add @justeat/f-button`         | `import '@justeat/f-button/dist/f-button.css';`         |
+| f-form-field   | `yarn add @justeat/f-form-field`     | `import '@justeat/f-form-field/dist/f-form-field.css';` |
 
 
 ### Vue Applications
@@ -65,12 +72,42 @@ export default {
 
 ### Props
 
-There may be props that allow you to customise its functionality.
+To add fields to the form, and text to the form button, a `formData` Object prop should be passed in. The `formData` Object should contain:
+ * **formFields** - ` Array of objects. Object should include
+    * **name** - The field name that data should be stored under
+    * **value** - The value of the field. When not set, this defaults to ''.
+    * **translations** - an object containing:
+        * **label** - the field's displayed text label
+ *  **buttonText** - The text displayed on the form's action button
 
-The props that can be defined are as follows (if any):
+> **Example `formData`**
+```
+formData: {
+    formFields: [
+        {
+            name: 'firstName',
+            value: '',
+            translations: {
+                label: 'First Name'
+            }
+        },
+        {
+            name: 'lastName',
+            value: '',
+            translations: {
+                label: 'Last Name'
+            }
+        }
+        ...
+    ],
+    buttonText: 'Continue'
+}
+```
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
+| `formData` | Object | **Required Prop** | Object containing button text and form field data. Should be structured as above. |
+| `isFormSubmitting` | Boolean | false | Allows the parent component to set a loading spinner on the submit button while any asynchronous calls are carried out by the parent |
 
 ### Events
 
@@ -78,6 +115,8 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+| `updated` | When any form field is updated will send `{ fieldName, value }` |
+| `form-submitting` | When the submit button is pressed |
 
 ## Development
 
