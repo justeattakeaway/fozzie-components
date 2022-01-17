@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.1.0
+------------------------------
+*November 09, 2021*
+
+### Added
+- CurrentLocation to consumer options
+- locationFilter to match users current location if given or exists on card
+- tests for new filter
+
+
 v4.0.0
 ------------------------------
 *November 09, 2021*
