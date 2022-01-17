@@ -100,7 +100,8 @@
 
             <restaurant-fees
                 v-if="hasFees"
-                v-bind="fees" />
+                v-bind="fees"
+                data-test-id="restaurant-fees" />
 
             <!-- Tags -->
             <div>
