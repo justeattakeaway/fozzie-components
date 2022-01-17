@@ -7,10 +7,14 @@ import {
 } from '../../constants';
 
 export default class ConsumerApi {
+    #httpClient;
+    #cookies;
+    #baseUrl;
+
     constructor ({ httpClient, cookies, baseUrl } = {}) {
-        this.httpClient = httpClient;
-        this.cookies = cookies;
-        this.baseUrl = baseUrl;
+        this.#httpClient = httpClient;
+        this.#cookies = cookies;
+        this.#baseUrl = baseUrl;
     }
 
     async getConsumerDetails (authToken, conversationId = this.setConversationId()) {
@@ -19,7 +23,7 @@ export default class ConsumerApi {
             Authorization: authToken ? `Bearer ${authToken}` : ''
         };
 
-        const response = await this.httpClient.get(`${this.baseUrl}/${CONSUMER_DETAILS_URL}`, headers);
+        const response = await this.#httpClient.get(`${this.#baseUrl}/${CONSUMER_DETAILS_URL}`, headers);
 
         return response;
     }
@@ -30,7 +34,7 @@ export default class ConsumerApi {
             Authorization: authToken ? `Bearer ${authToken}` : ''
         };
 
-        const response = await this.httpClient.get(`${this.baseUrl}/${CONSUMER_ADDRESSES_URL}`, headers);
+        const response = await this.#httpClient.get(`${this.#baseUrl}/${CONSUMER_ADDRESSES_URL}`, headers);
 
         return response;
     }
@@ -38,7 +42,7 @@ export default class ConsumerApi {
     setConversationId = conversationId => {
         const cid = conversationId || uuid();
 
-        this.cookies.set(CONVERSATION_ID_NAME, cid);
+        this.#cookies.set(CONVERSATION_ID_NAME, cid);
 
         return cid;
     };
