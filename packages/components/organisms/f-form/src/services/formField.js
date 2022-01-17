@@ -18,11 +18,11 @@ class FormFieldClass {
         const ariaLabel = this.createAriaLabel(this.value);
 
         return {
-            name: this.kebabCase,
+            name: this.kebabCase(),
             'label-text': this.translations.label,
             'input-type': this.inputType(),
-            ...(this.maxLength ? { 'max-length': this.maxLength } : {}),
-            ...(ariaLabel ? { 'aria-label': ariaLabel } : {})
+            ...this.maxLength && { 'max-length': this.maxLength },
+            ...ariaLabel && { 'aria-label': ariaLabel }
         };
     }
 
@@ -49,34 +49,38 @@ class FormFieldErrorClass extends FormFieldClass {
     constructor (field, error) {
         super(field);
         this.error = error;
-        this.props = this.createErrorProps(this.kebabCase());
-        this.errorMessage = this.createErrorMessage(this.kebabCase());
+        this.props = this.createErrorProps();
+        this.errorMessage = this.createErrorMessage();
+        this.errorId = this.createErrorId();
     }
 
-    createErrorProps (kebabCase) {
+    createErrorProps () {
         const errorProps = {
-            ...(this.error ? {
+            ...this.error && {
                 'has-error': true,
                 'aria-invalid': true,
-                'aria-describedby': `error-${kebabCase}-${this.error}`
-            } : {})
+                'aria-describedby': this.createErrorId()
+            }
         };
 
         return {
             ...errorProps,
-            ...this.props,
-            name: kebabCase
+            ...this.props
         };
     }
 
-    createErrorMessage (kebabCase) {
+    createErrorMessage () {
         return {
             props: {
-                id: `error-${kebabCase}-${this.error}`,
-                'data-test-id': `error-${kebabCase}-${this.error}`
+                id: this.createErrorId(),
+                'data-test-id': `error-${this.kebabCase()}-${this.error}`
             },
             text: this.translations.validationMessages[this.error]
         };
+    }
+
+    createErrorId () {
+        return `error-${this.kebabCase()}-${this.error}`;
     }
 }
 

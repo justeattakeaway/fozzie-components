@@ -18,7 +18,6 @@ import { FormFieldClass, FormFieldErrorClass } from '../../services/formField';
 jest.mock('../../services/formField');
 
 FormFieldClass.mockImplementation(() => (FormFieldMock));
-
 FormFieldErrorClass.mockImplementation(() => (FormFieldErrorMock));
 
 describe('Form', () => {
@@ -162,7 +161,7 @@ describe('Form', () => {
     describe('computed :: ', () => {
         describe('formFields :: ', () => {
             it('should return an object of `formData` keys and field values', () => {
-                // Arrange & Act
+                // Arrange
                 const wrapper = shallowMount(VForm, {
                     i18n,
                     localVue,
@@ -270,7 +269,7 @@ describe('Form', () => {
                         jest.clearAllMocks();
                     });
 
-                    it('should not create fieldData with `FormFieldErrorClass` with field and error', () => {
+                    it('should create fieldData calling `FormFieldErrorClass` with field and error', () => {
                         // Arrange
                         const wrapper = shallowMount(VForm, {
                             i18n,
@@ -279,11 +278,11 @@ describe('Form', () => {
                         });
 
                         // Act
-                        const result = wrapper.vm.createField(fieldWithRequiredValidations);
+                        const fieldData = wrapper.vm.createField(fieldWithRequiredValidations);
 
                         // Assert
                         expect(FormFieldErrorClass).toHaveBeenCalledWith(fieldWithRequiredValidations, errorType);
-                        expect(result).toEqual(FormFieldErrorMock);
+                        expect(fieldData).toEqual(FormFieldErrorMock);
                     });
                 });
 
@@ -296,7 +295,7 @@ describe('Form', () => {
                         jest.clearAllMocks();
                     });
 
-                    it('should not create fieldData with `FormFieldClass` with field', () => {
+                    it('should create fieldData calling `FormFieldClass` with field', () => {
                         // Arrange
                         const wrapper = shallowMount(VForm, {
                             i18n,
@@ -305,11 +304,11 @@ describe('Form', () => {
                         });
 
                         // Act
-                        const result = wrapper.vm.createField(fieldWithRequiredValidations);
+                        const fieldData = wrapper.vm.createField(fieldWithRequiredValidations);
 
                         // Assert
                         expect(FormFieldClass).toHaveBeenCalledWith(fieldWithRequiredValidations);
-                        expect(result).toEqual(FormFieldMock);
+                        expect(fieldData).toEqual(FormFieldMock);
                     });
                 });
 
@@ -415,11 +414,7 @@ describe('Form', () => {
                 it('should emit `FormValid` event with valid fields', () => {
                     // Arrange
                     const expected = {
-                        // email: 'John.Johnson@gmail.com',
                         firstName: 'John'
-                        // lastName: 'Johnson',
-                        // mobileNumber: '07111111111',
-                        // postcode: 'EC1A1BB'
                     };
 
                     // Act
@@ -444,7 +439,6 @@ describe('Form', () => {
                 beforeEach(() => {
                     // Arrange
                     jest.spyOn(FormValidationMixin.computed, 'validationState').mockReturnValue(validationState);
-                    // scrollToFirstInlineErrorSpy = jest.spyOn(VForm.methods, 'scrollToFirstInlineError');
 
                     wrapper = shallowMount(VForm, {
                         i18n,
@@ -465,12 +459,11 @@ describe('Form', () => {
                     jest.clearAllMocks();
                 });
 
-                it('should call `scrollToFirstInlineError` and emit `FormInvalid` with validation state', () => {
+                it('should emit `FormInvalid` with validation state', () => {
                     // Act
                     wrapper.vm.onFormSubmit();
 
                     // Assert
-                    // expect(scrollToFirstInlineErrorSpy).toHaveBeenCalled();
                     expect(emitSpy).toHaveBeenCalledWith(FORM_EVENTS.invalid, validationState);
                 });
             });

@@ -88,7 +88,7 @@ export default {
 ### Props
 
 To add fields to the form, and text to the form button, a `formData` Object prop should be passed in. The `formData` Object should contain:
- * **formFields** - ` Array of objects. Object should include:
+ * **formFields** - Array of objects. Object should include:
     * **name** - The field name that data should be stored under
     * **value** - The value of the field. When not set, this defaults to ''.
     * **translations** - an object containing:

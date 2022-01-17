@@ -135,18 +135,6 @@ export default {
             this.$emit(FORM_EVENTS.fieldUpdated, { name, value });
         },
 
-        createField (field) {
-            const fieldError = field.translations?.validationMessages && this.fieldStatus(field.name);
-            const fieldData = fieldError
-                ? new FormFieldErrorClass(field, fieldError)
-                : new FormFieldClass(field);
-
-            return {
-                value: field.value,
-                ...fieldData
-            };
-        },
-
         onFormSubmit () {
             this.$emit(FORM_EVENTS.submitting);
 
@@ -156,6 +144,14 @@ export default {
                 this.scrollToFirstInlineError();
                 this.$emit(FORM_EVENTS.invalid, this.validationState);
             }
+        },
+
+        createField (field) {
+            const fieldError = field.translations?.validationMessages && this.fieldStatus(field.name);
+
+            return fieldError
+                ? new FormFieldErrorClass(field, fieldError)
+                : new FormFieldClass(field);
         },
 
         formDataValidator () {
