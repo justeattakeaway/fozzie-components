@@ -48,32 +48,17 @@ export default {
 }
 
 .c-restaurantCard-fees-item {
-    position: relative;
-    padding-right: spacing();
-    margin-right: spacing(x0.5);
     white-space: nowrap;
-    @include font-size($font-body-s-paragraph);
-
-    &:before {
-        display: none;
-    }
+    margin: spacing(x0.5) 0;
 
     &:after {
         content: '\2022'; // round bullet character
         color: $color-content-subdued;
-        position: absolute;
-        right: 0;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        line-height: 1;
+        margin: 0 spacing(x0.5);;
     }
 
     &:last-of-type {
-        padding-right: 0;
-        margin-right: 0;
-
         &:after {
             display: none;
         }
