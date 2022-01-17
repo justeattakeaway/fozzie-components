@@ -75,7 +75,7 @@
     "@wdio/spec-reporter": "7.6.0",
     "@wdio/sync": "7.6.0",
     "allure-commandline": "2.13.0",
-    "axe-core": "4.1.1",
+    "axe-core": "4.3.5",
     "axe-reports": "1.1.11",
     "axios": "0.21.4",
     "babel-core": "7.0.0-bridge.0",

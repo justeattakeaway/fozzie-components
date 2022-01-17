@@ -2,6 +2,7 @@ const { source } = require('axe-core');
 const AxeReports = require('axe-reports');
 const { exec } = require('child_process');
 const fs = require('fs');
+const path = require('path');
 
 /**
  * Runs the WCAG accessibility tests on the curent page of the global browser
@@ -15,7 +16,7 @@ exports.getAccessibilityTestResults = (componentName) => {
         const options = {
             runOnly: {
                 type: 'tag',
-                values: ['wcag21aa']
+                values: ['wcag21a', 'wcag21aa', 'wcag143', 'cat.color', 'cat.aria']
             },
             rules: {
 				'duplicate-id': { enabled: false },
@@ -48,7 +49,8 @@ exports.processResults = (results, componentName) => {
     console.log('Creating .CSV artifact for Axe violations');
 
     const fileName = `${componentName}-a11y-violations`;
-    const localFilePath = `${__dirname}../../../test/results/axe-violations/${fileName}`;
+    const localFilePath = path.join(__dirname + `/../results/axe-violations/${fileName}`);
+
     // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
     if (process.env.CIRCLECI) {
         const ciFileName = `/home/circleci/project/test/results/axe-violations/${fileName}`;
