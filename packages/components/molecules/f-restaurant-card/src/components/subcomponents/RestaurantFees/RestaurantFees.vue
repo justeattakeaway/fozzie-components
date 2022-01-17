@@ -44,6 +44,7 @@ export default {
 .c-restaurantCard-fees {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .c-restaurantCard-fees-item {
