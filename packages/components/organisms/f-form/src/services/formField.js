@@ -1,55 +1,33 @@
-export default class FormField {
+/* eslint-disable max-classes-per-file */
+class FormFieldClass {
     constructor ({
         name,
         translations,
-        maxLength
+        value,
+        maxLength = null
     }) {
         this.name = name;
+        this.value = value;
         this.translations = translations;
         this.validationMessages = this.translations.validationMessages || null;
-        this.maxLength = maxLength || null;
+        this.maxLength = maxLength;
         this.props = this.createProps();
-        this.ariaLabel = this.createAriaLabel;
-        this.errorProps = this.createErrorProps;
-        this.errorMessage = this.createErrorMessage;
     }
 
     createProps () {
+        const ariaLabel = this.createAriaLabel(this.value);
+
         return {
-            name: this.kebabCase(),
+            name: this.kebabCase,
             'label-text': this.translations.label,
             'input-type': this.inputType(),
-            'max-length': this.maxLength || null
+            ...(this.maxLength ? { 'max-length': this.maxLength } : {}),
+            ...(ariaLabel ? { 'aria-label': ariaLabel } : {})
         };
     }
 
     kebabCase () {
         return this.name.replace(/([a-z0-9]|(?=[A-Z]))([A-Z1-9])/g, '$1-$2').toLowerCase();
-    }
-
-    createErrorProps (error) {
-        const errorProps = {
-            ...(error ? {
-                'has-error': true,
-                'aria-invalid': true,
-                'aria-describedby': this.validationMessages[this.error]
-            } : {})
-        };
-
-        return {
-            ...this.props,
-            ...errorProps
-        };
-    }
-
-    createErrorMessage (error) {
-        return {
-            props: {
-                id: `${this.kebabCase}-error`,
-                'data-test-id': `error-${this.kebabCase}-${error}`
-            },
-            text: this.validationMessages[error]
-        };
     }
 
     inputType () {
@@ -67,3 +45,42 @@ export default class FormField {
     }
 }
 
+class FormFieldErrorClass extends FormFieldClass {
+    constructor (field, error) {
+        super(field);
+        this.error = error;
+        this.props = this.createErrorProps(this.kebabCase());
+        this.errorMessage = this.createErrorMessage(this.kebabCase());
+    }
+
+    createErrorProps (kebabCase) {
+        const errorProps = {
+            ...(this.error ? {
+                'has-error': true,
+                'aria-invalid': true,
+                'aria-describedby': `error-${kebabCase}-${this.error}`
+            } : {})
+        };
+
+        return {
+            ...errorProps,
+            ...this.props,
+            name: kebabCase
+        };
+    }
+
+    createErrorMessage (kebabCase) {
+        return {
+            props: {
+                id: `error-${kebabCase}-${this.error}`,
+                'data-test-id': `error-${kebabCase}-${this.error}`
+            },
+            text: this.translations.validationMessages[this.error]
+        };
+    }
+}
+
+export {
+    FormFieldClass,
+    FormFieldErrorClass
+};

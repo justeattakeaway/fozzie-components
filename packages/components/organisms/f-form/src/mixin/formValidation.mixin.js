@@ -3,17 +3,16 @@ import {
     required, email
 } from 'vuelidate/lib/validators';
 import { validations } from '@justeat/f-services';
+import VueScrollTo from 'vue-scrollto';
 
 export default {
     mixins: [validationMixin],
 
-    data () {
-        return {
-            fields: {}
-        };
-    },
-
     computed: {
+        fields () {
+            return this.formData.formFields;
+        },
+
         validationState () {
             return validations.getFormValidationState(this.$v);
         },
@@ -37,16 +36,16 @@ export default {
 
         const formFields = {};
 
-        if (this.fields.length) {
+        if (this.fields?.length) {
             this.fields.forEach(field => {
                 const validationMessages = field.translations?.validationMessages;
 
                 if (validationMessages) {
                     formFields[field.name] = {
                         required,
-                        ...(validationMessages.invalid ? {
+                        ...validationMessages.invalid && {
                             isValid: invalidValidations[field.name]
-                        } : {})
+                        }
                     };
                 }
             });
@@ -56,10 +55,6 @@ export default {
     },
 
     methods: {
-        createValidations (formData) {
-            this.fields = formData;
-        },
-
         isFormValid () {
             this.$v.$touch();
 
@@ -78,9 +73,12 @@ export default {
             return postcodeValue && validations.isValidPostcode(postcodeValue.value, this.locale);
         },
 
-        formFieldBlur (fieldName) {
-            if (this.fieldValidations(fieldName)) {
-                this.fieldValidations(fieldName).$touch();
+        formFieldBlur (field) {
+            const { name, validationMessages } = field;
+            const fieldValidations = this.fieldValidations(name);
+
+            if (validationMessages?.invalid && fieldValidations) {
+                fieldValidations.$touch();
             }
         },
 
@@ -89,14 +87,29 @@ export default {
         },
 
         fieldStatus (fieldName) {
-            const isDirty = this.fieldValidations(fieldName).$dirty;
-            const hasRequiredError = isDirty && !this.fieldValidations(fieldName).required;
-            const hasInvalidError = isDirty && this.fieldValidations(fieldName).isValid === false;
+            const fieldValidations = this.fieldValidations(fieldName);
 
-            if (hasRequiredError || hasInvalidError) {
-                return hasRequiredError ? 'required' : 'invalid';
+            if (fieldValidations) {
+                const isDirty = fieldValidations?.$dirty;
+                const hasRequiredError = isDirty && !fieldValidations.required;
+                const hasInvalidError = isDirty && fieldValidations.isValid === false;
+
+                if (hasRequiredError || hasInvalidError) {
+                    return hasRequiredError ? 'required' : 'invalid';
+                }
             }
             return false;
+        },
+
+        scrollToFirstInlineError () {
+            this.$nextTick(() => {
+                const scrollingDurationInMilliseconds = 650;
+                const firstInlineError = document.querySelector('[data-js-error-message]');
+
+                if (firstInlineError) {
+                    VueScrollTo.scrollTo(firstInlineError, scrollingDurationInMilliseconds, { offset: -100 });
+                }
+            });
         }
     }
 };

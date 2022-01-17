@@ -1,11 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Form computed ::  formFieldData ::  should create an array of formFields with additional fieldData 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "input-type": "text",
+      "label-text": "First Name",
+      "name": "first-name",
+    },
+    "translations": Object {
+      "label": "First Name",
+      "validationMessages": Object {
+        "required": "Enter First Name",
+      },
+    },
+    "validationMessages": Object {
+      "required": "Enter First Name",
+    },
+    "value": "John",
+  },
+]
+`;
+
 exports[`Form computed ::  formFields ::  should return an object of \`formData\` keys and field values 1`] = `
 Object {
-  "email": "John.Johnson@gmail.com",
   "firstName": "John",
-  "lastName": "Johnson",
-  "mobileNumber": "07111111111",
-  "postcode": "EC1A1BB",
 }
 `;

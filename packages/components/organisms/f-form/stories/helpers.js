@@ -1,4 +1,4 @@
-const firstNameData = {
+const fieldWithRequiredValidations = {
     name: 'firstName',
     value: 'John',
     translations: {
@@ -6,6 +6,14 @@ const firstNameData = {
         validationMessages: {
             required: 'Enter First Name'
         }
+    }
+};
+
+const fieldWithoutValidations = {
+    name: 'lastName',
+    value: 'Johnson',
+    translations: {
+        label: 'Last Name'
     }
 };
 
@@ -33,27 +41,23 @@ const postcodeData = {
     }
 };
 
+const fieldWithBothValidations = {
+    name: 'email',
+    value: 'John.Johnson@gmail.com',
+    translations: {
+        label: 'Email Address',
+        validationMessages: {
+            required: 'Enter Email Address',
+            invalid: 'Enter valid Email Address'
+        }
+    }
+};
+
 const formData = {
     formFields: [
-        firstNameData,
-        {
-            name: 'lastName',
-            value: 'Johnson',
-            translations: {
-                label: 'Last Name'
-            }
-        },
-        {
-            name: 'email',
-            value: 'John.Johnson@gmail.com',
-            translations: {
-                label: 'Email Address',
-                validationMessages: {
-                    required: 'Enter Email Address',
-                    invalid: 'Enter valid Email Address'
-                }
-            }
-        },
+        fieldWithRequiredValidations,
+        fieldWithoutValidations,
+        fieldWithBothValidations,
         phoneNumberData,
         postcodeData
     ],
@@ -62,7 +66,9 @@ const formData = {
 
 export {
     formData,
-    firstNameData,
+    fieldWithRequiredValidations,
+    fieldWithoutValidations,
+    fieldWithBothValidations,
     phoneNumberData,
     postcodeData
 };

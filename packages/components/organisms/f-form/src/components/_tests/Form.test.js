@@ -1,25 +1,36 @@
 import { shallowMount } from '@vue/test-utils';
-import { validations } from '@justeat/f-services';
 import {
     localVue,
     i18n,
-    $v
+    $v,
+    FormFieldErrorMock,
+    FormFieldMock
 } from './helpers';
 import {
-    formData,
-    firstNameData,
-    phoneNumberData,
-    postcodeData
+    fieldWithRequiredValidations,
+    fieldWithoutValidations
 } from '../../../stories/helpers';
-
+import FormValidationMixin from '../../mixin/formValidation.mixin';
 import { FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../../constants';
 import VForm from '../Form.vue';
+import { FormFieldClass, FormFieldErrorClass } from '../../services/formField';
+
+jest.mock('../../services/formField');
+
+FormFieldClass.mockImplementation(() => (FormFieldMock));
+
+FormFieldErrorClass.mockImplementation(() => (FormFieldErrorMock));
 
 describe('Form', () => {
     let propsData;
 
     beforeEach(() => {
-        propsData = { formData, locale: 'en-GB' };
+        propsData = {
+            formData: {
+                formFields: [fieldWithRequiredValidations]
+            },
+            locale: 'en-GB'
+        };
     });
 
     it('should be defined', () => {
@@ -34,7 +45,7 @@ describe('Form', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('should have one form with method "post"', () => {
+    it('should have a form with method "post"', () => {
         // Arrange
         const wrapper = shallowMount(VForm, {
             i18n,
@@ -60,7 +71,7 @@ describe('Form', () => {
             spy.mockRestore();
         });
 
-        xit('should throw an error when `formFields` property is missing from `formData`', () => {
+        it('should throw an error when `formFields` property is missing from `formData`', () => {
             // Act & Assert
             expect(() => {
                 shallowMount(VForm, {
@@ -158,10 +169,40 @@ describe('Form', () => {
                     propsData
                 });
 
+                // Act
                 const result = wrapper.vm.formFields;
 
                 // Assert
                 expect(result).toMatchSnapshot();
+            });
+        });
+
+        describe('formFieldData :: ', () => {
+            let wrapper;
+            let createFieldSpy;
+            let result;
+
+            beforeEach(() => {
+                // Arrange
+                createFieldSpy = jest.spyOn(VForm.methods, 'createField');
+                wrapper = shallowMount(VForm, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                result = wrapper.vm.formFieldData;
+            });
+
+            it('should create an array of formFields with additional fieldData', () => {
+                // Assert
+                expect(result).toMatchSnapshot();
+            });
+
+            it('should call `createField` with field', () => {
+                // Assert
+                expect(createFieldSpy).toHaveBeenCalledWith(fieldWithRequiredValidations);
             });
         });
     });
@@ -181,13 +222,146 @@ describe('Form', () => {
                 });
 
                 const emitSpy = jest.spyOn(wrapper.vm, '$emit');
-                const payload = { fieldName: 'firstName', value: 'Joe' };
+                const payload = { name: 'firstName', value: 'Joe' };
 
                 // Act
                 wrapper.vm.updateField(payload);
 
                 // Assert
                 expect(emitSpy).toHaveBeenCalledWith(FORM_EVENTS.fieldUpdated, payload);
+            });
+        });
+
+        describe('createField :: ', () => {
+            let fieldStatusSpy;
+
+            beforeEach(() => {
+                fieldStatusSpy = jest.spyOn(FormValidationMixin.methods, 'fieldStatus');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            describe('when field has validationMessages', () => {
+                it('should call `fieldStatus` with fieldName', () => {
+                    // Arrange
+                    const wrapper = shallowMount(VForm, {
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    wrapper.vm.createField(fieldWithRequiredValidations);
+
+                    // Assert
+                    expect(fieldStatusSpy).toHaveBeenCalledWith(fieldWithRequiredValidations.name);
+                });
+
+                describe('when field has an error', () => {
+                    const errorType = 'required';
+
+                    beforeEach(() => {
+                        fieldStatusSpy.mockReturnValue(errorType);
+                    });
+
+                    afterEach(() => {
+                        jest.clearAllMocks();
+                    });
+
+                    it('should not create fieldData with `FormFieldErrorClass` with field and error', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VForm, {
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+
+                        // Act
+                        const result = wrapper.vm.createField(fieldWithRequiredValidations);
+
+                        // Assert
+                        expect(FormFieldErrorClass).toHaveBeenCalledWith(fieldWithRequiredValidations, errorType);
+                        expect(result).toEqual(FormFieldErrorMock);
+                    });
+                });
+
+                describe('when field does not have an error', () => {
+                    beforeEach(() => {
+                        fieldStatusSpy.mockReturnValue(false);
+                    });
+
+                    afterEach(() => {
+                        jest.clearAllMocks();
+                    });
+
+                    it('should not create fieldData with `FormFieldClass` with field', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VForm, {
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+
+                        // Act
+                        const result = wrapper.vm.createField(fieldWithRequiredValidations);
+
+                        // Assert
+                        expect(FormFieldClass).toHaveBeenCalledWith(fieldWithRequiredValidations);
+                        expect(result).toEqual(FormFieldMock);
+                    });
+                });
+
+                describe('when field has Error', () => {
+                    const errorType = 'required';
+
+                    beforeEach(() => {
+                        fieldStatusSpy.mockReturnValue(errorType);
+                    });
+
+                    afterEach(() => {
+                        jest.clearAllMocks();
+                    });
+
+                    it('should create fieldData with `FormFieldErrorClass` with field and error', () => {
+                        // Arrange
+                        const wrapper = shallowMount(VForm, {
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+
+                        // Act
+                        const result = wrapper.vm.createField(fieldWithRequiredValidations);
+
+                        // Assert
+                        expect(FormFieldErrorClass).toHaveBeenCalledWith(fieldWithRequiredValidations, errorType);
+                        expect(result).toEqual(FormFieldErrorMock);
+                    });
+                });
+            });
+
+            describe('when field does not have validationMessages', () => {
+                it('should not call `fieldStatus`', () => {
+                    // Arrange
+                    const wrapper = shallowMount(VForm, {
+                        i18n,
+                        localVue,
+                        propsData: {
+                            ...propsData,
+                            formData: {
+                                formFields: [fieldWithoutValidations]
+                            }
+                        }
+                    });
+
+                    // Act
+                    wrapper.vm.createField(fieldWithoutValidations);
+
+                    // Assert
+                    expect(fieldStatusSpy).not.toHaveBeenCalledWith(fieldWithoutValidations.name);
+                });
             });
         });
 
@@ -241,11 +415,11 @@ describe('Form', () => {
                 it('should emit `FormValid` event with valid fields', () => {
                     // Arrange
                     const expected = {
-                        email: 'John.Johnson@gmail.com',
-                        firstName: 'John',
-                        lastName: 'Johnson',
-                        mobileNumber: '07111111111',
-                        postcode: 'EC1A1BB'
+                        // email: 'John.Johnson@gmail.com',
+                        firstName: 'John'
+                        // lastName: 'Johnson',
+                        // mobileNumber: '07111111111',
+                        // postcode: 'EC1A1BB'
                     };
 
                     // Act
@@ -256,7 +430,7 @@ describe('Form', () => {
                 });
             });
 
-            xdescribe('when `$v.$invalid` is false', () => {
+            describe('when `$v.$invalid` is false', () => {
                 const validationState = {
                     validFields: [
                         'formFields.firstName',
@@ -267,11 +441,9 @@ describe('Form', () => {
                     invalidFields: []
                 };
 
-                // let scrollToFirstInlineErrorSpy;
-
                 beforeEach(() => {
                     // Arrange
-                    jest.spyOn(validations, 'getFormValidationState').mockReturnValue(validationState);
+                    jest.spyOn(FormValidationMixin.computed, 'validationState').mockReturnValue(validationState);
                     // scrollToFirstInlineErrorSpy = jest.spyOn(VForm.methods, 'scrollToFirstInlineError');
 
                     wrapper = shallowMount(VForm, {

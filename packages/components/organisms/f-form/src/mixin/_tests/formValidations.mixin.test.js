@@ -7,16 +7,67 @@ import {
 } from '../../components/_tests/helpers';
 import {
     formData,
-    firstNameData,
+    fieldWithoutValidations,
+    fieldWithBothValidations,
     phoneNumberData,
     postcodeData
 } from '../../../stories/helpers';
 
-import { FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../../constants';
 import formValidations from '../formValidation.mixin';
 
 describe('Form', () => {
+    let baseComponent;
+
+    beforeEach(() => {
+        baseComponent = {
+            render () {},
+            data () {
+                return {
+                    formData,
+                    locale: 'en-GB'
+                };
+            },
+            mixins: [formValidations]
+        };
+    });
+
     describe('computed :: ', () => {
+        describe('validationState ::', () => {
+            const expectedState = {
+                invalidFields: [],
+                validFields: []
+            };
+            let getFormValidationStateSpy;
+
+            beforeEach(() => {
+                getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState').mockReturnValue(expectedState);
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `getFormValidationState` with validations and return value', () => {
+                const wrapper = shallowMount(baseComponent, {
+                    i18n,
+                    localVue,
+                    mocks: {
+                        $v: {
+                            ...$v,
+                            dirty: false
+                        }
+                    }
+                });
+
+                // Act
+                const { validationState } = wrapper.vm;
+
+                // Assert
+                expect(getFormValidationStateSpy).toHaveBeenCalledWith($v);
+                expect(validationState).toEqual(expectedState);
+            });
+        });
+
         describe('invalidFieldsSummary ::', () => {
             let wrapper;
 
@@ -26,11 +77,9 @@ describe('Form', () => {
             });
 
             it('should return `null` if no fields have been touched', () => {
-                // Arrange & Act
-                wrapper = shallowMount(formValidations, {
+                wrapper = shallowMount(baseComponent, {
                     i18n,
                     localVue,
-                    render () {},
                     mocks: {
                         $v: {
                             ...$v,
@@ -52,10 +101,9 @@ describe('Form', () => {
                 jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
 
                 // Act
-                wrapper = shallowMount(formValidations, {
+                wrapper = shallowMount(baseComponent, {
                     i18n,
                     localVue,
-                    render () {},
                     mocks: {
                         $v: {
                             ...$v,
@@ -81,12 +129,15 @@ describe('Form', () => {
             });
 
             it('should call `.touch()` ', () => {
-                // Act
-                const wrapper = shallowMount(formValidations, {
+                const wrapper = shallowMount(baseComponent, {
                     i18n,
                     localVue,
-                    render () {},
-                    mocks: { $v }
+                    mocks: {
+                        $v: {
+                            ...$v,
+                            dirty: false
+                        }
+                    }
                 });
 
                 wrapper.vm.isFormValid();
@@ -99,11 +150,9 @@ describe('Form', () => {
                 [true, false],
                 [false, true]
             ])('should return %s if `$v.invalid` is $s', (expected, $invalid) => {
-                // Arrange & Act
-                const wrapper = shallowMount(formValidations, {
+                const wrapper = shallowMount(baseComponent, {
                     i18n,
                     localVue,
-                    render () {},
                     mocks: {
                         $v: {
                             ...$v,
@@ -117,7 +166,7 @@ describe('Form', () => {
             });
         });
 
-        xdescribe('isValidPhoneNumber ::', () => {
+        describe('isValidPhoneNumber ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -126,10 +175,9 @@ describe('Form', () => {
                 // Arrange
                 const isValidPhoneNumberSpy = jest.spyOn(validations, 'isValidPhoneNumber');
 
-                const wrapper = shallowMount(formValidations, {
+                const wrapper = shallowMount(baseComponent, {
                     i18n,
-                    localVue,
-                    render () {}
+                    localVue
                 });
 
                 // Act
@@ -140,7 +188,7 @@ describe('Form', () => {
             });
         });
 
-        xdescribe('isValidPostcode ::', () => {
+        describe('isValidPostcode ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -148,10 +196,10 @@ describe('Form', () => {
             it('should call `isValidPostcode` from `f-services`', () => {
                 // Arrange
                 const isValidPostcodeSpy = jest.spyOn(validations, 'isValidPostcode');
-                const wrapper = shallowMount(formValidations, {
+
+                const wrapper = shallowMount(baseComponent, {
                     i18n,
-                    localVue,
-                    render () {}
+                    localVue
                 });
 
                 // Act
@@ -159,6 +207,99 @@ describe('Form', () => {
 
                 // Assert
                 expect(isValidPostcodeSpy).toHaveBeenCalledWith(postcodeData.value, 'en-GB');
+            });
+        });
+
+        describe('fieldStatus ::', () => {
+            describe('when field does not have validations', () => {
+                beforeEach(() => {
+                    baseComponent.data = () => ({
+                        formData: {
+                            formFields: [
+                                fieldWithoutValidations
+                            ]
+                        }
+                    });
+                });
+
+                it('should return false', () => {
+                    // Arrange
+                    const wrapper = shallowMount(baseComponent, {
+                        i18n,
+                        localVue
+                    });
+
+                    // Act
+                    const result = wrapper.vm.fieldStatus('lastName');
+
+                    // Assert
+                    expect(result).toEqual(false);
+                });
+            });
+
+            it('should return false when field is not dirty', () => {
+                // Arrange
+                const wrapper = shallowMount(baseComponent, {
+                    i18n,
+                    localVue,
+                    mocks: {
+                        $v: {
+                            formFields: {
+                                fieldWithBothValidations: {
+                                    $dirty: false
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.fieldStatus('email');
+
+                // Assert
+                expect(result).toEqual(false);
+            });
+
+            describe('when field is dirty and has validations', () => {
+                beforeEach(() => {
+                    baseComponent.data = () => ({
+                        formData: {
+                            formFields: [
+                                fieldWithBothValidations
+                            ]
+                        }
+                    });
+                });
+
+                it.each([
+                    [false, true, true],
+                    ['required', false, false],
+                    ['required', false, true],
+                    ['invalid', true, false]
+                ])('should return %s if required is %s and isValid is %s', (expected, required, isValid) => {
+                    // Arrange
+                    const wrapper = shallowMount(baseComponent, {
+                        i18n,
+                        localVue,
+                        mocks: {
+                            $v: {
+                                formFields: {
+                                    email: {
+                                        required,
+                                        isValid,
+                                        $dirty: true
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    // Act
+                    const result = wrapper.vm.fieldStatus('email');
+
+                    // Assert
+                    expect(result).toEqual(expected);
+                });
             });
         });
     });
