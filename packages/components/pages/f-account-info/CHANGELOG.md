@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.14.4
 ------------------------------
-*January 17, 2022*
+*January 18, 2022*
 
 ### Added
 -  Exposed test methods wait & isdisplayed for error card
