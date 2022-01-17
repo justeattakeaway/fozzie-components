@@ -10,9 +10,6 @@ v0.14.2
 ### Added
 -  `src/services` and `src/constants.js` to `dist` in package.json
 
-### Changed
-- private functions to public in `Consumer.api`for testing access
-
 
 v0.14.1
 ------------------------------
