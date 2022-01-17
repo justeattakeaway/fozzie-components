@@ -2,7 +2,7 @@
     <div
         :class="[$style['c-restaurantCard-img']]"
         :style="`background-image: url(${imgUrl});`"
-        role="img">
+        role="presentation">
         <slot />
     </div>
 </template>
