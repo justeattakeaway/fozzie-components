@@ -70,7 +70,11 @@ RestaurantCardComponent.args = {
             }
         ],
         offer: '30% off when you spend £20 - some really really long offer that hopefully never happens but we need to protect against just in case',
-        isPremier: true
+        isPremier: true,
+        fees: {
+            deliveryFeeText: '£2.50 delivery fee',
+            minOrderText: 'No min. order'
+        }
     },
 
     flags: {

@@ -98,6 +98,10 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
+            <restaurant-fees
+                v-if="hasFees"
+                v-bind="fees" />
+
             <!-- Tags -->
             <div>
                 <!-- misc tags -->
@@ -154,6 +158,7 @@ import RestaurantTag from './subcomponents/RestaurantTags/RestaurantTag.vue';
 import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.vue';
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 import IconText from './subcomponents/IconText.vue';
+import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
 
 export default {
     name: 'RestaurantCardV1',
@@ -168,7 +173,8 @@ export default {
         DeliveryTimeMeta,
         IconText,
         OfferIcon,
-        LegendIcon
+        LegendIcon,
+        RestaurantFees
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -237,6 +243,10 @@ export default {
         isPremier: {
             type: Boolean,
             default: false
+        },
+        fees: {
+            type: Object,
+            default: () => {}
         }
     },
     computed: {
@@ -256,6 +266,9 @@ export default {
         },
         hasDishes () {
             return !!this.dishes?.length;
+        },
+        hasFees () {
+            return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
         }
     },
     provide () {
