@@ -36,7 +36,7 @@ export default class ConsumerApi {
     }
 
     setConversationId = conversationId => {
-        const cid = conversationId || uuid(); 
+        const cid = conversationId || uuid();
 
         this.cookies.set(CONVERSATION_ID_NAME, cid);
 
