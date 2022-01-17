@@ -6,7 +6,7 @@
             :text="deliveryFeeText"
             :hide-icon-in-tile-view="true"
             data-test-id="restaurant-fees-delivery">
-            <cash-icon data-test-id="restaurant-fees-delivery-icon" />
+            <cash-small-icon data-test-id="restaurant-fees-delivery-icon" />
         </icon-text>
 
         <icon-text
@@ -18,14 +18,14 @@
 </template>
 
 <script>
-import { CashIcon } from '@justeat/f-vue-icons';
+import { CashSmallIcon } from '@justeat/f-vue-icons';
 import IconText from '../IconText.vue';
 
 export default {
     name: 'RestaurantFees',
     components: {
         IconText,
-        CashIcon
+        CashSmallIcon
     },
     props: {
         deliveryFeeText: {
