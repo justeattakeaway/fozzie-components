@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
-*January 12, 2021*
+*January 18, 2021*
 
 ### Added
 - Add field validations.

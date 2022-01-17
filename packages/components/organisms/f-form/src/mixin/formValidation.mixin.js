@@ -89,10 +89,9 @@ export default {
         fieldStatus (fieldName) {
             const fieldValidations = this.fieldValidations(fieldName);
 
-            if (fieldValidations) {
-                const isDirty = fieldValidations?.$dirty;
-                const hasRequiredError = isDirty && !fieldValidations.required;
-                const hasInvalidError = isDirty && fieldValidations.isValid === false;
+            if (fieldValidations?.$dirty) {
+                const hasRequiredError = !fieldValidations.required;
+                const hasInvalidError = fieldValidations.isValid === false;
 
                 if (hasRequiredError || hasInvalidError) {
                     return hasRequiredError ? 'required' : 'invalid';
