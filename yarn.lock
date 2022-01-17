@@ -2221,14 +2221,6 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
 
-"@justeat/f-form-field@4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.5.0.tgz#931d5d643090c2fce46ecf8302b3333013fb3d7d"
-  integrity sha512-EJLkg0vzxS+BE16mZ2Q2r7bB3jvZd8EFW8jB5GmACSqtsCe0iLLFSfY2cPlDx3oZ1nZMoRse/T2foCrjH5c7dg==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "2.5.0"
-
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2244,10 +2236,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.4.0.tgz#a4bf50814d2f8a2fd91e25a2abef7bdb16ad74e7"
-  integrity sha512-2jrzrulKUN2VH6ULIgAqZR3RYtAZutM0BUD4K54saOquj3N1apnrnM1vrgYl6+V8kBvU6x5/FW8/eQSnW3Qr1Q==
+"@justeat/f-icons@4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.5.0.tgz#f0450300270a10996679c6f6d4525ee07594a736"
+  integrity sha512-LSdfZlllois1KHhsSS0QmtQKkXM1c0PNXcb8EmKMmU169BF+CQPqqqvuKb9Twt1IGYY7m3alsr292kv/5SvaGQ==
 
 "@justeat/f-link@2.0.0":
   version "2.0.0"

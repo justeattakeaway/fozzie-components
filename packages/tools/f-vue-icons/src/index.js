@@ -36,6 +36,7 @@ export { default as BagIcon } from '../icons/BagIcon';
 export { default as BasketIcon } from '../icons/BasketIcon';
 export { default as BinIcon } from '../icons/BinIcon';
 export { default as CaretIcon } from '../icons/CaretIcon';
+export { default as CashSmallIcon } from '../icons/CashSmallIcon';
 export { default as CashIcon } from '../icons/CashIcon';
 export { default as CertificateConfianzaIcon } from '../icons/CertificateConfianzaIcon';
 export { default as ChevronSplitIcon } from '../icons/ChevronSplitIcon';
