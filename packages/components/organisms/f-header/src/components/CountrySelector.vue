@@ -110,14 +110,6 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
 
-.c-nav-list-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    background: transparent;
-}
-
 .c-nav-list-iconWrapper {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
