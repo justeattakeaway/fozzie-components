@@ -151,13 +151,16 @@
                     data-test-id="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openUserMenu, mouseleave: closeUserMenu }"
                     @keyup.esc="closeUserMenu">
-                    <a
+                    <button
+                        type="button"
                         data-test-id="user-info-link"
                         :tabindex="isBelowMid ? -1 : 0"
                         :aria-expanded="!isBelowMid && userMenuIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
-                        :class="$style['c-nav-list-text']"
-                        href="/"
+                        :class="[
+                            $style['c-nav-list-text'],
+                            $style['c-nav-list-btn']
+                        ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
                         <profile-icon
@@ -181,7 +184,7 @@
                             ]">
                             {{ userInfo.email }}
                         </span>
-                    </a>
+                    </button>
 
                     <v-popover :class="$style['c-nav-popover']">
                         <user-navigation-panel
@@ -459,9 +462,12 @@ export default {
                 this.closeCountrySelector();
             }
 
-            // This is added to remove the ability to scroll the page content when the mobile navigation is open
-            this.handleMobileNavState();
-            this.tabLoop();
+            if (this.isBelowMid && this.navIsOpen) {
+                // This is added to remove the ability to scroll the page content when the mobile navigation is open
+                this.handleMobileNavState();
+
+                this.tabLoop();
+            }
         },
 
         /**
@@ -498,7 +504,14 @@ export default {
          * binding tab events via the keydown method
          */
         tabLoop () {
-            if (!this.isBelowMid || !this.navIsOpen) return;
+            const { nav } = this.$refs;
+
+            if (!this.isBelowMid || !this.navIsOpen) {
+                // If we're not in mobile view and the nav is not open,
+                // we want to remove the event listener if it already exists
+                nav.removeEventListener('keydown', this.keyActions);
+                return;
+            }
 
             // use `nextTick` to give Vue enough time to update the DOM
             this.$nextTick(() => {
@@ -507,10 +520,6 @@ export default {
                     '[aria-hidden="false"] > button:not([disabled]):not([inert])',
                     '[tabindex]:not([tabindex^="-"]):not([inert])'
                 ].join();
-
-                const {
-                    nav
-                } = this.$refs;
 
                 // Filter any "hidden" elements
                 const nodeList = nav.querySelectorAll(focusableElsSelector) || [];
@@ -523,6 +532,7 @@ export default {
                 this.firstFocusableEl = firstFocusableEl;
                 this.lastFocusableEl = lastFocusableEl;
 
+                // Add loop-handling event listener
                 nav.addEventListener('keydown', this.keyActions);
             });
         },
