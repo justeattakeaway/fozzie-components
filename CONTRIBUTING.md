@@ -73,26 +73,8 @@ If you are making changes that do not need a version bump in any part of the rep
 
 ## Publishing via npm
 
-To publish a package to **npm**, please first ensure that you have registered an account on [npmjs.com](https://www.npmjs.com/).
-
-Internal contributors (JET Employees) should request to be added to the Just Eat npm organisation by asking in the #guild-frontend Slack channel and providing their npm username. This will then allow you to publish the packages from our mono-repo.
-
-To be able to publish you will need to run `npm login` first. You will also need to add your github access token to `.npmrc` file for components to be published to our Storybook. More info about that can be found [here](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages).
-
-External contributors should raise a pull request and the release will be handled for you once approved.
-
-Once you are happy that the package is ready to be published, ensure you are on the correct branch — typically the `master`/`main` branch with the latest changes pulled. Then run `npm publish` on the command line.
+Publishing to **npm** is handled automatically as part of our CI process. Once a PR has been merged to master, any package versions that are not present on npm will be published as part of the **master** build.  Failure to do this will result in the `latest` version being overwritten on the registry.
 
 ## Publishing beta releases
 
-It can be useful to publish a package under a beta or alpha tag, prior to publishing it on the default release tag. For example, when working on a major version release that can be used by some consuming applications, but should not be made fully available for consumption.
-
-To do this, we use npm tags and separate release branches.
-
-As an example, if the current version of `@justeat/f-header` was currently `2.5.0` and I wanted to publish version 3 as a beta release, I would do the following.
-
-1. Create a branch off the main repository branch to be used for my beta changes. All subsequent PRs should be merged into this branch until the release branch is merged back into the `main`/`master` repository branch, so that other teams can continue to work on version 2 of the component if needed.
-2. Update the components version in its `package.json` to be `3.0.0-beta.0`. Subsequent v3 beta releases will increment this integer suffix `-beta.x`
-3. Once a PR has been merged into the v3 release branch, the package should be published using the following command: `npm publish --tag beta`.
-   This publishes the package using the tag `beta` ensuring that it doesn't get tagged as the `latest` version of the package.
-4. When the package is ready for full release as v3, the `package.json` of the component should be updated to `3.0.0` in its `package.json` and a PR from the v3 release branch should be made back into the `main`/`master` branch. When this has been merged, the component can be published as normal using `npm publish`
+When working with beta package versions, you must ensure the `tag: "beta"` property is present in the package's `package.json` file **before** merging to master. Failure to do this will result in the `latest` version being overwritten on the registry.
