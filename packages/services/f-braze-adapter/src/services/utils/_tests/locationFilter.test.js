@@ -5,17 +5,17 @@ const MOCK_CARDS = [
     {
         id: '1',
         type: 'HCC',
-        locations: 'BS1 3EQ, BA11 2PT'
+        location: 'BS1 3EQ, BA11 2PT'
     },
     {
         id: '2',
         type: 'HCC',
-        locations: 'BA11 2PT'
+        location: 'BA11 2PT'
     },
     {
         id: '3',
         type: 'HCC',
-        locations: ''
+        location: ''
     },
     {
         id: '4',
@@ -36,7 +36,7 @@ describe('LocationFilter', () => {
         expect(filteredCards.length).toEqual(3);
     });
 
-    it('should NOT return cards that do not match the users current location where a locations KVP exists', () => {
+    it('should NOT return cards that do not match the users current location where a location KVP exists', () => {
         // Arrange & Act
         const filteredCards = locationFilter(MOCK_CARDS, MOCK_CURRENT_LOCATION);
         const cardNoLocations = filteredCards.find(c => c.id === '3');
@@ -48,7 +48,7 @@ describe('LocationFilter', () => {
         expect(filteredCards.length).toEqual(3);
     });
 
-    it('should return cards that have NO locations KVP where a user has a current location', () => {
+    it('should return cards that have NO location KVP where a user has a current location', () => {
         // Arrange & Act
         const filteredCards = locationFilter(MOCK_CARDS, MOCK_CURRENT_LOCATION);
 
@@ -58,7 +58,7 @@ describe('LocationFilter', () => {
         expect(filteredCards.length).toEqual(3);
     });
 
-    it('should NOT return cards that have locations KVP where a user does NOT have a current location', () => {
+    it('should NOT return cards that have location KVP where a user does NOT have a current location', () => {
         // Arrange & Act
         const filteredCards = locationFilter(MOCK_CARDS, {
             location: null,
@@ -76,7 +76,7 @@ describe('LocationFilter', () => {
         expect(filteredCards.length).toEqual(2);
     });
 
-    it('should return cards that have NO locations KVP when the user has NO current location', () => {
+    it('should return cards that have NO location KVP when the user has NO current location', () => {
         // Arrange & Act
         const filteredCards = locationFilter(MOCK_CARDS, {
             location: null,

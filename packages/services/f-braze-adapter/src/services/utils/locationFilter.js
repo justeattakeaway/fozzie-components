@@ -5,7 +5,7 @@
  */
 const locationFilter = (cards, { location }) => cards.filter(card => {
     // will be undefined if no locations KVP exists
-    const locationsList = card?.locations?.split(',');
+    const locationsList = card?.location?.split(',');
     // return true if NO KVP
     if (locationsList === undefined) {
         return true;
