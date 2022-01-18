@@ -1,5 +1,6 @@
 {
   "name": "@justeat/storybook",
+  "private":"true",
   "version": "0.48.0",
   "scripts": {
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
