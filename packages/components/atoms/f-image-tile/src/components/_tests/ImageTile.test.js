@@ -64,7 +64,7 @@ describe('ImageTile', () => {
             });
 
             describe('imgSrc :: ', () => {
-                it('should apply `tileId` to the label for', () => {
+                it('should apply `imgSrc` to the image src', () => {
                     // Arrange
                     const propsData = { imgSrc: 'https://via.placeholder.com/150' };
 
@@ -77,6 +77,21 @@ describe('ImageTile', () => {
 
                     // Assert
                     expect(image.attributes('src')).toContain(propsData.imgSrc);
+                });
+
+                it('should not have an image if the `imgSrc` is empty', () => {
+                    // Arrange
+                    const propsData = { imgSrc: '' };
+
+                    // Act
+                    const wrapper = shallowMount(ImageTile, {
+                        propsData
+                    });
+
+                    const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+                    // Assert
+                    expect(image.exists()).toBe(false);
                 });
             });
 
@@ -99,6 +114,48 @@ describe('ImageTile', () => {
                     // Assert
                     expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
                 });
+            });
+        });
+    });
+
+    describe('computed :: ', () => {
+        describe('addPresentationRole :: ', () => {
+            it.each([
+                [false, 'this is some alt text', undefined],
+                [true, '', 'presentation']
+            ])('should return %s if alt text is %s', (expected, altText, role) => {
+                // Arrange
+                const propsData = {
+                    altText, imgSrc: 'https://via.placeholder.com/150'
+                };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+                // Assert
+                expect(wrapper.vm.addPresentationRole).toEqual(expected);
+                expect(image.attributes('role')).toEqual(role);
+            });
+        });
+
+        describe('cssVars :: ', () => {
+            it('should return fallbackImage as a css variable', () => {
+                // Arrange
+                const propsData = { fallbackImage: 'https://via.placeholder.com/150' };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const expected = { '--bg-image': 'url("https://via.placeholder.com/150")' };
+
+                // Assert
+                expect(wrapper.vm.cssVars).toEqual(expected);
             });
         });
     });
