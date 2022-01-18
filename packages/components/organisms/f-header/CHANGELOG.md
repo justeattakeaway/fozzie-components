@@ -6,10 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v9.3.0
 ------------------------------
-*January 17, 2021*
+*January 19, 2021*
 
 ### Fixed
-- User menu was not visibly toggling with keyboard navigation
+- User menu was not visibly toggling with keyboard navigation.
+
+### Changed
+- User account submenu link to button for increased accessibility.
+- Screen readers will now announce the country selector title, e.g., "Select your country".
+- Reorganised and rewritten some of the Navigation unit tests.
 
 
 v9.2.0
