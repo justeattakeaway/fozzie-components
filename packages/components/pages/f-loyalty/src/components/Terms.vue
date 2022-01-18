@@ -20,7 +20,7 @@
 .c-loyalty-terms-link {
     margin: spacing(x3) 0;
     text-align: center;
-    font-weight: $font-bodyStrong-s-weight;
+    font-weight: $font-body-strong-s-weight;
     text-decoration: none;
 
     &:hover {

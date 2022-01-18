@@ -165,19 +165,27 @@ export default {
 </script>
 
 <style lang="scss" module>
+$stampCard-responsive-tabletViewBreakpoint: '<=wide';
 $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 
 .c-loyalty-stampCardsSlotCardsContainer {
     margin: spacing() 0;
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-gap: spacing(x2);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 
-    .c-stampcards-stampCardsSlot-stampCard {
-        margin: spacing();
+    @include media($stampCard-responsive-tabletViewBreakpoint) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media($stampCard-responsive-mobileViewBreakpoint) {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .c-loyalty-stampCardsSlot-stampCard {
         overflow: auto;
-        @include media($stampCard-responsive-mobileViewBreakpoint) {
-            flex: 1 1 90%;
-        }
+        width: 100%;
+        background-color: $color-white;
     }
 }
 
