@@ -486,6 +486,17 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
+  publish-to-npm:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Publish unreleased package versions to npm
+          command: npx lerna publish from-package --ignore-scripts --yes
+      - slack_notify_fail
+      - slack_notify_success
+
 workflows:
   version: 2
 
@@ -532,6 +543,16 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - unit-tests-<< matrix.component_type >>
+      - publish-to-npm:
+          context: web-core
+          filters:
+            branches:
+              only: master
+          requires:
+            - browser-tests-atoms
+            - browser-tests-molecules
+            - browser-tests-organisms
+            - browser-tests-pages
 
   deploy-storybook:
     jobs:
