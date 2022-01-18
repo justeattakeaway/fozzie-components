@@ -4,8 +4,9 @@
             v-if="!shouldShowErrorPage"
             :card-heading="$t('accountDetails')"
             data-test-id="account-info"
-            has-outline
-            is-page-content-wrapper>
+            has-inner-spacing-large
+            :card-size-custom="'medium'"
+            has-outline>
             <h2
                 class="u-spacingBottom--large">
                 {{ $t('yourDetails') }}
