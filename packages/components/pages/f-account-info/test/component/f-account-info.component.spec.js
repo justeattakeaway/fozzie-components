@@ -86,6 +86,7 @@ describe('f-account-info component tests', () => {
         accountInfo.clearBlurField('phoneNumber');
         accountInfo.populateAccountForm('phoneNumber', customerInput);
         accountInfo.clickOutOfInputField();
+        accountInfo.focusField('lastName');
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);

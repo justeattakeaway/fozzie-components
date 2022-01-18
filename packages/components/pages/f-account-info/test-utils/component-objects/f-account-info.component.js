@@ -109,6 +109,12 @@ module.exports = class AccountInfo extends Page {
         el.keys(['Backspace']);
     }
 
+
+    focusField (fieldName) {
+        const el = this.fields[fieldName].input;
+        el.click();
+    }
+
     /**
     * @description
     * Inputs customer details into the account-info component.

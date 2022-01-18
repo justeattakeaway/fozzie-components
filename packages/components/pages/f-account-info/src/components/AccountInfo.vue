@@ -285,7 +285,7 @@ export default {
             isFormSubmitting: false,
             hasFormUpdate: false,
             hasAddressBeenUpdated: false,
-            shouldShowErrorPage: true,
+            shouldShowErrorPage: false,
             error: {}
         };
     },
