@@ -14,13 +14,17 @@ export const DemoImageTileComponent = (args, { argTypes }) => ({
     },
     props: Object.keys(argTypes),
     template: `
-                <test-container>
+                <test-container
+                :fallback-image="fallbackImage"
+                :cuisine-image="cuisineImage"
+                :cuisine-id="cuisineId">
                     <image-tile
                         :tile-id="cuisineId"
                         :href="cuisineId"
                         :img-src="cuisineImage"
                         :display-text="cuisineId"
                         :is-selected="selected"
+                        :fallback-image="fallbackImage"
                         @toggle="toggleCuisine"
                     >
                     </image-tile>
@@ -38,6 +42,11 @@ DemoImageTileComponent.argTypes = {
         control: { type: 'text' },
         description: 'Cuisine id',
         defaultValue: 'Chicken'
+    },
+    fallbackImage: {
+        control: { type: 'text' },
+        description: 'Fallback image link',
+        defaultValue: 'https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png'
     }
 };
 

@@ -81,15 +81,14 @@ export default {
             type: String,
             default: ''
         },
-        bgFallbackImage: {
+        fallbackImage: {
             type: String,
-            default: 'https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png'
+            default: ''
         }
     },
     data () {
         return {
-            isToggleSelected: false,
-            thisIsATest: ''
+            isToggleSelected: false
         };
     },
     computed: {
@@ -97,9 +96,10 @@ export default {
             return this.altText === '';
         },
         cssVars () {
+            const cssVariable = JSON.stringify(this.fallbackImage);
+
             return {
-                // eslint-disable-next-line prefer-template
-                '--bg-image': 'url(' + JSON.stringify(this.bgFallbackImage) + ')'
+                '--bg-image': `url(${cssVariable})`
             };
         }
     },
@@ -143,6 +143,10 @@ export default {
 
 <style lang="scss" module>
 
+$image-tile-background-opacity: 0.7;
+$image-tile-background-color: $color-interactive-brand;
+
+
 .c-imageTile {
     @include font-size(heading-m);
 
@@ -177,9 +181,8 @@ export default {
   display: block;
   position: relative;
   border-radius: $radius-rounded-b;
-  background-color: rgba(255,128,0,0.7);
+  background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
   padding-top: (61 / 102) * 100%;
-  // background-image: url(https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png);
   background-image: var(--bg-image);
 }
 

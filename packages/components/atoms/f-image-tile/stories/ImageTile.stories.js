@@ -15,8 +15,9 @@ export const ImageTileComponent = (args, { argTypes }) => ({
                     :is-selected='isSelected'
                     :is-link='isLink'
                     :display-text='displayText'
-                    :imgSrc='imgSrc'
-                    :altText='altText'
+                    :img-src='imgSrc'
+                    :alt-text='altText'
+                    :fallback-image='fallbackImage'
                 >
                 </image-tile>`
 });
@@ -56,6 +57,11 @@ ImageTileComponent.argTypes = {
         control: { type: 'text' },
         description: 'Image alt text',
         defaultValue: ''
+    },
+    fallbackImage: {
+        control: { type: 'text' },
+        description: 'Fallback image url',
+        defaultValue: 'https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png'
     }
 };
 

@@ -7,6 +7,7 @@
             :img-src="cuisineImage"
             :display-text="cuisineId"
             :is-selected="selected"
+            :fallback-image="fallbackImage"
             @toggle="toggleCuisine" />
     </div>
 </template>
@@ -22,9 +23,13 @@ export default {
     props: {
         cuisineId: {
             type: String,
-            default: 'Chicken'
+            default: ''
         },
         cuisineImage: {
+            type: String,
+            default: ''
+        },
+        fallbackImage: {
             type: String,
             default: ''
         }
