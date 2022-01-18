@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     COMPONENT,
@@ -5,7 +6,8 @@ const {
     SAVE_CHANGES_BUTTON,
     CHANGE_PASSWORD_BUTTON,
     DELETE_ACCOUNT_LINK,
-    FIELDS
+    FIELDS,
+    ERROR_CARD
 } = require('./f-account-info-selectors');
 
 module.exports = class AccountInfo extends Page {
@@ -14,6 +16,8 @@ module.exports = class AccountInfo extends Page {
     }
 
     get component () { return $(COMPONENT); }
+
+    get errorCardComponent () { return $(ERROR_CARD); }
 
     LinksAndButtons = {
         changeEmailAddressLink: {
@@ -78,8 +82,16 @@ module.exports = class AccountInfo extends Page {
         super.waitForComponent(this.component);
     }
 
+    waitForErrorCardComponent () {
+        super.waitForComponent(this.errorCardComponent);
+    }
+
     isComponentDisplayed () {
         return this.component.isDisplayed();
+    }
+
+    isErrorCardComponentDisplayed () {
+        return this.errorCardComponent.isDisplayed();
     }
 
     /**

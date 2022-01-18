@@ -39,6 +39,8 @@ $loyalty-loadingCardWidthDesktop: 392px;
 $loyalty-cardWidthTablet: 344px;
 $loyalty-loadingCardHeight: 135px;
 $loyalty-loading-bgColour: $color-background-default;
+$stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
+$stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-loyalty-loadingHeader {
     width: 140px;
