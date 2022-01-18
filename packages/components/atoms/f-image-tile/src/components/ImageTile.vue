@@ -92,9 +92,18 @@ export default {
         };
     },
     computed: {
+        /**
+         * Returns a boolean to which adds or removes
+         * the 'presentation' role from the image
+         *
+         */
         addPresentationRole () {
             return this.altText === '';
         },
+        /**
+         * Returns a css variable from the fallback image prop
+         *
+         */
         cssVars () {
             const cssVariable = JSON.stringify(this.fallbackImage);
 
