@@ -3,7 +3,7 @@
  * @param currentLocation
  * @returns Array
  */
-const locationFilter = (cards, { location = '' }) => cards.filter(card => {
+const locationFilter = (cards, { location }) => cards.filter(card => {
     // will be undefined if no locations KVP exists
     const locationsList = card?.locations?.split(',');
     // return true if NO KVP

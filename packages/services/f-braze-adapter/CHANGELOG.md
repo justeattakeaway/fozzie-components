@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.1.0
 ------------------------------
-*November 09, 2021*
+*January 18, 2022*
 
 ### Added
 - CurrentLocation to consumer options
