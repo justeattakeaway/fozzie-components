@@ -11,6 +11,14 @@ v0.14.3
 -  Minor design updates
 
 
+v0.14.4
+------------------------------
+*January 18, 2022*
+
+### Added
+-  Exposed test methods wait & isdisplayed for error card
+
+
 v0.14.3
 ------------------------------
 *January 17, 2022*
