@@ -109,7 +109,7 @@ export default {
                 return this.formData.formFields.map(field => this.createField(field));
             }
 
-            return {};
+            return [];
         },
 
         buttonText () {
