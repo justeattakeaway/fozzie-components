@@ -18,7 +18,8 @@
                 [$style['is-fullHeight']]: isFullHeight,
                 [$style['is-positioned-bottom']]: isPositionedBottom
             }]"
-            role="dialog">
+            role="dialog"
+            aria-labelledBy="modal-title">
             <div
                 ref="megaModalDocument"
                 :class="['c-megaModal-document', {
@@ -50,6 +51,7 @@
                 <component
                     :is="titleHtmlTag"
                     v-if="title"
+                    id="modal-title"
                     :class="['c-megaModal-title', $style['c-megaModal-title']]"
                     data-test-id="mega-modal-title">
                     {{ title }}
