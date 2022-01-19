@@ -43,9 +43,9 @@ export default {
                 if (validationMessages) {
                     formFields[field.name] = {
                         required,
-                        ...validationMessages.invalid && {
+                        ...(validationMessages.invalid ? {
                             isValid: invalidValidations[field.name]
-                        }
+                        } : {})
                     };
                 }
             });
@@ -62,15 +62,15 @@ export default {
         },
 
         isValidPhoneNumber () {
-            const phoneNumberValue = this.fields.find(field => field.name === 'mobileNumber');
+            const phoneNumberField = this.fields.find(field => field.name === 'mobileNumber');
 
-            return phoneNumberValue && validations.isValidPhoneNumber(phoneNumberValue.value, this.locale);
+            return phoneNumberField && validations.isValidPhoneNumber(phoneNumberField.value, this.locale);
         },
 
         isValidPostcode () {
-            const postcodeValue = this.fields.find(field => field.name === 'postcode');
+            const postcodeField = this.fields.find(field => field.name === 'postcode');
 
-            return postcodeValue && validations.isValidPostcode(postcodeValue.value, this.locale);
+            return postcodeField && validations.isValidPostcode(postcodeField.value, this.locale);
         },
 
         formFieldBlur (field) {
@@ -86,16 +86,15 @@ export default {
             return this.$v.formFields[fieldName];
         },
 
-        fieldStatus (fieldName) {
+        fieldErrorStatus (fieldName) {
             const fieldValidations = this.fieldValidations(fieldName);
 
             if (fieldValidations?.$dirty) {
                 const hasRequiredError = !fieldValidations.required;
                 const hasInvalidError = fieldValidations.isValid === false;
 
-                if (hasRequiredError || hasInvalidError) {
-                    return hasRequiredError ? 'required' : 'invalid';
-                }
+                if (hasRequiredError) return 'required';
+                if (hasInvalidError) return 'invalid';
             }
             return false;
         },

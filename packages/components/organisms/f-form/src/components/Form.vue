@@ -20,7 +20,7 @@
             @input="updateField({ name: field.name, value: $event })"
             @blur="formFieldBlur(field)">
             <template
-                v-if="field.validationMessages && fieldStatus(field.name)"
+                v-if="field.validationMessages && fieldErrorStatus(field.name)"
                 #error>
                 <error-message
                     v-bind="field.errorMessage.props"
@@ -105,15 +105,11 @@ export default {
         },
 
         formFieldData () {
-            const formFields = [];
-
             if (this.formData.formFields?.length) {
-                this.formData.formFields.forEach(field => {
-                    formFields.push(this.createField(field));
-                });
+                return this.formData.formFields.map(field => this.createField(field));
             }
 
-            return formFields;
+            return {};
         },
 
         buttonText () {
@@ -147,7 +143,7 @@ export default {
         },
 
         createField (field) {
-            const fieldError = field.translations?.validationMessages && this.fieldStatus(field.name);
+            const fieldError = field.translations?.validationMessages && this.fieldErrorStatus(field.name);
 
             return fieldError
                 ? new FormFieldErrorClass(field, fieldError)

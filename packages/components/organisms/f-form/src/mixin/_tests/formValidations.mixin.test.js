@@ -71,11 +71,6 @@ describe('Form', () => {
         describe('invalidFieldsSummary ::', () => {
             let wrapper;
 
-            afterEach(() => {
-                jest.clearAllMocks();
-                jest.restoreAllMocks();
-            });
-
             it('should return `null` if no fields have been touched', () => {
                 wrapper = shallowMount(baseComponent, {
                     i18n,
@@ -92,28 +87,69 @@ describe('Form', () => {
                 expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
             });
 
-            it('should return `null` if all fields have been touched and are valid', () => {
-                // Arrange
-                const mockValidationState = {
-                    invalidFields: []
-                };
+            describe('when fields are `dirty`', () => {
+                let getFormValidationStateSpy;
 
-                jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
-
-                // Act
-                wrapper = shallowMount(baseComponent, {
-                    i18n,
-                    localVue,
-                    mocks: {
-                        $v: {
-                            ...$v,
-                            dirty: true
+                beforeEach(() => {
+                    wrapper = shallowMount(baseComponent, {
+                        i18n,
+                        localVue,
+                        mocks: {
+                            $v: {
+                                ...$v,
+                                dirty: true
+                            }
                         }
-                    }
+                    });
+
+                    getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
                 });
 
-                // Assert
-                expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should return `null` if all fields have been touched and are valid', () => {
+                    // Arrange
+                    const mockValidationState = {
+                        invalidFields: []
+                    };
+
+                    getFormValidationStateSpy.mockReturnValue(mockValidationState);
+
+                    // Assert
+                    expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
+                });
+
+                it('should return the error summary with the number of invalid fields', () => {
+                    // Arrange
+                    const mockValidationState = {
+                        invalidFields: [
+                            'mobileNumber',
+                            'line1',
+                            'postcode'
+                        ]
+                    };
+
+                    getFormValidationStateSpy.mockReturnValue(mockValidationState);
+
+                    wrapper = shallowMount(baseComponent, {
+                        i18n,
+                        localVue,
+                        mocks: {
+                            $v: {
+                                formFields: {
+                                    ...$v.formFields,
+                                    $dirty: true
+                                }
+                            },
+                            $tc: jest.fn(() => 'There are 3 errors in the form')
+                        }
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.invalidFieldsSummary).toMatchSnapshot();
+                });
             });
         });
     });
@@ -171,7 +207,7 @@ describe('Form', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `isValidPhoneNumber` from `f-services`', () => {
+            it('should call `isValidPhoneNumber`', () => {
                 // Arrange
                 const isValidPhoneNumberSpy = jest.spyOn(validations, 'isValidPhoneNumber');
 
@@ -193,7 +229,7 @@ describe('Form', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `isValidPostcode` from `f-services`', () => {
+            it('should call `isValidPostcode`', () => {
                 // Arrange
                 const isValidPostcodeSpy = jest.spyOn(validations, 'isValidPostcode');
 
@@ -210,7 +246,7 @@ describe('Form', () => {
             });
         });
 
-        describe('fieldStatus ::', () => {
+        describe('fieldErrorStatus ::', () => {
             describe('when field does not have validations', () => {
                 beforeEach(() => {
                     baseComponent.data = () => ({
@@ -230,7 +266,7 @@ describe('Form', () => {
                     });
 
                     // Act
-                    const result = wrapper.vm.fieldStatus('lastName');
+                    const result = wrapper.vm.fieldErrorStatus(fieldWithoutValidations.name);
 
                     // Assert
                     expect(result).toEqual(false);
@@ -254,7 +290,7 @@ describe('Form', () => {
                 });
 
                 // Act
-                const result = wrapper.vm.fieldStatus('email');
+                const result = wrapper.vm.fieldErrorStatus(fieldWithBothValidations.name);
 
                 // Assert
                 expect(result).toEqual(false);
@@ -295,7 +331,7 @@ describe('Form', () => {
                     });
 
                     // Act
-                    const result = wrapper.vm.fieldStatus('email');
+                    const result = wrapper.vm.fieldErrorStatus(fieldWithBothValidations.name);
 
                     // Assert
                     expect(result).toEqual(expected);

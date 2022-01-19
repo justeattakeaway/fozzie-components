@@ -21,13 +21,13 @@ class FormFieldClass {
             name: this.kebabCase(),
             'label-text': this.translations.label,
             'input-type': this.inputType(),
-            ...this.maxLength && { 'max-length': this.maxLength },
-            ...ariaLabel && { 'aria-label': ariaLabel }
+            ...(this.maxLength ? { 'max-length': this.maxLength } : {}),
+            ...(ariaLabel ? { 'aria-label': ariaLabel } : {})
         };
     }
 
     kebabCase () {
-        return this.name.replace(/([a-z0-9]|(?=[A-Z]))([A-Z1-9])/g, '$1-$2').toLowerCase();
+        return this.name.replace(/([a-z0–9])([A-Z1-9])/g, '$1-$2').toLowerCase(); // https://stackoverflow.com/a/70226943
     }
 
     inputType () {

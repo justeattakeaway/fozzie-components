@@ -232,10 +232,10 @@ describe('Form', () => {
         });
 
         describe('createField :: ', () => {
-            let fieldStatusSpy;
+            let fieldErrorStatusSpy;
 
             beforeEach(() => {
-                fieldStatusSpy = jest.spyOn(FormValidationMixin.methods, 'fieldStatus');
+                fieldErrorStatusSpy = jest.spyOn(FormValidationMixin.methods, 'fieldErrorStatus');
             });
 
             afterEach(() => {
@@ -243,7 +243,7 @@ describe('Form', () => {
             });
 
             describe('when field has validationMessages', () => {
-                it('should call `fieldStatus` with fieldName', () => {
+                it('should call `fieldErrorStatus` with fieldName', () => {
                     // Arrange
                     const wrapper = shallowMount(VForm, {
                         i18n,
@@ -255,14 +255,14 @@ describe('Form', () => {
                     wrapper.vm.createField(fieldWithRequiredValidations);
 
                     // Assert
-                    expect(fieldStatusSpy).toHaveBeenCalledWith(fieldWithRequiredValidations.name);
+                    expect(fieldErrorStatusSpy).toHaveBeenCalledWith(fieldWithRequiredValidations.name);
                 });
 
                 describe('when field has an error', () => {
                     const errorType = 'required';
 
                     beforeEach(() => {
-                        fieldStatusSpy.mockReturnValue(errorType);
+                        fieldErrorStatusSpy.mockReturnValue(errorType);
                     });
 
                     afterEach(() => {
@@ -288,7 +288,7 @@ describe('Form', () => {
 
                 describe('when field does not have an error', () => {
                     beforeEach(() => {
-                        fieldStatusSpy.mockReturnValue(false);
+                        fieldErrorStatusSpy.mockReturnValue(false);
                     });
 
                     afterEach(() => {
@@ -316,7 +316,7 @@ describe('Form', () => {
                     const errorType = 'required';
 
                     beforeEach(() => {
-                        fieldStatusSpy.mockReturnValue(errorType);
+                        fieldErrorStatusSpy.mockReturnValue(errorType);
                     });
 
                     afterEach(() => {
@@ -342,7 +342,7 @@ describe('Form', () => {
             });
 
             describe('when field does not have validationMessages', () => {
-                it('should not call `fieldStatus`', () => {
+                it('should not call `fieldErrorStatus`', () => {
                     // Arrange
                     const wrapper = shallowMount(VForm, {
                         i18n,
@@ -359,7 +359,7 @@ describe('Form', () => {
                     wrapper.vm.createField(fieldWithoutValidations);
 
                     // Assert
-                    expect(fieldStatusSpy).not.toHaveBeenCalledWith(fieldWithoutValidations.name);
+                    expect(fieldErrorStatusSpy).not.toHaveBeenCalledWith(fieldWithoutValidations.name);
                 });
             });
         });
