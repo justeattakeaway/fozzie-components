@@ -1,29 +1,34 @@
 import locationFilter from '../locationFilter';
 
-const MOCK_CURRENT_LOCATION = { location: 'BS1 3EQ', latitude: '', longitude: '' };
+const MOCK_CURRENT_LOCATION = { location: 'BS1 3EQ', latitude: '51.12604231590439', longitude: '-1.7127676870914037' };
 const MOCK_CARDS = [
     {
         id: '1',
         type: 'HCC',
-        location: 'BS1 3EQ, BA11 2PT'
+        location: 'BS1 3EQ, BA11 2PT',
+        url: 'https://example.com/search?location=$LOCATION&lat=$LAT&lon=$LON'
     },
     {
         id: '2',
         type: 'HCC',
-        location: 'BA11 2PT'
+        location: 'BA11 2PT',
+        url: 'https://example.com/search?location=$LOCATION&lat=$LAT&lon=$LON'
     },
     {
         id: '3',
         type: 'HCC',
-        location: ''
+        location: '',
+        url: 'https://example.com/search?location=$LOCATION&lat=$LAT&lon=$LON'
     },
     {
         id: '4',
-        type: 'HCC'
+        type: 'HCC',
+        url: 'https://example.com/search?location=$LOCATION&lat=$LAT&lon=$LON'
     },
     {
         id: '5',
-        type: 'VCC'
+        type: 'VCC',
+        url: 'https://example.com/search?location=$LOCATION&lat=$LAT&lon=$LON'
     }
 ];
 
