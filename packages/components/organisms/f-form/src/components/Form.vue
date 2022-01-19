@@ -105,7 +105,7 @@ export default {
         },
 
         formFieldData () {
-            if (this.formData.formFields?.length) {
+            if (Array.isArray(this.formData.formFields)) {
                 return this.formData.formFields.map(field => this.createField(field));
             }
 
