@@ -492,6 +492,9 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: Auth With NPM
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
+      - run:
           name: Publish unreleased package versions to npm
           command: npx lerna publish from-package --ignore-scripts --yes
       - slack_notify_fail
@@ -545,9 +548,9 @@ workflows:
             - unit-tests-<< matrix.component_type >>
       - publish-to-npm:
           context: web-core
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
           requires:
             - browser-tests-atoms
             - browser-tests-molecules
