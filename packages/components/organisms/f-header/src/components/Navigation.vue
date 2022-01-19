@@ -157,6 +157,7 @@
                         :tabindex="isBelowMid ? -1 : 0"
                         :aria-expanded="!isBelowMid && userMenuIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
+                        :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
                         :class="[
                             $style['c-nav-list-text'],
                             $style['c-nav-list-btn']

@@ -27,6 +27,9 @@ const defaultPropsData = {
                 gtm: 'click_account_saved_cards'
             }
         },
+        userMenu: {
+            buttonLabel: () => "James's account"
+        },
         openMenuText: 'Open menu',
         deliveryEnquiry: {
             text: 'Deliver with Just Eat',

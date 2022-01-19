@@ -39,6 +39,10 @@ export default {
         }
     },
 
+    userMenu: {
+        buttonLabel: name => `La cuenta de ${name}`
+    },
+
     logo: {
         gtm: 'click_logo'
     },
