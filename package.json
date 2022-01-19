@@ -145,5 +145,8 @@
   ],
   "dependencies": {
     "deepmerge": "4.2.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
