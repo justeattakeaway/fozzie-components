@@ -93,7 +93,7 @@ export default {
     },
     computed: {
         /**
-         * Returns a boolean to which adds or removes
+         * Returns a boolean which adds or removes
          * the 'presentation' role from the image
          *
          */
@@ -188,11 +188,11 @@ $image-tile-background-color: $color-interactive-brand;
 
 .c-imageTile-imageContainer {
   display: block;
-  position: relative;
-  border-radius: $radius-rounded-b;
   background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
-  padding-top: (61 / 102) * 100%;
+  border-radius: $radius-rounded-b;
   background-image: var(--bg-image);
+  padding-top: (3 / 5) * 100%; // 5:3 aspect ratio
+  position: relative;
 }
 
 .c-imageTile-image {
