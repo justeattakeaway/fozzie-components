@@ -391,6 +391,17 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
+  danger-checks:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run: # Run PR Checks
+         name: Run PR Checks
+         command: yarn danger ci
+      - slack_notify_fail
+      - slack_notify_success
+
   build:
     executor: node
     environment:
@@ -507,6 +518,14 @@ workflows:
           filters:
             branches:
               ignore: [ 'gh-pages' ]
+      - danger-checks:
+          name: danger-checks
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - install
       - build:
           name: build
           context: web-core
