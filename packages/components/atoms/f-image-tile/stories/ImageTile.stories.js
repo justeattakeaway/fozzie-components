@@ -1,5 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 import ImageTile from '../src/components/ImageTile.vue';
+import ImageTileWallpaper from './images/wallpaper.png';
+import ImageTileCuisine from './images/burgers.jpg';
 
 export default {
     title: 'Components/Atoms',
@@ -41,7 +43,7 @@ ImageTileComponent.argTypes = {
     imgSrc: {
         control: { type: 'text' },
         description: 'Cuisine image link',
-        defaultValue: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/uk/cuisine-icons/burgers'
+        defaultValue: ImageTileCuisine
     },
     isSelected: {
         control: { type: 'boolean' },
@@ -61,7 +63,7 @@ ImageTileComponent.argTypes = {
     fallbackImage: {
         control: { type: 'text' },
         description: 'Fallback image url',
-        defaultValue: 'https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png'
+        defaultValue: ImageTileWallpaper
     }
 };
 

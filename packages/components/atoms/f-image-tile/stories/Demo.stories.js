@@ -1,6 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 import ImageTile from '../src/components/ImageTile.vue';
 import TestContainer from './TestContainer.vue';
+import ImageTileWallpaper from './images/wallpaper.png';
 
 export default {
     title: 'Components/Atoms',
@@ -46,7 +47,7 @@ DemoImageTileComponent.argTypes = {
     fallbackImage: {
         control: { type: 'text' },
         description: 'Fallback image link',
-        defaultValue: 'https://d30v2pzvrfyzpo.cloudfront.net/a/sw/img/wallpaper.png'
+        defaultValue: ImageTileWallpaper
     }
 };
 
