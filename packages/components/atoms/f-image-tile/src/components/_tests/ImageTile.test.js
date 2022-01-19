@@ -119,7 +119,7 @@ describe('ImageTile', () => {
     });
 
     describe('computed :: ', () => {
-        describe('addPresentationRole :: ', () => {
+        describe('isPresentationRole :: ', () => {
             it.each([
                 [false, 'this is some alt text', undefined],
                 [true, '', 'presentation']
@@ -137,7 +137,7 @@ describe('ImageTile', () => {
                 const image = wrapper.find('[data-test-id="image-tile-image"]');
 
                 // Assert
-                expect(wrapper.vm.addPresentationRole).toEqual(expected);
+                expect(wrapper.vm.isPresentationRole).toEqual(expected);
                 expect(image.attributes('role')).toEqual(role);
             });
         });

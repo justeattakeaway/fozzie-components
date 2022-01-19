@@ -38,7 +38,7 @@
                     :src="imgSrc"
                     data-test-id="image-tile-image"
                     :alt="altText"
-                    :role="addPresentationRole ? 'presentation' : false">
+                    :role="isPresentationRole ? 'presentation' : false">
             </span>
             <span :aria-hidden="isLink">
                 {{ displayText }}
@@ -92,12 +92,7 @@ export default {
         };
     },
     computed: {
-        /**
-         * Returns a boolean which adds or removes
-         * the 'presentation' role from the image
-         *
-         */
-        addPresentationRole () {
+        isPresentationRole () {
             return this.altText === '';
         },
         /**
@@ -199,8 +194,6 @@ $image-tile-background-color: $color-interactive-brand;
     border-radius: $radius-rounded-b;
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
