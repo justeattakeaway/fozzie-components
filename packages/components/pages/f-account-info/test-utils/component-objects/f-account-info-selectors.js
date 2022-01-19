@@ -3,7 +3,7 @@ exports.CHANGE_EMAIL_ADDRESS_LINK = '[name="account-info-change-emailAddress-lin
 exports.SAVE_CHANGES_BUTTON = '[data-test-id="account-info-save-changes-button"]';
 exports.CHANGE_PASSWORD_BUTTON = '[data-test-id="account-info-change-password-button"]';
 exports.DELETE_ACCOUNT_LINK = '[name="account-info-delete-account-link"]';
-
+exports.ERROR_CARD = '[data-test-id="account-info-error-card"]';
 
 exports.FIELDS = {
     firstName: {

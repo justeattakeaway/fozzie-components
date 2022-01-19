@@ -1,19 +1,24 @@
 <template>
     <div role="main">
         <div
-            v-if="!isAppsUserAgent"
+            v-if="showLoyaltyNavigationElements"
             :class="$style['c-loyalty']"
             data-test-id="loyalty">
             <loyalty-header />
             <div
-                :class="$style['c-stampcards-tabs']">
+                :class="$style['c-loyalty-tabs']">
                 <tabs :animate="shouldAnimate">
                     <tab
                         name="stamp-cards"
                         :title="$t('tabs.stamps.title')"
                         :selected="!showHowItWorks"
                     >
-                        <unauthenticated data-test-id="StampCards-StampCardsTab-UnauthContent" />
+                        <loyalty-cards
+                            v-if="isAuthenticated"
+                            data-test-id="StampCards-StampCardsTab-AuthedContent" />
+                        <unauthenticated
+                            v-else
+                            data-test-id="StampCards-StampCardsTab-UnauthContent" />
                     </tab>
                     <tab
                         name="how-it-works"
@@ -26,7 +31,7 @@
         </div>
         <div
             v-else
-            :class="$style['c-stampcards-appsHowItWorksContainer']"
+            :class="$style['c-loyalty-appsHowItWorksContainer']"
             data-test-id="StampCards-HowItWorks-Content">
             <how-it-works />
         </div>
@@ -43,6 +48,7 @@ import loyalty from '../store/loyalty.module';
 import { ACTION_INITIALISE_LOYALTY, VUEX_MODULE_NAMESPACE_LOYALTY } from '../store/types';
 import LoyaltyHeader from './Header.vue';
 import HowItWorks from './HowItWorks.vue';
+import LoyaltyCards from './LoyaltyCards.vue';
 import Unauthenticated from './Unauthenticated.vue';
 
 
@@ -51,6 +57,7 @@ export default {
 
     components: {
         LoyaltyHeader,
+        LoyaltyCards,
         Unauthenticated,
         HowItWorks,
         Tabs,
@@ -70,6 +77,10 @@ export default {
             type: String,
             required: true
         },
+        showLoyaltyNavigationElements: {
+            type: Boolean,
+            default: true
+        },
         hash: {
             type: String,
             default: ''
@@ -85,8 +96,7 @@ export default {
 
     computed: {
         ...mapGetters(VUEX_MODULE_NAMESPACE_LOYALTY, [
-            'isAuthenticated',
-            'isAppsUserAgent'
+            'isAuthenticated'
         ]),
 
         /**
@@ -136,8 +146,7 @@ export default {
     background-color: $color-background-default;
 }
 
-.c-stampcards-tabs {
-    //margin-top: -42px;
+.c-loyalty-tabs {
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: -42px auto 0;
@@ -149,6 +158,16 @@ export default {
 
     @include media('<narrow') {
         padding: 0 #{$layout-margin--narrow}px;
+    }
+}
+
+.c-loyalty-appsHowItWorksContainer {
+    padding-left: spacing(x4);
+    padding-right: spacing(x4);
+
+    @include media('<=wide') {
+        padding-left: spacing(x2);
+        padding-right: spacing(x2);
     }
 }
 

@@ -47,7 +47,9 @@
                 <span>{{ $t('checkoutHeader.guest.option') }}</span>
             </div>
 
-            <h2 :class="$style['c-checkoutHeader-guestTitle']">
+            <h2
+                :class="$style['c-checkoutHeader-guestTitle']"
+                data-test-id="guest-title">
                 {{ $t('checkoutHeader.guest.guestTitle') }}
             </h2>
 
