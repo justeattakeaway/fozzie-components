@@ -68,7 +68,7 @@ export default {
         },
         isCountrySelectorOpen: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     computed: {
