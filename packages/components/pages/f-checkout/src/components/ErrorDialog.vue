@@ -41,7 +41,8 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapActions, mapState } from 'vuex';
-import { DUPLICATE_ORDER, VUEX_CHECKOUT_MODULE } from '../constants';
+import { DUPLICATE_ORDER, NOTE_NOT_ACCEPTED_SUFFIX, VUEX_CHECKOUT_MODULE } from '../constants';
+import EventNames from '../event-names';
 
 export default {
     components: {
@@ -112,6 +113,10 @@ export default {
 
             if (this.checkoutErrorMessage && this.checkoutErrorMessage.shouldRedirectToMenu) {
                 window.location.assign(this.redirectUrl);
+            }
+
+            if (this.checkoutErrorMessage?.messageKey?.includes(NOTE_NOT_ACCEPTED_SUFFIX)) {
+                this.$emit(EventNames.NoteNotAccepted);
             }
 
             this.updateCheckoutErrorMessage();
