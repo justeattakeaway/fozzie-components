@@ -3,13 +3,6 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.49.0
-------------------------------
-*January 18, 2022*
-
-### Added
-- `"private": "true"` property to `package.json` to ensure the package doesn't get published to npm.
-
 v0.48.0
 ------------------------------
 *December 16, 2021*
