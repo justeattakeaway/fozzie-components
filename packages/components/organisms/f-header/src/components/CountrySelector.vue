@@ -5,7 +5,7 @@
                 [$style['is-open']]: isCountrySelectorOpen
             }
         ]"
-        v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
+        v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: (() => closeCountrySelector(false)) }"
         @keyup.esc="closeCountrySelector">
         <button
             ref="countrySelectorToggle"
@@ -85,13 +85,13 @@ export default {
     }),
 
     methods: {
-        closeCountrySelector () {
+        closeCountrySelector (withFocus = true) {
             this.isCountrySelectorOpen = false;
             this.$emit('close-country-selector');
-            const {
-                countrySelectorToggle
-            } = this.$refs;
-            countrySelectorToggle.focus();
+            const { countrySelectorToggle } = this.$refs;
+            if (withFocus) {
+                countrySelectorToggle.focus();
+            }
         },
 
         openCountrySelector () {
