@@ -11,7 +11,6 @@
 
         <!-- background image -->
         <restaurant-image
-            v-if="imgUrl"
             :class="[$style['c-restaurantCard-img']]"
             :img-url="imgUrl">
             <!-- Logo image -->
@@ -19,7 +18,7 @@
                 v-if="logoUrl"
                 :class="$style['c-restaurantCard-logo']"
                 :logo-url="logoUrl" />
-
+            <!-- Tags inside image container -->
             <restaurant-tags
                 v-if="hasImageTags"
                 :class="$style['c-restaurantCard-imageTags']"
@@ -151,7 +150,7 @@
 import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
-import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
+import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
 import RestaurantDishes from './subcomponents/RestaurantDishes/RestaurantDishes.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 import RestaurantTags from './subcomponents/RestaurantTags/RestaurantTags.vue';
