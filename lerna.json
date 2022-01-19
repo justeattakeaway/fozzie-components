@@ -11,5 +11,8 @@
     "packages/services/*",
     "packages/tools/*"
   ],
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "publishConfig": {
+    "access": "public"
+  }
 }
