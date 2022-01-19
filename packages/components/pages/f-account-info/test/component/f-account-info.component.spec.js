@@ -35,7 +35,7 @@ describe('f-account-info component tests', () => {
             // Act
             accountInfo.clearBlurField(field);
             accountInfo.clickOutOfInputField();
-            accountInfo.focusField('addressLine2');
+            accountInfo.tabOutOfField(field);
 
             // Assert
             expect(accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
@@ -86,7 +86,7 @@ describe('f-account-info component tests', () => {
         // Act
         accountInfo.clearBlurField('phoneNumber');
         accountInfo.populateAccountForm('phoneNumber', customerInput);
-        accountInfo.focusField('lastName');
+        accountInfo.tabOutOfField('phoneNumber');
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);

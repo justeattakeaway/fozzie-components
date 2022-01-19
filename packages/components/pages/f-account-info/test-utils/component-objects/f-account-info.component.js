@@ -109,10 +109,15 @@ module.exports = class AccountInfo extends Page {
         el.keys(['Backspace']);
     }
 
-
-    focusField (fieldName) {
+    /**
+    * @description
+    * Tab out of provided field
+    *
+    * @param {String} fieldName The name of the field to tab out of
+    */
+    tabOutOfField (fieldName) {
         const el = this.fields[fieldName].input;
-        el.click();
+        el.keys(['Tab']);
     }
 
     /**
