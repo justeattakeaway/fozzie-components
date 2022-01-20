@@ -18,7 +18,8 @@
                 [$style['is-fullHeight']]: isFullHeight,
                 [$style['is-positioned-bottom']]: isPositionedBottom
             }]"
-            role="dialog">
+            role="dialog"
+            :aria-labelledby="uid">
             <div
                 ref="megaModalDocument"
                 :class="['c-megaModal-document', {
@@ -50,6 +51,7 @@
                 <component
                     :is="titleHtmlTag"
                     v-if="title"
+                    :id="uid"
                     :class="['c-megaModal-title', $style['c-megaModal-title']]"
                     data-test-id="mega-modal-title">
                     {{ title }}
@@ -65,6 +67,8 @@
 import { CrossIcon } from '@justeat/f-vue-icons';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FButton from '@justeat/f-button';
+
+let uid = 0;
 
 export default {
     components: {
@@ -136,12 +140,19 @@ export default {
             type: String,
             default: ''
         },
-
         titleHtmlTag: {
             type: String,
             default: 'h3',
             validator: value => ['h1', 'h2', 'h3', 'h4'].includes(value)
         }
+    },
+
+    data () {
+        uid += 1;
+
+        return {
+            uid: `modal-${uid}-title`
+        };
     },
 
     computed: {
