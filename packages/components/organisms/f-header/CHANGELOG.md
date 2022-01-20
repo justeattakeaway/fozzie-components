@@ -8,12 +8,15 @@ v9.3.0
 ------------------------------
 *January 20, 2021*
 
+### Added
+- Tests for `UserNavigationPanel`'s computed property `tabIndex`.
+- `aria-label` to user account submenu button.
+
 ### Fixed
 - User menu was not visibly toggling with keyboard navigation.
 
 ### Changed
 - User account submenu link to button for increased accessibility.
-  - Now with `aria-label` to make its purpose clearer for screen reader users
 - Screen readers will now announce the country selector title, e.g., "Select your country".
 - Reorganised and rewritten some of the Navigation unit tests.
 
