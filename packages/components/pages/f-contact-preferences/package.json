@@ -3,7 +3,7 @@
   "description": "Fozzie Contact Preferences - Fozzie user contact preferences form component",
   "version": "0.13.0",
   "main": "dist/f-contact-preferences.umd.min.js",
-  "maxBundleSize": "50kB",
+  "maxBundleSize": "100kB",
   "files": [
     "dist",
     "test-utils",
