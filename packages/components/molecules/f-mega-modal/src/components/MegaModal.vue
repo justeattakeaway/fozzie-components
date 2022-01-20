@@ -153,6 +153,7 @@ export default {
 
     data () {
         uid += 1;
+
         return {
             uid: `modal-${uid}-title`
         };
