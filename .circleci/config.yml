@@ -519,7 +519,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - install
+            - danger-checks
       - bundlewatch:
           name: bundlewatch
           context: web-core
