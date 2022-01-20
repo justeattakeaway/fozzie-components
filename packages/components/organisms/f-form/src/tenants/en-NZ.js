@@ -1,4 +1,7 @@
+const messages = {
+    invalidFields: 'There is 1 error in the form | There are {count} errors in the form'
+};
+
 export default {
-    locale: 'en-NZ',
-    text: 'I am a VForm Component (NZ)'
+    messages
 };
