@@ -29,11 +29,17 @@
                 }]"
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label">
-            <img
-                :class="$style['c-imageTile-image']"
-                :src="imgSrc"
-                data-test-id="image-tile-image"
-                alt="">
+            <span
+                :class="$style['c-imageTile-imageContainer']"
+                :style="cssVars">
+                <img
+                    v-if="imgSrc"
+                    :class="$style['c-imageTile-image']"
+                    :src="imgSrc"
+                    data-test-id="image-tile-image"
+                    :alt="altText"
+                    :role="isPresentationRole ? 'presentation' : false">
+            </span>
             <span :aria-hidden="isLink">
                 {{ displayText }}
             </span>
@@ -69,13 +75,37 @@ export default {
         },
         imgSrc: {
             type: String,
-            default: null
+            default: ''
+        },
+        altText: {
+            type: String,
+            default: ''
+        },
+        fallbackImage: {
+            type: String,
+            default: ''
         }
     },
     data () {
         return {
             isToggleSelected: false
         };
+    },
+    computed: {
+        isPresentationRole () {
+            return this.altText === '';
+        },
+        /**
+         * Returns a css variable from the fallback image prop
+         *
+         */
+        cssVars () {
+            const cssVariable = JSON.stringify(this.fallbackImage);
+
+            return {
+                '--bg-image': `url(${cssVariable})`
+            };
+        }
     },
     watch: {
         isSelected (newValue) {
@@ -117,6 +147,10 @@ export default {
 
 <style lang="scss" module>
 
+$image-tile-background-opacity: 0.7;
+$image-tile-background-color: $color-interactive-brand;
+
+
 .c-imageTile {
     @include font-size(heading-m);
 
@@ -147,8 +181,23 @@ export default {
   border: 1px solid green;
 }
 
+.c-imageTile-imageContainer {
+  display: block;
+  background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
+  border-radius: $radius-rounded-b;
+  background-image: var(--bg-image);
+  padding-top: (3 / 5) * 100%; // 5:3 aspect ratio
+  position: relative;
+}
+
 .c-imageTile-image {
-    display: block;
+    border-radius: $radius-rounded-b;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 </style>
+
