@@ -198,10 +198,10 @@ export default {
             'editPreference'
         ]),
 
-        setFormDirtyState (boolFlag) {
-            this.isFormDirty = boolFlag;
+        setFormDirtyState (isDirty) {
+            this.isFormDirty = isDirty;
             this.shouldShowSaveErrorAlert = false;
-            this.shouldShowSuccessfulAlert = !boolFlag;
+            this.shouldShowSuccessfulAlert = !isDirty;
         },
 
         /**
