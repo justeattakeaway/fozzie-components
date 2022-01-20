@@ -73,8 +73,14 @@ If you are making changes that do not need a version bump in any part of the rep
 
 ## Publishing via npm
 
-Publishing to **npm** is handled automatically as part of our CI process. Once a PR has been merged to master, any package versions that are not present on npm will be published as part of the **master** build.  Failure to do this will result in the `latest` version being overwritten on the registry.
+Publishing to **npm** is handled automatically as part of our CI process. Once a PR has been merged to master, any package versions that are not present on npm will be published as part of the **master** build.
 
 ## Publishing beta releases
 
-When working with beta package versions, you must ensure the `tag: "beta"` property is present in the package's `package.json` file **before** merging to master. Failure to do this will result in the `latest` version being overwritten on the registry.
+When working with beta package versions, we recommend you either:
+
+ - Push your beta changes to a feature branch and manually publish to **npm** by executing `npm publish --tag beta`. This ensures your package is tagged correctly in **npm**.
+
+ OR
+
+ - Add the `tag: "beta"` property to the package's `package.json` file **before** merging to master. This ensures the package is tagged correctly on **npm**
