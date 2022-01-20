@@ -20,6 +20,7 @@ const CheckoutNonFulfillableError = 'checkout-update-failure';
 const CheckoutCustomerGetSuccess = 'checkout-customer-get-success';
 const CheckoutCustomerGetFailure = 'checkout-customer-get-failure';
 const NotesConfigurationFailure = 'checkout-notes-configuration-failure';
+const NoteNotAccepted = 'note-not-accepted';
 const CheckoutMounted = 'checkout-mounted';
 const CheckoutVerifyAge = 'checkout-verify-age';
 const FormSubmitting = 'form-submitting';
@@ -54,6 +55,7 @@ export default {
     FormSubmitting,
     FormValid,
     FormInvalid,
+    NoteNotAccepted,
     StopLoadingSpinner,
     NotesConfigurationFailure
 };

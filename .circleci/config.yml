@@ -381,13 +381,21 @@ jobs:
       - checkout
       - restore_cache_dist_directories
       - install_node_dependencies
-      - run: # Run PR Checks
-         name: Run PR Checks
-         command: yarn danger ci
       - persist_to_workspace:
           root: .
           paths:
             - '*'
+      - slack_notify_fail
+      - slack_notify_success
+
+  danger-checks:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run: # Run PR Checks
+         name: Run PR Checks
+         command: yarn danger ci --failOnErrors
       - slack_notify_fail
       - slack_notify_success
 
@@ -510,6 +518,14 @@ workflows:
           filters:
             branches:
               ignore: [ 'gh-pages' ]
+      - danger-checks:
+          name: danger-checks
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - install
       - build:
           name: build
           context: web-core
@@ -517,7 +533,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - install
+            - danger-checks
       - bundlewatch:
           name: bundlewatch
           context: web-core
@@ -548,9 +564,9 @@ workflows:
             - unit-tests-<< matrix.component_type >>
       - publish-to-npm:
           context: web-core
-          # filters:
-          #   branches:
-          #     only: master
+          filters:
+            branches:
+              only: master
           requires:
             - browser-tests-atoms
             - browser-tests-molecules

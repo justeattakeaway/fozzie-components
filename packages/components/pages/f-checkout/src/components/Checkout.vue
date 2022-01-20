@@ -5,7 +5,8 @@
             v-if="checkoutErrorMessage"
             ref="errorMessage"
             v-bind="errorProps.props"
-            @created="handleDialogCreation">
+            @created="handleDialogCreation"
+            @note-not-accepted="handleNoteNotAccepted">
             <span>{{ errorProps.content }}</span>
         </component>
 
@@ -533,6 +534,10 @@ export default {
 
                 this.handleEventLogging('CheckoutNonFulfillableError');
             }
+        },
+
+        async handleNoteNotAccepted () {
+            await this.loadNotesConfiguration();
         },
 
         /**

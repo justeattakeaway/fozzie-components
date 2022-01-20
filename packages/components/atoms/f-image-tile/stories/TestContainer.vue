@@ -7,6 +7,7 @@
             :img-src="cuisineImage"
             :display-text="cuisineId"
             :is-selected="selected"
+            :fallback-image="fallbackImage"
             @toggle="toggleCuisine" />
     </div>
 </template>
@@ -22,11 +23,15 @@ export default {
     props: {
         cuisineId: {
             type: String,
-            default: 'Chicken'
+            default: ''
         },
         cuisineImage: {
             type: String,
-            default: 'https://via.placeholder.com/150'
+            default: ''
+        },
+        fallbackImage: {
+            type: String,
+            default: ''
         }
     },
     data () {
@@ -46,6 +51,5 @@ export default {
     .c-testContainer {
         width: 200px;
         margin: auto;
-        background-color: pink;
     }
 </style>
