@@ -19,6 +19,20 @@ Generic form component for creating basic forms. Can be used to collect data fro
 
 ## Usage
 
+The form component is only available for creating basic forms. It can be used to collect data from text inputs.
+
+Fields can have two types of error checks:
+  * **required** if the field is required to submit the form
+  * **invalid** if the field needs to be checked against field type. Existing available validation checks can be added for:
+
+| Type check | Available Tenants |
+| --- | --- |
+| `email` | all |
+| `mobilePhone` | `en-GB`, `es-ES`, `en-AU`, `en-NZ` |
+| `postcode` | `en-GB`, `es-ES`, `en-AU`, `en-NZ` |
+
+To add validation messages, `validationMessages` should be provided via translations for the individual form field. ([to see how click here](#Props))
+
 ### Installation
 
 Install the module using npm or Yarn:
@@ -38,6 +52,7 @@ The package also has dependencies that need to be installed by consuming compone
 | -----          | -----                                | -----                                                   |
 | f-button       | `yarn add @justeat/f-button`         | `import '@justeat/f-button/dist/f-button.css';`         |
 | f-form-field   | `yarn add @justeat/f-form-field`     | `import '@justeat/f-form-field/dist/f-form-field.css';` |
+| f-error-message   | `yarn add @justeat/f-error-message`     | `import '@justeat/f-form-field/dist/f-error-message.css';` |
 
 
 ### Vue Applications
@@ -73,11 +88,16 @@ export default {
 ### Props
 
 To add fields to the form, and text to the form button, a `formData` Object prop should be passed in. The `formData` Object should contain:
- * **formFields** - ` Array of objects. Object should include
+ * **formFields** - Array of objects. Object should include:
     * **name** - The field name that data should be stored under
     * **value** - The value of the field. When not set, this defaults to ''.
     * **translations** - an object containing:
         * **label** - the field's displayed text label
+        * **validationMessages** - an object that can contain two types of validation messages:
+            * **required** - the validation message that will be displayed if a field is required
+            * **invalid** - the validation message that will be displayed if a field needs to match standard character requirements.
+              > **Currently available invalid field checks**
+                mobileNumber, email, postcode
  *  **buttonText** - The text displayed on the form's action button
 
 > **Example `formData`**
@@ -88,7 +108,10 @@ formData: {
             name: 'firstName',
             value: '',
             translations: {
-                label: 'First Name'
+                label: 'First Name',
+                validationMessages: {
+                    required: 'Enter First Name'
+                }
             }
         },
         {
@@ -97,7 +120,18 @@ formData: {
             translations: {
                 label: 'Last Name'
             }
-        }
+        },
+        mobileNumber: {
+            name: 'mobileNumber',
+            value: '',
+            translations: {
+                label: 'Mobile Number',
+                validationMessages: {
+                    required: 'Enter Mobile Number',
+                    invalid: 'Enter valid Mobile Number'
+                }
+            }
+        },
         ...
     ],
     buttonText: 'Continue'
@@ -107,6 +141,7 @@ formData: {
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `formData` | Object | **Required Prop** | Object containing button text and form field data. Should be structured as above. |
+| `locale` | String | `en-GB` | Sets the translation file to use. |
 | `isFormSubmitting` | Boolean | false | Allows the parent component to set a loading spinner on the submit button while any asynchronous calls are carried out by the parent |
 
 ### Events
@@ -117,6 +152,8 @@ The events that can be subscribed to are as follows (if any):
 | ----- | ----------- |
 | `updated` | When any form field is updated will send `{ fieldName, value }` |
 | `form-submitting` | When the submit button is pressed |
+| `form-valid` | When the submit button is pressed and form has no validation errors. |
+| `form-invalid` | When the submit button is pressed and form has validation errors. |
 
 ## Development
 
