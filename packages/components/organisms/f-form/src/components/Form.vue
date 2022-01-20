@@ -4,11 +4,33 @@
         :class="$style['c-form']"
         data-test-id="form-component"
         @submit.prevent="onFormSubmit">
+        <section
+            v-if="invalidFieldsSummary"
+            class="is-visuallyHidden"
+            role="alert"
+            data-test-id="error-summary-container">
+            {{ invalidFieldsSummary }}
+        </section>
+
         <form-field
-            v-for="field in formData.formFields"
+            v-for="field in formFieldData"
             :key="`${field.name}-field`"
-            v-bind="fieldProps(field)"
-            @input="updateField({ fieldName: field.name, value: $event })" />
+            v-bind="field.props"
+            :value="field.value"
+            @input="updateField({ name: field.name, value: $event })"
+            @blur="formFieldBlur(field)">
+            <template
+                v-if="field.validationMessages && fieldErrorStatus(field.name)"
+                #error>
+                <error-message
+                    v-bind="field.errorMessage.props"
+                    data-js-error-message>
+                    {{ field.errorMessage.text }}
+                </error-message>
+            </template>
+        </form-field>
+
+        <slot />
 
         <f-button
             button-type="primary"
@@ -25,22 +47,36 @@
 
 
 <script>
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FButton from '@justeat/f-button';
 import FormField from '@justeat/f-form-field';
-import { globalisationServices } from '@justeat/f-services';
+import ErrorMessage from '@justeat/f-error-message';
+import FormValidationMixin from '../mixin/formValidation.mixin';
 import tenantConfigs from '../tenants';
 import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';
+import { FormFieldClass, FormFieldErrorClass } from '../services/formField';
 
 export default {
     components: {
         FButton,
+        ErrorMessage,
         FormField
     },
+
+    mixins: [
+        FormValidationMixin,
+        VueGlobalisationMixin
+    ],
 
     props: {
         formData: {
             type: Object,
             required: true
+        },
+
+        locale: {
+            type: String,
+            default: 'en-GB'
         },
 
         isFormSubmitting: {
@@ -50,11 +86,8 @@ export default {
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-
         return {
-            copy: { ...localeConfig }
+            tenantConfigs
         };
     },
 
@@ -62,11 +95,21 @@ export default {
         formFields () {
             const formFields = {};
 
-            this.formData.formFields.forEach(field => {
-                formFields[field.name] = field.value;
-            });
+            if (this.formData.formFields?.length) {
+                this.formData.formFields.forEach(field => {
+                    formFields[field.name] = field.value;
+                });
+            }
 
             return formFields;
+        },
+
+        formFieldData () {
+            if (Array.isArray(this.formData.formFields)) {
+                return this.formData.formFields.map(field => this.createField(field));
+            }
+
+            return [];
         },
 
         buttonText () {
@@ -84,20 +127,27 @@ export default {
     },
 
     methods: {
-        updateField ({ fieldName, value }) {
-            return this.$emit(FORM_EVENTS.fieldUpdated, { fieldName, value });
+        updateField ({ name, value }) {
+            this.$emit(FORM_EVENTS.fieldUpdated, { name, value });
         },
 
         onFormSubmit () {
             this.$emit(FORM_EVENTS.submitting);
+
+            if (this.isFormValid()) {
+                this.$emit(FORM_EVENTS.valid, this.formFields);
+            } else {
+                this.scrollToFirstInlineError();
+                this.$emit(FORM_EVENTS.invalid, this.validationState);
+            }
         },
 
-        fieldProps (field) {
-            return {
-                name: field.name,
-                value: field.value || '',
-                'label-text': field.translations?.label
-            };
+        createField (field) {
+            const fieldError = field.translations?.validationMessages && this.fieldErrorStatus(field.name);
+
+            return fieldError
+                ? new FormFieldErrorClass(field, fieldError)
+                : new FormFieldClass(field);
         },
 
         formDataValidator () {

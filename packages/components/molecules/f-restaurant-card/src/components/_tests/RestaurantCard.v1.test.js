@@ -349,4 +349,49 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-dishes"]').exists()).toBe(false);
         });
     });
+
+    describe('Restaurant Fees', () => {
+        it.each([
+            { fees: null },
+            { fees: undefined },
+            { fees: {} },
+            {}
+        ])('does not render if no fees state exists', propsData => {
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-fees"]').exists()).toBe(false);
+        });
+
+        it('renders if there is a delivery fee', () => {
+            // arrange
+            const propsData = {
+                fees: {
+                    deliveryFeeText: 'foo'
+                }
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-fees"]').exists()).toBe(true);
+        });
+
+        it('renders if there is a minimum order', () => {
+            // arrange
+            const propsData = {
+                fees: {
+                    minOrderText: 'foo'
+                }
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-fees"]').exists()).toBe(true);
+        });
+    });
 });

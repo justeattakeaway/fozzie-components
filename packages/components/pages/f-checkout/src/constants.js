@@ -32,6 +32,7 @@ export const ERROR_TYPES = {
 };
 
 export const DUPLICATE_ORDER = 'DuplicateOrder';
+export const NOTE_NOT_ACCEPTED_SUFFIX = 'NOTE_NOT_ACCEPTED';
 
 export const VUEX_CHECKOUT_MODULE = 'fCheckoutModule';
 export const VUEX_CHECKOUT_ANALYTICS_MODULE = 'fCheckoutAnalyticsModule';

@@ -6,6 +6,7 @@ import {
     i18n, defaultCheckoutState, createStore
 } from './helpers/setup';
 import { DUPLICATE_ORDER, ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE, ERROR_TYPES } from '../../constants';
+import EventNames from '../../event-names';
 
 const localVue = createLocalVue();
 
@@ -196,6 +197,29 @@ describe('ErrorDialog', () => {
 
                 // Assert
                 expect(windowLocationSpy).not.toHaveBeenCalled();
+            });
+
+            it('should emit note not accepted event when note not accepted issue is returned', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant,
+                        checkoutErrorMessage: {
+                            messageKey: 'KITCHEN_NOTE_NOT_ACCEPTED',
+                            errorType: ERROR_TYPES.dialog
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                wrapper.vm.closeErrorDialog();
+
+                // Assert
+                expect(wrapper.emitted(EventNames.NoteNotAccepted).length).toBe(1);
             });
 
             describe('when `modalContext` exists', () => {

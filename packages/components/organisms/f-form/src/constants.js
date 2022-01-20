@@ -1,6 +1,8 @@
 export const FORM_EVENTS = {
     fieldUpdated: 'updated',
-    submitting: 'form-submitting'
+    submitting: 'form-submitting',
+    valid: 'form-valid',
+    invalid: 'form-invalid'
 };
 
 export const PROP_VALIDATION_MESSAGES = {
