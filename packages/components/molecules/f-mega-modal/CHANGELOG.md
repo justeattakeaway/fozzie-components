@@ -8,7 +8,7 @@ v4.0.1
 *January 19, 2022*
 
 ### Added
-- `aria-label` to MegaModal.vue to remove violations in storybook
+- `aria-labelledBy` to MegaModal.vue to remove violations in storybook
 
 
 v4.0.0
