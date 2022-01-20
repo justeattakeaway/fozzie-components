@@ -7,7 +7,6 @@
             is-positioned-bottom
             :title="copy.mainTitle"
             :has-close-button="false"
-            aria-label="cookieConsentTitle"
             data-cookie-consent-overlay>
             <div
                 :class="[

@@ -19,7 +19,7 @@
                 [$style['is-positioned-bottom']]: isPositionedBottom
             }]"
             role="dialog"
-            :aria-labelledby="ariaLabel">
+            :aria-labelledby="showAriaLabel">
             <div
                 ref="megaModalDocument"
                 :class="['c-megaModal-document', {
@@ -51,7 +51,7 @@
                 <component
                     :is="titleHtmlTag"
                     v-if="title"
-                    :id="ariaLabel"
+                    :id="uid"
                     :class="['c-megaModal-title', $style['c-megaModal-title']]"
                     data-test-id="mega-modal-title">
                     {{ title }}
@@ -154,7 +154,7 @@ export default {
     data () {
         uid += 1;
         return {
-            uid
+            uid: `modal-${uid}-title`
         };
     },
 
@@ -164,7 +164,7 @@ export default {
                 && this.hasOverlay;
         },
         showAriaLabel () {
-            return this.ariaLabel;
+            return this.ariaLabel === '' ? this.uid : this.ariaLabel;
         }
     },
 

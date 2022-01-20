@@ -83,26 +83,6 @@ export const MegaModalComponent = () => ({
             <p data-test-id="mega-modal-content">
                 Let's find another restaurant to order from.
             </p>
-            <mega-modal
-            :is-open="isOpen"
-            :is-narrow="isNarrow"
-            :is-wide="isWide"
-            :is-flush="isFlush"
-            :is-full-height="isFullHeight"
-            :is-scrollable="isScrollable"
-            :is-close-fixed="isCloseFixed"
-            :is-close-rounded="isCloseRounded"
-            :has-overlay="hasOverlay"
-            :has-close-button="hasCloseButton"
-            :close-on-blur="closeOnBlur"
-            :close-button-copy="closeButtonCopy"
-            :title="'This place isn’t taking orders'">
-
-            <p data-test-id="mega-modal-content">
-                Let's find another restaurant to order from.
-            </p>
-
-        </mega-modal>
 
         </mega-modal>
     `
