@@ -140,10 +140,6 @@ export default {
             type: String,
             default: ''
         },
-        ariaTitle: {
-            type: String,
-            default: 'pop-up modal'
-        },
         titleHtmlTag: {
             type: String,
             default: 'h3',
