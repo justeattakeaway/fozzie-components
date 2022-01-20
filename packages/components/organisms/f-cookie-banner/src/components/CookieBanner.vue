@@ -5,7 +5,9 @@
             ref="cookieBanner"
             :is-open="!shouldHideBanner"
             is-positioned-bottom
+            :title="copy.mainTitle"
             :has-close-button="false"
+            aria-label="cookieConsentTitle"
             data-cookie-consent-overlay>
             <div
                 :class="[
@@ -15,8 +17,7 @@
                 data-test-id="cookieConsentBanner"
                 role="dialog"
                 aria-modal="true"
-                aria-labelledby="cookieConsentTitle"
-                aria-describedby="cookieConsentDescription">
+                aria-labelledby="cookieConsentTitle">
                 <div
                     :class="$style['c-cookieBanner-content']"
                     data-test-id="cookieBannerContent">
@@ -73,7 +74,6 @@
         </mega-modal>
 
         <legacy-banner
-            v-else
             :should-hide-legacy-banner="shouldHideBanner"
             :legacy-banner-text="copy.legacyBannerText"
             :cookie-policy-link-url="copy.cookiePolicyLinkUrl"
