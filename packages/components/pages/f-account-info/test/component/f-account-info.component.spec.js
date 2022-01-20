@@ -34,7 +34,6 @@ describe('f-account-info component tests', () => {
         .it('should display an error message immediately when %s input has been deleted', field => {
             // Act
             accountInfo.clearBlurField(field);
-            accountInfo.clickOutOfInputField();
             accountInfo.tabOutOfField(field);
 
             // Assert
