@@ -383,7 +383,7 @@ jobs:
       - install_node_dependencies
       - run: # Run PR Checks
          name: Run PR Checks
-         command: yarn danger ci --fail-on-errors=true
+         command: yarn danger ci --failOnErrors
       - persist_to_workspace:
           root: .
           paths:
