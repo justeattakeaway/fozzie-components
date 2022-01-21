@@ -1,6 +1,9 @@
 <template>
     <div
-        :class="$style['c-imageTile']"
+        :class="[
+            $style['c-imageTile'], {
+                [$style['c-imageTile--selected']]: isToggleSelected
+            }]"
         data-test-id="image-tile-component">
         <a
             :class="[
@@ -23,10 +26,7 @@
             data-test-id="image-tile-input"
             @change="toggleFilter">
         <label
-            :class="[
-                $style['c-imageTile-label'], {
-                    [$style['c-imageTile-label--selected']]: isToggleSelected
-                }]"
+            :class="$style['c-imageTile-label']"
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label">
             <span
@@ -40,18 +40,28 @@
                     :alt="altText"
                     :role="isPresentationRole ? 'presentation' : false">
             </span>
-            <span :aria-hidden="isLink">
-                {{ displayText }}
+            <span
+                :class="$style['c-imageTile-text-container']"
+                :aria-hidden="isLink">
+                <span :class="$style['c-imageTile-icon-container']">
+                    <tick-icon :class="$style['c-imageTile-icon']" />
+                </span>
+                <span :class="$style['c-imageTile-text']">
+                    {{ displayText }}
+                </span>
             </span>
         </label>
     </div>
 </template>
 
 <script>
+import { TickIcon } from '@justeat/f-vue-icons';
 
 export default {
     name: 'ImageTile',
-    components: {},
+    components: {
+        TickIcon
+    },
     props: {
         href: {
             type: String,
@@ -156,6 +166,16 @@ $image-tile-background-color: $color-interactive-brand;
 
     font-family: $font-family-base;
     position: relative;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:hover .c-imageTile-icon {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+        width: 20px;
+    }
 }
 
 .c-imageTile-link {
@@ -177,10 +197,6 @@ $image-tile-background-color: $color-interactive-brand;
     flex-flow: column wrap;
 }
 
-.c-imageTile-label--selected {
-  border: 1px solid green;
-}
-
 .c-imageTile-imageContainer {
   display: block;
   background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
@@ -197,6 +213,42 @@ $image-tile-background-color: $color-interactive-brand;
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.c-imageTile-text-container {
+    display: flex;
+
+    .c-imageTile--selected & {
+        color: #017A39;
+    }
+}
+
+.c-imageTile-icon {
+    opacity: 0;
+    margin-right: spacing();
+    transform: rotate( -45deg ) scale(.5);
+    transition: transform .4s ease, opacity .4s ease;
+
+    .c-imageTile--selected & {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+        width: 10px;
+    }
+
+    .c-imageTile--selected & path {
+        fill: #017A39;
+    }
+}
+
+.c-imageTile-text {
+    @include font-size(body-s);
+    font-family: $font-family-base;
+    font-weight: $font-weight-regular;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 </style>
