@@ -1,5 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 import ImageTile from '../src/components/ImageTile.vue';
+import ImageTileWallpaper from './images/wallpaper.png';
+import ImageTileCuisine from './images/burgers.jpg';
 
 export default {
     title: 'Components/Atoms',
@@ -15,6 +17,9 @@ export const ImageTileComponent = (args, { argTypes }) => ({
                     :is-selected='isSelected'
                     :is-link='isLink'
                     :display-text='displayText'
+                    :img-src='imgSrc'
+                    :alt-text='altText'
+                    :fallback-image='fallbackImage'
                 >
                 </image-tile>`
 });
@@ -38,7 +43,7 @@ ImageTileComponent.argTypes = {
     imgSrc: {
         control: { type: 'text' },
         description: 'Cuisine image link',
-        defaultValue: 'https://via.placeholder.com/150'
+        defaultValue: ImageTileCuisine
     },
     isSelected: {
         control: { type: 'boolean' },
@@ -49,6 +54,16 @@ ImageTileComponent.argTypes = {
         control: { type: 'boolean' },
         description: 'Component acts as a link, rather than default toggle',
         defaultValue: false
+    },
+    altText: {
+        control: { type: 'text' },
+        description: 'Image alt text',
+        defaultValue: ''
+    },
+    fallbackImage: {
+        control: { type: 'text' },
+        description: 'Fallback image url',
+        defaultValue: ImageTileWallpaper
     }
 };
 
