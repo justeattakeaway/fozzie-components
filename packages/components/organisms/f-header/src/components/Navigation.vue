@@ -539,11 +539,7 @@ export default {
         },
 
         toggleUserMenu () {
-            if (this.userMenuIsOpen) {
-                this.closeUserMenu();
-            } else {
-                this.openUserMenu();
-            }
+            return this.userMenuIsOpen ? this.closeUserMenu() : this.openUserMenu();
         },
 
         closeUserMenu () {

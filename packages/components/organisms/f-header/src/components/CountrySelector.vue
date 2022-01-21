@@ -88,8 +88,9 @@ export default {
         closeCountrySelector (withFocus = true) {
             this.isCountrySelectorOpen = false;
             this.$emit('close-country-selector');
-            const { countrySelectorToggle } = this.$refs;
+
             if (withFocus) {
+                const { countrySelectorToggle } = this.$refs;
                 countrySelectorToggle.focus();
             }
         },
