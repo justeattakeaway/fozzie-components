@@ -6,6 +6,7 @@
             :is-open="!shouldHideBanner"
             is-positioned-bottom
             :has-close-button="false"
+            aria-label="cookieConsentTitle"
             data-cookie-consent-overlay>
             <div
                 :class="[
