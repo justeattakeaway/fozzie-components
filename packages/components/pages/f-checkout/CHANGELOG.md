@@ -7,8 +7,8 @@ v3.15.1
 ------------------------------
 *January 20, 2022*
 
-### Changed
-- Updated version of `f-mega-modal`
+### Fixed
+- Correct key for delivery note type when split notes is not enabled
 
 
 v3.15.0
