@@ -10,6 +10,9 @@
     "test-utils"<% } %><% if(config.needsTestingApiMocks) { %>,
     "src/services"<% } %>
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/<%= componentFolder %>f-<%= name.default %>",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
