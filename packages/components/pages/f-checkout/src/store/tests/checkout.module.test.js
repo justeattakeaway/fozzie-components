@@ -740,6 +740,7 @@ describe('CheckoutModule', () => {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept-Language': payload.language,
+                        'Accept-Tenant': payload.tenant,
                         Authorization: `Bearer ${state.authToken}`
                     },
                     timeout: payload.timeout
@@ -783,6 +784,7 @@ describe('CheckoutModule', () => {
                     const config = {
                         headers: {
                             'Content-Type': 'application/json',
+                            'Accept-Tenant': payload.tenant,
                             Authorization: `Bearer ${state.authToken}`
                         },
                         timeout: payload.timeout
@@ -1328,7 +1330,7 @@ describe('CheckoutModule', () => {
                 };
 
                 it('should return the formattedNotes as they are stored in state', () => {
-                    const expectedResult = [{ type: 'delivery', value: splitNotesDisabledState.notes.order.note }];
+                    const expectedResult = [{ type: 'delivery', note: splitNotesDisabledState.notes.order.note }];
 
                     // Act
                     const result = getters.formattedNotes(splitNotesDisabledState);

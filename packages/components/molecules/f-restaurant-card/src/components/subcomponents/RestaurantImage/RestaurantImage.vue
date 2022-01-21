@@ -1,7 +1,7 @@
 <template>
     <div
         :class="[$style['c-restaurantCard-img']]"
-        :style="`background-image: url(${imgUrl});`"
+        :style="`${imgUrl ? `background-image: url(${imgUrl});` : null}`"
         role="presentation">
         <slot />
     </div>
@@ -13,7 +13,7 @@ export default {
     props: {
         imgUrl: {
             type: String,
-            required: true
+            default: null
         }
     }
 };
