@@ -1,7 +1,11 @@
 /* eslint-disable no-import-assign */
 /* eslint-disable camelcase */
 import StatisticsClient from '../index';
+import statisticsModule from '../store/statistics.module';
 import * as config from '../config';
+import {
+    createStore
+} from './helpers/setup';
 
 jest.mock('../config', () => ({
     __esModule: true,
@@ -14,6 +18,9 @@ jest.mock('../config', () => ({
 jest.spyOn(global, 'setInterval');
 
 describe('f-statistics', () => {
+    let store,
+        registerStoreModuleSpy;
+
     const basePayload = {
         je_feature: 'f-statistics',
         je_logType: 'client-stats',
@@ -21,7 +28,22 @@ describe('f-statistics', () => {
         je_feature_for: 'Generic Front End'
     };
 
+    const mockStore = () => {
+        store = createStore({
+            state: {
+                publishQueue: []
+            },
+            actions: statisticsModule.actions,
+            mutations: statisticsModule.mutations
+        });
+
+        registerStoreModuleSpy = jest.fn();
+        store.registerModule = registerStoreModuleSpy;
+    };
+
     beforeEach(() => {
+        mockStore();
+
         jest.useFakeTimers();
     });
 
@@ -94,7 +116,7 @@ describe('f-statistics', () => {
 
         it('should define expected publish method', () => {
         // Arrange, Act & Assert
-            expect(new StatisticsClient().publish).toBeDefined();
+            expect(new StatisticsClient(null, null, null, store).publish).toBeDefined();
         });
 
         describe('single log publishing', () => {
@@ -104,7 +126,7 @@ describe('f-statistics', () => {
 
             it('should publish logs with expected properties', () => {
                 // Arrange
-                const statisticsClient = new StatisticsClient(justLogMock, null, null);
+                const statisticsClient = new StatisticsClient(justLogMock, null, null, store);
 
                 const expectedPayload = {
                     ...basePayload,
@@ -120,7 +142,7 @@ describe('f-statistics', () => {
 
             it('should publish logs with additional base payload properties when provided', () => {
                 // Arrange
-                const statisticsClient = new StatisticsClient(justLogMock, null, { a_base_payload_property: 'This is a test' });
+                const statisticsClient = new StatisticsClient(justLogMock, null, { a_base_payload_property: 'This is a test' }, store);
 
                 const expectedPayload = {
                     ...basePayload,
@@ -143,7 +165,7 @@ describe('f-statistics', () => {
 
             it('should not publish logs immediately', () => {
                 // Arrange
-                statisticsClient = new StatisticsClient(justLogMock, null, null);
+                statisticsClient = new StatisticsClient(justLogMock, null, null, store);
 
                 // Act
                 statisticsClient.publish('Test message', { testValue: 'A test value' });
@@ -155,7 +177,7 @@ describe('f-statistics', () => {
 
             it('should publish logs when BATCH_QUEUE_SIZE is met', () => {
                 // Arrange
-                statisticsClient = new StatisticsClient(justLogMock, null, null);
+                statisticsClient = new StatisticsClient(justLogMock, null, null, localStorage);
 
                 // Act
                 statisticsClient.publish('Test message', { testValue: 'A test value' });
@@ -170,7 +192,7 @@ describe('f-statistics', () => {
             it('should publish logs when  is met', async () => {
                 // Arrange
                 config.BATCH_INTERVAL_TIMER = 2000;
-                statisticsClient = new StatisticsClient(justLogMock, null, null);
+                statisticsClient = new StatisticsClient(justLogMock, null, null, store);
 
                 // Act
                 statisticsClient.publish('Test message', { testValue: 'A test value' });

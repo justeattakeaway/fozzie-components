@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import defaultOptions from './defaultOptions';
-// import statisticsModule from './store/statistics.module';
+import statisticsModule from './store/statistics.module';
 import { IS_BATCH_PUBLISHING_ENABLED, BATCH_QUEUE_SIZE, BATCH_INTERVAL_TIMER } from './config';
 
 export default class StatisticsClient {
@@ -18,7 +18,7 @@ export default class StatisticsClient {
         this.#basePayload = this.#makeBasePayload(basePayload);
         this.#justLogInstance = justLogInstance;
         this.#store = store;
-        // this.#store.registerModule(this.#configuration.namespace, statisticsModule, { preserveState: !!store.state[`${this.#configuration.namespace}`] });
+        this.#store.registerModule(this.#configuration.namespace, statisticsModule, { preserveState: !!store.state[`${this.#configuration.namespace}`] });
 
         if (IS_BATCH_PUBLISHING_ENABLED) {
             this.#startBatchTimer();
