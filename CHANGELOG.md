@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.9.1
+------------------------------
+*January 21, 2022*
+
+### Updated
+- `axe-helper.js` with A11y Axe rules to match storybook and to increase our a11y test coverage.
+
+
 
 v5.9.0
 ------------------------------
