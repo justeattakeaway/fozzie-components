@@ -11,7 +11,7 @@ const messages = {
         descriptionActivationNotLoggedIn: 'Do you already have a Just Eat account?',
         descriptionActivationFailed: 'Try again or get in touch with your Just Eat Pay administrator for help.',
         descriptionActivationSuccessful: 'Just Eat Pay is now activated on your account.',
-        activationInProgress: 'Activation is in progress, please wait'
+        activationInProgress: 'Activating your account, please wait'
     },
     actions: {
         activateTakeawayPay: 'Activate Just Eat Pay',
