@@ -117,67 +117,64 @@ $alert-borderRadius: $radius-rounded-c;
 
 .c-alert {
     position: relative;
-    padding: spacing();
-    padding-bottom: spacing(x1.5);
+    padding: spacing(x2);
+    padding-top: spacing(x1.5);
     margin-top: spacing(x2);
     border: 0;
     border-radius: $alert-borderRadius;
 }
-    .c-alert-headingContainer {
-        display: flex;
-        padding: spacing(x0.5) 0 0;
+
+.c-alert-headingContainer {
+    display: flex;
+    align-items: center;
+}
+
+.c-alert--success {
+    @include alert-variant($color-support-positive-02, $color-content-default);
+}
+
+.c-alert--warning {
+    @include alert-variant($color-support-warning-02, $color-content-default);
+}
+
+.c-alert--danger {
+    @include alert-variant($color-support-error-02, $color-content-default);
+}
+
+.c-alert--info {
+    @include alert-variant($color-support-info-02, $color-content-default);
+}
+
+.c-alert-heading {
+    @include font-size(subheading-s);
+    vertical-align: middle;
+    margin-top: 0;
+    margin-left: spacing(x2);
+}
+
+.c-alert-content {
+    @include font-size(body-l);
+    margin-top: spacing(x0.5);
+    margin-left: spacing(x5);
+}
+
+.c-alert-icon {
+    width: 23px;
+    height: 23px;
+}
+
+.c-alert-dismiss {
+    margin-left: auto;
+    z-index: zIndex(high);
+
+    &:hover {
+        cursor: pointer;
     }
+}
 
-    .c-alert--success {
-        @include alert-variant($color-support-positive-02, $color-content-default);
+.c-alert-dismiss-icon {
+    path {
+        fill: $color-content-subdued;
     }
-
-    .c-alert--warning {
-        @include alert-variant($color-support-warning-02, $color-content-default);
-    }
-
-    .c-alert--danger {
-        @include alert-variant($color-support-error-02, $color-content-default);
-    }
-
-    .c-alert--info {
-        @include alert-variant($color-support-info-02, $color-content-default);
-    }
-
-    .c-alert-heading {
-        @include font-size(subheading-s);
-        margin-top: -1px;
-        margin-bottom: spacing(x0.5);
-    }
-
-    .c-alert-content {
-        @include font-size(body-l);
-        padding-left: spacing(x5);
-    }
-
-    .c-alert-icon {
-        min-width: 20px;
-        width: 20px;
-        height: 20px;
-        margin: 5px spacing(x1.5) 0 spacing();
-    }
-
-    .c-alert-dismiss {
-        text-indent: 0;
-        margin-left: auto;
-        margin-right: spacing();
-        z-index: zIndex(high);
-
-        &:hover {
-            cursor: pointer;
-        }
-    }
-
-        .c-alert-dismiss-icon {
-            height: 16px;
-
-            path {
-                fill: $color-content-subdued;
-            }
-        }
+}
 </style>
