@@ -53,9 +53,7 @@
                     ]"
                     type="danger"
                     :heading="$t('errorMessages.saving.heading')">
-                    <p>
-                        {{ $t(error.messageKey) }}
-                    </p>
+                    {{ $t(error.messageKey) }}
                 </f-alert>
 
                 <f-alert
@@ -107,9 +105,7 @@ import FCardWithContent from '@justeat/f-card-with-content';
 import '@justeat/f-card-with-content/dist/f-card-with-content.css';
 import FAlert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
-import {
-    BagSadBgIcon
-} from '@justeat/f-vue-icons';
+import { BagSadBgIcon } from '@justeat/f-vue-icons';
 
 // Internal
 import tenantConfigs from '../tenants';
@@ -226,7 +222,7 @@ export default {
 
         /**
         * Informs the template that we are in Load Error State.
-        * @param {object} Error - The error that has recently occurred
+        * @param {object} error - The error that has recently occurred
         */
         handleLoadErrorState (error) {
             this.shouldShowLoadErrorCard = true;
@@ -235,7 +231,7 @@ export default {
 
         /**
         * Informs the template that we failed to save.
-        * @param {object} Error - The error that has recently occurred
+        * @param {object} error - The error that has recently occurred
         */
         handleSaveErrorState (error) {
             this.shouldShowSaveErrorAlert = true;
