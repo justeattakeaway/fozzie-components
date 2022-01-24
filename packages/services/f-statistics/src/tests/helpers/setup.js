@@ -4,7 +4,7 @@ import Vue from 'vue';
 
 const defaultState = {
     interval: null,
-    publishQueue: []
+    queue: []
 };
 
 const defaultActions = {};
