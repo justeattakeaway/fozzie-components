@@ -15,6 +15,20 @@ const processAndPublishQueue = (publishQueue, commit, justLog) => {
     commit(CLEAR_INTERVAL_TIMER);
 };
 
+const shouldStartPublishTimer = (interval, commit, publishLogs) => {
+    if (!interval && IS_BATCH_PUBLISHING_ENABLED) {
+        console.log('Starting publish timer');
+        commit(SET_INTERVAL_TIMER, () => publishLogs());
+    }
+};
+
+const shouldStartToPublish = (publishQueue, publishLogs) => {
+    if (!IS_BATCH_PUBLISHING_ENABLED || isQueueLengthExceeded(publishQueue)) {
+        publishLogs();
+    }
+};
+
+
 export default {
     namespaced: true,
 
@@ -25,18 +39,12 @@ export default {
 
     actions: {
         addToPublishQueue: ({ commit, state }, { log, justLog }) => {
-            const { publishQueue } = state;
+            const { publishQueue, interval } = state;
             const publishLogs = () => processAndPublishQueue(publishQueue, commit, justLog);
-
-            if (!publishQueue.length && IS_BATCH_PUBLISHING_ENABLED) {
-                console.log('Starting publish timer');
-                commit(SET_INTERVAL_TIMER, () => publishLogs());
-            }
+            shouldStartPublishTimer(interval, commit, publishLogs);
             commit(ADD_TO_PUBLISH_QUEUE, log);
             console.log(`Add log to queue (${publishQueue.length})`);
-            if (!IS_BATCH_PUBLISHING_ENABLED || isQueueLengthExceeded(publishQueue)) {
-                publishLogs();
-            }
+            shouldStartToPublish(publishQueue, publishLogs);
         }
     },
 
