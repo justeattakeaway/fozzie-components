@@ -48,7 +48,7 @@
                     v-if="shouldShowSaveErrorAlert"
                     data-test-id="contact-preferences-error-alert"
                     :class="[
-                        $style['c-contactPreferences-bottomMargin'],
+                        $style['c-contactPreferences-alert'],
                         $style['c-contactPreferences-inheritWidthAboveNarrow']
                     ]"
                     type="danger"
@@ -60,7 +60,7 @@
                     v-if="shouldShowSuccessfulAlert"
                     data-test-id="contact-preferences-success-alert"
                     :class="[
-                        $style['c-contactPreferences-bottomMargin'],
+                        $style['c-contactPreferences-alert'],
                         $style['c-contactPreferences-inheritWidthAboveNarrow']
                     ]"
                     type="success"
@@ -349,7 +349,7 @@ export default {
     }
 }
 
-.c-contactPreferences-bottomMargin {
+.c-contactPreferences-alert {
     margin: 0 0 spacing(x4);
 }
 </style>

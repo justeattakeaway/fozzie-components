@@ -48,14 +48,14 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.7.0",
-    "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-vue-icons": "3.3.0"
+    "@justeat/f-globalisation": "1.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
     "vuex": ">=3.5.1"
   },
-  "devDependencies": {
+  "devDependencies": {    
+    "@justeat/f-vue-icons": "3.3.0",
     "@justeat/f-button": "3.2.0",
     "@justeat/f-card": "3.4.0",
     "@justeat/f-card-with-content": "1.0.0",    
