@@ -1,4 +1,7 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+// const Page = require('@justeat/f-wdio-utils/src/page.object');
+
+const Page = require('../../../../../services/f-wdio-utils/src/page.object');
+
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
@@ -237,109 +240,10 @@ module.exports = class Checkout extends Page {
         return this.errorMessageDupOrderGoToHistory.isDisplayed();
     }
 
-    /**
-    * @description
-    * Inputs address details into the checkout component.
-    *
-    * @param {Object} checkoutInfo
-    * @param {String} checkoutInfo.serviceType
-    * @param {boolean} checkoutInfo.isAuthenticated
-    * @param {Object} checkoutInfo.tenant
-    * @param {Object} customerInfo
-    * @param {String} customerInfo.emailAddress Email address of the guest user.
-    * @param {String} customerInfo.mobileNumber The user's mobile number - delivery service type.
-    * @param {String} customerInfo.line1 First line of the user's address - delivery service type.
-    * @param {String} customerInfo.line2 Second line of the user's address - delivery service type.
-    * @param {String} customerInfo.locality Locality of the user's address - delivery service type.
-    * @param {String} customerInfo.postcode Postcode of the user's address - delivery service type.
-    * @param {String} customerInfo.orderTime Time of user's requested delivery/collection/dine-in time.
-    * @param {String} customerInfo.tableIdentifier Table number of user.
-    */
-    populateCheckoutForm (checkoutInfo, customerInfo) {
-        if (!checkoutInfo.isAuthenticated) {
-            this.populateSharedGuestFields(customerInfo);
-        }
-
-        switch (checkoutInfo.serviceType) {
-            case 'delivery':
-                this.populateDeliveryFields(customerInfo);
-                break;
-            case 'dinein':
-                this.populateDineInFields(customerInfo);
-                break;
-        }
-
-        if (customerInfo.mobileNumber) {
-            this.fields.mobileNumber.input.setValue(customerInfo.mobileNumber);
-        }
-
-        if (customerInfo.orderTime) {
-            this.selectOrderTime(customerInfo.orderTime);
-        }
-    }
-
-    populateSharedGuestFields (customerInfo) {
-        this.fields.firstName.input.setValue(customerInfo.firstName);
-        this.fields.lastName.input.setValue(customerInfo.lastName);
-        this.fields.emailAddress.input.setValue(customerInfo.emailAddress);
-    }
-
-    populateDeliveryFields (customerInfo) {
-        this.fields.addressLine1.input.setValue(customerInfo.line1);
-        this.fields.addressLine2.input.setValue(customerInfo.line2);
-        this.fields.addressLocality.input.setValue(customerInfo.locality);
-        this.fields.addressPostcode.input.setValue(customerInfo.postcode);
-    }
-
-    populateDineInFields (customerInfo) {
-        this.fields.tableIdentifier.input.setValue(customerInfo.tableIdentifier);
-    }
-
     populateAgeVerificationForm ({ day, month, year }) {
         this.ageVerificationDayDropdown.selectByVisibleText(day);
         this.ageVerificationMonthDropdown.selectByVisibleText(month);
         this.ageVerificationYearDropdown.selectByVisibleText(year);
-    }
-
-    /**
-    * @description
-    * Due to the anomalies between webdriver io and Chrome the current `clearField()`
-    * hack to clear a field needs to be different for those fields that have the onBlur
-    * event attached to them.
-    * Select all the text in the field and then performs a backspace to clear the field
-    *
-    * @param {String} fieldName The name of the field input it is clearing
-    */
-    clearBlurField (fieldName) {
-        // Determines the OS
-        const CONTROL = process.platform === 'darwin' ? 'Command' : '\uE009';
-        const el = this.fields[fieldName].input;
-        el.click();
-        el.keys([CONTROL, 'a']);
-        el.keys(['Backspace']);
-    }
-
-    /**
-    * @description
-    * Adds a space and backspaces to clear the value of the form field.
-    * For more information on this, you can check out the link below:
-    * https://github.com/webdriverio/webdriverio/issues/530#issuecomment-229435909
-    *
-    * @param {String} fieldName The name of the field input it is clearing
-    */
-    clearField (fieldName) {
-        const BACKSPACE_UNICODE = '\uE003';
-        this.fields[fieldName].input.setValue([' ', BACKSPACE_UNICODE]);
-    }
-
-    /**
-     * @description
-     * Adds a space and backspaces to clear the value of the form field.
-     *
-     * @param {String} fields Grabs the fields of the above object and runs a forEach loop to get the keys
-     */
-    clearCheckoutField (fieldName) {
-        this.clearField(fieldName);
     }
 
     /**
@@ -350,17 +254,6 @@ module.exports = class Checkout extends Page {
     */
     selectOrderTime (orderTime) {
         this.orderTimeDropdown.selectByVisibleText(orderTime);
-    }
-
-    /**
-     * @description
-     * Sets the value of the Checkout field.
-     *
-     * @param {String} Field name
-     * @param {String} Value to set
-     */
-    setFieldValue (fieldName, value) {
-        this.fields[fieldName].input.setValue(value);
     }
 
     /**

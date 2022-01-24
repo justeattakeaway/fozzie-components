@@ -1,9 +1,12 @@
+import forEach from 'mocha-each';
+
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
 let checkoutInfo;
 
-describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', device => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -21,7 +24,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State', device);
     });
 
     it('should display the mandatory error messages.', () => {
@@ -30,7 +33,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Mandatory Errors State', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Mandatory Errors State', device);
     });
 
     it('should display the "Something went wrong" error.', () => {
@@ -53,7 +56,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         browser.pause(500);
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Something went wrong" Error', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Something went wrong" Error', device);
     });
 
     it('should display the "Restaurant not taking orders" modal', () => {
@@ -75,22 +78,24 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', device);
     });
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
         const customerInfo = {
-            mobileNumber: '123'
+            mobileNumber: {
+                input: '123'
+            }
         };
 
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.populateForm('mobileNumber', customerInfo);
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Illegal Mobile Number Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Illegal Mobile Number Error State', device);
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -112,11 +117,12 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', device);
     });
 });
 
-describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', device => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -135,11 +141,12 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Deskt
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Pre-Order Warning', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Pre-Order Warning', device);
     });
 });
 
-describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', device => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -158,47 +165,50 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State', device);
     });
 
     it('should display the mandatory error messages', () => {
         // Act
-        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutField(field));
-        ['mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
+        ['mobileNumber', 'addressPostcode', 'addressLine1', 'addressLocality'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', device);
     });
 
     it('should display the illegal postcode error message', () => {
         // Arrange
         const customerInfo = {
-            postcode: 'TEST1A'
+            addressPostcode: {
+                input: 'TEST1A'
+            }
         };
 
         // Act
         checkout.clearBlurField('addressPostcode');
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.populateForm('addressPostcode', customerInfo);
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Postcode Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Postcode Error State', device);
     });
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
         const customerInfo = {
-            mobileNumber: '123'
+            mobileNumber: {
+                input: '123'
+            }
         };
 
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.populateForm('mobileNumber', customerInfo);
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', device);
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -220,11 +230,12 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', device);
     });
 });
 
-describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop Visual Tests', device => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -243,11 +254,12 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Pre-Order Warning', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Pre-Order Warning', device);
     });
 });
 
-describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', device => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -266,32 +278,33 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', 'desktop');
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', device);
     });
 
     it('should display the mandatory error messages', () => {
         // Act
-        checkout.clearCheckoutField('tableIdentifier');
-        checkout.clearBlurField('mobileNumber');
+        ['mobileNumber', 'tableIdentifier'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', 'desktop');
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', device);
     });
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
         const customerInfo = {
-            mobileNumber: '123'
+            mobileNumber: {
+                input: '123'
+            }
         };
 
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.populateForm('mobileNumber', customerInfo);
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', device);
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -313,7 +326,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', device);
     });
 
     it('should display the two notes fields if there is two noteTypes.', () => {
@@ -324,11 +337,12 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('$knob-Note types', 'get-notes-config-split');
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', device);
     });
 });
 
-describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Visual Tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Visual Tests', device => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -349,11 +363,12 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
 
     it('should display the state input.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible State field', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible State field', device);
     });
 });
 
-describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', device => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -375,6 +390,6 @@ describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Vi
 
     it('should display the age verification page', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible Age Verification', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible Age Verification', device);
     });
 });

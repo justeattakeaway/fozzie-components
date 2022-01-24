@@ -7,6 +7,21 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 let checkoutInfo;
 
+const customerInfo = {
+    firstName: {
+        input: 'Jerry'
+    },
+    lastName: {
+        input: 'Jazzman'
+    },
+    emailAddress: {
+        input: 'jerry.jazzman@ronniescotts.co.uk'
+    },
+    mobileNumber: {
+        input: '+447111111111'
+    }
+};
+
 describe('Accessibility tests', () => {
     it('a11y - should test f-checkout component (delivery) WCAG compliance', () => {
         // Act
@@ -116,7 +131,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -130,13 +145,7 @@ describe('Accessibility tests', () => {
         checkout.load();
 
         // Act
-        const customerInfo = {
-            firstName: 'Jerry',
-            lastName: 'Jazzman',
-            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '+447111111111'
-        };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        Object.keys(customerInfo).forEach(field => checkout.populateForm(field, customerInfo));
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -151,7 +160,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -164,17 +173,21 @@ describe('Accessibility tests', () => {
 
         checkout.load();
 
-        // Act
-        const customerInfo = {
-            firstName: 'Jerry',
-            lastName: 'Jazzman',
-            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '+447111111111',
-            line1: '1 Bristol Road',
-            locality: 'Bristol',
-            postcode: 'BS1 1AA'
+        const customerInput = {
+            ...customerInfo,
+            addressLine1: {
+                input: '1 Bristol Road'
+            },
+            addressLocality: {
+                input: 'Bristol'
+            },
+            addressPostcode: {
+                input: 'BS1 1AA'
+            }
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+
+        // Act
+        Object.keys(customerInput).forEach(field => checkout.populateForm(field, customerInput));
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -189,7 +202,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -203,14 +216,13 @@ describe('Accessibility tests', () => {
         checkout.load();
 
         // Act
-        const customerInfo = {
-            firstName: 'Jerry',
-            lastName: 'Jazzman',
-            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '+447111111111',
-            tableIdentifier: '1'
+        const customerInput = {
+            ...customerInfo,
+            tableIdentifier: {
+                input: '1'
+            }
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        Object.keys(customerInput).forEach(field => checkout.populateForm(field, customerInput));
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -234,13 +246,7 @@ describe('Accessibility tests', () => {
         checkout.load();
 
         // Act
-        const customerInfo = {
-            firstName: 'Jerry',
-            lastName: 'Jazzman',
-            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '+447111111111'
-        };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        Object.keys(customerInfo).forEach(field => checkout.populateForm(field, customerInfo));
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -263,17 +269,21 @@ describe('Accessibility tests', () => {
 
         checkout.load();
 
-        // Act
-        const customerInfo = {
-            firstName: 'Jerry',
-            lastName: 'Jazzman',
-            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '+447111111111',
-            line1: '1 Bristol Road',
-            locality: 'Bristol',
-            postcode: 'BS1 1AA'
+        const customerInput = {
+            ...customerInfo,
+            addressLine1: {
+                input: '1 Bristol Road'
+            },
+            addressLocality: {
+                input: 'Bristol'
+            },
+            addressPostcode: {
+                input: 'BS1 1AA'
+            }
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+
+        // Act
+        Object.keys(customerInput).forEach(field => checkout.populateForm(field, customerInput));
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -297,14 +307,13 @@ describe('Accessibility tests', () => {
         checkout.load();
 
         // Act
-        const customerInfo = {
-            firstName: 'Jerry',
-            lastName: 'Jazzman',
-            emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '+447111111111',
-            tableIdentifier: '1'
+        const customerInput = {
+            ...customerInfo,
+            tableIdentifier: {
+                input: '1'
+            }
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        Object.keys(customerInput).forEach(field => checkout.populateForm(field, customerInput));
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
