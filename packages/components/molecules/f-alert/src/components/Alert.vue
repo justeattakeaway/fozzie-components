@@ -118,7 +118,6 @@ $alert-borderRadius: $radius-rounded-c;
 .c-alert {
     position: relative;
     padding: spacing(x2);
-    padding-top: spacing(x1.5);
     margin-top: spacing(x2);
     border: 0;
     border-radius: $alert-borderRadius;
@@ -127,6 +126,7 @@ $alert-borderRadius: $radius-rounded-c;
 .c-alert-headingContainer {
     display: flex;
     align-items: center;
+    margin-top: 2px;
 }
 
 .c-alert--success {
