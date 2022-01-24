@@ -4,6 +4,7 @@ import StatisticsClient from '../index';
 import statisticsModule from '../store/statistics.module';
 import * as config from '../config';
 import {
+    defaultState,
     createStore
 } from './helpers/setup';
 
@@ -30,9 +31,7 @@ describe('f-statistics', () => {
 
     const mockStore = () => {
         store = createStore({
-            state: {
-                publishQueue: []
-            },
+            state: { ...defaultState },
             actions: statisticsModule.actions,
             mutations: statisticsModule.mutations
         });

@@ -1,6 +1,12 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 
+
+const defaultState = {
+    interval: null,
+    publishQueue: []
+};
+
 const defaultActions = {};
 
 const defaultGetters = {};
@@ -34,6 +40,7 @@ const createStore = ({
 };
 
 export {
+    defaultState,
     defaultActions,
     createStore,
     options
