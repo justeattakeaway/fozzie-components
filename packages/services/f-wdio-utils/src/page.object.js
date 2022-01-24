@@ -2,6 +2,7 @@ const { buildUrl } = require('./storybook-extensions');
 
 class Page {
     #defaultWaitTimeout = 500;
+
     constructor (componentType, componentName) {
         this.title = 'Component URLS';
         this.componentType = componentType;
