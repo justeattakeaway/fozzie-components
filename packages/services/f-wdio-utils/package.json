@@ -5,6 +5,9 @@
   "files": [
     "src/"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-wdio-utils",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"

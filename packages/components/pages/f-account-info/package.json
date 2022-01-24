@@ -1,13 +1,18 @@
 {
   "name": "@justeat/f-account-info",
   "description": "Fozzie Account Info - The account information page",
-  "version": "0.14.1",
+  "version": "0.14.4",
   "main": "dist/f-account-info.umd.min.js",
   "maxBundleSize": "100kB",
   "files": [
     "dist",
-    "test-utils"
+    "test-utils",
+    "src/services",
+    "src/constants.js"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-account-info",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"

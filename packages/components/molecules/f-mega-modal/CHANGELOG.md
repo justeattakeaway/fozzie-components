@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.2
+------------------------------
+*January 20, 2022*
+
+### Added
+- prop and computed property added for `ariaLabel` in MegaModal.vue
+
+
+v4.0.1
+------------------------------
+*January 19, 2022*
+
+### Added
+- `aria-labelledBy` to MegaModal.vue to remove violations in storybook
+
+
 v4.0.0
 ------------------------------
 *November 26, 2021*

@@ -1,9 +1,6 @@
-// Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-// import {
-//     withKnobs, select, boolean
-// } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VForm from '../src/components/Form.vue';
+import { formData } from './helpers';
 
 export default {
     title: 'Components/Organisms',
@@ -12,37 +9,22 @@ export default {
 
 export const VFormComponent = () => ({
     components: { VForm },
+
     data () {
         return {
-            formData: {
-                formFields: [
-                    {
-                        name: 'firstName',
-                        value: '',
-                        translations: {
-                            label: 'First Name'
-                        }
-                    },
-                    {
-                        name: 'lastName',
-                        value: '',
-                        translations: {
-                            label: 'Last Name'
-                        }
-                    },
-                    {
-                        name: 'email',
-                        value: '',
-                        translations: {
-                            label: 'Email Address'
-                        }
-                    }
-                ],
-                buttonText: 'Continue'
-            }
+            formData
         };
     },
-    template: '<v-form :form-data="formData"/>'
+
+    methods: {
+        updateField ({ name, value }) {
+            const formField = this.formData.formFields.find(field => field.name === name);
+            formField.value = value;
+        }
+    },
+
+
+    template: '<v-form :form-data="formData" @updated="updateField"/>'
 });
 
 VFormComponent.storyName = 'f-form';

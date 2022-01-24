@@ -5,7 +5,8 @@
             v-if="checkoutErrorMessage"
             ref="errorMessage"
             v-bind="errorProps.props"
-            @created="handleDialogCreation">
+            @created="handleDialogCreation"
+            @note-not-accepted="handleNoteNotAccepted">
             <span>{{ errorProps.content }}</span>
         </component>
 
@@ -535,6 +536,10 @@ export default {
             }
         },
 
+        async handleNoteNotAccepted () {
+            await this.loadNotesConfiguration();
+        },
+
         /**
          * Handles call of `updateCheckout` and catches and throws any returned errors.
          * 1. Maps checkout data.
@@ -718,6 +723,7 @@ export default {
             try {
                 await this.getCustomer({
                     url: this.getCustomerUrl,
+                    tenant: this.tenant,
                     timeout: this.checkoutTimeout
                 });
                 this.handleEventLogging('CheckoutCustomerGetSuccess');

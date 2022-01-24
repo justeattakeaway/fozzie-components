@@ -3,6 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.14.0
+------------------------------
+*January 20, 2022*
+
+### Changed
+- Fallback to gray background for restaurant image when image doesn't load or is missing
+- Hide restaurant logo when image fails to load
+- Add presentation role to restaurant logo
+- Move restaurant logo to it's own folder
+
+v0.13.0
+------------------------------
+*January 17, 2022*
+
+### Added
+- RestaurantFees component to display delivery fee and minimum order
+- RestaurantFees unit tests
+- Default background colour to restaurant card image
+### Changed
+- Changed restaurant image role from "img" to "presentation"
+- Added RestaurantFees data to storybook
+- Updated f-vue-icons dependency for new cash small icon
+
 v0.12.0
 ------------------------------
 *December 20, 2021*

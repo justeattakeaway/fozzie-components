@@ -11,7 +11,6 @@
 
         <!-- background image -->
         <restaurant-image
-            v-if="imgUrl"
             :class="[$style['c-restaurantCard-img']]"
             :img-url="imgUrl">
             <!-- Logo image -->
@@ -19,7 +18,7 @@
                 v-if="logoUrl"
                 :class="$style['c-restaurantCard-logo']"
                 :logo-url="logoUrl" />
-
+            <!-- Tags inside image container -->
             <restaurant-tags
                 v-if="hasImageTags"
                 :class="$style['c-restaurantCard-imageTags']"
@@ -98,6 +97,11 @@
             </component>
             <!-- END ERROR BOUNDARY -->
 
+            <restaurant-fees
+                v-if="hasFees"
+                v-bind="fees"
+                data-test-id="restaurant-fees" />
+
             <!-- Tags -->
             <div>
                 <!-- misc tags -->
@@ -146,7 +150,7 @@
 import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
-import RestaurantLogo from './subcomponents/RestaurantLogo.vue';
+import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
 import RestaurantDishes from './subcomponents/RestaurantDishes/RestaurantDishes.vue';
 import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
 import RestaurantTags from './subcomponents/RestaurantTags/RestaurantTags.vue';
@@ -154,6 +158,7 @@ import RestaurantTag from './subcomponents/RestaurantTags/RestaurantTag.vue';
 import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.vue';
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 import IconText from './subcomponents/IconText.vue';
+import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
 
 export default {
     name: 'RestaurantCardV1',
@@ -168,7 +173,8 @@ export default {
         DeliveryTimeMeta,
         IconText,
         OfferIcon,
-        LegendIcon
+        LegendIcon,
+        RestaurantFees
     },
     mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
@@ -237,6 +243,10 @@ export default {
         isPremier: {
             type: Boolean,
             default: false
+        },
+        fees: {
+            type: Object,
+            default: () => {}
         }
     },
     computed: {
@@ -256,6 +266,9 @@ export default {
         },
         hasDishes () {
             return !!this.dishes?.length;
+        },
+        hasFees () {
+            return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
         }
     },
     provide () {

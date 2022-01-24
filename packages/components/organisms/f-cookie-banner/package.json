@@ -1,13 +1,16 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "main": "dist/f-cookie-banner.umd.min.js",
   "maxBundleSize": "40kB",
   "files": [
     "dist",
     "test-utils"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-cookie-banner",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
@@ -56,7 +59,7 @@
   "devDependencies": {
     "@justeat/f-button": "3.0.2",
     "@justeat/f-link": "2.0.0",
-    "@justeat/f-mega-modal": "3.0.2",
+    "@justeat/f-mega-modal": "4.0.2",
     "@justeat/f-vue-icons": "2.3.0",
     "@justeat/f-wdio-utils": "0.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",

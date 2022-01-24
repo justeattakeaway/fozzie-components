@@ -1,8 +1,8 @@
 <template>
     <div
         :class="[$style['c-restaurantCard-img']]"
-        :style="`background-image: url(${imgUrl});`"
-        role="img">
+        :style="`${imgUrl ? `background-image: url(${imgUrl});` : null}`"
+        role="presentation">
         <slot />
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
     props: {
         imgUrl: {
             type: String,
-            required: true
+            default: null
         }
     }
 };
@@ -23,6 +23,7 @@ export default {
 $img-borderRadius : $radius-rounded-c;
 
 .c-restaurantCard-img {
+  background-color: $color-grey-30;
   background-size: cover;
   background-position: center;
   border-radius: $img-borderRadius;

@@ -3,6 +3,31 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.10.0
+------------------------------
+*January 20, 2022*
+
+### Updated
+- `.circleci/config.yml` to automatically publish new package versions to the npm registry.
+
+v5.9.0
+------------------------------
+*January 20, 2022*
+
+### Updated
+- `.circleci/config.yml` to put danger checks in their own workflow.
+
+
+v5.8.7
+------------------------------
+*January 17, 2022*
+
+### Updated
+- `axe-core` version to latest.
+
+### Fixed
+- `axe-helper.js` to create reports in the correct directory if tests fail locally.
+
 
 v5.8.6
 ------------------------------
