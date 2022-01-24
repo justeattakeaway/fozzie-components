@@ -32,7 +32,7 @@ class Page {
 
     /**
     * @description
-    * Select all the text in the field and then performs a backspace to clear the field.
+    * Selects all the text in the field and then performs a backspace to clear the field.
     *
     * @param {String} fieldName The name of the field
     */
@@ -67,8 +67,8 @@ class Page {
      * @description
      * Sets the value of a form field.
      *
-     * @param {String} fieldName name
-     * @param {String} value to set
+     * @param {String} fieldName the name of the field
+     * @param {String} value the value set
      */
     setFieldValue (fieldName, value) {
         this.fields[fieldName].input.setValue(value);
