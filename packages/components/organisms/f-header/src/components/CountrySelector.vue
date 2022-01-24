@@ -5,7 +5,7 @@
                 [$style['is-open']]: isCountrySelectorOpen
             }
         ]"
-        v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
+        v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: (() => closeCountrySelector(false)) }"
         @keyup.esc="closeCountrySelector">
         <button
             ref="countrySelectorToggle"
@@ -85,13 +85,14 @@ export default {
     }),
 
     methods: {
-        closeCountrySelector () {
+        closeCountrySelector (withFocus = true) {
             this.isCountrySelectorOpen = false;
             this.$emit('close-country-selector');
-            const {
-                countrySelectorToggle
-            } = this.$refs;
-            countrySelectorToggle.focus();
+
+            if (withFocus) {
+                const { countrySelectorToggle } = this.$refs;
+                countrySelectorToggle.focus();
+            }
         },
 
         openCountrySelector () {
@@ -109,14 +110,6 @@ export default {
 
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
-
-.c-nav-list-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    background: transparent;
-}
 
 .c-nav-list-iconWrapper {
     height: $countrySelector-flag-height;

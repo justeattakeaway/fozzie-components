@@ -151,14 +151,19 @@
                     data-test-id="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openUserMenu, mouseleave: closeUserMenu }"
                     @keyup.esc="closeUserMenu">
-                    <a
+                    <button
+                        type="button"
                         data-test-id="user-info-link"
                         :tabindex="isBelowMid ? -1 : 0"
                         :aria-expanded="!isBelowMid && userMenuIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
-                        :class="$style['c-nav-list-text']"
-                        href="/"
-                        @click.prevent="onNavToggle">
+                        :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
+                        :class="[
+                            $style['c-nav-list-text'],
+                            $style['c-nav-list-btn']
+                        ]"
+                        @click.prevent="toggleUserMenu"
+                        @keydown.space.prevent="toggleUserMenu">
                         <profile-icon
                             :class="[
                                 $style['c-nav-icon'],
@@ -180,13 +185,14 @@
                             ]">
                             {{ userInfo.email }}
                         </span>
-                    </a>
+                    </button>
 
                     <v-popover :class="$style['c-nav-popover']">
                         <user-navigation-panel
-                            :is-open="navIsOpen"
+                            :is-user-menu-open="userMenuIsOpen"
+                            :is-nav-open="navIsOpen"
                             :is-below-mid="isBelowMid"
-                            :is-country-selector-closed-on-mobile-view="isCountrySelectorClosedOnMobileView"
+                            :is-country-selector-open="countrySelectorIsOpen"
                             :copy="copy"
                             :return-logout-url="returnLogoutUrl"
                             @activateNav="openUserMenu"
@@ -424,12 +430,8 @@ export default {
                 this.customNavLinks.length > 0;
         },
 
-        isCountrySelectorClosedOnMobileView () {
-            return this.isBelowMid && !this.countrySelectorIsOpen;
-        },
-
         tabIndex () {
-            if (!this.isBelowMid || this.isCountrySelectorClosedOnMobileView) return 0;
+            if (!this.isBelowMid || !this.countrySelectorIsOpen) return 0;
             return -1;
         }
     },
@@ -461,9 +463,12 @@ export default {
                 this.closeCountrySelector();
             }
 
-            // This is added to remove the ability to scroll the page content when the mobile navigation is open
-            this.handleMobileNavState();
-            this.tabLoop();
+            if (this.isBelowMid && this.navIsOpen) {
+                // This is added to remove the ability to scroll the page content when the mobile navigation is open
+                this.handleMobileNavState();
+
+                this.tabLoop();
+            }
         },
 
         /**
@@ -500,7 +505,14 @@ export default {
          * binding tab events via the keydown method
          */
         tabLoop () {
-            if (!this.isBelowMid || !this.navIsOpen) return;
+            const { nav } = this.$refs;
+
+            if (!this.isBelowMid || !this.navIsOpen) {
+                // If we're not in mobile view and the nav is not open,
+                // we want to remove the event listener if it already exists
+                nav.removeEventListener('keydown', this.keyActions);
+                return;
+            }
 
             // use `nextTick` to give Vue enough time to update the DOM
             this.$nextTick(() => {
@@ -509,10 +521,6 @@ export default {
                     '[aria-hidden="false"] > button:not([disabled]):not([inert])',
                     '[tabindex]:not([tabindex^="-"]):not([inert])'
                 ].join();
-
-                const {
-                    nav
-                } = this.$refs;
 
                 // Filter any "hidden" elements
                 const nodeList = nav.querySelectorAll(focusableElsSelector) || [];
@@ -525,18 +533,21 @@ export default {
                 this.firstFocusableEl = firstFocusableEl;
                 this.lastFocusableEl = lastFocusableEl;
 
+                // Add loop-handling event listener
                 nav.addEventListener('keydown', this.keyActions);
             });
         },
 
+        toggleUserMenu () {
+            return this.userMenuIsOpen ? this.closeUserMenu() : this.openUserMenu();
+        },
+
         closeUserMenu () {
             this.userMenuIsOpen = false;
-            this.handleMobileNavState();
         },
 
         openUserMenu () {
             this.userMenuIsOpen = true;
-            this.handleMobileNavState();
         },
 
         onCountrySelectorToggle () {

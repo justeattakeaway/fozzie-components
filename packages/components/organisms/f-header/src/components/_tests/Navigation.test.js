@@ -46,62 +46,155 @@ describe('Navigation', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    describe('computed:: ', () => {
-        describe('isBelowMid:: ', () => {
-            it('should set isBelowMid computed property to false for desktop', () => {
+    describe('computed ::', () => {
+        describe('isBelowMid ::', () => {
+            afterEach(setDesktopViewport);
+
+            it.each([
+                [false, 'desktop', setDesktopViewport],
+                [true, 'mobile', setMobileViewport]
+            ])('should be %s for %s viewport', (expected, _, setViewportFn) => {
                 // Arrange & Act
-                setDesktopViewport();
+                setViewportFn();
 
                 wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
                 wrapper.setData(defaultData);
 
                 // Assert
-                expect(wrapper.vm.isBelowMid).toBeFalsy();
+                expect(wrapper.vm.isBelowMid).toBe(expected);
             });
+        });
 
-            it('should set isBelowMid computed property to true for mobile', () => {
-                // Arrange & Act
-                setMobileViewport();
-                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
-                wrapper.setData(defaultData);
+        describe('tabIndex', () => {
+            afterEach(setDesktopViewport);
+
+            it.each([
+                [0, false, false],
+                [0, false, true],
+                [0, true, false],
+                [-1, true, true]
+            ])('should be %s when `isBelowMid` is %s and `countrySelectorIsOpen` is %s', async (
+                tabIndex, isBelowMid, countrySelectorIsOpen
+            ) => {
+                if (isBelowMid) {
+                    setMobileViewport();
+                } else {
+                    setDesktopViewport();
+                }
+
+                wrapper = shallowMount(Navigation, {
+                    propsData: defaultPropsData
+                });
+
+                // Act
+                wrapper.setData({ countrySelectorIsOpen });
+                await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(wrapper.vm.isBelowMid).toBeTruthy();
+                expect(wrapper.vm.tabIndex).toBe(tabIndex);
             });
         });
-    });
 
+        describe('isOrderCountOutOfDate', () => {
+            it.each([
+                [true, 'past', 'Thu Oct 10 2019 15:37:14 GMT+0100'],
+                [false, 'future', 'Tue Aug 14 2063 16:30:34 GMT+0100']
+            ])('should return %s if order count expiry date is in the %s', async (expected, _, expiryDate) => {
+                // Arrange
+                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
-    it('should show the delivery enquiry link in the navigation if `showDeliveryEnquiry: true` and the content is there', async () => {
-        // Arrange
-        wrapper = shallowMount(Navigation, {
-            propsData: {
-                ...defaultPropsData,
-                showDeliveryEnquiry: true
-            }
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    localOrderCountExpires: new Date(expiryDate).getTime()
+                });
+
+                // Assert
+                expect(wrapper.vm.isOrderCountOutOfDate).toBe(expected);
+            });
         });
 
-        // Act
-        await wrapper.setData(defaultData); // need to await this for the state to fully update the DOM
+        describe('isOrderCountValid', () => {
+            it.each([
+                [true, true],
+                [false, false]
+            ])('should return %s if isOrderCountSupported is %s', (expected, isOrderCountSupported) => {
+                // Arrange
+                const propsData = {
+                    ...defaultPropsData,
+                    isOrderCountSupported
+                };
+                wrapper = shallowMount(Navigation, { propsData });
 
-        // Assert
-        expect(wrapper.find('[data-test-id="delivery-enquiry-link"]').exists()).toBe(true);
-    });
+                // Act
+                wrapper.vm.setAnalyticsBlob();
 
-    it('should NOT show the delivery enquiry link in the navigation if `showDeliveryEnquiry: false` and the content is there', async () => {
-        // Arrange
-        wrapper = shallowMount(Navigation, {
-            propsData: {
-                ...defaultPropsData,
-                showDeliveryEnquiry: false
-            }
+                // Assert
+                expect(Navigation.computed.isOrderCountValid.call(propsData)).toBe(expected);
+            });
         });
 
-        // Act
-        await wrapper.setData(defaultData);
+        describe('hasNavigationLinks', () => {
+            it.each([
+                'showOffersLink',
+                'showHelpLink',
+                'showDeliveryEnquiry',
+                'showLoginLink'
+            ])('should return true if `%s` is true', navLink => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        copy: {
+                            ...defaultPropsData.copy,
+                            [navLink]: true
+                        }
+                    }
+                });
 
-        // Assert
-        expect(wrapper.find('[data-test-id="delivery-enquiry-link"]').exists()).toBe(false);
+                // Assert
+                expect(wrapper.vm.hasNavigationLinks).toBe(true);
+            });
+
+            it('should return true if customNavLinks are provided', () => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showLoginInfo: false,
+                        customNavLinks: [
+                            {
+                                text: 'Test',
+                                url: '/test',
+                                gtm: {
+                                    label: 'test-label'
+                                }
+                            }
+                        ]
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.hasNavigationLinks).toBe(true);
+            });
+
+            it('should return false if there are no underlying links to show', () => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showLoginInfo: false,
+                        showOffersLink: false,
+                        showHelpLink: false,
+                        showDeliveryEnquiry: false,
+                        customNavLinks: []
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.hasNavigationLinks).toBe(false);
+            });
+        });
     });
 
     it('should show "logout" if the user is logged in and has nav link data', async () => {
@@ -498,377 +591,235 @@ describe('Navigation', () => {
         });
     });
 
-    describe('isOrderCountOutOfDate', () => {
-        it('should return true if the order count IS OUT of date', async () => {
-            // Arrange
-            const pastExpiryDate = new Date('Thu Oct 10 2019 15:37:14 GMT+0100').getTime();
-            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+    describe('methods ::', () => {
+        describe('fetchUserInfo', () => {
+            it('should return a response and populate "userInfo"', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
-            // Act
-            await wrapper.setData({
-                ...defaultData,
-                localOrderCountExpires: pastExpiryDate
-            });
-
-            // Assert
-            expect(wrapper.vm.isOrderCountOutOfDate).toBe(true);
-        });
-
-        it('should return false if the order count IS IN date', async () => {
-            // Arrange
-            const futureExpiryDate = new Date('Tue Aug 14 2063 16:30:34 GMT+0100').getTime();
-            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
-
-            // Act
-            await wrapper.setData({
-                ...defaultData,
-                localOrderCountExpires: futureExpiryDate
-            });
-
-            // Assert
-            expect(wrapper.vm.isOrderCountOutOfDate).toBe(false);
-        });
-    });
-
-    describe('isOrderCountValid', () => {
-        it('should return true if the order count IS valid', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                isOrderCountSupported: true
-            };
-            wrapper = shallowMount(Navigation, { propsData });
-
-            // Act
-            wrapper.vm.setAnalyticsBlob();
-
-            // Assert
-            expect(Navigation.computed.isOrderCountValid.call(propsData)).toBe(true);
-        });
-
-        it('should return false if the order count IS NOT valid', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                isOrderCountSupported: false
-            };
-            wrapper = shallowMount(Navigation, { propsData });
-
-            // Act
-            wrapper.vm.setAnalyticsBlob();
-
-            // Assert
-            expect(Navigation.computed.isOrderCountValid.call(propsData)).toBe(false);
-        });
-    });
-
-    describe('fetchUserInfo', () => {
-        it('should return a response and populate "userInfo"', async () => {
-            // Arrange
-            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
-
-            // Clear any user data so we can test the fetchUserInfo call
-            await wrapper.setData({
-                ...defaultData,
-                userInfo: false
-            });
-
-            // Act
-            await wrapper.vm.fetchUserInfo();
-
-            // Assert
-            expect(mockGet).toHaveBeenCalled();
-            expect(wrapper.vm.$data.userInfo).toBeDefined();
-            expect(wrapper.vm.$data.userInfo).toEqual(asyncUserDetails);
-        });
-
-        describe('(with spy)', () => {
-            let spy;
-
-            beforeEach(() => {
-                spy = jest.spyOn(Navigation.methods, 'fetchUserInfo');
-            });
-
-            afterEach(() => {
-                spy.mockReset();
-            });
-
-            it('should be called if "showLoginInfo" is true and user info is truthy', async () => {
-                // Arrange & Act
-                wrapper = shallowMount(Navigation, {
-                    propsData: {
-                        ...defaultPropsData,
-                        showLoginInfo: true,
-                        userInfoProp: false
-                    }
+                // Clear any user data so we can test the fetchUserInfo call
+                await wrapper.setData({
+                    ...defaultData,
+                    userInfo: false
                 });
 
+                // Act
+                await wrapper.vm.fetchUserInfo();
+
                 // Assert
+                expect(mockGet).toHaveBeenCalled();
+                expect(wrapper.vm.$data.userInfo).toBeDefined();
+                expect(wrapper.vm.$data.userInfo).toEqual(asyncUserDetails);
+            });
+
+            describe('(with spy)', () => {
+                let spy;
+
+                beforeEach(() => {
+                    spy = jest.spyOn(Navigation.methods, 'fetchUserInfo');
+                });
+
+                afterEach(() => {
+                    spy.mockReset();
+                });
+
+                it('should be called if "showLoginInfo" is true and user info is truthy', async () => {
+                    // Arrange & Act
+                    wrapper = shallowMount(Navigation, {
+                        propsData: {
+                            ...defaultPropsData,
+                            showLoginInfo: true,
+                            userInfoProp: false
+                        }
+                    });
+
+                    // Assert
+                    expect(spy).toHaveBeenCalled();
+                });
+
+                it.each([
+                    [true, 'truthy', defaultData.userInfo],
+                    [false, 'truthy', defaultData.userInfo],
+                    [false, 'falsy', false]
+                ])('should not be called if "showLoginInfo" is %s and user info is %s', (showLoginInfo, _, userInfoProp) => {
+                    // Arrange & Act
+                    wrapper = shallowMount(Navigation, {
+                        propsData: {
+                            ...defaultPropsData,
+                            showLoginInfo,
+                            userInfoProp
+                        }
+                    });
+
+                    // Assert
+                    expect(spy).not.toHaveBeenCalled();
+                });
+            });
+        });
+
+        describe('fetchOrderCountAndSave', () => {
+            beforeEach(() => {
+                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+            });
+
+            it('should call "setAnalyticsBlob" when data is returned', async () => {
+                // Arrange
+                const analyticsSpy = jest.spyOn(wrapper.vm, 'setAnalyticsBlob');
+
+                // Act
+                await wrapper.setData(defaultData);
+                await wrapper.vm.fetchOrderCountAndSave();
+
+                // Assert
+                expect(mockGet).toHaveBeenCalled();
+                expect(analyticsSpy).toHaveBeenCalled();
+            });
+
+            it('should set "localOrderCountExpires" when data expiry is returned', async () => {
+                // Arrange
+                wrapper.setData(defaultData);
+
+                // Act
+                await wrapper.vm.fetchOrderCountAndSave();
+
+                // Assert
+                expect(wrapper.vm.$data.localOrderCountExpires).not.toEqual(false);
+            });
+
+            it('should call "enrichUserDataWithCount" when data is returned', async () => {
+                // Arrange
+                const userDataSpy = jest.spyOn(wrapper.vm, 'enrichUserDataWithCount');
+                await wrapper.setData(defaultData);
+
+                // Act
+                await wrapper.vm.fetchOrderCountAndSave();
+
+                // Assert
+                expect(userDataSpy).toHaveBeenCalled();
+            });
+
+            it('should call "pushToDataLayer" when data is returned', async () => {
+                // Arrange
+                const dataLayerSpy = jest.spyOn(wrapper.vm, 'pushToDataLayer');
+                await wrapper.setData(defaultData);
+
+                // Act
+                await wrapper.vm.fetchOrderCountAndSave();
+
+                // Assert
+                expect(dataLayerSpy).toHaveBeenCalled();
+            });
+        });
+
+        describe('setAnalyticsBlob', () => {
+            it('should call "setItem" when called', () => {
+                // Arrange
+                const spy = jest.spyOn(Storage.prototype, 'setItem');
+                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+
+                // Assert
+                wrapper.vm.setAnalyticsBlob();
+
+                // Act
                 expect(spy).toHaveBeenCalled();
             });
+        });
 
-            it.each([
-                [true, 'truthy', defaultData.userInfo],
-                [false, 'truthy', defaultData.userInfo],
-                [false, 'falsy', false]
-            ])('should not be called if "showLoginInfo" is %s and user info is %s', (showLoginInfo, _, userInfoProp) => {
+        describe('getAnalyticsBlob', () => {
+            it('should call "getItem" when called', () => {
+                // Arrange
+                const spy = jest.spyOn(Storage.prototype, 'getItem');
+
+                // Assert
+                Navigation.computed.getAnalyticsBlob.call();
+
+                // Act
+                expect(spy).toHaveBeenCalled();
+            });
+        });
+    });
+
+    describe('props ::', () => {
+        describe('showLoginInfo', () => {
+            it('should NOT show "login" if `showLoginInfo: false`', async () => {
                 // Arrange & Act
                 wrapper = shallowMount(Navigation, {
                     propsData: {
                         ...defaultPropsData,
-                        showLoginInfo,
-                        userInfoProp
+                        showLoginInfo: false
+                    },
+                    data () {
+                        return defaultData;
                     }
                 });
 
                 // Assert
-                expect(spy).not.toHaveBeenCalled();
-            });
-        });
-    });
-
-    describe('fetchOrderCountAndSave', () => {
-        beforeEach(() => {
-            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
-        });
-
-        it('should call "setAnalyticsBlob" when data is returned', async () => {
-            // Arrange
-            const analyticsSpy = jest.spyOn(wrapper.vm, 'setAnalyticsBlob');
-
-            // Act
-            await wrapper.setData(defaultData);
-            await wrapper.vm.fetchOrderCountAndSave();
-
-            // Assert
-            expect(mockGet).toHaveBeenCalled();
-            expect(analyticsSpy).toHaveBeenCalled();
-        });
-
-        it('should set "localOrderCountExpires" when data expiry is returned', async () => {
-            // Arrange
-            wrapper.setData(defaultData);
-
-            // Act
-            await wrapper.vm.fetchOrderCountAndSave();
-
-            // Assert
-            expect(wrapper.vm.$data.localOrderCountExpires).not.toEqual(false);
-        });
-
-        it('should call "enrichUserDataWithCount" when data is returned', async () => {
-            // Arrange
-            const userDataSpy = jest.spyOn(wrapper.vm, 'enrichUserDataWithCount');
-            await wrapper.setData(defaultData);
-
-            // Act
-            await wrapper.vm.fetchOrderCountAndSave();
-
-            // Assert
-            expect(userDataSpy).toHaveBeenCalled();
-        });
-
-        it('should call "pushToDataLayer" when data is returned', async () => {
-            // Arrange
-            const dataLayerSpy = jest.spyOn(wrapper.vm, 'pushToDataLayer');
-            await wrapper.setData(defaultData);
-
-            // Act
-            await wrapper.vm.fetchOrderCountAndSave();
-
-            // Assert
-            expect(dataLayerSpy).toHaveBeenCalled();
-        });
-    });
-
-    describe('setAnalyticsBlob', () => {
-        it('should call "setItem" when called', () => {
-            // Arrange
-            const spy = jest.spyOn(Storage.prototype, 'setItem');
-            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
-
-            // Assert
-            wrapper.vm.setAnalyticsBlob();
-
-            // Act
-            expect(spy).toHaveBeenCalled();
-        });
-    });
-
-    describe('getAnalyticsBlob', () => {
-        it('should call "getItem" when called', () => {
-            // Arrange
-            const spy = jest.spyOn(Storage.prototype, 'getItem');
-
-            // Assert
-            Navigation.computed.getAnalyticsBlob.call();
-
-            // Act
-            expect(spy).toHaveBeenCalled();
-        });
-    });
-
-    describe('showLoginInfo', () => {
-        it('should NOT show "login" if `showLoginInfo: false`', async () => {
-            // Arrange & Act
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showLoginInfo: false
-                },
-                data () {
-                    return defaultData;
-                }
+                expect(wrapper.find('[data-test-id="login-link"]').exists()).toBe(false);
             });
 
-            // Assert
-            expect(wrapper.find('[data-test-id="login-link"]').exists()).toBe(false);
-        });
-
-        it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {
-            // Arrange
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showLoginInfo: false
-                },
-                computed: {
-                    hasNavigationLinks () {
-                        return true;
-                    }
-                },
-                mocks: {
-                    $style
-                }
-            });
-
-            // Act
-            await wrapper.setData({
-                ...defaultData,
-                userInfo: {
-                    isAuthenticated: true
-                }
-            });
-
-            // Assert
-            expect(wrapper.find('[data-test-id="user-info-icon"]').classes()).toContain('is-hidden');
-        });
-    });
-
-    describe('hasNavigationLinks', () => {
-        it.each([
-            'showOffersLink',
-            'showHelpLink',
-            'showDeliveryEnquiry',
-            'showLoginLink'
-        ])('should return true if `%s` is true', navLink => {
-            // Arrange & Act
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    copy: {
-                        ...defaultPropsData.copy,
-                        [navLink]: true
-                    }
-                }
-            });
-
-            // Assert
-            expect(wrapper.vm.hasNavigationLinks).toBe(true);
-        });
-
-        it('should return true if customNavLinks are provided', () => {
-            // Arrange & Act
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showLoginInfo: false,
-                    customNavLinks: [
-                        {
-                            text: 'Test',
-                            url: '/test',
-                            gtm: {
-                                label: 'test-label'
-                            }
+            it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showLoginInfo: false
+                    },
+                    computed: {
+                        hasNavigationLinks () {
+                            return true;
                         }
-                    ]
-                }
-            });
-
-            // Assert
-            expect(wrapper.vm.hasNavigationLinks).toBe(true);
-        });
-
-        it('should return false if there are no underlying links to show', () => {
-            // Arrange & Act
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showLoginInfo: false,
-                    showOffersLink: false,
-                    showHelpLink: false,
-                    showDeliveryEnquiry: false,
-                    customNavLinks: []
-                }
-            });
-
-            // Assert
-            expect(wrapper.vm.hasNavigationLinks).toBe(false);
-        });
-    });
-
-    describe('Country selector', () => {
-        it('should be shown when "showCountrySelector" is true', () => {
-            // Arrange & Act
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showCountrySelector: true
-                }
-            });
-
-            // Assert
-            expect(wrapper.findComponent(CountrySelector).exists()).toBe(true);
-        });
-
-        it('should not be shown when "showCountrySelector" is false', () => {
-            // Arrange & Act
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showCountrySelector: false
-                }
-            });
-
-            // Assert
-            expect(wrapper.findComponent(CountrySelector).exists()).toBe(false);
-        });
-
-        describe('on mobile', () => {
-            beforeEach(setMobileViewport);
-
-            it('should set tabIndex to -1 when countrySelectorIsOpen is true', async () => {
-                wrapper = shallowMount(Navigation, {
-                    propsData: defaultPropsData
+                    },
+                    mocks: {
+                        $style
+                    }
                 });
 
                 // Act
-                await wrapper.setData({ countrySelectorIsOpen: true });
-
-                // Assert
-                expect(wrapper.vm.tabIndex).toBe(-1);
-            });
-
-            it('should set tabIndex to 0 when countrySelectorIsOpen is false', async () => {
-                wrapper = shallowMount(Navigation, {
-                    propsData: defaultPropsData
+                await wrapper.setData({
+                    ...defaultData,
+                    userInfo: {
+                        isAuthenticated: true
+                    }
                 });
 
-                // Act
-                await wrapper.setData({ countrySelectorIsOpen: false });
+                // Assert
+                expect(wrapper.find('[data-test-id="user-info-icon"]').classes()).toContain('is-hidden');
+            });
+        });
+
+        describe('showDeliveryEnquiry', () => {
+            it.each([
+                ['show', true],
+                ['NOT show', false]
+            ])('should %s the delivery enquiry link when %s', (_, showDeliveryEnquiry) => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showDeliveryEnquiry
+                    }
+                });
 
                 // Assert
-                expect(wrapper.vm.tabIndex).toBe(0);
+                expect(wrapper.find('[data-test-id="delivery-enquiry-link"]').exists()).toBe(showDeliveryEnquiry);
+            });
+        });
+
+        describe('showCountrySelector', () => {
+            it.each([
+                ['show', true],
+                ['NOT show', false]
+            ])('should %s the country selector when %s', (_, showCountrySelector) => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showCountrySelector
+                    }
+                });
+
+                // Assert
+                expect(wrapper.findComponent(CountrySelector).exists()).toBe(showCountrySelector);
             });
         });
     });

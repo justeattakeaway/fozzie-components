@@ -4,6 +4,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v9.3.0
+------------------------------
+*January 20, 2021*
+
+### Added
+- Tests for `UserNavigationPanel`'s computed property `tabIndex`.
+- `aria-label` to user account submenu button.
+
+### Fixed
+- User menu was not visibly toggling with keyboard navigation.
+
+### Changed
+- User account submenu link to button for increased accessibility.
+- Screen readers will now announce the country selector title, e.g., "Select your country".
+- Reorganised and rewritten some of the Navigation unit tests.
+
+
 v9.2.0
 ------------------------------
 *December 20, 2021*

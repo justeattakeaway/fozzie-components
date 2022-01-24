@@ -25,7 +25,7 @@
         <li
             v-if="!isBelowMid">
             <a
-                :tabindex="isOpen ? 0 : -1"
+                :tabindex="isUserMenuOpen ? 0 : -1"
                 :href="returnLogoutUrl"
                 :data-trak='`{
                     "trakEvent": "click",
@@ -46,7 +46,11 @@
 <script>
 export default {
     props: {
-        isOpen: {
+        isUserMenuOpen: {
+            type: Boolean,
+            default: false
+        },
+        isNavOpen: {
             type: Boolean,
             default: false
         },
@@ -62,15 +66,19 @@ export default {
             type: String,
             default: ''
         },
-        isCountrySelectorClosedOnMobileView: {
+        isCountrySelectorOpen: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     computed: {
         tabIndex () {
-            if (this.isBelowMid && this.isOpen && !this.isCountrySelectorClosedOnMobileView) return -1;
-            if (!this.isOpen) return -1;
+            if (this.isBelowMid && this.isNavOpen && !this.isCountrySelectorOpen) {
+                return 0;
+            }
+            if (!this.isUserMenuOpen) {
+                return -1;
+            }
             return 0;
         }
     }
