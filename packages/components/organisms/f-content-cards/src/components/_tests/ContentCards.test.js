@@ -1,7 +1,7 @@
 /* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
 import { shallowMount, mount } from '@vue/test-utils';
 import Vue from 'vue';
-import initialiseMetadata from '@justeat/f-braze-adapter';
+import BrazeAdapter from '@justeat/f-braze-adapter';
 import ContentCards, {
     CARDSOURCE_METADATA,
     CARDSOURCE_CUSTOM,
@@ -33,12 +33,6 @@ const voucherCode = '__VOUCHERCODE__';
 const order = '__ORDER__';
 const id = btoa('ABC123');
 
-const metadataDispatcher = {
-    logCardClick: jest.fn(),
-    logCardImpressions: jest.fn(),
-    pushShapedEventToDataLayer: jest.fn()
-};
-
 const createCard = type => ({
     id,
     url,
@@ -50,6 +44,16 @@ const createCard = type => ({
     type,
     voucherCode
 });
+
+const mockLogger = {
+    logError: jest.fn(),
+    logWarn: jest.fn(),
+    logInfo: jest.fn()
+};
+
+const mocks = {
+    $logger: mockLogger
+};
 
 const createMetadataCards = cardTypes => cardTypes.map(type => createCard(type));
 
@@ -66,39 +70,38 @@ const scopedSlots = {
 
 beforeEach(() => {
     jest.resetAllMocks();
-    initialiseMetadata.mockResolvedValue(metadataDispatcher);
 });
 
 describe('ContentCards', () => {
-    it('should call intitialiseMetadata when mounted', () => {
+    it('should call BrazeAdapter when mounted', () => {
         // Arrange & Act
-        shallowMount(ContentCards, {
+        const wrapper = shallowMount(ContentCards, {
             propsData: {
                 apiKey,
                 userId
             },
             scopedSlots: {
                 default: '<div></div>'
-            }
+            },
+            mocks
         });
 
         // Assert
-        const [[settings]] = initialiseMetadata.mock.calls;
-        expect(settings.apiKey).toBe(apiKey);
-        expect(settings.userId).toBe(userId);
-        expect(settings.enableLogging).toBe(false);
+        expect(wrapper.vm.brazeAdapter).toBeInstanceOf(BrazeAdapter);
     });
 
 
 
-    describe('when a rejection from the promise returned by intitialiseMetadata has been encountered during loading', () => {
+    describe('when a error is thrown from the instantiation of BrazeAdapter during loading', () => {
         const error = new Error('foo');
         let instance;
 
         beforeEach(async () => {
             // Arrange
-            initialiseMetadata.mockReset();
-            initialiseMetadata.mockRejectedValue(error);
+            BrazeAdapter.mockReset();
+            BrazeAdapter.mockImplementation(() => {
+                throw error;
+            });
 
             // Act
             instance = shallowMount(ContentCards, {
@@ -108,7 +111,8 @@ describe('ContentCards', () => {
                 },
                 scopedSlots: {
                     default: '<div></div>'
-                }
+                },
+                mocks
             });
             await instance.vm.$nextTick();
         });
@@ -137,7 +141,8 @@ describe('ContentCards', () => {
                 apiKey,
                 userId
             },
-            scopedSlots
+            scopedSlots,
+            mocks
         });
         instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
@@ -180,7 +185,7 @@ describe('ContentCards', () => {
                     <div :data-test-id="card.type" v-for="card in cards"></div>
                 </content-cards>
             `
-        });
+        }, { mocks });
 
         // Act
         await instance.vm.testCustomCards();
@@ -201,7 +206,8 @@ describe('ContentCards', () => {
                         userId,
                         testId
                     },
-                    scopedSlots
+                    scopedSlots,
+                    mocks
                 });
             });
 
@@ -227,7 +233,8 @@ describe('ContentCards', () => {
                         userId,
                         testId
                     },
-                    scopedSlots
+                    scopedSlots,
+                    mocks
                 });
 
                 // Act
@@ -262,7 +269,8 @@ describe('ContentCards', () => {
                         userId,
                         testId
                     },
-                    scopedSlots
+                    scopedSlots,
+                    mocks
                 });
                 instance.vm.metadataContentCards(cards);
                 await instance.vm.$nextTick();
@@ -291,13 +299,16 @@ describe('ContentCards', () => {
                 apiKey,
                 userId
             },
-            scopedSlots
+            scopedSlots,
+            mocks
         });
         instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
 
+        expect(BrazeAdapter).toHaveBeenCalled();
+
         // Assert
-        expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cards.map(card => card.id));
+        expect(instance.vm.brazeAdapter.logCardImpressions).toHaveBeenCalledWith(cards.map(card => card.id));
     });
 
     describe('when mounting descendants', () => {
@@ -319,6 +330,7 @@ describe('ContentCards', () => {
                 stubs: {
                     PromotionCard
                 },
+                mocks,
                 scopedSlots: {
                     default: `
                         <div slot-scope="{ cards }">
@@ -365,7 +377,7 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardView(cardViewDetails);
 
                 // Assert
-                expect(metadataDispatcher.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
+                expect(instance.vm.brazeAdapter.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
                     contentId: id,
                     contentAction: 'view',
                     contentType: 'contentCard',
@@ -462,7 +474,7 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);
 
                 // Assert
-                expect(metadataDispatcher.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
+                expect(instance.vm.brazeAdapter.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
                     contentId: id,
                     contentAction: 'click',
                     contentType: 'contentCard',
@@ -484,7 +496,7 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);
 
                 // Assert
-                expect(metadataDispatcher.logCardClick).toHaveBeenCalledWith('foo');
+                expect(instance.vm.brazeAdapter.logCardClick).toHaveBeenCalledWith('foo');
             });
         });
 
@@ -585,7 +597,8 @@ describe('ContentCards', () => {
                     apiKey,
                     userId
                 },
-                scopedSlots
+                scopedSlots,
+                mocks
             });
 
             // Act
@@ -613,64 +626,6 @@ describe('ContentCards', () => {
 
         it('should emit an event containing the loading status when appboy is initialised', async () => {
             await testEmitter(HAS_LOADED, true);
-        });
-    });
-
-    describe('logging callback', () => {
-        const testMessage = '__TEST_MESSAGE__';
-        const testPayload = { test: 'PAYLOAD' };
-
-        it('should return a function with the correct logging parameters when callback is called', async () => {
-            // Arrange
-            const loggingType = 'logInfo';
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true,
-                    testId
-                },
-                mocks: {
-                    $logger: {
-                        logInfo: jest.fn()
-                    }
-                },
-                scopedSlots
-            });
-
-            // Act
-            const loggingCallback = instance.vm.handleLogging(instance.vm.$logger);
-            loggingCallback(loggingType, testMessage, testPayload);
-            await instance.vm.$nextTick();
-
-            // Assert
-            expect(instance.vm.$logger.logInfo).toHaveBeenCalledWith(testMessage, null, testPayload);
-        });
-        it('should NOT return a function when the callback is called with incorrect logging type', async () => {
-            // Arrange
-            const loggingType = 'foo';
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true,
-                    testId
-                },
-                mocks: {
-                    $logger: {
-                        logInfo: jest.fn()
-                    }
-                },
-                scopedSlots
-            });
-
-            // Act
-            const loggingCallback = instance.vm.handleLogging(instance.vm.$logger);
-            loggingCallback(loggingType, testMessage, testPayload);
-            await instance.vm.$nextTick();
-
-            // Assert
-            expect(instance.vm.$logger.logInfo).not.toHaveBeenCalled();
         });
     });
 });

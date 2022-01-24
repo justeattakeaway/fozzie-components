@@ -2,7 +2,8 @@
     <div data-test-id='address-component'>
         <fieldset :class="$style['c-address-group']">
             <legend
-                :class="$style['c-address-label']">
+                :class="$style['c-address-label']"
+                @click="addFocus">
                 {{ $t('labels.addressGroup') }}
             </legend>
             <checkout-form-field
@@ -54,6 +55,12 @@ export default {
             fieldType: 'address',
             fieldLength: '50'
         };
+    },
+
+    methods: {
+        addFocus () {
+            document.getElementById('formField-line-1').focus();
+        }
     }
 };
 </script>

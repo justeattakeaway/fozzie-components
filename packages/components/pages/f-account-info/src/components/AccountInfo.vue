@@ -18,7 +18,7 @@
                 @submit.prevent="onFormSubmit">
                 <form-field
                     :value="consumer.firstName"
-                    data-test-id="account-info-consumer-firstName"
+                    name="account-info-consumer-firstName"
                     maxlength="50"
                     :label-text="$t('consumer.firstNameLabel')"
                     :placeholder="$t('consumer.firstNamePlaceholder')"
@@ -27,10 +27,14 @@
                     <template
                         v-if="$v.consumer.firstName.$invalid"
                         #error>
-                        <f-error-message v-show="!$v.consumer.firstName.required && $v.consumer.firstName.$dirty">
+                        <f-error-message
+                            v-show="!$v.consumer.firstName.required && $v.consumer.firstName.$dirty"
+                            data-test-id="consumer-firstName-empty-error">
                             {{ $t('validation.firstNameRequired') }}
                         </f-error-message>
-                        <f-error-message v-show="!$v.consumer.firstName.isValidName">
+                        <f-error-message
+                            v-show="!$v.consumer.firstName.isValidName"
+                            data-test-id="consumer-firstName-invalid-error">
                             {{ $t('validation.firstNameInvalid') }}
                         </f-error-message>
                     </template>
@@ -38,7 +42,7 @@
 
                 <form-field
                     :value="consumer.lastName"
-                    data-test-id="account-info-consumer-lastName"
+                    name="account-info-consumer-lastName"
                     maxlength="50"
                     :label-text="$t('consumer.lastNameLabel')"
                     :placeholder="$t('consumer.lastNamePlaceholder')"
@@ -47,10 +51,14 @@
                     <template
                         v-if="$v.consumer.lastName.$invalid"
                         #error>
-                        <f-error-message v-show="!$v.consumer.lastName.required && $v.consumer.lastName.$dirty">
+                        <f-error-message
+                            v-show="!$v.consumer.lastName.required && $v.consumer.lastName.$dirty"
+                            data-test-id="consumer-lastName-empty-error">
                             {{ $t('validation.lastNameRequired') }}
                         </f-error-message>
-                        <f-error-message v-show="!$v.consumer.lastName.isValidName">
+                        <f-error-message
+                            v-show="!$v.consumer.lastName.isValidName"
+                            data-test-id="consumer-lastName-invalid-error">
                             {{ $t('validation.lastNameInvalid') }}
                         </f-error-message>
                     </template>
@@ -58,7 +66,7 @@
 
                 <form-field
                     :value="consumer.phoneNumber"
-                    data-test-id="account-info-consumer-phoneNumber"
+                    name="account-info-consumer-phoneNumber"
                     maxlength="16"
                     :label-text="$t('consumer.phoneNumberLabel')"
                     :placeholder="$t('consumer.phoneNumberPlaceholder')"
@@ -67,10 +75,14 @@
                     <template
                         v-if="$v.consumer.phoneNumber.$invalid"
                         #error>
-                        <f-error-message v-show="!$v.consumer.phoneNumber.required && $v.consumer.phoneNumber.$dirty">
+                        <f-error-message
+                            v-show="!$v.consumer.phoneNumber.required && $v.consumer.phoneNumber.$dirty"
+                            data-test-id="consumer-phoneNumber-empty-error">
                             {{ $t('validation.phoneNumberRequired') }}
                         </f-error-message>
-                        <f-error-message v-show="!$v.consumer.phoneNumber.isValidPhoneNumber && $v.consumer.phoneNumber.required && $v.consumer.phoneNumber.$dirty">
+                        <f-error-message
+                            v-show="!$v.consumer.phoneNumber.isValidPhoneNumber && $v.consumer.phoneNumber.required && $v.consumer.phoneNumber.$dirty"
+                            data-test-id="consumer-phoneNumber-invalid-error">
                             {{ $t('validation.phoneNumberInvalid') }}
                         </f-error-message>
                     </template>
@@ -83,7 +95,7 @@
 
                 <form-field
                     :value="consumer.line1"
-                    data-test-id="account-info-consumer-line1"
+                    name="account-info-consumer-line1"
                     maxlength="50"
                     :label-text="$t('consumer.addressLabel')"
                     :placeholder="$t('consumer.line1Placeholder')"
@@ -92,7 +104,9 @@
                     <template
                         v-if="$v.consumer.line1.$invalid"
                         #error>
-                        <f-error-message v-show="!$v.consumer.line1.required && $v.consumer.line1.$dirty">
+                        <f-error-message
+                            v-show="!$v.consumer.line1.required && $v.consumer.line1.$dirty"
+                            data-test-id="consumer-address-line1-empty-error">
                             {{ $t('validation.line1Required') }}
                         </f-error-message>
                     </template>
@@ -100,21 +114,21 @@
 
                 <form-field
                     :value="consumer.line2"
-                    data-test-id="account-info-consumer-line2"
+                    name="account-info-consumer-line2"
                     maxlength="50"
                     :placeholder="$t('consumer.line2Placeholder')"
                     @input="onEditConsumer('line2', $event, true)" />
 
                 <form-field
                     :value="consumer.line3"
-                    data-test-id="account-info-consumer-line3"
+                    name="account-info-consumer-line3"
                     maxlength="50"
                     :placeholder="$t('consumer.line3Placeholder')"
                     @input="onEditConsumer('line3', $event, true)" />
 
                 <form-field
                     :value="consumer.locality"
-                    data-test-id="account-info-consumer-locality"
+                    name="account-info-consumer-locality"
                     maxlength="50"
                     :label-text="$t('consumer.localityLabel')"
                     :placeholder="$t('consumer.localityPlaceholder')"
@@ -123,7 +137,9 @@
                     <template
                         v-if="$v.consumer.locality.$invalid"
                         #error>
-                        <f-error-message v-show="!$v.consumer.locality.required && $v.consumer.locality.$dirty">
+                        <f-error-message
+                            v-show="!$v.consumer.locality.required && $v.consumer.locality.$dirty"
+                            data-test-id="consumer-city-empty-error">
                             {{ $t('validation.localityRequired') }}
                         </f-error-message>
                     </template>
@@ -131,7 +147,7 @@
 
                 <form-field
                     :value="consumer.postcode"
-                    data-test-id="account-info-consumer-postcode"
+                    name="account-info-consumer-postcode"
                     maxlength="50"
                     :label-text="$t('consumer.postcodeLabel')"
                     :placeholder="$t('consumer.postcodePlaceholder')"
@@ -140,10 +156,14 @@
                     <template
                         v-if="$v.consumer.postcode.$invalid"
                         #error>
-                        <f-error-message v-show="!$v.consumer.postcode.required && $v.consumer.postcode.$dirty">
+                        <f-error-message
+                            v-show="!$v.consumer.postcode.required && $v.consumer.postcode.$dirty"
+                            data-test-id="consumer-postcode-empty-error">
                             {{ $t('validation.postcodeRequired') }}
                         </f-error-message>
-                        <f-error-message v-show="!$v.consumer.postcode.isValidPostcode && $v.consumer.postcode.required">
+                        <f-error-message
+                            v-show="!$v.consumer.postcode.isValidPostcode && $v.consumer.postcode.required"
+                            data-test-id="consumer-postcode-invalid-error">
                             {{ $t('validation.postcodeInvalid') }}
                         </f-error-message>
                     </template>
@@ -151,7 +171,7 @@
 
                 <f-button
                     :class="[$style['c-accountInfo-submitButton']]"
-                    data-test-id="account-info-submit-button"
+                    data-test-id="account-info-save-changes-button"
                     button-type="primary"
                     button-size="large"
                     is-full-width
@@ -163,7 +183,7 @@
 
             <f-button
                 :class="[$style['c-accountInfo-changePasswordButton']]"
-                data-test-id="account-info-submit-button"
+                data-test-id="account-info-change-password-button"
                 button-type="secondary"
                 href="/change-password?returnurl=/account/info"
                 button-size="large"

@@ -1,6 +1,6 @@
 import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
 
-const AccountInfo = require('../../test-utils/component-objects/f-accountInfo.component');
+const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
 const accountInfo = new AccountInfo();
 

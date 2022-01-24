@@ -113,8 +113,8 @@ export default {
                     gtm: 'click_about_list_your_restaurant'
                 },
                 {
-                    url: 'https://secure.ethicspoint.eu/domain/media/en/gui/106834/index.html',
-                    text: 'Ethics hotline',
+                    url: 'https://app.convercent.com/en-NZ/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296',
+                    text: 'Ethics Hotline',
                     target: '_blank',
                     rel: 'noopener',
                     gtm: 'click_ethics_hotline'
