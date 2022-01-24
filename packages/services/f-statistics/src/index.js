@@ -17,7 +17,6 @@ export default class StatisticsClient {
         this.#basePayload = this.#makeBasePayload(basePayload);
         this.#justLogInstance = justLogInstance;
         this.#store = store;
-
         this.#store.registerModule(this.#configuration.namespace, statisticsModule, { preserveState: !!store.state[`${this.#configuration.namespace}`] });
     }
 
