@@ -7,7 +7,6 @@ export default class StatisticsClient {
     #justLogInstance;
     #basePayload;
     #store;
-    #batchIntervalTimer;
 
     constructor (justLogInstance, options = {}, basePayload = {}, store) {
         this.#configuration = {
