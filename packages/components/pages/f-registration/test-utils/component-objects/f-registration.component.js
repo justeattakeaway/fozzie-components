@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
-// const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-const Page = require('../../../../../services/f-wdio-utils/src/page.object');
 const {
     REGISTRATION_COMPONENT,
     CREATE_ACCOUNT_BUTTON,

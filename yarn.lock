@@ -2461,6 +2461,13 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
+"@justeat/f-wdio-utils@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.5.0.tgz#d81310b4068a740465535c5740139dace04f1154"
+  integrity sha512-1it45TISsNbxioD6a86EkpijEQ1Zrsa7eKeq1yBYmJOP3S6+UhA7KMgjv/OV2+8LoKvfEy0UTOeLeuiqAYzlQg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/fozzie@6.2.0":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.2.0.tgz#57eec0c2b1d5e37a506e102dd49ed5fb6874250b"
