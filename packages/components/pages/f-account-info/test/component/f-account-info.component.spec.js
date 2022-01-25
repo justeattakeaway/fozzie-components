@@ -50,7 +50,7 @@ describe('f-account-info component tests', () => {
 
         // Act
         accountInfo.clearBlurField('firstName');
-        accountInfo.populateAccountForm('firstName', customerInput);
+        accountInfo.populateForm('firstName', customerInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -67,7 +67,7 @@ describe('f-account-info component tests', () => {
 
         // Act
         accountInfo.clearBlurField('lastName');
-        accountInfo.populateAccountForm('lastName', customerInput);
+        accountInfo.populateForm('lastName', customerInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -84,7 +84,7 @@ describe('f-account-info component tests', () => {
 
         // Act
         accountInfo.clearBlurField('phoneNumber');
-        accountInfo.populateAccountForm('phoneNumber', customerInput);
+        accountInfo.populateForm('phoneNumber', customerInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -101,7 +101,7 @@ describe('f-account-info component tests', () => {
 
         // Act
         accountInfo.clearBlurField('postcode');
-        accountInfo.populateAccountForm('postcode', customerInput);
+        accountInfo.populateForm('postcode', customerInput);
         accountInfo.clickOutOfInputField();
 
         // Assert

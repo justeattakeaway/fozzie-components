@@ -2,10 +2,10 @@ import forEach from 'mocha-each';
 
 const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
-const PLATFORM = 'mobile';
 let accountInfo;
 
-describe('f-account-info - Mobile Visual Tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-account-info - Visual Tests', device => {
     beforeEach(() => {
         accountInfo = new AccountInfo();
 
@@ -20,7 +20,7 @@ describe('f-account-info - Mobile Visual Tests', () => {
         accountInfo.waitForComponent();
 
         // Assert
-        browser.percyScreenshot('f-account-info - Base State', PLATFORM);
+        browser.percyScreenshot('f-account-info - Base State', device);
     });
 
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
@@ -30,7 +30,7 @@ describe('f-account-info - Mobile Visual Tests', () => {
         accountInfo.clickOutOfInputField();
 
         // Assert
-        browser.percyScreenshot(`f-account-info - ${field} Input Error Message`, PLATFORM);
+        browser.percyScreenshot(`f-account-info - ${field} Input Error Message`, device);
     });
 
     it('should display the illegal first name error message immediately on click', () => {
@@ -43,11 +43,11 @@ describe('f-account-info - Mobile Visual Tests', () => {
 
         // Act
         accountInfo.clearBlurField('firstName');
-        accountInfo.populateAccountForm('firstName', customerInput);
+        accountInfo.populateForm('firstName', customerInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
-        browser.percyScreenshot('f-account-info - illegal first name error message', PLATFORM);
+        browser.percyScreenshot('f-account-info - illegal first name error message', device);
     });
 
     it('should display the illegal last name error message immediately on click', () => {
@@ -77,11 +77,11 @@ describe('f-account-info - Mobile Visual Tests', () => {
 
         // Act
         accountInfo.clearBlurField('phoneNumber');
-        accountInfo.populateAccountForm('phoneNumber', customerInput);
+        accountInfo.populateForm('phoneNumber', customerInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
-        browser.percyScreenshot('f-account-info - illegal phone number error message', PLATFORM);
+        browser.percyScreenshot('f-account-info - illegal phone number error message', device);
     });
 
     it('should display invalid postcode error message immediately on click', () => {
@@ -98,6 +98,6 @@ describe('f-account-info - Mobile Visual Tests', () => {
         accountInfo.clickOutOfInputField();
 
         // Assert
-        browser.percyScreenshot('f-account-info - illegal postcode error message', PLATFORM);
+        browser.percyScreenshot('f-account-info - illegal postcode error message', device);
     });
 });
