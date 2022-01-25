@@ -164,6 +164,7 @@ $image-tile-ease: ease-in-out;
 
 .c-imageTile {
     position: relative;
+    width: 100%;
 }
 
 .c-imageTile-link {
@@ -216,7 +217,7 @@ $image-tile-ease: ease-in-out;
 .c-imageTile-icon {
     align-self: center;
     opacity: 0;
-    transform: translate3d(-10px, 10px, 0);
+    transform: translate3d(-10px, 0, 0) scale(0.5) rotate(-60deg);
     width: 0;
     will-change: transform, opacity;
 
@@ -229,7 +230,7 @@ $image-tile-ease: ease-in-out;
     .c-imageTile--selected &,
     .c-imageTile:hover & {
         opacity: 1;
-        transform: translate3d(0, 10px, 0);
+        transform: translate3d(0, 0, 0) scale(1) rotate(0);
         width: 15px;
     }
 
@@ -243,10 +244,10 @@ $image-tile-ease: ease-in-out;
     display: block;
     font-family: $font-family-base;
     font-weight: $font-weight-regular;
-    margin-right: spacing(2);
+    margin-right: spacing(x2);
     overflow: hidden;
     text-overflow: ellipsis;
-    transform: translate3d(0px, 10px, 0);
+    transform: translate3d(0, 0, 0);
     white-space: nowrap;
     width: 100%;
     will-change: transform;
@@ -257,7 +258,7 @@ $image-tile-ease: ease-in-out;
 
     .c-imageTile--selected &,
     .c-imageTile:hover & {
-        transform: translate3d(5px, 10px, 0);
+        transform: translate3d(5px, 0, 0);
     }
 }
 
