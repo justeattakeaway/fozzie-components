@@ -160,7 +160,13 @@ $image-tile-background-color: $color-interactive-brand;
 $image-tile-selected: $color-content-positive;
 $image-tile-transition-duration: 0.2s;
 $image-tile-ease: ease-in-out;
+$image-tile-text-transform: translate3d(5px, 0, 0);
 
+@mixin image-tile-icon-selected-transform() {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0);
+    width: 15px;
+}
 
 .c-imageTile {
     position: relative;
@@ -205,7 +211,7 @@ $image-tile-ease: ease-in-out;
 }
 
 .c-imageTile-textContainer {
-    margin-top: spacing();
+    margin-top: spacing(x2);
     display: flex;
     max-width: 100%;
 
@@ -227,15 +233,18 @@ $image-tile-ease: ease-in-out;
                     width $image-tile-transition-duration $image-tile-ease;
     }
 
-    .c-imageTile--selected &,
-    .c-imageTile:hover & {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1) rotate(0);
-        width: 15px;
+    .c-imageTile--selected & {
+        @include image-tile-icon-selected-transform();
     }
 
     .c-imageTile--selected & path {
         fill: $image-tile-selected;
+    }
+
+    @include media('>=mid') {
+        .c-imageTile:hover & {
+            @include image-tile-icon-selected-transform();
+        }
     }
 }
 
@@ -256,9 +265,14 @@ $image-tile-ease: ease-in-out;
         transition: transform $image-tile-transition-duration $image-tile-ease;
     }
 
-    .c-imageTile--selected &,
-    .c-imageTile:hover & {
-        transform: translate3d(5px, 0, 0);
+    .c-imageTile--selected & {
+        transform: $image-tile-text-transform;
+    }
+
+    @include media('>=mid') {
+        .c-imageTile:hover &  {
+            transform: $image-tile-text-transform;
+        }
     }
 }
 
