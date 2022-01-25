@@ -5,9 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.4.0
 ------------------------------
-*January X, 2022*
+*January 26, 2022*
 
 ### Added
+- Styled and truncated text
+- Transitions accounting for prefers-reduced-motion
 
 
 v0.3.0
