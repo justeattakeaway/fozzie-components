@@ -1,79 +1,120 @@
+const forEach = require('mocha-each');
 const Registration = require('../../test-utils/component-objects/f-registration.component');
 
 let registration;
 
-describe('f-registration - Desktop visual tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-registration - visual tests', device => {
     beforeEach(() => {
+        if (device === 'mobile') {
+            browser.setWindowSize(414, 731);
+        }
+
         registration = new Registration();
         registration.load();
     });
 
     it('should display component', () => {
         // Assert
-        browser.percyScreenshot('f-registration - Base', 'desktop');
+        browser.percyScreenshot('f-registration - Base', device);
     });
 
     it('should display the "Email address is already registered" error', () => {
         // Arrange
         const userInfo = {
-            firstName: 'Test',
-            lastName: 'User',
-            email: 'test@user.com',
-            password: 'testuser123'
+            firstName: {
+                input: 'Test'
+            },
+            lastName: {
+                input: 'User'
+            },
+            email: {
+                input: 'test@user.com'
+            },
+            password: {
+                input: 'testuser123'
+            }
         };
-
         // Act
-        registration.submitForm(userInfo);
+        Object.keys(userInfo).forEach(field => registration.populateForm(field, userInfo));
+        registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Email is already registered error"', 'desktop');
+        browser.percyScreenshot('f-registration - "Email is already registered error"', device);
     });
 
     it('should display error when form field is empty', () => {
         // Arrange
         const userInfo = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: ''
+            firstName: {
+                input: ''
+            },
+            lastName: {
+                input: ''
+            },
+            email: {
+                input: ''
+            },
+            password: {
+                input: ''
+            }
         };
 
         // Act
-        registration.submitForm(userInfo);
+        Object.keys(userInfo).forEach(field => registration.populateForm(field, userInfo));
+        registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Mandatory field errors"', 'desktop');
+        browser.percyScreenshot('f-registration - "Mandatory field errors"', device);
     });
 
     it('should display error when form input is invalid', () => {
         // Arrange
         const userInfo = {
-            firstName: '123*',
-            lastName: '456*',
-            email: '***@**',
-            password: 'llanfairpwllgwyngyllgogerychwyr'
+            firstName: {
+                input: '123*'
+            },
+            lastName: {
+                input: '456*'
+            },
+            email: {
+                input: '***@**'
+            },
+            password: {
+                input: 'llanfairpwllgwyngyllgogerychwyr'
+            }
         };
 
         // Act
-        registration.submitForm(userInfo);
+        Object.keys(userInfo).forEach(field => registration.populateForm(field, userInfo));
+        registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Invalid input error"', 'desktop');
+        browser.percyScreenshot('f-registration - "Invalid input error"', device);
     });
 
     it('should display error when form input is too long', () => {
         // Arrange
         const userInfo = {
-            firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
-            lastName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
-            email: 'abcdefghijabcdefghijabc@defghijabcdefghijabcdefghijabcdefghij.com',
-            password: 'abcdefghijabcdefghijabcdefghi'
+            firstName: {
+                input: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij'
+            },
+            lastName: {
+                input: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij'
+            },
+            email: {
+                input: 'abcdefghijabcdefghijabc@defghijabcdefghijabcdefghijabcdefghij.com'
+            },
+            password: {
+                input: 'abcdefghijabcdefghijabcdefghi'
+            }
         };
 
         // Act
-        registration.submitForm(userInfo);
+        Object.keys(userInfo).forEach(field => registration.populateForm(field, userInfo));
+        registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Input exceed max length error"', 'desktop');
+        browser.percyScreenshot('f-registration - "Input exceed max length error"', device);
     });
 });
