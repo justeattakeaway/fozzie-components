@@ -41,11 +41,9 @@
                     :role="isPresentationRole ? 'presentation' : false">
             </span>
             <span
-                :class="$style['c-imageTile-text-container']"
+                :class="$style['c-imageTile-textContainer']"
                 :aria-hidden="isLink">
-                <span :class="$style['c-imageTile-icon-container']">
-                    <tick-icon :class="$style['c-imageTile-icon']" />
-                </span>
+                <tick-icon :class="$style['c-imageTile-icon']" />
                 <span :class="$style['c-imageTile-text']">
                     {{ displayText }}
                 </span>
@@ -159,23 +157,13 @@ export default {
 
 $image-tile-background-opacity: 0.7;
 $image-tile-background-color: $color-interactive-brand;
+$image-tile-selected: $color-content-positive;
+$image-tile-transition-duration: 0.2s;
+$image-tile-ease: ease-in-out;
 
 
 .c-imageTile {
-    @include font-size(heading-m);
-
-    font-family: $font-family-base;
     position: relative;
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    &:hover .c-imageTile-icon {
-        opacity: 1;
-        transform: rotate(0) scale(1);
-        width: 20px;
-    }
 }
 
 .c-imageTile-link {
@@ -198,12 +186,12 @@ $image-tile-background-color: $color-interactive-brand;
 }
 
 .c-imageTile-imageContainer {
-  display: block;
-  background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
-  border-radius: $radius-rounded-b;
-  background-image: var(--bg-image);
-  padding-top: (3 / 5) * 100%; // 5:3 aspect ratio
-  position: relative;
+    background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
+    border-radius: $radius-rounded-b;
+    background-image: var(--bg-image);
+    display: block;
+    padding-top: (3 / 5) * 100%; // 5:3 aspect ratio
+    position: relative;
 }
 
 .c-imageTile-image {
@@ -215,40 +203,62 @@ $image-tile-background-color: $color-interactive-brand;
     height: 100%;
 }
 
-.c-imageTile-text-container {
+.c-imageTile-textContainer {
+    margin-top: spacing();
     display: flex;
+    max-width: 100%;
 
     .c-imageTile--selected & {
-        color: #017A39;
+        color: $image-tile-selected;
     }
 }
 
 .c-imageTile-icon {
+    align-self: center;
     opacity: 0;
-    margin-right: spacing();
-    transform: rotate( -45deg ) scale(.5);
-    transition: transform .4s ease, opacity .4s ease;
+    transform: translate3d(-10px, 10px, 0);
+    width: 0;
+    will-change: transform, opacity;
 
-    .c-imageTile--selected & {
+    @media (prefers-reduced-motion: no-preference) {
+        transition: transform $image-tile-transition-duration $image-tile-ease,
+                    opacity $image-tile-transition-duration $image-tile-ease,
+                    width $image-tile-transition-duration $image-tile-ease;
+    }
+
+    .c-imageTile--selected &,
+    .c-imageTile:hover & {
         opacity: 1;
-        transform: rotate(0) scale(1);
-        width: 10px;
+        transform: translate3d(0, 10px, 0);
+        width: 15px;
     }
 
     .c-imageTile--selected & path {
-        fill: #017A39;
+        fill: $image-tile-selected;
     }
 }
 
 .c-imageTile-text {
     @include font-size(body-s);
+    display: block;
     font-family: $font-family-base;
     font-weight: $font-weight-regular;
-    flex: 1;
+    margin-right: spacing(2);
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    transform: translate3d(0px, 10px, 0);
+    white-space: nowrap;
     width: 100%;
+    will-change: transform;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: transform $image-tile-transition-duration $image-tile-ease;
+    }
+
+    .c-imageTile--selected &,
+    .c-imageTile:hover & {
+        transform: translate3d(5px, 10px, 0);
+    }
 }
 
 </style>
