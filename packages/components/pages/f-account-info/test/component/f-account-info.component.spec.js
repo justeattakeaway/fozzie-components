@@ -34,7 +34,7 @@ describe('f-account-info component tests', () => {
         .it('should display an error message immediately when %s input has been deleted', field => {
             // Act
             accountInfo.clearBlurField(field);
-            accountInfo.clickOutOfInputField();
+            accountInfo.tabOutOfField(field);
 
             // Assert
             expect(accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
@@ -85,7 +85,7 @@ describe('f-account-info component tests', () => {
         // Act
         accountInfo.clearBlurField('phoneNumber');
         accountInfo.populateAccountForm('phoneNumber', customerInput);
-        accountInfo.clickOutOfInputField();
+        accountInfo.tabOutOfField('phoneNumber');
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
