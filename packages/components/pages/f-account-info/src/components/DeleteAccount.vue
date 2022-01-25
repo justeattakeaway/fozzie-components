@@ -6,7 +6,6 @@
 
         <f-link
             name="account-info-delete-account-link"
-            is-distinct
             href="/account/deactivate"
             target="_blank">
             {{ $t('deleteAccountLink') }}
