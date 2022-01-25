@@ -73,7 +73,9 @@ If you are making changes that do not need a version bump in any part of the rep
 
 ## Publishing via npm
 
-To publish a package to **npm**, please first ensure that you have registered an account on [npmjs.com](https://www.npmjs.com/).
+Publishing to **npm** is handled automatically as part of our CI process. Once a PR has been merged to master, any package versions that are not present on npm will be published as part of the **master** build.
+
+Alternatively, to manually publish a package to **npm**, please first ensure that you have registered an account on [npmjs.com](https://www.npmjs.com/).
 
 Internal contributors (JET Employees) should request to be added to the Just Eat npm organisation by asking in the #guild-frontend Slack channel and providing their npm username. This will then allow you to publish the packages from our mono-repo.
 
@@ -96,3 +98,7 @@ As an example, if the current version of `@justeat/f-header` was currently `2.5.
 3. Once a PR has been merged into the v3 release branch, the package should be published using the following command: `npm publish --tag beta`.
    This publishes the package using the tag `beta` ensuring that it doesn't get tagged as the `latest` version of the package.
 4. When the package is ready for full release as v3, the `package.json` of the component should be updated to `3.0.0` in its `package.json` and a PR from the v3 release branch should be made back into the `main`/`master` branch. When this has been merged, the component can be published as normal using `npm publish`
+
+
+If however you want beta versions to be released as part of CI, we recommend you add the `tag: "beta"` property to the package's `package.json` file **before** merging to master. This ensures the package is tagged correctly on **npm**. You will still be required to manually create the git tag.
+

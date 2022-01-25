@@ -111,6 +111,17 @@ module.exports = class AccountInfo extends Page {
 
     /**
     * @description
+    * Tab out of provided field
+    *
+    * @param {String} fieldName The name of the field to tab out of
+    */
+    tabOutOfField (fieldName) {
+        const el = this.fields[fieldName].input;
+        el.keys(['Tab']);
+    }
+
+    /**
+    * @description
     * Inputs customer details into the account-info component.
     *
     * @param {Object} customerInput customer input details

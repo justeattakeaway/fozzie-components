@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.1.0
+------------------------------
+*January 24, 2022*
+
+### Changed
+- Aligned the title with the icons
+- Set the distance between the title and description & margins to meet the Icing designs.
+
+
 v4.0.0
 ------------------------------
 *November 26, 2021*

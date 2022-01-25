@@ -1,12 +1,15 @@
 {
   "name": "@justeat/f-mega-modal",
   "description": "Fozzie Mega Modal – A Vue.js modal component",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "main": "dist/f-mega-modal.common.js",
   "maxBundleSize": "6kB",
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-mega-modal",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"

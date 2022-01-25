@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "3.15.1",
+  "version": "3.15.3",
   "main": "dist/f-checkout.umd.min.js",
   "maxBundleSize": "120kB",
   "files": [
@@ -10,6 +10,9 @@
     "src/services",
     "src/constants.js"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-checkout",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
@@ -69,7 +72,7 @@
     "@justeat/f-error-message": "1.0.0",
     "@justeat/f-form-field": "4.0.1",
     "@justeat/f-link": "2.0.0",
-    "@justeat/f-mega-modal": "3.0.2",
+    "@justeat/f-mega-modal": "4.0.2",
     "@justeat/f-vue-icons": "3.0.0",
     "@justeat/f-wdio-utils": "0.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
