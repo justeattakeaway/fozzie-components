@@ -38,7 +38,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Mandatory Errors State', device);
+        browser.percyScreenshot('f-checkout - Collection - Guest - Mandatory Errors State', device.toLowerCase());
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -54,7 +54,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', device);
+        browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', device.toLowerCase());
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -93,7 +93,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', device);
+        browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', device.toLowerCase());
     });
 
     it('should display invalid email address', () => {
@@ -109,7 +109,7 @@ forEach(['Desktop', 'Mobile'])
         browser.keys('Tab');
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - invalid email address Error State', device);
+        browser.percyScreenshot('f-checkout - Collection - Guest - invalid email address Error State', device.toLowerCase());
     });
 });
 
@@ -138,7 +138,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Pre-Order Warning', device);
+        browser.percyScreenshot('f-checkout - Collection - Guest - Pre-Order Warning', device.toLowerCase());
     });
 });
 
@@ -167,7 +167,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the delivery f-checkout component guest base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Base State', device);
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Base State', device.toLowerCase());
     });
 
     it('should display the delivery f-checkout guest mandatory error messages', () => {
@@ -175,7 +175,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Mandatory Errors State', device);
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Mandatory Errors State', device.toLowerCase());
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -191,7 +191,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', device);
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', device.toLowerCase());
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -239,7 +239,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', device);
+        browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', device.toLowerCase());
     });
 
     it('should display invalid email address', () => {
@@ -253,7 +253,7 @@ forEach(['Desktop', 'Mobile'])
         browser.keys('Tab');
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - invalid email address Error State', device);
+        browser.percyScreenshot('f-checkout - Delivery - Guest - invalid email address Error State', device.toLowerCase());
     });
 });
 forEach(['Desktop', 'Mobile'])
@@ -281,7 +281,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Pre-Order Warning', device);
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Pre-Order Warning', device.toLowerCase());
     });
 });
 
@@ -310,7 +310,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Guest - Base State', device);
+        browser.percyScreenshot('f-checkout - Dine in - Guest - Base State', device.toLowerCase());
     });
 
     it('should display the mandatory error messages', () => {
@@ -319,7 +319,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Guest - Manadatory Errors', device);
+        browser.percyScreenshot('f-checkout - Dine In - Guest - Manadatory Errors', device.toLowerCase());
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -333,7 +333,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Guest - Illegal Mobile Number Error State', device);
+        browser.percyScreenshot('f-checkout - Dine In - Guest - Illegal Mobile Number Error State', device.toLowerCase());
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -374,6 +374,6 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Guest - "Duplicate Order Warning" Modal', device);
+        browser.percyScreenshot('f-checkout - Dine in - Guest - "Duplicate Order Warning" Modal', device.toLowerCase());
     });
 });

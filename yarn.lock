@@ -2208,6 +2208,13 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
+"@justeat/f-card@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.4.0.tgz#8786fa1d97c50228d40ddeb7c44570bc0f2bd599"
+  integrity sha512-lzOld5dn8867Orjixj1A2qA9X8jrt+waKKuKyb59fomigJ+EnhP6XVeMhZixuu7aVee480EAXT2liklCA2eaxw==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
 "@justeat/f-content-cards@6.0.0-beta.2":
   version "6.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
@@ -2461,10 +2468,10 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-wdio-utils@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.6.0.tgz#0d5ea0ca9cc5b6bc9cd74b350e74cc62379d88f0"
-  integrity sha512-/yI/Nq3IZ8X0k+V0RBB4dNWFPOomSIt67FxBqgvI1Ig0HKd9tqTCxzTaDiKP3Bu9GlxLDHhdpS9HLNawTLsLgQ==
+"@justeat/f-wdio-utils@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.5.0.tgz#d81310b4068a740465535c5740139dace04f1154"
+  integrity sha512-1it45TISsNbxioD6a86EkpijEQ1Zrsa7eKeq1yBYmJOP3S6+UhA7KMgjv/OV2+8LoKvfEy0UTOeLeuiqAYzlQg==
   dependencies:
     "@justeat/f-services" "1.7.0"
 

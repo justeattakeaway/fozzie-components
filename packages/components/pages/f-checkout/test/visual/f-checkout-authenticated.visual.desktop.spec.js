@@ -30,7 +30,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State', device);
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State', device.toLowerCase());
     });
 
     it('should display the mandatory error messages.', () => {
@@ -39,7 +39,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Mandatory Errors State', device);
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Mandatory Errors State', device.toLowerCase());
     });
 
     it('should display the "Something went wrong" error.', () => {
@@ -62,7 +62,7 @@ forEach(['Desktop', 'Mobile'])
         browser.pause(500);
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Something went wrong" Error', device);
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Something went wrong" Error', device.toLowerCase());
     });
 
     it('should display the "Restaurant not taking orders" modal', () => {
@@ -84,7 +84,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', device);
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Restaurant not taking orders" Error Modal', device.toLowerCase());
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -101,7 +101,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Illegal Mobile Number Error State', device);
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Illegal Mobile Number Error State', device.toLowerCase());
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -123,7 +123,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', device);
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', device.toLowerCase());
     });
 });
 
@@ -152,7 +152,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Pre-Order Warning', device);
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Pre-Order Warning', device.toLowerCase());
     });
 });
 
@@ -181,7 +181,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State', device);
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State', device.toLowerCase());
     });
 
     it('should display the mandatory error messages', () => {
@@ -190,7 +190,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', device);
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', device.toLowerCase());
     });
 
     it('should display the illegal postcode error message', () => {
@@ -207,7 +207,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Postcode Error State', device);
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Postcode Error State', device.toLowerCase());
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -224,7 +224,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', device);
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', device.toLowerCase());
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -246,7 +246,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', device);
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', device.toLowerCase());
     });
 });
 
@@ -275,7 +275,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Pre-Order Warning', device);
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Pre-Order Warning', device.toLowerCase());
     });
 });
 
@@ -304,7 +304,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', device);
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - Base State', device.toLowerCase());
     });
 
     it('should display the mandatory error messages', () => {
@@ -313,7 +313,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', device);
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', device.toLowerCase());
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -330,7 +330,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', device);
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Illegal Mobile Number Error State', device.toLowerCase());
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -352,7 +352,7 @@ forEach(['Desktop', 'Mobile'])
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', device);
+        browser.percyScreenshot('f-checkout - Dine in - Authenticated - "Duplicate Order Warning" Modal', device.toLowerCase());
     });
 
     it('should display the two notes fields if there is two noteTypes.', () => {
@@ -363,7 +363,7 @@ forEach(['Desktop', 'Mobile'])
             .withQuery('&knob-Is ASAP available', true)
             .withQuery('$knob-Note types', 'get-notes-config-split');
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', device);
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', device.toLowerCase());
     });
 });
 
@@ -395,7 +395,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the state input.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible State field', device);
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible State field', device.toLowerCase());
     });
 });
 
@@ -428,6 +428,6 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the age verification page', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible Age Verification', device);
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Visible Age Verification', device.toLowerCase());
     });
 });
