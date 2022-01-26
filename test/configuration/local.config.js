@@ -31,7 +31,7 @@ const configuration = {
         }
     },
     // 'allure', 'video'
-    testReporters: ['allure']
+    testReporters: []
 };
 
 module.exports = configuration;
