@@ -3,7 +3,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout = new Checkout();
 let checkoutInfo;
 
-describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
+describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -22,7 +22,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Base State', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Guest - Base State', 'mobile');
     });
 
     it('should display the mandatory error messages', () => {
@@ -30,7 +30,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Mandatory Errors State', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Guest - Mandatory Errors State', 'mobile');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -42,7 +42,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', 'mobile');
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -73,23 +73,11 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'desktop');
-    });
-
-    it('should display invalid email address', () => {
-        // Arrange
-        const input = '@jazz.man@tunetown.com';
-
-        // Act
-        checkout.setFieldValue('emailAddress', input);
-        browser.keys('Tab');
-
-        // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - invalid email address Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'mobile');
     });
 });
 
-describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
+describe('f-checkout - Collection - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -108,11 +96,12 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Pre-Order Warning', 'desktop');
+        browser.percyScreenshot('f-checkout - Collection - Guest - Pre-Order Warning', 'mobile');
     });
 });
 
-describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
+
+describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -131,7 +120,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the delivery f-checkout component guest base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Base State', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Base State', 'mobile');
     });
 
     it('should display the delivery f-checkout guest mandatory error messages', () => {
@@ -139,7 +128,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Mandatory Errors State', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Mandatory Errors State', 'mobile');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -151,7 +140,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'mobile');
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
@@ -167,7 +156,6 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
             .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
-
         checkout.load();
 
         const customerInfo = {
@@ -185,23 +173,11 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'desktop');
-    });
-
-    it('should display invalid email address', () => {
-        // Arrange
-        const input = '@jazz.man@tunetown.com';
-
-        // Act
-        checkout.setFieldValue('emailAddress', input);
-        browser.keys('Tab');
-
-        // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - invalid email address Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'mobile');
     });
 });
 
-describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
+describe('f-checkout - Delivery - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -220,11 +196,11 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual 
 
     it('should display the pre-order warning.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Guest - Pre-Order Warning', 'desktop');
+        browser.percyScreenshot('f-checkout - Delivery - Guest - Pre-Order Warning', 'mobile');
     });
 });
 
-describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
+describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
@@ -243,7 +219,7 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Guest - Base State', 'desktop');
+        browser.percyScreenshot('f-checkout - Dine in - Guest - Base State', 'mobile');
     });
 
     it('should display the mandatory error messages', () => {
@@ -252,7 +228,7 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Guest - Manadatory Errors', 'desktop');
+        browser.percyScreenshot('f-checkout - Dine In - Guest - Manadatory Errors', 'mobile');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -264,37 +240,37 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Guest - Illegal Mobile Number Error State', 'desktop');
+        browser.percyScreenshot('f-checkout - Dine In - Guest - Illegal Mobile Number Error State', 'mobile');
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
-            serviceType: 'dinein',
+            serviceType: 'collection',
             isAuthenticated: false,
-            isASAP: false,
-            orderErrors: 'duplicate'
+            isASAP: true,
+            orderError: 'duplicate'
         };
         checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Place Order Errors', checkoutInfo.orderErrors);
+            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
+        checkout.load();
 
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '07234567890',
-            tableIdentifier: '10'
+            mobileNumber: '07234567890'
         };
 
         // Act
-        checkout.load();
         Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine in - Guest - "Duplicate Order Warning" Modal', 'desktop');
+        browser.percyScreenshot('f-checkout - Dine in - Guest - "Duplicate Order Warning" Modal', 'mobile');
     });
 });
