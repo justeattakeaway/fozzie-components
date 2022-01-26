@@ -30,7 +30,7 @@ forEach(['Desktop', 'Mobile'])
 
     it('should display the component base state.', () => {
         // Assert
-        browser.percyScreenshot('f-checkout - Collection - Guest - Base State', device);
+        browser.percyScreenshot('f-checkout - Collection - Guest - Base State', device.toLowerCase());
     });
 
     it('should display the mandatory error messages', () => {
