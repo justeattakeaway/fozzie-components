@@ -65,6 +65,21 @@ describe('Card', () => {
             // Assert
             expect(cardTitle.element.tagName.toLowerCase()).toBe(headingTag);
         });
+
+        it.each(['alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'])('should set the class to be %s, as passed in the `cardHeadingSize` prop', cardHeadingSize => {
+            // Arrange
+            const propsData = {
+                cardHeading: 'Test card title',
+                cardHeadingSize
+            };
+
+            // Act
+            const wrapper = shallowMount(Card, { propsData });
+            const cardTitle = wrapper.find('[data-test-id="card-heading"]');
+
+            // Assert
+            expect(cardTitle.classes(cardHeadingSize)).toBe(true);
+        });
     });
 
     describe('props', () => {
@@ -187,6 +202,38 @@ describe('Card', () => {
                 expect(heading.validator('h4')).toBeTruthy();
                 expect(heading.validator('h5')).toBeTruthy();
                 expect(heading.validator('h6')).toBeTruthy();
+            });
+        });
+
+        describe('cardHeadingSize', () => {
+            it('should default to `` if it is not set', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(Card, { propsData });
+
+                // Assert
+                expect(wrapper.vm.cardHeadingSize).toBe('');
+            });
+
+            it('should only allow ``, `alpha`, `beta`, `gamma`, `delta`, `epsilon`, `zeta` to be passed in', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(Card, { propsData });
+
+                const heading = wrapper.vm.$options.props.cardHeadingSize;
+
+                // Assert
+                expect(heading.validator('omicron')).toBeFalsy();
+                expect(heading.validator('alpha')).toBeTruthy();
+                expect(heading.validator('beta')).toBeTruthy();
+                expect(heading.validator('gamma')).toBeTruthy();
+                expect(heading.validator('delta')).toBeTruthy();
+                expect(heading.validator('epsilon')).toBeTruthy();
+                expect(heading.validator('zeta')).toBeTruthy();
             });
         });
 
