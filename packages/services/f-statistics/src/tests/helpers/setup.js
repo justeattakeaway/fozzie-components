@@ -7,6 +7,14 @@ const defaultState = {
     queue: []
 };
 
+const log = {
+    message: 'This is a message',
+    payload: {
+        alpha: 'alpha',
+        beta: 'beta'
+    }
+};
+
 const defaultActions = {};
 
 const defaultGetters = {};
@@ -43,5 +51,6 @@ export {
     defaultState,
     defaultActions,
     createStore,
-    options
+    options,
+    log
 };

@@ -1,14 +1,14 @@
 /* eslint-disable no-import-assign */
 /* eslint-disable camelcase */
-import StatisticsClient from '../index';
-import statisticsModule from '../store/statistics.module';
-import * as config from '../config';
+import StatisticsService from '../statistics.service';
+import statisticsModule from '../../store/statistics.module';
+import * as config from '../../config';
 import {
     defaultState,
     createStore
-} from './helpers/setup';
+} from '../../tests/helpers/setup';
 
-jest.mock('../config', () => ({
+jest.mock('../../config', () => ({
     __esModule: true,
     IS_BATCH_PUBLISHING_ENABLED: false,
     BATCH_QUEUE_SIZE: 5,
@@ -48,7 +48,7 @@ describe('f-statistics', () => {
 
     it('should be defined', () => {
         // Arrange, Act & Assert
-        expect(StatisticsClient).toBeDefined();
+        expect(StatisticsService).toBeDefined();
     });
 
     describe('constructor ::', () => {
@@ -59,10 +59,10 @@ describe('f-statistics', () => {
             };
 
             // Act
-            const statisticsClient = new StatisticsClient();
+            const statisticsService = new StatisticsService();
 
             // Assert
-            expect(statisticsClient.basePayload).toEqual(expectedPayload);
+            expect(statisticsService.basePayload).toEqual(expectedPayload);
         });
 
         it.skip('should merge base payload when additional properties are provided', () => {
@@ -73,10 +73,10 @@ describe('f-statistics', () => {
             };
 
             // Act
-            const statisticsClient = new StatisticsClient(null, null, { a_test_property: 'this is a test' });
+            const statisticsService = new StatisticsService(null, null, { a_test_property: 'this is a test' });
 
             // Assert
-            expect(statisticsClient.basePayload).toEqual(expectedPayload);
+            expect(statisticsService.basePayload).toEqual(expectedPayload);
         });
 
         it.skip('should use default payload as merge priority over provided payload', () => {
@@ -87,13 +87,13 @@ describe('f-statistics', () => {
             };
 
             // Act
-            const statisticsClient = new StatisticsClient(null, null, {
+            const statisticsService = new StatisticsService(null, null, {
                 a_test_property: 'this is a test',
                 je_feature: 'a modified value'
             });
 
             // Assert
-            expect(statisticsClient.basePayload).toEqual(expectedPayload);
+            expect(statisticsService.basePayload).toEqual(expectedPayload);
         });
     });
 
@@ -115,7 +115,7 @@ describe('f-statistics', () => {
 
         it('should define expected publish method', () => {
         // Arrange, Act & Assert
-            expect(new StatisticsClient(null, null, null, store).publish).toBeDefined();
+            expect(new StatisticsService(null, null, null, store).publish).toBeDefined();
         });
 
         describe('single log publishing', () => {
@@ -125,7 +125,7 @@ describe('f-statistics', () => {
 
             it('should publish logs with expected properties', () => {
                 // Arrange
-                const statisticsClient = new StatisticsClient(justLogMock, null, null, store);
+                const statisticsService = new StatisticsService(justLogMock, null, null, store);
 
                 const expectedPayload = {
                     ...basePayload,
@@ -133,7 +133,7 @@ describe('f-statistics', () => {
                 };
 
                 // Act
-                statisticsClient.publish('Test message', { testValue: 'A test value' });
+                statisticsService.publish('Test message', { testValue: 'A test value' });
 
                 // Assert
                 expect(publications[0]).toEqual(expectedPayload);
@@ -141,7 +141,7 @@ describe('f-statistics', () => {
 
             it('should publish logs with additional base payload properties when provided', () => {
                 // Arrange
-                const statisticsClient = new StatisticsClient(justLogMock, null, { a_base_payload_property: 'This is a test' }, store);
+                const statisticsService = new StatisticsService(justLogMock, null, { a_base_payload_property: 'This is a test' }, store);
 
                 const expectedPayload = {
                     ...basePayload,
@@ -149,7 +149,7 @@ describe('f-statistics', () => {
                 };
 
                 // Act
-                statisticsClient.publish('Test message', {});
+                statisticsService.publish('Test message', {});
 
                 // Assert
                 expect(publications[0]).toEqual(expectedPayload);
@@ -157,18 +157,18 @@ describe('f-statistics', () => {
         });
 
         describe.skip('batch log publishing', () => {
-            let statisticsClient;
+            let statisticsService;
             beforeEach(() => {
                 config.IS_BATCH_PUBLISHING_ENABLED = true;
             });
 
             it('should not publish logs immediately', () => {
                 // Arrange
-                statisticsClient = new StatisticsClient(justLogMock, null, null, store);
+                statisticsService = new StatisticsService(justLogMock, null, null, store);
 
                 // Act
-                statisticsClient.publish('Test message', { testValue: 'A test value' });
-                statisticsClient.publish('Test message', { testValue: 'B test value' });
+                statisticsService.publish('Test message', { testValue: 'A test value' });
+                statisticsService.publish('Test message', { testValue: 'B test value' });
 
                 // Assert
                 expect(publications.length).toEqual(0);
@@ -176,14 +176,14 @@ describe('f-statistics', () => {
 
             it('should publish logs when BATCH_QUEUE_SIZE is met', () => {
                 // Arrange
-                statisticsClient = new StatisticsClient(justLogMock, null, null, localStorage);
+                statisticsService = new StatisticsService(justLogMock, null, null, localStorage);
 
                 // Act
-                statisticsClient.publish('Test message', { testValue: 'A test value' });
-                statisticsClient.publish('Test message', { testValue: 'B test value' });
-                statisticsClient.publish('Test message', { testValue: 'C test value' });
-                statisticsClient.publish('Test message', { testValue: 'D test value' });
-                statisticsClient.publish('Test message', { testValue: 'E test value' });
+                statisticsService.publish('Test message', { testValue: 'A test value' });
+                statisticsService.publish('Test message', { testValue: 'B test value' });
+                statisticsService.publish('Test message', { testValue: 'C test value' });
+                statisticsService.publish('Test message', { testValue: 'D test value' });
+                statisticsService.publish('Test message', { testValue: 'E test value' });
 
                 // Assert
                 expect(publications.length).toEqual(5);
@@ -191,11 +191,11 @@ describe('f-statistics', () => {
             it('should publish logs when  is met', async () => {
                 // Arrange
                 config.BATCH_INTERVAL_TIMER = 2000;
-                statisticsClient = new StatisticsClient(justLogMock, null, null, store);
+                statisticsService = new StatisticsService(justLogMock, null, null, store);
 
                 // Act
-                statisticsClient.publish('Test message', { testValue: 'A test value' });
-                statisticsClient.publish('Test message', { testValue: 'B test value' });
+                statisticsService.publish('Test message', { testValue: 'A test value' });
+                statisticsService.publish('Test message', { testValue: 'B test value' });
 
                 // Assert
                 jest.useRealTimers();
