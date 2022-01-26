@@ -22,21 +22,14 @@ forEach(['desktop', 'mobile'])
     it('should display the "Email address is already registered" error', () => {
         // Arrange
         const userInfo = {
-            firstName: {
-                input: 'Test'
-            },
-            lastName: {
-                input: 'User'
-            },
-            email: {
-                input: 'test@user.com'
-            },
-            password: {
-                input: 'testuser123'
-            }
+            firstName: 'Test',
+            lastName: 'User',
+            email: 'test@user.com',
+            password: 'testuser123'
         };
+
         // Act
-        Object.keys(userInfo).forEach(field => registration.populateForm(field, userInfo));
+        Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
         registration.submit();
 
         // Assert
@@ -44,24 +37,7 @@ forEach(['desktop', 'mobile'])
     });
 
     it('should display error when form field is empty', () => {
-        // Arrange
-        const userInfo = {
-            firstName: {
-                input: ''
-            },
-            lastName: {
-                input: ''
-            },
-            email: {
-                input: ''
-            },
-            password: {
-                input: ''
-            }
-        };
-
         // Act
-        Object.keys(userInfo).forEach(field => registration.populateForm(field, userInfo));
         registration.submit();
 
         // Assert
@@ -71,22 +47,14 @@ forEach(['desktop', 'mobile'])
     it('should display error when form input is invalid', () => {
         // Arrange
         const userInfo = {
-            firstName: {
-                input: '123*'
-            },
-            lastName: {
-                input: '456*'
-            },
-            email: {
-                input: '***@**'
-            },
-            password: {
-                input: 'llanfairpwllgwyngyllgogerychwyr'
-            }
+            firstName: '123*',
+            lastName: '456*',
+            email: '***@**',
+            password: 'llanfairpwllgwyngyllgogerychwyr'
         };
 
         // Act
-        Object.keys(userInfo).forEach(field => registration.populateForm(field, userInfo));
+        Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
         registration.submit();
 
         // Assert
@@ -96,22 +64,14 @@ forEach(['desktop', 'mobile'])
     it('should display error when form input is too long', () => {
         // Arrange
         const userInfo = {
-            firstName: {
-                input: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij'
-            },
-            lastName: {
-                input: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij'
-            },
-            email: {
-                input: 'abcdefghijabcdefghijabc@defghijabcdefghijabcdefghijabcdefghij.com'
-            },
-            password: {
-                input: 'abcdefghijabcdefghijabcdefghi'
-            }
+            firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
+            lastName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
+            email: 'abcdefghijabcdefghijabc@defghijabcdefghijabcdefghijabcdefghij.com',
+            password: 'abcdefghijabcdefghijabcdefghi'
         };
 
         // Act
-        Object.keys(userInfo).forEach(field => registration.populateForm(field, userInfo));
+        Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
         registration.submit();
 
         // Assert
