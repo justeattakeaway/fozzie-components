@@ -16,7 +16,12 @@
             :class="$style['c-takeawaypayActivation-description']">
             {{ $t('messages.descriptionActivationAvailable2') }}
         </p>
-
+        <div
+            role="status"
+            aria-live="polite"
+            class="is-visuallyHidden">
+            {{ activationInProgressMessage }}
+        </div>
         <div :class="$style['c-takeawaypayActivation-actions']">
             <f-button
                 :disabled="activationInProgress"
@@ -103,7 +108,11 @@ export default {
             activationInProgress: false
         };
     },
-
+    computed: {
+        activationInProgressMessage () {
+            return this.activationInProgress === true ? this.$t('messages.activationInProgress') : '';
+        }
+    },
     methods: {
         async activate () {
             this.activationInProgress = true;

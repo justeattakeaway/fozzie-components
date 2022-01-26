@@ -10,7 +10,8 @@ const messages = {
         descriptionActivationAvailable2: 'Not you? Choose a different account or sign up.',
         descriptionActivationNotLoggedIn: 'Do you already have a Menulog account?',
         descriptionActivationFailed: 'Try again or get in touch with your Menulog Pay administrator for help.',
-        descriptionActivationSuccessful: 'Menulog Pay is now activated on your account.'
+        descriptionActivationSuccessful: 'Menulog Pay is now activated on your account.',
+        activationInProgress: 'Activating your account, please wait'
     },
     actions: {
         activateTakeawayPay: 'Activate Menulog Pay',

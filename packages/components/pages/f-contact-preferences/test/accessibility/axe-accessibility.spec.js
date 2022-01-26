@@ -28,7 +28,7 @@ describe('Accessibility tests', () => {
 
     forEach([
         ['en-GB']
-    ]).it('should test that the %s f-contact-preferences (error page) is WCAG compliant', locale => {
+    ]).it('should test that the %s f-contact-preferences (error alert) is WCAG compliant', locale => {
         // Arrange
         contactPreferences
         .withQuery('&knob-Locale', locale)
@@ -38,7 +38,23 @@ describe('Accessibility tests', () => {
         // Act
         contactPreferences.clickNewsEmailCheckbox();
         contactPreferences.clickSubmitButton();
-        const axeResults = getAccessibilityTestResults('f-contact-preferences - error page');
+        const axeResults = getAccessibilityTestResults('f-contact-preferences - save error alert');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
+    });
+
+    forEach([
+        ['en-GB']
+    ]).it('should test that the %s f-contact-preferences (error page) is WCAG compliant', locale => {
+        // Arrange
+        contactPreferences
+        .withQuery('&knob-Locale', locale)
+        .withQuery('&knob-Set Api State', 'api-get-failed');
+
+        // Act
+        contactPreferences.load();
+        const axeResults = getAccessibilityTestResults('f-contact-preferences - load error page');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
