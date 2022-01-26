@@ -21,6 +21,7 @@
                         <f-form-field
                             :class="$style['c-contactPreferences-formField']"
                             input-type="checkbox"
+                            is-grouped
                             :label-text=" $t(`${key}.email`)"
                             :label-description="getEmailDescription(key)"
                             :disabled="!isEmailEnabled"
@@ -33,6 +34,7 @@
                         <f-form-field
                             :class="$style['c-contactPreferences-formField']"
                             input-type="checkbox"
+                            is-grouped
                             :label-text=" $t(`${key}.sms`)"
                             :label-description="getSmsDescription(key)"
                             :disabled="!isSmsEnabled"
