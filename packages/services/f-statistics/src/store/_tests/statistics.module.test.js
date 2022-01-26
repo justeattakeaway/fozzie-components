@@ -6,15 +6,15 @@ import {
     defaultState,
     log
 } from '../../tests/helpers/setup';
-import startBatchPublishTimer from '../services/startBatchPublishTimer';
-import shouldPublishQueuedLogs from '../services/shouldPublishQueuedLogs';
+import startBatchPublishTimer from '../logic/startBatchPublishTimer';
+import shouldPublishQueuedLogs from '../logic/shouldPublishQueuedLogs';
 
 jest.useFakeTimers();
 jest.spyOn(global, 'setInterval');
 jest.spyOn(global, 'clearInterval');
 
-jest.mock('../services/startBatchPublishTimer', () => jest.fn());
-jest.mock('../services/shouldPublishQueuedLogs', () => jest.fn());
+jest.mock('../logic/startBatchPublishTimer', () => jest.fn());
+jest.mock('../logic/shouldPublishQueuedLogs', () => jest.fn());
 
 describe('Statistics Module ::', () => {
     let state;
