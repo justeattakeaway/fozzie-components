@@ -23,14 +23,9 @@ describe('f-checkout component tests', () => {
 
     it('should submit the checkout form', () => {
         // Arrange
-        const customerInfo = {
-            orderNote: {
-                input: 'Doorbell is broken'
-            }
-        };
-
+        const input = 'Doorbell is broken';
         // Act
-        checkout.populateForm('orderNote', customerInfo);
+        checkout.setFieldValue('orderNote', input);
         checkout.selectOrderTime(orderTime);
         checkout.goToPayment();
 
