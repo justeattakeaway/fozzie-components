@@ -74,7 +74,8 @@
             <!-- START ERROR BOUNDARY -->
             <!-- todo add v-if so null ratings dont show empty star with no text -->
             <component
-                :is="getWrapperComponent('rating')">
+                :is="getWrapperComponent('rating')"
+                v-bind="getWrapperComponentProps('rating')">
                 <restaurant-rating
                     data-test-id="restaurant-rating"
                     v-bind="rating" />
@@ -84,7 +85,7 @@
             <!-- Offline Icon -->
 
             <!-- Meta Items List -->
-            <p>TEST</p>
+            <p>TEST 2</p>
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
@@ -161,6 +162,7 @@ import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 import IconText from './subcomponents/IconText.vue';
 import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
+// import RenderlessComponent from './renderlessComponent.vue';x
 
 export default {
     name: 'RestaurantCardV1',
@@ -228,7 +230,7 @@ export default {
         },
         rating: {
             type: Object,
-            default: () => null
+            default: () => ({})
         },
         deliveryTimeData: {
             type: Object,
@@ -254,9 +256,9 @@ export default {
             type: Object,
             default: () => ({})
         },
-        clientOnly: {
-            type: [Object, String],
-            default: 'div'
+        wrapperComponentProps: {
+            type: Object,
+            default: () => ({})
         }
     },
     computed: {
@@ -287,23 +289,11 @@ export default {
         };
     },
     methods: {
-        // eslint-disable-next-line no-unused-vars
         getWrapperComponent (componentName) {
-            // console.log('clientOnly', this.clientOnly);
-            // // console.log(this[componentName]);
-            // // console.log(this.wrapperComponents);
-            // if (this[componentName]) {
-            //     // const comp = this.wrapperComponents?.[this[componentName].wrapperComponent] || 'div';
-            //     const comp = this.wrapperComponents.clientOnly || 'div';
-            //     console.log('comp', comp);
-            //     return comp;
-            // }
-
-            // return 'div';
-            console.log('wrapper component!', this.wrapperComponents[this[componentName]?.wrapperComponent]);
             return this.wrapperComponents[this[componentName]?.wrapperComponent] || 'div';
-
-            // return this.wrapperComponents.clientOnly || 'div';
+        },
+        getWrapperComponentProps (componentName) {
+            return this.wrapperComponentProps[componentName] || {};
         }
     }
 };

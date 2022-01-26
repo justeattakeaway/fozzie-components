@@ -5,7 +5,8 @@
         :flags="flags"
         :error-boundary="errorBoundary"
         :wrapper-components="wrapperComponents"
-        :client-only="clientOnly">
+        :wrapper-component-props="wrapperComponentProps"
+    >
         <template
             v-for="(_, slotName) in $slots"
             v-slot:[slotName]>
@@ -41,9 +42,9 @@ export default {
             type: Object,
             default: () => ({})
         },
-        clientOnly: {
-            type: [Object, String],
-            default: 'div'
+        wrapperComponentProps: {
+            type: Object,
+            default: () => ({})
         }
     },
     computed: {
