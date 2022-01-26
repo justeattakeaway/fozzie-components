@@ -5,24 +5,14 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout = new Checkout();
 let checkoutInfo;
 
-const customerInfo = {
-    firstName: {
-        input: 'Jerry'
-    },
-    lastName: {
-        input: 'Jazzman'
-    },
-    emailAddress: {
-        input: 'jerry.jazzman@ronniescotts.co.uk'
-    },
-    mobileNumber: {
-        input: '07234567890'
-    }
-};
-
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Collection - Guest - Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Collection - Guest - %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -53,7 +43,11 @@ forEach(['desktop', 'mobile'])
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        customerInfo.mobileNumber.input = '123';
+        const customerInfo = {
+            mobileNumber: {
+                input: '123'
+            }
+        };
 
         // Act
         checkout.populateForm('mobileNumber', customerInfo);
@@ -78,6 +72,22 @@ forEach(['desktop', 'mobile'])
             .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
 
         checkout.load();
+
+        const customerInfo = {
+            firstName: {
+                input: 'Jerry'
+            },
+            lastName: {
+                input: 'Jazzman'
+            },
+            emailAddress: {
+                input: 'jerry.jazzman@ronniescotts.co.uk'
+            },
+            mobileNumber: {
+                input: '07234567890'
+            }
+        };
+
         // Act
         Object.keys(customerInfo).forEach(field => checkout.populateForm(field, customerInfo));
         checkout.goToPayment();
@@ -88,7 +98,11 @@ forEach(['desktop', 'mobile'])
 
     it('should display invalid email address', () => {
         // Arrange
-        customerInfo.emailAddress.input = '@jazz.man@tunetown.com';
+        const customerInfo = {
+            emailAddress: {
+                input: '@jazz.man@tunetown.com'
+            }
+        };
 
         // Act
         checkout.populateForm('emailAddress', customerInfo);
@@ -99,9 +113,14 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Collection - Guest - isAsapAvailable: false - Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Collection - Guest - isAsapAvailable: false %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -123,9 +142,14 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Delivery - Guest - Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Delivery - Guest - %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -156,7 +180,11 @@ forEach(['desktop', 'mobile'])
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        customerInfo.mobileNumber.input = '123';
+        const customerInfo = {
+            mobileNumber: {
+                input: '123'
+            }
+        };
 
         // Act
         checkout.populateForm('mobileNumber', customerInfo);
@@ -182,8 +210,19 @@ forEach(['desktop', 'mobile'])
 
         checkout.load();
 
-        const customerInput = {
-            ...customerInfo,
+        const customerInfo = {
+            firstName: {
+                input: 'Jerry'
+            },
+            lastName: {
+                input: 'Jazzman'
+            },
+            emailAddress: {
+                input: 'jerry.jazzman@ronniescotts.co.uk'
+            },
+            mobileNumber: {
+                input: '07234567890'
+            },
             addressLine1: {
                 input: '47 Frith  Street'
             },
@@ -196,7 +235,7 @@ forEach(['desktop', 'mobile'])
         };
 
         // Act
-        Object.keys(customerInput).forEach(field => checkout.populateForm(field, customerInput));
+        Object.keys(customerInfo).forEach(field => checkout.populateForm(field, customerInfo));
         checkout.goToPayment();
 
         // Assert
@@ -205,7 +244,9 @@ forEach(['desktop', 'mobile'])
 
     it('should display invalid email address', () => {
         // Arrange
-        customerInfo.emailAddress.input = '@jazz.man@tunetown.com';
+        const customerInfo = {
+            emailAddress: '@jazz.man@tunetown.com'
+        };
 
         // Act
         checkout.populateForm('emailAddress', customerInfo);
@@ -215,9 +256,14 @@ forEach(['desktop', 'mobile'])
         browser.percyScreenshot('f-checkout - Delivery - Guest - invalid email address Error State', device);
     });
 });
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Delivery - Guest - isAsapAvailable: false - Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Delivery - Guest - isAsapAvailable: false %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -239,9 +285,14 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Dine In - Guest - Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Dine In - Guest - %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -273,7 +324,9 @@ forEach(['desktop', 'mobile'])
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        customerInfo.mobileNumber.input = '123';
+        const customerInfo = {
+            mobileNumber: '123'
+        };
 
         // Act
         checkout.populateForm('mobileNumber', customerInfo);
@@ -297,8 +350,19 @@ forEach(['desktop', 'mobile'])
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
             .withQuery('&knob-Place Order Errors', checkoutInfo.orderErrors);
 
-        const customerInput = {
-            ...customerInfo,
+        const customerInfo = {
+            firstName: {
+                input: 'Jerry'
+            },
+            lastName: {
+                input: 'Jazzman'
+            },
+            emailAddress: {
+                input: 'jerry.jazzman@ronniescotts.co.uk'
+            },
+            mobileNumber: {
+                input: '07234567890'
+            },
             tableIdentifier: {
                 input: '10'
             }
@@ -306,7 +370,7 @@ forEach(['desktop', 'mobile'])
 
         // Act
         checkout.load();
-        Object.keys(customerInput).forEach(field => checkout.populateForm(field, customerInput));
+        Object.keys(customerInfo).forEach(field => checkout.populateForm(field, customerInfo));
         checkout.goToPayment();
 
         // Assert

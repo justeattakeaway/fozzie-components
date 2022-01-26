@@ -5,9 +5,15 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 let checkoutInfo;
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Collection - Authenticated - %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
+
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -121,9 +127,14 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Collection - Authenticated - isAsapAvailable: false %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -145,9 +156,14 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Delivery - Authenticated - %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -234,9 +250,14 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -258,9 +279,14 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Dine In - Authenticated - %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -341,9 +367,15 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Delivery - AU Tenant - visibile state field - %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
+
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -367,9 +399,15 @@ forEach(['desktop', 'mobile'])
     });
 });
 
-forEach(['desktop', 'mobile'])
-.describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', device => {
+forEach(['Desktop', 'Mobile'])
+.describe('f-checkout - Delivery - AU Tenant - age verification page - %s Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'Mobile') {
+            browser.setWindowSize(414, 731);
+        } else {
+            browser.setWindowSize(1280, 900);
+        }
+
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
