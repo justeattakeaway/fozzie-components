@@ -270,7 +270,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     }
 
     @include media('>=mid') {
-        .c-imageTile:hover &  {
+        .c-imageTile:hover & {
             transform: $image-tile-text-transform;
         }
     }
