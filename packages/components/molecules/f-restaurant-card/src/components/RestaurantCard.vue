@@ -3,7 +3,9 @@
         :is="componentVersion"
         v-bind="data"
         :flags="flags"
-        :error-boundary="errorBoundary">
+        :error-boundary="errorBoundary"
+        :wrapper-components="wrapperComponents"
+        :client-only="clientOnly">
         <template
             v-for="(_, slotName) in $slots"
             v-slot:[slotName]>
@@ -34,6 +36,14 @@ export default {
         version: {
             type: String,
             default: 'v1'
+        },
+        wrapperComponents: {
+            type: Object,
+            default: () => ({})
+        },
+        clientOnly: {
+            type: [Object, String],
+            default: 'div'
         }
     },
     computed: {

@@ -72,9 +72,9 @@
 
             <!-- Ratings -->
             <!-- START ERROR BOUNDARY -->
+            <!-- todo add v-if so null ratings dont show empty star with no text -->
             <component
-                :is="errorBoundary"
-                tier="3">
+                :is="getWrapperComponent('rating')">
                 <restaurant-rating
                     data-test-id="restaurant-rating"
                     v-bind="rating" />
@@ -84,6 +84,7 @@
             <!-- Offline Icon -->
 
             <!-- Meta Items List -->
+            <p>TEST</p>
             <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
@@ -147,6 +148,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
@@ -226,7 +228,7 @@ export default {
         },
         rating: {
             type: Object,
-            default: () => ({})
+            default: () => null
         },
         deliveryTimeData: {
             type: Object,
@@ -247,6 +249,14 @@ export default {
         fees: {
             type: Object,
             default: () => {}
+        },
+        wrapperComponents: {
+            type: Object,
+            default: () => ({})
+        },
+        clientOnly: {
+            type: [Object, String],
+            default: 'div'
         }
     },
     computed: {
@@ -275,6 +285,26 @@ export default {
         return {
             isListItem: this.isListItem
         };
+    },
+    methods: {
+        // eslint-disable-next-line no-unused-vars
+        getWrapperComponent (componentName) {
+            // console.log('clientOnly', this.clientOnly);
+            // // console.log(this[componentName]);
+            // // console.log(this.wrapperComponents);
+            // if (this[componentName]) {
+            //     // const comp = this.wrapperComponents?.[this[componentName].wrapperComponent] || 'div';
+            //     const comp = this.wrapperComponents.clientOnly || 'div';
+            //     console.log('comp', comp);
+            //     return comp;
+            // }
+
+            // return 'div';
+            console.log('wrapper component!', this.wrapperComponents[this[componentName]?.wrapperComponent]);
+            return this.wrapperComponents[this[componentName]?.wrapperComponent] || 'div';
+
+            // return this.wrapperComponents.clientOnly || 'div';
+        }
     }
 };
 </script>
