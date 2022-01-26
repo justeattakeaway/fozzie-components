@@ -723,6 +723,7 @@ export default {
             try {
                 await this.getCustomer({
                     url: this.getCustomerUrl,
+                    tenant: this.tenant,
                     timeout: this.checkoutTimeout
                 });
                 this.handleEventLogging('CheckoutCustomerGetSuccess');

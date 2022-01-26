@@ -1,7 +1,8 @@
 {
   "name": "@justeat/f-searchbox",
   "description": "Fozzie Searchbox – Just Eat Takeaway Global Searchbox",
-  "version": "4.0.0-beta.37",
+  "tag": "beta",
+  "version": "4.0.0-beta.38",
   "main": "dist/f-searchbox.umd.min.js",
   "maxBundleSize": "60kB",
   "files": [
@@ -9,6 +10,9 @@
     "test-utils",
     "src/services"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-searchbox",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"

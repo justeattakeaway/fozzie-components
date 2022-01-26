@@ -1,10 +1,13 @@
 {
   "name": "@justeat/f-wdio-utils",
   "description": "Fozzie Wdio Utils - webdriverIO page object",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "files": [
     "src/"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-wdio-utils",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
