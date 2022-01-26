@@ -62,58 +62,58 @@ describe('ImageTile', () => {
                 // Assert
                 expect(label.attributes('for')).toContain(propsData.tileId);
             });
+        });
 
-            describe('imgSrc :: ', () => {
-                it('should apply `imgSrc` to the image src', () => {
-                    // Arrange
-                    const propsData = { imgSrc: 'https://via.placeholder.com/150' };
+        describe('imgSrc :: ', () => {
+            it('should apply `imgSrc` to the image src', () => {
+                // Arrange
+                const propsData = { imgSrc: 'https://via.placeholder.com/150' };
 
-                    // Act
-                    const wrapper = shallowMount(ImageTile, {
-                        propsData
-                    });
-
-                    const image = wrapper.find('[data-test-id="image-tile-image"]');
-
-                    // Assert
-                    expect(image.attributes('src')).toContain(propsData.imgSrc);
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
                 });
 
-                it('should not have an image if the `imgSrc` is empty', () => {
-                    // Arrange
-                    const propsData = { imgSrc: '' };
+                const image = wrapper.find('[data-test-id="image-tile-image"]');
 
-                    // Act
-                    const wrapper = shallowMount(ImageTile, {
-                        propsData
-                    });
-
-                    const image = wrapper.find('[data-test-id="image-tile-image"]');
-
-                    // Assert
-                    expect(image.exists()).toBe(false);
-                });
+                // Assert
+                expect(image.attributes('src')).toContain(propsData.imgSrc);
             });
 
-            describe('isSelected :: ', () => {
-                const isSelectedTrue = true;
-                const isSelectedFalse = false;
+            it('should not have an image if the `imgSrc` is empty', () => {
+                // Arrange
+                const propsData = { imgSrc: '' };
 
-                it.each([
-                    [true, isSelectedTrue],
-                    [false, isSelectedFalse]
-                ])('should update `isToggleSelected` %s when set to %s', (expectedValue, isSelected) => {
-                    // Arrange
-                    const propsData = { isSelected };
-
-                    // Act
-                    const wrapper = shallowMount(ImageTile, {
-                        propsData
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
                 });
+
+                const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+                // Assert
+                expect(image.exists()).toBe(false);
+            });
+        });
+
+        describe('isSelected :: ', () => {
+            const isSelectedTrue = true;
+            const isSelectedFalse = false;
+
+            it.each([
+                [true, isSelectedTrue],
+                [false, isSelectedFalse]
+            ])('should update `isToggleSelected` %s when set to %s', (expectedValue, isSelected) => {
+                // Arrange
+                const propsData = { isSelected };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
             });
         });
     });
