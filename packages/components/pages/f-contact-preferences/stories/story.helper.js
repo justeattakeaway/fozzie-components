@@ -12,14 +12,16 @@ const httpVerbs = {
 
 export const apiStates = {
     none: null,
-    apiPostFailed: 'api-post-failed'
+    apiPostFailed: 'api-post-failed',
+    apiGetFailed: 'api-get-failed'
 };
 
 export const apiStateOptions = {
     title: 'Set Api State',
     states: {
         None: apiStates.none,
-        'The POST/SUBMIT fails (change a value then click `Save Changes`)': apiStates.apiPostFailed
+        'The POST/SUBMIT fails (change a value then click `Save Changes`)': apiStates.apiPostFailed,
+        'The GET/LOAD fails (used for component testing only)': apiStates.apiGetFailed
     }
 };
 
@@ -52,6 +54,22 @@ const apiStateDefinitions = {
             url: '/consumer/preferences',
             method: httpVerbs.post,
             responseStatus: httpStatusCodes.internalServerError,
+            requestData: null,
+            responseData: getConsumerPreferences
+        }]
+    },
+    apiGetFailed: { // Bad GET but good POST
+        state: apiStates.apiGetFailed,
+        states: [{
+            url: '/consumer/preferences',
+            method: httpVerbs.get,
+            responseStatus: httpStatusCodes.internalServerError,
+            requestData: null,
+            responseData: {}
+        }, {
+            url: '/consumer/preferences',
+            method: httpVerbs.post,
+            responseStatus: httpStatusCodes.ok,
             requestData: null,
             responseData: getConsumerPreferences
         }]

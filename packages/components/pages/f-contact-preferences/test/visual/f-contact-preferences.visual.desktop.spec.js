@@ -3,6 +3,7 @@ import forEach from 'mocha-each';
 const ContactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
 
 let contactPreferences;
+const deviceType = 'desktop';
 
 describe('f-contact-preferences - Desktop Visual Tests', () => {
     beforeEach(() => {
@@ -19,7 +20,7 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         contactPreferences.waitForComponent();
 
         // Assert
-        browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, 'desktop');
+        browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, deviceType);
     });
 
     forEach([
@@ -34,12 +35,30 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         contactPreferences.waitForComponent();
 
         // Assert
-        browser.percyScreenshot(`f-contact-preferences - Checked Preferences State - ${locale}`, 'desktop');
+        browser.percyScreenshot(`f-contact-preferences - Checked Preferences State - ${locale}`, deviceType);
     });
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s error page', locale => {
+    ]).it('should display the %s Submit success alert', locale => {
+        // Arrange
+        contactPreferences
+            .withQuery('&knob-Locale', locale);
+        contactPreferences.load();
+        contactPreferences.waitForComponent();
+
+        // Act
+        contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
+        contactPreferences.clickSubmitButton();
+        contactPreferences.waitForComponent();
+
+        // Assert
+        browser.percyScreenshot(`f-contact-preferences - Submit Success Alert - ${locale}`, deviceType);
+    });
+
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Submit error alert', locale => {
         // Arrange
         contactPreferences
             .withQuery('&knob-Locale', locale)
@@ -53,6 +72,22 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         contactPreferences.waitForComponent();
 
         // Assert
-        browser.percyScreenshot(`f-contact-preferences - Error State - ${locale}`, 'desktop');
+        browser.percyScreenshot(`f-contact-preferences - Submit Error Alert - ${locale}`, deviceType);
+    });
+
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Load error page', locale => {
+        // Arrange
+        contactPreferences
+            .withQuery('&knob-Locale', locale)
+            .withQuery('&knob-Set Api State', 'api-get-failed');
+
+        // Act
+        contactPreferences.load();
+        contactPreferences.waitForComponent();
+
+        // Assert
+        browser.percyScreenshot(`f-contact-preferences - Load Error Page - ${locale}`, deviceType);
     });
 });
