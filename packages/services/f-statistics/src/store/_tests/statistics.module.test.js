@@ -6,19 +6,26 @@ import {
     defaultState,
     log
 } from '../../tests/helpers/setup';
+import startBatchPublishTimer from '../services/startBatchPublishTimer';
+import shouldPublishQueuedLogs from '../services/shouldPublishQueuedLogs';
 
 jest.useFakeTimers();
 jest.spyOn(global, 'setInterval');
 jest.spyOn(global, 'clearInterval');
 
+jest.mock('../services/startBatchPublishTimer', () => jest.fn());
+jest.mock('../services/shouldPublishQueuedLogs', () => jest.fn());
+
 describe('Statistics Module ::', () => {
     let state;
-    // let commit;
+    let commit;
+    let justLog;
 
     beforeEach(() => {
         // Arrange
         state = { ...defaultState };
-        // commit = jest.fn();
+        commit = jest.fn();
+        justLog = jest.fn();
     });
 
     afterEach(() => {
@@ -31,7 +38,31 @@ describe('Statistics Module ::', () => {
         expect(actualState).toEqual(defaultState);
     });
 
-    describe('actions ::', () => { });
+    describe('actions ::', () => {
+        describe('addToPublishQueue ::', () => {
+            it('should call `startBatchPublishTimer()` ', () => {
+                // Act
+                statisticsModule.actions.addToPublishQueue({ commit, state }, { log, justLog });
+
+                // Assert
+                expect(startBatchPublishTimer).toHaveBeenCalledWith(state, commit, justLog);
+            });
+            it('should call `shouldPublishQueuedLogs()` ', () => {
+                // Act
+                statisticsModule.actions.addToPublishQueue({ commit, state }, { log, justLog });
+
+                // Assert
+                expect(shouldPublishQueuedLogs).toHaveBeenCalledWith(state, commit, justLog);
+            });
+            it('should call the `ADD_TO_PUBLISH_QUEUE` mutation', () => {
+                // Act
+                statisticsModule.actions.addToPublishQueue({ commit }, { log, justLog });
+
+                // Assert
+                expect(commit).toHaveBeenLastCalledWith(ADD_TO_PUBLISH_QUEUE, log);
+            });
+        });
+    });
 
     describe('mutations ::', () => {
         describe(`${ADD_TO_PUBLISH_QUEUE} ::`, () => {

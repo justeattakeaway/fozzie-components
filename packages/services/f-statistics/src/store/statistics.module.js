@@ -3,7 +3,8 @@ import {
     ADD_TO_PUBLISH_QUEUE, CLEAR_PUBLISH_QUEUE, SET_INTERVAL_TIMER, CLEAR_INTERVAL_TIMER
 } from './mutation-types';
 
-import { startBatchPublishTimer, shouldPublishQueuedLogs } from './statistics.utils';
+import startBatchPublishTimer from './services/startBatchPublishTimer';
+import shouldPublishQueuedLogs from './services/shouldPublishQueuedLogs';
 
 export default {
     namespaced: true,
