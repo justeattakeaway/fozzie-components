@@ -321,7 +321,7 @@ export default {
     flex-flow: column;
     border: none;
     padding: 0;
-    margin: spacing(x2) 0 spacing(x4);
+    margin: spacing(x2) 0 spacing(x3);
 }
 
 .c-formField-label,
