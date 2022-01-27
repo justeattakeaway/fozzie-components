@@ -50,25 +50,25 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0",
-    "@justeat/f-globalisation": "1.0.0"
+    "@justeat/f-globalisation": "1.0.0",
+    "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
     "vuex": ">=3.5.1"
   },
   "devDependencies": {
-    "@justeat/f-vue-icons": "3.3.0",
+    "@justeat/f-alert": "4.1.0",
     "@justeat/f-button": "3.2.0",
     "@justeat/f-card": "3.5.0",
     "@justeat/f-card-with-content": "1.0.0",
-    "@justeat/f-alert": "4.1.0",
     "@justeat/f-form-field": "4.5.0",
+    "@justeat/f-vue-icons": "3.3.0",
+    "@justeat/f-wdio-utils": "0.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@justeat/f-wdio-utils": "0.5.0",
     "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2"
   }
