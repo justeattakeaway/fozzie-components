@@ -321,7 +321,7 @@ export default {
     flex-flow: column;
     border: none;
     padding: 0;
-    margin: spacing(x2) 0 spacing(x3);
+    margin: spacing(x2) 0 spacing(x4);
 }
 
 .c-formField-label,
@@ -352,6 +352,6 @@ export default {
 }
 
 .c-contactPreferences-alert {
-    margin: 0 0 spacing(x4);
+    margin: -(spacing()) 0 spacing(x4); // Negative top margin needed to offset the fieldset's bottom margin.
 }
 </style>
