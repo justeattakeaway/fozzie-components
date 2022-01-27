@@ -3,7 +3,5 @@
 export default {
     name: 'Renderless',
     functional: true,
-    render (_, { children }) {
-        return children;
-    }
+    render (_, { children }) { return children; }
 };
