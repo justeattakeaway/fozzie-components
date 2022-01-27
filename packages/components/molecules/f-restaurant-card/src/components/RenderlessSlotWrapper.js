@@ -3,8 +3,7 @@
 export default {
     name: 'Renderless',
     functional: true,
-    render (h, { slots }) {
-        const { default: defaultSlot } = slots();
-        return defaultSlot || h(false);
+    render (_, { children }) {
+        return children;
     }
 };
