@@ -87,7 +87,7 @@ describe('f-checkout component tests', () => {
 
         it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
             // Act
-            checkout.waitForComponent();
+            checkout.waitForComponent(checkout.component);
             checkout.clickRetryButton();
 
             // Assert
@@ -97,7 +97,7 @@ describe('f-checkout component tests', () => {
 
         it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
             // Act
-            checkout.waitForComponent();
+            checkout.waitForComponent(checkout.component);
             checkout.clickDupOrderGoToHistoryButton();
 
             // Assert

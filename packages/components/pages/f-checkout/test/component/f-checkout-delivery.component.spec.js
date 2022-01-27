@@ -97,7 +97,7 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
                 .withQuery('&knob-Note types', 'get-notes-config-split');
 
         checkout.load();
-        checkout.waitForComponent();
+        checkout.waitForComponent(checkout.component);
     });
 
     it('should open the order notes accordion and populate it', () => {
@@ -108,7 +108,7 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
                 .withQuery('&knob-Note types', 'get-notes-config');
 
         checkout.load();
-        checkout.waitForComponent();
+        checkout.waitForComponent(checkout.component);
 
         // Assert
         checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is a order note');
@@ -123,7 +123,7 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
                 .withQuery('&knob-Note types', 'get-notes-config-split');
 
         checkout.load();
-        checkout.waitForComponent();
+        checkout.waitForComponent(checkout.component);
 
         // Assert
         checkout.expandAndPopulateNote('courierAccordionHeader', 'courierNote', 'This is a courier note');
