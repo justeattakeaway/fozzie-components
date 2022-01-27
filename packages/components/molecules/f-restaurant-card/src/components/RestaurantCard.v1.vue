@@ -59,8 +59,8 @@
 
             <!-- New label -->
             <component
-                :is="'div'"
-                tier="3">
+                :is="getWrapperComponent('newTagText')"
+                v-bind="getWrapperComponentProps('newTagText')">
                 <!-- TODO - we want to translate this within the component using i18n.
                 For now we'll just need to pass down a translated string from the consuming site -->
                 <restaurant-tag
