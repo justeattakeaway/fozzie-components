@@ -4,6 +4,8 @@ const AccountInfo = require('../../test-utils/component-objects/f-account-info.c
 
 let accountInfo;
 
+const input = '123';
+
 describe('f-account-info component tests', () => {
     beforeEach(() => {
         accountInfo = new AccountInfo();
@@ -41,8 +43,6 @@ describe('f-account-info component tests', () => {
         });
 
     it('should display the illegal first name error message immediately on click', () => {
-        // Arrange
-        const input = '123';
         // Act
         accountInfo.clearBlurField('firstName');
         accountInfo.setFieldValue('firstName', input);
@@ -53,9 +53,6 @@ describe('f-account-info component tests', () => {
     });
 
     it('should display the illegal last name error message immediately on click', () => {
-        // Arrange
-        const input = '123';
-
         // Act
         accountInfo.clearBlurField('lastName');
         accountInfo.setFieldValue('lastName', input);
@@ -66,22 +63,16 @@ describe('f-account-info component tests', () => {
     });
 
     it('should display the illegal phone number error message immediately on click', () => {
-        // Arrange
-        const input = '123';
-
         // Act
         accountInfo.clearBlurField('phoneNumber');
         accountInfo.setFieldValue('phoneNumber', input);
-        accountInfo.tabOutOfField();
+        accountInfo.tabOutOfField('phoneNumber');
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
     });
 
     it('should display invalid postcode error message immediately on click', () => {
-        // Arrange
-        const input = '123';
-
         // Act
         accountInfo.clearBlurField('postcode');
         accountInfo.setFieldValue('postcode', input);
