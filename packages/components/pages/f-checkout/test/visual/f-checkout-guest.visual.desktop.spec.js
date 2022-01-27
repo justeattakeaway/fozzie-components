@@ -35,10 +35,10 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const input = '123';
+        const mobileNumber = '123';
 
         // Act
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', mobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -69,7 +69,8 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         };
 
         // Act
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         // Assert
@@ -78,10 +79,10 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
     it('should display invalid email address', () => {
         // Arrange
-        const input = '@jazz.man@tunetown.com';
+        const emailAddress = '@jazz.man@tunetown.com';
 
         // Act
-        checkout.setFieldValue('emailAddress', input);
+        checkout.setFieldValue('emailAddress', emailAddress);
         browser.keys('Tab');
 
         // Assert
@@ -144,10 +145,10 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const input = '123';
+        const mobileNumber = '123';
 
         // Act
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', mobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -181,7 +182,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         };
 
         // Act
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         // Assert
@@ -190,10 +192,10 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
     it('should display invalid email address', () => {
         // Arrange
-        const input = '@jazz.man@tunetown.com';
+        const emailAddress = '@jazz.man@tunetown.com';
 
         // Act
-        checkout.setFieldValue('emailAddress', input);
+        checkout.setFieldValue('emailAddress', emailAddress);
         browser.keys('Tab');
 
         // Assert
@@ -257,10 +259,10 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const input = '123';
+        const mobileNumber = '123';
 
         // Act
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', mobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -291,7 +293,8 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
 
         // Act
         checkout.load();
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         // Assert

@@ -35,10 +35,10 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const input = '123';
+        const mobileNumber = '123';
 
         // Act
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', mobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -68,8 +68,10 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
             mobileNumber: '07234567890'
         };
 
+        checkout.expectedCustomerInfo = customerInfo;
+
         // Act
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         // Assert
@@ -133,10 +135,10 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const input = '123';
+        const mobileNumber = '123';
 
         // Act
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', mobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -167,9 +169,10 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
             addressLocality: 'London',
             addressPostcode: 'W1D 4HT'
         };
+        checkout.expectedCustomerInfo = customerInfo;
 
         // Act
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         // Assert
@@ -233,10 +236,10 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
 
     it('should display the illegal mobile number error message', () => {
         // Arrange
-        const input = '123';
+        const mobileNumber = '123';
 
         // Act
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', mobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -266,8 +269,10 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
             mobileNumber: '07234567890'
         };
 
+        checkout.expectedCustomerInfo = customerInfo;
+
         // Act
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         // Assert

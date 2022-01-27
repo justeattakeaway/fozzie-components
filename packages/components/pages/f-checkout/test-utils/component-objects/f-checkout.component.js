@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 const {
@@ -136,6 +138,14 @@ module.exports = class Checkout extends Page {
             get error () { return $(FIELDS.addressAdministrativeArea.error); }
         }
     }
+
+    get customerInput () { return this.customerInfo || 'customer info has not been set'; }
+
+    set expectedCustomerInfo (info) {
+        this.customerInfo = info;
+    }
+
+
     /**
      * @description
      * Sets the data for the checkout component.
@@ -208,6 +218,10 @@ module.exports = class Checkout extends Page {
 
     clickDupOrderGoToHistoryButton () {
         return this.errorMessageDupOrderGoToHistory.click();
+    }
+
+    setFieldValues () {
+        Object.keys(this.customerInput).forEach(field => super.setFieldValue(field, this.customerInput[field]));
     }
 
     testTabOrder (tabOrder) {
