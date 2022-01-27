@@ -3,13 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.15.4
+------------------------------
+*January 27, 2022*
+
+### Changed
+- Bump `f-alert` version.
+
+
 v3.15.3
 ------------------------------
 *January 21, 2022*
 
 ### Changed
 - Passed tenant to `getCustomer` call
-  
+
 
 v3.15.2
 ------------------------------
@@ -40,7 +48,7 @@ v3.14.0
 
 ### Fixed
 - Logic for closest postcode
-  
+
 
 v3.13.3
 ------------------------------
