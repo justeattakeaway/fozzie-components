@@ -37,54 +37,17 @@ forEach(['desktop', 'mobile'])
         browser.percyScreenshot(`f-account-info - ${field} Input Error Message`, device);
     });
 
-    it('should display the illegal first name error message immediately on click', () => {
+    forEach(['firstName', 'lastName', 'phoneNumber', 'postcode'])
+    .it('should display the illegal %s error message immediately on click', field => {
         // Arrange
-        const input = '123';
+        const illegalInput = '123';
 
         // Act
-        accountInfo.clearBlurField('firstName');
-        accountInfo.setFieldValue('firstName', input);
+        accountInfo.clearBlurField(field);
+        accountInfo.setFieldValue(field, illegalInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
-        browser.percyScreenshot('f-account-info - illegal first name error message', device);
-    });
-
-    it('should display the illegal last name error message immediately on click', () => {
-        // Arrange
-        const input = '123';
-
-        // Act
-        accountInfo.clearBlurField('lastName');
-        accountInfo.setFieldValue('lastName', input);
-        accountInfo.clickOutOfInputField();
-
-        // Assert
-        browser.percyScreenshot('f-account-info - illegal last name error message', device);
-    });
-
-    it('should display the illegal phone number error message immediately on click', () => {
-        // Arrange
-        const input = '123';
-
-        // Act
-        accountInfo.clearBlurField('phoneNumber');
-        accountInfo.setFieldValue('phoneNumber', input);
-        accountInfo.clickOutOfInputField();
-
-        // Assert
-        browser.percyScreenshot('f-account-info - illegal phone number error message', device);
-    });
-
-    it('should display invalid postcode error message immediately on click', () => {
-        // Arrange
-        const input = '123';
-        // Act
-        accountInfo.clearBlurField('postcode');
-        accountInfo.setFieldValue('postcode', input);
-        accountInfo.clickOutOfInputField();
-
-        // Assert
-        browser.percyScreenshot('f-account-info - illegal postcode error message', device);
+        browser.percyScreenshot(`f-account-info - illegal ${field} error message`, device);
     });
 });
