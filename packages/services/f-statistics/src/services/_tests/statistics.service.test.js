@@ -59,7 +59,7 @@ describe('f-statistics', () => {
             };
 
             // Act
-            const statisticsService = new StatisticsService();
+            const statisticsService = new StatisticsService(null, null, null, store);
 
             // Assert
             expect(statisticsService.basePayload).toEqual(expectedPayload);

@@ -1,3 +1,4 @@
+/* eslint-disable no-import-assign */
 import shouldPublishQueuedLogs from '../shouldPublishQueuedLogs';
 import publishQueue from '../publishQueue';
 import * as config from '../../../config';
@@ -20,7 +21,6 @@ describe('Statistics Store Logic ::', () => {
     describe('shouldPublishQueuedLogs ::', () => {
         it('should call publishQueue() when batch publishing is not enabled config.IS_BATCH_PUBLISHING_ENABLED', () => {
             // Arrange
-            // eslint-disable-next-line no-import-assign
             config.IS_BATCH_PUBLISHING_ENABLED = false;
             const queue = Array(1).fill(log);
             // Act
@@ -31,7 +31,6 @@ describe('Statistics Store Logic ::', () => {
         });
         it('should not call publishQueue() when batch publishing is enabled and the queue is empty', () => {
             // Arrange
-            // eslint-disable-next-line no-import-assign
             config.IS_BATCH_PUBLISHING_ENABLED = true;
             const queue = [];
             // Act
@@ -42,7 +41,6 @@ describe('Statistics Store Logic ::', () => {
         });
         it('should not publishQueue() when batch publishing is enabled and the queue is equal to config.BATCH_QUEUE_SIZE ', () => {
             // Arrange
-            // eslint-disable-next-line no-import-assign
             config.IS_BATCH_PUBLISHING_ENABLED = true;
             const queue = Array(5).fill(log);
             // Act
@@ -51,9 +49,5 @@ describe('Statistics Store Logic ::', () => {
             // Assert
             expect(publishQueue).toBeCalled();
         });
-    });
-
-    describe('startBatchPublishTimer ::', () => {
-
     });
 });

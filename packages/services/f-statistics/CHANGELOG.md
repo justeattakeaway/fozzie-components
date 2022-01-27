@@ -8,7 +8,7 @@ v1.0.0
 *January 25, 2022*
 
 ### Added
-- Ability to batch publish logs based on queue length and interval timer
+- Ability to batch publish logs using Vuex store based on queue length and interval timer
 
 
 v0.4.0

@@ -79,7 +79,7 @@ describe('Statistics Module ::', () => {
             it('should add to exisiting state.queue', () => {
                 // Arrange
                 state.queue = [log];
-                const expected = [log, log];
+                const expected = Array(2).fill(log);
                 // Act
                 statisticsModule.mutations[ADD_TO_PUBLISH_QUEUE](state, log);
 
@@ -91,7 +91,7 @@ describe('Statistics Module ::', () => {
         describe(`${CLEAR_PUBLISH_QUEUE} ::`, () => {
             it('should clear state.queue', () => {
                 // Arrange
-                state.queue = [log, log, log];
+                state.queue = Array(3).fill(log);
 
                 // Act
                 statisticsModule.mutations[CLEAR_PUBLISH_QUEUE](state);
