@@ -34,7 +34,7 @@ describe('f-account-info component tests', () => {
         .it('should display an error message immediately when %s input has been deleted', field => {
             // Act
             accountInfo.clearBlurField(field);
-            accountInfo.clickOutOfInputField();
+            accountInfo.tabOutOfField(field);
 
             // Assert
             expect(accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
@@ -42,15 +42,10 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal first name error message immediately on click', () => {
         // Arrange
-        const customerInput = {
-            firstName: {
-                input: '123'
-            }
-        };
-
+        const input = '123';
         // Act
         accountInfo.clearBlurField('firstName');
-        accountInfo.populateForm('firstName', customerInput);
+        accountInfo.setFieldValue('firstName', input);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -59,15 +54,11 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal last name error message immediately on click', () => {
         // Arrange
-        const customerInput = {
-            lastName: {
-                input: '123'
-            }
-        };
+        const input = '123';
 
         // Act
         accountInfo.clearBlurField('lastName');
-        accountInfo.populateForm('lastName', customerInput);
+        accountInfo.setFieldValue('lastName', input);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -76,15 +67,11 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal phone number error message immediately on click', () => {
         // Arrange
-        const customerInput = {
-            phoneNumber: {
-                input: '123'
-            }
-        };
+        const input = '123';
 
         // Act
         accountInfo.clearBlurField('phoneNumber');
-        accountInfo.populateForm('phoneNumber', customerInput);
+        accountInfo.setFieldValue('phoneNumber', input);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -93,15 +80,11 @@ describe('f-account-info component tests', () => {
 
     it('should display invalid postcode error message immediately on click', () => {
         // Arrange
-        const customerInput = {
-            postcode: {
-                input: '123'
-            }
-        };
+        const input = '123';
 
         // Act
         accountInfo.clearBlurField('postcode');
-        accountInfo.populateForm('postcode', customerInput);
+        accountInfo.setFieldValue('postcode', input);
         accountInfo.clickOutOfInputField();
 
         // Assert

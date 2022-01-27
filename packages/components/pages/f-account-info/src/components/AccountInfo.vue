@@ -4,8 +4,9 @@
             v-if="!shouldShowErrorPage"
             :card-heading="$t('accountDetails')"
             data-test-id="account-info"
-            has-outline
-            is-page-content-wrapper>
+            has-inner-spacing-large
+            :card-size-custom="'medium'"
+            has-outline>
             <h2
                 class="u-spacingBottom--large">
                 {{ $t('yourDetails') }}
@@ -194,11 +195,16 @@
 
             <delete-account />
         </f-card>
+
         <f-card-with-content
             v-else
             data-test-id="account-info-error-card"
             :card-heading="$t('errorMessages.errorHeading')"
-            :card-description="$t(error.messageKey)">
+            :card-description="$t(error.messageKey)"
+            has-inner-spacing-large
+            :card-size-custom="'medium'"
+            has-outline
+            :class="[$style['c-accountInfo-errorCard']]">
             <template #icon>
                 <bag-sad-bg-icon />
             </template>
@@ -404,5 +410,9 @@ export default {
 
 .c-accountInfo-changePasswordButton {
     margin-top: spacing(x2);
+}
+
+.c-accountInfo-errorCard {
+    margin-left: 0;
 }
 </style>

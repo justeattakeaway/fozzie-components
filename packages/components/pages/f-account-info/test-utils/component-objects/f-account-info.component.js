@@ -94,6 +94,17 @@ module.exports = class AccountInfo extends Page {
         return this.errorCardComponent.isDisplayed();
     }
 
+    /**
+    * @description
+    * Tab out of provided field
+    *
+    * @param {String} fieldName The name of the field to tab out of
+    */
+    tabOutOfField (fieldName) {
+        const el = this.fields[fieldName].input;
+        el.keys(['Tab']);
+    }
+
     clickOutOfInputField () {
         this.component.click();
     }

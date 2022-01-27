@@ -18,6 +18,7 @@
                 v-if="cardHeading"
                 :class="[
                     $style['c-card-heading'],
+                    cardHeadingSize,
                     { [$style[`c-card-heading--${cardHeadingPosition}Aligned`]]: cardHeadingPosition !== 'left' }
                 ]"
                 data-test-id="card-heading">
@@ -52,6 +53,11 @@ export default {
             type: String,
             default: 'h1',
             validator: value => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].indexOf(value) !== -1
+        },
+        cardHeadingSize: {
+            type: String,
+            default: '',
+            validator: value => ['', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'].indexOf(value) !== -1
         },
         hasOutline: {
             type: Boolean,

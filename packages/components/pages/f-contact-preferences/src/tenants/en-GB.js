@@ -1,8 +1,17 @@
 const messages = {
     errorMessages: {
-        errorHeading: 'Error',
-        pageLoad: {
+        loading: {
+            heading: 'Error',
             description: 'Sorry, there was a problem fetching your contact preferences. Please try again later.'
+        },
+        saving: {
+            heading: 'Something went wrong',
+            description: 'Your changes have not been saved, please try again.'
+        }
+    },
+    successMessages: {
+        saving: {
+            heading: 'Changes saved'
         }
     },
     heading: 'Contact Preferences',
