@@ -324,11 +324,6 @@ export default {
     margin: spacing(x2) 0 spacing(x4);
 }
 
-.c-formField-label,
-.c-formField-label-description {
-    margin-bottom: 0;
-}
-
 .c-contactPreferences-subtitle {
     @include font-size(heading-s);
 }
