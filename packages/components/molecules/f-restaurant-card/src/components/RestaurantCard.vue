@@ -4,8 +4,7 @@
         v-bind="data"
         :flags="flags"
         :wrapper-components="wrapperComponents"
-        :wrapper-component-props="wrapperComponentProps"
-    >
+        :data-point-wrappers="dataPointWrappers">
         <template
             v-for="(_, slotName) in $slots"
             v-slot:[slotName]>

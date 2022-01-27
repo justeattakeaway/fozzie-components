@@ -96,8 +96,8 @@
 
             <!-- misc tags -->
             <component
-                :is="'div'"
-                tier="3">
+                :is="getWrapperComponent('contentTags')"
+                v-bind="getWrapperComponentProps('contentTags')">
                 <restaurant-tags
                     v-if="hasContentTags"
                     :class="$style['c-restaurantCard-tags']"
@@ -260,10 +260,10 @@ export default {
     },
     methods: {
         getWrapperComponent (componentName) {
-            return this.wrapperComponents[this[componentName]?.wrapperComponent] || RenderlessSlotWrapper;
+            return this.wrapperComponents[this.dataPointWrappers[componentName]?.wrapperComponent] || RenderlessSlotWrapper;
         },
         getWrapperComponentProps (componentName) {
-            return this.wrapperComponentProps[componentName] || {};
+            return this.dataPointWrappers[componentName]?.wrapperProps || {};
         }
     }
 };
