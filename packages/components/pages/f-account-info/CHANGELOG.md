@@ -9,7 +9,7 @@ v0.16.0
 
 ### Updated
 - `component` and `visual` tests to take in functions from `f-wdio-utils` package.
-- - visual tests to dynamically change device type
+- visual tests to dynamically change device type
 
 
 v0.15.0
