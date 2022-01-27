@@ -7,6 +7,10 @@ let accountInfo;
 forEach(['desktop', 'mobile'])
 .describe('f-account-info - Visual Tests', device => {
     beforeEach(() => {
+        if (device === 'mobile') {
+            browser.setWindowSize(414, 731);
+        }
+
         accountInfo = new AccountInfo();
 
         accountInfo.load();
@@ -35,15 +39,11 @@ forEach(['desktop', 'mobile'])
 
     it('should display the illegal first name error message immediately on click', () => {
         // Arrange
-        const customerInput = {
-            firstName: {
-                input: '123'
-            }
-        };
+        const input = '123';
 
         // Act
         accountInfo.clearBlurField('firstName');
-        accountInfo.populateForm('firstName', customerInput);
+        accountInfo.setFieldValue('firstName', input);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -52,32 +52,24 @@ forEach(['desktop', 'mobile'])
 
     it('should display the illegal last name error message immediately on click', () => {
         // Arrange
-        const customerInput = {
-            lastName: {
-                input: '123'
-            }
-        };
+        const input = '123';
 
         // Act
         accountInfo.clearBlurField('lastName');
-        accountInfo.populateAccountForm('lastName', customerInput);
+        accountInfo.setFieldValue('lastName', input);
         accountInfo.clickOutOfInputField();
 
         // Assert
-        browser.percyScreenshot('f-account-info - illegal last name error message', PLATFORM);
+        browser.percyScreenshot('f-account-info - illegal last name error message', device);
     });
 
     it('should display the illegal phone number error message immediately on click', () => {
         // Arrange
-        const customerInput = {
-            phoneNumber: {
-                input: '123'
-            }
-        };
+        const input = '123';
 
         // Act
         accountInfo.clearBlurField('phoneNumber');
-        accountInfo.populateForm('phoneNumber', customerInput);
+        accountInfo.setFieldValue('phoneNumber', input);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -86,15 +78,10 @@ forEach(['desktop', 'mobile'])
 
     it('should display invalid postcode error message immediately on click', () => {
         // Arrange
-        const customerInput = {
-            postcode: {
-                input: '123'
-            }
-        };
-
+        const input = '123';
         // Act
         accountInfo.clearBlurField('postcode');
-        accountInfo.populateAccountForm('postcode', customerInput);
+        accountInfo.setFieldValue('postcode', input);
         accountInfo.clickOutOfInputField();
 
         // Assert
