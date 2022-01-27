@@ -72,7 +72,7 @@ describe('f-account-info component tests', () => {
         // Act
         accountInfo.clearBlurField('phoneNumber');
         accountInfo.setFieldValue('phoneNumber', input);
-        accountInfo.clickOutOfInputField();
+        accountInfo.tabOutOfField();
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
