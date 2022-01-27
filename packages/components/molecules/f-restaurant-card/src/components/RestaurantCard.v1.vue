@@ -85,8 +85,8 @@
 
             <!-- Meta Items List -->
             <component
-                :is="'div'"
-                tier="3">
+                :is="getWrapperComponent('deliveryTimeData')"
+                v-bind="getWrapperComponentProps('deliveryTimeData')">
                 <delivery-time-meta
                     v-if="displayDeliveryTimeMeta"
                     v-bind="deliveryTimeData"
