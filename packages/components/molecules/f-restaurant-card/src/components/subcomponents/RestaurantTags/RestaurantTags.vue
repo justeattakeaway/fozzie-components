@@ -1,14 +1,14 @@
 <template>
-    <div
+    <ul
         :class="[$style['c-restaurantTags']]"
         :data-test-id="`restaurant-${testIdPosition}-tags`">
-        <p
+        <li
             v-for="(tag, index) in tags"
             :key="index"
             :class="[$style['c-restaurantTags-tag']]">
             <restaurant-tag v-bind="tag" />
-        </p>
-    </div>
+        </li>
+    </ul>
 </template>
 
 <script>
@@ -48,6 +48,11 @@ export default {
 
     &:last-of-type {
         margin-right: 0;
+    }
+
+    &:before {
+        // needed to override & remove legacy fozzie <li> styling
+        content: none;
     }
 }
 </style>
