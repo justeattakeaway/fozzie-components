@@ -8,7 +8,8 @@ v0.15.1
 *January 27, 2022*
 
 ### Updated
--  `component`, `visual` and `a11y` tests to take in functions from `f-wdio-utils` package
+- `component` and `visual` tests to take in functions from `f-wdio-utils` package
+- - visual tests to dynamically change device type
 
 
 v0.15.0
