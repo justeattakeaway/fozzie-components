@@ -4,7 +4,9 @@ const {
     COMPONENT,
     ERROR_PAGE,
     SUBMIT_BUTTON,
-    CHECKBOXES
+    CHECKBOXES,
+    ERROR_ALERT,
+    SUCCESS_ALERT
 } = require('./selectors');
 
 module.exports = class ContactPreferences extends Page {
@@ -22,6 +24,10 @@ module.exports = class ContactPreferences extends Page {
 
     get newsSmsPreference () { return $(CHECKBOXES.news.sms); }
 
+    get errorAlert () { return $(ERROR_ALERT); }
+
+    get successAlert () { return $(SUCCESS_ALERT); }
+
     load () {
         super.load(this.component);
     }
@@ -36,6 +42,14 @@ module.exports = class ContactPreferences extends Page {
 
     isErrorPageDisplayed () {
         return this.errorPage.isDisplayed();
+    }
+
+    isErrorAlertDisplayed () {
+        return this.errorAlert.isDisplayed();
+    }
+
+    isSuccessAlertDisplayed () {
+        return this.successAlert.isDisplayed();
     }
 
     clickSubmitButton () {

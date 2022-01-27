@@ -381,13 +381,21 @@ jobs:
       - checkout
       - restore_cache_dist_directories
       - install_node_dependencies
-      - run: # Run PR Checks
-         name: Run PR Checks
-         command: yarn danger ci
       - persist_to_workspace:
           root: .
           paths:
             - '*'
+      - slack_notify_fail
+      - slack_notify_success
+
+  danger-checks:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run: # Run PR Checks
+         name: Run PR Checks
+         command: yarn danger ci --failOnErrors
       - slack_notify_fail
       - slack_notify_success
 
@@ -486,6 +494,20 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
+  publish-to-npm:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Auth With NPM
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
+      - run:
+          name: Publish unreleased package versions to npm
+          command: npx lerna publish from-package --ignore-scripts --yes
+      - slack_notify_fail
+      - slack_notify_success
+
 workflows:
   version: 2
 
@@ -496,6 +518,14 @@ workflows:
           filters:
             branches:
               ignore: [ 'gh-pages' ]
+      - danger-checks:
+          name: danger-checks
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - install
       - build:
           name: build
           context: web-core
@@ -503,7 +533,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - install
+            - danger-checks
       - bundlewatch:
           name: bundlewatch
           context: web-core
@@ -532,6 +562,16 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - unit-tests-<< matrix.component_type >>
+      - publish-to-npm:
+          context: web-core
+          filters:
+            branches:
+              only: master
+          requires:
+            - browser-tests-atoms
+            - browser-tests-molecules
+            - browser-tests-organisms
+            - browser-tests-pages
 
   deploy-storybook:
     jobs:

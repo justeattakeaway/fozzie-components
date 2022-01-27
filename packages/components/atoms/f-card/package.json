@@ -1,12 +1,15 @@
 {
   "name": "@justeat/f-card",
   "description": "Fozzie Card Component – Used for providing wrapper card styling to an element (or group of elements)",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "main": "dist/f-card.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-card",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"

@@ -3,7 +3,7 @@
         data-test-id="contact-preferences"
         :class="$style['c-contactPreferences']">
         <card-component
-            v-if="!shouldShowErrorPage"
+            v-if="!shouldShowLoadErrorCard"
             :card-heading="$t('heading')"
             has-inner-spacing-large
             :card-size-custom="'medium'"
@@ -21,6 +21,7 @@
                         <f-form-field
                             :class="$style['c-contactPreferences-formField']"
                             input-type="checkbox"
+                            is-grouped
                             :label-text=" $t(`${key}.email`)"
                             :label-description="getEmailDescription(key)"
                             :disabled="!isEmailEnabled"
@@ -33,6 +34,7 @@
                         <f-form-field
                             :class="$style['c-contactPreferences-formField']"
                             input-type="checkbox"
+                            is-grouped
                             :label-text=" $t(`${key}.sms`)"
                             :label-description="getSmsDescription(key)"
                             :disabled="!isSmsEnabled"
@@ -44,8 +46,31 @@
                     </fieldset>
                 </div>
 
+                <f-alert
+                    v-if="shouldShowSaveErrorAlert"
+                    data-test-id="contact-preferences-error-alert"
+                    :class="[
+                        $style['c-contactPreferences-alert'],
+                        $style['c-contactPreferences-inheritWidthAboveNarrow']
+                    ]"
+                    type="danger"
+                    :heading="$t('errorMessages.saving.heading')">
+                    {{ $t(error.messageKey) }}
+                </f-alert>
+
+                <f-alert
+                    v-if="shouldShowSuccessfulAlert"
+                    data-test-id="contact-preferences-success-alert"
+                    :class="[
+                        $style['c-contactPreferences-alert'],
+                        $style['c-contactPreferences-inheritWidthAboveNarrow']
+                    ]"
+                    type="success"
+                    :heading="$t('successMessages.saving.heading')"
+                />
+
                 <f-button
-                    :class="$style['c-contactPreferences-btn']"
+                    :class="$style['c-contactPreferences-inheritWidthAboveNarrow']"
                     data-test-id="contact-preferences-submit-button"
                     button-type="primary"
                     action-type="submit"
@@ -55,20 +80,15 @@
             </form>
         </card-component>
 
-        <div v-else>
-            <card-component
-                data-test-id="contact-preferences-error-card"
-                has-outline
-                is-page-content-wrapper
-                card-heading-position="center">
-                <h1>
-                    {{ $t('errorMessages.errorHeading') }}
-                </h1>
-                <p>
-                    {{ $t(error.messageKey) }}
-                </p>
-            </card-component>
-        </div>
+        <f-card-with-content
+            v-else
+            data-test-id="contact-preferences-error-card"
+            :card-heading="$t('errorMessages.loading.heading')"
+            :card-description="$t(error.messageKey)">
+            <template #icon>
+                <bag-sad-bg-icon />
+            </template>
+        </f-card-with-content>
     </div>
 </template>
 
@@ -83,23 +103,33 @@ import FFormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+import FCardWithContent from '@justeat/f-card-with-content';
+import '@justeat/f-card-with-content/dist/f-card-with-content.css';
+import FAlert from '@justeat/f-alert';
+import '@justeat/f-alert/dist/f-alert.css';
+import { BagSadBgIcon } from '@justeat/f-vue-icons';
 
 // Internal
 import tenantConfigs from '../tenants';
-import { GetPreferencesError } from '../exceptions';
+import PreferencesError from '../exceptions/preferencesError';
 import ContactPreferencesApi from '../services/providers/contactPreferences.api';
 import fContactPreferencesModule from '../store/contactPreferences.module';
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
 
+const standardLogTags = ['account-pages', 'contact-preferences'];
+
 export default {
     name: 'ContactPreferences',
 
     components: {
         CardComponent,
+        FCardWithContent,
         FButton,
-        FFormField
+        FAlert,
+        FFormField,
+        BagSadBgIcon
     },
 
     mixins: [VueGlobalisationMixin],
@@ -123,7 +153,9 @@ export default {
         return {
             isFormDirty: false,
             error: {},
-            shouldShowErrorPage: false,
+            shouldShowLoadErrorCard: false,
+            shouldShowSaveErrorAlert: false,
+            shouldShowSuccessfulAlert: false,
             tenantConfigs,
             contactPreferencesApi: new ContactPreferencesApi({
                 httpClient: this.$http,
@@ -164,6 +196,12 @@ export default {
             'editPreference'
         ]),
 
+        setFormDirtyState (isDirty) {
+            this.isFormDirty = isDirty;
+            this.shouldShowSaveErrorAlert = false;
+            this.shouldShowSuccessfulAlert = !isDirty;
+        },
+
         /**
         * Returns translation string if it exists
         * @param {string} key - The key of the preference that needs changing
@@ -185,12 +223,21 @@ export default {
         },
 
         /**
-        * Informs the template that we are in an Error State.
-        * @param {object} Error - The error that has recently occurred
+        * Informs the template that we are in Load Error State.
+        * @param {object} error - The error that has recently occurred
         */
-        handleErrorState (error) {
-            this.shouldShowErrorPage = true;
-            this.error = error;
+        handleLoadErrorState (error) {
+            this.shouldShowLoadErrorCard = true;
+            this.error = new PreferencesError(error?.message, error?.response?.status, 'errorMessages.loading.description');
+        },
+
+        /**
+        * Informs the template that we failed to save.
+        * @param {object} error - The error that has recently occurred
+        */
+        handleSaveErrorState (error) {
+            this.shouldShowSaveErrorAlert = true;
+            this.error = new PreferencesError(error?.message, error?.response?.status, 'errorMessages.saving.description');
         },
 
         /**
@@ -201,7 +248,7 @@ export default {
         */
         editPreferenceValue (key, field, value) {
             this.editPreference({ key, field, value });
-            this.isFormDirty = true;
+            this.setFormDirtyState(true);
         },
 
         /**
@@ -223,11 +270,10 @@ export default {
         async initialise () {
             try {
                 await this.loadPreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
-                this.$log.info('Account preferences fetched successfully', ['account-pages', 'contact-preferences']);
-                this.isFormDirty = false;
+                this.$log.info('Account preferences fetched successfully', standardLogTags);
             } catch (error) {
-                this.$log.error('Error fetching account preferences', error, ['account-pages', 'contact-preferences']);
-                this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
+                this.$log.error('Error fetching account preferences', error, standardLogTags);
+                this.handleLoadErrorState(error);
             } finally {
                 this.$nextTick(() => {
                     this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
@@ -254,11 +300,11 @@ export default {
 
             try {
                 await this.savePreferences({ api: this.contactPreferencesApi, authToken: this.authToken });
-                this.$log.info('Account preferences saved successfully', ['account-pages', 'contact-preferences']);
-                this.isFormDirty = false;
+                this.$log.info('Account preferences saved successfully', standardLogTags);
+                this.setFormDirtyState(false);
             } catch (error) {
-                this.$log.error('Error saving account preferences', error, ['account-pages', 'contact-preferences']);
-                this.handleErrorState(new GetPreferencesError(error.message, error?.response?.status));
+                this.$log.error('Error saving account preferences', error, standardLogTags);
+                this.handleSaveErrorState(error);
             } finally {
                 this.setSubmittingState(false);
             }
@@ -297,11 +343,15 @@ export default {
     }
 }
 
-.c-contactPreferences-btn {
+.c-contactPreferences-inheritWidthAboveNarrow {
     width: 100%;
 
     @include media('>narrow') {
         width: inherit;
     }
+}
+
+.c-contactPreferences-alert {
+    margin: 0 0 spacing(x4);
 }
 </style>

@@ -17,7 +17,9 @@
                     <arrow-icon :class="$style['c-countrySelector-goBackIcon']" />
                 </f-button>
 
-                <h3>{{ copy.selectYourCountryText }}</h3>
+                <h3 id="selectYourCountry">
+                    {{ copy.selectYourCountryText }}
+                </h3>
             </header>
 
             <ul
@@ -25,7 +27,8 @@
                     $style['c-nav-popoverList'],
                     $style['c-nav-popoverList--twoColumns']
                 ]"
-                data-test-id="countrySelector-list">
+                data-test-id="countrySelector-list"
+                aria-labelledby="selectYourCountry">
                 <li
                     v-for="(country) in countries"
                     :key="country.key"

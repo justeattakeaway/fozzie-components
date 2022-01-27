@@ -10,6 +10,9 @@
     "dist",
     "icons"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": false,
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/tools/f-vue-icons",
   "contributors": [

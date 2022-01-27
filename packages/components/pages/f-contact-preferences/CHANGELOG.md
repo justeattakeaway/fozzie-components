@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.13.0
+------------------------------
+*January 21, 2022*
+
+### Added
+- Alerts for failed and successful saving and new design for fail to load error page.
+
+
 v0.12.1
 ------------------------------
 *January 5, 2022*

@@ -1,12 +1,15 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "main": "dist/f-alert.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-alert",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"

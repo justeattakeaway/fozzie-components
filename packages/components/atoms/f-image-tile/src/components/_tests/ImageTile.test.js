@@ -62,43 +62,100 @@ describe('ImageTile', () => {
                 // Assert
                 expect(label.attributes('for')).toContain(propsData.tileId);
             });
+        });
 
-            describe('imgSrc :: ', () => {
-                it('should apply `tileId` to the label for', () => {
-                    // Arrange
-                    const propsData = { imgSrc: 'https://via.placeholder.com/150' };
+        describe('imgSrc :: ', () => {
+            it('should apply `imgSrc` to the image src', () => {
+                // Arrange
+                const propsData = { imgSrc: 'https://via.placeholder.com/150' };
 
-                    // Act
-                    const wrapper = shallowMount(ImageTile, {
-                        propsData
-                    });
-
-                    const image = wrapper.find('[data-test-id="image-tile-image"]');
-
-                    // Assert
-                    expect(image.attributes('src')).toContain(propsData.imgSrc);
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
                 });
+
+                const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+                // Assert
+                expect(image.attributes('src')).toContain(propsData.imgSrc);
             });
 
-            describe('isSelected :: ', () => {
-                const isSelectedTrue = true;
-                const isSelectedFalse = false;
+            it('should not have an image if the `imgSrc` is empty', () => {
+                // Arrange
+                const propsData = { imgSrc: '' };
 
-                it.each([
-                    [true, isSelectedTrue],
-                    [false, isSelectedFalse]
-                ])('should update `isToggleSelected` %s when set to %s', (expectedValue, isSelected) => {
-                    // Arrange
-                    const propsData = { isSelected };
-
-                    // Act
-                    const wrapper = shallowMount(ImageTile, {
-                        propsData
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
                 });
+
+                const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+                // Assert
+                expect(image.exists()).toBe(false);
+            });
+        });
+
+        describe('isSelected :: ', () => {
+            const isSelectedTrue = true;
+            const isSelectedFalse = false;
+
+            it.each([
+                [true, isSelectedTrue],
+                [false, isSelectedFalse]
+            ])('should update `isToggleSelected` %s when set to %s', (expectedValue, isSelected) => {
+                // Arrange
+                const propsData = { isSelected };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
+            });
+        });
+    });
+
+    describe('computed :: ', () => {
+        describe('isPresentationRole :: ', () => {
+            it.each([
+                [false, 'this is some alt text', undefined],
+                [true, '', 'presentation']
+            ])('should return %s if alt text is %s', (expected, altText, role) => {
+                // Arrange
+                const propsData = {
+                    altText, imgSrc: 'https://via.placeholder.com/150'
+                };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+                // Assert
+                expect(wrapper.vm.isPresentationRole).toEqual(expected);
+                expect(image.attributes('role')).toEqual(role);
+            });
+        });
+
+        describe('cssVars :: ', () => {
+            it('should return fallbackImage as a css variable', () => {
+                // Arrange
+                const propsData = { fallbackImage: 'https://via.placeholder.com/150' };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const expected = { '--bg-image': 'url("https://via.placeholder.com/150")' };
+
+                // Assert
+                expect(wrapper.vm.cssVars).toEqual(expected);
             });
         });
     });

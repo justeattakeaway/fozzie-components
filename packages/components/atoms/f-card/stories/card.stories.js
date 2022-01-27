@@ -23,6 +23,7 @@ export const CardComponent = (args, { argTypes }) => ({
             :card-heading="cardHeading"
             :card-heading-position="cardHeadingPosition"
             :card-heading-tag="cardHeadingTag"
+            :card-heading-size="cardHeadingSize"
             :card-size-custom="cardSizeCustom"
             :has-outline="hasOutline"
             :is-page-content-wrapper="isPageContentWrapper"
@@ -39,6 +40,7 @@ CardComponent.args = {
     cardHeading: 'My Card Heading',
     cardHeadingPosition: 'left',
     cardHeadingTag: 'h1',
+    cardHeadingSize: '',
     hasOutline: false,
     isPageContentWrapper: false,
     hasFullWidthFooter: false,
@@ -52,6 +54,13 @@ CardComponent.argTypes = {
     },
     cardHeadingTag: {
         control: { type: 'select', options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }
+    },
+    cardHeadingSize: {
+        control: {
+            type: 'select',
+            options: ['alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta'],
+            defaultValue: ''
+        }
     },
     cardSizeCustom: {
         control: { type: 'select', options: ['medium', 'large'] }

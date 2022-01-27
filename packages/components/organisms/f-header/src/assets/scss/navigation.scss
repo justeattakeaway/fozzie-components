@@ -132,6 +132,19 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
+.c-nav-list-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+
+    @include media('<=mid') {
+        width: 100%;
+        text-align: left;
+    }
+}
+
 .c-nav-list-icon--flag {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
