@@ -168,9 +168,19 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     width: 15px;
 }
 
+@mixin image-tile-focus() {
+    outline: 2px solid $color-focus;
+    border-radius: $radius-rounded-b;
+}
+
 .c-imageTile {
     position: relative;
     width: 100%;
+
+    &:focus-within,
+    &:focus-visible {
+        @include image-tile-focus();
+    }
 }
 
 .c-imageTile-link {
@@ -179,17 +189,26 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     left: 0;
     right: 0;
     bottom: 0;
+
+    &:focus {
+        @include image-tile-focus();
+    }
 }
 
 .c-imageTile-link--toggle {
     display: block;
     position: static;
     pointer-events: none;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .c-imageTile-label {
     display: flex;
     flex-flow: column wrap;
+    border-radius: $radius-rounded-b; // focus styles in safari
 }
 
 .c-imageTile-imageContainer {
@@ -275,6 +294,5 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
         }
     }
 }
-
 </style>
 
