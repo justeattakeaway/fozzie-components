@@ -8,7 +8,7 @@ v5.11.0
 *January 27, 2022*
 
 ### Updated
-- `test/shared.config` added additional filename `test/visual/*.visual.spec.js` testType array.
+- `test/shared.config` added additional filename `test/visual/*.visual.spec.js` to testType array.
 
 
 v5.10.1
