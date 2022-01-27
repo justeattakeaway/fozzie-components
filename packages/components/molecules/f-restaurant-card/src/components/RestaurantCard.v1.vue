@@ -37,27 +37,24 @@
             </h3>
 
             <!-- Cuisines -->
-            <!-- START ERROR BOUNDARY -->
             <component
-                :is="errorBoundary"
+                :is="'div'"
                 tier="3">
                 <restaurant-cuisines
                     v-if="cuisines.length > 0"
                     data-test-id="restaurant-cuisines"
                     :cuisines="cuisines" />
             </component>
-            <!-- END ERROR BOUNDARY -->
 
-            <!-- Local Legend Logo -->
+            <!-- Premier Icon -->
             <legend-icon
                 v-if="isPremier"
                 :class="[$style['c-restaurantCard-premier']]"
                 data-test-id="premier-icon" />
 
             <!-- New label -->
-            <!-- START ERROR BOUNDARY -->
             <component
-                :is="errorBoundary"
+                :is="'div'"
                 tier="3">
                 <!-- TODO - we want to translate this within the component using i18n.
                 For now we'll just need to pass down a translated string from the consuming site -->
@@ -68,10 +65,8 @@
                     :text="newTagText"
                     color-scheme="positive" />
             </component>
-            <!-- END ERROR BOUNDARY -->
 
             <!-- Ratings -->
-            <!-- START ERROR BOUNDARY -->
             <!-- todo add v-if so null ratings dont show empty star with no text -->
             <component
                 :is="getWrapperComponent('rating')"
@@ -80,53 +75,35 @@
                     data-test-id="restaurant-rating"
                     v-bind="rating" />
             </component>
-            <!-- END ERROR BOUNDARY -->
 
             <!-- Offline Icon -->
 
             <!-- Meta Items List -->
-            <p>TEST 2</p>
-            <!-- START ERROR BOUNDARY -->
             <component
-                :is="errorBoundary"
+                :is="'div'"
                 tier="3">
-                <slot name="meta-items" />
-
                 <delivery-time-meta
                     v-if="displayDeliveryTimeMeta"
                     v-bind="deliveryTimeData"
                     data-test-id="restaurant-delivery-time-meta" />
             </component>
-            <!-- END ERROR BOUNDARY -->
 
+            <!-- Fees -->
             <restaurant-fees
                 v-if="hasFees"
                 v-bind="fees"
                 data-test-id="restaurant-fees" />
 
-            <!-- Tags -->
-            <div>
-                <!-- misc tags -->
-                <!-- START ERROR BOUNDARY -->
-                <component
-                    :is="errorBoundary"
-                    tier="3">
-                    <restaurant-tags
-                        v-if="hasContentTags"
-                        :class="$style['c-restaurantCard-tags']"
-                        :test-id-position="'inner-content'"
-                        :tags="tags.contentTags" />
-                </component>
-                <!-- END ERROR BOUNDARY -->
-            </div>
-            <!-- Optional items i.e. dish search results -->
-            <!-- START ERROR BOUNDARY -->
+            <!-- misc tags -->
             <component
-                :is="errorBoundary"
+                :is="'div'"
                 tier="3">
-                <slot name="optional-items" />
+                <restaurant-tags
+                    v-if="hasContentTags"
+                    :class="$style['c-restaurantCard-tags']"
+                    :test-id-position="'inner-content'"
+                    :tags="tags.contentTags" />
             </component>
-            <!-- END ERROR BOUNDARY -->
 
             <!-- Offers -->
             <icon-text
@@ -138,7 +115,7 @@
             </icon-text>
         </div>
 
-        <!-- optional items -->
+        <!-- Dishes -->
         <restaurant-dishes
             v-if="!disabled && hasDishes"
             data-test-id="restaurant-dishes"
@@ -151,7 +128,7 @@
 <script>
 /* eslint-disable no-console */
 import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
-import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
+import wrapperComponents from '../assets/vue/mixins/wrapperComponents.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
 import RestaurantDishes from './subcomponents/RestaurantDishes/RestaurantDishes.vue';
@@ -162,7 +139,7 @@ import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 import IconText from './subcomponents/IconText.vue';
 import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
-// import RenderlessComponent from './renderlessComponent.vue';x
+import RenderlessSlotWrapper from './RenderlessSlotWrapper';
 
 export default {
     name: 'RestaurantCardV1',
@@ -178,9 +155,10 @@ export default {
         IconText,
         OfferIcon,
         LegendIcon,
-        RestaurantFees
+        RestaurantFees,
+        RenderlessSlotWrapper
     },
-    mixins: [ErrorBoundaryMixin],
+    mixins: [wrapperComponents],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
         id: {
@@ -251,14 +229,6 @@ export default {
         fees: {
             type: Object,
             default: () => {}
-        },
-        wrapperComponents: {
-            type: Object,
-            default: () => ({})
-        },
-        wrapperComponentProps: {
-            type: Object,
-            default: () => ({})
         }
     },
     computed: {
@@ -290,7 +260,7 @@ export default {
     },
     methods: {
         getWrapperComponent (componentName) {
-            return this.wrapperComponents[this[componentName]?.wrapperComponent] || 'div';
+            return this.wrapperComponents[this[componentName]?.wrapperComponent] || RenderlessSlotWrapper;
         },
         getWrapperComponentProps (componentName) {
             return this.wrapperComponentProps[componentName] || {};

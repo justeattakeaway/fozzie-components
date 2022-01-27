@@ -3,7 +3,6 @@
         :is="componentVersion"
         v-bind="data"
         :flags="flags"
-        :error-boundary="errorBoundary"
         :wrapper-components="wrapperComponents"
         :wrapper-component-props="wrapperComponentProps"
     >
@@ -17,11 +16,11 @@
 
 <script>
 import restaurantCardVersions from './restaurantCardVersions';
-import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
+import wrapperComponents from '../assets/vue/mixins/wrapperComponents.mixin';
 
 export default {
     name: 'RestaurantCard',
-    mixins: [ErrorBoundaryMixin],
+    mixins: [wrapperComponents],
     props: {
         // restaurant & display data
         data: {
@@ -37,14 +36,6 @@ export default {
         version: {
             type: String,
             default: 'v1'
-        },
-        wrapperComponents: {
-            type: Object,
-            default: () => ({})
-        },
-        wrapperComponentProps: {
-            type: Object,
-            default: () => ({})
         }
     },
     computed: {
