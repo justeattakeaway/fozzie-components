@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.1.1
 ------------------------------
-*January 25, 2022*
+*January 27, 2022*
 
 ### Changed
 - `component` and `visual` tests to take in functions from `f-wdio-utils` package.
