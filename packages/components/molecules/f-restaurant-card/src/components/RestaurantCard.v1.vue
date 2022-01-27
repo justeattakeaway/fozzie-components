@@ -19,11 +19,16 @@
                 :class="$style['c-restaurantCard-logo']"
                 :logo-url="logoUrl" />
             <!-- Tags inside image container -->
-            <restaurant-tags
-                v-if="hasImageTags"
-                :class="$style['c-restaurantCard-imageTags']"
-                :test-id-position="'main-image'"
-                :tags="tags.imageTags" />
+            <component
+                :is="getWrapperComponent('imageTags')"
+                v-bind="getWrapperComponentProps('imageTags')">
+                <restaurant-tags
+                    v-if="hasImageTags"
+                    :class="$style['c-restaurantCard-imageTags']"
+                    :test-id-position="'main-image'"
+                    :tags="tags.imageTags" />
+            </component>
+
         </restaurant-image>
 
         <!-- primary content -->
@@ -106,13 +111,17 @@
             </component>
 
             <!-- Offers -->
-            <icon-text
-                v-if="hasOffer"
-                data-test-id="restaurant-offer"
-                :text="offer"
-                is-bold>
-                <offer-icon />
-            </icon-text>
+            <component
+                :is="getWrapperComponent('offer')"
+                v-bind="getWrapperComponentProps('offer')">
+                <icon-text
+                    v-if="hasOffer"
+                    data-test-id="restaurant-offer"
+                    :text="offer"
+                    is-bold>
+                    <offer-icon />
+                </icon-text>
+            </component>
         </div>
 
         <!-- Dishes -->
