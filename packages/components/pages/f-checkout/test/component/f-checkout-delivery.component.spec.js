@@ -73,7 +73,7 @@ describe('f-checkout "delivery" component tests', () => {
                 checkout.loadAgeVerification();
             });
 
-            it.only('should display the age verification', () => {
+            it('should display the age verification', () => {
                 // Assert
                 expect(checkout.isAgeVerificationDisplayed()).toBe(true);
             });

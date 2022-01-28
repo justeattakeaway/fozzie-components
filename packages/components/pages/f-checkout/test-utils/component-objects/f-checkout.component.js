@@ -1,5 +1,4 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-
 const {
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
