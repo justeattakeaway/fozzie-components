@@ -3,6 +3,8 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout = new Checkout();
 let checkoutInfo;
 
+const illegalMobileNumber = '123';
+
 describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
@@ -34,11 +36,8 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        const mobileNumber = '123';
-
         // Act
-        checkout.setFieldValue('mobileNumber', mobileNumber);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -59,8 +58,6 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
             .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
 
-        checkout.load();
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -68,8 +65,10 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
             mobileNumber: '07234567890'
         };
 
-        // Act
         checkout.expectedCustomerInfo = customerInfo;
+
+        // Act
+        checkout.load();
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -128,6 +127,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
         // Act
         checkout.load();
+        checkout.waitForComponent();
     });
 
     it('should display the delivery f-checkout component guest base state.', () => {
@@ -144,11 +144,8 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        const mobileNumber = '123';
-
         // Act
-        checkout.setFieldValue('mobileNumber', mobileNumber);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -169,8 +166,6 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
             .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
 
-        checkout.load();
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -181,8 +176,10 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
             addressPostcode: 'W1D 4HT'
         };
 
-        // Act
         checkout.expectedCustomerInfo = customerInfo;
+
+        // Act
+        checkout.load();
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -258,11 +255,8 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        const mobileNumber = '123';
-
         // Act
-        checkout.setFieldValue('mobileNumber', mobileNumber);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -291,9 +285,10 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
             tableIdentifier: '10'
         };
 
+        checkout.expectedCustomerInfo = customerInfo;
+
         // Act
         checkout.load();
-        checkout.expectedCustomerInfo = customerInfo;
         checkout.setFieldValues();
         checkout.goToPayment();
 

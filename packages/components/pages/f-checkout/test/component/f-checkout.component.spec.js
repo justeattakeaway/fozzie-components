@@ -9,6 +9,7 @@ const orderTime = 'Wednesday 01:45';
 
 describe('f-checkout component tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout();
         checkoutInfo = {
             serviceType: 'delivery',
@@ -18,14 +19,15 @@ describe('f-checkout component tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', true);
 
+        // Act
         checkout.load();
     });
 
     it('should submit the checkout form', () => {
         // Arrange
-        const input = 'Doorbell is broken';
+        const orderNote = 'Doorbell is broken';
         // Act
-        checkout.setFieldValue('orderNote', input);
+        checkout.setFieldValue('orderNote', orderNote);
         checkout.selectOrderTime(orderTime);
         checkout.goToPayment();
 
@@ -87,7 +89,7 @@ describe('f-checkout component tests', () => {
 
         it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
             // Act
-            checkout.waitForComponent(checkout.component);
+            checkout.waitForComponent();
             checkout.clickRetryButton();
 
             // Assert
@@ -97,7 +99,7 @@ describe('f-checkout component tests', () => {
 
         it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
             // Act
-            checkout.waitForComponent(checkout.component);
+            checkout.waitForComponent();
             checkout.clickDupOrderGoToHistoryButton();
 
             // Assert

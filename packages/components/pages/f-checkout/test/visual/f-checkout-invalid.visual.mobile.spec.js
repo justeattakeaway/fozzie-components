@@ -21,6 +21,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
         // Act
         checkout.loadError();
+        checkout.waitForErrorPageComponent();
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout" Error Page', 'mobile');
@@ -42,6 +43,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
         // Act
         checkout.loadError();
+        checkout.waitForErrorPageComponent();
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'mobile');

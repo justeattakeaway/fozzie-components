@@ -3,6 +3,8 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 let checkoutInfo;
 
+const illegalMobileNumber = '123';
+
 describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
@@ -16,6 +18,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
 
+        // Act
         checkout.load();
     });
 
@@ -79,12 +82,9 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        const input = '123';
-
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -170,11 +170,11 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the illegal postcode error message', () => {
         // Arrange
-        const input = 'TEST1A';
+        const addressPostcode = 'TEST1A';
 
         // Act
         checkout.clearBlurField('addressPostcode');
-        checkout.setFieldValue('addressPostcode', input);
+        checkout.setFieldValue('addressPostcode', addressPostcode);
         checkout.goToPayment();
 
         // Assert
@@ -182,12 +182,9 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        const input = '123';
-
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -272,12 +269,9 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        const input = '123';
-
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.setFieldValue('mobileNumber', input);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -360,7 +354,9 @@ describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Vi
                     .withQuery('&knob-Locale', checkoutInfo.locale)
                     .withQuery('&knob-Restrictions', checkoutInfo.restrictions);
 
+        // Act
         checkout.loadAgeVerification();
+        checkout.ageVerificationComponent.waitForExist(1000);
     });
 
     it('should display the age verification page', () => {
