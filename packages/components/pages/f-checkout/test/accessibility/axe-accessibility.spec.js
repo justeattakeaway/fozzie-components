@@ -137,7 +137,10 @@ describe('Accessibility tests', () => {
             mobileNumber: '+447111111111'
         };
 
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+
+        // Act
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -175,7 +178,10 @@ describe('Accessibility tests', () => {
             addressLocality: 'Bristol',
             addressPostcode: 'BS1 1AA'
         };
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+
+        // Act
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -211,7 +217,10 @@ describe('Accessibility tests', () => {
             mobileNumber: '+447111111111',
             tableIdentifier: '1'
         };
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+
+        // Act
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -241,7 +250,10 @@ describe('Accessibility tests', () => {
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111'
         };
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+
+        // Act
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -274,7 +286,10 @@ describe('Accessibility tests', () => {
             addressLocality: 'Bristol',
             addressPostcode: 'BS1 1AA'
         };
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+
+        // Act
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -297,7 +312,6 @@ describe('Accessibility tests', () => {
 
         checkout.load();
 
-        // Act
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -305,7 +319,10 @@ describe('Accessibility tests', () => {
             mobileNumber: '+447111111111',
             tableIdentifier: '1'
         };
-        Object.keys(customerInfo).forEach(field => checkout.setFieldValue(field, customerInfo[field]));
+        checkout.expectedCustomerInfo = customerInfo;
+
+        // Act
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
