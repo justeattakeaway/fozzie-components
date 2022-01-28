@@ -202,7 +202,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     pointer-events: none;
 
     &:focus {
-        outline: none;
+        outline: none; // Focus styles not needed in toggle state.
     }
 }
 
@@ -211,7 +211,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     flex-flow: column wrap;
 
     &:focus {
-        outline: none;
+        outline: none; // Prevents Safari doubling focus styles.
     }
 }
 
