@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Vuex from 'vuex';
 import Vue from 'vue';
 
@@ -23,6 +24,12 @@ const defaultMutations = {};
 
 const options = {
     namespace: 'f-statistics'
+};
+const basePayload = {
+    je_feature: 'f-statistics',
+    je_logType: 'client-stats',
+    je_environment: 'test',
+    je_feature_for: 'Generic Front End'
 };
 
 const createStore = ({
@@ -52,5 +59,6 @@ export {
     defaultActions,
     createStore,
     options,
-    log
+    log,
+    basePayload
 };
