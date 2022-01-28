@@ -169,8 +169,8 @@ module.exports = class Checkout extends Page {
         super.waitForComponent(component);
     }
 
-    waitForErrorPageComponent (timeout) {
-        super.waitForComponent(this.errorPageComponent, timeout);
+    waitForErrorPageComponent () {
+        super.waitForComponent(this.errorPageComponent);
     }
 
     waitForAgeVerificationComponent () {
