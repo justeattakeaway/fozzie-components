@@ -323,8 +323,6 @@ describe('ContactPreferences Component', () => {
             // Assert
             expect(wrapper.vm.shouldShowSaveErrorAlert).toEqual(false);
             expect(wrapper.vm.shouldShowSuccessfulAlert).toEqual(true);
-            const element = wrapper.find('[data-test-id="contact-preferences-success-alert"]');
-            expect(element.exists()).toEqual(true);
         });
 
         it('should not call the save action if no changes', async () => {
@@ -356,8 +354,6 @@ describe('ContactPreferences Component', () => {
             // Assert
             expect(wrapper.vm.shouldShowSaveErrorAlert).toEqual(true);
             expect(wrapper.vm.shouldShowSuccessfulAlert).toEqual(false);
-            const element = wrapper.find('[data-test-id="contact-preferences-error-alert"]');
-            expect(element.exists()).toEqual(true);
         });
 
         it('should log an error message if saving preferences throws an error', async () => {
