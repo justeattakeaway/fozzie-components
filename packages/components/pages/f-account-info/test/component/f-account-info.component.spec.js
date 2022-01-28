@@ -4,6 +4,8 @@ const AccountInfo = require('../../test-utils/component-objects/f-account-info.c
 
 let accountInfo;
 
+const illegalInput = '123';
+
 describe('f-account-info component tests', () => {
     beforeEach(() => {
         accountInfo = new AccountInfo();
@@ -40,18 +42,43 @@ describe('f-account-info component tests', () => {
         expect(accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
     });
 
-    forEach(['firstName', 'lastName', 'phoneNumber', 'postcode'])
-    .it('should display the illegal %s error message immediately on click', field => {
-        // Arrange
-        const illegalInput = '123';
-
+    it('should display the illegal first name error message immediately on click', () => {
         // Act
-        accountInfo.clearBlurField(field);
-        accountInfo.setFieldValue(field, illegalInput);
+        accountInfo.clearBlurField('firstName');
+        accountInfo.setFieldValue('firstName', illegalInput);
         accountInfo.clickOutOfInputField();
-        accountInfo.waitForComponent();
 
         // Assert
-        expect(accountInfo.isInvalidErrorMessageDisplayed(field)).toBe(true);
+        expect(accountInfo.isInvalidErrorMessageDisplayed('firstName')).toBe(true);
+    });
+
+    it('should display the illegal last name error message immediately on click', () => {
+        // Act
+        accountInfo.clearBlurField('lastName');
+        accountInfo.setFieldValue('lastName', illegalInput);
+        accountInfo.clickOutOfInputField();
+
+        // Assert
+        expect(accountInfo.isInvalidErrorMessageDisplayed('lastName')).toBe(true);
+    });
+
+    it('should display the illegal phone number error message immediately on click', () => {
+        // Act
+        accountInfo.clearBlurField('phoneNumber');
+        accountInfo.setFieldValue('phoneNumber', illegalInput);
+        accountInfo.clickOutOfInputField();
+
+        // Assert
+        expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
+    });
+
+    it('should display the illegal postcode error message immediately on click', () => {
+        // Act
+        accountInfo.clearBlurField('postcode');
+        accountInfo.setFieldValue('postcode', illegalInput);
+        accountInfo.clickOutOfInputField();
+
+        // Assert
+        expect(accountInfo.isInvalidErrorMessageDisplayed('postcode')).toBe(true);
     });
 });
