@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.5.0
 ------------------------------
-*January X, 2022*
+*January 28, 2022*
 
 ### Added
 - Focus styles for keyboard navigation
