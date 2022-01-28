@@ -49,7 +49,7 @@ commands:
     steps:
       - run:
           name: Install node dependencies
-          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+          command: yarn install --immutable --cache-folder ~/.cache/yarn
 
   run_command:
     parameters:
