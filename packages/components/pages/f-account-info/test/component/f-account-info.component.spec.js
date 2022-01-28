@@ -49,6 +49,7 @@ describe('f-account-info component tests', () => {
         accountInfo.clearBlurField(field);
         accountInfo.setFieldValue(field, illegalInput);
         accountInfo.clickOutOfInputField();
+        accountInfo.waitForComponent();
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed(field)).toBe(true);
