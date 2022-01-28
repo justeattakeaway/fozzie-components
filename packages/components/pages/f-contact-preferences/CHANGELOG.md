@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.15.0
+v0.16.0
 ------------------------------
-*January 27, 2022*
+*January 31, 2022*
 
 ### Changed
 - Move the alert markup in own file
