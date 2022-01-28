@@ -243,21 +243,22 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
-            serviceType: 'collection',
+            serviceType: 'dinein',
             isAuthenticated: false,
-            isASAP: true,
-            orderError: 'duplicate'
+            isASAP: false,
+            placeCheckoutOrders: 'duplicate'
         };
         checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+            .withQuery('&knob-Place Order Errors', checkoutInfo.placeCheckoutOrders);
 
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
-            mobileNumber: '07234567890'
+            mobileNumber: '07234567890',
+            tableIdentifier: '10'
         };
 
         checkout.expectedCustomerInfo = customerInfo;

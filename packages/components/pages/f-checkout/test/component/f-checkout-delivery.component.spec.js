@@ -71,10 +71,9 @@ describe('f-checkout "delivery" component tests', () => {
 
                 // Act
                 checkout.loadAgeVerification();
-                checkout.waitForAgeVerificationComponent();
             });
 
-            it('should display the age verification', () => {
+            it.only('should display the age verification', () => {
                 // Assert
                 expect(checkout.isAgeVerificationDisplayed()).toBe(true);
             });

@@ -356,7 +356,6 @@ describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Vi
 
         // Act
         checkout.loadAgeVerification();
-        checkout.ageVerificationComponent.waitForExist(1000);
     });
 
     it('should display the age verification page', () => {

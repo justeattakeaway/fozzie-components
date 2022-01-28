@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 const {
@@ -168,12 +166,12 @@ module.exports = class Checkout extends Page {
         super.load(this.ageVerificationComponent);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    waitForComponent (component = this.component) {
+        super.waitForComponent(component);
     }
 
-    waitForErrorPageComponent () {
-        super.waitForComponent(this.errorPageComponent);
+    waitForErrorPageComponent (timeout) {
+        super.waitForComponent(this.errorPageComponent, timeout);
     }
 
     waitForAgeVerificationComponent () {

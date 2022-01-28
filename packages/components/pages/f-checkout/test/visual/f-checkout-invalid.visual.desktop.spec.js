@@ -10,7 +10,6 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
 
         // Act
         checkout.loadError();
-        checkout.waitForErrorPageComponent();
     });
 
     it('should display the error page component', () => {
