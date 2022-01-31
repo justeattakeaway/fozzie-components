@@ -2184,13 +2184,6 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-alert@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-3.0.2.tgz#a4028e76146d3875f1c8452791e559cf915a5472"
-  integrity sha512-ppwaCHbr/vhqhWk9gAymVuW3GFNFeR3jG4jeHL3TjVI12FQfPhMjvhPnwbWd72FzBVsnFPbQAeg1+iBjBOgKRg==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2205,6 +2198,13 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.0.0.tgz#6bc0840adcca276638778a080ea66d6f34309a78"
   integrity sha512-X/XF1yo6whfSZ46i4kaz7VZlLe+U27SDOa8x+N3Vn5dakgYDRhdiIvgsDm8d1v6GX8eB4addlmlb/OkJ+9G42g==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
+"@justeat/f-card@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.4.0.tgz#8786fa1d97c50228d40ddeb7c44570bc0f2bd599"
+  integrity sha512-lzOld5dn8867Orjixj1A2qA9X8jrt+waKKuKyb59fomigJ+EnhP6XVeMhZixuu7aVee480EAXT2liklCA2eaxw==
   dependencies:
     "@justeat/f-services" "0.13.0"
 

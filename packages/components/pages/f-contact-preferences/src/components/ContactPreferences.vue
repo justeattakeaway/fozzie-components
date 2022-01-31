@@ -5,6 +5,7 @@
         <card-component
             v-if="!shouldShowLoadErrorCard"
             :card-heading="$t('heading')"
+            card-heading-size="beta"
             has-inner-spacing-large
             :card-size-custom="'medium'"
             has-outline>
@@ -22,8 +23,7 @@
                             :class="$style['c-contactPreferences-formField']"
                             input-type="checkbox"
                             is-grouped
-                            :label-text=" $t(`${key}.email`)"
-                            :label-description="getEmailDescription(key)"
+                            :label-text="getLabelText(key, 'email')"
                             :disabled="!isEmailEnabled"
                             :data-test-id="`contact-preferences-${key}-email-checkbox`"
                             :name="`contact-preferences-${key}-email`"
@@ -35,8 +35,7 @@
                             :class="$style['c-contactPreferences-formField']"
                             input-type="checkbox"
                             is-grouped
-                            :label-text=" $t(`${key}.sms`)"
-                            :label-description="getSmsDescription(key)"
+                            :label-text="getLabelText(key, 'sms')"
                             :disabled="!isSmsEnabled"
                             :data-test-id="`contact-preferences-${key}-sms-checkbox`"
                             :name="`contact-preferences-${key}-sms`"
@@ -203,23 +202,26 @@ export default {
         },
 
         /**
-        * Returns translation string if it exists
+        * Returns label text for a given key and field.
         * @param {string} key - The key of the preference that needs changing
+        * @param {string} field - The field of the preference that needs changing
         */
-        getEmailDescription (key) {
-            if (!this.$te(`${key}.emailDescription`)) return '';
+        getLabelText (key, field) {
+            const label = this.$t(`${key}.${field}`);
+            const description = this.getDescription(key, `${field}Description`);
 
-            return `(${this.$t(`${key}.emailDescription`)})`;
+            return `${label} ${description}`;
         },
 
         /**
-        * Returns translation string if it exists
+        * Returns translation for a description if it exists
         * @param {string} key - The key of the preference that needs changing
+        * @param {string} field - The field of the preference that needs changing
         */
-        getSmsDescription (key) {
-            if (!this.$te(`${key}.smsDescription`)) return '';
+        getDescription (key, field) {
+            if (!this.$te(`${key}.${field}`)) return '';
 
-            return `(${this.$t(`${key}.smsDescription`)})`;
+            return `(${this.$t(`${key}.${field}`)})`;
         },
 
         /**
@@ -313,21 +315,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.c-formField-label,
-.c-formField-label-description {
-    margin-bottom: 0;
-}
-</style>
-
 <style lang="scss" module>
-
 .c-contactPreferences-fieldset {
     display: flex;
     flex-flow: column;
     border: none;
     padding: 0;
-    margin: spacing(x2) 0;
+    margin: spacing(x2) 0 spacing(x4);
 }
 
 .c-contactPreferences-subtitle {
@@ -337,6 +331,7 @@ export default {
 .c-contactPreferences {
     .c-contactPreferences-formField {
         margin-top: 0;
+
         .c-contactPreferences-formField + & {
             margin-bottom: spacing(x2);
         }
@@ -352,6 +347,6 @@ export default {
 }
 
 .c-contactPreferences-alert {
-    margin: 0 0 spacing(x4);
+    margin: -(spacing()) 0 spacing(x4); // Negative top margin needed to offset the fieldset's bottom margin.
 }
 </style>

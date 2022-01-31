@@ -24,11 +24,13 @@
             class="is-visuallyHidden"
             :class="$style['c-imageTile-checkbox']"
             data-test-id="image-tile-input"
+            :tabindex="!isLink ? 0 : false"
             @change="toggleFilter">
         <label
             :class="$style['c-imageTile-label']"
             :for="`imageTileToggle-${tileId}`"
-            data-test-id="image-tile-label">
+            data-test-id="image-tile-label"
+            :tabindex="!isLink ? -1 : false">
             <span
                 :class="$style['c-imageTile-imageContainer']"
                 :style="cssVars">
@@ -168,9 +170,18 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     width: 15px;
 }
 
+@mixin image-tile-focus() {
+    outline: 2px solid $color-focus;
+    border-radius: $radius-rounded-b;
+}
+
 .c-imageTile {
     position: relative;
     width: 100%;
+
+    &:focus-within {
+        @include image-tile-focus();
+    }
 }
 
 .c-imageTile-link {
@@ -179,17 +190,29 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     left: 0;
     right: 0;
     bottom: 0;
+
+    &:focus {
+        @include image-tile-focus();
+    }
 }
 
 .c-imageTile-link--toggle {
     display: block;
     position: static;
     pointer-events: none;
+
+    &:focus {
+        outline: none; // Focus styles not needed in toggle state.
+    }
 }
 
 .c-imageTile-label {
     display: flex;
     flex-flow: column wrap;
+
+    &:focus {
+        outline: none; // Prevents Safari doubling focus styles.
+    }
 }
 
 .c-imageTile-imageContainer {
@@ -275,6 +298,5 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
         }
     }
 }
-
 </style>
 
