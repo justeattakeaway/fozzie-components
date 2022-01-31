@@ -136,7 +136,7 @@
 
 <script>
 import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
-import errorBoundaryProp from '../assets/vue/mixins/errorBoundary.mixin';
+import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
 import RestaurantDishes from './subcomponents/RestaurantDishes/RestaurantDishes.vue';
@@ -166,7 +166,7 @@ export default {
         RestaurantFees,
         RenderlessSlotWrapper
     },
-    mixins: [errorBoundaryProp],
+    mixins: [ErrorBoundaryMixin],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
         id: {

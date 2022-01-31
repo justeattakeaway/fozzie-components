@@ -14,11 +14,11 @@
 
 <script>
 import restaurantCardVersions from './restaurantCardVersions';
-import errorBoundaryProp from '../assets/vue/mixins/errorBoundary.mixin';
+import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 
 export default {
     name: 'RestaurantCard',
-    mixins: [errorBoundaryProp],
+    mixins: [ErrorBoundaryMixin],
     props: {
         // restaurant & display data
         data: {
