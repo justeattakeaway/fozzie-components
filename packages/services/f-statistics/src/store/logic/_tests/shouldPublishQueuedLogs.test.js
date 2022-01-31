@@ -1,17 +1,21 @@
 /* eslint-disable no-import-assign */
 import shouldPublishQueuedLogs from '../shouldPublishQueuedLogs';
+import isQueueLengthExceeded from '../isQueueLengthExceeded';
+import isQueueByteSizeExceeded from '../isQueueByteSizeExceeded';
 import publishQueue from '../publishQueue';
 import * as config from '../../../config';
 import { log } from '../../../tests/helpers/setup';
 
+jest.mock('../publishQueue', () => jest.fn());
+jest.mock('../isQueueLengthExceeded', () => jest.fn());
+jest.mock('../isQueueByteSizeExceeded', () => jest.fn());
+
 jest.mock('../../../config', () => ({
     __esModule: true,
     IS_BATCH_PUBLISHING_ENABLED: true,
-    BATCH_QUEUE_SIZE: 5,
     BATCH_INTERVAL_TIMER: 0
 }));
 
-jest.mock('../publishQueue', () => jest.fn());
 
 describe('Statistics Store Logic ::', () => {
     afterEach(() => {
@@ -29,22 +33,50 @@ describe('Statistics Store Logic ::', () => {
             // Assert
             expect(publishQueue).toBeCalled();
         });
-        it('should not call publishQueue() when batch publishing is enabled and the queue is empty', () => {
+        it('should not call publishQueue() when batch publishing is enabled isQueueLengthExceeded and isQueueByteSizeExceeded return false', () => {
             // Arrange
             config.IS_BATCH_PUBLISHING_ENABLED = true;
-            const queue = [];
+            isQueueLengthExceeded.mockImplementation(() => false);
+            isQueueByteSizeExceeded.mockImplementation(() => false);
+
             // Act
-            shouldPublishQueuedLogs({ queue }, {}, {});
+            shouldPublishQueuedLogs({ queue: [] }, {}, {});
 
             // Assert
             expect(publishQueue).toHaveBeenCalledTimes(0);
         });
-        it('should not publishQueue() when batch publishing is enabled and the queue is equal to config.BATCH_QUEUE_SIZE ', () => {
+        it('should call publishQueue() when batch publishing is enabled and isQueueLengthExceeded returns true ', () => {
             // Arrange
             config.IS_BATCH_PUBLISHING_ENABLED = true;
-            const queue = Array(5).fill(log);
+            isQueueLengthExceeded.mockImplementation(() => true);
+            isQueueByteSizeExceeded.mockImplementation(() => false);
+
             // Act
-            shouldPublishQueuedLogs({ queue }, {}, {});
+            shouldPublishQueuedLogs({ queue: [] }, {}, {});
+
+            // Assert
+            expect(publishQueue).toBeCalled();
+        });
+        it('should call publishQueue() when batch publishing is enabled and isQueueByteSizeExceeded returns true ', () => {
+            // Arrange
+            config.IS_BATCH_PUBLISHING_ENABLED = true;
+            isQueueLengthExceeded.mockImplementation(() => false);
+            isQueueByteSizeExceeded.mockImplementation(() => true);
+
+            // Act
+            shouldPublishQueuedLogs({ queue: [] }, {}, {});
+
+            // Assert
+            expect(publishQueue).toBeCalled();
+        });
+        it('should call publishQueue() when batch publishing is enabled and isQueueLengthExceeded and isQueueByteSizeExceeded returns true ', () => {
+            // Arrange
+            config.IS_BATCH_PUBLISHING_ENABLED = true;
+            isQueueLengthExceeded.mockImplementation(() => true);
+            isQueueByteSizeExceeded.mockImplementation(() => true);
+
+            // Act
+            shouldPublishQueuedLogs({ queue: [] }, {}, {});
 
             // Assert
             expect(publishQueue).toBeCalled();

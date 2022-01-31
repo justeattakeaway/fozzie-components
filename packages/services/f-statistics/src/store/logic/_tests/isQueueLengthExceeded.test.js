@@ -7,13 +7,10 @@ jest.mock('../../../config', () => ({
     __esModule: true,
     IS_BATCH_PUBLISHING_ENABLED: true,
     BATCH_QUEUE_SIZE: 5,
-    BATCH_INTERVAL_TIMER: 0
+    BATCH_INTERVAL_TIMER: 0,
+    BATCH_QUEUE_MAX_BYTES: 10000
 }));
 describe('Statistics Store Logic ::', () => {
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
     describe('isQueueLengthExceeded ::', () => {
         it('should return false if queue is less than config.BATCH_QUEUE_SIZE', () => {
             // Arrange
