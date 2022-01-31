@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 const IS_BATCH_PUBLISHING_ENABLED = true;
 const BATCH_QUEUE_SIZE = 5;
-const BATCH_INTERVAL_TIMER = 20000;
+const BATCH_INTERVAL_TIMER = 5000;
 
 export {
     IS_BATCH_PUBLISHING_ENABLED,
