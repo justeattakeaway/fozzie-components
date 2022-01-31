@@ -43,8 +43,8 @@
 
             <!-- Cuisines -->
             <component
-                :is="'div'"
-                tier="3">
+                :is="getWrapperComponent('cuisines')"
+                v-bind="getWrapperComponentProps('cuisines')">
                 <restaurant-cuisines
                     v-if="cuisines.length > 0"
                     data-test-id="restaurant-cuisines"
@@ -94,10 +94,14 @@
             </component>
 
             <!-- Fees -->
-            <restaurant-fees
-                v-if="hasFees"
-                v-bind="fees"
-                data-test-id="restaurant-fees" />
+            <component
+                :is="getWrapperComponent('fees')"
+                v-bind="getWrapperComponentProps('fees')">
+                <restaurant-fees
+                    v-if="hasFees"
+                    v-bind="fees"
+                    data-test-id="restaurant-fees" />
+            </component>
 
             <!-- misc tags -->
             <component
@@ -125,12 +129,16 @@
         </div>
 
         <!-- Dishes -->
-        <restaurant-dishes
-            v-if="!disabled && hasDishes"
-            data-test-id="restaurant-dishes"
-            :dishes="dishes"
-            :is-vertically-stacked="isListItem"
-            :class="[$style['c-restaurantCard-dishes']]" />
+        <component
+            :is="getWrapperComponent('dishes')"
+            v-bind="getWrapperComponentProps('dishes')">
+            <restaurant-dishes
+                v-if="!disabled && hasDishes"
+                data-test-id="restaurant-dishes"
+                :dishes="dishes"
+                :is-vertically-stacked="isListItem"
+                :class="[$style['c-restaurantCard-dishes']]" />
+        </component>
     </a>
 </template>
 

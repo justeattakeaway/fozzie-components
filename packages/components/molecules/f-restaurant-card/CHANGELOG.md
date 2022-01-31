@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.15.0
+------------------------------
+*January 31, 2022*
+
+### Added
+- A renderless component to enable conditional dynamic components that do not render extra markup if the criteria is not met
+### Changed
+- Wrapped each data point on the restaurant card in a dynamic component that is injected into the card by the consumer
+- Used better semantic markup for restaurant tags
+- Added styling override to prevent fozzie list styling from affecting restaurant tags in SearchWeb
+
 v0.14.0
 ------------------------------
 *January 20, 2022*
