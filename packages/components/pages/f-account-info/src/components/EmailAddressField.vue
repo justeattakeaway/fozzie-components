@@ -10,7 +10,6 @@
 
         <f-link
             name="account-info-change-emailAddress-link"
-            is-distinct
             :class="$style['c-accountInfo-customerCareLink']"
             href="/help/article/203097431/how-do-i-manage-my-account"
             target="_blank">
@@ -45,5 +44,6 @@ export default {
 .c-accountInfo-customerCareLink {
     display: block;
     margin-bottom: spacing(x4);
+    @include font-size(body-s);
 }
 </style>

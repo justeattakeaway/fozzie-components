@@ -30,6 +30,50 @@ class Page {
         return this;
     }
 
+    /**
+    * @description
+    * Selects all the text in the field and then performs a backspace to clear the field.
+    *
+    * @param {String} fieldName The name of the field
+    */
+    clearBlurField (fieldName) {
+        // Determines the OS
+        const CONTROL = process.platform === 'darwin' ? 'Command' : '\uE009';
+        const el = this.fields[fieldName].input;
+        el.click();
+        el.keys([CONTROL, 'a']);
+        el.keys(['Backspace']);
+    }
+
+    /**
+    * @description
+    * Populates a form with customer input details.
+    *
+    * @param {String} fieldName the name of the field
+    * @param {Object} customerInput the input added by the customer
+    * @example
+    * fieldName : 'firstName',
+    * customerInput = {
+    *   firstName: {
+    *     input: 'greg'
+    *   }
+    * }
+    */
+    populateForm (fieldName, customerInput) {
+        this.setFieldValue(fieldName, customerInput[fieldName].input);
+    }
+
+    /**
+     * @description
+     * Sets the value of a form field.
+     *
+     * @param {String} fieldName the name of the field
+     * @param {String} value the value set
+     */
+    setFieldValue (fieldName, value) {
+        this.fields[fieldName].input.setValue(value);
+    }
+
     // eslint-disable-next-line class-methods-use-this
     testTabOrder (tabOrderArray) {
         const expectedTabOrder = tabOrderArray.concat(tabOrderArray[0]);
