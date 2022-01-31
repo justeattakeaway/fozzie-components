@@ -143,7 +143,6 @@
 </template>
 
 <script>
-/* eslint-disable no-console */
 import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
 import wrapperComponents from '../assets/vue/mixins/wrapperComponents.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
