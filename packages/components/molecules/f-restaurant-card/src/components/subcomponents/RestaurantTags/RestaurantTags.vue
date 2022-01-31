@@ -49,10 +49,5 @@ export default {
     &:last-of-type {
         margin-right: 0;
     }
-
-    &:before {
-        // needed to override & remove legacy fozzie <li> styling
-        content: none;
-    }
 }
 </style>
