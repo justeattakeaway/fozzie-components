@@ -16,7 +16,6 @@ jest.mock('../../../config', () => ({
     BATCH_INTERVAL_TIMER: 0
 }));
 
-
 describe('Statistics Store Logic ::', () => {
     afterEach(() => {
         jest.clearAllMocks();

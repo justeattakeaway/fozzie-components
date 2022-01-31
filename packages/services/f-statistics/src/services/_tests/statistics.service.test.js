@@ -23,7 +23,6 @@ describe('f-statistics', () => {
         expect(StatisticsService).toBeDefined();
     });
 
-
     describe('constructor ::', () => {
         it('should call store.registerModule() to register the statisticsModule', () => {
             // Act

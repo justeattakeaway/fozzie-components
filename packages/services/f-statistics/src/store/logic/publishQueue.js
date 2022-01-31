@@ -3,7 +3,6 @@ import {
 } from '../mutation-types';
 
 /**
-import default from '../../../vite.config';
   * Publishes logs individually using Just Log before clearing the interval and removing logs from state.
   *
   * @param {array} queue - The array of log statistics
