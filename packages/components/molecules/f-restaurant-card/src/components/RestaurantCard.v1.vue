@@ -72,11 +72,11 @@
             </component>
 
             <!-- Ratings -->
-            <!-- todo add v-if so null ratings dont show empty star with no text -->
             <component
                 :is="getWrapperComponent('rating')"
                 v-bind="getWrapperComponentProps('rating')">
                 <restaurant-rating
+                    v-if="rating"
                     data-test-id="restaurant-rating"
                     v-bind="rating" />
             </component>
@@ -224,7 +224,7 @@ export default {
         },
         rating: {
             type: Object,
-            default: () => ({})
+            default: null
         },
         deliveryTimeData: {
             type: Object,

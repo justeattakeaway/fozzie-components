@@ -99,7 +99,7 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(true);
         });
 
-        it('renders rating component when state missing', () => {
+        it('does not render rating component when entire state missing', () => {
             // arrange
             const propsData = {};
 
@@ -109,7 +109,7 @@ describe('RestaurantCard.v1', () => {
             });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(false);
         });
     });
 
