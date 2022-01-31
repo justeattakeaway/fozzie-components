@@ -117,8 +117,8 @@ $alert-borderRadius: $radius-rounded-c;
 
 .c-alert {
     position: relative;
-    padding: spacing(x2);
-    margin-top: spacing(x2);
+    padding: spacing(d);
+    margin-top: spacing(d);
     border: 0;
     border-radius: $alert-borderRadius;
 }
@@ -149,13 +149,13 @@ $alert-borderRadius: $radius-rounded-c;
     @include font-size(subheading-s);
     vertical-align: middle;
     margin-top: 0;
-    margin-left: spacing(x2);
+    margin-left: spacing(d);
 }
 
 .c-alert-content {
     @include font-size(body-l);
-    margin-top: spacing(x0.5);
-    margin-left: spacing(x5);
+    margin-top: spacing(a);
+    margin-left: spacing(g);
 }
 
 .c-alert-icon {

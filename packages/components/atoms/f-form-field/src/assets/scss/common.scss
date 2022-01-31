@@ -23,18 +23,18 @@ $form-input-borderColour--invalid       : $color-support-error;
 
 $form-input-focus--boxShadow            : 0 0 0 2px $color-focus;
 
-$form-input-padding--side               : spacing(x2);
+$form-input-padding--side               : spacing(d);
 
-$form-input-height                      : spacing(x6);
+$form-input-height                      : spacing(h);
 $form-input-padding                     : 11px $form-input-padding--side 13px;
 
-$form-input-height--small               : spacing(x5);
+$form-input-height--small               : spacing(g);
 $form-input-padding--small              : 7px $form-input-padding--side 9px;
 
-$form-input-height--large               : spacing(x7);
+$form-input-height--large               : spacing(h);
 $form-input-padding--large              : 15px $form-input-padding--side 17px;
 
-$form-input-iconPadding                 : spacing(x7);
+$form-input-iconPadding                 : spacing(h);
 $form-input-icon-horizontalIndent       : 19px;
 
 @mixin form-field-size($height, $padding) {
@@ -67,7 +67,7 @@ $form-input-icon-horizontalIndent       : 19px;
 
 .c-formField {
     & + & {
-        margin-top: spacing(x2);
+        margin-top: spacing(d);
     }
 }
 

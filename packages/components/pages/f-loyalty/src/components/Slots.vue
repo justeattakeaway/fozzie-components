@@ -171,7 +171,7 @@ $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 .c-loyalty-stampCardsSlotCardsContainer {
     margin: spacing() 0;
     display: grid;
-    grid-gap: spacing(x2);
+    grid-gap: spacing(d);
     grid-template-columns: repeat(3, minmax(0, 1fr));
 
     @include media($stampCard-responsive-tabletViewBreakpoint) {
@@ -191,7 +191,7 @@ $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 
 .c-loyalty-stampCardsSlotTitle {
     width: 100%;
-    margin: spacing(x4) spacing() spacing();
+    margin: spacing(f) spacing() spacing();
 }
 
 .c-loyalty-stampCardsSlotSubtitle {

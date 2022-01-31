@@ -79,7 +79,7 @@ export default {
 
 .c-restaurantCard-iconText-content {
     flex: 1;
-    line-height: spacing(x2);
+    line-height: spacing(d);
 }
 
 .c-restaurantCard-iconText-content--green {
@@ -87,9 +87,9 @@ export default {
 }
 
 .c-restaurantCard-iconText-icon {
-    width: spacing(x2);
-    height: spacing(x2);
-    margin-right: spacing(x0.5);
+    width: spacing(d);
+    height: spacing(d);
+    margin-right: spacing(a);
 }
 
 .c-restaurantCard-iconText-icon--hideOnMidBelow {

@@ -39,7 +39,7 @@ $midWide: 980px;
     @include font-size('heading-xl', false);
     font-family: $font-family-base;
     font-weight: $font-weight-regular;
-    padding: spacing(x2);
+    padding: spacing(d);
     text-align: center;
     text-rendering: optimizeLegibility;
     width: 95%;
@@ -47,13 +47,13 @@ $midWide: 980px;
 
     @include media('>=narrowMid') {
         max-width: 800px;
-        padding: spacing(x2);
+        padding: spacing(d);
         min-height: 210px;
     }
 
     @include media('>=#{$midWide}') {
         min-height: 230px;
-        padding: 18px spacing(x2) 20px;
+        padding: 18px spacing(d) 20px;
     }
 }
 .c-searchShell-title,
@@ -85,7 +85,7 @@ $midWide: 980px;
     color: $color-grey-50;
     @include font-size('subheading-s', true, 'narrow');
     font-weight: $font-weight-regular;
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 
     @include media('>=narrowMid') {
         @include font-size('subheading-s');

@@ -402,7 +402,7 @@ $form-input-iconSize                           : 18px;
 
     .c-formField-field--textarea {
         background-clip: padding-box;
-        padding: spacing(x2);
+        padding: spacing(d);
         resize: none;
     }
 
@@ -476,6 +476,6 @@ $form-input-iconSize                           : 18px;
     .c-formField-assitiveText {
         font-weight: $font-weight-regular;
         color: $form-input-secondaryTextColour;
-        margin-top: spacing(x0.5);
+        margin-top: spacing(a);
     }
 </style>

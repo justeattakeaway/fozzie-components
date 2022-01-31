@@ -291,7 +291,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     max-width: 392px;
     display: flex;
     flex-direction: column;
-    padding: spacing(x2);
+    padding: spacing(d);
     border-radius: $radius-rounded-c;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     0 3px 1px -2px rgba(0, 0, 0, 0.07),
@@ -321,7 +321,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-stampCard1-icon {
     float: left;
-    margin-right: spacing(x2);
+    margin-right: spacing(d);
     margin-bottom: spacing();
     width: $stampCard-iconSize-landscape;
     height: $stampCard-iconSize-landscape;
@@ -335,7 +335,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-stampCard1-title {
     margin-top: 0;
-    margin-bottom: spacing(x0.5);
+    margin-bottom: spacing(a);
 
     @include media($stampCard-responsive-mobileViewBreakpoint) {
         @include font-size(heading-s, true, narrow);
@@ -343,7 +343,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 }
 
 .c-stampCard1-statusText {
-    margin: spacing(x0.5) spacing(x2) 0 spacing(x2);
+    margin: spacing(a) spacing(d) 0 spacing(d);
 }
 
 .c-stampCard1-subStatusText {

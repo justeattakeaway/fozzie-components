@@ -53,12 +53,12 @@ export default {
 }
 
 .c-unauthenticated-buttons {
-    margin-top: spacing(x2);
-    margin-bottom: spacing(x4);
+    margin-top: spacing(d);
+    margin-bottom: spacing(f);
 }
 
 .c-login-button {
-    margin-right: spacing(x2);
+    margin-right: spacing(d);
 }
 
 .c-title {
@@ -71,7 +71,7 @@ export default {
 
 .c-unauthenticated-image {
     width: 100%;
-    margin-bottom: spacing(x4);
+    margin-bottom: spacing(f);
 }
 
 </style>

@@ -62,8 +62,8 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    padding-top: spacing(x5);
-    padding-bottom: spacing(x5);
+    padding-top: spacing(g);
+    padding-bottom: spacing(g);
 }
 
 .c-subNavTemplate-breadcrumb,

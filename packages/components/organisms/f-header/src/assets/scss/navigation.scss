@@ -38,7 +38,7 @@ $nav-icon-color--transparent       : $color-interactive-inverse;
 $nav-icon-color--mobileWhiteBg     : $color-content-interactive-secondary;
 $nav-icon-size                     : 24px;
 
-$nav-toggleIcon-left               : spacing(x2);
+$nav-toggleIcon-left               : spacing(d);
 $nav-toggleIcon-width              : 21px;
 $nav-toggleIcon-height             : 2px;
 $nav-toggleIcon-borderRadius       : 1px;
@@ -190,7 +190,7 @@ $nav-toggleIcon-space              : 5px;
 .c-nav-list-text {
     display: flex;
     align-items: center;
-    padding: spacing(x1.5) spacing(x2);
+    padding: spacing(c) spacing(d);
     margin: 0;
     font-family: $nav-text-subFont;
     color: $nav-text-color--narrow;
@@ -232,7 +232,7 @@ $nav-toggleIcon-space              : 5px;
 
 .c-nav-list-link--leftPaddingBelowMid {
     @include media('<=mid') {
-        padding-left: spacing(x6);
+        padding-left: spacing(h);
     }
 }
 

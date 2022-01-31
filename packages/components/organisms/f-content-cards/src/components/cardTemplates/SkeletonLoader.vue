@@ -50,9 +50,9 @@ export default {
         display: flex;
         flex-direction: column;
         flex: 0 0 40%;
-        margin: 0 spacing() spacing(x3) 0;
+        margin: 0 spacing() spacing(e) 0;
         width: 100%;
-        padding: spacing(x3) spacing(x2);
+        padding: spacing(e) spacing(d);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 
         @include media('>=narrowMid') {

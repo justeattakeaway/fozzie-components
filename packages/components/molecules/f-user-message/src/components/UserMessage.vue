@@ -75,7 +75,7 @@ $userMessage-textColour : $color-content-default;
 .c-userMessage-container {
     max-width: 350px;
     margin: 0 auto;
-    padding: spacing(x2) 0;
+    padding: spacing(d) 0;
     display: flex;
 
     @include media('>=narrow') {
@@ -99,7 +99,7 @@ $userMessage-textColour : $color-content-default;
 }
 
 .c-userMessage-text {
-    margin: 0 0 0 spacing(x2);
+    margin: 0 0 0 spacing(d);
     @include font-size(body-s);
 
     @include media('>=mid') {

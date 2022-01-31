@@ -138,6 +138,6 @@ export default {
 
 <style lang="scss" module>
 .c-checkout-errorDialogButton {
-    margin: spacing(x4) spacing(x1.5) spacing(x0.5);
+    margin: spacing(f) spacing(c) spacing(a);
 }
 </style>

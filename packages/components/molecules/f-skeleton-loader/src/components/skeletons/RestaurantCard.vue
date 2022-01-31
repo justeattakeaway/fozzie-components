@@ -29,7 +29,7 @@ export default {
 }
 
 .c-restaurantCard-background {
-    margin-bottom: -(spacing(x8));
+    margin-bottom: -(spacing(i));
     height: 200px;
 }
 
