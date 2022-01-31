@@ -13,6 +13,7 @@ v0.15.0
 - Wrapped each data point on the restaurant card in a dynamic component that is injected into the card by the consumer
 - Used better semantic markup for restaurant tags
 - Added styling override to prevent fozzie list styling from affecting restaurant tags in SearchWeb
+- Do not render ratings subcomponent if entire ratings data is missing
 
 v0.14.0
 ------------------------------
