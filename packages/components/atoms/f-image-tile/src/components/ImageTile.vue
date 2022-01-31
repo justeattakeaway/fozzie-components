@@ -24,7 +24,7 @@
             class="is-visuallyHidden"
             :class="$style['c-imageTile-checkbox']"
             data-test-id="image-tile-input"
-            :tabindex="!isLink ? 0 : false"
+            :tabindex="!isLink ? 0 : -1"
             @change="toggleFilter">
         <label
             :class="$style['c-imageTile-label']"
