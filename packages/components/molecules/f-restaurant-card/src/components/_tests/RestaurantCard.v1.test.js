@@ -1,103 +1,7 @@
 import { mount } from '@vue/test-utils';
-import errorBoundary from './mocks/MockErrorBoundary.vue';
 import RestaurantCardV1 from '../RestaurantCard.v1.vue';
 
 describe('RestaurantCard.v1', () => {
-    describe('Error Boundary', () => {
-        const slotList = ['meta-items', 'optional-items'];
-
-        it.each(slotList)('Successfully wraps %p slot in error boundary', slot => {
-            // arrange
-            const propsData = {
-                errorBoundary
-            };
-
-            const slots = {
-                [slot]: `<div ${slot}-slot></div>`
-            };
-
-            // act
-            const wrapper = mount(RestaurantCardV1, {
-                propsData,
-                slots
-            });
-
-            // assert
-            expect(wrapper.find(`[error-boundary]>[${slot}-slot]`).exists()).toBe(true);
-        });
-
-        it('Successfully passes tier to error boundary', () => {
-            // arrange
-            const propsData = {
-                errorBoundary
-            };
-
-            const slots = {
-                'meta-items': '<div meta-items-slot></div>'
-            };
-
-            // act
-            const wrapper = mount(RestaurantCardV1, {
-                propsData,
-                slots
-            });
-
-            // assert
-            expect(wrapper.find('[error-boundary][tier="3"]>[meta-items-slot]').exists()).toBe(true);
-        });
-
-        it('Successfully wraps RestaurantCuisines component in error boundary', () => {
-            // arrange
-            const propsData = {
-                errorBoundary,
-                cuisines: ['Mexican', 'Burgers', 'Chinese']
-            };
-
-            // act
-            const wrapper = mount(RestaurantCardV1, {
-                propsData
-            });
-
-            // assert
-            expect(wrapper.find('[error-boundary]>[data-test-id="restaurant-cuisines"]').exists()).toBe(true);
-        });
-
-        it('Successfully wraps "new" RestaurantTag component in error boundary', () => {
-            // arrange
-            const newTagText = 'NEW';
-            const propsData = {
-                errorBoundary,
-                newTagText: 'NEW'
-            };
-
-            // act
-            const wrapper = mount(RestaurantCardV1, {
-                propsData
-            });
-
-            // assert
-            expect(wrapper.find(`[error-boundary]>[data-test-id="restaurant-tag"][title="${newTagText}"`).exists()).toBe(true);
-        });
-
-        it('Successfully wraps inner-content RestaurantTags component in error boundary', () => {
-            // arrange
-            const propsData = {
-                errorBoundary,
-                tags: {
-                    contentTags: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test tag that hopefully never happens' }]
-                }
-            };
-
-            // act
-            const wrapper = mount(RestaurantCardV1, {
-                propsData
-            });
-
-            // assert
-            expect(wrapper.find('[error-boundary]>[data-test-id="restaurant-inner-content-tags"]').exists()).toBe(true);
-        });
-    });
-
     describe('Restaurant cuisines', () => {
         it('should not be shown if there is no cuisines data', () => {
             // arrange
@@ -195,7 +99,7 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(true);
         });
 
-        it('renders rating component when state missing', () => {
+        it('does not render rating component when entire state missing', () => {
             // arrange
             const propsData = {};
 
@@ -205,7 +109,7 @@ describe('RestaurantCard.v1', () => {
             });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-rating"]').exists()).toBe(false);
         });
     });
 
