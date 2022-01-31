@@ -10,8 +10,8 @@ v0.15.0
 ### Added
 - A renderless component to enable conditional dynamic components that do not render extra markup if the criteria is not met
 ### Changed
-- Wrapped each data point on the restaurant card in a dynamic component that is injected into the card by the consumer
-- Used better semantic markup for restaurant tags
+- Wrapped each data point on the restaurant card in a dynamic component that is injected into the card by the consumer - it will currently resolve to the injected component (i.e. an error boundary) or a renderless component
+- Use better semantic markup for restaurant tags
 - Added styling override to prevent fozzie list styling from affecting restaurant tags in SearchWeb
 - Do not render ratings subcomponent if entire ratings data is missing
 

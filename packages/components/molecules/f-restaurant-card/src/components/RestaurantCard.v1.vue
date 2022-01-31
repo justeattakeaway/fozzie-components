@@ -20,10 +20,10 @@
                 :logo-url="logoUrl" />
             <!-- Tags inside image container -->
             <component
-                :is="getWrapperComponent('imageTags')"
-                v-bind="getWrapperComponentProps('imageTags')">
+                :is="getErrorBoundary"
+                v-if="hasImageTags"
+                :tier="3">
                 <restaurant-tags
-                    v-if="hasImageTags"
                     :class="$style['c-restaurantCard-imageTags']"
                     :test-id-position="'main-image'"
                     :tags="tags.imageTags" />
@@ -43,10 +43,10 @@
 
             <!-- Cuisines -->
             <component
-                :is="getWrapperComponent('cuisines')"
-                v-bind="getWrapperComponentProps('cuisines')">
+                :is="getErrorBoundary"
+                v-if="cuisines.length > 0"
+                :tier="3">
                 <restaurant-cuisines
-                    v-if="cuisines.length > 0"
                     data-test-id="restaurant-cuisines"
                     :cuisines="cuisines" />
             </component>
@@ -58,25 +58,21 @@
                 data-test-id="premier-icon" />
 
             <!-- New label -->
-            <component
-                :is="getWrapperComponent('newTagText')"
-                v-bind="getWrapperComponentProps('newTagText')">
-                <!-- TODO - we want to translate this within the component using i18n.
-                For now we'll just need to pass down a translated string from the consuming site -->
-                <restaurant-tag
-                    v-if="newTagText"
-                    :is-large="true"
-                    :is-uppercase="true"
-                    :text="newTagText"
-                    color-scheme="positive" />
-            </component>
+            <!-- TODO - we want to translate this within the component using i18n.
+            For now we'll just need to pass down a translated string from the consuming site -->
+            <restaurant-tag
+                v-if="newTagText"
+                :is-large="true"
+                :is-uppercase="true"
+                :text="newTagText"
+                color-scheme="positive" />
 
             <!-- Ratings -->
             <component
-                :is="getWrapperComponent('rating')"
-                v-bind="getWrapperComponentProps('rating')">
+                :is="getErrorBoundary"
+                v-if="rating"
+                :tier="3">
                 <restaurant-rating
-                    v-if="rating"
                     data-test-id="restaurant-rating"
                     v-bind="rating" />
             </component>
@@ -85,55 +81,51 @@
 
             <!-- Meta Items List -->
             <component
-                :is="getWrapperComponent('deliveryTimeData')"
-                v-bind="getWrapperComponentProps('deliveryTimeData')">
+                :is="getErrorBoundary"
+                v-if="displayDeliveryTimeMeta"
+                :tier="3">
                 <delivery-time-meta
-                    v-if="displayDeliveryTimeMeta"
                     v-bind="deliveryTimeData"
                     data-test-id="restaurant-delivery-time-meta" />
             </component>
 
             <!-- Fees -->
             <component
-                :is="getWrapperComponent('fees')"
-                v-bind="getWrapperComponentProps('fees')">
+                :is="getErrorBoundary"
+                v-if="hasFees"
+                :tier="3">
                 <restaurant-fees
-                    v-if="hasFees"
                     v-bind="fees"
                     data-test-id="restaurant-fees" />
             </component>
 
             <!-- misc tags -->
             <component
-                :is="getWrapperComponent('contentTags')"
-                v-bind="getWrapperComponentProps('contentTags')">
+                :is="getErrorBoundary"
+                v-if="hasContentTags"
+                :tier="3">
                 <restaurant-tags
-                    v-if="hasContentTags"
                     :class="$style['c-restaurantCard-tags']"
                     :test-id-position="'inner-content'"
                     :tags="tags.contentTags" />
             </component>
 
             <!-- Offers -->
-            <component
-                :is="getWrapperComponent('offer')"
-                v-bind="getWrapperComponentProps('offer')">
-                <icon-text
-                    v-if="hasOffer"
-                    data-test-id="restaurant-offer"
-                    :text="offer"
-                    is-bold>
-                    <offer-icon />
-                </icon-text>
-            </component>
+            <icon-text
+                v-if="hasOffer"
+                data-test-id="restaurant-offer"
+                :text="offer"
+                is-bold>
+                <offer-icon />
+            </icon-text>
         </div>
 
         <!-- Dishes -->
         <component
-            :is="getWrapperComponent('dishes')"
-            v-bind="getWrapperComponentProps('dishes')">
+            :is="getErrorBoundary"
+            v-if="!disabled && hasDishes"
+            :tier="3">
             <restaurant-dishes
-                v-if="!disabled && hasDishes"
                 data-test-id="restaurant-dishes"
                 :dishes="dishes"
                 :is-vertically-stacked="isListItem"
@@ -144,7 +136,7 @@
 
 <script>
 import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
-import wrapperComponents from '../assets/vue/mixins/wrapperComponents.mixin';
+import errorBoundaryProp from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
 import RestaurantDishes from './subcomponents/RestaurantDishes/RestaurantDishes.vue';
@@ -174,7 +166,7 @@ export default {
         RestaurantFees,
         RenderlessSlotWrapper
     },
-    mixins: [wrapperComponents],
+    mixins: [errorBoundaryProp],
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
         id: {
@@ -267,20 +259,15 @@ export default {
         },
         hasFees () {
             return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
+        },
+        getErrorBoundary () {
+            return this.errorBoundary ? this.errorBoundary : RenderlessSlotWrapper;
         }
     },
     provide () {
         return {
             isListItem: this.isListItem
         };
-    },
-    methods: {
-        getWrapperComponent (componentName) {
-            return this.wrapperComponents[this.dataPointWrappers[componentName]?.wrapperComponent] || RenderlessSlotWrapper;
-        },
-        getWrapperComponentProps (componentName) {
-            return this.dataPointWrappers[componentName]?.wrapperProps || {};
-        }
     }
 };
 </script>

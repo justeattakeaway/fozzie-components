@@ -3,8 +3,7 @@
         :is="componentVersion"
         v-bind="data"
         :flags="flags"
-        :wrapper-components="wrapperComponents"
-        :data-point-wrappers="dataPointWrappers">
+        :error-boundary="errorBoundary">
         <template
             v-for="(_, slotName) in $slots"
             v-slot:[slotName]>
@@ -15,11 +14,11 @@
 
 <script>
 import restaurantCardVersions from './restaurantCardVersions';
-import wrapperComponents from '../assets/vue/mixins/wrapperComponents.mixin';
+import errorBoundaryProp from '../assets/vue/mixins/errorBoundary.mixin';
 
 export default {
     name: 'RestaurantCard',
-    mixins: [wrapperComponents],
+    mixins: [errorBoundaryProp],
     props: {
         // restaurant & display data
         data: {
