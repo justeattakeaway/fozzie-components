@@ -20,7 +20,7 @@
                 :logo-url="logoUrl" />
             <!-- Tags inside image container -->
             <component
-                :is="getErrorBoundary"
+                :is="errorBoundary"
                 v-if="hasImageTags"
                 :tier="3">
                 <restaurant-tags
@@ -43,7 +43,7 @@
 
             <!-- Cuisines -->
             <component
-                :is="getErrorBoundary"
+                :is="errorBoundary"
                 v-if="cuisines.length > 0"
                 :tier="3">
                 <restaurant-cuisines
@@ -69,7 +69,7 @@
 
             <!-- Ratings -->
             <component
-                :is="getErrorBoundary"
+                :is="errorBoundary"
                 v-if="rating"
                 :tier="3">
                 <restaurant-rating
@@ -81,7 +81,7 @@
 
             <!-- Meta Items List -->
             <component
-                :is="getErrorBoundary"
+                :is="errorBoundary"
                 v-if="displayDeliveryTimeMeta"
                 :tier="3">
                 <delivery-time-meta
@@ -91,7 +91,7 @@
 
             <!-- Fees -->
             <component
-                :is="getErrorBoundary"
+                :is="errorBoundary"
                 v-if="hasFees"
                 :tier="3">
                 <restaurant-fees
@@ -101,7 +101,7 @@
 
             <!-- misc tags -->
             <component
-                :is="getErrorBoundary"
+                :is="errorBoundary"
                 v-if="hasContentTags"
                 :tier="3">
                 <restaurant-tags
@@ -122,7 +122,7 @@
 
         <!-- Dishes -->
         <component
-            :is="getErrorBoundary"
+            :is="errorBoundary"
             v-if="!disabled && hasDishes"
             :tier="3">
             <restaurant-dishes
@@ -259,9 +259,6 @@ export default {
         },
         hasFees () {
             return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
-        },
-        getErrorBoundary () {
-            return this.errorBoundary ? this.errorBoundary : RenderlessSlotWrapper;
         }
     },
     provide () {
