@@ -1,6 +1,14 @@
 import isQueueLengthExceeded from '../isQueueLengthExceeded';
 import { log } from '../../../tests/helpers/setup';
+// eslint-disable-next-line no-unused-vars
+import * as config from '../../../config';
 
+jest.mock('../../../config', () => ({
+    __esModule: true,
+    IS_BATCH_PUBLISHING_ENABLED: true,
+    BATCH_QUEUE_SIZE: 5,
+    BATCH_INTERVAL_TIMER: 0
+}));
 describe('Statistics Store Logic ::', () => {
     afterEach(() => {
         jest.clearAllMocks();
