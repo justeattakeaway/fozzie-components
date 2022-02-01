@@ -17,7 +17,7 @@ export const RestaurantDishesComponent = (args, { argTypes }) => ({
 });
 
 RestaurantDishesComponent.args = {
-    isVerticallyStacked : false,
+    isVerticallyStacked: false,
     dishes: [
         {
             name: 'Sausage And Egg Mcmuffin its a really long dish name I hope never happens®',

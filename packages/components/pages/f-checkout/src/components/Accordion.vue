@@ -32,6 +32,7 @@
 import { ChevronIcon } from '@justeat/f-vue-icons';
 
 export default {
+    name: 'CheckoutAccordion',
     components: {
         ChevronIcon
     },

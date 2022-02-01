@@ -9,7 +9,7 @@ module.exports = class <%= name.filename %> extends Page {
     get component () {
         return $(COMPONENT);
     }
-    
+
     waitForComponent () {
         super.waitForComponent(this.component);
     }

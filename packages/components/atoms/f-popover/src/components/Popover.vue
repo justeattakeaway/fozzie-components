@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'VPopover',
     components: {},
@@ -17,7 +16,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $popover-padding               : spacing(d);
 $tooltip-width                 : 10px;
 
@@ -44,5 +42,4 @@ $tooltip-width                 : 10px;
         }
     }
 }
-
 </style>

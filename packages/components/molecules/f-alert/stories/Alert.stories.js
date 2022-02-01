@@ -1,7 +1,7 @@
 import { boolean, select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
+import VueCard from '@justeat/f-card/src/components/Card.vue';
 import FAlert from '../src/components/Alert.vue';
-import VueCard from '../../../atoms/f-card/src/components/Card.vue';
 
 export default {
     title: 'Components/Molecules',

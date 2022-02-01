@@ -129,6 +129,7 @@
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
                         target="_blank"
+                        rel="noopener noreferrer"
                         data-test-id="delivery-enquiry-link">
                         <template #icon>
                             <moped-icon
@@ -280,6 +281,7 @@ import { countries } from '../tenants';
 import analyticsObjects from '../services/analytics/objects';
 
 export default {
+    name: 'HeaderNavigation',
     components: {
         CountrySelector,
         GiftIcon,
@@ -820,5 +822,4 @@ export default {
         }
     }
 }
-
 </style>

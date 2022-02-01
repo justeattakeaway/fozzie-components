@@ -26,7 +26,8 @@
 
         <button
             :class="$style['c-feedback-button']"
-            data-test-id="feedback-button">
+            data-test-id="feedback-button"
+            type="button">
             {{ buttonText }}
         </button>
     </div>

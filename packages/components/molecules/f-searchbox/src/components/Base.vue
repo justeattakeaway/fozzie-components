@@ -90,9 +90,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-searchbox {
     display: block;
 }
-
 </style>

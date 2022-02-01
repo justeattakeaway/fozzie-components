@@ -28,7 +28,7 @@ const methods = {
     onBrazeInit: action('on-braze-init'),
     getCardCount: action('get-card-count'),
     hasLoaded: action('has-loaded'),
-    onError: action('on-error'),
+    onError: action('on-error')
 };
 
 const template = `<content-cards
@@ -51,7 +51,7 @@ export default {
         userId: { control: { type: 'text' } },
         title: { control: { type: 'text' } },
         groupCards: { control: { type: 'boolean' } },
-        locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
+        locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } }
     },
     decorators: [withA11y]
 };

@@ -156,7 +156,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $image-tile-background-opacity: 0.7;
 $image-tile-background-color: $color-interactive-brand;
 $image-tile-selected: $color-content-positive;

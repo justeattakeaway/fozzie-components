@@ -21,7 +21,7 @@ export const StatusBannerComponent = () => ({
     props: {
     },
     store: new Vuex.Store({}),
-    template: `<status-banner />`
+    template: '<status-banner />'
 });
 
 StatusBannerComponent.storyName = 'f-status-banner';

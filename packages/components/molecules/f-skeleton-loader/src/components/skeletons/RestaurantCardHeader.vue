@@ -18,7 +18,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $restaurant-logo-width: 48px;
 
 .c-restaurantCardHeader {
@@ -56,5 +55,4 @@ $restaurant-logo-width: 48px;
 .c-restaurantCardHeader-text:not(:last-child) {
     margin-bottom: spacing();
 }
-
 </style>

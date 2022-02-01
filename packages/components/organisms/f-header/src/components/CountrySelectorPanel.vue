@@ -33,7 +33,7 @@
                     v-for="(country) in countries"
                     :key="country.key"
                     :class="$style['c-countrySelector-country']"
-                    :data-test-id="['countrySelector-countryList-' + country.dataTestKey]">
+                    :data-test-id="[`countrySelector-countryList-${country.dataTestKey}`]">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
@@ -171,5 +171,4 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     padding: spacing(c) spacing(e);
     width: 100%;
 }
-
 </style>

@@ -31,7 +31,7 @@
         :placeholder="$t(`userNote.order.${serviceType}.placeholder`)"
         :value="noteValue"
         v-bind="inputStyles"
-        :name="'order-note'"
+        name="order-note"
         :label-description="$t(`userNote.order.${serviceType}.text`)"
         @input="updateUserNotes({ note: $event, type: 'order' })" />
 </template>
@@ -48,6 +48,7 @@ import {
 import loggerMixin from '../mixins/logger.mixin';
 
 export default {
+    name: 'CheckoutNotes',
     components: {
         Accordion,
         FormField
