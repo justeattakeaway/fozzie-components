@@ -2534,10 +2534,10 @@
   dependencies:
     "@justeat/f-dom" "0.4.0"
 
-"@justeat/f-utils@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-2.0.0.tgz#34e34870f20ec85b5d0aca8a87e2bc2225e2f597"
-  integrity sha512-fFkNH39Qe6sg6e2YZmbh4l4g4qegvpsaEKnj1grCDRspQQvzpmBQBifx6nkHsdaEhetZTJC3LqwOXybmlVJI/g==
+"@justeat/f-utils@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-3.4.0.tgz#7c6b49ea0db15cf8ebada530d1485cf53fec507d"
+  integrity sha512-VWKLJ37x3hZdyjqs37dtYGDmDNXhBe99Ny6Tll4guj9g4m132GBpNOwfSpYgMCHnz81rZozKoIVZ83czyMliIA==
 
 "@justeat/f-vue-icons@1.10.0":
   version "1.10.0"
@@ -2637,19 +2637,19 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/fozzie@6.2.0":
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-6.2.0.tgz#57eec0c2b1d5e37a506e102dd49ed5fb6874250b"
-  integrity sha512-g5ehUOK9hT3U2QXqEqI3r50OwtderBTIl1PLBG77GSsKEtyVYDLFg9s80YnPgGMv7NQZZi9eL2uwh7QIa+2GPg==
+"@justeat/fozzie@7.3.0":
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-7.3.0.tgz#850a2bd1135cad5cd0171517b14823ed2ec2a0ad"
+  integrity sha512-Veqj5ShdKGCtbeRlEvdZ3OQLoH4XBrXtCtm9iZPbeSqGZEw+MMllTaCM6Tltepu2wHn+UIJXqHkwW70zilr/sA==
   dependencies:
-    "@justeat/f-utils" "2.0.0"
-    "@justeat/pie-design-tokens" "1.2.0"
+    "@justeat/f-utils" "3.4.0"
+    "@justeat/pie-design-tokens" "1.4.0"
     include-media "1.4.10"
 
-"@justeat/pie-design-tokens@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.2.0.tgz#379b9f25b481405c501afc1960b459fd06459b40"
-  integrity sha512-uMVpHVWM3RORK8DzdXWi2Rey9jPCq4sWt64JL9pqN+f+l4ck61b/rpRRf060WvWCcU0Cy/zihbSrJy1hNG1SQg==
+"@justeat/pie-design-tokens@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.4.0.tgz#adb4b3b7f5ed9ac9691e67e02b02264acd6dcfbf"
+  integrity sha512-V+lBWi4Q7WjYRYYTAm2rJfDqjePArhHrgC4pB8vsQXp4uPmEUG/6cJa4K8DArADxLA924QESE3Akmtn8nAe5dw==
   dependencies:
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"
