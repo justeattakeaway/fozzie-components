@@ -1,3 +1,4 @@
+const forEach = require('mocha-each');
 const Registration = require('../../test-utils/component-objects/f-registration.component');
 
 let registration;
@@ -13,10 +14,9 @@ describe('Shared - f-registration component tests', () => {
         expect(registration.isComponentDisplayed()).toBe(true);
     });
 
-    it('should check if the legal documentation is clickable', () => {
+    forEach(['termsAndConditionsLink', 'privacyPolicyLink', 'cookiesPolicyLink'])
+    .it('should check if the legal documentation is clickable', link => {
         // Assert
-        expect(registration.termsAndConditionsLinkCanBeClicked()).toBe(true);
-        expect(registration.privacyPolicyLinkCanBeClicked()).toBe(true);
-        expect(registration.cookiesPolicyLinkCanBeClicked()).toBe(true);
+        expect(registration.canBeClicked(link)).toBe(true);
     });
 });
