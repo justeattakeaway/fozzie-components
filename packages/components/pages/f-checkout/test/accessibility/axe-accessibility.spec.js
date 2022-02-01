@@ -138,7 +138,7 @@ describe('Accessibility tests', () => {
             mobileNumber: '+447111111111'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();
@@ -178,7 +178,7 @@ describe('Accessibility tests', () => {
             addressPostcode: 'BS1 1AA'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();
@@ -216,7 +216,7 @@ describe('Accessibility tests', () => {
             tableIdentifier: '1'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();
@@ -248,7 +248,7 @@ describe('Accessibility tests', () => {
             mobileNumber: '+447111111111'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();
@@ -283,7 +283,7 @@ describe('Accessibility tests', () => {
             addressPostcode: 'BS1 1AA'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();
@@ -316,7 +316,7 @@ describe('Accessibility tests', () => {
             tableIdentifier: '1'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();
