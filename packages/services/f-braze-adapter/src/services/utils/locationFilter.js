@@ -6,7 +6,7 @@
  */
 const hasValidLocation = (lat, lon) => {
     const regexExp = /^((-?|\+?)?\d+(\.\d+)?),\s*((-?|\+?)?\d+(\.\d+)?)$/gi;
-    return regexExp.test(`${lat},${lon}`);
+    return regexExp.test(`${lat},${lon}`) && parseFloat(lat) !== 0 && parseFloat(lon) !== 0;
 };
 
 /**
@@ -35,9 +35,9 @@ const locationFilter = (cards, { location, latitude, longitude }) => cards.filte
 
     // will be undefined if no locations KVP exists
     const locationsList = card?.location?.split(',');
-    // return true if NO KVP
+    // return true if NO KVP and if user has no location and hasPlaceholder is false or user has location and hasPlaceholder is true
     if (locationsList === undefined) {
-        return !hasPlaceHolder;
+        return !!((hasPlaceHolder && location && hasValidLocation(latitude, longitude)) || (!hasPlaceHolder));
     }
 
     if (hasPlaceHolder) {
