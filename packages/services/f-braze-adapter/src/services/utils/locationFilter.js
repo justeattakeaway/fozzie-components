@@ -31,15 +31,16 @@ const locationFilter = (cards, { location, latitude, longitude }) => cards.filte
     const needsLocation = card?.url?.includes('$LOCATION$');
     const needsLatitude = card?.url?.includes('$LAT$');
     const needsLongitude = card?.url?.includes('$LON$');
+    const hasPlaceHolder = needsLongitude || needsLatitude || needsLocation;
 
     // will be undefined if no locations KVP exists
     const locationsList = card?.location?.split(',');
     // return true if NO KVP
     if (locationsList === undefined) {
-        return !(needsLongitude || needsLatitude || needsLocation);
+        return !hasPlaceHolder;
     }
 
-    if (needsLongitude || needsLatitude || needsLocation) {
+    if (hasPlaceHolder) {
         // if we have a location attribute and or one of the placeholders but
         // NO current location return false
         if (!location) {
@@ -49,9 +50,7 @@ const locationFilter = (cards, { location, latitude, longitude }) => cards.filte
         if (!hasValidLocation(latitude, longitude)) {
             return false;
         }
-    }
-
-    if (!location) {
+    } else if (!location) {
         return true;
     }
 
