@@ -29,12 +29,14 @@ function toFormattedPostcode (postcode, tenant) {
 }
 
 function getAddress (postcode, tenant, address) {
+    const shouldShowAdministrativeArea = tenant === 'au';
+
     if (!address) {
         return {
             line1: '',
             line2: '',
             locality: '',
-            ...(tenant === 'au' ? { administrativeArea: '' } : {}),
+            ...(shouldShowAdministrativeArea ? { administrativeArea: '' } : {}),
             postcode: toFormattedPostcode(postcode, tenant)
         };
     }
@@ -45,7 +47,7 @@ function getAddress (postcode, tenant, address) {
         line1: address.Line1,
         line2: lines.filter(l => l).join(', '),
         locality: address.City,
-        ...(address.Line4 ? { administrativeArea: address.Line4 } : {}),
+        ...(shouldShowAdministrativeArea ? { administrativeArea: address.Line4 } : {}),
         postcode: address.ZipCode
     };
 }
