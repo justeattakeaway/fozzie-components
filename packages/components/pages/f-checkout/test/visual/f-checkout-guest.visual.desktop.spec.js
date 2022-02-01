@@ -65,7 +65,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
             mobileNumber: '07234567890'
         };
 
-        checkout.fieldInputValues = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();
