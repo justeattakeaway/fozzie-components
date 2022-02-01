@@ -209,9 +209,6 @@ export default {
 
     .c-formField-field--checkbox:disabled:checked + label:before {
         background-image: inline('#{$icon-path}/check--grey.svg');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 14px;
     }
 
     .c-formField-field--radio:disabled:checked + label:before {
