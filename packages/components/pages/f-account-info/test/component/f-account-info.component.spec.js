@@ -4,6 +4,8 @@ const AccountInfo = require('../../test-utils/component-objects/f-account-info.c
 
 let accountInfo;
 
+const illegalInput = '123';
+
 describe('f-account-info component tests', () => {
     beforeEach(() => {
         accountInfo = new AccountInfo();
@@ -31,26 +33,19 @@ describe('f-account-info component tests', () => {
 
 
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
-        .it('should display an error message immediately when %s input has been deleted', field => {
-            // Act
-            accountInfo.clearBlurField(field);
-            accountInfo.tabOutOfField(field);
+    .it('should display an error message immediately when %s input has been deleted', field => {
+        // Act
+        accountInfo.clearBlurField(field);
+        accountInfo.tabOutOfField(field);
 
-            // Assert
-            expect(accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
-        });
+        // Assert
+        expect(accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
+    });
 
     it('should display the illegal first name error message immediately on click', () => {
-        // Arrange
-        const customerInput = {
-            firstName: {
-                input: '123'
-            }
-        };
-
         // Act
         accountInfo.clearBlurField('firstName');
-        accountInfo.populateAccountForm('firstName', customerInput);
+        accountInfo.setFieldValue('firstName', illegalInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -58,16 +53,9 @@ describe('f-account-info component tests', () => {
     });
 
     it('should display the illegal last name error message immediately on click', () => {
-        // Arrange
-        const customerInput = {
-            lastName: {
-                input: '123'
-            }
-        };
-
         // Act
         accountInfo.clearBlurField('lastName');
-        accountInfo.populateAccountForm('lastName', customerInput);
+        accountInfo.setFieldValue('lastName', illegalInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
@@ -75,33 +63,19 @@ describe('f-account-info component tests', () => {
     });
 
     it('should display the illegal phone number error message immediately on click', () => {
-        // Arrange
-        const customerInput = {
-            phoneNumber: {
-                input: '123'
-            }
-        };
-
         // Act
         accountInfo.clearBlurField('phoneNumber');
-        accountInfo.populateAccountForm('phoneNumber', customerInput);
+        accountInfo.setFieldValue('phoneNumber', illegalInput);
         accountInfo.tabOutOfField('phoneNumber');
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
     });
 
-    it('should display invalid postcode error message immediately on click', () => {
-        // Arrange
-        const customerInput = {
-            postcode: {
-                input: '123'
-            }
-        };
-
+    it('should display the illegal postcode error message immediately on click', () => {
         // Act
         accountInfo.clearBlurField('postcode');
-        accountInfo.populateAccountForm('postcode', customerInput);
+        accountInfo.setFieldValue('postcode', illegalInput);
         accountInfo.clickOutOfInputField();
 
         // Assert
