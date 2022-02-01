@@ -11,7 +11,7 @@
                 "courierNoteAccepted": false
             },
             "dineIn": {
-                "orderNoteAccepted": false
+                "orderNoteAccepted": true
             }
         }
     }

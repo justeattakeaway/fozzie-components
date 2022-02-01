@@ -9,6 +9,7 @@ import checkoutAvailableFulfilment from '../../../stories/demo/checkout-availabl
 import customerAddresses from '../../../stories/demo/get-address.json';
 import geoLocationDetails from '../../../stories/demo/get-geo-location.json';
 import customer from '../../../stories/demo/get-customer.json';
+import splitNotesConfig from '../../../stories/demo/get-notes-config-split.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';
@@ -1304,7 +1305,11 @@ describe('CheckoutModule', () => {
                 // Arrange
                 const splitNotesEnabledState = {
                     ...state,
+                    features: {
+                        isSplitNotesEnabled: true
+                    },
                     notesConfiguration: {
+                        ...splitNotesConfig,
                         isSplitNotesEnabled: true
                     },
                     notes: { courier: { note: 'Please do not knock' }, kitchen: { note: 'No ketchup please' } }
@@ -1323,6 +1328,9 @@ describe('CheckoutModule', () => {
                 // Arrange
                 const splitNotesDisabledState = {
                     ...state,
+                    features: {
+                        isSplitNotesEnabled: false
+                    },
                     notesConfiguration: {
                         isSplitNotesEnabled: false
                     },
@@ -1333,7 +1341,7 @@ describe('CheckoutModule', () => {
                     const expectedResult = [{ type: 'delivery', note: splitNotesDisabledState.notes.order.note }];
 
                     // Act
-                    const result = getters.formattedNotes(splitNotesDisabledState);
+                    const result = getters.formattedNotes(splitNotesDisabledState, getters);
 
                     // Assert
                     expect(result).toEqual(expectedResult);
