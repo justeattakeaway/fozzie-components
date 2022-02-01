@@ -1,6 +1,7 @@
 <template>
     <div v-if="notesConfiguration.isSplitNotesEnabled">
         <accordion
+            v-if="shouldShowCourierNotes"
             :id="noteTypeCourierOrOrder"
             :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
             <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}</span>
@@ -78,6 +79,7 @@ export default {
             'kitchenNoteValue',
             'noteTypeCourierOrOrder',
             'noteValue',
+            'shouldShowCourierNotes',
             'shouldShowKitchenNotes'
         ])
     },

@@ -1312,7 +1312,7 @@ describe('CheckoutModule', () => {
 
                 it('should return the formattedNotes as they are stored in state', () => {
                     // Act
-                    const result = getters.formattedNotes(splitNotesEnabledState);
+                    const result = getters.formattedNotes(splitNotesEnabledState, getters);
 
                     // Assert
                     expect(result).toEqual(splitNotesEnabledState.notes);

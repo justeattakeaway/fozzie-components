@@ -630,10 +630,23 @@ export default {
     },
 
     getters: {
-        formattedNotes: state => (state.notesConfiguration.isSplitNotesEnabled ? state.notes : [{ type: 'delivery', note: state.notes.order?.note }]),
+        shouldShowCourierNotes: state => state.notesConfiguration[state.serviceType]?.courierNoteAccepted,
         shouldShowKitchenNotes: state => state.notesConfiguration[state.serviceType]?.kitchenNoteAccepted,
         noteTypeCourierOrOrder: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER),
         noteValue: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? state.notes.courier?.note : state.notes.order?.note),
-        kitchenNoteValue: state => state.notes.kitchen?.note || ''
+        kitchenNoteValue: state => state.notes.kitchen?.note || '',
+        formattedNotes: (state, getters) => (state.notesConfiguration.isSplitNotesEnabled ?
+            {
+                ...(getters.shouldShowCourierNotes && {
+                    courier: {
+                        note: state.notes.courier?.note
+                    }
+                }),
+                ...(getters.shouldShowKitchenNotes && {
+                    kitchen: {
+                        note: state.notes.kitchen?.note
+                    }
+                })
+            } : [{ type: 'delivery', note: state.notes.order?.note }])
     }
 };
