@@ -313,7 +313,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
+            const addressDetails = addressService.getClosestAddress(data, tenant, currentPostcode);
 
             commit(UPDATE_ADDRESS_DETAILS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });

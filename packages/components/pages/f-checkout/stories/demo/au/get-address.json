@@ -1,0 +1,35 @@
+{
+  "Addresses": [
+    {
+      "AddressId": 8622386,
+      "AddressName": "2000",
+      "City": "Sydney",
+      "Line1": "123 George Street",
+      "Line2": "Line 2",
+      "Line3": "The Rocks",
+      "Line4": "New South Wales",
+      "ZipCode": "2000"
+    },
+    {
+      "AddressId": 17731860,
+      "AddressName": "2089",
+      "City": "Sydney",
+      "Line1": "196 Kurraba Road",
+      "Line2": "Unit 5",
+      "Line3": "Neutral Bay",
+      "Line4": "New South Wales",
+      "ZipCode": "2089"
+    },
+    {
+      "AddressId": 18086210,
+      "AddressName": "3071",
+      "City": "Melbourne",
+      "Line1": "94 Shaftesbury Parade",
+      "Line2": null,
+      "Line3": "Thornbury",
+      "Line4": "Victoria",
+      "ZipCode": "3071"
+    }
+  ],
+  "DefaultAddress": 8622386
+}

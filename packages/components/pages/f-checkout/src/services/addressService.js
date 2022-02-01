@@ -1,17 +1,25 @@
 const storedLocationKey = 'je-full-address-details';
 
-function isFullPostCode (postcode) {
-    return !postcode ? false : postcode.length > 4;
+function isFullPostCode (postcode, tenant) {
+    const countryPostcodeLengths = {
+        uk: postcode.length > 5,
+        au: postcode.length === 4,
+        nz: postcode.length === 4
+    };
+
+    return !postcode ? false : countryPostcodeLengths[tenant];
 }
 
-function toFormattedPostcode (postcode) {
+const formatPostcode = postcode => postcode.replace(/\s/g, '').replace(/-/g, '');
+
+function toFormattedPostcode (postcode, tenant) {
     if (!postcode) {
         return '';
     }
 
-    let formatted = postcode.replace(/ /g, '').replace(/-/g, '');
+    let formatted = formatPostcode(postcode);
 
-    if (isFullPostCode(formatted)) {
+    if (isFullPostCode(formatted, tenant) && tenant === 'uk') {
         const last3 = formatted.slice(formatted.length - 3);
         const prefix = formatted.slice(0, formatted.length - 3);
         formatted = `${prefix} ${last3}`;
@@ -20,13 +28,14 @@ function toFormattedPostcode (postcode) {
     return formatted.toUpperCase();
 }
 
-function getAddress (postcode, address) {
+function getAddress (postcode, tenant, address) {
     if (!address) {
         return {
             line1: '',
             line2: '',
             locality: '',
-            postcode: toFormattedPostcode(postcode)
+            ...(tenant === 'au' ? { administrativeArea: '' } : {}),
+            postcode: toFormattedPostcode(postcode, tenant)
         };
     }
 
@@ -36,28 +45,41 @@ function getAddress (postcode, address) {
         line1: address.Line1,
         line2: lines.filter(l => l).join(', '),
         locality: address.City,
+        ...(address.Line4 ? { administrativeArea: address.Line4 } : {}),
         postcode: address.ZipCode
     };
 }
 
-function getDefaultAddress (addresses) {
-    return !addresses ? null : addresses.find(a => a && a.IsDefault);
+function getDefaultAddress (addressData, tenant) {
+    const addresses = addressData.Addresses;
+
+    return !addresses ? null : addresses.find(address => {
+        if (tenant === 'uk') {
+            return address && address.IsDefault;
+        }
+
+        const defaultAddressId = addressData.DefaultAddress;
+
+        return address.AddressId === defaultAddressId;
+    });
 }
 
-const formatPostcode = postcode => postcode.replace(/\s/g, '').replace(/-/g, '');
-
-function getAddressClosestToPostcode (postcode, addresses) {
+function getAddressClosestToPostcode (postcode, addressData, tenant) {
     if (!postcode) {
-        return getDefaultAddress(addresses);
+        return getDefaultAddress(addressData, tenant);
     }
+
+    const addresses = addressData.Addresses;
 
     let formattedPostcode = formatPostcode(postcode);
 
     let address = addresses.find(a => formatPostcode(a.ZipCode) === formattedPostcode);
 
-    if (isFullPostCode(formattedPostcode)) {
+    if (isFullPostCode(formattedPostcode, tenant)) {
         formattedPostcode = formattedPostcode.slice(0, formattedPostcode.length - 3);
     }
+
+
 
     address = address || addresses.find(a => a && a.ZipCode.startsWith(formattedPostcode));
 
@@ -136,16 +158,11 @@ function doesAddressInStorageAndFormMatch (storedAddress, formAddress) {
  * @param tenant - The current tenant
  * @returns {Object} - The closest formatted address
  */
-function getClosestAddress (addresses, tenant, currentPostcode) {
-    if (tenant !== 'uk') {
-        // TODO: Add implementation for other tenants
-        return getAddress('', {});
-    }
-
+function getClosestAddress (addressData, tenant, currentPostcode) {
     const postcode = currentPostcode || '';
-    const address = getAddressClosestToPostcode(postcode, addresses);
+    const address = getAddressClosestToPostcode(postcode, addressData, tenant);
 
-    return getAddress(postcode, address);
+    return getAddress(postcode, tenant, address);
 }
 
 export default {

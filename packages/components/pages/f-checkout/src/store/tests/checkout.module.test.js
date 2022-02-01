@@ -6,7 +6,7 @@ import basketInvalidProducts from '../../../stories/demo/get-basket-invalid-prod
 import basketOfflineProducts from '../../../stories/demo/get-basket-offline-products.json';
 import basketDeliveryAgeRestricted from '../../../stories/demo/get-basket-delivery-age-restriction.json';
 import checkoutAvailableFulfilment from '../../../stories/demo/checkout-available-fulfilment.json';
-import customerAddresses from '../../../stories/demo/get-address.json';
+import customerAddresses from '../../../stories/demo/uk/get-address.json';
 import geoLocationDetails from '../../../stories/demo/get-geo-location.json';
 import customer from '../../../stories/demo/get-customer.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
@@ -759,7 +759,7 @@ describe('CheckoutModule', () => {
                 await getAddress(context, payload);
 
                 // Assert
-                expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses.Addresses, payload.tenant, payload.currentPostcode);
+                expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses, payload.tenant, payload.currentPostcode);
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_ADDRESS_DETAILS, expectedFormattedAddress);
             });
