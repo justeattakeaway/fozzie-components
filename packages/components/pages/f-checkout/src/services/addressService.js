@@ -2,7 +2,7 @@ const storedLocationKey = 'je-full-address-details';
 
 function isFullPostCode (postcode, tenant) {
     const countryPostcodeLengths = {
-        uk: postcode.length > 5,
+        uk: postcode.length >= 5,
         au: postcode.length === 4,
         nz: postcode.length === 4
     };
