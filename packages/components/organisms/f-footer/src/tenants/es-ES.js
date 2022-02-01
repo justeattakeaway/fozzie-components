@@ -211,9 +211,7 @@ export default {
                     gtm: 'click_ethics_hotline'
                 },
                 {
-                    url: 'mailto:prensa@justeattakeaway.com',
-                    target: '_blank',
-                    rel: 'noopener',
+                    url: '/info/prensa',
                     text: 'Prensa',
                     gtm: 'click_prensa'
                 }
