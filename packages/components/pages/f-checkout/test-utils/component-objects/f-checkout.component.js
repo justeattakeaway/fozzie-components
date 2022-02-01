@@ -136,7 +136,7 @@ module.exports = class Checkout extends Page {
         }
     }
 
-    get inputFieldValues () { return this.customerInput || {}; }
+    get inputFieldValues () { return this.values || {}; }
 
     set inputFieldValues (customerInput) {
         this.values = customerInput;
