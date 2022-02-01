@@ -150,7 +150,7 @@ describe('LocationFilter', () => {
 
         it('should NOT return cards where the users location does NOT match the cards location KVP', () => {
             // Arrange & Act
-            const filteredCards = locationFilter(MOCK_CARDS_WITH_LOCATION_KVP, {...MOCK_CURRENT_LOCATION, location: 'BS1 3EQ'});
+            const filteredCards = locationFilter(MOCK_CARDS_WITH_LOCATION_KVP, { ...MOCK_CURRENT_LOCATION, location: 'BS1 3EQ' });
             const card = filteredCards.find(c => c.id === '2');
             const card2 = filteredCards.find(c => c.id === '3');
             const card3 = filteredCards.find(c => c.id === '4');
