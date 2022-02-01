@@ -42,6 +42,7 @@ export { default as CertificateConfianzaIcon } from '../icons/CertificateConfian
 export { default as ChevronSplitIcon } from '../icons/ChevronSplitIcon';
 export { default as ChevronIcon } from '../icons/ChevronIcon';
 export { default as ClockFilledIcon } from '../icons/ClockFilledIcon';
+export { default as ClockSmallIcon } from '../icons/ClockSmallIcon';
 export { default as ClockIcon } from '../icons/ClockIcon';
 export { default as CloseCircleIcon } from '../icons/CloseCircleIcon';
 export { default as CollectionIcon } from '../icons/CollectionIcon';
@@ -141,4 +142,5 @@ export { default as StopwatchIcon } from '../icons/StopwatchIcon';
 export { default as SuccessIcon } from '../icons/SuccessIcon';
 export { default as TickIcon } from '../icons/TickIcon';
 export { default as VegetarianIcon } from '../icons/VegetarianIcon';
+export { default as WalkingSmallIcon } from '../icons/WalkingSmallIcon';
 export { default as WarningIcon } from '../icons/WarningIcon';

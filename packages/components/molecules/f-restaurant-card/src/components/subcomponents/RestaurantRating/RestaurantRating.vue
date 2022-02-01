@@ -130,6 +130,10 @@ export default {
         isOwnRatingMessage: {
             type: String,
             default: ''
+        },
+        wrapperComponent: {
+            type: String,
+            default: ''
         }
     },
     data () {

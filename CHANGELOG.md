@@ -11,6 +11,14 @@ v6.0.0
 - `spacing()` calls throughout repo to new Pie token references e.g `spacing(x2)` > `spacing(d)`
 
 
+v5.11.0
+------------------------------
+*January 27, 2022*
+
+### Changed
+- `test/shared.config` added additional filename `test/visual/*.visual.spec.js` to testType array.
+
+
 v5.10.1
 ------------------------------
 *January 21, 2022*
