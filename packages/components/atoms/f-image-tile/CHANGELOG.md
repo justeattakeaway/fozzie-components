@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.5.1
+------------------------------
+*January 31, 2022*
+
+### Updated
+- Updated tabindex value on input 
+
+v0.5.0
+------------------------------
+*January 28, 2022*
+
+### Added
+- Focus styles for keyboard navigation
+
 v0.4.0
 ------------------------------
 *January 26, 2022*
