@@ -65,7 +65,7 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
             mobileNumber: '07234567890'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();
@@ -165,7 +165,7 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
             addressPostcode: 'W1D 4HT'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.setFieldValues();
@@ -261,7 +261,7 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
             tableIdentifier: '10'
         };
 
-        checkout.expectedCustomerInfo = customerInfo;
+        checkout.inputFieldValues = customerInfo;
 
         // Act
         checkout.load();

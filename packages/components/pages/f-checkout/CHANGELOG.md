@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.16.0
 ------------------------------
-*January 27, 2022*
+*February 1, 2022*
 
-### Changed
-- Updated `component`, `visual` and `a11y` tests with functions from `f-wdio-utils`
+### Updated
+- `component`, `visual` and `a11y` tests with functions from `f-wdio-utils`
 
 
 v3.15.4

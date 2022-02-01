@@ -136,10 +136,10 @@ module.exports = class Checkout extends Page {
         }
     }
 
-    get customerInput () { return this.customerInfo || 'customer info has not been set'; }
+    get inputFieldValues () { return this.customerInput || {}; }
 
-    set expectedCustomerInfo (info) {
-        this.customerInfo = info;
+    set inputFieldValues (customerInput) {
+        this.values = customerInput;
     }
 
 
@@ -222,7 +222,7 @@ module.exports = class Checkout extends Page {
     }
 
     setFieldValues () {
-        Object.keys(this.customerInput).forEach(field => super.setFieldValue(field, this.customerInput[field]));
+        Object.keys(this.inputFieldValues).forEach(field => super.setFieldValue(field, this.inputFieldValues[field]));
     }
 
     testTabOrder (tabOrder) {
