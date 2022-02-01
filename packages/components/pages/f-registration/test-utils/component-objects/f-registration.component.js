@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
+
 const {
     REGISTRATION_COMPONENT,
     CREATE_ACCOUNT_BUTTON,
@@ -68,6 +69,19 @@ module.exports = class Registration extends Page {
         }
     };
 
+    LinksAndButtons = {
+        termsAndConditionsLink: {
+            get cta () { return $(TERMS_AND_CONDITIONS_LINK); }
+        },
+        privacyPolicyLink: {
+            get cta () { return $(PRIVACY_POLICY_LINK); }
+        },
+        cookiesPolicyLink: {
+            get cta () { return $(COOKIES_POLICY_LINK); }
+        }
+    }
+
+
     load () {
         super.load(this.component);
     }
@@ -84,22 +98,7 @@ module.exports = class Registration extends Page {
         return this.fields[fieldName].input.isDisplayed();
     }
 
-    /**
-     * @description
-     * Inputs user details into the registration component and submits the form.
-     *
-     * @param {Object} userInfo
-     * @param {String} userInfo.firstName The user's first name
-     * @param {String} userInfo.lastName The user's last name
-     * @param {String} userInfo.email The user's e-mail address
-     * @param {String} userInfo.password The user's password
-     */
-    submitForm (userInfo) {
-        const { fields } = this;
-        fields.firstName.input.setValue(userInfo.firstName);
-        fields.lastName.input.setValue(userInfo.lastName);
-        fields.email.input.setValue(userInfo.email);
-        fields.password.input.setValue(userInfo.password);
+    submit () {
         this.createAccountButton.click();
     }
 
@@ -123,15 +122,7 @@ module.exports = class Registration extends Page {
         return field.innerText === field.invalidFormat;
     }
 
-    termsAndConditionsLinkCanBeClicked () {
-        return this.termsAndConditionsLink.isClickable();
-    }
-
-    privacyPolicyLinkCanBeClicked () {
-        return this.privacyPolicyLink.isClickable();
-    }
-
-    cookiesPolicyLinkCanBeClicked () {
-        return this.cookiesPolicyLink.isClickable();
+    canBeClicked (link) {
+        return this.LinksAndButtons[link].cta.isClickable();
     }
 };
