@@ -106,8 +106,8 @@ export default {
 $card-bgColor                             : $color-container-default;
 $card-borderColor                         : $color-border-default;
 $card-borderRadius                        : $radius-rounded-c;
-$card-padding                             : spacing(x2);
-$card-padding-large                       : spacing(x4);
+$card-padding                             : spacing(d);
+$card-padding-large                       : spacing(f);
 $card--pageContentWrapper-width           : 472px; // so that it falls on our 8px spacing grid
 
 .c-card {
@@ -138,28 +138,28 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
     .c-card--pageContentWrapper {
         width: 100%;
         transition: 250ms padding ease-in-out;
-        margin: spacing(x5) 0;
+        margin: spacing(g) 0;
 
         @include media('>=#{$card--pageContentWrapper-width}') {
             width: $card--pageContentWrapper-width;
-            margin: spacing(x5) auto;
+            margin: spacing(g) auto;
         }
 
         & > .c-card-innerSpacing {
-            padding: spacing(x3) 6% 0;
+            padding: spacing(e) 6% 0;
 
             @include media('>=narrow') {
-                padding: spacing(x6) 10%;
+                padding: spacing(h) 10%;
             }
 
             @include media('>=#{$card--pageContentWrapper-width}') {
-                padding: spacing(x6) spacing(x10);
+                padding: spacing(h) spacing(j);
             }
         }
     }
 
     .c-card-heading {
-        margin-bottom: spacing(x2);
+        margin-bottom: spacing(d);
     }
 
     .c-card-heading--centerAligned {

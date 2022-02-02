@@ -90,7 +90,7 @@ export default {
 
 .list-link {
     display: block;
-    padding: spacing(x1.5) spacing(x2);
+    padding: spacing(c) spacing(d);
     margin: 0;
     font-family: $font-family-base;
     font-weight: 300;
@@ -112,7 +112,7 @@ export default {
     }
 
     @include media('<=mid') {
-        padding-left: spacing(x6);
+        padding-left: spacing(h);
     }
 
 }

@@ -70,8 +70,8 @@ export default {
         color: $color-content-default;
         cursor: pointer;
         font-weight: $font-weight-bold;
-        padding: spacing(x2) 0;
-        margin-top: spacing(x2);
+        padding: spacing(d) 0;
+        margin-top: spacing(d);
         outline: none;
         text-decoration: none;
         text-align: left;

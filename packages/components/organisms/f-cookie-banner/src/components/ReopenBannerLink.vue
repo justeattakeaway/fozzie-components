@@ -33,7 +33,7 @@ export default {
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    padding: 0 spacing() spacing(x2);
+    padding: 0 spacing() spacing(d);
 }
 
 .reopen-link--greyBg {

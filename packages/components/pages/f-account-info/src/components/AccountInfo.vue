@@ -405,11 +405,11 @@ export default {
 
 <style lang="scss" module>
 .c-accountInfo-submitButton {
-    margin-top: spacing(x4);
+    margin-top: spacing(f);
 }
 
 .c-accountInfo-changePasswordButton {
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
 }
 
 .c-accountInfo-errorCard {

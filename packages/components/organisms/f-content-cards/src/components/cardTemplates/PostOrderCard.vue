@@ -106,7 +106,7 @@ export default {
     .c-postOrderCard {
         border: 1px solid $color-border-strong;
         border-radius: $radius-rounded-c;
-        padding: spacing(x3);
+        padding: spacing(e);
         max-width: 100%;
         flex: 1 1 0%; // do not remove unit its intentional for IE11
 
@@ -118,11 +118,11 @@ export default {
         .c-postOrderCard-title {
             @include font-size(heading-m);
 
-            margin-bottom: spacing(x2);
+            margin-bottom: spacing(d);
             text-align: left;
 
             @include media ('<mid') {
-                margin: spacing(x2);
+                margin: spacing(d);
             }
         }
     }

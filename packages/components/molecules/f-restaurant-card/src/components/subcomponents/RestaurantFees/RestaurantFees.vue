@@ -49,13 +49,13 @@ export default {
 
 .c-restaurantCard-fees-item {
     white-space: nowrap;
-    margin: spacing(x0.5) 0;
+    margin: spacing(a) 0;
 
     &:after {
         content: '\2022'; // round bullet character
         color: $color-content-subdued;
         line-height: 1;
-        margin: 0 spacing(x0.5);
+        margin: 0 spacing(a);
     }
 
     &:last-of-type {
