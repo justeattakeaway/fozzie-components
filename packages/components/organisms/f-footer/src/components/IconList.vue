@@ -106,7 +106,7 @@ export default {
 
 .c-iconList-listItem {
     margin-bottom: spacing();
-    margin-right: spacing(x3);
+    margin-right: spacing(e);
 
     a,
     svg {
@@ -130,8 +130,8 @@ export default {
 .c-iconList--apps {
 
     .c-iconList-listItem {
-        margin-right: spacing(x2);
-        margin-bottom: spacing(x2);
+        margin-right: spacing(d);
+        margin-bottom: spacing(d);
     }
 
     svg {
@@ -145,12 +145,12 @@ export default {
     align-items: center;
 
     @include media('<wide') {
-        padding: spacing(x2) spacing(x2) 0;
+        padding: spacing(d) spacing(d) 0;
     }
 
     .c-iconList-listItem {
         @include media('>=wide') {
-            margin-right: spacing(x6);
+            margin-right: spacing(h);
         }
     }
 

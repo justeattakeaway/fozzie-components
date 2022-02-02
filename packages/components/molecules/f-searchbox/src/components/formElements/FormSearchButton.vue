@@ -128,7 +128,7 @@ export default {
 }
 
 .c-search-btn--compressed {
-    margin: spacing(x0.5);
+    margin: spacing(a);
     border-radius: $border-radius;
     height: 48px;
     min-width: 48px;

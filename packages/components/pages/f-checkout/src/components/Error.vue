@@ -88,8 +88,8 @@ export default {
 .c-checkout-error {
     @include media('<=narrow') {
         border: none;
-        padding-top: spacing(x2);
-        padding-bottom: spacing(x2);
+        padding-top: spacing(d);
+        padding-bottom: spacing(d);
     }
 }
 </style>

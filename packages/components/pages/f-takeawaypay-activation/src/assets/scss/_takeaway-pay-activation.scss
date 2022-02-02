@@ -5,7 +5,7 @@
 
 .c-takeawaypayActivation-title {
     @include font-size(subheading-s);
-    padding-top: spacing(x2);
+    padding-top: spacing(d);
 }
 
 .c-takeawaypayActivation-description {
@@ -17,5 +17,5 @@
 }
 
 .c-takeawaypayActivation-actions {
-    padding-top: spacing(x3);
+    padding-top: spacing(e);
 }

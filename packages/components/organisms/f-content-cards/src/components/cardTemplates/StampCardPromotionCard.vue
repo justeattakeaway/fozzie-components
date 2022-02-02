@@ -121,28 +121,28 @@ $stampCard-promo-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
 
 .c-stampCardPromotion1-icon {
     position: absolute;
-    top: spacing(x2);
-    left: spacing(x2);
+    top: spacing(d);
+    left: spacing(d);
     margin: 0;
     border-radius: $radius-rounded-c;
     border: 0.5px solid $color-border-default;
 
     @include media('>narrowMid') {
-        top: spacing(x1.5) - 2px;
+        top: spacing(c) - 2px;
     }
 }
 
 .c-stampCardPromotion1-info {
-    padding: spacing(x2);
+    padding: spacing(d);
     background-color: $color-container-default;
     position: static;
     display: block;
     text-align: left;
     min-height: 0;
 
-    margin-top: - spacing(x3);
-    margin-left: spacing(x2);
-    margin-right: spacing(x2) - 1px;
+    margin-top: - spacing(e);
+    margin-left: spacing(d);
+    margin-right: spacing(d) - 1px;
     border-radius: $radius-rounded-c;
     box-shadow: $stampCard-promo-shadow;
 
@@ -163,7 +163,7 @@ $stampCard-promo-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
 .c-stampCardPromotion1-statusText {
     @include font-size(body-s);
 
-    margin-top: spacing(x0.5);
+    margin-top: spacing(a);
 
     @include media ('>narrowMid') {
         @include font-size('body-l', false);

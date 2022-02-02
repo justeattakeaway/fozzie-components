@@ -26,7 +26,7 @@ export default {
 .c-restaurantCard-cuisines {
     display: flex;
     flex-wrap: wrap;
-    margin: spacing(x0.5) 0;
+    margin: spacing(a) 0;
     padding: 0;
     list-style: none;
     list-style-image: none;
@@ -39,7 +39,7 @@ export default {
 .c-restaurantCard-cuisines-item {
     position: relative;
     padding-right: spacing();
-    margin-right: spacing(x0.5);
+    margin-right: spacing(a);
     white-space: nowrap;
     font-size: $font-body-s-paragraph * 1px;
 

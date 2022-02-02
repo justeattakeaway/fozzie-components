@@ -96,9 +96,9 @@ $form-dropdown-iconIndent--small              : 17px;
 $form-dropdown-iconIndent--large              : 25px;
 
 .c-formDropdown-icon {
-    width: spacing(x1.5);
+    width: spacing(c);
     position: absolute;
-    right: spacing(x3);
+    right: spacing(e);
     transform: rotate(180deg);
     pointer-events: none;
 
