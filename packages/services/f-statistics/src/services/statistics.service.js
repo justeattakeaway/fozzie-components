@@ -5,6 +5,7 @@ import statisticsModule from '../store/statistics.module';
 // TODO: move to defaultOption
 const BATCH_QUEUE_MAX_BYTES = 1000;
 const BATCH_QUEUE_SIZE = 5;
+const BATCH_INTERVAL_TIMER = 5000;
 
 export default class StatisticsService {
     #configuration;
@@ -48,15 +49,15 @@ export default class StatisticsService {
         return this.#store.state[`${this.#configuration.namespace}`].logs;
     }
 
-    publishBasedOnNumber () {
+    #publishBasedOnNumber () {
         if (this.#logs.length >= BATCH_QUEUE_SIZE) this.#publishLogs();
     }
 
     #publishBasedOnTime () {
-        this.#publishLogs();
+        if (!this.#publishIntervalTimer) { setInterval(this.#publishLogs.bind(this), BATCH_INTERVAL_TIMER); }
     }
 
-    publishBasedOnByteSize () {
+    #publishBasedOnByteSize () {
         const queueByteSize = new Blob([JSON.stringify([...this.#logs])]).size;
         if (queueByteSize >= BATCH_QUEUE_MAX_BYTES) this.#publishLogs();
     }
@@ -77,10 +78,7 @@ export default class StatisticsService {
     publish (message, statisticPayload) {
         const log = this.#makeLog(message, statisticPayload);
         this.#store.dispatch(`${this.#configuration.namespace}/addLog`, log);
-        if (!this.#publishIntervalTimer) {
-            setInterval(this.#publishBasedOnTime.bind(this), 10000);
-        }
-        this.publishBasedOnByteSize();
-        this.publishBasedOnNumber();
+        this.#publishBasedOnByteSize();
+        this.#publishBasedOnNumber();
     }
 }
