@@ -1,5 +1,5 @@
 <template>
-    <div v-if="features.isSplitNotesEnabled">
+    <div v-if="notesConfiguration.isSplitNotesEnabled">
         <accordion
             v-if="courierNoteAccepted"
             :id="courier"
@@ -71,7 +71,7 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'features',
+            'notesConfiguration',
             'serviceType'
         ]),
 
