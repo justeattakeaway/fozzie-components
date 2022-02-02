@@ -115,7 +115,8 @@ const fulfilmentTimeOptions = {
     none: null,
     'Selected Asap Time': 'user-selected-asap',
     'Selected Later Time': 'user-selected-later',
-    'Selected Unavailable Time': 'user-selected-unavailable-time'
+    'Selected Unavailable Time': 'user-selected-unavailable-time',
+    'Available Time Issues': 'issues'
 };
 
 const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
@@ -188,9 +189,6 @@ export const CheckoutComponent = () => ({
 
         getCheckoutUrl () {
             let url;
-            if (this.fulfilmentTimeSelection) {
-                url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
-            }
 
             if (this.getCheckoutError && this.getCheckoutError !== noTimeAvailable) {
                 url = `/checkout-${this.getCheckoutError}-get-error.json`;
@@ -235,6 +233,11 @@ export const CheckoutComponent = () => ({
             if (this.getCheckoutError === noTimeAvailable) {
                 return mockedRequests.checkoutAvailableFulfilmentNoTimeAvailable.url;
             }
+
+            if (this.fulfilmentTimeSelection) {
+                return `/checkout-available-fulfilment-${this.fulfilmentTimeSelection}.json`;
+            }
+
             return this.isAsapAvailable ? mockedRequests.checkoutAvailableFulfilment.url : mockedRequests.checkoutAvailableFulfilmentPreorder.url;
         },
 
