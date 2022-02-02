@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.16.0
+------------------------------
+*Februrary 02, 2022*
+
+### Added
+- New `RestaurantAvailability` component for displaying pre-order and collection info
+- Supporting unit tests
+- New blue colour variant to `IconText` class modifiers
+- Storybook file for the `RestaurantAvailability` component
+### Changed
+- Updated f-vue-icons to `3.5.0`
+- Use new clock-small icon on ETA
+- Directly target the SVG path elements in `IconText` colour modifiers to avoid default fills present in some icons
+- Simplified restaurant Storybook selector
+
 v0.15.0
 ------------------------------
 *January 31, 2022*

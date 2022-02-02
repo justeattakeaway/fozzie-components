@@ -27,7 +27,6 @@
 import { ClockSmallIcon, WalkingSmallIcon } from '@justeat/f-vue-icons';
 import isValidAvailabilityType from './propValidators/availabilityType.validator';
 import availabilityTypes from './availabilityTypes';
-
 import IconText from '../IconText.vue';
 
 const availabilityTypeIcons = {
@@ -47,7 +46,7 @@ export default {
         WalkingSmallIcon
     },
     props: {
-        // The type of availability i.e. Pre-order, Collection
+        // A string representation of pre-defined availability types: PREORDER, COLLECTION
         availabilityType: {
             type: String,
             default: null,
