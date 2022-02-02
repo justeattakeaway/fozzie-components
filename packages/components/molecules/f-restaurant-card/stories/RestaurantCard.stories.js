@@ -16,11 +16,7 @@ export default {
 export const RestaurantCardComponent = (args, { argTypes }) => ({
     components: { RestaurantCard },
     props: Object.keys(argTypes),
-    template:  `<restaurant-card v-bind="$props">
-                    <template v-slot:new-label>
-                        <p>Is New</p>
-                    </template>
-                </restaurant-card>`
+    template:  '<restaurant-card v-bind="$props"/>'
 });
 
 RestaurantCardComponent.args = {
