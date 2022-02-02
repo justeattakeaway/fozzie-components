@@ -41,6 +41,16 @@ describe('Statistics Module ::', () => {
                 expect(commit).toHaveBeenLastCalledWith(ADD_LOG, log);
             });
         });
+
+        describe('clearLogs ::', () => {
+            it('should call the `CLEAR_LOGS` mutation', () => {
+                // Act
+                statisticsModule.actions.clearLogs({ commit });
+
+                // Assert
+                expect(commit).toHaveBeenLastCalledWith(CLEAR_LOGS);
+            });
+        });
     });
 
     describe('mutations ::', () => {

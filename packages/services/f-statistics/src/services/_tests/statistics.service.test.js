@@ -13,6 +13,9 @@ const justLog = {
     info: jest.fn()
 };
 
+jest.useFakeTimers();
+jest.spyOn(global, 'setInterval');
+
 describe('f-statistics', () => {
     let store,
         storeDispatchSpy,
@@ -28,8 +31,13 @@ describe('f-statistics', () => {
         // Hijack and replicate updating the State thru dispatch calls
         storeDispatchSpy = jest.fn((action, payload) => {
             const state = store.state[`${options.namespace}`];
-            if (action === `${options.namespace}/addLog`) {
-                state.logs = [...state.logs, payload];
+            // eslint-disable-next-line default-case
+            switch (action) {
+                case `${options.namespace}/addLog`:
+                    state.logs = [...state.logs, payload];
+                    return;
+                case `${options.namespace}/clearLogs`:
+                    state.logs = [];
             }
         });
         store.dispatch = storeDispatchSpy;
@@ -144,6 +152,66 @@ describe('f-statistics', () => {
 
             // Assert
             expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
+        });
+
+
+        it('should call justLog.info when logs.length equal or exceeded', () => {
+            // Arrange
+            const config = { logsMaxLength: 3, logsIntervalTimer: 0, logsMaxByteSize: 1000 };
+            const statisticsService = new StatisticsService(justLog, config, null, store);
+
+            // Act
+            statisticsService.publish(log.message, { ...log.payload });
+            statisticsService.publish(log.message, { ...log.payload });
+            statisticsService.publish(log.message, { ...log.payload });
+
+            // Assert
+            expect(justLog.info).toBeCalledTimes(3);
+        });
+
+        it('should batch log publishing using length', () => {
+            // Arrange
+            const config = { logsMaxLength: 2, logsIntervalTimer: 0, logsMaxByteSize: 2000 };
+            const statisticsService = new StatisticsService(justLog, config, null, store);
+
+            // Act
+            statisticsService.publish(log.message, { ...log.payload });
+            statisticsService.publish(log.message, { ...log.payload });
+
+            expect(justLog.info).toBeCalledTimes(2);
+
+            statisticsService.publish(log.message, { ...log.payload });
+            statisticsService.publish(log.message, { ...log.payload });
+
+            // Assert
+            expect(justLog.info).toBeCalledTimes(4);
+        });
+
+        it('should call justLog.info when byte size exceeded', () => {
+            // Arrange
+            const config = { logsMaxLength: 10, logsMaxByteSize: 500, logsIntervalTimer: 0 };
+            const statisticsService = new StatisticsService(justLog, config, null, store);
+
+            // Act
+            statisticsService.publish(log.message, { ...log.payload });
+            statisticsService.publish(log.message, { ...log.payload });
+            statisticsService.publish(log.message, { ...log.payload });
+
+            // Assert
+            expect(justLog.info).toBeCalledTimes(3);
+        });
+
+        it('should call justLog.info when timer exceeded', () => {
+            // Arrange
+            const config = { logsMaxLength: 10, logsMaxByteSize: 1000, logsIntervalTimer: 5000 };
+            const statisticsService = new StatisticsService(justLog, config, null, store);
+
+            // Act
+            statisticsService.publish(log.message, { ...log.payload });
+            jest.runAllTimers();
+
+            // Assert
+            expect(justLog.info).toBeCalledTimes(1);
         });
     });
 });

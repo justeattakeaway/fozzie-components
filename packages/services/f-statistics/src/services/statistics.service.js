@@ -49,7 +49,9 @@ export default class StatisticsService {
     }
 
     #publishBasedOnTime () {
-        if (!this.#publishIntervalTimer && this.#configuration.logsIntervalTimer > 0) { this.#publishIntervalTimer = setInterval(this.#publishLogs.bind(this), this.#configuration.logsIntervalTimer); }
+        if (!this.#publishIntervalTimer && this.#configuration.logsIntervalTimer !== 0) {
+            this.#publishIntervalTimer = setInterval(this.#publishLogs.bind(this), this.#configuration.logsIntervalTimer);
+        }
     }
 
     #publishBasedOnByteSize () {
@@ -57,21 +59,16 @@ export default class StatisticsService {
         if (queueByteSize >= this.#configuration.logsMaxByteSize) this.#publishLogs();
     }
 
-    #makeJustLogPromise ({ message, payload }) {
-        return new Promise(resolve => {
-            this.#justLogInstance.info(message, {
-                ...payload
-            });
-            return resolve();
+    #makeJustLogFunction ({ message, payload }) {
+        return () => this.#justLogInstance.info(message, {
+            ...payload
         });
     }
 
-    async #publishLogs () {
+    #publishLogs () {
         clearInterval(this.#publishIntervalTimer);
-
-        await Promise.all(this.#logs.map(log => this.#makeJustLogPromise(log)))
-            .catch(err => console.log('A promise failed to resolve', err));
-
+        this.#logs.map(log => this.#makeJustLogFunction(log))
+            .forEach(justLog => justLog());
         this.#store.dispatch(`${this.#configuration.namespace}/clearLogs`);
     }
 

@@ -14,6 +14,9 @@ export default {
     actions: {
         addLog: ({ commit }, log) => {
             commit(ADD_LOG, log);
+        },
+        clearLogs: ({ commit }) => {
+            commit(CLEAR_LOGS);
         }
     },
 
