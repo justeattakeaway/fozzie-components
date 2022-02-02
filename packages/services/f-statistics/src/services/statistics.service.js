@@ -54,7 +54,7 @@ export default class StatisticsService {
     }
 
     #publishBasedOnTime () {
-        if (!this.#publishIntervalTimer) { setInterval(this.#publishLogs.bind(this), BATCH_INTERVAL_TIMER); }
+        if (!this.#publishIntervalTimer) { this.#publishIntervalTimer = setInterval(this.#publishLogs.bind(this), BATCH_INTERVAL_TIMER); }
     }
 
     #publishBasedOnByteSize () {
@@ -62,17 +62,14 @@ export default class StatisticsService {
         if (queueByteSize >= BATCH_QUEUE_MAX_BYTES) this.#publishLogs();
     }
 
-    // eslint-disable-next-line class-methods-use-this
     #publishLogs () {
-        // TODO: cancel time
-        // TODO: call just log etc
-        // this.#logs.forEach(({ message, payload }) => {
-        //     justLog.info(message, {
-        //         ...payload
-        //     });
-        // });
-
-        // this.#store.dispatch(`${this.#configuration.namespace}/clearLogs`);
+        clearInterval(this.#publishIntervalTimer);
+        this.#logs.forEach(({ message, payload }) => {
+            this.#justLogInstance.info(message, {
+                ...payload
+            });
+        });
+        this.#store.dispatch(`${this.#configuration.namespace}/clearLogs`);
     }
 
     publish (message, statisticPayload) {
