@@ -110,10 +110,10 @@ describe('LocationFilter', () => {
             expect(filteredCards.length).toEqual(2);
         });
 
-        it('should NOT return cards that have location PLACEHOLDERS where the user has an invalid latitude and longitude', () => {
+        it('should NOT return cards that have latitude and longitude PLACEHOLDERS where the user has an invalid latitude and longitude and they have NO location attribute', () => {
             // Arrange & Act
             const filteredCards = locationFilter(MOCK_CARDS_WITH_LOCATION_KVP, {
-                location: 'BA11 2PT',
+                location: null,
                 latitude: '0.000',
                 longitude: '0.000'
             });
@@ -121,7 +121,19 @@ describe('LocationFilter', () => {
 
             // Assert
             expect(card).toEqual(undefined);
-            expect(filteredCards.length).toEqual(1);
+            expect(filteredCards.length).toEqual(2);
+        });
+
+        it('should return cards that have latitude and longitude PLACEHOLDERS where the user has an invalid latitude and longitude and they DO have a location attribute', () => {
+            // Arrange & Act
+            const filteredCards = locationFilter(MOCK_CARDS_WITH_LOCATION_KVP, {
+                location: 'BA11 2PT',
+                latitude: '0.000',
+                longitude: '0.000'
+            });
+
+            // Assert
+            expect(filteredCards.length).toEqual(4);
         });
 
         it('should return cards that do NOT have location PLACEHOLDERS', () => {
