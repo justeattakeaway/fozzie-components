@@ -7,8 +7,8 @@ v3.16.0
 ------------------------------
 *February 1, 2022*
 
-### Changed
-- Address service to handle AU/NZ addresses.
+### Updated
+- `component`, `visual` and `a11y` tests with functions from `f-wdio-utils`
 
 
 v3.15.4
