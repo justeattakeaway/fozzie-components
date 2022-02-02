@@ -4,10 +4,12 @@ let checkout;
 
 describe('f-checkout "dinein" component tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'dinein')
             .withQuery('&knob-Is User Logged In', false);
 
+        // Act
         checkout.load();
     });
 
