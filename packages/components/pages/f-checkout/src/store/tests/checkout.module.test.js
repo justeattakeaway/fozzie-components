@@ -1349,7 +1349,7 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('shouldShowKitchenNotes ::', () => {
+        describe('kitchenNoteAccepted ::', () => {
             describe('when kitchen note accepted is returned `true` from the API', () => {
                 // Arrange
                 const kitchenNotesState = {
@@ -1364,7 +1364,7 @@ describe('CheckoutModule', () => {
 
                 it('should return true', () => {
                     // Act
-                    const result = getters.shouldShowKitchenNotes(kitchenNotesState);
+                    const result = getters.kitchenNoteAccepted(kitchenNotesState);
 
                     // Assert
                     expect(result).toEqual(true);
@@ -1385,7 +1385,7 @@ describe('CheckoutModule', () => {
 
                 it('should return false', () => {
                     // Act
-                    const result = getters.shouldShowKitchenNotes(kitchenNotesState);
+                    const result = getters.kitchenNoteAccepted(kitchenNotesState);
 
                     // Assert
                     expect(result).toEqual(false);

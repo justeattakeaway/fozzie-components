@@ -632,7 +632,7 @@ export default {
     getters: {
         courierNoteAccepted: state => state.notesConfiguration[state.serviceType]?.courierNoteAccepted,
         orderNoteAccepted: state => state.notesConfiguration[state.serviceType]?.orderNoteAccepted,
-        shouldShowKitchenNotes: state => state.notesConfiguration[state.serviceType]?.kitchenNoteAccepted,
+        kitchenNoteAccepted: state => state.notesConfiguration[state.serviceType]?.kitchenNoteAccepted,
         noteTypeCourierOrOrder: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER),
         noteValue: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? state.notes.courier?.note : state.notes.order?.note),
         kitchenNoteValue: state => state.notes.kitchen?.note || '',
@@ -643,7 +643,7 @@ export default {
                         note: state.notes.courier?.note
                     }
                 }),
-                ...(getters.shouldShowKitchenNotes && {
+                ...(getters.kitchenNoteAccepted && {
                     kitchen: {
                         note: state.notes.kitchen?.note
                     }

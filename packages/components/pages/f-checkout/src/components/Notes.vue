@@ -12,7 +12,7 @@
                 @input="updateUserNotes({ note: $event, type: noteTypeCourierOrOrder })" />
         </accordion>
         <accordion
-            v-if="shouldShowKitchenNotes"
+            v-if="kitchenNoteAccepted"
             id="kitchen"
             :title="$t(`userNote.kitchen.${serviceType}.title`)">
             <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.kitchen.${serviceType}.text`) }}</span>
@@ -78,7 +78,7 @@ export default {
             'kitchenNoteValue',
             'noteTypeCourierOrOrder',
             'noteValue',
-            'shouldShowKitchenNotes'
+            'kitchenNoteAccepted'
         ])
     },
 
