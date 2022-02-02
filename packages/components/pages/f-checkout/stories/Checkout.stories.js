@@ -112,7 +112,7 @@ const placeOrderErrorOptions = {
 };
 
 const fulfilmentTimeOptions = {
-    none: null,
+    None: null,
     'Selected Asap Time': 'user-selected-asap',
     'Selected Later Time': 'user-selected-later',
     'Selected Unavailable Time': 'user-selected-unavailable-time',
@@ -241,7 +241,7 @@ export const CheckoutComponent = () => ({
                 return `/checkout-available-fulfilment-${this.fulfilmentTimeSelection}.json`;
             }
 
-            return this.isAsapAvailable ? mockedRequests.checkoutAvailableFulfilment.url : mockedRequests.checkoutAvailableFulfilmentPreorder.url;
+            return this.isAsapAvailable ? '/checkout-available-fulfilment.json' : '/checkout-available-fulfilment-preorder.json';
         },
 
         getNoteConfigUrl () {
