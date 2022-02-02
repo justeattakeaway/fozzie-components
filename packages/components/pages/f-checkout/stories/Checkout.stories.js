@@ -188,6 +188,9 @@ export const CheckoutComponent = () => ({
 
         getCheckoutUrl () {
             let url;
+            if (this.fulfilmentTimeSelection && this.fulfilmentTimeSelection !== 'issues') {
+                url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
+            }
 
             if (this.getCheckoutError && this.getCheckoutError !== noTimeAvailable) {
                 url = `/checkout-${this.getCheckoutError}-get-error.json`;

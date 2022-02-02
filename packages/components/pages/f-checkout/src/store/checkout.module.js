@@ -216,7 +216,8 @@ export default {
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
             const { issues } = data;
 
-            const detailedIssues = issues.map(issue => getIssueByCode(issue.code));
+            const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
+                || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
             commit(UPDATE_CHECKOUT_ERROR_MESSAGE, detailedIssues[0]);
