@@ -1,15 +1,16 @@
 <template>
     <div v-if="features.isSplitNotesEnabled">
         <accordion
-            :id="noteTypeCourierOrOrder"
-            :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
-            <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}</span>
+            v-if="courierNoteAccepted"
+            :id="courier"
+            :title="$t(`userNote.courier.${serviceType}.title`)">
+            <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.courier.${serviceType}.text`) }}</span>
             <form-field
-                :placeholder="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.placeholder`)"
+                :placeholder="$t(`userNote.courier.${serviceType}.placeholder`)"
                 :value="noteValue"
                 v-bind="inputStyles"
-                :name="`${noteTypeCourierOrOrder}-note`"
-                @input="updateUserNotes({ note: $event, type: noteTypeCourierOrOrder })" />
+                :name="`courier-note`"
+                @input="updateUserNotes({ note: $event, type: courier })" />
         </accordion>
         <accordion
             v-if="kitchenNoteAccepted"
@@ -26,7 +27,7 @@
     </div>
     <form-field
         v-else
-        :label-text="$t(`userNote.order.delivery.title`)"
+        :label-text="$t(`userNote.order.${serviceType}.title`)"
         :placeholder="$t(`userNote.order.${serviceType}.placeholder`)"
         :value="noteValue"
         v-bind="inputStyles"
@@ -78,7 +79,8 @@ export default {
             'kitchenNoteValue',
             'noteTypeCourierOrOrder',
             'noteValue',
-            'kitchenNoteAccepted'
+            'kitchenNoteAccepted',
+            'courierNoteAccepted'
         ])
     },
 
