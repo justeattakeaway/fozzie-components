@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.17.1
+------------------------------
+*February 2, 2022*
+
+### Changed
+- Remove notes which aren't active from split notes calls.
+
+
 v3.17.0
 ------------------------------
 *February 2, 2022*
