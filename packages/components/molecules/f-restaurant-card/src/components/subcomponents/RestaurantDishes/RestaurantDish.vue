@@ -67,7 +67,7 @@ export default {
 <style lang="scss" module>
 .c-restaurantCard-dish {
     background-color: $color-orange-10;
-    padding: spacing(x1.5);
+    padding: spacing(c);
     border-radius: $radius-rounded-b;
     margin: 0;
     display: flex;
@@ -77,7 +77,7 @@ export default {
 }
 
 .c-restaurantCard-dish-description {
-    margin-right: spacing(x1.5);
+    margin-right: spacing(c);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -96,13 +96,13 @@ export default {
 }
 
 .c-restaurantCard-dish-nutritionalInfo {
-    margin-top: spacing(x0.5);
+    margin-top: spacing(a);
     color: $color-content-subdued;
 }
 
 .c-restaurantCard-dish-nutritionalInfo-item {
-    padding-right: spacing(x0.5) / 2 * 3;
-    margin-right: spacing(x0.5);
+    padding-right: spacing(a) / 2 * 3;
+    margin-right: spacing(a);
     position: relative;
 
     &:after {

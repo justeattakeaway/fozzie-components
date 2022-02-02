@@ -144,7 +144,7 @@ $header-height: 275px;
 }
 
 .c-offersHeader-media {
-    padding-top: spacing(x10);
+    padding-top: spacing(j);
     position: relative;
     z-index: 1;
     top: 0;

@@ -317,7 +317,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
+            const addressDetails = addressService.getClosestAddress(data, tenant, currentPostcode);
 
             commit(UPDATE_ADDRESS_DETAILS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
@@ -634,10 +634,29 @@ export default {
     },
 
     getters: {
-        formattedNotes: state => (state.notesConfiguration.isSplitNotesEnabled ? state.notes : [{ type: 'delivery', note: state.notes.order?.note }]),
-        shouldShowKitchenNotes: state => state.notesConfiguration[state.serviceType]?.kitchenNoteAccepted,
+        courierNoteAccepted: state => state.notesConfiguration[state.serviceType]?.courierNoteAccepted,
+        orderNoteAccepted: state => state.notesConfiguration[state.serviceType]?.orderNoteAccepted,
+        kitchenNoteAccepted: state => state.notesConfiguration[state.serviceType]?.kitchenNoteAccepted,
         noteTypeCourierOrOrder: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? CHECKOUT_NOTE_TYPE_COURIER : CHECKOUT_NOTE_TYPE_ORDER),
         noteValue: state => (state.notesConfiguration[state.serviceType]?.courierNoteAccepted ? state.notes.courier?.note : state.notes.order?.note),
-        kitchenNoteValue: state => state.notes.kitchen?.note || ''
+        kitchenNoteValue: state => state.notes.kitchen?.note || '',
+        formattedNotes: (state, getters) => (state.features.isSplitNotesEnabled ?
+            {
+                ...(getters.courierNoteAccepted && {
+                    courier: {
+                        note: state.notes.courier?.note
+                    }
+                }),
+                ...(getters.kitchenNoteAccepted && {
+                    kitchen: {
+                        note: state.notes.kitchen?.note
+                    }
+                }),
+                ...(state.notesConfiguration[state.serviceType]?.orderNoteAccepted && {
+                    order: {
+                        note: state.notes.order?.note
+                    }
+                })
+            } : [{ type: 'delivery', note: state.notes.order?.note }])
     }
 };

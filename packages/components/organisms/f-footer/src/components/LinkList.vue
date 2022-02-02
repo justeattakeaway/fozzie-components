@@ -171,7 +171,7 @@ export default {
     color: $footer-textColor;
     @include font-size(body-s);
     display: inline-block;
-    padding: spacing() spacing(x2);
+    padding: spacing() spacing(d);
     text-decoration: none;
     width: 100%;
 

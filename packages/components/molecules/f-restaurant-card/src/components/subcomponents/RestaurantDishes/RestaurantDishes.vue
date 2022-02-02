@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$scrollOffset: spacing(x2);
+$scrollOffset: spacing(d);
 
  .c-restaurantCard-dishes {
     padding: 0;

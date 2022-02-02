@@ -281,15 +281,15 @@ export default {
 
 <style lang="scss" module>
 .c-checkout-form {
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
 }
 
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
-    margin: spacing(x4) 0;
+    margin: spacing(f) 0;
 
     @include media('>=#{$checkout-width}') {
-        margin: spacing(x4) 0 0;
+        margin: spacing(f) 0 0;
     }
 }
 

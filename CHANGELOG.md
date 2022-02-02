@@ -3,11 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v6.0.0
+------------------------------
+*January 31, 2022*
+
+### Changed
+- `spacing()` calls throughout repo to new Pie token references e.g `spacing(x2)` > `spacing(d)`
+
+
 v5.11.0
 ------------------------------
 *January 27, 2022*
 
-### Updated
+### Changed
 - `test/shared.config` added additional filename `test/visual/*.visual.spec.js` to testType array.
 
 
@@ -15,7 +23,7 @@ v5.10.1
 ------------------------------
 *January 21, 2022*
 
-### Updated
+### Changed
 - `axe-helper.js` with A11y Axe rules to match storybook and to increase our a11y test coverage.
 
 
@@ -23,7 +31,7 @@ v5.10.0
 ------------------------------
 *January 20, 2022*
 
-### Updated
+### Changed
 - `.circleci/config.yml` to automatically publish new package versions to the npm registry.
 
 
@@ -31,7 +39,7 @@ v5.9.0
 ------------------------------
 *January 20, 2022*
 
-### Updated
+### Changed
 - `.circleci/config.yml` to put danger checks in their own workflow.
 
 
@@ -39,7 +47,7 @@ v5.8.7
 ------------------------------
 *January 17, 2022*
 
-### Updated
+### Changed
 - `axe-core` version to latest.
 
 ### Fixed

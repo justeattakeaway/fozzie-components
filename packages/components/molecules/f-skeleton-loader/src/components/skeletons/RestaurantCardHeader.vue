@@ -26,7 +26,7 @@ $restaurant-logo-width: 48px;
     background-color: $color-container-default;
     margin: auto;
     width: 96%;
-    padding-bottom: spacing(x2);
+    padding-bottom: spacing(d);
     position: relative;
     border-radius: $radius-rounded-c $radius-rounded-c 0 0;
 }
@@ -40,7 +40,7 @@ $restaurant-logo-width: 48px;
 }
 
 .c-restaurantCardHeader-heading {
-    height: spacing(x3);
+    height: spacing(e);
     margin: 0 auto spacing();
 }
 

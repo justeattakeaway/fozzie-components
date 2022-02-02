@@ -5,10 +5,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.19.0
 ------------------------------
-*February 1, 2022*
+*February 2, 2022*
 
 ### Changed
 - Handle `getAvailableFulfilmentTimes` issues
+
+
+v3.18.0
+------------------------------
+*February 2, 2022*
+
+### Changed
+- Address service to handle AU/NZ addresses.
+
+
+v3.17.0
+------------------------------
+*February 2, 2022*
+
+### Changed
+- Remove notes which aren't active from split notes calls.
 
 
 v3.16.0

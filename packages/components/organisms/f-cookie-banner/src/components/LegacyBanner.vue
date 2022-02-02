@@ -69,7 +69,7 @@ export default {
 
     .c-cookieWarning-inner {
         margin: 0 auto;
-        padding: spacing() spacing(x3) spacing() spacing();
+        padding: spacing() spacing(e) spacing() spacing();
         overflow: hidden;
 
             p {

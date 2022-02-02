@@ -33,7 +33,8 @@ import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-
 import updateCheckout403 from './update-checkout-403.json';
 import updateCheckoutTimeUnavailable from './update-checkout-time-unavailable.json';
 import updateCheckoutGeolocationRequired from './update-checkout-geolocation-required.json';
-import getAddress from './get-address.json';
+import getAddressUK from './uk/get-address.json';
+import getAddressAU from './au/get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
 import checkout403GetError from './checkout-403-get-error.json';
@@ -284,11 +285,17 @@ const requestDefinitions = {
         responseStatus: httpStatusCodes.ok,
         payload: updateCheckoutGeolocationRequired
     },
-    getAddress: {
-        url: '/get-address.json',
+    getAddressUK: {
+        url: '/uk/get-address.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: getAddress
+        payload: getAddressUK
+    },
+    getAddressAU: {
+        url: '/au/get-address.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: getAddressAU
     },
     placeOrder: {
         url: '/place-order.json',
