@@ -10,14 +10,14 @@ $search-height-mid: 60px;
 .c-search-placeholder {
     position: absolute;
     top: spacing();
-    left: spacing(x2);
+    left: spacing(d);
     text-align: left;
     transition: all 0.3s;
     cursor: text;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    right: spacing(x2);
+    right: spacing(d);
 
     @include media('>=narrowMid') {
         top: 50%;
@@ -29,7 +29,7 @@ $search-height-mid: 60px;
 .c-search-placeholder {
     @include media('<narrowMid') {
         .has-geo & {
-            right: spacing(x4);
+            right: spacing(f);
         }
         .has-geo.has-streetNumber & {
             right: 80px;
@@ -72,7 +72,7 @@ $search-height-mid: 60px;
 
 .c-search-input {
     box-sizing: border-box;
-    padding: 28px spacing(x2) spacing();
+    padding: 28px spacing(d) spacing();
     width: 100%;
     font-weight: $font-weight-bold;
     height: $search-height-small;

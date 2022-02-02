@@ -4,7 +4,7 @@ $footer-heading-font-size  : 'heading-s';
     @include font-size($footer-heading-font-size);
     font-family: $font-family-base;
     font-weight: $font-weight-headings;
-    padding: spacing(x2);
+    padding: spacing(d);
     padding-left: 0;
 }
 
@@ -23,7 +23,7 @@ $footer-heading-font-size  : 'heading-s';
     font-weight: $font-weight-headings;
     justify-content: space-between;
     margin: 0;
-    padding: spacing(x2);
+    padding: spacing(d);
     text-align: left;
     width: 100%;
     @include font-size($footer-heading-font-size);

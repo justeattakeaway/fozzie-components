@@ -273,13 +273,13 @@ export default {
 .c-restaurantCard {
   text-decoration: none;
   display: grid;
-  grid-gap: spacing(x2);
+  grid-gap: spacing(d);
   grid-template-columns: 1fr;
   position: relative;
 
   &.c-restaurantCard--listItem {
       @include media('>mid') {
-        grid-gap: spacing() spacing(x2);
+        grid-gap: spacing() spacing(d);
         grid-template-columns: minmax(180px, 20%) 1fr;
       }
   }
@@ -304,8 +304,8 @@ export default {
 }
 
 .c-restaurantCard-logo {
-  top: spacing(x2);
-  left: spacing(x2);
+  top: spacing(d);
+  left: spacing(d);
   position: absolute;
 }
 
@@ -328,10 +328,10 @@ export default {
 
 .c-restaurantCard-imageTags {
     bottom: spacing();
-    left: spacing(x2);
+    left: spacing(d);
     position: absolute;
     @include media('>mid') {
-        bottom: spacing(x1.5);
+        bottom: spacing(c);
     }
 }
 

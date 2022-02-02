@@ -536,7 +536,7 @@ export default {
 <style lang="scss" module>
 
 $registration-topMargin           : spacing() * 14;
-$registration-topMargin--narrow   : spacing(x9);
+$registration-topMargin--narrow   : spacing(i);
 $registration-icon-width          : 97px;
 $registration-icon-width--narrow  : 92px;
 $registration-icon-height         : 78px;
@@ -577,17 +577,17 @@ $registration-icon-height--narrow : 74px;
     }
 
     .c-registration-form {
-        margin-top: spacing(x3);
+        margin-top: spacing(e);
     }
 
     .c-registration-genericError {
         margin-top: 0;
-        margin-bottom: spacing(x2);
+        margin-bottom: spacing(d);
     }
 
     .c-registration-submit {
-        margin-top: spacing(x4);
-        margin-bottom: spacing(x4);
+        margin-top: spacing(f);
+        margin-bottom: spacing(f);
     }
 
     .c-registration-link {
@@ -600,7 +600,7 @@ $registration-icon-height--narrow : 74px;
 
         .c-registration-link--bottomSpacing {
             @include media('<narrow') {
-                padding-bottom: spacing(x4);
+                padding-bottom: spacing(f);
             }
         }
 </style>

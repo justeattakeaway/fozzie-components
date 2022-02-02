@@ -43,7 +43,7 @@ export default {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    margin-right: spacing(x0.5);
+    margin-right: spacing(a);
     display: inline-block;
 
     &:last-of-type {

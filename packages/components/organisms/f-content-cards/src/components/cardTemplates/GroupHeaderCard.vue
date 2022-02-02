@@ -21,10 +21,10 @@ export default {
 <style lang="scss" module>
 .c-contentCards--group-title {
     width: 100%;
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 
     &:not(:first-child) {
-        margin-top: spacing(x3);
+        margin-top: spacing(e);
     }
 
 }

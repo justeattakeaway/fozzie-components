@@ -162,9 +162,9 @@ export default {
 }
 
 .c-restaurantCard-rating-star {
-    width: spacing(x2);
-    height: spacing(x2);
-    margin-right: spacing(x0.5);
+    width: spacing(d);
+    height: spacing(d);
+    margin-right: spacing(a);
 
     & path {
         fill: $color-orange-30;
@@ -176,7 +176,7 @@ export default {
 }
 
 .c-restaurantCard-rating-outOf {
-    margin-right: spacing(x0.5);
+    margin-right: spacing(a);
 }
 
 .c-restaurantCard-rating-notRatedMsg,
@@ -187,7 +187,7 @@ export default {
 }
 
 .c-restaurantCard-rating-count {
-    margin: 0 -(spacing(x0.5));
+    margin: 0 -(spacing(a));
 }
 </style>
 

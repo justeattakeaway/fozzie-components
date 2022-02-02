@@ -3,8 +3,8 @@
     list-style: none;
     list-style-image: none;
     margin-top: 0;
-    margin-bottom: spacing(x2);
-    margin-left: spacing(x2);
+    margin-bottom: spacing(d);
+    margin-left: spacing(d);
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
@@ -15,14 +15,14 @@
         }
     }
     @include media('>=wide') {
-        margin: spacing(x2) 0 0 0;
+        margin: spacing(d) 0 0 0;
     }
     .is-collapsed & {
         display: none;
     }
 }
 .c-footer-list--inline {
-    margin: 0 0 spacing(x2);
+    margin: 0 0 spacing(d);
     align-items: center;
     flex-flow: row wrap;
     @include media('>=wide') {

@@ -170,6 +170,6 @@ export default {
 
 <style lang="scss" module>
 .c-checkout-selector {
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
 }
 </style>

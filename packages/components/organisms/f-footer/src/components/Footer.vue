@@ -161,10 +161,10 @@ export default {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    padding: spacing(x2);
+    padding: spacing(d);
 
     @include media('>=wide') {
-        padding: spacing(x4);
+        padding: spacing(f);
         flex-flow: row nowrap;
     }
 }

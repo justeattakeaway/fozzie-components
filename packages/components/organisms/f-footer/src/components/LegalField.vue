@@ -46,7 +46,7 @@ export default {
 
     @include media('<wide') {
         order: 2;
-        padding: spacing(x2);
+        padding: spacing(d);
     }
 
     p {

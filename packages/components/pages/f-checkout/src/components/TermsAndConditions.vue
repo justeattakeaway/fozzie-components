@@ -50,14 +50,14 @@ export default {
 
 .c-checkoutTermsAndConditions {
     background: $color-background-default;
-    margin-top: spacing(x5);
-    padding: spacing(x3);
+    margin-top: spacing(g);
+    padding: spacing(e);
     @include font-size('body-s');
     text-align: center;
     color: $color-grey-50;
 
     @include media('>=narrow') {
-        padding: spacing(x2) spacing(x5);
+        padding: spacing(d) spacing(g);
         margin-top: 0;
     }
 }

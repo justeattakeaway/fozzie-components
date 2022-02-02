@@ -162,12 +162,12 @@ export default {
 }
 
 .c-loyalty-appsHowItWorksContainer {
-    padding-left: spacing(x4);
-    padding-right: spacing(x4);
+    padding-left: spacing(f);
+    padding-right: spacing(f);
 
     @include media('<=wide') {
-        padding-left: spacing(x2);
-        padding-right: spacing(x2);
+        padding-left: spacing(d);
+        padding-right: spacing(d);
     }
 }
 

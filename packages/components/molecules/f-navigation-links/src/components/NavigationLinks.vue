@@ -64,7 +64,7 @@ export default {
 */
 .c-navigationLinks-link {
     display: inline-block;
-    padding: spacing() 0 spacing() spacing(x2);
+    padding: spacing() 0 spacing() spacing(d);
     border-left: 2px solid $color-border-default;
     color: $color-content-link;
 
