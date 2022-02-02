@@ -2,7 +2,7 @@
     <div v-if="notesConfiguration.isSplitNotesEnabled">
         <accordion
             v-if="courierNoteAccepted"
-            :id="courier"
+            id="courier"
             :title="$t(`userNote.courier.${serviceType}.title`)">
             <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.courier.${serviceType}.text`) }}</span>
             <form-field
