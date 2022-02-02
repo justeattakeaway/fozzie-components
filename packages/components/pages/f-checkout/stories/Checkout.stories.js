@@ -124,7 +124,6 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            getAddressUrl: mockedRequests.getAddress.url,
             loginUrl: '/login',
             paymentPageUrlPrefix,
             getGeoLocationUrl: mockedRequests.getGeoLocation.url,
@@ -213,6 +212,10 @@ export const CheckoutComponent = () => ({
             }
 
             return this.restriction ? `/get-basket-delivery-${this.restriction}.json` : `/get-basket-${this.serviceType}.json`;
+        },
+
+        getAddressUrl () {
+            return `/${TENANT_MAP[this.locale]}/get-address.json`;
         },
 
         authToken () {

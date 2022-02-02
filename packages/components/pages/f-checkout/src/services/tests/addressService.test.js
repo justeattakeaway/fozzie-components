@@ -28,135 +28,120 @@ const london3LinesDefault = {
     Line3: 'City of London'
 };
 
-describe('addressService', () => {
-    const tenant = 'uk';
-    const allAddresses = [area511Line, bristol2Lines, london3LinesDefault];
+const defaultAustraliaId = 17731860;
 
+const australiaAddressDefault = {
+    City: 'Sydney',
+    ZipCode: '2089',
+    Line1: '196 Kurraba Road',
+    Line2: 'Unit 5',
+    Line3: 'Neutral Bay',
+    Line4: 'New South Wales',
+    AddressId: defaultAustraliaId
+};
+
+const australiaAddressAdditional = {
+    City: 'Melbourne',
+    ZipCode: '3071',
+    Line1: '94 Shaftesbury Parade',
+    Line2: null,
+    Line3: 'Thornbury',
+    Line4: 'Victoria',
+    AddressId: 18086210
+};
+
+describe('addressService', () => {
     describe('getClosestAddress ::', () => {
-        describe('when last searched postcode is not present', () => {
+        const ukAddressesData = { Addresses: [area511Line, bristol2Lines, london3LinesDefault] };
+        const auAddressesData = { Addresses: [australiaAddressDefault, australiaAddressAdditional], DefaultAddress: defaultAustraliaId };
+
+        describe.each([
+            ['uk', ukAddressesData],
+            ['au', auAddressesData]
+        ])('when tenant === `%s` AND last searched postcode is not present', (tenant, addressData) => {
             const postcode = '';
 
             it('should return empty address if addresses is empty', () => {
                 // Act
-                const actual = addressService.getClosestAddress([], tenant, postcode);
+                const actual = addressService.getClosestAddress({}, tenant, postcode);
 
                 // Assert
-                expect(actual).toEqual({
-                    line1: '',
-                    line2: '',
-                    locality: '',
-                    postcode: ''
-                });
+                expect(actual).toMatchSnapshot();
             });
 
             it('should return default address if default address is present', () => {
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
+                const actual = addressService.getClosestAddress(addressData, tenant, postcode);
 
                 // Assert
-                expect(actual).toEqual({
-                    line1: london3LinesDefault.Line1,
-                    line2: `${london3LinesDefault.Line2}, ${london3LinesDefault.Line3}`,
-                    locality: london3LinesDefault.City,
-                    postcode: london3LinesDefault.ZipCode
-                });
+                expect(actual).toMatchSnapshot();
             });
         });
-        describe('when last searched postcode is present', () => {
-            it('should return empty address with postcode set, when postcode does not match', () => {
-                // Arrange
-                const postcode = 'EN1 1AA';
 
+        describe.each([
+            ['uk', ukAddressesData],
+            ['au', auAddressesData]
+        ])('when tenant === `%s` AND last searched postcode is present', (tenant, addressData) => {
+            const postcodeTypes = {
+                noMatch: {
+                    au: '4278',
+                    uk: 'EN1 1AA'
+                },
+                noMatchOrSpaces: {
+                    au: '4278',
+                    uk: 'EN11AA'
+                },
+                match: {
+                    au: '2089',
+                    uk: 'BS1 1AA'
+                },
+                matchNoSpaces: {
+                    au: '2089',
+                    uk: 'EC4M7RF'
+                },
+                partial: {
+                    au: '30',
+                    uk: 'AR51'
+                }
+            };
+            it('should return empty address with postcode set, when postcode does not match', () => {
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
+                const actual = addressService.getClosestAddress(addressData, tenant, postcodeTypes.noMatch[tenant]);
 
                 // Assert
-                expect(actual).toEqual({
-                    line1: '',
-                    line2: '',
-                    locality: '',
-                    postcode
-                });
+                expect(actual).toMatchSnapshot();
             });
 
             it('should return empty address with formatted postcode set, when postcode does not match and has no spaces', () => {
-                // Arrange
-                const postcode = 'EN11AA';
-
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
+                const actual = addressService.getClosestAddress(addressData, tenant, postcodeTypes.noMatchOrSpaces[tenant]);
 
                 // Assert
-                expect(actual).toEqual({
-                    line1: '',
-                    line2: '',
-                    locality: '',
-                    postcode: 'EN1 1AA'
-                });
-            });
-
-            it('should return empty address with postcode set, when postcode does not match', () => {
-                // Arrange
-                const postcode = 'EN1 1AA';
-
-                // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
-
-                // Assert
-                expect(actual).toEqual({
-                    line1: '',
-                    line2: '',
-                    locality: '',
-                    postcode
-                });
+                expect(actual).toMatchSnapshot();
             });
 
             it('should return address with full postcode match', () => {
-                // Arrange
-                const postcode = 'BS1 1AA';
-
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
+                const actual = addressService.getClosestAddress(addressData, tenant, postcodeTypes.match[tenant]);
 
                 // Assert
-                expect(actual).toEqual({
-                    line1: bristol2Lines.Line1,
-                    line2: bristol2Lines.Line2,
-                    locality: bristol2Lines.City,
-                    postcode: bristol2Lines.ZipCode
-                });
+                expect(actual).toMatchSnapshot();
             });
 
             it('should return address with full postcode match when address has no spaces', () => {
-                // Arrange
-                const postcode = 'EC4M7RF';
-
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
+                const actual = addressService.getClosestAddress(addressData, tenant, postcodeTypes.matchNoSpaces[tenant]);
 
                 // Assert
-                expect(actual).toEqual({
-                    line1: london3LinesDefault.Line1,
-                    line2: `${london3LinesDefault.Line2}, ${london3LinesDefault.Line3}`,
-                    locality: london3LinesDefault.City,
-                    postcode: london3LinesDefault.ZipCode
-                });
+                expect(actual).toMatchSnapshot();
             });
 
             it('should return address with postcode partial match', () => {
-                // Arrange
-                const postcode = 'AR51';
-
                 // Act
-                const actual = addressService.getClosestAddress(allAddresses, tenant, postcode);
+                const actual = addressService.getClosestAddress(addressData, tenant, postcodeTypes.partial[tenant]);
 
                 // Assert
-                expect(actual).toEqual({
-                    line1: area511Line.Line1,
-                    line2: '',
-                    locality: area511Line.City,
-                    postcode: area511Line.ZipCode
-                });
+                expect(actual).toMatchSnapshot();
             });
         });
     });
