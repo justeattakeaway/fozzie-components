@@ -86,6 +86,10 @@ export default {
     color: $color-green;
 }
 
+.c-restaurantCard-iconText-content--blue {
+    color: $color-blue;
+}
+
 .c-restaurantCard-iconText-icon {
     width: spacing(x2);
     height: spacing(x2);
@@ -99,6 +103,14 @@ export default {
 }
 
 .c-restaurantCard-iconText-icon--green {
-    fill: $color-green;
+    path {
+        fill: $color-green;
+    }
+}
+
+.c-restaurantCard-iconText-icon--blue {
+    path {
+        fill: $color-blue;
+    }
 }
 </style>
