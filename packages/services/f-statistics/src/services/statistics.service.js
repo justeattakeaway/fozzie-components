@@ -78,6 +78,7 @@ export default class StatisticsService {
     publish (message, statisticPayload) {
         const log = this.#makeLog(message, statisticPayload);
         this.#store.dispatch(`${this.#configuration.namespace}/addLog`, log);
+        this.#publishBasedOnTime();
         this.#publishBasedOnByteSize();
         this.#publishBasedOnNumber();
     }
