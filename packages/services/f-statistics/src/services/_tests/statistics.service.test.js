@@ -2,20 +2,49 @@ import StatisticsService from '../statistics.service';
 import statisticsModule from '../../store/statistics.module';
 import defaultConfig from '../../defaultOptions';
 import {
+    defaultState,
+    createStore,
     log,
-    basePayload
+    basePayload,
+    options
 } from '../../tests/helpers/setup';
 
-const store = {
-    state: {},
-    dispatch: jest.fn(),
-    registerModule: jest.fn()
-};
 const justLog = jest.fn();
 
 describe('f-statistics', () => {
+    let store,
+        storeDispatchSpy,
+        registerStoreModuleSpy;
+
+    const mockStore = () => {
+        store = createStore({
+            state: { ...defaultState },
+            actions: statisticsModule.actions,
+            mutations: statisticsModule.mutations
+        });
+
+        // Hijack and replicate updating the State thru dispatch calls
+        storeDispatchSpy = jest.fn((action, payload) => {
+            const state = store.state[`${options.namespace}`];
+            if (action === `${options.namespace}/addLog`) {
+                state.logs = [...state.logs, payload];
+            }
+        });
+        store.dispatch = storeDispatchSpy;
+
+        registerStoreModuleSpy = jest.fn();
+        store.registerModule = registerStoreModuleSpy;
+    };
+
+    beforeEach(() => {
+        // Arrange - store
+        mockStore();
+    });
+
     afterEach(() => {
         jest.clearAllMocks();
+        store = undefined;
+        storeDispatchSpy.mockRestore();
     });
 
     it('should be defined', () => {
@@ -24,14 +53,6 @@ describe('f-statistics', () => {
     });
 
     describe('constructor ::', () => {
-        it('should call store.registerModule() to register the statisticsModule', () => {
-            // Act
-            // eslint-disable-next-line no-unused-vars
-            const statisticsService = new StatisticsService(justLog, null, null, store);
-
-            // Assert
-            expect(store.registerModule).toHaveBeenLastCalledWith(defaultConfig.namespace, statisticsModule, { preserveState: false });
-        });
         it('should preserve state when calling store.registerModule() if the store already contains state', () => {
             // Arrange
             store.state[defaultConfig.namespace] = {};
@@ -41,24 +62,50 @@ describe('f-statistics', () => {
             const statisticsService = new StatisticsService(justLog, null, null, store);
 
             // Assert
-            expect(store.registerModule).toHaveBeenLastCalledWith(defaultConfig.namespace, statisticsModule, { preserveState: true });
+            expect(registerStoreModuleSpy).toHaveBeenCalledWith(options.namespace, expect.anything(), { preserveState: true });
         });
-        it('should merge base payload when additional properties are provided', () => {
+    });
+
+
+    describe('publish ::', () => {
+        it('should define expected publish method', () => {
+            // Arrange, Act & Assert
+            expect(new StatisticsService(null, null, null, store).publish).toBeDefined();
+        });
+
+        it('should add the log to state.logs', () => {
+            // Arrange
+            const expected = {
+                message: log.message,
+                payload: {
+                    ...basePayload,
+                    ...log.payload
+                }
+            };
+            const statisticsService = new StatisticsService(justLog, null, null, store);
+
+            // Act
+            statisticsService.publish(log.message, { ...log.payload });
+
+            // Assert
+            expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
+        });
+
+        it('should expose base payload when none is provided', () => {
             // Arrange
             const expected = {
                 message: 'This is a message',
                 payload: {
-                    ...basePayload,
-                    testProperty: 'this is a test'
+                    ...basePayload
                 }
             };
 
             // Act
-            const statisticsService = new StatisticsService(justLog, null, { testProperty: expected.payload.testProperty }, store);
-            statisticsService.publish(log.message);
+            const statisticsService = new StatisticsService(justLog, null, null, store);
+            statisticsService.publish(expected.message);
 
             // Assert
-            expect(store.dispatch).toBeCalledWith(expect.any(String), { justLog, log: expected });
+            expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
         });
 
         it('should use default payload as merge priority over provided payload', () => {
@@ -77,50 +124,24 @@ describe('f-statistics', () => {
             statisticsService.publish(log.message);
 
             // Assert
-            expect(store.dispatch).toBeCalledWith(expect.any(String), { justLog, log: expected });
+            expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
         });
-    });
-
-
-    describe('publish ::', () => {
-        it('should define expected publish method', () => {
-        // Arrange, Act & Assert
-            expect(new StatisticsService(null, null, null, store).publish).toBeDefined();
-        });
-
-        it('should call store `addToPublishQueue` action passing the log', () => {
-            // Arrange
-            const expectedLogObject = {
-                message: log.message,
-                payload: {
-                    ...basePayload,
-                    ...log.payload
-                }
-            };
-            const statisticsService = new StatisticsService(justLog, null, null, store);
-
-            // Act
-            statisticsService.publish(log.message, { ...log.payload });
-
-            // Assert
-            expect(store.dispatch).toBeCalledWith(`${defaultConfig.namespace}/addToPublishQueue`, { justLog, log: expectedLogObject });
-        });
-
-        it('should expose base payload when none is provided', () => {
+        it('should merge base payload when additional properties are provided', () => {
             // Arrange
             const expected = {
                 message: 'This is a message',
                 payload: {
-                    ...basePayload
+                    ...basePayload,
+                    testProperty: 'this is a test'
                 }
             };
 
             // Act
-            const statisticsService = new StatisticsService(justLog, null, null, store);
-            statisticsService.publish(expected.message);
+            const statisticsService = new StatisticsService(justLog, null, { testProperty: expected.payload.testProperty }, store);
+            statisticsService.publish(log.message);
 
             // Assert
-            expect(store.dispatch).toBeCalledWith(expect.any(String), { justLog, log: expected });
+            expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
         });
     });
 });

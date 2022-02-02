@@ -10,3 +10,5 @@ export {
     BATCH_INTERVAL_TIMER,
     BATCH_QUEUE_MAX_BYTES
 };
+
+// TODO: move to defaultOptions
