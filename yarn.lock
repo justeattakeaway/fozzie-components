@@ -2454,6 +2454,13 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
+"@justeat/f-vue-icons@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.4.0.tgz#47743051d93e7a320d95bd2b7bd5e83580d60480"
+  integrity sha512-DK3uvkXqm7tjB0yDHdOaUVoOtKeBQb/WKAp0FnlnXCzl1YiOenNVggVcdqLLAmQn9GSZuhVK+aECCbDeohDjgQ==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
 "@justeat/f-wdio-utils@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.4.0.tgz#6916a392777c88bc84e0d5a258e7e94c64ff7800"

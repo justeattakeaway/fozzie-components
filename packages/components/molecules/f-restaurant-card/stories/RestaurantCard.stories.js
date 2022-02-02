@@ -6,6 +6,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
 import restaurantLogo from './assets/images/mcdonalds-logo.gif';
 import restaurantImage from './assets/images/mcdonalds.webp';
+import availabilityTypes from '../src/components/subcomponents/RestaurantAvailability/availabilityTypes';
 
 export default {
     title: 'Components/Molecules/f-restaurant-card',
@@ -74,6 +75,11 @@ RestaurantCardComponent.args = {
         fees: {
             deliveryFeeText: '£2.50 delivery fee',
             minOrderText: 'No min. order'
+        },
+        availability: {
+            availabilityType: availabilityTypes.PREORDER,
+            availabilityTranslatedName: 'Pre-order',
+            detailsMessage: 'Opening at 13:20'
         }
     },
 
