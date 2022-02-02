@@ -44,9 +44,7 @@ import checkoutIssues from '../checkout-issues';
  * @returns {object} - An object with the issue's desired behaviours and the code.
  */
 const getIssueByCode = code => {
-    console.log('in', code);
     const issue = checkoutIssues[code];
-    console.log('iss', issue);
 
     if (issue) {
         return {
@@ -217,11 +215,8 @@ export default {
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
             const { issues } = data;
-            console.log(data);
-            console.log(issues);
 
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code));
-            console.log(detailedIssues);
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
             commit(UPDATE_CHECKOUT_ERROR_MESSAGE, detailedIssues[0]);
