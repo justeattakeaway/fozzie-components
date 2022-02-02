@@ -8,7 +8,7 @@ v1.1.0
 *February 2, 2021*
 
 ### Changed
-- `f-button` & `f-card-with-content` version.
+- `f-button` & `f-card` version.
 
 
 v1.0.0
