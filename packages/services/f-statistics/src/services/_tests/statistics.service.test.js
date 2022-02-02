@@ -9,7 +9,9 @@ import {
     options
 } from '../../tests/helpers/setup';
 
-const justLog = jest.fn();
+const justLog = {
+    info: jest.fn()
+};
 
 describe('f-statistics', () => {
     let store,

@@ -2,11 +2,6 @@
 import defaultOptions from '../defaultOptions';
 import statisticsModule from '../store/statistics.module';
 
-// TODO: move to defaultOption
-const BATCH_QUEUE_MAX_BYTES = 1000;
-const BATCH_QUEUE_SIZE = 5;
-const BATCH_INTERVAL_TIMER = 5000;
-
 export default class StatisticsService {
     #configuration;
     #justLogInstance;
@@ -50,25 +45,33 @@ export default class StatisticsService {
     }
 
     #publishBasedOnNumber () {
-        if (this.#logs.length >= BATCH_QUEUE_SIZE) this.#publishLogs();
+        if (this.#logs.length >= this.#configuration.logsMaxLength) this.#publishLogs();
     }
 
     #publishBasedOnTime () {
-        if (!this.#publishIntervalTimer) { this.#publishIntervalTimer = setInterval(this.#publishLogs.bind(this), BATCH_INTERVAL_TIMER); }
+        if (!this.#publishIntervalTimer && this.#configuration.logsIntervalTimer > 0) { this.#publishIntervalTimer = setInterval(this.#publishLogs.bind(this), this.#configuration.logsIntervalTimer); }
     }
 
     #publishBasedOnByteSize () {
         const queueByteSize = new Blob([JSON.stringify([...this.#logs])]).size;
-        if (queueByteSize >= BATCH_QUEUE_MAX_BYTES) this.#publishLogs();
+        if (queueByteSize >= this.#configuration.logsMaxByteSize) this.#publishLogs();
     }
 
-    #publishLogs () {
-        clearInterval(this.#publishIntervalTimer);
-        this.#logs.forEach(({ message, payload }) => {
+    #makeJustLogPromise ({ message, payload }) {
+        return new Promise(resolve => {
             this.#justLogInstance.info(message, {
                 ...payload
             });
+            return resolve();
         });
+    }
+
+    async #publishLogs () {
+        clearInterval(this.#publishIntervalTimer);
+
+        await Promise.all(this.#logs.map(log => this.#makeJustLogPromise(log)))
+            .catch(err => console.log('A promise failed to resolve', err));
+
         this.#store.dispatch(`${this.#configuration.namespace}/clearLogs`);
     }
 
@@ -80,3 +83,4 @@ export default class StatisticsService {
         this.#publishBasedOnNumber();
     }
 }
+
