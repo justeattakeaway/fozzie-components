@@ -1,47 +1,14 @@
-import checkoutDeliveryUk from './uk/checkout-delivery.json';
-import checkoutDeliveryAu from './au/checkout-delivery.json';
-import checkoutDeliveryNz from './nz/checkout-delivery.json';
-import checkoutWithDeliveryAndKitchenNoteTypes from './uk/checkout-delivery-split-notes-courier-kitchen.json';
-import checkoutWithDeliveryNoteType from './uk/checkout-delivery-split-notes-courier.json';
-import checkoutDeliveryUserSelectedAsap from './checkout-delivery-user-selected-asap.json';
-import checkoutDeliveryUserSelectedLater from './checkout-delivery-user-selected-later.json';
-import checkoutDeliveryUserSelectedUnavailableTime from './checkout-delivery-user-selected-unavailable-time.json';
-import checkoutCollectionUk from './uk/checkout-collection.json';
-import checkoutCollectionAu from './au/checkout-collection.json';
-import checkoutCollectionNz from './nz/checkout-collection.json';
-import checkoutCollectionUserSelectedAsap from './checkout-collection-user-selected-asap.json';
-import checkoutCollectionUserSelectedLater from './checkout-collection-user-selected-later.json';
-import checkoutCollectionUserSelectedUnavailableTime from './checkout-collection-user-selected-unavailable-time.json';
-import checkoutDineinUk from './uk/checkout-dinein.json';
-import checkoutDineinAu from './au/checkout-dinein.json';
-import checkoutDineinNz from './nz/checkout-dinein.json';
-import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
-import checkoutAvailableFulfilmentNoTimeAvailable from './checkout-available-fulfilment-no-time-available.json';
-import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
-import createGuest from './create-guest.json';
-import createGuestError from './create-guest-error.json';
-import getBasketDelivery from './get-basket-delivery.json';
-import getBasketCollection from './get-basket-collection.json';
-import getBasketDinein from './get-basket-dinein.json';
-import getBasketInvalidProducts from './get-basket-invalid-products.json';
-import getBasketOfflineProducts from './get-basket-offline-products.json';
-import updateCheckout from './update-checkout.json';
-import updateCheckoutRestaurantNotTakingOrders from './update-checkout-restaurant-not-taking-orders.json';
-import updateCheckoutServiceTypeUnavailable from './update-checkout-service-type-unavailable.json';
-import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-items-required.json';
-import updateCheckout403 from './update-checkout-403.json';
-import updateCheckoutTimeUnavailable from './update-checkout-time-unavailable.json';
-import updateCheckoutGeolocationRequired from './update-checkout-geolocation-required.json';
+import getCheckout from './responses/getCheckout';
+import availableFulfilmentTimes from './responses/getAvaialbleTimes';
+import createGuest from './responses/createGuest';
+import getBasket from './responses/getBasket';
+import getNotes from './responses/getNotes';
+import placeOrder from './responses/placeOrder';
+import updateCheckout from './responses/updateCheckout';
 import getAddress from './get-address.json';
-import placeOrder from './place-order.json';
-import placeOrderDuplicate from './place-order-duplicate.json';
-import checkout403GetError from './checkout-403-get-error.json';
-import checkout500GetError from './checkout-500-get-error.json';
 import getGeoLocation from './get-geo-location.json';
 import getCustomer from './get-customer.json';
-import getBasketDeliveryAgeRestricted from './get-basket-delivery-age-restriction.json';
-import splitNotesConfig from './get-notes-config-split.json';
-import nonSplitNotesConfig from './get-notes-config.json';
+
 
 const httpStatusCodes = {
     noResponse: 0,
@@ -62,103 +29,103 @@ const requestDefinitions = {
         url: '/uk/checkout-delivery.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDeliveryUk
+        payload: getCheckout.uk.delivery
     },
     checkoutDeliverySplitNotesKitchenAndCourier: {
         url: '/uk/checkout-delivery-split-notes-courier-kitchen.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutWithDeliveryAndKitchenNoteTypes
+        payload: getCheckout.uk.deliveryAndKitchenNoteTypes
     },
     checkoutDeliverySplitNotesCourier: {
         url: '/uk/checkout-delivery-split-notes-courier.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutWithDeliveryNoteType
+        payload: getCheckout.uk.deliveryNoteType
     },
     checkoutDeliveryAu: {
         url: '/au/checkout-delivery.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDeliveryAu
+        payload: getCheckout.au.delivery
     },
     checkoutDeliveryNz: {
         url: '/nz/checkout-delivery.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDeliveryNz
+        payload: getCheckout.nz.delivery
     },
     checkoutDeliveryUserSelectedAsap: {
         url: '/checkout-delivery-user-selected-asap.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDeliveryUserSelectedAsap
+        payload: getCheckout.deliveryUserSelectedAsap
     },
     checkoutDeliveryUserSelectedLater: {
         url: '/checkout-delivery-user-selected-later.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDeliveryUserSelectedLater
+        payload: getCheckout.deliveryUserSelectedLater
     },
     checkoutDeliveryUserSelectedUnavailableTime: {
         url: '/checkout-delivery-user-selected-unavailable-time.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDeliveryUserSelectedUnavailableTime
+        payload: getCheckout.deliveryUserSelectedUnavailableTime
     },
     checkoutCollectionUk: {
         url: '/uk/checkout-collection.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutCollectionUk
+        payload: getCheckout.uk.collection
     },
     checkoutCollectionAu: {
         url: '/au/checkout-collection.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutCollectionAu
+        payload: getCheckout.au.collection
     },
     checkoutCollectionNz: {
         url: '/nz/checkout-collection.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutCollectionNz
+        payload: getCheckout.nz.collection
     },
     checkoutCollectionUserSelectedAsap: {
         url: '/checkout-collection-user-selected-asap.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutCollectionUserSelectedAsap
+        payload: getCheckout.collectionUserSelectedAsap
     },
     checkoutCollectionUserSelectedLater: {
         url: '/checkout-collection-user-selected-later.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutCollectionUserSelectedLater
+        payload: getCheckout.collectionUserSelectedLater
     },
     checkoutCollectionUserSelectedUnavailableTime: {
         url: '/checkout-collection-user-selected-unavailable-time.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutCollectionUserSelectedUnavailableTime
+        payload: getCheckout.collectionUserSelectedUnavailableTime
     },
     checkoutDineinUk: {
         url: '/uk/checkout-dinein.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDineinUk
+        payload: getCheckout.uk.dinein
     },
     checkoutDineinAu: {
         url: '/au/checkout-dinein.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDineinAu
+        payload: getCheckout.au.dinein
     },
     checkoutDineinNz: {
         url: '/nz/checkout-dinein.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutDineinNz
+        payload: getCheckout.nz.dinein
     },
     checkoutTimeoutGetError: {
         url: '/checkout-timeout-get-error.json',
@@ -169,61 +136,61 @@ const requestDefinitions = {
         url: '/checkout-available-fulfilment.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutAvailableFulfilment
+        payload: availableFulfilmentTimes.default
     },
     checkoutAvailableFulfilmentNoTimeAvailable: {
         url: '/checkout-available-fulfilment-no-time-available.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutAvailableFulfilmentNoTimeAvailable
+        payload: availableFulfilmentTimes.noTimeAvailable
     },
     checkoutAvailableFulfilmentPreorder: {
         url: '/checkout-available-fulfilment-preorder.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkoutAvailableFulfilmentPreorder
+        payload: availableFulfilmentTimes.preOrder
     },
     createGuest: {
         url: '/create-guest.json',
         method: httpMethods.post,
         responseStatus: httpStatusCodes.ok,
-        payload: createGuest
+        payload: createGuest.default
     },
     createGuestError: {
         url: '/create-guest-error.json',
         method: httpMethods.post,
         responseStatus: httpStatusCodes.badRequest,
-        payload: createGuestError
+        payload: createGuest.error
     },
     getBasketDelivery: {
         url: '/get-basket-delivery.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: getBasketDelivery
+        payload: getBasket.delivery
     },
     getBasketCollection: {
         url: '/get-basket-collection.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: getBasketCollection
+        payload: getBasket.collection
     },
     getBasketDinein: {
         url: '/get-basket-dinein.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: getBasketDinein
+        payload: getBasket.dinein
     },
     getBasketInvalidProducts: {
         url: '/get-basket-invalid-products.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: getBasketInvalidProducts
+        payload: getBasket.invalidProducts
     },
     getBasketOfflineProducts: {
         url: '/get-basket-offline-products.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: getBasketOfflineProducts
+        payload: getBasket.offlineProducts
     },
     getBasketTimeout: {
         url: '/get-basket-timeout.json',
@@ -234,37 +201,37 @@ const requestDefinitions = {
         url: '/update-checkout.json',
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.ok,
-        payload: updateCheckout
+        payload: updateCheckout.default
     },
     updateCheckoutRestaurantNotTakingOrders: {
         url: '/update-checkout-restaurant-not-taking-orders.json',
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.ok,
-        payload: updateCheckoutRestaurantNotTakingOrders
+        payload: updateCheckout.restaurantNotTakingOrders
     },
     updateCheckoutServiceTypeUnavailable: {
         url: '/update-checkout-service-type-unavailable.json',
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.ok,
-        payload: updateCheckoutServiceTypeUnavailable
+        payload: updateCheckout.serviceTypeUnavailable
     },
     updateCheckoutAdditionalItemsRequired: {
         url: '/update-checkout-additional-items-required.json',
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.ok,
-        payload: updateCheckoutAdditionalItemsRequired
+        payload: updateCheckout.additionalItemsRequired
     },
     updateCheckout403: {
         url: '/update-checkout-403.json',
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.forbidden,
-        payload: updateCheckout403
+        payload: updateCheckout.error
     },
     updateCheckoutTimeUnavailable: {
         url: '/update-checkout-time-unavailable.json',
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.ok,
-        payload: updateCheckoutTimeUnavailable
+        payload: updateCheckout.noTimeAvailable
     },
     updateCheckoutTimeout: {
         url: '/update-checkout-timeout.json',
@@ -275,7 +242,7 @@ const requestDefinitions = {
         url: '/update-checkout-geolocation-required.json',
         method: httpMethods.patch,
         responseStatus: httpStatusCodes.ok,
-        payload: updateCheckoutGeolocationRequired
+        payload: updateCheckout.geolocationRequired
     },
     getAddress: {
         url: '/get-address.json',
@@ -287,13 +254,13 @@ const requestDefinitions = {
         url: '/place-order.json',
         method: httpMethods.post,
         responseStatus: httpStatusCodes.ok,
-        payload: placeOrder
+        payload: placeOrder.default
     },
     placeOrderDuplicate: {
         url: '/place-order-duplicate.json',
         method: httpMethods.post,
         responseStatus: httpStatusCodes.badRequest, // TODO: DJB this should be a 409
-        payload: placeOrderDuplicate
+        payload: placeOrder.duplicate
     },
     placeOrderTimeout: {
         url: '/place-order-timeout.json',
@@ -304,13 +271,13 @@ const requestDefinitions = {
         url: '/checkout-403-get-error.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.forbidden,
-        payload: checkout403GetError
+        payload: getCheckout.error403
     },
     checkout500GetError: {
         url: '/checkout-500-get-error.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: checkout500GetError
+        payload: getCheckout.error500
     },
     getGeoLocation: {
         url: '/get-geo-location.json',
@@ -328,19 +295,19 @@ const requestDefinitions = {
         url: '/get-basket-delivery-age-restriction.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: getBasketDeliveryAgeRestricted
+        payload: getBasket.ageRestrictiongeRestricted
     },
     getSplitNotesConfig: {
         url: '/get-notes-config-split/99999/checkout-note-types',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: splitNotesConfig
+        payload: getNotes.splitNotesConfig
     },
     getNonSplitNotesConfig: {
         url: '/get-notes-config/99999/checkout-note-types',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: nonSplitNotesConfig
+        payload: getNotes.notesConfig
     }
 };
 
