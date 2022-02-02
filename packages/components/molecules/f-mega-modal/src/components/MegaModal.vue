@@ -325,7 +325,7 @@ export default {
     border-radius: $radius-rounded-d;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
     display: none;
-    padding: spacing(x3);
+    padding: spacing(e);
     position: fixed;
     right: 50%;
     text-align: center;
@@ -414,8 +414,8 @@ export default {
         display: flex;
         opacity: 0.9;
         position: absolute;
-        right: spacing(x2);
-        top: spacing(x2);
+        right: spacing(d);
+        top: spacing(d);
         z-index: zIndex(high);
 
         @include media('>=mid') {
@@ -429,6 +429,6 @@ export default {
 }
 
 .c-megaModal-title {
-    margin: 0 spacing(x3);
+    margin: 0 spacing(e);
 }
 </style>

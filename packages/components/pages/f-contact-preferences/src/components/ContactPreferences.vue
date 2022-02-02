@@ -302,7 +302,7 @@ export default {
     flex-flow: column;
     border: none;
     padding: 0;
-    margin: spacing(x2) 0 spacing(x4);
+    margin: spacing(d) 0 spacing(f);
 }
 
 .c-contactPreferences-subtitle {
@@ -314,7 +314,7 @@ export default {
         margin-top: 0;
 
         .c-contactPreferences-formField + & {
-            margin-bottom: spacing(x2);
+            margin-bottom: spacing(d);
         }
     }
 }

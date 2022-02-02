@@ -65,7 +65,7 @@ $feedback-btn-font-size: 'body-s';
 }
 
 .c-feedback-text {
-    margin: 0 0 spacing(x0.5) 0;
+    margin: 0 0 spacing(a) 0;
     @include font-size(body-s);
 }
 

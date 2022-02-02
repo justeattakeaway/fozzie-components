@@ -1,13 +1,11 @@
-const objectIsVueComponent = obj => 'render' in obj;
+import RenderlessSlotWrapper from '../../../components/RenderlessSlotWrapper';
 
 export default {
     props: {
+        // An optional safeguard component to wrap around restaurant card data points such as ratings, cuisines etc.
         errorBoundary: {
-            type: [Object, String],
-            validator: value => (typeof value === 'object'
-                ? objectIsVueComponent(value)
-                : true),
-            default: 'div'
+            type: Object,
+            default: () => RenderlessSlotWrapper // by default returns a renderless component that will just render it's slot and not bloat markup
         }
     }
 };

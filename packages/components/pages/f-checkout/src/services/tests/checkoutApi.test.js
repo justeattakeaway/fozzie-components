@@ -19,7 +19,7 @@ describe('CheckoutApi', () => {
         };
         state = {
             authToken,
-            notesConfiguration: {}
+            features: {}
         };
     });
 
@@ -69,7 +69,7 @@ describe('CheckoutApi', () => {
         });
 
         it('should patch the checkout details to the backend', async () => {
-            state.notesConfiguration.isSplitNotesEnabled = true;
+            state.features.isSplitNotesEnabled = true;
             // Arrange
             const request = {
                 url: payload.url,

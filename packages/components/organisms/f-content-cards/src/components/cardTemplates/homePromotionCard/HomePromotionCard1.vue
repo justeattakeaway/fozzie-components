@@ -145,11 +145,11 @@ export default {
     .c-contentCards-homePromotionCard1 {
         text-decoration: initial;
         display: block;
-        padding: spacing(x3) 0 spacing(x2);
+        padding: spacing(e) 0 spacing(d);
         width: 100%;
 
         @include media('>mid') {
-            padding: spacing(x3) 0;
+            padding: spacing(e) 0;
         }
     }
 
@@ -165,7 +165,7 @@ export default {
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-bottom: spacing(x2);
+        margin-bottom: spacing(d);
 
         @include media('>mid') {
             width: 50%;
@@ -199,7 +199,7 @@ export default {
             width: 50%;
 
             :global(.c-contentCards-homePromotionCard2) {
-                padding-left: spacing(x5);
+                padding-left: spacing(g);
             }
 
             :global(.c-contentCards-homePromotionCard2-title) {

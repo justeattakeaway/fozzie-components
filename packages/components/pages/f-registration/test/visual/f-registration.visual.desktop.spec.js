@@ -1,16 +1,22 @@
+const forEach = require('mocha-each');
 const Registration = require('../../test-utils/component-objects/f-registration.component');
 
 let registration;
 
-describe('f-registration - Desktop visual tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-registration - visual tests', device => {
     beforeEach(() => {
+        if (device === 'mobile') {
+            browser.setWindowSize(414, 731);
+        }
+
         registration = new Registration();
         registration.load();
     });
 
     it('should display component', () => {
         // Assert
-        browser.percyScreenshot('f-registration - Base', 'desktop');
+        browser.percyScreenshot('f-registration - Base', device);
     });
 
     it('should display the "Email address is already registered" error', () => {
@@ -23,26 +29,19 @@ describe('f-registration - Desktop visual tests', () => {
         };
 
         // Act
-        registration.submitForm(userInfo);
+        Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
+        registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Email is already registered error"', 'desktop');
+        browser.percyScreenshot('f-registration - "Email is already registered error"', device);
     });
 
     it('should display error when form field is empty', () => {
-        // Arrange
-        const userInfo = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: ''
-        };
-
         // Act
-        registration.submitForm(userInfo);
+        registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Mandatory field errors"', 'desktop');
+        browser.percyScreenshot('f-registration - "Mandatory field errors"', device);
     });
 
     it('should display error when form input is invalid', () => {
@@ -55,10 +54,11 @@ describe('f-registration - Desktop visual tests', () => {
         };
 
         // Act
-        registration.submitForm(userInfo);
+        Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
+        registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Invalid input error"', 'desktop');
+        browser.percyScreenshot('f-registration - "Invalid input error"', device);
     });
 
     it('should display error when form input is too long', () => {
@@ -71,9 +71,10 @@ describe('f-registration - Desktop visual tests', () => {
         };
 
         // Act
-        registration.submitForm(userInfo);
+        Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
+        registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Input exceed max length error"', 'desktop');
+        browser.percyScreenshot('f-registration - "Input exceed max length error"', device);
     });
 });

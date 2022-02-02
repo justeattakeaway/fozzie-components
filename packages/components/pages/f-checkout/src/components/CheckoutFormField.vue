@@ -168,6 +168,6 @@ export default {
 
 <style lang="scss" module>
 .c-checkoutFormField-error--grouped {
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 }
 </style>

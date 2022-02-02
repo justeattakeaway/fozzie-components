@@ -107,6 +107,6 @@ $form-label-weight              : $font-weight-bold;
 .c-formField-label-description {
     display: block;
     margin-top: spacing();
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 }
 </style>

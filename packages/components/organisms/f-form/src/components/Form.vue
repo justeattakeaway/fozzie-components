@@ -180,6 +180,6 @@ export default {
 }
 
 .c-form-submitButton {
-    margin: spacing(x4) 0;
+    margin: spacing(f) 0;
 }
 </style>

@@ -33,6 +33,6 @@ export default {
 
 <style lang="scss" module>
 .c-guest {
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 }
 </style>

@@ -20,6 +20,9 @@ exports.testType = {
     ...(TEST_TYPE === 'visual' ? {
         name: 'visual',
         services: ['chromedriver', 'percy'],
-        specs: ['test/visual/*.visual.*.spec.js']
+        specs: [
+            'test/visual/*.visual.*.spec.js',
+            'test/visual/*.visual.spec.js'
+        ]
     } : {})
 };

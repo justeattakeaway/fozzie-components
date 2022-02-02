@@ -61,6 +61,6 @@ export default {
 }
 
 .c-contactPreferences-alert {
-    margin: -(spacing()) 0 spacing(x4); // Negative top margin needed to offset the fieldset's bottom margin.
+    margin: -(spacing()) 0 spacing(f); // Negative top margin needed to offset the fieldset's bottom margin.
 }
 </style>

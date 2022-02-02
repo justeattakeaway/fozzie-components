@@ -43,7 +43,7 @@ export default {
 <style lang="scss" module>
 .c-accountInfo-customerCareLink {
     display: block;
-    margin-bottom: spacing(x4);
+    margin-bottom: spacing(f);
     @include font-size(body-s);
 }
 </style>

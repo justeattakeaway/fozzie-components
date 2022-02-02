@@ -3,6 +3,8 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 let checkoutInfo;
 
+const illegalMobileNumber = '123';
+
 describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
@@ -90,6 +92,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
             .withQuery('&knob-Patch Checkout Errors', checkoutInfo.patchError);
+
         // Act
         checkout.load();
         checkout.goToPayment();
@@ -99,15 +102,9 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        
-        const customerInfo = {
-            mobileNumber: '123'
-        };
-
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -184,8 +181,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        ['addressLine1', 'addressLocality'].forEach(field => checkout.clearCheckoutField(field));
-        ['mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
+        ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
@@ -194,13 +190,11 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the illegal postcode error message', () => {
         // Arrange
-        const customerInfo = {
-            postcode: 'TEST1A'
-        };
+        const addressPostcode = 'TEST1A';
 
         // Act
         checkout.clearBlurField('addressPostcode');
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.setFieldValue('addressPostcode', addressPostcode);
         checkout.goToPayment();
 
         // Assert
@@ -208,14 +202,9 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        const customerInfo = {
-            mobileNumber: '123'
-        };
-
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert
@@ -336,8 +325,7 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the mandatory error messages', () => {
         // Act
-        checkout.clearCheckoutField('tableIdentifier');
-        checkout.clearBlurField('mobileNumber');
+        ['tableIdentifier', 'mobileNumber'].forEach(field => checkout.clearBlurField(field));
         checkout.goToPayment();
 
         // Assert
@@ -345,14 +333,9 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
     });
 
     it('should display the illegal mobile number error message', () => {
-        // Arrange
-        const customerInfo = {
-            mobileNumber: '123'
-        };
-
         // Act
         checkout.clearBlurField('mobileNumber');
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.setFieldValue('mobileNumber', illegalMobileNumber);
         checkout.goToPayment();
 
         // Assert

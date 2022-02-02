@@ -5,8 +5,11 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 let checkoutInfo;
 
+const orderTime = 'Wednesday 01:45';
+
 describe('f-checkout component tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout();
         checkoutInfo = {
             serviceType: 'delivery',
@@ -16,18 +19,16 @@ describe('f-checkout component tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', true);
 
+        // Act
         checkout.load();
     });
 
     it('should submit the checkout form', () => {
         // Arrange
-        const customerInfo = {
-            note: 'Doorbell is broken',
-            orderTime: 'Wednesday 01:45'
-        };
-
+        const orderNote = 'Doorbell is broken';
         // Act
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.setFieldValue('orderNote', orderNote);
+        checkout.selectOrderTime(orderTime);
         checkout.goToPayment();
 
         // Assert
@@ -43,7 +44,7 @@ describe('f-checkout component tests', () => {
     ])
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
             // Arrange
-            checkout.clearCheckoutField(field);
+            checkout.clearBlurField(field);
             const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
             // Act
@@ -54,13 +55,8 @@ describe('f-checkout component tests', () => {
         });
 
     it('should enable a user to submit without adding a note', () => {
-        // Arrange
-        const customerInfo = {
-            orderTime: 'Wednesday 01:45'
-        };
-
         // Act
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+        checkout.selectOrderTime(orderTime);
         checkout.goToPayment();
 
         // Assert

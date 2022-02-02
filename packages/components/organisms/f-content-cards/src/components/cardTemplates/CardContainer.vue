@@ -147,8 +147,8 @@ export default {
     .c-contentCard {
         @include card-container;
 
-        margin-right: spacing(x2);
-        margin-bottom: spacing(x2);
+        margin-right: spacing(d);
+        margin-bottom: spacing(d);
 
         @include media('>=narrowMid') {
             max-width: 370px;
@@ -169,8 +169,8 @@ export default {
             position: relative;
 
             .c-contentCard-info {
-                padding-top: spacing(x10) + spacing(x6);
-                padding-bottom: spacing(x2);
+                padding-top: spacing(j) + spacing(h);
+                padding-bottom: spacing(d);
                 border-radius: $radius-rounded-c;
             }
 
@@ -178,7 +178,7 @@ export default {
                 position: absolute;
                 left: 0;
                 right: 0;
-                top: spacing(x2);
+                top: spacing(d);
                 z-index: zIndex(mid);
                 width: 114px; // 1
                 height: 114px; // 1
@@ -219,7 +219,7 @@ export default {
     }
 
     .c-contentCard-text {
-        margin-top: spacing(x0.5);
+        margin-top: spacing(a);
         text-align: center;
     }
 
@@ -231,7 +231,7 @@ export default {
         align-items: center;
         min-height: 164px; // min-height set to the height of an card with a one-line title
         background-color: $color-container-default;
-        padding: spacing(x2);
+        padding: spacing(d);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
     }
@@ -245,7 +245,7 @@ export default {
 
     .c-contentCard-thumbnail {
         border: 1px solid $color-border-subtle;
-        margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
+        margin-top: - (32px + spacing(d)); // This offsets the thumbnail above the top of the info card
         width: 48px;
         min-height: 48px;
     }
@@ -253,8 +253,8 @@ export default {
     .c-postOrderCardContainer {
         .c-contentCard-thumbnail {
             position: absolute;
-            top: spacing(x2);
-            left: spacing(x2);
+            top: spacing(d);
+            left: spacing(d);
             margin: 0;
             border: none;
         }
@@ -266,18 +266,18 @@ export default {
             display: block;
             text-align: left;
             min-height: 0;
-            padding: spacing(x3) 0 0 0;
+            padding: spacing(e) 0 0 0;
 
             @include media ('<mid') {
                 border: 1px solid $color-border-strong;
-                padding: spacing(x3);
+                padding: spacing(e);
                 border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
             }
         }
 
         .c-contentCard-title {
             text-align: left;
-            margin: 0 0 spacing(x2);
+            margin: 0 0 spacing(d);
         }
 
         .c-contentCard-subTitle {
@@ -319,17 +319,17 @@ export default {
             top: 0;
 
             @include media('<mid') {
-                top: spacing(x2);
-                left: spacing(x2);
+                top: spacing(d);
+                left: spacing(d);
             }
         }
 
         .c-contentCard-info {
-            padding: 0 0 0 spacing(x9);
+            padding: 0 0 0 spacing(i);
 
             @include media('<mid') {
                 position: relative;
-                padding: spacing(x2) spacing(x2) spacing(x2) spacing(x9);
+                padding: spacing(d) spacing(d) spacing(d) spacing(i);
                 border-radius: $radius-rounded-c;
             }
         }
@@ -341,7 +341,7 @@ export default {
 
     .c-emboldenedText--subtitle {
         @include font-size(body-l);
-        margin-top: spacing(x2);
+        margin-top: spacing(d);
     }
 
     .c-emboldenedText--text {

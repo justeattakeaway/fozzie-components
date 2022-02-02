@@ -46,7 +46,7 @@ export default {
 .c-errorMessage-content {
     display: block;
     overflow: hidden;
-    margin-left: spacing(x3);
+    margin-left: spacing(e);
 }
 
 .c-errorMessage-icon {
