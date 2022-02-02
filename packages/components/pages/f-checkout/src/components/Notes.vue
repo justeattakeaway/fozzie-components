@@ -1,5 +1,5 @@
 <template>
-    <div v-if="notesConfiguration.isSplitNotesEnabled">
+    <div v-if="features.isSplitNotesEnabled">
         <accordion
             :id="noteTypeCourierOrOrder"
             :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
@@ -12,7 +12,7 @@
                 @input="updateUserNotes({ note: $event, type: noteTypeCourierOrOrder })" />
         </accordion>
         <accordion
-            v-if="shouldShowKitchenNotes"
+            v-if="kitchenNoteAccepted"
             id="kitchen"
             :title="$t(`userNote.kitchen.${serviceType}.title`)">
             <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.kitchen.${serviceType}.text`) }}</span>
@@ -70,7 +70,7 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'notesConfiguration',
+            'features',
             'serviceType'
         ]),
 
@@ -78,7 +78,7 @@ export default {
             'kitchenNoteValue',
             'noteTypeCourierOrOrder',
             'noteValue',
-            'shouldShowKitchenNotes'
+            'kitchenNoteAccepted'
         ])
     },
 
