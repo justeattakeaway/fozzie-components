@@ -15,10 +15,10 @@
         </icon-text>
 
         <p
-            v-if="message"
+            v-if="availabilityMessage"
             data-test-id="restaurant-availability-message"
             :class="[$style['c-restaurantCard-availability-message']]">
-            {{ message }}
+            {{ availabilityMessage }}
         </p>
     </div>
 </template>
@@ -58,7 +58,7 @@ export default {
             default: null
         },
         // The accompanying message for the availability type. i.e Opening times, delivering from...
-        message: {
+        availabilityMessage: {
             type: String,
             default: null
         }

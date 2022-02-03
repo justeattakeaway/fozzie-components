@@ -37,10 +37,10 @@ describe('RestaurantAvailability.vue', () => {
         expect(wrapper.find('[data-test-id="restaurant-availability-type"]').exists()).toBe(false);
     });
 
-    it('displays the `message` if provided', () => {
+    it('displays the `availabilityMessage` if provided', () => {
         // arrange
         const propsData = {
-            message: 'foo'
+            availabilityMessage: 'foo'
         };
 
         // act
@@ -48,10 +48,10 @@ describe('RestaurantAvailability.vue', () => {
         const renderedText = wrapper.find('[data-test-id="restaurant-availability-message"]').text();
 
         // assert
-        expect(renderedText).toStrictEqual(propsData.message);
+        expect(renderedText).toStrictEqual(propsData.availabilityMessage);
     });
 
-    it('does not display the `message` if not provided', () => {
+    it('does not display the `availabilityMessage` if not provided', () => {
         // arrange
         const propsData = {};
 

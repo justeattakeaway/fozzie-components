@@ -75,7 +75,7 @@ RestaurantCardComponent.args = {
         availability: {
             availabilityType: availabilityTypes.PREORDER,
             availabilityTranslatedName: 'Pre-order',
-            message: 'Opening at 13:20'
+            availabilityMessage: 'Opening at 13:20'
         }
     },
 
