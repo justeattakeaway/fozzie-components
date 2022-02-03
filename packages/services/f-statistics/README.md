@@ -30,7 +30,6 @@ A service for publishing statistics from the client side
 - Batching options - to decrease network usage
 - Sampling options - to increase scalability
 
-
 <hr>
 
 ## Usage
@@ -59,7 +58,11 @@ justLog.forFeature({
 // Declare basic options
 const statisticsConfiguration = {
     environment: 'your environment name',
-    featureName: 'your website name'
+    featureName: 'your website name',
+    // optional batch logging config to overide the default values
+    logsMaxByteSize: 2000,
+    logsMaxLength: 5,
+    logsIntervalTimer: 5000
 };
 
 // Optional (provide properties to publish with every statistic)
@@ -68,7 +71,7 @@ const baseProperties = {
 };
 
 // Initialise a new instance of the statistics client
-const statisticsClient = new StatisticsModule(justLog, statsConfiguration, baseProperties);
+const statisticsClient = new StatisticsModule(justLog, statsConfiguration, baseProperties, store);
 
 // Publish a statistic
 statisticsClient.publish({
@@ -81,11 +84,14 @@ inject('statistics', statisticsClient);
 ```
 
 ## Options
-All options are required and should be provided when initialising the `statsModule`
-Parameter | Description | Type
-------------- | ------------- | -------------
-environment | The name of the environment being used | String
-featureName | The name of your feature | String
+Options should be provided when initialising the `statsModule`
+Parameter | Required |Description | Type
+------------- | ---- |------------- | -------------
+environment | yes | The name of the environment being used | String
+featureName | yes | The name of your feature | String
+logsMaxByteSize | no | Total byte size of logs to store before triggering batch publishing | Number
+logsMaxLength | no | The number of logs to store before triggering batch publishing. Use 1 to publish immediately | Number
+logsIntervalTimer | no | Time in milliseconds to wait before publishing logs. Use 0 to disable batch publishing using timer  | Number
 
 <hr></br>
 
