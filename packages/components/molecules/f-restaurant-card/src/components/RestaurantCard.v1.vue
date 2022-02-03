@@ -77,6 +77,15 @@
                     v-bind="rating" />
             </component>
 
+            <component
+                :is="errorBoundary"
+                v-if="availability"
+                :tier="3">
+                <restaurant-availability
+                    v-bind="availability"
+                    data-test-id="restaurant-availability" />
+            </component>
+
             <!-- Offline Icon -->
 
             <!-- Meta Items List -->
@@ -147,6 +156,7 @@ import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 import IconText from './subcomponents/IconText.vue';
 import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
+import RestaurantAvailability from './subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
 import RenderlessSlotWrapper from './RenderlessSlotWrapper';
 
 export default {
@@ -164,6 +174,7 @@ export default {
         OfferIcon,
         LegendIcon,
         RestaurantFees,
+        RestaurantAvailability,
         RenderlessSlotWrapper
     },
     mixins: [ErrorBoundaryMixin],
@@ -237,6 +248,10 @@ export default {
         fees: {
             type: Object,
             default: () => {}
+        },
+        availability: {
+            type: Object,
+            default: null
         }
     },
     computed: {
