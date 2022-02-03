@@ -17,6 +17,7 @@ v0.16.0
 - Use new clock-small icon on ETA
 - Directly target the SVG path elements in `IconText` colour modifiers to avoid default fills present in some icons
 - Simplified restaurant Storybook selector
+- Use pie design token aliases for `IconText` colours
 
 v0.15.0
 ------------------------------

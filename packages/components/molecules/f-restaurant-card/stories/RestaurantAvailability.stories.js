@@ -20,7 +20,7 @@ export const RestaurantAvailabilityComponent = (args, { argTypes }) => ({
 RestaurantAvailabilityComponent.args = {
     availabilityType: availabilityTypes.COLLECTION,
     availabilityTranslatedName: 'Pre-order',
-    detailsMessage: 'Opening at 13:20'
+    message: 'Opening at 13:20'
 };
 
 RestaurantAvailabilityComponent.storyName = 'restaurant-availability';

@@ -37,21 +37,21 @@ describe('RestaurantAvailability.vue', () => {
         expect(wrapper.find('[data-test-id="restaurant-availability-type"]').exists()).toBe(false);
     });
 
-    it('displays the `detailsMessage` if provided', () => {
+    it('displays the `message` if provided', () => {
         // arrange
         const propsData = {
-            detailsMessage: 'foo'
+            message: 'foo'
         };
 
         // act
         const wrapper = mount(sut, { propsData });
-        const renderedText = wrapper.find('[data-test-id="restaurant-availability-detailsMessage"]').text();
+        const renderedText = wrapper.find('[data-test-id="restaurant-availability-message"]').text();
 
         // assert
-        expect(renderedText).toStrictEqual(propsData.detailsMessage);
+        expect(renderedText).toStrictEqual(propsData.message);
     });
 
-    it('does not display the `detailsMessage` if not provided', () => {
+    it('does not display the `message` if not provided', () => {
         // arrange
         const propsData = {};
 
@@ -59,7 +59,7 @@ describe('RestaurantAvailability.vue', () => {
         const wrapper = mount(sut, { propsData });
 
         // assert
-        expect(wrapper.find('[data-test-id="restaurant-availability-detailsMessage"]').exists()).toBe(false);
+        expect(wrapper.find('[data-test-id="restaurant-availability-message"]').exists()).toBe(false);
     });
 
     it.each([

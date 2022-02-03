@@ -15,10 +15,10 @@
         </icon-text>
 
         <p
-            v-if="detailsMessage"
-            data-test-id="restaurant-availability-detailsMessage"
-            :class="[$style['c-restaurantCard-availability-detailsMessage']]">
-            {{ detailsMessage }}
+            v-if="message"
+            data-test-id="restaurant-availability-message"
+            :class="[$style['c-restaurantCard-availability-message']]">
+            {{ message }}
         </p>
     </div>
 </template>
@@ -58,7 +58,7 @@ export default {
             default: null
         },
         // The accompanying message for the availability type. i.e Opening times, delivering from...
-        detailsMessage: {
+        message: {
             type: String,
             default: null
         }
@@ -86,7 +86,7 @@ export default {
 }
 
 .c-restaurantCard-availability-iconText,
-.c-restaurantCard-availability-detailsMessage {
+.c-restaurantCard-availability-message {
     overflow-wrap: break-word;
     @include font-size($font-paragraph-02);
 }
@@ -100,7 +100,7 @@ export default {
     }
 }
 
-.c-restaurantCard-availability-detailsMessage {
+.c-restaurantCard-availability-message {
     margin-top: 0;
 }
 </style>
