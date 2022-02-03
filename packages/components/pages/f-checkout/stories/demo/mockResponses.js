@@ -18,6 +18,7 @@ import checkoutDineinNz from './nz/checkout-dinein.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import checkoutAvailableFulfilmentNoTimeAvailable from './checkout-available-fulfilment-no-time-available.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
+import checkoutAvailableFulfilmentIssues from './checkout-available-fulfilment-issues.json';
 import createGuest from './create-guest.json';
 import createGuestError from './create-guest-error.json';
 import getBasketDelivery from './get-basket-delivery.json';
@@ -183,6 +184,12 @@ const requestDefinitions = {
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: checkoutAvailableFulfilmentPreorder
+    },
+    checkoutAvailableFulfilmentIssues: {
+        url: '/checkout-available-fulfilment-issues.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: checkoutAvailableFulfilmentIssues
     },
     createGuest: {
         url: '/create-guest.json',
