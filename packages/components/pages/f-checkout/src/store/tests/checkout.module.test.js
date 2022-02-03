@@ -1,27 +1,11 @@
 import axios from 'axios';
-import CheckoutModule from '../checkout.module';
-
-// import checkoutDelivery from '../../../stories/demo/responses/getCheckout/uk/checkout-delivery.json';
-import getCheckoutResponse from '../../../stories/demo/payloads/getCheckout';
-
-// import basketDelivery from '../../../stories/demo/responses/getBasket/get-basket-delivery.json';
-// import basketInvalidProducts from '../../../stories/demo/responses/getBasket/get-basket-invalid-products.json';
-// import basketOfflineProducts from '../../../stories/demo/responses/getBasket/get-basket-offline-products.json';
-// import basketDeliveryAgeRestricted from '../../../stories/demo/responses/getBasket/get-basket-delivery-age-restriction.json';
-
+import CheckoutModule from '../checkout.module'; import getCheckoutResponse from '../../../stories/demo/payloads/getCheckout';
 import getBasketResponse from '../../../stories/demo/payloads/getBasket';
-
 import getAvailableTimesResponse from '../../../stories/demo/payloads/getAvailableTimes';
-
-// import checkoutAvailableFulfilment from '../../../stories/demo/responses/getAvaialbleTimes/checkout-available-fulfilment.json';
 import customerAddressResponse from '../../../stories/demo/payloads/getAddress';
 import geoLocationDetailsResponse from '../../../stories/demo/payloads/getGeoLocation';
 import customerResponse from '../../../stories/demo/payloads/getCustomer';
-
-// import splitNotesConfig from '../../../stories/demo/responses/getNotes/get-notes-config-split.json';
 import getNotesResponse from '../../../stories/demo/payloads/getNotes';
-
-
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';

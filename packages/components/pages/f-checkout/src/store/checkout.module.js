@@ -180,7 +180,7 @@ export default {
 
             const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
             const { issues, isFulfillable } = responseData;
-            console.log(responseData);
+
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
 

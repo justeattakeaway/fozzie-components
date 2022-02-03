@@ -1,10 +1,10 @@
-import getNotes from './payloads/getNotes';
-import placeOrder from './payloads/placeOrder';
-import createGuest from './payloads/createGuest';
-import availableFulfilmentTimes from './payloads/getAvailableTimes';
-import updateCheckout from './payloads/updateCheckout';
-import getCheckout from './payloads/getCheckout';
 import getBasket from './payloads/getBasket';
+import getCheckout from './payloads/getCheckout';
+import createGuest from './payloads/createGuest.js';
+import getNotes from './payloads/getNotes.js';
+import placeOrder from './payloads/placeOrder.js';
+import updateCheckout from './payloads/updateCheckout.js';
+import availableFulfilmentTimes from './payloads/getAvailableTimes';
 import getAddress from './payloads/getAddress';
 import getGeoLocation from './payloads/getGeoLocation';
 import getCustomer from './payloads/getCustomer';
@@ -34,5 +34,5 @@ export default function () {
     Object.entries(getAddress).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
     Object.entries(getGeoLocation).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
     Object.entries(getCustomer).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    return requests
+    return requests;
 }
