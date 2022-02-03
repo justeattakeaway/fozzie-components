@@ -10,7 +10,7 @@
                 :value="noteValue"
                 v-bind="inputStyles"
                 :name="`courier-note`"
-                @input="updateUserNotes({ note: $event, type: courier })" />
+                @input="updateUserNotes({ note: $event, type: 'courier' })" />
         </accordion>
         <accordion
             v-if="kitchenNoteAccepted"
