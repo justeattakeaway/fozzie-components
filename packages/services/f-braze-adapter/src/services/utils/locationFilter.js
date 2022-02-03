@@ -37,9 +37,10 @@ const locationFilter = (cards, { location, latitude, longitude }) => cards.filte
     const locationsList = card?.location?.split(',');
     // return true if NO KVP and if user has no location and hasPlaceholder is false or user has location and hasPlaceholder is true
     if (locationsList === undefined) {
-        return !!((needsLocation && location) ||
-            ((needsLongitude || needsLatitude) && hasValidLocation(latitude, longitude)) ||
-            (!hasPlaceHolder));
+        return !!(!hasPlaceHolder
+            || ((needsLocation && location))
+            || ((needsLongitude || needsLatitude) && hasValidLocation(latitude, longitude))
+        );
     }
 
     if (hasPlaceHolder) {

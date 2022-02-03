@@ -67,16 +67,16 @@ const MOCK_CARDS_WITHOUT_LOCATION_KVP = [
 describe('LocationFilter', () => {
     describe('card has a Location KVP', () => {
         it.each([
-            [4, { location: MOCK_CURRENT_LOCATION.location, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
-            [3, { location: 'BS1 3EQ', latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
-            [3, { location: null, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
-            [2, { location: MOCK_CURRENT_LOCATION.location, latitude: null, longitude: null }],
-            [2, { location: MOCK_CURRENT_LOCATION.location, latitude: '0.000', longitude: '0.000' }],
-            [2, { location: MOCK_CURRENT_LOCATION.location, latitude: null, longitude: MOCK_CURRENT_LOCATION.longitude }],
-            [2, { location: MOCK_CURRENT_LOCATION.location, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: null }],
-            [1, { location: 'BS1 3EQ', latitude: null, longitude: null }],
-            [2, { location: null, latitude: null, longitude: null }]
-        ])('should return %s cards when the users location is %o', (numberOfCards, locationObject) => {
+            [4, 'has all location attributes', { location: MOCK_CURRENT_LOCATION.location, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
+            [3, 'has all location attributes with a different postcode', { location: 'BS1 3EQ', latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
+            [3, 'only has geocoords', { location: null, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
+            [2, 'has no geocoords', { location: MOCK_CURRENT_LOCATION.location, latitude: null, longitude: null }],
+            [2, 'has invalid geocoords', { location: MOCK_CURRENT_LOCATION.location, latitude: '0.000', longitude: '0.000' }],
+            [2, 'is missing latitude', { location: MOCK_CURRENT_LOCATION.location, latitude: null, longitude: MOCK_CURRENT_LOCATION.longitude }],
+            [2, 'is missing longitude', { location: MOCK_CURRENT_LOCATION.location, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: null }],
+            [1, 'has no geocoords with a different postcode', { location: 'BS1 3EQ', latitude: null, longitude: null }],
+            [2, 'has no valid location attributes', { location: null, latitude: null, longitude: null }]
+        ])('should return %s cards when the users location %s', (numberOfCards, description, locationObject) => {
             // Arrange & Act
             const filteredCards = locationFilter(MOCK_CARDS_WITH_LOCATION_KVP, locationObject);
             // Assert
@@ -86,14 +86,14 @@ describe('LocationFilter', () => {
 
     describe('card has NO Location KVP', () => {
         it.each([
-            [4, { location: MOCK_CURRENT_LOCATION.location, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
-            [3, { location: null, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
-            [3, { location: MOCK_CURRENT_LOCATION.location, latitude: null, longitude: null }],
-            [3, { location: MOCK_CURRENT_LOCATION.location, latitude: '0.000', longitude: '0.000' }],
-            [3, { location: MOCK_CURRENT_LOCATION.location, latitude: null, longitude: MOCK_CURRENT_LOCATION.longitude }],
-            [3, { location: MOCK_CURRENT_LOCATION.location, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: null }],
-            [1, { location: null, latitude: null, longitude: null }]
-        ])('should return %s cards when the users location is %o', (numberOfCards, locationObject) => {
+            [4, 'has all location attributes', { location: MOCK_CURRENT_LOCATION.location, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
+            [3, 'only has geocoords', { location: null, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: MOCK_CURRENT_LOCATION.longitude }],
+            [3, 'only has location', { location: MOCK_CURRENT_LOCATION.location, latitude: null, longitude: null }],
+            [3, 'has invalid geocoords', { location: MOCK_CURRENT_LOCATION.location, latitude: '0.000', longitude: '0.000' }],
+            [3, 'is missing latitude', { location: MOCK_CURRENT_LOCATION.location, latitude: null, longitude: MOCK_CURRENT_LOCATION.longitude }],
+            [3, 'is missing longitude', { location: MOCK_CURRENT_LOCATION.location, latitude: MOCK_CURRENT_LOCATION.latitude, longitude: null }],
+            [1, 'has no valid location attributes', { location: null, latitude: null, longitude: null }]
+        ])('should return %s cards when the users location %s', (numberOfCards, description, locationObject) => {
             // Arrange & Act
             const filteredCards = locationFilter(MOCK_CARDS_WITHOUT_LOCATION_KVP, locationObject);
             // Assert
