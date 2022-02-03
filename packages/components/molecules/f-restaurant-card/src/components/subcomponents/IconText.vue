@@ -82,12 +82,12 @@ export default {
     line-height: spacing(x2);
 }
 
-.c-restaurantCard-iconText-content--green {
-    color: $color-green;
+.c-restaurantCard-iconText-content--colorSupportPositive {
+    color: $color-support-positive;
 }
 
-.c-restaurantCard-iconText-content--blue {
-    color: $color-blue;
+.c-restaurantCard-iconText-content--colorSupportInfo {
+    color: $color-support-info;
 }
 
 .c-restaurantCard-iconText-icon {
@@ -102,15 +102,15 @@ export default {
     }
 }
 
-.c-restaurantCard-iconText-icon--green {
+.c-restaurantCard-iconText-icon--colorSupportPositive {
     path {
-        fill: $color-green;
+        fill: $color-support-positive;
     }
 }
 
-.c-restaurantCard-iconText-icon--blue {
+.c-restaurantCard-iconText-icon--colorSupportInfo {
     path {
-        fill: $color-blue;
+        fill: $color-support-info;
     }
 }
 </style>

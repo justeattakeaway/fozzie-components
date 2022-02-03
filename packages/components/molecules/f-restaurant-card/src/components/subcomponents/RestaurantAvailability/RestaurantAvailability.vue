@@ -35,7 +35,7 @@ const availabilityTypeIcons = {
 };
 
 const iconColors = {
-    [availabilityTypes.PREORDER]: 'blue'
+    [availabilityTypes.PREORDER]: 'colorSupportInfo'
 };
 
 export default {

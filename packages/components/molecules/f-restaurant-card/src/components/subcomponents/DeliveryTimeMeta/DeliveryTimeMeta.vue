@@ -4,7 +4,7 @@
             v-if="eta"
             :text="eta"
             :is-bold="true"
-            :color="'green'"
+            :color="'colorSupportPositive'"
             :hide-icon-in-tile-view="true"
             data-test-id="delivery-meta-eta">
             <clock-small-icon data-test-id="delivery-meta-eta-icon" />

@@ -79,7 +79,7 @@ describe('RestaurantAvailability.vue', () => {
     });
 
     it.each([
-        ['blue', availabilityTypes.PREORDER],
+        ['colorSupportInfo', availabilityTypes.PREORDER],
         [null, availabilityTypes.COLLECTION]
     ])('sets the color as %p when the `availabilityType` is %p', (expectedColor, availabilityType) => {
         // arrange
