@@ -4,10 +4,10 @@
             v-if="eta"
             :text="eta"
             :is-bold="true"
-            :color="'green'"
+            :color="'colorSupportPositive'"
             :hide-icon-in-tile-view="true"
             data-test-id="delivery-meta-eta">
-            <clock-icon data-test-id="delivery-meta-eta-icon" />
+            <clock-small-icon data-test-id="delivery-meta-eta-icon" />
         </icon-text>
 
         <icon-text
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { MapPinIcon, ClockIcon } from '@justeat/f-vue-icons';
+import { MapPinIcon, ClockSmallIcon } from '@justeat/f-vue-icons';
 import IconText from '../IconText.vue';
 
 export default {
@@ -37,7 +37,7 @@ export default {
     components: {
         IconText,
         MapPinIcon,
-        ClockIcon
+        ClockSmallIcon
     },
     props: {
         address: {
