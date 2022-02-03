@@ -14,12 +14,12 @@
                 data-test-id="restaurant-availability-icon" />
         </icon-text>
 
-        <p
+        <span
             v-if="availabilityMessage"
             data-test-id="restaurant-availability-message"
             :class="[$style['c-restaurantCard-availability-message']]">
             {{ availabilityMessage }}
-        </p>
+        </span>
     </div>
 </template>
 
@@ -98,9 +98,5 @@ export default {
         line-height: 1;
         margin: 0 spacing(x0.5);
     }
-}
-
-.c-restaurantCard-availability-message {
-    margin-top: 0;
 }
 </style>
