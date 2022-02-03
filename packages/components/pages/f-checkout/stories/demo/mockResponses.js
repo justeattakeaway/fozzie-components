@@ -1,13 +1,13 @@
-import getCheckout from './responses/getCheckout';
-import availableFulfilmentTimes from './responses/getAvaialbleTimes';
-import createGuest from './responses/createGuest';
-import getBasket from './responses/getBasket';
-import getNotes from './responses/getNotes';
-import placeOrder from './responses/placeOrder';
-import updateCheckout from './responses/updateCheckout';
-import getAddress from './get-address.json';
-import getGeoLocation from './get-geo-location.json';
-import getCustomer from './get-customer.json';
+import getCheckout from './payloads/getCheckout';
+import availableFulfilmentTimes from './payloads/getAvailableTimes';
+import createGuest from './payloads/createGuest.js';
+import getBasket from './payloads/getBasket';
+import getNotes from './payloads/getNotes.js';
+import placeOrder from './payloads/placeOrder.js';
+import updateCheckout from './payloads/updateCheckout.js';
+import getAddress from './payloads/get-address.json';
+import getGeoLocation from './payloads/get-geo-location.json';
+import getCustomer from './payloads/get-customer.json';
 
 
 const httpStatusCodes = {
@@ -68,7 +68,7 @@ const requestDefinitions = {
         payload: getCheckout.deliveryUserSelectedLater
     },
     checkoutDeliveryUserSelectedUnavailableTime: {
-        url: '/checkout-delivery-user-selected-unavailable-time.json',
+        url: '/checkout-delivery-user-selected-time-unavailable.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: getCheckout.deliveryUserSelectedUnavailableTime
@@ -104,7 +104,7 @@ const requestDefinitions = {
         payload: getCheckout.collectionUserSelectedLater
     },
     checkoutCollectionUserSelectedUnavailableTime: {
-        url: '/checkout-collection-user-selected-unavailable-time.json',
+        url: '/checkout-collection-user-selected-time-unavailable.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: getCheckout.collectionUserSelectedUnavailableTime
@@ -139,7 +139,7 @@ const requestDefinitions = {
         payload: availableFulfilmentTimes.default
     },
     checkoutAvailableFulfilmentNoTimeAvailable: {
-        url: '/checkout-available-fulfilment-no-time-available.json',
+        url: '/checkout-available-fulfilment-time-unavailable.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
         payload: availableFulfilmentTimes.noTimeAvailable
@@ -259,7 +259,7 @@ const requestDefinitions = {
     placeOrderDuplicate: {
         url: '/place-order-duplicate.json',
         method: httpMethods.post,
-        responseStatus: httpStatusCodes.badRequest, // TODO: DJB this should be a 409
+        responseStatus: httpStatusCodes.badRequest,
         payload: placeOrder.duplicate
     },
     placeOrderTimeout: {
@@ -281,7 +281,7 @@ const requestDefinitions = {
     },
     getGeoLocation: {
         url: '/get-geo-location.json',
-        method: httpMethods.post, // TODO:  DJB Why is this a POST?
+        method: httpMethods.post,
         responseStatus: httpStatusCodes.ok,
         payload: getGeoLocation
     },

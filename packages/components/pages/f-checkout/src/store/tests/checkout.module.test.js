@@ -1,15 +1,27 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
-import checkoutDelivery from '../../../stories/demo/responses/getCheckout/uk/checkout-delivery.json';
-import basketDelivery from '../../../stories/demo/responses/getBasket/get-basket-delivery.json';
-import basketInvalidProducts from '../../../stories/demo/responses/getBasket/get-basket-invalid-products.json';
-import basketOfflineProducts from '../../../stories/demo/responses/getBasket/get-basket-offline-products.json';
-import basketDeliveryAgeRestricted from '../../../stories/demo/responses/getBasket/get-basket-delivery-age-restriction.json';
-import checkoutAvailableFulfilment from '../../../stories/demo/responses/getAvaialbleTimes/checkout-available-fulfilment.json';
-import customerAddresses from '../../../stories/demo/get-address.json';
-import geoLocationDetails from '../../../stories/demo/get-geo-location.json';
-import customer from '../../../stories/demo/get-customer.json';
-import splitNotesConfig from '../../../stories/demo/responses/getNotes/get-notes-config-split.json';
+
+// import checkoutDelivery from '../../../stories/demo/responses/getCheckout/uk/checkout-delivery.json';
+import getCheckoutResponse from '../../../stories/demo/payloads/getCheckout';
+
+// import basketDelivery from '../../../stories/demo/responses/getBasket/get-basket-delivery.json';
+// import basketInvalidProducts from '../../../stories/demo/responses/getBasket/get-basket-invalid-products.json';
+// import basketOfflineProducts from '../../../stories/demo/responses/getBasket/get-basket-offline-products.json';
+// import basketDeliveryAgeRestricted from '../../../stories/demo/responses/getBasket/get-basket-delivery-age-restriction.json';
+
+import getBasketResponse from '../../../stories/demo/payloads/getBasket';
+
+import getAvailableTimesResponse from '../../../stories/demo/payloads/getAvailableTimes';
+
+// import checkoutAvailableFulfilment from '../../../stories/demo/responses/getAvaialbleTimes/checkout-available-fulfilment.json';
+import customerAddresses from '../../../stories/demo/payloads/get-address.json';
+import geoLocationDetails from '../../../stories/demo/payloads/get-geo-location.json';
+import customer from '../../../stories/demo/payloads/get-customer.json';
+
+// import splitNotesConfig from '../../../stories/demo/responses/getNotes/get-notes-config-split.json';
+import getNotesResponse from '../../../stories/demo/payloads/getNotes';
+
+
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';
@@ -50,6 +62,14 @@ import {
     CLEAR_DOB_ERROR,
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
+
+const checkoutDelivery = getCheckoutResponse.uk.defineProperty;
+const basketDelivery = getBasketResponse.delivery;
+const basketInvalidProducts = getBasketResponse.invalidProducts;
+const basketOfflineProducts = getBasketResponse.offlineProducts;
+const basketDeliveryAgeRestricted = getBasketResponse.ageRestricted;
+const checkoutAvailableFulfilment = getAvailableTimesResponse.default;
+const splitNotesConfig = getNotesResponse.notesConfig;
 
 const { actions, getters, mutations } = CheckoutModule;
 

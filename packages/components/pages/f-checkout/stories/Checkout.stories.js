@@ -11,6 +11,17 @@ import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation
 import CheckoutMock from './demo/checkoutMock';
 import mockedRequests from './demo/mockResponses';
 import { TENANT_MAP } from '../src/constants';
+import {
+    noteTypeOptions,
+    patchCheckoutErrorOptions,
+    restrictionOptions,
+    createGuestErrorOptions,
+    getCheckoutErrorOptions,
+    getBasketErrorOptions,
+    placeOrderErrorOptions,
+    fulfilmentTimeOptions,
+    timeUnavailable
+} from './options';
 
 export default {
     title: 'Components/Pages',
@@ -21,102 +32,7 @@ export default {
 };
 
 Vue.use(Vuex);
-
-const paymentPageUrlPrefix = '#/pay';
-
 CheckoutMock();
-
-const restraurantNotTakingOrders = 'Restaurant Not Taking Orders Issue (Response from server but order not fulfillable)';
-const serviceTypeUnavailable = 'ServiceType is not available (Response from server but order not fulfillable)';
-const additionalItemsRequired = 'Additional Items Required Issue (Response from server but order not fulfillable)';
-const updateCheckoutAccessForbidden = 'Access Forbidden (Response from server is 403)';
-const checkoutServerError = 'Checkout Error (Response from server is an error)';
-const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
-const accessForbiddenError = 'Access Forbidden Get Checkout Error (Response from server is an error)';
-const getCheckoutError = 'Any other Get Checkout Error (Response from server is an error)';
-const invalidProductsError = 'Basket contains invalid products';
-const offlineProductsError = 'Basket contains offline products';
-const createGuestError = 'Create Guest Error';
-const SERVER = 'SERVER';
-const accessForbiddenErrorCode = '403';
-const getCheckoutErrorCode = '500';
-const noTimeAvailableError = 'No Time Available';
-const noTimeAvailable = 'no-time-available';
-const ageRestriction = 'Age restricted';
-const ageRestrictionIssue = 'age-restriction';
-const restraurantNotTakingOrdersIssue = 'restaurant-not-taking-orders';
-const serviceTypeUnavailableIssue = 'service-type-unavailable';
-const additionalItemsRequiredIssue = 'additional-items-required';
-const timeNotAvailable = 'Selected time no longer available';
-const timeNotAvailableIssue = 'time-unavailable';
-const geolocationRequired = 'Geolocation required';
-const geolocationRequiredIssue = 'geolocation-required';
-const invalidProductsErrorCode = 'invalid-products';
-const offlineProductsErrorCode = 'offline-products';
-const createGuestErrorCode = 'error';
-const serverTimeout = 'Server timeout';
-const serverTimeoutIssue = 'timeout';
-const duplicateIssue = 'duplicate';
-
-const legacyNotes = 'Legacy notes';
-const noteTypesDeliveryAndKitchen = 'Delivery and Kitchen notes';
-const noteTypesCombined = 'Combined note';
-const noteTypesCombinedValue = 'get-notes-config';
-
-const noteTypeOptions = {
-    [legacyNotes]: null,
-    [noteTypesCombined]: noteTypesCombinedValue,
-    [noteTypesDeliveryAndKitchen]: 'get-notes-config-split'
-};
-
-const patchCheckoutErrorOptions = {
-    None: null,
-    [restraurantNotTakingOrders]: restraurantNotTakingOrdersIssue,
-    [serviceTypeUnavailable]: serviceTypeUnavailableIssue,
-    [additionalItemsRequired]: additionalItemsRequiredIssue,
-    [checkoutServerError]: SERVER,
-    [updateCheckoutAccessForbidden]: accessForbiddenErrorCode,
-    [timeNotAvailable]: timeNotAvailableIssue,
-    [geolocationRequired]: geolocationRequiredIssue,
-    [serverTimeout]: serverTimeoutIssue
-};
-
-const restrictionOptions = {
-    None: null,
-    [ageRestriction]: ageRestrictionIssue
-};
-
-const createGuestErrorOptions = {
-    None: null,
-    [createGuestError]: createGuestErrorCode
-};
-
-const getCheckoutErrorOptions = {
-    None: null,
-    [accessForbiddenError]: accessForbiddenErrorCode,
-    [getCheckoutError]: getCheckoutErrorCode,
-    [noTimeAvailableError]: noTimeAvailable,
-    [serverTimeout]: serverTimeoutIssue
-};
-
-const getBasketErrorOptions = {
-    None: null,
-    [invalidProductsError]: invalidProductsErrorCode,
-    [offlineProductsError]: offlineProductsErrorCode
-};
-
-const placeOrderErrorOptions = {
-    None: null,
-    [placeOrderError]: duplicateIssue,
-    [serverTimeout]: serverTimeoutIssue
-};
-
-const fulfilmentTimeOptions = {
-    none: null,
-    'Selected Asap Time': 'user-selected-asap',
-    'Selected Later Time': 'user-selected-later',
-    'Selected Unavailable Time': 'user-selected-unavailable-time'
-};
 
 const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
 
@@ -126,7 +42,7 @@ export const CheckoutComponent = () => ({
         return {
             getAddressUrl: mockedRequests.getAddress.url,
             loginUrl: '/login',
-            paymentPageUrlPrefix,
+            paymentPageUrlPrefix: '#/pay',
             getGeoLocationUrl: mockedRequests.getGeoLocation.url,
             getCustomerUrl: mockedRequests.getCustomer.url
         };
@@ -192,7 +108,7 @@ export const CheckoutComponent = () => ({
                 url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
             }
 
-            if (this.getCheckoutError && this.getCheckoutError !== noTimeAvailable) {
+            if (this.getCheckoutError && this.getCheckoutError !== timeUnavailable) {
                 url = `/checkout-${this.getCheckoutError}-get-error.json`;
             } else {
                 url = `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
@@ -202,12 +118,6 @@ export const CheckoutComponent = () => ({
         },
 
         getBasketUrl () {
-            if (this.getCheckoutError) {
-                if (this.getCheckoutError !== noTimeAvailable) {
-                    return `/checkout-${this.getCheckoutError}-get-error.json`;
-                }
-            }
-
             if (this.getBasketError) {
                 return `/get-basket-${this.getBasketError}.json`;
             }
@@ -232,7 +142,7 @@ export const CheckoutComponent = () => ({
         },
 
         checkoutAvailableFulfilmentUrl () {
-            if (this.getCheckoutError === noTimeAvailable) {
+            if (this.getCheckoutError === timeUnavailable) {
                 return mockedRequests.checkoutAvailableFulfilmentNoTimeAvailable.url;
             }
             return this.isAsapAvailable ? mockedRequests.checkoutAvailableFulfilment.url : mockedRequests.checkoutAvailableFulfilmentPreorder.url;
