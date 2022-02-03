@@ -112,7 +112,7 @@ const placeOrderErrorOptions = {
 };
 
 const fulfilmentTimeOptions = {
-    None: null,
+    none: null,
     'Selected Asap Time': 'user-selected-asap',
     'Selected Later Time': 'user-selected-later',
     'Selected Unavailable Time': 'user-selected-unavailable-time',
