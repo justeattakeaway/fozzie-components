@@ -4,18 +4,18 @@ import statisticsModule from '../store/statistics.module';
 
 export default class StatisticsService {
     #configuration;
-    #justLogInstance;
+    #logger;
     #basePayload;
     #store;
     #publishIntervalTimer = null;
 
-    constructor (justLogInstance, options = {}, basePayload = {}, store) {
+    constructor (logger, options = {}, basePayload = {}, store) {
         this.#configuration = {
             ...defaultOptions,
             ...options
         };
         this.#basePayload = this.#makeBasePayload(basePayload);
-        this.#justLogInstance = justLogInstance;
+        this.#logger = logger;
         this.#store = store;
         this.#store.registerModule(this.#configuration.namespace, statisticsModule, { preserveState: !!store.state[`${this.#configuration.namespace}`] });
     }
@@ -30,7 +30,7 @@ export default class StatisticsService {
         };
     }
 
-    #makeLog (message, statisticPayload) {
+    #createLog (message, statisticPayload) {
         return {
             message,
             payload: {
@@ -59,8 +59,8 @@ export default class StatisticsService {
         if (queueByteSize >= this.#configuration.logsMaxByteSize) this.#publishLogs();
     }
 
-    #makeJustLogFunction ({ message, payload }) {
-        return () => this.#justLogInstance.info(message, {
+    #createLogFunction ({ message, payload }) {
+        return () => this.#logger.info(message, {
             ...payload
         });
     }
@@ -68,13 +68,13 @@ export default class StatisticsService {
     #publishLogs () {
         clearInterval(this.#publishIntervalTimer);
         this.#publishIntervalTimer = null;
-        this.#logs.map(log => this.#makeJustLogFunction(log))
+        this.#logs.map(log => this.#createLogFunction(log))
             .forEach(justLog => justLog());
         this.#store.dispatch(`${this.#configuration.namespace}/clearLogs`);
     }
 
     publish (message, statisticPayload) {
-        const log = this.#makeLog(message, statisticPayload);
+        const log = this.#createLog(message, statisticPayload);
         this.#store.dispatch(`${this.#configuration.namespace}/addLog`, log);
         this.#publishBasedOnByteSize();
         this.#publishBasedOnNumber();
