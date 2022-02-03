@@ -112,23 +112,6 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
         checkout.waitForComponent();
     });
 
-    it('should open the order notes accordion and populate it', () => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Note types', 'get-notes-config');
-
-        // Act
-        checkout.load();
-        checkout.waitForComponent();
-
-        // Assert
-        checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is a order note');
-        checkout.goToPayment();
-    });
-
     it('should open the courier and kitchen notes accordions and populate them', () => {
         // Arrange
         checkout = new Checkout();
