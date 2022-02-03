@@ -8,7 +8,7 @@ describe('Accessibility tests', () => {
     beforeEach(() => {
         loyalty.load();
     });
-    it('a11y - should test f-loyalty component WCAG compliance', () => {
+    xit('a11y - should test f-loyalty component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-loyalty');
 

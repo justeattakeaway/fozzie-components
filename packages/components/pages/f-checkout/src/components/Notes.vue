@@ -9,7 +9,7 @@
                 :placeholder="$t(`userNote.courier.${serviceType}.placeholder`)"
                 :value="noteValue"
                 v-bind="inputStyles"
-                :name="`courier-note`"
+                name="courier-note"
                 @input="updateUserNotes({ note: $event, type: 'courier' })" />
         </accordion>
         <accordion
