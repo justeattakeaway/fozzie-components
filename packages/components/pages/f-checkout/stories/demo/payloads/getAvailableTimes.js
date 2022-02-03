@@ -1,3 +1,5 @@
+import { httpMethods, httpStatusCodes } from '../../helpers';
+
 function getAvailableTimes (isAsapAvailable = true, availableTimes = true) {
     const times = [
         {
@@ -26,7 +28,19 @@ function getAvailableTimes (isAsapAvailable = true, availableTimes = true) {
 
 
 export default {
-    default: getAvailableTimes(),
-    noTimeAvailable: getAvailableTimes(false, false),
-    preOrder: getAvailableTimes(false)
+    'checkout-available-fulfilment': {
+        method: httpMethods.get,
+        status: httpStatusCodes.ok,
+        payload: getAvailableTimes()
+    },
+    'checkout-available-fulfilment-time-unavailable': {
+        method: httpMethods.get,
+        status: httpStatusCodes.ok,
+        payload: getAvailableTimes(false, false)
+    },
+    'checkout-available-fulfilment-preorder': {
+        method: httpMethods.get,
+        status: httpStatusCodes.ok,
+        payload: getAvailableTimes(false)
+    }
 };

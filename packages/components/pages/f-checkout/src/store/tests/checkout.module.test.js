@@ -14,9 +14,9 @@ import getBasketResponse from '../../../stories/demo/payloads/getBasket';
 import getAvailableTimesResponse from '../../../stories/demo/payloads/getAvailableTimes';
 
 // import checkoutAvailableFulfilment from '../../../stories/demo/responses/getAvaialbleTimes/checkout-available-fulfilment.json';
-import customerAddresses from '../../../stories/demo/payloads/get-address.json';
-import geoLocationDetails from '../../../stories/demo/payloads/get-geo-location.json';
-import customer from '../../../stories/demo/payloads/get-customer.json';
+import customerAddressResponse from '../../../stories/demo/payloads/getAddress';
+import geoLocationDetailsResponse from '../../../stories/demo/payloads/getGeoLocation';
+import customerResponse from '../../../stories/demo/payloads/getCustomer';
 
 // import splitNotesConfig from '../../../stories/demo/responses/getNotes/get-notes-config-split.json';
 import getNotesResponse from '../../../stories/demo/payloads/getNotes';
@@ -63,13 +63,17 @@ import {
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
 
-const checkoutDelivery = getCheckoutResponse.uk.defineProperty;
-const basketDelivery = getBasketResponse.delivery;
-const basketInvalidProducts = getBasketResponse.invalidProducts;
-const basketOfflineProducts = getBasketResponse.offlineProducts;
-const basketDeliveryAgeRestricted = getBasketResponse.ageRestricted;
-const checkoutAvailableFulfilment = getAvailableTimesResponse.default;
-const splitNotesConfig = getNotesResponse.notesConfig;
+const customerAddresses = customerAddressResponse['get-address'].payload;
+const geoLocationDetails = geoLocationDetailsResponse['get-geo-location'].payload;
+const customer = customerResponse['get-customer'].payload;
+
+const checkoutDelivery = getCheckoutResponse['uk/checkout-delivery'].payload;
+const basketDelivery = getBasketResponse['get-basket-delivery'].payload;
+const basketInvalidProducts = getBasketResponse['get-basket-invalid-products'].payload;
+const basketOfflineProducts = getBasketResponse['get-basket-offline-products'].payload;
+const basketDeliveryAgeRestricted = getBasketResponse['get-basket-offline-age-restriction'].payload;
+const checkoutAvailableFulfilment = getAvailableTimesResponse['checkout-available-fulfilment'].payload;
+const splitNotesConfig = getNotesResponse['get-notes-config'].payload;
 
 const { actions, getters, mutations } = CheckoutModule;
 

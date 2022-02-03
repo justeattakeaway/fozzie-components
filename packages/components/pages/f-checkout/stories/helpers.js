@@ -20,6 +20,20 @@ export const DELIVERY_TIMES = {
     now: 'now'
 };
 
+export const httpStatusCodes = {
+    noResponse: 0,
+    ok: 200,
+    badRequest: 400,
+    forbidden: 403,
+    internalServerError: 500
+};
+
+export const httpMethods = {
+    get: 'get',
+    post: 'post',
+    patch: 'patch'
+};
+
 export const ISSUES = {
     timeUnavailable: 'FULFILMENT_TIME_UNAVAILABLE',
     serviceTypeUnavailable: 'SERVICE_TYPE_UNAVAILABLE',

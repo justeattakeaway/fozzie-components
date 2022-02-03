@@ -1,5 +1,5 @@
 // import updateCheckout from './update-checkout.json';
-import { ISSUES } from '../../helpers';
+import { httpMethods, httpStatusCodes, ISSUES } from '../../helpers';
 
 const updateCheckout = (issue, isForbidden = false) => {
     if (isForbidden) {
@@ -22,11 +22,43 @@ const updateCheckout = (issue, isForbidden = false) => {
 };
 
 export default {
-    default: updateCheckout(),
-    additionalItemsRequired: updateCheckout(ISSUES.additionalItemsRequired),
-    geolocationRequired: updateCheckout(ISSUES.geoLocationRequired),
-    restaurantNotTakingOrders: updateCheckout(ISSUES.restaurantNotTakingOrders),
-    serviceTypeUnavailable: updateCheckout(ISSUES.serviceTypeUnavailable),
-    unavailable: updateCheckout(ISSUES.timeUnavailable),
-    error: updateCheckout(false, true)
+    'update-checkout': {
+        method: httpMethods.patch,
+        status: httpStatusCodes.ok,
+        payload: updateCheckout()
+    },
+    'update-checkout-restaurant-not-taking-orders': {
+        method: httpMethods.patch,
+        status: httpStatusCodes.ok,
+        payload: updateCheckout(ISSUES.restaurantNotTakingOrders)
+    },
+    'update-checkout-service-type-unavailable': {
+        method: httpMethods.patch,
+        status: httpStatusCodes.ok,
+        payload: updateCheckout(ISSUES.serviceTypeUnavailable)
+    },
+    'update-checkout-additional-items-required': {
+        method: httpMethods.patch,
+        status: httpStatusCodes.ok,
+        payload: updateCheckout(ISSUES.additionalItemsRequired)
+    },
+    'update-checkout-403': {
+        method: httpMethods.patch,
+        status: httpStatusCodes.forbidden,
+        payload: updateCheckout(false, true)
+    },
+    'update-checkout-time-unavailable': {
+        method: httpMethods.patch,
+        status: httpStatusCodes.ok,
+        payload: updateCheckout(ISSUES.timeUnavailable)
+    },
+    'update-checkout-geolocation-required': {
+        method: httpMethods.patch,
+        status: httpStatusCodes.ok,
+        payload: updateCheckout(ISSUES.geolocationRequired)
+    },
+    'update-checkout-timeout': {
+        method: httpMethods.patch,
+        status: httpStatusCodes.ok
+    }
 };

@@ -59,7 +59,7 @@ Object {
   "notices": Array [
     Object {
       "notice": Object {
-        "text": "If you have a food allergy or intolerance (or someone you're ordering for has), <a href=\\"https://greggs.co.uk/nutrition\\" data-test-id=\\"allergen-url-link\\" target=\\"_blank\\" rel=\\"noopener\\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.",
+        "text": "If you have a food allergy or intolerance (or someone you're ordering for has), <a href='https://greggs.co.uk/nutrition' data-test-id='allergen-url-link' target='_blank' rel='noopener'>read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.",
       },
       "type": "allergy",
     },

@@ -1,3 +1,5 @@
+import { httpMethods, httpStatusCodes } from '../../helpers';
+
 function getNotesConfig (isSplitNotes = false) {
     return {
         customerNotes: {
@@ -20,6 +22,14 @@ function getNotesConfig (isSplitNotes = false) {
 }
 
 export default {
-    notesConfig: getNotesConfig(),
-    splitNotesConfig: getNotesConfig(true)
+    'get-notes-config': {
+        method: httpMethods.get,
+        status: httpStatusCodes.ok,
+        payload: getNotesConfig()
+    },
+    'get-notes-config-split': {
+        method: httpMethods.get,
+        status: httpStatusCodes.ok,
+        payload: getNotesConfig(true)
+    }
 };

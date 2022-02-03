@@ -1,6 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import mockedRequests, { httpMethods, httpStatusCodes } from './mockResponses';
+import { httpMethods, httpStatusCodes } from '../helpers';
+import mockedRequests from './mockResponses';
 
 const mock = new MockAdapter(axios);
 
@@ -29,13 +30,9 @@ function setupCheckoutMethod (mockedRequest) {
 }
 
 function setupCheckoutMethods () {
-    const requests = Object.entries(mockedRequests);
+    const requests = mockedRequests()
+    requests.forEach(request => setupCheckoutMethod(request));
 
-    for (let i = 0; i < requests.length; i++) {
-        const [, value] = requests[i];
-
-        setupCheckoutMethod(value);
-    }
     mock.onAny().passThrough();
 }
 

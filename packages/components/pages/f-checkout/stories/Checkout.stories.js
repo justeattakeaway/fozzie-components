@@ -9,7 +9,6 @@ import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation.module';
 import CheckoutMock from './demo/checkoutMock';
-import mockedRequests from './demo/mockResponses';
 import { TENANT_MAP } from '../src/constants';
 import {
     noteTypeOptions,
@@ -22,6 +21,7 @@ import {
     fulfilmentTimeOptions,
     timeUnavailable
 } from './options';
+
 
 export default {
     title: 'Components/Pages',
@@ -40,11 +40,11 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            getAddressUrl: mockedRequests.getAddress.url,
+            getAddressUrl: '/get-address',
             loginUrl: '/login',
             paymentPageUrlPrefix: '#/pay',
-            getGeoLocationUrl: mockedRequests.getGeoLocation.url,
-            getCustomerUrl: mockedRequests.getCustomer.url
+            getGeoLocationUrl: '/get-geo-location',
+            getCustomerUrl: '/get-customer'
         };
     },
     props: {
@@ -99,19 +99,19 @@ export const CheckoutComponent = () => ({
 
     computed: {
         createGuestUrl () {
-            return this.createGuestError ? mockedRequests.createGuestError.url : mockedRequests.createGuest.url;
+            return this.createGuestError ? '/create-guest-error' : '/create-guest';
         },
 
         getCheckoutUrl () {
             let url;
             if (this.fulfilmentTimeSelection) {
-                url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
+                url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}`;
             }
 
             if (this.getCheckoutError && this.getCheckoutError !== timeUnavailable) {
-                url = `/checkout-${this.getCheckoutError}-get-error.json`;
+                url = `/checkout-${this.getCheckoutError}-get-error`;
             } else {
-                url = `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}.json`;
+                url = `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}`;
             }
 
             return url;
@@ -119,10 +119,10 @@ export const CheckoutComponent = () => ({
 
         getBasketUrl () {
             if (this.getBasketError) {
-                return `/get-basket-${this.getBasketError}.json`;
+                return `/get-basket-${this.getBasketError}`;
             }
 
-            return this.restriction ? `/get-basket-delivery-${this.restriction}.json` : `/get-basket-${this.serviceType}.json`;
+            return this.restriction ? `/get-basket-delivery-${this.restriction}` : `/get-basket-${this.serviceType}`;
         },
 
         authToken () {
@@ -131,21 +131,21 @@ export const CheckoutComponent = () => ({
 
         updateCheckoutUrl () {
             if (this.patchCheckoutError) {
-                return `/update-checkout-${this.patchCheckoutError}.json`;
+                return `/update-checkout-${this.patchCheckoutError}`;
             }
 
-            return mockedRequests.updateCheckout.url;
+            return '/update-checkout';
         },
 
         placeOrderUrl () {
-            return this.placeOrderError ? `/place-order-${this.placeOrderError}.json` : mockedRequests.placeOrder.url;
+            return this.placeOrderError ? `/place-order-${this.placeOrderError}` : '/place-order-duplicate';
         },
 
         checkoutAvailableFulfilmentUrl () {
             if (this.getCheckoutError === timeUnavailable) {
-                return mockedRequests.checkoutAvailableFulfilmentNoTimeAvailable.url;
+                return '/checkout-available-fulfilment-time-unavailable';
             }
-            return this.isAsapAvailable ? mockedRequests.checkoutAvailableFulfilment.url : mockedRequests.checkoutAvailableFulfilmentPreorder.url;
+            return this.isAsapAvailable ? '/checkout-available-fulfilment' : '/checkout-available-fulfilment-preorder';
         },
 
         getNoteConfigUrl () {

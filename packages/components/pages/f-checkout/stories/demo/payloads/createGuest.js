@@ -1,3 +1,5 @@
+import { httpMethods, httpStatusCodes } from '../../helpers';
+
 function createGuest (hasErrors) {
     return {
         traceId: 'H3TKh4QSJUSwVBCBqEtkKw==',
@@ -14,6 +16,14 @@ function createGuest (hasErrors) {
 }
 
 export default {
-    default: createGuest(),
-    error: createGuest(true)
+    'create-guest': {
+        method: httpMethods.post,
+        status: httpStatusCodes.ok,
+        payload: createGuest()
+    },
+    'create-guest-error': {
+        method: httpMethods.post,
+        status: httpStatusCodes.ok,
+        payload: createGuest(true)
+    }
 };

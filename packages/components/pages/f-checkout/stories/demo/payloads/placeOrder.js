@@ -1,3 +1,5 @@
+import { httpMethods, httpStatusCodes } from '../../helpers';
+
 function placeOrder (isDuplicate = false) {
     if (isDuplicate) {
         return {
@@ -20,6 +22,18 @@ function placeOrder (isDuplicate = false) {
 }
 
 export default {
-    default: placeOrder(),
-    duplicate: placeOrder(true)
+    'place-order': {
+        method: httpMethods.post,
+        status: httpStatusCodes.ok,
+        payload: placeOrder()
+    },
+    'place-order-duplicate': {
+        method: httpMethods.post,
+        status: httpStatusCodes.badRequest,
+        payload: placeOrder(true)
+    },
+    'place-order-timeout': {
+        method: httpMethods.post,
+        status: httpStatusCodes.noResponse
+    }
 };
