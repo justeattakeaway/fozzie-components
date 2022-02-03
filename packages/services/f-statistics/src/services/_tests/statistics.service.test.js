@@ -13,7 +13,6 @@ const justLog = {
     info: jest.fn()
 };
 
-jest.useFakeTimers();
 jest.spyOn(global, 'setInterval');
 
 describe('f-statistics', () => {
@@ -49,6 +48,7 @@ describe('f-statistics', () => {
     beforeEach(() => {
         // Arrange - store
         mockStore();
+        jest.useFakeTimers();
     });
 
     afterEach(() => {
@@ -92,7 +92,7 @@ describe('f-statistics', () => {
                     ...log.payload
                 }
             };
-            const statisticsService = new StatisticsService(justLog, null, null, store);
+            const statisticsService = new StatisticsService(justLog, { logsIntervalTimer: 0 }, null, store);
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
@@ -111,7 +111,7 @@ describe('f-statistics', () => {
             };
 
             // Act
-            const statisticsService = new StatisticsService(justLog, null, null, store);
+            const statisticsService = new StatisticsService(justLog, { logsIntervalTimer: 0 }, null, store);
             statisticsService.publish(expected.message);
 
             // Assert
@@ -130,7 +130,7 @@ describe('f-statistics', () => {
 
             // Act
             // eslint-disable-next-line camelcase
-            const statisticsService = new StatisticsService(justLog, null, { testProperty: expected.payload.testProperty, je_feature: 'a modified value' }, store);
+            const statisticsService = new StatisticsService(justLog, { logsIntervalTimer: 0 }, { testProperty: expected.payload.testProperty, je_feature: 'a modified value' }, store);
             statisticsService.publish(log.message);
 
             // Assert
@@ -147,7 +147,7 @@ describe('f-statistics', () => {
             };
 
             // Act
-            const statisticsService = new StatisticsService(justLog, null, { testProperty: expected.payload.testProperty }, store);
+            const statisticsService = new StatisticsService(justLog, { logsIntervalTimer: 0 }, { testProperty: expected.payload.testProperty }, store);
             statisticsService.publish(log.message);
 
             // Assert
@@ -203,15 +203,33 @@ describe('f-statistics', () => {
 
         it('should call justLog.info when timer exceeded', () => {
             // Arrange
-            const config = { logsMaxLength: 10, logsMaxByteSize: 1000, logsIntervalTimer: 5000 };
+            const config = { logsMaxLength: 10, logsMaxByteSize: 1000, logsIntervalTimer: 1000 };
             const statisticsService = new StatisticsService(justLog, config, null, store);
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
-            jest.runAllTimers();
+            jest.runTimersToTime(1000);
 
             // Assert
             expect(justLog.info).toBeCalledTimes(1);
+        });
+
+        it('should reset and repeat timer calling Just Log', () => {
+            // Arrange
+            const config = { logsMaxLength: 10, logsMaxByteSize: 1000, logsIntervalTimer: 1000 };
+            const statisticsService = new StatisticsService(justLog, config, null, store);
+
+            // Act
+            statisticsService.publish(log.message, { ...log.payload });
+            jest.runTimersToTime(1000);
+
+            expect(justLog.info).toBeCalledTimes(1);
+
+            statisticsService.publish(log.message, { ...log.payload });
+            statisticsService.publish(log.message, { ...log.payload });
+            jest.runTimersToTime(1000);
+
+            expect(justLog.info).toBeCalledTimes(3);
         });
     });
 });

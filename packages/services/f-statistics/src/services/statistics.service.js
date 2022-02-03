@@ -7,7 +7,7 @@ export default class StatisticsService {
     #justLogInstance;
     #basePayload;
     #store;
-    #publishIntervalTimer;
+    #publishIntervalTimer = null;
 
     constructor (justLogInstance, options = {}, basePayload = {}, store) {
         this.#configuration = {
@@ -67,6 +67,7 @@ export default class StatisticsService {
 
     #publishLogs () {
         clearInterval(this.#publishIntervalTimer);
+        this.#publishIntervalTimer = null;
         this.#logs.map(log => this.#makeJustLogFunction(log))
             .forEach(justLog => justLog());
         this.#store.dispatch(`${this.#configuration.namespace}/clearLogs`);
@@ -75,9 +76,9 @@ export default class StatisticsService {
     publish (message, statisticPayload) {
         const log = this.#makeLog(message, statisticPayload);
         this.#store.dispatch(`${this.#configuration.namespace}/addLog`, log);
-        this.#publishBasedOnTime();
         this.#publishBasedOnByteSize();
         this.#publishBasedOnNumber();
+        this.#publishBasedOnTime();
     }
 }
 

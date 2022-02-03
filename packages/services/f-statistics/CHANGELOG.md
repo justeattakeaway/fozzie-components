@@ -5,10 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.0.0
 ------------------------------
-*January 25, 2022*
+*Febuary 03, 2022*
 
 ### Added
-- Ability to batch publish logs using Vuex store based on queue length and interval timer
+- Vuex module to store logs before batch publishing
+- Ability to batch publish logs based on length, interval and byte size
 
 
 v0.4.0

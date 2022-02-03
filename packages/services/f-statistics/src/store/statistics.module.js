@@ -27,14 +27,5 @@ export default {
         [CLEAR_LOGS]: state => {
             state.logs = [];
         }
-        // [SET_INTERVAL_TIMER] (state, cb) {
-        //     state.interval = setInterval(() => {
-        //         cb();
-        //     }, BATCH_INTERVAL_TIMER);
-        // },
-        // [CLEAR_INTERVAL_TIMER] (state) {
-        //     clearInterval(state.interval);
-        //     state.interval = null;
-        // }
     }
 };
