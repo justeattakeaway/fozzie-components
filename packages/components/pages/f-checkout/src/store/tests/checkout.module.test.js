@@ -768,7 +768,7 @@ describe('CheckoutModule', () => {
                 await getAddress(context, payload);
 
                 // Assert
-                expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses.Addresses, payload.tenant, payload.currentPostcode);
+                expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses, payload.tenant, payload.currentPostcode);
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_ADDRESS_DETAILS, expectedFormattedAddress);
             });

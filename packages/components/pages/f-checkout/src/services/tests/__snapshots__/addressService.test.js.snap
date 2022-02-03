@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is not present should return default address if default address is present 1`] = `
+Object {
+  "administrativeArea": "New South Wales",
+  "line1": "196 Kurraba Road",
+  "line2": "Unit 5, Neutral Bay",
+  "locality": "Sydney",
+  "postcode": "2089",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is not present should return empty address if addresses is empty 1`] = `
+Object {
+  "administrativeArea": "",
+  "line1": "",
+  "line2": "",
+  "locality": "",
+  "postcode": "",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return address with full postcode match 1`] = `
+Object {
+  "administrativeArea": "New South Wales",
+  "line1": "196 Kurraba Road",
+  "line2": "Unit 5, Neutral Bay",
+  "locality": "Sydney",
+  "postcode": "2089",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return address with full postcode match when address has no spaces 1`] = `
+Object {
+  "administrativeArea": "New South Wales",
+  "line1": "196 Kurraba Road",
+  "line2": "Unit 5, Neutral Bay",
+  "locality": "Sydney",
+  "postcode": "2089",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return address with postcode partial match 1`] = `
+Object {
+  "administrativeArea": "Victoria",
+  "line1": "94 Shaftesbury Parade",
+  "line2": "Thornbury",
+  "locality": "Melbourne",
+  "postcode": "3071",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return empty address with formatted postcode set, when postcode does not match and has no spaces 1`] = `
+Object {
+  "administrativeArea": "",
+  "line1": "",
+  "line2": "",
+  "locality": "",
+  "postcode": "4278",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return empty address with postcode set, when postcode does not match 1`] = `
+Object {
+  "administrativeArea": "",
+  "line1": "",
+  "line2": "",
+  "locality": "",
+  "postcode": "4278",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is not present should return default address if default address is present 1`] = `
+Object {
+  "line1": "Fleet Place House",
+  "line2": "Farringdon, City of London",
+  "locality": "London",
+  "postcode": "EC4M 7RF",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is not present should return empty address if addresses is empty 1`] = `
+Object {
+  "line1": "",
+  "line2": "",
+  "locality": "",
+  "postcode": "",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return address with full postcode match 1`] = `
+Object {
+  "line1": "1 Bristol Road",
+  "line2": "Flat 1",
+  "locality": "Bristol",
+  "postcode": "BS1 1AA",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return address with full postcode match when address has no spaces 1`] = `
+Object {
+  "line1": "Fleet Place House",
+  "line2": "Farringdon, City of London",
+  "locality": "London",
+  "postcode": "EC4M 7RF",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return address with postcode partial match 1`] = `
+Object {
+  "line1": "1 Test Road",
+  "line2": "",
+  "locality": "Area 51",
+  "postcode": "AR51 1AA",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return empty address with formatted postcode set, when postcode does not match and has no spaces 1`] = `
+Object {
+  "line1": "",
+  "line2": "",
+  "locality": "",
+  "postcode": "EN1 1AA",
+}
+`;
+
+exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return empty address with postcode set, when postcode does not match 1`] = `
+Object {
+  "line1": "",
+  "line2": "",
+  "locality": "",
+  "postcode": "EN1 1AA",
+}
+`;

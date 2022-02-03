@@ -40,7 +40,6 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            getAddressUrl: '/get-address',
             loginUrl: '/login',
             paymentPageUrlPrefix: '#/pay',
             getGeoLocationUrl: '/get-geo-location',
@@ -104,7 +103,7 @@ export const CheckoutComponent = () => ({
 
         getCheckoutUrl () {
             let url;
-            if (this.fulfilmentTimeSelection) {
+            if (this.fulfilmentTimeSelection && this.fulfilmentTimeSelection !== 'issues') {
                 url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}`;
             }
 
@@ -123,6 +122,10 @@ export const CheckoutComponent = () => ({
             }
 
             return this.restriction ? `/get-basket-delivery-${this.restriction}` : `/get-basket-${this.serviceType}`;
+        },
+
+        getAddressUrl () {
+            return `/${TENANT_MAP[this.locale]}/get-address.json`;
         },
 
         authToken () {
@@ -145,6 +148,11 @@ export const CheckoutComponent = () => ({
             if (this.getCheckoutError === timeUnavailable) {
                 return '/checkout-available-fulfilment-time-unavailable';
             }
+
+            if (this.fulfilmentTimeSelection) {
+                return `/checkout-available-fulfilment-${this.fulfilmentTimeSelection}`;
+            }
+
             return this.isAsapAvailable ? '/checkout-available-fulfilment' : '/checkout-available-fulfilment-preorder';
         },
 

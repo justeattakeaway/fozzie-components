@@ -49,7 +49,8 @@ const fulfilmentTimeOptions = {
     none: null,
     'Selected Asap Time': 'user-selected-asap',
     'Selected Later Time': 'user-selected-later',
-    'Selected Unavailable Time': timeUnavailable
+    'Selected Unavailable Time': timeUnavailable,
+    'Available Time Issues': 'issues'
 };
 
 const noteTypeOptions = {

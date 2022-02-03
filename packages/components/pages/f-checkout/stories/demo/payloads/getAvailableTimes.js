@@ -1,6 +1,6 @@
 import { httpMethods, httpStatusCodes } from '../../helpers';
 
-function getAvailableTimes (isAsapAvailable = true, availableTimes = true) {
+function getAvailableTimes (isAsapAvailable = true, availableTimes = true, issues = false) {
     const times = [
         {
             from: '2020-01-01T01:30:00.000Z',
@@ -22,7 +22,8 @@ function getAvailableTimes (isAsapAvailable = true, availableTimes = true) {
 
     return {
         times: availableTimes ? times : [],
-        asapAvailable: isAsapAvailable
+        asapAvailable: isAsapAvailable,
+        issues: issues ? [{ code: 'RESTAURANT_NOT_TAKING_ORDERS' }] : []
     };
 }
 
@@ -42,5 +43,10 @@ export default {
         method: httpMethods.get,
         status: httpStatusCodes.ok,
         payload: getAvailableTimes(false)
+    },
+    'checkout-available-fulfilment-issues': {
+        method: httpMethods.get,
+        status: httpStatusCodes.ok,
+        payload: getAvailableTimes(true, true, true)
     }
 };

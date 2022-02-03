@@ -215,6 +215,14 @@ export default {
          */
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
+            const { issues } = data;
+
+            const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
+                || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
+
+            if (detailedIssues.length) {
+                commit(UPDATE_CHECKOUT_ERROR_MESSAGE, detailedIssues[0]);
+            }
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
         },
@@ -314,7 +322,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant, currentPostcode);
+            const addressDetails = addressService.getClosestAddress(data, tenant, currentPostcode);
 
             commit(UPDATE_ADDRESS_DETAILS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });

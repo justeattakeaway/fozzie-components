@@ -2,13 +2,13 @@
     <p
         :class="{
             [$style['c-restaurantCard-iconText']]: true,
+            [$style[`c-restaurantCard-iconText--${color}`]]: true,
             [$style['c-restaurantCard-iconText--bold']]: isBold
         }">
         <span
             v-if="showIcon"
             :class="{
                 [$style['c-restaurantCard-iconText-icon']]: true,
-                [$style[`c-restaurantCard-iconText-icon--${color}`]]: true,
                 [$style['c-restaurantCard-iconText-icon--hideOnMidBelow']]: hideIconInTileView
             }"
             data-test-id="icon-text-icon">
@@ -16,8 +16,7 @@
         </span>
         <span
             :class="{
-                [$style['c-restaurantCard-iconText-content']]: true,
-                [$style[`c-restaurantCard-iconText-content--${color}`]]: true
+                [$style['c-restaurantCard-iconText-content']]: true
             }"
             data-test-id="icon-text-visible-text">
             {{ text }}
@@ -82,10 +81,6 @@ export default {
     line-height: spacing(d);
 }
 
-.c-restaurantCard-iconText-content--green {
-    color: $color-green;
-}
-
 .c-restaurantCard-iconText-icon {
     width: spacing(d);
     height: spacing(d);
@@ -98,7 +93,16 @@ export default {
     }
 }
 
-.c-restaurantCard-iconText-icon--green {
-    fill: $color-green;
+.c-restaurantCard-iconText--colorSupportPositive {
+    color: $color-support-positive;
+    path {
+        fill: $color-support-positive;
+    }
+}
+.c-restaurantCard-iconText--colorSupportInfo {
+    color: $color-support-info;
+    path {
+        fill: $color-support-info;
+    }
 }
 </style>
