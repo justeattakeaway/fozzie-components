@@ -10,6 +10,7 @@
                 $style.item,
                 { [$style.selected]: index === selected }
             ]"
+            type="button"
             @click="getSelectedStreetAddress($event, index, selected)">
             <map-pin-icon :class="$style['c-locationIcon']" />
 

@@ -35,15 +35,15 @@ module.exports = class Footer extends Page {
     get countryLink () { return this.countryValue != null ? this.countryValue : 'Please set a country value'; }
 
     set expectedDownloadIcon (icon) {
-        this.downloadIconValue = this.downloadIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
+        [this.downloadIconValue] = this.downloadIcons.filter(element => element.getAttribute('data-test-id').includes(icon));
     }
 
     set expectedSocialIcon (icon) {
-        this.socialIconValue = this.socialIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
+        [this.socialIconValue] = this.socialIcons.filter(element => element.getAttribute('data-test-id').includes(icon));
     }
 
     set expectedCountry (country) {
-        this.countryValue = this.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
+        [this.countryValue] = this.countries.filter(element => element.getAttribute('data-test-id').includes(country));
     }
 
     load () {

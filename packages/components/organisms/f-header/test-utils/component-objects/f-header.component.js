@@ -36,12 +36,12 @@ module.exports = class Header extends Page {
             get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon); },
             get countries () { return $$(NAVIGATION.countrySelector.countryList); }
         }
-    }
+    };
 
     get countryLink () { return this.countryValue != null ? this.countryValue : 'Please set a country value'; }
 
     set expectedCountry (country) {
-        this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
+        [this.countryValue] = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country));
     }
 
     load () {

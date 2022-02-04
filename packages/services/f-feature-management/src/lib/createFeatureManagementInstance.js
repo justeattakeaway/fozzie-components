@@ -12,7 +12,7 @@ let instance = null;
  * @param {object} httpClient An optional injected http client. If not provided, an internal instance will be created.
  * @returns Singleton FeatureManagement object
  */
-export default function (settings, httpClient) {
+export default function (settings, httpClient) { // eslint-disable-line func-names
     if (instance) return instance;
 
     if (settings.logger) {

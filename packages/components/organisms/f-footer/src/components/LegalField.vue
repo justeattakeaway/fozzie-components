@@ -39,7 +39,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-legalField-certificates {
     display: flex;
     align-items: center;

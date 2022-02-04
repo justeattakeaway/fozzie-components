@@ -18,8 +18,8 @@ describe('f-takeawaypay-activation - Error page - Mobile Visual Tests', () => {
 
     forEach(['en-GB', 'en-AU'])
     .it('should display the component when there is an error and tenant is "%s"', tenant => {
-         // Arrange
-         takeawayPayComponent.withQuery('knob-Locale', tenant);
+        // Arrange
+        takeawayPayComponent.withQuery('knob-Locale', tenant);
 
         // Act
         takeawayPayComponent.load('error');

@@ -18,6 +18,7 @@
                     :class="[$style['c-cookieWarning-btn']]"
                     data-test-id="cookieBanner-close-button"
                     aria-label="Close"
+                    type="button"
                     @click="$emit('hide-legacy-banner')">
                     <span class="is-visuallyHidden">
                         {{ legacyBannerCloseBannerText }}

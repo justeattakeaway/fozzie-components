@@ -1,5 +1,3 @@
-/* global browser */
-
 const CardWithContent = require('../../test-utils/component-objects/f-card-with-content.component');
 
 let cardWithContent = new CardWithContent();

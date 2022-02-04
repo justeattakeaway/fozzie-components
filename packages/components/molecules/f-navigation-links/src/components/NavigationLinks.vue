@@ -4,7 +4,9 @@
         :class="$style['c-navigationLinks']"
         data-test-id="navigationLinks">
         <li
-            v-for="({ id, href, to, name }, i) in filterLinks"
+            v-for="({
+                id, href, to, name
+            }, i) in filterLinks"
             :key="i"
             :class="$style['c-navigationLinks-item']">
             <v-link

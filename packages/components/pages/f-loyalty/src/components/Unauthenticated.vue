@@ -35,7 +35,7 @@ import FCard from '@justeat/f-card';
 import FButton from '@justeat/f-button';
 
 export default {
-    name: 'Unauthenticated',
+    name: 'LoyaltyUnauthenticated',
 
     components: {
         FCard,

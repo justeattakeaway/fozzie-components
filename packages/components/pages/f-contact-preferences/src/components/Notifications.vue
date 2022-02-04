@@ -30,7 +30,7 @@ import FAlert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 
 export default {
-    name: 'Notifications',
+    name: 'PreferenceNotifications',
 
     components: {
         FAlert

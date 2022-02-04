@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-duplicate-attr-inheritance -->
 <template>
     <component
         :is="componentType"
@@ -187,7 +188,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $btn-default-borderRadius              : $radius-rounded-e;
 $btn-default-font-size                 : 'heading-s';
 $btn-default-weight                    : $font-weight-bold;

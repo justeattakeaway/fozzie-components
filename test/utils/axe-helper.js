@@ -3,6 +3,8 @@ const AxeReports = require('axe-reports');
 const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const { getTestConfiguration } = require('../../test/configuration/configuration-helper');
+const configuration = getTestConfiguration();
 
 /**
  * Runs the WCAG accessibility tests on the curent page of the global browser
@@ -48,15 +50,12 @@ exports.getAccessibilityTestResults = (componentName) => {
 exports.processResults = (results, componentName) => {
     console.log('Creating .CSV artifact for Axe violations');
 
-    const fileName = `${componentName}-a11y-violations`;
-    const localFilePath = path.join(__dirname + `/../results/axe-violations/${fileName}`);
+    const filePath = `${configuration.testType.violationCSVDirectory}/${componentName}-a11y-violations`;
     // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
     if (process.env.CIRCLECI) {
-        const ciFileName = `/home/circleci/project/test/results/axe-violations/${fileName}`;
-
         try {
-            if (!fs.existsSync(ciFileName)) {
-                exec(`touch ${ciFileName}`, (error, stdout, stderr) => {
+            if (!fs.existsSync(filePath)) {
+                exec(`touch ${filePath}`, (error, stdout, stderr) => {
                     if (error) {
                         console.log(`error: ${error.message}`);
                         return;
@@ -71,11 +70,8 @@ exports.processResults = (results, componentName) => {
         } catch (err) {
             console.error(err);
         }
-
-        AxeReports.processResults(results, 'csv', ciFileName, false);
-    } else {
-        AxeReports.processResults(results, 'csv', localFilePath, false);
     }
 
+    AxeReports.processResults(results, 'csv', filePath, false);
     console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
 };
