@@ -216,11 +216,13 @@ export default {
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
             const { issues } = data;
 
-            const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
-                || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
+            if (issues) {
+                const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
+                    || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
 
-            if (detailedIssues.length) {
-                commit(UPDATE_CHECKOUT_ERROR_MESSAGE, detailedIssues[0]);
+                if (detailedIssues.length) {
+                    commit(UPDATE_CHECKOUT_ERROR_MESSAGE, detailedIssues[0]);
+                }
             }
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
