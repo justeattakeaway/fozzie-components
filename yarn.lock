@@ -2320,6 +2320,13 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-alert@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.1.0.tgz#f0b3585d0e72885d0ec8f923b7699aaf7cdcd3bc"
+  integrity sha512-/cT3C41bfQTqH66NEFZo6Jn0zvgvy+Sy0O1bxXnnN8jpf3ny8rXhxIm0uP6HLyDpfA+ZGTh8uvu4U0h8cCGcSQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2334,6 +2341,11 @@
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-0.2.1.tgz#1af84f431073ad3f5529a4b4db983563d6cf526e"
   integrity sha512-WGyfr0T/8eFqVUKNrr+PQTO8V3opidzUcT9s0fwJ4uU2q3SU31kqts9shDSgpDXKx7LBNxKqx/W8bUFgEU9Ejw==
+
+"@justeat/f-card-with-content@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.0.0.tgz#d2e376e121a1b1c89418000a04cb9d5ef3134019"
+  integrity sha512-5BT0MwSDu+JJ1641V25M6NJZrttsxJqz7JaRkfez4x7NoC3BkxW0CbcpRQxGSw9u9pEmMG6io1drNDjzPyrgyQ==
 
 "@justeat/f-card@3.0.0":
   version "3.0.0"
@@ -2431,6 +2443,11 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
+
+"@justeat/f-mega-modal@4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.0.2.tgz#7b2cea1bb64498db688b4c5ec004c4fda12672c1"
+  integrity sha512-MbnGuwij3mZMkqr5LSKBKWNlGOGZ03FfVyJyZNx+BAseqEnrogmkN3P3hhOmetgh7Sv1O9Vlg94/geCM20S3uA==
 
 "@justeat/f-navigation-links@0.3.0":
   version "0.3.0"
@@ -4775,7 +4792,7 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@testim/chrome-version@^1.0.7":
+"@testim/chrome-version@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@testim/chrome-version/-/chrome-version-1.1.2.tgz#092005c5b77bd3bb6576a4677110a11485e11864"
   integrity sha512-1c4ZOETSRpI0iBfIFUqU4KqwBAB2lHUAlBjZz/YqOHqwM9dTTzjV6Km0ZkiEiSCx/tLr1BtESIKyWWMww+RUqw==
@@ -7138,7 +7155,7 @@ axios@0.21.1:
   dependencies:
     follow-redirects "^1.10.0"
 
-axios@0.21.4, axios@^0.21.1, axios@^0.21.2:
+axios@0.21.4, axios@^0.21.1:
   version "0.21.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
@@ -7151,6 +7168,13 @@ axios@^0.19.0:
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
   dependencies:
     follow-redirects "1.5.10"
+
+axios@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
+  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
+  dependencies:
+    follow-redirects "^1.14.4"
 
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -9041,13 +9065,13 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromedriver@96.0.0:
-  version "96.0.0"
-  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-96.0.0.tgz#c8473498e4c94950fa168187b112019cce9e5c6c"
-  integrity sha512-4g6Hn5RHGsbaBmOrJbDlz/hdVPOc22eRsbvoAAMqkZxR2NJCcddHzCw2FAQeW8lX/C7xWVz3nyDsKX3fE9lIIw==
+chromedriver@98.0.0:
+  version "97.0.4"
+  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-97.0.4.tgz#69dbfae6194d32c64e34f88d60897835d86f7a99"
+  integrity sha512-mAOH1QSCaeYgniNOqceAzC8BVORQtWxsmgSOBuy8TV/CyyDTllLmKtNNORsxdqrDtefVlxRVQkEzYrlKiJsfFw==
   dependencies:
-    "@testim/chrome-version" "^1.0.7"
-    axios "^0.21.2"
+    "@testim/chrome-version" "^1.1.2"
+    axios "^0.24.0"
     del "^6.0.0"
     extract-zip "^2.0.1"
     https-proxy-agent "^5.0.0"
@@ -12907,7 +12931,7 @@ follow-redirects@1.5.10:
   dependencies:
     debug "=3.1.0"
 
-follow-redirects@^1.0.0, follow-redirects@^1.10.0, follow-redirects@^1.14.0:
+follow-redirects@^1.0.0, follow-redirects@^1.10.0, follow-redirects@^1.14.0, follow-redirects@^1.14.4:
   version "1.14.7"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.7.tgz#2004c02eb9436eee9a21446a6477debf17e81685"
   integrity sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==

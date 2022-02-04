@@ -1,7 +1,3 @@
-// Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-// import {
-//     withKnobs, select, boolean
-// } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
 import restaurantLogo from './assets/images/mcdonalds-logo.gif';
