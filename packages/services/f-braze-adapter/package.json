@@ -31,7 +31,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint:fix && yarn test && yarn build",
     "build": "vite build",
-    "lint": "vue-cli-service lint --no-fix",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
     "ci:test:services": "yarn test",
@@ -50,7 +50,6 @@
   "devDependencies": {
     "@braze/web-sdk": "^3.3.0",
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "core-js": "3.6.5",
     "jest-extended": "0.11.5",

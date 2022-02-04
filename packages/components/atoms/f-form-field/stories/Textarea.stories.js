@@ -4,8 +4,6 @@ import {
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
 import {
-    DEFAULT_FIELD_SIZE,
-    VALID_FIELD_SIZES,
     VALID_TEXT_INPUT_TYPES
 } from '../src/constants';
 

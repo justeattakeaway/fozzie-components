@@ -133,5 +133,4 @@ export default {
     height: 48px;
     min-width: 48px;
 }
-
 </style>

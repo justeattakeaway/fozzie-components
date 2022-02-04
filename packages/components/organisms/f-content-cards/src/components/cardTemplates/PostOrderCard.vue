@@ -11,7 +11,7 @@
         </h2>
         <card-container
             :card="cardContainerCard"
-            :class="[cardContainerStyles['c-postOrderCardContainer'] , { [cardContainerStyles['c-postOrderCard--condensed']]: !image && icon }]"
+            :class="[cardContainerStyles['c-postOrderCardContainer'], { [cardContainerStyles['c-postOrderCard--condensed']]: !image && icon }]"
             :container-title="containerTitle"
             :is-carousel="isCarousel"
             :data-test-id="containerTestId()"

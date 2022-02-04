@@ -67,7 +67,7 @@ const getLocationFromGeo = service => ((lat, lng) => (
     lat && lng
         ? geoSearch(service, lat, lng)
         : new Promise((resolve, reject) => (
-            !isGeoAvailable
+            !isGeoAvailable // eslint-disable-line no-promise-executor-return
                 ? reject(new Error(GEO_UNAVAILABLE))
                 : navigator.geolocation.getCurrentPosition(
                     result => {

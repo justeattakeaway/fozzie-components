@@ -7,7 +7,7 @@
         <div :class="$style['c-buttonList']">
             <a
                 v-for="(button, i) in buttonList.buttons"
-                :key="i + '_Button'"
+                :key="`${i}_Button`"
                 :href="button.url"
                 :data-trak='`{
                     "trakEvent": "click",
@@ -17,7 +17,7 @@
                 }`'
                 :class="$style['c-buttonList-button']"
                 target="_blank"
-                rel="noopener">
+                rel="noopener noreferrer">
                 {{ button.title }}
             </a>
         </div>

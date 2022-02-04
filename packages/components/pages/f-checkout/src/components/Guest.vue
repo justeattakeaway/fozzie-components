@@ -21,6 +21,7 @@
 import CheckoutFormField from './CheckoutFormField.vue';
 
 export default {
+    name: 'GuestCheckout',
     components: { CheckoutFormField },
 
     data () {

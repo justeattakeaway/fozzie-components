@@ -1,5 +1,5 @@
 import {
-    withKnobs, boolean, select, text
+    withKnobs
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import ErrorMessage from '../src/components/ErrorMessage.vue';

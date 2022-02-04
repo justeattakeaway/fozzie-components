@@ -73,9 +73,7 @@ describe('Navigation', () => {
                 [0, false, true],
                 [0, true, false],
                 [-1, true, true]
-            ])('should be %s when `isBelowMid` is %s and `countrySelectorIsOpen` is %s', async (
-                tabIndex, isBelowMid, countrySelectorIsOpen
-            ) => {
+            ])('should be %s when `isBelowMid` is %s and `countrySelectorIsOpen` is %s', async (tabIndex, isBelowMid, countrySelectorIsOpen) => {
                 if (isBelowMid) {
                     setMobileViewport();
                 } else {

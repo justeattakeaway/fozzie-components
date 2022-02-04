@@ -7,11 +7,13 @@
             :card-heading="$t('heading')"
             card-heading-size="beta"
             has-inner-spacing-large
-            :card-size-custom="'medium'"
+            card-size-custom="medium"
             has-outline>
             <form @submit.prevent="onFormSubmit">
                 <div
-                    v-for="{ key, isEmailEnabled, emailValue, isSmsEnabled, smsValue } in preferences"
+                    v-for="{
+                        key, isEmailEnabled, emailValue, isSmsEnabled, smsValue
+                    } in preferences"
                     :key="key">
                     <h2
                         :class="$style['c-contactPreferences-subtitle']">

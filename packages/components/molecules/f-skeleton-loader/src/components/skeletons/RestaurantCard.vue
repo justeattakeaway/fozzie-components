@@ -21,7 +21,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-restaurantCard {
     max-width: 370px;
     text-align: center;
@@ -42,6 +41,4 @@ export default {
 .c-restaurantCard-header {
     border-bottom: 0;
 }
-
-
 </style>

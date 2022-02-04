@@ -44,6 +44,11 @@
 import Color from 'color';
 
 export default {
+
+    inject: [
+        'emitCardView',
+        'emitCardClick'
+    ],
     props: {
         card: {
             type: Object,
@@ -129,11 +134,6 @@ export default {
             return this.url && !this.noLink;
         }
     },
-
-    inject: [
-        'emitCardView',
-        'emitCardClick'
-    ],
 
     mounted () {
         this.onViewContentCard();

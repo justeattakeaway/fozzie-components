@@ -12,7 +12,7 @@
             ]">
             <link-list
                 v-for="(linkList, i) in copy.linkLists"
-                :key="i + '_LinkList'"
+                :key="`${i}_LinkList`"
                 :link-list="linkList" />
         </div>
 
@@ -28,7 +28,7 @@
                     ]">
                     <button-list
                         v-for="(buttonList, i) in copy.linkButtonList"
-                        :key="i + '_ButtonList'"
+                        :key="`${i}_ButtonList`"
                         :button-list="buttonList" />
                 </div>
 
@@ -97,6 +97,7 @@ import LinkList from './LinkList.vue';
 import { tenantConfigs, countries } from '../tenants';
 
 export default {
+    name: 'PageFooter',
     components: {
         ButtonList,
         CountrySelector,

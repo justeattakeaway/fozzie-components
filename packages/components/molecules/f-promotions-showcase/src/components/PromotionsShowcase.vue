@@ -113,7 +113,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $promotionsItems-borderRadius                        : $radius-rounded-c;
 
 .c-promotionsShowcase {
@@ -213,5 +212,4 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     top: 0;
     overflow: visible !important;
 }
-
 </style>

@@ -359,7 +359,7 @@ const requestDefinitions = {
 };
 
 export {
-    requestDefinitions as default,
+    requestDefinitions as default, // eslint-disable-line no-restricted-exports
     httpMethods,
     httpStatusCodes
 };

@@ -25,7 +25,7 @@
                 :tier="3">
                 <restaurant-tags
                     :class="$style['c-restaurantCard-imageTags']"
-                    :test-id-position="'main-image'"
+                    test-id-position="main-image"
                     :tags="tags.imageTags" />
             </component>
 
@@ -58,8 +58,10 @@
                 data-test-id="premier-icon" />
 
             <!-- New label -->
-            <!-- TODO - we want to translate this within the component using i18n.
-            For now we'll just need to pass down a translated string from the consuming site -->
+            <!--
+                TODO - we want to translate this within the component using i18n.
+                For now we'll just need to pass down a translated string from the consuming site
+            -->
             <restaurant-tag
                 v-if="newTagText"
                 :is-large="true"
@@ -115,7 +117,7 @@
                 :tier="3">
                 <restaurant-tags
                     :class="$style['c-restaurantCard-tags']"
-                    :test-id-position="'inner-content'"
+                    test-id-position="inner-content"
                     :tags="tags.contentTags" />
             </component>
 
@@ -178,6 +180,11 @@ export default {
         RenderlessSlotWrapper
     },
     mixins: [ErrorBoundaryMixin],
+    provide () {
+        return {
+            isListItem: this.isListItem
+        };
+    },
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
         id: {
@@ -275,11 +282,6 @@ export default {
         hasFees () {
             return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
         }
-    },
-    provide () {
-        return {
-            isListItem: this.isListItem
-        };
     }
 };
 </script>

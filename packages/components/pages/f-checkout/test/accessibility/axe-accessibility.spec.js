@@ -120,7 +120,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -157,7 +157,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -197,7 +197,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {

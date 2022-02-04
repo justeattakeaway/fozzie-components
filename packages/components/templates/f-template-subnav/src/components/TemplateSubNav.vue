@@ -52,7 +52,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-subNavTemplate-breadcrumb {
     padding-top: 10px;
     padding-bottom: 1px;

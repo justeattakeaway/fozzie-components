@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     COMPONENT,
@@ -32,7 +31,7 @@ module.exports = class AccountInfo extends Page {
         deleteAccountLink: {
             get cta () { return $(DELETE_ACCOUNT_LINK); }
         }
-    }
+    };
 
     fields = {
         firstName: {
@@ -72,7 +71,7 @@ module.exports = class AccountInfo extends Page {
             get emptyError () { return $(FIELDS.postcode.emptyError); },
             get invalidError () { return $(FIELDS.postcode.invalidError); }
         }
-    }
+    };
 
     load () {
         super.load(this.component);

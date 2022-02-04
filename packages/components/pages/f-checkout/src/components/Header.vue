@@ -71,6 +71,7 @@ import { VUEX_CHECKOUT_MODULE } from '../constants';
 import loggerMixin from '../mixins/logger.mixin';
 
 export default {
+    name: 'CheckoutHeader',
     components: {
         FButton
     },

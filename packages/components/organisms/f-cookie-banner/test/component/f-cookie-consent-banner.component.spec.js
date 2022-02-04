@@ -16,8 +16,8 @@ describe('New - f-cookie-banner component tests', () => {
         cookieBanner.acceptCookies(expectedCookieValue);
 
         // Arrange
-        const bannerCookie = browser.getCookies().filter(cookie => cookie.name === 'je-banner_cookie')[0];
-        const bannerConsent = browser.getCookies().filter(cookie => cookie.name === 'je-cookieConsent')[0];
+        const [bannerCookie] = browser.getCookies().filter(cookie => cookie.name === 'je-banner_cookie');
+        const [bannerConsent] = browser.getCookies().filter(cookie => cookie.name === 'je-cookieConsent');
 
         // Assert
         expect(bannerCookie.value).toBe('130315');

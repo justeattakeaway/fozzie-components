@@ -24,7 +24,7 @@
                         $style['c-countrySelector-flag--current']
                     ]" />
                 <span
-                    :data-test-id="['countrySelector-current-country-' + currentCountryKey]">
+                    :data-test-id="[`countrySelector-current-country-${currentCountryKey}`]">
                     {{ currentCountryName }}
                 </span>
 
@@ -39,7 +39,7 @@
                 <cross-icon
                     v-show="showCountryList"
                     :class="[
-                        $style['c-icon--cross'],,
+                        $style['c-icon--cross'],
                         $style['c-countrySelector-cross']
                     ]" />
             </button>
@@ -52,8 +52,8 @@
                 role="region">
                 <li
                     v-for="(country, i) in countries"
-                    :key="i + '_Country'"
-                    :data-test-id="['countrySelector-country-' + country.dataTestKey]">
+                    :key="`${i}_Country`"
+                    :data-test-id="[`countrySelector-country-${country.dataTestKey}`]">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
