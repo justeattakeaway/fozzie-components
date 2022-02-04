@@ -1,1 +1,1 @@
-export const COMPONENT = '[data-test-id="offers"]';
+export const COMPONENT = '[data-test-id="offers"]'; // eslint-disable-line import/prefer-default-export

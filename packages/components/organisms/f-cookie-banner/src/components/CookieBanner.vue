@@ -44,7 +44,8 @@
                                 data-test-id="cookie-policy-link"
                                 is-distinct
                                 :href="copy.cookiePolicyLinkUrl"
-                                target="_blank">
+                                target="_blank"
+                                rel="noopener noreferrer">
                                 {{ copy.cookiePolicyLinkText }}
                             </v-link>
                             {{ copy.textLine4 }}

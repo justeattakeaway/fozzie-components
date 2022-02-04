@@ -4,7 +4,6 @@ let checkout;
 let checkoutInfo;
 
 describe('f-checkout - Invalid - Mobile Visual Tests', () => {
-
     it('should display the "Get Checkout" error page', () => {
         // Arrange
         checkout = new Checkout();

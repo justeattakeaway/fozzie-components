@@ -24,7 +24,7 @@
             :data-test-id="`icon-list-${listType}`">
             <li
                 v-for="(icon, i) in icons"
-                :key="i + '_Icon'"
+                :key="`${i}_Icon`"
                 :class="$style['c-iconList-listItem']">
                 <a
                     v-if="icon.url"
@@ -158,5 +158,4 @@ export default {
         max-width: 67px;
     }
 }
-
 </style>

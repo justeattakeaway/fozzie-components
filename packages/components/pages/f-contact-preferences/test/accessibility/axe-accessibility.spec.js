@@ -1,5 +1,5 @@
 import forEach from 'mocha-each';
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
 
 const ContactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
 

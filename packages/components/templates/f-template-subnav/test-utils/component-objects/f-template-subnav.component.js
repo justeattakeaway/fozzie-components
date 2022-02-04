@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class TemplateSubNav extends Page {

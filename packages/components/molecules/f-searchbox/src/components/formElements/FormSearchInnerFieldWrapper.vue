@@ -90,5 +90,4 @@ $streetInput-width: spacing(h);
         outline-color: $color-focus;
     }
 }
-
 </style>

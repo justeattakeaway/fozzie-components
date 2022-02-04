@@ -37,6 +37,12 @@ import { VALIDATIONS, VUEX_CHECKOUT_MODULE } from '../constants';
 export default {
     components: { FormField, ErrorMessage },
 
+    /**
+     * Provide/Inject allows component to inherit `Checkout`
+     * validator scope, `$v`.
+    */
+    inject: ['$v'],
+
     props: {
         fieldName: {
             type: String,
@@ -58,12 +64,6 @@ export default {
             defalut: false
         }
     },
-
-    /**
-     * Provide/Inject allows component to inherit `Checkout`
-     * validator scope, `$v`.
-    */
-    inject: ['$v'],
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [

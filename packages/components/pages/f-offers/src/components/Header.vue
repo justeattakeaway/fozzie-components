@@ -74,7 +74,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $header-height: 275px;
 
 .c-offerHeader-wrapper {

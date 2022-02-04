@@ -26,6 +26,11 @@
 
 <script>
 export default {
+
+    inject: [
+        // Locale-specific copy configuration
+        'copy'
+    ],
     props: {
         card: {
             type: Object,
@@ -62,11 +67,6 @@ export default {
                 };
         }
     },
-
-    inject: [
-        // Locale-specific copy configuration
-        'copy'
-    ],
 
     methods: {
         /**

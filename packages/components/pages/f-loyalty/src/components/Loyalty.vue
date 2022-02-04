@@ -136,7 +136,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-loyalty {
     display: flex;
     flex-direction: column;
@@ -170,5 +169,4 @@ export default {
         padding-right: spacing(d);
     }
 }
-
 </style>

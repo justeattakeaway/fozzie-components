@@ -73,5 +73,4 @@ export default {
     width: 100%;
     margin-bottom: spacing(f);
 }
-
 </style>

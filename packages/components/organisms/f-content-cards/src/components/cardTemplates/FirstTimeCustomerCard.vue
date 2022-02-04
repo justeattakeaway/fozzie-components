@@ -71,5 +71,4 @@ $banner-bgColour-legacy : #cd381f;
     font-weight: bold;
     margin-top: spacing(a);
 }
-
 </style>

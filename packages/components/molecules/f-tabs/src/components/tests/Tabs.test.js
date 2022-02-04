@@ -25,14 +25,14 @@ const registeredTabsMock = [
 
 describe('Tabs', () => {
     const Tab = Vue.extend({
-        name: 'Tab',
-        template: '<div data-tab="true"></div>',
+        name: 'FTab',
         inject: [
             REGISTER,
             SELECT,
             TABS_COMPONENT,
             UPDATE_TITLE
-        ]
+        ],
+        template: '<div data-tab="true"></div>'
     });
 
     const arrange = ({ mocks } = {}) => {

@@ -112,7 +112,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $alert-borderRadius: $radius-rounded-c;
 
 .c-alert {

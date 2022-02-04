@@ -43,9 +43,8 @@
 </template>
 
 <script>
-
 export default {
-    name: 'Breadcrumbs',
+    name: 'BreadCrumbs',
     props: {
         links: {
             type: Array,
@@ -73,7 +72,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $breadcrumbs-text-colour-noBackground: $color-content-default;
 $breadcrumbs-text-colour-hasBackground: $color-content-light;
 $breadcrumbs-background-colour: rgba($color-black, 0.6);

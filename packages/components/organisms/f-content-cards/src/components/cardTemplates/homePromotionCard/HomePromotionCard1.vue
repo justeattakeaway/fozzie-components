@@ -47,6 +47,10 @@ export default {
         HomePromotionCard2
     },
 
+    inject: [
+        'emitCardClick'
+    ],
+
     props: {
         card: {
             type: Object,
@@ -128,10 +132,6 @@ export default {
             }
         }
     },
-
-    inject: [
-        'emitCardClick'
-    ],
 
     methods: {
         onClickContentCard () {

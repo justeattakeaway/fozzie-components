@@ -28,7 +28,7 @@
     "yeoman-generator"
   ],
   "scripts": {
-    "lint": "vue-cli-service lint",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit --passWithNoTests",
     "ci:test:tools": "yarn test"
@@ -46,9 +46,8 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
-    "@justeat/eslint-config-fozzie": "3.4.1",
+    "@justeat/eslint-config-fozzie": "5.1.0",
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2"

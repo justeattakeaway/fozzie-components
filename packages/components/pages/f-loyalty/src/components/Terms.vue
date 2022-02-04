@@ -9,6 +9,12 @@
     </div>
 </template>
 
+<script>
+export default {
+    name: 'LoyaltyTerms'
+};
+</script>
+
 <style lang="scss" module>
 .c-loyalty-terms {
     display: flex;

@@ -152,6 +152,7 @@ export default {
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             const { data } = await checkoutApi.getCheckout(url, state, timeout);
+
             resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);
@@ -215,11 +216,13 @@ export default {
             const { data } = await checkoutApi.getAvailableFulfilment(url, timeout);
             const { issues } = data;
 
-            const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
-                || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
+            if (issues) {
+                const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
+                    || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
 
-            if (detailedIssues.length) {
-                commit(UPDATE_CHECKOUT_ERROR_MESSAGE, detailedIssues[0]);
+                if (detailedIssues.length) {
+                    commit(UPDATE_CHECKOUT_ERROR_MESSAGE, detailedIssues[0]);
+                }
             }
 
             commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
@@ -261,7 +264,6 @@ export default {
             timeout
         }) => {
             const { data } = await basketApi.getBasket(url, tenant, language, timeout);
-
             const prompts = data.BasketSummary.Prompts;
             const hasBasketChanged = prompts && (!!prompts.InvalidProducts?.length || !!prompts.OfflineProducts?.length);
 

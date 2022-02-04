@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'NoCardsErrorState',
 
@@ -38,7 +37,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 $stampCard-responsive-notMobileViewBreakpoint: '>narrowMid';
 $stampCard-iconSize: 96px;

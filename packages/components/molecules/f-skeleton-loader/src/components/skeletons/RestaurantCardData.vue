@@ -18,7 +18,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-restaurantData {
     display: flex;
     flex-direction: row;
@@ -38,5 +37,4 @@ export default {
     width: 25%;
     height: spacing(c);
 }
-
 </style>
