@@ -129,7 +129,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $font-sizes: (
     sm: (
         title: heading-s,
@@ -397,5 +396,4 @@ $mediaElement-content-margin: spacing(e);
         }
     }
 }
-
 </style>

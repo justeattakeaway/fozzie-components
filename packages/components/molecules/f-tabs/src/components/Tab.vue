@@ -30,7 +30,14 @@ const {
 } = INJECTIONS;
 
 export default {
-    name: 'Tab',
+    name: 'FTab',
+
+    inject: [
+        REGISTER,
+        SELECT,
+        TABS_COMPONENT,
+        UPDATE_TITLE
+    ],
 
     props: {
         title: {
@@ -48,13 +55,6 @@ export default {
             default: false
         }
     },
-
-    inject: [
-        REGISTER,
-        SELECT,
-        TABS_COMPONENT,
-        UPDATE_TITLE
-    ],
 
     computed: {
         isActive () {
@@ -97,7 +97,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $fade-out-transition-duration: 0.3s;
 $fade-in-transition-duration: 0.7s;
 $fade-in-transition-distance: 40px;

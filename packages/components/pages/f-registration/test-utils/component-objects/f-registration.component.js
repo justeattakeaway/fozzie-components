@@ -79,7 +79,7 @@ module.exports = class Registration extends Page {
         cookiesPolicyLink: {
             get cta () { return $(COOKIES_POLICY_LINK); }
         }
-    }
+    };
 
 
     load () {

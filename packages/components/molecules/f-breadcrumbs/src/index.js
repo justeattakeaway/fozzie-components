@@ -6,7 +6,7 @@
 
 
 // Import vue component
-import BreadCrumbs from '@/components/Breadcrumbs.vue';
+import BreadCrumbs from '@/components/BreadCrumbs.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {

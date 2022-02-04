@@ -29,7 +29,7 @@
                         <tick-icon
                             v-if="inCooldown"
                             :class="[
-                                $style['zeta'],
+                                $style.zeta,
                                 $style['c-contentCard-voucher-code-cooldown-tick']
                             ]" />
                     </transition>
@@ -53,6 +53,13 @@ export default {
         CardContainer,
         TickIcon
     },
+
+    inject: [
+        // Locale-specific copy configuration
+        'copy',
+        // Callback for emitting event when voucher code is clicked
+        'emitVoucherCodeClick'
+    ],
 
     props: {
         card: {
@@ -128,13 +135,6 @@ export default {
             return this.copyState === COPY_STATE_COOLDOWN;
         }
     },
-
-    inject: [
-        // Locale-specific copy configuration
-        'copy',
-        // Callback for emitting event when voucher code is clicked
-        'emitVoucherCodeClick'
-    ],
 
     methods: {
         /**

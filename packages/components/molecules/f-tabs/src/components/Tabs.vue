@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 import { DIRECTION, INJECTIONS } from '../constants';
 
 const {
@@ -36,20 +35,7 @@ const {
 } = INJECTIONS;
 
 export default {
-    name: 'Tabs',
-
-    props: {
-        animate: {
-            type: Boolean,
-            default: false
-        }
-    },
-
-    data: () => ({
-        direction: null,
-        activeTab: '',
-        tabs: []
-    }),
+    name: 'FTabs',
 
     provide () {
         const component = this;
@@ -86,6 +72,19 @@ export default {
             }
         };
     },
+
+    props: {
+        animate: {
+            type: Boolean,
+            default: false
+        }
+    },
+
+    data: () => ({
+        direction: null,
+        activeTab: '',
+        tabs: []
+    }),
     methods: {
 
         /**
@@ -136,7 +135,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $tabs-link-colour         : $color-content-default;
 $tabs-link-font-weight    : $font-weight-bold;
 $tabs-link-border-colour  : $color-orange-30;
@@ -186,5 +184,4 @@ $tabs-link-border-colour  : $color-orange-30;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 }
-
 </style>

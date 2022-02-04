@@ -6,13 +6,13 @@
 
 
 // Import vue component
-import Registration from '@/components/Registration.vue';
+import FRegistration from '@/components/Registration.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('Registration', Registration);
+    Vue.component('FRegistration', FRegistration);
 }
 
 // Create module definition for Vue.use()
@@ -32,4 +32,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default Registration;
+export default FRegistration;

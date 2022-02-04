@@ -16,7 +16,7 @@
 import ImageTile from '../src/components/ImageTile.vue';
 
 export default {
-    name: 'Container',
+    name: 'TestContainer',
     components: {
         ImageTile
     },

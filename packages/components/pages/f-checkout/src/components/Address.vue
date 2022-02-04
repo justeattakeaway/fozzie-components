@@ -41,6 +41,7 @@
 import CheckoutFormField from './CheckoutFormField.vue';
 
 export default {
+    name: 'CheckoutAddress',
     components: { CheckoutFormField },
 
     props: {

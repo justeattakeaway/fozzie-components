@@ -31,7 +31,6 @@ module.exports = class Checkout extends Page {
         super('page', 'checkout-component');
     }
 
-    /* eslint-disable class-methods-use-this */
     get component () { return $(CHECKOUT_COMPONENT); }
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
@@ -77,7 +76,6 @@ module.exports = class Checkout extends Page {
     get kitchenAccordionHeader () { return $(KITCHEN_ACCORDION_HEADER); }
 
     get orderAccordionHeader () { return $(ORDER_ACCORDION_HEADER); }
-    /* eslint-enable class-methods-use-this */
 
     fields = {
         firstName: {
@@ -134,7 +132,7 @@ module.exports = class Checkout extends Page {
             get input () { return $(FIELDS.addressAdministrativeArea.input); },
             get error () { return $(FIELDS.addressAdministrativeArea.error); }
         }
-    }
+    };
 
     get inputFieldValues () { return this.values || {}; }
 

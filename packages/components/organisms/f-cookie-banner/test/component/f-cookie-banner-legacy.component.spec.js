@@ -21,7 +21,7 @@ describe('Legacy - f-cookie-banner component tests', () => {
         cookieBanner.close();
 
         // Assert
-        const bannerCookie = browser.getCookies().filter(cookie => cookie.name === 'je-banner_cookie')[0];
+        const [bannerCookie] = browser.getCookies().filter(cookie => cookie.name === 'je-banner_cookie');
         expect(bannerCookie.value).toBe('130315');
         expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(false);
     });

@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v6.1.0
+------------------------------
+*February 4, 2022*
+
+### Changed
+- Updated repo to use ESLint v8
+- wdio plugin added to ESLint
+
+### Removed
+- Reliance on vue-cli for JS linting as meant we were tied to the version it supported (which is currently v6).
+
+
 v6.0.0
 ------------------------------
 *January 31, 2022*
@@ -96,7 +108,7 @@ v5.8.1
 ------------------------------
 *December 21, 2021*
 
-### Updated
+### Changed
 - Circle CI cached components to include new f-filter-pill component
 
 
@@ -104,7 +116,7 @@ v5.8.0
 ------------------------------
 *December 20, 2021*
 
-### Updated
+### Changed
 - fozzie package to the latest (v6.2.0).
 
 
@@ -206,7 +218,7 @@ v5.1.1
 ------------------------------
 *November 2, 2021*
 
-### Updated
+### Changed
 - Updated Circle CI for new location of f-template-subnav
 
 
@@ -229,7 +241,7 @@ v5.0.4
 ------------------------------
 *October 28, 2021*
 
-### Updated
+### Changed
 - Circle CI cached components to include new f-image-tile component
 
 v5.0.3
@@ -330,7 +342,7 @@ v4.5.0
 ------------------------------
 *October 8, 2021*
 
-### Updated
+### Changed
 - webdriverIO to v91.
 
 
@@ -347,7 +359,7 @@ v4.3.2
 ------------------------------
 *October 6, 2021*
 
-### Updated
+### Changed
 - Only apply `wip` label to newly opened/reopened PRs.
 
 
@@ -381,7 +393,7 @@ v4.1.0
 ------------------------------
 *October 4, 2021*
 
-### Updated
+### Changed
 - Circle CI cached components to include new f-restaurant-card component
 
 
@@ -389,7 +401,7 @@ v4.0.0
 ------------------------------
 *September 15, 2021*
 
-### Updated
+### Changed
 - fozzie version to make normalize styles optional. This will remove normalize styles from the components by default.
 - JETSansDigital font instead of JustEatBasis for the components and storybook.
 
@@ -398,7 +410,7 @@ v4.0.0-beta.0
 ------------------------------
 *August 25, 2021*
 
-### Updated
+### Changed
 - fozzie version to include new font.
 
 ### Changed
@@ -452,7 +464,7 @@ v3.52.1
 ------------------------------
 *August 11, 2021*
 
-### Updated
+### Changed
 - Various packages to latest version of `f-wdio-utils - v0.3.0`
 
 
@@ -709,7 +721,7 @@ v3.34.0
 ------------------------------
 *May 18, 2021*
 
-### Updated
+### Changed
 - fozzie to v5.0.0-beta.7 which uses new pie design tokens instead of fozzie-colour-palette vars
 
 
@@ -1207,7 +1219,7 @@ v2.16.0
 ------------------------------
 *November 17, 2020*
 
-### Updated
+### Changed
 - Splitting out `sassOptions` config to allow Eyeglass includes, so all components can use the same config.
 
 
@@ -1215,7 +1227,7 @@ v2.15.0
 ------------------------------
 *November 12, 2020*
 
-### Updated
+### Changed
 - Version of `f-utils` updated to v1.
 
 

@@ -60,7 +60,7 @@ export const VOffersComponent = (args, { argTypes }) => ({
     }),
 
     watch: {
-        offersState: function (val) {
+        offersState: function (val) { // eslint-disable-line func-names
             const displayKey = Object.keys(DISPLAY_STATE).find(key => DISPLAY_STATE[key] === val);
             this.startServer(SEEDS[displayKey]);
             this.initialiseAppboyContentCardRefresh();

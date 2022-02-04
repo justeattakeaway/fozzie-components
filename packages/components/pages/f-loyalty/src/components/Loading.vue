@@ -34,7 +34,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $loyalty-loadingCardWidthDesktop: 392px;
 $loyalty-cardWidthTablet: 344px;
 $loyalty-loadingCardHeight: 135px;

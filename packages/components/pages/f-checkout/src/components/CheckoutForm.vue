@@ -81,6 +81,31 @@ export default {
         validationMixin
     ],
 
+    /*
+    * Provide/Inject allows nested `Address` component to inherit `Checkout`
+    * validator scope, `$v`.
+    */
+    provide () {
+        const $v = {};
+
+        Object.defineProperty($v, VALIDATIONS.address, {
+            enumerable: true,
+            get: () => this.$v.address
+        });
+
+        Object.defineProperty($v, VALIDATIONS.customer, {
+            enumerable: true,
+            get: () => this.$v.customer
+        });
+
+        Object.defineProperty($v, VALIDATIONS.dineIn, {
+            enumerable: true,
+            get: () => this.$v.dineIn
+        });
+
+        return { $v };
+    },
+
     props: {
         tenant: {
             type: String,
@@ -111,31 +136,6 @@ export default {
             type: Boolean,
             required: true
         }
-    },
-
-    /*
-    * Provide/Inject allows nested `Address` component to inherit `Checkout`
-    * validator scope, `$v`.
-    */
-    provide () {
-        const $v = {};
-
-        Object.defineProperty($v, VALIDATIONS.address, {
-            enumerable: true,
-            get: () => this.$v.address
-        });
-
-        Object.defineProperty($v, VALIDATIONS.customer, {
-            enumerable: true,
-            get: () => this.$v.customer
-        });
-
-        Object.defineProperty($v, VALIDATIONS.dineIn, {
-            enumerable: true,
-            get: () => this.$v.dineIn
-        });
-
-        return { $v };
     },
 
     computed: {

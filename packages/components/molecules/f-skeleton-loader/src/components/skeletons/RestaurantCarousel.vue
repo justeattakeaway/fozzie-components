@@ -25,7 +25,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $breakpoints: (medium: 520px, large: 960px);
 
 .c-restaurantCarousel {
@@ -69,5 +68,4 @@ $breakpoints: (medium: 520px, large: 960px);
         }
     }
 }
-
 </style>

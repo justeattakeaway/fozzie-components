@@ -316,8 +316,8 @@ describe('ContentCards', () => {
 
         const arrange = async () => {
             const PromotionCard = Vue.extend({
-                template: '<div data-promotion-card="true"></div>',
-                inject: ['emitCardClick', 'emitCardView', 'emitVoucherCodeClick']
+                inject: ['emitCardClick', 'emitCardView', 'emitVoucherCodeClick'],
+                template: '<div data-promotion-card="true"></div>'
             });
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
             const cards = createMetadataCards(cardTypes);

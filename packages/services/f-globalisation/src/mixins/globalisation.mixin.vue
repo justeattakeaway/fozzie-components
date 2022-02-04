@@ -1,5 +1,6 @@
 <script>
 export default {
+    name: 'GlobalisationMixin',
     props: {
         /*
             When locale is specified, it will be set as the current locale within i18n
