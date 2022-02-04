@@ -1,6 +1,10 @@
 import { httpMethods, httpStatusCodes } from '../../helpers';
 
-function getAvailableTimes (isAsapAvailable = true, availableTimes = true, issues = false) {
+function getAvailableTimes (payload) {
+    const asapUnavailable = payload?.asapUnavailable;
+    const timesUnavailable = payload?.timesUnavailable;
+    const issues = payload?.issues;
+
     const times = [
         {
             from: '2020-01-01T01:30:00.000Z',
@@ -21,32 +25,37 @@ function getAvailableTimes (isAsapAvailable = true, availableTimes = true, issue
     ];
 
     return {
-        times: availableTimes ? times : [],
-        asapAvailable: isAsapAvailable,
+        times: timesUnavailable ? [] : times,
+        asapAvailable: !asapUnavailable,
         issues: issues ? [{ code: 'RESTAURANT_NOT_TAKING_ORDERS' }] : []
     };
 }
 
+const success = {
+    method: httpMethods.get,
+    responseStatus: httpStatusCodes.ok
+};
 
-export default {
-    'checkout-available-fulfilment': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
+export default [
+    {
+        url: '/checkout-available-fulfilment-preorder',
+        ...success,
+        payload: getAvailableTimes({ asapUnavailable: true })
+    },
+    {
+        url: '/checkout-available-fulfilment',
+        ...success,
         payload: getAvailableTimes()
     },
-    'checkout-available-fulfilment-time-unavailable': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getAvailableTimes(false, false)
+    {
+        url: '/checkout-available-fulfilment-time-unavailable',
+        ...success,
+        payload: getAvailableTimes({ asapUnavailable: true, timesUnavailable: true })
     },
-    'checkout-available-fulfilment-preorder': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getAvailableTimes(false)
-    },
-    'checkout-available-fulfilment-issues': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getAvailableTimes(true, true, true)
+
+    {
+        url: '/checkout-available-fulfilment-issues',
+        ...success,
+        payload: getAvailableTimes({ issues: true })
     }
-};
+];

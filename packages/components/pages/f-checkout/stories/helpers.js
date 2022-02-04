@@ -39,5 +39,6 @@ export const ISSUES = {
     serviceTypeUnavailable: 'SERVICE_TYPE_UNAVAILABLE',
     restaurantNotTakingOrders: 'RESTAURANT_NOT_TAKING_ORDERS',
     geoLocationRequired: 'GEOLOCATION_REQUIRED',
-    additionalItemsRequired: 'ADDITIONAL_ITEMS_REQUIRED'
+    additionalItemsRequired: 'ADDITIONAL_ITEMS_REQUIRED',
+    forbidden: 'forbidden'
 };

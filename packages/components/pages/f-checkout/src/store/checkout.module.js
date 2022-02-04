@@ -152,7 +152,7 @@ export default {
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             const { data } = await checkoutApi.getCheckout(url, state, timeout);
-
+            console.log('got', data);
             resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);

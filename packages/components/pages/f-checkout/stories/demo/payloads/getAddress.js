@@ -25,10 +25,11 @@ function getAddress () {
     };
 }
 
-export default {
-    'get-address': {
+export default [
+    {
+        url: '/get-address',
         method: httpMethods.get,
-        status: httpStatusCodes.ok,
+        responseStatus: httpStatusCodes.ok,
         payload: getAddress()
     }
-};
+];

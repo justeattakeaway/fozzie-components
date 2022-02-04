@@ -49,7 +49,11 @@ function getTime (asap, scheduledTime) {
     };
 }
 
-export default function (serviceType, tenant, isAsap, scheduledTime, notes) {
+export default function (serviceType, tenant, additionalToggles) {
+    const isAsap = additionalToggles?.isAsap;
+    const scheduledTime = additionalToggles?.scheduledTime;
+    const notes = additionalToggles?.notes;
+
     const customer = buildCustomer(tenant);
     const time = getTime(isAsap, scheduledTime);
     const noteTypes = getNoteTypes(notes);

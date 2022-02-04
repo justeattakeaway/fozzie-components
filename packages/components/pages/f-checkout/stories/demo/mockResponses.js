@@ -1,38 +1,25 @@
+import availableFulfilmentTimes from './payloads/getAvailableTimes';
+import placeOrder from './payloads/placeOrder';
+import getAddress from './payloads/getAddress';
 import getBasket from './payloads/getBasket';
 import getCheckout from './payloads/getCheckout';
-import createGuest from './payloads/createGuest.js';
-import getNotes from './payloads/getNotes.js';
-import placeOrder from './payloads/placeOrder.js';
-import updateCheckout from './payloads/updateCheckout.js';
-import availableFulfilmentTimes from './payloads/getAvailableTimes';
-import getAddress from './payloads/getAddress';
-import getGeoLocation from './payloads/getGeoLocation';
 import getCustomer from './payloads/getCustomer';
-
-function buildRequestDefinition (endpoint) {
-    const [url, value] = endpoint;
-
-    const response = {
-        url: `/${url}`,
-        method: value.method,
-        responseStatus: value.status,
-        payload: value.payload
-    };
-
-    return response;
-}
+import getGeoLocation from './payloads/getGeoLocation';
+import getNotes from './payloads/getNotes';
+import createGuest from './payloads/createGuest';
+import updateCheckout from './payloads/updateCheckout';
 
 export default function () {
-    const requests = [];
-    Object.entries(placeOrder).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(getNotes).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(createGuest).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(availableFulfilmentTimes).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(updateCheckout).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(getCheckout).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(getBasket).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(getAddress).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(getGeoLocation).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    Object.entries(getCustomer).forEach(endpoint => requests.push(buildRequestDefinition(endpoint)));
-    return requests;
+    return [
+        ...availableFulfilmentTimes,
+        ...createGuest,
+        ...getAddress,
+        ...getBasket,
+        ...getCheckout,
+        ...getCustomer,
+        ...getGeoLocation,
+        ...getNotes,
+        ...placeOrder,
+        ...updateCheckout
+    ];
 }

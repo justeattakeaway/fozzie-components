@@ -15,15 +15,20 @@ function createGuest (hasErrors) {
     };
 }
 
-export default {
-    'create-guest': {
-        method: httpMethods.post,
-        status: httpStatusCodes.ok,
+const success = {
+    method: httpMethods.post,
+    responseStatus: httpStatusCodes.ok
+};
+
+export default [
+    {
+        url: '/create-guest',
+        ...success,
         payload: createGuest()
     },
-    'create-guest-error': {
-        method: httpMethods.post,
-        status: httpStatusCodes.ok,
+    {
+        url: '/create-guest-error',
+        ...success,
         payload: createGuest(true)
     }
-};
+];

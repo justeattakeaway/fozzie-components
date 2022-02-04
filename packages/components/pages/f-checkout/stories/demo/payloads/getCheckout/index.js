@@ -9,124 +9,97 @@ import {
     NOTE_TYPES, TENANTS, DELIVERY_TIMES, httpStatusCodes, httpMethods
 } from '../../../helpers';
 
-export default {
-    'checkout-403-get-error': {
-        method: httpMethods.get,
-        status: httpStatusCodes.noResponse,
+const success = {
+    method: httpMethods.get,
+    responseStatus: httpStatusCodes.ok
+};
+
+const noResponse = {
+    method: httpMethods.get,
+    responseStatus: httpStatusCodes.noResponse
+};
+
+function buildTenantSpecificGetCheckoutRequests () {
+    const tenants = ['uk', 'au', 'nz'];
+    const tenantRequests = [];
+
+    tenants.forEach(tenant => {
+        tenantRequests.push(
+            {
+                url: `/${tenant}/checkout-collection`,
+                ...success,
+                payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS[tenant], { isAsap: true })
+            },
+            {
+                url: `/${tenant}/checkout-delivery`,
+                ...success,
+                payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS[tenant], { isAsap: true })
+            },
+            {
+                url: `/${tenant}/checkout-dinein`,
+                ...success,
+                payload: getCheckout(CHECKOUT_METHOD_DINEIN, TENANTS[tenant], { isAsap: true })
+            },
+            {
+                url: `/${tenant}/checkout-delivery-split-notes-courier`,
+                ...success,
+                payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS[tenant], { isAsap: true, scheduledTime: DELIVERY_TIMES.now, notes: NOTE_TYPES.courier })
+            },
+            {
+                url: `/${tenant}/checkout-delivery-split-notes-courier-kitchen`,
+                ...success,
+                payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS[tenant], { isAsap: true, scheduledTime: DELIVERY_TIMES.now, notes: NOTE_TYPES.split })
+            }
+        );
+    });
+
+    return tenantRequests;
+}
+
+export default [
+    {
+        url: '/checkout-403-get-error',
+        ...noResponse,
         payload: errors.forbidden
     },
-    'checkout-500-get-error': {
-        method: httpMethods.get,
-        status: httpStatusCodes.noResponse,
+    {
+        url: '/checkout-500-get-error',
+        ...noResponse,
         payload: errors.server
     },
-    'checkout-timeout-get-error': {
-        method: httpMethods.get,
-        status: httpStatusCodes.noResponse
+    {
+        url: '/checkout-timeout-get-error',
+        ...noResponse
     },
-    'checkout-collection-user-selected-asap': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.uk, true)
+    {
+        url: '/checkout-collection-user-selected-asap',
+        ...success,
+        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.uk, { isAsap: true })
     },
-    'checkout-collection-user-selected-later': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.uk, true, DELIVERY_TIMES.later)
+    {
+        url: '/checkout-collection-user-selected-later',
+        ...success,
+        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.uk, { isAsap: true, scheduledTime: DELIVERY_TIMES.later })
     },
-    'checkout-collection-user-selected-time-unavailable': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.uk, true, DELIVERY_TIMES.unavailable)
+    {
+        url: '/checkout-collection-user-selected-time-unavailable',
+        ...success,
+        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.uk, { isAsap: true, scheduledTime: DELIVERY_TIMES.unavailable })
     },
-    'checkout-delivery-user-selected-asap': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, true)
+    {
+        url: '/checkout-delivery-user-selected-asap',
+        ...success,
+        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, { isAsap: true })
     },
-    'checkout-delivery-user-selected-later': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, true, DELIVERY_TIMES.later)
+    {
+        url: '/checkout-delivery-user-selected-later',
+        ...success,
+        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, { isAsap: true, scheduledTime: DELIVERY_TIMES.later })
     },
-    'checkout-delivery-user-selected-time-unavailable': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, true, DELIVERY_TIMES.unavailable)
+    {
+        url: '/checkout-delivery-user-selected-time-unavailable',
+        ...success,
+        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, { isAsap: true, scheduledTime: DELIVERY_TIMES.unavailable })
     },
-    'uk/checkout-collection': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.uk, true)
-    },
-    'uk/checkout-delivery': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, true)
-    },
-    'uk/checkout-dinein': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DINEIN, TENANTS.uk, true)
-    },
-    'uk/checkout-delivery-split-notes-courier': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, true, DELIVERY_TIMES.now, NOTE_TYPES.courier)
-    },
-    'uk/checkout-delivery-split-notes-courier-kitchen': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.uk, true, DELIVERY_TIMES.now, NOTE_TYPES.split)
-    },
-    'au/checkout-collection': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.au, true)
-    },
-    'au/checkout-delivery': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.au, true)
-    },
-    'au/checkout-dinein': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DINEIN, TENANTS.au, true)
-    },
-    'au/checkout-delivery-split-notes-courier': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.au, true, DELIVERY_TIMES.now, NOTE_TYPES.courier)
-    },
-    'au/checkout-delivery-split-notes-courier-kitchen': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.au, true, DELIVERY_TIMES.now, NOTE_TYPES.split)
-    },
-    'nz/checkout-collection': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_COLLECTION, TENANTS.nz, true)
-    },
-    'nz/checkout-delivery': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.nz, true)
-    },
-    'nz/checkout-dinein': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DINEIN, TENANTS.nz, true)
-    },
-    'nz/checkout-delivery-split-notes-courier': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.nz, true, DELIVERY_TIMES.now, NOTE_TYPES.courier)
-    },
-    'nz/checkout-delivery-split-notes-courier-kitchen': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
-        payload: getCheckout(CHECKOUT_METHOD_DELIVERY, TENANTS.nz, true, DELIVERY_TIMES.now, NOTE_TYPES.split)
-    }
-};
+    ...buildTenantSpecificGetCheckoutRequests()
+];

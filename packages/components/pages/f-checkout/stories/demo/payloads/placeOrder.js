@@ -21,19 +21,24 @@ function placeOrder (isDuplicate = false) {
     };
 }
 
-export default {
-    'place-order': {
-        method: httpMethods.post,
-        status: httpStatusCodes.ok,
+const method = httpMethods.post;
+
+export default [
+    {
+        url: '/place-order',
+        method,
+        responseStatus: httpStatusCodes.ok,
         payload: placeOrder()
     },
-    'place-order-duplicate': {
-        method: httpMethods.post,
-        status: httpStatusCodes.badRequest,
+    {
+        url: '/place-order-duplicate',
+        method,
+        responseStatus: httpStatusCodes.badRequest,
         payload: placeOrder(true)
     },
-    'place-order-timeout': {
-        method: httpMethods.post,
-        status: httpStatusCodes.noResponse
+    {
+        url: '/place-order-timeout',
+        method,
+        responseStatus: httpStatusCodes.noResponse
     }
-};
+];

@@ -5,35 +5,26 @@ import mockedRequests from './mockResponses';
 
 const mock = new MockAdapter(axios);
 
-function setupCheckoutMethod (mockedRequest) {
-    let methodMock;
+export default function () {
+    mockedRequests().forEach(request => {
+        const methods = {
+            [httpMethods.post]: mock.onPost(request.url),
+            [httpMethods.get]: mock.onGet(request.url),
+            [httpMethods.patch]: mock.onPatch(request.url)
+        };
 
-    switch (mockedRequest.method) {
-        case httpMethods.post:
-            methodMock = mock.onPost(mockedRequest.url);
-            break;
-        case httpMethods.get:
-            methodMock = mock.onGet(mockedRequest.url);
-            break;
-        case httpMethods.patch:
-            methodMock = mock.onPatch(mockedRequest.url);
-            break;
-        default:
-            throw new Error(`Unknown HTTP method '${mockedRequest.method}'.`);
-    }
+        const methodMock = methods[request.method];
 
-    if (mockedRequest.responseStatus === httpStatusCodes.noResponse) {
-        methodMock.timeout();
-    } else {
-        methodMock.reply(mockedRequest.responseStatus, mockedRequest.payload);
-    }
-}
+        if (!methodMock) {
+            throw new Error(`Unknown HTTP method '${request.method}'.`);
+        }
 
-function setupCheckoutMethods () {
-    const requests = mockedRequests()
-    requests.forEach(request => setupCheckoutMethod(request));
+        if (request.responseStatus === httpStatusCodes.noResponse) {
+            methodMock.timeout();
+        } else {
+            methodMock.reply(request.responseStatus, request.payload);
+        }
+    });
 
     mock.onAny().passThrough();
 }
-
-export default setupCheckoutMethods;

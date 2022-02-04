@@ -21,15 +21,20 @@ function getNotesConfig (isSplitNotes = false) {
     };
 }
 
-export default {
-    'get-notes-config': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
+const success = {
+    method: httpMethods.get,
+    responseStatus: httpStatusCodes.ok
+};
+
+export default [
+    {
+        url: '/get-notes-config',
+        ...success,
         payload: getNotesConfig()
     },
-    'get-notes-config-split': {
-        method: httpMethods.get,
-        status: httpStatusCodes.ok,
+    {
+        url: '/get-notes-config-split',
+        ...success,
         payload: getNotesConfig(true)
     }
-};
+];

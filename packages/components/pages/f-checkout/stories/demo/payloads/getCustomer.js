@@ -17,11 +17,12 @@ function getCustomer () {
     };
 }
 
-export default {
-    'get-customer': {
+export default [
+    {
+        url: '/get-customer',
         method: httpMethods.get,
-        status: httpStatusCodes.ok,
+        responseStatus: httpStatusCodes.ok,
         payload: getCustomer()
     }
-};
+];
 

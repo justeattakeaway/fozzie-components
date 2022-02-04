@@ -19,11 +19,12 @@ function getGeoLocation () {
     };
 }
 
-export default {
-    'get-geo-location': {
+export default [
+    {
+        url: '/get-geo-location',
         method: httpMethods.post,
-        status: httpStatusCodes.ok,
+        responseStatus: httpStatusCodes.ok,
         payload: getGeoLocation()
     }
-};
+];
 

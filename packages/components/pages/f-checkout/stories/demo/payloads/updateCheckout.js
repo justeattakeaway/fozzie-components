@@ -1,8 +1,8 @@
 // import updateCheckout from './update-checkout.json';
 import { httpMethods, httpStatusCodes, ISSUES } from '../../helpers';
 
-const updateCheckout = (issue, isForbidden = false) => {
-    if (isForbidden) {
+const updateCheckout = error => {
+    if (error === ISSUES.forbidden) {
         return {
             faultId: 'cdc59433-391e-4299-abbb-4ab03d4e0d6c',
             traceId: '9fdec3c2-b78a-45eb-9ee4-b8ccc5e66da5',
@@ -17,48 +17,55 @@ const updateCheckout = (issue, isForbidden = false) => {
 
     return {
         isFulfillable: true,
-        issues: issue ? [{ code: issue }] : []
+        issues: error ? [{ code: error }] : []
     };
 };
 
-export default {
-    'update-checkout': {
-        method: httpMethods.patch,
-        status: httpStatusCodes.ok,
+const http = {
+    method: httpMethods.patch,
+    responseStatus: httpStatusCodes.ok
+};
+
+export default [
+    {
+        url: '/update-checkout',
+        ...http,
         payload: updateCheckout()
     },
-    'update-checkout-restaurant-not-taking-orders': {
-        method: httpMethods.patch,
-        status: httpStatusCodes.ok,
+    {
+        url: '/update-checkout-restaurant-not-taking-orders',
+        ...http,
         payload: updateCheckout(ISSUES.restaurantNotTakingOrders)
     },
-    'update-checkout-service-type-unavailable': {
-        method: httpMethods.patch,
-        status: httpStatusCodes.ok,
+    {
+        url: '/update-checkout-service-type-unavailable',
+        ...http,
         payload: updateCheckout(ISSUES.serviceTypeUnavailable)
     },
-    'update-checkout-additional-items-required': {
-        method: httpMethods.patch,
-        status: httpStatusCodes.ok,
+    {
+        url: '/update-checkout-additional-items-required',
+        ...http,
         payload: updateCheckout(ISSUES.additionalItemsRequired)
     },
-    'update-checkout-403': {
+    {
+        url: '/update-checkout-403',
         method: httpMethods.patch,
-        status: httpStatusCodes.forbidden,
-        payload: updateCheckout(false, true)
+        responseStatus: httpStatusCodes.forbidden,
+        payload: updateCheckout(ISSUES.forbidden)
     },
-    'update-checkout-time-unavailable': {
-        method: httpMethods.patch,
-        status: httpStatusCodes.ok,
+    {
+        url: '/update-checkout-time-unavailable',
+        ...http,
         payload: updateCheckout(ISSUES.timeUnavailable)
     },
-    'update-checkout-geolocation-required': {
-        method: httpMethods.patch,
-        status: httpStatusCodes.ok,
+    {
+        url: '/update-checkout-geolocation-required',
+        ...http,
         payload: updateCheckout(ISSUES.geolocationRequired)
     },
-    'update-checkout-timeout': {
+    {
+        url: '/update-checkout-timeout',
         method: httpMethods.patch,
-        status: httpStatusCodes.ok
+        responseStatus: httpStatusCodes.noResponse
     }
-};
+];
