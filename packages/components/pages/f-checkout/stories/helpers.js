@@ -16,8 +16,8 @@ export const TENANTS = {
 
 export const DELIVERY_TIMES = {
     later: 'later',
-    unavailable: 'unavailable',
-    now: 'now'
+    unavailable: 'unavailable-time',
+    asap: 'asap'
 };
 
 export const httpStatusCodes = {
@@ -32,6 +32,26 @@ export const httpMethods = {
     get: 'get',
     post: 'post',
     patch: 'patch'
+};
+
+export const getSuccess = {
+    method: httpMethods.get,
+    responseStatus: httpStatusCodes.ok
+};
+
+export const getNoResponse = {
+    method: httpMethods.get,
+    responseStatus: httpStatusCodes.ok
+};
+
+export const postSuccess = {
+    method: httpMethods.post,
+    responseStatus: httpStatusCodes.ok
+};
+
+export const patchSuccess = {
+    method: httpMethods.patch,
+    responseStatus: httpStatusCodes.ok
 };
 
 export const ISSUES = {

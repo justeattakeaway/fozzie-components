@@ -1,4 +1,4 @@
-import { httpMethods, httpStatusCodes } from '../../helpers';
+import { postSuccess } from '../../helpers';
 
 function getGeoLocation () {
     return {
@@ -22,8 +22,7 @@ function getGeoLocation () {
 export default [
     {
         url: '/get-geo-location',
-        method: httpMethods.post,
-        responseStatus: httpStatusCodes.ok,
+        ...postSuccess,
         payload: getGeoLocation()
     }
 ];

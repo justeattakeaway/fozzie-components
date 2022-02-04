@@ -9,17 +9,16 @@ import getNotes from './payloads/getNotes';
 import createGuest from './payloads/createGuest';
 import updateCheckout from './payloads/updateCheckout';
 
-export default function () {
-    return [
-        ...availableFulfilmentTimes,
-        ...createGuest,
-        ...getAddress,
-        ...getBasket,
-        ...getCheckout,
-        ...getCustomer,
-        ...getGeoLocation,
-        ...getNotes,
-        ...placeOrder,
-        ...updateCheckout
-    ];
-}
+export default [
+    ...availableFulfilmentTimes,
+    ...createGuest,
+    ...getAddress,
+    ...getBasket,
+    ...getCheckout,
+    ...getCustomer,
+    ...getGeoLocation,
+    ...getNotes,
+    ...placeOrder,
+    ...updateCheckout
+];
+

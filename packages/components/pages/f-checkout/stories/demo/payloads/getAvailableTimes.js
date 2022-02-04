@@ -1,6 +1,6 @@
-import { httpMethods, httpStatusCodes } from '../../helpers';
+import { getSuccess } from '../../helpers';
 
-function getAvailableTimes (payload) {
+export function getAvailableTimes (payload) {
     const asapUnavailable = payload?.asapUnavailable;
     const timesUnavailable = payload?.timesUnavailable;
     const issues = payload?.issues;
@@ -31,31 +31,26 @@ function getAvailableTimes (payload) {
     };
 }
 
-const success = {
-    method: httpMethods.get,
-    responseStatus: httpStatusCodes.ok
-};
-
 export default [
     {
         url: '/checkout-available-fulfilment-preorder',
-        ...success,
+        ...getSuccess,
         payload: getAvailableTimes({ asapUnavailable: true })
     },
     {
         url: '/checkout-available-fulfilment',
-        ...success,
+        ...getSuccess,
         payload: getAvailableTimes()
     },
     {
         url: '/checkout-available-fulfilment-time-unavailable',
-        ...success,
+        ...getSuccess,
         payload: getAvailableTimes({ asapUnavailable: true, timesUnavailable: true })
     },
 
     {
         url: '/checkout-available-fulfilment-issues',
-        ...success,
+        ...getSuccess,
         payload: getAvailableTimes({ issues: true })
     }
 ];

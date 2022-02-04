@@ -6,7 +6,7 @@ import mockedRequests from './mockResponses';
 const mock = new MockAdapter(axios);
 
 export default function () {
-    mockedRequests().forEach(request => {
+    mockedRequests.forEach(request => {
         const methods = {
             [httpMethods.post]: mock.onPost(request.url),
             [httpMethods.get]: mock.onGet(request.url),

@@ -1,11 +1,10 @@
 import axios from 'axios';
-import CheckoutModule from '../checkout.module'; import getCheckoutResponse from '../../../stories/demo/payloads/getCheckout';
-import getBasketResponse from '../../../stories/demo/payloads/getBasket';
-import getAvailableTimesResponse from '../../../stories/demo/payloads/getAvailableTimes';
-import customerAddressResponse from '../../../stories/demo/payloads/getAddress';
+import CheckoutModule from '../checkout.module';
+import getCheckoutResponse from '../../../stories/demo/payloads/getCheckout/getCheckout';
+import getBasketResponse from '../../../stories/demo/payloads/getBasket/getBasket';
+import { getAvailableTimes } from '../../../stories/demo/payloads/getAvailableTimes';
 import geoLocationDetailsResponse from '../../../stories/demo/payloads/getGeoLocation';
-import customerResponse from '../../../stories/demo/payloads/getCustomer';
-import getNotesResponse from '../../../stories/demo/payloads/getNotes';
+import { getNotesConfig } from '../../../stories/demo/payloads/getNotes';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';
@@ -22,8 +21,12 @@ import {
     ERROR_TYPES,
     DUPLICATE_ORDER,
     CHECKOUT_NOTE_TYPE_COURIER,
-    CHECKOUT_NOTE_TYPE_ORDER
+    CHECKOUT_NOTE_TYPE_ORDER,
+    CHECKOUT_METHOD_DELIVERY
 } from '../../constants';
+
+import addressData from '../../../stories/demo/payloads/getCheckout/addresses/uk';
+import customer from '../../../stories/demo/payloads/getCheckout/customer/uk';
 
 import {
     UPDATE_AUTH,
@@ -47,17 +50,19 @@ import {
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
 
-const customerAddresses = customerAddressResponse['get-address'].payload;
-const geoLocationDetails = geoLocationDetailsResponse['get-geo-location'].payload;
-const customer = customerResponse['get-customer'].payload;
+// const customerAddresses = customerAddressResponse['get-address'].payload;
+const geoLocationDetails = geoLocationDetailsResponse[0].payload;
+// const customer = customerResponse['get-customer'].payload;
 
-const checkoutDelivery = getCheckoutResponse['uk/checkout-delivery'].payload;
-const basketDelivery = getBasketResponse['get-basket-delivery'].payload;
-const basketInvalidProducts = getBasketResponse['get-basket-invalid-products'].payload;
-const basketOfflineProducts = getBasketResponse['get-basket-offline-products'].payload;
-const basketDeliveryAgeRestricted = getBasketResponse['get-basket-offline-age-restriction'].payload;
-const checkoutAvailableFulfilment = getAvailableTimesResponse['checkout-available-fulfilment'].payload;
-const splitNotesConfig = getNotesResponse['get-notes-config'].payload;
+const checkoutDelivery = getCheckoutResponse();
+
+const basketDelivery = getBasketResponse();
+const basketInvalidProducts = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'invalidProduct');
+const basketOfflineProducts = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'offlineProduct');
+const basketDeliveryAgeRestricted = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'ageRestriction');
+
+const checkoutAvailableFulfilment = getAvailableTimes();
+const splitNotesConfig = getNotesConfig(true);
 
 const { actions, getters, mutations } = CheckoutModule;
 
@@ -754,12 +759,15 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
-                const [expectedAddress] = customerAddresses.Addresses;
+                const customerAddresses = {
+                    Addresses: [addressData]
+                };
+
                 const expectedFormattedAddress = {
-                    line1: expectedAddress.Line1,
-                    line2: expectedAddress.Line2,
-                    locality: expectedAddress.City,
-                    postcode: expectedAddress.ZipCode
+                    line1: addressData.Line1,
+                    line2: addressData.Line2,
+                    locality: addressData.City,
+                    postcode: addressData.ZipCode
                 };
                 const addressServiceSpy = jest.spyOn(addressService, 'getClosestAddress').mockReturnValue(expectedFormattedAddress);
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));

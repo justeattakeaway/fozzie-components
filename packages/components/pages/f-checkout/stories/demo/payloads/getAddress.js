@@ -1,4 +1,4 @@
-import { httpMethods, httpStatusCodes } from '../../helpers';
+import { getSuccess } from '../../helpers';
 
 function getAddress () {
     return {
@@ -28,8 +28,7 @@ function getAddress () {
 export default [
     {
         url: '/get-address',
-        method: httpMethods.get,
-        responseStatus: httpStatusCodes.ok,
+        ...getSuccess,
         payload: getAddress()
     }
 ];

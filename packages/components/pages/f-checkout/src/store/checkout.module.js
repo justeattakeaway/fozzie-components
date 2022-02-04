@@ -152,7 +152,6 @@ export default {
          */
         getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             const { data } = await checkoutApi.getCheckout(url, state, timeout);
-            console.log('got', data);
             resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);
@@ -180,7 +179,6 @@ export default {
 
             const { data: responseData, headers } = await checkoutApi.updateCheckout(request);
             const { issues, isFulfillable } = responseData;
-
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { messageKey: DEFAULT_CHECKOUT_ISSUE, errorType: ERROR_TYPES.dialog });
 
@@ -263,6 +261,7 @@ export default {
             timeout
         }) => {
             const { data } = await basketApi.getBasket(url, tenant, language, timeout);
+
             const prompts = data.BasketSummary.Prompts;
             const hasBasketChanged = prompts && (!!prompts.InvalidProducts?.length || !!prompts.OfflineProducts?.length);
 

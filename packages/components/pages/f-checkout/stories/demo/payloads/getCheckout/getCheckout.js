@@ -49,14 +49,15 @@ function getTime (asap, scheduledTime) {
     };
 }
 
-export default function (serviceType, tenant, additionalToggles) {
-    const isAsap = additionalToggles?.isAsap;
+export default function (serviceType = CHECKOUT_METHOD_DELIVERY, tenant = 'uk', additionalToggles) {
+    const isAsap = additionalToggles?.isAsap || true;
     const scheduledTime = additionalToggles?.scheduledTime;
     const notes = additionalToggles?.notes;
 
     const customer = buildCustomer(tenant);
     const time = getTime(isAsap, scheduledTime);
     const noteTypes = getNoteTypes(notes);
+
     let location;
 
     if (serviceType === CHECKOUT_METHOD_DELIVERY) {

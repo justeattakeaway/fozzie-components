@@ -1,4 +1,4 @@
-import { httpMethods, httpStatusCodes } from '../../helpers';
+import { getSuccess } from '../../helpers';
 
 function getCustomer () {
     return {
@@ -20,8 +20,7 @@ function getCustomer () {
 export default [
     {
         url: '/get-customer',
-        method: httpMethods.get,
-        responseStatus: httpStatusCodes.ok,
+        ...getSuccess,
         payload: getCustomer()
     }
 ];

@@ -1,4 +1,4 @@
-import { httpMethods, httpStatusCodes } from '../../helpers';
+import { postSuccess } from '../../helpers';
 
 function createGuest (hasErrors) {
     return {
@@ -15,20 +15,15 @@ function createGuest (hasErrors) {
     };
 }
 
-const success = {
-    method: httpMethods.post,
-    responseStatus: httpStatusCodes.ok
-};
-
 export default [
     {
         url: '/create-guest',
-        ...success,
+        ...postSuccess,
         payload: createGuest()
     },
     {
         url: '/create-guest-error',
-        ...success,
+        ...postSuccess,
         payload: createGuest(true)
     }
 ];

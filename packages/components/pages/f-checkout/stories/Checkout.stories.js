@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
-
 import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
@@ -32,7 +31,6 @@ export default {
 };
 
 Vue.use(Vuex);
-console.log('here');
 CheckoutMock();
 
 const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';

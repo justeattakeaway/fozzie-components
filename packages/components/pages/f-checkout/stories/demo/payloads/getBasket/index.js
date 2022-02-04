@@ -1,5 +1,5 @@
 import { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN } from '../../../../src/constants';
-import { httpMethods, httpStatusCodes } from '../../../helpers';
+import { getSuccess, getNoResponse } from '../../../helpers';
 import getBasket from './getBasket';
 
 const RESTRICTIONS = {
@@ -8,45 +8,39 @@ const RESTRICTIONS = {
     offline: 'offlineProduct'
 };
 
-const success = {
-    method: httpMethods.get,
-    responseStatus: httpStatusCodes.ok
-};
+function basketRequests () {
+    const tenantRequests = [];
+
+    [CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN].forEach(method => {
+        tenantRequests.push({
+            url: `/get-basket-${method}`,
+            ...getSuccess,
+            payload: getBasket(method)
+        });
+    });
+
+    return tenantRequests;
+}
 
 export default [
-    {
-        url: '/get-basket-delivery',
-        ...success,
-        payload: getBasket(CHECKOUT_METHOD_DELIVERY)
-    },
-    {
-        url: '/get-basket-collection',
-        ...success,
-        payload: getBasket(CHECKOUT_METHOD_COLLECTION)
-    },
-    {
-        url: '/get-basket-dinein',
-        ...success,
-        payload: getBasket(CHECKOUT_METHOD_DINEIN)
-    },
+    ...basketRequests(),
     {
         url: '/get-basket-invalid-products',
-        ...success,
+        ...getSuccess,
         payload: getBasket(CHECKOUT_METHOD_DELIVERY, RESTRICTIONS.invalid)
     },
     {
         url: '/get-basket-offline-products',
-        ...success,
+        ...getSuccess,
         payload: getBasket(CHECKOUT_METHOD_DELIVERY, RESTRICTIONS.offline)
     },
     {
         url: '/get-basket-offline-age-restriction',
-        ...success,
+        ...getSuccess,
         payload: getBasket(CHECKOUT_METHOD_DELIVERY, RESTRICTIONS.age)
     },
     {
         url: '/get-basket-timeout',
-        method: httpMethods.get,
-        responseStatus: httpStatusCodes.noResponse
+        ...getNoResponse
     }
 ];

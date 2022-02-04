@@ -1,6 +1,6 @@
-import { httpMethods, httpStatusCodes } from '../../helpers';
+import { getSuccess } from '../../helpers';
 
-function getNotesConfig (isSplitNotes = false) {
+export function getNotesConfig (isSplitNotes = false) {
     return {
         customerNotes: {
             serviceTypes: {
@@ -21,20 +21,15 @@ function getNotesConfig (isSplitNotes = false) {
     };
 }
 
-const success = {
-    method: httpMethods.get,
-    responseStatus: httpStatusCodes.ok
-};
-
 export default [
     {
         url: '/get-notes-config',
-        ...success,
+        ...getSuccess,
         payload: getNotesConfig()
     },
     {
         url: '/get-notes-config-split',
-        ...success,
+        ...getSuccess,
         payload: getNotesConfig(true)
     }
 ];

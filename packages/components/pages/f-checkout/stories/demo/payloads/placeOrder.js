@@ -1,4 +1,4 @@
-import { httpMethods, httpStatusCodes } from '../../helpers';
+import { httpMethods, httpStatusCodes, postSuccess } from '../../helpers';
 
 function placeOrder (isDuplicate = false) {
     if (isDuplicate) {
@@ -26,8 +26,7 @@ const method = httpMethods.post;
 export default [
     {
         url: '/place-order',
-        method,
-        responseStatus: httpStatusCodes.ok,
+        ...postSuccess,
         payload: placeOrder()
     },
     {

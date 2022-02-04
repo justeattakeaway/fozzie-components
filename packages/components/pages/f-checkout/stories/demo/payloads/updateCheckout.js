@@ -1,5 +1,6 @@
-// import updateCheckout from './update-checkout.json';
-import { httpMethods, httpStatusCodes, ISSUES } from '../../helpers';
+import {
+    httpMethods, httpStatusCodes, ISSUES, patchSuccess
+} from '../../helpers';
 
 const updateCheckout = error => {
     if (error === ISSUES.forbidden) {
@@ -21,30 +22,25 @@ const updateCheckout = error => {
     };
 };
 
-const http = {
-    method: httpMethods.patch,
-    responseStatus: httpStatusCodes.ok
-};
-
 export default [
     {
         url: '/update-checkout',
-        ...http,
+        ...patchSuccess,
         payload: updateCheckout()
     },
     {
         url: '/update-checkout-restaurant-not-taking-orders',
-        ...http,
+        ...patchSuccess,
         payload: updateCheckout(ISSUES.restaurantNotTakingOrders)
     },
     {
         url: '/update-checkout-service-type-unavailable',
-        ...http,
+        ...patchSuccess,
         payload: updateCheckout(ISSUES.serviceTypeUnavailable)
     },
     {
         url: '/update-checkout-additional-items-required',
-        ...http,
+        ...patchSuccess,
         payload: updateCheckout(ISSUES.additionalItemsRequired)
     },
     {
@@ -55,12 +51,12 @@ export default [
     },
     {
         url: '/update-checkout-time-unavailable',
-        ...http,
+        ...patchSuccess,
         payload: updateCheckout(ISSUES.timeUnavailable)
     },
     {
         url: '/update-checkout-geolocation-required',
-        ...http,
+        ...patchSuccess,
         payload: updateCheckout(ISSUES.geolocationRequired)
     },
     {

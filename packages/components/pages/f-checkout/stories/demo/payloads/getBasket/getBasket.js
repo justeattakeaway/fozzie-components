@@ -1,3 +1,5 @@
+import { CHECKOUT_METHOD_DELIVERY } from '../../../../src/constants';
+
 const product = {
     Name: 'Alcoholic beverage',
     ProductId: '299994'
@@ -24,7 +26,7 @@ function buildPrompts (issues) {
     };
 }
 
-export default function (serviceType, issues) {
+export default function (serviceType = CHECKOUT_METHOD_DELIVERY, issues) {
     return {
         BasketId: '11111111',
         ServiceType: serviceType,
