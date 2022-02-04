@@ -8,7 +8,8 @@
                     is-bold
                     is-distinct
                     :href="$t('termsAndConditionsLinkUrl')"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {{ $t('termsAndConditionsLinkText') }}
                 </v-link>
             </template>
@@ -17,7 +18,8 @@
                     is-bold
                     is-distinct
                     :href="$t('privacyPolicyLinkUrl')"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {{ $t('privacyPolicyLinkText') }}
                 </v-link>
             </template>
@@ -26,7 +28,8 @@
                     is-bold
                     is-distinct
                     :href="$t('cookiePolicyLinkUrl')"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {{ $t('cookiePolicyLinkText') }}
                 </v-link>
             </template>
@@ -47,7 +50,6 @@ export default {
 
 
 <style lang="scss" module>
-
 .c-checkoutTermsAndConditions {
     background: $color-background-default;
     margin-top: spacing(g);

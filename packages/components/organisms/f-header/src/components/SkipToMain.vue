@@ -29,7 +29,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-skipTo {
     position: absolute;
     top: 0;

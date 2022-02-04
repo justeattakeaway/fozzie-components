@@ -9,7 +9,7 @@ let instance;
 let mock;
 let windowSpy;
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars,no-promise-executor-return
 const withDelay = (delay, response) => () => new Promise((resolve, _) => setTimeout(() => resolve(response), delay));
 
 beforeEach(() => {

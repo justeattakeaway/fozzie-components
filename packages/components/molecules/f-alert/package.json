@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "main": "dist/f-alert.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -31,7 +31,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-alert ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
@@ -53,12 +53,11 @@
   },
   "devDependencies": {
     "node-sass-magic-importer": "5.3.2",
-    "@justeat/f-button": "3.2.0",
+    "@justeat/f-button": "3.3.0",
     "@justeat/f-wdio-utils": "0.5.0",
     "@justeat/f-vue-icons": "1.13.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3"
   }

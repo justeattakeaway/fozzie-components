@@ -8,6 +8,7 @@
 
 <script>
 export default {
+    name: 'ActionButton',
     props: {
         actionType: {
             type: String,

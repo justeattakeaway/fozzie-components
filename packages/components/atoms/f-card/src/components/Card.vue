@@ -102,7 +102,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $card-bgColor                             : $color-container-default;
 $card-borderColor                         : $color-border-default;
 $card-borderRadius                        : $radius-rounded-c;

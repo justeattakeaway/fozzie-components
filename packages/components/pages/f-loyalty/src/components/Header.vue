@@ -110,7 +110,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-loyaltyHeader-container {
     width: 100%;
     max-width: #{$layout-max-width}px;

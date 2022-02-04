@@ -475,6 +475,8 @@ jobs:
           when: always
       - store_artifacts:
           path: allure-report
+      - store_artifacts:
+          path: test/results/axe-violations
       - slack_notify_fail
       - slack_notify_success
 

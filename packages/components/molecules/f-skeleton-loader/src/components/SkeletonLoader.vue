@@ -27,10 +27,8 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-skeleton-loader {
     position: relative;
     vertical-align: top;
 }
-
 </style>

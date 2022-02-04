@@ -76,7 +76,6 @@
 </template>
 
 <script>
-
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import lightFormat from 'date-fns/lightFormat';
@@ -111,6 +110,10 @@ export default {
     directives: {
         makeTextAccessible
     },
+
+    inject: [
+        'copy'
+    ],
 
     props: {
         card: {
@@ -233,10 +236,6 @@ export default {
         this.dateFnsLocale = this.getDateFnsLocale(this.copy.locale);
     },
 
-    inject: [
-        'copy'
-    ],
-
     methods: {
         /**
          * Takes the locale and lazyloads the correct date locale from the date-fns library
@@ -257,10 +256,6 @@ export default {
                     return da;
                 case 'en-AU':
                     return enAU;
-                case 'en-GB':
-                case 'en-IE':
-                default:
-                    return enGB;
                 case 'en-NZ':
                     return enNZ;
                 case 'es-ES':
@@ -269,6 +264,10 @@ export default {
                     return it;
                 case 'nb-NO':
                     return nb;
+                case 'en-GB':
+                case 'en-IE':
+                default:
+                    return enGB;
             }
         }
     }
@@ -276,7 +275,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $stampCard-subStatus-colour: #017a39; /* $color-green in PIE - not in fozzie-colour-palette yet */
 $stampCard-expiryInfo-colour: $color-content-subdued;
 

@@ -2,11 +2,11 @@ import {
     withKnobs, select, text, boolean, object
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import FormField from '../src/components/FormField.vue';
 import {
     AllergyNutIcon,
     DriverIcon
 } from '@justeat/f-vue-icons';
+import FormField from '../src/components/FormField.vue';
 import {
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES,
@@ -42,12 +42,6 @@ export const FormFieldComponent = () => ({
         isGrouped: {
             default: boolean('isGrouped', false)
         },
-        assistiveText: {
-            default: text('Assistive Text', '')
-        },
-        labelText: {
-            default: text('Label Text', 'First name')
-        },
         fieldSize: {
             default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
         },
@@ -78,12 +72,6 @@ export const FormFieldComponent = () => ({
         placeholder: {
             default: text('Placeholder', '')
         },
-        labelText: {
-            default: text('Label Text', 'Dropdown Icon - Left')
-        },
-        labelText: {
-            default: text('Label Text', 'Radio Label')
-        },
         valueRadio: {
             default: text('Value', 'radioLabel')
         },
@@ -98,12 +86,12 @@ export const FormFieldComponent = () => ({
         },
         suffix: {
             default: text('suffix', 'GBP')
-        },
+        }
     },
     parameters: {
         notes: 'some documentation here'
     },
-    template:`
+    template: `
         <div
         class="u-spacingBottom--large storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide">
             <form-field

@@ -38,7 +38,7 @@ export const CookieBannerComponent = () => ({
         :key="locale"
         :should-show-legacy-banner="shouldShowLegacyBanner"
         :should-use-grey-background="shouldUseGreyBackground"
-		:nameSuffix="nameSuffix" />`
+        :nameSuffix="nameSuffix" />`
 });
 
 CookieBannerComponent.storyName = 'f-cookie-banner';

@@ -30,6 +30,7 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import { CHECKOUT_METHOD_DINEIN, VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
+    name: 'CheckoutSelector',
     components: {
         Alert,
         FormDropdown

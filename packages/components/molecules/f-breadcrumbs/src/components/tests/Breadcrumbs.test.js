@@ -1,5 +1,5 @@
 import { shallowMount, RouterLinkStub } from '@vue/test-utils';
-import BreadCrumbs from '../Breadcrumbs.vue';
+import BreadCrumbs from '../BreadCrumbs.vue';
 
 describe('BreadCrumbs', () => {
     it('should be defined', () => {
