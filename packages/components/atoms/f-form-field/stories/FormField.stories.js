@@ -75,9 +75,6 @@ export const FormFieldComponent = () => ({
         valueRadio: {
             default: text('Value', 'radioLabel')
         },
-        assistiveText: {
-            default: text('Assistive Text', 'Change my properties via knobs')
-        },
         inputType: {
             default: select('Input Type', VALID_TEXT_INPUT_TYPES)
         },
@@ -101,10 +98,8 @@ export const FormFieldComponent = () => ({
                 :has-error="hasError"
                 :is-grouped="isGrouped"
                 input-type="checkbox"
-                :disabled="isDisabled"
-                :assistiveText="assistiveText"/>
+                :disabled="isDisabled"/>
             <form-field
-                :assistiveText="assistiveText"
                 :disabled="isDisabled"
                 :has-error="hasError"
                 :is-grouped="isGrouped"
@@ -134,8 +129,7 @@ export const FormFieldComponent = () => ({
                 :placeholder="placeholder"
                 :maxlength="200"
                 :labelDetails="labelDetails"
-                :labelDescription="labelDescription"
-                :assistiveText="assistiveText"/>
+                :labelDescription="labelDescription"/>
             <form-field
                 :locale="locale"
                 :label-text="labelText"
@@ -149,7 +143,6 @@ export const FormFieldComponent = () => ({
                 :maxlength="200"
                 :labelDetails="labelDetails"
                 :labelDescription="labelDescription"
-                :assistiveText="assistiveText"
                 :dropdown-options="dropdownOptions">
                 <template v-slot:icon-leading>
                     <AllergyNutIcon />
@@ -168,8 +161,7 @@ export const FormFieldComponent = () => ({
                 :rows="7"
                 :maxlength="200"
                 :labelDetails="labelDetails"
-                :labelDescription="labelDescription"
-                :assistiveText="assistiveText"/>
+                :labelDescription="labelDescription"/>
             <form-field
                 locale="en-GB"
                 label-text="Affixed Field"
@@ -180,7 +172,6 @@ export const FormFieldComponent = () => ({
                 :disabled="isDisabled"
                 :placeholder="placeholder"
                 :labelDetails="labelDetails"
-                :assistiveText="assistiveText"
                 :prefix="prefix"
                 :suffix="suffix"/>
             <form-field
@@ -195,8 +186,7 @@ export const FormFieldComponent = () => ({
                 :placeholder="placeholder"
                 :maxlength="200"
                 :labelDetails="labelDetails"
-                :labelDescription="labelDescription"
-                :assistiveText="assistiveText"/>
+                :labelDescription="labelDescription"/>
             <form-field
                 locale="en-GB"
                 label-text="Text input - Left Icon"
