@@ -23,27 +23,27 @@ function buildTenantSpecificGetCheckoutRequests () {
     Object.values(TENANTS).forEach(tenant => {
         tenantRequests.push(
             {
-                url: `/${tenant}/checkout-collection`,
+                url: `/checkout-collection-${tenant}`,
                 ...getSuccess,
                 payload: getCheckout(...args(tenant).collection)
             },
             {
-                url: `/${tenant}/checkout-delivery`,
+                url: `/checkout-delivery-${tenant}`,
                 ...getSuccess,
                 payload: getCheckout(...args(tenant).delivery)
             },
             {
-                url: `/${tenant}/checkout-dinein`,
+                url: `/checkout-dinein-${tenant}`,
                 ...getSuccess,
                 payload: getCheckout(...args(tenant).dinein)
             },
             {
-                url: `/${tenant}/checkout-delivery-split-notes-courier`,
+                url: `/checkout-delivery-split-notes-courier-${tenant}`,
                 ...getSuccess,
                 payload: getCheckout(...args(tenant).delivery, { notes: NOTE_TYPES.courier })
             },
             {
-                url: `/${tenant}/checkout-delivery-split-notes-courier-kitchen`,
+                url: `/checkout-delivery-split-notes-courier-kitchen-${tenant}`,
                 ...getSuccess,
                 payload: getCheckout(...args(tenant).delivery, { notes: NOTE_TYPES.split })
             }
@@ -81,17 +81,17 @@ function scheduledTimes () {
 
 export default [
     {
-        url: '/checkout-403-get-error',
+        url: '/checkout-403-error',
         ...getNoResponse,
         payload: errors.forbidden
     },
     {
-        url: '/checkout-500-get-error',
+        url: '/checkout-500-error',
         ...getNoResponse,
         payload: errors.server
     },
     {
-        url: '/checkout-timeout-get-error',
+        url: '/checkout-timeout-error',
         ...getNoResponse
     },
     ...scheduledTimes(),

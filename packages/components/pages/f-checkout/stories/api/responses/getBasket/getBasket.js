@@ -9,7 +9,6 @@ const restriction = {
     Type: 'Alcohol'
 };
 
-
 function buildPrompts (issues) {
     return {
         SpendMore: null,

@@ -23,12 +23,12 @@ export function getNotesConfig (isSplitNotes = false) {
 
 export default [
     {
-        url: '/get-notes-config',
+        url: '/get-notes-config/99999/checkout-note-types',
         ...getSuccess,
         payload: getNotesConfig()
     },
     {
-        url: '/get-notes-config-split',
+        url: '/get-notes-config-split/99999/checkout-note-types',
         ...getSuccess,
         payload: getNotesConfig(true)
     }

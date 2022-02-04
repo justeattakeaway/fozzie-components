@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { httpMethods, httpStatusCodes } from '../helpers';
-import mockedRequests from './mockResponses';
+import mockedRequests from './responses';
 
 const mock = new MockAdapter(axios);
 

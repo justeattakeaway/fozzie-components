@@ -3,24 +3,15 @@ import Vuex from 'vuex';
 import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
+
 import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation.module';
-import CheckoutMock from './demo/checkoutMock';
+import CheckoutMock from './api/checkoutMock';
 import { TENANT_MAP } from '../src/constants';
-import {
-    noteTypeOptions,
-    patchCheckoutErrorOptions,
-    restrictionOptions,
-    createGuestErrorOptions,
-    getCheckoutErrorOptions,
-    getBasketErrorOptions,
-    placeOrderErrorOptions,
-    fulfilmentTimeOptions,
-    timeUnavailable
-} from './options';
-
+import { authToken } from './helpers';
+import { propOptions, timeUnavailable } from './helpers/propOptions';
 
 export default {
     title: 'Components/Pages',
@@ -32,8 +23,6 @@ export default {
 
 Vue.use(Vuex);
 CheckoutMock();
-
-const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
 
 export const CheckoutComponent = () => ({
     components: { VueCheckout },
@@ -51,7 +40,7 @@ export const CheckoutComponent = () => ({
         },
 
         serviceType: {
-            default: select('Service Type', ['collection', 'delivery', 'dinein', 'invalid-url'], 'delivery')
+            default: select('Service Type', propOptions.serviceTypeOptions, 'delivery')
         },
 
         locale: {
@@ -62,36 +51,32 @@ export const CheckoutComponent = () => ({
             default: boolean('Is ASAP available', true)
         },
 
-        patchCheckoutError: {
-            default: select('Patch Checkout Errors', patchCheckoutErrorOptions)
-        },
-
-        getCheckoutError: {
-            default: select('Get Checkout Errors', getCheckoutErrorOptions, null)
-        },
-
-        createGuestError: {
-            default: select('Create Guest Errors', createGuestErrorOptions, null)
+        getCheckoutOptions: {
+            default: select('Get Checkout Options', propOptions.getCheckoutOptions, null)
         },
 
         getBasketError: {
-            default: select('Get Basket Errors', getBasketErrorOptions, null)
+            default: select('Get Basket Options', propOptions.getBasketOptions, null)
+        },
+
+        patchCheckoutError: {
+            default: select('Patch Checkout Errors', propOptions.patchCheckoutErrorOptions)
+        },
+
+        createGuestError: {
+            default: select('Create Guest Errors', propOptions.createGuestErrorOptions, null)
         },
 
         placeOrderError: {
-            default: select('Place Order Errors', placeOrderErrorOptions)
+            default: select('Place Order Errors', propOptions.placeOrderErrorOptions)
         },
 
-        fulfilmentTimeSelection: {
-            default: select('Fulfilment Time Options', fulfilmentTimeOptions)
-        },
-
-        restriction: {
-            default: select('Restrictions', restrictionOptions)
+        fulfilmentTimeErrors: {
+            default: select('Fulfilment Time Options', propOptions.fulfilmentTimeErrors)
         },
 
         noteType: {
-            default: select('Note types', noteTypeOptions, null)
+            default: select('Note types', propOptions.noteTypeOptions, null)
         }
     },
 
@@ -101,55 +86,36 @@ export const CheckoutComponent = () => ({
         },
 
         getCheckoutUrl () {
-            let url;
-            if (this.fulfilmentTimeSelection && this.fulfilmentTimeSelection !== 'issues') {
-                url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}`;
-            }
-
-            if (this.getCheckoutError && this.getCheckoutError !== timeUnavailable) {
-                url = `/checkout-${this.getCheckoutError}-get-error`;
+            if (this.getCheckoutOptions && this.getCheckoutOptions !== timeUnavailable) {
+                return `/checkout-${this.getCheckoutOptions}-error`;
             } else {
-                url = `/${TENANT_MAP[this.locale]}/checkout-${this.serviceType}`;
+                return `/checkout-${this.serviceType}-${TENANT_MAP[this.locale]}`;
             }
-
-            return url;
         },
 
         getBasketUrl () {
-            if (this.getBasketError) {
-                return `/get-basket-${this.getBasketError}`;
-            }
-
-            return this.restriction ? `/get-basket-delivery-${this.restriction}` : `/get-basket-${this.serviceType}`;
+            return this.getBasketError ? `/get-basket-${this.getBasketError}` : `/get-basket-${this.serviceType}`;
         },
 
         getAddressUrl () {
-            return `/${TENANT_MAP[this.locale]}/get-address.json`;
+            return `/get-address-${TENANT_MAP[this.locale]}`;
         },
 
         authToken () {
-            return this.isLoggedIn ? mockAuthToken : '';
+            return this.isLoggedIn ? authToken : '';
         },
 
         updateCheckoutUrl () {
-            if (this.patchCheckoutError) {
-                return `/update-checkout-${this.patchCheckoutError}`;
-            }
-
-            return '/update-checkout';
+            return this.patchCheckoutError ? `/update-checkout-${this.patchCheckoutError}`: '/update-checkout';
         },
 
         placeOrderUrl () {
-            return this.placeOrderError ? `/place-order-${this.placeOrderError}` : '/place-order-duplicate';
+            return this.placeOrderError ? `/place-order-${this.placeOrderError}` : '/place-order';
         },
 
         checkoutAvailableFulfilmentUrl () {
-            if (this.getCheckoutError === timeUnavailable) {
-                return '/checkout-available-fulfilment-time-unavailable';
-            }
-
-            if (this.fulfilmentTimeSelection) {
-                return `/checkout-available-fulfilment-${this.fulfilmentTimeSelection}`;
+            if (this.fulfilmentTimeErrors) {
+                return `/checkout-available-fulfilment-${this.fulfilmentTimeErrors}`;
             }
 
             return this.isAsapAvailable ? '/checkout-available-fulfilment' : '/checkout-available-fulfilment-preorder';
@@ -168,7 +134,7 @@ export const CheckoutComponent = () => ({
 
     methods: {
         otacToAuthExchanger () {
-            return mockAuthToken;
+            return authToken;
         }
     },
 

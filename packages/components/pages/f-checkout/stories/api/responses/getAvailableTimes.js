@@ -47,7 +47,6 @@ export default [
         ...getSuccess,
         payload: getAvailableTimes({ asapUnavailable: true, timesUnavailable: true })
     },
-
     {
         url: '/checkout-available-fulfilment-issues',
         ...getSuccess,

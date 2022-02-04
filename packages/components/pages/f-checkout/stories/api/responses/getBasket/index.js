@@ -35,7 +35,7 @@ export default [
         payload: getBasket(CHECKOUT_METHOD_DELIVERY, RESTRICTIONS.offline)
     },
     {
-        url: '/get-basket-offline-age-restriction',
+        url: '/get-basket-age-restriction',
         ...getSuccess,
         payload: getBasket(CHECKOUT_METHOD_DELIVERY, RESTRICTIONS.age)
     },

@@ -1,5 +1,5 @@
-import addresses from './addresses';
-import customers from './customer';
+import addresses from '../../../helpers/addresses';
+import customers from '../../../helpers/customer';
 import {
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_DINEIN,
@@ -82,7 +82,7 @@ export default function (serviceType = CHECKOUT_METHOD_DELIVERY, tenant = 'uk', 
             {
                 type: 'allergy',
                 notice: {
-                    text: 'If you have a food allergy or intolerance (or someone you\'re ordering for has), <a href=\'https://greggs.co.uk/nutrition\' data-test-id=\'allergen-url-link\' target=\'_blank\' rel=\'noopener\'>read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.'
+                    text: 'If you have a food allergy or intolerance (or someone you’re ordering for has), <a href="https://greggs.co.uk/nutrition" data-test-id="allergen-url-link" target="_blank" rel="noopener">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.'
                 }
             }
         ],
@@ -96,7 +96,7 @@ export default function (serviceType = CHECKOUT_METHOD_DELIVERY, tenant = 'uk', 
             {
                 type: 'information',
                 message: {
-                    text: 'We\'re sorry, some items in your basket are no longer available'
+                    text: 'We’re sorry, some items in your basket are no longer available'
                 }
             }
         ],

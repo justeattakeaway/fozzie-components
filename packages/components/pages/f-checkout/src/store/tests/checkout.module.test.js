@@ -1,10 +1,5 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
-import getCheckoutResponse from '../../../stories/demo/payloads/getCheckout/getCheckout';
-import getBasketResponse from '../../../stories/demo/payloads/getBasket/getBasket';
-import { getAvailableTimes } from '../../../stories/demo/payloads/getAvailableTimes';
-import geoLocationDetailsResponse from '../../../stories/demo/payloads/getGeoLocation';
-import { getNotesConfig } from '../../../stories/demo/payloads/getNotes';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';
@@ -24,10 +19,6 @@ import {
     CHECKOUT_NOTE_TYPE_ORDER,
     CHECKOUT_METHOD_DELIVERY
 } from '../../constants';
-
-import addressData from '../../../stories/demo/payloads/getCheckout/addresses/uk';
-import customer from '../../../stories/demo/payloads/getCheckout/customer/uk';
-
 import {
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
@@ -49,18 +40,19 @@ import {
     CLEAR_DOB_ERROR,
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
+import customer from '../../../stories/helpers/customer/uk';
+import getCheckoutResponse from '../../../stories/api/responses/getCheckout/getCheckout';
+import getBasketResponse from '../../../stories/api/responses/getBasket/getBasket';
+import { getAvailableTimes } from '../../../stories/api/responses/getAvailableTimes';
+import geoLocationDetailsResponse from '../../../stories/api/responses/getGeoLocation';
+import { getNotesConfig } from '../../../stories/api/responses/getNotes';
 
-// const customerAddresses = customerAddressResponse['get-address'].payload;
 const geoLocationDetails = geoLocationDetailsResponse[0].payload;
-// const customer = customerResponse['get-customer'].payload;
-
 const checkoutDelivery = getCheckoutResponse();
-
 const basketDelivery = getBasketResponse();
 const basketInvalidProducts = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'invalidProduct');
 const basketOfflineProducts = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'offlineProduct');
 const basketDeliveryAgeRestricted = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'ageRestriction');
-
 const checkoutAvailableFulfilment = getAvailableTimes();
 const splitNotesConfig = getNotesConfig(true);
 
@@ -760,14 +752,14 @@ describe('CheckoutModule', () => {
                     timeout: payload.timeout
                 };
                 const customerAddresses = {
-                    Addresses: [addressData]
+                    Addresses: [address]
                 };
 
                 const expectedFormattedAddress = {
-                    line1: addressData.Line1,
-                    line2: addressData.Line2,
-                    locality: addressData.City,
-                    postcode: addressData.ZipCode
+                    line1: address.Line1,
+                    line2: address.Line2,
+                    locality: address.City,
+                    postcode: address.ZipCode
                 };
                 const addressServiceSpy = jest.spyOn(addressService, 'getClosestAddress').mockReturnValue(expectedFormattedAddress);
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));

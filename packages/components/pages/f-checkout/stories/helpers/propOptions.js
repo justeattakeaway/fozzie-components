@@ -1,7 +1,9 @@
+import { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN } from "../../src/constants";
+
 const serverTimeout = 'Server timeout';
 const serverTimeoutIssue = 'timeout';
 const accessForbiddenErrorCode = '403';
-const timeUnavailable = 'time-unavailable';
+export const timeUnavailable = 'time-unavailable';
 
 const patchCheckoutErrorOptions = {
     None: null,
@@ -15,28 +17,27 @@ const patchCheckoutErrorOptions = {
     [serverTimeout]: serverTimeoutIssue
 };
 
-const restrictionOptions = {
-    None: null,
-    'Age restricted': 'age-restriction'
-};
-
 const createGuestErrorOptions = {
     None: null,
     'Create Guest Error': 'error'
 };
 
-const getCheckoutErrorOptions = {
+const getCheckoutOptions = {
     None: null,
-    'Access Forbidden Get Checkout Error (Response from server is an error)': accessForbiddenErrorCode,
-    'Any other Get Checkout Error (Response from server is an error)': '500',
-    'No Time Available': timeUnavailable,
+    'Error - Access Forbidden (Response from server is an error)': accessForbiddenErrorCode,
+    'Error - Any other (Response from server is an error)': '500',
+    'Error - No Time Available': timeUnavailable,
+    'Scheduled Time - Asap': 'user-selected-asap',
+    'Scheduled Time - Later': 'user-selected-later',
+    'Scheduled Time - Unavailable': timeUnavailable,
     [serverTimeout]: serverTimeoutIssue
 };
 
-const getBasketErrorOptions = {
+const getBasketOptions = {
     None: null,
-    'Basket contains invalid products': 'invalid-products',
-    'Basket contains offline products': 'offline-products'
+    'Error - Basket contains invalid products': 'invalid-products',
+    'Error - Basket contains offline products': 'offline-products',
+    'Restriction - Age restricted': 'age-restriction'
 };
 
 const placeOrderErrorOptions = {
@@ -45,11 +46,8 @@ const placeOrderErrorOptions = {
     [serverTimeout]: serverTimeoutIssue
 };
 
-const fulfilmentTimeOptions = {
+const fulfilmentTimeErrors = {
     none: null,
-    'Selected Asap Time': 'user-selected-asap',
-    'Selected Later Time': 'user-selected-later',
-    'Selected Unavailable Time': timeUnavailable,
     'Available Time Issues': 'issues'
 };
 
@@ -59,14 +57,16 @@ const noteTypeOptions = {
     'Delivery and Kitchen notes': 'get-notes-config-split'
 };
 
-export {
+const serviceTypeOptions = [CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN, 'invalid-url']
+
+export const propOptions = {
     noteTypeOptions,
     patchCheckoutErrorOptions,
-    restrictionOptions,
     createGuestErrorOptions,
-    getCheckoutErrorOptions,
-    getBasketErrorOptions,
+    getCheckoutOptions,
+    getBasketOptions,
     placeOrderErrorOptions,
-    fulfilmentTimeOptions,
+    fulfilmentTimeErrors,
+    serviceTypeOptions,
     timeUnavailable
 };
