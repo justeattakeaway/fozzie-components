@@ -2247,6 +2247,17 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-braze-adapter@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-4.0.0.tgz#343be7a2210d457868cdbb7c594270295bcf8280"
+  integrity sha512-mvaon/eXd7AnNlHI7qjUvkztltcKCOe+e+pTZineZfWnisLvCtNynoQZy8AmdHD5a9buNaGnX6vk0c9kCO6CEw==
+  dependencies:
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
+
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2327,6 +2338,14 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
 
+"@justeat/f-form-field@4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.6.0.tgz#eb70e7aebba7fb2bddb80be012e3f7b0dee069f8"
+  integrity sha512-/lj9c1W06hTHX+//qmScJZhHTkkKC2kZrQ4bWQvdF9cB1Ph07kldpDt+uUBtS5FJl/8szE9kSjplK29MtsSDjQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "2.5.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2373,13 +2392,6 @@
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-0.3.0.tgz#73475aec7110f8be32b58e2d5250f62ba92295a8"
   integrity sha512-qcImxIiXRY57/54Piu/i9zZ6k7mRsnxHHcdnuPJvGAxbWDPNJIcWgJL07tMEedLVeZ+OM3Pg9KEkC983Hrc8vg==
-
-"@justeat/f-popover@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.0.0.tgz#2f7c337a56a209aec96b009aacf4dfc646e3bdc3"
-  integrity sha512-64EtGfhMk2YFkJ8LB+Q7XhjyQp83RRMS84Xout1nkQg0E5iBzGs+7G5JLUT6fSspZOxqpsuGjwQinbcIwajj3w==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
 
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"
