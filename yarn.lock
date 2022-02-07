@@ -2479,13 +2479,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-0.3.0.tgz#73475aec7110f8be32b58e2d5250f62ba92295a8"
   integrity sha512-qcImxIiXRY57/54Piu/i9zZ6k7mRsnxHHcdnuPJvGAxbWDPNJIcWgJL07tMEedLVeZ+OM3Pg9KEkC983Hrc8vg==
 
-"@justeat/f-popover@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.0.0.tgz#2f7c337a56a209aec96b009aacf4dfc646e3bdc3"
-  integrity sha512-64EtGfhMk2YFkJ8LB+Q7XhjyQp83RRMS84Xout1nkQg0E5iBzGs+7G5JLUT6fSspZOxqpsuGjwQinbcIwajj3w==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.0.0.tgz#fa6ea41ca3ccde26d5ed65511a96f1a728a9fc88"
