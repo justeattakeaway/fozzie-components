@@ -8,7 +8,7 @@ v3.19.3
 ------------------------------
 *February 7, 2022*
 
-### Chenged
+### Changed
 - Tidy up `stories` folder.
 
 
