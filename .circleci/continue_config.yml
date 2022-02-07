@@ -504,7 +504,7 @@ workflows:
   build_and_test_packages:
     when:
     condition:
-      - equal: [ false, << pipeline.parameters.global-change >> ]
+      equal: [ false, << pipeline.parameters.global-change >> ]
     jobs:
       - install:
           context: web-core
