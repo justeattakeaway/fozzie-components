@@ -13,6 +13,7 @@ v0.17.0
 - rename `disabled` prop to `isDisabled`
 - add new color support to `IconText` component
 - simplify SCSS color theme logic in `IconText` component using a mixin
+- update storybook with the new prop changes
 
 
 v0.16.1
