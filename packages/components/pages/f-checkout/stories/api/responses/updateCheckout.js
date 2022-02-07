@@ -44,12 +44,6 @@ export default [
         payload: updateCheckout(ISSUES.additionalItemsRequired)
     },
     {
-        url: '/update-checkout-403',
-        method: httpMethods.patch,
-        responseStatus: httpStatusCodes.forbidden,
-        payload: updateCheckout(ISSUES.forbidden)
-    },
-    {
         url: '/update-checkout-time-unavailable',
         ...patchSuccess,
         payload: updateCheckout(ISSUES.timeUnavailable)
@@ -58,6 +52,12 @@ export default [
         url: '/update-checkout-geolocation-required',
         ...patchSuccess,
         payload: updateCheckout(ISSUES.geolocationRequired)
+    },
+    {
+        url: '/update-checkout-403',
+        method: httpMethods.patch,
+        responseStatus: httpStatusCodes.forbidden,
+        payload: updateCheckout(ISSUES.forbidden)
     },
     {
         url: '/update-checkout-timeout',

@@ -1,4 +1,4 @@
-const defaultId = 17731860
+const defaultId = 17731860;
 
 const defaultAddress = {
     City: 'McLeans Island',
@@ -23,11 +23,11 @@ const additionalAddress = {
 const defaultGeoLocation = {
     latitude: 27.8606,
     longitude: 152.9788
-}
+};
 
-export const nzAddresses = { Addresses: [defaultAddress, additionalAddress], DefaultAddress: defaultId }
+export const nzAddresses = { Addresses: [defaultAddress, additionalAddress], DefaultAddress: defaultId };
 
-export default {
+export const nzAddress = {
     address: {
         lines: [defaultAddress.Line1, defaultAddress.Line2, defaultAddress.Line3],
         locality: defaultAddress.City,

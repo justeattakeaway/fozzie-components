@@ -1,4 +1,4 @@
-import {Addresses} from '../../helpers/addresses/';
+import { Addresses } from '../../helpers/addresses';
 import { getSuccess, TENANTS } from '../../helpers';
 
 function getAddress (tenant) {
@@ -11,14 +11,12 @@ function buildAddresses () {
     const tenantRequests = [];
 
     Object.values(TENANTS).forEach(tenant => {
-        tenantRequests.push(
-            {
-                url: `/address-${tenant}`,
-                ...getSuccess,
-                payload: getAddress(tenant)
-            }
-        )
-    })
+        tenantRequests.push({
+            url: `/address-${tenant}`,
+            ...getSuccess,
+            payload: getAddress(tenant)
+        });
+    });
     return tenantRequests;
 }
 

@@ -27,7 +27,7 @@ export function getAvailableTimes (payload) {
     return {
         times: timesUnavailable ? [] : times,
         asapAvailable: !asapUnavailable,
-        ...(issues ? {issues: [{ code: 'RESTAURANT_NOT_TAKING_ORDERS' }]} : {})
+        ...(issues ? { issues: [{ code: 'RESTAURANT_NOT_TAKING_ORDERS' }] } : {})
     };
 }
 

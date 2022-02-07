@@ -1,4 +1,4 @@
-import addresses from '../../../helpers/addresses';
+import { Address } from '../../../helpers/addresses';
 import customers from '../../../helpers/customer';
 import {
     CHECKOUT_METHOD_DELIVERY,
@@ -13,7 +13,7 @@ function buildCustomer (tenant) {
 }
 
 function buildLocation (tenant) {
-    return addresses[tenant];
+    return Address[tenant];
 }
 
 function getNoteTypes (notes) {

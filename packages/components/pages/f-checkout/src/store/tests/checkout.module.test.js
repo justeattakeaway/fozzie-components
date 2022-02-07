@@ -16,8 +16,7 @@ import {
     ERROR_TYPES,
     DUPLICATE_ORDER,
     CHECKOUT_NOTE_TYPE_COURIER,
-    CHECKOUT_NOTE_TYPE_ORDER,
-    CHECKOUT_METHOD_DELIVERY
+    CHECKOUT_NOTE_TYPE_ORDER
 } from '../../constants';
 import {
     UPDATE_AUTH,
@@ -40,21 +39,18 @@ import {
     CLEAR_DOB_ERROR,
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
-import customer from '../../../stories/helpers/customer/uk';
-import getCheckoutResponse from '../../../stories/api/responses/getCheckout/getCheckout';
-import getBasketResponse from '../../../stories/api/responses/getBasket/getBasket';
-import { getAvailableTimes } from '../../../stories/api/responses/getAvailableTimes';
-import geoLocationDetailsResponse from '../../../stories/api/responses/getGeoLocation';
-import { getNotesConfig } from '../../../stories/api/responses/getNotes';
 
-const geoLocationDetails = geoLocationDetailsResponse[0].payload;
-const checkoutDelivery = getCheckoutResponse();
-const basketDelivery = getBasketResponse();
-const basketInvalidProducts = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'invalidProduct');
-const basketOfflineProducts = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'offlineProduct');
-const basketDeliveryAgeRestricted = getBasketResponse(CHECKOUT_METHOD_DELIVERY, 'ageRestriction');
-const checkoutAvailableFulfilment = getAvailableTimes();
-const splitNotesConfig = getNotesConfig(true);
+import customer from '../../../stories/helpers/customer/uk';
+import {
+    geoLocationDetails,
+    checkoutDelivery,
+    basketDelivery,
+    basketInvalidProducts,
+    basketOfflineProducts,
+    basketDeliveryAgeRestricted,
+    checkoutAvailableFulfilment,
+    splitNotesConfig
+} from '../../components/_tests/helpers/apiResponses';
 
 const { actions, getters, mutations } = CheckoutModule;
 

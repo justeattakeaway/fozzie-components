@@ -88,9 +88,9 @@ export const CheckoutComponent = () => ({
         getCheckoutUrl () {
             if (this.getCheckoutOptions && this.getCheckoutOptions !== timeUnavailable) {
                 return `/checkout-${this.getCheckoutOptions}-error`;
-            } else {
-                return `/checkout-${this.serviceType}-${TENANT_MAP[this.locale]}`;
             }
+
+            return `/checkout-${this.serviceType}-${TENANT_MAP[this.locale]}`;
         },
 
         getBasketUrl () {
@@ -106,7 +106,7 @@ export const CheckoutComponent = () => ({
         },
 
         updateCheckoutUrl () {
-            return this.patchCheckoutError ? `/update-checkout-${this.patchCheckoutError}`: '/update-checkout';
+            return this.patchCheckoutError ? `/update-checkout-${this.patchCheckoutError}` : '/update-checkout';
         },
 
         placeOrderUrl () {

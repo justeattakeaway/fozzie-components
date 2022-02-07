@@ -9,7 +9,7 @@ import {
     NOTE_TYPES, TENANTS, DELIVERY_TIMES, getSuccess, getNoResponse
 } from '../../../helpers';
 
-function args (tenant = TENANTS.uk) {
+function serviceType (tenant = TENANTS.uk) {
     return {
         delivery: [CHECKOUT_METHOD_DELIVERY, tenant],
         collection: [CHECKOUT_METHOD_COLLECTION, tenant],
@@ -25,27 +25,27 @@ function buildTenantSpecificGetCheckoutRequests () {
             {
                 url: `/checkout-collection-${tenant}`,
                 ...getSuccess,
-                payload: getCheckout(...args(tenant).collection)
+                payload: getCheckout(...serviceType(tenant).collection)
             },
             {
                 url: `/checkout-delivery-${tenant}`,
                 ...getSuccess,
-                payload: getCheckout(...args(tenant).delivery)
+                payload: getCheckout(...serviceType(tenant).delivery)
             },
             {
                 url: `/checkout-dinein-${tenant}`,
                 ...getSuccess,
-                payload: getCheckout(...args(tenant).dinein)
+                payload: getCheckout(...serviceType(tenant).dinein)
             },
             {
                 url: `/checkout-delivery-split-notes-courier-${tenant}`,
                 ...getSuccess,
-                payload: getCheckout(...args(tenant).delivery, { notes: NOTE_TYPES.courier })
+                payload: getCheckout(...serviceType(tenant).delivery, { notes: NOTE_TYPES.courier })
             },
             {
                 url: `/checkout-delivery-split-notes-courier-kitchen-${tenant}`,
                 ...getSuccess,
-                payload: getCheckout(...args(tenant).delivery, { notes: NOTE_TYPES.split })
+                payload: getCheckout(...serviceType(tenant).delivery, { notes: NOTE_TYPES.split })
             }
         );
     });
@@ -61,17 +61,17 @@ function scheduledTimes () {
             {
                 url: `/checkout-collection-user-selected-${time}`,
                 ...getSuccess,
-                payload: getCheckout(...args().collection, { scheduledTime: DELIVERY_TIMES.asap })
+                payload: getCheckout(...serviceType().collection, { scheduledTime: DELIVERY_TIMES.asap })
             },
             {
                 url: `/checkout-delivery-user-selected-${time}`,
                 ...getSuccess,
-                payload: getCheckout(...args().delivery, { scheduledTime: DELIVERY_TIMES.asap })
+                payload: getCheckout(...serviceType().delivery, { scheduledTime: DELIVERY_TIMES.asap })
             },
             {
                 url: `/checkout-dinein-user-selected-${time}`,
                 ...getSuccess,
-                payload: getCheckout(...args().dinein, { scheduledTime: DELIVERY_TIMES.asap })
+                payload: getCheckout(...serviceType().dinein, { scheduledTime: DELIVERY_TIMES.asap })
             }
         );
     });

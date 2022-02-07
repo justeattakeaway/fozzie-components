@@ -1,4 +1,4 @@
-import { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN } from "../../src/constants";
+import { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN } from '../../src/constants';
 
 const serverTimeout = 'Server timeout';
 const serverTimeoutIssue = 'timeout';
@@ -57,7 +57,7 @@ const noteTypeOptions = {
     'Delivery and Kitchen notes': 'get-notes-config-split'
 };
 
-const serviceTypeOptions = [CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN, 'invalid-url']
+const serviceTypeOptions = [CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_DINEIN, 'invalid-url'];
 
 export const propOptions = {
     noteTypeOptions,

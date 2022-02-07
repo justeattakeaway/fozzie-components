@@ -6,7 +6,7 @@ const defaultAddress = {
     Line1: 'Fleet Place House',
     Line2: 'Farringdon',
     Line3: null
-}
+};
 
 const additionalAddress = {
     City: 'Area 51',
@@ -16,16 +16,16 @@ const additionalAddress = {
     Line1: 'Test St 1',
     Line2: 'Test House',
     Line3: null
-}
+};
 
 const defaultGeoLocation = {
     latitude: 51.5165,
     longitude: 0.1033
-}
+};
 
-export const ukAddresses = {Addresses: [defaultAddress, additionalAddress]}
+export const ukAddresses = { Addresses: [defaultAddress, additionalAddress] };
 
-export default {
+export const ukAddress = {
     address: {
         lines: [defaultAddress.Line1, defaultAddress.Line2, defaultAddress.Line3],
         locality: defaultAddress.City,
