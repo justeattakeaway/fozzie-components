@@ -504,8 +504,8 @@ workflows:
   build_and_test_packages:
     when:
     condition:
-      not:
-        - or: # Either must be true to trigger
+      or:
+        - not: # Either must be true to trigger
           - equal: [ master, << pipeline.git.branch >> ]
           - equal: [ true, << pipeline.parameters.global-change >> ]
     jobs:
