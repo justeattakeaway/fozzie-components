@@ -12,7 +12,7 @@
         <!-- background image -->
         <restaurant-image
             :class="[$style['c-restaurantCard-img']]"
-            :img-url="imageUrl">
+            :img-url="imgUrl">
             <!-- Logo image -->
             <restaurant-logo
                 v-if="logoUrl"
@@ -296,11 +296,6 @@ export default {
         },
         hasFees () {
             return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
-        },
-        imageUrl () {
-            return this.isDisabled
-                ? null
-                : this.imgUrl;
         }
     }
 };
