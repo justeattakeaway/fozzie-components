@@ -43,9 +43,8 @@
 </template>
 
 <script>
-
 export default {
-    name: 'Breadcrumbs',
+    name: 'BreadCrumbs',
     props: {
         links: {
             type: Array,
@@ -73,7 +72,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $breadcrumbs-text-colour-noBackground: $color-content-default;
 $breadcrumbs-text-colour-hasBackground: $color-content-light;
 $breadcrumbs-background-colour: rgba($color-black, 0.6);
@@ -100,10 +98,10 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
 }
 
 .c-breadcrumbs-item {
-    padding: spacing(x0.5) spacing();
+    padding: spacing(a) spacing();
 
     @include media('<narrowMid') {
-        padding: spacing(x0.5) spacing(x2) spacing(x0.5) spacing();
+        padding: spacing(a) spacing(d) spacing(a) spacing();
     }
 }
 
@@ -166,7 +164,7 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
     }
 
     @include media('<narrowMid') {
-        margin-left: spacing(x1.5);
+        margin-left: spacing(c);
         transform: scale(0.6, 1.2) rotate(180deg);
         margin-top: 2px;
     }

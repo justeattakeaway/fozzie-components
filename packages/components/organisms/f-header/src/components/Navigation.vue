@@ -129,6 +129,7 @@
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
                         target="_blank"
+                        rel="noopener noreferrer"
                         data-test-id="delivery-enquiry-link">
                         <template #icon>
                             <moped-icon
@@ -280,6 +281,7 @@ import { countries } from '../tenants';
 import analyticsObjects from '../services/analytics/objects';
 
 export default {
+    name: 'HeaderNavigation',
     components: {
         CountrySelector,
         GiftIcon,
@@ -698,9 +700,9 @@ export default {
         position: absolute;
         top: 0;
         right: 0;
-        width: spacing(x2) + $nav-featureLinkIcon-width + spacing(x2); // includes padding on both sides
-        height: spacing(x2) + $nav-featureLinkIcon-height + spacing(x2);
-        padding: spacing(x2);
+        width: spacing(d) + $nav-featureLinkIcon-width + spacing(d); // includes padding on both sides
+        height: spacing(d) + $nav-featureLinkIcon-height + spacing(d);
+        padding: spacing(d);
     }
 }
 
@@ -820,5 +822,4 @@ export default {
         }
     }
 }
-
 </style>

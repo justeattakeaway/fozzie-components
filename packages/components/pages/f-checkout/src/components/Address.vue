@@ -41,6 +41,7 @@
 import CheckoutFormField from './CheckoutFormField.vue';
 
 export default {
+    name: 'CheckoutAddress',
     components: { CheckoutFormField },
 
     props: {
@@ -74,11 +75,11 @@ $address-weight-bold     : $font-weight-bold;
     color: $address-colour;
     @include font-size($address-fontSize);
     font-weight: $address-weight-bold;
-    margin: spacing(x2) 0 spacing();
+    margin: spacing(d) 0 spacing();
 }
 
 .c-address-group {
-    margin: spacing(x2) 0;
+    margin: spacing(d) 0;
     padding: 0;
     border: none;
     @include font-size($address-fontSize);

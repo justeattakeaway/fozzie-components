@@ -1,18 +1,19 @@
 <template>
     <div v-if="notesConfiguration.isSplitNotesEnabled">
         <accordion
-            :id="noteTypeCourierOrOrder"
-            :title="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.title`)">
-            <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.text`) }}</span>
+            v-if="courierNoteAccepted"
+            id="courier"
+            :title="$t(`userNote.courier.${serviceType}.title`)">
+            <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.courier.${serviceType}.text`) }}</span>
             <form-field
-                :placeholder="$t(`userNote.${noteTypeCourierOrOrder}.${serviceType}.placeholder`)"
+                :placeholder="$t(`userNote.courier.${serviceType}.placeholder`)"
                 :value="noteValue"
                 v-bind="inputStyles"
-                :name="`${noteTypeCourierOrOrder}-note`"
-                @input="updateUserNotes({ note: $event, type: noteTypeCourierOrOrder })" />
+                name="courier-note"
+                @input="updateUserNotes({ note: $event, type: 'courier' })" />
         </accordion>
         <accordion
-            v-if="shouldShowKitchenNotes"
+            v-if="kitchenNoteAccepted"
             id="kitchen"
             :title="$t(`userNote.kitchen.${serviceType}.title`)">
             <span :class="$style['c-checkout-accordion-help']">{{ $t(`userNote.kitchen.${serviceType}.text`) }}</span>
@@ -26,11 +27,11 @@
     </div>
     <form-field
         v-else
-        :label-text="$t(`userNote.order.delivery.title`)"
+        :label-text="$t(`userNote.order.${serviceType}.title`)"
         :placeholder="$t(`userNote.order.${serviceType}.placeholder`)"
         :value="noteValue"
         v-bind="inputStyles"
-        :name="'order-note'"
+        name="order-note"
         :label-description="$t(`userNote.order.${serviceType}.text`)"
         @input="updateUserNotes({ note: $event, type: 'order' })" />
 </template>
@@ -47,6 +48,7 @@ import {
 import loggerMixin from '../mixins/logger.mixin';
 
 export default {
+    name: 'CheckoutNotes',
     components: {
         Accordion,
         FormField
@@ -78,7 +80,8 @@ export default {
             'kitchenNoteValue',
             'noteTypeCourierOrOrder',
             'noteValue',
-            'shouldShowKitchenNotes'
+            'kitchenNoteAccepted',
+            'courierNoteAccepted'
         ])
     },
 

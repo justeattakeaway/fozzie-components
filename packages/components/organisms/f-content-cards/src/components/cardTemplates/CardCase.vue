@@ -17,6 +17,11 @@
 export default {
     name: 'CardCase',
 
+    inject: [
+        'emitCardView',
+        'emitCardClick'
+    ],
+
     props: {
         card: {
             type: Object,
@@ -29,11 +34,6 @@ export default {
             return this.card.target || {};
         }
     },
-
-    inject: [
-        'emitCardView',
-        'emitCardClick'
-    ],
 
     mounted () {
         this.onViewContentCard();

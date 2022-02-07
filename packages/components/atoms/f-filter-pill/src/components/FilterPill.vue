@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'FilterPill',
     components: {},
@@ -17,7 +16,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-filterPill {
     display: flex;
     justify-content: center;
@@ -28,5 +26,4 @@ export default {
     font-family: $font-family-base;
     @include font-size(heading-m);
 }
-
 </style>

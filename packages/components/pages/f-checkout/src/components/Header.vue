@@ -71,6 +71,7 @@ import { VUEX_CHECKOUT_MODULE } from '../constants';
 import loggerMixin from '../mixins/logger.mixin';
 
 export default {
+    name: 'CheckoutHeader',
     components: {
         FButton
     },
@@ -120,16 +121,16 @@ export default {
 
 .c-checkoutHeader-guestTitle {
     margin-top: 0;
-    margin-bottom: spacing(x0.5);
+    margin-bottom: spacing(a);
     @include font-size('heading-s');
 }
 
 .c-checkoutHeader-loginButton {
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
 }
 
 .c-checkoutHeader-confirmation {
-    margin-top: spacing(x0.5);
+    margin-top: spacing(a);
     margin-bottom: 0;
     @include font-size('body-s');
     color: $color-content-subdued;
@@ -137,8 +138,8 @@ export default {
 
 .c-checkoutHeader-option {
     display: block;
-    margin-top: spacing(x2);
-    margin-bottom: spacing(x2);
+    margin-top: spacing(d);
+    margin-bottom: spacing(d);
     text-transform: uppercase;
     font-weight: 300;
     overflow: hidden;

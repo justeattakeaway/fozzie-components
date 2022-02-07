@@ -5,7 +5,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (to be added to next release)
 ------------------------------
-*November 3, 2021*
+*February 4, 2022*
+
+### Changed
+- Upgraded to ESLint v8
+
+
+v3.3.0
+------------------------------
+*January 28, 2022*
+
+### Changed
+- `spacing` references to new mapping from fozzie e.g spacing(x2) > spacing(d).
 
 ### Added
 - Component, visual and accessibility tests for icon-buttons

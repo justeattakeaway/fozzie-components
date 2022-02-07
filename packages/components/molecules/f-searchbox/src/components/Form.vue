@@ -79,6 +79,7 @@ import {
 } from '../event-types';
 
 export default {
+    name: 'SearchForm',
     components: {
         ErrorMessage,
         FormSearchField,

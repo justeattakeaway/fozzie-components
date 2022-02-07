@@ -21,6 +21,7 @@
 import CheckoutFormField from './CheckoutFormField.vue';
 
 export default {
+    name: 'GuestCheckout',
     components: { CheckoutFormField },
 
     data () {
@@ -33,6 +34,6 @@ export default {
 
 <style lang="scss" module>
 .c-guest {
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 }
 </style>

@@ -113,12 +113,11 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $promotionsItems-borderRadius                        : $radius-rounded-c;
 
 .c-promotionsShowcase {
     background-color: $color-support-brand-02;
-    padding: spacing(x2);
+    padding: spacing(d);
 }
 
 .c-promotionsShowcase-inner {
@@ -141,7 +140,7 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
 .c-promotionsShowcase-item {
     display: flex;
     flex-direction: row;
-    padding: spacing(x2);
+    padding: spacing(d);
     text-decoration: none;
 
     // Override button styles
@@ -165,7 +164,7 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
 
 .c-promotionsShowcase-itemElement {
     & + & {
-        margin-left: spacing(x2);
+        margin-left: spacing(d);
     }
 }
 
@@ -176,7 +175,7 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     margin-top: spacing();
 
     &:nth-of-type(1) {
-        margin-top: spacing(x0.5);
+        margin-top: spacing(a);
     }
 }
 
@@ -213,5 +212,4 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     top: 0;
     overflow: visible !important;
 }
-
 </style>

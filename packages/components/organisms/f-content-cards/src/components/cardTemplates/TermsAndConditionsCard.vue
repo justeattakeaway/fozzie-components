@@ -26,6 +26,11 @@
 
 <script>
 export default {
+
+    inject: [
+        // Locale-specific copy configuration
+        'copy'
+    ],
     props: {
         card: {
             type: Object,
@@ -63,11 +68,6 @@ export default {
         }
     },
 
-    inject: [
-        // Locale-specific copy configuration
-        'copy'
-    ],
-
     methods: {
         /**
          * Returns an ID based on the given suffix if non-empty test ID supplied as prop
@@ -85,7 +85,7 @@ export default {
 <style lang="scss" module>
   .c-contentCards-tnc-card-shell {
     background-color: $color-container-default;
-    padding: spacing(x3);
+    padding: spacing(e);
     text-align: center;
   }
 
@@ -101,7 +101,7 @@ export default {
   .c-contentCards-tnc-card-secondaryHeader {
     @include font-size(body-s);
     color: $color-content-subdued;
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
 
     @include media('>=narrow') {
       @include font-size(heading-s);

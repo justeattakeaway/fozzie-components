@@ -1,5 +1,5 @@
 import {
-    withKnobs, text, select, boolean
+    withKnobs, text, select
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';

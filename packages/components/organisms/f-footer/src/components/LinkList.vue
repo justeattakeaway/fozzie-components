@@ -17,6 +17,7 @@
                     $style['c-footer-heading--button']
                 ]"
                 data-test-id="linkList-header-button"
+                type="button"
                 @click="onPanelClick">
                 {{ linkList.title }}
                 <chevron-icon
@@ -42,7 +43,7 @@
             data-test-id="footer-link-list">
             <li
                 v-for="(link, i) in linkList.links"
-                :key="i + '_Link'">
+                :key="`${i}_Link`">
                 <a
                     :href="link.url"
                     :rel="link.rel"
@@ -171,7 +172,7 @@ export default {
     color: $footer-textColor;
     @include font-size(body-s);
     display: inline-block;
-    padding: spacing() spacing(x2);
+    padding: spacing() spacing(d);
     text-decoration: none;
     width: 100%;
 

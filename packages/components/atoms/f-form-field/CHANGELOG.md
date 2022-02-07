@@ -3,6 +3,31 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.7.1
+------------------------------
+*February 7, 2022*
+
+### Added
+- `FormField.stories.js` with all variants of f-form-field on a single storybook page.
+- `f-form-field--visual.component.js` and visual tests.
+
+
+v4.7.0
+------------------------------
+*February 2, 2022*
+
+### Added
+- `postcss-assets` plugin to enable inline assets injection for css background images.
+
+
+v4.6.0
+------------------------------
+*January 28, 2022*
+
+### Changed
+- `spacing` references to new mapping from fozzie e.g spacing(x2) > spacing(d).
+
+
 v4.5.1
 ------------------------------
 *January 6, 2022*

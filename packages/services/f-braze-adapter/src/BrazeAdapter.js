@@ -18,7 +18,8 @@ export default class BrazeAdapter {
         interceptInAppMessageClickEvents,
         customFilters,
         logger,
-        tags = 'global'
+        tags = 'global',
+        currentLocation
     }) {
         // create a key to identify the section from which the logs reference for later lookup if needed if no tags
         // apply global keyword
@@ -33,7 +34,8 @@ export default class BrazeAdapter {
             customFilters,
             logger,
             userId,
-            tags
+            tags,
+            currentLocation
         };
 
         this._consumerRegistry = GetConsumerRegistry({

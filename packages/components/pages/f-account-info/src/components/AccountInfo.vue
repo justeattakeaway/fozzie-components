@@ -5,7 +5,7 @@
             :card-heading="$t('accountDetails')"
             data-test-id="account-info"
             has-inner-spacing-large
-            :card-size-custom="'medium'"
+            card-size-custom="medium"
             has-outline>
             <h2
                 class="u-spacingBottom--large">
@@ -202,7 +202,7 @@
             :card-heading="$t('errorMessages.errorHeading')"
             :card-description="$t(error.messageKey)"
             has-inner-spacing-large
-            :card-size-custom="'medium'"
+            card-size-custom="medium"
             has-outline
             :class="[$style['c-accountInfo-errorCard']]">
             <template #icon>
@@ -405,11 +405,11 @@ export default {
 
 <style lang="scss" module>
 .c-accountInfo-submitButton {
-    margin-top: spacing(x4);
+    margin-top: spacing(f);
 }
 
 .c-accountInfo-changePasswordButton {
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
 }
 
 .c-accountInfo-errorCard {

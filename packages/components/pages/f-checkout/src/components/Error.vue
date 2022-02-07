@@ -3,7 +3,7 @@
         data-test-id="checkout-error-page-component"
         :class="$style['c-checkout-error']"
         :card-heading="$t(`errorMessages.${messageKey}.heading`)"
-        :card-description=" $t(`errorMessages.${messageKey}.description`, { serviceType: serviceType })"
+        :card-description=" $t(`errorMessages.${messageKey}.description`, { serviceType })"
         :primary-button="primaryButton"
         @primary-button-click="redirectFromErrorPage">
         <template
@@ -26,6 +26,7 @@ import {
 import loggerMixin from '../mixins/logger.mixin';
 
 export default {
+    name: 'CheckoutError',
     components: {
         Card,
         BagSadBgIcon
@@ -88,8 +89,8 @@ export default {
 .c-checkout-error {
     @include media('<=narrow') {
         border: none;
-        padding-top: spacing(x2);
-        padding-bottom: spacing(x2);
+        padding-top: spacing(d);
+        padding-bottom: spacing(d);
     }
 }
 </style>

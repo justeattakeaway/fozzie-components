@@ -1,7 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class FormField extends Page {
-    constructor() {
+    constructor () {
         super('atom-folder', 'f-form-field--text-input-default-component');
     }
 

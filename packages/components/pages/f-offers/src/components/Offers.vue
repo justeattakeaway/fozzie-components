@@ -98,7 +98,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-offers {
     display: flex;
     flex-direction: column;
@@ -123,5 +122,4 @@ export default {
         padding: #{$layout-margin--narrow}px;
     }
 }
-
 </style>

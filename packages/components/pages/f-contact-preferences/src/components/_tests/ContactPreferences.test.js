@@ -140,7 +140,7 @@ describe('ContactPreferences Component', () => {
             wrapper = await mountContactPreferences({ actions: errorActions });
 
             // Assert
-            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+            expect(wrapper.vm.shouldShowLoadErrorCard).toEqual(true);
         });
 
         it('should not show the error card if no errors', async () => {
@@ -155,7 +155,7 @@ describe('ContactPreferences Component', () => {
         it('should show the error card if shouldShowErrorPage is true', async () => {
             // Arrange & Act
             wrapper = await mountContactPreferences();
-            await wrapper.setData({ shouldShowErrorPage: true });
+            await wrapper.setData({ shouldShowLoadErrorCard: true });
             const element = wrapper.find('[data-test-id="contact-preferences-error-card"]');
 
             // Assert
@@ -312,6 +312,19 @@ describe('ContactPreferences Component', () => {
             );
         });
 
+        it('should set shouldShowSaveSuccessAlert flag to true and show the success alert if successful save', async () => {
+            // Arrange
+            wrapper = await mountContactPreferences();
+            await wrapper.setData({ isFormDirty: true });
+
+            // Act
+            await wrapper.vm.onFormSubmit();
+
+            // Assert
+            expect(wrapper.vm.shouldShowSaveErrorAlert).toEqual(false);
+            expect(wrapper.vm.shouldShowSuccessfulAlert).toEqual(true);
+        });
+
         it('should not call the save action if no changes', async () => {
             // Arrange
             wrapper = await mountContactPreferences();
@@ -324,7 +337,7 @@ describe('ContactPreferences Component', () => {
             expect(storeActions.savePreferences).not.toHaveBeenCalled();
         });
 
-        it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+        it('should set shouldShowSaveErrorAlert flag to true and show the error alert if save fails', async () => {
             // Arrange
             const errorActions = {
                 loadPreferences: jest.fn(),
@@ -339,7 +352,8 @@ describe('ContactPreferences Component', () => {
             await wrapper.vm.onFormSubmit();
 
             // Assert
-            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+            expect(wrapper.vm.shouldShowSaveErrorAlert).toEqual(true);
+            expect(wrapper.vm.shouldShowSuccessfulAlert).toEqual(false);
         });
 
         it('should log an error message if saving preferences throws an error', async () => {

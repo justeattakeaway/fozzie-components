@@ -3,13 +3,80 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.19.2
+------------------------------
+*February 4, 2022*
+
+### Fixed
+- Handle Available fulfilment times responses without issues
+- 
+### Changed
+- Upgraded to ESLint v8
+
+
+v3.19.1
+------------------------------
+*February 3, 2022*
+
+### Changed
+- Use string instead of empty variable courier
+
+
+v3.19.0
+------------------------------
+*February 3, 2022*
+
+### Changed
+- Handle `getAvailableFulfilmentTimes` issues
+
+
+v3.18.1
+------------------------------
+*February 2, 2022*
+
+### Changed
+- Use old notes field for order notes
+
+
+v3.18.0
+------------------------------
+*February 2, 2022*
+### Changed
+- Address service to handle AU/NZ addresses.
+
+
+v3.17.0
+------------------------------
+*February 2, 2022*
+
+### Changed
+- Remove notes which aren't active from split notes calls.
+
+
+v3.16.0
+------------------------------
+*February 1, 2022*
+
+### Updated
+- `component`, `visual` and `a11y` tests with functions from `f-wdio-utils`
+
+
+v3.15.4
+------------------------------
+*January 27, 2022*
+
+### Changed
+- Bump `f-alert` version.
+
+
 v3.15.3
 ------------------------------
 *January 21, 2022*
 
 ### Changed
 - Passed tenant to `getCustomer` call
-  
+
 
 v3.15.2
 ------------------------------
@@ -40,7 +107,7 @@ v3.14.0
 
 ### Fixed
 - Logic for closest postcode
-  
+
 
 v3.13.3
 ------------------------------
@@ -1468,7 +1535,7 @@ v0.78.0
 - The whole handling of exceptions and errors.
 - Several functions and tests.
 
-### Removed
+### Removed
 - Redundant and unnecessary functions.
 
 

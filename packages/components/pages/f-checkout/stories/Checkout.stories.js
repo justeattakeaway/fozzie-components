@@ -115,7 +115,8 @@ const fulfilmentTimeOptions = {
     none: null,
     'Selected Asap Time': 'user-selected-asap',
     'Selected Later Time': 'user-selected-later',
-    'Selected Unavailable Time': 'user-selected-unavailable-time'
+    'Selected Unavailable Time': 'user-selected-unavailable-time',
+    'Available Time Issues': 'issues'
 };
 
 const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
@@ -124,7 +125,6 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            getAddressUrl: mockedRequests.getAddress.url,
             loginUrl: '/login',
             paymentPageUrlPrefix,
             getGeoLocationUrl: mockedRequests.getGeoLocation.url,
@@ -188,7 +188,7 @@ export const CheckoutComponent = () => ({
 
         getCheckoutUrl () {
             let url;
-            if (this.fulfilmentTimeSelection) {
+            if (this.fulfilmentTimeSelection && this.fulfilmentTimeSelection !== 'issues') {
                 url = `/checkout-${this.serviceType}-${this.fulfilmentTimeSelection}.json`;
             }
 
@@ -215,6 +215,10 @@ export const CheckoutComponent = () => ({
             return this.restriction ? `/get-basket-delivery-${this.restriction}.json` : `/get-basket-${this.serviceType}.json`;
         },
 
+        getAddressUrl () {
+            return `/${TENANT_MAP[this.locale]}/get-address.json`;
+        },
+
         authToken () {
             return this.isLoggedIn ? mockAuthToken : '';
         },
@@ -235,7 +239,12 @@ export const CheckoutComponent = () => ({
             if (this.getCheckoutError === noTimeAvailable) {
                 return mockedRequests.checkoutAvailableFulfilmentNoTimeAvailable.url;
             }
-            return this.isAsapAvailable ? mockedRequests.checkoutAvailableFulfilment.url : mockedRequests.checkoutAvailableFulfilmentPreorder.url;
+
+            if (this.fulfilmentTimeSelection) {
+                return `/checkout-available-fulfilment-${this.fulfilmentTimeSelection}.json`;
+            }
+
+            return this.isAsapAvailable ? '/checkout-available-fulfilment.json' : '/checkout-available-fulfilment-preorder.json';
         },
 
         getNoteConfigUrl () {

@@ -33,7 +33,7 @@
                     v-for="(country) in countries"
                     :key="country.key"
                     :class="$style['c-countrySelector-country']"
-                    :data-test-id="['countrySelector-countryList-' + country.dataTestKey]">
+                    :data-test-id="[`countrySelector-countryList-${country.dataTestKey}`]">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
@@ -116,7 +116,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 
 .c-countrySelector {
     @include media('>mid') {
-        padding: spacing(x3) 0;
+        padding: spacing(e) 0;
     }
 }
 
@@ -125,8 +125,8 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     align-items: center;
 
     @include media('>mid') {
-        padding-bottom: spacing(x2);
-        padding-left: spacing(x2);
+        padding-bottom: spacing(d);
+        padding-left: spacing(d);
     }
 
     h3 {
@@ -142,7 +142,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     }
 
     .c-countrySelector-header-button {
-        margin: spacing(x2);
+        margin: spacing(d);
         @include media('>mid') {
             display: none;
         }
@@ -168,8 +168,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     text-decoration: none;
     color: $countrySelector-text-color;
     @include font-size(body-l);
-    padding: spacing(x1.5) spacing(x3);
+    padding: spacing(c) spacing(e);
     width: 100%;
 }
-
 </style>

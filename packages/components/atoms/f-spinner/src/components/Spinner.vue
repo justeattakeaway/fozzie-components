@@ -14,8 +14,8 @@
 </template>
 
 <script>
-
 export default {
+    name: 'LoadingSpinner',
     data () {
         return {
             shouldShowSpinner: true

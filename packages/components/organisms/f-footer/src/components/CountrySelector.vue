@@ -24,7 +24,7 @@
                         $style['c-countrySelector-flag--current']
                     ]" />
                 <span
-                    :data-test-id="['countrySelector-current-country-' + currentCountryKey]">
+                    :data-test-id="[`countrySelector-current-country-${currentCountryKey}`]">
                     {{ currentCountryName }}
                 </span>
 
@@ -39,7 +39,7 @@
                 <cross-icon
                     v-show="showCountryList"
                     :class="[
-                        $style['c-icon--cross'],,
+                        $style['c-icon--cross'],
                         $style['c-countrySelector-cross']
                     ]" />
             </button>
@@ -52,8 +52,8 @@
                 role="region">
                 <li
                     v-for="(country, i) in countries"
-                    :key="i + '_Country'"
-                    :data-test-id="['countrySelector-country-' + country.dataTestKey]">
+                    :key="`${i}_Country`"
+                    :data-test-id="[`countrySelector-country-${country.dataTestKey}`]">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
@@ -147,7 +147,7 @@ $countrySelector-btn-font-size: 'body-s';
 }
 .c-countrySelector-link {
     display: flex;
-    padding: spacing() spacing(x2);
+    padding: spacing() spacing(d);
     text-decoration: none;
     color: $color-content-interactive-tertiary;
 
@@ -199,7 +199,7 @@ $countrySelector-btn-font-size: 'body-s';
     cursor: pointer;
     display: flex;
     @include font-size($countrySelector-btn-font-size);
-    padding: spacing(x2);
+    padding: spacing(d);
     width: 100%;
 }
 
@@ -211,7 +211,7 @@ $countrySelector-btn-font-size: 'body-s';
     padding: 0;
     margin-top: 0;
     margin-left: 0;
-    margin-bottom: spacing(x6) + 1;
+    margin-bottom: spacing(h) + 1;
     background-color: $footer-bgLight;
     box-shadow: 0 2px 28px rgba($color-grey, 0.08);
     list-style: none;

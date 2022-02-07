@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-image-tile",
   "description": "Fozzie Image Tile - An interactive tile component containing an image, text and link.",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "main": "dist/f-image-tile.umd.min.js",
   "files": [
     "dist",
@@ -31,7 +31,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-image-tile ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
@@ -55,7 +55,6 @@
     "node-sass-magic-importer": "5.3.2",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3"
   }

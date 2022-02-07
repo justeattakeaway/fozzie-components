@@ -9,11 +9,12 @@ let checkoutInfo;
 
 describe('Accessibility tests', () => {
     it('a11y - should test f-checkout component (delivery) WCAG compliance', () => {
-        // Act
+        // Arrange
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', true);
 
+        // Act
         checkout.load();
         const axeResults = getAccessibilityTestResults('f-checkout-delivery');
 
@@ -22,11 +23,12 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-checkout component (collection) WCAG compliance', () => {
-        // Act
+        // Arrange
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true);
 
+        // Act
         checkout.load();
         const axeResults = getAccessibilityTestResults('f-checkout-collection');
 
@@ -35,11 +37,12 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-checkout component (guest) WCAG compliance', () => {
-        // Act
+        // Arrange
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', false);
 
+        // Act
         checkout.load();
         const axeResults = getAccessibilityTestResults('f-checkout-guest');
 
@@ -48,11 +51,12 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-checkout component (error) WCAG compliance', () => {
-        // Act
+        // Arrange
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'Invalid URL')
             .withQuery('&knob-Is User Logged In', false);
 
+        // Act
         checkout.loadError();
         const axeResults = getAccessibilityTestResults('f-checkout-error-page');
 
@@ -116,7 +120,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -127,16 +131,18 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
-        checkout.load();
-
-        // Act
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111'
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+
+        checkout.inputFieldValues = customerInfo;
+
+        // Act
+        checkout.load();
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -151,7 +157,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -162,19 +168,21 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
-        checkout.load();
-
-        // Act
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111',
-            line1: '1 Bristol Road',
-            locality: 'Bristol',
-            postcode: 'BS1 1AA'
+            addressLine1: '1 Bristol Road',
+            addressLocality: 'Bristol',
+            addressPostcode: 'BS1 1AA'
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+
+        checkout.inputFieldValues = customerInfo;
+
+        // Act
+        checkout.load();
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -189,7 +197,7 @@ describe('Accessibility tests', () => {
         ['additional-items-required'],
         ['time-unavailable']
     ])
-    .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', (patchError) => {
+    .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', patchError => {
         // Arrange
         checkout = new Checkout();
         checkoutInfo = {
@@ -200,9 +208,6 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Patch Checkout Errors', patchError);
 
-        checkout.load();
-
-        // Act
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -210,7 +215,12 @@ describe('Accessibility tests', () => {
             mobileNumber: '+447111111111',
             tableIdentifier: '1'
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+
+        checkout.inputFieldValues = customerInfo;
+
+        // Act
+        checkout.load();
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -231,16 +241,18 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        checkout.load();
-
-        // Act
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111'
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+
+        checkout.inputFieldValues = customerInfo;
+
+        // Act
+        checkout.load();
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -261,19 +273,21 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        checkout.load();
-
-        // Act
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
             emailAddress: 'jerry.jazzman@ronniescotts.co.uk',
             mobileNumber: '+447111111111',
-            line1: '1 Bristol Road',
-            locality: 'Bristol',
-            postcode: 'BS1 1AA'
+            addressLine1: '1 Bristol Road',
+            addressLocality: 'Bristol',
+            addressPostcode: 'BS1 1AA'
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+
+        checkout.inputFieldValues = customerInfo;
+
+        // Act
+        checkout.load();
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -294,9 +308,6 @@ describe('Accessibility tests', () => {
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Place Order Errors', 'duplicate');
 
-        checkout.load();
-
-        // Act
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -304,7 +315,12 @@ describe('Accessibility tests', () => {
             mobileNumber: '+447111111111',
             tableIdentifier: '1'
         };
-        checkout.populateCheckoutForm(checkoutInfo, customerInfo);
+
+        checkout.inputFieldValues = customerInfo;
+
+        // Act
+        checkout.load();
+        checkout.setFieldValues();
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];

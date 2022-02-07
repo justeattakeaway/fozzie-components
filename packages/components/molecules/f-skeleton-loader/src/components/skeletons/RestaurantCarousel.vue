@@ -25,13 +25,12 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $breakpoints: (medium: 520px, large: 960px);
 
 .c-restaurantCarousel {
     margin: auto;
     padding-top: spacing();
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 }
 
 .c-restaurantCarousel-heading {
@@ -40,7 +39,7 @@ $breakpoints: (medium: 520px, large: 960px);
 }
 
 .c-restaurantCarousel-desc {
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
     max-width: 425px;
 }
 
@@ -58,7 +57,7 @@ $breakpoints: (medium: 520px, large: 960px);
         display: block;
     }
     @include media('>medium') {
-        margin: 0 spacing(x2) 0 0;
+        margin: 0 spacing(d) 0 0;
         &:nth-child(2) {
             display: block;
         }
@@ -69,5 +68,4 @@ $breakpoints: (medium: 520px, large: 960px);
         }
     }
 }
-
 </style>

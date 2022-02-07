@@ -57,6 +57,7 @@ import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../c
 import { FormFieldClass, FormFieldErrorClass } from '../services/formField';
 
 export default {
+    name: 'VForm',
     components: {
         FButton,
         ErrorMessage,
@@ -180,6 +181,6 @@ export default {
 }
 
 .c-form-submitButton {
-    margin: spacing(x4) 0;
+    margin: spacing(f) 0;
 }
 </style>

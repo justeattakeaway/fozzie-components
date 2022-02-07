@@ -35,7 +35,7 @@ import FCard from '@justeat/f-card';
 import FButton from '@justeat/f-button';
 
 export default {
-    name: 'Unauthenticated',
+    name: 'LoyaltyUnauthenticated',
 
     components: {
         FCard,
@@ -62,10 +62,10 @@ $stampCards-unauthenticated-img-dimension: 200px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: spacing(x4);
+    padding: spacing(f);
 
     @include media('<=narrowMid') {
-        padding: spacing(x2);
+        padding: spacing(d);
     }
 
     @include media('<=tiny') {
@@ -79,13 +79,13 @@ $stampCards-unauthenticated-img-dimension: 200px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: spacing(x3);
+    margin-bottom: spacing(e);
     width: 100%;
     max-width: $stampCards-unauthenticated-width;
-    padding: spacing(x5);
+    padding: spacing(g);
 
     @include media('<=tiny') {
-        padding: spacing(x2);
+        padding: spacing(d);
     }
 
 }
@@ -97,6 +97,6 @@ $stampCards-unauthenticated-img-dimension: 200px;
 
 .c-loyalty-unauthenticated-title {
     @include font-size(heading-s);
-    margin-bottom: spacing(x3);
+    margin-bottom: spacing(e);
 }
 </style>

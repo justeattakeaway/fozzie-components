@@ -18,6 +18,7 @@ import checkoutDineinNz from './nz/checkout-dinein.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import checkoutAvailableFulfilmentNoTimeAvailable from './checkout-available-fulfilment-no-time-available.json';
 import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
+import checkoutAvailableFulfilmentIssues from './checkout-available-fulfilment-issues.json';
 import createGuest from './create-guest.json';
 import createGuestError from './create-guest-error.json';
 import getBasketDelivery from './get-basket-delivery.json';
@@ -32,7 +33,8 @@ import updateCheckoutAdditionalItemsRequired from './update-checkout-additional-
 import updateCheckout403 from './update-checkout-403.json';
 import updateCheckoutTimeUnavailable from './update-checkout-time-unavailable.json';
 import updateCheckoutGeolocationRequired from './update-checkout-geolocation-required.json';
-import getAddress from './get-address.json';
+import getAddressUK from './uk/get-address.json';
+import getAddressAU from './au/get-address.json';
 import placeOrder from './place-order.json';
 import placeOrderDuplicate from './place-order-duplicate.json';
 import checkout403GetError from './checkout-403-get-error.json';
@@ -183,6 +185,12 @@ const requestDefinitions = {
         responseStatus: httpStatusCodes.ok,
         payload: checkoutAvailableFulfilmentPreorder
     },
+    checkoutAvailableFulfilmentIssues: {
+        url: '/checkout-available-fulfilment-issues.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: checkoutAvailableFulfilmentIssues
+    },
     createGuest: {
         url: '/create-guest.json',
         method: httpMethods.post,
@@ -277,11 +285,17 @@ const requestDefinitions = {
         responseStatus: httpStatusCodes.ok,
         payload: updateCheckoutGeolocationRequired
     },
-    getAddress: {
-        url: '/get-address.json',
+    getAddressUK: {
+        url: '/uk/get-address.json',
         method: httpMethods.get,
         responseStatus: httpStatusCodes.ok,
-        payload: getAddress
+        payload: getAddressUK
+    },
+    getAddressAU: {
+        url: '/au/get-address.json',
+        method: httpMethods.get,
+        responseStatus: httpStatusCodes.ok,
+        payload: getAddressAU
     },
     placeOrder: {
         url: '/place-order.json',
@@ -345,7 +359,7 @@ const requestDefinitions = {
 };
 
 export {
-    requestDefinitions as default,
+    requestDefinitions as default, // eslint-disable-line no-restricted-exports
     httpMethods,
     httpStatusCodes
 };

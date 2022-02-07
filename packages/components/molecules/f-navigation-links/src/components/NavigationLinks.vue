@@ -4,7 +4,9 @@
         :class="$style['c-navigationLinks']"
         data-test-id="navigationLinks">
         <li
-            v-for="({ id, href, to, name }, i) in filterLinks"
+            v-for="({
+                id, href, to, name
+            }, i) in filterLinks"
             :key="i"
             :class="$style['c-navigationLinks-item']">
             <v-link
@@ -64,7 +66,7 @@ export default {
 */
 .c-navigationLinks-link {
     display: inline-block;
-    padding: spacing() 0 spacing() spacing(x2);
+    padding: spacing() 0 spacing() spacing(d);
     border-left: 2px solid $color-border-default;
     color: $color-content-link;
 

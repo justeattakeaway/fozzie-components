@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "lint": "vue-cli-service lint --no-fix",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix"
   },
   "browserslist": [
@@ -43,7 +43,6 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@justeat/f-wdio-utils": "0.4.0",
     "@vue/test-utils": "1.0.3"

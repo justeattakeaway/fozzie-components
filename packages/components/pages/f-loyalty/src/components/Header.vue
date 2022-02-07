@@ -110,7 +110,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-loyaltyHeader-container {
     width: 100%;
     max-width: #{$layout-max-width}px;
@@ -127,7 +126,7 @@ export default {
 }
 
 .c-loyaltyHeader {
-    padding: spacing() 0 spacing(x6) 0;
+    padding: spacing() 0 spacing(h) 0;
     background-color: $color-container-default;
     border-bottom: 1px solid $color-grey-20;
 }

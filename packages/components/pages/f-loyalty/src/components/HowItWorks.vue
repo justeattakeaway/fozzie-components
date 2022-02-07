@@ -224,22 +224,22 @@ $examplePercentages-line-width-xl: 550px;
 /* MAIN */
 .c-howItWorks-title {
     @include font-size(heading-l);
-    margin-top: spacing(x3);
+    margin-top: spacing(e);
     margin-bottom: spacing();
 }
 
 .c-howItWorks-text {
     @include font-size(body-s);
-    margin-bottom: spacing(x3);
+    margin-bottom: spacing(e);
 }
 
 .c-stampcards-appsHowItWorksContainer {
-    padding-left: spacing(x4);
-    padding-right: spacing(x4);
+    padding-left: spacing(f);
+    padding-right: spacing(f);
 
     @include media('<=wide') {
-        padding-left: spacing(x2);
-        padding-right: spacing(x2);
+        padding-left: spacing(d);
+        padding-right: spacing(d);
     }
 }
 
@@ -250,7 +250,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 
 .c-howItWorks-exampleTitle {
     @include font-size(heading-s);
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 }
 
 .c-howItWorks-example {
@@ -269,7 +269,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     }
 
     @include media('<=narrowMid') {
-        padding: spacing(x0.5);
+        padding: spacing(a);
     }
 
     @include media('<=tiny') {
@@ -296,8 +296,8 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 }
 
 .c-howItWorks-example-orders-title {
-    margin-right: spacing(x2);
-    margin-top: spacing(x4);
+    margin-right: spacing(d);
+    margin-top: spacing(f);
 
     @include media('<=wide') {
         margin: 0;
@@ -307,10 +307,10 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 .c-howItWorks-example-orders-contentWrapper {
     display: flex;
     flex-direction: row;
-    margin-right: spacing(x0.5);
+    margin-right: spacing(a);
 
     @include media('<=wide') {
-        margin-top: spacing(x2);
+        margin-top: spacing(d);
         margin-right: 0;
     }
 }
@@ -331,7 +331,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     }
 
     @include media('<=tiny') {
-        padding: spacing() spacing(x0.5);
+        padding: spacing() spacing(a);
     }
 
 }
@@ -339,8 +339,8 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 .c-howItWorks-example-order-number {
     padding: 2px spacing();
     background: $color-background-default;
-    border-radius: spacing(x2);
-    margin-bottom: spacing(x2);
+    border-radius: spacing(d);
+    margin-bottom: spacing(d);
     font-weight: $font-weight-bold;
     margin-left: spacing();
 
@@ -379,7 +379,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     @include font-size(body-s);
     margin-top: 0;
     flex-shrink: 0;
-    margin-right: spacing(x2);
+    margin-right: spacing(d);
     display: flex;
     align-items: center;
     text-align: center;
@@ -387,7 +387,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 
     @include media('<=wide') {
         width: $examplePercentages-line-width-xl;
-        margin: spacing(x4) 0;
+        margin: spacing(f) 0;
 
         &:before {
             @include percentages-line;
@@ -398,11 +398,11 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
         }
 
         &:not(:empty):before {
-            margin-right: spacing(x2);
+            margin-right: spacing(d);
         }
 
         &:not(:empty):after {
-            margin-left: spacing(x2);
+            margin-left: spacing(d);
         }
     }
 
@@ -421,12 +421,12 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 }
 
 .c-howItWorks-example-percentages-value {
-    padding: spacing() spacing(x5);
+    padding: spacing() spacing(g);
     margin-top: 0;
     font-weight: $font-weight-bold;
 
     @include media('<=mid') {
-        padding: spacing() spacing(x4);
+        padding: spacing() spacing(f);
     }
 
     @include media('<=narrowMid') {
@@ -434,7 +434,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     }
 
     @include media('<=tiny') {
-        padding: spacing() spacing(x0.5);
+        padding: spacing() spacing(a);
     }
 
 }
@@ -455,13 +455,13 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: spacing(x2) spacing(x4);
+    padding: spacing(d) spacing(f);
     background-color: $color-container-subtle;
     border-radius: 100%;
     width: 160px;
     height: 160px;
     text-align: center;
-    margin-left: spacing(x3);
+    margin-left: spacing(e);
 
     @include media('<=wide') {
         background-color: transparent;
@@ -471,11 +471,11 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     }
 
     @include media('<=narrowMid') {
-        padding: spacing(x2) spacing();
+        padding: spacing(d) spacing();
     }
 
     @include media('<=tiny') {
-        padding: spacing(x2) 0;
+        padding: spacing(d) 0;
     }
 
 }
@@ -498,11 +498,11 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
         }
 
         &:not(:empty):before {
-            margin-right: spacing(x2);
+            margin-right: spacing(d);
         }
 
         &:not(:empty):after {
-            margin-left: spacing(x2);
+            margin-left: spacing(d);
         }
     }
 
@@ -532,7 +532,7 @@ HOW IT WORKS SECTION: MEDIA SECTION
 .c-howItWorks-mediaWrapper {
     margin-bottom: spacing();
     display: grid;
-    grid-gap: spacing(x2);
+    grid-gap: spacing(d);
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto;
 
@@ -544,7 +544,7 @@ HOW IT WORKS SECTION: MEDIA SECTION
 @include media('<=wide') {
     .c-howItWorks-mediaWrapper {
         display: grid;
-        grid-gap: spacing(x2);
+        grid-gap: spacing(d);
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto;
     }
@@ -553,7 +553,7 @@ HOW IT WORKS SECTION: MEDIA SECTION
 @include media('<=narrow') {
     .c-howItWorks-mediaWrapper {
         display: grid;
-        grid-gap: spacing(x2);
+        grid-gap: spacing(d);
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
     }
@@ -561,8 +561,8 @@ HOW IT WORKS SECTION: MEDIA SECTION
 
 .c-howItWorks-mediaTitle {
     @include font-size(heading-l);
-    margin-top: spacing(x6);
-    margin-bottom: spacing(x3);
+    margin-top: spacing(h);
+    margin-bottom: spacing(e);
 }
 
 .c-stampcards-terms {
@@ -573,7 +573,7 @@ HOW IT WORKS SECTION: MEDIA SECTION
 }
 
 .c-stampcards-terms-link {
-    margin: spacing(x3) 0;
+    margin: spacing(e) 0;
     text-align: center;
     font-weight: $font-weight-bold;
     text-decoration: none;

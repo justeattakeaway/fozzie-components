@@ -76,7 +76,6 @@
 </template>
 
 <script>
-
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import lightFormat from 'date-fns/lightFormat';
@@ -111,6 +110,10 @@ export default {
     directives: {
         makeTextAccessible
     },
+
+    inject: [
+        'copy'
+    ],
 
     props: {
         card: {
@@ -233,10 +236,6 @@ export default {
         this.dateFnsLocale = this.getDateFnsLocale(this.copy.locale);
     },
 
-    inject: [
-        'copy'
-    ],
-
     methods: {
         /**
          * Takes the locale and lazyloads the correct date locale from the date-fns library
@@ -257,10 +256,6 @@ export default {
                     return da;
                 case 'en-AU':
                     return enAU;
-                case 'en-GB':
-                case 'en-IE':
-                default:
-                    return enGB;
                 case 'en-NZ':
                     return enNZ;
                 case 'es-ES':
@@ -269,6 +264,10 @@ export default {
                     return it;
                 case 'nb-NO':
                     return nb;
+                case 'en-GB':
+                case 'en-IE':
+                default:
+                    return enGB;
             }
         }
     }
@@ -276,7 +275,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $stampCard-subStatus-colour: #017a39; /* $color-green in PIE - not in fozzie-colour-palette yet */
 $stampCard-expiryInfo-colour: $color-content-subdued;
 
@@ -291,7 +289,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     max-width: 392px;
     display: flex;
     flex-direction: column;
-    padding: spacing(x2);
+    padding: spacing(d);
     border-radius: $radius-rounded-c;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     0 3px 1px -2px rgba(0, 0, 0, 0.07),
@@ -321,7 +319,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-stampCard1-icon {
     float: left;
-    margin-right: spacing(x2);
+    margin-right: spacing(d);
     margin-bottom: spacing();
     width: $stampCard-iconSize-landscape;
     height: $stampCard-iconSize-landscape;
@@ -335,7 +333,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-stampCard1-title {
     margin-top: 0;
-    margin-bottom: spacing(x0.5);
+    margin-bottom: spacing(a);
 
     @include media($stampCard-responsive-mobileViewBreakpoint) {
         @include font-size(heading-s, true, narrow);
@@ -343,7 +341,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 }
 
 .c-stampCard1-statusText {
-    margin: spacing(x0.5) spacing(x2) 0 spacing(x2);
+    margin: spacing(a) spacing(d) 0 spacing(d);
 }
 
 .c-stampCard1-subStatusText {
