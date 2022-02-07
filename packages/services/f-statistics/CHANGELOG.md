@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.5.0
+------------------------------
+*Febuary 07, 2022*
+
+### Added
+- Ability to batch publish logs based on length, interval and byte size
+
+
 v0.4.0
 ------------------------------
 *October 19, 2021*
