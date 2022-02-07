@@ -499,13 +499,15 @@ jobs:
       - slack_notify_success
 
 workflows:
-  version: 2.1
  
   # Workflow that's run for non-global changes
   build_and_test_packages:
     when:
     condition:
-      equal: [ false, << pipeline.parameters.global-change >> ]
+      not:
+        - or: # Either must be true to trigger
+          - equal: [ master, << pipeline.git.branch >> ]
+          - equal: [ true, << pipeline.parameters.global-change >> ]
     jobs:
       - install:
           context: web-core
@@ -559,10 +561,9 @@ workflows:
 
   build_and_test_global:
     when:
-    condition:
-      - or:
-        - equal: [ true, << pipeline.parameters.global-change >> ]
+      or: # Either must be true to trigger
         - equal: [ master, << pipeline.git.branch >> ]
+        - equal: [ true, << pipeline.parameters.global-change >> ]
     jobs:
       - install:
           context: web-core
