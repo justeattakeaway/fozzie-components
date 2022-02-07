@@ -1,8 +1,8 @@
 const FormField = require('../../test-utils/component-objects/f-form-field--visual.component');
 
-let formField;
-
 describe('f-form-field visual tests', () => {
+    let formField;
+
     describe('default state', () => {
         it('should display all fields in the default state', () => {
             // Arrange
