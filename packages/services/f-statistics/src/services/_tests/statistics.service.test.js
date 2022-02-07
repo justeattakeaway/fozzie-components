@@ -173,5 +173,17 @@ describe('f-statistics', () => {
 
             expect(justLog.info).toBeCalledTimes(3);
         });
+
+        it('should only publish once when all batch conditions are met', () => {
+            // Arrange
+            const config = { logsMaxLength: 1, logsMaxByteSize: 1, logsIntervalTimer: 1 };
+            const statisticsService = new StatisticsService(justLog, config, null);
+
+            // Act
+            statisticsService.publish(log.message, { ...log.payload });
+            jest.runTimersToTime(1);
+
+            expect(justLog.info).toBeCalledTimes(1);
+        });
     });
 });
