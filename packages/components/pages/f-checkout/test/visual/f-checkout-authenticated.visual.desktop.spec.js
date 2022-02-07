@@ -302,7 +302,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the two notes fields if there is two noteTypes.', () => {
         // Arrange
-        checkout = new Checkout('organism', 'checkout-component');
+        checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'collection')
             .withQuery('&knob-Is User Logged In', true)
             .withQuery('&knob-Is ASAP available', true)
@@ -352,7 +352,7 @@ describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Vi
                     .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
                     .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
                     .withQuery('&knob-Locale', checkoutInfo.locale)
-                    .withQuery('&knob-Restrictions', checkoutInfo.restrictions);
+                    .withQuery('&knob-Get Basket Options', checkoutInfo.restrictions);
 
         // Act
         checkout.loadAgeVerification();
