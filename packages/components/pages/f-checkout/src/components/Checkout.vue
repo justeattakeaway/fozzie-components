@@ -6,26 +6,24 @@
             ref="errorMessage"
             v-bind="errorProps.props"
             @created="handleDialogCreation"
-            @note-not-accepted="handleNoteNotAccepted"
-        >
+            @note-not-accepted="handleNoteNotAccepted">
             <span>{{ errorProps.content }}</span>
         </component>
 
-        <age-verification v-if="shouldShowAgeVerificationForm" />
+        <age-verification
+            v-if="shouldShowAgeVerificationForm" />
 
         <div
             v-if="shouldShowCheckoutForm"
             data-theme="jet"
-            data-test-id="checkout-component"
-        >
+            data-test-id="checkout-component">
             <card
                 has-full-width-footer
                 has-outline
                 is-page-content-wrapper
                 card-heading-position="center"
                 :data-test-id="`checkout-card-component-${serviceType}`"
-                :class="$style['c-checkout']"
-            >
+                :class="$style['c-checkout']">
                 <checkout-header :login-url="loginUrl" />
 
                 <checkout-form
@@ -35,13 +33,11 @@
                     :scroll-to-element="scrollToElement"
                     :available-fulfilment-times-key="availableFulfilmentTimesKey"
                     :is-form-submitting="isFormSubmitting"
-                    v-on="formEvents"
-                />
+                    v-on="formEvents"/>
 
                 <template
                     v-if="!isLoggedIn"
-                    #cardFooter
-                >
+                    #cardFooter>
                     <checkout-terms-and-conditions />
                 </template>
             </card>
