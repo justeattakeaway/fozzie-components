@@ -76,7 +76,6 @@ RestaurantCardComponent.args = {
             availabilityTranslatedName: 'Pre-order',
             availabilityMessage: 'Opening at 13:20'
         },
-        isDisabled: false,
         disabledMessage: 'Not taking orders at the moment'
     },
 

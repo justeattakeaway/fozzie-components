@@ -10,7 +10,8 @@ v0.17.0
 - new `disabledMessage` prop that is rendered when a restaurant is disabled
 - unit tests to test `disabledMessage` rendering logic
 ### Changed
-- rename `disabled` prop to `isDisabled`
+- remove `disabled` prop
+- remove any disabled check business logic from component
 - add new color support to `IconText` component
 - simplify SCSS color theme logic in `IconText` component using a mixin
 - update storybook with the new prop changes

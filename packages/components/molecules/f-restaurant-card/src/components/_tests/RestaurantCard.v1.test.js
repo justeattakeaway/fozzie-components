@@ -300,10 +300,9 @@ describe('RestaurantCard.v1', () => {
     });
 
     describe('Disabled Message', () => {
-        it('displays a disabled message if one is provided and `isDisabled` is true', () => {
+        it('displays a disabled message if one is provided', () => {
             // arrange
             const propsData = {
-                isDisabled: true,
                 disabledMessage: 'foo bar baz'
             };
 
@@ -321,26 +320,7 @@ describe('RestaurantCard.v1', () => {
         ])('does not display a disabled message if none exists', disabledMessage => {
             // arrange
             const propsData = {
-                isDisabled: true,
                 disabledMessage
-            };
-
-            // act
-            const wrapper = mount(RestaurantCardV1, { propsData });
-
-            // assert
-            expect(wrapper.find('[data-test-id="restaurant-disabled"]').exists()).toBe(false);
-        });
-
-        it.each([
-            false,
-            null,
-            undefined
-        ])('does not display a disabled message if `isDisabled` is falsey', isDisabled => {
-            // arrange
-            const propsData = {
-                isDisabled,
-                disabledMessage: 'foo bar baz'
             };
 
             // act

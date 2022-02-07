@@ -132,7 +132,7 @@
 
             <!-- Disabled Message -->
             <icon-text
-                v-if="isDisabled && disabledMessage"
+                v-if="disabledMessage"
                 data-test-id="restaurant-disabled"
                 :text="disabledMessage"
                 color="colorSupportError"
@@ -144,7 +144,7 @@
         <!-- Dishes -->
         <component
             :is="errorBoundary"
-            v-if="!disabled && hasDishes"
+            v-if="hasDishes"
             :tier="3">
             <restaurant-dishes
                 data-test-id="restaurant-dishes"
@@ -266,10 +266,6 @@ export default {
         availability: {
             type: Object,
             default: null
-        },
-        isDisabled: {
-            type: Boolean,
-            default: false
         },
         disabledMessage: {
             type: String,
