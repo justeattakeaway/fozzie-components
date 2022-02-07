@@ -1,6 +1,7 @@
 const path = require('path');
 
 const rootDir = path.join(__dirname, '..', '..');
+const assetsPlugin = require('postcss-assets');
 const sassOptions = require('../../config/sassOptions')(rootDir);
 
 // vue.config.js
@@ -60,5 +61,15 @@ module.exports = {
             .end()
             .use('vue-svg-loader')
             .loader('vue-svg-loader');
+    },
+
+    css: {
+        loaderOptions: {
+            postcss: {
+                plugins: [
+                    assetsPlugin
+                ]
+            }
+        }
     }
 };
