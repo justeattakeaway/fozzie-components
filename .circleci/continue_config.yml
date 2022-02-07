@@ -499,11 +499,12 @@ jobs:
       - slack_notify_success
 
 workflows:
-  version: 2
+  version: 2.1
  
   # Workflow that's run for non-global changes
   build_and_test_packages:
     when:
+    condition:
       equal: [ false, << pipeline.parameters.global-change >> ]
     jobs:
       - install:
