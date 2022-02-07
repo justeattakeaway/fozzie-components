@@ -71,7 +71,7 @@ const baseProperties = {
 };
 
 // Initialise a new instance of the statistics client
-const statisticsClient = new StatisticsModule(justLog, statsConfiguration, baseProperties, store);
+const statisticsClient = new StatisticsModule(justLog, statsConfiguration, baseProperties);
 
 // Publish a statistic
 statisticsClient.publish({

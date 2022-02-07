@@ -1,13 +1,20 @@
+/* eslint-disable camelcase */
 import StatisticsService from '../statistics.service';
-import statisticsModule from '../../store/statistics.module';
-import defaultConfig from '../../defaultOptions';
-import {
-    defaultState,
-    createStore,
-    log,
-    basePayload,
-    options
-} from '../../tests/helpers/setup';
+
+const basePayload = {
+    je_feature: 'f-statistics',
+    je_logType: 'client-stats',
+    je_environment: 'test',
+    je_feature_for: 'Generic Front End'
+};
+
+const log = {
+    message: 'This is a message',
+    payload: {
+        alpha: 'alpha',
+        beta: 'beta'
+    }
+};
 
 const justLog = {
     info: jest.fn()
@@ -16,45 +23,12 @@ const justLog = {
 jest.spyOn(global, 'setInterval');
 
 describe('f-statistics', () => {
-    let store,
-        storeDispatchSpy,
-        registerStoreModuleSpy;
-
-    const mockStore = () => {
-        store = createStore({
-            state: { ...defaultState },
-            actions: statisticsModule.actions,
-            mutations: statisticsModule.mutations
-        });
-
-        // Hijack and replicate updating the State thru dispatch calls
-        storeDispatchSpy = jest.fn((action, payload) => {
-            const state = store.state[`${options.namespace}`];
-            // eslint-disable-next-line default-case
-            switch (action) {
-                case `${options.namespace}/addLog`:
-                    state.logs = [...state.logs, payload];
-                    return;
-                case `${options.namespace}/clearLogs`:
-                    state.logs = [];
-            }
-        });
-        store.dispatch = storeDispatchSpy;
-
-        registerStoreModuleSpy = jest.fn();
-        store.registerModule = registerStoreModuleSpy;
-    };
-
     beforeEach(() => {
-        // Arrange - store
-        mockStore();
         jest.useFakeTimers();
     });
 
     afterEach(() => {
         jest.clearAllMocks();
-        store = undefined;
-        storeDispatchSpy.mockRestore();
     });
 
     it('should be defined', () => {
@@ -62,43 +36,11 @@ describe('f-statistics', () => {
         expect(StatisticsService).toBeDefined();
     });
 
-    describe('constructor ::', () => {
-        it('should preserve state when calling store.registerModule() if the store already contains state', () => {
-            // Arrange
-            store.state[defaultConfig.namespace] = {};
-
-            // Act
-            // eslint-disable-next-line no-unused-vars
-            const statisticsService = new StatisticsService(justLog, null, null, store);
-
-            // Assert
-            expect(registerStoreModuleSpy).toHaveBeenCalledWith(options.namespace, expect.anything(), { preserveState: true });
-        });
-    });
-
 
     describe('publish ::', () => {
         it('should define expected publish method', () => {
             // Arrange, Act & Assert
-            expect(new StatisticsService(null, null, null, store).publish).toBeDefined();
-        });
-
-        it('should add the log to state.logs', () => {
-            // Arrange
-            const expected = {
-                message: log.message,
-                payload: {
-                    ...basePayload,
-                    ...log.payload
-                }
-            };
-            const statisticsService = new StatisticsService(justLog, { logsIntervalTimer: 0 }, null, store);
-
-            // Act
-            statisticsService.publish(log.message, { ...log.payload });
-
-            // Assert
-            expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
+            expect(new StatisticsService(null, null, null).publish).toBeDefined();
         });
 
         it('should expose base payload when none is provided', () => {
@@ -111,11 +53,11 @@ describe('f-statistics', () => {
             };
 
             // Act
-            const statisticsService = new StatisticsService(justLog, { logsIntervalTimer: 0 }, null, store);
+            const statisticsService = new StatisticsService(justLog, { logsMaxLength: 1, logsIntervalTimer: 0 }, null);
             statisticsService.publish(expected.message);
 
             // Assert
-            expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
+            expect(justLog.info).toHaveBeenCalledWith(expected.message, expected.payload);
         });
 
         it('should use default payload as merge priority over provided payload', () => {
@@ -130,11 +72,11 @@ describe('f-statistics', () => {
 
             // Act
             // eslint-disable-next-line camelcase
-            const statisticsService = new StatisticsService(justLog, { logsIntervalTimer: 0 }, { testProperty: expected.payload.testProperty, je_feature: 'a modified value' }, store);
+            const statisticsService = new StatisticsService(justLog, { logsMaxLength: 1, logsIntervalTimer: 0 }, { testProperty: expected.payload.testProperty, je_feature: 'a modified value' });
             statisticsService.publish(log.message);
 
             // Assert
-            expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
+            expect(justLog.info).toHaveBeenCalledWith(expected.message, expected.payload);
         });
         it('should merge base payload when additional properties are provided', () => {
             // Arrange
@@ -147,18 +89,18 @@ describe('f-statistics', () => {
             };
 
             // Act
-            const statisticsService = new StatisticsService(justLog, { logsIntervalTimer: 0 }, { testProperty: expected.payload.testProperty }, store);
+            const statisticsService = new StatisticsService(justLog, { logsMaxLength: 1, logsIntervalTimer: 0 }, { testProperty: expected.payload.testProperty });
             statisticsService.publish(log.message);
 
             // Assert
-            expect(store.state[`${options.namespace}`].logs).toEqual([expected]);
+            expect(justLog.info).toHaveBeenCalledWith(expected.message, expected.payload);
         });
 
 
         it('should call justLog.info when logs.length equal or exceeded', () => {
             // Arrange
             const config = { logsMaxLength: 3, logsIntervalTimer: 0, logsMaxByteSize: 1000 };
-            const statisticsService = new StatisticsService(justLog, config, null, store);
+            const statisticsService = new StatisticsService(justLog, config, null);
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
@@ -172,7 +114,7 @@ describe('f-statistics', () => {
         it('should batch log publishing using length', () => {
             // Arrange
             const config = { logsMaxLength: 2, logsIntervalTimer: 0, logsMaxByteSize: 2000 };
-            const statisticsService = new StatisticsService(justLog, config, null, store);
+            const statisticsService = new StatisticsService(justLog, config, null);
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
@@ -190,7 +132,7 @@ describe('f-statistics', () => {
         it('should call justLog.info when byte size exceeded', () => {
             // Arrange
             const config = { logsMaxLength: 10, logsMaxByteSize: 500, logsIntervalTimer: 0 };
-            const statisticsService = new StatisticsService(justLog, config, null, store);
+            const statisticsService = new StatisticsService(justLog, config, null);
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
@@ -204,7 +146,7 @@ describe('f-statistics', () => {
         it('should call justLog.info when timer exceeded', () => {
             // Arrange
             const config = { logsMaxLength: 10, logsMaxByteSize: 1000, logsIntervalTimer: 1000 };
-            const statisticsService = new StatisticsService(justLog, config, null, store);
+            const statisticsService = new StatisticsService(justLog, config, null);
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
@@ -217,7 +159,7 @@ describe('f-statistics', () => {
         it('should reset and repeat timer calling Just Log', () => {
             // Arrange
             const config = { logsMaxLength: 10, logsMaxByteSize: 1000, logsIntervalTimer: 1000 };
-            const statisticsService = new StatisticsService(justLog, config, null, store);
+            const statisticsService = new StatisticsService(justLog, config, null);
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });

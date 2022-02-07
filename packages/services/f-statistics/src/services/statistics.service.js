@@ -1,23 +1,20 @@
 /* eslint-disable camelcase */
 import defaultOptions from '../defaultOptions';
-import statisticsModule from '../store/statistics.module';
 
 export default class StatisticsService {
     #configuration;
     #logger;
     #basePayload;
-    #store;
+    #logs = [];
     #publishIntervalTimer = null;
 
-    constructor (logger, options = {}, basePayload = {}, store) {
+    constructor (logger, options = {}, basePayload = {}) {
         this.#configuration = {
             ...defaultOptions,
             ...options
         };
         this.#basePayload = this.#makeBasePayload(basePayload);
         this.#logger = logger;
-        this.#store = store;
-        this.#store.registerModule(this.#configuration.namespace, statisticsModule, { preserveState: !!store.state[`${this.#configuration.namespace}`] });
     }
 
     #makeBasePayload (basePayload) {
@@ -38,10 +35,6 @@ export default class StatisticsService {
                 ...this.#basePayload
             }
         };
-    }
-
-    get #logs () {
-        return this.#store.state[`${this.#configuration.namespace}`].logs;
     }
 
     #publishBasedOnNumber () {
@@ -70,12 +63,12 @@ export default class StatisticsService {
         this.#publishIntervalTimer = null;
         this.#logs.map(log => this.#createLogFunction(log))
             .forEach(justLog => justLog());
-        this.#store.dispatch(`${this.#configuration.namespace}/clearLogs`);
+        this.#logs = [];
     }
 
     publish (message, statisticPayload) {
         const log = this.#createLog(message, statisticPayload);
-        this.#store.dispatch(`${this.#configuration.namespace}/addLog`, log);
+        this.#logs.push(log);
         this.#publishBasedOnTime();
         this.#publishBasedOnByteSize();
         this.#publishBasedOnNumber();
