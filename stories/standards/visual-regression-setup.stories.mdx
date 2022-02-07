@@ -118,6 +118,11 @@ This removes the risk of checking it into Git, and also prevents the need to mod
 set PERCY_TOKEN_F_YOUR_COMPONENT_NAME_HERE=<paste your token here>
 ```
 
+Once you have added this, to allow your PR to run the visual tests on CI, you'll also need to add this line below to your component's `package.json` replacing 'YOUR_COMPONENT_TYPE_HERE' with either `atoms`, `molecules`, `organisms` or `pages`.
+
+```
+"ci:test:visual:YOUR_COMPONENT_TYPE_HERE": "yarn test:visual",
+```
 
 ## Approving New Visual Changes
 
