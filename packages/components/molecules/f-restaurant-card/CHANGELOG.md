@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.17.0
+------------------------------
+*Februrary 07, 2022*
+### Added
+- new `disabledMessage` prop that is rendered when a restaurant is disabled
+- unit tests to test `disabledMessage` rendering logic
+### Changed
+- remove `disabled` prop
+- remove any disabled check business logic from component
+- add new color support to `IconText` component
+- simplify SCSS color theme logic in `IconText` component using a mixin
+- update storybook with the new prop changes
+
+
 v0.16.1
 ------------------------------
 *Februrary 03, 2022*

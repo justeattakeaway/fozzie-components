@@ -298,4 +298,36 @@ describe('RestaurantCard.v1', () => {
             expect(wrapper.find('[data-test-id="restaurant-fees"]').exists()).toBe(true);
         });
     });
+
+    describe('Disabled Message', () => {
+        it('displays a disabled message if one is provided', () => {
+            // arrange
+            const propsData = {
+                disabledMessage: 'foo bar baz'
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-disabled"]').exists()).toBe(true);
+        });
+
+        it.each([
+            null,
+            undefined,
+            ''
+        ])('does not display a disabled message if none exists', disabledMessage => {
+            // arrange
+            const propsData = {
+                disabledMessage
+            };
+
+            // act
+            const wrapper = mount(RestaurantCardV1, { propsData });
+
+            // assert
+            expect(wrapper.find('[data-test-id="restaurant-disabled"]').exists()).toBe(false);
+        });
+    });
 });
