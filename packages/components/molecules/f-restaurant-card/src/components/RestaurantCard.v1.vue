@@ -12,7 +12,7 @@
         <!-- background image -->
         <restaurant-image
             :class="[$style['c-restaurantCard-img']]"
-            :img-url="imgUrl">
+            :img-url="imageUrl">
             <!-- Logo image -->
             <restaurant-logo
                 v-if="logoUrl"
@@ -129,6 +129,16 @@
                 is-bold>
                 <offer-icon />
             </icon-text>
+
+            <!-- Disabled Message -->
+            <icon-text
+                v-if="isDisabled && disabledMessage"
+                data-test-id="restaurant-disabled"
+                :text="disabledMessage"
+                color="colorSupportError"
+                hide-icon-in-tile-view>
+                <clock-small-icon />
+            </icon-text>
         </div>
 
         <!-- Dishes -->
@@ -146,7 +156,7 @@
 </template>
 
 <script>
-import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
+import { OfferIcon, LegendIcon, ClockSmallIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
@@ -175,6 +185,7 @@ export default {
         IconText,
         OfferIcon,
         LegendIcon,
+        ClockSmallIcon,
         RestaurantFees,
         RestaurantAvailability,
         RenderlessSlotWrapper
@@ -206,10 +217,6 @@ export default {
         imgUrl: {
             type: String,
             default: null
-        },
-        disabled: {
-            type: Boolean,
-            default: false
         },
         isListItem: {
             type: Boolean,
@@ -259,6 +266,14 @@ export default {
         availability: {
             type: Object,
             default: null
+        },
+        isDisabled: {
+            type: Boolean,
+            default: false
+        },
+        disabledMessage: {
+            type: String,
+            default: null
         }
     },
     computed: {
@@ -281,6 +296,11 @@ export default {
         },
         hasFees () {
             return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
+        },
+        imageUrl () {
+            return this.isDisabled
+                ? null
+                : this.imgUrl;
         }
     }
 };

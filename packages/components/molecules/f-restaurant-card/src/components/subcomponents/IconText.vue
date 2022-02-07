@@ -65,6 +65,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+@mixin themedColor($color) {
+    color: $color;
+    path {
+        fill: $color;
+    }
+}
+
 .c-restaurantCard-iconText {
     @include font-size();
     margin: spacing() 0;
@@ -94,15 +101,14 @@ export default {
 }
 
 .c-restaurantCard-iconText--colorSupportPositive {
-    color: $color-support-positive;
-    path {
-        fill: $color-support-positive;
-    }
+    @include themedColor($color-support-positive);
 }
+
 .c-restaurantCard-iconText--colorSupportInfo {
-    color: $color-support-info;
-    path {
-        fill: $color-support-info;
-    }
+    @include themedColor($color-support-info);
+}
+
+.c-restaurantCard-iconText--colorSupportError {
+    @include themedColor($color-support-error);
 }
 </style>
