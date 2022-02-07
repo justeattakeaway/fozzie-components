@@ -17,6 +17,7 @@ import {
 import dispatcherEventStream from './DispatcherEventStream';
 import { LOGGER } from './types/events';
 import { LOG_ERROR, LOG_INFO } from './types/logger';
+import locationFilter from './utils/locationFilter';
 
 class BrazeConsumer {
     /**
@@ -37,7 +38,8 @@ class BrazeConsumer {
         logger = {},
         customFilters = [],
         userId,
-        tags
+        tags,
+        currentLocation = {}
     }) {
         this.$logger = logger;
         // temp logging function as dispatcher event stream is not available until the consumer is registered
@@ -108,7 +110,8 @@ class BrazeConsumer {
             sortByCardOrder,
             cards => filterByEnabledCardTypes(cards, this.enabledCardTypes),
             cards => filterByBrands(cards, this.brands),
-            filterByCurrentlyActive
+            filterByCurrentlyActive,
+            cards => locationFilter(cards, currentLocation)
         ];
 
         this._cards = [];
