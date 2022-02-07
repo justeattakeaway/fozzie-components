@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.17.1
+------------------------------
+*Februrary 07, 2022*
+### Added
+- Add Unit Tests to Restaurant Image & Logo
+
 v0.17.0
 ------------------------------
 *Februrary 07, 2022*
