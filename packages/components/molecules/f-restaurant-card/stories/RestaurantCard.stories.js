@@ -23,7 +23,6 @@ RestaurantCardComponent.args = {
     data: {
         id: '00000',
         name: 'McDonald\'s® - Clapham Junction',
-        disabled: false,
         logoUrl: restaurantLogo,
         imgUrl: restaurantImage,
         isListItem: true,
@@ -76,7 +75,8 @@ RestaurantCardComponent.args = {
             availabilityType: availabilityTypes.PREORDER,
             availabilityTranslatedName: 'Pre-order',
             availabilityMessage: 'Opening at 13:20'
-        }
+        },
+        disabledMessage: 'Not taking orders at the moment'
     },
 
     flags: {

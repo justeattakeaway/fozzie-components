@@ -129,12 +129,22 @@
                 is-bold>
                 <offer-icon />
             </icon-text>
+
+            <!-- Disabled Message -->
+            <icon-text
+                v-if="disabledMessage"
+                data-test-id="restaurant-disabled"
+                :text="disabledMessage"
+                color="colorSupportError"
+                hide-icon-in-tile-view>
+                <clock-small-icon />
+            </icon-text>
         </div>
 
         <!-- Dishes -->
         <component
             :is="errorBoundary"
-            v-if="!disabled && hasDishes"
+            v-if="hasDishes"
             :tier="3">
             <restaurant-dishes
                 data-test-id="restaurant-dishes"
@@ -146,7 +156,7 @@
 </template>
 
 <script>
-import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
+import { OfferIcon, LegendIcon, ClockSmallIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
@@ -175,6 +185,7 @@ export default {
         IconText,
         OfferIcon,
         LegendIcon,
+        ClockSmallIcon,
         RestaurantFees,
         RestaurantAvailability,
         RenderlessSlotWrapper
@@ -206,10 +217,6 @@ export default {
         imgUrl: {
             type: String,
             default: null
-        },
-        disabled: {
-            type: Boolean,
-            default: false
         },
         isListItem: {
             type: Boolean,
@@ -258,6 +265,10 @@ export default {
         },
         availability: {
             type: Object,
+            default: null
+        },
+        disabledMessage: {
+            type: String,
             default: null
         }
     },
