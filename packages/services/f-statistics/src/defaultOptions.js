@@ -2,9 +2,9 @@ const defaultConfig = {
     namespace: 'f-statistics',
     environment: 'test',
     featureName: 'Generic Front End',
-    logsMaxByteSize: 2000,
-    logsMaxLength: 5,
-    logsIntervalTimer: 5000
+    logsMaxByteSize: 0,
+    logsMaxLength: 1,
+    logsIntervalTimer: 0
 };
 
 export default defaultConfig;
