@@ -1,15 +1,5 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
-import checkoutDelivery from '../../../stories/demo/uk/checkout-delivery.json';
-import basketDelivery from '../../../stories/demo/get-basket-delivery.json';
-import basketInvalidProducts from '../../../stories/demo/get-basket-invalid-products.json';
-import basketOfflineProducts from '../../../stories/demo/get-basket-offline-products.json';
-import basketDeliveryAgeRestricted from '../../../stories/demo/get-basket-delivery-age-restriction.json';
-import checkoutAvailableFulfilment from '../../../stories/demo/checkout-available-fulfilment.json';
-import customerAddresses from '../../../stories/demo/uk/get-address.json';
-import geoLocationDetails from '../../../stories/demo/get-geo-location.json';
-import customer from '../../../stories/demo/get-customer.json';
-import splitNotesConfig from '../../../stories/demo/get-notes-config-split.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';
@@ -28,7 +18,6 @@ import {
     CHECKOUT_NOTE_TYPE_COURIER,
     CHECKOUT_NOTE_TYPE_ORDER
 } from '../../constants';
-
 import {
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
@@ -50,6 +39,18 @@ import {
     CLEAR_DOB_ERROR,
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
+
+import customer from '../../../stories/helpers/customer/uk';
+import {
+    geoLocationDetails,
+    checkoutDelivery,
+    basketDelivery,
+    basketInvalidProducts,
+    basketOfflineProducts,
+    basketDeliveryAgeRestricted,
+    checkoutAvailableFulfilment,
+    splitNotesConfig
+} from '../../components/_tests/helpers/apiResponses';
 
 const { actions, getters, mutations } = CheckoutModule;
 
@@ -746,12 +747,15 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
-                const [expectedAddress] = customerAddresses.Addresses;
+                const customerAddresses = {
+                    Addresses: [address]
+                };
+
                 const expectedFormattedAddress = {
-                    line1: expectedAddress.Line1,
-                    line2: expectedAddress.Line2,
-                    locality: expectedAddress.City,
-                    postcode: expectedAddress.ZipCode
+                    line1: address.Line1,
+                    line2: address.Line2,
+                    locality: address.City,
+                    postcode: address.ZipCode
                 };
                 const addressServiceSpy = jest.spyOn(addressService, 'getClosestAddress').mockReturnValue(expectedFormattedAddress);
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));

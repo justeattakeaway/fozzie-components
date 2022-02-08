@@ -4,10 +4,10 @@ exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with de
 Object {
   "address": Object {
     "administrativeArea": undefined,
-    "line1": "1 Bristol Road",
-    "line2": "Flat 1",
-    "locality": "Bristol",
-    "postcode": "BS1 1AA",
+    "line1": "Fleet Place House",
+    "line2": "Farringdon",
+    "locality": "London",
+    "postcode": "EC4M 7RF",
   },
   "authToken": "",
   "availableFulfilment": Object {
@@ -49,7 +49,7 @@ Object {
     },
     Object {
       "message": Object {
-        "text": "We're sorry, some items in your basket are no longer available",
+        "text": "We’re sorry, some items in your basket are no longer available",
       },
       "type": "information",
     },
@@ -59,7 +59,7 @@ Object {
   "notices": Array [
     Object {
       "notice": Object {
-        "text": "If you have a food allergy or intolerance (or someone you're ordering for has), <a href=\\"https://greggs.co.uk/nutrition\\" data-test-id=\\"allergen-url-link\\" target=\\"_blank\\" rel=\\"noopener\\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.",
+        "text": "If you have a food allergy or intolerance (or someone you’re ordering for has), <a href=\\"https://greggs.co.uk/nutrition\\" data-test-id=\\"allergen-url-link\\" target=\\"_blank\\" rel=\\"noopener\\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.",
       },
       "type": "allergy",
     },
