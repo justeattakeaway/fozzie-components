@@ -90,7 +90,7 @@ export default {
     data () {
         return {
             tenantConfigs,
-            shouldAnimate: false
+            shouldAnimate: true
         };
     },
 
