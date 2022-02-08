@@ -460,8 +460,7 @@ jobs:
       # Else Build + Lint changed packages.
       - when:
           condition:
-            and:
-              - equal: [ false, << pipeline.parameters.global-change >> ]
+            not: << pipeline.parameters.global-change >>
           steps:
             # Build all components
             - build_all_components
@@ -578,8 +577,8 @@ workflows:
   # Workflow that's run for non-global changes
   build_and_test_packages:
     when:
-      and: # Either must be true to trigger
-        - equal: [ false, << pipeline.parameters.global-change >> ]
+      condition:
+        not: << pipeline.parameters.global-change >>
     jobs:
       - install:
           context: web-core
