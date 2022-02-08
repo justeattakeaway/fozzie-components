@@ -222,10 +222,10 @@ commands:
             - run:
                 name: Build Storybook for changed package UI tests
                 command: yarn storybook:build-changed
-            - persist_to_workspace:
-                root: packages/storybook
-                paths:
-                  - '*'
+      - persist_to_workspace:
+          root: packages/storybook
+          paths:
+            - '*'
 
   component_tests:
     description: Run Component Tests
