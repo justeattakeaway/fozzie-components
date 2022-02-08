@@ -11,4 +11,9 @@ describe('f-image-tile component tests', () => {
         // Assert
         expect(imageTile.isComponentDisplayed()).toBe(true);
     });
+
+    it('should check that the f-image-tile component is clickable', () => {
+        // Assert
+        expect(imageTile.isComponentClickable()).toBe(true);
+    });
 });
