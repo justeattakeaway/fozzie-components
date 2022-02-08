@@ -25,6 +25,7 @@ forEach(['success', 'warning', 'info', 'danger'])
 
         // Act
         alert.load();
+        alert.waitForComponent();
 
         // Assert
         browser.percyScreenshot(`f-alert - ${type} - undismissible`, 'desktop');
