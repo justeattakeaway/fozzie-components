@@ -460,8 +460,7 @@ jobs:
       # Else Build + Lint changed packages.
       - when:
           condition:
-            not: 
-              - equal: [ true, << pipeline.parameters.global-change >> ]
+            not: << pipeline.parameters.global-change >>
           steps:
             # Build all components
             - build_all_components
