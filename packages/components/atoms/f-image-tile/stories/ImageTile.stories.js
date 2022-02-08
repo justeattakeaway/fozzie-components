@@ -26,7 +26,8 @@ export const ImageTileComponent = (args, { argTypes }) => ({
                         :img-src='imgSrc'
                         :alt-text='altText'
                         :fallback-image='fallbackImage'
-                        @toggle="toggleCuisine"
+                        @toggle="toggleCuisine" 
+                        slot-scope="{ toggleCuisine }"
                     >
                     </image-tile>
                 </test-container>

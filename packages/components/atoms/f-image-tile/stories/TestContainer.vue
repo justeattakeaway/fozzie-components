@@ -1,6 +1,6 @@
 <template>
     <div :class="$style['c-testContainer']">
-        <slot />
+        <slot :toggleCuisine="toggleCuisine" />
     </div>
 </template>
 
