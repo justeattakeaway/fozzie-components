@@ -1,12 +1,9 @@
 import { mount, config } from '@vue/test-utils';
+import mockCssModules from 'root/test/utils/mockCSSModules';
 import RestaurantLogo from '../RestaurantLogo.vue';
 
-// Allows for the testing of CSS module classes
-config.mocks.$style = new Proxy({}, {
-    get (_, name) {
-        return name;
-    }
-});
+// Mocks CSS modules and allows for their testing
+mockCssModules(config);
 
 
 describe('RestaurantLogo component', () => {

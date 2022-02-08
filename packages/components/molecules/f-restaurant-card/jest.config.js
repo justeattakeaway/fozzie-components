@@ -16,6 +16,7 @@ module.exports = {
     ],
 
     moduleNameMapper: {
+        '^root/(.*)$': '<rootDir>/../../../../$1',
         '^@/(.*)$': '<rootDir>/src/$1',
         '^~include-media/(.*)$': '<rootDir>../../node_modules/include-media/$1',
         '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1',
