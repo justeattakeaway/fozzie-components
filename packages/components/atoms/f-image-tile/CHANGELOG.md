@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.8.0
 ------------------------------
-*February X, 2022*
+*February 8, 2022*
 
 ### Changed
 - Storybook combine stories so ImageTile is always shown within a container.

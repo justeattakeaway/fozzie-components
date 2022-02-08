@@ -61,9 +61,8 @@ ImageTileComponent.argTypes = {
         defaultValue: 'Chicken'
     },
     imgSrc: {
-        control: { type: 'text' },
+        control: { type: 'select', options: [ImageTileCuisine, null] },
         description: 'Cuisine image link',
-        defaultValue: ImageTileCuisine
     },
     isSelected: {
         control: { type: 'boolean' },
