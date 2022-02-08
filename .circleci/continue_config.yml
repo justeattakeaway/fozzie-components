@@ -40,16 +40,16 @@ commands:
       - when:
         condition:
           or:
-           - equal: [ true, << pipeline.parameters.global-change >> ]
-           - equal: [ master, << pipeline.git.branch >> ]
+            - equal: [ true, << pipeline.parameters.global-change >> ]
+            - equal: [ master, << pipeline.git.branch >> ]
       - run:
           name: << parameters.command_description >>
           command: yarn << parameters.command_name >>
       - when:
         condition:
           not:
-           - equal: [true, << pipeline.parameters.global-change >> ]
-           - equal: [ master, << pipeline.git.branch >> ]
+            - equal: [ true, << pipeline.parameters.global-change >> ]
+            - equal: [ master, << pipeline.git.branch >> ]
       - run:
           name: << parameters.command_description >>
           command: yarn << parameters.command_name >> --since master...HEAD
@@ -215,16 +215,16 @@ commands:
       - when:
         condition:
           or:
-           - equal: [ true, << pipeline.parameters.global-change >> ]
-           - equal: [ master, << pipeline.git.branch >> ]
+            - equal: [ true, << pipeline.parameters.global-change >> ]
+            - equal: [ master, << pipeline.git.branch >> ]
       - run:
           name: Build Storybook for all UI tests
           command: yarn storybook:build
       - when:
         condition:
           not:
-           - equal: [ true, << pipeline.parameters.global-change >> ]
-           - equal: [ master, << pipeline.git.branch >> ]
+            - equal: [ true, << pipeline.parameters.global-change >> ]
+            - equal: [ master, << pipeline.git.branch >> ]
       - run:
           name: Build Storybook for changed package UI tests
           command: yarn storybook:build-changed
@@ -439,28 +439,28 @@ jobs:
       - when:
           condition:
             or:
-            - equal: [ master, << pipeline.git.branch >> ]
-            - equal: [ true, << pipeline.parameters.global-change >> ]
+              - equal: [ master, << pipeline.git.branch >> ]
+              - equal: [ true, << pipeline.parameters.global-change >> ]
           steps:
             # Build components based on atomic level - e.g ci:build:atoms
             - build_component_type:
                 component_type: << parameters.component_type >>
+            - lint_component_type:
+                component_type: << parameters.component_type >>
             - persist_to_workspace:
-                root: .
-                paths:
-                  - '*'
+                  root: .
+                  paths:
+                    - '*'
             # Only save cache dist if master branch
             - when:
                 condition:
-                  and:
-                  - equal: [ master, << pipeline.git.branch >> ]
+                  equal: [ master, << pipeline.git.branch >> ]
                 steps:
                   - save_cache_dist_directories
-            - lint_all_components
       # Else Build + Lint changed packages.
       - when:
           condition:
-            not: << pipeline.parameters.global-change >>
+            equal: [ false, << pipeline.parameters.global-change >> ]
           steps:
             # Build all components
             - build_all_components
@@ -470,8 +470,7 @@ jobs:
                 paths:
                   - '*'
             # Lint components based on atomic level - e.g ci:lint:atoms
-            - lint_component_type:
-                component_type: << parameters.component_type >>
+            - lint_all_components
       - slack_notify_fail
       - slack_notify_success
 
@@ -577,9 +576,8 @@ workflows:
   # Workflow that's run for non-global changes
   build_and_test_packages:
     when:
-      condition:
-        not: 
-          - equal: [ true, << pipeline.parameters.global-change >> ]
+      condition: 
+        equal: [ false, << pipeline.parameters.global-change >> ]
     jobs:
       - install:
           context: web-core
