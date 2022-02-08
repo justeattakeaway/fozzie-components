@@ -101,7 +101,7 @@ export default {
 }
 
 .c-restaurantCard-dish-nutritionalInfo-item {
-    padding-right: spacing(a) / 2 * 3;
+    padding-right: math.div(spacing(a), 2) * 3;
     margin-right: spacing(a);
     position: relative;
 
