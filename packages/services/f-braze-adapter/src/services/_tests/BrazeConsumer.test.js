@@ -5,6 +5,7 @@ import transformCardData from '../utils/transformCardData';
 const mockCards = [
     {
         title: '51 Pegasi b',
+        url: 'https://just-eat.co.uk/search?location=$LOCATION&lat=$LAT&lon=$LON',
         extras: {
             updated: '2020-02-17T13:23:58.000Z',
             custom_card_type: 'Promotion_Card_1', // eslint-disable-line camelcase
@@ -13,6 +14,7 @@ const mockCards = [
     },
     {
         title: 'Wasp-17b',
+        url: 'https://just-eat.co.uk/search?location=$LOCATION&lat=$LAT&lon=$LON',
         extras: {
             updated: '2020-02-16T12:28:58.000Z',
             custom_card_type: 'Promotion_Card_2', // eslint-disable-line camelcase
@@ -21,6 +23,7 @@ const mockCards = [
     },
     {
         title: 'Wasp-19b',
+        url: 'https://just-eat.co.uk/search?location=$LOCATION&lat=$LAT&lon=$LON',
         extras: {
             updated: '2020-02-15T18:23:58.000Z',
             custom_card_type: 'Promotion_Card_3', // eslint-disable-line camelcase
