@@ -25,16 +25,16 @@ export const DropdownIconComponent = (args, { argTypes }) => ({
             :locale="locale"
             :label-text="labelText"
             input-type="dropdown"
-            :shouldShowLabelText="shouldShowLabelText"
+            :should-show-label-text="shouldShowLabelText"
             :field-size="fieldSize"
             :has-error="hasError"
             :is-grouped="isGrouped"
             :disabled="isDisabled"
             :placeholder="placeholder"
-            :maxlength="200"
-            :labelDetails="labelDetails"
-            :labelDescription="labelDescription"
-            :assistiveText="assistiveText"
+            :max-length="200"
+            :label-details="labelDetails"
+            :label-description="labelDescription"
+            :assistive-text="assistiveText"
             :dropdown-options="dropdownOptions">
             <template v-slot:icon-leading>
                 <AllergyNutIcon />
@@ -68,7 +68,7 @@ DropdownIconComponent.argTypes = {
     isGrouped:
     {
         control: { type: 'boolean' },
-        description: 'Select whether group or not',
+        description: 'Select whether to remove the margin between all grouped form fields or not.',
         defaultValue: false
     },
     labelDetails:

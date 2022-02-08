@@ -18,18 +18,18 @@ export const DropdownDefaultComponent = (args, { argTypes }) => ({
         `<form-field
             :locale="locale"
             :label-text="labelText"
-            :labelDescription="labelDescription"
-            :labelDetails="labelDetails"
+            :label-description="labelDescription"
+            :label-details="labelDetails"
             :field-size="fieldSize"
             input-type="dropdown"
-            :shouldShowLabelText="shouldShowLabelText"            
+            :should-show-label-text="shouldShowLabelText"            
             :has-error="hasError"
             :dropdown-options="dropdownOptions"
             :is-grouped="isGrouped"
             :disabled="isDisabled"
             :placeholder="placeholder"
-            :maxlength="200"
-            :assistiveText="assistiveText"
+            :max-length="200"
+            :assistive-text="assistiveText"
         />`
 });
 
@@ -59,7 +59,7 @@ DropdownDefaultComponent.argTypes = {
     isGrouped:
     {
         control: { type: 'boolean' },
-        description: 'Select whether group or not',
+        description: 'Select whether to remove the margin between all grouped form fields or not.',
         defaultValue: false
     },
     labelDetails:

@@ -68,9 +68,9 @@ RouterLinkComponent.argTypes = {
         description: 'Choose a Button Size',
         defaultValue: 'medium'
     },
-    hasIcon: { description: 'no control on this story' },
-    href: { description: 'no control on this story' },
-    isLoading: { description: 'no control on this story' },
+    hasIcon: { description: 'not available in this story' },
+    href: { description: 'not available in this story' },
+    isLoading: { description: 'not available in this story' },
     toLink:
     {
         control: { type: 'select' },

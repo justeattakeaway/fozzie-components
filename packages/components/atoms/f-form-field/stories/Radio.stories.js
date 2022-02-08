@@ -13,12 +13,11 @@ export const RadioComponent = (args, { argTypes }) => ({
     template: `
         <div>
             <form-field
-                :assistiveText="assistiveText"
+                :assistive-text="assistiveText"
                 :disabled="isDisabled"
                 :has-error="hasError"
                 :is-grouped="isGrouped"
                 :label-text="labelText"
-                :value="value"
                 id="radio-1"
                 input-type="radio"
                 name="group-name" />
@@ -29,8 +28,7 @@ export const RadioComponent = (args, { argTypes }) => ({
                 id="radio-2"
                 input-type="radio"
                 label-text="Second label"
-                name="group-name"
-                value="second-value" />
+                name="group-name"/>
         </div>
         `
 });
@@ -42,7 +40,7 @@ RadioComponent.argTypes = {
     isGrouped:
     {
         control: { type: 'boolean' },
-        description: 'Select whether group or not',
+        description: 'Select whether to remove the margin between all grouped form fields or not.',
         defaultValue: false
     },
     value: {

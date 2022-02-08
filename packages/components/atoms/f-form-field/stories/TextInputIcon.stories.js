@@ -23,7 +23,7 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
         <form-field
             :locale="locale"
             label-text="Text input - Left Icon"
-            :shouldShowLabelText="shouldShowLabelText"
+            :should-show-label-text="shouldShowLabelText"
             input-type="text"
             field-size="small"
             :has-error="hasError">
@@ -35,7 +35,7 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
         <form-field
         :locale="locale"
             label-text="Text input - Right Icon"
-            :shouldShowLabelText="shouldShowLabelText"
+            :should-show-label-text="shouldShowLabelText"
             input-type="text"
             field-size="medium"
             :has-error="hasError">
@@ -47,7 +47,7 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
         <form-field
             :locale="locale"
             label-text="Text input - Both Icons"
-            :shouldShowLabelText="shouldShowLabelText"
+            :should-show-label-text="shouldShowLabelText"
             input-type="text"
             field-size="large"
             :has-error="hasError">
@@ -65,9 +65,9 @@ TextInputIconComponent.storyName = 'Text Input - Icon';
 
 TextInputIconComponent.argTypes = {
     ...SharedArgTypes,
-    labelText: { description: 'no control on this story' },
-    labelDescription: { description: 'no control on this story' },
-    assistiveText: { description: 'no control on this story' },
+    labelText: { description: 'not available in this story' },
+    labelDescription: { description: 'not available in this story' },
+    assistiveText: { description: 'not available in this story' },
     shouldShowLabelText:
     {
         control: { type: 'boolean' },

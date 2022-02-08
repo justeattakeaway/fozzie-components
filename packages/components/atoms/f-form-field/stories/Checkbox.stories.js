@@ -15,12 +15,11 @@ export const CheckboxComponent = (args, { argTypes }) => ({
             :locale="locale"
             :label-text="labelText"
             :label-description="labelDescription"
-            :value="value"
             :has-error="hasError"
             :is-grouped="isGrouped"
             input-type="checkbox"
             :disabled="isDisabled"
-            :assistiveText="assistiveText"
+            :assistive-text="assistiveText"
         />`
 });
 
@@ -31,11 +30,7 @@ CheckboxComponent.argTypes = {
     isGrouped:
     {
         control: { type: 'boolean' },
-        description: 'Select whether group or not',
+        description: 'Select whether to remove the margin between all grouped form fields or not.',
         defaultValue: false
-    },
-    value: {
-        control: { type: 'text' },
-        defaultValue: 'checkboxLabel'
     }
 };

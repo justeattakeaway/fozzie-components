@@ -20,14 +20,14 @@ export const TextInputAffixedComponent = (args, { argTypes }) => ({
     `<form-field
         :locale="locale"
         :label-text="labelText"
-        :shouldShowLabelText="shouldShowLabelText"
+        :should-show-label-text="shouldShowLabelText"
         :input-type="inputType"
         :field-size="fieldSize"
         :has-error="hasError"
         :disabled="isDisabled"
         :placeholder="placeholder"
-        :labelDetails="labelDetails"
-        :assistiveText="assistiveText"
+        :label-details="labelDetails"
+        :assistive-text="assistiveText"
         :prefix="prefix"
         :suffix="suffix"
     />`
@@ -52,7 +52,7 @@ TextInputAffixedComponent.argTypes = {
     labelDetails:
     {
         control: { type: 'text' },
-        description: 'Enter a label details',
+        description: 'Enter label details',
         defaultValue: ''
     },
     shouldShowLabelText:

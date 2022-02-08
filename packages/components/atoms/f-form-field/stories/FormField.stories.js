@@ -25,7 +25,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :disabled="isDisabled"
                 :has-error="hasError"
                 label-text="Checkbox"
-                :labelDescription="labelDescription"
+                :label-description="labelDescription"
                 input-type="checkbox"
                 value="value-text"/>
                 <div>
@@ -33,9 +33,8 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                         :disabled="isDisabled"
                         :has-error="hasError"
                         label-text="Radio Grouped - 1"
-                        :labelDescription="labelDescription"
+                        :label-description="labelDescription"
                         input-type="radio"
-                        valueRadio="first-value"
                         :is-grouped="true"
                         id="radio-1"
                         name="group-name" />
@@ -43,9 +42,8 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                         :disabled="isDisabled"
                         :has-error="hasError"
                         label-text="Radio Grouped - 2"
-                        :labelDescription="labelDescription"
+                        :label-description="labelDescription"
                         input-type="radio"
-                        valueRadio="second-value"
                         :is-grouped="true"
                         id="radio-2"
                         name="group-name" />
@@ -54,9 +52,8 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :disabled="isDisabled"
                 :has-error="hasError"
                 label-text="Radio"
-                :labelDescription="labelDescription"
+                :label-description="labelDescription"
                 input-type="radio"
-                valueRadio="single-value"
                 id="radio-3"
                 name="no-group-name" />
             <form-field
@@ -64,27 +61,27 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :has-error="hasError"
                 :locale="locale"
                 label-text="Dropdown"
-                :labelDescription="labelDescription"
+                :label-description="labelDescription"
                 input-type="dropdown"
-                :shouldShowLabelText="shouldShowLabelText"
+                :should-show-label-text="shouldShowLabelText"
                 field-size="medium"
                 :dropdown-options="dropdownOptions"
                 placeholder=""
-                maxlength="200"
-                labelDetails=""/>
+                max-length="200"
+                label-details=""/>
             <form-field
                 :disabled="isDisabled"
                 :has-error="hasError"
                 :locale="locale"
                 label-text="Dropdown - Icon"
-                :labelDescription="labelDescription"
+                :label-description="labelDescription"
                 input-type="dropdown"
-                :shouldShowLabelText="shouldShowLabelText"
+                :should-show-label-text="shouldShowLabelText"
                 field-size="medium"
                 :dropdown-options="dropdownOptions"
                 placeholder=""
-                maxlength="200"
-                labelDetails="">
+                max-length="200"
+                label-dDetails="">
                 <template v-slot:icon-leading>
                     <AllergyNutIcon />
                 </template>
@@ -94,25 +91,25 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :has-error="hasError"
                 :locale="locale"
                 label-text="Textarea input"
-                :labelDescription="labelDescription"
+                :label-description="labelDescription"
                 input-type="textarea"
-                :shouldShowLabelText="shouldShowLabelText"
+                :should-show-label-text="shouldShowLabelText"
                 cols="30"
                 placeholder=""
                 rows="7"
-                maxlength="200"
+                max-length="200"
                 labelDetails=""/>
             <form-field
                 :disabled="isDisabled"
                 :has-error="hasError"
                 :locale="locale"
                 label-text="Text input - Prefix/Suffix"
-                :labelDescription="labelDescription"
+                :label-description="labelDescription"
                 input-type="text"
-                :shouldShowLabelText="shouldShowLabelText"
+                :should-show-label-text="shouldShowLabelText"
                 field-size="medium"
                 placeholder=""
-                labelDetails=""
+                label-details=""
                 prefix="£"
                 suffix="GBP"/>
             <form-field
@@ -120,21 +117,21 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :has-error="hasError"
                 :locale="locale"
                 label-text="Text input"
-                :labelDescription="labelDescription"
+                :label-description="labelDescription"
                 input-type="text"
-                :shouldShowLabelText="shouldShowLabelText"
+                :should-show-label-text="shouldShowLabelText"
                 field-size="medium"
                 placeholder=""
-                maxlength="200"
-                labelDetails=""/>
+                max-length="200"
+                label-details=""/>
             <form-field
                 :disabled="isDisabled"
                 :has-error="hasError"
                 :locale="locale"
                 label-text="Text input - Left Icon"
-                :labelDescription="labelDescription"
+                :label-description="labelDescription"
                 input-type="text"
-                :shouldShowLabelText="shouldShowLabelText"
+                :should-show-label-text="shouldShowLabelText"
                 field-size="small">
                     <template v-slot:icon-leading>
                         <AllergyNutIcon />
@@ -145,9 +142,9 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             :has-error="hasError"
             :locale="locale"
             label-text="Text input - Right Icon"
-            :labelDescription="labelDescription"
+            :label-description="labelDescription"
             input-type="text"
-            :shouldShowLabelText="shouldShowLabelText"
+            :should-show-label-text="shouldShowLabelText"
             field-size="medium">
             <template v-slot:icon-trailing>
                 <DriverIcon />
@@ -158,7 +155,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             :has-error="hasError"
             :locale="locale"
             label-text="Text input - Both Icons"
-            :labelDescription="labelDescription"
+            :label-description="labelDescription"
             input-type="text"
             field-size="large">
             <template v-slot:icon-leading>
@@ -201,6 +198,6 @@ FormFieldComponent.argTypes = {
         description: 'Select whether to show label text or not',
         defaultValue: true
     },
-    labelText: { description: 'no control on this story' },
-    assistiveText: { description: 'no control on this story' }
+    labelText: { description: 'not available in this story' },
+    assistiveText: { description: 'not available in this story' }
 };

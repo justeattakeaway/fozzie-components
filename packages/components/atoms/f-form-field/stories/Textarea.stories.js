@@ -18,17 +18,17 @@ export const TextareaComponent = (args, { argTypes }) => ({
             :locale="locale"
             :label-text="labelText"
             :input-type="inputType"
-            :shouldShowLabelText="shouldShowLabelText"
+            :should-show-label-text="shouldShowLabelText"
             :has-error="hasError"
             :is-grouped="isGrouped"
             :disabled="isDisabled"
             :cols="30"
             :placeholder="placeholder"
             :rows="7"
-            :maxlength="200"
-            :labelDetails="labelDetails"
-            :labelDescription="labelDescription"
-            :assistiveText="assistiveText"
+            :max-length="200"
+            :label-details="labelDetails"
+            :label-description="labelDescription"
+            :assistive-text="assistiveText"
         />`
 });
 
@@ -39,7 +39,7 @@ TextareaComponent.argTypes = {
     isGrouped:
     {
         control: { type: 'boolean' },
-        description: 'Select whether group or not',
+        description: 'Select whether to remove the margin between all grouped form fields or not.',
         defaultValue: false
     },
     inputType: {
