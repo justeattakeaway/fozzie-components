@@ -40,7 +40,7 @@ commands:
       - when:
         condition:
           or:
-           - equal: [ true, << pipeline.parameters.global-change >> ]
+           - << pipeline.parameters.global-change >>
            - equal: [ master, << pipeline.git.branch >> ]
       - run:
           name: << parameters.command_description >>
@@ -48,7 +48,7 @@ commands:
       - when:
         condition:
           not:
-           - equal: [ true, << pipeline.parameters.global-change >> ]
+           - << pipeline.parameters.global-change >>
            - equal: [ master, << pipeline.git.branch >> ]
       - run:
           name: << parameters.command_description >>
@@ -215,7 +215,7 @@ commands:
       - when:
         condition:
           or:
-           - equal: [ true, << pipeline.parameters.global-change >> ]
+           - equal: << pipeline.parameters.global-change >>
            - equal: [ master, << pipeline.git.branch >> ]
       - run:
           name: Build Storybook for all UI tests
@@ -223,7 +223,7 @@ commands:
       - when:
         condition:
           not:
-           - equal: [ true, << pipeline.parameters.global-change >> ]
+           - << pipeline.parameters.global-change >>
            - equal: [ master, << pipeline.git.branch >> ]
       - run:
           name: Build Storybook for changed package UI tests
@@ -440,7 +440,7 @@ jobs:
           condition:
             or:
             - equal: [ master, << pipeline.git.branch >> ]
-            - equal: [ true, << pipeline.parameters.global-change >> ]
+            - << pipeline.parameters.global-change >>
           steps:
             # Build components based on atomic level - e.g ci:build:atoms
             - build_component_type:
@@ -644,7 +644,7 @@ workflows:
     when:
       or: # Either must be true to trigger
         - equal: [ master, << pipeline.git.branch >> ]
-        - equal: [ true, << pipeline.parameters.global-change >> ]
+        - << pipeline.parameters.global-change >>
     jobs:
       - install:
           context: web-core
