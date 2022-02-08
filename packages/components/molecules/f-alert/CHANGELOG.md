@@ -9,7 +9,7 @@ Latest – to be added to the next release
 *February 8, 2022*
 
 ### Added
-- Visual regression tests to component
+- Visual regression tests
 
 
 v4.2.0

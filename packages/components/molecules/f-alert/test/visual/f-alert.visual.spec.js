@@ -27,6 +27,6 @@ forEach(['success', 'warning', 'info', 'danger'])
         alert.load();
 
         // Assert
-        browser.percyScreenshot(`f-alert - ${type} - dismissible`, 'desktop');
+        browser.percyScreenshot(`f-alert - ${type} - undismissible`, 'desktop');
     });
 });
