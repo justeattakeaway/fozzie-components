@@ -1,13 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
-import {
-    withKnobs,
-    select,
-    boolean
-} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FButton from '../src/components/Button.vue';
+import SharedButtonArgTypes from './sharedButtonArgTypes';
 
 Vue.use(Router);
 
@@ -29,40 +24,17 @@ const routes = [
 
 export default {
     title: 'Components/Atoms/f-button',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const RouterLinkComponent = () => ({
+export const RouterLinkComponent = (args, { argTypes }) => ({
     components: {
         FButton
     },
-
     router: new Router({
         routes
     }),
-
-    props: {
-        buttonType: {
-            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link'], 'primary')
-        },
-
-        buttonSize: {
-            default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
-        },
-
-        disabled: {
-            default: boolean('disabled', false)
-        },
-
-        isFullWidth: {
-            default: boolean('isFullWidth', false)
-        },
-
-        to: {
-            default: select('to', ['/exampleRoute1', '/exampleRoute2'])
-        }
-    },
-
+    props: Object.keys(argTypes),
     template: `
         <div>
             <f-button
@@ -70,7 +42,7 @@ export const RouterLinkComponent = () => ({
                 :buttonSize="buttonSize"
                 :disabled="disabled"
                 :isFullWidth="isFullWidth"
-                :to="to"
+                :to="toLink"
                 :isIcon="false">
                 Default Button Text
             </f-button>
@@ -79,3 +51,31 @@ export const RouterLinkComponent = () => ({
 });
 
 RouterLinkComponent.storyName = 'Router Link';
+
+RouterLinkComponent.argTypes = {
+    ...SharedButtonArgTypes,
+    buttonType:
+    {
+        control: { type: 'select' },
+        options: ['primary', 'secondary', 'outline', 'ghost', 'link'],
+        description: 'Choose a Button Type',
+        defaultValue: 'primary'
+    },
+    buttonSize:
+    {
+        control: { type: 'select' },
+        options: ['xsmall', 'small', 'medium', 'large'],
+        description: 'Choose a Button Size',
+        defaultValue: 'medium'
+    },
+    hasIcon: { description: 'no control on this story' },
+    href: { description: 'no control on this story' },
+    isLoading: { description: 'no control on this story' },
+    toLink:
+    {
+        control: { type: 'select' },
+        options: ['/exampleRoute1', '/exampleRoute2'],
+        description: 'Choose a Link',
+        defaultValue: '/exampleRoute1'
+    }
+};

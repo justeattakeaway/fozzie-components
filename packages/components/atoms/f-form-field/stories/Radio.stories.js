@@ -1,42 +1,15 @@
-import {
-    withKnobs, select, text, boolean
-} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
+import SharedArgTypes from './SharedArgTypes';
 
 export default {
     title: 'Components/Atoms/f-form-field',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const RadioComponent = () => ({
+export const RadioComponent = (args, { argTypes }) => ({
     components: { FormField },
-    props: {
-        locale: {
-            default: select('Locale', ['en-GB', 'en-AU'])
-        },
-        labelText: {
-            default: text('Label Text', 'Radio Label')
-        },
-        value: {
-            default: text('Value', 'radioLabel')
-        },
-        isDisabled: {
-            default: boolean('isDisabled', false)
-        },
-        hasError: {
-            default: boolean('hasError', false)
-        },
-        isGrouped: {
-            default: boolean('isGrouped', false)
-        },
-        assistiveText: {
-            default: text('Assistive Text', 'Change my properties via knobs')
-        }
-    },
-    parameters: {
-        notes: 'some documentation here'
-    },
+    props: Object.keys(argTypes),
     template: `
         <div>
             <form-field
@@ -63,3 +36,17 @@ export const RadioComponent = () => ({
 });
 
 RadioComponent.storyName = 'Radio';
+
+RadioComponent.argTypes = {
+    ...SharedArgTypes,
+    isGrouped:
+    {
+        control: { type: 'boolean' },
+        description: 'Select whether group or not',
+        defaultValue: false
+    },
+    value: {
+        control: { type: 'text' },
+        defaultValue: 'radioLabel'
+    }
+};

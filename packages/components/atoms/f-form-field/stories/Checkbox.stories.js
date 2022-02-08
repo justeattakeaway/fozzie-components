@@ -1,47 +1,18 @@
-import {
-    withKnobs, select, text, boolean
-} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
+import SharedArgTypes from './SharedArgTypes';
 
 export default {
     title: 'Components/Atoms/f-form-field',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const CheckboxComponent = () => ({
+export const CheckboxComponent = (args, { argTypes }) => ({
     components: { FormField },
-    props: {
-        locale: {
-            default: select('Locale', ['en-GB', 'en-AU'])
-        },
-        labelText: {
-            default: text('Label Text', 'Checkbox Label')
-        },
-        labelDescription: {
-            default: text('Label Description', '')
-        },
-        value: {
-            default: text('Value', 'checkboxLabel')
-        },
-        isDisabled: {
-            default: select('isDisabled', [null, 'disabled'])
-        },
-        hasError: {
-            default: boolean('hasError', false)
-        },
-        isGrouped: {
-            default: boolean('isGrouped', false)
-        },
-        assistiveText: {
-            default: text('Assistive Text', '')
-        }
-    },
-    parameters: {
-        notes: 'some documentation here'
-    },
+    props: Object.keys(argTypes),
     template:
         `<form-field
+            :locale="locale"
             :label-text="labelText"
             :label-description="labelDescription"
             :value="value"
@@ -49,7 +20,22 @@ export const CheckboxComponent = () => ({
             :is-grouped="isGrouped"
             input-type="checkbox"
             :disabled="isDisabled"
-            :assistiveText="assistiveText"/>`
+            :assistiveText="assistiveText"
+        />`
 });
 
 CheckboxComponent.storyName = 'Checkbox';
+
+CheckboxComponent.argTypes = {
+    ...SharedArgTypes,
+    isGrouped:
+    {
+        control: { type: 'boolean' },
+        description: 'Select whether group or not',
+        defaultValue: false
+    },
+    value: {
+        control: { type: 'text' },
+        defaultValue: 'checkboxLabel'
+    }
+};

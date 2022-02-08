@@ -1,220 +1,166 @@
-import {
-    withKnobs, select, text, boolean, object
-} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
     AllergyNutIcon,
     DriverIcon
 } from '@justeat/f-vue-icons';
 import FormField from '../src/components/FormField.vue';
-import {
-    DEFAULT_FIELD_SIZE,
-    VALID_FIELD_SIZES,
-    VALID_TEXT_INPUT_TYPES
-} from '../src/constants';
+import SharedArgTypes from './SharedArgTypes';
 
 export default {
     title: 'Components/Atoms/f-form-field',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const FormFieldComponent = () => ({
-    components: { FormField, AllergyNutIcon, DriverIcon },
-    props: {
-        locale: {
-            default: select('Locale', ['en-GB', 'en-AU'])
-        },
-        labelText: {
-            default: text('Label Text', 'Checkbox Label')
-        },
-        labelDescription: {
-            default: text('Label Description', '')
-        },
-        value: {
-            default: text('Value', 'checkboxLabel')
-        },
-        isDisabled: {
-            default: boolean('isDisabled', false)
-        },
-        hasError: {
-            default: boolean('hasError', false)
-        },
-        isGrouped: {
-            default: boolean('isGrouped', false)
-        },
-        fieldSize: {
-            default: select('Field Size', VALID_FIELD_SIZES, DEFAULT_FIELD_SIZE)
-        },
-        shouldShowLabelText: {
-            default: boolean('shouldShowLabelText', true)
-        },
-        dropdownOptions: {
-            default: object('Dropdown Options', [
-                {
-                    disabled: true,
-                    selected: true,
-                    text: 'Disabled option',
-                    value: ''
-                },
-                {
-                    text: 'As soon as possible',
-                    value: '2021-01-01T01:00:00.000Z'
-                },
-                {
-                    text: 'Today in 5 minutes',
-                    value: '2021-01-01T01:05:00.000Z'
-                }
-            ])
-        },
-        labelDetails: {
-            default: text('Label Details', '')
-        },
-        placeholder: {
-            default: text('Placeholder', '')
-        },
-        valueRadio: {
-            default: text('Value', 'radioLabel')
-        },
-        inputType: {
-            default: select('Input Type', VALID_TEXT_INPUT_TYPES)
-        },
-        prefix: {
-            default: text('prefix', '£')
-        },
-        suffix: {
-            default: text('suffix', 'GBP')
-        }
+export const FormFieldComponent = (args, { argTypes }) => ({
+    components: {
+        FormField,
+        AllergyNutIcon,
+        DriverIcon
     },
-    parameters: {
-        notes: 'some documentation here'
-    },
+    props: Object.keys(argTypes),
     template: `
         <div
         class="u-spacingBottom--large storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide">
             <form-field
-                :label-text="labelText"
-                :label-description="labelDescription"
-                :value="value"
-                :has-error="hasError"
-                :is-grouped="isGrouped"
-                input-type="checkbox"
-                :disabled="isDisabled"/>
-            <form-field
                 :disabled="isDisabled"
                 :has-error="hasError"
-                :is-grouped="isGrouped"
-                :label-text="labelText"
-                :valueRadio="value"
-                id="radio-1"
-                input-type="radio"
-                name="group-name" />
-            <form-field
-                :disabled="isDisabled"
-                :is-grouped="isGrouped"
-                id="radio-2"
-                input-type="radio"
-                label-text="Second label"
-                name="group-name"
-                valueRadio="second-value" />
-            <form-field
-                :locale="locale"
-                :label-text="labelText"
-                input-type="dropdown"
-                :shouldShowLabelText="shouldShowLabelText"
-                :field-size="fieldSize"
-                :has-error="hasError"
-                :dropdown-options="dropdownOptions"
-                :is-grouped="isGrouped"
-                :disabled="isDisabled"
-                :placeholder="placeholder"
-                :maxlength="200"
-                :labelDetails="labelDetails"
-                :labelDescription="labelDescription"/>
-            <form-field
-                :locale="locale"
-                :label-text="labelText"
-                input-type="dropdown"
-                :shouldShowLabelText="shouldShowLabelText"
-                :field-size="fieldSize"
-                :has-error="hasError"
-                :is-grouped="isGrouped"
-                :disabled="isDisabled"
-                :placeholder="placeholder"
-                :maxlength="200"
-                :labelDetails="labelDetails"
+                label-text="Checkbox"
                 :labelDescription="labelDescription"
-                :dropdown-options="dropdownOptions">
+                input-type="checkbox"
+                value="value-text"/>
+                <div>
+                    <form-field
+                        :disabled="isDisabled"
+                        :has-error="hasError"
+                        label-text="Radio Grouped - 1"
+                        :labelDescription="labelDescription"
+                        input-type="radio"
+                        valueRadio="first-value"
+                        :is-grouped="true"
+                        id="radio-1"
+                        name="group-name" />
+                    <form-field
+                        :disabled="isDisabled"
+                        :has-error="hasError"
+                        label-text="Radio Grouped - 2"
+                        :labelDescription="labelDescription"
+                        input-type="radio"
+                        valueRadio="second-value"
+                        :is-grouped="true"
+                        id="radio-2"
+                        name="group-name" />
+                </div>
+            <form-field
+                :disabled="isDisabled"
+                :has-error="hasError"
+                label-text="Radio"
+                :labelDescription="labelDescription"
+                input-type="radio"
+                valueRadio="single-value"
+                id="radio-3"
+                name="no-group-name" />
+            <form-field
+                :disabled="isDisabled"
+                :has-error="hasError"
+                :locale="locale"
+                label-text="Dropdown"
+                :labelDescription="labelDescription"
+                input-type="dropdown"
+                :shouldShowLabelText="shouldShowLabelText"
+                field-size="medium"
+                :dropdown-options="dropdownOptions"
+                placeholder=""
+                maxlength="200"
+                labelDetails=""/>
+            <form-field
+                :disabled="isDisabled"
+                :has-error="hasError"
+                :locale="locale"
+                label-text="Dropdown - Icon"
+                :labelDescription="labelDescription"
+                input-type="dropdown"
+                :shouldShowLabelText="shouldShowLabelText"
+                field-size="medium"
+                :dropdown-options="dropdownOptions"
+                placeholder=""
+                maxlength="200"
+                labelDetails="">
                 <template v-slot:icon-leading>
                     <AllergyNutIcon />
                 </template>
             </form-field>
             <form-field
+                :disabled="isDisabled"
+                :has-error="hasError"
                 :locale="locale"
-                :label-text="labelText"
+                label-text="Textarea input"
+                :labelDescription="labelDescription"
                 input-type="textarea"
                 :shouldShowLabelText="shouldShowLabelText"
-                :has-error="hasError"
-                :is-grouped="isGrouped"
-                :disabled="isDisabled"
-                :cols="30"
-                :placeholder="placeholder"
-                :rows="7"
-                :maxlength="200"
-                :labelDetails="labelDetails"
-                :labelDescription="labelDescription"/>
+                cols="30"
+                placeholder=""
+                rows="7"
+                maxlength="200"
+                labelDetails=""/>
             <form-field
-                locale="en-GB"
-                label-text="Affixed Field"
-                :shouldShowLabelText="shouldShowLabelText"
-                :input-type="inputType"
-                :field-size="fieldSize"
-                :has-error="hasError"
                 :disabled="isDisabled"
-                :placeholder="placeholder"
-                :labelDetails="labelDetails"
-                :prefix="prefix"
-                :suffix="suffix"/>
-            <form-field
+                :has-error="hasError"
                 :locale="locale"
-                :label-text="labelText"
-                :input-type="inputType"
-                :shouldShowLabelText="shouldShowLabelText"
-                :field-size="fieldSize"
-                :has-error="hasError"
-                :is-grouped="isGrouped"
-                :disabled="isDisabled"
-                :placeholder="placeholder"
-                :maxlength="200"
-                :labelDetails="labelDetails"
-                :labelDescription="labelDescription"/>
-            <form-field
-                locale="en-GB"
-                label-text="Text input - Left Icon"
-                :shouldShowLabelText="shouldShowLabelText"
+                label-text="Text input - Prefix/Suffix"
+                :labelDescription="labelDescription"
                 input-type="text"
-                field-size="small"
-                :has-error="hasError">
+                :shouldShowLabelText="shouldShowLabelText"
+                field-size="medium"
+                placeholder=""
+                labelDetails=""
+                prefix="£"
+                suffix="GBP"/>
+            <form-field
+                :disabled="isDisabled"
+                :has-error="hasError"
+                :locale="locale"
+                label-text="Text input"
+                :labelDescription="labelDescription"
+                input-type="text"
+                :shouldShowLabelText="shouldShowLabelText"
+                field-size="medium"
+                placeholder=""
+                maxlength="200"
+                labelDetails=""/>
+            <form-field
+                :disabled="isDisabled"
+                :has-error="hasError"
+                :locale="locale"
+                label-text="Text input - Left Icon"
+                :labelDescription="labelDescription"
+                input-type="text"
+                :shouldShowLabelText="shouldShowLabelText"
+                field-size="small">
                     <template v-slot:icon-leading>
                         <AllergyNutIcon />
                     </template>
             </form-field>
         <form-field
-            locale="en-GB"
+            :disabled="isDisabled"
+            :has-error="hasError"
+            :locale="locale"
             label-text="Text input - Right Icon"
-            :shouldShowLabelText="shouldShowLabelText"
+            :labelDescription="labelDescription"
             input-type="text"
-            field-size="medium"
-            :has-error="hasError">
+            :shouldShowLabelText="shouldShowLabelText"
+            field-size="medium">
             <template v-slot:icon-trailing>
                 <DriverIcon />
             </template>
         </form-field>
         <form-field
-            locale="en-GB"
+            :disabled="isDisabled"
+            :has-error="hasError"
+            :locale="locale"
             label-text="Text input - Both Icons"
+            :labelDescription="labelDescription"
             input-type="text"
-            field-size="large"
-            :has-error="hasError">
+            field-size="large">
             <template v-slot:icon-leading>
                 <AllergyNutIcon />
             </template>
@@ -227,3 +173,34 @@ export const FormFieldComponent = () => ({
 
 
 FormFieldComponent.storyName = 'Form Fields';
+
+FormFieldComponent.args = {
+    dropdownOptions:  [
+        {
+            disabled: true,
+            selected: true,
+            text: 'Disabled option',
+            value: ''
+        },
+        {
+            text: 'As soon as possible',
+            value: '2021-01-01T01:00:00.000Z'
+        },
+        {
+            text: 'Today in 5 minutes',
+            value: '2021-01-01T01:05:00.000Z'
+        }
+    ]
+};
+
+FormFieldComponent.argTypes = {
+    ...SharedArgTypes,
+    shouldShowLabelText:
+    {
+        control: { type: 'boolean' },
+        description: 'Select whether to show label text or not',
+        defaultValue: true
+    },
+    labelText: { description: 'no control on this story' },
+    assistiveText: { description: 'no control on this story' }
+};
