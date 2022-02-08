@@ -1,4 +1,3 @@
-import { boolean, select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VueCard from '@justeat/f-card/src/components/Card.vue';
 import FAlert from '../src/components/Alert.vue';
@@ -8,25 +7,12 @@ export default {
     decorators: [withA11y]
 };
 
-export const AlertComponent = () => ({
+export const AlertComponent = (args, { argTypes }) => ({
     components: { FAlert, VueCard },
-    props: {
-        locale: {
-            default: select('Locale', ['en-GB', 'es-ES'])
-        },
-        type: {
-            default: select('Type', ['success', 'warning', 'danger', 'info'], 'success')
-        },
-        heading: {
-            default: text('Heading', 'Title of the alert')
-        },
-        isDismissible: {
-            default: boolean('Is it dismissible?', true)
-        }
-    },
+    props: Object.keys(argTypes),
     template: `
     <vue-card
-        locale="en-GB"
+        locale="locale"
         has-outline
         is-page-content-wrapper>
         <f-alert
@@ -46,5 +32,27 @@ export const AlertComponent = () => ({
         </p>
     </vue-card>`
 });
+
+AlertComponent.args = {
+    locale: 'en-GB',
+    type: 'success',
+    heading: 'Title of the alert',
+    isDismissible: true
+};
+
+AlertComponent.argTypes = {
+    locale: {
+        control: { type: 'select', options: ['en-GB', 'es-ES'] }
+    },
+    type: {
+        control: { type: 'select', options: ['success', 'warning', 'danger', 'info'] }
+    },
+    heading: { 
+        control: { type: 'text' }
+    },
+    isDismissible: {
+        control: { type: 'boolean' }
+    }
+};
 
 AlertComponent.storyName = 'f-alert';
