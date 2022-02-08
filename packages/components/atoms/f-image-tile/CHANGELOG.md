@@ -8,7 +8,7 @@ v0.8.0
 *February 8, 2022*
 
 ### Changed
-- Storybook combine stories so ImageTile is always shown within a container.
+- Storybook, combine stories so ImageTile is always shown within a container.
 
 
 v0.7.0

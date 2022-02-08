@@ -33,17 +33,6 @@ export const ImageTileComponent = (args, { argTypes }) => ({
             `
 });
 
-ImageTileComponent.args = {
-    href: '/Chicken',
-    tileId: 'Chicken',
-    displayText: 'Chicken',
-    imgSrc: ImageTileCuisine,
-    isSelected: false,
-    isLink: false,
-    altText: '',
-    fallbackImage: ImageTileWallpaper
-};
-
 ImageTileComponent.argTypes = {
     href: {
         control: { type: 'text' },
@@ -63,6 +52,7 @@ ImageTileComponent.argTypes = {
     imgSrc: {
         control: { type: 'select', options: [ImageTileCuisine, null] },
         description: 'Cuisine image link',
+        defaultValue: ImageTileCuisine
     },
     isSelected: {
         control: { type: 'boolean' },
