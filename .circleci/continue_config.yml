@@ -643,7 +643,7 @@ workflows:
     when:
       or: # Either must be true to trigger
         - equal: [ master, << pipeline.git.branch >> ]
-        - << pipeline.parameters.global-change >>
+        - equal: [true, << pipeline.parameters.global-change >> ]
     jobs:
       - install:
           context: web-core
