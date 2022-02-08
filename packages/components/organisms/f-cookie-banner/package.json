@@ -35,6 +35,8 @@
     "build:static-files": "yarn --cwd ./f-cookie-banner-static build",
     "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
+    "ci:build:organisms": "yarn build",
+    "ci:lint:organisms": "yarn lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
