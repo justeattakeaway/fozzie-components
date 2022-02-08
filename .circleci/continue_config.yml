@@ -442,7 +442,9 @@ jobs:
             - equal: [ master, << pipeline.git.branch >> ]
             - equal: [ true, << pipeline.parameters.global-change >> ]
           steps:
-            - build_all_components
+            # Build components based on atomic level - e.g ci:build:atoms
+            - build_component_type:
+                component_type: << parameters.component_type >>
             - persist_to_workspace:
                 root: .
                 paths:
@@ -461,9 +463,8 @@ jobs:
             and:
               - equal: [ false, << pipeline.parameters.global-change >> ]
           steps:
-            # Lint components based on atomic level - e.g ci:lint:atoms
-            - build_component_type:
-                component_type: << parameters.component_type >>
+            # Build all components
+            - build_all_components
             # Persist the atomic level folder (includes dist of all components within the atomic level) e.g - packages/components/atoms
             - persist_to_workspace:
                 root: << parameters.component_type_folder >>
