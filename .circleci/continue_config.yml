@@ -12,7 +12,7 @@ orbs:
 parameters:
   global-change:
     type: boolean
-    default: false
+    default: true
 
 commands:
   set_deploy_key:
@@ -38,21 +38,18 @@ commands:
     description: Runs commands based on passed parameters
     steps:
       - when:
-        condition:
-          or:
-            - equal: [ true, << pipeline.parameters.global-change >> ]
-            - equal: [ master, << pipeline.git.branch >> ]
-      - run:
-          name: << parameters.command_description >>
-          command: yarn << parameters.command_name >>
+          condition: << pipeline.parameters.global-change >>
+          steps:
+            - run:
+                name: << parameters.command_description >>
+                command: yarn << parameters.command_name >>
       - when:
-        condition:
-          not:
-            - equal: [ true, << pipeline.parameters.global-change >> ]
-            - equal: [ master, << pipeline.git.branch >> ]
-      - run:
-          name: << parameters.command_description >>
-          command: yarn << parameters.command_name >> --since master...HEAD
+          condition:
+            not: << pipeline.parameters.global-change >>
+          steps:
+            - run:
+                name: << parameters.command_description >>
+                command: yarn << parameters.command_name >> --since master...HEAD
 
   save_cache_dist_directories:
     description: Saves cache for dist directories
@@ -213,25 +210,22 @@ commands:
     description: Build Storybook for all UI tests
     steps:
       - when:
-        condition:
-          or:
-            - equal: [ true, << pipeline.parameters.global-change >> ]
-            - equal: [ master, << pipeline.git.branch >> ]
-      - run:
-          name: Build Storybook for all UI tests
-          command: yarn storybook:build
+          condition: << pipeline.parameters.global-change >>
+          steps:
+            - run:
+                name: Build Storybook for all UI tests
+                command: yarn storybook:build
       - when:
-        condition:
-          not:
-            - equal: [ true, << pipeline.parameters.global-change >> ]
-            - equal: [ master, << pipeline.git.branch >> ]
-      - run:
-          name: Build Storybook for changed package UI tests
-          command: yarn storybook:build-changed
-      - persist_to_workspace:
-          root: packages/storybook
-          paths:
-            - '*'
+          condition:
+            not: << pipeline.parameters.global-change >>
+          steps:
+            - run:
+                name: Build Storybook for changed package UI tests
+                command: yarn storybook:build-changed
+            - persist_to_workspace:
+                root: packages/storybook
+                paths:
+                  - '*'
 
   component_tests:
     description: Run Component Tests
@@ -424,23 +418,20 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     parameters:
-       component_type:
-         type: string
+      component_type:
+        type: string
         # Setting a default value so this job can be used by both workflows. Value will always be overridden at workflow level.
-         default: global
-       component_type_folder:
-         type: string
-         # Setting a default value so this job can be used by both workflows. Value will always be overridden at workflow level.
-         default: global
+        default: global
+      component_type_folder:
+        type: string
+        # Setting a default value so this job can be used by both workflows. Value will always be overridden at workflow level.
+        default: global
     steps:
       - attach_workspace:
           at: .
-      # If global-change OR master branch - Build + Lint all packages.
+        # If global-change - Build + Lint all packages.
       - when:
-          condition:
-            or:
-              - equal: [ master, << pipeline.git.branch >> ]
-              - equal: [ true, << pipeline.parameters.global-change >> ]
+          condition: << pipeline.parameters.global-change >>
           steps:
             # Build components based on atomic level - e.g ci:build:atoms
             - build_component_type:
@@ -448,10 +439,10 @@ jobs:
             - lint_component_type:
                 component_type: << parameters.component_type >>
             - persist_to_workspace:
-                  root: .
-                  paths:
-                    - '*'
-            # Only save cache dist if master branch
+                root: << parameters.component_type_folder >>
+                paths:
+                  - '*'
+            #Only save cache dist if master branch
             - when:
                 condition:
                   equal: [ master, << pipeline.git.branch >> ]
@@ -460,13 +451,13 @@ jobs:
       # Else Build + Lint changed packages.
       - when:
           condition:
-            equal: [ false, << pipeline.parameters.global-change >> ]
+            not: << pipeline.parameters.global-change >>
           steps:
             # Build all components
             - build_all_components
-            # Persist the atomic level folder (includes dist of all components within the atomic level) e.g - packages/components/atoms
+            # Persist whole workspace
             - persist_to_workspace:
-                root: << parameters.component_type_folder >>
+                root: .
                 paths:
                   - '*'
             # Lint components based on atomic level - e.g ci:lint:atoms
@@ -576,8 +567,7 @@ workflows:
   # Workflow that's run for non-global changes
   # build_and_test_packages:
   #   when:
-  #     condition: 
-  #       equal: [ false, << pipeline.parameters.global-change >> ]
+  #     not: << pipeline.parameters.global-change >>
   #   jobs:
   #     - install:
   #         context: web-core
@@ -642,7 +632,7 @@ workflows:
     when:
       or: # Either must be true to trigger
         - equal: [ master, << pipeline.git.branch >> ]
-        - equal: [ true, << pipeline.parameters.global-change >> ]
+        - << pipeline.parameters.global-change >>
     jobs:
       - install:
           context: web-core
