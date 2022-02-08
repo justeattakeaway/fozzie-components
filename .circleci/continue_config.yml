@@ -163,19 +163,41 @@ commands:
           keys:
             - build-cache-services-master-
 
-  build_packages:
-    description: Locally builds all packages in the monorepo
+  build_all_components:
+    description: Builds all components in the monorepo
     steps:
       - run_command:
-          command_description: Build packages
+          command_description: Build all components
           command_name: build
 
-  lint_packages:
-    description: Locally lints all packages in the monorepo
+  build_component_type:
+    description: Builds a component type in the monorepo
+    parameters:
+      component_type:
+        type: string
+        default: global
     steps:
       - run_command:
-          command_description: Run linting for packages
+          command_description: Build << parameters.component_type >> components
+          command_name: ci:build:<< parameters.component_type >>
+
+  lint_all_components:
+    description: Lints all components in the monorepo
+    steps:
+      - run_command:
+          command_description: Lint all components
           command_name: lint
+
+  lint_component_type:
+    description: Lints << parameters.component_type >> components
+    parameters:
+      component_type:
+        type: string
+        default: global
+    steps:
+      - run_command:
+          command_description: Run linting for << parameters.component_type >> components
+          command_name: ci:lint:<< parameters.component_type >>
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
@@ -206,6 +228,10 @@ commands:
       - run:
           name: Build Storybook for changed package UI tests
           command: yarn storybook:build-changed
+      - persist_to_workspace:
+          root: packages/storybook
+          paths:
+            - '*'
 
   component_tests:
     description: Run Component Tests
@@ -371,6 +397,7 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps:
       - checkout
+      # Restore 'master' cache
       - restore_cache_dist_directories
       - install_node_dependencies
       - persist_to_workspace:
@@ -396,17 +423,64 @@ jobs:
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
+    parameters:
+       component_type:
+         type: string
+        # Setting a default value so this job can be used by both workflows. Value will always be overridden at workflow level.
+         default: global
+       component_type_folder:
+         type: string
+         # Setting a default value so this job can be used by both workflows. Value will always be overridden at workflow level.
+         default: global
     steps:
       - attach_workspace:
           at: .
-      - build_packages
-      - save_cache_dist_directories
+      # If global-change OR master branch - Build + Lint all packages.
+      - when:
+          condition:
+            or:
+            - equal: [ master, << pipeline.git.branch >> ]
+            - equal: [ true, << pipeline.parameters.global-change >> ]
+          steps:
+            - build_all_components
+            - persist_to_workspace:
+                root: .
+                paths:
+                  - '*'
+            # Only save cache dist if master branch
+            - when:
+                condition:
+                  and:
+                  - equal: [ master, << pipeline.git.branch >> ]
+                steps:
+                  - save_cache_dist_directories
+            - lint_all_components
+      # Else Build + Lint changed packages.
+      - when:
+          condition:
+            and:
+              - equal: [ false, << pipeline.parameters.global-change >> ]
+          steps:
+            # Lint components based on atomic level - e.g ci:lint:atoms
+            - build_component_type:
+                component_type: << parameters.component_type >>
+            # Persist the atomic level folder (includes dist of all components within the atomic level) e.g - packages/components/atoms
+            - persist_to_workspace:
+                root: << parameters.component_type_folder >>
+                paths:
+                  - '*'
+            # Lint components based on atomic level - e.g ci:lint:atoms
+            - lint_component_type:
+                component_type: << parameters.component_type >>
+      - slack_notify_fail
+      - slack_notify_success
+
+  build-storybook:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
       - build_storybook
-      - persist_to_workspace:
-          root: .
-          paths:
-            - '*'
-      - lint_packages
       - slack_notify_fail
       - slack_notify_success
 
@@ -527,6 +601,14 @@ workflows:
               ignore: ['gh-pages', 'master']
           requires:
             - danger-checks
+      - build-storybook:
+          name: build-storybook
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build
       - bundlewatch:
           name: bundlewatch
           context: web-core
@@ -534,7 +616,7 @@ workflows:
             branches:
               ignore: ['gh-pages', 'master']
           requires:
-            - build
+            - build-storybook
       - unit-tests:
           matrix:
             parameters:
@@ -555,6 +637,7 @@ workflows:
               ignore: ['gh-pages', 'master']
           requires:
             - unit-tests-<< matrix.component_type >>
+            - build-storybook
 
   build_and_test_global:
     when:
@@ -575,14 +658,101 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - install
+
       - build:
-          name: build
+          component_type: 'services'
+          component_type_folder: 'packages/services'
+          name: build-services
           context: web-core
           filters:
             branches:
               ignore: ['gh-pages']
           requires:
             - danger-checks
+
+      - build:
+          component_type: 'tools'
+          component_type_folder: 'packages/tools'
+          name: build-tools
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - danger-checks
+
+      - build:
+          component_type: 'atoms'
+          component_type_folder: 'packages/components/atoms'
+          name: build-atoms
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build-tools
+            - build-services
+
+      - build:
+          component_type: 'molecules'
+          component_type_folder: 'packages/components/molecules'
+          name: build-molecules
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build-atoms
+
+      - build:
+          component_type: 'templates'
+          component_type_folder: 'packages/components/tempklates'
+          name: build-templates
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build-molecules
+
+      - build:
+          component_type: 'organisms'
+          component_type_folder: 'packages/components/organisms'
+          name: build-organisms
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build-atoms
+
+      - build:
+          component_type: 'pages'
+          component_type_folder: 'packages/components/pages'
+          name: build-pages
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build-molecules
+            - build-organisms
+
+      - build-storybook:
+          name: build-storybook
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build-tools
+            - build-services
+            - build-atoms
+            - build-molecules
+            - build-organisms
+            - build-pages
+            - build-templates
+
       - bundlewatch:
           name: bundlewatch
           context: web-core
@@ -590,7 +760,15 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - build
+            - build-tools
+            - build-services
+            - build-atoms
+            - build-molecules
+            - build-organisms
+            - build-pages
+            - build-templates
+            - build-storybook
+
       - unit-tests:
           matrix:
             parameters:
@@ -600,7 +778,8 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - build
+            - build-<< matrix.component_type >>
+
       - browser-tests:
           matrix:
             parameters:
@@ -611,6 +790,8 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - unit-tests-<< matrix.component_type >>
+            - build-storybook
+
       - publish-to-npm:
           context: web-core
           filters:
