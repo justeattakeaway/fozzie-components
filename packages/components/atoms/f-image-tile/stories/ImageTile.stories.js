@@ -1,5 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import ImageTile from '../src/components/ImageTile.vue';
+import TestContainer from './TestContainer.vue';
 import ImageTileWallpaper from './images/wallpaper.png';
 import ImageTileCuisine from './images/burgers.jpg';
 
@@ -9,20 +10,39 @@ export default {
 };
 
 export const ImageTileComponent = (args, { argTypes }) => ({
-    components: { ImageTile },
+    components: {
+        ImageTile,
+        TestContainer
+    },
     props: Object.keys(argTypes),
-    template: `<image-tile
-                    :href='href'
-                    :tile-id='tileId'
-                    :is-selected='isSelected'
-                    :is-link='isLink'
-                    :display-text='displayText'
-                    :img-src='imgSrc'
-                    :alt-text='altText'
-                    :fallback-image='fallbackImage'
-                >
-                </image-tile>`
+    template: `
+                <test-container>
+                    <image-tile
+                        :href='href'
+                        :tile-id='tileId'
+                        :is-selected='isSelected'
+                        :is-link='isLink'
+                        :display-text='displayText'
+                        :img-src='imgSrc'
+                        :alt-text='altText'
+                        :fallback-image='fallbackImage'
+                        @toggle="toggleCuisine"
+                    >
+                    </image-tile>
+                </test-container>
+            `
 });
+
+ImageTileComponent.args = {
+    href: '/Chicken',
+    tileId: 'Chicken',
+    displayText: 'Chicken',
+    imgSrc: ImageTileCuisine,
+    isSelected: false,
+    isLink: false,
+    altText: '',
+    fallbackImage: ImageTileWallpaper
+};
 
 ImageTileComponent.argTypes = {
     href: {
