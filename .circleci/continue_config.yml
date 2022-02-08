@@ -695,7 +695,7 @@ workflows:
 
       - build:
           component_type: 'templates'
-          component_type_folder: 'packages/components/tempklates'
+          component_type_folder: 'packages/components/templates'
           name: build-templates
           context: web-core
           filters:
