@@ -749,14 +749,8 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - build-tools
-            - build-services
-            - build-atoms
-            - build-molecules
-            - build-organisms
             - build-pages
             - build-templates
-            - build-storybook
 
       - unit-tests:
           matrix:
