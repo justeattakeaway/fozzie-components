@@ -1,7 +1,3 @@
-// Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-// import {
-//     withKnobs, select, boolean
-// } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import RestaurantCard from '../src/components/RestaurantCard.vue';
 import restaurantLogo from './assets/images/mcdonalds-logo.gif';
@@ -23,7 +19,6 @@ RestaurantCardComponent.args = {
     data: {
         id: '00000',
         name: 'McDonald\'s® - Clapham Junction',
-        disabled: false,
         logoUrl: restaurantLogo,
         imgUrl: restaurantImage,
         isListItem: true,
@@ -76,7 +71,8 @@ RestaurantCardComponent.args = {
             availabilityType: availabilityTypes.PREORDER,
             availabilityTranslatedName: 'Pre-order',
             availabilityMessage: 'Opening at 13:20'
-        }
+        },
+        disabledMessage: 'Not taking orders at the moment'
     },
 
     flags: {

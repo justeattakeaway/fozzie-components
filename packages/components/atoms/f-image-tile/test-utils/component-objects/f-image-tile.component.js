@@ -18,4 +18,8 @@ module.exports = class ImageTile extends Page {
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
+
+    isComponentClickable () {
+        return this.component.isClickable();
+    }
 };

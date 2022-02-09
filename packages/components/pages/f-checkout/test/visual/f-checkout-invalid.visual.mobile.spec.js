@@ -16,7 +16,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Get Checkout Errors', checkoutInfo.errorCode);
+            .withQuery('&knob-Get Checkout Options', checkoutInfo.errorCode);
 
         // Act
         checkout.loadError();
@@ -37,7 +37,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
             .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
             .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Get Checkout Errors', checkoutInfo.errorCode);
+            .withQuery('&knob-Get Checkout Options', checkoutInfo.errorCode);
 
         // Act
         checkout.loadError();

@@ -4,13 +4,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.20.0
+------------------------------
+*February 9, 2022*
+
+### Changed
+- Updated versions of `f-alert`, `f-button`, `f-card`, `f-card-with-content`, `f-error-message`, `f-form-field`, `f-link` and `f-mega-modal`.
+
+### Fixed
+- Available fulfilment times to return error status only if there is a response.
+- No available time stories and mocked requests
+
+
+v3.19.3
+------------------------------
+*February 7, 2022*
+
+### Changed
+- Tidy up `stories` folder.
+
+
 v3.19.2
 ------------------------------
 *February 4, 2022*
 
 ### Fixed
 - Handle Available fulfilment times responses without issues
-- 
+
 ### Changed
 - Upgraded to ESLint v8
 

@@ -2273,11 +2273,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.3.0.tgz#b56e48e48d69eed746fe3fb245bb47e915b97252"
   integrity sha512-iFcYy3ou8QkqkfCRHRyVlR9HOcllXJHsdLiRLKSdJNk6nZLP/ecTNmw4uqHWfhj4pJZU5JgmDno0Wdz1jpuZsQ==
 
-"@justeat/f-card-with-content@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-0.2.1.tgz#1af84f431073ad3f5529a4b4db983563d6cf526e"
-  integrity sha512-WGyfr0T/8eFqVUKNrr+PQTO8V3opidzUcT9s0fwJ4uU2q3SU31kqts9shDSgpDXKx7LBNxKqx/W8bUFgEU9Ejw==
-
 "@justeat/f-card-with-content@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.0.0.tgz#d2e376e121a1b1c89418000a04cb9d5ef3134019"
@@ -2351,6 +2346,14 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
 
+"@justeat/f-form-field@4.7.1":
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.7.1.tgz#86a82f2a3d443fffe28fdf45ac333b625d6eb650"
+  integrity sha512-ORrSg/YMxycCpySmpjGh+mt8R/zceGWpUoW5qgCglzZxsk77/7TDW4zBY/h/S78e6FHvBPSjj460GLI7XDdZDQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "2.5.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2387,11 +2390,6 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
-
-"@justeat/f-mega-modal@4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.0.2.tgz#7b2cea1bb64498db688b4c5ec004c4fda12672c1"
-  integrity sha512-MbnGuwij3mZMkqr5LSKBKWNlGOGZ03FfVyJyZNx+BAseqEnrogmkN3P3hhOmetgh7Sv1O9Vlg94/geCM20S3uA==
 
 "@justeat/f-navigation-links@0.3.0":
   version "0.3.0"

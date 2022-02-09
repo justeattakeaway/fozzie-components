@@ -18,7 +18,7 @@ module.exports = class Alert extends Page {
     }
 
     waitForComponent () {
-        super.waitForComponent(this.component);
+        super.waitForComponent(this.component, 1000);
     }
 
     clickExitButton () {

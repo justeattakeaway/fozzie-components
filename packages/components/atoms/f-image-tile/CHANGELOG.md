@@ -3,10 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (to be added to next release)
+v0.8.0
 ------------------------------
-*February 4, 2022*
+*February 8, 2022*
+
+### Changed
+- Storybook, combine stories so ImageTile is always shown within a container.
+
+
+v0.7.0
+------------------------------
+*February 8, 2022*
+
+### Added
+- Clickable component test
 
 ### Changed
 - Upgraded to ESLint v8
