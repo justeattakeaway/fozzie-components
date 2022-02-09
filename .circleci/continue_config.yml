@@ -585,7 +585,7 @@ workflows:
             branches:
               ignore: ['gh-pages', 'master']
           requires:
-            - build-storybook
+            - build
       - unit-tests:
           matrix:
             parameters:
@@ -595,7 +595,7 @@ workflows:
             branches:
               ignore: ['gh-pages', 'master']
           requires:
-            - build
+            - bundlewatch
       - browser-tests:
           matrix:
             parameters:
@@ -605,7 +605,7 @@ workflows:
             branches:
               ignore: ['gh-pages', 'master']
           requires:
-            - build
+            - bundlewatch
 
   build_and_test_global:
     when:
