@@ -2345,6 +2345,13 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.4.0"
 
+"@justeat/f-alert@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.1.0.tgz#f0b3585d0e72885d0ec8f923b7699aaf7cdcd3bc"
+  integrity sha512-/cT3C41bfQTqH66NEFZo6Jn0zvgvy+Sy0O1bxXnnN8jpf3ny8rXhxIm0uP6HLyDpfA+ZGTh8uvu4U0h8cCGcSQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2359,6 +2366,11 @@
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-0.2.1.tgz#1af84f431073ad3f5529a4b4db983563d6cf526e"
   integrity sha512-WGyfr0T/8eFqVUKNrr+PQTO8V3opidzUcT9s0fwJ4uU2q3SU31kqts9shDSgpDXKx7LBNxKqx/W8bUFgEU9Ejw==
+
+"@justeat/f-card-with-content@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.0.0.tgz#d2e376e121a1b1c89418000a04cb9d5ef3134019"
+  integrity sha512-5BT0MwSDu+JJ1641V25M6NJZrttsxJqz7JaRkfez4x7NoC3BkxW0CbcpRQxGSw9u9pEmMG6io1drNDjzPyrgyQ==
 
 "@justeat/f-card@3.0.0":
   version "3.0.0"
@@ -2456,6 +2468,11 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
+
+"@justeat/f-mega-modal@4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.0.2.tgz#7b2cea1bb64498db688b4c5ec004c4fda12672c1"
+  integrity sha512-MbnGuwij3mZMkqr5LSKBKWNlGOGZ03FfVyJyZNx+BAseqEnrogmkN3P3hhOmetgh7Sv1O9Vlg94/geCM20S3uA==
 
 "@justeat/f-navigation-links@0.3.0":
   version "0.3.0"

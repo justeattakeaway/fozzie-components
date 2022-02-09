@@ -511,7 +511,7 @@ jobs:
           at: .
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
-          command: yarn global add @vue/cli @vue/cli-service-global
+          command: yarn global add @vue/cli @vue/cli-service-global http-server
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
