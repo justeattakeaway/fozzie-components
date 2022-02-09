@@ -1,7 +1,6 @@
 <template>
     <form-dropdown
         v-show="shouldShowSelector"
-        id="time-selection"
         name="order-time"
         :class="$style['c-checkout-selector']"
         input-type="dropdown"
