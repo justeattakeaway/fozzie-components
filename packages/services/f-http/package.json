@@ -36,7 +36,6 @@
     "ci:build:services": "yarn build",
     "ci:lint:services": "yarn lint",
     "lint:fix": "yarn lint --fix",
-    "storybook:build": "vite build",
     "test": "jest",
     "ci:test:services": "yarn test",
     "test:coverage": "jest test:unit --coverage"

@@ -226,6 +226,9 @@ commands:
           root: packages/storybook/storybook-static
           paths:
             - '*'
+            - 'css/*'
+            - 'img/*'
+            - 'static/*'
 
   component_tests:
     description: Run Component Tests
