@@ -222,13 +222,6 @@ commands:
             - run:
                 name: Build Storybook for changed package UI tests
                 command: yarn storybook:build-changed
-      - persist_to_workspace:
-          root: packages/storybook/storybook-static
-          paths:
-            - '*'
-            - 'css/*'
-            - 'img/*'
-            - 'static/*'
 
   component_tests:
     description: Run Component Tests
@@ -468,15 +461,6 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
-  build-storybook:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: .
-      - build_storybook
-      - slack_notify_fail
-      - slack_notify_success
-
   bundlewatch:
     executor: node
     environment:
@@ -515,6 +499,7 @@ jobs:
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global http-server
+      - build_storybook
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
@@ -730,15 +715,6 @@ workflows:
             - build-molecules
             - build-organisms
 
-      - build-storybook:
-          name: build-storybook
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - build-pages
-            - build-templates
 
       - bundlewatch:
           name: bundlewatch
@@ -771,7 +747,6 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - unit-tests-<< matrix.component_type >>
-            - build-storybook
 
       - publish-to-npm:
           context: web-core
