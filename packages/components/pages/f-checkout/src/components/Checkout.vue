@@ -691,7 +691,7 @@ export default {
                     this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
                 }
             } catch (error) {
-                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
+                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response?.status));
             }
         },
 

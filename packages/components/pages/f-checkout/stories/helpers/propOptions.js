@@ -26,10 +26,9 @@ const getCheckoutOptions = {
     None: null,
     'Error - Access Forbidden (Response from server is an error)': accessForbiddenErrorCode,
     'Error - Any other (Response from server is an error)': '500',
-    'Error - No Time Available': timeUnavailable,
     'Scheduled Time - Asap': 'user-selected-asap',
     'Scheduled Time - Later': 'user-selected-later',
-    'Scheduled Time - Unavailable': timeUnavailable,
+    'Scheduled Time - Unavailable': `user-selected-${timeUnavailable}`,
     [serverTimeout]: serverTimeoutIssue
 };
 
@@ -48,6 +47,7 @@ const placeOrderErrorOptions = {
 
 const fulfilmentTimeErrors = {
     none: null,
+    'Error - No Time Available': timeUnavailable,
     'Available Time Issues': 'issues'
 };
 
