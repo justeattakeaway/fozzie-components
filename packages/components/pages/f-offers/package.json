@@ -52,20 +52,20 @@
     "jwt-decode": "3.1.2"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "js-cookie": "2.2.1",
-    "@justeat/f-trak": "0.7.1",
     "@braze/web-sdk": "3.3.0",
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
+    "@justeat/f-trak": "0.7.1",
+    "js-cookie": "2.2.1",
     "vuex": ">=3.5.1"
   },
   "devDependencies": {
     "@braze/web-sdk": "3.3.0",
-    "@justeat/f-content-cards": "6.0.0-beta.2",
     "@justeat/f-button": "3.0.2",
+    "@justeat/f-content-cards": "6.0.0-beta.2",
     "@justeat/f-media-element": "2.0.0",
+    "@justeat/f-mega-modal": "3.0.0",
     "@justeat/f-searchbox": "6.3.0",
     "@justeat/f-trak": "0.7.1",
-    "@justeat/f-mega-modal": "3.0.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-unit-jest": "4.4.6",
