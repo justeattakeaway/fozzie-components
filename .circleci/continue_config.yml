@@ -553,68 +553,59 @@ jobs:
 workflows:
  
   # Workflow that's run for non-global changes
-  # build_and_test_packages:
-  #   when:
-  #     not: << pipeline.parameters.global-change >>
-  #   jobs:
-  #     - install:
-  #         context: web-core
-  #         filters:
-  #           branches:
-  #             ignore: ['gh-pages', 'master']
-  #     - danger-checks:
-  #         name: danger-checks
-  #         context: web-core
-  #         filters:
-  #           branches:
-  #             ignore: ['gh-pages', 'master']
-  #         requires:
-  #           - install
-  #     - build:
-  #         name: build
-  #         context: web-core
-  #         filters:
-  #           branches:
-  #             ignore: ['gh-pages', 'master']
-  #         requires:
-  #           - danger-checks
-  #     - build-storybook:
-  #         name: build-storybook
-  #         context: web-core
-  #         filters:
-  #           branches:
-  #             ignore: ['gh-pages']
-  #         requires:
-  #           - build
-  #     - bundlewatch:
-  #         name: bundlewatch
-  #         context: web-core
-  #         filters:
-  #           branches:
-  #             ignore: ['gh-pages', 'master']
-  #         requires:
-  #           - build-storybook
-  #     - unit-tests:
-  #         matrix:
-  #           parameters:
-  #             component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
-  #         context: web-core
-  #         filters:
-  #           branches:
-  #             ignore: ['gh-pages', 'master']
-  #         requires:
-  #           - build
-  #     - browser-tests:
-  #         matrix:
-  #           parameters:
-  #             component_type: ['atoms', 'molecules', 'organisms', 'pages']
-  #         context: web-core
-  #         filters:
-  #           branches:
-  #             ignore: ['gh-pages', 'master']
-  #         requires:
-  #           - unit-tests-<< matrix.component_type >>
-  #           - build-storybook
+  build_and_test_packages:
+    when:
+      not: << pipeline.parameters.global-change >>
+    jobs:
+      - install:
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+      - danger-checks:
+          name: danger-checks
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+          requires:
+            - install
+      - build:
+          name: build
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+          requires:
+            - danger-checks
+      - bundlewatch:
+          name: bundlewatch
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+          requires:
+            - build-storybook
+      - unit-tests:
+          matrix:
+            parameters:
+              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+          requires:
+            - build
+      - browser-tests:
+          matrix:
+            parameters:
+              component_type: ['atoms', 'molecules', 'organisms', 'pages']
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+          requires:
+            - build
 
   build_and_test_global:
     when:
@@ -715,7 +706,6 @@ workflows:
             - build-molecules
             - build-organisms
 
-
       - bundlewatch:
           name: bundlewatch
           context: web-core
@@ -746,7 +736,6 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - unit-tests-<< matrix.component_type >>
             - build-pages
             - build-templates
             - bundlewatch
