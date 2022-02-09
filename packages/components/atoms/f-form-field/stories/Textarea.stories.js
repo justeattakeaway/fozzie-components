@@ -51,7 +51,7 @@ TextareaComponent.argTypes = {
     labelDetails:
     {
         control: { type: 'text' },
-        description: 'Enter a label details',
+        description: 'Enter label details',
         defaultValue: ''
     },
     shouldShowLabelText:
