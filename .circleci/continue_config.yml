@@ -747,6 +747,9 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - unit-tests-<< matrix.component_type >>
+            - build-pages
+            - build-templates
+            - bundlewatch
 
       - publish-to-npm:
           context: web-core
