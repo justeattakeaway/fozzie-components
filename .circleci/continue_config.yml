@@ -223,7 +223,7 @@ commands:
                 name: Build Storybook for changed package UI tests
                 command: yarn storybook:build-changed
       - persist_to_workspace:
-          root: packages/storybook
+          root: packages/storybook/storybook-static
           paths:
             - '*'
 
