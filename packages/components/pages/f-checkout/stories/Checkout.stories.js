@@ -11,7 +11,7 @@ import fCheckoutExperimentationModule from '../src/store/checkoutExperimentation
 import CheckoutMock from './api/checkoutMock';
 import { TENANT_MAP } from '../src/constants';
 import { authToken } from './helpers';
-import { propOptions, timeUnavailable } from './helpers/propOptions';
+import { propOptions } from './helpers/propOptions';
 
 export default {
     title: 'Components/Pages',
@@ -86,8 +86,8 @@ export const CheckoutComponent = () => ({
         },
 
         getCheckoutUrl () {
-            if (this.getCheckoutOptions && this.getCheckoutOptions !== timeUnavailable) {
-                return `/checkout-${this.getCheckoutOptions}-error`;
+            if (this.getCheckoutOptions) {
+                return `/checkout-${this.serviceType}-${this.getCheckoutOptions}`;
             }
 
             return `/checkout-${this.serviceType}-${TENANT_MAP[this.locale]}`;
