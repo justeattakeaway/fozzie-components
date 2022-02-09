@@ -6,7 +6,7 @@ import {
     CHECKOUT_METHOD_COLLECTION
 } from '../../../../src/constants';
 import {
-    NOTE_TYPES, TENANTS, DELIVERY_TIMES, getSuccess, getNoResponse
+    NOTE_TYPES, TENANTS, DELIVERY_TIMES, httpMethods, httpStatusCodes, getSuccess
 } from '../../../helpers';
 
 function serviceType (tenant = TENANTS.uk) {
@@ -53,25 +53,46 @@ function buildTenantSpecificGetCheckoutRequests () {
     return tenantRequests;
 }
 
-function scheduledTimes () {
+function deliveryRequests () {
     const tenantRequests = [];
 
-    Object.values(DELIVERY_TIMES).forEach(time => {
+    Object.values([
+        CHECKOUT_METHOD_DELIVERY,
+        CHECKOUT_METHOD_DINEIN,
+        CHECKOUT_METHOD_COLLECTION
+    ]).forEach(type => {
         tenantRequests.push(
             {
-                url: `/checkout-collection-user-selected-${time}`,
+                url: `/checkout-${type}-user-selected-asap`,
                 ...getSuccess,
-                payload: getCheckout(...serviceType().collection, { scheduledTime: DELIVERY_TIMES.asap })
+                payload: getCheckout(...serviceType().collection, { isPreOrder: false, scheduledTime: DELIVERY_TIMES.asap })
             },
             {
-                url: `/checkout-delivery-user-selected-${time}`,
+                url: `/checkout-${type}-user-selected-later`,
                 ...getSuccess,
-                payload: getCheckout(...serviceType().delivery, { scheduledTime: DELIVERY_TIMES.asap })
+                payload: getCheckout(...serviceType().delivery, { isPreOrder: true, scheduledTime: DELIVERY_TIMES.later })
             },
             {
-                url: `/checkout-dinein-user-selected-${time}`,
+                url: `/checkout-${type}-user-selected-time-unavailable`,
                 ...getSuccess,
-                payload: getCheckout(...serviceType().dinein, { scheduledTime: DELIVERY_TIMES.asap })
+                payload: getCheckout(...serviceType().dinein, { isPreOrder: true, scheduledTime: DELIVERY_TIMES.unavailable })
+            },
+            {
+                url: `/checkout-${type}-403`,
+                method: httpMethods.get,
+                responseStatus: httpStatusCodes.forbidden,
+                payload: errors.forbidden
+            },
+            {
+                url: `/checkout-${type}-500`,
+                method: httpMethods.get,
+                responseStatus: httpStatusCodes.internalServerError,
+                payload: errors.server
+            },
+            {
+                url: `/checkout-${type}-timeout`,
+                method: httpMethods.get,
+                responseStatus: httpStatusCodes.noResponse
             }
         );
     });
@@ -80,20 +101,6 @@ function scheduledTimes () {
 }
 
 export default [
-    {
-        url: '/checkout-403-error',
-        ...getNoResponse,
-        payload: errors.forbidden
-    },
-    {
-        url: '/checkout-500-error',
-        ...getNoResponse,
-        payload: errors.server
-    },
-    {
-        url: '/checkout-timeout-error',
-        ...getNoResponse
-    },
-    ...scheduledTimes(),
+    ...deliveryRequests(),
     ...buildTenantSpecificGetCheckoutRequests()
 ];

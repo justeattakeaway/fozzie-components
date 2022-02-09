@@ -25,37 +25,37 @@ function getNoteTypes (notes) {
     return noteTypes[notes] || null;
 }
 
-function getTime (asap, scheduledTime) {
+function getTime (isPreOrder, scheduledTime) {
     const times = {
         [DELIVERY_TIMES.later]: {
             from: '2020-01-01T02:15:00.000Z',
             to: '2020-01-01T02:15:00.000Z'
         },
-        [DELIVERY_TIMES.now]: {
-            from: '2020-01-01T02:15:00.000Z',
-            to: '2020-01-01T02:15:00.000Z'
+        [DELIVERY_TIMES.asap]: {
+            from: '2020-01-01T01:30:00.000Z',
+            to: '2020-01-01T01:30:00.000Z'
         },
         [DELIVERY_TIMES.unavailable]: {
-            from: '2019-01-01T02:15:00.000Z',
-            to: '2019-01-01T02:15:00.000Z'
+            from: '2019-01-01T02:30:00.000Z',
+            to: '2019-01-01T02:30:00.000Z'
         }
     };
 
     const scheduled = times[scheduledTime] || null;
 
     return {
-        asap,
-        ...scheduled
+        asap: !isPreOrder,
+        scheduled
     };
 }
 
 export default function (serviceType = CHECKOUT_METHOD_DELIVERY, tenant = 'uk', additionalToggles) {
-    const isAsap = additionalToggles?.isAsap || true;
+    const isPreOrder = !!additionalToggles?.isPreOrder;
     const scheduledTime = additionalToggles?.scheduledTime;
     const notes = additionalToggles?.notes;
 
     const customer = buildCustomer(tenant);
-    const time = getTime(isAsap, scheduledTime);
+    const time = getTime(isPreOrder, scheduledTime);
     const noteTypes = getNoteTypes(notes);
 
     let location;

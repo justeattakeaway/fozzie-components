@@ -41,7 +41,7 @@ export const getSuccess = {
 
 export const getNoResponse = {
     method: httpMethods.get,
-    responseStatus: httpStatusCodes.ok
+    responseStatus: httpStatusCodes.noResponse
 };
 
 export const postSuccess = {
