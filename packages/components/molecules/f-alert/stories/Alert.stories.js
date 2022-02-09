@@ -47,7 +47,7 @@ AlertComponent.argTypes = {
     type: {
         control: { type: 'select', options: ['success', 'warning', 'danger', 'info'] }
     },
-    heading: { 
+    heading: {
         control: { type: 'text' }
     },
     isDismissible: {
