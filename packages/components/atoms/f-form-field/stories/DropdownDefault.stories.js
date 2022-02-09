@@ -28,7 +28,7 @@ export const DropdownDefaultComponent = (args, { argTypes }) => ({
             :is-grouped="isGrouped"
             :disabled="isDisabled"
             :placeholder="placeholder"
-            :max-length="200"
+            maxlength="200"
             :assistive-text="assistiveText"
         />`
 });

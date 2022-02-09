@@ -27,7 +27,7 @@ export const TextInputDefaultComponent = (args, { argTypes }) => ({
             :is-grouped="isGrouped"
             :disabled="isDisabled"
             :placeholder="placeholder"
-            :max-length="200"
+            maxlength="200"
             :label-details="labelDetails"
             :label-description="labelDescription"
             :assistive-text="assistiveText"/>`

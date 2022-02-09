@@ -26,8 +26,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :has-error="hasError"
                 label-text="Checkbox"
                 :label-description="labelDescription"
-                input-type="checkbox"
-                value="value-text"/>
+                input-type="checkbox"/>
                 <div>
                     <form-field
                         :disabled="isDisabled"
@@ -66,9 +65,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :should-show-label-text="shouldShowLabelText"
                 field-size="medium"
                 :dropdown-options="dropdownOptions"
-                placeholder=""
-                max-length="200"
-                label-details=""/>
+                maxlength="200"/>
             <form-field
                 :disabled="isDisabled"
                 :has-error="hasError"
@@ -79,9 +76,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :should-show-label-text="shouldShowLabelText"
                 field-size="medium"
                 :dropdown-options="dropdownOptions"
-                placeholder=""
-                max-length="200"
-                label-dDetails="">
+                maxlength="200">
                 <template v-slot:icon-leading>
                     <AllergyNutIcon />
                 </template>
@@ -95,10 +90,8 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 input-type="textarea"
                 :should-show-label-text="shouldShowLabelText"
                 cols="30"
-                placeholder=""
                 rows="7"
-                max-length="200"
-                labelDetails=""/>
+                maxlength="200"/>
             <form-field
                 :disabled="isDisabled"
                 :has-error="hasError"
@@ -108,8 +101,6 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 input-type="text"
                 :should-show-label-text="shouldShowLabelText"
                 field-size="medium"
-                placeholder=""
-                label-details=""
                 prefix="£"
                 suffix="GBP"/>
             <form-field
@@ -121,9 +112,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 input-type="text"
                 :should-show-label-text="shouldShowLabelText"
                 field-size="medium"
-                placeholder=""
-                max-length="200"
-                label-details=""/>
+                maxlength="200"/>
             <form-field
                 :disabled="isDisabled"
                 :has-error="hasError"
