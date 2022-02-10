@@ -587,7 +587,7 @@ workflows:
             branches:
               ignore: ['gh-pages', 'master']
           requires:
-            - danger-checks
+            - unit-tests-<< matrix.component_type >>
       - bundlewatch:
           name: bundlewatch
           context: web-core
