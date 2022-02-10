@@ -570,6 +570,16 @@ workflows:
               ignore: ['gh-pages', 'master']
           requires:
             - install
+      - unit-tests:
+          matrix:
+            parameters:
+              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages', 'master']
+          requires:
+            - danger-checks
       - build:
           name: build
           context: web-core
@@ -586,16 +596,6 @@ workflows:
               ignore: ['gh-pages', 'master']
           requires:
             - build
-      - unit-tests:
-          matrix:
-            parameters:
-              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages', 'master']
-          requires:
-            - bundlewatch
       - browser-tests:
           matrix:
             parameters:
@@ -626,6 +626,17 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - install
+
+      - unit-tests:
+          matrix:
+            parameters:
+              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - danger-checks
 
       - build:
           component_type: 'services'
@@ -673,6 +684,17 @@ workflows:
             - build-atoms
 
       - build:
+          component_type: 'organisms'
+          component_type_folder: 'packages/components/organisms'
+          name: build-organisms
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build-molecules
+
+      - build:
           component_type: 'templates'
           component_type_folder: 'packages/components/templates'
           name: build-templates
@@ -684,17 +706,6 @@ workflows:
             - build-molecules
 
       - build:
-          component_type: 'organisms'
-          component_type_folder: 'packages/components/organisms'
-          name: build-organisms
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - build-atoms
-
-      - build:
           component_type: 'pages'
           component_type_folder: 'packages/components/pages'
           name: build-pages
@@ -703,7 +714,6 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - build-molecules
             - build-organisms
 
       - bundlewatch:
@@ -715,17 +725,6 @@ workflows:
           requires:
             - build-pages
             - build-templates
-
-      - unit-tests:
-          matrix:
-            parameters:
-              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - build-<< matrix.component_type >>
 
       - browser-tests:
           matrix:
