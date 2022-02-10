@@ -21,6 +21,7 @@ workflows:
           # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
           mapping: |
             ^(?!.*packages|yarn\.lock|bear\.png|\.editorconfig).*$ global-change true
+            ^(.*packages).*$ global-change false
           base-revision: master
           # this is the path of the configuration we should trigger once
           # path filtering and pipeline parameter value updates are
