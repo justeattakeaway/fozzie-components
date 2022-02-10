@@ -12,7 +12,7 @@ orbs:
 parameters:
   global-change:
     type: boolean
-    default: false
+    default: true
 
 commands:
   set_deploy_key:
