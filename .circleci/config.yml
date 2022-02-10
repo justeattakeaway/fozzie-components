@@ -21,7 +21,7 @@ workflows:
           # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
           mapping: |
             ^(?=.*^package\.json|\.circleci).*$ global-change true
-          base-revision: master
+          base-revision: dyanmic-config-multi-config
           # this is the path of the configuration we should trigger once
           # path filtering and pipeline parameter value updates are
           # complete. In this case, we are using the parent dynamic
