@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form",
   "description": "Fozzie Form - fozzie form",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "dist/f-form.umd.min.js",
   "maxBundleSize": "50kB",
   "files": [
@@ -61,9 +61,9 @@
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.5.0",
-    "@justeat/f-button": "3.0.2",
-    "@justeat/f-form-field": "4.0.1",
-    "@justeat/f-error-message": "1.0.0",
+    "@justeat/f-button": "3.3.0",
+    "@justeat/f-form-field": "4.6.0",
+    "@justeat/f-error-message": "1.1.0",
     "node-sass-magic-importer": "5.3.2",
     "@samhammer/vue-cli-plugin-stylelint": "2.1.0",
     "@vue/cli-plugin-babel": "4.5.15",

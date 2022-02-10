@@ -1,47 +1,29 @@
-import {
-    withKnobs, select, boolean
-} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
     AllergyNutIcon,
     DriverIcon
 } from '@justeat/f-vue-icons';
 import FormField from '../src/components/FormField.vue';
+import SharedArgTypes from './SharedArgTypes';
 
 export default {
     title: 'Components/Atoms/f-form-field',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const TextInputIconComponent = () => ({
+export const TextInputIconComponent = (args, { argTypes }) => ({
     components: {
         FormField,
         AllergyNutIcon,
         DriverIcon
     },
-    props: {
-        locale: {
-            default: select('Locale', ['en-GB', 'en-AU'])
-        },
-        shouldShowLabelText: {
-            default: boolean('shouldShowLabelText', true)
-        },
-        isDisabled: {
-            default: select('isDisabled', [null, 'disabled'])
-        },
-        hasError: {
-            default: boolean('hasError', false)
-        }
-    },
-    parameters: {
-        notes: 'some documentation here'
-    },
+    props: Object.keys(argTypes),
     template: `
     <div class="wrapper--vertical">
         <form-field
-            locale="en-GB"
+            :locale="locale"
             label-text="Text input - Left Icon"
-            :shouldShowLabelText="shouldShowLabelText"
+            :should-show-label-text="shouldShowLabelText"
             input-type="text"
             field-size="small"
             :has-error="hasError">
@@ -51,9 +33,9 @@ export const TextInputIconComponent = () => ({
         </form-field>
 
         <form-field
-            locale="en-GB"
+        :locale="locale"
             label-text="Text input - Right Icon"
-            :shouldShowLabelText="shouldShowLabelText"
+            :should-show-label-text="shouldShowLabelText"
             input-type="text"
             field-size="medium"
             :has-error="hasError">
@@ -63,8 +45,9 @@ export const TextInputIconComponent = () => ({
         </form-field>
 
         <form-field
-            locale="en-GB"
+            :locale="locale"
             label-text="Text input - Both Icons"
+            :should-show-label-text="shouldShowLabelText"
             input-type="text"
             field-size="large"
             :has-error="hasError">
@@ -79,3 +62,16 @@ export const TextInputIconComponent = () => ({
 });
 
 TextInputIconComponent.storyName = 'Text Input - Icon';
+
+TextInputIconComponent.argTypes = {
+    ...SharedArgTypes,
+    labelText: { description: 'not available in this story' },
+    labelDescription: { description: 'not available in this story' },
+    assistiveText: { description: 'not available in this story' },
+    shouldShowLabelText:
+    {
+        control: { type: 'boolean' },
+        description: 'Select whether to show label text or not',
+        defaultValue: true
+    }
+};

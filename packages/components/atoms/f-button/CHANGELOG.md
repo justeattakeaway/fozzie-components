@@ -3,12 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (to be added to next release)
+
+
+v3.3.1
 ------------------------------
-*February 4, 2022*
+*February 8, 2022*
 
 ### Changed
 - Upgraded to ESLint v8
+- Converted Storybook Knobs to Controls
 
 
 v3.3.0
