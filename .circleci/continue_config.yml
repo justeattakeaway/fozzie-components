@@ -654,7 +654,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - danger-checks
+            - unit-tests-services
 
       - build:
           component_type: 'tools'
@@ -665,7 +665,7 @@ workflows:
             branches:
               ignore: ['gh-pages']
           requires:
-            - danger-checks
+            - unit-tests-tools
 
       - build:
           component_type: 'atoms'
@@ -678,6 +678,7 @@ workflows:
           requires:
             - build-tools
             - build-services
+            - unit-tests-atoms
 
       - build:
           component_type: 'molecules'
@@ -689,6 +690,7 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - build-atoms
+            - unit-tests-molecules
 
       - build:
           component_type: 'organisms'
@@ -700,6 +702,7 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - build-molecules
+            - unit-tests-organisms
 
       - build:
           component_type: 'templates'
@@ -711,6 +714,7 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - build-molecules
+            - unit-tests-templates
 
       - build:
           component_type: 'pages'
@@ -722,6 +726,7 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - build-organisms
+            - unit-tests-pages
 
       - bundlewatch:
           name: bundlewatch
