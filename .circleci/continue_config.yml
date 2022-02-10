@@ -587,7 +587,14 @@ workflows:
             branches:
               ignore: ['gh-pages', 'master']
           requires:
-            - unit-tests-<< matrix.component_type >>
+            - unit-tests-tools
+            - unit-tests-services
+            - unit-tests-atoms
+            - unit-tests-molecules
+            - unit-tests-organisms
+            - unit-tests-pages
+            - unit-tests-templates
+
       - bundlewatch:
           name: bundlewatch
           context: web-core
