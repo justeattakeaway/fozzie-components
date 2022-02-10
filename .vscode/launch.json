@@ -17,6 +17,26 @@
             }
         },
         {
+            "name": "Run Single Spec - Visual - Chrome",
+            "type": "node",
+            "request": "launch",
+            "args": ["wdio-chrome.conf.js", "--spec", "${file}"],
+            "cwd": "${workspaceFolder}",
+            "autoAttachChildProcesses": true,
+            "program": "${workspaceRoot}/node_modules/@wdio/cli/bin/wdio.js",
+            "console": "integratedTerminal",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**/*.js",
+                "${workspaceFolder}/lib/**/*.js",
+                "<node_internals>/**/*.js"
+            ],
+            "env": {
+                "JE_ENV": "test",
+                "TEST_TYPE": "visual",
+                "SPEC_FILE": "${file}"
+            }
+        },
+        {
             "name": "Run Single Spec - Component - Chrome",
             "type": "node",
             "request": "launch",

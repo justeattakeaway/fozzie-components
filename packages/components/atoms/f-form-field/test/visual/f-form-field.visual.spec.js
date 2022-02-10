@@ -15,11 +15,12 @@ describe('f-form-field visual tests', () => {
             browser.percyScreenshot('f-form-field - Base State', 'desktop');
         });
     });
+
     describe('disabled state', () => {
         it('should display all fields in a disabled state', () => {
             // Arrange
             formField = new FormField()
-            .withQuery('&knob-isDisabled', true);
+            .withQuery('args', 'isDisabled:disabled');
 
             // Act
             formField.load();
@@ -28,11 +29,12 @@ describe('f-form-field visual tests', () => {
             browser.percyScreenshot('f-form-field - Disabled State', 'desktop');
         });
     });
+
     describe('errored state', () => {
         it('should display all fields in an errored state', () => {
             // Arrange
             formField = new FormField()
-            .withQuery('&knob-hasError', true);
+            .withQuery('args', 'hasError:true');
 
             // Act
             formField.load();

@@ -46,8 +46,8 @@ MegaModalComponent.args = {
     hasCloseButton: true,
     closeOnBlur: true,
     closeButtonCopy: 'Close modal',
-    titleCopy: 'This place isn’t taking orders' 
-}
+    titleCopy: 'This place isn’t taking orders'
+};
 
 MegaModalComponent.argTypes = {
     isOpen: {
@@ -89,6 +89,6 @@ MegaModalComponent.argTypes = {
     titleCopy: {
         control: { type: 'text' }
     }
-}
+};
 
 MegaModalComponent.storyName = 'f-mega-modal';
