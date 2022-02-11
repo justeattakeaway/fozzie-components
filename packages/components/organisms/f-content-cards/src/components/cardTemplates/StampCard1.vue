@@ -275,7 +275,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$stampCard-subStatus-colour: #017a39; /* $color-green in PIE - not in fozzie-colour-palette yet */
+$stampCard-subStatus-colour: $color-support-positive;
 $stampCard-expiryInfo-colour: $color-content-subdued;
 
 $stampCard-iconSize-landscape: 56px;
@@ -291,9 +291,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     flex-direction: column;
     padding: spacing(d);
     border-radius: $radius-rounded-c;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
-    0 3px 1px -2px rgba(0, 0, 0, 0.07),
-    0 1px 5px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: $elevation-01;
 
     &,
     &:hover,
@@ -308,7 +306,6 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
     @include media($stampCard-responsive-mobileViewBreakpoint) {
         width: auto;
-        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.12);
         max-width: none;
     }
 }

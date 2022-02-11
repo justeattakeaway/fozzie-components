@@ -53,7 +53,7 @@ export default {
         margin: 0 spacing() spacing(e) 0;
         width: 100%;
         padding: spacing(e) spacing(d);
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: $elevation-01;
 
         @include media('>=narrowMid') {
             flex-direction: row;
