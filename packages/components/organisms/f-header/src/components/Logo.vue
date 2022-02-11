@@ -22,6 +22,7 @@ import {
 } from '@justeat/f-vue-icons';
 
 export default {
+    name: 'HeaderLogo',
     components: {
         JeLogo,
         MlLogo,
@@ -89,8 +90,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-
-    // link with the logo
+// link with the logo
     .c-logo {
         display: block;
         display: flex;

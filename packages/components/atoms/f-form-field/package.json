@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
   "description": "Fozzie Form Field - Fozzie Form Field Component",
-  "version": "4.5.1",
+  "version": "4.7.2",
   "main": "dist/f-form-field.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -31,14 +31,16 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-form-field ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_FORM_FIELD} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "ci:test:atoms": "yarn test",
     "ci:test-component:chrome:atoms": "yarn test-component:chrome",
+    "ci:test:visual:atoms": "yarn test:visual",
     "ci:test-a11y:chrome:atoms": "yarn test-a11y:chrome"
   },
   "browserslist": [
@@ -54,10 +56,10 @@
   "devDependencies": {
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
     "@justeat/f-wdio-utils": "0.5.0",
-    "node-sass-magic-importer": "5.3.2"
+    "node-sass-magic-importer": "5.3.2",
+    "postcss-assets": "5.0.0"
   }
 }

@@ -1,7 +1,6 @@
 <template>
     <form-dropdown
         v-show="shouldShowSelector"
-        id="time-selection"
         name="order-time"
         :class="$style['c-checkout-selector']"
         input-type="dropdown"
@@ -30,6 +29,7 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import { CHECKOUT_METHOD_DINEIN, VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
+    name: 'CheckoutSelector',
     components: {
         Alert,
         FormDropdown
@@ -170,6 +170,6 @@ export default {
 
 <style lang="scss" module>
 .c-checkout-selector {
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
 }
 </style>

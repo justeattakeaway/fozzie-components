@@ -39,14 +39,13 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-legalField-certificates {
     display: flex;
     align-items: center;
 
     @include media('<wide') {
         order: 2;
-        padding: spacing(x2);
+        padding: spacing(d);
     }
 
     p {

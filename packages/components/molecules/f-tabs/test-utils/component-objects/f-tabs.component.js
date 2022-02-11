@@ -26,7 +26,7 @@ module.exports = class Tabs extends Page {
     }
 
     set expectedTabButton (tabTitle) {
-        this.tabButtonValue = this.tabButtons.filter(element => element.getText().includes(tabTitle))[0];
+        [this.tabButtonValue] = this.tabButtons.filter(element => element.getText().includes(tabTitle));
     }
 
     get tabButton () { return this.tabButtonValue != null ? this.tabButtonValue : 'Please set an expected tab button value'; }

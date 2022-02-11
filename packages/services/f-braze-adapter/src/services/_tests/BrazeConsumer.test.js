@@ -70,19 +70,19 @@ describe('BrazeConsumer', () => {
         ${'brands'} | ${{ 'Consumer brands must be an Array': {} }}
         ${'customFilters'} | ${{ 'Consumer customFilters must be an Array': {} }}
     `('should throw an error if $parameter is $value', async ({ parameter, value }) => {
-    // Arrange
-    function instantiateBrazeConsumer () {
-        const testOptions = {
-            ...mockConsumerOptions,
-            [parameter]: value[Object.keys(value)[0]]
-        };
-        // eslint-disable-next-line no-unused-vars
-        const consumer = new BrazeConsumer(testOptions);
-    }
+        // Arrange
+        function instantiateBrazeConsumer () {
+            const testOptions = {
+                ...mockConsumerOptions,
+                [parameter]: value[Object.keys(value)[0]]
+            };
+            // eslint-disable-next-line no-unused-vars
+            const consumer = new BrazeConsumer(testOptions);
+        }
 
-    // Assert
-    expect(instantiateBrazeConsumer).toThrow(Object.keys(value)[0]);
-});
+        // Assert
+        expect(instantiateBrazeConsumer).toThrow(Object.keys(value)[0]);
+    });
 
     it('should return an array of callbacks from getContentCardCallbacks method', () => {
         // Arrange

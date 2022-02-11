@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-mega-modal",
   "description": "Fozzie Mega Modal – A Vue.js modal component",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "main": "dist/f-mega-modal.common.js",
   "maxBundleSize": "6kB",
   "files": [
@@ -31,7 +31,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-mega-modal ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
@@ -50,12 +50,11 @@
     "body-scroll-lock": "3.x"
   },
   "devDependencies": {
-    "@justeat/f-button": "3.2.0",
+    "@justeat/f-button": "3.3.0",
     "@justeat/f-vue-icons": "2.4.0",
     "@justeat/f-wdio-utils": "0.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
     "body-scroll-lock": "3.0.3",

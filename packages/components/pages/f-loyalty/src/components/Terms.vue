@@ -9,6 +9,12 @@
     </div>
 </template>
 
+<script>
+export default {
+    name: 'LoyaltyTerms'
+};
+</script>
+
 <style lang="scss" module>
 .c-loyalty-terms {
     display: flex;
@@ -18,7 +24,7 @@
 }
 
 .c-loyalty-terms-link {
-    margin: spacing(x3) 0;
+    margin: spacing(e) 0;
     text-align: center;
     font-weight: $font-body-strong-s-weight;
     text-decoration: none;

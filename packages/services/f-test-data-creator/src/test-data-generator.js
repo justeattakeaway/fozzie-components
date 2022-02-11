@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const crypto = require('crypto');
 
 module.exports = class TestDataGenerator {

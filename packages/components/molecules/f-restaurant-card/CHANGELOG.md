@@ -3,6 +3,54 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.17.0
+------------------------------
+*Februrary 07, 2022*
+### Added
+- new `disabledMessage` prop that is rendered when a restaurant is disabled
+- unit tests to test `disabledMessage` rendering logic
+### Changed
+- remove `disabled` prop
+- remove any disabled check business logic from component
+- add new color support to `IconText` component
+- simplify SCSS color theme logic in `IconText` component using a mixin
+- update storybook with the new prop changes
+
+
+v0.16.1
+------------------------------
+*Februrary 03, 2022*
+### Changed
+- Use new `spacing()` values
+
+v0.16.0
+------------------------------
+*Februrary 02, 2022*
+
+### Added
+- New `RestaurantAvailability` component for displaying pre-order and collection info
+- Supporting unit tests
+- New blue colour variant to `IconText` class modifiers
+- Storybook file for the `RestaurantAvailability` component
+### Changed
+- Updated f-vue-icons to `3.5.0`
+- Use new clock-small icon on ETA
+- Directly target the SVG path elements in `IconText` colour modifiers to avoid default fills present in some icons
+- Simplified restaurant Storybook selector
+- Use pie design token aliases for `IconText` colours
+
+v0.15.0
+------------------------------
+*January 31, 2022*
+
+### Added
+- A renderless component to enable conditional dynamic components that do not render extra markup if the criteria is not met
+### Changed
+- Wrapped each data point on the restaurant card in a dynamic component that is injected into the card by the consumer - it will currently resolve to the injected component (i.e. an error boundary) or a renderless component
+- Use better semantic markup for restaurant tags
+- Added styling override to prevent fozzie list styling from affecting restaurant tags in SearchWeb
+- Do not render ratings subcomponent if entire ratings data is missing
+
 v0.14.0
 ------------------------------
 *January 20, 2022*

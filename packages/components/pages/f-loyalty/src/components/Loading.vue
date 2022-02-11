@@ -34,7 +34,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $loyalty-loadingCardWidthDesktop: 392px;
 $loyalty-cardWidthTablet: 344px;
 $loyalty-loadingCardHeight: 135px;
@@ -59,7 +58,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     margin: spacing();
     width: $loyalty-loadingCardWidthDesktop;
     height: $loyalty-loadingCardHeight;
-    padding: spacing(x2);
+    padding: spacing(d);
     border-radius: $border-radius;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     0 3px 1px -2px rgba(0, 0, 0, 0.07),

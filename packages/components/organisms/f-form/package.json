@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form",
   "description": "Fozzie Form - fozzie form",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "dist/f-form.umd.min.js",
   "maxBundleSize": "50kB",
   "files": [
@@ -32,7 +32,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-form ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
@@ -59,13 +59,12 @@
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.5.0",
-    "@justeat/f-button": "3.0.2",
-    "@justeat/f-form-field": "4.0.1",
-    "@justeat/f-error-message": "1.0.0",
+    "@justeat/f-button": "3.3.0",
+    "@justeat/f-form-field": "4.6.0",
+    "@justeat/f-error-message": "1.1.0",
     "node-sass-magic-importer": "5.3.2",
     "@samhammer/vue-cli-plugin-stylelint": "2.1.0",
     "@vue/cli-plugin-babel": "4.5.15",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.5.15",
     "@vue/test-utils": "1.2.2"
   }

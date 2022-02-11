@@ -2,13 +2,13 @@
     <p
         :class="{
             [$style['c-restaurantCard-iconText']]: true,
+            [$style[`c-restaurantCard-iconText--${color}`]]: true,
             [$style['c-restaurantCard-iconText--bold']]: isBold
         }">
         <span
             v-if="showIcon"
             :class="{
                 [$style['c-restaurantCard-iconText-icon']]: true,
-                [$style[`c-restaurantCard-iconText-icon--${color}`]]: true,
                 [$style['c-restaurantCard-iconText-icon--hideOnMidBelow']]: hideIconInTileView
             }"
             data-test-id="icon-text-icon">
@@ -16,8 +16,7 @@
         </span>
         <span
             :class="{
-                [$style['c-restaurantCard-iconText-content']]: true,
-                [$style[`c-restaurantCard-iconText-content--${color}`]]: true
+                [$style['c-restaurantCard-iconText-content']]: true
             }"
             data-test-id="icon-text-visible-text">
             {{ text }}
@@ -66,6 +65,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+@mixin themedColor($color) {
+    color: $color;
+    path {
+        fill: $color;
+    }
+}
+
 .c-restaurantCard-iconText {
     @include font-size();
     margin: spacing() 0;
@@ -79,17 +85,13 @@ export default {
 
 .c-restaurantCard-iconText-content {
     flex: 1;
-    line-height: spacing(x2);
-}
-
-.c-restaurantCard-iconText-content--green {
-    color: $color-green;
+    line-height: spacing(d);
 }
 
 .c-restaurantCard-iconText-icon {
-    width: spacing(x2);
-    height: spacing(x2);
-    margin-right: spacing(x0.5);
+    width: spacing(d);
+    height: spacing(d);
+    margin-right: spacing(a);
 }
 
 .c-restaurantCard-iconText-icon--hideOnMidBelow {
@@ -98,7 +100,15 @@ export default {
     }
 }
 
-.c-restaurantCard-iconText-icon--green {
-    fill: $color-green;
+.c-restaurantCard-iconText--colorSupportPositive {
+    @include themedColor($color-support-positive);
+}
+
+.c-restaurantCard-iconText--colorSupportInfo {
+    @include themedColor($color-support-info);
+}
+
+.c-restaurantCard-iconText--colorSupportError {
+    @include themedColor($color-support-error);
 }
 </style>

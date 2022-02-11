@@ -6,11 +6,13 @@ let checkout;
 describe('f-checkout "delivery" component tests', () => {
     describe('uk tenant', () => {
         beforeEach(() => {
+            // Arrange
             checkout = new Checkout();
             checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true);
 
+            // Act
             checkout.load();
         });
 
@@ -26,12 +28,14 @@ describe('f-checkout "delivery" component tests', () => {
     describe('au tenant', () => {
         describe('and age verification is not required', () => {
             beforeEach(() => {
+                // Arrange
                 checkout = new Checkout();
                 checkout.withQuery('&knob-Service Type', 'delivery')
                     .withQuery('&knob-Is User Logged In', false)
                     .withQuery('&knob-Is ASAP available', true)
                     .withQuery('&knob-Locale', 'en-AU');
 
+                // Act
                 checkout.load();
             });
 
@@ -63,16 +67,19 @@ describe('f-checkout "delivery" component tests', () => {
                 .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
                 .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
                 .withQuery('&knob-Locale', checkoutInfo.locale)
-                .withQuery('&knob-Restrictions', checkoutInfo.restrictions);
+                .withQuery('&knob-Get Basket Options', checkoutInfo.restrictions);
 
+                // Act
                 checkout.loadAgeVerification();
             });
 
             it('should display the age verification', () => {
+                // Assert
                 expect(checkout.isAgeVerificationDisplayed()).toBe(true);
             });
 
             it('should display a field error if the age is younger than 18', () => {
+                // Arrange
                 const todaysDate = new Date();
                 const dob = {
                     day: todaysDate.getDay(),
@@ -80,8 +87,11 @@ describe('f-checkout "delivery" component tests', () => {
                     year: todaysDate.getFullYear() - 17 // The user is 17 years old
                 };
 
+                // Act
                 checkout.populateAgeVerificationForm(dob);
                 checkout.ageVerificationSubmitButton.click();
+
+                // Assert
                 expect(checkout.isAgeVerificationErrorDisplayed()).toBe(true);
             });
         });
@@ -90,38 +100,27 @@ describe('f-checkout "delivery" component tests', () => {
 
 describe('f-checkout "delivery" - split notes - component tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
                 .withQuery('&knob-Note types', 'get-notes-config-split');
 
+        // Act
         checkout.load();
         checkout.waitForComponent();
-    });
-
-    it('should open the order notes accordion and populate it', () => {
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Note types', 'get-notes-config');
-
-        checkout.load();
-        checkout.waitForComponent();
-
-        // Assert
-        checkout.expandAndPopulateNote('orderAccordionHeader', 'orderNote', 'This is a order note');
-        checkout.goToPayment();
     });
 
     it('should open the courier and kitchen notes accordions and populate them', () => {
+        // Arrange
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true)
                 .withQuery('&knob-Note types', 'get-notes-config-split');
 
+        // Act
         checkout.load();
         checkout.waitForComponent();
 

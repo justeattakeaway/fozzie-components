@@ -44,7 +44,8 @@
                                 data-test-id="cookie-policy-link"
                                 is-distinct
                                 :href="copy.cookiePolicyLinkUrl"
-                                target="_blank">
+                                target="_blank"
+                                rel="noopener noreferrer">
                                 {{ copy.cookiePolicyLinkText }}
                             </v-link>
                             {{ copy.textLine4 }}
@@ -503,7 +504,7 @@ export default {
 
 .c-cookieBanner-content {
     margin: 0 auto;
-    padding: spacing(x4);
+    padding: spacing(f);
     text-align: left;
 }
 
@@ -516,7 +517,7 @@ export default {
 @include media ('<mid') {
     .c-cookieBanner-card {
         flex-direction: column;
-        padding: spacing(x2) 0;
+        padding: spacing(d) 0;
     }
 
     .c-cookieBanner-ios {
@@ -525,13 +526,13 @@ export default {
 
     .c-cookieBanner-content,
     .c-cookieBanner-cta {
-        padding: spacing(x2) spacing(x3) spacing(x0.5);
+        padding: spacing(d) spacing(e) spacing(a);
     }
 }
 
 @include media ('>=mid') {
     .c-cookieBanner-cta {
-        padding: spacing(x4);
+        padding: spacing(f);
         min-width: 352px;
         margin: 0 auto;
     }

@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     COMPONENT,
@@ -32,7 +31,7 @@ module.exports = class AccountInfo extends Page {
         deleteAccountLink: {
             get cta () { return $(DELETE_ACCOUNT_LINK); }
         }
-    }
+    };
 
     fields = {
         firstName: {
@@ -72,7 +71,7 @@ module.exports = class AccountInfo extends Page {
             get emptyError () { return $(FIELDS.postcode.emptyError); },
             get invalidError () { return $(FIELDS.postcode.invalidError); }
         }
-    }
+    };
 
     load () {
         super.load(this.component);
@@ -96,21 +95,6 @@ module.exports = class AccountInfo extends Page {
 
     /**
     * @description
-    * Select all the text in the field and then performs a backspace to clear the field
-    *
-    * @param {String} fieldName The name of the field input it is clearing
-    */
-    clearBlurField (fieldName) {
-        // Determines the OS
-        const CONTROL = process.platform === 'darwin' ? 'Command' : '\uE009';
-        const el = this.fields[fieldName].input;
-        el.click();
-        el.keys([CONTROL, 'a']);
-        el.keys(['Backspace']);
-    }
-
-    /**
-    * @description
     * Tab out of provided field
     *
     * @param {String} fieldName The name of the field to tab out of
@@ -118,16 +102,6 @@ module.exports = class AccountInfo extends Page {
     tabOutOfField (fieldName) {
         const el = this.fields[fieldName].input;
         el.keys(['Tab']);
-    }
-
-    /**
-    * @description
-    * Inputs customer details into the account-info component.
-    *
-    * @param {Object} customerInput customer input details
-    */
-    populateAccountForm (field, customerInput) {
-        this.fields[field].input.setValue(customerInput[field].input);
     }
 
     clickOutOfInputField () {

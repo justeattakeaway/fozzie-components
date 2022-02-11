@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.1.0
+------------------------------
+*January 28, 2022*
+
+### Changed
+- `spacing` references to new mapping from fozzie e.g spacing(x2) > spacing(d).
+
 
 v1.0.0
 ------------------------------

@@ -18,6 +18,7 @@
                     :class="[$style['c-cookieWarning-btn']]"
                     data-test-id="cookieBanner-close-button"
                     aria-label="Close"
+                    type="button"
                     @click="$emit('hide-legacy-banner')">
                     <span class="is-visuallyHidden">
                         {{ legacyBannerCloseBannerText }}
@@ -69,7 +70,7 @@ export default {
 
     .c-cookieWarning-inner {
         margin: 0 auto;
-        padding: spacing() spacing(x3) spacing() spacing();
+        padding: spacing() spacing(e) spacing() spacing();
         overflow: hidden;
 
             p {

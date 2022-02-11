@@ -6,11 +6,13 @@ let checkout;
 
 describe('f-checkout "guest" component tests', () => {
     beforeEach(() => {
+        // Arrange
         checkout = new Checkout();
         checkout.withQuery('&knob-Service Type', 'delivery')
             .withQuery('&knob-Is User Logged In', false)
             .withQuery('&knob-Is ASAP available', true);
 
+        // Act
         checkout.load();
     });
 

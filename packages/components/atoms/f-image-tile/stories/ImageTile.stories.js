@@ -1,5 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import ImageTile from '../src/components/ImageTile.vue';
+import TestContainer from './TestContainer.vue';
 import ImageTileWallpaper from './images/wallpaper.png';
 import ImageTileCuisine from './images/burgers.jpg';
 
@@ -9,19 +10,28 @@ export default {
 };
 
 export const ImageTileComponent = (args, { argTypes }) => ({
-    components: { ImageTile },
+    components: {
+        ImageTile,
+        TestContainer
+    },
     props: Object.keys(argTypes),
-    template: `<image-tile
-                    :href='href'
-                    :tile-id='tileId'
-                    :is-selected='isSelected'
-                    :is-link='isLink'
-                    :display-text='displayText'
-                    :img-src='imgSrc'
-                    :alt-text='altText'
-                    :fallback-image='fallbackImage'
-                >
-                </image-tile>`
+    template: `
+                <test-container>
+                    <image-tile
+                        :href='href'
+                        :tile-id='tileId'
+                        :is-selected='isSelected'
+                        :is-link='isLink'
+                        :display-text='displayText'
+                        :img-src='imgSrc'
+                        :alt-text='altText'
+                        :fallback-image='fallbackImage'
+                        @toggle="toggleCuisine" 
+                        slot-scope="{ toggleCuisine }"
+                    >
+                    </image-tile>
+                </test-container>
+            `
 });
 
 ImageTileComponent.argTypes = {
@@ -41,7 +51,7 @@ ImageTileComponent.argTypes = {
         defaultValue: 'Chicken'
     },
     imgSrc: {
-        control: { type: 'text' },
+        control: { type: 'select', options: [ImageTileCuisine, null] },
         description: 'Cuisine image link',
         defaultValue: ImageTileCuisine
     },

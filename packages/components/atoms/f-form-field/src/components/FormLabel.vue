@@ -75,7 +75,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $form-label-colour              : $color-content-default; // Text colour of form labels
 $form-label-fontSize            : 'body-s';
 $form-label-weight              : $font-weight-bold;
@@ -107,6 +106,6 @@ $form-label-weight              : $font-weight-bold;
 .c-formField-label-description {
     display: block;
     margin-top: spacing();
-    margin-bottom: spacing(x2);
+    margin-bottom: spacing(d);
 }
 </style>

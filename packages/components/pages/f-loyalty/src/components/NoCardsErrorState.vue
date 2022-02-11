@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'NoCardsErrorState',
 
@@ -38,15 +37,14 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 $stampCard-responsive-notMobileViewBreakpoint: '>narrowMid';
 $stampCard-iconSize: 96px;
 
 .c-noCardsError {
     width: 100%;
-    padding-top: spacing(x0.5);
-    min-height: $stampCard-iconSize + spacing(x0.5); // Icon size plus padding
+    padding-top: spacing(a);
+    min-height: $stampCard-iconSize + spacing(a); // Icon size plus padding
 
     @include media($stampCard-responsive-notMobileViewBreakpoint) {
         margin-left: spacing();

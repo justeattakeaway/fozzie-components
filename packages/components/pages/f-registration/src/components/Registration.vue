@@ -145,7 +145,8 @@
                     is-distinct
                     data-test-id="ts-and-cs-link"
                     :href="copy.navLinks.termsAndConditions.url"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {{ copy.navLinks.termsAndConditions.text }}
                 </v-link>{{ copy.navLinks.termsAndConditions.suffix }}
                 {{ copy.navLinks.privacyPolicy.prefix }}
@@ -154,7 +155,8 @@
                     is-distinct
                     data-test-id="privacy-policy-link"
                     :href="copy.navLinks.privacyPolicy.url"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {{ copy.navLinks.privacyPolicy.text }}
                 </v-link>
                 {{ copy.navLinks.cookiesPolicy.prefix }}
@@ -163,7 +165,8 @@
                     is-distinct
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {{ copy.navLinks.cookiesPolicy.text }}
                 </v-link>{{ copy.navLinks.cookiesPolicy.suffix }}
             </p>
@@ -232,7 +235,7 @@ const formValidationState = $v => {
 };
 
 export default {
-    name: 'Registration',
+    name: 'FRegistration',
 
     components: {
         FButton,
@@ -530,13 +533,11 @@ export default {
         }
     }
 };
-
 </script>
 
 <style lang="scss" module>
-
 $registration-topMargin           : spacing() * 14;
-$registration-topMargin--narrow   : spacing(x9);
+$registration-topMargin--narrow   : spacing(i);
 $registration-icon-width          : 97px;
 $registration-icon-width--narrow  : 92px;
 $registration-icon-height         : 78px;
@@ -577,17 +578,17 @@ $registration-icon-height--narrow : 74px;
     }
 
     .c-registration-form {
-        margin-top: spacing(x3);
+        margin-top: spacing(e);
     }
 
     .c-registration-genericError {
         margin-top: 0;
-        margin-bottom: spacing(x2);
+        margin-bottom: spacing(d);
     }
 
     .c-registration-submit {
-        margin-top: spacing(x4);
-        margin-bottom: spacing(x4);
+        margin-top: spacing(f);
+        margin-bottom: spacing(f);
     }
 
     .c-registration-link {
@@ -600,7 +601,7 @@ $registration-icon-height--narrow : 74px;
 
         .c-registration-link--bottomSpacing {
             @include media('<narrow') {
-                padding-bottom: spacing(x4);
+                padding-bottom: spacing(f);
             }
         }
 </style>

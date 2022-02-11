@@ -1,39 +1,12 @@
 <template>
     <div :class="$style['c-testContainer']">
-        <image-tile
-            :key="cuisineId"
-            :tile-id="cuisineId"
-            :href="cuisineId"
-            :img-src="cuisineImage"
-            :display-text="cuisineId"
-            :is-selected="selected"
-            :fallback-image="fallbackImage"
-            @toggle="toggleCuisine" />
+        <slot :toggleCuisine="toggleCuisine" />
     </div>
 </template>
 
 <script>
-import ImageTile from '../src/components/ImageTile.vue';
-
 export default {
-    name: 'Container',
-    components: {
-        ImageTile
-    },
-    props: {
-        cuisineId: {
-            type: String,
-            default: ''
-        },
-        cuisineImage: {
-            type: String,
-            default: ''
-        },
-        fallbackImage: {
-            type: String,
-            default: ''
-        }
-    },
+    name: 'TestContainer',
     data () {
         return {
             selected: false
@@ -49,7 +22,6 @@ export default {
 
 <style lang="scss" module>
     .c-testContainer {
-        width: 200px;
-        margin: auto;
+        width: 140px;
     }
 </style>

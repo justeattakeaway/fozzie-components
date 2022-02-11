@@ -3,7 +3,6 @@ import UserMessage from '../src/components/UserMessage.vue';
 
 export default {
     title: 'Components/Molecules',
-
     decorators: [
         withA11y
     ]

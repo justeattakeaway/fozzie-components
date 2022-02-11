@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest – to be added to the next release
+------------------------------
+*February 8, 2022*
+
+### Added
+- Visual regression tests
+
+
+v4.2.0
+------------------------------
+*February 2, 2022*
+
+### Changed
+- `f-button` version.
+
+
 v4.1.0
 ------------------------------
 *January 24, 2022*

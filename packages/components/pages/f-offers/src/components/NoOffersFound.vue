@@ -75,18 +75,18 @@ export default {
 .c-noOffersFound-wrapper {
     width: 100%;
     background: $color-grey-20;
-    padding: spacing(x4) spacing(x5);
+    padding: spacing(f) spacing(g);
 
     & .c-noOffersFound-link {
         padding: 0;
 
         @include media('<=narrow') {
-            margin-top: spacing(x3);
+            margin-top: spacing(e);
         }
     }
 
     & .c-noOffersFound-searchBox {
-        padding-top: spacing(x2);
+        padding-top: spacing(d);
 
         @include media('<=mid') {
             width: 300px;

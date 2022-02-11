@@ -691,7 +691,7 @@ export default {
                     this.handleEventLogging('CheckoutAvailableFulfilmentGetSuccess');
                 }
             } catch (error) {
-                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response.status));
+                this.handleErrorState(new AvailableFulfilmentGetError(error.message, error.response?.status));
             }
         },
 
@@ -913,7 +913,7 @@ export default {
     margin-right: auto;
 
     @include media('<=#{$checkout-width}') {
-        width: calc(100% - #{spacing(x5)}); // Matches the margin of `f-card`
+        width: calc(100% - #{spacing(g)}); // Matches the margin of `f-card`
     }
 }
 </style>

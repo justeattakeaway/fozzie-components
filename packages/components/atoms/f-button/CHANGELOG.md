@@ -3,9 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (to be added to next release)
+
+
+v3.3.1
 ------------------------------
-*November 3, 2021*
+*February 8, 2022*
+
+### Changed
+- Upgraded to ESLint v8
+- Converted Storybook Knobs to Controls
+
+
+v3.3.0
+------------------------------
+*January 28, 2022*
+
+### Changed
+- `spacing` references to new mapping from fozzie e.g spacing(x2) > spacing(d).
 
 ### Added
 - Component, visual and accessibility tests for icon-buttons

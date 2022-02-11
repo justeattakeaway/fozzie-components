@@ -1,15 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import CheckoutModule from '../checkout.module';
-import checkoutDelivery from '../../../stories/demo/uk/checkout-delivery.json';
-import basketDelivery from '../../../stories/demo/get-basket-delivery.json';
-import basketInvalidProducts from '../../../stories/demo/get-basket-invalid-products.json';
-import basketOfflineProducts from '../../../stories/demo/get-basket-offline-products.json';
-import basketDeliveryAgeRestricted from '../../../stories/demo/get-basket-delivery-age-restriction.json';
-import checkoutAvailableFulfilment from '../../../stories/demo/checkout-available-fulfilment.json';
-import customerAddresses from '../../../stories/demo/get-address.json';
-import geoLocationDetails from '../../../stories/demo/get-geo-location.json';
-import customer from '../../../stories/demo/get-customer.json';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';
@@ -28,7 +19,6 @@ import {
     CHECKOUT_NOTE_TYPE_COURIER,
     CHECKOUT_NOTE_TYPE_ORDER
 } from '../../constants';
-
 import {
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
@@ -50,6 +40,18 @@ import {
     CLEAR_DOB_ERROR,
     UPDATE_DINEIN_DETAILS
 } from '../mutation-types';
+
+import customer from '../../../stories/helpers/customer/uk';
+import {
+    geoLocationDetails,
+    checkoutDelivery,
+    basketDelivery,
+    basketInvalidProducts,
+    basketOfflineProducts,
+    basketDeliveryAgeRestricted,
+    checkoutAvailableFulfilment,
+    splitNotesConfig
+} from '../../components/_tests/helpers/apiResponses';
 
 const { actions, getters, mutations } = CheckoutModule;
 
@@ -746,12 +748,15 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
-                const [expectedAddress] = customerAddresses.Addresses;
+                const customerAddresses = {
+                    Addresses: [address]
+                };
+
                 const expectedFormattedAddress = {
-                    line1: expectedAddress.Line1,
-                    line2: expectedAddress.Line2,
-                    locality: expectedAddress.City,
-                    postcode: expectedAddress.ZipCode
+                    line1: address.Line1,
+                    line2: address.Line2,
+                    locality: address.City,
+                    postcode: address.ZipCode
                 };
                 const addressServiceSpy = jest.spyOn(addressService, 'getClosestAddress').mockReturnValue(expectedFormattedAddress);
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
@@ -760,7 +765,7 @@ describe('CheckoutModule', () => {
                 await getAddress(context, payload);
 
                 // Assert
-                expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses.Addresses, payload.tenant, payload.currentPostcode);
+                expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses, payload.tenant, payload.currentPostcode);
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_ADDRESS_DETAILS, expectedFormattedAddress);
             });
@@ -1325,7 +1330,11 @@ describe('CheckoutModule', () => {
                 // Arrange
                 const splitNotesEnabledState = {
                     ...state,
+                    features: {
+                        isSplitNotesEnabled: true
+                    },
                     notesConfiguration: {
+                        ...splitNotesConfig,
                         isSplitNotesEnabled: true
                     },
                     notes: { courier: { note: 'Please do not knock' }, kitchen: { note: 'No ketchup please' } }
@@ -1333,7 +1342,7 @@ describe('CheckoutModule', () => {
 
                 it('should return the formattedNotes as they are stored in state', () => {
                     // Act
-                    const result = getters.formattedNotes(splitNotesEnabledState);
+                    const result = getters.formattedNotes(splitNotesEnabledState, getters);
 
                     // Assert
                     expect(result).toEqual(splitNotesEnabledState.notes);
@@ -1344,6 +1353,9 @@ describe('CheckoutModule', () => {
                 // Arrange
                 const splitNotesDisabledState = {
                     ...state,
+                    features: {
+                        isSplitNotesEnabled: false
+                    },
                     notesConfiguration: {
                         isSplitNotesEnabled: false
                     },
@@ -1354,7 +1366,7 @@ describe('CheckoutModule', () => {
                     const expectedResult = [{ type: 'delivery', note: splitNotesDisabledState.notes.order.note }];
 
                     // Act
-                    const result = getters.formattedNotes(splitNotesDisabledState);
+                    const result = getters.formattedNotes(splitNotesDisabledState, getters);
 
                     // Assert
                     expect(result).toEqual(expectedResult);
@@ -1362,7 +1374,7 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('shouldShowKitchenNotes ::', () => {
+        describe('kitchenNoteAccepted ::', () => {
             describe('when kitchen note accepted is returned `true` from the API', () => {
                 // Arrange
                 const kitchenNotesState = {
@@ -1377,7 +1389,7 @@ describe('CheckoutModule', () => {
 
                 it('should return true', () => {
                     // Act
-                    const result = getters.shouldShowKitchenNotes(kitchenNotesState);
+                    const result = getters.kitchenNoteAccepted(kitchenNotesState);
 
                     // Assert
                     expect(result).toEqual(true);
@@ -1398,7 +1410,7 @@ describe('CheckoutModule', () => {
 
                 it('should return false', () => {
                     // Act
-                    const result = getters.shouldShowKitchenNotes(kitchenNotesState);
+                    const result = getters.kitchenNoteAccepted(kitchenNotesState);
 
                     // Assert
                     expect(result).toEqual(false);

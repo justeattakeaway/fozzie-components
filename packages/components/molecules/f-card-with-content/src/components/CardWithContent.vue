@@ -107,12 +107,12 @@ export default {
 }
 
 .c-cardWithContent-button {
-    margin: spacing(x4) 0 spacing(x0.5);
+    margin: spacing(f) 0 spacing(a);
 }
 
 .c-cardWithContent-icon {
     margin: auto;
-    margin-bottom: spacing(x4);
+    margin-bottom: spacing(f);
     width: 200px;
 }
 </style>

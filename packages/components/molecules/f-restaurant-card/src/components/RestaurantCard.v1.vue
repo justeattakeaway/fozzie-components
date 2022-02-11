@@ -19,11 +19,16 @@
                 :class="$style['c-restaurantCard-logo']"
                 :logo-url="logoUrl" />
             <!-- Tags inside image container -->
-            <restaurant-tags
+            <component
+                :is="errorBoundary"
                 v-if="hasImageTags"
-                :class="$style['c-restaurantCard-imageTags']"
-                :test-id-position="'main-image'"
-                :tags="tags.imageTags" />
+                :tier="3">
+                <restaurant-tags
+                    :class="$style['c-restaurantCard-imageTags']"
+                    test-id-position="main-image"
+                    :tags="tags.imageTags" />
+            </component>
+
         </restaurant-image>
 
         <!-- primary content -->
@@ -37,94 +42,84 @@
             </h3>
 
             <!-- Cuisines -->
-            <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
-                tier="3">
+                v-if="cuisines.length > 0"
+                :tier="3">
                 <restaurant-cuisines
-                    v-if="cuisines.length > 0"
                     data-test-id="restaurant-cuisines"
                     :cuisines="cuisines" />
             </component>
-            <!-- END ERROR BOUNDARY -->
 
-            <!-- Local Legend Logo -->
+            <!-- Premier Icon -->
             <legend-icon
                 v-if="isPremier"
                 :class="[$style['c-restaurantCard-premier']]"
                 data-test-id="premier-icon" />
 
             <!-- New label -->
-            <!-- START ERROR BOUNDARY -->
-            <component
-                :is="errorBoundary"
-                tier="3">
-                <!-- TODO - we want to translate this within the component using i18n.
-                For now we'll just need to pass down a translated string from the consuming site -->
-                <restaurant-tag
-                    v-if="newTagText"
-                    :is-large="true"
-                    :is-uppercase="true"
-                    :text="newTagText"
-                    color-scheme="positive" />
-            </component>
-            <!-- END ERROR BOUNDARY -->
+            <!--
+                TODO - we want to translate this within the component using i18n.
+                For now we'll just need to pass down a translated string from the consuming site
+            -->
+            <restaurant-tag
+                v-if="newTagText"
+                :is-large="true"
+                :is-uppercase="true"
+                :text="newTagText"
+                color-scheme="positive" />
 
             <!-- Ratings -->
-            <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
-                tier="3">
+                v-if="rating"
+                :tier="3">
                 <restaurant-rating
                     data-test-id="restaurant-rating"
                     v-bind="rating" />
             </component>
-            <!-- END ERROR BOUNDARY -->
+
+            <component
+                :is="errorBoundary"
+                v-if="availability"
+                :tier="3">
+                <restaurant-availability
+                    v-bind="availability"
+                    data-test-id="restaurant-availability" />
+            </component>
 
             <!-- Offline Icon -->
 
             <!-- Meta Items List -->
-            <!-- START ERROR BOUNDARY -->
             <component
                 :is="errorBoundary"
-                tier="3">
-                <slot name="meta-items" />
-
+                v-if="displayDeliveryTimeMeta"
+                :tier="3">
                 <delivery-time-meta
-                    v-if="displayDeliveryTimeMeta"
                     v-bind="deliveryTimeData"
                     data-test-id="restaurant-delivery-time-meta" />
             </component>
-            <!-- END ERROR BOUNDARY -->
 
-            <restaurant-fees
-                v-if="hasFees"
-                v-bind="fees"
-                data-test-id="restaurant-fees" />
-
-            <!-- Tags -->
-            <div>
-                <!-- misc tags -->
-                <!-- START ERROR BOUNDARY -->
-                <component
-                    :is="errorBoundary"
-                    tier="3">
-                    <restaurant-tags
-                        v-if="hasContentTags"
-                        :class="$style['c-restaurantCard-tags']"
-                        :test-id-position="'inner-content'"
-                        :tags="tags.contentTags" />
-                </component>
-                <!-- END ERROR BOUNDARY -->
-            </div>
-            <!-- Optional items i.e. dish search results -->
-            <!-- START ERROR BOUNDARY -->
+            <!-- Fees -->
             <component
                 :is="errorBoundary"
-                tier="3">
-                <slot name="optional-items" />
+                v-if="hasFees"
+                :tier="3">
+                <restaurant-fees
+                    v-bind="fees"
+                    data-test-id="restaurant-fees" />
             </component>
-            <!-- END ERROR BOUNDARY -->
+
+            <!-- misc tags -->
+            <component
+                :is="errorBoundary"
+                v-if="hasContentTags"
+                :tier="3">
+                <restaurant-tags
+                    :class="$style['c-restaurantCard-tags']"
+                    test-id-position="inner-content"
+                    :tags="tags.contentTags" />
+            </component>
 
             <!-- Offers -->
             <icon-text
@@ -134,20 +129,34 @@
                 is-bold>
                 <offer-icon />
             </icon-text>
+
+            <!-- Disabled Message -->
+            <icon-text
+                v-if="disabledMessage"
+                data-test-id="restaurant-disabled"
+                :text="disabledMessage"
+                color="colorSupportError"
+                hide-icon-in-tile-view>
+                <clock-small-icon />
+            </icon-text>
         </div>
 
-        <!-- optional items -->
-        <restaurant-dishes
-            v-if="!disabled && hasDishes"
-            data-test-id="restaurant-dishes"
-            :dishes="dishes"
-            :is-vertically-stacked="isListItem"
-            :class="[$style['c-restaurantCard-dishes']]" />
+        <!-- Dishes -->
+        <component
+            :is="errorBoundary"
+            v-if="hasDishes"
+            :tier="3">
+            <restaurant-dishes
+                data-test-id="restaurant-dishes"
+                :dishes="dishes"
+                :is-vertically-stacked="isListItem"
+                :class="[$style['c-restaurantCard-dishes']]" />
+        </component>
     </a>
 </template>
 
 <script>
-import { OfferIcon, LegendIcon } from '@justeat/f-vue-icons';
+import { OfferIcon, LegendIcon, ClockSmallIcon } from '@justeat/f-vue-icons';
 import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
 import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
 import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
@@ -159,6 +168,8 @@ import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.
 import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 import IconText from './subcomponents/IconText.vue';
 import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
+import RestaurantAvailability from './subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
+import RenderlessSlotWrapper from './RenderlessSlotWrapper';
 
 export default {
     name: 'RestaurantCardV1',
@@ -174,9 +185,17 @@ export default {
         IconText,
         OfferIcon,
         LegendIcon,
-        RestaurantFees
+        ClockSmallIcon,
+        RestaurantFees,
+        RestaurantAvailability,
+        RenderlessSlotWrapper
     },
     mixins: [ErrorBoundaryMixin],
+    provide () {
+        return {
+            isListItem: this.isListItem
+        };
+    },
     // NOTE: These are merely some placeholder props and not indicative of the props we will end up using
     props: {
         id: {
@@ -198,10 +217,6 @@ export default {
         imgUrl: {
             type: String,
             default: null
-        },
-        disabled: {
-            type: Boolean,
-            default: false
         },
         isListItem: {
             type: Boolean,
@@ -226,7 +241,7 @@ export default {
         },
         rating: {
             type: Object,
-            default: () => ({})
+            default: null
         },
         deliveryTimeData: {
             type: Object,
@@ -247,6 +262,14 @@ export default {
         fees: {
             type: Object,
             default: () => {}
+        },
+        availability: {
+            type: Object,
+            default: null
+        },
+        disabledMessage: {
+            type: String,
+            default: null
         }
     },
     computed: {
@@ -270,11 +293,6 @@ export default {
         hasFees () {
             return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
         }
-    },
-    provide () {
-        return {
-            isListItem: this.isListItem
-        };
     }
 };
 </script>
@@ -283,13 +301,13 @@ export default {
 .c-restaurantCard {
   text-decoration: none;
   display: grid;
-  grid-gap: spacing(x2);
+  grid-gap: spacing(d);
   grid-template-columns: 1fr;
   position: relative;
 
   &.c-restaurantCard--listItem {
       @include media('>mid') {
-        grid-gap: spacing() spacing(x2);
+        grid-gap: spacing() spacing(d);
         grid-template-columns: minmax(180px, 20%) 1fr;
       }
   }
@@ -314,8 +332,8 @@ export default {
 }
 
 .c-restaurantCard-logo {
-  top: spacing(x2);
-  left: spacing(x2);
+  top: spacing(d);
+  left: spacing(d);
   position: absolute;
 }
 
@@ -338,10 +356,10 @@ export default {
 
 .c-restaurantCard-imageTags {
     bottom: spacing();
-    left: spacing(x2);
+    left: spacing(d);
     position: absolute;
     @include media('>mid') {
-        bottom: spacing(x1.5);
+        bottom: spacing(c);
     }
 }
 

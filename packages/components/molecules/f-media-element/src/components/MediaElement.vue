@@ -129,7 +129,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $font-sizes: (
     sm: (
         title: heading-s,
@@ -153,7 +152,7 @@ $font-sizes: (
     )
 );
 
-$mediaElement-content-margin: spacing(x3);
+$mediaElement-content-margin: spacing(e);
 
 .c-mediaElement {
     display: flex;
@@ -389,7 +388,7 @@ $mediaElement-content-margin: spacing(x3);
         & .c-mediaElement-text {
             @include font-size(map-get($value, 'text'));
             @if $size == sm {
-                margin-top: spacing(x0.5);
+                margin-top: spacing(a);
             }
             @else if $size == md {
                 margin-top: spacing();
@@ -397,5 +396,4 @@ $mediaElement-content-margin: spacing(x3);
         }
     }
 }
-
 </style>

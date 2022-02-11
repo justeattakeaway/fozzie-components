@@ -2,7 +2,7 @@
   "name": "@justeat/f-searchbox",
   "description": "Fozzie Searchbox – Just Eat Takeaway Global Searchbox",
   "tag": "beta",
-  "version": "4.0.0-beta.38",
+  "version": "4.0.0-beta.39",
   "main": "dist/f-searchbox.umd.min.js",
   "maxBundleSize": "60kB",
   "files": [
@@ -34,7 +34,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-searchbox ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
@@ -67,14 +67,13 @@
     "vuex": "3.5.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "3.2.0",
+    "@justeat/f-button": "3.3.0",
     "@justeat/f-error-message": "1.0.0",
     "@justeat/f-globalisation": "0.2.0",
     "@justeat/f-mega-modal": "3.0.2",
     "@justeat/f-vue-icons": "1.13.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
     "@justeat/f-wdio-utils": "0.5.0",

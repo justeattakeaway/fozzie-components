@@ -6,7 +6,12 @@ module.exports = {
         // https://github.com/vue-a11y/eslint-plugin-vuejs-accessibility/tree/master/docs
         'plugin:vuejs-accessibility/recommended'
     ],
+    plugins: ['webdriverio'],
+    env: {
+        "webdriverio/wdio": true
+    },
     rules: {
+        'class-methods-use-this': 'off', // can't use with getters in webdriver, which flag as errors
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'vue/html-quotes': 'off',
@@ -62,13 +67,15 @@ module.exports = {
             'always',
             { 'exceptAfterSingleLine': true },
         ],
-        
+
         // Setting these to warn temporarily otherwise it breaks the dev experience
         // and makes it hard to actually fix them.
         // Once the existing issues are fixed we can remove the rules so they default back to error.
         'vuejs-accessibility/alt-text': 'warn',
-        'vuejs-accessibility/anchor-has-content': 'warn',
+        'vuejs-accessibility/anchor-has-content': 'off', // turned off, as reporting false positives
+        'vuejs-accessibility/click-events-have-key-events': 'off', // not relevant, false positives
         'vuejs-accessibility/form-control-has-label': 'warn',
+        'vuejs-accessibility/no-onchange': 'off', // turned off, as only an issue in very old browsers
         'vuejs-accessibility/label-has-for': [
             'warn',
             {
@@ -79,7 +86,7 @@ module.exports = {
         ]
     },
     parserOptions: {
-        parser: 'babel-eslint',
+        parser: '@babel/eslint-parser',
         ecmaVersion: 2017,
         sourceType: 'module',
     },

@@ -7,11 +7,13 @@
             :card-heading="$t('heading')"
             card-heading-size="beta"
             has-inner-spacing-large
-            :card-size-custom="'medium'"
+            card-size-custom="medium"
             has-outline>
             <form @submit.prevent="onFormSubmit">
                 <div
-                    v-for="{ key, isEmailEnabled, emailValue, isSmsEnabled, smsValue } in preferences"
+                    v-for="{
+                        key, isEmailEnabled, emailValue, isSmsEnabled, smsValue
+                    } in preferences"
                     :key="key">
                     <h2
                         :class="$style['c-contactPreferences-subtitle']">
@@ -45,28 +47,10 @@
                     </fieldset>
                 </div>
 
-                <f-alert
-                    v-if="shouldShowSaveErrorAlert"
-                    data-test-id="contact-preferences-error-alert"
-                    :class="[
-                        $style['c-contactPreferences-alert'],
-                        $style['c-contactPreferences-inheritWidthAboveNarrow']
-                    ]"
-                    type="danger"
-                    :heading="$t('errorMessages.saving.heading')">
-                    {{ $t(error.messageKey) }}
-                </f-alert>
-
-                <f-alert
-                    v-if="shouldShowSuccessfulAlert"
-                    data-test-id="contact-preferences-success-alert"
-                    :class="[
-                        $style['c-contactPreferences-alert'],
-                        $style['c-contactPreferences-inheritWidthAboveNarrow']
-                    ]"
-                    type="success"
-                    :heading="$t('successMessages.saving.heading')"
-                />
+                <notifications
+                    :error-message-key="error.messageKey"
+                    :show-save-error-alert="shouldShowSaveErrorAlert"
+                    :show-successful-alert="shouldShowSuccessfulAlert" />
 
                 <f-button
                     :class="$style['c-contactPreferences-inheritWidthAboveNarrow']"
@@ -104,11 +88,10 @@ import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FCardWithContent from '@justeat/f-card-with-content';
 import '@justeat/f-card-with-content/dist/f-card-with-content.css';
-import FAlert from '@justeat/f-alert';
-import '@justeat/f-alert/dist/f-alert.css';
 import { BagSadBgIcon } from '@justeat/f-vue-icons';
 
 // Internal
+import Notifications from './Notifications.vue';
 import tenantConfigs from '../tenants';
 import PreferencesError from '../exceptions/preferencesError';
 import ContactPreferencesApi from '../services/providers/contactPreferences.api';
@@ -126,9 +109,9 @@ export default {
         CardComponent,
         FCardWithContent,
         FButton,
-        FAlert,
         FFormField,
-        BagSadBgIcon
+        BagSadBgIcon,
+        Notifications
     },
 
     mixins: [VueGlobalisationMixin],
@@ -321,7 +304,7 @@ export default {
     flex-flow: column;
     border: none;
     padding: 0;
-    margin: spacing(x2) 0 spacing(x4);
+    margin: spacing(d) 0 spacing(f);
 }
 
 .c-contactPreferences-subtitle {
@@ -333,7 +316,7 @@ export default {
         margin-top: 0;
 
         .c-contactPreferences-formField + & {
-            margin-bottom: spacing(x2);
+            margin-bottom: spacing(d);
         }
     }
 }
@@ -344,9 +327,5 @@ export default {
     @include media('>narrow') {
         width: inherit;
     }
-}
-
-.c-contactPreferences-alert {
-    margin: -(spacing()) 0 spacing(x4); // Negative top margin needed to offset the fieldset's bottom margin.
 }
 </style>

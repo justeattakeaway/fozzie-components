@@ -9,12 +9,12 @@
 import TextBlock from './Text.vue';
 
 export default {
+    name: 'SkeletonSentence',
     components: { TextBlock }
 };
 </script>
 
 <style lang="scss" module>
-
 .c-skeletonLoader-text:nth-child(2) {
     max-width: 70%;
 }
@@ -22,5 +22,4 @@ export default {
 .c-skeletonLoader-text:not(:last-child) {
     margin-bottom: spacing();
 }
-
 </style>

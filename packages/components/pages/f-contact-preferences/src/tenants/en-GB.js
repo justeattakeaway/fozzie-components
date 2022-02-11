@@ -6,7 +6,7 @@ const messages = {
         },
         saving: {
             heading: 'Something went wrong',
-            description: 'Your changes have not been saved, please try again.'
+            description: 'Sorry, it\'s not you, it\'s us. If the problem continues, get in touch.'
         }
     },
     successMessages: {

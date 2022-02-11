@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "3.7.1",
+  "version": "3.8.0",
   "main": "dist/f-cookie-banner.umd.min.js",
   "maxBundleSize": "40kB",
   "files": [
@@ -34,7 +34,7 @@
     "build": "vue-cli-service build --target lib --name f-cookie-banner ./src/index.js",
     "build:static-files": "yarn --cwd ./f-cookie-banner-static build",
     "demo": "vue serve --port 8080 ./src/demo/Index.vue",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
@@ -57,14 +57,13 @@
     "js-cookie": "2.2.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "3.0.2",
+    "@justeat/f-button": "3.3.0",
     "@justeat/f-link": "2.0.0",
-    "@justeat/f-mega-modal": "4.0.2",
+    "@justeat/f-mega-modal": "4.1.0",
     "@justeat/f-vue-icons": "2.3.0",
     "@justeat/f-wdio-utils": "0.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2"

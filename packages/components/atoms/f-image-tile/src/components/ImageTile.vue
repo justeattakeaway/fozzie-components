@@ -24,7 +24,7 @@
             class="is-visuallyHidden"
             :class="$style['c-imageTile-checkbox']"
             data-test-id="image-tile-input"
-            :tabindex="!isLink ? 0 : false"
+            :tabindex="!isLink ? 0 : -1"
             @change="toggleFilter">
         <label
             :class="$style['c-imageTile-label']"
@@ -156,7 +156,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 $image-tile-background-opacity: 0.7;
 $image-tile-background-color: $color-interactive-brand;
 $image-tile-selected: $color-content-positive;
@@ -234,7 +233,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 }
 
 .c-imageTile-textContainer {
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
     display: flex;
     max-width: 100%;
 
@@ -276,7 +275,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     display: block;
     font-family: $font-family-base;
     font-weight: $font-weight-regular;
-    margin-right: spacing(x2);
+    margin-right: spacing(d);
     overflow: hidden;
     text-overflow: ellipsis;
     transform: translate3d(0, 0, 0);

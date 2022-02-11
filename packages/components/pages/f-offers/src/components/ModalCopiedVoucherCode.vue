@@ -6,7 +6,7 @@
         :data-test-id="testIds.modal"
         @close="close">
         <h3>{{ $t('authenticated.voucherCodeModal.title') }}</h3>
-        <p v-html="$t('authenticated.voucherCodeModal.body')" />
+        <p v-html="$t('authenticated.voucherCodeModal.body')" /><!--eslint-disable-line vue/no-v-html-->
         <f-button
             v-if="hasLink"
             :href="url"

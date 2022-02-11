@@ -7,7 +7,7 @@
         <div :class="$style['c-buttonList']">
             <a
                 v-for="(button, i) in buttonList.buttons"
-                :key="i + '_Button'"
+                :key="`${i}_Button`"
                 :href="button.url"
                 :data-trak='`{
                     "trakEvent": "click",
@@ -17,7 +17,7 @@
                 }`'
                 :class="$style['c-buttonList-button']"
                 target="_blank"
-                rel="noopener">
+                rel="noopener noreferrer">
                 {{ button.title }}
             </a>
         </div>
@@ -54,9 +54,9 @@ $buttonList-font-size: 'subheading-s';
     @include font-size($buttonList-font-size, false);
     font-weight: $font-weight-headings;
     min-width: 226px;
-    margin-right: spacing(x2);
+    margin-right: spacing(d);
     margin-bottom: spacing();
-    padding: 10px spacing(x2);
+    padding: 10px spacing(d);
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
@@ -71,7 +71,7 @@ $buttonList-font-size: 'subheading-s';
     }
 
     @include media('<narrow') {
-        margin-bottom: spacing(x2);
+        margin-bottom: spacing(d);
         margin-right: 0;
         width: 100%;
 

@@ -3,6 +3,39 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.8.0
+------------------------------
+*February 8, 2022*
+
+### Changed
+- Storybook, combine stories so ImageTile is always shown within a container.
+
+
+v0.7.0
+------------------------------
+*February 8, 2022*
+
+### Added
+- Clickable component test
+
+### Changed
+- Upgraded to ESLint v8
+
+
+v0.6.0
+------------------------------
+*January 31, 2022*
+
+### Changed
+- `spacing` references to new mapping from fozzie e.g spacing(x2) > spacing(d).
+
+
+v0.5.1
+------------------------------
+*January 31, 2022*
+
+### Changed
+- Updated tabindex value on input
 
 v0.5.0
 ------------------------------
@@ -10,6 +43,7 @@ v0.5.0
 
 ### Added
 - Focus styles for keyboard navigation
+
 
 v0.4.0
 ------------------------------

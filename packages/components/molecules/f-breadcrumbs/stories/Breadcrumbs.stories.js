@@ -1,9 +1,5 @@
-// Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-// import {
-//     withKnobs, select, boolean
-// } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import Breadcrumbs from '../src/components/Breadcrumbs.vue';
+import Breadcrumbs from '../src/components/BreadCrumbs.vue';
 
 export default {
     title: 'Components/Molecules',

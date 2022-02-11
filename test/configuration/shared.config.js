@@ -15,11 +15,15 @@ exports.testType = {
         services: ['chromedriver', 'percy'],
         specs: VS_DEBUGGER ? [SPEC_FILE] : [
             'test/accessibility/axe-accessibility.spec.js'
-        ]
+        ],
+        violationCSVDirectory: `${global.baseDir}/test/results/axe-violations`
     } : {}),
     ...(TEST_TYPE === 'visual' ? {
         name: 'visual',
         services: ['chromedriver', 'percy'],
-        specs: ['test/visual/*.visual.*.spec.js']
+        specs: [
+            'test/visual/*.visual.*.spec.js',
+            'test/visual/*.visual.spec.js'
+        ]
     } : {})
 };

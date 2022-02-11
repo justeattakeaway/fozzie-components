@@ -69,7 +69,7 @@ export default {
 <style lang="scss" module>
 @import '../../assets/scss/form';
 
-$streetInput-width: spacing(x6);
+$streetInput-width: spacing(h);
 
 .c-search-innerFields {
     position: absolute;
@@ -82,7 +82,7 @@ $streetInput-width: spacing(x6);
 
 .c-search-streetInput {
     border-left: $color-border-subtle 1px solid;
-    margin-right: spacing(x0.5);
+    margin-right: spacing(a);
     width: $streetInput-width;
     outline: $color-white 2px auto;
 
@@ -90,5 +90,4 @@ $streetInput-width: spacing(x6);
         outline-color: $color-focus;
     }
 }
-
 </style>
