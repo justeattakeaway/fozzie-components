@@ -3,19 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v9.6.0
+------------------------------
+*February 11, 2022*
+
+### Changed
+- box-shadow values to use the elevation token from the pie-design-tokens.
+
+
 v9.5.0
 ------------------------------
 *February 4, 2022*
 
 ### Changed
 - Version of `f-button` & `f-popover`.
-
-
-Latest (to be added to next release)
-------------------------------
-*February 4, 2022*
-
-### Changed
 - Upgraded to ESLint v8
 
 
