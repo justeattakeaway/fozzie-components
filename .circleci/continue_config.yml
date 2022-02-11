@@ -10,7 +10,7 @@ orbs:
 # the default pipeline parameters, which will be updated according to
 # the results of the path-filtering orb
 parameters:
-  global-change:
+  global_change:
     type: boolean
     default: false
 
@@ -38,14 +38,14 @@ commands:
     description: Runs commands based on passed parameters
     steps:
       - when:
-          condition: << pipeline.parameters.global-change >>
+          condition: << pipeline.parameters.global_change >>
           steps:
             - run:
                 name: << parameters.command_description >>
                 command: yarn << parameters.command_name >>
       - when:
           condition:
-            not: << pipeline.parameters.global-change >>
+            not: << pipeline.parameters.global_change >> 
           steps:
             - run:
                 name: << parameters.command_description >>
@@ -160,14 +160,14 @@ commands:
           keys:
             - build-cache-services-master-
 
-  build_all_components:
+  build_packages:
     description: Builds all components in the monorepo
     steps:
       - run_command:
           command_description: Build all components
           command_name: build
 
-  build_component_type:
+  build_component_type_packages:
     description: Builds a component type in the monorepo
     parameters:
       component_type:
@@ -185,7 +185,7 @@ commands:
           command_description: Lint all components
           command_name: lint
 
-  lint_component_type:
+  lint_component_type_packages:
     description: Lints << parameters.component_type >> components
     parameters:
       component_type:
@@ -210,14 +210,14 @@ commands:
     description: Build Storybook for all UI tests
     steps:
       - when:
-          condition: << pipeline.parameters.global-change >>
+          condition: << pipeline.parameters.global_change >>
           steps:
             - run:
                 name: Build Storybook for all UI tests
                 command: yarn storybook:build
       - when:
           condition:
-            not: << pipeline.parameters.global-change >>
+            not: << pipeline.parameters.global_change >>
           steps:
             - run:
                 name: Build Storybook for changed package UI tests
@@ -425,32 +425,30 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-        # If global-change - Build + Lint all packages.
+        # If global_change - Build + Lint all packages across multiple jobs - based on atomic level.
       - when:
-          condition: << pipeline.parameters.global-change >>
+          condition: << pipeline.parameters.global_change >>
           steps:
-            # Build components based on atomic level - e.g ci:build:atoms
-            - build_component_type:
+            - build_component_type_packages:
                 component_type: << parameters.component_type >>
-            - lint_component_type:
+            - lint_component_type_packages:
                 component_type: << parameters.component_type >>
             - persist_to_workspace:
                 root: << parameters.component_type_folder >>
                 paths:
                   - '*'
-            #Only save cache dist if master branch
+            # Only save cache dist if master branch
             - when:
                 condition:
                   equal: [ master, << pipeline.git.branch >> ]
                 steps:
                   - save_cache_dist_directories
-      # Else Build + Lint changed packages.
+      # Else Build + Lint changed packages in a single job.
       - when:
           condition:
-            not: << pipeline.parameters.global-change >>
+            not: << pipeline.parameters.global_change >>
           steps:
-            # Build all components
-            - build_all_components
+            - build_packages
             # Persist whole workspace
             - persist_to_workspace:
                 root: .
@@ -555,7 +553,7 @@ workflows:
   # Workflow that's run for non-global changes
   build_and_test_packages:
     when:
-      not: << pipeline.parameters.global-change >>
+      not: << pipeline.parameters.global_change >>
     jobs:
       - install:
           context: web-core
@@ -618,7 +616,7 @@ workflows:
     when:
       or: # Either must be true to trigger
         - equal: [ master, << pipeline.git.branch >> ]
-        - << pipeline.parameters.global-change >>
+        - << pipeline.parameters.global_change >>
     jobs:
       - install:
           context: web-core
@@ -761,6 +759,9 @@ workflows:
             - browser-tests-molecules
             - browser-tests-organisms
             - browser-tests-pages
+            - unit-tests-tools
+            - unit-tests-services
+            - unit-tests-templates
 
   deploy-storybook:
     jobs:
