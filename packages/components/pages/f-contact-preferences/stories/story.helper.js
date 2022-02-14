@@ -10,69 +10,75 @@ const httpVerbs = {
     post: 'POST'
 };
 
-export const apiStates = {
-    none: null,
-    apiPostFailed: 'api-post-failed',
-    apiGetFailed: 'api-get-failed'
+const apiStates = {
+    none: 'no-issues',
+    apiGetFailed: 'get-details-fails',
+    apiPostFailed: 'post-details-fails'
 };
 
 export const apiStateOptions = {
     title: 'Set Api State',
-    states: {
-        None: apiStates.none,
-        'The POST/SUBMIT fails (change a value then click `Save Changes`)': apiStates.apiPostFailed,
-        'The GET/LOAD fails (used for component testing only)': apiStates.apiGetFailed
-    }
+    default: apiStates.none,
+    states: [
+        apiStates.none,
+        apiStates.apiGetFailed,
+        apiStates.apiPostFailed
+    ]
 };
 
-const apiStateDefinitions = {
+const contactPreferencesGET200 = {
+    url: '/consumer/preferences',
+    method: httpVerbs.get,
+    responseStatus: httpStatusCodes.ok,
+    requestData: null,
+    responseData: getConsumerPreferences
+};
+
+const contactPreferencesPOST200 = {
+    url: '/consumer/preferences',
+    method: httpVerbs.post,
+    responseStatus: httpStatusCodes.ok,
+    requestData: null,
+    responseData: getConsumerPreferences
+};
+
+const contactPreferencesGET500 = {
+    url: '/consumer/preferences',
+    method: httpVerbs.get,
+    responseStatus: httpStatusCodes.internalServerError,
+    requestData: null,
+    responseData: {}
+};
+
+const contactPreferencesPOST500 = {
+    url: '/consumer/preferences',
+    method: httpVerbs.post,
+    responseStatus: httpStatusCodes.internalServerError,
+    requestData: null,
+    responseData: getConsumerPreferences
+};
+
+const apiDefinitions = {
     none: { // Good GET and good POST
         state: apiStates.none,
-        states: [{
-            url: '/consumer/preferences',
-            method: httpVerbs.get,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerPreferences
-        }, {
-            url: '/consumer/preferences',
-            method: httpVerbs.post,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerPreferences
-        }]
+        states: [
+            contactPreferencesGET200,
+            contactPreferencesPOST200
+        ]
     },
     apiPostFailed: { // Good GET but bad POST
         state: apiStates.apiPostFailed,
-        states: [{
-            url: '/consumer/preferences',
-            method: httpVerbs.get,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerPreferences
-        }, {
-            url: '/consumer/preferences',
-            method: httpVerbs.post,
-            responseStatus: httpStatusCodes.internalServerError,
-            requestData: null,
-            responseData: getConsumerPreferences
-        }]
+        states: [
+            contactPreferencesGET200,
+            contactPreferencesPOST500
+        ]
     },
     apiGetFailed: { // Bad GET but good POST
         state: apiStates.apiGetFailed,
-        states: [{
-            url: '/consumer/preferences',
-            method: httpVerbs.get,
-            responseStatus: httpStatusCodes.internalServerError,
-            requestData: null,
-            responseData: {}
-        }, {
-            url: '/consumer/preferences',
-            method: httpVerbs.post,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerPreferences
-        }]
+        states: [
+            contactPreferencesGET500,
+            contactPreferencesPOST200
+        ]
     }
 };
 
@@ -80,12 +86,10 @@ const apiStateDefinitions = {
 * Prepares the api mocks to reflect what value the 'Set Api State' Storybook Knob equals.
 * @param {apiStates} apiState - The value of the 'Set Api State' Storybook Knob (defaults to 'none')
 */
-export const setupApiState = ({
-    apiState = apiStates.none
-}) => {
+export const setupApiMockState = (apiState = apiStates.none) => {
     process.mockFactory.reset();
 
-    Object.entries(apiStateDefinitions).forEach(e => {
+    Object.entries(apiDefinitions).forEach(e => {
         const [, definition] = e;
 
         if (definition.state === apiState) {
