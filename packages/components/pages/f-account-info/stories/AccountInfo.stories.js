@@ -42,10 +42,6 @@ export const AccountInfoComponent = (args, { argTypes }) => ({
     />`
 });
 
-AccountInfoComponent.argTypes = {
-    apiDetailsState: apiStateOptions.default
-};
-
 AccountInfoComponent.storyName = 'f-account-info';
 
 AccountInfoComponent.argTypes = {
