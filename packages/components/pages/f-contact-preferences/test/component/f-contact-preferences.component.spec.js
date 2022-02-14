@@ -48,7 +48,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:post-details-fails'].join(';');
+        const controls = [`locale:${locale}`, 'apiState:post-preferences-fails'].join(';');
         contactPreferences.path += `&args=${controls}`;
 
         // Act
@@ -69,7 +69,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Error page if Load fails', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:get-details-fails'].join(';');
+        const controls = [`locale:${locale}`, 'apiState:get-preferences-fails'].join(';');
         contactPreferences.path += `&args=${controls}`;
 
         // Act

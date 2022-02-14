@@ -55,7 +55,7 @@ export const ContactPreferencesComponent = (args, { argTypes }) => ({
         authToken="some-auth-token"
         :isAuthFinished="true"
         :locale="locale"
-        :smart-gateway-base-url="''"
+        smart-gateway-base-url=""
     />`
 
 });

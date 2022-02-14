@@ -63,7 +63,7 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:post-details-fails'].join(';');
+        const controls = [`locale:${locale}`, 'apiState:post-preferences-fails'].join(';');
         contactPreferences.path += `&args=${controls}`;
 
         // Act
@@ -81,7 +81,7 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Load error page', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:get-details-fails'].join(';');
+        const controls = [`locale:${locale}`, 'apiState:get-preferences-fails'].join(';');
         contactPreferences.path += `&args=${controls}`;
 
         // Act
