@@ -84,9 +84,7 @@ export default {
 <style lang="scss" module>
 @import '../../../src/assets/scss/card-styles';
 
-$stampCard-promo-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
-    0 3px 1px -2px rgba(0, 0, 0, 0.07),
-    0 1px 5px 0 rgba(0, 0, 0, 0.06);
+$stampCard-promo-shadow: $elevation-01;
 
 .c-stampCardPromotion1 {
     @include card-container;

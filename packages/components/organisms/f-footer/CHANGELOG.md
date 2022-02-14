@@ -4,12 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v6.3.0
 ------------------------------
-*February 4, 2022*
+*February 11, 2022*
 
 ### Changed
-- Upgraded to ESLint v8
+- box-shadow value to use the elevation token from the pie-design-tokens.
+- Upgraded to ESLint v8.
 
 
 v6.2.0

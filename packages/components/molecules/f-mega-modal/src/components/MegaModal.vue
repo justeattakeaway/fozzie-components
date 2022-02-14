@@ -323,7 +323,7 @@ export default {
 .c-megaModal-content {
     background-color: $color-container-default;
     border-radius: $radius-rounded-d;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: $elevation-04;
     display: none;
     padding: spacing(e);
     position: fixed;
@@ -336,7 +336,7 @@ export default {
     &.is-positioned-bottom {
         border-radius: 0;
         bottom: -100vh;
-        box-shadow: 0 -8px 16px 0 rgba(0, 0, 0, 0.22), 0 16px 16px 0 rgba(0, 0, 0, 0.24);
+        box-shadow: $elevation-05;
         display: block;
         left: 0;
         top: auto;

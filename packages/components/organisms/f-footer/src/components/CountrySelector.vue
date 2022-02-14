@@ -213,7 +213,7 @@ $countrySelector-btn-font-size: 'body-s';
     margin-left: 0;
     margin-bottom: spacing(h) + 1;
     background-color: $footer-bgLight;
-    box-shadow: 0 2px 28px rgba($color-grey, 0.08);
+    box-shadow: $elevation-02;
     list-style: none;
 
     & > li:before {

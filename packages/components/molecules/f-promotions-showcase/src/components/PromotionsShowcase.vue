@@ -113,8 +113,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-$promotionsItems-borderRadius                        : $radius-rounded-c;
-
 .c-promotionsShowcase {
     background-color: $color-support-brand-02;
     padding: spacing(d);
@@ -126,11 +124,9 @@ $promotionsItems-borderRadius                        : $radius-rounded-c;
     justify-content: center;
     background-color: $color-container-default;
 
-    box-shadow: 0 4px 6px       rgba(27, 35, 36, 0.02),
-                0 2px 12px -2px rgba(27, 35, 36, 0.08),
-                0 3px 6px       rgba(27, 35, 36, 0.06);
+    box-shadow: $elevation-02;
 
-    border-radius: $promotionsItems-borderRadius;
+    border-radius: $radius-rounded-c;
 
     @include media('>=wide') {
         flex-direction: row;
