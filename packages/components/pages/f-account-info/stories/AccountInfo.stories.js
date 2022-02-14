@@ -1,75 +1,67 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
-import { select, withKnobs } from '@storybook/addon-knobs';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import AccountInfo from '../src/components/AccountInfo.vue';
 import fAccountInfoModule from '../src/store/accountInfo.module';
 import {
-    setupApiState,
-    apiStates,
-    apiGetPostDetailsStateOptions,
-    apiGetPostAddressesStateOptions
+    // apiStates,
+    apiStateOptions,
+    setupApiMockState
 } from './story.helper';
 
 Vue.use(Vuex);
 
 export default {
     title: 'Components/Pages',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const AccountInfoComponent = () => ({
+export const AccountInfoComponent = (args, { argTypes }) => ({
     components: { AccountInfo },
-    props: {
-        locale: {
-            default: select('Locale', [locales.gb], locales.gb)
-        },
-
-        apiDetailsState: {
-            default: select(apiGetPostDetailsStateOptions.title, apiGetPostDetailsStateOptions.states, apiStates.none)
-        },
-
-        apiAddressesState: {
-            default: select(apiGetPostAddressesStateOptions.title, apiGetPostAddressesStateOptions.states, apiStates.none)
-        }
-    },
-
+    props: Object.keys(argTypes),
     watch: {
-        apiDetailsState: {
+        apiState: {
             immediate: true,
             async handler (value) {
-                setupApiState({
-                    apiDetailsState: value,
-                    apiAddressState: this.apiAddressesState
-                });
-            }
-        },
-
-        apiAddressesState: {
-            immediate: true,
-            async handler (value) {
-                setupApiState({
-                    apiDetailsState: this.apiDetailsState,
-                    apiAddressState: value
-                });
+                setupApiMockState(value);
             }
         }
     },
-
     store: new Vuex.Store({
         modules: {
             fAccountInfoModule
         }
     }),
-
-    template: '<account-info ' +
-    'authToken="some-auth-token" ' +
-    ':isAuthFinished="true" ' +
-    ':locale="locale" ' +
-    'smart-gateway-base-url="" ' +
-    // eslint-disable-next-line no-template-curly-in-string
-    ':key="`${locale}`" />'
+    template:
+    `<account-info
+        :locale="locale"
+        authToken="some-auth-token"
+        :isAuthFinished="true"
+        smart-gateway-base-url=""
+    />`
 });
 
+AccountInfoComponent.argTypes = {
+    apiDetailsState: apiStateOptions.default
+};
+
 AccountInfoComponent.storyName = 'f-account-info';
+
+AccountInfoComponent.argTypes = {
+    locale: {
+        control: { type: 'select' },
+        options: [locales.gb],
+        description: 'Choose a locale',
+        defaultValue: locales.gb
+    },
+    apiState: {
+        control: {
+            type: 'select'
+        },
+        options: apiStateOptions.states,
+        mapping: apiStateOptions.states,
+        description: apiStateOptions.title,
+        defaultValue: apiStateOptions.default
+    }
+};
