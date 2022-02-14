@@ -31,7 +31,9 @@
                 <div
                     :class="$style['c-promotionsShowcase-itemElement']"
                     data-test-id="promotionsShowcase-itemElement">
-                    <h4 data-test-id="promotionsShowcase-itemTitle">
+                    <h4
+                        :class="$style['c-promotionsShowcase-itemTitle']"
+                        data-test-id="promotionsShowcase-itemTitle">
                         {{ item.title }}
                     </h4>
                     <p
@@ -119,8 +121,8 @@ export default {
 }
 
 .c-promotionsShowcase-inner {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
     justify-content: center;
     background-color: $color-container-default;
 
@@ -129,7 +131,7 @@ export default {
     border-radius: $radius-rounded-c;
 
     @include media('>=wide') {
-        flex-direction: row;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
@@ -158,9 +160,13 @@ export default {
     }
 }
 
+.c-promotionsShowcase-itemTitle {
+    @include font-size(heading-s, true, 'narrow');
+}
+
 .c-promotionsShowcase-itemElement {
     & + & {
-        margin-left: spacing(d);
+        margin-left: spacing(b);
     }
 }
 
@@ -181,16 +187,12 @@ export default {
 
 .c-promotionsShowcase-itemElement--styleLink {
     color: $color-content-link;
-    font-weight: $font-weight-bold;
-
-    .c-promotionsShowcase-item:hover & {
-        text-decoration: underline;
-    }
+    text-decoration: underline;
 }
 
 .c-promotionsShowcase-itemElement--styleEmphasized {
     text-decoration: underline;
-    font-weight: $font-weight-bold;
+    color: $color-content-link;
 }
 
 .c-promotionsShowcase-itemIllustrationContainer {
