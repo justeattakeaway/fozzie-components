@@ -58,8 +58,6 @@ describe('f-contact-preferences component tests', () => {
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
 
-        browser.pause(3000);
-
         // Assert
         expect(contactPreferences.isSuccessAlertDisplayed()).toBe(false);
         expect(contactPreferences.isErrorAlertDisplayed()).toBe(true);
