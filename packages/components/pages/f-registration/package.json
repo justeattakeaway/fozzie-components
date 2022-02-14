@@ -66,8 +66,8 @@
     "@justeat/f-vue-icons": "2.7.0",
     "@justeat/f-wdio-utils": "0.6.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.5.8",
-    "@vue/cli-plugin-unit-jest": "4.5.8",
+    "@vue/cli-plugin-babel": "5.0.0-rc.3",
+    "@vue/cli-plugin-unit-jest": "5.0.0-rc.3",
     "@vue/test-utils": "1.1.1",
     "flush-promises": "1.0.2",
     "node-sass-magic-importer": "5.3.2"

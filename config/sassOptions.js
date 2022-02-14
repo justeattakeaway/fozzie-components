@@ -27,9 +27,6 @@ module.exports = function init () {
     //         sourceMap: true
     //     };
     return {
-        sassOptions: {
-            includePaths: ['node_modules/']
-        },
         sourceMap: true
     };
 };

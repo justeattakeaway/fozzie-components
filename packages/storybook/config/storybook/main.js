@@ -10,6 +10,9 @@ module.exports = {
         '@storybook/addon-a11y',
         '@storybook/addon-controls'
     ],
+    core: {
+        builder: 'webpack5'
+    },
     webpackFinal: async config => {
         const newConfig = {
             ...config,
@@ -34,7 +37,7 @@ module.exports = {
             // Added to prevent CircleCI from running out of memory - https://github.com/storybookjs/storybook/issues/6408#issuecomment-648197797
             optimization: {
                 minimize: false,
-                minimizer: [],
+                minimizer: []
             },
             resolve: {
                 ...config.resolve,

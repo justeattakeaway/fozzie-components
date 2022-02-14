@@ -22,9 +22,11 @@ module.exports = {
     css: {
         loaderOptions: {
             postcss: {
-                plugins: [
-                    assetsPlugin
-                ]
+                postcssOptions: {
+                    plugins: [
+                        assetsPlugin
+                    ]
+                }
             }
         }
     },

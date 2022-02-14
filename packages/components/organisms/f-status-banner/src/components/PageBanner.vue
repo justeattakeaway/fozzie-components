@@ -42,5 +42,5 @@ export default {
 </script>
 
 <style lang="scss" module>
-@include pageBanner();
+
 </style>

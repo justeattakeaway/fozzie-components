@@ -38,6 +38,7 @@ module.exports = {
                     const relPath = path.relative(path.dirname(resourcePath), absPath)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
                     return `
+                    @use "sass:math";
                     @import "${relPath}";
                     ${content}`;
                 }
@@ -66,9 +67,11 @@ module.exports = {
     css: {
         loaderOptions: {
             postcss: {
-                plugins: [
-                    assetsPlugin
-                ]
+                postcssOptions: {
+                    plugins: [
+                        assetsPlugin
+                    ]
+                }
             }
         }
     }
