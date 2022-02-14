@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.19.0
+------------------------------
+*Februrary 14, 2022*
+
+### Added
+- Click handler logic unit test
+- A new constants JS file to house the custom event key (and any more in the future)
+### Changed
+- Deleted the `RestaurantCard` wrapper component previously wrapping the `RestaurantCard.v1` component
+- Renamed `RestaurantCard.v1` component to `RestaurantCard`
+- updated storybook with flattend props object
+- Updated click handler logic to emit an object containing the restaurant ID
+
 v0.18.0
 ------------------------------
 *Februrary 11, 2022*
