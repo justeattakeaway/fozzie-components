@@ -13,8 +13,11 @@ describe('f-contact-preferences component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the  %s f-contact-preferences component', locale => {
+        // Arrange
+        const controls = [`locale:${locale}`];
+        contactPreferences.path += `&args=${controls}`;
+
         // Act
-        contactPreferences.withQuery('&knob-Locale', locale);
         contactPreferences.load();
         contactPreferences.waitForComponent();
 
@@ -26,11 +29,12 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', locale => {
         // Arrange
-        contactPreferences.withQuery('&knob-Locale', locale);
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
+        const controls = [`locale:${locale}`];
+        contactPreferences.path += `&args=${controls}`;
 
         // Act
+        contactPreferences.load();
+        contactPreferences.waitForComponent();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
@@ -44,16 +48,17 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', locale => {
         // Arrange
-        contactPreferences
-        .withQuery('&knob-Locale', locale)
-        .withQuery('&knob-Set Api State', 'api-post-failed');
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
+        const controls = [`locale:${locale}`, 'apiState:post-details-fails'].join(';');
+        contactPreferences.path += `&args=${controls}`;
 
         // Act
+        contactPreferences.load();
+        contactPreferences.waitForComponent();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
+
+        browser.pause(3000);
 
         // Assert
         expect(contactPreferences.isSuccessAlertDisplayed()).toBe(false);
@@ -64,9 +69,8 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Error page if Load fails', locale => {
         // Arrange
-        contactPreferences
-        .withQuery('&knob-Locale', locale)
-        .withQuery('&knob-Set Api State', 'api-get-failed');
+        const controls = [`locale:${locale}`, 'apiState:get-details-fails'].join(';');
+        contactPreferences.path += `&args=${controls}`;
 
         // Act
         contactPreferences.load();

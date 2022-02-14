@@ -12,8 +12,8 @@ const httpVerbs = {
 
 const apiStates = {
     none: 'no-issues',
-    apiGetFailed: 'get-details-fails',
-    apiPostFailed: 'post-details-fails'
+    apiGetFailed: 'get-preferences-fails',
+    apiPostFailed: 'post-preferences-fails'
 };
 
 export const apiStateOptions = {
