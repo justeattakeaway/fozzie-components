@@ -159,7 +159,7 @@ export default {
         position: relative;
         display: block;
         width: 100%;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: $elevation-01;
         border-radius: $radius-rounded-c;
         padding: spacing(d) calc(35% + #{spacing()}) spacing(d) spacing(d);
         max-width: 800px; //to replicate max-width of searchbox
