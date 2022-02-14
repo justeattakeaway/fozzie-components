@@ -56,11 +56,8 @@ AccountInfoComponent.argTypes = {
         defaultValue: locales.gb
     },
     apiState: {
-        control: {
-            type: 'select'
-        },
+        control: { type: 'select' },
         options: apiStateOptions.states,
-        mapping: apiStateOptions.states,
         description: apiStateOptions.title,
         defaultValue: apiStateOptions.default
     }
