@@ -7,6 +7,7 @@
             [$style['c-restaurantTag--isUppercase']]: isUppercase
         }"
         :title="text"
+        :aria-label="ariaLabel"
         data-test-id="restaurant-tag">
         {{ text }}
     </span>
@@ -38,6 +39,10 @@ export default {
         isUppercase: {
             type: Boolean,
             default: false
+        },
+        ariaLabel: {
+            type: String,
+            default: null
         }
     }
 };

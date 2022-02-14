@@ -32,4 +32,36 @@ describe('RestaurantTag component', () => {
         // assert
         expect(wrapper.attributes('title')).toMatch(expectedTitle);
     });
+
+    it('sets an "aria-label" attribute to the text prop value', () => {
+        // arrange
+        const expectedAriaLabelText = 'foo';
+        const propsData = {
+            text: 'bar',
+            textColor: '#fff',
+            backgroundColor: '#222',
+            ariaLabel: expectedAriaLabelText
+        };
+
+        // act
+        const wrapper = shallowMount(RestaurantTag, { propsData });
+
+        // assert
+        expect(wrapper.attributes('aria-label')).toMatch(expectedAriaLabelText);
+    });
+
+    it('does not set an "aria-label" attribute if no prop is provided', () => {
+        // arrange
+        const propsData = {
+            text: 'bar',
+            textColor: '#fff',
+            backgroundColor: '#222'
+        };
+
+        // act
+        const wrapper = shallowMount(RestaurantTag, { propsData });
+
+        // assert
+        expect(wrapper.attributes('aria-label')).toBe(undefined);
+    });
 });
