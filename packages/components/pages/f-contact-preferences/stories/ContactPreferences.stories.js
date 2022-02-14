@@ -81,13 +81,13 @@ ContactPreferencesComponent.argTypes = {
 
     isNewsEmailOptedIn: {
         control: { type: 'boolean' },
-        description: 'If set to true the header shows the Jet logo',
+        description: 'If set to true opt in to emails',
         defaultValue: false
     },
 
     isNewsSmsOptedIn: {
         control: { type: 'boolean' },
-        description: 'If set to true the header shows the Jet logo',
+        description: 'If set to true opt in to SMS',
         defaultValue: false
     }
 };
