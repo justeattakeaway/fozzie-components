@@ -9,6 +9,7 @@ v0.16.1
 
 ### Updated
 - Converted Storybook Knobs to Controls
+- Added Visual/Chrome tests for 'fail to load' scenario
 
 
 v0.16.0
