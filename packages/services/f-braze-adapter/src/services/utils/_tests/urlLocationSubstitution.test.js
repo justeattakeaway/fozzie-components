@@ -8,7 +8,7 @@ const MOCK_CUSTOMER_LOCATION = {
 const MOCK_CARDS = [
     {
         id: '1',
-        url: 'https://just-eat.co.uk/search?location=$LOCATION&lat=$LAT&lon=$LON'
+        url: 'https://just-eat.co.uk/search?location=$LOCATION$&lat=$LAT$&lon=$LON$'
     },
     {
         id: '2',
