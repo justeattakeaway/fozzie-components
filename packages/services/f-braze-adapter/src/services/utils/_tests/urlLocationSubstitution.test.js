@@ -17,7 +17,7 @@ const MOCK_CARDS = [
 ];
 
 describe('urlLocationSubstitution', () => {
-    it('should substitute the $LOCATION marker when passed in card url', () => {
+    it('should substitute the $LOCATION$ marker when passed in card url', () => {
         // Arrange & act
         const [card] = urlLocationSubstitution(MOCK_CARDS, MOCK_CUSTOMER_LOCATION);
         const { url } = card;
@@ -26,7 +26,7 @@ describe('urlLocationSubstitution', () => {
         expect(url).toContain(MOCK_CUSTOMER_LOCATION.location);
     });
 
-    it('should substitute the $LON marker when passed in card url', () => {
+    it('should substitute the $LON$ marker when passed in card url', () => {
         // Arrange & act
         const [card] = urlLocationSubstitution(MOCK_CARDS, MOCK_CUSTOMER_LOCATION);
         const { url } = card;
@@ -35,7 +35,7 @@ describe('urlLocationSubstitution', () => {
         expect(url).toContain(MOCK_CUSTOMER_LOCATION.longitude);
     });
 
-    it('should substitute the $LAT marker when passed in card url', () => {
+    it('should substitute the $LAT$ marker when passed in card url', () => {
         // Arrange & act
         const [card] = urlLocationSubstitution(MOCK_CARDS, MOCK_CUSTOMER_LOCATION);
         const { url } = card;
