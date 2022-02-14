@@ -109,47 +109,47 @@ const apiDefinitions = {
     none: {
         state: apiStates.none,
         states: [
-            { ...consumerDetailsGET200 },
-            { ...consumerDetailsPOST200 },
-            { ...consumerAddressGET200 },
-            { ...consumerAddressPOST200 }
+            consumerDetailsGET200,
+            consumerDetailsPOST200,
+            consumerAddressGET200,
+            consumerAddressPOST200
         ]
     },
     apiPostDetailsFailed: {
         state: apiStates.apiPostDetailsFailed,
         states: [
-            { ...consumerDetailsGET200 },
-            { ...consumerDetailsPOST500 }, // Fail
-            { ...consumerAddressGET200 },
-            { ...consumerAddressPOST200 }
+            consumerDetailsGET200,
+            consumerDetailsPOST500, // Fail
+            consumerAddressGET200,
+            consumerAddressPOST200
 
         ]
     },
     apiPostAddressFailed: {
         state: apiStates.apiPostAddressFailed,
         states: [
-            { ...consumerDetailsGET200 },
-            { ...consumerDetailsPOST200 },
-            { ...consumerAddressGET200 },
-            { ...consumerAddressPOST500 } // Fail
+            consumerDetailsGET200,
+            consumerDetailsPOST200,
+            consumerAddressGET200,
+            consumerAddressPOST500 // Fail
         ]
     },
     apiGetDetailsFailed: {
         state: apiStates.apiGetDetailsFailed,
         states: [
-            { ...consumerDetailsGET500 }, // Fail
-            { ...consumerDetailsPOST200 },
-            { ...consumerAddressGET200 },
-            { ...consumerAddressPOST200 }
+            consumerDetailsGET500, // Fail
+            consumerDetailsPOST200,
+            consumerAddressGET200,
+            consumerAddressPOST200
         ]
     },
     apiGetAddressFailed: {
         state: apiStates.apiGetAddressFailed,
         states: [
-            { ...consumerDetailsGET200 },
-            { ...consumerDetailsPOST200 },
-            { ...consumerAddressGET500 }, // Fail
-            { ...consumerAddressPOST200 }
+            consumerDetailsGET200,
+            consumerDetailsPOST200,
+            consumerAddressGET500, // Fail
+            consumerAddressPOST200
         ]
     }
 };

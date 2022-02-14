@@ -5,7 +5,6 @@ import { locales } from '@justeat/storybook/constants/globalisation';
 import AccountInfo from '../src/components/AccountInfo.vue';
 import fAccountInfoModule from '../src/store/accountInfo.module';
 import {
-    // apiStates,
     apiStateOptions,
     setupApiMockState
 } from './story.helper';

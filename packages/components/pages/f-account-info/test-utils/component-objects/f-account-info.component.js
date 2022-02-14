@@ -1,3 +1,5 @@
+import { buildUrl } from '@justeat/f-wdio-utils/src/storybook-extensions';
+
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     COMPONENT,
@@ -72,6 +74,11 @@ module.exports = class AccountInfo extends Page {
             get invalidError () { return $(FIELDS.postcode.invalidError); }
         }
     };
+
+    open () {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        super.open(pageUrl);
+    }
 
     load () {
         super.load(this.component);

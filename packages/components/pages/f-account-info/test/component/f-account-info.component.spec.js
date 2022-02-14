@@ -2,17 +2,14 @@ import forEach from 'mocha-each';
 
 const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
-let accountInfo;
-
-const illegalInput = '123';
-
 describe('f-account-info component tests', () => {
+    let accountInfo;
+    const illegalInput = '123';
+
     beforeEach(() => {
         accountInfo = new AccountInfo();
 
         accountInfo.load();
-
-        accountInfo.waitForComponent();
     });
 
     it('should display the f-account-info component', () => {
@@ -30,7 +27,6 @@ describe('f-account-info component tests', () => {
         // Assert
         expect(accountInfo.canBeClicked(cta)).toBe(true);
     });
-
 
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
     .it('should display an error message immediately when %s input has been deleted', field => {
@@ -80,5 +76,25 @@ describe('f-account-info component tests', () => {
 
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('postcode')).toBe(true);
+    });
+});
+
+describe('f-account-info component fail to Load tests', () => {
+    let accountInfo;
+
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Error page', locale => {
+        // Arrange
+        accountInfo = new AccountInfo();
+        accountInfo
+        .withQuery('args', `locale:${locale};apiState:get-details-fails`);
+
+        // Act
+        accountInfo.open();
+        accountInfo.waitForErrorCardComponent();
+
+        // Assert
+        expect(accountInfo.isErrorCardComponentDisplayed()).toBe(true);
     });
 });

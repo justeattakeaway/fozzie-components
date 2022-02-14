@@ -2,10 +2,10 @@ import forEach from 'mocha-each';
 
 const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
-let accountInfo;
-
 forEach(['desktop', 'mobile'])
 .describe('f-account-info - Visual Tests', device => {
+    let accountInfo;
+
     beforeEach(() => {
         if (device === 'mobile') {
             browser.setWindowSize(414, 731);
@@ -14,15 +14,9 @@ forEach(['desktop', 'mobile'])
         accountInfo = new AccountInfo();
 
         accountInfo.load();
-
-        accountInfo.waitForComponent();
     });
 
     it('should display the default component state', () => {
-        // Act
-        accountInfo.load();
-        accountInfo.waitForComponent();
-
         // Assert
         browser.percyScreenshot('f-account-info - Base State', device);
     });
@@ -49,5 +43,33 @@ forEach(['desktop', 'mobile'])
 
         // Assert
         browser.percyScreenshot(`f-account-info - illegal ${field} error message`, device);
+    });
+});
+
+forEach(['desktop', 'mobile'])
+.describe('f-account-info - Visual fail to Load tests', device => {
+    let accountInfo;
+
+    beforeEach(() => {
+        if (device === 'mobile') {
+            browser.setWindowSize(414, 731);
+        }
+
+        accountInfo = new AccountInfo();
+    });
+
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Error page', locale => {
+        // Arrange
+        accountInfo
+        .withQuery('args', `locale:${locale};apiState:get-details-fails`);
+
+        // Act
+        accountInfo.open();
+        accountInfo.waitForErrorCardComponent();
+
+        // Assert
+        browser.percyScreenshot(`f-account-info - Load Error Page - ${locale}`, device);
     });
 });
