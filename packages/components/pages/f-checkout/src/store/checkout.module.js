@@ -340,25 +340,32 @@ export default {
             tenant,
             timeout
         }) => {
-            if (!state.customer || state.customer.mobileNumber) {
+            if (state.customer.mobileNumber) {
                 return;
             }
 
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant,
-                    ...(state.authToken && {
-                        Authorization: authHeader
-                    })
-                },
-                timeout
-            };
+            const tokenData = jwtDecode(state.authToken);
+            let mobileNumber = tokenData.mobile_number || tokenData.phone_number || '';
 
-            const { data } = await axios.get(url, config);
+            if (!mobileNumber && tenant === 'uk') {
+                const authHeader = state.authToken && `Bearer ${state.authToken}`;
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept-Tenant': tenant,
+                        ...(state.authToken && {
+                            Authorization: authHeader
+                        })
+                    },
+                    timeout
+                };
 
-            commit(UPDATE_PHONE_NUMBER, data.PhoneNumber);
+                const { data } = await axios.get(url, config);
+                mobileNumber = data.PhoneNumber;
+            }
+
+
+            commit(UPDATE_PHONE_NUMBER, mobileNumber);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
