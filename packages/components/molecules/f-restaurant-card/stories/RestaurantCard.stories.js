@@ -25,7 +25,7 @@ RestaurantCardComponent.args = {
         url: 'some-restaurant/12345',
         cuisines: ['Mexican', 'Burgers', 'Chinese'],
         tags: {
-            imageTags: [{ text: 'Promoted', colorScheme: 'dark' }, { text: 'StampCards', colorScheme: 'warm' }],
+            imageTags: [{ text: 'Promoted', colorScheme: 'dark' }, { text: 'StampCards', colorScheme: 'warm', ariaLabel: 'Stampcard Partner' }],
             contentTags: [{ text: 'BTA Winner' }, { text: 'Michelin Star' }, { text: 'Tried & Tasted' }, { text: 'New Ownership' }, { text: 'Delivered by Menulog' }, { text: 'A very very very super long unrealistic but necessary to test tag that hopefully never happens' }]
         },
         newTagText: 'new',

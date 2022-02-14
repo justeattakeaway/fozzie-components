@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.18.0
+------------------------------
+*Februrary 11, 2022*
+### Changed
+- added aria-label support to `RestaurantTag` component
+- updated storybook with new aria label prop
+
 v0.17.0
 ------------------------------
 *Februrary 07, 2022*
