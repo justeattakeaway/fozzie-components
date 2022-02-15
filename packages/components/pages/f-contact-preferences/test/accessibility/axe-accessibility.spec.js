@@ -52,7 +52,7 @@ describe('Accessibility tests', () => {
         contactPreferences.path += `&args=${controls}`;
 
         // Act
-        contactPreferences.load();
+        contactPreferences.loadError();
         const axeResults = getAccessibilityTestResults('f-contact-preferences - load error page');
 
         // Assert

@@ -84,8 +84,7 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         contactPreferences.path += `&args=${controls}`;
 
         // Act
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
+        contactPreferences.loadError();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Load Error Page - ${locale}`, deviceType);

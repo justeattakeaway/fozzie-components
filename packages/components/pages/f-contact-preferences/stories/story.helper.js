@@ -39,7 +39,7 @@ const contactPreferencesPOST200 = {
     method: httpVerbs.post,
     responseStatus: httpStatusCodes.ok,
     requestData: null,
-    responseData: getConsumerPreferences
+    responseData: {}
 };
 
 const contactPreferencesGET500 = {
@@ -55,7 +55,7 @@ const contactPreferencesPOST500 = {
     method: httpVerbs.post,
     responseStatus: httpStatusCodes.internalServerError,
     requestData: null,
-    responseData: getConsumerPreferences
+    responseData: {}
 };
 
 const apiDefinitions = {

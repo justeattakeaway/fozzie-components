@@ -71,8 +71,7 @@ describe('f-contact-preferences component tests', () => {
         contactPreferences.path += `&args=${controls}`;
 
         // Act
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
+        contactPreferences.loadError();
 
         // Assert
         expect(contactPreferences.isErrorPageDisplayed()).toBe(true);
