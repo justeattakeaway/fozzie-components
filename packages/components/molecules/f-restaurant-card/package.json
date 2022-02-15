@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-restaurant-card",
   "description": "Fozzie Restaurant Card -  Responsible for displaying restaurant data and linking to a restaurant",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "main": "dist/f-restaurant-card.umd.min.js",
   "files": [
     "dist",
@@ -56,7 +56,6 @@
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@vue/test-utils": "1.0.3",
-    "node-sass-magic-importer": "5.3.2"
+    "@vue/test-utils": "1.0.3"
   }
 }

@@ -54,7 +54,6 @@
     "@justeat/f-button": "3.x"
   },
   "devDependencies": {
-    "node-sass-magic-importer": "5.3.2",
     "@justeat/f-button": "3.3.0",
     "@justeat/f-wdio-utils": "0.5.0",
     "@justeat/f-vue-icons": "1.13.0",

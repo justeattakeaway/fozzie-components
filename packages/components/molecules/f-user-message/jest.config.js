@@ -1,4 +1,10 @@
 module.exports = {
+    globals: {
+        'vue-jest': {
+            experimentalCSSCompile: false // hoping this will be a temporary fix, as tests fail when updating to dart-sass currently with vue-cli
+        }
+    },
+
     moduleFileExtensions: [
         'js',
         'jsx',
