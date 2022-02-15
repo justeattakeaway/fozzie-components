@@ -31,6 +31,10 @@ module.exports = class ContactPreferences extends Page {
         super.load(this.component);
     }
 
+    loadError () {
+        super.load(this.errorPage);
+    }
+
     waitForComponent () {
         super.waitForComponent(this.component);
     }

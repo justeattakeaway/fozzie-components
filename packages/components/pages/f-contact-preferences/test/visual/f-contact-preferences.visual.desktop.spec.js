@@ -14,10 +14,11 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s default component state', locale => {
+        // Arrange
+        contactPreferences.path += `&args=locale:${locale}`;
+
         // Act
-        contactPreferences.withQuery('&knob-Locale', locale);
         contactPreferences.load();
-        contactPreferences.waitForComponent();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, deviceType);
@@ -27,12 +28,10 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s news email & sms checked', locale => {
         // Arrange
-        contactPreferences
-            .withQuery('&knob-Locale', locale)
-            .withQuery('&knob-News - Email - Opted In', 'true')
-            .withQuery('&knob-News - Sms - Opted In', 'true');
+        contactPreferences.path += `&args=locale:${locale};isNewsEmailOptedIn:true;isNewsSmsOptedIn:true`;
+
+        // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Checked Preferences State - ${locale}`, deviceType);
@@ -42,12 +41,10 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit success alert', locale => {
         // Arrange
-        contactPreferences
-            .withQuery('&knob-Locale', locale);
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
+        contactPreferences.path += `&args=locale:${locale}`;
 
         // Act
+        contactPreferences.load();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
@@ -60,13 +57,10 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert', locale => {
         // Arrange
-        contactPreferences
-            .withQuery('&knob-Locale', locale)
-            .withQuery('&knob-Set Api State', 'api-post-failed');
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
+        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
 
         // Act
+        contactPreferences.load();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
@@ -79,13 +73,10 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Load error page', locale => {
         // Arrange
-        contactPreferences
-            .withQuery('&knob-Locale', locale)
-            .withQuery('&knob-Set Api State', 'api-get-failed');
+        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
 
         // Act
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
+        contactPreferences.loadError();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Load Error Page - ${locale}`, deviceType);
