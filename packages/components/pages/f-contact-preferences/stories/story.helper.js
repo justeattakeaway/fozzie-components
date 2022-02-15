@@ -58,29 +58,29 @@ const contactPreferencesPOST500 = {
     responseData: {}
 };
 
-const apiDefinitions = {
-    none: { // Good GET and good POST
+const apiDefinitions = [
+    {
         state: apiStates.none,
         states: [
             contactPreferencesGET200,
             contactPreferencesPOST200
         ]
     },
-    apiPostFailed: { // Good GET but bad POST
+    {
         state: apiStates.apiPostFailed,
         states: [
             contactPreferencesGET200,
             contactPreferencesPOST500
         ]
     },
-    apiGetFailed: { // Bad GET but good POST
+    {
         state: apiStates.apiGetFailed,
         states: [
             contactPreferencesGET500,
             contactPreferencesPOST200
         ]
     }
-};
+];
 
 /**
 * Prepares the api mocks to reflect what value the 'Set Api State' Storybook Knob equals.
@@ -89,20 +89,14 @@ const apiDefinitions = {
 export const setupApiMockState = (apiState = apiStates.none) => {
     process.mockFactory.reset();
 
-    Object.entries(apiDefinitions).forEach(e => {
-        const [, definition] = e;
-
-        if (definition.state === apiState) {
-            definition.states.forEach(x => {
-                process.mockFactory.setupMockResponse(
-                    x.method,
-                    x.url,
-                    x.requestData,
-                    x.responseStatus,
-                    x.responseData
-                );
-            });
-        }
+    apiDefinitions.find(e => e.state === apiState)?.states.forEach(x => {
+        process.mockFactory.setupMockResponse(
+            x.method,
+            x.url,
+            x.requestData,
+            x.responseStatus,
+            x.responseData
+        );
     });
 
     process.mockFactory.setupPassThrough();
