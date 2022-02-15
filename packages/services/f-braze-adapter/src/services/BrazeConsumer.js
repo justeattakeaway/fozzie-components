@@ -18,6 +18,7 @@ import dispatcherEventStream from './DispatcherEventStream';
 import { LOGGER } from './types/events';
 import { LOG_ERROR, LOG_INFO } from './types/logger';
 import locationFilter from './utils/locationFilter';
+import urlLocationSubstitution from './utils/urlLocationSubstitution';
 
 class BrazeConsumer {
     /**
@@ -111,7 +112,8 @@ class BrazeConsumer {
             cards => filterByEnabledCardTypes(cards, this.enabledCardTypes),
             cards => filterByBrands(cards, this.brands),
             filterByCurrentlyActive,
-            cards => locationFilter(cards, currentLocation)
+            cards => locationFilter(cards, currentLocation),
+            cards => urlLocationSubstitution(cards, currentLocation)
         ];
 
         this._cards = [];
