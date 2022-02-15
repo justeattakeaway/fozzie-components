@@ -81,14 +81,6 @@ module.exports = class AccountInfo extends Page {
         super.load(this.errorCardComponent);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
-    }
-
-    waitForErrorCardComponent () {
-        super.waitForComponent(this.errorCardComponent);
-    }
-
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }

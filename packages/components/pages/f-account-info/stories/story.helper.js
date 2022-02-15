@@ -14,21 +14,9 @@ const httpVerbs = {
 const apiStates = {
     none: 'no-issues',
     apiGetDetailsFailed: 'get-details-fails',
-    apiGetAddresssFailed: 'get-address-fails',
+    apiGetAddressFailed: 'get-address-fails',
     apiPostDetailsFailed: 'post-details-fails',
     apiPostAddressFailed: 'post-address-fails'
-};
-
-export const apiStateOptions = {
-    title: 'Set Api State',
-    default: apiStates.none,
-    states: [
-        apiStates.none,
-        apiStates.apiGetDetailsFailed,
-        apiStates.apiGetAddresssFailed,
-        apiStates.apiPostDetailsFailed,
-        apiStates.apiPostAddressFailed
-    ]
 };
 
 // Consumer Details
@@ -105,8 +93,8 @@ const consumerAddressPOST500 = {
     responseData: getConsumerAddresses
 };
 
-const apiDefinitions = {
-    none: {
+const apiDefinitions = [
+    {
         state: apiStates.none,
         states: [
             consumerDetailsGET200,
@@ -115,17 +103,16 @@ const apiDefinitions = {
             consumerAddressPOST200
         ]
     },
-    apiPostDetailsFailed: {
+    {
         state: apiStates.apiPostDetailsFailed,
         states: [
             consumerDetailsGET200,
             consumerDetailsPOST500, // Fail
             consumerAddressGET200,
             consumerAddressPOST200
-
         ]
     },
-    apiPostAddressFailed: {
+    {
         state: apiStates.apiPostAddressFailed,
         states: [
             consumerDetailsGET200,
@@ -134,7 +121,7 @@ const apiDefinitions = {
             consumerAddressPOST500 // Fail
         ]
     },
-    apiGetDetailsFailed: {
+    {
         state: apiStates.apiGetDetailsFailed,
         states: [
             consumerDetailsGET500, // Fail
@@ -143,7 +130,7 @@ const apiDefinitions = {
             consumerAddressPOST200
         ]
     },
-    apiGetAddressFailed: {
+    {
         state: apiStates.apiGetAddressFailed,
         states: [
             consumerDetailsGET200,
@@ -152,6 +139,18 @@ const apiDefinitions = {
             consumerAddressPOST200
         ]
     }
+];
+
+export const apiStateOptions = {
+    title: 'Set Api State',
+    default: apiStates.none,
+    states: [
+        apiStates.none,
+        apiStates.apiGetDetailsFailed,
+        apiStates.apiGetAddressFailed,
+        apiStates.apiPostDetailsFailed,
+        apiStates.apiPostAddressFailed
+    ]
 };
 
 /**
@@ -161,19 +160,14 @@ const apiDefinitions = {
 export const setupApiMockState = (apiState = apiStates.none) => {
     process.mockFactory.reset();
 
-    Object.entries(apiDefinitions).forEach(e => {
-        const [, definition] = e;
-        if (definition.state === apiState) {
-            definition.states.forEach(x => {
-                process.mockFactory.setupMockResponse(
-                    x.method,
-                    x.url,
-                    x.requestData,
-                    x.responseStatus,
-                    x.responseData
-                );
-            });
-        }
+    apiDefinitions.find(e => e.state === apiState)?.states.forEach(x => {
+        process.mockFactory.setupMockResponse(
+            x.method,
+            x.url,
+            x.requestData,
+            x.responseStatus,
+            x.responseData
+        );
     });
 
     process.mockFactory.setupPassThrough();

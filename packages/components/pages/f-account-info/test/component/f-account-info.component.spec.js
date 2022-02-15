@@ -8,11 +8,12 @@ describe('f-account-info component tests', () => {
 
     beforeEach(() => {
         accountInfo = new AccountInfo();
-
-        accountInfo.load();
     });
 
     it('should display the f-account-info component', () => {
+        // Act
+        accountInfo.load();
+
         // Assert
         expect(accountInfo.isComponentDisplayed()).toBe(true);
     });
