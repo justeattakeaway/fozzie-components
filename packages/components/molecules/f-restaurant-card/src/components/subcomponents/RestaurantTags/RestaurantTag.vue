@@ -7,6 +7,7 @@
             [$style['c-restaurantTag--isUppercase']]: isUppercase
         }"
         :title="text"
+        :aria-label="ariaLabel"
         data-test-id="restaurant-tag">
         {{ text }}
     </span>
@@ -38,6 +39,10 @@ export default {
         isUppercase: {
             type: Boolean,
             default: false
+        },
+        ariaLabel: {
+            type: String,
+            default: null
         }
     }
 };
@@ -46,7 +51,7 @@ export default {
 <style lang="scss" module>
 .c-restaurantTag {
     display: inline-block;
-    padding: 0 spacing() / 2;
+    padding: 0 spacing(a);
     border-radius: $radius-rounded-a;
     font-size: $font-paragraph-03 * 1px;
     color: $color-content-default;
@@ -61,7 +66,7 @@ export default {
 }
 
 .c-restaurantTag--isLarge {
-    padding: spacing() / 4 spacing();
+    padding: math.div(spacing(), 4) spacing();
 }
 
 .c-restaurantTag--isUppercase {

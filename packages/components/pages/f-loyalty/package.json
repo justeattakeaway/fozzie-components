@@ -71,7 +71,6 @@
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
     "faker": "5.5.3",
-    "miragejs": "0.1.42",
-    "node-sass-magic-importer": "5.3.2"
+    "miragejs": "0.1.42"
   }
 }

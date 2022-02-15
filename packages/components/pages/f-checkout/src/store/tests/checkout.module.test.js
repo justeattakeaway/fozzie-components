@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import CheckoutModule from '../checkout.module';
 import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
@@ -784,26 +785,46 @@ describe('CheckoutModule', () => {
                     state.customer.mobileNumber = '';
                 });
 
-                it(`should get the customer details from the backend and call ${UPDATE_PHONE_NUMBER} mutation`, async () => {
-                    // Arrange
-                    const config = {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept-Tenant': payload.tenant,
-                            Authorization: `Bearer ${state.authToken}`
-                        },
-                        timeout: payload.timeout
-                    };
+                describe('if the phone number is not in the auth token', () => {
+                    it(`should get the customer details from the backend and call ${UPDATE_PHONE_NUMBER} mutation`, async () => {
+                        // Arrange
+                        const newState = { ...state, authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsIm5hbWUiOiJKb2UgQmxvZ2dzIn0.iMgyH4JZVcID1GZ6_qrmUvQMBts1Eb7LcUPKk_eu72A' };
+                        const config = {
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept-Tenant': payload.tenant,
+                                Authorization: `Bearer ${newState.authToken}`
+                            },
+                            timeout: payload.timeout
+                        };
 
-                    axios.get = jest.fn(() => Promise.resolve({ data: customer }));
-                    const expectedPhoneNumber = customer.PhoneNumber;
+                        axios.get = jest.fn(() => Promise.resolve({ data: customer }));
+                        const expectedPhoneNumber = customer.PhoneNumber;
 
-                    // Act
-                    await getCustomer({ commit, state, dispatch }, payload);
 
-                    // Assert
-                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_PHONE_NUMBER, expectedPhoneNumber);
+                        // Act
+                        await getCustomer({ commit, state: newState, dispatch }, payload);
+
+                        // Assert
+                        expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                        expect(commit).toHaveBeenCalledWith(UPDATE_PHONE_NUMBER, expectedPhoneNumber);
+                    });
+                });
+
+                describe('if the phone number is in the auth token', () => {
+                    it(`should get the customer details from the backend and call ${UPDATE_PHONE_NUMBER} mutation`, async () => {
+                        // Arrange
+                        axios.get = jest.fn(() => Promise.resolve({ data: customer }));
+                        const expectedPhoneNumber = jwtDecode(state.authToken).mobile_number;
+
+
+                        // Act
+                        await getCustomer({ commit, state, dispatch }, payload);
+
+                        // Assert
+                        expect(axios.get).toBeCalledTimes(0);
+                        expect(commit).toHaveBeenCalledWith(UPDATE_PHONE_NUMBER, expectedPhoneNumber);
+                    });
                 });
 
                 it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {

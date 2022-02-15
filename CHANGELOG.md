@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v7.0.0
+------------------------------
+*February 15, 2022*
+
+### Changed
+- **Breaking Change** – repo now uses `dart-sass` instead of `node-sass` for styles.
+  There is still an outstanding issue in `vue-jest` and it's support of dart-sass which means for components
+  wanting to compile styles in jest (to test classnames for instance), `node-sass` still needs to be included
+  as part of that packages `devDepenedencies`. For all other packages, `experimentalCSSCompile: false` has been
+  set to turn off jest compiling styles, otherwise the tests won't run as expected.
+- Eyeglass has been removed in favour of using `sass-loader`'s node_modules path resolution, as this comes out of the box.
+
+### Removed
+- Any references to fozzie `$theme` variables in `common.scss` files, as no longer needed.
+- Removed webpack tilda `~` for fozzie scss refrences, as not needed – sass-loader does this automatically now.
+
+
 v6.1.1
 ------------------------------
 *February 4, 2022*

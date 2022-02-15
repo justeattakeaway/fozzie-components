@@ -1,27 +1,10 @@
-const magicImporter = require('node-sass-magic-importer');
-const eyeglass = require('eyeglass');
+// const magicImporter = require('node-sass-magic-importer');
+// const eyeglass = require('eyeglass');
 
-module.exports = function init (rootDir) {
-    const sassOptions = eyeglass({
-        eyeglass: {
-            root: rootDir
-        },
-        includePaths: ['node_modules/']
-    });
-
-    sassOptions.importer = [
-        magicImporter({
-            cwd: rootDir
-        }),
-        sassOptions.importer
-    ];
-
+module.exports = function init () {
     return {
         sassOptions: {
-            eyeglass: sassOptions.eyeglass,
-            functions: sassOptions.functions,
-            includePaths: sassOptions.includePaths,
-            importer: sassOptions.importer
+            includePaths: ['node_modules/']
         },
         sourceMap: true
     };

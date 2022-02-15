@@ -3,9 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.19.0
+------------------------------
+*Februrary 14, 2022*
+
+### Added
+- `sass:math` to `vue.config` to allow `dart-sass` migration.
+
+v0.18.0
+------------------------------
+*Februrary 11, 2022*
+### Changed
+- added aria-label support to `RestaurantTag` component
+- updated storybook with new aria label prop
+
+
 v0.17.0
 ------------------------------
-*Februrary 07, 2022*
+*February 07, 2022*
 ### Added
 - new `disabledMessage` prop that is rendered when a restaurant is disabled
 - unit tests to test `disabledMessage` rendering logic
@@ -19,13 +34,13 @@ v0.17.0
 
 v0.16.1
 ------------------------------
-*Februrary 03, 2022*
+*February 03, 2022*
 ### Changed
 - Use new `spacing()` values
 
 v0.16.0
 ------------------------------
-*Februrary 02, 2022*
+*February 02, 2022*
 
 ### Added
 - New `RestaurantAvailability` component for displaying pre-order and collection info

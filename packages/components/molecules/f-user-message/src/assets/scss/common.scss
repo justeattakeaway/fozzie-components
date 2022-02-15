@@ -3,7 +3,7 @@
 // The theme is handled via a data-attribute on the component
 $theme: 'jet' !default;
 
-@import  '~@justeat/fozzie/src/scss/fozzie';
+@import '@justeat/fozzie/src/scss/fozzie';
 
 /**
  * Global variables which need to be changed depending on the theme (TODO: move to separate component)

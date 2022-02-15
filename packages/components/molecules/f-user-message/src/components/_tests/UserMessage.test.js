@@ -34,15 +34,13 @@ describe('UserMessage component', () => {
             }
         });
 
-        const mockPopulateUserMessage = jest.fn();
+        // const mockPopulateUserMessage = jest.fn();
+        const mockPopulateUserMessage = jest.spyOn(UserMessage.methods, 'populateUserMessage');
 
         // Act
         shallowMount(UserMessage, {
             localVue,
-            propsData,
-            methods: {
-                populateUserMessage: mockPopulateUserMessage
-            }
+            propsData
         });
 
         // Assert

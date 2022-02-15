@@ -22,7 +22,8 @@ export const RestaurantTagComponent = (args, { argTypes }) => ({
 RestaurantTagComponent.args = {
     text: 'Promoted',
     textColour: tagColourSchemes.promoted.text,
-    backgroundColour: tagColourSchemes.promoted.background
+    backgroundColour: tagColourSchemes.promoted.background,
+    ariaLabel: 'Foo bar'
 };
 
 RestaurantTagComponent.storyName = 'restaurant-tag';

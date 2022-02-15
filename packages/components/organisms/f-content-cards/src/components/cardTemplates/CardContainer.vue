@@ -232,7 +232,7 @@ export default {
         min-height: 164px; // min-height set to the height of an card with a one-line title
         background-color: $color-container-default;
         padding: spacing(d);
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: $elevation-01;
         border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
     }
 
