@@ -9,7 +9,7 @@ v7.0.0
 *February 15, 2022*
 
 ### Changed
-- *Breaking Change* – repo now uses `dart-sass` instead of `node-sass` for styles.
+- **Breaking Change** – repo now uses `dart-sass` instead of `node-sass` for styles.
   There is still an outstanding issue in `vue-jest` and it's support of dart-sass which means for components
   wanting to compile styles in jest (to test classnames for instance), `node-sass` still needs to be included
   as part of that packages `devDepenedencies`. For all other packages, `experimentalCSSCompile: false` has been
