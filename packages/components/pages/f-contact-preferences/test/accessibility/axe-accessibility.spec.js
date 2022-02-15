@@ -15,8 +15,7 @@ describe('Accessibility tests', () => {
         ['en-GB']
     ]).it('a11y - should test that the %s f-contact-preferences component is WCAG compliant', locale => {
         // Arrange
-        const controls = [`locale:${locale}`];
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale}`;
 
         // Act
         contactPreferences.load();
@@ -30,8 +29,7 @@ describe('Accessibility tests', () => {
         ['en-GB']
     ]).it('should test that the %s f-contact-preferences (error alert) is WCAG compliant', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:post-preferences-fails'].join(';');
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
 
         // Act
         contactPreferences.load();
@@ -47,8 +45,7 @@ describe('Accessibility tests', () => {
         ['en-GB']
     ]).it('should test that the %s f-contact-preferences (error page) is WCAG compliant', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:get-preferences-fails'].join(';');
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
 
         // Act
         contactPreferences.loadError();

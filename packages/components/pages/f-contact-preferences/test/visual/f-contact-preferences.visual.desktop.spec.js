@@ -15,8 +15,7 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s default component state', locale => {
         // Arrange
-        const controls = [`locale:${locale}`];
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale}`;
 
         // Act
         contactPreferences.load();
@@ -29,8 +28,7 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s news email & sms checked', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'isNewsEmailOptedIn:true', 'isNewsSmsOptedIn:true'];
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale};isNewsEmailOptedIn:true;isNewsSmsOptedIn:true`;
 
         // Act
         contactPreferences.load();
@@ -43,8 +41,7 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit success alert', locale => {
         // Arrange
-        const controls = [`locale:${locale}`];
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale}`;
 
         // Act
         contactPreferences.load();
@@ -60,8 +57,7 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:post-preferences-fails'].join(';');
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
 
         // Act
         contactPreferences.load();
@@ -77,8 +73,7 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Load error page', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:get-preferences-fails'].join(';');
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
 
         // Act
         contactPreferences.loadError();

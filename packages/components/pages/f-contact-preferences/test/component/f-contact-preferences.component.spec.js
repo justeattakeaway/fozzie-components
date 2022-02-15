@@ -14,8 +14,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the  %s f-contact-preferences component', locale => {
         // Arrange
-        const controls = [`locale:${locale}`];
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale}`;
 
         // Act
         contactPreferences.load();
@@ -28,8 +27,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', locale => {
         // Arrange
-        const controls = [`locale:${locale}`];
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale}`;
 
         // Act
         contactPreferences.load();
@@ -46,8 +44,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:post-preferences-fails'].join(';');
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
 
         // Act
         contactPreferences.load();
@@ -64,8 +61,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Error page if Load fails', locale => {
         // Arrange
-        const controls = [`locale:${locale}`, 'apiState:get-preferences-fails'].join(';');
-        contactPreferences.path += `&args=${controls}`;
+        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
 
         // Act
         contactPreferences.loadError();
