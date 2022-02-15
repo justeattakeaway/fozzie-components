@@ -44,7 +44,7 @@
             <!-- Cuisines -->
             <component
                 :is="errorBoundary"
-                v-if="cuisines.length > 0"
+                v-if="hasCuisines"
                 :tier="3">
                 <restaurant-cuisines
                     data-test-id="restaurant-cuisines"
@@ -222,11 +222,11 @@ export default {
         },
         cuisines: {
             type: Array,
-            default: () => []
+            default: null
         },
         tags: {
             type: Object,
-            default: () => ({})
+            default: null
         },
         newTagText: {
             type: String,
@@ -238,11 +238,11 @@ export default {
         },
         deliveryTimeData: {
             type: Object,
-            default: () => ({})
+            default: null
         },
         dishes: {
             type: Array,
-            default: () => ([])
+            default: null
         },
         offer: {
             type: String,
@@ -254,7 +254,7 @@ export default {
         },
         fees: {
             type: Object,
-            default: () => {}
+            default: null
         },
         availability: {
             type: Object,
@@ -281,15 +281,18 @@ export default {
             return !!this.offer?.length;
         },
         displayDeliveryTimeMeta () {
-            return this.deliveryTimeData.eta ||
-                this.deliveryTimeData.distance ||
-                this.deliveryTimeData.address;
+            return !!(this.deliveryTimeData?.eta ||
+                this.deliveryTimeData?.distance ||
+                this.deliveryTimeData?.address);
         },
         hasDishes () {
             return !!this.dishes?.length;
         },
         hasFees () {
-            return !!this.fees?.deliveryFeeText || !!this.fees?.minOrderText;
+            return !!(this.fees?.deliveryFeeText || this.fees?.minOrderText);
+        },
+        hasCuisines () {
+            return !!this.cuisines?.length;
         }
     },
     methods: {
