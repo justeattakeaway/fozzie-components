@@ -15,11 +15,10 @@ describe('Accessibility tests', () => {
         ['en-GB']
     ]).it('a11y - should test that the %s f-contact-preferences component is WCAG compliant', locale => {
         // Arrange
-        contactPreferences.withQuery('&knob-Locale', locale);
-        contactPreferences.load();
-        contactPreferences.waitForComponent();
+        contactPreferences.path += `&args=locale:${locale}`;
 
         // Act
+        contactPreferences.load();
         const axeResults = getAccessibilityTestResults('f-contact-preferences');
 
         // Assert
@@ -30,12 +29,10 @@ describe('Accessibility tests', () => {
         ['en-GB']
     ]).it('should test that the %s f-contact-preferences (error alert) is WCAG compliant', locale => {
         // Arrange
-        contactPreferences
-        .withQuery('&knob-Locale', locale)
-        .withQuery('&knob-Set Api State', 'api-post-failed');
-        contactPreferences.load();
+        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
 
         // Act
+        contactPreferences.load();
         contactPreferences.clickNewsEmailCheckbox();
         contactPreferences.clickSubmitButton();
         const axeResults = getAccessibilityTestResults('f-contact-preferences - save error alert');
@@ -48,12 +45,10 @@ describe('Accessibility tests', () => {
         ['en-GB']
     ]).it('should test that the %s f-contact-preferences (error page) is WCAG compliant', locale => {
         // Arrange
-        contactPreferences
-        .withQuery('&knob-Locale', locale)
-        .withQuery('&knob-Set Api State', 'api-get-failed');
+        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
 
         // Act
-        contactPreferences.load();
+        contactPreferences.loadError();
         const axeResults = getAccessibilityTestResults('f-contact-preferences - load error page');
 
         // Assert

@@ -1,53 +1,33 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
-import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import ContactPreferences from '../src/components/ContactPreferences.vue';
 import fContactPreferencesModule from '../src/store/contactPreferences.module';
 import {
-    setupApiState,
-    apiStates,
-    apiStateOptions
+    apiStateOptions,
+    setupApiMockState
 } from './story.helper';
 
 Vue.use(Vuex);
 
 export default {
     title: 'Components/Pages',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const ContactPreferencesComponent = () => ({
+export const ContactPreferencesComponent = (args, { argTypes }) => ({
     components: {
         ContactPreferences
     },
 
-    props: {
-        locale: {
-            default: select('Locale', [locales.gb], locales.gb)
-        },
-
-        apiState: {
-            default: select(apiStateOptions.title, apiStateOptions.states, apiStates.none)
-        },
-
-        isNewsEmailOptedIn: {
-            default: boolean('News - Email - Opted In', false)
-        },
-
-        isNewsSmsOptedIn: {
-            default: boolean('News - Sms - Opted In', false)
-        }
-    },
+    props: Object.keys(argTypes),
 
     watch: {
         apiState: {
             immediate: true,
             async handler (value) {
-                setupApiState({
-                    apiState: value
-                });
+                setupApiMockState(value);
             }
         },
 
@@ -70,14 +50,44 @@ export const ContactPreferencesComponent = () => ({
         }
     }),
 
-    template: '<contact-preferences ' +
-    'authToken="some-auth-token" ' +
-    ':isAuthFinished="true" ' +
-    ':locale="locale" ' +
-    'smart-gateway-base-url="" ' +
-    // eslint-disable-next-line no-template-curly-in-string
-    ':key="`${locale}`" />'
+    template:
+    `<contact-preferences
+        authToken="some-auth-token"
+        :isAuthFinished="true"
+        :locale="locale"
+        smart-gateway-base-url=""
+    />`
 
 });
 
 ContactPreferencesComponent.storyName = 'f-contact-preferences';
+
+ContactPreferencesComponent.argTypes = {
+    locale: {
+        control: { type: 'select' },
+        options: [locales.gb],
+        description: 'Choose a locale',
+        defaultValue: locales.gb
+    },
+
+    apiState: {
+        control: {
+            type: 'select'
+        },
+        options: apiStateOptions.states,
+        description: apiStateOptions.title,
+        defaultValue: apiStateOptions.default
+    },
+
+    isNewsEmailOptedIn: {
+        control: { type: 'boolean' },
+        description: 'If set to true opt in to emails',
+        defaultValue: false
+    },
+
+    isNewsSmsOptedIn: {
+        control: { type: 'boolean' },
+        description: 'If set to true opt in to SMS',
+        defaultValue: false
+    }
+};
