@@ -57,7 +57,7 @@
     "@babel/preset-env": "7.14.9",
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "5.1.0",
-    "@justeat/fozzie": "8.0.0-beta.1",
+    "@justeat/fozzie": "8.0.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.0-beta.73",
     "@percy/webdriverio": "2.0.0",
