@@ -18,12 +18,18 @@ describe('f-account-info component tests', () => {
     });
 
     it('should show that the email formfield is disabled', () => {
+        // Act
+        accountInfo.load();
+
         // Assert
         expect(accountInfo.isDisabled('emailAddress')).toBe(true);
     });
 
     forEach(['changeEmailAddressLink', 'saveChangesButton', 'changePasswordButton', 'deleteAccountLink'])
     .it('should check if all call to actions are clickable', cta => {
+        // Act
+        accountInfo.load();
+
         // Assert
         expect(accountInfo.canBeClicked(cta)).toBe(true);
     });
@@ -31,6 +37,7 @@ describe('f-account-info component tests', () => {
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
     .it('should display an error message immediately when %s input has been deleted', field => {
         // Act
+        accountInfo.load();
         accountInfo.clearBlurField(field);
         accountInfo.tabOutOfField(field);
 
@@ -40,6 +47,7 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal first name error message immediately on click', () => {
         // Act
+        accountInfo.load();
         accountInfo.clearBlurField('firstName');
         accountInfo.setFieldValue('firstName', illegalInput);
         accountInfo.clickOutOfInputField();
@@ -50,6 +58,7 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal last name error message immediately on click', () => {
         // Act
+        accountInfo.load();
         accountInfo.clearBlurField('lastName');
         accountInfo.setFieldValue('lastName', illegalInput);
         accountInfo.clickOutOfInputField();
@@ -60,6 +69,7 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal phone number error message immediately on click', () => {
         // Act
+        accountInfo.load();
         accountInfo.clearBlurField('phoneNumber');
         accountInfo.setFieldValue('phoneNumber', illegalInput);
         accountInfo.tabOutOfField('phoneNumber');
@@ -70,6 +80,7 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal postcode error message immediately on click', () => {
         // Act
+        accountInfo.load();
         accountInfo.clearBlurField('postcode');
         accountInfo.setFieldValue('postcode', illegalInput);
         accountInfo.clickOutOfInputField();
@@ -77,22 +88,16 @@ describe('f-account-info component tests', () => {
         // Assert
         expect(accountInfo.isInvalidErrorMessageDisplayed('postcode')).toBe(true);
     });
-});
-
-describe('f-account-info component fail to Load tests', () => {
-    let accountInfo;
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s Error page', locale => {
+    ]).it('should display the %s Error page if GET fails', locale => {
         // Arrange
-        accountInfo = new AccountInfo();
         accountInfo
         .withQuery('args', `locale:${locale};apiState:get-details-fails`);
 
         // Act
-        accountInfo.open();
-        accountInfo.waitForErrorCardComponent();
+        accountInfo.loadError();
 
         // Assert
         expect(accountInfo.isErrorCardComponentDisplayed()).toBe(true);
