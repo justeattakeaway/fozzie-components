@@ -41,27 +41,13 @@
                 {{ name }}
             </h3>
 
-            <!-- Cuisines -->
-            <component
-                :is="errorBoundary"
-                v-if="hasCuisines"
-                :tier="3">
-                <restaurant-cuisines
-                    data-test-id="restaurant-cuisines"
-                    :cuisines="cuisines" />
-            </component>
-
             <!-- Premier Icon -->
             <legend-icon
                 v-if="isPremier"
                 :class="[$style['c-restaurantCard-premier']]"
                 data-test-id="premier-icon" />
 
-            <!-- New label -->
-            <!--
-                TODO - we want to translate this within the component using i18n.
-                For now we'll just need to pass down a translated string from the consuming site
-            -->
+            <!-- 'New' label -->
             <restaurant-tag
                 v-if="newTagText"
                 :is-large="true"
@@ -79,6 +65,17 @@
                     v-bind="rating" />
             </component>
 
+            <!-- Cuisines -->
+            <component
+                :is="errorBoundary"
+                v-if="hasCuisines"
+                :tier="3">
+                <restaurant-cuisines
+                    data-test-id="restaurant-cuisines"
+                    :cuisines="cuisines" />
+            </component>
+
+            <!-- Availability -->
             <component
                 :is="errorBoundary"
                 v-if="availability"
@@ -88,9 +85,7 @@
                     data-test-id="restaurant-availability" />
             </component>
 
-            <!-- Offline Icon -->
-
-            <!-- Meta Items List -->
+            <!-- Delivery Meta (etas, distance etc) -->
             <component
                 :is="errorBoundary"
                 v-if="displayDeliveryTimeMeta"
@@ -110,7 +105,7 @@
                     data-test-id="restaurant-fees" />
             </component>
 
-            <!-- misc tags -->
+            <!-- Content Tags -->
             <component
                 :is="errorBoundary"
                 v-if="hasContentTags"
@@ -121,7 +116,7 @@
                     :tags="tags.contentTags" />
             </component>
 
-            <!-- Offers -->
+            <!-- Offer -->
             <icon-text
                 v-if="hasOffer"
                 data-test-id="restaurant-offer"
