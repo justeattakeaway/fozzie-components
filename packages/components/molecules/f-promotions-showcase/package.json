@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-promotions-showcase",
   "description": "Fozzie Promotions Showcase - A place for promotional messages to be displayed",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "dist/f-promotions-showcase.umd.min.js",
   "maxBundleSize": "4kB",
   "files": [
