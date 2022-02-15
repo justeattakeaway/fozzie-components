@@ -219,7 +219,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     border-radius: $radius-rounded-b;
     background-image: var(--bg-image);
     display: block;
-    padding-top: (3 / 5) * 100%; // 5:3 aspect ratio
+    padding-top: math.div(3, 5) * 100%; // 5:3 aspect ratio
     position: relative;
 }
 

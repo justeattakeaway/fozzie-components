@@ -1,9 +1,4 @@
-// Set $theme variable so that fozzie doesn't complain when vars are imported below
-// n.b. This variables isn't actually used (unless there are theme specific vars from fozzie)
-// Instead, the theme is handled via a data-attribute on the component (via the `@mixin theme()` below)
-$theme: 'jet' !default;
-
-@import  '~@justeat/fozzie/src/scss/fozzie';
+@import '@justeat/fozzie/src/scss/fozzie';
 
 /**
  * Component Variables
