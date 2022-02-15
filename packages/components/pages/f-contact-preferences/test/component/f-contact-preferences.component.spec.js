@@ -19,7 +19,6 @@ describe('f-contact-preferences component tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
 
         // Assert
         expect(contactPreferences.isComponentDisplayed()).toBe(true);
@@ -34,7 +33,6 @@ describe('f-contact-preferences component tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
@@ -53,7 +51,6 @@ describe('f-contact-preferences component tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();

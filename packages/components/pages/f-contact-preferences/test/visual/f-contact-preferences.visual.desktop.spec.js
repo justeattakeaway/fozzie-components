@@ -20,7 +20,6 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, deviceType);
@@ -33,8 +32,8 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
         const controls = [`locale:${locale}`, 'isNewsEmailOptedIn:true', 'isNewsSmsOptedIn:true'];
         contactPreferences.path += `&args=${controls}`;
 
+        // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Checked Preferences State - ${locale}`, deviceType);
@@ -49,7 +48,6 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
@@ -67,7 +65,6 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();

@@ -20,7 +20,6 @@ describe('Accessibility tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-contact-preferences');
 
         // Assert

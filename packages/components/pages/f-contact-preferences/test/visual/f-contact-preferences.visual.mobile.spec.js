@@ -20,7 +20,6 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, deviceType);
@@ -35,7 +34,6 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Checked Preferences State - ${locale}`, deviceType);
@@ -50,7 +48,6 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
@@ -68,7 +65,6 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
 
         // Act
         contactPreferences.load();
-        contactPreferences.waitForComponent();
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
