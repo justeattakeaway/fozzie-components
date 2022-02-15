@@ -2251,17 +2251,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-braze-adapter@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-4.0.0.tgz#343be7a2210d457868cdbb7c594270295bcf8280"
-  integrity sha512-mvaon/eXd7AnNlHI7qjUvkztltcKCOe+e+pTZineZfWnisLvCtNynoQZy8AmdHD5a9buNaGnX6vk0c9kCO6CEw==
-  dependencies:
-    date-fns "2.16.1"
-    lodash.findindex "4.6.0"
-    lodash.orderby "4.6.0"
-    lodash.startswith "4.2.1"
-    lodash.uniq "4.5.0"
-
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
