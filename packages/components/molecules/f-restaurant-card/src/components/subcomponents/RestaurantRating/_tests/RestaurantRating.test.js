@@ -22,7 +22,7 @@ describe('RestaurantRating component', () => {
 
         // act
         const wrapper = mount(RestaurantRating, { propsData });
-        const screenReaderMessageElement = wrapper.find('[data-test-id="ratings-summary-message"]');
+        const screenReaderMessageElement = wrapper.find('[data-test-id="restaurant-rating"]');
 
         // assert
         expect(screenReaderMessageElement.exists()).toBe(true);
@@ -45,7 +45,7 @@ describe('RestaurantRating component', () => {
 
         // act
         const wrapper = mount(RestaurantRating, { propsData });
-        const screenReaderMessageElement = wrapper.find('[data-test-id="ratings-summary-message"]');
+        const screenReaderMessageElement = wrapper.find('[data-test-id="restaurant-rating]');
 
         // assert
         expect(screenReaderMessageElement.exists()).toBe(false);
@@ -94,7 +94,7 @@ describe('RestaurantRating component', () => {
             const filledStarElement = wrapper.find('[data-test-id="ratings-star-filled"]');
             const emptyStarElement = wrapper.find('[data-test-id="ratings-star-empty"]');
             const ownRatingMessageElement = wrapper.find('[data-test-id="rating-own-rating-message"]');
-            const noRatingsMessage = wrapper.find('[data-test-id="no-ratings-message"]');
+            const noRatingsMessage = wrapper.find('[data-test-id="restaurant-rating-none"]');
             const countMessage = wrapper.find('[data-test-id="rating-count"]');
 
             // assert
@@ -132,7 +132,7 @@ describe('RestaurantRating component', () => {
             const filledStarElement = wrapper.find('[data-test-id="ratings-star-filled"]');
             const ownRatingMessageElement = wrapper.find('[data-test-id="rating-own-rating-message"]');
             const emptyStarElement = wrapper.find('[data-test-id="ratings-star-empty"]');
-            const noRatingsMessage = wrapper.find('[data-test-id="no-ratings-message"]');
+            const noRatingsMessage = wrapper.find('[data-test-id="restaurant-rating-none"]');
             const countMessage = wrapper.find('[data-test-id="rating-count"]');
             const screenReaderMessageElement = wrapper.find('[data-test-id="ratings-summary-message"]');
 
@@ -168,8 +168,8 @@ describe('RestaurantRating component', () => {
             const filledStarElement = wrapper.find('[data-test-id="ratings-star-filled"]');
             const emptyStarElement = wrapper.find('[data-test-id="ratings-star-empty"]');
             const ownRatingMessageElement = wrapper.find('[data-test-id="rating-own-rating-message"]');
-            const noRatingsMessage = wrapper.find('[data-test-id="no-ratings-message"]');
-            const countMessage = wrapper.find('[data-test-id="rating-count"]');
+            const noRatingsMessage = wrapper.find('[data-test-id="restaurant-rating-none"]');
+            const countMessage = wrapper.find('[data-test-id="rating"]');
 
             // assert
             expect(emptyStarElement.exists()).toBe(false);
@@ -205,7 +205,7 @@ describe('RestaurantRating component', () => {
             const filledStarElement = wrapper.find('[data-test-id="ratings-star-filled"]');
             const ownRatingMessageElement = wrapper.find('[data-test-id="rating-own-rating-message"]');
             const emptyStarElement = wrapper.find('[data-test-id="ratings-star-empty"]');
-            const noRatingsMessage = wrapper.find('[data-test-id="no-ratings-message"]');
+            const noRatingsMessage = wrapper.find('[data-test-id="restaurant-rating-none"]');
             const countMessage = wrapper.find('[data-test-id="rating-count"]');
 
             // assert
