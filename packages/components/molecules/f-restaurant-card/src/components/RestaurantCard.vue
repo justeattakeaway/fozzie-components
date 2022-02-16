@@ -71,7 +71,6 @@
                 v-if="hasCuisines"
                 :tier="3">
                 <restaurant-cuisines
-                    data-test-id="restaurant-cuisines"
                     :cuisines="cuisines" />
             </component>
 
@@ -101,8 +100,7 @@
                 v-if="hasFees"
                 :tier="3">
                 <restaurant-fees
-                    v-bind="fees"
-                    data-test-id="restaurant-fees" />
+                    v-bind="fees" />
             </component>
 
             <!-- Content Tags -->
