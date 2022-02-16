@@ -53,6 +53,7 @@
                 :is-large="true"
                 :is-uppercase="true"
                 :text="newTagText"
+                data-test-id="restaurant-new-badge"
                 color-scheme="positive" />
 
             <!-- Ratings -->
