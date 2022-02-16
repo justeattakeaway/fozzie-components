@@ -1,6 +1,7 @@
 <template>
     <ul
-        :class="[$style['c-restaurantCard-cuisines']]">
+        :class="[$style['c-restaurantCard-cuisines']]"
+        data-test-id="restaurant-cuisines">
         <li
             v-for="(cuisine, index) in cuisines"
             :key="index"
