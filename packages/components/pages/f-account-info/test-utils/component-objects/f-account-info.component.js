@@ -73,16 +73,12 @@ module.exports = class AccountInfo extends Page {
         }
     };
 
-    load () {
-        super.load(this.component);
+    load (component = this.component) {
+        super.load(component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
-    }
-
-    waitForErrorCardComponent () {
-        super.waitForComponent(this.errorCardComponent);
+    loadError () {
+        super.load(this.errorCardComponent);
     }
 
     isComponentDisplayed () {
