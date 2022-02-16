@@ -10,6 +10,6 @@ export default {
         const attrs = ctx.data.attrs || {};
         ctx.data.attrs = attrs;
 
-        return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" class="c-ficon c-ficon--cross" {...ctx.data}><path fill-rule="evenodd" d="M13.3.7a1 1 0 00-1.4 0L7 5.6 2.1.7A1 1 0 10.7 2.1L5.6 7 .7 11.9a1 1 0 101.4 1.4L7 8.4l4.9 4.9a1 1 0 101.4-1.4L8.4 7l4.9-4.9c.4-.4.4-1 0-1.4z"></path></svg>;
+        return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="c-ficon c-ficon--cross" {...ctx.data}><path d="m13.801.807-5.8 5.802L2.198.807.808 2.2 6.608 8l-5.8 5.801 1.39 1.392L8 9.39l5.801 5.802 1.392-1.392L9.39 8l5.802-5.801L13.8.807Z" fill="#242E30"></path></svg>;
     }
 };
