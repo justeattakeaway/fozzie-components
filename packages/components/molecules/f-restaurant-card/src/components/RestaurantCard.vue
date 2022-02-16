@@ -1,45 +1,372 @@
 <template>
-    <component
-        :is="componentVersion"
-        v-bind="data"
-        :flags="flags"
-        :error-boundary="errorBoundary">
-        <template
-            v-for="(_, slotName) in $slots"
-            v-slot:[slotName]>
-            <slot :name="slotName" />
-        </template>
-    </component>
+    <a
+        :href="url"
+        :class="[
+            $style['c-restaurantCard'], {
+                [$style['c-restaurantCard--listItem']]: isListItem,
+                [$style['c-restaurantCard--hasImg']]: !!imgUrl
+            }]"
+        data-test-id="restaurantCard-component"
+        @click="handleClick">
+
+        <!-- background image -->
+        <restaurant-image
+            :class="[$style['c-restaurantCard-img']]"
+            :img-url="imgUrl">
+            <!-- Logo image -->
+            <restaurant-logo
+                v-if="logoUrl"
+                :class="$style['c-restaurantCard-logo']"
+                :logo-url="logoUrl" />
+            <!-- Tags inside image container -->
+            <component
+                :is="errorBoundary"
+                v-if="hasImageTags"
+                :tier="3">
+                <restaurant-tags
+                    :class="$style['c-restaurantCard-imageTags']"
+                    test-id-position="main-image"
+                    :tags="tags.imageTags" />
+            </component>
+
+        </restaurant-image>
+
+        <!-- primary content -->
+        <div :class="$style['c-restaurantCard-content']">
+            <!-- Restaurant Name -->
+            <h3
+                :class="$style['c-restaurantCard-name']"
+                data-test-id="restaurant_name"
+                data-search-name>
+                {{ name }}
+            </h3>
+
+            <!-- Premier Icon -->
+            <legend-icon
+                v-if="isPremier"
+                :class="[$style['c-restaurantCard-premier']]"
+                data-test-id="premier-icon" />
+
+            <!-- 'New' label -->
+            <restaurant-tag
+                v-if="newTagText"
+                :is-large="true"
+                :is-uppercase="true"
+                :text="newTagText"
+                color-scheme="positive" />
+
+            <!-- Ratings -->
+            <component
+                :is="errorBoundary"
+                v-if="rating"
+                :tier="3">
+                <restaurant-rating
+                    data-test-id="restaurant-rating"
+                    v-bind="rating" />
+            </component>
+
+            <!-- Cuisines -->
+            <component
+                :is="errorBoundary"
+                v-if="hasCuisines"
+                :tier="3">
+                <restaurant-cuisines
+                    data-test-id="restaurant-cuisines"
+                    :cuisines="cuisines" />
+            </component>
+
+            <!-- Availability -->
+            <component
+                :is="errorBoundary"
+                v-if="availability"
+                :tier="3">
+                <restaurant-availability
+                    v-bind="availability"
+                    data-test-id="restaurant-availability" />
+            </component>
+
+            <!-- Delivery Meta (etas, distance etc) -->
+            <component
+                :is="errorBoundary"
+                v-if="displayDeliveryTimeMeta"
+                :tier="3">
+                <delivery-time-meta
+                    v-bind="deliveryTimeData"
+                    data-test-id="restaurant-delivery-time-meta" />
+            </component>
+
+            <!-- Fees -->
+            <component
+                :is="errorBoundary"
+                v-if="hasFees"
+                :tier="3">
+                <restaurant-fees
+                    v-bind="fees"
+                    data-test-id="restaurant-fees" />
+            </component>
+
+            <!-- Content Tags -->
+            <component
+                :is="errorBoundary"
+                v-if="hasContentTags"
+                :tier="3">
+                <restaurant-tags
+                    :class="$style['c-restaurantCard-tags']"
+                    test-id-position="inner-content"
+                    :tags="tags.contentTags" />
+            </component>
+
+            <!-- Offer -->
+            <icon-text
+                v-if="hasOffer"
+                data-test-id="restaurant-offer"
+                :text="offer"
+                is-bold>
+                <offer-icon />
+            </icon-text>
+
+            <!-- Disabled Message -->
+            <icon-text
+                v-if="disabledMessage"
+                data-test-id="restaurant-disabled"
+                :text="disabledMessage"
+                color="colorSupportError"
+                hide-icon-in-tile-view>
+                <clock-small-icon />
+            </icon-text>
+        </div>
+
+        <!-- Dishes -->
+        <component
+            :is="errorBoundary"
+            v-if="hasDishes"
+            :tier="3">
+            <restaurant-dishes
+                data-test-id="restaurant-dishes"
+                :dishes="dishes"
+                :is-vertically-stacked="isListItem"
+                :class="[$style['c-restaurantCard-dishes']]" />
+        </component>
+    </a>
 </template>
 
 <script>
-import restaurantCardVersions from './restaurantCardVersions';
-import ErrorBoundaryMixin from '../assets/vue/mixins/errorBoundary.mixin';
+import { OfferIcon, LegendIcon, ClockSmallIcon } from '@justeat/f-vue-icons';
+import RestaurantImage from './subcomponents/RestaurantImage/RestaurantImage.vue';
+import RestaurantLogo from './subcomponents/RestaurantLogo/RestaurantLogo.vue';
+import RestaurantDishes from './subcomponents/RestaurantDishes/RestaurantDishes.vue';
+import RestaurantCuisines from './subcomponents/RestaurantCuisines.vue';
+import RestaurantTags from './subcomponents/RestaurantTags/RestaurantTags.vue';
+import RestaurantTag from './subcomponents/RestaurantTags/RestaurantTag.vue';
+import RestaurantRating from './subcomponents/RestaurantRating/RestaurantRating.vue';
+import DeliveryTimeMeta from './subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
+import IconText from './subcomponents/IconText.vue';
+import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
+import RestaurantAvailability from './subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
+import RenderlessSlotWrapper from './RenderlessSlotWrapper';
+import { EVENT_CLICK_RESTAURANT_CARD } from '../constants/custom-events';
 
 export default {
     name: 'RestaurantCard',
-    mixins: [ErrorBoundaryMixin],
+    components: {
+        RestaurantImage,
+        RestaurantLogo,
+        RestaurantDishes,
+        RestaurantCuisines,
+        RestaurantTags,
+        RestaurantTag,
+        RestaurantRating,
+        DeliveryTimeMeta,
+        IconText,
+        OfferIcon,
+        LegendIcon,
+        ClockSmallIcon,
+        RestaurantFees,
+        RestaurantAvailability,
+        RenderlessSlotWrapper
+    },
+    provide () {
+        return {
+            isListItem: this.isListItem
+        };
+    },
     props: {
-        // restaurant & display data
-        data: {
-            type: Object,
-            required: true
-        },
-        // feature flags
-        flags: {
-            type: Object,
-            default: () => ({})
-        },
-        // component version
-        version: {
+        id: {
             type: String,
-            default: 'v1'
+            default: null
+        },
+        name: {
+            type: String,
+            default: null
+        },
+        url: {
+            type: String,
+            default: null
+        },
+        logoUrl: {
+            type: String,
+            default: null
+        },
+        imgUrl: {
+            type: String,
+            default: null
+        },
+        isListItem: {
+            type: Boolean,
+            default: true
+        },
+        cuisines: {
+            type: Array,
+            default: null
+        },
+        tags: {
+            type: Object,
+            default: null
+        },
+        newTagText: {
+            type: String,
+            default: null
+        },
+        rating: {
+            type: Object,
+            default: null
+        },
+        deliveryTimeData: {
+            type: Object,
+            default: null
+        },
+        dishes: {
+            type: Array,
+            default: null
+        },
+        offer: {
+            type: String,
+            default: null
+        },
+        isPremier: {
+            type: Boolean,
+            default: false
+        },
+        fees: {
+            type: Object,
+            default: null
+        },
+        availability: {
+            type: Object,
+            default: null
+        },
+        disabledMessage: {
+            type: String,
+            default: null
+        },
+        // An optional safeguard component to wrap around restaurant card data points such as ratings, cuisines etc.
+        errorBoundary: {
+            type: Object,
+            default: () => RenderlessSlotWrapper // by default returns a renderless component that will just render it's slot and not bloat markup
         }
     },
     computed: {
-        componentVersion () {
-            return restaurantCardVersions.components[this.version];
+        hasContentTags () {
+            return !!this.tags?.contentTags?.length;
+        },
+        hasImageTags () {
+            return !!this.tags?.imageTags?.length;
+        },
+        hasOffer () {
+            return !!this.offer?.length;
+        },
+        displayDeliveryTimeMeta () {
+            return !!(this.deliveryTimeData?.eta ||
+                this.deliveryTimeData?.distance ||
+                this.deliveryTimeData?.address);
+        },
+        hasDishes () {
+            return !!this.dishes?.length;
+        },
+        hasFees () {
+            return !!(this.fees?.deliveryFeeText || this.fees?.minOrderText);
+        },
+        hasCuisines () {
+            return !!this.cuisines?.length;
+        }
+    },
+    methods: {
+        handleClick () {
+            this.$emit(EVENT_CLICK_RESTAURANT_CARD, {
+                restaurantId: this.id
+            });
         }
     }
 };
 </script>
+
+<style lang="scss" module>
+.c-restaurantCard {
+  text-decoration: none;
+  display: grid;
+  grid-gap: spacing(d);
+  grid-template-columns: 1fr;
+  position: relative;
+
+  &.c-restaurantCard--listItem {
+      @include media('>mid') {
+        grid-gap: spacing() spacing(d);
+        grid-template-columns: minmax(180px, 30%) 1fr;
+      }
+  }
+
+  &:hover {
+      .c-restaurantCard-name {
+          text-decoration: underline;
+      }
+  }
+}
+
+.c-restaurantCard-img {
+  width: 100%;
+  height: 200px; // TODO: agree with design
+
+  .c-restaurantCard--listItem & {
+      @include media('>mid') {
+        min-height: 125px; // TODO: agree with design
+        height: 100%;
+      }
+  }
+}
+
+.c-restaurantCard-logo {
+  top: spacing(d);
+  left: spacing(d);
+  position: absolute;
+}
+
+.c-restaurantCard-content {
+  .c-restaurantCard--listItem & {
+    @include media('>mid') {
+      padding: spacing() 0;
+      grid-column: 2/3;
+    }
+  }
+}
+
+.c-restaurantCard-dishes {
+  .c-restaurantCard--listItem & {
+      @include media('>mid') {
+        grid-column: 1/3;
+      }
+  }
+}
+
+.c-restaurantCard-imageTags {
+    bottom: spacing();
+    left: spacing(d);
+    position: absolute;
+    @include media('>mid') {
+        bottom: spacing(c);
+    }
+}
+
+.c-restaurantCard-premier {
+    height: 21px;
+}
+</style>
