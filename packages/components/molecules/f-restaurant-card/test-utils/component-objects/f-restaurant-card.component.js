@@ -5,7 +5,7 @@ module.exports = class RestaurantCard extends Page {
         super('molecule-folder', 'f-restaurant-card--restaurant-card-component');
     }
 
-    get component () { return $('[data-test-id="restaurantCard-component"]'); }
+    get component () { return $('[data-test-id="restaurant"]'); }
 
     load () {
         super.load(this.component);

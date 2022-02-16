@@ -3,10 +3,10 @@
         :href="url"
         :class="[
             $style['c-restaurantCard'], {
-                [$style['c-restaurantCard--listItem']]: isListItem,
-                [$style['c-restaurantCard--hasImg']]: !!imgUrl
+                [$style['c-restaurantCard--listItem']]: isListItem
             }]"
-        data-test-id="restaurantCard-component"
+        data-test-id="restaurant"
+        :data-restaurant-id="id"
         @click="handleClick">
 
         <!-- background image -->
