@@ -9,7 +9,7 @@ v0.17.0
 *January 31, 2022*
 
 ### Added
-- Included Accept-Language header for consumerApi calls
+- Included 'Accept-Language' header for all consumerApi calls
 
 ### Updated
 - Converted Storybook Knobs to Controls
