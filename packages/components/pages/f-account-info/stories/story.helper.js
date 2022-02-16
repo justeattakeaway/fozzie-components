@@ -11,141 +11,166 @@ const httpVerbs = {
     post: 'POST'
 };
 
-export const apiStates = {
-    none: null,
-    apiPostFailed: 'api-post-failed'
+const apiStates = {
+    none: 'no-issues',
+    apiGetDetailsFailed: 'get-details-fails',
+    apiGetAddressFailed: 'get-address-fails',
+    apiPostDetailsFailed: 'post-details-fails',
+    apiPostAddressFailed: 'post-address-fails'
 };
 
-export const apiGetPostDetailsStateOptions = {
-    title: 'Set Api Get/Post Details State',
-    states: {
-        None: apiStates.none,
-        'The POST consumer details fails (change a value then click `Save Changes`)': apiStates.apiPostFailed
-    }
+// Consumer Details
+const consumerDetailsGET200 = {
+    // GET consumer details successfully
+    url: '/consumer',
+    method: httpVerbs.get,
+    responseStatus: httpStatusCodes.ok,
+    requestData: null,
+    responseData: getConsumerDetails
 };
 
-export const apiGetPostAddressesStateOptions = {
-    title: 'Set Api Get/Post Addresses State',
-    states: {
-        None: apiStates.none,
-        'The POST consumer address fails (change a value then click `Save Changes`)': apiStates.apiPostFailed
-    }
+const consumerDetailsGET500 = {
+    // Failed GET consumer details
+    url: '/consumer',
+    method: httpVerbs.get,
+    responseStatus: httpStatusCodes.internalServerError,
+    requestData: null,
+    responseData: null
 };
 
-const apiAddressesStateDefinitions = {
-    none: { // Good GET and good POST
+const consumerDetailsPOST200 = {
+    // POST consumer details successfully
+    url: '/consumer',
+    method: httpVerbs.post,
+    responseStatus: httpStatusCodes.ok,
+    requestData: null,
+    responseData: getConsumerDetails
+};
+
+const consumerDetailsPOST500 = {
+    // Fail to POST consumer details
+    url: '/consumer',
+    method: httpVerbs.post,
+    responseStatus: httpStatusCodes.internalServerError,
+    requestData: null,
+    responseData: getConsumerDetails
+};
+
+// Consumer Address
+const consumerAddressGET200 = {
+    // GET consumer address successfully
+    url: '/consumer/addresses',
+    method: httpVerbs.get,
+    responseStatus: httpStatusCodes.ok,
+    requestData: null,
+    responseData: getConsumerAddresses
+};
+
+const consumerAddressGET500 = {
+    // Failed to GET consumer address
+    url: '/consumer/addresses',
+    method: httpVerbs.get,
+    responseStatus: httpStatusCodes.internalServerError,
+    requestData: null,
+    responseData: null
+};
+
+const consumerAddressPOST200 = {
+    // POST consumer address successfully
+    url: '/consumer/addresses',
+    method: httpVerbs.post,
+    responseStatus: httpStatusCodes.ok,
+    requestData: null,
+    responseData: getConsumerAddresses
+};
+
+const consumerAddressPOST500 = {
+    // Failed to POST consumer address
+    url: '/consumer/addresses',
+    method: httpVerbs.post,
+    responseStatus: httpStatusCodes.internalServerError,
+    requestData: null,
+    responseData: getConsumerAddresses
+};
+
+const apiDefinitions = [
+    {
         state: apiStates.none,
-        states: [{
-            url: '/consumer/addresses',
-            method: httpVerbs.get,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerAddresses
-        }, {
-            url: '/consumer/addresses',
-            method: httpVerbs.post,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerAddresses
-        }]
+        states: [
+            consumerDetailsGET200,
+            consumerDetailsPOST200,
+            consumerAddressGET200,
+            consumerAddressPOST200
+        ]
     },
-    apiPostFailed: { // Good GET but bad POST
-        state: apiStates.apiPostFailed,
-        states: [{
-            url: '/consumer/addresses',
-            method: httpVerbs.get,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerAddresses
-        }, {
-            url: '/consumer/addresses',
-            method: httpVerbs.post,
-            responseStatus: httpStatusCodes.internalServerError,
-            requestData: null,
-            responseData: getConsumerAddresses
-        }]
+    {
+        state: apiStates.apiPostDetailsFailed,
+        states: [
+            consumerDetailsGET200,
+            consumerDetailsPOST500, // Fail
+            consumerAddressGET200,
+            consumerAddressPOST200
+        ]
+    },
+    {
+        state: apiStates.apiPostAddressFailed,
+        states: [
+            consumerDetailsGET200,
+            consumerDetailsPOST200,
+            consumerAddressGET200,
+            consumerAddressPOST500 // Fail
+        ]
+    },
+    {
+        state: apiStates.apiGetDetailsFailed,
+        states: [
+            consumerDetailsGET500, // Fail
+            consumerDetailsPOST200,
+            consumerAddressGET200,
+            consumerAddressPOST200
+        ]
+    },
+    {
+        state: apiStates.apiGetAddressFailed,
+        states: [
+            consumerDetailsGET200,
+            consumerDetailsPOST200,
+            consumerAddressGET500, // Fail
+            consumerAddressPOST200
+        ]
     }
-};
+];
 
-const apiDetailsStateDefinitions = {
-    none: { // Good GET and good POST
-        state: apiStates.none,
-        states: [{
-            url: '/consumer',
-            method: httpVerbs.get,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerDetails
-        }, {
-            url: '/consumer',
-            method: httpVerbs.post,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerDetails
-        }]
-    },
-    apiPostFailed: { // Good GET but bad POST
-        state: apiStates.apiPostFailed,
-        states: [{
-            url: '/consumer',
-            method: httpVerbs.get,
-            responseStatus: httpStatusCodes.ok,
-            requestData: null,
-            responseData: getConsumerDetails
-        }, {
-            url: '/consumer',
-            method: httpVerbs.post,
-            responseStatus: httpStatusCodes.internalServerError,
-            requestData: null,
-            responseData: getConsumerDetails
-        }]
-    }
+export const apiStateOptions = {
+    title: 'Set Api State',
+    default: apiStates.none,
+    states: [
+        apiStates.none,
+        apiStates.apiGetDetailsFailed,
+        apiStates.apiGetAddressFailed,
+        apiStates.apiPostDetailsFailed,
+        apiStates.apiPostAddressFailed
+    ]
 };
 
 /**
-* Prepares the GET/POST mocks for the api calls to reflect what value the Storybook Knobs equals.
-* @param {apiStates} apiDetailsState - The current set value of the 'Details' Storybook Knob (defaults to 'none')
-* @param {apiStates} apiAddressState - The current set value of the 'Address' Storybook Knob (defaults to 'none')
+* Prepares the GET/POST mocks for the api calls to reflect what value the Storybook Control equals.
+* @param {apiStates} apiState - The current set value of the requested api state
 */
-export const setupApiState = ({
-    apiDetailsState = apiStates.none,
-    apiAddressState = apiStates.none
-}) => {
+export const setupApiMockState = (apiState = apiStates.none) => {
     process.mockFactory.reset();
 
-    // Get Details
-    Object.entries(apiDetailsStateDefinitions).forEach(e => {
-        const [, definition] = e;
-
-        if (definition.state === apiDetailsState) {
-            definition.states.forEach(x => {
-                process.mockFactory.setupMockResponse(
-                    x.method,
-                    x.url,
-                    x.requestData,
-                    x.responseStatus,
-                    x.responseData
-                );
-            });
-        }
-    });
-
-    // Get Addresses
-    Object.entries(apiAddressesStateDefinitions).forEach(e => {
-        const [, definition] = e;
-
-        if (definition.state === apiAddressState) {
-            definition.states.forEach(x => {
-                process.mockFactory.setupMockResponse(
-                    x.method,
-                    x.url,
-                    x.requestData,
-                    x.responseStatus,
-                    x.responseData
-                );
-            });
-        }
+    apiDefinitions.find(e => e.state === apiState)?.states.forEach(x => {
+        process.mockFactory.setupMockResponse(
+            x.method,
+            x.url,
+            x.requestData,
+            x.responseStatus,
+            x.responseData
+        );
     });
 
     process.mockFactory.setupPassThrough();
 };
+
+
