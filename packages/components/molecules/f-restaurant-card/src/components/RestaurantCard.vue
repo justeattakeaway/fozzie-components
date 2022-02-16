@@ -118,7 +118,7 @@
             <!-- Offer -->
             <icon-text
                 v-if="hasOffer"
-                data-test-id="restaurant-offer"
+                data-test-id="restaurant-discounts"
                 :text="offer"
                 is-bold>
                 <offer-icon />
