@@ -34,6 +34,8 @@
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
+    "ci:build:services": "yarn build",
+    "ci:lint:services": "yarn lint",
     "lint:fix": "yarn lint --fix",
     "test": "jest",
     "ci:test:services": "yarn test"
