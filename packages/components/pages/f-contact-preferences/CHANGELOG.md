@@ -6,7 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest – to be added to the next release
 ------------------------------
-
 ### Removed
 - Unneeded controls and watchers in `ContactPreferences.stories`
 
