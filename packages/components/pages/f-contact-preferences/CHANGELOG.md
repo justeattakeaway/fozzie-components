@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest – to be added to the next release
 ------------------------------
+
+*February 16, 2022*
+
+### Updated
+- Removed unneeded toggle controls
+
+
 *February 14, 2022*
 
 ### Updated
