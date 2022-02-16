@@ -2,6 +2,7 @@ import Vuex from 'vuex';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import ContactPreferences from '../ContactPreferences.vue';
+import ContactPreferencesApi from '../../services/providers/contactPreferences.api';
 import tenantConfigs from '../../tenants';
 import {
     contactPreferencesViewModel,
@@ -77,6 +78,8 @@ const mountContactPreferences = async ({
 };
 
 describe('ContactPreferences Component', () => {
+    let contactPreferencesMock;
+
     beforeEach(() => {
         // Arrange & Act
         dataDefaults = () => ({
@@ -98,6 +101,12 @@ describe('ContactPreferences Component', () => {
             isAuthFinished: true,
             smartGatewayBaseUrl: baseUrl
         };
+        contactPreferencesMock = new ContactPreferencesApi({
+            baseUrl,
+            cookies: cookiesSpy,
+            httpClient: httpSpy,
+            locale: 'en-GB'
+        });
     });
 
     afterEach(() => {
@@ -121,11 +130,7 @@ describe('ContactPreferences Component', () => {
 
             // Assert
             expect(storeActions.loadPreferences).toHaveBeenCalledWith(expect.any(Object), {
-                api: {
-                    baseUrl,
-                    cookies: cookiesSpy,
-                    httpClient: httpSpy
-                },
+                api: contactPreferencesMock,
                 authToken: token
             });
         });
@@ -286,11 +291,7 @@ describe('ContactPreferences Component', () => {
 
             // Assert
             expect(storeActions.savePreferences).toHaveBeenCalledWith(expect.any(Object), {
-                api: {
-                    baseUrl,
-                    cookies: cookiesSpy,
-                    httpClient: httpSpy
-                },
+                api: contactPreferencesMock,
                 authToken: token
             });
         });
