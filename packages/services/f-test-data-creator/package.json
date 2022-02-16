@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
+    "ci:lint:services": "yarn lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style"
   },
