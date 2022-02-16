@@ -46,13 +46,13 @@ const createCard = type => ({
 });
 
 const mockLogger = {
-    logError: jest.fn(),
-    logWarn: jest.fn(),
-    logInfo: jest.fn()
+    error: jest.fn(),
+    warn: jest.fn(),
+    info: jest.fn()
 };
 
 const mocks = {
-    $logger: mockLogger
+    $log: mockLogger
 };
 
 const createMetadataCards = cardTypes => cardTypes.map(type => createCard(type));
