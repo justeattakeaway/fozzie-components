@@ -35,8 +35,6 @@
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-account-info ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
-    "ci:build:pages": "yarn build",
-    "ci:lint:pages": "yarn lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
