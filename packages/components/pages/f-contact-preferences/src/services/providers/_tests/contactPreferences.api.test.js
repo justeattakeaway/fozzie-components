@@ -7,14 +7,15 @@ import {
     contactPreferencesUpdateBody
 } from '../../../../test-utils/setup';
 
-let apiProvider;
-let httpMock;
-let cookiesMock;
-const cookiesSetSpy = jest.fn();
-const httpGetSpy = jest.fn();
-const httpPostSpy = jest.fn();
-
 describe('ContactPreferencesApi Provider', () => {
+    let apiProvider;
+    let httpMock;
+    let cookiesMock;
+    const locale = 'en-GB';
+    const cookiesSetSpy = jest.fn();
+    const httpGetSpy = jest.fn();
+    const httpPostSpy = jest.fn();
+
     beforeEach(() => {
         // Arrange mocks/spies
         httpMock = {
@@ -29,7 +30,8 @@ describe('ContactPreferencesApi Provider', () => {
         apiProvider = new ContactPreferencesApi({
             httpClient: httpMock,
             cookies: cookiesMock,
-            baseUrl
+            baseUrl,
+            locale
         });
     });
 
@@ -77,7 +79,8 @@ describe('ContactPreferencesApi Provider', () => {
             const expectedUri = `${baseUrl}/consumer/preferences`;
             const expectedHeaders = {
                 Authorization: `Bearer ${token}`,
-                'x-je-conversation': conversationId
+                'x-je-conversation': conversationId,
+                'Accept-Language': locale
             };
 
             // Act
@@ -111,7 +114,8 @@ describe('ContactPreferencesApi Provider', () => {
             const expectedBody = contactPreferencesUpdateBody;
             const expectedHeaders = {
                 Authorization: `Bearer ${token}`,
-                'x-je-conversation': conversationId
+                'x-je-conversation': conversationId,
+                'Accept-Language': locale
             };
 
             // Act

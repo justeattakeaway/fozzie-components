@@ -142,7 +142,8 @@ export default {
             contactPreferencesApi: new ContactPreferencesApi({
                 httpClient: this.$http,
                 cookies: this.$cookies,
-                baseUrl: this.smartGatewayBaseUrl
+                baseUrl: this.smartGatewayBaseUrl,
+                locale: this.$i18n.locale
             }),
             isFormSubmitting: false
         };
