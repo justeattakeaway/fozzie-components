@@ -45,7 +45,7 @@
             <legend-icon
                 v-if="isPremier"
                 :class="[$style['c-restaurantCard-premier']]"
-                data-test-id="premier-icon" />
+                data-test-id="restaurant-premier" />
 
             <!-- 'New' label -->
             <restaurant-tag
