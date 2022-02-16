@@ -7,13 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Latest – to be added to the next release
 ------------------------------
 
+### Removed
+- Unneeded controls and watchers in `ContactPreferences.stories`
+
+
+v0.17.0
+------------------------------
 *February 16, 2022*
 
-### Removed
-- Removed unneeded toggle controls
-
-
-*February 14, 2022*
+### Added
+- Included 'Accept-Language' header for all consumerApi calls
 
 ### Updated
 - Converted Storybook Knobs to Controls
