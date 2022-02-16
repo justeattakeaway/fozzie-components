@@ -9,7 +9,7 @@ Latest – to be added to the next release
 
 *February 16, 2022*
 
-### Updated
+### Removed
 - Removed unneeded toggle controls
 
 
