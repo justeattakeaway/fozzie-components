@@ -29,18 +29,6 @@ export const ContactPreferencesComponent = (args, { argTypes }) => ({
             async handler (value) {
                 setupApiMockState(value);
             }
-        },
-
-        isNewsEmailOptedIn: {
-            async handler (value) {
-                this.$store.dispatch('fContactPreferencesModule/editPreference', { key: 'news', field: 'emailValue', value });
-            }
-        },
-
-        isNewsSmsOptedIn: {
-            async handler (value) {
-                this.$store.dispatch('fContactPreferencesModule/editPreference', { key: 'news', field: 'smsValue', value });
-            }
         }
     },
 
