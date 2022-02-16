@@ -3,6 +3,13 @@ import sut from '../DeliveryTimeMeta.vue';
 
 
 describe('DeliveryTimeMeta', () => {
+    const etaSelector = '[data-test-id="restaurant-eta"]';
+    const locationSelector = '[data-test-id="restaurant-location"]';
+
+    const etaIconSelector = '[data-test-id="restaurant-eta-icon"]';
+    const distanceIconSelector = '[data-test-id="restaurant-distance-icon"]';
+    const addressIconSelector = '[data-test-id="restaurant-address-icon"]';
+
     it('should be defined', () => {
         // arrange
         const propsData = {
@@ -27,7 +34,7 @@ describe('DeliveryTimeMeta', () => {
         const wrapper = mount(sut, { propsData });
 
         const visibleText = wrapper.text();
-        const etaExists = wrapper.find('[data-test-id="delivery-meta-eta"]').exists();
+        const etaExists = wrapper.find(etaSelector).exists();
 
         // assert
         expect(visibleText).toBe('foo');
@@ -45,7 +52,7 @@ describe('DeliveryTimeMeta', () => {
         const wrapper = mount(sut, { propsData });
 
         const visibleText = wrapper.text();
-        const distanceExists = wrapper.find('[data-test-id="delivery-meta-distance"]').exists();
+        const distanceExists = wrapper.find(locationSelector).exists();
 
         // assert
         expect(visibleText).toBe('bar');
@@ -62,7 +69,7 @@ describe('DeliveryTimeMeta', () => {
         const wrapper = mount(sut, { propsData });
 
         const visibleText = wrapper.text();
-        const addressExists = wrapper.find('[data-test-id="delivery-meta-address"]').exists();
+        const addressExists = wrapper.find(locationSelector).exists();
 
         // assert
         expect(visibleText).toBe('baz');
@@ -80,7 +87,7 @@ describe('DeliveryTimeMeta', () => {
             const wrapper = mount(sut, { propsData });
 
             const etaText = wrapper.text();
-            const etaIconExists = wrapper.find('[data-test-id="delivery-meta-eta-icon"]').exists();
+            const etaIconExists = wrapper.find(etaIconSelector).exists();
 
             // assert
             expect(etaText).toBeTruthy();
@@ -97,7 +104,7 @@ describe('DeliveryTimeMeta', () => {
             const wrapper = mount(sut, { propsData });
 
             const distanceText = wrapper.text();
-            const distanceIconExists = wrapper.find('[data-test-id="delivery-meta-distance-icon"]').exists();
+            const distanceIconExists = wrapper.find(distanceIconSelector).exists();
 
             // assert
             expect(distanceText).toBeTruthy();
@@ -114,7 +121,7 @@ describe('DeliveryTimeMeta', () => {
             const wrapper = mount(sut, { propsData });
 
             const addressText = wrapper.text();
-            const addressIconExists = wrapper.find('[data-test-id="delivery-meta-address-icon"]').exists();
+            const addressIconExists = wrapper.find(addressIconSelector).exists();
 
             // assert
             expect(addressText).toBeTruthy();
@@ -141,7 +148,7 @@ describe('DeliveryTimeMeta', () => {
             const wrapper = mount(sut, { propsData });
 
             const etaText = wrapper.text();
-            const etaIconExists = wrapper.find('[data-test-id="delivery-meta-eta-icon"]').exists();
+            const etaIconExists = wrapper.find(etaIconSelector).exists();
 
             // assert
             expect(etaText).toBeTruthy();
@@ -158,7 +165,7 @@ describe('DeliveryTimeMeta', () => {
             const wrapper = mount(sut, { propsData });
 
             const distanceText = wrapper.text();
-            const distanceIconExists = wrapper.find('[data-test-id="delivery-meta-distance-icon"]').exists();
+            const distanceIconExists = wrapper.find(distanceIconSelector).exists();
 
             // assert
             expect(distanceText).toBeTruthy();
@@ -175,7 +182,7 @@ describe('DeliveryTimeMeta', () => {
             const wrapper = mount(sut, { propsData });
 
             const addressText = wrapper.text();
-            const addressIconExists = wrapper.find('[data-test-id="delivery-meta-address-icon"]').exists();
+            const addressIconExists = wrapper.find(addressIconSelector).exists();
 
             // assert
             expect(addressText).toBeTruthy();
