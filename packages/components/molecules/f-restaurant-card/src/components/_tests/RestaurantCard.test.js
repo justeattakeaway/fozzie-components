@@ -311,7 +311,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-disabled"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-offline"]').exists()).toBe(true);
         });
 
         it.each([

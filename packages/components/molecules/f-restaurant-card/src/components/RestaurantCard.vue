@@ -127,7 +127,7 @@
             <!-- Disabled Message -->
             <icon-text
                 v-if="disabledMessage"
-                data-test-id="restaurant-disabled"
+                data-test-id="restaurant-offline"
                 :text="disabledMessage"
                 color="colorSupportError"
                 hide-icon-in-tile-view>
