@@ -77,17 +77,5 @@ ContactPreferencesComponent.argTypes = {
         options: apiStateOptions.states,
         description: apiStateOptions.title,
         defaultValue: apiStateOptions.default
-    },
-
-    isNewsEmailOptedIn: {
-        control: { type: 'boolean' },
-        description: 'If set to true opt in to emails',
-        defaultValue: false
-    },
-
-    isNewsSmsOptedIn: {
-        control: { type: 'boolean' },
-        description: 'If set to true opt in to SMS',
-        defaultValue: false
     }
 };
