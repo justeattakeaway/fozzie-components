@@ -33,8 +33,6 @@
     "prepublishOnly": "yarn && yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
-    "ci:build:organisms": "yarn build",
-    "ci:lint:organisms": "yarn lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
