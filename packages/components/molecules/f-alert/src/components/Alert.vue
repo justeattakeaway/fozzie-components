@@ -125,7 +125,6 @@ $alert-borderRadius: $radius-rounded-c;
 .c-alert-headingContainer {
     display: flex;
     align-items: center;
-    margin-top: 2px;
 }
 
 .c-alert--success {
@@ -149,11 +148,11 @@ $alert-borderRadius: $radius-rounded-c;
     vertical-align: middle;
     margin-top: 0;
     margin-left: spacing(d);
+    margin-bottom: spacing(a);
 }
 
 .c-alert-content {
     @include font-size(body-l);
-    margin-top: spacing(a);
     margin-left: spacing(g);
 }
 
