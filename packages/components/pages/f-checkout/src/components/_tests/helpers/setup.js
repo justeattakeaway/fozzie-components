@@ -154,10 +154,10 @@ const createStore = (
     }
 });
 
-const $logger = {
-    logInfo: jest.fn(),
-    logWarn: jest.fn(),
-    logError: jest.fn()
+const $log = {
+    info: jest.fn(),
+    warn: jest.fn(),
+    error: jest.fn()
 };
 
 // eslint-disable-next-line
@@ -179,7 +179,7 @@ export {
     defaultExperimentationState,
     i18n,
     createStore,
-    $logger,
+    $log,
     $cookies,
     mockAuthToken,
     mockAuthTokenNoNumbers,
