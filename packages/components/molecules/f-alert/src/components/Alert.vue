@@ -129,18 +129,30 @@ $alert-borderRadius: $radius-rounded-c;
 
 .c-alert--success {
     @include alert-variant($color-support-positive-02, $color-content-default);
+    path {
+        fill: $color-support-positive;
+    }
 }
 
 .c-alert--warning {
     @include alert-variant($color-support-warning-02, $color-content-default);
+    path {
+        fill: $color-support-warning;
+    }
 }
 
 .c-alert--danger {
     @include alert-variant($color-support-error-02, $color-content-default);
+    path {
+        fill: $color-support-error;
+    }
 }
 
 .c-alert--info {
     @include alert-variant($color-support-info-02, $color-content-default);
+    path {
+        fill: $color-support-info;
+    }
 }
 
 .c-alert-heading {
