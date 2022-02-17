@@ -31,8 +31,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn build",
-    "build": "rollup --config",
-    "ci:build:services": "yarn build"
+    "build": "rollup --config"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

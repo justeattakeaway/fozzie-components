@@ -3,10 +3,10 @@
         :href="url"
         :class="[
             $style['c-restaurantCard'], {
-                [$style['c-restaurantCard--listItem']]: isListItem,
-                [$style['c-restaurantCard--hasImg']]: !!imgUrl
+                [$style['c-restaurantCard--listItem']]: isListItem
             }]"
-        data-test-id="restaurantCard-component"
+        data-test-id="restaurant"
+        :data-restaurant-id="id"
         @click="handleClick">
 
         <!-- background image -->
@@ -45,7 +45,7 @@
             <legend-icon
                 v-if="isPremier"
                 :class="[$style['c-restaurantCard-premier']]"
-                data-test-id="premier-icon" />
+                data-test-id="restaurant-premier" />
 
             <!-- 'New' label -->
             <restaurant-tag
@@ -53,6 +53,7 @@
                 :is-large="true"
                 :is-uppercase="true"
                 :text="newTagText"
+                data-test-id="restaurant-new-badge"
                 color-scheme="positive" />
 
             <!-- Ratings -->
@@ -71,7 +72,6 @@
                 v-if="hasCuisines"
                 :tier="3">
                 <restaurant-cuisines
-                    data-test-id="restaurant-cuisines"
                     :cuisines="cuisines" />
             </component>
 
@@ -101,8 +101,7 @@
                 v-if="hasFees"
                 :tier="3">
                 <restaurant-fees
-                    v-bind="fees"
-                    data-test-id="restaurant-fees" />
+                    v-bind="fees" />
             </component>
 
             <!-- Content Tags -->

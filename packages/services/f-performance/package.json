@@ -30,7 +30,6 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
-    "ci:lint:services": "yarn lint",
     "lint:fix": "yarn lint --fix"
   },
   "browserslist": [
