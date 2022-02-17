@@ -8,7 +8,7 @@
         }"
         :title="text"
         :aria-label="ariaLabel"
-        data-test-id="restaurant-badge">
+        :data-test-id="testId || 'restaurant-badge'">
         {{ text }}
     </span>
 </template>
@@ -41,6 +41,10 @@ export default {
             default: false
         },
         ariaLabel: {
+            type: String,
+            default: null
+        },
+        testId: {
             type: String,
             default: null
         }
