@@ -77,7 +77,6 @@ import {
     VUEX_CHECKOUT_EXPERIMENTATION_MODULE,
     VUEX_CHECKOUT_MODULE
 } from '../constants';
-import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import LogEvents from '../log-events';
 import tenantConfigs from '../tenants';
@@ -114,8 +113,7 @@ export default {
     },
 
     mixins: [
-        VueGlobalisationMixin,
-        loggerMixin
+        VueGlobalisationMixin
     ],
 
     props: {
@@ -514,12 +512,34 @@ export default {
             }
 
             if (LogEvents[event]?.logMessage) {
-                this.logInvoker({
-                    message: LogEvents[event].logMessage,
-                    data: { ...this.eventData, ...additionalData },
-                    logMethod: this.$logger[LogEvents[event].logMethod],
-                    ...error && { error }
-                });
+                const { logMethod } = LogEvents[event];
+                if (logMethod !== 'error') {
+                    this.$log[logMethod](
+                        LogEvents[event].logMessage,
+                        'checkout',
+                        {
+                            ...this.eventData,
+                            ...additionalData
+                        }
+                    );
+                } else {
+                    this.$log[logMethod](
+                        LogEvents[event].logMessage,
+                        error,
+                        'checkout',
+                        {
+                            ...this.eventData,
+                            ...additionalData,
+                            ...(error && error instanceof Error && {
+                                exception: error.name,
+                                exceptionMessage: error.message,
+                                exceptionStackTrace: error.stack,
+                                traceId: error.traceId || (error.response && error.response.data.traceId),
+                                errorCode: error.errorCode
+                            })
+                        }
+                    );
+                }
             }
         },
 
