@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.23.0
+------------------------------
+*Februrary 17, 2022*
+### Changed
+- inject test IDs into restaurant-tags
+- sync restaurant dish test ids with searchweb
+
 v0.22.0
 ------------------------------
 *Februrary 17, 2022*
