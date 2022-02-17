@@ -11,6 +11,9 @@ v4.3.0
 ### Fixed
 - Small CSS bug when cross icon is displayed
 
+### Changed
+- Bump of `f-vue-icons` with new cross icon
+
 *February 8, 2022*
 
 ### Added
