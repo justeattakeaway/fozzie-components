@@ -1,33 +1,33 @@
 export default {
     CheckoutSuccess: {
         logMessage: 'Consumer Checkout Successful',
-        logMethod: 'logInfo',
+        logMethod: 'info',
         hasEventData: true
     },
     CheckoutFailure: {
         logMessage: 'Consumer Checkout Failure',
-        logMethod: 'logError',
+        logMethod: 'error',
         hasEventData: true
     },
     CheckoutAddressGetFailure: {
         logMessage: 'Get Checkout Address Failure',
-        logMethod: 'logWarn'
+        logMethod: 'warn'
     },
     CheckoutCustomerGetFailure: {
         logMessage: 'Get Checkout Customer Failure',
-        logMethod: 'logWarn'
+        logMethod: 'warn'
     },
     CheckoutGeoLocationGetFailure: {
         logMessage: 'Geo Location Lookup Failed',
-        logMethod: 'logWarn'
+        logMethod: 'warn'
     },
     CheckoutValidationError: {
         logMessage: 'Checkout Validation Error',
-        logMethod: 'logWarn'
+        logMethod: 'warn'
     },
     CheckoutSetupGuestFailure: {
         logMessage: 'Checkout Setup Guest Failure',
-        logMethod: 'logError',
+        logMethod: 'error',
         hasEventData: true
     },
     CheckoutUpdateSuccess: {
@@ -35,17 +35,17 @@ export default {
     },
     CheckoutUpdateFailure: {
         logMessage: 'Consumer Update Failure',
-        logMethod: 'logError',
+        logMethod: 'error',
         hasEventData: true
     },
     CheckoutNonFulfillableError: {
         logMessage: 'Consumer Checkout Not Fulfillable',
-        logMethod: 'logError',
+        logMethod: 'error',
         hasEventData: true
     },
     CheckoutUpdateForbidden: {
         logMessage: 'Checkout Update Failure: Access Forbidden',
-        logMethod: 'logWarn',
+        logMethod: 'warn',
         hasEventData: true
     },
     CheckoutPlaceOrderSuccess: {
@@ -53,36 +53,36 @@ export default {
     },
     CheckoutPlaceOrderFailure: {
         logMessage: 'Place Order Failure',
-        logMethod: 'logError',
+        logMethod: 'error',
         hasEventData: true
     },
     CheckoutPlaceOrderDuplicateOrder: {
         logMessage: 'Place Order Duplicate Order',
-        logMethod: 'logWarn',
+        logMethod: 'warn',
         hasEventData: true
     },
     CheckoutGetFailure: {
         logMessage: 'Get Checkout Failure',
-        logMethod: 'logWarn'
+        logMethod: 'warn'
     },
     CheckoutGetForbidden: {
         logMessage: 'Get Checkout Failure: Access Forbidden',
-        logMethod: 'logWarn'
+        logMethod: 'warn'
     },
     CheckoutAvailableFulfilmentGetFailure: {
         logMessage: 'Get Checkout Available Fulfilment Times Failure',
-        logMethod: 'logError'
+        logMethod: 'error'
     },
     CheckoutAvailableFulfilmentEmpty: {
         logMessage: 'Available Fulfilment Times Empty',
-        logMethod: 'logError'
+        logMethod: 'error'
     },
     CheckoutBasketGetFailure: {
         logMessage: 'Get Basket Failure',
-        logMethod: 'logError'
+        logMethod: 'error'
     },
     NotesConfigurationFailure: {
         logMessage: 'Notes configuration failure',
-        logMethod: 'logWarn'
+        logMethod: 'warn'
     }
 };

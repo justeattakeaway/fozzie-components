@@ -45,7 +45,6 @@ import Accordion from './Accordion.vue';
 import {
     VUEX_CHECKOUT_MODULE
 } from '../constants';
-import loggerMixin from '../mixins/logger.mixin';
 
 export default {
     name: 'CheckoutNotes',
@@ -53,10 +52,6 @@ export default {
         Accordion,
         FormField
     },
-
-    mixins: [
-        loggerMixin
-    ],
 
     data () {
         return {

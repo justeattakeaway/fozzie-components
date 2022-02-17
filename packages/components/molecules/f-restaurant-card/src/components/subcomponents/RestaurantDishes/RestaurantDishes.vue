@@ -4,11 +4,11 @@
             [$style['c-restaurantCard-dishes']]: true,
             [$style['c-restaurantCard-dishes--isVerticallyStacked']]: isVerticallyStacked,
             [$style['c-restaurantCard-dishes--isScrollable']]: hasMultipleDishes
-        }">
+        }"
+        data-test-id="dishsearch-dish-list">
         <li
             v-for="dish in renderableDishes"
             :key="`restaurant-dish-${dish.name}`"
-            data-test-id="restaurant-dish-list-item"
             :class="[$style['c-restaurantCard-dishes-item']]">
             <restaurant-dish v-bind="dish" />
         </li>

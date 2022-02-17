@@ -23,7 +23,6 @@ import {
     VUEX_CHECKOUT_MODULE,
     CHECKOUT_ERROR_FORM_TYPE
 } from '../constants';
-import loggerMixin from '../mixins/logger.mixin';
 
 export default {
     name: 'CheckoutError',
@@ -31,10 +30,6 @@ export default {
         Card,
         BagSadBgIcon
     },
-
-    mixins: [
-        loggerMixin
-    ],
 
     props: {
         redirectUrl: {
@@ -62,11 +57,13 @@ export default {
     },
 
     mounted () {
-        this.logInvoker({
-            message: 'Consumer Checkout Error Page',
-            data: {},
-            logMethod: this.$logger.logWarn
-        });
+        this.$log.warn(
+            'Consumer Checkout Error Page',
+            'checkout',
+            {
+                ...this.defaultLoggingData
+            }
+        );
     },
 
     methods: {
