@@ -16,7 +16,7 @@
         <!-- No ratings message -->
         <span
             v-if="noRatingsAvailable"
-            data-test-id="no-ratings-message"
+            data-test-id="restaurant-rating-none"
             :class="[$style['c-restaurantCard-rating-notRatedMsg']]">
             {{ notRatedMessage }}
         </span>
@@ -28,7 +28,7 @@
                  are still being discovered. Therefore this is subject to change
             -->
             <span
-                data-test-id="ratings-summary-message"
+                data-test-id="restaurant-rating"
                 class="is-visuallyHidden">
                 {{ accessibleMessage }}
             </span>
@@ -59,7 +59,7 @@
                 &#40;
                 <data
                     v-if="!isOwnRating"
-                    data-test-id="rating-count"
+                    data-test-id="rating"
                     :class="[$style['c-restaurantCard-rating-count']]"
                     :value="count">
                     {{ count }}
