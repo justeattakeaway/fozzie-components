@@ -8,7 +8,7 @@
         }"
         :title="text"
         :aria-label="ariaLabel"
-        :data-test-id="testId ? testId : 'restaurant-badge'">
+        :data-test-id="testId || 'restaurant-badge'">
         {{ text }}
     </span>
 </template>
