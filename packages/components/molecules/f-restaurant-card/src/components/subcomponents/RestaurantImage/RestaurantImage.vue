@@ -1,6 +1,7 @@
 <template>
     <div
         :class="[$style['c-restaurantCard-img']]"
+        data-test-id="restaurant-cuisine-image"
         :style="`${imgUrl ? `background-image: url(${imgUrl});` : null}`"
         role="presentation">
         <slot />

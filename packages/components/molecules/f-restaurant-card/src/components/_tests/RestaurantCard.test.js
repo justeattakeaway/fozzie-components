@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import RestaurantCard from '../RestaurantCard.vue';
 import { EVENT_CLICK_RESTAURANT_CARD } from '../../constants/custom-events';
+import RestaurantAvailability from '../subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
 
 describe('RestaurantCard', () => {
     describe('Restaurant cuisines', () => {
@@ -153,7 +154,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-offer"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-discounts"]').exists()).toBe(true);
         });
 
         it.each([
@@ -311,7 +312,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-disabled"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-offline"]').exists()).toBe(true);
         });
 
         it.each([
@@ -329,6 +330,38 @@ describe('RestaurantCard', () => {
 
             // assert
             expect(wrapper.find('[data-test-id="restaurant-disabled"]').exists()).toBe(false);
+        });
+    });
+
+    describe('Restaurant availability', () => {
+        it('renders an availability component if data provided', () => {
+            // arrange
+            const propsData = {
+                availability: {
+                    availabilityType: 'COLLECTION',
+                    availabilityTranslatedName: 'Pre-order',
+                    availabilityMessage: 'Opening at 13:20'
+                }
+            };
+
+            // act
+            const wrapper = mount(RestaurantCard, { propsData });
+
+            // assert
+            expect(wrapper.findComponent(RestaurantAvailability).exists()).toBe(true);
+        });
+
+        it.each([
+            {},
+            {
+                availability: null
+            }
+        ])('does not render an availability component if availability prop is missing', propsData => {
+            // arrange & act
+            const wrapper = mount(RestaurantCard, { propsData });
+
+            // assert
+            expect(wrapper.findComponent(RestaurantAvailability).exists()).toBe(false);
         });
     });
 

@@ -62,7 +62,6 @@
                 v-if="rating"
                 :tier="3">
                 <restaurant-rating
-                    data-test-id="restaurant-rating"
                     v-bind="rating" />
             </component>
 
@@ -81,8 +80,7 @@
                 v-if="availability"
                 :tier="3">
                 <restaurant-availability
-                    v-bind="availability"
-                    data-test-id="restaurant-availability" />
+                    v-bind="availability" />
             </component>
 
             <!-- Delivery Meta (etas, distance etc) -->
@@ -118,7 +116,7 @@
             <!-- Offer -->
             <icon-text
                 v-if="hasOffer"
-                data-test-id="restaurant-offer"
+                data-test-id="restaurant-discounts"
                 :text="offer"
                 is-bold>
                 <offer-icon />
@@ -127,7 +125,7 @@
             <!-- Disabled Message -->
             <icon-text
                 v-if="disabledMessage"
-                data-test-id="restaurant-disabled"
+                data-test-id="restaurant-offline"
                 :text="disabledMessage"
                 color="colorSupportError"
                 hide-icon-in-tile-view>
