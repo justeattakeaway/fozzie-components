@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.22.0
+------------------------------
+*February 16, 2022*
+
+### Changed
+- $logger interface to $log.
+- Updated the tests to reflect the changes.
+
+### Removed
+- logger mixin as not needed anymore with new $log interface.
+
+
 v3.21.1
 ------------------------------
 *February 16, 2022*

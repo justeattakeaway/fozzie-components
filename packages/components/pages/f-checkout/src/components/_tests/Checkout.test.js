@@ -26,7 +26,7 @@ import {
     defaultCheckoutActions,
     i18n,
     createStore,
-    $logger,
+    $log,
     $cookies
 } from './helpers/setup';
 import exceptions from '../../exceptions/exceptions';
@@ -278,7 +278,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
@@ -856,7 +855,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -963,7 +961,6 @@ describe('Checkout', () => {
 
         describe('handleEventLogging ::', () => {
             let wrapper;
-            let logInvokerSpy;
 
             const eventData = {
                 isLoggedIn: false,
@@ -982,11 +979,9 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger
+                        $log
                     }
                 });
-
-                logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
             });
 
             describe('when `EventNames` contains event', () => {
@@ -1013,8 +1008,8 @@ describe('Checkout', () => {
                         expect(event[0][0]).toEqual(eventData);
                     });
 
-                    describe('AND event `hasEventData`', () => {
-                        it('AND event `hasEventData` and an error, should emit event with eventData and error', () => {
+                    describe('AND an error', () => {
+                        it('should emit event with eventData and error', () => {
                             // Act
                             wrapper.vm.handleEventLogging(eventWithEventData, error);
 
@@ -1026,53 +1021,16 @@ describe('Checkout', () => {
                         });
                     });
                 });
-            });
 
-            describe('when `LogEvents` contains event', () => {
-                const event = 'CheckoutSuccess';
-                const eventLog = {
-                    message: 'Consumer Checkout Successful',
-                    data: eventData,
-                    logMethod: $logger.logInfo
-                };
+                describe('when `LogEvents` contains event', () => {
+                    const event = 'CheckoutSuccess';
 
-                it('should log event', () => {
-                    // Act
-                    wrapper.vm.handleEventLogging(event);
-
-                    // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
-                });
-
-                describe('AND event has error', () => {
-                    beforeEach(() => {
-                        // Arrange
-                        eventLog.error = error;
-                    });
-
-                    it('should log event with error', () => {
+                    it('should log event', () => {
                         // Act
-                        wrapper.vm.handleEventLogging(event, error);
+                        wrapper.vm.handleEventLogging(event);
 
                         // Assert
-                        expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
-                    });
-
-                    describe('AND event has additionalData', () => {
-                        const additionalData = { postcode: 'EC1A 1BB' };
-
-                        beforeEach(() => {
-                            // Arrange
-                            eventLog.data = { ...eventData, ...additionalData };
-                        });
-
-                        it('should log event with error', () => {
-                            // Act
-                            wrapper.vm.handleEventLogging(event, error, additionalData);
-
-                            // Assert
-                            expect(logInvokerSpy).toHaveBeenCalledWith(eventLog);
-                        });
+                        expect($log.info).toHaveBeenCalled();
                     });
                 });
             });
@@ -1135,7 +1093,6 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger,
                                     $cookies
                                 }
                             });
@@ -1165,7 +1122,6 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger,
                                     $cookies
                                 }
                             });
@@ -1194,7 +1150,6 @@ describe('Checkout', () => {
                                 localVue,
                                 propsData,
                                 mocks: {
-                                    $logger,
                                     $cookies
                                 }
                             });
@@ -1270,7 +1225,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1301,7 +1255,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1384,74 +1337,6 @@ describe('Checkout', () => {
             });
         });
 
-        describe('`logInvoker` ::', () => {
-            let wrapper;
-            const store = createStore({
-                ...defaultCheckoutState,
-                isLoggedIn: true,
-                serviceType: CHECKOUT_METHOD_DELIVERY
-            });
-
-            beforeEach(() => {
-                wrapper = mount(VueCheckout, {
-                    store,
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $logger,
-                        $cookies
-                    }
-                });
-            });
-
-            it('should exist', () => {
-                expect(wrapper.vm.logInvoker).toBeDefined();
-            });
-
-            describe('when invoked', () => {
-                it('should call `$logger` with the correct callback assigned', () => {
-                    // Arrange & Act
-                    wrapper.vm.logInvoker({
-                        message: 'Logger says hi',
-                        data: wrapper.vm.eventData,
-                        logMethod: $logger.logInfo
-                    });
-
-                    // Assert
-                    expect($logger.logInfo).toHaveBeenCalled();
-                });
-
-                it('should call `$logger` with the correct arguments', () => {
-                    // Arrange
-                    const error = new Error();
-                    error.name = 'Test name';
-                    error.message = 'Test message';
-                    error.stack = 'Test stack';
-                    error.errorCode = 'Test error code';
-
-                    const expectedError = {
-                        exception: error.name,
-                        exceptionMessage: error.message,
-                        exceptionStackTrace: error.stack,
-                        errorCode: error.errorCode
-                    };
-                    const logMessage = 'Logger says hi';
-
-                    // Act
-                    wrapper.vm.logInvoker({
-                        message: logMessage,
-                        data: wrapper.vm.eventData,
-                        logMethod: $logger.logError,
-                        error
-                    });
-
-                    // Assert
-                    expect($logger.logError).toHaveBeenCalledWith(logMessage, store, { data: wrapper.vm.eventData, tags: 'checkout', ...expectedError });
-                });
-            });
-        });
-
         describe('`handleNonFulfillableCheckout` ::', () => {
             let wrapper;
             let handleEventLoggingSpy;
@@ -1523,7 +1408,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
@@ -1544,7 +1428,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -1576,7 +1459,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1646,7 +1528,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1684,7 +1565,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1724,7 +1604,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1768,7 +1647,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1803,7 +1681,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1835,7 +1712,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -1869,7 +1745,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
@@ -1932,7 +1807,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
@@ -1958,7 +1832,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -1988,7 +1861,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2034,7 +1906,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -2057,7 +1928,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -2080,7 +1950,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -2171,7 +2040,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2315,7 +2183,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2370,7 +2237,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2416,7 +2282,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2435,7 +2300,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2457,7 +2321,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -2566,10 +2429,7 @@ describe('Checkout', () => {
                     }),
                     i18n,
                     localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+                    propsData
                 });
 
                 handleEventLoggingSpy = jest.spyOn(wrapper.vm, 'handleEventLogging').mockImplementation();
@@ -2651,10 +2511,7 @@ describe('Checkout', () => {
                     }),
                     i18n,
                     localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+                    propsData
                 });
 
                 const alertElement = wrapper.findComponent({ ref }).vm.$el;
@@ -2674,10 +2531,7 @@ describe('Checkout', () => {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+                    propsData
                 });
 
                 // Act
@@ -2699,10 +2553,7 @@ describe('Checkout', () => {
                     }),
                     i18n,
                     localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+                    propsData
                 });
 
                 const alertElement = wrapper.findComponent({ ref }).vm.$el;
@@ -2734,7 +2585,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
@@ -2752,7 +2602,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2772,7 +2621,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2819,10 +2667,7 @@ describe('Checkout', () => {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+                    propsData
                 });
 
                 // Act & Assert
@@ -2838,7 +2683,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2861,7 +2705,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -2946,7 +2789,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
@@ -3036,7 +2878,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -3079,7 +2920,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -3116,7 +2956,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -3153,7 +2992,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
@@ -3204,7 +3042,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
@@ -3228,7 +3065,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -3252,7 +3088,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -3276,7 +3111,6 @@ describe('Checkout', () => {
                             localVue,
                             propsData,
                             mocks: {
-                                $logger,
                                 $cookies
                             }
                         });
@@ -3301,7 +3135,6 @@ describe('Checkout', () => {
                         localVue,
                         propsData,
                         mocks: {
-                            $logger,
                             $cookies
                         }
                     });
@@ -3337,7 +3170,6 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $logger,
                         $cookies
                     }
                 });
