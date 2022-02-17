@@ -23,7 +23,7 @@ export default {
     },
     CheckoutValidationError: {
         logMessage: 'Checkout Validation Error',
-        logMethod: 'logWarn'
+        logMethod: 'warn'
     },
     CheckoutSetupGuestFailure: {
         logMessage: 'Checkout Setup Guest Failure',

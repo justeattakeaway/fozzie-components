@@ -512,8 +512,9 @@ export default {
             }
 
             if (LogEvents[event]?.logMessage) {
-                if (LogEvents[event].logMethod !== 'error') {
-                    this.$log[LogEvents[event].logMethod](
+                const { logMethod } = LogEvents[event];
+                if (logMethod !== 'error') {
+                    this.$log[logMethod](
                         LogEvents[event].logMessage,
                         'checkout',
                         {
@@ -522,7 +523,7 @@ export default {
                         }
                     );
                 } else {
-                    this.$log[LogEvents[event].logMethod](
+                    this.$log[logMethod](
                         LogEvents[event].logMessage,
                         error,
                         'checkout',
