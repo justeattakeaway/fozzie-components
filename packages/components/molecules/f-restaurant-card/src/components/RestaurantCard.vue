@@ -139,7 +139,6 @@
             v-if="hasDishes"
             :tier="3">
             <restaurant-dishes
-                data-test-id="restaurant-dishes"
                 :dishes="dishes"
                 :is-vertically-stacked="isListItem"
                 :class="[$style['c-restaurantCard-dishes']]" />
