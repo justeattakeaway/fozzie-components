@@ -1,5 +1,7 @@
 <template>
-    <div :class="[$style['c-restaurantCard-availability']]">
+    <div
+        :class="[$style['c-restaurantCard-availability']]"
+        data-test-id="restaurant-times">
         <icon-text
             v-if="availabilityTranslatedName"
             :text="availabilityTranslatedName"

@@ -80,8 +80,7 @@
                 v-if="availability"
                 :tier="3">
                 <restaurant-availability
-                    v-bind="availability"
-                    data-test-id="restaurant-availability" />
+                    v-bind="availability" />
             </component>
 
             <!-- Delivery Meta (etas, distance etc) -->
