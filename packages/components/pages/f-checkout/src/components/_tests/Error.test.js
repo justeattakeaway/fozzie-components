@@ -5,7 +5,7 @@ import Error from '../Error.vue';
 import {
     i18n,
     $cookies,
-    $logger,
+    $log,
     createStore,
     defaultCheckoutState
 } from './helpers/setup';
@@ -40,7 +40,7 @@ describe('Error', () => {
             },
             mocks: {
                 $cookies,
-                $logger
+                $log
             }
         });
     });
@@ -121,7 +121,7 @@ describe('Error', () => {
                             },
                             mocks: {
                                 $cookies,
-                                $logger
+                                $log
                             }
                         });
                     });
