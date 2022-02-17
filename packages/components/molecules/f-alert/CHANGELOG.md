@@ -12,7 +12,8 @@ v4.3.0
 - Small CSS bug when cross icon is displayed
 
 ### Changed
-- Bump of `f-vue-icons` with new cross icon
+- Bump of `f-vue-icons` with new cross and info icon
+- defined svg fill colour inside the component
 
 *February 8, 2022*
 
