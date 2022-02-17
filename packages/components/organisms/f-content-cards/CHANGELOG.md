@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.3.0
 ------------------------------
-*February 15, 2022*
+*February 17, 2022*
 
 ### Changed
 - Updated braze adapter version to support location aware content card filtering

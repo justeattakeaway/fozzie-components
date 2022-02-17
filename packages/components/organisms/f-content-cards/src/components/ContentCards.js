@@ -11,6 +11,7 @@ import {
 
 export const CARDSOURCE_METADATA = 'metadata';
 export const CARDSOURCE_CUSTOM = 'custom';
+const TAG_NAME = 'content-cards';
 
 export const STATE_DEFAULT = 'default';
 export const STATE_ERROR = 'error';
@@ -100,7 +101,7 @@ export default {
         },
         tags: {
             type: String,
-            default: 'content-cards'
+            default: TAG_NAME
         }
     },
     data: () => ({
@@ -128,7 +129,7 @@ export default {
             }[this.locale] || 'uk';
         },
         logTags () {
-            return ['content-cards', this.tags !== 'content-cards' ? this.tags : null];
+            return [TAG_NAME, this.tags !== TAG_NAME ? this.tags : null];
         }
     },
     watch: {
