@@ -28,10 +28,12 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s news email & sms checked', locale => {
         // Arrange
-        contactPreferences.path += `&args=locale:${locale};isNewsEmailOptedIn:true;isNewsSmsOptedIn:true`;
+        contactPreferences.path += `&args=locale:${locale}`;
 
         // Act
         contactPreferences.load();
+        contactPreferences.clickNewsEmailCheckbox();
+        contactPreferences.clickNewsSmsCheckbox();
 
         // Assert
         browser.percyScreenshot(`f-contact-preferences - Checked Preferences State - ${locale}`, deviceType);
