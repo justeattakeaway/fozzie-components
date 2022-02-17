@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.21.0
+------------------------------
+*Februrary 16, 2022*
+### Changed
+- Sync a number of `data-test-id` attributes with the SearchWeb acceptance tests
+- Removed an unused class modifier `c-restaurantCard--hasImg`
+- Update unit tests with new test IDs
+
 v0.20.0
 ------------------------------
 *Februrary 15, 2022*

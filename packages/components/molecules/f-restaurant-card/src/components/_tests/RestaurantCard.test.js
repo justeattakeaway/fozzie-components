@@ -186,7 +186,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-premier"]').exists()).toBe(true);
         });
 
         it('should not show Premier Tag when restaurant is not Premier', () => {
@@ -199,7 +199,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="restaurant-premier"]').exists()).toBe(false);
         });
 
         it('should not show Premier Tag when premier data is missing', () => {
@@ -210,7 +210,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="restaurant-premier"]').exists()).toBe(false);
         });
 
         it.each([null, undefined])('should not show Premier Tag when premier data is %p', value => {
@@ -223,7 +223,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="premier-icon"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="restaurant-premier"]').exists()).toBe(false);
         });
     });
 
@@ -266,7 +266,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-fees"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="restaurant-delivery-fees"]').exists()).toBe(false);
         });
 
         it('renders if there is a delivery fee', () => {
@@ -281,7 +281,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-fees"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-delivery-fees"]').exists()).toBe(true);
         });
 
         it('renders if there is a minimum order', () => {
@@ -296,7 +296,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-fees"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="restaurant-delivery-fees"]').exists()).toBe(true);
         });
     });
 

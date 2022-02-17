@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "main": "dist/f-vue-icons.cjs.js",
   "maxBundleSize": "150kB",
   "cdn": "dist/f-vue-icons.min.js",
@@ -37,8 +37,6 @@
     "build": "yarn build:icons && yarn build:dist",
     "build:dist": "bili --format umd,es,cjs,umd-min --js buble --name f-vue-icons",
     "build:icons": "node build && babel src/components -d icons",
-    "ci:build:tools": "yarn build",
-    "ci:lint:tools": "yarn lint",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit --passWithNoTests",
@@ -54,7 +52,7 @@
     "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
-    "@justeat/f-icons": "4.6.0",
+    "@justeat/f-icons": "4.7.0",
     "@vue/cli-plugin-babel": "4.5.8",
     "@vue/cli-plugin-unit-jest": "4.5.8",
     "@vue/test-utils": "1.0.3",

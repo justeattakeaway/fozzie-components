@@ -6,8 +6,8 @@
             :is-bold="true"
             color="colorSupportPositive"
             :hide-icon-in-tile-view="true"
-            data-test-id="delivery-meta-eta">
-            <clock-small-icon data-test-id="delivery-meta-eta-icon" />
+            data-test-id="restaurant-eta">
+            <clock-small-icon data-test-id="restaurant-eta-icon" />
         </icon-text>
 
         <icon-text
@@ -15,15 +15,15 @@
             :text="distance"
             :is-bold="true"
             :hide-icon-in-tile-view="true"
-            data-test-id="delivery-meta-distance">
-            <map-pin-icon data-test-id="delivery-meta-distance-icon" />
+            data-test-id="restaurant-location">
+            <map-pin-icon data-test-id="restaurant-distance-icon" />
         </icon-text>
 
         <icon-text
             v-else-if="address"
             :text="address"
-            data-test-id="delivery-meta-address">
-            <map-pin-icon data-test-id="delivery-meta-address-icon" />
+            data-test-id="restaurant-location">
+            <map-pin-icon data-test-id="restaurant-address-icon" />
         </icon-text>
     </div>
 </template>

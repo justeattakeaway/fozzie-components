@@ -1,5 +1,7 @@
 <template>
-    <div :class="[$style['c-restaurantCard-fees']]">
+    <div
+        :class="[$style['c-restaurantCard-fees']]"
+        data-test-id="restaurant-delivery-fees">
         <icon-text
             v-if="deliveryFeeText"
             :class="[$style['c-restaurantCard-fees-item']]"
