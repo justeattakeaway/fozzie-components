@@ -11,7 +11,6 @@ v0.18.0
 ### Updated
 - Version of `f-alert`
 
-
 *February 17, 2022*
 
 ### Removed
