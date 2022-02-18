@@ -68,15 +68,12 @@ import '@justeat/f-button/dist/f-button.css';
 import { mapState } from 'vuex';
 import EventNames from '../event-names';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
-import loggerMixin from '../mixins/logger.mixin';
 
 export default {
     name: 'CheckoutHeader',
     components: {
         FButton
     },
-
-    mixins: [loggerMixin],
 
     props: {
         loginUrl: {
@@ -101,10 +98,10 @@ export default {
         onVisitLoginPage () {
             this.$emit(EventNames.CheckoutVisitLoginPage);
 
-            this.logInvoker({
-                message: 'Consumer Visit Login Page',
-                logMethod: this.$logger.logInfo
-            });
+            this.$log.info(
+                'Consumer Visit Login Page',
+                'checkout'
+            );
         }
     }
 };

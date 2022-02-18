@@ -23,7 +23,8 @@ RestaurantTagComponent.args = {
     text: 'Promoted',
     textColour: tagColourSchemes.promoted.text,
     backgroundColour: tagColourSchemes.promoted.background,
-    ariaLabel: 'Foo bar'
+    ariaLabel: 'Foo bar',
+    testId: 'restaurant-sponsored'
 };
 
 RestaurantTagComponent.storyName = 'restaurant-tag';

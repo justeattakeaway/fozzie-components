@@ -9,7 +9,6 @@ import {
     defaultCheckoutState,
     i18n,
     createStore,
-    $logger,
     $cookies
 } from './helpers/setup';
 
@@ -149,7 +148,6 @@ describe('CheckoutForm', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger,
                         $cookies
                     }
                 });
@@ -180,7 +178,6 @@ describe('CheckoutForm', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger,
                         $cookies
                     }
                 });
@@ -208,7 +205,6 @@ describe('CheckoutForm', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger,
                         $cookies
                     }
                 });
@@ -226,7 +222,6 @@ describe('CheckoutForm', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger,
                         $cookies
                     },
                     computed: {
@@ -251,7 +246,6 @@ describe('CheckoutForm', () => {
                     propsData,
                     mocks: {
                         $v,
-                        $logger,
                         $cookies
                     },
                     computed: {
@@ -289,10 +283,7 @@ describe('CheckoutForm', () => {
                     }),
                     i18n,
                     localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+                    propsData
                 });
 
                 const scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
