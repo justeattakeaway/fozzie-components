@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import RestaurantCard from '../RestaurantCard.vue';
 import { EVENT_CLICK_RESTAURANT_CARD } from '../../constants/custom-events';
 import RestaurantAvailability from '../subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
+import RestaurantDishes from '../subcomponents/RestaurantDishes/RestaurantDishes.vue';
 
 describe('RestaurantCard', () => {
     describe('Restaurant cuisines', () => {
@@ -239,7 +240,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-dishes"]').exists()).toBe(true);
+            expect(wrapper.findComponent(RestaurantDishes).exists()).toBe(true);
         });
 
         it.each([
@@ -252,7 +253,7 @@ describe('RestaurantCard', () => {
             const wrapper = mount(RestaurantCard, { propsData });
 
             // assert
-            expect(wrapper.find('[data-test-id="restaurant-dishes"]').exists()).toBe(false);
+            expect(wrapper.findComponent(RestaurantDishes).exists()).toBe(false);
         });
     });
 
