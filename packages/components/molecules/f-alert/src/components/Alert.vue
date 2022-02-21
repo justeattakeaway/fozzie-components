@@ -125,23 +125,34 @@ $alert-borderRadius: $radius-rounded-c;
 .c-alert-headingContainer {
     display: flex;
     align-items: center;
-    margin-top: 2px;
 }
 
 .c-alert--success {
     @include alert-variant($color-support-positive-02, $color-content-default);
+    path {
+        fill: $color-support-positive;
+    }
 }
 
 .c-alert--warning {
     @include alert-variant($color-support-warning-02, $color-content-default);
+    path {
+        fill: $color-support-warning;
+    }
 }
 
 .c-alert--danger {
     @include alert-variant($color-support-error-02, $color-content-default);
+    path {
+        fill: $color-support-error;
+    }
 }
 
 .c-alert--info {
     @include alert-variant($color-support-info-02, $color-content-default);
+    path {
+        fill: $color-support-info;
+    }
 }
 
 .c-alert-heading {
@@ -149,11 +160,11 @@ $alert-borderRadius: $radius-rounded-c;
     vertical-align: middle;
     margin-top: 0;
     margin-left: spacing(d);
+    margin-bottom: spacing(a);
 }
 
 .c-alert-content {
     @include font-size(body-l);
-    margin-top: spacing(a);
     margin-left: spacing(g);
 }
 
