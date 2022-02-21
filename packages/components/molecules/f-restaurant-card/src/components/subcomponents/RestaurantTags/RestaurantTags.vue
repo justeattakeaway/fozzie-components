@@ -35,19 +35,17 @@ export default {
 
 <style lang="scss" module>
 .c-restaurantTags {
-    margin: 0;
+    margin-top: 0;
     padding: 0;
+    line-height: 1;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: spacing(a);
 }
 
 .c-restaurantTags-tag {
     list-style-type: none;
-    padding: 0;
     margin: 0;
-    margin-right: spacing(a);
-    display: inline-block;
-
-    &:last-of-type {
-        margin-right: 0;
-    }
 }
 </style>

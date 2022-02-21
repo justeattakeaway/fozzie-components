@@ -35,7 +35,7 @@
         <div :class="$style['c-restaurantCard-content']">
             <!-- Restaurant Name -->
             <h3
-                :class="[$style['c-restaurantCard-name'], $style['c-restaurantCard-data']]"
+                :class="[$style['c-restaurantCard-name']]"
                 data-test-id="restaurant_name"
                 data-search-name>
                 {{ name }}
@@ -81,6 +81,8 @@
                     :cuisines="cuisines" />
             </component>
 
+            <div :class="[$style['c-restaurantCard-break']]" />
+
             <!-- Delivery Meta (etas, distance etc) -->
             <component
                 :is="errorBoundary"
@@ -118,7 +120,7 @@
                 v-if="hasOffer"
                 data-test-id="restaurant-discounts"
                 :text="offer"
-                :class="[$style['c-restaurantCard-data']]"
+                :class="[$style['c-restaurantCard-offer'], $style['c-restaurantCard-data']]"
                 is-bold>
                 <offer-icon />
             </icon-text>
@@ -129,7 +131,7 @@
                 v-if="hasContentTags"
                 :tier="3">
                 <restaurant-tags
-                    :class="[$style['c-restaurantCard-tags'], $style['c-restaurantCard-data']]"
+                    :class="[$style['c-restaurantCard-tags']]"
                     test-id-position="inner-content"
                     :tags="tags.contentTags" />
             </component>
@@ -310,35 +312,89 @@ export default {
 </script>
 
 <style lang="scss" module>
-// DRAFT - layout inner-card
-.c-restaurantCard-data {
-    grid-column: 2;
+// DRAFT - layout inner-card - desktop
+@include media('>mid') {
+    .c-restaurantCard-data {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            grid-column: 2;
+        }
+    }
+
+    .c-restaurantCard-content {
+        .c-restaurantCard--listItem & {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-flow: dense;
+            align-items: center;
+            gap: spacing(a) spacing(d);
+        }
+    }
+
+    .c-restaurantCard-ratingContainer,
+    .c-restaurantCard-cuisines {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            grid-column: 1;
+        }
+    }
+
+    .c-restaurantCard-name,
+    .c-restaurantCard-tags {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            grid-column: 1 / 3;
+        }
+    }
+
+    .c-restaurantCard-name {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            margin-bottom: spacing(a);
+        }
+    }
+
+    .c-restaurantCard-tags {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            margin-top: spacing(a);
+        }
+    }
+
+    .c-restaurantCard-break {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            display: none;
+        }
+    }
 }
 
+// DRAFT - layout inner-card - mobile
 .c-restaurantCard-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-flow: dense;
+    display: flex;
     align-items: center;
-    gap: spacing(a) spacing(d);
-}
+    flex-flow: row wrap;
 
-.c-restaurantCard-ratingContainer,
-.c-restaurantCard-cuisines {
-    grid-column: 1;
+    > * {
+        margin-bottom: spacing(a);
+        margin-right: spacing(b);
+    }
 }
 
 .c-restaurantCard-name,
-.c-restaurantCard-tags {
-    grid-column: 1 / 3;
+.c-restaurantCard-tags,
+.c-restaurantCard-offer {
+    flex: 0 0 100%;
 }
 
-.c-restaurantCard-name {
-    margin-bottom: spacing(a);
-}
-
-.c-restaurantCard-tags {
+.c-restaurantCard-offer {
+    order: 1; // places as last flex item if no other orders specified
     margin-top: spacing(a);
+
+    .c-restaurantCard--listItem .c-restaurantCard-content & {
+        @include media('>mid') {
+            order: initial; // ignore for list-item desktop
+        }
+    }
+}
+
+.c-restaurantCard-break {
+    width: 100%;
+    margin: 0;
 }
 
 // regular styling
@@ -399,12 +455,10 @@ export default {
 }
 
 .c-restaurantCard-imageTags {
-    bottom: spacing();
+    bottom: spacing(d);
     left: spacing(d);
     position: absolute;
-    @include media('>mid') {
-        bottom: spacing(c);
-    }
+    margin-bottom: 0;
 }
 
 .c-restaurantCard-premier {
