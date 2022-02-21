@@ -32,7 +32,7 @@
         </restaurant-image>
 
         <!-- primary content -->
-        <div :class="$style['c-restaurantCard-content']">
+        <section :class="$style['c-restaurantCard-content']">
             <!-- Restaurant Name -->
             <h3
                 :class="[$style['c-restaurantCard-name']]"
@@ -146,7 +146,7 @@
                 hide-icon-in-tile-view>
                 <clock-small-icon />
             </icon-text>
-        </div>
+        </section>
 
         <!-- Dishes -->
         <component
