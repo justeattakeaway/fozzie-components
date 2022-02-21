@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import RestaurantTags from '../src/components/subcomponents/RestaurantTags/RestaurantTags.vue';
+import RestaurantTags from '../../src/components/subcomponents/RestaurantTags/RestaurantTags.vue';
 
 export default {
     title: 'Components/Molecules/f-restaurant-card/Subcomponents',

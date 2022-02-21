@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import DeliveryTimeMeta from '../src/components/subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
+import DeliveryTimeMeta from '../../src/components/subcomponents/DeliveryTimeMeta/DeliveryTimeMeta.vue';
 
 export default {
     title: 'Components/Molecules/f-restaurant-card/Subcomponents',

@@ -1,6 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
-import RestaurantAvailability from '../src/components/subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
-import availabilityTypes from '../src/components/subcomponents/RestaurantAvailability/availabilityTypes';
+import RestaurantAvailability from '../../src/components/subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
+import availabilityTypes from '../../src/components/subcomponents/RestaurantAvailability/availabilityTypes';
 
 export default {
     title: 'Components/Molecules/f-restaurant-card/Subcomponents',

@@ -1,21 +1,21 @@
 import { withA11y } from '@storybook/addon-a11y';
-import RestaurantCard from '../src/components/RestaurantCard.vue';
-import restaurantLogo from './assets/images/mcdonalds-logo.gif';
-import restaurantImage from './assets/images/mcdonalds.webp';
-import availabilityTypes from '../src/components/subcomponents/RestaurantAvailability/availabilityTypes';
+import RestaurantCard from '../../src/components/RestaurantCard.vue';
+import restaurantLogo from '../assets/images/mcdonalds-logo.gif';
+import restaurantImage from '../assets/images/mcdonalds.webp';
+import availabilityTypes from '../../src/components/subcomponents/RestaurantAvailability/availabilityTypes';
 
 export default {
-    title: 'Components/Molecules/f-restaurant-card',
+    title: 'Components/Molecules/f-restaurant-card/RestaurantCard/ListItem',
     decorators: [withA11y]
 };
 
-export const RestaurantCardComponent = (args, { argTypes }) => ({
+export const RestaurantCardListItemVerboseComponent = (args, { argTypes }) => ({
     components: { RestaurantCard },
     props: Object.keys(argTypes),
     template:  '<restaurant-card v-bind="$props"/>'
 });
 
-RestaurantCardComponent.args = {
+RestaurantCardListItemVerboseComponent.args = {
     id: '12345',
     name: 'McDonald\'s® - Clapham Junction',
     logoUrl: restaurantLogo,
@@ -70,8 +70,7 @@ RestaurantCardComponent.args = {
         availabilityType: availabilityTypes.PREORDER,
         availabilityTranslatedName: 'Pre-order',
         availabilityMessage: 'Opening at 13:20'
-    },
-    disabledMessage: 'Not taking orders at the moment'
+    }
 };
 
-RestaurantCardComponent.storyName = 'f-restaurant-card';
+RestaurantCardListItemVerboseComponent.storyName = 'Online - List Item Mode - Verbose Data';
