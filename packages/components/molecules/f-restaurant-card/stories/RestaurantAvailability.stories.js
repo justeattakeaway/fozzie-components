@@ -3,7 +3,7 @@ import RestaurantAvailability from '../src/components/subcomponents/RestaurantAv
 import availabilityTypes from '../src/components/subcomponents/RestaurantAvailability/availabilityTypes';
 
 export default {
-    title: 'Components/Molecules/f-restaurant-card',
+    title: 'Components/Molecules/f-restaurant-card/Subcomponents',
     decorators: [withA11y]
 };
 
