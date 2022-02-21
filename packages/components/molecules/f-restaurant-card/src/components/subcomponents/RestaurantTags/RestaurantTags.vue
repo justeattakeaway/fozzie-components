@@ -36,6 +36,7 @@ export default {
 <style lang="scss" module>
 .c-restaurantTags {
     margin-top: 0;
+    margin-left: 0;
     padding: 0;
     line-height: 1;
     display: flex;
