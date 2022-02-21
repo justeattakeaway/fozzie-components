@@ -158,10 +158,14 @@ export default {
          */
         cardsReceived (cards) {
             if (cards || this.contentCardsHaveLoaded) {
-                this.$logger.logInfo('f-offers (Results) - Content cards received', this.$store, {
-                    ...this.loggingData,
-                    Count: cards
-                });
+                this.$log.info(
+                    'f-offers (Results) - Content cards received',
+                    'offers',
+                    {
+                        ...this.loggingData,
+                        Count: cards
+                    }
+                );
             }
         },
 
@@ -170,9 +174,13 @@ export default {
          */
         hasLoaded () {
             this.contentCardsHaveLoaded = true;
-            this.$logger.logInfo('f-offers (Results) - Content cards loaded successfully', this.$store, {
-                ...this.loggingData
-            });
+            this.$log.info(
+                'f-offers (Results) - Content cards loaded successfully',
+                'offers',
+                {
+                    ...this.loggingData
+                }
+            );
         },
 
         /**
@@ -181,17 +189,22 @@ export default {
          */
         onError (error) {
             this.error = error;
-            this.$logger.logError('f-offers (Results) - An error has occurred during the loading of content cards', this.$store, {
-                ...this.loggingData,
-                error: {
-                    body: error,
-                    exception: error.name,
-                    exceptionMessage: error.message,
-                    exceptionStackTrace: error.stack,
-                    traceId: error.traceId || (error.response && error.response.data.traceId),
-                    errorCode: error.errorCode
+            this.$log.error(
+                'f-offers (Results) - An error has occurred during the loading of content cards',
+                error,
+                'offers',
+                {
+                    ...this.loggingData,
+                    error: {
+                        body: error,
+                        exception: error.name,
+                        exceptionMessage: error.message,
+                        exceptionStackTrace: error.stack,
+                        traceId: error.traceId || (error.response && error.response.data.traceId),
+                        errorCode: error.errorCode
+                    }
                 }
-            });
+            );
         },
 
         /**
