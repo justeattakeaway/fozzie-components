@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "7.2.0",
+  "version": "7.3.0",
   "main": "dist/f-content-cards.umd.min.js",
   "maxBundleSize": "75kB",
   "files": [
@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@braze/web-sdk": "^3.3.0",
-    "@justeat/f-braze-adapter": "4.0.0",
+    "@justeat/f-braze-adapter": "4.2.0",
     "@justeat/f-vue-icons": "1.2.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
