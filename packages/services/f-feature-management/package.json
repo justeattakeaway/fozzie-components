@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-feature-management",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Service for querying feature values provided by Feature Management",
   "main": "dist/f-feature-management.umd.js",
   "module": "dist/f-feature-management.es.js",
