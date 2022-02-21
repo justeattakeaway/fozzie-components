@@ -1,4 +1,4 @@
-import SET_FM_CONFIG_JSON from './mutation.types';
+const SET_FM_CONFIG_JSON = 'SET_FM_CONFIG_JSON';
 
 export default {
     namespaced: true,
