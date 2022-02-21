@@ -67,9 +67,10 @@ export default {
     beforeCreate () {
         if (!this.$store.hasModule(VUEX_MODULE_NAMESPACE_OFFERS)) {
             this.$store.registerModule(VUEX_MODULE_NAMESPACE_OFFERS, offers);
-            this.$logger.logInfo('f-offers (main) - Vuex module registered for f-offers', this.$store, {
-                tags: 'offers'
-            });
+            this.$log.info(
+                'f-offers (main) - Vuex module registered for f-offers',
+                'offers'
+            );
         }
     },
 
@@ -81,12 +82,15 @@ export default {
             brazeApiKey: this.brazeApiKey,
             authToken: this.authToken
         });
-        this.$logger.logInfo('f-offers (main) - Offers page mounted', this.$store, {
-            tags: 'offers',
-            data: {
-                brazeApiKey: this.brazeApiKey
+        this.$log.info(
+            'f-offers (main) - Offers page mounted',
+            'offers',
+            {
+                data: {
+                    brazeApiKey: this.brazeApiKey
+                }
             }
-        });
+        );
     },
 
     methods: {
