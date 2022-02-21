@@ -2251,13 +2251,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-alert@4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.2.0.tgz#fe2ca873fdbb4b18c6ac41a4ed702ca689a77e0f"
-  integrity sha512-1dUOkKrY5NGXjJPa+jTP2JpHfRXqNXFtJ9U0enCS+/uHf/4aKcbd5wwX6fLZLcHCoZUoBu3jXO/tPdFrQSotWw==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2299,19 +2292,10 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-content-cards@6.0.0-beta.2":
-  version "6.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-6.0.0-beta.2.tgz#1b77d0d33ad0b8b41d26d78029c848e8444d20b5"
-  integrity sha512-+Z1YqCpYMAZIZzZl7Bb+NAApKGvjNwypsAWcFlmqXpQgnmYV0C5CxJZo2z7VDXaQ7J7IZiTDH62YpvXJt1kP5A==
-  dependencies:
-    "@babel/plugin-proposal-class-properties" "7.12.13"
-    "@justeat/f-services" "1.0.1"
-    core-js "3.6.5"
-
-"@justeat/f-content-cards@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-7.0.0.tgz#486e3cc1e6e8196a0d8a7efb026c55d18237a5a2"
-  integrity sha512-FuKy9jC+6//idD/ZJQ2Of/se/g0BtzuETyloKuSxHrF9XocqT7GVrGGr9vJm6whoglqrLcBq48dpuq7us03OjA==
+"@justeat/f-content-cards@7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-7.2.0.tgz#df6ad1c340c25d8de402a0d78404350a304beff8"
+  integrity sha512-P4oR6EUC4JzE/CobZQJoMxFwjjc9dWmElsjeRFGVONsPNqXUB0viX0aynkdH4bPTyHtYA+6cZos0qveXE3AoAw==
   dependencies:
     "@babel/plugin-proposal-class-properties" "7.12.13"
     "@justeat/f-services" "1.0.1"
