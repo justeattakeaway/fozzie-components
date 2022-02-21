@@ -35,35 +35,41 @@
         <div :class="$style['c-restaurantCard-content']">
             <!-- Restaurant Name -->
             <h3
-                :class="$style['c-restaurantCard-name']"
+                :class="[$style['c-restaurantCard-name'], $style['c-restaurantCard-data']]"
                 data-test-id="restaurant_name"
                 data-search-name>
                 {{ name }}
             </h3>
 
-            <!-- Premier Icon -->
-            <legend-icon
-                v-if="isPremier"
-                :class="[$style['c-restaurantCard-premier']]"
-                data-test-id="restaurant-premier" />
+            <div
+                :class="[
+                    $style['c-restaurantCard-ratingContainer'],
+                    $style['c-restaurantCard-data']]">
+                <!-- Ratings -->
+                <component
+                    :is="errorBoundary"
+                    v-if="rating"
+                    :tier="3">
+                    <restaurant-rating
+                        v-bind="rating" />
+                </component>
 
-            <!-- 'New' label -->
-            <restaurant-tag
-                v-if="newTagText"
-                :is-large="true"
-                :is-uppercase="true"
-                :text="newTagText"
-                data-test-id="restaurant-new-badge"
-                color-scheme="positive" />
+                <!-- Premier Icon -->
+                <legend-icon
+                    v-if="isPremier"
+                    :class="[$style['c-restaurantCard-premier']]"
+                    data-test-id="restaurant-premier" />
 
-            <!-- Ratings -->
-            <component
-                :is="errorBoundary"
-                v-if="rating"
-                :tier="3">
-                <restaurant-rating
-                    v-bind="rating" />
-            </component>
+                <!-- 'New' label -->
+                <restaurant-tag
+                    v-if="newTagText"
+                    :is-large="true"
+                    :is-uppercase="true"
+                    :text="newTagText"
+                    data-test-id="restaurant-new-badge"
+                    color-scheme="positive" />
+            </div>
+
 
             <!-- Cuisines -->
             <component
@@ -71,16 +77,8 @@
                 v-if="hasCuisines"
                 :tier="3">
                 <restaurant-cuisines
+                    :class="[$style['c-restaurantCard-data'], $style['c-restaurantCard-cuisines']]"
                     :cuisines="cuisines" />
-            </component>
-
-            <!-- Availability -->
-            <component
-                :is="errorBoundary"
-                v-if="availability"
-                :tier="3">
-                <restaurant-availability
-                    v-bind="availability" />
             </component>
 
             <!-- Delivery Meta (etas, distance etc) -->
@@ -90,8 +88,20 @@
                 :tier="3">
                 <delivery-time-meta
                     v-bind="deliveryTimeData"
+                    :class="[$style['c-restaurantCard-data']]"
                     data-test-id="restaurant-delivery-time-meta" />
             </component>
+
+            <!-- Availability -->
+            <component
+                :is="errorBoundary"
+                v-if="availability"
+                :tier="3">
+                <restaurant-availability
+                    :class="[$style['c-restaurantCard-data']]"
+                    v-bind="availability" />
+            </component>
+
 
             <!-- Fees -->
             <component
@@ -99,18 +109,8 @@
                 v-if="hasFees"
                 :tier="3">
                 <restaurant-fees
+                    :class="[$style['c-restaurantCard-data']]"
                     v-bind="fees" />
-            </component>
-
-            <!-- Content Tags -->
-            <component
-                :is="errorBoundary"
-                v-if="hasContentTags"
-                :tier="3">
-                <restaurant-tags
-                    :class="$style['c-restaurantCard-tags']"
-                    test-id-position="inner-content"
-                    :tags="tags.contentTags" />
             </component>
 
             <!-- Offer -->
@@ -118,15 +118,28 @@
                 v-if="hasOffer"
                 data-test-id="restaurant-discounts"
                 :text="offer"
+                :class="[$style['c-restaurantCard-data']]"
                 is-bold>
                 <offer-icon />
             </icon-text>
+
+            <!-- Content Tags -->
+            <component
+                :is="errorBoundary"
+                v-if="hasContentTags"
+                :tier="3">
+                <restaurant-tags
+                    :class="[$style['c-restaurantCard-tags'], $style['c-restaurantCard-data']]"
+                    test-id-position="inner-content"
+                    :tags="tags.contentTags" />
+            </component>
 
             <!-- Disabled Message -->
             <icon-text
                 v-if="disabledMessage"
                 data-test-id="restaurant-offline"
                 :text="disabledMessage"
+                :class="$style['c-restaurantCard-data']"
                 color="colorSupportError"
                 hide-icon-in-tile-view>
                 <clock-small-icon />
@@ -297,6 +310,38 @@ export default {
 </script>
 
 <style lang="scss" module>
+// DRAFT - layout inner-card
+.c-restaurantCard-data {
+    grid-column: 2;
+}
+
+.c-restaurantCard-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: dense;
+    align-items: center;
+    gap: spacing(a) spacing(d);
+}
+
+.c-restaurantCard-ratingContainer,
+.c-restaurantCard-cuisines {
+    grid-column: 1;
+}
+
+.c-restaurantCard-name,
+.c-restaurantCard-tags {
+    grid-column: 1 / 3;
+}
+
+.c-restaurantCard-name {
+    margin-bottom: spacing(a);
+}
+
+.c-restaurantCard-tags {
+    margin-top: spacing(a);
+}
+
+// regular styling
 .c-restaurantCard {
   text-decoration: none;
   display: grid;
@@ -364,5 +409,11 @@ export default {
 
 .c-restaurantCard-premier {
     height: 21px;
+}
+
+.c-restaurantCard-ratingContainer {
+    display: flex;
+    gap: spacing();
+    align-items: center;
 }
 </style>
