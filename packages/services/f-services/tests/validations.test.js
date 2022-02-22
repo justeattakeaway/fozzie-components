@@ -214,6 +214,25 @@ describe('isValidPostcode', () => {
         // Assert
         expect(actual).toBe(expected);
     });
+
+    it.each([
+        ['01234', true],
+        ['01', false],
+        ['0123456', false],
+        ['AR51 1AA', false],
+        ['ATEGD', false],
+        ['1 2 3 4 5', false],
+        ['not even trying', false],
+        ['01!23', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `it-IT` locale', (postcode, expected) => {
+        // Act
+        const actual = isValidPostcode(postcode, 'it-IT');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
 });
 
 describe('isValidPhoneNumber', () => {
@@ -296,6 +315,28 @@ describe('isValidPhoneNumber', () => {
     ])('should validate %s as %s with `en-NZ` locale', (number, expected) => {
         // Act
         const actual = isValidPhoneNumber(number, 'en-NZ');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
+        ['+39 06 01234667', true],
+        ['+39 06 0123', false],
+        ['+39 06 01234567890123456', false],
+        ['+39 30 123467', true],
+        ['+39 30 123', false],
+        ['+39 30 123456780123456', false],
+        ['01234567', true],
+        ['0123', false],
+        ['01234567890123456', false],
+        ['!askfjt%$', false],
+        ['not even trying', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `it-IT` locale', (number, expected) => {
+        // Act
+        const actual = isValidPhoneNumber(number, 'it-IT');
 
         // Assert
         expect(actual).toBe(expected);
