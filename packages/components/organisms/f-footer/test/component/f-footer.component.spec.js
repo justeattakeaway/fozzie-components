@@ -6,11 +6,11 @@ let footer;
 
 describe('Desktop - f-footer component tests', () => {
     beforeEach(() => {
+        // Arrange
         footer = new Footer();
-        footer.withQuery('&knob-Locale', 'en-GB');
-        footer.withQuery('&knob-Show country selector', 'true');
-        footer.withQuery('&knob-Show courier links', 'false');
+        footer.withQuery('args', 'locale:en-GB;showCountrySelector:true');
 
+        // Act
         footer.load();
     });
 

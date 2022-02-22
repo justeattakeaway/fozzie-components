@@ -11,6 +11,12 @@ import {
 
 const localVue = createLocalVue();
 
+const mockLogger = {
+    error: jest.fn(),
+    warn: jest.fn(),
+    info: jest.fn()
+};
+
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
@@ -57,7 +63,10 @@ describe('Offers', () => {
             propsData,
             localVue,
             i18n,
-            store
+            store,
+            mocks: {
+                $log: mockLogger
+            }
         });
         expect(wrapper.exists()).toBe(true);
     });

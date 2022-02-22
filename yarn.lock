@@ -2244,10 +2244,17 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.4.0"
 
-"@justeat/f-alert@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.1.0.tgz#f0b3585d0e72885d0ec8f923b7699aaf7cdcd3bc"
-  integrity sha512-/cT3C41bfQTqH66NEFZo6Jn0zvgvy+Sy0O1bxXnnN8jpf3ny8rXhxIm0uP6HLyDpfA+ZGTh8uvu4U0h8cCGcSQ==
+"@justeat/f-alert@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.2.0.tgz#fe2ca873fdbb4b18c6ac41a4ed702ca689a77e0f"
+  integrity sha512-1dUOkKrY5NGXjJPa+jTP2JpHfRXqNXFtJ9U0enCS+/uHf/4aKcbd5wwX6fLZLcHCoZUoBu3jXO/tPdFrQSotWw==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
+"@justeat/f-alert@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.2.0.tgz#fe2ca873fdbb4b18c6ac41a4ed702ca689a77e0f"
+  integrity sha512-1dUOkKrY5NGXjJPa+jTP2JpHfRXqNXFtJ9U0enCS+/uHf/4aKcbd5wwX6fLZLcHCoZUoBu3jXO/tPdFrQSotWw==
   dependencies:
     "@justeat/f-services" "1.0.0"
 
