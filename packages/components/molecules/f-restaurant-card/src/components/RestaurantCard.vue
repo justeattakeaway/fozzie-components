@@ -435,6 +435,15 @@ export default {
             display: none;
         }
     }
+
+    .c-restaurantCard-content {
+        .c-restaurantCard--listItem & {
+            // remove gap
+            > * {
+                margin-bottom: 0;
+            }
+        }
+}
 }
 
 // Regular style data positioning
@@ -462,6 +471,7 @@ export default {
 
     .c-restaurantCard--listItem .c-restaurantCard-content & {
         @include media('>mid') {
+            margin-top: 0;
             order: initial; // ignore for list-item desktop
         }
     }
