@@ -1,10 +1,9 @@
-import { text, withKnobs } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VoucherCard from '../src/components/cardTemplates/voucherCard/VoucherCard.vue';
 
 export default {
     title: 'Components/Molecules/f-content-cards',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
 function voucherCard (cardType, title, imageUrl, subtitle, voucherCode, icon1, line3) {
@@ -50,31 +49,12 @@ function provide () {
     };
 }
 
-export const VoucherCardComponent = () => ({
+export const VoucherCardComponent = (args, { argTypes }) => ({
     components: {
         VoucherCard
     },
 
-    props: {
-        title: {
-            default: text('Title', 'Voluptatem corporis eveniet aperiam cupiditate mollitia perferendis.')
-        },
-        cardTitle: {
-            default: text('Card Title', ' Aliquam et aliquam et.')
-        },
-        subtitle: {
-            default: text('Card Subtitle', 'Voluptas sint id pariatur.')
-        },
-        image: {
-            default: text('Card Image', 'https://picsum.photos/seed/VoucherCard_image/384/216?blur=3')
-        },
-        icon: {
-            default: text('Card Icon', 'https://picsum.photos/seed/VoucherCard_icon/48/48')
-        },
-        voucherCode: {
-            default: text('Voucher Code', 'SPECIALVOUCHER')
-        }
-    },
+    props: Object.keys(argTypes),
 
     provide,
 
@@ -86,7 +66,8 @@ export const VoucherCardComponent = () => ({
             this.cardTitle,
             this.voucherCode,
             this.icon,
-            this.subtitle
+            this.subtitle,
+            this.cardType
         );
     },
 
@@ -95,28 +76,51 @@ export const VoucherCardComponent = () => ({
 
 VoucherCardComponent.storyName = 'voucher-card';
 
-export const AnniversaryCardComponent = () => ({
+VoucherCardComponent.args = {
+    title: 'Voluptatem corporis eveniet aperiam cupiditate mollitia perferendis.',
+    cardTitle: 'Aliquam et aliquam et.',
+    subtitle: 'Voluptas sint id pariatur.',
+    image: 'https://picsum.photos/seed/VoucherCard_image/384/216?blur=3',
+    icon: 'https://picsum.photos/seed/VoucherCard_icon/48/48',
+    voucherCode: 'SPECIALVOUCHER',
+    cardType: 'Voucher_Card_1'
+};
+
+VoucherCardComponent.argTypes = {
+    title: {
+        control: { type: 'text' },
+        description: 'Changes text of title'
+    },
+    cardTitle: {
+        control: { type: 'text' },
+        description: 'Changes text of card title'
+    },
+    subtitle: {
+        control: { type: 'text' },
+        description: 'Changes text of card subtitle'
+    },
+    image: {
+        control: { type: 'text' },
+        description: 'Change text of card image'
+    },
+    icon: {
+        control: { type: 'text' },
+        description: 'Change text of card icon'
+    },
+    voucherCode: {
+        control: { type: 'text' },
+        description: 'Change text of voucher code'
+    }
+};
+
+
+
+export const AnniversaryCardComponent = (args, { argTypes }) => ({
     components: {
         VoucherCard
     },
 
-    props: {
-        title: {
-            default: text('Title', 'Minus deserunt adipisci beatae et eligendi soluta.')
-        },
-        cardTitle: {
-            default: text('Card Title', 'Aspernatur ipsum sunt omnis cum veritatis cumque animi.')
-        },
-        subtitle: {
-            default: text('Card Description', 'Nemo quasi vitae omnis aliquid deserunt ut saepe.')
-        },
-        image: {
-            default: text('Anniversary Hero Image', 'https://picsum.photos/seed/AnniversaryCard_image/109/96')
-        },
-        voucherCode: {
-            default: text('Voucher Code', 'SPECIALVOUCHER')
-        }
-    },
+    props: Object.keys(argTypes),
 
     provide,
 
@@ -136,3 +140,34 @@ export const AnniversaryCardComponent = () => ({
 });
 
 AnniversaryCardComponent.storyName = 'anniversary-card';
+
+AnniversaryCardComponent.args = {
+    title: 'Minus deserunt adipisci beatae et eligendi soluta.',
+    cardTitle: 'Aspernatur ipsum sunt omnis cum veritatis cumque animi.',
+    subtitle: 'Nemo quasi vitae omnis aliquid deserunt ut saepe.',
+    image: 'https://picsum.photos/seed/AnniversaryCard_image/109/96',
+    voucherCode: 'SPECIALVOUCHER'
+};
+
+AnniversaryCardComponent.argTypes = {
+    title: {
+        control: { type: 'text' },
+        description: 'Changes text of title'
+    },
+    cardTitle: {
+        control: { type: 'text' },
+        description: 'Changes text of card title'
+    },
+    subtitle: {
+        control: { type: 'text' },
+        description: 'Changes text of card subtitle'
+    },
+    image: {
+        control: { type: 'text' },
+        description: 'Change text of card image'
+    },
+    voucherCode: {
+        control: { type: 'text' },
+        description: 'Change text of voucher code'
+    }
+};

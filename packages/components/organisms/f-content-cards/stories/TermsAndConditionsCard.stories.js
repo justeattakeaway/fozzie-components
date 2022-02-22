@@ -1,10 +1,9 @@
-import { text, withKnobs } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import TermsAndConditionsCard from '../src/components/cardTemplates/TermsAndConditionsCard.vue';
 
 export default {
     title: 'Components/Molecules/f-content-cards',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
 /**
@@ -17,25 +16,12 @@ export default {
  *  provide: {Function}
  * }}
  */
-export const TermsAndConditionsCardComponent = () => ({
+export const TermsAndConditionsCardComponent = (args, { argTypes }) => ({
     components: {
         TermsAndConditionsCard
     },
 
-    props: {
-        cardTitle: {
-            default: text('Card Title', 'T&amp;C Example Title')
-        },
-        subtitle: {
-            default: text('Card Subtitle', 'Example subtitle')
-        },
-        url: {
-            default: text('Card URL', '/termsandconditions#ii.just-eat-voucher-terms-conditions')
-        },
-        label: {
-            default: text('Call to Action Label', 'See the terms and conditions')
-        }
-    },
+    props: Object.keys(argTypes),
 
     /**
      * Stubbed copy for injecting when supplied card information is not complete
@@ -52,7 +38,33 @@ export const TermsAndConditionsCardComponent = () => ({
         };
     },
 
-    template: '<terms-and-conditions-card :card="{title:cardTitle,subtitle,url,ctaText:label}" />'
+    template: '<terms-and-conditions-card :card="{title,subtitle,url,ctaText:label}" />'
 });
 
 TermsAndConditionsCardComponent.storyName = 'terms-and-conditions-card';
+
+TermsAndConditionsCardComponent.args = {
+    title: 'T&amp;C Example Title',
+    subtitle: 'Example subtitle',
+    url: '/termsandconditions#ii.just-eat-voucher-terms-conditions',
+    label: 'See the terms and conditions'
+};
+
+TermsAndConditionsCardComponent.argTypes = {
+    title: {
+        control: { type: 'text' },
+        description: 'Changes text of Card Title'
+    },
+    subtitle: {
+        control: { type: 'text' },
+        description: 'Changes text of Card Subtitle'
+    },
+    url: {
+        control: { type: 'text' },
+        description: 'Changes text of URL'
+    },
+    label: {
+        control: { type: 'text' },
+        description: 'Changes text of label'
+    }
+};

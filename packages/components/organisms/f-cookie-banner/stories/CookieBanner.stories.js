@@ -1,37 +1,15 @@
-import {
-    withKnobs, select, boolean, text
-} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import CookieBanner from '../src/components/CookieBanner.vue';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const CookieBannerComponent = () => ({
+export const CookieBannerComponent = (args, { argTypes }) => ({
     components: { CookieBanner },
-    props: {
-        locale: {
-            default: select('Locale', ['da-DK', 'en-AU', 'en-GB', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
-        },
+    props: Object.keys(argTypes),
 
-        isHidden: {
-            default: boolean('Is hidden', false)
-        },
-
-        shouldShowLegacyBanner: {
-            default: boolean('Show legacy banner', null)
-        },
-
-        shouldUseGreyBackground: {
-            default: boolean('Reopen link uses grey background', true)
-        },
-
-        nameSuffix: {
-            default: text('Cookie name suffix', '')
-        }
-    },
     template: `<cookie-banner
         :locale="locale"
         :is-hidden="isHidden"
@@ -42,3 +20,40 @@ export const CookieBannerComponent = () => ({
 });
 
 CookieBannerComponent.storyName = 'f-cookie-banner';
+
+CookieBannerComponent.args = {
+    locale: 'en-GB',
+    isHidden: false,
+    shouldShowLegacyBanner: null,
+    shouldUseGreyBackground: true,
+    nameSuffix: ''
+};
+
+CookieBannerComponent.argTypes = {
+    locale: {
+        control: { type: 'select' },
+        description: 'Select a tenant',
+        options: ['da-DK', 'en-AU', 'en-GB', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']
+    },
+
+    isHidden: {
+        control: { type: 'boolean' },
+        description: 'If set to true, cookie banner is hidden from view'
+    },
+
+    shouldShowLegacyBanner: {
+        control: { type: 'boolean' },
+        description: 'If set to true, legacy banner is displayed'
+    },
+
+    shouldUseGreyBackground: {
+        control: { type: 'boolean' },
+        description: 'If set to true, re-open link uses grey background'
+    },
+
+    nameSuffix: {
+        control: { type: 'text' },
+        description: 'Set a cookie name suffix'
+    }
+};
+

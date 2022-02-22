@@ -6,9 +6,11 @@ let cookieBanner;
 
 describe('New - f-cookie-banner Desktop Visual Tests', () => {
     beforeEach(() => {
+        // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', 'en-IE');
+        cookieBanner.withQuery('args', 'locale:en-IE');
 
+        // Act
         cookieBanner.load();
     });
 

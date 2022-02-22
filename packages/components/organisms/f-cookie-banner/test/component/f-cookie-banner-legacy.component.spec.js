@@ -6,8 +6,11 @@ let cookieBanner;
 
 describe('Legacy - f-cookie-banner component tests', () => {
     beforeEach(() => {
+        // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', 'en-AU');
+        cookieBanner.withQuery('args', 'locale:en-AU');
+
+        // Act
         cookieBanner.load();
     });
 
@@ -33,11 +36,10 @@ describe('Legacy - f-cookie-banner component tests', () => {
     .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
         // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', tenant);
-
-        cookieBanner.load();
+        cookieBanner.withQuery('args', `locale:${tenant}`);
 
         // Act
+        cookieBanner.load();
         cookieBanner.clickCookiePolicyLink();
 
         // Assert

@@ -5,11 +5,14 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-consen
 let cookieBanner;
 
 describe('New - f-cookie-banner component tests', () => {
+    beforeEach(() => {
+        cookieBanner = new CookieBanner();
+    });
+
     forEach(['full', 'necessary'])
     .it('should set "je-cookie_banner" and "je-cookieConsent" to expected cookie values for "%s"', expectedCookieValue => {
         // Arrange
-        cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', 'en-IE');
+        cookieBanner.withQuery('args', 'locale:en-IE');
 
         // Act
         cookieBanner.load();
@@ -27,8 +30,7 @@ describe('New - f-cookie-banner component tests', () => {
     forEach(['es-ES', 'en-IE', 'it-IT', 'en-GB'])
     .it('should display the f-cookie-banner component for "%s"', tenant => {
         // Arrange
-        cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', tenant);
+        cookieBanner.withQuery('args', `locale:${tenant}`);
 
         // Act
         cookieBanner.load();
@@ -45,12 +47,10 @@ describe('New - f-cookie-banner component tests', () => {
     ])
         .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
             // Arrange
-            cookieBanner = new CookieBanner();
-            cookieBanner.withQuery('&knob-Locale', tenant);
-
-            cookieBanner.load();
+            cookieBanner.withQuery('args', `locale:${tenant}`);
 
             // Act
+            cookieBanner.load();
             cookieBanner.clickCookiePolicyLink();
             browser.switchWindow(new RegExp(`^.*${expectedCookiePolicyUrl}.*$`));
 
